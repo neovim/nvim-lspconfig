@@ -12,9 +12,12 @@ things as much as you want in addition to the defaults that this provides.
 **CONTRIBUTIONS ARE WELCOME!**
 
 There's a lot of language servers in the world, and not enough time.  See
-`lua/common_lsp/texlab.lua` and `lua/common_lsp/skeleton.lua` for examples and
-ask me questions in the [Neovim Gitter](https://gitter.im/neovim/neovim) to
-help me complete configurations for *all the LSPs!*
+[`lua/common_lsp/texlab.lua`](https://github.com/norcalli/nvim-common-lsp/blob/master/lua/common_lsp/texlab.lua)
+and
+[`lua/common_lsp/skeleton.lua`](https://github.com/norcalli/nvim-common-lsp/blob/master/lua/common_lsp/skeleton.lua)
+for examples and ask me questions in the [Neovim
+Gitter](https://gitter.im/neovim/neovim) to help me complete configurations for
+*all the LSPs!*
 
 ## Install
 
