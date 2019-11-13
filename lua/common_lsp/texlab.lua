@@ -35,53 +35,92 @@ end
 
 -- TODO support more of https://github.com/microsoft/vscode-languageserver-node/blob/master/protocol/src/protocol.progress.proposed.md
 
+local function lookup_configuration(config, section)
+	local settings = config.texlab_settings
+	for part in vim.gsplit(section, '.', true) do
+		settings = settings[part]
+	end
+	return settings
+end
+
 local default_config
 default_config = {
 	name = "texlab";
 	cmd = {"texlab"};
 	filetype = {"tex"};
-	build_log_level = lsp.protocol.MessageType.Warning;
-	build_args = {"-pdf", "-interaction=nonstopmode", "-synctex=1"};
-	build_executable = "latexmk";
-	build_on_save = false;
-	callbacks = {
-		["window/logMessage"] = function(err, method, params, client_id)
-			local client = lsp.get_client_by_id(client_id)
-			-- TODO(ashkan) If the client died, then we might as well show everything?
-			local build_log_level = client and client.config.build_log_level or lsp.protocol.MessageType.Log
-			-- local build_log_level = client and client.config.build_log_level or default_config.build_log_level
-			if params and params.type <= build_log_level then
-				lsp.builtin_callbacks[method](err, method, params, client_id)
-			end
-		end
+	texlab_log_level = lsp.protocol.MessageType.Warning;
+	texlab_settings = {
+		latex = {
+			build = {
+				args = {"-pdf", "-interaction=nonstopmode", "-synctex=1"};
+				executable = "latexmk";
+				onSave = false;
+			}
+		}
 	}
 }
 
-local function run_command(command)
+local function nvim_command(command)
 	validate { command = { command, 's' } }
 	for line in vim.gsplit(command, "\n", true) do
 		api.nvim_command(line)
 	end
 end
 
+local function setup_callbacks(config)
+	config.callbacks = config.callbacks or {}
+
+	config.callbacks["window/logMessage"] = function(err, method, params, client_id)
+		if params and params.type <= config.texlab_log_level then
+			lsp.builtin_callbacks[method](err, method, params, client_id)
+		end
+	end
+
+	-- TODO use existing callback?
+	config.callbacks["workspace/configuration"] = function(err, method, params, client_id)
+		if err then error(tostring(err)) end
+		if not params.items then
+			return {}
+		end
+
+		local result = {}
+		for _, item in ipairs(params.items) do
+			if item.section then
+				local value = lookup_configuration(config, item.section) or vim.NIL
+				print(string.format("config[%q] = %s", item.section, vim.inspect(value)))
+				table.insert(result, value)
+			end
+		end
+		return result
+	end
+end
+
 function M.texlab(config)
 	config = vim.tbl_extend("keep", config, default_config)
-	-- Deep merge is needed for callbacks.
-	for method, fn in pairs(default_config.callbacks) do
-		config.callbacks[method] = fn
-	end
+
+	util.tbl_deep_extend(config.texlab_settings, default_config.texlab_settings)
+
+	config.capabilities = config.capabilities or vim.lsp.protocol.make_client_capabilities()
+	util.tbl_deep_extend(config.capabilities, {
+		workspace = {
+			configuration = true;
+		}
+	})
+
+	setup_callbacks(config)
+
 	config.on_attach = util.add_hook_after(config.on_attach, function(client, bufnr)
 		if bufnr == api.nvim_get_current_buf() then
 			M.texlab_setup_commands()
 		else
-			run_command(string.format("autocmd BufEnter <buffer=%d> ++once lua require'common_lsp/texlab'.texlab_setup_commands()", bufnr))
+			nvim_command(string.format("autocmd BufEnter <buffer=%d> ++once lua require'common_lsp/texlab'.texlab_setup_commands()", bufnr))
 		end
 	end)
 	lsp.add_filetype_config(config)
 end
 
 function M.texlab_setup_commands()
-	run_command [[
+	nvim_command [[
 		command! TexlabBuild lua require'common_lsp/texlab'.texlab_buf_build(0)
 	]]
 end
