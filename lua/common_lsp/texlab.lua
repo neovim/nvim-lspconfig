@@ -12,27 +12,6 @@ local texlab_build_status = vim.tbl_add_reverse_lookup {
   Cancelled = 3;
 }
 
-function M.texlab_buf_build(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
-  local params = { textDocument = { uri = vim.uri_from_bufnr(bufnr) }  }
-  lsp.buf_request(bufnr, 'textDocument/build', params, function(err, method, result, client_id)
-    if err then error(tostring(err)) end
-    print("Build "..texlab_build_status[result.status])
-  end)
-end
-
--- bufnr isn't actually required here, but we need a valid buffer in order to
--- be able to find the client for buf_request.
--- TODO find a client by looking through buffers for a valid client?
-function M.texlab_build_cancel_all(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
-  local params = { token = "texlab-build-*" }
-  lsp.buf_request(bufnr, 'window/progress/cancel', params, function(err, method, result, client_id)
-    if err then error(tostring(err)) end
-    print("Cancel result", vim.inspect(result))
-  end)
-end
-
 -- TODO support more of https://github.com/microsoft/vscode-languageserver-node/blob/master/protocol/src/protocol.progress.proposed.md
 
 local function lookup_configuration(config, section)
@@ -47,7 +26,7 @@ local default_config
 default_config = {
   name = "texlab";
   cmd = {"texlab"};
-  filetype = {"tex"};
+  filetype = {"tex", "bib"};
   texlab_log_level = lsp.protocol.MessageType.Warning;
   texlab_settings = {
     latex = {
@@ -95,6 +74,33 @@ local function setup_callbacks(config)
   end
 end
 
+-- A function to set up texlab easier.
+--
+-- Additionally, it sets up the following commands:
+-- - TexlabBuild: builds the current buffer.
+--
+-- {config} is the same as |vim.lsp.add_filetype_config()|, but with some
+-- additions and changes:
+--
+-- {texlab_log_level}
+--   controls the level of logs to show from build processes and other
+--   window/logMessage events. By default it is set to
+--   vim.lsp.protocol.MessageType.Warning instead of
+--   vim.lsp.protocol.MessageType.Log.
+--
+-- {texlab_settings}
+--   The settings specified here https://texlab.netlify.com/docs/reference/configuration.
+--   This is a table, and the keys are case sensitive.
+--   Example: `texlab_settings = { latex = { build = { executable = "latexmk" } } }`
+--
+-- {filetype}
+--   Defaults to {"tex", "bib"}
+--
+-- {cmd}
+--   Defaults to {"texlab"}
+--
+-- {name}
+--   Defaults to "texlab"
 function M.texlab(config)
   config = vim.tbl_extend("keep", config, default_config)
 
@@ -123,6 +129,27 @@ function M.texlab_setup_commands()
   nvim_command [[
     command! TexlabBuild lua require'common_lsp/texlab'.texlab_buf_build(0)
   ]]
+end
+
+function M.texlab_buf_build(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  local params = { textDocument = { uri = vim.uri_from_bufnr(bufnr) }  }
+  lsp.buf_request(bufnr, 'textDocument/build', params, function(err, method, result, client_id)
+    if err then error(tostring(err)) end
+    print("Build "..texlab_build_status[result.status])
+  end)
+end
+
+-- bufnr isn't actually required here, but we need a valid buffer in order to
+-- be able to find the client for buf_request.
+-- TODO find a client by looking through buffers for a valid client?
+function M.texlab_build_cancel_all(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  local params = { token = "texlab-build-*" }
+  lsp.buf_request(bufnr, 'window/progress/cancel', params, function(err, method, result, client_id)
+    if err then error(tostring(err)) end
+    print("Cancel result", vim.inspect(result))
+  end)
 end
 
 return M
