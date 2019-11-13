@@ -54,5 +54,20 @@ function M.tbl_deep_extend(dst, ...)
   return dst
 end
 
+function M.nvim_multiline_command(command)
+  validate { command = { command, 's' } }
+  for line in vim.gsplit(command, "\n", true) do
+    api.nvim_command(line)
+  end
+end
+
+function M.lookup_section(settings, section)
+  for part in vim.gsplit(section, '.', true) do
+    settings = settings[part]
+  end
+  return settings
+end
+
+
 return M
 -- vim:et ts=2 sw=2

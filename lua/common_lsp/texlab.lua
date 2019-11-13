@@ -5,22 +5,7 @@ local lsp = vim.lsp
 
 local M = {}
 
-local texlab_build_status = vim.tbl_add_reverse_lookup {
-  Success = 0;
-  Error = 1;
-  Failure = 2;
-  Cancelled = 3;
-}
-
 -- TODO support more of https://github.com/microsoft/vscode-languageserver-node/blob/master/protocol/src/protocol.progress.proposed.md
-
-local function lookup_configuration(config, section)
-  local settings = config.texlab_settings
-  for part in vim.gsplit(section, '.', true) do
-    settings = settings[part]
-  end
-  return settings
-end
 
 local default_config
 default_config = {
@@ -38,13 +23,6 @@ default_config = {
     }
   }
 }
-
-local function nvim_command(command)
-  validate { command = { command, 's' } }
-  for line in vim.gsplit(command, "\n", true) do
-    api.nvim_command(line)
-  end
-end
 
 local function setup_callbacks(config)
   config.callbacks = config.callbacks or {}
@@ -65,7 +43,7 @@ local function setup_callbacks(config)
     local result = {}
     for _, item in ipairs(params.items) do
       if item.section then
-        local value = lookup_configuration(config, item.section) or vim.NIL
+        local value = util.lookup_section(config.texlab_settings, item.section) or vim.NIL
         print(string.format("config[%q] = %s", item.section, vim.inspect(value)))
         table.insert(result, value)
       end
@@ -101,7 +79,7 @@ end
 --
 -- {name}
 --   Defaults to "texlab"
-function M.texlab(config)
+function M.setup(config)
   config = vim.tbl_extend("keep", config, default_config)
 
   util.tbl_deep_extend(config.texlab_settings, default_config.texlab_settings)
@@ -117,19 +95,26 @@ function M.texlab(config)
 
   config.on_attach = util.add_hook_after(config.on_attach, function(client, bufnr)
     if bufnr == api.nvim_get_current_buf() then
-      M.texlab_setup_commands()
+      M._setup_buffer()
     else
-      nvim_command(string.format("autocmd BufEnter <buffer=%d> ++once lua require'common_lsp/texlab'.texlab_setup_commands()", bufnr))
+      util.nvim_multiline_command(string.format("autocmd BufEnter <buffer=%d> ++once lua require'common_lsp/texlab'._setup_buffer()", bufnr))
     end
   end)
   lsp.add_filetype_config(config)
 end
 
-function M.texlab_setup_commands()
-  nvim_command [[
+function M._setup_buffer()
+  util.nvim_multiline_command [[
     command! TexlabBuild lua require'common_lsp/texlab'.texlab_buf_build(0)
   ]]
 end
+
+local texlab_build_status = vim.tbl_add_reverse_lookup {
+  Success = 0;
+  Error = 1;
+  Failure = 2;
+  Cancelled = 3;
+}
 
 function M.texlab_buf_build(bufnr)
   bufnr = util.validate_bufnr(bufnr)
