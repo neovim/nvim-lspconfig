@@ -125,6 +125,8 @@ function M.texlab_buf_build(bufnr)
   end)
 end
 
+M.buf_build = M.texlab_buf_build
+
 -- bufnr isn't actually required here, but we need a valid buffer in order to
 -- be able to find the client for buf_request.
 -- TODO find a client by looking through buffers for a valid client?
