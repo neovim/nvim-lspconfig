@@ -47,7 +47,7 @@ local default_config
 default_config = {
   name = "texlab";
   cmd = {"texlab"};
-  filetype = {"tex"};
+  filetype = {"tex", "bib"};
   texlab_log_level = lsp.protocol.MessageType.Warning;
   texlab_settings = {
     latex = {
