@@ -4,9 +4,11 @@ local inspect = vim.inspect
 
 local M = {}
 
+M.name = "SKELETON"
+
 local default_config
 default_config = {
-  name = "SKELETON";
+  name = M.name;
   cmd = {"SKELETON"};
   filetype = {"SKELETON"};
   log_level = lsp.protocol.MessageType.Warning;
@@ -32,19 +34,13 @@ local function setup_callbacks(config)
     for _, item in ipairs(params.items) do
       if item.section then
         local value = util.lookup_section(config.settings, item.section) or vim.NIL
-        print(string.format("config[%q] = %s", item.section, inspect(value)))
+        -- Uncomment this to debug.
+        -- print(string.format("config[%q] = %s", item.section, inspect(value)))
         table.insert(result, value)
       end
     end
     return result
   end
-end
-
-M.name = "SKELETON"
-
-local function module_fn(fn_body)
-  validate { fn_body = {fn_body, 's'} }
-  return string.format("lua require 'common_lsp/%s'.%s", M.name, fn_body)
 end
 
 -- A function to set up SKELETON easier.
@@ -93,7 +89,8 @@ function M.setup(config)
       M._setup_buffer()
     else
       api.nvim_command(string.format(
-          "autocmd BufEnter <buffer=%d> ++once lua require'common_lsp/SKELETON'._setup_buffer()",
+          "autocmd BufEnter <buffer=%d> ++once lua require'common_lsp/%s'._setup_buffer()",
+          M.name,
           bufnr))
     end
   end)
@@ -101,22 +98,34 @@ function M.setup(config)
   lsp.add_filetype_config(config)
 end
 
+-- Declare any commands here. You can use additional modifiers like "-range"
+-- which will be added as command options. All of these commands are buffer
+-- level by default.
+M.commands = {
+  SKELETON_FORMAT = {
+    function()
+      M.buf_SPOOKY_FUNCTION(0)
+    end;
+    "-range";
+  };
+  SKELETON_SPOOKY_COMMAND = {
+    function()
+      local bufnr = util.validate_bufnr(0)
+      print("SPOOKY COMMAND STUFF!", bufnr)
+    end;
+  };
+}
+
 function M._setup_buffer()
-  local commands = {
-    "command! SKELETON_SPOOKY_COMMAND -buffer "..module_fn("buf_SPOOKY_FUNCTION(0)");
-    "command! SKELETON_OTHER_COMMAND -buffer "..module_fn("buf_OTHER_FUNCTION(0)");
-  }
-  for _, command in ipairs(commands) do
-    api.nvim_command(command)
-  end
+  -- Do other setup here if you want.
+
+  -- Create the module commands
+  util.create_module_commands(M.name, M.commands)
 end
 
 function M.buf_SPOOKY_FUNCTION(bufnr)
   bufnr = util.validate_bufnr(bufnr)
-end
-
-function M.buf_OTHER_FUNCTION(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
+  print("SPOOKY FUNCTION STUFF!", bufnr)
 end
 
 return M

@@ -9,6 +9,8 @@ greatly extensible, but most users just want to get up and going. This
 plugin/library is for those people, although it still let's you customize
 things as much as you want in addition to the defaults that this provides.
 
+**NOTE**: Requires current Neovim master as of 2019-11-13
+
 **CONTRIBUTIONS ARE WELCOME!**
 
 There's a lot of language servers in the world, and not enough time.  See
@@ -42,13 +44,13 @@ From Lua:
 ```lua
 require 'common_lsp'.texlab.setup {
   name = "texlab_fancy";
-  texlab_log_level = vim.lsp.protocol.MessageType.Log;
-  texlab_settings = {
+  log_level = vim.lsp.protocol.MessageType.Log;
+  settings = {
     latex = {
-	  build = {
-	    onSave = true;
-	  }
-	}
+      build = {
+        onSave = true;
+      }
+    }
   }
 }
 
@@ -66,31 +68,31 @@ https://texlab.netlify.com/
 common_lsp.texlab.setup({config})
 common_lsp#texlab({config})
 
-	A function to set up texlab easier.
+    A function to set up texlab easier.
 
-	Additionally, it sets up the following commands:
-	- `TexlabBuild`: builds the current buffer.
+    Additionally, it sets up the following commands:
+    - `TexlabBuild`: builds the current buffer.
 
-	{config} is the same as |vim.lsp.add_filetype_config()|, but with some
-	additions and changes:
+    {config} is the same as |vim.lsp.add_filetype_config()|, but with some
+    additions and changes:
 
-	{texlab_log_level}
-	  controls the level of logs to show from build processes and other
-	  window/logMessage events. By default it is set to
-	  vim.lsp.protocol.MessageType.Warning instead of
-	  vim.lsp.protocol.MessageType.Log.
+    {log_level}
+      controls the level of logs to show from build processes and other
+      window/logMessage events. By default it is set to
+      vim.lsp.protocol.MessageType.Warning instead of
+      vim.lsp.protocol.MessageType.Log.
 
-	{texlab_settings}
-	  The settings specified here https://texlab.netlify.com/docs/reference/configuration.
-	  This is a table, and the keys are case sensitive.
-	  Example: `texlab_settings = { latex = { build = { executable = "latexmk" } } }`
+    {settings}
+      The settings specified here https://texlab.netlify.com/docs/reference/configuration.
+      This is a table, and the keys are case sensitive.
+      Example: `settings = { latex = { build = { onSave = true } } }`
 
-	{filetype}
-	  Defaults to {"tex", "bib"}
+    {filetype}
+      Defaults to {"tex", "bib"}
 
-	{cmd}
-	  Defaults to {"texlab"}
+    {cmd}
+      Defaults to {"texlab"}
 
-	{name}
-	  Defaults to "texlab"
+    {name}
+      Defaults to "texlab"
 ```

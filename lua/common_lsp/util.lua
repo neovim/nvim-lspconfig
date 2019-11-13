@@ -68,6 +68,27 @@ function M.lookup_section(settings, section)
   return settings
 end
 
+function M.create_module_commands(module_name, commands)
+  for command_name, def in pairs(commands) do
+    local parts = {"command!"}
+    -- Insert attributes.
+    for k, v in pairs(def) do
+      if type(k) == 'string' and type(v) == 'boolean' and v then
+        table.insert(parts, "-"..k)
+      elseif type(k) == 'number' and type(v) == 'string' and v:match("^%-") then
+        table.insert(parts, v)
+      end
+    end
+    table.insert(parts, command_name)
+    -- The command definition.
+    table.insert(parts,
+        string.format("lua require'common_lsp/%s'.commands[%q][1]()", module_name, command_name))
+    local command = table.concat(parts, " ")
+    print(command)
+    api.nvim_command(command)
+  end
+end
+
 
 return M
 -- vim:et ts=2 sw=2
