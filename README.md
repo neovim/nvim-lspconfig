@@ -9,6 +9,13 @@ greatly extensible, but most users just want to get up and going. This
 plugin/library is for those people, although it still let's you customize
 things as much as you want in addition to the defaults that this provides.
 
+*CONTRIBUTIONS ARE WELCOME!*
+
+There's a lot of language servers in the world, and not enough time.  See
+`lua/common_lsp/texlab.lua` and `lua/common_lsp/skeleton.lua` for examples and
+ask me questions in the [Neovim Gitter](https://gitter.im/neovim/neovim) and
+help me complete the configurations for all the LSPs!
+
 ## Install
 
 `Plug 'norcalli/nvim-common-lsp'`
