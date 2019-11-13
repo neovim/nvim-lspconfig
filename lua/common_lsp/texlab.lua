@@ -105,7 +105,7 @@ end
 
 function M._setup_buffer()
   util.nvim_multiline_command [[
-    command! TexlabBuild lua require'common_lsp/texlab'.texlab_buf_build(0)
+    command! TexlabBuild -buffer lua require'common_lsp/texlab'.texlab_buf_build(0)
   ]]
 end
 
