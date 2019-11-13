@@ -83,9 +83,7 @@ function M.create_module_commands(module_name, commands)
     -- The command definition.
     table.insert(parts,
         string.format("lua require'common_lsp/%s'.commands[%q][1]()", module_name, command_name))
-    local command = table.concat(parts, " ")
-    print(command)
-    api.nvim_command(command)
+    api.nvim_command(table.concat(parts, " "))
   end
 end
 

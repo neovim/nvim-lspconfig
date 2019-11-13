@@ -113,6 +113,8 @@ M.commands = {
       M.buf_build(0)
     end;
   };
+  -- TexlabCancelAllBuilds = {
+  -- };
 }
 
 function M._setup_buffer()
