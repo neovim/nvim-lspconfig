@@ -3,10 +3,8 @@ name: CI
 on: [push]
 
 jobs:
-  build:
-
-    runs-on: [linux]
-
+  docgen:
+    runs-on: [ubuntu-latest]
     steps:
     - uses: actions/checkout@v1
     - name: Setup from neovim nightly and run docgen
