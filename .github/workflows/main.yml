@@ -8,8 +8,6 @@ jobs:
     if: github.ref != 'master'
     steps:
     - uses: actions/checkout@v1
-      with:
-        ref: ${{ github.ref }}
     - run: date +%F > todays-date
     - name: Restore cache for today's nightly.
       uses: actions/cache@v1.0.0
@@ -32,4 +30,4 @@ jobs:
         git config user.name "Github Actions"
         git add README.md
         # Only commit and push if we have changes
-        git diff --quiet && git diff --staged --quiet || (git commit -m "${COMMIT_MSG}"; git push origin ${GITHUB_REF})
+        git diff --quiet && git diff --staged --quiet || (git commit -m "${COMMIT_MSG}"; git push origin HEAD:${GITHUB_REF})
