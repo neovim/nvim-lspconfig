@@ -1,5 +1,5 @@
 function! common_lsp#setup(name, config)
-  return luaeval("local name, config = unpack(_A) require'common_lsp'[name].setup(config)", {a:name, a:config})
+  return luaeval("require'common_lsp'[_A[1]].setup(_A[2])", [a:name, a:config])
 endfunction
 
 function! common_lsp#texlab(config)
