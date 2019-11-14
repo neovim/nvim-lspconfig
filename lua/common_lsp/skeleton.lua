@@ -1,133 +1,162 @@
 local util = require 'common_lsp/util'
 local api, validate, lsp = vim.api, vim.validate, vim.lsp
-local inspect = vim.inspect
+local tbl_extend = vim.tbl_extend
 
-local M = {}
+local skeleton = {}
 
-M.name = "SKELETON"
 
-local default_config
-default_config = {
-  name = M.name;
-  cmd = {"SKELETON"};
-  filetype = {"SKELETON"};
-  log_level = lsp.protocol.MessageType.Warning;
-  settings = {};
-}
-
-local function setup_callbacks(config)
-  config.callbacks = config.callbacks or {}
-
-  config.callbacks["window/logMessage"] = function(err, method, params, client_id)
-    if params and params.type <= config.log_level then
-      lsp.builtin_callbacks[method](err, method, params, client_id)
+function skeleton.__newindex(t, template_name, template)
+  validate {
+    name = {template_name, 's'};
+    default_config = {template.default_config, 't'};
+    on_new_config = {template.on_new_config, 'f', true};
+    on_attach = {template.on_attach, 'f', true};
+    commands = {template.commands, 't', true};
+  }
+  if template.commands then
+    for k, v in pairs(template.commands) do
+      validate {
+        ['command.name'] = {k, 's'};
+        ['command.fn'] = {v[1], 'f'};
+      }
     end
   end
 
-  config.callbacks["workspace/configuration"] = function(err, method, params, client_id)
-    if err then error(tostring(err)) end
-    if not params.items then
-      return {}
-    end
+  local M = {}
 
-    local result = {}
-    for _, item in ipairs(params.items) do
-      if item.section then
-        local value = util.lookup_section(config.settings, item.section) or vim.NIL
-        -- Uncomment this to debug.
-        -- print(string.format("config[%q] = %s", item.section, inspect(value)))
-        table.insert(result, value)
-      end
-    end
-    return result
-  end
-end
-
--- A function to set up SKELETON easier.
---
--- Additionally, it sets up the following commands:
--- - SKELETON_SPOOKY_COMMAND: This does something SPOOKY.
--- - SKELETON_OTHER_COMMAND: This does some OTHER thing.
---
--- {config} is the same as |vim.lsp.add_filetype_config()|, but with some
--- additions and changes:
---
--- {name}
---   Defaults to "SKELETON"
---
--- {cmd}
---   Defaults to {"SKELETON"}
---
--- {filetype}
---   Defaults to {"SKELETON"}
---
--- {log_level}
---   controls the level of logs to show from build processes and other
---   window/logMessage events. By default it is set to
---   vim.lsp.protocol.MessageType.Warning instead of
---   vim.lsp.protocol.MessageType.Log.
---
--- {settings}
---   This is a table, and the keys are case sensitive.
---   Example: `settings = { }`
-function M.setup(config)
-  config = vim.tbl_extend("keep", config, default_config)
-
-  util.tbl_deep_extend(config.settings, default_config.settings)
-
-  config.capabilities = config.capabilities or lsp.protocol.make_client_capabilities()
-  util.tbl_deep_extend(config.capabilities, {
-    workspace = {
-      configuration = true;
-    }
+  local default_config = tbl_extend("keep", template.default_config, {
+    log_level = lsp.protocol.MessageType.Warning;
+    settings = {};
+    callbacks = {};
   })
 
-  setup_callbacks(config)
+  -- Force this part.
+  default_config.name = template_name
 
-  config.on_attach = util.add_hook_after(config.on_attach, function(client, bufnr)
-    if bufnr == api.nvim_get_current_buf() then
-      M._setup_buffer()
-    else
-      api.nvim_command(string.format(
-          "autocmd BufEnter <buffer=%d> ++once lua require'common_lsp/%s'._setup_buffer()",
-          M.name,
-          bufnr))
+  -- The config here is the one which will be instantiated for the new server,
+  -- which is why this is a function, so that it can refer to the settings
+  -- object on the server.
+  local function add_callbacks(config)
+    config.callbacks["window/logMessage"] = function(err, method, params, client_id)
+      if params and params.type <= config.log_level then
+        lsp.builtin_callbacks[method](err, method, params, client_id)
+      end
     end
-  end)
 
-  lsp.add_filetype_config(config)
+    config.callbacks["workspace/configuration"] = function(err, method, params, client_id)
+      if err then error(tostring(err)) end
+      if not params.items then
+        return {}
+      end
+
+      local result = {}
+      for _, item in ipairs(params.items) do
+        if item.section then
+          local value = util.lookup_section(config.settings, item.section) or vim.NIL
+          table.insert(result, value)
+        end
+      end
+      return result
+    end
+  end
+
+  function M.setup(config)
+    validate {
+      root_dir = {config.root_dir, 'f', default_config.root_dir ~= nil};
+      filetypes = {config.filetype, 't', true};
+      on_new_config = {config.on_new_config, 'f', true};
+      on_attach = {config.on_attach, 'f', true};
+    }
+    config = tbl_extend("keep", config, default_config)
+
+    local trigger
+    if config.filetypes then
+      trigger = "FileType "..table.concat(config.filetypes, ',')
+    else
+      trigger = "BufReadPost *"
+    end
+    api.nvim_command(string.format(
+        "autocmd %s lua require'common_lsp'[%q].manager.try_add()"
+        , trigger
+        , config.name
+        ))
+
+    local get_root_dir = config.root_dir
+
+    -- In the case of a reload, close existing things.
+    if M.manager then
+      for _, client in ipairs(M.manager.clients()) do
+        client.stop(true)
+      end
+      M.manager = nil
+    end
+    local manager = util.server_per_root_dir_manager(function(_root_dir)
+      local new_config = vim.tbl_extend("keep", {}, config)
+      -- Deepcopy anything that is >1 level nested.
+      new_config.settings = vim.deepcopy(new_config.settings)
+      util.tbl_deep_extend(new_config.settings, default_config.settings)
+
+      new_config.capabilities = new_config.capabilities or lsp.protocol.make_client_capabilities()
+      util.tbl_deep_extend(new_config.capabilities, {
+        workspace = {
+          configuration = true;
+        }
+      })
+
+      add_callbacks(new_config)
+      if template.on_new_config then
+        pcall(template.on_new_config, new_config)
+      end
+      if config.on_new_config then
+        pcall(config.on_new_config, new_config)
+      end
+
+      -- Save the old _on_attach so that we can reference it via the BufEnter.
+      new_config._on_attach = new_config.on_attach
+      new_config.on_attach = vim.schedule_wrap(function(client, bufnr)
+        if bufnr == api.nvim_get_current_buf() then
+          M._setup_buffer(client.id)
+        else
+          api.nvim_command(string.format(
+              "autocmd BufEnter <buffer=%d> ++once lua require'common_lsp'[%q]._setup_buffer(%d)"
+              , template_name
+              , bufnr
+              , client.id
+              ))
+        end
+      end)
+      return new_config
+    end)
+
+    function manager.try_add()
+      local root_dir = get_root_dir(api.nvim_buf_get_name(0), api.nvim_get_current_buf())
+      print(api.nvim_get_current_buf(), root_dir)
+      local id = manager.add(root_dir)
+      lsp.buf_attach_client(0, id)
+    end
+
+    M.manager = manager
+  end
+
+  function M._setup_buffer(client_id)
+    local client = lsp.get_client_by_id(client_id)
+    if client.config._on_attach then
+      client.config._on_attach(client)
+    end
+    if template.commands then
+      -- Create the module commands
+      util.create_module_commands(template_name, M.commands)
+    end
+  end
+
+  M.commands = template.commands
+  M.name = template_name
+  M.template_config = template
+
+  rawset(t, template_name, M)
+
+  return M
 end
 
--- Declare any commands here. You can use additional modifiers like "-range"
--- which will be added as command options. All of these commands are buffer
--- level by default.
-M.commands = {
-  SKELETON_FORMAT = {
-    function()
-      M.buf_SPOOKY_FUNCTION(0)
-    end;
-    "-range";
-  };
-  SKELETON_SPOOKY_COMMAND = {
-    function()
-      local bufnr = util.validate_bufnr(0)
-      print("SPOOKY COMMAND STUFF!", bufnr)
-    end;
-  };
-}
-
-function M._setup_buffer()
-  -- Do other setup here if you want.
-
-  -- Create the module commands
-  util.create_module_commands(M.name, M.commands)
-end
-
-function M.buf_SPOOKY_FUNCTION(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
-  print("SPOOKY FUNCTION STUFF!", bufnr)
-end
-
-return M
+return setmetatable({}, skeleton)
 -- vim:et ts=2 sw=2
-

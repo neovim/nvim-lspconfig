@@ -84,7 +84,7 @@ function M.create_module_commands(module_name, commands)
     table.insert(parts, command_name)
     -- The command definition.
     table.insert(parts,
-        string.format("lua require'common_lsp/%s'.commands[%q][1]()", module_name, command_name))
+        string.format("lua require'common_lsp'[%q].commands[%q][1]()", module_name, command_name))
     api.nvim_command(table.concat(parts, " "))
   end
 end
@@ -123,6 +123,7 @@ M.path = (function()
     local strip_dir_pat = path_sep.."([^"..path_sep.."]+)$"
     local strip_sep_pat = path_sep.."$"
     dirname = function(path)
+      if not path then return end
       local result = path:gsub(strip_sep_pat, ""):gsub(strip_dir_pat, "")
       if #result == 0 then
         return "/"
@@ -142,6 +143,7 @@ M.path = (function()
     -- Just in case our algo is buggy, don't infinite loop.
     for _ = 1, 100 do
       dir = dirname(dir)
+      if not dir then return end
       -- If we can't ascend further, then stop looking.
       if cb(dir, path) then
         return dir, path
@@ -156,6 +158,7 @@ M.path = (function()
   local function iterate_parents(path)
     path = uv.fs_realpath(path)
     local function it(s, v)
+      if not v then return end
       if is_fs_root(v) then return end
       return dirname(v), path
     end

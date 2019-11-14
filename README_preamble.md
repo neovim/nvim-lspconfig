@@ -16,7 +16,7 @@ things as much as you want in addition to the defaults that this provides.
 There's a lot of language servers in the world, and not enough time.  See
 [`lua/common_lsp/texlab.lua`](https://github.com/norcalli/nvim-common-lsp/blob/master/lua/common_lsp/texlab.lua)
 and
-[`lua/common_lsp/gopls.lua`](https://github.com/norcalli/nvim-common-lsp/blob/master/lua/common_lsp/gopls.lua)
+[`lua/common_lsp/skeleton.lua`](https://github.com/norcalli/nvim-common-lsp/blob/master/lua/common_lsp/skeleton.lua)
 for examples and ask me questions in the [Neovim
 Gitter](https://gitter.im/neovim/neovim) to help me complete configurations for
 *all the LSPs!*
@@ -26,8 +26,11 @@ implemented from [this excellent list compiled by the coc.nvim
 contributors](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
 [this other excellent list from the emacs lsp-mode
 contributors](https://github.com/emacs-lsp/lsp-mode#supported-languages)
-and create a new file under `lua/common_lsp/SERVER_NAME.lua`. I recommend
-looking at `lua/common_lsp/texlab.lua` for inspiration.
+and create a new file under `lua/common_lsp/SERVER_NAME.lua`.
+- For a simple server which should only ever have one instance for the entire
+neovim lifetime, I recommend copying `lua/common_lsp/texlab.lua`.
+- For servers which should have a different instance for each project root, I
+recommend copying `lua/common_lsp/gopls.lua`.
 
 ## Progress
 
@@ -52,6 +55,15 @@ In progress:
 
 From vim:
 ```vim
+call common_lsp#texlab({})
+call common_lsp#gopls({})
+
+" These are still TODO, but will be done.
+call common_lsp#clangd({})
+call common_lsp#ccls({})
+call common_lsp#tsserver({})
+
+" Or using a dynamic name.
 call common_lsp#setup("texlab", {})
 call common_lsp#setup("gopls", {})
 ```
@@ -78,7 +90,7 @@ common_lsp.gopls.setup {
 }
 
 -- Build the current buffer.
-common_lsp.texlab.buf_build(0)
+require 'common_lsp'.texlab.buf_build(0)
 ```
 
 ```
@@ -153,52 +165,3 @@ common_lsp.SERVER.setup({config})
 
 # LSP Implementations
 
-## texlab
-
-https://texlab.netlify.com/
-
-A completion engine built from scratch for (la)tex.
-
-
-
-common_lsp.texlab.setup({config})
-common_lsp#setup("texlab", {config})
-
-```
-  Commands:
-  - TexlabBuild: Build the current buffer
-  
-  Default Values:
-    cmd = { "texlab" }
-    filetypes = { "tex", "bib" }
-    log_level = 2
-    root_dir = vim's starting directory
-    settings = {
-      latex = {
-        build = {
-          args = { "-pdf", "-interaction=nonstopmode", "-synctex=1" },
-          executable = "latexmk",
-          onSave = false
-        }
-      }
-    }
-```
-## gopls
-
-https://github.com/golang/tools/tree/master/gopls
-
-Google's lsp server for golang.
-
-
-
-common_lsp.gopls.setup({config})
-common_lsp#setup("gopls", {config})
-
-```
-  Default Values:
-    cmd = { "gopls" }
-    filetypes = { "go" }
-    log_level = 2
-    root_dir = vim's starting directory
-    settings = {}
-```

@@ -1,8 +1,15 @@
+local skeleton = require 'common_lsp/skeleton'
+require 'common_lsp/gopls'
+require 'common_lsp/texlab'
+
 local M = {
-  texlab = require 'common_lsp/texlab';
-  gopls = require 'common_lsp/gopls';
   util = require 'common_lsp/util';
 }
 
-return M
+local mt = {}
+function mt:__index(k)
+  return skeleton[k]
+end
+
+return setmetatable(M, mt)
 -- vim:et ts=2 sw=2
