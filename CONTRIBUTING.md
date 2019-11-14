@@ -25,11 +25,11 @@ In vim.validate parlance, this is the format to use.
 
 ```
 skeleton.SERVER_NAME = {
-	default_config = {'t'};
-	on_new_config = {'f', true};
-	on_attach = {'f', true};
-	commands = {'t', true};
-	docs = {'t', true};
+  default_config = {'t'};
+  on_new_config = {'f', true};
+  on_attach = {'f', true};
+  commands = {'t', true};
+  docs = {'t', true};
 }
 docs = {
   description = {'s', true};
@@ -56,7 +56,7 @@ Example:
       function()
         buf_build(0)
       end;
-	  "-range";
+      "-range";
       description = "Build the current buffer";
     };
   };
