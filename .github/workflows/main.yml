@@ -7,9 +7,15 @@ jobs:
     runs-on: [ubuntu-latest]
     steps:
     - uses: actions/checkout@v1
+    - run: date +%F > todays-date
+    - name: Restore cache for today's nightly.
+      uses: actions/cache@v1.0.0
+      with:
+        path: _neovim
+        key: ${{ runner.os }}-nightly-${{ hashFiles("todays-date") }}
     - name: Setup from neovim nightly and run docgen
       run: |
-        eval "$(curl -Ss https://raw.githubusercontent.com/norcalli/bot-ci/master/scripts/github-actions-setup.sh) nightly-x64"
+        curl -OL https://raw.githubusercontent.com/norcalli/bot-ci/master/scripts/github-actions-setup.sh
+        source github-actions-setup.sh nightly-x64
         nvim -u NONE +'set rtp+=$PWD' +"luafile scripts/docgen.lua" +q
-    - name: Add & Commit
-      uses: EndBug/add-and-commit@v1.0.0
+    - uses: EndBug/add-and-commit@v1.0.0
