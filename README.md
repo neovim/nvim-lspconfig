@@ -3,10 +3,10 @@
 WIP Common configurations for Language Servers.
 
 This repository aims to be a central location to store configurations for
-Language Servers which leverages Neovim's built-in LSP client `vim.lsp` for the
+Language Servers which leverage Neovim's built-in LSP client `vim.lsp` as the
 client backbone. The `vim.lsp` implementation is made to be customizable and
 greatly extensible, but most users just want to get up and going. This
-plugin/library is for those people, although it still let's you customize
+plugin/library is for those people, although it still lets you customize
 things as much as you want in addition to the defaults that this provides.
 
 **NOTE**: Requires current Neovim master as of 2019-11-13
@@ -26,17 +26,16 @@ implemented from [this excellent list compiled by the coc.nvim
 contributors](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
 [this other excellent list from the emacs lsp-mode
 contributors](https://github.com/emacs-lsp/lsp-mode#supported-languages)
-and create a new file under `lua/nvim_lsp/SERVER_NAME.lua`.
-- For a simple server which should only ever have one instance for the entire
-neovim lifetime, I recommend copying `lua/nvim_lsp/texlab.lua`.
-- For servers which should have a different instance for each project root, I
-recommend copying `lua/nvim_lsp/gopls.lua`.
+and create a new file under `lua/nvim_lsp/SERVER_NAME.lua`. I recommend looking
+at `lua/nvim_lsp/texlab.lua` for the most extensive example, but all of them
+are good references. Also read `CONTRIBUTING.md`.
 
 ## Progress
 
 Implemented:
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
+- [pyls](https://github.com/neovim/nvim-lsp#pyls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
 
 Planned servers to implement (by me, but contributions welcome anyway):
@@ -55,17 +54,7 @@ In progress:
 
 From vim:
 ```vim
-call nvim_lsp#texlab({})
-call nvim_lsp#gopls({})
-
-" These are still TODO, but will be done.
-call nvim_lsp#clangd({})
-call nvim_lsp#ccls({})
-call nvim_lsp#tsserver({})
-
-" Or using a dynamic name.
 call nvim_lsp#setup("texlab", {})
-call nvim_lsp#setup("gopls", {})
 ```
 
 From Lua:
@@ -93,7 +82,6 @@ nvim_lsp.gopls.setup {
 require 'nvim_lsp'.texlab.buf_build(0)
 ```
 
-```
 These are functions to set up servers more easily with some server specific
 defaults and more server specific things like commands or different
 diagnostics.
@@ -103,6 +91,7 @@ Servers may define extra functions on the `nvim_lsp.SERVER` table, e.g.
 
 The main setup signature will be:
 
+```
 nvim_lsp.SERVER.setup({config})
 
   {config} is the same as |vim.lsp.start_client()|, but with some
@@ -165,3 +154,121 @@ nvim_lsp.SERVER.setup({config})
 
 # LSP Implementations
 
+## clangd
+
+https://clang.llvm.org/extra/clangd/Installation.html
+
+clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
+as compile_commands.json or, for simpler projects, a compile_flags.txt.
+
+```
+nvim_lsp.clangd.setup({config})
+nvim_lsp#setup("clangd", {config})
+
+  Default Values:
+    capabilities = default capabilities, with offsetEncoding utf-8
+    cmd = { "clangd", "--background-index" }
+    filetypes = { "c", "cpp", "objc", "objcpp" }
+    log_level = 2
+    on_init = function to handle changing offsetEncoding
+    root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
+    settings = {}
+```
+## pyls
+
+https://github.com/palantir/python-language-server
+
+python-language-server, a language server for Python
+
+the following settings (with default options) are supported:
+```lua
+settings = {
+  pyls = {
+    enable = true;
+    trace = { server = "verbose"; };
+    commandPath = "";
+    configurationSources = { "pycodestyle" };
+    plugins = {
+      jedi_completion = { enabled = true; };
+      jedi_hover = { enabled = true; };
+      jedi_references = { enabled = true; };
+      jedi_signature_help = { enabled = true; };
+      jedi_symbols = {
+        enabled = true;
+        all_scopes = true;
+      };
+      mccabe = {
+        enabled = true;
+        threshold = 15;
+      };
+      preload = { enabled = true; };
+      pycodestyle = { enabled = true; };
+      pydocstyle = {
+        enabled = false;
+        match = "(?!test_).*\\.py";
+        matchDir = "[^\\.].*";
+      };
+      pyflakes = { enabled = true; };
+      rope_completion = { enabled = true; };
+      yapf = { enabled = true; };
+    };
+  };
+};
+```
+    
+```
+nvim_lsp.pyls.setup({config})
+nvim_lsp#setup("pyls", {config})
+
+  Default Values:
+    cmd = { "pyls" }
+    filetypes = { "python" }
+    log_level = 2
+    root_dir = vim's starting directory
+    settings = {}
+```
+## texlab
+
+https://texlab.netlify.com/
+
+A completion engine built from scratch for (la)tex.
+
+```
+nvim_lsp.texlab.setup({config})
+nvim_lsp#setup("texlab", {config})
+
+  Commands:
+  - TexlabBuild: Build the current buffer
+  
+  Default Values:
+    cmd = { "texlab" }
+    filetypes = { "tex", "bib" }
+    log_level = 2
+    root_dir = vim's starting directory
+    settings = {
+      latex = {
+        build = {
+          args = { "-pdf", "-interaction=nonstopmode", "-synctex=1" },
+          executable = "latexmk",
+          onSave = false
+        }
+      }
+    }
+```
+## gopls
+
+https://github.com/golang/tools/tree/master/gopls
+
+Google's lsp server for golang.
+
+```
+nvim_lsp.gopls.setup({config})
+nvim_lsp#setup("gopls", {config})
+
+  Default Values:
+    cmd = { "gopls" }
+    filetypes = { "go" }
+    log_level = 2
+    root_dir = root_pattern("go.mod", ".git")
+    settings = {}
+```
