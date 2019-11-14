@@ -19,6 +19,11 @@ skeleton.elmls = {
       elmAnalyseTrigger = "change",
     };
     capabilities = default_capabilities;
+    on_init = vim.schedule_wrap(function(client, result)
+      if result.offsetEncoding then
+        client.offset_encoding = result.offsetEncoding
+      end
+    end)
   };
   docs = {
     description = [[
@@ -31,6 +36,7 @@ npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
 ]];
     default_config = {
       root_dir = [[root_pattern("elm.json")]];
+      on_init = [[function to handle changing offsetEncoding]];
       capabilities = [[default capabilities, with offsetEncoding utf-8]];
     };
   };

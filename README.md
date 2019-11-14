@@ -292,6 +292,7 @@ nvim_lsp#setup("elmls", {config})
     cmd = { "elm-language-server" }
     filetypes = { "elm" }
     log_level = 2
+    on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("elm.json")
     settings = {}
 ```
