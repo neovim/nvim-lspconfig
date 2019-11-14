@@ -37,6 +37,7 @@ Implemented:
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
+- [elmls](https://github.com/neovim/nvim-lsp#elmls)
 
 Planned servers to implement (by me, but contributions welcome anyway):
 - [ccls](https://github.com/MaskRay/ccls)
@@ -153,4 +154,3 @@ nvim_lsp.SERVER.setup({config})
 ```
 
 # LSP Implementations
-

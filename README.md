@@ -37,6 +37,7 @@ Implemented:
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
+- [elmls](https://github.com/neovim/nvim-lsp#elmls)
 
 Planned servers to implement (by me, but contributions welcome anyway):
 - [ccls](https://github.com/MaskRay/ccls)
@@ -215,7 +216,7 @@ settings = {
   };
 };
 ```
-    
+
 ```
 nvim_lsp.pyls.setup({config})
 nvim_lsp#setup("pyls", {config})
@@ -239,7 +240,7 @@ nvim_lsp#setup("texlab", {config})
 
   Commands:
   - TexlabBuild: Build the current buffer
-  
+
   Default Values:
     cmd = { "texlab" }
     filetypes = { "tex", "bib" }
@@ -270,5 +271,27 @@ nvim_lsp#setup("gopls", {config})
     filetypes = { "go" }
     log_level = 2
     root_dir = root_pattern("go.mod", ".git")
+    settings = {}
+```
+
+## elmls
+
+https://github.com/elm-tooling/elm-language-server#installation
+
+elm-language-server (elmLS) relies on having a few dependencies installed:
+```sh
+npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
+```
+
+```
+nvim_lsp.elmls.setup({config})
+nvim_lsp#setup("elmls", {config})
+
+  Default Values:
+    capabilities = default capabilities, with offsetEncoding utf-8
+    cmd = { "elm-language-server" }
+    filetypes = { "elm" }
+    log_level = 2
+    root_dir = root_pattern("elm.json")
     settings = {}
 ```
