@@ -5,17 +5,29 @@ on: [push]
 jobs:
   docgen:
     runs-on: [ubuntu-latest]
+    if: ${{ env.GITHUB_REF }} != 'master'
     steps:
     - uses: actions/checkout@v1
     - run: date +%F > todays-date
     - name: Restore cache for today's nightly.
       uses: actions/cache@v1.0.0
       with:
-        path: _neovim
+        path: /tmp/_neovim
         key: ${{ runner.os }}-nightly-${{ hashFiles('todays-date') }}
     - name: Setup from neovim nightly and run docgen
       run: |
         curl -OL https://raw.githubusercontent.com/norcalli/bot-ci/master/scripts/github-actions-setup.sh
         source github-actions-setup.sh nightly-x64
         nvim -u NONE +'set rtp+=$PWD' +"luafile scripts/docgen.lua" +q
-    - uses: EndBug/add-and-commit@v1.0.0
+    - name: Commit changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        COMMIT_MSG: |
+          [docgen] Update README.md
+          skip-checks: true
+      run: |
+        git config user.email "actions@github"
+        git config user.name "Github Actions"
+        git add README.md
+        # Only commit and push if we have changes
+        git diff --quiet && git diff --staged --quiet || (git commit -m "${COMMIT_MSG}"; git push origin ${GITHUB_REF})
