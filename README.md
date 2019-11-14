@@ -35,11 +35,11 @@ recommend copying `lua/nvim_lsp/gopls.lua`.
 ## Progress
 
 Implemented:
+- [clangd](https://github.com/neovim/nvim-lsp#clangd)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
 
 Planned servers to implement (by me, but contributions welcome anyway):
-- [clangd](https://clang.llvm.org/extra/clangd/Installation.html)
 - [ccls](https://github.com/MaskRay/ccls)
 - [lua-language-server](https://github.com/sumneko/lua-language-server)
 - [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)
