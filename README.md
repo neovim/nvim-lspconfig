@@ -14,9 +14,9 @@ things as much as you want in addition to the defaults that this provides.
 **CONTRIBUTIONS ARE WELCOME!**
 
 There's a lot of language servers in the world, and not enough time.  See
-[`lua/common_lsp/texlab.lua`](https://github.com/norcalli/nvim-common-lsp/blob/master/lua/common_lsp/texlab.lua)
+[`lua/common_lsp/texlab.lua`](https://github.com/neovim/nvim-lsp/blob/master/lua/common_lsp/texlab.lua)
 and
-[`lua/common_lsp/skeleton.lua`](https://github.com/norcalli/nvim-common-lsp/blob/master/lua/common_lsp/skeleton.lua)
+[`lua/common_lsp/skeleton.lua`](https://github.com/neovim/nvim-lsp/blob/master/lua/common_lsp/skeleton.lua)
 for examples and ask me questions in the [Neovim
 Gitter](https://gitter.im/neovim/neovim) to help me complete configurations for
 *all the LSPs!*
@@ -35,9 +35,9 @@ recommend copying `lua/common_lsp/gopls.lua`.
 ## Progress
 
 Implemented:
-- [clangd](https://github.com/norcalli/nvim-common-lsp#clangd)
-- [gopls](https://github.com/norcalli/nvim-common-lsp#gopls) (has some errors)
-- [texlab](https://github.com/norcalli/nvim-common-lsp#texlab)
+- [clangd](https://github.com/neovim/nvim-lsp#clangd)
+- [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
+- [texlab](https://github.com/neovim/nvim-lsp#texlab)
 
 Planned servers to implement (by me, but contributions welcome anyway):
 - [ccls](https://github.com/MaskRay/ccls)
@@ -49,7 +49,7 @@ In progress:
 
 ## Install
 
-`Plug 'norcalli/nvim-common-lsp'`
+`Plug 'neovim/nvim-lsp'`
 
 ## Use
 
