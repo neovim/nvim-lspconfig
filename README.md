@@ -1,4 +1,4 @@
-# nvim-lsp
+# nvim-common-lsp
 
 WIP Common configurations for Language Servers.
 
@@ -35,11 +35,11 @@ recommend copying `lua/nvim_lsp/gopls.lua`.
 ## Progress
 
 Implemented:
-- [clangd](https://github.com/neovim/nvim-lsp#clangd)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
 
 Planned servers to implement (by me, but contributions welcome anyway):
+- [clangd](https://clang.llvm.org/extra/clangd/Installation.html)
 - [ccls](https://github.com/MaskRay/ccls)
 - [lua-language-server](https://github.com/sumneko/lua-language-server)
 - [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)
@@ -172,12 +172,10 @@ https://clang.llvm.org/extra/clangd/Installation.html
 clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
 
-
-
+```
 nvim_lsp.clangd.setup({config})
 nvim_lsp#setup("clangd", {config})
 
-```
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "clangd", "--background-index" }
@@ -193,12 +191,10 @@ https://texlab.netlify.com/
 
 A completion engine built from scratch for (la)tex.
 
-
-
+```
 nvim_lsp.texlab.setup({config})
 nvim_lsp#setup("texlab", {config})
 
-```
   Commands:
   - TexlabBuild: Build the current buffer
   
@@ -223,12 +219,10 @@ https://github.com/golang/tools/tree/master/gopls
 
 Google's lsp server for golang.
 
-
-
+```
 nvim_lsp.gopls.setup({config})
 nvim_lsp#setup("gopls", {config})
 
-```
   Default Values:
     cmd = { "gopls" }
     filetypes = { "go" }

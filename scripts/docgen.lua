@@ -82,8 +82,7 @@ for k, v in pairs(skeleton) do
   params.preamble = ""
   if tconf.docs then
     params.preamble = table.concat(filter(
-    nilifempty(tconf.docs.description),
-    ""
+    nilifempty(tconf.docs.description)
     ), '\n\n')
   end
 
@@ -91,10 +90,10 @@ for k, v in pairs(skeleton) do
 ## {{template_name}}
 
 {{preamble}}
+```
 nvim_lsp.{{template_name}}.setup({config})
 nvim_lsp#setup("{{template_name}}", {config})
 
-```
 {{body}}
 ```
 ]]):gsub("{{(%S+)}}", params)
