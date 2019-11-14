@@ -21,6 +21,15 @@ for examples and ask me questions in the [Neovim
 Gitter](https://gitter.im/neovim/neovim) to help me complete configurations for
 *all the LSPs!*
 
+If you don't know where to start, you can pick one that's not in progress or
+implemented from [this excellent list compiled by the coc.nvim
+contributors](https://github.com/neoclide/coc.nvim/wiki/Language-servers) and
+create a new file under `lua/common_lsp/SERVER_NAME.lua`.
+- For a simple server which should only ever have one instance for the entire
+neovim lifetime, I recommend copying `lua/common_lsp/texlab.lua`.
+- For servers which should have a different instance for each project root, I
+recommend copying `lua/common_lsp/gopls.lua`.
+
 ## Progress
 
 Implemented:
