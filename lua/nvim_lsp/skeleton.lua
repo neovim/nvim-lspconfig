@@ -1,4 +1,4 @@
-local util = require 'common_lsp/util'
+local util = require 'nvim_lsp/util'
 local api, validate, lsp = vim.api, vim.validate, vim.lsp
 local tbl_extend = vim.tbl_extend
 
@@ -76,7 +76,7 @@ function skeleton.__newindex(t, template_name, template)
       trigger = "BufReadPost *"
     end
     api.nvim_command(string.format(
-        "autocmd %s lua require'common_lsp'[%q].manager.try_add()"
+        "autocmd %s lua require'nvim_lsp'[%q].manager.try_add()"
         , trigger
         , config.name
         ))
@@ -118,7 +118,7 @@ function skeleton.__newindex(t, template_name, template)
           M._setup_buffer(client.id)
         else
           api.nvim_command(string.format(
-              "autocmd BufEnter <buffer=%d> ++once lua require'common_lsp'[%q]._setup_buffer(%d)"
+              "autocmd BufEnter <buffer=%d> ++once lua require'nvim_lsp'[%q]._setup_buffer(%d)"
               , template_name
               , bufnr
               , client.id

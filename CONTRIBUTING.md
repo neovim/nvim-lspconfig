@@ -72,7 +72,7 @@ Example:
 skeleton.texlab.buf_build = buf_build
 ```
 
-After you create a skeleton, you have to `require 'common_lsp/SERVER_NAME'` in
-`lua/common_lsp.lua`, and that's it.
+After you create a skeleton, you have to `require 'nvim_lsp/SERVER_NAME'` in
+`lua/nvim_lsp.lua`, and that's it.
 
 Generate docs and you're done.

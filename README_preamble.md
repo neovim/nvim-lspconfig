@@ -14,9 +14,9 @@ things as much as you want in addition to the defaults that this provides.
 **CONTRIBUTIONS ARE WELCOME!**
 
 There's a lot of language servers in the world, and not enough time.  See
-[`lua/common_lsp/texlab.lua`](https://github.com/norcalli/nvim-common-lsp/blob/master/lua/common_lsp/texlab.lua)
+[`lua/nvim_lsp/texlab.lua`](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/texlab.lua)
 and
-[`lua/common_lsp/skeleton.lua`](https://github.com/norcalli/nvim-common-lsp/blob/master/lua/common_lsp/skeleton.lua)
+[`lua/nvim_lsp/skeleton.lua`](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/skeleton.lua)
 for examples and ask me questions in the [Neovim
 Gitter](https://gitter.im/neovim/neovim) to help me complete configurations for
 *all the LSPs!*
@@ -26,17 +26,17 @@ implemented from [this excellent list compiled by the coc.nvim
 contributors](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
 [this other excellent list from the emacs lsp-mode
 contributors](https://github.com/emacs-lsp/lsp-mode#supported-languages)
-and create a new file under `lua/common_lsp/SERVER_NAME.lua`.
+and create a new file under `lua/nvim_lsp/SERVER_NAME.lua`.
 - For a simple server which should only ever have one instance for the entire
-neovim lifetime, I recommend copying `lua/common_lsp/texlab.lua`.
+neovim lifetime, I recommend copying `lua/nvim_lsp/texlab.lua`.
 - For servers which should have a different instance for each project root, I
-recommend copying `lua/common_lsp/gopls.lua`.
+recommend copying `lua/nvim_lsp/gopls.lua`.
 
 ## Progress
 
 Implemented:
-- [gopls](https://github.com/norcalli/nvim-common-lsp#gopls) (has some errors)
-- [texlab](https://github.com/norcalli/nvim-common-lsp#texlab)
+- [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
+- [texlab](https://github.com/neovim/nvim-lsp#texlab)
 
 Planned servers to implement (by me, but contributions welcome anyway):
 - [clangd](https://clang.llvm.org/extra/clangd/Installation.html)
@@ -49,28 +49,28 @@ In progress:
 
 ## Install
 
-`Plug 'norcalli/nvim-common-lsp'`
+`Plug 'neovim/nvim-lsp'`
 
 ## Use
 
 From vim:
 ```vim
-call common_lsp#texlab({})
-call common_lsp#gopls({})
+call nvim_lsp#texlab({})
+call nvim_lsp#gopls({})
 
 " These are still TODO, but will be done.
-call common_lsp#clangd({})
-call common_lsp#ccls({})
-call common_lsp#tsserver({})
+call nvim_lsp#clangd({})
+call nvim_lsp#ccls({})
+call nvim_lsp#tsserver({})
 
 " Or using a dynamic name.
-call common_lsp#setup("texlab", {})
-call common_lsp#setup("gopls", {})
+call nvim_lsp#setup("texlab", {})
+call nvim_lsp#setup("gopls", {})
 ```
 
 From Lua:
 ```lua
-require 'common_lsp'.texlab.setup {
+require 'nvim_lsp'.texlab.setup {
   name = "texlab_fancy";
   log_level = vim.lsp.protocol.MessageType.Log;
   settings = {
@@ -82,15 +82,15 @@ require 'common_lsp'.texlab.setup {
   }
 }
 
-local common_lsp = require 'common_lsp'
+local nvim_lsp = require 'nvim_lsp'
 
 -- Customize how to find the root_dir
-common_lsp.gopls.setup {
-  root_dir = common_lsp.util.root_pattern(".git");
+nvim_lsp.gopls.setup {
+  root_dir = nvim_lsp.util.root_pattern(".git");
 }
 
 -- Build the current buffer.
-require 'common_lsp'.texlab.buf_build(0)
+require 'nvim_lsp'.texlab.buf_build(0)
 ```
 
 ```
@@ -98,12 +98,12 @@ These are functions to set up servers more easily with some server specific
 defaults and more server specific things like commands or different
 diagnostics.
 
-Servers may define extra functions on the `common_lsp.SERVER` table, e.g.
-`common_lsp.texlab.buf_build({bufnr})`.
+Servers may define extra functions on the `nvim_lsp.SERVER` table, e.g.
+`nvim_lsp.texlab.buf_build({bufnr})`.
 
 The main setup signature will be:
 
-common_lsp.SERVER.setup({config})
+nvim_lsp.SERVER.setup({config})
 
   {config} is the same as |vim.lsp.start_client()|, but with some
   additions and changes:
@@ -121,14 +121,14 @@ common_lsp.SERVER.setup({config})
 
     If nil is returned, the buffer is skipped.
 
-    See |common_lsp.util.search_ancestors()| and the functions which use it:
-    - |common_lsp.util.root_pattern(patterns...)| finds an ancestor which
+    See |nvim_lsp.util.search_ancestors()| and the functions which use it:
+    - |nvim_lsp.util.root_pattern(patterns...)| finds an ancestor which
     - contains one of the files in `patterns...`. This is equivalent
     to coc.nvim's "rootPatterns"
     - More specific utilities:
-      - |common_lsp.util.find_git_root()|
-      - |common_lsp.util.find_node_modules_root()|
-      - |common_lsp.util.find_package_json_root()|
+      - |nvim_lsp.util.find_git_root()|
+      - |nvim_lsp.util.find_node_modules_root()|
+      - |nvim_lsp.util.find_package_json_root()|
 
   {name}
     Defaults to the server's name.

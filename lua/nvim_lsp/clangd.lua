@@ -1,5 +1,5 @@
-local skeleton = require 'common_lsp/skeleton'
-local util = require 'common_lsp/util'
+local skeleton = require 'nvim_lsp/skeleton'
+local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
 local default_capabilities = lsp.protocol.make_client_capabilities()

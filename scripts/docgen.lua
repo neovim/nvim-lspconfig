@@ -1,4 +1,4 @@
-local skeleton = require 'common_lsp/skeleton'
+local skeleton = require 'nvim_lsp/skeleton'
 local inspect = vim.inspect
 
 local function filter(...)
@@ -91,8 +91,8 @@ for k, v in pairs(skeleton) do
 ## {{template_name}}
 
 {{preamble}}
-common_lsp.{{template_name}}.setup({config})
-common_lsp#setup("{{template_name}}", {config})
+nvim_lsp.{{template_name}}.setup({config})
+nvim_lsp#setup("{{template_name}}", {config})
 
 ```
 {{body}}
