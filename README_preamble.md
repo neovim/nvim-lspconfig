@@ -1,4 +1,4 @@
-# nvim-common-lsp
+# nvim-lsp
 
 WIP Common configurations for Language Servers.
 
