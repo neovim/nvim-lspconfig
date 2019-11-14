@@ -26,11 +26,9 @@ implemented from [this excellent list compiled by the coc.nvim
 contributors](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
 [this other excellent list from the emacs lsp-mode
 contributors](https://github.com/emacs-lsp/lsp-mode#supported-languages)
-and create a new file under `lua/nvim_lsp/SERVER_NAME.lua`.
-- For a simple server which should only ever have one instance for the entire
-neovim lifetime, I recommend copying `lua/nvim_lsp/texlab.lua`.
-- For servers which should have a different instance for each project root, I
-recommend copying `lua/nvim_lsp/gopls.lua`.
+and create a new file under `lua/nvim_lsp/SERVER_NAME.lua`. I recommend looking
+at `lua/nvim_lsp/texlab.lua` for the most extensive example, but all of them
+are good references. Also read `CONTRIBUTING.md`.
 
 ## Progress
 
@@ -156,3 +154,121 @@ nvim_lsp.SERVER.setup({config})
 
 # LSP Implementations
 
+## clangd
+
+https://clang.llvm.org/extra/clangd/Installation.html
+
+clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
+as compile_commands.json or, for simpler projects, a compile_flags.txt.
+
+```
+nvim_lsp.clangd.setup({config})
+nvim_lsp#setup("clangd", {config})
+
+  Default Values:
+    capabilities = default capabilities, with offsetEncoding utf-8
+    cmd = { "clangd", "--background-index" }
+    filetypes = { "c", "cpp", "objc", "objcpp" }
+    log_level = 2
+    on_init = function to handle changing offsetEncoding
+    root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
+    settings = {}
+```
+## pyls
+
+https://github.com/palantir/python-language-server
+
+python-language-server, a language server for Python
+
+the following settings (with default options) are supported:
+```lua
+settings = {
+  pyls = {
+    enable = true;
+    trace = { server = "verbose"; };
+    commandPath = "";
+    configurationSources = { "pycodestyle" };
+    plugins = {
+      jedi_completion = { enabled = true; };
+      jedi_hover = { enabled = true; };
+      jedi_references = { enabled = true; };
+      jedi_signature_help = { enabled = true; };
+      jedi_symbols = {
+        enabled = true;
+        all_scopes = true;
+      };
+      mccabe = {
+        enabled = true;
+        threshold = 15;
+      };
+      preload = { enabled = true; };
+      pycodestyle = { enabled = true; };
+      pydocstyle = {
+        enabled = false;
+        match = "(?!test_).*\\.py";
+        matchDir = "[^\\.].*";
+      };
+      pyflakes = { enabled = true; };
+      rope_completion = { enabled = true; };
+      yapf = { enabled = true; };
+    };
+  };
+};
+```
+    
+```
+nvim_lsp.pyls.setup({config})
+nvim_lsp#setup("pyls", {config})
+
+  Default Values:
+    cmd = { "pyls" }
+    filetypes = { "python" }
+    log_level = 2
+    root_dir = vim's starting directory
+    settings = {}
+```
+## texlab
+
+https://texlab.netlify.com/
+
+A completion engine built from scratch for (la)tex.
+
+```
+nvim_lsp.texlab.setup({config})
+nvim_lsp#setup("texlab", {config})
+
+  Commands:
+  - TexlabBuild: Build the current buffer
+  
+  Default Values:
+    cmd = { "texlab" }
+    filetypes = { "tex", "bib" }
+    log_level = 2
+    root_dir = vim's starting directory
+    settings = {
+      latex = {
+        build = {
+          args = { "-pdf", "-interaction=nonstopmode", "-synctex=1" },
+          executable = "latexmk",
+          onSave = false
+        }
+      }
+    }
+```
+## gopls
+
+https://github.com/golang/tools/tree/master/gopls
+
+Google's lsp server for golang.
+
+```
+nvim_lsp.gopls.setup({config})
+nvim_lsp#setup("gopls", {config})
+
+  Default Values:
+    cmd = { "gopls" }
+    filetypes = { "go" }
+    log_level = 2
+    root_dir = root_pattern("go.mod", ".git")
+    settings = {}
+```

@@ -1,3 +1,4 @@
+require 'nvim_lsp'
 local skeleton = require 'nvim_lsp/skeleton'
 local inspect = vim.inspect
 
@@ -38,7 +39,7 @@ local function indent(n, s)
   return table.concat(lines, '\n')
 end
 
-local writer = io.popen("cat README_preamble.md - > README.md  common-lsp-docs.md", "w")
+local writer = io.popen("cat README_preamble.md - > README.md", "w")
 
 for k, v in pairs(skeleton) do
   local tconf = v.template_config
@@ -68,6 +69,9 @@ for k, v in pairs(skeleton) do
     for _, dk in ipairs(keys) do
       local dv = tconf.default_config[dk]
       local description = tconf.docs and tconf.docs.default_config and tconf.docs.default_config[dk]
+      if description and type(description) ~= 'string' then
+        description = inspect(description)
+      end
       table.insert(lines, indent(2, string.format("%s = %s", dk, description or inspect(dv))))
     end
     params.default_config = indent(0, table.concat(lines, '\n'))
