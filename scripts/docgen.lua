@@ -1,3 +1,4 @@
+require 'nvim_lsp'
 local skeleton = require 'nvim_lsp/skeleton'
 local inspect = vim.inspect
 
@@ -38,7 +39,7 @@ local function indent(n, s)
   return table.concat(lines, '\n')
 end
 
-local writer = io.popen("cat README_preamble.md - > README.md  common-lsp-docs.md", "w")
+local writer = io.popen("cat README_preamble.md - > README.md", "w")
 
 for k, v in pairs(skeleton) do
   local tconf = v.template_config
