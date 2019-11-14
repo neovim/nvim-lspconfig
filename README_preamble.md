@@ -55,17 +55,9 @@ In progress:
 
 From vim:
 ```vim
-call nvim_lsp#texlab({})
-call nvim_lsp#gopls({})
-
-" These are still TODO, but will be done.
-call nvim_lsp#clangd({})
-call nvim_lsp#ccls({})
-call nvim_lsp#tsserver({})
-
-" Or using a dynamic name.
 call nvim_lsp#setup("texlab", {})
 call nvim_lsp#setup("gopls", {})
+call nvim_lsp#setup("pyls", {})
 ```
 
 From Lua:

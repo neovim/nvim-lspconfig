@@ -55,17 +55,9 @@ In progress:
 
 From vim:
 ```vim
-call nvim_lsp#texlab({})
-call nvim_lsp#gopls({})
-
-" These are still TODO, but will be done.
-call nvim_lsp#clangd({})
-call nvim_lsp#ccls({})
-call nvim_lsp#tsserver({})
-
-" Or using a dynamic name.
 call nvim_lsp#setup("texlab", {})
 call nvim_lsp#setup("gopls", {})
+call nvim_lsp#setup("pyls", {})
 ```
 
 From Lua:
@@ -183,6 +175,60 @@ nvim_lsp#setup("clangd", {config})
     log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
+    settings = {}
+```
+## pyls
+
+https://github.com/palantir/python-language-server
+
+python-language-server, a language server for Python
+
+the following settings (with default options) are supported:
+
+```
+settings = {
+  pyls = {
+    enable = true;
+    trace = { server = "verbose"; };
+    commandPath = "";
+    configurationSources = { "pycodestyle" };
+    plugins = {
+      jedi_completion = { enabled = true; };
+      jedi_hover = { enabled = true; };
+      jedi_references = { enabled = true; };
+      jedi_signature_help = { enabled = true; };
+      jedi_symbols = {
+        enabled = true;
+        all_scopes = true;
+      };
+      mccabe = {
+        enabled = true;
+        threshold = 15;
+      };
+      preload = { enabled = true; };
+      pycodestyle = { enabled = true; };
+      pydocstyle = {
+        enabled = false;
+        match = "(?!test_).*\\.py";
+        matchDir = "[^\\.].*";
+      };
+      pyflakes = { enabled = true; };
+      rope_completion = { enabled = true; };
+      yapf = { enabled = true; };
+    };
+  };
+};
+```
+    
+```
+nvim_lsp.pyls.setup({config})
+nvim_lsp#setup("pyls", {config})
+
+  Default Values:
+    cmd = { "pyls" }
+    filetypes = { "python" }
+    log_level = 2
+    root_dir = vim's starting directory
     settings = {}
 ```
 ## texlab

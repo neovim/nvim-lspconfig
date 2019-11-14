@@ -2,6 +2,7 @@ local skeleton = require 'nvim_lsp/skeleton'
 require 'nvim_lsp/gopls'
 require 'nvim_lsp/texlab'
 require 'nvim_lsp/clangd'
+require 'nvim_lsp/pyls'
 
 local M = {
   util = require 'nvim_lsp/util';
