@@ -21,6 +21,21 @@ for examples and ask me questions in the [Neovim
 Gitter](https://gitter.im/neovim/neovim) to help me complete configurations for
 *all the LSPs!*
 
+## Progress
+
+Implemented:
+- [gopls](https://github.com/norcalli/nvim-common-lsp#gopls)
+- [texlab](https://github.com/norcalli/nvim-common-lsp#texlab)
+
+Planned servers to implement (by me, but contributions welcome anyway):
+- [clangd](https://clang.llvm.org/extra/clangd/Installation.html)
+- [ccls](https://github.com/MaskRay/ccls)
+- [lua-language-server](https://github.com/sumneko/lua-language-server)
+- [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)
+
+In progress:
+- ...
+
 ## Install
 
 `Plug 'norcalli/nvim-common-lsp'`
