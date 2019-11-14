@@ -19,11 +19,11 @@ skeleton.elmls = {
       elmAnalyseTrigger = "change",
     };
     capabilities = default_capabilities;
-    on_init = vim.schedule_wrap(function(client, result)
+    on_init = function(client, result)
       if result.offsetEncoding then
         client.offset_encoding = result.offsetEncoding
       end
-    end)
+    end
   };
   docs = {
     description = [[
