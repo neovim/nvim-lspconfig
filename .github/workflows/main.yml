@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        ref: github.ref
+        ref: ${{ github.ref }}
     - run: date +%F > todays-date
     - name: Restore cache for today's nightly.
       uses: actions/cache@v1.0.0
