@@ -5,6 +5,11 @@
 
 # Generating docs
 
+> NOTE: Github Actions automatically generates the docs, so only modify
+> README_preamble.md or the `docs` in the server config!
+
+The instructions here are for previewing changes locally.
+
 `scripts/docgen.lua` was written with the intention of being sourced (like with `luafile`)
 from `nvim` to run.
 
@@ -17,6 +22,7 @@ from the project root. This ensures that it doesn't pick up another
 copy of `nvim_lsp` on your system.
 
 This generates a suffix for README.md
+
 
 # skeleton
 

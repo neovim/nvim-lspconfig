@@ -14,21 +14,19 @@ things as much as you want in addition to the defaults that this provides.
 **CONTRIBUTIONS ARE WELCOME!**
 
 There's a lot of language servers in the world, and not enough time.  See
-[`lua/nvim_lsp/texlab.lua`](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/texlab.lua)
-and
-[`lua/nvim_lsp/skeleton.lua`](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/skeleton.lua)
-for examples and ask me questions in the [Neovim
-Gitter](https://gitter.im/neovim/neovim) to help me complete configurations for
-*all the LSPs!*
+[`lua/nvim_lsp/*.lua`](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/)
+for examples and ask us questions in the [Neovim
+Gitter](https://gitter.im/neovim/neovim) to help us complete configurations for
+*all the LSPs!* Read `CONTRIBUTING.md` for some instructions.
 
 If you don't know where to start, you can pick one that's not in progress or
 implemented from [this excellent list compiled by the coc.nvim
 contributors](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
 [this other excellent list from the emacs lsp-mode
 contributors](https://github.com/emacs-lsp/lsp-mode#supported-languages)
-and create a new file under `lua/nvim_lsp/SERVER_NAME.lua`. I recommend looking
-at `lua/nvim_lsp/texlab.lua` for the most extensive example, but all of them
-are good references. Also read `CONTRIBUTING.md`.
+and create a new file under `lua/nvim_lsp/SERVER_NAME.lua`. We recommend
+looking at `lua/nvim_lsp/texlab.lua` for the most extensive example, but all of
+them are good references.
 
 ## Progress
 
