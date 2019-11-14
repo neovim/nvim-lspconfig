@@ -124,10 +124,10 @@ M.path = (function()
     local strip_sep_pat = path_sep.."$"
     dirname = function(path)
       local result = path:gsub(strip_sep_pat, ""):gsub(strip_dir_pat, "")
-			if #result == 0 then
-				return "/"
-			end
-			return result
+      if #result == 0 then
+        return "/"
+      end
+      return result
     end
   end
 
@@ -142,24 +142,24 @@ M.path = (function()
     -- Just in case our algo is buggy, don't infinite loop.
     for _ = 1, 100 do
       dir = dirname(dir)
-			-- If we can't ascend further, then stop looking.
+      -- If we can't ascend further, then stop looking.
       if cb(dir, path) then
         return dir, path
       end
-			if is_fs_root(dir) then
-				break
-			end
+      if is_fs_root(dir) then
+        break
+      end
     end
   end
 
   -- Iterate the path until we find the rootdir.
   local function iterate_parents(path)
     path = uv.fs_realpath(path)
-		local function it(s, v)
-			if is_fs_root(v) then return end
-			return dirname(v), path
-		end
-		return it, path, path
+    local function it(s, v)
+      if is_fs_root(v) then return end
+      return dirname(v), path
+    end
+    return it, path, path
   end
 
   return {

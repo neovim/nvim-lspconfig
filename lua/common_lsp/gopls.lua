@@ -91,66 +91,68 @@ end
 --   This is a table, and the keys are case sensitive.
 --   Example: `settings = { }`
 function M.setup(config)
-	validate {
-		root_dir = {config.root_dir, 'f'};
-		filetype = {config.filetype, 't', true};
-	}
+  validate {
+    root_dir = {config.root_dir, 'f'};
+    filetype = {config.filetype, 't', true};
+  }
 
-	if config.filetype then
+  local filetype = config.filetype or default_config.filetype
+
+  if filetype then
     local filetypes
-    if type(config.filetype) == 'string' then
-      filetypes = { config.filetype }
+    if type(filetype) == 'string' then
+      filetypes = { filetype }
     else
-      filetypes = config.filetype
+      filetypes = filetype
     end
-		api.nvim_command(string.format(
-				"autocmd FileType %s lua require'common_lsp/%s'.manager.try_add()"
-				, table.concat(filetypes, ',')
-				, M.name
-				))
-	else
-		api.nvim_command(string.format(
-				"autocmd BufReadPost * lua require'common_lsp/%s'.manager.try_add()"
-				, M.name
-				))
-	end
+    api.nvim_command(string.format(
+        "autocmd FileType %s lua require'common_lsp'[%q].manager.try_add()"
+        , table.concat(filetypes, ',')
+        , M.name
+        ))
+  else
+    api.nvim_command(string.format(
+        "autocmd BufReadPost * lua require'common_lsp'[%q].manager.try_add()"
+        , M.name
+        ))
+  end
 
-	local get_root_dir = config.root_dir
+  local get_root_dir = config.root_dir or default_config.root_dir
 
-	M.manager = util.server_per_root_dir_manager(function(_root_dir)
-		local new_config = vim.tbl_extend("keep", config, default_config)
-		-- Deepcopy anything that is >1 level nested.
-		new_config.settings = vim.deepcopy(new_config.settings)
-		util.tbl_deep_extend(new_config.settings, default_config.settings)
+  M.manager = util.server_per_root_dir_manager(function(_root_dir)
+    local new_config = vim.tbl_extend("keep", config, default_config)
+    -- Deepcopy anything that is >1 level nested.
+    new_config.settings = vim.deepcopy(new_config.settings)
+    util.tbl_deep_extend(new_config.settings, default_config.settings)
 
-		new_config.capabilities = new_config.capabilities or lsp.protocol.make_client_capabilities()
-		util.tbl_deep_extend(new_config.capabilities, {
-			workspace = {
-				configuration = true;
-			}
-		})
+    new_config.capabilities = new_config.capabilities or lsp.protocol.make_client_capabilities()
+    util.tbl_deep_extend(new_config.capabilities, {
+      workspace = {
+        configuration = true;
+      }
+    })
 
-		setup_callbacks(new_config)
+    setup_callbacks(new_config)
 
-		new_config.on_attach = util.add_hook_after(new_config.on_attach, function(client, bufnr)
-			if bufnr == api.nvim_get_current_buf() then
-				M._setup_buffer()
-			else
-				api.nvim_command(string.format(
-						"autocmd BufEnter <buffer=%d> ++once lua require'common_lsp/%s'._setup_buffer()",
-						M.name,
-						bufnr))
-			end
-		end)
-		return new_config
-	end)
+    new_config.on_attach = util.add_hook_after(new_config.on_attach, function(client, bufnr)
+      if bufnr == api.nvim_get_current_buf() then
+        M._setup_buffer()
+      else
+        api.nvim_command(string.format(
+            "autocmd BufEnter <buffer=%d> ++once lua require'common_lsp/%s'._setup_buffer()",
+            M.name,
+            bufnr))
+      end
+    end)
+    return new_config
+  end)
 
-	function M.manager.try_add()
+  function M.manager.try_add()
     local root_dir = get_root_dir(api.nvim_buf_get_name(0), api.nvim_get_current_buf())
     print(api.nvim_get_current_buf(), root_dir)
-		local id = M.manager.add(root_dir)
+    local id = M.manager.add(root_dir)
     lsp.buf_attach_client(0, id)
-	end
+  end
 end
 
 -- Declare any commands here. You can use additional modifiers like "-range"
