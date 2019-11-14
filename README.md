@@ -35,7 +35,7 @@ recommend copying `lua/common_lsp/gopls.lua`.
 ## Progress
 
 Implemented:
-- [gopls](https://github.com/norcalli/nvim-common-lsp#gopls)
+- [gopls](https://github.com/norcalli/nvim-common-lsp#gopls) (has some errors)
 - [texlab](https://github.com/norcalli/nvim-common-lsp#texlab)
 
 Planned servers to implement (by me, but contributions welcome anyway):
