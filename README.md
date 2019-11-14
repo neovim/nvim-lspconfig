@@ -26,17 +26,16 @@ implemented from [this excellent list compiled by the coc.nvim
 contributors](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
 [this other excellent list from the emacs lsp-mode
 contributors](https://github.com/emacs-lsp/lsp-mode#supported-languages)
-and create a new file under `lua/nvim_lsp/SERVER_NAME.lua`.
-- For a simple server which should only ever have one instance for the entire
-neovim lifetime, I recommend copying `lua/nvim_lsp/texlab.lua`.
-- For servers which should have a different instance for each project root, I
-recommend copying `lua/nvim_lsp/gopls.lua`.
+and create a new file under `lua/nvim_lsp/SERVER_NAME.lua`. I recommend looking
+at `lua/nvim_lsp/texlab.lua` for the most extensive example, but all of them
+are good references. Also read `CONTRIBUTING.md`.
 
 ## Progress
 
 Implemented:
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
+- [pyls](https://github.com/neovim/nvim-lsp#pyls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
 
 Planned servers to implement (by me, but contributions welcome anyway):
@@ -55,9 +54,10 @@ In progress:
 
 From vim:
 ```vim
-call nvim_lsp#setup("texlab", {})
+call nvim_lsp#setup("clangd", {})
 call nvim_lsp#setup("gopls", {})
 call nvim_lsp#setup("pyls", {})
+call nvim_lsp#setup("texlab", {})
 ```
 
 From Lua:
@@ -184,8 +184,7 @@ https://github.com/palantir/python-language-server
 python-language-server, a language server for Python
 
 the following settings (with default options) are supported:
-
-```
+```lua
 settings = {
   pyls = {
     enable = true;
