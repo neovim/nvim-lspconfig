@@ -30,6 +30,8 @@ Gitter](https://gitter.im/neovim/neovim) to help me complete configurations for
 From vim:
 ```vim
 call common_lsp#texlab({})
+call common_lsp#gopls({})
+
 " These are still TODO, but will be done.
 call common_lsp#clangd({})
 call common_lsp#ccls({})
@@ -37,7 +39,7 @@ call common_lsp#tsserver({})
 
 " Or using a dynamic name.
 call common_lsp#setup("texlab", {})
-call common_lsp#setup("clangd", {})
+call common_lsp#setup("gopls", {})
 ```
 
 From Lua:
@@ -52,6 +54,13 @@ require 'common_lsp'.texlab.setup {
       }
     }
   }
+}
+
+local common_lsp = require 'common_lsp'
+
+-- Customize how to find the root_dir
+common_lsp.gopls.setup {
+  root_dir = common_lsp.util.root_pattern(".git");
 }
 
 -- Build the current buffer.
@@ -95,4 +104,61 @@ common_lsp#texlab({config})
 
     {name}
       Defaults to "texlab"
+```
+
+## gopls
+
+https://github.com/golang/tools/tree/master/gopls
+
+```
+common_lsp.gopls.setup({config})
+common_lsp#gopls({config})
+
+    A function to set up `gopls` easier.
+   
+    Additionally, it sets up the following commands:
+    - SKELETON_SPOOKY_COMMAND: This does something SPOOKY.
+   
+    {config} is the same as |vim.lsp.add_filetype_config()|, but with some
+    additions and changes:
+   
+    {root_dir}
+      REQUIRED function(filename, bufnr) which is called on new candidate
+      buffers to attach to and returns either a root_dir or nil.
+      If a root_dir is returned, then this file will also be attached. You can
+      optionally use {filetype} to help pre-filter by filetype.
+      If a root_dir is returned which differs from any previously returned
+      root_dir, a new server will be spawned with that root_dir.
+      If nil is returned, the buffer is skipped.
+ 
+      See |common_lsp.util.search_ancestors()| and the functions which use it:
+      - |common_lsp.util.root_pattern(patterns...)| finds an ancestor which a
+      descendent which has one of the files in `patterns...`. This is equivalent
+      to coc.nvim's "rootPatterns"
+      - More specific utilities:
+        - |common_lsp.util.find_git_root()|
+        - |common_lsp.util.find_node_modules_root()|
+        - |common_lsp.util.find_package_json_root()|
+   
+      Defaults to common_lsp.util.root_pattern("go.mod", ".git")
+   
+    {name}
+      Defaults to "gopls"
+   
+    {cmd}
+      Defaults to {"gopls"}
+   
+    {filetype}
+      Defaults to {"go"}. This is optional and only serves to reduce the scope
+      of files to filter for {root_dir}.
+   
+    {log_level}
+      controls the level of logs to show from build processes and other
+      window/logMessage events. By default it is set to
+      vim.lsp.protocol.MessageType.Warning instead of
+      vim.lsp.protocol.MessageType.Log.
+   
+    {settings}
+      This is a table, and the keys are case sensitive.
+      Example: `settings = { }`
 ```
