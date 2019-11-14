@@ -185,6 +185,22 @@ nvim_lsp#setup("clangd", {config})
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
     settings = {}
 ```
+## pyls
+
+https://github.com/palantir/python-language-server
+
+python-language-server, a language server for Python
+
+```
+nvim_lsp.pyls.setup({config})
+nvim_lsp#setup("pyls", {config})
+
+  Default Values:
+    cmd = { "pyls" }
+    filetypes = { "python" }
+    log_level = 2
+    root_dir = vim's starting directory
+```
 ## texlab
 
 https://texlab.netlify.com/
