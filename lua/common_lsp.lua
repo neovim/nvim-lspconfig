@@ -1,6 +1,7 @@
 local skeleton = require 'common_lsp/skeleton'
 require 'common_lsp/gopls'
 require 'common_lsp/texlab'
+require 'common_lsp/clangd'
 
 local M = {
   util = require 'common_lsp/util';

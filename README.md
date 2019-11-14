@@ -16,7 +16,7 @@ things as much as you want in addition to the defaults that this provides.
 There's a lot of language servers in the world, and not enough time.  See
 [`lua/common_lsp/texlab.lua`](https://github.com/norcalli/nvim-common-lsp/blob/master/lua/common_lsp/texlab.lua)
 and
-[`lua/common_lsp/gopls.lua`](https://github.com/norcalli/nvim-common-lsp/blob/master/lua/common_lsp/gopls.lua)
+[`lua/common_lsp/skeleton.lua`](https://github.com/norcalli/nvim-common-lsp/blob/master/lua/common_lsp/skeleton.lua)
 for examples and ask me questions in the [Neovim
 Gitter](https://gitter.im/neovim/neovim) to help me complete configurations for
 *all the LSPs!*
@@ -26,8 +26,11 @@ implemented from [this excellent list compiled by the coc.nvim
 contributors](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
 [this other excellent list from the emacs lsp-mode
 contributors](https://github.com/emacs-lsp/lsp-mode#supported-languages)
-and create a new file under `lua/common_lsp/SERVER_NAME.lua`. I recommend
-looking at `lua/common_lsp/texlab.lua` for inspiration.
+and create a new file under `lua/common_lsp/SERVER_NAME.lua`.
+- For a simple server which should only ever have one instance for the entire
+neovim lifetime, I recommend copying `lua/common_lsp/texlab.lua`.
+- For servers which should have a different instance for each project root, I
+recommend copying `lua/common_lsp/gopls.lua`.
 
 ## Progress
 
@@ -52,6 +55,15 @@ In progress:
 
 From vim:
 ```vim
+call common_lsp#texlab({})
+call common_lsp#gopls({})
+
+" These are still TODO, but will be done.
+call common_lsp#clangd({})
+call common_lsp#ccls({})
+call common_lsp#tsserver({})
+
+" Or using a dynamic name.
 call common_lsp#setup("texlab", {})
 call common_lsp#setup("gopls", {})
 ```
@@ -78,7 +90,7 @@ common_lsp.gopls.setup {
 }
 
 -- Build the current buffer.
-common_lsp.texlab.buf_build(0)
+require 'common_lsp'.texlab.buf_build(0)
 ```
 
 ```
@@ -153,6 +165,28 @@ common_lsp.SERVER.setup({config})
 
 # LSP Implementations
 
+## clangd
+
+https://clang.llvm.org/extra/clangd/Installation.html
+
+clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
+as compile_commands.json or, for simpler projects, a compile_flags.txt.
+
+
+
+common_lsp.clangd.setup({config})
+common_lsp#setup("clangd", {config})
+
+```
+  Default Values:
+    capabilities = default capabilities, with offsetEncoding utf-8
+    cmd = { "clangd", "--background-index" }
+    filetypes = { "c", "cpp", "objc", "objcpp" }
+    log_level = 2
+    on_init = function to handle changing offsetEncoding
+    root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
+    settings = {}
+```
 ## texlab
 
 https://texlab.netlify.com/
@@ -199,6 +233,6 @@ common_lsp#setup("gopls", {config})
     cmd = { "gopls" }
     filetypes = { "go" }
     log_level = 2
-    root_dir = vim's starting directory
+    root_dir = root_pattern("go.mod", ".git")
     settings = {}
 ```
