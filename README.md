@@ -35,12 +35,12 @@ Implemented:
 - [elmls](https://github.com/neovim/nvim-lsp#elmls)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
+- [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
 
 Planned servers to implement (by me, but contributions welcome anyway):
 - [ccls](https://github.com/MaskRay/ccls)
 - [lua-language-server](https://github.com/sumneko/lua-language-server)
-- [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)
 
 In progress:
 - ...

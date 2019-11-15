@@ -3,6 +3,7 @@ require 'nvim_lsp/clangd'
 require 'nvim_lsp/elmls'
 require 'nvim_lsp/gopls'
 require 'nvim_lsp/pyls'
+require 'nvim_lsp/rust_analyzer'
 require 'nvim_lsp/texlab'
 
 local M = {
