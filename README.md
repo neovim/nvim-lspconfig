@@ -31,7 +31,6 @@ them are good references.
 ## Progress
 
 Implemented:
-- [bash-language-server](https://github.com/mads-hartmann/bash-language-server)
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
 - [elmls](https://github.com/neovim/nvim-lsp#elmls)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
@@ -154,6 +153,22 @@ nvim_lsp.SERVER.setup({config})
 ```
 
 # LSP Implementations
+## bash
+
+For install instruction visit:
+https://github.com/mads-hartmann/bash-language-server#installation
+
+```lua
+nvim_lsp.bash.setup({config})
+nvim_lsp#setup("bash", {config})
+
+  Default Values:
+    cmd = { "bash-language-server", "start" }
+    filetypes = { "sh" }
+    log_level = 2
+    root_dir = vim's starting directory
+    settings = {}
+```
 ## clangd
 
 https://clang.llvm.org/extra/clangd/Installation.html
