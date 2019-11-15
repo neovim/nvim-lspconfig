@@ -31,6 +31,7 @@ them are good references.
 ## Progress
 
 Implemented:
+- [bash-language-server](https://github.com/mads-hartmann/bash-language-server)
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
 - [elmls](https://github.com/neovim/nvim-lsp#elmls)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)

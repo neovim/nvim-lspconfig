@@ -1,4 +1,5 @@
 local skeleton = require 'nvim_lsp/skeleton'
+require 'nvim_lsp/bash'
 require 'nvim_lsp/clangd'
 require 'nvim_lsp/elmls'
 require 'nvim_lsp/gopls'
