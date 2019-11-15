@@ -336,7 +336,7 @@ typescript-language-server can be installed via `:TsServerInstall` or by yoursel
 npm install -g typescript-language-server
 ```
 
-```vim
+```lua
 nvim_lsp.tsserver.setup({config})
 nvim_lsp#setup("tsserver", {config})
 
