@@ -44,7 +44,6 @@ local global_commands = {
 
 util.create_module_commands("typescript-language-server", global_commands)
 
-local tsserver_root_patter = util.root_pattern("package.json")
 
 skeleton.tsserver = {
   default_config = {
@@ -66,7 +65,6 @@ skeleton.tsserver = {
     if install_info.is_installed then
       new_config.cmd = {install_info.tsserver}
     end
-    print(vim.inspect(new_config))
   end;
   docs = {
     description = [[
