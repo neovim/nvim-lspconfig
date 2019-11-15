@@ -326,9 +326,13 @@ npm install -g typescript-language-server
 nvim_lsp.tsserver.setup({config})
 nvim_lsp#setup("tsserver", {config})
 
+  Commands:
+  - TsServerInstall: Install typescript-language-server and its dependencies to stdpath("cache")/nvim_lsp/typescript-language-server
+  - TsServerInstallInfo: Print installation infor for `typescript-language-server`
+  
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8
-    cmd = { "typescript-language-server", "--stdio" }
+    cmd = { "typescript-language-server" }
     filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
     log_level = 2
     on_init = function to handle changing offsetEncoding
