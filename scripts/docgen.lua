@@ -97,7 +97,7 @@ for _, k in ipairs(skeleton_keys) do
 ## {{template_name}}
 
 {{preamble}}
-```vim
+```lua
 nvim_lsp.{{template_name}}.setup({config})
 nvim_lsp#setup("{{template_name}}", {config})
 

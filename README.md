@@ -159,7 +159,7 @@ https://clang.llvm.org/extra/clangd/Installation.html
 clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
 
-```vim
+```json
 nvim_lsp.clangd.setup({config})
 nvim_lsp#setup("clangd", {config})
 
@@ -191,7 +191,7 @@ If you don't want to use neovim to install it, then you can use:
 npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
 ```
 
-```vim
+```json
 nvim_lsp.elmls.setup({config})
 nvim_lsp#setup("elmls", {config})
 
@@ -220,7 +220,7 @@ https://github.com/golang/tools/tree/master/gopls
 
 Google's lsp server for golang.
 
-```vim
+```json
 nvim_lsp.gopls.setup({config})
 nvim_lsp#setup("gopls", {config})
 
@@ -273,7 +273,7 @@ settings = {
 };
 ```
     
-```vim
+```json
 nvim_lsp.pyls.setup({config})
 nvim_lsp#setup("pyls", {config})
 
@@ -290,7 +290,7 @@ https://texlab.netlify.com/
 
 A completion engine built from scratch for (la)tex.
 
-```vim
+```json
 nvim_lsp.texlab.setup({config})
 nvim_lsp#setup("texlab", {config})
 
