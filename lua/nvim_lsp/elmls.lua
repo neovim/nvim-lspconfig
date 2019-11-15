@@ -2,6 +2,7 @@ local skeleton = require 'nvim_lsp/skeleton'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 local fn = vim.fn
+local api = vim.api
 local need_bins = util.need_bins
 
 local default_capabilities = lsp.protocol.make_client_capabilities()
@@ -45,11 +46,19 @@ local global_commands = {
 
 util.create_module_commands("elmls", global_commands)
 
+local elm_root_pattern = util.root_pattern("elm.json")
+
 skeleton.elmls = {
   default_config = {
     cmd = {bin_name};
+    -- TODO(ashkan) if we comment this out, it will allow elmls to operate on elm.json. It seems like it could do that, but no other editor allows it right now.
     filetypes = {"elm"};
-    root_dir = util.root_pattern("elm.json");
+    root_dir = function(fname, bufnr)
+      local filetype = api.nvim_buf_get_option(0, 'filetype')
+      if filetype == 'elm' or (filetype == 'json' and fname:match("elm%.json$")) then
+        return elm_root_pattern(fname)
+      end
+    end;
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
     init_options = {
