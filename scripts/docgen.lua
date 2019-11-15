@@ -41,7 +41,10 @@ end
 
 local writer = io.popen("cat README_preamble.md - > README.md", "w")
 
-for k, v in pairs(skeleton) do
+local skeleton_keys = vim.tbl_keys(skeleton)
+table.sort(skeleton_keys)
+for _, k in ipairs(skeleton_keys) do
+  local v = skeleton[k]
   local tconf = v.template_config
 
   local params = {}
@@ -94,7 +97,7 @@ for k, v in pairs(skeleton) do
 ## {{template_name}}
 
 {{preamble}}
-```
+```vim
 nvim_lsp.{{template_name}}.setup({config})
 nvim_lsp#setup("{{template_name}}", {config})
 
