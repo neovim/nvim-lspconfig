@@ -159,7 +159,7 @@ https://clang.llvm.org/extra/clangd/Installation.html
 clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
 
-```vim
+```lua
 nvim_lsp.clangd.setup({config})
 nvim_lsp#setup("clangd", {config})
 
@@ -191,7 +191,7 @@ If you don't want to use neovim to install it, then you can use:
 npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
 ```
 
-```vim
+```lua
 nvim_lsp.elmls.setup({config})
 nvim_lsp#setup("elmls", {config})
 
@@ -220,7 +220,7 @@ https://github.com/golang/tools/tree/master/gopls
 
 Google's lsp server for golang.
 
-```vim
+```lua
 nvim_lsp.gopls.setup({config})
 nvim_lsp#setup("gopls", {config})
 
@@ -273,7 +273,7 @@ settings = {
 };
 ```
     
-```vim
+```lua
 nvim_lsp.pyls.setup({config})
 nvim_lsp#setup("pyls", {config})
 
@@ -288,9 +288,11 @@ nvim_lsp#setup("pyls", {config})
 
 https://texlab.netlify.com/
 
-A completion engine built from scratch for (la)tex.
+A completion engine built from scratch for (La)TeX.
 
-```vim
+See https://texlab.netlify.com/docs/reference/configuration for configuration options.
+
+```lua
 nvim_lsp.texlab.setup({config})
 nvim_lsp#setup("texlab", {config})
 
@@ -303,11 +305,23 @@ nvim_lsp#setup("texlab", {config})
     log_level = 2
     root_dir = vim's starting directory
     settings = {
+      bibtex = {
+        formatting = {
+          lineLength = 120
+        }
+      },
       latex = {
         build = {
           args = { "-pdf", "-interaction=nonstopmode", "-synctex=1" },
           executable = "latexmk",
           onSave = false
+        },
+        forwardSearch = {
+          args = {},
+          onSave = false
+        },
+        lint = {
+          onChange = false
         }
       }
     }
