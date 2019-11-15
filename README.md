@@ -36,6 +36,7 @@ Implemented:
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
+- [tsserver](https://github.com/neovim/nvim-lsp#tsserver)
 
 Planned servers to implement (by me, but contributions welcome anyway):
 - [ccls](https://github.com/MaskRay/ccls)
@@ -325,4 +326,30 @@ nvim_lsp#setup("texlab", {config})
         }
       }
     }
+```
+## tsserver
+
+https://github.com/theia-ide/typescript-language-server
+
+typescript-language-server can be installed via `:TsServerInstall` or by yourself with `npm`: 
+```sh
+npm install -g typescript-language-server
+```
+
+```vim
+nvim_lsp.tsserver.setup({config})
+nvim_lsp#setup("tsserver", {config})
+
+  Commands:
+  - TsServerInstall: Install typescript-language-server and its dependencies to stdpath("cache")/nvim_lsp/typescript-language-server
+  - TsServerInstallInfo: Print installation infor for `typescript-language-server`
+  
+  Default Values:
+    capabilities = default capabilities, with offsetEncoding utf-8
+    cmd = { "typescript-language-server" }
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
+    log_level = 2
+    on_init = function to handle changing offsetEncoding
+    root_dir = root_pattern("package.json")
+    settings = {}
 ```
