@@ -2,6 +2,7 @@ local validate = vim.validate
 local api = vim.api
 local lsp = vim.lsp
 local uv = vim.loop
+local fn = vim.fn
 
 local M = {}
 
@@ -87,6 +88,15 @@ function M.create_module_commands(module_name, commands)
         string.format("lua require'nvim_lsp'[%q].commands[%q][1]()", module_name, command_name))
     api.nvim_command(table.concat(parts, " "))
   end
+end
+
+function M.need_bins(...)
+  for i = 1, select("#", ...) do
+    if 0 == fn.executable((select(i, ...))) then
+      return false
+    end
+  end
+  return true
 end
 
 -- Some path utilities

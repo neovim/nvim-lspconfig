@@ -32,6 +32,7 @@ them are good references.
 
 Implemented:
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
+- [elmls](https://github.com/neovim/nvim-lsp#elmls)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
@@ -151,7 +152,6 @@ nvim_lsp.SERVER.setup({config})
 ```
 
 # LSP Implementations
-
 ## clangd
 
 https://clang.llvm.org/extra/clangd/Installation.html
@@ -159,7 +159,7 @@ https://clang.llvm.org/extra/clangd/Installation.html
 clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
 
-```
+```vim
 nvim_lsp.clangd.setup({config})
 nvim_lsp#setup("clangd", {config})
 
@@ -170,6 +170,65 @@ nvim_lsp#setup("clangd", {config})
     log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
+    settings = {}
+```
+## elmls
+
+https://github.com/elm-tooling/elm-language-server#installation
+
+You can install elmls automatically to the path at
+  `stdpath("cache")/nvim_lsp/elmls`
+by using the function `nvim_lsp.elmls.install()` or the command `:ElmlsInstall`.
+
+This will only install if it can't find `elm-language-server` and if it hasn't
+been installed before by neovim.
+
+You can see installation info via `:ElmlsInstallInfo` or via
+`nvim_lsp.elmls.get_install_info()`. This will let you know if it is installed.
+
+If you don't want to use neovim to install it, then you can use:
+```sh
+npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
+```
+
+```vim
+nvim_lsp.elmls.setup({config})
+nvim_lsp#setup("elmls", {config})
+
+  Commands:
+  - ElmlsInstall: Install elmls and its dependencies to stdpath("cache")/nvim_lsp/elmls
+  - ElmlsInstallInfo: Print installation info for `elmls`
+  
+  Default Values:
+    capabilities = default capabilities, with offsetEncoding utf-8
+    cmd = { "elm-language-server" }
+    filetypes = { "elm" }
+    init_options = {
+      elmAnalyseTrigger = "change",
+      elmFormatPath = "elm-format",
+      elmPath = "elm",
+      elmTestPath = "elm-test"
+    }
+    log_level = 2
+    on_init = function to handle changing offsetEncoding
+    root_dir = root_pattern("elm.json")
+    settings = {}
+```
+## gopls
+
+https://github.com/golang/tools/tree/master/gopls
+
+Google's lsp server for golang.
+
+```vim
+nvim_lsp.gopls.setup({config})
+nvim_lsp#setup("gopls", {config})
+
+  Default Values:
+    cmd = { "gopls" }
+    filetypes = { "go" }
+    log_level = 2
+    root_dir = root_pattern("go.mod", ".git")
     settings = {}
 ```
 ## pyls
@@ -214,7 +273,7 @@ settings = {
 };
 ```
     
-```
+```vim
 nvim_lsp.pyls.setup({config})
 nvim_lsp#setup("pyls", {config})
 
@@ -231,7 +290,7 @@ https://texlab.netlify.com/
 
 A completion engine built from scratch for (la)tex.
 
-```
+```vim
 nvim_lsp.texlab.setup({config})
 nvim_lsp#setup("texlab", {config})
 
@@ -252,21 +311,4 @@ nvim_lsp#setup("texlab", {config})
         }
       }
     }
-```
-## gopls
-
-https://github.com/golang/tools/tree/master/gopls
-
-Google's lsp server for golang.
-
-```
-nvim_lsp.gopls.setup({config})
-nvim_lsp#setup("gopls", {config})
-
-  Default Values:
-    cmd = { "gopls" }
-    filetypes = { "go" }
-    log_level = 2
-    root_dir = root_pattern("go.mod", ".git")
-    settings = {}
 ```

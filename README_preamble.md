@@ -32,6 +32,7 @@ them are good references.
 
 Implemented:
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
+- [elmls](https://github.com/neovim/nvim-lsp#elmls)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
@@ -151,4 +152,3 @@ nvim_lsp.SERVER.setup({config})
 ```
 
 # LSP Implementations
-
