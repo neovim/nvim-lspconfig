@@ -3,10 +3,10 @@
 WIP Common configurations for Language Servers.
 
 This repository aims to be a central location to store configurations for
-Language Servers which leverages Neovim's built-in LSP client `vim.lsp` for the
+Language Servers which leverage Neovim's built-in LSP client `vim.lsp` as the
 client backbone. The `vim.lsp` implementation is made to be customizable and
 greatly extensible, but most users just want to get up and going. This
-plugin/library is for those people, although it still let's you customize
+plugin/library is for those people, although it still lets you customize
 things as much as you want in addition to the defaults that this provides.
 
 **NOTE**: Requires current Neovim master as of 2019-11-13
@@ -34,6 +34,7 @@ are good references. Also read `CONTRIBUTING.md`.
 
 Implemented:
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
+- [elmls](https://github.com/neovim/nvim-lsp#elmls)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
@@ -54,9 +55,6 @@ In progress:
 
 From vim:
 ```vim
-call nvim_lsp#setup("clangd", {})
-call nvim_lsp#setup("gopls", {})
-call nvim_lsp#setup("pyls", {})
 call nvim_lsp#setup("texlab", {})
 ```
 
@@ -85,7 +83,6 @@ nvim_lsp.gopls.setup {
 require 'nvim_lsp'.texlab.buf_build(0)
 ```
 
-```
 These are functions to set up servers more easily with some server specific
 defaults and more server specific things like commands or different
 diagnostics.
@@ -95,6 +92,7 @@ Servers may define extra functions on the `nvim_lsp.SERVER` table, e.g.
 
 The main setup signature will be:
 
+```
 nvim_lsp.SERVER.setup({config})
 
   {config} is the same as |vim.lsp.start_client()|, but with some
@@ -156,4 +154,3 @@ nvim_lsp.SERVER.setup({config})
 ```
 
 # LSP Implementations
-

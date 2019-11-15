@@ -13,11 +13,11 @@ skeleton.clangd = {
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
     capabilities = default_capabilities;
-    on_init = vim.schedule_wrap(function(client, result)
+    on_init = function(client, result)
       if result.offsetEncoding then
         client.offset_encoding = result.offsetEncoding
       end
-    end)
+    end
   };
   -- commands = {};
   -- on_new_config = function(new_config) end;
@@ -37,4 +37,3 @@ as compile_commands.json or, for simpler projects, a compile_flags.txt.
   };
 }
 -- vim:et ts=2 sw=2
-
