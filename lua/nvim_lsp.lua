@@ -4,6 +4,7 @@ require 'nvim_lsp/elmls'
 require 'nvim_lsp/gopls'
 require 'nvim_lsp/pyls'
 require 'nvim_lsp/texlab'
+require 'nvim_lsp/bash'
 
 local M = {
   util = require 'nvim_lsp/util';
