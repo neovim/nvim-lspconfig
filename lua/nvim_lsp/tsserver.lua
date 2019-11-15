@@ -64,7 +64,7 @@ skeleton.tsserver = {
   on_new_config = function(new_config)
     local install_info = get_install_info()
     if install_info.is_installed then
-      new_config.cmd = {install_info.elmls}
+      new_config.cmd = {install_info.tsserver}
     end
     print(vim.inspect(new_config))
   end;
