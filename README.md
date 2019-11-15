@@ -36,6 +36,7 @@ Implemented:
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
+- [tsserver](https://github.com/neovim/nvim-lsp#tsserver)
 
 Planned servers to implement (by me, but contributions welcome anyway):
 - [ccls](https://github.com/MaskRay/ccls)
@@ -198,7 +199,7 @@ nvim_lsp#setup("elmls", {config})
   Commands:
   - ElmlsInstall: Install elmls and its dependencies to stdpath("cache")/nvim_lsp/elmls
   - ElmlsInstallInfo: Print installation info for `elmls`
-
+  
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "elm-language-server" }
@@ -272,7 +273,7 @@ settings = {
   };
 };
 ```
-
+    
 ```vim
 nvim_lsp.pyls.setup({config})
 nvim_lsp#setup("pyls", {config})
@@ -296,7 +297,7 @@ nvim_lsp#setup("texlab", {config})
 
   Commands:
   - TexlabBuild: Build the current buffer
-
+  
   Default Values:
     cmd = { "texlab" }
     filetypes = { "tex", "bib" }
@@ -316,17 +317,21 @@ nvim_lsp#setup("texlab", {config})
 
 https://github.com/theia-ide/typescript-language-server
 
-Language Server Protocol implementation for TypeScript wrapping `tsserver`.
+typescript-language-server relies on having a few dependencies installed:
+```sh
+npm install -g typescript-language-server
+```
 
 ```vim
 nvim_lsp.tsserver.setup({config})
 nvim_lsp#setup("tsserver", {config})
 
   Default Values:
+    capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "typescript-language-server", "--stdio" }
-    filetypes = {"typescript", "typescriptreact", "typescript.tsx"};
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
     log_level = 2
-    root_dir = root_pattern("package.json");
+    on_init = function to handle changing offsetEncoding
+    root_dir = root_pattern("package.json")
     settings = {}
 ```
-
