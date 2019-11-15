@@ -46,6 +46,19 @@ skeleton.texlab = {
           executable = "latexmk";
           onSave = false;
         };
+        forwardSearch = {
+          args = {};
+          executable = nil;
+          onSave = false;
+        };
+        lint = { 
+          onChange = false; 
+        };
+      };
+      bibtex = { 
+        formatting = { 
+          lineLength = 120 
+        }; 
       };
     };
   };
@@ -65,7 +78,9 @@ skeleton.texlab = {
     description = [[
 https://texlab.netlify.com/
 
-A completion engine built from scratch for (la)tex.
+A completion engine built from scratch for (La)TeX.
+
+See https://texlab.netlify.com/docs/reference/configuration for configuration options.
 ]];
     default_config = {
       root_dir = "vim's starting directory";
