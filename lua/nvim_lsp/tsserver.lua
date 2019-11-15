@@ -48,7 +48,7 @@ util.create_module_commands("typescript-language-server", global_commands)
 skeleton.tsserver = {
   default_config = {
     cmd = {bin_name};
-    filetypes = {"typescript", "typescriptreact", "typescript.tsx"};
+    filetypes = {"javascript","javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"};
     root_dir = util.root_pattern("package.json");
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
