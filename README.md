@@ -317,7 +317,7 @@ nvim_lsp#setup("texlab", {config})
 
 https://github.com/theia-ide/typescript-language-server
 
-typescript-language-server relies on having a few dependencies installed:
+typescript-language-server can be installed via `:TsServerInstall` or by yourself with `npm`: 
 ```sh
 npm install -g typescript-language-server
 ```
