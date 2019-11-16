@@ -13,8 +13,8 @@ local installer = util.npm_installer {
 
 skeleton[server_name] = {
   default_config = util.utf8_config {
-    cmd = {bin_name};
-    filetypes = {"typescript", "typescriptreact", "typescript.tsx"};
+    cmd = {bin_name, "--stdio"};
+    filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"};
     root_dir = util.root_pattern("package.json");
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
