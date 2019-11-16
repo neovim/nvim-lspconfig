@@ -291,6 +291,7 @@ local function zip_lists_to_map(a, b)
 end
 
 local base_install_dir = M.path.join(fn.stdpath("cache"), "nvim_lsp")
+M.base_install_dir = base_install_dir
 function M.npm_installer(config)
   validate {
     server_name = {config.server_name, 's'};

@@ -84,3 +84,18 @@ After you create a skeleton, you have to `require 'nvim_lsp/SERVER_NAME'` in
 `lua/nvim_lsp.lua`, and that's it.
 
 Generate docs and you're done.
+
+# Supporting installation
+
+If a skeleton has the functions `.install()` and `.install_info()` available, then
+it will be picked up by `LspInstall` and `LspInstallInfo`.
+
+`function install()` is the signature and it is expected that it will create
+any data in `util.base_install_dir/{server_name}`.
+
+`function install_info()` should return a table with at least `is_installed`
+which indicates the current status of installation (if it is installed by us).
+It can contain any other additional data that the user may find useful.
+
+The helper function `util.npm_installer` can be used for lsps which are installed
+with `npm`. See `elmls.lua` or `tsserver.lua` or `bashls.lua` for example usage.
