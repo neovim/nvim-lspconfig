@@ -88,9 +88,17 @@ for _, k in ipairs(skeleton_keys) do
   end
   params.preamble = ""
   if tconf.docs then
-    params.preamble = table.concat(filter(
-    nilifempty(tconf.docs.description)
-    ), '\n\n')
+    local installation_instructions
+    if v.install then
+      installation_instructions = string.format("Can be installed in neovim with `:LspInstall %s`", k)
+    end
+    local preamble_parts = filter(
+      nilifempty(tconf.docs.description)
+      , installation_instructions
+    )
+    -- Insert a newline after the preamble if it exists.
+    if #preamble_parts > 0 then table.insert(preamble_parts, '') end
+    params.preamble = table.concat(preamble_parts, '\n')
   end
 
   local section = ([[

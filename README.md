@@ -31,6 +31,7 @@ them are good references.
 ## Progress
 
 Implemented:
+- [bashls](https://github.com/neovim/nvim-lsp#bashls)
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
 - [elmls](https://github.com/neovim/nvim-lsp#elmls)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
@@ -50,7 +51,33 @@ In progress:
 
 `Plug 'neovim/nvim-lsp'`
 
-## Use
+## Usage
+
+Servers configurations can be set up with a "setup function." These are
+functions to set up servers more easily with some server specific defaults and
+more server specific things like commands or different diagnostics.
+
+The "setup functions" are `call nvim_lsp#setup({name}, {config})` from vim and
+`nvim_lsp[name].setup(config)` from Lua.
+
+Servers may define extra functions on the `nvim_lsp.SERVER` table, e.g.
+`nvim_lsp.texlab.buf_build({bufnr})`.
+
+### Auto Installation
+
+Many servers can be automatically installed with the `:LspInstall`
+command. Detailed installation info can be found
+with the `:LspInstallInfo` command, which optionally accepts a specific server name.
+
+For example:
+```vim
+LspInstall elmls
+silent LspInstall elmls " useful if you want to autoinstall in init.vim
+LspInstallInfo
+LspInstallInfo elmls
+```
+
+### Example
 
 From vim:
 ```vim
@@ -82,12 +109,7 @@ nvim_lsp.gopls.setup {
 require 'nvim_lsp'.texlab.buf_build(0)
 ```
 
-These are functions to set up servers more easily with some server specific
-defaults and more server specific things like commands or different
-diagnostics.
-
-Servers may define extra functions on the `nvim_lsp.SERVER` table, e.g.
-`nvim_lsp.texlab.buf_build({bufnr})`.
+### Setup function details
 
 The main setup signature will be:
 
@@ -153,14 +175,16 @@ nvim_lsp.SERVER.setup({config})
 ```
 
 # LSP Implementations
-## bash
+## bashls
 
 For install instruction visit:
 https://github.com/mads-hartmann/bash-language-server#installation
 
+Can be installed in neovim with `:LspInstall bashls`
+
 ```lua
-nvim_lsp.bash.setup({config})
-nvim_lsp#setup("bash", {config})
+nvim_lsp.bashls.setup({config})
+nvim_lsp#setup("bashls", {config})
 
   Default Values:
     cmd = { "bash-language-server", "start" }
@@ -175,6 +199,7 @@ https://clang.llvm.org/extra/clangd/Installation.html
 
 clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
+
 
 ```lua
 nvim_lsp.clangd.setup({config})
@@ -193,29 +218,17 @@ nvim_lsp#setup("clangd", {config})
 
 https://github.com/elm-tooling/elm-language-server#installation
 
-You can install elmls automatically to the path at
-  `stdpath("cache")/nvim_lsp/elmls`
-by using the function `nvim_lsp.elmls.install()` or the command `:ElmlsInstall`.
-
-This will only install if it can't find `elm-language-server` and if it hasn't
-been installed before by neovim.
-
-You can see installation info via `:ElmlsInstallInfo` or via
-`nvim_lsp.elmls.get_install_info()`. This will let you know if it is installed.
-
 If you don't want to use neovim to install it, then you can use:
 ```sh
 npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
 ```
 
+Can be installed in neovim with `:LspInstall elmls`
+
 ```lua
 nvim_lsp.elmls.setup({config})
 nvim_lsp#setup("elmls", {config})
 
-  Commands:
-  - ElmlsInstall: Install elmls and its dependencies to stdpath("cache")/nvim_lsp/elmls
-  - ElmlsInstallInfo: Print installation info for `elmls`
-  
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "elm-language-server" }
@@ -236,6 +249,7 @@ nvim_lsp#setup("elmls", {config})
 https://github.com/golang/tools/tree/master/gopls
 
 Google's lsp server for golang.
+
 
 ```lua
 nvim_lsp.gopls.setup({config})
@@ -290,6 +304,7 @@ settings = {
 };
 ```
     
+
 ```lua
 nvim_lsp.pyls.setup({config})
 nvim_lsp#setup("pyls", {config})
@@ -308,6 +323,7 @@ https://texlab.netlify.com/
 A completion engine built from scratch for (La)TeX.
 
 See https://texlab.netlify.com/docs/reference/configuration for configuration options.
+
 
 ```lua
 nvim_lsp.texlab.setup({config})
@@ -347,19 +363,17 @@ nvim_lsp#setup("texlab", {config})
 
 https://github.com/theia-ide/typescript-language-server
 
-typescript-language-server can be installed via `:TsServerInstall` or by yourself with `npm`: 
+`typescript-language-server` can be installed via `:LspInstall tsserver` or by yourself with `npm`: 
 ```sh
 npm install -g typescript-language-server
 ```
+
+Can be installed in neovim with `:LspInstall tsserver`
 
 ```lua
 nvim_lsp.tsserver.setup({config})
 nvim_lsp#setup("tsserver", {config})
 
-  Commands:
-  - TsServerInstall: Install typescript-language-server and its dependencies to stdpath("cache")/nvim_lsp/typescript-language-server
-  - TsServerInstallInfo: Print installation infor for `typescript-language-server`
-  
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "typescript-language-server" }
