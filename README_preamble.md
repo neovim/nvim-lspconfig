@@ -31,6 +31,7 @@ them are good references.
 ## Progress
 
 Implemented:
+- [bashls](https://github.com/neovim/nvim-lsp#bashls)
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
 - [elmls](https://github.com/neovim/nvim-lsp#elmls)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
@@ -50,7 +51,33 @@ In progress:
 
 `Plug 'neovim/nvim-lsp'`
 
-## Use
+## Usage
+
+Servers configurations can be set up with a "setup function." These are
+functions to set up servers more easily with some server specific defaults and
+more server specific things like commands or different diagnostics.
+
+The "setup functions" are `call nvim_lsp#setup({name}, {config})` from vim and
+`nvim_lsp[name].setup(config)` from Lua.
+
+Servers may define extra functions on the `nvim_lsp.SERVER` table, e.g.
+`nvim_lsp.texlab.buf_build({bufnr})`.
+
+### Auto Installation
+
+Many servers can be automatically installed with the `:LspInstall`
+command. Detailed installation info can be found
+with the `:LspInstallInfo` command, which optionally accepts a specific server name.
+
+For example:
+```vim
+LspInstall elmls
+silent LspInstall elmls " useful if you want to autoinstall in init.vim
+LspInstallInfo
+LspInstallInfo elmls
+```
+
+### Example
 
 From vim:
 ```vim
@@ -82,12 +109,7 @@ nvim_lsp.gopls.setup {
 require 'nvim_lsp'.texlab.buf_build(0)
 ```
 
-These are functions to set up servers more easily with some server specific
-defaults and more server specific things like commands or different
-diagnostics.
-
-Servers may define extra functions on the `nvim_lsp.SERVER` table, e.g.
-`nvim_lsp.texlab.buf_build({bufnr})`.
+### Setup function details
 
 The main setup signature will be:
 

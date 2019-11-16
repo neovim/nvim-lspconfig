@@ -85,12 +85,12 @@ function M.create_module_commands(module_name, commands)
     table.insert(parts, command_name)
     -- The command definition.
     table.insert(parts,
-        string.format("lua require'nvim_lsp'[%q].commands[%q][1]()", module_name, command_name))
+        string.format("lua require'nvim_lsp'[%q].commands[%q][1](<f-args>)", module_name, command_name))
     api.nvim_command(table.concat(parts, " "))
   end
 end
 
-function M.need_bins(...)
+function M.has_bins(...)
   for i = 1, select("#", ...) do
     if 0 == fn.executable((select(i, ...))) then
       return false
@@ -266,6 +266,104 @@ function M.find_package_json_ancestor(startpath)
       return path
     end
   end)
+end
+
+local function validate_string_list(t)
+  for _, v in ipairs(t) do
+    if type(v) ~= 'string' then
+      return false
+    end
+  end
+  return true
+end
+
+local function map_list(t, fn)
+  local res = {}
+  for i, v in ipairs(t) do table.insert(res, fn(v, i)) end
+  return res
+end
+
+local function zip_lists_to_map(a, b)
+  assert(#a == #b)
+  local res = {}
+  for i = 1, #a do res[a[i]] = b[i] end
+  return res
+end
+
+local base_install_dir = M.path.join(fn.stdpath("cache"), "nvim_lsp")
+M.base_install_dir = base_install_dir
+function M.npm_installer(config)
+  validate {
+    server_name = {config.server_name, 's'};
+    packages = {config.packages, validate_string_list, 'List of npm package names'};
+    binaries = {config.binaries, validate_string_list, 'List of binary names'};
+    post_install_script = {config.post_install_script, 's', true};
+  }
+
+  local install_dir = M.path.join(base_install_dir, config.server_name)
+  local bin_dir = M.path.join(install_dir, "node_modules", ".bin")
+  local function bin_path(name)
+    return M.path.join(bin_dir, name)
+  end
+
+  local binary_paths = map_list(config.binaries, bin_path)
+
+  local function get_install_info()
+    return {
+      bin_dir = bin_dir;
+      install_dir = install_dir;
+      binaries = zip_lists_to_map(config.binaries, binary_paths);
+      is_installed = M.has_bins(unpack(binary_paths));
+    }
+  end
+
+  local function install()
+    -- TODO(ashkan) need all binaries or just the first?
+    if M.has_bins(unpack(config.binaries)) then
+      return print(config.server_name, "is already installed (not by neovim)")
+    end
+    if not M.has_bins("sh", "npm", "mkdir") then
+      api.nvim_err_writeln('Installation requires "sh", "npm", "mkdir"')
+      return
+    end
+    if get_install_info().is_installed then
+      return print(config.server_name, "is already installed")
+    end
+    local install_params = {
+      packages = table.concat(config.packages, ' ');
+      install_dir = install_dir;
+      post_install_script = config.post_install_script or '';
+    }
+    local cmd = io.popen("sh", "w")
+    local install_script = ([[
+    set -eo pipefail
+    mkdir -p "{{install_dir}}"
+    cd "{{install_dir}}"
+    npm install {{packages}}
+    {{post_install_script}}
+    ]]):gsub("{{(%S+)}}", install_params)
+    cmd:write(install_script)
+    cmd:close()
+    if not get_install_info().is_installed then
+      api.nvim_err_writeln('Installation of', config.server_name, 'failed')
+    end
+  end
+
+  return {
+    install = install;
+    info = get_install_info;
+  }
+end
+
+function M.utf8_config(config)
+  config.capabilities = config.capabilities or lsp.protocol.make_client_capabilities()
+  config.capabilities.offsetEncoding = {"utf-8", "utf-16"}
+  function config.on_init(client, result)
+    if result.offsetEncoding then
+      client.offset_encoding = result.offsetEncoding
+    end
+  end
+  return config
 end
 
 return M

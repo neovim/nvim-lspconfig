@@ -2,22 +2,13 @@ local skeleton = require 'nvim_lsp/skeleton'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-local default_capabilities = lsp.protocol.make_client_capabilities()
-default_capabilities.offsetEncoding = {"utf-8", "utf-16"}
-
 skeleton.clangd = {
-  default_config = {
+  default_config = util.utf8_config {
     cmd = {"clangd", "--background-index"};
     filetypes = {"c", "cpp", "objc", "objcpp"};
     root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git");
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
-    capabilities = default_capabilities;
-    on_init = function(client, result)
-      if result.offsetEncoding then
-        client.offset_encoding = result.offsetEncoding
-      end
-    end
   };
   -- commands = {};
   -- on_new_config = function(new_config) end;
