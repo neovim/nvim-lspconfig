@@ -35,6 +35,7 @@ Implemented:
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
 - [elmls](https://github.com/neovim/nvim-lsp#elmls)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
+- [haskell-ide-engine](https://github.com/haskell/haskell-ide-engine)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
 - [tsserver](https://github.com/neovim/nvim-lsp#tsserver)
