@@ -376,8 +376,8 @@ nvim_lsp#setup("tsserver", {config})
 
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8
-    cmd = { "typescript-language-server" }
-    filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
+    cmd = { "typescript-language-server", "--stdio" }
+    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
     log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("package.json")
