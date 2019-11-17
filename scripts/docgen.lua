@@ -30,6 +30,16 @@ local function dedent(s)
   return table.concat(lines, '\n')
 end
 
+local function template(s, params)
+  return (s:gsub("{{([^{}]+)}}", params))
+end
+
+local function map_list(t, fn)
+  local res = {}
+  for i, v in ipairs(t) do table.insert(res, fn(v, i)) end
+  return res
+end
+
 local function indent(n, s)
   if n <= 0 then return s end
   local lines = vim.split(s, '\n', true)
@@ -39,69 +49,69 @@ local function indent(n, s)
   return table.concat(lines, '\n')
 end
 
-local writer = io.popen("cat README_preamble.md - > README.md", "w")
-
 local skeleton_keys = vim.tbl_keys(skeleton)
 table.sort(skeleton_keys)
-for _, k in ipairs(skeleton_keys) do
-  local v = skeleton[k]
-  local tconf = v.template_config
 
-  local params = {}
-  params.template_name = k
-  if tconf.commands then
-    local lines = {"Commands:"}
-    local cnames = vim.tbl_keys(tconf.commands)
-    table.sort(cnames)
-    for _, cname in ipairs(cnames) do
-      local def = tconf.commands[cname]
-      if def.description then
-        table.insert(lines, string.format("- %s: %s", cname, def.description))
-      else
-        table.insert(lines, string.format("- %s", cname))
-      end
-      lines[#lines] = indent(0, lines[#lines])
-    end
-    params.commands = indent(0, table.concat(lines, '\n'))
-  end
-  if tconf.default_config then
-    local lines = {}
-    lines = {"Default Values:"}
-    local keys = vim.tbl_keys(tconf.default_config)
-    table.sort(keys)
-    for _, dk in ipairs(keys) do
-      local dv = tconf.default_config[dk]
-      local description = tconf.docs and tconf.docs.default_config and tconf.docs.default_config[dk]
-      if description and type(description) ~= 'string' then
-        description = inspect(description)
-      end
-      table.insert(lines, indent(2, string.format("%s = %s", dk, description or inspect(dv))))
-    end
-    params.default_config = indent(0, table.concat(lines, '\n'))
-  end
-  do
-    local body_lines = filter(
-    params.commands
-    , params.default_config
-    )
-    params.body = indent(2, table.concat(body_lines, '\n\n'))
-  end
-  params.preamble = ""
-  if tconf.docs then
-    local installation_instructions
-    if v.install then
-      installation_instructions = string.format("Can be installed in neovim with `:LspInstall %s`", k)
-    end
-    local preamble_parts = filter(
-      nilifempty(tconf.docs.description)
-      , installation_instructions
-    )
-    -- Insert a newline after the preamble if it exists.
-    if #preamble_parts > 0 then table.insert(preamble_parts, '') end
-    params.preamble = table.concat(preamble_parts, '\n')
-  end
+local function make_lsp_sections()
+  return map_list(skeleton_keys, function(k)
+    local v = skeleton[k]
+    local tconf = v.template_config
 
-  local section = ([[
+    local params = {}
+    params.template_name = k
+    if tconf.commands then
+      local lines = {"Commands:"}
+      local cnames = vim.tbl_keys(tconf.commands)
+      table.sort(cnames)
+      for _, cname in ipairs(cnames) do
+        local def = tconf.commands[cname]
+        if def.description then
+          table.insert(lines, string.format("- %s: %s", cname, def.description))
+        else
+          table.insert(lines, string.format("- %s", cname))
+        end
+        lines[#lines] = indent(0, lines[#lines])
+      end
+      params.commands = indent(0, table.concat(lines, '\n'))
+    end
+    if tconf.default_config then
+      local lines = {}
+      lines = {"Default Values:"}
+      local keys = vim.tbl_keys(tconf.default_config)
+      table.sort(keys)
+      for _, dk in ipairs(keys) do
+        local dv = tconf.default_config[dk]
+        local description = tconf.docs and tconf.docs.default_config and tconf.docs.default_config[dk]
+        if description and type(description) ~= 'string' then
+          description = inspect(description)
+        end
+        table.insert(lines, indent(2, string.format("%s = %s", dk, description or inspect(dv))))
+      end
+      params.default_config = indent(0, table.concat(lines, '\n'))
+    end
+    do
+      local body_lines = filter(
+      params.commands
+      , params.default_config
+      )
+      params.body = indent(2, table.concat(body_lines, '\n\n'))
+    end
+    params.preamble = ""
+    if tconf.docs then
+      local installation_instructions
+      if v.install then
+        installation_instructions = string.format("Can be installed in neovim with `:LspInstall %s`", k)
+      end
+      local preamble_parts = filter(
+        nilifempty(tconf.docs.description)
+        , installation_instructions
+      )
+      -- Insert a newline after the preamble if it exists.
+      if #preamble_parts > 0 then table.insert(preamble_parts, '') end
+      params.preamble = table.concat(preamble_parts, '\n')
+    end
+
+    return template([[
 ## {{template_name}}
 
 {{preamble}}
@@ -111,10 +121,32 @@ nvim_lsp#setup("{{template_name}}", {config})
 
 {{body}}
 ```
-]]):gsub("{{(%S+)}}", params)
-
-  writer:write(section)
+]], params)
+  end)
 end
 
+local function make_readme_preamble()
+  local data = io.open("README_preamble.md"):read("*a")
+  local implemented_server_marker = "Implemented language servers:"
+  return data:gsub(implemented_server_marker, function()
+    local lines = vim.tbl_flatten {
+      implemented_server_marker;
+      map_list(skeleton_keys, function(k)
+        return template("- [{{server}}](https://github.com/neovim/nvim-lsp#{{server}})", {server=k})
+      end)
+    }
+    return table.concat(lines, '\n')
+  end)
+end
+
+local writer = io.open("README.md", "w")
+
+local parts = vim.tbl_flatten {
+  make_readme_preamble();
+  make_lsp_sections();
+}
+
+writer:write(table.concat(parts, '\n'))
 writer:close()
+
 -- vim:et ts=2 sw=2
