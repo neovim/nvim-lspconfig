@@ -11,6 +11,7 @@ skeleton.rls = {
     settings = {};
   };
   docs = {
+    package_json = "https://github.com/rust-lang/rls-vscode/raw/master/package.json";
     description = [[
 https://github.com/rust-lang/rls
 
