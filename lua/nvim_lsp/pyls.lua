@@ -2,13 +2,11 @@ local skeleton = require 'nvim_lsp/skeleton'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-local cwd = vim.loop.cwd()
-
 skeleton.pyls = {
   default_config = {
     cmd = {"pyls"};
     filetypes = {"python"};
-    root_dir = function() return cwd end;
+    root_dir = util.once(vim.loop.cwd());
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
   };

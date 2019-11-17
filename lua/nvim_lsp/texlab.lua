@@ -2,8 +2,6 @@ local skeleton = require 'nvim_lsp/skeleton'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-local cwd = vim.loop.cwd()
-
 local texlab_build_status = vim.tbl_add_reverse_lookup {
   Success = 0;
   Error = 1;
@@ -37,7 +35,7 @@ skeleton.texlab = {
   default_config = {
     cmd = {"texlab"};
     filetypes = {"tex", "bib"};
-    root_dir = function() return cwd end;
+    root_dir = util.once(vim.loop.cwd());
     log_level = lsp.protocol.MessageType.Warning;
     settings = {
       latex = {
