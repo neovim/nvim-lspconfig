@@ -36,6 +36,7 @@ Implemented:
 - [elmls](https://github.com/neovim/nvim-lsp#elmls)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
+- [rls](https://github.com/neovim/nvim-lsp#rls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
 - [tsserver](https://github.com/neovim/nvim-lsp#tsserver)
 
@@ -314,6 +315,36 @@ nvim_lsp#setup("pyls", {config})
     filetypes = { "python" }
     log_level = 2
     root_dir = vim's starting directory
+    settings = {}
+```
+## rls
+
+https://github.com/rust-lang/rls
+
+rls, a language server for Rust
+
+Refer to the following for how to setup rls itself.
+https://github.com/rust-lang/rls#setup
+
+See below for rls specific settings.
+https://github.com/rust-lang/rls#configuration
+
+If you want to use rls for a particular build, eg nightly, set cmd as follows:
+
+```lua
+cmd = {"rustup", "run", "nightly", "rls"}
+```
+    
+
+```lua
+nvim_lsp.rls.setup({config})
+nvim_lsp#setup("rls", {config})
+
+  Default Values:
+    cmd = { "rls" }
+    filetypes = { "rust" }
+    log_level = 2
+    root_dir = root_pattern("Cargo.toml")
     settings = {}
 ```
 ## texlab
