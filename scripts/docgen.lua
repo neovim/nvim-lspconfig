@@ -174,7 +174,7 @@ local function make_lsp_sections()
                       });
                       '';
                       make_section(2, '\n', {
-                        {v.description and pre(v.description)};
+                        {v.description};
                       });
                     })
                   end));
@@ -197,7 +197,7 @@ end
 
 local function make_implemented_servers_list()
   return make_section(0, '\n', sorted_map_table(skeleton, function(k)
-    return template("- [{{server}}](https://github.com/neovim/nvim-lsp#{{server}})", {server=k})
+    return template("- [{{server}}](#{{server}})", {server=k})
   end))
 end
 
