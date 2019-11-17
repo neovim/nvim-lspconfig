@@ -36,6 +36,7 @@ Implemented language servers:
 - [ccls](https://github.com/neovim/nvim-lsp#ccls)
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
 - [elmls](https://github.com/neovim/nvim-lsp#elmls)
+- [flow](https://github.com/neovim/nvim-lsp#flow)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
 - [rls](https://github.com/neovim/nvim-lsp#rls)
@@ -271,6 +272,33 @@ nvim_lsp#setup("elmls", {config})
     log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("elm.json")
+    settings = {}
+```
+
+## flow
+
+https://flow.org/
+https://github.com/facebook/flow
+
+See below for how to setup Flow itself.
+https://flow.org/en/docs/install/
+
+See below for lsp command options.
+
+```sh
+npm run flow lsp -- --help
+```
+    
+
+```lua
+nvim_lsp.flow.setup({config})
+nvim_lsp#setup("flow", {config})
+
+  Default Values:
+    cmd = { "npm", "run", "flow", "lsp" }
+    filetypes = { "javascript", "javascriptreact", "javascript.jsx" }
+    log_level = 2
+    root_dir = root_pattern(".flowconfig")
     settings = {}
 ```
 
