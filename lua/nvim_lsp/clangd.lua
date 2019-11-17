@@ -17,6 +17,8 @@ skeleton.clangd = {
     description = [[
 https://clang.llvm.org/extra/clangd/Installation.html
 
+**NOTE:** Clang >= 9 is recommended! See [this issue for more](https://github.com/neovim/nvim-lsp/issues/23).
+
 clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
 ]];

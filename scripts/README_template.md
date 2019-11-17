@@ -35,7 +35,6 @@ Implemented language servers:
 {{implemented_servers_list}}
 
 Planned servers to implement (by me, but contributions welcome anyway):
-- [ccls](https://github.com/MaskRay/ccls)
 - [lua-language-server](https://github.com/sumneko/lua-language-server)
 - [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)
 
