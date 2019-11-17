@@ -395,119 +395,154 @@ cmd = {"rustup", "run", "nightly", "rls"}
 ```
     
 <details><summary>Rust configuration</summary>
-<pre>
-rust-client.channel: enum { "stable", "beta", "nightly" }
-  Rust channel to invoke rustup with. Ignored if rustup is disabled. By default, uses the same channel as your currently open project.
 
-rust-client.disableRustup: boolean
-  Disable usage of rustup and use rustc/rls from PATH.
+- **`rust-client.channel`**: `enum { "stable", "beta", "nightly" }`
 
-rust-client.enableMultiProjectSetup: boolean
-  Allow multiple projects in the same folder, along with remove the constraint that the cargo.toml must be located at the root. (Experimental: might not work for certain setups)
+  <pre>Rust channel to invoke rustup with. Ignored if rustup is disabled. By default, uses the same channel as your currently open project.</pre>
 
-rust-client.logToFile: boolean
-  When set to true, RLS stderr is logged to a file at workspace root level. Requires reloading extension after change.
+- **`rust-client.disableRustup`**: `boolean`
 
-rust-client.nestedMultiRootConfigInOutermost: boolean
-  If one root workspace folder is nested in another root folder, look for the Rust config in the outermost root.
+  <pre>Disable usage of rustup and use rustc/rls from PATH.</pre>
 
-rust-client.revealOutputChannelOn: enum { "info", "warn", "error", "never" }
-  Specifies message severity on which the output channel will be revealed. Requires reloading extension after change.
+- **`rust-client.enableMultiProjectSetup`**: `boolean`
 
-rust-client.rlsPath: string|null
-  Override RLS path. Only required for RLS developers. If you set this and use rustup, you should also set `rust-client.channel` to ensure your RLS sees the right libraries. If you don't use rustup, make sure to set `rust-client.disableRustup`.
+  <pre>Allow multiple projects in the same folder, along with remove the constraint that the cargo.toml must be located at the root. (Experimental: might not work for certain setups)</pre>
 
-rust-client.rustupPath: string
-  Path to rustup executable. Ignored if rustup is disabled.
+- **`rust-client.logToFile`**: `boolean`
 
-rust-client.trace.server: enum { "off", "messages", "verbose" }
-  Traces the communication between VS Code and the Rust language server.
+  <pre>When set to true, RLS stderr is logged to a file at workspace root level. Requires reloading extension after change.</pre>
 
-rust-client.updateOnStartup: boolean
-  Update the RLS whenever the extension starts up.
+- **`rust-client.nestedMultiRootConfigInOutermost`**: `boolean`
 
-rust-client.useWSL: boolean
-  When set to true, RLS is started within Windows Subsystem for Linux.
+  <pre>If one root workspace folder is nested in another root folder, look for the Rust config in the outermost root.</pre>
 
-rust.all_features: boolean
-  Enable all Cargo features.
+- **`rust-client.revealOutputChannelOn`**: `enum { "info", "warn", "error", "never" }`
 
-rust.all_targets: boolean
-  Checks the project as if you were running cargo check --all-targets (I.e., check all targets and integration tests too).
+  <pre>Specifies message severity on which the output channel will be revealed. Requires reloading extension after change.</pre>
 
-rust.build_bin: string|null
-  Specify to run analysis as if running `cargo check --bin <name>`. Use `null` to auto-detect. (unstable)
+- **`rust-client.rlsPath`**: `string|null`
 
-rust.build_command: string|null
-  EXPERIMENTAL (requires `unstable_features`)
+  <pre>Override RLS path. Only required for RLS developers. If you set this and use rustup, you should also set `rust-client.channel` to ensure your RLS sees the right libraries. If you don't use rustup, make sure to set `rust-client.disableRustup`.</pre>
+
+- **`rust-client.rustupPath`**: `string`
+
+  <pre>Path to rustup executable. Ignored if rustup is disabled.</pre>
+
+- **`rust-client.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  <pre>Traces the communication between VS Code and the Rust language server.</pre>
+
+- **`rust-client.updateOnStartup`**: `boolean`
+
+  <pre>Update the RLS whenever the extension starts up.</pre>
+
+- **`rust-client.useWSL`**: `boolean`
+
+  <pre>When set to true, RLS is started within Windows Subsystem for Linux.</pre>
+
+- **`rust.all_features`**: `boolean`
+
+  <pre>Enable all Cargo features.</pre>
+
+- **`rust.all_targets`**: `boolean`
+
+  <pre>Checks the project as if you were running cargo check --all-targets (I.e., check all targets and integration tests too).</pre>
+
+- **`rust.build_bin`**: `string|null`
+
+  <pre>Specify to run analysis as if running `cargo check --bin <name>`. Use `null` to auto-detect. (unstable)</pre>
+
+- **`rust.build_command`**: `string|null`
+
+  <pre>EXPERIMENTAL (requires `unstable_features`)
   If set, executes a given program responsible for rebuilding save-analysis to be loaded by the RLS. The program given should output a list of resulting .json files on stdout. 
-  Implies `rust.build_on_save`: true.
+  Implies `rust.build_on_save`: true.</pre>
 
-rust.build_lib: boolean|null
-  Specify to run analysis as if running `cargo check --lib`. Use `null` to auto-detect. (unstable)
+- **`rust.build_lib`**: `boolean|null`
 
-rust.build_on_save: boolean
-  Only index the project when a file is saved and not on change.
+  <pre>Specify to run analysis as if running `cargo check --lib`. Use `null` to auto-detect. (unstable)</pre>
 
-rust.cfg_test: boolean
-  Build cfg(test) code. (unstable)
+- **`rust.build_on_save`**: `boolean`
 
-rust.clear_env_rust_log: boolean
-  Clear the RUST_LOG environment variable before running rustc or cargo.
+  <pre>Only index the project when a file is saved and not on change.</pre>
 
-rust.clippy_preference: enum { "on", "opt-in", "off" }
-  Controls eagerness of clippy diagnostics when available. Valid values are (case-insensitive):
+- **`rust.cfg_test`**: `boolean`
+
+  <pre>Build cfg(test) code. (unstable)</pre>
+
+- **`rust.clear_env_rust_log`**: `boolean`
+
+  <pre>Clear the RUST_LOG environment variable before running rustc or cargo.</pre>
+
+- **`rust.clippy_preference`**: `enum { "on", "opt-in", "off" }`
+
+  <pre>Controls eagerness of clippy diagnostics when available. Valid values are (case-insensitive):
    - "off": Disable clippy lints.
    - "on": Display the same diagnostics as command-line clippy invoked with no arguments (`clippy::all` unless overridden).
    - "opt-in": Only display the lints explicitly enabled in the code. Start by adding `#![warn(clippy::all)]` to the root of each crate you want linted.
-  You need to install clippy via rustup if you haven't already.
+  You need to install clippy via rustup if you haven't already.</pre>
 
-rust.crate_blacklist: array|null
-  Overrides the default list of packages for which analysis is skipped.
-  Available since RLS 1.38
+- **`rust.crate_blacklist`**: `array|null`
 
-rust.features: array
-  A list of Cargo features to enable.
+  <pre>Overrides the default list of packages for which analysis is skipped.
+  Available since RLS 1.38</pre>
 
-rust.full_docs: boolean|null
-  Instructs cargo to enable full documentation extraction during save-analysis while building the crate.
+- **`rust.features`**: `array`
 
-rust.jobs: number|null
-  Number of Cargo jobs to be run in parallel.
+  <pre>A list of Cargo features to enable.</pre>
 
-rust.no_default_features: boolean
-  Do not enable default Cargo features.
+- **`rust.full_docs`**: `boolean|null`
 
-rust.racer_completion: boolean
-  Enables code completion using racer.
+  <pre>Instructs cargo to enable full documentation extraction during save-analysis while building the crate.</pre>
 
-rust.rustflags: string|null
-  Flags added to RUSTFLAGS.
+- **`rust.jobs`**: `number|null`
 
-rust.rustfmt_path: string|null
-  When specified, RLS will use the Rustfmt pointed at the path instead of the bundled one
+  <pre>Number of Cargo jobs to be run in parallel.</pre>
 
-rust.show_hover_context: boolean
-  Show additional context in hover tooltips when available. This is often the type local variable declaration.
+- **`rust.no_default_features`**: `boolean`
 
-rust.show_warnings: boolean
-  Show warnings.
+  <pre>Do not enable default Cargo features.</pre>
 
-rust.sysroot: string|null
-  --sysroot
+- **`rust.racer_completion`**: `boolean`
 
-rust.target: string|null
-  --target
+  <pre>Enables code completion using racer.</pre>
 
-rust.target_dir: string|null
-  When specified, it places the generated analysis files at the specified target directory. By default it is placed target/rls directory.
+- **`rust.rustflags`**: `string|null`
 
-rust.unstable_features: boolean
-  Enable unstable features.
+  <pre>Flags added to RUSTFLAGS.</pre>
 
-rust.wait_to_build: number|null
-  Time in milliseconds between receiving a change notification and starting build.
-</pre>
+- **`rust.rustfmt_path`**: `string|null`
+
+  <pre>When specified, RLS will use the Rustfmt pointed at the path instead of the bundled one</pre>
+
+- **`rust.show_hover_context`**: `boolean`
+
+  <pre>Show additional context in hover tooltips when available. This is often the type local variable declaration.</pre>
+
+- **`rust.show_warnings`**: `boolean`
+
+  <pre>Show warnings.</pre>
+
+- **`rust.sysroot`**: `string|null`
+
+  <pre>--sysroot</pre>
+
+- **`rust.target`**: `string|null`
+
+  <pre>--target</pre>
+
+- **`rust.target_dir`**: `string|null`
+
+  <pre>When specified, it places the generated analysis files at the specified target directory. By default it is placed target/rls directory.</pre>
+
+- **`rust.unstable_features`**: `boolean`
+
+  <pre>Enable unstable features.</pre>
+
+- **`rust.wait_to_build`**: `number|null`
+
+  <pre>Time in milliseconds between receiving a change notification and starting build.</pre>
+
 </details>
 
 ```lua
