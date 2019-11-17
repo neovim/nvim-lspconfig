@@ -366,10 +366,5 @@ function M.utf8_config(config)
   return config
 end
 
--- Returns a function which returns the same value forever.
-function M.once(value)
-  return function() return value end
-end
-
 return M
 -- vim:et ts=2 sw=2
