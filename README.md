@@ -45,7 +45,6 @@ Implemented language servers:
 - [tsserver](#tsserver)
 
 Planned servers to implement (by me, but contributions welcome anyway):
-- [ccls](https://github.com/MaskRay/ccls)
 - [lua-language-server](https://github.com/sumneko/lua-language-server)
 - [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)
 
@@ -226,6 +225,8 @@ nvim_lsp#setup("ccls", {config})
 ## clangd
 
 https://clang.llvm.org/extra/clangd/Installation.html
+
+**NOTE:** Clang >= 9 is recommended! See [this issue for more](https://github.com/neovim/nvim-lsp/issues/23).
 
 clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
