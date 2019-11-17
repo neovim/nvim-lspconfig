@@ -2,8 +2,6 @@ local skeleton = require 'nvim_lsp/skeleton'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-local cwd = vim.loop.cwd()
-
 local server_name = "bashls"
 local bin_name = "bash-language-server"
 
@@ -17,7 +15,7 @@ skeleton[server_name] = {
   default_config = {
     cmd = {"bash-language-server", "start"};
     filetypes = {"sh"};
-    root_dir = function() return cwd end;
+    root_dir = util.once(vim.loop.cwd());
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
   };
@@ -35,8 +33,9 @@ skeleton[server_name] = {
   -- on_attach = function(client, bufnr) end;
   docs = {
     description = [[
-For install instruction visit:
-https://github.com/mads-hartmann/bash-language-server#installation
+https://github.com/mads-hartmann/bash-language-server
+
+Language server for bash, written using tree sitter in typescript.
 ]];
     default_config = {
       root_dir = "vim's starting directory";

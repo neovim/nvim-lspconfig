@@ -2,9 +2,9 @@ local skeleton = require 'nvim_lsp/skeleton'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-skeleton.clangd = {
+skeleton.ccls = {
   default_config = util.utf8_config {
-    cmd = {"clangd", "--background-index"};
+    cmd = {"ccls"};
     filetypes = {"c", "cpp", "objc", "objcpp"};
     root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git");
     log_level = lsp.protocol.MessageType.Warning;
@@ -15,11 +15,9 @@ skeleton.clangd = {
   -- on_attach = function(client, bufnr) end;
   docs = {
     description = [[
-https://clang.llvm.org/extra/clangd/Installation.html
+https://github.com/MaskRay/ccls/wiki
 
-**NOTE:** Clang >= 9 is recommended! See [this issue for more](https://github.com/neovim/nvim-lsp/issues/23).
-
-clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
+ccls relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
 ]];
     default_config = {

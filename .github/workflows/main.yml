@@ -18,7 +18,7 @@ jobs:
       run: |
         curl -OL https://raw.githubusercontent.com/norcalli/bot-ci/master/scripts/github-actions-setup.sh
         source github-actions-setup.sh nightly-x64
-        nvim -u NONE +'set rtp+=$PWD' +"luafile scripts/docgen.lua" +q
+        scripts/docgen.sh
     - name: Commit changes
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

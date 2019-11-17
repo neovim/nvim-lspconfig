@@ -1,107 +1,69 @@
 require 'nvim_lsp'
 local skeleton = require 'nvim_lsp/skeleton'
+local util = require 'nvim_lsp/util'
 local inspect = vim.inspect
+local uv = vim.loop
+local fn = vim.fn
+local tbl_flatten = vim.tbl_flatten
 
-local function filter(...)
-  local lines = {}
-  for i = 1, select("#", ...) do
-    local v = select(i, ...)
-    if v then
-      table.insert(lines, v)
+local function template(s, params)
+  return (s:gsub("{{([^{}]+)}}", params))
+end
+
+local function map_list(t, fn)
+  local res = {}
+  for i, v in ipairs(t) do
+    local x = fn(v, i)
+    if x ~= nil then
+      table.insert(res, x)
     end
   end
-  return lines
-end
-
-local function nilifempty(s)
-  if #s == 0 then return end
-  return s
-end
-
-local function dedent(s)
-  local lines = vim.split(s, '\n', true)
-  if #lines == 0 then
-    return ""
-  end
-  local indent = #lines[1]:match("^%s*")
-  for i = 1, #lines do
-    lines[i] = lines[i]:sub(indent)
-  end
-  return table.concat(lines, '\n')
+  return res
 end
 
 local function indent(n, s)
-  if n <= 0 then return s end
+  local prefix
+  if type(n) == 'number' then
+    if n <= 0 then return s end
+    prefix = string.rep(" ", n)
+  else
+    assert(type(n) == 'string', 'n must be number or string')
+    prefix = n
+  end
   local lines = vim.split(s, '\n', true)
   for i, line in ipairs(lines) do
-    lines[i] = string.rep(" ", n)..line
+    lines[i] = prefix..line
   end
   return table.concat(lines, '\n')
 end
 
-local writer = io.popen("cat README_preamble.md - > README.md", "w")
-
-local skeleton_keys = vim.tbl_keys(skeleton)
-table.sort(skeleton_keys)
-for _, k in ipairs(skeleton_keys) do
-  local v = skeleton[k]
-  local tconf = v.template_config
-
-  local params = {}
-  params.template_name = k
-  if tconf.commands then
-    local lines = {"Commands:"}
-    local cnames = vim.tbl_keys(tconf.commands)
-    table.sort(cnames)
-    for _, cname in ipairs(cnames) do
-      local def = tconf.commands[cname]
-      if def.description then
-        table.insert(lines, string.format("- %s: %s", cname, def.description))
-      else
-        table.insert(lines, string.format("- %s", cname))
-      end
-      lines[#lines] = indent(0, lines[#lines])
+local function make_parts(fns)
+  return tbl_flatten(map_list(fns, function(v)
+    if type(v) == 'function' then
+      v = v()
     end
-    params.commands = indent(0, table.concat(lines, '\n'))
-  end
-  if tconf.default_config then
-    local lines = {}
-    lines = {"Default Values:"}
-    local keys = vim.tbl_keys(tconf.default_config)
-    table.sort(keys)
-    for _, dk in ipairs(keys) do
-      local dv = tconf.default_config[dk]
-      local description = tconf.docs and tconf.docs.default_config and tconf.docs.default_config[dk]
-      if description and type(description) ~= 'string' then
-        description = inspect(description)
-      end
-      table.insert(lines, indent(2, string.format("%s = %s", dk, description or inspect(dv))))
-    end
-    params.default_config = indent(0, table.concat(lines, '\n'))
-  end
-  do
-    local body_lines = filter(
-    params.commands
-    , params.default_config
-    )
-    params.body = indent(2, table.concat(body_lines, '\n\n'))
-  end
-  params.preamble = ""
-  if tconf.docs then
-    local installation_instructions
-    if v.install then
-      installation_instructions = string.format("Can be installed in neovim with `:LspInstall %s`", k)
-    end
-    local preamble_parts = filter(
-      nilifempty(tconf.docs.description)
-      , installation_instructions
-    )
-    -- Insert a newline after the preamble if it exists.
-    if #preamble_parts > 0 then table.insert(preamble_parts, '') end
-    params.preamble = table.concat(preamble_parts, '\n')
-  end
+    return {v}
+  end))
+end
 
-  local section = ([[
+local function make_section(indentlvl, sep, parts)
+  return indent(indentlvl, table.concat(make_parts(parts), sep))
+end
+
+local function readfile(path)
+  assert(util.path.is_file(path))
+  return io.open(path):read("*a")
+end
+
+local function sorted_map_table(t, fn)
+  local keys = vim.tbl_keys(t)
+  table.sort(keys)
+  return map_list(keys, function(k)
+    return fn(k, t[k])
+  end)
+end
+
+local lsp_section_template = [[
 ## {{template_name}}
 
 {{preamble}}
@@ -111,10 +73,150 @@ nvim_lsp#setup("{{template_name}}", {config})
 
 {{body}}
 ```
-]]):gsub("{{(%S+)}}", params)
+]]
 
-  writer:write(section)
+local function make_lsp_sections()
+  return make_section(0, '\n', sorted_map_table(skeleton, function(template_name, template_object)
+    local template_def = template_object.template_config
+    local docs = template_def.docs
+
+    local params = {
+      template_name = template_name;
+      preamble = "";
+      body = "";
+    }
+
+    params.body = make_section(2, '\n\n', {
+      function()
+        if not template_def.commands then return end
+        return make_section(0, '\n', {
+          "Commands:";
+          sorted_map_table(template_def.commands, function(name, def)
+            if def.description then
+              return string.format("- %s: %s", name, def.description)
+            end
+            return string.format("- %s", name)
+          end)
+        })
+      end;
+      function()
+        if not template_def.default_config then return end
+        return make_section(0, '\n', {
+          "Default Values:";
+          sorted_map_table(template_def.default_config, function(k, v)
+            local description = ((docs or {}).default_config or {})[k]
+            if description and type(description) ~= 'string' then
+              description = inspect(description)
+            end
+            return indent(2, string.format("%s = %s", k, description or inspect(v)))
+          end)
+        })
+      end;
+    })
+
+    if docs then
+      local tempdir = os.getenv("PACKAGE_JSON_CACHEDIR") or uv.fs_mkdtemp("/tmp/nvim-lsp.XXXXXX")
+      if not util.path.is_dir(tempdir) then
+        fn.mkdir(tempdir)
+      end
+      local preamble_parts = make_parts {
+        function()
+          if docs.description and #docs.description > 0 then
+            return docs.description
+          end
+        end;
+        function()
+          if template_object.install then
+            return string.format("Can be installed in neovim with `:LspInstall %s`", template_name)
+          end
+        end;
+        function()
+          if docs.package_json then
+            local filename = util.path.join(tempdir, template_name..'.package.json')
+            if util.path.is_file(filename) then
+              os.execute(string.format("curl -L -o %q -z %q %q", filename, filename, docs.package_json))
+            else
+              os.execute(string.format("curl -L -o %q %q", filename, docs.package_json))
+            end
+            if not util.path.is_file(filename) then
+              print("Failed to download package.json for %q at %q", template_name, docs.package_json)
+              os.exit(1)
+              return
+            end
+            local data = fn.json_decode(readfile(filename))
+            -- The entire autogenerated section.
+            return make_section(0, '\n', {
+              -- The default settings section
+              function()
+                local default_settings = (data.contributes or {}).configuration
+                if not default_settings.properties then return end
+                -- The outer section.
+                return make_section(0, '\n', {
+                  '<details><summary>'..(default_settings.title or "Available settings:")..'</summary>';
+                  '';
+                  -- The list of properties.
+                  make_section(0, '\n\n', sorted_map_table(default_settings.properties, function(k, v)
+                    local function tick(s) return string.format("`%s`", s) end
+                    local function pre(s) return string.format("<pre>%s</pre>", s) end
+                    local function code(s) return string.format("<code>%s</code>", s) end
+                    local function bold(s) return string.format("**%s**", s) end
+                    return make_section(0, '\n', {
+                      "- "..make_section(0, ': ', {
+                        bold(tick(k));
+                        function()
+                          if v.enum then
+                            return tick("enum "..inspect(v.enum))
+                          end
+                          if v.type then
+                            return tick(table.concat(tbl_flatten{v.type}, '|'))
+                          end
+                        end;
+                      });
+                      '';
+                      make_section(2, '\n', {
+                        {v.description};
+                      });
+                    })
+                  end));
+                  '';
+                  '</details>';
+                })
+              end;
+            })
+          end
+        end
+      }
+      -- Insert a newline after the preamble if it exists.
+      if #preamble_parts > 0 then table.insert(preamble_parts, '') end
+      params.preamble = table.concat(preamble_parts, '\n')
+    end
+
+    return template(lsp_section_template, params)
+  end))
 end
 
-writer:close()
+local function make_implemented_servers_list()
+  return make_section(0, '\n', sorted_map_table(skeleton, function(k)
+    return template("- [{{server}}](#{{server}})", {server=k})
+  end))
+end
+
+local function generate_readme(template_file, params)
+  vim.validate {
+    lsp_server_details = {params.lsp_server_details, 's'};
+    implemented_servers_list = {params.implemented_servers_list, 's'};
+  }
+  local input_template = readfile(template_file)
+  local readme_data = template(input_template, params)
+
+  local writer = io.open("README.md", "w")
+  writer:write(readme_data)
+  writer:close()
+end
+
+generate_readme("scripts/README_template.md", {
+  implemented_servers_list = make_implemented_servers_list();
+  lsp_server_details = make_lsp_sections();
+})
+
 -- vim:et ts=2 sw=2
