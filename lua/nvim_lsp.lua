@@ -1,13 +1,15 @@
 local skeleton = require 'nvim_lsp/skeleton'
+
 require 'nvim_lsp/bashls'
 require 'nvim_lsp/ccls'
 require 'nvim_lsp/clangd'
 require 'nvim_lsp/elmls'
+require 'nvim_lsp/flow'
 require 'nvim_lsp/gopls'
 require 'nvim_lsp/pyls'
+require 'nvim_lsp/rls'
 require 'nvim_lsp/texlab'
 require 'nvim_lsp/tsserver'
-require 'nvim_lsp/rls'
 
 local M = {
   util = require 'nvim_lsp/util';
