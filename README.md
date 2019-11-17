@@ -17,7 +17,8 @@ There's a lot of language servers in the world, and not enough time.  See
 [`lua/nvim_lsp/*.lua`](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/)
 for examples and ask us questions in the [Neovim
 Gitter](https://gitter.im/neovim/neovim) to help us complete configurations for
-*all the LSPs!* Read `CONTRIBUTING.md` for some instructions.
+*all the LSPs!* Read `CONTRIBUTING.md` for some instructions. NOTE: don't
+modify `README.md`; it is auto-generated.
 
 If you don't know where to start, you can pick one that's not in progress or
 implemented from [this excellent list compiled by the coc.nvim
@@ -30,13 +31,15 @@ them are good references.
 
 ## Progress
 
-Implemented:
+Implemented language servers:
 - [bashls](https://github.com/neovim/nvim-lsp#bashls)
+- [ccls](https://github.com/neovim/nvim-lsp#ccls)
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
 - [elmls](https://github.com/neovim/nvim-lsp#elmls)
-- [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
-- [haskell-ide-engine](https://github.com/neovim/nvim-lsp#hie)
+- [flow](https://github.com/neovim/nvim-lsp#flow)
+- [gopls](https://github.com/neovim/nvim-lsp#gopls)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
+- [rls](https://github.com/neovim/nvim-lsp#rls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
 - [tsserver](https://github.com/neovim/nvim-lsp#tsserver)
 
@@ -176,10 +179,12 @@ nvim_lsp.SERVER.setup({config})
 ```
 
 # LSP Implementations
+
 ## bashls
 
-For install instruction visit:
-https://github.com/mads-hartmann/bash-language-server#installation
+https://github.com/mads-hartmann/bash-language-server
+
+Language server for bash, written using tree sitter in typescript.
 
 Can be installed in neovim with `:LspInstall bashls`
 
@@ -194,6 +199,29 @@ nvim_lsp#setup("bashls", {config})
     root_dir = vim's starting directory
     settings = {}
 ```
+
+## ccls
+
+https://github.com/MaskRay/ccls/wiki
+
+ccls relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
+as compile_commands.json or, for simpler projects, a compile_flags.txt.
+
+
+```lua
+nvim_lsp.ccls.setup({config})
+nvim_lsp#setup("ccls", {config})
+
+  Default Values:
+    capabilities = default capabilities, with offsetEncoding utf-8
+    cmd = { "ccls" }
+    filetypes = { "c", "cpp", "objc", "objcpp" }
+    log_level = 2
+    on_init = function to handle changing offsetEncoding
+    root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
+    settings = {}
+```
+
 ## clangd
 
 https://clang.llvm.org/extra/clangd/Installation.html
@@ -215,6 +243,7 @@ nvim_lsp#setup("clangd", {config})
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
     settings = {}
 ```
+
 ## elmls
 
 https://github.com/elm-tooling/elm-language-server#installation
@@ -245,6 +274,34 @@ nvim_lsp#setup("elmls", {config})
     root_dir = root_pattern("elm.json")
     settings = {}
 ```
+
+## flow
+
+https://flow.org/
+https://github.com/facebook/flow
+
+See below for how to setup Flow itself.
+https://flow.org/en/docs/install/
+
+See below for lsp command options.
+
+```sh
+npm run flow lsp -- --help
+```
+    
+
+```lua
+nvim_lsp.flow.setup({config})
+nvim_lsp#setup("flow", {config})
+
+  Default Values:
+    cmd = { "npm", "run", "flow", "lsp" }
+    filetypes = { "javascript", "javascriptreact", "javascript.jsx" }
+    log_level = 2
+    root_dir = root_pattern(".flowconfig")
+    settings = {}
+```
+
 ## gopls
 
 https://github.com/golang/tools/tree/master/gopls
@@ -263,6 +320,7 @@ nvim_lsp#setup("gopls", {config})
     root_dir = root_pattern("go.mod", ".git")
     settings = {}
 ```
+
 ## pyls
 
 https://github.com/palantir/python-language-server
@@ -317,6 +375,38 @@ nvim_lsp#setup("pyls", {config})
     root_dir = vim's starting directory
     settings = {}
 ```
+
+## rls
+
+https://github.com/rust-lang/rls
+
+rls, a language server for Rust
+
+Refer to the following for how to setup rls itself.
+https://github.com/rust-lang/rls#setup
+
+See below for rls specific settings.
+https://github.com/rust-lang/rls#configuration
+
+If you want to use rls for a particular build, eg nightly, set cmd as follows:
+
+```lua
+cmd = {"rustup", "run", "nightly", "rls"}
+```
+    
+
+```lua
+nvim_lsp.rls.setup({config})
+nvim_lsp#setup("rls", {config})
+
+  Default Values:
+    cmd = { "rls" }
+    filetypes = { "rust" }
+    log_level = 2
+    root_dir = root_pattern("Cargo.toml")
+    settings = {}
+```
+
 ## texlab
 
 https://texlab.netlify.com/
@@ -360,6 +450,7 @@ nvim_lsp#setup("texlab", {config})
       }
     }
 ```
+
 ## tsserver
 
 https://github.com/theia-ide/typescript-language-server
@@ -384,3 +475,4 @@ nvim_lsp#setup("tsserver", {config})
     root_dir = root_pattern("package.json")
     settings = {}
 ```
+
