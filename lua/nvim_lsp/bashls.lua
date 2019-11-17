@@ -35,8 +35,9 @@ skeleton[server_name] = {
   -- on_attach = function(client, bufnr) end;
   docs = {
     description = [[
-For install instruction visit:
-https://github.com/mads-hartmann/bash-language-server#installation
+https://github.com/mads-hartmann/bash-language-server
+
+Language server for bash, written using tree sitter in typescript.
 ]];
     default_config = {
       root_dir = "vim's starting directory";
