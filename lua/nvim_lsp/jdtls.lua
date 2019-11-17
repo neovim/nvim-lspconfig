@@ -2,16 +2,13 @@ local skeleton = require 'nvim_lsp/skeleton'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-local cwd = vim.loop.cwd()
-
 local server_name = "jdtls"
-local bin_name = "jdtls"
 
 skeleton[server_name] = {
   default_config = {
     cmd = {"jdtls"};
     filetypes = {"java"};
-    root_dir = function() return cwd end;
+    root_dir = vim.loop.os_homedir;
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
   };
