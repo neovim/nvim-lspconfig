@@ -38,6 +38,7 @@ Implemented language servers:
 - [elmls](https://github.com/neovim/nvim-lsp#elmls)
 - [flow](https://github.com/neovim/nvim-lsp#flow)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls)
+- [hie](https://github.com/neovim/nvim-lsp#hie)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
 - [rls](https://github.com/neovim/nvim-lsp#rls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
@@ -318,6 +319,38 @@ nvim_lsp#setup("gopls", {config})
     filetypes = { "go" }
     log_level = 2
     root_dir = root_pattern("go.mod", ".git")
+    settings = {}
+```
+
+## hie
+
+https://github.com/haskell/haskell-ide-engine
+
+the following init_options are supported (see https://github.com/haskell/haskell-ide-engine#configuration):
+```lua
+init_options = {
+  languageServerHaskell = {
+    hlintOn = bool;
+    maxNumberOfProblems = number;
+    diagnosticsDebounceDuration = number;
+    liquidOn = bool (default false);
+    completionSnippetsOn = bool (default true);
+    formatOnImportOn = bool (default true);
+    formattingProvider = string (default "brittany", alternate "floskell");
+  }
+}
+```
+        
+
+```lua
+nvim_lsp.hie.setup({config})
+nvim_lsp#setup("hie", {config})
+
+  Default Values:
+    cmd = { "hie-wrapper" }
+    filetypes = { "haskell" }
+    log_level = 2
+    root_dir = root_pattern("stack.yaml", "package.yaml", ".git")
     settings = {}
 ```
 
