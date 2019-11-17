@@ -32,10 +32,12 @@ them are good references.
 
 Implemented language servers:
 - [bashls](https://github.com/neovim/nvim-lsp#bashls)
+- [ccls](https://github.com/neovim/nvim-lsp#ccls)
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
 - [elmls](https://github.com/neovim/nvim-lsp#elmls)
 - [gopls](https://github.com/neovim/nvim-lsp#gopls)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
+- [rls](https://github.com/neovim/nvim-lsp#rls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
 - [tsserver](https://github.com/neovim/nvim-lsp#tsserver)
 
@@ -196,6 +198,28 @@ nvim_lsp#setup("bashls", {config})
     settings = {}
 ```
 
+## ccls
+
+https://github.com/MaskRay/ccls/wiki
+
+ccls relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
+as compile_commands.json or, for simpler projects, a compile_flags.txt.
+
+
+```lua
+nvim_lsp.ccls.setup({config})
+nvim_lsp#setup("ccls", {config})
+
+  Default Values:
+    capabilities = default capabilities, with offsetEncoding utf-8
+    cmd = { "ccls" }
+    filetypes = { "c", "cpp", "objc", "objcpp" }
+    log_level = 2
+    on_init = function to handle changing offsetEncoding
+    root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
+    settings = {}
+```
+
 ## clangd
 
 https://clang.llvm.org/extra/clangd/Installation.html
@@ -320,6 +344,37 @@ nvim_lsp#setup("pyls", {config})
     filetypes = { "python" }
     log_level = 2
     root_dir = vim's starting directory
+    settings = {}
+```
+
+## rls
+
+https://github.com/rust-lang/rls
+
+rls, a language server for Rust
+
+Refer to the following for how to setup rls itself.
+https://github.com/rust-lang/rls#setup
+
+See below for rls specific settings.
+https://github.com/rust-lang/rls#configuration
+
+If you want to use rls for a particular build, eg nightly, set cmd as follows:
+
+```lua
+cmd = {"rustup", "run", "nightly", "rls"}
+```
+    
+
+```lua
+nvim_lsp.rls.setup({config})
+nvim_lsp#setup("rls", {config})
+
+  Default Values:
+    cmd = { "rls" }
+    filetypes = { "rust" }
+    log_level = 2
+    root_dir = root_pattern("Cargo.toml")
     settings = {}
 ```
 
