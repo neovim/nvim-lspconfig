@@ -5,7 +5,6 @@ on: [push]
 jobs:
   docgen:
     runs-on: [ubuntu-latest]
-    if: github.ref != 'master'
     steps:
     - uses: actions/checkout@v1
     - run: date +%F > todays-date
