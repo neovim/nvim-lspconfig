@@ -359,44 +359,274 @@ nvim_lsp#setup("hie", {config})
 
 https://github.com/palantir/python-language-server
 
-python-language-server, a language server for Python
-
-the following settings (with default options) are supported:
-```lua
-settings = {
-  pyls = {
-    enable = true;
-    trace = { server = "verbose"; };
-    commandPath = "";
-    configurationSources = { "pycodestyle" };
-    plugins = {
-      jedi_completion = { enabled = true; };
-      jedi_hover = { enabled = true; };
-      jedi_references = { enabled = true; };
-      jedi_signature_help = { enabled = true; };
-      jedi_symbols = {
-        enabled = true;
-        all_scopes = true;
-      };
-      mccabe = {
-        enabled = true;
-        threshold = 15;
-      };
-      preload = { enabled = true; };
-      pycodestyle = { enabled = true; };
-      pydocstyle = {
-        enabled = false;
-        match = "(?!test_).*\\.py";
-        matchDir = "[^\\.].*";
-      };
-      pyflakes = { enabled = true; };
-      rope_completion = { enabled = true; };
-      yapf = { enabled = true; };
-    };
-  };
-};
-```
+`python-language-server`, a language server for Python.
     
+This server accepts configuration via the `settings` key.
+<details><summary>Python Language Server Configuration</summary>
+
+- **`pyls.configurationSources`**: `array`
+
+  Default: `{ "pycodestyle" }`
+  
+  Array items: `{enum = { "pycodestyle", "pyflakes" },type = "string"}`
+  
+  List of configuration sources to use.
+
+- **`pyls.executable`**: `string`
+
+  Default: `"pyls"`
+  
+  Language server executable
+
+- **`pyls.plugins.jedi.environment`**: `string`
+
+  Default: `vim.NIL`
+  
+  Define environment for jedi.Script and Jedi.names.
+
+- **`pyls.plugins.jedi.extra_paths`**: `array`
+
+  Default: `{}`
+  
+  Define extra paths for jedi.Script.
+
+- **`pyls.plugins.jedi_completion.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable the plugin.
+
+- **`pyls.plugins.jedi_completion.include_params`**: `boolean`
+
+  Default: `true`
+  
+  Auto-completes methods and classes with tabstops for each parameter.
+
+- **`pyls.plugins.jedi_definition.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable the plugin.
+
+- **`pyls.plugins.jedi_definition.follow_builtin_imports`**: `boolean`
+
+  Default: `true`
+  
+  If follow_imports is True will decide if it follow builtin imports.
+
+- **`pyls.plugins.jedi_definition.follow_imports`**: `boolean`
+
+  Default: `true`
+  
+  The goto call will follow imports.
+
+- **`pyls.plugins.jedi_hover.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable the plugin.
+
+- **`pyls.plugins.jedi_references.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable the plugin.
+
+- **`pyls.plugins.jedi_signature_help.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable the plugin.
+
+- **`pyls.plugins.jedi_symbols.all_scopes`**: `boolean`
+
+  Default: `true`
+  
+  If True lists the names of all scopes instead of only the module namespace.
+
+- **`pyls.plugins.jedi_symbols.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable the plugin.
+
+- **`pyls.plugins.mccabe.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable the plugin.
+
+- **`pyls.plugins.mccabe.threshold`**: `number`
+
+  Default: `15`
+  
+  The minimum threshold that triggers warnings about cyclomatic complexity.
+
+- **`pyls.plugins.preload.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable the plugin.
+
+- **`pyls.plugins.preload.modules`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  List of modules to import on startup
+
+- **`pyls.plugins.pycodestyle.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable the plugin.
+
+- **`pyls.plugins.pycodestyle.exclude`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  Exclude files or directories which match these patterns.
+
+- **`pyls.plugins.pycodestyle.filename`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  When parsing directories, only check filenames matching these patterns.
+
+- **`pyls.plugins.pycodestyle.hangClosing`**: `boolean`
+
+  Default: `vim.NIL`
+  
+  Hang closing bracket instead of matching indentation of opening bracket's line.
+
+- **`pyls.plugins.pycodestyle.ignore`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  Ignore errors and warnings
+
+- **`pyls.plugins.pycodestyle.maxLineLength`**: `number`
+
+  Default: `vim.NIL`
+  
+  Set maximum allowed line length.
+
+- **`pyls.plugins.pycodestyle.select`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  Select errors and warnings
+
+- **`pyls.plugins.pydocstyle.addIgnore`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  Ignore errors and warnings in addition to the specified convention.
+
+- **`pyls.plugins.pydocstyle.addSelect`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  Select errors and warnings in addition to the specified convention.
+
+- **`pyls.plugins.pydocstyle.convention`**: `enum { "pep257", "numpy" }`
+
+  Default: `vim.NIL`
+  
+  Choose the basic list of checked errors by specifying an existing convention.
+
+- **`pyls.plugins.pydocstyle.enabled`**: `boolean`
+
+  Enable or disable the plugin.
+
+- **`pyls.plugins.pydocstyle.ignore`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  Ignore errors and warnings
+
+- **`pyls.plugins.pydocstyle.match`**: `string`
+
+  Default: `"(?!test_).*\\.py"`
+  
+  Check only files that exactly match the given regular expression; default is to match files that don't start with 'test_' but end with '.py'.
+
+- **`pyls.plugins.pydocstyle.matchDir`**: `string`
+
+  Default: `"[^\\.].*"`
+  
+  Search only dirs that exactly match the given regular expression; default is to match dirs which do not begin with a dot.
+
+- **`pyls.plugins.pydocstyle.select`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  Select errors and warnings
+
+- **`pyls.plugins.pyflakes.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable the plugin.
+
+- **`pyls.plugins.pylint.args`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  Arguments to pass to pylint.
+
+- **`pyls.plugins.pylint.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable the plugin.
+
+- **`pyls.plugins.rope_completion.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable the plugin.
+
+- **`pyls.plugins.yapf.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable the plugin.
+
+- **`pyls.rope.extensionModules`**: `string`
+
+  Default: `vim.NIL`
+  
+  Builtin and c-extension modules that are allowed to be imported and inspected by rope.
+
+- **`pyls.rope.ropeFolder`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  The name of the folder in which rope stores project configurations and data.  Pass `null` for not using such a folder at all.
+
+</details>
 
 ```lua
 nvim_lsp.pyls.setup({config})
@@ -428,10 +658,13 @@ If you want to use rls for a particular build, eg nightly, set cmd as follows:
 cmd = {"rustup", "run", "nightly", "rls"}
 ```
     
+This server accepts configuration via the `settings` key.
 <details><summary>Rust configuration</summary>
 
 - **`rust-client.channel`**: `enum { "stable", "beta", "nightly" }`
 
+  Default: `vim.NIL`
+  
   Rust channel to invoke rustup with. Ignored if rustup is disabled. By default, uses the same channel as your currently open project.
 
 - **`rust-client.disableRustup`**: `boolean`
@@ -448,22 +681,32 @@ cmd = {"rustup", "run", "nightly", "rls"}
 
 - **`rust-client.nestedMultiRootConfigInOutermost`**: `boolean`
 
+  Default: `true`
+  
   If one root workspace folder is nested in another root folder, look for the Rust config in the outermost root.
 
 - **`rust-client.revealOutputChannelOn`**: `enum { "info", "warn", "error", "never" }`
 
+  Default: `"never"`
+  
   Specifies message severity on which the output channel will be revealed. Requires reloading extension after change.
 
 - **`rust-client.rlsPath`**: `string|null`
 
+  Default: `vim.NIL`
+  
   Override RLS path. Only required for RLS developers. If you set this and use rustup, you should also set `rust-client.channel` to ensure your RLS sees the right libraries. If you don't use rustup, make sure to set `rust-client.disableRustup`.
 
 - **`rust-client.rustupPath`**: `string`
 
+  Default: `"rustup"`
+  
   Path to rustup executable. Ignored if rustup is disabled.
 
 - **`rust-client.trace.server`**: `enum { "off", "messages", "verbose" }`
 
+  Default: `"off"`
+  
   Traces the communication between VS Code and the Rust language server.
 
 - **`rust-client.updateOnStartup`**: `boolean`
@@ -480,20 +723,28 @@ cmd = {"rustup", "run", "nightly", "rls"}
 
 - **`rust.all_targets`**: `boolean`
 
+  Default: `true`
+  
   Checks the project as if you were running cargo check --all-targets (I.e., check all targets and integration tests too).
 
 - **`rust.build_bin`**: `string|null`
 
+  Default: `vim.NIL`
+  
   Specify to run analysis as if running `cargo check --bin <name>`. Use `null` to auto-detect. (unstable)
 
 - **`rust.build_command`**: `string|null`
 
+  Default: `vim.NIL`
+  
   EXPERIMENTAL (requires `unstable_features`)
   If set, executes a given program responsible for rebuilding save-analysis to be loaded by the RLS. The program given should output a list of resulting .json files on stdout. 
   Implies `rust.build_on_save`: true.
 
 - **`rust.build_lib`**: `boolean|null`
 
+  Default: `vim.NIL`
+  
   Specify to run analysis as if running `cargo check --lib`. Use `null` to auto-detect. (unstable)
 
 - **`rust.build_on_save`**: `boolean`
@@ -506,10 +757,14 @@ cmd = {"rustup", "run", "nightly", "rls"}
 
 - **`rust.clear_env_rust_log`**: `boolean`
 
+  Default: `true`
+  
   Clear the RUST_LOG environment variable before running rustc or cargo.
 
 - **`rust.clippy_preference`**: `enum { "on", "opt-in", "off" }`
 
+  Default: `"opt-in"`
+  
   Controls eagerness of clippy diagnostics when available. Valid values are (case-insensitive):
    - "off": Disable clippy lints.
    - "on": Display the same diagnostics as command-line clippy invoked with no arguments (`clippy::all` unless overridden).
@@ -518,19 +773,27 @@ cmd = {"rustup", "run", "nightly", "rls"}
 
 - **`rust.crate_blacklist`**: `array|null`
 
+  Default: `{ "cocoa", "gleam", "glium", "idna", "libc", "openssl", "rustc_serialize", "serde", "serde_json", "typenum", "unicode_normalization", "unicode_segmentation", "winapi" }`
+  
   Overrides the default list of packages for which analysis is skipped.
   Available since RLS 1.38
 
 - **`rust.features`**: `array`
 
+  Default: `{}`
+  
   A list of Cargo features to enable.
 
 - **`rust.full_docs`**: `boolean|null`
 
+  Default: `vim.NIL`
+  
   Instructs cargo to enable full documentation extraction during save-analysis while building the crate.
 
 - **`rust.jobs`**: `number|null`
 
+  Default: `vim.NIL`
+  
   Number of Cargo jobs to be run in parallel.
 
 - **`rust.no_default_features`**: `boolean`
@@ -539,34 +802,50 @@ cmd = {"rustup", "run", "nightly", "rls"}
 
 - **`rust.racer_completion`**: `boolean`
 
+  Default: `true`
+  
   Enables code completion using racer.
 
 - **`rust.rustflags`**: `string|null`
 
+  Default: `vim.NIL`
+  
   Flags added to RUSTFLAGS.
 
 - **`rust.rustfmt_path`**: `string|null`
 
+  Default: `vim.NIL`
+  
   When specified, RLS will use the Rustfmt pointed at the path instead of the bundled one
 
 - **`rust.show_hover_context`**: `boolean`
 
+  Default: `true`
+  
   Show additional context in hover tooltips when available. This is often the type local variable declaration.
 
 - **`rust.show_warnings`**: `boolean`
 
+  Default: `true`
+  
   Show warnings.
 
 - **`rust.sysroot`**: `string|null`
 
+  Default: `vim.NIL`
+  
   --sysroot
 
 - **`rust.target`**: `string|null`
 
+  Default: `vim.NIL`
+  
   --target
 
 - **`rust.target_dir`**: `string|null`
 
+  Default: `vim.NIL`
+  
   When specified, it places the generated analysis files at the specified target directory. By default it is placed target/rls directory.
 
 - **`rust.unstable_features`**: `boolean`
@@ -575,6 +854,8 @@ cmd = {"rustup", "run", "nightly", "rls"}
 
 - **`rust.wait_to_build`**: `number|null`
 
+  Default: `vim.NIL`
+  
   Time in milliseconds between receiving a change notification and starting build.
 
 </details>

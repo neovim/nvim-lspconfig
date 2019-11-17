@@ -152,6 +152,7 @@ local function make_lsp_sections()
                 if not default_settings.properties then return end
                 -- The outer section.
                 return make_section(0, '\n', {
+                  'This server accepts configuration via the `settings` key.';
                   '<details><summary>'..(default_settings.title or "Available settings:")..'</summary>';
                   '';
                   -- The list of properties.
@@ -173,7 +174,9 @@ local function make_lsp_sections()
                         end;
                       });
                       '';
-                      make_section(2, '\n', {
+                      make_section(2, '\n\n', {
+                        {v.default and "Default: "..tick(inspect(v.default, {newline='';indent=''}))};
+                        {v.items and "Array items: "..tick(inspect(v.items, {newline='';indent=''}))};
                         {v.description};
                       });
                     })
