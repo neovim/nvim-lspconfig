@@ -6,7 +6,7 @@ skeleton.pyls = {
   default_config = {
     cmd = {"pyls"};
     filetypes = {"python"};
-    root_dir = util.once(vim.loop.cwd());
+    root_dir = util.always(vim.loop.cwd());
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
   };
