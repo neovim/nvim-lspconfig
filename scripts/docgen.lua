@@ -53,7 +53,7 @@ local skeleton_keys = vim.tbl_keys(skeleton)
 table.sort(skeleton_keys)
 
 local function make_lsp_sections()
-  return map_list(skeleton_keys, function(k)
+  local sections = map_list(skeleton_keys, function(k)
     local v = skeleton[k]
     local tconf = v.template_config
 
@@ -123,30 +123,32 @@ nvim_lsp#setup("{{template_name}}", {config})
 ```
 ]], params)
   end)
+  return table.concat(sections, '\n')
 end
 
-local function make_readme_preamble()
-  local data = io.open("README_preamble.md"):read("*a")
-  local implemented_server_marker = "Implemented language servers:"
-  return data:gsub(implemented_server_marker, function()
-    local lines = vim.tbl_flatten {
-      implemented_server_marker;
-      map_list(skeleton_keys, function(k)
-        return template("- [{{server}}](https://github.com/neovim/nvim-lsp#{{server}})", {server=k})
-      end)
-    }
-    return table.concat(lines, '\n')
+local function make_implemented_servers_list()
+  local parts = map_list(skeleton_keys, function(k)
+    return template("- [{{server}}](https://github.com/neovim/nvim-lsp#{{server}})", {server=k})
   end)
+  return table.concat(parts, '\n')
 end
 
-local writer = io.open("README.md", "w")
+local function generate_readme(params)
+  vim.validate {
+    lsp_server_details = {params.lsp_server_details, 's'};
+    implemented_servers_list = {params.implemented_servers_list, 's'};
+  }
+  local input_template = io.open("scripts/README_template.md"):read("*a")
+  local readme_data = template(input_template, params)
 
-local parts = vim.tbl_flatten {
-  make_readme_preamble();
-  make_lsp_sections();
+  local writer = io.open("README.md", "w")
+  writer:write(readme_data)
+  writer:close()
+end
+
+generate_readme {
+  implemented_servers_list = make_implemented_servers_list();
+  lsp_server_details = make_lsp_sections();
 }
-
-writer:write(table.concat(parts, '\n'))
-writer:close()
 
 -- vim:et ts=2 sw=2

@@ -16,13 +16,12 @@ from `nvim` to run.
 It **must** be run from the .git/project root. This could be modified to try to
 find the .git root with one of our `util.*` functions potentially.
 
-You can run
-`nvim -u NONE +'set rtp+=$PWD' +"luafile scripts/docgen.lua" +q`
-from the project root. This ensures that it doesn't pick up another
-copy of `nvim_lsp` on your system.
+You can run `scripts/docgen.sh` from the project root. This ensures that it
+doesn't pick up another copy of `nvim_lsp` on your system.
 
-This generates a suffix for README.md
+This generates README.md
 
+**DO NOT MODIFY `README.md` DIRECTLY**
 
 # skeleton
 

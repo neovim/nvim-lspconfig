@@ -17,7 +17,8 @@ There's a lot of language servers in the world, and not enough time.  See
 [`lua/nvim_lsp/*.lua`](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/)
 for examples and ask us questions in the [Neovim
 Gitter](https://gitter.im/neovim/neovim) to help us complete configurations for
-*all the LSPs!* Read `CONTRIBUTING.md` for some instructions.
+*all the LSPs!* Read `CONTRIBUTING.md` for some instructions. NOTE: don't
+modify `README.md`; it is auto-generated.
 
 If you don't know where to start, you can pick one that's not in progress or
 implemented from [this excellent list compiled by the coc.nvim
@@ -391,3 +392,4 @@ nvim_lsp#setup("tsserver", {config})
     root_dir = root_pattern("package.json")
     settings = {}
 ```
+
