@@ -32,17 +32,17 @@ them are good references.
 ## Progress
 
 Implemented language servers:
-- [bashls](https://github.com/neovim/nvim-lsp#bashls)
-- [ccls](https://github.com/neovim/nvim-lsp#ccls)
-- [clangd](https://github.com/neovim/nvim-lsp#clangd)
-- [elmls](https://github.com/neovim/nvim-lsp#elmls)
-- [flow](https://github.com/neovim/nvim-lsp#flow)
-- [gopls](https://github.com/neovim/nvim-lsp#gopls)
-- [hie](https://github.com/neovim/nvim-lsp#hie)
-- [pyls](https://github.com/neovim/nvim-lsp#pyls)
-- [rls](https://github.com/neovim/nvim-lsp#rls)
-- [texlab](https://github.com/neovim/nvim-lsp#texlab)
-- [tsserver](https://github.com/neovim/nvim-lsp#tsserver)
+- [bashls](#bashls)
+- [ccls](#ccls)
+- [clangd](#clangd)
+- [elmls](#elmls)
+- [flow](#flow)
+- [gopls](#gopls)
+- [hie](#hie)
+- [pyls](#pyls)
+- [rls](#rls)
+- [texlab](#texlab)
+- [tsserver](#tsserver)
 
 Planned servers to implement (by me, but contributions welcome anyway):
 - [ccls](https://github.com/MaskRay/ccls)
@@ -427,6 +427,156 @@ If you want to use rls for a particular build, eg nightly, set cmd as follows:
 cmd = {"rustup", "run", "nightly", "rls"}
 ```
     
+<details><summary>Rust configuration</summary>
+
+- **`rust-client.channel`**: `enum { "stable", "beta", "nightly" }`
+
+  Rust channel to invoke rustup with. Ignored if rustup is disabled. By default, uses the same channel as your currently open project.
+
+- **`rust-client.disableRustup`**: `boolean`
+
+  Disable usage of rustup and use rustc/rls from PATH.
+
+- **`rust-client.enableMultiProjectSetup`**: `boolean`
+
+  Allow multiple projects in the same folder, along with remove the constraint that the cargo.toml must be located at the root. (Experimental: might not work for certain setups)
+
+- **`rust-client.logToFile`**: `boolean`
+
+  When set to true, RLS stderr is logged to a file at workspace root level. Requires reloading extension after change.
+
+- **`rust-client.nestedMultiRootConfigInOutermost`**: `boolean`
+
+  If one root workspace folder is nested in another root folder, look for the Rust config in the outermost root.
+
+- **`rust-client.revealOutputChannelOn`**: `enum { "info", "warn", "error", "never" }`
+
+  Specifies message severity on which the output channel will be revealed. Requires reloading extension after change.
+
+- **`rust-client.rlsPath`**: `string|null`
+
+  Override RLS path. Only required for RLS developers. If you set this and use rustup, you should also set `rust-client.channel` to ensure your RLS sees the right libraries. If you don't use rustup, make sure to set `rust-client.disableRustup`.
+
+- **`rust-client.rustupPath`**: `string`
+
+  Path to rustup executable. Ignored if rustup is disabled.
+
+- **`rust-client.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Traces the communication between VS Code and the Rust language server.
+
+- **`rust-client.updateOnStartup`**: `boolean`
+
+  Update the RLS whenever the extension starts up.
+
+- **`rust-client.useWSL`**: `boolean`
+
+  When set to true, RLS is started within Windows Subsystem for Linux.
+
+- **`rust.all_features`**: `boolean`
+
+  Enable all Cargo features.
+
+- **`rust.all_targets`**: `boolean`
+
+  Checks the project as if you were running cargo check --all-targets (I.e., check all targets and integration tests too).
+
+- **`rust.build_bin`**: `string|null`
+
+  Specify to run analysis as if running `cargo check --bin <name>`. Use `null` to auto-detect. (unstable)
+
+- **`rust.build_command`**: `string|null`
+
+  EXPERIMENTAL (requires `unstable_features`)
+  If set, executes a given program responsible for rebuilding save-analysis to be loaded by the RLS. The program given should output a list of resulting .json files on stdout. 
+  Implies `rust.build_on_save`: true.
+
+- **`rust.build_lib`**: `boolean|null`
+
+  Specify to run analysis as if running `cargo check --lib`. Use `null` to auto-detect. (unstable)
+
+- **`rust.build_on_save`**: `boolean`
+
+  Only index the project when a file is saved and not on change.
+
+- **`rust.cfg_test`**: `boolean`
+
+  Build cfg(test) code. (unstable)
+
+- **`rust.clear_env_rust_log`**: `boolean`
+
+  Clear the RUST_LOG environment variable before running rustc or cargo.
+
+- **`rust.clippy_preference`**: `enum { "on", "opt-in", "off" }`
+
+  Controls eagerness of clippy diagnostics when available. Valid values are (case-insensitive):
+   - "off": Disable clippy lints.
+   - "on": Display the same diagnostics as command-line clippy invoked with no arguments (`clippy::all` unless overridden).
+   - "opt-in": Only display the lints explicitly enabled in the code. Start by adding `#![warn(clippy::all)]` to the root of each crate you want linted.
+  You need to install clippy via rustup if you haven't already.
+
+- **`rust.crate_blacklist`**: `array|null`
+
+  Overrides the default list of packages for which analysis is skipped.
+  Available since RLS 1.38
+
+- **`rust.features`**: `array`
+
+  A list of Cargo features to enable.
+
+- **`rust.full_docs`**: `boolean|null`
+
+  Instructs cargo to enable full documentation extraction during save-analysis while building the crate.
+
+- **`rust.jobs`**: `number|null`
+
+  Number of Cargo jobs to be run in parallel.
+
+- **`rust.no_default_features`**: `boolean`
+
+  Do not enable default Cargo features.
+
+- **`rust.racer_completion`**: `boolean`
+
+  Enables code completion using racer.
+
+- **`rust.rustflags`**: `string|null`
+
+  Flags added to RUSTFLAGS.
+
+- **`rust.rustfmt_path`**: `string|null`
+
+  When specified, RLS will use the Rustfmt pointed at the path instead of the bundled one
+
+- **`rust.show_hover_context`**: `boolean`
+
+  Show additional context in hover tooltips when available. This is often the type local variable declaration.
+
+- **`rust.show_warnings`**: `boolean`
+
+  Show warnings.
+
+- **`rust.sysroot`**: `string|null`
+
+  --sysroot
+
+- **`rust.target`**: `string|null`
+
+  --target
+
+- **`rust.target_dir`**: `string|null`
+
+  When specified, it places the generated analysis files at the specified target directory. By default it is placed target/rls directory.
+
+- **`rust.unstable_features`**: `boolean`
+
+  Enable unstable features.
+
+- **`rust.wait_to_build`**: `number|null`
+
+  Time in milliseconds between receiving a change notification and starting build.
+
+</details>
 
 ```lua
 nvim_lsp.rls.setup({config})
