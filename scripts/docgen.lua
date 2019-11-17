@@ -22,10 +22,17 @@ local function map_list(t, fn)
 end
 
 local function indent(n, s)
-  if n <= 0 then return s end
+  local prefix
+  if type(n) == 'number' then
+    if n <= 0 then return s end
+    prefix = string.rep(" ", n)
+  else
+    assert(type(n) == 'string', 'n must be number or string')
+    prefix = n
+  end
   local lines = vim.split(s, '\n', true)
   for i, line in ipairs(lines) do
-    lines[i] = string.rep(" ", n)..line
+    lines[i] = prefix..line
   end
   return table.concat(lines, '\n')
 end
@@ -146,20 +153,32 @@ local function make_lsp_sections()
                 -- The outer section.
                 return make_section(0, '\n', {
                   '<details><summary>'..(default_settings.title or "Available settings:")..'</summary>';
-                  '<pre>';
+                  '';
                   -- The list of properties.
                   make_section(0, '\n\n', sorted_map_table(default_settings.properties, function(k, v)
+                    local function tick(s) return string.format("`%s`", s) end
+                    local function pre(s) return string.format("<pre>%s</pre>", s) end
+                    local function code(s) return string.format("<code>%s</code>", s) end
+                    local function bold(s) return string.format("**%s**", s) end
                     return make_section(0, '\n', {
-                      make_section(0, ': ', {
-                        k;
-                        {v.enum and "enum "..inspect(v.enum) or table.concat(tbl_flatten{v.type}, '|')};
+                      "- "..make_section(0, ': ', {
+                        bold(tick(k));
+                        function()
+                          if v.enum then
+                            return tick("enum "..inspect(v.enum))
+                          end
+                          if v.type then
+                            return tick(table.concat(tbl_flatten{v.type}, '|'))
+                          end
+                        end;
                       });
+                      '';
                       make_section(2, '\n', {
-                        {v.description};
-                      })
+                        {v.description and pre(v.description)};
+                      });
                     })
                   end));
-                  '</pre>';
+                  '';
                   '</details>';
                 })
               end;
