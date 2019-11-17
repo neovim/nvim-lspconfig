@@ -244,32 +244,6 @@ nvim_lsp#setup("elmls", {config})
     root_dir = root_pattern("elm.json")
     settings = {}
 ```
-## flow
-
-https://flow.org/
-https://github.com/facebook/flow
-
-See below for how to setup Flow itself.
-https://flow.org/en/docs/install/
-
-See below for lsp command options.
-
-```sh
-npm run flow lsp -- --help
-```
-    
-
-```lua
-nvim_lsp.flow.setup({config})
-nvim_lsp#setup("flow", {config})
-
-  Default Values:
-    cmd = { "npm", "run", "flow", "lsp" }
-    filetypes = { "javascript", "javascriptreact", "javascript.jsx" }
-    log_level = 2
-    root_dir = root_pattern(".flowconfig")
-    settings = {}
-```
 ## gopls
 
 https://github.com/golang/tools/tree/master/gopls
