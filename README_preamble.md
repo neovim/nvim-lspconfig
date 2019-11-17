@@ -30,14 +30,7 @@ them are good references.
 
 ## Progress
 
-Implemented:
-- [bashls](https://github.com/neovim/nvim-lsp#bashls)
-- [clangd](https://github.com/neovim/nvim-lsp#clangd)
-- [elmls](https://github.com/neovim/nvim-lsp#elmls)
-- [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
-- [pyls](https://github.com/neovim/nvim-lsp#pyls)
-- [texlab](https://github.com/neovim/nvim-lsp#texlab)
-- [tsserver](https://github.com/neovim/nvim-lsp#tsserver)
+Implemented language servers:
 
 Planned servers to implement (by me, but contributions welcome anyway):
 - [ccls](https://github.com/MaskRay/ccls)

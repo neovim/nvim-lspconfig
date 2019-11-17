@@ -30,11 +30,11 @@ them are good references.
 
 ## Progress
 
-Implemented:
+Implemented language servers:
 - [bashls](https://github.com/neovim/nvim-lsp#bashls)
 - [clangd](https://github.com/neovim/nvim-lsp#clangd)
 - [elmls](https://github.com/neovim/nvim-lsp#elmls)
-- [gopls](https://github.com/neovim/nvim-lsp#gopls) (has some errors)
+- [gopls](https://github.com/neovim/nvim-lsp#gopls)
 - [pyls](https://github.com/neovim/nvim-lsp#pyls)
 - [texlab](https://github.com/neovim/nvim-lsp#texlab)
 - [tsserver](https://github.com/neovim/nvim-lsp#tsserver)
@@ -175,10 +175,12 @@ nvim_lsp.SERVER.setup({config})
 ```
 
 # LSP Implementations
+
 ## bashls
 
-For install instruction visit:
-https://github.com/mads-hartmann/bash-language-server#installation
+https://github.com/mads-hartmann/bash-language-server
+
+Language server for bash, written using tree sitter in typescript.
 
 Can be installed in neovim with `:LspInstall bashls`
 
@@ -193,6 +195,7 @@ nvim_lsp#setup("bashls", {config})
     root_dir = vim's starting directory
     settings = {}
 ```
+
 ## clangd
 
 https://clang.llvm.org/extra/clangd/Installation.html
@@ -214,6 +217,7 @@ nvim_lsp#setup("clangd", {config})
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
     settings = {}
 ```
+
 ## elmls
 
 https://github.com/elm-tooling/elm-language-server#installation
@@ -244,6 +248,7 @@ nvim_lsp#setup("elmls", {config})
     root_dir = root_pattern("elm.json")
     settings = {}
 ```
+
 ## gopls
 
 https://github.com/golang/tools/tree/master/gopls
@@ -262,6 +267,7 @@ nvim_lsp#setup("gopls", {config})
     root_dir = root_pattern("go.mod", ".git")
     settings = {}
 ```
+
 ## pyls
 
 https://github.com/palantir/python-language-server
@@ -316,6 +322,7 @@ nvim_lsp#setup("pyls", {config})
     root_dir = vim's starting directory
     settings = {}
 ```
+
 ## texlab
 
 https://texlab.netlify.com/
@@ -359,6 +366,7 @@ nvim_lsp#setup("texlab", {config})
       }
     }
 ```
+
 ## tsserver
 
 https://github.com/theia-ide/typescript-language-server
