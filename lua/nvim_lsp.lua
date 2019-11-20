@@ -10,6 +10,7 @@ require 'nvim_lsp/gopls'
 require 'nvim_lsp/hie'
 require 'nvim_lsp/pyls'
 require 'nvim_lsp/rls'
+require 'nvim_lsp/solargraph'
 require 'nvim_lsp/texlab'
 require 'nvim_lsp/tsserver'
 
