@@ -322,8 +322,8 @@ function M.npm_installer(config)
     if M.has_bins(unpack(config.binaries)) then
       return print(config.server_name, "is already installed (not by neovim)")
     end
-    if not M.has_bins("sh", "npm", "mkdir") then
-      api.nvim_err_writeln('Installation requires "sh", "npm", "mkdir"')
+    if not M.has_bins("bash", "npm", "mkdir") then
+      api.nvim_err_writeln('Installation requires "bash", "npm", "mkdir"')
       return
     end
     if get_install_info().is_installed then
@@ -334,7 +334,7 @@ function M.npm_installer(config)
       install_dir = install_dir;
       post_install_script = config.post_install_script or '';
     }
-    local cmd = io.popen("sh", "w")
+    local cmd = io.popen("bash", "w")
     local install_script = ([[
     set -eo pipefail
     mkdir -p "{{install_dir}}"
