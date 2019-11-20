@@ -11,11 +11,15 @@ local installer = util.npm_installer {
   binaries = {bin_name};
 }
 
+local root_pattern = util.root_pattern("package.json")
+
 skeleton[server_name] = {
   default_config = util.utf8_config {
     cmd = {bin_name, "--stdio"};
     filetypes = {"css", "scss", "less"};
-    root_dir = util.root_pattern("package.json");
+    root_dir = function(fname)
+      return root_pattern(fname) or vim.loop.os_homedir()
+    end;
     log_level = lsp.protocol.MessageType.Warning;
     settings = {
       css = { validate = true },
