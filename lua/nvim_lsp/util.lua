@@ -345,7 +345,7 @@ function M.npm_installer(config)
     cmd:write(install_script)
     cmd:close()
     if not get_install_info().is_installed then
-      api.nvim_err_writeln('Installation of', config.server_name, 'failed')
+      api.nvim_err_writeln('Installation of ' .. config.server_name .. ' failed')
     end
   end
 
