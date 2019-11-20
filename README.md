@@ -35,6 +35,7 @@ Implemented language servers:
 - [bashls](#bashls)
 - [ccls](#ccls)
 - [clangd](#clangd)
+- [cssls](#cssls)
 - [elmls](#elmls)
 - [flow](#flow)
 - [gopls](#gopls)
@@ -244,6 +245,41 @@ nvim_lsp#setup("clangd", {config})
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
     settings = {}
+```
+
+## cssls
+
+https://github.com/vscode-langservers/vscode-css-languageserver-bin
+
+`css-languageserver` can be installed via `:LspInstall cssls` or by yourself with `npm`:
+```sh
+npm install -g vscode-css-languageserver-bin
+```
+
+Can be installed in neovim with `:LspInstall cssls`
+
+```lua
+nvim_lsp.cssls.setup({config})
+nvim_lsp#setup("cssls", {config})
+
+  Default Values:
+    capabilities = default capabilities, with offsetEncoding utf-8
+    cmd = { "css-languageserver", "--stdio" }
+    filetypes = { "css", "scss", "less" }
+    log_level = 2
+    on_init = function to handle changing offsetEncoding
+    root_dir = root_pattern("package.json")
+    settings = {
+      css = {
+        validate = true
+      },
+      less = {
+        validate = true
+      },
+      scss = {
+        validate = true
+      }
+    }
 ```
 
 ## elmls
@@ -596,8 +632,6 @@ This server accepts configuration via the `settings` key.
 
 - **`pyls.plugins.pylint.enabled`**: `boolean`
 
-  Default: `true`
-  
   Enable or disable the plugin.
 
 - **`pyls.plugins.rope_completion.enabled`**: `boolean`
