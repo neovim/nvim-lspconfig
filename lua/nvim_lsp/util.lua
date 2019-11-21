@@ -143,7 +143,10 @@ M.path = (function()
   end
 
   local function path_join(...)
-    return table.concat(vim.tbl_flatten {...}, path_sep)
+    local result =
+      table.concat(
+        vim.tbl_flatten {...}, path_sep):gsub(path_sep.."+", path_sep)
+    return result
   end
 
   -- Traverse the path calling cb along the way.
