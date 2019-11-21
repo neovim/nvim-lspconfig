@@ -339,7 +339,7 @@ function M.npm_installer(config)
     }
     local cmd = io.popen("sh", "w")
     local install_script = ([[
-    set -eo pipefail
+    set -e
     mkdir -p "{{install_dir}}"
     cd "{{install_dir}}"
     npm install {{packages}}

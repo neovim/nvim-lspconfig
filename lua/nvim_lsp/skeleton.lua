@@ -119,8 +119,8 @@ function skeleton.__newindex(t, template_name, template)
         else
           api.nvim_command(string.format(
               "autocmd BufEnter <buffer=%d> ++once lua require'nvim_lsp'[%q]._setup_buffer(%d)"
-              , template_name
               , bufnr
+              , template_name
               , client.id
               ))
         end
