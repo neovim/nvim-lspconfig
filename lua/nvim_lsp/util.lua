@@ -114,13 +114,13 @@ M.path = (function()
     return exists(filename) == 'file'
   end
 
-  local is_windows = uv.os_uname().sysname == "Windows"
+  local is_windows = uv.os_uname().version:match("Windows")
   local path_sep = is_windows and "\\" or "/"
 
   local is_fs_root
   if is_windows then
     is_fs_root = function(path)
-      return path:match("^%a:\\\\$")
+      return path:match("^%a:$")
     end
   else
     is_fs_root = function(path)
@@ -143,7 +143,10 @@ M.path = (function()
   end
 
   local function path_join(...)
-    return table.concat(vim.tbl_flatten {...}, path_sep)
+    local result =
+      table.concat(
+        vim.tbl_flatten {...}, path_sep):gsub(path_sep.."+", path_sep)
+    return result
   end
 
   -- Traverse the path calling cb along the way.
