@@ -67,6 +67,9 @@ end
 function M.lookup_section(settings, section)
   for part in vim.gsplit(section, '.', true) do
     settings = settings[part]
+    if not settings then
+      return
+    end
   end
   return settings
 end
