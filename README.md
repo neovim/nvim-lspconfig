@@ -163,7 +163,11 @@ nvim_lsp.SERVER.setup({config})
 
   {settings}
     This is a table, and the keys are case sensitive. This is for the
-    window/configuration event responses.
+    `workspace/configuration` event responses.
+    We also notify the server *once* on `initialize` with
+    `workspace/didChangeConfiguration`.
+    If you change the settings later on, you should send the notification
+    yourself with `client.workspace_did_change_configuration({settings})`
     Example: `settings = { keyName = { subKey = 1 } }`
 
   {on_attach}
