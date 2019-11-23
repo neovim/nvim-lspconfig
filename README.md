@@ -384,6 +384,98 @@ init_options = {
 }
 ```
         
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`languageServerHaskell.completionSnippetsOn`**: `boolean`
+
+  Default: `true`
+  
+  Show snippets with type information when using code completion
+
+- **`languageServerHaskell.diagnosticsOnChange`**: `boolean`
+
+  Default: `true`
+  
+  Compute diagnostics continuously as you type. Turn off to only generate diagnostics on file save.
+
+- **`languageServerHaskell.enableHIE`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable HIE (useful for multi-root workspaces).
+
+- **`languageServerHaskell.formatOnImportOn`**: `boolean`
+
+  Default: `true`
+  
+  When adding an import, use the formatter on the result
+
+- **`languageServerHaskell.formattingProvider`**: `enum { "brittany", "floskell", "none" }`
+
+  Default: `"brittany"`
+  
+  The tool to use for formatting requests.
+
+- **`languageServerHaskell.hieExecutablePath`**: `string`
+
+  Default: `""`
+  
+  Set the path to your hie executable, if it's not already on your $PATH. Works with ~, ${HOME} and ${workspaceFolder}.
+
+- **`languageServerHaskell.hlintOn`**: `boolean`
+
+  Default: `true`
+  
+  Get suggestions from hlint
+
+- **`languageServerHaskell.liquidOn`**: `boolean`
+
+  Get diagnostics from liquid haskell
+
+- **`languageServerHaskell.logFile`**: `string`
+
+  Default: `""`
+  
+  If set, redirects the logs to a file.
+
+- **`languageServerHaskell.maxNumberOfProblems`**: `number`
+
+  Default: `100`
+  
+  Controls the maximum number of problems produced by the server.
+
+- **`languageServerHaskell.showTypeForSelection.command.location`**: `enum { "dropdown", "channel" }`
+
+  Default: `"dropdown"`
+  
+  Determines where the type information for selected text will be shown when the `showType` command is triggered (distinct from automatically showing this information when hover is triggered).
+  dropdown: in a dropdown
+  channel: will be revealed in an output channel
+
+- **`languageServerHaskell.showTypeForSelection.onHover`**: `boolean`
+
+  Default: `true`
+  
+  If true, when an expression is selected, the hover tooltip will attempt to display the type of the entire expression - rather than just the term under the cursor.
+
+- **`languageServerHaskell.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VSCode and the languageServerHaskell service.
+
+- **`languageServerHaskell.useCustomHieWrapper`**: `boolean`
+
+  Use your own custom wrapper for hie (remember to specify the path!). This will take precedence over useHieWrapper and hieExecutablePath.
+
+- **`languageServerHaskell.useCustomHieWrapperPath`**: `string`
+
+  Default: `""`
+  
+  Specify the full path to your own custom hie wrapper (e.g. ${HOME}/.hie-wrapper.sh). Works with ~, ${HOME} and ${workspaceFolder}.
+
+</details>
 
 ```lua
 nvim_lsp.hie.setup({config})
