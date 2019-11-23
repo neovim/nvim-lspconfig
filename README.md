@@ -892,9 +892,9 @@ This server accepts configuration via the `settings` key.
 
   Enable unstable features.
 
-- **`rust.wait_to_build`**: `number|null`
+- **`rust.wait_to_build`**: `number`
 
-  Default: `vim.NIL`
+  Default: `1500`
   
   Time in milliseconds between receiving a change notification and starting build.
 
