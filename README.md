@@ -43,6 +43,7 @@ Implemented language servers:
 - [pyls](#pyls)
 - [rls](#rls)
 - [solargraph](#solargraph)
+- [sumneko_lua](#sumneko_lua)
 - [texlab](#texlab)
 - [tsserver](#tsserver)
 
@@ -1031,6 +1032,101 @@ nvim_lsp#setup("solargraph", {config})
     filetypes = { "ruby" }
     log_level = 2
     root_dir = root_pattern("Gemfile", ".git")
+    settings = {}
+```
+
+## sumneko_lua
+
+https://github.com/sumneko/lua-language-server
+
+Lua language server. **By default, this doesn't have a `cmd` set.** This is
+because it doesn't provide a global binary. We provide an installer for Linux
+using `:LspInstall`.  If you wish to install it yourself, [here is a
+guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
+
+Can be installed in neovim with `:LspInstall sumneko_lua`
+This server accepts configuration via the `settings` key.
+<details><summary>Lua</summary>
+
+- **`Lua.completion.callSnippet`**: `enum { "Disable", "Both", "Replace" }`
+
+  Default: `"Disable"`
+
+- **`Lua.completion.enable`**: `boolean`
+
+  Default: `true`
+
+- **`Lua.completion.keywordSnippet`**: `enum { "Disable", "Both", "Replace" }`
+
+  Default: `"Replace"`
+
+- **`Lua.diagnostics.disable`**: `array`
+
+  Array items: `{type = "string"}`
+
+- **`Lua.diagnostics.enable`**: `boolean`
+
+  Default: `true`
+
+- **`Lua.diagnostics.globals`**: `array`
+
+  Array items: `{type = "string"}`
+
+- **`Lua.diagnostics.severity`**: `object`
+
+  
+
+- **`Lua.runtime.path`**: `array`
+
+  Default: `{ "?.lua", "?/init.lua", "?/?.lua" }`
+  
+  Array items: `{type = "string"}`
+
+- **`Lua.runtime.version`**: `enum { "Lua 5.1", "Lua 5.2", "Lua 5.3", "Lua 5.4", "LuaJIT" }`
+
+  Default: `"Lua 5.3"`
+
+- **`Lua.workspace.ignoreDir`**: `array`
+
+  Default: `{ ".vscode" }`
+  
+  Array items: `{type = "string"}`
+
+- **`Lua.workspace.ignoreSubmodules`**: `boolean`
+
+  Default: `true`
+
+- **`Lua.workspace.library`**: `object`
+
+  
+
+- **`Lua.workspace.maxPreload`**: `integer`
+
+  Default: `300`
+
+- **`Lua.workspace.preloadFileSize`**: `integer`
+
+  Default: `100`
+
+- **`Lua.workspace.useGitIgnore`**: `boolean`
+
+  Default: `true`
+
+- **`Lua.zzzzzz.cat`**: `boolean`
+
+  
+
+</details>
+
+```lua
+nvim_lsp.sumneko_lua.setup({config})
+nvim_lsp#setup("sumneko_lua", {config})
+
+  Default Values:
+    filetypes = { "lua" }
+    log_level = 2
+    on_new_config = <function 1>
+    root_dir = <function 1>
     settings = {}
 ```
 

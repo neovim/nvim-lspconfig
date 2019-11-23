@@ -20,6 +20,10 @@ local function make_installer()
 			print(name, "is already installed")
 			return
 		end
+		if not (util.has_bins("ninja") or util.has_bins("curl")) then
+			error('Need either "ninja" or "curl" (to download ninja) to install this.')
+			return
+		end
 		if not util.has_bins("sh", "chmod", "unzip") then
 			error('Need the binaries "sh", "chmod", "unzip" to install this')
 			return
@@ -80,6 +84,17 @@ skeleton[name] = {
 		end;
 		log_level = vim.lsp.protocol.MessageType.Warning;
 		settings = {};
+	};
+	docs = {
+		vspackage = "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/sumneko/vsextensions/lua/latest/vspackage";
+		description = [[
+https://github.com/sumneko/lua-language-server
+
+Lua language server. **By default, this doesn't have a `cmd` set.** This is
+because it doesn't provide a global binary. We provide an installer for Linux
+using `:LspInstall`.  If you wish to install it yourself, [here is a
+guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
+]]
 	};
 }
 
