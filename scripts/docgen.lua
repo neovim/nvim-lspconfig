@@ -167,7 +167,7 @@ local function make_lsp_sections()
                 -- The outer section.
                 return make_section(0, '\n', {
                   'This server accepts configuration via the `settings` key.';
-                  '<details><summary>'..(default_settings.title or "Available settings:")..'</summary>';
+                  '<details><summary>Available settings:</summary>';
                   '';
                   -- The list of properties.
                   make_section(0, '\n\n', sorted_map_table(default_settings.properties, function(k, v)
