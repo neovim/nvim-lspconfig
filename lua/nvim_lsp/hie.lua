@@ -12,7 +12,7 @@ skeleton.hie = {
   };
 
   docs = {
-    vspackage = util.format_vspackage_url("alanz.vscode-hie-server");
+    vscode = "alanz.vscode-hie-server";
     description = [[
 https://github.com/haskell/haskell-ide-engine
 

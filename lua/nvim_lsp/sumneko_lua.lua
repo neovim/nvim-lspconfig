@@ -85,7 +85,7 @@ skeleton[name] = {
 		installer.configure(config)
 	end;
 	docs = {
-		vspackage = util.format_vspackage_url("sumneko.lua");
+		vscode = "sumneko.lua";
 		description = [[
 https://github.com/sumneko/lua-language-server
 

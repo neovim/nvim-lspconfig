@@ -129,6 +129,9 @@ local function make_lsp_sections()
         end;
         function()
           local package_json_name = util.path.join(tempdir, template_name..'.package.json');
+          if docs.vscode then
+            docs.vspackage = util.format_vspackage_url(docs.vscode)
+          end
           if docs.vspackage then
             local script = [[
             curl -L -o {{vspackage_name}} {{vspackage_url}}
