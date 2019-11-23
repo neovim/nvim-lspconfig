@@ -415,6 +415,12 @@ function M.sh(script, cwd)
 	stdin:shutdown()
 end
 
+function M.format_vspackage_url(extension_name)
+  local org, package = unpack(vim.split(extension_name, ".", true))
+  assert(org and package)
+  return string.format("https://marketplace.visualstudio.com/_apis/public/gallery/publishers/%s/vsextensions/%s/latest/vspackage", org, package)
+end
+
 
 function M.utf8_config(config)
   config.capabilities = config.capabilities or lsp.protocol.make_client_capabilities()
