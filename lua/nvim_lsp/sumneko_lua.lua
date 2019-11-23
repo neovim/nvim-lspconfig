@@ -78,12 +78,12 @@ skeleton[name] = {
 		root_dir = function(fname)
 			return util.find_git_ancestor(fname) or vim.loop.os_homedir()
 		end;
-		on_new_config = function(config)
-			installer.configure(config)
-		end;
 		log_level = vim.lsp.protocol.MessageType.Warning;
 		settings = {};
 	};
+	on_new_config = function(config)
+		installer.configure(config)
+	end;
 	docs = {
 		vspackage = "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/sumneko/vsextensions/lua/latest/vspackage";
 		description = [[
@@ -93,7 +93,10 @@ Lua language server. **By default, this doesn't have a `cmd` set.** This is
 because it doesn't provide a global binary. We provide an installer for Linux
 using `:LspInstall`.  If you wish to install it yourself, [here is a
 guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
-]]
+]];
+    default_config = {
+      root_dir = [[root_pattern(".git") or os_homedir]];
+    };
 	};
 }
 
