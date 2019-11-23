@@ -404,7 +404,7 @@ https://github.com/palantir/python-language-server
 `python-language-server`, a language server for Python.
     
 This server accepts configuration via the `settings` key.
-<details><summary>Python Language Server Configuration</summary>
+<details><summary>Available settings:</summary>
 
 - **`pyls.configurationSources`**: `array`
 
@@ -699,7 +699,7 @@ cmd = {"rustup", "run", "nightly", "rls"}
 ```
     
 This server accepts configuration via the `settings` key.
-<details><summary>Rust configuration</summary>
+<details><summary>Available settings:</summary>
 
 - **`rust-client.channel`**: `enum { "stable", "beta", "nightly" }`
 
@@ -925,7 +925,7 @@ gem install solargraph
 ```
     
 This server accepts configuration via the `settings` key.
-<details><summary>Solargraph settings for Ruby</summary>
+<details><summary>Available settings:</summary>
 
 - **`solargraph.autoformat`**: `enum { true, false }`
 
@@ -1046,7 +1046,7 @@ guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
 
 Can be installed in neovim with `:LspInstall sumneko_lua`
 This server accepts configuration via the `settings` key.
-<details><summary>Lua</summary>
+<details><summary>Available settings:</summary>
 
 - **`Lua.completion.callSnippet`**: `enum { "Disable", "Both", "Replace" }`
 
