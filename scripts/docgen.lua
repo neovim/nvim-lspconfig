@@ -115,7 +115,7 @@ local function make_lsp_sections()
     })
 
     if docs then
-      local tempdir = uv.fs_mkdtemp("/tmp/nvim-lsp.XXXXXX")
+      local tempdir = os.getenv("DOCGEN_TEMPDIR") or uv.fs_mkdtemp("/tmp/nvim-lsp.XXXXXX")
       local preamble_parts = make_parts {
         function()
           if docs.description and #docs.description > 0 then
@@ -203,7 +203,9 @@ local function make_lsp_sections()
           end
         end
       }
-      os.execute("rm -rf "..tempdir)
+      if not os.getenv("DOCGEN_TEMPDIR") then
+        os.execute("rm -rf "..tempdir)
+      end
       -- Insert a newline after the preamble if it exists.
       if #preamble_parts > 0 then table.insert(preamble_parts, '') end
       params.preamble = table.concat(preamble_parts, '\n')
