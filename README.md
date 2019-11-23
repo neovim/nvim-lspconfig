@@ -1125,8 +1125,7 @@ nvim_lsp#setup("sumneko_lua", {config})
   Default Values:
     filetypes = { "lua" }
     log_level = 2
-    on_new_config = <function 1>
-    root_dir = <function 1>
+    root_dir = root_pattern(".git") or os_homedir
     settings = {}
 ```
 
