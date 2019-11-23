@@ -43,6 +43,7 @@ Implemented language servers:
 - [pyls](#pyls)
 - [rls](#rls)
 - [solargraph](#solargraph)
+- [sumneko_lua](#sumneko_lua)
 - [texlab](#texlab)
 - [tsserver](#tsserver)
 
@@ -1031,6 +1032,21 @@ nvim_lsp#setup("solargraph", {config})
     filetypes = { "ruby" }
     log_level = 2
     root_dir = root_pattern("Gemfile", ".git")
+    settings = {}
+```
+
+## sumneko_lua
+
+
+```lua
+nvim_lsp.sumneko_lua.setup({config})
+nvim_lsp#setup("sumneko_lua", {config})
+
+  Default Values:
+    filetypes = { "lua" }
+    log_level = 2
+    on_new_config = <function 1>
+    root_dir = <function 1>
     settings = {}
 ```
 
