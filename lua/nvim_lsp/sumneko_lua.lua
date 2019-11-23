@@ -74,7 +74,6 @@ local installer = make_installer()
 
 skeleton[name] = {
 	default_config = {
-		-- cmd = {'/home/ashkan/works/3rd/lua-language-server/run.sh'};
 		filetypes = {'lua'};
 		root_dir = function(fname)
 			return util.find_git_ancestor(fname) or vim.loop.os_homedir()
