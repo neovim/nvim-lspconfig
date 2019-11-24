@@ -39,7 +39,7 @@ function skeleton.__newindex(t, template_name, template)
   local function add_callbacks(config)
     config.callbacks["window/logMessage"] = function(err, method, params, client_id)
       if params and params.type <= config.log_level then
-        lsp.builtin_callbacks[method](err, method, params, client_id)
+        lsp.default_callbacks[method](err, method, params, client_id)
       end
     end
 
