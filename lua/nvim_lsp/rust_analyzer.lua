@@ -11,6 +11,7 @@ skeleton.rust_analyzer = {
     settings = {};
   };
   docs = {
+    package_json = "https://github.com/rust-analyzer/rust-analyzer/raw/master/editors/code/package.json";
     description = [[
 https://github.com/rust-analyzer/rust-analyzer
 
