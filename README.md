@@ -787,6 +787,76 @@ https://github.com/hansec/fortran-language-server
 
 Fortran Language Server for the Language Server Protocol
     
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`fortran-ls.autocompletePrefix`**: `boolean`
+
+  Filter autocomplete suggestions with variable prefix
+
+- **`fortran-ls.displayVerWarning`**: `boolean`
+
+  Default: `true`
+  
+  Provides notifications when the underlying language server is out of date.
+
+- **`fortran-ls.enableCodeActions`**: `boolean`
+
+  Enable experimental code actions (requires v1.7.0+).
+
+- **`fortran-ls.executablePath`**: `string`
+
+  Default: `"fortls"`
+  
+  Path to the Fortran language server (fortls).
+
+- **`fortran-ls.hoverSignature`**: `boolean`
+
+  Show signature information in hover for argument (also enables 'variableHover').
+
+- **`fortran-ls.includeSymbolMem`**: `boolean`
+
+  Default: `true`
+  
+  Include type members in document outline (also used for 'Go to Symbol in File')
+
+- **`fortran-ls.incrementalSync`**: `boolean`
+
+  Default: `true`
+  
+  Use incremental synchronization for file changes.
+
+- **`fortran-ls.lowercaseIntrinsics`**: `boolean`
+
+  Use lowercase for intrinsics and keywords in autocomplete requests.
+
+- **`fortran-ls.maxCommentLineLength`**: `number`
+
+  Default: `-1`
+  
+  Maximum comment line length (requires v1.8.0+).
+
+- **`fortran-ls.maxLineLength`**: `number`
+
+  Default: `-1`
+  
+  Maximum line length (requires v1.8.0+).
+
+- **`fortran-ls.notifyInit`**: `boolean`
+
+  Notify when workspace initialization is complete (requires v1.7.0+).
+
+- **`fortran-ls.useSignatureHelp`**: `boolean`
+
+  Default: `true`
+  
+  Use signature help instead of snippets when available.
+
+- **`fortran-ls.variableHover`**: `boolean`
+
+  Show hover information for variables.
+
+</details>
 
 ```lua
 nvim_lsp.fortls.setup({config})
@@ -840,6 +910,98 @@ init_options = {
 }
 ```
         
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`languageServerHaskell.completionSnippetsOn`**: `boolean`
+
+  Default: `true`
+  
+  Show snippets with type information when using code completion
+
+- **`languageServerHaskell.diagnosticsOnChange`**: `boolean`
+
+  Default: `true`
+  
+  Compute diagnostics continuously as you type. Turn off to only generate diagnostics on file save.
+
+- **`languageServerHaskell.enableHIE`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable HIE (useful for multi-root workspaces).
+
+- **`languageServerHaskell.formatOnImportOn`**: `boolean`
+
+  Default: `true`
+  
+  When adding an import, use the formatter on the result
+
+- **`languageServerHaskell.formattingProvider`**: `enum { "brittany", "floskell", "none" }`
+
+  Default: `"brittany"`
+  
+  The tool to use for formatting requests.
+
+- **`languageServerHaskell.hieExecutablePath`**: `string`
+
+  Default: `""`
+  
+  Set the path to your hie executable, if it's not already on your $PATH. Works with ~, ${HOME} and ${workspaceFolder}.
+
+- **`languageServerHaskell.hlintOn`**: `boolean`
+
+  Default: `true`
+  
+  Get suggestions from hlint
+
+- **`languageServerHaskell.liquidOn`**: `boolean`
+
+  Get diagnostics from liquid haskell
+
+- **`languageServerHaskell.logFile`**: `string`
+
+  Default: `""`
+  
+  If set, redirects the logs to a file.
+
+- **`languageServerHaskell.maxNumberOfProblems`**: `number`
+
+  Default: `100`
+  
+  Controls the maximum number of problems produced by the server.
+
+- **`languageServerHaskell.showTypeForSelection.command.location`**: `enum { "dropdown", "channel" }`
+
+  Default: `"dropdown"`
+  
+  Determines where the type information for selected text will be shown when the `showType` command is triggered (distinct from automatically showing this information when hover is triggered).
+  dropdown: in a dropdown
+  channel: will be revealed in an output channel
+
+- **`languageServerHaskell.showTypeForSelection.onHover`**: `boolean`
+
+  Default: `true`
+  
+  If true, when an expression is selected, the hover tooltip will attempt to display the type of the entire expression - rather than just the term under the cursor.
+
+- **`languageServerHaskell.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VSCode and the languageServerHaskell service.
+
+- **`languageServerHaskell.useCustomHieWrapper`**: `boolean`
+
+  Use your own custom wrapper for hie (remember to specify the path!). This will take precedence over useHieWrapper and hieExecutablePath.
+
+- **`languageServerHaskell.useCustomHieWrapperPath`**: `string`
+
+  Default: `""`
+  
+  Specify the full path to your own custom hie wrapper (e.g. ${HOME}/.hie-wrapper.sh). Works with ~, ${HOME} and ${workspaceFolder}.
+
+</details>
 
 ```lua
 nvim_lsp.hie.setup({config})
@@ -859,6 +1021,132 @@ https://github.com/leanprover/lean-client-js/tree/master/lean-language-server
 
 Lean language server.
     
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`lean.executablePath`**: `string`
+
+  Default: `"lean"`
+  
+  Path to the Lean executable to use.
+
+- **`lean.extraOptions`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{description = "a single command-line argument",type = "string"}`
+  
+  Extra command-line options for the Lean server.
+
+- **`lean.infoViewAllErrorsOnLine`**: `boolean`
+
+  Info view: show all errors on the current line, instead of just the ones on the right of the cursor.
+
+- **`lean.infoViewAutoOpen`**: `boolean`
+
+  Default: `true`
+  
+  Info view: open info view when Lean extension is activated.
+
+- **`lean.infoViewAutoOpenShowGoal`**: `boolean`
+
+  Default: `true`
+  
+  Info view: auto open shows goal and messages for the current line (instead of all messages for the whole file)
+
+- **`lean.infoViewFilterIndex`**: `number`
+
+  Default: `-1`
+  
+  Index of the filter applied to the tactic state (in the array infoViewTacticStateFilters). An index of -1 means no filter is applied.
+
+- **`lean.infoViewStyle`**: `string`
+
+  Default: `""`
+  
+  Add an additional CSS snippet to the info view.
+
+- **`lean.infoViewTacticStateFilters`**: `array`
+
+  Default: `{ {flags = "",match = false,regex = "^_"}, {flags = "",match = true,name = "goals only",regex = "^(⊢|\\d+ goals|case|$)"} }`
+  
+  Array items: `{description = "an object with required properties 'regex': string, 'match': boolean, and 'flags': string, and optional property 'name': string",properties = {flags = {description = "additional flags passed to the RegExp constructor, e.g. 'i' for ignore case",type = "string"},match = {description = "whether tactic state lines matching the value of 'regex' should be included (true) or excluded (false)",type = "boolean"},name = {description = "name displayed in the dropdown",type = "string"},regex = {description = "a properly-escaped regex string, e.g. '^_' matches any string beginning with an underscore",type = "string"}},required = { "regex", "match", "flags" },type = "object"}`
+  
+  An array of objects containing regular expression strings that can be used to filter (positively or negatively) the tactic state in the info view. Set to an empty array '[]' to hide the filter select dropdown.
+   
+   Each object must contain the following keys: 'regex': string, 'match': boolean, 'flags': string.
+   'regex' is a properly-escaped regex string,
+   'match' = true (false) means blocks in the tactic state matching 'regex' will be included (excluded) in the info view, 
+   'flags' are additional flags passed to the JavaScript RegExp constructor.
+   The 'name' key is optional and may contain a string that is displayed in the dropdown instead of the full regex details.
+
+- **`lean.input.customTranslations`**: `object`
+
+  Default: `{}`
+  
+  Array items: `{description = "Unicode character to translate to",type = "string"}`
+  
+  Add additional input Unicode translations. Example: `{"foo": "☺"}` will correct `\foo` to `☺`.
+
+- **`lean.input.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable Lean input mode.
+
+- **`lean.input.languages`**: `array`
+
+  Default: `{ "lean" }`
+  
+  Array items: `{description = "the name of a language, e.g. 'lean', 'markdown'",type = "string"}`
+  
+  Enable Lean Unicode input in other file types.
+
+- **`lean.input.leader`**: `string`
+
+  Default: `"\\"`
+  
+  Leader key to trigger input mode.
+
+- **`lean.leanpkgPath`**: `string`
+
+  Default: `"leanpkg"`
+  
+  Path to the leanpkg executable to use.
+
+- **`lean.memoryLimit`**: `number`
+
+  Default: `4096`
+  
+  Set a memory limit (in megabytes) for the Lean server.
+
+- **`lean.progressMessages`**: `boolean`
+
+  Show error messages where Lean is still checking.
+
+- **`lean.roiModeDefault`**: `string`
+
+  Default: `"visible"`
+  
+  Set the default region of interest mode (nothing, visible, lines, linesAndAbove, open, or project) for the Lean extension.
+
+- **`lean.timeLimit`**: `number`
+
+  Default: `100000`
+  
+  Set a deterministic timeout (it is approximately the maximum number of memory allocations in thousands) for the Lean server.
+
+- **`lean.typeInStatusBar`**: `boolean`
+
+  Default: `true`
+  
+  Show the type of term under the cursor in the status bar.
+
+- **`lean.typesInCompletionList`**: `boolean`
+
+  Display types of all items in the list of completions. By default, only the type of the highlighted item is shown.
+
+</details>
 
 ```lua
 nvim_lsp.leanls.setup({config})
@@ -1173,6 +1461,207 @@ If you want to use rls for a particular build, eg nightly, set cmd as follows:
 cmd = {"rustup", "run", "nightly", "rls"}
 ```
     
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`rust-client.channel`**: `enum { "stable", "beta", "nightly" }`
+
+  Default: `vim.NIL`
+  
+  Rust channel to invoke rustup with. Ignored if rustup is disabled. By default, uses the same channel as your currently open project.
+
+- **`rust-client.disableRustup`**: `boolean`
+
+  Disable usage of rustup and use rustc/rls from PATH.
+
+- **`rust-client.enableMultiProjectSetup`**: `boolean`
+
+  Allow multiple projects in the same folder, along with remove the constraint that the cargo.toml must be located at the root. (Experimental: might not work for certain setups)
+
+- **`rust-client.logToFile`**: `boolean`
+
+  When set to true, RLS stderr is logged to a file at workspace root level. Requires reloading extension after change.
+
+- **`rust-client.nestedMultiRootConfigInOutermost`**: `boolean`
+
+  Default: `true`
+  
+  If one root workspace folder is nested in another root folder, look for the Rust config in the outermost root.
+
+- **`rust-client.revealOutputChannelOn`**: `enum { "info", "warn", "error", "never" }`
+
+  Default: `"never"`
+  
+  Specifies message severity on which the output channel will be revealed. Requires reloading extension after change.
+
+- **`rust-client.rlsPath`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  Override RLS path. Only required for RLS developers. If you set this and use rustup, you should also set `rust-client.channel` to ensure your RLS sees the right libraries. If you don't use rustup, make sure to set `rust-client.disableRustup`.
+
+- **`rust-client.rustupPath`**: `string`
+
+  Default: `"rustup"`
+  
+  Path to rustup executable. Ignored if rustup is disabled.
+
+- **`rust-client.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the Rust language server.
+
+- **`rust-client.updateOnStartup`**: `boolean`
+
+  Update the RLS whenever the extension starts up.
+
+- **`rust-client.useWSL`**: `boolean`
+
+  When set to true, RLS is started within Windows Subsystem for Linux.
+
+- **`rust.all_features`**: `boolean`
+
+  Enable all Cargo features.
+
+- **`rust.all_targets`**: `boolean`
+
+  Default: `true`
+  
+  Checks the project as if you were running cargo check --all-targets (I.e., check all targets and integration tests too).
+
+- **`rust.build_bin`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  Specify to run analysis as if running `cargo check --bin <name>`. Use `null` to auto-detect. (unstable)
+
+- **`rust.build_command`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  EXPERIMENTAL (requires `unstable_features`)
+  If set, executes a given program responsible for rebuilding save-analysis to be loaded by the RLS. The program given should output a list of resulting .json files on stdout. 
+  Implies `rust.build_on_save`: true.
+
+- **`rust.build_lib`**: `boolean|null`
+
+  Default: `vim.NIL`
+  
+  Specify to run analysis as if running `cargo check --lib`. Use `null` to auto-detect. (unstable)
+
+- **`rust.build_on_save`**: `boolean`
+
+  Only index the project when a file is saved and not on change.
+
+- **`rust.cfg_test`**: `boolean`
+
+  Build cfg(test) code. (unstable)
+
+- **`rust.clear_env_rust_log`**: `boolean`
+
+  Default: `true`
+  
+  Clear the RUST_LOG environment variable before running rustc or cargo.
+
+- **`rust.clippy_preference`**: `enum { "on", "opt-in", "off" }`
+
+  Default: `"opt-in"`
+  
+  Controls eagerness of clippy diagnostics when available. Valid values are (case-insensitive):
+   - "off": Disable clippy lints.
+   - "on": Display the same diagnostics as command-line clippy invoked with no arguments (`clippy::all` unless overridden).
+   - "opt-in": Only display the lints explicitly enabled in the code. Start by adding `#![warn(clippy::all)]` to the root of each crate you want linted.
+  You need to install clippy via rustup if you haven't already.
+
+- **`rust.crate_blacklist`**: `array|null`
+
+  Default: `{ "cocoa", "gleam", "glium", "idna", "libc", "openssl", "rustc_serialize", "serde", "serde_json", "typenum", "unicode_normalization", "unicode_segmentation", "winapi" }`
+  
+  Overrides the default list of packages for which analysis is skipped.
+  Available since RLS 1.38
+
+- **`rust.features`**: `array`
+
+  Default: `{}`
+  
+  A list of Cargo features to enable.
+
+- **`rust.full_docs`**: `boolean|null`
+
+  Default: `vim.NIL`
+  
+  Instructs cargo to enable full documentation extraction during save-analysis while building the crate.
+
+- **`rust.jobs`**: `number|null`
+
+  Default: `vim.NIL`
+  
+  Number of Cargo jobs to be run in parallel.
+
+- **`rust.no_default_features`**: `boolean`
+
+  Do not enable default Cargo features.
+
+- **`rust.racer_completion`**: `boolean`
+
+  Default: `true`
+  
+  Enables code completion using racer.
+
+- **`rust.rustflags`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  Flags added to RUSTFLAGS.
+
+- **`rust.rustfmt_path`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  When specified, RLS will use the Rustfmt pointed at the path instead of the bundled one
+
+- **`rust.show_hover_context`**: `boolean`
+
+  Default: `true`
+  
+  Show additional context in hover tooltips when available. This is often the type local variable declaration.
+
+- **`rust.show_warnings`**: `boolean`
+
+  Default: `true`
+  
+  Show warnings.
+
+- **`rust.sysroot`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  --sysroot
+
+- **`rust.target`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  --target
+
+- **`rust.target_dir`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  When specified, it places the generated analysis files at the specified target directory. By default it is placed target/rls directory.
+
+- **`rust.unstable_features`**: `boolean`
+
+  Enable unstable features.
+
+- **`rust.wait_to_build`**: `number`
+
+  Default: `1500`
+  
+  Time in milliseconds between receiving a change notification and starting build.
+
+</details>
 
 ```lua
 nvim_lsp.rls.setup({config})
@@ -1356,6 +1845,104 @@ You can install solargraph via gem install.
 gem install solargraph
 ```
     
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`solargraph.autoformat`**: `enum { true, false }`
+
+  Enable automatic formatting while typing (WARNING: experimental)
+
+- **`solargraph.bundlerPath`**: `string`
+
+  Default: `"bundle"`
+  
+  Path to the bundle executable, defaults to 'bundle'
+
+- **`solargraph.checkGemVersion`**: `enum { true, false }`
+
+  Default: `true`
+  
+  Automatically check if a new version of the Solargraph gem is available.
+
+- **`solargraph.commandPath`**: `string`
+
+  Default: `"solargraph"`
+  
+  Path to the solargraph command.  Set this to an absolute path to select from multiple installed Ruby versions.
+
+- **`solargraph.completion`**: `enum { true, false }`
+
+  Default: `true`
+  
+  Enable completion
+
+- **`solargraph.definitions`**: `enum { true, false }`
+
+  Default: `true`
+  
+  Enable definitions (go to, etc.)
+
+- **`solargraph.diagnostics`**: `enum { true, false }`
+
+  Enable diagnostics
+
+- **`solargraph.externalServer`**: `object`
+
+  Default: `{host = "localhost",port = 7658}`
+  
+  The host and port to use for external transports. (Ignored for stdio and socket transports.)
+
+- **`solargraph.folding`**: `boolean`
+
+  Default: `true`
+  
+  Enable folding ranges
+
+- **`solargraph.formatting`**: `enum { true, false }`
+
+  Enable document formatting
+
+- **`solargraph.hover`**: `enum { true, false }`
+
+  Default: `true`
+  
+  Enable hover
+
+- **`solargraph.logLevel`**: `enum { "warn", "info", "debug" }`
+
+  Default: `"warn"`
+  
+  Level of debug info to log. `warn` is least and `debug` is most.
+
+- **`solargraph.references`**: `enum { true, false }`
+
+  Default: `true`
+  
+  Enable finding references
+
+- **`solargraph.rename`**: `enum { true, false }`
+
+  Default: `true`
+  
+  Enable symbol renaming
+
+- **`solargraph.symbols`**: `enum { true, false }`
+
+  Default: `true`
+  
+  Enable symbols
+
+- **`solargraph.transport`**: `enum { "socket", "stdio", "external" }`
+
+  Default: `"socket"`
+  
+  The type of transport to use.
+
+- **`solargraph.useBundler`**: `boolean`
+
+  Use `bundle exec` to run solargraph. (If this is true, the solargraph.commandPath setting is ignored.)
+
+</details>
 
 ```lua
 nvim_lsp.solargraph.setup({config})
@@ -1379,6 +1966,78 @@ using `:LspInstall`.  If you wish to install it yourself, [here is a
 guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
 
 Can be installed in neovim with `:LspInstall sumneko_lua`
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`Lua.completion.callSnippet`**: `enum { "Disable", "Both", "Replace" }`
+
+  Default: `"Disable"`
+
+- **`Lua.completion.enable`**: `boolean`
+
+  Default: `true`
+
+- **`Lua.completion.keywordSnippet`**: `enum { "Disable", "Both", "Replace" }`
+
+  Default: `"Replace"`
+
+- **`Lua.diagnostics.disable`**: `array`
+
+  Array items: `{type = "string"}`
+
+- **`Lua.diagnostics.enable`**: `boolean`
+
+  Default: `true`
+
+- **`Lua.diagnostics.globals`**: `array`
+
+  Array items: `{type = "string"}`
+
+- **`Lua.diagnostics.severity`**: `object`
+
+  
+
+- **`Lua.runtime.path`**: `array`
+
+  Default: `{ "?.lua", "?/init.lua", "?/?.lua" }`
+  
+  Array items: `{type = "string"}`
+
+- **`Lua.runtime.version`**: `enum { "Lua 5.1", "Lua 5.2", "Lua 5.3", "Lua 5.4", "LuaJIT" }`
+
+  Default: `"Lua 5.3"`
+
+- **`Lua.workspace.ignoreDir`**: `array`
+
+  Default: `{ ".vscode" }`
+  
+  Array items: `{type = "string"}`
+
+- **`Lua.workspace.ignoreSubmodules`**: `boolean`
+
+  Default: `true`
+
+- **`Lua.workspace.library`**: `object`
+
+  
+
+- **`Lua.workspace.maxPreload`**: `integer`
+
+  Default: `300`
+
+- **`Lua.workspace.preloadFileSize`**: `integer`
+
+  Default: `100`
+
+- **`Lua.workspace.useGitIgnore`**: `boolean`
+
+  Default: `true`
+
+- **`Lua.zzzzzz.cat`**: `boolean`
+
+  
+
+</details>
 
 ```lua
 nvim_lsp.sumneko_lua.setup({config})
