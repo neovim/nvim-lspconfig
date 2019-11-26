@@ -38,6 +38,7 @@ Implemented language servers:
 - [cssls](#cssls)
 - [elmls](#elmls)
 - [flow](#flow)
+- [fortls](#fortls)
 - [gopls](#gopls)
 - [hie](#hie)
 - [pyls](#pyls)
@@ -344,6 +345,27 @@ nvim_lsp#setup("flow", {config})
     log_level = 2
     root_dir = root_pattern(".flowconfig")
     settings = {}
+```
+
+## fortls
+
+https://github.com/hansec/fortran-language-server
+
+Fortran Language Server for the Language Server Protocol
+    
+
+```lua
+nvim_lsp.fortls.setup({config})
+nvim_lsp#setup("fortls", {config})
+
+  Default Values:
+    cmd = { "fortls" }
+    filetypes = { "fortran" }
+    log_level = 2
+    root_dir = root_pattern(".fortls")
+    settings = {
+      nthreads = 1
+    }
 ```
 
 ## gopls
