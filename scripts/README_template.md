@@ -34,13 +34,6 @@ them are good references.
 Implemented language servers:
 {{implemented_servers_list}}
 
-Planned servers to implement (by me, but contributions welcome anyway):
-- [lua-language-server](https://github.com/sumneko/lua-language-server)
-- [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)
-
-In progress:
-- ...
-
 ## Install
 
 `Plug 'neovim/nvim-lsp'`
