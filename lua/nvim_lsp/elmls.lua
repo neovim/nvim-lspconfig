@@ -53,6 +53,7 @@ skeleton[server_name] = {
     end
   end;
   docs = {
+    vscode = "Elmtooling.elm-ls-vscode";
     description = [[
 https://github.com/elm-tooling/elm-language-server#installation
 
