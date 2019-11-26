@@ -13,10 +13,11 @@ skeleton.leanls = {
   -- on_new_config = function(new_config) end;
   -- on_attach = function(client, bufnr) end;
   docs = {
+    vscode = "jroesch.lean";
     description = [[
-    https://github.com/leanprover/lean-client-js/tree/master/lean-language-server
+https://github.com/leanprover/lean-client-js/tree/master/lean-language-server
 
-    Lean language server.
+Lean language server.
     ]];
     default_config = {
       root_dir = [[util.root_pattern(".git")]];

@@ -11,6 +11,7 @@ skeleton.solargraph = {
     settings = {};
   };
   docs = {
+    vscode = "castwide.solargraph";
     package_json = "https://raw.githubusercontent.com/castwide/vscode-solargraph/master/package.json";
     description = [[
 https://solargraph.org/

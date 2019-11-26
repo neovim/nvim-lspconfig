@@ -14,6 +14,7 @@ skeleton.ccls = {
   -- on_new_config = function(new_config) end;
   -- on_attach = function(client, bufnr) end;
   docs = {
+    vscode = "ccls-project.ccls";
     description = [[
 https://github.com/MaskRay/ccls/wiki
 
