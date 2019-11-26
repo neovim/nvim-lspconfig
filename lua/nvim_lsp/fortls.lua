@@ -15,6 +15,7 @@ skeleton.fortls = {
   -- on_new_config = function(new_config) end;
   -- on_attach = function(client, bufnr) end;
   docs = {
+    vscode = 'hansec.fortran-ls';
     description = [[
 https://github.com/hansec/fortran-language-server
 
