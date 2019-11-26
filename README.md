@@ -43,6 +43,7 @@ Implemented language servers:
 - [pyls](#pyls)
 - [rls](#rls)
 - [solargraph](#solargraph)
+- [sumneko_lua](#sumneko_lua)
 - [texlab](#texlab)
 - [tsserver](#tsserver)
 
@@ -383,6 +384,98 @@ init_options = {
 }
 ```
         
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`languageServerHaskell.completionSnippetsOn`**: `boolean`
+
+  Default: `true`
+  
+  Show snippets with type information when using code completion
+
+- **`languageServerHaskell.diagnosticsOnChange`**: `boolean`
+
+  Default: `true`
+  
+  Compute diagnostics continuously as you type. Turn off to only generate diagnostics on file save.
+
+- **`languageServerHaskell.enableHIE`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable HIE (useful for multi-root workspaces).
+
+- **`languageServerHaskell.formatOnImportOn`**: `boolean`
+
+  Default: `true`
+  
+  When adding an import, use the formatter on the result
+
+- **`languageServerHaskell.formattingProvider`**: `enum { "brittany", "floskell", "none" }`
+
+  Default: `"brittany"`
+  
+  The tool to use for formatting requests.
+
+- **`languageServerHaskell.hieExecutablePath`**: `string`
+
+  Default: `""`
+  
+  Set the path to your hie executable, if it's not already on your $PATH. Works with ~, ${HOME} and ${workspaceFolder}.
+
+- **`languageServerHaskell.hlintOn`**: `boolean`
+
+  Default: `true`
+  
+  Get suggestions from hlint
+
+- **`languageServerHaskell.liquidOn`**: `boolean`
+
+  Get diagnostics from liquid haskell
+
+- **`languageServerHaskell.logFile`**: `string`
+
+  Default: `""`
+  
+  If set, redirects the logs to a file.
+
+- **`languageServerHaskell.maxNumberOfProblems`**: `number`
+
+  Default: `100`
+  
+  Controls the maximum number of problems produced by the server.
+
+- **`languageServerHaskell.showTypeForSelection.command.location`**: `enum { "dropdown", "channel" }`
+
+  Default: `"dropdown"`
+  
+  Determines where the type information for selected text will be shown when the `showType` command is triggered (distinct from automatically showing this information when hover is triggered).
+  dropdown: in a dropdown
+  channel: will be revealed in an output channel
+
+- **`languageServerHaskell.showTypeForSelection.onHover`**: `boolean`
+
+  Default: `true`
+  
+  If true, when an expression is selected, the hover tooltip will attempt to display the type of the entire expression - rather than just the term under the cursor.
+
+- **`languageServerHaskell.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VSCode and the languageServerHaskell service.
+
+- **`languageServerHaskell.useCustomHieWrapper`**: `boolean`
+
+  Use your own custom wrapper for hie (remember to specify the path!). This will take precedence over useHieWrapper and hieExecutablePath.
+
+- **`languageServerHaskell.useCustomHieWrapperPath`**: `string`
+
+  Default: `""`
+  
+  Specify the full path to your own custom hie wrapper (e.g. ${HOME}/.hie-wrapper.sh). Works with ~, ${HOME} and ${workspaceFolder}.
+
+</details>
 
 ```lua
 nvim_lsp.hie.setup({config})
@@ -403,7 +496,7 @@ https://github.com/palantir/python-language-server
 `python-language-server`, a language server for Python.
     
 This server accepts configuration via the `settings` key.
-<details><summary>Python Language Server Configuration</summary>
+<details><summary>Available settings:</summary>
 
 - **`pyls.configurationSources`**: `array`
 
@@ -698,7 +791,7 @@ cmd = {"rustup", "run", "nightly", "rls"}
 ```
     
 This server accepts configuration via the `settings` key.
-<details><summary>Rust configuration</summary>
+<details><summary>Available settings:</summary>
 
 - **`rust-client.channel`**: `enum { "stable", "beta", "nightly" }`
 
@@ -891,9 +984,9 @@ This server accepts configuration via the `settings` key.
 
   Enable unstable features.
 
-- **`rust.wait_to_build`**: `number|null`
+- **`rust.wait_to_build`**: `number`
 
-  Default: `vim.NIL`
+  Default: `1500`
   
   Time in milliseconds between receiving a change notification and starting build.
 
@@ -924,7 +1017,7 @@ gem install solargraph
 ```
     
 This server accepts configuration via the `settings` key.
-<details><summary>Solargraph settings for Ruby</summary>
+<details><summary>Available settings:</summary>
 
 - **`solargraph.autoformat`**: `enum { true, false }`
 
@@ -1031,6 +1124,100 @@ nvim_lsp#setup("solargraph", {config})
     filetypes = { "ruby" }
     log_level = 2
     root_dir = root_pattern("Gemfile", ".git")
+    settings = {}
+```
+
+## sumneko_lua
+
+https://github.com/sumneko/lua-language-server
+
+Lua language server. **By default, this doesn't have a `cmd` set.** This is
+because it doesn't provide a global binary. We provide an installer for Linux
+using `:LspInstall`.  If you wish to install it yourself, [here is a
+guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
+
+Can be installed in neovim with `:LspInstall sumneko_lua`
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`Lua.completion.callSnippet`**: `enum { "Disable", "Both", "Replace" }`
+
+  Default: `"Disable"`
+
+- **`Lua.completion.enable`**: `boolean`
+
+  Default: `true`
+
+- **`Lua.completion.keywordSnippet`**: `enum { "Disable", "Both", "Replace" }`
+
+  Default: `"Replace"`
+
+- **`Lua.diagnostics.disable`**: `array`
+
+  Array items: `{type = "string"}`
+
+- **`Lua.diagnostics.enable`**: `boolean`
+
+  Default: `true`
+
+- **`Lua.diagnostics.globals`**: `array`
+
+  Array items: `{type = "string"}`
+
+- **`Lua.diagnostics.severity`**: `object`
+
+  
+
+- **`Lua.runtime.path`**: `array`
+
+  Default: `{ "?.lua", "?/init.lua", "?/?.lua" }`
+  
+  Array items: `{type = "string"}`
+
+- **`Lua.runtime.version`**: `enum { "Lua 5.1", "Lua 5.2", "Lua 5.3", "Lua 5.4", "LuaJIT" }`
+
+  Default: `"Lua 5.3"`
+
+- **`Lua.workspace.ignoreDir`**: `array`
+
+  Default: `{ ".vscode" }`
+  
+  Array items: `{type = "string"}`
+
+- **`Lua.workspace.ignoreSubmodules`**: `boolean`
+
+  Default: `true`
+
+- **`Lua.workspace.library`**: `object`
+
+  
+
+- **`Lua.workspace.maxPreload`**: `integer`
+
+  Default: `300`
+
+- **`Lua.workspace.preloadFileSize`**: `integer`
+
+  Default: `100`
+
+- **`Lua.workspace.useGitIgnore`**: `boolean`
+
+  Default: `true`
+
+- **`Lua.zzzzzz.cat`**: `boolean`
+
+  
+
+</details>
+
+```lua
+nvim_lsp.sumneko_lua.setup({config})
+nvim_lsp#setup("sumneko_lua", {config})
+
+  Default Values:
+    filetypes = { "lua" }
+    log_level = 2
+    root_dir = root_pattern(".git") or os_homedir
     settings = {}
 ```
 

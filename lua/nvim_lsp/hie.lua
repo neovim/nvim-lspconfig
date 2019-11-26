@@ -12,6 +12,7 @@ skeleton.hie = {
   };
 
   docs = {
+    vscode = "alanz.vscode-hie-server";
     description = [[
 https://github.com/haskell/haskell-ide-engine
 
