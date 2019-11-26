@@ -44,6 +44,7 @@ Implemented language servers:
 - [leanls](#leanls)
 - [pyls](#pyls)
 - [rls](#rls)
+- [rust_analyzer](#rust_analyzer)
 - [solargraph](#solargraph)
 - [sumneko_lua](#sumneko_lua)
 - [texlab](#texlab)
@@ -698,6 +699,40 @@ npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
 ```
 
 Can be installed in neovim with `:LspInstall elmls`
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`elmLS.elmAnalyseTrigger`**: `enum { "change", "save", "never" }`
+
+  Default: `"change"`
+  
+  When do you want the extension to run elm-analyse? Might need a restart to take effect.
+
+- **`elmLS.elmFormatPath`**: `string`
+
+  Default: `""`
+  
+  The path to your elm-format executable. Should be empty by default, in that case it will assume the name and try to first get it from a local npm installation or a global one. If you set it manually it will not try to load from the npm folder.
+
+- **`elmLS.elmPath`**: `string`
+
+  Default: `""`
+  
+  The path to your elm executable. Should be empty by default, in that case it will assume the name and try to first get it from a local npm installation or a global one. If you set it manually it will not try to load from the npm folder.
+
+- **`elmLS.elmTestPath`**: `string`
+
+  Default: `""`
+  
+  The path to your elm-test executable. Should be empty by default, in that case it will assume the name and try to first get it from a local npm installation or a global one. If you set it manually it will not try to load from the npm folder.
+
+- **`elmLS.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the language server.
+
+</details>
 
 ```lua
 nvim_lsp.elmls.setup({config})
@@ -1151,6 +1186,164 @@ nvim_lsp#setup("rls", {config})
     settings = {}
 ```
 
+## rust_analyzer
+
+https://github.com/rust-analyzer/rust-analyzer
+
+rust-analyzer(aka rls 2.0), a language server for Rust
+
+See below for rls specific settings.
+https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#settings
+    
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`rust-analyzer.cargo-watch.arguments`**: `string`
+
+  Default: `""`
+  
+  `cargo-watch` arguments. (e.g: `--features="shumway,pdf"` will run as `cargo watch -x "check --features="shumway,pdf""` )
+
+- **`rust-analyzer.cargo-watch.command`**: `string`
+
+  Default: `"check"`
+  
+  `cargo-watch` command. (e.g: `clippy` will run as `cargo watch -x clippy` )
+
+- **`rust-analyzer.cargo-watch.ignore`**: `array`
+
+  Default: `{}`
+  
+  A list of patterns for cargo-watch to ignore (will be passed as `--ignore`)
+
+- **`rust-analyzer.displayInlayHints`**: `boolean`
+
+  Default: `true`
+  
+  Display additional type information in the editor
+
+- **`rust-analyzer.enableCargoWatchOnStartup`**: `enum { "ask", "enabled", "disabled" }`
+
+  Default: `"ask"`
+  
+  Whether to run `cargo watch` on startup
+
+- **`rust-analyzer.enableEnhancedTyping`**: `boolean`
+
+  Default: `true`
+  
+  Enables enhanced typing. NOTE: If using a VIM extension, you should set this to false
+
+- **`rust-analyzer.excludeGlobs`**: `array`
+
+  Default: `{}`
+  
+  Paths to exclude from analysis
+
+- **`rust-analyzer.featureFlags`**: `object`
+
+  Default: `{}`
+  
+  Fine grained feature flags to disable annoying features
+
+- **`rust-analyzer.highlightingOn`**: `boolean`
+
+  Highlight Rust code (overrides built-in syntax highlighting)
+
+- **`rust-analyzer.lruCapacity`**: `number`
+
+  Default: `vim.NIL`
+  
+  Number of syntax trees rust-analyzer keeps in memory
+
+- **`rust-analyzer.maxInlayHintLength`**: `number`
+
+  Default: `20`
+  
+  Maximum length for inlay hints
+
+- **`rust-analyzer.raLspServerPath`**: `string`
+
+  Default: `"ra_lsp_server"`
+  
+  Path to ra_lsp_server executable
+
+- **`rust-analyzer.rainbowHighlightingOn`**: `boolean`
+
+  When highlighting Rust code, use a unique color per identifier
+
+- **`rust-analyzer.trace.cargo-watch`**: `enum { "off", "error", "verbose" }`
+
+  Default: `"off"`
+  
+  Trace output of cargo-watch
+
+- **`rust-analyzer.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Trace requests to the ra_lsp_server
+
+- **`rust-analyzer.useClientWatching`**: `boolean`
+
+  client provided file watching instead of notify watching.
+
+</details>
+
+```lua
+nvim_lsp.rust_analyzer.setup({config})
+nvim_lsp#setup("rust_analyzer", {config})
+
+  Default Values:
+    capabilities = {
+      offsetEncoding = { "utf-8", "utf-16" },
+      textDocument = {
+        completion = {
+          completionItem = {
+            commitCharactersSupport = false,
+            deprecatedSupport = false,
+            documentationFormat = { "markdown", "plaintext" },
+            preselectSupport = false,
+            snippetSupport = false
+          },
+          completionItemKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
+          },
+          contextSupport = false,
+          dynamicRegistration = false
+        },
+        documentHighlight = {
+          dynamicRegistration = false
+        },
+        hover = {
+          contentFormat = { "markdown", "plaintext" },
+          dynamicRegistration = false
+        },
+        references = {
+          dynamicRegistration = false
+        },
+        signatureHelp = {
+          dynamicRegistration = false,
+          signatureInformation = {
+            documentationFormat = { "markdown", "plaintext" }
+          }
+        },
+        synchronization = {
+          didSave = true,
+          dynamicRegistration = false,
+          willSave = false,
+          willSaveWaitUntil = false
+        }
+      }
+    }
+    cmd = { "ra_lsp_server" }
+    filetypes = { "rust" }
+    log_level = 2
+    on_init = <function 1>
+    root_dir = root_pattern("Cargo.toml")
+    settings = {}
+```
+
 ## solargraph
 
 https://solargraph.org/
@@ -1163,104 +1356,6 @@ You can install solargraph via gem install.
 gem install solargraph
 ```
     
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`solargraph.autoformat`**: `enum { true, false }`
-
-  Enable automatic formatting while typing (WARNING: experimental)
-
-- **`solargraph.bundlerPath`**: `string`
-
-  Default: `"bundle"`
-  
-  Path to the bundle executable, defaults to 'bundle'
-
-- **`solargraph.checkGemVersion`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Automatically check if a new version of the Solargraph gem is available.
-
-- **`solargraph.commandPath`**: `string`
-
-  Default: `"solargraph"`
-  
-  Path to the solargraph command.  Set this to an absolute path to select from multiple installed Ruby versions.
-
-- **`solargraph.completion`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Enable completion
-
-- **`solargraph.definitions`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Enable definitions (go to, etc.)
-
-- **`solargraph.diagnostics`**: `enum { true, false }`
-
-  Enable diagnostics
-
-- **`solargraph.externalServer`**: `object`
-
-  Default: `{host = "localhost",port = 7658}`
-  
-  The host and port to use for external transports. (Ignored for stdio and socket transports.)
-
-- **`solargraph.folding`**: `boolean`
-
-  Default: `true`
-  
-  Enable folding ranges
-
-- **`solargraph.formatting`**: `enum { true, false }`
-
-  Enable document formatting
-
-- **`solargraph.hover`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Enable hover
-
-- **`solargraph.logLevel`**: `enum { "warn", "info", "debug" }`
-
-  Default: `"warn"`
-  
-  Level of debug info to log. `warn` is least and `debug` is most.
-
-- **`solargraph.references`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Enable finding references
-
-- **`solargraph.rename`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Enable symbol renaming
-
-- **`solargraph.symbols`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Enable symbols
-
-- **`solargraph.transport`**: `enum { "socket", "stdio", "external" }`
-
-  Default: `"socket"`
-  
-  The type of transport to use.
-
-- **`solargraph.useBundler`**: `boolean`
-
-  Use `bundle exec` to run solargraph. (If this is true, the solargraph.commandPath setting is ignored.)
-
-</details>
 
 ```lua
 nvim_lsp.solargraph.setup({config})
