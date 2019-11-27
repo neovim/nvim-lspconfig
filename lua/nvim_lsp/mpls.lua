@@ -1,6 +1,5 @@
 local skeleton = require 'nvim_lsp/skeleton'
 local util = require 'nvim_lsp/util'
-local default_callbacks = require 'vim.lsp.callbacks'
 local lsp = vim.lsp
 
 local name = "mpls"
@@ -87,10 +86,6 @@ end
 
 local installer = make_installer()
 
-
-default_callbacks['telemetry/event'] = function(_, _, _)
-end
-
 skeleton[name] = {
 
   default_config = {
@@ -102,9 +97,9 @@ skeleton[name] = {
     settings = {
       python = {
         analysis = {
-          errors = {"undefined-variable"};
-          info = {"unresolved_import"};
-          disabled = {"too-many-function-arguments", "parameter-missing"},
+          errors = {};
+          info = {};
+          disabled = {},
         };
       };
     };
@@ -116,11 +111,8 @@ skeleton[name] = {
                 {
                     properties= 
                     {
-                        InterpreterPath="/Users/michael/.virtualenvs/pyls/bin/python",
-                        -- UseDefaultDatabase=true,
-                        DatabasePath="/Users/michael/.cache/nvim/nvim_lsp/mpls/db",
-
-                        Version=3.7,
+                        InterpreterPath=get_active_interpreter();
+                        Version=get_python_version(),
                     };
                 },
       displayOptions= {
@@ -130,15 +122,9 @@ skeleton[name] = {
                 trimDocumentationText= false,
                 maxDocumentationTextLength= 0,
                 };
-      -- searchPaths= {}; 
-      searchPaths= {"/Users/michael/test", "/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/lib/python37.zip", "/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/lib/python3.7", "/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload", "/Users/michael/.virtualenvs/pyls/lib/python3.7/site-packages"},
       analysisUpdates=true,
       asyncStartup=true,
-      logLevel=5,
-      cacheFolderPath = "/Users/michael/.cache/nvim/nvim_lsp/mpls/Cache",
-      typeStubSearchPaths= {"/Users/michael/.cache/nvim/nvim_lsp/mpls/Typeshed"},
     };
-    -- callbacks = default_callbacks;
   };
   -- on_new_config = function(new_config) end;
   -- on_attach = function(client, bufnr) end;
