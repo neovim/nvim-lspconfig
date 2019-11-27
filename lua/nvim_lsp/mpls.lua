@@ -11,14 +11,14 @@ local function file_exists(name)
 end
 
 local function get_active_interpreter()
-  local f = io.popen("which python") -- runs command
+  local f = io.popen("which python | tr -d '\n'") -- runs command
   local l = f:read("*a") -- read output of command
   f:close()
   return l
 end
 
 local function get_python_version()
-  local f = io.popen("python --version 2>&1 | awk '{print $2}'") -- runs command
+  local f = io.popen("python --version 2>&1 | awk '{print $2}' | tr -d '\n'") -- runs command
   local l = f:read("*a") -- read output of command
   f:close()
   return l
@@ -99,20 +99,44 @@ skeleton[name] = {
       return util.find_git_ancestor(fname) or vim.loop.os_homedir()
     end;
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
+    settings = {
+      python = {
+        analysis = {
+          errors = {"undefined-variable"};
+          info = {"unresolved_import"};
+          disabled = {"too-many-function-arguments", "parameter-missing"},
+        };
+      };
+    };
     on_new_config = function(config)
       installer.configure(config)
     end;
     init_options = {
-       interpreter = 
+      interpreter = 
                 {
                     properties= 
                     {
-                        InterpreterPath=get_active_interpreter(),
-                        UseDefaultDatabase=true,
-                        Version=get_python_version(),
-                    }                    
-                }
+                        InterpreterPath="/Users/michael/.virtualenvs/pyls/bin/python",
+                        -- UseDefaultDatabase=true,
+                        DatabasePath="/Users/michael/.cache/nvim/nvim_lsp/mpls/db",
+
+                        Version=3.7,
+                    };
+                },
+      displayOptions= {
+                preferredFormat= 'markdown',
+                trimDocumentationLines= false,
+                maxDocumentationLineLength= 0,
+                trimDocumentationText= false,
+                maxDocumentationTextLength= 0,
+                };
+      -- searchPaths= {}; 
+      searchPaths= {"/Users/michael/test", "/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/lib/python37.zip", "/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/lib/python3.7", "/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload", "/Users/michael/.virtualenvs/pyls/lib/python3.7/site-packages"},
+      analysisUpdates=true,
+      asyncStartup=true,
+      logLevel=5,
+      cacheFolderPath = "/Users/michael/.cache/nvim/nvim_lsp/mpls/Cache",
+      typeStubSearchPaths= {"/Users/michael/.cache/nvim/nvim_lsp/mpls/Typeshed"},
     };
     -- callbacks = default_callbacks;
   };
