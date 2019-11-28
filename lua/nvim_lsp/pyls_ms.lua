@@ -2,7 +2,7 @@ local skeleton = require 'nvim_lsp/skeleton'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-local name = "mpls"
+local name = "pyls_ms"
 
 local function file_exists(name)
    local f=io.open(name,"r")
