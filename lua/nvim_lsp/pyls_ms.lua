@@ -5,14 +5,14 @@ local lsp = vim.lsp
 local name = "pyls_ms"
 
 local function get_active_interpreter()
-  local f = io.popen("which python")
+  local f = io.popen("which python 2>&1")
   local l = f:read("*a")
   f:close()
   return l:match("^%s*(.-)%s*$") 
 end
 
 local function get_python_version()
-  local f = io.popen("python --version") -- runs command
+  local f = io.popen("python --version 2>&1") -- runs command
   local l = f:read("*a") -- read output of command
   f:close()
   return l:match("^Python%s*(...).*%s*$")
