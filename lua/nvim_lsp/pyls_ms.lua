@@ -4,23 +4,18 @@ local lsp = vim.lsp
 
 local name = "pyls_ms"
 
-local function file_exists(name)
-   local f=io.open(name,"r")
-   if f~=nil then io.close(f) return true else return false end
-end
-
 local function get_active_interpreter()
-  local f = io.popen("which python | tr -d '\n'") -- runs command
-  local l = f:read("*a") -- read output of command
+  local f = io.popen("which python")
+  local l = f:read("*a")
   f:close()
-  return l
+  return l:match("^%s*(.-)%s*$") 
 end
 
 local function get_python_version()
-  local f = io.popen("python --version 2>&1 | awk '{print $2}' | tr -d '\n'") -- runs command
+  local f = io.popen("python --version") -- runs command
   local l = f:read("*a") -- read output of command
   f:close()
-  return l
+  return l:match("^Python%s*(...).*%s*$")
 end
 
 local function make_installer()
@@ -72,7 +67,7 @@ fi
   end
   function X.info()
     return {
-      is_installed = file_exists(bin);
+      is_installed = util.path.exists(bin);
       install_dir = install_dir;
       cmd = cmd;
     }
