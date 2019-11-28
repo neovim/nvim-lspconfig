@@ -59,11 +59,13 @@ which dotnet  >/dev/null || {
 if [ "$(uname)" == "Darwin" ]
   then 
     curl -fLO https://pvsc.azureedge.net/python-language-server-stable/Python-Language-Server-osx-x64.0.4.114.nupkg
+    unzip Python-Language-Server-osx-x64.0.4.114.nupkg
 elif [ "$(uname)" == "Linux" ]
   then
     curl -fLO https://pvsc.azureedge.net/python-language-server-stable/Python-Language-Server-linux-x64.0.4.114.nupkg
+    unzip Python-Language-Server-linux-x64.0.4.114.nupkg
 fi
-unzip Python-Language-Server-osx-x64.0.4.114.nupkg
+
     ]=]
     vim.fn.mkdir(install_info.install_dir, "p")
     util.sh(script, install_info.install_dir)
