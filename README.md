@@ -36,6 +36,7 @@ Implemented language servers:
 - [ccls](#ccls)
 - [clangd](#clangd)
 - [cssls](#cssls)
+- [dockerls](#dockerls)
 - [elmls](#elmls)
 - [flow](#flow)
 - [fortls](#fortls)
@@ -681,6 +682,29 @@ nvim_lsp#setup("cssls", {config})
         validate = true
       }
     }
+```
+
+## dockerls
+
+https://github.com/rcjsuen/dockerfile-language-server-nodejs
+
+`dockerfile-language-server` can be installed via `:LspInstall tsserver` or by yourself with `npm`: 
+```sh
+npm install -g docker-language-server-nodejs
+```
+    
+Can be installed in neovim with `:LspInstall dockerls`
+
+```lua
+nvim_lsp.dockerls.setup({config})
+nvim_lsp#setup("dockerls", {config})
+
+  Default Values:
+    cmd = { "docker-language-server", "--stdio" }
+    filetypes = { "Dockerfile", "dockerfile" }
+    log_level = 2
+    root_dir = root_pattern("Dockerfile")
+    settings = {}
 ```
 
 ## elmls
