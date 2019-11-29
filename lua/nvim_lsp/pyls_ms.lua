@@ -4,13 +4,6 @@ local lsp = vim.lsp
 
 local name = "pyls_ms"
 
-local function get_active_interpreter()
-  local f = io.popen("which python 2>&1")
-  local l = f:read("*a")
-  f:close()
-  return l:match("^%s*(.-)%s*$") 
-end
-
 local function get_python_version()
   local f = io.popen("python --version 2>&1") -- runs command
   local l = f:read("*a") -- read output of command
@@ -96,7 +89,7 @@ skeleton[name] = {
         analysis = {
           errors = {};
           info = {};
-          disabled = {},
+          disabled = {};
         };
       };
     };
@@ -108,19 +101,19 @@ skeleton[name] = {
                 {
                     properties= 
                     {
-                        InterpreterPath=get_active_interpreter();
-                        Version=get_python_version(),
+                        InterpreterPath=vim.fn.exepath("python");
+                        Version=get_python_version();
                     };
-                },
-      displayOptions= {
-                preferredFormat= 'markdown',
-                trimDocumentationLines= false,
-                maxDocumentationLineLength= 0,
-                trimDocumentationText= false,
-                maxDocumentationTextLength= 0,
                 };
-      analysisUpdates=true,
-      asyncStartup=true,
+      displayOptions= {
+                preferredFormat= 'markdown';
+                trimDocumentationLines= false;
+                maxDocumentationLineLength= 0;
+                trimDocumentationText= false;
+                maxDocumentationTextLength= 0;
+                };
+      analysisUpdates=true;
+      asyncStartup=true;
     };
   };
   -- on_new_config = function(new_config) end;
