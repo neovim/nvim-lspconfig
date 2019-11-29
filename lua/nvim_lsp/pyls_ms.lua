@@ -29,20 +29,12 @@ local function make_installer()
       error('Need "curl" to install this.')
       return
     end
-    if not util.has_bins("sh", "chmod", "unzip") then
-      error('Need the binaries "sh", "chmod", "unzip" to install this')
+    if not (util.has_bins("dotnet")) then
+      error('Need ".NET Core" to install this.')
       return
     end
     local script = [=[
 set -e
-# Install dotnet if not available.
-which dotnet  >/dev/null || {
-  test -x dotnet || {
-    curl -L https://dot.net/v1/dotnet-install.sh | sh
-  }
-  export PATH=$PWD:$PATH
-}
-
 # clone project
 if [ "$(uname)" == "Darwin" ]
   then 
