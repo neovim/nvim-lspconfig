@@ -1439,33 +1439,39 @@ nvim_lsp#setup("pyls", {config})
 
 ## pyls_ms
 
-https://github.com/Microsoft/python-language-server
-
-`Microsoft Language Server for Python `, a language server for Python.
+    https://github.com/Microsoft/python-language-server
+    `python-language-server`, a language server for Python.
     
-Requires [.NET Core](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-install-script) to run. On Linux or macOS:
-
-```bash
-curl -L https://dot.net/v1/dotnet-install.sh | sh
-```
-
-This server accepts configuration via the `settings` key.
+Can be installed in neovim with `:LspInstall pyls_ms`
 
 ```lua
 nvim_lsp.pyls_ms.setup({config})
+nvim_lsp#setup("pyls_ms", {config})
 
   Default Values:
-    cmd = { "dotnet exec /path/to/Microsoft.Python.LanguageServer.dll" }
     filetypes = { "python" }
-    log_level = lsp.protocol.MessageType.Warning
-    root_dir = util.find_git_ancestor(fname) or vim.loop.os_homedir()
+    init_options = {
+      analysisUpdates = true,
+      asyncStartup = true,
+      displayOptions = {},
+      interpreter = {
+        properties = {
+          InterpreterPath = "/usr/bin/python",
+          Version = "2.7"
+        }
+      }
+    }
+    log_level = 2
+    on_new_config = <function 1>
+    root_dir = vim's starting directory
     settings = {
       python = {
         analysis = {
-          errors = {};
-          info = {};
-          disabled = {};
-      };
+          disabled = {},
+          errors = {},
+          info = {}
+        }
+      }
     }
 ```
 
