@@ -40,7 +40,7 @@ local function make_installer()
     elseif vim.fn.has('unix') then
       system = 'linux'
     elseif vim.fn.has('win32') then
-      system = 'windows'
+      system = 'win'
     else 
       error('Unable to identify host operating system')
     end
