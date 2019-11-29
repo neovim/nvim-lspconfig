@@ -33,22 +33,29 @@ local function make_installer()
       error('Need ".NET Core" to install this.')
       return
     end
-    local script = [=[
-set -e
-# clone project
-if [ "$(uname)" == "Darwin" ]
-  then 
-    curl -fLO https://pvsc.azureedge.net/python-language-server-stable/Python-Language-Server-osx-x64.0.4.114.nupkg
-    unzip Python-Language-Server-osx-x64.0.4.114.nupkg
-elif [ "$(uname)" == "Linux" ]
-  then
-    curl -fLO https://pvsc.azureedge.net/python-language-server-stable/Python-Language-Server-linux-x64.0.4.114.nupkg
-    unzip Python-Language-Server-linux-x64.0.4.114.nupkg
-fi
 
-    ]=]
-    vim.fn.mkdir(install_info.install_dir, "p")
-    util.sh(script, install_info.install_dir)
+    local system
+    if vim.fn.has('mac') then
+      system = 'osx'
+    elseif vim.fn.has('unix') then
+      system = 'linux'
+    elseif vim.fn.has('win32') then
+      system = 'windows'
+    else 
+      error('Unable to identify host operating system')
+    end
+
+    local url = string.format("https://pvsc.azureedge.net/python-language-server-stable/Python-Language-Server-%s-x64.0.4.114.nupkg", string.lower(system))
+    download_cmd = string.format('curl -fLo %s --create-dirs %s', install_info.install_dir .. "/pyls.nupkg", url)
+
+    if vim.fn.has('mac') or vim.fn.has('unix') then
+      install_cmd = "unzip " .. install_info.install_dir .. "/pyls.nupkg -d " .. install_info.install_dir
+    elseif vim.fn.has('win32') then
+      install_cmd = "Expand-Archive -Force " .. install_info.install_dir .. "/pyls.nupkg -d " .. install_info.install_dir
+    end
+
+    vim.fn.system(download_cmd)
+    vim.fn.system(install_cmd)
   end
   function X.info()
     return {
