@@ -104,13 +104,7 @@ skeleton[name] = {
                         Version=get_python_version();
                     };
                 };
-      displayOptions= {
-                preferredFormat= 'markdown';
-                trimDocumentationLines= false;
-                maxDocumentationLineLength= 0;
-                trimDocumentationText= false;
-                maxDocumentationTextLength= 0;
-                };
+      displayOptions= {};
       analysisUpdates=true;
       asyncStartup=true;
     };
