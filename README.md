@@ -39,6 +39,7 @@ Implemented language servers:
 - [elmls](#elmls)
 - [flow](#flow)
 - [fortls](#fortls)
+- [ghcide](#ghcide)
 - [gopls](#gopls)
 - [hie](#hie)
 - [leanls](#leanls)
@@ -864,6 +865,24 @@ nvim_lsp#setup("fortls", {config})
     settings = {
       nthreads = 1
     }
+```
+
+## ghcide
+
+https://github.com/digital-asset/ghcide
+
+A library for building Haskell IDE tooling.
+
+```lua
+nvim_lsp.ghcide.setup({config})
+nvim_lsp#setup("ghcide", {config})
+
+  Default Values:
+    cmd = { "ghcide", "--lsp" }
+    filetypes = { "haskell", "lhaskell" }
+    log_level = 2
+    root_dir = root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml");
+    settings = {}
 ```
 
 ## gopls
