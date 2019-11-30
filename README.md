@@ -897,6 +897,23 @@ https://github.com/digital-asset/ghcide
 
 A library for building Haskell IDE tooling.
 
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`hic.arguments`**: `string`
+
+  Default: `"--lsp"`
+  
+  The arguments you would like to pass to the executable
+
+- **`hic.executablePath`**: `string`
+
+  Default: `"ghcide"`
+  
+  The location of your ghcide executable
+
+</details>
+
 ```lua
 nvim_lsp.ghcide.setup({config})
 nvim_lsp#setup("ghcide", {config})
@@ -905,7 +922,7 @@ nvim_lsp#setup("ghcide", {config})
     cmd = { "ghcide", "--lsp" }
     filetypes = { "haskell", "lhaskell" }
     log_level = 2
-    root_dir = root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml");
+    root_dir = root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml")
     settings = {}
 ```
 
