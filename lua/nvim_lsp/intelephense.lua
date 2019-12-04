@@ -15,7 +15,7 @@ skeleton[server_name] = {
   default_config = util.utf8_config {
     cmd = {bin_name, "--stdio"};
     filetypes = {"php"};
-    root_dir = util.root_pattern("package.json");
+    root_dir = util.root_pattern("composer.json");
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
   };
@@ -40,7 +40,7 @@ npm install -g intelephense
 ```
 ]];
     default_config = {
-      root_dir = [[root_pattern("package.json")]];
+      root_dir = [[root_pattern("composer.json")]];
       on_init = [[function to handle changing offsetEncoding]];
       capabilities = [[default capabilities, with offsetEncoding utf-8]];
     };
