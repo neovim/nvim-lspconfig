@@ -17,7 +17,16 @@ skeleton[server_name] = {
     filetypes = {"php"};
     root_dir = util.root_pattern("composer.json");
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
+    settings = {
+      intelephense = {
+        environment = {
+          documentRoot = ""
+        }
+      }
+    };
+    init_options = {
+      licenceKey = ""
+    }
   };
   on_new_config = function(new_config)
     local install_info = installer.info()
