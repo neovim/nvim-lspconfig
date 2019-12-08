@@ -1,37 +1,59 @@
 # nvim-lsp
 
-WIP Common configurations for Language Servers.
+Collection of common configurations for the Neovim `vim.lsp` LSP client. These
+configurations hopefully work automatically, but are otherwise _best effort_.
+If you find a problem, send a pull request with the fix.
 
-This repository aims to be a central location to store configurations for
-Language Servers which leverage Neovim's built-in LSP client `vim.lsp` as the
-client backbone. The `vim.lsp` implementation is made to be customizable and
-greatly extensible, but most users just want to get up and going. This
-plugin/library is for those people, although it still lets you customize
-things as much as you want in addition to the defaults that this provides.
+`vim.lsp` is designed to be customizable and highly extensible, but most users
+just want to get up and going. This collection is intended to get you started
+quickly, in the ideal case. You can still customize things as much as you want
+in addition to the defaults provided here.
 
-**NOTE**: Requires current Neovim master as of 2019-11-13
+**Note**: This repository is a work-in-progress and requires Nvim HEAD. Update
+nvim-lsp and Nvim before reporting an issue.
 
-**CONTRIBUTIONS ARE WELCOME!**
+## Contributions are welcome!
 
-There's a lot of language servers in the world, and not enough time.  See
-[`lua/nvim_lsp/*.lua`](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/)
-for examples and ask us questions in the [Neovim
-Gitter](https://gitter.im/neovim/neovim) to help us complete configurations for
-*all the LSPs!* Read `CONTRIBUTING.md` for some instructions. NOTE: don't
-modify `README.md`; it is auto-generated.
+There are many language servers in the world, and not enough time.
+Help us create configs for *all the LSPs!*
 
-If you don't know where to start, you can pick one that's not in progress or
-implemented from [this excellent list compiled by the coc.nvim
-contributors](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
-[this other excellent list from the emacs lsp-mode
-contributors](https://github.com/emacs-lsp/lsp-mode#supported-languages)
-and create a new file under `lua/nvim_lsp/SERVER_NAME.lua`. We recommend
-looking at `lua/nvim_lsp/texlab.lua` for the most extensive example, but all of
-them are good references.
+- See [existing configs](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/)
+  for examples
+- Ask questions in [Neovim Gitter](https://gitter.im/neovim/neovim)
+- Read [CONTRIBUTING.md](CONTRIBUTING.md) for instructions.
+- Don't modify `README.md`, it is auto-generated.
 
-## Progress
+Quickstart:
 
-Implemented language servers:
+1. Choose a language from [the coc.nvim wiki](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
+  [the emacs-lsp project](https://github.com/emacs-lsp/lsp-mode#supported-languages)
+2. Create a new file at `lua/nvim_lsp/SERVER_NAME.lua`
+3. `lua/nvim_lsp/texlab.lua` for an extensive example, but any
+   [existing config](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/) is a good reference.
+
+## Install
+
+**nvim-lsp** is just a plugin, so it can be installed like any other N/Vim
+plugin:
+
+    Plug 'neovim/nvim-lsp'
+
+## Usage
+
+Servers configurations can be set up with a "setup function." These are
+functions to set up servers more easily with some server specific defaults and
+more server specific things like commands or different diagnostics.
+
+The "setup functions" are `call nvim_lsp#setup({name}, {config})` from vim and
+`nvim_lsp[name].setup(config)` from Lua.
+
+Each config may define additional server-specific functions on the
+`nvim_lsp.SERVER` object, e.g. `nvim_lsp.texlab.buf_build({bufnr})`.
+
+## Configurations
+
+The following configurations are implemented:
+
 - [bashls](#bashls)
 - [ccls](#ccls)
 - [clangd](#clangd)
@@ -53,44 +75,21 @@ Implemented language servers:
 - [texlab](#texlab)
 - [tsserver](#tsserver)
 
-## Install
+### Installing language servers
 
-`Plug 'neovim/nvim-lsp'`
+Some configs provide auto-installation of the required language server via
+`:LspInstall <name>`.  For example, to install the Elm language server:
 
-## Usage
+    :LspInstall elmls
 
-Servers configurations can be set up with a "setup function." These are
-functions to set up servers more easily with some server specific defaults and
-more server specific things like commands or different diagnostics.
-
-The "setup functions" are `call nvim_lsp#setup({name}, {config})` from vim and
-`nvim_lsp[name].setup(config)` from Lua.
-
-Servers may define extra functions on the `nvim_lsp.SERVER` table, e.g.
-`nvim_lsp.texlab.buf_build({bufnr})`.
-
-### Auto Installation
-
-Many servers can be automatically installed with the `:LspInstall`
-command. Detailed installation info can be found
-with the `:LspInstallInfo` command, which optionally accepts a specific server name.
-
-For example:
-```vim
-LspInstall elmls
-silent LspInstall elmls " useful if you want to autoinstall in init.vim
-LspInstallInfo
-LspInstallInfo elmls
-```
+Detailed info is given by `:LspInstallInfo`, which optionally accepts a server
+name. Example:
 
 ### Example
 
-From vim:
-```vim
-call nvim_lsp#setup("texlab", {})
-```
+nvim-lsp is a Lua plugin, and all code samples below are in Lua. **It's easy to
+call Lua from Vimscript**: see `:help :lua-heredoc`.
 
-From Lua:
 ```lua
 require 'nvim_lsp'.texlab.setup {
   name = "texlab_fancy";
@@ -196,7 +195,6 @@ Can be installed in neovim with `:LspInstall bashls`
 
 ```lua
 nvim_lsp.bashls.setup({config})
-nvim_lsp#setup("bashls", {config})
 
   Default Values:
     cmd = { "bash-language-server", "start" }
@@ -614,7 +612,6 @@ This server accepts configuration via the `settings` key.
 
 ```lua
 nvim_lsp.ccls.setup({config})
-nvim_lsp#setup("ccls", {config})
 
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8
@@ -638,7 +635,6 @@ as compile_commands.json or, for simpler projects, a compile_flags.txt.
 
 ```lua
 nvim_lsp.clangd.setup({config})
-nvim_lsp#setup("clangd", {config})
 
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8
@@ -663,7 +659,6 @@ Can be installed in neovim with `:LspInstall cssls`
 
 ```lua
 nvim_lsp.cssls.setup({config})
-nvim_lsp#setup("cssls", {config})
 
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8
@@ -698,7 +693,6 @@ Can be installed in neovim with `:LspInstall dockerls`
 
 ```lua
 nvim_lsp.dockerls.setup({config})
-nvim_lsp#setup("dockerls", {config})
 
   Default Values:
     cmd = { "docker-language-server", "--stdio" }
@@ -755,7 +749,6 @@ This server accepts configuration via the `settings` key.
 
 ```lua
 nvim_lsp.elmls.setup({config})
-nvim_lsp#setup("elmls", {config})
 
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8
@@ -790,7 +783,6 @@ npm run flow lsp -- --help
 
 ```lua
 nvim_lsp.flow.setup({config})
-nvim_lsp#setup("flow", {config})
 
   Default Values:
     cmd = { "npm", "run", "flow", "lsp" }
@@ -879,7 +871,6 @@ This server accepts configuration via the `settings` key.
 
 ```lua
 nvim_lsp.fortls.setup({config})
-nvim_lsp#setup("fortls", {config})
 
   Default Values:
     cmd = { "fortls" }
@@ -916,7 +907,6 @@ This server accepts configuration via the `settings` key.
 
 ```lua
 nvim_lsp.ghcide.setup({config})
-nvim_lsp#setup("ghcide", {config})
 
   Default Values:
     cmd = { "ghcide", "--lsp" }
@@ -935,7 +925,6 @@ Google's lsp server for golang.
 
 ```lua
 nvim_lsp.gopls.setup({config})
-nvim_lsp#setup("gopls", {config})
 
   Default Values:
     cmd = { "gopls" }
@@ -1059,7 +1048,6 @@ This server accepts configuration via the `settings` key.
 
 ```lua
 nvim_lsp.hie.setup({config})
-nvim_lsp#setup("hie", {config})
 
   Default Values:
     cmd = { "hie-wrapper" }
@@ -1204,7 +1192,6 @@ This server accepts configuration via the `settings` key.
 
 ```lua
 nvim_lsp.leanls.setup({config})
-nvim_lsp#setup("leanls", {config})
 
   Default Values:
     cmd = { "lean-language-server", "--stdio" }
@@ -1487,7 +1474,6 @@ This server accepts configuration via the `settings` key.
 
 ```lua
 nvim_lsp.pyls.setup({config})
-nvim_lsp#setup("pyls", {config})
 
   Default Values:
     cmd = { "pyls" }
@@ -1506,7 +1492,6 @@ Can be installed in neovim with `:LspInstall pyls_ms`
 
 ```lua
 nvim_lsp.pyls_ms.setup({config})
-nvim_lsp#setup("pyls_ms", {config})
 
   Default Values:
     filetypes = { "python" }
@@ -1757,7 +1742,6 @@ This server accepts configuration via the `settings` key.
 
 ```lua
 nvim_lsp.rls.setup({config})
-nvim_lsp#setup("rls", {config})
 
   Default Values:
     cmd = { "rls" }
@@ -1873,7 +1857,6 @@ This server accepts configuration via the `settings` key.
 
 ```lua
 nvim_lsp.rust_analyzer.setup({config})
-nvim_lsp#setup("rust_analyzer", {config})
 
   Default Values:
     capabilities = {
@@ -2038,7 +2021,6 @@ This server accepts configuration via the `settings` key.
 
 ```lua
 nvim_lsp.solargraph.setup({config})
-nvim_lsp#setup("solargraph", {config})
 
   Default Values:
     cmd = { "solargraph", "stdio" }
@@ -2133,7 +2115,6 @@ This server accepts configuration via the `settings` key.
 
 ```lua
 nvim_lsp.sumneko_lua.setup({config})
-nvim_lsp#setup("sumneko_lua", {config})
 
   Default Values:
     filetypes = { "lua" }
@@ -2153,7 +2134,6 @@ See https://texlab.netlify.com/docs/reference/configuration for configuration op
 
 ```lua
 nvim_lsp.texlab.setup({config})
-nvim_lsp#setup("texlab", {config})
 
   Commands:
   - TexlabBuild: Build the current buffer
@@ -2199,7 +2179,6 @@ Can be installed in neovim with `:LspInstall tsserver`
 
 ```lua
 nvim_lsp.tsserver.setup({config})
-nvim_lsp#setup("tsserver", {config})
 
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8

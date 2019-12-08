@@ -113,8 +113,8 @@ skeleton[name] = {
   -- on_attach = function(client, bufnr) end;
   docs = {
     description = [[
-    https://github.com/Microsoft/python-language-server
-    `python-language-server`, a language server for Python.
+https://github.com/Microsoft/python-language-server
+`python-language-server`, a language server for Python.
     ]];
     default_config = {
       root_dir = "vim's starting directory";

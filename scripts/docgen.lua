@@ -68,8 +68,7 @@ local lsp_section_template = [[
 
 {{preamble}}
 ```lua
-nvim_lsp.{{template_name}}.setup({config})
-nvim_lsp#setup("{{template_name}}", {config})
+require'nvim_lsp'.{{template_name}}.setup{}
 
 {{body}}
 ```
@@ -124,7 +123,7 @@ local function make_lsp_sections()
         end;
         function()
           if template_object.install then
-            return string.format("Can be installed in neovim with `:LspInstall %s`", template_name)
+            return string.format("Can be installed in Nvim with `:LspInstall %s`", template_name)
           end
         end;
         function()
