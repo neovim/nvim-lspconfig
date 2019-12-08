@@ -34,7 +34,7 @@ skeleton[server_name] = {
     description = [[
 https://github.com/rcjsuen/dockerfile-language-server-nodejs
 
-`dockerfile-language-server` can be installed via `:LspInstall tsserver` or by yourself with `npm`: 
+`dockerfile-language-server` can be installed via `:LspInstall dockerls` or by yourself with `npm`:
 ```sh
 npm install -g docker-language-server-nodejs
 ```
@@ -48,4 +48,3 @@ npm install -g docker-language-server-nodejs
 skeleton[server_name].install = installer.install
 skeleton[server_name].install_info = installer.info
 -- vim:et ts=2 sw=2
-
