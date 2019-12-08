@@ -1,80 +1,74 @@
 # nvim-lsp
 
-WIP Common configurations for Language Servers.
+Collection of common configurations for the [Nvim LSP client](https://neovim.io/doc/user/lsp.html).
 
-This repository aims to be a central location to store configurations for
-Language Servers which leverage Neovim's built-in LSP client `vim.lsp` as the
-client backbone. The `vim.lsp` implementation is made to be customizable and
-greatly extensible, but most users just want to get up and going. This
-plugin/library is for those people, although it still lets you customize
-things as much as you want in addition to the defaults that this provides.
+It is hoped that these configurations serve as a "source of truth", but they
+are strictly _best effort_. If something doesn't work, these configs are useful
+as a starting point, which you can adjust to fit your environment.
 
-**NOTE**: Requires current Neovim master as of 2019-11-13
+**Note**: This is a work-in-progress and requires Nvim HEAD. Update Nvim and
+nvim-lsp before reporting an issue.
 
-**CONTRIBUTIONS ARE WELCOME!**
+## Contributions are welcome!
 
-There's a lot of language servers in the world, and not enough time.  See
-[`lua/nvim_lsp/*.lua`](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/)
-for examples and ask us questions in the [Neovim
-Gitter](https://gitter.im/neovim/neovim) to help us complete configurations for
-*all the LSPs!* Read `CONTRIBUTING.md` for some instructions. NOTE: don't
-modify `README.md`; it is auto-generated.
+There are many language servers in the world, and not enough time.
+Help us create configs for *all the LSPs!*
 
-If you don't know where to start, you can pick one that's not in progress or
-implemented from [this excellent list compiled by the coc.nvim
-contributors](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
-[this other excellent list from the emacs lsp-mode
-contributors](https://github.com/emacs-lsp/lsp-mode#supported-languages)
-and create a new file under `lua/nvim_lsp/SERVER_NAME.lua`. We recommend
-looking at `lua/nvim_lsp/texlab.lua` for the most extensive example, but all of
-them are good references.
-
-## Progress
-
-Implemented language servers:
-{{implemented_servers_list}}
+0. Read [CONTRIBUTING.md](CONTRIBUTING.md) for instructions.
+   Ask questions in [Neovim Gitter](https://gitter.im/neovim/neovim).
+1. Choose a language from [the coc.nvim wiki](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
+  [the emacs-lsp project](https://github.com/emacs-lsp/lsp-mode#supported-languages).
+2. Create a new file at `lua/nvim_lsp/SERVER_NAME.lua`. See
+   [existing configs](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/) for
+   examples (`lua/nvim_lsp/texlab.lua` is an extensive example).
 
 ## Install
 
-`Plug 'neovim/nvim-lsp'`
+**nvim-lsp** is just a plugin. Install it like any other Nvim plugin:
+
+    Plug 'neovim/nvim-lsp'
 
 ## Usage
 
-Servers configurations can be set up with a "setup function." These are
-functions to set up servers more easily with some server specific defaults and
-more server specific things like commands or different diagnostics.
+Each config provides a `setup()` function, to initialize the server with
+reasonable defaults and some server-specific things like commands or different
+diagnostics.
 
-The "setup functions" are `call nvim_lsp#setup({name}, {config})` from vim and
-`nvim_lsp[name].setup(config)` from Lua.
+    nvim_lsp[name].setup{name=…, settings = {…}, …}
 
-Servers may define extra functions on the `nvim_lsp.SERVER` table, e.g.
-`nvim_lsp.texlab.buf_build({bufnr})`.
+Find the [config](#configurations) for your language, then paste the example
+given there to your `init.vim`. **All examples are given in Lua,** see `:help
+:lua-heredoc` to use Lua from your init.vim.
 
-### Auto Installation
+Some configs may define additional server-specific functions, e.g. the `texlab`
+config provides `nvim_lsp.texlab.buf_build({bufnr})`.
 
-Many servers can be automatically installed with the `:LspInstall`
-command. Detailed installation info can be found
-with the `:LspInstallInfo` command, which optionally accepts a specific server name.
+### Example: using the defaults
 
-For example:
-```vim
-LspInstall elmls
-silent LspInstall elmls " useful if you want to autoinstall in init.vim
-LspInstallInfo
-LspInstallInfo elmls
-```
+To use the defaults, just call `setup()` with an empty `config` parameter.
+For the `gopls` config, that would be:
 
-### Example
+    require'nvim_lsp'.gopls.setup{}
 
-From vim:
-```vim
-call nvim_lsp#setup("texlab", {})
-```
+### Example: override some defaults
 
-From Lua:
+To set some config properties at `setup()`, specify their keys. For example to
+change how the "project root" is found, set the `root_dir` key:
+
 ```lua
-require 'nvim_lsp'.texlab.setup {
-  name = "texlab_fancy";
+local nvim_lsp = require'nvim_lsp'
+nvim_lsp.gopls.setup{
+  root_dir = nvim_lsp.util.root_pattern('.git');
+}
+```
+
+The [documentation](#configurations) for each config lists default values and
+additional optional properties.
+
+```lua
+local nvim_lsp = require'nvim_lsp'
+nvim_lsp.texlab.setup{
+  name = 'texlab_fancy';
   log_level = vim.lsp.protocol.MessageType.Log;
   settings = {
     latex = {
@@ -84,32 +78,63 @@ require 'nvim_lsp'.texlab.setup {
     }
   }
 }
-
-local nvim_lsp = require 'nvim_lsp'
-
--- Customize how to find the root_dir
-nvim_lsp.gopls.setup {
-  root_dir = nvim_lsp.util.root_pattern(".git");
-}
-
--- Build the current buffer.
-require 'nvim_lsp'.texlab.buf_build(0)
 ```
 
-### Setup function details
+### Example: custom config
 
-The main setup signature will be:
+To configure a custom/private server, just require `nvim_lsp/skeleton` and do
+the same as we do if we were adding it to the repository itself.
+
+1. Define the config: `configs.foo_lsp = { … }`
+2. Call `nvim_lsp.foo_lsp.setup{}`
+
+```lua
+local nvim_lsp = require'nvim_lsp'
+local configs = require'nvim_lsp/skeleton'
+-- Check if it's already defined for when I reload this file.
+if not nvim_lsp.foo_lsp then
+  configs.foo_lsp = {
+    default_config = {
+      cmd = {'/home/ashkan/works/3rd/lua-language-server/run.sh'};
+      filetypes = {'lua'};
+      root_dir = function(fname)
+        return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+      end;
+      log_level = vim.lsp.protocol.MessageType.Warning;
+      settings = {};
+    };
+  }
+end
+nvim_lsp.foo_lsp.setup{}
+```
+
+### Installing a language server
+
+Configs may provide an `install()` function. Then you can use
+`:LspInstall {name}` to install the required language server.
+For example, to install the Elm language server:
+
+    :LspInstall elmls
+
+Use `:LspInstallInfo` to see install info.
+
+    :LspInstallInfo
+
+## setup() function
+
+The `setup()` interface:
 
 ```
-nvim_lsp.SERVER.setup({config})
+nvim_lsp.SERVER.setup{config}
 
-  {config} is the same as |vim.lsp.start_client()|, but with some
-  additions and changes:
+  The `config` parameter has the same shape as that of
+  |vim.lsp.start_client()|, with these additions and changes:
 
   {root_dir}
-    May be required (depending on the server).
-    `function(filename, bufnr)` which is called on new candidate buffers to
-    attach to and returns either a root_dir or nil.
+    Required for some servers, optional for others.
+    Function of the form `function(filename, bufnr)`.
+    Called on new candidate buffers being attached-to.
+    Returns either a root_dir or nil.
 
     If a root_dir is returned, then this file will also be attached. You
     can optionally use {filetype} to help pre-filter by filetype.
@@ -122,8 +147,8 @@ nvim_lsp.SERVER.setup({config})
     See |nvim_lsp.util.search_ancestors()| and the functions which use it:
     - |nvim_lsp.util.root_pattern(patterns...)| finds an ancestor which
     - contains one of the files in `patterns...`. This is equivalent
-    to coc.nvim's "rootPatterns"
-    - More specific utilities:
+      to coc.nvim's "rootPatterns"
+    - Related utilities for common tools:
       - |nvim_lsp.util.find_git_root()|
       - |nvim_lsp.util.find_node_modules_root()|
       - |nvim_lsp.util.find_package_json_root()|
@@ -132,31 +157,30 @@ nvim_lsp.SERVER.setup({config})
     Defaults to the server's name.
 
   {filetypes}
-    A set of filetypes to filter for consideration by {root_dir}.
-    Can be left empty.
-    A server may specify a default value.
+    Set of filetypes to filter for consideration by {root_dir}.
+    May be empty.
+    Server may specify a default value.
 
   {log_level}
     controls the level of logs to show from build processes and other
-    window/logMessage events. By default it is set to
+    window/logMessage events. Defaults to
     vim.lsp.protocol.MessageType.Warning instead of
     vim.lsp.protocol.MessageType.Log.
 
   {settings}
-    This is a table, and the keys are case sensitive. This is for the
-    `workspace/configuration` event responses.
+    Map with case-sensitive keys corresponding to `workspace/configuration`
+    event responses.
     We also notify the server *once* on `initialize` with
     `workspace/didChangeConfiguration`.
-    If you change the settings later on, you should send the notification
-    yourself with `client.workspace_did_change_configuration({settings})`
+    If you change the settings later on, you must emit the notification
+    with `client.workspace_did_change_configuration({settings})`
     Example: `settings = { keyName = { subKey = 1 } }`
 
   {on_attach}
-    `function(client)` will be executed with the current buffer as the
-    one the {client} is being attaching to. This is different from
+    `function(client)` executed with the current buffer as the one the {client}
+    is being attached-to. This is different from
     |vim.lsp.start_client()|'s on_attach parameter, which passes the {bufnr} as
-    the second parameter instead. This is useful for running buffer local
-    commands.
+    the second parameter instead. Useful for doing buffer-local setup.
 
   {on_new_config}
     `function(new_config)` will be executed after a new configuration has been
@@ -165,6 +189,11 @@ nvim_lsp.SERVER.setup({config})
     sent to |vim.lsp.start_client()|.
 ```
 
-# LSP Implementations
+# Configurations
+
+The following LSP configs are included. Follow a link to find documentation for
+that config.
+
+{{implemented_servers_list}}
 
 {{lsp_server_details}}

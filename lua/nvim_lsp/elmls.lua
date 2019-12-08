@@ -57,7 +57,7 @@ skeleton[server_name] = {
     description = [[
 https://github.com/elm-tooling/elm-language-server#installation
 
-If you don't want to use neovim to install it, then you can use:
+If you don't want to use Nvim to install it, then you can use:
 ```sh
 npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
 ```

@@ -40,7 +40,7 @@ function skeleton.__newindex(t, template_name, template)
     config.callbacks["window/logMessage"] = function(err, method, params, client_id)
       if params and params.type <= config.log_level then
         -- TODO(ashkan) remove this after things have settled.
-        assert(lsp.callbacks, "Please update neovim master. This is an incompatible interface.")
+        assert(lsp.callbacks, "Update to Nvim HEAD. This is an incompatible interface.")
         lsp.callbacks[method](err, method, params, client_id)
       end
     end

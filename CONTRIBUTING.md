@@ -1,34 +1,28 @@
 # Requirements
 
 - Neovim :P
-- The docgen requires \*nix systems for now.
+- docgen requires a unix system.
 
 # Generating docs
 
 > NOTE: Github Actions automatically generates the docs, so only modify
-> README_preamble.md or the `docs` in the server config!
+> `README_template.md` or the `docs` object on the server config!
+> **DO NOT MODIFY `README.md` DIRECTLY**
 
-The instructions here are for previewing changes locally.
+To preview the generated `README.md` locally, source `scripts/docgen.lua` from
+`nvim` (e.g. with `:luafile`):
 
-`scripts/docgen.lua` was written with the intention of being sourced (like with `luafile`)
-from `nvim` to run.
+    nvim -R -Es +'set rtp+=$PWD' +'luafile scripts/docgen.lua'
 
-It **must** be run from the .git/project root. This could be modified to try to
-find the .git root with one of our `util.*` functions potentially.
-
-You can run `scripts/docgen.sh` from the project root. This ensures that it
-doesn't pick up another copy of `nvim_lsp` on your system.
-
-This generates README.md
-
-**DO NOT MODIFY `README.md` DIRECTLY**
+It **must** be run from the `.git`/project root. (TODO: try to find the `.git`
+root with one of our `util.*` functions?)
 
 # skeleton
 
 skeleton has a `__newindex` metamethod which validates and creates
 an object containing `setup()`, which can then be retrieved and modified.
 
-In vim.validate parlance, this is the format to use.
+In `vim.validate` parlance, this is the "spec":
 
 ```
 skeleton.SERVER_NAME = {
@@ -44,16 +38,14 @@ docs = {
 }
 ```
 
-The docs `default_config` is a table whose keys match the other `default_config`,
-and can be used to specify a string in place of using `vim.inspect(value)` to
-generate the documentation. This is useful for functions, whose output would
-be unhelpful otherwise.
-
-`commands` is a table of key/value pairs from `command_name -> {definition}`.
-The format of `{definition}` is a table where the first array value
-is a function which will be called for this command. The other table values
-are either array values which will be formed into flags for the command or
-special keys like `description`.
+- Keys of the `docs.default_config` table match those of
+  `skeleton.SERVER_NAME.default_config`, and can be used to specify custom
+  documentation. This is useful for functions, whose docs cannot be easily
+  auto-generated.
+- The `commands` object is a table of `name:definition` key:value pairs, where
+  `definition` is a list whose first value is a function implementing the
+  command. The other table values are either array values which will be formed
+  into flags for the command or special keys like `description`.
 
 Example:
 
@@ -70,24 +62,19 @@ Example:
 ```
 
 
-After you create a `skeleton.SERVER_NAME`, you can add functions to it that you
-wish to expose to the user.
+After you create `skeleton.SERVER_NAME`, you may add arbitrary
+language-specific functions to it if necessary.
 
 Example:
 
-```
-skeleton.texlab.buf_build = buf_build
-```
+    skeleton.texlab.buf_build = buf_build
 
-After you create a skeleton, you have to `require 'nvim_lsp/SERVER_NAME'` in
-`lua/nvim_lsp.lua`, and that's it.
+Finally, add a `require 'nvim_lsp/SERVER_NAME'` line to `lua/nvim_lsp.lua`.
 
-Generate docs and you're done.
+# Auto-installation
 
-# Supporting installation
-
-If a skeleton has the functions `.install()` and `.install_info()` available, then
-it will be picked up by `LspInstall` and `LspInstallInfo`.
+Configs may optionally provide `install()` and `install_info()` functions.
+This will be recognized by `:LspInstall` and `:LspInstallInfo`.
 
 `function install()` is the signature and it is expected that it will create
 any data in `util.base_install_dir/{server_name}`.
@@ -97,4 +84,4 @@ which indicates the current status of installation (if it is installed by us).
 It can contain any other additional data that the user may find useful.
 
 The helper function `util.npm_installer` can be used for lsps which are installed
-with `npm`. See `elmls.lua` or `tsserver.lua` or `bashls.lua` for example usage.
+with `npm`. See `elmls.lua`, `tsserver.lua`, or `bashls.lua` for examples.
