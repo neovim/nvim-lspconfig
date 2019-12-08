@@ -11,22 +11,38 @@ local installer = util.npm_installer {
   binaries = {bin_name};
 }
 
+local function is_inside_cwd(path, cwd)
+  local function cb(dir, _)
+    return dir == cwd;
+  end
+
+  local dir, _ = util.path.traverse_parents(path, cb);
+
+  return dir == cwd;
+end
+
 skeleton[server_name] = {
   default_config = util.utf8_config {
     cmd = {bin_name, "--stdio"};
     filetypes = {"php"};
-    root_dir = util.root_pattern("composer.json");
+    root_dir = function (pattern)
+      local cwd  = vim.loop.cwd();
+      local root = util.root_pattern("composer.json", ".git")(pattern);
+
+      -- prefer cwd if it is inside root
+      return is_inside_cwd(root, cwd) and cwd or root;
+    end;
     log_level = lsp.protocol.MessageType.Warning;
     settings = {
       intelephense = {
         environment = {
-          documentRoot = ""
-        }
-      }
+          documentRoot = "";
+        };
+      };
     };
     init_options = {
-      licenceKey = ""
-    }
+      licenceKey = "";
+    };
   };
   on_new_config = function(new_config)
     local install_info = installer.info()
