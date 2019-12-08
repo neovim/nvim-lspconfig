@@ -65,9 +65,12 @@ npm install -g intelephense
 ```
 ]];
     default_config = {
-      root_dir = [[root_pattern("composer.json")]];
+      root_dir = [[root_pattern("composer.json", ".git")]];
       on_init = [[function to handle changing offsetEncoding]];
       capabilities = [[default capabilities, with offsetEncoding utf-8]];
+      init_options = [[{
+        licenceKey = ""
+      }]];
     };
   };
 }
