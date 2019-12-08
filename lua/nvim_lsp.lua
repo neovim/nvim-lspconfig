@@ -41,11 +41,6 @@ M._root = {}
 -- Called from plugin/nvim_lsp.vim because it requires knowing that the last
 -- script in scriptnames to be executed is nvim_lsp.
 function M._root._setup()
-  local snr = tonumber(table.remove(vim.split(vim.fn.execute("scriptnames"), '\n')):match("^%s*(%d+)"))
-  local function sid(s)
-    return string.format("<SNR>%d_%s", snr, s)
-  end
-
   M._root.commands = {
     LspInstall = {
       function(name)
@@ -62,7 +57,7 @@ function M._root._setup()
         template.install()
       end;
       "-nargs=1";
-      "-complete=custom,"..sid("complete_installable_server_names");
+      "-complete=custom,v:lua.lsp_complete_installable_servers";
       description = '`:LspInstall {name}` installs a server under stdpath("cache")/nvim_lsp/{name}';
     };
     LspInstallInfo = {
@@ -83,7 +78,7 @@ function M._root._setup()
         return print(vim.inspect(template.install_info()))
       end;
       "-nargs=?";
-      "-complete=custom,"..sid("complete_installable_server_names");
+      "-complete=custom,v:lua.lsp_complete_servers";
       description = 'Print installation info for {name} if one is specified, or all installable servers.';
     };
   };
