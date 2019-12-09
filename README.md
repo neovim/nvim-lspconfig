@@ -34,7 +34,7 @@ Each config provides a `setup()` function, to initialize the server with
 reasonable defaults and some server-specific things like commands or different
 diagnostics.
 
-    nvim_lsp[name].setup{name=…, settings = {…}, …}
+    require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
 
 Find the [config](#configurations) for your language, then paste the example
 given there to your `init.vim`. **All examples are given in Lua,** see `:help
@@ -86,7 +86,7 @@ To configure a custom/private server, just require `nvim_lsp/skeleton` and do
 the same as we do if we were adding it to the repository itself.
 
 1. Define the config: `configs.foo_lsp = { … }`
-2. Call `nvim_lsp.foo_lsp.setup{}`
+2. Call `setup()`: `require'nvim_lsp'.foo_lsp.setup{}`
 
 ```lua
 local nvim_lsp = require'nvim_lsp'
