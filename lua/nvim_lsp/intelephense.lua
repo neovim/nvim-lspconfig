@@ -19,7 +19,7 @@ skeleton[server_name] = {
       local cwd  = vim.loop.cwd();
       local root = util.root_pattern("composer.json", ".git")(pattern);
 
-      -- prefer cwd if it is inside root
+      -- prefer cwd if root is a descendant
       return util.path.is_descendant(cwd, root) and cwd or root;
     end;
     log_level = lsp.protocol.MessageType.Warning;
