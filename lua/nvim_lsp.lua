@@ -11,6 +11,7 @@ require 'nvim_lsp/fortls'
 require 'nvim_lsp/ghcide'
 require 'nvim_lsp/gopls'
 require 'nvim_lsp/hie'
+require 'nvim_lsp/intelephense'
 require 'nvim_lsp/leanls'
 require 'nvim_lsp/pyls'
 require 'nvim_lsp/pyls_ms'
@@ -20,7 +21,6 @@ require 'nvim_lsp/solargraph'
 require 'nvim_lsp/sumneko_lua'
 require 'nvim_lsp/texlab'
 require 'nvim_lsp/tsserver'
-require 'nvim_lsp/intelephense'
 
 local M = {
   util = require 'nvim_lsp/util';
