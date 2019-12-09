@@ -11,16 +11,6 @@ local installer = util.npm_installer {
   binaries = {bin_name};
 }
 
-local function is_inside_cwd(path, cwd)
-  local function cb(dir, _)
-    return dir == cwd;
-  end
-
-  local dir, _ = util.path.traverse_parents(path, cb);
-
-  return dir == cwd;
-end
-
 skeleton[server_name] = {
   default_config = util.utf8_config {
     cmd = {bin_name, "--stdio"};
@@ -30,7 +20,7 @@ skeleton[server_name] = {
       local root = util.root_pattern("composer.json", ".git")(pattern);
 
       -- prefer cwd if it is inside root
-      return is_inside_cwd(root, cwd) and cwd or root;
+      return util.path.is_descendant(cwd, root) and cwd or root;
     end;
     log_level = lsp.protocol.MessageType.Warning;
     settings = {

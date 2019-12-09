@@ -182,6 +182,16 @@ M.path = (function()
     return it, path, path
   end
 
+  local function is_descendant(root, path)
+    local function cb(dir, _)
+      return dir == root;
+    end
+
+    local dir, _ = traverse_parents(path, cb);
+
+    return dir == root;
+  end
+
   return {
     is_dir = is_dir;
     is_file = is_file;
@@ -191,6 +201,7 @@ M.path = (function()
     join = path_join;
     traverse_parents = traverse_parents;
     iterate_parents = iterate_parents;
+    is_descendant = is_descendant;
   }
 end)()
 
