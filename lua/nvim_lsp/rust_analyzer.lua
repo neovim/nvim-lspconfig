@@ -17,8 +17,7 @@ https://github.com/rust-analyzer/rust-analyzer
 
 rust-analyzer (aka rls 2.0), a language server for Rust
 
-See [rls docs](https://github.com/rust-lang/rls#configuration) for rls-specific settings.
-
+See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#settings) for extra settings.
     ]];
     default_config = {
       root_dir = [[root_pattern("Cargo.toml")]];
