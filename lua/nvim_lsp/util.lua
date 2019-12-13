@@ -342,7 +342,7 @@ function M.npm_installer(config)
   local function install()
     -- TODO(ashkan) need all binaries or just the first?
     if M.has_bins(unpack(config.binaries)) then
-      return print(config.server_name, "is already installed (not by neovim)")
+      return print(config.server_name, "is already installed (not by Nvim)")
     end
     if not M.has_bins("sh", "npm", "mkdir") then
       api.nvim_err_writeln('Installation requires "sh", "npm", "mkdir"')

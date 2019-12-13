@@ -18,11 +18,8 @@ https://github.com/rust-lang/rls
 
 rls, a language server for Rust
 
-Refer to the following for how to setup rls itself.
-https://github.com/rust-lang/rls#setup
-
-See below for rls specific settings.
-https://github.com/rust-lang/rls#configuration
+See https://github.com/rust-lang/rls#setup to setup rls itself.
+See https://github.com/rust-lang/rls#configuration for rls-specific settings.
 
 If you want to use rls for a particular build, eg nightly, set cmd as follows:
 

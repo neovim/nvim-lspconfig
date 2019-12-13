@@ -15,10 +15,9 @@ skeleton.rust_analyzer = {
     description = [[
 https://github.com/rust-analyzer/rust-analyzer
 
-rust-analyzer(aka rls 2.0), a language server for Rust
+rust-analyzer (aka rls 2.0), a language server for Rust
 
-See below for rls specific settings.
-https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#settings
+See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#settings) for extra settings.
     ]];
     default_config = {
       root_dir = [[root_pattern("Cargo.toml")]];
