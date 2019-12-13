@@ -183,6 +183,10 @@ M.path = (function()
   end
 
   local function is_descendant(root, path)
+    if (not path) then
+      return false;
+    end
+
     local function cb(dir, _)
       return dir == root;
     end
