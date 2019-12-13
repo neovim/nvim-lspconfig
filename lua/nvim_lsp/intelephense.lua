@@ -23,16 +23,6 @@ skeleton[server_name] = {
       return util.path.is_descendant(cwd, root) and cwd or root;
     end;
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {
-      intelephense = {
-        environment = {
-          documentRoot = "";
-        };
-      };
-    };
-    init_options = {
-      licenceKey = "";
-    };
   };
   on_new_config = function(new_config)
     local install_info = installer.info()
@@ -59,7 +49,19 @@ npm install -g intelephense
       on_init = [[function to handle changing offsetEncoding]];
       capabilities = [[default capabilities, with offsetEncoding utf-8]];
       init_options = [[{
-        licenceKey = ""
+        storagePath = Optional absolute path to storage dir. Defaults to os.tmpdir().
+        globalStoragePath = Optional absolute path to a global storage dir. Defaults to os.homedir().
+        licenceKey = Optional licence key or absolute path to a text file containing the licence key.
+        clearCache = Optional flag to clear server state. State can also be cleared by deleting {storagePath}/intelephense
+        -- See https://github.com/bmewburn/intelephense-docs#initialisation-options
+      }]];
+      settings = [[{
+        intelephense = {
+          files = {
+            maxSize = 1000000;
+          };
+        };
+        -- See https://github.com/bmewburn/intelephense-docs#configuration-options
       }]];
     };
   };
@@ -68,4 +70,3 @@ npm install -g intelephense
 skeleton[server_name].install = installer.install
 skeleton[server_name].install_info = installer.info
 -- vim:et ts=2 sw=2
-
