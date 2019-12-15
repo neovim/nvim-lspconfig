@@ -3,11 +3,11 @@ local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
 local server_name = "dockerls"
-local bin_name = "docker-language-server"
+local bin_name = "docker-langserver"
 
 local installer = util.npm_installer {
   server_name = server_name;
-  packages = { "docker-language-server-nodejs" };
+  packages = { "dockerfile-language-server-nodejs" };
   binaries = {bin_name};
 }
 
@@ -34,9 +34,9 @@ skeleton[server_name] = {
     description = [[
 https://github.com/rcjsuen/dockerfile-language-server-nodejs
 
-`dockerfile-language-server` can be installed via `:LspInstall dockerls` or by yourself with `npm`:
+`docker-langserver` can be installed via `:LspInstall dockerls` or by yourself with `npm`:
 ```sh
-npm install -g docker-language-server-nodejs
+npm install -g dockerfile-language-server-nodejs
 ```
     ]];
     default_config = {
