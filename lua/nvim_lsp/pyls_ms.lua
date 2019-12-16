@@ -35,11 +35,11 @@ local function make_installer()
     end
 
     local system
-    if vim.fn.has('mac') then
+    if vim.fn.has('mac') == 1 then
       system = 'osx'
-    elseif vim.fn.has('unix') then
+    elseif vim.fn.has('unix') == 1 then
       system = 'linux'
-    elseif vim.fn.has('win32') then
+    elseif vim.fn.has('win32') == 1 then
       system = 'win'
     else 
       error('Unable to identify host operating system')
