@@ -714,9 +714,9 @@ require'nvim_lsp'.cssls.setup{}
 
 https://github.com/rcjsuen/dockerfile-language-server-nodejs
 
-`dockerfile-language-server` can be installed via `:LspInstall dockerls` or by yourself with `npm`:
+`docker-langserver` can be installed via `:LspInstall dockerls` or by yourself with `npm`:
 ```sh
-npm install -g docker-language-server-nodejs
+npm install -g dockerfile-language-server-nodejs
 ```
     
 Can be installed in Nvim with `:LspInstall dockerls`
@@ -725,7 +725,7 @@ Can be installed in Nvim with `:LspInstall dockerls`
 require'nvim_lsp'.dockerls.setup{}
 
   Default Values:
-    cmd = { "docker-language-server", "--stdio" }
+    cmd = { "docker-langserver", "--stdio" }
     filetypes = { "Dockerfile", "dockerfile" }
     log_level = 2
     root_dir = root_pattern("Dockerfile")
@@ -1807,6 +1807,22 @@ This server accepts configuration via the `settings` key.
   
   A list of patterns for cargo-watch to ignore (will be passed as `--ignore`)
 
+- **`rust-analyzer.cargoFeatures.allFeatures`**: `boolean`
+
+  Default: `true`
+  
+  Activate all available features
+
+- **`rust-analyzer.cargoFeatures.features`**: `array`
+
+  Default: `{}`
+  
+  List of features to activate
+
+- **`rust-analyzer.cargoFeatures.noDefaultFeatures`**: `boolean`
+
+  Do not activate the `default` feature
+
 - **`rust-analyzer.displayInlayHints`**: `boolean`
 
   Default: `true`
@@ -2069,6 +2085,10 @@ Can be installed in Nvim with `:LspInstall sumneko_lua`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`Lua.awakened.cat`**: `boolean`
+
+  
+
 - **`Lua.completion.callSnippet`**: `enum { "Disable", "Both", "Replace" }`
 
   Default: `"Disable"`
@@ -2080,6 +2100,18 @@ This server accepts configuration via the `settings` key.
 - **`Lua.completion.keywordSnippet`**: `enum { "Disable", "Both", "Replace" }`
 
   Default: `"Replace"`
+
+- **`Lua.develop.debuggerPort`**: `integer`
+
+  Default: `11412`
+
+- **`Lua.develop.debuggerWait`**: `boolean`
+
+  
+
+- **`Lua.develop.enable`**: `boolean`
+
+  
 
 - **`Lua.diagnostics.disable`**: `array`
 
@@ -2132,10 +2164,6 @@ This server accepts configuration via the `settings` key.
 - **`Lua.workspace.useGitIgnore`**: `boolean`
 
   Default: `true`
-
-- **`Lua.zzzzzz.cat`**: `boolean`
-
-  
 
 </details>
 
