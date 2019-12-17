@@ -205,6 +205,7 @@ that config.
 - [ghcide](#ghcide)
 - [gopls](#gopls)
 - [hie](#hie)
+- [intelephense](#intelephense)
 - [leanls](#leanls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
@@ -1085,6 +1086,29 @@ require'nvim_lsp'.hie.setup{}
     log_level = 2
     root_dir = root_pattern("stack.yaml", "package.yaml", ".git")
     settings = {}
+```
+
+## intelephense
+
+https://intelephense.com/
+
+`intelephense` can be installed via `:LspInstall intelephense` or by yourself with `npm`: 
+```sh
+npm install -g intelephense
+```
+
+Can be installed in Nvim with `:LspInstall intelephense`
+
+```lua
+require'nvim_lsp'.intelephense.setup{}
+
+  Default Values:
+    capabilities = default capabilities, with offsetEncoding utf-8
+    cmd = { "intelephense", "--stdio" }
+    filetypes = { "php" }
+    log_level = 2
+    on_init = function to handle changing offsetEncoding
+    root_dir = root_pattern("composer.json", ".git")
 ```
 
 ## leanls
