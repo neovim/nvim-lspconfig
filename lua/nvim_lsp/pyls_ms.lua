@@ -45,12 +45,12 @@ local function make_installer()
       error('Unable to identify host operating system')
     end
 
-    local url = string.format("https://pvsc.azureedge.net/python-language-server-stable/Python-Language-Server-%s-x64.0.4.114.nupkg", string.lower(system))
+    local url = string.format("https://pvsc.azureedge.net/python-language-server-stable/Python-Language-Server-%s-x64.0.5.10.nupkg", string.lower(system))
     download_cmd = string.format('curl -fLo %s --create-dirs %s', install_info.install_dir .. "/pyls.nupkg", url)
 
-    if vim.fn.has('mac') or vim.fn.has('unix') then
+    if system == 'osx' or system == 'linux' then
       install_cmd = "unzip " .. install_info.install_dir .. "/pyls.nupkg -d " .. install_info.install_dir
-    elseif vim.fn.has('win32') then
+    elseif system == 'win' then
       install_cmd = "Expand-Archive -Force " .. install_info.install_dir .. "/pyls.nupkg -d " .. install_info.install_dir
     end
 
@@ -114,7 +114,17 @@ skeleton[name] = {
   docs = {
     description = [[
 https://github.com/Microsoft/python-language-server
+
 `python-language-server`, a language server for Python.
+
+Requires [.NET Core](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-install-script) to run. On Linux or macOS:
+
+```bash
+curl -L https://dot.net/v1/dotnet-install.sh | sh
+```
+
+This server accepts configuration via the `settings` key.
+
     ]];
     default_config = {
       root_dir = "vim's starting directory";
