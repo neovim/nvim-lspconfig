@@ -48,9 +48,9 @@ local function make_installer()
     local url = string.format("https://pvsc.azureedge.net/python-language-server-stable/Python-Language-Server-%s-x64.0.5.10.nupkg", string.lower(system))
     download_cmd = string.format('curl -fLo %s --create-dirs %s', install_info.install_dir .. "/pyls.nupkg", url)
 
-    if system == 'osx' or system == 'linux' then
+    if vim.fn.has('mac') == 1 or vim.fn.has('unix') == 1 then
       install_cmd = "unzip " .. install_info.install_dir .. "/pyls.nupkg -d " .. install_info.install_dir
-    elseif system == 'win' then
+    elseif vim.fn.has('win32') == 1 then
       install_cmd = "Expand-Archive -Force " .. install_info.install_dir .. "/pyls.nupkg -d " .. install_info.install_dir
     end
 
