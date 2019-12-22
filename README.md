@@ -1540,7 +1540,17 @@ require'nvim_lsp'.pyls.setup{}
 ## pyls_ms
 
 https://github.com/Microsoft/python-language-server
+
 `python-language-server`, a language server for Python.
+
+Requires [.NET Core](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-install-script) to run. On Linux or macOS:
+
+```bash
+curl -L https://dot.net/v1/dotnet-install.sh | sh
+```
+
+This server accepts configuration via the `settings` key.
+
     
 Can be installed in Nvim with `:LspInstall pyls_ms`
 
@@ -1813,6 +1823,12 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`rust-analyzer.cargo-watch.allTargets`**: `boolean`
+
+  Default: `true`
+  
+  Check all targets and tests (will be passed as `--all-targets`)
+
 - **`rust-analyzer.cargo-watch.arguments`**: `string`
 
   Default: `""`
@@ -1917,6 +1933,8 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.useClientWatching`**: `boolean`
 
+  Default: `true`
+  
   client provided file watching instead of notify watching.
 
 </details>
