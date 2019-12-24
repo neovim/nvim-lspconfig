@@ -811,6 +811,104 @@ See below for lsp command options.
 npm run flow lsp -- --help
 ```
     
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`flow.coverageSeverity`**: `enum { "error", "warn", "info" }`
+
+  Default: `"info"`
+  
+  Type coverage diagnostic severity
+
+- **`flow.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Is flow enabled
+
+- **`flow.fileExtensions`**: `array`
+
+  Default: `{ ".js", ".mjs", ".jsx", ".flow", ".json" }`
+  
+  Array items: `{type = "string"}`
+  
+  (Supported only when useLSP: false). File extensions to consider for flow processing
+
+- **`flow.lazyMode`**: `string`
+
+  Default: `vim.NIL`
+  
+  Set value to enable flow lazy mode
+
+- **`flow.logLevel`**: `enum { "error", "warn", "info", "trace" }`
+
+  Default: `"info"`
+  
+  Log level for output panel logs
+
+- **`flow.pathToFlow`**: `string`
+
+  Default: `"flow"`
+  
+  Absolute path to flow binary. Special var ${workspaceFolder} or ${flowconfigDir} can be used in path (NOTE: in windows you can use '/' and can omit '.cmd' in path)
+
+- **`flow.runOnAllFiles`**: `boolean`
+
+  (Supported only when useLSP: false) Run Flow on all files, No need to put //@flow comment on top of files.
+
+- **`flow.runOnEdit`**: `boolean`
+
+  Default: `true`
+  
+  If true will run flow on every edit, otherwise will run only when changes are saved (Note: 'useLSP: true' only supports syntax errors)
+
+- **`flow.showStatus`**: `boolean`
+
+  Default: `true`
+  
+  (Supported only when useLSP: false) If true will display flow status is the statusbar
+
+- **`flow.showUncovered`**: `boolean`
+
+  If true will show uncovered code by default
+
+- **`flow.stopFlowOnExit`**: `boolean`
+
+  Default: `true`
+  
+  Stop Flow on Exit
+
+- **`flow.trace.server`**
+
+  Default: `"off"`
+  
+  Traces the communication between VSCode and the flow lsp service.
+
+- **`flow.useBundledFlow`**: `boolean`
+
+  Default: `true`
+  
+  If true will use flow bundled with this plugin if nothing works
+
+- **`flow.useCodeSnippetOnFunctionSuggest`**: `boolean`
+
+  Default: `true`
+  
+  Complete functions with their parameter signature.
+
+- **`flow.useLSP`**: `boolean`
+
+  Default: `true`
+  
+  Turn off to switch from the official Flow Language Server implementation to talking directly to flow.
+
+- **`flow.useNPMPackagedFlow`**: `boolean`
+
+  Default: `true`
+  
+  Support using flow through your node_modules folder, WARNING: Checking this box is a security risk. When you open a project we will immediately run code contained within it.
+
+</details>
 
 ```lua
 require'nvim_lsp'.flow.setup{}
