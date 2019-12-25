@@ -22,6 +22,9 @@ Help us create configs for *all the LSPs!*
    [existing configs](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/) for
    examples (`lua/nvim_lsp/texlab.lua` is an extensive example).
 
+## Requirements
+This plugin requires nightly neovim now.
+
 ## Install
 
 **nvim-lsp** is just a plugin. Install it like any other Nvim plugin:
