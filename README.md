@@ -6,8 +6,8 @@ It is hoped that these configurations serve as a "source of truth", but they
 are strictly _best effort_. If something doesn't work, these configs are useful
 as a starting point, which you can adjust to fit your environment.
 
-**Note**: This is a work-in-progress and requires Nvim HEAD. Update Nvim and
-nvim-lsp before reporting an issue.
+This is work-in-progress and **requires [Nvim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly)**.
+Update Nvim and nvim-lsp before reporting an issue.
 
 ## Contributions are welcome!
 
@@ -24,10 +24,11 @@ Help us create configs for *all the LSPs!*
 
 ## Install
 
-**nvim-lsp** is just a plugin. Install it like any other Nvim plugin:
-
-    Plug 'neovim/nvim-lsp'
-
+- Requires [Nvim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly) (v0.5 prerelease).
+- nvim-lsp is just a plugin. Install it like any other Vim plugin.
+  ```
+  :Plug 'neovim/nvim-lsp'
+  ```
 ## Usage
 
 Each config provides a `setup()` function, to initialize the server with
@@ -207,6 +208,7 @@ that config.
 - [hie](#hie)
 - [intelephense](#intelephense)
 - [leanls](#leanls)
+- [ocamlls](#ocamlls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
 - [rls](#rls)
@@ -811,6 +813,104 @@ See below for lsp command options.
 npm run flow lsp -- --help
 ```
     
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`flow.coverageSeverity`**: `enum { "error", "warn", "info" }`
+
+  Default: `"info"`
+  
+  Type coverage diagnostic severity
+
+- **`flow.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Is flow enabled
+
+- **`flow.fileExtensions`**: `array`
+
+  Default: `{ ".js", ".mjs", ".jsx", ".flow", ".json" }`
+  
+  Array items: `{type = "string"}`
+  
+  (Supported only when useLSP: false). File extensions to consider for flow processing
+
+- **`flow.lazyMode`**: `string`
+
+  Default: `vim.NIL`
+  
+  Set value to enable flow lazy mode
+
+- **`flow.logLevel`**: `enum { "error", "warn", "info", "trace" }`
+
+  Default: `"info"`
+  
+  Log level for output panel logs
+
+- **`flow.pathToFlow`**: `string`
+
+  Default: `"flow"`
+  
+  Absolute path to flow binary. Special var ${workspaceFolder} or ${flowconfigDir} can be used in path (NOTE: in windows you can use '/' and can omit '.cmd' in path)
+
+- **`flow.runOnAllFiles`**: `boolean`
+
+  (Supported only when useLSP: false) Run Flow on all files, No need to put //@flow comment on top of files.
+
+- **`flow.runOnEdit`**: `boolean`
+
+  Default: `true`
+  
+  If true will run flow on every edit, otherwise will run only when changes are saved (Note: 'useLSP: true' only supports syntax errors)
+
+- **`flow.showStatus`**: `boolean`
+
+  Default: `true`
+  
+  (Supported only when useLSP: false) If true will display flow status is the statusbar
+
+- **`flow.showUncovered`**: `boolean`
+
+  If true will show uncovered code by default
+
+- **`flow.stopFlowOnExit`**: `boolean`
+
+  Default: `true`
+  
+  Stop Flow on Exit
+
+- **`flow.trace.server`**
+
+  Default: `"off"`
+  
+  Traces the communication between VSCode and the flow lsp service.
+
+- **`flow.useBundledFlow`**: `boolean`
+
+  Default: `true`
+  
+  If true will use flow bundled with this plugin if nothing works
+
+- **`flow.useCodeSnippetOnFunctionSuggest`**: `boolean`
+
+  Default: `true`
+  
+  Complete functions with their parameter signature.
+
+- **`flow.useLSP`**: `boolean`
+
+  Default: `true`
+  
+  Turn off to switch from the official Flow Language Server implementation to talking directly to flow.
+
+- **`flow.useNPMPackagedFlow`**: `boolean`
+
+  Default: `true`
+  
+  Support using flow through your node_modules folder, WARNING: Checking this box is a security risk. When you open a project we will immediately run code contained within it.
+
+</details>
 
 ```lua
 require'nvim_lsp'.flow.setup{}
@@ -1255,6 +1355,28 @@ require'nvim_lsp'.leanls.setup{}
     settings = {}
 ```
 
+## ocamlls
+
+https://github.com/ocaml-lsp/ocaml-language-server
+
+`ocaml-language-server` can be installed via `:LspInstall ocamlls` or by yourself with `npm`
+```sh
+npm install -g ocaml-langauge-server
+```
+    
+Can be installed in Nvim with `:LspInstall ocamlls`
+
+```lua
+require'nvim_lsp'.ocamlls.setup{}
+
+  Default Values:
+    cmd = { "ocaml-language-server", "--stdio" }
+    filetypes = { "ocaml", "reason" }
+    log_level = 2
+    root_dir = root_pattern(".merlin", "package.json")
+    settings = {}
+```
+
 ## pyls
 
 https://github.com/palantir/python-language-server
@@ -1540,7 +1662,17 @@ require'nvim_lsp'.pyls.setup{}
 ## pyls_ms
 
 https://github.com/Microsoft/python-language-server
+
 `python-language-server`, a language server for Python.
+
+Requires [.NET Core](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-install-script) to run. On Linux or macOS:
+
+```bash
+curl -L https://dot.net/v1/dotnet-install.sh | sh
+```
+
+This server accepts configuration via the `settings` key.
+
     
 Can be installed in Nvim with `:LspInstall pyls_ms`
 
@@ -1813,6 +1945,12 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`rust-analyzer.cargo-watch.allTargets`**: `boolean`
+
+  Default: `true`
+  
+  Check all targets and tests (will be passed as `--all-targets`)
+
 - **`rust-analyzer.cargo-watch.arguments`**: `string`
 
   Default: `""`
@@ -1917,6 +2055,8 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.useClientWatching`**: `boolean`
 
+  Default: `true`
+  
   client provided file watching instead of notify watching.
 
 </details>

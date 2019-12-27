@@ -11,6 +11,7 @@ skeleton.flow = {
     settings = {};
   };
   docs = {
+    package_json = "https://raw.githubusercontent.com/flowtype/flow-for-vscode/master/package.json";
     description = [[
 https://flow.org/
 https://github.com/facebook/flow
