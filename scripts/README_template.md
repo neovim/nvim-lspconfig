@@ -6,8 +6,8 @@ It is hoped that these configurations serve as a "source of truth", but they
 are strictly _best effort_. If something doesn't work, these configs are useful
 as a starting point, which you can adjust to fit your environment.
 
-**Note**: This is a work-in-progress and requires Nvim HEAD. Update Nvim and
-nvim-lsp before reporting an issue.
+This is work-in-progress and **requires [Nvim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly)**.
+Update Nvim and nvim-lsp before reporting an issue.
 
 ## Contributions are welcome!
 
@@ -24,10 +24,11 @@ Help us create configs for *all the LSPs!*
 
 ## Install
 
-**nvim-lsp** is just a plugin. Install it like any other Nvim plugin:
-
-    Plug 'neovim/nvim-lsp'
-
+- Requires [Nvim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly) (v0.5 prerelease).
+- nvim-lsp is just a plugin. Install it like any other Vim plugin.
+  ```
+  :Plug 'neovim/nvim-lsp'
+  ```
 ## Usage
 
 Each config provides a `setup()` function, to initialize the server with
