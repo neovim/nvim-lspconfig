@@ -1,7 +1,6 @@
 local skeleton = require "nvim_lsp/skeleton"
 local util = require "nvim_lsp/util"
 local lsp = vim.lsp
-local api = vim.api
 
 local server_name = "vimls"
 local bin_name = "vim-language-server"

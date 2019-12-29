@@ -22,14 +22,14 @@ end
 -- bufnr isn't actually required here, but we need a valid buffer in order to
 -- be able to find the client for buf_request.
 -- TODO find a client by looking through buffers for a valid client?
-local function build_cancel_all(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
-  local params = { token = "texlab-build-*" }
-  lsp.buf_request(bufnr, 'window/progress/cancel', params, function(err, method, result, client_id)
-    if err then error(tostring(err)) end
-    print("Cancel result", vim.inspect(result))
-  end)
-end
+-- local function build_cancel_all(bufnr)
+--   bufnr = util.validate_bufnr(bufnr)
+--   local params = { token = "texlab-build-*" }
+--   lsp.buf_request(bufnr, 'window/progress/cancel', params, function(err, method, result, client_id)
+--     if err then error(tostring(err)) end
+--     print("Cancel result", vim.inspect(result))
+--   end)
+-- end
 
 skeleton.texlab = {
   default_config = {
@@ -49,14 +49,14 @@ skeleton.texlab = {
           executable = nil;
           onSave = false;
         };
-        lint = { 
-          onChange = false; 
+        lint = {
+          onChange = false;
         };
       };
-      bibtex = { 
-        formatting = { 
-          lineLength = 120 
-        }; 
+      bibtex = {
+        formatting = {
+          lineLength = 120
+        };
       };
     };
   };

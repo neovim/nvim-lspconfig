@@ -14,32 +14,28 @@ function M.validate_bufnr(bufnr)
   return bufnr == 0 and api.nvim_get_current_buf() or bufnr
 end
 
-function M.add_hook_before(fn, new_fn)
-  if fn then
+function M.add_hook_before(func, new_fn)
+  if func then
     return function(...)
       -- TODO which result?
       new_fn(...)
-      return fn(...)
+      return func(...)
     end
   else
     return new_fn
   end
 end
 
-function M.add_hook_after(fn, new_fn)
-  if fn then
+function M.add_hook_after(func, new_fn)
+  if func then
     return function(...)
       -- TODO which result?
-      fn(...)
+      func(...)
       return new_fn(...)
     end
   else
     return new_fn
   end
-end
-
-local function split_lines(s)
-  return vim.split(s, "\n", true)
 end
 
 function M.tbl_deep_extend(dst, ...)
@@ -247,11 +243,11 @@ function M.server_per_root_dir_manager(make_config)
   return manager
 end
 
-function M.search_ancestors(startpath, fn)
-  validate { fn = {fn, 'f'} }
-  if fn(startpath) then return startpath end
+function M.search_ancestors(startpath, func)
+  validate { func = {func, 'f'} }
+  if func(startpath) then return startpath end
   for path in M.path.iterate_parents(startpath) do
-    if fn(path) then return path end
+    if func(path) then return path end
   end
 end
 
@@ -299,9 +295,9 @@ local function validate_string_list(t)
   return true
 end
 
-local function map_list(t, fn)
+local function map_list(t, func)
   local res = {}
-  for i, v in ipairs(t) do table.insert(res, fn(v, i)) end
+  for i, v in ipairs(t) do table.insert(res, func(v, i)) end
   return res
 end
 
@@ -385,6 +381,8 @@ function M.sh(script, cwd)
   local stdin = uv.new_pipe(false)
   local stdout = uv.new_pipe(false)
   local stderr = uv.new_pipe(false)
+
+  -- luacheck: no unused
   local handle, pid
   handle, pid = uv.spawn("sh", {
     stdio = {stdin, stdout, stderr};

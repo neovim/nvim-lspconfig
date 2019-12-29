@@ -41,12 +41,13 @@ local function make_installer()
       system = 'linux'
     elseif vim.fn.has('win32') == 1 then
       system = 'win'
-    else 
+    else
       error('Unable to identify host operating system')
     end
 
     local url = string.format("https://pvsc.azureedge.net/python-language-server-stable/Python-Language-Server-%s-x64.0.5.10.nupkg", string.lower(system))
-    download_cmd = string.format('curl -fLo %s --create-dirs %s', install_info.install_dir .. "/pyls.nupkg", url)
+    local download_cmd = string.format('curl -fLo %s --create-dirs %s', install_info.install_dir .. "/pyls.nupkg", url)
+    local install_cmd = ''
 
     if vim.fn.has('mac') == 1 or vim.fn.has('unix') == 1 then
       install_cmd = "unzip " .. install_info.install_dir .. "/pyls.nupkg -d " .. install_info.install_dir
@@ -96,9 +97,9 @@ skeleton[name] = {
       installer.configure(config)
     end;
     init_options = {
-      interpreter = 
+      interpreter =
                 {
-                    properties= 
+                    properties=
                     {
                         InterpreterPath=vim.fn.exepath("python");
                         Version=get_python_version();

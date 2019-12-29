@@ -39,7 +39,7 @@ skeleton[server_name] = {
     description = [[
 https://intelephense.com/
 
-`intelephense` can be installed via `:LspInstall intelephense` or by yourself with `npm`: 
+`intelephense` can be installed via `:LspInstall intelephense` or by yourself with `npm`:
 ```sh
 npm install -g intelephense
 ```
