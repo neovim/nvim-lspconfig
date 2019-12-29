@@ -68,7 +68,7 @@ local lsp_section_template = [[
 
 {{preamble}}
 ```lua
-require'nvim_lsp'.{{template_name}}.setup{}
+require 'nvim_lsp'.{{template_name}}.setup{}
 
 {{body}}
 ```
