@@ -29,12 +29,16 @@ Help us create configs for *all the LSPs!*
   ```
   :Plug 'neovim/nvim-lsp'
   ```
+- Call `:packadd nvim-lsp` in your config if you installed nvim-lsp to
+  'packpath' or if you use a package manager such as minpac.
+
 ## Usage
 
 Each config provides a `setup()` function, to initialize the server with
 reasonable defaults and some server-specific things like commands or different
 diagnostics.
 
+    vim.api.nvim_command('packadd nvim-lsp')
     require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
 
 Find the [config](#configurations) for your language, then paste the example
@@ -49,6 +53,7 @@ config provides `nvim_lsp.texlab.buf_build({bufnr})`.
 To use the defaults, just call `setup()` with an empty `config` parameter.
 For the `gopls` config, that would be:
 
+    vim.api.nvim_command('packadd nvim-lsp')
     require'nvim_lsp'.gopls.setup{}
 
 ### Example: override some defaults
