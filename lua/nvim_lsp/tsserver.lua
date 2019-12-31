@@ -34,7 +34,7 @@ skeleton[server_name] = {
     description = [[
 https://github.com/theia-ide/typescript-language-server
 
-`typescript-language-server` can be installed via `:LspInstall tsserver` or by yourself with `npm`: 
+`typescript-language-server` can be installed via `:LspInstall tsserver` or by yourself with `npm`:
 ```sh
 npm install -g typescript-language-server
 ```

@@ -1,0 +1,22 @@
+name: lint
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  lint:
+    runs-on: [ubuntu-latest]
+    steps:
+    - name: Checkout sources
+      uses: actions/checkout@v1
+    - name: Setup luacheck
+      run: |
+        sudo apt update &&
+        sudo apt install -y lua5.1 luarocks &&
+        sudo luarocks install luacheck
+    - name: Run luacheck
+      run: |
+        luacheck .
+
