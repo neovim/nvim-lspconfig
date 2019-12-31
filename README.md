@@ -2036,10 +2036,6 @@ This server accepts configuration via the `settings` key.
 
   When highlighting Rust code, use a unique color per identifier
 
-- **`rust-analyzer.scopeMappings`**: `object`
-
-  Mapping Rust Analyzer scopes to TextMateRule scopes list.
-
 - **`rust-analyzer.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
