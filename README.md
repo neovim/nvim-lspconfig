@@ -1280,7 +1280,7 @@ This server accepts configuration via the `settings` key.
 
 - **`lean.input.customTranslations`**: `object`
 
-  Default: `{}`
+  Default: `vim.empty_dict()`
   
   Array items: `{description = "Unicode character to translate to",type = "string"}`
   
@@ -2007,7 +2007,7 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.featureFlags`**: `object`
 
-  Default: `{}`
+  Default: `vim.empty_dict()`
   
   Fine grained feature flags to disable annoying features
 
