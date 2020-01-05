@@ -219,6 +219,7 @@ that config.
 - [texlab](#texlab)
 - [tsserver](#tsserver)
 - [vimls](#vimls)
+- [yamlls](#yamlls)
 
 ## bashls
 
@@ -2518,6 +2519,144 @@ require'nvim_lsp'.vimls.setup{}
     log_level = 2
     on_new_config = <function 1>
     root_dir = <function 1>
+    settings = {}
+```
+
+## yamlls
+
+https://github.com/redhat-developer/yaml-language-server
+
+`yaml-language-server` can be installed via `:LspInstall yamlls` or by yourself with `npm`:
+```sh
+npm install -g yaml-language-server
+```
+
+Can be installed in Nvim with `:LspInstall yamlls`
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`yaml.completion`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable completion feature
+
+- **`yaml.customTags`**: `array`
+
+  Default: `{}`
+  
+  Custom tags for the parser to use
+
+- **`yaml.format.bracketSpacing`**: `boolean`
+
+  Default: `true`
+  
+  Print spaces between brackets in objects
+
+- **`yaml.format.enable`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable default YAML formatter
+
+- **`yaml.format.printWidth`**: `integer`
+
+  Default: `80`
+  
+  Specify the line length that the printer will wrap on
+
+- **`yaml.format.proseWrap`**: `enum { "preserve", "never", "always" }`
+
+  Default: `"preserve"`
+  
+  Always: wrap prose if it exeeds the print width, Never: never wrap the prose, Preserve: wrap prose as-is
+
+- **`yaml.format.singleQuote`**: `boolean`
+
+  Use single quotes instead of double quotes
+
+- **`yaml.hover`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable hover feature
+
+- **`yaml.schemaStore.enable`**: `boolean`
+
+  Default: `true`
+  
+  Automatically pull available YAML schemas from JSON Schema Store
+
+- **`yaml.schemas`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  Associate schemas to YAML files in the current workspace
+
+- **`yaml.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VSCode and the YAML language service.
+
+- **`yaml.validate`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable validation feature
+
+</details>
+
+```lua
+require'nvim_lsp'.yamlls.setup{}
+
+  Default Values:
+    capabilities = {
+      offsetEncoding = { "utf-8", "utf-16" },
+      textDocument = {
+        completion = {
+          completionItem = {
+            commitCharactersSupport = false,
+            deprecatedSupport = false,
+            documentationFormat = { "markdown", "plaintext" },
+            preselectSupport = false,
+            snippetSupport = false
+          },
+          completionItemKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
+          },
+          contextSupport = false,
+          dynamicRegistration = false
+        },
+        documentHighlight = {
+          dynamicRegistration = false
+        },
+        hover = {
+          contentFormat = { "markdown", "plaintext" },
+          dynamicRegistration = false
+        },
+        references = {
+          dynamicRegistration = false
+        },
+        signatureHelp = {
+          dynamicRegistration = false,
+          signatureInformation = {
+            documentationFormat = { "markdown", "plaintext" }
+          }
+        },
+        synchronization = {
+          didSave = true,
+          dynamicRegistration = false,
+          willSave = false,
+          willSaveWaitUntil = false
+        }
+      }
+    }
+    cmd = { "yaml-language-server", "--stdio" }
+    filetypes = { "yaml" }
+    log_level = 2
+    on_init = <function 1>
+    root_dir = root_pattern(".git", vim.fn.getcwd())
     settings = {}
 ```
 
