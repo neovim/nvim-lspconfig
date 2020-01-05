@@ -215,6 +215,7 @@ that config.
 - [rust_analyzer](#rust_analyzer)
 - [solargraph](#solargraph)
 - [sumneko_lua](#sumneko_lua)
+- [terraformls](#terraformls)
 - [texlab](#texlab)
 - [tsserver](#tsserver)
 - [vimls](#vimls)
@@ -2331,6 +2332,89 @@ require'nvim_lsp'.sumneko_lua.setup{}
     filetypes = { "lua" }
     log_level = 2
     root_dir = root_pattern(".git") or os_homedir
+    settings = {}
+```
+
+## terraformls
+
+https://github.com/juliosueiras/terraform-lsp
+
+Terraform language server
+You can use [released binary](https://github.com/juliosueiras/terraform-lsp/releases) or [build](https://github.com/juliosueiras/terraform-lsp#building) your own.
+
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`terraform.codelens.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable the CodeLens feature
+
+- **`terraform.format`**: `object`
+
+  Default: `{ignoreExtensionsOnSave = { ".tfsmurf" }}`
+  
+  Formatting settings
+
+- **`terraform.indexing`**: `object`
+
+  Default: `{delay = 500,enabled = true,exclude = { ".terraform/**/*", "**/.terraform/**/*" },liveIndexing = false}`
+  
+  Indexes all terraform sources to get live syntax errors, rename support, go to symbol, and much more...
+
+- **`terraform.languageServer`**: `object`
+
+  Default: `{args = {},enabled = false}`
+  
+  Configures how the language server runs and works
+
+- **`terraform.lintConfig`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  Path to the `tflint` config file.
+
+- **`terraform.lintPath`**: `string`
+
+  Default: `"tflint"`
+  
+  Path to the `tflint` executable.
+
+- **`terraform.path`**: `string`
+
+  Default: `"terraform"`
+  
+  Path to the `terraform` executable
+
+- **`terraform.paths`**: `array`
+
+  Default: `{}`
+  
+  List of terraform paths or paths with versions
+
+- **`terraform.telemetry.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable telemetry reporting for this plugin. The global `telemetry.enableTelemetry` is also respected. If the global is disabled, this setting has no effect.
+
+- **`terraform.templateDirectory`**: `string`
+
+  Default: `"templates"`
+  
+  A relative path to where your templates are stored relative to the workspace root.
+
+</details>
+
+```lua
+require'nvim_lsp'.terraformls.setup{}
+
+  Default Values:
+    cmd = { "terraform-lsp" }
+    filetypes = { "terraform" }
+    log_level = 2
+    root_dir = root_pattern(".git")
     settings = {}
 ```
 
