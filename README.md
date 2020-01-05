@@ -1146,6 +1146,10 @@ This server accepts configuration via the `settings` key.
   
   Controls the maximum number of problems produced by the server.
 
+- **`languageServerHaskell.noLspParam`**: `boolean`
+
+  Do not set the '--lsp' flag in the hie/hie-wrapper arguments when launching it
+
 - **`languageServerHaskell.showTypeForSelection.command.location`**: `enum { "dropdown", "channel" }`
 
   Default: `"dropdown"`
