@@ -18,6 +18,16 @@ require'nvim_lsp/skeleton'.julials = {
       return util.find_git_ancestor(fname) or vim.loop.os_homedir()
     end;
   };
+  docs = {
+    vscode = "julialang.language-julia";
+    description = [[
+https://github.com/julia-vscode/julia-vscode
+`LanguageServer.jl` can be installed via `:LspInstall julials` or by yourself the `julia` and `Pkg`:
+```sh
+julia -e 'using Pkg; Pkg.add("LanguageServer")'
+```
+    ]];
+  };
 }
 
 require'nvim_lsp/skeleton'.julials.install = function()
