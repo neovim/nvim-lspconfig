@@ -10,10 +10,10 @@ local function template(s, params)
   return (s:gsub("{{([^{}]+)}}", params))
 end
 
-local function map_list(t, fn)
+local function map_list(t, func)
   local res = {}
   for i, v in ipairs(t) do
-    local x = fn(v, i)
+    local x = func(v, i)
     if x ~= nil then
       table.insert(res, x)
     end
@@ -55,11 +55,11 @@ local function readfile(path)
   return io.open(path):read("*a")
 end
 
-local function sorted_map_table(t, fn)
+local function sorted_map_table(t, func)
   local keys = vim.tbl_keys(t)
   table.sort(keys)
   return map_list(keys, function(k)
-    return fn(k, t[k])
+    return func(k, t[k])
   end)
 end
 
@@ -137,7 +137,7 @@ local function make_lsp_sections()
               curl -L -o {{vspackage_name}} {{vspackage_url}}
               gzip -d {{vspackage_name}}
               unzip -j {{vspackage_zip}} extension/package.json
-              mv package.json {{package_json_name}} 
+              mv package.json {{package_json_name}}
               ]]
               os.execute(template(script, {
                 package_json_name = package_json_name;
@@ -178,9 +178,9 @@ local function make_lsp_sections()
                   -- The list of properties.
                   make_section(0, '\n\n', sorted_map_table(default_settings.properties, function(k, v)
                     local function tick(s) return string.format("`%s`", s) end
-                    local function pre(s) return string.format("<pre>%s</pre>", s) end
-                    local function code(s) return string.format("<code>%s</code>", s) end
                     local function bold(s) return string.format("**%s**", s) end
+                    -- local function pre(s) return string.format("<pre>%s</pre>", s) end
+                    -- local function code(s) return string.format("<code>%s</code>", s) end
                     return make_section(0, '\n', {
                       "- "..make_section(0, ': ', {
                         bold(tick(k));

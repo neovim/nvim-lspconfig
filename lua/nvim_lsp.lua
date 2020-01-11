@@ -22,7 +22,10 @@ require 'nvim_lsp/sumneko_lua'
 require 'nvim_lsp/texlab'
 require 'nvim_lsp/tsserver'
 require 'nvim_lsp/metals'
+require 'nvim_lsp/vimls'
 require 'nvim_lsp/ocamlls'
+require 'nvim_lsp/terraformls'
+require 'nvim_lsp/yamlls'
 
 local M = {
   util = require 'nvim_lsp/util';

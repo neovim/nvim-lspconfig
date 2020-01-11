@@ -215,8 +215,11 @@ that config.
 - [rust_analyzer](#rust_analyzer)
 - [solargraph](#solargraph)
 - [sumneko_lua](#sumneko_lua)
+- [terraformls](#terraformls)
 - [texlab](#texlab)
 - [tsserver](#tsserver)
+- [vimls](#vimls)
+- [yamlls](#yamlls)
 
 ## bashls
 
@@ -1145,6 +1148,10 @@ This server accepts configuration via the `settings` key.
   
   Controls the maximum number of problems produced by the server.
 
+- **`languageServerHaskell.noLspParam`**: `boolean`
+
+  Do not set the '--lsp' flag in the hie/hie-wrapper arguments when launching it
+
 - **`languageServerHaskell.showTypeForSelection.command.location`**: `enum { "dropdown", "channel" }`
 
   Default: `"dropdown"`
@@ -1192,7 +1199,7 @@ require'nvim_lsp'.hie.setup{}
 
 https://intelephense.com/
 
-`intelephense` can be installed via `:LspInstall intelephense` or by yourself with `npm`: 
+`intelephense` can be installed via `:LspInstall intelephense` or by yourself with `npm`:
 ```sh
 npm install -g intelephense
 ```
@@ -1278,7 +1285,7 @@ This server accepts configuration via the `settings` key.
 
 - **`lean.input.customTranslations`**: `object`
 
-  Default: `{}`
+  Default: `vim.empty_dict()`
   
   Array items: `{description = "Unicode character to translate to",type = "string"}`
   
@@ -1951,9 +1958,9 @@ This server accepts configuration via the `settings` key.
   
   Check all targets and tests (will be passed as `--all-targets`)
 
-- **`rust-analyzer.cargo-watch.arguments`**: `string`
+- **`rust-analyzer.cargo-watch.arguments`**: `array`
 
-  Default: `""`
+  Default: `{}`
   
   `cargo-watch` arguments. (e.g: `--features="shumway,pdf"` will run as `cargo watch -x "check --features="shumway,pdf""` )
 
@@ -1963,11 +1970,11 @@ This server accepts configuration via the `settings` key.
   
   `cargo-watch` command. (e.g: `clippy` will run as `cargo watch -x clippy` )
 
-- **`rust-analyzer.cargo-watch.ignore`**: `array`
+- **`rust-analyzer.cargo-watch.enable`**: `boolean`
 
-  Default: `{}`
+  Default: `true`
   
-  A list of patterns for cargo-watch to ignore (will be passed as `--ignore`)
+  Run `cargo check` for diagnostics on save
 
 - **`rust-analyzer.cargoFeatures.allFeatures`**: `boolean`
 
@@ -1991,12 +1998,6 @@ This server accepts configuration via the `settings` key.
   
   Display additional type information in the editor
 
-- **`rust-analyzer.enableCargoWatchOnStartup`**: `enum { "ask", "enabled", "disabled" }`
-
-  Default: `"ask"`
-  
-  Whether to run `cargo watch` on startup
-
 - **`rust-analyzer.enableEnhancedTyping`**: `boolean`
 
   Default: `true`
@@ -2011,7 +2012,7 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.featureFlags`**: `object`
 
-  Default: `{}`
+  Default: `vim.empty_dict()`
   
   Fine grained feature flags to disable annoying features
 
@@ -2040,12 +2041,6 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.rainbowHighlightingOn`**: `boolean`
 
   When highlighting Rust code, use a unique color per identifier
-
-- **`rust-analyzer.trace.cargo-watch`**: `enum { "off", "error", "verbose" }`
-
-  Default: `"off"`
-  
-  Trace output of cargo-watch
 
 - **`rust-analyzer.trace.server`**: `enum { "off", "messages", "verbose" }`
 
@@ -2341,6 +2336,89 @@ require'nvim_lsp'.sumneko_lua.setup{}
     settings = {}
 ```
 
+## terraformls
+
+https://github.com/juliosueiras/terraform-lsp
+
+Terraform language server
+You can use [released binary](https://github.com/juliosueiras/terraform-lsp/releases) or [build](https://github.com/juliosueiras/terraform-lsp#building) your own.
+
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`terraform.codelens.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable the CodeLens feature
+
+- **`terraform.format`**: `object`
+
+  Default: `{ignoreExtensionsOnSave = { ".tfsmurf" }}`
+  
+  Formatting settings
+
+- **`terraform.indexing`**: `object`
+
+  Default: `{delay = 500,enabled = true,exclude = { ".terraform/**/*", "**/.terraform/**/*" },liveIndexing = false}`
+  
+  Indexes all terraform sources to get live syntax errors, rename support, go to symbol, and much more...
+
+- **`terraform.languageServer`**: `object`
+
+  Default: `{args = {},enabled = false}`
+  
+  Configures how the language server runs and works
+
+- **`terraform.lintConfig`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  Path to the `tflint` config file.
+
+- **`terraform.lintPath`**: `string`
+
+  Default: `"tflint"`
+  
+  Path to the `tflint` executable.
+
+- **`terraform.path`**: `string`
+
+  Default: `"terraform"`
+  
+  Path to the `terraform` executable
+
+- **`terraform.paths`**: `array`
+
+  Default: `{}`
+  
+  List of terraform paths or paths with versions
+
+- **`terraform.telemetry.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable telemetry reporting for this plugin. The global `telemetry.enableTelemetry` is also respected. If the global is disabled, this setting has no effect.
+
+- **`terraform.templateDirectory`**: `string`
+
+  Default: `"templates"`
+  
+  A relative path to where your templates are stored relative to the workspace root.
+
+</details>
+
+```lua
+require'nvim_lsp'.terraformls.setup{}
+
+  Default Values:
+    cmd = { "terraform-lsp" }
+    filetypes = { "terraform" }
+    log_level = 2
+    root_dir = root_pattern(".git")
+    settings = {}
+```
+
 ## texlab
 
 https://texlab.netlify.com/
@@ -2388,7 +2466,7 @@ require'nvim_lsp'.texlab.setup{}
 
 https://github.com/theia-ide/typescript-language-server
 
-`typescript-language-server` can be installed via `:LspInstall tsserver` or by yourself with `npm`: 
+`typescript-language-server` can be installed via `:LspInstall tsserver` or by yourself with `npm`:
 ```sh
 npm install -g typescript-language-server
 ```
@@ -2405,6 +2483,180 @@ require'nvim_lsp'.tsserver.setup{}
     log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("package.json")
+    settings = {}
+```
+
+## vimls
+
+
+```lua
+require'nvim_lsp'.vimls.setup{}
+
+  Default Values:
+    cmd = { "vim-language-server", "--stdio" }
+    docs = {
+      description = "https://github.com/iamcco/vim-language-server\n\nIf you don't want to use Nvim to install it, then you can use:\n```sh\nnpm install -g vim-language-server\n```\n"
+    }
+    filetypes = { "vim" }
+    init_options = {
+      diagnostic = {
+        enable = true
+      },
+      indexes = {
+        count = 3,
+        gap = 100,
+        projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
+        runtimepath = true
+      },
+      iskeyword = "@,48-57,_,192-255,-#",
+      runtimepath = "",
+      suggest = {
+        fromRuntimepath = true,
+        fromVimruntime = true
+      },
+      vimruntime = ""
+    }
+    log_level = 2
+    on_new_config = <function 1>
+    root_dir = <function 1>
+    settings = {}
+```
+
+## yamlls
+
+https://github.com/redhat-developer/yaml-language-server
+
+`yaml-language-server` can be installed via `:LspInstall yamlls` or by yourself with `npm`:
+```sh
+npm install -g yaml-language-server
+```
+
+Can be installed in Nvim with `:LspInstall yamlls`
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`yaml.completion`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable completion feature
+
+- **`yaml.customTags`**: `array`
+
+  Default: `{}`
+  
+  Custom tags for the parser to use
+
+- **`yaml.format.bracketSpacing`**: `boolean`
+
+  Default: `true`
+  
+  Print spaces between brackets in objects
+
+- **`yaml.format.enable`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable default YAML formatter
+
+- **`yaml.format.printWidth`**: `integer`
+
+  Default: `80`
+  
+  Specify the line length that the printer will wrap on
+
+- **`yaml.format.proseWrap`**: `enum { "preserve", "never", "always" }`
+
+  Default: `"preserve"`
+  
+  Always: wrap prose if it exeeds the print width, Never: never wrap the prose, Preserve: wrap prose as-is
+
+- **`yaml.format.singleQuote`**: `boolean`
+
+  Use single quotes instead of double quotes
+
+- **`yaml.hover`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable hover feature
+
+- **`yaml.schemaStore.enable`**: `boolean`
+
+  Default: `true`
+  
+  Automatically pull available YAML schemas from JSON Schema Store
+
+- **`yaml.schemas`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  Associate schemas to YAML files in the current workspace
+
+- **`yaml.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VSCode and the YAML language service.
+
+- **`yaml.validate`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable validation feature
+
+</details>
+
+```lua
+require'nvim_lsp'.yamlls.setup{}
+
+  Default Values:
+    capabilities = {
+      offsetEncoding = { "utf-8", "utf-16" },
+      textDocument = {
+        completion = {
+          completionItem = {
+            commitCharactersSupport = false,
+            deprecatedSupport = false,
+            documentationFormat = { "markdown", "plaintext" },
+            preselectSupport = false,
+            snippetSupport = false
+          },
+          completionItemKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
+          },
+          contextSupport = false,
+          dynamicRegistration = false
+        },
+        documentHighlight = {
+          dynamicRegistration = false
+        },
+        hover = {
+          contentFormat = { "markdown", "plaintext" },
+          dynamicRegistration = false
+        },
+        references = {
+          dynamicRegistration = false
+        },
+        signatureHelp = {
+          dynamicRegistration = false,
+          signatureInformation = {
+            documentationFormat = { "markdown", "plaintext" }
+          }
+        },
+        synchronization = {
+          didSave = true,
+          dynamicRegistration = false,
+          willSave = false,
+          willSaveWaitUntil = false
+        }
+      }
+    }
+    cmd = { "yaml-language-server", "--stdio" }
+    filetypes = { "yaml" }
+    log_level = 2
+    on_init = <function 1>
+    root_dir = root_pattern(".git", vim.fn.getcwd())
     settings = {}
 ```
 

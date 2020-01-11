@@ -2,6 +2,7 @@
 
 - Neovim :P
 - docgen requires a unix system.
+- luacheck for linting Lua code. ([Install](https://github.com/mpeterv/luacheck#installation))
 
 # Generating docs
 

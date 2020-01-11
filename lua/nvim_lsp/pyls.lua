@@ -1,5 +1,4 @@
 local skeleton = require 'nvim_lsp/skeleton'
-local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
 skeleton.pyls = {

@@ -27,6 +27,7 @@ function skeleton.__newindex(t, template_name, template)
   local default_config = tbl_extend("keep", template.default_config, {
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
+    init_options = {};
     callbacks = {};
   })
 
@@ -98,6 +99,9 @@ function skeleton.__newindex(t, template_name, template)
       new_config.settings = vim.deepcopy(new_config.settings)
       util.tbl_deep_extend(new_config.settings, default_config.settings)
 
+      new_config.init_options = vim.deepcopy(new_config.init_options)
+      util.tbl_deep_extend(new_config.init_options, default_config.init_options)
+
       new_config.capabilities = new_config.capabilities or lsp.protocol.make_client_capabilities()
       util.tbl_deep_extend(new_config.capabilities, {
         workspace = {
@@ -123,7 +127,7 @@ function skeleton.__newindex(t, template_name, template)
             settings = settings;
           })
         end
-        if new_config.settings then
+        if not vim.tbl_isempty(new_config.settings) then
           client.workspace_did_change_configuration(new_config.settings)
         end
       end)
