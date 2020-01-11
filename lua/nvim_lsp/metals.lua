@@ -11,7 +11,7 @@ local function make_installer()
   function X.install()
     local install_info = X.info()
     if install_info.is_installed then
-      print(name, "is already installed")
+      print(server_name, "is already installed")
       return
     end
     if not (util.has_bins("curl")) then
@@ -60,8 +60,8 @@ skeleton[server_name] = {
     installer.configure(config)
   end;
   docs = {
-  	vscode = "scalameta.metals";
-  	package_json = "https://raw.githubusercontent.com/scalameta/metals-vscode/master/package.json";
+    vscode = "scalameta.metals";
+    package_json = "https://raw.githubusercontent.com/scalameta/metals-vscode/master/package.json";
     description = [[
 https://scalameta.org/metals/
 
