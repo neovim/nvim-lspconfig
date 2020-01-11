@@ -25,7 +25,7 @@ local function make_installer()
     local coursier_bin = install_dir .. "/coursier"
     local download_cmd = string.format("curl -fLo %s --create-dirs https://git.io/coursier", coursier_bin)
     local chmod_cmd = string.format("chmod +x %s", coursier_bin)
-    local install_cmd = string.format("%s bootstrap --java-opt -Xss4m --java-opt -Xms100m --java-opt -Dmetals.client=coc.nvim org.scalameta:metals_2.12:0.7.6 -r bintray:scalacenter/releases -r sonatype:snapshots -o %s -f", coursier_bin, metals_bin)
+    local install_cmd = string.format("%s bootstrap --java-opt -Xss4m --java-opt -Xms100m --java-opt -Dmetals.client=coc.nvim org.scalameta:metals_2.12:latest.release -r bintray:scalacenter/releases -r sonatype:snapshots -o %s -f", coursier_bin, metals_bin)
     vim.fn.system(download_cmd)
     vim.fn.system(chmod_cmd)
     vim.fn.system(install_cmd)
@@ -52,7 +52,7 @@ skeleton[server_name] = {
   default_config = {
     cmd = {bin_name};
     filetype = {"scala", "sbt"};
-    root_dir = util.root_pattern("build.sbt");
+    root_dir = util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml");
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
   };
