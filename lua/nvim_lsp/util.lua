@@ -47,7 +47,7 @@ function M.tbl_deep_extend(dst, ...)
       if type(v) == 'table' and not vim.tbl_islist(v) then
         dst[k] = M.tbl_deep_extend(dst[k] or vim.empty_dict(), v)
       else
-        dst[k] = v
+        dst[k] = dst[k] or v
       end
     end
   end
