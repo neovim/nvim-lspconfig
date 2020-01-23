@@ -174,7 +174,7 @@ function server_configs.__newindex(t, template_name, template)
 
   M.commands = template.commands
   M.name = template_name
-  M.template_config = template
+  M.document_template = template
 
   rawset(t, template_name, M)
 
