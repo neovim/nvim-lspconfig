@@ -5,16 +5,16 @@ local tbl_extend = vim.tbl_extend
 local server_configs = {}
 
 
-function server_configs.__newindex(t, template_name, template)
+function server_configs.__newindex(t, config_name, config_definition)
   validate {
-    name = {template_name, 's'};
-    default_config = {template.default_config, 't'};
-    on_new_config = {template.on_new_config, 'f', true};
-    on_attach = {template.on_attach, 'f', true};
-    commands = {template.commands, 't', true};
+    name = {config_name, 's'};
+    default_config = {config_definition.default_config, 't'};
+    on_new_config = {config_definition.on_new_config, 'f', true};
+    on_attach = {config_definition.on_attach, 'f', true};
+    commands = {config_definition.commands, 't', true};
   }
-  if template.commands then
-    for k, v in pairs(template.commands) do
+  if config_definition.commands then
+    for k, v in pairs(config_definition.commands) do
       validate {
         ['command.name'] = {k, 's'};
         ['command.fn'] = {v[1], 'f'};
@@ -24,7 +24,7 @@ function server_configs.__newindex(t, template_name, template)
 
   local M = {}
 
-  local default_config = tbl_extend("keep", template.default_config, {
+  local default_config = tbl_extend("keep", config_definition.default_config, {
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
     init_options = {};
@@ -32,7 +32,7 @@ function server_configs.__newindex(t, template_name, template)
   })
 
   -- Force this part.
-  default_config.name = template_name
+  default_config.name = config_name
 
   -- The config here is the one which will be instantiated for the new server,
   -- which is why this is a function, so that it can refer to the settings
@@ -110,8 +110,8 @@ function server_configs.__newindex(t, template_name, template)
       })
 
       add_callbacks(new_config)
-      if template.on_new_config then
-        pcall(template.on_new_config, new_config)
+      if config_definition.on_new_config then
+        pcall(config_definition.on_new_config, new_config)
       end
       if config.on_new_config then
         pcall(config.on_new_config, new_config)
@@ -141,7 +141,7 @@ function server_configs.__newindex(t, template_name, template)
           api.nvim_command(string.format(
               "autocmd BufEnter <buffer=%d> ++once lua require'nvim_lsp'[%q]._setup_buffer(%d)"
               , bufnr
-              , template_name
+              , config_name
               , client.id
               ))
         end
@@ -166,17 +166,17 @@ function server_configs.__newindex(t, template_name, template)
     if client.config._on_attach then
       client.config._on_attach(client)
     end
-    if template.commands then
+    if config_definition.commands then
       -- Create the module commands
-      util.create_module_commands(template_name, M.commands)
+      util.create_module_commands(config_name, M.commands)
     end
   end
 
-  M.commands = template.commands
-  M.name = template_name
-  M.document_template = template
+  M.commands = config_definition.commands
+  M.name = config_name
+  M.document_template = config_definition
 
-  rawset(t, template_name, M)
+  rawset(t, config_name, M)
 
   return M
 end
