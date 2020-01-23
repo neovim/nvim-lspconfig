@@ -49,17 +49,17 @@ function M._root._setup()
   M._root.commands = {
     LspInstall = {
       function(name)
-        local template = server_configs[name]
-        if not template then
+        local config = server_configs[name]
+        if not config then
           return print("Invalid server name:", name)
         end
-        if not template.install then
+        if not config.install then
           return print(name, "can't be automatically installed (yet)")
         end
-        if template.install_info().is_installed then
+        if config.install_info().is_installed then
           return print(name, "is already installed")
         end
-        template.install()
+        config.install()
       end;
       "-nargs=1";
       "-complete=custom,v:lua.lsp_complete_installable_servers";
@@ -76,11 +76,11 @@ function M._root._setup()
           end
           return print(vim.inspect(res))
         end
-        local template = server_configs[name]
-        if not template then
+        local config = server_configs[name]
+        if not config then
           return print("Invalid server name:", name)
         end
-        return print(vim.inspect(template.install_info()))
+        return print(vim.inspect(config.install_info()))
       end;
       "-nargs=?";
       "-complete=custom,v:lua.lsp_complete_servers";
