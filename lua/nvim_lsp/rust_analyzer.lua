@@ -1,8 +1,8 @@
-local skeleton = require 'nvim_lsp/skeleton'
+local server_configs = require 'nvim_lsp/server_configs'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-skeleton.rust_analyzer = {
+server_configs.rust_analyzer = {
   default_config = util.utf8_config {
     cmd = {"ra_lsp_server"};
     filetypes = {"rust"};

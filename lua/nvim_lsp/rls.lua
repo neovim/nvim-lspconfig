@@ -1,8 +1,8 @@
-local skeleton = require 'nvim_lsp/skeleton'
+local server_configs = require 'nvim_lsp/server_configs'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-skeleton.rls = {
+server_configs.rls = {
   default_config = {
     cmd = {"rls"};
     filetypes = {"rust"};

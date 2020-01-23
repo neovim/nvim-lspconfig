@@ -1,8 +1,8 @@
-local skeleton = require 'nvim_lsp/skeleton'
+local server_configs = require 'nvim_lsp/server_configs'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-skeleton.ghcide = {
+server_configs.ghcide = {
   default_config = {
     cmd = { "ghcide", "--lsp" };
     filetypes = { "haskell", "lhaskell" };
