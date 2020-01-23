@@ -1996,7 +1996,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Display additional type information in the editor
+  Display additional type and parameter information in the editor
 
 - **`rust-analyzer.enableEnhancedTyping`**: `boolean`
 
@@ -2020,7 +2020,7 @@ This server accepts configuration via the `settings` key.
 
   Highlight Rust code (overrides built-in syntax highlighting)
 
-- **`rust-analyzer.lruCapacity`**: `number`
+- **`rust-analyzer.lruCapacity`**: `number|null`
 
   Default: `vim.NIL`
   
