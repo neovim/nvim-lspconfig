@@ -1408,7 +1408,7 @@ This server accepts configuration via the `settings` key.
 
 - **`metals.serverVersion`**: `string`
 
-  Default: `"0.7.6"`
+  Default: `"0.8.0"`
 
 </details>
 
@@ -1417,7 +1417,7 @@ require'nvim_lsp'.metals.setup{}
 
   Default Values:
     cmd = { "metals" }
-    filetype = { "scala", "sbt" }
+    filetype = { "scala" }
     log_level = 2
     root_dir = util.root_pattern("build.sbt")
     settings = {}
@@ -2057,7 +2057,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Display additional type information in the editor
+  Display additional type and parameter information in the editor
 
 - **`rust-analyzer.enableEnhancedTyping`**: `boolean`
 
@@ -2081,7 +2081,7 @@ This server accepts configuration via the `settings` key.
 
   Highlight Rust code (overrides built-in syntax highlighting)
 
-- **`rust-analyzer.lruCapacity`**: `number`
+- **`rust-analyzer.lruCapacity`**: `number|null`
 
   Default: `vim.NIL`
   
