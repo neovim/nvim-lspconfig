@@ -208,6 +208,7 @@ that config.
 - [hie](#hie)
 - [intelephense](#intelephense)
 - [leanls](#leanls)
+- [metals](#metals)
 - [ocamlls](#ocamlls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
@@ -1359,6 +1360,66 @@ require'nvim_lsp'.leanls.setup{}
     filetypes = { "lean" }
     log_level = 2
     root_dir = util.root_pattern(".git")
+    settings = {}
+```
+
+## metals
+
+https://scalameta.org/metals/
+
+Scala language server with rich IDE features.
+`metals` can be installed via `:LspInstall metals`.
+
+Can be installed in Nvim with `:LspInstall metals`
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`metals.customRepositories`**: `array`
+
+  Array items: `{type = "string"}`
+
+- **`metals.gradleScript`**: `string`
+
+  
+
+- **`metals.javaHome`**: `string`
+
+  
+
+- **`metals.mavenScript`**: `string`
+
+  
+
+- **`metals.millScript`**: `string`
+
+  
+
+- **`metals.sbtScript`**: `string`
+
+  
+
+- **`metals.scalafmtConfigPath`**: `string`
+
+  
+
+- **`metals.serverProperties`**: `array`
+
+  Array items: `{type = "string"}`
+
+- **`metals.serverVersion`**: `string`
+
+  Default: `"0.7.6"`
+
+</details>
+
+```lua
+require'nvim_lsp'.metals.setup{}
+
+  Default Values:
+    cmd = { "metals" }
+    filetype = { "scala", "sbt" }
+    log_level = 2
+    root_dir = util.root_pattern("build.sbt")
     settings = {}
 ```
 
