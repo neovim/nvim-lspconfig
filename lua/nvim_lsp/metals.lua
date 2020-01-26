@@ -23,7 +23,7 @@ local function make_installer()
       return
     end
     local coursier_bin = install_dir .. "/coursier"
-    local download_cmd = string.format("curl -fLo %s --create-dirs https://git.io/coursier", coursier_bin)
+    local download_cmd = string.format("curl -fLo %s --create-dirs https://git.io/coursier-cli", coursier_bin)
     local chmod_cmd = string.format("chmod +x %s", coursier_bin)
     local install_cmd = string.format("%s bootstrap --java-opt -Xss4m --java-opt -Xms100m --java-opt -Dmetals.client=coc.nvim org.scalameta:metals_2.12:latest.release -r bintray:scalacenter/releases -r sonatype:snapshots -o %s -f", coursier_bin, metals_bin)
     vim.fn.system(download_cmd)
