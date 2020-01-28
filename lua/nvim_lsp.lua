@@ -49,8 +49,8 @@ function M._root._setup()
   M._root.commands = {
     LspInstall = {
       function(name)
-        local template = configs[name]
-        if not template then
+        local config = configs[name]
+        if not config then
           return print("Invalid server name:", name)
         end
         if not config.install then
@@ -76,8 +76,8 @@ function M._root._setup()
           end
           return print(vim.inspect(res))
         end
-        local template = configs[name]
-        if not template then
+        local config = configs[name]
+        if not config then
           return print("Invalid server name:", name)
         end
         return print(vim.inspect(config.install_info()))
