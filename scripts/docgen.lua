@@ -76,7 +76,7 @@ require'nvim_lsp'.{{template_name}}.setup{}
 
 local function make_lsp_sections()
   return make_section(0, '\n', sorted_map_table(configs, function(template_name, template_object)
-    local template_def = template_object.document_template
+    local template_def = template_object.template_config
     local docs = template_def.docs
 
     local params = {

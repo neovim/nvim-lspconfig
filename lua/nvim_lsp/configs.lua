@@ -174,7 +174,7 @@ function configs.__newindex(t, config_name, config_definition)
 
   M.commands = config_definition.commands
   M.name = config_name
-  M.document_template = config_definition
+  M.document_config = config_definition
 
   rawset(t, config_name, M)
 
