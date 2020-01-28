@@ -6,7 +6,7 @@ skeleton.clangd = {
   default_config = util.utf8_config {
     cmd = {"clangd", "--background-index"};
     filetypes = {"c", "cpp", "objc", "objcpp"};
-    root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git");
+    root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".");
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
   };
@@ -23,7 +23,7 @@ clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONC
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
 ]];
     default_config = {
-      root_dir = [[root_pattern("compile_commands.json", "compile_flags.txt", ".git")]];
+      root_dir = [[root_pattern("compile_commands.json", "compile_flags.txt", ".git") or cwd]];
       on_init = [[function to handle changing offsetEncoding]];
       capabilities = [[default capabilities, with offsetEncoding utf-8]];
     };
