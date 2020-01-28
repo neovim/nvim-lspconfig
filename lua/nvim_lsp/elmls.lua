@@ -1,4 +1,4 @@
-local skeleton = require 'nvim_lsp/skeleton'
+local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 local api = vim.api
@@ -16,7 +16,7 @@ local default_capabilities = lsp.protocol.make_client_capabilities()
 default_capabilities.offsetEncoding = {"utf-8", "utf-16"}
 local elm_root_pattern = util.root_pattern("elm.json")
 
-skeleton[server_name] = {
+configs[server_name] = {
   default_config = util.utf8_config {
     cmd = {bin_name};
     -- TODO(ashkan) if we comment this out, it will allow elmls to operate on elm.json. It seems like it could do that, but no other editor allows it right now.
@@ -70,7 +70,7 @@ npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
   };
 }
 
-skeleton[server_name].install = installer.install
-skeleton[server_name].install_info = installer.info
+configs[server_name].install = installer.install
+configs[server_name].install_info = installer.info
 -- vim:et ts=2 sw=2
 

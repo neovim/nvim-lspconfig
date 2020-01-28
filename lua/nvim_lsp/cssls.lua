@@ -1,4 +1,4 @@
-local skeleton = require 'nvim_lsp/skeleton'
+local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
@@ -13,7 +13,7 @@ local installer = util.npm_installer {
 
 local root_pattern = util.root_pattern("package.json")
 
-skeleton[server_name] = {
+configs[server_name] = {
   default_config = util.utf8_config {
     cmd = {bin_name, "--stdio"};
     filetypes = {"css", "scss", "less"};
@@ -55,6 +55,6 @@ npm install -g vscode-css-languageserver-bin
   };
 }
 
-skeleton[server_name].install = installer.install
-skeleton[server_name].install_info = installer.info
+configs[server_name].install = installer.install
+configs[server_name].install_info = installer.info
 -- vim:et ts=2 sw=2

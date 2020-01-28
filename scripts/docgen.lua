@@ -1,5 +1,5 @@
 require 'nvim_lsp'
-local skeleton = require 'nvim_lsp/skeleton'
+local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 local inspect = vim.inspect
 local uv = vim.loop
@@ -75,7 +75,7 @@ require'nvim_lsp'.{{template_name}}.setup{}
 ]]
 
 local function make_lsp_sections()
-  return make_section(0, '\n', sorted_map_table(skeleton, function(template_name, template_object)
+  return make_section(0, '\n', sorted_map_table(configs, function(template_name, template_object)
     local template_def = template_object.document_template
     local docs = template_def.docs
 
@@ -222,7 +222,7 @@ local function make_lsp_sections()
 end
 
 local function make_implemented_servers_list()
-  return make_section(0, '\n', sorted_map_table(skeleton, function(k)
+  return make_section(0, '\n', sorted_map_table(configs, function(k)
     return template("- [{{server}}](#{{server}})", {server=k})
   end))
 end

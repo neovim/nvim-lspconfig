@@ -18,15 +18,15 @@ To preview the generated `README.md` locally, source `scripts/docgen.lua` from
 It **must** be run from the `.git`/project root. (TODO: try to find the `.git`
 root with one of our `util.*` functions?)
 
-# skeleton
+# configs
 
-skeleton has a `__newindex` metamethod which validates and creates
+configs has a `__newindex` metamethod which validates and creates
 an object containing `setup()`, which can then be retrieved and modified.
 
 In `vim.validate` parlance, this is the "spec":
 
 ```
-skeleton.SERVER_NAME = {
+configs.SERVER_NAME = {
   default_config = {'t'};
   on_new_config = {'f', true};
   on_attach = {'f', true};
@@ -40,7 +40,7 @@ docs = {
 ```
 
 - Keys of the `docs.default_config` table match those of
-  `skeleton.SERVER_NAME.default_config`, and can be used to specify custom
+  `configs.SERVER_NAME.default_config`, and can be used to specify custom
   documentation. This is useful for functions, whose docs cannot be easily
   auto-generated.
 - The `commands` object is a table of `name:definition` key:value pairs, where
@@ -63,12 +63,12 @@ Example:
 ```
 
 
-After you create `skeleton.SERVER_NAME`, you may add arbitrary
+After you create `configs.SERVER_NAME`, you may add arbitrary
 language-specific functions to it if necessary.
 
 Example:
 
-    skeleton.texlab.buf_build = buf_build
+    configs.texlab.buf_build = buf_build
 
 Finally, add a `require 'nvim_lsp/SERVER_NAME'` line to `lua/nvim_lsp.lua`.
 

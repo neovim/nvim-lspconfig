@@ -1,8 +1,8 @@
-local skeleton = require 'nvim_lsp/skeleton'
+local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-skeleton.gopls = {
+configs.gopls = {
   default_config = {
     cmd = {"gopls"};
     filetypes = {"go"};

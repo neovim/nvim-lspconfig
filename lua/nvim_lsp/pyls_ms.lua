@@ -1,4 +1,4 @@
-local skeleton = require 'nvim_lsp/skeleton'
+local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
@@ -76,7 +76,7 @@ end
 
 local installer = make_installer()
 
-skeleton[name] = {
+configs[name] = {
 
   default_config = {
     filetypes = {"python"};
@@ -133,5 +133,5 @@ This server accepts configuration via the `settings` key.
   };
 };
 
-skeleton[name].install = installer.install
-skeleton[name].install_info = installer.info
+configs[name].install = installer.install
+configs[name].install_info = installer.info

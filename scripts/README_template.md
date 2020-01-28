@@ -83,7 +83,7 @@ nvim_lsp.texlab.setup{
 
 ### Example: custom config
 
-To configure a custom/private server, just require `nvim_lsp/skeleton` and do
+To configure a custom/private server, just require `nvim_lsp/configs` and do
 the same as we do if we were adding it to the repository itself.
 
 1. Define the config: `configs.foo_lsp = { … }`
@@ -91,7 +91,7 @@ the same as we do if we were adding it to the repository itself.
 
 ```lua
 local nvim_lsp = require'nvim_lsp'
-local configs = require'nvim_lsp/skeleton'
+local configs = require'nvim_lsp/configs'
 -- Check if it's already defined for when I reload this file.
 if not nvim_lsp.foo_lsp then
   configs.foo_lsp = {
