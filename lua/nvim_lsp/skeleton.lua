@@ -5,7 +5,7 @@ local tbl_extend = vim.tbl_extend
 local skeleton = {}
 
 
-function skeleton.__newindex(t, template_name, template)
+function skeleton.__newindex(t, config_name, config_definition)
   validate {
     name = {config_name, 's'};
     default_config = {config_definition.default_config, 't'};
