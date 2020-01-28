@@ -1,4 +1,4 @@
-local server_configs = require 'nvim_lsp/server_configs'
+local skeleton = require 'nvim_lsp/skeleton'
 
 require 'nvim_lsp/bashls'
 require 'nvim_lsp/ccls'
@@ -31,12 +31,12 @@ local M = {
 }
 
 function M.available_servers()
-  return vim.tbl_keys(server_configs)
+  return vim.tbl_keys(skeleton)
 end
 
 function M.installable_servers()
   local res = {}
-  for k, v in pairs(server_configs) do
+  for k, v in pairs(skeleton) do
     if v.install then table.insert(res, k) end
   end
   return res
@@ -49,8 +49,8 @@ function M._root._setup()
   M._root.commands = {
     LspInstall = {
       function(name)
-        local config = server_configs[name]
-        if not config then
+        local template = skeleton[name]
+        if not template then
           return print("Invalid server name:", name)
         end
         if not config.install then
@@ -69,15 +69,15 @@ function M._root._setup()
       function(name)
         if name == nil then
           local res = {}
-          for k, v in pairs(server_configs) do
+          for k, v in pairs(skeleton) do
             if v.install_info then
               res[k] = v.install_info()
             end
           end
           return print(vim.inspect(res))
         end
-        local config = server_configs[name]
-        if not config then
+        local template = skeleton[name]
+        if not template then
           return print("Invalid server name:", name)
         end
         return print(vim.inspect(config.install_info()))
@@ -93,7 +93,7 @@ end
 
 local mt = {}
 function mt:__index(k)
-  return server_configs[k]
+  return skeleton[k]
 end
 
 return setmetatable(M, mt)

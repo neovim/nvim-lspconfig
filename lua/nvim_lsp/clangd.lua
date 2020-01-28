@@ -1,8 +1,8 @@
-local server_configs = require 'nvim_lsp/server_configs'
+local skeleton = require 'nvim_lsp/skeleton'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-server_configs.clangd = {
+skeleton.clangd = {
   default_config = util.utf8_config {
     cmd = {"clangd", "--background-index"};
     filetypes = {"c", "cpp", "objc", "objcpp"};

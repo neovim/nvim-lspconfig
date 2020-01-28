@@ -1,4 +1,4 @@
-local server_configs = require 'nvim_lsp/server_configs'
+local skeleton = require 'nvim_lsp/skeleton'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
@@ -31,7 +31,7 @@ end
 --   end)
 -- end
 
-server_configs.texlab = {
+skeleton.texlab = {
   default_config = {
     cmd = {"texlab"};
     filetypes = {"tex", "bib"};
@@ -86,5 +86,5 @@ See https://texlab.netlify.com/docs/reference/configuration for configuration op
   };
 }
 
-server_configs.texlab.buf_build = buf_build
+skeleton.texlab.buf_build = buf_build
 -- vim:et ts=2 sw=2

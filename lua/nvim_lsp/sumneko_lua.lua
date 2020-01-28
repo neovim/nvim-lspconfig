@@ -1,4 +1,4 @@
-local server_configs = require 'nvim_lsp/server_configs'
+local skeleton = require 'nvim_lsp/skeleton'
 local util = require 'nvim_lsp/util'
 local vim = vim
 
@@ -92,7 +92,7 @@ end
 
 local installer = make_installer()
 
-server_configs[name] = {
+skeleton[name] = {
   default_config = {
     filetypes = {'lua'};
     root_dir = function(fname)
@@ -120,6 +120,6 @@ guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
   };
 }
 
-server_configs[name].install = installer.install
-server_configs[name].install_info = installer.info
+skeleton[name].install = installer.install
+skeleton[name].install_info = installer.info
 -- vim:et ts=2

@@ -2,10 +2,10 @@ local util = require 'nvim_lsp/util'
 local api, validate, lsp = vim.api, vim.validate, vim.lsp
 local tbl_extend = vim.tbl_extend
 
-local server_configs = {}
+local skeleton = {}
 
 
-function server_configs.__newindex(t, config_name, config_definition)
+function skeleton.__newindex(t, template_name, template)
   validate {
     name = {config_name, 's'};
     default_config = {config_definition.default_config, 't'};
@@ -181,5 +181,5 @@ function server_configs.__newindex(t, config_name, config_definition)
   return M
 end
 
-return setmetatable({}, server_configs)
+return setmetatable({}, skeleton)
 -- vim:et ts=2 sw=2
