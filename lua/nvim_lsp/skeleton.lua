@@ -27,7 +27,7 @@ function skeleton.__newindex(t, template_name, template)
   local default_config = tbl_extend("keep", template.default_config, {
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
-    init_options = {};
+    init_options = vim.empty_dict();
     callbacks = {};
   })
 
