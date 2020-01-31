@@ -39,19 +39,17 @@ parlance here is the "spec":
 - `commands` is a map of `name:definition` key:value pairs, where `definition`
   is a list whose first value is a function implementing the command and the
   rest are either array values which will be formed into flags for the command
-  or special keys like `description`.
-
-  Example:
+  or special keys like `description`. Example:
   ```
-      commands = {
-        TexlabBuild = {
-          function()
-            buf_build(0)
-          end;
-          "-range";
-          description = "Build the current buffer";
-        };
-      };
+  commands = {
+    TexlabBuild = {
+      function()
+        buf_build(0)
+      end;
+      "-range";
+      description = "Build the current buffer";
+    };
+  };
   ```
 
 The `configs.__newindex` metamethod consumes the config definition and returns
