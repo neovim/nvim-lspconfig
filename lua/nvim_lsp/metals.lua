@@ -1,4 +1,4 @@
-local skeleton = require 'nvim_lsp/skeleton'
+local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 local server_name = "metals"
@@ -48,7 +48,7 @@ end
 
 local installer = make_installer()
 
-skeleton[server_name] = {
+configs[server_name] = {
   default_config = {
     cmd = {bin_name};
     filetype = {"scala"};
@@ -74,6 +74,6 @@ Scala language server with rich IDE features.
   };
 };
 
-skeleton[server_name].install = installer.install
-skeleton[server_name].install_info = installer.info
+configs[server_name].install = installer.install
+configs[server_name].install_info = installer.info
 -- vim:et ts=2 sw=2
