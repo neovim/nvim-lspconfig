@@ -1,8 +1,8 @@
-local skeleton = require 'nvim_lsp/skeleton'
+local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-skeleton.fortls = {
+configs.fortls = {
   default_config = {
     cmd = {"fortls"};
     filetypes = {"fortran"};

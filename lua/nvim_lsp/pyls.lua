@@ -1,7 +1,7 @@
-local skeleton = require 'nvim_lsp/skeleton'
+local configs = require 'nvim_lsp/configs'
 local lsp = vim.lsp
 
-skeleton.pyls = {
+configs.pyls = {
   default_config = {
     cmd = {"pyls"};
     filetypes = {"python"};

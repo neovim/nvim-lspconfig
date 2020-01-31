@@ -1,8 +1,8 @@
-local skeleton = require 'nvim_lsp/skeleton'
+local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-skeleton.solargraph = {
+configs.solargraph = {
   default_config = {
     cmd = {"solargraph", "stdio"};
     filetypes = {"ruby"};

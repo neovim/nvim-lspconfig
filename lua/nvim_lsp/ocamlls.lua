@@ -1,4 +1,4 @@
-local skeleton = require 'nvim_lsp/skeleton'
+local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
@@ -11,7 +11,7 @@ local installer = util.npm_installer {
   binaries = { bin_name };
 }
 
-skeleton[server_name] = {
+configs[server_name] = {
   default_config = {
     cmd = { bin_name, "--stdio" };
     filetypes = { "ocaml", "reason" };
@@ -43,6 +43,6 @@ npm install -g ocaml-langauge-server
     };
   };
 };
-skeleton[server_name].install = installer.install
-skeleton[server_name].install_info = installer.info
+configs[server_name].install = installer.install
+configs[server_name].install_info = installer.info
 -- vim:et ts=2 sw=2
