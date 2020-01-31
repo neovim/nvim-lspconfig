@@ -32,34 +32,34 @@ parlance here is the "spec":
       default_config = {'t', true};
     }
 
-The `configs.__newindex` metamethod consumes the config definition and returns
-an object with a `setup()` method, to be invoked by users like so:
-
-    require'nvim_lsp'.SERVER_NAME.setup{}
-
-- Keys of the `docs.default_config` table match those of
+- Keys in `docs.default_config` match those of
   `configs.SERVER_NAME.default_config`, and can be used to specify custom
   documentation. This is useful for functions, whose docs cannot be easily
   auto-generated.
+- `commands` is a map of `name:definition` key:value pairs, where `definition`
+  is a list whose first value is a function implementing the command and the
+  rest are either array values which will be formed into flags for the command
+  or special keys like `description`.
 
-`commands` is a table of `name:definition` key:value pairs, where `definition`
-is a list whose first value is a function implementing the command and the rest
-are either array values which will be formed into flags for the command or
-special keys like `description`.
-
-Example:
-
-    commands = {
-      TexlabBuild = {
-        function()
-          buf_build(0)
-        end;
-        "-range";
-        description = "Build the current buffer";
+  Example:
+  ```
+      commands = {
+        TexlabBuild = {
+          function()
+            buf_build(0)
+          end;
+          "-range";
+          description = "Build the current buffer";
+        };
       };
-    };
+  ```
 
-After you set `configs.SERVER_NAME`, you can add arbitrary language-specific
+The `configs.__newindex` metamethod consumes the config definition and returns
+an object with a `setup()` method, to be invoked by users:
+
+    require'nvim_lsp'.SERVER_NAME.setup{}
+
+After you set `configs.SERVER_NAME` you can add arbitrary language-specific
 functions to it if necessary.
 
 Example:
