@@ -5,16 +5,16 @@ local tbl_extend = vim.tbl_extend
 local configs = {}
 
 
-function configs.__newindex(t, config_name, config_definition)
+function configs.__newindex(t, config_name, config_def)
   validate {
     name = {config_name, 's'};
-    default_config = {config_definition.default_config, 't'};
-    on_new_config = {config_definition.on_new_config, 'f', true};
-    on_attach = {config_definition.on_attach, 'f', true};
-    commands = {config_definition.commands, 't', true};
+    default_config = {config_def.default_config, 't'};
+    on_new_config = {config_def.on_new_config, 'f', true};
+    on_attach = {config_def.on_attach, 'f', true};
+    commands = {config_def.commands, 't', true};
   }
-  if config_definition.commands then
-    for k, v in pairs(config_definition.commands) do
+  if config_def.commands then
+    for k, v in pairs(config_def.commands) do
       validate {
         ['command.name'] = {k, 's'};
         ['command.fn'] = {v[1], 'f'};
@@ -24,7 +24,7 @@ function configs.__newindex(t, config_name, config_definition)
 
   local M = {}
 
-  local default_config = tbl_extend("keep", config_definition.default_config, {
+  local default_config = tbl_extend("keep", config_def.default_config, {
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
     init_options = vim.empty_dict();
@@ -110,8 +110,8 @@ function configs.__newindex(t, config_name, config_definition)
       })
 
       add_callbacks(new_config)
-      if config_definition.on_new_config then
-        pcall(config_definition.on_new_config, new_config)
+      if config_def.on_new_config then
+        pcall(config_def.on_new_config, new_config)
       end
       if config.on_new_config then
         pcall(config.on_new_config, new_config)
@@ -166,15 +166,15 @@ function configs.__newindex(t, config_name, config_definition)
     if client.config._on_attach then
       client.config._on_attach(client)
     end
-    if config_definition.commands then
+    if config_def.commands then
       -- Create the module commands
       util.create_module_commands(config_name, M.commands)
     end
   end
 
-  M.commands = config_definition.commands
+  M.commands = config_def.commands
   M.name = config_name
-  M.document_config = config_definition
+  M.document_config = config_def
 
   rawset(t, config_name, M)
 
