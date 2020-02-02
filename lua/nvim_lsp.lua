@@ -1,32 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 
-require 'nvim_lsp/bashls'
-require 'nvim_lsp/ccls'
-require 'nvim_lsp/clangd'
-require 'nvim_lsp/cssls'
-require 'nvim_lsp/dockerls'
-require 'nvim_lsp/elmls'
-require 'nvim_lsp/flow'
-require 'nvim_lsp/fortls'
-require 'nvim_lsp/ghcide'
-require 'nvim_lsp/gopls'
-require 'nvim_lsp/hie'
-require 'nvim_lsp/intelephense'
-require 'nvim_lsp/leanls'
-require 'nvim_lsp/pyls'
-require 'nvim_lsp/pyls_ms'
-require 'nvim_lsp/rls'
-require 'nvim_lsp/rust_analyzer'
-require 'nvim_lsp/solargraph'
-require 'nvim_lsp/sumneko_lua'
-require 'nvim_lsp/texlab'
-require 'nvim_lsp/tsserver'
-require 'nvim_lsp/metals'
-require 'nvim_lsp/vimls'
-require 'nvim_lsp/ocamlls'
-require 'nvim_lsp/terraformls'
-require 'nvim_lsp/yamlls'
-
 local M = {
   util = require 'nvim_lsp/util';
 }
@@ -94,6 +67,9 @@ end
 
 local mt = {}
 function mt:__index(k)
+  if configs[k] == nil then
+    require('nvim_lsp/'..k)
+  end
   return configs[k]
 end
 

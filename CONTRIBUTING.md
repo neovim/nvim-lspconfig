@@ -64,8 +64,6 @@ Example:
 
     configs.texlab.buf_build = buf_build
 
-Finally, add a `require 'nvim_lsp/SERVER_NAME'` line to `lua/nvim_lsp.lua`.
-
 ## Auto-install
 
 Configs may optionally provide `install()` and `install_info()` functions. This
