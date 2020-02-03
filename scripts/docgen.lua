@@ -222,6 +222,14 @@ local function make_lsp_sections()
 end
 
 local function make_implemented_servers_list()
+  -- load language server modules
+  local pfile = io.popen('ls lua/nvim_lsp/')
+  for filename in pfile:lines() do
+      local f = string.gsub(filename, ".lua$", "", 1)
+      require("../lua/nvim_lsp/"..f)
+  end
+  pfile:close()
+
   return make_section(0, '\n', sorted_map_table(configs, function(k)
     return template("- [{{server}}](#{{server}})", {server=k})
   end))
