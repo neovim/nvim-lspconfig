@@ -200,7 +200,33 @@ nvim_lsp.SERVER.setup{config}
 The following LSP configs are included. Follow a link to find documentation for
 that config.
 
-
+- [bashls](#bashls)
+- [ccls](#ccls)
+- [clangd](#clangd)
+- [cssls](#cssls)
+- [dockerls](#dockerls)
+- [elmls](#elmls)
+- [flow](#flow)
+- [fortls](#fortls)
+- [ghcide](#ghcide)
+- [gopls](#gopls)
+- [hie](#hie)
+- [intelephense](#intelephense)
+- [jsonls](#jsonls)
+- [leanls](#leanls)
+- [metals](#metals)
+- [ocamlls](#ocamlls)
+- [pyls](#pyls)
+- [pyls_ms](#pyls_ms)
+- [rls](#rls)
+- [rust_analyzer](#rust_analyzer)
+- [solargraph](#solargraph)
+- [sumneko_lua](#sumneko_lua)
+- [terraformls](#terraformls)
+- [texlab](#texlab)
+- [tsserver](#tsserver)
+- [vimls](#vimls)
+- [yamlls](#yamlls)
 
 ## bashls
 
