@@ -14,11 +14,11 @@ Update Nvim and nvim-lsp before reporting an issue.
 There are many language servers in the world, and not enough time.
 Help us create configs for *all the LSPs!*
 
-0. Read [CONTRIBUTING.md](CONTRIBUTING.md) for instructions.
+1. Read [CONTRIBUTING.md](CONTRIBUTING.md) for instructions.
    Ask questions in [Neovim Gitter](https://gitter.im/neovim/neovim).
-1. Choose a language from [the coc.nvim wiki](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
+2. Choose a language from [the coc.nvim wiki](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
   [the emacs-lsp project](https://github.com/emacs-lsp/lsp-mode#supported-languages).
-2. Create a new file at `lua/nvim_lsp/SERVER_NAME.lua`. See
+3. Create a new file at `lua/nvim_lsp/SERVER_NAME.lua`. See
    [existing configs](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/) for
    examples (`lua/nvim_lsp/texlab.lua` is an extensive example).
 
