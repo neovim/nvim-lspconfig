@@ -2,7 +2,7 @@
 
 - [Neovim](https://neovim.io/) :P
 - `scripts/docgen.lua` expects a unix system.
-- [luacheck](https://github.com/mpeterv/luacheck#installation) for the lint job.
+- Lint task requires [luacheck](https://github.com/mpeterv/luacheck#installation).
 
 # Generating docs
 

@@ -74,7 +74,16 @@ require'nvim_lsp'.{{template_name}}.setup{}
 ```
 ]]
 
+local function require_all_configs()
+  -- Configs are lazy-loaded, tickle them to populate the `configs` singleton.
+  for _,v in ipairs(vim.fn.glob('lua/nvim_lsp/*.lua', 1, 1)) do
+    local module_name = v:gsub('.*/', ''):gsub('%.lua$', '')
+    require('nvim_lsp/'..module_name)
+  end
+end
+
 local function make_lsp_sections()
+  require_all_configs()
   return make_section(0, '\n', sorted_map_table(configs, function(template_name, template_object)
     local template_def = template_object.document_config
     local docs = template_def.docs
