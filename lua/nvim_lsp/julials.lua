@@ -1,7 +1,8 @@
+local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
-require'nvim_lsp/skeleton'.julials = {
+configs.julials = {
   default_config = {
     cmd = {
         "julia", "--project", "--startup-file=no", "--history-file=no", "-e", [[
@@ -30,7 +31,7 @@ julia -e 'using Pkg; Pkg.add("LanguageServer")'
   };
 }
 
-require'nvim_lsp/skeleton'.julials.install = function()
+configs.julials.install = function()
   local script = [[
   julia -e 'using Pkg; Pkg.add("LanguageServer")'
   ]]
@@ -38,7 +39,7 @@ require'nvim_lsp/skeleton'.julials.install = function()
   nvim_lsp.util.sh(script, vim.loop.os_homedir())
 end
 
-require'nvim_lsp/skeleton'.julials.install_info = function()
+configs.julials.install_info = function()
   local script = [[
   julia -e 'using LanguageServer'
   ]]
