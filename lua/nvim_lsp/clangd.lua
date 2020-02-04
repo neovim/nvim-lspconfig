@@ -2,11 +2,14 @@ local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 local lsp = vim.lsp
 
+local root_pattern = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")
 configs.clangd = {
   default_config = util.utf8_config {
     cmd = {"clangd", "--background-index"};
     filetypes = {"c", "cpp", "objc", "objcpp"};
-    root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".");
+    root_dir = function(fname)
+      return root_pattern(fname) or util.path.dirname(fname)
+    end;
     log_level = lsp.protocol.MessageType.Warning;
     settings = {};
   };
@@ -23,7 +26,7 @@ clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONC
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
 ]];
     default_config = {
-      root_dir = [[root_pattern("compile_commands.json", "compile_flags.txt", ".git") or cwd]];
+      root_dir = [[root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname]];
       on_init = [[function to handle changing offsetEncoding]];
       capabilities = [[default capabilities, with offsetEncoding utf-8]];
     };
