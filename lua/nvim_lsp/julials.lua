@@ -1,6 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 configs.julials = {
   default_config = {
@@ -36,7 +35,7 @@ configs.julials.install = function()
   julia -e 'using Pkg; Pkg.add("LanguageServer")'
   ]]
 
-  nvim_lsp.util.sh(script, vim.loop.os_homedir())
+  util.sh(script, vim.loop.os_homedir())
 end
 
 configs.julials.install_info = function()
