@@ -686,7 +686,7 @@ require'nvim_lsp'.clangd.setup{}
     filetypes = { "c", "cpp", "objc", "objcpp" }
     log_level = 2
     on_init = function to handle changing offsetEncoding
-    root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or cwd
+    root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
     settings = {}
 ```
 
