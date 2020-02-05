@@ -213,7 +213,7 @@ that config.
 - [hie](#hie)
 - [intelephense](#intelephense)
 - [jsonls](#jsonls)
-- [julials][#julials]
+- [julials](#julials)
 - [leanls](#leanls)
 - [metals](#metals)
 - [ocamlls](#ocamlls)
@@ -261,55 +261,55 @@ This server accepts configuration via the `settings` key.
 - **`ccls.cache.directory`**: `string`
 
   Default: `".ccls-cache"`
-
+  
   Absolute or relative (from the project root) path to the directory that the cached index will be stored in. Try to have this directory on an SSD. If empty, cached indexes will not be saved on disk.
-
+  
   ${workspaceFolder} will be replaced by the folder where .vscode/settings.json resides.
-
+  
   Cache directories are project-wide, so this should be configured in the workspace settings so multiple indexes do not clash.
-
+  
   Example value: "/work/ccls-cache/chrome/"
 
 - **`ccls.cache.hierarchicalPath`**: `boolean`
 
   If false, store cache files as $directory/@a@b/c.cc.blob
-
+  
   If true, $directory/a/b/c.cc.blob.
 
 - **`ccls.callHierarchy.qualified`**: `boolean`
 
   Default: `true`
-
+  
   If true, use qualified names in the call hiearchy
 
 - **`ccls.clang.excludeArgs`**: `array`
 
   Default: `{}`
-
+  
   An set of command line arguments to strip before passing to clang when indexing. Each list entry is a separate argument.
 
 - **`ccls.clang.extraArgs`**: `array`
 
   Default: `{}`
-
+  
   An extra set of command line arguments to give clang when indexing. Each list entry is a separate argument.
 
 - **`ccls.clang.pathMappings`**: `array`
 
   Default: `{}`
-
+  
   Translate paths in compile_commands.json entries, .ccls options and cache files. This allows to reuse cache files built otherwhere if the source paths are different.
 
 - **`ccls.clang.resourceDir`**: `string`
 
   Default: `""`
-
+  
   Default value to use for clang -resource-dir argument. This will be automatically supplied by ccls if not provided.
 
 - **`ccls.codeLens.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Specifies whether the references CodeLens should be shown.
 
 - **`ccls.codeLens.localVariables`**: `boolean`
@@ -323,7 +323,7 @@ This server accepts configuration via the `settings` key.
 - **`ccls.completion.caseSensitivity`**: `integer`
 
   Default: `2`
-
+  
   Case sensitivity when code completion is filtered. 0: case-insensitive, 1: case-folded, i.e. insensitive if no input character is uppercase, 2: case-sensitive
 
 - **`ccls.completion.detailedLabel`**: `boolean`
@@ -341,67 +341,67 @@ This server accepts configuration via the `settings` key.
 - **`ccls.completion.include.blacklist`**: `array`
 
   Default: `{}`
-
+  
   ECMAScript regex that checks absolute path. If it partially matches, the file is not added to include path auto-complete. An example is "/CACHE/"
 
 - **`ccls.completion.include.maxPathSize`**: `integer`
 
   Default: `37`
-
+  
   Maximum length for path in #include proposals. If the path length goes beyond this number it will be elided. Set to 0 to always display the full path.
 
 - **`ccls.completion.include.suffixWhitelist`**: `array`
 
   Default: `{ ".h", ".hpp", ".hh" }`
-
+  
   Only files ending in one of these values will be shown in include auto-complete. Set to the empty-list to disable include auto-complete.
 
 - **`ccls.completion.include.whitelist`**: `array`
 
   Default: `{}`
-
+  
   ECMAScript regex that checks absolute file path. If it does not partially match, the file is not added to include path auto-complete. An example is "/src/"
 
 - **`ccls.diagnostics.blacklist`**: `array`
 
   Default: `{}`
-
+  
   Files that match these patterns won't be displayed in diagnostics view.
 
 - **`ccls.diagnostics.onChange`**: `integer`
 
   Default: `1000`
-
+  
   Time in milliseconds to wait before computing diagnostics on type. -1: disable diagnostics on type.
 
 - **`ccls.diagnostics.onOpen`**: `integer`
 
   Default: `0`
-
+  
   Time in milliseconds to wait before computing diagnostics when a file is opened.
 
 - **`ccls.diagnostics.onSave`**: `integer`
 
   Default: `0`
-
+  
   Time in milliseconds to wait before computing diagnostics when a file is saved.
 
 - **`ccls.diagnostics.spellChecking`**: `boolean`
 
   Default: `true`
-
+  
   Whether to do spell checking on undefined symbol names when computing diagnostics.
 
 - **`ccls.diagnostics.whitelist`**: `array`
 
   Default: `{}`
-
+  
   Files that match these patterns will be displayed in diagnostics view.
 
 - **`ccls.highlight.blacklist`**: `array|null`
 
   Default: `vim.NIL`
-
+  
   Files that match these patterns won't have semantic highlight.
 
 - **`ccls.highlight.enum.face`**: `array`
@@ -411,7 +411,7 @@ This server accepts configuration via the `settings` key.
 - **`ccls.highlight.function.colors`**: `array`
 
   Default: `{ "#e5b124", "#927754", "#eb992c", "#e2bf8f", "#d67c17", "#88651e", "#e4b953", "#a36526", "#b28927", "#d69855" }`
-
+  
   Colors to use for semantic highlight. A good generator is http://tools.medialab.sciences-po.fr/iwanthue/. If multiple colors are specified, semantic highlight will cycle through them for successive symbols.
 
 - **`ccls.highlight.function.face`**: `array`
@@ -429,13 +429,13 @@ This server accepts configuration via the `settings` key.
 - **`ccls.highlight.largeFileSize`**: `integer|null`
 
   Default: `vim.NIL`
-
+  
   Disable semantic highlight for files larger than the size.
 
 - **`ccls.highlight.macro.colors`**: `array`
 
   Default: `{ "#e79528", "#c5373d", "#e8a272", "#d84f2b", "#a67245", "#e27a33", "#9b4a31", "#b66a1e", "#e27a71", "#cf6d49" }`
-
+  
   Colors to use for semantic highlight. A good generator is http://tools.medialab.sciences-po.fr/iwanthue/. If multiple colors are specified, semantic highlight will cycle through them for successive symbols.
 
 - **`ccls.highlight.macro.face`**: `array`
@@ -457,7 +457,7 @@ This server accepts configuration via the `settings` key.
 - **`ccls.highlight.namespace.colors`**: `array`
 
   Default: `{ "#429921", "#58c1a4", "#5ec648", "#36815b", "#83c65d", "#417b2f", "#43cc71", "#7eb769", "#58bf89", "#3e9f4a" }`
-
+  
   Colors to use for semantic highlight. A good generator is http://tools.medialab.sciences-po.fr/iwanthue/. If multiple colors are specified, semantic highlight will cycle through them for successive symbols.
 
 - **`ccls.highlight.namespace.face`**: `array`
@@ -487,7 +487,7 @@ This server accepts configuration via the `settings` key.
 - **`ccls.highlight.type.colors`**: `array`
 
   Default: `{ "#e1afc3", "#d533bb", "#9b677f", "#e350b6", "#a04360", "#dd82bc", "#de3864", "#ad3f87", "#dd7a90", "#e0438a" }`
-
+  
   Colors to use for semantic highlight. A good generator is http://tools.medialab.sciences-po.fr/iwanthue/. If multiple colors are specified, semantic highlight will cycle through them for successive symbols.
 
 - **`ccls.highlight.type.face`**: `array`
@@ -501,7 +501,7 @@ This server accepts configuration via the `settings` key.
 - **`ccls.highlight.variable.colors`**: `array`
 
   Default: `{ "#587d87", "#26cdca", "#397797", "#57c2cc", "#306b72", "#6cbcdf", "#368896", "#3ea0d2", "#48a5af", "#7ca6b7" }`
-
+  
   Colors to use for semantic highlight. A good generator is http://tools.medialab.sciences-po.fr/iwanthue/. If multiple colors are specified, semantic highlight will cycle through them for successive symbols.
 
 - **`ccls.highlight.variable.face`**: `array`
@@ -511,37 +511,37 @@ This server accepts configuration via the `settings` key.
 - **`ccls.highlight.whitelist`**: `array|null`
 
   Default: `vim.NIL`
-
+  
   Files that match these patterns will have semantic highlight.
 
 - **`ccls.index.blacklist`**: `array`
 
   Default: `{}`
-
+  
   A translation unit (cc/cpp file) is not indexed if any of the ECMAScript regexes in this list partially matches translation unit's the absolute path.
 
 - **`ccls.index.initialBlacklist`**: `array`
 
   Default: `{}`
-
+  
   Files matched by the regexes should not be indexed on initialization. Indexing is deferred to when they are opened.
 
 - **`ccls.index.initialWhitelist`**: `array`
 
   Default: `{}`
-
+  
   Files matched by the regexes should be indexed on initialization.
 
 - **`ccls.index.maxInitializerLines`**: `integer`
 
   Default: `15`
-
+  
   Number of lines of the initializer / macro definition showed in hover.
 
 - **`ccls.index.multiVersion`**: `integer`
 
   Default: `0`
-
+  
   If not 0, a file will be indexed in each tranlation unit that includes it.
 
 - **`ccls.index.onChange`**: `boolean`
@@ -551,105 +551,105 @@ This server accepts configuration via the `settings` key.
 - **`ccls.index.threads`**: `number`
 
   Default: `0`
-
+  
   Number of indexer threads. If 0, 80% of cores are used.
 
 - **`ccls.index.trackDependency`**: `integer`
 
   Default: `2`
-
+  
   Whether to reparse a file if write times of its dependencies have changed. The file will always be reparsed if its own write time changes.
-
+  
   0: no, 1: only during initial load of project, 2: yes
 
 - **`ccls.index.whitelist`**: `array`
 
   Default: `{}`
-
+  
   If a translation unit's absolute path partially matches any ECMAScript regex in this list, it will be indexed. The whitelist takes priority over the blacklist. To only index files in the whitelist, make "ccls.index.blacklist" match everything, ie, set it to ".*".
 
 - **`ccls.launch.args`**: `array`
 
   Default: `{}`
-
+  
   Array containing extra arguments to pass to the ccls binary
 
 - **`ccls.launch.command`**: `string`
 
   Default: `"ccls"`
-
+  
   Path to the ccls binary (default assumes the binary is in the PATH)
 
 - **`ccls.misc.compilationDatabaseCommand`**: `string`
 
   Default: `""`
-
+  
   If not empty, the compilation database command to use
 
 - **`ccls.misc.compilationDatabaseDirectory`**: `string`
 
   Default: `""`
-
+  
   If not empty, the compilation database directory to use instead of the project root
 
 - **`ccls.misc.showInactiveRegions`**: `boolean`
 
   Default: `true`
-
+  
   If true, ccls will highlight skipped ranges.
 
 - **`ccls.statusUpdateInterval`**: `integer`
 
   Default: `2000`
-
+  
   Interval between updating ccls status in milliseconds. Set to 0 to disable.
 
 - **`ccls.theme.dark.skippedRange.backgroundColor`**: `string`
 
   Default: `"rgba(18, 18, 18, 0.3)"`
-
+  
   CSS color to apply to the background when the code region has been disabled by the preprocessor in a dark theme.
 
 - **`ccls.theme.dark.skippedRange.textColor`**: `string`
 
   Default: `"rgb(100, 100, 100)"`
-
+  
   CSS color to apply to text when the code region has been disabled by the preprocessor in a dark theme.
 
 - **`ccls.theme.light.skippedRange.backgroundColor`**: `string`
 
   Default: `"rgba(220, 220, 220, 0.3)"`
-
+  
   CSS color to apply to the background when the code region has been disabled by the preprocessor in a light theme.
 
 - **`ccls.theme.light.skippedRange.textColor`**: `string`
 
   Default: `"rgb(100, 100, 100)"`
-
+  
   CSS color to apply to text when the code region has been disabled by the preprocessor in a light theme.
 
 - **`ccls.trace.websocketEndpointUrl`**: `string`
 
   Default: `""`
-
+  
   When set, logs all LSP messages to specified WebSocket endpoint.
 
 - **`ccls.treeViews.doubleClickTimeoutMs`**: `number`
 
   Default: `500`
-
+  
   If a tree view entry is double-clicked within this timeout value, vscode will navigate to the entry.
 
 - **`ccls.workspaceSymbol.caseSensitivity`**: `integer`
 
   Default: `1`
-
+  
   Case sensitivity when searching workspace symbols. 0: case-insensitive, 1: case-folded, i.e. insensitive if no input character is uppercase, 2: case-sensitive
 
 - **`ccls.workspaceSymbol.maxNum`**: `number|null`
 
   Default: `vim.NIL`
-
+  
   The maximum number of global search (ie, Ctrl+P + #foo) search results to report. For small search strings on large projects there can be a massive number of results (ie, over 1,000,000) so this limit is important to avoid extremely long delays. null means use the default value provided by the ccls language server.
 
 </details>
@@ -732,7 +732,7 @@ https://github.com/rcjsuen/dockerfile-language-server-nodejs
 ```sh
 npm install -g dockerfile-language-server-nodejs
 ```
-
+    
 Can be installed in Nvim with `:LspInstall dockerls`
 
 ```lua
@@ -762,31 +762,31 @@ This server accepts configuration via the `settings` key.
 - **`elmLS.elmAnalyseTrigger`**: `enum { "change", "save", "never" }`
 
   Default: `"change"`
-
+  
   When do you want the extension to run elm-analyse? Might need a restart to take effect.
 
 - **`elmLS.elmFormatPath`**: `string`
 
   Default: `""`
-
+  
   The path to your elm-format executable. Should be empty by default, in that case it will assume the name and try to first get it from a local npm installation or a global one. If you set it manually it will not try to load from the npm folder.
 
 - **`elmLS.elmPath`**: `string`
 
   Default: `""`
-
+  
   The path to your elm executable. Should be empty by default, in that case it will assume the name and try to first get it from a local npm installation or a global one. If you set it manually it will not try to load from the npm folder.
 
 - **`elmLS.elmTestPath`**: `string`
 
   Default: `""`
-
+  
   The path to your elm-test executable. Should be empty by default, in that case it will assume the name and try to first get it from a local npm installation or a global one. If you set it manually it will not try to load from the npm folder.
 
 - **`elmLS.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
-
+  
   Traces the communication between VS Code and the language server.
 
 </details>
@@ -823,46 +823,46 @@ See below for lsp command options.
 ```sh
 npm run flow lsp -- --help
 ```
-
+    
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
 - **`flow.coverageSeverity`**: `enum { "error", "warn", "info" }`
 
   Default: `"info"`
-
+  
   Type coverage diagnostic severity
 
 - **`flow.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Is flow enabled
 
 - **`flow.fileExtensions`**: `array`
 
   Default: `{ ".js", ".mjs", ".jsx", ".flow", ".json" }`
-
+  
   Array items: `{type = "string"}`
-
+  
   (Supported only when useLSP: false). File extensions to consider for flow processing
 
 - **`flow.lazyMode`**: `string`
 
   Default: `vim.NIL`
-
+  
   Set value to enable flow lazy mode
 
 - **`flow.logLevel`**: `enum { "error", "warn", "info", "trace" }`
 
   Default: `"info"`
-
+  
   Log level for output panel logs
 
 - **`flow.pathToFlow`**: `string`
 
   Default: `"flow"`
-
+  
   Absolute path to flow binary. Special var ${workspaceFolder} or ${flowconfigDir} can be used in path (NOTE: in windows you can use '/' and can omit '.cmd' in path)
 
 - **`flow.runOnAllFiles`**: `boolean`
@@ -872,13 +872,13 @@ This server accepts configuration via the `settings` key.
 - **`flow.runOnEdit`**: `boolean`
 
   Default: `true`
-
+  
   If true will run flow on every edit, otherwise will run only when changes are saved (Note: 'useLSP: true' only supports syntax errors)
 
 - **`flow.showStatus`**: `boolean`
 
   Default: `true`
-
+  
   (Supported only when useLSP: false) If true will display flow status is the statusbar
 
 - **`flow.showUncovered`**: `boolean`
@@ -888,37 +888,37 @@ This server accepts configuration via the `settings` key.
 - **`flow.stopFlowOnExit`**: `boolean`
 
   Default: `true`
-
+  
   Stop Flow on Exit
 
 - **`flow.trace.server`**
 
   Default: `"off"`
-
+  
   Traces the communication between VSCode and the flow lsp service.
 
 - **`flow.useBundledFlow`**: `boolean`
 
   Default: `true`
-
+  
   If true will use flow bundled with this plugin if nothing works
 
 - **`flow.useCodeSnippetOnFunctionSuggest`**: `boolean`
 
   Default: `true`
-
+  
   Complete functions with their parameter signature.
 
 - **`flow.useLSP`**: `boolean`
 
   Default: `true`
-
+  
   Turn off to switch from the official Flow Language Server implementation to talking directly to flow.
 
 - **`flow.useNPMPackagedFlow`**: `boolean`
 
   Default: `true`
-
+  
   Support using flow through your node_modules folder, WARNING: Checking this box is a security risk. When you open a project we will immediately run code contained within it.
 
 </details>
@@ -939,7 +939,7 @@ require'nvim_lsp'.flow.setup{}
 https://github.com/hansec/fortran-language-server
 
 Fortran Language Server for the Language Server Protocol
-
+    
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
@@ -950,7 +950,7 @@ This server accepts configuration via the `settings` key.
 - **`fortran-ls.displayVerWarning`**: `boolean`
 
   Default: `true`
-
+  
   Provides notifications when the underlying language server is out of date.
 
 - **`fortran-ls.enableCodeActions`**: `boolean`
@@ -960,7 +960,7 @@ This server accepts configuration via the `settings` key.
 - **`fortran-ls.executablePath`**: `string`
 
   Default: `"fortls"`
-
+  
   Path to the Fortran language server (fortls).
 
 - **`fortran-ls.hoverSignature`**: `boolean`
@@ -970,13 +970,13 @@ This server accepts configuration via the `settings` key.
 - **`fortran-ls.includeSymbolMem`**: `boolean`
 
   Default: `true`
-
+  
   Include type members in document outline (also used for 'Go to Symbol in File')
 
 - **`fortran-ls.incrementalSync`**: `boolean`
 
   Default: `true`
-
+  
   Use incremental synchronization for file changes.
 
 - **`fortran-ls.lowercaseIntrinsics`**: `boolean`
@@ -986,13 +986,13 @@ This server accepts configuration via the `settings` key.
 - **`fortran-ls.maxCommentLineLength`**: `number`
 
   Default: `-1`
-
+  
   Maximum comment line length (requires v1.8.0+).
 
 - **`fortran-ls.maxLineLength`**: `number`
 
   Default: `-1`
-
+  
   Maximum line length (requires v1.8.0+).
 
 - **`fortran-ls.notifyInit`**: `boolean`
@@ -1002,7 +1002,7 @@ This server accepts configuration via the `settings` key.
 - **`fortran-ls.useSignatureHelp`**: `boolean`
 
   Default: `true`
-
+  
   Use signature help instead of snippets when available.
 
 - **`fortran-ls.variableHover`**: `boolean`
@@ -1036,13 +1036,13 @@ This server accepts configuration via the `settings` key.
 - **`hic.arguments`**: `string`
 
   Default: `"--lsp"`
-
+  
   The arguments you would like to pass to the executable
 
 - **`hic.executablePath`**: `string`
 
   Default: `"ghcide"`
-
+  
   The location of your ghcide executable
 
 </details>
@@ -1094,50 +1094,50 @@ init_options = {
   }
 }
 ```
-
+        
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
 - **`languageServerHaskell.completionSnippetsOn`**: `boolean`
 
   Default: `true`
-
+  
   Show snippets with type information when using code completion
 
 - **`languageServerHaskell.diagnosticsOnChange`**: `boolean`
 
   Default: `true`
-
+  
   Compute diagnostics continuously as you type. Turn off to only generate diagnostics on file save.
 
 - **`languageServerHaskell.enableHIE`**: `boolean`
 
   Default: `true`
-
+  
   Enable/disable HIE (useful for multi-root workspaces).
 
 - **`languageServerHaskell.formatOnImportOn`**: `boolean`
 
   Default: `true`
-
+  
   When adding an import, use the formatter on the result
 
 - **`languageServerHaskell.formattingProvider`**: `enum { "brittany", "floskell", "none" }`
 
   Default: `"brittany"`
-
+  
   The tool to use for formatting requests.
 
 - **`languageServerHaskell.hieExecutablePath`**: `string`
 
   Default: `""`
-
+  
   Set the path to your hie executable, if it's not already on your $PATH. Works with ~, ${HOME} and ${workspaceFolder}.
 
 - **`languageServerHaskell.hlintOn`**: `boolean`
 
   Default: `true`
-
+  
   Get suggestions from hlint
 
 - **`languageServerHaskell.liquidOn`**: `boolean`
@@ -1147,13 +1147,13 @@ This server accepts configuration via the `settings` key.
 - **`languageServerHaskell.logFile`**: `string`
 
   Default: `""`
-
+  
   If set, redirects the logs to a file.
 
 - **`languageServerHaskell.maxNumberOfProblems`**: `number`
 
   Default: `100`
-
+  
   Controls the maximum number of problems produced by the server.
 
 - **`languageServerHaskell.noLspParam`**: `boolean`
@@ -1163,7 +1163,7 @@ This server accepts configuration via the `settings` key.
 - **`languageServerHaskell.showTypeForSelection.command.location`**: `enum { "dropdown", "channel" }`
 
   Default: `"dropdown"`
-
+  
   Determines where the type information for selected text will be shown when the `showType` command is triggered (distinct from automatically showing this information when hover is triggered).
   dropdown: in a dropdown
   channel: will be revealed in an output channel
@@ -1171,13 +1171,13 @@ This server accepts configuration via the `settings` key.
 - **`languageServerHaskell.showTypeForSelection.onHover`**: `boolean`
 
   Default: `true`
-
+  
   If true, when an expression is selected, the hover tooltip will attempt to display the type of the entire expression - rather than just the term under the cursor.
 
 - **`languageServerHaskell.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
-
+  
   Traces the communication between VSCode and the languageServerHaskell service.
 
 - **`languageServerHaskell.useCustomHieWrapper`**: `boolean`
@@ -1187,7 +1187,7 @@ This server accepts configuration via the `settings` key.
 - **`languageServerHaskell.useCustomHieWrapperPath`**: `string`
 
   Default: `""`
-
+  
   Specify the full path to your own custom hie wrapper (e.g. ${HOME}/.hie-wrapper.sh). Works with ~, ${HOME} and ${workspaceFolder}.
 
 </details>
@@ -1244,31 +1244,31 @@ This server accepts configuration via the `settings` key.
 - **`json.colorDecorators.enable`**: `boolean`
 
   Default: `true`
-
+  
   %json.colorDecorators.enable.desc%
 
 - **`json.format.enable`**: `boolean`
 
   Default: `true`
-
+  
   %json.format.enable.desc%
 
 - **`json.maxItemsComputed`**: `number`
 
   Default: `5000`
-
+  
   %json.maxItemsComputed.desc%
 
 - **`json.schemas`**: `array`
 
   Array items: `{default = {fileMatch = { "/myfile" },url = "schemaURL"},properties = {fileMatch = {description = "%json.schemas.fileMatch.desc%",items = {default = "MyFile.json",description = "%json.schemas.fileMatch.item.desc%",type = "string"},minItems = 1,type = "array"},schema = {["$ref"] = "http://json-schema.org/draft-07/schema#",description = "%json.schemas.schema.desc%"},url = {default = "/user.schema.json",description = "%json.schemas.url.desc%",type = "string"}},type = "object"}`
-
+  
   %json.schemas.desc%
 
 - **`json.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
-
+  
   %json.tracing.desc%
 
 </details>
@@ -1328,14 +1328,141 @@ require'nvim_lsp'.jsonls.setup{}
 
 ## julials
 
-https://julialang.org
+https://github.com/julia-vscode/julia-vscode
+`LanguageServer.jl` can be installed via `:LspInstall julials` or by yourself the `julia` and `Pkg`:
+```sh
+julia -e 'using Pkg; Pkg.add("LanguageServer")'
+```
+    
+Can be installed in Nvim with `:LspInstall julials`
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
 
-`LanguageServer.jl` must be installed using julia's package manager.
-Once installed, the vim plugin will start the Language Server if julia is in the path.
-Add the following to your `init.vim` in a `lua` block:
+- **`julia.NumThreads`**: `integer`
+
+  Default: `1`
+  
+  Number of threads to use for Julia processes.
+
+- **`julia.additionalArgs`**: `array`
+
+  Default: `{}`
+  
+  Additional julia arguments.
+
+- **`julia.enableCrashReporter`**: `boolean|null`
+
+  Default: `vim.NIL`
+  
+  Enable crash reports to be sent to the julia VS Code extension developers.
+
+- **`julia.enableTelemetry`**: `boolean|null`
+
+  Default: `vim.NIL`
+  
+  Enable usage data and errors to be sent to the julia VS Code extension developers.
+
+- **`julia.environmentPath`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  Path to a julia environment.
+
+- **`julia.executablePath`**: `string`
+
+  Default: `""`
+  
+  Points to the julia executable.
+
+- **`julia.format.calls`**: `boolean`
+
+  Default: `true`
+  
+  Format function calls.
+
+- **`julia.format.comments`**: `boolean`
+
+  Default: `true`
+  
+  Format comments.
+
+- **`julia.format.curly`**: `boolean`
+
+  Default: `true`
+  
+  Format braces.
+
+- **`julia.format.docs`**: `boolean`
+
+  Default: `true`
+  
+  Format inline documentation.
+
+- **`julia.format.indent`**: `integer`
+
+  Default: `4`
+  
+  Indent size for formatting.
+
+- **`julia.format.indents`**: `boolean`
+
+  Default: `true`
+  
+  Format file indents.
+
+- **`julia.format.iterOps`**: `boolean`
+
+  Default: `true`
+  
+  Format loop iterators.
+
+- **`julia.format.ops`**: `boolean`
+
+  Default: `true`
+  
+  Format whitespace around operators.
+
+- **`julia.format.tuples`**: `boolean`
+
+  Default: `true`
+  
+  Format tuples.
+
+- **`julia.runLinter`**: `boolean`
+
+  Default: `true`
+  
+  Run the linter on active files.
+
+- **`julia.useCustomSysimage`**: `boolean`
+
+  Default: `"false"`
+  
+  Use an existing custom sysimage when starting the REPL
+
+- **`julia.usePlotPane`**: `boolean`
+
+  Default: `true`
+  
+  Display plots within vscode.
+
+- **`julia.useRevise`**: `boolean`
+
+  Default: `true`
+  
+  Load Revise.jl on startup of the REPL.
+
+</details>
 
 ```lua
 require'nvim_lsp'.julials.setup{}
+
+  Default Values:
+    cmd = { "julia", "--project", "--startup-file=no", "--history-file=no", "-e", "        using LanguageServer;\n        using Pkg;\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, false, dirname(Pkg.Types.Context().env.project_file));\n        server.runlinter = true; run(server);\n        " }
+    filetypes = { "julia" }
+    log_level = 2
+    root_dir = <function 1>
+    settings = {}
 ```
 
 ## leanls
@@ -1343,22 +1470,22 @@ require'nvim_lsp'.julials.setup{}
 https://github.com/leanprover/lean-client-js/tree/master/lean-language-server
 
 Lean language server.
-
+    
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
 - **`lean.executablePath`**: `string`
 
   Default: `"lean"`
-
+  
   Path to the Lean executable to use.
 
 - **`lean.extraOptions`**: `array`
 
   Default: `{}`
-
+  
   Array items: `{description = "a single command-line argument",type = "string"}`
-
+  
   Extra command-line options for the Lean server.
 
 - **`lean.infoViewAllErrorsOnLine`**: `boolean`
@@ -1368,79 +1495,79 @@ This server accepts configuration via the `settings` key.
 - **`lean.infoViewAutoOpen`**: `boolean`
 
   Default: `true`
-
+  
   Info view: open info view when Lean extension is activated.
 
 - **`lean.infoViewAutoOpenShowGoal`**: `boolean`
 
   Default: `true`
-
+  
   Info view: auto open shows goal and messages for the current line (instead of all messages for the whole file)
 
 - **`lean.infoViewFilterIndex`**: `number`
 
   Default: `-1`
-
+  
   Index of the filter applied to the tactic state (in the array infoViewTacticStateFilters). An index of -1 means no filter is applied.
 
 - **`lean.infoViewStyle`**: `string`
 
   Default: `""`
-
+  
   Add an additional CSS snippet to the info view.
 
 - **`lean.infoViewTacticStateFilters`**: `array`
 
   Default: `{ {flags = "",match = false,regex = "^_"}, {flags = "",match = true,name = "goals only",regex = "^(⊢|\\d+ goals|case|$)"} }`
-
+  
   Array items: `{description = "an object with required properties 'regex': string, 'match': boolean, and 'flags': string, and optional property 'name': string",properties = {flags = {description = "additional flags passed to the RegExp constructor, e.g. 'i' for ignore case",type = "string"},match = {description = "whether tactic state lines matching the value of 'regex' should be included (true) or excluded (false)",type = "boolean"},name = {description = "name displayed in the dropdown",type = "string"},regex = {description = "a properly-escaped regex string, e.g. '^_' matches any string beginning with an underscore",type = "string"}},required = { "regex", "match", "flags" },type = "object"}`
-
+  
   An array of objects containing regular expression strings that can be used to filter (positively or negatively) the tactic state in the info view. Set to an empty array '[]' to hide the filter select dropdown.
-
+   
    Each object must contain the following keys: 'regex': string, 'match': boolean, 'flags': string.
    'regex' is a properly-escaped regex string,
-   'match' = true (false) means blocks in the tactic state matching 'regex' will be included (excluded) in the info view,
+   'match' = true (false) means blocks in the tactic state matching 'regex' will be included (excluded) in the info view, 
    'flags' are additional flags passed to the JavaScript RegExp constructor.
    The 'name' key is optional and may contain a string that is displayed in the dropdown instead of the full regex details.
 
 - **`lean.input.customTranslations`**: `object`
 
   Default: `vim.empty_dict()`
-
+  
   Array items: `{description = "Unicode character to translate to",type = "string"}`
-
+  
   Add additional input Unicode translations. Example: `{"foo": "☺"}` will correct `\foo` to `☺`.
 
 - **`lean.input.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable Lean input mode.
 
 - **`lean.input.languages`**: `array`
 
   Default: `{ "lean" }`
-
+  
   Array items: `{description = "the name of a language, e.g. 'lean', 'markdown'",type = "string"}`
-
+  
   Enable Lean Unicode input in other file types.
 
 - **`lean.input.leader`**: `string`
 
   Default: `"\\"`
-
+  
   Leader key to trigger input mode.
 
 - **`lean.leanpkgPath`**: `string`
 
   Default: `"leanpkg"`
-
+  
   Path to the leanpkg executable to use.
 
 - **`lean.memoryLimit`**: `number`
 
   Default: `4096`
-
+  
   Set a memory limit (in megabytes) for the Lean server.
 
 - **`lean.progressMessages`**: `boolean`
@@ -1450,19 +1577,19 @@ This server accepts configuration via the `settings` key.
 - **`lean.roiModeDefault`**: `string`
 
   Default: `"visible"`
-
+  
   Set the default region of interest mode (nothing, visible, lines, linesAndAbove, open, or project) for the Lean extension.
 
 - **`lean.timeLimit`**: `number`
 
   Default: `100000`
-
+  
   Set a deterministic timeout (it is approximately the maximum number of memory allocations in thousands) for the Lean server.
 
 - **`lean.typeInStatusBar`**: `boolean`
 
   Default: `true`
-
+  
   Show the type of term under the cursor in the status bar.
 
 - **`lean.typesInCompletionList`**: `boolean`
@@ -1499,27 +1626,27 @@ This server accepts configuration via the `settings` key.
 
 - **`metals.gradleScript`**: `string`
 
-
+  
 
 - **`metals.javaHome`**: `string`
 
-
+  
 
 - **`metals.mavenScript`**: `string`
 
-
+  
 
 - **`metals.millScript`**: `string`
 
-
+  
 
 - **`metals.sbtScript`**: `string`
 
-
+  
 
 - **`metals.scalafmtConfigPath`**: `string`
 
-
+  
 
 - **`metals.serverProperties`**: `array`
 
@@ -1550,7 +1677,7 @@ https://github.com/ocaml-lsp/ocaml-language-server
 ```sh
 npm install -g ocaml-langauge-server
 ```
-
+    
 Can be installed in Nvim with `:LspInstall ocamlls`
 
 ```lua
@@ -1569,192 +1696,192 @@ require'nvim_lsp'.ocamlls.setup{}
 https://github.com/palantir/python-language-server
 
 `python-language-server`, a language server for Python.
-
+    
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
 - **`pyls.configurationSources`**: `array`
 
   Default: `{ "pycodestyle" }`
-
+  
   Array items: `{enum = { "pycodestyle", "pyflakes" },type = "string"}`
-
+  
   List of configuration sources to use.
 
 - **`pyls.executable`**: `string`
 
   Default: `"pyls"`
-
+  
   Language server executable
 
 - **`pyls.plugins.jedi.environment`**: `string`
 
   Default: `vim.NIL`
-
+  
   Define environment for jedi.Script and Jedi.names.
 
 - **`pyls.plugins.jedi.extra_paths`**: `array`
 
   Default: `{}`
-
+  
   Define extra paths for jedi.Script.
 
 - **`pyls.plugins.jedi_completion.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable or disable the plugin.
 
 - **`pyls.plugins.jedi_completion.include_params`**: `boolean`
 
   Default: `true`
-
+  
   Auto-completes methods and classes with tabstops for each parameter.
 
 - **`pyls.plugins.jedi_definition.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable or disable the plugin.
 
 - **`pyls.plugins.jedi_definition.follow_builtin_imports`**: `boolean`
 
   Default: `true`
-
+  
   If follow_imports is True will decide if it follow builtin imports.
 
 - **`pyls.plugins.jedi_definition.follow_imports`**: `boolean`
 
   Default: `true`
-
+  
   The goto call will follow imports.
 
 - **`pyls.plugins.jedi_hover.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable or disable the plugin.
 
 - **`pyls.plugins.jedi_references.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable or disable the plugin.
 
 - **`pyls.plugins.jedi_signature_help.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable or disable the plugin.
 
 - **`pyls.plugins.jedi_symbols.all_scopes`**: `boolean`
 
   Default: `true`
-
+  
   If True lists the names of all scopes instead of only the module namespace.
 
 - **`pyls.plugins.jedi_symbols.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable or disable the plugin.
 
 - **`pyls.plugins.mccabe.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable or disable the plugin.
 
 - **`pyls.plugins.mccabe.threshold`**: `number`
 
   Default: `15`
-
+  
   The minimum threshold that triggers warnings about cyclomatic complexity.
 
 - **`pyls.plugins.preload.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable or disable the plugin.
 
 - **`pyls.plugins.preload.modules`**: `array`
 
   Default: `vim.NIL`
-
+  
   Array items: `{type = "string"}`
-
+  
   List of modules to import on startup
 
 - **`pyls.plugins.pycodestyle.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable or disable the plugin.
 
 - **`pyls.plugins.pycodestyle.exclude`**: `array`
 
   Default: `vim.NIL`
-
+  
   Array items: `{type = "string"}`
-
+  
   Exclude files or directories which match these patterns.
 
 - **`pyls.plugins.pycodestyle.filename`**: `array`
 
   Default: `vim.NIL`
-
+  
   Array items: `{type = "string"}`
-
+  
   When parsing directories, only check filenames matching these patterns.
 
 - **`pyls.plugins.pycodestyle.hangClosing`**: `boolean`
 
   Default: `vim.NIL`
-
+  
   Hang closing bracket instead of matching indentation of opening bracket's line.
 
 - **`pyls.plugins.pycodestyle.ignore`**: `array`
 
   Default: `vim.NIL`
-
+  
   Array items: `{type = "string"}`
-
+  
   Ignore errors and warnings
 
 - **`pyls.plugins.pycodestyle.maxLineLength`**: `number`
 
   Default: `vim.NIL`
-
+  
   Set maximum allowed line length.
 
 - **`pyls.plugins.pycodestyle.select`**: `array`
 
   Default: `vim.NIL`
-
+  
   Array items: `{type = "string"}`
-
+  
   Select errors and warnings
 
 - **`pyls.plugins.pydocstyle.addIgnore`**: `array`
 
   Default: `vim.NIL`
-
+  
   Array items: `{type = "string"}`
-
+  
   Ignore errors and warnings in addition to the specified convention.
 
 - **`pyls.plugins.pydocstyle.addSelect`**: `array`
 
   Default: `vim.NIL`
-
+  
   Array items: `{type = "string"}`
-
+  
   Select errors and warnings in addition to the specified convention.
 
 - **`pyls.plugins.pydocstyle.convention`**: `enum { "pep257", "numpy" }`
 
   Default: `vim.NIL`
-
+  
   Choose the basic list of checked errors by specifying an existing convention.
 
 - **`pyls.plugins.pydocstyle.enabled`**: `boolean`
@@ -1764,43 +1891,43 @@ This server accepts configuration via the `settings` key.
 - **`pyls.plugins.pydocstyle.ignore`**: `array`
 
   Default: `vim.NIL`
-
+  
   Array items: `{type = "string"}`
-
+  
   Ignore errors and warnings
 
 - **`pyls.plugins.pydocstyle.match`**: `string`
 
   Default: `"(?!test_).*\\.py"`
-
+  
   Check only files that exactly match the given regular expression; default is to match files that don't start with 'test_' but end with '.py'.
 
 - **`pyls.plugins.pydocstyle.matchDir`**: `string`
 
   Default: `"[^\\.].*"`
-
+  
   Search only dirs that exactly match the given regular expression; default is to match dirs which do not begin with a dot.
 
 - **`pyls.plugins.pydocstyle.select`**: `array`
 
   Default: `vim.NIL`
-
+  
   Array items: `{type = "string"}`
-
+  
   Select errors and warnings
 
 - **`pyls.plugins.pyflakes.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable or disable the plugin.
 
 - **`pyls.plugins.pylint.args`**: `array`
 
   Default: `vim.NIL`
-
+  
   Array items: `{type = "string"}`
-
+  
   Arguments to pass to pylint.
 
 - **`pyls.plugins.pylint.enabled`**: `boolean`
@@ -1810,27 +1937,27 @@ This server accepts configuration via the `settings` key.
 - **`pyls.plugins.rope_completion.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable or disable the plugin.
 
 - **`pyls.plugins.yapf.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable or disable the plugin.
 
 - **`pyls.rope.extensionModules`**: `string`
 
   Default: `vim.NIL`
-
+  
   Builtin and c-extension modules that are allowed to be imported and inspected by rope.
 
 - **`pyls.rope.ropeFolder`**: `array`
 
   Default: `vim.NIL`
-
+  
   Array items: `{type = "string"}`
-
+  
   The name of the folder in which rope stores project configurations and data.  Pass `null` for not using such a folder at all.
 
 </details>
@@ -1860,7 +1987,7 @@ curl -L https://dot.net/v1/dotnet-install.sh | sh
 
 This server accepts configuration via the `settings` key.
 
-
+    
 Can be installed in Nvim with `:LspInstall pyls_ms`
 
 ```lua
@@ -1907,14 +2034,14 @@ If you want to use rls for a particular build, eg nightly, set cmd as follows:
 ```lua
 cmd = {"rustup", "run", "nightly", "rls"}
 ```
-
+    
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
 - **`rust-client.channel`**: `enum { "stable", "beta", "nightly" }`
 
   Default: `vim.NIL`
-
+  
   Rust channel to invoke rustup with. Ignored if rustup is disabled. By default, uses the same channel as your currently open project.
 
 - **`rust-client.disableRustup`**: `boolean`
@@ -1932,31 +2059,31 @@ This server accepts configuration via the `settings` key.
 - **`rust-client.nestedMultiRootConfigInOutermost`**: `boolean`
 
   Default: `true`
-
+  
   If one root workspace folder is nested in another root folder, look for the Rust config in the outermost root.
 
 - **`rust-client.revealOutputChannelOn`**: `enum { "info", "warn", "error", "never" }`
 
   Default: `"never"`
-
+  
   Specifies message severity on which the output channel will be revealed. Requires reloading extension after change.
 
 - **`rust-client.rlsPath`**: `string|null`
 
   Default: `vim.NIL`
-
+  
   Override RLS path. Only required for RLS developers. If you set this and use rustup, you should also set `rust-client.channel` to ensure your RLS sees the right libraries. If you don't use rustup, make sure to set `rust-client.disableRustup`.
 
 - **`rust-client.rustupPath`**: `string`
 
   Default: `"rustup"`
-
+  
   Path to rustup executable. Ignored if rustup is disabled.
 
 - **`rust-client.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
-
+  
   Traces the communication between VS Code and the Rust language server.
 
 - **`rust-client.updateOnStartup`**: `boolean`
@@ -1974,27 +2101,27 @@ This server accepts configuration via the `settings` key.
 - **`rust.all_targets`**: `boolean`
 
   Default: `true`
-
+  
   Checks the project as if you were running cargo check --all-targets (I.e., check all targets and integration tests too).
 
 - **`rust.build_bin`**: `string|null`
 
   Default: `vim.NIL`
-
+  
   Specify to run analysis as if running `cargo check --bin <name>`. Use `null` to auto-detect. (unstable)
 
 - **`rust.build_command`**: `string|null`
 
   Default: `vim.NIL`
-
+  
   EXPERIMENTAL (requires `unstable_features`)
-  If set, executes a given program responsible for rebuilding save-analysis to be loaded by the RLS. The program given should output a list of resulting .json files on stdout.
+  If set, executes a given program responsible for rebuilding save-analysis to be loaded by the RLS. The program given should output a list of resulting .json files on stdout. 
   Implies `rust.build_on_save`: true.
 
 - **`rust.build_lib`**: `boolean|null`
 
   Default: `vim.NIL`
-
+  
   Specify to run analysis as if running `cargo check --lib`. Use `null` to auto-detect. (unstable)
 
 - **`rust.build_on_save`**: `boolean`
@@ -2008,13 +2135,13 @@ This server accepts configuration via the `settings` key.
 - **`rust.clear_env_rust_log`**: `boolean`
 
   Default: `true`
-
+  
   Clear the RUST_LOG environment variable before running rustc or cargo.
 
 - **`rust.clippy_preference`**: `enum { "on", "opt-in", "off" }`
 
   Default: `"opt-in"`
-
+  
   Controls eagerness of clippy diagnostics when available. Valid values are (case-insensitive):
    - "off": Disable clippy lints.
    - "on": Display the same diagnostics as command-line clippy invoked with no arguments (`clippy::all` unless overridden).
@@ -2024,26 +2151,26 @@ This server accepts configuration via the `settings` key.
 - **`rust.crate_blacklist`**: `array|null`
 
   Default: `{ "cocoa", "gleam", "glium", "idna", "libc", "openssl", "rustc_serialize", "serde", "serde_json", "typenum", "unicode_normalization", "unicode_segmentation", "winapi" }`
-
+  
   Overrides the default list of packages for which analysis is skipped.
   Available since RLS 1.38
 
 - **`rust.features`**: `array`
 
   Default: `{}`
-
+  
   A list of Cargo features to enable.
 
 - **`rust.full_docs`**: `boolean|null`
 
   Default: `vim.NIL`
-
+  
   Instructs cargo to enable full documentation extraction during save-analysis while building the crate.
 
 - **`rust.jobs`**: `number|null`
 
   Default: `vim.NIL`
-
+  
   Number of Cargo jobs to be run in parallel.
 
 - **`rust.no_default_features`**: `boolean`
@@ -2053,49 +2180,49 @@ This server accepts configuration via the `settings` key.
 - **`rust.racer_completion`**: `boolean`
 
   Default: `true`
-
+  
   Enables code completion using racer.
 
 - **`rust.rustflags`**: `string|null`
 
   Default: `vim.NIL`
-
+  
   Flags added to RUSTFLAGS.
 
 - **`rust.rustfmt_path`**: `string|null`
 
   Default: `vim.NIL`
-
+  
   When specified, RLS will use the Rustfmt pointed at the path instead of the bundled one
 
 - **`rust.show_hover_context`**: `boolean`
 
   Default: `true`
-
+  
   Show additional context in hover tooltips when available. This is often the type local variable declaration.
 
 - **`rust.show_warnings`**: `boolean`
 
   Default: `true`
-
+  
   Show warnings.
 
 - **`rust.sysroot`**: `string|null`
 
   Default: `vim.NIL`
-
+  
   --sysroot
 
 - **`rust.target`**: `string|null`
 
   Default: `vim.NIL`
-
+  
   --target
 
 - **`rust.target_dir`**: `string|null`
 
   Default: `vim.NIL`
-
+  
   When specified, it places the generated analysis files at the specified target directory. By default it is placed target/rls directory.
 
 - **`rust.unstable_features`**: `boolean`
@@ -2105,7 +2232,7 @@ This server accepts configuration via the `settings` key.
 - **`rust.wait_to_build`**: `number`
 
   Default: `1500`
-
+  
   Time in milliseconds between receiving a change notification and starting build.
 
 </details>
@@ -2128,44 +2255,44 @@ https://github.com/rust-analyzer/rust-analyzer
 rust-analyzer (aka rls 2.0), a language server for Rust
 
 See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#settings) for extra settings.
-
+    
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
 - **`rust-analyzer.cargo-watch.allTargets`**: `boolean`
 
   Default: `true`
-
+  
   Check all targets and tests (will be passed as `--all-targets`)
 
 - **`rust-analyzer.cargo-watch.arguments`**: `array`
 
   Default: `{}`
-
+  
   `cargo-watch` arguments. (e.g: `--features="shumway,pdf"` will run as `cargo watch -x "check --features="shumway,pdf""` )
 
 - **`rust-analyzer.cargo-watch.command`**: `string`
 
   Default: `"check"`
-
+  
   `cargo-watch` command. (e.g: `clippy` will run as `cargo watch -x clippy` )
 
 - **`rust-analyzer.cargo-watch.enable`**: `boolean`
 
   Default: `true`
-
+  
   Run `cargo check` for diagnostics on save
 
 - **`rust-analyzer.cargoFeatures.allFeatures`**: `boolean`
 
   Default: `true`
-
+  
   Activate all available features
 
 - **`rust-analyzer.cargoFeatures.features`**: `array`
 
   Default: `{}`
-
+  
   List of features to activate
 
 - **`rust-analyzer.cargoFeatures.noDefaultFeatures`**: `boolean`
@@ -2175,25 +2302,19 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.displayInlayHints`**: `boolean`
 
   Default: `true`
-
+  
   Display additional type and parameter information in the editor
-
-- **`rust-analyzer.enableEnhancedTyping`**: `boolean`
-
-  Default: `true`
-
-  Enables enhanced typing. NOTE: If using a VIM extension, you should set this to false
 
 - **`rust-analyzer.excludeGlobs`**: `array`
 
   Default: `{}`
-
+  
   Paths to exclude from analysis
 
 - **`rust-analyzer.featureFlags`**: `object`
 
   Default: `vim.empty_dict()`
-
+  
   Fine grained feature flags to disable annoying features
 
 - **`rust-analyzer.highlightingOn`**: `boolean`
@@ -2203,19 +2324,19 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.lruCapacity`**: `number|null`
 
   Default: `vim.NIL`
-
+  
   Number of syntax trees rust-analyzer keeps in memory
 
 - **`rust-analyzer.maxInlayHintLength`**: `number`
 
   Default: `20`
-
+  
   Maximum length for inlay hints
 
 - **`rust-analyzer.raLspServerPath`**: `string`
 
   Default: `"ra_lsp_server"`
-
+  
   Path to ra_lsp_server executable
 
 - **`rust-analyzer.rainbowHighlightingOn`**: `boolean`
@@ -2225,13 +2346,13 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
-
+  
   Trace requests to the ra_lsp_server
 
 - **`rust-analyzer.useClientWatching`**: `boolean`
 
   Default: `true`
-
+  
   client provided file watching instead of notify watching.
 
 </details>
@@ -2300,7 +2421,7 @@ You can install solargraph via gem install.
 ```sh
 gem install solargraph
 ```
-
+    
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
@@ -2311,31 +2432,31 @@ This server accepts configuration via the `settings` key.
 - **`solargraph.bundlerPath`**: `string`
 
   Default: `"bundle"`
-
+  
   Path to the bundle executable, defaults to 'bundle'
 
 - **`solargraph.checkGemVersion`**: `enum { true, false }`
 
   Default: `true`
-
+  
   Automatically check if a new version of the Solargraph gem is available.
 
 - **`solargraph.commandPath`**: `string`
 
   Default: `"solargraph"`
-
+  
   Path to the solargraph command.  Set this to an absolute path to select from multiple installed Ruby versions.
 
 - **`solargraph.completion`**: `enum { true, false }`
 
   Default: `true`
-
+  
   Enable completion
 
 - **`solargraph.definitions`**: `enum { true, false }`
 
   Default: `true`
-
+  
   Enable definitions (go to, etc.)
 
 - **`solargraph.diagnostics`**: `enum { true, false }`
@@ -2345,13 +2466,13 @@ This server accepts configuration via the `settings` key.
 - **`solargraph.externalServer`**: `object`
 
   Default: `{host = "localhost",port = 7658}`
-
+  
   The host and port to use for external transports. (Ignored for stdio and socket transports.)
 
 - **`solargraph.folding`**: `boolean`
 
   Default: `true`
-
+  
   Enable folding ranges
 
 - **`solargraph.formatting`**: `enum { true, false }`
@@ -2361,37 +2482,37 @@ This server accepts configuration via the `settings` key.
 - **`solargraph.hover`**: `enum { true, false }`
 
   Default: `true`
-
+  
   Enable hover
 
 - **`solargraph.logLevel`**: `enum { "warn", "info", "debug" }`
 
   Default: `"warn"`
-
+  
   Level of debug info to log. `warn` is least and `debug` is most.
 
 - **`solargraph.references`**: `enum { true, false }`
 
   Default: `true`
-
+  
   Enable finding references
 
 - **`solargraph.rename`**: `enum { true, false }`
 
   Default: `true`
-
+  
   Enable symbol renaming
 
 - **`solargraph.symbols`**: `enum { true, false }`
 
   Default: `true`
-
+  
   Enable symbols
 
 - **`solargraph.transport`**: `enum { "socket", "stdio", "external" }`
 
   Default: `"socket"`
-
+  
   The type of transport to use.
 
 - **`solargraph.useBundler`**: `boolean`
@@ -2426,7 +2547,7 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.awakened.cat`**: `boolean`
 
-
+  
 
 - **`Lua.completion.callSnippet`**: `enum { "Disable", "Both", "Replace" }`
 
@@ -2446,11 +2567,11 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.develop.debuggerWait`**: `boolean`
 
-
+  
 
 - **`Lua.develop.enable`**: `boolean`
 
-
+  
 
 - **`Lua.diagnostics.disable`**: `array`
 
@@ -2466,12 +2587,12 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.diagnostics.severity`**: `object`
 
-
+  
 
 - **`Lua.runtime.path`**: `array`
 
   Default: `{ "?.lua", "?/init.lua", "?/?.lua" }`
-
+  
   Array items: `{type = "string"}`
 
 - **`Lua.runtime.version`**: `enum { "Lua 5.1", "Lua 5.2", "Lua 5.3", "Lua 5.4", "LuaJIT" }`
@@ -2481,7 +2602,7 @@ This server accepts configuration via the `settings` key.
 - **`Lua.workspace.ignoreDir`**: `array`
 
   Default: `{ ".vscode" }`
-
+  
   Array items: `{type = "string"}`
 
 - **`Lua.workspace.ignoreSubmodules`**: `boolean`
@@ -2490,7 +2611,7 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.workspace.library`**: `object`
 
-
+  
 
 - **`Lua.workspace.maxPreload`**: `integer`
 
@@ -2529,61 +2650,61 @@ This server accepts configuration via the `settings` key.
 - **`terraform.codelens.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable/disable the CodeLens feature
 
 - **`terraform.format`**: `object`
 
   Default: `{ignoreExtensionsOnSave = { ".tfsmurf" }}`
-
+  
   Formatting settings
 
 - **`terraform.indexing`**: `object`
 
   Default: `{delay = 500,enabled = true,exclude = { ".terraform/**/*", "**/.terraform/**/*" },liveIndexing = false}`
-
+  
   Indexes all terraform sources to get live syntax errors, rename support, go to symbol, and much more...
 
 - **`terraform.languageServer`**: `object`
 
   Default: `{args = {},enabled = false}`
-
+  
   Configures how the language server runs and works
 
 - **`terraform.lintConfig`**: `string|null`
 
   Default: `vim.NIL`
-
+  
   Path to the `tflint` config file.
 
 - **`terraform.lintPath`**: `string`
 
   Default: `"tflint"`
-
+  
   Path to the `tflint` executable.
 
 - **`terraform.path`**: `string`
 
   Default: `"terraform"`
-
+  
   Path to the `terraform` executable
 
 - **`terraform.paths`**: `array`
 
   Default: `{}`
-
+  
   List of terraform paths or paths with versions
 
 - **`terraform.telemetry.enabled`**: `boolean`
 
   Default: `true`
-
+  
   Enable/disable telemetry reporting for this plugin. The global `telemetry.enableTelemetry` is also respected. If the global is disabled, this setting has no effect.
 
 - **`terraform.templateDirectory`**: `string`
 
   Default: `"templates"`
-
+  
   A relative path to where your templates are stored relative to the workspace root.
 
 </details>
@@ -2613,7 +2734,7 @@ require'nvim_lsp'.texlab.setup{}
 
   Commands:
   - TexlabBuild: Build the current buffer
-
+  
   Default Values:
     cmd = { "texlab" }
     filetypes = { "tex", "bib" }
@@ -2718,37 +2839,37 @@ This server accepts configuration via the `settings` key.
 - **`yaml.completion`**: `boolean`
 
   Default: `true`
-
+  
   Enable/disable completion feature
 
 - **`yaml.customTags`**: `array`
 
   Default: `{}`
-
+  
   Custom tags for the parser to use
 
 - **`yaml.format.bracketSpacing`**: `boolean`
 
   Default: `true`
-
+  
   Print spaces between brackets in objects
 
 - **`yaml.format.enable`**: `boolean`
 
   Default: `true`
-
+  
   Enable/disable default YAML formatter
 
 - **`yaml.format.printWidth`**: `integer`
 
   Default: `80`
-
+  
   Specify the line length that the printer will wrap on
 
 - **`yaml.format.proseWrap`**: `enum { "preserve", "never", "always" }`
 
   Default: `"preserve"`
-
+  
   Always: wrap prose if it exeeds the print width, Never: never wrap the prose, Preserve: wrap prose as-is
 
 - **`yaml.format.singleQuote`**: `boolean`
@@ -2758,31 +2879,31 @@ This server accepts configuration via the `settings` key.
 - **`yaml.hover`**: `boolean`
 
   Default: `true`
-
+  
   Enable/disable hover feature
 
 - **`yaml.schemaStore.enable`**: `boolean`
 
   Default: `true`
-
+  
   Automatically pull available YAML schemas from JSON Schema Store
 
 - **`yaml.schemas`**: `object`
 
   Default: `vim.empty_dict()`
-
+  
   Associate schemas to YAML files in the current workspace
 
 - **`yaml.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
-
+  
   Traces the communication between VSCode and the YAML language service.
 
 - **`yaml.validate`**: `boolean`
 
   Default: `true`
-
+  
   Enable/disable validation feature
 
 </details>
