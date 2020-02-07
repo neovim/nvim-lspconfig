@@ -8,7 +8,7 @@ local dart_sdk_path = os.getenv("DART_SDK")
 
 configs[server_name] = {
   default_config = {
-    cmd = {"dart", dart_sdk_path .. "/bin/snapshots/analysis_server.dart.snapshot", "--lsp"};
+    cmd = {bin_name, dart_sdk_path .. "/bin/snapshots/analysis_server.dart.snapshot", "--lsp"};
     filetypes = {"dart"};
     root_dir = nvim_lsp.util.root_pattern("pubspec.yaml");
     log_level = lsp.protocol.MessageType.Warning;
