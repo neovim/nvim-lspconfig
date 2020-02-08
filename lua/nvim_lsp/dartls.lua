@@ -25,7 +25,7 @@ configs[server_name] = {
     description = [[
 https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec
 
-Language server for dart.
+Language server for Dart.
 ]];
     default_config = {
       root_dir = "pubspec.yaml folder";
@@ -39,4 +39,3 @@ configs[server_name].install_info = function()
     is_installed = dart_sdk_path ~= nil
   }
 end
-
