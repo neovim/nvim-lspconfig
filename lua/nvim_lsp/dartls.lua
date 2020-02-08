@@ -34,7 +34,7 @@ Language server for dart.
 };
 
 
-configs[server_name].install_info = function() 
+configs[server_name].install_info = function()
   return {
     is_installed = dart_sdk_path ~= nil
   }
