@@ -28,7 +28,7 @@ https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec
 Language server for Dart.
 ]];
     default_config = {
-      root_dir = "pubspec.yaml folder";
+      root_dir = [[root_pattern("pubspec.yaml")]];
     };
   };
 };
