@@ -22,7 +22,7 @@ configs[server_name] = {
     settings = {};
   };
   docs = {
-  	package_json = "https://raw.githubusercontent.com/Dart-Code/Dart-Code/master/package.json";
+    package_json = "https://raw.githubusercontent.com/Dart-Code/Dart-Code/master/package.json";
     description = [[
 https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec
 
@@ -34,9 +34,4 @@ Language server for Dart.
   };
 };
 
-
-configs[server_name].install_info = function()
-  return {
-    is_installed = dart_sdk_path ~= nil
-  }
-end
+-- vim:et ts=2 sw=2
