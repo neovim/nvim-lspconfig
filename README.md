@@ -227,6 +227,7 @@ that config.
 - [texlab](#texlab)
 - [tsserver](#tsserver)
 - [vimls](#vimls)
+- [vuels](#vuels)
 - [yamlls](#yamlls)
 
 ## bashls
@@ -1122,7 +1123,7 @@ This server accepts configuration via the `settings` key.
   
   When adding an import, use the formatter on the result
 
-- **`languageServerHaskell.formattingProvider`**: `enum { "brittany", "floskell", "none" }`
+- **`languageServerHaskell.formattingProvider`**: `enum { "brittany", "floskell", "ormolu", "none" }`
 
   Default: `"brittany"`
   
@@ -2333,11 +2334,11 @@ This server accepts configuration via the `settings` key.
   
   Maximum length for inlay hints
 
-- **`rust-analyzer.raLspServerPath`**: `string`
+- **`rust-analyzer.raLspServerPath`**: `null|string`
 
-  Default: `"ra_lsp_server"`
+  Default: `vim.NIL`
   
-  Path to ra_lsp_server executable
+  Path to ra_lsp_server executable (points to bundled binary by default)
 
 - **`rust-analyzer.rainbowHighlightingOn`**: `boolean`
 
@@ -2821,6 +2822,248 @@ require'nvim_lsp'.vimls.setup{}
     on_new_config = <function 1>
     root_dir = <function 1>
     settings = {}
+```
+
+## vuels
+
+https://github.com/vuejs/vetur/tree/master/server
+
+Vue language server
+`vue-language-server` can be installed via `:LspInstall vuels` or by yourself with `npm`:
+```sh
+npm install -g vue-language-server
+```
+
+Can be installed in Nvim with `:LspInstall vuels`
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`vetur.completion.autoImport`**: `boolean`
+
+  Default: `true`
+  
+  Include completion for module export and auto import them
+
+- **`vetur.completion.scaffoldSnippetSources`**: `object`
+
+  Default: `{user = "🗒️",vetur = "✌",workspace = "💼"}`
+  
+  Where Vetur source Scaffold Snippets from and how to indicate them. Set a source to "" to disable it.
+  
+  - workspace: `<WORKSPACE>/.vscode/vetur/snippets`.
+  - user: `<USER-DATA-DIR>/User/snippets/vetur`.
+  - vetur: Bundled in Vetur.
+  
+  The default is:
+  ```
+  "vetur.completion.scaffoldSnippetSources": {
+    "workspace": "💼",
+    "user": "🗒️",
+    "vetur": "✌"
+  }
+  ```
+  
+  Alternatively, you can do:
+  
+  ```
+  "vetur.completion.scaffoldSnippetSources": {
+    "workspace": "(W)",
+    "user": "(U)",
+    "vetur": "(V)"
+  }
+  ```
+  
+  Read more: https://vuejs.github.io/vetur/snippet.html.
+
+- **`vetur.completion.tagCasing`**: `enum { "initial", "kebab" }`
+
+  Default: `"kebab"`
+  
+  Casing conversion for tag completion
+
+- **`vetur.dev.logLevel`**: `enum { "INFO", "DEBUG" }`
+
+  Default: `"INFO"`
+  
+  Log level for VLS
+
+- **`vetur.dev.vlsPath`**: `string`
+
+  Path to VLS for Vetur developers. There are two ways of using it. 
+  
+  1. Clone vuejs/vetur from GitHub, build it and point it to the ABSOLUTE path of `/server`.
+  2. `yarn global add vue-language-server` and point Vetur to the installed location (`yarn global dir` + node_modules/vue-language-server)
+
+- **`vetur.dev.vlsPort`**: `number`
+
+  Default: `-1`
+  
+  The port that VLS listens to. Can be used for attaching to the VLS Node process for debugging / profiling.
+
+- **`vetur.experimental.templateInterpolationService`**: `boolean`
+
+  Enable template interpolation service that offers diagnostics / hover / definition / references.
+
+- **`vetur.format.defaultFormatter.css`**: `enum { "none", "prettier" }`
+
+  Default: `"prettier"`
+  
+  Default formatter for <style> region
+
+- **`vetur.format.defaultFormatter.html`**: `enum { "none", "prettyhtml", "js-beautify-html", "prettier" }`
+
+  Default: `"prettyhtml"`
+  
+  Default formatter for <template> region
+
+- **`vetur.format.defaultFormatter.js`**: `enum { "none", "prettier", "prettier-eslint", "vscode-typescript" }`
+
+  Default: `"prettier"`
+  
+  Default formatter for <script> region
+
+- **`vetur.format.defaultFormatter.less`**: `enum { "none", "prettier" }`
+
+  Default: `"prettier"`
+  
+  Default formatter for <style lang='less'> region
+
+- **`vetur.format.defaultFormatter.postcss`**: `enum { "none", "prettier" }`
+
+  Default: `"prettier"`
+  
+  Default formatter for <style lang='postcss'> region
+
+- **`vetur.format.defaultFormatter.scss`**: `enum { "none", "prettier" }`
+
+  Default: `"prettier"`
+  
+  Default formatter for <style lang='scss'> region
+
+- **`vetur.format.defaultFormatter.stylus`**: `enum { "none", "stylus-supremacy" }`
+
+  Default: `"stylus-supremacy"`
+  
+  Default formatter for <style lang='stylus'> region
+
+- **`vetur.format.defaultFormatter.ts`**: `enum { "none", "prettier", "prettier-tslint", "vscode-typescript" }`
+
+  Default: `"prettier"`
+  
+  Default formatter for <script> region
+
+- **`vetur.format.defaultFormatterOptions`**: `object`
+
+  Default: `{["js-beautify-html"] = {wrap_attributes = "force-expand-multiline"},prettyhtml = {printWidth = 100,singleQuote = false,sortAttributes = false,wrapAttributes = false}}`
+  
+  Options for all default formatters
+
+- **`vetur.format.enable`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable the Vetur document formatter.
+
+- **`vetur.format.options.tabSize`**: `number`
+
+  Default: `2`
+  
+  Number of spaces per indentation level. Inherited by all formatters.
+
+- **`vetur.format.options.useTabs`**: `boolean`
+
+  Use tabs for indentation. Inherited by all formatters.
+
+- **`vetur.format.scriptInitialIndent`**: `boolean`
+
+  Whether to have initial indent for <script> region
+
+- **`vetur.format.styleInitialIndent`**: `boolean`
+
+  Whether to have initial indent for <style> region
+
+- **`vetur.grammar.customBlocks`**: `object`
+
+  Default: `{docs = "md",i18n = "json"}`
+  
+  Mapping from custom block tag name to language name. Used for generating grammar to support syntax highlighting for custom blocks.
+
+- **`vetur.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and Vue Language Server.
+
+- **`vetur.useWorkspaceDependencies`**: `boolean`
+
+  Use dependencies from workspace. Currently only for TypeScript.
+
+- **`vetur.validation.script`**: `boolean`
+
+  Default: `true`
+  
+  Validate js/ts in <script>
+
+- **`vetur.validation.style`**: `boolean`
+
+  Default: `true`
+  
+  Validate css/scss/less/postcss in <style>
+
+- **`vetur.validation.template`**: `boolean`
+
+  Default: `true`
+  
+  Validate vue-html in <template> using eslint-plugin-vue
+
+</details>
+
+```lua
+require'nvim_lsp'.vuels.setup{}
+
+  Default Values:
+    cmd = { "vls" }
+    filetypes = { "vue" }
+    init_options = {
+      config = {
+        css = {},
+        emmet = {},
+        html = {
+          suggest = {}
+        },
+        javascript = {
+          format = {}
+        },
+        stylusSupremacy = {},
+        typescript = {
+          format = {}
+        },
+        vetur = {
+          completion = {
+            autoImport = false,
+            tagCasing = "kebab",
+            useScaffoldSnippets = false
+          },
+          format = {
+            defaultFormatter = {
+              js = "none",
+              ts = "none"
+            },
+            defaultFormatterOptions = {},
+            scriptInitialIndent = false,
+            styleInitialIndent = false
+          },
+          useWorkspaceDependencies = false,
+          validation = {
+            script = true,
+            style = true,
+            template = true
+          }
+        }
+      }
+    }
+    log_level = 2
+    root_dir = root_pattern("package.json", "vue.config.js")
 ```
 
 ## yamlls
