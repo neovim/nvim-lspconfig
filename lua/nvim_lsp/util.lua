@@ -45,7 +45,7 @@ function M.tbl_deep_extend(dst, ...)
     validate { arg = { t, 't' } }
     for k, v in pairs(t) do
       if type(v) == 'table' and not vim.tbl_islist(v) then
-        dst[k] = M.tbl_deep_extend(dst[k] or {}, v)
+        dst[k] = M.tbl_deep_extend(dst[k] or vim.empty_dict(), v)
       else
         dst[k] = v
       end

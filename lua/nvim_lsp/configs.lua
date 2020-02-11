@@ -26,7 +26,7 @@ function configs.__newindex(t, config_name, config_def)
 
   local default_config = tbl_extend("keep", config_def.default_config, {
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
+    settings = vim.empty_dict();
     init_options = vim.empty_dict();
     callbacks = {};
   })
@@ -95,7 +95,7 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     local make_config = function(_root_dir)
-      local new_config = vim.tbl_extend("keep", {}, config)
+      local new_config = vim.tbl_extend("keep", vim.empty_dict(), config)
       -- Deepcopy anything that is >1 level nested.
       new_config.settings = vim.deepcopy(new_config.settings)
       util.tbl_deep_extend(new_config.settings, default_config.settings)
@@ -153,8 +153,8 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     local manager = util.server_per_root_dir_manager(function(_root_dir)
-        return make_config(_root_dir)
-      end)
+      return make_config(_root_dir)
+    end)
 
     function manager.try_add()
       local root_dir = get_root_dir(api.nvim_buf_get_name(0), api.nvim_get_current_buf())

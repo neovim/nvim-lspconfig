@@ -8,7 +8,6 @@ configs.rust_analyzer = {
     filetypes = {"rust"};
     root_dir = util.root_pattern("Cargo.toml");
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
   };
   docs = {
     package_json = "https://github.com/rust-analyzer/rust-analyzer/raw/master/editors/code/package.json";
