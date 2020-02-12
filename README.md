@@ -212,6 +212,7 @@ that config.
 - [gopls](#gopls)
 - [hie](#hie)
 - [intelephense](#intelephense)
+- [js_langserver](#js_langserver)
 - [jsonls](#jsonls)
 - [julials](#julials)
 - [leanls](#leanls)
@@ -1225,6 +1226,30 @@ require'nvim_lsp'.intelephense.setup{}
     log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("composer.json", ".git")
+```
+
+## js_langserver
+
+https://github.com/tbodt/js-langserver
+
+`js-langserver` can be installed via `:LspInstall js-langserver` or by yourself with `npm`:
+```sh
+npm install -g js-langserver
+```
+
+Can be installed in Nvim with `:LspInstall js_langserver`
+
+```lua
+require'nvim_lsp'.js_langserver.setup{}
+
+  Default Values:
+    capabilities = default capabilities, with offsetEncoding utf-8
+    cmd = { "js-langserver", "--stdio" }
+    filetypes = { "javascript", "javascriptreact", "javascript.jsx" }
+    log_level = 2
+    on_init = function to handle changing offsetEncoding
+    root_dir = root_pattern("package.json")
+    settings = {}
 ```
 
 ## jsonls
