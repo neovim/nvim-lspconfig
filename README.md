@@ -2934,6 +2934,12 @@ This server accepts configuration via the `settings` key.
   
   Default formatter for <style lang='postcss'> region
 
+- **`vetur.format.defaultFormatter.sass`**: `enum { "none", "sass-formatter" }`
+
+  Default: `"sass-formatter"`
+  
+  Default formatter for <style lang='sass'> region
+
 - **`vetur.format.defaultFormatter.scss`**: `enum { "none", "prettier" }`
 
   Default: `"prettier"`
