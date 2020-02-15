@@ -5,7 +5,7 @@ local lsp = vim.lsp
 local server_name = "dartls"
 local bin_name = "dart"
 
-local dart_sdk_root_path = function()
+local find_dart_sdk_root_path = function()
   if vim.fn["executable"]("dart") == 1 then
     return vim.fn["resolve"](vim.fn["exepath"]("dart"))
   elseif vim.fn["executable"]("flutter") == 1 then
@@ -20,7 +20,7 @@ local dart_sdk_root_path = function()
 end
 
 local analysis_server_snapshot_path = function()
-  local dart_sdk_root_path = vim.fn["fnamemodify"](dart_sdk_root_path(), ":h")
+  local dart_sdk_root_path = vim.fn["fnamemodify"](find_dart_sdk_root_path(), ":h")
   local snapshot = dart_sdk_root_path.."/snapshots/analysis_server.dart.snapshot"
 
   if vim.fn["has"]("win32") == 1 or vim.fn["has"]("win64") == 1 then
