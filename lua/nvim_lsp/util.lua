@@ -208,7 +208,7 @@ end)()
 
 -- Returns a function(root_dir), which, when called with a root_dir it hasn't
 -- seen before, will call make_config(root_dir) and start a new client.
-function M.server_per_root_dir_manager(make_config)
+function M.server_per_root_dir_manager(_make_config)
   local clients = {}
   local manager = {}
 
@@ -218,8 +218,7 @@ function M.server_per_root_dir_manager(make_config)
     -- Check if we have a client alredy or start and store it.
     local client_id = clients[root_dir]
     if not client_id then
-      local new_config = make_config(root_dir)
-      new_config.root_dir = root_dir
+      local new_config = _make_config(root_dir)
       new_config.on_exit = M.add_hook_before(new_config.on_exit, function()
         clients[root_dir] = nil
       end)

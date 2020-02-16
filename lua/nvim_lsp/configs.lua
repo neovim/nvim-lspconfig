@@ -93,7 +93,8 @@ function configs.__newindex(t, config_name, config_def)
       end
       M.manager = nil
     end
-    local manager = util.server_per_root_dir_manager(function(_root_dir)
+
+    local make_config = function(_root_dir)
       local new_config = vim.tbl_extend("keep", {}, config)
       -- Deepcopy anything that is >1 level nested.
       new_config.settings = vim.deepcopy(new_config.settings)
@@ -146,8 +147,14 @@ function configs.__newindex(t, config_name, config_def)
               ))
         end
       end)
+
+      new_config.root_dir = _root_dir
       return new_config
-    end)
+    end
+
+    local manager = util.server_per_root_dir_manager(function(_root_dir)
+        return make_config(_root_dir)
+      end)
 
     function manager.try_add()
       local root_dir = get_root_dir(api.nvim_buf_get_name(0), api.nvim_get_current_buf())
@@ -159,6 +166,7 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     M.manager = manager
+    M.make_config = make_config
   end
 
   function M._setup_buffer(client_id)
