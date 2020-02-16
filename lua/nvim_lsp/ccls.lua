@@ -8,7 +8,6 @@ configs.ccls = {
     filetypes = {"c", "cpp", "objc", "objcpp"};
     root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git");
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
   };
   -- commands = {};
   -- on_new_config = function(new_config) end;

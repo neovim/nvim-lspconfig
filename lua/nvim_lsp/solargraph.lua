@@ -8,7 +8,6 @@ configs.solargraph = {
     filetypes = {"ruby"};
     root_dir = util.root_pattern("Gemfile", ".git");
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
   };
   docs = {
     vscode = "castwide.solargraph";

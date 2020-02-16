@@ -8,7 +8,6 @@ configs.rls = {
     filetypes = {"rust"};
     root_dir = util.root_pattern("Cargo.toml");
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
   };
   docs = {
     vscode = "rust-lang.rust";

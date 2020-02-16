@@ -8,7 +8,6 @@ configs.hie = {
     filetypes = {"haskell"};
     root_dir = util.root_pattern("stack.yaml", "package.yaml", ".git");
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
   };
 
   docs = {

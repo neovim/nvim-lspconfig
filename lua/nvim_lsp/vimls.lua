@@ -19,7 +19,6 @@ configs[server_name] = {
       return util.find_git_ancestor(fname) or vim.loop.os_homedir()
     end,
     log_level = lsp.protocol.MessageType.Warning,
-    settings = {},
     init_options = {
       iskeyword = "@,48-57,_,192-255,-#",
       vimruntime = "",

@@ -8,7 +8,6 @@ configs.flow = {
     filetypes = {"javascript", "javascriptreact", "javascript.jsx"};
     root_dir = util.root_pattern(".flowconfig");
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
   };
   docs = {
     package_json = "https://raw.githubusercontent.com/flowtype/flow-for-vscode/master/package.json";

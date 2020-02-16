@@ -7,7 +7,6 @@ configs.pyls = {
     filetypes = {"python"};
     root_dir = vim.loop.os_homedir;
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
   };
   -- on_new_config = function(new_config) end;
   -- on_attach = function(client, bufnr) end;

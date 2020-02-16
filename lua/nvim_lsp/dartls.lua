@@ -47,7 +47,6 @@ configs[server_name] = {
       outline = "true",
       fluttreOutline= "false"
     };
-    settings = {};
   };
   docs = {
     vscode = "Dart-Code.dart-code";

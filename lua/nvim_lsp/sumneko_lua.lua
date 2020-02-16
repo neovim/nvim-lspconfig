@@ -99,7 +99,6 @@ configs[name] = {
       return util.find_git_ancestor(fname) or vim.loop.os_homedir()
     end;
     log_level = vim.lsp.protocol.MessageType.Warning;
-    settings = {};
   };
   on_new_config = function(config)
     installer.configure(config)

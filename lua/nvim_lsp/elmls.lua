@@ -28,7 +28,6 @@ configs[server_name] = {
       end
     end;
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
     init_options = {
       elmPath = "elm",
       elmFormatPath = "elm-format",
