@@ -17,7 +17,6 @@ configs[server_name] = {
     filetypes = {"sh"};
     root_dir = vim.loop.os_homedir;
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
   };
   on_new_config = function(new_config)
     local install_info = installer.info()

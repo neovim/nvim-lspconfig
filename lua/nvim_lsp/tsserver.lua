@@ -17,7 +17,6 @@ configs[server_name] = {
     filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"};
     root_dir = util.root_pattern("package.json");
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
   };
   on_new_config = function(new_config)
     local install_info = installer.info()

@@ -8,7 +8,6 @@ configs.ghcide = {
     filetypes = { "haskell", "lhaskell" };
     root_dir = util.root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml");
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
   };
 
   docs = {

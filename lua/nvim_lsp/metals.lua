@@ -54,7 +54,6 @@ configs[server_name] = {
     filetype = {"scala"};
     root_dir = util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml");
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
   };
   on_new_config = function(config)
     installer.configure(config)

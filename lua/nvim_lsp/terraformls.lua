@@ -8,7 +8,6 @@ configs.terraformls = {
     filetypes = {"terraform"};
     root_dir = util.root_pattern(".git");
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
   };
   docs = {
     vscode = "mauve.terraform";

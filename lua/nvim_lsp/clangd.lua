@@ -11,7 +11,6 @@ configs.clangd = {
       return root_pattern(fname) or util.path.dirname(fname)
     end;
     log_level = lsp.protocol.MessageType.Warning;
-    settings = {};
   };
   -- commands = {};
   -- on_new_config = function(new_config) end;
