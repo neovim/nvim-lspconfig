@@ -4,7 +4,7 @@ local lsp = vim.lsp
 
 configs.rust_analyzer = {
   default_config = util.utf8_config {
-    cmd = {"ra_lsp_server"};
+    cmd = {"rust-analyzer"};
     filetypes = {"rust"};
     root_dir = util.root_pattern("Cargo.toml");
     log_level = lsp.protocol.MessageType.Warning;
