@@ -24,7 +24,14 @@ configs[server_name] = {
         };
     };
     docs = {
-        description = [[test]]
+        description = [[
+Reference:
+https://help.semmle.com/codeql/codeql-cli.html
+
+Binaries:
+https://github.com/github/codeql-cli-binaries
+        ]];
+        package_json = "https://github.com/github/vscode-codeql/blob/master/extensions/ql-vscode/package.json";
     };
     on_new_config = function(config)
         if config.settings.search_path ~= nil and config.settings.search_path ~= '' then
