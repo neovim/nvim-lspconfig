@@ -1,6 +1,5 @@
 local configs = require "nvim_lsp/configs"
 local util = require "nvim_lsp/util"
-local lsp = vim.lsp
 
 local server_name = "codeqlls"
 
@@ -15,8 +14,8 @@ configs[server_name] = {
         log_level = vim.lsp.protocol.MessageType.Warning;
         before_init = function(initialize_params, config)
             initialize_params['workspaceFolders'] = {{
-                name = 'workspace',
-                uri = initialize_params['rootUri']
+                    name = 'workspace',
+                    uri = initialize_params['rootUri']
             }}
         end;
         settings = {
@@ -35,7 +34,7 @@ https://github.com/github/codeql-cli-binaries
     };
     on_new_config = function(config)
         if config.settings.search_path ~= nil and config.settings.search_path ~= '' then
-            search_path="--search-path="
+            local search_path = "--search-path="
             for _, path in ipairs(config.settings.search_path) do
                 search_path = search_path..vim.fn.expand(path)..":"
             end
