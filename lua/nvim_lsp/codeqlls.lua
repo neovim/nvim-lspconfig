@@ -21,7 +21,7 @@ configs[server_name] = {
             }}
         end;
         settings = {
-            search_path = vim.empty_dict() 
+            search_path = vim.empty_dict()
         };
     };
     docs = {
