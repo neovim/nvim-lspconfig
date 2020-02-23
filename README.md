@@ -2907,6 +2907,10 @@ This server accepts configuration via the `settings` key.
   
   Path to rust-analyzer executable (points to bundled binary by default)
 
+- **`rust-analyzer.trace.extension`**: `boolean`
+
+  Enable logging of VS Code extensions itself
+
 - **`rust-analyzer.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
