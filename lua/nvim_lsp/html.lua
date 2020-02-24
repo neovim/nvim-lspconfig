@@ -43,7 +43,7 @@ configs[server_name] = {
     description = [[
 https://github.com/vscode-langservers/vscode-html-languageserver-bin
 
-`html-languageserver` can be installed via `:LspInstall htmlls` or by yourself with `npm`:
+`html-languageserver` can be installed via `:LspInstall html` or by yourself with `npm`:
 ```sh
 npm install -g vscode-html-languageserver-bin
 ```
