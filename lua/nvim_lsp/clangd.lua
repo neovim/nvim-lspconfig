@@ -1,6 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 local root_pattern = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")
 configs.clangd = {
@@ -10,7 +9,6 @@ configs.clangd = {
     root_dir = function(fname)
       return root_pattern(fname) or util.path.dirname(fname)
     end;
-    log_level = lsp.protocol.MessageType.Warning;
   };
   -- commands = {};
   -- on_new_config = function(new_config) end;

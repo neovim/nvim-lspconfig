@@ -1,13 +1,11 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 configs.gopls = {
   default_config = {
     cmd = {"gopls"};
     filetypes = {"go"};
     root_dir = util.root_pattern("go.mod", ".git");
-    log_level = lsp.protocol.MessageType.Warning;
   };
   -- on_new_config = function(new_config) end;
   -- on_attach = function(client, bufnr) end;

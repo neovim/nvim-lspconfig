@@ -1,6 +1,5 @@
 local configs = require "nvim_lsp/configs"
 local util = require "nvim_lsp/util"
-local lsp = vim.lsp
 
 local server_name = "vimls"
 local bin_name = "vim-language-server"
@@ -18,7 +17,6 @@ configs[server_name] = {
     root_dir = function(fname)
       return util.find_git_ancestor(fname) or vim.loop.os_homedir()
     end,
-    log_level = lsp.protocol.MessageType.Warning,
     init_options = {
       iskeyword = "@,48-57,_,192-255,-#",
       vimruntime = "",

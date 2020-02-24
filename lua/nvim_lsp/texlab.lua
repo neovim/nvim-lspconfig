@@ -36,7 +36,6 @@ configs.texlab = {
     cmd = {"texlab"};
     filetypes = {"tex", "bib"};
     root_dir = vim.loop.os_homedir;
-    log_level = lsp.protocol.MessageType.Warning;
     settings = {
       latex = {
         build = {

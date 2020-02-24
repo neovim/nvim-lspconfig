@@ -1,6 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 local server_name = "bashls"
 local bin_name = "bash-language-server"
@@ -16,7 +15,6 @@ configs[server_name] = {
     cmd = {"bash-language-server", "start"};
     filetypes = {"sh"};
     root_dir = vim.loop.os_homedir;
-    log_level = lsp.protocol.MessageType.Warning;
   };
   on_new_config = function(new_config)
     local install_info = installer.info()

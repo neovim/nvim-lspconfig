@@ -4,7 +4,6 @@ local tbl_extend = vim.tbl_extend
 
 local configs = {}
 
-
 function configs.__newindex(t, config_name, config_def)
   validate {
     name = {config_name, 's'};
@@ -26,6 +25,7 @@ function configs.__newindex(t, config_name, config_def)
 
   local default_config = tbl_extend("keep", config_def.default_config, {
     log_level = lsp.protocol.MessageType.Warning;
+    message_level = lsp.protocol.MessageType.Warning;
     settings = vim.empty_dict();
     init_options = vim.empty_dict();
     callbacks = {};
@@ -42,7 +42,17 @@ function configs.__newindex(t, config_name, config_def)
       if params and params.type <= config.log_level then
         -- TODO(ashkan) remove this after things have settled.
         assert(lsp.callbacks, "Update to Nvim HEAD. This is an incompatible interface.")
-        lsp.callbacks[method](err, method, params, client_id)
+        assert(lsp.callbacks["window/logMessage"], "Callback for window/logMessage notification is not defined")
+        lsp.callbacks["window/logMessage"](err, method, params, client_id)
+      end
+    end
+
+    config.callbacks["window/showMessage"] = function(err, method, params, client_id)
+      if params and params.type <= config.message_level then
+        -- TODO(ashkan) remove this after things have settled.
+        assert(lsp.callbacks and lsp.callbacks[method], "Update to Nvim HEAD. This is an incompatible interface.")
+        assert(lsp.callbacks["window/showMessage"], "Callback for window/showMessage notification is not defined")
+        lsp.callbacks["window/showMessage"](err, method, params, client_id)
       end
     end
 

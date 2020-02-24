@@ -1,6 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 local server_name = "metals"
 local bin_name = "metals"
 
@@ -53,7 +52,6 @@ configs[server_name] = {
     cmd = {bin_name};
     filetype = {"scala"};
     root_dir = util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml");
-    log_level = lsp.protocol.MessageType.Warning;
   };
   on_new_config = function(config)
     installer.configure(config)

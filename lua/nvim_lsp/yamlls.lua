@@ -1,6 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 local server_name = "yamlls"
 local bin_name = "yaml-language-server"
@@ -16,7 +15,6 @@ configs[server_name] = {
     cmd = {bin_name, "--stdio"};
     filetypes = {"yaml"};
     root_dir = util.root_pattern(".git", vim.fn.getcwd());
-    log_level = lsp.protocol.MessageType.Warning;
   };
   on_new_config = function(new_config)
     local install_info = installer.info()

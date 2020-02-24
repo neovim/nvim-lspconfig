@@ -1,6 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 local server_name = "intelephense"
 local bin_name = "intelephense"
@@ -22,7 +21,6 @@ configs[server_name] = {
       -- prefer cwd if root is a descendant
       return util.path.is_descendant(cwd, root) and cwd or root;
     end;
-    log_level = lsp.protocol.MessageType.Warning;
   };
   on_new_config = function(new_config)
     local install_info = installer.info()
