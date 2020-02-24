@@ -1,13 +1,11 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 configs.gdscript = {
   default_config = {
     cmd = {"nc", "localhost", "6008"};
     filetypes = {"gd", "gdscript3"};
     root_dir = util.root_pattern("project.godot", ".git");
-    log_level = lsp.protocol.MessageType.Warning;
   };
   docs = {
     description = [[
