@@ -1,6 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 local server_name = "html"
 local bin_name = "html-languageserver"
