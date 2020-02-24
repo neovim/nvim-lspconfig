@@ -76,6 +76,7 @@ local nvim_lsp = require'nvim_lsp'
 nvim_lsp.texlab.setup{
   name = 'texlab_fancy';
   log_level = vim.lsp.protocol.MessageType.Log;
+  message_level = vim.lsp.protocol.MessageType.Log;
   settings = {
     latex = {
       build = {
@@ -106,7 +107,6 @@ if not nvim_lsp.foo_lsp then
       root_dir = function(fname)
         return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
       end;
-      log_level = vim.lsp.protocol.MessageType.Warning;
       settings = {};
     };
   }
@@ -168,8 +168,12 @@ nvim_lsp.SERVER.setup{config}
     Server may specify a default value.
 
   {log_level}
-    controls the level of logs to show from build processes and other
-    window/logMessage events. Defaults to
+    controls the level of logs to show from window/logMessage notifications. Defaults to
+    vim.lsp.protocol.MessageType.Warning instead of
+    vim.lsp.protocol.MessageType.Log.
+
+  {message_level}
+    controls the level of messages to show from window/showMessage notifications. Defaults to
     vim.lsp.protocol.MessageType.Warning instead of
     vim.lsp.protocol.MessageType.Log.
 
@@ -246,7 +250,6 @@ require'nvim_lsp'.bashls.setup{}
   Default Values:
     cmd = { "bash-language-server", "start" }
     filetypes = { "sh" }
-    log_level = 2
     root_dir = vim's starting directory
 ```
 
@@ -663,7 +666,6 @@ require'nvim_lsp'.ccls.setup{}
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "ccls" }
     filetypes = { "c", "cpp", "objc", "objcpp" }
-    log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
 ```
@@ -685,7 +687,6 @@ require'nvim_lsp'.clangd.setup{}
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "clangd", "--background-index" }
     filetypes = { "c", "cpp", "objc", "objcpp" }
-    log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
 ```
@@ -708,7 +709,6 @@ require'nvim_lsp'.cssls.setup{}
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "css-languageserver", "--stdio" }
     filetypes = { "css", "scss", "less" }
-    log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("package.json")
     settings = {
@@ -1209,7 +1209,6 @@ require'nvim_lsp'.dartls.setup{}
       outline = "true",
       suggestFromUnimportedLibraries = "true"
     }
-    log_level = 2
     root_dir = root_pattern("pubspec.yaml")
 ```
 
@@ -1230,7 +1229,6 @@ require'nvim_lsp'.dockerls.setup{}
   Default Values:
     cmd = { "docker-langserver", "--stdio" }
     filetypes = { "Dockerfile", "dockerfile" }
-    log_level = 2
     root_dir = root_pattern("Dockerfile")
 ```
 
@@ -1292,7 +1290,6 @@ require'nvim_lsp'.elmls.setup{}
       elmPath = "elm",
       elmTestPath = "elm-test"
     }
-    log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("elm.json")
 ```
@@ -1416,7 +1413,6 @@ require'nvim_lsp'.flow.setup{}
   Default Values:
     cmd = { "npm", "run", "flow", "lsp" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx" }
-    log_level = 2
     root_dir = root_pattern(".flowconfig")
 ```
 
@@ -1503,7 +1499,6 @@ require'nvim_lsp'.fortls.setup{}
   Default Values:
     cmd = { "fortls" }
     filetypes = { "fortran" }
-    log_level = 2
     root_dir = root_pattern(".fortls")
     settings = {
       nthreads = 1
@@ -1539,7 +1534,6 @@ require'nvim_lsp'.ghcide.setup{}
   Default Values:
     cmd = { "ghcide", "--lsp" }
     filetypes = { "haskell", "lhaskell" }
-    log_level = 2
     root_dir = root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml")
 ```
 
@@ -1556,7 +1550,6 @@ require'nvim_lsp'.gopls.setup{}
   Default Values:
     cmd = { "gopls" }
     filetypes = { "go" }
-    log_level = 2
     root_dir = root_pattern("go.mod", ".git")
 ```
 
@@ -1682,7 +1675,6 @@ require'nvim_lsp'.hie.setup{}
   Default Values:
     cmd = { "hie-wrapper" }
     filetypes = { "haskell" }
-    log_level = 2
     root_dir = root_pattern("stack.yaml", "package.yaml", ".git")
 ```
 
@@ -1704,7 +1696,6 @@ require'nvim_lsp'.intelephense.setup{}
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "intelephense", "--stdio" }
     filetypes = { "php" }
-    log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("composer.json", ".git")
 ```
@@ -1803,7 +1794,6 @@ require'nvim_lsp'.jsonls.setup{}
     }
     cmd = { "vscode-json-languageserver", "--stdio" }
     filetypes = { "json" }
-    log_level = 2
     on_init = <function 1>
     root_dir = root_pattern(".git", vim.fn.getcwd())
 ```
@@ -1942,7 +1932,6 @@ require'nvim_lsp'.julials.setup{}
   Default Values:
     cmd = { "julia", "--project", "--startup-file=no", "--history-file=no", "-e", "        using LanguageServer;\n        using Pkg;\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, false, dirname(Pkg.Types.Context().env.project_file));\n        server.runlinter = true; run(server);\n        " }
     filetypes = { "julia" }
-    log_level = 2
     root_dir = <function 1>
 ```
 
@@ -2085,7 +2074,6 @@ require'nvim_lsp'.leanls.setup{}
   Default Values:
     cmd = { "lean-language-server", "--stdio" }
     filetypes = { "lean" }
-    log_level = 2
     root_dir = util.root_pattern(".git")
 ```
 
@@ -2144,7 +2132,6 @@ require'nvim_lsp'.metals.setup{}
   Default Values:
     cmd = { "metals" }
     filetype = { "scala" }
-    log_level = 2
     root_dir = util.root_pattern("build.sbt")
 ```
 
@@ -2218,7 +2205,6 @@ require'nvim_lsp'.nimls.setup{}
   Default Values:
     cmd = { "nimlsp" }
     filetypes = { "nim" }
-    log_level = 2
     root_dir = root_pattern(".git") or os_homedir
 ```
 
@@ -2239,7 +2225,6 @@ require'nvim_lsp'.ocamlls.setup{}
   Default Values:
     cmd = { "ocaml-language-server", "--stdio" }
     filetypes = { "ocaml", "reason" }
-    log_level = 2
     root_dir = root_pattern(".merlin", "package.json")
 ```
 
@@ -2520,7 +2505,6 @@ require'nvim_lsp'.pyls.setup{}
   Default Values:
     cmd = { "pyls" }
     filetypes = { "python" }
-    log_level = 2
     root_dir = vim's starting directory
 ```
 
@@ -2557,7 +2541,6 @@ require'nvim_lsp'.pyls_ms.setup{}
         }
       }
     }
-    log_level = 2
     on_new_config = <function 1>
     root_dir = vim's starting directory
     settings = {
@@ -2794,7 +2777,6 @@ require'nvim_lsp'.rls.setup{}
   Default Values:
     cmd = { "rls" }
     filetypes = { "rust" }
-    log_level = 2
     root_dir = root_pattern("Cargo.toml")
 ```
 
@@ -2972,7 +2954,6 @@ require'nvim_lsp'.rust_analyzer.setup{}
     }
     cmd = { "rust-analyzer" }
     filetypes = { "rust" }
-    log_level = 2
     on_init = <function 1>
     root_dir = root_pattern("Cargo.toml")
 ```
@@ -3094,7 +3075,6 @@ require'nvim_lsp'.solargraph.setup{}
   Default Values:
     cmd = { "solargraph", "stdio" }
     filetypes = { "ruby" }
-    log_level = 2
     root_dir = root_pattern("Gemfile", ".git")
 ```
 
@@ -3280,7 +3260,6 @@ require'nvim_lsp'.terraformls.setup{}
   Default Values:
     cmd = { "terraform-lsp" }
     filetypes = { "terraform" }
-    log_level = 2
     root_dir = root_pattern(".git")
 ```
 
@@ -3302,7 +3281,6 @@ require'nvim_lsp'.texlab.setup{}
   Default Values:
     cmd = { "texlab" }
     filetypes = { "tex", "bib" }
-    log_level = 2
     root_dir = vim's starting directory
     settings = {
       bibtex = {
@@ -3345,7 +3323,6 @@ require'nvim_lsp'.tsserver.setup{}
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "typescript-language-server", "--stdio" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
-    log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("package.json")
 ```
@@ -3380,7 +3357,6 @@ require'nvim_lsp'.vimls.setup{}
       },
       vimruntime = ""
     }
-    log_level = 2
     on_new_config = <function 1>
     root_dir = <function 1>
 ```
@@ -3629,7 +3605,6 @@ require'nvim_lsp'.vuels.setup{}
         }
       }
     }
-    log_level = 2
     root_dir = root_pattern("package.json", "vue.config.js")
 ```
 
@@ -3765,7 +3740,6 @@ require'nvim_lsp'.yamlls.setup{}
     }
     cmd = { "yaml-language-server", "--stdio" }
     filetypes = { "yaml" }
-    log_level = 2
     on_init = <function 1>
     root_dir = root_pattern(".git", vim.fn.getcwd())
 ```
