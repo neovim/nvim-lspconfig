@@ -20,7 +20,6 @@ configs[server_name] = {
     root_dir = function(fname)
       return root_pattern(fname) or vim.loop.os_homedir()
     end;
-    log_level = lsp.protocol.MessageType.Warning;
     settings = {};
     init_options = {
       embeddedLanguages = { css= true, javascript= true },
@@ -48,11 +47,6 @@ https://github.com/vscode-langservers/vscode-html-languageserver-bin
 npm install -g vscode-html-languageserver-bin
 ```
 ]];
-    default_config = {
-      root_dir = [[root_pattern("package.json")]];
-      on_init = [[function to handle changing offsetEncoding]];
-      capabilities = [[default capabilities, with offsetEncoding utf-8]];
-    };
   };
 }
 
