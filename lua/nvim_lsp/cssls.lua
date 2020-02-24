@@ -1,6 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 local server_name = "cssls"
 local bin_name = "css-languageserver"
@@ -20,7 +19,6 @@ configs[server_name] = {
     root_dir = function(fname)
       return root_pattern(fname) or vim.loop.os_homedir()
     end;
-    log_level = lsp.protocol.MessageType.Warning;
     settings = {
       css = { validate = true },
       scss = { validate = true },

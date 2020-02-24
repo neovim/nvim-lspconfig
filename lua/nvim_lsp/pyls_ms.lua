@@ -1,6 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 local name = "pyls_ms"
 
@@ -83,7 +82,6 @@ configs[name] = {
     root_dir = function(fname)
       return util.find_git_ancestor(fname) or vim.loop.os_homedir()
     end;
-    log_level = lsp.protocol.MessageType.Warning;
     settings = {
       python = {
         analysis = {
