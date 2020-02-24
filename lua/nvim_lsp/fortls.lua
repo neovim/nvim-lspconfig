@@ -1,13 +1,11 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 configs.fortls = {
   default_config = {
     cmd = {"fortls"};
     filetypes = {"fortran"};
     root_dir = util.root_pattern(".fortls");
-    log_level = lsp.protocol.MessageType.Warning;
     settings = {
       nthreads = 1,
     };

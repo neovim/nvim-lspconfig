@@ -1,6 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 configs.pyls = {
   default_config = {
@@ -9,7 +8,6 @@ configs.pyls = {
     root_dir = function(fname)
       return util.path.dirname(fname)
     end;
-    log_level = lsp.protocol.MessageType.Warning;
   };
   -- on_new_config = function(new_config) end;
   -- on_attach = function(client, bufnr) end;

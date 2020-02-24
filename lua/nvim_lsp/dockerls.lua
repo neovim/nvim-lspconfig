@@ -1,6 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 local server_name = "dockerls"
 local bin_name = "docker-langserver"
@@ -16,7 +15,6 @@ configs[server_name] = {
     cmd = {bin_name, "--stdio"};
     filetypes = {"Dockerfile", "dockerfile"};
     root_dir = util.root_pattern("Dockerfile");
-    log_level = lsp.protocol.MessageType.Warning;
   };
   on_new_config = function(new_config)
     local install_info = installer.info()

@@ -1,6 +1,5 @@
 local nvim_lsp = require 'nvim_lsp'
 local configs = require 'nvim_lsp/configs'
-local lsp = vim.lsp
 
 local server_name = "dartls"
 local bin_name = "dart"
@@ -39,7 +38,6 @@ configs[server_name] = {
     cmd = {bin_name, analysis_server_snapshot_path(), "--lsp"};
     filetypes = {"dart"};
     root_dir = nvim_lsp.util.root_pattern("pubspec.yaml");
-    log_level = lsp.protocol.MessageType.Warning;
     init_options = {
       onlyAnalyzeProjectsWithOpenFiles = "false",
       suggestFromUnimportedLibraries = "true",

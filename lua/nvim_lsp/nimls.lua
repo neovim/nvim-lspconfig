@@ -5,7 +5,6 @@ configs.nimls = {
   default_config = {
     cmd = {"nimlsp",};
     filetypes = {'nim'};
-    log_level = vim.lsp.protocol.MessageType.Warning;
     root_dir = function(fname)
       return util.find_git_ancestor(fname) or vim.loop.os_homedir()
     end;
