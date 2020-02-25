@@ -1673,7 +1673,7 @@ This server accepts configuration via the `settings` key.
 require'nvim_lsp'.hie.setup{}
 
   Default Values:
-    cmd = { "hie-wrapper" }
+    cmd = { "hie-wrapper", "--lsp" }
     filetypes = { "haskell" }
     root_dir = root_pattern("stack.yaml", "package.yaml", ".git")
 ```
