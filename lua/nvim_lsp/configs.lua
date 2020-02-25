@@ -23,13 +23,7 @@ function configs.__newindex(t, config_name, config_def)
 
   local M = {}
 
-  local default_config = tbl_extend("keep", config_def.default_config, {
-    log_level = lsp.protocol.MessageType.Warning;
-    message_level = lsp.protocol.MessageType.Warning;
-    settings = vim.empty_dict();
-    init_options = vim.empty_dict();
-    callbacks = {};
-  })
+  local default_config = tbl_extend("keep", config_def.default_config, util.default_config)
 
   -- Force this part.
   default_config.name = config_name
