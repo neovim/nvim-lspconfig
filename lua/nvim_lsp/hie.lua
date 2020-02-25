@@ -3,7 +3,7 @@ local util = require 'nvim_lsp/util'
 
 configs.hie = {
   default_config = {
-    cmd = {"hie-wrapper"};
+    cmd = {"hie-wrapper", "--lsp"};
     filetypes = {"haskell"};
     root_dir = util.root_pattern("stack.yaml", "package.yaml", ".git");
   };
