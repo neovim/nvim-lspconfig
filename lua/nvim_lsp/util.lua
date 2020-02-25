@@ -7,6 +7,8 @@ local fn = vim.fn
 
 local M = {}
 
+M.Severity = vim.tbl_extend("keep", lsp.protocol.MessageType, { None = 0 })
+
 function M.validate_bufnr(bufnr)
   validate {
     bufnr = { bufnr, 'n' }

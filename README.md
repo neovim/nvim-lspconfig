@@ -75,8 +75,8 @@ additional optional properties.
 local nvim_lsp = require'nvim_lsp'
 nvim_lsp.texlab.setup{
   name = 'texlab_fancy';
-  log_level = vim.lsp.protocol.MessageType.Log;
-  message_level = vim.lsp.protocol.MessageType.Log;
+  log_level = nvim_lsp.util.Severity.Log;
+  message_level = nvim_lsp.util.Severity.Log;
   settings = {
     latex = {
       build = {
@@ -168,14 +168,25 @@ nvim_lsp.SERVER.setup{config}
     Server may specify a default value.
 
   {log_level}
-    controls the level of logs to show from window/logMessage notifications. Defaults to
-    vim.lsp.protocol.MessageType.Warning instead of
-    vim.lsp.protocol.MessageType.Log.
+    controls the level of logs to show from window/logMessage notifications.
+    Defaults to nvim_lsp.util.Severity.Warning.
+    You can set
+      - nvim_lsp.util.Severity.None
+      - nvim_lsp.util.Severity.Error
+      - nvim_lsp.util.Severity.Warning
+      - nvim_lsp.util.Severity.Info
+      - nvim_lsp.util.Severity.Log
 
   {message_level}
-    controls the level of messages to show from window/showMessage notifications. Defaults to
-    vim.lsp.protocol.MessageType.Warning instead of
-    vim.lsp.protocol.MessageType.Log.
+    controls the level of messages to show from window/showMessage notifications.
+    Defaults to vim.lsp.protocol.Severity.Warning.
+    Defaults to nvim_lsp.util.Severity.Warning.
+    You can set
+      - nvim_lsp.util.Severity.None
+      - nvim_lsp.util.Severity.Error
+      - nvim_lsp.util.Severity.Warning
+      - nvim_lsp.util.Severity.Info
+      - nvim_lsp.util.Severity.Log
 
   {settings}
     Map with case-sensitive keys corresponding to `workspace/configuration`
@@ -3178,7 +3189,6 @@ require'nvim_lsp'.sumneko_lua.setup{}
 
   Default Values:
     filetypes = { "lua" }
-    log_level = 2
     root_dir = root_pattern(".git") or os_homedir
 ```
 
