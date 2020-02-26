@@ -1,13 +1,11 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 configs.solargraph = {
   default_config = {
     cmd = {"solargraph", "stdio"};
     filetypes = {"ruby"};
     root_dir = util.root_pattern("Gemfile", ".git");
-    log_level = lsp.protocol.MessageType.Warning;
   };
   docs = {
     vscode = "castwide.solargraph";

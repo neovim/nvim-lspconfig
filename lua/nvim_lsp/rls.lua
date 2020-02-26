@@ -1,13 +1,11 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 configs.rls = {
   default_config = {
     cmd = {"rls"};
     filetypes = {"rust"};
     root_dir = util.root_pattern("Cargo.toml");
-    log_level = lsp.protocol.MessageType.Warning;
   };
   docs = {
     vscode = "rust-lang.rust";

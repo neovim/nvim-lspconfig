@@ -1,12 +1,13 @@
 local configs = require 'nvim_lsp/configs'
-local lsp = vim.lsp
+local util = require 'nvim_lsp/util'
 
 configs.pyls = {
   default_config = {
     cmd = {"pyls"};
     filetypes = {"python"};
-    root_dir = vim.loop.os_homedir;
-    log_level = lsp.protocol.MessageType.Warning;
+    root_dir = function(fname)
+      return util.path.dirname(fname)
+    end;
   };
   -- on_new_config = function(new_config) end;
   -- on_attach = function(client, bufnr) end;

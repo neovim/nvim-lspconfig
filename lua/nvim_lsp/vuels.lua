@@ -1,6 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 local server_name = "vuels"
 local bin_name = "vls"
@@ -16,7 +15,6 @@ configs[server_name] = {
     cmd = {bin_name};
     filetypes = {"vue"};
     root_dir = util.root_pattern("package.json", "vue.config.js");
-    log_level = lsp.protocol.MessageType.Warning;
     init_options = {
       config = {
         vetur = {

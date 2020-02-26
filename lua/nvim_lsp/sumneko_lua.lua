@@ -1,6 +1,5 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local vim = vim
 
 local name = "sumneko_lua"
 local bin_name = "lua-language-server"

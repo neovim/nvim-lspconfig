@@ -76,6 +76,7 @@ local nvim_lsp = require'nvim_lsp'
 nvim_lsp.texlab.setup{
   name = 'texlab_fancy';
   log_level = vim.lsp.protocol.MessageType.Log;
+  message_level = vim.lsp.protocol.MessageType.Log;
   settings = {
     latex = {
       build = {
@@ -106,7 +107,6 @@ if not nvim_lsp.foo_lsp then
       root_dir = function(fname)
         return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
       end;
-      log_level = vim.lsp.protocol.MessageType.Warning;
       settings = {};
     };
   }
@@ -168,8 +168,12 @@ nvim_lsp.SERVER.setup{config}
     Server may specify a default value.
 
   {log_level}
-    controls the level of logs to show from build processes and other
-    window/logMessage events. Defaults to
+    controls the level of logs to show from window/logMessage notifications. Defaults to
+    vim.lsp.protocol.MessageType.Warning instead of
+    vim.lsp.protocol.MessageType.Log.
+
+  {message_level}
+    controls the level of messages to show from window/showMessage notifications. Defaults to
     vim.lsp.protocol.MessageType.Warning instead of
     vim.lsp.protocol.MessageType.Log.
 

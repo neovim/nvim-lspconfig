@@ -76,6 +76,7 @@ local nvim_lsp = require'nvim_lsp'
 nvim_lsp.texlab.setup{
   name = 'texlab_fancy';
   log_level = vim.lsp.protocol.MessageType.Log;
+  message_level = vim.lsp.protocol.MessageType.Log;
   settings = {
     latex = {
       build = {
@@ -106,7 +107,6 @@ if not nvim_lsp.foo_lsp then
       root_dir = function(fname)
         return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
       end;
-      log_level = vim.lsp.protocol.MessageType.Warning;
       settings = {};
     };
   }
@@ -168,8 +168,12 @@ nvim_lsp.SERVER.setup{config}
     Server may specify a default value.
 
   {log_level}
-    controls the level of logs to show from build processes and other
-    window/logMessage events. Defaults to
+    controls the level of logs to show from window/logMessage notifications. Defaults to
+    vim.lsp.protocol.MessageType.Warning instead of
+    vim.lsp.protocol.MessageType.Log.
+
+  {message_level}
+    controls the level of messages to show from window/showMessage notifications. Defaults to
     vim.lsp.protocol.MessageType.Warning instead of
     vim.lsp.protocol.MessageType.Log.
 
@@ -204,6 +208,7 @@ that config.
 - [ccls](#ccls)
 - [clangd](#clangd)
 - [cssls](#cssls)
+- [dartls](#dartls)
 - [dockerls](#dockerls)
 - [elmls](#elmls)
 - [flow](#flow)
@@ -216,6 +221,7 @@ that config.
 - [julials](#julials)
 - [leanls](#leanls)
 - [metals](#metals)
+- [nimls](#nimls)
 - [ocamlls](#ocamlls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
@@ -244,9 +250,7 @@ require'nvim_lsp'.bashls.setup{}
   Default Values:
     cmd = { "bash-language-server", "start" }
     filetypes = { "sh" }
-    log_level = 2
     root_dir = vim's starting directory
-    settings = {}
 ```
 
 ## ccls
@@ -662,10 +666,8 @@ require'nvim_lsp'.ccls.setup{}
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "ccls" }
     filetypes = { "c", "cpp", "objc", "objcpp" }
-    log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
-    settings = {}
 ```
 
 ## clangd
@@ -685,10 +687,8 @@ require'nvim_lsp'.clangd.setup{}
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "clangd", "--background-index" }
     filetypes = { "c", "cpp", "objc", "objcpp" }
-    log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
-    settings = {}
 ```
 
 ## cssls
@@ -709,7 +709,6 @@ require'nvim_lsp'.cssls.setup{}
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "css-languageserver", "--stdio" }
     filetypes = { "css", "scss", "less" }
-    log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("package.json")
     settings = {
@@ -723,6 +722,494 @@ require'nvim_lsp'.cssls.setup{}
         validate = true
       }
     }
+```
+
+## dartls
+
+https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec
+
+Language server for dart.
+
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`dart.additionalAnalyzerFileExtensions`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Additional file extensions that should be analyzed (usually used in combination with analyzer plugins).
+
+- **`dart.allowAnalytics`**: `boolean`
+
+  Default: `true`
+  
+  Whether to send analytics such as startup timings, frequency of use of features and analysis server crashes.
+
+- **`dart.analysisExcludedFolders`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  An array of paths to be excluded from Dart analysis. This option should usually be set at the Workspace level.
+
+- **`dart.analysisServerFolding`**: `boolean`
+
+  Default: `true`
+  
+  Whether to use folding data from the Dart analysis server instead of the built-in VS Code indent-based folding.
+
+- **`dart.analyzeAngularTemplates`**: `boolean`
+
+  Default: `true`
+  
+  Whether to enable analysis for AngularDart templates (requires the angular_analyzer_plugin).
+
+- **`dart.analyzerAdditionalArgs`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Additional arguments to pass to the Dart analysis server.
+
+- **`dart.analyzerDiagnosticsPort`**: `null|number`
+
+  Default: `vim.NIL`
+  
+  The port number to be used for the Dart analysis server diagnostic server.
+
+- **`dart.analyzerInstrumentationLogFile`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The path to a log file for very detailed logging in the Dart analysis server that may be useful when trying to diagnose analysis server issues.
+
+- **`dart.analyzerLogFile`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The path to a log file for communication between Dart Code and the analysis server.
+
+- **`dart.analyzerObservatoryPort`**: `null|number`
+
+  Default: `vim.NIL`
+  
+  The port number to be used for the Dart analysis server observatory.
+
+- **`dart.analyzerPath`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The path to a custom Dart analysis server.
+
+- **`dart.analyzerSshHost`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  An SSH host to run the analysis server.
+  This can be useful when modifying code on a remote machine using SSHFS.
+
+- **`dart.autoImportCompletions`**: `boolean`
+
+  Default: `true`
+  
+  Whether to include symbols that have not been imported in the code completion list and automatically insert the required import when selecting them.
+
+- **`dart.buildRunnerAdditionalArgs`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Additional args to pass to the build_runner when building/watching/serving.
+
+- **`dart.checkForSdkUpdates`**: `boolean`
+
+  Default: `true`
+  
+  Whether to check you are using the latest version of the Dart SDK at startup.
+
+- **`dart.closingLabels`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show annotations against constructor, method invocations and lists that span multiple lines.
+
+- **`dart.debugExternalLibraries`**: `boolean`
+
+  Whether to mark external pub package libraries as debuggable, enabling stepping into them while debugging.
+
+- **`dart.debugSdkLibraries`**: `boolean`
+
+  Whether to mark SDK libraries as debuggable, enabling stepping into them while debugging.
+
+- **`dart.devToolsLogFile`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The path to a low-traffic log file for the Dart DevTools service.
+
+- **`dart.devToolsPort`**: `null|number`
+
+  Default: `vim.NIL`
+  
+  The port number to be used for the Dart DevTools.
+
+- **`dart.devToolsReuseWindows`**: `boolean`
+
+  Default: `true`
+  
+  Whether to try to reuse existing DevTools windows instead of launching new ones. Only works for instances of DevTools launched by the DevTools server on the local machine.
+
+- **`dart.devToolsTheme`**: `enum { "dark", "light" }`
+
+  Default: `"dark"`
+  
+  The theme to use for Dart DevTools.
+
+- **`dart.doNotFormat`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  An array of glob patterns that should be excluded for formatting. The pattern is matched against the absolute path of the file. Use **/test/** to skip formatting for all test folders.
+
+- **`dart.enableCompletionCommitCharacters`**: `boolean`
+
+  Whether to automatically commit the selected completion item when pressing certain keys such as . , ( and [.
+
+- **`dart.enableSdkFormatter`**: `boolean`
+
+  Default: `true`
+  
+  Whether to enable the dart_style formatter included with the Dart SDK.
+
+- **`dart.env`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  Additional environment variables to be added to all Dart/Flutter processes spawned by the Dart and Flutter extensions.
+
+- **`dart.evaluateGettersInDebugViews`**: `boolean`
+
+  Default: `true`
+  
+  Whether to evaluate getters in order to display them in debug views (such as the Variables, Watch and Hovers views).
+
+- **`dart.extensionLogFile`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The path to a low-traffic log file for basic extension and editor issues.
+
+- **`dart.flutterAdbConnectOnChromeOs`**: `boolean`
+
+  Whether to automatically run 'adb connect 100.115.92.2:5555' when spawning the Flutter Daemon when running on Chrome OS.
+
+- **`dart.flutterAdditionalArgs`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Additional args to pass to all flutter commands.
+
+- **`dart.flutterAndroidX`**: `boolean`
+
+  Whether to pass the --androidx flag when running the 'Flutter: New Project' command.
+
+- **`dart.flutterCreateAndroidLanguage`**: `enum { "java", "kotlin" }`
+
+  Default: `"kotlin"`
+  
+  The programming language to use for Android apps when creating new projects using the 'Flutter: New Project' command.
+
+- **`dart.flutterCreateIOSLanguage`**: `enum { "objc", "swift" }`
+
+  Default: `"swift"`
+  
+  The programming language to use for IOS apps when creating new projects using the 'Flutter: New Project' command.
+
+- **`dart.flutterCreateOrganization`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The organization responsible for your new Flutter project, in reverse domain name notation. This string is used in Java package names and as prefix in the iOS bundle identifier when creating new projects using the 'Flutter: New Project' command.
+
+- **`dart.flutterDaemonLogFile`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The path to a log file for the 'flutter daemon' communication which is the service that provides information about connected devices used to show in the status bar.
+
+- **`dart.flutterGutterIcons`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show Flutter icons and colors in the editor gutter.
+
+- **`dart.flutterHotReloadOnSave`**: `boolean`
+
+  Default: `true`
+  
+  Whether to automatically send a Hot Reload request during debug session when saving files.
+
+- **`dart.flutterHotRestartOnSave`**: `boolean`
+
+  Default: `true`
+  
+  Whether to automatically send a Hot Restart request during a debug session when saving files if Hot Reload is not available but Hot Restart is.
+
+- **`dart.flutterOutline`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show the Flutter Outline tree in the side bar.
+
+- **`dart.flutterRunLogFile`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The path to a log file for 'flutter run' which is used to launch Flutter applications from VS Code. This is useful when trying to diagnose issues with applications launching (or failing to) on simulators and devices. Use ${name} in the log file name to prevent concurrent debug sessions overwriting each others logs.
+
+- **`dart.flutterScreenshotPath`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The path to a directory to save Flutter screenshots.
+
+- **`dart.flutterSdkPath`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The location of the Flutter SDK to use. If blank, Dart Code will attempt to find it from the project folder, FLUTTER_ROOT environment variable and the PATH environment variable.
+
+- **`dart.flutterSdkPaths`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  An array of strings that are either Flutter SDKs or folders that contains multiple Flutter SDKs in sub-folders. When set, the version number in the status bar will be clickable to quickly switch between SDKs.
+
+- **`dart.flutterSelectDeviceWhenConnected`**: `boolean`
+
+  Default: `true`
+  
+  Whether to set newly connected devices as the current device in Flutter projects.
+
+- **`dart.flutterStructuredErrors`**: `boolean`
+
+  Default: `true`
+  
+  Whether to use Flutter's structured error support for improve error display.
+
+- **`dart.flutterTestLogFile`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The path to a log file for 'flutter test' which is used to run unit tests from VS Code. This is useful when trying to diagnose issues with unit test executions. Use ${name} in the log file name to prevent concurrent debug sessions overwriting each others logs.
+
+- **`dart.flutterTrackWidgetCreation`**: `boolean`
+
+  Default: `true`
+  
+  Whether to pass --track-widget-creation to Flutter apps (required to support 'Inspect Widget'). This setting is always ignored when running in Profile or Release mode.
+
+- **`dart.insertArgumentPlaceholders`**: `boolean`
+
+  Default: `true`
+  
+  Whether to insert argument placeholders during code completions. This feature is automatically disabled when enableCompletionCommitCharacters is enabled.
+
+- **`dart.lineLength`**: `integer`
+
+  Default: `80`
+  
+  The maximum length of a line of code. This is used by the document formatter.
+
+- **`dart.maxLogLineLength`**: `number`
+
+  Default: `2000`
+  
+  The maximum length of a line in the log file. Lines longer than this will be truncated and suffixed with an ellipsis.
+
+- **`dart.notifyAnalyzerErrors`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show a notification the first few times an analysis server exception occurs.
+
+- **`dart.observatoryLogFile`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The path to a log file for communication between Dart Code and Observatory (the VM debugger). This is useful when trying to diagnose issues with debugging such as missed breakpoints. Use ${name} in the log file name to prevent concurrent debug sessions overwriting each others logs.
+
+- **`dart.openDevTools`**: `enum { "never", "flutter", "always" }`
+
+  Default: `"never"`
+  
+  Whether to automatically open DevTools at the start of a debug session.
+
+- **`dart.openTestView`**: `array`
+
+  Default: `{ "testRunStart" }`
+  
+  Array items: `{enum = { "testRunStart", "testFailure" }}`
+  
+  When to automatically switch focus to the test list (array to support multiple values).
+
+- **`dart.previewBuildRunnerTasks`**: `boolean`
+
+  Whether to register Pub Build Runner tasks with VS Code.
+
+- **`dart.previewFlutterUiGuides`**: `boolean`
+
+  Whether to enable the Flutter UI Guides preview.
+
+- **`dart.previewFlutterUiGuidesCustomTracking`**: `boolean`
+
+  Whether to enable custom tracking of Flutter UI guidelines (to hide some latency of waiting for the next Flutter Outline).
+
+- **`dart.previewHotReloadOnSaveWatcher`**: `boolean`
+
+  Whether to perform hot-reload-on-save based on a filesystem watcher for Dart files rather than using VS Code's onDidSave event. This allows reloads to trigger when external tools modify Dart source files.
+
+- **`dart.previewNewCompletionPlaceholders`**: `boolean`
+
+  Default: `true`
+  
+  Whether to enable new behaviour for code completion to include @required arguments as placeholders (when using dart.insertArgumentPlaceholders).
+
+- **`dart.previewToStringInDebugViews`**: `boolean`
+
+  Whether to call toString() on objects when rendering them in debug views (such as the Variables, Watch and Hovers views). Only applies to views of 15 or fewer values for performance reasons.
+
+- **`dart.promptToGetPackages`**: `boolean`
+
+  Default: `true`
+  
+  Whether to prompt to get packages when opening a project with out of date packages.
+
+- **`dart.promptToRunIfErrors`**: `boolean`
+
+  Default: `true`
+  
+  Whether to prompt before running if there are errors in your project. Test scripts will be excluded from the check unless they're the script being run.
+
+- **`dart.pubAdditionalArgs`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Additional args to pass to all pub commands.
+
+- **`dart.pubTestLogFile`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The path to a log file for 'pub run test' runs. This is useful when trying to diagnose issues with unit test executions. Use ${name} in the log file name to prevent concurrent debug sessions overwriting each others logs.
+
+- **`dart.runPubGetOnPubspecChanges`**: `boolean`
+
+  Default: `true`
+  
+  Whether to automatically run 'pub get' whenever pubspec.yaml is saved.
+
+- **`dart.sdkPath`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The location of the Dart SDK to use for analyzing and executing code. If blank, Dart Code will attempt to find it from the PATH environment variable. When editing a Flutter project, the version of Dart included in the Flutter SDK is used in preference.
+
+- **`dart.sdkPaths`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  An array of strings that are either Dart SDKs or folders that contains multiple Dart SDKs in sub-folders. When set, the version number in the status bar will be clickable to quickly switch between SDKs.
+
+- **`dart.showDartDeveloperLogs`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show logs from dart:developer's log() function in the debug console.
+
+- **`dart.showDartPadSampleCodeLens`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show CodeLens actions in the editor for opening online DartPad samples.
+
+- **`dart.showIgnoreQuickFixes`**: `boolean`
+
+  Whether to show quick fixes for ignoring hints and lints.
+
+- **`dart.showTestCodeLens`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show CodeLens actions in the editor for quick running/debugging tests.
+
+- **`dart.showTodos`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show TODOs in the Problems list.
+
+- **`dart.triggerSignatureHelpAutomatically`**: `boolean`
+
+  Whether to automatically trigger signature help when pressing keys such as , and (.
+
+- **`dart.useKnownChromeOSPorts`**: `boolean`
+
+  Default: `true`
+  
+  Whether to use specific ports for Observatory and DevTools when running in Chrome OS. This is required to connect from the native Chrome OS browser but will prevent apps from launching if the ports are already in-use (for example if trying to run a second app).
+
+- **`dart.vmAdditionalArgs`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Additional args to pass to the Dart VM when running/debugging command line apps.
+
+- **`dart.warnWhenEditingFilesOutsideWorkspace`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show a warning when modifying files outside of the workspace.
+
+- **`dart.webDaemonLogFile`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The path to a log file for communication between Dart Code and the webdev daemon. This is useful when trying to diagnose issues with launching web applications. Use ${name} in the log file name to prevent concurrent debug sessions overwriting each others logs.
+
+</details>
+
+```lua
+require'nvim_lsp'.dartls.setup{}
+
+  Default Values:
+    cmd = { "dart", "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot", "--lsp" }
+    filetypes = { "dart" }
+    init_options = {
+      closingLabels = "true",
+      fluttreOutline = "false",
+      onlyAnalyzeProjectsWithOpenFiles = "false",
+      outline = "true",
+      suggestFromUnimportedLibraries = "true"
+    }
+    root_dir = root_pattern("pubspec.yaml")
 ```
 
 ## dockerls
@@ -742,9 +1229,7 @@ require'nvim_lsp'.dockerls.setup{}
   Default Values:
     cmd = { "docker-langserver", "--stdio" }
     filetypes = { "Dockerfile", "dockerfile" }
-    log_level = 2
     root_dir = root_pattern("Dockerfile")
-    settings = {}
 ```
 
 ## elmls
@@ -805,10 +1290,8 @@ require'nvim_lsp'.elmls.setup{}
       elmPath = "elm",
       elmTestPath = "elm-test"
     }
-    log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("elm.json")
-    settings = {}
 ```
 
 ## flow
@@ -930,9 +1413,7 @@ require'nvim_lsp'.flow.setup{}
   Default Values:
     cmd = { "npm", "run", "flow", "lsp" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx" }
-    log_level = 2
     root_dir = root_pattern(".flowconfig")
-    settings = {}
 ```
 
 ## fortls
@@ -1018,7 +1499,6 @@ require'nvim_lsp'.fortls.setup{}
   Default Values:
     cmd = { "fortls" }
     filetypes = { "fortran" }
-    log_level = 2
     root_dir = root_pattern(".fortls")
     settings = {
       nthreads = 1
@@ -1054,9 +1534,7 @@ require'nvim_lsp'.ghcide.setup{}
   Default Values:
     cmd = { "ghcide", "--lsp" }
     filetypes = { "haskell", "lhaskell" }
-    log_level = 2
     root_dir = root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml")
-    settings = {}
 ```
 
 ## gopls
@@ -1072,9 +1550,7 @@ require'nvim_lsp'.gopls.setup{}
   Default Values:
     cmd = { "gopls" }
     filetypes = { "go" }
-    log_level = 2
     root_dir = root_pattern("go.mod", ".git")
-    settings = {}
 ```
 
 ## hie
@@ -1197,11 +1673,9 @@ This server accepts configuration via the `settings` key.
 require'nvim_lsp'.hie.setup{}
 
   Default Values:
-    cmd = { "hie-wrapper" }
+    cmd = { "hie-wrapper", "--lsp" }
     filetypes = { "haskell" }
-    log_level = 2
     root_dir = root_pattern("stack.yaml", "package.yaml", ".git")
-    settings = {}
 ```
 
 ## intelephense
@@ -1222,7 +1696,6 @@ require'nvim_lsp'.intelephense.setup{}
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "intelephense", "--stdio" }
     filetypes = { "php" }
-    log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("composer.json", ".git")
 ```
@@ -1321,10 +1794,8 @@ require'nvim_lsp'.jsonls.setup{}
     }
     cmd = { "vscode-json-languageserver", "--stdio" }
     filetypes = { "json" }
-    log_level = 2
     on_init = <function 1>
     root_dir = root_pattern(".git", vim.fn.getcwd())
-    settings = {}
 ```
 
 ## julials
@@ -1461,9 +1932,7 @@ require'nvim_lsp'.julials.setup{}
   Default Values:
     cmd = { "julia", "--project", "--startup-file=no", "--history-file=no", "-e", "        using LanguageServer;\n        using Pkg;\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, false, dirname(Pkg.Types.Context().env.project_file));\n        server.runlinter = true; run(server);\n        " }
     filetypes = { "julia" }
-    log_level = 2
     root_dir = <function 1>
-    settings = {}
 ```
 
 ## leanls
@@ -1605,9 +2074,7 @@ require'nvim_lsp'.leanls.setup{}
   Default Values:
     cmd = { "lean-language-server", "--stdio" }
     filetypes = { "lean" }
-    log_level = 2
     root_dir = util.root_pattern(".git")
-    settings = {}
 ```
 
 ## metals
@@ -1665,9 +2132,80 @@ require'nvim_lsp'.metals.setup{}
   Default Values:
     cmd = { "metals" }
     filetype = { "scala" }
-    log_level = 2
     root_dir = util.root_pattern("build.sbt")
-    settings = {}
+```
+
+## nimls
+
+https://github.com/PMunch/nimlsp
+`nimlsp` can be installed via `:LspInstall nimls` or by yourself the `nimble` package manager:
+```sh
+nimble install nimlsp
+```
+    
+Can be installed in Nvim with `:LspInstall nimls`
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`nim.buildCommand`**: `string`
+
+  Default: `"c"`
+  
+  Nim build command (c, cpp, doc, etc)
+
+- **`nim.buildOnSave`**: `boolean`
+
+  Execute build task from tasks.json file on save.
+
+- **`nim.licenseString`**: `string`
+
+  Default: `""`
+  
+  Optional license text that will be inserted on nim file creation.
+
+- **`nim.lintOnSave`**: `boolean`
+
+  Default: `true`
+  
+  Check code by using 'nim check' on save.
+
+- **`nim.logNimsuggest`**: `boolean`
+
+  Enable verbose logging of nimsuggest to use profile directory.
+
+- **`nim.nimsuggestRestartTimeout`**: `integer`
+
+  Default: `60`
+  
+  Nimsuggest will be restarted after this timeout in minutes, if 0 then restart disabled.
+
+- **`nim.project`**: `array`
+
+  Default: `{}`
+  
+  Nim project file, if empty use current selected.
+
+- **`nim.runOutputDirectory`**: `string`
+
+  Default: `""`
+  
+  Output directory for run selected file command. The directory is relative to the workspace root.
+
+- **`nim.test-project`**: `string`
+
+  Default: `""`
+  
+  Optional test project.
+
+</details>
+
+```lua
+require'nvim_lsp'.nimls.setup{}
+
+  Default Values:
+    cmd = { "nimlsp" }
+    filetypes = { "nim" }
+    root_dir = root_pattern(".git") or os_homedir
 ```
 
 ## ocamlls
@@ -1687,9 +2225,7 @@ require'nvim_lsp'.ocamlls.setup{}
   Default Values:
     cmd = { "ocaml-language-server", "--stdio" }
     filetypes = { "ocaml", "reason" }
-    log_level = 2
     root_dir = root_pattern(".merlin", "package.json")
-    settings = {}
 ```
 
 ## pyls
@@ -1969,9 +2505,7 @@ require'nvim_lsp'.pyls.setup{}
   Default Values:
     cmd = { "pyls" }
     filetypes = { "python" }
-    log_level = 2
     root_dir = vim's starting directory
-    settings = {}
 ```
 
 ## pyls_ms
@@ -2007,7 +2541,6 @@ require'nvim_lsp'.pyls_ms.setup{}
         }
       }
     }
-    log_level = 2
     on_new_config = <function 1>
     root_dir = vim's starting directory
     settings = {
@@ -2244,9 +2777,7 @@ require'nvim_lsp'.rls.setup{}
   Default Values:
     cmd = { "rls" }
     filetypes = { "rust" }
-    log_level = 2
     root_dir = root_pattern("Cargo.toml")
-    settings = {}
 ```
 
 ## rust_analyzer
@@ -2269,6 +2800,8 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.cargo-watch.arguments`**: `array`
 
   Default: `{}`
+  
+  Array items: `{type = "string"}`
   
   `cargo-watch` arguments. (e.g: `--features="shumway,pdf"` will run as `cargo watch -x "check --features="shumway,pdf""` )
 
@@ -2294,6 +2827,8 @@ This server accepts configuration via the `settings` key.
 
   Default: `{}`
   
+  Array items: `{type = "string"}`
+  
   List of features to activate
 
 - **`rust-analyzer.cargoFeatures.noDefaultFeatures`**: `boolean`
@@ -2310,6 +2845,8 @@ This server accepts configuration via the `settings` key.
 
   Default: `{}`
   
+  Array items: `{type = "string"}`
+  
   Paths to exclude from analysis
 
 - **`rust-analyzer.featureFlags`**: `object`
@@ -2322,33 +2859,45 @@ This server accepts configuration via the `settings` key.
 
   Highlight Rust code (overrides built-in syntax highlighting)
 
-- **`rust-analyzer.lruCapacity`**: `number|null`
+- **`rust-analyzer.lruCapacity`**: `null|integer`
 
   Default: `vim.NIL`
   
   Number of syntax trees rust-analyzer keeps in memory
 
-- **`rust-analyzer.maxInlayHintLength`**: `number`
+- **`rust-analyzer.maxInlayHintLength`**: `null|integer`
 
   Default: `20`
   
   Maximum length for inlay hints
 
-- **`rust-analyzer.raLspServerPath`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  Path to ra_lsp_server executable (points to bundled binary by default)
-
 - **`rust-analyzer.rainbowHighlightingOn`**: `boolean`
 
   When highlighting Rust code, use a unique color per identifier
+
+- **`rust-analyzer.rustfmtArgs`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Additional arguments to rustfmt
+
+- **`rust-analyzer.serverPath`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  Path to rust-analyzer executable (points to bundled binary by default)
+
+- **`rust-analyzer.trace.extension`**: `boolean`
+
+  Enable logging of VS Code extensions itself
 
 - **`rust-analyzer.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
   
-  Trace requests to the ra_lsp_server
+  Trace requests to the rust-analyzer
 
 - **`rust-analyzer.useClientWatching`**: `boolean`
 
@@ -2403,12 +2952,10 @@ require'nvim_lsp'.rust_analyzer.setup{}
         }
       }
     }
-    cmd = { "ra_lsp_server" }
+    cmd = { "rust-analyzer" }
     filetypes = { "rust" }
-    log_level = 2
     on_init = <function 1>
     root_dir = root_pattern("Cargo.toml")
-    settings = {}
 ```
 
 ## solargraph
@@ -2528,9 +3075,7 @@ require'nvim_lsp'.solargraph.setup{}
   Default Values:
     cmd = { "solargraph", "stdio" }
     filetypes = { "ruby" }
-    log_level = 2
     root_dir = root_pattern("Gemfile", ".git")
-    settings = {}
 ```
 
 ## sumneko_lua
@@ -2635,7 +3180,6 @@ require'nvim_lsp'.sumneko_lua.setup{}
     filetypes = { "lua" }
     log_level = 2
     root_dir = root_pattern(".git") or os_homedir
-    settings = {}
 ```
 
 ## terraformls
@@ -2716,9 +3260,7 @@ require'nvim_lsp'.terraformls.setup{}
   Default Values:
     cmd = { "terraform-lsp" }
     filetypes = { "terraform" }
-    log_level = 2
     root_dir = root_pattern(".git")
-    settings = {}
 ```
 
 ## texlab
@@ -2739,7 +3281,6 @@ require'nvim_lsp'.texlab.setup{}
   Default Values:
     cmd = { "texlab" }
     filetypes = { "tex", "bib" }
-    log_level = 2
     root_dir = vim's starting directory
     settings = {
       bibtex = {
@@ -2782,10 +3323,8 @@ require'nvim_lsp'.tsserver.setup{}
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "typescript-language-server", "--stdio" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
-    log_level = 2
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("package.json")
-    settings = {}
 ```
 
 ## vimls
@@ -2818,10 +3357,8 @@ require'nvim_lsp'.vimls.setup{}
       },
       vimruntime = ""
     }
-    log_level = 2
     on_new_config = <function 1>
     root_dir = <function 1>
-    settings = {}
 ```
 
 ## vuels
@@ -3068,7 +3605,6 @@ require'nvim_lsp'.vuels.setup{}
         }
       }
     }
-    log_level = 2
     root_dir = root_pattern("package.json", "vue.config.js")
 ```
 
@@ -3204,9 +3740,7 @@ require'nvim_lsp'.yamlls.setup{}
     }
     cmd = { "yaml-language-server", "--stdio" }
     filetypes = { "yaml" }
-    log_level = 2
     on_init = <function 1>
     root_dir = root_pattern(".git", vim.fn.getcwd())
-    settings = {}
 ```
 

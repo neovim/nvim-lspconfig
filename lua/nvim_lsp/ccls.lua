@@ -1,13 +1,11 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
-local lsp = vim.lsp
 
 configs.ccls = {
   default_config = util.utf8_config {
     cmd = {"ccls"};
     filetypes = {"c", "cpp", "objc", "objcpp"};
     root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git");
-    log_level = lsp.protocol.MessageType.Warning;
   };
   -- commands = {};
   -- on_new_config = function(new_config) end;
