@@ -128,6 +128,14 @@ M.path = (function()
     end
   end
 
+  local function is_absolute(filename)
+    if is_windows then
+      return filename:match("^%a:") or filename:match("^\\\\")
+    else
+      return filename:match("^/")
+    end
+  end
+
   local dirname
   do
     local strip_dir_pat = path_sep.."([^"..path_sep.."]+)$"
@@ -195,6 +203,7 @@ M.path = (function()
   return {
     is_dir = is_dir;
     is_file = is_file;
+    is_absolute = is_absolute;
     exists = exists;
     sep = path_sep;
     dirname = dirname;
