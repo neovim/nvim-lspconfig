@@ -1888,6 +1888,12 @@ This server accepts configuration via the `settings` key.
   
   Format loop iterators.
 
+- **`julia.format.kw`**: `boolean`
+
+  Default: `true`
+  
+  Remove spaces around = in function keywords.
+
 - **`julia.format.ops`**: `boolean`
 
   Default: `true`
@@ -1900,11 +1906,63 @@ This server accepts configuration via the `settings` key.
   
   Format tuples.
 
-- **`julia.runLinter`**: `boolean`
+- **`julia.lint.call`**: `boolean`
+
+  Check calls against existing methods. (experimental)
+
+- **`julia.lint.constif`**: `boolean`
+
+  Default: `true`
+  
+  Check for constant conditionals of if statements.
+
+- **`julia.lint.iter`**: `boolean`
+
+  Default: `true`
+  
+  Check iterator syntax of loops.
+
+- **`julia.lint.lazy`**: `boolean`
+
+  Default: `true`
+  
+  Check for deterministic lazy boolean operators.
+
+- **`julia.lint.missingrefs`**: `boolean`
+
+  Default: `true`
+  
+  Report possibly missing references.
+
+- **`julia.lint.modname`**: `boolean`
+
+  Default: `true`
+  
+  Check for invalid submodule names.
+
+- **`julia.lint.pirates`**: `boolean`
+
+  Default: `true`
+  
+  Check for type piracy.
+
+- **`julia.lint.run`**: `boolean`
 
   Default: `true`
   
   Run the linter on active files.
+
+- **`julia.lint.typeparam`**: `boolean`
+
+  Default: `true`
+  
+  Check for unused DataType parameters.
+
+- **`julia.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the language server.
 
 - **`julia.useCustomSysimage`**: `boolean`
 
@@ -2088,6 +2146,14 @@ Can be installed in Nvim with `:LspInstall metals`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`metals.bloopSbtAlreadyInstalled`**: `boolean`
+
+  
+
+- **`metals.bloopVersion`**: `string`
+
+  
+
 - **`metals.customRepositories`**: `array`
 
   Array items: `{type = "string"}`
@@ -2122,7 +2188,7 @@ This server accepts configuration via the `settings` key.
 
 - **`metals.serverVersion`**: `string`
 
-  Default: `"0.8.0"`
+  Default: `"0.8.1"`
 
 </details>
 
@@ -2854,6 +2920,10 @@ This server accepts configuration via the `settings` key.
   Default: `vim.empty_dict()`
   
   Fine grained feature flags to disable annoying features
+
+- **`rust-analyzer.highlighting.semanticTokens`**: `boolean`
+
+  Use proposed semantic tokens API for syntax highlighting
 
 - **`rust-analyzer.highlightingOn`**: `boolean`
 
