@@ -216,6 +216,7 @@ that config.
 - [ghcide](#ghcide)
 - [gopls](#gopls)
 - [hie](#hie)
+- [html](#html)
 - [intelephense](#intelephense)
 - [jsonls](#jsonls)
 - [julials](#julials)
@@ -1676,6 +1677,37 @@ require'nvim_lsp'.hie.setup{}
     cmd = { "hie-wrapper", "--lsp" }
     filetypes = { "haskell" }
     root_dir = root_pattern("stack.yaml", "package.yaml", ".git")
+```
+
+## html
+
+https://github.com/vscode-langservers/vscode-html-languageserver-bin
+
+`html-languageserver` can be installed via `:LspInstall html` or by yourself with `npm`:
+```sh
+npm install -g vscode-html-languageserver-bin
+```
+
+Can be installed in Nvim with `:LspInstall html`
+
+```lua
+require'nvim_lsp'.html.setup{}
+
+  Default Values:
+    capabilities = default capabilities, with offsetEncoding utf-8
+    cmd = { "html-languageserver", "--stdio" }
+    filetypes = { "html" }
+    init_options = {
+      configurationSection = { "html", "css", "javascript" },
+      embeddedLanguages = {
+        css = true,
+        javascript = true
+      }
+    }
+    log_level = 2
+    on_init = function to handle changing offsetEncoding
+    root_dir = root_pattern("package.json")
+    settings = {}
 ```
 
 ## intelephense
