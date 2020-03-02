@@ -7,7 +7,9 @@ configs.clangd = {
     cmd = {"clangd", "--background-index"};
     filetypes = {"c", "cpp", "objc", "objcpp"};
     root_dir = function(fname)
-      return root_pattern(fname) or util.path.dirname(fname)
+      local filename = util.path.is_absolute(fname) and fname
+        or util.path.join(vim.loop.cwd(), fname)
+      return root_pattern(filename) or util.path.dirname(filename)
     end;
   };
   -- commands = {};
