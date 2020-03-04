@@ -1694,7 +1694,47 @@ Can be installed in Nvim with `:LspInstall html`
 require'nvim_lsp'.html.setup{}
 
   Default Values:
-    capabilities = default capabilities, with offsetEncoding utf-8
+    capabilities = {
+      offsetEncoding = { "utf-8", "utf-16" },
+      textDocument = {
+        completion = {
+          completionItem = {
+            commitCharactersSupport = false,
+            deprecatedSupport = false,
+            documentationFormat = { "markdown", "plaintext" },
+            preselectSupport = false,
+            snippetSupport = false
+          },
+          completionItemKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
+          },
+          contextSupport = false,
+          dynamicRegistration = false
+        },
+        documentHighlight = {
+          dynamicRegistration = false
+        },
+        hover = {
+          contentFormat = { "markdown", "plaintext" },
+          dynamicRegistration = false
+        },
+        references = {
+          dynamicRegistration = false
+        },
+        signatureHelp = {
+          dynamicRegistration = false,
+          signatureInformation = {
+            documentationFormat = { "markdown", "plaintext" }
+          }
+        },
+        synchronization = {
+          didSave = true,
+          dynamicRegistration = false,
+          willSave = false,
+          willSaveWaitUntil = false
+        }
+      }
+    }
     cmd = { "html-languageserver", "--stdio" }
     filetypes = { "html" }
     init_options = {
@@ -1704,9 +1744,8 @@ require'nvim_lsp'.html.setup{}
         javascript = true
       }
     }
-    log_level = 2
-    on_init = function to handle changing offsetEncoding
-    root_dir = root_pattern("package.json")
+    on_init = <function 1>
+    root_dir = <function 1>
     settings = {}
 ```
 
@@ -3192,10 +3231,6 @@ guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
 Can be installed in Nvim with `:LspInstall sumneko_lua`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
-
-- **`Lua.awakened.cat`**: `boolean`
-
-  
 
 - **`Lua.completion.callSnippet`**: `enum { "Disable", "Both", "Replace" }`
 
