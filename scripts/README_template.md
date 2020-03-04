@@ -27,7 +27,7 @@ Help us create configs for *all the LSPs!*
 - Requires [Nvim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly) (v0.5 prerelease).
 - nvim-lsp is just a plugin. Install it like any other Vim plugin.
 
-  ex: Using [vim-plug](https://github.com/junegunn/vim-plug)
+  e.g. [vim-plug](https://github.com/junegunn/vim-plug)
   ```
   :Plug 'neovim/nvim-lsp'
   ```
