@@ -6,7 +6,7 @@ local bin_name = "vls"
 
 local installer = util.npm_installer {
   server_name = server_name;
-  packages = { "vue-language-server" };
+  packages = { "vls" };
   binaries = {bin_name};
 }
 
@@ -70,10 +70,10 @@ configs[server_name] = {
     description = [[
 https://github.com/vuejs/vetur/tree/master/server
 
-Vue language server
+Vue language server(vls)
 `vue-language-server` can be installed via `:LspInstall vuels` or by yourself with `npm`:
 ```sh
-npm install -g vue-language-server
+npm install -g vls
 ```
 ]];
     default_config = {
