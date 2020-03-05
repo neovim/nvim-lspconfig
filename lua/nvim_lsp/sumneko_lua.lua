@@ -111,6 +111,16 @@ Lua language server. **By default, this doesn't have a `cmd` set.** This is
 because it doesn't provide a global binary. We provide an installer for Linux
 and macOS using `:LspInstall`.  If you wish to install it yourself, [here is a
 guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
+So you should set `cmd` yourself like this.
+
+```lua
+require'nvim_lsp'.sumneko_lua.setup{
+  cmd = {"path", "to", "cmd"};
+  ...
+}
+```
+
+If you install via our installer, if you execute `:LspInstallInfo sumneko_lua`, you can know `cmd` value.
 ]];
     default_config = {
       root_dir = [[root_pattern(".git") or os_homedir]];
