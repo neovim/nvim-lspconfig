@@ -3504,10 +3504,10 @@ require'nvim_lsp'.vimls.setup{}
 
 https://github.com/vuejs/vetur/tree/master/server
 
-Vue language server
+Vue language server(vls)
 `vue-language-server` can be installed via `:LspInstall vuels` or by yourself with `npm`:
 ```sh
-npm install -g vue-language-server
+npm install -g vls
 ```
 
 Can be installed in Nvim with `:LspInstall vuels`
