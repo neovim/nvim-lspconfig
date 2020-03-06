@@ -215,6 +215,7 @@ that config.
 - [elmls](#elmls)
 - [flow](#flow)
 - [fortls](#fortls)
+- [gdscript](#gdscript)
 - [ghcide](#ghcide)
 - [gopls](#gopls)
 - [hie](#hie)
@@ -1506,6 +1507,22 @@ require'nvim_lsp'.fortls.setup{}
     settings = {
       nthreads = 1
     }
+```
+
+## gdscript
+
+https://github.com/godotengine/godot
+
+Language server for GDScript, used by Godot Engine.
+
+
+```lua
+require'nvim_lsp'.gdscript.setup{}
+
+  Default Values:
+    cmd = { "nc", "localhost", "6008" }
+    filetypes = { "gd", "gdscript3" }
+    root_dir = <function 1>
 ```
 
 ## ghcide
