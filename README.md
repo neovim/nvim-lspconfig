@@ -212,6 +212,7 @@ that config.
 - [cssls](#cssls)
 - [dartls](#dartls)
 - [dockerls](#dockerls)
+- [efm](#efm)
 - [elmls](#elmls)
 - [flow](#flow)
 - [fortls](#fortls)
@@ -1234,6 +1235,21 @@ require'nvim_lsp'.dockerls.setup{}
     cmd = { "docker-langserver", "--stdio" }
     filetypes = { "Dockerfile", "dockerfile" }
     root_dir = root_pattern("Dockerfile")
+```
+
+## efm
+
+https://github.com/mattn/efm-langserver
+
+General purpose Language Server that can use specified error message format generated from specified command.
+
+
+```lua
+require'nvim_lsp'.efm.setup{}
+
+  Default Values:
+    cmd = { "efm-langserver" }
+    root_dir = root_pattern(".git")
 ```
 
 ## elmls
