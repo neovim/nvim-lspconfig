@@ -9,7 +9,8 @@ labels: bug
 <!-- Before reporting: search existing issues. -->
 
 - `nvim --version`:
-- nvim-lsp version:
+- nvim-lsp version(commit hash):
+- `:checkhealth` result
 - What language server(If the problem is related to a specific language server):
 - Operating system/version:
 - Terminal name/version:
