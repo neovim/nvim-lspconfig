@@ -1749,6 +1749,13 @@ require'nvim_lsp'.html.setup{}
         documentHighlight = {
           dynamicRegistration = false
         },
+        documentSymbol = {
+          dynamicRegistration = false,
+          hierarchicalDocumentSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
+        },
         hover = {
           contentFormat = { "markdown", "plaintext" },
           dynamicRegistration = false
@@ -1876,6 +1883,13 @@ require'nvim_lsp'.jsonls.setup{}
         },
         documentHighlight = {
           dynamicRegistration = false
+        },
+        documentSymbol = {
+          dynamicRegistration = false,
+          hierarchicalDocumentSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
         },
         hover = {
           contentFormat = { "markdown", "plaintext" },
@@ -2966,28 +2980,20 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.cargo-watch.allTargets`**: `boolean`
 
   Default: `true`
-  
-  Check all targets and tests (will be passed as `--all-targets`)
 
 - **`rust-analyzer.cargo-watch.arguments`**: `array`
 
   Default: `{}`
   
   Array items: `{type = "string"}`
-  
-  `cargo-watch` arguments. (e.g: `--features="shumway,pdf"` will run as `cargo watch -x "check --features="shumway,pdf""` )
 
 - **`rust-analyzer.cargo-watch.command`**: `string`
 
   Default: `"check"`
-  
-  `cargo-watch` command. (e.g: `clippy` will run as `cargo watch -x clippy` )
 
 - **`rust-analyzer.cargo-watch.enable`**: `boolean`
 
   Default: `true`
-  
-  Run `cargo check` for diagnostics on save
 
 - **`rust-analyzer.cargoFeatures.allFeatures`**: `boolean`
 
@@ -3005,7 +3011,7 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.cargoFeatures.noDefaultFeatures`**: `boolean`
 
-  Do not activate the `default` feature
+  
 
 - **`rust-analyzer.displayInlayHints`**: `boolean`
 
@@ -3075,6 +3081,12 @@ This server accepts configuration via the `settings` key.
   
   Trace requests to the rust-analyzer
 
+- **`rust-analyzer.updates.askBeforeDownload`**: `boolean`
+
+  Default: `true`
+  
+  Whether to ask for permission before downloading any files from the Internet
+
 - **`rust-analyzer.useClientWatching`**: `boolean`
 
   Default: `true`
@@ -3106,6 +3118,13 @@ require'nvim_lsp'.rust_analyzer.setup{}
         },
         documentHighlight = {
           dynamicRegistration = false
+        },
+        documentSymbol = {
+          dynamicRegistration = false,
+          hierarchicalDocumentSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
         },
         hover = {
           contentFormat = { "markdown", "plaintext" },
@@ -3898,6 +3917,13 @@ require'nvim_lsp'.yamlls.setup{}
         },
         documentHighlight = {
           dynamicRegistration = false
+        },
+        documentSymbol = {
+          dynamicRegistration = false,
+          hierarchicalDocumentSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
         },
         hover = {
           contentFormat = { "markdown", "plaintext" },
