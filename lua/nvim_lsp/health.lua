@@ -4,17 +4,23 @@ function M.check_health()
 
   for _, top_level_config in pairs(configs) do
     -- the folder needs to exist
-    local new_config = top_level_config.make_config(".")
+    local config = top_level_config.make_config(".")
 
-    local cmd, _ = vim.lsp._cmd_parts(new_config.cmd)
-    if not (vim.fn.executable(cmd) == 1) then
+    local status, cmd = pcall(vim.lsp._cmd_parts, config.cmd)
+    if not status then
       vim.fn['health#report_error'](
-        string.format("%s: The given command %q is not executable.", new_config.name, cmd)
+        string.format("%s: config.cmd error, %s", config.name, cmd)
       )
     else
-      vim.fn['health#report_info'](
-        string.format("%s: configuration checked.", new_config.name)
-      )
+      if not (vim.fn.executable(cmd) == 1) then
+        vim.fn['health#report_error'](
+          string.format("%s: The given command %q is not executable.", config.name, cmd)
+        )
+      else
+        vim.fn['health#report_info'](
+          string.format("%s: configuration checked.", config.name)
+        )
+      end
     end
   end
 end
