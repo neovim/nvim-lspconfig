@@ -116,7 +116,7 @@ end
 nvim_lsp.foo_lsp.setup{}
 ```
 
-### Example: orverride default config
+### Example: override default config
 
 If you want to change default configs for all servers, you can override default_config like this.
 
