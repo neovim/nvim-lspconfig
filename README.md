@@ -219,6 +219,7 @@ nvim_lsp.SERVER.setup{config}
 The following LSP configs are included. Follow a link to find documentation for
 that config.
 
+- [als](#als)
 - [bashls](#bashls)
 - [ccls](#ccls)
 - [clangd](#clangd)
@@ -253,6 +254,23 @@ that config.
 - [vimls](#vimls)
 - [vuels](#vuels)
 - [yamlls](#yamlls)
+
+## als
+
+https://github.com/adacore/ada_language_server
+
+AdaCore's Ada language server.
+
+Can be installed in Nvim with `:LspInstall als`
+
+```lua
+require'nvim_lsp'.als.setup{}
+
+  Default Values:
+    cmd = { "ada_language_server" } -- On windows: ada_language_server.exe
+    filetypes = { "ada" }
+    root_dir = root_pattern("Makefile", ".git")
+```
 
 ## bashls
 
