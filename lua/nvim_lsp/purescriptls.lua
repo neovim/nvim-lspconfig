@@ -26,7 +26,6 @@ configs[server_name] = {
       end
     end
   end;
-  -- on_attach = function(client, bufnr) end;
   docs = {
     description = [[
 https://github.com/nwolverson/purescript-language-server
