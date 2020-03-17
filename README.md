@@ -116,7 +116,7 @@ end
 nvim_lsp.foo_lsp.setup{}
 ```
 
-### Example: override default config
+### Example: orverride default config
 
 If you want to change default configs for all servers, you can override default_config like this.
 
@@ -2990,6 +2990,10 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`rust-analyzer.additionalOutDirs`**: `object`
+
+  Default: `vim.empty_dict()`
+
 - **`rust-analyzer.cargo-watch.allTargets`**: `boolean`
 
   Default: `true`
@@ -3026,12 +3030,6 @@ This server accepts configuration via the `settings` key.
 
   
 
-- **`rust-analyzer.displayInlayHints`**: `boolean`
-
-  Default: `true`
-  
-  Display additional type and parameter information in the editor
-
 - **`rust-analyzer.excludeGlobs`**: `array`
 
   Default: `{}`
@@ -3054,17 +3052,29 @@ This server accepts configuration via the `settings` key.
 
   Highlight Rust code (overrides built-in syntax highlighting)
 
+- **`rust-analyzer.inlayHints.maxLength`**: `null|integer`
+
+  Default: `20`
+  
+  Maximum length for inlay hints
+
+- **`rust-analyzer.inlayHints.parameterHints`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show function parameter name inlay hints at the call site
+
+- **`rust-analyzer.inlayHints.typeHints`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show inlay type hints
+
 - **`rust-analyzer.lruCapacity`**: `null|integer`
 
   Default: `vim.NIL`
   
   Number of syntax trees rust-analyzer keeps in memory
-
-- **`rust-analyzer.maxInlayHintLength`**: `null|integer`
-
-  Default: `20`
-  
-  Maximum length for inlay hints
 
 - **`rust-analyzer.rainbowHighlightingOn`**: `boolean`
 
@@ -3082,7 +3092,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  Path to rust-analyzer executable (points to bundled binary by default)
+  Path to rust-analyzer executable (points to bundled binary by default). If this is set, then "rust-analyzer.updates.channel" setting is not used
 
 - **`rust-analyzer.trace.extension`**: `boolean`
 
@@ -3099,6 +3109,10 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Whether to ask for permission before downloading any files from the Internet
+
+- **`rust-analyzer.updates.channel`**: `enum { "stable", "nightly" }`
+
+  Default: `"stable"`
 
 - **`rust-analyzer.useClientWatching`**: `boolean`
 
