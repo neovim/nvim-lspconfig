@@ -241,6 +241,7 @@ that config.
 - [metals](#metals)
 - [nimls](#nimls)
 - [ocamlls](#ocamlls)
+- [purescriptls](#purescriptls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
 - [rls](#rls)
@@ -2427,6 +2428,224 @@ require'nvim_lsp'.ocamlls.setup{}
     root_dir = root_pattern(".merlin", "package.json")
 ```
 
+## purescriptls
+
+https://github.com/nwolverson/purescript-language-server
+`purescript-language-server` can be installed via `:LspInstall purescriptls` or by yourself with `npm`
+```sh
+npm install -g purescript-language-server
+```
+
+Can be installed in Nvim with `:LspInstall purescriptls`
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`purescript.addNpmPath`**: `boolean`
+
+  Whether to add the local npm bin directory to the PATH for purs IDE server and build command.
+
+- **`purescript.addPscPackageSources`**: `boolean`
+
+  Whether to add psc-package sources to the globs passed to the IDE server for source locations (specifically the output of `psc-package sources`, if this is a psc-package project). Update due to adding packages/changing package set requires psc-ide server restart.
+
+- **`purescript.addSpagoSources`**: `boolean`
+
+  Whether to add spago sources to the globs passed to the IDE server for source locations (specifically the output of `spago sources`, if this is a spago project). Update due to adding packages/changing package set requires psc-ide server restart.
+
+- **`purescript.autoStartPscIde`**: `boolean`
+
+  Default: `true`
+  
+  Whether to automatically start/connect to purs IDE server when editing a PureScript file (includes connecting to an existing running instance). If this is disabled, various features like autocomplete, tooltips, and other type info will not work until start command is run manually.
+
+- **`purescript.autocompleteAddImport`**: `boolean`
+
+  Default: `true`
+  
+  Whether to automatically add imported identifiers when accepting autocomplete result.
+
+- **`purescript.autocompleteAllModules`**: `boolean`
+
+  Default: `true`
+  
+  Whether to always autocomplete from all built modules, or just those imported in the file. Suggestions from all modules always available by explicitly triggering autocomplete.
+
+- **`purescript.autocompleteGrouped`**: `boolean`
+
+  Default: `true`
+  
+  Whether to group completions in autocomplete results. Requires compiler 0.11.6
+
+- **`purescript.autocompleteLimit`**: `null|integer`
+
+  Default: `vim.NIL`
+  
+  Maximum number of results to fetch for an autocompletion request. May improve performance on large projects.
+
+- **`purescript.buildCommand`**: `string`
+
+  Default: `"pulp build -- --json-errors"`
+  
+  Build command to use with arguments. Not passed to shell. eg `pulp build -- --json-errors` (this default requires pulp >=10)
+
+- **`purescript.censorWarnings`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  The warning codes to censor, both for fast rebuild and a full build. Unrelated to any psa setup. e.g.: ["ShadowedName","MissingTypeDeclaration"]
+
+- **`purescript.codegenTargets`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  List of codegen targets to pass to the compiler for rebuild. e.g. js, corefn. If not specified (rather than empty array) this will not be passed and the compiler will default to js. Requires 0.12.1+
+
+- **`purescript.editorMode`**: `boolean`
+
+  Whether to set the editor-mode flag on the IDE server
+
+- **`purescript.fastRebuild`**: `boolean`
+
+  Default: `true`
+  
+  Enable purs IDE server fast rebuild
+
+- **`purescript.importsPreferredModules`**: `array`
+
+  Default: `{ "Prelude" }`
+  
+  Array items: `{type = "string"}`
+  
+  Module to prefer to insert when adding imports which have been re-exported. In order of preference, most preferred first.
+
+- **`purescript.outputDirectory`**: `string`
+
+  Default: `vim.NIL`
+  
+  Override purs ide output directory (output/ if not specified). This should match up to your build command
+
+- **`purescript.packagePath`**: `string`
+
+  Default: `"bower_components"`
+  
+  Path to installed packages. Will be used to control globs passed to IDE server for source locations.  Change requires IDE server restart.
+
+- **`purescript.polling`**: `boolean`
+
+  Whether to set the polling flag on the IDE server
+
+- **`purescript.preludeModule`**: `string`
+
+  Default: `"Prelude"`
+  
+  Module to consider as your default prelude, if an auto-complete suggestion comes from this module it will be imported unqualified.
+
+- **`purescript.pscIdePort`**: `integer|null`
+
+  Default: `vim.NIL`
+  
+  Port to use for purs IDE server (whether an existing server or to start a new one). By default a random port is chosen (or an existing port in .psc-ide-port if present), if this is specified no attempt will be made to select an alternative port on failure.
+
+- **`purescript.pscIdeServerExe`**: `string`
+
+  Default: `"psc-ide-server"`
+  
+  Location of legacy psc-ide-server executable (resolved wrt PATH)
+
+- **`purescript.pscIdelogLevel`**: `string`
+
+  Default: `""`
+  
+  Log level for purs IDE server
+
+- **`purescript.pursExe`**: `string`
+
+  Default: `"purs"`
+  
+  Location of purs executable (resolved wrt PATH)
+
+- **`purescript.sourcePath`**: `string`
+
+  Default: `"src"`
+  
+  Path to application source root. Will be used to control globs passed to IDE server for source locations. Change requires IDE server restart.
+
+- **`purescript.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VSCode and the PureScript language service.
+
+- **`purescript.useCombinedExe`**: `boolean`
+
+  Default: `true`
+  
+  Whether to use the new combined purs executable. This will default to true in the future then go away.
+
+</details>
+
+```lua
+require'nvim_lsp'.purescriptls.setup{}
+
+  Default Values:
+    capabilities = {
+      offsetEncoding = { "utf-8", "utf-16" },
+      textDocument = {
+        completion = {
+          completionItem = {
+            commitCharactersSupport = false,
+            deprecatedSupport = false,
+            documentationFormat = { "markdown", "plaintext" },
+            preselectSupport = false,
+            snippetSupport = false
+          },
+          completionItemKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
+          },
+          contextSupport = false,
+          dynamicRegistration = false
+        },
+        documentHighlight = {
+          dynamicRegistration = false
+        },
+        documentSymbol = {
+          dynamicRegistration = false,
+          hierarchicalDocumentSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
+        },
+        hover = {
+          contentFormat = { "markdown", "plaintext" },
+          dynamicRegistration = false
+        },
+        references = {
+          dynamicRegistration = false
+        },
+        signatureHelp = {
+          dynamicRegistration = false,
+          signatureInformation = {
+            documentationFormat = { "markdown", "plaintext" }
+          }
+        },
+        synchronization = {
+          didSave = true,
+          dynamicRegistration = false,
+          willSave = false,
+          willSaveWaitUntil = false
+        }
+      }
+    }
+    cmd = { "purescript-language-server", "--stdio" }
+    filetypes = { "purescript" }
+    on_init = <function 1>
+    root_dir = root_pattern("spago.dhall, bower.json")
+```
+
 ## pyls
 
 https://github.com/palantir/python-language-server
@@ -2990,10 +3209,6 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`rust-analyzer.additionalOutDirs`**: `object`
-
-  Default: `vim.empty_dict()`
-
 - **`rust-analyzer.cargo-watch.allTargets`**: `boolean`
 
   Default: `true`
@@ -3025,6 +3240,10 @@ This server accepts configuration via the `settings` key.
   Array items: `{type = "string"}`
   
   List of features to activate
+
+- **`rust-analyzer.cargoFeatures.loadOutDirsFromCheck`**: `boolean`
+
+  
 
 - **`rust-analyzer.cargoFeatures.noDefaultFeatures`**: `boolean`
 
