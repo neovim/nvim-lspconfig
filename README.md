@@ -2331,7 +2331,7 @@ require'nvim_lsp'.metals.setup{}
 
   Default Values:
     cmd = { "metals" }
-    filetype = { "scala" }
+    filetypes = { "scala" }
     root_dir = util.root_pattern("build.sbt")
 ```
 
