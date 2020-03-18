@@ -50,7 +50,7 @@ local installer = make_installer()
 configs[server_name] = {
   default_config = {
     cmd = {bin_name};
-    filetype = {"scala"};
+    filetypes = {"scala"};
     root_dir = util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml");
   };
   on_new_config = function(config)
