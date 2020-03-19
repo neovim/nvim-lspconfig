@@ -3396,7 +3396,7 @@ require'nvim_lsp'.rust_analyzer.setup{}
     cmd = { "rust-analyzer" }
     filetypes = { "rust" }
     on_init = <function 1>
-    root_dir = root_pattern("Cargo.toml")
+    root_dir = root_pattern("Cargo.toml", "rust-project.json")
 ```
 
 ## solargraph
