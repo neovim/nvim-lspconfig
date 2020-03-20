@@ -14,7 +14,7 @@ configs[server_name] = {
   default_config = {
     cmd = {"bash-language-server", "start"};
     filetypes = {"sh"};
-    root_dir = vim.loop.os_homedir;
+    root_dir = util.path.dirname;
   };
   on_new_config = function(new_config)
     local install_info = installer.info()
