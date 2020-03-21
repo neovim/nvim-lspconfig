@@ -2322,7 +2322,7 @@ This server accepts configuration via the `settings` key.
 
 - **`metals.serverVersion`**: `string`
 
-  Default: `"0.8.1"`
+  Default: `"0.8.3"`
 
 </details>
 
