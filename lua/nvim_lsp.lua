@@ -23,6 +23,9 @@ function M._root._setup()
   M._root.commands = {
     LspInstall = {
       function(name)
+        if configs[name] == nil then
+          pcall(require('nvim_lsp/'..name))
+        end
         local config = configs[name]
         if not config then
           return print("Invalid server name:", name)
@@ -49,6 +52,9 @@ function M._root._setup()
             end
           end
           return print(vim.inspect(res))
+        end
+        if configs[name] == nil then
+          pcall(require('nvim_lsp/'..name))
         end
         local config = configs[name]
         if not config then
