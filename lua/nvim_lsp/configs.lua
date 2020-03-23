@@ -162,7 +162,6 @@ function configs.__newindex(t, config_name, config_def)
 
     function manager.try_add()
       local root_dir = get_root_dir(api.nvim_buf_get_name(0), api.nvim_get_current_buf())
-      if not root_dir then return end
       local id = manager.add(root_dir)
       if id then
         lsp.buf_attach_client(0, id)
