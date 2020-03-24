@@ -1,20 +1,30 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
-local server_name = "bashls"
-local bin_name = "bash-language-server"
+local server_name = "html"
+local bin_name = "html-languageserver"
 
 local installer = util.npm_installer {
   server_name = server_name;
-  packages = { "bash-language-server" };
+  packages = { "vscode-html-languageserver-bin" };
   binaries = {bin_name};
 }
 
+local root_pattern = util.root_pattern("package.json")
+
 configs[server_name] = {
-  default_config = {
-    cmd = {"bash-language-server", "start"};
-    filetypes = {"sh"};
-    root_dir = util.path.dirname;
+  default_config = util.utf8_config {
+    cmd = {bin_name, "--stdio"};
+    filetypes = {"html"};
+    root_dir = function(fname)
+      return root_pattern(fname) or vim.loop.os_homedir()
+    end;
+    settings = {};
+    init_options = {
+      embeddedLanguages = { css= true, javascript= true },
+      configurationSection = { 'html', 'css', 'javascript' },
+    }
+
   };
   on_new_config = function(new_config)
     local install_info = installer.info()
@@ -27,18 +37,17 @@ configs[server_name] = {
       end
     end
   end;
-  -- on_attach = function(client, bufnr) end;
   docs = {
     description = [[
-https://github.com/mads-hartmann/bash-language-server
+https://github.com/vscode-langservers/vscode-html-languageserver-bin
 
-Language server for bash, written using tree sitter in typescript.
+`html-languageserver` can be installed via `:LspInstall html` or by yourself with `npm`:
+```sh
+npm install -g vscode-html-languageserver-bin
+```
 ]];
-    default_config = {
-      root_dir = "vim's starting directory";
-    };
   };
-};
+}
 
 configs[server_name].install = installer.install
 configs[server_name].install_info = installer.info

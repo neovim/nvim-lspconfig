@@ -44,7 +44,7 @@ local function make_installer()
       error('Unable to identify host operating system')
     end
 
-    local url = string.format("https://pvsc.azureedge.net/python-language-server-stable/Python-Language-Server-%s-x64.0.5.30.nupkg", string.lower(system))
+    local url = string.format("https://pvsc.azureedge.net/python-language-server-stable/Python-Language-Server-%s-x64.0.5.31.nupkg", string.lower(system))
     local download_cmd = string.format('curl -fLo %s --create-dirs %s', install_info.install_dir .. "/pyls.nupkg", url)
     local install_cmd = ''
 

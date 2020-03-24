@@ -26,6 +26,8 @@ Help us create configs for *all the LSPs!*
 
 - Requires [Nvim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly) (v0.5 prerelease).
 - nvim-lsp is just a plugin. Install it like any other Vim plugin.
+
+  e.g. [vim-plug](https://github.com/junegunn/vim-plug)
   ```
   :Plug 'neovim/nvim-lsp'
   ```
@@ -112,6 +114,19 @@ if not nvim_lsp.foo_lsp then
   }
 end
 nvim_lsp.foo_lsp.setup{}
+```
+
+### Example: orverride default config
+
+If you want to change default configs for all servers, you can override default_config like this.
+
+```lua
+local nvim_lsp = require'nvim_lsp'
+nvim_lsp.util.default_config = vim.tbl_extend(
+  "force",
+  nvim_lsp.util.default_config,
+  { log_level = lsp.protocol.MessageType.Warning.Error }
+)
 ```
 
 ### Installing a language server

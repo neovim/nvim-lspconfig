@@ -7,6 +7,14 @@ local fn = vim.fn
 
 local M = {}
 
+M.default_config = {
+  log_level = lsp.protocol.MessageType.Warning;
+  message_level = lsp.protocol.MessageType.Warning;
+  settings = vim.empty_dict();
+  init_options = vim.empty_dict();
+  callbacks = {};
+}
+
 function M.validate_bufnr(bufnr)
   validate {
     bufnr = { bufnr, 'n' }
@@ -128,6 +136,14 @@ M.path = (function()
     end
   end
 
+  local function is_absolute(filename)
+    if is_windows then
+      return filename:match("^%a:") or filename:match("^\\\\")
+    else
+      return filename:match("^/")
+    end
+  end
+
   local dirname
   do
     local strip_dir_pat = path_sep.."([^"..path_sep.."]+)$"
@@ -195,6 +211,7 @@ M.path = (function()
   return {
     is_dir = is_dir;
     is_file = is_file;
+    is_absolute = is_absolute;
     exists = exists;
     sep = path_sep;
     dirname = dirname;
@@ -214,6 +231,7 @@ function M.server_per_root_dir_manager(_make_config)
 
   function manager.add(root_dir)
     if not root_dir then return end
+    if not M.path.is_dir(root_dir) then return end
 
     -- Check if we have a client alredy or start and store it.
     local client_id = clients[root_dir]

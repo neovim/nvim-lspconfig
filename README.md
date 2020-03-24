@@ -26,6 +26,8 @@ Help us create configs for *all the LSPs!*
 
 - Requires [Nvim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly) (v0.5 prerelease).
 - nvim-lsp is just a plugin. Install it like any other Vim plugin.
+
+  e.g. [vim-plug](https://github.com/junegunn/vim-plug)
   ```
   :Plug 'neovim/nvim-lsp'
   ```
@@ -112,6 +114,19 @@ if not nvim_lsp.foo_lsp then
   }
 end
 nvim_lsp.foo_lsp.setup{}
+```
+
+### Example: orverride default config
+
+If you want to change default configs for all servers, you can override default_config like this.
+
+```lua
+local nvim_lsp = require'nvim_lsp'
+nvim_lsp.util.default_config = vim.tbl_extend(
+  "force",
+  nvim_lsp.util.default_config,
+  { log_level = lsp.protocol.MessageType.Warning.Error }
+)
 ```
 
 ### Installing a language server
@@ -210,12 +225,15 @@ that config.
 - [cssls](#cssls)
 - [dartls](#dartls)
 - [dockerls](#dockerls)
+- [efm](#efm)
 - [elmls](#elmls)
 - [flow](#flow)
 - [fortls](#fortls)
+- [gdscript](#gdscript)
 - [ghcide](#ghcide)
 - [gopls](#gopls)
 - [hie](#hie)
+- [html](#html)
 - [intelephense](#intelephense)
 - [jsonls](#jsonls)
 - [julials](#julials)
@@ -223,6 +241,7 @@ that config.
 - [metals](#metals)
 - [nimls](#nimls)
 - [ocamlls](#ocamlls)
+- [purescriptls](#purescriptls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
 - [rls](#rls)
@@ -1232,6 +1251,21 @@ require'nvim_lsp'.dockerls.setup{}
     root_dir = root_pattern("Dockerfile")
 ```
 
+## efm
+
+https://github.com/mattn/efm-langserver
+
+General purpose Language Server that can use specified error message format generated from specified command.
+
+
+```lua
+require'nvim_lsp'.efm.setup{}
+
+  Default Values:
+    cmd = { "efm-langserver" }
+    root_dir = root_pattern(".git")
+```
+
 ## elmls
 
 https://github.com/elm-tooling/elm-language-server#installation
@@ -1505,6 +1539,22 @@ require'nvim_lsp'.fortls.setup{}
     }
 ```
 
+## gdscript
+
+https://github.com/godotengine/godot
+
+Language server for GDScript, used by Godot Engine.
+
+
+```lua
+require'nvim_lsp'.gdscript.setup{}
+
+  Default Values:
+    cmd = { "nc", "localhost", "6008" }
+    filetypes = { "gd", "gdscript3" }
+    root_dir = <function 1>
+```
+
 ## ghcide
 
 https://github.com/digital-asset/ghcide
@@ -1678,6 +1728,83 @@ require'nvim_lsp'.hie.setup{}
     root_dir = root_pattern("stack.yaml", "package.yaml", ".git")
 ```
 
+## html
+
+https://github.com/vscode-langservers/vscode-html-languageserver-bin
+
+`html-languageserver` can be installed via `:LspInstall html` or by yourself with `npm`:
+```sh
+npm install -g vscode-html-languageserver-bin
+```
+
+Can be installed in Nvim with `:LspInstall html`
+
+```lua
+require'nvim_lsp'.html.setup{}
+
+  Default Values:
+    capabilities = {
+      offsetEncoding = { "utf-8", "utf-16" },
+      textDocument = {
+        completion = {
+          completionItem = {
+            commitCharactersSupport = false,
+            deprecatedSupport = false,
+            documentationFormat = { "markdown", "plaintext" },
+            preselectSupport = false,
+            snippetSupport = false
+          },
+          completionItemKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
+          },
+          contextSupport = false,
+          dynamicRegistration = false
+        },
+        documentHighlight = {
+          dynamicRegistration = false
+        },
+        documentSymbol = {
+          dynamicRegistration = false,
+          hierarchicalDocumentSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
+        },
+        hover = {
+          contentFormat = { "markdown", "plaintext" },
+          dynamicRegistration = false
+        },
+        references = {
+          dynamicRegistration = false
+        },
+        signatureHelp = {
+          dynamicRegistration = false,
+          signatureInformation = {
+            documentationFormat = { "markdown", "plaintext" }
+          }
+        },
+        synchronization = {
+          didSave = true,
+          dynamicRegistration = false,
+          willSave = false,
+          willSaveWaitUntil = false
+        }
+      }
+    }
+    cmd = { "html-languageserver", "--stdio" }
+    filetypes = { "html" }
+    init_options = {
+      configurationSection = { "html", "css", "javascript" },
+      embeddedLanguages = {
+        css = true,
+        javascript = true
+      }
+    }
+    on_init = <function 1>
+    root_dir = <function 1>
+    settings = {}
+```
+
 ## intelephense
 
 https://intelephense.com/
@@ -1770,6 +1897,13 @@ require'nvim_lsp'.jsonls.setup{}
         },
         documentHighlight = {
           dynamicRegistration = false
+        },
+        documentSymbol = {
+          dynamicRegistration = false,
+          hierarchicalDocumentSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
         },
         hover = {
           contentFormat = { "markdown", "plaintext" },
@@ -1888,6 +2022,12 @@ This server accepts configuration via the `settings` key.
   
   Format loop iterators.
 
+- **`julia.format.kw`**: `boolean`
+
+  Default: `true`
+  
+  Remove spaces around = in function keywords.
+
 - **`julia.format.ops`**: `boolean`
 
   Default: `true`
@@ -1900,11 +2040,63 @@ This server accepts configuration via the `settings` key.
   
   Format tuples.
 
-- **`julia.runLinter`**: `boolean`
+- **`julia.lint.call`**: `boolean`
+
+  Check calls against existing methods. (experimental)
+
+- **`julia.lint.constif`**: `boolean`
+
+  Default: `true`
+  
+  Check for constant conditionals of if statements.
+
+- **`julia.lint.iter`**: `boolean`
+
+  Default: `true`
+  
+  Check iterator syntax of loops.
+
+- **`julia.lint.lazy`**: `boolean`
+
+  Default: `true`
+  
+  Check for deterministic lazy boolean operators.
+
+- **`julia.lint.missingrefs`**: `boolean`
+
+  Default: `true`
+  
+  Report possibly missing references.
+
+- **`julia.lint.modname`**: `boolean`
+
+  Default: `true`
+  
+  Check for invalid submodule names.
+
+- **`julia.lint.pirates`**: `boolean`
+
+  Default: `true`
+  
+  Check for type piracy.
+
+- **`julia.lint.run`**: `boolean`
 
   Default: `true`
   
   Run the linter on active files.
+
+- **`julia.lint.typeparam`**: `boolean`
+
+  Default: `true`
+  
+  Check for unused DataType parameters.
+
+- **`julia.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the language server.
 
 - **`julia.useCustomSysimage`**: `boolean`
 
@@ -2088,6 +2280,14 @@ Can be installed in Nvim with `:LspInstall metals`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`metals.bloopSbtAlreadyInstalled`**: `boolean`
+
+  
+
+- **`metals.bloopVersion`**: `string`
+
+  
+
 - **`metals.customRepositories`**: `array`
 
   Array items: `{type = "string"}`
@@ -2122,7 +2322,7 @@ This server accepts configuration via the `settings` key.
 
 - **`metals.serverVersion`**: `string`
 
-  Default: `"0.8.0"`
+  Default: `"0.8.3"`
 
 </details>
 
@@ -2131,7 +2331,7 @@ require'nvim_lsp'.metals.setup{}
 
   Default Values:
     cmd = { "metals" }
-    filetype = { "scala" }
+    filetypes = { "scala" }
     root_dir = util.root_pattern("build.sbt")
 ```
 
@@ -2226,6 +2426,224 @@ require'nvim_lsp'.ocamlls.setup{}
     cmd = { "ocaml-language-server", "--stdio" }
     filetypes = { "ocaml", "reason" }
     root_dir = root_pattern(".merlin", "package.json")
+```
+
+## purescriptls
+
+https://github.com/nwolverson/purescript-language-server
+`purescript-language-server` can be installed via `:LspInstall purescriptls` or by yourself with `npm`
+```sh
+npm install -g purescript-language-server
+```
+
+Can be installed in Nvim with `:LspInstall purescriptls`
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`purescript.addNpmPath`**: `boolean`
+
+  Whether to add the local npm bin directory to the PATH for purs IDE server and build command.
+
+- **`purescript.addPscPackageSources`**: `boolean`
+
+  Whether to add psc-package sources to the globs passed to the IDE server for source locations (specifically the output of `psc-package sources`, if this is a psc-package project). Update due to adding packages/changing package set requires psc-ide server restart.
+
+- **`purescript.addSpagoSources`**: `boolean`
+
+  Whether to add spago sources to the globs passed to the IDE server for source locations (specifically the output of `spago sources`, if this is a spago project). Update due to adding packages/changing package set requires psc-ide server restart.
+
+- **`purescript.autoStartPscIde`**: `boolean`
+
+  Default: `true`
+  
+  Whether to automatically start/connect to purs IDE server when editing a PureScript file (includes connecting to an existing running instance). If this is disabled, various features like autocomplete, tooltips, and other type info will not work until start command is run manually.
+
+- **`purescript.autocompleteAddImport`**: `boolean`
+
+  Default: `true`
+  
+  Whether to automatically add imported identifiers when accepting autocomplete result.
+
+- **`purescript.autocompleteAllModules`**: `boolean`
+
+  Default: `true`
+  
+  Whether to always autocomplete from all built modules, or just those imported in the file. Suggestions from all modules always available by explicitly triggering autocomplete.
+
+- **`purescript.autocompleteGrouped`**: `boolean`
+
+  Default: `true`
+  
+  Whether to group completions in autocomplete results. Requires compiler 0.11.6
+
+- **`purescript.autocompleteLimit`**: `null|integer`
+
+  Default: `vim.NIL`
+  
+  Maximum number of results to fetch for an autocompletion request. May improve performance on large projects.
+
+- **`purescript.buildCommand`**: `string`
+
+  Default: `"pulp build -- --json-errors"`
+  
+  Build command to use with arguments. Not passed to shell. eg `pulp build -- --json-errors` (this default requires pulp >=10)
+
+- **`purescript.censorWarnings`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  The warning codes to censor, both for fast rebuild and a full build. Unrelated to any psa setup. e.g.: ["ShadowedName","MissingTypeDeclaration"]
+
+- **`purescript.codegenTargets`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  List of codegen targets to pass to the compiler for rebuild. e.g. js, corefn. If not specified (rather than empty array) this will not be passed and the compiler will default to js. Requires 0.12.1+
+
+- **`purescript.editorMode`**: `boolean`
+
+  Whether to set the editor-mode flag on the IDE server
+
+- **`purescript.fastRebuild`**: `boolean`
+
+  Default: `true`
+  
+  Enable purs IDE server fast rebuild
+
+- **`purescript.importsPreferredModules`**: `array`
+
+  Default: `{ "Prelude" }`
+  
+  Array items: `{type = "string"}`
+  
+  Module to prefer to insert when adding imports which have been re-exported. In order of preference, most preferred first.
+
+- **`purescript.outputDirectory`**: `string`
+
+  Default: `vim.NIL`
+  
+  Override purs ide output directory (output/ if not specified). This should match up to your build command
+
+- **`purescript.packagePath`**: `string`
+
+  Default: `"bower_components"`
+  
+  Path to installed packages. Will be used to control globs passed to IDE server for source locations.  Change requires IDE server restart.
+
+- **`purescript.polling`**: `boolean`
+
+  Whether to set the polling flag on the IDE server
+
+- **`purescript.preludeModule`**: `string`
+
+  Default: `"Prelude"`
+  
+  Module to consider as your default prelude, if an auto-complete suggestion comes from this module it will be imported unqualified.
+
+- **`purescript.pscIdePort`**: `integer|null`
+
+  Default: `vim.NIL`
+  
+  Port to use for purs IDE server (whether an existing server or to start a new one). By default a random port is chosen (or an existing port in .psc-ide-port if present), if this is specified no attempt will be made to select an alternative port on failure.
+
+- **`purescript.pscIdeServerExe`**: `string`
+
+  Default: `"psc-ide-server"`
+  
+  Location of legacy psc-ide-server executable (resolved wrt PATH)
+
+- **`purescript.pscIdelogLevel`**: `string`
+
+  Default: `""`
+  
+  Log level for purs IDE server
+
+- **`purescript.pursExe`**: `string`
+
+  Default: `"purs"`
+  
+  Location of purs executable (resolved wrt PATH)
+
+- **`purescript.sourcePath`**: `string`
+
+  Default: `"src"`
+  
+  Path to application source root. Will be used to control globs passed to IDE server for source locations. Change requires IDE server restart.
+
+- **`purescript.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VSCode and the PureScript language service.
+
+- **`purescript.useCombinedExe`**: `boolean`
+
+  Default: `true`
+  
+  Whether to use the new combined purs executable. This will default to true in the future then go away.
+
+</details>
+
+```lua
+require'nvim_lsp'.purescriptls.setup{}
+
+  Default Values:
+    capabilities = {
+      offsetEncoding = { "utf-8", "utf-16" },
+      textDocument = {
+        completion = {
+          completionItem = {
+            commitCharactersSupport = false,
+            deprecatedSupport = false,
+            documentationFormat = { "markdown", "plaintext" },
+            preselectSupport = false,
+            snippetSupport = false
+          },
+          completionItemKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
+          },
+          contextSupport = false,
+          dynamicRegistration = false
+        },
+        documentHighlight = {
+          dynamicRegistration = false
+        },
+        documentSymbol = {
+          dynamicRegistration = false,
+          hierarchicalDocumentSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
+        },
+        hover = {
+          contentFormat = { "markdown", "plaintext" },
+          dynamicRegistration = false
+        },
+        references = {
+          dynamicRegistration = false
+        },
+        signatureHelp = {
+          dynamicRegistration = false,
+          signatureInformation = {
+            documentationFormat = { "markdown", "plaintext" }
+          }
+        },
+        synchronization = {
+          didSave = true,
+          dynamicRegistration = false,
+          willSave = false,
+          willSaveWaitUntil = false
+        }
+      }
+    }
+    cmd = { "purescript-language-server", "--stdio" }
+    filetypes = { "purescript" }
+    on_init = <function 1>
+    root_dir = root_pattern("spago.dhall, bower.json")
 ```
 
 ## pyls
@@ -2794,28 +3212,20 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.cargo-watch.allTargets`**: `boolean`
 
   Default: `true`
-  
-  Check all targets and tests (will be passed as `--all-targets`)
 
 - **`rust-analyzer.cargo-watch.arguments`**: `array`
 
   Default: `{}`
   
   Array items: `{type = "string"}`
-  
-  `cargo-watch` arguments. (e.g: `--features="shumway,pdf"` will run as `cargo watch -x "check --features="shumway,pdf""` )
 
 - **`rust-analyzer.cargo-watch.command`**: `string`
 
   Default: `"check"`
-  
-  `cargo-watch` command. (e.g: `clippy` will run as `cargo watch -x clippy` )
 
 - **`rust-analyzer.cargo-watch.enable`**: `boolean`
 
   Default: `true`
-  
-  Run `cargo check` for diagnostics on save
 
 - **`rust-analyzer.cargoFeatures.allFeatures`**: `boolean`
 
@@ -2831,15 +3241,13 @@ This server accepts configuration via the `settings` key.
   
   List of features to activate
 
+- **`rust-analyzer.cargoFeatures.loadOutDirsFromCheck`**: `boolean`
+
+  
+
 - **`rust-analyzer.cargoFeatures.noDefaultFeatures`**: `boolean`
 
-  Do not activate the `default` feature
-
-- **`rust-analyzer.displayInlayHints`**: `boolean`
-
-  Default: `true`
   
-  Display additional type and parameter information in the editor
 
 - **`rust-analyzer.excludeGlobs`**: `array`
 
@@ -2855,21 +3263,37 @@ This server accepts configuration via the `settings` key.
   
   Fine grained feature flags to disable annoying features
 
+- **`rust-analyzer.highlighting.semanticTokens`**: `boolean`
+
+  Use proposed semantic tokens API for syntax highlighting
+
 - **`rust-analyzer.highlightingOn`**: `boolean`
 
   Highlight Rust code (overrides built-in syntax highlighting)
+
+- **`rust-analyzer.inlayHints.maxLength`**: `null|integer`
+
+  Default: `20`
+  
+  Maximum length for inlay hints
+
+- **`rust-analyzer.inlayHints.parameterHints`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show function parameter name inlay hints at the call site
+
+- **`rust-analyzer.inlayHints.typeHints`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show inlay type hints
 
 - **`rust-analyzer.lruCapacity`**: `null|integer`
 
   Default: `vim.NIL`
   
   Number of syntax trees rust-analyzer keeps in memory
-
-- **`rust-analyzer.maxInlayHintLength`**: `null|integer`
-
-  Default: `20`
-  
-  Maximum length for inlay hints
 
 - **`rust-analyzer.rainbowHighlightingOn`**: `boolean`
 
@@ -2887,7 +3311,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  Path to rust-analyzer executable (points to bundled binary by default)
+  Path to rust-analyzer executable (points to bundled binary by default). If this is set, then "rust-analyzer.updates.channel" setting is not used
 
 - **`rust-analyzer.trace.extension`**: `boolean`
 
@@ -2898,6 +3322,16 @@ This server accepts configuration via the `settings` key.
   Default: `"off"`
   
   Trace requests to the rust-analyzer
+
+- **`rust-analyzer.updates.askBeforeDownload`**: `boolean`
+
+  Default: `true`
+  
+  Whether to ask for permission before downloading any files from the Internet
+
+- **`rust-analyzer.updates.channel`**: `enum { "stable", "nightly" }`
+
+  Default: `"stable"`
 
 - **`rust-analyzer.useClientWatching`**: `boolean`
 
@@ -2931,6 +3365,13 @@ require'nvim_lsp'.rust_analyzer.setup{}
         documentHighlight = {
           dynamicRegistration = false
         },
+        documentSymbol = {
+          dynamicRegistration = false,
+          hierarchicalDocumentSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
+        },
         hover = {
           contentFormat = { "markdown", "plaintext" },
           dynamicRegistration = false
@@ -2955,7 +3396,7 @@ require'nvim_lsp'.rust_analyzer.setup{}
     cmd = { "rust-analyzer" }
     filetypes = { "rust" }
     on_init = <function 1>
-    root_dir = root_pattern("Cargo.toml")
+    root_dir = root_pattern("Cargo.toml", "rust-project.json")
 ```
 
 ## solargraph
@@ -3086,14 +3527,20 @@ Lua language server. **By default, this doesn't have a `cmd` set.** This is
 because it doesn't provide a global binary. We provide an installer for Linux
 and macOS using `:LspInstall`.  If you wish to install it yourself, [here is a
 guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
+So you should set `cmd` yourself like this.
+
+```lua
+require'nvim_lsp'.sumneko_lua.setup{
+  cmd = {"path", "to", "cmd"};
+  ...
+}
+```
+
+If you install via our installer, if you execute `:LspInstallInfo sumneko_lua`, you can know `cmd` value.
 
 Can be installed in Nvim with `:LspInstall sumneko_lua`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
-
-- **`Lua.awakened.cat`**: `boolean`
-
-  
 
 - **`Lua.completion.callSnippet`**: `enum { "Disable", "Both", "Replace" }`
 
@@ -3365,10 +3812,10 @@ require'nvim_lsp'.vimls.setup{}
 
 https://github.com/vuejs/vetur/tree/master/server
 
-Vue language server
+Vue language server(vls)
 `vue-language-server` can be installed via `:LspInstall vuels` or by yourself with `npm`:
 ```sh
-npm install -g vue-language-server
+npm install -g vls
 ```
 
 Can be installed in Nvim with `:LspInstall vuels`
@@ -3716,6 +4163,13 @@ require'nvim_lsp'.yamlls.setup{}
         },
         documentHighlight = {
           dynamicRegistration = false
+        },
+        documentSymbol = {
+          dynamicRegistration = false,
+          hierarchicalDocumentSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
         },
         hover = {
           contentFormat = { "markdown", "plaintext" },
