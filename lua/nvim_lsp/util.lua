@@ -231,6 +231,7 @@ function M.server_per_root_dir_manager(_make_config)
 
   function manager.add(root_dir)
     if not root_dir then return end
+    if not M.path.is_dir(root_dir) then return end
 
     -- Check if we have a client alredy or start and store it.
     local client_id = clients[root_dir]
