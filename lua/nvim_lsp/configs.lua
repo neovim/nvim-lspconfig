@@ -99,16 +99,10 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     local make_config = function(_root_dir)
-      local new_config = vim.tbl_extend("keep", vim.empty_dict(), config)
-      -- Deepcopy anything that is >1 level nested.
-      new_config.settings = vim.deepcopy(new_config.settings)
-      util.tbl_deep_extend(new_config.settings, default_config.settings)
-
-      new_config.init_options = vim.deepcopy(new_config.init_options)
-      util.tbl_deep_extend(new_config.init_options, default_config.init_options)
-
+      local new_config = util.tbl_deep_extend("keep", vim.empty_dict(), config)
+      new_config = util.tbl_deep_extend('keep', new_config, default_config)
       new_config.capabilities = new_config.capabilities or lsp.protocol.make_client_capabilities()
-      util.tbl_deep_extend(new_config.capabilities, {
+      new_config.capabilities = util.tbl_deep_extend('keep', new_config.capabilities, {
         workspace = {
           configuration = true;
         }
