@@ -43,7 +43,7 @@ configs[server_name] = {
       else
         new_config.cmd = {install_info.binaries[bin_name]}
       end
-      util.tbl_deep_extend(new_config.init_options, {
+      new_config.init_options = util.tbl_deep_extend('force', new_config.init_options, {
         elmPath = install_info.binaries["elm"];
         elmFormatPath = install_info.binaries["elm-format"];
         elmTestPath = install_info.binaries["elm-test"];
