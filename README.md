@@ -2357,6 +2357,13 @@ This server accepts configuration via the `settings` key.
 
   Execute build task from tasks.json file on save.
 
+- **`nim.enableNimsuggest`**: `boolean`
+
+  Default: `true`
+  
+  Enable calling nimsuggest process to provide completion suggestions, hover suggestions, etc.
+  This option requires restart to take effect.
+
 - **`nim.licenseString`**: `string`
 
   Default: `""`
@@ -2373,17 +2380,37 @@ This server accepts configuration via the `settings` key.
 
   Enable verbose logging of nimsuggest to use profile directory.
 
+- **`nim.nimprettyIndent`**: `integer`
+
+  Default: `0`
+  
+  Nimpretty: set the number of spaces that is used for indentation
+  --indent:0 means autodetection (default behaviour).
+
+- **`nim.nimprettyMaxLineLen`**: `integer`
+
+  Default: `80`
+  
+  Nimpretty: set the desired maximum line length (default: 80).
+
 - **`nim.nimsuggestRestartTimeout`**: `integer`
 
   Default: `60`
   
   Nimsuggest will be restarted after this timeout in minutes, if 0 then restart disabled.
+  This option requires restart to take effect.
 
 - **`nim.project`**: `array`
 
   Default: `{}`
   
   Nim project file, if empty use current selected.
+
+- **`nim.projectMapping`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  For non project mode list of per file project mapping using regex, for example ```{"(.*).inim": "$1.nim"}```
 
 - **`nim.runOutputDirectory`**: `string`
 
@@ -3270,6 +3297,12 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.highlightingOn`**: `boolean`
 
   Highlight Rust code (overrides built-in syntax highlighting)
+
+- **`rust-analyzer.inlayHints.chainingHints`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show inlay type hints for method chains
 
 - **`rust-analyzer.inlayHints.maxLength`**: `null|integer`
 
