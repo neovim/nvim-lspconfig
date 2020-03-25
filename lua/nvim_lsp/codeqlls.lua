@@ -5,19 +5,6 @@ local server_name = "codeqlls"
 
 local root_pattern = util.root_pattern("qlpack.yml")
 
-function dump(o)
-   if type(o) == 'table' then
-      local s = '{ '
-      for k,v in pairs(o) do
-         if type(k) ~= 'number' then k = '"'..k..'"' end
-         s = s .. '['..k..'] = ' .. dump(v) .. ','
-      end
-      return s .. '} '
-   else
-      return tostring(o)
-   end
-end
-
 configs[server_name] = {
     default_config = {
         cmd = {"codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q"};
@@ -52,10 +39,6 @@ https://github.com/github/codeql-cli-binaries
         };
     };
     on_new_config = function(config)
-        file = io.open("/tmp/neovim.log", "a")
-        io.output(file)
-        io.write(dump(config.settings))
-        io.close(file)
         if type(config.settings.search_path) == 'table' and not vim.tbl_isempty(config.settings.search_path) then
             local search_path = "--search-path="
             for _, path in ipairs(config.settings.search_path) do
