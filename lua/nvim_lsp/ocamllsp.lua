@@ -5,9 +5,7 @@ configs.ocamllsp = {
   default_config = {
     cmd = {"ocamllsp",};
     filetypes = {'ocaml', 'reason'};
-    root_dir = function(fname)
-      return util.find_git_ancestor(fname) or vim.loop.os_homedir()
-    end;
+    root_dir = util.root_pattern("merlin", "package.json", ".git");
   };
   docs = {
     description = [[
