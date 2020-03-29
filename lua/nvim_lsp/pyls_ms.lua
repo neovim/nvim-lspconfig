@@ -10,6 +10,17 @@ local function get_python_version()
   return l:match("^Python%s*(...).*%s*$")
 end
 
+local function get_latest_pyls()
+  local f = io.popen("curl -k --silent 'https://pvsc.blob.core.windows.net/python-language-server-stable?restype=container&comp=list&prefix=Python-Language-Server-osx-x64'")
+  local l = f:read("*a")
+  f:close()
+  local version
+  for w in  string.gmatch (l, "x64%.(.-).nupkg") do
+      version = w
+  end
+  return version
+end
+
 local function make_installer()
   local P = util.path.join
   local install_dir = P{util.base_install_dir, name}
@@ -44,7 +55,8 @@ local function make_installer()
       error('Unable to identify host operating system')
     end
 
-    local url = string.format("https://pvsc.azureedge.net/python-language-server-stable/Python-Language-Server-%s-x64.0.5.31.nupkg", string.lower(system))
+    local version = get_latest_pyls()
+    local url = string.format("https://pvsc.azureedge.net/python-language-server-stable/Python-Language-Server-%s-x64.%s.nupkg", string.lower(system), version)
     local download_cmd = string.format('curl -fLo %s --create-dirs %s', install_info.install_dir .. "/pyls.nupkg", url)
     local install_cmd = ''
 
