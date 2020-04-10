@@ -8,7 +8,7 @@ configs.rust_analyzer = {
     root_dir = util.root_pattern("Cargo.toml", "rust-project.json");
   };
   docs = {
-    package_json = "https://github.com/rust-analyzer/rust-analyzer/raw/master/editors/code/package.json";
+    package_json = "https://raw.githubusercontent.com/rust-analyzer/rust-analyzer/master/editors/code/package.json";
     description = [[
 https://github.com/rust-analyzer/rust-analyzer
 
