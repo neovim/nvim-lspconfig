@@ -116,7 +116,7 @@ end
 nvim_lsp.foo_lsp.setup{}
 ```
 
-### Example: orverride default config
+### Example: override default config
 
 If you want to change default configs for all servers, you can override default_config like this.
 
@@ -222,6 +222,7 @@ that config.
 - [bashls](#bashls)
 - [ccls](#ccls)
 - [clangd](#clangd)
+- [codeqlls](#codeqlls)
 - [cssls](#cssls)
 - [dartls](#dartls)
 - [dockerls](#dockerls)
@@ -241,12 +242,14 @@ that config.
 - [metals](#metals)
 - [nimls](#nimls)
 - [ocamlls](#ocamlls)
+- [ocamllsp](#ocamllsp)
 - [purescriptls](#purescriptls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
 - [rls](#rls)
 - [rust_analyzer](#rust_analyzer)
 - [solargraph](#solargraph)
+- [sourcekit](#sourcekit)
 - [sumneko_lua](#sumneko_lua)
 - [terraformls](#terraformls)
 - [texlab](#texlab)
@@ -710,6 +713,77 @@ require'nvim_lsp'.clangd.setup{}
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
 ```
 
+## codeqlls
+
+Reference:
+https://help.semmle.com/codeql/codeql-cli.html
+
+Binaries:
+https://github.com/github/codeql-cli-binaries
+        
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`codeQL.cli.executablePath`**: `string`
+
+  Default: `""`
+  
+  Path to the CodeQL executable that should be used by the CodeQL extension. The executable is named `codeql` on Linux/Mac and `codeql.exe` on Windows. This overrides all other CodeQL CLI settings.
+
+- **`codeQL.queryHistory.format`**: `string`
+
+  Default: `"[%t] %q on %d - %s"`
+  
+  Default string for how to label query history items. %t is the time of the query, %q is the query name, %d is the database name, and %s is a status string.
+
+- **`codeQL.runningQueries.autoSave`**: `boolean`
+
+  Enable automatically saving a modified query file when running a query.
+
+- **`codeQL.runningQueries.debug`**: `boolean`
+
+  Enable debug logging and tuple counting when running CodeQL queries. This information is useful for debugging query performance.
+
+- **`codeQL.runningQueries.memory`**: `integer|null`
+
+  Default: `vim.NIL`
+  
+  Memory (in MB) to use for running queries. Leave blank for CodeQL to choose a suitable value based on your system's available memory.
+
+- **`codeQL.runningQueries.numberOfThreads`**: `integer`
+
+  Default: `1`
+  
+  Number of threads for running queries.
+
+- **`codeQL.runningQueries.timeout`**: `integer|null`
+
+  Default: `vim.NIL`
+  
+  Timeout (in seconds) for running queries. Leave blank or set to zero for no timeout.
+
+- **`codeQL.runningTests.numberOfThreads`**: `integer`
+
+  Default: `1`
+  
+  Number of threads for running CodeQL tests.
+
+</details>
+
+```lua
+require'nvim_lsp'.codeqlls.setup{}
+
+  Default Values:
+    before_init = <function 1>
+    cmd = { "codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q" }
+    filetypes = { "codeql" }
+    log_level = 2
+    root_dir = <function 1>
+    settings = {
+      search_path = "list containing all search paths, eg: '~/codeql-home/codeql-repo'"
+    }
+```
+
 ## cssls
 
 https://github.com/vscode-langservers/vscode-css-languageserver-bin
@@ -765,6 +839,10 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Whether to send analytics such as startup timings, frequency of use of features and analysis server crashes.
+
+- **`dart.allowTestsOutsideTestFolder`**: `boolean`
+
+  Whether to consider files ending '_test.dart' that are outside of the test folder as tests. This should be enabled if you put tests inside the 'lib' folder of your Flutter application so they will be run with 'flutter test' and not 'flutter run'.
 
 - **`dart.analysisExcludedFolders`**: `array`
 
@@ -953,6 +1031,10 @@ This server accepts configuration via the `settings` key.
   
   The programming language to use for IOS apps when creating new projects using the 'Flutter: New Project' command.
 
+- **`dart.flutterCreateOffline`**: `boolean`
+
+  Whether to use offline mode when creating new projects with the 'Flutter: New Project' command.
+
 - **`dart.flutterCreateOrganization`**: `null|string`
 
   Default: `vim.NIL`
@@ -1098,6 +1180,10 @@ This server accepts configuration via the `settings` key.
 - **`dart.previewHotReloadOnSaveWatcher`**: `boolean`
 
   Whether to perform hot-reload-on-save based on a filesystem watcher for Dart files rather than using VS Code's onDidSave event. This allows reloads to trigger when external tools modify Dart source files.
+
+- **`dart.previewLsp`**: `boolean`
+
+  Whether to run the analyzer in LSP mode (experimental, requires restart).
 
 - **`dart.previewNewCompletionPlaceholders`**: `boolean`
 
@@ -2455,6 +2541,28 @@ require'nvim_lsp'.ocamlls.setup{}
     root_dir = root_pattern(".merlin", "package.json")
 ```
 
+## ocamllsp
+
+https://github.com/ocaml/ocaml-lsp
+
+`ocaml-lsp` can be installed as described in [installation guide](https://github.com/ocaml/ocaml-lsp#installation).
+
+To install the lsp server in a particular opam switch:
+```sh
+opam pin add ocaml-lsp-server https://github.com/ocaml/ocaml-lsp.git
+opam install ocaml-lsp-server
+```
+    
+
+```lua
+require'nvim_lsp'.ocamllsp.setup{}
+
+  Default Values:
+    cmd = { "ocamllsp" }
+    filetypes = { "ocaml", "reason" }
+    root_dir = root_pattern(".merlin", "package.json")
+```
+
 ## purescriptls
 
 https://github.com/nwolverson/purescript-language-server
@@ -3236,31 +3344,19 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`rust-analyzer.cargo-watch.allTargets`**: `boolean`
+- **`rust-analyzer.callInfo.full`**: `boolean`
 
   Default: `true`
-
-- **`rust-analyzer.cargo-watch.arguments`**: `array`
-
-  Default: `{}`
   
-  Array items: `{type = "string"}`
+  Show function name and docs in parameter hints
 
-- **`rust-analyzer.cargo-watch.command`**: `string`
-
-  Default: `"check"`
-
-- **`rust-analyzer.cargo-watch.enable`**: `boolean`
-
-  Default: `true`
-
-- **`rust-analyzer.cargoFeatures.allFeatures`**: `boolean`
+- **`rust-analyzer.cargo.allFeatures`**: `boolean`
 
   Default: `true`
   
   Activate all available features
 
-- **`rust-analyzer.cargoFeatures.features`**: `array`
+- **`rust-analyzer.cargo.features`**: `array`
 
   Default: `{}`
   
@@ -3268,35 +3364,71 @@ This server accepts configuration via the `settings` key.
   
   List of features to activate
 
-- **`rust-analyzer.cargoFeatures.loadOutDirsFromCheck`**: `boolean`
+- **`rust-analyzer.cargo.loadOutDirsFromCheck`**: `boolean`
 
   
 
-- **`rust-analyzer.cargoFeatures.noDefaultFeatures`**: `boolean`
+- **`rust-analyzer.cargo.noDefaultFeatures`**: `boolean`
 
   
 
-- **`rust-analyzer.excludeGlobs`**: `array`
+- **`rust-analyzer.checkOnSave.allTargets`**: `boolean`
+
+  Default: `true`
+
+- **`rust-analyzer.checkOnSave.command`**: `string`
+
+  Default: `"check"`
+
+- **`rust-analyzer.checkOnSave.enable`**: `boolean`
+
+  Default: `true`
+
+- **`rust-analyzer.checkOnSave.extraArgs`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+
+- **`rust-analyzer.checkOnSave.overrideCommand`**: `null|array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{minItems = 1,type = "string"}`
+
+- **`rust-analyzer.completion.addCallArgumentSnippets`**: `boolean`
+
+  Default: `true`
+  
+  Whether to add argument snippets when completing functions
+
+- **`rust-analyzer.completion.addCallParenthesis`**: `boolean`
+
+  Default: `true`
+  
+  Whether to add parenthesis when completing functions
+
+- **`rust-analyzer.completion.postfix.enable`**: `boolean`
+
+  Default: `true`
+
+- **`rust-analyzer.diagnostics.enable`**: `boolean`
+
+  Default: `true`
+
+- **`rust-analyzer.files.exclude`**: `array`
 
   Default: `{}`
   
   Array items: `{type = "string"}`
   
-  Paths to exclude from analysis
+  Paths to exclude from analysis.
 
-- **`rust-analyzer.featureFlags`**: `object`
+- **`rust-analyzer.files.watcher`**: `enum { "client", "notify" }`
 
-  Default: `vim.empty_dict()`
+  Default: `"client"`
   
-  Fine grained feature flags to disable annoying features
-
-- **`rust-analyzer.highlighting.semanticTokens`**: `boolean`
-
-  Use proposed semantic tokens API for syntax highlighting
-
-- **`rust-analyzer.highlightingOn`**: `boolean`
-
-  Highlight Rust code (overrides built-in syntax highlighting)
+  Controls file watching implementation.
 
 - **`rust-analyzer.inlayHints.chainingHints`**: `boolean`
 
@@ -3326,19 +3458,29 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  Number of syntax trees rust-analyzer keeps in memory
+  Number of syntax trees rust-analyzer keeps in memory.
 
-- **`rust-analyzer.rainbowHighlightingOn`**: `boolean`
+- **`rust-analyzer.notifications.cargoTomlNotFound`**: `boolean`
 
-  When highlighting Rust code, use a unique color per identifier
+  Default: `true`
 
-- **`rust-analyzer.rustfmtArgs`**: `array`
+- **`rust-analyzer.notifications.workspaceLoaded`**: `boolean`
+
+  Default: `true`
+
+- **`rust-analyzer.rustfmt.extraArgs`**: `array`
 
   Default: `{}`
   
   Array items: `{type = "string"}`
   
   Additional arguments to rustfmt
+
+- **`rust-analyzer.rustfmt.overrideCommand`**: `null|array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{minItems = 1,type = "string"}`
 
 - **`rust-analyzer.serverPath`**: `null|string`
 
@@ -3365,12 +3507,6 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.updates.channel`**: `enum { "stable", "nightly" }`
 
   Default: `"stable"`
-
-- **`rust-analyzer.useClientWatching`**: `boolean`
-
-  Default: `true`
-  
-  client provided file watching instead of notify watching.
 
 </details>
 
@@ -3550,6 +3686,44 @@ require'nvim_lsp'.solargraph.setup{}
     cmd = { "solargraph", "stdio" }
     filetypes = { "ruby" }
     root_dir = root_pattern("Gemfile", ".git")
+```
+
+## sourcekit
+
+https://github.com/apple/sourcekit-lsp
+
+Language server for Swift and C/C++/Objective-C.
+    
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`sourcekit-lsp.serverPath`**: `string`
+
+  Default: `"sourcekit-lsp"`
+  
+  The path of the sourcekit-lsp executable
+
+- **`sourcekit-lsp.toolchainPath`**: `string`
+
+  Default: `""`
+  
+  (optional) The path of the swift toolchain. By default, sourcekit-lsp uses the toolchain it is installed in.
+
+- **`sourcekit-lsp.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the SourceKit-LSP language server.
+
+</details>
+
+```lua
+require'nvim_lsp'.sourcekit.setup{}
+
+  Default Values:
+    cmd = { "xcrun", "sourcekit-lsp" }
+    filetypes = { "swift" }
+    root_dir = root_pattern("Package.swift", ".git")
 ```
 
 ## sumneko_lua
