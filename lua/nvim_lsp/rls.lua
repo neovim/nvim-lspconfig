@@ -9,7 +9,7 @@ configs.rls = {
   };
   docs = {
     vscode = "rust-lang.rust";
-    package_json = "https://github.com/rust-lang/rls-vscode/raw/master/package.json";
+    package_json = "https://raw.githubusercontent.com/rust-lang/rls-vscode/master/package.json";
     description = [[
 https://github.com/rust-lang/rls
 
