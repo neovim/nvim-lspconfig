@@ -261,19 +261,20 @@ that config.
 
 ## als
 
-https://github.com/adacore/ada_language_server
+https://github.com/AdaCore/ada_language_server
 
-AdaCore's Ada language server.
+Ada language server. Use `LspInstall als` to install it.
 
 Can be installed in Nvim with `:LspInstall als`
+
 
 ```lua
 require'nvim_lsp'.als.setup{}
 
   Default Values:
-    cmd = { "ada_language_server" } -- On windows: ada_language_server.exe
+    cmd = { "ada_language_server" }
     filetypes = { "ada" }
-    root_dir = root_pattern("Makefile", ".git")
+    root_dir = util.root_pattern("Makefile")
 ```
 
 ## bashls
@@ -2426,7 +2427,13 @@ This server accepts configuration via the `settings` key.
 
 - **`metals.serverVersion`**: `string`
 
-  Default: `"0.8.3"`
+  Default: `"0.8.4"`
+
+- **`metals.superMethodLensesEnabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable/disable goto super method code lens.
 
 </details>
 
@@ -3143,9 +3150,9 @@ cmd = {"rustup", "run", "nightly", "rls"}
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`rust-client.channel`**: `enum { "stable", "beta", "nightly" }`
+- **`rust-client.channel`**
 
-  Default: `vim.NIL`
+  Default: `"default"`
   
   Rust channel to invoke rustup with. Ignored if rustup is disabled. By default, uses the same channel as your currently open project.
 
@@ -3155,7 +3162,7 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-client.enableMultiProjectSetup`**: `boolean`
 
-  Allow multiple projects in the same folder, along with remove the constraint that the cargo.toml must be located at the root. (Experimental: might not work for certain setups)
+  Allow multiple projects in the same folder, along with removing the constraint that the cargo.toml must be located at the root. (Experimental: might not work for certain setups)
 
 - **`rust-client.logToFile`**: `boolean`
 
@@ -3334,9 +3341,9 @@ This server accepts configuration via the `settings` key.
 
   Enable unstable features.
 
-- **`rust.wait_to_build`**: `number`
+- **`rust.wait_to_build`**: `number|null`
 
-  Default: `1500`
+  Default: `vim.NIL`
   
   Time in milliseconds between receiving a change notification and starting build.
 
@@ -3485,6 +3492,10 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.notifications.workspaceLoaded`**: `boolean`
 
   Default: `true`
+
+- **`rust-analyzer.procMacro.enabled`**: `boolean`
+
+  Enable Proc macro support, cargo.loadOutDirsFromCheck must be enabled.
 
 - **`rust-analyzer.rustfmt.extraArgs`**: `array`
 
