@@ -74,7 +74,7 @@ end
 local mt = {}
 function mt:__index(k)
   if configs[k] == nil then
-    require('nvim_lsp/'..k)
+    pcall(require, 'nvim_lsp/'..k)
   end
   return configs[k]
 end
