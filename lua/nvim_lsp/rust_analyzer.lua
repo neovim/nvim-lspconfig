@@ -6,6 +6,9 @@ configs.rust_analyzer = {
     cmd = {"rust-analyzer"};
     filetypes = {"rust"};
     root_dir = util.root_pattern("Cargo.toml", "rust-project.json");
+    settings = {
+      ["rust-analyzer"] = {}
+    }
   };
   docs = {
     package_json = "https://raw.githubusercontent.com/rust-analyzer/rust-analyzer/master/editors/code/package.json";
