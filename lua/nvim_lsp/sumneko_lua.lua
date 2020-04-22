@@ -39,8 +39,8 @@ local function make_installer()
       error('Need either "ninja" or "curl" (to download ninja) to install this.')
       return
     end
-    if not util.has_bins("sh", "chmod", "unzip") then
-      error('Need the binaries "sh", "chmod", "unzip" to install this')
+    if not util.has_bins("sh", "chmod", "unzip", "clang") then
+      error('Need the binaries "sh", "chmod", "unzip", "clang" to install this')
       return
     end
     local script = [=[
@@ -56,7 +56,7 @@ which ninja >/dev/null || {
     unzip $ninja_zip
     chmod +x ninja
   }
-  export PATH=$PWD:$PATH
+  export PATH="$PWD:$PATH"
 }
 
 # clone project
