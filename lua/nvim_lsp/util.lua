@@ -417,30 +417,6 @@ function M.sh(script, cwd)
   local stdout = uv.new_pipe(false)
   local stderr = uv.new_pipe(false)
 
-  -- luacheck: no unused
-  local handle, pid
-  handle, pid = uv.spawn("sh", {
-    stdio = {stdin, stdout, stderr};
-    cwd = cwd;
-  }, function()
-    stdin:close()
-    stdout:close()
-    stderr:close()
-    handle:close()
-    vim.schedule(function()
-      api.nvim_command("silent bwipeout! "..bufnr)
-    end)
-  end)
-
-  -- If the buffer closes, then kill our process.
-  api.nvim_buf_attach(bufnr, false, {
-    on_detach = function()
-      if not handle:is_closing() then
-        handle:kill(15)
-      end
-    end;
-  })
-
   local output_buf = ''
   local function update_chunk(err, chunk)
     if chunk then
@@ -456,6 +432,38 @@ function M.sh(script, cwd)
     end
   end
   update_chunk = vim.schedule_wrap(update_chunk)
+
+  -- luacheck: no unused
+  local handle, pid
+  handle, pid = uv.spawn("sh", {
+    stdio = {stdin, stdout, stderr};
+    cwd = cwd;
+  }, function(code, signal)
+    stdin:close()
+    stdout:close()
+    stderr:close()
+    handle:close()
+    if code == 0 and signal == 0 then
+      vim.schedule(function()
+          api.nvim_command("silent bwipeout! "..bufnr)
+      end)
+    else
+      update_chunk(
+        nil,
+        "Process exited with code " ..code.." / signal "..signal
+      )
+    end
+  end)
+
+  -- If the buffer closes, then kill our process.
+  api.nvim_buf_attach(bufnr, false, {
+    on_detach = function()
+      if not handle:is_closing() then
+        handle:kill(15)
+      end
+    end;
+  })
+
   stdout:read_start(update_chunk)
   stderr:read_start(update_chunk)
   stdin:write(script)
