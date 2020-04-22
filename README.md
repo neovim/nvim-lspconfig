@@ -2049,9 +2049,9 @@ Can be installed in Nvim with `:LspInstall julials`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`julia.NumThreads`**: `integer`
+- **`julia.NumThreads`**: `integer|null`
 
-  Default: `1`
+  Default: `vim.NIL`
   
   Number of threads to use for Julia processes.
 
@@ -3160,19 +3160,15 @@ This server accepts configuration via the `settings` key.
 
   Disable usage of rustup and use rustc/rls from PATH.
 
-- **`rust-client.enableMultiProjectSetup`**: `boolean`
+- **`rust-client.enableMultiProjectSetup`**: `boolean|null`
 
+  Default: `vim.NIL`
+  
   Allow multiple projects in the same folder, along with removing the constraint that the cargo.toml must be located at the root. (Experimental: might not work for certain setups)
 
 - **`rust-client.logToFile`**: `boolean`
 
   When set to true, RLS stderr is logged to a file at workspace root level. Requires reloading extension after change.
-
-- **`rust-client.nestedMultiRootConfigInOutermost`**: `boolean`
-
-  Default: `true`
-  
-  If one root workspace folder is nested in another root folder, look for the Rust config in the outermost root.
 
 - **`rust-client.revealOutputChannelOn`**: `enum { "info", "warn", "error", "never" }`
 
@@ -3493,7 +3489,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
 
-- **`rust-analyzer.procMacro.enabled`**: `boolean`
+- **`rust-analyzer.procMacro.enable`**: `boolean`
 
   Enable Proc macro support, cargo.loadOutDirsFromCheck must be enabled.
 
@@ -3725,6 +3721,14 @@ Language server for Swift and C/C++/Objective-C.
     
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
+
+- **`sourcekit-lsp.serverArguments`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Arguments to pass to sourcekit-lsp. Argument keys and values should be provided as separate entries in the array e.g. ['--log-level', 'debug']
 
 - **`sourcekit-lsp.serverPath`**: `string`
 
