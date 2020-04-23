@@ -8,19 +8,19 @@ local root_pattern = util.root_pattern("qlpack.yml")
 configs[server_name] = {
     default_config = {
         cmd = {"codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q"};
-        filetypes = {'codeql'};
+        filetypes = {'ql'};
         root_dir = function(fname)
             return root_pattern("qlpack.yml") or util.path.dirname(fname)
         end;
         log_level = vim.lsp.protocol.MessageType.Warning;
         before_init = function(initialize_params, config)
             initialize_params['workspaceFolders'] = {{
-                    name = 'workspace',
-                    uri = initialize_params['rootUri']
+                name = 'workspace',
+                uri = initialize_params['rootUri']
             }}
         end;
         settings = {
-            ["search_path"] = {}
+            search_path = vim.empty_dict()
         };
     };
     docs = {
@@ -45,6 +45,8 @@ https://github.com/github/codeql-cli-binaries
                 search_path = search_path..vim.fn.expand(path)..":"
             end
             config.cmd = {"codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q", search_path}
+        else
+            config.cmd = {"codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q"}
         end
     end;
 }
