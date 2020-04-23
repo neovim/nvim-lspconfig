@@ -239,6 +239,7 @@ that config.
 - [intelephense](#intelephense)
 - [jsonls](#jsonls)
 - [julials](#julials)
+- [kotlin_language_server](#kotlin_language_server)
 - [leanls](#leanls)
 - [metals](#metals)
 - [nimls](#nimls)
@@ -2230,6 +2231,50 @@ require'nvim_lsp'.julials.setup{}
     cmd = { "julia", "--project", "--startup-file=no", "--history-file=no", "-e", "        using LanguageServer;\n        using Pkg;\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, false, dirname(Pkg.Types.Context().env.project_file));\n        server.runlinter = true; run(server);\n        " }
     filetypes = { "julia" }
     root_dir = <function 1>
+```
+
+## kotlin_language_server
+
+https://github.com/fwcd/kotlin-language-server
+
+Kotlin Language Server.
+Requirements:
+  * java 8+ on path
+  * (optional) kotlinc on path for gradle-less projects
+  * `kotlin`-filetype support for vim.
+
+Simply follow the build instructions from the source, summarized:
+
+```bash
+git clone && cd
+./gradlew :server:installDist
+```
+
+Gradle will download itself and all dependencies. 
+Output to start the server is a script (unix or \*.bat), located at:
+`/path/to/git/of/kotlin-language-server/server/build/install/server/bin/`
+
+This will result in one executable script (unix) and one \*.bat which are used in the configuration below.
+
+<details><summary>Available settings:</summary>
+
+- **`kotlin-language-server.transport`**: `cli-arg`
+
+  Default: `None`
+  
+  The default option starts the server via stdio, which is our desired transport
+  protocol.
+
+</details>
+
+configuration:
+
+```lua
+require 'nvim_lsp'.kotlin_language_server.setup {
+  -- Default Values:
+	cmd = { "/path/to/git/of/kotlin-language-server/" .. "server/build/install/server/bin/kotlin-language-server" }; -- startup script
+};
+
 ```
 
 ## leanls
