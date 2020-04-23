@@ -8,12 +8,12 @@ local root_pattern = util.root_pattern("qlpack.yml")
 
 configs[server_name] = {
     default_config = {
-        filetypes = {'codeql'};
+        filetypes = {'ql'};
         root_dir = function(fname)
             return root_pattern("qlpack.yml") or util.path.dirname(fname)
         end;
-        log_level = vim.lsp.protocol.MessageType.Warning;
-        before_init = function(initialize_params, config)
+        log_level = lsp.protocol.MessageType.Warning;
+        before_init = function(initialize_params, _)
             initialize_params['workspaceFolders'] = {{
                 name = 'workspace',
                 uri = initialize_params['rootUri']
@@ -28,7 +28,7 @@ configs[server_name] = {
     };
     on_new_config = function(config)
         if config.settings.search_path ~= nil and config.settings.search_path ~= '' then
-            search_path="--search-path="
+            local search_path="--search-path="
             for _, path in ipairs(config.settings.search_path) do
                 search_path = search_path..vim.fn.expand(path)..":"
             end
