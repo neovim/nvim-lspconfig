@@ -265,6 +265,19 @@ https://github.com/AdaCore/ada_language_server
 
 Ada language server. Use `LspInstall als` to install it.
 
+Can be configured by passing a "settings" object to `als.setup{}`:
+
+```lua
+require('nvim_lsp').als.setup{
+    settings = {
+      ada = {
+        projectFile = "project.gpr";
+        scenarioVariables = { ... };
+      }
+    }
+}
+```
+
 Can be installed in Nvim with `:LspInstall als`
 
 
@@ -274,7 +287,7 @@ require'nvim_lsp'.als.setup{}
   Default Values:
     cmd = { "ada_language_server" }
     filetypes = { "ada" }
-    root_dir = util.root_pattern("Makefile")
+    root_dir = util.root_pattern("Makefile", ".git")
 ```
 
 ## bashls
