@@ -6,6 +6,12 @@ local bin_name = "metals"
 local function make_installer()
   local install_dir = util.path.join{util.base_install_dir, server_name}
   local metals_bin = util.path.join{install_dir, bin_name}
+  local server_version
+  if (vim.g.metals_server_version) then
+    server_version = vim.g.metals_server_version
+  else
+    server_version = 'latest.release'
+  end
   local X = {}
   function X.install()
     local install_info = X.info()
@@ -32,7 +38,7 @@ local function make_installer()
       os.execute("mkdir " .. install_dir)
       coursier_exe = "cs"
     end
-    local install_cmd = string.format("%s bootstrap --java-opt -Xss4m --java-opt -Xms100m --java-opt -Dmetals.client=coc.nvim org.scalameta:metals_2.12:latest.release -r bintray:scalacenter/releases -r sonatype:snapshots -o %s -f", coursier_exe, metals_bin)
+    local install_cmd = string.format("%s bootstrap --java-opt -Xss4m --java-opt -Xms100m org.scalameta:metals_2.12:%s -r bintray:scalacenter/releases -r sonatype:snapshots -o %s -f", coursier_exe, server_version, metals_bin)
     vim.fn.system(install_cmd)
   end
   function X.info()
@@ -58,6 +64,26 @@ configs[server_name] = {
     cmd = {bin_name};
     filetypes = {"scala"};
     root_dir = util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml");
+    message_level = vim.lsp.protocol.MessageType.Log;
+    init_options = {
+        statusBarProvider = "show-message",
+        didFocusProvider = false,
+        slowTaskProvider = false,
+        inputBoxProvider = false,
+        quickPickProvider = false,
+        executeClientCommandProvider = false,
+        doctorProvider = "html",
+        isExitOnShutdown = false,
+        isHttpEnabled = true,
+        compilerOptions = {
+          isCompletionItemDetailEnabled = true,
+          isCompletionItemDocumentationEnabled = true,
+          isHoverDocumentationEnabled = true,
+          snippetAutoIndent = false,
+          isSignatureHelpDocumentationEnabled = true,
+          isCompletionItemResolve = true
+        }
+      };
   };
   on_new_config = function(config)
     installer.configure(config)
@@ -67,6 +93,12 @@ configs[server_name] = {
     package_json = "https://raw.githubusercontent.com/scalameta/metals-vscode/master/package.json";
     description = [[
 https://scalameta.org/metals/
+
+To target a specific version on Metals, set the following.
+If nothing is set, the latest stable will be used.
+```vim
+let g:metals_server_version = '0.8.4+106-5f2b9350-SNAPSHOT'
+```
 
 Scala language server with rich IDE features.
 `metals` can be installed via `:LspInstall metals`.
