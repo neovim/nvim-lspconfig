@@ -2456,7 +2456,7 @@ require'nvim_lsp'.metals.setup{}
   Default Values:
     cmd = { "metals" }
     filetypes = { "scala" }
-    root_dir = util.root_pattern("build.sbt")
+    root_dir = util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml")
 ```
 
 ## nimls
@@ -3162,6 +3162,12 @@ cmd = {"rustup", "run", "nightly", "rls"}
     
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
+
+- **`rust-client.autoStartRls`**: `boolean`
+
+  Default: `true`
+  
+  Start RLS automatically when opening a file or project.
 
 - **`rust-client.channel`**
 
