@@ -808,7 +808,7 @@ require'nvim_lsp'.codeqlls.setup{}
   Default Values:
     before_init = <function 1>
     cmd = { "codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q" }
-    filetypes = { "codeql" }
+    filetypes = { "ql" }
     log_level = 2
     root_dir = <function 1>
     settings = {
