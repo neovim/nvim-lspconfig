@@ -21,12 +21,18 @@ local function make_installer()
       error('Need "JDK" to install this.')
       return
     end
-    local coursier_bin = install_dir .. "/coursier"
-    local download_cmd = string.format("curl -fLo %s --create-dirs https://git.io/coursier-cli", coursier_bin)
-    local chmod_cmd = string.format("chmod +x %s", coursier_bin)
-    local install_cmd = string.format("%s bootstrap --java-opt -Xss4m --java-opt -Xms100m --java-opt -Dmetals.client=coc.nvim org.scalameta:metals_2.12:latest.release -r bintray:scalacenter/releases -r sonatype:snapshots -o %s -f", coursier_bin, metals_bin)
-    vim.fn.system(download_cmd)
-    vim.fn.system(chmod_cmd)
+    local coursier_exe
+    if not (util.has_bins("cs")) then
+      coursier_exe = install_dir .. "/coursier"
+      local download_cmd = string.format("curl -fLo %s --create-dirs https://git.io/coursier-cli", coursier_exe)
+      local chmod_cmd = string.format("chmod +x %s", coursier_exe)
+      vim.fn.system(download_cmd)
+      vim.fn.system(chmod_cmd)
+    else
+      os.execute("mkdir " .. install_dir)
+      coursier_exe = "cs"
+    end
+    local install_cmd = string.format("%s bootstrap --java-opt -Xss4m --java-opt -Xms100m --java-opt -Dmetals.client=coc.nvim org.scalameta:metals_2.12:latest.release -r bintray:scalacenter/releases -r sonatype:snapshots -o %s -f", coursier_exe, metals_bin)
     vim.fn.system(install_cmd)
   end
   function X.info()
@@ -66,7 +72,7 @@ Scala language server with rich IDE features.
 `metals` can be installed via `:LspInstall metals`.
 ]];
     default_config = {
-      root_dir = [[util.root_pattern("build.sbt")]];
+      root_dir = [[util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml")]];
     };
   };
 };
