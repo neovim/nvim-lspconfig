@@ -2391,6 +2391,12 @@ require'nvim_lsp'.leanls.setup{}
 
 https://scalameta.org/metals/
 
+To target a specific version on Metals, set the following.
+If nothing is set, the latest stable will be used.
+```vim
+let g:metals_server_version = '0.8.4+106-5f2b9350-SNAPSHOT'
+```
+
 Scala language server with rich IDE features.
 `metals` can be installed via `:LspInstall metals`.
 
@@ -2456,6 +2462,26 @@ require'nvim_lsp'.metals.setup{}
   Default Values:
     cmd = { "metals" }
     filetypes = { "scala" }
+    init_options = {
+      compilerOptions = {
+        isCompletionItemDetailEnabled = true,
+        isCompletionItemDocumentationEnabled = true,
+        isCompletionItemResolve = true,
+        isHoverDocumentationEnabled = true,
+        isSignatureHelpDocumentationEnabled = true,
+        snippetAutoIndent = false
+      },
+      didFocusProvider = false,
+      doctorProvider = "html",
+      executeClientCommandProvider = false,
+      inputBoxProvider = false,
+      isExitOnShutdown = false,
+      isHttpEnabled = true,
+      quickPickProvider = false,
+      slowTaskProvider = false,
+      statusBarProvider = "show-message"
+    }
+    message_level = 4
     root_dir = util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml")
 ```
 
