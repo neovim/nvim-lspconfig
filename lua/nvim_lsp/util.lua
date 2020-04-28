@@ -409,58 +409,29 @@ function M.npm_installer(config)
 end
 
 function M.sh(script, cwd)
-  api.nvim_command("10new")
   assert(cwd and M.path.is_dir(cwd), "sh: Invalid directory")
-  local winnr = api.nvim_get_current_win()
+  -- switching to insert mode makes the buffer scroll as new output is added
+  -- and makes it easy and intuitive to cancel the operation with Ctrl-C
+  api.nvim_command("10new | startinsert")
   local bufnr = api.nvim_get_current_buf()
-  local stdin = uv.new_pipe(false)
-  local stdout = uv.new_pipe(false)
-  local stderr = uv.new_pipe(false)
 
-  -- luacheck: no unused
-  local handle, pid
-  handle, pid = uv.spawn("sh", {
-    stdio = {stdin, stdout, stderr};
-    cwd = cwd;
-  }, function()
-    stdin:close()
-    stdout:close()
-    stderr:close()
-    handle:close()
-    vim.schedule(function()
-      api.nvim_command("silent bwipeout! "..bufnr)
-    end)
-  end)
+  -- TODO: The on_exit callback needs to be a VimL function, so here's a quick
+  -- and dirty way of creating one with a hopefully unique name, so that
+  -- different runs of M.sh don't stomp on each other's callbacks (or some
+  -- other VimL functions for that matter). If it ever becomes possible to pass
+  -- Lua callbacks to termopen/jobstart, switch to a local Lua function closing
+  -- over bufnr as a much cleaner alternative.
+  -- See https://github.com/neovim/neovim/issues/7607
+  local viml_on_exit = "Nvim_lspUtilShOn_exit"..bufnr
+  api.nvim_command([[
+    function! ]]..viml_on_exit..[[(job_id, code, event_type)
+      if !a:code
+        silent bwipeout! ]]..bufnr..[[|
+      endif
+    endfunction
+  ]])
 
-  -- If the buffer closes, then kill our process.
-  api.nvim_buf_attach(bufnr, false, {
-    on_detach = function()
-      if not handle:is_closing() then
-        handle:kill(15)
-      end
-    end;
-  })
-
-  local output_buf = ''
-  local function update_chunk(err, chunk)
-    if chunk then
-      output_buf = output_buf..chunk
-      local lines = vim.split(output_buf, '\n', true)
-      api.nvim_buf_set_option(bufnr, "modifiable", true)
-      api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-      api.nvim_buf_set_option(bufnr, "modifiable", false)
-      api.nvim_buf_set_option(bufnr, "modified", false)
-      if api.nvim_win_is_valid(winnr) then
-        api.nvim_win_set_cursor(winnr, {#lines, 0})
-      end
-    end
-  end
-  update_chunk = vim.schedule_wrap(update_chunk)
-  stdout:read_start(update_chunk)
-  stderr:read_start(update_chunk)
-  stdin:write(script)
-  stdin:write("\n")
-  stdin:shutdown()
+  fn.termopen({"sh", "-c", script}, {cwd = cwd, on_exit = viml_on_exit})
 end
 
 function M.format_vspackage_url(extension_name)
