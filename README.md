@@ -4056,7 +4056,7 @@ require'nvim_lsp'.tsserver.setup{}
     cmd = { "typescript-language-server", "--stdio" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
     on_init = function to handle changing offsetEncoding
-    root_dir = root_pattern("package.json")
+    root_dir = root_pattern("package.json", "tsconfig.json", ".git")
 ```
 
 ## vimls
