@@ -14,7 +14,7 @@ configs[server_name] = {
   default_config = util.utf8_config {
     cmd = {bin_name, "--stdio"};
     filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"};
-    root_dir = util.root_pattern("package.json", ".git");
+    root_dir = util.root_pattern("package.json", "tsconfig.json", ".git");
   };
   on_new_config = function(new_config)
     local install_info = installer.info()
@@ -37,7 +37,7 @@ npm install -g typescript-language-server
 ```
 ]];
     default_config = {
-      root_dir = [[root_pattern("package.json", ".git")]];
+      root_dir = [[root_pattern("package.json", "tsconfig.json", ".git")]];
       on_init = [[function to handle changing offsetEncoding]];
       capabilities = [[default capabilities, with offsetEncoding utf-8]];
     };
