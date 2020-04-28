@@ -226,6 +226,7 @@ that config.
 - [codeqlls](#codeqlls)
 - [cssls](#cssls)
 - [dartls](#dartls)
+- [diagnosticls](#diagnosticls)
 - [dockerls](#dockerls)
 - [efm](#efm)
 - [elmls](#elmls)
@@ -1347,6 +1348,23 @@ require'nvim_lsp'.dartls.setup{}
       suggestFromUnimportedLibraries = "true"
     }
     root_dir = root_pattern("pubspec.yaml")
+```
+
+## diagnosticls
+
+https://github.com/iamcco/diagnostic-languageserver
+
+Diagnostic language server integrate with linters.
+
+Can be installed in Nvim with `:LspInstall diagnosticls`
+
+```lua
+require'nvim_lsp'.diagnosticls.setup{}
+
+  Default Values:
+    cmd = { "diagnostic-languageserver", "--stdio" }
+    filetypes = Empty by default, override to add filetypes
+    root_dir = Vim's starting directory
 ```
 
 ## dockerls
