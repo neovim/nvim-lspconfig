@@ -2258,7 +2258,7 @@ This will result in one executable script (unix) and one \*.bat which are used i
 
 <details><summary>Available settings:</summary>
 
-  - **`kotlin.languageServer.enabled`**: `boolean`
+- **`kotlin.languageServer.enabled`**: `boolean`
 
       default: `true`
 
