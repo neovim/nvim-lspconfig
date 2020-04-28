@@ -6,7 +6,6 @@
 --- 	https://github.com/udalov/kotlin-vim (recommended)
 --- 	Note that there is no LICENSE specified yet.
 
-local vim = vim	-- from global table
 local util = require 'nvim_lsp/util'
 local configs = require 'nvim_lsp/configs'
 
