@@ -10,7 +10,7 @@ local util = require 'nvim_lsp/util'
 local configs = require 'nvim_lsp/configs'
 
 configs.kotlin_language_server = {
-  default_config = util.utf8_config {
+  default_config = {
     filetypes = { "kotlin" };
     root_dir = util.root_pattern("settings.gradle");
   };
