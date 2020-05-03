@@ -896,7 +896,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to enable analysis for AngularDart templates (requires the angular_analyzer_plugin).
+  Whether to enable analysis for AngularDart templates (requires the Angular analyzer plugin to be enabled in analysis_options.yaml).
 
 - **`dart.analyzerAdditionalArgs`**: `array`
 
@@ -1031,6 +1031,12 @@ This server accepts configuration via the `settings` key.
   
   Whether to evaluate getters in order to display them in debug views (such as the Variables, Watch and Hovers views).
 
+- **`dart.evaluateToStringInDebugViews`**: `boolean`
+
+  Default: `true`
+  
+  Whether to call toString() on objects when rendering them in debug views (such as the Variables, Watch and Hovers views). Only applies to views of 15 or fewer values for performance reasons.
+
 - **`dart.extensionLogFile`**: `null|string`
 
   Default: `vim.NIL`
@@ -1074,6 +1080,14 @@ This server accepts configuration via the `settings` key.
   Default: `vim.NIL`
   
   The organization responsible for your new Flutter project, in reverse domain name notation. This string is used in Java package names and as prefix in the iOS bundle identifier when creating new projects using the 'Flutter: New Project' command.
+
+- **`dart.flutterCustomEmulators`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{properties = {args = {items = {type = "string"},type = "array"},executable = {type = "string"},id = {type = "string"},name = {type = "string"}},type = "object"}`
+  
+  Custom emulators to show in the emulator list for easier launching. If IDs match existing emulators returned by Flutter, the custom emulators will override them.
 
 - **`dart.flutterDaemonLogFile`**: `null|string`
 
@@ -1199,6 +1213,10 @@ This server accepts configuration via the `settings` key.
   
   When to automatically switch focus to the test list (array to support multiple values).
 
+- **`dart.previewBazelWorkspaceCustomScripts`**: `boolean`
+
+  EXPERIMENTAL: Whether to look for custom script definitions at dart/config/intellij-plugins/flutter.json in Bazel workspaces. Currently supported for macOS and Linux only.
+
 - **`dart.previewBuildRunnerTasks`**: `boolean`
 
   Whether to register Pub Build Runner tasks with VS Code.
@@ -1217,17 +1235,13 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.previewLsp`**: `boolean`
 
-  Whether to run the analyzer in LSP mode (experimental, requires restart).
+  EXPERIMENTAL: Whether to run the analyzer in LSP mode (requires restart).
 
 - **`dart.previewNewCompletionPlaceholders`**: `boolean`
 
   Default: `true`
   
   Whether to enable new behaviour for code completion to include @required arguments as placeholders (when using dart.insertArgumentPlaceholders).
-
-- **`dart.previewToStringInDebugViews`**: `boolean`
-
-  Whether to call toString() on objects when rendering them in debug views (such as the Variables, Watch and Hovers views). Only applies to views of 15 or fewer values for performance reasons.
 
 - **`dart.promptToGetPackages`**: `boolean`
 
@@ -1290,6 +1304,12 @@ This server accepts configuration via the `settings` key.
 - **`dart.showIgnoreQuickFixes`**: `boolean`
 
   Whether to show quick fixes for ignoring hints and lints.
+
+- **`dart.showMainCodeLens`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show CodeLens actions in the editor for quick running/debugging scripts with main methods.
 
 - **`dart.showTestCodeLens`**: `boolean`
 
@@ -1897,6 +1917,12 @@ require'nvim_lsp'.html.setup{}
           contextSupport = false,
           dynamicRegistration = false
         },
+        declaration = {
+          linkSupport = true
+        },
+        definition = {
+          linkSupport = true
+        },
         documentHighlight = {
           dynamicRegistration = false
         },
@@ -1910,6 +1936,9 @@ require'nvim_lsp'.html.setup{}
         hover = {
           contentFormat = { "markdown", "plaintext" },
           dynamicRegistration = false
+        },
+        implementation = {
+          linkSupport = true
         },
         references = {
           dynamicRegistration = false
@@ -1925,6 +1954,16 @@ require'nvim_lsp'.html.setup{}
           dynamicRegistration = false,
           willSave = false,
           willSaveWaitUntil = false
+        },
+        typeDefinition = {
+          linkSupport = true
+        },
+        workspaceSymbol = {
+          dynamicRegistration = false,
+          hierarchicalWorkspaceSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
         }
       }
     }
@@ -2032,6 +2071,12 @@ require'nvim_lsp'.jsonls.setup{}
           contextSupport = false,
           dynamicRegistration = false
         },
+        declaration = {
+          linkSupport = true
+        },
+        definition = {
+          linkSupport = true
+        },
         documentHighlight = {
           dynamicRegistration = false
         },
@@ -2045,6 +2090,9 @@ require'nvim_lsp'.jsonls.setup{}
         hover = {
           contentFormat = { "markdown", "plaintext" },
           dynamicRegistration = false
+        },
+        implementation = {
+          linkSupport = true
         },
         references = {
           dynamicRegistration = false
@@ -2060,6 +2108,16 @@ require'nvim_lsp'.jsonls.setup{}
           dynamicRegistration = false,
           willSave = false,
           willSaveWaitUntil = false
+        },
+        typeDefinition = {
+          linkSupport = true
+        },
+        workspaceSymbol = {
+          dynamicRegistration = false,
+          hierarchicalWorkspaceSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
         }
       }
     }
@@ -2266,132 +2324,109 @@ require'nvim_lsp'.julials.setup{}
 
 ## kotlin_language_server
 
-https://github.com/fwcd/kotlin-language-server
+    A kotlin language server which was developed for internal usage and
+    released afterwards. Maintaining is not done by the original author,
+    but by fwcd.
 
-Kotlin Language Server.
-Requirements:
-  * java 8+ on path
-  * (optional) kotlinc on path for gradle-less projects
-  * `kotlin`-filetype support for vim.
-
-Simply follow the build instructions from the source, summarized:
-
-```bash
-git clone && cd
-./gradlew :server:installDist
-```
-
-Gradle will download itself and all dependencies. 
-Output to start the server is a script (unix or \*.bat), located at:
-`/path/to/git/of/kotlin-language-server/server/build/install/server/bin/`
-
-This will result in one executable script (unix) and one \*.bat which are used in the configuration below.
-
+    It is builded via gradle and developed on github.
+    Source and additional description:
+    https://github.com/fwcd/kotlin-language-server
+    
+This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`kotlin.languageServer.enabled`**: `boolean`
-
-      default: `true`
-
-      description: `[Recommended] Specifies whether the language server should be used. When enabled the extension will provide code completions and linting, otherwise just syntax highlighting. Might require a reload to apply.`
-
-- **`kotlin.languageServer.path`**: `string`
-
-      default: `""`
-
-      description: `Optionally a custom path to the language server executable.`
-
-- **`kotlin.languageServer.transport`**: `string`
-
-      default: `stdio`
-
-      enum: [`stdio`, `tcp`],
-      description: `The transport layer beneath the language server protocol. Note that the extension will launch the server even if a TCP socket is used.`,
-
-- **`kotlin.languageServer.port`**: `integer`
-
-      default: ``
-
-      description: `The port to which the client will attempt to connect to. A random port is used if zero. Only used if the transport layer is TCP.`,
-
-- **`kotlin.trace.server`**: `string`
-
-      default: `"off"`
-
-      enum: [
-          `off`,
-      `messages`,
-      `verbose`
-      ],
-      description: `Traces the communication between VSCode and the Kotlin language server.`,
-      scope: `window`
-
 - **`kotlin.compiler.jvm.target`**: `string`
-      
-      default: `"default"`
 
-      description: `Specifies the JVM target, e.g. \`1.6\` or \`1.8\``
-
-- **`kotlin.linting.debounceTime`**: `integer`
-
-      default: `250`
-
-      description: `[DEBUG] Specifies the debounce time limit. Lower to increase responsiveness at the cost of possibile stability issues.`
+  Default: `"default"`
+  
+  Specifies the JVM target, e.g. "1.6" or "1.8"
 
 - **`kotlin.completion.snippets.enabled`**: `boolean`
 
-      default: `true`
-
-      description: `Specifies whether code completion should provide snippets (true) or plain-text items (false).`
-
-- **`kotlin.debugAdapter.enabled`**: `boolean`
-
-      default: `true`
-
-      description: `[Recommended] Specifies whether the debug adapter should be used. When enabled a debugger for Kotlin will be available.`
-
-- **`kotlin.debugAdapter.path`**: `string`
-
-      default: `""`
-
-      description: `Optionally a custom path to the debug adapter executable.`
+  Default: `true`
+  
+  Specifies whether code completion should provide snippets (true) or plain-text items (false).
 
 - **`kotlin.debounceTime`**: `integer`
 
-      default: `250`
+  Default: `250`
+  
+  [DEPRECATED] Specifies the debounce time limit. Lower to increase responsiveness at the cost of possibile stability issues.
 
-      description: `[DEPRECATED] Specifies the debounce time limit. Lower to increase responsiveness at the cost of possibile stability issues.`,
-      deprecationMessage: `Use 'kotlin.linting.debounceTime' instead`
+- **`kotlin.debugAdapter.enabled`**: `boolean`
 
-- **`kotlin.externalSources.useKlsScheme`**: `boolean`
+  Default: `true`
+  
+  [Recommended] Specifies whether the debug adapter should be used. When enabled a debugger for Kotlin will be available.
 
-      default: `true`
+- **`kotlin.debugAdapter.path`**: `string`
 
-      description: `[Recommended] Specifies whether URIs inside JARs should be represented using the 'kls'-scheme.`
+  Default: `""`
+  
+  Optionally a custom path to the debug adapter executable.
 
 - **`kotlin.externalSources.autoConvertToKotlin`**: `boolean`
 
-      default: `true`
+  Default: `true`
+  
+  Specifies whether decompiled/external classes should be auto-converted to Kotlin.
 
-      description: `Specifies whether decompiled/external classes should be auto-converted to Kotlin.`
+- **`kotlin.externalSources.useKlsScheme`**: `boolean`
+
+  Default: `true`
+  
+  [Recommended] Specifies whether URIs inside JARs should be represented using the 'kls'-scheme.
+
+- **`kotlin.languageServer.enabled`**: `boolean`
+
+  Default: `true`
+  
+  [Recommended] Specifies whether the language server should be used. When enabled the extension will provide code completions and linting, otherwise just syntax highlighting. Might require a reload to apply.
+
+- **`kotlin.languageServer.path`**: `string`
+
+  Default: `""`
+  
+  Optionally a custom path to the language server executable.
+
+- **`kotlin.languageServer.port`**: `integer`
+
+  Default: `0`
+  
+  The port to which the client will attempt to connect to. A random port is used if zero. Only used if the transport layer is TCP.
+
+- **`kotlin.languageServer.transport`**: `enum { "stdio", "tcp" }`
+
+  Default: `"stdio"`
+  
+  The transport layer beneath the language server protocol. Note that the extension will launch the server even if a TCP socket is used.
+
+- **`kotlin.linting.debounceTime`**: `integer`
+
+  Default: `250`
+  
+  [DEBUG] Specifies the debounce time limit. Lower to increase responsiveness at the cost of possibile stability issues.
 
 - **`kotlin.snippetsEnabled`**: `boolean`
 
-      default: `true`
+  Default: `true`
+  
+  [DEPRECATED] Specifies whether code completion should provide snippets (true) or plain-text items (false).
 
-      description: `[DEPRECATED] Specifies whether code completion should provide snippets (true) or plain-text items (false).`,
-      deprecationMessage: `Use 'kotlin.completion.snippets.enabled'`
+- **`kotlin.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VSCode and the Kotlin language server.
 
 </details>
 
-configuration:
-
 ```lua
-require 'nvim_lsp'.kotlin_language_server.setup {
-  -- Default Values:
-	cmd = { "/path/to/git/of/kotlin-language-server/" .. "server/build/install/server/bin/kotlin-language-server" }; -- startup script
-};
+require'nvim_lsp'.kotlin_language_server.setup{}
 
+  Default Values:
+    filetypes = { "kotlin" }
+    root_dir = root_pattern("settings.gradle")
 ```
 
 ## leanls
@@ -2957,6 +2992,12 @@ require'nvim_lsp'.purescriptls.setup{}
           contextSupport = false,
           dynamicRegistration = false
         },
+        declaration = {
+          linkSupport = true
+        },
+        definition = {
+          linkSupport = true
+        },
         documentHighlight = {
           dynamicRegistration = false
         },
@@ -2970,6 +3011,9 @@ require'nvim_lsp'.purescriptls.setup{}
         hover = {
           contentFormat = { "markdown", "plaintext" },
           dynamicRegistration = false
+        },
+        implementation = {
+          linkSupport = true
         },
         references = {
           dynamicRegistration = false
@@ -2985,6 +3029,16 @@ require'nvim_lsp'.purescriptls.setup{}
           dynamicRegistration = false,
           willSave = false,
           willSaveWaitUntil = false
+        },
+        typeDefinition = {
+          linkSupport = true
+        },
+        workspaceSymbol = {
+          dynamicRegistration = false,
+          hierarchicalWorkspaceSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
         }
       }
     }
@@ -3627,6 +3681,18 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
 
+- **`rust-analyzer.debug.engine`**: `enum { "auto", "vadimcn.vscode-lldb", "ms-vscode.cpptools" }`
+
+  Default: `"auto"`
+  
+  Preffered debug engine.
+
+- **`rust-analyzer.debug.sourceFileMap`**: `object`
+
+  Default: `{["/rustc/<id>"] = "${env:USERPROFILE}/.rustup/toolchains/<toolchain-id>/lib/rustlib/src/rust"}`
+  
+  Optional source file mappings passed to the debug engine.
+
 - **`rust-analyzer.diagnostics.enable`**: `boolean`
 
   Default: `true`
@@ -3676,10 +3742,6 @@ This server accepts configuration via the `settings` key.
   Number of syntax trees rust-analyzer keeps in memory.
 
 - **`rust-analyzer.notifications.cargoTomlNotFound`**: `boolean`
-
-  Default: `true`
-
-- **`rust-analyzer.notifications.workspaceLoaded`**: `boolean`
 
   Default: `true`
 
@@ -3750,6 +3812,12 @@ require'nvim_lsp'.rust_analyzer.setup{}
           contextSupport = false,
           dynamicRegistration = false
         },
+        declaration = {
+          linkSupport = true
+        },
+        definition = {
+          linkSupport = true
+        },
         documentHighlight = {
           dynamicRegistration = false
         },
@@ -3763,6 +3831,9 @@ require'nvim_lsp'.rust_analyzer.setup{}
         hover = {
           contentFormat = { "markdown", "plaintext" },
           dynamicRegistration = false
+        },
+        implementation = {
+          linkSupport = true
         },
         references = {
           dynamicRegistration = false
@@ -3778,6 +3849,16 @@ require'nvim_lsp'.rust_analyzer.setup{}
           dynamicRegistration = false,
           willSave = false,
           willSaveWaitUntil = false
+        },
+        typeDefinition = {
+          linkSupport = true
+        },
+        workspaceSymbol = {
+          dynamicRegistration = false,
+          hierarchicalWorkspaceSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
         }
       }
     }
@@ -4595,6 +4676,12 @@ require'nvim_lsp'.yamlls.setup{}
           contextSupport = false,
           dynamicRegistration = false
         },
+        declaration = {
+          linkSupport = true
+        },
+        definition = {
+          linkSupport = true
+        },
         documentHighlight = {
           dynamicRegistration = false
         },
@@ -4608,6 +4695,9 @@ require'nvim_lsp'.yamlls.setup{}
         hover = {
           contentFormat = { "markdown", "plaintext" },
           dynamicRegistration = false
+        },
+        implementation = {
+          linkSupport = true
         },
         references = {
           dynamicRegistration = false
@@ -4623,6 +4713,16 @@ require'nvim_lsp'.yamlls.setup{}
           dynamicRegistration = false,
           willSave = false,
           willSaveWaitUntil = false
+        },
+        typeDefinition = {
+          linkSupport = true
+        },
+        workspaceSymbol = {
+          dynamicRegistration = false,
+          hierarchicalWorkspaceSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
         }
       }
     }
