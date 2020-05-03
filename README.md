@@ -240,6 +240,7 @@ that config.
 - [intelephense](#intelephense)
 - [jsonls](#jsonls)
 - [julials](#julials)
+- [kotlin_language_server](#kotlin_language_server)
 - [leanls](#leanls)
 - [metals](#metals)
 - [nimls](#nimls)
@@ -2261,6 +2262,136 @@ require'nvim_lsp'.julials.setup{}
     cmd = { "julia", "--project", "--startup-file=no", "--history-file=no", "-e", "        using LanguageServer;\n        using Pkg;\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, false, dirname(Pkg.Types.Context().env.project_file));\n        server.runlinter = true; run(server);\n        " }
     filetypes = { "julia" }
     root_dir = <function 1>
+```
+
+## kotlin_language_server
+
+https://github.com/fwcd/kotlin-language-server
+
+Kotlin Language Server.
+Requirements:
+  * java 8+ on path
+  * (optional) kotlinc on path for gradle-less projects
+  * `kotlin`-filetype support for vim.
+
+Simply follow the build instructions from the source, summarized:
+
+```bash
+git clone && cd
+./gradlew :server:installDist
+```
+
+Gradle will download itself and all dependencies. 
+Output to start the server is a script (unix or \*.bat), located at:
+`/path/to/git/of/kotlin-language-server/server/build/install/server/bin/`
+
+This will result in one executable script (unix) and one \*.bat which are used in the configuration below.
+
+<details><summary>Available settings:</summary>
+
+- **`kotlin.languageServer.enabled`**: `boolean`
+
+      default: `true`
+
+      description: `[Recommended] Specifies whether the language server should be used. When enabled the extension will provide code completions and linting, otherwise just syntax highlighting. Might require a reload to apply.`
+
+- **`kotlin.languageServer.path`**: `string`
+
+      default: `""`
+
+      description: `Optionally a custom path to the language server executable.`
+
+- **`kotlin.languageServer.transport`**: `string`
+
+      default: `stdio`
+
+      enum: [`stdio`, `tcp`],
+      description: `The transport layer beneath the language server protocol. Note that the extension will launch the server even if a TCP socket is used.`,
+
+- **`kotlin.languageServer.port`**: `integer`
+
+      default: ``
+
+      description: `The port to which the client will attempt to connect to. A random port is used if zero. Only used if the transport layer is TCP.`,
+
+- **`kotlin.trace.server`**: `string`
+
+      default: `"off"`
+
+      enum: [
+          `off`,
+      `messages`,
+      `verbose`
+      ],
+      description: `Traces the communication between VSCode and the Kotlin language server.`,
+      scope: `window`
+
+- **`kotlin.compiler.jvm.target`**: `string`
+      
+      default: `"default"`
+
+      description: `Specifies the JVM target, e.g. \`1.6\` or \`1.8\``
+
+- **`kotlin.linting.debounceTime`**: `integer`
+
+      default: `250`
+
+      description: `[DEBUG] Specifies the debounce time limit. Lower to increase responsiveness at the cost of possibile stability issues.`
+
+- **`kotlin.completion.snippets.enabled`**: `boolean`
+
+      default: `true`
+
+      description: `Specifies whether code completion should provide snippets (true) or plain-text items (false).`
+
+- **`kotlin.debugAdapter.enabled`**: `boolean`
+
+      default: `true`
+
+      description: `[Recommended] Specifies whether the debug adapter should be used. When enabled a debugger for Kotlin will be available.`
+
+- **`kotlin.debugAdapter.path`**: `string`
+
+      default: `""`
+
+      description: `Optionally a custom path to the debug adapter executable.`
+
+- **`kotlin.debounceTime`**: `integer`
+
+      default: `250`
+
+      description: `[DEPRECATED] Specifies the debounce time limit. Lower to increase responsiveness at the cost of possibile stability issues.`,
+      deprecationMessage: `Use 'kotlin.linting.debounceTime' instead`
+
+- **`kotlin.externalSources.useKlsScheme`**: `boolean`
+
+      default: `true`
+
+      description: `[Recommended] Specifies whether URIs inside JARs should be represented using the 'kls'-scheme.`
+
+- **`kotlin.externalSources.autoConvertToKotlin`**: `boolean`
+
+      default: `true`
+
+      description: `Specifies whether decompiled/external classes should be auto-converted to Kotlin.`
+
+- **`kotlin.snippetsEnabled`**: `boolean`
+
+      default: `true`
+
+      description: `[DEPRECATED] Specifies whether code completion should provide snippets (true) or plain-text items (false).`,
+      deprecationMessage: `Use 'kotlin.completion.snippets.enabled'`
+
+</details>
+
+configuration:
+
+```lua
+require 'nvim_lsp'.kotlin_language_server.setup {
+  -- Default Values:
+	cmd = { "/path/to/git/of/kotlin-language-server/" .. "server/build/install/server/bin/kotlin-language-server" }; -- startup script
+};
+
 ```
 
 ## leanls
