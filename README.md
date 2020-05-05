@@ -2636,12 +2636,10 @@ This server accepts configuration via the `settings` key.
 
 - **`metals.serverVersion`**: `string`
 
-  Default: `"0.8.4"`
+  Default: `"0.9.0"`
 
 - **`metals.superMethodLensesEnabled`**: `boolean`
 
-  Default: `true`
-  
   Enable/disable goto super method code lens.
 
 </details>
