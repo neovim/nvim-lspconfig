@@ -1959,8 +1959,10 @@ require'nvim_lsp'.html.setup{}
         },
         typeDefinition = {
           linkSupport = true
-        },
-        workspaceSymbol = {
+        }
+      },
+      workspace = {
+        symbol = {
           dynamicRegistration = false,
           hierarchicalWorkspaceSymbolSupport = true,
           symbolKind = {
@@ -2113,8 +2115,10 @@ require'nvim_lsp'.jsonls.setup{}
         },
         typeDefinition = {
           linkSupport = true
-        },
-        workspaceSymbol = {
+        }
+      },
+      workspace = {
+        symbol = {
           dynamicRegistration = false,
           hierarchicalWorkspaceSymbolSupport = true,
           symbolKind = {
@@ -2444,7 +2448,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"lean"`
   
-  Path to the Lean executable to use.
+  Path to the Lean executable to use. DO NOT CHANGE from the default `lean` unless you know what you're doing!
 
 - **`lean.extraOptions`**: `array`
 
@@ -2528,7 +2532,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"leanpkg"`
   
-  Path to the leanpkg executable to use.
+  Path to the leanpkg executable to use. DO NOT CHANGE from the default `leanpkg` unless you know what you're doing!
 
 - **`lean.memoryLimit`**: `number`
 
@@ -3034,8 +3038,10 @@ require'nvim_lsp'.purescriptls.setup{}
         },
         typeDefinition = {
           linkSupport = true
-        },
-        workspaceSymbol = {
+        }
+      },
+      workspace = {
+        symbol = {
           dynamicRegistration = false,
           hierarchicalWorkspaceSymbolSupport = true,
           symbolKind = {
@@ -3854,8 +3860,10 @@ require'nvim_lsp'.rust_analyzer.setup{}
         },
         typeDefinition = {
           linkSupport = true
-        },
-        workspaceSymbol = {
+        }
+      },
+      workspace = {
+        symbol = {
           dynamicRegistration = false,
           hierarchicalWorkspaceSymbolSupport = true,
           symbolKind = {
@@ -4718,8 +4726,10 @@ require'nvim_lsp'.yamlls.setup{}
         },
         typeDefinition = {
           linkSupport = true
-        },
-        workspaceSymbol = {
+        }
+      },
+      workspace = {
+        symbol = {
           dynamicRegistration = false,
           hierarchicalWorkspaceSymbolSupport = true,
           symbolKind = {
