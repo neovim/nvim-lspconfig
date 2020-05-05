@@ -2,6 +2,8 @@
 
 Collection of common configurations for the [Nvim LSP client](https://neovim.io/doc/user/lsp.html).
 
+**Note:** `nvim-lsp` is unrelated to [vim-lsp](https://github.com/prabirshrestha/vim-lsp).
+
 It is hoped that these configurations serve as a "source of truth", but they
 are strictly _best effort_. If something doesn't work, these configs are useful
 as a starting point, which you can adjust to fit your environment.
