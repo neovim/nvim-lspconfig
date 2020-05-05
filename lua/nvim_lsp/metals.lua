@@ -67,21 +67,9 @@ configs[server_name] = {
     message_level = vim.lsp.protocol.MessageType.Log;
     init_options = {
         statusBarProvider = "show-message",
-        didFocusProvider = false,
-        slowTaskProvider = false,
-        inputBoxProvider = false,
-        quickPickProvider = false,
-        executeClientCommandProvider = false,
-        doctorProvider = "html",
-        isExitOnShutdown = false,
         isHttpEnabled = true,
         compilerOptions = {
-          isCompletionItemDetailEnabled = true,
-          isCompletionItemDocumentationEnabled = true,
-          isHoverDocumentationEnabled = true,
-          snippetAutoIndent = false,
-          isSignatureHelpDocumentationEnabled = true,
-          isCompletionItemResolve = true
+          snippetAutoIndent = false
         }
       };
   };
