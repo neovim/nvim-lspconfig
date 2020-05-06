@@ -2652,21 +2652,9 @@ require'nvim_lsp'.metals.setup{}
     filetypes = { "scala" }
     init_options = {
       compilerOptions = {
-        isCompletionItemDetailEnabled = true,
-        isCompletionItemDocumentationEnabled = true,
-        isCompletionItemResolve = true,
-        isHoverDocumentationEnabled = true,
-        isSignatureHelpDocumentationEnabled = true,
         snippetAutoIndent = false
       },
-      didFocusProvider = false,
-      doctorProvider = "html",
-      executeClientCommandProvider = false,
-      inputBoxProvider = false,
-      isExitOnShutdown = false,
       isHttpEnabled = true,
-      quickPickProvider = false,
-      slowTaskProvider = false,
       statusBarProvider = "show-message"
     }
     message_level = 4
@@ -3646,6 +3634,16 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.cargo.noDefaultFeatures`**: `boolean`
 
   
+
+- **`rust-analyzer.cargo.target`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  Specify the compilation target
+
+- **`rust-analyzer.checkOnSave.allFeatures`**: `boolean`
+
+  Default: `true`
 
 - **`rust-analyzer.checkOnSave.allTargets`**: `boolean`
 
