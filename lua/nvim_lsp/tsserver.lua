@@ -3,6 +3,9 @@ local util = require 'nvim_lsp/util'
 
 local server_name = "tsserver"
 local bin_name = "typescript-language-server"
+if vim.fn.has('win32') then
+  bin_name = bin_name..".cmd"
+end
 
 local installer = util.npm_installer {
   server_name = server_name;
