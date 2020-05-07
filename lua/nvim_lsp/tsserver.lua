@@ -3,7 +3,7 @@ local util = require 'nvim_lsp/util'
 
 local server_name = "tsserver"
 local bin_name = "typescript-language-server"
-if vim.fn.has('win32') then
+if vim.fn.has('win32') == 1 then
   bin_name = bin_name..".cmd"
 end
 
