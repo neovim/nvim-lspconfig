@@ -50,7 +50,7 @@ local install_info = function()
   local status = not l:match("FALSE")
 
   return {
-    version = get_r_version(),
+    r_version = get_r_version(),
     is_installed = status,
   }
 end
