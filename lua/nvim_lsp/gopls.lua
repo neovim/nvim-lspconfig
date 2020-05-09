@@ -4,7 +4,7 @@ local util = require 'nvim_lsp/util'
 configs.gopls = {
   default_config = {
     cmd = {"gopls"};
-    filetypes = {"go"};
+    filetypes = {"go", "gomod"};
     root_dir = util.root_pattern("go.mod", ".git");
   };
   -- on_new_config = function(new_config) end;
