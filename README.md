@@ -1758,7 +1758,7 @@ require'nvim_lsp'.gopls.setup{}
 
   Default Values:
     cmd = { "gopls" }
-    filetypes = { "go" }
+    filetypes = { "go", "gomod" }
     root_dir = root_pattern("go.mod", ".git")
 ```
 
@@ -1820,6 +1820,12 @@ This server accepts configuration via the `settings` key.
   
   Set the path to your hie executable, if it's not already on your $PATH. Works with ~, ${HOME} and ${workspaceFolder}.
 
+- **`languageServerHaskell.hieVariant`**: `enum { "haskell-ide-engine", "haskell-language-server", "ghcide" }`
+
+  Default: `"haskell-ide-engine"`
+  
+  Which haskell language server to use.
+
 - **`languageServerHaskell.hlintOn`**: `boolean`
 
   Default: `true`
@@ -1842,10 +1848,6 @@ This server accepts configuration via the `settings` key.
   
   Controls the maximum number of problems produced by the server.
 
-- **`languageServerHaskell.noLspParam`**: `boolean`
-
-  Do not set the '--lsp' flag in the hie/hie-wrapper arguments when launching it
-
 - **`languageServerHaskell.showTypeForSelection.command.location`**: `enum { "dropdown", "channel" }`
 
   Default: `"dropdown"`
@@ -1860,21 +1862,11 @@ This server accepts configuration via the `settings` key.
   
   If true, when an expression is selected, the hover tooltip will attempt to display the type of the entire expression - rather than just the term under the cursor.
 
-- **`languageServerHaskell.trace.server`**: `enum { "off", "messages", "verbose" }`
+- **`languageServerHaskell.trace.server`**: `enum { "off", "messages" }`
 
   Default: `"off"`
   
   Traces the communication between VSCode and the languageServerHaskell service.
-
-- **`languageServerHaskell.useCustomHieWrapper`**: `boolean`
-
-  Use your own custom wrapper for hie (remember to specify the path!). This will take precedence over useHieWrapper and hieExecutablePath.
-
-- **`languageServerHaskell.useCustomHieWrapperPath`**: `string`
-
-  Default: `""`
-  
-  Specify the full path to your own custom hie wrapper (e.g. ${HOME}/.hie-wrapper.sh). Works with ~, ${HOME} and ${workspaceFolder}.
 
 </details>
 
@@ -2039,6 +2031,12 @@ This server accepts configuration via the `settings` key.
   Default: `5000`
   
   %json.maxItemsComputed.desc%
+
+- **`json.schemaDownload.enable`**: `boolean`
+
+  Default: `true`
+  
+  %json.enableSchemaDownload.desc%
 
 - **`json.schemas`**: `array`
 
@@ -3438,11 +3436,7 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-client.updateOnStartup`**: `boolean`
 
-  Update the RLS whenever the extension starts up.
-
-- **`rust-client.useWSL`**: `boolean`
-
-  When set to true, RLS is started within Windows Subsystem for Linux.
+  Update the Rust toolchain and its required components whenever the extension starts up.
 
 - **`rust.all_features`**: `boolean`
 
@@ -3689,7 +3683,18 @@ This server accepts configuration via the `settings` key.
 
   Default: `"auto"`
   
-  Preffered debug engine.
+  Preferred debug engine.
+
+- **`rust-analyzer.debug.engineSettings`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  Optional settings passed to the debug engine. Example:
+  { "lldb": { "terminal":"external"} }
+
+- **`rust-analyzer.debug.openDebugPane`**: `boolean`
+
+  Whether to open up the Debug Pane on debugging start.
 
 - **`rust-analyzer.debug.sourceFileMap`**: `object`
 
@@ -3720,6 +3725,12 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Whether to show inlay type hints for method chains
+
+- **`rust-analyzer.inlayHints.enable`**: `boolean`
+
+  Default: `true`
+  
+  Disable all inlay hints
 
 - **`rust-analyzer.inlayHints.maxLength`**: `null|integer`
 
