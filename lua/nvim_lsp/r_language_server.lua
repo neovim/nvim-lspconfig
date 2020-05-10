@@ -30,8 +30,10 @@ configs.r_language_server = {
 
 
 local install = function()
-  local f = io.popen([[Rscript -e "install.packages('languageserver')"]])
-  f:close()
+  if not install_info().is_installed then
+    local f = io.popen([[Rscript -e "install.packages('languageserver', lib=Sys.getenv('R_LIBS_USER'))"]])
+    f:close()
+  end
 end
 
 local get_r_version = function()
