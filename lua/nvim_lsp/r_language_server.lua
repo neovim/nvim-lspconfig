@@ -30,13 +30,6 @@ configs.r_language_server = {
 }
 
 
-local install = function()
-  if not install_info().is_installed then
-    local f = io.popen([[Rscript -e "install.packages('languageserver', lib=Sys.getenv('R_LIBS_USER'))"]])
-    f:close()
-  end
-end
-
 local get_r_version = function()
   local f = io.popen([[R --version]])
   local version = f:read("*a"):match("[0-9.]+")
@@ -56,6 +49,13 @@ local install_info = function()
     r_version = get_r_version(),
     is_installed = status,
   }
+end
+
+local install = function()
+  if not install_info().is_installed then
+    local f = io.popen([[Rscript -e "install.packages('languageserver', lib=Sys.getenv('R_LIBS_USER'))"]])
+    f:close()
+  end
 end
 
 configs.r_language_server.install = install
