@@ -51,9 +51,18 @@ local install_info = function()
   }
 end
 
+local create_install_dir = function()
+  local script = [[Rscript -e "dir.create(Sys.getenv('R_LIBS_USER'), recursive=T)"]]
+  local f = io.popen(script)
+  f:close()
+end
+
 local install = function()
   if not install_info().is_installed then
-    local f = io.popen([[Rscript -e "install.packages('languageserver', lib=Sys.getenv('R_LIBS_USER'))"]])
+    create_install_dir()
+
+    local script = [[Rscript -e "install.packages('languageserver', lib=Sys.getenv('R_LIBS_USER'))"]]
+    local f = io.popen(script)
     f:close()
   end
 end
