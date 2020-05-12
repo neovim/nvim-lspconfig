@@ -61,7 +61,7 @@ local install = function()
   if not install_info().is_installed then
     create_install_dir()
 
-    local script = [[Rscript -e "install.packages('languageserver', lib=Sys.getenv('R_LIBS_USER'))"]]
+    local script = [[Rscript -e "install.packages('languageserver', lib=Sys.getenv('R_LIBS_USER'), repos='https://cloud.r-project.org')"]]
     local f = io.popen(script)
     f:close()
   end
