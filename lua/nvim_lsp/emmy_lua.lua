@@ -68,9 +68,9 @@ configs[name] = {
   -- on_attach = function(client, bufnr) end;
   docs = {
     description = [[
-https://github.com/nix-community/rnix-lsp
+https://github.com/EmmyLua/EmmyLua-LanguageServer
 
-A language server for Nix providing basic completion and formatting via nixpkgs-fmt.
+A language server for lua. 
 
 This server accepts configuration via the `settings` key.
 
