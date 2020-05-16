@@ -4239,7 +4239,7 @@ require'nvim_lsp'.terraformls.setup{}
   Default Values:
     cmd = { "terraform-lsp" }
     filetypes = { "terraform" }
-    root_dir = root_pattern(".git")
+    root_dir = root_pattern(".terraform", ".git")
 ```
 
 ## texlab
