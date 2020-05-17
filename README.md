@@ -1954,6 +1954,7 @@ require'nvim_lsp'.html.setup{}
         }
       },
       workspace = {
+        applyEdit = true,
         symbol = {
           dynamicRegistration = false,
           hierarchicalWorkspaceSymbolSupport = true,
@@ -2116,6 +2117,7 @@ require'nvim_lsp'.jsonls.setup{}
         }
       },
       workspace = {
+        applyEdit = true,
         symbol = {
           dynamicRegistration = false,
           hierarchicalWorkspaceSymbolSupport = true,
@@ -2241,19 +2243,27 @@ This server accepts configuration via the `settings` key.
 
 - **`julia.lint.call`**: `boolean`
 
-  Check calls against existing methods. (experimental)
+  Default: `true`
+  
+  This compares  call signatures against all known methods for the called function. Calls with too many or too few arguments, or unknown keyword parameters are highlighted.
 
 - **`julia.lint.constif`**: `boolean`
 
   Default: `true`
   
-  Check for constant conditionals of if statements.
+  Check for constant conditionals in if statements that result in branches never being reached..
+
+- **`julia.lint.datadecl`**: `boolean`
+
+  Default: `true`
+  
+  Check variables used in type declarations are datatypes.
 
 - **`julia.lint.iter`**: `boolean`
 
   Default: `true`
   
-  Check iterator syntax of loops.
+  Check iterator syntax of loops. Will identify, for example, attempts to iterate over single values.
 
 - **`julia.lint.lazy`**: `boolean`
 
@@ -2261,23 +2271,29 @@ This server accepts configuration via the `settings` key.
   
   Check for deterministic lazy boolean operators.
 
-- **`julia.lint.missingrefs`**: `boolean`
+- **`julia.lint.missingrefs`**: `enum { "none", "symbols", "all" }`
 
-  Default: `true`
+  Default: `"all"`
   
-  Report possibly missing references.
+  Highlight unknown symbols. The `symbols` option will not mark unknown fields.
 
 - **`julia.lint.modname`**: `boolean`
 
   Default: `true`
   
-  Check for invalid submodule names.
+  Check submodule names do not shadow their parent's name.
+
+- **`julia.lint.nothingcomp`**: `boolean`
+
+  Default: `true`
+  
+  Check for use of `==` rather than `===` when comparing against `nothing`. 
 
 - **`julia.lint.pirates`**: `boolean`
 
   Default: `true`
   
-  Check for type piracy.
+  Check for type piracy - the overloading of external functions with methods specified for external datatypes. 'External' here refers to imported code.
 
 - **`julia.lint.run`**: `boolean`
 
@@ -2289,7 +2305,13 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Check for unused DataType parameters.
+  Check parameters declared in `where` statements or datatype declarations are used.
+
+- **`julia.lint.useoffuncargs`**: `boolean`
+
+  Default: `true`
+  
+  Check that all declared arguments are used within the function body.
 
 - **`julia.trace.server`**: `enum { "off", "messages", "verbose" }`
 
@@ -3025,6 +3047,7 @@ require'nvim_lsp'.purescriptls.setup{}
         }
       },
       workspace = {
+        applyEdit = true,
         symbol = {
           dynamicRegistration = false,
           hierarchicalWorkspaceSymbolSupport = true,
@@ -3080,6 +3103,10 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Enable or disable the plugin.
+
+- **`pyls.plugins.jedi_completion.fuzzy`**: `boolean`
+
+  Enable fuzzy when requesting autocomplete.
 
 - **`pyls.plugins.jedi_completion.include_params`**: `boolean`
 
@@ -3406,6 +3433,12 @@ This server accepts configuration via the `settings` key.
   
   Allow multiple projects in the same folder, along with removing the constraint that the cargo.toml must be located at the root. (Experimental: might not work for certain setups)
 
+- **`rust-client.engine`**: `enum { "rls", "rust-analyzer" }`
+
+  Default: `"rls"`
+  
+  The underlying LSP server used to provide IDE support for Rust projects.
+
 - **`rust-client.logToFile`**: `boolean`
 
   When set to true, RLS stderr is logged to a file at workspace root level. Requires reloading extension after change.
@@ -3526,6 +3559,24 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Enables code completion using racer.
+
+- **`rust.rust-analyzer`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  Settings passed down to rust-analyzer server
+
+- **`rust.rust-analyzer.path`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  When specified, uses the rust-analyzer binary at a given path
+
+- **`rust.rust-analyzer.releaseTag`**: `string`
+
+  Default: `"nightly"`
+  
+  Which binary release to download and use
 
 - **`rust.rustflags`**: `string|null`
 
@@ -3870,6 +3921,7 @@ require'nvim_lsp'.rust_analyzer.setup{}
         }
       },
       workspace = {
+        applyEdit = true,
         symbol = {
           dynamicRegistration = false,
           hierarchicalWorkspaceSymbolSupport = true,
@@ -4073,6 +4125,10 @@ If you install via our installer, if you execute `:LspInstallInfo sumneko_lua`, 
 Can be installed in Nvim with `:LspInstall sumneko_lua`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
+
+- **`Lua.color.mode`**: `enum { "Grammar", "Semantic" }`
+
+  Default: `"Semantic"`
 
 - **`Lua.completion.callSnippet`**: `enum { "Disable", "Both", "Replace" }`
 
@@ -4736,6 +4792,7 @@ require'nvim_lsp'.yamlls.setup{}
         }
       },
       workspace = {
+        applyEdit = true,
         symbol = {
           dynamicRegistration = false,
           hierarchicalWorkspaceSymbolSupport = true,
