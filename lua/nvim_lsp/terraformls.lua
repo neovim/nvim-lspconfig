@@ -5,7 +5,7 @@ configs.terraformls = {
   default_config = {
     cmd = {"terraform-lsp"};
     filetypes = {"terraform"};
-    root_dir = util.root_pattern(".git");
+    root_dir = util.root_pattern(".terraform", ".git");
   };
   docs = {
     vscode = "mauve.terraform";
@@ -16,7 +16,7 @@ Terraform language server
 You can use [released binary](https://github.com/juliosueiras/terraform-lsp/releases) or [build](https://github.com/juliosueiras/terraform-lsp#building) your own.
 ]];
     default_config = {
-      root_dir = [[root_pattern(".git")]];
+      root_dir = [[root_pattern(".terraform", ".git")]];
     };
   };
 }
