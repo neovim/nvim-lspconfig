@@ -8,7 +8,7 @@ local function make_installer()
   local install_dir = P{util.base_install_dir, name}
 
   local bin = P{install_dir, "EmmyLua-LS-all.jar"}
-  local cmd = {"java -cp " .. bin .. " com.tang.vscode.MainKt"}
+  local cmd = {"java", "-cp", bin, "com.tang.vscode.MainKt"}
 
   local X = {}
   function X.install()
