@@ -34,11 +34,10 @@ local function make_installer()
 
         local script = [=[
             set -e
-            bin_name=]=] .. bin_name .. '\n' ..  [=[
 
             # clone project
-            git clone https://github.com/elixir-lsp/$bin_name
-            cd $bin_name
+            git clone https://github.com/elixir-lsp/elixir-ls
+            cd elixir-ls
             
             # fetch dependencies and compile
             mix deps.get && mix compile
