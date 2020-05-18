@@ -1892,14 +1892,6 @@ require'nvim_lsp'.html.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
-        codeAction = {
-          codeActionLiteralSupport = {
-            codeActionKind = {
-              valueSet = {}
-            }
-          },
-          dynamicRegistration = false
-        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
@@ -2061,14 +2053,6 @@ require'nvim_lsp'.jsonls.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
-        codeAction = {
-          codeActionLiteralSupport = {
-            codeActionKind = {
-              valueSet = {}
-            }
-          },
-          dynamicRegistration = false
-        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
@@ -2997,14 +2981,6 @@ require'nvim_lsp'.purescriptls.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
-        codeAction = {
-          codeActionLiteralSupport = {
-            codeActionKind = {
-              valueSet = {}
-            }
-          },
-          dynamicRegistration = false
-        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
@@ -3930,14 +3906,6 @@ require'nvim_lsp'.rust_analyzer.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
-        codeAction = {
-          codeActionLiteralSupport = {
-            codeActionKind = {
-              valueSet = {}
-            }
-          },
-          dynamicRegistration = false
-        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
@@ -4807,14 +4775,6 @@ require'nvim_lsp'.yamlls.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
-        codeAction = {
-          codeActionLiteralSupport = {
-            codeActionKind = {
-              valueSet = {}
-            }
-          },
-          dynamicRegistration = false
-        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
