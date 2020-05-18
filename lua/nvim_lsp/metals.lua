@@ -77,7 +77,6 @@ configs[server_name] = {
     installer.configure(config)
   end;
   docs = {
-    vscode = "scalameta.metals";
     package_json = "https://raw.githubusercontent.com/scalameta/metals-vscode/master/package.json";
     description = [[
 https://scalameta.org/metals/
