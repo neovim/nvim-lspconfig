@@ -134,6 +134,14 @@ Requires [.NET Core](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-i
 curl -L https://dot.net/v1/dotnet-install.sh | sh
 ```
 
+`python-language-server` can be installed via `:LspInstall pyls_ms` or you can [build](https://github.com/microsoft/python-language-server/blob/master/CONTRIBUTING.md#setup) your own.
+
+If you want to use your own build, set cmd to point to `Microsoft.Python.languageServer.dll`.
+
+```lua
+cmd = { "dotnet", "exec", "path/to/Microsoft.Python.languageServer.dll" };
+```
+
 This server accepts configuration via the `settings` key.
 
     ]];
