@@ -66,11 +66,7 @@ configs.texlab = {
       end;
       description = "Build the current buffer";
     };
-    -- TexlabCancelAllBuilds = {
-    -- };
   };
-  -- on_new_config = function(new_config) end;
-  -- on_attach = function(client, bufnr) end;
   docs = {
     description = [[
 https://texlab.netlify.com/

@@ -13,7 +13,7 @@ local installer = util.npm_installer {
 local root_pattern = util.root_pattern("package.json")
 
 configs[server_name] = {
-  default_config = util.utf8_config {
+  default_config = {
     cmd = {bin_name, "--stdio"};
     filetypes = {"css", "scss", "less"};
     root_dir = function(fname)
@@ -47,8 +47,6 @@ npm install -g vscode-css-languageserver-bin
 ]];
     default_config = {
       root_dir = [[root_pattern("package.json")]];
-      on_init = [[function to handle changing offsetEncoding]];
-      capabilities = [[default capabilities, with offsetEncoding utf-8]];
     };
   };
 }

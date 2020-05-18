@@ -7,8 +7,6 @@ configs.sourcekit = {
     filetypes = {"swift"};
     root_dir = util.root_pattern("Package.swift", ".git")
   };
-  -- on_new_config = function(new_config) end;
-  -- on_attach = function(client, bufnr) end;
   docs = {
     package_json = "https://raw.githubusercontent.com/apple/sourcekit-lsp/master/Editors/vscode/package.json";
     description = [[
@@ -21,5 +19,4 @@ Language server for Swift and C/C++/Objective-C.
     };
   };
 };
-
 -- vim:et ts=2 sw=2

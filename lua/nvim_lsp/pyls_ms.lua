@@ -107,21 +107,18 @@ configs[name] = {
       installer.configure(config)
     end;
     init_options = {
-      interpreter =
-                {
-                    properties=
-                    {
-                        InterpreterPath=vim.fn.exepath("python");
-                        Version=get_python_version();
-                    };
-                };
-      displayOptions= {};
-      analysisUpdates=true;
-      asyncStartup=true;
+      interpreter = {
+        properties =
+        {
+          InterpreterPath = vim.fn.exepath("python");
+          Version = get_python_version();
+        };
+      };
+      displayOptions = {};
+      analysisUpdates = true;
+      asyncStartup = true;
     };
   };
-  -- on_new_config = function(new_config) end;
-  -- on_attach = function(client, bufnr) end;
   docs = {
     description = [[
 https://github.com/Microsoft/python-language-server
@@ -153,3 +150,4 @@ This server accepts configuration via the `settings` key.
 
 configs[name].install = installer.install
 configs[name].install_info = installer.info
+-- vim:et ts=2 sw=2

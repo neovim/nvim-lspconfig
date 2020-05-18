@@ -2,14 +2,11 @@ local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
 configs.ccls = {
-  default_config = util.utf8_config {
+  default_config = {
     cmd = {"ccls"};
     filetypes = {"c", "cpp", "objc", "objcpp"};
     root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git");
   };
-  -- commands = {};
-  -- on_new_config = function(new_config) end;
-  -- on_attach = function(client, bufnr) end;
   docs = {
     vscode = "ccls-project.ccls";
     description = [[
@@ -20,8 +17,6 @@ as compile_commands.json or, for simpler projects, a compile_flags.txt.
 ]];
     default_config = {
       root_dir = [[root_pattern("compile_commands.json", "compile_flags.txt", ".git")]];
-      on_init = [[function to handle changing offsetEncoding]];
-      capabilities = [[default capabilities, with offsetEncoding utf-8]];
     };
   };
 }

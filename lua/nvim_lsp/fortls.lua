@@ -10,8 +10,6 @@ configs.fortls = {
       nthreads = 1,
     };
   };
-  -- on_new_config = function(new_config) end;
-  -- on_attach = function(client, bufnr) end;
   docs = {
     vscode = 'hansec.fortran-ls';
     description = [[
@@ -24,5 +22,4 @@ Fortran Language Server for the Language Server Protocol
     };
   };
 };
-
 -- vim:et ts=2 sw=2
