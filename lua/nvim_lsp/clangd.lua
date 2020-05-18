@@ -12,9 +12,6 @@ configs.clangd = {
       return root_pattern(filename) or util.path.dirname(filename)
     end;
   };
-  -- commands = {};
-  -- on_new_config = function(new_config) end;
-  -- on_attach = function(client, bufnr) end;
   docs = {
     description = [[
 https://clang.llvm.org/extra/clangd/Installation.html

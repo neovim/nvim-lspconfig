@@ -11,7 +11,7 @@ local installer = util.npm_installer {
 }
 
 configs[server_name] = {
-  default_config = util.utf8_config {
+  default_config = {
     cmd = {bin_name, "--stdio"};
     filetypes = {"php"};
     root_dir = function (pattern)
@@ -44,8 +44,6 @@ npm install -g intelephense
 ]];
     default_config = {
       root_dir = [[root_pattern("composer.json", ".git")]];
-      on_init = [[function to handle changing offsetEncoding]];
-      capabilities = [[default capabilities, with offsetEncoding utf-8]];
       init_options = [[{
         storagePath = Optional absolute path to storage dir. Defaults to os.tmpdir().
         globalStoragePath = Optional absolute path to a global storage dir. Defaults to os.homedir().

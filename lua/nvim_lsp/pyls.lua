@@ -9,8 +9,6 @@ configs.pyls = {
       return util.path.dirname(fname)
     end;
   };
-  -- on_new_config = function(new_config) end;
-  -- on_attach = function(client, bufnr) end;
   docs = {
     package_json = "https://raw.githubusercontent.com/palantir/python-language-server/develop/vscode-client/package.json";
     description = [[
@@ -23,5 +21,4 @@ https://github.com/palantir/python-language-server
     };
   };
 };
-
 -- vim:et ts=2 sw=2

@@ -17,7 +17,7 @@ default_capabilities.offsetEncoding = {"utf-8", "utf-16"}
 local elm_root_pattern = util.root_pattern("elm.json")
 
 configs[server_name] = {
-  default_config = util.utf8_config {
+  default_config = {
     cmd = {bin_name};
     -- TODO(ashkan) if we comment this out, it will allow elmls to operate on elm.json. It seems like it could do that, but no other editor allows it right now.
     filetypes = {"elm"};
@@ -62,8 +62,6 @@ npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
 ]];
     default_config = {
       root_dir = [[root_pattern("elm.json")]];
-      on_init = [[function to handle changing offsetEncoding]];
-      capabilities = [[default capabilities, with offsetEncoding utf-8]];
     };
   };
 }

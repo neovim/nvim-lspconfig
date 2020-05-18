@@ -27,7 +27,6 @@ configs[server_name] = {
       end
     end
   end;
-  -- on_attach = function(client, bufnr) end;
   docs = {
     description = [[
 https://github.com/mads-hartmann/bash-language-server

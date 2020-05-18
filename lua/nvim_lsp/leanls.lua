@@ -7,8 +7,6 @@ configs.leanls = {
     filetypes = {"lean"};
     root_dir = util.root_pattern(".git");
   };
-  -- on_new_config = function(new_config) end;
-  -- on_attach = function(client, bufnr) end;
   docs = {
     vscode = "jroesch.lean";
     description = [[
