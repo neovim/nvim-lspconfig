@@ -9,7 +9,7 @@ configs.ghcide = {
   };
 
   docs = {
-    vscode = "DigitalAssetHoldingsLLC.ghcide";
+    package_json = "https://raw.githubusercontent.com/digital-asset/ghcide/master/extension/package.json";
     description = [[
 https://github.com/digital-asset/ghcide
 

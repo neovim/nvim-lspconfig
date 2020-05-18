@@ -136,32 +136,6 @@ local function make_lsp_sections()
         end;
         function()
           local package_json_name = util.path.join(tempdir, template_name..'.package.json');
-          if docs.vscode then
-            docs.vspackage = util.format_vspackage_url(docs.vscode)
-          end
-          if docs.vspackage then
-            for i = 1, 5 do
-              local script = [[
-              curl -L -o {{vspackage_name}} {{vspackage_url}}
-              gzip -d {{vspackage_name}}
-              unzip -j {{vspackage_zip}} extension/package.json
-              mv package.json {{package_json_name}}
-              ]]
-              os.execute(template(script, {
-                package_json_name = package_json_name;
-                vspackage_name = util.path.join(tempdir, template_name..'.vspackage.zip.gz');
-                vspackage_zip = util.path.join(tempdir, template_name..'.vspackage.zip');
-                vspackage_url = docs.vspackage;
-              }))
-              if util.path.is_file(package_json_name) then
-                docs.package_json = true
-                break
-              else
-                print(string.format("Failed to download vspackage for %q at %q", template_name, docs.vspackage))
-                vim.api.nvim_command("sleep "..math.random(0, i))
-              end
-            end
-          end
           if docs.package_json then
             if not util.path.is_file(package_json_name) then
               os.execute(string.format("curl -L -o %q %q", package_json_name, docs.package_json))

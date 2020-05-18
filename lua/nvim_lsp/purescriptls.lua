@@ -27,7 +27,7 @@ configs[server_name] = {
     end
   end;
   docs = {
-    vscode = "nwolverson.ide-purescript";
+    package_json = "https://raw.githubusercontent.com/nwolverson/vscode-ide-purescript/master/package.json";
     description = [[
 https://github.com/nwolverson/purescript-language-server
 `purescript-language-server` can be installed via `:LspInstall purescriptls` or by yourself with `npm`

@@ -11,7 +11,7 @@ configs.fortls = {
     };
   };
   docs = {
-    vscode = 'hansec.fortran-ls';
+    package_json = "https://raw.githubusercontent.com/hansec/vscode-fortran-ls/master/package.json";
     description = [[
 https://github.com/hansec/fortran-language-server
 

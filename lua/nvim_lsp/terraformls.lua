@@ -8,7 +8,7 @@ configs.terraformls = {
     root_dir = util.root_pattern(".terraform", ".git");
   };
   docs = {
-    vscode = "mauve.terraform";
+    package_json = "https://raw.githubusercontent.com/hashicorp/vscode-terraform/master/package.json";
     description = [[
 https://github.com/juliosueiras/terraform-lsp
 

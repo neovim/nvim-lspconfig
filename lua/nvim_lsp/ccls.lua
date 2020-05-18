@@ -8,7 +8,7 @@ configs.ccls = {
     root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git");
   };
   docs = {
-    vscode = "ccls-project.ccls";
+    package_json = "https://raw.githubusercontent.com/MaskRay/vscode-ccls/master/package.json";
     description = [[
 https://github.com/MaskRay/ccls/wiki
 

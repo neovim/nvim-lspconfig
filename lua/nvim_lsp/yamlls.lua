@@ -27,7 +27,7 @@ configs[server_name] = {
     end
   end;
   docs = {
-    vscode = "redhat.vscode-yaml";
+    package_json = "https://raw.githubusercontent.com/redhat-developer/vscode-yaml/master/package.json";
     description = [[
 https://github.com/redhat-developer/yaml-language-server
 

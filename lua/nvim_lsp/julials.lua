@@ -17,7 +17,7 @@ configs.julials = {
     end;
   };
   docs = {
-    vscode = "julialang.language-julia";
+    package_json = "https://raw.githubusercontent.com/julia-vscode/julia-vscode/master/package.json";
     description = [[
 https://github.com/julia-vscode/julia-vscode
 `LanguageServer.jl` can be installed via `:LspInstall julials` or by yourself the `julia` and `Pkg`:

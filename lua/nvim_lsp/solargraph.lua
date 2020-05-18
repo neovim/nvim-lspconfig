@@ -8,7 +8,6 @@ configs.solargraph = {
     root_dir = util.root_pattern("Gemfile", ".git");
   };
   docs = {
-    vscode = "castwide.solargraph";
     package_json = "https://raw.githubusercontent.com/castwide/vscode-solargraph/master/package.json";
     description = [[
 https://solargraph.org/

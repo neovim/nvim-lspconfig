@@ -8,7 +8,7 @@ configs.leanls = {
     root_dir = util.root_pattern(".git");
   };
   docs = {
-    vscode = "jroesch.lean";
+    package_json = "https://raw.githubusercontent.com/leanprover/vscode-lean/master/package.json";
     description = [[
 https://github.com/leanprover/lean-client-js/tree/master/lean-language-server
 
