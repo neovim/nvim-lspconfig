@@ -970,11 +970,11 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.debugExternalLibraries`**: `boolean`
 
-  Whether to mark external pub package libraries as debuggable, enabling stepping into them while debugging.
+  Whether to mark external pub package libraries (including package:flutter) as debuggable, enabling stepping into them while debugging.
 
 - **`dart.debugSdkLibraries`**: `boolean`
 
-  Whether to mark SDK libraries as debuggable, enabling stepping into them while debugging.
+  Whether to mark Dart SDK libraries (dart:*) as debuggable, enabling stepping into them while debugging.
 
 - **`dart.devToolsLogFile`**: `null|string`
 
@@ -1892,6 +1892,14 @@ require'nvim_lsp'.html.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
+        codeAction = {
+          codeActionLiteralSupport = {
+            codeActionKind = {
+              valueSet = {}
+            }
+          },
+          dynamicRegistration = false
+        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
@@ -2053,6 +2061,14 @@ require'nvim_lsp'.jsonls.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
+        codeAction = {
+          codeActionLiteralSupport = {
+            codeActionKind = {
+              valueSet = {}
+            }
+          },
+          dynamicRegistration = false
+        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
@@ -2314,8 +2330,6 @@ This server accepts configuration via the `settings` key.
 
 - **`julia.useCustomSysimage`**: `boolean`
 
-  Default: `"false"`
-  
   Use an existing custom sysimage when starting the REPL
 
 - **`julia.usePlotPane`**: `boolean`
@@ -2983,6 +2997,14 @@ require'nvim_lsp'.purescriptls.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
+        codeAction = {
+          codeActionLiteralSupport = {
+            codeActionKind = {
+              valueSet = {}
+            }
+          },
+          dynamicRegistration = false
+        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
@@ -3908,6 +3930,14 @@ require'nvim_lsp'.rust_analyzer.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
+        codeAction = {
+          codeActionLiteralSupport = {
+            codeActionKind = {
+              valueSet = {}
+            }
+          },
+          dynamicRegistration = false
+        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
@@ -4004,7 +4034,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"bundle"`
   
-  Path to the bundle executable, defaults to 'bundle'
+  Path to the bundle executable, defaults to 'bundle'. Needs to be an absolute path for the 'bundle' exec/shim
 
 - **`solargraph.checkGemVersion`**: `enum { true, false }`
 
@@ -4777,6 +4807,14 @@ require'nvim_lsp'.yamlls.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
+        codeAction = {
+          codeActionLiteralSupport = {
+            codeActionKind = {
+              valueSet = {}
+            }
+          },
+          dynamicRegistration = false
+        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
