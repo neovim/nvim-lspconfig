@@ -252,6 +252,7 @@ that config.
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
 - [rls](#rls)
+- [rnix](#rnix)
 - [rust_analyzer](#rust_analyzer)
 - [solargraph](#solargraph)
 - [sourcekit](#sourcekit)
@@ -3359,6 +3360,14 @@ Requires [.NET Core](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-i
 curl -L https://dot.net/v1/dotnet-install.sh | sh
 ```
 
+`python-language-server` can be installed via `:LspInstall pyls_ms` or you can [build](https://github.com/microsoft/python-language-server/blob/master/CONTRIBUTING.md#setup) your own.
+
+If you want to use your own build, set cmd to point to `Microsoft.Python.languageServer.dll`.
+
+```lua
+cmd = { "dotnet", "exec", "path/to/Microsoft.Python.languageServer.dll" };
+```
+
 This server accepts configuration via the `settings` key.
 
     
@@ -3639,6 +3648,31 @@ require'nvim_lsp'.rls.setup{}
     cmd = { "rls" }
     filetypes = { "rust" }
     root_dir = root_pattern("Cargo.toml")
+```
+
+## rnix
+
+https://github.com/nix-community/rnix-lsp
+
+A language server for Nix providing basic completion and formatting via nixpkgs-fmt.
+
+To install manually, run `cargo install rnix-lsp`. If you are using nix, rnix-lsp is in nixpkgs.
+
+This server accepts configuration via the `settings` key.
+
+    
+Can be installed in Nvim with `:LspInstall rnix`
+
+```lua
+require'nvim_lsp'.rnix.setup{}
+
+  Default Values:
+    cmd = { "rnix-lsp" }
+    filetypes = { "nix" }
+    init_options = {}
+    on_new_config = <function 1>
+    root_dir = vim's starting directory
+    settings = {}
 ```
 
 ## rust_analyzer
