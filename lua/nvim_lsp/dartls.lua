@@ -47,7 +47,7 @@ configs[server_name] = {
     };
   };
   docs = {
-    vscode = "Dart-Code.dart-code";
+    package_json = "https://raw.githubusercontent.com/Dart-Code/Dart-Code/master/package.json";
     description = [[
 https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec
 

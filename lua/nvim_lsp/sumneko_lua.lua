@@ -103,7 +103,7 @@ configs[name] = {
     installer.configure(config)
   end;
   docs = {
-    vscode = "sumneko.lua";
+    package_json = "https://raw.githubusercontent.com/sumneko/vscode-lua/master/package.json";
     description = [[
 https://github.com/sumneko/lua-language-server
 

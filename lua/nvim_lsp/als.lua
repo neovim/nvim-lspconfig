@@ -74,7 +74,6 @@ configs[server_name] = {
     installer.configure(config)
   end;
   docs = {
-    vscode = "AdaCore.ada";
     package_json = "https://raw.githubusercontent.com/AdaCore/ada_language_server/master/integration/vscode/ada/package.json";
     description = [[
 https://github.com/AdaCore/ada_language_server

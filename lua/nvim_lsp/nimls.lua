@@ -10,7 +10,7 @@ configs.nimls = {
     end;
   };
   docs = {
-    vscode = "kosz78.nim";
+    package_json = "https://raw.githubusercontent.com/pragmagic/vscode-nim/master/package.json";
     description = [[
 https://github.com/PMunch/nimlsp
 `nimlsp` can be installed via `:LspInstall nimls` or by yourself the `nimble` package manager:

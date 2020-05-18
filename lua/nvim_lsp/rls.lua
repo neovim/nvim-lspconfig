@@ -8,7 +8,6 @@ configs.rls = {
     root_dir = util.root_pattern("Cargo.toml");
   };
   docs = {
-    vscode = "rust-lang.rust";
     package_json = "https://raw.githubusercontent.com/rust-lang/rls-vscode/master/package.json";
     description = [[
 https://github.com/rust-lang/rls
