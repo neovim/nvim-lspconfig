@@ -722,10 +722,8 @@ This server accepts configuration via the `settings` key.
 require'nvim_lsp'.ccls.setup{}
 
   Default Values:
-    capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "ccls" }
     filetypes = { "c", "cpp", "objc", "objcpp" }
-    on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
 ```
 
@@ -836,10 +834,8 @@ Can be installed in Nvim with `:LspInstall cssls`
 require'nvim_lsp'.cssls.setup{}
 
   Default Values:
-    capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "css-languageserver", "--stdio" }
     filetypes = { "css", "scss", "less" }
-    on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("package.json")
     settings = {
       css = {
@@ -1475,7 +1471,6 @@ This server accepts configuration via the `settings` key.
 require'nvim_lsp'.elmls.setup{}
 
   Default Values:
-    capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "elm-language-server" }
     filetypes = { "elm" }
     init_options = {
@@ -1484,7 +1479,6 @@ require'nvim_lsp'.elmls.setup{}
       elmPath = "elm",
       elmTestPath = "elm-test"
     }
-    on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("elm.json")
 ```
 
@@ -1994,10 +1988,8 @@ Can be installed in Nvim with `:LspInstall intelephense`
 require'nvim_lsp'.intelephense.setup{}
 
   Default Values:
-    capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "intelephense", "--stdio" }
     filetypes = { "php" }
-    on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("composer.json", ".git")
 ```
 
@@ -3835,6 +3827,24 @@ This server accepts configuration via the `settings` key.
   
   Whether to show inlay type hints
 
+- **`rust-analyzer.lens.debug`**: `boolean`
+
+  Default: `true`
+
+- **`rust-analyzer.lens.enable`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show CodeLens in Rust files.
+
+- **`rust-analyzer.lens.implementations`**: `boolean`
+
+  Default: `true`
+
+- **`rust-analyzer.lens.run`**: `boolean`
+
+  Default: `true`
+
 - **`rust-analyzer.lruCapacity`**: `null|integer`
 
   Default: `vim.NIL`
@@ -4389,10 +4399,8 @@ Can be installed in Nvim with `:LspInstall tsserver`
 require'nvim_lsp'.tsserver.setup{}
 
   Default Values:
-    capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "typescript-language-server", "--stdio" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
-    on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("package.json", "tsconfig.json", ".git")
 ```
 
