@@ -38,7 +38,7 @@ local function make_installer()
             # clone project
             git clone https://github.com/elixir-lsp/elixir-ls
             cd elixir-ls
-            
+
             # fetch dependencies and compile
             mix deps.get && mix compile
 
