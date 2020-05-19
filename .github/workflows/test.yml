@@ -1,0 +1,41 @@
+name: test
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: [ubuntu-latest]
+    steps:
+    - name: Checkout sources
+      uses: actions/checkout@v2
+    - name: Setup build dependencies
+      run: |
+        sudo apt update &&
+        sudo apt install -y ninja-build \
+          gettext \
+          libtool \
+          libtool-bin \
+          autoconf \
+          automake \
+          cmake \
+          g++ \
+          pkg-config \
+          unzip \
+          gperf \
+          libluajit-5.1-dev \
+          libunibilium-dev \
+          libmsgpack-dev \
+          libtermkey-dev \
+          libvterm-dev \
+          libjemalloc-dev \
+          lua5.1 \
+          lua-lpeg \
+          lua-mpack \
+          lua-bitop
+    - name: Run test with building Nvim
+      run: |
+        make test
+
