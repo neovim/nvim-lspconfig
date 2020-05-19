@@ -3,21 +3,21 @@ local util = require 'nvim_lsp/util'
 
 local server_name = "elixirls"
 local bin_name = "elixir-ls"
-local bin
+local cmd = "language_server"
+
+if vim.fn.has('mac') == 1 or vim.fn.has('unix') == 1 then
+    cmd = cmd..".sh"
+elseif vim.fn.has('win32') == 1  or vim.fn.has('win64') == 1 then
+    cmd = cmd..".bat"
+else
+    error("System is not supported, try to install manually.")
+    return
+end
 
 local function make_installer()
     local P = util.path.join
     local install_dir = P{util.base_install_dir, server_name}
-    local git_dir = P{install_dir, bin_name}
-
-    if vim.fn.has('mac') == 1 or vim.fn.has('unix') == 1 then
-        bin = P{git_dir, "release", "language_server.sh"}
-    elseif vim.fn.has('win32') == 1  or vim.fn.has('win64') == 1 then
-        bin = P{git_dir, "release", "language_server.bat"}
-    else
-        error("System is not supported, try to install manually.")
-        return
-    end
+	local cmd_path = P{install_dir, bin_name, "release", cmd}
 
     local X = {}
     function X.install()
@@ -51,9 +51,9 @@ local function make_installer()
 
     function X.info()
         return {
-            is_installed = util.path.exists(bin);
+            is_installed = util.path.exists(cmd_path);
             install_dir = install_dir;
-            cmd = { bin };
+            cmd = { cmd_path };
         }
     end
 
@@ -70,7 +70,7 @@ local installer = make_installer()
 
 configs[server_name] = {
   default_config = {
-    -- cmd = {bin};
+    cmd = { cmd };
     filetypes = {"elixir", "eelixir"};
     root_dir = function(fname)
         return util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
