@@ -70,7 +70,7 @@ local installer = make_installer()
 
 configs[server_name] = {
   default_config = {
-    cmd = {bin};
+    -- cmd = {bin};
     filetypes = {"elixir", "eelixir"};
     root_dir = function(fname)
         return util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
@@ -82,25 +82,23 @@ configs[server_name] = {
     docs = {
         package_json = "https://raw.githubusercontent.com/JakeBecker/vscode-elixir-ls/master/package.json";
         description = [[
-        https://github.com/elixir-lsp/elixir-ls
+https://github.com/elixir-lsp/elixir-ls
 
-        Elixir language server. This LSP does not provide a language server by default, but it makes an attempt
-        at installing it by cloning the git repo and compiling it using elixir's build tool Mix. This is also
-        the reason for not including the `cmd` option by default. This can be set by using the following format:
-        ```lua
-        require'nvim_lsp'.elixirLS.setup{
-            -- Unix
-            cmd = {"path/to/language_server.sh"};
-            -- Windows
-            cmd = {"path/to/language_server.bat"};
-            ...
-        }
-        ```
+`elixir-ls` can be installed via `:LspInstall elixirls` or by yourself by following the instructions [here](https://github.com/elixir-lsp/elixir-ls#building-and-running).
 
-        Use `LspInstall elixirls` to install it.
+This language server does not provide a global binary, but must be installed manually. The command `:LspInstaller elixirls` makes an attempt at installing the binary by
+Fetching the elixir-ls repository from GitHub, compiling it and then installing it.
 
-        If you want to install it manually, following the instructions [here](https://github.com/elixir-lsp/elixir-ls#building-and-running)
-        ]];
+```lua
+require'nvim_lsp'.elixirLS.setup{
+    -- Unix
+    cmd = { "path/to/language_server.sh" };
+    -- Windows
+    cmd = { "path/to/language_server.bat" };
+    ...
+}
+```
+]];
             default_config = {
                 root_dir = [[root_pattern("mix.exs", ".git") or vim.loop.os_homedir()]];
             };
