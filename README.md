@@ -231,6 +231,7 @@ that config.
 - [diagnosticls](#diagnosticls)
 - [dockerls](#dockerls)
 - [efm](#efm)
+- [elixirls](#elixirls)
 - [elmls](#elmls)
 - [flow](#flow)
 - [fortls](#fortls)
@@ -1422,6 +1423,82 @@ require'nvim_lsp'.efm.setup{}
     root_dir = root_pattern(".git")
 ```
 
+## elixirls
+
+https://github.com/elixir-lsp/elixir-ls
+
+`elixir-ls` can be installed via `:LspInstall elixirls` or by yourself by following the instructions [here](https://github.com/elixir-lsp/elixir-ls#building-and-running).
+
+This language server does not provide a global binary, but must be installed manually. The command `:LspInstaller elixirls` makes an attempt at installing the binary by
+Fetching the elixir-ls repository from GitHub, compiling it and then installing it.
+
+```lua
+require'nvim_lsp'.elixirLS.setup{
+    -- Unix
+    cmd = { "path/to/language_server.sh" };
+    -- Windows
+    cmd = { "path/to/language_server.bat" };
+    ...
+}
+```
+
+Can be installed in Nvim with `:LspInstall elixirls`
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`elixirLS.dialyzerEnabled`**: `boolean`
+
+  Default: `true`
+  
+  Run ElixirLS's rapid Dialyzer when code is saved
+
+- **`elixirLS.dialyzerFormat`**: `enum { "dialyzer", "dialyxir_short", "dialyxir_long" }`
+
+  Default: `"dialyzer"`
+  
+  Formatter to use for Dialyzer warnings
+
+- **`elixirLS.dialyzerWarnOpts`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{enum = { "error_handling", "no_behaviours", "no_contracts", "no_fail_call", "no_fun_app", "no_improper_lists", "no_match", "no_missing_calls", "no_opaque", "no_return", "no_undefined_callbacks", "no_unused", "underspecs", "unknown", "unmatched_returns", "overspecs", "specdiffs" },type = "string"}`
+  
+  Dialyzer options to enable or disable warnings. See Dialyzer's documentation for options. Note that the "race_conditions" option is unsupported
+
+- **`elixirLS.fetchDeps`**: `boolean`
+
+  Default: `true`
+  
+  Automatically fetch project dependencies when compiling
+
+- **`elixirLS.mixEnv`**: `string`
+
+  Default: `"test"`
+  
+  Mix environment to use for compilation
+
+- **`elixirLS.projectDir`**: `string`
+
+  Subdirectory containing Mix project if not in the project root
+
+- **`elixirLS.suggestSpecs`**: `boolean`
+
+  Default: `true`
+  
+  Suggest @spec annotations inline using Dialyzer's inferred success typings (Requires Dialyzer)
+
+</details>
+
+```lua
+require'nvim_lsp'.elixirls.setup{}
+
+  Default Values:
+    cmd = { "language_server.sh" }
+    filetypes = { "elixir", "eelixir" }
+    root_dir = root_pattern("mix.exs", ".git") or vim.loop.os_homedir()
+```
+
 ## elmls
 
 https://github.com/elm-tooling/elm-language-server#installation
@@ -1892,6 +1969,14 @@ require'nvim_lsp'.html.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
+        codeAction = {
+          codeActionLiteralSupport = {
+            codeActionKind = {
+              valueSet = {}
+            }
+          },
+          dynamicRegistration = false
+        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
@@ -2053,6 +2138,14 @@ require'nvim_lsp'.jsonls.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
+        codeAction = {
+          codeActionLiteralSupport = {
+            codeActionKind = {
+              valueSet = {}
+            }
+          },
+          dynamicRegistration = false
+        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
@@ -2981,6 +3074,14 @@ require'nvim_lsp'.purescriptls.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
+        codeAction = {
+          codeActionLiteralSupport = {
+            codeActionKind = {
+              valueSet = {}
+            }
+          },
+          dynamicRegistration = false
+        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
@@ -3906,6 +4007,14 @@ require'nvim_lsp'.rust_analyzer.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
+        codeAction = {
+          codeActionLiteralSupport = {
+            codeActionKind = {
+              valueSet = {}
+            }
+          },
+          dynamicRegistration = false
+        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
@@ -4775,6 +4884,14 @@ require'nvim_lsp'.yamlls.setup{}
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
       textDocument = {
+        codeAction = {
+          codeActionLiteralSupport = {
+            codeActionKind = {
+              valueSet = {}
+            }
+          },
+          dynamicRegistration = false
+        },
         completion = {
           completionItem = {
             commitCharactersSupport = false,
