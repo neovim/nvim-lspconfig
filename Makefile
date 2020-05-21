@@ -1,3 +1,6 @@
 test:
 	sh ./scripts/run_test.sh
-.PHONY: test
+lint:
+	luacheck lua/* test/*
+.PHONY: test lint
+

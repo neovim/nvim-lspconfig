@@ -78,3 +78,8 @@ It can contain any other additional data that the user may find useful.
 
 Function `util.npm_installer()` can be used for`npm`-installable language
 servers. See `elmls.lua`, `tsserver.lua`, `bashls.lua` for examples.
+
+## Lint
+
+When you create a pull request and push commit, Github Action run luacheck automaticaly.
+If you want to run luacheck on your local, you can use `make lint`.
