@@ -3,7 +3,7 @@ local util = require 'nvim_lsp/util'
 
 configs.flow = {
   default_config = {
-    cmd = {"npx", "flow","lsp"};
+    cmd = {"npx", "--no-install", "flow","lsp"};
     filetypes = {"javascript", "javascriptreact", "javascript.jsx"};
     root_dir = util.root_pattern(".flowconfig");
   };
