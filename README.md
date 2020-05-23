@@ -252,6 +252,7 @@ that config.
 - [purescriptls](#purescriptls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
+- [r_language_server](#r_language_server)
 - [rls](#rls)
 - [rnix](#rnix)
 - [rust_analyzer](#rust_analyzer)
@@ -1242,6 +1243,10 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Whether to enable new behaviour for code completion to include @required arguments as placeholders (when using dart.insertArgumentPlaceholders).
+
+- **`dart.previewUpdateImportsOnRename`**: `boolean`
+
+  EXPERIMENTAL: Whether to automatically update imports when moving/renaming files. Currently only works for single-file moves/renames.
 
 - **`dart.promptToGetPackages`**: `boolean`
 
@@ -3493,6 +3498,65 @@ require'nvim_lsp'.pyls_ms.setup{}
     }
 ```
 
+## r_language_server
+
+    [languageserver](https://github.com/REditorSupport/languageserver) is an
+    implementation of the Microsoft's Language Server Protocol for the R
+    language.
+
+    It is released on CRAN and can be easily installed by
+
+    ```R
+    install.packages("languageserver")
+    ```
+    
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`r.lsp.args`**: `array`
+
+  Default: `{}`
+  
+  The command line arguments to use when launching R Language Server
+
+- **`r.lsp.debug`**: `boolean`
+
+  Debug R Language Server
+
+- **`r.lsp.diagnostics`**: `boolean`
+
+  Default: `true`
+  
+  Enable Diagnostics
+
+- **`r.lsp.lang`**: `string`
+
+  Default: `""`
+  
+  Override default LANG environment variable
+
+- **`r.lsp.path`**: `string`
+
+  Default: `""`
+  
+  Path to R binary for launching Language Server
+
+- **`r.lsp.use_stdio`**: `boolean`
+
+  Use STDIO connection instead of TCP. (Unix/macOS users only)
+
+</details>
+
+```lua
+require'nvim_lsp'.r_language_server.setup{}
+
+  Default Values:
+    cmd = { "R", "--slave", "-e", "languageserver::run()" }
+    filetypes = { "r", "rmd" }
+    log_level = 2
+    root_dir = root_pattern(".git") or os_homedir
+```
+
 ## rls
 
 https://github.com/rust-lang/rls
@@ -3900,13 +3964,13 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to show inlay type hints for method chains
+  Whether to show inlay type hints for method chains.
 
 - **`rust-analyzer.inlayHints.enable`**: `boolean`
 
   Default: `true`
   
-  Disable all inlay hints
+  Whether to show inlay hints
 
 - **`rust-analyzer.inlayHints.maxLength`**: `null|integer`
 
@@ -3918,13 +3982,13 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to show function parameter name inlay hints at the call site
+  Whether to show function parameter name inlay hints at the call site.
 
 - **`rust-analyzer.inlayHints.typeHints`**: `boolean`
 
   Default: `true`
   
-  Whether to show inlay type hints
+  Whether to show inlay type hints for variables.
 
 - **`rust-analyzer.lens.debug`**: `boolean`
 
