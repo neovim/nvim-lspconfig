@@ -4,7 +4,7 @@ local util = require 'nvim_lsp/util'
 configs.gdscript = {
   default_config = {
     cmd = {"nc", "localhost", "6008"};
-    filetypes = {"gd", "gdscript3"};
+    filetypes = {"gd", "gdscript", "gdscript3"};
     root_dir = util.root_pattern("project.godot", ".git");
   };
   docs = {
