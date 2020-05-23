@@ -1575,7 +1575,7 @@ https://flow.org/en/docs/install/
 See below for lsp command options.
 
 ```sh
-npm run flow lsp -- --help
+npx flow lsp --help
 ```
     
 This server accepts configuration via the `settings` key.
@@ -1681,7 +1681,7 @@ This server accepts configuration via the `settings` key.
 require'nvim_lsp'.flow.setup{}
 
   Default Values:
-    cmd = { "npm", "run", "flow", "lsp" }
+    cmd = { "npx", "--no-install", "flow", "lsp" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx" }
     root_dir = root_pattern(".flowconfig")
 ```
@@ -1787,7 +1787,7 @@ require'nvim_lsp'.gdscript.setup{}
 
   Default Values:
     cmd = { "nc", "localhost", "6008" }
-    filetypes = { "gd", "gdscript3" }
+    filetypes = { "gd", "gdscript", "gdscript3" }
     root_dir = <function 1>
 ```
 
