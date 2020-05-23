@@ -3,7 +3,7 @@ local util = require 'nvim_lsp/util'
 
 configs.flow = {
   default_config = {
-    cmd = {"npm", "run", "flow","lsp"};
+    cmd = {"npx", "--no-install", "flow","lsp"};
     filetypes = {"javascript", "javascriptreact", "javascript.jsx"};
     root_dir = util.root_pattern(".flowconfig");
   };
@@ -19,7 +19,7 @@ https://flow.org/en/docs/install/
 See below for lsp command options.
 
 ```sh
-npm run flow lsp -- --help
+npx flow lsp --help
 ```
     ]];
     default_config = {
