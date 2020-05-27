@@ -241,6 +241,7 @@ that config.
 - [hie](#hie)
 - [html](#html)
 - [intelephense](#intelephense)
+- [javascript_typescript_langserver](#javascript_typescript_langserver)
 - [jsonls](#jsonls)
 - [julials](#julials)
 - [kotlin_language_server](#kotlin_language_server)
@@ -2081,6 +2082,25 @@ require'nvim_lsp'.intelephense.setup{}
     cmd = { "intelephense", "--stdio" }
     filetypes = { "php" }
     root_dir = root_pattern("composer.json", ".git")
+```
+
+## javascript_typescript_langserver
+
+https://github.com/sourcegraph/javascript-typescript-langserver
+
+`javascript_typescript_langserver` can be installed via `:LspInstall javascript_typescript_langserver` or by yourself with `npm`:
+```sh
+npm install -g javascript-typescript-langserver
+```
+
+Can be installed in Nvim with `:LspInstall javascript_typescript_langserver`
+
+```lua
+require'nvim_lsp'.javascript_typescript_langserver.setup{}
+  Default Values:
+    cmd = { "javascript-typescript-stdio" }
+    filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"};
+    root_dir = root_pattern("package.json", "tsconfig.json", ".git");
 ```
 
 ## jsonls
