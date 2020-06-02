@@ -1244,10 +1244,6 @@ This server accepts configuration via the `settings` key.
   
   Whether to enable new behaviour for code completion to include @required arguments as placeholders (when using dart.insertArgumentPlaceholders).
 
-- **`dart.previewUpdateImportsOnRename`**: `boolean`
-
-  EXPERIMENTAL: Whether to automatically update imports when moving/renaming files. Currently only works for single-file moves/renames.
-
 - **`dart.promptToGetPackages`**: `boolean`
 
   Default: `true`
@@ -1308,13 +1304,15 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.showIgnoreQuickFixes`**: `boolean`
 
+  Default: `true`
+  
   Whether to show quick fixes for ignoring hints and lints.
 
 - **`dart.showMainCodeLens`**: `boolean`
 
   Default: `true`
   
-  Whether to show CodeLens actions in the editor for quick running/debugging scripts with main methods.
+  Whether to show CodeLens actions in the editor for quick running/debugging scripts with main functions.
 
 - **`dart.showTestCodeLens`**: `boolean`
 
@@ -1331,6 +1329,12 @@ This server accepts configuration via the `settings` key.
 - **`dart.triggerSignatureHelpAutomatically`**: `boolean`
 
   Whether to automatically trigger signature help when pressing keys such as , and (.
+
+- **`dart.updateImportsOnRename`**: `boolean`
+
+  Default: `true`
+  
+  Whether to automatically update imports when moving/renaming files. Currently only works for single-file moves/renames.
 
 - **`dart.useKnownChromeOSPorts`**: `boolean`
 
@@ -1438,7 +1442,7 @@ This language server does not provide a global binary, but must be installed man
 Fetching the elixir-ls repository from GitHub, compiling it and then installing it.
 
 ```lua
-require'nvim_lsp'.elixirLS.setup{
+require'nvim_lsp'.elixirls.setup{
     -- Unix
     cmd = { "path/to/language_server.sh" };
     -- Windows
@@ -1988,7 +1992,7 @@ require'nvim_lsp'.html.setup{}
             deprecatedSupport = false,
             documentationFormat = { "markdown", "plaintext" },
             preselectSupport = false,
-            snippetSupport = false
+            snippetSupport = true
           },
           completionItemKind = {
             valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
@@ -2157,7 +2161,7 @@ require'nvim_lsp'.jsonls.setup{}
             deprecatedSupport = false,
             documentationFormat = { "markdown", "plaintext" },
             preselectSupport = false,
-            snippetSupport = false
+            snippetSupport = true
           },
           completionItemKind = {
             valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
@@ -3093,7 +3097,7 @@ require'nvim_lsp'.purescriptls.setup{}
             deprecatedSupport = false,
             documentationFormat = { "markdown", "plaintext" },
             preselectSupport = false,
-            snippetSupport = false
+            snippetSupport = true
           },
           completionItemKind = {
             valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
@@ -3204,6 +3208,12 @@ This server accepts configuration via the `settings` key.
 - **`pyls.plugins.jedi_completion.fuzzy`**: `boolean`
 
   Enable fuzzy when requesting autocomplete.
+
+- **`pyls.plugins.jedi_completion.include_class_objects`**: `boolean`
+
+  Default: `true`
+  
+  Adds class objects as a separate completion item.
 
 - **`pyls.plugins.jedi_completion.include_params`**: `boolean`
 
@@ -4085,7 +4095,7 @@ require'nvim_lsp'.rust_analyzer.setup{}
             deprecatedSupport = false,
             documentationFormat = { "markdown", "plaintext" },
             preselectSupport = false,
-            snippetSupport = false
+            snippetSupport = true
           },
           completionItemKind = {
             valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
@@ -4962,7 +4972,7 @@ require'nvim_lsp'.yamlls.setup{}
             deprecatedSupport = false,
             documentationFormat = { "markdown", "plaintext" },
             preselectSupport = false,
-            snippetSupport = false
+            snippetSupport = true
           },
           completionItemKind = {
             valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
