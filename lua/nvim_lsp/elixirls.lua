@@ -90,7 +90,7 @@ This language server does not provide a global binary, but must be installed man
 Fetching the elixir-ls repository from GitHub, compiling it and then installing it.
 
 ```lua
-require'nvim_lsp'.elixirLS.setup{
+require'nvim_lsp'.elixirls.setup{
     -- Unix
     cmd = { "path/to/language_server.sh" };
     -- Windows
