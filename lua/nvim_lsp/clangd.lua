@@ -1,6 +1,16 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
+local function switch_source_header(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  local params = { uri = vim.uri_from_bufnr(bufnr) }
+  vim.lsp.buf_request(bufnr, 'textDocument/switchSourceHeader', params, function(err, _, result)
+    if err then error(tostring(err)) end
+    if not result then print ("Corresponding file can’t be determined") return end
+    vim.api.nvim_command('edit '..vim.uri_to_fname(result))
+  end)
+end
+
 local root_pattern = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")
 configs.clangd = {
   default_config = util.utf8_config {
@@ -11,6 +21,14 @@ configs.clangd = {
         or util.path.join(vim.loop.cwd(), fname)
       return root_pattern(filename) or util.path.dirname(filename)
     end;
+  };
+  commands = {
+    ClangdSwitchSourceHeader = {
+      function()
+        switch_source_header(0)
+      end;
+      description = "Switch between source/header";
+    };
   };
   docs = {
     description = [[
@@ -28,4 +46,6 @@ as compile_commands.json or, for simpler projects, a compile_flags.txt.
     };
   };
 }
+
+configs.clangd.switch_source_header = switch_source_header
 -- vim:et ts=2 sw=2
