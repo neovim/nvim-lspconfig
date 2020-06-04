@@ -21,6 +21,13 @@ configs.clangd = {
         or util.path.join(vim.loop.cwd(), fname)
       return root_pattern(filename) or util.path.dirname(filename)
     end;
+    capabilities = {
+      textDocument = {
+        completion = {
+          editsNearCursor = true
+        }
+      }
+    },
   };
   commands = {
     ClangdSwitchSourceHeader = {
