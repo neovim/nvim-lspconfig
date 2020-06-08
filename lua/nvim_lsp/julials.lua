@@ -41,7 +41,6 @@ julia --project=]] .. environment_directory .. [[ -e 'using Pkg; Pkg.add("Langua
 configs.julials.install = function()
 
   local script = [[
-  julia -e 'mkdir("]] .. environment_directory .. [[")'
   julia --project=]] .. environment_directory .. [[ -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
   ]]
 
