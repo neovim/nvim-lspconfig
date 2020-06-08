@@ -11,7 +11,7 @@ configs.julials = {
         Pkg.instantiate()
         using LanguageServer; using SymbolServer;
         depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
-        project_path = Base.active_project()
+        project_path = pwd()
         # Make sure that we only load packages from this environment specifically.
         empty!(LOAD_PATH)
         push!(LOAD_PATH, "@")
