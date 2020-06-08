@@ -1,6 +1,8 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
+print(vim.fn.expand('<sfile>:p:h'))
+
 configs.julials = {
   default_config = {
     cmd = {
@@ -9,7 +11,7 @@ configs.julials = {
         Pkg.instantiate()
         using LanguageServer; using SymbolServer;
         depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
-        project_path = dirname(Pkg.Types.Context().env.project_file)
+        project_path = Base.active_project()
         # Make sure that we only load packages from this environment specifically.
         empty!(LOAD_PATH)
         push!(LOAD_PATH, "@")
