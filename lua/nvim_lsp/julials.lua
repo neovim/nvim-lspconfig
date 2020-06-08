@@ -41,7 +41,7 @@ julia --project=~/.cache/nvim/nvim_lsp/julials -e 'using Pkg; Pkg.add("LanguageS
 configs.julials.install = function()
 
   local script = [[
-  julia -e 'mkdir(]] .. environment_directory .. [[)'
+  julia -e 'mkdir("]] .. environment_directory .. [[")'
   julia --project=]] .. environment_directory .. [[ -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
   ]]
 
