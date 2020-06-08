@@ -32,7 +32,7 @@ configs.julials = {
 https://github.com/julia-vscode/julia-vscode
 `LanguageServer.jl` can be installed via `:LspInstall julials` or by yourself the `julia` and `Pkg`:
 ```sh
-julia --project=~/.cache/nvim/nvim_lsp/julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
+julia --project=]] .. environment_directory .. [[ -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
     ]];
   };
