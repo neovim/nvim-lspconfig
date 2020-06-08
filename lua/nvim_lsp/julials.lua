@@ -1,12 +1,12 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
-current_directory = debug.getinfo(1).short_src:match("(.*[/\\])")
+environment_directory = util.path.join(util.base_install_dir, "julials")
 
 configs.julials = {
   default_config = {
     cmd = {
-        "julia", "--project=" .. current_directory, "--startup-file=no", "--history-file=no", "-e", [[
+        "julia", "--project=" .. environment_directory, "--startup-file=no", "--history-file=no", "-e", [[
         using Pkg;
         Pkg.instantiate()
         using LanguageServer; using SymbolServer;
@@ -32,15 +32,17 @@ configs.julials = {
 https://github.com/julia-vscode/julia-vscode
 `LanguageServer.jl` can be installed via `:LspInstall julials` or by yourself the `julia` and `Pkg`:
 ```sh
-julia --project=/path/to/nvim_lsp/lua/nvim_lsp -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
+julia --project=~/.cache/nvim/nvim_lsp/julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
     ]];
   };
 }
 
 configs.julials.install = function()
+
   local script = [[
-  julia --project=]] .. current_directory .. [[ -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
+  julia -e 'mkdir(]] .. environment_directory .. [[)'
+  julia --project=]] .. environment_directory .. [[ -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
   ]]
 
   util.sh(script, vim.loop.os_homedir())
@@ -48,7 +50,7 @@ end
 
 configs.julials.install_info = function()
   local script = [[
-  julia --project=]] .. current_directory .. [[ -e 'using LanguageServer; using SymbolServer'
+  julia --project=]] .. environment_directory .. [[ -e 'using LanguageServer; using SymbolServer'
   ]]
 
   local status = pcall(vim.fn.system, script)
