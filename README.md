@@ -291,6 +291,8 @@ Can be installed in Nvim with `:LspInstall als`
 ```lua
 require'nvim_lsp'.als.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "ada_language_server" }
     filetypes = { "ada" }
@@ -308,6 +310,8 @@ Can be installed in Nvim with `:LspInstall bashls`
 ```lua
 require'nvim_lsp'.bashls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "bash-language-server", "start" }
     filetypes = { "sh" }
@@ -723,6 +727,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.ccls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "ccls" }
     filetypes = { "c", "cpp", "objc", "objcpp" }
@@ -813,6 +819,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.codeqlls.setup{}
 
+  Commands:
+  
   Default Values:
     before_init = <function 1>
     cmd = { "codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q" }
@@ -838,6 +846,8 @@ Can be installed in Nvim with `:LspInstall cssls`
 ```lua
 require'nvim_lsp'.cssls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "css-languageserver", "--stdio" }
     filetypes = { "css", "scss", "less" }
@@ -1370,6 +1380,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.dartls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "dart", "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot", "--lsp" }
     filetypes = { "dart" }
@@ -1394,6 +1406,8 @@ Can be installed in Nvim with `:LspInstall diagnosticls`
 ```lua
 require'nvim_lsp'.diagnosticls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "diagnostic-languageserver", "--stdio" }
     filetypes = Empty by default, override to add filetypes
@@ -1414,6 +1428,8 @@ Can be installed in Nvim with `:LspInstall dockerls`
 ```lua
 require'nvim_lsp'.dockerls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "docker-langserver", "--stdio" }
     filetypes = { "Dockerfile", "dockerfile" }
@@ -1430,6 +1446,8 @@ General purpose Language Server that can use specified error message format gene
 ```lua
 require'nvim_lsp'.efm.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "efm-langserver" }
     root_dir = root_pattern(".git")
@@ -1505,6 +1523,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.elixirls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "language_server.sh" }
     filetypes = { "elixir", "eelixir" }
@@ -1559,6 +1579,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.elmls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "elm-language-server" }
     filetypes = { "elm" }
@@ -1687,6 +1709,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.flow.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "npx", "--no-install", "flow", "lsp" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx" }
@@ -1773,6 +1797,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.fortls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "fortls" }
     filetypes = { "fortran" }
@@ -1792,6 +1818,8 @@ Language server for GDScript, used by Godot Engine.
 ```lua
 require'nvim_lsp'.gdscript.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "nc", "localhost", "6008" }
     filetypes = { "gd", "gdscript", "gdscript3" }
@@ -1824,6 +1852,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.ghcide.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "ghcide", "--lsp" }
     filetypes = { "haskell", "lhaskell" }
@@ -1840,6 +1870,8 @@ Google's lsp server for golang.
 ```lua
 require'nvim_lsp'.gopls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "gopls" }
     filetypes = { "go", "gomod" }
@@ -1957,6 +1989,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.hie.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "hie-wrapper", "--lsp" }
     filetypes = { "haskell" }
@@ -1977,6 +2011,8 @@ Can be installed in Nvim with `:LspInstall html`
 ```lua
 require'nvim_lsp'.html.setup{}
 
+  Commands:
+  
   Default Values:
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
@@ -2084,6 +2120,8 @@ Can be installed in Nvim with `:LspInstall intelephense`
 ```lua
 require'nvim_lsp'.intelephense.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "intelephense", "--stdio" }
     filetypes = { "php" }
@@ -2146,6 +2184,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.jsonls.setup{}
 
+  Commands:
+  
   Default Values:
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
@@ -2452,6 +2492,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.julials.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "julia", "--project=/home/runner/.cache/nvim/nvim_lsp/julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = pwd()\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
     filetypes = { "julia" }
@@ -2560,6 +2602,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.kotlin_language_server.setup{}
 
+  Commands:
+  
   Default Values:
     filetypes = { "kotlin" }
     root_dir = root_pattern("settings.gradle")
@@ -2701,6 +2745,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.leanls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "lean-language-server", "--stdio" }
     filetypes = { "lean" }
@@ -2777,6 +2823,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.metals.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "metals" }
     filetypes = { "scala" }
@@ -2885,6 +2933,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.nimls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "nimlsp" }
     filetypes = { "nim" }
@@ -2905,6 +2955,8 @@ Can be installed in Nvim with `:LspInstall ocamlls`
 ```lua
 require'nvim_lsp'.ocamlls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "ocaml-language-server", "--stdio" }
     filetypes = { "ocaml", "reason" }
@@ -2927,6 +2979,8 @@ opam install ocaml-lsp-server
 ```lua
 require'nvim_lsp'.ocamllsp.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "ocamllsp" }
     filetypes = { "ocaml", "reason" }
@@ -3096,6 +3150,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.purescriptls.setup{}
 
+  Commands:
+  
   Default Values:
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
@@ -3465,6 +3521,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.pyls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "pyls" }
     filetypes = { "python" }
@@ -3499,6 +3557,8 @@ Can be installed in Nvim with `:LspInstall pyls_ms`
 ```lua
 require'nvim_lsp'.pyls_ms.setup{}
 
+  Commands:
+  
   Default Values:
     filetypes = { "python" }
     init_options = {
@@ -3577,6 +3637,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.r_language_server.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "R", "--slave", "-e", "languageserver::run()" }
     filetypes = { "r", "rmd" }
@@ -3826,6 +3888,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.rls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "rls" }
     filetypes = { "rust" }
@@ -3848,6 +3912,8 @@ Can be installed in Nvim with `:LspInstall rnix`
 ```lua
 require'nvim_lsp'.rnix.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "rnix-lsp" }
     filetypes = { "nix" }
@@ -4120,6 +4186,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.rust_analyzer.setup{}
 
+  Commands:
+  
   Default Values:
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
@@ -4319,6 +4387,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.solargraph.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "solargraph", "stdio" }
     filetypes = { "ruby" }
@@ -4365,6 +4435,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.sourcekit.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "xcrun", "sourcekit-lsp" }
     filetypes = { "swift" }
@@ -4479,6 +4551,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.sumneko_lua.setup{}
 
+  Commands:
+  
   Default Values:
     filetypes = { "lua" }
     log_level = 2
@@ -4506,6 +4580,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.terraformls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "terraform-lsp" }
     filetypes = { "terraform" }
@@ -4568,6 +4644,8 @@ Can be installed in Nvim with `:LspInstall tsserver`
 ```lua
 require'nvim_lsp'.tsserver.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "typescript-language-server", "--stdio" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
@@ -4580,6 +4658,8 @@ require'nvim_lsp'.tsserver.setup{}
 ```lua
 require'nvim_lsp'.vimls.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "vim-language-server", "--stdio" }
     docs = {
@@ -4811,6 +4891,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.vuels.setup{}
 
+  Commands:
+  
   Default Values:
     cmd = { "vls" }
     filetypes = { "vue" }
@@ -4943,6 +5025,8 @@ This server accepts configuration via the `settings` key.
 ```lua
 require'nvim_lsp'.yamlls.setup{}
 
+  Commands:
+  
   Default Values:
     capabilities = {
       offsetEncoding = { "utf-8", "utf-16" },
