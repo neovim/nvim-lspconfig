@@ -1,7 +1,7 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
-environment_directory = util.path.join(util.base_install_dir, "julials")
+local environment_directory = util.path.join(util.base_install_dir, "julials")
 
 configs.julials = {
   default_config = {
