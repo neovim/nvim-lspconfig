@@ -742,6 +742,9 @@ as compile_commands.json or, for simpler projects, a compile_flags.txt.
 ```lua
 require'nvim_lsp'.clangd.setup{}
 
+  Commands:
+  - ClangdSwitchSourceHeader: Switch between source/header
+  
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8
     cmd = { "clangd", "--background-index" }
@@ -2275,6 +2278,16 @@ This server accepts configuration via the `settings` key.
   Default: `""`
   
   Points to the julia executable.
+
+- **`julia.execution.codeInREPL`**: `boolean`
+
+  Print executed code in REPL.
+
+- **`julia.execution.resultType`**: `enum { "REPL", "inline", "both" }`
+
+  Default: `"REPL"`
+  
+  Specifies how to show inline execution results
 
 - **`julia.format.calls`**: `boolean`
 
@@ -3859,8 +3872,6 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.cargo.allFeatures`**: `boolean`
 
-  Default: `true`
-  
   Activate all available features
 
 - **`rust-analyzer.cargo.features`**: `array`
@@ -3887,7 +3898,7 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.checkOnSave.allFeatures`**: `boolean`
 
-  Default: `true`
+  
 
 - **`rust-analyzer.checkOnSave.allTargets`**: `boolean`
 
@@ -3970,6 +3981,24 @@ This server accepts configuration via the `settings` key.
   
   Controls file watching implementation.
 
+- **`rust-analyzer.hoverActions.debug`**: `boolean`
+
+  Default: `true`
+
+- **`rust-analyzer.hoverActions.enable`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show HoverActions in Rust files.
+
+- **`rust-analyzer.hoverActions.implementations`**: `boolean`
+
+  Default: `true`
+
+- **`rust-analyzer.hoverActions.run`**: `boolean`
+
+  Default: `true`
+
 - **`rust-analyzer.inlayHints.chainingHints`**: `boolean`
 
   Default: `true`
@@ -4017,6 +4046,12 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.lens.run`**: `boolean`
 
   Default: `true`
+
+- **`rust-analyzer.linkedProjects`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = { "string", "object" }}`
 
 - **`rust-analyzer.lruCapacity`**: `null|integer`
 
@@ -4071,6 +4106,10 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.updates.channel`**: `enum { "stable", "nightly" }`
 
   Default: `"stable"`
+
+- **`rust-analyzer.withSysroot`**: `boolean`
+
+  Default: `true`
 
 </details>
 
@@ -4452,65 +4491,11 @@ You can use [released binary](https://github.com/juliosueiras/terraform-lsp/rele
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`terraform.codelens.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable/disable the CodeLens feature
-
-- **`terraform.format`**: `object`
-
-  Default: `{ignoreExtensionsOnSave = { ".tfsmurf" }}`
-  
-  Formatting settings
-
-- **`terraform.indexing`**: `object`
-
-  Default: `{delay = 500,enabled = true,exclude = { ".terraform/**/*", "**/.terraform/**/*" },liveIndexing = false}`
-  
-  Indexes all terraform sources to get live syntax errors, rename support, go to symbol, and much more...
-
 - **`terraform.languageServer`**: `object`
 
-  Default: `{args = {},enabled = false}`
+  Default: `{args = { "serve" },external = true,maxNumberOfProblems = 100,pathToBinary = "",["trace.server"] = "off"}`
   
-  Configures how the language server runs and works
-
-- **`terraform.lintConfig`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  Path to the `tflint` config file.
-
-- **`terraform.lintPath`**: `string`
-
-  Default: `"tflint"`
-  
-  Path to the `tflint` executable.
-
-- **`terraform.path`**: `string`
-
-  Default: `"terraform"`
-  
-  Path to the `terraform` executable
-
-- **`terraform.paths`**: `array`
-
-  Default: `{}`
-  
-  List of terraform paths or paths with versions
-
-- **`terraform.telemetry.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable/disable telemetry reporting for this plugin. The global `telemetry.enableTelemetry` is also respected. If the global is disabled, this setting has no effect.
-
-- **`terraform.templateDirectory`**: `string`
-
-  Default: `"templates"`
-  
-  A relative path to where your templates are stored relative to the workspace root.
+  Language Server settings
 
 </details>
 
