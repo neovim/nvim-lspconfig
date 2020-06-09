@@ -27,17 +27,23 @@ local function make_installer()
       error('Need "JDK" to install this.')
       return
     end
-    local coursier_exe
-    if not (util.has_bins("cs")) then
+
+    local coursier_exe = nil
+    if util.has_bins("cs") then
+      coursier_exe = "cs"
+    elseif util.has_bins("coursier") then
+      coursier_exe = "coursier"
+    end
+    if not coursier_exe then
       coursier_exe = install_dir .. "/coursier"
       local download_cmd = string.format("curl -fLo %s --create-dirs https://git.io/coursier-cli", coursier_exe)
       local chmod_cmd = string.format("chmod +x %s", coursier_exe)
       vim.fn.system(download_cmd)
       vim.fn.system(chmod_cmd)
     else
-      os.execute("mkdir " .. install_dir)
-      coursier_exe = "cs"
+      os.execute("mkdir -p " .. install_dir)
     end
+
     local install_cmd = string.format("%s bootstrap --java-opt -Xss4m --java-opt -Xms100m org.scalameta:metals_2.12:%s -r bintray:scalacenter/releases -r sonatype:snapshots -o %s -f", coursier_exe, server_version, metals_bin)
     vim.fn.system(install_cmd)
   end
@@ -78,7 +84,7 @@ configs[server_name] = {
   end;
   docs = {
     package_json = "https://raw.githubusercontent.com/scalameta/metals-vscode/master/package.json";
-    description = [[
+    description  = [[
 https://scalameta.org/metals/
 
 To target a specific version on Metals, set the following.
@@ -96,6 +102,5 @@ Scala language server with rich IDE features.
   };
 };
 
-configs[server_name].install = installer.install
+configs[server_name].install      = installer.install
 configs[server_name].install_info = installer.info
--- vim:et ts=2 sw=2
