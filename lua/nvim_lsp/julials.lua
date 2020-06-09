@@ -34,6 +34,10 @@ https://github.com/julia-vscode/julia-vscode
 ```sh
 julia --project=]] .. environment_directory .. [[ -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
+If you want to install the LanguageServer manually, you will have to ensure that the Julia environment is stored in this location:
+```vim
+:lua print(require'nvim_lsp'.util.path.join(require'nvim_lsp'.util.base_install_dir, "julials"))
+```
     ]];
   };
 }
