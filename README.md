@@ -2236,7 +2236,11 @@ require'nvim_lsp'.jsonls.setup{}
 https://github.com/julia-vscode/julia-vscode
 `LanguageServer.jl` can be installed via `:LspInstall julials` or by yourself the `julia` and `Pkg`:
 ```sh
-julia -e 'using Pkg; Pkg.add("LanguageServer")'
+julia --project=/home/runner/.cache/nvim/nvim_lsp/julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
+```
+If you want to install the LanguageServer manually, you will have to ensure that the Julia environment is stored in this location:
+```vim
+:lua print(require'nvim_lsp'.util.path.join(require'nvim_lsp'.util.base_install_dir, "julials"))
 ```
     
 Can be installed in Nvim with `:LspInstall julials`
@@ -2449,7 +2453,7 @@ This server accepts configuration via the `settings` key.
 require'nvim_lsp'.julials.setup{}
 
   Default Values:
-    cmd = { "julia", "--project", "--startup-file=no", "--history-file=no", "-e", "        using LanguageServer;\n        using Pkg;\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, false, dirname(Pkg.Types.Context().env.project_file));\n        server.runlinter = true; run(server);\n        " }
+    cmd = { "julia", "--project=/home/runner/.cache/nvim/nvim_lsp/julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = pwd()\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
     filetypes = { "julia" }
     root_dir = <function 1>
 ```
