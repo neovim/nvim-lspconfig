@@ -10,12 +10,10 @@ local find_dart_sdk_root_path = function()
   elseif vim.fn["executable"]("flutter") == 1 then
     local flutter_path = vim.fn["resolve"](vim.fn["exepath"]("flutter"))
     local flutter_bin = vim.fn["fnamemodify"](flutter_path, ":h")
-    local dart_sdk_root_path = flutter_bin.."/cache/dart-sdk/bin/dart"
-    if vim.fn["executable"](dart_sdk_root_path) == 1 then
-      return dart_sdk_root_path
-    end
+    return flutter_bin.."/cache/dart-sdk/bin/dart"
+  else
+    return ''
   end
-  error("[LSP] Could not find Dart SDK root path")
 end
 
 local analysis_server_snapshot_path = function()
@@ -26,11 +24,7 @@ local analysis_server_snapshot_path = function()
     snapshot = snapshot:gsub("/", "\\")
   end
 
-  if vim.fn["filereadable"](snapshot) == 1 then
-    return snapshot
-  else
-    error("[LSP] Could not find analysis server snapshot")
-  end
+  return snapshot
 end
 
 configs[server_name] = {
