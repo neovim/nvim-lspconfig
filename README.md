@@ -1383,7 +1383,7 @@ require'nvim_lsp'.dartls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "dart", "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot", "--lsp" }
+    cmd = { "dart", "./snapshots/analysis_server.dart.snapshot", "--lsp" }
     filetypes = { "dart" }
     init_options = {
       closingLabels = "true",
@@ -3966,9 +3966,9 @@ This server accepts configuration via the `settings` key.
   
   Specify the compilation target
 
-- **`rust-analyzer.checkOnSave.allFeatures`**: `boolean`
+- **`rust-analyzer.checkOnSave.allFeatures`**: `null|boolean`
 
-  
+  Default: `vim.NIL`
 
 - **`rust-analyzer.checkOnSave.allTargets`**: `boolean`
 
@@ -3987,6 +3987,14 @@ This server accepts configuration via the `settings` key.
   Default: `{}`
   
   Array items: `{type = "string"}`
+
+- **`rust-analyzer.checkOnSave.features`**: `null|array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  List of features to activate. Defaults to `rust-analyzer.cargo.features`.
 
 - **`rust-analyzer.checkOnSave.overrideCommand`**: `null|array`
 
