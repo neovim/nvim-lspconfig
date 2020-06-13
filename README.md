@@ -2535,7 +2535,7 @@ require'nvim_lsp'.julials.setup{}
   Commands:
   
   Default Values:
-    cmd = { "julia", "--project=/home/runner/.cache/nvim/nvim_lsp/julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = pwd()\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
+    cmd = { "julia", "--project=/home/runner/.cache/nvim/nvim_lsp/julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
     filetypes = { "julia" }
     root_dir = <function 1>
 ```
