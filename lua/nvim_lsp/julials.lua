@@ -1,25 +1,25 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
-local environment_directory = util.path.join(util.base_install_dir, "julials")
+local environment_directory = util.path.join(util.base_install_dir, "LSPNeovim")
 
+-- determine appropriate project argument
+-- TODO not entirely sure when this is evaluated, so it may not be safe
+local function envdirstring()
+  dir = util.path.join(util.base_install_dir, "LSPNeovim")
+  if util.path.is_dir(dir) then
+    return "--project=" .. dir
+  else
+    return nil
+  end
+end
+
+-- TODO project string
 configs.julials = {
   default_config = {
     cmd = {
-        "julia", "--project=" .. environment_directory, "--startup-file=no", "--history-file=no", "-e", [[
-        using Pkg;
-        Pkg.instantiate()
-        using LanguageServer; using SymbolServer;
-        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
-        project_path = pwd()
-        # Make sure that we only load packages from this environment specifically.
-        empty!(LOAD_PATH)
-        push!(LOAD_PATH, "@")
-        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path
-        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);
-        server.runlinter = true;
-        run(server);
-        ]]
+        "julia", envdirstring(), "--startup-file=no", "--history-file=no",
+        "-e", "using LSPNeovim; LSPNeovim.run()"
     };
     filetypes = {'julia'};
     root_dir = function(fname)
@@ -29,32 +29,22 @@ configs.julials = {
   docs = {
     package_json = "https://raw.githubusercontent.com/julia-vscode/julia-vscode/master/package.json";
     description = [[
-https://github.com/julia-vscode/julia-vscode
-`LanguageServer.jl` can be installed via `:LspInstall julials` or by yourself the `julia` and `Pkg`:
-```sh
-julia --project=]] .. environment_directory .. [[ -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
-```
-If you want to install the LanguageServer manually, you will have to ensure that the Julia environment is stored in this location:
-```vim
-:lua print(require'nvim_lsp'.util.path.join(require'nvim_lsp'.util.base_install_dir, "julials"))
-```
+LSPNeovim.jl can be installed via `:LspInstall julials` or you can add it in the usual way to your default
+environment by doing `Pkg.add("LSPNeovim")`.
     ]];
   };
 }
 
 configs.julials.install = function()
 
-  local script = [[
-  julia --project=]] .. environment_directory .. [[ -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
-  ]]
+  local script = [[julia --startup-file=no -e 'using LibGit2; LibGit2.clone("https://github.com/ExpandingMan/LSPNeovim.jl", "]] ..
+    environment_directory .. [[")']]
 
   util.sh(script, vim.loop.os_homedir())
 end
 
 configs.julials.install_info = function()
-  local script = [[
-  julia --project=]] .. environment_directory .. [[ -e 'using LanguageServer; using SymbolServer'
-  ]]
+  local script = [[julia --startup-file=no --project=]] .. (envdirstring() or "") .. [[ -e 'using LSPNeovim']]
 
   local status = pcall(vim.fn.system, script)
 
