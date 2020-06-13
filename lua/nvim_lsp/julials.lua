@@ -1,25 +1,15 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
-local environment_directory = util.path.join(util.base_install_dir, "LSPNeovim")
+local envdir = util.path.join(util.base_install_dir, "LSPNeovim")
 
--- determine appropriate project argument
--- TODO not entirely sure when this is evaluated, so it may not be safe
-local function envdirstring()
-  dir = util.path.join(util.base_install_dir, "LSPNeovim")
-  if util.path.is_dir(dir) then
-    return "--project=" .. dir
-  else
-    return nil
-  end
-end
+local runscript = util.path.join(envdir, "bin", "run.jl")
 
--- TODO project string
 configs.julials = {
   default_config = {
     cmd = {
-        "julia", envdirstring(), "--startup-file=no", "--history-file=no",
-        "-e", "using LSPNeovim; LSPNeovim.run()"
+        "julia", "--project=" .. envdir, "--startup-file=no", "--history-file=no",
+        runscript
     };
     filetypes = {'julia'};
     root_dir = function(fname)
@@ -38,13 +28,13 @@ environment by doing `Pkg.add("LSPNeovim")`.
 configs.julials.install = function()
 
   local script = [[julia --startup-file=no -e 'using LibGit2; LibGit2.clone("https://github.com/ExpandingMan/LSPNeovim.jl", "]] ..
-    environment_directory .. [[")']]
+    envdir .. [[")']]
 
   util.sh(script, vim.loop.os_homedir())
 end
 
 configs.julials.install_info = function()
-  local script = [[julia --startup-file=no --project=]] .. (envdirstring() or "") .. [[ -e 'using LSPNeovim']]
+  local script = [[julia --startup-file=no --project=]] .. envdir .. [[ -e 'using LSPNeovim']]
 
   local status = pcall(vim.fn.system, script)
 
