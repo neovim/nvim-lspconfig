@@ -161,6 +161,13 @@ local function make_lsp_sections()
                   make_section(0, '\n\n', sorted_map_table(default_settings.properties, function(k, v)
                     local function tick(s) return string.format("`%s`", s) end
                     local function bold(s) return string.format("**%s**", s) end
+
+                    -- https://github.github.com/gfm/#backslash-escapes
+                    local function excape_markdown_punctuations(str)
+                      local pattern = "\\(\\*\\|\\.\\|?\\|!\\|\"\\|#\\|\\$\\|%\\|'\\|(\\|)\\|,\\|-\\|\\/\\|:\\|;\\|<\\|=\\|>\\|@\\|\\[\\|\\\\\\|\\]\\|\\^\\|_\\|`\\|{\\|\\\\|\\|}\\)"
+                      return fn.substitute(str, pattern, "\\\\\\0", "g")
+                    end
+
                     -- local function pre(s) return string.format("<pre>%s</pre>", s) end
                     -- local function code(s) return string.format("<code>%s</code>", s) end
                     return make_section(0, '\n', {
@@ -179,7 +186,7 @@ local function make_lsp_sections()
                       make_section(2, '\n\n', {
                         {v.default and "Default: "..tick(inspect(v.default, {newline='';indent=''}))};
                         {v.items and "Array items: "..tick(inspect(v.items, {newline='';indent=''}))};
-                        {v.description};
+                        {excape_markdown_punctuations(v.description)};
                       });
                     })
                   end));
