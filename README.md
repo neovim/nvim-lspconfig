@@ -225,6 +225,7 @@ that config.
 - [bashls](#bashls)
 - [ccls](#ccls)
 - [clangd](#clangd)
+- [cmake](#cmake)
 - [codeqlls](#codeqlls)
 - [cssls](#cssls)
 - [dartls](#dartls)
@@ -791,6 +792,27 @@ require'nvim_lsp'.clangd.setup{}
     filetypes = { "c", "cpp", "objc", "objcpp" }
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
+```
+
+## cmake
+
+https://github.com/regen100/cmake-language-server
+
+CMake LSP Implementation
+
+
+```lua
+require'nvim_lsp'.cmake.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "cmake-language-server" }
+    filetypes = { "cmake" }
+    init_options = {
+      buildDirectory = "build"
+    }
+    root_dir = root_pattern(".git", "compile_commands.json", "build")
 ```
 
 ## codeqlls
