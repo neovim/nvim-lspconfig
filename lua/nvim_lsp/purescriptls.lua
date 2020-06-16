@@ -11,7 +11,7 @@ local installer = util.npm_installer {
 }
 
 configs[server_name] = {
-  default_config = util.utf8_config {
+  default_config = {
     cmd = {"purescript-language-server", "--stdio"};
     filetypes = {"purescript"};
     root_dir = util.root_pattern("spago.dhall", "bower.json");
