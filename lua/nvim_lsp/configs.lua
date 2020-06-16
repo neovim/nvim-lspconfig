@@ -62,6 +62,10 @@ function configs.__newindex(t, config_name, config_def)
       for _, item in ipairs(params.items) do
         if item.section then
           local value = util.lookup_section(config.settings, item.section) or vim.NIL
+          -- For empty sections with no explicit '' key, return settings as is
+          if value == vim.NIL and item.section == '' then
+            value = config.settings or vim.NIL
+          end
           table.insert(result, value)
         end
       end
