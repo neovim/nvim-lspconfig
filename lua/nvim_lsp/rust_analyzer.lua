@@ -2,7 +2,7 @@ local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
 configs.rust_analyzer = {
-  default_config = util.utf8_config {
+  default_config = {
     cmd = {"rust-analyzer"};
     filetypes = {"rust"};
     root_dir = util.root_pattern("Cargo.toml", "rust-project.json");

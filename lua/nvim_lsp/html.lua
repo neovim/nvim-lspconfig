@@ -13,7 +13,7 @@ local installer = util.npm_installer {
 local root_pattern = util.root_pattern("package.json")
 
 configs[server_name] = {
-  default_config = util.utf8_config {
+  default_config = {
     cmd = {bin_name, "--stdio"};
     filetypes = {"html"};
     root_dir = function(fname)
