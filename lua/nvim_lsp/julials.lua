@@ -34,13 +34,7 @@ configs.julials.install = function()
 end
 
 configs.julials.install_info = function()
-  local script = [[julia --startup-file=no --project=]] .. envdir .. [[ -e 'using LSPNeovim']]
-
-  local status = pcall(vim.fn.system, script)
-
-  return {
-    is_installed = status and vim.v.shell_error == 0;
-  }
+  return {is_installed=util.path.is_file(util.path.join(envdir,"Project.toml"))}
 end
 
 --- vim:et ts=2 sw=2
