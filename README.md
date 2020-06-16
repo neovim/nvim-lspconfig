@@ -2070,84 +2070,6 @@ require'nvim_lsp'.html.setup{}
   Commands:
   
   Default Values:
-    capabilities = {
-      offsetEncoding = { "utf-8", "utf-16" },
-      textDocument = {
-        codeAction = {
-          codeActionLiteralSupport = {
-            codeActionKind = {
-              valueSet = {}
-            }
-          },
-          dynamicRegistration = false
-        },
-        completion = {
-          completionItem = {
-            commitCharactersSupport = false,
-            deprecatedSupport = false,
-            documentationFormat = { "markdown", "plaintext" },
-            preselectSupport = false,
-            snippetSupport = true
-          },
-          completionItemKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
-          },
-          contextSupport = false,
-          dynamicRegistration = false
-        },
-        declaration = {
-          linkSupport = true
-        },
-        definition = {
-          linkSupport = true
-        },
-        documentHighlight = {
-          dynamicRegistration = false
-        },
-        documentSymbol = {
-          dynamicRegistration = false,
-          hierarchicalDocumentSymbolSupport = true,
-          symbolKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
-          }
-        },
-        hover = {
-          contentFormat = { "markdown", "plaintext" },
-          dynamicRegistration = false
-        },
-        implementation = {
-          linkSupport = true
-        },
-        references = {
-          dynamicRegistration = false
-        },
-        signatureHelp = {
-          dynamicRegistration = false,
-          signatureInformation = {
-            documentationFormat = { "markdown", "plaintext" }
-          }
-        },
-        synchronization = {
-          didSave = true,
-          dynamicRegistration = false,
-          willSave = false,
-          willSaveWaitUntil = false
-        },
-        typeDefinition = {
-          linkSupport = true
-        }
-      },
-      workspace = {
-        applyEdit = true,
-        symbol = {
-          dynamicRegistration = false,
-          hierarchicalWorkspaceSymbolSupport = true,
-          symbolKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
-          }
-        }
-      }
-    }
     cmd = { "html-languageserver", "--stdio" }
     filetypes = { "html" }
     init_options = {
@@ -2157,7 +2079,6 @@ require'nvim_lsp'.html.setup{}
         javascript = true
       }
     }
-    on_init = <function 1>
     root_dir = <function 1>
     settings = {}
 ```
@@ -2243,87 +2164,8 @@ require'nvim_lsp'.jsonls.setup{}
   Commands:
   
   Default Values:
-    capabilities = {
-      offsetEncoding = { "utf-8", "utf-16" },
-      textDocument = {
-        codeAction = {
-          codeActionLiteralSupport = {
-            codeActionKind = {
-              valueSet = {}
-            }
-          },
-          dynamicRegistration = false
-        },
-        completion = {
-          completionItem = {
-            commitCharactersSupport = false,
-            deprecatedSupport = false,
-            documentationFormat = { "markdown", "plaintext" },
-            preselectSupport = false,
-            snippetSupport = true
-          },
-          completionItemKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
-          },
-          contextSupport = false,
-          dynamicRegistration = false
-        },
-        declaration = {
-          linkSupport = true
-        },
-        definition = {
-          linkSupport = true
-        },
-        documentHighlight = {
-          dynamicRegistration = false
-        },
-        documentSymbol = {
-          dynamicRegistration = false,
-          hierarchicalDocumentSymbolSupport = true,
-          symbolKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
-          }
-        },
-        hover = {
-          contentFormat = { "markdown", "plaintext" },
-          dynamicRegistration = false
-        },
-        implementation = {
-          linkSupport = true
-        },
-        references = {
-          dynamicRegistration = false
-        },
-        signatureHelp = {
-          dynamicRegistration = false,
-          signatureInformation = {
-            documentationFormat = { "markdown", "plaintext" }
-          }
-        },
-        synchronization = {
-          didSave = true,
-          dynamicRegistration = false,
-          willSave = false,
-          willSaveWaitUntil = false
-        },
-        typeDefinition = {
-          linkSupport = true
-        }
-      },
-      workspace = {
-        applyEdit = true,
-        symbol = {
-          dynamicRegistration = false,
-          hierarchicalWorkspaceSymbolSupport = true,
-          symbolKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
-          }
-        }
-      }
-    }
     cmd = { "vscode-json-languageserver", "--stdio" }
     filetypes = { "json" }
-    on_init = <function 1>
     root_dir = root_pattern(".git", vim.fn.getcwd())
 ```
 
@@ -3221,87 +3063,8 @@ require'nvim_lsp'.purescriptls.setup{}
   Commands:
   
   Default Values:
-    capabilities = {
-      offsetEncoding = { "utf-8", "utf-16" },
-      textDocument = {
-        codeAction = {
-          codeActionLiteralSupport = {
-            codeActionKind = {
-              valueSet = {}
-            }
-          },
-          dynamicRegistration = false
-        },
-        completion = {
-          completionItem = {
-            commitCharactersSupport = false,
-            deprecatedSupport = false,
-            documentationFormat = { "markdown", "plaintext" },
-            preselectSupport = false,
-            snippetSupport = true
-          },
-          completionItemKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
-          },
-          contextSupport = false,
-          dynamicRegistration = false
-        },
-        declaration = {
-          linkSupport = true
-        },
-        definition = {
-          linkSupport = true
-        },
-        documentHighlight = {
-          dynamicRegistration = false
-        },
-        documentSymbol = {
-          dynamicRegistration = false,
-          hierarchicalDocumentSymbolSupport = true,
-          symbolKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
-          }
-        },
-        hover = {
-          contentFormat = { "markdown", "plaintext" },
-          dynamicRegistration = false
-        },
-        implementation = {
-          linkSupport = true
-        },
-        references = {
-          dynamicRegistration = false
-        },
-        signatureHelp = {
-          dynamicRegistration = false,
-          signatureInformation = {
-            documentationFormat = { "markdown", "plaintext" }
-          }
-        },
-        synchronization = {
-          didSave = true,
-          dynamicRegistration = false,
-          willSave = false,
-          willSaveWaitUntil = false
-        },
-        typeDefinition = {
-          linkSupport = true
-        }
-      },
-      workspace = {
-        applyEdit = true,
-        symbol = {
-          dynamicRegistration = false,
-          hierarchicalWorkspaceSymbolSupport = true,
-          symbolKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
-          }
-        }
-      }
-    }
     cmd = { "purescript-language-server", "--stdio" }
     filetypes = { "purescript" }
-    on_init = <function 1>
     root_dir = root_pattern("spago.dhall, bower.json")
 ```
 
@@ -4303,87 +4066,8 @@ require'nvim_lsp'.rust_analyzer.setup{}
   Commands:
   
   Default Values:
-    capabilities = {
-      offsetEncoding = { "utf-8", "utf-16" },
-      textDocument = {
-        codeAction = {
-          codeActionLiteralSupport = {
-            codeActionKind = {
-              valueSet = {}
-            }
-          },
-          dynamicRegistration = false
-        },
-        completion = {
-          completionItem = {
-            commitCharactersSupport = false,
-            deprecatedSupport = false,
-            documentationFormat = { "markdown", "plaintext" },
-            preselectSupport = false,
-            snippetSupport = true
-          },
-          completionItemKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
-          },
-          contextSupport = false,
-          dynamicRegistration = false
-        },
-        declaration = {
-          linkSupport = true
-        },
-        definition = {
-          linkSupport = true
-        },
-        documentHighlight = {
-          dynamicRegistration = false
-        },
-        documentSymbol = {
-          dynamicRegistration = false,
-          hierarchicalDocumentSymbolSupport = true,
-          symbolKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
-          }
-        },
-        hover = {
-          contentFormat = { "markdown", "plaintext" },
-          dynamicRegistration = false
-        },
-        implementation = {
-          linkSupport = true
-        },
-        references = {
-          dynamicRegistration = false
-        },
-        signatureHelp = {
-          dynamicRegistration = false,
-          signatureInformation = {
-            documentationFormat = { "markdown", "plaintext" }
-          }
-        },
-        synchronization = {
-          didSave = true,
-          dynamicRegistration = false,
-          willSave = false,
-          willSaveWaitUntil = false
-        },
-        typeDefinition = {
-          linkSupport = true
-        }
-      },
-      workspace = {
-        applyEdit = true,
-        symbol = {
-          dynamicRegistration = false,
-          hierarchicalWorkspaceSymbolSupport = true,
-          symbolKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
-          }
-        }
-      }
-    }
     cmd = { "rust-analyzer" }
     filetypes = { "rust" }
-    on_init = <function 1>
     root_dir = root_pattern("Cargo.toml", "rust-project.json")
 ```
 
@@ -4651,6 +4335,12 @@ This server accepts configuration via the `settings` key.
 - **`Lua.runtime.version`**: `enum { "Lua 5.1", "Lua 5.2", "Lua 5.3", "Lua 5.4", "LuaJIT" }`
 
   Default: `"Lua 5.3"`
+  
+  null
+
+- **`Lua.signatureHelp.enable`**: `boolean`
+
+  Default: `true`
   
   null
 
@@ -5172,87 +4862,8 @@ require'nvim_lsp'.yamlls.setup{}
   Commands:
   
   Default Values:
-    capabilities = {
-      offsetEncoding = { "utf-8", "utf-16" },
-      textDocument = {
-        codeAction = {
-          codeActionLiteralSupport = {
-            codeActionKind = {
-              valueSet = {}
-            }
-          },
-          dynamicRegistration = false
-        },
-        completion = {
-          completionItem = {
-            commitCharactersSupport = false,
-            deprecatedSupport = false,
-            documentationFormat = { "markdown", "plaintext" },
-            preselectSupport = false,
-            snippetSupport = true
-          },
-          completionItemKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
-          },
-          contextSupport = false,
-          dynamicRegistration = false
-        },
-        declaration = {
-          linkSupport = true
-        },
-        definition = {
-          linkSupport = true
-        },
-        documentHighlight = {
-          dynamicRegistration = false
-        },
-        documentSymbol = {
-          dynamicRegistration = false,
-          hierarchicalDocumentSymbolSupport = true,
-          symbolKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
-          }
-        },
-        hover = {
-          contentFormat = { "markdown", "plaintext" },
-          dynamicRegistration = false
-        },
-        implementation = {
-          linkSupport = true
-        },
-        references = {
-          dynamicRegistration = false
-        },
-        signatureHelp = {
-          dynamicRegistration = false,
-          signatureInformation = {
-            documentationFormat = { "markdown", "plaintext" }
-          }
-        },
-        synchronization = {
-          didSave = true,
-          dynamicRegistration = false,
-          willSave = false,
-          willSaveWaitUntil = false
-        },
-        typeDefinition = {
-          linkSupport = true
-        }
-      },
-      workspace = {
-        applyEdit = true,
-        symbol = {
-          dynamicRegistration = false,
-          hierarchicalWorkspaceSymbolSupport = true,
-          symbolKind = {
-            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
-          }
-        }
-      }
-    }
     cmd = { "yaml-language-server", "--stdio" }
     filetypes = { "yaml" }
-    on_init = <function 1>
     root_dir = root_pattern(".git", vim.fn.getcwd())
 ```
 
