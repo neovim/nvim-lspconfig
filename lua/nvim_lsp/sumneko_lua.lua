@@ -110,7 +110,7 @@ https://github.com/sumneko/lua-language-server
 Lua language server. **By default, this doesn't have a `cmd` set.** This is
 because it doesn't provide a global binary. We provide an installer for Linux
 and macOS using `:LspInstall`.  If you wish to install it yourself, [here is a
-guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
+guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)).
 So you should set `cmd` yourself like this.
 
 ```lua
