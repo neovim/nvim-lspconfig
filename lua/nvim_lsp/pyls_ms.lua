@@ -3,13 +3,6 @@ local util = require 'nvim_lsp/util'
 
 local name = "pyls_ms"
 
-local function get_python_version()
-  local f = io.popen("python --version 2>&1") -- runs command
-  local l = f:read("*a") -- read output of command
-  f:close()
-  return l:match("^Python%s*(...).*%s*$")
-end
-
 local function get_latest_pyls()
   local f = io.popen("curl -k --silent 'https://pvsc.blob.core.windows.net/python-language-server-stable?restype=container&comp=list&prefix=Python-Language-Server-osx-x64'")
   local l = f:read("*a")
@@ -110,8 +103,8 @@ configs[name] = {
       interpreter = {
         properties =
         {
-          InterpreterPath = vim.fn.exepath("python");
-          Version = get_python_version();
+          InterpreterPath = "";
+          Version = "";
         };
       };
       displayOptions = {};
@@ -137,6 +130,13 @@ If you want to use your own build, set cmd to point to `Microsoft.Python.languag
 
 ```lua
 cmd = { "dotnet", "exec", "path/to/Microsoft.Python.languageServer.dll" };
+```
+
+If the `python` interpreter is not in your PATH environment variable, set the `InterpreterPath` and `Version` properties accordingly.
+
+```lua
+InterpreterPath = "path/to/python",
+Version = "3.8"
 ```
 
 This server accepts configuration via the `settings` key.
