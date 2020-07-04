@@ -58,9 +58,9 @@ local installer = make_installer()
 
 configs[server_name] = {
   default_config = {
-    cmd = {bin_name, "--languageserver", "--verbose"};
+    cmd = {installer.info().cmd[1], "--languageserver", "--verbose"};
     filetypes = {"cs", "vb"};
-    root_dir = util.root_pattern(".csproj", ".sln", ".git");
+    root_dir = util.root_pattern("*.csproj", "*.sln");
     message_level = vim.lsp.protocol.MessageType.Log;
     init_options = {
     };
