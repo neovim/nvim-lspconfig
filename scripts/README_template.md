@@ -42,8 +42,19 @@ Each config provides a `setup()` function, to initialize the server with
 reasonable defaults and some server-specific things like commands or different
 diagnostics.
 
-    vim.cmd('packadd nvim-lsp')  -- If installed as a Vim "package".
-    require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
+```lua
+vim.cmd('packadd nvim-lsp')  -- If installed as a Vim "package".
+require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
+```
+
+If you want to add this to your vimrc, you will need to enclose it in a `lua` block.
+
+```vim
+lua <<EOF
+vim.cmd('packadd nvim-lsp')  -- If installed as a Vim "package".
+require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
+EOF
+```
 
 Find the [config](#configurations) for your language, then paste the example
 given there to your `init.vim`. **All examples are given in Lua,** see `:help
@@ -57,8 +68,10 @@ config provides `nvim_lsp.texlab.buf_build({bufnr})`.
 To use the defaults, just call `setup()` with an empty `config` parameter.
 For the `gopls` config, that would be:
 
-    vim.cmd('packadd nvim-lsp')  -- If installed as a Vim "package".
-    require'nvim_lsp'.gopls.setup{}
+```lua
+vim.cmd('packadd nvim-lsp')  -- If installed as a Vim "package".
+require'nvim_lsp'.gopls.setup{}
+```
 
 ### Example: override some defaults
 
