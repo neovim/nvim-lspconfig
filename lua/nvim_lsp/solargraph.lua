@@ -1,9 +1,13 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
+local bin_name = "solargraph"
+if vim.fn.has('win32') == 1 then
+  bin_name = bin_name..'.bat'
+end
 configs.solargraph = {
   default_config = {
-    cmd = {"solargraph", "stdio"};
+    cmd = {bin_name, "stdio"};
     filetypes = {"ruby"};
     root_dir = util.root_pattern("Gemfile", ".git");
   };
