@@ -3,6 +3,9 @@ local util = require "nvim_lsp/util"
 
 local server_name = "vimls"
 local bin_name = "vim-language-server"
+if vim.fn.has('win32') == 1 then
+  bin_name = bin_name..".cmd"
+end
 
 local installer = util.npm_installer {
   server_name = server_name,
