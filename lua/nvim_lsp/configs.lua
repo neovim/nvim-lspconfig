@@ -126,10 +126,10 @@ function configs.__newindex(t, config_name, config_def)
 
       add_callbacks(new_config)
       if config_def.on_new_config then
-        pcall(config_def.on_new_config, new_config)
+        pcall(config_def.on_new_config, new_config, _root_dir)
       end
       if config.on_new_config then
-        pcall(config.on_new_config, new_config)
+        pcall(config.on_new_config, new_config, _root_dir)
       end
 
       new_config.on_init = util.add_hook_after(new_config.on_init, function(client, _result)
