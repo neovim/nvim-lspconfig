@@ -13,7 +13,7 @@ configs[server_name] = {
   default_config = {
     cmd = {"pyright-langserver", "--stdio"};
     filetypes = {"python"};
-    root_dir = util.root_pattern(".git");
+   root_dir = util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
   };
   docs = {
     description = [[
