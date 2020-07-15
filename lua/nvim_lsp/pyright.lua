@@ -15,6 +15,7 @@ configs[server_name] = {
     filetypes = {"python"};
     root_dir = util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
     settings = {
+      analysis = { autoSearchPaths= true; };
       pyright = { useLibraryCodeForTypes = true; };
     };
    };
