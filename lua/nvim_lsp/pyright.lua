@@ -13,8 +13,11 @@ configs[server_name] = {
   default_config = {
     cmd = {"pyright-langserver", "--stdio"};
     filetypes = {"python"};
-   root_dir = util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
-  };
+    root_dir = util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
+    settings = {
+      pyright = { useLibraryCodeForTypes = true; };
+    };
+   };
   docs = {
     description = [[
 https://github.com/microsoft/pyright
