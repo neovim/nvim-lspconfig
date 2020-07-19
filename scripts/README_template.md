@@ -63,6 +63,12 @@ given there to your `init.vim`. **All examples are given in Lua,** see `:help
 Some configs may define additional server-specific functions, e.g. the `texlab`
 config provides `nvim_lsp.texlab.buf_build({bufnr})`.
 
+If you want to see the location of log file, you can run this in neovim:
+
+```
+:lua print(vim.lsp.get_log_path())
+```
+
 ### Example: using the defaults
 
 To use the defaults, just call `setup()` with an empty `config` parameter.
