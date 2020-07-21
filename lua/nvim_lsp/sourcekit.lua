@@ -4,7 +4,7 @@ local util = require 'nvim_lsp/util'
 configs.sourcekit = {
   default_config = {
     cmd = {"xcrun", "sourcekit-lsp"};
-    filetypes = {"swift"};
+    filetypes = {"swift", "c", "cpp", "objective-c", "objective-cpp"};
     root_dir = util.root_pattern("Package.swift", ".git")
   };
   docs = {
