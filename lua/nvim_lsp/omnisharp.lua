@@ -14,12 +14,13 @@ local function make_installer()
   elseif vim.fn.has('mac') == 1 then
     url = 'osx'
   end
+  local bin_path = util.path.join{install_dir, bin_name}
 
   local download_target = util.path.join{install_dir, string.format("omnisharp-%s.zip", url)}
   local extract_cmd = string.format("unzip '%s' -d '%s'", download_target, install_dir)
   local download_cmd = string.format('curl -fLo "%s" --create-dirs "https://github.com/OmniSharp/omnisharp-roslyn/releases/latest/download/omnisharp-%s.zip"', download_target, url)
+  local make_executable_cmd = string.format("chmod u+x '%s'", bin_path)
 
-  local bin_path = util.path.join{install_dir, bin_name}
   local X = {}
   function X.install()
     local install_info = X.info()
@@ -34,6 +35,7 @@ local function make_installer()
     vim.fn.mkdir(install_dir, 'p')
     vim.fn.system(download_cmd)
     vim.fn.system(extract_cmd)
+    vim.fn.system(make_executable_cmd)
   end
   function X.info()
     return {
