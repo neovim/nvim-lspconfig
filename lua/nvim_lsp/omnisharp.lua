@@ -7,22 +7,19 @@ local function make_installer()
   local install_dir = util.path.join{util.base_install_dir, server_name}
 
   local url = 'linux-x64'
-  local extracted_dir = "linux"
 
   if vim.fn.has('win32') == 1 then
     url = 'win-x64'
-    extracted_dir = 'win32'
     bin_name = 'Omnisharp.exe'
   elseif vim.fn.has('mac') == 1 then
     url = 'osx'
-    extracted_dir = 'darwin'
   end
 
   local download_target = util.path.join{install_dir, string.format("omnisharp-%s.zip", url)}
   local extract_cmd = string.format("unzip '%s' -d '%s'", download_target, install_dir)
   local download_cmd = string.format('curl -fLo "%s" --create-dirs "https://github.com/OmniSharp/omnisharp-roslyn/releases/latest/download/omnisharp-%s.zip"', download_target, url)
 
-  local bin_path = util.path.join{install_dir, extracted_dir, bin_name}
+  local bin_path = util.path.join{install_dir, bin_name}
   local X = {}
   function X.install()
     local install_info = X.info()
@@ -42,7 +39,7 @@ local function make_installer()
     return {
       is_installed = util.path.exists(bin_path);
       install_dir = install_dir;
-      cmd = { bin_path };
+      cmd = { bin_path, "--languageserver" };
     }
   end
   function X.configure(config)
@@ -58,10 +55,12 @@ local installer = make_installer()
 
 configs[server_name] = {
   default_config = {
-    cmd = {installer.info().cmd[1], "--languageserver", "--verbose"};
+    cmd = installer.info().cmd;
     filetypes = {"cs", "vb"};
     root_dir = util.root_pattern("*.csproj", "*.sln");
-    message_level = vim.lsp.protocol.MessageType.Log;
+    on_new_config = function(config)
+      installer.configure(config)
+    end;
     init_options = {
     };
   };
