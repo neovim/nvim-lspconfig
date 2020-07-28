@@ -24,7 +24,7 @@ configs[server_name] = {
         };
     };
     docs = {
-        package_json = "https://raw.githubusercontent.com/github/vscode-codeql/master/extensions/ql-vscode/package.json";
+        package_json = "https://raw.githubusercontent.com/github/vscode-codeql/main/extensions/ql-vscode/package.json";
         description = [[
 Reference:
 https://help.semmle.com/codeql/codeql-cli.html
