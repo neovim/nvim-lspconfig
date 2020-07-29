@@ -4466,11 +4466,11 @@ require'nvim_lsp'.texlab.setup{}
 
 ## tsserver
 
-https://github.com/theia-ide/typescript-language-server
+https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29
 
 `typescript-language-server` can be installed via `:LspInstall tsserver` or by yourself with `npm`:
 ```sh
-npm install -g typescript-language-server
+npm install -g typescript
 ```
 
 Can be installed in Nvim with `:LspInstall tsserver`
