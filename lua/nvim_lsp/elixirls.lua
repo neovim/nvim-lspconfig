@@ -73,7 +73,7 @@ configs[server_name] = {
     cmd = { cmd };
     filetypes = {"elixir", "eelixir"};
     root_dir = function(fname)
-        return util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+        return util.root_pattern("mix.lock", ".git")(fname) or vim.loop.os_homedir()
     end;
     };
     on_new_config = function(config)
@@ -100,7 +100,7 @@ require'nvim_lsp'.elixirls.setup{
 ```
 ]];
             default_config = {
-                root_dir = [[root_pattern("mix.exs", ".git") or vim.loop.os_homedir()]];
+                root_dir = [[root_pattern("mix.lock", ".git") or vim.loop.os_homedir()]];
             };
     };
 }
