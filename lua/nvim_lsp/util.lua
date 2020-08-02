@@ -125,6 +125,31 @@ function M.has_bins(...)
   return true
 end
 
+-- some file system utilities
+M.fs = {
+}
+
+function M.fs.force_symlink(target,link_path,flag,callback)
+  if type(flag) == 'function' then
+    callback = callback or flag
+    flag = nil
+  end
+  callback  = callback or function (err) if err then error(err) end end
+  local function handling_callback(err)
+    if err and err:match('EEXIST') then
+      uv.fs_unlink(link_path,function(err)
+                                if(err) then
+                                  return callback(err)
+                                end
+                                M.fs.force_symlink(target,link_path,flag,callback)
+                              end)
+      return
+    end
+    callback(err)
+  end
+  uv.fs_symlink(target,link_path,flag,handling_callback)
+end
+
 -- Some path utilities
 M.path = (function()
   local function exists(filename)
