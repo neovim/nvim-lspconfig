@@ -18,6 +18,13 @@ configs[server_name] = {
       analysis = { autoSearchPaths= true; };
       pyright = { useLibraryCodeForTypes = true; };
     };
+    -- The following before_init function can be removed once https://github.com/neovim/neovim/pull/12638 is merged
+    before_init = function(initialize_params)
+            initialize_params['workspaceFolders'] = {{
+                name = 'workspace',
+                uri = initialize_params['rootUri']
+            }}
+    end
    };
   docs = {
     description = [[
@@ -30,7 +37,4 @@ https://github.com/microsoft/pyright
 
 configs[server_name].install = installer.install
 configs[server_name].install_info = installer.info
-
--- configs[server_name].install = installer.install
--- configs[server_name].install_info = installer.info
 -- vim:et ts=2 sw=2
