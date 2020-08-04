@@ -137,9 +137,9 @@ function M.fs.force_symlink(target,link_path,flag,callback)
   callback  = callback or function (err) if err then error(err) end end
   local function handling_callback(err)
     if err and err:match('EEXIST') then
-      uv.fs_unlink(link_path,function(err)
-                                if(err) then
-                                  return callback(err)
+      uv.fs_unlink(link_path,function(inner_err)
+                                if(inner_err) then
+                                  return callback(inner_err)
                                 end
                                 M.fs.force_symlink(target,link_path,flag,callback)
                               end)
