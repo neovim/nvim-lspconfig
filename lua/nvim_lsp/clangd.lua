@@ -14,9 +14,13 @@ local function get_system_info()
     return info.sysname:lower(),info.machine
 end
 
+local function get_bin_name()
+    return luv.os_uname().sysname:lower() == 'windows_nt' and (name..'.exe') or name
+end
+
 -- fetch latest release info
 local function get_latest_release_info()
-  local f = io.popen("curl -k --silent '"..github_release_url.."' ")
+  local f = io.popen('curl -k --silent "'..github_release_url..'" ')
   local l = f:read("*a")
   f:close()
   return vim.fn.json_decode(l)
@@ -61,11 +65,6 @@ local function passes_installation_checks(install_info,system,architecture)
       return false
     end
 
-    if system == 'windows_nt' and not util.has_bins('Expand-Archive') then
-      error("Expand-Archive is required on "..system)
-      return false
-    end
-
     return true
 end
 
@@ -73,7 +72,7 @@ local function make_installer()
   local P = util.path.join
   local install_dir = P{util.base_install_dir , name}
 
-  local bin = P{install_dir , "bin","clangd"}
+  local bin = P{install_dir , "bin", get_bin_name()}
 
   local X = {}
   function X.install()
@@ -89,7 +88,7 @@ local function make_installer()
     local release_version = release_info.name
     local download_url,zip_file_name = parse_clangd_download_info(release_info, platform_translation[system])
     local zip_file_path = P{install_info.install_dir , zip_file_name}
-    local download_cmd = string.format("curl -fLo %s --create-dirs '%s'",zip_file_path , download_url)
+    local download_cmd = string.format('curl -fLo %s --create-dirs "%s"',zip_file_path , download_url)
     local target_bin_dir = P{install_info.install_dir,name..'_'..release_version,'bin'}
     local symlink_dir = P{install_info.install_dir,'bin'}
     local install_cmd = ''
@@ -103,7 +102,7 @@ local function make_installer()
     if system == 'darwin' or system == 'linux' then
       install_cmd = "unzip "..zip_file_path.." -d "..install_info.install_dir
     elseif system == 'windows_nt' then
-      install_cmd = "Expand-Archive -Force "..zip_file_path.." -d "..install_info.install_dir
+      install_cmd = 'powershell -command  "Expand-Archive -Force '..zip_file_path..' -d '..install_info.install_dir..'"'
     end
 
     vim.fn.system(download_cmd)
@@ -112,10 +111,11 @@ local function make_installer()
   end
 
   function X.info()
+    local bin_name = get_bin_name()
     return {
-      is_installed = util.has_bins(name) or util.path.exists(bin);
+      is_installed = util.has_bins(bin_name) or util.path.exists(bin);
       install_dir = install_dir;
-      cmd = {util.has_bins(name) and name or bin , "--background-index"};
+      cmd = {util.has_bins(bin_name) and bin_name or bin , "--background-index"};
     }
   end
 
