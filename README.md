@@ -42,8 +42,19 @@ Each config provides a `setup()` function, to initialize the server with
 reasonable defaults and some server-specific things like commands or different
 diagnostics.
 
-    vim.cmd('packadd nvim-lsp')  -- If installed as a Vim "package".
-    require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
+```lua
+vim.cmd('packadd nvim-lsp')  -- If installed as a Vim "package".
+require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
+```
+
+If you want to add this to your vimrc, you will need to enclose it in a `lua` block.
+
+```vim
+lua <<EOF
+vim.cmd('packadd nvim-lsp')  -- If installed as a Vim "package".
+require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
+EOF
+```
 
 Find the [config](#configurations) for your language, then paste the example
 given there to your `init.vim`. **All examples are given in Lua,** see `:help
@@ -52,13 +63,21 @@ given there to your `init.vim`. **All examples are given in Lua,** see `:help
 Some configs may define additional server-specific functions, e.g. the `texlab`
 config provides `nvim_lsp.texlab.buf_build({bufnr})`.
 
+If you want to see the location of log file, you can run this in neovim:
+
+```
+:lua print(vim.lsp.get_log_path())
+```
+
 ### Example: using the defaults
 
 To use the defaults, just call `setup()` with an empty `config` parameter.
 For the `gopls` config, that would be:
 
-    vim.cmd('packadd nvim-lsp')  -- If installed as a Vim "package".
-    require'nvim_lsp'.gopls.setup{}
+```lua
+vim.cmd('packadd nvim-lsp')  -- If installed as a Vim "package".
+require'nvim_lsp'.gopls.setup{}
+```
 
 ### Example: override some defaults
 
@@ -242,6 +261,7 @@ that config.
 - [hie](#hie)
 - [html](#html)
 - [intelephense](#intelephense)
+- [jedi_language_server](#jedi_language_server)
 - [jsonls](#jsonls)
 - [julials](#julials)
 - [kotlin_language_server](#kotlin_language_server)
@@ -325,6 +345,7 @@ https://github.com/MaskRay/ccls/wiki
 
 ccls relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
+For details on how to automatically generate one using CMake look [here](https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html).
 
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
@@ -778,6 +799,7 @@ https://clang.llvm.org/extra/clangd/Installation.html
 
 clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
+For details on how to automatically generate one using CMake look [here](https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html).
 
 
 ```lua
@@ -994,12 +1016,6 @@ This server accepts configuration via the `settings` key.
   
   The path to a log file for communication between Dart Code and the analysis server\.
 
-- **`dart.analyzerObservatoryPort`**: `null|number`
-
-  Default: `vim.NIL`
-  
-  The port number to be used for the Dart analysis server observatory\.
-
 - **`dart.analyzerPath`**: `null|string`
 
   Default: `vim.NIL`
@@ -1012,6 +1028,12 @@ This server accepts configuration via the `settings` key.
   
   An SSH host to run the analysis server\.
   This can be useful when modifying code on a remote machine using SSHFS\.
+
+- **`dart.analyzerVmServicePort`**: `null|number`
+
+  Default: `vim.NIL`
+  
+  The port number to be used for the Dart analysis server VM service\.
 
 - **`dart.autoImportCompletions`**: `boolean`
 
@@ -1038,6 +1060,12 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Whether to show annotations against constructor\, method invocations and lists that span multiple lines\.
+
+- **`dart.debugExtensionBackendProtocol`**: `enum { "sse", "ws" }`
+
+  Default: `"ws"`
+  
+  The protocol to use for the Dart Debug Extension backend service\. Using WebSockets can improve performance but may fail when connecting through some proxy servers\.
 
 - **`dart.debugExternalLibraries`**: `boolean`
 
@@ -1089,6 +1117,12 @@ This server accepts configuration via the `settings` key.
   
   Whether to enable the dart\_style formatter included with the Dart SDK\.
 
+- **`dart.enableSnippets`**: `boolean`
+
+  Default: `true`
+  
+  Whether to include Dart and Flutter snippets in code completion\.
+
 - **`dart.env`**: `object`
 
   Default: `vim.empty_dict()`
@@ -1105,7 +1139,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to call toString\(\) on objects when rendering them in debug views \(such as the Variables\, Watch and Hovers views\)\. Only applies to views of 15 or fewer values for performance reasons\.
+  Whether to call toString\(\) on objects when rendering them in debug views \(such as the Variables\, Watch and Hovers views\)\. Only applies to views of 100 or fewer values for performance reasons\.
 
 - **`dart.extensionLogFile`**: `null|string`
 
@@ -1263,12 +1297,6 @@ This server accepts configuration via the `settings` key.
   
   Whether to show a notification the first few times an analysis server exception occurs\.
 
-- **`dart.observatoryLogFile`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  The path to a log file for communication between Dart Code and Observatory \(the VM debugger\)\. This is useful when trying to diagnose issues with debugging such as missed breakpoints\. Use \$\{name\} in the log file name to prevent concurrent debug sessions overwriting each others logs\.
-
 - **`dart.openDevTools`**: `enum { "never", "flutter", "always" }`
 
   Default: `"never"`
@@ -1291,6 +1319,10 @@ This server accepts configuration via the `settings` key.
 
   Whether to register Pub Build Runner tasks with VS Code\.
 
+- **`dart.previewEmbeddedDevTools`**: `boolean`
+
+  EXPERIMENTAL\: Whether to load DevTools embedded inside VS Code\.
+
 - **`dart.previewFlutterUiGuides`**: `boolean`
 
   Whether to enable the Flutter UI Guides preview\.
@@ -1306,12 +1338,6 @@ This server accepts configuration via the `settings` key.
 - **`dart.previewLsp`**: `boolean`
 
   EXPERIMENTAL\: Whether to run the analyzer in LSP mode \(requires restart\)\.
-
-- **`dart.previewNewCompletionPlaceholders`**: `boolean`
-
-  Default: `true`
-  
-  Whether to enable new behaviour for code completion to include \@required arguments as placeholders \(when using dart\.insertArgumentPlaceholders\)\.
 
 - **`dart.promptToGetPackages`**: `boolean`
 
@@ -1409,7 +1435,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to use specific ports for Observatory and DevTools when running in Chrome OS\. This is required to connect from the native Chrome OS browser but will prevent apps from launching if the ports are already in\-use \(for example if trying to run a second app\)\.
+  Whether to use specific ports for the VM service and DevTools when running in Chrome OS\. This is required to connect from the native Chrome OS browser but will prevent apps from launching if the ports are already in\-use \(for example if trying to run a second app\)\.
 
 - **`dart.vmAdditionalArgs`**: `array`
 
@@ -1418,6 +1444,12 @@ This server accepts configuration via the `settings` key.
   Array items: `{type = "string"}`
   
   Additional args to pass to the Dart VM when running\/debugging command line apps\.
+
+- **`dart.vmServiceLogFile`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  The path to a log file for communication between Dart Code and the VM service\. This is useful when trying to diagnose issues with debugging such as missed breakpoints\. Use \$\{name\} in the log file name to prevent concurrent debug sessions overwriting each others logs\.
 
 - **`dart.warnWhenEditingFilesOutsideWorkspace`**: `boolean`
 
@@ -1443,7 +1475,7 @@ require'nvim_lsp'.dartls.setup{}
     filetypes = { "dart" }
     init_options = {
       closingLabels = "true",
-      flutterOutline = "false",
+      fluttreOutline = "false",
       onlyAnalyzeProjectsWithOpenFiles = "false",
       outline = "true",
       suggestFromUnimportedLibraries = "true"
@@ -1956,89 +1988,69 @@ init_options = {
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`languageServerHaskell.completionSnippetsOn`**: `boolean`
+- **`haskell.completionSnippetsOn`**: `boolean`
 
   Default: `true`
   
   Show snippets with type information when using code completion
 
-- **`languageServerHaskell.diagnosticsOnChange`**: `boolean`
+- **`haskell.diagnosticsOnChange`**: `boolean`
 
   Default: `true`
   
   Compute diagnostics continuously as you type\. Turn off to only generate diagnostics on file save\.
 
-- **`languageServerHaskell.enableHIE`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable HIE \(useful for multi\-root workspaces\)\.
-
-- **`languageServerHaskell.formatOnImportOn`**: `boolean`
+- **`haskell.formatOnImportOn`**: `boolean`
 
   Default: `true`
   
   When adding an import\, use the formatter on the result
 
-- **`languageServerHaskell.formattingProvider`**: `enum { "brittany", "floskell", "ormolu", "none" }`
+- **`haskell.formattingProvider`**: `enum { "brittany", "floskell", "ormolu", "stylish-haskell", "none" }`
 
-  Default: `"brittany"`
+  Default: `"ormolu"`
   
-  The tool to use for formatting requests\.
+  The tool to use for formatting requests
 
-- **`languageServerHaskell.hieExecutablePath`**: `string`
-
-  Default: `""`
-  
-  Set the path to your hie executable\, if it\'s not already on your \$PATH\. Works with ~\, \$\{HOME\} and \$\{workspaceFolder\}\.
-
-- **`languageServerHaskell.hieVariant`**: `enum { "haskell-ide-engine", "haskell-language-server", "ghcide" }`
-
-  Default: `"haskell-ide-engine"`
-  
-  Which haskell language server to use\.
-
-- **`languageServerHaskell.hlintOn`**: `boolean`
+- **`haskell.hlintOn`**: `boolean`
 
   Default: `true`
   
   Get suggestions from hlint
 
-- **`languageServerHaskell.liquidOn`**: `boolean`
+- **`haskell.languageServerVariant`**: `enum { "haskell-ide-engine", "haskell-language-server", "ghcide" }`
+
+  Default: `"haskell-language-server"`
+  
+  Which language server to use\.
+
+- **`haskell.liquidOn`**: `boolean`
 
   Get diagnostics from liquid haskell
 
-- **`languageServerHaskell.logFile`**: `string`
+- **`haskell.logFile`**: `string`
 
   Default: `""`
   
   If set\, redirects the logs to a file\.
 
-- **`languageServerHaskell.maxNumberOfProblems`**: `number`
+- **`haskell.maxNumberOfProblems`**: `number`
 
   Default: `100`
   
-  Controls the maximum number of problems produced by the server\.
+  Controls the maximum number of problems produced by the server
 
-- **`languageServerHaskell.showTypeForSelection.command.location`**: `enum { "dropdown", "channel" }`
+- **`haskell.serverExecutablePath`**: `string`
 
-  Default: `"dropdown"`
+  Default: `""`
   
-  Determines where the type information for selected text will be shown when the \`showType\` command is triggered \(distinct from automatically showing this information when hover is triggered\)\.
-  dropdown\: in a dropdown
-  channel\: will be revealed in an output channel
+  Manually set a language server executable\. Can be something on the \$PATH or a path to an executable itself\. Works with ~\, \$\{HOME\} and \$\{workspaceFolder\}\.
 
-- **`languageServerHaskell.showTypeForSelection.onHover`**: `boolean`
-
-  Default: `true`
-  
-  If true\, when an expression is selected\, the hover tooltip will attempt to display the type of the entire expression \- rather than just the term under the cursor\.
-
-- **`languageServerHaskell.trace.server`**: `enum { "off", "messages" }`
+- **`haskell.trace.server`**: `enum { "off", "messages" }`
 
   Default: `"off"`
   
-  Traces the communication between VSCode and the languageServerHaskell service\.
+  Traces the communication between VS Code and the language server\.
 
 </details>
 
@@ -2103,6 +2115,24 @@ require'nvim_lsp'.intelephense.setup{}
     cmd = { "intelephense", "--stdio" }
     filetypes = { "php" }
     root_dir = root_pattern("composer.json", ".git")
+```
+
+## jedi_language_server
+
+https://github.com/pappasam/jedi-language-server
+
+`jedi-language-server`, a language server for Python, built on top of jedi
+    
+
+```lua
+require'nvim_lsp'.jedi_language_server.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "jedi-language-server" }
+    filetypes = { "python" }
+    root_dir = vim's starting directory
 ```
 
 ## jsonls
@@ -2315,6 +2345,12 @@ This server accepts configuration via the `settings` key.
   
   Check variables used in type declarations are datatypes\.
 
+- **`julia.lint.disabledDirs`**: `array`
+
+  Default: `{ "docs", "test" }`
+  
+  null
+
 - **`julia.lint.iter`**: `boolean`
 
   Default: `true`
@@ -2329,7 +2365,7 @@ This server accepts configuration via the `settings` key.
 
 - **`julia.lint.missingrefs`**: `enum { "none", "symbols", "all" }`
 
-  Default: `"all"`
+  Default: `"none"`
   
   Highlight unknown symbols\. The \`symbols\` option will not mark unknown fields\.
 
@@ -2458,6 +2494,20 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   \[Recommended\] Specifies whether URIs inside JARs should be represented using the \'kls\'\-scheme\.
+
+- **`kotlin.languageServer.debugAttach.autoSuspend`**: `boolean`
+
+  \[DEBUG\] If enabled \(together with debugAttach\.enabled\)\, the language server will not immediately launch but instead listen on the specified attach port and wait for a debugger\. This is ONLY useful if you need to debug the language server ITSELF\.
+
+- **`kotlin.languageServer.debugAttach.enabled`**: `boolean`
+
+  \[DEBUG\] Whether the language server should listen for debuggers\, i\.e\. be debuggable while running in VSCode\. This is ONLY useful if you need to debug the language server ITSELF\.
+
+- **`kotlin.languageServer.debugAttach.port`**: `integer`
+
+  Default: `5005`
+  
+  \[DEBUG\] If transport is stdio this enables you to attach to the running langugage server with a debugger\. This is ONLY useful if you need to debug the language server ITSELF\.
 
 - **`kotlin.languageServer.enabled`**: `boolean`
 
@@ -2674,6 +2724,12 @@ Can be installed in Nvim with `:LspInstall metals`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`metals.ammoniteJvmProperties`**: `array`
+
+  Array items: `{type = "string"}`
+  
+  null
+
 - **`metals.bloopSbtAlreadyInstalled`**: `boolean`
 
   null
@@ -2685,6 +2741,12 @@ This server accepts configuration via the `settings` key.
 - **`metals.customRepositories`**: `array`
 
   Array items: `{type = "string"}`
+  
+  null
+
+- **`metals.enableStripMarginOnTypeFormatting`**: `boolean`
+
+  Default: `true`
   
   null
 
@@ -2720,7 +2782,7 @@ This server accepts configuration via the `settings` key.
 
 - **`metals.serverVersion`**: `string`
 
-  Default: `"0.9.0"`
+  Default: `"0.9.2"`
   
   null
 
@@ -2919,6 +2981,8 @@ This server accepts configuration via the `settings` key.
 
 - **`purescript.addSpagoSources`**: `boolean`
 
+  Default: `true`
+  
   Whether to add spago sources to the globs passed to the IDE server for source locations \(specifically the output of \`spago sources\`\, if this is a spago project\)\. Update due to adding packages\/changing package set requires psc\-ide server restart\.
 
 - **`purescript.autoStartPscIde`**: `boolean`
@@ -2953,7 +3017,7 @@ This server accepts configuration via the `settings` key.
 
 - **`purescript.buildCommand`**: `string`
 
-  Default: `"pulp build -- --json-errors"`
+  Default: `"spago build --purs-args --json-errors"`
   
   Build command to use with arguments\. Not passed to shell\. eg \`pulp build \-\- \-\-json\-errors\` \(this default requires pulp \>\=10\)
 
@@ -2975,7 +3039,7 @@ This server accepts configuration via the `settings` key.
 
 - **`purescript.editorMode`**: `boolean`
 
-  Whether to set the editor\-mode flag on the IDE server
+  \(DEPRECATED \- ignored from purs 0\.13\.8\) Whether to set the editor\-mode flag on the IDE server
 
 - **`purescript.fastRebuild`**: `boolean`
 
@@ -2993,19 +3057,19 @@ This server accepts configuration via the `settings` key.
 
 - **`purescript.outputDirectory`**: `string`
 
-  Default: `vim.NIL`
+  Default: `"output/"`
   
   Override purs ide output directory \(output\/ if not specified\)\. This should match up to your build command
 
 - **`purescript.packagePath`**: `string`
 
-  Default: `"bower_components"`
+  Default: `""`
   
   Path to installed packages\. Will be used to control globs passed to IDE server for source locations\.  Change requires IDE server restart\.
 
 - **`purescript.polling`**: `boolean`
 
-  Whether to set the polling flag on the IDE server
+  \(DEPRECATED \- ignored from purs 0\.13\.8\) Whether to set the polling flag on the IDE server
 
 - **`purescript.preludeModule`**: `string`
 
@@ -3018,12 +3082,6 @@ This server accepts configuration via the `settings` key.
   Default: `vim.NIL`
   
   Port to use for purs IDE server \(whether an existing server or to start a new one\)\. By default a random port is chosen \(or an existing port in \.psc\-ide\-port if present\)\, if this is specified no attempt will be made to select an alternative port on failure\.
-
-- **`purescript.pscIdeServerExe`**: `string`
-
-  Default: `"psc-ide-server"`
-  
-  Location of legacy psc\-ide\-server executable \(resolved wrt PATH\)
 
 - **`purescript.pscIdelogLevel`**: `string`
 
@@ -3048,12 +3106,6 @@ This server accepts configuration via the `settings` key.
   Default: `"off"`
   
   Traces the communication between VSCode and the PureScript language service\.
-
-- **`purescript.useCombinedExe`**: `boolean`
-
-  Default: `true`
-  
-  Whether to use the new combined purs executable\. This will default to true in the future then go away\.
 
 </details>
 
@@ -3380,6 +3432,13 @@ If you want to use your own build, set cmd to point to `Microsoft.Python.languag
 cmd = { "dotnet", "exec", "path/to/Microsoft.Python.languageServer.dll" };
 ```
 
+If the `python` interpreter is not in your PATH environment variable, set the `InterpreterPath` and `Version` properties accordingly.
+
+```lua
+InterpreterPath = "path/to/python",
+Version = "3.8"
+```
+
 This server accepts configuration via the `settings` key.
 
     
@@ -3398,8 +3457,8 @@ require'nvim_lsp'.pyls_ms.setup{}
       displayOptions = {},
       interpreter = {
         properties = {
-          InterpreterPath = "/usr/bin/python",
-          Version = "2.7"
+          InterpreterPath = "",
+          Version = ""
         }
       }
     }
@@ -3775,6 +3834,12 @@ This server accepts configuration via the `settings` key.
 
   Activate all available features
 
+- **`rust-analyzer.cargo.autoreload`**: `boolean`
+
+  Default: `true`
+  
+  null
+
 - **`rust-analyzer.cargo.features`**: `array`
 
   Default: `{}`
@@ -3796,6 +3861,12 @@ This server accepts configuration via the `settings` key.
   Default: `vim.NIL`
   
   Specify the compilation target
+
+- **`rust-analyzer.cargoRunner`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  Custom cargo runner extension ID\.
 
 - **`rust-analyzer.checkOnSave.allFeatures`**: `null|boolean`
 
@@ -3836,6 +3907,12 @@ This server accepts configuration via the `settings` key.
   Array items: `{type = "string"}`
   
   List of features to activate\. Defaults to \`rust\-analyzer\.cargo\.features\`\.
+
+- **`rust-analyzer.checkOnSave.noDefaultFeatures`**: `null|boolean`
+
+  Default: `vim.NIL`
+  
+  null
 
 - **`rust-analyzer.checkOnSave.overrideCommand`**: `null|array`
 
@@ -3892,6 +3969,30 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.diagnostics.enableExperimental`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`rust-analyzer.diagnostics.warningsAsHint`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  List of warnings that should be displayed with hint severity\.
+  The warnings will be indicated by faded text or three dots in code and will not show up in the problems panel\.
+
+- **`rust-analyzer.diagnostics.warningsAsInfo`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  List of warnings that should be displayed with info severity\.
+  The warnings will be indicated by a blue squiggly underline in code and a blue icon in the problems panel\.
+
 - **`rust-analyzer.files.exclude`**: `array`
 
   Default: `{}`
@@ -3917,6 +4018,12 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Whether to show HoverActions in Rust files\.
+
+- **`rust-analyzer.hoverActions.gotoTypeDef`**: `boolean`
+
+  Default: `true`
+  
+  null
 
 - **`rust-analyzer.hoverActions.implementations`**: `boolean`
 
@@ -4008,6 +4115,12 @@ This server accepts configuration via the `settings` key.
 
   Enable Proc macro support\, cargo\.loadOutDirsFromCheck must be enabled\.
 
+- **`rust-analyzer.runnableEnv`**
+
+  Default: `vim.NIL`
+  
+  Environment variables passed to the runnable launched using \`Test \` or \`Debug\` lens or \`rust\-analyzer\.run\` command\.
+
 - **`rust-analyzer.rustfmt.extraArgs`**: `array`
 
   Default: `{}`
@@ -4038,7 +4151,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"off"`
   
-  Trace requests to the rust\-analyzer
+  Trace requests to the rust\-analyzer \(this is usually overly verbose and not recommended for regular users\)
 
 - **`rust-analyzer.updates.askBeforeDownload`**: `boolean`
 
@@ -4237,7 +4350,7 @@ require'nvim_lsp'.sourcekit.setup{}
   
   Default Values:
     cmd = { "xcrun", "sourcekit-lsp" }
-    filetypes = { "swift" }
+    filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" }
     root_dir = root_pattern("Package.swift", ".git")
 ```
 
@@ -4248,7 +4361,7 @@ https://github.com/sumneko/lua-language-server
 Lua language server. **By default, this doesn't have a `cmd` set.** This is
 because it doesn't provide a global binary. We provide an installer for Linux
 and macOS using `:LspInstall`.  If you wish to install it yourself, [here is a
-guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
+guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)).
 So you should set `cmd` yourself like this.
 
 ```lua
@@ -4273,6 +4386,12 @@ This server accepts configuration via the `settings` key.
 - **`Lua.completion.callSnippet`**: `enum { "Disable", "Both", "Replace" }`
 
   Default: `"Disable"`
+  
+  null
+
+- **`Lua.completion.displayContext`**: `integer`
+
+  Default: `6`
   
   null
 
@@ -4322,6 +4441,30 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.diagnostics.severity`**: `object`
 
+  null
+
+- **`Lua.hover.enable`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`Lua.hover.viewNumber`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`Lua.hover.viewString`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`Lua.hover.viewStringMax`**: `integer`
+
+  Default: `1000`
+  
   null
 
 - **`Lua.runtime.path`**: `array`
@@ -4380,6 +4523,10 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`Lua.zzzzzz.cat`**: `boolean`
+
+  null
+
 </details>
 
 ```lua
@@ -4402,6 +4549,14 @@ You can use [released binary](https://github.com/juliosueiras/terraform-lsp/rele
 
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
+
+- **`terraform-ls.rootModules`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Per\-workspace list of module directories for the language server to read
 
 - **`terraform.languageServer`**: `object`
 
@@ -4587,10 +4742,10 @@ This server accepts configuration via the `settings` key.
 
 - **`vetur.dev.vlsPath`**: `string`
 
-  Path to VLS for Vetur developers\. There are two ways of using it\. 
+  Path to vls for Vetur developers\. There are two ways of using it\. 
   
   1\. Clone vuejs\/vetur from GitHub\, build it and point it to the ABSOLUTE path of \`\/server\`\.
-  2\. \`yarn global add vue\-language\-server\` and point Vetur to the installed location \(\`yarn global dir\` + node\_modules\/vue\-language\-server\)
+  2\. \`yarn global add vls\` and point Vetur to the installed location \(\`yarn global dir\` + node\_modules\/vls\)
 
 - **`vetur.dev.vlsPort`**: `number`
 
@@ -4631,6 +4786,12 @@ This server accepts configuration via the `settings` key.
   Default: `"prettier"`
   
   Default formatter for \<style lang\=\'postcss\'\> region
+
+- **`vetur.format.defaultFormatter.pug`**: `enum { "none", "prettier" }`
+
+  Default: `"prettier"`
+  
+  Default formatter for \<template lang\=\'pug\'\> region
 
 - **`vetur.format.defaultFormatter.sass`**: `enum { "none", "sass-formatter" }`
 
