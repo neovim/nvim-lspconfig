@@ -5,7 +5,7 @@ configs.ocamllsp = {
   default_config = {
     cmd = {"ocamllsp",};
     filetypes = {'ocaml', 'reason'};
-    root_dir = util.root_pattern("merlin", "package.json", ".git");
+    root_dir = util.root_pattern(".merlin", "package.json", ".git");
   };
   docs = {
     description = [[
