@@ -5,9 +5,9 @@ local release_url = 'https://api.github.com/repos/rust-analyzer/rust-analyzer/re
 local postfix = '-linux'
 local bin = 'rust-analyzer'
 
-if vim.fn.has('mac') == 1 then
+if vim.fn.has('mac') then
   postfix = '-mac'
-elseif vim.fn.has('win32') == 1  or vim.fn.has('win64') == 1 then
+elseif vim.fn.has('win32') or vim.fn.has('win64') then
   postfix = '-windows.exe'
 end
 
@@ -15,9 +15,9 @@ local function make_installer()
   local I = {}
   local P = util.path.join
   local install_dir = P{util.base_install_dir, server_name}
-	local cmd_path = P{install_dir, bin}
+  local cmd_path = P{install_dir, bin}
 
-  local function getReleaseJson()
+  local function get_release_info()
     local json_string = vim.fn.system(string.format('curl -s "%s"', release_url), install_dir)
     return vim.fn.json_decode(json_string)
   end
@@ -25,7 +25,7 @@ local function make_installer()
   function I.install()
     local install_info = I.info()
     vim.fn.mkdir(install_info.install_dir, "p")
-    local json = getReleaseJson()
+    local json = get_release_info()
 
     local download_url = ''
     local tag_name = json.tag_name
@@ -48,17 +48,17 @@ local function make_installer()
   end
 
   function I.info()
-        return {
-            is_installed = util.path.exists(cmd_path);
-            install_dir = install_dir;
-            cmd = { cmd_path };
-        }
+    return {
+      is_installed = util.path.exists(cmd_path);
+      install_dir = install_dir;
+      cmd = { cmd_path };
+    }
   end
 
   function I.configure(_)
     local install_info = I.info()
     local tag = vim.fn.system('cat .rust-analyzer-tag', install_info.install_dir)
-    local json = getReleaseJson()
+    local json = get_release_info()
     if (json.tag_name == tag) then
       return
     end
@@ -66,8 +66,6 @@ local function make_installer()
     local choice = vim.fn.inputlist(options)
     if (choice == 1) then
       I.install()
-    else
-      print('Cancelling')
     end
   end
   return I
