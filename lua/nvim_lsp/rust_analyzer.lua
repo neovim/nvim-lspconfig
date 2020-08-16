@@ -2,13 +2,13 @@ local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 local server_name = 'rust_analyzer'
 local release_url = 'https://api.github.com/repos/rust-analyzer/rust-analyzer/releases/latest'
-local postfix = '-linux'
+local suffix = '-linux'
 local bin = 'rust-analyzer'
 
-if vim.fn.has('mac') then
-  postfix = '-mac'
-elseif vim.fn.has('win32') or vim.fn.has('win64') then
-  postfix = '-windows.exe'
+if vim.fn.has('mac') == 1 then
+  suffix = '-mac'
+elseif vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
+  suffix = '-windows.exe'
 end
 
 local function make_installer()
@@ -25,12 +25,12 @@ local function make_installer()
   function I.install()
     local install_info = I.info()
     vim.fn.mkdir(install_info.install_dir, "p")
-    local json = get_release_info()
+    local release_info = get_release_info()
 
     local download_url = ''
-    local tag_name = json.tag_name
-    for _, value in pairs(json.assets) do
-      if (value ~= nil and string.match(value.browser_download_url, postfix..'$')) then
+    local tag_name = release_info.tag_name
+    for _, value in pairs(release_info.assets) do
+      if (value ~= nil and string.match(value.browser_download_url, suffix..'$')) then
         download_url = value.browser_download_url
       end
     end
@@ -58,8 +58,8 @@ local function make_installer()
   function I.configure(_)
     local install_info = I.info()
     local tag = vim.fn.system('cat .rust-analyzer-tag', install_info.install_dir)
-    local json = get_release_info()
-    if (json.tag_name == tag) then
+    local release_info = get_release_info()
+    if (release_info.tag_name == tag) then
       return
     end
     local options = {"There is a new version of rust-analyzer. Would you like to update?", "1. Update", "2. Cancel"}
