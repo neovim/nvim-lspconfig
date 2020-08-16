@@ -2,13 +2,14 @@ local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 local server_name = 'rust_analyzer'
 local release_url = 'https://api.github.com/repos/rust-analyzer/rust-analyzer/releases/latest'
-local suffix = '-linux'
+local download_url_template = 'https://github.com/rust-analyzer/rust-analyzer/releases/download/%s/rust-analyzer-%s'
+local suffix = 'linux'
 local bin = 'rust-analyzer'
 
 if vim.fn.has('mac') == 1 then
-  suffix = '-mac'
+  suffix = 'mac'
 elseif vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
-  suffix = '-windows.exe'
+  suffix = 'windows.exe'
 end
 
 local function make_installer()
@@ -27,17 +28,8 @@ local function make_installer()
     vim.fn.mkdir(install_info.install_dir, "p")
     local release_info = get_release_info()
 
-    local download_url = ''
     local tag_name = release_info.tag_name
-    for _, value in pairs(release_info.assets) do
-      if (value ~= nil and string.match(value.browser_download_url, suffix..'$')) then
-        download_url = value.browser_download_url
-      end
-    end
-    if (download_url == '') then
-      print('Could not find download url. Aborting.')
-      return
-    end
+    local download_url = string.format(download_url_template, tag_name, suffix)
     util.sh(
       string.format(
         'echo "Starting download: %s" && ' ..
