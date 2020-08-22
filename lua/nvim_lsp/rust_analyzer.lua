@@ -5,7 +5,6 @@ local release_url = 'https://api.github.com/repos/rust-analyzer/rust-analyzer/re
 local download_url_template = 'https://github.com/rust-analyzer/rust-analyzer/releases/download/%s/rust-analyzer-%s'
 local suffix = 'linux'
 local bin = 'rust-analyzer'
-local tag_file = '.rust-analyzer-tag'
 
 if vim.fn.has('mac') == 1 then
   suffix = 'mac'
@@ -18,7 +17,6 @@ local function make_installer()
   local P = util.path.join
   local install_dir = P{util.base_install_dir, server_name}
   local cmd_path = P{install_dir, bin}
-  local tag_file_path = P{install_dir, tag_file}
 
   local function get_release_info()
     local json_string = vim.fn.system(string.format('curl -s "%s"', release_url), install_dir)
@@ -36,38 +34,22 @@ local function make_installer()
       string.format(
         'echo "Starting download: %s" && ' ..
         'curl -L "%s" > rust-analyzer && ' ..
-        'chmod 755 rust-analyzer && ' ..
-        'echo "%s" > .rust-analyzer-tag',
-      download_url, download_url, tag_name), install_info.install_dir)
+        'chmod 755 rust-analyzer',
+      download_url, download_url), install_info.install_dir)
   end
 
   function I.info()
-    local install_info = {
-      is_installed = util.path.exists(cmd_path) and util.path.exists(tag_file_path);
+    return {
+      is_installed = util.path.exists(cmd_path);
       install_dir = install_dir;
       cmd = { cmd_path };
     }
-    I.configure(install_info)
-    return install_info
   end
 
-  function I.configure(install_info)
-    local tag = ''
-    if util.path.exists(P{install_dir, '.rust-analyzer-tag'}) then
-      tag = vim.fn.system('cat .rust-analyzer-tag', install_info.install_dir)
-    end
-    local release_info = get_release_info()
-    print(tag)
-    print(release_info.tag_name)
-    if (release_info.tag_name == tag) then
-      return
-    end
-    local options = {"There is a new version of rust-analyzer. Would you like to update?", "1. Update", "2. Cancel"}
-    local choice = vim.fn.inputlist(options)
-    if (choice == 1) then
-      I.install()
-    end
+  function I.cmd()
+    return cmd_path
   end
+
   return I
 end
 
@@ -75,8 +57,8 @@ local installer = make_installer()
 
 configs.rust_analyzer = {
   default_config = {
-    cmd = installer.info().cmd;
-    filetypes = {"rust"};
+    cmd = { installer.cmd() };
+    filetypes = { "rust" };
     root_dir = util.root_pattern("Cargo.toml", "rust-project.json");
   };
   docs = {
@@ -90,9 +72,6 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
     ]];
     default_config = {
       root_dir = [[root_pattern("Cargo.toml", "rust-project.json")]];
-      on_new_config = function(config)
-        installer.configure(config)
-      end;
     };
   };
 };
