@@ -13,7 +13,6 @@ elseif vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
 end
 
 local function make_installer()
-  local I = {}
   local P = util.path.join
   local install_dir = P{util.base_install_dir, server_name}
   local cmd_path = P{install_dir, bin}
@@ -23,33 +22,29 @@ local function make_installer()
     return vim.fn.json_decode(json_string)
   end
 
-  function I.install()
-    local install_info = I.info()
-    vim.fn.mkdir(install_info.install_dir, "p")
-    local release_info = get_release_info()
+  local I = {
+    install = function()
+      vim.fn.mkdir(install_dir, "p")
+      local release_info = get_release_info()
 
-    local tag_name = release_info.tag_name
-    local download_url = string.format(download_url_template, tag_name, suffix)
-    util.sh(
-      string.format(
-        'echo "Starting download: %s" && ' ..
-        'curl -L "%s" > rust-analyzer && ' ..
-        'chmod 755 rust-analyzer',
-      download_url, download_url), install_info.install_dir)
-  end
-
-  function I.info()
-    return {
-      is_installed = util.path.exists(cmd_path);
-      install_dir = install_dir;
-      cmd = { cmd_path };
-    }
-  end
-
-  function I.cmd()
-    return cmd_path
-  end
-
+      local tag_name = release_info.tag_name
+      local download_url = string.format(download_url_template, tag_name, suffix)
+      util.sh(
+        string.format(
+          'echo "Starting download: %s" && ' ..
+          'curl -L "%s" > rust-analyzer && ' ..
+          'chmod 755 rust-analyzer',
+        download_url, download_url), install_dir)
+    end;
+    info = function()
+      return {
+        is_installed = util.path.exists(cmd_path);
+        install_dir = install_dir;
+        cmd = { cmd_path };
+      }
+    end;
+    cmd = cmd_path
+  }
   return I
 end
 
@@ -57,7 +52,7 @@ local installer = make_installer()
 
 configs.rust_analyzer = {
   default_config = {
-    cmd = { installer.cmd() };
+    cmd = { installer.cmd };
     filetypes = { "rust" };
     root_dir = util.root_pattern("Cargo.toml", "rust-project.json");
   };
