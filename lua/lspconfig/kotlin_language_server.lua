@@ -13,6 +13,7 @@ configs.kotlin_language_server = {
   default_config = {
     filetypes = { "kotlin" };
     root_dir = util.root_pattern("settings.gradle");
+    cmd = {"kotlin-language-server"};
   };
   docs = {
     package_json = "https://raw.githubusercontent.com/fwcd/vscode-kotlin/master/package.json";
@@ -27,6 +28,7 @@ configs.kotlin_language_server = {
     ]];
     default_config = {
       root_dir = [[root_pattern("settings.gradle")]];
+      cmd = {"kotlin-language-server"};
       capabilities = [[
       smart code completion,
       diagnostics,
