@@ -80,6 +80,7 @@ function configs.__newindex(t, config_name, config_def)
       on_new_config = {config.on_new_config, 'f', true};
       on_attach = {config.on_attach, 'f', true};
       commands = {config.commands, 't', true};
+      gen_cmdline_args = {config.gen_cmdline_args, 'f', true};
     }
     if config.commands then
       for k, v in pairs(config.commands) do
@@ -105,6 +106,7 @@ function configs.__newindex(t, config_name, config_def)
         ))
 
     local get_root_dir = config.root_dir
+    local gen_cmdline_args = config.gen_cmdline_args
 
     -- In the case of a reload, close existing things.
     if M.manager then
@@ -123,6 +125,14 @@ function configs.__newindex(t, config_name, config_def)
           configuration = true;
         }
       })
+
+      -- Dynamically generate command-line arguments based on the active buffer path
+      if gen_cmdline_args ~= nil then
+        local args = gen_cmdline_args(api.nvim_buf_get_name(0), api.nvim_get_current_buf())
+        for i = 1, #args do
+          table.insert(new_config.cmd, args[i])
+        end
+      end
 
       add_callbacks(new_config)
       if config_def.on_new_config then
