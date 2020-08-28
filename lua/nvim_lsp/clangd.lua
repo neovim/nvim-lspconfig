@@ -50,6 +50,7 @@ For details on how to automatically generate one using CMake look [here](https:/
 ]];
     default_config = {
       root_dir = [[root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname]];
+      gen_cmdline_args = [[function generating command line arguments based on an absolute file path or nil]];
       on_init = [[function to handle changing offsetEncoding]];
       capabilities = [[default capabilities, with offsetEncoding utf-8]];
     };
