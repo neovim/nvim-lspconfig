@@ -244,6 +244,7 @@ that config.
 - [bashls](#bashls)
 - [ccls](#ccls)
 - [clangd](#clangd)
+- [clojure_lsp](#clojure_lsp)
 - [cmake](#cmake)
 - [codeqlls](#codeqlls)
 - [cssls](#cssls)
@@ -816,6 +817,24 @@ require'nvim_lsp'.clangd.setup{}
     filetypes = { "c", "cpp", "objc", "objcpp" }
     on_init = function to handle changing offsetEncoding
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
+```
+
+## clojure_lsp
+
+https://github.com/snoe/clojure-lsp
+
+Clojure Language Server
+
+
+```lua
+require'nvim_lsp'.clojure_lsp.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "clojure-lsp" }
+    filetypes = { "clojure", "edn" }
+    root_dir = root_pattern("project.clj", "deps.edn", ".git")
 ```
 
 ## cmake
