@@ -1,6 +1,7 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
+
 configs.hls = {
   default_config = {
     cmd = {"haskell-language-server-wrapper", "--lsp"};
@@ -9,7 +10,6 @@ configs.hls = {
   };
 
   docs = {
-    package_json = "https://raw.githubusercontent.com/haskell/vscode-haskell/master/package.json";
     description = [[
 https://github.com/haskell/haskell-language-server
         ]];
