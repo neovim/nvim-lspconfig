@@ -37,7 +37,7 @@ configs[server_name] = {
       suggestFromUnimportedLibraries = "true",
       closingLabels = "true",
       outline = "true",
-      fluttreOutline= "false"
+      flutterOutline= "false"
     };
   };
   docs = {
