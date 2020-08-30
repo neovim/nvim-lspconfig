@@ -1,7 +1,6 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
-
 configs.hls = {
   default_config = {
     cmd = {"haskell-language-server-wrapper", "--lsp"};
@@ -12,6 +11,8 @@ configs.hls = {
   docs = {
     description = [[
 https://github.com/haskell/haskell-language-server
+
+Integration point for ghcide and haskell-ide-engine. One IDE to rule them all.
         ]];
 
     default_config = {
