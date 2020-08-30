@@ -261,6 +261,7 @@ that config.
 - [hie](#hie)
 - [html](#html)
 - [intelephense](#intelephense)
+- [jdtls](#jdtls)
 - [jedi_language_server](#jedi_language_server)
 - [jsonls](#jsonls)
 - [julials](#julials)
@@ -2116,6 +2117,33 @@ require'nvim_lsp'.intelephense.setup{}
     cmd = { "intelephense", "--stdio" }
     filetypes = { "php" }
     root_dir = root_pattern("composer.json", ".git")
+```
+
+## jdtls
+
+https://projects.eclipse.org/projects/eclipse.jdt.ls
+
+Language server can be installed with `:LspInstall jdtls`
+
+Language server for Java.
+    
+Can be installed in Nvim with `:LspInstall jdtls`
+
+```lua
+require'nvim_lsp'.jdtls.setup{}
+
+  Commands:
+  
+  Default Values:
+    callbacks = {
+      ["textDocument/codeAction"] = <function 1>
+    }
+    filetypes = { "java" }
+    init_options = {
+      jvm_args = {},
+      workspace = "/home/runner/workspace"
+    }
+    root_dir = root_pattern(".git")
 ```
 
 ## jedi_language_server
