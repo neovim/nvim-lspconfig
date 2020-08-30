@@ -270,6 +270,7 @@ that config.
 - [nimls](#nimls)
 - [ocamlls](#ocamlls)
 - [ocamllsp](#ocamllsp)
+- [omnisharp](#omnisharp)
 - [purescriptls](#purescriptls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
@@ -2963,6 +2964,26 @@ require'nvim_lsp'.ocamllsp.setup{}
     cmd = { "ocamllsp" }
     filetypes = { "ocaml", "reason" }
     root_dir = root_pattern(".merlin", "package.json")
+```
+
+## omnisharp
+
+https://github.com/omnisharp/omnisharp-roslyn
+OmniSharp server based on Roslyn workspaces
+
+Can be installed in Nvim with `:LspInstall omnisharp`
+
+```lua
+require'nvim_lsp'.omnisharp.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver" }
+    filetypes = { "cs", "vb" }
+    init_options = {}
+    on_new_config = <function 1>
+    root_dir = root_pattern(".csproj", ".sln", ".git")
 ```
 
 ## purescriptls
