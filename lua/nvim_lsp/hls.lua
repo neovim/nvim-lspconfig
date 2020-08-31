@@ -5,18 +5,18 @@ configs.hls = {
   default_config = {
     cmd = {"haskell-language-server-wrapper", "--lsp"};
     filetypes = {"haskell", "lhaskell"};
-    root_dir = util.root_pattern("stack.yaml", "package.yaml", ".git");
+    root_dir = util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml");
   };
 
   docs = {
     description = [[
 https://github.com/haskell/haskell-language-server
 
-Integration point for ghcide and haskell-ide-engine. One IDE to rule them all.
+Haskell Language Server
         ]];
 
     default_config = {
-      root_dir = [[root_pattern("stack.yaml", "package.yaml", ".git")]];
+      root_dir = [[root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")]];
     };
   };
 };
