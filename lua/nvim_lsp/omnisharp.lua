@@ -5,7 +5,7 @@ local bin_name = 'run'
 
 local function make_installer()
   local install_dir = util.path.join{util.base_install_dir, server_name}
-  local pid = vim.api.nvim_call_function('getpid', {})
+  local pid = vim.fn.getpid()
   local url = 'linux-x64'
 
   if vim.fn.has('win32') == 1 then
