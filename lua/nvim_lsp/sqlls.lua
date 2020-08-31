@@ -32,10 +32,9 @@ configs[server_name] = {
     description = [[
       https://github.com/joe-re/sql-language-server
 
-      `cmd` value is **not set** by default. An installer is provided via this `:LspInstall` that uses the 
+      `cmd` value is **not set** by default. An installer is provided via this `:LspInstall` that uses the
        nvm_lsp node_modules directory to find the executable. The `cmd` value can be overriden in `setup`;
 
-             
       ```lua
       require'nvim_lsp'.sqlls.setup{
         cmd = {"path/to/command", "up", "--method", "stdio"};
@@ -56,4 +55,3 @@ configs[server_name] = {
 configs[server_name].install = installer.install
 configs[server_name].install_info = installer.info
 -- vim:et ts=2 sw=2
-
