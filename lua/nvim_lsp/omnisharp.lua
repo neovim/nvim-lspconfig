@@ -5,7 +5,7 @@ local bin_name = 'run'
 
 local function make_installer()
   local install_dir = util.path.join{util.base_install_dir, server_name}
-
+  local pid = vim.fn.getpid()
   local url = 'linux-x64'
 
   if vim.fn.has('win32') == 1 then
@@ -41,7 +41,7 @@ local function make_installer()
     return {
       is_installed = util.path.exists(bin_path);
       install_dir = install_dir;
-      cmd = { bin_path, "--languageserver" };
+      cmd = { bin_path, "--languageserver" , "--hostPID", tostring(pid)};
     }
   end
   function X.configure(config)
