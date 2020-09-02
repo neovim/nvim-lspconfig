@@ -282,6 +282,7 @@ that config.
 - [rust_analyzer](#rust_analyzer)
 - [solargraph](#solargraph)
 - [sourcekit](#sourcekit)
+- [sqlls](#sqlls)
 - [sumneko_lua](#sumneko_lua)
 - [terraformls](#terraformls)
 - [texlab](#texlab)
@@ -3026,7 +3027,7 @@ require'nvim_lsp'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2648" }
+    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2793" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -4443,6 +4444,35 @@ require'nvim_lsp'.sourcekit.setup{}
     cmd = { "xcrun", "sourcekit-lsp" }
     filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" }
     root_dir = root_pattern("Package.swift", ".git")
+```
+
+## sqlls
+
+https://github.com/joe-re/sql-language-server
+
+`cmd` value is **not set** by default. An installer is provided via the `:LspInstall` command that uses the *nvm_lsp node_modules* directory to find the sql-language-server executable. The `cmd` value can be overriden in the `setup` table;
+
+```lua
+require'nvim_lsp'.sqlls.setup{
+  cmd = {"path/to/command", "up", "--method", "stdio"};
+  ...
+}
+```
+
+This LSP can be installed via `:LspInstall sqlls` or with `npm`. If using LspInstall, run `:LspInstallInfo sqlls` to view installation paths. Find further instructions on manual installation of the sql-language-server at [joe-re/sql-language-server](https://github.com/joe-re/sql-language-server).
+<br>
+    
+Can be installed in Nvim with `:LspInstall sqlls`
+
+```lua
+require'nvim_lsp'.sqlls.setup{}
+
+  Commands:
+  
+  Default Values:
+    filetypes = { "sql", "mysql" }
+    root_dir = <function 1>
+    settings = {}
 ```
 
 ## sumneko_lua
