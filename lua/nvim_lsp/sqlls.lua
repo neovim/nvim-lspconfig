@@ -18,6 +18,7 @@ configs[server_name] = {
     root_dir = function(fname)
       return root_pattern(fname) or vim.loop.os_homedir()
     end;
+    settings = {};
   };
   on_new_config = function(config)
     local install_info = installer.info();
@@ -28,26 +29,20 @@ configs[server_name] = {
     end
   end;
   docs = {
-    package_json = "https://raw.githubusercontent.com/joe-re/sql-language-server/release/package.json";
     description = [[
-      https://github.com/joe-re/sql-language-server
+https://github.com/joe-re/sql-language-server
 
-      `cmd` value is **not set** by default. An installer is provided via this `:LspInstall` that uses the
-       nvm_lsp node_modules directory to find the executable. The `cmd` value can be overriden in `setup`;
+`cmd` value is **not set** by default. An installer is provided via the `:LspInstall` command that uses the *nvm_lsp node_modules* directory to find the sql-language-server executable. The `cmd` value can be overriden in the `setup` table;
 
-      ```lua
-      require'nvim_lsp'.sqlls.setup{
-        cmd = {"path/to/command", "up", "--method", "stdio"};
-        ...
-      }
-      ```
+```lua
+require'nvim_lsp'.sqlls.setup{
+  cmd = {"path/to/command", "up", "--method", "stdio"};
+  ...
+}
+```
 
-      Find further instructions on manual installation of the sql-language-server lsp at [joe-re/sql-language-server](https://github.com/joe-re/sql-language-server).
-
-      `sql-language-server` can be installed via `:LspInstall sqlls` or by yourself with `npm`:
-      ```sh
-      npm install -g sql-language-server
-      ```
+This LSP can be installed via `:LspInstall sqlls` or with `npm`. If using LspInstall, run `:LspInstallInfo sqlls` to view installation paths. Find further instructions on manual installation of the sql-language-server at [joe-re/sql-language-server](https://github.com/joe-re/sql-language-server).
+<br>
     ]];
   };
 }
