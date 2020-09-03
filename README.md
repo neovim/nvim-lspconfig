@@ -992,6 +992,14 @@ This server accepts configuration via the `settings` key.
 
   Whether to consider files ending \'\_test\.dart\' that are outside of the test folder as tests\. This should be enabled if you put tests inside the \'lib\' folder of your Flutter application so they will be run with \'flutter test\' and not \'flutter run\'\.
 
+- **`dart.analysisExcludedFolders`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  An array of paths to be excluded from Dart analysis\. This option should usually be set at the Workspace level\.
+
 - **`dart.analysisServerFolding`**: `boolean`
 
   Default: `true`
@@ -3027,7 +3035,7 @@ require'nvim_lsp'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2793" }
+    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2699" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -4666,7 +4674,7 @@ require'nvim_lsp'.sumneko_lua.setup{}
 https://github.com/juliosueiras/terraform-lsp
 
 Terraform language server
-You can use [released binary](https://github.com/juliosueiras/terraform-lsp/releases) or [build](https://github.com/juliosueiras/terraform-lsp#building) your own.
+Download a released binary from https://github.com/hashicorp/terraform-ls/releases.
 
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
@@ -4701,7 +4709,7 @@ require'nvim_lsp'.terraformls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "terraform-lsp" }
+    cmd = { "terraform-ls" }
     filetypes = { "terraform" }
     root_dir = root_pattern(".terraform", ".git")
 ```
