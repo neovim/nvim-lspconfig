@@ -245,8 +245,8 @@ nvim_lsp.SERVER.setup{config}
     `compile_commands.json` using the `--compile-commands-dir` argument.
 
     on_new_config = function(new_config)
-        local root_dir = new_config.root_dir(nvim.api.nvim_buf_get_name(0),
-                                             nvim.api.nvim_get_current_buf())
+        local root_dir = new_config.root_dir(vim.api.nvim_buf_get_name(0),
+                                             vim.api.nvim_get_current_buf())
         local build_path = string.gsub(root_dir, 'src', 'build')
         local args = {('--compile-commands-dir=%s'):format(build_path)}
         vim.list_extend(new_config.cmd, args)
