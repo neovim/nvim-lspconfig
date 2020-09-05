@@ -6,9 +6,9 @@ Collection of common configurations for the [Nvim LSP client](https://neovim.io/
 
 The configurations here are strictly **best effort and unsupported**.
 
-This repo is a "source of truth" for Nvim LSP users to collaboratively provide
-starting examples for the many LSP backends out there, and as a reference for the current
-best practice (or most popular) when a given language has more than one LSP backend to choose from.
+This repo is (1) a place for Nvim LSP users to collaboratively provide starting
+examples for the many LSP backends out there, and (2) a reference for the
+current best practice (or most popular) regarding choice of server, setup, etc.
 
 ## Requires Nvim 0.5 HEAD
 
@@ -27,21 +27,18 @@ best practices for a given language.
 2. Choose a language from [the coc.nvim wiki](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
   [emacs-lsp](https://github.com/emacs-lsp/lsp-mode#supported-languages).
 3. Create a new file at `lua/nvim_lsp/SERVER_NAME.lua`.
-  - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/nvim_lsp/)
-   to get started. Most configs are simple. For an extensive example see
-   [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/nvim_lsp/texlab.lua).
+   - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/nvim_lsp/)
+     to get started. Most configs are simple. For an extensive example see
+     [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/nvim_lsp/texlab.lua).
 
 ## Install
 
 - Requires [Nvim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly) (v0.5 prerelease).
-- nvim-lspconfig is just a plugin. Install it like any other Vim plugin.
-
-  e.g. [vim-plug](https://github.com/junegunn/vim-plug)
+- nvim-lspconfig is just a plugin. Install it like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
   ```
   :Plug 'neovim/nvim-lspconfig'
   ```
-- Call `:packadd nvim-lspconfig` in your vimrc if you installed nvim-lspconfig to
-  `'packpath'` or if you use a package manager such as minpac.
+- Call `:packadd nvim-lspconfig` in your vimrc if you installed nvim-lspconfig to `'packpath'` or if you use a package manager such as minpac.
 
 ## Usage
 
@@ -806,7 +803,7 @@ require'nvim_lsp'.ccls.setup{}
 
 https://clang.llvm.org/extra/clangd/Installation.html
 
-**NOTE:** Clang >= 9 is recommended! See [this issue for more](https://github.com/neovim/nvim-lspconfig/issues/23).
+**NOTE:** Clang >= 9 is recommended! See [this issue for more](https://github.com/neovim/nvim-lsp/issues/23).
 
 clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
@@ -3042,7 +3039,7 @@ require'nvim_lsp'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2630" }
+    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2702" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
