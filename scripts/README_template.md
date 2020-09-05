@@ -1,40 +1,44 @@
-# nvim-lsp
+# nvim-lspconfig
 
 Collection of common configurations for the [Nvim LSP client](https://neovim.io/doc/user/lsp.html).
 
-**Note:** `nvim-lsp` is unrelated to [vim-lsp](https://github.com/prabirshrestha/vim-lsp).
+## Best-effort, unsupported
 
-It is hoped that these configurations serve as a "source of truth", but they
-are strictly _best effort_. If something doesn't work, these configs are useful
-as a starting point, which you can adjust to fit your environment.
+The configurations here are strictly **best effort and unsupported**.
 
-This is work-in-progress and **requires [Nvim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly)**.
-Update Nvim and nvim-lsp before reporting an issue.
+This repo is (1) a place for Nvim LSP users to collaboratively provide starting
+examples for the many LSP backends out there, and (2) a reference for the
+current best practice (or most popular) regarding choice of server, setup, etc.
 
-## Contributions are welcome!
+## Requires Nvim 0.5 HEAD
 
-There are many language servers in the world, and not enough time.
-Help us create configs for *all the LSPs!*
+While Nvim LSP undergoes development, the configs in this repo assume that you
+are using the latest [Nvim HEAD/nightly build](https://github.com/neovim/neovim/releases/tag/nightly).
 
-1. Read [CONTRIBUTING.md](CONTRIBUTING.md) for instructions.
+Update Nvim and nvim-lspconfig before reporting an issue.
+
+## Contributions
+
+It's up to you to send improvements so that these configs align with current
+best practices for a given language.
+
+1. Read [CONTRIBUTING.md](CONTRIBUTING.md).
    Ask questions in [Neovim Gitter](https://gitter.im/neovim/neovim).
 2. Choose a language from [the coc.nvim wiki](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
-  [the emacs-lsp project](https://github.com/emacs-lsp/lsp-mode#supported-languages).
-3. Create a new file at `lua/nvim_lsp/SERVER_NAME.lua`. See
-   [existing configs](https://github.com/neovim/nvim-lsp/blob/master/lua/nvim_lsp/) for
-   examples (`lua/nvim_lsp/texlab.lua` is an extensive example).
+  [emacs-lsp](https://github.com/emacs-lsp/lsp-mode#supported-languages).
+3. Create a new file at `lua/nvim_lsp/SERVER_NAME.lua`.
+   - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/nvim_lsp/)
+     to get started. Most configs are simple. For an extensive example see
+     [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/nvim_lsp/texlab.lua).
 
 ## Install
 
 - Requires [Nvim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly) (v0.5 prerelease).
-- nvim-lsp is just a plugin. Install it like any other Vim plugin.
-
-  e.g. [vim-plug](https://github.com/junegunn/vim-plug)
+- nvim-lspconfig is just a plugin. Install it like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
   ```
-  :Plug 'neovim/nvim-lsp'
+  :Plug 'neovim/nvim-lspconfig'
   ```
-- Call `:packadd nvim-lsp` in your vimrc if you installed nvim-lsp to
-  `'packpath'` or if you use a package manager such as minpac.
+- Call `:packadd nvim-lspconfig` in your vimrc if you installed nvim-lspconfig to `'packpath'` or if you use a package manager such as minpac.
 
 ## Usage
 
@@ -43,7 +47,7 @@ reasonable defaults and some server-specific things like commands or different
 diagnostics.
 
 ```lua
-vim.cmd('packadd nvim-lsp')  -- If installed as a Vim "package".
+vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
 require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
 ```
 
@@ -51,7 +55,7 @@ If you want to add this to your vimrc, you will need to enclose it in a `lua` bl
 
 ```vim
 lua <<EOF
-vim.cmd('packadd nvim-lsp')  -- If installed as a Vim "package".
+vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
 require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
 EOF
 ```
@@ -75,7 +79,7 @@ To use the defaults, just call `setup()` with an empty `config` parameter.
 For the `gopls` config, that would be:
 
 ```lua
-vim.cmd('packadd nvim-lsp')  -- If installed as a Vim "package".
+vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
 require'nvim_lsp'.gopls.setup{}
 ```
 
