@@ -285,6 +285,7 @@ that config.
 - [rnix](#rnix)
 - [rome](#rome)
 - [rust_analyzer](#rust_analyzer)
+- [scry](#scry)
 - [solargraph](#solargraph)
 - [sourcekit](#sourcekit)
 - [sqlls](#sqlls)
@@ -3040,7 +3041,7 @@ require'nvim_lsp'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2687" }
+    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2653" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -4309,6 +4310,24 @@ require'nvim_lsp'.rust_analyzer.setup{}
     settings = {
       ["rust-analyzer"] = {}
     }
+```
+
+## scry
+
+https://github.com/crystal-lang-tools/scry
+
+Crystal language server.
+
+
+```lua
+require'nvim_lsp'.scry.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "scry" }
+    filetypes = { "crystal" }
+    root_dir = root_pattern('shard.yml', '.git') or dirname
 ```
 
 ## solargraph
