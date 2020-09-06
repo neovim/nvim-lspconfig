@@ -3041,7 +3041,7 @@ require'nvim_lsp'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2832" }
+    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2652" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -4717,7 +4717,7 @@ require'nvim_lsp'.sumneko_lua.setup{}
 
 ## terraformls
 
-https://github.com/juliosueiras/terraform-lsp
+https://github.com/hashicorp/terraform-ls
 
 Terraform language server
 Download a released binary from https://github.com/hashicorp/terraform-ls/releases.
