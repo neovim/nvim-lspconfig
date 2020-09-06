@@ -283,6 +283,7 @@ that config.
 - [r_language_server](#r_language_server)
 - [rls](#rls)
 - [rnix](#rnix)
+- [rome](#rome)
 - [rust_analyzer](#rust_analyzer)
 - [scry](#scry)
 - [solargraph](#solargraph)
@@ -3040,7 +3041,7 @@ require'nvim_lsp'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2735" }
+    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2687" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -3899,6 +3900,28 @@ require'nvim_lsp'.rnix.setup{}
     on_new_config = <function 1>
     root_dir = vim's starting directory
     settings = {}
+```
+
+## rome
+
+https://romefrontend.dev
+
+Language server for the Rome Frontend Toolchain.
+
+```sh
+npm install [-g] rome
+```
+
+
+```lua
+require'nvim_lsp'.rome.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "rome", "lsp" }
+    filetypes = { "javascript", "javascriptreact", "json", "typescript", "typescript.tsx", "typescriptreact" }
+    root_dir = root_pattern('package.json', 'node_modules', '.git') or dirname
 ```
 
 ## rust_analyzer
