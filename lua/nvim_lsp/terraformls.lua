@@ -10,7 +10,7 @@ configs.terraformls = {
   docs = {
     package_json = "https://raw.githubusercontent.com/hashicorp/vscode-terraform/master/package.json";
     description = [[
-https://github.com/juliosueiras/terraform-lsp
+https://github.com/hashicorp/terraform-ls
 
 Terraform language server
 Download a released binary from https://github.com/hashicorp/terraform-ls/releases.
