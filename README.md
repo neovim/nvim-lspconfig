@@ -264,6 +264,7 @@ that config.
 - [ghcide](#ghcide)
 - [gopls](#gopls)
 - [hie](#hie)
+- [hls](#hls)
 - [html](#html)
 - [intelephense](#intelephense)
 - [jdtls](#jdtls)
@@ -2101,6 +2102,24 @@ require'nvim_lsp'.hie.setup{}
     root_dir = root_pattern("stack.yaml", "package.yaml", ".git")
 ```
 
+## hls
+
+https://github.com/haskell/haskell-language-server
+
+Haskell Language Server
+        
+
+```lua
+require'nvim_lsp'.hls.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "haskell-language-server-wrapper", "--lsp" }
+    filetypes = { "haskell", "lhaskell" }
+    root_dir = root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")
+```
+
 ## html
 
 https://github.com/vscode-langservers/vscode-html-languageserver-bin
@@ -3041,7 +3060,7 @@ require'nvim_lsp'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2652" }
+    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2801" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -5069,6 +5088,10 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Validate vue\-html in \<template\> using eslint\-plugin\-vue
+
+- **`vetur.validation.templateProps`**: `boolean`
+
+  Validate props usage in \<template\> region\. Show error\/warning for not passing declared props to child components\.
 
 </details>
 
