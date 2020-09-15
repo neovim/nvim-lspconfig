@@ -1,9 +1,13 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
+local groovy_server_path = "~/groovyls/build/libs/groovyls-all.jar"
 
 configs.groovyls = {
   default_config = {
-    cmd = {"/home/wuilliam.lacruz/.sdkman/candidates/java/current/bin/java -jar /home/wuilliam.lacruz/groovyls/build/libs/groovyls-all.jar"};
+
+    cmd = {
+      "java", "-jar", groovy_server_path,
+    };
     filetypes = {"groovy", "gsp"};
     root_dir = util.root_pattern("grails-app", ".git");
   };
