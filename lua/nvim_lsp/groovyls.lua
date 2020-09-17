@@ -2,18 +2,17 @@ local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
 local name = "groovyls"
+local P = util.path.join
+local install_dir = P{util.base_install_dir, name}
+local bin = P{install_dir, "groovy-language-server", "build", "libs", "groovy-language-server-all.jar"}
 
 local function make_installer()
-  local P = util.path.join
-  local install_dir = P{util.base_install_dir, name}
-
-  local bin = P{install_dir, "groovy-language-server", "build", "libs", "groovy-language-server.jar"}
-  local cmd = {"java", "-jar", bin}
-
   local X = {}
+
   function X.install()
     local install_info = X.info()
     if install_info.is_installed then
+      print("C")
       print(name, "is already installed.")
       return
     end
@@ -35,22 +34,18 @@ cd groovy-language-server
 # build
 ./gradlew build
     ]=]
-
     vim.fn.mkdir(install_info.install_dir, "p")
     util.sh(script, install_info.install_dir)
   end
+
   function X.info()
     return {
       is_installed = util.path.exists(bin);
       install_dir = install_dir;
-      cmd = cmd;
+      cmd = {
+        "java", "-jar", bin,
+      };
     }
-  end
-  function X.configure(config)
-    local install_info = X.info()
-    if install_info.is_installed then
-      config.cmd = cmd
-    end
   end
   return X
 end
@@ -59,11 +54,14 @@ local installer = make_installer()
 
 configs[name] = {
   default_config = {
-    filetypes = {"groovy"};
-    root_dir = util.root_pattern("build.gradle", "pom.xml", "grails-app", ".git");
-    log_level = vim.lsp.protocol.MessageType.Warning;
+    cmd = {
+      "java", "-jar", bin,
+    };
+    filetypes = {"groovy", "gsp"};
+    root_dir = util.root_pattern("grails-app", ".git");
   };
   on_new_config = function(config)
+    print('custom config', vim.inpect(config))
     installer.configure(config)
   end;
   docs = {
@@ -86,8 +84,7 @@ require'nvim_lsp'.sumneko_groovylstmp.setup{
 If you install via our installer, if you execute `:LspInstallInfo sumneko_groovylstmp`, you can know `cmd` value.
 ]];
     default_config = {
-      filetypes = { "groovy" };
-      root_dir = [[root_pattern("build.gradle", "pom.xml", "grails-app", ".git")]];
+      root_dir = [[root_pattern("grails-app", ".git")]];
     };
   };
 }
