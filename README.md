@@ -263,6 +263,7 @@ that config.
 - [gdscript](#gdscript)
 - [ghcide](#ghcide)
 - [gopls](#gopls)
+- [groovyls](#groovyls)
 - [hie](#hie)
 - [hls](#hls)
 - [html](#html)
@@ -2003,6 +2004,42 @@ require'nvim_lsp'.gopls.setup{}
     root_dir = root_pattern("go.mod", ".git")
 ```
 
+## groovyls
+
+https://github.com/prominic/groovy-language-server.git
+
+Requirements:
+ - Linux only (for now)
+ - Java 11+
+
+`groovyls` can be installed via `:LspInstall groovyls` or by yourself by following the instructions [here](https://github.com/prominic/groovy-language-server.git#build).
+
+This language server does not provide a global binary, but must be installed manually. The command `:LspInstaller groovyls` makes an attempt at installing the binary by
+Fetching the groovyls repository from GitHub, compiling it and then expose a binary.
+
+If you installed groovy language server by yourself, you can set the `cmd` custom path as follow:
+
+```lua
+require'nvim_lsp'.groovyls.setup{
+    -- Unix
+    cmd = { "java", "-jar", "path/to/groovyls/groovy-language-server-all.jar" },
+    ...
+}
+```
+
+Can be installed in Nvim with `:LspInstall groovyls`
+
+```lua
+require'nvim_lsp'.groovyls.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "java", "-jar", "groovy-language-server-all.jar" }
+    filetypes = { "groovy" }
+    root_dir = root_pattern(".git") or vim.loop.os_homedir()
+```
+
 ## hie
 
 https://github.com/haskell/haskell-ide-engine
@@ -2194,7 +2231,7 @@ require'nvim_lsp'.jdtls.setup{}
     filetypes = { "java" }
     init_options = {
       jvm_args = {},
-      workspace = "/home/runner/workspace"
+      workspace = "/home/wuilliam.lacruz/workspace"
     }
     root_dir = root_pattern(".git")
 ```
@@ -2286,7 +2323,7 @@ require'nvim_lsp'.jsonls.setup{}
 https://github.com/julia-vscode/julia-vscode
 `LanguageServer.jl` can be installed via `:LspInstall julials` or by yourself the `julia` and `Pkg`:
 ```sh
-julia --project=/home/runner/.cache/nvim/nvim_lsp/julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
+julia --project=/home/wuilliam.lacruz/.cache/nvim/nvim_lsp/julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
 If you want to install the LanguageServer manually, you will have to ensure that the Julia environment is stored in this location:
 ```vim
@@ -2523,7 +2560,7 @@ require'nvim_lsp'.julials.setup{}
   Commands:
   
   Default Values:
-    cmd = { "julia", "--project=/home/runner/.cache/nvim/nvim_lsp/julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
+    cmd = { "julia", "--project=/home/wuilliam.lacruz/.cache/nvim/nvim_lsp/julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
     filetypes = { "julia" }
     root_dir = <function 1>
 ```
@@ -3060,7 +3097,7 @@ require'nvim_lsp'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2801" }
+    cmd = { "/home/wuilliam.lacruz/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "4103" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -3480,6 +3517,12 @@ This server accepts configuration via the `settings` key.
 - **`pyls.plugins.pylint.enabled`**: `boolean`
 
   Enable or disable the plugin\.
+
+- **`pyls.plugins.pylint.executable`**: `string`
+
+  Default: `vim.NIL`
+  
+  Executable to run pylint with\. Enabling this will run pylint on unsaved files via stdin\. Can slow down workflow\. Only works with python3\.
 
 - **`pyls.plugins.rope_completion.enabled`**: `boolean`
 
@@ -3953,6 +3996,12 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
     
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
+
+- **`rust-analyzer.assist.importMergeBehaviour`**: `enum { "none", "full", "last" }`
+
+  Default: `"full"`
+  
+  The strategy to use when inserting new imports or merging imports\.
 
 - **`rust-analyzer.callInfo.full`**: `boolean`
 

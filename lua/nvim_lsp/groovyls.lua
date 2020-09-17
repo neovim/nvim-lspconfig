@@ -2,17 +2,20 @@ local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
 local name = "groovyls"
-local P = util.path.join
-local install_dir = P{util.base_install_dir, name}
-local bin = P{install_dir, "groovy-language-server", "build", "libs", "groovy-language-server-all.jar"}
+local bin_name = "groovy-language-server-all.jar"
 
 local function make_installer()
   local X = {}
+  local P = util.path.join
+  local install_dir = P{util.base_install_dir, name}
+  local bin_path = P{install_dir, "groovy-language-server", "build", "libs", bin_name}
+  local cmd = {
+    "java", "-jar", bin_path,
+  };
 
   function X.install()
     local install_info = X.info()
     if install_info.is_installed then
-      print("C")
       print(name, "is already installed.")
       return
     end
@@ -40,12 +43,17 @@ cd groovy-language-server
 
   function X.info()
     return {
-      is_installed = util.path.exists(bin);
+      is_installed = util.path.exists(bin_path);
       install_dir = install_dir;
-      cmd = {
-        "java", "-jar", bin,
-      };
+      cmd = cmd
     }
+  end
+
+  function X.configure(config)
+      local install_info = X.info()
+      if install_info.is_installed then
+          config.cmd = install_info.cmd
+      end
   end
   return X
 end
@@ -55,36 +63,43 @@ local installer = make_installer()
 configs[name] = {
   default_config = {
     cmd = {
-      "java", "-jar", bin,
-    };
-    filetypes = {"groovy", "gsp"};
-    root_dir = util.root_pattern("grails-app", ".git");
+      "java", "-jar", bin_name
+    },
+    filetypes = {"groovy"};
+    root_dir = util.root_pattern(".git") or vim.loop.os_homedir();
   };
   on_new_config = function(config)
-    print('custom config', vim.inpect(config))
     installer.configure(config)
   end;
   docs = {
     description = [[
-https://github.com/sumneko/groovylstmp-language-server
+https://github.com/prominic/groovy-language-server.git
 
-Lua language server. **By default, this doesn't have a `cmd` set.** This is
-because it doesn't provide a global binary. We provide an installer for Linux
-and macOS using `:LspInstall`.  If you wish to install it yourself, [here is a
-guide](https://github.com/sumneko/groovylstmp-language-server/wiki/Build-and-Run-(Standalone)).
-So you should set `cmd` yourself like this.
+Requirements:
+ - Linux only (for now)
+ - Java 11+
 
-```groovylstmp
-require'nvim_lsp'.sumneko_groovylstmp.setup{
-  cmd = {"path", "to", "cmd"};
-  ...
+`groovyls` can be installed via `:LspInstall groovyls` or by yourself by following the instructions [here](https://github.com/prominic/groovy-language-server.git#build).
+
+This language server does not provide a global binary, but must be installed manually. The command `:LspInstaller groovyls` makes an attempt at installing the binary by
+Fetching the groovyls repository from GitHub, compiling it and then expose a binary.
+
+If you installed groovy language server by yourself, you can set the `cmd` custom path as follow:
+
+```lua
+require'nvim_lsp'.groovyls.setup{
+    -- Unix
+    cmd = { "java", "-jar", "path/to/groovyls/groovy-language-server-all.jar" },
+    ...
 }
 ```
-
-If you install via our installer, if you execute `:LspInstallInfo sumneko_groovylstmp`, you can know `cmd` value.
 ]];
     default_config = {
-      root_dir = [[root_pattern("grails-app", ".git")]];
+      cmd = {
+        "java", "-jar", bin_name
+      },
+      filetypes = {"groovy"};
+      root_dir = [[root_pattern(".git") or vim.loop.os_homedir()]];
     };
   };
 }
