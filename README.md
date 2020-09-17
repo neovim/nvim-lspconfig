@@ -2014,7 +2014,7 @@ Requirements:
 
 `groovyls` can be installed via `:LspInstall groovyls` or by yourself by following the instructions [here](https://github.com/prominic/groovy-language-server.git#build).
 
-This language server does not provide a global binary, but must be installed manually. The command `:LspInstaller groovyls` makes an attempt at installing the binary by
+The command `:LspInstaller groovyls` makes an attempt at installing the binary by
 Fetching the groovyls repository from GitHub, compiling it and then expose a binary.
 
 If you installed groovy language server by yourself, you can set the `cmd` custom path as follow:
@@ -3097,7 +3097,7 @@ require'nvim_lsp'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/wuilliam.lacruz/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "4103" }
+    cmd = { "/home/wuilliam.lacruz/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "14270" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
