@@ -7,7 +7,11 @@ configs.rust_analyzer = {
     filetypes = {"rust"};
     root_dir = util.root_pattern("Cargo.toml", "rust-project.json");
     settings = {
-      ["rust-analyzer"] = {}
+      ["rust-analyzer"] = {
+        checkOnSave = {
+          enable = false
+        }
+      }
     }
   };
   docs = {
