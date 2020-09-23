@@ -4845,6 +4845,10 @@ require'nvim_lsp'.tsserver.setup{}
 
 ## vimls
 
+Can be installed in Nvim with `:LspInstall vimls` or by yourself with `npm`:
+```sh
+npm install -g vim-language-server
+```
 
 ```lua
 require'nvim_lsp'.vimls.setup{}
