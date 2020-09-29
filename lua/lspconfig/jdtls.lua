@@ -25,6 +25,21 @@ local cmd = {
   "--add-opens java.base/java.lang=ALL-UNNAMED",
 }
 
+
+--- The presence of one of these files indicates a root directory.
+--
+-- We search for configuration files of the most common Java build systems. We
+-- could add more build systems, such as Make, but let's keep things simple for
+-- now.
+local root_files = {
+  'build.xml',             -- Ant
+  'pom.xml',               -- Maven
+  'build.gradle',          -- Gradle
+  'build.gradle.kts',      -- Gradle
+  'settings.gradle',       -- Gradle
+  'settings.gradle.kts',   -- Gradle
+}
+
 configs[server_name] = {
   default_config = {
     cmd = cmd,
@@ -33,7 +48,11 @@ configs[server_name] = {
       GRADLE_HOME=vim.fn.getenv("GRADLE_HOME"),
     },
     filetypes = { "java" };
-    root_dir = util.root_pattern('.git');
+    root_dir = function(fname)
+	return util.find_git_ancestor(fname)
+		or util.root_pattern(unpack(root_files))(fname)
+		or vim.call('getcwd')
+    end;
     init_options = {
       workspace = path.join { vim.loop.os_homedir(), "workspace" };
       jvm_args = {};
