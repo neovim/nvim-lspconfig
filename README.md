@@ -245,6 +245,7 @@ The following LSP configs are included. Follow a link to find documentation for
 that config.
 
 - [als](#als)
+- [apex_jorje](#apex_jorje)
 - [bashls](#bashls)
 - [ccls](#ccls)
 - [clangd](#clangd)
@@ -329,6 +330,25 @@ require'nvim_lsp'.als.setup{}
     cmd = { "ada_language_server" }
     filetypes = { "ada" }
     root_dir = util.root_pattern("Makefile", ".git")
+```
+
+## apex_jorje
+
+https://developer.salesforce.com/tools/vscode/en/apex/language-server/
+
+Language server for Apex
+    
+Can be installed in Nvim with `:LspInstall apex_jorje`
+
+```lua
+require'nvim_lsp'.apex_jorje.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "java", "-cp", "/home/mariusz/.cache/nvim/nvim_lsp/apex_jorje/apex-jorje-lsp.jar", "-Ddebug.internal.errors=true", "-Ddebug.semantic.errors=false", "apex.jorje.lsp.ApexLanguageServerLauncher" }
+    filetypes = { "apex" }
+    root_dir = 'util.root_pattern("sfdx-project.json", ".git")'
 ```
 
 ## bashls
