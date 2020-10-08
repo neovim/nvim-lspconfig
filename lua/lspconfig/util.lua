@@ -249,8 +249,10 @@ function M.root_pattern(...)
   local patterns = vim.tbl_flatten {...}
   local function matcher(path)
     for _, pattern in ipairs(patterns) do
-      if M.path.exists(vim.fn.glob(M.path.join(path, pattern))) then
-        return path
+      for _, p in ipairs(vim.fn.glob(M.path.join(path, pattern), true, true)) do
+        if M.path.exists(p) then
+          return path
+        end
       end
     end
   end
