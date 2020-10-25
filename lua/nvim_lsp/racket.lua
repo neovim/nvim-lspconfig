@@ -3,7 +3,7 @@ local util = require 'nvim_lsp/util'
 
 configs.racket = {
   default_config = {
-    cmd = {"racket", "-l" "racket-langserver"};
+    cmd = {"racket", "-l", "racket-langserver"};
     filetypes = {"racket"};
     root_dir = util.path.dirname;
   };
