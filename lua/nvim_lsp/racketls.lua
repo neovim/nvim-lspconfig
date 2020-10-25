@@ -1,7 +1,7 @@
 local configs = require 'nvim_lsp/configs'
 local util = require 'nvim_lsp/util'
 
-configs.cmake = {
+configs.racket = {
   default_config = {
     cmd = {"racket -l racket-langserver"};
     filetypes = {"racket"};
