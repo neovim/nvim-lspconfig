@@ -3,7 +3,7 @@ local util = require 'nvim_lsp/util'
 
 configs.racket = {
   default_config = {
-    cmd = {"racket -l racket-langserver"};
+    cmd = {"racket", "-l" "racket-langserver"};
     filetypes = {"racket"};
     root_dir = util.path.dirname;
   };
@@ -21,3 +21,4 @@ May also require https://github.com/wlangstroth/vim-racket
 };
 
 -- vim:et ts=2 sw=2
+https://github.com/Lazerbeak12345/nvim-lspconfig/blo
