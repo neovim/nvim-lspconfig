@@ -21,4 +21,3 @@ May also require https://github.com/wlangstroth/vim-racket
 };
 
 -- vim:et ts=2 sw=2
-https://github.com/Lazerbeak12345/nvim-lspconfig/blo
