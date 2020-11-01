@@ -3,7 +3,7 @@ local util = require 'nvim_lsp/util'
 
 configs.terraformls = {
   default_config = {
-    cmd = {"terraform-ls"};
+    cmd = {"terraform-ls", "serve"};
     filetypes = {"terraform"};
     root_dir = util.root_pattern(".terraform", ".git");
   };
