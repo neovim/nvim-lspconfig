@@ -2259,7 +2259,7 @@ require'lspconfig'.jdtls.setup{}
   Commands:
   
   Default Values:
-    callbacks = {
+    handlers = {
       ["textDocument/codeAction"] = <function 1>
     }
     filetypes = { "java" }
