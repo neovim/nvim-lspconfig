@@ -233,7 +233,7 @@ nvim_lsp.SERVER.setup{config}
     the second parameter instead. Useful for doing buffer-local setup.
 
   {on_new_config}
-    `function(new_config)` will be executed after a new configuration has been
+    `function(new_config, new_root_dir)` will be executed after a new configuration has been
     created as a result of {root_dir} returning a unique value. You can use this
     as an opportunity to further modify the new_config or use it before it is
     sent to |vim.lsp.start_client()|.

@@ -233,7 +233,7 @@ nvim_lsp.SERVER.setup{config}
     the second parameter instead. Useful for doing buffer-local setup.
 
   {on_new_config}
-    `function(new_config)` will be executed after a new configuration has been
+    `function(new_config, new_root_dir)` will be executed after a new configuration has been
     created as a result of {root_dir} returning a unique value. You can use this
     as an opportunity to further modify the new_config or use it before it is
     sent to |vim.lsp.start_client()|.
@@ -245,6 +245,7 @@ The following LSP configs are included. Follow a link to find documentation for
 that config.
 
 - [als](#als)
+- [angularls](#angularls)
 - [bashls](#bashls)
 - [ccls](#ccls)
 - [clangd](#clangd)
@@ -329,6 +330,28 @@ require'nvim_lsp'.als.setup{}
     cmd = { "ada_language_server" }
     filetypes = { "ada" }
     root_dir = util.root_pattern("Makefile", ".git")
+```
+
+## angularls
+
+https://github.com/angular/vscode-ng-language-service
+
+`angular-language-server` can be installed via `:LspInstall angularls`
+
+If you prefer to install this yourself you can through npm `npm install @angular/language-server`.
+Be aware there is no global binary and must be run via `node_modules/@angular/language-server/index.js`
+    
+Can be installed in Nvim with `:LspInstall angularls`
+
+```lua
+require'nvim_lsp'.angularls.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "/home/runner/.cache/nvim/nvim_lsp/angularls/node_modules/.bin/angularls", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" }
+    filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" }
+    root_dir = root_pattern("angular.json", ".git")
 ```
 
 ## bashls
