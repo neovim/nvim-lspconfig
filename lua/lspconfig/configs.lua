@@ -37,8 +37,8 @@ function configs.__newindex(t, config_name, config_def)
     config.handlers["window/logMessage"] = function(err, method, params, client_id)
       if params and params.type <= config.log_level then
         -- TODO(ashkan) remove this after things have settled.
-        assert(lsp.handlers, "Update to Nvim HEAD. This is an incompatible interface.")
-        assert(lsp.handlers["window/logMessage"], "Callback for window/logMessage notification is not defined")
+        assert(not lsp.callbacks, "lsp.callbacks has been deprecated. See here for more: https://github.com/nvim-lua/diagnostic-nvim/issues/73")
+        assert(lsp.handlers["window/logMessage"], "Handler for window/logMessage notification is not defined")
         lsp.handlers["window/logMessage"](err, method, params, client_id)
       end
     end
