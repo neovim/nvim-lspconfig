@@ -30,13 +30,11 @@ function configs.__newindex(t, config_name, config_def)
   -- Force this part.
   default_config.name = config_name
 
-  -- Ensure that there are no callbacks registered.
-  assert(not lsp.callbacks, "lsp.callbacks has been deprecated. See here for more: https://github.com/neovim/neovim/pull/12655")
-
   -- The config here is the one which will be instantiated for the new server,
   -- which is why this is a function, so that it can refer to the settings
   -- object on the server.
   local function add_handlers(config)
+    assert(not lsp.callbacks, "lsp.callbacks has been deprecated. See here for more: https://github.com/neovim/neovim/pull/12655")
     config.handlers["window/logMessage"] = function(err, method, params, client_id)
       if params and params.type <= config.log_level then
         -- TODO(ashkan) remove this after things have settled.
