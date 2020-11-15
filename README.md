@@ -2718,6 +2718,7 @@ require'lspconfig'.kotlin_language_server.setup{}
   Commands:
   
   Default Values:
+    cmd = { "kotlin-language-server" }
     filetypes = { "kotlin" }
     root_dir = root_pattern("settings.gradle")
 ```
@@ -3149,7 +3150,7 @@ require'lspconfig'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2552" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2437" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
