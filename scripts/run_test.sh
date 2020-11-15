@@ -9,5 +9,5 @@ fi
 cd ./neovim
 
 make functionaltest \
-  BUSTED_ARGS="--lpath=$PJ_ROOT/?.lua --lpath=$PJ_ROOT/lua/?.lua --lpath=$PJ_ROOT/lua/nvim_lsp/?.lua" \
-  TEST_FILE="../test/nvim_lsp_spec.lua"
+  BUSTED_ARGS="--lpath=$PJ_ROOT/?.lua --lpath=$PJ_ROOT/lua/?.lua --lpath=$PJ_ROOT/lua/lspconfig/?.lua" \
+  TEST_FILE="../test/lspconfig_spec.lua"

@@ -1,6 +1,6 @@
-require 'nvim_lsp'
-local configs = require 'nvim_lsp/configs'
-local util = require 'nvim_lsp/util'
+require 'lspconfig'
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 local inspect = vim.inspect
 local uv = vim.loop
 local fn = vim.fn
@@ -68,7 +68,7 @@ local lsp_section_template = [[
 
 {{preamble}}
 ```lua
-require'nvim_lsp'.{{template_name}}.setup{}
+require'lspconfig'.{{template_name}}.setup{}
 
 {{body}}
 ```
@@ -76,9 +76,9 @@ require'nvim_lsp'.{{template_name}}.setup{}
 
 local function require_all_configs()
   -- Configs are lazy-loaded, tickle them to populate the `configs` singleton.
-  for _,v in ipairs(vim.fn.glob('lua/nvim_lsp/*.lua', 1, 1)) do
+  for _,v in ipairs(vim.fn.glob('lua/lspconfig/*.lua', 1, 1)) do
     local module_name = v:gsub('.*/', ''):gsub('%.lua$', '')
-    require('nvim_lsp/'..module_name)
+    require('lspconfig/'..module_name)
   end
 end
 

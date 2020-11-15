@@ -66,7 +66,7 @@ parlance here is the "spec":
 The `configs.__newindex` metamethod consumes the config definition and returns
 an object with a `setup()` method, to be invoked by users:
 
-    require'nvim_lsp'.SERVER_NAME.setup{}
+    require'lspconfig'.SERVER_NAME.setup{}
 
 After you set `configs.SERVER_NAME` you can add arbitrary language-specific
 functions to it if necessary.

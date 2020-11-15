@@ -26,10 +26,10 @@ best practices for a given language.
    Ask questions in [Neovim Gitter](https://gitter.im/neovim/neovim).
 2. Choose a language from [the coc.nvim wiki](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
   [emacs-lsp](https://github.com/emacs-lsp/lsp-mode#supported-languages).
-3. Create a new file at `lua/nvim_lsp/SERVER_NAME.lua`.
-   - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/nvim_lsp/)
+3. Create a new file at `lua/lspconfig/SERVER_NAME.lua`.
+   - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/)
      to get started. Most configs are simple. For an extensive example see
-     [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/nvim_lsp/texlab.lua).
+     [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/texlab.lua).
 
 ## Install
 
@@ -48,7 +48,7 @@ diagnostics.
 
 ```lua
 vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
-require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
+require'lspconfig'.<config>.setup{name=…, settings = {…}, …}
 ```
 
 If you want to add this to your vimrc, you will need to enclose it in a `lua` block.
@@ -56,7 +56,7 @@ If you want to add this to your vimrc, you will need to enclose it in a `lua` bl
 ```vim
 lua <<EOF
 vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
-require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
+require'lspconfig'.<config>.setup{name=…, settings = {…}, …}
 EOF
 ```
 
@@ -65,7 +65,7 @@ given there to your `init.vim`. **All examples are given in Lua,** see `:help
 :lua-heredoc` to use Lua from your init.vim.
 
 Some configs may define additional server-specific functions, e.g. the `texlab`
-config provides `nvim_lsp.texlab.buf_build({bufnr})`.
+config provides `lspconfig.texlab.buf_build({bufnr})`.
 
 If you want to see the location of log file, you can run this in neovim:
 
@@ -80,7 +80,7 @@ For the `gopls` config, that would be:
 
 ```lua
 vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
-require'nvim_lsp'.gopls.setup{}
+require'lspconfig'.gopls.setup{}
 ```
 
 ### Example: override some defaults
@@ -89,9 +89,9 @@ To set some config properties at `setup()`, specify their keys. For example to
 change how the "project root" is found, set the `root_dir` key:
 
 ```lua
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.gopls.setup{
-  root_dir = nvim_lsp.util.root_pattern('.git');
+local lspconfig = require'lspconfig'
+lspconfig.gopls.setup{
+  root_dir = lspconfig.util.root_pattern('.git');
 }
 ```
 
@@ -99,8 +99,8 @@ The [documentation](#configurations) for each config lists default values and
 additional optional properties.
 
 ```lua
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.texlab.setup{
+local lspconfig = require'lspconfig'
+lspconfig.texlab.setup{
   name = 'texlab_fancy';
   log_level = vim.lsp.protocol.MessageType.Log;
   message_level = vim.lsp.protocol.MessageType.Log;
@@ -116,29 +116,29 @@ nvim_lsp.texlab.setup{
 
 ### Example: custom config
 
-To configure a custom/private server, just require `nvim_lsp/configs` and do
+To configure a custom/private server, just require `lspconfig/configs` and do
 the same as we do if we were adding it to the repository itself.
 
 1. Define the config: `configs.foo_lsp = { … }`
-2. Call `setup()`: `require'nvim_lsp'.foo_lsp.setup{}`
+2. Call `setup()`: `require'lspconfig'.foo_lsp.setup{}`
 
 ```lua
-local nvim_lsp = require'nvim_lsp'
-local configs = require'nvim_lsp/configs'
+local lspconfig = require'lspconfig'
+local configs = require'lspconfig/configs'
 -- Check if it's already defined for when I reload this file.
-if not nvim_lsp.foo_lsp then
+if not lspconfig.foo_lsp then
   configs.foo_lsp = {
     default_config = {
       cmd = {'/home/ashkan/works/3rd/lua-language-server/run.sh'};
       filetypes = {'lua'};
       root_dir = function(fname)
-        return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+        return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
       end;
       settings = {};
     };
   }
 end
-nvim_lsp.foo_lsp.setup{}
+lspconfig.foo_lsp.setup{}
 ```
 
 ### Example: override default config
@@ -146,10 +146,10 @@ nvim_lsp.foo_lsp.setup{}
 If you want to change default configs for all servers, you can override default_config like this.
 
 ```lua
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.util.default_config = vim.tbl_extend(
+local lspconfig = require'lspconfig'
+lspconfig.util.default_config = vim.tbl_extend(
   "force",
-  nvim_lsp.util.default_config,
+  lspconfig.util.default_config,
   { log_level = lsp.protocol.MessageType.Warning.Error }
 )
 ```
@@ -171,7 +171,7 @@ Use `:LspInstallInfo` to see install info.
 The `setup()` interface:
 
 ```
-nvim_lsp.SERVER.setup{config}
+lspconfig.SERVER.setup{config}
 
   The `config` parameter has the same shape as that of
   |vim.lsp.start_client()|, with these additions and changes:
@@ -190,14 +190,14 @@ nvim_lsp.SERVER.setup{config}
 
     If nil is returned, the buffer is skipped.
 
-    See |nvim_lsp.util.search_ancestors()| and the functions which use it:
-    - |nvim_lsp.util.root_pattern(patterns...)| finds an ancestor which
+    See |lspconfig.util.search_ancestors()| and the functions which use it:
+    - |lspconfig.util.root_pattern(patterns...)| finds an ancestor which
     - contains one of the files in `patterns...`. This is equivalent
       to coc.nvim's "rootPatterns"
     - Related utilities for common tools:
-      - |nvim_lsp.util.find_git_root()|
-      - |nvim_lsp.util.find_node_modules_root()|
-      - |nvim_lsp.util.find_package_json_root()|
+      - |lspconfig.util.find_git_root()|
+      - |lspconfig.util.find_node_modules_root()|
+      - |lspconfig.util.find_package_json_root()|
 
   {name}
     Defaults to the server's name.
@@ -308,7 +308,7 @@ Ada language server. Use `LspInstall als` to install it.
 Can be configured by passing a "settings" object to `als.setup{}`:
 
 ```lua
-require('nvim_lsp').als.setup{
+require('lspconfig').als.setup{
     settings = {
       ada = {
         projectFile = "project.gpr";
@@ -322,7 +322,7 @@ Can be installed in Nvim with `:LspInstall als`
 
 
 ```lua
-require'nvim_lsp'.als.setup{}
+require'lspconfig'.als.setup{}
 
   Commands:
   
@@ -344,12 +344,12 @@ Be aware there is no global binary and must be run via `node_modules/@angular/la
 Can be installed in Nvim with `:LspInstall angularls`
 
 ```lua
-require'nvim_lsp'.angularls.setup{}
+require'lspconfig'.angularls.setup{}
 
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/nvim_lsp/angularls/node_modules/.bin/angularls", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/angularls/node_modules/.bin/angularls", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" }
     filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" }
     root_dir = root_pattern("angular.json", ".git")
 ```
@@ -363,7 +363,7 @@ Language server for bash, written using tree sitter in typescript.
 Can be installed in Nvim with `:LspInstall bashls`
 
 ```lua
-require'nvim_lsp'.bashls.setup{}
+require'lspconfig'.bashls.setup{}
 
   Commands:
   
@@ -815,7 +815,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.ccls.setup{}
+require'lspconfig'.ccls.setup{}
 
   Commands:
   
@@ -837,7 +837,7 @@ For details on how to automatically generate one using CMake look [here](https:/
 
 
 ```lua
-require'nvim_lsp'.clangd.setup{}
+require'lspconfig'.clangd.setup{}
 
   Commands:
   - ClangdSwitchSourceHeader: Switch between source/header
@@ -858,7 +858,7 @@ Clojure Language Server
 
 
 ```lua
-require'nvim_lsp'.clojure_lsp.setup{}
+require'lspconfig'.clojure_lsp.setup{}
 
   Commands:
   
@@ -876,7 +876,7 @@ CMake LSP Implementation
 
 
 ```lua
-require'nvim_lsp'.cmake.setup{}
+require'lspconfig'.cmake.setup{}
 
   Commands:
   
@@ -947,7 +947,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.codeqlls.setup{}
+require'lspconfig'.codeqlls.setup{}
 
   Commands:
   
@@ -974,7 +974,7 @@ npm install -g vscode-css-languageserver-bin
 Can be installed in Nvim with `:LspInstall cssls`
 
 ```lua
-require'nvim_lsp'.cssls.setup{}
+require'lspconfig'.cssls.setup{}
 
   Commands:
   
@@ -1526,7 +1526,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.dartls.setup{}
+require'lspconfig'.dartls.setup{}
 
   Commands:
   
@@ -1552,7 +1552,7 @@ Diagnostic language server integrate with linters.
 Can be installed in Nvim with `:LspInstall diagnosticls`
 
 ```lua
-require'nvim_lsp'.diagnosticls.setup{}
+require'lspconfig'.diagnosticls.setup{}
 
   Commands:
   
@@ -1574,7 +1574,7 @@ npm install -g dockerfile-language-server-nodejs
 Can be installed in Nvim with `:LspInstall dockerls`
 
 ```lua
-require'nvim_lsp'.dockerls.setup{}
+require'lspconfig'.dockerls.setup{}
 
   Commands:
   
@@ -1592,7 +1592,7 @@ General purpose Language Server that can use specified error message format gene
 
 
 ```lua
-require'nvim_lsp'.efm.setup{}
+require'lspconfig'.efm.setup{}
 
   Commands:
   
@@ -1611,7 +1611,7 @@ This language server does not provide a global binary, but must be installed man
 Fetching the elixir-ls repository from GitHub, compiling it and then installing it.
 
 ```lua
-require'nvim_lsp'.elixirls.setup{
+require'lspconfig'.elixirls.setup{
     -- Unix
     cmd = { "path/to/language_server.sh" };
     -- Windows
@@ -1669,7 +1669,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.elixirls.setup{}
+require'lspconfig'.elixirls.setup{}
 
   Commands:
   
@@ -1725,7 +1725,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.elmls.setup{}
+require'lspconfig'.elmls.setup{}
 
   Commands:
   
@@ -1855,7 +1855,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.flow.setup{}
+require'lspconfig'.flow.setup{}
 
   Commands:
   
@@ -1943,7 +1943,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.fortls.setup{}
+require'lspconfig'.fortls.setup{}
 
   Commands:
   
@@ -1964,7 +1964,7 @@ Language server for GDScript, used by Godot Engine.
 
 
 ```lua
-require'nvim_lsp'.gdscript.setup{}
+require'lspconfig'.gdscript.setup{}
 
   Commands:
   
@@ -1998,7 +1998,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.ghcide.setup{}
+require'lspconfig'.ghcide.setup{}
 
   Commands:
   
@@ -2016,7 +2016,7 @@ Google's lsp server for golang.
 
 
 ```lua
-require'nvim_lsp'.gopls.setup{}
+require'lspconfig'.gopls.setup{}
 
   Commands:
   
@@ -2115,7 +2115,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.hie.setup{}
+require'lspconfig'.hie.setup{}
 
   Commands:
   
@@ -2133,7 +2133,7 @@ Haskell Language Server
         
 
 ```lua
-require'nvim_lsp'.hls.setup{}
+require'lspconfig'.hls.setup{}
 
   Commands:
   
@@ -2155,7 +2155,7 @@ npm install -g vscode-html-languageserver-bin
 Can be installed in Nvim with `:LspInstall html`
 
 ```lua
-require'nvim_lsp'.html.setup{}
+require'lspconfig'.html.setup{}
 
   Commands:
   
@@ -2185,7 +2185,7 @@ npm install -g intelephense
 Can be installed in Nvim with `:LspInstall intelephense`
 
 ```lua
-require'nvim_lsp'.intelephense.setup{}
+require'lspconfig'.intelephense.setup{}
 
   Commands:
   
@@ -2206,7 +2206,7 @@ Language server for Java.
 Can be installed in Nvim with `:LspInstall jdtls`
 
 ```lua
-require'nvim_lsp'.jdtls.setup{}
+require'lspconfig'.jdtls.setup{}
 
   Commands:
   
@@ -2230,7 +2230,7 @@ https://github.com/pappasam/jedi-language-server
     
 
 ```lua
-require'nvim_lsp'.jedi_language_server.setup{}
+require'lspconfig'.jedi_language_server.setup{}
 
   Commands:
   
@@ -2294,7 +2294,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.jsonls.setup{}
+require'lspconfig'.jsonls.setup{}
 
   Commands:
   
@@ -2309,11 +2309,11 @@ require'nvim_lsp'.jsonls.setup{}
 https://github.com/julia-vscode/julia-vscode
 `LanguageServer.jl` can be installed via `:LspInstall julials` or by yourself the `julia` and `Pkg`:
 ```sh
-julia --project=/home/runner/.cache/nvim/nvim_lsp/julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
+julia --project=/home/runner/.cache/nvim/lspconfig/julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
 If you want to install the LanguageServer manually, you will have to ensure that the Julia environment is stored in this location:
 ```vim
-:lua print(require'nvim_lsp'.util.path.join(require'nvim_lsp'.util.base_install_dir, "julials"))
+:lua print(require'lspconfig'.util.path.join(require'lspconfig'.util.base_install_dir, "julials"))
 ```
     
 Can be installed in Nvim with `:LspInstall julials`
@@ -2541,12 +2541,12 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.julials.setup{}
+require'lspconfig'.julials.setup{}
 
   Commands:
   
   Default Values:
-    cmd = { "julia", "--project=/home/runner/.cache/nvim/nvim_lsp/julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
+    cmd = { "julia", "--project=/home/runner/.cache/nvim/lspconfig/julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
     filetypes = { "julia" }
     root_dir = <function 1>
 ```
@@ -2665,7 +2665,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.kotlin_language_server.setup{}
+require'lspconfig'.kotlin_language_server.setup{}
 
   Commands:
   
@@ -2808,7 +2808,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.leanls.setup{}
+require'lspconfig'.leanls.setup{}
 
   Commands:
   
@@ -2904,7 +2904,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.metals.setup{}
+require'lspconfig'.metals.setup{}
 
   Commands:
   
@@ -3014,7 +3014,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.nimls.setup{}
+require'lspconfig'.nimls.setup{}
 
   Commands:
   
@@ -3036,7 +3036,7 @@ npm install -g ocaml-langauge-server
 Can be installed in Nvim with `:LspInstall ocamlls`
 
 ```lua
-require'nvim_lsp'.ocamlls.setup{}
+require'lspconfig'.ocamlls.setup{}
 
   Commands:
   
@@ -3060,7 +3060,7 @@ opam install ocaml-lsp-server
     
 
 ```lua
-require'nvim_lsp'.ocamllsp.setup{}
+require'lspconfig'.ocamllsp.setup{}
 
   Commands:
   
@@ -3078,12 +3078,12 @@ OmniSharp server based on Roslyn workspaces
 Can be installed in Nvim with `:LspInstall omnisharp`
 
 ```lua
-require'nvim_lsp'.omnisharp.setup{}
+require'lspconfig'.omnisharp.setup{}
 
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2801" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2801" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -3241,7 +3241,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.purescriptls.setup{}
+require'lspconfig'.purescriptls.setup{}
 
   Commands:
   
@@ -3533,7 +3533,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.pyls.setup{}
+require'lspconfig'.pyls.setup{}
 
   Commands:
   
@@ -3576,7 +3576,7 @@ This server accepts configuration via the `settings` key.
 Can be installed in Nvim with `:LspInstall pyls_ms`
 
 ```lua
-require'nvim_lsp'.pyls_ms.setup{}
+require'lspconfig'.pyls_ms.setup{}
 
   Commands:
   
@@ -3656,7 +3656,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.r_language_server.setup{}
+require'lspconfig'.r_language_server.setup{}
 
   Commands:
   
@@ -3907,7 +3907,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.rls.setup{}
+require'lspconfig'.rls.setup{}
 
   Commands:
   
@@ -3931,7 +3931,7 @@ This server accepts configuration via the `settings` key.
 Can be installed in Nvim with `:LspInstall rnix`
 
 ```lua
-require'nvim_lsp'.rnix.setup{}
+require'lspconfig'.rnix.setup{}
 
   Commands:
   
@@ -3956,7 +3956,7 @@ npm install [-g] rome
 
 
 ```lua
-require'nvim_lsp'.rome.setup{}
+require'lspconfig'.rome.setup{}
 
   Commands:
   
@@ -4341,7 +4341,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.rust_analyzer.setup{}
+require'lspconfig'.rust_analyzer.setup{}
 
   Commands:
   
@@ -4362,7 +4362,7 @@ Crystal language server.
 
 
 ```lua
-require'nvim_lsp'.scry.setup{}
+require'lspconfig'.scry.setup{}
 
   Commands:
   
@@ -4484,7 +4484,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.solargraph.setup{}
+require'lspconfig'.solargraph.setup{}
 
   Commands:
   
@@ -4532,7 +4532,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.sourcekit.setup{}
+require'lspconfig'.sourcekit.setup{}
 
   Commands:
   
@@ -4549,7 +4549,7 @@ https://github.com/joe-re/sql-language-server
 `cmd` value is **not set** by default. An installer is provided via the `:LspInstall` command that uses the *nvm_lsp node_modules* directory to find the sql-language-server executable. The `cmd` value can be overriden in the `setup` table;
 
 ```lua
-require'nvim_lsp'.sqlls.setup{
+require'lspconfig'.sqlls.setup{
   cmd = {"path/to/command", "up", "--method", "stdio"};
   ...
 }
@@ -4561,7 +4561,7 @@ This LSP can be installed via `:LspInstall sqlls` or with `npm`. If using LspIns
 Can be installed in Nvim with `:LspInstall sqlls`
 
 ```lua
-require'nvim_lsp'.sqlls.setup{}
+require'lspconfig'.sqlls.setup{}
 
   Commands:
   
@@ -4582,7 +4582,7 @@ guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standa
 So you should set `cmd` yourself like this.
 
 ```lua
-require'nvim_lsp'.sumneko_lua.setup{
+require'lspconfig'.sumneko_lua.setup{
   cmd = {"path", "to", "cmd"};
   ...
 }
@@ -4747,7 +4747,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.sumneko_lua.setup{}
+require'lspconfig'.sumneko_lua.setup{}
 
   Commands:
   
@@ -4792,7 +4792,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.terraformls.setup{}
+require'lspconfig'.terraformls.setup{}
 
   Commands:
   
@@ -4812,7 +4812,7 @@ See https://texlab.netlify.com/docs/reference/configuration for configuration op
 
 
 ```lua
-require'nvim_lsp'.texlab.setup{}
+require'lspconfig'.texlab.setup{}
 
   Commands:
   - TexlabBuild: Build the current buffer
@@ -4856,7 +4856,7 @@ npm install -g typescript-language-server
 Can be installed in Nvim with `:LspInstall tsserver`
 
 ```lua
-require'nvim_lsp'.tsserver.setup{}
+require'lspconfig'.tsserver.setup{}
 
   Commands:
   
@@ -4870,7 +4870,7 @@ require'nvim_lsp'.tsserver.setup{}
 
 
 ```lua
-require'nvim_lsp'.vimls.setup{}
+require'lspconfig'.vimls.setup{}
 
   Commands:
   
@@ -5119,7 +5119,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.vuels.setup{}
+require'lspconfig'.vuels.setup{}
 
   Commands:
   
@@ -5253,7 +5253,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.yamlls.setup{}
+require'lspconfig'.yamlls.setup{}
 
   Commands:
   
