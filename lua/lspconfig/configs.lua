@@ -34,7 +34,7 @@ function configs.__newindex(t, config_name, config_def)
   -- which is why this is a function, so that it can refer to the settings
   -- object on the server.
   local function add_handlers(config)
-    assert(not lsp.callbacks, "lsp.callbacks has been deprecated. See here for more: https://github.com/neovim/neovim/pull/12655")
+    assert(not config.callbacks, "lsp.callbacks has been deprecated. See here for more: https://github.com/neovim/neovim/pull/12655")
     config.handlers["window/logMessage"] = function(err, method, params, client_id)
       if params and params.type <= config.log_level then
         -- TODO(ashkan) remove this after things have settled.
