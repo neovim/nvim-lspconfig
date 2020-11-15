@@ -14,10 +14,25 @@ if vim.fn.has('win32') == 1 then
   bin_name = bin_name..".bat"
 end
 
+
+--- The presence of one of these files indicates a project root directory
+--
+--  These are configuration files for the various build systems supported by
+--  Kotlin. I am not sure whether the language server supports Ant projects,
+--  but I'm keeping it here as well since Ant does support Kotlin.
+local root_files = {
+  'build.xml',             -- Ant
+  'pom.xml',               -- Maven
+  'build.gradle',          -- Gradle
+  'build.gradle.kts',      -- Gradle
+  'settings.gradle',       -- Gradle
+  'settings.gradle.kts',   -- Gradle
+}
+
 configs.kotlin_language_server = {
   default_config = {
     filetypes = { "kotlin" };
-    root_dir = util.root_pattern("settings.gradle");
+    root_dir = util.root_pattern(unpack(root_files));
     cmd = { bin_name };
   };
   docs = {
