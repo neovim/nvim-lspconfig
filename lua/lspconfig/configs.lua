@@ -46,8 +46,7 @@ function configs.__newindex(t, config_name, config_def)
     config.handlers["window/showMessage"] = function(err, method, params, client_id)
       if params and params.type <= config.message_level then
         -- TODO(ashkan) remove this after things have settled.
-        assert(lsp.handlers and lsp.handlers[method], "Update to Nvim HEAD. This is an incompatible interface.")
-        assert(lsp.handlers["window/showMessage"], "Callback for window/showMessage notification is not defined")
+        assert(lsp.handlers["window/showMessage"], "Handler for window/showMessage notification is not defined")
         lsp.handlers["window/showMessage"](err, method, params, client_id)
       end
     end
