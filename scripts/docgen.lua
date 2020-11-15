@@ -138,7 +138,7 @@ local function make_lsp_sections()
           local package_json_name = util.path.join(tempdir, template_name..'.package.json');
           if docs.package_json then
             if not util.path.is_file(package_json_name) then
-              os.execute(string.format("curl -L -o %q %q", package_json_name, docs.package_json))
+              os.execute(string.format("curl -v -L -o %q %q", package_json_name, docs.package_json))
             end
             if not util.path.is_file(package_json_name) then
               print(string.format("Failed to download package.json for %q at %q", template_name, docs.package_json))
