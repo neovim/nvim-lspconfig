@@ -9,10 +9,16 @@
 local util = require 'lspconfig/util'
 local configs = require 'lspconfig/configs'
 
+local bin_name = "kotlin-language-server"
+if vim.fn.has('win32') == 1 then
+  bin_name = bin_name..".bat"
+end
+
 configs.kotlin_language_server = {
   default_config = {
     filetypes = { "kotlin" };
     root_dir = util.root_pattern("settings.gradle");
+    cmd = { bin_name };
   };
   docs = {
     package_json = "https://raw.githubusercontent.com/fwcd/vscode-kotlin/master/package.json";
@@ -27,6 +33,7 @@ configs.kotlin_language_server = {
     ]];
     default_config = {
       root_dir = [[root_pattern("settings.gradle")]];
+      cmd = {"kotlin-language-server"};
       capabilities = [[
       smart code completion,
       diagnostics,
