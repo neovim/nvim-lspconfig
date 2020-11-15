@@ -920,6 +920,12 @@ This server accepts configuration via the `settings` key.
 
   Enable debug logging and tuple counting when running CodeQL queries\. This information is useful for debugging query performance\.
 
+- **`codeQL.runningQueries.maxQueries`**: `integer`
+
+  Default: `20`
+  
+  Max number of simultaneous queries to run using the \'CodeQL\: Run Queries\' command\.
+
 - **`codeQL.runningQueries.memory`**: `integer|null`
 
   Default: `vim.NIL`
@@ -1020,7 +1026,7 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.allowTestsOutsideTestFolder`**: `boolean`
 
-  Whether to consider files ending \'\_test\.dart\' that are outside of the test folder as tests\. This should be enabled if you put tests inside the \'lib\' folder of your Flutter application so they will be run with \'flutter test\' and not \'flutter run\'\.
+  null
 
 - **`dart.analysisExcludedFolders`**: `array`
 
@@ -1040,7 +1046,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to enable analysis for AngularDart templates \(requires the Angular analyzer plugin to be enabled in analysis\_options\.yaml\)\.
+  null
 
 - **`dart.analyzerAdditionalArgs`**: `array`
 
@@ -1054,7 +1060,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The port number to be used for the Dart analysis server diagnostic server\.
+  The port number to be used for the Dart analyzer diagnostic server\.
 
 - **`dart.analyzerInstrumentationLogFile`**: `null|string`
 
@@ -1099,7 +1105,7 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{type = "string"}`
   
-  Additional args to pass to the build\_runner when building\/watching\/serving\.
+  null
 
 - **`dart.checkForSdkUpdates`**: `boolean`
 
@@ -1113,6 +1119,12 @@ This server accepts configuration via the `settings` key.
   
   Whether to show annotations against constructor\, method invocations and lists that span multiple lines\.
 
+- **`dart.completeFunctionCalls`**: `boolean`
+
+  Default: `true`
+  
+  null
+
 - **`dart.debugExtensionBackendProtocol`**: `enum { "sse", "ws" }`
 
   Default: `"ws"`
@@ -1121,11 +1133,17 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.debugExternalLibraries`**: `boolean`
 
-  Whether to mark external pub package libraries \(including package\:flutter\) as debuggable\, enabling stepping into them while debugging\.
+  null
 
 - **`dart.debugSdkLibraries`**: `boolean`
 
-  Whether to mark Dart SDK libraries \(dart\:\*\) as debuggable\, enabling stepping into them while debugging\.
+  null
+
+- **`dart.devToolsBrowser`**: `enum { "chrome", "default" }`
+
+  Default: `"chrome"`
+  
+  Whether to launch external DevTools windows using Chrome or the system default browser\.
 
 - **`dart.devToolsLogFile`**: `null|string`
 
@@ -1157,23 +1175,23 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{type = "string"}`
   
-  An array of glob patterns that should be excluded for formatting\. The pattern is matched against the absolute path of the file\. Use \*\*\/test\/\*\* to skip formatting for all test folders\.
+  null
 
 - **`dart.embedDevTools`**: `boolean`
 
   Default: `true`
   
-  Whether to load DevTools embedded inside VS Code\.
+  null
 
 - **`dart.enableCompletionCommitCharacters`**: `boolean`
 
-  Whether to automatically commit the selected completion item when pressing certain keys such as \. \, \( and \[\.
+  null
 
 - **`dart.enableSdkFormatter`**: `boolean`
 
   Default: `true`
   
-  Whether to enable the dart\_style formatter included with the Dart SDK\.
+  null
 
 - **`dart.enableSnippets`**: `boolean`
 
@@ -1207,7 +1225,7 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.flutterAdbConnectOnChromeOs`**: `boolean`
 
-  Whether to automatically run \'adb connect 100\.115\.92\.2\:5555\' when spawning the Flutter Daemon when running on Chrome OS\.
+  null
 
 - **`dart.flutterAdditionalArgs`**: `array`
 
@@ -1215,11 +1233,7 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{type = "string"}`
   
-  Additional args to pass to all flutter commands\.
-
-- **`dart.flutterAndroidX`**: `boolean`
-
-  Whether to pass the \-\-androidx flag when running the \'Flutter\: New Project\' command\.
+  null
 
 - **`dart.flutterCreateAndroidLanguage`**: `enum { "java", "kotlin" }`
 
@@ -1231,7 +1245,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"swift"`
   
-  The programming language to use for IOS apps when creating new projects using the \'Flutter\: New Project\' command\.
+  The programming language to use for iOS apps when creating new projects using the \'Flutter\: New Project\' command\.
 
 - **`dart.flutterCreateOffline`**: `boolean`
 
@@ -1241,7 +1255,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The organization responsible for your new Flutter project\, in reverse domain name notation\. This string is used in Java package names and as prefix in the iOS bundle identifier when creating new projects using the \'Flutter\: New Project\' command\.
+  null
 
 - **`dart.flutterCustomEmulators`**: `array`
 
@@ -1255,7 +1269,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The path to a log file for the \'flutter daemon\' communication which is the service that provides information about connected devices used to show in the status bar\.
+  null
 
 - **`dart.flutterGutterIcons`**: `boolean`
 
@@ -1267,7 +1281,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to automatically send a Hot Reload request during debug session when saving files\.
+  Whether to automatically send a Hot Reload request during a debug session when saving files\.
 
 - **`dart.flutterHotRestartOnSave`**: `boolean`
 
@@ -1279,13 +1293,13 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to show the Flutter Outline tree in the side bar\.
+  Whether to show the Flutter Outline tree in the sidebar\.
 
 - **`dart.flutterRunLogFile`**: `null|string`
 
   Default: `vim.NIL`
   
-  The path to a log file for \'flutter run\' which is used to launch Flutter applications from VS Code\. This is useful when trying to diagnose issues with applications launching \(or failing to\) on simulators and devices\. Use \$\{name\} in the log file name to prevent concurrent debug sessions overwriting each others logs\.
+  null
 
 - **`dart.flutterScreenshotPath`**: `null|string`
 
@@ -1297,7 +1311,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The location of the Flutter SDK to use\. If blank\, Dart Code will attempt to find it from the project folder\, FLUTTER\_ROOT environment variable and the PATH environment variable\.
+  null
 
 - **`dart.flutterSdkPaths`**: `array`
 
@@ -1305,7 +1319,7 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{type = "string"}`
   
-  An array of strings that are either Flutter SDKs or folders that contains multiple Flutter SDKs in sub\-folders\. When set\, the version number in the status bar will be clickable to quickly switch between SDKs\.
+  An array of paths that either directly point to a Flutter SDK or the parent directory of multiple Flutter SDKs\. When set\, the version number in the status bar can be used to quickly switch between SDKs\.
 
 - **`dart.flutterSelectDeviceWhenConnected`**: `boolean`
 
@@ -1317,25 +1331,33 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to use Flutter\'s structured error support for improve error display\.
+  null
+
+- **`dart.flutterTestAdditionalArgs`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  null
 
 - **`dart.flutterTestLogFile`**: `null|string`
 
   Default: `vim.NIL`
   
-  The path to a log file for \'flutter test\' which is used to run unit tests from VS Code\. This is useful when trying to diagnose issues with unit test executions\. Use \$\{name\} in the log file name to prevent concurrent debug sessions overwriting each others logs\.
+  null
 
 - **`dart.flutterTrackWidgetCreation`**: `boolean`
 
   Default: `true`
   
-  Whether to pass \-\-track\-widget\-creation to Flutter apps \(required to support \'Inspect Widget\'\)\. This setting is always ignored when running in Profile or Release mode\.
+  null
 
 - **`dart.insertArgumentPlaceholders`**: `boolean`
 
   Default: `true`
   
-  Whether to insert argument placeholders during code completions\. This feature is automatically disabled when enableCompletionCommitCharacters is enabled\.
+  null
 
 - **`dart.lineLength`**: `integer`
 
@@ -1371,15 +1393,15 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.previewBazelWorkspaceCustomScripts`**: `boolean`
 
-  EXPERIMENTAL\: Whether to look for custom script definitions at dart\/config\/intellij\-plugins\/flutter\.json in Bazel workspaces\. Currently supported for macOS and Linux only\.
+  null
 
-- **`dart.previewBuildRunnerTasks`**: `boolean`
+- **`dart.previewCommitCharacters`**: `boolean`
 
-  Whether to register Pub Build Runner tasks with VS Code\.
+  EXPERIMENTAL\: Whether to enable commit characters for the LSP server\. In a future release\, the dart\.enableCompletionCommitCharacters setting will also apply to LSP\.
 
 - **`dart.previewFlutterUiGuides`**: `boolean`
 
-  Whether to enable the Flutter UI Guides preview\.
+  null
 
 - **`dart.previewFlutterUiGuidesCustomTracking`**: `boolean`
 
@@ -1387,11 +1409,11 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.previewHotReloadOnSaveWatcher`**: `boolean`
 
-  Whether to perform hot\-reload\-on\-save based on a filesystem watcher for Dart files rather than using VS Code\'s onDidSave event\. This allows reloads to trigger when external tools modify Dart source files\.
+  null
 
 - **`dart.previewLsp`**: `boolean`
 
-  EXPERIMENTAL\: Whether to run the analyzer in LSP mode \(requires restart\)\.
+  null
 
 - **`dart.promptToGetPackages`**: `boolean`
 
@@ -1417,19 +1439,19 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The path to a log file for \'pub run test\' runs\. This is useful when trying to diagnose issues with unit test executions\. Use \$\{name\} in the log file name to prevent concurrent debug sessions overwriting each others logs\.
+  null
 
 - **`dart.runPubGetOnPubspecChanges`**: `boolean`
 
   Default: `true`
   
-  Whether to automatically run \'pub get\' whenever pubspec\.yaml is saved\.
+  null
 
 - **`dart.sdkPath`**: `null|string`
 
   Default: `vim.NIL`
   
-  The location of the Dart SDK to use for analyzing and executing code\. If blank\, Dart Code will attempt to find it from the PATH environment variable\. When editing a Flutter project\, the version of Dart included in the Flutter SDK is used in preference\.
+  null
 
 - **`dart.sdkPaths`**: `array`
 
@@ -1437,19 +1459,25 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{type = "string"}`
   
-  An array of strings that are either Dart SDKs or folders that contains multiple Dart SDKs in sub\-folders\. When set\, the version number in the status bar will be clickable to quickly switch between SDKs\.
+  An array of paths that either directly point to a Dart SDK or the parent directory of multiple Dart SDKs\. When set\, the version number in the status bar can be used to quickly switch between SDKs\.
 
 - **`dart.showDartDeveloperLogs`**: `boolean`
 
   Default: `true`
   
-  Whether to show logs from dart\:developer\'s log\(\) function in the debug console\.
+  null
 
 - **`dart.showDartPadSampleCodeLens`**: `boolean`
 
   Default: `true`
   
   Whether to show CodeLens actions in the editor for opening online DartPad samples\.
+
+- **`dart.showDevToolsDebugToolBarButtons`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show DevTools buttons in the Debug toolbar\.
 
 - **`dart.showIgnoreQuickFixes`**: `boolean`
 
@@ -1461,13 +1489,13 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to show CodeLens actions in the editor for quick running\/debugging scripts with main functions\.
+  Whether to show CodeLens actions in the editor for quick running \/ debugging scripts with main functions\.
 
 - **`dart.showTestCodeLens`**: `boolean`
 
   Default: `true`
   
-  Whether to show CodeLens actions in the editor for quick running\/debugging tests\.
+  Whether to show CodeLens actions in the editor for quick running \/ debugging tests\.
 
 - **`dart.showTodos`**: `boolean`
 
@@ -1483,7 +1511,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to automatically update imports when moving\/renaming files\. Currently only works for single\-file moves\/renames\.
+  Whether to automatically update imports when moving or renaming files\. Currently only supports single file moves \/ renames\.
 
 - **`dart.useKnownChromeOSPorts`**: `boolean`
 
@@ -1503,13 +1531,13 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The path to a log file for communication between Dart Code and the VM service\. This is useful when trying to diagnose issues with debugging such as missed breakpoints\. Use \$\{name\} in the log file name to prevent concurrent debug sessions overwriting each others logs\.
+  null
 
 - **`dart.warnWhenEditingFilesInPubCache`**: `boolean`
 
   Default: `true`
   
-  Whether to show a warning when modifying files in Pub\'s cache folder\.
+  null
 
 - **`dart.warnWhenEditingFilesOutsideWorkspace`**: `boolean`
 
@@ -1521,7 +1549,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The path to a log file for communication between Dart Code and the webdev daemon\. This is useful when trying to diagnose issues with launching web applications\. Use \$\{name\} in the log file name to prevent concurrent debug sessions overwriting each others logs\.
+  null
 
 </details>
 
@@ -1692,9 +1720,13 @@ Can be installed in Nvim with `:LspInstall elmls`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`elmLS.disableElmLSDiagnostics`**: `boolean`
+
+  Disable linting diagnostics from the language server\.
+
 - **`elmLS.elmAnalyseTrigger`**: `enum { "change", "save", "never" }`
 
-  Default: `"change"`
+  Default: `"never"`
   
   When do you want the extension to run elm\-analyse\? Might need a restart to take effect\.
 
@@ -1877,6 +1909,10 @@ This server accepts configuration via the `settings` key.
 - **`fortran-ls.autocompletePrefix`**: `boolean`
 
   Filter autocomplete suggestions with variable prefix
+
+- **`fortran-ls.disableDiagnostics`**: `boolean`
+
+  Disable diagnostics \(requires v1\.12\.0+\)\.
 
 - **`fortran-ls.displayVerWarning`**: `boolean`
 
@@ -2100,6 +2136,12 @@ This server accepts configuration via the `settings` key.
   
   Controls the maximum number of problems produced by the server
 
+- **`haskell.releasesURL`**: `string`
+
+  Default: `""`
+  
+  An optional URL to override where to check for haskell\-language\-server releases
+
 - **`haskell.serverExecutablePath`**: `string`
 
   Default: `""`
@@ -2111,6 +2153,12 @@ This server accepts configuration via the `settings` key.
   Default: `"off"`
   
   Traces the communication between VS Code and the language server\.
+
+- **`haskell.updateBehavior`**: `enum { "keep-up-to-date", "prompt", "never-check" }`
+
+  Default: `"keep-up-to-date"`
+  
+  null
 
 </details>
 
@@ -2358,7 +2406,7 @@ This server accepts configuration via the `settings` key.
 
 - **`julia.execution.codeInREPL`**: `boolean`
 
-  Print executed code in REPL\.
+  Print executed code in REPL and append it to the REPL history\.
 
 - **`julia.execution.resultType`**: `enum { "REPL", "inline", "both" }`
 
@@ -2861,6 +2909,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`metals.excludedPackages`**: `array`
+
+  Default: `{}`
+  
+  null
+
 - **`metals.gradleScript`**: `string`
 
   null
@@ -2881,6 +2935,10 @@ This server accepts configuration via the `settings` key.
 
   null
 
+- **`metals.scalafixConfigPath`**: `string`
+
+  null
+
 - **`metals.scalafmtConfigPath`**: `string`
 
   null
@@ -2893,8 +2951,16 @@ This server accepts configuration via the `settings` key.
 
 - **`metals.serverVersion`**: `string`
 
-  Default: `"0.9.3"`
+  Default: `"0.9.5"`
   
+  null
+
+- **`metals.showImplicitArguments`**: `boolean`
+
+  null
+
+- **`metals.showInferredType`**: `boolean`
+
   null
 
 - **`metals.superMethodLensesEnabled`**: `boolean`
@@ -3083,7 +3149,7 @@ require'lspconfig'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2801" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2552" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -3273,6 +3339,12 @@ This server accepts configuration via the `settings` key.
   Default: `"pyls"`
   
   Language server executable
+
+- **`pyls.plugins.jedi.env_vars`**: `dictionary`
+
+  Default: `vim.NIL`
+  
+  Define environment variables for jedi\.Script and Jedi\.names\.
 
 - **`pyls.plugins.jedi.environment`**: `string`
 
@@ -3503,6 +3575,12 @@ This server accepts configuration via the `settings` key.
 - **`pyls.plugins.pylint.enabled`**: `boolean`
 
   Enable or disable the plugin\.
+
+- **`pyls.plugins.pylint.executable`**: `string`
+
+  Default: `vim.NIL`
+  
+  Executable to run pylint with\. Enabling this will run pylint on unsaved files via stdin\. Can slow down workflow\. Only works with python3\.
 
 - **`pyls.plugins.rope_completion.enabled`**: `boolean`
 
@@ -3977,6 +4055,18 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`rust-analyzer.assist.importMergeBehaviour`**: `enum { "none", "full", "last" }`
+
+  Default: `"full"`
+  
+  The strategy to use when inserting new imports or merging imports\.
+
+- **`rust-analyzer.assist.importPrefix`**: `enum { "plain", "by_self", "by_crate" }`
+
+  Default: `"plain"`
+  
+  The path structure for newly inserted paths to use\.
+
 - **`rust-analyzer.callInfo.full`**: `boolean`
 
   Default: `true`
@@ -4252,6 +4342,10 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.lens.methodReferences`**: `boolean`
+
+  null
+
 - **`rust-analyzer.lens.run`**: `boolean`
 
   Default: `true`
@@ -4272,6 +4366,10 @@ This server accepts configuration via the `settings` key.
   
   Number of syntax trees rust\-analyzer keeps in memory\.
 
+- **`rust-analyzer.noSysroot`**: `boolean`
+
+  null
+
 - **`rust-analyzer.notifications.cargoTomlNotFound`**: `boolean`
 
   Default: `true`
@@ -4287,6 +4385,27 @@ This server accepts configuration via the `settings` key.
   Default: `vim.NIL`
   
   Environment variables passed to the runnable launched using \`Test \` or \`Debug\` lens or \`rust\-analyzer\.run\` command\.
+
+- **`rust-analyzer.runnables.cargoExtraArgs`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Additional arguments to be passed to cargo for runnables such as tests or binaries\.
+  For example\, it may be \'\-\-release\'
+
+- **`rust-analyzer.runnables.overrideCargo`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  Command to be executed instead of \'cargo\' for runnables\.
+
+- **`rust-analyzer.rustcSource`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  Path to the rust compiler sources\, for usage in rustc\_private projects\.
 
 - **`rust-analyzer.rustfmt.extraArgs`**: `array`
 
@@ -4329,12 +4448,6 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.updates.channel`**: `enum { "stable", "nightly" }`
 
   Default: `"stable"`
-  
-  null
-
-- **`rust-analyzer.withSysroot`**: `boolean`
-
-  Default: `true`
   
   null
 
@@ -4594,6 +4707,12 @@ Can be installed in Nvim with `:LspInstall sumneko_lua`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`Lua.awakened.cat`**: `boolean`
+
+  Default: `true`
+  
+  null
+
 - **`Lua.color.mode`**: `enum { "Grammar", "Semantic" }`
 
   Default: `"Semantic"`
@@ -4660,9 +4779,27 @@ This server accepts configuration via the `settings` key.
 
   null
 
+- **`Lua.diagnostics.workspaceDelay`**: `integer`
+
+  Default: `0`
+  
+  null
+
+- **`Lua.diagnostics.workspaceRate`**: `integer`
+
+  Default: `100`
+  
+  null
+
 - **`Lua.hover.enable`**: `boolean`
 
   Default: `true`
+  
+  null
+
+- **`Lua.hover.fieldInfer`**: `integer`
+
+  Default: `3000`
   
   null
 
@@ -4684,6 +4821,18 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`Lua.intelliSense.fastGlobal`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`Lua.intelliSense.searchDepth`**: `integer`
+
+  Default: `0`
+  
+  null
+
 - **`Lua.runtime.path`**: `array`
 
   Default: `{ "?.lua", "?/init.lua", "?/?.lua" }`
@@ -4692,9 +4841,13 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`Lua.runtime.special`**: `object`
+
+  null
+
 - **`Lua.runtime.version`**: `enum { "Lua 5.1", "Lua 5.2", "Lua 5.3", "Lua 5.4", "LuaJIT" }`
 
-  Default: `"Lua 5.3"`
+  Default: `"Lua 5.4"`
   
   null
 
@@ -4724,7 +4877,7 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.workspace.maxPreload`**: `integer`
 
-  Default: `300`
+  Default: `1000`
   
   null
 
@@ -4738,10 +4891,6 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  null
-
-- **`Lua.zzzzzz.cat`**: `boolean`
-
   null
 
 </details>
@@ -4990,7 +5139,7 @@ This server accepts configuration via the `settings` key.
 
 - **`vetur.format.defaultFormatter.html`**: `enum { "none", "prettyhtml", "js-beautify-html", "prettier" }`
 
-  Default: `"prettyhtml"`
+  Default: `"prettier"`
   
   Default formatter for \<template\> region
 
@@ -5078,6 +5227,12 @@ This server accepts configuration via the `settings` key.
   
   Mapping from custom block tag name to language name\. Used for generating grammar to support syntax highlighting for custom blocks\.
 
+- **`vetur.languageFeatures.codeActions`**: `boolean`
+
+  Default: `true`
+  
+  Whether to enable codeActions
+
 - **`vetur.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
@@ -5114,7 +5269,7 @@ This server accepts configuration via the `settings` key.
 
 - **`vetur.validation.templateProps`**: `boolean`
 
-  Validate props usage in \<template\> region\. Show error\/warning for not passing declared props to child components\.
+  Validate props usage in \<template\> region\. Show error\/warning for not passing declared props to child components and show error for passing wrongly typed interpolation expressions
 
 </details>
 
