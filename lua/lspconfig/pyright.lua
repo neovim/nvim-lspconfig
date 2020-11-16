@@ -3,6 +3,23 @@ local util = require 'lspconfig/util'
 
 local server_name = "pyright"
 
+local function organize_imports(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  local uri = vim.uri_from_bufnr(bufnr)
+  local params = {
+    command = 'pyright.organizeimports';
+    arguments = { uri }
+  }
+
+  local edits = vim.lsp.buf_request(bufnr, 'workspace/executeCommand', params, function(err, _, _)
+    if err then error(tostring(err)) end
+end)
+
+  if edits then
+    vim.lsp.util.apply_workspace_edit(edits)
+  end
+end
+
 local installer = util.npm_installer {
   server_name = server_name;
   packages = {server_name};
@@ -26,6 +43,15 @@ configs[server_name] = {
             }}
     end
    };
+   commands = {
+      PyrightOrganizeImports = {
+      function()
+        organize_imports(0)
+      end;
+      description = "Organize Import Statements";
+    };
+  };
+
   docs = {
     description = [[
 https://github.com/microsoft/pyright
@@ -37,4 +63,5 @@ https://github.com/microsoft/pyright
 
 configs[server_name].install = installer.install
 configs[server_name].install_info = installer.info
+configs[server_name].organize_imports = organize_imports
 -- vim:et ts=2 sw=2
