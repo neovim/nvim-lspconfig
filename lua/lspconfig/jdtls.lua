@@ -1,6 +1,6 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
-local callbacks = require 'vim.lsp.callbacks'
+local handlers = require 'vim.lsp.handlers'
 local path = util.path
 
 local server_name = "jdtls"
@@ -101,7 +101,7 @@ configs[server_name] = {
       jvm_args = {};
       os_config = nil;
     };
-    callbacks = {
+    handlers = {
       -- Due to an invalid protocol implementation in the jdtls we have to
       -- conform these to be spec compliant.
       -- https://github.com/eclipse/eclipse.jdt.ls/issues/376
@@ -113,7 +113,7 @@ configs[server_name] = {
           end
         end
 
-        callbacks['textDocument/codeAction'](a, b, actions)
+        handlers['textDocument/codeAction'](a, b, actions)
       end
     };
   };

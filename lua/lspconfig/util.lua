@@ -12,7 +12,7 @@ M.default_config = {
   message_level = lsp.protocol.MessageType.Warning;
   settings = vim.empty_dict();
   init_options = vim.empty_dict();
-  callbacks = {};
+  handlers = {};
 }
 
 function M.validate_bufnr(bufnr)

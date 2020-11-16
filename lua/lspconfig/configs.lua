@@ -33,26 +33,25 @@ function configs.__newindex(t, config_name, config_def)
   -- The config here is the one which will be instantiated for the new server,
   -- which is why this is a function, so that it can refer to the settings
   -- object on the server.
-  local function add_callbacks(config)
-    config.callbacks["window/logMessage"] = function(err, method, params, client_id)
+  local function add_handlers(config)
+    assert(not config.callbacks, "lsp.callbacks has been obsoleted. See here for more: https://github.com/neovim/neovim/pull/12655")
+    config.handlers["window/logMessage"] = function(err, method, params, client_id)
       if params and params.type <= config.log_level then
         -- TODO(ashkan) remove this after things have settled.
-        assert(lsp.callbacks, "Update to Nvim HEAD. This is an incompatible interface.")
-        assert(lsp.callbacks["window/logMessage"], "Callback for window/logMessage notification is not defined")
-        lsp.callbacks["window/logMessage"](err, method, params, client_id)
+        assert(lsp.handlers["window/logMessage"], "Handler for window/logMessage notification is not defined")
+        lsp.handlers["window/logMessage"](err, method, params, client_id)
       end
     end
 
-    config.callbacks["window/showMessage"] = function(err, method, params, client_id)
+    config.handlers["window/showMessage"] = function(err, method, params, client_id)
       if params and params.type <= config.message_level then
         -- TODO(ashkan) remove this after things have settled.
-        assert(lsp.callbacks and lsp.callbacks[method], "Update to Nvim HEAD. This is an incompatible interface.")
-        assert(lsp.callbacks["window/showMessage"], "Callback for window/showMessage notification is not defined")
-        lsp.callbacks["window/showMessage"](err, method, params, client_id)
+        assert(lsp.handlers["window/showMessage"], "Handler for window/showMessage notification is not defined")
+        lsp.handlers["window/showMessage"](err, method, params, client_id)
       end
     end
 
-    config.callbacks["workspace/configuration"] = function(err, method, params, client_id)
+    config.handlers["workspace/configuration"] = function(err, method, params, client_id)
       if err then error(tostring(err)) end
       if not params.items then
         return {}
@@ -124,7 +123,7 @@ function configs.__newindex(t, config_name, config_def)
         }
       })
 
-      add_callbacks(new_config)
+      add_handlers(new_config)
       if config_def.on_new_config then
         pcall(config_def.on_new_config, new_config, _root_dir)
       end
