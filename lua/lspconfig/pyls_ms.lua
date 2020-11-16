@@ -36,6 +36,10 @@ local function make_installer()
       error('Need ".NET Core" to install this.')
       return
     end
+    if not (util.has_bins("unzip")) and (vim.fn.has('mac') == 1 or vim.fn.has('unix') == 1) then
+      error('Need "unzip" to install this.')
+      return
+    end
 
     local system
     if vim.fn.has('mac') == 1 then
