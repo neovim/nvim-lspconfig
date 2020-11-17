@@ -392,8 +392,7 @@ function M.npm_installer(config)
     set -e
     mkdir -p "{{install_dir}}"
     cd "{{install_dir}}"
-    [ ! -f package.json ] && npm init -y
-    npm install {{packages}} --no-package-lock --no-save --production
+    npm install {{packages}} --no-package-lock --no-save --no-color --no-progress
     {{post_install_script}}
     ]]):gsub("{{(%S+)}}", install_params)
     cmd:write(install_script)
