@@ -28,7 +28,7 @@ end
 
 local function buf_search(bufnr)
   bufnr = util.validate_bufnr(bufnr)
-  local params = { textDocument = { uri = vim.uri_from_bufnr(bufnr) }, position = { line = 10, character = 10  }
+  local params = { textDocument = { uri = vim.uri_from_bufnr(bufnr) }, position = { line = vim.fn.line('.')-1, character = vim.fn.col('.')  }}
   lsp.buf_request(bufnr, 'textDocument/forwardSearch', params,
       function(err, _, result, _)
         if err then error(tostring(err)) end
@@ -87,7 +87,7 @@ configs.texlab = {
       function()
           buf_search(0)
       end;
-      description = "Forward search current position";
+      description = "Forward search from current position";
     }
   };
   docs = {
