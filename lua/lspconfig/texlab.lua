@@ -32,7 +32,7 @@ local function buf_search(bufnr)
   lsp.buf_request(bufnr, 'textDocument/forwardSearch', params,
       function(err, _, result, _)
         if err then error(tostring(err)) end
-        print("Search "..texlab_build_status[result.status])
+        print("Search "..texlab_forward_status[result.status])
       end)
 end
 
