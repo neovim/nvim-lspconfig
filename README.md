@@ -1562,11 +1562,11 @@ require'lspconfig'.dartls.setup{}
     cmd = { "dart", "./snapshots/analysis_server.dart.snapshot", "--lsp" }
     filetypes = { "dart" }
     init_options = {
-      closingLabels = "true",
-      flutterOutline = "false",
-      onlyAnalyzeProjectsWithOpenFiles = "false",
-      outline = "true",
-      suggestFromUnimportedLibraries = "true"
+      closingLabels = false,
+      flutterOutline = false,
+      onlyAnalyzeProjectsWithOpenFiles = false,
+      outline = false,
+      suggestFromUnimportedLibraries = true
     }
     root_dir = root_pattern("pubspec.yaml")
 ```
