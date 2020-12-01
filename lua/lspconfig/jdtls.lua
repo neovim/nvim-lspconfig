@@ -110,6 +110,8 @@ configs[server_name] = {
           -- TODO: (steelsojka) Handle more than one edit?
           if action.command == 'java.apply.workspaceEdit' then
             action.edit = action.arguments[1]
+          elseif type(action.command) == 'table' and action.command.command == 'java.apply.workspaceEdit' then
+            action.edit = action.command.arguments[1]
           end
         end
 
