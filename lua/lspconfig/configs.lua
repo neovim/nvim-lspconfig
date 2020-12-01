@@ -66,6 +66,8 @@ function configs.__newindex(t, config_name, config_def)
             value = config.settings or vim.NIL
           end
           table.insert(result, value)
+        else
+          table.insert(result, config.settings)
         end
       end
       return result
