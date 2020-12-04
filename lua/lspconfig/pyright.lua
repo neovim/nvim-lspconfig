@@ -14,6 +14,15 @@ configs[server_name] = {
     cmd = {"pyright-langserver", "--stdio"};
     filetypes = {"python"};
     root_dir = util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
+    handlers = {
+      -- pyright ignores dynamicRegistration settings
+      ['client/registerCapability'] = function(_, _, _, _)
+        return {
+          result = nil;
+          error = nil;
+        }
+      end
+    };
     settings = {
       python = {
         analysis = {
