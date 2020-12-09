@@ -23,10 +23,10 @@ end
 local root_files = {
   'build.xml',             -- Ant
   'pom.xml',               -- Maven
+  'settings.gradle',       -- Gradle (mutli-project)
+  'settings.gradle.kts',   -- Gradle (mutli-project)
   'build.gradle',          -- Gradle
   'build.gradle.kts',      -- Gradle
-  'settings.gradle',       -- Gradle
-  'settings.gradle.kts',   -- Gradle
 }
 
 configs.kotlin_language_server = {
