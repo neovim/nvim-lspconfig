@@ -3,6 +3,9 @@ local util = require 'lspconfig/util'
 
 local server_name = "purescriptls"
 local bin_name = "purescript-language-server"
+if vim.fn.has('win32') == 1 then
+  bin_name = bin_name..'.cmd'
+end
 
 local installer = util.npm_installer {
   server_name = server_name;
@@ -12,7 +15,7 @@ local installer = util.npm_installer {
 
 configs[server_name] = {
   default_config = {
-    cmd = {"purescript-language-server", "--stdio"};
+    cmd = {bin_name, "--stdio"};
     filetypes = {"purescript"};
     root_dir = util.root_pattern("spago.dhall", "bower.json");
   };
