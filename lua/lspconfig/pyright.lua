@@ -2,16 +2,20 @@ local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
 local server_name = "pyright"
+local bin_name = "pyright-langserver"
+if vim.fn.has('win32') == 1 then
+  bin_name = bin_name..".cmd"
+end
 
 local installer = util.npm_installer {
   server_name = server_name;
   packages = {server_name};
-  binaries = {server_name};
+  binaries = {bin_name};
 }
 
 configs[server_name] = {
   default_config = {
-    cmd = {"pyright-langserver", "--stdio"};
+    cmd = {bin_name, "--stdio"};
     filetypes = {"python"};
     root_dir = util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
     settings = {
