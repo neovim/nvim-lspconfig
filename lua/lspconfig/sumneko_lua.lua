@@ -95,7 +95,7 @@ configs[name] = {
   default_config = {
     filetypes = {'lua'};
     root_dir = function(fname)
-      return util.find_git_ancestor(fname) or vim.loop.os_homedir()
+      return util.find_git_ancestor(fname) or util.path.dirname(fname)
     end;
     log_level = vim.lsp.protocol.MessageType.Warning;
   };
@@ -123,7 +123,7 @@ require'lspconfig'.sumneko_lua.setup{
 If you install via our installer, if you execute `:LspInstallInfo sumneko_lua`, you can know `cmd` value.
 ]];
     default_config = {
-      root_dir = [[root_pattern(".git") or os_homedir]];
+      root_dir = [[root_pattern(".git") or bufdir]];
     };
   };
 }
