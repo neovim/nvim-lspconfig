@@ -105,11 +105,21 @@ configs[server_name] = {
       -- Due to an invalid protocol implementation in the jdtls we have to
       -- conform these to be spec compliant.
       -- https://github.com/eclipse/eclipse.jdt.ls/issues/376
+      -- Command in org.eclipse.lsp5j -> https://github.com/eclipse/lsp4j/blob/master/org.eclipse.lsp4j/src/main/xtend-gen/org/eclipse/lsp4j/Command.java
+      -- CodeAction in org.eclipse.lsp4j -> https://github.com/eclipse/lsp4j/blob/master/org.eclipse.lsp4j/src/main/xtend-gen/org/eclipse/lsp4j/CodeAction.java
+      -- Command in LSP -> https://microsoft.github.io/language-server-protocol/specification#command
+      -- CodeAction in LSP -> https://microsoft.github.io/language-server-protocol/specification#textDocument_codeAction
       ['textDocument/codeAction'] = function(a, b, actions)
         for _,action in ipairs(actions) do
           -- TODO: (steelsojka) Handle more than one edit?
+          -- if command is string, then 'ation' is Command in java format,
+          -- then we add 'edit' property to change to CodeAction in LSP and 'edit' will be executed first
           if action.command == 'java.apply.workspaceEdit' then
-            action.edit = action.arguments[1]
+            action.edit = action.edit or action.arguments[1]
+          -- if command is table, then 'action' is CodeAction in java format
+          -- then we add 'edit' property to change to CodeAction in LSP and 'edit' will be executed first
+          elseif type(action.command) == 'table' and action.command.command == 'java.apply.workspaceEdit' then
+            action.edit = action.edit or action.command.arguments[1]
           end
         end
 
