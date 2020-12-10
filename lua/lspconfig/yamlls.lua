@@ -14,6 +14,15 @@ configs[server_name] = {
   default_config = {
     cmd = {bin_name, "--stdio"};
     filetypes = {"yaml"};
+    handlers = {
+      -- yamlls tries to register for workspaceFolder changes, which does not have the dynamicRegistration indicator
+      ['client/registerCapability'] = function(_, _, _, _)
+        return {
+          result = nil;
+          error = nil;
+        }
+      end
+    };
     root_dir = util.root_pattern(".git", vim.fn.getcwd());
   };
   on_new_config = function(new_config)
