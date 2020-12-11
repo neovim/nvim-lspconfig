@@ -26,10 +26,10 @@ best practices for a given language.
    Ask questions in [Neovim Gitter](https://gitter.im/neovim/neovim).
 2. Choose a language from [the coc.nvim wiki](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
   [emacs-lsp](https://github.com/emacs-lsp/lsp-mode#supported-languages).
-3. Create a new file at `lua/nvim_lsp/SERVER_NAME.lua`.
-   - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/nvim_lsp/)
+3. Create a new file at `lua/lspconfig/SERVER_NAME.lua`.
+   - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/)
      to get started. Most configs are simple. For an extensive example see
-     [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/nvim_lsp/texlab.lua).
+     [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/texlab.lua).
 
 ## Install
 
@@ -48,7 +48,7 @@ diagnostics.
 
 ```lua
 vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
-require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
+require'lspconfig'.<config>.setup{name=…, settings = {…}, …}
 ```
 
 If you want to add this to your vimrc, you will need to enclose it in a `lua` block.
@@ -56,7 +56,7 @@ If you want to add this to your vimrc, you will need to enclose it in a `lua` bl
 ```vim
 lua <<EOF
 vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
-require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
+require'lspconfig'.<config>.setup{name=…, settings = {…}, …}
 EOF
 ```
 
@@ -65,7 +65,7 @@ given there to your `init.vim`. **All examples are given in Lua,** see `:help
 :lua-heredoc` to use Lua from your init.vim.
 
 Some configs may define additional server-specific functions, e.g. the `texlab`
-config provides `nvim_lsp.texlab.buf_build({bufnr})`.
+config provides `lspconfig.texlab.buf_build({bufnr})`.
 
 If you want to see the location of log file, you can run this in neovim:
 
@@ -80,7 +80,7 @@ For the `gopls` config, that would be:
 
 ```lua
 vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
-require'nvim_lsp'.gopls.setup{}
+require'lspconfig'.gopls.setup{}
 ```
 
 ### Example: override some defaults
@@ -89,9 +89,9 @@ To set some config properties at `setup()`, specify their keys. For example to
 change how the "project root" is found, set the `root_dir` key:
 
 ```lua
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.gopls.setup{
-  root_dir = nvim_lsp.util.root_pattern('.git');
+local lspconfig = require'lspconfig'
+lspconfig.gopls.setup{
+  root_dir = lspconfig.util.root_pattern('.git');
 }
 ```
 
@@ -99,8 +99,8 @@ The [documentation](#configurations) for each config lists default values and
 additional optional properties.
 
 ```lua
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.texlab.setup{
+local lspconfig = require'lspconfig'
+lspconfig.texlab.setup{
   name = 'texlab_fancy';
   log_level = vim.lsp.protocol.MessageType.Log;
   message_level = vim.lsp.protocol.MessageType.Log;
@@ -116,29 +116,29 @@ nvim_lsp.texlab.setup{
 
 ### Example: custom config
 
-To configure a custom/private server, just require `nvim_lsp/configs` and do
+To configure a custom/private server, just require `lspconfig/configs` and do
 the same as we do if we were adding it to the repository itself.
 
 1. Define the config: `configs.foo_lsp = { … }`
-2. Call `setup()`: `require'nvim_lsp'.foo_lsp.setup{}`
+2. Call `setup()`: `require'lspconfig'.foo_lsp.setup{}`
 
 ```lua
-local nvim_lsp = require'nvim_lsp'
-local configs = require'nvim_lsp/configs'
+local lspconfig = require'lspconfig'
+local configs = require'lspconfig/configs'
 -- Check if it's already defined for when I reload this file.
-if not nvim_lsp.foo_lsp then
+if not lspconfig.foo_lsp then
   configs.foo_lsp = {
     default_config = {
       cmd = {'/home/ashkan/works/3rd/lua-language-server/run.sh'};
       filetypes = {'lua'};
       root_dir = function(fname)
-        return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+        return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
       end;
       settings = {};
     };
   }
 end
-nvim_lsp.foo_lsp.setup{}
+lspconfig.foo_lsp.setup{}
 ```
 
 ### Example: override default config
@@ -146,10 +146,10 @@ nvim_lsp.foo_lsp.setup{}
 If you want to change default configs for all servers, you can override default_config like this.
 
 ```lua
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.util.default_config = vim.tbl_extend(
+local lspconfig = require'lspconfig'
+lspconfig.util.default_config = vim.tbl_extend(
   "force",
-  nvim_lsp.util.default_config,
+  lspconfig.util.default_config,
   { log_level = lsp.protocol.MessageType.Warning.Error }
 )
 ```
@@ -171,7 +171,7 @@ Use `:LspInstallInfo` to see install info.
 The `setup()` interface:
 
 ```
-nvim_lsp.SERVER.setup{config}
+lspconfig.SERVER.setup{config}
 
   The `config` parameter has the same shape as that of
   |vim.lsp.start_client()|, with these additions and changes:
@@ -190,14 +190,14 @@ nvim_lsp.SERVER.setup{config}
 
     If nil is returned, the buffer is skipped.
 
-    See |nvim_lsp.util.search_ancestors()| and the functions which use it:
-    - |nvim_lsp.util.root_pattern(patterns...)| finds an ancestor which
+    See |lspconfig.util.search_ancestors()| and the functions which use it:
+    - |lspconfig.util.root_pattern(patterns...)| finds an ancestor which
     - contains one of the files in `patterns...`. This is equivalent
       to coc.nvim's "rootPatterns"
     - Related utilities for common tools:
-      - |nvim_lsp.util.find_git_root()|
-      - |nvim_lsp.util.find_node_modules_root()|
-      - |nvim_lsp.util.find_package_json_root()|
+      - |lspconfig.util.find_git_root()|
+      - |lspconfig.util.find_node_modules_root()|
+      - |lspconfig.util.find_package_json_root()|
 
   {name}
     Defaults to the server's name.
@@ -233,7 +233,7 @@ nvim_lsp.SERVER.setup{config}
     the second parameter instead. Useful for doing buffer-local setup.
 
   {on_new_config}
-    `function(new_config)` will be executed after a new configuration has been
+    `function(new_config, new_root_dir)` will be executed after a new configuration has been
     created as a result of {root_dir} returning a unique value. You can use this
     as an opportunity to further modify the new_config or use it before it is
     sent to |vim.lsp.start_client()|.
@@ -245,6 +245,7 @@ The following LSP configs are included. Follow a link to find documentation for
 that config.
 
 - [als](#als)
+- [angularls](#angularls)
 - [bashls](#bashls)
 - [ccls](#ccls)
 - [clangd](#clangd)
@@ -307,7 +308,7 @@ Ada language server. Use `LspInstall als` to install it.
 Can be configured by passing a "settings" object to `als.setup{}`:
 
 ```lua
-require('nvim_lsp').als.setup{
+require('lspconfig').als.setup{
     settings = {
       ada = {
         projectFile = "project.gpr";
@@ -321,7 +322,7 @@ Can be installed in Nvim with `:LspInstall als`
 
 
 ```lua
-require'nvim_lsp'.als.setup{}
+require'lspconfig'.als.setup{}
 
   Commands:
   
@@ -329,6 +330,28 @@ require'nvim_lsp'.als.setup{}
     cmd = { "ada_language_server" }
     filetypes = { "ada" }
     root_dir = util.root_pattern("Makefile", ".git")
+```
+
+## angularls
+
+https://github.com/angular/vscode-ng-language-service
+
+`angular-language-server` can be installed via `:LspInstall angularls`
+
+If you prefer to install this yourself you can through npm `npm install @angular/language-server`.
+Be aware there is no global binary and must be run via `node_modules/@angular/language-server/index.js`
+    
+Can be installed in Nvim with `:LspInstall angularls`
+
+```lua
+require'lspconfig'.angularls.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "/home/runner/.cache/nvim/lspconfig/angularls/node_modules/.bin/angularls", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" }
+    filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" }
+    root_dir = root_pattern("angular.json", ".git")
 ```
 
 ## bashls
@@ -340,7 +363,7 @@ Language server for bash, written using tree sitter in typescript.
 Can be installed in Nvim with `:LspInstall bashls`
 
 ```lua
-require'nvim_lsp'.bashls.setup{}
+require'lspconfig'.bashls.setup{}
 
   Commands:
   
@@ -792,7 +815,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.ccls.setup{}
+require'lspconfig'.ccls.setup{}
 
   Commands:
   
@@ -814,7 +837,7 @@ For details on how to automatically generate one using CMake look [here](https:/
 
 
 ```lua
-require'nvim_lsp'.clangd.setup{}
+require'lspconfig'.clangd.setup{}
 
   Commands:
   - ClangdSwitchSourceHeader: Switch between source/header
@@ -835,7 +858,7 @@ Clojure Language Server
 
 
 ```lua
-require'nvim_lsp'.clojure_lsp.setup{}
+require'lspconfig'.clojure_lsp.setup{}
 
   Commands:
   
@@ -853,7 +876,7 @@ CMake LSP Implementation
 
 
 ```lua
-require'nvim_lsp'.cmake.setup{}
+require'lspconfig'.cmake.setup{}
 
   Commands:
   
@@ -897,6 +920,12 @@ This server accepts configuration via the `settings` key.
 
   Enable debug logging and tuple counting when running CodeQL queries\. This information is useful for debugging query performance\.
 
+- **`codeQL.runningQueries.maxQueries`**: `integer`
+
+  Default: `20`
+  
+  Max number of simultaneous queries to run using the \'CodeQL\: Run Queries\' command\.
+
 - **`codeQL.runningQueries.memory`**: `integer|null`
 
   Default: `vim.NIL`
@@ -924,7 +953,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.codeqlls.setup{}
+require'lspconfig'.codeqlls.setup{}
 
   Commands:
   
@@ -951,7 +980,7 @@ npm install -g vscode-css-languageserver-bin
 Can be installed in Nvim with `:LspInstall cssls`
 
 ```lua
-require'nvim_lsp'.cssls.setup{}
+require'lspconfig'.cssls.setup{}
 
   Commands:
   
@@ -997,7 +1026,7 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.allowTestsOutsideTestFolder`**: `boolean`
 
-  Whether to consider files ending \'\_test\.dart\' that are outside of the test folder as tests\. This should be enabled if you put tests inside the \'lib\' folder of your Flutter application so they will be run with \'flutter test\' and not \'flutter run\'\.
+  null
 
 - **`dart.analysisExcludedFolders`**: `array`
 
@@ -1017,7 +1046,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to enable analysis for AngularDart templates \(requires the Angular analyzer plugin to be enabled in analysis\_options\.yaml\)\.
+  null
 
 - **`dart.analyzerAdditionalArgs`**: `array`
 
@@ -1031,7 +1060,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The port number to be used for the Dart analysis server diagnostic server\.
+  The port number to be used for the Dart analyzer diagnostic server\.
 
 - **`dart.analyzerInstrumentationLogFile`**: `null|string`
 
@@ -1076,7 +1105,7 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{type = "string"}`
   
-  Additional args to pass to the build\_runner when building\/watching\/serving\.
+  null
 
 - **`dart.checkForSdkUpdates`**: `boolean`
 
@@ -1090,6 +1119,12 @@ This server accepts configuration via the `settings` key.
   
   Whether to show annotations against constructor\, method invocations and lists that span multiple lines\.
 
+- **`dart.completeFunctionCalls`**: `boolean`
+
+  Default: `true`
+  
+  null
+
 - **`dart.debugExtensionBackendProtocol`**: `enum { "sse", "ws" }`
 
   Default: `"ws"`
@@ -1098,11 +1133,17 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.debugExternalLibraries`**: `boolean`
 
-  Whether to mark external pub package libraries \(including package\:flutter\) as debuggable\, enabling stepping into them while debugging\.
+  null
 
 - **`dart.debugSdkLibraries`**: `boolean`
 
-  Whether to mark Dart SDK libraries \(dart\:\*\) as debuggable\, enabling stepping into them while debugging\.
+  null
+
+- **`dart.devToolsBrowser`**: `enum { "chrome", "default" }`
+
+  Default: `"chrome"`
+  
+  Whether to launch external DevTools windows using Chrome or the system default browser\.
 
 - **`dart.devToolsLogFile`**: `null|string`
 
@@ -1134,23 +1175,23 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{type = "string"}`
   
-  An array of glob patterns that should be excluded for formatting\. The pattern is matched against the absolute path of the file\. Use \*\*\/test\/\*\* to skip formatting for all test folders\.
+  null
 
 - **`dart.embedDevTools`**: `boolean`
 
   Default: `true`
   
-  Whether to load DevTools embedded inside VS Code\.
+  null
 
 - **`dart.enableCompletionCommitCharacters`**: `boolean`
 
-  Whether to automatically commit the selected completion item when pressing certain keys such as \. \, \( and \[\.
+  null
 
 - **`dart.enableSdkFormatter`**: `boolean`
 
   Default: `true`
   
-  Whether to enable the dart\_style formatter included with the Dart SDK\.
+  null
 
 - **`dart.enableSnippets`**: `boolean`
 
@@ -1184,7 +1225,7 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.flutterAdbConnectOnChromeOs`**: `boolean`
 
-  Whether to automatically run \'adb connect 100\.115\.92\.2\:5555\' when spawning the Flutter Daemon when running on Chrome OS\.
+  null
 
 - **`dart.flutterAdditionalArgs`**: `array`
 
@@ -1192,11 +1233,7 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{type = "string"}`
   
-  Additional args to pass to all flutter commands\.
-
-- **`dart.flutterAndroidX`**: `boolean`
-
-  Whether to pass the \-\-androidx flag when running the \'Flutter\: New Project\' command\.
+  null
 
 - **`dart.flutterCreateAndroidLanguage`**: `enum { "java", "kotlin" }`
 
@@ -1208,7 +1245,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"swift"`
   
-  The programming language to use for IOS apps when creating new projects using the \'Flutter\: New Project\' command\.
+  The programming language to use for iOS apps when creating new projects using the \'Flutter\: New Project\' command\.
 
 - **`dart.flutterCreateOffline`**: `boolean`
 
@@ -1218,7 +1255,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The organization responsible for your new Flutter project\, in reverse domain name notation\. This string is used in Java package names and as prefix in the iOS bundle identifier when creating new projects using the \'Flutter\: New Project\' command\.
+  null
 
 - **`dart.flutterCustomEmulators`**: `array`
 
@@ -1232,7 +1269,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The path to a log file for the \'flutter daemon\' communication which is the service that provides information about connected devices used to show in the status bar\.
+  null
 
 - **`dart.flutterGutterIcons`**: `boolean`
 
@@ -1244,7 +1281,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to automatically send a Hot Reload request during debug session when saving files\.
+  Whether to automatically send a Hot Reload request during a debug session when saving files\.
 
 - **`dart.flutterHotRestartOnSave`**: `boolean`
 
@@ -1256,13 +1293,13 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to show the Flutter Outline tree in the side bar\.
+  Whether to show the Flutter Outline tree in the sidebar\.
 
 - **`dart.flutterRunLogFile`**: `null|string`
 
   Default: `vim.NIL`
   
-  The path to a log file for \'flutter run\' which is used to launch Flutter applications from VS Code\. This is useful when trying to diagnose issues with applications launching \(or failing to\) on simulators and devices\. Use \$\{name\} in the log file name to prevent concurrent debug sessions overwriting each others logs\.
+  null
 
 - **`dart.flutterScreenshotPath`**: `null|string`
 
@@ -1274,7 +1311,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The location of the Flutter SDK to use\. If blank\, Dart Code will attempt to find it from the project folder\, FLUTTER\_ROOT environment variable and the PATH environment variable\.
+  null
 
 - **`dart.flutterSdkPaths`**: `array`
 
@@ -1282,7 +1319,7 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{type = "string"}`
   
-  An array of strings that are either Flutter SDKs or folders that contains multiple Flutter SDKs in sub\-folders\. When set\, the version number in the status bar will be clickable to quickly switch between SDKs\.
+  An array of paths that either directly point to a Flutter SDK or the parent directory of multiple Flutter SDKs\. When set\, the version number in the status bar can be used to quickly switch between SDKs\.
 
 - **`dart.flutterSelectDeviceWhenConnected`**: `boolean`
 
@@ -1294,25 +1331,33 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to use Flutter\'s structured error support for improve error display\.
+  null
+
+- **`dart.flutterTestAdditionalArgs`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  null
 
 - **`dart.flutterTestLogFile`**: `null|string`
 
   Default: `vim.NIL`
   
-  The path to a log file for \'flutter test\' which is used to run unit tests from VS Code\. This is useful when trying to diagnose issues with unit test executions\. Use \$\{name\} in the log file name to prevent concurrent debug sessions overwriting each others logs\.
+  null
 
 - **`dart.flutterTrackWidgetCreation`**: `boolean`
 
   Default: `true`
   
-  Whether to pass \-\-track\-widget\-creation to Flutter apps \(required to support \'Inspect Widget\'\)\. This setting is always ignored when running in Profile or Release mode\.
+  null
 
 - **`dart.insertArgumentPlaceholders`**: `boolean`
 
   Default: `true`
   
-  Whether to insert argument placeholders during code completions\. This feature is automatically disabled when enableCompletionCommitCharacters is enabled\.
+  null
 
 - **`dart.lineLength`**: `integer`
 
@@ -1348,15 +1393,15 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.previewBazelWorkspaceCustomScripts`**: `boolean`
 
-  EXPERIMENTAL\: Whether to look for custom script definitions at dart\/config\/intellij\-plugins\/flutter\.json in Bazel workspaces\. Currently supported for macOS and Linux only\.
+  null
 
-- **`dart.previewBuildRunnerTasks`**: `boolean`
+- **`dart.previewCommitCharacters`**: `boolean`
 
-  Whether to register Pub Build Runner tasks with VS Code\.
+  EXPERIMENTAL\: Whether to enable commit characters for the LSP server\. In a future release\, the dart\.enableCompletionCommitCharacters setting will also apply to LSP\.
 
 - **`dart.previewFlutterUiGuides`**: `boolean`
 
-  Whether to enable the Flutter UI Guides preview\.
+  null
 
 - **`dart.previewFlutterUiGuidesCustomTracking`**: `boolean`
 
@@ -1364,11 +1409,11 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.previewHotReloadOnSaveWatcher`**: `boolean`
 
-  Whether to perform hot\-reload\-on\-save based on a filesystem watcher for Dart files rather than using VS Code\'s onDidSave event\. This allows reloads to trigger when external tools modify Dart source files\.
+  null
 
 - **`dart.previewLsp`**: `boolean`
 
-  EXPERIMENTAL\: Whether to run the analyzer in LSP mode \(requires restart\)\.
+  null
 
 - **`dart.promptToGetPackages`**: `boolean`
 
@@ -1394,19 +1439,19 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The path to a log file for \'pub run test\' runs\. This is useful when trying to diagnose issues with unit test executions\. Use \$\{name\} in the log file name to prevent concurrent debug sessions overwriting each others logs\.
+  null
 
 - **`dart.runPubGetOnPubspecChanges`**: `boolean`
 
   Default: `true`
   
-  Whether to automatically run \'pub get\' whenever pubspec\.yaml is saved\.
+  null
 
 - **`dart.sdkPath`**: `null|string`
 
   Default: `vim.NIL`
   
-  The location of the Dart SDK to use for analyzing and executing code\. If blank\, Dart Code will attempt to find it from the PATH environment variable\. When editing a Flutter project\, the version of Dart included in the Flutter SDK is used in preference\.
+  null
 
 - **`dart.sdkPaths`**: `array`
 
@@ -1414,19 +1459,25 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{type = "string"}`
   
-  An array of strings that are either Dart SDKs or folders that contains multiple Dart SDKs in sub\-folders\. When set\, the version number in the status bar will be clickable to quickly switch between SDKs\.
+  An array of paths that either directly point to a Dart SDK or the parent directory of multiple Dart SDKs\. When set\, the version number in the status bar can be used to quickly switch between SDKs\.
 
 - **`dart.showDartDeveloperLogs`**: `boolean`
 
   Default: `true`
   
-  Whether to show logs from dart\:developer\'s log\(\) function in the debug console\.
+  null
 
 - **`dart.showDartPadSampleCodeLens`**: `boolean`
 
   Default: `true`
   
   Whether to show CodeLens actions in the editor for opening online DartPad samples\.
+
+- **`dart.showDevToolsDebugToolBarButtons`**: `boolean`
+
+  Default: `true`
+  
+  Whether to show DevTools buttons in the Debug toolbar\.
 
 - **`dart.showIgnoreQuickFixes`**: `boolean`
 
@@ -1438,13 +1489,13 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to show CodeLens actions in the editor for quick running\/debugging scripts with main functions\.
+  Whether to show CodeLens actions in the editor for quick running \/ debugging scripts with main functions\.
 
 - **`dart.showTestCodeLens`**: `boolean`
 
   Default: `true`
   
-  Whether to show CodeLens actions in the editor for quick running\/debugging tests\.
+  Whether to show CodeLens actions in the editor for quick running \/ debugging tests\.
 
 - **`dart.showTodos`**: `boolean`
 
@@ -1460,7 +1511,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to automatically update imports when moving\/renaming files\. Currently only works for single\-file moves\/renames\.
+  Whether to automatically update imports when moving or renaming files\. Currently only supports single file moves \/ renames\.
 
 - **`dart.useKnownChromeOSPorts`**: `boolean`
 
@@ -1480,13 +1531,13 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The path to a log file for communication between Dart Code and the VM service\. This is useful when trying to diagnose issues with debugging such as missed breakpoints\. Use \$\{name\} in the log file name to prevent concurrent debug sessions overwriting each others logs\.
+  null
 
 - **`dart.warnWhenEditingFilesInPubCache`**: `boolean`
 
   Default: `true`
   
-  Whether to show a warning when modifying files in Pub\'s cache folder\.
+  null
 
 - **`dart.warnWhenEditingFilesOutsideWorkspace`**: `boolean`
 
@@ -1498,12 +1549,12 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  The path to a log file for communication between Dart Code and the webdev daemon\. This is useful when trying to diagnose issues with launching web applications\. Use \$\{name\} in the log file name to prevent concurrent debug sessions overwriting each others logs\.
+  null
 
 </details>
 
 ```lua
-require'nvim_lsp'.dartls.setup{}
+require'lspconfig'.dartls.setup{}
 
   Commands:
   
@@ -1511,11 +1562,11 @@ require'nvim_lsp'.dartls.setup{}
     cmd = { "dart", "./snapshots/analysis_server.dart.snapshot", "--lsp" }
     filetypes = { "dart" }
     init_options = {
-      closingLabels = "true",
-      flutterOutline = "false",
-      onlyAnalyzeProjectsWithOpenFiles = "false",
-      outline = "true",
-      suggestFromUnimportedLibraries = "true"
+      closingLabels = false,
+      flutterOutline = false,
+      onlyAnalyzeProjectsWithOpenFiles = false,
+      outline = false,
+      suggestFromUnimportedLibraries = true
     }
     root_dir = root_pattern("pubspec.yaml")
 ```
@@ -1529,7 +1580,7 @@ Diagnostic language server integrate with linters.
 Can be installed in Nvim with `:LspInstall diagnosticls`
 
 ```lua
-require'nvim_lsp'.diagnosticls.setup{}
+require'lspconfig'.diagnosticls.setup{}
 
   Commands:
   
@@ -1551,7 +1602,7 @@ npm install -g dockerfile-language-server-nodejs
 Can be installed in Nvim with `:LspInstall dockerls`
 
 ```lua
-require'nvim_lsp'.dockerls.setup{}
+require'lspconfig'.dockerls.setup{}
 
   Commands:
   
@@ -1569,7 +1620,7 @@ General purpose Language Server that can use specified error message format gene
 
 
 ```lua
-require'nvim_lsp'.efm.setup{}
+require'lspconfig'.efm.setup{}
 
   Commands:
   
@@ -1588,7 +1639,7 @@ This language server does not provide a global binary, but must be installed man
 Fetching the elixir-ls repository from GitHub, compiling it and then installing it.
 
 ```lua
-require'nvim_lsp'.elixirls.setup{
+require'lspconfig'.elixirls.setup{
     -- Unix
     cmd = { "path/to/language_server.sh" };
     -- Windows
@@ -1646,7 +1697,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.elixirls.setup{}
+require'lspconfig'.elixirls.setup{}
 
   Commands:
   
@@ -1669,9 +1720,13 @@ Can be installed in Nvim with `:LspInstall elmls`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`elmLS.disableElmLSDiagnostics`**: `boolean`
+
+  Disable linting diagnostics from the language server\.
+
 - **`elmLS.elmAnalyseTrigger`**: `enum { "change", "save", "never" }`
 
-  Default: `"change"`
+  Default: `"never"`
   
   When do you want the extension to run elm\-analyse\? Might need a restart to take effect\.
 
@@ -1702,7 +1757,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.elmls.setup{}
+require'lspconfig'.elmls.setup{}
 
   Commands:
   
@@ -1832,7 +1887,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.flow.setup{}
+require'lspconfig'.flow.setup{}
 
   Commands:
   
@@ -1854,6 +1909,10 @@ This server accepts configuration via the `settings` key.
 - **`fortran-ls.autocompletePrefix`**: `boolean`
 
   Filter autocomplete suggestions with variable prefix
+
+- **`fortran-ls.disableDiagnostics`**: `boolean`
+
+  Disable diagnostics \(requires v1\.12\.0+\)\.
 
 - **`fortran-ls.displayVerWarning`**: `boolean`
 
@@ -1920,7 +1979,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.fortls.setup{}
+require'lspconfig'.fortls.setup{}
 
   Commands:
   
@@ -1941,7 +2000,7 @@ Language server for GDScript, used by Godot Engine.
 
 
 ```lua
-require'nvim_lsp'.gdscript.setup{}
+require'lspconfig'.gdscript.setup{}
 
   Commands:
   
@@ -1975,7 +2034,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.ghcide.setup{}
+require'lspconfig'.ghcide.setup{}
 
   Commands:
   
@@ -1993,7 +2052,7 @@ Google's lsp server for golang.
 
 
 ```lua
-require'nvim_lsp'.gopls.setup{}
+require'lspconfig'.gopls.setup{}
 
   Commands:
   
@@ -2077,6 +2136,12 @@ This server accepts configuration via the `settings` key.
   
   Controls the maximum number of problems produced by the server
 
+- **`haskell.releasesURL`**: `string`
+
+  Default: `""`
+  
+  An optional URL to override where to check for haskell\-language\-server releases
+
 - **`haskell.serverExecutablePath`**: `string`
 
   Default: `""`
@@ -2089,10 +2154,16 @@ This server accepts configuration via the `settings` key.
   
   Traces the communication between VS Code and the language server\.
 
+- **`haskell.updateBehavior`**: `enum { "keep-up-to-date", "prompt", "never-check" }`
+
+  Default: `"keep-up-to-date"`
+  
+  null
+
 </details>
 
 ```lua
-require'nvim_lsp'.hie.setup{}
+require'lspconfig'.hie.setup{}
 
   Commands:
   
@@ -2110,7 +2181,7 @@ Haskell Language Server
         
 
 ```lua
-require'nvim_lsp'.hls.setup{}
+require'lspconfig'.hls.setup{}
 
   Commands:
   
@@ -2132,7 +2203,7 @@ npm install -g vscode-html-languageserver-bin
 Can be installed in Nvim with `:LspInstall html`
 
 ```lua
-require'nvim_lsp'.html.setup{}
+require'lspconfig'.html.setup{}
 
   Commands:
   
@@ -2162,7 +2233,7 @@ npm install -g intelephense
 Can be installed in Nvim with `:LspInstall intelephense`
 
 ```lua
-require'nvim_lsp'.intelephense.setup{}
+require'lspconfig'.intelephense.setup{}
 
   Commands:
   
@@ -2183,12 +2254,12 @@ Language server for Java.
 Can be installed in Nvim with `:LspInstall jdtls`
 
 ```lua
-require'nvim_lsp'.jdtls.setup{}
+require'lspconfig'.jdtls.setup{}
 
   Commands:
   
   Default Values:
-    callbacks = {
+    handlers = {
       ["textDocument/codeAction"] = <function 1>
     }
     filetypes = { "java" }
@@ -2207,7 +2278,7 @@ https://github.com/pappasam/jedi-language-server
     
 
 ```lua
-require'nvim_lsp'.jedi_language_server.setup{}
+require'lspconfig'.jedi_language_server.setup{}
 
   Commands:
   
@@ -2271,7 +2342,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.jsonls.setup{}
+require'lspconfig'.jsonls.setup{}
 
   Commands:
   
@@ -2286,11 +2357,11 @@ require'nvim_lsp'.jsonls.setup{}
 https://github.com/julia-vscode/julia-vscode
 `LanguageServer.jl` can be installed via `:LspInstall julials` or by yourself the `julia` and `Pkg`:
 ```sh
-julia --project=/home/runner/.cache/nvim/nvim_lsp/julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
+julia --project=/home/runner/.cache/nvim/lspconfig/julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
 If you want to install the LanguageServer manually, you will have to ensure that the Julia environment is stored in this location:
 ```vim
-:lua print(require'nvim_lsp'.util.path.join(require'nvim_lsp'.util.base_install_dir, "julials"))
+:lua print(require'lspconfig'.util.path.join(require'lspconfig'.util.base_install_dir, "julials"))
 ```
     
 Can be installed in Nvim with `:LspInstall julials`
@@ -2335,7 +2406,7 @@ This server accepts configuration via the `settings` key.
 
 - **`julia.execution.codeInREPL`**: `boolean`
 
-  Print executed code in REPL\.
+  Print executed code in REPL and append it to the REPL history\.
 
 - **`julia.execution.resultType`**: `enum { "REPL", "inline", "both" }`
 
@@ -2518,12 +2589,12 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.julials.setup{}
+require'lspconfig'.julials.setup{}
 
   Commands:
   
   Default Values:
-    cmd = { "julia", "--project=/home/runner/.cache/nvim/nvim_lsp/julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
+    cmd = { "julia", "--project=/home/runner/.cache/nvim/lspconfig/julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
     filetypes = { "julia" }
     root_dir = <function 1>
 ```
@@ -2642,11 +2713,12 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.kotlin_language_server.setup{}
+require'lspconfig'.kotlin_language_server.setup{}
 
   Commands:
   
   Default Values:
+    cmd = { "kotlin-language-server" }
     filetypes = { "kotlin" }
     root_dir = root_pattern("settings.gradle")
 ```
@@ -2785,7 +2857,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.leanls.setup{}
+require'lspconfig'.leanls.setup{}
 
   Commands:
   
@@ -2838,6 +2910,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`metals.excludedPackages`**: `array`
+
+  Default: `{}`
+  
+  null
+
 - **`metals.gradleScript`**: `string`
 
   null
@@ -2858,6 +2936,10 @@ This server accepts configuration via the `settings` key.
 
   null
 
+- **`metals.scalafixConfigPath`**: `string`
+
+  null
+
 - **`metals.scalafmtConfigPath`**: `string`
 
   null
@@ -2870,8 +2952,16 @@ This server accepts configuration via the `settings` key.
 
 - **`metals.serverVersion`**: `string`
 
-  Default: `"0.9.3"`
+  Default: `"0.9.5"`
   
+  null
+
+- **`metals.showImplicitArguments`**: `boolean`
+
+  null
+
+- **`metals.showInferredType`**: `boolean`
+
   null
 
 - **`metals.superMethodLensesEnabled`**: `boolean`
@@ -2881,7 +2971,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.metals.setup{}
+require'lspconfig'.metals.setup{}
 
   Commands:
   
@@ -2991,7 +3081,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.nimls.setup{}
+require'lspconfig'.nimls.setup{}
 
   Commands:
   
@@ -3013,7 +3103,7 @@ npm install -g ocaml-langauge-server
 Can be installed in Nvim with `:LspInstall ocamlls`
 
 ```lua
-require'nvim_lsp'.ocamlls.setup{}
+require'lspconfig'.ocamlls.setup{}
 
   Commands:
   
@@ -3037,7 +3127,7 @@ opam install ocaml-lsp-server
     
 
 ```lua
-require'nvim_lsp'.ocamllsp.setup{}
+require'lspconfig'.ocamllsp.setup{}
 
   Commands:
   
@@ -3055,12 +3145,12 @@ OmniSharp server based on Roslyn workspaces
 Can be installed in Nvim with `:LspInstall omnisharp`
 
 ```lua
-require'nvim_lsp'.omnisharp.setup{}
+require'lspconfig'.omnisharp.setup{}
 
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/nvim_lsp/omnisharp/run", "--languageserver", "--hostPID", "2801" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2529" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -3218,7 +3308,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.purescriptls.setup{}
+require'lspconfig'.purescriptls.setup{}
 
   Commands:
   
@@ -3250,6 +3340,12 @@ This server accepts configuration via the `settings` key.
   Default: `"pyls"`
   
   Language server executable
+
+- **`pyls.plugins.jedi.env_vars`**: `dictionary`
+
+  Default: `vim.NIL`
+  
+  Define environment variables for jedi\.Script and Jedi\.names\.
 
 - **`pyls.plugins.jedi.environment`**: `string`
 
@@ -3481,6 +3577,12 @@ This server accepts configuration via the `settings` key.
 
   Enable or disable the plugin\.
 
+- **`pyls.plugins.pylint.executable`**: `string`
+
+  Default: `vim.NIL`
+  
+  Executable to run pylint with\. Enabling this will run pylint on unsaved files via stdin\. Can slow down workflow\. Only works with python3\.
+
 - **`pyls.plugins.rope_completion.enabled`**: `boolean`
 
   Default: `true`
@@ -3510,7 +3612,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.pyls.setup{}
+require'lspconfig'.pyls.setup{}
 
   Commands:
   
@@ -3553,7 +3655,7 @@ This server accepts configuration via the `settings` key.
 Can be installed in Nvim with `:LspInstall pyls_ms`
 
 ```lua
-require'nvim_lsp'.pyls_ms.setup{}
+require'lspconfig'.pyls_ms.setup{}
 
   Commands:
   
@@ -3633,7 +3735,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.r_language_server.setup{}
+require'lspconfig'.r_language_server.setup{}
 
   Commands:
   
@@ -3884,7 +3986,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.rls.setup{}
+require'lspconfig'.rls.setup{}
 
   Commands:
   
@@ -3908,7 +4010,7 @@ This server accepts configuration via the `settings` key.
 Can be installed in Nvim with `:LspInstall rnix`
 
 ```lua
-require'nvim_lsp'.rnix.setup{}
+require'lspconfig'.rnix.setup{}
 
   Commands:
   
@@ -3933,7 +4035,7 @@ npm install [-g] rome
 
 
 ```lua
-require'nvim_lsp'.rome.setup{}
+require'lspconfig'.rome.setup{}
 
   Commands:
   
@@ -3953,6 +4055,18 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
     
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
+
+- **`rust-analyzer.assist.importMergeBehaviour`**: `enum { "none", "full", "last" }`
+
+  Default: `"full"`
+  
+  The strategy to use when inserting new imports or merging imports\.
+
+- **`rust-analyzer.assist.importPrefix`**: `enum { "plain", "by_self", "by_crate" }`
+
+  Default: `"plain"`
+  
+  The path structure for newly inserted paths to use\.
 
 - **`rust-analyzer.callInfo.full`**: `boolean`
 
@@ -4229,6 +4343,10 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.lens.methodReferences`**: `boolean`
+
+  null
+
 - **`rust-analyzer.lens.run`**: `boolean`
 
   Default: `true`
@@ -4249,6 +4367,10 @@ This server accepts configuration via the `settings` key.
   
   Number of syntax trees rust\-analyzer keeps in memory\.
 
+- **`rust-analyzer.noSysroot`**: `boolean`
+
+  null
+
 - **`rust-analyzer.notifications.cargoTomlNotFound`**: `boolean`
 
   Default: `true`
@@ -4264,6 +4386,27 @@ This server accepts configuration via the `settings` key.
   Default: `vim.NIL`
   
   Environment variables passed to the runnable launched using \`Test \` or \`Debug\` lens or \`rust\-analyzer\.run\` command\.
+
+- **`rust-analyzer.runnables.cargoExtraArgs`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Additional arguments to be passed to cargo for runnables such as tests or binaries\.
+  For example\, it may be \'\-\-release\'
+
+- **`rust-analyzer.runnables.overrideCargo`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  Command to be executed instead of \'cargo\' for runnables\.
+
+- **`rust-analyzer.rustcSource`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  Path to the rust compiler sources\, for usage in rustc\_private projects\.
 
 - **`rust-analyzer.rustfmt.extraArgs`**: `array`
 
@@ -4309,16 +4452,10 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`rust-analyzer.withSysroot`**: `boolean`
-
-  Default: `true`
-  
-  null
-
 </details>
 
 ```lua
-require'nvim_lsp'.rust_analyzer.setup{}
+require'lspconfig'.rust_analyzer.setup{}
 
   Commands:
   
@@ -4339,7 +4476,7 @@ Crystal language server.
 
 
 ```lua
-require'nvim_lsp'.scry.setup{}
+require'lspconfig'.scry.setup{}
 
   Commands:
   
@@ -4461,7 +4598,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.solargraph.setup{}
+require'lspconfig'.solargraph.setup{}
 
   Commands:
   
@@ -4509,7 +4646,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.sourcekit.setup{}
+require'lspconfig'.sourcekit.setup{}
 
   Commands:
   
@@ -4526,7 +4663,7 @@ https://github.com/joe-re/sql-language-server
 `cmd` value is **not set** by default. An installer is provided via the `:LspInstall` command that uses the *nvm_lsp node_modules* directory to find the sql-language-server executable. The `cmd` value can be overriden in the `setup` table;
 
 ```lua
-require'nvim_lsp'.sqlls.setup{
+require'lspconfig'.sqlls.setup{
   cmd = {"path/to/command", "up", "--method", "stdio"};
   ...
 }
@@ -4538,7 +4675,7 @@ This LSP can be installed via `:LspInstall sqlls` or with `npm`. If using LspIns
 Can be installed in Nvim with `:LspInstall sqlls`
 
 ```lua
-require'nvim_lsp'.sqlls.setup{}
+require'lspconfig'.sqlls.setup{}
 
   Commands:
   
@@ -4559,7 +4696,7 @@ guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standa
 So you should set `cmd` yourself like this.
 
 ```lua
-require'nvim_lsp'.sumneko_lua.setup{
+require'lspconfig'.sumneko_lua.setup{
   cmd = {"path", "to", "cmd"};
   ...
 }
@@ -4570,6 +4707,12 @@ If you install via our installer, if you execute `:LspInstallInfo sumneko_lua`, 
 Can be installed in Nvim with `:LspInstall sumneko_lua`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
+
+- **`Lua.awakened.cat`**: `boolean`
+
+  Default: `true`
+  
+  null
 
 - **`Lua.color.mode`**: `enum { "Grammar", "Semantic" }`
 
@@ -4637,9 +4780,27 @@ This server accepts configuration via the `settings` key.
 
   null
 
+- **`Lua.diagnostics.workspaceDelay`**: `integer`
+
+  Default: `0`
+  
+  null
+
+- **`Lua.diagnostics.workspaceRate`**: `integer`
+
+  Default: `100`
+  
+  null
+
 - **`Lua.hover.enable`**: `boolean`
 
   Default: `true`
+  
+  null
+
+- **`Lua.hover.fieldInfer`**: `integer`
+
+  Default: `3000`
   
   null
 
@@ -4661,6 +4822,18 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`Lua.intelliSense.fastGlobal`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`Lua.intelliSense.searchDepth`**: `integer`
+
+  Default: `0`
+  
+  null
+
 - **`Lua.runtime.path`**: `array`
 
   Default: `{ "?.lua", "?/init.lua", "?/?.lua" }`
@@ -4669,9 +4842,13 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`Lua.runtime.special`**: `object`
+
+  null
+
 - **`Lua.runtime.version`**: `enum { "Lua 5.1", "Lua 5.2", "Lua 5.3", "Lua 5.4", "LuaJIT" }`
 
-  Default: `"Lua 5.3"`
+  Default: `"Lua 5.4"`
   
   null
 
@@ -4701,7 +4878,7 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.workspace.maxPreload`**: `integer`
 
-  Default: `300`
+  Default: `1000`
   
   null
 
@@ -4717,14 +4894,10 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`Lua.zzzzzz.cat`**: `boolean`
-
-  null
-
 </details>
 
 ```lua
-require'nvim_lsp'.sumneko_lua.setup{}
+require'lspconfig'.sumneko_lua.setup{}
 
   Commands:
   
@@ -4769,12 +4942,12 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.terraformls.setup{}
+require'lspconfig'.terraformls.setup{}
 
   Commands:
   
   Default Values:
-    cmd = { "terraform-ls" }
+    cmd = { "terraform-ls", "serve" }
     filetypes = { "terraform" }
     root_dir = root_pattern(".terraform", ".git")
 ```
@@ -4789,7 +4962,7 @@ See https://texlab.netlify.com/docs/reference/configuration for configuration op
 
 
 ```lua
-require'nvim_lsp'.texlab.setup{}
+require'lspconfig'.texlab.setup{}
 
   Commands:
   - TexlabBuild: Build the current buffer
@@ -4833,7 +5006,7 @@ npm install -g typescript-language-server
 Can be installed in Nvim with `:LspInstall tsserver`
 
 ```lua
-require'nvim_lsp'.tsserver.setup{}
+require'lspconfig'.tsserver.setup{}
 
   Commands:
   
@@ -4847,7 +5020,7 @@ require'nvim_lsp'.tsserver.setup{}
 
 
 ```lua
-require'nvim_lsp'.vimls.setup{}
+require'lspconfig'.vimls.setup{}
 
   Commands:
   
@@ -4967,7 +5140,7 @@ This server accepts configuration via the `settings` key.
 
 - **`vetur.format.defaultFormatter.html`**: `enum { "none", "prettyhtml", "js-beautify-html", "prettier" }`
 
-  Default: `"prettyhtml"`
+  Default: `"prettier"`
   
   Default formatter for \<template\> region
 
@@ -5055,6 +5228,12 @@ This server accepts configuration via the `settings` key.
   
   Mapping from custom block tag name to language name\. Used for generating grammar to support syntax highlighting for custom blocks\.
 
+- **`vetur.languageFeatures.codeActions`**: `boolean`
+
+  Default: `true`
+  
+  Whether to enable codeActions
+
 - **`vetur.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
@@ -5091,12 +5270,12 @@ This server accepts configuration via the `settings` key.
 
 - **`vetur.validation.templateProps`**: `boolean`
 
-  Validate props usage in \<template\> region\. Show error\/warning for not passing declared props to child components\.
+  Validate props usage in \<template\> region\. Show error\/warning for not passing declared props to child components and show error for passing wrongly typed interpolation expressions
 
 </details>
 
 ```lua
-require'nvim_lsp'.vuels.setup{}
+require'lspconfig'.vuels.setup{}
 
   Commands:
   
@@ -5230,7 +5409,7 @@ This server accepts configuration via the `settings` key.
 </details>
 
 ```lua
-require'nvim_lsp'.yamlls.setup{}
+require'lspconfig'.yamlls.setup{}
 
   Commands:
   

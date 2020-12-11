@@ -26,10 +26,10 @@ best practices for a given language.
    Ask questions in [Neovim Gitter](https://gitter.im/neovim/neovim).
 2. Choose a language from [the coc.nvim wiki](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
   [emacs-lsp](https://github.com/emacs-lsp/lsp-mode#supported-languages).
-3. Create a new file at `lua/nvim_lsp/SERVER_NAME.lua`.
-   - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/nvim_lsp/)
+3. Create a new file at `lua/lspconfig/SERVER_NAME.lua`.
+   - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/)
      to get started. Most configs are simple. For an extensive example see
-     [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/nvim_lsp/texlab.lua).
+     [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/texlab.lua).
 
 ## Install
 
@@ -48,7 +48,7 @@ diagnostics.
 
 ```lua
 vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
-require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
+require'lspconfig'.<config>.setup{name=…, settings = {…}, …}
 ```
 
 If you want to add this to your vimrc, you will need to enclose it in a `lua` block.
@@ -56,7 +56,7 @@ If you want to add this to your vimrc, you will need to enclose it in a `lua` bl
 ```vim
 lua <<EOF
 vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
-require'nvim_lsp'.<config>.setup{name=…, settings = {…}, …}
+require'lspconfig'.<config>.setup{name=…, settings = {…}, …}
 EOF
 ```
 
@@ -65,7 +65,7 @@ given there to your `init.vim`. **All examples are given in Lua,** see `:help
 :lua-heredoc` to use Lua from your init.vim.
 
 Some configs may define additional server-specific functions, e.g. the `texlab`
-config provides `nvim_lsp.texlab.buf_build({bufnr})`.
+config provides `lspconfig.texlab.buf_build({bufnr})`.
 
 If you want to see the location of log file, you can run this in neovim:
 
@@ -80,7 +80,7 @@ For the `gopls` config, that would be:
 
 ```lua
 vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
-require'nvim_lsp'.gopls.setup{}
+require'lspconfig'.gopls.setup{}
 ```
 
 ### Example: override some defaults
@@ -89,9 +89,9 @@ To set some config properties at `setup()`, specify their keys. For example to
 change how the "project root" is found, set the `root_dir` key:
 
 ```lua
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.gopls.setup{
-  root_dir = nvim_lsp.util.root_pattern('.git');
+local lspconfig = require'lspconfig'
+lspconfig.gopls.setup{
+  root_dir = lspconfig.util.root_pattern('.git');
 }
 ```
 
@@ -99,8 +99,8 @@ The [documentation](#configurations) for each config lists default values and
 additional optional properties.
 
 ```lua
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.texlab.setup{
+local lspconfig = require'lspconfig'
+lspconfig.texlab.setup{
   name = 'texlab_fancy';
   log_level = vim.lsp.protocol.MessageType.Log;
   message_level = vim.lsp.protocol.MessageType.Log;
@@ -116,29 +116,29 @@ nvim_lsp.texlab.setup{
 
 ### Example: custom config
 
-To configure a custom/private server, just require `nvim_lsp/configs` and do
+To configure a custom/private server, just require `lspconfig/configs` and do
 the same as we do if we were adding it to the repository itself.
 
 1. Define the config: `configs.foo_lsp = { … }`
-2. Call `setup()`: `require'nvim_lsp'.foo_lsp.setup{}`
+2. Call `setup()`: `require'lspconfig'.foo_lsp.setup{}`
 
 ```lua
-local nvim_lsp = require'nvim_lsp'
-local configs = require'nvim_lsp/configs'
+local lspconfig = require'lspconfig'
+local configs = require'lspconfig/configs'
 -- Check if it's already defined for when I reload this file.
-if not nvim_lsp.foo_lsp then
+if not lspconfig.foo_lsp then
   configs.foo_lsp = {
     default_config = {
       cmd = {'/home/ashkan/works/3rd/lua-language-server/run.sh'};
       filetypes = {'lua'};
       root_dir = function(fname)
-        return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+        return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
       end;
       settings = {};
     };
   }
 end
-nvim_lsp.foo_lsp.setup{}
+lspconfig.foo_lsp.setup{}
 ```
 
 ### Example: override default config
@@ -146,10 +146,10 @@ nvim_lsp.foo_lsp.setup{}
 If you want to change default configs for all servers, you can override default_config like this.
 
 ```lua
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.util.default_config = vim.tbl_extend(
+local lspconfig = require'lspconfig'
+lspconfig.util.default_config = vim.tbl_extend(
   "force",
-  nvim_lsp.util.default_config,
+  lspconfig.util.default_config,
   { log_level = lsp.protocol.MessageType.Warning.Error }
 )
 ```
@@ -171,7 +171,7 @@ Use `:LspInstallInfo` to see install info.
 The `setup()` interface:
 
 ```
-nvim_lsp.SERVER.setup{config}
+lspconfig.SERVER.setup{config}
 
   The `config` parameter has the same shape as that of
   |vim.lsp.start_client()|, with these additions and changes:
@@ -190,14 +190,14 @@ nvim_lsp.SERVER.setup{config}
 
     If nil is returned, the buffer is skipped.
 
-    See |nvim_lsp.util.search_ancestors()| and the functions which use it:
-    - |nvim_lsp.util.root_pattern(patterns...)| finds an ancestor which
+    See |lspconfig.util.search_ancestors()| and the functions which use it:
+    - |lspconfig.util.root_pattern(patterns...)| finds an ancestor which
     - contains one of the files in `patterns...`. This is equivalent
       to coc.nvim's "rootPatterns"
     - Related utilities for common tools:
-      - |nvim_lsp.util.find_git_root()|
-      - |nvim_lsp.util.find_node_modules_root()|
-      - |nvim_lsp.util.find_package_json_root()|
+      - |lspconfig.util.find_git_root()|
+      - |lspconfig.util.find_node_modules_root()|
+      - |lspconfig.util.find_package_json_root()|
 
   {name}
     Defaults to the server's name.
@@ -233,7 +233,7 @@ nvim_lsp.SERVER.setup{config}
     the second parameter instead. Useful for doing buffer-local setup.
 
   {on_new_config}
-    `function(new_config)` will be executed after a new configuration has been
+    `function(new_config, new_root_dir)` will be executed after a new configuration has been
     created as a result of {root_dir} returning a unique value. You can use this
     as an opportunity to further modify the new_config or use it before it is
     sent to |vim.lsp.start_client()|.
