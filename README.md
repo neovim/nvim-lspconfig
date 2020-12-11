@@ -2068,18 +2068,18 @@ require'lspconfig'.gopls.setup{}
 https://github.com/prominic/groovy-language-server.git
 
 Requirements:
- - Linux only (for now)
- - Java 11+
+ - Linux/macOS (for now)
+ - Java 8+
 
 `groovyls` can be installed via `:LspInstall groovyls` or by yourself by following the instructions [here](https://github.com/prominic/groovy-language-server.git#build).
 
-The command `:LspInstaller groovyls` makes an attempt at installing the binary by
+The command `:LspInstall groovyls` makes an attempt at installing the binary by
 Fetching the groovyls repository from GitHub, compiling it and then expose a binary.
 
 If you installed groovy language server by yourself, you can set the `cmd` custom path as follow:
 
 ```lua
-require'nvim_lsp'.groovyls.setup{
+require'lspconfig'.groovyls.setup{
     -- Unix
     cmd = { "java", "-jar", "path/to/groovyls/groovy-language-server-all.jar" },
     ...
@@ -2089,7 +2089,7 @@ require'nvim_lsp'.groovyls.setup{
 Can be installed in Nvim with `:LspInstall groovyls`
 
 ```lua
-require'nvim_lsp'.groovyls.setup{}
+require'lspconfig'.groovyls.setup{}
 
   Commands:
 

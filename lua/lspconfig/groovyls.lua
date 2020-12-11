@@ -77,7 +77,7 @@ https://github.com/prominic/groovy-language-server.git
 
 Requirements:
  - Linux/macOS (for now)
- - Java 11+
+ - Java 8+
 
 `groovyls` can be installed via `:LspInstall groovyls` or by yourself by following the instructions [here](https://github.com/prominic/groovy-language-server.git#build).
 
