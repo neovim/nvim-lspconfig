@@ -1,5 +1,5 @@
-local configs = require 'nvim_lsp/configs'
-local util = require 'nvim_lsp/util'
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 local name = "groovyls"
 local bin_name = "groovy-language-server-all.jar"
@@ -76,18 +76,18 @@ configs[name] = {
 https://github.com/prominic/groovy-language-server.git
 
 Requirements:
- - Linux only (for now)
+ - Linux/macOS (for now)
  - Java 11+
 
 `groovyls` can be installed via `:LspInstall groovyls` or by yourself by following the instructions [here](https://github.com/prominic/groovy-language-server.git#build).
 
-The command `:LspInstaller groovyls` makes an attempt at installing the binary by
+The command `:LspInstall groovyls` makes an attempt at installing the binary by
 Fetching the groovyls repository from GitHub, compiling it and then expose a binary.
 
 If you installed groovy language server by yourself, you can set the `cmd` custom path as follow:
 
 ```lua
-require'nvim_lsp'.groovyls.setup{
+require'lspconfig'.groovyls.setup{
     -- Unix
     cmd = { "java", "-jar", "path/to/groovyls/groovy-language-server-all.jar" },
     ...
