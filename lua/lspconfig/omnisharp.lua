@@ -74,7 +74,7 @@ https://github.com/omnisharp/omnisharp-roslyn
 OmniSharp server based on Roslyn workspaces
 ]];
     default_config = {
-      root_dir = [[root_pattern(".csproj", ".sln", ".git")]];
+      root_dir = [[root_pattern(".csproj", ".sln")]];
     };
   };
 }
