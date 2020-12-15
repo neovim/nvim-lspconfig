@@ -1,5 +1,5 @@
-local configs = require 'nvim_lsp/configs'
-local util = require 'nvim_lsp/util'
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.zls = {
     default_config = {
