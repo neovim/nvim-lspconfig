@@ -1,3 +1,4 @@
+local log = require 'vim.lsp.log'
 local util = require 'lspconfig/util'
 local api, validate, lsp = vim.api, vim.validate, vim.lsp
 local tbl_extend = vim.tbl_extend
@@ -49,6 +50,18 @@ function configs.__newindex(t, config_name, config_def)
         assert(lsp.handlers["window/showMessage"], "Handler for window/showMessage notification is not defined")
         lsp.handlers["window/showMessage"](err, method, params, client_id)
       end
+    end
+
+    -- pyright and jdtls ignore dynamicRegistration settings and sent client/registerCapability handler which are unhandled
+    config.handlers['client/registerCapability'] = function(_, _, _, _)
+      log.warn(string.format( [[
+        The language server %s incorrectly triggers a registerCapability handler
+        despite dynamicRegistration set to false. Please report upstream.
+      ]] , config.name))
+      return {
+        result = nil;
+        error = nil;
+      }
     end
 
     config.handlers["workspace/configuration"] = function(err, method, params, client_id)
