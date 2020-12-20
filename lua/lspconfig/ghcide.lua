@@ -1,7 +1,5 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
-local vim = vim
-vim.api.nvim_command('echomsg "NOTICE: \\"ghcide\\" has been deprecated. Use \\"haskell-language-server\\" instead of \\"ghcide\\". For more information, see https://github.com/haskell/ghcide/pull/939 .')
 
 configs.ghcide = {
   default_config = {
