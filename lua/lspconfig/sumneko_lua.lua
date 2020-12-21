@@ -121,6 +121,35 @@ require'lspconfig'.sumneko_lua.setup{
 ```
 
 If you install via our installer, if you execute `:LspInstallInfo sumneko_lua`, you can know `cmd` value.
+
+The settings of the language server can also be overridden. This is especially useful
+when developing on the lua components of neovim. Some recommended settings are as follows:
+
+```lua
+require'lspconfig'.sumneko_lua.setup {
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = vim.split(package.path, ';'),
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+        },
+      },
+    },
+  },
+}
+```
 ]];
     default_config = {
       root_dir = [[root_pattern(".git") or bufdir]];
