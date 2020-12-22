@@ -224,7 +224,7 @@ local function generate_readme(template_file, params)
   local input_template = readfile(template_file)
   local readme_data = template(input_template, params)
 
-  local writer = io.open("README.md", "w")
+  local writer = io.open("CONFIG.md", "w")
   writer:write(readme_data)
   writer:close()
 end
