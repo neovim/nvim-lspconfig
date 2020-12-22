@@ -353,7 +353,7 @@ function M.npm_installer(config)
     post_install_script = {config.post_install_script, 's', true};
   }
 
-  local install_dir = M.path.join(base_install_dir, config.server_name)
+  local install_dir = M.path.join(base_install_dir, config.server_name .. "_nvim-lsp")
   local bin_dir = M.path.join(install_dir, "node_modules", ".bin")
   local function bin_path(name)
     return M.path.join(bin_dir, name)
