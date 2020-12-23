@@ -12,7 +12,7 @@ labels: bug
 - nvim-lsp version(commit hash):
 - `:checkhealth` result
 - What language server(If the problem is related to a specific language server):
-- Can you reproduce this beahvior on other language server clients (vscode, languageclient-neovim, coc.nvim, etc.):
+- Can you reproduce this behavior on other language server clients (vscode, languageclient-neovim, coc.nvim, etc.):
 - Is this problem isolated to this particular language server:
 - Operating system/version:
 - Terminal name/version:
