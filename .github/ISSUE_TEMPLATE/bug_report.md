@@ -25,4 +25,4 @@ labels: bug
 ### Expected behaviour
 
 ### LSP log
-<!-- Please add vim.lsp.log.set_level("info") to your lua block in init.vim and paste a link to your log file, located at $HOME/.local/share/nvim/lsp.log -->
+<!-- Please add vim.lsp.set_log_level("debug") to your lua block in init.vim and paste a link to your log file, located at $HOME/.local/share/nvim/lsp.log -->
