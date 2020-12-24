@@ -17,7 +17,8 @@ configs.perlls = {
     };
     filetypes = {"perl"};
     root_dir = function(fname)
-      return util.root_pattern(".git")(fname) or vim.loop.os_homedir()
+      --return util.root_pattern(".git")(fname) or vim.loop.os_homedir()
+      return util.root_pattern(".git")(fname) or vim.fn.getcwd()
     end;
   };
   docs = {
@@ -27,7 +28,7 @@ configs.perlls = {
 
     `Perl-LanguageServer`, a language server for Perl.
 
-    To make this work, ensure that you have Perl::LanguageServer installed and the perl command in your $PATH
+    To make this work, ensure that you have Perl::LanguageServer installed and perl command is on your path.
     ]];
     default_config = {
       root_dir = "vim's starting directory";
