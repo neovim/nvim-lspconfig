@@ -60,7 +60,7 @@ require'lspconfig'.<config>.setup{name=…, settings = {…}, …}
 EOF
 ```
 
-Find the [config](#configurations) for your language, then paste the example
+Find the [config](CONFIG.md) for your language, then paste the example
 given there to your `init.vim`. **All examples are given in Lua,** see `:help
 :lua-heredoc` to use Lua from your init.vim.
 
@@ -95,7 +95,7 @@ lspconfig.gopls.setup{
 }
 ```
 
-The [documentation](#configurations) for each config lists default values and
+The [documentation](CONFIG.md)) for each config lists default values and
 additional optional properties.
 
 ```lua
