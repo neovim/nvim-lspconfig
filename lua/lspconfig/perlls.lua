@@ -27,7 +27,7 @@ configs.perlls = {
 
     `Perl-LanguageServer`, a language server for Perl.
 
-    To make this work, ensure that you have Perl::LanguageServer installed and perl command is on your path.
+    To use the language server, ensure that you have Perl::LanguageServer installed and perl command is on your path.
     ]];
     default_config = {
       root_dir = "vim's starting directory";
