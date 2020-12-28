@@ -34,9 +34,9 @@ configs[server_name] = {
     description = [[
 https://github.com/theia-ide/typescript-language-server
 
-`typescript-language-server` can be installed via `:LspInstall tsserver` or by yourself with `npm`:
+`typescript-language-server` can be installed via `:LspInstall tsserver` or by yourself with `npm` (also making sure typescript is installed):
 ```sh
-npm install -g typescript-language-server
+npm install -g typescript-language-server typescript
 ```
 ]];
     default_config = {
