@@ -130,11 +130,6 @@ local function make_lsp_sections()
           end
         end;
         function()
-          if template_object.install then
-            return string.format("Can be installed in Nvim with `:LspInstall %s`", template_name)
-          end
-        end;
-        function()
           local package_json_name = util.path.join(tempdir, template_name..'.package.json');
           if docs.package_json then
             if not util.path.is_file(package_json_name) then

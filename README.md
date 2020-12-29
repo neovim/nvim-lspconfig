@@ -154,18 +154,6 @@ lspconfig.util.default_config = vim.tbl_extend(
 )
 ```
 
-### Installing a language server
-
-Configs may provide an `install()` function. Then you can use
-`:LspInstall {name}` to install the required language server.
-For example, to install the Elm language server:
-
-    :LspInstall elmls
-
-Use `:LspInstallInfo` to see install info.
-
-    :LspInstallInfo
-
 ## setup() function
 
 The `setup()` interface:

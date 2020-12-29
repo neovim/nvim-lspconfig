@@ -4,12 +4,6 @@ local util = require 'lspconfig/util'
 local server_name = "intelephense"
 local bin_name = "intelephense"
 
-local installer = util.npm_installer {
-  server_name = server_name;
-  packages = { "intelephense" };
-  binaries = {bin_name};
-}
-
 configs[server_name] = {
   default_config = {
     cmd = {bin_name, "--stdio"};
@@ -22,22 +16,11 @@ configs[server_name] = {
       return util.path.is_descendant(cwd, root) and cwd or root;
     end;
   };
-  on_new_config = function(new_config)
-    local install_info = installer.info()
-    if install_info.is_installed then
-      if type(new_config.cmd) == 'table' then
-        -- Try to preserve any additional args from upstream changes.
-        new_config.cmd[1] = install_info.binaries[bin_name]
-      else
-        new_config.cmd = {install_info.binaries[bin_name]}
-      end
-    end
-  end;
   docs = {
     description = [[
 https://intelephense.com/
 
-`intelephense` can be installed via `:LspInstall intelephense` or by yourself with `npm`:
+`intelephense` can be installed via `npm`:
 ```sh
 npm install -g intelephense
 ```
@@ -63,6 +46,4 @@ npm install -g intelephense
   };
 }
 
-configs[server_name].install = installer.install
-configs[server_name].install_info = installer.info
 -- vim:et ts=2 sw=2

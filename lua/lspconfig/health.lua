@@ -3,8 +3,7 @@ function M.check_health()
   local configs = require 'lspconfig/configs'
 
   for _, top_level_config in pairs(configs) do
-    -- If users execute `:LspInstall` or `:LspInstallInfo`,
-    -- a config is required but is not added make_config function.
+    -- Only check configs that have a make_config function.
     if not (top_level_config.make_config == nil) then
       -- the folder needs to exist
       local config = top_level_config.make_config(".")
