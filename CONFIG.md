@@ -2966,7 +2966,7 @@ require'lspconfig'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2615" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2483" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -4863,6 +4863,7 @@ require'lspconfig'.texlab.setup{}
 
   Commands:
   - TexlabBuild: Build the current buffer
+  - TexlabForward: Forward search from current position
   
   Default Values:
     cmd = { "texlab" }
