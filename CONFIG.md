@@ -21,6 +21,7 @@ that config.
 - [flow](#flow)
 - [fortls](#fortls)
 - [gdscript](#gdscript)
+- [ghcide](#ghcide)
 - [gopls](#gopls)
 - [groovyls](#groovyls)
 - [hie](#hie)
@@ -110,7 +111,7 @@ require'lspconfig'.angularls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/Users/michael/.cache/nvim/lspconfig/angularls/node_modules/.bin/angularls", "--stdio", "--tsProbeLocations", "/Users/michael/Repositories/node_modules", "--ngProbeLocations", "/Users/michael/Repositories/node_modules" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/angularls/node_modules/.bin/angularls", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" }
     filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" }
     root_dir = root_pattern("angular.json", ".git")
 ```
@@ -1002,6 +1003,14 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`dart.flutterAttachAdditionalArgs`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  null
+
 - **`dart.flutterCreateAndroidLanguage`**: `enum { "java", "kotlin" }`
 
   Default: `"kotlin"`
@@ -1061,6 +1070,14 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Whether to show the Flutter Outline tree in the sidebar\.
+
+- **`dart.flutterRunAdditionalArgs`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  null
 
 - **`dart.flutterRunLogFile`**: `null|string`
 
@@ -1783,6 +1800,25 @@ require'lspconfig'.gdscript.setup{}
     root_dir = <function 1>
 ```
 
+## ghcide
+
+https://github.com/digital-asset/ghcide
+
+A library for building Haskell IDE tooling.
+"ghcide" isn't for end users now. Use "haskell-language-server" instead of "ghcide".
+
+
+```lua
+require'lspconfig'.ghcide.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "ghcide", "--lsp" }
+    filetypes = { "haskell", "lhaskell" }
+    root_dir = root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml")
+```
+
 ## gopls
 
 https://github.com/golang/tools/tree/master/gopls
@@ -2040,7 +2076,7 @@ require'lspconfig'.jdtls.setup{}
     }
     init_options = {
       jvm_args = {},
-      workspace = "/Users/michael/workspace"
+      workspace = "/home/runner/workspace"
     }
     root_dir = root_pattern(".git")
 ```
@@ -2132,7 +2168,7 @@ require'lspconfig'.jsonls.setup{}
 https://github.com/julia-vscode/julia-vscode
 `LanguageServer.jl` can be installed via `:LspInstall julials` or by yourself the `julia` and `Pkg`:
 ```sh
-julia --project=/Users/michael/.cache/nvim/lspconfig/julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
+julia --project=/home/runner/.cache/nvim/lspconfig/julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
 If you want to install the LanguageServer manually, you will have to ensure that the Julia environment is stored in this location:
 ```vim
@@ -2369,7 +2405,7 @@ require'lspconfig'.julials.setup{}
   Commands:
   
   Default Values:
-    cmd = { "julia", "--project=/Users/michael/.cache/nvim/lspconfig/julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
+    cmd = { "julia", "--project=/home/runner/.cache/nvim/lspconfig/julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
     filetypes = { "julia" }
     root_dir = <function 1>
 ```
@@ -2639,7 +2675,7 @@ require'lspconfig'.leanls.setup{}
   Default Values:
     cmd = { "lean-language-server", "--stdio" }
     filetypes = { "lean" }
-    root_dir = util.root_pattern(".git")
+    root_dir = root_pattern(".git") or os_homedir
 ```
 
 ## metals
@@ -2727,7 +2763,7 @@ This server accepts configuration via the `settings` key.
 
 - **`metals.serverVersion`**: `string`
 
-  Default: `"0.9.7"`
+  Default: `"0.9.8"`
   
   null
 
@@ -2929,7 +2965,7 @@ require'lspconfig'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/Users/michael/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "45226" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2564" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -4034,12 +4070,11 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.empty_dict()`
   
-  Optional settings passed to the debug engine\. Example\:
-  \{ \"lldb\"\: \{ \"terminal\"\:\"external\"\} \}
+  null
 
 - **`rust-analyzer.debug.openDebugPane`**: `boolean`
 
-  Whether to open up the Debug Pane on debugging start\.
+  null
 
 - **`rust-analyzer.debug.sourceFileMap`**: `object`
 
@@ -4135,7 +4170,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to show inlay hints
+  Whether to show inlay hints\.
 
 - **`rust-analyzer.inlayHints.maxLength`**: `null|integer`
 
@@ -4211,7 +4246,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  Environment variables passed to the runnable launched using \`Test \` or \`Debug\` lens or \`rust\-analyzer\.run\` command\.
+  null
 
 - **`rust-analyzer.runnables.cargoExtraArgs`**: `array`
 
@@ -4253,23 +4288,23 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  Path to rust\-analyzer executable \(points to bundled binary by default\)\. If this is set\, then \"rust\-analyzer\.updates\.channel\" setting is not used
+  null
 
 - **`rust-analyzer.trace.extension`**: `boolean`
 
-  Enable logging of VS Code extensions itself
+  Enable logging of VS Code extensions itself\.
 
 - **`rust-analyzer.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
   
-  Trace requests to the rust\-analyzer \(this is usually overly verbose and not recommended for regular users\)
+  Trace requests to the rust\-analyzer \(this is usually overly verbose and not recommended for regular users\)\.
 
 - **`rust-analyzer.updates.askBeforeDownload`**: `boolean`
 
   Default: `true`
   
-  Whether to ask for permission before downloading any files from the Internet
+  Whether to ask for permission before downloading any files from the Internet\.
 
 - **`rust-analyzer.updates.channel`**: `enum { "stable", "nightly" }`
 
@@ -4654,6 +4689,12 @@ This server accepts configuration via the `settings` key.
 - **`Lua.intelliSense.searchDepth`**: `integer`
 
   Default: `0`
+  
+  null
+
+- **`Lua.runtime.nonstandardSymbol`**: `array`
+
+  Array items: `{enum = { "//", "/**/", "`", "+=", "-=", "*=", "/=", "||", "&&", "!", "!=", "continue" },type = "string"}`
   
   null
 
