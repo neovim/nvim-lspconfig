@@ -2966,7 +2966,7 @@ require'lspconfig'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2481" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2475" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -4779,7 +4779,7 @@ require'lspconfig'.sumneko_lua.setup{}
   Default Values:
     filetypes = { "lua" }
     log_level = 2
-    root_dir = root_pattern(".git") or os_homedir
+    root_dir = root_pattern(".git") or bufdir
 ```
 
 ## svelte
