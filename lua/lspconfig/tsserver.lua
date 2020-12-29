@@ -17,7 +17,7 @@ configs[server_name] = {
   default_config = {
     cmd = {bin_name, "--stdio"};
     filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"};
-    root_dir = util.root_pattern("package.json", "tsconfig.json", ".git");
+    root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git");
   };
   on_new_config = function(new_config)
     local install_info = installer.info()
@@ -40,7 +40,7 @@ npm install -g typescript-language-server
 ```
 ]];
     default_config = {
-      root_dir = [[root_pattern("package.json", "tsconfig.json", ".git")]];
+      root_dir = [[root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")]];
     };
   };
 }
