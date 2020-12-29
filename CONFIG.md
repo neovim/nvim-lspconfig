@@ -53,6 +53,7 @@ that config.
 - [sourcekit](#sourcekit)
 - [sqlls](#sqlls)
 - [sumneko_lua](#sumneko_lua)
+- [svelte](#svelte)
 - [terraformls](#terraformls)
 - [texlab](#texlab)
 - [tsserver](#tsserver)
@@ -2965,7 +2966,7 @@ require'lspconfig'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2642" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2615" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -4779,6 +4780,28 @@ require'lspconfig'.sumneko_lua.setup{}
     filetypes = { "lua" }
     log_level = 2
     root_dir = root_pattern(".git") or os_homedir
+```
+
+## svelte
+
+https://github.com/sveltejs/language-tools/tree/master/packages/language-server
+
+`svelte-language-server` can be installed via `:LspInstall svelte` or by yourself with `npm`:
+```sh
+npm install -g svelte-language-server
+```
+
+Can be installed in Nvim with `:LspInstall svelte`
+
+```lua
+require'lspconfig'.svelte.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "svelteserver", "--stdio" }
+    filetypes = { "svelte" }
+    root_dir = root_pattern("package.json", ".git")
 ```
 
 ## terraformls
