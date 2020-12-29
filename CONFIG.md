@@ -39,6 +39,7 @@ that config.
 - [ocamlls](#ocamlls)
 - [ocamllsp](#ocamllsp)
 - [omnisharp](#omnisharp)
+- [perlls](#perlls)
 - [purescriptls](#purescriptls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
@@ -2966,11 +2967,131 @@ require'lspconfig'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2475" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2494" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
     root_dir = root_pattern(".csproj", ".sln")
+```
+
+## perlls
+
+    https://github.com/richterger/Perl-LanguageServer/tree/master/clients/vscode/perl
+
+    `Perl-LanguageServer`, a language server for Perl.
+
+    To use the language server, ensure that you have Perl::LanguageServer installed and perl command is on your path.
+    
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`perl.debugAdapterPort`**: `string`
+
+  Default: `"13603"`
+  
+  port to use for connection between vscode and debug adapter inside Perl\:\:LanguageServer\. On a multi user system every user must use a differnt port\.
+
+- **`perl.enable`**: `boolean`
+
+  Default: `true`
+  
+  enable\/disable this extension
+
+- **`perl.fileFilter`**: `array`
+
+  Default: `vim.NIL`
+  
+  array for filtering perl file\, defaults to \*\.pm|\*\.pl
+
+- **`perl.ignoreDirs`**: `array`
+
+  Default: `vim.NIL`
+  
+  directories to ignore\, defaults to \.vscode\, \.git\, \.svn
+
+- **`perl.logLevel`**: `integer`
+
+  Default: `0`
+  
+  Log level 0\-2
+
+- **`perl.pathMap`**: `array`
+
+  Default: `vim.NIL`
+  
+  mapping of local to remote paths
+
+- **`perl.perlCmd`**: `string`
+
+  Default: `vim.NIL`
+  
+  defaults to perl
+
+- **`perl.perlInc`**: `array`
+
+  Default: `vim.NIL`
+  
+  array with paths to add to perl library path
+
+- **`perl.showLocalVars`**: `boolean`
+
+  if true\, show also local variables in symbol view
+
+- **`perl.sshAddr`**: `string`
+
+  Default: `vim.NIL`
+  
+  ip address of remote system
+
+- **`perl.sshArgs`**: `string`
+
+  Default: `vim.NIL`
+  
+  optional arguments for ssh
+
+- **`perl.sshCmd`**: `string`
+
+  Default: `vim.NIL`
+  
+  defaults to ssh on unix and plink on windows
+
+- **`perl.sshPort`**: `string`
+
+  Default: `vim.NIL`
+  
+  optional\, port for ssh to remote system
+
+- **`perl.sshUser`**: `string`
+
+  Default: `vim.NIL`
+  
+  user for ssh login
+
+- **`perl.sshWorkspaceRoot`**: `string`
+
+  Default: `vim.NIL`
+  
+  path of the workspace root on remote system
+
+</details>
+
+```lua
+require'lspconfig'.perlls.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "perl", "-MPerl::LanguageServer", "-e", "Perl::LanguageServer::run", "--", "--port 13603", "--nostdio 0", "--version 2.1.0" }
+    filetypes = { "perl" }
+    root_dir = vim's starting directory
+    settings = {
+      perl = {
+        fileFilter = { ".pm", ".pl" },
+        ignoreDirs = ".git",
+        perlCmd = "perl",
+        perlInc = " "
+      }
+    }
 ```
 
 ## purescriptls

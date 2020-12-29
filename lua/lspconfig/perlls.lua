@@ -21,7 +21,7 @@ configs.perlls = {
     end;
   };
   docs = {
-    package_json = "https://github.com/richterger/Perl-LanguageServer/blob/master/clients/vscode/perl/package.json";
+    package_json = "https://raw.githubusercontent.com/richterger/Perl-LanguageServer/master/clients/vscode/perl/package.json";
     description = [[
     https://github.com/richterger/Perl-LanguageServer/tree/master/clients/vscode/perl
 
