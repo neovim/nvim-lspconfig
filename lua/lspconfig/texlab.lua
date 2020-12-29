@@ -9,6 +9,13 @@ local texlab_build_status = vim.tbl_add_reverse_lookup {
   Cancelled = 3;
 }
 
+local texlab_forward_status = vim.tbl_add_reverse_lookup {
+  Success = 0;
+  Error = 1;
+  Failure = 2;
+  Unconfigured = 3;
+}
+
 local function buf_build(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local params = { textDocument = { uri = vim.uri_from_bufnr(bufnr) }  }
@@ -16,6 +23,16 @@ local function buf_build(bufnr)
       function(err, _, result, _)
         if err then error(tostring(err)) end
         print("Build "..texlab_build_status[result.status])
+      end)
+end
+
+local function buf_search(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  local params = { textDocument = { uri = vim.uri_from_bufnr(bufnr) }, position = { line = vim.fn.line('.')-1, character = vim.fn.col('.')  }}
+  lsp.buf_request(bufnr, 'textDocument/forwardSearch', params,
+      function(err, _, result, _)
+        if err then error(tostring(err)) end
+        print("Search "..texlab_forward_status[result.status])
       end)
 end
 
@@ -66,6 +83,12 @@ configs.texlab = {
       end;
       description = "Build the current buffer";
     };
+    TexlabForward = {
+      function()
+          buf_search(0)
+      end;
+      description = "Forward search from current position";
+    }
   };
   docs = {
     description = [[
@@ -82,4 +105,5 @@ See https://texlab.netlify.com/docs/reference/configuration for configuration op
 }
 
 configs.texlab.buf_build = buf_build
+configs.texlab.buf_search = buf_search
 -- vim:et ts=2 sw=2
