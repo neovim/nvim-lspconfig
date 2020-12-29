@@ -2966,7 +2966,7 @@ require'lspconfig'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2483" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2481" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -4911,7 +4911,7 @@ require'lspconfig'.tsserver.setup{}
   Default Values:
     cmd = { "typescript-language-server", "--stdio" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
-    root_dir = root_pattern("package.json", "tsconfig.json", ".git")
+    root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
 ```
 
 ## vimls
