@@ -2968,7 +2968,7 @@ require'lspconfig'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2947" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2532" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
