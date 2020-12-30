@@ -4,6 +4,10 @@ local util = require 'lspconfig/util'
 local server_name = "vuels"
 local bin_name = "vls"
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.window.workDoneProgress = false;
+capabilities.window.showMessage = false;
+
 local installer = util.npm_installer {
   server_name = server_name;
   packages = { "vls" };
@@ -12,7 +16,16 @@ local installer = util.npm_installer {
 
 configs[server_name] = {
   default_config = {
+    capabilities=capabilities;
     cmd = {bin_name};
+    handlers = {
+      ['window/showMessageRequest'] = function(_, _, _, _)
+        return {
+          result = nil;
+          error = nil;
+        }
+      end
+    };
     filetypes = {"vue"};
     root_dir = util.root_pattern("package.json", "vue.config.js");
     init_options = {
