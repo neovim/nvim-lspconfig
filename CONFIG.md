@@ -2968,7 +2968,7 @@ require'lspconfig'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2471" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2571" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -4449,6 +4449,109 @@ require'lspconfig'.rust_analyzer.setup{}
   Commands:
   
   Default Values:
+    capabilities = {
+      callHierarchy = {
+        dynamicRegistration = false
+      },
+      textDocument = {
+        codeAction = {
+          codeActionLiteralSupport = {
+            codeActionKind = {
+              valueSet = { "", "Empty", "QuickFix", "Refactor", "RefactorExtract", "RefactorInline", "RefactorRewrite", "Source", "SourceOrganizeImports", "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports" }
+            }
+          },
+          dynamicRegistration = false
+        },
+        completion = {
+          completionItem = {
+            commitCharactersSupport = false,
+            deprecatedSupport = false,
+            documentationFormat = { "markdown", "plaintext" },
+            preselectSupport = false,
+            snippetSupport = false
+          },
+          completionItemKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
+          },
+          contextSupport = false,
+          dynamicRegistration = false
+        },
+        declaration = {
+          linkSupport = true
+        },
+        definition = {
+          linkSupport = true
+        },
+        documentHighlight = {
+          dynamicRegistration = false
+        },
+        documentSymbol = {
+          dynamicRegistration = false,
+          hierarchicalDocumentSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
+        },
+        hover = {
+          contentFormat = { "markdown", "plaintext" },
+          dynamicRegistration = false
+        },
+        implementation = {
+          linkSupport = true
+        },
+        references = {
+          dynamicRegistration = false
+        },
+        rename = {
+          dynamicRegistration = false,
+          prepareSupport = true,
+          prepareSupportDefaultBehavior = 1
+        },
+        signatureHelp = {
+          dynamicRegistration = false,
+          signatureInformation = {
+            documentationFormat = { "markdown", "plaintext" }
+          }
+        },
+        synchronization = {
+          didSave = true,
+          dynamicRegistration = false,
+          willSave = false,
+          willSaveWaitUntil = false
+        },
+        typeDefinition = {
+          linkSupport = true
+        }
+      },
+      window = {
+        showDocument = {
+          support = false
+        },
+        showMessage = {
+          messageActionItem = {
+            additionalPropertiesSupport = false
+          }
+        },
+        workDoneProgress = true
+      },
+      workspace = {
+        applyEdit = true,
+        symbol = {
+          dynamicRegistration = false,
+          hierarchicalWorkspaceSymbolSupport = true,
+          symbolKind = {
+            valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+          }
+        },
+        workspaceEdit = {
+          changeAnnotationSupport = {
+            groupsOnLabel = true
+          },
+          normalizesLineEndings = true
+        },
+        workspaceFolders = true
+      }
+    }
     cmd = { "rust-analyzer" }
     filetypes = { "rust" }
     root_dir = root_pattern("Cargo.toml", "rust-project.json")
