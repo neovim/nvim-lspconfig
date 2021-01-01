@@ -48,13 +48,9 @@ end
 --   end)
 -- end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.window.workDoneProgress = false;
-
 configs.texlab = {
   default_config = {
     cmd = {"texlab"};
-    capabilities = capabilities;
     filetypes = {"tex", "bib"};
     root_dir = vim.loop.os_homedir;
     settings = {
