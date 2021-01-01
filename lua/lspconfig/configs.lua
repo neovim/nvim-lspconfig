@@ -144,20 +144,11 @@ function configs.__newindex(t, config_name, config_def)
         pcall(config.on_new_config, new_config, _root_dir)
       end
 
-      new_config.on_init = util.add_hook_after(new_config.on_init, function(client, _result)
-        function client.workspace_did_change_configuration(settings)
-          if not settings then return end
-          if vim.tbl_isempty(settings) then
-            settings = {[vim.type_idx]=vim.types.dictionary}
-          end
-          return client.notify('workspace/didChangeConfiguration', {
-            settings = settings;
-          })
-        end
-        if not vim.tbl_isempty(new_config.settings) then
-          client.workspace_did_change_configuration(new_config.settings)
-        end
-      end)
+      -- Many languge servers do not comply with the LSP spec, and require
+      -- that after initialization the client sends "worksapce/didChangeConfiguration"
+      -- along with the settings. Here we wrap the on_init function with a call to 
+      -- 'workspace/didChangeConfiguration'
+      new_config.on_init = vim.lsp.util.wrap_on_init(new_config)
 
       -- Save the old _on_attach so that we can reference it via the BufEnter.
       new_config._on_attach = new_config.on_attach
