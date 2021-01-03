@@ -102,16 +102,19 @@ To configure a custom/private server, just
 ```lua
 local lspconfig = require'lspconfig'
 local configs = require'lspconfig/configs'
-configs.foo_lsp = {
-  default_config = {
-    cmd = {'/home/ashkan/works/3rd/lua-language-server/run.sh'};
-    filetypes = {'lua'};
-    root_dir = function(fname)
-      return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-    end;
-    settings = {};
-  };
-}
+-- Check if it's already defined for when reloading this file.
+if not lspconfig.foo_lsp then
+  configs.foo_lsp = {
+    default_config = {
+      cmd = {'/home/ashkan/works/3rd/lua-language-server/run.sh'};
+      filetypes = {'lua'};
+      root_dir = function(fname)
+        return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+      end;
+      settings = {};
+    };
+  }
+end
 lspconfig.foo_lsp.setup{}
 ```
 
