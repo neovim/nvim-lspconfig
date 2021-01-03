@@ -2550,7 +2550,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"lean"`
   
-  Path to the Lean executable to use\. DO NOT CHANGE from the default \`lean\` unless you know what you\'re doing\!
+  null
 
 - **`lean.extraOptions`**: `array`
 
@@ -2558,35 +2558,35 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{description = "a single command-line argument",type = "string"}`
   
-  Extra command\-line options for the Lean server\.
+  null
 
 - **`lean.infoViewAllErrorsOnLine`**: `boolean`
 
-  Info view\: show all errors on the current line\, instead of just the ones on the right of the cursor\.
+  null
 
 - **`lean.infoViewAutoOpen`**: `boolean`
 
   Default: `true`
   
-  Info view\: open info view when Lean extension is activated\.
+  null
 
 - **`lean.infoViewAutoOpenShowGoal`**: `boolean`
 
   Default: `true`
   
-  Info view\: auto open shows goal and messages for the current line \(instead of all messages for the whole file\)
+  null
 
 - **`lean.infoViewFilterIndex`**: `number`
 
   Default: `-1`
   
-  Index of the filter applied to the tactic state \(in the array infoViewTacticStateFilters\)\. An index of \-1 means no filter is applied\.
+  null
 
 - **`lean.infoViewStyle`**: `string`
 
   Default: `""`
   
-  Add an additional CSS snippet to the info view\.
+  null
 
 - **`lean.infoViewTacticStateFilters`**: `array`
 
@@ -2594,13 +2594,7 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{description = "an object with required properties 'regex': string, 'match': boolean, and 'flags': string, and optional property 'name': string",properties = {flags = {description = "additional flags passed to the RegExp constructor, e.g. 'i' for ignore case",type = "string"},match = {description = "whether tactic state lines matching the value of 'regex' should be included (true) or excluded (false)",type = "boolean"},name = {description = "name displayed in the dropdown",type = "string"},regex = {description = "a properly-escaped regex string, e.g. '^_' matches any string beginning with an underscore",type = "string"}},required = { "regex", "match", "flags" },type = "object"}`
   
-  An array of objects containing regular expression strings that can be used to filter \(positively or negatively\) the tactic state in the info view\. Set to an empty array \'\[\]\' to hide the filter select dropdown\.
-   
-   Each object must contain the following keys\: \'regex\'\: string\, \'match\'\: boolean\, \'flags\'\: string\.
-   \'regex\' is a properly\-escaped regex string\,
-   \'match\' \= true \(false\) means blocks in the tactic state matching \'regex\' will be included \(excluded\) in the info view\, 
-   \'flags\' are additional flags passed to the JavaScript RegExp constructor\.
-   The \'name\' key is optional and may contain a string that is displayed in the dropdown instead of the full regex details\.
+  null
 
 - **`lean.input.customTranslations`**: `object`
 
@@ -2608,13 +2602,13 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{description = "Unicode character to translate to",type = "string"}`
   
-  Add additional input Unicode translations\. Example\: \`\{\"foo\"\: \"☺\"\}\` will correct \`\\foo\` to \`☺\`\.
+  null
 
 - **`lean.input.enabled`**: `boolean`
 
   Default: `true`
   
-  Enable Lean input mode\.
+  null
 
 - **`lean.input.languages`**: `array`
 
@@ -2622,51 +2616,51 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{description = "the name of a language, e.g. 'lean', 'markdown'",type = "string"}`
   
-  Enable Lean Unicode input in other file types\.
+  null
 
 - **`lean.input.leader`**: `string`
 
   Default: `"\\"`
   
-  Leader key to trigger input mode\.
+  null
 
 - **`lean.leanpkgPath`**: `string`
 
   Default: `"leanpkg"`
   
-  Path to the leanpkg executable to use\. DO NOT CHANGE from the default \`leanpkg\` unless you know what you\'re doing\!
+  null
 
 - **`lean.memoryLimit`**: `number`
 
   Default: `4096`
   
-  Set a memory limit \(in megabytes\) for the Lean server\.
+  null
 
 - **`lean.progressMessages`**: `boolean`
 
-  Show error messages where Lean is still checking\.
+  null
 
 - **`lean.roiModeDefault`**: `string`
 
   Default: `"visible"`
   
-  Set the default region of interest mode \(nothing\, visible\, lines\, linesAndAbove\, open\, or project\) for the Lean extension\.
+  null
 
 - **`lean.timeLimit`**: `number`
 
   Default: `100000`
   
-  Set a deterministic timeout \(it is approximately the maximum number of memory allocations in thousands\) for the Lean server\.
+  null
 
 - **`lean.typeInStatusBar`**: `boolean`
 
   Default: `true`
   
-  Show the type of term under the cursor in the status bar\.
+  null
 
 - **`lean.typesInCompletionList`**: `boolean`
 
-  Display types of all items in the list of completions\. By default\, only the type of the highlighted item is shown\.
+  null
 
 </details>
 
@@ -2968,7 +2962,7 @@ require'lspconfig'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2559" }
+    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2555" }
     filetypes = { "cs", "vb" }
     init_options = {}
     on_new_config = <function 1>
@@ -4820,6 +4814,35 @@ require'lspconfig'.sumneko_lua.setup{
 ```
 
 If you install via our installer, if you execute `:LspInstallInfo sumneko_lua`, you can know `cmd` value.
+
+The settings of the language server can also be overridden. This is especially useful
+when developing on the lua components of neovim. Some recommended settings are as follows:
+
+```lua
+require'lspconfig'.sumneko_lua.setup {
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = vim.split(package.path, ';'),
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+        },
+      },
+    },
+  },
+}
+```
 
 Can be installed in Nvim with `:LspInstall sumneko_lua`
 This server accepts configuration via the `settings` key.
