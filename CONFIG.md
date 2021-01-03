@@ -2101,6 +2101,20 @@ vscode-json-languageserver, a language server for JSON and JSON schema
 npm install -g vscode-json-languageserver
 ```
 
+vscode-json-languageserver only provides range formatting. You can map a command that applies range formatting to the entire document:
+
+```lua
+require'lspconfig'.jsonls.setup {
+    commands = {
+      Format = {
+        function()
+          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+        end
+      }
+    }
+}
+```
+
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
@@ -2150,6 +2164,9 @@ require'lspconfig'.jsonls.setup{}
   Default Values:
     cmd = { "vscode-json-languageserver", "--stdio" }
     filetypes = { "json" }
+    init_options = {
+      provideFormatter = true
+    }
     root_dir = root_pattern(".git", vim.fn.getcwd())
 ```
 
