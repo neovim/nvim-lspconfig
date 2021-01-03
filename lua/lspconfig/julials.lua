@@ -30,7 +30,7 @@ configs.julials = {
     package_json = "https://raw.githubusercontent.com/julia-vscode/julia-vscode/master/package.json";
     description = [[
 https://github.com/julia-vscode/julia-vscode
-`LanguageServer.jl` can be installed via `:LspInstall julials` or by yourself the `julia` and `Pkg`:
+`LanguageServer.jl` can be installed with `julia` and `Pkg`:
 ```sh
 julia --project=]] .. environment_directory .. [[ -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
@@ -41,26 +41,5 @@ If you want to install the LanguageServer manually, you will have to ensure that
     ]];
   };
 }
-
-configs.julials.install = function()
-
-  local script = [[
-  julia --project=]] .. environment_directory .. [[ -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
-  ]]
-
-  util.sh(script, vim.loop.os_homedir())
-end
-
-configs.julials.install_info = function()
-  local script = [[
-  julia --project=]] .. environment_directory .. [[ -e 'using LanguageServer; using SymbolServer'
-  ]]
-
-  local status = pcall(vim.fn.system, script)
-
-  return {
-    is_installed = status and vim.v.shell_error == 0;
-  }
-end
 
 --- vim:et ts=2 sw=2

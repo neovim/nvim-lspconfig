@@ -4,12 +4,6 @@ local util = require 'lspconfig/util'
 local server_name = "cssls"
 local bin_name = "css-languageserver"
 
-local installer = util.npm_installer {
-  server_name = server_name;
-  packages = { "vscode-css-languageserver-bin" };
-  binaries = {bin_name};
-}
-
 local root_pattern = util.root_pattern("package.json")
 
 configs[server_name] = {
@@ -25,22 +19,11 @@ configs[server_name] = {
       less = { validate = true }
      };
   };
-  on_new_config = function(new_config)
-    local install_info = installer.info()
-    if install_info.is_installed then
-      if type(new_config.cmd) == 'table' then
-        -- Try to preserve any additional args from upstream changes.
-        new_config.cmd[1] = install_info.binaries[bin_name]
-      else
-        new_config.cmd = {install_info.binaries[bin_name]}
-      end
-    end
-  end;
   docs = {
     description = [[
 https://github.com/vscode-langservers/vscode-css-languageserver-bin
 
-`css-languageserver` can be installed via `:LspInstall cssls` or by yourself with `npm`:
+`css-languageserver` can be installed via `npm`:
 ```sh
 npm install -g vscode-css-languageserver-bin
 ```
@@ -51,6 +34,4 @@ npm install -g vscode-css-languageserver-bin
   };
 }
 
-configs[server_name].install = installer.install
-configs[server_name].install_info = installer.info
 -- vim:et ts=2 sw=2

@@ -68,7 +68,7 @@ that config.
 
 https://github.com/AdaCore/ada_language_server
 
-Ada language server. Use `LspInstall als` to install it.
+Installation instructions can be found [here](https://github.com/AdaCore/ada_language_server#Install).
 
 Can be configured by passing a "settings" object to `als.setup{}`:
 
@@ -83,7 +83,6 @@ require('lspconfig').als.setup{
 }
 ```
 
-Can be installed in Nvim with `:LspInstall als`
 
 
 ```lua
@@ -101,12 +100,9 @@ require'lspconfig'.als.setup{}
 
 https://github.com/angular/vscode-ng-language-service
 
-`angular-language-server` can be installed via `:LspInstall angularls`
-
-If you prefer to install this yourself you can through npm `npm install @angular/language-server`.
-Be aware there is no global binary and must be run via `node_modules/@angular/language-server/index.js`
+`angular-language-server` can be installed via npm `npm install @angular/language-server`.
+Be aware there is no global binary and must be run via `node_modules/@angular/language-server/index.js` which can be added as the default cmd.
     
-Can be installed in Nvim with `:LspInstall angularls`
 
 ```lua
 require'lspconfig'.angularls.setup{}
@@ -114,7 +110,7 @@ require'lspconfig'.angularls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/lspconfig/angularls/node_modules/.bin/angularls", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" }
+    cmd = { "angularls", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" }
     filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" }
     root_dir = root_pattern("angular.json", ".git")
 ```
@@ -125,7 +121,6 @@ https://github.com/mads-hartmann/bash-language-server
 
 Language server for bash, written using tree sitter in typescript.
 
-Can be installed in Nvim with `:LspInstall bashls`
 
 ```lua
 require'lspconfig'.bashls.setup{}
@@ -743,12 +738,11 @@ require'lspconfig'.codeqlls.setup{}
 
 https://github.com/vscode-langservers/vscode-css-languageserver-bin
 
-`css-languageserver` can be installed via `:LspInstall cssls` or by yourself with `npm`:
+`css-languageserver` can be installed via `npm`:
 ```sh
 npm install -g vscode-css-languageserver-bin
 ```
 
-Can be installed in Nvim with `:LspInstall cssls`
 
 ```lua
 require'lspconfig'.cssls.setup{}
@@ -1376,7 +1370,6 @@ https://github.com/iamcco/diagnostic-languageserver
 
 Diagnostic language server integrate with linters.
 
-Can be installed in Nvim with `:LspInstall diagnosticls`
 
 ```lua
 require'lspconfig'.diagnosticls.setup{}
@@ -1393,12 +1386,11 @@ require'lspconfig'.diagnosticls.setup{}
 
 https://github.com/rcjsuen/dockerfile-language-server-nodejs
 
-`docker-langserver` can be installed via `:LspInstall dockerls` or by yourself with `npm`:
+`docker-langserver` can be installed via `npm`:
 ```sh
 npm install -g dockerfile-language-server-nodejs
 ```
     
-Can be installed in Nvim with `:LspInstall dockerls`
 
 ```lua
 require'lspconfig'.dockerls.setup{}
@@ -1432,22 +1424,27 @@ require'lspconfig'.efm.setup{}
 
 https://github.com/elixir-lsp/elixir-ls
 
-`elixir-ls` can be installed via `:LspInstall elixirls` or by yourself by following the instructions [here](https://github.com/elixir-lsp/elixir-ls#building-and-running).
+`elixir-ls` can be installed by following the instructions [here](https://github.com/elixir-lsp/elixir-ls#building-and-running).
 
-This language server does not provide a global binary, but must be installed manually. The command `:LspInstaller elixirls` makes an attempt at installing the binary by
-Fetching the elixir-ls repository from GitHub, compiling it and then installing it.
+```bash
+curl -fLO https://github.com/elixir-lsp/elixir-ls/releases/latest/download/elixir-ls.zip
+unzip elixir-ls.zip -d /path/to/elixir-ls
+# Unix
+chmod +x /path/to/elixir-ls/language_server.sh
+```
+
+**By default, elixir-ls doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of you unzipped elixir-ls.
 
 ```lua
 require'lspconfig'.elixirls.setup{
     -- Unix
-    cmd = { "path/to/language_server.sh" };
+    cmd = { "/path/to/elixir-ls/language_server.sh" };
     -- Windows
-    cmd = { "path/to/language_server.bat" };
+    cmd = { "/path/to/elixir-ls/language_server.bat" };
     ...
 }
 ```
 
-Can be installed in Nvim with `:LspInstall elixirls`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
@@ -1501,7 +1498,6 @@ require'lspconfig'.elixirls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "language_server.sh" }
     filetypes = { "elixir", "eelixir" }
     root_dir = root_pattern("mix.exs", ".git") or vim.loop.os_homedir()
 ```
@@ -1515,7 +1511,6 @@ If you don't want to use Nvim to install it, then you can use:
 npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
 ```
 
-Can be installed in Nvim with `:LspInstall elmls`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
@@ -1848,12 +1843,9 @@ Requirements:
  - Linux/macOS (for now)
  - Java 11+
 
-`groovyls` can be installed via `:LspInstall groovyls` or by yourself by following the instructions [here](https://github.com/prominic/groovy-language-server.git#build).
+`groovyls` can be installed by following the instructions [here](https://github.com/prominic/groovy-language-server.git#build).
 
-The command `:LspInstall groovyls` makes an attempt at installing the binary by
-Fetching the groovyls repository from GitHub, compiling it and then expose a binary.
-
-If you installed groovy language server by yourself, you can set the `cmd` custom path as follow:
+If you have installed groovy language server, you can set the `cmd` custom path as follow:
 
 ```lua
 require'lspconfig'.groovyls.setup{
@@ -1863,7 +1855,6 @@ require'lspconfig'.groovyls.setup{
 }
 ```
 
-Can be installed in Nvim with `:LspInstall groovyls`
 
 ```lua
 require'lspconfig'.groovyls.setup{}
@@ -2009,12 +2000,11 @@ require'lspconfig'.hls.setup{}
 
 https://github.com/vscode-langservers/vscode-html-languageserver-bin
 
-`html-languageserver` can be installed via `:LspInstall html` or by yourself with `npm`:
+`html-languageserver` can be installed via `npm`:
 ```sh
 npm install -g vscode-html-languageserver-bin
 ```
 
-Can be installed in Nvim with `:LspInstall html`
 
 ```lua
 require'lspconfig'.html.setup{}
@@ -2039,12 +2029,11 @@ require'lspconfig'.html.setup{}
 
 https://intelephense.com/
 
-`intelephense` can be installed via `:LspInstall intelephense` or by yourself with `npm`:
+`intelephense` can be installed via `npm`:
 ```sh
 npm install -g intelephense
 ```
 
-Can be installed in Nvim with `:LspInstall intelephense`
 
 ```lua
 require'lspconfig'.intelephense.setup{}
@@ -2061,11 +2050,10 @@ require'lspconfig'.intelephense.setup{}
 
 https://projects.eclipse.org/projects/eclipse.jdt.ls
 
-Language server can be installed with `:LspInstall jdtls`
-
 Language server for Java.
+
+See project page for installation instructions.
     
-Can be installed in Nvim with `:LspInstall jdtls`
 
 ```lua
 require'lspconfig'.jdtls.setup{}
@@ -2108,12 +2096,11 @@ https://github.com/vscode-langservers/vscode-json-languageserver
 
 vscode-json-languageserver, a language server for JSON and JSON schema
 
-`vscode-json-languageserver` can be installed via `:LspInstall jsonls` or by yourself with `npm`:
+`vscode-json-languageserver` can be installed via `npm`:
 ```sh
 npm install -g vscode-json-languageserver
 ```
 
-Can be installed in Nvim with `:LspInstall jsonls`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
@@ -2169,16 +2156,15 @@ require'lspconfig'.jsonls.setup{}
 ## julials
 
 https://github.com/julia-vscode/julia-vscode
-`LanguageServer.jl` can be installed via `:LspInstall julials` or by yourself the `julia` and `Pkg`:
+`LanguageServer.jl` can be installed with `julia` and `Pkg`:
 ```sh
-julia --project=/home/runner/.cache/nvim/lspconfig/julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
+julia --project=julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
 If you want to install the LanguageServer manually, you will have to ensure that the Julia environment is stored in this location:
 ```vim
 :lua print(require'lspconfig'.util.path.join(require'lspconfig'.util.base_install_dir, "julials"))
 ```
     
-Can be installed in Nvim with `:LspInstall julials`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
@@ -2408,7 +2394,7 @@ require'lspconfig'.julials.setup{}
   Commands:
   
   Default Values:
-    cmd = { "julia", "--project=/home/runner/.cache/nvim/lspconfig/julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
+    cmd = { "julia", "--project=julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
     filetypes = { "julia" }
     root_dir = <function 1>
 ```
@@ -2679,16 +2665,26 @@ require'lspconfig'.leanls.setup{}
 
 https://scalameta.org/metals/
 
-To target a specific version on Metals, set the following.
-If nothing is set, the latest stable will be used.
-```vim
-let g:metals_server_version = '0.8.4+106-5f2b9350-SNAPSHOT'
+Scala language server with rich IDE features.
+
+See full instructions in the Metals documentation:
+
+https://scalameta.org/metals/docs/editors/vim.html#using-an-alternative-lsp-client
+
+Note: that if you're using [nvim-metals](https://github.com/scalameta/nvim-metals), that plugin fully handles the setup and installation of Metals, and you shouldn't set up Metals both with it and this plugin.
+
+To install Metals, make sure to have [coursier](https://get-coursier.io/docs/cli-installation) installed, and once you do you can install the latest Metals with `cs install metals`. You can also manually bootstrap Metals with the following command.
+
+```bash
+cs bootstrap \
+  --java-opt -Xss4m \
+  --java-opt -Xms100m \
+  org.scalameta:metals_2.12:<enter-version-here> \
+  -r bintray:scalacenter/releases \
+  -r sonatype:snapshots \
+  -o /usr/local/bin/metals -f
 ```
 
-Scala language server with rich IDE features.
-`metals` can be installed via `:LspInstall metals`.
-
-Can be installed in Nvim with `:LspInstall metals`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
@@ -2804,12 +2800,11 @@ require'lspconfig'.metals.setup{}
 ## nimls
 
 https://github.com/PMunch/nimlsp
-`nimlsp` can be installed via `:LspInstall nimls` or by yourself the `nimble` package manager:
+`nimlsp` can be installed via the `nimble` package manager:
 ```sh
 nimble install nimlsp
 ```
     
-Can be installed in Nvim with `:LspInstall nimls`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
@@ -2907,12 +2902,11 @@ require'lspconfig'.nimls.setup{}
 
 https://github.com/ocaml-lsp/ocaml-language-server
 
-`ocaml-language-server` can be installed via `:LspInstall ocamlls` or by yourself with `npm`
+`ocaml-language-server` can be installed via `npm`
 ```sh
 npm install -g ocaml-langauge-server
 ```
     
-Can be installed in Nvim with `:LspInstall ocamlls`
 
 ```lua
 require'lspconfig'.ocamlls.setup{}
@@ -2954,7 +2948,22 @@ require'lspconfig'.ocamllsp.setup{}
 https://github.com/omnisharp/omnisharp-roslyn
 OmniSharp server based on Roslyn workspaces
 
-Can be installed in Nvim with `:LspInstall omnisharp`
+`omnisharp-roslyn` can be installed by downloading and extracting a release from [here](https://github.com/OmniSharp/omnisharp-roslyn/releases).
+Omnisharp can also be built from source by following the instructions [here](https://github.com/omnisharp/omnisharp-roslyn#downloading-omnisharp).
+
+**By default, omnisharp-roslyn doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of you unzipped .
+
+```lua
+local pid = vim.fn.getpid()
+local omnisharp_bin = "/path/to/omnisharp/OmniSharp"
+-- on Windows
+-- local omnisharp_bin = "/path/to/omnisharp/OmniSharp.exe"
+require'lspconfig'.omnisharp.setup{
+    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
+    ...
+}
+```
+
 
 ```lua
 require'lspconfig'.omnisharp.setup{}
@@ -2962,10 +2971,8 @@ require'lspconfig'.omnisharp.setup{}
   Commands:
   
   Default Values:
-    cmd = { "/home/runner/.cache/nvim/lspconfig/omnisharp/run", "--languageserver", "--hostPID", "2581" }
     filetypes = { "cs", "vb" }
     init_options = {}
-    on_new_config = <function 1>
     root_dir = root_pattern(".csproj", ".sln")
 ```
 
@@ -3092,12 +3099,11 @@ require'lspconfig'.perlls.setup{}
 ## purescriptls
 
 https://github.com/nwolverson/purescript-language-server
-`purescript-language-server` can be installed via `:LspInstall purescriptls` or by yourself with `npm`
+`purescript-language-server` can be installed via `npm`
 ```sh
 npm install -g purescript-language-server
 ```
 
-Can be installed in Nvim with `:LspInstall purescriptls`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
@@ -3566,9 +3572,9 @@ Requires [.NET Core](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-i
 curl -L https://dot.net/v1/dotnet-install.sh | sh
 ```
 
-`python-language-server` can be installed via `:LspInstall pyls_ms` or you can [build](https://github.com/microsoft/python-language-server/blob/master/CONTRIBUTING.md#setup) your own.
+`python-language-server` can be installed via [build](https://github.com/microsoft/python-language-server/blob/master/CONTRIBUTING.md#setup).
 
-If you want to use your own build, set cmd to point to `Microsoft.Python.languageServer.dll`.
+Set cmd to point to `Microsoft.Python.languageServer.dll`.
 
 ```lua
 cmd = { "dotnet", "exec", "path/to/Microsoft.Python.languageServer.dll" };
@@ -3584,7 +3590,6 @@ Version = "3.8"
 This server accepts configuration via the `settings` key.
 
     
-Can be installed in Nvim with `:LspInstall pyls_ms`
 
 ```lua
 require'lspconfig'.pyls_ms.setup{}
@@ -3604,7 +3609,6 @@ require'lspconfig'.pyls_ms.setup{}
         }
       }
     }
-    on_new_config = <function 1>
     root_dir = vim's starting directory
     settings = {
       python = {
@@ -3623,7 +3627,6 @@ https://github.com/microsoft/pyright
 
 `pyright`, a static type checker and language server for python
 
-Can be installed in Nvim with `:LspInstall pyright`
 
 ```lua
 require'lspconfig'.pyright.setup{}
@@ -3984,7 +3987,6 @@ To install manually, run `cargo install rnix-lsp`. If you are using nix, rnix-ls
 This server accepts configuration via the `settings` key.
 
     
-Can be installed in Nvim with `:LspInstall rnix`
 
 ```lua
 require'lspconfig'.rnix.setup{}
@@ -3995,7 +3997,6 @@ require'lspconfig'.rnix.setup{}
     cmd = { "rnix-lsp" }
     filetypes = { "nix" }
     init_options = {}
-    on_new_config = <function 1>
     root_dir = vim's starting directory
     settings = {}
 ```
@@ -4668,7 +4669,7 @@ require'lspconfig'.sourcekit.setup{}
 
 https://github.com/joe-re/sql-language-server
 
-`cmd` value is **not set** by default. An installer is provided via the `:LspInstall` command that uses the *nvm_lsp node_modules* directory to find the sql-language-server executable. The `cmd` value can be overriden in the `setup` table;
+`cmd` value is **not set** by default. The `cmd` value can be overriden in the `setup` table;
 
 ```lua
 require'lspconfig'.sqlls.setup{
@@ -4677,10 +4678,9 @@ require'lspconfig'.sqlls.setup{
 }
 ```
 
-This LSP can be installed via `:LspInstall sqlls` or with `npm`. If using LspInstall, run `:LspInstallInfo sqlls` to view installation paths. Find further instructions on manual installation of the sql-language-server at [joe-re/sql-language-server](https://github.com/joe-re/sql-language-server).
+This LSP can be installed via  `npm`. Find further instructions on manual installation of the sql-language-server at [joe-re/sql-language-server](https://github.com/joe-re/sql-language-server).
 <br>
     
-Can be installed in Nvim with `:LspInstall sqlls`
 
 ```lua
 require'lspconfig'.sqlls.setup{}
@@ -4697,26 +4697,16 @@ require'lspconfig'.sqlls.setup{}
 
 https://github.com/sumneko/lua-language-server
 
-Lua language server. **By default, this doesn't have a `cmd` set.** This is
-because it doesn't provide a global binary. We provide an installer for Linux
-and macOS using `:LspInstall`.  If you wish to install it yourself, [here is a
-guide](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)).
-So you should set `cmd` yourself like this.
+Lua language server.
+
+`lua-language-server` can be installed by following the instructions [here](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)).
+
+**By default, lua-language-server doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of you unzipped and compiled lua-language-server.
 
 ```lua
-require'lspconfig'.sumneko_lua.setup{
-  cmd = {"path", "to", "cmd"};
-  ...
-}
-```
-
-If you install via our installer, if you execute `:LspInstallInfo sumneko_lua`, you can know `cmd` value.
-
-The settings of the language server can also be overridden. This is especially useful
-when developing on the lua components of neovim. Some recommended settings are as follows:
-
-```lua
+local sumneko_root_path = "/path/to/lua-language-server"
 require'lspconfig'.sumneko_lua.setup {
+  cmd = {sumneko_root_path .. "/bin/{linux,macOS}/lua-language-server", "-E", sumneko_root_path .. "/main.lua"};
   settings = {
     Lua = {
       runtime = {
@@ -4741,7 +4731,6 @@ require'lspconfig'.sumneko_lua.setup {
 }
 ```
 
-Can be installed in Nvim with `:LspInstall sumneko_lua`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
@@ -4968,12 +4957,11 @@ require'lspconfig'.sumneko_lua.setup{}
 
 https://github.com/sveltejs/language-tools/tree/master/packages/language-server
 
-`svelte-language-server` can be installed via `:LspInstall svelte` or by yourself with `npm`:
+`svelte-language-server` can be installed via `npm`:
 ```sh
 npm install -g svelte-language-server
 ```
 
-Can be installed in Nvim with `:LspInstall svelte`
 
 ```lua
 require'lspconfig'.svelte.setup{}
@@ -5078,12 +5066,11 @@ require'lspconfig'.texlab.setup{}
 
 https://github.com/theia-ide/typescript-language-server
 
-`typescript-language-server` can be installed via `:LspInstall tsserver` or by yourself with `npm`:
+`typescript-language-server` can be installed via `npm`:
 ```sh
 npm install -g typescript-language-server
 ```
 
-Can be installed in Nvim with `:LspInstall tsserver`
 
 ```lua
 require'lspconfig'.tsserver.setup{}
@@ -5107,7 +5094,7 @@ require'lspconfig'.vimls.setup{}
   Default Values:
     cmd = { "vim-language-server", "--stdio" }
     docs = {
-      description = "https://github.com/iamcco/vim-language-server\n\nIf you don't want to use Nvim to install it, then you can use:\n```sh\nnpm install -g vim-language-server\n```\n"
+      description = "https://github.com/iamcco/vim-language-server\n\nYou can install vim-language-server via npm:\n```sh\nnpm install -g vim-language-server\n```\n"
     }
     filetypes = { "vim" }
     init_options = {
@@ -5128,7 +5115,6 @@ require'lspconfig'.vimls.setup{}
       },
       vimruntime = ""
     }
-    on_new_config = <function 1>
     root_dir = <function 1>
 ```
 
@@ -5137,12 +5123,11 @@ require'lspconfig'.vimls.setup{}
 https://github.com/vuejs/vetur/tree/master/server
 
 Vue language server(vls)
-`vue-language-server` can be installed via `:LspInstall vuels` or by yourself with `npm`:
+`vue-language-server` can be installed via `npm`:
 ```sh
 npm install -g vls
 ```
 
-Can be installed in Nvim with `:LspInstall vuels`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
@@ -5411,12 +5396,11 @@ require'lspconfig'.vuels.setup{}
 
 https://github.com/redhat-developer/yaml-language-server
 
-`yaml-language-server` can be installed via `:LspInstall yamlls` or by yourself with `npm`:
+`yaml-language-server` can be installed via `npm`:
 ```sh
 npm install -g yaml-language-server
 ```
 
-Can be installed in Nvim with `:LspInstall yamlls`
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 

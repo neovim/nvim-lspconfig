@@ -255,6 +255,11 @@ function M.server_per_root_dir_manager(_make_config)
     local client_id = clients[root_dir]
     if not client_id then
       local new_config = _make_config(root_dir)
+      --TODO:mjlbach -- this current isn't printing
+      if not new_config.cmd then
+          print(string.format("Error, cmd not defined for [%q]. You must manually define a cmd for the default config for this server. See server documentation.", new_config.name))
+          return
+      end
       new_config.on_exit = M.add_hook_before(new_config.on_exit, function()
         clients[root_dir] = nil
       end)
@@ -320,115 +325,6 @@ function M.find_package_json_ancestor(startpath)
     end
   end)
 end
-
-local function validate_string_list(t)
-  for _, v in ipairs(t) do
-    if type(v) ~= 'string' then
-      return false
-    end
-  end
-  return true
-end
-
-local function map_list(t, func)
-  local res = {}
-  for i, v in ipairs(t) do table.insert(res, func(v, i)) end
-  return res
-end
-
-local function zip_lists_to_map(a, b)
-  assert(#a == #b)
-  local res = {}
-  for i = 1, #a do res[a[i]] = b[i] end
-  return res
-end
-
-local base_install_dir = M.path.join(fn.stdpath("cache"), "lspconfig")
-M.base_install_dir = base_install_dir
-function M.npm_installer(config)
-  validate {
-    server_name = {config.server_name, 's'};
-    packages = {config.packages, validate_string_list, 'List of npm package names'};
-    binaries = {config.binaries, validate_string_list, 'List of binary names'};
-    post_install_script = {config.post_install_script, 's', true};
-  }
-
-  local install_dir = M.path.join(base_install_dir, config.server_name)
-  local bin_dir = M.path.join(install_dir, "node_modules", ".bin")
-  local function bin_path(name)
-    return M.path.join(bin_dir, name)
-  end
-
-  local binary_paths = map_list(config.binaries, bin_path)
-
-  local function get_install_info()
-    return {
-      bin_dir = bin_dir;
-      install_dir = install_dir;
-      binaries = zip_lists_to_map(config.binaries, binary_paths);
-      is_installed = M.has_bins(unpack(binary_paths));
-    }
-  end
-
-  local function install()
-    -- TODO(ashkan) need all binaries or just the first?
-    if M.has_bins(unpack(config.binaries)) then
-      return print(config.server_name, "is already installed (not by Nvim)")
-    end
-    if not M.has_bins("sh", "npm", "mkdir") then
-      api.nvim_err_writeln('Installation requires "sh", "npm", "mkdir"')
-      return
-    end
-    if get_install_info().is_installed then
-      return print(config.server_name, "is already installed")
-    end
-    local install_params = {
-      packages = table.concat(config.packages, ' ');
-      install_dir = install_dir;
-      post_install_script = config.post_install_script or '';
-    }
-    local cmd = io.popen("sh", "w")
-    local install_script = ([[
-    set -e
-    mkdir -p "{{install_dir}}"
-    cd "{{install_dir}}"
-    [ ! -f package.json ] && npm init -y
-    npm install {{packages}} --no-package-lock --no-save --production
-    {{post_install_script}}
-    ]]):gsub("{{(%S+)}}", install_params)
-    cmd:write(install_script)
-    cmd:close()
-    if not get_install_info().is_installed then
-      api.nvim_err_writeln('Installation of ' .. config.server_name .. ' failed')
-    end
-  end
-
-  return {
-    install = install;
-    info = get_install_info;
-  }
-end
-
-function M.sh(script, cwd)
-  assert(cwd and M.path.is_dir(cwd), "sh: Invalid directory")
-  -- switching to insert mode makes the buffer scroll as new output is added
-  -- and makes it easy and intuitive to cancel the operation with Ctrl-C
-  api.nvim_command("10new | startinsert")
-  local bufnr = api.nvim_get_current_buf()
-  local function on_exit(job_id, code, event_type)
-    if code == 0 then
-      api.nvim_command("silent bwipeout! "..bufnr)
-    end
-  end
-  fn.termopen({"sh", "-c", script}, {cwd = cwd, on_exit = on_exit})
-end
-
-function M.format_vspackage_url(extension_name)
-  local org, package = unpack(vim.split(extension_name, ".", true))
-  assert(org and package)
-  return string.format("https://marketplace.visualstudio.com/_apis/public/gallery/publishers/%s/vsextensions/%s/latest/vspackage", org, package)
-end
-
 
 function M.utf8_config(config)
   config.capabilities = config.capabilities or lsp.protocol.make_client_capabilities()

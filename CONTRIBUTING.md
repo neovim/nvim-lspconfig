@@ -77,14 +77,9 @@ Example:
 
 ## Auto-install
 
-Configs may optionally provide `install()` and `install_info()` functions which
-are discovered by `:LspInstall` and `:LspInstallInfo`. Function
-`util.npm_installer()` can be used for`npm`-installable language servers. See
-`elmls.lua`, `tsserver.lua`, `bashls.lua` for examples.
-
-Note **we are considering removing the auto-install concept**
+Note **we have removed auto installers from the nvim-lspconfig repo**
 ([#334](https://github.com/neovim/nvim-lspconfig/issues/334)).  Instead, each
-config should _document_ key installation details:
+config _documents_ key installation details:
 
 - URL to download the server
 - URL to documentation explaining how to install the server

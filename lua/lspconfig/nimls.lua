@@ -13,7 +13,7 @@ configs.nimls = {
     package_json = "https://raw.githubusercontent.com/pragmagic/vscode-nim/master/package.json";
     description = [[
 https://github.com/PMunch/nimlsp
-`nimlsp` can be installed via `:LspInstall nimls` or by yourself the `nimble` package manager:
+`nimlsp` can be installed via the `nimble` package manager:
 ```sh
 nimble install nimlsp
 ```
@@ -23,23 +23,3 @@ nimble install nimlsp
     };
   };
 }
-
-configs.nimls.install = function()
-  local script = [[
-  nimble install nimlsp
-  ]]
-
-  util.sh(script, vim.loop.os_homedir())
-end
-
-configs.nimls.install_info = function()
-  local script = [[
-  nimlsp --version
-  ]]
-
-  local status = pcall(vim.fn.system, script)
-
-  return {
-    is_installed = status and vim.v.shell_error == 0;
-  }
-end
