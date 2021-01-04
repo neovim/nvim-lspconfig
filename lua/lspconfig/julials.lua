@@ -1,12 +1,10 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
-local environment_directory = util.path.join(util.base_install_dir, "julials")
-
 configs.julials = {
   default_config = {
     cmd = {
-        "julia", "--project=" .. environment_directory, "--startup-file=no", "--history-file=no", "-e", [[
+        "julia", "--project=~/.julia/packages/LanguageServer/y1ebo/src/LanguageServer.jl", "--startup-file=no", "--history-file=no", "-e", [[
         using Pkg;
         Pkg.instantiate()
         using LanguageServer; using SymbolServer;
@@ -32,12 +30,10 @@ configs.julials = {
 https://github.com/julia-vscode/julia-vscode
 `LanguageServer.jl` can be installed with `julia` and `Pkg`:
 ```sh
-julia --project=]] .. environment_directory .. [[ -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
+julia -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
-If you want to install the LanguageServer manually, you will have to ensure that the Julia environment is stored in this location:
-```vim
-:lua print(require'lspconfig'.util.path.join(require'lspconfig'.util.base_install_dir, "julials"))
-```
+By default, this will place the julia language server at `$HOME/.julia/packages/LanguageServer/y1ebo/src/LanguageServer.jl`.
+A custom directory or environment can be specified with the --project flag, which will also require updating `cmd` in the server setup.
     ]];
   };
 }
