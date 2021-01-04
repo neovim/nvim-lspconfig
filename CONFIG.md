@@ -13,6 +13,7 @@ that config.
 - [codeqlls](#codeqlls)
 - [cssls](#cssls)
 - [dartls](#dartls)
+- [denols](#denols)
 - [diagnosticls](#diagnosticls)
 - [dockerls](#dockerls)
 - [efm](#efm)
@@ -1381,6 +1382,30 @@ require'lspconfig'.dartls.setup{}
       suggestFromUnimportedLibraries = true
     }
     root_dir = root_pattern("pubspec.yaml")
+```
+
+## denols
+
+https://github.com/denoland/deno
+
+Deno's built-in language server
+```
+
+
+```lua
+require'lspconfig'.denols.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "deno", "lsp" }
+    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+    init_options = {
+      enable = true,
+      lint = false,
+      unstable = false
+    }
+    root_dir = root_pattern("package.json", "tsconfig.json", ".git")
 ```
 
 ## diagnosticls
