@@ -16,31 +16,37 @@ end
 local function file_status_update(_, _, message, client_id)
   local client = vim.lsp.get_client_by_id(client_id)
   if not client then
-    vim.api.nvim_err_writeln("LSP[" .. client_id .. "] client has shut down after sending the message")
+    vim.api.nvim_err_writeln("LSP[id=" .. client_id .. "] client has shut down after sending the message")
     vim.api.nvim_command("redraw")
   end
   client.messages.status = { uri = message.uri, content = message.state }
-  vim.api.nvim_command('doautocmd <nomodeline> User LspProgressUpdate')
+  vim.api.nvim_command('doautocmd <nomodeline> User LspStatusUpdate')
 end
 
 local root_pattern = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")
 
-local default_capabilities = vim.tbl_deep_extend('keep', require'vim.lsp.protocol'.make_client_capabilities(), {
+local default_capabilities = vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(), {
   textDocument = {
     completion = {
       editsNearCursor = true
     }
-  }
+  },
+  offsetEncoding = {"utf-8", "utf-16"}
 })
 
 configs.clangd = {
-  default_config = util.utf8_config {
+  default_config = {
     cmd = {"clangd", "--background-index"};
     filetypes = {"c", "cpp", "objc", "objcpp"};
     root_dir = function(fname)
       local filename = util.path.is_absolute(fname) and fname
         or util.path.join(vim.loop.cwd(), fname)
       return root_pattern(filename) or util.path.dirname(filename)
+    end;
+    on_init = function(client, result)
+      if result.offsetEncoding then
+        client.offset_encoding = result.offsetEncoding
+      end
     end;
     capabilities = default_capabilities;
     handlers = {
@@ -72,6 +78,7 @@ For details on how to automatically generate one using CMake look [here](https:/
       root_dir = [[root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname]];
       on_init = [[function to handle changing offsetEncoding]];
       capabilities = [[default capabilities, with offsetEncoding utf-8]];
+      handlers = [[handler for textDocument/clangd.fileStatus extension]];
       init_options = [[{ clangdFileStatus = true }]];
     };
   };
