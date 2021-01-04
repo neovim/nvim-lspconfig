@@ -27,8 +27,9 @@ configs[server_name] = {
       },
       suggest = {fromVimruntime = true, fromRuntimepath = true}
     },
-    docs = {
-      description = [[
+  },
+  docs = {
+    description = [[
 https://github.com/iamcco/vim-language-server
 
 You can install vim-language-server via npm:
@@ -36,7 +37,6 @@ You can install vim-language-server via npm:
 npm install -g vim-language-server
 ```
 ]]
-    }
   }
 }
 

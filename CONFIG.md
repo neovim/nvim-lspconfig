@@ -5160,6 +5160,13 @@ require'lspconfig'.tsserver.setup{}
 
 ## vimls
 
+https://github.com/iamcco/vim-language-server
+
+You can install vim-language-server via npm:
+```sh
+npm install -g vim-language-server
+```
+
 
 ```lua
 require'lspconfig'.vimls.setup{}
@@ -5168,9 +5175,6 @@ require'lspconfig'.vimls.setup{}
   
   Default Values:
     cmd = { "vim-language-server", "--stdio" }
-    docs = {
-      description = "https://github.com/iamcco/vim-language-server\n\nYou can install vim-language-server via npm:\n```sh\nnpm install -g vim-language-server\n```\n"
-    }
     filetypes = { "vim" }
     init_options = {
       diagnostic = {
