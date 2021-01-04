@@ -141,6 +141,25 @@ ccls relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCom
 as compile_commands.json or, for simpler projects, a compile_flags.txt.
 For details on how to automatically generate one using CMake look [here](https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html).
 
+Customization options are passed to ccls at initialization time via init_options, a list of available options can be found [here](https://github.com/MaskRay/ccls/wiki/Customization#initialization-options). For example:
+
+```lua
+local lspconfig = require'lspconfig'
+lspconfig.ccls.setup {
+  init_options = {
+	  compilationDatabaseDirectory = "build";
+    index = {
+      threads = 0;
+    };
+    clang = {
+      excludeArgs = { "-frounding-math"} ;
+    };
+  }
+}
+
+```
+
+
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
