@@ -2175,12 +2175,10 @@ require'lspconfig'.jsonls.setup{}
 https://github.com/julia-vscode/julia-vscode
 `LanguageServer.jl` can be installed with `julia` and `Pkg`:
 ```sh
-julia --project=julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
+julia -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
-If you want to install the LanguageServer manually, you will have to ensure that the Julia environment is stored in this location:
-```vim
-:lua print(require'lspconfig'.util.path.join(require'lspconfig'.util.base_install_dir, "julials"))
-```
+By default, this will place the julia language server at `$HOME/.julia/packages/LanguageServer/y1ebo/src/LanguageServer.jl`.
+A custom directory or environment can be specified with the --project flag, which will also require updating `cmd` in the server setup.
     
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
@@ -2411,7 +2409,7 @@ require'lspconfig'.julials.setup{}
   Commands:
   
   Default Values:
-    cmd = { "julia", "--project=julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
+    cmd = { "julia", "--project=~/.julia/packages/LanguageServer/y1ebo/src/LanguageServer.jl", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
     filetypes = { "julia" }
     root_dir = <function 1>
 ```
