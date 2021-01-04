@@ -1012,17 +1012,17 @@ This server accepts configuration via the `settings` key.
 
   Default: `"kotlin"`
   
-  The programming language to use for Android apps when creating new projects using the \'Flutter\: New Project\' command\.
+  The programming language to use for Android apps when creating new projects using the \'Flutter\: New Application Project\' command\.
 
 - **`dart.flutterCreateIOSLanguage`**: `enum { "objc", "swift" }`
 
   Default: `"swift"`
   
-  The programming language to use for iOS apps when creating new projects using the \'Flutter\: New Project\' command\.
+  The programming language to use for iOS apps when creating new projects using the \'Flutter\: New Application Project\' command\.
 
 - **`dart.flutterCreateOffline`**: `boolean`
 
-  Whether to use offline mode when creating new projects with the \'Flutter\: New Project\' command\.
+  Whether to use offline mode when creating new projects with the \'Flutter\: New Application Project\' command\.
 
 - **`dart.flutterCreateOrganization`**: `null|string`
 
@@ -4425,7 +4425,7 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`rust-analyzer.serverPath`**: `null|string`
+- **`rust-analyzer.server.path`**: `null|string`
 
   Default: `vim.NIL`
   
@@ -4734,7 +4734,7 @@ end
 
 -- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
 local sumneko_root_path = vim.fn.stdpath('cache')..'/lspconfig/sumneko_lua/lua-language-server'
-local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-serve
+local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server
 
 require'lspconfig'.sumneko_lua.setup {
   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
