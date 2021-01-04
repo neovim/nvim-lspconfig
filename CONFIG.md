@@ -1031,17 +1031,17 @@ This server accepts configuration via the `settings` key.
 
   Default: `"kotlin"`
   
-  The programming language to use for Android apps when creating new projects using the \'Flutter\: New Project\' command\.
+  The programming language to use for Android apps when creating new projects using the \'Flutter\: New Application Project\' command\.
 
 - **`dart.flutterCreateIOSLanguage`**: `enum { "objc", "swift" }`
 
   Default: `"swift"`
   
-  The programming language to use for iOS apps when creating new projects using the \'Flutter\: New Project\' command\.
+  The programming language to use for iOS apps when creating new projects using the \'Flutter\: New Application Project\' command\.
 
 - **`dart.flutterCreateOffline`**: `boolean`
 
-  Whether to use offline mode when creating new projects with the \'Flutter\: New Project\' command\.
+  Whether to use offline mode when creating new projects with the \'Flutter\: New Application Project\' command\.
 
 - **`dart.flutterCreateOrganization`**: `null|string`
 
@@ -4444,7 +4444,7 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`rust-analyzer.serverPath`**: `null|string`
+- **`rust-analyzer.server.path`**: `null|string`
 
   Default: `vim.NIL`
   
