@@ -75,6 +75,8 @@ as compile_commands.json or, for simpler projects, a compile_flags.txt.
 For details on how to automatically generate one using CMake look [here](https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html).
 ]];
     default_config = {
+      cmd = [[{ "clangd", "--background-index" }]];
+      file_types = [[{ "c", "cpp", "obj", "objcpp" }]];
       root_dir = [[root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname]];
       on_init = [[function to handle changing offsetEncoding]];
       capabilities = [[default capabilities, with offsetEncoding utf-8]];
