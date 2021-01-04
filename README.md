@@ -226,6 +226,25 @@ lspconfig.SERVER.setup{config}
     as an opportunity to further modify the new_config or use it before it is
     sent to |vim.lsp.start_client()|.
 ```
+## Custom LSP install function
+You can use the build in terminal together with a custom lua file to create your own LSP installer.
+```sh 
+mkdir ~/.config/nvim/lua
+touch ~/.config/nvim/lua/install_lsp.lua
+```
+The content of install_lsp.lua could be (see [CONFIG.md](CONFIG.md)):
+```lua
+os.execute("npm install -g vscode-html-languageserver-bin")
+os.execute("npm install -g vscode-css-languageserver-bin")
+os.execute("npm install -g typescript typescript-language-server")
+os.execute("npm install -g vscode-json-languageserver")
+os.execute("npm install -g vim-language-server")
+```
+
+Run the command from the build in terminal: 
+```vim
+command LSPInstall :vsplit term://sudo lua ~/.config/nvim/lua/install_lsp.lua<CR>i
+```
 
 # Individual server documentation
 
