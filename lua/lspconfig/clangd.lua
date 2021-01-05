@@ -19,7 +19,7 @@ local function file_status_update(_, _, message, client_id)
     vim.api.nvim_err_writeln("LSP[id=" .. client_id .. "] client has shut down after sending the message")
     vim.api.nvim_command("redraw")
   end
-  client.messages.status = { uri = message.uri, content = message.state }
+  client.messages.status[message.uri] = { content = message.state }
   vim.api.nvim_command('doautocmd <nomodeline> User LspStatusUpdate')
 end
 
