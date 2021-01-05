@@ -1389,8 +1389,6 @@ require'lspconfig'.dartls.setup{}
 https://github.com/denoland/deno
 
 Deno's built-in language server
-```
-
 
 ```lua
 require'lspconfig'.denols.setup{}
