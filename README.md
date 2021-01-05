@@ -180,8 +180,8 @@ lspconfig.SERVER.setup{config}
 
     See |lspconfig.util.search_ancestors()| and the functions which use it:
     - |lspconfig.util.root_pattern(patterns...)| finds an ancestor which
-    - contains one of the files in `patterns...`. This is equivalent
-      to coc.nvim's "rootPatterns"
+    - contains one of the files in `patterns...`. Patterns can take the form of a specific file, such as ".git", or a glob.  See `:help glob` for 
+    - allowed patterns. This is equivalent to coc.nvim's "rootPatterns"
     - Related utilities for common tools:
       - |lspconfig.util.find_git_root()|
       - |lspconfig.util.find_node_modules_root()|
