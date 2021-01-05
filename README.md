@@ -179,9 +179,12 @@ lspconfig.SERVER.setup{config}
     If nil is returned, the buffer is skipped.
 
     See |lspconfig.util.search_ancestors()| and the functions which use it:
-    - |lspconfig.util.root_pattern(patterns...)| finds an ancestor which
-    - contains one of the files in `patterns...`. This is equivalent
-      to coc.nvim's "rootPatterns"
+    - |lspconfig.util.root_pattern(pattern1, pattern2...)| is a variadic function which
+      takes string patterns as arguments, and finds an ancestor 
+      which contains one of the files matching the pattern. 
+      Each pattern can be a specific filename, such as ".git", or a glob.  
+      See `:help glob` for allowed patterns.  This is equivalent to
+      coc.nvim's "rootPatterns"
     - Related utilities for common tools:
       - |lspconfig.util.find_git_root()|
       - |lspconfig.util.find_node_modules_root()|
