@@ -14,6 +14,7 @@ that config.
 - [cssls](#cssls)
 - [dartls](#dartls)
 - [denols](#denols)
+- [dhall_lsp_server](#dhall_lsp_server)
 - [diagnosticls](#diagnosticls)
 - [dockerls](#dockerls)
 - [efm](#efm)
@@ -1406,6 +1407,26 @@ require'lspconfig'.denols.setup{}
       unstable = false
     }
     root_dir = root_pattern("package.json", "tsconfig.json", ".git")
+```
+
+## dhall_lsp_server
+
+
+```lua
+require'lspconfig'.dhall_lsp_server.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "dhall-lsp-server" }
+    docs = {
+      default_config = {
+        root_dir = 'root_pattern(".git", vim.fn.getcwd())'
+      },
+      description = "https://github.com/dhall-lang/dhall-haskell/tree/master/dhall-lsp-server\n\nlanguage server for dhall\n\n`dhall-lsp-server` can be installed via cabal:\n```sh\ncabal install dhall-lsp-server\n```\nprebuilt binaries can be found [here](https://github.com/dhall-lang/dhall-haskell/releases).\n"
+    }
+    filetypes = { "dhall" }
+    root_dir = <function 1>
 ```
 
 ## diagnosticls
