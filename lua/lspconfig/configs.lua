@@ -35,23 +35,6 @@ function configs.__newindex(t, config_name, config_def)
   -- which is why this is a function, so that it can refer to the settings
   -- object on the server.
   local function add_handlers(config)
-    assert(not config.callbacks, "lsp.callbacks has been obsoleted. See here for more: https://github.com/neovim/neovim/pull/12655")
-    config.handlers["window/logMessage"] = function(err, method, params, client_id)
-      if params and params.type <= config.log_level then
-        -- TODO(ashkan) remove this after things have settled.
-        assert(lsp.handlers["window/logMessage"], "Handler for window/logMessage notification is not defined")
-        lsp.handlers["window/logMessage"](err, method, params, client_id)
-      end
-    end
-
-    config.handlers["window/showMessage"] = function(err, method, params, client_id)
-      if params and params.type <= config.message_level then
-        -- TODO(ashkan) remove this after things have settled.
-        assert(lsp.handlers["window/showMessage"], "Handler for window/showMessage notification is not defined")
-        lsp.handlers["window/showMessage"](err, method, params, client_id)
-      end
-    end
-
     -- pyright and jdtls ignore dynamicRegistration settings and sent client/registerCapability handler which are unhandled
     config.handlers['client/registerCapability'] = function(_, _, _, _)
       log.warn(string.format( [[
@@ -64,25 +47,6 @@ function configs.__newindex(t, config_name, config_def)
       }
     end
 
-    config.handlers["workspace/configuration"] = function(err, method, params, client_id)
-      if err then error(tostring(err)) end
-      if not params.items then
-        return {}
-      end
-
-      local result = {}
-      for _, item in ipairs(params.items) do
-        if item.section then
-          local value = util.lookup_section(config.settings, item.section) or vim.NIL
-          -- For empty sections with no explicit '' key, return settings as is
-          if value == vim.NIL and item.section == '' then
-            value = config.settings or vim.NIL
-          end
-          table.insert(result, value)
-        end
-      end
-      return result
-    end
   end
 
   function M.setup(config)
