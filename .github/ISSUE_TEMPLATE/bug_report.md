@@ -32,6 +32,7 @@ labels: bug
 <summary>Checkhealth result</summary>
 <!-- Run `:checkhealth lspconfig` and paste the result here-->
 </details>
+
 ### LSP log
 <!-- If not using the minimal_init.lua please add vim.lsp.set_log_level("debug") to your lua block 
      in init.vim and paste a link to your log file, located at $HOME/.local/share/nvim/lsp.log -->
