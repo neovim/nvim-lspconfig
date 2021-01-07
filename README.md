@@ -18,7 +18,7 @@ that are installed on your system.
   :Plug 'neovim/nvim-lspconfig'
   ```
 ## Quickstart
-1. Install a language server, e.g. [pyright](CONFIG.md#pyright) via npm -i -g pyright" `npm i -g pyright`
+1. Install a language server, e.g. [pyright](CONFIG.md#pyright) via `npm i -g pyright`
 2. Install `nvim-lspconfig` via your plugin manager
 3. Add the language server setup to your init.vim. The server name must match those found in the table of contents in [CONFIG.md](CONFIG.md)
 ```vim
