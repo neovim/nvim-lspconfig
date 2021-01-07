@@ -10,14 +10,11 @@ labels: bug
 
 - `nvim --version`:
 - nvim-lsp version(commit hash):
-- `:checkhealth` result
-- What language server(If the problem is related to a specific language server):
+- What language server (If the problem is related to a specific language server):
 - Can you reproduce this behavior on other language server clients (vscode, languageclient-neovim, coc.nvim, etc.):
-- Can you reproduce this behavior on other language servers offer by the nvim-lspconfig repo? (pyls -> pyright):
-- Is this problem isolated to this particular language server:
+- Can you reproduce this behavior on other language servers offered in the nvim-lspconfig repo? (pyls -> pyright):
+- Is the problem isolated to a particular language server:
 - Operating system/version:
-- Terminal name/version:
-- `$TERM`:
 
 ### How to reproduce the problem from neovim startup
 
@@ -25,5 +22,20 @@ labels: bug
 
 ### Expected behaviour
 
+### Minimal init.vim or init.lua and code sample
+<!-- You can download a minimal_init.lua from here 
+      curl -fLO https://raw.githubusercontent.com/neovim/nvim-lspconfig/master/test/minimal_init.lua 
+      After editing to include your language server, run neovim with nvim -u minimal_init.lua -->
+
+### Health check
+<details>
+<summary>Checkhealth result</summary>
+<!-- Run `:checkhealth lspconfig` and paste the result here-->
+</details>
 ### LSP log
-<!-- Please add vim.lsp.set_log_level("debug") to your lua block in init.vim and paste a link to your log file, located at $HOME/.local/share/nvim/lsp.log -->
+<!-- If not using the minimal_init.lua please add vim.lsp.set_log_level("debug") to your lua block 
+     in init.vim and paste a link to your log file, located at $HOME/.local/share/nvim/lsp.log -->
+<details>
+<summary>Log file</summary>
+<!-- past you log between here -->
+</details>
