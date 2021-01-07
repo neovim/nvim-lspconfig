@@ -1820,14 +1820,49 @@ require'lspconfig'.jsonls.setup{}
 ## julials
 
 https://github.com/julia-vscode/julia-vscode
+
 `LanguageServer.jl` can be installed with `julia` and `Pkg`:
 ```sh
-julia --project=julials -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
+julia -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
-If you want to install the LanguageServer manually, you will have to ensure that the Julia environment is stored in this location:
-```vim
-:lua print(require'lspconfig'.util.path.join(require'lspconfig'.util.base_install_dir, "julials"))
+The default config lazily evaluates the location of the julia language server from the your global julia packages.
+This adds a small overhead on first opening of a julia file. To avoid this overhead, replace server_path in on_new_config with
+a hard-coded path to the server.
+
+```lua
+require'lspconfig'.julials.setup{
+    on_new_config = function(new_config,new_root_dir)
+      server_path = "/path/to/directory/containing/LanguageServer.jl/src"
+      cmd = {
+        "julia",
+        "--project="..server_path,
+        "--startup-file=no",
+        "--history-file=no",
+        "-e", [[
+          using Pkg;
+          Pkg.instantiate()
+          using LanguageServer; using SymbolServer;
+          depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
+          project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))
+          # Make sure that we only load packages from this environment specifically.
+          @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path
+          server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);
+          server.runlinter = true;
+          run(server);
+        \]\]
+    };
+      new_config.cmd = cmd
+    end
+}
 ```
+You can find the path to the globally installed LanguageServer.jl package with the following command:
+
+```bash
+julia -e 'print(Base.find_package("LanguageServer"))'
+```
+
+Note: the directory passed to `--project=...` should terminate with src, not LanguageServer.jl.
+
     
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
@@ -1871,6 +1906,12 @@ This server accepts configuration via the `settings` key.
 - **`julia.execution.codeInREPL`**: `boolean`
 
   Print executed code in REPL and append it to the REPL history\.
+
+- **`julia.execution.inlineResults.colors`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
 
 - **`julia.execution.resultType`**: `enum { "REPL", "inline", "both" }`
 
@@ -2058,8 +2099,8 @@ require'lspconfig'.julials.setup{}
   Commands:
   
   Default Values:
-    cmd = { "julia", "--project=julials", "--startup-file=no", "--history-file=no", "-e", '        using Pkg;\n        Pkg.instantiate()\n        using LanguageServer; using SymbolServer;\n        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n        project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n        # Make sure that we only load packages from this environment specifically.\n        empty!(LOAD_PATH)\n        push!(LOAD_PATH, "@")\n        @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n        server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n        server.runlinter = true;\n        run(server);\n        ' }
     filetypes = { "julia" }
+    on_new_config = <function 1>
     root_dir = <function 1>
 ```
 
@@ -4022,6 +4063,12 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.procMacro.enable`**: `boolean`
 
+  null
+
+- **`rust-analyzer.procMacro.server`**: `null|string`
+
+  Default: `vim.NIL`
+  
   null
 
 - **`rust-analyzer.runnableEnv`**
