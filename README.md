@@ -1,76 +1,52 @@
 # nvim-lspconfig
 
-Collection of common configurations for the [Nvim LSP client](https://neovim.io/doc/user/lsp.html).
+Collection of common configurations for Neovim's built-in [language server client](https://neovim.io/doc/user/lsp.html).
+The configurations are supported on a best-effort basis, and rely on contributions 
+from regular users to stay up-to-date.
 
-## Best-effort, unsupported
-
-The configurations here are strictly **best effort and unsupported**.
-
-This repo is (1) a place for Nvim LSP users to collaboratively provide starting
-examples for the many LSP backends out there, and (2) a reference for the
-current best practice (or most popular) regarding choice of server, setup, etc.
-
-## Requires Nvim 0.5 HEAD
-
-While Nvim LSP undergoes development, the configs in this repo assume that you
-are using the latest [Nvim HEAD/nightly build](https://github.com/neovim/neovim/releases/tag/nightly).
-
-Update Nvim and nvim-lspconfig before reporting an issue.
-
-## Contributions
-
-It's up to you to send improvements so that these configs align with current
-best practices for a given language.
-
-1. Read [CONTRIBUTING.md](CONTRIBUTING.md).
-   Ask questions in [Neovim Gitter](https://gitter.im/neovim/neovim).
-2. Choose a language from [the coc.nvim wiki](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
-  [emacs-lsp](https://github.com/emacs-lsp/lsp-mode#supported-languages).
-3. Create a new file at `lua/lspconfig/SERVER_NAME.lua`.
-   - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/)
-     to get started. Most configs are simple. For an extensive example see
-     [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/texlab.lua).
+This repo handles automatically launching, initializing, and configuring language servers
+that are installed on your system.
 
 ## Install
 
-- Requires [Nvim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly) (v0.5 prerelease).
-- nvim-lspconfig is just a plugin. Install it like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
+* Requires [Neovim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly) (v0.5 prerelease). The configs in this repo
+  assume that you are using the latest [Neovim HEAD/nightly build](https://github.com/neovim/neovim/releases/tag/nightly). 
+  Update Neovim and nvim-lspconfig before reporting an issue.
+
+* nvim-lspconfig is just a plugin. Install it like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
   ```
   :Plug 'neovim/nvim-lspconfig'
   ```
-- Call `:packadd nvim-lspconfig` in your vimrc if you installed nvim-lspconfig to `'packpath'` or if you use a package manager such as minpac.
+## Quickstart
+1. Install a language server, e.g. [pyright](CONFIG.md#pyright) via npm -i -g pyright" `npm i -g pyright`
+2. Install `nvim-lspconfig` via your plugin manager
+3. Add the language server setup to your init.vim. The server name must match those found in the table of contents in [CONFIG.md](CONFIG.md)
+```vim
+lua << EOF 
+require'lspconfig'.pyright.setup{}
+EOF 
+```
+4. Open a file that is placed in a directory recognized by the server 
+(see server configuration in [CONFIG.md](CONFIG.md); e.g., for [pyright](CONFIG.md#pyright), this is 
+any directory containing ".git", "setup.py",  "setup.cfg", "pyproject.toml",
+or "requirements.txt")
+5. See [Keybindings and completion](#Keybindings-and-completion) for mapping useful functions and enabling
+omnifunc completion
 
 ## Usage
 
-Each config provides a `setup()` function, to initialize the server with
-reasonable defaults and some server-specific things like commands or different
-diagnostics.
+**All provided examples are in Lua,** see `:help :lua-heredoc` to use Lua from your init.vim,
+or the quickstart above for an example of a lua heredoc.
 
+Each config provides a `setup()` function to initialize the server with reasonable default
+initialization options and settings, as well as some server-specific commands. This is 
+invoked in the following form, where `<server>` corresponds to the language server name
+in [CONFIG.md](CONFIG.md).
+
+`setup()` takes optional arguments <config>, each of which overrides the respective 
+part of the default configuration. The allowed arguments are detailed [below](#setup-function).
 ```lua
-vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
-require'lspconfig'.<config>.setup{name=…, settings = {…}, …}
-```
-
-If you want to add this to your vimrc, you will need to enclose it in a `lua` block.
-
-```vim
-lua <<EOF
-vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
-require'lspconfig'.<config>.setup{name=…, settings = {…}, …}
-EOF
-```
-
-Find the [config](#configurations) for your language, then paste the example
-given there to your `init.vim`. **All examples are given in Lua,** see `:help
-:lua-heredoc` to use Lua from your init.vim.
-
-Some configs may define additional server-specific functions, e.g. the `texlab`
-config provides `lspconfig.texlab.buf_build({bufnr})`.
-
-If you want to see the location of log file, you can run this in neovim:
-
-```
-:lua print(vim.lsp.get_log_path())
+require'lspconfig'.<server>.setup{<config>}
 ```
 
 ### Example: using the defaults
@@ -79,7 +55,6 @@ To use the defaults, just call `setup()` with an empty `config` parameter.
 For the `gopls` config, that would be:
 
 ```lua
-vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
 require'lspconfig'.gopls.setup{}
 ```
 
@@ -95,8 +70,9 @@ lspconfig.gopls.setup{
 }
 ```
 
-The [documentation](#configurations) for each config lists default values and
-additional optional properties.
+The [documentation](CONFIG.md) for each config lists default values and
+additional optional properties. For a more complicated example overriding 
+the `name`, `log_level`, `message_level`, and `settings` of texlab:
 
 ```lua
 local lspconfig = require'lspconfig'
@@ -116,32 +92,28 @@ lspconfig.texlab.setup{
 
 ### Example: custom config
 
-To configure a custom/private server, just require `lspconfig/configs` and do
-the same as we do if we were adding it to the repository itself.
+To configure a custom/private server, just 
 
-1. Define the config: `configs.foo_lsp = { … }`
-2. Call `setup()`: `require'lspconfig'.foo_lsp.setup{}`
+1. load the lspconfig module: `local lspconfig = require('lspconfig')`,
+2. Define the config: `lspconfig.configs.foo_lsp = { … }`
+3. Call `setup()`: `lspconfig.foo_lsp.setup{}`
 
 ```lua
 local lspconfig = require'lspconfig'
-local configs = require'lspconfig/configs'
--- Check if it's already defined for when I reload this file.
-if not lspconfig.foo_lsp then
-  configs.foo_lsp = {
-    default_config = {
-      cmd = {'/home/ashkan/works/3rd/lua-language-server/run.sh'};
-      filetypes = {'lua'};
-      root_dir = function(fname)
-        return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-      end;
-      settings = {};
-    };
-  }
-end
+lspconfig.configs.foo_lsp = {
+  default_config = {
+    cmd = {'/home/ashkan/works/3rd/lua-language-server/run.sh'};
+    filetypes = {'lua'};
+    root_dir = function(fname)
+      return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+    end;
+    settings = {};
+  };
+}
 lspconfig.foo_lsp.setup{}
 ```
 
-### Example: override default config
+### Example: override default config for all servers
 
 If you want to change default configs for all servers, you can override default_config like this.
 
@@ -154,9 +126,75 @@ lspconfig.util.default_config = vim.tbl_extend(
 )
 ```
 
+## Individual server settings and initialization options
+
+See [CONFIG.md](CONFIG.md) for documentation and configuration of individual language servers.
+This document contains installation instructions for each language server, and is 
+auto-generated from the documentation in the lua source. Do not submit PRs 
+modifying CONFIG.md directly; CONFIG.md will be overwritten by docgen
+
+**You do not need to copy settings or init_options from this configuration into your config**
+
+## Keybindings and completion
+
+The following maps most of the standard functions to keybindings, and maps omnicomplete to use
+the lsp.omnifunc. See `:help lsp for more details`
+```vim
+lua << EOF
+local nvim_lsp = require('lspconfig')
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+
+  -- Set some keybinds conditional on server capabilities
+  if client.resolved_capabilities.document_formatting then
+    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  elseif client.resolved_capabilities.document_range_formatting then
+    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  end
+  
+  -- Set autocommands conditional on server_capabilities
+  if client.resolved_capabilities.document_highlight then
+    require('lspconfig').util.nvim_multiline_command [[
+      :hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
+      :hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
+      :hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+      augroup lsp_document_highlight
+        autocmd!
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+    ]]
+end
+
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup { on_attach = on_attach }
+end
+EOF
+```
 ## setup() function
 
-The `setup()` interface:
+Only the following arguments can be passed to the setup function:
 
 ```
 lspconfig.SERVER.setup{config}
@@ -231,6 +269,40 @@ lspconfig.SERVER.setup{config}
     `new_config.cmd = cmd` is present within the function body.
 ```
 
-# Individual server documentation
+## Debugging
+The two most common points of failure are 
 
-See [CONFIG.md](CONFIG.md) for documentation and configuration of individual language servers.
+1. The language server is not installed. You should be able to run the `cmd` 
+defined in each lua module from the command line.
+
+2. Not triggering root detection. The language server will only start if it
+is opened in a directory, or child directory, containing a file which signals
+the *root* of the project. Most of the time, this is a `.git` folder, but each server
+defines the root config in the lua file.
+
+Before reporting a bug, check your logs. Add the following to your init.vim
+to enable logging 
+
+```vim
+lua << EOF
+vim.lsp.set_log_level("debug")
+EOF
+```
+Attempt to run the language server, and open the log with:
+```
+:lua vim.cmd('e'..vim.lsp.get_log_path())
+```
+Most of the time, the reason for failure is present in the logs.
+
+## Contributions
+If you are missing a language server on the list in [CONFIG.md](CONFIG.md), contributing
+a new configuration for it would be appreciated. You can follow these steps:
+
+1. Read [CONTRIBUTING.md](CONTRIBUTING.md).
+2. Choose a language from [the coc.nvim wiki](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
+  [emacs-lsp](https://github.com/emacs-lsp/lsp-mode#supported-languages).
+3. Create a new file at `lua/lspconfig/SERVER_NAME.lua`.
+   - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/)
+     to get started. Most configs are simple. For an extensive example see
+     [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/texlab.lua).
+4. Ask questions in [Neovim Gitter](https://gitter.im/neovim/neovim).
