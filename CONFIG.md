@@ -3752,7 +3752,7 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`rust-analyzer.assist.importMergeBehaviour`**: `enum { "none", "full", "last" }`
+- **`rust-analyzer.assist.importMergeBehavior`**: `enum { "none", "full", "last" }`
 
   Default: `"full"`
   
