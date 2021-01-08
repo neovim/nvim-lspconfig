@@ -8,6 +8,11 @@ end
 configs.solargraph = {
   default_config = {
     cmd = {bin_name, "stdio"};
+    settings = {
+      solargraph = {
+        diagnostics = true;
+      };
+    };
     filetypes = {"ruby"};
     root_dir = util.root_pattern("Gemfile", ".git");
   };
@@ -21,7 +26,7 @@ solargraph, a language server for Ruby
 You can install solargraph via gem install.
 
 ```sh
-gem install solargraph
+gem install --user-install solargraph
 ```
     ]];
     default_config = {
