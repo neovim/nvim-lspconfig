@@ -138,7 +138,7 @@ modifying CONFIG.md directly; CONFIG.md will be overwritten by docgen
 ## Keybindings and completion
 
 The following maps most of the standard functions to keybindings, and maps omnicomplete to use
-the lsp.omnifunc. See `:help lsp for more details`
+the lsp.omnifunc. See `:help lsp` for more details
 ```vim
 lua << EOF
 local nvim_lsp = require('lspconfig')
