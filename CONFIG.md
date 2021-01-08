@@ -972,7 +972,6 @@ require'lspconfig'.dartls.setup{}
 https://github.com/denoland/deno
 
 Deno's built-in language server
-```
 
 
 ```lua
@@ -1182,6 +1181,10 @@ This server accepts configuration via the `settings` key.
   Default: `""`
   
   The path to your elm\-test executable\. Should be empty by default\, in that case it will assume the name and try to first get it from a local npm installation or a global one\. If you set it manually it will not try to load from the npm folder\.
+
+- **`elmLS.skipInstallPackageConfirmation`**: `boolean`
+
+  Skips confirmation for the Install Package code action
 
 - **`elmLS.trace.server`**: `enum { "off", "messages", "verbose" }`
 
@@ -4735,6 +4738,10 @@ This server accepts configuration via the `settings` key.
   Array items: `{type = "string"}`
   
   Per\-workspace list of module directories for the language server to exclude
+
+- **`terraform-ls.experimentalFeatures`**: `object`
+
+  Experimental \(opt\-in\) terraform\-ls features
 
 - **`terraform-ls.rootModules`**: `array`
 
