@@ -326,16 +326,6 @@ function M.find_package_json_ancestor(startpath)
   end)
 end
 
-function M.utf8_config(config)
-  config.capabilities = config.capabilities or lsp.protocol.make_client_capabilities()
-  config.capabilities.offsetEncoding = {"utf-8", "utf-16"}
-  function config.on_init(client, result)
-    if result.offsetEncoding then
-      client.offset_encoding = result.offsetEncoding
-    end
-  end
-  return config
-end
 
 return M
 -- vim:et ts=2 sw=2
