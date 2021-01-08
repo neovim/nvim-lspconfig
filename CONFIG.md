@@ -3997,7 +3997,7 @@ solargraph, a language server for Ruby
 You can install solargraph via gem install.
 
 ```sh
-gem install solargraph
+gem install --user-install solargraph
 ```
     
 This server accepts configuration via the `settings` key.
@@ -4108,6 +4108,11 @@ require'lspconfig'.solargraph.setup{}
     cmd = { "solargraph", "stdio" }
     filetypes = { "ruby" }
     root_dir = root_pattern("Gemfile", ".git")
+    settings = {
+      solargraph = {
+        diagnostics = true
+      }
+    }
 ```
 
 ## sorbet
