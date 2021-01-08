@@ -1183,6 +1183,10 @@ This server accepts configuration via the `settings` key.
   
   The path to your elm\-test executable\. Should be empty by default\, in that case it will assume the name and try to first get it from a local npm installation or a global one\. If you set it manually it will not try to load from the npm folder\.
 
+- **`elmLS.skipInstallPackageConfirmation`**: `boolean`
+
+  Skips confirmation for the Install Package code action
+
 - **`elmLS.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
@@ -1871,6 +1875,12 @@ This server accepts configuration via the `settings` key.
 - **`julia.execution.codeInREPL`**: `boolean`
 
   Print executed code in REPL and append it to the REPL history\.
+
+- **`julia.execution.inlineResults.colors`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
 
 - **`julia.execution.resultType`**: `enum { "REPL", "inline", "both" }`
 
@@ -3398,6 +3408,20 @@ rls, a language server for Rust
 
 See https://github.com/rust-lang/rls#setup to setup rls itself.
 See https://github.com/rust-lang/rls#configuration for rls-specific settings.
+All settings listed on the rls configuration section of the readme
+must be set under settings.rust as follows:
+
+```lua
+nvim_lsp.rls.setup {
+  settings = {
+    rust = {
+      unstable_features = true,
+      build_on_save = false,
+      all_features = true,
+    },
+  },
+}
+```
 
 If you want to use rls for a particular build, eg nightly, set cmd as follows:
 
@@ -3405,229 +3429,6 @@ If you want to use rls for a particular build, eg nightly, set cmd as follows:
 cmd = {"rustup", "run", "nightly", "rls"}
 ```
     
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`rust-client.autoStartRls`**: `boolean`
-
-  Default: `true`
-  
-  Start RLS automatically when opening a file or project\.
-
-- **`rust-client.channel`**
-
-  Default: `"default"`
-  
-  Rust channel to invoke rustup with\. Ignored if rustup is disabled\. By default\, uses the same channel as your currently open project\.
-
-- **`rust-client.disableRustup`**: `boolean`
-
-  Disable usage of rustup and use rustc\/rls\/rust\-analyzer from PATH\.
-
-- **`rust-client.enableMultiProjectSetup`**: `boolean|null`
-
-  Default: `vim.NIL`
-  
-  Allow multiple projects in the same folder\, along with removing the constraint that the cargo\.toml must be located at the root\. \(Experimental\: might not work for certain setups\)
-
-- **`rust-client.engine`**: `enum { "rls", "rust-analyzer" }`
-
-  Default: `"rls"`
-  
-  The underlying LSP server used to provide IDE support for Rust projects\.
-
-- **`rust-client.logToFile`**: `boolean`
-
-  When set to true\, RLS stderr is logged to a file at workspace root level\. Requires reloading extension after change\.
-
-- **`rust-client.revealOutputChannelOn`**: `enum { "info", "warn", "error", "never" }`
-
-  Default: `"never"`
-  
-  Specifies message severity on which the output channel will be revealed\. Requires reloading extension after change\.
-
-- **`rust-client.rlsPath`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  Override RLS path\. Only required for RLS developers\. If you set this and use rustup\, you should also set \`rust\-client\.channel\` to ensure your RLS sees the right libraries\. If you don\'t use rustup\, make sure to set \`rust\-client\.disableRustup\`\.
-
-- **`rust-client.rustupPath`**: `string`
-
-  Default: `"rustup"`
-  
-  Path to rustup executable\. Ignored if rustup is disabled\.
-
-- **`rust-client.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VS Code and the Rust language server\.
-
-- **`rust-client.updateOnStartup`**: `boolean`
-
-  Update the Rust toolchain and its required components whenever the extension starts up\.
-
-- **`rust.all_features`**: `boolean`
-
-  Enable all Cargo features\.
-
-- **`rust.all_targets`**: `boolean`
-
-  Default: `true`
-  
-  Checks the project as if you were running cargo check \-\-all\-targets \(I\.e\.\, check all targets and integration tests too\)\.
-
-- **`rust.build_bin`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  Specify to run analysis as if running \`cargo check \-\-bin \<name\>\`\. Use \`null\` to auto\-detect\. \(unstable\)
-
-- **`rust.build_command`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  EXPERIMENTAL \(requires \`unstable\_features\`\)
-  If set\, executes a given program responsible for rebuilding save\-analysis to be loaded by the RLS\. The program given should output a list of resulting \.json files on stdout\. 
-  Implies \`rust\.build\_on\_save\`\: true\.
-
-- **`rust.build_lib`**: `boolean|null`
-
-  Default: `vim.NIL`
-  
-  Specify to run analysis as if running \`cargo check \-\-lib\`\. Use \`null\` to auto\-detect\. \(unstable\)
-
-- **`rust.build_on_save`**: `boolean`
-
-  Only index the project when a file is saved and not on change\.
-
-- **`rust.cfg_test`**: `boolean`
-
-  Build cfg\(test\) code\. \(unstable\)
-
-- **`rust.clear_env_rust_log`**: `boolean`
-
-  Default: `true`
-  
-  Clear the RUST\_LOG environment variable before running rustc or cargo\.
-
-- **`rust.clippy_preference`**: `enum { "on", "opt-in", "off" }`
-
-  Default: `"opt-in"`
-  
-  Controls eagerness of clippy diagnostics when available\. Valid values are \(case\-insensitive\)\:
-   \- \"off\"\: Disable clippy lints\.
-   \- \"on\"\: Display the same diagnostics as command\-line clippy invoked with no arguments \(\`clippy\:\:all\` unless overridden\)\.
-   \- \"opt\-in\"\: Only display the lints explicitly enabled in the code\. Start by adding \`\#\!\[warn\(clippy\:\:all\)\]\` to the root of each crate you want linted\.
-  You need to install clippy via rustup if you haven\'t already\.
-
-- **`rust.crate_blacklist`**: `array|null`
-
-  Default: `{ "cocoa", "gleam", "glium", "idna", "libc", "openssl", "rustc_serialize", "serde", "serde_json", "typenum", "unicode_normalization", "unicode_segmentation", "winapi" }`
-  
-  Overrides the default list of packages for which analysis is skipped\.
-  Available since RLS 1\.38
-
-- **`rust.features`**: `array`
-
-  Default: `{}`
-  
-  A list of Cargo features to enable\.
-
-- **`rust.full_docs`**: `boolean|null`
-
-  Default: `vim.NIL`
-  
-  Instructs cargo to enable full documentation extraction during save\-analysis while building the crate\.
-
-- **`rust.jobs`**: `number|null`
-
-  Default: `vim.NIL`
-  
-  Number of Cargo jobs to be run in parallel\.
-
-- **`rust.no_default_features`**: `boolean`
-
-  Do not enable default Cargo features\.
-
-- **`rust.racer_completion`**: `boolean`
-
-  Default: `true`
-  
-  Enables code completion using racer\.
-
-- **`rust.rust-analyzer`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  Settings passed down to rust\-analyzer server
-
-- **`rust.rust-analyzer.path`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  When specified\, uses the rust\-analyzer binary at a given path
-
-- **`rust.rust-analyzer.releaseTag`**: `string`
-
-  Default: `"nightly"`
-  
-  Which binary release to download and use
-
-- **`rust.rustflags`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  Flags added to RUSTFLAGS\.
-
-- **`rust.rustfmt_path`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  When specified\, RLS will use the Rustfmt pointed at the path instead of the bundled one
-
-- **`rust.show_hover_context`**: `boolean`
-
-  Default: `true`
-  
-  Show additional context in hover tooltips when available\. This is often the type local variable declaration\.
-
-- **`rust.show_warnings`**: `boolean`
-
-  Default: `true`
-  
-  Show warnings\.
-
-- **`rust.sysroot`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  \-\-sysroot
-
-- **`rust.target`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  \-\-target
-
-- **`rust.target_dir`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  When specified\, it places the generated analysis files at the specified target directory\. By default it is placed target\/rls directory\.
-
-- **`rust.unstable_features`**: `boolean`
-
-  Enable unstable features\.
-
-- **`rust.wait_to_build`**: `number|null`
-
-  Default: `vim.NIL`
-  
-  Time in milliseconds between receiving a change notification and starting build\.
-
-</details>
 
 ```lua
 require'lspconfig'.rls.setup{}
@@ -3698,7 +3499,7 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`rust-analyzer.assist.importMergeBehaviour`**: `enum { "none", "full", "last" }`
+- **`rust-analyzer.assist.importMergeBehavior`**: `enum { "none", "full", "last" }`
 
   Default: `"full"`
   
@@ -4022,6 +3823,12 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.procMacro.enable`**: `boolean`
 
+  null
+
+- **`rust-analyzer.procMacro.server`**: `null|string`
+
+  Default: `vim.NIL`
+  
   null
 
 - **`rust-analyzer.runnableEnv`**
@@ -4675,6 +4482,10 @@ This server accepts configuration via the `settings` key.
   Array items: `{type = "string"}`
   
   Per\-workspace list of module directories for the language server to exclude
+
+- **`terraform-ls.experimentalFeatures`**: `object`
+
+  Experimental \(opt\-in\) terraform\-ls features
 
 - **`terraform-ls.rootModules`**: `array`
 
