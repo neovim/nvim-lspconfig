@@ -19,7 +19,6 @@ configs[server_name] = {
 https://github.com/denoland/deno
 
 Deno's built-in language server
-```
 ]];
     default_config = {
       root_dir = [[root_pattern("package.json", "tsconfig.json", ".git")]];
