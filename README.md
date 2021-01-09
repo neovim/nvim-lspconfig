@@ -260,10 +260,8 @@ lspconfig.SERVER.setup{config}
     Example: `settings = { keyName = { subKey = 1 } }`
 
   {on_attach}
-    `function(client)` executed with the current buffer as the one the {client}
-    is being attached-to. This is different from
-    |vim.lsp.start_client()|'s on_attach parameter, which passes the {bufnr} as
-    the second parameter instead. Useful for doing buffer-local setup.
+    `function(client, bufnr)` Runs the on_attach function from the client's 
+    config if it was defined. Useful for doing buffer-local setup.
 
   {on_new_config}
     `function(new_config, new_root_dir)` will be executed after a new configuration has been
