@@ -5,7 +5,11 @@ configs.rust_analyzer = {
   default_config = {
     cmd = {"rust-analyzer"};
     filetypes = {"rust"};
-    root_dir = util.root_pattern("Cargo.toml", "rust-project.json");
+    root_dir = function(fname)
+      return util.find_git_ancestor(fname) or
+      util.root_pattern("rust-project.json")(fname) or
+      util.root_pattern("Cargo.toml")(fname)
+    end;
     settings = {
       ["rust-analyzer"] = {}
     };
