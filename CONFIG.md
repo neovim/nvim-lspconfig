@@ -1711,11 +1711,23 @@ require'lspconfig'.intelephense.setup{}
 
 ## jdtls
 
+
 https://projects.eclipse.org/projects/eclipse.jdt.ls
 
 Language server for Java.
 
 See project page for installation instructions.
+
+Due to the nature of java, the settings for eclipse jdtls cannot be automatically
+inferred. Please set the following environmental variables to match your installation. You can set these locally for your project with the help of [direnv](https://github.com/direnv/direnv). Note version numbers will change depending on your project's version of java, your version of eclipse, and in the case of JDTLS_CONFIG, your OS.
+
+```bash
+export JAR=/path/to/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_1.6.0.v20200915-1508.jar
+export GRADLE_HOME=$HOME/gradle
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.9.11-9.fc33.x86_64/
+export JDLTS_CONFIG=/path/to/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux
+export WORKSPACE=$HOME/workspace
+```
     
 
 ```lua
@@ -1724,6 +1736,11 @@ require'lspconfig'.jdtls.setup{}
   Commands:
   
   Default Values:
+    cmd = { "/usr/lib/jvm/adoptopenjdk-8-hotspot-amd64/bin/java", "-Declipse.application=org.eclipse.jdt.ls.core.id1", "-Dosgi.bundles.defaultStartLevel=4", "-Declipse.product=org.eclipse.jdt.ls.core.product", "-Dlog.protocol=true", "-Dlog.level=ALL", "-Xms1g", "-Xmx2G", "-jar", "vim.NIL", "-configuration", "vim.NIL", "-data", "vim.NIL", "--add-modules=ALL-SYSTEM", "--add-opens java.base/java.util=ALL-UNNAMED", "--add-opens java.base/java.lang=ALL-UNNAMED" }
+    cmd_env = {
+      GRADLE_HOME = "/usr/share/gradle",
+      JAR = vim.NIL
+    }
     filetypes = { "java" }
     handlers = {
       ["textDocument/codeAction"] = <function 1>
