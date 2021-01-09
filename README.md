@@ -135,6 +135,24 @@ modifying CONFIG.md directly; CONFIG.md will be overwritten by docgen
 
 **You do not need to copy settings or init_options from this configuration into your config**
 
+## Project local settings
+
+Local settings can be configured by enabling the exrc option with `set exrc` in your init.vim
+and creating a `.nvimrc` file in the project's root directory. If neovim is launched
+in the same directory as `.nvimrc`, it will evaluate your user configuration first,
+followed by the local configuration. An example `.nvimrc` might be as follows
+
+```
+lua << EOF
+  local nvim_lsp = require('lspconfig')
+  local servers = {'rust_analyzer'}
+  nvim_lsp.rust_analyzer.setup { root_dir= function() vim.fn.getcwd() end; }
+EOF
+```
+
+Be aware, after enabling exrc, neovim will execute any `.nvimrc` or `.exrc` owned by 
+your user, including git clones.
+
 ## Keybindings and completion
 
 The following maps most of the standard functions to keybindings, and maps omnicomplete to use
