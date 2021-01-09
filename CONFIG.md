@@ -1183,6 +1183,10 @@ This server accepts configuration via the `settings` key.
   
   The path to your elm\-test executable\. Should be empty by default\, in that case it will assume the name and try to first get it from a local npm installation or a global one\. If you set it manually it will not try to load from the npm folder\.
 
+- **`elmLS.skipInstallPackageConfirmation`**: `boolean`
+
+  Skips confirmation for the Install Package code action
+
 - **`elmLS.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
@@ -1871,6 +1875,12 @@ This server accepts configuration via the `settings` key.
 - **`julia.execution.codeInREPL`**: `boolean`
 
   Print executed code in REPL and append it to the REPL history\.
+
+- **`julia.execution.inlineResults.colors`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
 
 - **`julia.execution.resultType`**: `enum { "REPL", "inline", "both" }`
 
@@ -3698,7 +3708,7 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`rust-analyzer.assist.importMergeBehaviour`**: `enum { "none", "full", "last" }`
+- **`rust-analyzer.assist.importMergeBehavior`**: `enum { "none", "full", "last" }`
 
   Default: `"full"`
   
@@ -4022,6 +4032,12 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.procMacro.enable`**: `boolean`
 
+  null
+
+- **`rust-analyzer.procMacro.server`**: `null|string`
+
+  Default: `vim.NIL`
+  
   null
 
 - **`rust-analyzer.runnableEnv`**
@@ -4675,6 +4691,10 @@ This server accepts configuration via the `settings` key.
   Array items: `{type = "string"}`
   
   Per\-workspace list of module directories for the language server to exclude
+
+- **`terraform-ls.experimentalFeatures`**: `object`
+
+  Experimental \(opt\-in\) terraform\-ls features
 
 - **`terraform-ls.rootModules`**: `array`
 
