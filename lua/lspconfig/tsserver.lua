@@ -11,7 +11,10 @@ configs[server_name] = {
   default_config = {
     cmd = {bin_name, "--stdio"};
     filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"};
-    root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git");
+    root_dir = function(fname)
+      return util.root_pattern("tsconfig.json")(fname) or 
+      util.root_pattern("package.json", "jsconfig.json", ".git")(fname);
+    end
   };
   docs = {
     description = [[
