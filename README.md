@@ -100,7 +100,8 @@ To configure a custom/private server, just
 
 ```lua
 local lspconfig = require'lspconfig'
-lspconfig.configs.foo_lsp = {
+local configs = require'lspconfig/configs'
+configs.foo_lsp = {
   default_config = {
     cmd = {'/home/ashkan/works/3rd/lua-language-server/run.sh'};
     filetypes = {'lua'};
