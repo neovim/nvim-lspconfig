@@ -13,8 +13,18 @@ local function switch_source_header(bufnr)
 end
 
 local root_pattern = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")
+
+local default_capabilities = vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(), {
+  textDocument = {
+    completion = {
+      editsNearCursor = true
+    }
+  },
+  offsetEncoding = {"utf-8", "utf-16"}
+});
+
 configs.clangd = {
-  default_config = util.utf8_config {
+  default_config = {
     cmd = {"clangd", "--background-index"};
     filetypes = {"c", "cpp", "objc", "objcpp"};
     root_dir = function(fname)
@@ -22,13 +32,12 @@ configs.clangd = {
         or util.path.join(vim.loop.cwd(), fname)
       return root_pattern(filename) or util.path.dirname(filename)
     end;
-    capabilities = {
-      textDocument = {
-        completion = {
-          editsNearCursor = true
-        }
-      }
-    },
+    on_init = function(client, result)
+      if result.offsetEncoding then
+        client.offset_encoding = result.offsetEncoding
+      end
+    end;
+    capabilities = default_capabilities;
   };
   commands = {
     ClangdSwitchSourceHeader = {
