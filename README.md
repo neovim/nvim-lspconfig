@@ -197,6 +197,16 @@ for _, lsp in ipairs(servers) do
 end
 EOF
 ```
+## The wiki
+Please see the [wiki](https://github.com/neovim/nvim-lspconfig/wiki) for additional topics, including:
+
+* [Installing language servers automatically](https://github.com/neovim/nvim-lspconfig/wiki/Installing-language-servers-automatically)
+* [Snippets support](https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins)
+* [Project local settings](https://github.com/neovim/nvim-lspconfig/wiki/Project-local-settings)
+* [Recommended plugins for enhanced language server features](https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins)
+
+and more.
+
 ## setup() function
 
 Only the following arguments can be passed to the setup function:
