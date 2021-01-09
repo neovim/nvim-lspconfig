@@ -5,8 +5,34 @@ local path = util.path
 
 local server_name = "jdtls"
 
+cmd = { 
+  tostring(vim.fn.getenv("JAVA_HOME")).."/bin/java",
+  "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+  "-Dosgi.bundles.defaultStartLevel=4",
+  "-Declipse.product=org.eclipse.jdt.ls.core.product",
+  "-Dlog.protocol=true",
+  "-Dlog.level=ALL",
+  "-Xms1g",
+  "-Xmx2G",
+  "-jar", 
+  tostring(vim.fn.getenv("JAR")),
+  "-configuration",
+  tostring(vim.fn.getenv("JDTLS_CONFIG")),
+  "-data",
+  tostring(vim.fn.getenv("WORKSPACE")),
+  "--add-modules=ALL-SYSTEM",
+  "--add-opens java.base/java.util=ALL-UNNAMED",
+  "--add-opens java.base/java.lang=ALL-UNNAMED",
+}
+
+print(vim.inspect(cmd))
 configs[server_name] = {
   default_config = {
+    cmd = cmd,
+    cmd_env = {
+      JAR=vim.fn.getenv("JAR"),
+      GRADLE_HOME=vim.fn.getenv("GRADLE_HOME"),
+    },
     filetypes = { "java" };
     root_dir = util.root_pattern('.git');
     init_options = {
@@ -42,11 +68,23 @@ configs[server_name] = {
   };
   docs = {
     description = [[
+
 https://projects.eclipse.org/projects/eclipse.jdt.ls
 
 Language server for Java.
 
 See project page for installation instructions.
+
+Due to the nature of java, the settings for eclipse jdtls cannot be automatically
+inferred. Please set the following environmental variables to match your installation. You can set these locally for your project with the help of [direnv](https://github.com/direnv/direnv). Note version numbers will change depending on your project's version of java, your version of eclipse, and in the case of JDTLS_CONFIG, your OS.
+
+```bash
+export JAR=/path/to/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_1.6.0.v20200915-1508.jar
+export GRADLE_HOME=$HOME/gradle
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.9.11-9.fc33.x86_64/
+export JDLTS_CONFIG=/path/to/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux
+export WORKSPACE=$HOME/workspace
+```
     ]];
     default_config = {
       root_dir = [[root_pattern(".git")]];
