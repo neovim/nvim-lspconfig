@@ -5,8 +5,8 @@ local path = util.path
 
 local server_name = "jdtls"
 
-cmd = { 
-  tostring(vim.fn.getenv("JAVA_HOME")).."/bin/java",
+local cmd = {
+  util.path.join(tostring(vim.fn.getenv("JAVA_HOME")), "/bin/java"),
   "-Declipse.application=org.eclipse.jdt.ls.core.id1",
   "-Dosgi.bundles.defaultStartLevel=4",
   "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -14,7 +14,7 @@ cmd = {
   "-Dlog.level=ALL",
   "-Xms1g",
   "-Xmx2G",
-  "-jar", 
+  "-jar",
   tostring(vim.fn.getenv("JAR")),
   "-configuration",
   tostring(vim.fn.getenv("JDTLS_CONFIG")),
@@ -25,7 +25,6 @@ cmd = {
   "--add-opens java.base/java.lang=ALL-UNNAMED",
 }
 
-print(vim.inspect(cmd))
 configs[server_name] = {
   default_config = {
     cmd = cmd,
