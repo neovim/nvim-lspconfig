@@ -334,7 +334,7 @@ function M.depth_first_root_pattern(...)
   end
 end
 
-local function matcher (path, pattern)
+local function matcher(path, pattern)
   if M.path.is_dir(M.path.join(path, pattern)) then
     return path
   end
