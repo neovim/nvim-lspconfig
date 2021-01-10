@@ -7,6 +7,21 @@ local fn = vim.fn
 
 local M = {}
 
+function M.is_module_available (module)
+  if package.loaded[module] then
+    return true
+  else
+    for _, searcher in ipairs(package.searchers or package.loaders) do
+      local loader = searcher(module)
+      if type(loader) == 'function' then
+        package.preload[module] = loader
+        return true
+      end
+    end
+    return false
+  end
+end
+
 M.default_config = {
   log_level = lsp.protocol.MessageType.Warning;
   message_level = lsp.protocol.MessageType.Warning;

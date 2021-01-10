@@ -41,7 +41,7 @@ end
 
 local mt = {}
 function mt:__index(k)
-  if configs[k] == nil then
+  if configs[k] == nil and M.util.is_module_available('lspconfig/'..k) then
     require('lspconfig/'..k)
   end
   return configs[k]
