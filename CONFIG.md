@@ -42,6 +42,7 @@ that config.
 - [ocamllsp](#ocamllsp)
 - [omnisharp](#omnisharp)
 - [perlls](#perlls)
+- [php_language_server](#php_language_server)
 - [purescriptls](#purescriptls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
@@ -2832,6 +2833,39 @@ require'lspconfig'.perlls.setup{}
         perlInc = " "
       }
     }
+```
+
+## php_language_server
+
+https://github.com/felixfbecker/php-language-server
+
+PHP Implementation of the VS Code Language Server Protocol
+
+`php-language-server` can be installed via `composer`:
+```sh
+# To install the language server
+composer require felixfbecker/language-server
+# To parse stubs
+composer run-script --working-dir=vendor/felixfbecker/language-server parse-stubs
+```
+
+To use `php-language-server`, you must define `cmd` when you setup the language server:
+```lua
+require'lspconfig'.php_language_server.setup {
+  cmd = {"php", "vendor/felixfbecker/language-server/bin/php-language-server.php"};
+};
+```
+
+
+
+```lua
+require'lspconfig'.php_language_server.setup{}
+
+  Commands:
+  
+  Default Values:
+    filetypes = { "php" }
+    root_dir = root_pattern("composer.json", ".git")
 ```
 
 ## purescriptls
