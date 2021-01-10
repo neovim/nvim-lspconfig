@@ -39,6 +39,18 @@ https://github.com/julia-vscode/julia-vscode
 ```sh
 julia -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
+
+LanguageServer.jl implemented a unique hard check that the contents of a file match the content sent
+to the language server, which requires a workaround, as neovim (and vim) and new lines to files
+by default on save. Add the following to your init.
+
+require('lspconfig').util.nvim_multiline_command [[
+  augroup SpecialJuliaLanguageServerWorkarounds
+    autocmd!
+    au FileType julia set binary noeol
+  augroup end
+\]\]
+
 The default config lazily evaluates the location of the julia language server from the your global julia packages.
 This adds a small overhead on first opening of a julia file. To avoid this overhead, replace server_path in on_new_config with
 a hard-coded path to the server.
