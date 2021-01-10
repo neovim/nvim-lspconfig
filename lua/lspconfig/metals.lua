@@ -18,7 +18,6 @@ configs[server_name] = {
       };
   };
   docs = {
-    package_json = "https://raw.githubusercontent.com/scalameta/metals-vscode/master/package.json";
     description  = [[
 https://scalameta.org/metals/
 
