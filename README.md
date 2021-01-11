@@ -32,6 +32,7 @@ any directory containing ".git", "setup.py",  "setup.cfg", "pyproject.toml",
 or "requirements.txt")
 5. See [Keybindings and completion](#Keybindings-and-completion) for mapping useful functions and enabling
 omnifunc completion
+6. Try `:LspInfo` to see the status of active and configured language servers.
 
 ## Usage
 
@@ -293,8 +294,8 @@ is opened in a directory, or child directory, containing a file which signals
 the *root* of the project. Most of the time, this is a `.git` folder, but each server
 defines the root config in the lua file.
 
-Before reporting a bug, check your logs. Add the following to your init.vim
-to enable logging 
+Before reporting a bug, check your logs and the output of `:LspInfo`. Add the 
+following to your init.vim to enable logging 
 
 ```vim
 lua << EOF
