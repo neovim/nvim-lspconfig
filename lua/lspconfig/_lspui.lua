@@ -96,7 +96,6 @@ function win_float.percentage_range_window(col_range, row_range, options)
   vim.api.nvim_win_set_buf(win_id, bufnr)
 
   vim.cmd('setlocal nocursorcolumn')
-  vim.fn.nvim_win_set_option(win_id, 'winblend', options.winblend)
 
   return {
     bufnr = bufnr,
