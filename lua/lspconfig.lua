@@ -75,14 +75,10 @@ function M._root._setup()
         local cmd_not_found_msg = "False. Please check your path and ensure the server is installed"
         vim.list_extend(buf_lines, matching_config_header)
         for _, config in pairs(configs) do
-          --TODO(mjlbach): This is why the command is slow.
-          -- We should change config initialization so this is cached (generally)
-          local config_table = config.make_config(buffer_dir)
-
           local cmd_is_executable, cmd
-          if config_table.cmd then
-            cmd = table.concat(config_table.cmd, " ")
-            if vim.fn.executable(config_table.cmd[1]) == 1 then
+          if config.cmd then
+            cmd = table.concat(config.cmd, " ")
+            if vim.fn.executable(config.cmd[1]) == 1 then
               cmd_is_executable = "True"
             else
               cmd_is_executable = cmd_not_found_msg
@@ -92,15 +88,15 @@ function M._root._setup()
             cmd_is_executable = cmd
           end
 
-          for _, filetype_match in ipairs(config_table.filetypes) do
+          for _, filetype_match in ipairs(config.filetypes) do
             if buffer_filetype == filetype_match then
               local matching_config_info = {
                 "",
                 "Config: "..config.name,
                 "\tcmd: "..cmd,
                 "\tcmd is executable: ".. cmd_is_executable,
-                "\tidentified root: "..(config_table.root_dir or "None"),
-                "\tcustom handlers: "..table.concat(vim.tbl_keys(config_table.handlers), ", "),
+                "\tidentified root: "..(config.get_root_dir(buffer_dir) or "None"),
+                "\tcustom handlers: "..table.concat(vim.tbl_keys(config.handlers), ", "),
               }
              vim.list_extend(buf_lines, matching_config_info)
             end

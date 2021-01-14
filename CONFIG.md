@@ -1910,7 +1910,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `{}`
   
-  Additional julia arguments\.
+  Additional Julia arguments\.
 
 - **`julia.enableCrashReporter`**: `boolean|null`
 
@@ -2116,7 +2116,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Display plots within vscode\.
+  Display plots within VS Code\. Might require a restart of the Julia process\.
 
 - **`julia.useRevise`**: `boolean`
 
