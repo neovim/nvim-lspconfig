@@ -118,6 +118,12 @@ function configs.__newindex(t, config_name, config_def)
 
     local get_root_dir = config.root_dir
 
+    -- Used by :LspInfo
+    M.get_root_dir = config.root_dir
+    M.filetypes = config.filetypes
+    M.handlers = config.handlers
+    M.cmd = config.cmd
+
     -- In the case of a reload, close existing things.
     if M.manager then
       for _, client in ipairs(M.manager.clients()) do
