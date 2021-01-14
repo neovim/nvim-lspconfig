@@ -17,7 +17,7 @@ local default_probe_dir = get_probe_dir(vim.fn.getcwd())
 configs[server_name] = {
   default_config = {
     cmd = {
-      'angularls',
+      'ngserver',
       '--stdio',
       '--tsProbeLocations', default_probe_dir,
       '--ngProbeLocations', default_probe_dir
@@ -33,7 +33,7 @@ configs[server_name] = {
 
     -- We need to check our probe directories because they may have changed.
     new_config.cmd = {
-      'angularls',
+      'ngserver',
       '--stdio',
       '--tsProbeLocations', new_probe_dir,
       '--ngProbeLocations', new_probe_dir
@@ -43,14 +43,13 @@ configs[server_name] = {
     description = [[
 https://github.com/angular/vscode-ng-language-service
 
-`angular-language-server` can be installed via npm `npm install @angular/language-server`.
-Be aware there is no global binary and must be run via `node_modules/@angular/language-server/index.js` which can be added as the default cmd.
+`angular-language-server` can be installed via npm `npm install -g @angular/language-server`.
 
 Note, that if you override the default `cmd`, you must also update `on_new_config` to set `new_config.cmd` during startup.
 
 ```lua
 local project_library_path = "/path/to/project/lib"
-local cmd = {"node", "/path/to/node_modules/@angular/language-server/index.js", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
+local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
 
 require'lspconfig'.angularls.setup{
   cmd = cmd,
