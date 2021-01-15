@@ -1,29 +1,32 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
+local cmd = {
+  "julia",
+  "--startup-file=no",
+  "--history-file=no",
+  "-e", [[
+    using Pkg;
+    Pkg.instantiate()
+    using LanguageServer; using SymbolServer;
+    depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
+    project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))
+    # Make sure that we only load packages from this environment specifically.
+    @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path
+    server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);
+    server.runlinter = true;
+    run(server);
+  ]]
+};
+
 configs.julials = {
   default_config = {
-    on_new_config = function(new_config,new_root_dir)
+    cmd = cmd;
+    on_new_config = function(new_config, _)
       local server_path = vim.fn.system("julia -e 'print(Base.find_package(\"LanguageServer\"))'")
-      local cmd = {
-        "julia",
-        "--project="..server_path:sub(0,-19),
-        "--startup-file=no",
-        "--history-file=no",
-        "-e", [[
-          using Pkg;
-          Pkg.instantiate()
-          using LanguageServer; using SymbolServer;
-          depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
-          project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))
-          # Make sure that we only load packages from this environment specifically.
-          @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path
-          server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);
-          server.runlinter = true;
-          run(server);
-        ]]
-    };
-      new_config.cmd = cmd
+      local new_cmd = vim.deepcopy(cmd)
+      table.insert(new_cmd, 2, "--project="..server_path:sub(0,-19))
+      new_config.cmd = new_cmd
     end,
     filetypes = {'julia'};
     root_dir = function(fname)

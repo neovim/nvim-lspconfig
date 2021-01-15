@@ -40,15 +40,36 @@ function M._root._setup()
         }
         vim.list_extend(buf_lines, header)
 
-        for _, client in ipairs(buf_clients) do
-          local client_info = {
+        local function trim_whitespace(cmd)
+          local trimmed_cmd = {}
+          for _, str in ipairs(cmd) do
+            table.insert(trimmed_cmd, str:match'^%s*(.*)')
+          end
+          return trimmed_cmd
+        end
+
+        local function remove_newlines(cmd)
+          cmd = trim_whitespace(cmd)
+          cmd = table.concat(cmd, ' ')
+          cmd = vim.split(cmd, '\n')
+          cmd = trim_whitespace(cmd)
+          cmd = table.concat(cmd, ' ')
+          return cmd
+        end
+
+        local function make_client_info(client)
+          return {
             "",
             "Client: "..tostring(client.id),
             "\tname: "..client.name,
             "\troot: "..client.workspaceFolders[1].name,
             "\tfiletypes: "..table.concat(client.config.filetypes, ', '),
-            "\tcmd: "..table.concat(client.config.cmd, ', '),
+            "\tcmd: "..remove_newlines(client.config.cmd),
           }
+        end
+
+        for _, client in ipairs(buf_clients) do
+           local client_info = make_client_info(client)
            vim.list_extend(buf_lines, client_info)
         end
 
@@ -58,14 +79,7 @@ function M._root._setup()
         }
         vim.list_extend(buf_lines, active_section_header)
         for _, client in ipairs(clients) do
-          local client_info = {
-            "",
-            "Client: "..tostring(client.id),
-            "\tname: "..client.name,
-            "\troot: "..client.workspaceFolders[1].name,
-            "\tfiletypes: "..table.concat(client.config.filetypes, ', '),
-            "\tcmd: "..table.concat(client.config.cmd, ', '),
-          }
+           local client_info = make_client_info(client)
            vim.list_extend(buf_lines, client_info)
         end
         local matching_config_header = {
@@ -77,7 +91,7 @@ function M._root._setup()
         for _, config in pairs(configs) do
           local cmd_is_executable, cmd
           if config.cmd then
-            cmd = table.concat(config.cmd, " ")
+            cmd = remove_newlines(config.cmd)
             if vim.fn.executable(config.cmd[1]) == 1 then
               cmd_is_executable = "True"
             else

@@ -294,6 +294,9 @@ is opened in a directory, or child directory, containing a file which signals
 the *root* of the project. Most of the time, this is a `.git` folder, but each server
 defines the root config in the lua file.
 
+:LspInfo provides a handy overview of your active and configured language servers.
+Note, that it will not report any configuration changes applied in `on_new_config`.
+
 Before reporting a bug, check your logs and the output of `:LspInfo`. Add the 
 following to your init.vim to enable logging 
 
