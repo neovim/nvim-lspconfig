@@ -87,25 +87,36 @@ function M._root._setup()
             cmd = "cmd not defined"
             cmd_is_executable = cmd
           end
-
-          for _, filetype_match in ipairs(config.filetypes) do
-            if buffer_filetype == filetype_match then
+          if config.filetypes then
+            for _, filetype_match in ipairs(config.filetypes) do
+              if buffer_filetype == filetype_match then
+                local matching_config_info = {
+                  "",
+                  "Config: "..config.name,
+                  "\tcmd: "..cmd,
+                  "\tcmd is executable: ".. cmd_is_executable,
+                  "\tidentified root: "..(config.get_root_dir(buffer_dir) or "None"),
+                  "\tcustom handlers: "..table.concat(vim.tbl_keys(config.handlers), ", "),
+                }
+               vim.list_extend(buf_lines, matching_config_info)
+              end
+            end
+          else
               local matching_config_info = {
                 "",
                 "Config: "..config.name,
-                "\tcmd: "..cmd,
-                "\tcmd is executable: ".. cmd_is_executable,
-                "\tidentified root: "..(config.get_root_dir(buffer_dir) or "None"),
-                "\tcustom handlers: "..table.concat(vim.tbl_keys(config.handlers), ", "),
+                "\tfiletype: ".."No filetypes defined, please define filetypes in setup().",
               }
              vim.list_extend(buf_lines, matching_config_info)
-            end
           end
         end
         buf_lines = vim.lsp.util._trim_and_pad(buf_lines, { pad_left = 2, pad_top = 1})
         vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, buf_lines )
         vim.fn.matchadd("Title", table.concat(vim.tbl_keys(configs), '\\|'))
-        vim.fn.matchadd("Error", "cmd not defined\\|"..cmd_not_found_msg)
+        vim.fn.matchadd("Error",
+          "No filetypes defined, please define filetypes in setup().\\|"..
+          "cmd not defined\\|" ..
+          cmd_not_found_msg)
         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<esc>', '<cmd>bd<CR>', { noremap = true})
         vim.lsp.util.close_preview_autocmd({"BufHidden", "BufLeave"}, win_id)
       end;
