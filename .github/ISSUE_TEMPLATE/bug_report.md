@@ -6,7 +6,7 @@ labels: bug
 
 ---
 
-<!-- Before reporting: search existing issues. Note that this repository implements configuration and initialization of language servers. Implementation of the language server spec itself is located in the neovim core repository-->
+<!-- Before reporting: search existing issues and ensure you are running the latest nightly of neovim and the latest version of nvim-lspconfig. Note that this repository implements configuration and initialization of language servers. Implementation of the language server spec itself is located in the neovim core repository-->
 
 - `nvim --version`:
 - nvim-lsp version(commit hash):
