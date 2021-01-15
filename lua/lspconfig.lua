@@ -63,7 +63,7 @@ function M._root._setup()
             "Client: "..tostring(client.id),
             "\tname: "..client.name,
             "\troot: "..client.workspaceFolders[1].name,
-            "\tfiletypes: "..table.concat(client.config.filetypes, ', '),
+            "\tfiletypes: "..table.concat(client.config.filetypes or {}, ', '),
             "\tcmd: "..remove_newlines(client.config.cmd),
           }
         end
