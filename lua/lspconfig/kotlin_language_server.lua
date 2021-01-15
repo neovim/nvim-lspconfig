@@ -21,10 +21,13 @@ end
 --  Kotlin. I am not sure whether the language server supports Ant projects,
 --  but I'm keeping it here as well since Ant does support Kotlin.
 local root_files = {
+  'settings.gradle',       -- Gradle (multi-project)
+  'settings.gradle.kts',   -- Gradle (multi-project)
   'build.xml',             -- Ant
   'pom.xml',               -- Maven
-  'settings.gradle',       -- Gradle (mutli-project)
-  'settings.gradle.kts',   -- Gradle (mutli-project)
+}
+
+local fallback_root_files = {
   'build.gradle',          -- Gradle
   'build.gradle.kts',      -- Gradle
 }
@@ -32,7 +35,10 @@ local root_files = {
 configs.kotlin_language_server = {
   default_config = {
     filetypes = { "kotlin" };
-    root_dir = util.root_pattern(unpack(root_files));
+    root_dir = function(fname)
+      return util.root_pattern(unpack(root_files))(fname) or
+      util.root_pattern(unpack(fallback_root_files))(fname)
+    end;
     cmd = { bin_name };
   };
   docs = {
