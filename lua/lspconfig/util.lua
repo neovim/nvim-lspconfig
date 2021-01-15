@@ -87,16 +87,6 @@ function M.nvim_multiline_command(command)
   end
 end
 
-function M.lookup_section(settings, section)
-  for part in vim.gsplit(section, '.', true) do
-    settings = settings[part]
-    if not settings then
-      return
-    end
-  end
-  return settings
-end
-
 function M.create_module_commands(module_name, commands)
   for command_name, def in pairs(commands) do
     local parts = {"command!"}
