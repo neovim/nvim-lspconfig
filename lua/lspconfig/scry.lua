@@ -6,7 +6,7 @@ configs.scry = {
     cmd = {'scry'},
     filetypes = {'crystal'},
     root_dir = function(fname)
-      return util.root_pattern('shard.yml') or
+      return util.root_pattern('shard.yml')(fname) or
         util.find_git_ancestor(fname) or
         util.path.dirname(fname)
     end
