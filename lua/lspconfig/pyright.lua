@@ -7,11 +7,22 @@ if vim.fn.has('win32') == 1 then
   bin_name = bin_name..".cmd"
 end
 
+local root_files = {
+  'setup.py',
+  'pyproject.toml',
+  'setup.cfg',
+  'requirements.txt',
+  '.git',
+}
+
 configs[server_name] = {
   default_config = {
     cmd = {bin_name, "--stdio"};
     filetypes = {"python"};
-    root_dir = util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
+    root_dir = function(filename)
+      return util.root_pattern(unpack(root_files))(filename) or
+             util.path.dirname(filename)
+    end;
     settings = {
       python = {
         analysis = {
