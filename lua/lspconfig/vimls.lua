@@ -12,7 +12,7 @@ configs[server_name] = {
     cmd = {bin_name, "--stdio"},
     filetypes = {"vim"},
     root_dir = function(fname)
-      return util.find_git_ancestor(fname) or vim.loop.os_homedir()
+      return util.find_git_ancestor(fname) or vim.fn.getcwd()
     end,
     init_options = {
       iskeyword = "@,48-57,_,192-255,-#",
