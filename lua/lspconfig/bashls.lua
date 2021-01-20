@@ -1,3 +1,4 @@
+local log = require('vim/lsp/log')
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
@@ -7,7 +8,17 @@ configs[server_name] = {
   default_config = {
     cmd = {"bash-language-server", "start"};
     filetypes = {"sh"};
-    root_dir = util.path.dirname;
+    root_dir = function(fname)
+      local dirname = util.path.dirname(fname)
+
+      -- Prevent the bash-language-server from scanning the entire home folder.
+      if dirname == vim.loop.os_homedir() then
+        log.info('Not setting root_dir to prevent scanning everything in $HOME')
+        return nil
+      end
+
+      return dirname
+    end
   };
   docs = {
     description = [[
