@@ -11,19 +11,17 @@ configs[server_name] = {
   };
   -- on_new_config = function(new_config) end;
   -- on_attach = function(client, bufnr) end;
+
   docs = {
     description = [[
 https://github.com/omnisharp/omnisharp-roslyn
 OmniSharp server based on Roslyn workspaces
-
 `omnisharp-roslyn` can be installed by downloading and extracting a release from [here](https://github.com/OmniSharp/omnisharp-roslyn/releases).
 Omnisharp can also be built from source by following the instructions [here](https://github.com/omnisharp/omnisharp-roslyn#downloading-omnisharp).
-
-**By default, omnisharp-roslyn doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of you unzipped .
-
+**By default, omnisharp-roslyn doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of your unzipped release.
 ```lua
 local pid = vim.fn.getpid()
-local omnisharp_bin = "/path/to/omnisharp/OmniSharp"
+local omnisharp_bin = "/path/to/omnisharp/run"
 -- on Windows
 -- local omnisharp_bin = "/path/to/omnisharp/OmniSharp.exe"
 require'lspconfig'.omnisharp.setup{
@@ -32,6 +30,7 @@ require'lspconfig'.omnisharp.setup{
 }
 ```
 ]];
+
     default_config = {
       root_dir = [[root_pattern(".csproj", ".sln")]];
     };
