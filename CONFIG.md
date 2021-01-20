@@ -2118,6 +2118,12 @@ This server accepts configuration via the `settings` key.
   
   Display plots within VS Code\. Might require a restart of the Julia process\.
 
+- **`julia.useProgressFrontend`**: `boolean`
+
+  Default: `true`
+  
+  null
+
 - **`julia.useRevise`**: `boolean`
 
   Default: `true`
@@ -2326,6 +2332,12 @@ This server accepts configuration via the `settings` key.
   Default: `vim.empty_dict()`
   
   Array items: `{description = "Unicode character to translate to",type = "string"}`
+  
+  null
+
+- **`lean.input.eagerReplacementEnabled`**: `boolean`
+
+  Default: `true`
   
   null
 
