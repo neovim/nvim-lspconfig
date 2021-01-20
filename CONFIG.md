@@ -47,6 +47,7 @@ that config.
 - [pyls_ms](#pyls_ms)
 - [pyright](#pyright)
 - [r_language_server](#r_language_server)
+- [racket_langserver](#racket_langserver)
 - [rls](#rls)
 - [rnix](#rnix)
 - [rome](#rome)
@@ -2118,6 +2119,12 @@ This server accepts configuration via the `settings` key.
   
   Display plots within VS Code\. Might require a restart of the Julia process\.
 
+- **`julia.useProgressFrontend`**: `boolean`
+
+  Default: `true`
+  
+  null
+
 - **`julia.useRevise`**: `boolean`
 
   Default: `true`
@@ -2326,6 +2333,12 @@ This server accepts configuration via the `settings` key.
   Default: `vim.empty_dict()`
   
   Array items: `{description = "Unicode character to translate to",type = "string"}`
+  
+  null
+
+- **`lean.input.eagerReplacementEnabled`**: `boolean`
+
+  Default: `true`
   
   null
 
@@ -3371,6 +3384,28 @@ require'lspconfig'.r_language_server.setup{}
     filetypes = { "r", "rmd" }
     log_level = 2
     root_dir = root_pattern(".git") or os_homedir
+```
+
+## racket_langserver
+
+[https://github.com/jeapostrophe/racket-langserver](https://github.com/jeapostrophe/racket-langserver)
+
+The Racket language server. This project seeks to use
+[DrRacket](https://github.com/racket/drracket)'s public API to provide
+functionality that mimics DrRacket's code tools as closely as possible.
+
+Install via `raco`: `raco pkg install racket-langserver`
+
+
+```lua
+require'lspconfig'.racket_langserver.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "racket", "--lib", "racket-langserver" }
+    filetypes = { "racket", "scheme" }
+    root_dir = <function 1>
 ```
 
 ## rls
