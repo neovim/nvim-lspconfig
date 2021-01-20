@@ -80,13 +80,6 @@ function M.tbl_deep_extend(behavior, ...)
   return ret
 end
 
-function M.nvim_multiline_command(command)
-  validate { command = { command, 's' } }
-  for line in vim.gsplit(command, "\n", true) do
-    api.nvim_command(line)
-  end
-end
-
 function M.create_module_commands(module_name, commands)
   for command_name, def in pairs(commands) do
     local parts = {"command!"}
