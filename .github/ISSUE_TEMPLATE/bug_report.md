@@ -35,7 +35,7 @@ labels: bug
 
 ### LSP log
 <!-- If not using the minimal_init.lua please add vim.lsp.set_log_level("debug") to your lua block 
-     in init.vim and paste a link to your log file, located at $HOME/.local/share/nvim/lsp.log -->
+     in init.vim and paste a link to your log file, located at  $HOME/.cache/nvim/lsp.log (formerly $HOME/.local/share/nvim/lsp.log) -->
 <details>
 <summary>Log file</summary>
 <!-- past you log between here -->
