@@ -11,7 +11,7 @@ configs.racket_langserver = {
     filetypes = {"racket", "scheme"};
     root_dir = function(filename)
       return util.root_pattern(unpack(root_files))(filename) or
-        util.path.dirnmae(filename)
+        util.path.dirname(filename)
       end
   };
   docs = {
