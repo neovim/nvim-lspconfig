@@ -13,11 +13,16 @@ return function ()
   local bufnr, win_id = win_info.bufnr, win_info.win_id
 
   local buf_lines = {}
+
+  local buf_client_names = {}
+  for _, client in ipairs(buf_clients) do
+    table.insert(buf_client_names, client.name)
+  end
+
   local header = {
-    "Available servers:",
-    "\t"..table.concat(vim.tbl_keys(configs), ', '),
+    "Configured servers: \t"..table.concat(vim.tbl_keys(configs), ', '),
     "",
-    "Clients attached to this buffer: "..tostring(#buf_clients)
+    tostring(#buf_clients).." client(s) attached to this buffer: "..table.concat(buf_client_names, ', '),
   }
   vim.list_extend(buf_lines, header)
 
@@ -38,14 +43,14 @@ return function ()
     return cmd
   end
 
+  local indent = "  "
   local function make_client_info(client)
     return {
       "",
-      "Client: "..tostring(client.id),
-      "\tname: "..client.name,
-      "\troot: "..client.workspaceFolders[1].name,
+      "Client: "..client.name.." (current id: "..tostring(client.id)..")",
+      "\troot:      "..client.workspaceFolders[1].name,
       "\tfiletypes: "..table.concat(client.config.filetypes or {}, ', '),
-      "\tcmd: "..remove_newlines(client.config.cmd),
+      "\tcmd:       "..remove_newlines(client.config.cmd),
     }
   end
 
@@ -56,7 +61,7 @@ return function ()
 
   local active_section_header = {
     "",
-    "Total active clients: "..tostring(#clients),
+    tostring(#clients).." active client(s): ",
   }
   vim.list_extend(buf_lines, active_section_header)
   for _, client in ipairs(clients) do
@@ -65,7 +70,7 @@ return function ()
   end
   local matching_config_header = {
     "",
-    "Clients that match the current buffer filetype:",
+    "Clients that match the buffer filetype "..buffer_filetype.." :",
   }
   local cmd_not_found_msg = "False. Please check your path and ensure the server is installed"
   vim.list_extend(buf_lines, matching_config_header)
@@ -86,12 +91,11 @@ return function ()
       for _, filetype_match in ipairs(config.filetypes) do
         if buffer_filetype == filetype_match then
           local matching_config_info = {
-            "",
-            "Config: "..config.name,
-            "\tcmd: "..cmd,
-            "\tcmd is executable: ".. cmd_is_executable,
-            "\tidentified root: "..(config.get_root_dir(buffer_dir) or "None"),
-            "\tcustom handlers: "..table.concat(vim.tbl_keys(config.handlers), ", "),
+            indent.."Config: "..config.name,
+            indent.."\tcmd: "..cmd,
+            indent.."\tcmd is executable: ".. cmd_is_executable,
+            indent.."\tidentified root: "..(config.get_root_dir(buffer_dir) or "None"),
+            indent.."\tcustom handlers: "..table.concat(vim.tbl_keys(config.handlers), ", "),
           }
          vim.list_extend(buf_lines, matching_config_info)
         end
