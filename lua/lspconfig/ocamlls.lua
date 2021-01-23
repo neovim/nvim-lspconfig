@@ -21,6 +21,7 @@ npm install -g ocaml-langauge-server
     ]];
     default_config = {
       root_dir = [[root_pattern(".merlin", "package.json")]];
+      filetypes = [[test]];
     };
   };
 };

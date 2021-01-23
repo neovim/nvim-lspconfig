@@ -1,7 +1,9 @@
 name: docgen
 
-on: [push]
-
+on:
+  push:
+    branches:
+      - master
 jobs:
   docgen:
     runs-on: [ubuntu-latest]
