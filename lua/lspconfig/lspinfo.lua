@@ -20,7 +20,7 @@ return function ()
   end
 
   local header = {
-    "Configured servers: \t"..table.concat(vim.tbl_keys(configs), ', '),
+    "Configured servers: "..table.concat(vim.tbl_keys(configs), ', '),
     "",
     tostring(#buf_clients).." client(s) attached to this buffer: "..table.concat(buf_client_names, ', '),
   }
@@ -47,10 +47,10 @@ return function ()
   local function make_client_info(client)
     return {
       "",
-      "Client: "..client.name.." (current id: "..tostring(client.id)..")",
-      "\troot:      "..client.workspaceFolders[1].name,
-      "\tfiletypes: "..table.concat(client.config.filetypes or {}, ', '),
-      "\tcmd:       "..remove_newlines(client.config.cmd),
+      indent.."Client: "..client.name.." (id "..tostring(client.id)..")",
+      indent.."\troot:      "..client.workspaceFolders[1].name,
+      indent.."\tfiletypes: "..table.concat(client.config.filetypes or {}, ', '),
+      indent.."\tcmd:       "..remove_newlines(client.config.cmd),
     }
   end
 
@@ -70,7 +70,7 @@ return function ()
   end
   local matching_config_header = {
     "",
-    "Clients that match the buffer filetype "..buffer_filetype.." :",
+    "Clients that match the filetype "..buffer_filetype.." :",
   }
   local cmd_not_found_msg = "False. Please check your path and ensure the server is installed"
   vim.list_extend(buf_lines, matching_config_header)
@@ -112,6 +112,7 @@ return function ()
   buf_lines = vim.lsp.util._trim_and_pad(buf_lines, { pad_left = 2, pad_top = 1})
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, buf_lines )
   vim.fn.matchadd("Title", table.concat(vim.tbl_keys(configs), '\\|'))
+  vim.fn.matchadd("Title", buffer_filetype)
   vim.fn.matchadd("Error",
     "No filetypes defined, please define filetypes in setup().\\|"..
     "cmd not defined\\|" ..
