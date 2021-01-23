@@ -1,11 +1,13 @@
 name: docgen
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   docgen:
     runs-on: [ubuntu-latest]
-    if: github.ref != 'master'
     steps:
     - uses: actions/checkout@v2
     - run: date +%F > todays-date
@@ -23,7 +25,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COMMIT_MSG: |
-          [docgen] Update README.md
+          [docgen] Update CONFIG.md
           skip-checks: true
       run: |
         git config user.email "actions@github"
