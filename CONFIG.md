@@ -2096,6 +2096,12 @@ This server accepts configuration via the `settings` key.
   
   Check that all declared arguments are used within the function body\.
 
+- **`julia.liveTestFile`**: `string`
+
+  Default: `"test/runtests.jl"`
+  
+  A workspace relative path to a Julia file that contains the tests that should be run for live testing\.
+
 - **`julia.packageServer`**: `string`
 
   Default: `""`
