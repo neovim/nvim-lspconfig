@@ -2096,6 +2096,12 @@ This server accepts configuration via the `settings` key.
   
   Check that all declared arguments are used within the function body\.
 
+- **`julia.liveTestFile`**: `string`
+
+  Default: `"test/runtests.jl"`
+  
+  A workspace relative path to a Julia file that contains the tests that should be run for live testing\.
+
 - **`julia.packageServer`**: `string`
 
   Default: `""`
@@ -2117,6 +2123,12 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Display plots within VS Code\. Might require a restart of the Julia process\.
+
+- **`julia.useProgressFrontend`**: `boolean`
+
+  Default: `true`
+  
+  null
 
 - **`julia.useRevise`**: `boolean`
 
@@ -2326,6 +2338,12 @@ This server accepts configuration via the `settings` key.
   Default: `vim.empty_dict()`
   
   Array items: `{description = "Unicode character to translate to",type = "string"}`
+  
+  null
+
+- **`lean.input.eagerReplacementEnabled`**: `boolean`
+
+  Default: `true`
   
   null
 
