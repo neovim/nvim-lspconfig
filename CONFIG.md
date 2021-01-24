@@ -888,6 +888,12 @@ This server accepts configuration via the `settings` key.
   
   Whether to show CodeLens actions in the editor for quick running \/ debugging scripts with main functions\.
 
+- **`dart.showSkippedTests`**: `boolean`
+
+  Default: `true`
+  
+  null
+
 - **`dart.showTestCodeLens`**: `boolean`
 
   Default: `true`
@@ -2097,6 +2103,12 @@ This server accepts configuration via the `settings` key.
   
   Check that all declared arguments are used within the function body\.
 
+- **`julia.liveTestFile`**: `string`
+
+  Default: `"test/runtests.jl"`
+  
+  A workspace relative path to a Julia file that contains the tests that should be run for live testing\.
+
 - **`julia.packageServer`**: `string`
 
   Default: `""`
@@ -2653,6 +2665,10 @@ This server accepts configuration via the `settings` key.
   
   port to use for connection between vscode and debug adapter inside Perl\:\:LanguageServer\. On a multi user system every user must use a differnt port\.
 
+- **`perl.disableCache`**: `boolean`
+
+  if true\, the LanguageServer will not cache the result of parsing source files on disk\, so it can be used within readonly directories
+
 - **`perl.enable`**: `boolean`
 
   Default: `true`
@@ -2693,7 +2709,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  array with paths to add to perl library path
+  array with paths to add to perl library path\. This setting is used by the syntax checker\, the parser and for the debugee\. It is NOT used to find the LanguageServer itself \(use perlArgs \: \[ \"\-I\/incpath\"\] for non default path of LanguageServer\)
 
 - **`perl.showLocalVars`**: `boolean`
 
