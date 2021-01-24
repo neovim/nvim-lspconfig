@@ -26,22 +26,6 @@ function M._root._setup()
       "-nargs=?";
       description = '`:LspInfo` Displays attached, active, and configured language servers';
     };
-    LspInstall = {
-      function()
-        print("deprecated, see https://github.com/neovim/neovim/wiki/Following-HEAD")
-      end;
-      "-nargs=?";
-      "-complete=custom,v:lua.lsp_complete_installable_servers";
-      description = '`:LspInstall {name}` installs a server under stdpath("cache")/lspconfig/{name}';
-    };
-    LspInstallInfo = {
-      function()
-        print("deprecated, see https://github.com/neovim/neovim/wiki/Following-HEAD")
-      end;
-      "-nargs=?";
-      "-complete=custom,v:lua.lsp_complete_servers";
-      description = 'Print installation info for {name} if one is specified, or all installable servers.';
-    };
   };
 
   M.util.create_module_commands("_root", M._root.commands)
