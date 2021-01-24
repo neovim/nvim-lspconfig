@@ -2686,6 +2686,12 @@ This server accepts configuration via the `settings` key.
   
   directories to ignore\, defaults to \.vscode\, \.git\, \.svn
 
+- **`perl.logFile`**: `string`
+
+  Default: `vim.NIL`
+  
+  If set\, log output is written to the given logfile\, insetad of displaying it in the vscode output pane\. Log output is always appended so you are responsible for rotating the file\.
+
 - **`perl.logLevel`**: `integer`
 
   Default: `0`
@@ -2708,7 +2714,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  array with paths to add to perl library path\. This setting is used by the syntax checker\, the parser and for the debugee\. It is NOT used to find the LanguageServer itself \(use perlArgs \: \[ \"\-I\/incpath\"\] for non default path of LanguageServer\)
+  array with paths to add to perl library path\. This setting is used by the syntax checker and for the debugee and also for the LanguageServer itself\.
 
 - **`perl.showLocalVars`**: `boolean`
 
