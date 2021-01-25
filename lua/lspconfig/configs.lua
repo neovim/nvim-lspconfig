@@ -1,4 +1,3 @@
-local log = require 'vim.lsp.log'
 local util = require 'lspconfig/util'
 local api, validate, lsp = vim.api, vim.validate, vim.lsp
 local tbl_extend = vim.tbl_extend
@@ -30,24 +29,6 @@ function configs.__newindex(t, config_name, config_def)
 
   -- Force this part.
   default_config.name = config_name
-
-  -- The config here is the one which will be instantiated for the new server,
-  -- which is why this is a function, so that it can refer to the settings
-  -- object on the server.
-  local function add_handlers(config)
-    -- pyright and jdtls ignore dynamicRegistration settings and sent client/registerCapability handler which are unhandled
-    config.handlers['client/registerCapability'] = function(_, _, _, _)
-      log.warn(string.format( [[
-        The language server %s incorrectly triggers a registerCapability handler
-        despite dynamicRegistration set to false. Please report upstream.
-      ]] , config.name))
-      return {
-        result = nil;
-        error = nil;
-      }
-    end
-
-  end
 
   function M.setup(config)
     validate {
@@ -106,7 +87,6 @@ function configs.__newindex(t, config_name, config_def)
         }
       })
 
-      add_handlers(new_config)
       if config_def.on_new_config then
         pcall(config_def.on_new_config, new_config, _root_dir)
       end
