@@ -3824,6 +3824,10 @@ This server accepts configuration via the `settings` key.
 
   null
 
+- **`rust-analyzer.lens.references`**: `boolean`
+
+  null
+
 - **`rust-analyzer.lens.run`**: `boolean`
 
   Default: `true`
