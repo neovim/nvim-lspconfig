@@ -165,6 +165,9 @@ local function make_lsp_sections()
 
                     -- local function pre(s) return string.format("<pre>%s</pre>", s) end
                     -- local function code(s) return string.format("<code>%s</code>", s) end
+                    if not (type(v) == "table") then
+                        return
+                    end
                     return make_section(0, '\n', {
                       "- "..make_section(0, ': ', {
                         bold(tick(k));
