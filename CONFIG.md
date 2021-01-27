@@ -860,6 +860,12 @@ This server accepts configuration via the `settings` key.
   
   An array of paths that either directly point to a Dart SDK or the parent directory of multiple Dart SDKs\. When set\, the version number in the status bar can be used to quickly switch between SDKs\.
 
+- **`dart.shareDevToolsWithFlutter`**: `boolean`
+
+  Default: `true`
+  
+  Whether to eagerly run DevTools for Flutter workspaces and share the spawned server with \`flutter run\`\.
+
 - **`dart.showDartDeveloperLogs`**: `boolean`
 
   Default: `true`
@@ -883,6 +889,12 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Whether to show quick fixes for ignoring hints and lints\.
+
+- **`dart.showInspectorNotificationsForWidgetErrors`**: `boolean`
+
+  Default: `true`
+  
+  null
 
 - **`dart.showMainCodeLens`**: `boolean`
 
@@ -3734,6 +3746,14 @@ This server accepts configuration via the `settings` key.
   null
 
 - **`rust-analyzer.diagnostics.warningsAsInfo`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  null
+
+- **`rust-analyzer.files.excludeDirs`**: `array`
 
   Default: `{}`
   
