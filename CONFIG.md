@@ -25,6 +25,7 @@ that config.
 - [gdscript](#gdscript)
 - [ghcide](#ghcide)
 - [gopls](#gopls)
+- [graphql](#graphql)
 - [groovyls](#groovyls)
 - [hie](#hie)
 - [hls](#hls)
@@ -1505,6 +1506,28 @@ require'lspconfig'.gopls.setup{}
     cmd = { "gopls" }
     filetypes = { "go", "gomod" }
     root_dir = root_pattern("go.mod", ".git")
+```
+
+## graphql
+
+https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-cli
+
+`graphql-lsp` can be installed via `npm`:
+
+```sh
+npm install -g graphql-language-service-cli
+```
+
+
+```lua
+require'lspconfig'.graphql.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "graphql-lsp", "server", "-m", "stream" }
+    filetypes = { "graphql" }
+    root_dir = root_pattern('.git', '.graphqlrc')
 ```
 
 ## groovyls
