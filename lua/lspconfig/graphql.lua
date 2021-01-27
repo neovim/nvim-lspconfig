@@ -12,7 +12,6 @@ configs[server_name] = {
   },
 
   docs = {
-    package_json = 'https://raw.githubusercontent.com/graphql/graphiql/main/packages/graphql-language-service-cli/package.json',
     description = [[
 https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-cli
 
