@@ -22,7 +22,7 @@ require'lspconfig'.sqls.setup{
   ...
 }
 ```
-This LSP can be installed via `go get github.com/lighttiger2505/sqls` Find further instructions on manual installation of the Language Server Protocol for SQL at [lighttiger2505/sqls](https://github.com/lighttiger2505/sqls)
+Sqls can be installed via `go get github.com/lighttiger2505/sqls`. Instructions for compiling Sqls from the source can be found at [lighttiger2505/sqls](https://github.com/lighttiger2505/sqls).
 
     ]];
   };
