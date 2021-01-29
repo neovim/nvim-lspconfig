@@ -21,12 +21,9 @@ require'lspconfig'.sqls.setup{
   cmd = {"path/to/command", "-config" "path/to/config.yml"};
   ...
 }
-
+```
 This LSP can be installed via `go get github.com/lighttiger2505/sqls` Find further instructions on manual installation of the Language Server Protocol for SQL at [lighttiger2505/sqls](https://github.com/lighttiger2505/sqls)
 
-```
-
-<br>
     ]];
   };
 }
