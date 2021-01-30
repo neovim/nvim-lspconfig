@@ -324,6 +324,14 @@ This server accepts configuration via the `settings` key.
   
   Number of threads for running CodeQL tests\.
 
+- **`codeQL.telemetry.enableTelemetry`**: `boolean`
+
+  Specifies whether to send CodeQL usage telemetry\. This setting AND the global \`\#telemetry\.enableTelemetry\#\` setting must be checked for telemetry to be sent to GitHub\.
+
+- **`codeQL.telemetry.logTelemetry`**: `boolean`
+
+  Specifies whether or not to write telemetry events to the extension log\.
+
 </details>
 
 ```lua
@@ -1788,7 +1796,8 @@ require'lspconfig'.jdtls.setup{}
     }
     filetypes = { "java" }
     handlers = {
-      ["textDocument/codeAction"] = <function 1>
+      ["language/status"] = <function 1>,
+      ["textDocument/codeAction"] = <function 2>
     }
     init_options = {
       jvm_args = {},
@@ -4483,6 +4492,18 @@ This server accepts configuration via the `settings` key.
   null
 
 - **`Lua.telemetry.enable`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`Lua.window.progress`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`Lua.window.statusBar`**: `boolean`
 
   Default: `true`
   
