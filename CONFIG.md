@@ -196,7 +196,7 @@ require'lspconfig'.ccls.setup{}
 
 ## clangd
 
-https://clang.llvm.org/extra/clangd/Installation.html
+https://clangd.llvm.org/installation.html
 
 **NOTE:** Clang >= 9 is recommended! See [this issue for more](https://github.com/neovim/nvim-lsp/issues/23).
 
