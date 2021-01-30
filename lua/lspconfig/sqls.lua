@@ -8,7 +8,7 @@ configs.sqls = {
     cmd = {"sqls"};
     filetypes = {"sql", "mysql"};
     root_dir = function(fname)
-      return root_pattern(fname) or vim.loop.os_homedir()
+      return root_pattern(fname) or util.root_pattern(vim.fn.getcwd(), ".git")
     end;
     settings = {};
   };
