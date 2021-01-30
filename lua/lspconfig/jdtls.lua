@@ -25,6 +25,38 @@ local cmd = {
   "--add-opens java.base/java.lang=ALL-UNNAMED",
 }
 
+
+--- The presence of one of these files indicates a root directory.
+--
+-- We search for configuration files of the most common Java build systems. We
+-- could add more build systems, such as Make, but let's keep things simple for
+-- now.
+local root_files = {
+  -- Single-module projects
+  {
+    'build.xml',             -- Ant
+    'pom.xml',               -- Maven
+    'settings.gradle',       -- Gradle
+    'settings.gradle.kts',   -- Gradle
+  },
+  -- Multi-module projects
+  {'build.gradle', 'build.gradle.kts'},
+}
+
+
+--- Callback function for the `language/status` notification.
+--
+-- The server sends a non-standard notification when the status of the language
+-- server changes. This can be used to display progress as the server is
+-- starting up.
+local function on_language_status(_, _, result)
+	local command = vim.api.nvim_command
+    command('echohl ModeMsg')
+    command(string.format('echo "%s"', result.message))
+    command('echohl None')
+end
+
+
 configs[server_name] = {
   default_config = {
     cmd = cmd,
@@ -33,7 +65,13 @@ configs[server_name] = {
       GRADLE_HOME=vim.fn.getenv("GRADLE_HOME"),
     },
     filetypes = { "java" };
-    root_dir = util.root_pattern('.git');
+    root_dir = function(fname)
+      for _, patterns in ipairs(root_files) do
+        local root = util.root_pattern(unpack(patterns))(fname)
+        if root then return root end
+      end
+      return vim.fn.getcwd()
+    end;
     init_options = {
       workspace = path.join { vim.loop.os_homedir(), "workspace" };
       jvm_args = {};
@@ -62,7 +100,8 @@ configs[server_name] = {
         end
 
         handlers['textDocument/codeAction'](a, b, actions)
-      end
+      end;
+      ['language/status'] = vim.schedule_wrap(on_language_status)
     };
   };
   docs = {
