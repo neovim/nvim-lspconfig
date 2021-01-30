@@ -1,14 +1,12 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
-local root_pattern = util.root_pattern(".git", "config.yml")
-
 configs.sqls = {
   default_config = {
     cmd = {"sqls"};
     filetypes = {"sql", "mysql"};
     root_dir = function(fname)
-      return root_pattern(fname) or util.root_pattern(vim.fn.getcwd(), ".git")
+      return util.root_pattern("config.yml")(fname) or util.path.dirname(fname)
     end;
     settings = {};
   };
