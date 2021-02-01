@@ -34,7 +34,7 @@ end
 local mt = {}
 function mt:__index(k)
   if configs[k] == nil then
-    require('lspconfig/'..k)
+    pcall(require, 'lspconfig/'..k)
   end
   return configs[k]
 end
