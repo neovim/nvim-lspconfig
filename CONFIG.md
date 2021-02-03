@@ -327,7 +327,7 @@ This server accepts configuration via the `settings` key.
 
 - **`codeQL.telemetry.enableTelemetry`**: `boolean`
 
-  Specifies whether to send CodeQL usage telemetry\. This setting AND the global \`\#telemetry\.enableTelemetry\#\` setting must be checked for telemetry to be sent to GitHub\.
+  null
 
 - **`codeQL.telemetry.logTelemetry`**: `boolean`
 
@@ -4436,6 +4436,28 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`Lua.hint.enable`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`Lua.hint.paramName`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`Lua.hint.paramType`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`Lua.hint.setType`**: `boolean`
+
+  null
+
 - **`Lua.hover.enable`**: `boolean`
 
   Default: `true`
@@ -4524,7 +4546,7 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`Lua.window.progress`**: `boolean`
+- **`Lua.window.progressBar`**: `boolean`
 
   Default: `true`
   
