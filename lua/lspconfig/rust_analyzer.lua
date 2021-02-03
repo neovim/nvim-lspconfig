@@ -8,7 +8,7 @@ configs.rust_analyzer = {
     root_dir = function(fname)
       local cargo_metadata = vim.fn.system("cargo metadata --format-version 1")
       local cargo_root = nil
-      if vim.v.shell_handler == 0 then
+      if vim.v.shell_error == 0 then
         cargo_root = vim.fn.json_decode(cargo_metadata)["workspace_root"]
       end
       return cargo_root or
