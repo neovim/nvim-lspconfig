@@ -8,7 +8,7 @@ configs.nimls = {
     root_dir = function(fname)
       return util.root_pattern("*.nimble")(fname) or
         util.find_git_ancestor(fname) or
-        vim.loop.os_homedir()
+        util.path.dirname(fname)
     end;
   };
   docs = {
