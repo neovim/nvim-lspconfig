@@ -667,11 +667,11 @@ This server accepts configuration via the `settings` key.
   
   Whether to show Flutter icons and colors in the editor gutter\.
 
-- **`dart.flutterHotReloadOnSave`**: `boolean`
+- **`dart.flutterHotReloadOnSave`**: `enum { "never", "always", "manual" }`
 
-  Default: `true`
+  Default: `"manual"`
   
-  Whether to automatically send a Hot Reload request during a debug session when saving files\.
+  null
 
 - **`dart.flutterHotRestartOnSave`**: `boolean`
 
