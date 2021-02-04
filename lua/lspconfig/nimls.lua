@@ -6,7 +6,9 @@ configs.nimls = {
     cmd = {"nimlsp",};
     filetypes = {'nim'};
     root_dir = function(fname)
-      return util.find_git_ancestor(fname) or vim.loop.os_homedir()
+      return util.root_pattern("*.nimble")(fname) or
+        util.find_git_ancestor(fname) or
+        util.path.dirname(fname)
     end;
   };
   docs = {
