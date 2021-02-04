@@ -87,10 +87,12 @@ function configs.__newindex(t, config_name, config_def)
     M.cmd = config.cmd
 
     -- In the case of a reload, close existing things.
+    local reload = false
     if M.manager then
       for _, client in ipairs(M.manager.clients()) do
         client.stop(true)
       end
+      reload = true
       M.manager = nil
     end
 
@@ -173,6 +175,11 @@ function configs.__newindex(t, config_name, config_def)
 
     M.manager = manager
     M.make_config = make_config
+    if reload and not (config.autostart == false) then
+      for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+        manager.try_add_wrapper(bufnr)
+      end
+    end
   end
 
   function M._setup_buffer(client_id, bufnr)
