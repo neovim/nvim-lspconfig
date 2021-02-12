@@ -1214,9 +1214,13 @@ This server accepts configuration via the `settings` key.
   
   The path to your elm\-test executable\. Should be empty by default\, in that case it will assume the name and try to first get it from a local npm installation or a global one\. If you set it manually it will not try to load from the npm folder\.
 
+- **`elmLS.onlyUpdateDiagnosticsOnSave`**: `boolean`
+
+  Only update compiler diagnostics on save\, not on document change\.
+
 - **`elmLS.skipInstallPackageConfirmation`**: `boolean`
 
-  Skips confirmation for the Install Package code action
+  Skips confirmation for the Install Package code action\.
 
 - **`elmLS.trace.server`**: `enum { "off", "messages", "verbose" }`
 
@@ -4438,8 +4442,6 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.hint.enable`**: `boolean`
 
-  Default: `true`
-  
   null
 
 - **`Lua.hint.paramName`**: `boolean`
