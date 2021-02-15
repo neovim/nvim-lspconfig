@@ -245,7 +245,7 @@ function M.server_per_root_dir_manager(_make_config)
               .."See server documentation.", new_config.name))
           return
       elseif vim.fn.executable(new_config.cmd[1]) == 0 then
-        print(string.format("Error, cmd [%q] is not executable.", new_config.cmd[1]))
+        vim.notify(string.format("cmd [%q] is not executable.", new_config.cmd[1]), vim.log.levels.Error)
         return
       end
       new_config.on_exit = M.add_hook_before(new_config.on_exit, function()
