@@ -113,7 +113,7 @@ function configs.__newindex(t, config_name, config_def)
       new_config._on_attach = new_config.on_attach
       new_config.on_attach = vim.schedule_wrap(function(client, bufnr)
         if bufnr == api.nvim_get_current_buf() then
-          M._setup_buffer(client.id)
+          M._setup_buffer(client.id, bufnr)
         else
           api.nvim_command(string.format(
               "autocmd BufEnter <buffer=%d> ++once lua require'lspconfig'[%q]._setup_buffer(%d)"
@@ -147,10 +147,10 @@ function configs.__newindex(t, config_name, config_def)
     M.make_config = make_config
   end
 
-  function M._setup_buffer(client_id)
+  function M._setup_buffer(client_id, bufnr)
     local client = lsp.get_client_by_id(client_id)
     if client.config._on_attach then
-      client.config._on_attach(client)
+      client.config._on_attach(client, bufnr)
     end
     if client.config.commands and not vim.tbl_isempty(client.config.commands) then
       M.commands = util.tbl_deep_extend("force", M.commands, client.config.commands)
