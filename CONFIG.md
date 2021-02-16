@@ -273,7 +273,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `""`
   
-  Path to the CodeQL executable that should be used by the CodeQL extension\. The executable is named \`codeql\` on Linux\/Mac and \`codeql\.exe\` on Windows\. This overrides all other CodeQL CLI settings\.
+  Path to the CodeQL executable that should be used by the CodeQL extension\. The executable is named \`codeql\` on Linux\/Mac and \`codeql\.exe\` on Windows\. If empty\, the extension will look for a CodeQL executable on your shell PATH\, or if CodeQL is not on your PATH\, download and manage its own CodeQL executable\.
 
 - **`codeQL.queryHistory.format`**: `string`
 
