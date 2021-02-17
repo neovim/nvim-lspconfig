@@ -65,7 +65,7 @@ function configs.__newindex(t, config_name, config_def)
 
     local get_root_dir = config.root_dir
 
-    function M.launch()
+    function M.autostart()
       local root_dir = get_root_dir(api.nvim_buf_get_name(0), api.nvim_get_current_buf())
       api.nvim_command(string.format(
           "autocmd %s lua require'lspconfig'[%q].manager.try_add_wrapper()"
