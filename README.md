@@ -211,6 +211,14 @@ Please see the [wiki](https://github.com/neovim/nvim-lspconfig/wiki) for additio
 
 and more.
 
+## Manually starting (or restarting) language servers
+
+If you would like to manually managing starting language servers, but still have new buffers within a root directory autoattach 
+to running servers, pass `autostart = false` to your `.setup{}` call for a language server and call 
+`:lua require('lspconfig').language_server_name.launch()`.
+
+This function can also be used to restart a workspace after stopping a language server with `:lua vim.lsp.stop_client(client_id)`.
+
 ## setup() function
 
 Only the following arguments can be passed to the setup function:
@@ -254,6 +262,10 @@ lspconfig.SERVER.setup{config}
     Set of filetypes to filter for consideration by {root_dir}.
     May be empty.
     Server may specify a default value.
+
+  {autostart}
+    Whether to automatically start a language server when a matching filetype is detected.
+    Defaults to true.
 
   {log_level}
     controls the level of logs to show from window/logMessage notifications. Defaults to
