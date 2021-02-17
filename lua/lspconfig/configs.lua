@@ -55,13 +55,30 @@ function configs.__newindex(t, config_name, config_def)
     else
       trigger = "BufReadPost *"
     end
-    api.nvim_command(string.format(
-        "autocmd %s lua require'lspconfig'[%q].manager.try_add()"
-        , trigger
-        , config.name
-        ))
+    if not (config.autostart == false) then
+      api.nvim_command(string.format(
+          "autocmd %s lua require'lspconfig'[%q].manager.try_add()"
+          , trigger
+          , config.name
+          ))
+    end
 
     local get_root_dir = config.root_dir
+
+    function M.launch()
+      local root_dir = get_root_dir(api.nvim_buf_get_name(0), api.nvim_get_current_buf())
+      api.nvim_command(string.format(
+          "autocmd %s lua require'lspconfig'[%q].manager.try_add_wrapper()"
+          , "BufReadPost " .. root_dir .. "/*"
+          , config.name
+          ))
+      for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+        local buf_dir = api.nvim_buf_get_name(bufnr)
+        if buf_dir:sub(1, root_dir:len()) == root_dir then
+          M.manager.try_add_wrapper(bufnr)
+        end
+      end
+    end
 
     -- Used by :LspInfo
     M.get_root_dir = config.root_dir
@@ -132,14 +149,25 @@ function configs.__newindex(t, config_name, config_def)
       return make_config(_root_dir)
     end)
 
-    function manager.try_add()
-      if vim.bo.buftype == 'nofile' then
+    function manager.try_add(bufnr)
+      bufnr = bufnr or api.nvim_get_current_buf()
+      if vim.api.nvim_buf_get_option(bufnr, 'filetype') == 'nofile' then
         return
       end
-      local root_dir = get_root_dir(api.nvim_buf_get_name(0), api.nvim_get_current_buf())
+      local root_dir = get_root_dir(api.nvim_buf_get_name(bufnr), bufnr)
       local id = manager.add(root_dir)
       if id then
-        lsp.buf_attach_client(0, id)
+        lsp.buf_attach_client(bufnr, id)
+      end
+    end
+
+    function manager.try_add_wrapper(bufnr)
+      local buftype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+      for _, filetype in ipairs(config.filetypes) do
+        if buftype == filetype then
+          manager.try_add(bufnr)
+          return
+        end
       end
     end
 
