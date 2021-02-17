@@ -215,7 +215,7 @@ and more.
 
 If you would like to manually managing starting language servers, but still have new buffers within a root directory autoattach 
 to running servers, pass `autostart = false` to your `.setup{}` call for a language server and call 
-`:lua require('lspconfig').language_server_name.launch()`.
+`:lua require('lspconfig').language_server_name.autostart()`.
 
 This function can also be used to restart a workspace after stopping a language server with `:lua vim.lsp.stop_client(client_id)`.
 
