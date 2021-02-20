@@ -1010,10 +1010,14 @@ Deno's built-in language server
 require'lspconfig'.denols.setup{}
 
   Commands:
+  - DenolsCache: Cache a module and all of its dependencies.
   
   Default Values:
     cmd = { "deno", "lsp" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+    handlers = {
+      ["textDocument/definition"] = <function 1>
+    }
     init_options = {
       enable = true,
       lint = false,
@@ -4598,6 +4602,12 @@ This server accepts configuration via the `settings` key.
 - **`Lua.workspace.useGitIgnore`**: `boolean`
 
   Default: `true`
+  
+  null
+
+- **`lua.runtime.fileEncoding`**: `enum { "utf8", "ansi" }`
+
+  Default: `"utf8"`
   
   null
 
