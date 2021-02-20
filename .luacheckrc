@@ -10,5 +10,20 @@ ignore = {
 
 -- Global objects defined by the C code
 read_globals = {
-  "vim",
+  vim = {
+    fields = {
+      -- :help lua-vim-variables
+      g = { read_only = false, other_fields = true },
+      b = { read_only = false, other_fields = true },
+      w = { read_only = false, other_fields = true },
+      t = { read_only = false, other_fields = true },
+      v = { read_only = false, other_fields = true },
+      env = { read_only = false, other_fields = true },
+
+      -- :help lua-vim-options
+      o = { read_only = false, other_fields = true },
+      bo = { read_only = false, other_fields = true },
+      wo = { read_only = false, other_fields = true },
+    }
+  }
 }
