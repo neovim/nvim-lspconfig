@@ -12,17 +12,20 @@ local function buf_cache(bufnr)
 end
 
 local function virtual_text_document_handler(uri, result)
-  if not result or #result ~= 1 then return nil end
+  if not result then return nil end
 
-  local lines = vim.split(result[1].result, "\n")
-  local bufnr = vim.uri_to_bufnr(uri)
+  for client_id, res in pairs(result) do
+    local lines = vim.split(res.result, "\n")
+    local bufnr = vim.uri_to_bufnr(uri)
 
-  local current_buf = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-  if #current_buf ~= 0 then return nil end
+    local current_buf = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+    if #current_buf ~= 0 then return nil end
 
-  vim.api.nvim_buf_set_lines(bufnr, 0, -1, nil, lines)
-  vim.api.nvim_buf_set_option(bufnr, "readonly", true)
-  vim.api.nvim_buf_set_option(bufnr, "modified", false)
+    vim.api.nvim_buf_set_lines(bufnr, 0, -1, nil, lines)
+    vim.api.nvim_buf_set_option(bufnr, "readonly", true)
+    vim.api.nvim_buf_set_option(bufnr, "modified", false)
+    lsp.buf_attach_client(bufnr, client_id)
+  end
 end
 
 local function virtual_text_document(uri)
