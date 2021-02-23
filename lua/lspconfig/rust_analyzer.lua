@@ -7,7 +7,7 @@ local function reload_workspace(bufnr)
   lsp.buf_request(bufnr, 'rust-analyzer/reloadWorkspace', nil,
       function(err, _, result, _)
         if err then error(tostring(err)) end
-        print("Workspace reloaded")
+        vim.notify("Workspace reloaded")
       end)
 end
 
