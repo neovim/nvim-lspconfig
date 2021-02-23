@@ -1,5 +1,15 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
+local lsp = vim.lsp
+
+local function reload_workspace(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  lsp.buf_request(bufnr, 'rust-analyzer/reloadWorkspace', _,
+      function(err, _, result, _)
+        if err then error(tostring(err)) end
+        print("Workspace reloaded")
+      end)
+end
 
 configs.rust_analyzer = {
   default_config = {
@@ -20,6 +30,14 @@ configs.rust_analyzer = {
       ["rust-analyzer"] = {}
     };
   };
+  commands = {
+    CargoReload = {
+      function() 
+        reload_workspace(0)
+      end;
+      description = "Reload current workspace"
+    }
+  };
   docs = {
     package_json = "https://raw.githubusercontent.com/rust-analyzer/rust-analyzer/master/editors/code/package.json";
     description = [[
@@ -34,4 +52,6 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
     };
   };
 };
+
+configs.rust_analyzer.reload_workspace = reload_workspace
 -- vim:et ts=2 sw=2
