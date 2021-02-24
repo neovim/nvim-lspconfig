@@ -22,9 +22,9 @@ that are installed on your system.
 2. Install `nvim-lspconfig` via your plugin manager
 3. Add the language server setup to your init.vim. The server name must match those found in the table of contents in [CONFIG.md](CONFIG.md)
 ```vim
-lua << EOF 
+lua << EOF
 require'lspconfig'.pyright.setup{}
-EOF 
+EOF
 ```
 4. Open a file that is placed in a directory recognized by the server 
 (see server configuration in [CONFIG.md](CONFIG.md); e.g., for [pyright](CONFIG.md#pyright), this is 
