@@ -6,9 +6,11 @@ local server_name = "denols"
 
 local function buf_cache(bufnr)
   local params = {}
-  params["referrer"] = { textDocument = { uri = vim.uri_from_bufnr(bufnr) } }
+  params["referrer"] = { uri = vim.uri_from_bufnr(bufnr) }
   params["uris"] = {}
-  lsp.buf_request(bufnr, "deno/cache", params)
+  lsp.buf_request(bufnr, "deno/cache", params, function(err)
+    if err then error(tostring(err)) end
+  end)
 end
 
 local function virtual_text_document_handler(uri, result)
