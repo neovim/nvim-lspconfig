@@ -108,6 +108,7 @@ function M.has_bins(...)
   return true
 end
 
+
 -- Some path utilities
 M.path = (function()
   local function exists(filename)
@@ -223,6 +224,43 @@ M.path = (function()
   }
 end)()
 
+local function set_value(settings, key, value)
+  local keys = vim.split(key, '.', true)
+  for idx,k in ipairs(keys) do
+    if idx == #keys then
+      settings[k] = value
+    else
+      if settings[k] == nil then
+        settings[k] = {}
+      end
+      settings = settings[k]
+    end
+  end
+end
+
+local function read_package_json(package_json)
+  local file = io.open(package_json, 'rb')
+  if not file then return {} end
+  local content = fn.json_decode(file:read "*a").contributes.configuration.properties
+  file:close()
+
+  local settings = {}
+  for k, v in pairs(content) do
+      set_value(settings, k, v)
+  end
+  return settings
+end
+
+function M.validate_server_settings(server_settings, package_json)
+  -- TODO (saad parwaiz) improve validation
+  local default_server_settings = read_package_json(package_json)
+  for k,v in pairs(server_settings) do
+    if default_server_settings[k] == nil then
+      return {}
+    end
+  end
+  return server_settings
+end
 
 -- Returns a function(root_dir), which, when called with a root_dir it hasn't
 -- seen before, will call make_config(root_dir) and start a new client.
