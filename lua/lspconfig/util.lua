@@ -108,7 +108,6 @@ function M.has_bins(...)
   return true
 end
 
-
 -- Some path utilities
 M.path = (function()
   local function exists(filename)
@@ -254,7 +253,7 @@ end
 function M.validate_server_settings(server_settings, package_json)
   -- TODO (saad parwaiz) improve validation
   local default_server_settings = read_package_json(package_json)
-  for k,v in pairs(server_settings) do
+  for k,_ in pairs(server_settings) do
     if default_server_settings[k] == nil then
       return {}
     end
