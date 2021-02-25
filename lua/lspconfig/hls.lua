@@ -11,6 +11,13 @@ configs.hls = {
         formattingProvider = "ormolu";
       };
     };
+    lspinfo = function (cfg)
+      -- return "specific"
+      if cfg.settings.languageServerHaskell.logFile or false then
+        return "logfile: "..cfg.settings.languageServerHaskell.logFile
+      end
+      return ""
+    end;
   };
 
   docs = {
