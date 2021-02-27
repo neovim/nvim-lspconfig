@@ -46,12 +46,18 @@ return function ()
 
   local indent = "  "
   local function make_client_info(client)
+    local server_specific_info = ""
+    if client.config.lspinfo then
+      server_specific_info = client.config.lspinfo(client.config)
+    end
     return {
       "",
       indent.."Client: "..client.name.." (id "..tostring(client.id)..")",
       indent.."\troot:      "..client.workspaceFolders[1].name,
       indent.."\tfiletypes: "..table.concat(client.config.filetypes or {}, ', '),
       indent.."\tcmd:       "..remove_newlines(client.config.cmd),
+      indent.."\t"..server_specific_info,
+      ""
     }
   end
 
