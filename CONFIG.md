@@ -286,7 +286,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `200`
   
-  Number of queries displayed per page of the results view\.
+  Max number of query results to display per page in the results view\.
 
 - **`codeQL.runningQueries.autoSave`**: `boolean`
 
@@ -1745,6 +1745,7 @@ require'lspconfig'.hls.setup{}
   Default Values:
     cmd = { "haskell-language-server-wrapper", "--lsp" }
     filetypes = { "haskell", "lhaskell" }
+    lspinfo = <function 1>
     root_dir = root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")
     settings = {
       languageServerHaskell = {
@@ -2312,6 +2313,12 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   \[Recommended\] Specifies whether URIs inside JARs should be represented using the \'kls\'\-scheme\.
+
+- **`kotlin.indexing.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Whether global symbols in the project should be indexed automatically in the background\. This enables e\.g\. code completion for unimported classes and functions\.
 
 - **`kotlin.languageServer.debugAttach.autoSuspend`**: `boolean`
 
