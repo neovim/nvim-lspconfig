@@ -4071,6 +4071,7 @@ This server accepts configuration via the `settings` key.
 require'lspconfig'.rust_analyzer.setup{}
 
   Commands:
+  - CargoReload: Reload current cargo workspace
   
   Default Values:
     cmd = { "rust-analyzer" }
