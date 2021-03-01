@@ -4738,7 +4738,7 @@ require'lspconfig'.terraformls.setup{}
   
   Default Values:
     cmd = { "terraform-ls", "serve" }
-    filetypes = { "terraform" }
+    filetypes = { "terraform", "hcl" }
     root_dir = root_pattern(".terraform", ".git")
 ```
 
