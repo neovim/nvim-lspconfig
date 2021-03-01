@@ -20,6 +20,7 @@ that config.
 - [efm](#efm)
 - [elixirls](#elixirls)
 - [elmls](#elmls)
+- [erlangls](#erlangls)
 - [flow](#flow)
 - [fortls](#fortls)
 - [fsautocomplete](#fsautocomplete)
@@ -1250,6 +1251,33 @@ require'lspconfig'.elmls.setup{}
       elmTestPath = "elm-test"
     }
     root_dir = root_pattern("elm.json")
+```
+
+## erlangls
+
+https://erlang-ls.github.io
+
+Language Server for Erlang.
+
+Clone [erlang_ls](https://github.com/erlang-ls/erlang_ls)
+Compile the project with `make` and copy resulting binaries somewhere in your $PATH eg. `cp _build/*/bin/* ~/local/bin`
+
+Installation instruction can be found [here](https://github.com/erlang-ls/erlang_ls).
+
+Installation requirements:
+    - [Erlang OTP 21+](https://github.com/erlang/otp)
+    - [rebar3 3.9.1+](https://github.com/erlang/rebar3)
+
+
+```lua
+require'lspconfig'.erlangls.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "erlang_ls" }
+    filetypes = { "erlang" }
+    root_dir = root_pattern('rebar.config', 'erlang.mk', '.git') or util.path.dirname(fname)
 ```
 
 ## flow
@@ -2953,7 +2981,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"spago build --purs-args --json-errors"`
   
-  Build command to use with arguments\. Not passed to shell\. eg \`pulp build \-\- \-\-json\-errors\` \(this default requires pulp \>\=10\)
+  Build command to use with arguments\. Not passed to shell\. eg \`spago build \-\-purs\-args \-\-json\-errors\`
 
 - **`purescript.censorWarnings`**: `array`
 
