@@ -4,6 +4,26 @@ local lsp = vim.lsp
 
 local server_name = "denols"
 
+local function deno_uri_to_uri(uri)
+  -- 1.7.4 LS returns deno:///https/deno.land/std@0.85.0/http/server.ts
+  -- 1.7.5 LS returns deno:/https/deno.land/std%400.85.0/http/server.ts
+  -- nvim-lsp only handles deno://
+  if string.sub(uri, 1, 6) == "deno:/" and string.sub(uri, 7, 7) ~= "/" then
+    return string.gsub(uri, "^deno:/", "deno://", 1)
+  end
+  return uri
+end
+
+local function uri_to_deno_uri(uri)
+  -- 1.7.4 LS use deno:/// and nvim-lsp use deno:/// as buffer_uri, too.
+  -- 1.7.5 LS use deno:/   and nvim-lsp use deno://  as buffer_uri.
+  -- When buffer_uri is deno://, change uri to deno:/.
+  if string.sub(uri, 1, 7) == "deno://" and string.sub(uri, 8, 8) ~= "/" then
+    return string.gsub(uri, "^deno://", "deno:/", 1)
+  end
+  return uri
+end
+
 local function buf_cache(bufnr)
   local params = {}
   params["referrer"] = { uri = vim.uri_from_bufnr(bufnr) }
@@ -18,7 +38,7 @@ local function virtual_text_document_handler(uri, result)
 
   for client_id, res in pairs(result) do
     local lines = vim.split(res.result, "\n")
-    local bufnr = vim.uri_to_bufnr(uri)
+    local bufnr = vim.uri_to_bufnr(deno_uri_to_uri(uri))
 
     local current_buf = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
     if #current_buf ~= 0 then return nil end
@@ -26,6 +46,7 @@ local function virtual_text_document_handler(uri, result)
     vim.api.nvim_buf_set_lines(bufnr, 0, -1, nil, lines)
     vim.api.nvim_buf_set_option(bufnr, "readonly", true)
     vim.api.nvim_buf_set_option(bufnr, "modified", false)
+    vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
     lsp.buf_attach_client(bufnr, client_id)
   end
 end
@@ -40,6 +61,25 @@ local function virtual_text_document(uri)
   virtual_text_document_handler(uri, result)
 end
 
+local function definition_handler(err, method, result)
+  if not result or vim.tbl_isempty(result) then return nil end
+
+  for _, res in pairs(result) do
+    if string.sub(res.targetUri, 1, 6) == "deno:/" then
+      virtual_text_document(res.targetUri)
+      res.targetUri = deno_uri_to_uri(res.targetUri)
+    end
+  end
+
+  lsp.handlers["textDocument/definition"](err, method, result)
+end
+
+local function denols_definition()
+  local params = lsp.util.make_position_params()
+  params.textDocument.uri = uri_to_deno_uri(params.textDocument.uri)
+  lsp.buf_request(0, "textDocument/definition", params)
+end
+
 configs[server_name] = {
   default_config = {
     cmd = {"deno", "lsp"};
@@ -51,20 +91,14 @@ configs[server_name] = {
       unstable = false;
     };
     handlers = {
-      ["textDocument/definition"] = function(err, method, result)
-        if not result or vim.tbl_isempty(result) then return nil end
-
-        for _, res in pairs(result) do
-          if string.sub(res.targetUri, 1, 7) == "deno://" then
-            virtual_text_document(res.targetUri)
-          end
-        end
-
-        lsp.handlers["textDocument/definition"](err, method, result)
-      end;
+      ["textDocument/definition"] = definition_handler;
     };
   };
   commands = {
+    DenolsDefinition = {
+      denols_definition;
+      description = "Jump to definition. This handle deno:/ schema in deno:// buffer."
+    };
     DenolsCache = {
       function()
         buf_cache(0)
@@ -84,6 +118,7 @@ Deno's built-in language server
   };
 }
 
+configs.denols.definition = denols_definition
 configs.denols.buf_cache = buf_cache
 configs.denols.virtual_text_document = virtual_text_document
 -- vim:et ts=2 sw=2
