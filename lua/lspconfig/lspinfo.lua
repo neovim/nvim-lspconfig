@@ -83,7 +83,7 @@ return function ()
   vim.list_extend(buf_lines, matching_config_header)
   for _, config in pairs(configs) do
     local cmd_is_executable, cmd
-    if config.cmd then
+    if config.cmd and type(config.cmd[1]) == "string" then
       cmd = remove_newlines(config.cmd)
       if vim.fn.executable(config.cmd[1]) == 1 then
         cmd_is_executable = "True"
