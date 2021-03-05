@@ -823,8 +823,10 @@ This server accepts configuration via the `settings` key.
 
   null
 
-- **`dart.previewLsp`**: `boolean`
+- **`dart.previewLsp`**: `null|boolean`
 
+  Default: `vim.NIL`
+  
   null
 
 - **`dart.promptToGetPackages`**: `boolean`
@@ -3709,15 +3711,15 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`rust-analyzer.cargo.loadOutDirsFromCheck`**: `boolean`
-
-  null
-
 - **`rust-analyzer.cargo.noDefaultFeatures`**: `boolean`
 
   null
 
 - **`rust-analyzer.cargo.noSysroot`**: `boolean`
+
+  null
+
+- **`rust-analyzer.cargo.runBuildScripts`**: `boolean`
 
   null
 
@@ -4587,6 +4589,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`Lua.runtime.fileEncoding`**: `enum { "utf8", "ansi" }`
+
+  Default: `"utf8"`
+  
+  null
+
 - **`Lua.runtime.nonstandardSymbol`**: `array`
 
   Array items: `{enum = { "//", "/**/", "`", "+=", "-=", "*=", "/=", "||", "&&", "!", "!=", "continue" },type = "string"}`
@@ -4678,12 +4686,6 @@ This server accepts configuration via the `settings` key.
 - **`Lua.workspace.useGitIgnore`**: `boolean`
 
   Default: `true`
-  
-  null
-
-- **`lua.runtime.fileEncoding`**: `enum { "utf8", "ansi" }`
-
-  Default: `"utf8"`
   
   null
 
@@ -5088,6 +5090,12 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Whether to enable codeActions
+
+- **`vetur.languageFeatures.updateImportOnFileMove`**: `boolean`
+
+  Default: `true`
+  
+  Whether to automatic updating import path when rename or move a file
 
 - **`vetur.trace.server`**: `enum { "off", "messages", "verbose" }`
 
