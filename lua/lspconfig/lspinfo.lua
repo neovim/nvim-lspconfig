@@ -120,6 +120,7 @@ return function ()
   buf_lines = vim.lsp.util._trim_and_pad(buf_lines, { pad_left = 2, pad_top = 1})
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, buf_lines )
   vim.api.nvim_buf_set_option(bufnr,'modifiable',false)
+  vim.api.nvim_buf_set_option(bufnr,'filetype','lspinfo')
   vim.fn.matchadd("Title", table.concat(vim.tbl_keys(configs), '\\|'))
   vim.fn.matchadd("Title", buffer_filetype)
   vim.fn.matchadd("Error",
