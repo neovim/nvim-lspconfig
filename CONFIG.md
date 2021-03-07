@@ -1015,12 +1015,15 @@ require'lspconfig'.denols.setup{}
 
   Commands:
   - DenolsCache: Cache a module and all of its dependencies.
+  - DenolsDefinition: Jump to definition. This handle deno:/ schema in deno:// buffer.
+  - DenolsReferences: List references. This handle deno:/ schema in deno:// buffer.
   
   Default Values:
     cmd = { "deno", "lsp" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
     handlers = {
-      ["textDocument/definition"] = <function 1>
+      ["textDocument/definition"] = <function 1>,
+      ["textDocument/references"] = <function 1>
     }
     init_options = {
       enable = true,
@@ -3674,6 +3677,12 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
     
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
+
+- **`rust-analyzer.assist.importGroup`**: `boolean`
+
+  Default: `true`
+  
+  null
 
 - **`rust-analyzer.assist.importMergeBehavior`**: `enum { "none", "full", "last" }`
 
