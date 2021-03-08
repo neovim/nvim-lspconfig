@@ -3730,6 +3730,8 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.cargo.runBuildScripts`**: `boolean`
 
+  Default: `true`
+  
   null
 
 - **`rust-analyzer.cargo.target`**: `null|string`
@@ -4676,8 +4678,10 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`Lua.workspace.library`**: `object`
+- **`Lua.workspace.library`**: `array`
 
+  Array items: `{type = "string"}`
+  
   null
 
 - **`Lua.workspace.maxPreload`**: `integer`
