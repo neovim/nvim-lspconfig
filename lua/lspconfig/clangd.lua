@@ -14,7 +14,7 @@ end
 
 local root_pattern = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")
 
-local default_capabilities = vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(), {
+local default_capabilities = vim.tbl_deep_extend('force', util.default_config.capabilities, {
   textDocument = {
     completion = {
       editsNearCursor = true
