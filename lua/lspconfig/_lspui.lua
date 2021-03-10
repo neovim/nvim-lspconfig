@@ -92,7 +92,7 @@ function win_float.percentage_range_window(col_range, row_range, options)
   win_opts.width = math.floor(vim.o.columns * width_percentage)
 
   local bufnr = options.bufnr or vim.api.nvim_create_buf(false, true)
-  local win_id = vim.fn.nvim_open_win(bufnr, true, win_opts)
+  local win_id = vim.api.nvim_open_win(bufnr, true, win_opts)
   vim.api.nvim_win_set_buf(win_id, bufnr)
 
   vim.cmd('setlocal nocursorcolumn')
