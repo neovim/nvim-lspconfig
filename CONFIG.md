@@ -66,6 +66,7 @@ that config.
 - [terraformls](#terraformls)
 - [texlab](#texlab)
 - [tsserver](#tsserver)
+- [vala_ls](#vala_ls)
 - [vimls](#vimls)
 - [vls](#vls)
 - [vuels](#vuels)
@@ -4847,6 +4848,21 @@ require'lspconfig'.tsserver.setup{}
     cmd = { "typescript-language-server", "--stdio" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
     root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+```
+
+## vala_ls
+
+https://github.com/benwaffle/vala-language-server
+
+```lua
+require'lspconfig'.vala_ls.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "vala-language-server" }
+    filetypes = { "vala", "genie" }
+    root_dir = root_pattern("meson.build", ".git")
 ```
 
 ## vimls
