@@ -46,6 +46,7 @@ that config.
 - [ocamllsp](#ocamllsp)
 - [omnisharp](#omnisharp)
 - [perlls](#perlls)
+- [powershell_es](#powershell_es)
 - [purescriptls](#purescriptls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
@@ -1768,12 +1769,6 @@ This server accepts configuration via the `settings` key.
   
   If set\, redirects the logs to a file\.
 
-- **`haskell.maxNumberOfProblems`**: `number`
-
-  Default: `100`
-  
-  Controls the maximum number of problems produced by the server
-
 - **`haskell.plugin.class.globalOn`**: `boolean`
 
   Default: `true`
@@ -3075,6 +3070,47 @@ require'lspconfig'.perlls.setup{}
         perlInc = " "
       }
     }
+```
+
+## powershell_es
+
+https://github.com/PowerShell/PowerShellEditorServices
+
+Language server for PowerShell.
+
+To install, download and extract PowerShellEditorServices.zip
+from the [releases](https://github.com/PowerShell/PowerShellEditorServices/releases).
+To configure the language server, set the property `bundle_path` to the root
+of the extracted PowerShellEditorServices.zip.
+
+The default configuration doesn't set `cmd` unless `bundle_path` is specified.
+
+```lua
+require'lspconfig'.powershell_es.setup{
+  bundle_path = 'c:/w/PowerShellEditorServices',
+}
+```
+
+If necessary, specific `cmd` can be defined instead of `bundle_path`.
+See [PowerShellEditorServices](https://github.com/PowerShell/PowerShellEditorServices#stdio)
+to learn more.
+
+```lua
+require'lspconfig'.powershell_es.setup{
+  cmd = {'pwsh', '-NoLogo', '-NoProfile', '-Command', "c:/PSES/Start-EditorServices.ps1 ..."}
+}
+```
+
+
+```lua
+require'lspconfig'.powershell_es.setup{}
+
+  Commands:
+  
+  Default Values:
+    filetypes = { "ps1" }
+    on_new_config = <function 1>
+    root_dir = git root or current directory
 ```
 
 ## purescriptls
