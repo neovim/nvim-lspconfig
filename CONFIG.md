@@ -295,6 +295,12 @@ This server accepts configuration via the `settings` key.
 
   Enable automatically saving a modified query file when running a query\.
 
+- **`codeQL.runningQueries.cacheSize`**: `integer|null`
+
+  Default: `vim.NIL`
+  
+  Maximum size of the disk cache \(in MB\)\. Leave blank to allow the evaluator to automatically adjust the size of the disk cache based on the size of the codebase and the complexity of the queries being executed\.
+
 - **`codeQL.runningQueries.debug`**: `boolean`
 
   Enable debug logging and tuple counting when running CodeQL queries\. This information is useful for debugging query performance\.
@@ -316,6 +322,10 @@ This server accepts configuration via the `settings` key.
   Default: `1`
   
   Number of threads for running queries\.
+
+- **`codeQL.runningQueries.saveCache`**: `boolean`
+
+  Aggressively save intermediate results to the disk cache\. This may speed up subsequent queries if they are similar\. Be aware that using this option will greatly increase disk usage and initial evaluation time\.
 
 - **`codeQL.runningQueries.timeout`**: `integer|null`
 
@@ -1744,23 +1754,13 @@ This server accepts configuration via the `settings` key.
 
   Default: `"ormolu"`
   
-  The formatter to use when formatting a document or range
+  The formatter to use when formatting a document or range\. Ensure the plugin is enabled\.
 
 - **`haskell.hlintOn`**: `boolean`
 
   Default: `true`
   
   Get suggestions from hlint
-
-- **`haskell.languageServerVariant`**: `enum { "haskell-ide-engine", "haskell-language-server", "ghcide" }`
-
-  Default: `"haskell-language-server"`
-  
-  Which language server to use\.
-
-- **`haskell.liquidOn`**: `boolean`
-
-  Get diagnostics from liquid haskell
 
 - **`haskell.logFile`**: `string`
 
@@ -1773,6 +1773,108 @@ This server accepts configuration via the `settings` key.
   Default: `100`
   
   Controls the maximum number of problems produced by the server
+
+- **`haskell.plugin.class.globalOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables type class plugin
+
+- **`haskell.plugin.eval.globalOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables eval plugin
+
+- **`haskell.plugin.ghcide-type-lenses.config.mode`**: `enum { "always", "exported", "diagnostics" }`
+
+  Default: `true`
+  
+  Control how type lenses are shown
+
+- **`haskell.plugin.ghcide-type-lenses.globalOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables type lenses plugin
+
+- **`haskell.plugin.haddockComments.globalOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables haddock comments plugin
+
+- **`haskell.plugin.hlint.codeActionsOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables hlint code actions \(apply hints\)
+
+- **`haskell.plugin.hlint.diagnosticsOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables hlint diagnostics
+
+- **`haskell.plugin.importLens.codeActionsOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables explicit imports code actions
+
+- **`haskell.plugin.importLens.codeLensOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables explicit imports code lenses
+
+- **`haskell.plugin.moduleName.globalOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables module name plugin
+
+- **`haskell.plugin.pragmas.codeActionsOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables pragmas code actions
+
+- **`haskell.plugin.pragmas.completionOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables pragmas completions
+
+- **`haskell.plugin.retrie.globalOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables retrie plugin
+
+- **`haskell.plugin.splice.globalOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables splice plugin \(expand template haskell definitions\)
+
+- **`haskell.plugin.tactic.config.features`**: `Object`
+
+  Default: `true`
+  
+  null
+
+- **`haskell.plugin.tactic.config.max_use_ctor_actions`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`haskell.plugin.tactic.globalOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables wingman \(tactic\) plugin
 
 - **`haskell.releasesURL`**: `string`
 
@@ -4645,6 +4747,12 @@ This server accepts configuration via the `settings` key.
 - **`Lua.intelliSense.searchDepth`**: `integer`
 
   Default: `0`
+  
+  null
+
+- **`Lua.misc.parameters`**: `string`
+
+  Default: `""`
   
   null
 
