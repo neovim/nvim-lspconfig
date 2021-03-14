@@ -337,4 +337,4 @@ a new configuration for it would be appreciated. You can follow these steps:
    - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/)
      to get started. Most configs are simple. For an extensive example see
      [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/texlab.lua).
-4. Ask questions in [Neovim Gitter](https://gitter.im/neovim/neovim).
+4. Ask questions on our [Discourse](https://neovim.discourse.group/c/7-category/7) or in [Neovim Gitter](https://gitter.im/neovim/neovim).
