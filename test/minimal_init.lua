@@ -1,13 +1,11 @@
-local execute = vim.api.nvim_command
+-- install packer
 local fn = vim.fn
 
-local install_path = "/tmp/site/pack/packer/opt/packer.nvim"
+local install_path = '/tmp/nvim/site/pack/packer/opt/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
+  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
-
-execute "packadd packer.nvim"
 
 vim.cmd [[packadd packer.nvim]]
 vim.cmd [[autocmd BufWritePost minimal_init.lua PackerCompile]]
@@ -19,7 +17,7 @@ require("packer").startup(
     function()
       use "neovim/nvim-lspconfig"
     end,
-    config = {package_root = "/tmp/site/pack"}
+    config = {package_root = '/tmp/nvim/site/pack'}
   }
 )
 
