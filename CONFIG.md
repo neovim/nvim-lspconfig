@@ -6,6 +6,7 @@ that config.
 - [als](#als)
 - [angularls](#angularls)
 - [bashls](#bashls)
+- [beancount](#beancount)
 - [ccls](#ccls)
 - [clangd](#clangd)
 - [clojure_lsp](#clojure_lsp)
@@ -160,6 +161,28 @@ require'lspconfig'.bashls.setup{}
     root_dir = vim's starting directory
 ```
 
+## beancount
+
+https://github.com/polarmutex/beancount-language-server#installation
+
+See https://github.com/polarmutex/beancount-language-server#configuration for configuration options
+
+
+```lua
+require'lspconfig'.beancount.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "beancount-langserver" }
+    filetypes = { "beancount" }
+    init_options = {
+      journalFile = "",
+      pythonPath = "python3"
+    }
+    root_dir = root_pattern("elm.json")
+```
+
 ## ccls
 
 https://github.com/MaskRay/ccls/wiki
@@ -282,9 +305,9 @@ This server accepts configuration via the `settings` key.
 
 - **`codeQL.queryHistory.format`**: `string`
 
-  Default: `"[%t] %q on %d - %s"`
+  Default: `"%q on %d - %s, %r result count [%t]"`
   
-  Default string for how to label query history items\. \%t is the time of the query\, \%q is the query name\, \%d is the database name\, and \%s is a status string\.
+  Default string for how to label query history items\. \%t is the time of the query\, \%q is the query name\, \%d is the database name\, \%r is the number of results\, and \%s is a status string\.
 
 - **`codeQL.resultsDisplay.pageSize`**: `integer`
 
@@ -4208,6 +4231,8 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.procMacro.enable`**: `boolean`
 
+  Default: `true`
+  
   null
 
 - **`rust-analyzer.procMacro.server`**: `null|string`
@@ -4790,6 +4815,10 @@ This server accepts configuration via the `settings` key.
 
   Default: `""`
   
+  null
+
+- **`Lua.runtime.builtin`**: `object`
+
   null
 
 - **`Lua.runtime.fileEncoding`**: `enum { "utf8", "ansi" }`
