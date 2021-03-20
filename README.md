@@ -79,8 +79,6 @@ the `name`, `log_level`, `message_level`, and `settings` of texlab:
 local lspconfig = require'lspconfig'
 lspconfig.texlab.setup{
   name = 'texlab_fancy';
-  log_level = vim.lsp.protocol.MessageType.Log;
-  message_level = vim.lsp.protocol.MessageType.Log;
   settings = {
     latex = {
       build = {
@@ -120,14 +118,28 @@ lspconfig.foo_lsp.setup{}
 
 ### Example: override default config for all servers
 
-If you want to change default configs for all servers, you can override default_config like this.
+If you want to change default configs for all servers, you can override default_config like this. In this example, we additionally add a check for log_level and message_level which can be passed to the server to control the verbosity of "window/logMessage".
 
 ```lua
 local lspconfig = require'lspconfig'
 lspconfig.util.default_config = vim.tbl_extend(
   "force",
   lspconfig.util.default_config,
-  { log_level = lsp.protocol.MessageType.Warning.Error }
+  {
+    autostart = false,
+    handlers = {
+      ["window/logMessage"] = function(err, method, params, client_id)
+          if params and params.type <= vim.lsp.protocol.MessageType.Log then
+            vim.lsp.handlers["window/logMessage"](err, method, params, client_id)
+          end
+        end;
+      ["window/showMessage"] = function(err, method, params, client_id)
+          if params and params.type <= vim.lsp.protocol.MessageType.Warning.Error then
+            vim.lsp.handlers["window/showMessage"](err, method, params, client_id)
+          end
+        end;
+    }
+  }
 )
 ```
 
@@ -266,16 +278,6 @@ lspconfig.SERVER.setup{config}
   {autostart}
     Whether to automatically start a language server when a matching filetype is detected.
     Defaults to true.
-
-  {log_level}
-    controls the level of logs to show from window/logMessage notifications. Defaults to
-    vim.lsp.protocol.MessageType.Warning instead of
-    vim.lsp.protocol.MessageType.Log.
-
-  {message_level}
-    controls the level of messages to show from window/showMessage notifications. Defaults to
-    vim.lsp.protocol.MessageType.Warning instead of
-    vim.lsp.protocol.MessageType.Log.
 
   {settings}
     Map with case-sensitive keys corresponding to `workspace/configuration`
