@@ -357,6 +357,12 @@ This server accepts configuration via the `settings` key.
   
   Timeout \(in seconds\) for running queries\. Leave blank or set to zero for no timeout\.
 
+- **`codeQL.runningTests.additionalTestArguments`**: `array`
+
+  Default: `{}`
+  
+  null
+
 - **`codeQL.runningTests.numberOfThreads`**: `integer`
 
   Default: `1`
@@ -379,11 +385,18 @@ require'lspconfig'.codeqlls.setup{}
   Commands:
   
   Default Values:
-    before_init = <function 1>
+    before_init = function(initialize_params, config)
+                initialize_params['workspaceFolders'] = {{
+                    name = 'workspace',
+                    uri = initialize_params['rootUri']
+                }}
+            end;
     cmd = { "codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q" }
     filetypes = { "ql" }
     log_level = 2
-    root_dir = <function 1>
+    root_dir = function(fname)
+                return root_pattern("qlpack.yml") or util.path.dirname(fname)
+            end;
     settings = {
       search_path = "list containing all search paths, eg: '~/codeql-home/codeql-repo'"
     }
@@ -549,7 +562,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"ws"`
   
-  The protocol to use for the Dart Debug Extension backend service\. Using WebSockets can improve performance but may fail when connecting through some proxy servers\.
+  The protocol to use for the Dart Debug Extension backend service and injected client\. Using WebSockets can improve performance but may fail when connecting through some proxy servers\.
 
 - **`dart.debugExternalLibraries`**: `boolean`
 
@@ -1086,7 +1099,9 @@ require'lspconfig'.dhall_lsp_server.setup{}
       description = "https://github.com/dhall-lang/dhall-haskell/tree/master/dhall-lsp-server\n\nlanguage server for dhall\n\n`dhall-lsp-server` can be installed via cabal:\n```sh\ncabal install dhall-lsp-server\n```\nprebuilt binaries can be found [here](https://github.com/dhall-lang/dhall-haskell/releases).\n"
     }
     filetypes = { "dhall" }
-    root_dir = <function 1>
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
 ```
 
 ## diagnosticls
@@ -1576,7 +1591,9 @@ require'lspconfig'.fsautocomplete.setup{}
     init_options = {
       AutomaticWorkspaceInit = true
     }
-    root_dir = <function 1>
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
 ```
 
 ## gdscript
@@ -1876,13 +1893,13 @@ This server accepts configuration via the `settings` key.
   
   Enables splice plugin \(expand template haskell definitions\)
 
-- **`haskell.plugin.tactic.config.features`**: `Object`
+- **`haskell.plugin.tactic.config.features`**: `string`
 
   Default: `true`
   
   null
 
-- **`haskell.plugin.tactic.config.max_use_ctor_actions`**: `boolean`
+- **`haskell.plugin.tactic.config.max_use_ctor_actions`**: `integer`
 
   Default: `true`
   
@@ -1946,7 +1963,13 @@ require'lspconfig'.hls.setup{}
   Default Values:
     cmd = { "haskell-language-server-wrapper", "--lsp" }
     filetypes = { "haskell", "lhaskell" }
-    lspinfo = <function 1>
+    lspinfo = function (cfg)
+          -- return "specific"
+          if cfg.settings.languageServerHaskell.logFile or false then
+            return "logfile: "..cfg.settings.languageServerHaskell.logFile
+          end
+          return ""
+        end;
     root_dir = root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")
     settings = {
       languageServerHaskell = {
@@ -1993,7 +2016,9 @@ require'lspconfig'.html.setup{}
         javascript = true
       }
     }
-    root_dir = <function 1>
+    root_dir = function(fname)
+          return root_pattern(fname) or vim.loop.os_homedir()
+        end;
     settings = {}
 ```
 
@@ -2221,6 +2246,12 @@ This server accepts configuration via the `settings` key.
   Default: `{}`
   
   Additional Julia arguments\.
+
+- **`julia.editor`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  null
 
 - **`julia.enableCrashReporter`**: `boolean|null`
 
@@ -2456,8 +2487,15 @@ require'lspconfig'.julials.setup{}
   Default Values:
     cmd = { "julia", "--startup-file=no", "--history-file=no", "-e", '    using Pkg;\n    Pkg.instantiate()\n    using LanguageServer; using SymbolServer;\n    depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n    project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n    # Make sure that we only load packages from this environment specifically.\n    @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n    server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n    server.runlinter = true;\n    run(server);\n  ' }
     filetypes = { "julia" }
-    on_new_config = <function 1>
-    root_dir = <function 1>
+    on_new_config = function(new_config, _)
+          local server_path = vim.fn.system("julia -e 'print(Base.find_package(\"LanguageServer\"))'")
+          local new_cmd = vim.deepcopy(cmd)
+          table.insert(new_cmd, 2, "--project="..server_path:sub(0,-19))
+          new_config.cmd = new_cmd
+        end,
+    root_dir = function(fname)
+          return util.find_git_ancestor(fname) or vim.fn.getcwd()
+        end;
 ```
 
 ## kotlin_language_server
@@ -3132,7 +3170,10 @@ require'lspconfig'.powershell_es.setup{}
   
   Default Values:
     filetypes = { "ps1" }
-    on_new_config = <function 1>
+    on_new_config = function(new_config, _)
+          local bundle_path = new_config.bundle_path
+          new_config.cmd = make_cmd(bundle_path)
+        end,
     root_dir = git root or current directory
 ```
 
@@ -3676,7 +3717,10 @@ require'lspconfig'.pyright.setup{}
   Default Values:
     cmd = { "pyright-langserver", "--stdio" }
     filetypes = { "python" }
-    root_dir = <function 1>
+    root_dir = function(filename)
+          return util.root_pattern(unpack(root_files))(filename) or
+                 util.path.dirname(filename)
+        end;
     settings = {
       python = {
         analysis = {
@@ -3785,7 +3829,10 @@ require'lspconfig'.racket_langserver.setup{}
   Default Values:
     cmd = { "racket", "--lib", "racket-langserver" }
     filetypes = { "racket", "scheme" }
-    root_dir = <function 1>
+    root_dir = function(filename)
+          return util.root_pattern(unpack(root_files))(filename) or
+            util.path.dirname(filename)
+          end
 ```
 
 ## rls
@@ -4576,7 +4623,9 @@ require'lspconfig'.sqlls.setup{}
   
   Default Values:
     filetypes = { "sql", "mysql" }
-    root_dir = <function 1>
+    root_dir = function(fname)
+          return root_pattern(fname) or vim.loop.os_homedir()
+        end;
     settings = {}
 ```
 
@@ -4602,7 +4651,9 @@ require'lspconfig'.sqls.setup{}
   Default Values:
     cmd = { "sqls" }
     filetypes = { "sql", "mysql" }
-    root_dir = <function 1>
+    root_dir = function(fname)
+          return util.root_pattern("config.yml")(fname) or util.path.dirname(fname)
+        end;
     settings = {}
 ```
 
@@ -5121,7 +5172,9 @@ require'lspconfig'.vimls.setup{}
       },
       vimruntime = ""
     }
-    root_dir = <function 1>
+    root_dir = function(fname)
+          return util.find_git_ancestor(fname) or vim.fn.getcwd()
+        end,
 ```
 
 ## vls
