@@ -47,6 +47,7 @@ that config.
 - [ocamllsp](#ocamllsp)
 - [omnisharp](#omnisharp)
 - [perlls](#perlls)
+- [phpactor](#phpactor)
 - [powershell_es](#powershell_es)
 - [purescriptls](#purescriptls)
 - [pyls](#pyls)
@@ -3131,6 +3132,24 @@ require'lspconfig'.perlls.setup{}
         perlInc = " "
       }
     }
+```
+
+## phpactor
+
+https://github.com/phpactor/phpactor
+
+Installation: https://phpactor.readthedocs.io/en/develop/usage/standalone.html#installation-global
+
+
+```lua
+require'lspconfig'.phpactor.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "phpactor", "language-server" }
+    filetypes = { "php" }
+    root_dir = root_pattern("composer.json", ".git")
 ```
 
 ## powershell_es
