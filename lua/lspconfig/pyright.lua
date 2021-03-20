@@ -15,6 +15,14 @@ local root_files = {
   '.git',
 }
 
+local function organize_imports()
+  local params = {
+    command = 'pyright.organizeimports',
+    arguments = { vim.uri_from_bufnr(0) },
+  }
+  vim.lsp.buf.execute_command(params)
+end
+
 configs[server_name] = {
   default_config = {
     cmd = {bin_name, "--stdio"};
@@ -31,7 +39,13 @@ configs[server_name] = {
         };
       };
     };
-   };
+  };
+  commands = {
+    PyrightOrganizeImports = {
+      organize_imports;
+      description = "Organize Imports";
+    };
+  };
   docs = {
     description = [[
 https://github.com/microsoft/pyright
