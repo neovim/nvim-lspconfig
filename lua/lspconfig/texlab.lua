@@ -52,7 +52,9 @@ configs.texlab = {
   default_config = {
     cmd = {"texlab"};
     filetypes = {"tex", "bib"};
-    root_dir = vim.loop.os_homedir;
+    root_dir = function(filename)
+      return util.path.dirname(filename)
+    end;
     settings = {
       latex = {
         build = {
