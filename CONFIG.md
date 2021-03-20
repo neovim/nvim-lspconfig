@@ -3732,6 +3732,7 @@ https://github.com/microsoft/pyright
 require'lspconfig'.pyright.setup{}
 
   Commands:
+  - PyrightOrganizeImports: Organize Imports
   
   Default Values:
     cmd = { "pyright-langserver", "--stdio" }
