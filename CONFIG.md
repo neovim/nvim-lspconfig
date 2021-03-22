@@ -18,6 +18,7 @@ that config.
 - [dhall_lsp_server](#dhall_lsp_server)
 - [diagnosticls](#diagnosticls)
 - [dockerls](#dockerls)
+- [dotls](#dotls)
 - [efm](#efm)
 - [elixirls](#elixirls)
 - [elmls](#elmls)
@@ -1142,6 +1143,30 @@ require'lspconfig'.dockerls.setup{}
     cmd = { "docker-langserver", "--stdio" }
     filetypes = { "Dockerfile", "dockerfile" }
     root_dir = root_pattern("Dockerfile")
+```
+
+## dotls
+
+https://github.com/nikeee/dot-language-server
+
+`dot-language-server` can be installed via `npm`:
+```sh
+npm install -g dot-language-server
+```
+    
+
+```lua
+require'lspconfig'.dotls.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "dot-language-server", "--stdio" }
+    filetypes = { "dot" }
+    root_dir = function(filename)
+          return util.root_pattern(unpack(root_files))(filename) or
+                 util.path.dirname(filename)
+        end;
 ```
 
 ## efm
