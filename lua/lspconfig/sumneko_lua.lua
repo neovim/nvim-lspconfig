@@ -10,6 +10,7 @@ configs[name] = {
       return util.find_git_ancestor(fname) or util.path.dirname(fname)
     end;
     log_level = vim.lsp.protocol.MessageType.Warning;
+    settings = { Lua = { telemetry = { enable = false }}};
   };
   docs = {
     package_json = "https://raw.githubusercontent.com/sumneko/vscode-lua/master/package.json";
@@ -58,6 +59,10 @@ require'lspconfig'.sumneko_lua.setup {
           [vim.fn.expand('$VIMRUNTIME/lua')] = true,
           [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
         },
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
       },
     },
   },
