@@ -532,7 +532,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to include symbols that have not been imported in the code completion list and automatically insert the required import when selecting them\.
+  Whether to include symbols that have not been imported in the code completion list and automatically insert the required import when selecting them \(requires restart\)\.
 
 - **`dart.buildRunnerAdditionalArgs`**: `array`
 
@@ -778,6 +778,12 @@ This server accepts configuration via the `settings` key.
   
   Whether to set newly connected devices as the current device in Flutter projects\.
 
+- **`dart.flutterShowWebServerDevice`**: `enum { "remote", "always" }`
+
+  Default: `"remote"`
+  
+  null
+
 - **`dart.flutterStructuredErrors`**: `boolean`
 
   Default: `true`
@@ -827,6 +833,12 @@ This server accepts configuration via the `settings` key.
   Default: `80`
   
   The maximum length of a line of code\. This is used by the document formatter\.
+
+- **`dart.lspSnippetTextEdits`**: `boolean`
+
+  Default: `true`
+  
+  null
 
 - **`dart.maxLogLineLength`**: `number`
 
@@ -4253,7 +4265,7 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.inlayHints.maxLength`**: `null|integer`
 
-  Default: `vim.NIL`
+  Default: `25`
   
   null
 
@@ -4749,6 +4761,10 @@ require'lspconfig'.sumneko_lua.setup {
           [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
         },
       },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
     },
   },
 }
@@ -5030,6 +5046,13 @@ require'lspconfig'.sumneko_lua.setup{}
     filetypes = { "lua" }
     log_level = 2
     root_dir = root_pattern(".git") or bufdir
+    settings = {
+      Lua = {
+        telemetry = {
+          enable = false
+        }
+      }
+    }
 ```
 
 ## svelte
