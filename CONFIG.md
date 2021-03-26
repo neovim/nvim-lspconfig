@@ -285,7 +285,7 @@ require'lspconfig'.cmake.setup{}
     init_options = {
       buildDirectory = "build"
     }
-    root_dir = root_pattern(".git", "compile_commands.json", "build")
+    root_dir = root_pattern(".git", "compile_commands.json", "build") or dirname
 ```
 
 ## codeqlls
