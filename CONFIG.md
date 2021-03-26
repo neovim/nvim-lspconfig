@@ -4979,9 +4979,9 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`Lua.telemetry.enable`**: `boolean`
+- **`Lua.telemetry.enable`**: `boolean|null`
 
-  Default: `true`
+  Default: `vim.NIL`
   
   null
 
