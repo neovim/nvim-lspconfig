@@ -121,8 +121,9 @@ return function ()
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, buf_lines )
   vim.api.nvim_buf_set_option(bufnr,'modifiable',false)
   vim.api.nvim_buf_set_option(bufnr,'filetype','lspinfo')
-  vim.fn.matchadd("Title", table.concat(vim.tbl_keys(configs), '\\|'))
-  vim.fn.matchadd("Title", buffer_filetype)
+  local configs_pattern = '\\%(' .. table.concat(vim.tbl_keys(configs), '\\|') .. '\\)'
+  vim.cmd('syntax match Title /\\%(Client\\|Config\\):.*\\zs' .. configs_pattern .. '/')
+  vim.cmd('syntax match Identifier /filetypes:.*\\zs\\<' .. buffer_filetype .. '\\>/')
   vim.fn.matchadd("Error",
     "No filetypes defined, please define filetypes in setup().\\|"..
     "cmd not defined\\|" ..
