@@ -72,7 +72,7 @@ the `gopls` config, that would be:
 
 
 ==============================================================================
-6. Overriding defaults                           *lspconfig-override-defaults*
+6. Overriding server defaults             *lspconfig-override-server-defaults*
 
 
 To set some config properties at `setup()` , specify their keys. For example to
@@ -135,7 +135,7 @@ To configure a custom/private server, just
 
 
 ==============================================================================
-8. Overriding defaults                                            *lspconfig-*
+8. Overriding all defaults                   *lspconfig-override-all-defaults*
 
 
 If you want to change default configs for all servers, you can override
@@ -179,7 +179,7 @@ overwritten by docgen
 **You do not need to copy settings or init_options from this configuration into
 your config**
 ==============================================================================
-10. The wiki                                                  *lspconfig-wiki*
+10. Keybindings                                        *lspconfig-keybindings*
 
 
 The following maps most of the standard functions to keybindings, and maps
