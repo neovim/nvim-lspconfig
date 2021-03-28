@@ -3764,6 +3764,92 @@ https://github.com/microsoft/pyright
 
 `pyright`, a static type checker and language server for python
 
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`pyright.disableLanguageServices`**: `boolean`
+
+  Disables type completion\, definitions\, and references\.
+
+- **`pyright.disableOrganizeImports`**: `boolean`
+
+  Disables the “Organize Imports” command\.
+
+- **`python.analysis.autoImportCompletions`**: `boolean`
+
+  Default: `true`
+  
+  Offer auto\-import completions\.
+
+- **`python.analysis.autoSearchPaths`**: `boolean`
+
+  Default: `true`
+  
+  Automatically add common search paths like \'src\'\?
+
+- **`python.analysis.diagnosticMode`**: `enum { "openFilesOnly", "workspace" }`
+
+  Default: `"openFilesOnly"`
+  
+  null
+
+- **`python.analysis.diagnosticSeverityOverrides`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  Allows a user to override the severity levels for individual diagnostics\.
+
+- **`python.analysis.extraPaths`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Additional import search resolution paths
+
+- **`python.analysis.logLevel`**: `enum { "Error", "Warning", "Information", "Trace" }`
+
+  Default: `"Information"`
+  
+  Specifies the level of logging for the Output panel
+
+- **`python.analysis.stubPath`**: `string`
+
+  Default: `"typings"`
+  
+  Path to directory containing custom type stub files\.
+
+- **`python.analysis.typeCheckingMode`**: `enum { "off", "basic", "strict" }`
+
+  Default: `"basic"`
+  
+  Defines the default rule set for type checking\.
+
+- **`python.analysis.typeshedPaths`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Paths to look for typeshed modules\.
+
+- **`python.analysis.useLibraryCodeForTypes`**: `boolean`
+
+  Use library implementations to extract type information when type stub is not present\.
+
+- **`python.pythonPath`**: `string`
+
+  Default: `"python"`
+  
+  Path to Python\, you can use a custom version of Python\.
+
+- **`python.venvPath`**: `string`
+
+  Default: `""`
+  
+  Path to folder with a list of Virtual Environments\.
+
+</details>
 
 ```lua
 require'lspconfig'.pyright.setup{}
