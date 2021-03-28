@@ -15,9 +15,12 @@ language servers that are installed on your system.
   assume that you are using the latest [Neovim HEAD/nightly build](https://github.com/neovim/neovim/releases/tag/nightly). 
   Update Neovim and nvim-lspconfig before reporting an issue.
 * nvim-lspconfig is just a plugin. Install it like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
-  ```
-  :Plug 'neovim/nvim-lspconfig'
-  ```
+
+>
+    :Plug 'neovim/nvim-lspconfig'
+<
+
+
 ==============================================================================
 3. Quickstart                                           *lspconfig-quickstart*
 
@@ -370,7 +373,27 @@ Attempt to run the language server, and open the log with:
 
 Most of the time, the reason for failure is present in the logs.
 ==============================================================================
-15. Contributions                                    *lspconfig-contributions*
+15. Windows                                                *lspconfig-windows*
+
+
+In order for neovim to launch certain executables on Windows, it must append
+`.cmd` to the command name. A fix is in the works upstream, but until this is
+mainlined please the following somewhere in your init.vim (lua heredoc) or
+init.lua:
+
+>
+    vim.loop.spawn = (function ()    
+      local spawn = vim.loop.spawn    
+      return function(path, options, on_exit)    
+        local full_path = vim.fn.exepath(path)    
+        return spawn(full_path, options, on_exit)    
+      end    
+    end)()
+<
+
+
+==============================================================================
+16. Contributions                                    *lspconfig-contributions*
 
 
 If you are missing a language server on the list in [CONFIG.md](CONFIG.md) ,
