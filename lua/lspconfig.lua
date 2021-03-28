@@ -19,8 +19,45 @@ function M._root._setup()
       function()
         lspinfo()
       end;
-      "-nargs=?";
+      "-nargs=0";
       description = '`:LspInfo` Displays attached, active, and configured language servers';
+    };
+    LspStart = {
+      function(server_name)
+        require('lspconfig')[server_name].autostart()
+      end;
+      "-nargs=1 -complete=custom,v:lua.lsp_complete_configured_servers";
+      description = '`:LspStart` Manually launches a language server.';
+    };
+    LspStop = {
+      function(client_id)
+        if not client_id then
+          vim.lsp.stop_client(vim.lsp.get_active_clients())
+        else
+          local client = vim.lsp.get_client_by_id(tonumber(client_id))
+          if client then
+            client.stop()
+          end
+        end
+      end;
+      "-nargs=? -complete=customlist,v:lua.lsp_get_active_client_ids";
+      description = '`:LspStop` Manually stops the given language client.';
+    };
+    LspRestart = {
+      function(client_id)
+        if client_id then
+          local client = vim.lsp.get_client_by_id(tonumber(client_id))
+          if client then
+            local client_name = client.name
+            client.stop()
+            vim.defer_fn(function()
+              require('lspconfig')[client_name].autostart()
+            end, 500)
+          end
+        end
+      end;
+      "-nargs=? -complete=customlist,v:lua.lsp_get_active_client_ids";
+      description = '`:LspRestart` Manually restart the given language client.';
     };
   };
 
