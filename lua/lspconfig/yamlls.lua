@@ -2,7 +2,13 @@ local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
 local server_name = "yamlls"
-local bin_name = "yaml-language-server"
+
+local bin_name
+if vim.fn.has("win32") == 1 then
+  bin_name = "yaml-language-server.cmd"
+else
+  bin_name = "yaml-language-server"
+end
 
 configs[server_name] = {
   default_config = {
