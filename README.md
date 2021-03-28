@@ -14,9 +14,9 @@ that are installed on your system.
   Update Neovim and nvim-lspconfig before reporting an issue.
 
 * nvim-lspconfig is just a plugin. Install it like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
-  ```
-  :Plug 'neovim/nvim-lspconfig'
-  ```
+```vim
+:Plug 'neovim/nvim-lspconfig'
+```
 ## Quickstart
 1. Install a language server, e.g. [pyright](CONFIG.md#pyright) via `npm i -g pyright`
 2. Install `nvim-lspconfig` via your plugin manager
@@ -327,6 +327,20 @@ Attempt to run the language server, and open the log with:
 :lua vim.cmd('e'..vim.lsp.get_log_path())
 ```
 Most of the time, the reason for failure is present in the logs.
+
+## Windows
+
+In order for neovim to launch certain executables on Windows, it must append `.cmd` to the command name. A fix is in the works upstream, but until this is mainlined please the following somewhere in your init.vim (lua heredoc) or init.lua:
+
+```lua
+vim.loop.spawn = (function ()
+  local spawn = vim.loop.spawn
+  return function(path, options, on_exit)
+    local full_path = vim.fn.exepath(path)
+    return spawn(full_path, options, on_exit)
+  end
+end)()
+```
 
 ## Contributions
 If you are missing a language server on the list in [CONFIG.md](CONFIG.md), contributing
