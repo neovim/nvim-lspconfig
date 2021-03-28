@@ -97,10 +97,10 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     local make_config = function(_root_dir)
-      local new_config = util.tbl_deep_extend("keep", vim.empty_dict(), config)
-      new_config = util.tbl_deep_extend('keep', new_config, default_config)
+      local new_config = vim.tbl_deep_extend("keep", vim.empty_dict(), config)
+      new_config = vim.tbl_deep_extend('keep', new_config, default_config)
       new_config.capabilities = new_config.capabilities or lsp.protocol.make_client_capabilities()
-      new_config.capabilities = util.tbl_deep_extend('keep', new_config.capabilities, {
+      new_config.capabilities = vim.tbl_deep_extend('keep', new_config.capabilities, {
         workspace = {
           configuration = true;
         }
@@ -188,7 +188,7 @@ function configs.__newindex(t, config_name, config_def)
       client.config._on_attach(client, bufnr)
     end
     if client.config.commands and not vim.tbl_isempty(client.config.commands) then
-      M.commands = util.tbl_deep_extend("force", M.commands, client.config.commands)
+      M.commands = vim.tbl_deep_extend("force", M.commands, client.config.commands)
     end
     if not M.commands_created and not vim.tbl_isempty(M.commands) then
       -- Create the module commands

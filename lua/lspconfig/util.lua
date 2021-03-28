@@ -46,40 +46,6 @@ function M.add_hook_after(func, new_fn)
   end
 end
 
-function M.tbl_deep_extend(behavior, ...)
-  if (behavior ~= 'error' and behavior ~= 'keep' and behavior ~= 'force') then
-    error('invalid "behavior": '..tostring(behavior))
-  end
-
-  if select('#', ...) < 2 then
-    error('wrong number of arguments (given '..tostring(1 + select('#', ...))..', expected at least 3)')
-  end
-
-  local ret = {}
-  if vim._empty_dict_mt ~= nil and getmetatable(select(1, ...)) == vim._empty_dict_mt then
-    ret = vim.empty_dict()
-  end
-
-  for i = 1, select('#', ...) do
-    local tbl = select(i, ...)
-    vim.validate{["after the second argument"] = {tbl,'t'}}
-    if tbl then
-      for k, v in pairs(tbl) do
-        if type(v) == 'table' and not vim.tbl_islist(v) then
-          ret[k] = M.tbl_deep_extend(behavior, ret[k] or vim.empty_dict(), v)
-        elseif behavior ~= 'force' and ret[k] ~= nil then
-          if behavior == 'error' then
-            error('key found in more than one map: '..k)
-          end  -- Else behavior is "keep".
-        else
-          ret[k] = v
-        end
-      end
-    end
-  end
-  return ret
-end
-
 function M.create_module_commands(module_name, commands)
   for command_name, def in pairs(commands) do
     local parts = {"command!"}
