@@ -96,6 +96,10 @@ function configs.__newindex(t, config_name, config_def)
       M.manager = nil
     end
 
+    -- Can be changed from outside
+    local config_settings = vim.tbl_deep_extend("keep", vim.empty_dict(), config.settings)
+    M.settings = vim.tbl_deep_extend('keep', config_settings, default_config.settings)
+
     local make_config = function(_root_dir)
       local new_config = vim.tbl_deep_extend("keep", vim.empty_dict(), config)
       new_config = vim.tbl_deep_extend('keep', new_config, default_config)
@@ -112,6 +116,10 @@ function configs.__newindex(t, config_name, config_def)
       if config.on_new_config then
         pcall(config.on_new_config, new_config, _root_dir)
       end
+
+      -- Reset values that have been changed from outside
+      -- Used by 'workspace/configuration' handler
+      new_config.settings = M.settings
 
       new_config.on_init = util.add_hook_after(new_config.on_init, function(client, _result)
         function client.workspace_did_change_configuration(settings)
