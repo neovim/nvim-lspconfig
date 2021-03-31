@@ -2116,7 +2116,9 @@ require'lspconfig'.jdtls.setup{}
     filetypes = { "java" }
     handlers = {
       ["language/status"] = <function 1>,
-      ["textDocument/codeAction"] = <function 2>
+      ["textDocument/codeAction"] = <function 2>,
+      ["textDocument/rename"] = <function 3>,
+      ["workspace/applyEdit"] = <function 4>
     }
     init_options = {
       jvm_args = {},
