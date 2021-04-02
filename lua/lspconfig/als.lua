@@ -35,7 +35,7 @@ require('lspconfig').als.setup{
 ```
 ]];
     default_config = {
-      root_dir = [[util.root_pattern("Makefile", ".git")]];
+      root_dir = [[root_pattern("Makefile", ".git")]];
     };
   };
 };
