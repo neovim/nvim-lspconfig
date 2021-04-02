@@ -3177,7 +3177,7 @@ require'lspconfig'.perlls.setup{}
 
 https://github.com/phpactor/phpactor
 
-Installation: https://phpactor.readthedocs.io/en/develop/usage/standalone.html#installation-global
+Installation: https://phpactor.readthedocs.io/en/master/usage/standalone.html#global-installation
 
 
 ```lua
