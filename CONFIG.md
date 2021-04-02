@@ -4845,8 +4845,8 @@ require'lspconfig'.sumneko_lua.setup {
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+          [vim.env.VIMRUNTIME .. "/lua"] = true,
+          [vim.env.VIMRUNTIME .. "/lua/vim/lsp"] = true,
         },
       },
       -- Do not send telemetry data containing a randomized but unique identifier
