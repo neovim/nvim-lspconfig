@@ -3058,7 +3058,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"13603"`
   
-  port to use for connection between vscode and debug adapter inside Perl\:\:LanguageServer\. On a multi user system every user must use a differnt port\.
+  port to use for connection between vscode and debug adapter inside Perl\:\:LanguageServer\. On a multi user system every user must use a different port\.
 
 - **`perl.disableCache`**: `boolean`
 
@@ -3086,7 +3086,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  If set\, log output is written to the given logfile\, insetad of displaying it in the vscode output pane\. Log output is always appended so you are responsible for rotating the file\.
+  If set\, log output is written to the given logfile\, instead of displaying it in the vscode output pane\. Log output is always appended so you are responsible for rotating the file\.
 
 - **`perl.logLevel`**: `integer`
 
