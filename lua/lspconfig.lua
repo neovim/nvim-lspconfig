@@ -45,15 +45,20 @@ function M._root._setup()
     };
     LspRestart = {
       function(client_id)
-        if client_id then
-          local client = vim.lsp.get_client_by_id(tonumber(client_id))
-          if client then
-            local client_name = client.name
-            client.stop()
-            vim.defer_fn(function()
-              require('lspconfig')[client_name].autostart()
-            end, 500)
-          end
+        local clients
+
+        if client_id == nil then
+          clients = vim.lsp.buf_get_clients(0)
+        else
+          clients = {vim.lsp.get_client_by_id(tonumber(client_id))}
+        end
+
+        for _, client in ipairs(clients) do
+          local client_name = client.name
+          client.stop()
+          vim.defer_fn(function()
+            require('lspconfig')[client_name].autostart()
+          end, 500)
         end
       end;
       "-nargs=? -complete=customlist,v:lua.lsp_get_active_client_ids";
