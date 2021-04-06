@@ -70,6 +70,7 @@ that config.
 - [svelte](#svelte)
 - [terraformls](#terraformls)
 - [texlab](#texlab)
+- [tflint](#tflint)
 - [tsserver](#tsserver)
 - [vala_ls](#vala_ls)
 - [vimls](#vimls)
@@ -738,9 +739,9 @@ This server accepts configuration via the `settings` key.
   
   Whether to show the Flutter Outline tree in the sidebar\.
 
-- **`dart.flutterRunAdditionalArgs`**: `array`
+- **`dart.flutterRunAdditionalArgs`**: `null|array`
 
-  Default: `{}`
+  Default: `vim.NIL`
   
   Array items: `{type = "string"}`
   
@@ -856,7 +857,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"never"`
   
-  Whether to automatically open DevTools at the start of a debug session\.
+  Whether to automatically open DevTools at the start of a debug session\. If embedded DevTools is enabled\, this will launch the Widget Inspector embedded for Flutter projects\, or launch DevTools externally in a browser for Dart projects\.
 
 - **`dart.openTestView`**: `array`
 
@@ -5254,6 +5255,25 @@ require'lspconfig'.texlab.setup{}
         }
       }
     }
+```
+
+## tflint
+
+https://github.com/terraform-linters/tflint
+
+A pluggable Terraform linter that can act as lsp server.
+Installation instructions can be found in https://github.com/terraform-linters/tflint#installation.
+
+
+```lua
+require'lspconfig'.tflint.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "tflint", "--langserver" }
+    filetypes = { "terraform" }
+    root_dir = root_pattern(".terraform", ".git", ".tflint.hcl")
 ```
 
 ## tsserver
