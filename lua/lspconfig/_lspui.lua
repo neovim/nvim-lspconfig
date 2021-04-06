@@ -90,6 +90,16 @@ function win_float.percentage_range_window(col_range, row_range, options)
 
   win_opts.col = math.floor(vim.o.columns * col_start_percentage)
   win_opts.width = math.floor(vim.o.columns * width_percentage)
+  win_opts.border = {
+      {" ", "NormalFloat"},
+      {" ", "NormalFloat"},
+      {" ", "NormalFloat"},
+      {" ", "NormalFloat"},
+      {" ", "NormalFloat"},
+      {" ", "NormalFloat"},
+      {" ", "NormalFloat"},
+      {" ", "NormalFloat"}
+  }
 
   local bufnr = options.bufnr or vim.api.nvim_create_buf(false, true)
   local win_id = vim.api.nvim_open_win(bufnr, true, win_opts)
