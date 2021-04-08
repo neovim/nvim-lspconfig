@@ -23,12 +23,12 @@ configs.perlls = {
   docs = {
     package_json = "https://raw.githubusercontent.com/richterger/Perl-LanguageServer/master/clients/vscode/perl/package.json";
     description = [[
-    https://github.com/richterger/Perl-LanguageServer/tree/master/clients/vscode/perl
+https://github.com/richterger/Perl-LanguageServer/tree/master/clients/vscode/perl
 
-    `Perl-LanguageServer`, a language server for Perl.
+`Perl-LanguageServer`, a language server for Perl.
 
-    To use the language server, ensure that you have Perl::LanguageServer installed and perl command is on your path.
-    ]];
+To use the language server, ensure that you have Perl::LanguageServer installed and perl command is on your path.
+]];
     default_config = {
       root_dir = "vim's starting directory";
     };
