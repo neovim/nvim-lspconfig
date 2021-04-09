@@ -32,7 +32,16 @@ any directory containing ".git", "setup.py",  "setup.cfg", "pyproject.toml",
 or "requirements.txt")
 5. See [Keybindings and completion](#Keybindings-and-completion) for mapping useful functions and enabling
 omnifunc completion
-6. Try `:LspInfo` to see the status of active and configured language servers.
+
+## Built-in commands
+
+* `:LspInfo` shows the status of active and configured language servers.
+
+The following support tab-completion for all arguments:
+
+* `:LspStart <config_name>` Start the requested server name. Will only succesfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command.
+* `:LspStop <client_id>` Defaults to stopping all buffer clients. 
+* `:LspRestart <client_id>` Defaults to restarting all buffer clients.
 
 ## Usage
 
@@ -223,13 +232,6 @@ Please see the [wiki](https://github.com/neovim/nvim-lspconfig/wiki) for additio
 
 and more.
 
-## Manually starting (or restarting) language servers
-
-If you would like to manually managing starting language servers, but still have new buffers within a root directory autoattach 
-to running servers, pass `autostart = false` to your `.setup{}` call for a language server and call 
-`:lua require('lspconfig').language_server_name.autostart()`.
-
-This function can also be used to restart a workspace after stopping a language server with `:lua vim.lsp.stop_client(client_id)`.
 
 ## setup() function
 
