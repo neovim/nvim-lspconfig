@@ -67,6 +67,10 @@ function configs.__newindex(t, config_name, config_def)
 
     function M.autostart()
       local root_dir = get_root_dir(api.nvim_buf_get_name(0), api.nvim_get_current_buf())
+      if not root_dir then
+        vim.notify(string.format("Autostart for %s failed: matching root directory not detected.", config_name))
+        return
+      end
       api.nvim_command(string.format(
           "autocmd %s lua require'lspconfig'[%q].manager.try_add_wrapper()"
           , "BufReadPost " .. root_dir .. "/*"
