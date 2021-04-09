@@ -535,6 +535,12 @@ This server accepts configuration via the `settings` key.
   
   Whether to include symbols that have not been imported in the code completion list and automatically insert the required import when selecting them \(requires restart\)\.
 
+- **`dart.automaticCommentSlashes`**: `enum { "none", "tripleSlash", "all" }`
+
+  Default: `"tripleSlash"`
+  
+  null
+
 - **`dart.buildRunnerAdditionalArgs`**: `array`
 
   Default: `{}`
@@ -5568,6 +5574,12 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Whether to enable codeActions
+
+- **`vetur.languageFeatures.semanticTokens`**: `boolean`
+
+  Default: `true`
+  
+  Whether to enable semantic highlighting\. Currently only works for typescript
 
 - **`vetur.languageFeatures.updateImportOnFileMove`**: `boolean`
 
