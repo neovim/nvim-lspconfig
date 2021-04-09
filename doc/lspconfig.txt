@@ -42,9 +42,17 @@ any directory containing ".git", "setup.py",  "setup.cfg", "pyproject.toml",
 or "requirements.txt")
 5. See [Keybindings and completion](#Keybindings-and-completion) for mapping useful functions and enabling
 omnifunc completion
-6. Try `:LspInfo` to see the status of active and configured language servers.
 ==============================================================================
-4. Usage                                                     *lspconfig-usage*
+4. Built-in commands                             *lspconfig-built-in-commands*
+
+
+* `:LspInfo` shows the status of active and configured language servers.
+The following support tab-completion for all arguments:
+* `:LspStart <config_name>` Start the requested server name. Will only succesfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command.
+* `:LspStop <client_id>` Defaults to stopping all buffer clients. 
+* `:LspRestart <client_id>` Defaults to restarting all buffer clients.
+==============================================================================
+5. Usage                                                     *lspconfig-usage*
 
 
 **All provided examples are in Lua,** see `:help :lua-heredoc` to use Lua from
@@ -63,7 +71,7 @@ detailed [below](#setup-function).
 
 
 ==============================================================================
-5. Defaults                                               *lspconfig-defaults*
+6. Defaults                                               *lspconfig-defaults*
 
 
 To use the defaults, just call `setup()` with an empty `config` parameter. For
@@ -75,7 +83,7 @@ the `gopls` config, that would be:
 
 
 ==============================================================================
-6. Overriding server defaults             *lspconfig-override-server-defaults*
+7. Overriding server defaults             *lspconfig-override-server-defaults*
 
 
 To set some config properties at `setup()` , specify their keys. For example to
@@ -109,7 +117,7 @@ additional optional properties. For a more complicated example overriding the
 
 
 ==============================================================================
-7. Custom config                                     *lspconfig-custom-config*
+8. Custom config                                     *lspconfig-custom-config*
 
 
 To configure a custom/private server, just
@@ -138,7 +146,7 @@ To configure a custom/private server, just
 
 
 ==============================================================================
-8. Overriding all defaults                   *lspconfig-override-all-defaults*
+9. Overriding all defaults                   *lspconfig-override-all-defaults*
 
 
 If you want to change default configs for all servers, you can override
@@ -171,7 +179,7 @@ verbosity of "window/logMessage".
 
 
 ==============================================================================
-9. Per-server documentation                   *lspconfig-server-documentation*
+10. Per-server documentation                  *lspconfig-server-documentation*
 
 
 See [CONFIG.md](CONFIG.md) for documentation and configuration of individual
@@ -182,7 +190,7 @@ overwritten by docgen
 **You do not need to copy settings or init_options from this configuration into
 your config**
 ==============================================================================
-10. Keybindings                                        *lspconfig-keybindings*
+11. Keybindings                                        *lspconfig-keybindings*
 
 
 The following maps most of the standard functions to keybindings, and maps
@@ -248,7 +256,7 @@ omnicomplete to use the lsp.omnifunc. See `:help lsp` for more details
 
 
 ==============================================================================
-11. The wiki                                              *lspconfig-the-wiki*
+12. The wiki                                              *lspconfig-the-wiki*
 
 
 Please see the [wiki](https://github.com/neovim/nvim-lspconfig/wiki) for
@@ -258,16 +266,6 @@ additional topics, including:
 * [Project local settings](https://github.com/neovim/nvim-lspconfig/wiki/Project-local-settings)
 * [Recommended plugins for enhanced language server features](https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins)
 and more.
-==============================================================================
-12. Manual control                                  *lspconfig-manual-control*
-
-
-If you would like to manually managing starting language servers, but still
-have new buffers within a root directory autoattach to running servers, pass
-`autostart = false` to your `.setup{}` call for a language server and call
-`:lua require('lspconfig').language_server_name.autostart()`.
-This function can also be used to restart a workspace after stopping a language
-server with `:lua vim.lsp.stop_client(client_id)`.
 ==============================================================================
 13. setup() function                              *lspconfig-setup()-function*
 
