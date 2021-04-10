@@ -3052,12 +3052,12 @@ require'lspconfig'.omnisharp.setup{}
 
 ## perlls
 
-    https://github.com/richterger/Perl-LanguageServer/tree/master/clients/vscode/perl
+https://github.com/richterger/Perl-LanguageServer/tree/master/clients/vscode/perl
 
-    `Perl-LanguageServer`, a language server for Perl.
+`Perl-LanguageServer`, a language server for Perl.
 
-    To use the language server, ensure that you have Perl::LanguageServer installed and perl command is on your path.
-    
+To use the language server, ensure that you have Perl::LanguageServer installed and perl command is on your path.
+
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
