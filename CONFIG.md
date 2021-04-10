@@ -66,6 +66,7 @@ that config.
 - [sourcekit](#sourcekit)
 - [sqlls](#sqlls)
 - [sqls](#sqls)
+- [stylelint_lsp](#stylelint_lsp)
 - [sumneko_lua](#sumneko_lua)
 - [svelte](#svelte)
 - [terraformls](#terraformls)
@@ -4806,6 +4807,29 @@ require'lspconfig'.sqls.setup{}
     root_dir = function(fname)
           return util.root_pattern("config.yml")(fname) or util.path.dirname(fname)
         end;
+    settings = {}
+```
+
+## stylelint_lsp
+
+https://github.com/bmatcuk/stylelint-lsp
+
+`stylelint-lsp` can be installed via `npm`:
+
+```sh
+npm i -g stylelint-lsp
+```
+
+
+```lua
+require'lspconfig'.stylelint_lsp.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "stylelint-lsp", "--stdio" }
+    filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss", "javascript", "javascriptreact", "typescript", "typescriptreact" }
+    root_dir =  root_pattern('.stylelintrc', 'package.json') 
     settings = {}
 ```
 
