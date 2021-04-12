@@ -4,6 +4,10 @@ local util = require 'lspconfig/util'
 local server_name = "intelephense"
 local bin_name = "intelephense"
 
+if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+  bin_name = bin_name .. ".cmd"
+end
+
 configs[server_name] = {
   default_config = {
     cmd = {bin_name, "--stdio"};
