@@ -746,9 +746,9 @@ This server accepts configuration via the `settings` key.
   
   Whether to show the Flutter Outline tree in the sidebar\.
 
-- **`dart.flutterRunAdditionalArgs`**: `null|array`
+- **`dart.flutterRunAdditionalArgs`**: `array`
 
-  Default: `vim.NIL`
+  Default: `{}`
   
   Array items: `{type = "string"}`
   
@@ -4146,6 +4146,12 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.cargo.target`**: `null|string`
 
   Default: `vim.NIL`
+  
+  null
+
+- **`rust-analyzer.cargo.useRustcWrapperForBuildScripts`**: `boolean`
+
+  Default: `true`
   
   null
 
