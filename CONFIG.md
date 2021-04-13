@@ -69,6 +69,7 @@ that config.
 - [stylelint_lsp](#stylelint_lsp)
 - [sumneko_lua](#sumneko_lua)
 - [svelte](#svelte)
+- [svls](#svls)
 - [terraformls](#terraformls)
 - [texlab](#texlab)
 - [tflint](#tflint)
@@ -5199,6 +5200,25 @@ require'lspconfig'.svelte.setup{}
     cmd = { "svelteserver", "--stdio" }
     filetypes = { "svelte" }
     root_dir = root_pattern("package.json", ".git")
+```
+
+## svls
+
+      https://github.com/dalance/svls
+      Language server for verilog and SystemVerilog
+    
+
+```lua
+require'lspconfig'.svls.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "svls" }
+    filetypes = { "verilog", "systemverilog" }
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
 ```
 
 ## terraformls
