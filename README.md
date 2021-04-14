@@ -39,7 +39,7 @@ omnifunc completion
 
 The following support tab-completion for all arguments:
 
-* `:LspStart <config_name>` Start the requested server name. Will only succesfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command.
+* `:LspStart <config_name>` Start the requested server name. Will only succesfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command. Defaults to all servers matching current buffer filetype.
 * `:LspStop <client_id>` Defaults to stopping all buffer clients. 
 * `:LspRestart <client_id>` Defaults to restarting all buffer clients.
 
