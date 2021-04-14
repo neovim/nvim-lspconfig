@@ -27,6 +27,19 @@ https://github.com/vscode-langservers/vscode-css-languageserver-bin
 ```sh
 npm install -g vscode-css-languageserver-bin
 ```
+
+Neovim does not currently include built-in snippets. `vscode-css-languageserver` only provides completions when snippet support is enabled.
+To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
+
+```lua
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.cssls.setup {
+  capabilities = capabilities,
+}
+```
 ]];
     default_config = {
       root_dir = [[root_pattern("package.json")]];
