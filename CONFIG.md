@@ -224,7 +224,7 @@ require'lspconfig'.ccls.setup{}
   Default Values:
     cmd = { "ccls" }
     filetypes = { "c", "cpp", "objc", "objcpp" }
-    root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git")
+    root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
 ```
 
 ## clangd
