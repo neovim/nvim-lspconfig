@@ -24,9 +24,22 @@ function M._root._setup()
     };
     LspStart = {
       function(server_name)
-        require('lspconfig')[server_name].autostart()
+        if server_name then
+          require('lspconfig')[server_name].autostart()
+        else
+          local buffer_filetype = vim.bo.filetype
+          for client_name, config in pairs(configs) do
+            if config.filetypes then
+              for _, filetype_match in ipairs(config.filetypes) do
+                if buffer_filetype == filetype_match then
+                  require('lspconfig')[client_name].autostart()
+                end
+              end
+            end
+          end
+        end
       end;
-      "-nargs=1 -complete=custom,v:lua.lsp_complete_configured_servers";
+      "-nargs=? -complete=custom,v:lua.lsp_complete_configured_servers";
       description = '`:LspStart` Manually launches a language server.';
     };
     LspStop = {
