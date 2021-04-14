@@ -27,6 +27,15 @@ https://github.com/vscode-langservers/vscode-css-languageserver-bin
 ```sh
 npm install -g vscode-css-languageserver-bin
 ```
+
+```lua
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.cssls.setup {
+  capabilities = capabilities,
+}
+```
 ]];
     default_config = {
       root_dir = [[root_pattern("package.json")]];
