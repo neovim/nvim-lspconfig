@@ -69,9 +69,6 @@ require'lspconfig'.sumneko_lua.setup {
 }
 ```
 ]];
-    default_config = {
-      root_dir = [[root_pattern(".git") or bufdir]];
-    };
   };
 }
 -- vim:et ts=2
