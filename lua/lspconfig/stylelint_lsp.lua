@@ -20,6 +20,7 @@ configs.stylelint_lsp = {
     settings = {};
   },
   docs = {
+    package_json = "https://raw.githubusercontent.com/bmatcuk/coc-stylelintplus/master/package.json";
     description = [[
 https://github.com/bmatcuk/stylelint-lsp
 
@@ -27,6 +28,18 @@ https://github.com/bmatcuk/stylelint-lsp
 
 ```sh
 npm i -g stylelint-lsp
+```
+
+Can be configured by passing a `settings.stylelintplus` object to `stylelint_lsp.setup`:
+
+```lua
+require'lspconfig'.stylelint_lsp.setup{
+  settings = {
+    stylelintplus = {
+      -- see available options in stylelint-lsp documentation
+    }
+  }
+}
 ```
 ]];
     default_config = {
