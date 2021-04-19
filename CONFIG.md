@@ -2997,7 +2997,7 @@ require'lspconfig'.ocamlls.setup{}
   Default Values:
     cmd = { "ocaml-language-server", "--stdio" }
     filetypes = { "ocaml", "reason" }
-    root_dir = root_pattern(".merlin", "package.json")
+    root_dir = root_pattern("*.opam", "esy.json", "package.json")
 ```
 
 ## ocamllsp
@@ -3021,7 +3021,7 @@ require'lspconfig'.ocamllsp.setup{}
   Default Values:
     cmd = { "ocamllsp" }
     filetypes = { "ocaml", "reason" }
-    root_dir = root_pattern(".merlin", "package.json")
+    root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
 
 ## omnisharp
