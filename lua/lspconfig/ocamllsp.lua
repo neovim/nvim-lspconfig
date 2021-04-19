@@ -5,7 +5,7 @@ configs.ocamllsp = {
   default_config = {
     cmd = {"ocamllsp",};
     filetypes = {'ocaml', 'reason'};
-    root_dir = util.root_pattern("*.opam","esy.json","package.json", ".git");
+    root_dir = util.root_pattern("*.opam", "esy.json", "package.json", ".git");
   };
   docs = {
     description = [[
@@ -20,7 +20,7 @@ opam install ocaml-lsp-server
 ```
     ]];
     default_config = {
-      root_dir = [[root_pattern("*.opam","esy.json","package.json",".git")]];
+      root_dir = [[root_pattern("*.opam", "esy.json", "package.json", ".git")]];
     };
   };
 }
