@@ -56,6 +56,11 @@ function configs.__newindex(t, config_name, config_def)
       trigger = "BufReadPost *"
     end
     if not (config.autostart == false) then
+      if not config.filetypes or vim.tbl_contains(config.filetypes, vim.bo.ft) then
+        vim.schedule(function()
+          M.manager.try_add()
+        end)
+      end
       api.nvim_command(string.format(
           "autocmd %s lua require'lspconfig'[%q].manager.try_add()"
           , trigger
