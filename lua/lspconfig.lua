@@ -85,7 +85,7 @@ end
 local mt = {}
 function mt:__index(k)
   if configs[k] == nil then
-    pcall(require, 'lspconfig/'..k)
+    pcall(dofile, 'lspconfig/' .. k .. ".lua")
   end
   return configs[k]
 end
