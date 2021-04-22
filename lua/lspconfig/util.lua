@@ -74,6 +74,11 @@ function M.has_bins(...)
   return true
 end
 
+M.script_path = function()
+   local str = debug.getinfo(2, "S").source:sub(2)
+   return str:match("(.*/)")
+end
+
 -- Some path utilities
 M.path = (function()
   local function exists(filename)
