@@ -188,6 +188,9 @@ function configs.__newindex(t, config_name, config_def)
   end
 
   function M._setup_buffer(client_id, bufnr)
+    if not vim.api.nvim_buf_is_valid(bufnr) then
+      return
+    end
     local client = lsp.get_client_by_id(client_id)
     if client.config._on_attach then
       client.config._on_attach(client, bufnr)
