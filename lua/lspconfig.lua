@@ -4,6 +4,8 @@ local M = {
   util = require 'lspconfig/util';
 }
 
+local script_path = M.util.script_path()
+
 M._root = {}
 
 function M.available_servers()
@@ -84,7 +86,9 @@ end
 local mt = {}
 function mt:__index(k)
   if configs[k] == nil then
-    pcall(require, 'lspconfig/'..k)
+    -- dofile is used here as a performance hack to increase the speed of calls to setup({})
+    -- dofile does not cache module lookups, and requires the absolute path to the target file
+    dofile(script_path .. 'lspconfig/' .. k .. ".lua")
   end
   return configs[k]
 end
