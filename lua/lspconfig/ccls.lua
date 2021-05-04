@@ -23,7 +23,7 @@ Customization options are passed to ccls at initialization time via init_options
 local lspconfig = require'lspconfig'
 lspconfig.ccls.setup {
   init_options = {
-	  compilationDatabaseDirectory = "build";
+    compilationDatabaseDirectory = "build";
     index = {
       threads = 0;
     };

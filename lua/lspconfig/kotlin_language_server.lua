@@ -3,8 +3,8 @@
 ---
 --- This server requires vim to be aware of the kotlin-filetype.
 --- You could refer for this capability to:
---- 	https://github.com/udalov/kotlin-vim (recommended)
---- 	Note that there is no LICENSE specified yet.
+--- https://github.com/udalov/kotlin-vim (recommended)
+--- Note that there is no LICENSE specified yet.
 
 local util = require 'lspconfig/util'
 local configs = require 'lspconfig/configs'
