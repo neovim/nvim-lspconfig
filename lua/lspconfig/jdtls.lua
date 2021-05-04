@@ -50,10 +50,10 @@ local root_files = {
 -- server changes. This can be used to display progress as the server is
 -- starting up.
 local function on_language_status(_, _, result)
-	local command = vim.api.nvim_command
-    command('echohl ModeMsg')
-    command(string.format('echo "%s"', result.message))
-    command('echohl None')
+  local command = vim.api.nvim_command
+  command('echohl ModeMsg')
+  command(string.format('echo "%s"', result.message))
+  command('echohl None')
 end
 
 -- If the text document version is 0, set it to nil instead so that Neovim
