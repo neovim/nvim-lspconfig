@@ -74,6 +74,8 @@ that config.
 - [texlab](#texlab)
 - [tflint](#tflint)
 - [tsserver](#tsserver)
+- [unified_language_server_md](#unified_language_server_md)
+- [unified_language_server_txt](#unified_language_server_txt)
 - [vala_ls](#vala_ls)
 - [vimls](#vimls)
 - [vls](#vls)
@@ -5440,6 +5442,48 @@ require'lspconfig'.tsserver.setup{}
     cmd = { "typescript-language-server", "--stdio" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
     root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+```
+
+## unified_language_server_md
+
+[Unified language server](https://github.com/unifiedjs/unified-language-server) designed by UnifiedJS
+
+Can be installed via npm or yarn
+```bash
+npm install -g unified-language-server  # npm
+yarn global add unified-language-server # yarn
+```
+
+
+```lua
+require'lspconfig'.unified_language_server_md.setup{}
+  Commands:
+  
+  Default Values:
+    cmd = { "unified-language-server", "--parser=remark-parse", "--stdio" }
+    filetypes = { "markdown" }
+    root_dir = util.path.dirname
+```
+
+## unified_language_server_txt
+
+[Unified language server](https://github.com/unifiedjs/unified-language-server) designed by UnifiedJS
+
+Can be installed via npm or yarn
+```bash
+npm install -g unified-language-server  # npm
+yarn global add unified-language-server # yarn
+```
+
+
+```lua
+require'lspconfig'.unified_language_server_txt.setup{}
+  Commands:
+  
+  Default Values:
+    cmd = { "unified-language-server", "--parser=retext-english", "--stdio" }
+    filetypes = { "text" }
+    root_dir = util.path.dirname
 ```
 
 ## vala_ls
