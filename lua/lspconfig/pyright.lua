@@ -36,6 +36,7 @@ configs[server_name] = {
         analysis = {
           autoSearchPaths = true;
           useLibraryCodeForTypes = true;
+          diagnosticMode = 'workspace';
         };
       };
     };
