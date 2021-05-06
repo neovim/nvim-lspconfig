@@ -13,7 +13,7 @@ configs[server_name] = {
       -- Default upstream pattern is "**/*@(.sh|.inc|.bash|.command)".
       GLOB_PATTERN = vim.env.GLOB_PATTERN or "*@(.sh|.inc|.bash|.command)"
     },
-    filetypes = {"sh"};
+    filetypes = {"sh", "zsh", "makefile"};
     root_dir = util.path.dirname;
   };
   docs = {
