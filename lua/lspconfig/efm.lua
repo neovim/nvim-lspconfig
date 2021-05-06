@@ -8,7 +8,9 @@ local bin_name = "efm-langserver"
 configs[server_name] = {
   default_config = {
     cmd = {bin_name};
-    root_dir = util.root_pattern(".git");
+    root_dir = function(fname)
+      return util.root_pattern(".git")(fname) or util.path.dirname(fname)
+    end;
   };
 
   docs = {
@@ -18,7 +20,7 @@ https://github.com/mattn/efm-langserver
 General purpose Language Server that can use specified error message format generated from specified command.
 ]];
     default_config = {
-      root_dir = [[root_pattern(".git")]];
+      root_dir = [[util.root_pattern(".git")(fname) or util.path.dirname(fname)]];
     };
   };
 }
