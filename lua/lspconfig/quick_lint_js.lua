@@ -4,7 +4,7 @@ local util = require("lspconfig/util")
 configs.quick_lint_js = {
   default_config = {
     cmd = {"quick-lint-js", "--lsp-server"},
-    filetypes = {"javascript"},
+    filetypes = {"javascript", "javascriptreact"},
     root_dir = function(fname)
       return util.find_node_modules_ancestor(fname) or
         util.find_git_ancestor(fname) or util.path.dirname(fname)
