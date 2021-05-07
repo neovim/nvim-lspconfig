@@ -7,7 +7,8 @@ configs.quick_lint_js = {
     filetypes = {"javascript", "javascriptreact"},
     root_dir = function(fname)
       return util.find_node_modules_ancestor(fname) or
-        util.find_git_ancestor(fname) or util.path.dirname(fname)
+        util.find_git_ancestor(fname) or
+        util.path.dirname(fname)
     end
   },
   docs = {
