@@ -14,7 +14,7 @@ labels: bug
 - Can you reproduce this behavior on other language server clients? (vscode, languageclient-neovim, coc.nvim, etc.):
 - Can you reproduce this behavior on other language servers offered in the nvim-lspconfig repo? (pyls -> pyright):
 - Is the problem isolated to a particular language server?:
-- Can you reproduce with a previous version of a particular language server?:
+- Can you reproduce this behavior with a previous version of a particular language server?:
 - Operating system/version:
 
 ### How to reproduce the problem from neovim startup
