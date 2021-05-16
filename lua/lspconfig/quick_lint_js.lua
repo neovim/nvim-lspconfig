@@ -17,9 +17,6 @@ configs.quick_lint_js = {
 https://quick-lint-js.com/
 
 quick-lint-js finds bugs in JavaScript programs.
-[200× faster than ESLint](https://quick-lint-js.com/benchmarks/), quick-lint-js gives you instant feedback as you code.
-Find bugs in your JavaScript before your finger leaves the keyboard.
-Lint any JavaScript file with no configuration.
 
 See https://quick-lint-js.com/install/ for the installation documentation.
 ]],
