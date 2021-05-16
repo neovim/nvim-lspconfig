@@ -5528,11 +5528,11 @@ require'lspconfig'.terraformls.setup{}
 
 ## texlab
 
-https://texlab.netlify.com/
+https://github.com/latex-lsp/texlab
 
 A completion engine built from scratch for (La)TeX.
 
-See https://texlab.netlify.com/docs/reference/configuration for configuration options.
+See https://github.com/latex-lsp/texlab/docs/options.md for configuration options.
 
 
 ```lua
@@ -5547,23 +5547,22 @@ require'lspconfig'.texlab.setup{}
     filetypes = { "tex", "bib" }
     root_dir = vim's starting directory
     settings = {
-      bibtex = {
-        formatting = {
-          lineLength = 120
-        }
-      },
-      latex = {
+      texlab = {
+        auxDirectory = ".",
+        bibtexFormatter = "texlab",
         build = {
           args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
           executable = "latexmk",
-          onSave = false
+          isContinuous = false
         },
+        chktex = {
+          onEdit = false,
+          onOpenAndSave = false
+        },
+        diagnosticsDelay = 300,
+        formatterLineLength = 80,
         forwardSearch = {
-          args = {},
-          onSave = false
-        },
-        lint = {
-          onChange = false
+          args = {}
         }
       }
     }
