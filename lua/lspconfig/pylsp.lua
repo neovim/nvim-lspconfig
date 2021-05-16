@@ -24,7 +24,7 @@ https://github.com/python-lsp/python-lsp-server
 
 A Python 3.6+ implementation of the Language Server Protocol.
 
-The language server has to be installed separately for example by `pipx install python-lsp-server`.
+The language server can be installed via `pipx install 'python-lsp-server[all]'`.
 Further instructions can be found in the [project's README](https://github.com/python-lsp/python-lsp-server).
 
 Note: This is a community fork of `pyls`.

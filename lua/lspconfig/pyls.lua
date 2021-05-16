@@ -14,6 +14,9 @@ configs.pyls = {
 https://github.com/palantir/python-language-server
 
 `python-language-server`, a language server for Python.
+
+The language server can be installed via `pipx install 'python-language-server[all]'`.
+
     ]];
     default_config = {
       root_dir = "vim's starting directory";
