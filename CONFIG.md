@@ -1080,7 +1080,7 @@ require'lspconfig'.dartls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "dart", "/home/michael/.local/flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot", "--lsp" }
+    cmd = { "dart", "./snapshots/analysis_server.dart.snapshot", "--lsp" }
     filetypes = { "dart" }
     init_options = {
       closingLabels = false,
@@ -2183,9 +2183,9 @@ require'lspconfig'.jdtls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "vim.NIL/bin/java", "-Declipse.application=org.eclipse.jdt.ls.core.id1", "-Dosgi.bundles.defaultStartLevel=4", "-Declipse.product=org.eclipse.jdt.ls.core.product", "-Dlog.protocol=true", "-Dlog.level=ALL", "-Xms1g", "-Xmx2G", "-jar", "vim.NIL", "-configuration", "vim.NIL", "-data", "vim.NIL", "--add-modules=ALL-SYSTEM", "--add-opens java.base/java.util=ALL-UNNAMED", "--add-opens java.base/java.lang=ALL-UNNAMED" }
+    cmd = { "/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64/bin/java", "-Declipse.application=org.eclipse.jdt.ls.core.id1", "-Dosgi.bundles.defaultStartLevel=4", "-Declipse.product=org.eclipse.jdt.ls.core.product", "-Dlog.protocol=true", "-Dlog.level=ALL", "-Xms1g", "-Xmx2G", "-jar", "vim.NIL", "-configuration", "vim.NIL", "-data", "vim.NIL", "--add-modules=ALL-SYSTEM", "--add-opens java.base/java.util=ALL-UNNAMED", "--add-opens java.base/java.lang=ALL-UNNAMED" }
     cmd_env = {
-      GRADLE_HOME = vim.NIL,
+      GRADLE_HOME = "/usr/share/gradle-7.0.1",
       JAR = vim.NIL
     }
     filetypes = { "java" }
@@ -2197,7 +2197,7 @@ require'lspconfig'.jdtls.setup{}
     }
     init_options = {
       jvm_args = {},
-      workspace = "/home/michael/workspace"
+      workspace = "/home/runner/workspace"
     }
     root_dir = root_pattern(".git")
 ```
