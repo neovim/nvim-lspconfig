@@ -1,7 +1,23 @@
 # nvim-lspconfig
-
 A collection of common configurations for Neovim's built-in [language server client](https://neovim.io/doc/user/lsp.html).
+
 This repo handles automatically launching and initializing language servers that are installed on your system.
+
+# LSP overview
+
+Neovim supports the Language Server Protocol (LSP), which means it acts as a client to language servers and includes a Lua framework `vim.lsp` for building enhanced LSP tools. LSP facilitates features like:
+
+- go-to-definition
+- find-references
+- hover
+- completion
+- rename
+- format 
+- refactor
+
+Neovim provides an interface for all of these features, and the language server client is designed to be highly extensible to allow plugins to integrate language server features which are not yet present in Neovim core such as [**auto**-completion](https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion) (as opposed to manual completion with omnifunc) and [snippet integration](https://github.com/neovim/nvim-lspconfig/wiki/Snippets).
+
+These features are not implemented in this repo, but in Neovim core. See `:help lsp` for more details.
 
 ## Install
 
@@ -19,7 +35,7 @@ npm i -g pyright
 ```
 2. Add the language server setup to your init.vim. The server name must match those found in the table of contents in [CONFIG.md](CONFIG.md)
 ```vim
-lua << eof
+lua << EOF
 require'lspconfig'.pyright.setup{}
 eof
 ```
@@ -42,14 +58,14 @@ Language servers require each project to have a `root` in order to provide compl
 
 ## Enabling additional language servers
 
-Enabling most language servers is as easy as installing the language on your PATH, and adding the following to your config:
+Enabling most language servers is as easy as installing the language server, ensuring it is on your PATH, and adding the following to your config:
 
 ```vim
 lua << EOF
 require'lspconfig'.rust_analyzer.setup{}
 EOF
 ```
-For a full list of servers, see [CONFIG.md](CONFIG.md). This document contains installation instructions and additional, optional customization suggestions for each language server. For some servers that are not on your system path (jdtls, elixirls) you will be required to manually add `cmd` as an entry in the table passed to setup.
+For a full list of servers, see [CONFIG.md](CONFIG.md). This document contains installation instructions and additional, optional customization suggestions for each language server. For some servers that are not on your system path (jdtls, elixirls) you will be required to manually add `cmd` as an entry in the table passed to setup. Most language servers can be installed in less than a minute.
 
 ## Keybindings and completion
 
