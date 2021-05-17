@@ -2,7 +2,10 @@ local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
 local language_id_of = {
+  menhir = 'ocaml.menhir';
   ocaml = 'ocaml';
+  ocamlinterface = 'ocaml.interface';
+  ocamllex = 'ocaml.ocamllex';
   reason = 'reason';
 }
 
