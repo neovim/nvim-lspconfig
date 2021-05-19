@@ -574,6 +574,12 @@ This server accepts configuration via the `settings` key.
   
   Whether to check you are using the latest version of the Dart SDK at startup\.
 
+- **`dart.cliConsole`**: `enum { "debugConsole", "terminal" }`
+
+  Default: `"debugConsole"`
+  
+  Whether to run Dart CLI apps in the Debug Console or the VS Code integrated terminal\. The Debug Console has more functionality because the process is controlled by the debug adapter\, but is unable to accept input from the user via stdin\.
+
 - **`dart.closingLabels`**: `boolean`
 
   Default: `true`
@@ -803,6 +809,12 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Whether to set newly connected devices as the current device in Flutter projects\.
+
+- **`dart.flutterShowEmulators`**: `enum { "local", "always" }`
+
+  Default: `"local"`
+  
+  null
 
 - **`dart.flutterShowWebServerDevice`**: `enum { "remote", "always" }`
 
@@ -2197,7 +2209,7 @@ require'lspconfig'.jdtls.setup{}
   Default Values:
     cmd = { "/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64/bin/java", "-Declipse.application=org.eclipse.jdt.ls.core.id1", "-Dosgi.bundles.defaultStartLevel=4", "-Declipse.product=org.eclipse.jdt.ls.core.product", "-Dlog.protocol=true", "-Dlog.level=ALL", "-Xms1g", "-Xmx2G", "-jar", "vim.NIL", "-configuration", "vim.NIL", "-data", "vim.NIL", "--add-modules=ALL-SYSTEM", "--add-opens java.base/java.util=ALL-UNNAMED", "--add-opens java.base/java.lang=ALL-UNNAMED" }
     cmd_env = {
-      GRADLE_HOME = "/usr/share/gradle-7.0.1",
+      GRADLE_HOME = "/usr/share/gradle-7.0.2",
       JAR = vim.NIL
     }
     filetypes = { "java" }
@@ -3085,7 +3097,8 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocaml", "reason" }
+    filetypes = { "menhir", "ocamlinterface", "ocaml", "ocamllex", "reason" }
+    get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
 
@@ -4701,6 +4714,18 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.updates.channel`**: `enum { "stable", "nightly" }`
 
   Default: `"stable"`
+  
+  null
+
+- **`rust-analyzer.workspace.symbol.search.kind`**: `enum { "only_types", "all_symbols" }`
+
+  Default: `"only_types"`
+  
+  null
+
+- **`rust-analyzer.workspace.symbol.search.scope`**: `enum { "workspace", "workspace_and_dependencies" }`
+
+  Default: `"workspace"`
   
   null
 
