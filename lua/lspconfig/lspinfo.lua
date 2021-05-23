@@ -23,7 +23,7 @@ return function ()
     "Configured servers: "..table.concat(vim.tbl_keys(configs), ', '),
     "Neovim logs at: "..(vim.lsp.get_log_path()),
     "",
-    tostring(#buf_clients).." client(s) attached to this buffer: "..table.concat(buf_client_names, ', '),
+    tostring(#vim.tbl_keys(buf_clients)).." client(s) attached to this buffer: "..table.concat(buf_client_names, ', '),
   }
   vim.list_extend(buf_lines, header)
 
