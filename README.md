@@ -37,7 +37,7 @@ npm i -g pyright
 ```vim
 lua << EOF
 require'lspconfig'.pyright.setup{}
-eof
+EOF
 ```
 3. Create a project, this project must contain a file matching the root directory trigger. See [Automatically launching language servers](#Automatically-launching-language-servers) for additional info.
 ```bash
