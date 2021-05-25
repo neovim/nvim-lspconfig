@@ -53,7 +53,7 @@ lsp` for more details.
 >
     lua << EOF    
     require'lspconfig'.pyright.setup{}    
-    eof
+    EOF
 <
 
 
