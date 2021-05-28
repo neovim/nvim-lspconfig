@@ -21,7 +21,7 @@ configs.rome = {
   },
   docs = {
       description = [[
-https://romefrontend.dev
+https://rome.tools
 
 Language server for the Rome Frontend Toolchain.
 
