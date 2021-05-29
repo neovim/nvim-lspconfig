@@ -8,14 +8,13 @@ on:
 jobs:
   docgen:
     runs-on: [ubuntu-latest]
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v2
-      with:
-        persist-credentials: false
-        fetch-depth: 0
     - run: date +%F > todays-date
     - name: Restore cache for today's nightly.
-      uses: actions/cache@v1.0.0
+      uses: actions/cache@v2
       with:
         path: _neovim
         key: ${{ runner.os }}-nightly-${{ hashFiles('todays-date') }}
@@ -26,14 +25,12 @@ jobs:
         scripts/docgen.sh
     - name: Commit changes
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COMMIT_MSG: |
           [docgen] Update CONFIG.md
           skip-checks: true
       run: |
-        git config user.email "actions@github"
-        git config user.name "Github Actions"
-        git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        git config user.name github-actions
+        git config user.email github-actions@github.com
         git add CONFIG.md
         # Only commit and push if we have changes
-        git diff --quiet && git diff --staged --quiet || (git commit -m "${COMMIT_MSG}"; git push origin HEAD:${GITHUB_REF})
+        git diff --quiet && git diff --staged --quiet || (git commit -m "${COMMIT_MSG}"; git push)

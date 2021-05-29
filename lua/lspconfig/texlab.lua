@@ -56,25 +56,25 @@ configs.texlab = {
       return util.path.dirname(filename)
     end;
     settings = {
-      latex = {
+      texlab = {
+        rootDirectory = nil;
         build = {
-          args = {"-pdf", "-interaction=nonstopmode", "-synctex=1", "%f"};
           executable = "latexmk";
-          onSave = false;
+          args = {"-pdf", "-interaction=nonstopmode", "-synctex=1", "%f"};
+          isContinuous = false;
         };
+        auxDirectory = '.';
         forwardSearch = {
-          args = {};
           executable = nil;
-          onSave = false;
+          args = {};
         };
-        lint = {
-          onChange = false;
+        chktex = {
+          onOpenAndSave = false;
+          onEdit = false;
         };
-      };
-      bibtex = {
-        formatting = {
-          lineLength = 120
-        };
+        diagnosticsDelay = 300;
+        bibtexFormatter = 'texlab';
+        formatterLineLength = 80;
       };
     };
   };
@@ -94,11 +94,11 @@ configs.texlab = {
   };
   docs = {
     description = [[
-https://texlab.netlify.com/
+https://github.com/latex-lsp/texlab
 
 A completion engine built from scratch for (La)TeX.
 
-See https://texlab.netlify.com/docs/reference/configuration for configuration options.
+See https://github.com/latex-lsp/texlab/docs/options.md for configuration options.
 ]];
     default_config = {
       root_dir = "vim's starting directory";

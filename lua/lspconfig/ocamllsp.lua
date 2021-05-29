@@ -1,11 +1,28 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
+local language_id_of = {
+  menhir = 'ocaml.menhir';
+  ocaml = 'ocaml';
+  ocamlinterface = 'ocaml.interface';
+  ocamllex = 'ocaml.ocamllex';
+  reason = 'reason';
+}
+
+local filetypes = {}
+
+for ftype, _ in pairs(language_id_of) do
+  table.insert(filetypes, ftype)
+end
+
+local get_language_id = function (_, ftype) return language_id_of[ftype] end
+
 configs.ocamllsp = {
   default_config = {
     cmd = {"ocamllsp",};
-    filetypes = {'ocaml', 'reason'};
+    filetypes = filetypes;
     root_dir = util.root_pattern("*.opam", "esy.json", "package.json", ".git");
+    get_language_id = get_language_id;
   };
   docs = {
     description = [[

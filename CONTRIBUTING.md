@@ -1,7 +1,3 @@
-# Contributing to nvim-lspconfig
-
-Thank you!
-
 ## Requirements
 
 - [Neovim](https://neovim.io/) :P
@@ -74,14 +70,3 @@ functions to it if necessary.
 Example:
 
     configs.texlab.buf_build = buf_build
-
-## Auto-install
-
-Note **we have removed auto installers from the nvim-lspconfig repo**
-([#334](https://github.com/neovim/nvim-lspconfig/issues/334)).  Instead, each
-config _documents_ key installation details:
-
-- URL to download the server
-- URL to documentation explaining how to install the server
-- Brief instructions that user can copy/paste into their shell to install via
-  common package managers such as apt-get/homebrew.

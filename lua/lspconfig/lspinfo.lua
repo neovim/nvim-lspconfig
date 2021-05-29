@@ -15,7 +15,7 @@ return function ()
   local buf_lines = {}
 
   local buf_client_names = {}
-  for _, client in ipairs(buf_clients) do
+  for _, client in pairs(buf_clients) do
     table.insert(buf_client_names, client.name)
   end
 
@@ -23,13 +23,13 @@ return function ()
     "Configured servers: "..table.concat(vim.tbl_keys(configs), ', '),
     "Neovim logs at: "..(vim.lsp.get_log_path()),
     "",
-    tostring(#buf_clients).." client(s) attached to this buffer: "..table.concat(buf_client_names, ', '),
+    tostring(#vim.tbl_keys(buf_clients)).." client(s) attached to this buffer: "..table.concat(buf_client_names, ', '),
   }
   vim.list_extend(buf_lines, header)
 
   local function trim_whitespace(cmd)
     local trimmed_cmd = {}
-    for _, str in ipairs(cmd) do
+    for _, str in pairs(cmd) do
       table.insert(trimmed_cmd, str:match'^%s*(.*)')
     end
     return trimmed_cmd
@@ -61,7 +61,7 @@ return function ()
     }
   end
 
-  for _, client in ipairs(buf_clients) do
+  for _, client in pairs(buf_clients) do
      local client_info = make_client_info(client)
      vim.list_extend(buf_lines, client_info)
   end
@@ -71,7 +71,7 @@ return function ()
     tostring(#clients).." active client(s): ",
   }
   vim.list_extend(buf_lines, active_section_header)
-  for _, client in ipairs(clients) do
+  for _, client in pairs(clients) do
      local client_info = make_client_info(client)
      vim.list_extend(buf_lines, client_info)
   end
@@ -95,7 +95,7 @@ return function ()
       cmd_is_executable = cmd
     end
     if config.filetypes then
-      for _, filetype_match in ipairs(config.filetypes) do
+      for _, filetype_match in pairs(config.filetypes) do
         if buffer_filetype == filetype_match then
           local matching_config_info = {
             indent.."",

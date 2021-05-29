@@ -127,6 +127,7 @@ configs[server_name] = {
     };
   };
   docs = {
+    package_json = "https://raw.githubusercontent.com/redhat-developer/vscode-java/master/package.json",
     description = [[
 
 https://projects.eclipse.org/projects/eclipse.jdt.ls
@@ -141,7 +142,7 @@ inferred. Please set the following environmental variables to match your install
 ```bash
 export JAR=/path/to/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_1.6.0.v20200915-1508.jar
 export GRADLE_HOME=$HOME/gradle
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.9.11-9.fc33.x86_64/
+export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:/bin/java::")
 export JDTLS_CONFIG=/path/to/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux
 export WORKSPACE=$HOME/workspace
 ```
