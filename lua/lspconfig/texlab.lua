@@ -98,7 +98,7 @@ https://github.com/latex-lsp/texlab
 
 A completion engine built from scratch for (La)TeX.
 
-See https://github.com/latex-lsp/texlab/docs/options.md for configuration options.
+See https://github.com/latex-lsp/texlab/blob/master/docs/options.md for configuration options.
 ]];
     default_config = {
       root_dir = "vim's starting directory";
