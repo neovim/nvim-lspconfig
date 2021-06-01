@@ -16,15 +16,27 @@ configs.rust_analyzer = {
     cmd = {"rust-analyzer"};
     filetypes = {"rust"};
     root_dir = function(fname)
-      local cargo_metadata = vim.fn.system("cargo metadata --no-deps --format-version 1")
-      local cargo_root = nil
-      if vim.v.shell_error == 0 then
-        cargo_root = vim.fn.json_decode(cargo_metadata)["workspace_root"]
+      -- Order of preference for how we choose the root dir:
+      --   * Current Cargo workspace (if any)
+      --   * Current Cargo crate (if any)
+      --   * Rust project root, for projects that don't use Cargo (if any)
+      --   * Current git repository
+      local cargo_crate_dir = util.root_pattern("Cargo.toml")(fname)
+      -- Make sure that we run `cargo metadata` in the current project dir
+      -- rather that the dir from which nvim was initially launched.
+      local cmd = "cargo metadata --no-deps --format-version 1"
+      if cargo_crate_dir ~= nil then
+        cmd = cmd .. " --manifest-path " .. util.path.join(cargo_crate_dir, "Cargo.toml")
       end
-      return cargo_root or
-        util.find_git_ancestor(fname) or
-        util.root_pattern("rust-project.json")(fname) or
-        util.root_pattern("Cargo.toml")(fname)
+      local cargo_metadata = vim.fn.system(cmd)
+      local cargo_workspace_dir = nil
+      if vim.v.shell_error == 0 then
+        cargo_worspace_dir = vim.fn.json_decode(cargo_metadata)["workspace_root"]
+      end
+      return cargo_workspace_dir or
+        cargo_crate_dir or
+        nvim_lsp.util.root_pattern("rust-project.json")(fname) or
+        nvim_lsp.util.find_git_ancestor(fname)
     end;
     settings = {
       ["rust-analyzer"] = {}
