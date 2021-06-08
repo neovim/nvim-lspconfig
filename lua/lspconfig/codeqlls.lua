@@ -10,10 +10,10 @@ configs[server_name] = {
         cmd = {"codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q"};
         filetypes = {'ql'};
         root_dir = function(fname)
-            return root_pattern("qlpack.yml") or util.path.dirname(fname)
+            return root_pattern(fname) or util.path.dirname(fname)
         end;
         log_level = vim.lsp.protocol.MessageType.Warning;
-        before_init = function(initialize_params, config)
+        before_init = function(initialize_params)
             initialize_params['workspaceFolders'] = {{
                 name = 'workspace',
                 uri = initialize_params['rootUri']
