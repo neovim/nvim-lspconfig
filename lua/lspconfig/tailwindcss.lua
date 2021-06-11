@@ -11,6 +11,8 @@ configs[server_name] = {
     filetypes = {
       -- html
       'aspnetcorerazor',
+      'astro',
+      'astro-markdown',
       'blade',
       'django-html',
       'edge',
