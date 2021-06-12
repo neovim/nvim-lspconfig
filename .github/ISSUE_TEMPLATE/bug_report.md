@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a problem in nvim-lsp
+about: Report a problem in nvim-lspconfig
 title: ''
 labels: bug
 
@@ -9,7 +9,7 @@ labels: bug
 <!-- Before reporting: search existing issues and ensure you are running the latest nightly of neovim and the latest version of nvim-lspconfig. Note that this repository implements configuration and initialization of language servers. Implementation of the language server spec itself is located in the neovim core repository-->
 
 - `nvim --version`:
-- nvim-lsp version(commit hash):
+- nvim-lspconfig version(commit hash):
 - What language server (If the problem is related to a specific language server):
 - Can you reproduce this behavior on other language server clients (vscode, languageclient-neovim, coc.nvim, etc.):
 - Can you reproduce this behavior on other language servers offered in the nvim-lspconfig repo? (pyls -> pyright):
