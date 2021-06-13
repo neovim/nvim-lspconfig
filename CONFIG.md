@@ -12,6 +12,7 @@ that config.
 - [clojure_lsp](#clojure_lsp)
 - [cmake](#cmake)
 - [codeqlls](#codeqlls)
+- [crystalline](#crystalline)
 - [cssls](#cssls)
 - [dartls](#dartls)
 - [denols](#denols)
@@ -51,6 +52,7 @@ that config.
 - [perlls](#perlls)
 - [phpactor](#phpactor)
 - [powershell_es](#powershell_es)
+- [prismals](#prismals)
 - [purescriptls](#purescriptls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
@@ -303,90 +305,6 @@ https://help.semmle.com/codeql/codeql-cli.html
 Binaries:
 https://github.com/github/codeql-cli-binaries
         
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`codeQL.cli.executablePath`**: `string`
-
-  Default: `""`
-  
-  Path to the CodeQL executable that should be used by the CodeQL extension\. The executable is named \`codeql\` on Linux\/Mac and \`codeql\.exe\` on Windows\. If empty\, the extension will look for a CodeQL executable on your shell PATH\, or if CodeQL is not on your PATH\, download and manage its own CodeQL executable\.
-
-- **`codeQL.queryHistory.format`**: `string`
-
-  Default: `"%q on %d - %s, %r result count [%t]"`
-  
-  Default string for how to label query history items\. \%t is the time of the query\, \%q is the query name\, \%d is the database name\, \%r is the number of results\, and \%s is a status string\.
-
-- **`codeQL.resultsDisplay.pageSize`**: `integer`
-
-  Default: `200`
-  
-  Max number of query results to display per page in the results view\.
-
-- **`codeQL.runningQueries.autoSave`**: `boolean`
-
-  Enable automatically saving a modified query file when running a query\.
-
-- **`codeQL.runningQueries.cacheSize`**: `integer|null`
-
-  Default: `vim.NIL`
-  
-  Maximum size of the disk cache \(in MB\)\. Leave blank to allow the evaluator to automatically adjust the size of the disk cache based on the size of the codebase and the complexity of the queries being executed\.
-
-- **`codeQL.runningQueries.debug`**: `boolean`
-
-  Enable debug logging and tuple counting when running CodeQL queries\. This information is useful for debugging query performance\.
-
-- **`codeQL.runningQueries.maxQueries`**: `integer`
-
-  Default: `20`
-  
-  Max number of simultaneous queries to run using the \'CodeQL\: Run Queries\' command\.
-
-- **`codeQL.runningQueries.memory`**: `integer|null`
-
-  Default: `vim.NIL`
-  
-  Memory \(in MB\) to use for running queries\. Leave blank for CodeQL to choose a suitable value based on your system\'s available memory\.
-
-- **`codeQL.runningQueries.numberOfThreads`**: `integer`
-
-  Default: `1`
-  
-  Number of threads for running queries\.
-
-- **`codeQL.runningQueries.saveCache`**: `boolean`
-
-  Aggressively save intermediate results to the disk cache\. This may speed up subsequent queries if they are similar\. Be aware that using this option will greatly increase disk usage and initial evaluation time\.
-
-- **`codeQL.runningQueries.timeout`**: `integer|null`
-
-  Default: `vim.NIL`
-  
-  Timeout \(in seconds\) for running queries\. Leave blank or set to zero for no timeout\.
-
-- **`codeQL.runningTests.additionalTestArguments`**: `array`
-
-  Default: `{}`
-  
-  null
-
-- **`codeQL.runningTests.numberOfThreads`**: `integer`
-
-  Default: `1`
-  
-  Number of threads for running CodeQL tests\.
-
-- **`codeQL.telemetry.enableTelemetry`**: `boolean`
-
-  null
-
-- **`codeQL.telemetry.logTelemetry`**: `boolean`
-
-  Specifies whether or not to write telemetry events to the extension log\.
-
-</details>
 
 ```lua
 require'lspconfig'.codeqlls.setup{}
@@ -394,7 +312,7 @@ require'lspconfig'.codeqlls.setup{}
   Commands:
   
   Default Values:
-    before_init = function(initialize_params, config)
+    before_init = function(initialize_params)
                 initialize_params['workspaceFolders'] = {{
                     name = 'workspace',
                     uri = initialize_params['rootUri']
@@ -404,11 +322,29 @@ require'lspconfig'.codeqlls.setup{}
     filetypes = { "ql" }
     log_level = 2
     root_dir = function(fname)
-                return root_pattern("qlpack.yml") or util.path.dirname(fname)
+                return root_pattern(fname) or util.path.dirname(fname)
             end;
     settings = {
       search_path = "list containing all search paths, eg: '~/codeql-home/codeql-repo'"
     }
+```
+
+## crystalline
+
+https://github.com/elbywan/crystalline
+
+Crystal language server.
+
+
+```lua
+require'lspconfig'.crystalline.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "crystalline" }
+    filetypes = { "crystal" }
+    root_dir = root_pattern('shard.yml', '.git') or dirname
 ```
 
 ## cssls
@@ -658,6 +594,10 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
+  null
+
+- **`dart.enableServerSnippets`**: `boolean`
+
   null
 
 - **`dart.enableSnippets`**: `boolean`
@@ -1649,26 +1589,20 @@ require'lspconfig'.fortls.setup{}
 
 https://github.com/fsharp/FsAutoComplete
 
-Language Server for F# provded by FsAutoComplete (FSAC).
-
-Download a release of FsAutoComplete from [here](https://github.com/fsharp/FsAutoComplete/releases).
-Instructions to compile from source are found on the main repository.
+Language Server for F# provided by FsAutoComplete (FSAC).
 
 FsAutoComplete requires the [dotnet-sdk](https://dotnet.microsoft.com/download) to be installed.
+
+The prefered way to install FsAutoComplete is with `dotnet tool install --global fsautocomplete`.
+
+Instructions to compile from source are found on the main [repository](https://github.com/fsharp/FsAutoComplete).
 
 You may also need to configure the filetype as Vim defaults to Forth for `*.fs` files:
 
 `autocmd BufNewFile,BufRead *.fs,*.fsx,*.fsi set filetype=fsharp`
 
-This is automatically done by plugins such as [vim-polyglot](https://github.com/sheerun/vim-polyglot), [PhilT/vim-fsharp](https://github.com/PhilT/vim-fsharp) or [fsharp/vim-fsharp](https://github.com/fsharp/vim-fsharp).
+This is automatically done by plugins such as [PhilT/vim-fsharp](https://github.com/PhilT/vim-fsharp), [fsharp/vim-fsharp](https://github.com/fsharp/vim-fsharp), and [adelarsq/neofsharp.vim](https://github.com/adelarsq/neofsharp.vim).
 
-**By default, this config doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of your unzipped and compiled fsautocomplete.dll.
-
-```lua
-require'lspconfig'.fsautocomplete.setup{
-  cmd = {'dotnet', 'path/to/fsautocomplete.dll', '--background-service-enabled'}
-}
-```
     
 
 ```lua
@@ -1677,6 +1611,7 @@ require'lspconfig'.fsautocomplete.setup{}
   Commands:
   
   Default Values:
+    cmd = { "dotnet", "fsautocomplete", "--background-service-enabled" }
     filetypes = { "fsharp" }
     init_options = {
       AutomaticWorkspaceInit = true
@@ -3066,6 +3001,12 @@ This server accepts configuration via the `settings` key.
 
   Use an existing custom sysimage when starting the REPL
 
+- **`julia.usePlotNavigator`**: `boolean`
+
+  Default: `true`
+  
+  Whether to automatically show the plot navigator when plotting\.
+
 - **`julia.usePlotPane`**: `boolean`
 
   Default: `true`
@@ -3565,7 +3506,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "reason", "ocamlinterface", "ocamllex", "ocaml", "menhir" }
+    filetypes = { "menhir", "reason", "ocamlinterface", "ocaml", "ocamllex" }
     get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
@@ -3803,6 +3744,29 @@ require'lspconfig'.powershell_es.setup{}
     root_dir = git root or current directory
 ```
 
+## prismals
+
+npm install -g @prisma/language-server
+
+'prismals, a language server for the prisma javascript and typescript orm'
+
+
+```lua
+require'lspconfig'.prismals.setup{}
+
+  Commands:
+  
+  Default Values:
+    cmd = { "prisma-language-server", "--stdio" }
+    filetypes = { "prisma" }
+    root_dir = root_pattern(".git", "package.json")
+    settings = {
+      prisma = {
+        prismaFmtBinPath = ""
+      }
+    }
+```
+
 ## purescriptls
 
 https://github.com/nwolverson/purescript-language-server
@@ -3880,10 +3844,6 @@ This server accepts configuration via the `settings` key.
   
   List of codegen targets to pass to the compiler for rebuild\. e\.g\. js\, corefn\. If not specified \(rather than empty array\) this will not be passed and the compiler will default to js\. Requires 0\.12\.1+
 
-- **`purescript.editorMode`**: `boolean`
-
-  \(DEPRECATED \- ignored from purs 0\.13\.8\) Whether to set the editor\-mode flag on the IDE server
-
 - **`purescript.fastRebuild`**: `boolean`
 
   Default: `true`
@@ -3909,10 +3869,6 @@ This server accepts configuration via the `settings` key.
   Default: `""`
   
   Path to installed packages\. Will be used to control globs passed to IDE server for source locations\.  Change requires IDE server restart\.
-
-- **`purescript.polling`**: `boolean`
-
-  \(DEPRECATED \- ignored from purs 0\.13\.8\) Whether to set the polling flag on the IDE server
 
 - **`purescript.preludeModule`**: `string`
 
@@ -4887,6 +4843,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.completion.autoself.enable`**: `boolean`
+
+  Default: `true`
+  
+  null
+
 - **`rust-analyzer.completion.postfix.enable`**: `boolean`
 
   Default: `true`
@@ -4957,6 +4919,10 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.experimental.procAttrMacros`**: `boolean`
+
+  null
+
 - **`rust-analyzer.files.excludeDirs`**: `array`
 
   Default: `{}`
@@ -5005,6 +4971,10 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
+  null
+
+- **`rust-analyzer.hoverActions.references`**: `boolean`
+
   null
 
 - **`rust-analyzer.hoverActions.run`**: `boolean`
@@ -5137,6 +5107,10 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
+  null
+
+- **`rust-analyzer.rustfmt.enableRangeFormatting`**: `boolean`
+
   null
 
 - **`rust-analyzer.rustfmt.extraArgs`**: `array`
@@ -5619,6 +5593,10 @@ end
 local sumneko_root_path = vim.fn.stdpath('cache')..'/lspconfig/sumneko_lua/lua-language-server'
 local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
 
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
 require'lspconfig'.sumneko_lua.setup {
   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
   settings = {
@@ -5627,7 +5605,7 @@ require'lspconfig'.sumneko_lua.setup {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
         -- Setup your lua path
-        path = vim.split(package.path, ';'),
+        path = runtime_path,
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
@@ -5635,10 +5613,7 @@ require'lspconfig'.sumneko_lua.setup {
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-        },
+        library = vim.api.nvim_get_runtime_file("", true),
       },
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
@@ -6047,7 +6022,7 @@ https://github.com/latex-lsp/texlab
 
 A completion engine built from scratch for (La)TeX.
 
-See https://github.com/latex-lsp/texlab/docs/options.md for configuration options.
+See https://github.com/latex-lsp/texlab/blob/master/docs/options.md for configuration options.
 
 
 ```lua
@@ -6413,6 +6388,12 @@ This server accepts configuration via the `settings` key.
   
   Traces the communication between VS Code and Vue Language Server\.
 
+- **`vetur.underline.refValue`**: `boolean`
+
+  Default: `true`
+  
+  Enable underline \`\.value\` when using composition API\.
+
 - **`vetur.useWorkspaceDependencies`**: `boolean`
 
   Use dependencies from workspace\. Currently only for TypeScript\.
@@ -6507,6 +6488,12 @@ npm install -g yaml-language-server
 
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
+
+- **`redhat.telemetry.enabled`**: `boolean`
+
+  Default: `vim.NIL`
+  
+  null
 
 - **`yaml.completion`**: `boolean`
 
