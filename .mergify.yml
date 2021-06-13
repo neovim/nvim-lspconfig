@@ -6,7 +6,6 @@ pull_request_rules:
       close:
       comment: 
         message: "CONFIG.md is auto-generated: edit the lua source file instead (and re-read the PR template)."
-        pull_request_rules:
   - name: Conventional Commit
     conditions:
       - "title~=^(fix|feat|docs|style|refactor|perf|test|build|ci|chore|revert)(?:\\(.+\\))?:"
