@@ -2031,14 +2031,14 @@ require'lspconfig'.hls.setup{}
 
 ## html
 
-https://github.com/vscode-langservers/vscode-html-languageserver-bin
+https://github.com/hrsh7th/vscode-langservers-extracted
 
-`vscode-html-languageserver` can be installed via `npm`:
+`vscode-html-language-server` can be installed via `npm`:
 ```sh
-npm install -g vscode-html-languageserver-bin
+npm i -g vscode-langservers-extracted
 ```
 
-Neovim does not currently include built-in snippets. `vscode-html-languageserver` only provides completions when snippet support is enabled.
+Neovim does not currently include built-in snippets. `vscode-html-language-server` only provides completions when snippet support is enabled.
 To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
 
 ```lua
@@ -2058,7 +2058,7 @@ require'lspconfig'.html.setup{}
   Commands:
   
   Default Values:
-    cmd = { "html-languageserver", "--stdio" }
+    cmd = { "vscode-html-language-server", "--stdio" }
     filetypes = { "html" }
     init_options = {
       configurationSection = { "html", "css", "javascript" },
@@ -3422,7 +3422,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "menhir", "ocamlinterface", "ocaml", "ocamllex", "reason" }
+    filetypes = { "menhir", "ocamlinterface", "ocaml", "reason", "ocamllex" }
     get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
