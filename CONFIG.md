@@ -2611,16 +2611,16 @@ require'lspconfig'.jedi_language_server.setup{}
 
 ## jsonls
 
-https://github.com/vscode-langservers/vscode-json-languageserver
+https://github.com/hrsh7th/vscode-langservers-extracted
 
-vscode-json-languageserver, a language server for JSON and JSON schema
+vscode-json-language-server, a language server for JSON and JSON schema
 
-`vscode-json-languageserver` can be installed via `npm`:
+`vscode-json-language-server` can be installed via `npm`:
 ```sh
-npm install -g vscode-json-languageserver
+npm i -g vscode-langservers-extracted
 ```
 
-vscode-json-languageserver only provides range formatting. You can map a command that applies range formatting to the entire document:
+vscode-json-language-server only provides range formatting. You can map a command that applies range formatting to the entire document:
 
 ```lua
 require'lspconfig'.jsonls.setup {
@@ -2681,7 +2681,7 @@ require'lspconfig'.jsonls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "vscode-json-languageserver", "--stdio" }
+    cmd = { "vscode-json-language-server", "--stdio" }
     filetypes = { "json" }
     init_options = {
       provideFormatter = true
@@ -3422,7 +3422,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "menhir", "ocamlinterface", "ocaml", "reason", "ocamllex" }
+    filetypes = { "ocamlinterface", "ocaml", "ocamllex", "menhir", "reason" }
     get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
