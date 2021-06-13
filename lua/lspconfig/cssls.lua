@@ -31,7 +31,7 @@ https://github.com/hrsh7th/vscode-langservers-extracted
 npm i -g vscode-langservers-extracted
 ```
     
-Neovim does not currently include built-in snippets. vscode-css-language-server only provides completions when snippet support is enabled. To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
+Neovim does not currently include built-in snippets. `vscode-css-language-server` only provides completions when snippet support is enabled. To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
 
 ```lua
 --Enable (broadcasting) snippet capability for completion
@@ -43,27 +43,6 @@ require'lspconfig'.cssls.setup {
 }
 ```
     
-```lua
-require'lspconfig'.cssls.setup{}
-
-  Commands:
-  
-  Default Values:
-    cmd = { "vscode-css-language-server", "--stdio" }
-    filetypes = { "css", "scss", "less" }
-    root_dir = root_pattern("package.json")
-    settings = {
-      css = {
-        validate = true
-      },
-      less = {
-        validate = true
-      },
-      scss = {
-        validate = true
-      }
-    }
-```
 ]];
     default_config = {
       root_dir = [[root_pattern("package.json")]];
