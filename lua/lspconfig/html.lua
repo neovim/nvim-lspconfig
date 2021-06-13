@@ -2,7 +2,7 @@ local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
 local server_name = "html"
-local bin_name = "html-languageserver"
+local bin_name = "vscode-html-language-server"
 
 local root_pattern = util.root_pattern("package.json")
 
@@ -22,14 +22,14 @@ configs[server_name] = {
   };
   docs = {
     description = [[
-https://github.com/vscode-langservers/vscode-html-languageserver-bin
+https://github.com/hrsh7th/vscode-langservers-extracted
 
-`vscode-html-languageserver` can be installed via `npm`:
+`vscode-html-language-server` can be installed via `npm`:
 ```sh
-npm install -g vscode-html-languageserver-bin
+npm i -g vscode-langservers-extracted
 ```
 
-Neovim does not currently include built-in snippets. `vscode-html-languageserver` only provides completions when snippet support is enabled.
+Neovim does not currently include built-in snippets. `vscode-html-language-server` only provides completions when snippet support is enabled.
 To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
 
 ```lua
