@@ -43,6 +43,7 @@ that config.
 - [jsonls](#jsonls)
 - [julials](#julials)
 - [kotlin_language_server](#kotlin_language_server)
+- [lean3ls](#lean3ls)
 - [leanls](#leanls)
 - [metals](#metals)
 - [nimls](#nimls)
@@ -3176,138 +3177,46 @@ require'lspconfig'.kotlin_language_server.setup{}
     root_dir = root_pattern("settings.gradle")
 ```
 
-## leanls
+## lean3ls
 
 https://github.com/leanprover/lean-client-js/tree/master/lean-language-server
 
-Lean language server.
+Lean installation instructions can be found
+[here](https://leanprover-community.github.io/get_started.html#regular-install).
+
+Once Lean is installed, you can install the Lean 3 language server by running
+```sh
+npm install -g lean-language-server
+```
     
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
 
-- **`lean.executablePath`**: `string`
+```lua
+require'lspconfig'.lean3ls.setup{}
 
-  Default: `"lean"`
+  Commands:
   
-  null
+  Default Values:
+    cmd = { "lean-language-server", "--stdio" }
+    filetypes = { "lean3" }
+    on_new_config = function(config, root)
+          if not util.path.is_file(root .. "/leanpkg.toml") then return end
+          if not config.cmd_cwd then
+            config.cmd_cwd = root
+          end
+        end;
+    root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
+```
 
-- **`lean.extraOptions`**: `array`
+## leanls
 
-  Default: `{}`
-  
-  Array items: `{description = "a single command-line argument",type = "string"}`
-  
-  null
+https://github.com/leanprover/lean4
 
-- **`lean.infoViewAllErrorsOnLine`**: `boolean`
+Lean installation instructions can be found
+[here](https://leanprover-community.github.io/get_started.html#regular-install).
 
-  null
-
-- **`lean.infoViewAutoOpen`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`lean.infoViewAutoOpenShowGoal`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`lean.infoViewFilterIndex`**: `number`
-
-  Default: `-1`
-  
-  null
-
-- **`lean.infoViewStyle`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`lean.infoViewTacticStateFilters`**: `array`
-
-  Default: `{ {flags = "",match = false,regex = "^_"}, {flags = "",match = true,name = "goals only",regex = "^(⊢|\\d+ goals|case|$)"} }`
-  
-  Array items: `{description = "an object with required properties 'regex': string, 'match': boolean, and 'flags': string, and optional property 'name': string",properties = {flags = {description = "additional flags passed to the RegExp constructor, e.g. 'i' for ignore case",type = "string"},match = {description = "whether tactic state lines matching the value of 'regex' should be included (true) or excluded (false)",type = "boolean"},name = {description = "name displayed in the dropdown",type = "string"},regex = {description = "a properly-escaped regex string, e.g. '^_' matches any string beginning with an underscore",type = "string"}},required = { "regex", "match", "flags" },type = "object"}`
-  
-  null
-
-- **`lean.input.customTranslations`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  Array items: `{description = "Unicode character to translate to",type = "string"}`
-  
-  null
-
-- **`lean.input.eagerReplacementEnabled`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`lean.input.enabled`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`lean.input.languages`**: `array`
-
-  Default: `{ "lean" }`
-  
-  Array items: `{description = "the name of a language, e.g. 'lean', 'markdown'",type = "string"}`
-  
-  null
-
-- **`lean.input.leader`**: `string`
-
-  Default: `"\\"`
-  
-  null
-
-- **`lean.leanpkgPath`**: `string`
-
-  Default: `"leanpkg"`
-  
-  null
-
-- **`lean.memoryLimit`**: `number`
-
-  Default: `4096`
-  
-  null
-
-- **`lean.progressMessages`**: `boolean`
-
-  null
-
-- **`lean.roiModeDefault`**: `string`
-
-  Default: `"visible"`
-  
-  null
-
-- **`lean.timeLimit`**: `number`
-
-  Default: `100000`
-  
-  null
-
-- **`lean.typeInStatusBar`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`lean.typesInCompletionList`**: `boolean`
-
-  null
-
-</details>
+The Lean 4 language server is built-in with a Lean 4 install
+(and can be manually run with, e.g., `lean --server`).
+    
 
 ```lua
 require'lspconfig'.leanls.setup{}
@@ -3315,9 +3224,15 @@ require'lspconfig'.leanls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "lean-language-server", "--stdio" }
+    cmd = { "lean", "--server" }
     filetypes = { "lean" }
-    root_dir = root_pattern(".git") or os_homedir
+    on_new_config = function(config, root)
+          if not util.path.is_file(root .. "/leanpkg.toml") then return end
+          if not config.cmd_cwd then
+            config.cmd_cwd = root
+          end
+        end;
+    root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
 ```
 
 ## metals
@@ -3506,7 +3421,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocaml", "ocamllex", "menhir", "reason", "ocamlinterface" }
+    filetypes = { "ocamlinterface", "ocaml", "ocamllex", "menhir", "reason" }
     get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
