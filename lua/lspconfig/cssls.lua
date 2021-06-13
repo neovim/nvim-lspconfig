@@ -2,7 +2,7 @@ local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
 local server_name = "cssls"
-local bin_name = "css-languageserver"
+local bin_name = "vscode-css-language-server"
 
 local root_pattern = util.root_pattern("package.json")
 
@@ -23,7 +23,7 @@ configs[server_name] = {
     description = [[
 
     
-https://www.npmjs.com/package/vscode-langservers-extracted
+https://github.com/hrsh7th/vscode-langservers-extracted
 
 `css-languageserver` can be installed via `npm`:
 
@@ -42,8 +42,6 @@ require'lspconfig'.cssls.setup {
   capabilities = capabilities,
 }
 ```
-
-Here is the most basic setup and the default values that provides:
     
 ```lua
 require'lspconfig'.cssls.setup{}
@@ -65,50 +63,6 @@ require'lspconfig'.cssls.setup{}
         validate = true
       }
     }
-```
-    
-Here is a further exmaple lua setup, where an override has been set to warn if an #id selector is used in Sass (scss) files:
-
-```lua
-require'lspconfig'.cssls.setup({
-    cmd = { "vscode-css-language-server", "--stdio" },
-    settings = {
-    scss = {
-      lint = {
-        idSelector = "warning",
-      },
-    },
-  },
-})
-```
-
-]];
-    
-  };
-}
-
-
-    
-    
-    
-    https://github.com/vscode-langservers/vscode-css-languageserver-bin
-
-`css-languageserver` can be installed via `npm`:
-```sh
-npm install -g vscode-css-languageserver-bin
-```
-
-Neovim does not currently include built-in snippets. `vscode-css-languageserver` only provides completions when snippet support is enabled.
-To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
-
-```lua
---Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-require'lspconfig'.cssls.setup {
-  capabilities = capabilities,
-}
 ```
 ]];
     default_config = {
