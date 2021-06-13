@@ -42,7 +42,6 @@ require'lspconfig'.cssls.setup {
   capabilities = capabilities,
 }
 ```
-    
 ]];
     default_config = {
       root_dir = [[root_pattern("package.json")]];
