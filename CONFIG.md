@@ -350,15 +350,17 @@ require'lspconfig'.crystalline.setup{}
 
 ## cssls
 
-https://github.com/vscode-langservers/vscode-css-languageserver-bin
+
+    
+https://github.com/hrsh7th/vscode-langservers-extracted
 
 `css-languageserver` can be installed via `npm`:
-```sh
-npm install -g vscode-css-languageserver-bin
-```
 
-Neovim does not currently include built-in snippets. `vscode-css-languageserver` only provides completions when snippet support is enabled.
-To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
+```sh
+npm i -g vscode-langservers-extracted
+```
+    
+Neovim does not currently include built-in snippets. `vscode-css-language-server` only provides completions when snippet support is enabled. To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
 
 ```lua
 --Enable (broadcasting) snippet capability for completion
@@ -377,7 +379,7 @@ require'lspconfig'.cssls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "css-languageserver", "--stdio" }
+    cmd = { "vscode-css-language-server", "--stdio" }
     filetypes = { "css", "scss", "less" }
     root_dir = root_pattern("package.json")
     settings = {
@@ -3421,7 +3423,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocamlinterface", "ocaml", "ocamllex", "menhir", "reason" }
+    filetypes = { "ocaml", "ocamllex", "menhir", "reason", "ocamlinterface" }
     get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
