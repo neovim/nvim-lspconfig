@@ -2,7 +2,7 @@ local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
 local server_name = "cssls"
-local bin_name = "vscode-css-language-server"
+local bin_name = "css-languageserver"
 
 local root_pattern = util.root_pattern("package.json")
 
