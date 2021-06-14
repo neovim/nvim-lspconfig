@@ -74,7 +74,6 @@ configs[server_name] = {
     end,
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/tailwindlabs/tailwindcss-intellisense/master/packages/tailwindcss-language-server/package.json',
     description = [[
 https://github.com/tailwindlabs/tailwindcss-intellisense
 
