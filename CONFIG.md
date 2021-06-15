@@ -3423,7 +3423,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "menhir", "reason", "ocamlinterface", "ocaml", "ocamllex" }
+    filetypes = { "ocamlinterface", "ocaml", "ocamllex", "reason", "menhir" }
     get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
@@ -4603,6 +4603,14 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
     
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
+
+- **`$generated-end`**
+
+  null
+
+- **`$generated-start`**
+
+  null
 
 - **`rust-analyzer.assist.importEnforceGranularity`**: `boolean`
 
@@ -5921,7 +5929,29 @@ require'lspconfig'.tailwindcss.setup{}
         eruby = "erb"
       }
     }
+    on_new_config = function(new_config)
+          if not new_config.settings then new_config.settings = {} end
+          if not new_config.settings.editor then new_config.settings.editor = {} end
+          if not new_config.settings.editor.tabSize then
+            -- set tab size for hover
+            new_config.settings.editor.tabSize = vim.lsp.util.get_effective_tabstop()
+          end
+        end,
     root_dir = root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', 'node_modules', '.git')
+    settings = {
+      tailwindCSS = {
+        lint = {
+          cssConflict = "warning",
+          invalidApply = "error",
+          invalidConfigPath = "error",
+          invalidScreen = "error",
+          invalidTailwindDirective = "error",
+          invalidVariant = "error",
+          recommendedVariantOrder = "warning"
+        },
+        validate = true
+      }
+    }
 ```
 
 ## terraformls
