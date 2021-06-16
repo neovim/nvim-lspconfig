@@ -3423,7 +3423,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocamlinterface", "ocaml", "ocamllex", "reason", "menhir" }
+    filetypes = { "menhir", "reason", "ocamlinterface", "ocaml", "ocamllex" }
     get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
@@ -5078,8 +5078,6 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.updates.askBeforeDownload`**: `boolean`
 
-  Default: `true`
-  
   Whether to ask for permission before downloading any files from the Internet\.
 
 - **`rust-analyzer.updates.channel`**: `enum { "stable", "nightly" }`
@@ -5903,7 +5901,7 @@ Tailwind CSS Language Server
 Until the standalone server is published to npm, you can extract the server from the VS Code package:
 
 ```bash
-curl -L -o tailwindcss-intellisense.vsix $(curl -s https://api.github.com/repos/tailwindlabs/tailwindcss-intellisense/releases/latest | grep 'browser_' | cut -d\" -f4)
+curl -L -o tailwindcss-intellisense.vsix https://github.com/tailwindlabs/tailwindcss-intellisense/releases/download/v0.6.8/vscode-tailwindcss-0.6.8.vsix
 unzip tailwindcss-intellisense.vsix -d tailwindcss-intellisense
 echo "#\!/usr/bin/env node\n$(cat tailwindcss-intellisense/extension/dist/server/tailwindServer.js)" > tailwindcss-language-server
 chmod +x tailwindcss-language-server
