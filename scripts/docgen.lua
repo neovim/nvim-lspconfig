@@ -67,11 +67,17 @@ local lsp_section_template = [[
 ## {{template_name}}
 
 {{preamble}}
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.{{template_name}}.setup{}
+```
 
+**Commands and default values:**
+```lua
 {{body}}
 ```
+
 ]]
 
 local function require_all_configs()
