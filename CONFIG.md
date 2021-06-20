@@ -110,9 +110,14 @@ require('lspconfig').als.setup{
 
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.als.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -120,6 +125,7 @@ require'lspconfig'.als.setup{}
     filetypes = { "ada" }
     root_dir = util.root_pattern("Makefile", ".git")
 ```
+
 
 ## angularls
 
@@ -142,9 +148,14 @@ require'lspconfig'.angularls.setup{
 ```
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.angularls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -153,6 +164,7 @@ require'lspconfig'.angularls.setup{}
     root_dir = root_pattern("angular.json", ".git")
 ```
 
+
 ## bashls
 
 https://github.com/mads-hartmann/bash-language-server
@@ -160,9 +172,14 @@ https://github.com/mads-hartmann/bash-language-server
 Language server for bash, written using tree sitter in typescript.
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.bashls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -174,6 +191,7 @@ require'lspconfig'.bashls.setup{}
     root_dir = vim's starting directory
 ```
 
+
 ## beancount
 
 https://github.com/polarmutex/beancount-language-server#installation
@@ -181,9 +199,14 @@ https://github.com/polarmutex/beancount-language-server#installation
 See https://github.com/polarmutex/beancount-language-server#configuration for configuration options
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.beancount.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -195,6 +218,7 @@ require'lspconfig'.beancount.setup{}
     }
     root_dir = root_pattern("elm.json")
 ```
+
 
 ## ccls
 
@@ -224,9 +248,14 @@ lspconfig.ccls.setup {
 
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.ccls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -234,6 +263,7 @@ require'lspconfig'.ccls.setup{}
     filetypes = { "c", "cpp", "objc", "objcpp" }
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
 ```
+
 
 ## clangd
 
@@ -246,9 +276,14 @@ as compile_commands.json or, for simpler projects, a compile_flags.txt.
 For details on how to automatically generate one using CMake look [here](https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html).
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.clangd.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   - ClangdSwitchSourceHeader: Switch between source/header
   
@@ -260,6 +295,7 @@ require'lspconfig'.clangd.setup{}
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
 ```
 
+
 ## clojure_lsp
 
 https://github.com/snoe/clojure-lsp
@@ -267,9 +303,14 @@ https://github.com/snoe/clojure-lsp
 Clojure Language Server
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.clojure_lsp.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -278,6 +319,7 @@ require'lspconfig'.clojure_lsp.setup{}
     root_dir = root_pattern("project.clj", "deps.edn", ".git")
 ```
 
+
 ## cmake
 
 https://github.com/regen100/cmake-language-server
@@ -285,9 +327,14 @@ https://github.com/regen100/cmake-language-server
 CMake LSP Implementation
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.cmake.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -299,6 +346,7 @@ require'lspconfig'.cmake.setup{}
     root_dir = root_pattern(".git", "compile_commands.json", "build") or dirname
 ```
 
+
 ## codeqlls
 
 Reference:
@@ -308,9 +356,14 @@ Binaries:
 https://github.com/github/codeql-cli-binaries
         
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.codeqlls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -331,6 +384,7 @@ require'lspconfig'.codeqlls.setup{}
     }
 ```
 
+
 ## crystalline
 
 https://github.com/elbywan/crystalline
@@ -338,9 +392,14 @@ https://github.com/elbywan/crystalline
 Crystal language server.
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.crystalline.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -348,6 +407,7 @@ require'lspconfig'.crystalline.setup{}
     filetypes = { "crystal" }
     root_dir = root_pattern('shard.yml', '.git') or dirname
 ```
+
 
 ## cssls
 
@@ -373,9 +433,14 @@ require'lspconfig'.cssls.setup {
 ```
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.cssls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -394,6 +459,7 @@ require'lspconfig'.cssls.setup{}
       }
     }
 ```
+
 
 ## dartls
 
@@ -1029,9 +1095,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.dartls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1047,6 +1118,7 @@ require'lspconfig'.dartls.setup{}
     root_dir = root_pattern("pubspec.yaml")
 ```
 
+
 ## denols
 
 https://github.com/denoland/deno
@@ -1054,9 +1126,14 @@ https://github.com/denoland/deno
 Deno's built-in language server
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.denols.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   - DenolsCache: Cache a module and all of its dependencies.
   - DenolsDefinition: Jump to definition. This handle deno:/ schema in deno:// buffer.
@@ -1077,12 +1154,18 @@ require'lspconfig'.denols.setup{}
     root_dir = root_pattern("package.json", "tsconfig.json", ".git")
 ```
 
+
 ## dhall_lsp_server
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.dhall_lsp_server.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1099,6 +1182,7 @@ require'lspconfig'.dhall_lsp_server.setup{}
       end
 ```
 
+
 ## diagnosticls
 
 https://github.com/iamcco/diagnostic-languageserver
@@ -1106,9 +1190,14 @@ https://github.com/iamcco/diagnostic-languageserver
 Diagnostic language server integrate with linters.
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.diagnosticls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1116,6 +1205,7 @@ require'lspconfig'.diagnosticls.setup{}
     filetypes = Empty by default, override to add filetypes
     root_dir = Vim's starting directory
 ```
+
 
 ## dockerls
 
@@ -1127,9 +1217,14 @@ npm install -g dockerfile-language-server-nodejs
 ```
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.dockerls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1137,6 +1232,7 @@ require'lspconfig'.dockerls.setup{}
     filetypes = { "Dockerfile", "dockerfile" }
     root_dir = root_pattern("Dockerfile")
 ```
+
 
 ## dotls
 
@@ -1148,9 +1244,14 @@ npm install -g dot-language-server
 ```
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.dotls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1162,6 +1263,7 @@ require'lspconfig'.dotls.setup{}
         end;
 ```
 
+
 ## efm
 
 https://github.com/mattn/efm-langserver
@@ -1169,15 +1271,21 @@ https://github.com/mattn/efm-langserver
 General purpose Language Server that can use specified error message format generated from specified command.
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.efm.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
     cmd = { "efm-langserver" }
     root_dir = util.root_pattern(".git")(fname) or util.path.dirname(fname)
 ```
+
 
 ## elixirls
 
@@ -1251,15 +1359,21 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.elixirls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
     filetypes = { "elixir", "eelixir" }
     root_dir = root_pattern("mix.exs", ".git") or vim.loop.os_homedir()
 ```
+
 
 ## elmls
 
@@ -1327,9 +1441,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.elmls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1343,6 +1462,7 @@ require'lspconfig'.elmls.setup{}
     }
     root_dir = root_pattern("elm.json")
 ```
+
 
 ## erlangls
 
@@ -1360,9 +1480,14 @@ Installation requirements:
     - [rebar3 3.9.1+](https://github.com/erlang/rebar3)
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.erlangls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1370,6 +1495,7 @@ require'lspconfig'.erlangls.setup{}
     filetypes = { "erlang" }
     root_dir = root_pattern('rebar.config', 'erlang.mk', '.git') or util.path.dirname(fname)
 ```
+
 
 ## flow
 
@@ -1482,9 +1608,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.flow.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1492,6 +1623,7 @@ require'lspconfig'.flow.setup{}
     filetypes = { "javascript", "javascriptreact", "javascript.jsx" }
     root_dir = root_pattern(".flowconfig")
 ```
+
 
 ## fortls
 
@@ -1574,9 +1706,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.fortls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1587,6 +1724,7 @@ require'lspconfig'.fortls.setup{}
       nthreads = 1
     }
 ```
+
 
 ## fsautocomplete
 
@@ -1608,9 +1746,14 @@ This is automatically done by plugins such as [PhilT/vim-fsharp](https://github.
 
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.fsautocomplete.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1624,6 +1767,7 @@ require'lspconfig'.fsautocomplete.setup{}
       end
 ```
 
+
 ## gdscript
 
 https://github.com/godotengine/godot
@@ -1631,9 +1775,14 @@ https://github.com/godotengine/godot
 Language server for GDScript, used by Godot Engine.
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.gdscript.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1641,6 +1790,7 @@ require'lspconfig'.gdscript.setup{}
     filetypes = { "gd", "gdscript", "gdscript3" }
     root_dir = util.root_pattern("project.godot", ".git")
 ```
+
 
 ## ghcide
 
@@ -1650,9 +1800,14 @@ A library for building Haskell IDE tooling.
 "ghcide" isn't for end users now. Use "haskell-language-server" instead of "ghcide".
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.ghcide.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1661,6 +1816,7 @@ require'lspconfig'.ghcide.setup{}
     root_dir = root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml")
 ```
 
+
 ## gopls
 
 https://github.com/golang/tools/tree/master/gopls
@@ -1668,9 +1824,14 @@ https://github.com/golang/tools/tree/master/gopls
 Google's lsp server for golang.
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.gopls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1678,6 +1839,7 @@ require'lspconfig'.gopls.setup{}
     filetypes = { "go", "gomod" }
     root_dir = root_pattern("go.mod", ".git")
 ```
+
 
 ## graphql
 
@@ -1690,9 +1852,14 @@ npm install -g graphql-language-service-cli
 ```
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.graphql.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1700,6 +1867,7 @@ require'lspconfig'.graphql.setup{}
     filetypes = { "graphql" }
     root_dir = root_pattern('.git', '.graphqlrc')
 ```
+
 
 ## groovyls
 
@@ -1722,9 +1890,14 @@ require'lspconfig'.groovyls.setup{
 ```
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.groovyls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1732,6 +1905,7 @@ require'lspconfig'.groovyls.setup{}
     filetypes = { "groovy" }
     root_dir = root_pattern(".git") or vim.loop.os_homedir()
 ```
+
 
 ## haxe_language_server
 
@@ -1760,9 +1934,14 @@ your project's root directory. If your file is named something different,
 specify it using the `init_options.displayArguments` setting.
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.haxe_language_server.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -1778,6 +1957,7 @@ require'lspconfig'.haxe_language_server.setup{}
       }
     }
 ```
+
 
 ## hie
 
@@ -1989,9 +2169,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.hie.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -2000,6 +2185,7 @@ require'lspconfig'.hie.setup{}
     root_dir = root_pattern("stack.yaml", "package.yaml", ".git")
 ```
 
+
 ## hls
 
 https://github.com/haskell/haskell-language-server
@@ -2007,9 +2193,14 @@ https://github.com/haskell/haskell-language-server
 Haskell Language Server
         
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.hls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -2029,6 +2220,7 @@ require'lspconfig'.hls.setup{}
       }
     }
 ```
+
 
 ## html
 
@@ -2053,9 +2245,14 @@ require'lspconfig'.html.setup {
 ```
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.html.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -2074,6 +2271,7 @@ require'lspconfig'.html.setup{}
     settings = {}
 ```
 
+
 ## intelephense
 
 https://intelephense.com/
@@ -2084,9 +2282,14 @@ npm install -g intelephense
 ```
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.intelephense.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -2094,6 +2297,7 @@ require'lspconfig'.intelephense.setup{}
     filetypes = { "php" }
     root_dir = root_pattern("composer.json", ".git")
 ```
+
 
 ## java_language_server
 
@@ -2104,9 +2308,14 @@ Java language server
 Point `cmd` to `lang_server_linux.sh` or the equivalent script for macOS/Windows provided by java-language-server
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.java_language_server.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -2117,6 +2326,7 @@ require'lspconfig'.java_language_server.setup{}
       end
     settings = {}
 ```
+
 
 ## jdtls
 
@@ -2567,9 +2777,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.jdtls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -2592,6 +2807,7 @@ require'lspconfig'.jdtls.setup{}
     root_dir = root_pattern(".git")
 ```
 
+
 ## jedi_language_server
 
 https://github.com/pappasam/jedi-language-server
@@ -2599,9 +2815,14 @@ https://github.com/pappasam/jedi-language-server
 `jedi-language-server`, a language server for Python, built on top of jedi
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.jedi_language_server.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -2609,6 +2830,7 @@ require'lspconfig'.jedi_language_server.setup{}
     filetypes = { "python" }
     root_dir = vim's starting directory
 ```
+
 
 ## jsonls
 
@@ -2676,9 +2898,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.jsonls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -2689,6 +2916,7 @@ require'lspconfig'.jsonls.setup{}
     }
     root_dir = root_pattern(".git", vim.fn.getcwd())
 ```
+
 
 ## julials
 
@@ -2815,6 +3043,10 @@ This server accepts configuration via the `settings` key.
   Default: `"REPL"`
   
   Specifies how to show inline execution results
+
+- **`julia.focusPlotNavigator`**: `boolean`
+
+  Whether to automatically show the plot navigator when plotting\.
 
 - **`julia.format.calls`**: `boolean`
 
@@ -3004,12 +3236,6 @@ This server accepts configuration via the `settings` key.
 
   Use an existing custom sysimage when starting the REPL
 
-- **`julia.usePlotNavigator`**: `boolean`
-
-  Default: `true`
-  
-  Whether to automatically show the plot navigator when plotting\.
-
 - **`julia.usePlotPane`**: `boolean`
 
   Default: `true`
@@ -3030,9 +3256,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.julials.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3048,6 +3279,7 @@ require'lspconfig'.julials.setup{}
           return util.find_git_ancestor(fname) or vim.fn.getcwd()
         end;
 ```
+
 
 ## kotlin_language_server
 
@@ -3168,9 +3400,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.kotlin_language_server.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3178,6 +3415,7 @@ require'lspconfig'.kotlin_language_server.setup{}
     filetypes = { "kotlin" }
     root_dir = root_pattern("settings.gradle")
 ```
+
 
 ## lean3ls
 
@@ -3192,9 +3430,14 @@ npm install -g lean-language-server
 ```
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.lean3ls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3209,6 +3452,7 @@ require'lspconfig'.lean3ls.setup{}
     root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
 ```
 
+
 ## leanls
 
 https://github.com/leanprover/lean4
@@ -3220,9 +3464,14 @@ The Lean 4 language server is built-in with a Lean 4 install
 (and can be manually run with, e.g., `lean --server`).
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.leanls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3236,6 +3485,7 @@ require'lspconfig'.leanls.setup{}
         end;
     root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
 ```
+
 
 ## metals
 
@@ -3262,9 +3512,14 @@ cs bootstrap \
 ```
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.metals.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3280,6 +3535,7 @@ require'lspconfig'.metals.setup{}
     message_level = 4
     root_dir = util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml")
 ```
+
 
 ## nimls
 
@@ -3371,9 +3627,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.nimls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3381,6 +3642,7 @@ require'lspconfig'.nimls.setup{}
     filetypes = { "nim" }
     root_dir = root_pattern(".git") or os_homedir
 ```
+
 
 ## ocamlls
 
@@ -3392,9 +3654,14 @@ npm install -g ocaml-langauge-server
 ```
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.ocamlls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3402,6 +3669,7 @@ require'lspconfig'.ocamlls.setup{}
     filetypes = { "ocaml", "reason" }
     root_dir = root_pattern("*.opam", "esy.json", "package.json")
 ```
+
 
 ## ocamllsp
 
@@ -3416,9 +3684,14 @@ opam install ocaml-lsp-server
 ```
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.ocamllsp.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3427,6 +3700,7 @@ require'lspconfig'.ocamllsp.setup{}
     get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
+
 
 ## omnisharp
 
@@ -3458,9 +3732,14 @@ find /path/to/omnisharp-osx | xargs xattr -r -d com.apple.quarantine
 ```
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.omnisharp.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3468,6 +3747,7 @@ require'lspconfig'.omnisharp.setup{}
     init_options = {}
     root_dir = root_pattern(".csproj", ".sln")
 ```
+
 
 ## perlls
 
@@ -3580,9 +3860,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.perlls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3599,6 +3884,7 @@ require'lspconfig'.perlls.setup{}
     }
 ```
 
+
 ## phpactor
 
 https://github.com/phpactor/phpactor
@@ -3606,9 +3892,14 @@ https://github.com/phpactor/phpactor
 Installation: https://phpactor.readthedocs.io/en/master/usage/standalone.html#global-installation
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.phpactor.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3616,6 +3907,7 @@ require'lspconfig'.phpactor.setup{}
     filetypes = { "php" }
     root_dir = root_pattern("composer.json", ".git")
 ```
+
 
 ## powershell_es
 
@@ -3647,9 +3939,14 @@ require'lspconfig'.powershell_es.setup{
 ```
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.powershell_es.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3661,6 +3958,7 @@ require'lspconfig'.powershell_es.setup{}
     root_dir = git root or current directory
 ```
 
+
 ## prismals
 
 npm install -g @prisma/language-server
@@ -3668,9 +3966,14 @@ npm install -g @prisma/language-server
 'prismals, a language server for the prisma javascript and typescript orm'
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.prismals.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3683,6 +3986,7 @@ require'lspconfig'.prismals.setup{}
       }
     }
 ```
+
 
 ## purescriptls
 
@@ -3825,9 +4129,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.purescriptls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -3835,6 +4144,7 @@ require'lspconfig'.purescriptls.setup{}
     filetypes = { "purescript" }
     root_dir = root_pattern("spago.dhall, bower.json")
 ```
+
 
 ## pyls
 
@@ -4132,9 +4442,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.pyls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -4142,6 +4457,7 @@ require'lspconfig'.pyls.setup{}
     filetypes = { "python" }
     root_dir = vim's starting directory
 ```
+
 
 ## pyls_ms
 
@@ -4174,9 +4490,14 @@ This server accepts configuration via the `settings` key.
 
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.pyls_ms.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -4204,6 +4525,7 @@ require'lspconfig'.pyls_ms.setup{}
     }
 ```
 
+
 ## pylsp
 
 https://github.com/python-lsp/python-lsp-server
@@ -4216,9 +4538,14 @@ Further instructions can be found in the [project's README](https://github.com/p
 Note: This is a community fork of `pyls`.
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.pylsp.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -4237,6 +4564,7 @@ require'lspconfig'.pylsp.setup{}
                   util.path.dirname(fname)
         end;
 ```
+
 
 ## pyright
 
@@ -4331,9 +4659,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.pyright.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   - PyrightOrganizeImports: Organize Imports
   
@@ -4354,6 +4687,7 @@ require'lspconfig'.pyright.setup{}
       }
     }
 ```
+
 
 ## r_language_server
 
@@ -4422,9 +4756,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.r_language_server.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -4433,6 +4772,7 @@ require'lspconfig'.r_language_server.setup{}
     log_level = 2
     root_dir = root_pattern(".git") or os_homedir
 ```
+
 
 ## racket_langserver
 
@@ -4445,9 +4785,14 @@ functionality that mimics DrRacket's code tools as closely as possible.
 Install via `raco`: `raco pkg install racket-langserver`
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.racket_langserver.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -4458,6 +4803,7 @@ require'lspconfig'.racket_langserver.setup{}
             util.path.dirname(filename)
           end
 ```
+
 
 ## rescriptls
 
@@ -4491,9 +4837,14 @@ Another option is to use vscode extension [release](https://github.com/rescript-
 Take a look at [here](https://github.com/rescript-lang/rescript-vscode#use-with-other-editors) for instructions.
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.rescriptls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -4504,6 +4855,7 @@ require'lspconfig'.rescriptls.setup{}
       end
     settings = {}
 ```
+
 
 ## rls
 
@@ -4535,9 +4887,14 @@ cmd = {"rustup", "run", "nightly", "rls"}
 ```
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.rls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -4545,6 +4902,7 @@ require'lspconfig'.rls.setup{}
     filetypes = { "rust" }
     root_dir = root_pattern("Cargo.toml")
 ```
+
 
 ## rnix
 
@@ -4558,9 +4916,14 @@ This server accepts configuration via the `settings` key.
 
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.rnix.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -4570,6 +4933,7 @@ require'lspconfig'.rnix.setup{}
     root_dir = vim's starting directory
     settings = {}
 ```
+
 
 ## rome
 
@@ -4582,9 +4946,14 @@ npm install [-g] rome
 ```
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.rome.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -4592,6 +4961,7 @@ require'lspconfig'.rome.setup{}
     filetypes = { "javascript", "javascriptreact", "json", "typescript", "typescript.tsx", "typescriptreact" }
     root_dir = root_pattern('package.json', 'node_modules', '.git') or dirname
 ```
+
 
 ## rust_analyzer
 
@@ -4612,6 +4982,12 @@ This server accepts configuration via the `settings` key.
 
   null
 
+- **`rust-analyzer.assist.allowMergingIntoGlobImports`**: `boolean`
+
+  Default: `true`
+  
+  null
+
 - **`rust-analyzer.assist.importEnforceGranularity`**: `boolean`
 
   null
@@ -4628,7 +5004,7 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`rust-analyzer.assist.importPrefix`**: `enum { "plain", "by_self", "by_crate" }`
+- **`rust-analyzer.assist.importPrefix`**: `enum { "plain", "self", "crate" }`
 
   Default: `"plain"`
   
@@ -5100,9 +5476,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.rust_analyzer.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   - CargoReload: Reload current cargo workspace
   
@@ -5115,6 +5496,7 @@ require'lspconfig'.rust_analyzer.setup{}
     }
 ```
 
+
 ## scry
 
 https://github.com/crystal-lang-tools/scry
@@ -5122,9 +5504,14 @@ https://github.com/crystal-lang-tools/scry
 Crystal language server.
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.scry.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -5132,6 +5519,7 @@ require'lspconfig'.scry.setup{}
     filetypes = { "crystal" }
     root_dir = root_pattern('shard.yml', '.git') or dirname
 ```
+
 
 ## solargraph
 
@@ -5244,9 +5632,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.solargraph.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -5259,6 +5652,7 @@ require'lspconfig'.solargraph.setup{}
       }
     }
 ```
+
 
 ## sorbet
 
@@ -5274,9 +5668,14 @@ gem install sorbet
 ```
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.sorbet.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -5284,6 +5683,7 @@ require'lspconfig'.sorbet.setup{}
     filetypes = { "ruby" }
     root_dir = root_pattern("Gemfile", ".git")
 ```
+
 
 ## sourcekit
 
@@ -5322,9 +5722,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.sourcekit.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -5332,6 +5737,7 @@ require'lspconfig'.sourcekit.setup{}
     filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" }
     root_dir = root_pattern("Package.swift", ".git")
 ```
+
 
 ## sqlls
 
@@ -5350,9 +5756,14 @@ This LSP can be installed via  `npm`. Find further instructions on manual instal
 <br>
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.sqlls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -5362,6 +5773,7 @@ require'lspconfig'.sqlls.setup{}
         end;
     settings = {}
 ```
+
 
 ## sqls
 
@@ -5377,9 +5789,14 @@ Sqls can be installed via `go get github.com/lighttiger2505/sqls`. Instructions 
 
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.sqls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -5390,6 +5807,7 @@ require'lspconfig'.sqls.setup{}
         end;
     settings = {}
 ```
+
 
 ## stylelint_lsp
 
@@ -5478,9 +5896,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.stylelint_lsp.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -5489,6 +5912,7 @@ require'lspconfig'.stylelint_lsp.setup{}
     root_dir =  root_pattern('.stylelintrc', 'package.json') 
     settings = {}
 ```
+
 
 ## sumneko_lua
 
@@ -5682,15 +6106,9 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`Lua.hover.fieldInfer`**: `integer`
-
-  Default: `3000`
-  
-  null
-
 - **`Lua.hover.previewFields`**: `integer`
 
-  Default: `100`
+  Default: `20`
   
   null
 
@@ -5750,7 +6168,7 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.runtime.plugin`**: `string`
 
-  Default: `".vscode/lua/plugin.lua"`
+  Default: `""`
   
   null
 
@@ -5832,9 +6250,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.sumneko_lua.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -5850,6 +6273,7 @@ require'lspconfig'.sumneko_lua.setup{}
     }
 ```
 
+
 ## svelte
 
 https://github.com/sveltejs/language-tools/tree/master/packages/language-server
@@ -5860,9 +6284,14 @@ npm install -g svelte-language-server
 ```
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.svelte.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -5871,15 +6300,21 @@ require'lspconfig'.svelte.setup{}
     root_dir = root_pattern("package.json", ".git")
 ```
 
+
 ## svls
 
       https://github.com/dalance/svls
       Language server for verilog and SystemVerilog
     
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.svls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -5889,6 +6324,7 @@ require'lspconfig'.svls.setup{}
         return M.search_ancestors(startpath, matcher)
       end
 ```
+
 
 ## tailwindcss
 
@@ -5913,9 +6349,14 @@ Alternatively, it might be packaged for your operating system, eg.:
 https://aur.archlinux.org/packages/tailwindcss-language-server/
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.tailwindcss.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -5951,6 +6392,7 @@ require'lspconfig'.tailwindcss.setup{}
       }
     }
 ```
+
 
 ## terraformls
 
@@ -5990,9 +6432,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.terraformls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -6000,6 +6447,7 @@ require'lspconfig'.terraformls.setup{}
     filetypes = { "terraform", "hcl" }
     root_dir = root_pattern(".terraform", ".git")
 ```
+
 
 ## texlab
 
@@ -6010,9 +6458,14 @@ A completion engine built from scratch for (La)TeX.
 See https://github.com/latex-lsp/texlab/blob/master/docs/options.md for configuration options.
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.texlab.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   - TexlabBuild: Build the current buffer
   - TexlabForward: Forward search from current position
@@ -6043,6 +6496,7 @@ require'lspconfig'.texlab.setup{}
     }
 ```
 
+
 ## tflint
 
 https://github.com/terraform-linters/tflint
@@ -6051,9 +6505,14 @@ A pluggable Terraform linter that can act as lsp server.
 Installation instructions can be found in https://github.com/terraform-linters/tflint#installation.
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.tflint.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -6061,6 +6520,7 @@ require'lspconfig'.tflint.setup{}
     filetypes = { "terraform" }
     root_dir = root_pattern(".terraform", ".git", ".tflint.hcl")
 ```
+
 
 ## tsserver
 
@@ -6072,9 +6532,14 @@ npm install -g typescript typescript-language-server
 ```
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.tsserver.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -6083,13 +6548,19 @@ require'lspconfig'.tsserver.setup{}
     root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
 ```
 
+
 ## vala_ls
 
 https://github.com/benwaffle/vala-language-server
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.vala_ls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -6097,6 +6568,7 @@ require'lspconfig'.vala_ls.setup{}
     filetypes = { "vala", "genie" }
     root_dir = root_pattern("meson.build", ".git")
 ```
+
 
 ## vimls
 
@@ -6108,9 +6580,14 @@ npm install -g vim-language-server
 ```
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.vimls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -6139,6 +6616,7 @@ require'lspconfig'.vimls.setup{}
         end,
 ```
 
+
 ## vls
 
 https://github.com/vlang/vls
@@ -6160,15 +6638,21 @@ require'lspconfig'.vls.setup {
 ```
 
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.vls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
     filetypes = { "vlang" }
     root_dir = root_pattern("v.mod", ".git")
 ```
+
 
 ## vuels
 
@@ -6413,9 +6897,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.vuels.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -6461,6 +6950,7 @@ require'lspconfig'.vuels.setup{}
     }
     root_dir = root_pattern("package.json", "vue.config.js")
 ```
+
 
 ## yamlls
 
@@ -6568,9 +7058,14 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.yamlls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -6578,6 +7073,7 @@ require'lspconfig'.yamlls.setup{}
     filetypes = { "yaml" }
     root_dir = root_pattern(".git", vim.fn.getcwd())
 ```
+
 
 ## zeta_note
 
@@ -6615,15 +7111,21 @@ This server accepts configuration via the `settings` key.
 
 </details>
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.zeta_note.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
     filetypes = { "markdown" }
     root_dir = root_pattern(".zeta.toml")
 ```
+
 
 ## zls
 
@@ -6632,9 +7134,14 @@ require'lspconfig'.zeta_note.setup{}
            `Zig LSP implementation + Zig Language Server`.
         
 
+
+**Snippet to enable the language server:**
 ```lua
 require'lspconfig'.zls.setup{}
+```
 
+**Commands and default values:**
+```lua
   Commands:
   
   Default Values:
@@ -6642,4 +7149,5 @@ require'lspconfig'.zls.setup{}
     filetypes = { "zig", "zir" }
     root_dir = util.root_pattern("zls.json", ".git") or current_file_dirname
 ```
+
 
