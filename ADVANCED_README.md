@@ -109,13 +109,13 @@ lspconfig.util.default_config = vim.tbl_extend(
 
 ## setup() function
 
-Only the following arguments can be passed to the setup function:
+setup() extends the arguments listed in `:help vim.lsp.start_client()`. **In addition to all of the arguments defined for start_client**, the following key/value pairs can be passed to the setup function:
 
 ```
 lspconfig.SERVER.setup{config}
 
   The `config` parameter has the same shape as that of
-  |vim.lsp.start_client()|, with these additions and changes:
+  |vim.lsp.start_client()|, with these additions:
 
   {root_dir}
     Required for some servers, optional for others.
@@ -154,19 +154,6 @@ lspconfig.SERVER.setup{config}
   {autostart}
     Whether to automatically start a language server when a matching filetype is detected.
     Defaults to true.
-
-  {settings}
-    Map with case-sensitive keys corresponding to `workspace/configuration`
-    event responses.
-    We also notify the server *once* on `initialize` with
-    `workspace/didChangeConfiguration`.
-    If you change the settings later on, you must emit the notification
-    with `client.workspace_did_change_configuration({settings})`
-    Example: `settings = { keyName = { subKey = 1 } }`
-
-  {on_attach}
-    `function(client, bufnr)` Runs the on_attach function from the client's 
-    config if it was defined. Useful for doing buffer-local setup.
 
   {on_new_config}
     `function(new_config, new_root_dir)` will be executed after a new configuration has been
