@@ -12,7 +12,7 @@ local function switch_source_header(bufnr)
   end)
 end
 
-local root_pattern = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")
+local root_pattern = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".clangd")
 
 local default_capabilities = vim.tbl_deep_extend(
   'force',
