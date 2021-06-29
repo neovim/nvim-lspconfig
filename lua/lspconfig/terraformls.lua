@@ -4,7 +4,7 @@ local util = require 'lspconfig/util'
 configs.terraformls = {
   default_config = {
     cmd = {"terraform-ls", "serve"};
-    filetypes = {"terraform", "hcl"};
+    filetypes = {"terraform"};
     root_dir = util.root_pattern(".terraform", ".git");
   };
   docs = {
