@@ -579,11 +579,11 @@ This server accepts configuration via the `settings` key.
   
   Whether to check you are using the latest version of the Dart SDK at startup\.
 
-- **`dart.cliConsole`**: `enum { "debugConsole", "terminal" }`
+- **`dart.cliConsole`**: `enum { "debugConsole", "terminal", "externalTerminal" }`
 
   Default: `"debugConsole"`
   
-  Whether to run Dart CLI apps in the Debug Console or the VS Code integrated terminal\. The Debug Console has more functionality because the process is controlled by the debug adapter\, but is unable to accept input from the user via stdin\.
+  Whether to run Dart CLI apps in the Debug Console or a terminal\. The Debug Console has more functionality because the process is controlled by the debug adapter\, but is unable to accept input from the user via stdin\.
 
 - **`dart.closingLabels`**: `boolean`
 
@@ -957,7 +957,7 @@ This server accepts configuration via the `settings` key.
   
   Array items: `{type = "string"}`
   
-  Additional args to pass to all pub commands\.
+  Additional args to pass to all \`pub\` commands\.
 
 - **`dart.pubTestLogFile`**: `null|string`
 
@@ -1604,6 +1604,8 @@ This server accepts configuration via the `settings` key.
 
 - **`flow.useNPMPackagedFlow`**: `boolean`
 
+  Default: `true`
+  
   Support using flow through your node\_modules folder\, WARNING\: Checking this box is a security risk\. When you open a project we will immediately run code contained within it\.
 
 </details>
@@ -2459,6 +2461,12 @@ This server accepts configuration via the `settings` key.
   
   Path to Maven\'s global settings\.xml
 
+- **`java.configuration.maven.notCoveredPluginExecutionSeverity`**: `enum { "ignore", "warning", "error" }`
+
+  Default: `"warning"`
+  
+  Specifies severity if the plugin execution is not covered by Maven build lifecycle\.
+
 - **`java.configuration.maven.userSettings`**: `string`
 
   Default: `vim.NIL`
@@ -2790,7 +2798,7 @@ require'lspconfig'.jdtls.setup{}
   Default Values:
     cmd = { "/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64/bin/java", "-Declipse.application=org.eclipse.jdt.ls.core.id1", "-Dosgi.bundles.defaultStartLevel=4", "-Declipse.product=org.eclipse.jdt.ls.core.product", "-Dlog.protocol=true", "-Dlog.level=ALL", "-Xms1g", "-Xmx2G", "-jar", "vim.NIL", "-configuration", "vim.NIL", "-data", "vim.NIL", "--add-modules=ALL-SYSTEM", "--add-opens java.base/java.util=ALL-UNNAMED", "--add-opens java.base/java.lang=ALL-UNNAMED" }
     cmd_env = {
-      GRADLE_HOME = "/usr/share/gradle-7.0.2",
+      GRADLE_HOME = "/usr/share/gradle-7.1",
       JAR = vim.NIL
     }
     filetypes = { "java" }
@@ -3441,7 +3449,7 @@ require'lspconfig'.lean3ls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "lean-language-server", "--stdio" }
+    cmd = { "lean-language-server", "--stdio", "--", "-M", "4096", "-T", "100000" }
     filetypes = { "lean3" }
     on_new_config = function(config, root)
           if not util.path.is_file(root .. "/leanpkg.toml") then return end
@@ -3696,7 +3704,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocamlinterface", "ocaml", "ocamllex", "reason", "menhir" }
+    filetypes = { "menhir", "reason", "ocamlinterface", "ocaml", "ocamllex" }
     get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
@@ -5054,6 +5062,14 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.cargo.unsetTest`**: `array`
+
+  Default: `{ "core" }`
+  
+  Array items: `{type = "string"}`
+  
+  null
+
 - **`rust-analyzer.cargo.useRustcWrapperForBuildScripts`**: `boolean`
 
   Default: `true`
@@ -5244,6 +5260,18 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.hover.documentation`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`rust-analyzer.hover.linksInHover`**: `boolean`
+
+  Default: `true`
+  
+  null
+
 - **`rust-analyzer.hoverActions.debug`**: `boolean`
 
   Default: `true`
@@ -5263,12 +5291,6 @@ This server accepts configuration via the `settings` key.
   null
 
 - **`rust-analyzer.hoverActions.implementations`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.hoverActions.linksInHover`**: `boolean`
 
   Default: `true`
   
@@ -5694,6 +5716,10 @@ Language server for Swift and C/C++/Objective-C.
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`sourcekit-lsp.inlayHints.enabled`**: `boolean`
+
+  \(experimental\) Render inlay type annotations in the editor\.
+
 - **`sourcekit-lsp.serverArguments`**: `array`
 
   Default: `{}`
@@ -6022,20 +6048,6 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`Lua.develop.debuggerPort`**: `integer`
-
-  Default: `11412`
-  
-  null
-
-- **`Lua.develop.debuggerWait`**: `boolean`
-
-  null
-
-- **`Lua.develop.enable`**: `boolean`
-
-  null
-
 - **`Lua.diagnostics.disable`**: `array`
 
   Array items: `{type = "string"}`
@@ -6130,15 +6142,9 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`Lua.intelliSense.searchDepth`**: `integer`
+- **`Lua.misc.parameters`**: `array`
 
-  Default: `0`
-  
-  null
-
-- **`Lua.misc.parameters`**: `string`
-
-  Default: `""`
+  Array items: `{type = "string"}`
   
   null
 
