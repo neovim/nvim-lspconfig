@@ -3704,7 +3704,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "menhir", "reason", "ocamlinterface", "ocaml", "ocamllex" }
+    filetypes = { "ocamllex", "ocaml", "menhir", "ocamlinterface", "reason" }
     get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
@@ -6450,7 +6450,7 @@ require'lspconfig'.terraformls.setup{}
   
   Default Values:
     cmd = { "terraform-ls", "serve" }
-    filetypes = { "terraform", "hcl" }
+    filetypes = { "terraform" }
     root_dir = root_pattern(".terraform", ".git")
 ```
 
