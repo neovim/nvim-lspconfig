@@ -3,7 +3,7 @@ local util = require 'lspconfig/util'
 
 configs.lean3ls = {
   default_config = {
-    cmd = {"lean-language-server", "--stdio"};
+    cmd = {"lean-language-server", "--stdio", "--", "-M", "4096", "-T", "100000" };
     filetypes = {"lean3"};
     root_dir = function(fname)
       return util.root_pattern("leanpkg.toml")(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
