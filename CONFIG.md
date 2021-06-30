@@ -3892,6 +3892,76 @@ require'lspconfig'.perlls.setup{}
     }
 ```
 
+## perlpls
+
+https://metacpan.org/pod/PLS
+
+PLS: Perl Language Server
+
+To use the language server, ensure that you have PLS installed and is in your path.
+
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`perl.inc`**: `string`
+
+  Default: `vim.NIL`
+  
+  a list of paths to include in @INC
+
+- **`perl.pls`**: `string`
+
+  Default: `vim.NIL`
+
+  path to pls
+
+- **`perl.cwd`**: `string`
+
+  Default: `vim.NIL`
+  
+  the working directory to use for pls
+
+- **`perl.perltidyrc`**: `string`
+
+  Default: `vim.NIL`
+  
+  the location of your ".perltidyrc" file
+
+- **`perl.perlcritic.enabled`**: `boolean`
+
+  Default: `false`
+  
+  whether to enable linting using perlcritic
+
+- **`perl.perlcritic.perlcriticrc`**: `string`
+
+  Default: `~/.perlcriticrc`
+  
+  the location of your ".perlcriticrc" file
+
+</details>
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.perlpls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "pls" }
+    filetypes = { "perl" }
+    root_dir = vim's starting directory
+    settings = {
+      perl = {
+        perlcritic = { enabled = false },
+      }
+    }
+```
+
 
 ## phpactor
 
