@@ -23,7 +23,7 @@ configs.julials = {
   default_config = {
     cmd = cmd;
     on_new_config = function(new_config, _)
-      local server_path = vim.fn.system("julia -e 'print(Base.find_package(\"LanguageServer\"))'")
+      local server_path = vim.fn.system("julia --startup-file=no -q -e 'print(Base.find_package(\"LanguageServer\"))'")
       local new_cmd = vim.deepcopy(cmd)
       table.insert(new_cmd, 2, "--project="..server_path:sub(0,-19))
       new_config.cmd = new_cmd
