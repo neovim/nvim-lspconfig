@@ -3704,7 +3704,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "reason", "menhir", "ocamlinterface", "ocaml", "ocamllex" }
+    filetypes = { "ocaml", "ocamllex", "menhir", "reason", "ocamlinterface" }
     get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
