@@ -3278,7 +3278,7 @@ require'lspconfig'.julials.setup{}
     cmd = { "julia", "--startup-file=no", "--history-file=no", "-e", '    using Pkg;\n    Pkg.instantiate()\n    using LanguageServer; using SymbolServer;\n    depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n    project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n    # Make sure that we only load packages from this environment specifically.\n    @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n    server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n    server.runlinter = true;\n    run(server);\n  ' }
     filetypes = { "julia" }
     on_new_config = function(new_config, _)
-          local server_path = vim.fn.system("julia -e 'print(Base.find_package(\"LanguageServer\"))'")
+          local server_path = vim.fn.system("julia --startup-file=no -q -e 'print(Base.find_package(\"LanguageServer\"))'")
           local new_cmd = vim.deepcopy(cmd)
           table.insert(new_cmd, 2, "--project="..server_path:sub(0,-19))
           new_config.cmd = new_cmd
@@ -3704,7 +3704,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocamlinterface", "ocaml", "ocamllex", "reason", "menhir" }
+    filetypes = { "menhir", "reason", "ocamlinterface", "ocaml", "ocamllex" }
     get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
