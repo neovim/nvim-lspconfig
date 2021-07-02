@@ -157,7 +157,16 @@ M.path = (function()
 
   -- Iterate the path until we find the rootdir.
   local function iterate_parents(path)
+    _path = path
     path = uv.fs_realpath(path)
+    --[[ In Windows, handle mapped network drives:
+    -- https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/new-psdrive?view=powershell-7.1 e.g.
+    -- New-PSDrive -persist -scope global -Root \\$env:COMPUTER_NAME\Users -Name T -PSProvider FileSystem 
+    --This function will never terminate if we use the fs_realpath('T:'),
+        so just use the given path.
+    --]]
+    if path and path:match([[^\\[^\]+\%a%$\]]) then path = _path end
+
     local function it(s, v)
       if not v then return end
       if is_fs_root(v) then return end
@@ -262,9 +271,10 @@ function M.root_pattern(...)
     end
   end
   return function(startpath)
-    return M.search_ancestors(startpath, matcher)
+    return M.search_ancestors(startpath, matcher) or startpath
   end
 end
+
 function M.find_git_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     if M.path.is_dir(M.path.join(path, ".git")) then
@@ -272,6 +282,7 @@ function M.find_git_ancestor(startpath)
     end
   end)
 end
+
 function M.find_node_modules_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     if M.path.is_dir(M.path.join(path, "node_modules")) then
@@ -279,6 +290,7 @@ function M.find_node_modules_ancestor(startpath)
     end
   end)
 end
+
 function M.find_package_json_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     if M.path.is_file(M.path.join(path, "package.json")) then
