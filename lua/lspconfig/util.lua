@@ -121,7 +121,9 @@ M.path = (function()
     local strip_dir_pat = path_sep.."([^"..path_sep.."]+)$"
     local strip_sep_pat = path_sep.."$"
     dirname = function(path)
-      if not path then return end
+      if not path or #path == 0 then
+        return
+      end
       local result = path:gsub(strip_sep_pat, ""):gsub(strip_dir_pat, "")
       if #result == 0 then
         return "/"
