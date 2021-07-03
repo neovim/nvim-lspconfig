@@ -61,7 +61,8 @@ configs.texlab = {
         build = {
           executable = "latexmk";
           args = {"-pdf", "-interaction=nonstopmode", "-synctex=1", "%f"};
-          isContinuous = false;
+          onSave = false;
+          forwardSearchAfter = false;
         };
         auxDirectory = '.';
         forwardSearch = {
@@ -73,6 +74,11 @@ configs.texlab = {
           onEdit = false;
         };
         diagnosticsDelay = 300;
+        latexFormatter = 'latexindent';
+        latexindent = {
+          ["local"] = nil; -- local is a reserved keyword
+          modifyLineBreaks = false;
+        };
         bibtexFormatter = 'texlab';
         formatterLineLength = 80;
       };
