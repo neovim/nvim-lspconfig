@@ -12,7 +12,7 @@ Neovim supports the Language Server Protocol (LSP), which means it acts as a cli
 - hover
 - completion
 - rename
-- format 
+- format
 - refactor
 
 Neovim provides an interface for all of these features, and the language server client is designed to be highly extensible to allow plugins to integrate language server features which are not yet present in Neovim core such as [**auto**-completion](https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion) (as opposed to manual completion with omnifunc) and [snippet integration](https://github.com/neovim/nvim-lspconfig/wiki/Snippets).
@@ -21,7 +21,7 @@ These features are not implemented in this repo, but in Neovim core. See `:help 
 
 ## Install
 
-* Requires [Neovim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly) (v0.5 prerelease). Update Neovim and nvim-lspconfig before reporting an issue.
+* Requires [Neovim v0.5.0](https://github.com/neovim/neovim/releases/tag/v0.5.0) or [Nightly](https://github.com/neovim/neovim/releases/tag/v0.5.0). Update Neovim and nvim-lspconfig before reporting an issue.
 
 * Install nvim-lspconfig like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
 ```vim
@@ -69,13 +69,13 @@ For a full list of servers, see [CONFIG.md](CONFIG.md). This document contains i
 
 ## Keybindings and completion
 
-nvim-lspconfig does not map keybindings or enable completion by default. Manual, triggered completion can be provided by neovim's built-in omnifunc. For autocompletion, a general purpose [autocompletion plugin](https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion) is required. The following example configuration provides suggested keymaps for the most commonly used language server functions, and manually triggered completion with omnifunc (\<c-x\>\<c-o\>). 
+nvim-lspconfig does not map keybindings or enable completion by default. Manual, triggered completion can be provided by neovim's built-in omnifunc. For autocompletion, a general purpose [autocompletion plugin](https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion) is required. The following example configuration provides suggested keymaps for the most commonly used language server functions, and manually triggered completion with omnifunc (\<c-x\>\<c-o\>).
 
 ```vim
 lua << EOF
 local nvim_lsp = require('lspconfig')
 
--- Use an on_attach function to only map the following keys 
+-- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -152,7 +152,7 @@ Most of the time, the reason for failure is present in the logs.
 The following support tab-completion for all arguments:
 
 * `:LspStart <config_name>` Start the requested server name. Will only succesfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command. Defaults to all servers matching current buffer filetype.
-* `:LspStop <client_id>` Defaults to stopping all buffer clients. 
+* `:LspStop <client_id>` Defaults to stopping all buffer clients.
 * `:LspRestart <client_id>` Defaults to restarting all buffer clients.
 
 ## The wiki
@@ -165,7 +165,7 @@ Please see the [wiki](https://github.com/neovim/nvim-lspconfig/wiki) for additio
 
 ## Windows
 
-In order for neovim to launch certain executables on Windows, it must append `.cmd` to the command name. To work around this, manually append `.cmd` to the entry `cmd` in a given plugin's setup{} call.  
+In order for neovim to launch certain executables on Windows, it must append `.cmd` to the command name. To work around this, manually append `.cmd` to the entry `cmd` in a given plugin's setup{} call.
 
 ## Contributions
 If you are missing a language server on the list in [CONFIG.md](CONFIG.md), contributing
