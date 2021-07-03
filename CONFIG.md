@@ -3710,7 +3710,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "menhir", "reason", "ocamlinterface", "ocaml", "ocamllex" }
+    filetypes = { "ocaml", "ocamllex", "menhir", "reason", "ocamlinterface" }
     get_language_id = function (_, ftype) return language_id_of[ftype] end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
@@ -6493,7 +6493,8 @@ require'lspconfig'.texlab.setup{}
         build = {
           args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
           executable = "latexmk",
-          isContinuous = false
+          forwardSearchAfter = false,
+          onSave = false
         },
         chktex = {
           onEdit = false,
@@ -6503,6 +6504,10 @@ require'lspconfig'.texlab.setup{}
         formatterLineLength = 80,
         forwardSearch = {
           args = {}
+        },
+        latexFormatter = "latexindent",
+        latexindent = {
+          modifyLineBreaks = false
         }
       }
     }
