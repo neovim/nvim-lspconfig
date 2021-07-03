@@ -368,17 +368,19 @@ require'lspconfig'.codeqlls.setup{}
   
   Default Values:
     before_init = function(initialize_params)
-                initialize_params['workspaceFolders'] = {{
-                    name = 'workspace',
-                    uri = initialize_params['rootUri']
-                }}
-            end;
+          initialize_params["workspaceFolders"] = {
+            {
+              name = "workspace",
+              uri = initialize_params["rootUri"],
+            },
+          }
+        end,
     cmd = { "codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q" }
     filetypes = { "ql" }
     log_level = 2
     root_dir = function(fname)
-                return root_pattern(fname) or util.path.dirname(fname)
-            end;
+          return root_pattern(fname) or util.path.dirname(fname)
+        end,
     settings = {
       search_path = "list containing all search paths, eg: '~/codeql-home/codeql-repo'"
     }
@@ -1264,9 +1266,8 @@ require'lspconfig'.dotls.setup{}
     cmd = { "dot-language-server", "--stdio" }
     filetypes = { "dot" }
     root_dir = function(filename)
-          return util.root_pattern(unpack(root_files))(filename) or
-                 util.path.dirname(filename)
-        end;
+          return util.root_pattern(unpack(root_files))(filename) or util.path.dirname(filename)
+        end,
 ```
 
 
@@ -2214,13 +2215,13 @@ require'lspconfig'.hls.setup{}
   Default Values:
     cmd = { "haskell-language-server-wrapper", "--lsp" }
     filetypes = { "haskell", "lhaskell" }
-    lspinfo = function (cfg)
+    lspinfo = function(cfg)
           -- return "specific"
           if cfg.settings.languageServerHaskell.logFile or false then
-            return "logfile: "..cfg.settings.languageServerHaskell.logFile
+            return "logfile: " .. cfg.settings.languageServerHaskell.logFile
           end
           return ""
-        end;
+        end,
     root_dir = root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")
     settings = {
       languageServerHaskell = {
@@ -2275,7 +2276,7 @@ require'lspconfig'.html.setup{}
     }
     root_dir = function(fname)
           return root_pattern(fname) or vim.loop.os_homedir()
-        end;
+        end,
     settings = {}
 ```
 
@@ -3284,14 +3285,14 @@ require'lspconfig'.julials.setup{}
     cmd = { "julia", "--startup-file=no", "--history-file=no", "-e", '    using Pkg;\n    Pkg.instantiate()\n    using LanguageServer; using SymbolServer;\n    depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n    project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n    # Make sure that we only load packages from this environment specifically.\n    @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n    server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n    server.runlinter = true;\n    run(server);\n  ' }
     filetypes = { "julia" }
     on_new_config = function(new_config, _)
-          local server_path = vim.fn.system("julia --startup-file=no -q -e 'print(Base.find_package(\"LanguageServer\"))'")
+          local server_path = vim.fn.system "julia --startup-file=no -q -e 'print(Base.find_package(\"LanguageServer\"))'"
           local new_cmd = vim.deepcopy(cmd)
-          table.insert(new_cmd, 2, "--project="..server_path:sub(0,-19))
+          table.insert(new_cmd, 2, "--project=" .. server_path:sub(0, -19))
           new_config.cmd = new_cmd
         end,
     root_dir = function(fname)
           return util.find_git_ancestor(fname) or vim.fn.getcwd()
-        end;
+        end,
 ```
 
 
@@ -3458,11 +3459,13 @@ require'lspconfig'.lean3ls.setup{}
     cmd = { "lean-language-server", "--stdio", "--", "-M", "4096", "-T", "100000" }
     filetypes = { "lean3" }
     on_new_config = function(config, root)
-          if not util.path.is_file(root .. "/leanpkg.toml") then return end
+          if not util.path.is_file(root .. "/leanpkg.toml") then
+            return
+          end
           if not config.cmd_cwd then
             config.cmd_cwd = root
           end
-        end;
+        end,
     root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
 ```
 
@@ -3492,11 +3495,13 @@ require'lspconfig'.leanls.setup{}
     cmd = { "lean", "--server" }
     filetypes = { "lean" }
     on_new_config = function(config, root)
-          if not util.path.is_file(root .. "/leanpkg.toml") then return end
+          if not util.path.is_file(root .. "/leanpkg.toml") then
+            return
+          end
           if not config.cmd_cwd then
             config.cmd_cwd = root
           end
-        end;
+        end,
     root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
 ```
 
@@ -3710,8 +3715,10 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocamllex", "menhir", "reason", "ocamlinterface", "ocaml" }
-    get_language_id = function (_, ftype) return language_id_of[ftype] end
+    filetypes = { "ocaml", "ocamllex", "menhir", "reason", "ocamlinterface" }
+    get_language_id = function(_, ftype)
+      return language_id_of[ftype]
+    end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
 ```
 
@@ -4571,12 +4578,10 @@ require'lspconfig'.pylsp.setup{}
             "setup.py",
             "setup.cfg",
             "requirements.txt",
-            "Pipfile"
+            "Pipfile",
           }
-          return util.root_pattern(unpack(root_files))(fname) or
-                  util.find_git_ancestor(fname) or
-                  util.path.dirname(fname)
-        end;
+          return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+        end,
 ```
 
 
@@ -4688,9 +4693,8 @@ require'lspconfig'.pyright.setup{}
     cmd = { "pyright-langserver", "--stdio" }
     filetypes = { "python" }
     root_dir = function(filename)
-          return util.root_pattern(unpack(root_files))(filename) or
-                 util.path.dirname(filename)
-        end;
+          return util.root_pattern(unpack(root_files))(filename) or util.path.dirname(filename)
+        end,
     settings = {
       python = {
         analysis = {
@@ -4813,9 +4817,8 @@ require'lspconfig'.racket_langserver.setup{}
     cmd = { "racket", "--lib", "racket-langserver" }
     filetypes = { "racket", "scheme" }
     root_dir = function(filename)
-          return util.root_pattern(unpack(root_files))(filename) or
-            util.path.dirname(filename)
-          end
+          return util.root_pattern(unpack(root_files))(filename) or util.path.dirname(filename)
+        end,
 ```
 
 
@@ -5802,7 +5805,7 @@ require'lspconfig'.sqlls.setup{}
     filetypes = { "sql", "mysql" }
     root_dir = function(fname)
           return root_pattern(fname) or vim.loop.os_homedir()
-        end;
+        end,
     settings = {}
 ```
 
@@ -5835,8 +5838,8 @@ require'lspconfig'.sqls.setup{}
     cmd = { "sqls" }
     filetypes = { "sql", "mysql" }
     root_dir = function(fname)
-          return util.root_pattern("config.yml")(fname) or util.path.dirname(fname)
-        end;
+          return util.root_pattern "config.yml"(fname) or util.path.dirname(fname)
+        end,
     settings = {}
 ```
 
@@ -6381,8 +6384,12 @@ require'lspconfig'.tailwindcss.setup{}
       }
     }
     on_new_config = function(new_config)
-          if not new_config.settings then new_config.settings = {} end
-          if not new_config.settings.editor then new_config.settings.editor = {} end
+          if not new_config.settings then
+            new_config.settings = {}
+          end
+          if not new_config.settings.editor then
+            new_config.settings.editor = {}
+          end
           if not new_config.settings.editor.tabSize then
             -- set tab size for hover
             new_config.settings.editor.tabSize = vim.lsp.util.get_effective_tabstop()
