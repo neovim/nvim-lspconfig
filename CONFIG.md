@@ -597,6 +597,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`dart.dapLogFile`**: `null|string`
+
+  Default: `vim.NIL`
+  
+  null
+
 - **`dart.debugExtensionBackendProtocol`**: `enum { "sse", "ws" }`
 
   Default: `"ws"`
