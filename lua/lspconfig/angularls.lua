@@ -1,7 +1,7 @@
-local configs = require 'lspconfig/configs'
-local util = require 'lspconfig/util'
+local configs = require "lspconfig/configs"
+local util = require "lspconfig/util"
 
-local server_name = 'angularls'
+local server_name = "angularls"
 
 -- Angular requires a node_modules directory to probe for @angular/language-service and typescript
 -- in order to use your projects configured versions.
@@ -9,7 +9,7 @@ local server_name = 'angularls'
 local function get_probe_dir(root_dir)
   local project_root = util.find_node_modules_ancestor(root_dir)
 
-  return project_root and (project_root .. '/node_modules') or ''
+  return project_root and (project_root .. "/node_modules") or ""
 end
 
 local default_probe_dir = get_probe_dir(vim.fn.getcwd())
@@ -17,28 +17,32 @@ local default_probe_dir = get_probe_dir(vim.fn.getcwd())
 configs[server_name] = {
   default_config = {
     cmd = {
-      'ngserver',
-      '--stdio',
-      '--tsProbeLocations', default_probe_dir,
-      '--ngProbeLocations', default_probe_dir
-    };
-    filetypes = {'typescript', 'html', 'typescriptreact', 'typescript.tsx'};
+      "ngserver",
+      "--stdio",
+      "--tsProbeLocations",
+      default_probe_dir,
+      "--ngProbeLocations",
+      default_probe_dir,
+    },
+    filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" },
     -- Check for angular.json or .git first since that is the root of the project.
     -- Don't check for tsconfig.json or package.json since there are multiple of these
     -- in an angular monorepo setup.
-    root_dir = util.root_pattern('angular.json', '.git');
-  };
+    root_dir = util.root_pattern("angular.json", ".git"),
+  },
   on_new_config = function(new_config, new_root_dir)
     local new_probe_dir = get_probe_dir(new_root_dir)
 
     -- We need to check our probe directories because they may have changed.
     new_config.cmd = {
-      'ngserver',
-      '--stdio',
-      '--tsProbeLocations', new_probe_dir,
-      '--ngProbeLocations', new_probe_dir
+      "ngserver",
+      "--stdio",
+      "--tsProbeLocations",
+      new_probe_dir,
+      "--ngProbeLocations",
+      new_probe_dir,
     }
-  end;
+  end,
   docs = {
     description = [[
 https://github.com/angular/vscode-ng-language-service
@@ -58,9 +62,9 @@ require'lspconfig'.angularls.setup{
   end,
 }
 ```
-    ]];
+    ]],
     default_config = {
-      root_dir = [[root_pattern("angular.json", ".git")]];
-    };
-  }
+      root_dir = [[root_pattern("angular.json", ".git")]],
+    },
+  },
 }

@@ -1,14 +1,14 @@
-local configs = require 'lspconfig/configs'
-local util = require 'lspconfig/util'
+local configs = require "lspconfig/configs"
+local util = require "lspconfig/util"
 
 configs.ccls = {
   default_config = {
-    cmd = {"ccls"};
-    filetypes = {"c", "cpp", "objc", "objcpp"};
+    cmd = { "ccls" },
+    filetypes = { "c", "cpp", "objc", "objcpp" },
     root_dir = function(fname)
       return util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")(fname) or util.path.dirname(fname)
-    end;
-  };
+    end,
+  },
   docs = {
     description = [[
 https://github.com/MaskRay/ccls/wiki
@@ -35,10 +35,10 @@ lspconfig.ccls.setup {
 
 ```
 
-]];
+]],
     default_config = {
-      root_dir = [[root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname]];
-    };
-  };
+      root_dir = [[root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname]],
+    },
+  },
 }
 -- vim:et ts=2 sw=2

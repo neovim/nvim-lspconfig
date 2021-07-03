@@ -34,12 +34,12 @@ function win_float.default_opts(options)
   local left = math.floor((vim.o.columns - width) / 2)
 
   local opts = {
-    relative = 'editor',
-    row      = top,
-    col      = left,
-    width    = width,
-    height   = height,
-    style    = 'minimal'
+    relative = "editor",
+    row = top,
+    col = left,
+    width = width,
+    height = height,
+    style = "minimal",
   }
 
   return opts
@@ -60,12 +60,12 @@ function win_float.percentage_range_window(col_range, row_range, options)
   win_opts.relative = "editor"
 
   local height_percentage, row_start_percentage
-  if type(row_range) == 'number' then
+  if type(row_range) == "number" then
     assert(row_range <= 1)
     assert(row_range > 0)
     height_percentage = row_range
     row_start_percentage = (1 - height_percentage) / 2
-  elseif type(row_range) == 'table' then
+  elseif type(row_range) == "table" then
     height_percentage = row_range[2] - row_range[1]
     row_start_percentage = row_range[1]
   else
@@ -73,15 +73,15 @@ function win_float.percentage_range_window(col_range, row_range, options)
   end
 
   win_opts.height = math.ceil(vim.o.lines * height_percentage)
-  win_opts.row = math.ceil(vim.o.lines *  row_start_percentage)
+  win_opts.row = math.ceil(vim.o.lines * row_start_percentage)
 
   local width_percentage, col_start_percentage
-  if type(col_range) == 'number' then
+  if type(col_range) == "number" then
     assert(col_range <= 1)
     assert(col_range > 0)
     width_percentage = col_range
     col_start_percentage = (1 - width_percentage) / 2
-  elseif type(col_range) == 'table' then
+  elseif type(col_range) == "table" then
     width_percentage = col_range[2] - col_range[1]
     col_start_percentage = col_range[1]
   else
@@ -91,21 +91,21 @@ function win_float.percentage_range_window(col_range, row_range, options)
   win_opts.col = math.floor(vim.o.columns * col_start_percentage)
   win_opts.width = math.floor(vim.o.columns * width_percentage)
   win_opts.border = {
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"}
+    { " ", "NormalFloat" },
+    { " ", "NormalFloat" },
+    { " ", "NormalFloat" },
+    { " ", "NormalFloat" },
+    { " ", "NormalFloat" },
+    { " ", "NormalFloat" },
+    { " ", "NormalFloat" },
+    { " ", "NormalFloat" },
   }
 
   local bufnr = options.bufnr or vim.api.nvim_create_buf(false, true)
   local win_id = vim.api.nvim_open_win(bufnr, true, win_opts)
   vim.api.nvim_win_set_buf(win_id, bufnr)
 
-  vim.cmd('setlocal nocursorcolumn')
+  vim.cmd "setlocal nocursorcolumn"
 
   return {
     bufnr = bufnr,
