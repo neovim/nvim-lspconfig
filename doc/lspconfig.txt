@@ -17,7 +17,7 @@ enhanced LSP tools. LSP facilitates features like:
 - hover
 - completion
 - rename
-- format 
+- format
 - refactor
 Neovim provides an interface for all of these features, and the language server
 client is designed to be highly extensible to allow plugins to integrate
@@ -29,7 +29,7 @@ lsp` for more details.
 3. Install                                                 *lspconfig-install*
 
 
-* Requires [Neovim HEAD/nightly](https://github.com/neovim/neovim/releases/tag/nightly) (v0.5 prerelease). Update Neovim and nvim-lspconfig before reporting an issue.
+* Requires [Neovim v0.5.0](https://github.com/neovim/neovim/releases/tag/v0.5.0) or [Nightly](https://github.com/neovim/neovim/releases/tag/nightly). Update Neovim and nvim-lspconfig before reporting an issue.
 * Install nvim-lspconfig like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
 
 >
@@ -117,7 +117,7 @@ completion with omnifunc ( \< c-x \> \< c-o \> ).
     lua << EOF    
     local nvim_lsp = require('lspconfig')    
     
-    -- Use an on_attach function to only map the following keys     
+    -- Use an on_attach function to only map the following keys    
     -- after the language server attaches to the current buffer    
     local on_attach = function(client, bufnr)    
       local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end    
@@ -154,7 +154,12 @@ completion with omnifunc ( \< c-x \> \< c-o \> ).
     -- map buffer local keybindings when the language server attaches    
     local servers = { "pyright", "rust_analyzer", "tsserver" }    
     for _, lsp in ipairs(servers) do    
-      nvim_lsp[lsp].setup { on_attach = on_attach }    
+      nvim_lsp[lsp].setup {    
+        on_attach = on_attach,    
+        flags = {    
+          debounce_text_changes = 150,    
+        }    
+      }    
     end    
     EOF
 <
@@ -167,7 +172,7 @@ server attaches to the current buffer.
 
 
 The two most common reasons a language server does not start or attach are:
-1. The language server is not installed. nvim-lspconfig does not install language servers for you. You should be able to run the `cmd` defined in each server's lua module from the command line and see that the language server starts. If the `cmd` is an excutable name, ensure it is on your path.
+1. The language server is not installed. nvim-lspconfig does not install language servers for you. You should be able to run the `cmd` defined in each server's lua module from the command line and see that the language server starts. If the `cmd` is an executable name, ensure it is on your path.
 2. Not triggering root detection. The language server will only start if it is opened in a directory, or child directory, containing a file which signals the *root* of the project. Most of the time, this is a `.git` folder, but each server defines the root config in the lua file. See [CONFIG.md](CONFIG.md) or the source for the list of root directories.
 :LspInfo provides a handy overview of your active and configured language
 servers. Note, that it will not report any configuration changes applied in
@@ -196,8 +201,8 @@ Most of the time, the reason for failure is present in the logs.
 
 * `:LspInfo` shows the status of active and configured language servers.
 The following support tab-completion for all arguments:
-* `:LspStart <config_name>` Start the requested server name. Will only succesfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command. Defaults to all servers matching current buffer filetype.
-* `:LspStop <client_id>` Defaults to stopping all buffer clients. 
+* `:LspStart <config_name>` Start the requested server name. Will only successfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command. Defaults to all servers matching current buffer filetype.
+* `:LspStop <client_id>` Defaults to stopping all buffer clients.
 * `:LspRestart <client_id>` Defaults to restarting all buffer clients.
 ==============================================================================
 10. The wiki                                              *lspconfig-the-wiki*
@@ -206,7 +211,7 @@ The following support tab-completion for all arguments:
 Please see the [wiki](https://github.com/neovim/nvim-lspconfig/wiki) for
 additional topics, including:
 * [Installing language servers automatically](https://github.com/neovim/nvim-lspconfig/wiki/Installing-language-servers-automatically)
-* [Snippets support](https://github.com/neovim/nvim-lspconfig/wiki/Snippets-support)
+* [Snippets support](https://github.com/neovim/nvim-lspconfig/wiki/Snippets)
 * [Project local settings](https://github.com/neovim/nvim-lspconfig/wiki/Project-local-settings)
 * [Recommended plugins for enhanced language server features](https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins)
 ==============================================================================
