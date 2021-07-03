@@ -1,5 +1,5 @@
-local configs = require 'lspconfig/configs'
-local util = require 'lspconfig/util'
+local configs = require "lspconfig/configs"
+local util = require "lspconfig/util"
 local lsp = vim.lsp
 
 local server_name = "denols"
@@ -27,19 +27,25 @@ local function buf_cache(bufnr)
   params["referrer"] = { uri = vim.uri_from_bufnr(bufnr) }
   params["uris"] = {}
   lsp.buf_request(bufnr, "deno/cache", params, function(err)
-    if err then error(tostring(err)) end
+    if err then
+      error(tostring(err))
+    end
   end)
 end
 
 local function virtual_text_document_handler(uri, result)
-  if not result then return nil end
+  if not result then
+    return nil
+  end
 
   for client_id, res in pairs(result) do
     local lines = vim.split(res.result, "\n")
     local bufnr = vim.uri_to_bufnr(deno_uri_to_uri(uri))
 
     local current_buf = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-    if #current_buf ~= 0 then return nil end
+    if #current_buf ~= 0 then
+      return nil
+    end
 
     vim.api.nvim_buf_set_lines(bufnr, 0, -1, nil, lines)
     vim.api.nvim_buf_set_option(bufnr, "readonly", true)
@@ -60,14 +66,16 @@ local function virtual_text_document(uri)
 end
 
 local function denols_handler(err, method, result)
-  if not result or vim.tbl_isempty(result) then return nil end
+  if not result or vim.tbl_isempty(result) then
+    return nil
+  end
 
   for _, res in pairs(result) do
     local uri = res.uri or res.targetUri
     if string.sub(uri, 1, 6) == "deno:/" then
       virtual_text_document(uri)
-      res['uri'] = deno_uri_to_uri(uri)
-      res['targetUri'] = deno_uri_to_uri(uri)
+      res["uri"] = deno_uri_to_uri(uri)
+      res["targetUri"] = deno_uri_to_uri(uri)
     end
   end
 
@@ -81,59 +89,59 @@ local function denols_definition()
 end
 
 local function denols_references(context)
-  vim.validate { context = { context, 't', true } }
+  vim.validate { context = { context, "t", true } }
   local params = lsp.util.make_position_params()
   params.context = context or {
-    includeDeclaration = true;
+    includeDeclaration = true,
   }
   params[vim.type_idx] = vim.types.dictionary
   params.textDocument.uri = uri_to_deno_uri(params.textDocument.uri)
-  lsp.buf_request(0, 'textDocument/references', params)
+  lsp.buf_request(0, "textDocument/references", params)
 end
 
 configs[server_name] = {
   default_config = {
-    cmd = {"deno", "lsp"};
-    filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"};
-    root_dir = util.root_pattern("package.json", "tsconfig.json", ".git");
+    cmd = { "deno", "lsp" },
+    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+    root_dir = util.root_pattern("package.json", "tsconfig.json", ".git"),
     init_options = {
-      enable = true;
-      lint = false;
-      unstable = false;
-    };
+      enable = true,
+      lint = false,
+      unstable = false,
+    },
     handlers = {
-      ["textDocument/definition"] = denols_handler;
-      ["textDocument/references"] = denols_handler;
-    };
-  };
+      ["textDocument/definition"] = denols_handler,
+      ["textDocument/references"] = denols_handler,
+    },
+  },
   commands = {
     DenolsDefinition = {
-      denols_definition;
-      description = "Jump to definition. This handle deno:/ schema in deno:// buffer."
-    };
+      denols_definition,
+      description = "Jump to definition. This handle deno:/ schema in deno:// buffer.",
+    },
     DenolsReferences = {
       function()
-       denols_references({ includeDeclaration = true })
-      end;
-      description = "List references. This handle deno:/ schema in deno:// buffer."
-    };
+        denols_references { includeDeclaration = true }
+      end,
+      description = "List references. This handle deno:/ schema in deno:// buffer.",
+    },
     DenolsCache = {
       function()
         buf_cache(0)
-      end;
-      description = "Cache a module and all of its dependencies."
-    };
-  };
+      end,
+      description = "Cache a module and all of its dependencies.",
+    },
+  },
   docs = {
     description = [[
 https://github.com/denoland/deno
 
 Deno's built-in language server
-]];
+]],
     default_config = {
-      root_dir = [[root_pattern("package.json", "tsconfig.json", ".git")]];
-    };
-  };
+      root_dir = [[root_pattern("package.json", "tsconfig.json", ".git")]],
+    },
+  },
 }
 
 configs.denols.definition = denols_definition

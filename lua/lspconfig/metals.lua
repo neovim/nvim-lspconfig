@@ -1,24 +1,24 @@
-local configs = require 'lspconfig/configs'
-local util = require 'lspconfig/util'
+local configs = require "lspconfig/configs"
+local util = require "lspconfig/util"
 local server_name = "metals"
 local bin_name = "metals"
 
 configs[server_name] = {
   default_config = {
-    cmd = {bin_name};
-    filetypes = {"scala"};
-    root_dir = util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml");
-    message_level = vim.lsp.protocol.MessageType.Log;
+    cmd = { bin_name },
+    filetypes = { "scala" },
+    root_dir = util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml"),
+    message_level = vim.lsp.protocol.MessageType.Log,
     init_options = {
-        statusBarProvider = "show-message",
-        isHttpEnabled = true,
-        compilerOptions = {
-          snippetAutoIndent = false
-        }
-      };
-  };
+      statusBarProvider = "show-message",
+      isHttpEnabled = true,
+      compilerOptions = {
+        snippetAutoIndent = false,
+      },
+    },
+  },
   docs = {
-    description  = [[
+    description = [[
 https://scalameta.org/metals/
 
 Scala language server with rich IDE features.
@@ -40,9 +40,9 @@ cs bootstrap \
   -r sonatype:snapshots \
   -o /usr/local/bin/metals -f
 ```
-]];
+]],
     default_config = {
-      root_dir = [[util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml")]];
-    };
-  };
-};
+      root_dir = [[util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml")]],
+    },
+  },
+}
