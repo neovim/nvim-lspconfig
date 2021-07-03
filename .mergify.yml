@@ -6,18 +6,3 @@ pull_request_rules:
       close:
       comment: 
         message: "CONFIG.md is auto-generated: edit the lua source file instead (and re-read the PR template)."
-  - name: Conventional Commit
-    conditions:
-      - "title~=^(fix|feat|docs|style|refactor|perf|test|build|ci|chore|revert)(?:\\(.+\\))?:"
-    actions:
-      post_check:
-        title: |
-          {% if check_succeed %}
-          Title follows Conventional Commit
-          {% else %}
-          Title does not follow Conventional Commit
-          {% endif %}
-        summary: |
-          {% if not check_succeed %}
-          Your pull request title must follow [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/).
-          {% endif %}
