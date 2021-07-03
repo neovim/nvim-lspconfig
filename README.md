@@ -126,7 +126,7 @@ The `on_attach` hook is used to only activate the bindings after the language se
 ## Debugging
 The two most common reasons a language server does not start or attach are:
 
-1. The language server is not installed. nvim-lspconfig does not install language servers for you. You should be able to run the `cmd` defined in each server's lua module from the command line and see that the language server starts. If the `cmd` is an excutable name, ensure it is on your path.
+1. The language server is not installed. nvim-lspconfig does not install language servers for you. You should be able to run the `cmd` defined in each server's lua module from the command line and see that the language server starts. If the `cmd` is an executable name, ensure it is on your path.
 
 2. Not triggering root detection. The language server will only start if it is opened in a directory, or child directory, containing a file which signals the *root* of the project. Most of the time, this is a `.git` folder, but each server defines the root config in the lua file. See [CONFIG.md](CONFIG.md) or the source for the list of root directories.
 
@@ -151,7 +151,7 @@ Most of the time, the reason for failure is present in the logs.
 
 The following support tab-completion for all arguments:
 
-* `:LspStart <config_name>` Start the requested server name. Will only succesfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command. Defaults to all servers matching current buffer filetype.
+* `:LspStart <config_name>` Start the requested server name. Will only successfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command. Defaults to all servers matching current buffer filetype.
 * `:LspStop <client_id>` Defaults to stopping all buffer clients.
 * `:LspRestart <client_id>` Defaults to restarting all buffer clients.
 
