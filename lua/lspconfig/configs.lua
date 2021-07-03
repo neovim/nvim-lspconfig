@@ -32,6 +32,7 @@ function configs.__newindex(t, config_name, config_def)
 
   function M.setup(config)
     validate {
+      cmd = {config.cmd, 't', default_config.cmd ~= nil};
       root_dir = {config.root_dir, 'f', default_config.root_dir ~= nil};
       filetypes = {config.filetype, 't', true};
       on_new_config = {config.on_new_config, 'f', true};
