@@ -1,14 +1,13 @@
-local configs = require 'lspconfig/configs'
-local util = require 'lspconfig/util'
-local server_name = 'omnisharp'
+local configs = require("lspconfig/configs")
+local util = require("lspconfig/util")
+local server_name = "omnisharp"
 
 configs[server_name] = {
   default_config = {
-    filetypes = {"cs", "vb"};
-    root_dir = util.root_pattern("*.csproj", "*.sln");
-    init_options = {
-    };
-  };
+    filetypes = { "cs", "vb" },
+    root_dir = util.root_pattern("*.csproj", "*.sln"),
+    init_options = {},
+  },
   -- on_new_config = function(new_config) end;
   -- on_attach = function(client, bufnr) end;
   docs = {
@@ -39,11 +38,11 @@ Note, if you download the executable for darwin you will need to strip the quara
 ```bash
 find /path/to/omnisharp-osx | xargs xattr -r -d com.apple.quarantine
 ```
-]];
+]],
     default_config = {
-      root_dir = [[root_pattern(".csproj", ".sln")]];
-    };
-  };
+      root_dir = [[root_pattern(".csproj", ".sln")]],
+    },
+  },
 }
 
 -- vim:et ts=2 sw=2

@@ -1,4 +1,4 @@
-local docgen = require('babelfish')
+local docgen = require("babelfish")
 
 local docs = {}
 
@@ -8,14 +8,14 @@ docs.generate = function()
     output_file = "./doc/lspconfig.txt",
     project_name = "lspconfig",
     header_aliases = {
-      ["Example: using the defaults"] = {"Defaults", "defaults"},
-      ["Example: override some defaults"] = {"Overriding server defaults", "override-server-defaults"},
-      ["Example: custom config"] = {"Custom config", "custom-config"},
-      ["Example: override default config for all servers"] = {"Overriding all defaults",  "override-all-defaults"},
-      ["Individual server settings and initialization options"] = { "Per-server documentation", "server-documentation"},
-      ["Keybindings and completion"] = {"Keybindings", "keybindings"},
-      ["Manually starting (or restarting) language servers"] = {"Manual control", "manual-control"}
-    }
+      ["Example: using the defaults"] = { "Defaults", "defaults" },
+      ["Example: override some defaults"] = { "Overriding server defaults", "override-server-defaults" },
+      ["Example: custom config"] = { "Custom config", "custom-config" },
+      ["Example: override default config for all servers"] = { "Overriding all defaults", "override-all-defaults" },
+      ["Individual server settings and initialization options"] = { "Per-server documentation", "server-documentation" },
+      ["Keybindings and completion"] = { "Keybindings", "keybindings" },
+      ["Manually starting (or restarting) language servers"] = { "Manual control", "manual-control" },
+    },
   }
   docgen.generate_readme(metadata)
 end

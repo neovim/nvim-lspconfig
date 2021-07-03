@@ -1,15 +1,14 @@
-local configs = require 'lspconfig/configs'
-local util = require 'lspconfig/util'
-
+local configs = require("lspconfig/configs")
+local util = require("lspconfig/util")
 
 configs.erlangls = {
   default_config = {
-    cmd = { "erlang_ls" };
-    filetypes = { "erlang" };
+    cmd = { "erlang_ls" },
+    filetypes = { "erlang" },
     root_dir = function(fname)
       return util.root_pattern("rebar.config", "erlang.mk", ".git")(fname) or util.path.dirname(fname)
-    end;
-  };
+    end,
+  },
   docs = {
     description = [[
 https://erlang-ls.github.io
@@ -24,9 +23,9 @@ Installation instruction can be found [here](https://github.com/erlang-ls/erlang
 Installation requirements:
     - [Erlang OTP 21+](https://github.com/erlang/otp)
     - [rebar3 3.9.1+](https://github.com/erlang/rebar3)
-]];
+]],
     default_config = {
-      root_dir = [[root_pattern('rebar.config', 'erlang.mk', '.git') or util.path.dirname(fname)]]
-    }
-  };
+      root_dir = [[root_pattern('rebar.config', 'erlang.mk', '.git') or util.path.dirname(fname)]],
+    },
+  },
 }

@@ -1,14 +1,15 @@
-local configs = require 'lspconfig/configs'
-local util = require 'lspconfig/util'
+local configs = require("lspconfig/configs")
+local util = require("lspconfig/util")
 
 local server_name = "powershell_es"
-local temp_path = vim.fn.stdpath('cache')
+local temp_path = vim.fn.stdpath("cache")
 
 local function make_cmd(bundle_path)
   if bundle_path ~= nil then
-    local command_fmt = [[%s/PowerShellEditorServices/Start-EditorServices.ps1 -BundledModulesPath %s -LogPath %s/powershell_es.log -SessionDetailsPath %s/powershell_es.session.json -FeatureFlags @() -AdditionalModules @() -HostName nvim -HostProfileId 0 -HostVersion 1.0.0 -Stdio -LogLevel Normal]]
+    local command_fmt =
+      [[%s/PowerShellEditorServices/Start-EditorServices.ps1 -BundledModulesPath %s -LogPath %s/powershell_es.log -SessionDetailsPath %s/powershell_es.session.json -FeatureFlags @() -AdditionalModules @() -HostName nvim -HostProfileId 0 -HostVersion 1.0.0 -Stdio -LogLevel Normal]]
     local command = command_fmt:format(bundle_path, bundle_path, temp_path, temp_path)
-    return {"pwsh", "-NoLogo", "-NoProfile", "-Command", command}
+    return { "pwsh", "-NoLogo", "-NoProfile", "-Command", command }
   end
 end
 
@@ -18,11 +19,11 @@ configs[server_name] = {
       local bundle_path = new_config.bundle_path
       new_config.cmd = make_cmd(bundle_path)
     end,
-    filetypes = {"ps1"},
+    filetypes = { "ps1" },
     root_dir = function(fname)
       return util.find_git_ancestor(fname) or vim.fn.getcwd()
-    end;
-  };
+    end,
+  },
   docs = {
     description = [[
 https://github.com/PowerShell/PowerShellEditorServices
@@ -51,11 +52,11 @@ require'lspconfig'.powershell_es.setup{
   cmd = {'pwsh', '-NoLogo', '-NoProfile', '-Command', "c:/PSES/Start-EditorServices.ps1 ..."}
 }
 ```
-]];
+]],
     default_config = {
-      root_dir = "git root or current directory";
-    };
-  };
-};
+      root_dir = "git root or current directory",
+    },
+  },
+}
 
 -- vim:et ts=2 sw=2

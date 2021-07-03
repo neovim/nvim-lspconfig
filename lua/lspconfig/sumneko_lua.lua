@@ -1,19 +1,19 @@
-local configs = require 'lspconfig/configs'
-local util = require 'lspconfig/util'
+local configs = require("lspconfig/configs")
+local util = require("lspconfig/util")
 
 local name = "sumneko_lua"
 
 configs[name] = {
   default_config = {
-    filetypes = {'lua'};
+    filetypes = { "lua" },
     root_dir = function(fname)
       return util.find_git_ancestor(fname) or util.path.dirname(fname)
-    end;
-    log_level = vim.lsp.protocol.MessageType.Warning;
-    settings = { Lua = { telemetry = { enable = false }}};
-  };
+    end,
+    log_level = vim.lsp.protocol.MessageType.Warning,
+    settings = { Lua = { telemetry = { enable = false } } },
+  },
   docs = {
-    package_json = "https://raw.githubusercontent.com/sumneko/vscode-lua/master/package.json";
+    package_json = "https://raw.githubusercontent.com/sumneko/vscode-lua/master/package.json",
     description = [[
 https://github.com/sumneko/lua-language-server
 
@@ -69,10 +69,10 @@ require'lspconfig'.sumneko_lua.setup {
   },
 }
 ```
-]];
+]],
     default_config = {
-      root_dir = [[root_pattern(".git") or bufdir]];
-    };
-  };
+      root_dir = [[root_pattern(".git") or bufdir]],
+    },
+  },
 }
 -- vim:et ts=2

@@ -1,37 +1,36 @@
-local configs = require 'lspconfig/configs'
-local util = require 'lspconfig/util'
+local configs = require("lspconfig/configs")
+local util = require("lspconfig/util")
 
 local name = "pyls_ms"
 
 configs[name] = {
 
   default_config = {
-    filetypes = {"python"};
+    filetypes = { "python" },
     root_dir = function(fname)
       return util.find_git_ancestor(fname) or vim.loop.os_homedir()
-    end;
+    end,
     settings = {
       python = {
         analysis = {
-          errors = {};
-          info = {};
-          disabled = {};
-        };
-      };
-    };
+          errors = {},
+          info = {},
+          disabled = {},
+        },
+      },
+    },
     init_options = {
       interpreter = {
-        properties =
-        {
-          InterpreterPath = "";
-          Version = "";
-        };
-      };
-      displayOptions = {};
-      analysisUpdates = true;
-      asyncStartup = true;
-    };
-  };
+        properties = {
+          InterpreterPath = "",
+          Version = "",
+        },
+      },
+      displayOptions = {},
+      analysisUpdates = true,
+      asyncStartup = true,
+    },
+  },
   docs = {
     description = [[
 https://github.com/Microsoft/python-language-server
@@ -61,11 +60,11 @@ Version = "3.8"
 
 This server accepts configuration via the `settings` key.
 
-    ]];
+    ]],
     default_config = {
-      root_dir = "vim's starting directory";
-    };
-  };
-};
+      root_dir = "vim's starting directory",
+    },
+  },
+}
 
 -- vim:et ts=2 sw=2
