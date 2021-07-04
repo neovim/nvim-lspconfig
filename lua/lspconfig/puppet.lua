@@ -1,25 +1,24 @@
-local configs = require 'lspconfig/configs'
-local util = require 'lspconfig/util'
+local configs = require "lspconfig/configs"
+local util = require "lspconfig/util"
 
 local server_name = "puppet"
 local bin_name = "puppet-languageserver"
 
 local root_files = {
-  'manifests',
-  '.puppet-lint.rc',
-  'hiera.yaml',
-  '.git',
+  "manifests",
+  ".puppet-lint.rc",
+  "hiera.yaml",
+  ".git",
 }
 
 configs[server_name] = {
   default_config = {
-    cmd = {bin_name, "--stdio"};
-    filetypes = {"puppet"};
+    cmd = { bin_name, "--stdio" },
+    filetypes = { "puppet" },
     root_dir = function(filename)
-      return util.root_pattern(unpack(root_files))(filename) or
-             util.path.dirname(filename)
-    end
-  };
+      return util.root_pattern(unpack(root_files))(filename) or util.path.dirname(filename)
+    end,
+  },
   docs = {
     description = [[
 LSP server for Puppet.
@@ -36,10 +35,10 @@ Installation:
 - Add that repository to $PATH.
 
 - Ensure you can run `puppet-languageserver` from outside the editor-services directory.
-]];
+]],
     default_config = {
-      root_dir = [[root_pattern("manifests", ".puppet-lint.rc", "hiera.yaml", ".git")]];
-    };
-  };
+      root_dir = [[root_pattern("manifests", ".puppet-lint.rc", "hiera.yaml", ".git")]],
+    },
+  },
 }
 -- vim:et ts=2 sw=2
