@@ -4,14 +4,22 @@ local util = require 'lspconfig/util'
 local server_name = "puppet"
 local bin_name = "puppet-languageserver"
 
+local root_files = {
+  'manifests',
+  '.puppet-lint.rc',
+  'hiera.yaml',
+  '.git',
+}
+
 configs[server_name] = {
   default_config = {
     cmd = {bin_name, "--stdio"};
     filetypes = {"puppet"};
-    root_dir = util.root_pattern("manifests", ".puppet-lint.rc", "hiera.yaml", ".git");
+    root_dir = function(filename)
+      return util.root_pattern(unpack(root_files))(filename) or
+             util.path.dirname(filename)
+    end
   };
-  -- on_new_config = function(new_config) end;
-  -- on_attach = function(client, bufnr) end;
   docs = {
     description = [[
 https://github.com/puppetlabs/puppet-editor-services
