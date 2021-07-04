@@ -54,6 +54,7 @@ that config.
 - [phpactor](#phpactor)
 - [powershell_es](#powershell_es)
 - [prismals](#prismals)
+- [puppet](#puppet)
 - [purescriptls](#purescriptls)
 - [pyls](#pyls)
 - [pyls_ms](#pyls_ms)
@@ -3715,7 +3716,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocaml", "ocamllex", "menhir", "reason", "ocamlinterface" }
+    filetypes = { "ocaml", "menhir", "ocamlinterface", "reason", "ocamllex" }
     get_language_id = function(_, ftype)
       return language_id_of[ftype]
     end
@@ -4006,6 +4007,41 @@ require'lspconfig'.prismals.setup{}
         prismaFmtBinPath = ""
       }
     }
+```
+
+
+## puppet
+
+LSP server for Puppet.
+
+Installation:
+
+- Clone the editor-services repository:
+    https://github.com/puppetlabs/puppet-editor-services
+
+- Navigate into that directory and run: `bundle install`
+
+- Install the 'puppet-lint' gem: `gem install puppet-lint`
+
+- Add that repository to $PATH.
+
+- Ensure you can run `puppet-languageserver` from outside the editor-services directory.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.puppet.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "puppet-languageserver", "--stdio" }
+    filetypes = { "puppet" }
+    root_dir = root_pattern("manifests", ".puppet-lint.rc", "hiera.yaml", ".git")
 ```
 
 
