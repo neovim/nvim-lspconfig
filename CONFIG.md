@@ -51,6 +51,7 @@ that config.
 - [ocamllsp](#ocamllsp)
 - [omnisharp](#omnisharp)
 - [perlls](#perlls)
+- [perlpls](#perlpls)
 - [phpactor](#phpactor)
 - [powershell_es](#powershell_es)
 - [prismals](#prismals)
@@ -3716,7 +3717,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocaml", "ocamllex", "menhir", "reason", "ocamlinterface" }
+    filetypes = { "ocamllex", "reason", "menhir", "ocaml", "ocamlinterface" }
     get_language_id = function(_, ftype)
       return language_id_of[ftype]
     end
@@ -3902,6 +3903,100 @@ require'lspconfig'.perlls.setup{}
         ignoreDirs = ".git",
         perlCmd = "perl",
         perlInc = " "
+      }
+    }
+```
+
+
+## perlpls
+
+https://github.com/FractalBoy/perl-language-server
+https://metacpan.org/pod/PLS
+
+`PLS`, another language server for Perl.
+
+To use the language server, ensure that you have PLS installed and that it is in your path
+
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`perl.cwd`**: `string`
+
+  Default: `"."`
+  
+  Current working directory to use
+
+- **`perl.inc`**: `array`
+
+  Default: `{}`
+  
+  Paths to add to \@INC\.
+
+- **`perl.perlcritic.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable perlcritic
+
+- **`perl.perlcritic.perlcriticrc`**: `string`
+
+  Default: `"~/.perlcriticrc"`
+  
+  Path to \.perlcriticrc
+
+- **`perl.perltidyrc`**: `string`
+
+  Default: `"~/.perltidyrc"`
+  
+  Path to \.perltidyrc
+
+- **`perl.pls`**: `string`
+
+  Default: `"pls"`
+  
+  Path to the pls executable script
+
+- **`perl.sortImports.args`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Arguments passed in\. Each argument is a separate item in the array\.
+
+- **`perl.syntax.enabled`**: `boolean`
+
+  Default: `true`
+  
+  Enable syntax checking
+
+- **`perl.syntax.perl`**: `string`
+
+  Default: `""`
+  
+  Path to the perl binary to use for syntax checking
+
+</details>
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.perlpls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "pls" }
+    filetypes = { "perl" }
+    root_dir = vim's starting directory
+    settings = {
+      perl = {
+        perlcritic = {
+          enabled = false
+        }
       }
     }
 ```
