@@ -26,93 +26,93 @@ extra:
 nav:
   - Home: index.md
   - Install: install.md
-  - Languages:
-    - Introduction: languages/index.md
-    - Language Servers:
-      - Ada (als): languages/als.md
-      - Angular (angularls): languages/angularls.md
-      - Bash (bashls): languages/bashls.md
-      - Beancount (beancount): languages/beancount.md
-      - C like (ccls): languages/ccls.md
-      - C like (clangd): languages/clangd.md
-      - C like (sourcekit): languages/sourcekit.md
-      - Clojure (clojure_lsp): languages/clojure_lsp.md
-      - CMake (cmake): languages/cmake.md
-      - C(omnisharp): languages/omnisharp.md
-      - Crystal (crystalline): languages/crystalline.md
-      - Crystal (scry): languages/scry.md
-      - CSS (cssls): languages/cssls.md
-      - Dart (dartls): languages/dartls.md
-      - Dhall (dhall_lsp_server): languages/dhall_lsp_server.md
-      - Docker (dockerls): languages/dockerls.md
-      - DOT (dotls): languages/dotls.md
-      - Elexir (elixirls): languages/elixirls.md
-      - Elm (elmls): languages/elmls.md
-      - Erlang (erlangls): languages/erlangls.md
-      - F(fsautocomplete): languages/fsautocomplete.md
-      - Fortan (fortls): languages/fortls.md
-      - GDScript (gdscript): languages/gdscript.md
-      - Go (gopls): languages/gopls.md
-      - GraphQL (graphql): languages/graphql.md
-      - Haskell (ghcide): languages/ghcide.md
-      - Haskell (hie): languages/hie.md
-      - Haskell (hls): languages/hls.md
-      - Haxe (haxe_language_server): languages/haxe_language_server.md
-      - HTML (html): languages/html.md
-      - Java (groovyls): languages/groovyls.md
-      - Java (java_language_server): languages/java_language_server.md
-      - Java (jdtls): languages/jdtls.md
-      - JSON (jsonls): languages/jsonls.md
-      - Julia (julials): languages/julials.md
-      - Kotlin (kotlin_language_server): languages/kotlin_language_server.md
-      - Lean (lean3ls): languages/lean3ls.md
-      - Lean (leanls): languages/leanls.md
-      - Lua (sumneko_lua): languages/sumneko_lua.md
-      - Markdown (zeta_note): languages/zeta_note.md
-      - Nim (nimls): languages/nimls.md
-      - Nix (rnix): languages/rnix.md
-      - OCaml (ocamlls): languages/ocamlls.md
-      - OCaml (ocamllsp): languages/ocamllsp.md
-      - Perl (perlls): languages/perlls.md
-      - PHP (intelephense): languages/intelephense.md
-      - PHP (phpactor): languages/phpactor.md
-      - Powershell (powershell_es): languages/powershell_es.md
-      - Prisma (prismals): languages/prismals.md
-      - Puppet (puppet): languages/puppet.md
-      - PureScript (purescriptls): languages/purescriptls.md
-      - Python (jedi_language_server): languages/jedi_language_server.md
-      - Python (pyls): languages/pyls.md
-      - Python (pyls_ms): languages/pyls_ms.md
-      - Python (pylsp): languages/pylsp.md
-      - Python (pyright): languages/pyright.md
-      - Racket (racket_langserver): languages/racket_langserver.md
-      - ReScript (rescriptls): languages/rescriptls.md
-      - R (r_language_server): languages/r_language_server.md
-      - Ruby (solargraph): languages/solargraph.md
-      - Ruby (sorbet): languages/sorbet.md
-      - Rust (rls): languages/rls.md
-      - Rust (rust_analyzer): languages/rust_analyzer.md
-      - Scala (metals): languages/metals.md
-      - SQL (sqlls): languages/sqlls.md
-      - SQL (sqls): languages/sqls.md
-      - Stylelint (stylelint_lsp): languages/stylelint_lsp.md
-      - Svelte (svelte): languages/svelte.md
-      - Tailwind (tailwindcss): languages/tailwindcss.md
-      - Terraform (terraformls): languages/terraformls.md
-      - Terraform (tflint): languages/tflint.md
-      - TexLab (texlab): languages/texlab.md
-      - TypeScript (denols): languages/denols.md
-      - TypeScript (flow): languages/flow.md
-      - TypeScript (rome): languages/rome.md
-      - TypeScript (tsserver): languages/tsserver.md
-      - Vala (vala_ls): languages/vala_ls.md
-      - Verilog (svls): languages/svls.md
-      - VimScript (vimls): languages/vimls.md
-      - Vue (vuels): languages/vuels.md
-      - V (vls): languages/vls.md
-      - YAML (yamlls): languages/yamlls.md
-      - Zig (zls): languages/zls.md
+  - LSP:
+    - Introduction: lsp/index.md
+    - Languages:
+      - Ada (als): lsp/als.md
+      - Angular (angularls): lsp/angularls.md
+      - Bash (bashls): lsp/bashls.md
+      - Beancount (beancount): lsp/beancount.md
+      - C like (ccls): lsp/ccls.md
+      - C like (clangd): lsp/clangd.md
+      - C like (sourcekit): lsp/sourcekit.md
+      - Clojure (clojure_lsp): lsp/clojure_lsp.md
+      - CMake (cmake): lsp/cmake.md
+      - C(omnisharp): lsp/omnisharp.md
+      - Crystal (crystalline): lsp/crystalline.md
+      - Crystal (scry): lsp/scry.md
+      - CSS (cssls): lsp/cssls.md
+      - Dart (dartls): lsp/dartls.md
+      - Dhall (dhall_lsp_server): lsp/dhall_lsp_server.md
+      - Docker (dockerls): lsp/dockerls.md
+      - DOT (dotls): lsp/dotls.md
+      - Elexir (elixirls): lsp/elixirls.md
+      - Elm (elmls): lsp/elmls.md
+      - Erlang (erlangls): lsp/erlangls.md
+      - F(fsautocomplete): lsp/fsautocomplete.md
+      - Fortan (fortls): lsp/fortls.md
+      - GDScript (gdscript): lsp/gdscript.md
+      - Go (gopls): lsp/gopls.md
+      - GraphQL (graphql): lsp/graphql.md
+      - Haskell (ghcide): lsp/ghcide.md
+      - Haskell (hie): lsp/hie.md
+      - Haskell (hls): lsp/hls.md
+      - Haxe (haxe_language_server): lsp/haxe_language_server.md
+      - HTML (html): lsp/html.md
+      - Java (groovyls): lsp/groovyls.md
+      - Java (java_language_server): lsp/java_language_server.md
+      - Java (jdtls): lsp/jdtls.md
+      - JSON (jsonls): lsp/jsonls.md
+      - Julia (julials): lsp/julials.md
+      - Kotlin (kotlin_language_server): lsp/kotlin_language_server.md
+      - Lean (lean3ls): lsp/lean3ls.md
+      - Lean (leanls): lsp/leanls.md
+      - Lua (sumneko_lua): lsp/sumneko_lua.md
+      - Markdown (zeta_note): lsp/zeta_note.md
+      - Nim (nimls): lsp/nimls.md
+      - Nix (rnix): lsp/rnix.md
+      - OCaml (ocamlls): lsp/ocamlls.md
+      - OCaml (ocamllsp): lsp/ocamllsp.md
+      - Perl (perlls): lsp/perlls.md
+      - PHP (intelephense): lsp/intelephense.md
+      - PHP (phpactor): lsp/phpactor.md
+      - Powershell (powershell_es): lsp/powershell_es.md
+      - Prisma (prismals): lsp/prismals.md
+      - Puppet (puppet): lsp/puppet.md
+      - PureScript (purescriptls): lsp/purescriptls.md
+      - Python (jedi_language_server): lsp/jedi_language_server.md
+      - Python (pyls): lsp/pyls.md
+      - Python (pyls_ms): lsp/pyls_ms.md
+      - Python (pylsp): lsp/pylsp.md
+      - Python (pyright): lsp/pyright.md
+      - Racket (racket_langserver): lsp/racket_langserver.md
+      - ReScript (rescriptls): lsp/rescriptls.md
+      - R (r_language_server): lsp/r_language_server.md
+      - Ruby (solargraph): lsp/solargraph.md
+      - Ruby (sorbet): lsp/sorbet.md
+      - Rust (rls): lsp/rls.md
+      - Rust (rust_analyzer): lsp/rust_analyzer.md
+      - Scala (metals): lsp/metals.md
+      - SQL (sqlls): lsp/sqlls.md
+      - SQL (sqls): lsp/sqls.md
+      - Stylelint (stylelint_lsp): lsp/stylelint_lsp.md
+      - Svelte (svelte): lsp/svelte.md
+      - Tailwind (tailwindcss): lsp/tailwindcss.md
+      - Terraform (terraformls): lsp/terraformls.md
+      - Terraform (tflint): lsp/tflint.md
+      - TexLab (texlab): lsp/texlab.md
+      - TypeScript (denols): lsp/denols.md
+      - TypeScript (flow): lsp/flow.md
+      - TypeScript (rome): lsp/rome.md
+      - TypeScript (tsserver): lsp/tsserver.md
+      - Vala (vala_ls): lsp/vala_ls.md
+      - Verilog (svls): lsp/svls.md
+      - VimScript (vimls): lsp/vimls.md
+      - Vue (vuels): lsp/vuels.md
+      - V (vls): lsp/vls.md
+      - YAML (yamlls): lsp/yamlls.md
+      - Zig (zls): lsp/zls.md
     - Misc Servers:
-      - CodeQL (codeqlls): languages/codeqlls.md
-      - Diagnostics (diagnosticls): languages/diagnosticls.md
-      - Diagnostics (efm): languages/efm.md
+      - CodeQL (codeqlls): lsp/codeqlls.md
+      - Diagnostics (diagnosticls): lsp/diagnosticls.md
+      - Diagnostics (efm): lsp/efm.md
