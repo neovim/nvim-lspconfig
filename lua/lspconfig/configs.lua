@@ -192,18 +192,19 @@ function configs.__newindex(t, config_name, config_def)
 
   function M._setup_buffer(client_id, bufnr)
     local client = lsp.get_client_by_id(client_id)
-    if not client == nil then
-      if client.config._on_attach then
-        client.config._on_attach(client, bufnr)
-      end
-      if client.config.commands and not vim.tbl_isempty(client.config.commands) then
-        M.commands = vim.tbl_deep_extend("force", M.commands, client.config.commands)
-      end
-      if not M.commands_created and not vim.tbl_isempty(M.commands) then
-        -- Create the module commands
-        util.create_module_commands(config_name, M.commands)
-        M.commands_created = true
-      end
+    if not client then
+      return
+    end
+    if client.config._on_attach then
+      client.config._on_attach(client, bufnr)
+    end
+    if client.config.commands and not vim.tbl_isempty(client.config.commands) then
+      M.commands = vim.tbl_deep_extend("force", M.commands, client.config.commands)
+    end
+    if not M.commands_created and not vim.tbl_isempty(M.commands) then
+      -- Create the module commands
+      util.create_module_commands(config_name, M.commands)
+      M.commands_created = true
     end
   end
 
