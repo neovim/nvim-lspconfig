@@ -161,7 +161,7 @@ M.path = (function()
 
   -- Iterate the path until we find the rootdir.
   local function iterate_parents(path)
-    path = uv.fs_realpath(path)
+    path = uv.fs_realpath(path) or path
     local function it(s, v)
       if not v then
         return
