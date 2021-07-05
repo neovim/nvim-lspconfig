@@ -1,12 +1,12 @@
-local configs = require 'lspconfig/configs'
-local util = require 'lspconfig/util'
+local configs = require "lspconfig/configs"
+local util = require "lspconfig/util"
 
-configs.arduino_language_server ={
+configs.arduino_language_server = {
   default_config = {
-    cmd = {"arduino-language-server"},
-    filetypes = {"arduino"},
-	root_dir = function(fname)
-	  return util.root_pattern("*.ino")(fname) or util.path.dirname(fname)
+    cmd = { "arduino-language-server" },
+    filetypes = { "arduino" },
+    root_dir = function(fname)
+      return util.root_pattern "*.ino"(fname) or util.path.dirname(fname)
     end,
     docs = {
       description = [[
@@ -29,7 +29,7 @@ and make sure you install any relevant platforms libraries:
 The language server also requires `clangd` be installed. It will look for `clangd` by default but
 the binary path can be overridden if need be.
 
-After all dependencies are installed you'll need to override the lspconfig command for the 
+After all dependencies are installed you'll need to override the lspconfig command for the
 language server in your setup function with the necessary configurations:
 
 ```lua
@@ -47,12 +47,12 @@ lspconfig.arduino_language_server.setup({
 
 For further instruction about configuration options, run `arduino-language-server --help`.
 
-]];
+]],
       default_config = {
         root_dir = [[root_pattern("*.ino")]],
-      }
-    }
-  }
+      },
+    },
+  },
 }
 
 -- vim:et ts=2 sw=2
