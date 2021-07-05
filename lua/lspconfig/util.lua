@@ -166,7 +166,8 @@ M.path = (function()
       if not v then
         return
       end
-      if is_fs_root(v) then
+      -- Terminate at filesystem boundary or non-filesystem (e.g., fugitive://) buffer paths
+      if is_fs_root(v) or v:match "^%a+:$" then
         return
       end
       return dirname(v), path
