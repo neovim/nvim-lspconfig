@@ -23,6 +23,7 @@ that config.
 - [efm](#efm)
 - [elixirls](#elixirls)
 - [elmls](#elmls)
+- [ember](#ember)
 - [erlangls](#erlangls)
 - [flow](#flow)
 - [fortls](#fortls)
@@ -1470,6 +1471,34 @@ require'lspconfig'.elmls.setup{}
       elmTestPath = "elm-test"
     }
     root_dir = root_pattern("elm.json")
+```
+
+
+## ember
+
+https://github.com/lifeart/ember-language-server
+
+`ember-language-server` can be installed via `npm`:
+
+```sh
+npm install -g @lifeart/ember-language-server
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.ember.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "ember-language-server", "--stdio" }
+    filetypes = { "handlebars", "typescript", "javascript" }
+    root_dir = root_pattern("ember-cli-build.js", ".git")
 ```
 
 
@@ -3717,7 +3746,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocaml", "ocamllex", "menhir", "reason", "ocamlinterface" }
+    filetypes = { "ocamlinterface", "ocaml", "ocamllex", "menhir", "reason" }
     get_language_id = function(_, ftype)
       return language_id_of[ftype]
     end
@@ -5477,6 +5506,24 @@ This server accepts configuration via the `settings` key.
   Whether inlay hints font size should be smaller than editor\'s font size\.
 
 - **`rust-analyzer.inlayHints.typeHints`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`rust-analyzer.joinLines.joinElseIf`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`rust-analyzer.joinLines.removeTrailingComma`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`rust-analyzer.joinLines.unwrapTrivialBlock`**: `boolean`
 
   Default: `true`
   
