@@ -2695,7 +2695,7 @@ This server accepts configuration via the `settings` key.
 
 - **`java.project.importOnFirstTimeStartup`**: `enum { "disabled", "interactive", "automatic" }`
 
-  Default: `"interactive"`
+  Default: `"automatic"`
   
   Specifies whether to import the Java projects\, when opening the folder in Hybrid mode for the first time\.
 
@@ -3746,7 +3746,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocamlinterface", "ocaml", "ocamllex", "menhir", "reason" }
+    filetypes = { "menhir", "reason", "ocamlinterface", "ocaml", "ocamllex" }
     get_language_id = function(_, ftype)
       return language_id_of[ftype]
     end
@@ -6398,6 +6398,12 @@ This server accepts configuration via the `settings` key.
   null
 
 - **`Lua.window.statusBar`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`Lua.workspace.checkThirdParty`**: `boolean`
 
   Default: `true`
   
