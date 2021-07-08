@@ -70,6 +70,7 @@ that config.
 - [rome](#rome)
 - [rust_analyzer](#rust_analyzer)
 - [scry](#scry)
+- [serve_d](#serve_d)
 - [solargraph](#solargraph)
 - [sorbet](#sorbet)
 - [sourcekit](#sourcekit)
@@ -5727,6 +5728,29 @@ require'lspconfig'.scry.setup{}
     cmd = { "scry" }
     filetypes = { "crystal" }
     root_dir = root_pattern('shard.yml', '.git') or dirname
+```
+
+
+## serve_d
+
+https://github.com/Pure-D/serve-d
+
+D language server
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig.serve_d.setup{}
+```
+
+**Commands and default values:**
+```lua
+Commands:
+
+Default values:
+
+cmd = { "serve-d" }
+filetypes = { "d" }
+root_dir = util.root_pattern("dub.json", "dub.sdl", ".git")
 ```
 
 
