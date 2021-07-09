@@ -167,10 +167,11 @@ M.path = (function()
       else
         return
       end
-      if not uv.fs_realpath(v) then
+      if v and uv.fs_realpath(v) then
+        return v, path
+      else
         return
       end
-      return v, path
     end
     return it, path, path
   end
