@@ -25,7 +25,7 @@ These features are not implemented in this repo, but in Neovim core. See `:help 
 
 * Install nvim-lspconfig like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
 ```vim
-:Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig'
 ```
 
 ## Quickstart
