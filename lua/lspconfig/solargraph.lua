@@ -13,6 +13,7 @@ configs.solargraph = {
         diagnostics = true,
       },
     },
+    init_options = { formatting = true },
     filetypes = { "ruby" },
     root_dir = util.root_pattern("Gemfile", ".git"),
   },
