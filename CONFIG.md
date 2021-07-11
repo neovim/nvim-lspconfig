@@ -3746,7 +3746,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocamlinterface", "ocaml", "ocamllex", "reason", "menhir" }
+    filetypes = { "ocaml", "ocamllex", "menhir", "reason", "ocamlinterface" }
     get_language_id = function(_, ftype)
       return language_id_of[ftype]
     end
@@ -3868,7 +3868,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  array with paths to add to perl library path\. This setting is used by the syntax checker and for the debugee and also for the LanguageServer itself\.
+  array with paths to add to perl library path\. This setting is used by the syntax checker and for the debuggee and also for the LanguageServer itself\.
 
 - **`perl.showLocalVars`**: `boolean`
 
