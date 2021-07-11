@@ -70,7 +70,7 @@ For a full list of servers, see [CONFIG.md](CONFIG.md). This document contains i
 ## Keybindings and completion
 
 nvim-lspconfig does not map keybindings or enable completion by default. Manual, triggered completion can be provided by neovim's built-in omnifunc. For autocompletion, a general purpose [autocompletion plugin](https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion) is required. The following example configuration provides suggested keymaps for the most commonly used language server functions, and manually triggered completion with omnifunc (\<c-x\>\<c-o\>).
-Note: **you must pass the defined on_attach as an argument to every setup {} call** and **the keybindings in on_attach only take effect after the language server has started (attached to the current buffer)**. 
+Note: **you must pass the defined `on_attach` as an argument to every `setup {}` call** and **the keybindings in `on_attach` only take effect after the language server has started (attached to the current buffer)**. 
 
 ```vim
 lua << EOF
