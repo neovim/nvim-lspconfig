@@ -3463,44 +3463,6 @@ require'lspconfig'.kotlin_language_server.setup{}
 ```
 
 
-## lean3ls
-
-https://github.com/leanprover/lean-client-js/tree/master/lean-language-server
-
-Lean installation instructions can be found
-[here](https://leanprover-community.github.io/get_started.html#regular-install).
-
-Once Lean is installed, you can install the Lean 3 language server by running
-```sh
-npm install -g lean-language-server
-```
-    
-
-
-**Snippet to enable the language server:**
-```lua
-require'lspconfig'.lean3ls.setup{}
-```
-
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "lean-language-server", "--stdio", "--", "-M", "4096", "-T", "100000" }
-    filetypes = { "lean3" }
-    on_new_config = function(config, root)
-          if not util.path.is_file(root .. "/leanpkg.toml") then
-            return
-          end
-          if not config.cmd_cwd then
-            config.cmd_cwd = root
-          end
-        end,
-    root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
-```
-
-
 ## leanls
 
 https://github.com/leanprover/lean4
@@ -3511,6 +3473,9 @@ Lean installation instructions can be found
 The Lean 4 language server is built-in with a Lean 4 install
 (and can be manually run with, e.g., `lean --server`).
     
+Note: that if you're using [lean.nvim](https://github.com/Julian/lean.nvim),
+that plugin fully handles the setup of the Lean language server,
+and you shouldn't set up `leanls` both with it and this plugin.
 
 
 **Snippet to enable the language server:**
@@ -3525,6 +3490,48 @@ require'lspconfig'.leanls.setup{}
   Default Values:
     cmd = { "lean", "--server" }
     filetypes = { "lean" }
+    on_new_config = function(config, root)
+          if not util.path.is_file(root .. "/leanpkg.toml") then
+            return
+          end
+          if not config.cmd_cwd then
+            config.cmd_cwd = root
+          end
+        end,
+    root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
+```
+
+
+## lean3ls
+
+https://github.com/leanprover/lean-client-js/tree/master/lean-language-server
+
+Lean installation instructions can be found
+[here](https://leanprover-community.github.io/get_started.html#regular-install).
+
+Once Lean is installed, you can install the Lean 3 language server by running
+```sh
+npm install -g lean-language-server
+```
+    
+Note: that if you're using [lean.nvim](https://github.com/Julian/lean.nvim),
+that plugin fully handles the setup of the Lean language server,
+and you shouldn't set up `lean3ls` both with it and this plugin. You still will
+need to install the language server.
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.lean3ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "lean-language-server", "--stdio", "--", "-M", "4096", "-T", "100000" }
+    filetypes = { "lean3" }
     on_new_config = function(config, root)
           if not util.path.is_file(root .. "/leanpkg.toml") then
             return
