@@ -13,9 +13,10 @@ configs.rome = {
       "typescriptreact",
     },
     root_dir = function(fname)
-      return util.find_package_json_ancestor(fname) or util.find_node_modules_ancestor(fname) or util.find_git_ancestor(
-        fname
-      ) or util.path.dirname(fname)
+      return util.find_package_json_ancestor(fname)
+        or util.find_node_modules_ancestor(fname)
+        or util.find_git_ancestor(fname)
+        or util.path.dirname(fname)
     end,
   },
   docs = {
