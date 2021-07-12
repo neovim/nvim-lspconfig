@@ -161,7 +161,7 @@ function configs.__newindex(t, config_name, config_def)
 
     function manager.try_add(bufnr)
       bufnr = bufnr or api.nvim_get_current_buf()
-      if vim.api.nvim_buf_get_option(bufnr, "filetype") == "nofile" then
+      if vim.api.nvim_buf_get_option(bufnr, "buftype") == "nofile" then
         return
       end
       local root_dir = get_root_dir(api.nvim_buf_get_name(bufnr), bufnr)
@@ -172,9 +172,9 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     function manager.try_add_wrapper(bufnr)
-      local buftype = vim.api.nvim_buf_get_option(bufnr, "filetype")
+      local buf_filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
       for _, filetype in ipairs(config.filetypes) do
-        if buftype == filetype then
+        if buf_filetype == filetype then
           manager.try_add(bufnr)
           return
         end
