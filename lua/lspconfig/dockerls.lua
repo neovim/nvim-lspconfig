@@ -1,14 +1,14 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "dockerls"
-local bin_name = "docker-langserver"
+local server_name = 'dockerls'
+local bin_name = 'docker-langserver'
 
 configs[server_name] = {
   default_config = {
-    cmd = { bin_name, "--stdio" },
-    filetypes = { "Dockerfile", "dockerfile" },
-    root_dir = util.root_pattern "Dockerfile",
+    cmd = { bin_name, '--stdio' },
+    filetypes = { 'Dockerfile', 'dockerfile' },
+    root_dir = util.root_pattern 'Dockerfile',
   },
   docs = {
     description = [[

@@ -1,15 +1,15 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.cmake = {
   default_config = {
-    cmd = { "cmake-language-server" },
-    filetypes = { "cmake" },
+    cmd = { 'cmake-language-server' },
+    filetypes = { 'cmake' },
     root_dir = function(fname)
-      return util.root_pattern(".git", "compile_commands.json", "build")(fname) or util.path.dirname(fname)
+      return util.root_pattern('.git', 'compile_commands.json', 'build')(fname) or util.path.dirname(fname)
     end,
     init_options = {
-      buildDirectory = "build",
+      buildDirectory = 'build',
     },
   },
   docs = {

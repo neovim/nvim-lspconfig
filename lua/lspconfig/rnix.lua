@@ -1,13 +1,13 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local name = "rnix"
+local name = 'rnix'
 
 configs[name] = {
 
   default_config = {
-    cmd = { "rnix-lsp" },
-    filetypes = { "nix" },
+    cmd = { 'rnix-lsp' },
+    filetypes = { 'nix' },
     root_dir = function(fname)
       return util.find_git_ancestor(fname) or vim.loop.os_homedir()
     end,

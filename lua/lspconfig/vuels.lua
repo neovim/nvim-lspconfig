@@ -1,14 +1,14 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "vuels"
-local bin_name = "vls"
+local server_name = 'vuels'
+local bin_name = 'vls'
 
 configs[server_name] = {
   default_config = {
     cmd = { bin_name },
-    filetypes = { "vue" },
-    root_dir = util.root_pattern("package.json", "vue.config.js"),
+    filetypes = { 'vue' },
+    root_dir = util.root_pattern('package.json', 'vue.config.js'),
     init_options = {
       config = {
         vetur = {
@@ -21,12 +21,12 @@ configs[server_name] = {
           completion = {
             autoImport = false,
             useScaffoldSnippets = false,
-            tagCasing = "kebab",
+            tagCasing = 'kebab',
           },
           format = {
             defaultFormatter = {
-              js = "none",
-              ts = "none",
+              js = 'none',
+              ts = 'none',
             },
             defaultFormatterOptions = {},
             scriptInitialIndent = false,
@@ -49,7 +49,7 @@ configs[server_name] = {
     },
   },
   docs = {
-    package_json = "https://raw.githubusercontent.com/vuejs/vetur/master/package.json",
+    package_json = 'https://raw.githubusercontent.com/vuejs/vetur/master/package.json',
     description = [[
 https://github.com/vuejs/vetur/tree/master/server
 
@@ -73,12 +73,12 @@ npm install -g vls
             completion = {
               autoImport = false,
               useScaffoldSnippets = false,
-              tagCasing = "kebab",
+              tagCasing = 'kebab',
             },
             format = {
               defaultFormatter = {
-                js = "none",
-                ts = "none",
+                js = 'none',
+                ts = 'none',
               },
               defaultFormatterOptions = {},
               scriptInitialIndent = false,

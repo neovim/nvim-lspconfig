@@ -1,5 +1,5 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 local lsp = vim.lsp
 
 local texlab_build_status = vim.tbl_add_reverse_lookup {
@@ -19,11 +19,11 @@ local texlab_forward_status = vim.tbl_add_reverse_lookup {
 local function buf_build(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local params = { textDocument = { uri = vim.uri_from_bufnr(bufnr) } }
-  lsp.buf_request(bufnr, "textDocument/build", params, function(err, _, result, _)
+  lsp.buf_request(bufnr, 'textDocument/build', params, function(err, _, result, _)
     if err then
       error(tostring(err))
     end
-    print("Build " .. texlab_build_status[result.status])
+    print('Build ' .. texlab_build_status[result.status])
   end)
 end
 
@@ -31,13 +31,13 @@ local function buf_search(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local params = {
     textDocument = { uri = vim.uri_from_bufnr(bufnr) },
-    position = { line = vim.fn.line "." - 1, character = vim.fn.col "." },
+    position = { line = vim.fn.line '.' - 1, character = vim.fn.col '.' },
   }
-  lsp.buf_request(bufnr, "textDocument/forwardSearch", params, function(err, _, result, _)
+  lsp.buf_request(bufnr, 'textDocument/forwardSearch', params, function(err, _, result, _)
     if err then
       error(tostring(err))
     end
-    print("Search " .. texlab_forward_status[result.status])
+    print('Search ' .. texlab_forward_status[result.status])
   end)
 end
 
@@ -55,8 +55,8 @@ end
 
 configs.texlab = {
   default_config = {
-    cmd = { "texlab" },
-    filetypes = { "tex", "bib" },
+    cmd = { 'texlab' },
+    filetypes = { 'tex', 'bib' },
     root_dir = function(filename)
       return util.path.dirname(filename)
     end,
@@ -64,12 +64,12 @@ configs.texlab = {
       texlab = {
         rootDirectory = nil,
         build = {
-          executable = "latexmk",
-          args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+          executable = 'latexmk',
+          args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' },
           onSave = false,
           forwardSearchAfter = false,
         },
-        auxDirectory = ".",
+        auxDirectory = '.',
         forwardSearch = {
           executable = nil,
           args = {},
@@ -79,12 +79,12 @@ configs.texlab = {
           onEdit = false,
         },
         diagnosticsDelay = 300,
-        latexFormatter = "latexindent",
+        latexFormatter = 'latexindent',
         latexindent = {
-          ["local"] = nil, -- local is a reserved keyword
+          ['local'] = nil, -- local is a reserved keyword
           modifyLineBreaks = false,
         },
-        bibtexFormatter = "texlab",
+        bibtexFormatter = 'texlab',
         formatterLineLength = 80,
       },
     },
@@ -94,13 +94,13 @@ configs.texlab = {
       function()
         buf_build(0)
       end,
-      description = "Build the current buffer",
+      description = 'Build the current buffer',
     },
     TexlabForward = {
       function()
         buf_search(0)
       end,
-      description = "Forward search from current position",
+      description = 'Forward search from current position',
     },
   },
   docs = {

@@ -17,7 +17,7 @@ M.default_config = {
 
 function M.validate_bufnr(bufnr)
   validate {
-    bufnr = { bufnr, "n" },
+    bufnr = { bufnr, 'n' },
   }
   return bufnr == 0 and api.nvim_get_current_buf() or bufnr
 end
@@ -48,12 +48,12 @@ end
 
 function M.create_module_commands(module_name, commands)
   for command_name, def in pairs(commands) do
-    local parts = { "command!" }
+    local parts = { 'command!' }
     -- Insert attributes.
     for k, v in pairs(def) do
-      if type(k) == "string" and type(v) == "boolean" and v then
-        table.insert(parts, "-" .. k)
-      elseif type(k) == "number" and type(v) == "string" and v:match "^%-" then
+      if type(k) == 'string' and type(v) == 'boolean' and v then
+        table.insert(parts, '-' .. k)
+      elseif type(k) == 'number' and type(v) == 'string' and v:match '^%-' then
         table.insert(parts, v)
       end
     end
@@ -63,12 +63,12 @@ function M.create_module_commands(module_name, commands)
       parts,
       string.format("lua require'lspconfig'[%q].commands[%q][1](<f-args>)", module_name, command_name)
     )
-    api.nvim_command(table.concat(parts, " "))
+    api.nvim_command(table.concat(parts, ' '))
   end
 end
 
 function M.has_bins(...)
-  for i = 1, select("#", ...) do
+  for i = 1, select('#', ...) do
     if 0 == fn.executable((select(i, ...))) then
       return false
     end
@@ -77,8 +77,8 @@ function M.has_bins(...)
 end
 
 M.script_path = function()
-  local str = debug.getinfo(2, "S").source:sub(2)
-  return str:match "(.*[/\\])"
+  local str = debug.getinfo(2, 'S').source:sub(2)
+  return str:match '(.*[/\\])'
 end
 
 -- Some path utilities
@@ -89,53 +89,53 @@ M.path = (function()
   end
 
   local function is_dir(filename)
-    return exists(filename) == "directory"
+    return exists(filename) == 'directory'
   end
 
   local function is_file(filename)
-    return exists(filename) == "file"
+    return exists(filename) == 'file'
   end
 
-  local is_windows = uv.os_uname().version:match "Windows"
-  local path_sep = is_windows and "\\" or "/"
+  local is_windows = uv.os_uname().version:match 'Windows'
+  local path_sep = is_windows and '\\' or '/'
 
   local is_fs_root
   if is_windows then
     is_fs_root = function(path)
-      return path:match "^%a:$"
+      return path:match '^%a:$'
     end
   else
     is_fs_root = function(path)
-      return path == "/"
+      return path == '/'
     end
   end
 
   local function is_absolute(filename)
     if is_windows then
-      return filename:match "^%a:" or filename:match "^\\\\"
+      return filename:match '^%a:' or filename:match '^\\\\'
     else
-      return filename:match "^/"
+      return filename:match '^/'
     end
   end
 
   local dirname
   do
-    local strip_dir_pat = path_sep .. "([^" .. path_sep .. "]+)$"
-    local strip_sep_pat = path_sep .. "$"
+    local strip_dir_pat = path_sep .. '([^' .. path_sep .. ']+)$'
+    local strip_sep_pat = path_sep .. '$'
     dirname = function(path)
       if not path or #path == 0 then
         return
       end
-      local result = path:gsub(strip_sep_pat, ""):gsub(strip_dir_pat, "")
+      local result = path:gsub(strip_sep_pat, ''):gsub(strip_dir_pat, '')
       if #result == 0 then
-        return "/"
+        return '/'
       end
       return result
     end
   end
 
   local function path_join(...)
-    local result = table.concat(vim.tbl_flatten { ... }, path_sep):gsub(path_sep .. "+", path_sep)
+    local result = table.concat(vim.tbl_flatten { ... }, path_sep):gsub(path_sep .. '+', path_sep)
     return result
   end
 
@@ -226,15 +226,15 @@ function M.server_per_root_dir_manager(_make_config)
       if not new_config.cmd then
         print(
           string.format(
-            "Error, cmd not defined for [%q]."
-              .. "You must manually define a cmd for the default config for this server."
-              .. "See server documentation.",
+            'Error, cmd not defined for [%q].'
+              .. 'You must manually define a cmd for the default config for this server.'
+              .. 'See server documentation.',
             new_config.name
           )
         )
         return
       elseif vim.fn.executable(new_config.cmd[1]) == 0 then
-        vim.notify(string.format("cmd [%q] is not executable.", new_config.cmd[1]), vim.log.levels.Error)
+        vim.notify(string.format('cmd [%q] is not executable.', new_config.cmd[1]), vim.log.levels.Error)
         return
       end
       new_config.on_exit = M.add_hook_before(new_config.on_exit, function()
@@ -261,7 +261,7 @@ function M.server_per_root_dir_manager(_make_config)
 end
 
 function M.search_ancestors(startpath, func)
-  validate { func = { func, "f" } }
+  validate { func = { func, 'f' } }
   if func(startpath) then
     return startpath
   end
@@ -296,21 +296,21 @@ function M.root_pattern(...)
 end
 function M.find_git_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
-    if M.path.is_dir(M.path.join(path, ".git")) then
+    if M.path.is_dir(M.path.join(path, '.git')) then
       return path
     end
   end)
 end
 function M.find_node_modules_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
-    if M.path.is_dir(M.path.join(path, "node_modules")) then
+    if M.path.is_dir(M.path.join(path, 'node_modules')) then
       return path
     end
   end)
 end
 function M.find_package_json_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
-    if M.path.is_file(M.path.join(path, "package.json")) then
+    if M.path.is_file(M.path.join(path, 'package.json')) then
       return path
     end
   end)

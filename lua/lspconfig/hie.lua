@@ -1,15 +1,15 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.hie = {
   default_config = {
-    cmd = { "hie-wrapper", "--lsp" },
-    filetypes = { "haskell" },
-    root_dir = util.root_pattern("stack.yaml", "package.yaml", ".git"),
+    cmd = { 'hie-wrapper', '--lsp' },
+    filetypes = { 'haskell' },
+    root_dir = util.root_pattern('stack.yaml', 'package.yaml', '.git'),
   },
 
   docs = {
-    package_json = "https://raw.githubusercontent.com/alanz/vscode-hie-server/master/package.json",
+    package_json = 'https://raw.githubusercontent.com/alanz/vscode-hie-server/master/package.json',
     description = [[
 https://github.com/haskell/haskell-ide-engine
 

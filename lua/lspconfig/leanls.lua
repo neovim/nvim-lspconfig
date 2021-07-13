@@ -1,15 +1,15 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.leanls = {
   default_config = {
-    cmd = { "lean", "--server" },
-    filetypes = { "lean" },
+    cmd = { 'lean', '--server' },
+    filetypes = { 'lean' },
     root_dir = function(fname)
-      return util.root_pattern "leanpkg.toml"(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+      return util.root_pattern 'leanpkg.toml'(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
     end,
     on_new_config = function(config, root)
-      if not util.path.is_file(root .. "/leanpkg.toml") then
+      if not util.path.is_file(root .. '/leanpkg.toml') then
         return
       end
       if not config.cmd_cwd then

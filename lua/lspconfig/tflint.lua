@@ -1,11 +1,11 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.tflint = {
   default_config = {
-    cmd = { "tflint", "--langserver" },
-    filetypes = { "terraform" },
-    root_dir = util.root_pattern(".terraform", ".git", ".tflint.hcl"),
+    cmd = { 'tflint', '--langserver' },
+    filetypes = { 'terraform' },
+    root_dir = util.root_pattern('.terraform', '.git', '.tflint.hcl'),
   },
   docs = {
     description = [[

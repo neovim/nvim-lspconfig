@@ -1,12 +1,12 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local name = "vls"
+local name = 'vls'
 
 configs[name] = {
   default_config = {
-    filetypes = { "vlang" },
-    root_dir = util.root_pattern("v.mod", ".git"),
+    filetypes = { 'vlang' },
+    root_dir = util.root_pattern('v.mod', '.git'),
   },
   docs = {
     description = [[

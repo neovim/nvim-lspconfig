@@ -1,13 +1,13 @@
-local lspconfig = require "lspconfig"
-local configs = require "lspconfig/configs"
+local lspconfig = require 'lspconfig'
+local configs = require 'lspconfig/configs'
 
-local name = "rescriptls"
+local name = 'rescriptls'
 
 configs[name] = {
   default_config = {
     cmd = {},
-    filetypes = { "rescript" },
-    root_dir = lspconfig.util.root_pattern("bsconfig.json", ".git"),
+    filetypes = { 'rescript' },
+    root_dir = lspconfig.util.root_pattern('bsconfig.json', '.git'),
     settings = {},
   },
   docs = {

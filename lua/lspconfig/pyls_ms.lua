@@ -1,12 +1,12 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local name = "pyls_ms"
+local name = 'pyls_ms'
 
 configs[name] = {
 
   default_config = {
-    filetypes = { "python" },
+    filetypes = { 'python' },
     root_dir = function(fname)
       return util.find_git_ancestor(fname) or vim.loop.os_homedir()
     end,
@@ -22,8 +22,8 @@ configs[name] = {
     init_options = {
       interpreter = {
         properties = {
-          InterpreterPath = "",
-          Version = "",
+          InterpreterPath = '',
+          Version = '',
         },
       },
       displayOptions = {},

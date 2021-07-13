@@ -1,11 +1,11 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.ghcide = {
   default_config = {
-    cmd = { "ghcide", "--lsp" },
-    filetypes = { "haskell", "lhaskell" },
-    root_dir = util.root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml"),
+    cmd = { 'ghcide', '--lsp' },
+    filetypes = { 'haskell', 'lhaskell' },
+    root_dir = util.root_pattern('stack.yaml', 'hie-bios', 'BUILD.bazel', 'cabal.config', 'package.yaml'),
   },
 
   docs = {

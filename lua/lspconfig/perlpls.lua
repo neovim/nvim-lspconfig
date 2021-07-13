@@ -1,21 +1,21 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.perlpls = {
   default_config = {
-    cmd = { "pls" },
+    cmd = { 'pls' },
     settings = {
       perl = {
         perlcritic = { enabled = false },
       },
     },
-    filetypes = { "perl" },
+    filetypes = { 'perl' },
     root_dir = function(filename)
-      return util.root_pattern ".git"(filename) or util.path.dirname(filename)
+      return util.root_pattern '.git'(filename) or util.path.dirname(filename)
     end,
   },
   docs = {
-    package_json = "https://raw.githubusercontent.com/FractalBoy/perl-language-server/master/client/package.json",
+    package_json = 'https://raw.githubusercontent.com/FractalBoy/perl-language-server/master/client/package.json',
     description = [[
 https://github.com/FractalBoy/perl-language-server
 https://metacpan.org/pod/PLS
