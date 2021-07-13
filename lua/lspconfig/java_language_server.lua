@@ -1,13 +1,13 @@
-local lspconfig = require "lspconfig"
-local configs = require "lspconfig/configs"
+local lspconfig = require 'lspconfig'
+local configs = require 'lspconfig/configs'
 
-local name = "java_language_server"
+local name = 'java_language_server'
 
 configs[name] = {
   default_config = {
     cmd = {},
-    filetypes = { "java" },
-    root_dir = lspconfig.util.root_pattern("build.gradle", "pom.xml", ".git"),
+    filetypes = { 'java' },
+    root_dir = lspconfig.util.root_pattern('build.gradle', 'pom.xml', '.git'),
     settings = {},
   },
   docs = {

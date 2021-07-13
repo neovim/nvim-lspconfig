@@ -1,12 +1,12 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.erlangls = {
   default_config = {
-    cmd = { "erlang_ls" },
-    filetypes = { "erlang" },
+    cmd = { 'erlang_ls' },
+    filetypes = { 'erlang' },
     root_dir = function(fname)
-      return util.root_pattern("rebar.config", "erlang.mk", ".git")(fname) or util.path.dirname(fname)
+      return util.root_pattern('rebar.config', 'erlang.mk', '.git')(fname) or util.path.dirname(fname)
     end,
   },
   docs = {

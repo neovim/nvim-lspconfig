@@ -1,9 +1,9 @@
-local configs = require "lspconfig/configs"
+local configs = require 'lspconfig/configs'
 
 configs.jedi_language_server = {
   default_config = {
-    cmd = { "jedi-language-server" },
-    filetypes = { "python" },
+    cmd = { 'jedi-language-server' },
+    filetypes = { 'python' },
     root_dir = function(fname)
       return vim.fn.getcwd()
     end,

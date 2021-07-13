@@ -1,12 +1,12 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.zls = {
   default_config = {
-    cmd = { "zls" },
-    filetypes = { "zig", "zir" },
+    cmd = { 'zls' },
+    filetypes = { 'zig', 'zir' },
     root_dir = function(fname)
-      return util.root_pattern("zls.json", ".git")(fname) or util.path.dirname(fname)
+      return util.root_pattern('zls.json', '.git')(fname) or util.path.dirname(fname)
     end,
   },
   docs = {

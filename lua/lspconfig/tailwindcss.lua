@@ -1,81 +1,81 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "tailwindcss"
-local bin_name = "tailwindcss-language-server"
+local server_name = 'tailwindcss'
+local bin_name = 'tailwindcss-language-server'
 
 configs[server_name] = {
   default_config = {
-    cmd = { bin_name, "--stdio" },
+    cmd = { bin_name, '--stdio' },
     -- filetypes copied and adjusted from tailwindcss-intellisense
     filetypes = {
       -- html
-      "aspnetcorerazor",
-      "astro",
-      "astro-markdown",
-      "blade",
-      "django-html",
-      "edge",
-      "eelixir", -- vim ft
-      "ejs",
-      "erb",
-      "eruby", -- vim ft
-      "gohtml",
-      "haml",
-      "handlebars",
-      "hbs",
-      "html",
+      'aspnetcorerazor',
+      'astro',
+      'astro-markdown',
+      'blade',
+      'django-html',
+      'edge',
+      'eelixir', -- vim ft
+      'ejs',
+      'erb',
+      'eruby', -- vim ft
+      'gohtml',
+      'haml',
+      'handlebars',
+      'hbs',
+      'html',
       -- 'HTML (Eex)',
       -- 'HTML (EEx)',
-      "html-eex",
-      "jade",
-      "leaf",
-      "liquid",
-      "markdown",
-      "mdx",
-      "mustache",
-      "njk",
-      "nunjucks",
-      "php",
-      "razor",
-      "slim",
-      "twig",
+      'html-eex',
+      'jade',
+      'leaf',
+      'liquid',
+      'markdown',
+      'mdx',
+      'mustache',
+      'njk',
+      'nunjucks',
+      'php',
+      'razor',
+      'slim',
+      'twig',
       -- css
-      "css",
-      "less",
-      "postcss",
-      "sass",
-      "scss",
-      "stylus",
-      "sugarss",
+      'css',
+      'less',
+      'postcss',
+      'sass',
+      'scss',
+      'stylus',
+      'sugarss',
       -- js
-      "javascript",
-      "javascriptreact",
-      "reason",
-      "rescript",
-      "typescript",
-      "typescriptreact",
+      'javascript',
+      'javascriptreact',
+      'reason',
+      'rescript',
+      'typescript',
+      'typescriptreact',
       -- mixed
-      "vue",
-      "svelte",
+      'vue',
+      'svelte',
     },
     init_options = {
       userLanguages = {
-        eelixir = "html-eex",
-        eruby = "erb",
+        eelixir = 'html-eex',
+        eruby = 'erb',
       },
     },
     settings = {
       tailwindCSS = {
         validate = true,
         lint = {
-          cssConflict = "warning",
-          invalidApply = "error",
-          invalidScreen = "error",
-          invalidVariant = "error",
-          invalidConfigPath = "error",
-          invalidTailwindDirective = "error",
-          recommendedVariantOrder = "warning",
+          cssConflict = 'warning',
+          invalidApply = 'error',
+          invalidScreen = 'error',
+          invalidVariant = 'error',
+          invalidConfigPath = 'error',
+          invalidTailwindDirective = 'error',
+          recommendedVariantOrder = 'warning',
         },
       },
     },
@@ -92,8 +92,8 @@ configs[server_name] = {
       end
     end,
     root_dir = function(fname)
-      return util.root_pattern("tailwind.config.js", "tailwind.config.ts")(fname)
-        or util.root_pattern("postcss.config.js", "postcss.config.ts")(fname)
+      return util.root_pattern('tailwind.config.js', 'tailwind.config.ts')(fname)
+        or util.root_pattern('postcss.config.js', 'postcss.config.ts')(fname)
         or util.find_package_json_ancestor(fname)
         or util.find_node_modules_ancestor(fname)
         or util.find_git_ancestor(fname)

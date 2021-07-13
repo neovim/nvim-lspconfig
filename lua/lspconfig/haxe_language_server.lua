@@ -1,18 +1,18 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.haxe_language_server = {
   default_config = {
-    cmd = { "haxe-language-server" },
-    filetypes = { "haxe" },
-    root_dir = util.root_pattern "*.hxml",
+    cmd = { 'haxe-language-server' },
+    filetypes = { 'haxe' },
+    root_dir = util.root_pattern '*.hxml',
     settings = {
       haxe = {
-        executable = "haxe",
+        executable = 'haxe',
       },
     },
     init_options = {
-      displayArguments = { "build.hxml" },
+      displayArguments = { 'build.hxml' },
     },
   },
   docs = {

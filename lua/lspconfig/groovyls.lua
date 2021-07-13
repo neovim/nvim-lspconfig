@@ -1,18 +1,18 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local name = "groovyls"
-local bin_name = "groovy-language-server-all.jar"
+local name = 'groovyls'
+local bin_name = 'groovy-language-server-all.jar'
 
 configs[name] = {
   default_config = {
     cmd = {
-      "java",
-      "-jar",
+      'java',
+      '-jar',
       bin_name,
     },
-    filetypes = { "groovy" },
-    root_dir = util.root_pattern ".git" or vim.loop.os_homedir(),
+    filetypes = { 'groovy' },
+    root_dir = util.root_pattern '.git' or vim.loop.os_homedir(),
   },
   docs = {
     description = [[
@@ -36,11 +36,11 @@ require'lspconfig'.groovyls.setup{
 ]],
     default_config = {
       cmd = {
-        "java",
-        "-jar",
+        'java',
+        '-jar',
         bin_name,
       },
-      filetypes = { "groovy" },
+      filetypes = { 'groovy' },
       root_dir = [[root_pattern(".git") or vim.loop.os_homedir()]],
     },
   },

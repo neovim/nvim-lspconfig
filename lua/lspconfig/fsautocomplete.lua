@@ -1,13 +1,13 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "fsautocomplete"
+local server_name = 'fsautocomplete'
 
 configs[server_name] = {
   default_config = {
-    cmd = { "dotnet", "fsautocomplete", "--background-service-enabled" },
-    root_dir = util.root_pattern("*.sln", "*.fsproj", ".git"),
-    filetypes = { "fsharp" },
+    cmd = { 'dotnet', 'fsautocomplete', '--background-service-enabled' },
+    root_dir = util.root_pattern('*.sln', '*.fsproj', '.git'),
+    filetypes = { 'fsharp' },
     init_options = {
       AutomaticWorkspaceInit = true,
     },

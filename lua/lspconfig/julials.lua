@@ -1,11 +1,11 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 local cmd = {
-  "julia",
-  "--startup-file=no",
-  "--history-file=no",
-  "-e",
+  'julia',
+  '--startup-file=no',
+  '--history-file=no',
+  '-e',
   [[
     using Pkg;
     Pkg.instantiate()
@@ -24,18 +24,18 @@ configs.julials = {
   default_config = {
     cmd = cmd,
     on_new_config = function(new_config, _)
-      local server_path = vim.fn.system "julia --startup-file=no -q -e 'print(Base.find_package(\"LanguageServer\"))'"
+      local server_path = vim.fn.system 'julia --startup-file=no -q -e \'print(Base.find_package("LanguageServer"))\''
       local new_cmd = vim.deepcopy(cmd)
-      table.insert(new_cmd, 2, "--project=" .. server_path:sub(0, -19))
+      table.insert(new_cmd, 2, '--project=' .. server_path:sub(0, -19))
       new_config.cmd = new_cmd
     end,
-    filetypes = { "julia" },
+    filetypes = { 'julia' },
     root_dir = function(fname)
       return util.find_git_ancestor(fname) or vim.fn.getcwd()
     end,
   },
   docs = {
-    package_json = "https://raw.githubusercontent.com/julia-vscode/julia-vscode/master/package.json",
+    package_json = 'https://raw.githubusercontent.com/julia-vscode/julia-vscode/master/package.json',
     description = [[
 https://github.com/julia-vscode/julia-vscode
 

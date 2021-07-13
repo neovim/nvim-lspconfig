@@ -1,22 +1,22 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "html"
-local bin_name = "vscode-html-language-server"
+local server_name = 'html'
+local bin_name = 'vscode-html-language-server'
 
-local root_pattern = util.root_pattern "package.json"
+local root_pattern = util.root_pattern 'package.json'
 
 configs[server_name] = {
   default_config = {
-    cmd = { bin_name, "--stdio" },
-    filetypes = { "html" },
+    cmd = { bin_name, '--stdio' },
+    filetypes = { 'html' },
     root_dir = function(fname)
       return root_pattern(fname) or vim.loop.os_homedir()
     end,
     settings = {},
     init_options = {
       embeddedLanguages = { css = true, javascript = true },
-      configurationSection = { "html", "css", "javascript" },
+      configurationSection = { 'html', 'css', 'javascript' },
     },
   },
   docs = {

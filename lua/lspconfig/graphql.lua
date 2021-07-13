@@ -1,14 +1,14 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "graphql"
-local bin_name = "graphql-lsp"
+local server_name = 'graphql'
+local bin_name = 'graphql-lsp'
 
 configs[server_name] = {
   default_config = {
-    cmd = { bin_name, "server", "-m", "stream" },
-    filetypes = { "graphql" },
-    root_dir = util.root_pattern(".git", ".graphqlrc"),
+    cmd = { bin_name, 'server', '-m', 'stream' },
+    filetypes = { 'graphql' },
+    root_dir = util.root_pattern('.git', '.graphqlrc'),
   },
 
   docs = {

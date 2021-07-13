@@ -1,14 +1,14 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "svelte"
-local bin_name = "svelteserver"
+local server_name = 'svelte'
+local bin_name = 'svelteserver'
 
 configs[server_name] = {
   default_config = {
-    cmd = { bin_name, "--stdio" },
-    filetypes = { "svelte" },
-    root_dir = util.root_pattern("package.json", ".git"),
+    cmd = { bin_name, '--stdio' },
+    filetypes = { 'svelte' },
+    root_dir = util.root_pattern('package.json', '.git'),
   },
   docs = {
     description = [[

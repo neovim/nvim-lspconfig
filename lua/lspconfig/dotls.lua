@@ -1,17 +1,17 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "dotls"
-local bin_name = "dot-language-server"
+local server_name = 'dotls'
+local bin_name = 'dot-language-server'
 
 local root_files = {
-  ".git",
+  '.git',
 }
 
 configs[server_name] = {
   default_config = {
-    cmd = { bin_name, "--stdio" },
-    filetypes = { "dot" },
+    cmd = { bin_name, '--stdio' },
+    filetypes = { 'dot' },
     root_dir = function(filename)
       return util.root_pattern(unpack(root_files))(filename) or util.path.dirname(filename)
     end,

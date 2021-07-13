@@ -1,4 +1,4 @@
-local util = require "lspconfig/util"
+local util = require 'lspconfig/util'
 local api, validate, lsp = vim.api, vim.validate, vim.lsp
 local tbl_extend = vim.tbl_extend
 
@@ -6,17 +6,17 @@ local configs = {}
 
 function configs.__newindex(t, config_name, config_def)
   validate {
-    name = { config_name, "s" },
-    default_config = { config_def.default_config, "t" },
-    on_new_config = { config_def.on_new_config, "f", true },
-    on_attach = { config_def.on_attach, "f", true },
-    commands = { config_def.commands, "t", true },
+    name = { config_name, 's' },
+    default_config = { config_def.default_config, 't' },
+    on_new_config = { config_def.on_new_config, 'f', true },
+    on_attach = { config_def.on_attach, 'f', true },
+    commands = { config_def.commands, 't', true },
   }
   if config_def.commands then
     for k, v in pairs(config_def.commands) do
       validate {
-        ["command.name"] = { k, "s" },
-        ["command.fn"] = { v[1], "f" },
+        ['command.name'] = { k, 's' },
+        ['command.fn'] = { v[1], 'f' },
       }
     end
   else
@@ -25,36 +25,36 @@ function configs.__newindex(t, config_name, config_def)
 
   local M = {}
 
-  local default_config = tbl_extend("keep", config_def.default_config, util.default_config)
+  local default_config = tbl_extend('keep', config_def.default_config, util.default_config)
 
   -- Force this part.
   default_config.name = config_name
 
   function M.setup(config)
     validate {
-      cmd = { config.cmd, "t", true },
-      root_dir = { config.root_dir, "f", default_config.root_dir ~= nil },
-      filetypes = { config.filetype, "t", true },
-      on_new_config = { config.on_new_config, "f", true },
-      on_attach = { config.on_attach, "f", true },
-      commands = { config.commands, "t", true },
+      cmd = { config.cmd, 't', true },
+      root_dir = { config.root_dir, 'f', default_config.root_dir ~= nil },
+      filetypes = { config.filetype, 't', true },
+      on_new_config = { config.on_new_config, 'f', true },
+      on_attach = { config.on_attach, 'f', true },
+      commands = { config.commands, 't', true },
     }
     if config.commands then
       for k, v in pairs(config.commands) do
         validate {
-          ["command.name"] = { k, "s" },
-          ["command.fn"] = { v[1], "f" },
+          ['command.name'] = { k, 's' },
+          ['command.fn'] = { v[1], 'f' },
         }
       end
     end
 
-    config = tbl_extend("keep", config, default_config)
+    config = tbl_extend('keep', config, default_config)
 
     local trigger
     if config.filetypes then
-      trigger = "FileType " .. table.concat(config.filetypes, ",")
+      trigger = 'FileType ' .. table.concat(config.filetypes, ',')
     else
-      trigger = "BufReadPost *"
+      trigger = 'BufReadPost *'
     end
     if not (config.autostart == false) then
       api.nvim_command(string.format("autocmd %s lua require'lspconfig'[%q].manager.try_add()", trigger, config.name))
@@ -65,13 +65,13 @@ function configs.__newindex(t, config_name, config_def)
     function M.autostart()
       local root_dir = get_root_dir(api.nvim_buf_get_name(0), api.nvim_get_current_buf())
       if not root_dir then
-        vim.notify(string.format("Autostart for %s failed: matching root directory not detected.", config_name))
+        vim.notify(string.format('Autostart for %s failed: matching root directory not detected.', config_name))
         return
       end
       api.nvim_command(
         string.format(
           "autocmd %s lua require'lspconfig'[%q].manager.try_add_wrapper()",
-          "BufReadPost " .. root_dir .. "/*",
+          'BufReadPost ' .. root_dir .. '/*',
           config.name
         )
       )
@@ -100,10 +100,10 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     local make_config = function(_root_dir)
-      local new_config = vim.tbl_deep_extend("keep", vim.empty_dict(), config)
-      new_config = vim.tbl_deep_extend("keep", new_config, default_config)
+      local new_config = vim.tbl_deep_extend('keep', vim.empty_dict(), config)
+      new_config = vim.tbl_deep_extend('keep', new_config, default_config)
       new_config.capabilities = new_config.capabilities or lsp.protocol.make_client_capabilities()
-      new_config.capabilities = vim.tbl_deep_extend("keep", new_config.capabilities, {
+      new_config.capabilities = vim.tbl_deep_extend('keep', new_config.capabilities, {
         workspace = {
           configuration = true,
         },
@@ -124,7 +124,7 @@ function configs.__newindex(t, config_name, config_def)
           if vim.tbl_isempty(settings) then
             settings = { [vim.type_idx] = vim.types.dictionary }
           end
-          return client.notify("workspace/didChangeConfiguration", {
+          return client.notify('workspace/didChangeConfiguration', {
             settings = settings,
           })
         end
@@ -161,7 +161,7 @@ function configs.__newindex(t, config_name, config_def)
 
     function manager.try_add(bufnr)
       bufnr = bufnr or api.nvim_get_current_buf()
-      if vim.api.nvim_buf_get_option(bufnr, "buftype") == "nofile" then
+      if vim.api.nvim_buf_get_option(bufnr, 'buftype') == 'nofile' then
         return
       end
       local root_dir = get_root_dir(api.nvim_buf_get_name(bufnr), bufnr)
@@ -172,7 +172,7 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     function manager.try_add_wrapper(bufnr)
-      local buf_filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
+      local buf_filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
       for _, filetype in ipairs(config.filetypes) do
         if buf_filetype == filetype then
           manager.try_add(bufnr)
@@ -199,7 +199,7 @@ function configs.__newindex(t, config_name, config_def)
       client.config._on_attach(client, bufnr)
     end
     if client.config.commands and not vim.tbl_isempty(client.config.commands) then
-      M.commands = vim.tbl_deep_extend("force", M.commands, client.config.commands)
+      M.commands = vim.tbl_deep_extend('force', M.commands, client.config.commands)
     end
     if not M.commands_created and not vim.tbl_isempty(M.commands) then
       -- Create the module commands

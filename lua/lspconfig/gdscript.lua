@@ -1,11 +1,11 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.gdscript = {
   default_config = {
-    cmd = { "nc", "localhost", "6008" },
-    filetypes = { "gd", "gdscript", "gdscript3" },
-    root_dir = util.root_pattern("project.godot", ".git"),
+    cmd = { 'nc', 'localhost', '6008' },
+    filetypes = { 'gd', 'gdscript', 'gdscript3' },
+    root_dir = util.root_pattern('project.godot', '.git'),
   },
   docs = {
     description = [[

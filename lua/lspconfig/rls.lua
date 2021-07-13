@@ -1,11 +1,11 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.rls = {
   default_config = {
-    cmd = { "rls" },
-    filetypes = { "rust" },
-    root_dir = util.root_pattern "Cargo.toml",
+    cmd = { 'rls' },
+    filetypes = { 'rust' },
+    root_dir = util.root_pattern 'Cargo.toml',
   },
   docs = {
     description = [[

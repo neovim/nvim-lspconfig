@@ -1,11 +1,11 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
-local server_name = "omnisharp"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
+local server_name = 'omnisharp'
 
 configs[server_name] = {
   default_config = {
-    filetypes = { "cs", "vb" },
-    root_dir = util.root_pattern("*.csproj", "*.sln"),
+    filetypes = { 'cs', 'vb' },
+    root_dir = util.root_pattern('*.csproj', '*.sln'),
     init_options = {},
   },
   -- on_new_config = function(new_config) end;

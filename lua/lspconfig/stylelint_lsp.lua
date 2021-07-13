@@ -1,26 +1,26 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.stylelint_lsp = {
   default_config = {
-    cmd = { "stylelint-lsp", "--stdio" },
+    cmd = { 'stylelint-lsp', '--stdio' },
     filetypes = {
-      "css",
-      "less",
-      "scss",
-      "sugarss",
-      "vue",
-      "wxss",
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
+      'css',
+      'less',
+      'scss',
+      'sugarss',
+      'vue',
+      'wxss',
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
     },
-    root_dir = util.root_pattern(".stylelintrc", "package.json"),
+    root_dir = util.root_pattern('.stylelintrc', 'package.json'),
     settings = {},
   },
   docs = {
-    package_json = "https://raw.githubusercontent.com/bmatcuk/coc-stylelintplus/master/package.json",
+    package_json = 'https://raw.githubusercontent.com/bmatcuk/coc-stylelintplus/master/package.json',
     description = [[
 https://github.com/bmatcuk/stylelint-lsp
 

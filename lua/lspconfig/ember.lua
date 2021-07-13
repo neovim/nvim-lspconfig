@@ -1,14 +1,14 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "ember"
-local bin_name = "ember-language-server"
+local server_name = 'ember'
+local bin_name = 'ember-language-server'
 
 configs[server_name] = {
   default_config = {
-    cmd = { bin_name, "--stdio" },
-    filetypes = { "handlebars", "typescript", "javascript" },
-    root_dir = util.root_pattern("ember-cli-build.js", ".git"),
+    cmd = { bin_name, '--stdio' },
+    filetypes = { 'handlebars', 'typescript', 'javascript' },
+    root_dir = util.root_pattern('ember-cli-build.js', '.git'),
   },
   docs = {
     description = [[

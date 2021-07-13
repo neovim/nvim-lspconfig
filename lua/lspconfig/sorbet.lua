@@ -1,14 +1,14 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "sorbet"
-local bin_name = "srb"
+local server_name = 'sorbet'
+local bin_name = 'srb'
 
 configs[server_name] = {
   default_config = {
-    cmd = { bin_name, "tc", "--lsp" },
-    filetypes = { "ruby" },
-    root_dir = util.root_pattern("Gemfile", ".git"),
+    cmd = { bin_name, 'tc', '--lsp' },
+    filetypes = { 'ruby' },
+    root_dir = util.root_pattern('Gemfile', '.git'),
   },
   docs = {
     description = [[

@@ -1,4 +1,4 @@
-local helpers = require "test.functional.helpers"(after_each)
+local helpers = require 'test.functional.helpers'(after_each)
 local clear = helpers.clear
 local exec_lua = helpers.exec_lua
 local eq = helpers.eq
@@ -15,11 +15,11 @@ before_each(function()
   )
 end)
 
-describe("lspconfig", function()
-  describe("util", function()
-    describe("path", function()
-      describe("exists", function()
-        it("is present directory", function()
+describe('lspconfig', function()
+  describe('util', function()
+    describe('path', function()
+      describe('exists', function()
+        it('is present directory', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
@@ -28,7 +28,7 @@ describe("lspconfig", function()
           ]])
         end)
 
-        it("is not present directory", function()
+        it('is not present directory', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
@@ -37,7 +37,7 @@ describe("lspconfig", function()
           ]])
         end)
 
-        it("is present file", function()
+        it('is present file', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
@@ -49,7 +49,7 @@ describe("lspconfig", function()
           ]])
         end)
 
-        it("is not present file", function()
+        it('is not present file', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
@@ -62,8 +62,8 @@ describe("lspconfig", function()
         end)
       end)
 
-      describe("is_dir", function()
-        it("is directory", function()
+      describe('is_dir', function()
+        it('is directory', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
@@ -72,7 +72,7 @@ describe("lspconfig", function()
           ]])
         end)
 
-        it("is not present directory", function()
+        it('is not present directory', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
@@ -81,7 +81,7 @@ describe("lspconfig", function()
           ]])
         end)
 
-        it("is file", function()
+        it('is file', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
@@ -94,8 +94,8 @@ describe("lspconfig", function()
         end)
       end)
 
-      describe("is_file", function()
-        it("is file", function()
+      describe('is_file', function()
+        it('is file', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
@@ -107,7 +107,7 @@ describe("lspconfig", function()
           ]])
         end)
 
-        it("is not present file", function()
+        it('is not present file', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
@@ -119,7 +119,7 @@ describe("lspconfig", function()
           ]])
         end)
 
-        it("is directory", function()
+        it('is directory', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
@@ -129,15 +129,15 @@ describe("lspconfig", function()
         end)
       end)
 
-      describe("is_absolute", function()
-        it("is absolute", function()
+      describe('is_absolute', function()
+        it('is absolute', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
             return not (lspconfig.util.path.is_absolute("/foo/bar") == nil)
           ]])
         end)
 
-        it("is not absolute", function()
+        it('is not absolute', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
             return lspconfig.util.path.is_absolute("foo/bar") == nil
@@ -150,21 +150,21 @@ describe("lspconfig", function()
         end)
       end)
 
-      describe("join", function()
-        it("", function()
+      describe('join', function()
+        it('', function()
           eq(
             exec_lua [[
             local lspconfig = require("lspconfig")
             return lspconfig.util.path.join("foo", "bar", "baz")
           ]],
-            "foo/bar/baz"
+            'foo/bar/baz'
           )
         end)
       end)
     end)
 
-    describe("root_pattern", function()
-      it("resolves to a_marker.txt", function()
+    describe('root_pattern', function()
+      it('resolves to a_marker.txt', function()
         ok(exec_lua [[
           local lspconfig = require("lspconfig")
 
@@ -175,7 +175,7 @@ describe("lspconfig", function()
         ]])
       end)
 
-      it("resolves to root_marker.txt", function()
+      it('resolves to root_marker.txt', function()
         ok(exec_lua [[
           local lspconfig = require("lspconfig")
 

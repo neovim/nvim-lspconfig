@@ -1,14 +1,14 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "ocamlls"
-local bin_name = "ocaml-language-server"
+local server_name = 'ocamlls'
+local bin_name = 'ocaml-language-server'
 
 configs[server_name] = {
   default_config = {
-    cmd = { bin_name, "--stdio" },
-    filetypes = { "ocaml", "reason" },
-    root_dir = util.root_pattern("*.opam", "esy.json", "package.json"),
+    cmd = { bin_name, '--stdio' },
+    filetypes = { 'ocaml', 'reason' },
+    root_dir = util.root_pattern('*.opam', 'esy.json', 'package.json'),
   },
   docs = {
     description = [[

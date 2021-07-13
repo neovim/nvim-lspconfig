@@ -1,12 +1,12 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.ccls = {
   default_config = {
-    cmd = { "ccls" },
-    filetypes = { "c", "cpp", "objc", "objcpp" },
+    cmd = { 'ccls' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
     root_dir = function(fname)
-      return util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")(fname) or util.path.dirname(fname)
+      return util.root_pattern('compile_commands.json', 'compile_flags.txt', '.git')(fname) or util.path.dirname(fname)
     end,
   },
   docs = {

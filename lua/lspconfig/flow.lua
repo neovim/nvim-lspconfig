@@ -1,14 +1,14 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.flow = {
   default_config = {
-    cmd = { "npx", "--no-install", "flow", "lsp" },
-    filetypes = { "javascript", "javascriptreact", "javascript.jsx" },
-    root_dir = util.root_pattern ".flowconfig",
+    cmd = { 'npx', '--no-install', 'flow', 'lsp' },
+    filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx' },
+    root_dir = util.root_pattern '.flowconfig',
   },
   docs = {
-    package_json = "https://raw.githubusercontent.com/flowtype/flow-for-vscode/master/package.json",
+    package_json = 'https://raw.githubusercontent.com/flowtype/flow-for-vscode/master/package.json',
     description = [[
 https://flow.org/
 https://github.com/facebook/flow

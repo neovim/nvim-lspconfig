@@ -1,12 +1,12 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.sqls = {
   default_config = {
-    cmd = { "sqls" },
-    filetypes = { "sql", "mysql" },
+    cmd = { 'sqls' },
+    filetypes = { 'sql', 'mysql' },
     root_dir = function(fname)
-      return util.root_pattern "config.yml"(fname) or util.path.dirname(fname)
+      return util.root_pattern 'config.yml'(fname) or util.path.dirname(fname)
     end,
     settings = {},
   },

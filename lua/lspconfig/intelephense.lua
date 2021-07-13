@@ -1,16 +1,16 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "intelephense"
-local bin_name = "intelephense"
+local server_name = 'intelephense'
+local bin_name = 'intelephense'
 
 configs[server_name] = {
   default_config = {
-    cmd = { bin_name, "--stdio" },
-    filetypes = { "php" },
+    cmd = { bin_name, '--stdio' },
+    filetypes = { 'php' },
     root_dir = function(pattern)
       local cwd = vim.loop.cwd()
-      local root = util.root_pattern("composer.json", ".git")(pattern)
+      local root = util.root_pattern('composer.json', '.git')(pattern)
 
       -- prefer cwd if root is a descendant
       return util.path.is_descendant(cwd, root) and cwd or root

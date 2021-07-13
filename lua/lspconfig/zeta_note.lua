@@ -1,15 +1,15 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "zeta_note"
+local server_name = 'zeta_note'
 
 configs[server_name] = {
   default_config = {
-    filetypes = { "markdown" },
-    root_dir = util.root_pattern ".zeta.toml",
+    filetypes = { 'markdown' },
+    root_dir = util.root_pattern '.zeta.toml',
   },
   docs = {
-    package_json = "https://raw.githubusercontent.com/artempyanykh/zeta-note-vscode/main/package.json",
+    package_json = 'https://raw.githubusercontent.com/artempyanykh/zeta-note-vscode/main/package.json',
     description = [[
 https://github.com/artempyanykh/zeta-note
 

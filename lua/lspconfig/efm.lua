@@ -1,14 +1,14 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
-local server_name = "efm"
-local bin_name = "efm-langserver"
+local server_name = 'efm'
+local bin_name = 'efm-langserver'
 
 configs[server_name] = {
   default_config = {
     cmd = { bin_name },
     root_dir = function(fname)
-      return util.root_pattern ".git"(fname) or util.path.dirname(fname)
+      return util.root_pattern '.git'(fname) or util.path.dirname(fname)
     end,
   },
 

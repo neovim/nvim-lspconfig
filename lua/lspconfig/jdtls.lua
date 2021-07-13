@@ -1,28 +1,28 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
-local handlers = require "vim.lsp.handlers"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
+local handlers = require 'vim.lsp.handlers'
 local path = util.path
 
-local server_name = "jdtls"
+local server_name = 'jdtls'
 
 local cmd = {
-  util.path.join(tostring(vim.fn.getenv "JAVA_HOME"), "/bin/java"),
-  "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-  "-Dosgi.bundles.defaultStartLevel=4",
-  "-Declipse.product=org.eclipse.jdt.ls.core.product",
-  "-Dlog.protocol=true",
-  "-Dlog.level=ALL",
-  "-Xms1g",
-  "-Xmx2G",
-  "-jar",
-  tostring(vim.fn.getenv "JAR"),
-  "-configuration",
-  tostring(vim.fn.getenv "JDTLS_CONFIG"),
-  "-data",
-  tostring(vim.fn.getenv "WORKSPACE"),
-  "--add-modules=ALL-SYSTEM",
-  "--add-opens java.base/java.util=ALL-UNNAMED",
-  "--add-opens java.base/java.lang=ALL-UNNAMED",
+  util.path.join(tostring(vim.fn.getenv 'JAVA_HOME'), '/bin/java'),
+  '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+  '-Dosgi.bundles.defaultStartLevel=4',
+  '-Declipse.product=org.eclipse.jdt.ls.core.product',
+  '-Dlog.protocol=true',
+  '-Dlog.level=ALL',
+  '-Xms1g',
+  '-Xmx2G',
+  '-jar',
+  tostring(vim.fn.getenv 'JAR'),
+  '-configuration',
+  tostring(vim.fn.getenv 'JDTLS_CONFIG'),
+  '-data',
+  tostring(vim.fn.getenv 'WORKSPACE'),
+  '--add-modules=ALL-SYSTEM',
+  '--add-opens java.base/java.util=ALL-UNNAMED',
+  '--add-opens java.base/java.lang=ALL-UNNAMED',
 }
 
 --- The presence of one of these files indicates a root directory.
@@ -33,13 +33,13 @@ local cmd = {
 local root_files = {
   -- Single-module projects
   {
-    "build.xml", -- Ant
-    "pom.xml", -- Maven
-    "settings.gradle", -- Gradle
-    "settings.gradle.kts", -- Gradle
+    'build.xml', -- Ant
+    'pom.xml', -- Maven
+    'settings.gradle', -- Gradle
+    'settings.gradle.kts', -- Gradle
   },
   -- Multi-module projects
-  { "build.gradle", "build.gradle.kts" },
+  { 'build.gradle', 'build.gradle.kts' },
 }
 
 --- Callback function for the `language/status` notification.
@@ -49,9 +49,9 @@ local root_files = {
 -- starting up.
 local function on_language_status(_, _, result)
   local command = vim.api.nvim_command
-  command "echohl ModeMsg"
+  command 'echohl ModeMsg'
   command(string.format('echo "%s"', result.message))
-  command "echohl None"
+  command 'echohl None'
 end
 
 -- If the text document version is 0, set it to nil instead so that Neovim
@@ -73,10 +73,10 @@ configs[server_name] = {
   default_config = {
     cmd = cmd,
     cmd_env = {
-      JAR = vim.fn.getenv "JAR",
-      GRADLE_HOME = vim.fn.getenv "GRADLE_HOME",
+      JAR = vim.fn.getenv 'JAR',
+      GRADLE_HOME = vim.fn.getenv 'GRADLE_HOME',
     },
-    filetypes = { "java" },
+    filetypes = { 'java' },
     root_dir = function(fname)
       for _, patterns in ipairs(root_files) do
         local root = util.root_pattern(unpack(patterns))(fname)
@@ -87,7 +87,7 @@ configs[server_name] = {
       return vim.fn.getcwd()
     end,
     init_options = {
-      workspace = path.join { vim.loop.os_homedir(), "workspace" },
+      workspace = path.join { vim.loop.os_homedir(), 'workspace' },
       jvm_args = {},
       os_config = nil,
     },
@@ -99,35 +99,35 @@ configs[server_name] = {
       -- CodeAction in org.eclipse.lsp4j -> https://github.com/eclipse/lsp4j/blob/master/org.eclipse.lsp4j/src/main/xtend-gen/org/eclipse/lsp4j/CodeAction.java
       -- Command in LSP -> https://microsoft.github.io/language-server-protocol/specification#command
       -- CodeAction in LSP -> https://microsoft.github.io/language-server-protocol/specification#textDocument_codeAction
-      ["textDocument/codeAction"] = function(a, b, actions)
+      ['textDocument/codeAction'] = function(a, b, actions)
         for _, action in ipairs(actions) do
           -- TODO: (steelsojka) Handle more than one edit?
           -- if command is string, then 'ation' is Command in java format,
           -- then we add 'edit' property to change to CodeAction in LSP and 'edit' will be executed first
-          if action.command == "java.apply.workspaceEdit" then
+          if action.command == 'java.apply.workspaceEdit' then
             action.edit = fix_zero_version(action.edit or action.arguments[1])
             -- if command is table, then 'action' is CodeAction in java format
             -- then we add 'edit' property to change to CodeAction in LSP and 'edit' will be executed first
-          elseif type(action.command) == "table" and action.command.command == "java.apply.workspaceEdit" then
+          elseif type(action.command) == 'table' and action.command.command == 'java.apply.workspaceEdit' then
             action.edit = fix_zero_version(action.edit or action.command.arguments[1])
           end
         end
-        handlers["textDocument/codeAction"](a, b, actions)
+        handlers['textDocument/codeAction'](a, b, actions)
       end,
 
-      ["textDocument/rename"] = function(a, b, workspace_edit)
-        handlers["textDocument/rename"](a, b, fix_zero_version(workspace_edit))
+      ['textDocument/rename'] = function(a, b, workspace_edit)
+        handlers['textDocument/rename'](a, b, fix_zero_version(workspace_edit))
       end,
 
-      ["workspace/applyEdit"] = function(a, b, workspace_edit)
-        handlers["workspace/applyEdit"](a, b, fix_zero_version(workspace_edit))
+      ['workspace/applyEdit'] = function(a, b, workspace_edit)
+        handlers['workspace/applyEdit'](a, b, fix_zero_version(workspace_edit))
       end,
 
-      ["language/status"] = vim.schedule_wrap(on_language_status),
+      ['language/status'] = vim.schedule_wrap(on_language_status),
     },
   },
   docs = {
-    package_json = "https://raw.githubusercontent.com/redhat-developer/vscode-java/master/package.json",
+    package_json = 'https://raw.githubusercontent.com/redhat-developer/vscode-java/master/package.json',
     description = [[
 
 https://projects.eclipse.org/projects/eclipse.jdt.ls
