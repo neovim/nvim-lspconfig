@@ -371,10 +371,10 @@ require'lspconfig'.codeqlls.setup{}
   
   Default Values:
     before_init = function(initialize_params)
-          initialize_params["workspaceFolders"] = {
+          initialize_params['workspaceFolders'] = {
             {
-              name = "workspace",
-              uri = initialize_params["rootUri"],
+              name = 'workspace',
+              uri = initialize_params['rootUri'],
             },
           }
         end,
@@ -2249,9 +2249,9 @@ require'lspconfig'.hls.setup{}
     lspinfo = function(cfg)
           -- return "specific"
           if cfg.settings.languageServerHaskell.logFile or false then
-            return "logfile: " .. cfg.settings.languageServerHaskell.logFile
+            return 'logfile: ' .. cfg.settings.languageServerHaskell.logFile
           end
-          return ""
+          return ''
         end,
     root_dir = root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")
     settings = {
@@ -3316,9 +3316,9 @@ require'lspconfig'.julials.setup{}
     cmd = { "julia", "--startup-file=no", "--history-file=no", "-e", '    using Pkg;\n    Pkg.instantiate()\n    using LanguageServer; using SymbolServer;\n    depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n    project_path = dirname(something(Base.current_project(pwd()), Base.load_path_expand(LOAD_PATH[2])))\n    # Make sure that we only load packages from this environment specifically.\n    @info "Running language server" env=Base.load_path()[1] pwd() project_path depot_path\n    server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);\n    server.runlinter = true;\n    run(server);\n  ' }
     filetypes = { "julia" }
     on_new_config = function(new_config, _)
-          local server_path = vim.fn.system "julia --startup-file=no -q -e 'print(Base.find_package(\"LanguageServer\"))'"
+          local server_path = vim.fn.system 'julia --startup-file=no -q -e \'print(Base.find_package("LanguageServer"))\''
           local new_cmd = vim.deepcopy(cmd)
-          table.insert(new_cmd, 2, "--project=" .. server_path:sub(0, -19))
+          table.insert(new_cmd, 2, '--project=' .. server_path:sub(0, -19))
           new_config.cmd = new_cmd
         end,
     root_dir = function(fname)
@@ -3490,7 +3490,7 @@ require'lspconfig'.lean3ls.setup{}
     cmd = { "lean-language-server", "--stdio", "--", "-M", "4096", "-T", "100000" }
     filetypes = { "lean3" }
     on_new_config = function(config, root)
-          if not util.path.is_file(root .. "/leanpkg.toml") then
+          if not util.path.is_file(root .. '/leanpkg.toml') then
             return
           end
           if not config.cmd_cwd then
@@ -3526,7 +3526,7 @@ require'lspconfig'.leanls.setup{}
     cmd = { "lean", "--server" }
     filetypes = { "lean" }
     on_new_config = function(config, root)
-          if not util.path.is_file(root .. "/leanpkg.toml") then
+          if not util.path.is_file(root .. '/leanpkg.toml') then
             return
           end
           if not config.cmd_cwd then
@@ -3746,7 +3746,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocamlinterface", "ocaml", "ocamllex", "reason", "menhir" }
+    filetypes = { "menhir", "ocamlinterface", "ocaml", "ocamllex", "reason" }
     get_language_id = function(_, ftype)
       return language_id_of[ftype]
     end
@@ -4734,11 +4734,11 @@ require'lspconfig'.pylsp.setup{}
     filetypes = { "python" }
     root_dir = function(fname)
           local root_files = {
-            "pyproject.toml",
-            "setup.py",
-            "setup.cfg",
-            "requirements.txt",
-            "Pipfile",
+            'pyproject.toml',
+            'setup.py',
+            'setup.cfg',
+            'requirements.txt',
+            'Pipfile',
           }
           return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
         end,
@@ -6019,7 +6019,7 @@ require'lspconfig'.sqls.setup{}
     cmd = { "sqls" }
     filetypes = { "sql", "mysql" }
     root_dir = function(fname)
-          return util.root_pattern "config.yml"(fname) or util.path.dirname(fname)
+          return util.root_pattern 'config.yml'(fname) or util.path.dirname(fname)
         end,
     settings = {}
 ```
