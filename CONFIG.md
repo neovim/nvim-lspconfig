@@ -3746,7 +3746,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocamlinterface", "ocamllex", "reason", "ocaml", "menhir" }
+    filetypes = { "ocamlinterface", "ocaml", "ocamllex", "reason", "menhir" }
     get_language_id = function(_, ftype)
       return language_id_of[ftype]
     end
