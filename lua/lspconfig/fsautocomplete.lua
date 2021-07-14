@@ -20,7 +20,7 @@ Language Server for F# provided by FsAutoComplete (FSAC).
 
 FsAutoComplete requires the [dotnet-sdk](https://dotnet.microsoft.com/download) to be installed.
 
-The prefered way to install FsAutoComplete is with `dotnet tool install --global fsautocomplete`.
+The preferred way to install FsAutoComplete is with `dotnet tool install --global fsautocomplete`.
 
 Instructions to compile from source are found on the main [repository](https://github.com/fsharp/FsAutoComplete).
 
