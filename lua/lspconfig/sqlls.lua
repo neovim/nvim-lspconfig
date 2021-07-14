@@ -17,7 +17,7 @@ configs[server_name] = {
     description = [[
 https://github.com/joe-re/sql-language-server
 
-`cmd` value is **not set** by default. The `cmd` value can be overriden in the `setup` table;
+`cmd` value is **not set** by default. The `cmd` value can be overridden in the `setup` table;
 
 ```lua
 require'lspconfig'.sqlls.setup{

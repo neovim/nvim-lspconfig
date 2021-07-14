@@ -1774,7 +1774,7 @@ Language Server for F# provided by FsAutoComplete (FSAC).
 
 FsAutoComplete requires the [dotnet-sdk](https://dotnet.microsoft.com/download) to be installed.
 
-The prefered way to install FsAutoComplete is with `dotnet tool install --global fsautocomplete`.
+The preferred way to install FsAutoComplete is with `dotnet tool install --global fsautocomplete`.
 
 Instructions to compile from source are found on the main [repository](https://github.com/fsharp/FsAutoComplete).
 
@@ -3333,7 +3333,7 @@ require'lspconfig'.julials.setup{}
     released afterwards. Maintaining is not done by the original author,
     but by fwcd.
 
-    It is builded via gradle and developed on github.
+    It is built via gradle and developed on github.
     Source and additional description:
     https://github.com/fwcd/kotlin-language-server
     
@@ -3356,7 +3356,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `250`
   
-  \[DEPRECATED\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possibile stability issues\.
+  \[DEPRECATED\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possible stability issues\.
 
 - **`kotlin.debugAdapter.enabled`**: `boolean`
 
@@ -3400,7 +3400,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `5005`
   
-  \[DEBUG\] If transport is stdio this enables you to attach to the running langugage server with a debugger\. This is ONLY useful if you need to debug the language server ITSELF\.
+  \[DEBUG\] If transport is stdio this enables you to attach to the running language server with a debugger\. This is ONLY useful if you need to debug the language server ITSELF\.
 
 - **`kotlin.languageServer.enabled`**: `boolean`
 
@@ -3430,7 +3430,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `250`
   
-  \[DEBUG\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possibile stability issues\.
+  \[DEBUG\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possible stability issues\.
 
 - **`kotlin.snippetsEnabled`**: `boolean`
 
@@ -5959,7 +5959,7 @@ require'lspconfig'.sourcekit.setup{}
 
 https://github.com/joe-re/sql-language-server
 
-`cmd` value is **not set** by default. The `cmd` value can be overriden in the `setup` table;
+`cmd` value is **not set** by default. The `cmd` value can be overridden in the `setup` table;
 
 ```lua
 require'lspconfig'.sqlls.setup{
@@ -7219,7 +7219,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"preserve"`
   
-  Always\: wrap prose if it exeeds the print width\, Never\: never wrap the prose\, Preserve\: wrap prose as\-is
+  Always\: wrap prose if it exceeds the print width\, Never\: never wrap the prose\, Preserve\: wrap prose as\-is
 
 - **`yaml.format.singleQuote`**: `boolean`
 

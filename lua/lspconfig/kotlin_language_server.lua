@@ -46,7 +46,7 @@ configs.kotlin_language_server = {
     released afterwards. Maintaining is not done by the original author,
     but by fwcd.
 
-    It is builded via gradle and developed on github.
+    It is built via gradle and developed on github.
     Source and additional description:
     https://github.com/fwcd/kotlin-language-server
     ]],
