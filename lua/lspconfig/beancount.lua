@@ -14,7 +14,7 @@ configs[server_name] = {
     init_options = {
       -- this is the path to the beancout journal file
       journalFile = '',
-      -- this is the path to the pyton binary with beancount installed
+      -- this is the path to the python binary with beancount installed
       pythonPath = 'python3',
     },
   },
