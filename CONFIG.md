@@ -1774,7 +1774,7 @@ Language Server for F# provided by FsAutoComplete (FSAC).
 
 FsAutoComplete requires the [dotnet-sdk](https://dotnet.microsoft.com/download) to be installed.
 
-The prefered way to install FsAutoComplete is with `dotnet tool install --global fsautocomplete`.
+The preferred way to install FsAutoComplete is with `dotnet tool install --global fsautocomplete`.
 
 Instructions to compile from source are found on the main [repository](https://github.com/fsharp/FsAutoComplete).
 
@@ -2836,7 +2836,7 @@ require'lspconfig'.jdtls.setup{}
   Default Values:
     cmd = { "/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64/bin/java", "-Declipse.application=org.eclipse.jdt.ls.core.id1", "-Dosgi.bundles.defaultStartLevel=4", "-Declipse.product=org.eclipse.jdt.ls.core.product", "-Dlog.protocol=true", "-Dlog.level=ALL", "-Xms1g", "-Xmx2G", "-jar", "vim.NIL", "-configuration", "vim.NIL", "-data", "vim.NIL", "--add-modules=ALL-SYSTEM", "--add-opens java.base/java.util=ALL-UNNAMED", "--add-opens java.base/java.lang=ALL-UNNAMED" }
     cmd_env = {
-      GRADLE_HOME = "/usr/share/gradle-7.1",
+      GRADLE_HOME = "/usr/share/gradle-7.1.1",
       JAR = vim.NIL
     }
     filetypes = { "java" }
@@ -3333,7 +3333,7 @@ require'lspconfig'.julials.setup{}
     released afterwards. Maintaining is not done by the original author,
     but by fwcd.
 
-    It is builded via gradle and developed on github.
+    It is built via gradle and developed on github.
     Source and additional description:
     https://github.com/fwcd/kotlin-language-server
     
@@ -3746,7 +3746,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "menhir", "ocamlinterface", "ocaml", "ocamllex", "reason" }
+    filetypes = { "ocaml", "ocamllex", "menhir", "reason", "ocamlinterface" }
     get_language_id = function(_, ftype)
       return language_id_of[ftype]
     end
@@ -3868,7 +3868,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `vim.NIL`
   
-  array with paths to add to perl library path\. This setting is used by the syntax checker and for the debuggee and also for the LanguageServer itself\.
+  array with paths to add to perl library path\. This setting is used by the syntax checker and for the debuggee and also for the LanguageServer itself\. perl\.perlInc should be absolute paths\.
 
 - **`perl.showLocalVars`**: `boolean`
 
@@ -5959,7 +5959,7 @@ require'lspconfig'.sourcekit.setup{}
 
 https://github.com/joe-re/sql-language-server
 
-`cmd` value is **not set** by default. The `cmd` value can be overriden in the `setup` table;
+`cmd` value is **not set** by default. The `cmd` value can be overridden in the `setup` table;
 
 ```lua
 require'lspconfig'.sqlls.setup{
