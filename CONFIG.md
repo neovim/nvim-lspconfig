@@ -5983,7 +5983,7 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.runtime.nonstandardSymbol`**: `array`
 
-  Array items: `{enum = { "//", "/**/", "`", "+=", "-=", "*=", "/=", "||", "&&", "!", "!=", "continue" },type = "string"}`
+  Array items: ``{enum = { "//", "/**/", "`", "+=", "-=", "*=", "/=", "||", "&&", "!", "!=", "continue" },type = "string"}``
   
   null
 
