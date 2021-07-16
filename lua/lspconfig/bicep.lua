@@ -5,7 +5,7 @@ local server_name = 'bicep'
 configs[server_name] = {
   default_config = {
     filetypes = { 'bicep' },
-    root_dir = util.root_pattern('.git'),
+    root_dir = util.root_pattern '.git',
     init_options = {},
   },
   docs = {
