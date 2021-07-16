@@ -39,4 +39,3 @@ To download the latest release and place in /usr/local/bin/bicep-langserver:
 }
 
 -- vim:et ts=2 sw=2
-
