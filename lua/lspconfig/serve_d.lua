@@ -1,11 +1,7 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
-<<<<<<< HEAD
 configs.serve_d = {
-=======
-configs.zls = {
->>>>>>> f8bd92f845a213649e6716e9202bcc94665fb127
   default_config = {
     cmd = { 'serve-d' },
     filetypes = { 'd' },
