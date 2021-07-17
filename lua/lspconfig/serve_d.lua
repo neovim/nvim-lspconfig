@@ -5,7 +5,7 @@ configs.serve_d = {
   default_config = {
     cmd = { 'serve-d' },
     filetypes = { 'd' },
-    root_dir =  util.root_pattern('dub.json', 'dub.sdl', '.git'),
+    root_dir = util.root_pattern('dub.json', 'dub.sdl', '.git'),
   },
   docs = {
     description = [[
