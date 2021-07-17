@@ -15,7 +15,7 @@ configs.serve_d = {
            Download a binary from https://github.com/Pure-D/serve-d/releases and put it in your $PATH.
         ]],
     default_config = {
-      root_dir = [[util.root_pattern("dub.json", "dub.sdl", ".git") or current_file_dirname]],
+      root_dir = [[util.root_pattern("dub.json", "dub.sdl", ".git")]],
     },
   },
 }
