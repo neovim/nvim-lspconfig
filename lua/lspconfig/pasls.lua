@@ -3,20 +3,20 @@ local util = require 'lspconfig/util'
 
 configs.pasls = {
 	default_config = {
-		cmd = { 'paslsp' },
+		cmd = { 'pasls' },
 		cmd_env = {
-			PP = 'fpc',
+			PP = '/usr/lib/fpc/3.2.2/ppcx64',
 			FPCDIR = '/usr/lib/fpc/src',
-			LAZARUSDIR =  '',
+			LAZARUSDIR =  '/usr/lib/lazarus',
 			FPCTARGET = '',
-			FPCTARGETCPU = '',
+			FPCTARGETCPU = 'x86_64',
 		},
 		filetypes = { 'pascal' },
 		root_dir = util.path.dirname,
 	},
 	docs = {
 		description=[[
-		https://github.com/arjanadriaanse/pascal-language-server
+		https://github.com/parhelia512/pascal-language-server
 		An LSP server implementation for Pascal variants that are supported by Free Pascal, including Object Pascal. It uses CodeTools from Lazarus as backend.
 		]],
 	},
