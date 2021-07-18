@@ -1,5 +1,5 @@
-local configs = require 'lspconfig.configs'
-local util = require 'lspconfig.util'
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.pasls = {
 	default_config = {
@@ -9,14 +9,15 @@ configs.pasls = {
 			FPCDIR = '/usr/lib/fpc/src',
 			LAZARUSDIR =  '',
 			FPCTARGET = '',
-			FPCTARGETCPU = ''
+			FPCTARGETCPU = '',
 		},
 		filetypes = { 'pascal' },
 		root_dir = util.path.dirname,
 	},
-	docs = [[
-	https://github.com/arjanadriaanse/pascal-language-server
-
-	An LSP server implementation for Pascal variants that are supported by Free Pascal, including Object Pascal. It uses CodeTools from Lazarus as backend.
-	]],
+	docs = {
+		description=[[
+		https://github.com/arjanadriaanse/pascal-language-server
+		An LSP server implementation for Pascal variants that are supported by Free Pascal, including Object Pascal. It uses CodeTools from Lazarus as backend.
+		]],
+	},
 }
