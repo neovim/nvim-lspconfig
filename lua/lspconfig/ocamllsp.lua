@@ -9,12 +9,6 @@ local language_id_of = {
   reason = 'reason',
 }
 
-local filetypes = {}
-
-for ftype, _ in pairs(language_id_of) do
-  table.insert(filetypes, ftype)
-end
-
 local get_language_id = function(_, ftype)
   return language_id_of[ftype]
 end
@@ -22,7 +16,7 @@ end
 configs.ocamllsp = {
   default_config = {
     cmd = { 'ocamllsp' },
-    filetypes = filetypes,
+    filetypes = { 'ocaml', 'ocaml.menhir', 'ocaml.interface', 'ocaml.ocamllex', 'reason' },
     root_dir = util.root_pattern('*.opam', 'esy.json', 'package.json', '.git'),
     get_language_id = get_language_id,
   },
