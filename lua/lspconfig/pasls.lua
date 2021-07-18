@@ -16,7 +16,7 @@ configs.pasls = {
 	},
 	docs = {
 		description=[[
-		https://github.com/parhelia512/pascal-language-server
+		https://github.com/genericptr/pascal-language-server
 		An LSP server implementation for Pascal variants that are supported by Free Pascal, including Object Pascal. It uses CodeTools from Lazarus as backend.
 		]],
 	},
