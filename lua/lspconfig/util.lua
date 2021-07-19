@@ -15,6 +15,9 @@ M.default_config = {
   handlers = {},
 }
 
+-- global on_setup hook
+M.on_setup = nil
+
 function M.validate_bufnr(bufnr)
   validate {
     bufnr = { bufnr, 'n' },
