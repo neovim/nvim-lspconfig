@@ -3042,7 +3042,7 @@ This server accepts configuration via the `settings` key.
 
 - **`julia.completionmode`**: `enum { "exportedonly", "import", "qualify" }`
 
-  Default: `"import"`
+  Default: `"qualify"`
   
   Sets the mode for completions\.
 
@@ -3100,7 +3100,7 @@ This server accepts configuration via the `settings` key.
 
 - **`julia.execution.resultType`**: `enum { "REPL", "inline", "inline, errors in REPL", "both" }`
 
-  Default: `"REPL"`
+  Default: `"both"`
   
   Specifies how to show inline execution results
 
@@ -3285,6 +3285,12 @@ This server accepts configuration via the `settings` key.
   Default: `"julia_vscode"`
   
   null
+
+- **`julia.symbolCacheDownload`**: `boolean|null`
+
+  Default: `vim.NIL`
+  
+  Download symbol server cache files from GitHub\.
 
 - **`julia.trace.server`**: `enum { "off", "messages", "verbose" }`
 
@@ -3760,7 +3766,7 @@ require'lspconfig'.ocamllsp.setup{}
   
   Default Values:
     cmd = { "ocamllsp" }
-    filetypes = { "ocamllex", "menhir", "reason", "ocamlinterface", "ocaml" }
+    filetypes = { "ocamlinterface", "ocaml", "ocamllex", "reason", "menhir" }
     get_language_id = function(_, ftype)
       return language_id_of[ftype]
     end
@@ -6106,6 +6112,12 @@ This server accepts configuration via the `settings` key.
 - **`Lua.workspace.useGitIgnore`**: `boolean`
 
   Default: `true`
+  
+  null
+
+- **`Lua.workspace.userThirdParty`**: `array`
+
+  Array items: `{type = "string"}`
   
   null
 
