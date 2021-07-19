@@ -50,6 +50,10 @@ function configs.__newindex(t, config_name, config_def)
 
     config = tbl_extend('keep', config, default_config)
 
+    if util.on_setup then
+      pcall(util.on_setup, config)
+    end
+
     local trigger
     if config.filetypes then
       trigger = 'FileType ' .. table.concat(config.filetypes, ',')
@@ -84,7 +88,7 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     -- Used by :LspInfo
-    M.get_root_dir = config.root_dir
+    M.get_root_dir = get_root_dir
     M.filetypes = config.filetypes
     M.handlers = config.handlers
     M.cmd = config.cmd
