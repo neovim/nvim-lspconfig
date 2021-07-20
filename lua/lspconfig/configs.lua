@@ -92,6 +92,7 @@ function configs.__newindex(t, config_name, config_def)
     M.filetypes = config.filetypes
     M.handlers = config.handlers
     M.cmd = config.cmd
+    M._autostart = config.autostart
 
     -- In the case of a reload, close existing things.
     local reload = false
