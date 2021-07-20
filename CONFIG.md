@@ -2245,16 +2245,23 @@ require'lspconfig'.hls.setup{}
   Default Values:
     cmd = { "haskell-language-server-wrapper", "--lsp" }
     filetypes = { "haskell", "lhaskell" }
-    lspinfo = function(cfg)
-          -- return "specific"
-          if cfg.settings.languageServerHaskell.logFile or false then
-            return 'logfile: ' .. cfg.settings.languageServerHaskell.logFile
+    lspinfo = function on_stdout(_, data, _)
+            local version = data[1]
+            table.insert(extra, 'version:   ' .. version)
           end
-          return ''
+    
+          local opts = {
+            cwd = cfg.cwd,
+            stdout_buffered = true,
+            on_stdout = on_stdout,
+          }
+          local chanid = vim.fn.jobstart({ cfg.cmd[1], '--version' }, opts)
+          vim.fn.jobwait { chanid }
+          return extra
         end,
     root_dir = root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")
     settings = {
-      languageServerHaskell = {
+      haskell = {
         formattingProvider = "ormolu"
       }
     }
