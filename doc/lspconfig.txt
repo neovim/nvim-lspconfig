@@ -33,7 +33,7 @@ lsp` for more details.
 * Install nvim-lspconfig like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
 
 >
-    :Plug 'neovim/nvim-lspconfig'
+    Plug 'neovim/nvim-lspconfig'
 <
 
 
@@ -111,7 +111,10 @@ Manual, triggered completion can be provided by neovim's built-in omnifunc. For
 autocompletion, a general purpose [autocompletion plugin](https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion)
 is required. The following example configuration provides suggested keymaps for
 the most commonly used language server functions, and manually triggered
-completion with omnifunc ( \< c-x \> \< c-o \> ).
+completion with omnifunc ( \< c-x \> \< c-o \> ). Note: **you must pass the
+defined `on_attach` as an argument to every `setup {}` call** and **the
+keybindings in `on_attach` only take effect after the language server has
+started (attached to the current buffer)**.
 
 >
     lua << EOF    
@@ -174,6 +177,7 @@ server attaches to the current buffer.
 The two most common reasons a language server does not start or attach are:
 1. The language server is not installed. nvim-lspconfig does not install language servers for you. You should be able to run the `cmd` defined in each server's lua module from the command line and see that the language server starts. If the `cmd` is an executable name, ensure it is on your path.
 2. Not triggering root detection. The language server will only start if it is opened in a directory, or child directory, containing a file which signals the *root* of the project. Most of the time, this is a `.git` folder, but each server defines the root config in the lua file. See [CONFIG.md](CONFIG.md) or the source for the list of root directories.
+3. Misconfiguration. You must pass `on_attach` and `capabilities` for **each** `setup {}` if you want these to take effect. You must also **not call `setup {}` twice for the same server**. The second call to `setup {}` will overwrite the first.
 :LspInfo provides a handy overview of your active and configured language
 servers. Note, that it will not report any configuration changes applied in
 `on_new_config`.
