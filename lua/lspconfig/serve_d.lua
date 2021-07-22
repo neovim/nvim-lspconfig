@@ -8,6 +8,7 @@ configs.serve_d = {
     root_dir = util.root_pattern('dub.json', 'dub.sdl', '.git'),
   },
   docs = {
+    language_name = 'D',
     description = [[
            https://github.com/Pure-D/serve-d
 

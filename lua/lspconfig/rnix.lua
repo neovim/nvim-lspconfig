@@ -15,6 +15,7 @@ configs[name] = {
     init_options = {},
   },
   docs = {
+    language_name = 'Nix',
     description = [[
 https://github.com/nix-community/rnix-lsp
 
