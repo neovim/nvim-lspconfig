@@ -21,6 +21,7 @@ configs.ocamllsp = {
     get_language_id = get_language_id,
   },
   docs = {
+    language_name = 'OCaml',
     description = [[
 https://github.com/ocaml/ocaml-lsp
 

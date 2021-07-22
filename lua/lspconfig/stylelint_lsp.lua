@@ -20,6 +20,7 @@ configs.stylelint_lsp = {
     settings = {},
   },
   docs = {
+    language_name = 'Diagnostics',
     package_json = 'https://raw.githubusercontent.com/bmatcuk/coc-stylelintplus/master/package.json',
     description = [[
 https://github.com/bmatcuk/stylelint-lsp

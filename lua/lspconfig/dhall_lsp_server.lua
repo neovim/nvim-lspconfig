@@ -7,6 +7,7 @@ configs.dhall_lsp_server = {
     filetypes = { 'dhall' },
     root_dir = util.root_pattern('.git', vim.fn.getcwd()),
     docs = {
+      language_name = 'Dhall',
       description = [[
 https://github.com/dhall-lang/dhall-haskell/tree/master/dhall-lsp-server
 

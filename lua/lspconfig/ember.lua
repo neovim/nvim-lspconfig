@@ -11,6 +11,7 @@ configs[server_name] = {
     root_dir = util.root_pattern('ember-cli-build.js', '.git'),
   },
   docs = {
+    language_name = 'Ember',
     description = [[
 https://github.com/lifeart/ember-language-server
 

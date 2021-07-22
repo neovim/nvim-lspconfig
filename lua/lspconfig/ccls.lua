@@ -36,6 +36,7 @@ lspconfig.ccls.setup {
 ```
 
 ]],
+    language_name = 'C like',
     default_config = {
       root_dir = [[root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname]],
     },

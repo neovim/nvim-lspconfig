@@ -133,6 +133,7 @@ configs[server_name] = {
     },
   },
   docs = {
+    language_name = 'Deno',
     description = [[
 https://github.com/denoland/deno
 

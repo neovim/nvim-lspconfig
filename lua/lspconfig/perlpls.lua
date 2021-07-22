@@ -15,6 +15,7 @@ configs.perlpls = {
     end,
   },
   docs = {
+    language_name = 'Perl',
     package_json = 'https://raw.githubusercontent.com/FractalBoy/perl-language-server/master/client/package.json',
     description = [[
 https://github.com/FractalBoy/perl-language-server

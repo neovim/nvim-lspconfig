@@ -20,6 +20,7 @@ configs.rome = {
     end,
   },
   docs = {
+    language_name = 'Rome',
     description = [[
 https://rome.tools
 
