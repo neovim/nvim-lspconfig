@@ -3501,6 +3501,10 @@ Once Lean is installed, you can install the Lean 3 language server by running
 ```sh
 npm install -g lean-language-server
 ```
+
+Note: that if you're using [lean.nvim](https://github.com/Julian/lean.nvim),
+that plugin fully handles the setup of the Lean language server,
+and you shouldn't set up `lean3ls` both with it and `lspconfig`.
     
 
 
@@ -3537,6 +3541,10 @@ Lean installation instructions can be found
 
 The Lean 4 language server is built-in with a Lean 4 install
 (and can be manually run with, e.g., `lean --server`).
+
+Note: that if you're using [lean.nvim](https://github.com/Julian/lean.nvim),
+that plugin fully handles the setup of the Lean language server,
+and you shouldn't set up `leanls` both with it and `lspconfig`.
     
 
 
@@ -3574,7 +3582,7 @@ See full instructions in the Metals documentation:
 
 https://scalameta.org/metals/docs/editors/vim.html#using-an-alternative-lsp-client
 
-Note: that if you're using [nvim-metals](https://github.com/scalameta/nvim-metals), that plugin fully handles the setup and installation of Metals, and you shouldn't set up Metals both with it and this plugin.
+Note: that if you're using [nvim-metals](https://github.com/scalameta/nvim-metals), that plugin fully handles the setup and installation of Metals, and you shouldn't set up Metals both with it and `lspconfig`.
 
 To install Metals, make sure to have [coursier](https://get-coursier.io/docs/cli-installation) installed, and once you do you can install the latest Metals with `cs install metals`. You can also manually bootstrap Metals with the following command.
 
@@ -5067,6 +5075,30 @@ This server accepts configuration via the `settings` key.
 - **`rust-analyzer.files.watcher`**: `string`
 
   Default: `"client"`
+  
+  null
+
+- **`rust-analyzer.highlightRelated.breakPoints`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`rust-analyzer.highlightRelated.exitPoints`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`rust-analyzer.highlightRelated.references`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`rust-analyzer.highlightRelated.yieldPoints`**: `boolean`
+
+  Default: `true`
   
   null
 
