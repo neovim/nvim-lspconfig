@@ -48,9 +48,6 @@ lspconfig.arduino_language_server.setup({
 For further instruction about configuration options, run `arduino-language-server --help`.
 
 ]],
-      default_config = {
-        root_dir = [[root_pattern("*.ino")]],
-      },
     },
   },
 }
