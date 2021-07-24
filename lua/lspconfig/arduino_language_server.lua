@@ -1,12 +1,12 @@
-local configs = require "lspconfig/configs"
-local util = require "lspconfig/util"
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.arduino_language_server = {
   default_config = {
-    cmd = { "arduino-language-server" },
-    filetypes = { "arduino" },
+    cmd = { 'arduino-language-server' },
+    filetypes = { 'arduino' },
     root_dir = function(fname)
-      return util.root_pattern "*.ino"(fname) or util.path.dirname(fname)
+      return util.root_pattern '*.ino'(fname)
     end,
     docs = {
       description = [[
@@ -48,9 +48,6 @@ lspconfig.arduino_language_server.setup({
 For further instruction about configuration options, run `arduino-language-server --help`.
 
 ]],
-      default_config = {
-        root_dir = [[root_pattern("*.ino")]],
-      },
     },
   },
 }
