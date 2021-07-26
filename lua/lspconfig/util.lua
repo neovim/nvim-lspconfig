@@ -221,7 +221,7 @@ function M.server_per_root_dir_manager(_make_config)
       return
     end
 
-    -- Check if we have a client alredy or start and store it.
+    -- Check if we have a client already or start and store it.
     local client_id = clients[root_dir]
     if not client_id then
       local new_config = _make_config(root_dir)
