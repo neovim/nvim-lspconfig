@@ -2152,35 +2152,29 @@ This server accepts configuration via the `settings` key.
   
   Enables splice plugin \(expand template haskell definitions\)
 
-- **`haskell.plugin.tactic.config.features`**: `string`
-
-  Default: `true`
-  
-  null
-
-- **`haskell.plugin.tactic.config.max_use_ctor_actions`**: `integer`
-
-  Default: `5`
-  
-  null
-
-- **`haskell.plugin.tactic.globalOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables wingman \(tactic\) plugin
-
 - **`haskell.plugin.tactics.config.hole_severity`**: `enum { 1, 2, 3, 4, vim.NIL }`
 
   Default: `vim.NIL`
   
   The severity to use when showing hole diagnostics\.
 
+- **`haskell.plugin.tactics.config.max_use_ctor_actions`**: `integer`
+
+  Default: `5`
+  
+  null
+
 - **`haskell.plugin.tactics.config.timeout_duration`**: `integer`
 
   Default: `2`
   
   null
+
+- **`haskell.plugin.tactics.globalOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables Wingman \(tactics\) plugin
 
 - **`haskell.releasesURL`**: `string`
 
@@ -3264,6 +3258,10 @@ This server accepts configuration via the `settings` key.
   Default: `"test/runtests.jl"`
   
   A workspace relative path to a Julia file that contains the tests that should be run for live testing\.
+
+- **`julia.notebookController`**: `boolean`
+
+  Enable the experimental native Jupyter notebook integration\.
 
 - **`julia.packageServer`**: `string`
 
