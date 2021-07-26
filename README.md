@@ -125,7 +125,9 @@ EOF
 The `on_attach` hook is used to only activate the bindings after the language server attaches to the current buffer.
 
 ## Debugging
-The two most common reasons a language server does not start or attach are:
+If you have an issue with lspconfig, the first step is to reproduce with a [minimal configuration](https://github.com/neovim/nvim-lspconfig/blob/master/test/minimal_init.lua).
+
+The most common reasons a language server does not start or attach are:
 
 1. The language server is not installed. nvim-lspconfig does not install language servers for you. You should be able to run the `cmd` defined in each server's lua module from the command line and see that the language server starts. If the `cmd` is an executable name, ensure it is on your path.
 
