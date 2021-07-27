@@ -15,9 +15,9 @@ configs[server_name] = {
     description = [[
 https://github.com/redhat-developer/yaml-language-server
 
-`yaml-language-server` can be installed via `npm`:
+`yaml-language-server` can be installed via `yarn`:
 ```sh
-npm install -g yaml-language-server
+yarn global add yaml-language-server
 ```
 ]],
     default_config = {
