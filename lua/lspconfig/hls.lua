@@ -5,7 +5,10 @@ configs.hls = {
   default_config = {
     cmd = { 'haskell-language-server-wrapper', '--lsp' },
     filetypes = { 'haskell', 'lhaskell' },
-    root_dir = util.root_pattern('*.cabal', 'stack.yaml', 'cabal.project', 'package.yaml', 'hie.yaml'),
+    root_dir = function(fname)
+      local root_dir = util.root_pattern('*.cabal', 'stack.yaml', 'cabal.project', 'package.yaml', 'hie.yaml')(fname)
+      return root_dir or vim.fn.getcwd()
+    end,
     settings = {
       haskell = {
         formattingProvider = 'ormolu',
