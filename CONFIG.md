@@ -5687,7 +5687,7 @@ require'lspconfig'.sourcekit.setup{}
   Commands:
   
   Default Values:
-    cmd = { "xcrun", "sourcekit-lsp" }
+    cmd = { "sourcekit-lsp" }
     filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" }
     root_dir = root_pattern("Package.swift", ".git")
 ```
