@@ -36,7 +36,7 @@ FPCTARGETCPU = 'x86_64',
 },
 }
 ```
-`FPCDIR` : set this to your FPC source location.
+`FPCDIR` : FPC source directory (This is the only required option for the server to work).
 
 `PP` : Path to the Free Pascal compiler executable.
 
