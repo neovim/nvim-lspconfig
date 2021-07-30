@@ -4,13 +4,6 @@ local util = require 'lspconfig/util'
 configs.pasls = {
   default_config = {
     cmd = { 'pasls' },
-    cmd_env = {
-      FPCDIR = '/usr/lib/fpc/src',
-      PP = '/usr/lib/fpc/3.2.2/ppcx64',
-      LAZARUSDIR = '/usr/lib/lazarus',
-      FPCTARGET = '',
-      FPCTARGETCPU = 'x86_64',
-    },
     filetypes = { 'pascal' },
     root_dir = util.path.dirname,
   },
@@ -22,20 +15,16 @@ An LSP server implementation for Pascal variants that are supported by Free Pasc
 
 First set `cmd` to the Pascal lsp binary.
 
-Customization options are passed to pasls as environment variables for example:
+Customization options are passed to pasls as environment variables for example in your `.bashrc`:
+	    ```bash
+export FPCDIR='/usr/lib/fpc/src',
+export PP='/usr/lib/fpc/3.2.2/ppcx64',
+export LAZARUSDIR='/usr/lib/lazarus',
+export FPCTARGET='',
+export FPCTARGETCPU='x86_64',
 
-```lua
-require'lspconfig'.pasls.setup {
-cmd = { 'pasls' },
-cmd_env = {
-FPCDIR = '/usr/lib/fpc/src',
-PP = '/usr/lib/fpc/3.2.2/ppcx64',
-LAZARUSDIR = '/usr/lib/lazarus',
-FPCTARGET = '',
-FPCTARGETCPU = 'x86_64',
-},
-}
-```
+		```
+
 `FPCDIR` : FPC source directory (This is the only required option for the server to work).
 
 `PP` : Path to the Free Pascal compiler executable.
