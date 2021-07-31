@@ -30,6 +30,11 @@ configs[server_name] = {
 https://github.com/ansible/ansible-language-server
 
 Language server for the ansible configuration management tool.
+
+`ansible-language-server` can be installed via `yarn`:
+```sh
+yarn global add ansible-language-server
+```
 ]],
   },
 }
