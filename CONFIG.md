@@ -5,6 +5,7 @@ that config.
 
 - [als](#als)
 - [angularls](#angularls)
+- [ansiblels](#ansiblels)
 - [bashls](#bashls)
 - [beancount](#beancount)
 - [ccls](#ccls)
@@ -164,6 +165,51 @@ require'lspconfig'.angularls.setup{}
     cmd = { "ngserver", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" }
     filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" }
     root_dir = root_pattern("angular.json", ".git")
+```
+
+
+## ansiblels
+
+https://github.com/ansible/ansible-language-server
+
+Language server for the ansible configuration management tool.
+
+`ansible-language-server` can be installed via `yarn`:
+```sh
+yarn global add ansible-language-server
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.ansiblels.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "ansible-language-server", "--stdio" }
+    filetypes = { "yaml" }
+    root_dir = function(fname)
+          return util.root_pattern { '*.yml', '*.yaml' }(fname)
+        end,
+    settings = {
+      ansible = {
+        ansible = {
+          path = "ansible"
+        },
+        ansibleLint = {
+          enabled = true,
+          path = "ansible-lint"
+        },
+        python = {
+          interpreterPath = "python"
+        }
+      }
+    }
 ```
 
 
@@ -2032,12 +2078,6 @@ init_options = {
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`haskell.completionSnippetsOn`**: `boolean`
-
-  Default: `true`
-  
-  Show snippets with type information when using code completion
-
 - **`haskell.diagnosticsOnChange`**: `boolean`
 
   Default: `true`
@@ -2055,12 +2095,6 @@ This server accepts configuration via the `settings` key.
   Default: `"ormolu"`
   
   The formatter to use when formatting a document or range\. Ensure the plugin is enabled\.
-
-- **`haskell.hlintOn`**: `boolean`
-
-  Default: `true`
-  
-  Get suggestions from hlint
 
 - **`haskell.logFile`**: `string`
 
@@ -2116,6 +2150,12 @@ This server accepts configuration via the `settings` key.
   
   Enables hlint code actions \(apply hints\)
 
+- **`haskell.plugin.hlint.config.flags`**: `array`
+
+  Default: `{}`
+  
+  null
+
 - **`haskell.plugin.hlint.diagnosticsOn`**: `boolean`
 
   Default: `true`
@@ -2164,6 +2204,12 @@ This server accepts configuration via the `settings` key.
   
   Enables splice plugin \(expand template haskell definitions\)
 
+- **`haskell.plugin.tactics.config.auto_gas`**: `integer`
+
+  Default: `4`
+  
+  null
+
 - **`haskell.plugin.tactics.config.hole_severity`**: `enum { 1, 2, 3, 4, vim.NIL }`
 
   Default: `vim.NIL`
@@ -2173,6 +2219,12 @@ This server accepts configuration via the `settings` key.
 - **`haskell.plugin.tactics.config.max_use_ctor_actions`**: `integer`
 
   Default: `5`
+  
+  null
+
+- **`haskell.plugin.tactics.config.proofstate_styling`**: `boolean`
+
+  Default: `true`
   
   null
 
@@ -5249,6 +5301,12 @@ This server accepts configuration via the `settings` key.
   null
 
 - **`rust-analyzer.lens.enable`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`rust-analyzer.lens.forceCustomCommands`**: `boolean`
 
   Default: `true`
   
