@@ -25,7 +25,6 @@ configs[server_name] = {
     end,
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/ansible/ansible-language-server/main/package.json',
     description = [[
 https://github.com/ansible/ansible-language-server
 
