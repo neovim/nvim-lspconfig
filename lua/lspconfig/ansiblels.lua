@@ -21,7 +21,7 @@ configs[server_name] = {
     },
     filetypes = { 'yaml' },
     root_dir = function(fname)
-      return util.root_pattern '*.yml'(fname) or util.root_pattern '*.yaml'(fname)
+      return util.root_pattern { '*.yml', '*.yaml' }(fname)
     end,
   },
   docs = {
