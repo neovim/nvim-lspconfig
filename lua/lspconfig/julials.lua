@@ -8,7 +8,7 @@ local cmd = {
   '-e',
   [[
     using Pkg
-    Pkg.instantiate()
+    Pkg.activate(Base.current_project())
     using LanguageServer
     depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
     project_path = let
