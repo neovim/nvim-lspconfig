@@ -659,7 +659,7 @@ This server accepts configuration via the `settings` key.
   
   The protocol to use for the Dart Debug Extension backend service and injected client\. Using WebSockets can improve performance but may fail when connecting through some proxy servers\.
 
-- **`dart.debugExternalLibraries`**: `boolean`
+- **`dart.debugExternalPackageLibraries`**: `boolean`
 
   null
 
@@ -2251,6 +2251,12 @@ This server accepts configuration via the `settings` key.
   Default: `""`
   
   null
+
+- **`haskell.trace.client`**: `enum { "off", "error", "debug" }`
+
+  Default: `"error"`
+  
+  Traces the communication between VS Code and the language server\.
 
 - **`haskell.trace.server`**: `enum { "off", "messages" }`
 
