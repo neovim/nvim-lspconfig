@@ -3429,7 +3429,7 @@ require'lspconfig'.julials.setup{}
     cmd = { "julia", "--startup-file=no", "--history-file=no", "-e", '    using Pkg\n    Pkg.instantiate()\n    using LanguageServer\n    depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n    project_path = let\n        dirname(something(\n            ## 1. Finds an explicitly set project (JULIA_PROJECT)\n            Base.load_path_expand((\n                p = get(ENV, "JULIA_PROJECT", nothing);\n                p === nothing ? nothing : isempty(p) ? nothing : p\n            )),\n            ## 2. Look for a Project.toml file in the current working directory,\n            ##    or parent directories, with $HOME as an upper boundary\n            Base.current_project(),\n            ## 3. First entry in the load path\n            get(Base.load_path(), 1, nothing),\n            ## 4. Fallback to default global environment,\n            ##    this is more or less unreachable\n            Base.load_path_expand("@v#.#"),\n        ))\n    end\n    @info "Running language server" VERSION pwd() project_path depot_path\n    server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path)\n    server.runlinter = true\n    run(server)\n  ' }
     filetypes = { "julia" }
     on_new_config = function(new_config, _)
-          local server_path = vim.fn.system 'julia --startup-file=no -q -e \'print(Base.find_package("LanguageServer"))\''
+          local server_path = vim.fn.system 'julia --startup-file=no -q -e \'print(dirname(something(Base.find_package("LanguageServer"))))\''
           local new_cmd = vim.deepcopy(cmd)
           table.insert(new_cmd, 2, '--project=' .. server_path:sub(0, -19))
           new_config.cmd = new_cmd
