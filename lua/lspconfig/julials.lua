@@ -9,7 +9,7 @@ local cmd = {
   [[
     using Pkg
     Pkg.activate(Base.current_project())
-    using LanguageServer, SymbolServer, StaticLint
+    using LanguageServer
     depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
     project_path = let
         dirname(something(
