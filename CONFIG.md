@@ -2863,8 +2863,10 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`java.showBuildStatusOnStart.enabled`**: `boolean`
+- **`java.showBuildStatusOnStart.enabled`**
 
+  Default: `"notification"`
+  
   Automatically show build status on startup\.
 
 - **`java.signatureHelp.enabled`**: `boolean`
@@ -6564,6 +6566,9 @@ require'lspconfig'.tsserver.setup{}
   Default Values:
     cmd = { "typescript-language-server", "--stdio" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+    init_options = {
+      hostInfo = "neovim"
+    }
     root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
 ```
 
