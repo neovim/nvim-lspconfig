@@ -8,6 +8,7 @@ that config.
 - [ansiblels](#ansiblels)
 - [bashls](#bashls)
 - [beancount](#beancount)
+- [bicep](#bicep)
 - [ccls](#ccls)
 - [clangd](#clangd)
 - [clojure_lsp](#clojure_lsp)
@@ -265,6 +266,53 @@ require'lspconfig'.beancount.setup{}
       pythonPath = "python3"
     }
     root_dir = root_pattern("elm.json")
+```
+
+
+## bicep
+
+https://github.com/azure/bicep
+Bicep language server
+
+Bicep language server can be installed by downloading and extracting a release of bicep-langserver.zip from [Bicep GitHub releases](https://github.com/Azure/bicep/releases).
+
+Bicep language server requires the [dotnet-sdk](https://dotnet.microsoft.com/download) to be installed.
+
+**By default, bicep language server doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of the unzipped run script or binary.
+
+```lua
+local bicep_lsp_bin = "/path/to/bicep-langserver/Bicep.LangServer.dll"
+require'lspconfig'.bicep.setup{
+    cmd = { "dotnet", bicep_lsp_bin };
+    ...
+}
+```
+
+To download the latest release and place in /usr/local/bin/bicep-langserver:
+```bash
+(cd $(mktemp -d) \
+    && curl -fLO https://github.com/Azure/bicep/releases/latest/download/bicep-langserver.zip \
+    && rm -rf /usr/local/bin/bicep-langserver \
+    && unzip -d /usr/local/bin/bicep-langserver bicep-langserver.zip)
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.bicep.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    filetypes = { "bicep" }
+    init_options = {}
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
 ```
 
 
