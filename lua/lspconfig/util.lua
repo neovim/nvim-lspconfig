@@ -13,6 +13,7 @@ M.default_config = {
   settings = vim.empty_dict(),
   init_options = vim.empty_dict(),
   handlers = {},
+  autostart = true,
 }
 
 -- global on_setup hook

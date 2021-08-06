@@ -47,6 +47,13 @@ return function()
     return cmd
   end
 
+  local function autostart_to_str(autostart)
+    local autostart_status = 'True'
+    if autostart == false then
+      autostart_status = 'Disabled'
+    end
+    return autostart_status
+  end
   local indent = '  '
   local function make_client_info(client)
     local lines = {
@@ -62,6 +69,7 @@ return function()
       indent .. '\troot:      ' .. client.workspaceFolders[1].name,
       indent .. '\tfiletypes: ' .. table.concat(client.config.filetypes or {}, ', '),
       indent .. '\tcmd:       ' .. remove_newlines(client.config.cmd),
+      indent .. '\tautostart: ' .. autostart_to_str(client._autostart),
     }
     if client.config.lspinfo then
       local server_specific_info = client.config.lspinfo(client.config)
@@ -116,6 +124,7 @@ return function()
             indent .. '\tcmd:               ' .. cmd,
             indent .. '\tcmd is executable: ' .. cmd_is_executable,
             indent .. '\tidentified root:   ' .. (config.get_root_dir(buffer_dir) or 'None'),
+            indent .. '\tautostart:         ' .. autostart_to_str(config._autostart),
             indent .. '\tcustom handlers:   ' .. table.concat(vim.tbl_keys(config.handlers), ', '),
           }
           vim.list_extend(buf_lines, matching_config_info)
