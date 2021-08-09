@@ -3525,7 +3525,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `250`
   
-  \[DEPRECATED\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possibile stability issues\.
+  \[DEPRECATED\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possible stability issues\.
 
 - **`kotlin.debugAdapter.enabled`**: `boolean`
 
@@ -3569,7 +3569,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `5005`
   
-  \[DEBUG\] If transport is stdio this enables you to attach to the running langugage server with a debugger\. This is ONLY useful if you need to debug the language server ITSELF\.
+  \[DEBUG\] If transport is stdio this enables you to attach to the running language server with a debugger\. This is ONLY useful if you need to debug the language server ITSELF\.
 
 - **`kotlin.languageServer.enabled`**: `boolean`
 
@@ -3599,7 +3599,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `250`
   
-  \[DEBUG\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possibile stability issues\.
+  \[DEBUG\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possible stability issues\.
 
 - **`kotlin.snippetsEnabled`**: `boolean`
 
@@ -7080,7 +7080,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"preserve"`
   
-  Always\: wrap prose if it exeeds the print width\, Never\: never wrap the prose\, Preserve\: wrap prose as\-is
+  Always\: wrap prose if it exceeds the print width\, Never\: never wrap the prose\, Preserve\: wrap prose as\-is
 
 - **`yaml.format.singleQuote`**: `boolean`
 
