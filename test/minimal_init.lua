@@ -1,18 +1,19 @@
--- install packer
-local fn = vim.fn
-
-local install_path = '/tmp/nvim/site/pack/packer/start/packer.nvim'
-
+vim.cmd [[set runtimepath=$VIMRUNTIME]]
 vim.cmd [[set packpath=/tmp/nvim/site]]
 
+local package_root = '/tmp/nvim/site/pack'
+local install_path = package_root .. '/packer/start/packer.nvim'
+
 local function load_plugins()
-  local use = require('packer').use
   require('packer').startup {
-    function()
-      use 'wbthomason/packer.nvim'
-      use 'neovim/nvim-lspconfig'
-    end,
-    config = { package_root = '/tmp/nvim/site/pack' },
+    {
+      'wbthomason/packer.nvim',
+      'neovim/nvim-lspconfig',
+    },
+    config = {
+      package_root = package_root,
+      compile_path = install_path .. '/plugin/packer_compiled.lua',
+    },
   }
 end
 
@@ -67,12 +68,13 @@ _G.load_config = function()
   print [[You can find your log at $HOME/.cache/nvim/lsp.log. Please paste in a github issue under a details tag as described in the issue template.]]
 end
 
-if fn.isdirectory(install_path) == 0 then
-  fn.system { 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path }
+if vim.fn.isdirectory(install_path) == 0 then
+  vim.fn.system { 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path }
   load_plugins()
   require('packer').sync()
-  vim.cmd 'autocmd User PackerComplete ++once lua load_config()'
+  vim.cmd [[autocmd User PackerComplete ++once lua load_config()]]
 else
   load_plugins()
+  require('packer').sync()
   _G.load_config()
 end
