@@ -1276,14 +1276,14 @@ require'lspconfig'.dhall_lsp_server.setup{}
     cmd = { "dhall-lsp-server" }
     docs = {
       default_config = {
-        root_dir = 'root_pattern(".git", vim.fn.getcwd())'
+        root_dir = 'root_pattern(".git") or dirname'
       },
       description = "https://github.com/dhall-lang/dhall-haskell/tree/master/dhall-lsp-server\n\nlanguage server for dhall\n\n`dhall-lsp-server` can be installed via cabal:\n```sh\ncabal install dhall-lsp-server\n```\nprebuilt binaries can be found [here](https://github.com/dhall-lang/dhall-haskell/releases).\n"
     }
     filetypes = { "dhall" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
+    root_dir = function(fname)
+          return util.root_pattern '.git'(fname) or util.path.dirname(fname)
+        end,
 ```
 
 
@@ -3104,7 +3104,7 @@ require'lspconfig'.jsonls.setup{}
     init_options = {
       provideFormatter = true
     }
-    root_dir = root_pattern(".git", vim.fn.getcwd())
+    root_dir = root_pattern(".git") or dirname
 ```
 
 
@@ -7141,7 +7141,7 @@ require'lspconfig'.yamlls.setup{}
   Default Values:
     cmd = { "yaml-language-server", "--stdio" }
     filetypes = { "yaml" }
-    root_dir = root_pattern(".git", vim.fn.getcwd())
+    root_dir = root_pattern(".git") or dirname
 ```
 
 
