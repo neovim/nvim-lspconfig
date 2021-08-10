@@ -2304,7 +2304,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `"error"`
   
-  Traces the communication between VS Code and the language server\.
+  Sets the log level in the client side\.
 
 - **`haskell.trace.server`**: `enum { "off", "messages" }`
 
@@ -4162,13 +4162,11 @@ This server accepts configuration via the `settings` key.
   
   Path to the pls executable script
 
-- **`perl.sortImports.args`**: `array`
+- **`perl.plsargs`**: `array`
 
   Default: `{}`
   
-  Array items: `{type = "string"}`
-  
-  Arguments passed in\. Each argument is a separate item in the array\.
+  Arguments to pass to the pls command
 
 - **`perl.syntax.enabled`**: `boolean`
 
