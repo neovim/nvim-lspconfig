@@ -23,6 +23,18 @@ Lua language server.
 
 **By default, lua-language-server doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of your unzipped and compiled lua-language-server.
 
+For Termux users:
+
+  Install using: `pkg install lua-language-server`
+
+  setup `cmd` config as following
+  ```lua
+  require'lspconfig'.sumneko_lua.setup {
+    cmd = {'lua-language-server', '--start-lsp'}
+    -- rest config as stated below
+  }
+  ```
+
 ```lua
 local system_name
 if vim.fn.has("mac") == 1 then
