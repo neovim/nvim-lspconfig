@@ -49,6 +49,7 @@ that config.
 - [lean3ls](#lean3ls)
 - [leanls](#leanls)
 - [metals](#metals)
+- [mint](#mint)
 - [nimls](#nimls)
 - [ocamlls](#ocamlls)
 - [ocamllsp](#ocamllsp)
@@ -3764,6 +3765,33 @@ require'lspconfig'.metals.setup{}
 ```
 
 
+## mint
+
+https://www.mint-lang.com
+
+Install Mint using the [instructions](https://www.mint-lang.com/install).
+The language server is included since version 0.12.0.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.mint.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "mint", "ls" }
+    filetypes = { "mint" }
+    root_dir = function(fname)
+          return util.root_pattern 'mint.json'(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+        end,
+```
+
+
 ## nimls
 
 https://github.com/PMunch/nimlsp
@@ -4405,6 +4433,10 @@ This server accepts configuration via the `settings` key.
   
   Build command to use with arguments\. Not passed to shell\. eg \`spago build \-\-purs\-args \-\-json\-errors\`
 
+- **`purescript.buildOpenedFiles`**: `boolean`
+
+  null
+
 - **`purescript.censorWarnings`**: `array`
 
   Default: `{}`
@@ -4426,6 +4458,12 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Enable purs IDE server fast rebuild
+
+- **`purescript.formatter`**: `enum { "none", "purty", "purs-tidy", "pose" }`
+
+  Default: `"purty"`
+  
+  Tool to use to for formatting\. Must be installed and on PATH \(or npm installed with addNpmPath set\)
 
 - **`purescript.importsPreferredModules`**: `array`
 
