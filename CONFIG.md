@@ -6361,9 +6361,13 @@ require'lspconfig'.svelte.setup{}
 
 ## svls
 
-      https://github.com/dalance/svls
-      Language server for verilog and SystemVerilog
+https://github.com/dalance/svls
+  
+Language server for verilog and SystemVerilog
+
+`svls` can be installed via `cargo`:  
     
+    cargo install svls
 
 
 **Snippet to enable the language server:**
