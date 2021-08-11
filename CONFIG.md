@@ -48,6 +48,7 @@ that config.
 - [lean3ls](#lean3ls)
 - [leanls](#leanls)
 - [metals](#metals)
+- [mint](#mint)
 - [nimls](#nimls)
 - [ocamlls](#ocamlls)
 - [ocamllsp](#ocamllsp)
@@ -3707,6 +3708,28 @@ require'lspconfig'.metals.setup{}
     root_dir = util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml")
 ```
 
+## mint
+
+https://www.mint-lang.com
+
+Install `mint` using the [instructions](https://www.mint-lang.com/install).
+The LSP server is included since version 0.12.0.
+
+**Snippet to enable the language server:**
+```lua
+require('lspconfig').mint.setup{}
+```
+
+**Commands and default values:***
+```lua
+  Commands:
+
+  Default Values:
+    cmd = {'mint', 'ls'}
+    filetypes = {'mint'}
+    root_dir = function(fname)
+      return util.root_pattern 'mint.json'(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+    end
 
 ## nimls
 
