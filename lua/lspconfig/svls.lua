@@ -11,8 +11,14 @@ configs[server_name] = {
   },
   docs = {
     description = [[
-      https://github.com/dalance/svls
-      Language server for verilog and SystemVerilog
+https://github.com/dalance/svls
+
+Language server for verilog and SystemVerilog
+
+`svls` can be installed via `cargo`:
+ ```sh
+ cargo install svls
+ ```
     ]],
   },
 }
