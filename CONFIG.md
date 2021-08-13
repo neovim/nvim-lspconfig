@@ -6359,7 +6359,7 @@ require'lspconfig'.sumneko_lua.setup{}
   Default Values:
     filetypes = { "lua" }
     log_level = 2
-    root_dir = root_pattern(".git") or bufdir
+    root_dir = root_pattern("lua/", ".git") or bufdir
     settings = {
       Lua = {
         telemetry = {
