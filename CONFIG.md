@@ -2011,7 +2011,7 @@ require'lspconfig'.graphql.setup{}
   Default Values:
     cmd = { "graphql-lsp", "server", "-m", "stream" }
     filetypes = { "graphql" }
-    root_dir = root_pattern('.git', '.graphqlrc')
+    root_dir = root_pattern('.git', '.graphqlrc*')
 ```
 
 
