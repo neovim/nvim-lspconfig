@@ -3117,59 +3117,12 @@ https://github.com/julia-vscode/julia-vscode
 ```sh
 julia -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
 ```
-The default config lazily evaluates the location of the julia language server from the your global julia packages.
-This adds a small overhead on first opening of a julia file. To avoid this overhead, replace server_path in on_new_config with
-a hard-coded path to the server.
+This installs LanguageServer.jl into your global julia environment.
 
-```lua
-require'lspconfig'.julials.setup{
-    on_new_config = function(new_config,new_root_dir)
-      server_path = "/path/to/directory/containing/LanguageServer.jl/src"
-      cmd = {
-        "julia",
-        "--project="..server_path,
-        "--startup-file=no",
-        "--history-file=no",
-        "-e", [[
-          using Pkg
-          Pkg.instantiate()
-          using LanguageServer
-          depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
-          project_path = let
-              dirname(something(
-                  ## 1. Finds an explicitly set project (JULIA_PROJECT)
-                  Base.load_path_expand((
-                      p = get(ENV, "JULIA_PROJECT", nothing);
-                      p === nothing ? nothing : isempty(p) ? nothing : p
-                  )),
-                  ## 2. Look for a Project.toml file in the current working directory,
-                  ##    or parent directories, with $HOME as an upper boundary
-                  Base.current_project(),
-                  ## 3. First entry in the load path
-                  get(Base.load_path(), 1, nothing),
-                  ## 4. Fallback to default global environment,
-                  ##    this is more or less unreachable
-                  Base.load_path_expand("@v#.#"),
-              ))
-          end
-          @info "Running language server" VERSION pwd() project_path depot_path
-          server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path)
-          server.runlinter = true
-          run(server)
-        \]\]
-    };
-      new_config.cmd = cmd
-    end
-}
+In order to have LanguageServer.jl pick up installed packages or dependencies in a Julia project, you must first instantiate the project:
+```sh
+julia --project=/path/to/my/project -e 'using Pkg; Pkg.instantiate()'
 ```
-You can find the path to the globally installed LanguageServer.jl package with the following command:
-
-```bash
-julia -e 'print(Base.find_package("LanguageServer"))'
-```
-
-Note: the directory passed to `--project=...` should terminate with src, not LanguageServer.jl.
-
     
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
@@ -3485,14 +3438,11 @@ require'lspconfig'.julials.setup{}
   Default Values:
     cmd = { "julia", "--startup-file=no", "--history-file=no", "-e", '    using Pkg\n    Pkg.instantiate()\n    using LanguageServer\n    depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n    project_path = let\n        dirname(something(\n            ## 1. Finds an explicitly set project (JULIA_PROJECT)\n            Base.load_path_expand((\n                p = get(ENV, "JULIA_PROJECT", nothing);\n                p === nothing ? nothing : isempty(p) ? nothing : p\n            )),\n            ## 2. Look for a Project.toml file in the current working directory,\n            ##    or parent directories, with $HOME as an upper boundary\n            Base.current_project(),\n            ## 3. First entry in the load path\n            get(Base.load_path(), 1, nothing),\n            ## 4. Fallback to default global environment,\n            ##    this is more or less unreachable\n            Base.load_path_expand("@v#.#"),\n        ))\n    end\n    @info "Running language server" VERSION pwd() project_path depot_path\n    server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path)\n    server.runlinter = true\n    run(server)\n  ' }
     filetypes = { "julia" }
-    on_new_config = function(new_config, _)
-          local server_path = vim.fn.system 'julia --startup-file=no -q -e \'print(Base.find_package("LanguageServer"))\''
-          local new_cmd = vim.deepcopy(cmd)
-          table.insert(new_cmd, 2, '--project=' .. server_path:sub(0, -19))
-          new_config.cmd = new_cmd
+    on_new_config = function(new_config, root_dir)
+          new_config.cmd_cwd = root_dir
         end,
     root_dir = function(fname)
-          return util.find_git_ancestor(fname) or vim.fn.getcwd()
+          return util.find_git_ancestor(fname) or util.path.dirname(fname)
         end,
 ```
 
