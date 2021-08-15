@@ -19,7 +19,9 @@ local function get_java_executable()
 end
 
 local function get_workspace_dir()
-  return env.WORKSPACE and env.WORKSPACE or util.path.join(env.HOME, 'workspace')
+  local workspace_root = env.WORKSPACE or util.path.join(env.HOME, 'workspace')
+
+  return util.path.join(workspace_root, vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t'))
 end
 
 local function get_jdtls_jar()
