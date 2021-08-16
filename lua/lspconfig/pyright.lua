@@ -12,6 +12,7 @@ local root_files = {
   'pyproject.toml',
   'setup.cfg',
   'requirements.txt',
+  'pyrightconfig.json',
   '.git',
 }
 
