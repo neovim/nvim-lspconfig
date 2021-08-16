@@ -103,7 +103,13 @@ configs[server_name] = {
   default_config = {
     cmd = { 'deno', 'lsp' },
     filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
-    root_dir = util.root_pattern('package.json', 'tsconfig.json', '.git'),
+    root_dir = function(fname)
+      local root_files = {
+        'package.json',
+        'tsconfig.json',
+      }
+      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+    end,
     init_options = {
       enable = true,
       lint = false,
