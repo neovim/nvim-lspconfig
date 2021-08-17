@@ -6,12 +6,22 @@ configs.lean3ls = {
     cmd = { 'lean-language-server', '--stdio', '--', '-M', '4096', '-T', '100000' },
     filetypes = { 'lean3' },
     root_dir = function(fname)
-      return util.root_pattern 'leanpkg.toml'(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+      -- check if inside elan stdlib
+      local stdlib_dir
+      do
+        local _, endpos = fname:find(util.path.sep .. util.path.join('lean', 'library'))
+        if endpos then
+          stdlib_dir = fname:sub(1, endpos)
+        end
+      end
+
+      return util.root_pattern 'leanpkg.toml'(fname)
+        or util.root_pattern 'leanpkg.path'(fname)
+        or stdlib_dir
+        or util.find_git_ancestor(fname)
+        or util.path.dirname(fname)
     end,
     on_new_config = function(config, root)
-      if not util.path.is_file(root .. '/leanpkg.toml') then
-        return
-      end
       if not config.cmd_cwd then
         config.cmd_cwd = root
       end
