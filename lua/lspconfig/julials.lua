@@ -7,9 +7,15 @@ local cmd = {
   '--history-file=no',
   '-e',
   [[
-    using Pkg
-    Pkg.instantiate()
+    # Load LanguageServer.jl: attempt to load from ~/.julia/environments/nvim-lspconfig
+    # with the regular load path as a fallback
+    ls_install_path = joinpath(
+        get(DEPOT_PATH, 1, joinpath(homedir(), ".julia")),
+        "environments", "nvim-lspconfig"
+    )
+    pushfirst!(LOAD_PATH, ls_install_path)
     using LanguageServer
+    popfirst!(LOAD_PATH)
     depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
     project_path = let
         dirname(something(
@@ -51,13 +57,20 @@ configs.julials = {
     description = [[
 https://github.com/julia-vscode/julia-vscode
 
-`LanguageServer.jl` can be installed with `julia` and `Pkg`:
+LanguageServer.jl can be installed with `julia` and `Pkg`:
 ```sh
-julia -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer")'
+julia --project=~/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.add("LanguageServer")'
 ```
-This installs LanguageServer.jl into your global julia environment.
+where `~/.julia/environments/nvim-lspconfig` is the location where
+the default configuration expects LanguageServer.jl to be installed.
 
-In order to have LanguageServer.jl pick up installed packages or dependencies in a Julia project, you must first instantiate the project:
+To update an existing install, use the following command:
+```sh
+julia --project=~/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.update()'
+```
+
+Note: In order to have LanguageServer.jl pick up installed packages or dependencies in a
+Julia project, you must make sure that the project is instantiated:
 ```sh
 julia --project=/path/to/my/project -e 'using Pkg; Pkg.instantiate()'
 ```
