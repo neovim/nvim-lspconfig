@@ -33,6 +33,15 @@ configs[server_name] = {
   on_new_config = function(new_config, new_root_dir)
     local new_probe_dir = get_probe_dir(new_root_dir)
 
+    -- Checking if we should provide legacy support
+    local file = io.open(new_probe_dir..'/@angular/core/package.json', 'r')
+    if file then
+        local file_contents = file:read('*all')
+        if tonumber(file_contents.match(file_contents, [["version": "(%d+).%d+.%d+"]])) < 9 then
+            table.insert(new_config.cmd, "--viewEngine")
+        end
+    end
+
     -- We need to check our probe directories because they may have changed.
     new_config.cmd = {
       'ngserver',
