@@ -5,7 +5,7 @@ configs.fortls = {
   default_config = {
     cmd = { 'fortls' },
     filetypes = { 'fortran' },
-    root_dir = function(fname) 
+    root_dir = function(fname)
       return util.root_pattern('.fortls') or util.find_git_ancestor(fname) or util.path.dirname(fname)
     end,
     settings = {
