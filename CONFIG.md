@@ -2478,7 +2478,6 @@ require'lspconfig'.java_language_server.setup{}
   Commands:
   
   Default Values:
-    cmd = {}
     filetypes = { "java" }
     root_dir = function(startpath)
         return M.search_ancestors(startpath, matcher)
