@@ -1,4 +1,5 @@
 # nvim-lspconfig
+
 A collection of common configurations for Neovim's built-in [language server client](https://neovim.io/doc/user/lsp.html).
 
 This repo handles automatically launching and initializing language servers that are installed on your system.
@@ -24,30 +25,42 @@ These features are not implemented in this repo, but in Neovim core. See `:help 
 * Requires [Neovim v0.5.0](https://github.com/neovim/neovim/releases/tag/v0.5.0) or [Nightly](https://github.com/neovim/neovim/releases/tag/nightly). Update Neovim and nvim-lspconfig before reporting an issue.
 
 * Install nvim-lspconfig like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
-```vim
-Plug 'neovim/nvim-lspconfig'
-```
+
+    ```vim
+    Plug 'neovim/nvim-lspconfig'
+    ```
 
 ## Quickstart
+
 1. Install a language server, e.g. [pyright](CONFIG.md#pyright)
-```bash
-npm i -g pyright
-```
+
+    ```bash
+    npm i -g pyright
+    ```
+
 2. Add the language server setup to your init.vim. The server name must match those found in the table of contents in [CONFIG.md](CONFIG.md)
-```vim
-lua << EOF
-require'lspconfig'.pyright.setup{}
-EOF
-```
+
+    ```lua
+    lua << EOF
+    require'lspconfig'.pyright.setup{}
+    EOF
+    ```
+
 3. Create a project, this project must contain a file matching the root directory trigger. See [Automatically launching language servers](#Automatically-launching-language-servers) for additional info.
-```bash
-mkdir test_python_project
-cd test_python_project
-git init
-touch main.py
-```
+
+    ```bash
+    mkdir test_python_project
+    cd test_python_project
+    git init
+    touch main.py
+    ```
+
 4. Launch neovim, the language server will now be attached and providing diagnostics (see `:LspInfo`)
-`nvim main.py`
+
+    ```
+    nvim main.py
+    ```
+
 5. See [Keybindings and completion](#Keybindings-and-completion) for mapping useful functions and enabling omnifunc completion
 
 ## Automatically launching language servers
@@ -65,6 +78,7 @@ lua << EOF
 require'lspconfig'.rust_analyzer.setup{}
 EOF
 ```
+
 For a full list of servers, see [CONFIG.md](CONFIG.md). This document contains installation instructions and additional, optional customization suggestions for each language server. For some servers that are not on your system path (jdtls, elixirls) you will be required to manually add `cmd` as an entry in the table passed to setup. Most language servers can be installed in less than a minute.
 
 ## Keybindings and completion
@@ -72,7 +86,7 @@ For a full list of servers, see [CONFIG.md](CONFIG.md). This document contains i
 nvim-lspconfig does not map keybindings or enable completion by default. Manual, triggered completion can be provided by neovim's built-in omnifunc. For autocompletion, a general purpose [autocompletion plugin](https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion) is required. The following example configuration provides suggested keymaps for the most commonly used language server functions, and manually triggered completion with omnifunc (\<c-x\>\<c-o\>).
 Note: **you must pass the defined `on_attach` as an argument to every `setup {}` call** and **the keybindings in `on_attach` only take effect after the language server has started (attached to the current buffer)**. 
 
-```vim
+```lua
 lua << EOF
 local nvim_lsp = require('lspconfig')
 
@@ -82,7 +96,7 @@ local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  --Enable completion triggered by <c-x><c-o>
+  -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
@@ -122,9 +136,11 @@ for _, lsp in ipairs(servers) do
 end
 EOF
 ```
+
 The `on_attach` hook is used to only activate the bindings after the language server attaches to the current buffer.
 
 ## Debugging
+
 If you have an issue with lspconfig, the first step is to reproduce with a [minimal configuration](https://github.com/neovim/nvim-lspconfig/blob/master/test/minimal_init.lua).
 
 The most common reasons a language server does not start or attach are:
@@ -139,7 +155,7 @@ The most common reasons a language server does not start or attach are:
 
 Before reporting a bug, check your logs and the output of `:LspInfo`. Add the following to your init.vim to enable logging:
 
-```vim
+```lua
 lua << EOF
 vim.lsp.set_log_level("debug")
 EOF
@@ -161,6 +177,7 @@ The following support tab-completion for all arguments:
 * `:LspRestart <client_id>` Defaults to restarting all buffer clients.
 
 ## The wiki
+
 Please see the [wiki](https://github.com/neovim/nvim-lspconfig/wiki) for additional topics, including:
 
 * [Installing language servers automatically](https://github.com/neovim/nvim-lspconfig/wiki/Installing-language-servers-automatically)
@@ -173,14 +190,19 @@ Please see the [wiki](https://github.com/neovim/nvim-lspconfig/wiki) for additio
 In order for neovim to launch certain executables on Windows, it must append `.cmd` to the command name. To work around this, manually append `.cmd` to the entry `cmd` in a given plugin's setup{} call.
 
 ## Contributions
+
 If you are missing a language server on the list in [CONFIG.md](CONFIG.md), contributing
 a new configuration for it would be appreciated. You can follow these steps:
 
 1. Read [CONTRIBUTING.md](CONTRIBUTING.md).
+
 2. Choose a language from [the coc.nvim wiki](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
-  [emacs-lsp](https://github.com/emacs-lsp/lsp-mode#supported-languages).
+[emacs-lsp](https://github.com/emacs-lsp/lsp-mode#supported-languages).
+
 3. Create a new file at `lua/lspconfig/SERVER_NAME.lua`.
-   - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/)
-     to get started. Most configs are simple. For an extensive example see
-     [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/texlab.lua).
+
+    - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/)
+      to get started. Most configs are simple. For an extensive example see
+      [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/texlab.lua).
+
 4. Ask questions on our [Discourse](https://neovim.discourse.group/c/7-category/7) or in the [Neovim Gitter](https://gitter.im/neovim/neovim).
