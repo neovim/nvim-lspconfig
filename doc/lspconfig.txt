@@ -32,43 +32,38 @@ lsp` for more details.
 * Requires [Neovim v0.5.0](https://github.com/neovim/neovim/releases/tag/v0.5.0) or [Nightly](https://github.com/neovim/neovim/releases/tag/nightly). Update Neovim and nvim-lspconfig before reporting an issue.
 * Install nvim-lspconfig like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
 
->
+    ```vim
     Plug 'neovim/nvim-lspconfig'
-<
-
-
+    ```
 ==============================================================================
 4. Quickstart                                           *lspconfig-quickstart*
 
 
 1. Install a language server, e.g. [pyright](CONFIG.md#pyright)
 
->
+    ```bash
     npm i -g pyright
-<
-
-
+    ```
 2. Add the language server setup to your init.vim. The server name must match those found in the table of contents in [CONFIG.md](CONFIG.md)
 
->
-    lua << EOF    
-    require'lspconfig'.pyright.setup{}    
+    ```lua
+    lua << EOF
+    require'lspconfig'.pyright.setup{}
     EOF
-<
-
-
+    ```
 3. Create a project, this project must contain a file matching the root directory trigger. See [Automatically launching language servers](#Automatically-launching-language-servers) for additional info.
 
->
-    mkdir test_python_project    
-    cd test_python_project    
-    git init    
+    ```bash
+    mkdir test_python_project
+    cd test_python_project
+    git init
     touch main.py
-<
-
-
+    ```
 4. Launch neovim, the language server will now be attached and providing diagnostics (see `:LspInfo`)
-`nvim main.py`
+
+    ```
+    nvim main.py
+    ```
 5. See [Keybindings and completion](#Keybindings-and-completion) for mapping useful functions and enabling omnifunc completion
 ==============================================================================
 5. Automatically launching language servers*lspconfig-automatically-launching-language-servers*
@@ -126,7 +121,7 @@ started (attached to the current buffer)**.
       local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end    
       local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end    
     
-      --Enable completion triggered by <c-x><c-o>    
+      -- Enable completion triggered by <c-x><c-o>    
       buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')    
     
       -- Mappings.    
@@ -235,10 +230,11 @@ contributing a new configuration for it would be appreciated. You can follow
 these steps:
 1. Read [CONTRIBUTING.md](CONTRIBUTING.md).
 2. Choose a language from [the coc.nvim wiki](https://github.com/neoclide/coc.nvim/wiki/Language-servers) or
-  [emacs-lsp](https://github.com/emacs-lsp/lsp-mode#supported-languages).
+[emacs-lsp](https://github.com/emacs-lsp/lsp-mode#supported-languages).
 3. Create a new file at `lua/lspconfig/SERVER_NAME.lua`.
-   - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/)
-     to get started. Most configs are simple. For an extensive example see
-     [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/texlab.lua).
+
+    - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/)
+      to get started. Most configs are simple. For an extensive example see
+      [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/texlab.lua).
 4. Ask questions on our [Discourse](https://neovim.discourse.group/c/7-category/7) or in the [Neovim Gitter](https://gitter.im/neovim/neovim).
 vim:tw=78:ts=8:ft=help:norl:
