@@ -1,5 +1,5 @@
 local configs = require 'lspconfig/configs'
-local lspui = require 'lspconfig/_lspui'
+local windows = require 'lspconfig/ui/windows'
 
 return function()
   -- These options need to be cached before switching to the floating
@@ -9,7 +9,7 @@ return function()
   local buffer_filetype = vim.bo.filetype
   local buffer_dir = vim.fn.expand '%:p:h'
 
-  local win_info = lspui.percentage_range_window(0.8, 0.7)
+  local win_info = windows.percentage_range_window(0.8, 0.7)
   local bufnr, win_id = win_info.bufnr, win_info.win_id
 
   local buf_lines = {}
