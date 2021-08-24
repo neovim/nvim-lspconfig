@@ -230,13 +230,10 @@ function M.server_per_root_dir_manager(_make_config)
       if new_config.enabled == false then
         return
       end
-      --TODO:mjlbach -- these prints only show up with nvim_error_writeln()
       if not new_config.cmd then
         print(
           string.format(
-            'Error, cmd not defined for [%q].'
-              .. 'You must manually define a cmd for the default config for this server.'
-              .. 'See server documentation.',
+            'Error: cmd not defined for %q. You must manually set cmd in the setup{} call according to CONFIG.md.',
             new_config.name
           )
         )

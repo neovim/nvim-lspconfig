@@ -61,7 +61,9 @@ function configs.__newindex(t, config_name, config_def)
       trigger = 'BufReadPost *'
     end
     if not (config.autostart == false) then
-      api.nvim_command(string.format("autocmd %s lua require'lspconfig'[%q].manager.try_add()", trigger, config.name))
+      api.nvim_command(
+        string.format("autocmd %s unsilent lua require'lspconfig'[%q].manager.try_add()", trigger, config.name)
+      )
     end
 
     local get_root_dir = config.root_dir
@@ -74,7 +76,7 @@ function configs.__newindex(t, config_name, config_def)
       end
       api.nvim_command(
         string.format(
-          "autocmd %s lua require'lspconfig'[%q].manager.try_add_wrapper()",
+          "autocmd %s unsilent lua require'lspconfig'[%q].manager.try_add_wrapper()",
           'BufReadPost ' .. root_dir .. '/*',
           config.name
         )
