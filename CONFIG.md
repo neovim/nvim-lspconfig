@@ -1362,8 +1362,8 @@ require'lspconfig'.dotls.setup{}
   Default Values:
     cmd = { "dot-language-server", "--stdio" }
     filetypes = { "dot" }
-    root_dir = function(filename)
-          return util.root_pattern(unpack(root_files))(filename) or util.path.dirname(filename)
+    root_dir = function(fname)
+          return util.root_pattern(unpack(root_files))(fname) or util.path.dirname(fname)
         end,
 ```
 
@@ -4773,8 +4773,8 @@ require'lspconfig'.racket_langserver.setup{}
   Default Values:
     cmd = { "racket", "--lib", "racket-langserver" }
     filetypes = { "racket", "scheme" }
-    root_dir = function(filename)
-          return util.root_pattern(unpack(root_files))(filename) or util.path.dirname(filename)
+    root_dir = function(fname)
+          return util.root_pattern(unpack(root_files))(fname) or util.path.dirname(fname)
         end,
 ```
 
