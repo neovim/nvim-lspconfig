@@ -4641,8 +4641,16 @@ require'lspconfig'.pyright.setup{}
   Default Values:
     cmd = { "pyright-langserver", "--stdio" }
     filetypes = { "python" }
-    root_dir = function(filename)
-          return util.root_pattern(unpack(root_files))(filename) or util.path.dirname(filename)
+    root_dir = function(fname)
+          local root_files = {
+            'pyproject.toml',
+            'setup.py',
+            'setup.cfg',
+            'requirements.txt',
+            'Pipfile',
+            'pyrightconfig.json',
+          }
+          return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestory(fname) or util.path.dirname(fname)
         end,
     settings = {
       python = {
