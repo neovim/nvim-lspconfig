@@ -57,9 +57,7 @@ configs.texlab = {
   default_config = {
     cmd = { 'texlab' },
     filetypes = { 'tex', 'bib' },
-    root_dir = function(filename)
-      return util.path.dirname(filename)
-    end,
+    root_dir = util.path.dirname,
     settings = {
       texlab = {
         rootDirectory = nil,
