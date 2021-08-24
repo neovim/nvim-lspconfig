@@ -9,8 +9,8 @@ configs.racket_langserver = {
   default_config = {
     cmd = { 'racket', '--lib', 'racket-langserver' },
     filetypes = { 'racket', 'scheme' },
-    root_dir = function(filename)
-      return util.root_pattern(unpack(root_files))(filename) or util.path.dirname(filename)
+    root_dir = function(fname)
+      return util.root_pattern(unpack(root_files))(fname) or util.path.dirname(fname)
     end,
   },
   docs = {
