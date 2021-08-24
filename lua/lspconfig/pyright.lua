@@ -7,15 +7,6 @@ if vim.fn.has 'win32' == 1 then
   bin_name = bin_name .. '.cmd'
 end
 
-local root_files = {
-  'setup.py',
-  'pyproject.toml',
-  'setup.cfg',
-  'requirements.txt',
-  'pyrightconfig.json',
-  '.git',
-}
-
 local function organize_imports()
   local params = {
     command = 'pyright.organizeimports',
@@ -28,8 +19,16 @@ configs[server_name] = {
   default_config = {
     cmd = { bin_name, '--stdio' },
     filetypes = { 'python' },
-    root_dir = function(filename)
-      return util.root_pattern(unpack(root_files))(filename) or util.path.dirname(filename)
+    root_dir = function(fname)
+      local root_files = {
+        'pyproject.toml',
+        'setup.py',
+        'setup.cfg',
+        'requirements.txt',
+        'Pipfile',
+        'pyrightconfig.json',
+      }
+      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestory(fname) or util.path.dirname(fname)
     end,
     settings = {
       python = {
