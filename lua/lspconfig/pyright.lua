@@ -28,7 +28,7 @@ configs[server_name] = {
         'Pipfile',
         'pyrightconfig.json',
       }
-      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestory(fname) or util.path.dirname(fname)
+      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
     end,
     settings = {
       python = {
