@@ -282,5 +282,3 @@ generate_readme('scripts/README_template.md', {
   implemented_servers_list = make_implemented_servers_list(),
   lsp_server_details = make_lsp_sections(),
 })
-
--- vim:et ts=2 sw=2

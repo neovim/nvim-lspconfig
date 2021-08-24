@@ -27,5 +27,3 @@ yarn global add yaml-language-server
     },
   },
 }
-
--- vim:et ts=2 sw=2

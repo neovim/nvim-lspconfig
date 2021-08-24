@@ -74,5 +74,3 @@ configs.kotlin_language_server = {
     },
   },
 }
-
--- vim:et ts=2 sw=2

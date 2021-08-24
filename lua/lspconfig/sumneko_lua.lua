@@ -75,4 +75,3 @@ require'lspconfig'.sumneko_lua.setup {
     },
   },
 }
--- vim:et ts=2

@@ -46,5 +46,3 @@ find /path/to/omnisharp-osx | xargs xattr -r -d com.apple.quarantine
     },
   },
 }
-
--- vim:et ts=2 sw=2

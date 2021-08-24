@@ -74,4 +74,3 @@ For details on how to automatically generate one using CMake look [here](https:/
 }
 
 configs.clangd.switch_source_header = switch_source_header
--- vim:et ts=2 sw=2

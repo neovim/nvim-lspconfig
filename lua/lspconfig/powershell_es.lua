@@ -58,5 +58,3 @@ require'lspconfig'.powershell_es.setup{
     },
   },
 }
-
--- vim:et ts=2 sw=2

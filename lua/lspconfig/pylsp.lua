@@ -29,4 +29,3 @@ Note: This is a community fork of `pyls`.
     ]],
   },
 }
--- vim:et ts=2 sw=2

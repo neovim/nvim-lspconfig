@@ -24,4 +24,3 @@ npm install -g ocaml-langauge-server
     },
   },
 }
--- vim:et ts=2 sw=2

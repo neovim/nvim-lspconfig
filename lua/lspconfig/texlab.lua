@@ -117,4 +117,3 @@ See https://github.com/latex-lsp/texlab/blob/master/docs/options.md for configur
 
 configs.texlab.buf_build = buf_build
 configs.texlab.buf_search = buf_search
--- vim:et ts=2 sw=2

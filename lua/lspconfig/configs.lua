@@ -226,4 +226,3 @@ function configs.__newindex(t, config_name, config_def)
 end
 
 return setmetatable({}, configs)
--- vim:et ts=2 sw=2

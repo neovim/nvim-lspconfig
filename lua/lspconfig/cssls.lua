@@ -47,5 +47,3 @@ require'lspconfig'.cssls.setup {
     },
   },
 }
-
--- vim:et ts=2 sw=2

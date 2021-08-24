@@ -43,5 +43,3 @@ require'lspconfig'.html.setup {
 ]],
   },
 }
-
--- vim:et ts=2 sw=2

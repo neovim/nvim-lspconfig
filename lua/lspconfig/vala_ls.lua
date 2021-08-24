@@ -38,5 +38,3 @@ configs.vala_ls = {
     },
   },
 }
-
--- vim:et ts=2 sw=2

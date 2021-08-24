@@ -27,5 +27,3 @@ Language server for bash, written using tree sitter in typescript.
     },
   },
 }
-
--- vim:et ts=2 sw=2

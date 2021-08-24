@@ -33,4 +33,3 @@ require'lspconfig'.vls.setup {
     },
   },
 }
--- vim:et ts=2

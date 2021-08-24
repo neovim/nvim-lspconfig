@@ -31,5 +31,3 @@ npm install -g typescript typescript-language-server
     },
   },
 }
-
--- vim:et ts=2 sw=2

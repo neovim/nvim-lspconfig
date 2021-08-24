@@ -22,4 +22,3 @@ Language server for verilog and SystemVerilog
     ]],
   },
 }
--- vim:et ts=2 sw=2

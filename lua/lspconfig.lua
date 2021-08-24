@@ -94,4 +94,3 @@ function mt:__index(k)
 end
 
 return setmetatable(M, mt)
--- vim:et ts=2 sw=2

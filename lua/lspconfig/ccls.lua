@@ -42,4 +42,3 @@ lspconfig.ccls.setup {
     },
   },
 }
--- vim:et ts=2 sw=2

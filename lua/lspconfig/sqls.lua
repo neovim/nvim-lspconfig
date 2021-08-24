@@ -25,5 +25,3 @@ Sqls can be installed via `go get github.com/lighttiger2505/sqls`. Instructions 
     ]],
   },
 }
-
--- vim:et ts=2 sw=2
