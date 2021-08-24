@@ -3958,6 +3958,12 @@ require'lspconfig'.omnisharp.setup{}
   Default Values:
     filetypes = { "cs", "vb" }
     init_options = {}
+    on_new_config = function(new_config, new_root_dir)
+          if new_root_dir then
+            table.insert(new_config.cmd, '-s')
+            table.insert(new_config.cmd, new_root_dir)
+          end
+        end,
     root_dir = root_pattern(".sln") or root_pattern(".csproj")
 ```
 
