@@ -5324,6 +5324,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.joinLines.joinAssignments`**: `boolean`
+
+  Default: `true`
+  
+  null
+
 - **`rust-analyzer.joinLines.joinElseIf`**: `boolean`
 
   Default: `true`
@@ -6070,9 +6076,21 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`Lua.completion.requireSeparator`**: `string`
+
+  Default: `"."`
+  
+  null
+
 - **`Lua.completion.showParams`**: `boolean`
 
   Default: `true`
+  
+  null
+
+- **`Lua.completion.showWord`**: `enum { "Enable", "Fallback", "Disable" }`
+
+  Default: `"Fallback"`
   
   null
 
@@ -6100,6 +6118,18 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`Lua.diagnostics.ignoredFiles`**: `enum { "Enable", "Opened", "Disable" }`
+
+  Default: `"Disable"`
+  
+  null
+
+- **`Lua.diagnostics.libraryFiles`**: `enum { "Enable", "Opened", "Disable" }`
+
+  Default: `"Disable"`
+  
+  null
+
 - **`Lua.diagnostics.neededFileStatus`**: `object`
 
   null
@@ -6124,9 +6154,9 @@ This server accepts configuration via the `settings` key.
 
   null
 
-- **`Lua.hint.paramName`**: `boolean`
+- **`Lua.hint.paramName`**: `enum { "All", "Literal", "Disable" }`
 
-  Default: `true`
+  Default: `"All"`
   
   null
 
@@ -6200,7 +6230,7 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.runtime.path`**: `array`
 
-  Default: `{ "?.lua", "?/init.lua", "?/?.lua" }`
+  Default: `{ "?.lua", "?/init.lua" }`
   
   Array items: `{type = "string"}`
   
