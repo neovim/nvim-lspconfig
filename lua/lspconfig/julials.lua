@@ -77,5 +77,3 @@ julia --project=/path/to/my/project -e 'using Pkg; Pkg.instantiate()'
     ]],
   },
 }
-
---- vim:et ts=2 sw=2

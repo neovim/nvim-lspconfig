@@ -38,4 +38,3 @@ and you shouldn't set up `lean3ls` both with it and `lspconfig`.
     },
   },
 }
--- vim:et ts=2 sw=2

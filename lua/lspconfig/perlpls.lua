@@ -29,4 +29,3 @@ To use the language server, ensure that you have PLS installed and that it is in
     },
   },
 }
--- vim:et ts=2 sw=2

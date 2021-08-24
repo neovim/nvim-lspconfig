@@ -45,5 +45,3 @@ npm install -g intelephense
     },
   },
 }
-
--- vim:et ts=2 sw=2

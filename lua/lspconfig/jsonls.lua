@@ -47,5 +47,3 @@ require'lspconfig'.jsonls.setup {
     },
   },
 }
-
--- vim:et ts=2 sw=2

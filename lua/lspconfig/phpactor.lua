@@ -28,5 +28,3 @@ Installation: https://phpactor.readthedocs.io/en/master/usage/standalone.html#gl
     },
   },
 }
-
--- vim:et ts=2 sw=2

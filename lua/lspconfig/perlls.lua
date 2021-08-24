@@ -40,4 +40,3 @@ To use the language server, ensure that you have Perl::LanguageServer installed 
     },
   },
 }
--- vim:et ts=2 sw=2

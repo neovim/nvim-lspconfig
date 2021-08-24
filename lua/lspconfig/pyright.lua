@@ -56,5 +56,3 @@ https://github.com/microsoft/pyright
 ]],
   },
 }
-
--- vim:et ts=2 sw=2

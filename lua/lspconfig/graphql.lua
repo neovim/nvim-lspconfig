@@ -26,5 +26,3 @@ npm install -g graphql-language-service-cli
     },
   },
 }
-
--- vim:et ts=2 sw=2

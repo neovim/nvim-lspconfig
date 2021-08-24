@@ -41,4 +41,3 @@ cmd = {"rustup", "run", "nightly", "rls"}
     },
   },
 }
--- vim:et ts=2 sw=2

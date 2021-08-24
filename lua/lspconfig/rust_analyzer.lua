@@ -60,4 +60,3 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
 }
 
 configs.rust_analyzer.reload_workspace = reload_workspace
--- vim:et ts=2 sw=2

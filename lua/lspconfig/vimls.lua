@@ -39,5 +39,3 @@ npm install -g vim-language-server
 ]],
   },
 }
-
--- vim:et ts=2 sw=2

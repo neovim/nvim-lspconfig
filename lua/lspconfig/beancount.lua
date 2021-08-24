@@ -29,5 +29,3 @@ See https://github.com/polarmutex/beancount-language-server#configuration for co
     },
   },
 }
-
--- vim:et ts=2 sw=2

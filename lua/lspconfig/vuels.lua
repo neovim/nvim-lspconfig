@@ -102,5 +102,3 @@ npm install -g vls
     },
   },
 }
-
--- vim:et ts=2 sw=2

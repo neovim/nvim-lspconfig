@@ -39,5 +39,3 @@ require('lspconfig').als.setup{
     },
   },
 }
-
--- vim:et ts=2 sw=2

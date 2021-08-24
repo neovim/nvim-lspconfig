@@ -24,5 +24,3 @@ npm install -g svelte-language-server
     },
   },
 }
-
--- vim:et ts=2 sw=2

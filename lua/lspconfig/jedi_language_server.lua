@@ -19,4 +19,3 @@ https://github.com/pappasam/jedi-language-server
     },
   },
 }
--- vim:et ts=2 sw=2

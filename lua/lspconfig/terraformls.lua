@@ -20,4 +20,3 @@ Download a released binary from https://github.com/hashicorp/terraform-ls/releas
     },
   },
 }
--- vim:et ts=2 sw=2

@@ -19,4 +19,3 @@ Language server for Swift and C/C++/Objective-C.
     },
   },
 }
--- vim:et ts=2 sw=2

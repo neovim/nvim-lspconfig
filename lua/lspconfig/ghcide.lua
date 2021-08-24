@@ -20,4 +20,3 @@ A library for building Haskell IDE tooling.
     },
   },
 }
--- vim:et ts=2 sw=2

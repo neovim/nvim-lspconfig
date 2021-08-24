@@ -31,5 +31,3 @@ This LSP can be installed via  `npm`. Find further instructions on manual instal
     ]],
   },
 }
-
--- vim:et ts=2 sw=2

@@ -19,4 +19,3 @@ Installation instructions can be found in https://github.com/terraform-linters/t
     },
   },
 }
--- vim:et ts=2 sw=2
