@@ -321,4 +321,15 @@ function M.find_package_json_ancestor(startpath)
   end)
 end
 
+function M.get_active_client_by_ft(filetype)
+  local clients = vim.lsp.get_active_clients()
+  local clients_list = {}
+  for _, client in pairs(clients) do
+    if vim.tbl_contains(client.config.filetypes, filetype) then
+      table.insert(clients_list, client.name)
+    end
+  end
+  return clients_list
+end
+
 return M

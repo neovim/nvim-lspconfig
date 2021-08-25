@@ -1,4 +1,4 @@
--- The following is extracted and modified from plenary.vnim by
+-- The following is extracted and modified from popup.nvim by
 -- TJ Devries. It is not a stable API, and is expected to change
 --
 local function apply_defaults(original, defaults)
@@ -40,10 +40,12 @@ function win_float.default_opts(options)
     width = width,
     height = height,
     style = 'minimal',
+    border = 'rounded',
   }
 
   return opts
 end
+
 --- Create window that takes up certain percentags of the current screen.
 ---
 --- Works regardless of current buffers, tabs, splits, etc.
@@ -90,16 +92,6 @@ function win_float.percentage_range_window(col_range, row_range, options)
 
   win_opts.col = math.floor(vim.o.columns * col_start_percentage)
   win_opts.width = math.floor(vim.o.columns * width_percentage)
-  win_opts.border = {
-    { ' ', 'NormalFloat' },
-    { ' ', 'NormalFloat' },
-    { ' ', 'NormalFloat' },
-    { ' ', 'NormalFloat' },
-    { ' ', 'NormalFloat' },
-    { ' ', 'NormalFloat' },
-    { ' ', 'NormalFloat' },
-    { ' ', 'NormalFloat' },
-  }
 
   local bufnr = options.bufnr or vim.api.nvim_create_buf(false, true)
   local win_id = vim.api.nvim_open_win(bufnr, true, win_opts)
