@@ -6517,6 +6517,18 @@ This server accepts configuration via the `settings` key.
   
   Per\-workspace list of module directories for the language server to read
 
+- **`terraform-ls.terraformExecPath`**: `string`
+
+  Path to the Terraform binary
+
+- **`terraform-ls.terraformExecTimeout`**: `string`
+
+  Overrides Terraform execution timeout \(e\.g\. 30s\)
+
+- **`terraform-ls.terraformLogFilePath`**: `string`
+
+  Path to a file for Terraform executions to be logged into \(TF\_LOG\_PATH\) with support for variables \(e\.g\. Timestamp\, Pid\, Ppid\) via Go template syntax \{\{\.VarName\}\}
+
 - **`terraform.languageServer`**: `object`
 
   Default: `{args = { "serve" },external = true,maxNumberOfProblems = 100,pathToBinary = "",["trace.server"] = "off"}`
