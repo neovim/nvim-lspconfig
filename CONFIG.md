@@ -4320,6 +4320,156 @@ Installation:
 
 - Ensure you can run `puppet-languageserver` from outside the editor-services directory.
 
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`puppet.editorService.debugFilePath`**: `string`
+
+  Default: `""`
+  
+  The absolute filepath where the Puppet Editor Service will output the debugging log\. By default no logfile is generated
+
+- **`puppet.editorService.enable`**: `boolean`
+
+  Default: `true`
+  
+  Enable\/disable advanced Puppet Language Features
+
+- **`puppet.editorService.featureFlags`**: `array`
+
+  Default: `{}`
+  
+  An array of strings of experimental features to enable in the Puppet Editor Service
+
+- **`puppet.editorService.foldingRange.enable`**: `boolean`
+
+  Default: `true`
+  
+  Enable\/disable syntax aware code folding provider
+
+- **`puppet.editorService.foldingRange.showLastLine`**: `boolean`
+
+  Show or hide the last line in code folding regions
+
+- **`puppet.editorService.formatOnType.enable`**: `boolean`
+
+  Enable\/disable the Puppet document on\-type formatter\, for example hashrocket alignment
+
+- **`puppet.editorService.formatOnType.maxFileSize`**: `integer`
+
+  Default: `4096`
+  
+  Sets the maximum file size \(in Bytes\) that document on\-type formatting will occur\. Setting this to zero \(0\) will disable the file size check\. Note that large file sizes can cause performance issues\.
+
+- **`puppet.editorService.hover.showMetadataInfo`**: `boolean`
+
+  Default: `true`
+  
+  Enable or disable showing Puppet Module version information in the metadata\.json file
+
+- **`puppet.editorService.loglevel`**: `enum { "debug", "error", "normal", "warning", "verbose" }`
+
+  Default: `"normal"`
+  
+  Set the logging verbosity level for the Puppet Editor Service\, with Debug producing the most output and Error producing the least
+
+- **`puppet.editorService.protocol`**: `enum { "stdio", "tcp" }`
+
+  Default: `"stdio"`
+  
+  The protocol used to communicate with the Puppet Editor Service\. By default the local STDIO protocol is used\.
+
+- **`puppet.editorService.puppet.confdir`**: `string`
+
+  Default: `""`
+  
+  The Puppet configuration directory\. See https\:\/\/puppet\.com\/docs\/puppet\/latest\/dirs\_confdir\.html for more information
+
+- **`puppet.editorService.puppet.environment`**: `string`
+
+  Default: `""`
+  
+  The Puppet environment to use\. See https\:\/\/puppet\.com\/docs\/puppet\/latest\/config\_print\.html\#environments for more information
+
+- **`puppet.editorService.puppet.modulePath`**: `string`
+
+  Default: `""`
+  
+  Additional module paths to use when starting the Editor Services\. On Windows this is delimited with a semicolon\, and on all other platforms\, with a colon\. For example C\:\\Path1\;C\:\\Path2
+
+- **`puppet.editorService.puppet.vardir`**: `string`
+
+  Default: `""`
+  
+  The Puppet cache directory\. See https\:\/\/puppet\.com\/docs\/puppet\/latest\/dirs\_vardir\.html for more information
+
+- **`puppet.editorService.puppet.version`**: `string`
+
+  Default: `""`
+  
+  The version of Puppet to use\. For example \'5\.4\.0\'\. This is generally only applicable when using the PDK installation type\. If Puppet Editor Services is unable to use this version\, it will default to the latest available version of Puppet\.
+
+- **`puppet.editorService.tcp.address`**: `string`
+
+  The IP address or hostname of the remote Puppet Editor Service to connect to\, for example \'computer\.domain\' or \'192\.168\.0\.1\'\. Only applicable when the editorService\.protocol is set to tcp
+
+- **`puppet.editorService.tcp.port`**: `integer`
+
+  The TCP Port of the remote Puppet Editor Service to connect to\. Only applicable when the editorService\.protocol is set to tcp
+
+- **`puppet.editorService.timeout`**: `integer`
+
+  Default: `10`
+  
+  The timeout to connect to the Puppet Editor Service
+
+- **`puppet.format.enable`**: `boolean`
+
+  Default: `true`
+  
+  Enable\/disable the Puppet document formatter
+
+- **`puppet.installDirectory`**: `string`
+
+  null
+
+- **`puppet.installType`**: `enum { "auto", "pdk", "agent" }`
+
+  Default: `"auto"`
+  
+  null
+
+- **`puppet.notification.nodeGraph`**: `enum { "messagebox", "statusbar", "none" }`
+
+  Default: `"messagebox"`
+  
+  The type of notification used when a node graph is being generated\. Default value of messagebox
+
+- **`puppet.notification.puppetResource`**: `enum { "messagebox", "statusbar", "none" }`
+
+  Default: `"messagebox"`
+  
+  The type of notification used when a running Puppet Resouce\. Default value of messagebox
+
+- **`puppet.pdk.checkVersion`**: `boolean`
+
+  Default: `true`
+  
+  Enable\/disable checking if installed PDK version is latest
+
+- **`puppet.titleBar.pdkNewModule.enable`**: `boolean`
+
+  Default: `true`
+  
+  Enable\/disable the PDK New Module icon in the Editor Title Bar
+
+- **`puppet.validate.resolvePuppetfiles`**: `boolean`
+
+  Default: `true`
+  
+  Enable\/disable using dependency resolution for Puppetfiles
+
+</details>
 
 
 **Snippet to enable the language server:**
