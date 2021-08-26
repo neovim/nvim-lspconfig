@@ -1044,6 +1044,10 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`dart.previewVsCodeTestRunner`**: `boolean`
+
+  PREVIEW\: Whether to enable reporting tests into the VS Code Test Runner \(requires restart\)\.
+
 - **`dart.promptToGetPackages`**: `boolean`
 
   Default: `true`
