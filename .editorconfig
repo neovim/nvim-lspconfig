@@ -8,6 +8,10 @@ end_of_line = lf
 insert_final_newline = true
 charset = utf-8
 
+[*.lua]
+indent_style = space
+indent_size = 2
+
 [{Makefile,**/Makefile,runtime/doc/*.txt}]
 indent_style = tab
 indent_size = 8
