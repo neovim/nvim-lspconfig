@@ -58,7 +58,7 @@ local function make_config_info(config)
   local info_lines = {
     'filetypes:         ' .. config_info.filetypes,
     'root directory:    ' .. config_info.root_dir,
-    'command:           ' .. config_info.cmd,
+    'cmd:               ' .. config_info.cmd,
     'cmd is executable: ' .. config_info.cmd_is_executable,
     'autostart:         ' .. config_info.autostart,
     'custom handlers:   ' .. config_info.handlers,
@@ -95,7 +95,7 @@ local function make_client_info(client)
     'filetypes:       ' .. client_info.filetypes,
     'autostart:       ' .. client_info.autostart,
     'root directory:  ' .. client_info.root_dir,
-    'command:         ' .. client_info.cmd,
+    'cmd:             ' .. client_info.cmd,
   }
 
   if client.config.lspinfo then
@@ -190,7 +190,7 @@ return function()
   }
   vim.list_extend(buf_lines, matching_config_header)
 
-  local fmt_buf_lines = indent_lines(buf_lines, '\t')
+  local fmt_buf_lines = indent_lines(buf_lines, ' ')
 
   fmt_buf_lines = vim.lsp.util._trim(fmt_buf_lines, {})
 
