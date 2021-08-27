@@ -32,13 +32,19 @@ vscode-json-language-server only provides range formatting. You can map a comman
 
 ```lua
 require'lspconfig'.jsonls.setup {
-    commands = {
-      Format = {
-        function()
-          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-        end
-      }
+  commands = {
+    Format = {
+      function()
+        vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+      end
     }
+  }
+  get_language_id = function(bufnr, filetype)
+    if filetype == 'json' then
+      return 'jsonc' -- If you want to allow comments in json, You can specify `jsonc` language id.
+    end
+    return filetype
+  end
 }
 ```
 ]],
