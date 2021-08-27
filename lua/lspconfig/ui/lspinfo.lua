@@ -2,10 +2,9 @@ local configs = require 'lspconfig/configs'
 local windows = require 'lspconfig/ui/windows'
 local util = require 'lspconfig/util'
 
-local indent = '\t'
-local cmd_not_found_msg = {
-  'False. Please check your path and ensure the server is installed',
-  '',
+local error_messages = {
+  cmd_not_found = 'Unable to find executable. Please check your path and ensure the server is installed',
+  no_filetype_defined = 'No filetypes defined, Please define filetypes in setup()',
 }
 
 local function trim_blankspace(cmd)
@@ -39,12 +38,13 @@ local function make_config_info(config)
     if vim.fn.executable(config.cmd[1]) == 1 then
       config_info.cmd_is_executable = 'true'
     else
-      config_info.cmd_is_executable = cmd_not_found_msg
+      config_info.cmd_is_executable = error_messages.cmd_not_found
     end
   else
     config_info.cmd = 'cmd not defined'
     config_info.cmd_is_executable = 'NA'
   end
+
   local buffer_dir = vim.fn.expand '%:p:h'
   config_info.root_dir = config.get_root_dir(buffer_dir) or 'NA'
   config_info.autostart = (config.autostart and 'true') or 'false'
@@ -53,13 +53,19 @@ local function make_config_info(config)
 
   local lines = {
     'Config: ' .. config_info.name,
-    '\tfiletypes:         ' .. config_info.filetypes,
-    '\troot directory:    ' .. config_info.root_dir,
-    '\tcommand:           ' .. config_info.cmd,
-    '\tcmd is executable: ' .. config_info.cmd_is_executable,
-    '\tautostart:         ' .. config_info.autostart,
-    '\tcustom handlers:   ' .. config_info.handlers,
   }
+
+  local info_lines = {
+    'filetypes:         ' .. config_info.filetypes,
+    'root directory:    ' .. config_info.root_dir,
+    'command:           ' .. config_info.cmd,
+    'cmd is executable: ' .. config_info.cmd_is_executable,
+    'autostart:         ' .. config_info.autostart,
+    'custom handlers:   ' .. config_info.handlers,
+  }
+
+  vim.list_extend(lines, indent_lines(info_lines, '\t'))
+
   return lines
 end
 
@@ -83,18 +89,21 @@ local function make_client_info(client)
       .. ', bufnr: ['
       .. client_info.attached_buffers_list
       .. '])',
-    '\tfiletypes:       ' .. client_info.filetypes,
-    '\tautostart:       ' .. client_info.autostart,
-    '\troot directory:  ' .. client_info.root_dir,
-    '\tcommand:         ' .. client_info.cmd,
   }
+
+  local info_lines = {
+    'filetypes:       ' .. client_info.filetypes,
+    'autostart:       ' .. client_info.autostart,
+    'root directory:  ' .. client_info.root_dir,
+    'command:         ' .. client_info.cmd,
+  }
+
   if client.config.lspinfo then
     local server_specific_info = client.config.lspinfo(client.config)
-    server_specific_info = vim.tbl_map(function(val)
-      return indent .. '\t' .. val
-    end, server_specific_info)
-    lines = vim.list_extend(lines, server_specific_info)
+    info_lines = vim.list_extend(info_lines, server_specific_info)
   end
+
+  vim.list_extend(lines, indent_lines(info_lines, '\t'))
 
   return lines
 end
@@ -162,7 +171,7 @@ return function()
 
   local other_matching_configs_header = {
     '',
-    'Other clients that match the filetype ' .. buffer_filetype .. ':',
+    'Other clients that match the filetype: ' .. buffer_filetype,
     '',
   }
 
@@ -171,20 +180,7 @@ return function()
   if not vim.tbl_isempty(other_matching_configs) then
     vim.list_extend(buf_lines, other_matching_configs_header)
     for _, config in pairs(other_matching_configs) do
-      if config.filetypes then
-        for _, filetype_match in pairs(config.filetypes) do
-          if filetype_match == buffer_filetype then
-            vim.list_extend(buf_lines, make_config_info(config))
-          end
-        end
-      else
-        local matching_config_info = {
-          '',
-          'Config: ' .. config.name,
-          '\tfiletype: ' .. 'No filetypes defined, please define filetypes in setup().',
-        }
-        vim.list_extend(buf_lines, matching_config_info)
-      end
+      vim.list_extend(buf_lines, make_config_info(config))
     end
   end
 
@@ -194,7 +190,7 @@ return function()
   }
   vim.list_extend(buf_lines, matching_config_header)
 
-  local fmt_buf_lines = indent_lines(buf_lines, indent)
+  local fmt_buf_lines = indent_lines(buf_lines, '\t')
 
   fmt_buf_lines = vim.lsp.util._trim(fmt_buf_lines, {})
 
@@ -207,18 +203,16 @@ return function()
 
   vim.fn.matchadd(
     'Error',
-    'No filetypes defined, please define filetypes in setup().\\|' .. 'cmd not defined\\|' .. cmd_not_found_msg
+    error_messages.no_filetype_defined .. '.\\|' .. 'cmd not defined\\|' .. error_messages.cmd_not_found
   )
-  local configs_pattern = '\\%(' .. table.concat(vim.tbl_keys(configs), '\\|') .. '\\)'
-
   vim.cmd 'let m=matchadd("string", "true")'
   vim.cmd 'let m=matchadd("error", "false")'
-  vim.cmd('syntax match Title /\\%(Client\\|Config\\):.*\\zs' .. configs_pattern .. '/')
   for _, config in pairs(configs) do
+    vim.fn.matchadd('Title', '\\%(Client\\|Config\\):.*\\zs' .. config.name .. '\\ze')
     vim.fn.matchadd('Visual', 'list:.*\\zs' .. config.name .. '\\ze')
     if config.filetypes then
       for _, ft in pairs(config.filetypes) do
-        vim.cmd('syntax match Type /\\%(filetypes\\|filetype\\):.*\\zs\\<' .. ft .. '\\>/')
+        vim.fn.matchadd('Type', '\\%(filetypes\\|filetype\\):.*\\zs' .. ft .. '\\ze')
       end
     end
   end

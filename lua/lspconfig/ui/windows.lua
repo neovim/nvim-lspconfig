@@ -40,7 +40,16 @@ function win_float.default_opts(options)
     width = width,
     height = height,
     style = 'minimal',
-    border = 'solid',
+    border = {
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+    },
   }
 
   return opts
@@ -97,7 +106,7 @@ function win_float.percentage_range_window(col_range, row_range, options)
   local win_id = vim.api.nvim_open_win(bufnr, true, win_opts)
   vim.api.nvim_win_set_buf(win_id, bufnr)
 
-  vim.cmd 'setlocal nocursorcolumn'
+  vim.cmd 'setlocal nocursorcolumn ts=2 sw=2'
 
   return {
     bufnr = bufnr,

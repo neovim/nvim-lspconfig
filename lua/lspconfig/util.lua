@@ -338,7 +338,12 @@ function M.get_other_matching_providers(filetype)
   local other_matching_configs = {}
   for _, config in pairs(configs) do
     if not vim.tbl_contains(active_clients_list, config.name) then
-      table.insert(other_matching_configs, config)
+      local filestypes = config.filetypes or {}
+      for _, ft in pairs(filestypes) do
+        if ft == filetype then
+          table.insert(other_matching_configs, config)
+        end
+      end
     end
   end
   return other_matching_configs
