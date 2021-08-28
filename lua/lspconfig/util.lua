@@ -321,4 +321,32 @@ function M.find_package_json_ancestor(startpath)
   end)
 end
 
+function M.get_active_client_by_ft(filetype)
+  local clients = vim.lsp.get_active_clients()
+  local clients_list = {}
+  for _, client in pairs(clients) do
+    if vim.tbl_contains(client.config.filetypes, filetype) then
+      table.insert(clients_list, client.name)
+    end
+  end
+  return clients_list
+end
+
+function M.get_other_matching_providers(filetype)
+  local configs = require 'lspconfig/configs'
+  local active_clients_list = M.get_active_client_by_ft(filetype)
+  local other_matching_configs = {}
+  for _, config in pairs(configs) do
+    if not vim.tbl_contains(active_clients_list, config.name) then
+      local filestypes = config.filetypes or {}
+      for _, ft in pairs(filestypes) do
+        if ft == filetype then
+          table.insert(other_matching_configs, config)
+        end
+      end
+    end
+  end
+  return other_matching_configs
+end
+
 return M
