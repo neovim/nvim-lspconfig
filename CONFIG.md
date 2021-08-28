@@ -85,6 +85,7 @@ that config.
 - [terraformls](#terraformls)
 - [texlab](#texlab)
 - [tflint](#tflint)
+- [theme_check](#theme_check)
 - [tsserver](#tsserver)
 - [vala_ls](#vala_ls)
 - [vimls](#vimls)
@@ -6795,6 +6796,45 @@ require'lspconfig'.tflint.setup{}
     cmd = { "tflint", "--langserver" }
     filetypes = { "terraform" }
     root_dir = root_pattern(".terraform", ".git", ".tflint.hcl")
+```
+
+
+## theme_check
+
+https://github.com/Shopify/shopify-cli
+
+`theme-check-language-server` is bundled with `shopify-cli` or it can also be installed via
+
+https://github.com/Shopify/theme-check#installation
+
+**NOTE:**
+If installed via Homebrew, `cmd` must be set to 'theme-check-liquid-server'
+
+```lua
+require lspconfig.theme_check.setup {
+  cmd = { 'theme-check-liquid-server' }
+}
+```
+
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.theme_check.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "theme-check-language-server", "--stdio" }
+    filetypes = { "liquid" }
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
+    settings = {}
 ```
 
 
