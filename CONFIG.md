@@ -2430,7 +2430,7 @@ require'lspconfig'.html.setup{}
       }
     }
     root_dir = function(fname)
-          return root_pattern(fname) or vim.loop.os_homedir()
+          return util.root_pattern('package.json', '.git')(fname) or util.path.dirname(fname)
         end,
     settings = {}
 ```
