@@ -30,7 +30,10 @@ labels: bug
 ### Health check
 <details>
 <summary>Checkhealth result</summary>
-<!-- Run `:checkhealth lspconfig` and paste the result here-->
+
+```
+Run `:checkhealth lspconfig` and paste the result here
+```
 </details>
 
 ### LSP log
@@ -38,5 +41,8 @@ labels: bug
      in init.vim and paste a link to your log file, located at  $HOME/.cache/nvim/lsp.log (formerly $HOME/.local/share/nvim/lsp.log) -->
 <details>
 <summary>Log file</summary>
-<!-- past you log between here -->
+
+```
+paste your log here
+```
 </details>
