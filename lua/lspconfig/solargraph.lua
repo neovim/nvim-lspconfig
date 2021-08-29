@@ -15,7 +15,9 @@ configs.solargraph = {
     },
     init_options = { formatting = true },
     filetypes = { 'ruby' },
-    root_dir = util.root_pattern('Gemfile', '.git'),
+    root_dir = function(fname)
+      return util.root_pattern 'Gemfile'(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+    end,
   },
   docs = {
     package_json = 'https://raw.githubusercontent.com/castwide/vscode-solargraph/master/package.json',
@@ -31,7 +33,7 @@ gem install --user-install solargraph
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern("Gemfile", ".git")]],
+      root_dir = [[root_pattern("Gemfile", ".git") or dirname]],
     },
   },
 }
