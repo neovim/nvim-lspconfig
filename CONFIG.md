@@ -16,6 +16,7 @@ that config.
 - [codeqlls](#codeqlls)
 - [crystalline](#crystalline)
 - [cssls](#cssls)
+- [daml](#daml)
 - [dartls](#dartls)
 - [denols](#denols)
 - [dhall_lsp_server](#dhall_lsp_server)
@@ -561,6 +562,21 @@ require'lspconfig'.cssls.setup{}
 ```
 
 
+## daml
+
+https://daml.com
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.daml.setup{}
+```
+
+Default Values:
+  cmd = { "daml" }
+  filetypes = { "daml" }
+  root_dir = root_pattern('daml.yaml')
+
+Language server for Daml.
 ## dartls
 
 https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec
