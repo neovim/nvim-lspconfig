@@ -57,6 +57,7 @@ that config.
 - [perlls](#perlls)
 - [perlpls](#perlpls)
 - [phpactor](#phpactor)
+- [psalm](#psalm)
 - [powershell_es](#powershell_es)
 - [prismals](#prismals)
 - [puppet](#puppet)
@@ -4234,6 +4235,31 @@ require'lspconfig'.phpactor.setup{}
     cmd = { "phpactor", "language-server" }
     filetypes = { "php" }
     root_dir = root_pattern("composer.json", ".git")
+```
+
+
+## psalm
+
+https://psalm.dev/
+
+Installation: https://psalm.dev/docs/running_psalm/installation/
+
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.psalm.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "bin/psalm-language-server" }
+    filetypes = { "php" }
+    root_dir = root_pattern("psalm.xml", "composer.json", ".git")
 ```
 
 
