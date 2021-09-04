@@ -4631,6 +4631,10 @@ This server accepts configuration via the `settings` key.
   
   Tool to use to for formatting\. Must be installed and on PATH \(or npm installed with addNpmPath set\)
 
+- **`purescript.fullBuildOnSave`**: `boolean`
+
+  Whether to perform a full build on save with the configured build command \(rather than IDE server fast rebuild\)\. This is not generally recommended because it is slow\, but it does mean that dependant modules are rebuilt as necessary\.
+
 - **`purescript.importsPreferredModules`**: `array`
 
   Default: `{ "Prelude" }`
