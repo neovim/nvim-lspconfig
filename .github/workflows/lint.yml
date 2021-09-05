@@ -11,14 +11,20 @@ jobs:
     steps:
     - name: Checkout sources
       uses: actions/checkout@v2
-    - name: Setup luacheck
-      run: |
-        sudo apt update &&
-        sudo apt install -y lua5.1 luarocks &&
-        sudo luarocks install luacheck
+
+    - name: Use lua
+      uses: leafo/gh-actions-lua@v8
+
+    - name: Use luarocks
+      uses: leafo/gh-actions-luarocks@v4
+
+    - name: Install luacheck
+      run: luarocks install luacheck
+
     - name: Run luacheck
       run: |
-        sudo make lint
+        make lint
+
   style-lint:
     runs-on: [ubuntu-latest]
     steps: 
