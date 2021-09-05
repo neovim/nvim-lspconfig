@@ -3638,9 +3638,6 @@ require'lspconfig'.lean3ls.setup{}
     cmd = { "lean-language-server", "--stdio", "--", "-M", "4096", "-T", "100000" }
     filetypes = { "lean3" }
     on_new_config = function(config, root)
-          if not util.path.is_file(root .. '/leanpkg.toml') then
-            return
-          end
           if not config.cmd_cwd then
             config.cmd_cwd = root
           end
@@ -3678,9 +3675,6 @@ require'lspconfig'.leanls.setup{}
     cmd = { "lean", "--server" }
     filetypes = { "lean" }
     on_new_config = function(config, root)
-          if not util.path.is_file(root .. '/leanpkg.toml') then
-            return
-          end
           if not config.cmd_cwd then
             config.cmd_cwd = root
           end
