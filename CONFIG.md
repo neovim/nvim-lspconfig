@@ -73,6 +73,7 @@ that config.
 - [rust_analyzer](#rust_analyzer)
 - [scry](#scry)
 - [serve_d](#serve_d)
+- [solang](#solang)
 - [solargraph](#solargraph)
 - [sorbet](#sorbet)
 - [sourcekit](#sourcekit)
@@ -5793,6 +5794,38 @@ require'lspconfig'.serve_d.setup{}
     cmd = { "serve-d" }
     filetypes = { "d" }
     root_dir = util.root_pattern("dub.json", "dub.sdl", ".git")
+```
+
+
+## solang
+
+A language server for Solidity
+
+See the [documentation](https://solang.readthedocs.io/en/latest/installing.html) for installation instructions.
+
+The language server only provides the following capabilities:
+* Syntax highlighting
+* Diagnostics
+* Hover
+
+There is currently no support for completion, goto definition, references, or other functionality.
+
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.solang.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "solang", "--language-server" }
+    filetypes = { "solidity" }
+    root_dir = root_pattern(".git")
 ```
 
 
