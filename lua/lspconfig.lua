@@ -67,7 +67,7 @@ function M._root._setup()
           clients = { vim.lsp.get_client_by_id(tonumber(client_id)) }
         end
 
-        for _, client in ipairs(clients) do
+        for _, client in pairs(clients) do
           local client_name = client.name
           client.stop()
           vim.defer_fn(function()
