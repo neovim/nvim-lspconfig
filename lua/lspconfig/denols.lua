@@ -65,7 +65,18 @@ local function virtual_text_document(uri)
   virtual_text_document_handler(uri, result)
 end
 
-local function denols_handler(err, method, result)
+local function denols_handler(err, methodOrResult, resultOrContext)
+  local is_new_signature = resultOrContext.method ~= nil
+  local result
+
+  -- LSP handler signature was changed in
+  -- https://github.com/neovim/neovim/commit/df17d7844ed7dedcb80f9405f7078a046a12524a
+  if is_new_signature then
+    result = methodOrResult
+  else
+    result = resultOrContext
+  end
+
   if not result or vim.tbl_isempty(result) then
     return nil
   end
@@ -79,7 +90,14 @@ local function denols_handler(err, method, result)
     end
   end
 
-  lsp.handlers[method](err, method, result)
+  if is_new_signature then
+    local context = resultOrContext
+    local method = resultOrContext.method
+    lsp.handlers[method](err, result, context)
+  else
+    local method = methodOrResult
+    lsp.handlers[method](err, method, result)
+  end
 end
 
 local function denols_definition()
