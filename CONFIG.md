@@ -1001,6 +1001,10 @@ This server accepts configuration via the `settings` key.
   
   The maximum length of a line in the log file\. Lines longer than this will be truncated and suffixed with an ellipsis\.
 
+- **`dart.normalizeFileCasing`**: `boolean`
+
+  Whether to normalize file casings before sending them to the LSP server\. This may fix issues with file\_names lints not disappearing after renaming a file if the VS Code API continues to use the original casing\.
+
 - **`dart.notifyAnalyzerErrors`**: `boolean`
 
   Default: `true`
@@ -1074,6 +1078,12 @@ This server accepts configuration via the `settings` key.
 - **`dart.pubTestLogFile`**: `null|string`
 
   Default: `vim.NIL`
+  
+  null
+
+- **`dart.renameFilesWithClasses`**: `enum { "never", "prompt", "always" }`
+
+  Default: `"never"`
   
   null
 
@@ -3411,6 +3421,16 @@ This server accepts configuration via the `settings` key.
 - **`julia.persistentSession.tmuxSessionName`**: `string`
 
   Default: `"julia_vscode"`
+  
+  null
+
+- **`julia.plots.path`**: `string`
+
+  The output directory to save plots to
+
+- **`julia.showRuntimeDiagnostics`**: `boolean`
+
+  Default: `true`
   
   null
 
