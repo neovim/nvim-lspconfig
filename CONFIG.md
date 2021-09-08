@@ -6,6 +6,7 @@ that config.
 - [als](#als)
 - [angularls](#angularls)
 - [ansiblels](#ansiblels)
+- [arduino_language_server](#arduino_language_server)
 - [bashls](#bashls)
 - [beancount](#beancount)
 - [bicep](#bicep)
@@ -217,6 +218,31 @@ require'lspconfig'.ansiblels.setup{}
         }
       }
     }
+```
+
+
+## arduino_language_server
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.arduino_language_server.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "arduino-language-server" }
+    docs = {
+      description = "https://github.com/arduino/arduino-language-server\n\nLanguage server for Arduino\n\nThe `arduino-language-server` can be installed by running:\n\tgo get -u github.com/arduino/arduino-language-server\n\nThe `arduino-cli` tools must also be installed. Follow these instructions for your distro:\n\thttps://arduino.github.io/arduino-cli/latest/installation/\n\nAfter installing the `arduino-cli` tools, follow these instructions for generating\na configuration file:\n\thttps://arduino.github.io/arduino-cli/latest/getting-started/#create-a-configuration-file\nand make sure you install any relevant platforms libraries:\n\thttps://arduino.github.io/arduino-cli/latest/getting-started/#install-the-core-for-your-board\n\nThe language server also requires `clangd` be installed. It will look for `clangd` by default but\nthe binary path can be overridden if need be.\n\nAfter all dependencies are installed you'll need to override the lspconfig command for the\nlanguage server in your setup function with the necessary configurations:\n\n```lua\nlspconfig.arduino_language_server.setup({\n\tcmd =  {\n\t\t-- Required\n\t\t\"arduino-language-server\",\n\t\t\"-cli-config\", \"/path/to/arduino-cli.yaml\",\n\t\t-- Optional\n\t\t\"-cli\", \"/path/to/arduino-cli\",\n\t\t\"-clangd\", \"/path/to/clangd\"\n\t}\n})\n```\n\nFor further instruction about configuration options, run `arduino-language-server --help`.\n\n"
+    }
+    filetypes = { "arduino" }
+    root_dir = function(fname)
+          return util.root_pattern '*.ino'(fname)
+        end,
 ```
 
 
