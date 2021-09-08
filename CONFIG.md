@@ -4728,7 +4728,7 @@ require'lspconfig'.purescriptls.setup{}
   Default Values:
     cmd = { "purescript-language-server", "--stdio" }
     filetypes = { "purescript" }
-    root_dir = root_pattern("spago.dhall, bower.json")
+    root_dir = root_pattern("spago.dhall, 'psc-package.json', bower.json")
 ```
 
 
