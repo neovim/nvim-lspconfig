@@ -7,11 +7,11 @@ local bin_name = 'dart'
 local find_dart_sdk_root_path = function()
   if os.getenv 'FLUTTER_SDK' then
     local flutter_path = os.getenv 'FLUTTER_SDK'
-    return util.path.path_join(flutter_path, 'cache', 'dart-sdk', 'bin', 'dart')
+    return util.path.join(flutter_path, 'cache', 'dart-sdk', 'bin', 'dart')
   elseif vim.fn['executable'] 'flutter' == 1 then
     local flutter_path = vim.fn['resolve'](vim.fn['exepath'] 'flutter')
     local flutter_bin = vim.fn['fnamemodify'](flutter_path, ':h')
-    return util.path.path_join(flutter_bin, 'cache', 'dart-sdk', 'bin', 'dart')
+    return util.path.join(flutter_bin, 'cache', 'dart-sdk', 'bin', 'dart')
   elseif vim.fn['executable'] 'dart' == 1 then
     return vim.fn['resolve'](vim.fn['exepath'] 'dart')
   else
@@ -21,7 +21,7 @@ end
 
 local analysis_server_snapshot_path = function()
   local dart_sdk_root_path = vim.fn['fnamemodify'](find_dart_sdk_root_path(), ':h')
-  local snapshot = util.path.path_join(dart_sdk_root_path, 'snapshots', 'analysis_server.dart.snapshot')
+  local snapshot = util.path.join(dart_sdk_root_path, 'snapshots', 'analysis_server.dart.snapshot')
 
   if vim.fn['has'] 'win32' == 1 or vim.fn['has'] 'win64' == 1 then
     snapshot = snapshot:gsub('/', '\\')
