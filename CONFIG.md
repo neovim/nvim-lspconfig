@@ -55,6 +55,7 @@ that config.
 - [ocamlls](#ocamlls)
 - [ocamllsp](#ocamllsp)
 - [omnisharp](#omnisharp)
+- [pasls](#pasls)
 - [perlls](#perlls)
 - [perlpls](#perlpls)
 - [phpactor](#phpactor)
@@ -4041,6 +4042,54 @@ require'lspconfig'.omnisharp.setup{}
           end
         end,
     root_dir = root_pattern(".sln") or root_pattern(".csproj")
+```
+
+
+## pasls
+
+https://github.com/genericptr/pascal-language-server
+
+An LSP server implementation for Pascal variants that are supported by Free Pascal, including Object Pascal. It uses CodeTools from Lazarus as backend.
+
+First set `cmd` to the Pascal lsp binary.
+
+Customization options are passed to pasls as environment variables for example in your `.bashrc`:
+	    ```bash
+export FPCDIR='/usr/lib/fpc/src',
+export PP='/usr/lib/fpc/3.2.2/ppcx64',
+export LAZARUSDIR='/usr/lib/lazarus',
+export FPCTARGET='',
+export FPCTARGETCPU='x86_64',
+
+		```
+
+`FPCDIR` : FPC source directory (This is the only required option for the server to work).
+
+`PP` : Path to the Free Pascal compiler executable.
+
+`LAZARUSDIR` : Path to the Lazarus sources.
+
+`FPCTARGET` : Target operating system for cross compiling.
+
+`FPCTARGETCPU` : Target CPU for cross compiling.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.pasls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "pasls" }
+    filetypes = { "pascal" }
+    root_dir = function(fname)
+          return util.find_git_ancestor(fname) or util.path.dirname(fname)
+        end,
 ```
 
 
