@@ -92,6 +92,7 @@ that config.
 - [vala_ls](#vala_ls)
 - [vimls](#vimls)
 - [vls](#vls)
+- [volar](#volar)
 - [vuels](#vuels)
 - [yamlls](#yamlls)
 - [zeta_note](#zeta_note)
@@ -831,17 +832,17 @@ This server accepts configuration via the `settings` key.
 
   Default: `"kotlin"`
   
-  The programming language to use for Android apps when creating new projects using the \'Flutter\: New Application Project\' command\.
+  The programming language to use for Android apps when creating new projects using the \'Flutter\: New Project\' command\.
 
 - **`dart.flutterCreateIOSLanguage`**: `enum { "objc", "swift" }`
 
   Default: `"swift"`
   
-  The programming language to use for iOS apps when creating new projects using the \'Flutter\: New Application Project\' command\.
+  The programming language to use for iOS apps when creating new projects using the \'Flutter\: New Project\' command\.
 
 - **`dart.flutterCreateOffline`**: `boolean`
 
-  Whether to use offline mode when creating new projects with the \'Flutter\: New Application Project\' command\.
+  Whether to use offline mode when creating new projects with the \'Flutter\: New Project\' command\.
 
 - **`dart.flutterCreateOrganization`**: `null|string`
 
@@ -2168,6 +2169,18 @@ This server accepts configuration via the `settings` key.
   
   If set\, redirects the logs to a file\.
 
+- **`haskell.openDocumentationInHackage`**: `boolean`
+
+  Default: `true`
+  
+  When opening \'Documentation\' for external libraries\, open in hackage by default\. Set to false to instead open in vscode\.
+
+- **`haskell.openSourceInHackage`**: `boolean`
+
+  Default: `true`
+  
+  When opening \'Source\' for external libraries\, open in hackage by default\. Set to false to instead open in vscode\.
+
 - **`haskell.plugin.class.globalOn`**: `boolean`
 
   Default: `true`
@@ -2909,12 +2922,6 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Enable\/disable Smart Selection support for Java\. Disabling this option will not affect the VS Code built\-in word\-based and bracket\-based smart selection\.
-
-- **`java.semanticHighlighting.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable the semantic highlighting\.
 
 - **`java.server.launchMode`**: `enum { "Standard", "LightWeight", "Hybrid" }`
 
@@ -7058,6 +7065,208 @@ require'lspconfig'.vls.setup{}
   Default Values:
     filetypes = { "vlang" }
     root_dir = root_pattern("v.mod", ".git")
+```
+
+
+## volar
+
+https://github.com/johnsoncodehk/volar/tree/master/packages/server
+
+Volar language server for Vue
+Volar can be installed via npm
+```sh
+npm install -g @volar/server
+```
+
+With Vue 3 projects - it works out of the box.
+
+With Vue 2 projects - requires [additional configuration](https://github.com/johnsoncodehk/volar#using)
+
+Do not run `vuels` and `volar` at the same time.
+
+To check which language servers are running, open a `.vue` file and run the `:LspInfo` command.
+
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`volar-api.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the language server\.
+
+- **`volar-document.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the language server\.
+
+- **`volar-html.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the language server\.
+
+- **`volar.autoCompleteRefs`**: `boolean`
+
+  Default: `true`
+  
+  Auto\-complete Ref value with \`\.value\`\.
+
+- **`volar.checkVueTscVersion`**: `boolean`
+
+  Default: `true`
+  
+  Check node\_modules\/vscode\-vue\-languageservice version when start extension\.
+
+- **`volar.codeLens.pugTools`**: `boolean`
+
+  Default: `true`
+  
+  \[pug ☐\] code lens\.
+
+- **`volar.codeLens.references`**: `boolean`
+
+  Default: `true`
+  
+  \[references\] code lens\.
+
+- **`volar.codeLens.scriptSetupTools`**: `boolean`
+
+  Default: `true`
+  
+  \[ref sugar ☐\] code lens\.
+
+- **`volar.formatting.printWidth`**: `number`
+
+  Default: `100`
+  
+  HTML formatting print width\.
+
+- **`volar.icon.finder`**: `boolean`
+
+  \(Experimental\) Show code finder icon in title area of editor\.
+
+- **`volar.icon.preview`**: `boolean`
+
+  \(Experimental\) Show preview component icon in title area of editor\.
+
+- **`volar.icon.splitEditors`**: `boolean`
+
+  Default: `true`
+  
+  Show split editor icon in title area of editor\.
+
+- **`volar.lowPowerMode`**: `boolean`
+
+  Using one language server to do the work of two language serves can reduce system resource usage\, but features such as auto\-complete will be much slower\.
+
+- **`volar.preferredAttrNameCase`**: `enum { "auto-kebab", "auto-camel", "kebab", "camel" }`
+
+  Default: `"auto-kebab"`
+  
+  Preferred attr name case\.
+
+- **`volar.preferredTagNameCase`**: `enum { "auto", "both", "kebab", "pascal" }`
+
+  Default: `"auto"`
+  
+  Preferred tag name case\.
+
+- **`volar.preview.backgroundColor`**: `string`
+
+  Default: `"#fff"`
+  
+  Component preview background color\.
+
+- **`volar.preview.port`**: `number`
+
+  Default: `3333`
+  
+  Default port for component preview server\.
+
+- **`volar.preview.transparentGrid`**: `boolean`
+
+  Default: `true`
+  
+  Component preview background style\.
+
+- **`volar.tsPlugin`**: `enum { vim.NIL, true, false }`
+
+  Default: `vim.NIL`
+  
+  Enable Vue TS Server Plugin\.
+  Since TypeScript cannot handle type information for \`\.vue\` imports\, they are shimmed to be a generic Vue component type by default\. In most cases\, this is fine if you don\'t really care about component prop types outside of templates\. However\, if you wish to get actual prop types in \`\.vue\` imports \(for example to get props validation when using manual \`h\(\.\.\.\)\` calls\)\, then you need to enable this setting\.
+
+- **`volar.tsPluginStatus`**: `boolean`
+
+  Default: `true`
+  
+  Display TS Server Plugin status bar item\.
+
+</details>
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.volar.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "volar-server", "--stdio" }
+    filetypes = { "vue" }
+    init_options = {
+      documentFeatures = {
+        documentColor = false,
+        documentFormatting = {
+          defaultPrintWidth = 100
+        },
+        documentSymbol = true,
+        foldingRange = true,
+        linkedEditingRange = true,
+        selectionRange = true
+      },
+      languageFeatures = {
+        callHierarchy = true,
+        codeAction = true,
+        codeLens = true,
+        completion = {
+          defaultAttrNameCase = "kebabCase",
+          defaultTagNameCase = "both"
+        },
+        definition = true,
+        diagnostics = true,
+        documentHighlight = true,
+        documentLink = true,
+        hover = true,
+        references = true,
+        rename = true,
+        renameFileRefactoring = true,
+        schemaRequestService = true,
+        semanticTokens = false,
+        signatureHelp = true,
+        typeDefinition = true
+      },
+      typescript = {
+        serverPath = ""
+      }
+    }
+    on_new_config = function(new_config, new_root_dir)
+          if
+            new_config.init_options
+            and new_config.init_options.typescript
+            and new_config.init_options.typescript.serverPath == ''
+          then
+            new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
+          end
+        end,
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
 ```
 
 
