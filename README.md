@@ -1,6 +1,6 @@
 # nvim-lspconfig
 
-A collection of common configurations for Neovim's built-in [language server client](https://neovim.io/doc/user/lsp.html).
+A [collection](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md) of common configurations for Neovim's built-in [language server client](https://neovim.io/doc/user/lsp.html).
 
 This repo handles automatically launching and initializing language servers that are installed on your system.
 
