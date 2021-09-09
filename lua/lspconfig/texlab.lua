@@ -16,10 +16,33 @@ local texlab_forward_status = vim.tbl_add_reverse_lookup {
   Unconfigured = 3,
 }
 
+-- add compatibility shim for breaking signature change
+local function mk_handler(fn)
+  return function(...)
+    local config_or_client_id = select(4, ...)
+    local is_new = type(config_or_client_id) ~= 'number'
+    if is_new then
+      return fn(...)
+    else
+      local err = select(1, ...)
+      local method = select(2, ...)
+      local result = select(3, ...)
+      local client_id = select(4, ...)
+      local bufnr = select(5, ...)
+      local config = select(6, ...)
+      return fn(err, result, { method = method, client_id = client_id, bufnr = bufnr }, config)
+    end
+  end
+end
+
+local function request(bufnr, method, params, handler)
+  return lsp.buf_request(bufnr, method, params, mk_handler(handler))
+end
+
 local function buf_build(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local params = { textDocument = { uri = vim.uri_from_bufnr(bufnr) } }
-  lsp.buf_request(bufnr, 'textDocument/build', params, function(err, _, result, _)
+  request(bufnr, 'textDocument/build', params, function(err, result, _)
     if err then
       error(tostring(err))
     end
@@ -33,7 +56,7 @@ local function buf_search(bufnr)
     textDocument = { uri = vim.uri_from_bufnr(bufnr) },
     position = { line = vim.fn.line '.' - 1, character = vim.fn.col '.' },
   }
-  lsp.buf_request(bufnr, 'textDocument/forwardSearch', params, function(err, _, result, _)
+  request(bufnr, 'textDocument/forwardSearch', params, function(err, result, _)
     if err then
       error(tostring(err))
     end
