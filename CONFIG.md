@@ -1484,7 +1484,7 @@ This server accepts configuration via the `settings` key.
 
 - **`elixirLS.dialyzerFormat`**: `enum { "dialyzer", "dialyxir_short", "dialyxir_long" }`
 
-  Default: `"dialyzer"`
+  Default: `"dialyxir_long"`
   
   Formatter to use for Dialyzer warnings
 
@@ -1495,6 +1495,10 @@ This server accepts configuration via the `settings` key.
   Array items: `{enum = { "error_handling", "no_behaviours", "no_contracts", "no_fail_call", "no_fun_app", "no_improper_lists", "no_match", "no_missing_calls", "no_opaque", "no_return", "no_undefined_callbacks", "no_unused", "underspecs", "unknown", "unmatched_returns", "overspecs", "specdiffs" },type = "string"}`
   
   Dialyzer options to enable or disable warnings\. See Dialyzer\'s documentation for options\. Note that the \"race\_conditions\" option is unsupported
+
+- **`elixirLS.enableTestLenses`**: `boolean`
+
+  Show code lenses to run tests in terminal
 
 - **`elixirLS.fetchDeps`**: `boolean`
 
@@ -1508,15 +1512,33 @@ This server accepts configuration via the `settings` key.
   
   Mix environment to use for compilation
 
+- **`elixirLS.mixTarget`**: `string`
+
+  Mix target to use for compilation \(requires Elixir \>\= 1\.8\)
+
 - **`elixirLS.projectDir`**: `string`
 
+  Default: `""`
+  
   Subdirectory containing Mix project if not in the project root
+
+- **`elixirLS.signatureAfterComplete`**: `boolean`
+
+  Default: `true`
+  
+  Show signature help after confirming autocomplete
 
 - **`elixirLS.suggestSpecs`**: `boolean`
 
   Default: `true`
   
   Suggest \@spec annotations inline using Dialyzer\'s inferred success typings \(Requires Dialyzer\)
+
+- **`elixirLS.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the Elixir language server\.
 
 </details>
 
