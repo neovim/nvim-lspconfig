@@ -7266,6 +7266,12 @@ This server accepts configuration via the `settings` key.
   
   Component preview background style\.
 
+- **`volar.takeOverBuiltinTsExtension`**: `boolean`
+
+  Default: `true`
+  
+  If built\-in VSCode TypeScript Extension disabled\, take over language support for \*\.ts\.
+
 - **`volar.tsPlugin`**: `enum { vim.NIL, true, false }`
 
   Default: `vim.NIL`
@@ -7275,8 +7281,6 @@ This server accepts configuration via the `settings` key.
 
 - **`volar.tsPluginStatus`**: `boolean`
 
-  Default: `true`
-  
   Display TS Server Plugin status bar item\.
 
 </details>
