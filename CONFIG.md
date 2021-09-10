@@ -1737,14 +1737,6 @@ This server accepts configuration via the `settings` key.
   
   Is flow enabled
 
-- **`flow.fileExtensions`**: `array`
-
-  Default: `{ ".js", ".mjs", ".jsx", ".flow", ".json" }`
-  
-  Array items: `{type = "string"}`
-  
-  \(Supported only when useLSP\: false\)\. File extensions to consider for flow processing
-
 - **`flow.lazyMode`**: `string`
 
   Default: `vim.NIL`
@@ -1763,21 +1755,11 @@ This server accepts configuration via the `settings` key.
   
   Absolute path to flow binary\. Special var \$\{workspaceFolder\} or \$\{flowconfigDir\} can be used in path \(NOTE\: in windows you can use \'\/\' and can omit \'\.cmd\' in path\)
 
-- **`flow.runOnAllFiles`**: `boolean`
-
-  \(Supported only when useLSP\: false\) Run Flow on all files\, No need to put \/\/\@flow comment on top of files\.
-
 - **`flow.runOnEdit`**: `boolean`
 
   Default: `true`
   
   If true will run flow on every edit\, otherwise will run only when changes are saved \(Note\: \'useLSP\: true\' only supports syntax errors\)
-
-- **`flow.showStatus`**: `boolean`
-
-  Default: `true`
-  
-  \(Supported only when useLSP\: false\) If true will display flow status is the statusbar
 
 - **`flow.showUncovered`**: `boolean`
 
@@ -1806,12 +1788,6 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Complete functions with their parameter signature\.
-
-- **`flow.useLSP`**: `boolean`
-
-  Default: `true`
-  
-  Turn off to switch from the official Flow Language Server implementation to talking directly to flow\.
 
 - **`flow.useNPMPackagedFlow`**: `boolean`
 
