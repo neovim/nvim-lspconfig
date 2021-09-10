@@ -35,7 +35,12 @@ function M.compat_handler(handler)
       local client_id = select(4, ...)
       local bufnr = select(5, ...)
       local config = select(6, ...)
-      return handler(err, result, { method = method, client_id = client_id, bufnr = bufnr, is_legacy_call = true }, config)
+      return handler(
+        err,
+        result,
+        { method = method, client_id = client_id, bufnr = bufnr, is_legacy_call = true },
+        config
+      )
     end
   end
 end
