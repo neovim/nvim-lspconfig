@@ -86,6 +86,7 @@ that config.
 - [svelte](#svelte)
 - [svls](#svls)
 - [tailwindcss](#tailwindcss)
+- [taplo](#taplo)
 - [terraformls](#terraformls)
 - [texlab](#texlab)
 - [tflint](#tflint)
@@ -6819,6 +6820,35 @@ require'lspconfig'.tailwindcss.setup{}
         validate = true
       }
     }
+```
+
+
+## taplo
+
+https://taplo.tamasfe.dev/lsp/
+
+Language server for Taplo, a TOML toolkit.
+
+`taplo-lsp` can be installed via `cargo`:
+```sh
+cargo install taplo-lsp
+```
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.taplo.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "taplo-lsp", "run" }
+    filetypes = { "toml" }
+    root_dir = root_pattern("*.toml", ".git") or dirname
 ```
 
 
