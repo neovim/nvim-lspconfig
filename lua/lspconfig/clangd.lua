@@ -5,7 +5,14 @@ local util = require 'lspconfig/util'
 local function switch_source_header(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local params = { uri = vim.uri_from_bufnr(bufnr) }
-  vim.lsp.buf_request(bufnr, 'textDocument/switchSourceHeader', params, function(err, _, result)
+  vim.lsp.buf_request(bufnr, 'textDocument/switchSourceHeader', params, function(err, result_1, result_2)
+    local result = (function()
+      if type(result_1) == 'table' then
+        return result_1
+      end
+      return result_2
+    end)()
+
     if err then
       error(tostring(err))
     end
