@@ -373,4 +373,23 @@ function M.get_other_matching_providers(filetype)
   return other_matching_configs
 end
 
+function M.mk_handler(func)
+  return function(...)
+    local count = select('#', ...)
+    local config_or_client_id = select(4, ...)
+    local is_new = type(config_or_client_id) ~= 'number' or count == 4
+    if is_new then
+      return func(...)
+    else
+      local err = select(1, ...)
+      local method = select(2, ...)
+      local result = select(3, ...)
+      local client_id = select(4, ...)
+      local bufnr = select(5, ...)
+      local config = select(6, ...)
+      return func(err, result, { method = method, client_id = client_id, bufnr = bufnr, is_legacy_call = true}, config)
+    end
+  end
+end
+
 return M
