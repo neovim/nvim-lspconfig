@@ -16,38 +16,22 @@ local texlab_forward_status = vim.tbl_add_reverse_lookup {
   Unconfigured = 3,
 }
 
--- add compatibility shim for breaking signature change
-local function mk_handler(fn)
-  return function(...)
-    local config_or_client_id = select(4, ...)
-    local is_new = type(config_or_client_id) ~= 'number'
-    if is_new then
-      return fn(...)
-    else
-      local err = select(1, ...)
-      local method = select(2, ...)
-      local result = select(3, ...)
-      local client_id = select(4, ...)
-      local bufnr = select(5, ...)
-      local config = select(6, ...)
-      return fn(err, result, { method = method, client_id = client_id, bufnr = bufnr }, config)
-    end
-  end
-end
-
-local function request(bufnr, method, params, handler)
-  return lsp.buf_request(bufnr, method, params, mk_handler(handler))
-end
-
 local function buf_build(bufnr)
   bufnr = util.validate_bufnr(bufnr)
-  local params = { textDocument = { uri = vim.uri_from_bufnr(bufnr) } }
-  request(bufnr, 'textDocument/build', params, function(err, result, _)
-    if err then
-      error(tostring(err))
-    end
-    print('Build ' .. texlab_build_status[result.status])
-  end)
+  local params = {
+    textDocument = { uri = vim.uri_from_bufnr(bufnr) },
+  }
+  lsp.buf_request(
+    bufnr,
+    'textDocument/build',
+    params,
+    util.compat_handler(function(err, result)
+      if err then
+        error(tostring(err))
+      end
+      print('Build ' .. texlab_build_status[result.status])
+    end)
+  )
 end
 
 local function buf_search(bufnr)
@@ -56,12 +40,17 @@ local function buf_search(bufnr)
     textDocument = { uri = vim.uri_from_bufnr(bufnr) },
     position = { line = vim.fn.line '.' - 1, character = vim.fn.col '.' },
   }
-  request(bufnr, 'textDocument/forwardSearch', params, function(err, result, _)
-    if err then
-      error(tostring(err))
-    end
-    print('Search ' .. texlab_forward_status[result.status])
-  end)
+  lsp.buf_request(
+    bufnr,
+    'textDocument/forwardSearch',
+    params,
+    util.compat_handler(function(err, result)
+      if err then
+        error(tostring(err))
+      end
+      print('Search ' .. texlab_forward_status[result.status])
+    end)
+  )
 end
 
 -- bufnr isn't actually required here, but we need a valid buffer in order to
