@@ -11,7 +11,7 @@ configs[server_name] = {
   default_config = {
     cmd = { bin_name, '--stdio' },
     filetypes = { 'purescript' },
-    root_dir = util.root_pattern('spago.dhall', 'bower.json'),
+    root_dir = util.root_pattern('bower.json', 'psc-package.json', 'spago.dhall'),
   },
   docs = {
     package_json = 'https://raw.githubusercontent.com/nwolverson/vscode-ide-purescript/master/package.json',
@@ -23,7 +23,7 @@ npm install -g purescript-language-server
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern("spago.dhall, bower.json")]],
+      root_dir = [[root_pattern("spago.dhall, 'psc-package.json', bower.json")]],
     },
   },
 }

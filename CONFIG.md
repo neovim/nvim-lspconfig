@@ -6,6 +6,7 @@ that config.
 - [als](#als)
 - [angularls](#angularls)
 - [ansiblels](#ansiblels)
+- [arduino_language_server](#arduino_language_server)
 - [bashls](#bashls)
 - [beancount](#beancount)
 - [bicep](#bicep)
@@ -55,6 +56,7 @@ that config.
 - [ocamlls](#ocamlls)
 - [ocamllsp](#ocamllsp)
 - [omnisharp](#omnisharp)
+- [pasls](#pasls)
 - [perlls](#perlls)
 - [perlpls](#perlpls)
 - [phpactor](#phpactor)
@@ -84,6 +86,7 @@ that config.
 - [svelte](#svelte)
 - [svls](#svls)
 - [tailwindcss](#tailwindcss)
+- [taplo](#taplo)
 - [terraformls](#terraformls)
 - [texlab](#texlab)
 - [tflint](#tflint)
@@ -92,6 +95,7 @@ that config.
 - [vala_ls](#vala_ls)
 - [vimls](#vimls)
 - [vls](#vls)
+- [volar](#volar)
 - [vuels](#vuels)
 - [yamlls](#yamlls)
 - [zeta_note](#zeta_note)
@@ -215,6 +219,31 @@ require'lspconfig'.ansiblels.setup{}
         }
       }
     }
+```
+
+
+## arduino_language_server
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.arduino_language_server.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "arduino-language-server" }
+    docs = {
+      description = "https://github.com/arduino/arduino-language-server\n\nLanguage server for Arduino\n\nThe `arduino-language-server` can be installed by running:\n\tgo get -u github.com/arduino/arduino-language-server\n\nThe `arduino-cli` tools must also be installed. Follow these instructions for your distro:\n\thttps://arduino.github.io/arduino-cli/latest/installation/\n\nAfter installing the `arduino-cli` tools, follow these instructions for generating\na configuration file:\n\thttps://arduino.github.io/arduino-cli/latest/getting-started/#create-a-configuration-file\nand make sure you install any relevant platforms libraries:\n\thttps://arduino.github.io/arduino-cli/latest/getting-started/#install-the-core-for-your-board\n\nThe language server also requires `clangd` be installed. It will look for `clangd` by default but\nthe binary path can be overridden if need be.\n\nAfter all dependencies are installed you'll need to override the lspconfig command for the\nlanguage server in your setup function with the necessary configurations:\n\n```lua\nlspconfig.arduino_language_server.setup({\n\tcmd =  {\n\t\t-- Required\n\t\t\"arduino-language-server\",\n\t\t\"-cli-config\", \"/path/to/arduino-cli.yaml\",\n\t\t-- Optional\n\t\t\"-cli\", \"/path/to/arduino-cli\",\n\t\t\"-clangd\", \"/path/to/clangd\"\n\t}\n})\n```\n\nFor further instruction about configuration options, run `arduino-language-server --help`.\n\n"
+    }
+    filetypes = { "arduino" }
+    root_dir = function(fname)
+          return util.root_pattern '*.ino'(fname)
+        end,
 ```
 
 
@@ -831,17 +860,17 @@ This server accepts configuration via the `settings` key.
 
   Default: `"kotlin"`
   
-  The programming language to use for Android apps when creating new projects using the \'Flutter\: New Application Project\' command\.
+  The programming language to use for Android apps when creating new projects using the \'Flutter\: New Project\' command\.
 
 - **`dart.flutterCreateIOSLanguage`**: `enum { "objc", "swift" }`
 
   Default: `"swift"`
   
-  The programming language to use for iOS apps when creating new projects using the \'Flutter\: New Application Project\' command\.
+  The programming language to use for iOS apps when creating new projects using the \'Flutter\: New Project\' command\.
 
 - **`dart.flutterCreateOffline`**: `boolean`
 
-  Whether to use offline mode when creating new projects with the \'Flutter\: New Application Project\' command\.
+  Whether to use offline mode when creating new projects with the \'Flutter\: New Project\' command\.
 
 - **`dart.flutterCreateOrganization`**: `null|string`
 
@@ -1001,6 +1030,10 @@ This server accepts configuration via the `settings` key.
   
   The maximum length of a line in the log file\. Lines longer than this will be truncated and suffixed with an ellipsis\.
 
+- **`dart.normalizeFileCasing`**: `boolean`
+
+  Whether to normalize file casings before sending them to the LSP server\. This may fix issues with file\_names lints not disappearing after renaming a file if the VS Code API continues to use the original casing\.
+
 - **`dart.notifyAnalyzerErrors`**: `boolean`
 
   Default: `true`
@@ -1074,6 +1107,12 @@ This server accepts configuration via the `settings` key.
 - **`dart.pubTestLogFile`**: `null|string`
 
   Default: `vim.NIL`
+  
+  null
+
+- **`dart.renameFilesWithClasses`**: `enum { "never", "prompt", "always" }`
+
+  Default: `"never"`
   
   null
 
@@ -1446,7 +1485,7 @@ This server accepts configuration via the `settings` key.
 
 - **`elixirLS.dialyzerFormat`**: `enum { "dialyzer", "dialyxir_short", "dialyxir_long" }`
 
-  Default: `"dialyzer"`
+  Default: `"dialyxir_long"`
   
   Formatter to use for Dialyzer warnings
 
@@ -1457,6 +1496,10 @@ This server accepts configuration via the `settings` key.
   Array items: `{enum = { "error_handling", "no_behaviours", "no_contracts", "no_fail_call", "no_fun_app", "no_improper_lists", "no_match", "no_missing_calls", "no_opaque", "no_return", "no_undefined_callbacks", "no_unused", "underspecs", "unknown", "unmatched_returns", "overspecs", "specdiffs" },type = "string"}`
   
   Dialyzer options to enable or disable warnings\. See Dialyzer\'s documentation for options\. Note that the \"race\_conditions\" option is unsupported
+
+- **`elixirLS.enableTestLenses`**: `boolean`
+
+  Show code lenses to run tests in terminal
 
 - **`elixirLS.fetchDeps`**: `boolean`
 
@@ -1470,15 +1513,33 @@ This server accepts configuration via the `settings` key.
   
   Mix environment to use for compilation
 
+- **`elixirLS.mixTarget`**: `string`
+
+  Mix target to use for compilation \(requires Elixir \>\= 1\.8\)
+
 - **`elixirLS.projectDir`**: `string`
 
+  Default: `""`
+  
   Subdirectory containing Mix project if not in the project root
+
+- **`elixirLS.signatureAfterComplete`**: `boolean`
+
+  Default: `true`
+  
+  Show signature help after confirming autocomplete
 
 - **`elixirLS.suggestSpecs`**: `boolean`
 
   Default: `true`
   
   Suggest \@spec annotations inline using Dialyzer\'s inferred success typings \(Requires Dialyzer\)
+
+- **`elixirLS.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the Elixir language server\.
 
 </details>
 
@@ -1677,14 +1738,6 @@ This server accepts configuration via the `settings` key.
   
   Is flow enabled
 
-- **`flow.fileExtensions`**: `array`
-
-  Default: `{ ".js", ".mjs", ".jsx", ".flow", ".json" }`
-  
-  Array items: `{type = "string"}`
-  
-  \(Supported only when useLSP\: false\)\. File extensions to consider for flow processing
-
 - **`flow.lazyMode`**: `string`
 
   Default: `vim.NIL`
@@ -1703,21 +1756,11 @@ This server accepts configuration via the `settings` key.
   
   Absolute path to flow binary\. Special var \$\{workspaceFolder\} or \$\{flowconfigDir\} can be used in path \(NOTE\: in windows you can use \'\/\' and can omit \'\.cmd\' in path\)
 
-- **`flow.runOnAllFiles`**: `boolean`
-
-  \(Supported only when useLSP\: false\) Run Flow on all files\, No need to put \/\/\@flow comment on top of files\.
-
 - **`flow.runOnEdit`**: `boolean`
 
   Default: `true`
   
   If true will run flow on every edit\, otherwise will run only when changes are saved \(Note\: \'useLSP\: true\' only supports syntax errors\)
-
-- **`flow.showStatus`**: `boolean`
-
-  Default: `true`
-  
-  \(Supported only when useLSP\: false\) If true will display flow status is the statusbar
 
 - **`flow.showUncovered`**: `boolean`
 
@@ -1746,12 +1789,6 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Complete functions with their parameter signature\.
-
-- **`flow.useLSP`**: `boolean`
-
-  Default: `true`
-  
-  Turn off to switch from the official Flow Language Server implementation to talking directly to flow\.
 
 - **`flow.useNPMPackagedFlow`**: `boolean`
 
@@ -2157,6 +2194,18 @@ This server accepts configuration via the `settings` key.
   Default: `""`
   
   If set\, redirects the logs to a file\.
+
+- **`haskell.openDocumentationInHackage`**: `boolean`
+
+  Default: `true`
+  
+  When opening \'Documentation\' for external libraries\, open in hackage by default\. Set to false to instead open in vscode\.
+
+- **`haskell.openSourceInHackage`**: `boolean`
+
+  Default: `true`
+  
+  When opening \'Source\' for external libraries\, open in hackage by default\. Set to false to instead open in vscode\.
 
 - **`haskell.plugin.class.globalOn`**: `boolean`
 
@@ -2900,12 +2949,6 @@ This server accepts configuration via the `settings` key.
   
   Enable\/disable Smart Selection support for Java\. Disabling this option will not affect the VS Code built\-in word\-based and bracket\-based smart selection\.
 
-- **`java.semanticHighlighting.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable the semantic highlighting\.
-
 - **`java.server.launchMode`**: `enum { "Standard", "LightWeight", "Hybrid" }`
 
   Default: `"Hybrid"`
@@ -3411,6 +3454,16 @@ This server accepts configuration via the `settings` key.
 - **`julia.persistentSession.tmuxSessionName`**: `string`
 
   Default: `"julia_vscode"`
+  
+  null
+
+- **`julia.plots.path`**: `string`
+
+  The output directory to save plots to
+
+- **`julia.showRuntimeDiagnostics`**: `boolean`
+
+  Default: `true`
   
   null
 
@@ -4014,6 +4067,54 @@ require'lspconfig'.omnisharp.setup{}
           end
         end,
     root_dir = root_pattern(".sln") or root_pattern(".csproj")
+```
+
+
+## pasls
+
+https://github.com/genericptr/pascal-language-server
+
+An LSP server implementation for Pascal variants that are supported by Free Pascal, including Object Pascal. It uses CodeTools from Lazarus as backend.
+
+First set `cmd` to the Pascal lsp binary.
+
+Customization options are passed to pasls as environment variables for example in your `.bashrc`:
+	    ```bash
+export FPCDIR='/usr/lib/fpc/src',
+export PP='/usr/lib/fpc/3.2.2/ppcx64',
+export LAZARUSDIR='/usr/lib/lazarus',
+export FPCTARGET='',
+export FPCTARGETCPU='x86_64',
+
+		```
+
+`FPCDIR` : FPC source directory (This is the only required option for the server to work).
+
+`PP` : Path to the Free Pascal compiler executable.
+
+`LAZARUSDIR` : Path to the Lazarus sources.
+
+`FPCTARGET` : Target operating system for cross compiling.
+
+`FPCTARGETCPU` : Target CPU for cross compiling.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.pasls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "pasls" }
+    filetypes = { "pascal" }
+    root_dir = function(fname)
+          return util.find_git_ancestor(fname) or util.path.dirname(fname)
+        end,
 ```
 
 
@@ -4701,7 +4802,7 @@ require'lspconfig'.purescriptls.setup{}
   Default Values:
     cmd = { "purescript-language-server", "--stdio" }
     filetypes = { "purescript" }
-    root_dir = root_pattern("spago.dhall, bower.json")
+    root_dir = root_pattern("spago.dhall, 'psc-package.json', bower.json")
 ```
 
 
@@ -6722,6 +6823,35 @@ require'lspconfig'.tailwindcss.setup{}
 ```
 
 
+## taplo
+
+https://taplo.tamasfe.dev/lsp/
+
+Language server for Taplo, a TOML toolkit.
+
+`taplo-lsp` can be installed via `cargo`:
+```sh
+cargo install taplo-lsp
+```
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.taplo.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "taplo-lsp", "run" }
+    filetypes = { "toml" }
+    root_dir = root_pattern("*.toml", ".git") or dirname
+```
+
+
 ## terraformls
 
 https://github.com/hashicorp/terraform-ls
@@ -7038,6 +7168,212 @@ require'lspconfig'.vls.setup{}
   Default Values:
     filetypes = { "vlang" }
     root_dir = root_pattern("v.mod", ".git")
+```
+
+
+## volar
+
+https://github.com/johnsoncodehk/volar/tree/master/packages/server
+
+Volar language server for Vue
+Volar can be installed via npm
+```sh
+npm install -g @volar/server
+```
+
+With Vue 3 projects - it works out of the box.
+
+With Vue 2 projects - requires [additional configuration](https://github.com/johnsoncodehk/volar#using)
+
+Do not run `vuels` and `volar` at the same time.
+
+To check which language servers are running, open a `.vue` file and run the `:LspInfo` command.
+
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`volar-api.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the language server\.
+
+- **`volar-document.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the language server\.
+
+- **`volar-html.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the language server\.
+
+- **`volar.autoCompleteRefs`**: `boolean`
+
+  Default: `true`
+  
+  Auto\-complete Ref value with \`\.value\`\.
+
+- **`volar.checkVueTscVersion`**: `boolean`
+
+  Default: `true`
+  
+  Check node\_modules\/vscode\-vue\-languageservice version when start extension\.
+
+- **`volar.codeLens.pugTools`**: `boolean`
+
+  Default: `true`
+  
+  \[pug ☐\] code lens\.
+
+- **`volar.codeLens.references`**: `boolean`
+
+  Default: `true`
+  
+  \[references\] code lens\.
+
+- **`volar.codeLens.scriptSetupTools`**: `boolean`
+
+  Default: `true`
+  
+  \[ref sugar ☐\] code lens\.
+
+- **`volar.formatting.printWidth`**: `number`
+
+  Default: `100`
+  
+  HTML formatting print width\.
+
+- **`volar.icon.finder`**: `boolean`
+
+  \(Experimental\) Show code finder icon in title area of editor\.
+
+- **`volar.icon.preview`**: `boolean`
+
+  \(Experimental\) Show preview component icon in title area of editor\.
+
+- **`volar.icon.splitEditors`**: `boolean`
+
+  Default: `true`
+  
+  Show split editor icon in title area of editor\.
+
+- **`volar.lowPowerMode`**: `boolean`
+
+  Using one language server to do the work of two language serves can reduce system resource usage\, but features such as auto\-complete will be much slower\.
+
+- **`volar.preferredAttrNameCase`**: `enum { "auto-kebab", "auto-camel", "kebab", "camel" }`
+
+  Default: `"auto-kebab"`
+  
+  Preferred attr name case\.
+
+- **`volar.preferredTagNameCase`**: `enum { "auto", "both", "kebab", "pascal" }`
+
+  Default: `"auto"`
+  
+  Preferred tag name case\.
+
+- **`volar.preview.backgroundColor`**: `string`
+
+  Default: `"#fff"`
+  
+  Component preview background color\.
+
+- **`volar.preview.port`**: `number`
+
+  Default: `3333`
+  
+  Default port for component preview server\.
+
+- **`volar.preview.transparentGrid`**: `boolean`
+
+  Default: `true`
+  
+  Component preview background style\.
+
+- **`volar.takeOverBuiltinTsExtension`**: `boolean`
+
+  Default: `true`
+  
+  If built\-in VSCode TypeScript Extension disabled\, take over language support for \*\.ts\.
+
+- **`volar.tsPlugin`**: `enum { vim.NIL, true, false }`
+
+  Default: `vim.NIL`
+  
+  Enable Vue TS Server Plugin\.
+  Since TypeScript cannot handle type information for \`\.vue\` imports\, they are shimmed to be a generic Vue component type by default\. In most cases\, this is fine if you don\'t really care about component prop types outside of templates\. However\, if you wish to get actual prop types in \`\.vue\` imports \(for example to get props validation when using manual \`h\(\.\.\.\)\` calls\)\, then you need to enable this setting\.
+
+- **`volar.tsPluginStatus`**: `boolean`
+
+  Display TS Server Plugin status bar item\.
+
+</details>
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.volar.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "volar-server", "--stdio" }
+    filetypes = { "vue" }
+    init_options = {
+      documentFeatures = {
+        documentColor = false,
+        documentFormatting = {
+          defaultPrintWidth = 100
+        },
+        documentSymbol = true,
+        foldingRange = true,
+        linkedEditingRange = true,
+        selectionRange = true
+      },
+      languageFeatures = {
+        callHierarchy = true,
+        codeAction = true,
+        codeLens = true,
+        completion = {
+          defaultAttrNameCase = "kebabCase",
+          defaultTagNameCase = "both"
+        },
+        definition = true,
+        diagnostics = true,
+        documentHighlight = true,
+        documentLink = true,
+        hover = true,
+        references = true,
+        rename = true,
+        renameFileRefactoring = true,
+        schemaRequestService = true,
+        semanticTokens = false,
+        signatureHelp = true,
+        typeDefinition = true
+      },
+      typescript = {
+        serverPath = ""
+      }
+    }
+    on_new_config = function(new_config, new_root_dir)
+          if
+            new_config.init_options
+            and new_config.init_options.typescript
+            and new_config.init_options.typescript.serverPath == ''
+          then
+            new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
+          end
+        end,
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
 ```
 
 
