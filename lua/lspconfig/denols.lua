@@ -79,6 +79,8 @@ local function denols_handler(err, result, context)
     end
   end
 
+  -- TODO remove this conditional when the handler is no longer being wrapped
+  -- with util.compat_handler (just use the else clause)
   if context.is_legacy_call then
     lsp.handlers[context.method](err, context.method, result)
   else
