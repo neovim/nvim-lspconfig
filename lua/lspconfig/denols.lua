@@ -114,8 +114,8 @@ configs[server_name] = {
       unstable = false,
     },
     handlers = {
-      ['textDocument/definition'] = util.mk_handler(denols_handler),
-      ['textDocument/references'] = util.mk_handler(denols_handler),
+      ['textDocument/definition'] = util.compat_handler(denols_handler),
+      ['textDocument/references'] = util.compat_handler(denols_handler),
     },
   },
   commands = {
