@@ -15,9 +15,7 @@ configs.quick_lint_js = {
   docs = {
     description = [[
 https://quick-lint-js.com/
-
 quick-lint-js finds bugs in JavaScript programs.
-
 See https://quick-lint-js.com/install/ for the installation documentation.
 ]],
     default_config = {
