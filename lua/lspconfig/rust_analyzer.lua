@@ -1,10 +1,9 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
-local lsp = vim.lsp
 
 local function reload_workspace(bufnr)
   bufnr = util.validate_bufnr(bufnr)
-  lsp.buf_request(bufnr, 'rust-analyzer/reloadWorkspace', nil, function(err, _, result, _)
+  vim.lsp.buf_request(bufnr, 'rust-analyzer/reloadWorkspace', nil, function(err)
     if err then
       error(tostring(err))
     end
