@@ -65,7 +65,7 @@ local function virtual_text_document(uri)
   virtual_text_document_handler(uri, result)
 end
 
-local function denols_handler(err, result, context)
+local function denols_handler(err, result, ctx)
   if not result or vim.tbl_isempty(result) then
     return nil
   end
@@ -81,10 +81,10 @@ local function denols_handler(err, result, context)
 
   -- TODO remove this conditional when the handler is no longer being wrapped
   -- with util.compat_handler (just use the else clause)
-  if context.is_legacy_call then
-    lsp.handlers[context.method](err, context.method, result)
+  if ctx.is_legacy_call then
+    lsp.handlers[ctx.method](err, ctx.method, result)
   else
-    lsp.handlers[context.method](err, result, context)
+    lsp.handlers[ctx.method](err, result, ctx)
   end
 end
 
