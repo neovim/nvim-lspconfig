@@ -100,6 +100,7 @@ that config.
 - [vuels](#vuels)
 - [yamlls](#yamlls)
 - [zeta_note](#zeta_note)
+- [zk](#zk)
 - [zls](#zls)
 
 ## als
@@ -7881,6 +7882,30 @@ require'lspconfig'.zeta_note.setup{}
   Default Values:
     filetypes = { "markdown" }
     root_dir = root_pattern(".zeta.toml")
+```
+
+
+## zk
+
+github.com/mickael-menu/zk
+
+A plain text note-taking assistant
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.zk.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "zk", "lsp" }
+    filetypes = { "markdown" }
+    root_dir = root_pattern(".zk")
 ```
 
 
