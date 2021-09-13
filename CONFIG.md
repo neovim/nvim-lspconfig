@@ -16,6 +16,7 @@ that config.
 - [cmake](#cmake)
 - [codeqlls](#codeqlls)
 - [crystalline](#crystalline)
+- [csharp_ls](#csharp_ls)
 - [cssls](#cssls)
 - [dartls](#dartls)
 - [denols](#denols)
@@ -99,6 +100,7 @@ that config.
 - [vuels](#vuels)
 - [yamlls](#yamlls)
 - [zeta_note](#zeta_note)
+- [zk](#zk)
 - [zls](#zls)
 
 ## als
@@ -537,6 +539,39 @@ require'lspconfig'.crystalline.setup{}
     cmd = { "crystalline" }
     filetypes = { "crystal" }
     root_dir = root_pattern('shard.yml', '.git') or dirname
+```
+
+
+## csharp_ls
+
+https://github.com/razzmatazz/csharp-language-server
+
+Language Server for C#.
+
+csharp-ls requires the [dotnet-sdk](https://dotnet.microsoft.com/download) to be installed.
+
+The preferred way to install csharp-ls is with `dotnet tool install --global csharp-ls`.
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.csharp_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "csharp-ls" }
+    filetypes = { "cs" }
+    init_options = {
+      AutomaticWorkspaceInit = true
+    }
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
 ```
 
 
@@ -7847,6 +7882,30 @@ require'lspconfig'.zeta_note.setup{}
   Default Values:
     filetypes = { "markdown" }
     root_dir = root_pattern(".zeta.toml")
+```
+
+
+## zk
+
+github.com/mickael-menu/zk
+
+A plain text note-taking assistant
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.zk.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "zk", "lsp" }
+    filetypes = { "markdown" }
+    root_dir = root_pattern(".zk")
 ```
 
 
