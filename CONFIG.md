@@ -3461,10 +3461,6 @@ This server accepts configuration via the `settings` key.
   
   A workspace relative path to a Julia file that contains the tests that should be run for live testing\.
 
-- **`julia.notebookController`**: `boolean`
-
-  Enable the experimental native Jupyter notebook integration\.
-
 - **`julia.packageServer`**: `string`
 
   Default: `""`
