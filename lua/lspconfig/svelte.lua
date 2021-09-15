@@ -3,6 +3,9 @@ local util = require 'lspconfig/util'
 
 local server_name = 'svelte'
 local bin_name = 'svelteserver'
+if vim.fn.has 'win32' == 1 then
+  bin_name = bin_name .. '.cmd'
+end
 
 configs[server_name] = {
   default_config = {
