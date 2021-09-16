@@ -63,6 +63,7 @@ that config.
 - [phpactor](#phpactor)
 - [powershell_es](#powershell_es)
 - [prismals](#prismals)
+- [psalm](#psalm)
 - [puppet](#puppet)
 - [purescriptls](#purescriptls)
 - [pylsp](#pylsp)
@@ -3460,10 +3461,6 @@ This server accepts configuration via the `settings` key.
   
   A workspace relative path to a Julia file that contains the tests that should be run for live testing\.
 
-- **`julia.notebookController`**: `boolean`
-
-  Enable the experimental native Jupyter notebook integration\.
-
 - **`julia.packageServer`**: `string`
 
   Default: `""`
@@ -4481,6 +4478,33 @@ require'lspconfig'.prismals.setup{}
         prismaFmtBinPath = ""
       }
     }
+```
+
+
+## psalm
+
+https://github.com/vimeo/psalm
+
+Can be installed with composer.
+```sh
+composer global require vimeo/psalm
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.psalm.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "psalm-language-server" }
+    filetypes = { "php" }
+    root_dir = root_pattern("psalm.xml", "psalm.xml.dist")
 ```
 
 
