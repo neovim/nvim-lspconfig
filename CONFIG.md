@@ -16,6 +16,7 @@ that config.
 - [cmake](#cmake)
 - [codeqlls](#codeqlls)
 - [crystalline](#crystalline)
+- [csharp_ls](#csharp_ls)
 - [cssls](#cssls)
 - [dartls](#dartls)
 - [denols](#denols)
@@ -62,6 +63,7 @@ that config.
 - [phpactor](#phpactor)
 - [powershell_es](#powershell_es)
 - [prismals](#prismals)
+- [psalm](#psalm)
 - [puppet](#puppet)
 - [purescriptls](#purescriptls)
 - [pylsp](#pylsp)
@@ -86,6 +88,7 @@ that config.
 - [svelte](#svelte)
 - [svls](#svls)
 - [tailwindcss](#tailwindcss)
+- [taplo](#taplo)
 - [terraformls](#terraformls)
 - [texlab](#texlab)
 - [tflint](#tflint)
@@ -98,6 +101,7 @@ that config.
 - [vuels](#vuels)
 - [yamlls](#yamlls)
 - [zeta_note](#zeta_note)
+- [zk](#zk)
 - [zls](#zls)
 
 ## als
@@ -539,6 +543,39 @@ require'lspconfig'.crystalline.setup{}
 ```
 
 
+## csharp_ls
+
+https://github.com/razzmatazz/csharp-language-server
+
+Language Server for C#.
+
+csharp-ls requires the [dotnet-sdk](https://dotnet.microsoft.com/download) to be installed.
+
+The preferred way to install csharp-ls is with `dotnet tool install --global csharp-ls`.
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.csharp_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "csharp-ls" }
+    filetypes = { "cs" }
+    init_options = {
+      AutomaticWorkspaceInit = true
+    }
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
+```
+
+
 ## cssls
 
 
@@ -576,7 +613,7 @@ require'lspconfig'.cssls.setup{}
   Default Values:
     cmd = { "vscode-css-language-server", "--stdio" }
     filetypes = { "css", "scss", "less" }
-    root_dir = root_pattern("package.json")
+    root_dir = root_pattern("package.json", ".git") or bufdir
     settings = {
       css = {
         validate = true
@@ -1484,7 +1521,7 @@ This server accepts configuration via the `settings` key.
 
 - **`elixirLS.dialyzerFormat`**: `enum { "dialyzer", "dialyxir_short", "dialyxir_long" }`
 
-  Default: `"dialyzer"`
+  Default: `"dialyxir_long"`
   
   Formatter to use for Dialyzer warnings
 
@@ -1495,6 +1532,10 @@ This server accepts configuration via the `settings` key.
   Array items: `{enum = { "error_handling", "no_behaviours", "no_contracts", "no_fail_call", "no_fun_app", "no_improper_lists", "no_match", "no_missing_calls", "no_opaque", "no_return", "no_undefined_callbacks", "no_unused", "underspecs", "unknown", "unmatched_returns", "overspecs", "specdiffs" },type = "string"}`
   
   Dialyzer options to enable or disable warnings\. See Dialyzer\'s documentation for options\. Note that the \"race\_conditions\" option is unsupported
+
+- **`elixirLS.enableTestLenses`**: `boolean`
+
+  Show code lenses to run tests in terminal
 
 - **`elixirLS.fetchDeps`**: `boolean`
 
@@ -1508,15 +1549,33 @@ This server accepts configuration via the `settings` key.
   
   Mix environment to use for compilation
 
+- **`elixirLS.mixTarget`**: `string`
+
+  Mix target to use for compilation \(requires Elixir \>\= 1\.8\)
+
 - **`elixirLS.projectDir`**: `string`
 
+  Default: `""`
+  
   Subdirectory containing Mix project if not in the project root
+
+- **`elixirLS.signatureAfterComplete`**: `boolean`
+
+  Default: `true`
+  
+  Show signature help after confirming autocomplete
 
 - **`elixirLS.suggestSpecs`**: `boolean`
 
   Default: `true`
   
   Suggest \@spec annotations inline using Dialyzer\'s inferred success typings \(Requires Dialyzer\)
+
+- **`elixirLS.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the Elixir language server\.
 
 </details>
 
@@ -1715,14 +1774,6 @@ This server accepts configuration via the `settings` key.
   
   Is flow enabled
 
-- **`flow.fileExtensions`**: `array`
-
-  Default: `{ ".js", ".mjs", ".jsx", ".flow", ".json" }`
-  
-  Array items: `{type = "string"}`
-  
-  \(Supported only when useLSP\: false\)\. File extensions to consider for flow processing
-
 - **`flow.lazyMode`**: `string`
 
   Default: `vim.NIL`
@@ -1741,21 +1792,11 @@ This server accepts configuration via the `settings` key.
   
   Absolute path to flow binary\. Special var \$\{workspaceFolder\} or \$\{flowconfigDir\} can be used in path \(NOTE\: in windows you can use \'\/\' and can omit \'\.cmd\' in path\)
 
-- **`flow.runOnAllFiles`**: `boolean`
-
-  \(Supported only when useLSP\: false\) Run Flow on all files\, No need to put \/\/\@flow comment on top of files\.
-
 - **`flow.runOnEdit`**: `boolean`
 
   Default: `true`
   
   If true will run flow on every edit\, otherwise will run only when changes are saved \(Note\: \'useLSP\: true\' only supports syntax errors\)
-
-- **`flow.showStatus`**: `boolean`
-
-  Default: `true`
-  
-  \(Supported only when useLSP\: false\) If true will display flow status is the statusbar
 
 - **`flow.showUncovered`**: `boolean`
 
@@ -1784,12 +1825,6 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Complete functions with their parameter signature\.
-
-- **`flow.useLSP`**: `boolean`
-
-  Default: `true`
-  
-  Turn off to switch from the official Flow Language Server implementation to talking directly to flow\.
 
 - **`flow.useNPMPackagedFlow`**: `boolean`
 
@@ -3426,10 +3461,6 @@ This server accepts configuration via the `settings` key.
   
   A workspace relative path to a Julia file that contains the tests that should be run for live testing\.
 
-- **`julia.notebookController`**: `boolean`
-
-  Enable the experimental native Jupyter notebook integration\.
-
 - **`julia.packageServer`**: `string`
 
   Default: `""`
@@ -4447,6 +4478,33 @@ require'lspconfig'.prismals.setup{}
         prismaFmtBinPath = ""
       }
     }
+```
+
+
+## psalm
+
+https://github.com/vimeo/psalm
+
+Can be installed with composer.
+```sh
+composer global require vimeo/psalm
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.psalm.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "psalm-language-server" }
+    filetypes = { "php" }
+    root_dir = root_pattern("psalm.xml", "psalm.xml.dist")
 ```
 
 
@@ -6824,6 +6882,35 @@ require'lspconfig'.tailwindcss.setup{}
 ```
 
 
+## taplo
+
+https://taplo.tamasfe.dev/lsp/
+
+Language server for Taplo, a TOML toolkit.
+
+`taplo-lsp` can be installed via `cargo`:
+```sh
+cargo install taplo-lsp
+```
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.taplo.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "taplo-lsp", "run" }
+    filetypes = { "toml" }
+    root_dir = root_pattern("*.toml", ".git") or dirname
+```
+
+
 ## terraformls
 
 https://github.com/hashicorp/terraform-ls
@@ -7266,6 +7353,12 @@ This server accepts configuration via the `settings` key.
   
   Component preview background style\.
 
+- **`volar.takeOverBuiltinTsExtension`**: `boolean`
+
+  Default: `true`
+  
+  If built\-in VSCode TypeScript Extension disabled\, take over language support for \*\.ts\.
+
 - **`volar.tsPlugin`**: `enum { vim.NIL, true, false }`
 
   Default: `vim.NIL`
@@ -7275,8 +7368,6 @@ This server accepts configuration via the `settings` key.
 
 - **`volar.tsPluginStatus`**: `boolean`
 
-  Default: `true`
-  
   Display TS Server Plugin status bar item\.
 
 </details>
@@ -7815,6 +7906,30 @@ require'lspconfig'.zeta_note.setup{}
   Default Values:
     filetypes = { "markdown" }
     root_dir = root_pattern(".zeta.toml")
+```
+
+
+## zk
+
+github.com/mickael-menu/zk
+
+A plain text note-taking assistant
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.zk.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "zk", "lsp" }
+    filetypes = { "markdown" }
+    root_dir = root_pattern(".zk")
 ```
 
 

@@ -5,16 +5,21 @@ local util = require 'lspconfig/util'
 local function switch_source_header(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local params = { uri = vim.uri_from_bufnr(bufnr) }
-  vim.lsp.buf_request(bufnr, 'textDocument/switchSourceHeader', params, function(err, _, result)
-    if err then
-      error(tostring(err))
-    end
-    if not result then
-      print 'Corresponding file cannot be determined'
-      return
-    end
-    vim.api.nvim_command('edit ' .. vim.uri_to_fname(result))
-  end)
+  vim.lsp.buf_request(
+    bufnr,
+    'textDocument/switchSourceHeader',
+    params,
+    util.compat_handler(function(err, result)
+      if err then
+        error(tostring(err))
+      end
+      if not result then
+        print 'Corresponding file cannot be determined'
+        return
+      end
+      vim.api.nvim_command('edit ' .. vim.uri_to_fname(result))
+    end)
+  )
 end
 
 local root_pattern = util.root_pattern('compile_commands.json', 'compile_flags.txt', '.git')
