@@ -613,7 +613,7 @@ require'lspconfig'.cssls.setup{}
   Default Values:
     cmd = { "vscode-css-language-server", "--stdio" }
     filetypes = { "css", "scss", "less" }
-    root_dir = root_pattern("package.json")
+    root_dir = root_pattern("package.json", ".git") or bufdir
     settings = {
       css = {
         validate = true
