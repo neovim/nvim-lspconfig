@@ -17,6 +17,7 @@ configs[server_name] = {
     end,
   },
   docs = {
+    url = 'https://github.com/bmewburn/vscode-intelephense',
     description = [[
 https://github.com/phpactor/phpactor
 

@@ -1,67 +1,65 @@
 require 'lspconfig'
+local util = require 'lspconfig/util'
 local configs = require 'lspconfig/configs'
-local server_info = require 'server-info'
 
+local server_info = require 'lspconfig/util/server-info'
+
+local updated_conf_dir = 'updated'
+vim.fn.mkdir(updated_conf_dir, 'p')
+
+local function gen_config_path(name)
+  return updated_conf_dir .. '/' .. name .. '_new.lua'
+end
+--[[
 local function dump(...)
   local objects = vim.tbl_map(vim.inspect, { ... })
   print(unpack(objects))
   return ...
 end
-
-local function require_all_configs()
-  -- Configs are lazy-loaded, tickle them to populate the `configs` singleton.
-  for _, v in ipairs(vim.fn.glob('lua/lspconfig/*.lua', 1, 1)) do
-    local module_name = v:gsub('.*/', ''):gsub('%.lua$', '')
-    require('lspconfig/' .. module_name)
-  end
+dump(server_info.get_configuration_info 'https://github.com/bmewburn/vscode-intelephense')
+local matches = server_info.get_all_servers_with_configuration_info()
+dump(matches)
+util.write_async('lspconfig/util/all-servers-with-info.lua', vim.inspect(matches))
+--]]
+--
+-- Configs are lazy-loaded, tickle them to populate the `configs` singleton.
+for _, v in ipairs(vim.fn.glob('lua/lspconfig/*.lua', 1, 1)) do
+  local module_name = v:gsub('.*/', ''):gsub('%.lua$', '')
+  require('lspconfig/' .. module_name)
 end
 
-local function get_configs_with_package_json()
-  require_all_configs()
-  local matching_configs = {}
+local all_package_json_matches = server_info.get_all_servers_with_package_json()
 
-  for _, c in pairs(configs) do
-    if c.document_config and c.document_config.docs and c.document_config.docs.package_json then
-      table.insert(matching_configs, c.document_config.docs.package_json)
-      -- dump(c.document_config.docs.package_json)
-    end
-  end
-  dump(string.format('got [%s] configured package.json', #matching_configs))
-  return matching_configs
+local all_matches_names = {}
+for _, s in ipairs(all_package_json_matches) do
+  table.insert(all_matches_names, s.language)
 end
 
-local function get_missing_configs(t)
-  local missing_configs = {}
+local missing_configs = {}
+local matching_configs = {}
 
-  local ts_matches = server_info.get_ts_implemented_servers()
-  if vim.tbl_isempty(ts_matches) then
-    error 'unable to fetch table'
-  end
-
-  for _, server in pairs(ts_matches) do
-    local repo_url = server[3]
-    if repo_url:match 'github' then
-      local gh_repo_name = repo_url:gsub('https://github.com/', '')
-
-      local cmd = string.format('gh api repos/%s/contents/package.json -q .download_url', gh_repo_name)
-      local package_json = string.gsub(vim.fn.system(cmd), '%s+', '')
-      if not vim.tbl_contains(t, package_json) and not package_json:match '404' then
-        table.insert(missing_configs, package_json)
+for _, config in pairs(configs) do
+  if config.document_config and config.document_config.docs then
+    if not config.document_config.docs.package_json then
+      -- TODO: this is missing a lot of servers currently
+      local matching_server_info = server_info.get_server_info_by_config(config.document_config)
+      if matching_server_info then
+        table.insert(missing_configs, config.name)
+        config.document_config.server_info = matching_server_info
+        util.write_async(gen_config_path(config.name), vim.inspect(config))
       end
+    else
+      table.insert(matching_configs, config.name)
     end
   end
-
-  dump(string.format('got [%s] missing matches!', #missing_configs))
-  return missing_configs
 end
 
-local configs_table = get_configs_with_package_json()
+local info = { '[' .. #all_matches_names .. '] all found servers with package_json: ', '' }
+vim.list_extend(info, all_matches_names)
+vim.list_extend(info, { '', '[' .. #matching_configs .. '] configured servers with package_json: ', '' })
+vim.list_extend(info, matching_configs)
+vim.list_extend(info, { '', '[' .. #missing_configs .. '] was able to match servers with missing package_json: ', '' })
+vim.list_extend(info, missing_configs)
 
-local matches = get_missing_configs(configs_table)
--- vim.tbl_map(function(c)
---   dump(string.format('found a missing server config, for [%s]', c))
--- end, matches)
-
-local writer = io.open('missing_matches.txt', 'w')
-writer:write(table.concat(matches, '\n'))
-writer:close()
+local outfile = 'all_info.txt'
+util.write_async(outfile, table.concat(info, '\n'))

@@ -4384,6 +4384,300 @@ https://github.com/phpactor/phpactor
 
 Installation: https://phpactor.readthedocs.io/en/master/usage/standalone.html#global-installation
 
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`intelephense.compatibility.correctForArrayAccessArrayAndTraversableArrayUnionTypes`**: `boolean`
+
+  Default: `true`
+  
+  Resolves \`ArrayAccess\` and \`Traversable\` implementations that are unioned with a typed array to generic syntax\. eg \`ArrayAccessOrTraversable|ElementType\[\]\` \=\> \`ArrayAccessOrTraversable\<mixed\, ElementType\>\`\.
+
+- **`intelephense.compatibility.correctForBaseClassStaticUnionTypes`**: `boolean`
+
+  Default: `true`
+  
+  Resolves \`BaseClass|static\` union types to \`static\` instead of \`BaseClass\`\.
+
+- **`intelephense.completion.fullyQualifyGlobalConstantsAndFunctions`**: `boolean`
+
+  Global namespace constants and functions will be fully qualified \(prefixed with a backslash\)\.
+
+- **`intelephense.completion.insertUseDeclaration`**: `boolean`
+
+  Default: `true`
+  
+  Use declarations will be automatically inserted for namespaced classes\, traits\, interfaces\, functions\, and constants\.
+
+- **`intelephense.completion.maxItems`**: `number`
+
+  Default: `100`
+  
+  The maximum number of completion items returned per request\.
+
+- **`intelephense.completion.triggerParameterHints`**: `boolean`
+
+  Default: `true`
+  
+  Method and function completions will include parentheses and trigger parameter hints\.
+
+- **`intelephense.diagnostics.argumentCount`**: `boolean`
+
+  Default: `true`
+  
+  Enables argument count diagnostics\.
+
+- **`intelephense.diagnostics.deprecated`**: `boolean`
+
+  Default: `true`
+  
+  Enables deprecated diagnostics\.
+
+- **`intelephense.diagnostics.duplicateSymbols`**: `boolean`
+
+  Default: `true`
+  
+  Enables duplicate symbol diagnostics\.
+
+- **`intelephense.diagnostics.embeddedLanguages`**: `boolean`
+
+  Default: `true`
+  
+  Enables diagnostics in embedded languages\.
+
+- **`intelephense.diagnostics.enable`**: `boolean`
+
+  Default: `true`
+  
+  Enables diagnostics\.
+
+- **`intelephense.diagnostics.implementationErrors`**: `boolean`
+
+  Default: `true`
+  
+  Enables reporting of problems associated with method and class implementations\. For example\, unimplemented methods or method signature incompatibilities\.
+
+- **`intelephense.diagnostics.languageConstraints`**: `boolean`
+
+  Default: `true`
+  
+  Enables reporting of various language constraint errors\.
+
+- **`intelephense.diagnostics.run`**: `enum { "onType", "onSave" }`
+
+  Default: `"onType"`
+  
+  Controls when diagnostics are run\.
+
+- **`intelephense.diagnostics.typeErrors`**: `boolean`
+
+  Default: `true`
+  
+  Enables diagnostics on type compatibility of arguments\, property assignments\, and return statements where types have been declared\.
+
+- **`intelephense.diagnostics.undefinedClassConstants`**: `boolean`
+
+  Default: `true`
+  
+  Enables undefined class constant diagnostics\.
+
+- **`intelephense.diagnostics.undefinedConstants`**: `boolean`
+
+  Default: `true`
+  
+  Enables undefined constant diagnostics\.
+
+- **`intelephense.diagnostics.undefinedFunctions`**: `boolean`
+
+  Default: `true`
+  
+  Enables undefined function diagnostics\.
+
+- **`intelephense.diagnostics.undefinedMethods`**: `boolean`
+
+  Default: `true`
+  
+  Enables undefined method diagnostics\.
+
+- **`intelephense.diagnostics.undefinedProperties`**: `boolean`
+
+  Default: `true`
+  
+  Enables undefined static property diagnostics\.
+
+- **`intelephense.diagnostics.undefinedSymbols`**: `boolean`
+
+  Default: `true`
+  
+  DEPRECATED\. Use the setting for each symbol category\.
+
+- **`intelephense.diagnostics.undefinedTypes`**: `boolean`
+
+  Default: `true`
+  
+  Enables undefined class\, interface and trait diagnostics\.
+
+- **`intelephense.diagnostics.undefinedVariables`**: `boolean`
+
+  Default: `true`
+  
+  Enables undefined variable diagnostics\.
+
+- **`intelephense.diagnostics.unexpectedTokens`**: `boolean`
+
+  Default: `true`
+  
+  Enables unexpected token diagnostics\.
+
+- **`intelephense.diagnostics.unusedSymbols`**: `boolean`
+
+  Default: `true`
+  
+  Enables unused variable\, private member\, and import diagnostics\.
+
+- **`intelephense.environment.documentRoot`**: `string`
+
+  The directory of the entry point to the application \(directory of index\.php\)\. Can be absolute or relative to the workspace folder\. Used for resolving script inclusion and path suggestions\.
+
+- **`intelephense.environment.includePaths`**: `array`
+
+  Array items: `{type = "string"}`
+  
+  The include paths \(as individual path items\) as defined in the include\_path ini setting or paths to external libraries\. Can be absolute or relative to the workspace folder\. Used for resolving script inclusion and\/or adding external symbols to folder\.
+
+- **`intelephense.environment.phpVersion`**: `string`
+
+  Default: `"8.0.0"`
+  
+  A semver compatible string that represents the target PHP version\. Used for providing version appropriate suggestions and diagnostics\. PHP 5\.3\.0 and greater supported\.
+
+- **`intelephense.environment.shortOpenTag`**: `boolean`
+
+  Default: `true`
+  
+  When enabled \'\<\?\' will be parsed as a PHP open tag\. Defaults to true\.
+
+- **`intelephense.files.associations`**: `array`
+
+  Default: `{ "*.php", "*.phtml" }`
+  
+  Configure glob patterns to make files available for language server features\. Inherits from files\.associations\.
+
+- **`intelephense.files.exclude`**: `array`
+
+  Default: `{ "**/.git/**", "**/.svn/**", "**/.hg/**", "**/CVS/**", "**/.DS_Store/**", "**/node_modules/**", "**/bower_components/**", "**/vendor/**/{Tests,tests}/**", "**/.history/**", "**/vendor/**/vendor/**" }`
+  
+  Array items: `{type = "string"}`
+  
+  Configure glob patterns to exclude certain files and folders from all language server features\. Inherits from files\.exclude\.
+
+- **`intelephense.files.maxSize`**: `number`
+
+  Default: `1000000`
+  
+  Maximum file size in bytes\.
+
+- **`intelephense.format.braces`**: `enum { "psr12", "allman", "k&r" }`
+
+  Default: `"psr12"`
+  
+  Controls formatting style of braces
+
+- **`intelephense.format.enable`**: `boolean`
+
+  Default: `true`
+  
+  Enables formatting\.
+
+- **`intelephense.licenceKey`**: `string`
+
+  DEPRECATED\. Don\'t use this\. Go to command palette and search for enter licence key\.
+
+- **`intelephense.maxMemory`**: `number`
+
+  Maximum memory \(in MB\) that the server should use\. On some systems this may only have effect when runtime has been set\. Minimum 256\.
+
+- **`intelephense.phpdoc.classTemplate`**: `object`
+
+  Default: `{summary = "$1",tags = { "@package ${1:$SYMBOL_NAMESPACE}" }}`
+  
+  An object that describes the format of generated class\/interface\/trait phpdoc\. The following snippet variables are available\: SYMBOL\_NAME\; SYMBOL\_KIND\; SYMBOL\_TYPE\; SYMBOL\_NAMESPACE\.
+
+- **`intelephense.phpdoc.functionTemplate`**: `object`
+
+  Default: `{summary = "$1",tags = { "@param ${1:$SYMBOL_TYPE} $SYMBOL_NAME $2", "@return ${1:$SYMBOL_TYPE} $2", "@throws ${1:$SYMBOL_TYPE} $2" }}`
+  
+  An object that describes the format of generated function\/method phpdoc\. The following snippet variables are available\: SYMBOL\_NAME\; SYMBOL\_KIND\; SYMBOL\_TYPE\; SYMBOL\_NAMESPACE\.
+
+- **`intelephense.phpdoc.propertyTemplate`**: `object`
+
+  Default: `{summary = "$1",tags = { "@var ${1:$SYMBOL_TYPE}" }}`
+  
+  An object that describes the format of generated property phpdoc\. The following snippet variables are available\: SYMBOL\_NAME\; SYMBOL\_KIND\; SYMBOL\_TYPE\; SYMBOL\_NAMESPACE\.
+
+- **`intelephense.phpdoc.returnVoid`**: `boolean`
+
+  Default: `true`
+  
+  Adds \`\@return void\` to auto generated phpdoc for definitions that do not return a value\.
+
+- **`intelephense.phpdoc.textFormat`**: `enum { "snippet", "text" }`
+
+  Default: `"snippet"`
+  
+  null
+
+- **`intelephense.phpdoc.useFullyQualifiedNames`**: `boolean`
+
+  Fully qualified names will be used for types when true\. When false short type names will be used and imported where appropriate\. Overrides intelephense\.completion\.insertUseDeclaration\.
+
+- **`intelephense.references.exclude`**: `array`
+
+  Default: `{ "**/vendor/**" }`
+  
+  Array items: `{type = "string"}`
+  
+  Glob patterns matching files and folders that should be excluded from references search\.
+
+- **`intelephense.rename.exclude`**: `array`
+
+  Default: `{ "**/vendor/**" }`
+  
+  Array items: `{type = "string"}`
+  
+  Glob patterns matching files and folders that should be excluded when renaming symbols\. Rename operation will fail if the symbol definition is found in the excluded files\/folders\.
+
+- **`intelephense.rename.namespaceMode`**: `enum { "single", "all" }`
+
+  Default: `"single"`
+  
+  Controls the scope of a namespace rename operation\.
+
+- **`intelephense.runtime`**: `string`
+
+  Path to a Node\.js executable\. Use this if you wish to use a different version of Node\.js\. Defaults to Node\.js shipped with VSCode\.
+
+- **`intelephense.stubs`**: `array`
+
+  Default: `{ "apache", "bcmath", "bz2", "calendar", "com_dotnet", "Core", "ctype", "curl", "date", "dba", "dom", "enchant", "exif", "FFI", "fileinfo", "filter", "fpm", "ftp", "gd", "gettext", "gmp", "hash", "iconv", "imap", "intl", "json", "ldap", "libxml", "mbstring", "meta", "mysqli", "oci8", "odbc", "openssl", "pcntl", "pcre", "PDO", "pdo_ibm", "pdo_mysql", "pdo_pgsql", "pdo_sqlite", "pgsql", "Phar", "posix", "pspell", "readline", "Reflection", "session", "shmop", "SimpleXML", "snmp", "soap", "sockets", "sodium", "SPL", "sqlite3", "standard", "superglobals", "sysvmsg", "sysvsem", "sysvshm", "tidy", "tokenizer", "xml", "xmlreader", "xmlrpc", "xmlwriter", "xsl", "Zend OPcache", "zip", "zlib" }`
+  
+  Array items: `{enum = { "aerospike", "amqp", "apache", "apcu", "ast", "bcmath", "blackfire", "bz2", "calendar", "cassandra", "com_dotnet", "Core", "couchbase", "couchbase_v3", "crypto", "ctype", "cubrid", "curl", "date", "dba", "decimal", "dio", "dom", "ds", "enchant", "Ev", "event", "exif", "fann", "FFI", "ffmpeg", "fileinfo", "filter", "fpm", "ftp", "gd", "gearman", "geoip", "geos", "gettext", "gmagick", "gmp", "gnupg", "grpc", "hash", "http", "ibm_db2", "iconv", "igbinary", "imagick", "imap", "inotify", "interbase", "intl", "json", "judy", "ldap", "leveldb", "libevent", "libsodium", "libvirt-php", "libxml", "lua", "LuaSandbox", "lzf", "mailparse", "mapscript", "mbstring", "mcrypt", "memcache", "memcached", "meminfo", "meta", "ming", "mongo", "mongodb", "mosquitto-php", "mqseries", "msgpack", "mssql", "mysql", "mysql_xdevapi", "mysqli", "ncurses", "newrelic", "oauth", "oci8", "odbc", "openssl", "parallel", "Parle", "pcntl", "pcov", "pcre", "pdflib", "PDO", "pdo_ibm", "pdo_mysql", "pdo_pgsql", "pdo_sqlite", "pgsql", "Phar", "phpdbg", "posix", "pspell", "pthreads", "radius", "rar", "rdkafka", "readline", "recode", "redis", "Reflection", "regex", "rpminfo", "rrd", "SaxonC", "session", "shmop", "SimpleXML", "snmp", "soap", "sockets", "sodium", "solr", "SPL", "SplType", "SQLite", "sqlite3", "sqlsrv", "ssh2", "standard", "stats", "stomp", "suhosin", "superglobals", "svm", "svn", "sybase", "sync", "sysvmsg", "sysvsem", "sysvshm", "tidy", "tokenizer", "uopz", "uuid", "uv", "v8js", "wddx", "win32service", "winbinder", "wincache", "wordpress", "xcache", "xdebug", "xhprof", "xlswriter", "xml", "xmlreader", "xmlrpc", "xmlwriter", "xsl", "xxtea", "yaf", "yaml", "yar", "zend", "Zend OPcache", "ZendCache", "ZendDebugger", "ZendUtils", "zip", "zlib", "zmq", "zookeeper", "zstd" },type = "string"}`
+  
+  Configure stub files for built in symbols and common extensions\. The default setting includes PHP core and all bundled extensions\.
+
+- **`intelephense.telemetry.enabled`**: `boolean|null`
+
+  Default: `vim.NIL`
+  
+  Anonymous usage and crash data will be sent to Azure Application Insights\. Inherits from telemetry\.enableTelemetry\.
+
+- **`intelephense.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VSCode and the intelephense language server\.
+
+</details>
 
 
 **Snippet to enable the language server:**

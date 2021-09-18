@@ -373,4 +373,24 @@ function M.get_other_matching_providers(filetype)
   return other_matching_configs
 end
 
+function M.write_async(path, txt)
+  uv.fs_open(path, "w", 438, function(open_err, fd)
+    assert(not open_err, open_err)
+    uv.fs_write(fd, txt, -1, function(write_err)
+      assert(not write_err, write_err)
+      uv.fs_close(fd, function(close_err)
+        assert(not close_err, close_err)
+      end)
+    end)
+  end)
+end
+
+function M.read_async(path)
+  local fd = assert(vim.loop.fs_open(path, "r", 438))
+  local stat = assert(vim.loop.fs_fstat(fd))
+  local data = assert(vim.loop.fs_read(fd, stat.size, 0))
+  assert(vim.loop.fs_close(fd))
+  return data
+end
+
 return M

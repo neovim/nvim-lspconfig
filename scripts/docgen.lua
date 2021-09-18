@@ -1,6 +1,7 @@
 require 'lspconfig'
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
+local server_info = require 'lspconfig/util/server-info'
 local inspect = vim.inspect
 local uv = vim.loop
 local fn = vim.fn
@@ -162,13 +163,14 @@ local function make_lsp_sections()
             end
           end,
           function()
-            local package_json_name = util.path.join(tempdir, template_name .. '.package.json')
-            if docs.package_json then
+            local package_json = docs.package_json or server_info.get_package_json_from_docs(docs)
+            if package_json then
+              local package_json_name = util.path.join(tempdir, template_name .. '.package.json')
               if not util.path.is_file(package_json_name) then
-                os.execute(string.format('curl -v -L -o %q %q', package_json_name, docs.package_json))
+                os.execute(string.format('curl -v -L -o %q %q', package_json_name, package_json))
               end
               if not util.path.is_file(package_json_name) then
-                print(string.format('Failed to download package.json for %q at %q', template_name, docs.package_json))
+                print(string.format('Failed to download package.json for %q at %q', template_name, package_json))
                 os.exit(1)
                 return
               end
@@ -177,7 +179,7 @@ local function make_lsp_sections()
               return make_section(0, '\n', {
                 -- The default settings section
                 function()
-                  local default_settings = (data.contributes or {}).configuration
+                  local default_settings = (data.contributes or {}).configuration or {}
                   if not default_settings.properties then
                     return
                   end
