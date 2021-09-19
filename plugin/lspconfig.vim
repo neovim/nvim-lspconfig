@@ -2,6 +2,9 @@ if exists('g:lspconfig')
   finish
 endif
 let g:lspconfig = 1
+if !has("nvim-0.5")
+  finish
+endif
 
 lua << EOF
 lsp_complete_configured_servers = function()
