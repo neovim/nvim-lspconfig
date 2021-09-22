@@ -12,7 +12,10 @@ docs.generate = function()
       ['Example: override some defaults'] = { 'Overriding server defaults', 'override-server-defaults' },
       ['Example: custom config'] = { 'Custom config', 'custom-config' },
       ['Example: override default config for all servers'] = { 'Overriding all defaults', 'override-all-defaults' },
-      ['Individual server settings and initialization options'] = { 'Per-server documentation', 'server-documentation' },
+      ['Individual server settings and initialization options'] = {
+        'Per-server documentation',
+        'server-documentation',
+      },
       ['Keybindings and completion'] = { 'Keybindings', 'keybindings' },
       ['Manually starting (or restarting) language servers'] = { 'Manual control', 'manual-control' },
     },

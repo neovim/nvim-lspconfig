@@ -108,7 +108,14 @@ end
 configs[server_name] = {
   default_config = {
     cmd = { 'deno', 'lsp' },
-    filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+    filetypes = {
+      'javascript',
+      'javascriptreact',
+      'javascript.jsx',
+      'typescript',
+      'typescriptreact',
+      'typescript.tsx',
+    },
     root_dir = util.root_pattern('package.json', 'tsconfig.json', '.git'),
     init_options = {
       enable = true,
