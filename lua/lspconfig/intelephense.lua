@@ -26,13 +26,14 @@ npm install -g intelephense
 ```
 ]],
     default_config = {
+      package_json = 'https://raw.githubusercontent.com/bmewburn/vscode-intelephense/master/package.json',
       root_dir = [[root_pattern("composer.json", ".git")]],
       init_options = [[{
         storagePath = Optional absolute path to storage dir. Defaults to os.tmpdir().
         globalStoragePath = Optional absolute path to a global storage dir. Defaults to os.homedir().
         licenceKey = Optional licence key or absolute path to a text file containing the licence key.
         clearCache = Optional flag to clear server state. State can also be cleared by deleting {storagePath}/intelephense
-        -- See https://github.com/bmewburn/intelephense-docs#initialisation-options
+        -- See https://github.com/bmewburn/intelephense-docs
       }]],
       settings = [[{
         intelephense = {
@@ -40,7 +41,7 @@ npm install -g intelephense
             maxSize = 1000000;
           };
         };
-        -- See https://github.com/bmewburn/intelephense-docs#configuration-options
+        -- See https://github.com/bmewburn/intelephense-docs
       }]],
     },
   },
