@@ -6,7 +6,7 @@ configs.gopls = {
     cmd = { 'gopls' },
     filetypes = { 'go', 'gomod' },
     root_dir = function(fname)
-      return util.root_pattern 'go.work'(fname) or util.root_pattern('go.mod', '.git')(fname)
+      return util.root_pattern 'go.work'(fname) or util.root_pattern('go.mod', '.git')(fname) or util.path.dirname(fname)
     end,
   },
   docs = {
@@ -16,7 +16,7 @@ https://github.com/golang/tools/tree/master/gopls
 Google's lsp server for golang.
 ]],
     default_config = {
-      root_dir = [[root_pattern("go.mod", ".git")]],
+      root_dir = [[root_pattern("go.mod", ".git") or dirname]],
     },
   },
 }
