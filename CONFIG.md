@@ -3112,14 +3112,14 @@ require'lspconfig'.jedi_language_server.setup{}
 
 https://github.com/hrsh7th/vscode-langservers-extracted
 
-vscode-json-language-server, a language server for JSON and JSON schema
+vscode-json-languageserver, a language server for JSON and JSON schema
 
-`vscode-json-language-server` can be installed via `npm`:
+`vscode-json-languageserver` can be installed via `npm`:
 ```sh
 npm i -g vscode-langservers-extracted
 ```
 
-vscode-json-language-server only provides range formatting. You can map a command that applies range formatting to the entire document:
+vscode-json-languageserver only provides range formatting. You can map a command that applies range formatting to the entire document:
 
 ```lua
 require'lspconfig'.jsonls.setup {
@@ -3133,7 +3133,7 @@ require'lspconfig'.jsonls.setup {
 }
 ```
 
-Neovim does not currently include built-in snippets. `vscode-json-language-server` only provides completions when snippet support is enabled. To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
+Neovim does not currently include built-in snippets. `vscode-json-languageserver` only provides completions when snippet support is enabled. To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
 
 ```lua
 --Enable (broadcasting) snippet capability for completion
@@ -3197,7 +3197,7 @@ require'lspconfig'.jsonls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "vscode-json-language-server", "--stdio" }
+    cmd = { "vscode-json-languageserver", "--stdio" }
     filetypes = { "json" }
     init_options = {
       provideFormatter = true
