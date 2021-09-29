@@ -18,8 +18,5 @@ https://github.com/PMunch/nimlsp
 nimble install nimlsp
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern(".git") or os_homedir]],
-    },
   },
 }
