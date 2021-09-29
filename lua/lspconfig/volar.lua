@@ -67,7 +67,6 @@ configs[server_name] = {
     end,
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/johnsoncodehk/volar/master/package.json',
     description = [[
 https://github.com/johnsoncodehk/volar/tree/master/packages/server
 
