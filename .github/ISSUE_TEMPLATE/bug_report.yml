@@ -63,7 +63,7 @@ body:
     attributes:
       label: "Minimal config"
       render: Lua
-      description: "You can download a `minimal_init.lua via `curl -fLO https://raw.githubusercontent.com/neovim/nvim-lspconfig/master/test/minimal_init.lua`. Then edit it to include your language server and add necessary configuration and paste it here."
+      description: "You can download a minimal_init.lua via `curl -fLO https://raw.githubusercontent.com/neovim/nvim-lspconfig/master/test/minimal_init.lua`. Then edit it to include your language server and add necessary configuration and paste it here."
     validations:
       required: true
   - type: textarea
