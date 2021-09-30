@@ -9,6 +9,7 @@ configs[server_name] = {
     cmd = { bin_name, '--stdio' },
     filetypes = { 'dockerfile' },
     root_dir = util.root_pattern 'Dockerfile',
+    single_file_support = true,
   },
   docs = {
     description = [[
