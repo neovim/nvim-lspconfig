@@ -38,7 +38,7 @@ function M.compat_handler(handler)
       return handler(
         err,
         result,
-        { method = method, client_id = client_id, bufnr = bufnr, is_legacy_call = true },
+        { method = method, client_id = client_id, bufnr = bufnr },
         config
       )
     end
