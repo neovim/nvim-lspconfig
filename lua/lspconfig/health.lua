@@ -1,5 +1,5 @@
 local M = {}
-function M.check_health()
+function M.check()
   local configs = require 'lspconfig/configs'
 
   for _, top_level_config in pairs(configs) do
