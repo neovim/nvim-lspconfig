@@ -42,8 +42,10 @@ local function fix_all(opts)
   })
 end
 
+local bin_name = 'vscode-eslint-language-server'
 configs.eslint = {
   default_config = {
+    cmd = { bin_name, '--stdio' },
     filetypes = {
       'javascript',
       'javascriptreact',
@@ -102,16 +104,24 @@ configs.eslint = {
   },
   docs = {
     description = [[
-https://github.com/microsoft/vscode-eslint
+https://github.com/hrsh7th/vscode-langservers-extracted
 
-A linting engine for JavaScript / Typescript
+vscode-eslint-language-server: A linting engine for JavaScript / Typescript
 
-Setup: Run `npm install && npm run webpack` in the root and set the `cmd` to `{"node", PATH_TO_REPO .. "/server/out/eslintServer.js", "--stdio"}`
+`vscode-eslint-language-server` can be installed via `npm`:
+```sh
+npm i -g vscode-langservers-extracted
+```
+
+vscode-eslint-language-server provides an EslintFixAll command that can be used to format document on save
+```vim
+autocmd BufWritePre <buffer> <cmd>EslintFixAll<CR>
+```
 
 See https://github.com/microsoft/vscode-eslint/blob/55871979d7af184bf09af491b6ea35ebd56822cf/server/src/eslintServer.ts#L216-L229 for configuration options.
 
 Additional messages you can handle: eslint/probeFailed, eslint/noLibrary, eslint/noConfig
-Additional messages you can handle that are handled already in lspconfig: eslint/openDoc, eslint/confirmESLintExecution
+Messages already handled in lspconfig: eslint/openDoc, eslint/confirmESLintExecution
 ]],
   },
 }
