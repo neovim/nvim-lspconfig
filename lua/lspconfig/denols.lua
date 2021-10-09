@@ -81,7 +81,7 @@ local function denols_handler(err, result, ctx)
 
   -- TODO remove this conditional when the handler is no longer being wrapped
   -- with util.compat_handler (just use the else clause)
-  if vim.fn.has('nvim-0.5.1') then
+  if vim.fn.has 'nvim-0.5.1' then
     lsp.handlers[ctx.method](err, result, ctx)
   else
     lsp.handlers[ctx.method](err, ctx.method, result)
