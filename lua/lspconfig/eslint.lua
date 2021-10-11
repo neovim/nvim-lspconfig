@@ -66,6 +66,7 @@ configs.eslint = {
       format = false,
       quiet = false,
       onIgnoredFiles = 'off',
+      rulesCustomizations = {},
       run = 'onType',
       nodePath = vim.NIL,
       codeAction = {
