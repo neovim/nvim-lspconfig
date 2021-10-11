@@ -56,7 +56,18 @@ configs.eslint = {
     },
     root_dir = util.root_pattern('.eslintrc.json', '.eslintrc.js', 'package.json', 'tsconfig.json', '.git'),
     settings = {
-      validate = 'on',
+      validate = 'off',
+      packageManager = 'npm',
+      useESLintClass = false,
+      codeActionOnSave = {
+        enable = false,
+        mode = 'all',
+      },
+      format = false,
+      quiet = false,
+      onIgnoredFiles = 'off',
+      run = 'onType',
+      nodePath = vim.NIL,
       codeAction = {
         disableRuleComment = {
           enable = true,
@@ -66,17 +77,6 @@ configs.eslint = {
           enable = true,
         },
       },
-      codeActionOnSave = {
-        enable = false,
-        mode = 'all',
-        rules = {},
-      },
-      format = false,
-      quiet = false,
-      onIgnoredFiles = 'off',
-      options = nil,
-      run = 'onType',
-      nodePath = vim.NIL,
     },
     handlers = {
       ['eslint/openDoc'] = function(_, result)
