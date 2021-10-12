@@ -12,8 +12,8 @@ configs[name] = {
     log_level = vim.lsp.protocol.MessageType.Warning,
   },
   docs = {
-    description =[[
-    Client to https://github.com/1c-syntax/bsl-language-server 
+    description = [[
+    Client to https://github.com/1c-syntax/bsl-language-server
     Which work with .bsl and .os files
     ]],
     default_config = {
@@ -21,4 +21,3 @@ configs[name] = {
     },
   },
 }
--- vim:et ts=2
