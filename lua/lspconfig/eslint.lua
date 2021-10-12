@@ -84,7 +84,11 @@ configs.eslint = {
         if not result then
           return
         end
-        vim.cmd('!open ' .. result.url)
+        if vim.fn.has 'win32' == 1 then
+          os.execute(string.format('start %q', result.url))
+        else
+          os.execute(string.format('open %q', result.url))
+        end
         return {}
       end,
       ['eslint/confirmESLintExecution'] = function(_, result)
