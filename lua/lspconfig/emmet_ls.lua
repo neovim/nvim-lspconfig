@@ -7,9 +7,7 @@ configs[server_name] = {
   default_config = {
     cmd = { 'emmet-ls', '--stdio' },
     filetypes = { 'html', 'css' },
-    root_dir = function(fname)
-      return util.root_pattern '.git'(fname) or vim.fn.getcwd()
-    end,
+    root_dir = util.find_git_ancestor,
   },
   docs = {
     description = [[
@@ -21,7 +19,7 @@ npm install -g emmet-ls
 ```
 ]],
     default_config = {
-      root_dir = "vim's starting directory",
+      root_dir = 'git root',
     },
   },
 }
