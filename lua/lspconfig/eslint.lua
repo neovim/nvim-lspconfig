@@ -114,16 +114,16 @@ configs.eslint = {
         end
         return 4 -- approved
       end,
-      ["eslint/probeFailed"] = function()
-        vim.notify("ESLint probe failed.", vim.log.levels.WARN)
+      ['eslint/probeFailed'] = function()
+        vim.notify('ESLint probe failed.', vim.log.levels.WARN)
         return { id = nil, result = true }
       end,
-      ["eslint/noLibrary"] = function()
-        vim.notify("Unable to find ESLint library.", vim.log.levels.WARN)
+      ['eslint/noLibrary'] = function()
+        vim.notify('Unable to find ESLint library.', vim.log.levels.WARN)
         return { id = nil, result = true }
       end,
-      ["eslint/noConfig"] = function()
-        vim.notify("Unable to find ESLint configuration.", vim.log.levels.WARN)
+      ['eslint/noConfig'] = function()
+        vim.notify('Unable to find ESLint configuration.', vim.log.levels.WARN)
         return { id = nil, result = true }
       end,
     },
