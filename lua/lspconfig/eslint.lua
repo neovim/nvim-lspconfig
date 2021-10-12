@@ -119,7 +119,7 @@ vscode-eslint-language-server provides an EslintFixAll command that can be used 
 autocmd BufWritePre <buffer> <cmd>EslintFixAll<CR>
 ```
 
-See https://github.com/microsoft/vscode-eslint/blob/55871979d7af184bf09af491b6ea35ebd56822cf/server/src/eslintServer.ts#L216-L229 for configuration options.
+See [vscode-eslint](https://github.com/microsoft/vscode-eslint/blob/55871979d7af184bf09af491b6ea35ebd56822cf/server/src/eslintServer.ts#L216-L229) for configuration options.
 
 Additional messages you can handle: eslint/probeFailed, eslint/noLibrary, eslint/noConfig
 Messages already handled in lspconfig: eslint/openDoc, eslint/confirmESLintExecution
