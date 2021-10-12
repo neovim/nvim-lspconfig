@@ -55,20 +55,37 @@ configs.eslint = {
       'typescript.tsx',
     },
     root_dir = util.root_pattern('.eslintrc.json', '.eslintrc.js', 'package.json', 'tsconfig.json', '.git'),
+    -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
     settings = {
-      validate = 'off',
+      validate = 'on',
       packageManager = 'npm',
       useESLintClass = false,
       codeActionOnSave = {
         enable = false,
         mode = 'all',
       },
-      format = false,
+      format = true,
       quiet = false,
       onIgnoredFiles = 'off',
       rulesCustomizations = {},
       run = 'onType',
-      nodePath = vim.NIL,
+      -- If nodePath is a non-null/undefined value the eslint LSP runs into runtime exceptions.
+      --
+      -- It's recommended not to change this.
+      nodePath = '',
+      -- Automatically determine working directory by locating .eslintrc config files.
+      --
+      -- It's recommended not to change this.
+      workingDirectory = { mode = 'auto' },
+      -- The "workspaceFolder" is a VSCode concept. We set it to the root
+      -- directory to not restrict the LPS server when it traverses the
+      -- file tree when locating a .eslintrc config file.
+      --
+      -- It's recommended not to change this.
+      workspaceFolder = {
+        uri = '/',
+        name = 'root',
+      },
       codeAction = {
         disableRuleComment = {
           enable = true,
