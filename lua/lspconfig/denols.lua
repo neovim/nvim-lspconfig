@@ -65,7 +65,7 @@ local function virtual_text_document(uri)
   virtual_text_document_handler(uri, result)
 end
 
-local function denols_handler(err, method, result)
+local function denols_handler(err, result, ctx)
   if not result or vim.tbl_isempty(result) then
     return nil
   end
@@ -79,7 +79,13 @@ local function denols_handler(err, method, result)
     end
   end
 
-  lsp.handlers[method](err, method, result)
+  -- TODO remove this conditional when the handler is no longer being wrapped
+  -- with util.compat_handler (just use the else clause)
+  if vim.fn.has 'nvim-0.5.1' then
+    lsp.handlers[ctx.method](err, result, ctx)
+  else
+    lsp.handlers[ctx.method](err, ctx.method, result)
+  end
 end
 
 local function denols_definition()
@@ -117,8 +123,8 @@ configs[server_name] = {
       unstable = false,
     },
     handlers = {
-      ['textDocument/definition'] = denols_handler,
-      ['textDocument/references'] = denols_handler,
+      ['textDocument/definition'] = util.compat_handler(denols_handler),
+      ['textDocument/references'] = util.compat_handler(denols_handler),
     },
   },
   commands = {

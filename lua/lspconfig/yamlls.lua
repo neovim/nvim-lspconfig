@@ -11,6 +11,10 @@ configs[server_name] = {
     root_dir = function(fname)
       return util.root_pattern '.git'(fname) or util.path.dirname(fname)
     end,
+    settings = {
+      -- https://github.com/redhat-developer/vscode-redhat-telemetry#how-to-disable-telemetry-reporting
+      redhat = { telemetry = { enabled = false } },
+    },
   },
   docs = {
     package_json = 'https://raw.githubusercontent.com/redhat-developer/vscode-yaml/master/package.json',
