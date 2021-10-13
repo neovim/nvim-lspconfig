@@ -54,7 +54,15 @@ configs.eslint = {
       'typescriptreact',
       'typescript.tsx',
     },
-    root_dir = util.root_pattern('.eslintrc.json', '.eslintrc.js', 'package.json', 'tsconfig.json', '.git'),
+    -- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
+    root_dir = util.root_pattern(
+      '.eslintrc.js',
+      '.eslintrc.cjs',
+      '.eslintrc.yaml',
+      '.eslintrc.yml',
+      '.eslintrc.json',
+      'package.json'
+    ),
     -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
     settings = {
       validate = 'on',
