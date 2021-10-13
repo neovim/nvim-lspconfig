@@ -109,7 +109,8 @@ configs.eslint = {
         if not result then
           return
         end
-        if vim.fn.has 'win32' == 1 then
+        local sysname = vim.loop.os_uname().sysname
+        if sysname:match 'Windows' then
           os.execute(string.format('start %q', result.url))
         else
           os.execute(string.format('open %q', result.url))
