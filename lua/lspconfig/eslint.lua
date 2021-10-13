@@ -85,15 +85,6 @@ configs.eslint = {
       --
       -- It's recommended not to change this.
       workingDirectory = { mode = 'auto' },
-      -- The "workspaceFolder" is a VSCode concept. We set it to the root
-      -- directory to not restrict the LPS server when it traverses the
-      -- file tree when locating a .eslintrc config file.
-      --
-      -- It's recommended not to change this.
-      workspaceFolder = {
-        uri = '/',
-        name = 'root',
-      },
       codeAction = {
         disableRuleComment = {
           enable = true,
@@ -104,6 +95,15 @@ configs.eslint = {
         },
       },
     },
+    on_new_config = function(config, new_root_dir)
+      -- The "workspaceFolder" is a VSCode concept. It limits how far the
+      -- server will traverse the file system when locating the ESLint config
+      -- file (e.g., .eslintrc).
+      config.settings.workspaceFolder = {
+        uri = new_root_dir,
+        name = vim.fn.fnamemodify(new_root_dir, ':t'),
+      }
+    end,
     handlers = {
       ['eslint/openDoc'] = function(_, result)
         if not result then
@@ -124,15 +124,15 @@ configs.eslint = {
       end,
       ['eslint/probeFailed'] = function()
         vim.notify('ESLint probe failed.', vim.log.levels.WARN)
-        return { id = nil, result = true }
+        return {}
       end,
       ['eslint/noLibrary'] = function()
         vim.notify('Unable to find ESLint library.', vim.log.levels.WARN)
-        return { id = nil, result = true }
+        return {}
       end,
       ['eslint/noConfig'] = function()
         vim.notify('Unable to find ESLint configuration.', vim.log.levels.WARN)
-        return { id = nil, result = true }
+        return {}
       end,
     },
   },
