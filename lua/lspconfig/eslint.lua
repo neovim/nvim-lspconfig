@@ -131,10 +131,6 @@ configs.eslint = {
         vim.notify('Unable to find ESLint library.', vim.log.levels.WARN)
         return {}
       end,
-      ['eslint/noConfig'] = function()
-        vim.notify('Unable to find ESLint configuration.', vim.log.levels.WARN)
-        return {}
-      end,
     },
   },
   commands = {
@@ -163,8 +159,8 @@ autocmd BufWritePre <buffer> <cmd>EslintFixAll<CR>
 
 See [vscode-eslint](https://github.com/microsoft/vscode-eslint/blob/55871979d7af184bf09af491b6ea35ebd56822cf/server/src/eslintServer.ts#L216-L229) for configuration options.
 
-Additional messages you can handle: eslint/probeFailed, eslint/noLibrary, eslint/noConfig
-Messages already handled in lspconfig: eslint/openDoc, eslint/confirmESLintExecution
+Additional messages you can handle: eslint/noConfig
+Messages already handled in lspconfig: eslint/openDoc, eslint/confirmESLintExecution, eslint/probeFailed, eslint/noLibrary
 ]],
   },
 }
