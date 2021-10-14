@@ -32,6 +32,23 @@ https://github.com/theia-ide/typescript-language-server
 ```sh
 npm install -g typescript typescript-language-server
 ```
+
+By default, `typescript-language-server` will type check JavaScript files. If you'd like to disable
+this feature, you can do so by editing your `jsconfig.json` file and disable the `checkJs` option.
+Here's an example:
+
+```json
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "checkJs": false
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
+```
 ]],
     default_config = {
       root_dir = [[root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")]],
