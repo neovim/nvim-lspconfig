@@ -115,7 +115,6 @@ configs.eslint = {
         else
           os.execute(string.format('open %q', result.url))
         end
-        return {}
       end,
       ['eslint/confirmESLintExecution'] = function(_, result)
         if not result then
@@ -125,11 +124,9 @@ configs.eslint = {
       end,
       ['eslint/probeFailed'] = function()
         vim.notify('ESLint probe failed.', vim.log.levels.WARN)
-        return {}
       end,
       ['eslint/noLibrary'] = function()
         vim.notify('Unable to find ESLint library.', vim.log.levels.WARN)
-        return {}
       end,
     },
   },
