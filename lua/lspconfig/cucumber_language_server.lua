@@ -8,7 +8,6 @@ configs.cucumber_language_server = {
     root_dir = util.root_pattern '.git',
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/cucumber/common/main/language-server/javascript/package.json',
     description = [[
 https://cucumber.io
 https://github.com/cucumber/common
