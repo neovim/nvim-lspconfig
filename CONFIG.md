@@ -18,6 +18,7 @@ that config.
 - [crystalline](#crystalline)
 - [csharp_ls](#csharp_ls)
 - [cssls](#cssls)
+- [cucumber_language_server](#cucumber_language_server)
 - [dartls](#dartls)
 - [denols](#denols)
 - [dhall_lsp_server](#dhall_lsp_server)
@@ -28,7 +29,9 @@ that config.
 - [elixirls](#elixirls)
 - [elmls](#elmls)
 - [ember](#ember)
+- [emmet_ls](#emmet_ls)
 - [erlangls](#erlangls)
+- [eslint](#eslint)
 - [flow](#flow)
 - [fortls](#fortls)
 - [fsautocomplete](#fsautocomplete)
@@ -41,6 +44,7 @@ that config.
 - [hie](#hie)
 - [hls](#hls)
 - [html](#html)
+- [idris2_lsp](#idris2_lsp)
 - [intelephense](#intelephense)
 - [java_language_server](#java_language_server)
 - [jdtls](#jdtls)
@@ -628,6 +632,37 @@ require'lspconfig'.cssls.setup{}
 ```
 
 
+## cucumber_language_server
+
+https://cucumber.io
+https://github.com/cucumber/common
+https://www.npmjs.com/package/@cucumber/language-server
+
+Language server for Cucumber.
+
+`cucumber-language-server` can be installed via `npm`:
+```sh
+npm install -g @cucumber/language-server
+```
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.cucumber_language_server.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "cucumber-language-server", "--stdio" }
+    filetypes = { "cucumber" }
+    root_dir = root_pattern(".git")
+```
+
+
 ## dartls
 
 https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec
@@ -1116,10 +1151,6 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`dart.previewVsCodeTestRunner`**: `boolean`
-
-  PREVIEW\: Whether to enable reporting tests into the VS Code Test Runner \(requires restart\)\.
-
 - **`dart.promptToGetPackages`**: `boolean`
 
   Default: `true`
@@ -1244,9 +1275,13 @@ This server accepts configuration via the `settings` key.
 
 - **`dart.useKnownChromeOSPorts`**: `boolean`
 
+  Whether to use specific ports for the VM service and DevTools when running in Chrome OS\. This is required to connect from the native Chrome OS browser but will prevent apps from launching if the ports are already in\-use \(for example if trying to run a second app\)\.
+
+- **`dart.useVsCodeTestRunner`**: `boolean`
+
   Default: `true`
   
-  Whether to use specific ports for the VM service and DevTools when running in Chrome OS\. This is required to connect from the native Chrome OS browser but will prevent apps from launching if the ports are already in\-use \(for example if trying to run a second app\)\.
+  Whether to use the built\-in VS Code test runner\. Otherwises uses the legacy custom test runner\.
 
 - **`dart.vmAdditionalArgs`**: `array`
 
@@ -1331,7 +1366,7 @@ require'lspconfig'.denols.setup{}
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
     handlers = {
       ["textDocument/definition"] = <function 1>,
-      ["textDocument/references"] = <function 1>
+      ["textDocument/references"] = <function 2>
     }
     init_options = {
       enable = true,
@@ -1712,6 +1747,33 @@ require'lspconfig'.ember.setup{}
 ```
 
 
+## emmet_ls
+
+https://github.com/aca/emmet-ls
+
+Package can be installed via `npm`:
+```sh
+npm install -g emmet-ls
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.emmet_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "emmet-ls", "--stdio" }
+    filetypes = { "html", "css" }
+    root_dir = git root
+```
+
+
 ## erlangls
 
 https://erlang-ls.github.io
@@ -1742,6 +1804,90 @@ require'lspconfig'.erlangls.setup{}
     cmd = { "erlang_ls" }
     filetypes = { "erlang" }
     root_dir = root_pattern('rebar.config', 'erlang.mk', '.git') or util.path.dirname(fname)
+```
+
+
+## eslint
+
+https://github.com/hrsh7th/vscode-langservers-extracted
+
+vscode-eslint-language-server: A linting engine for JavaScript / Typescript
+
+`vscode-eslint-language-server` can be installed via `npm`:
+```sh
+npm i -g vscode-langservers-extracted
+```
+
+vscode-eslint-language-server provides an EslintFixAll command that can be used to format document on save
+```vim
+autocmd BufWritePre <buffer> <cmd>EslintFixAll<CR>
+```
+
+See [vscode-eslint](https://github.com/microsoft/vscode-eslint/blob/55871979d7af184bf09af491b6ea35ebd56822cf/server/src/eslintServer.ts#L216-L229) for configuration options.
+
+Additional messages you can handle: eslint/noConfig
+Messages already handled in lspconfig: eslint/openDoc, eslint/confirmESLintExecution, eslint/probeFailed, eslint/noLibrary
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.eslint.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  - EslintFixAll: Fix all eslint problems for this buffer
+  
+  Default Values:
+    cmd = { "vscode-eslint-language-server", "--stdio" }
+    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+    handlers = {
+      ["eslint/confirmESLintExecution"] = <function 1>,
+      ["eslint/noLibrary"] = <function 2>,
+      ["eslint/openDoc"] = <function 3>,
+      ["eslint/probeFailed"] = <function 4>
+    }
+    on_new_config = function(config, new_root_dir)
+          -- The "workspaceFolder" is a VSCode concept. It limits how far the
+          -- server will traverse the file system when locating the ESLint config
+          -- file (e.g., .eslintrc).
+          config.settings.workspaceFolder = {
+            uri = new_root_dir,
+            name = vim.fn.fnamemodify(new_root_dir, ':t'),
+          }
+        end,
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
+    settings = {
+      codeAction = {
+        disableRuleComment = {
+          enable = true,
+          location = "separateLine"
+        },
+        showDocumentation = {
+          enable = true
+        }
+      },
+      codeActionOnSave = {
+        enable = false,
+        mode = "all"
+      },
+      format = true,
+      nodePath = "",
+      onIgnoredFiles = "off",
+      packageManager = "npm",
+      quiet = false,
+      rulesCustomizations = {},
+      run = "onType",
+      useESLintClass = false,
+      validate = "on",
+      workingDirectory = {
+        mode = "auto"
+      }
+    }
 ```
 
 
@@ -2207,17 +2353,11 @@ init_options = {
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`haskell.diagnosticsOnChange`**: `boolean`
+- **`haskell.checkProject`**: `boolean`
 
   Default: `true`
   
-  Compute diagnostics continuously as you type\. Turn off to only generate diagnostics on file save\.
-
-- **`haskell.formatOnImportOn`**: `boolean`
-
-  Default: `true`
-  
-  When adding an import\, use the formatter on the result
+  Whether to typecheck the entire project on load\. It could drive to bad perfomance in large projects\.
 
 - **`haskell.formattingProvider`**: `enum { "brittany", "floskell", "fourmolu", "ormolu", "stylish-haskell", "none" }`
 
@@ -2230,6 +2370,12 @@ This server accepts configuration via the `settings` key.
   Default: `""`
   
   If set\, redirects the logs to a file\.
+
+- **`haskell.maxCompletions`**: `integer`
+
+  Default: `40`
+  
+  Maximum number of completions sent to the editor\.
 
 - **`haskell.openDocumentationInHackage`**: `boolean`
 
@@ -2333,6 +2479,12 @@ This server accepts configuration via the `settings` key.
   
   Enables pragmas completions
 
+- **`haskell.plugin.refineImports.globalOn`**: `boolean`
+
+  Default: `true`
+  
+  Enables refine imports plugin
+
 - **`haskell.plugin.retrie.globalOn`**: `boolean`
 
   Default: `true`
@@ -2381,6 +2533,12 @@ This server accepts configuration via the `settings` key.
   
   Enables Wingman \(tactics\) plugin
 
+- **`haskell.releasesDownloadStoragePath`**: `string`
+
+  Default: `""`
+  
+  null
+
 - **`haskell.releasesURL`**: `string`
 
   Default: `""`
@@ -2388,6 +2546,12 @@ This server accepts configuration via the `settings` key.
   An optional URL to override where to check for haskell\-language\-server releases
 
 - **`haskell.serverExecutablePath`**: `string`
+
+  Default: `""`
+  
+  null
+
+- **`haskell.serverExtraArgs`**: `string`
 
   Default: `""`
   
@@ -2523,6 +2687,57 @@ require'lspconfig'.html.setup{}
 ```
 
 
+## idris2_lsp
+
+https://github.com/idris-community/idris2-lsp
+
+The Idris 2 language server.
+
+Plugins for the Idris 2 filetype include
+[Idris2-Vim](https://github.com/edwinb/idris2-vim) (fewer features, stable) and
+[Nvim-Idris2](https://github.com/ShinKage/nvim-idris2) (cutting-edge,
+experimental).
+
+Idris2-Lsp requires a build of Idris 2 that includes the "Idris 2 API" package.
+Package managers with known support for this build include the
+[AUR](https://aur.archlinux.org/packages/idris2-api-git/) and
+[Homebrew](https://formulae.brew.sh/formula/idris2#default).
+
+If your package manager does not support the Idris 2 API, you will need to build
+Idris 2 from source. Refer to the
+[the Idris 2 installation instructions](https://github.com/idris-lang/Idris2/blob/main/INSTALL.md)
+for details.  Steps 5 and 8 are listed as "optional" in that guide, but they are
+necessary in order to make the Idris 2 API available.
+
+You need to install a version of Idris2-Lsp that is compatible with your
+version of Idris 2. There should be a branch corresponding to every released
+Idris 2 version after v0.4.0. Use the latest commit on that branch. For example,
+if you have Idris v0.5.1, you should use the v0.5.1 branch of Idris2-Lsp.
+
+If your Idris 2 version is newer than the newest Idris2-Lsp branch, use the
+latest commit on the `master` branch, and set a reminder to check the Idris2-Lsp
+repo for the release of a compatible versioned branch.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.idris2_lsp.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "idris2-lsp" }
+    filetypes = { "idris2" }
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
+```
+
+
 ## intelephense
 
 https://intelephense.com/
@@ -2558,6 +2773,56 @@ Java language server
 
 Point `cmd` to `lang_server_linux.sh` or the equivalent script for macOS/Windows provided by java-language-server
 
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`java.addExports`**: `array`
+
+  Array items: `{type = "string"}`
+  
+  List of modules to allow access to\, for example \[\"jdk\.compiler\/com\.sun\.tools\.javac\.api\"\]
+
+- **`java.classPath`**: `array`
+
+  Array items: `{type = "string"}`
+  
+  Relative paths from workspace root to \.jar files\, \.zip files\, or folders that should be included in the Java class path
+
+- **`java.debugTestMethod`**: `array`
+
+  Array items: `{type = "string"}`
+  
+  Command to debug one test method\, for example \[\"mvn\"\, \"test\"\, \"\-Dmaven\.surefire\.debug\"\, \"\-Dtest\=\$\{class\}\#\$\{method\}\"\. The test should start paused\, listening for the debugger on port 5005\.
+
+- **`java.externalDependencies`**: `array`
+
+  Array items: `{pattern = "^[^:]+:[^:]+:[^:]+(:[^:]+:[^:]+)?$",type = "string"}`
+  
+  External dependencies of the form groupId\:artifactId\:version or groupId\:artifactId\:packaging\:version\:scope
+
+- **`java.home`**: `string`
+
+  Absolute path to your Java home directory
+
+- **`java.testClass`**: `array`
+
+  Array items: `{type = "string"}`
+  
+  Command to run all tests in a class\, for example \[\"mvn\"\, \"test\"\, \"\-Dtest\=\$\{class\}\"
+
+- **`java.testMethod`**: `array`
+
+  Array items: `{type = "string"}`
+  
+  Command to run one test method\, for example \[\"mvn\"\, \"test\"\, \"\-Dtest\=\$\{class\}\#\$\{method\}\"
+
+- **`java.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VSCode and the language server\.
+
+</details>
 
 
 **Snippet to enable the language server:**
@@ -2689,7 +2954,7 @@ This server accepts configuration via the `settings` key.
 
 - **`java.completion.filteredTypes`**: `array`
 
-  Default: `{ "java.awt.*", "com.sun.*", "sun.*" }`
+  Default: `{ "java.awt.*", "com.sun.*", "sun.*", "jdk.*", "org.graalvm.*", "io.micrometer.shaded.*" }`
   
   Defines the type filters\. All types whose fully qualified name matches the selected filter strings will be ignored in content assist or quick fix proposals and when organizing imports\. For example \'java\.awt\.\*\' will hide all types from the awt packages\.
 
@@ -2743,7 +3008,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `{}`
   
-  Array items: `{additionalProperties = false,default = vim.empty_dict(),properties = {default = {description = "Is default runtime? Only one runtime can be default.",type = "boolean"},javadoc = {description = "JDK javadoc path.",type = "string"},name = {description = "Java Execution Environment name. Must be unique.",enum = { "J2SE-1.5", "JavaSE-1.6", "JavaSE-1.7", "JavaSE-1.8", "JavaSE-9", "JavaSE-10", "JavaSE-11", "JavaSE-12", "JavaSE-13", "JavaSE-14", "JavaSE-15", "JavaSE-16" },type = "string"},path = {description = 'JDK home path. Should be the JDK installation directory, not the Java bin path.\n On Windows, backslashes must be escaped, i.e.\n"path":"C:\\\\Program Files\\\\Java\\\\jdk1.8.0_161".',pattern = ".*(?<!\\/bin|\\/bin\\/|\\\\bin|\\\\bin\\\\)$",type = "string"},sources = {description = "JDK sources path.",type = "string"}},required = { "path", "name" },type = "object"}`
+  Array items: `{additionalProperties = false,default = vim.empty_dict(),properties = {default = {description = "Is default runtime? Only one runtime can be default.",type = "boolean"},javadoc = {description = "JDK javadoc path.",type = "string"},name = {description = "Java Execution Environment name. Must be unique.",enum = { "J2SE-1.5", "JavaSE-1.6", "JavaSE-1.7", "JavaSE-1.8", "JavaSE-9", "JavaSE-10", "JavaSE-11", "JavaSE-12", "JavaSE-13", "JavaSE-14", "JavaSE-15", "JavaSE-16", "JavaSE-17" },type = "string"},path = {description = 'JDK home path. Should be the JDK installation directory, not the Java bin path.\n On Windows, backslashes must be escaped, i.e.\n"path":"C:\\\\Program Files\\\\Java\\\\jdk1.8.0_161".',pattern = ".*(?<!\\/bin|\\/bin\\/|\\\\bin|\\\\bin\\\\)$",type = "string"},sources = {description = "JDK sources path.",type = "string"}},required = { "path", "name" },type = "object"}`
   
   Map Java Execution Environments to local JDKs\.
 
@@ -3985,7 +4250,9 @@ require'lspconfig'.nimls.setup{}
   Default Values:
     cmd = { "nimlsp" }
     filetypes = { "nim" }
-    root_dir = root_pattern(".git") or os_homedir
+    root_dir = function(fname)
+          return util.root_pattern '*.nimble'(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+        end,
 ```
 
 
@@ -4161,6 +4428,12 @@ To use the language server, ensure that you have Perl::LanguageServer installed 
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`perl.cacheDir`**: `string`
+
+  Default: `vim.NIL`
+  
+  directory for caching of parsed symbols\, if the directory does not exists\, it will be created\, defaults to \$\{workspace\}\/\.vscode\/perl\-lang\. This should be one unqiue directory per project and an absolute path\.
+
 - **`perl.debugAdapterPort`**: `string`
 
   Default: `"13603"`
@@ -4229,7 +4502,7 @@ This server accepts configuration via the `settings` key.
   
   ip address of remote system
 
-- **`perl.sshArgs`**: `string`
+- **`perl.sshArgs`**: `array`
 
   Default: `vim.NIL`
   
@@ -5507,6 +5780,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.completion.snippets`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
+
 - **`rust-analyzer.debug.engine`**: `enum { "auto", "vadimcn.vscode-lldb", "ms-vscode.cpptools" }`
 
   Default: `"auto"`
@@ -5573,6 +5852,8 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.experimental.procAttrMacros`**: `boolean`
 
+  Default: `true`
+  
   null
 
 - **`rust-analyzer.files.excludeDirs`**: `array`
@@ -5735,6 +6016,10 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
+  null
+
+- **`rust-analyzer.lens.enumVariantReferences`**: `boolean`
+
   null
 
 - **`rust-analyzer.lens.forceCustomCommands`**: `boolean`
@@ -6449,7 +6734,7 @@ require'lspconfig'.sumneko_lua.setup {
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`Lua.color.mode`**: `enum { "Grammar", "Semantic" }`
+- **`Lua.color.mode`**: `enum { "Grammar", "Semantic", "SemanticEnhanced" }`
 
   Default: `"Semantic"`
   
@@ -6469,7 +6754,7 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.completion.displayContext`**: `integer`
 
-  Default: `6`
+  Default: `0`
   
   null
 
@@ -6529,13 +6814,13 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.diagnostics.ignoredFiles`**: `enum { "Enable", "Opened", "Disable" }`
 
-  Default: `"Disable"`
+  Default: `"Opened"`
   
   null
 
 - **`Lua.diagnostics.libraryFiles`**: `enum { "Enable", "Opened", "Disable" }`
 
-  Default: `"Disable"`
+  Default: `"Opened"`
   
   null
 
@@ -7104,6 +7389,26 @@ https://github.com/theia-ide/typescript-language-server
 npm install -g typescript typescript-language-server
 ```
 
+To configure type language server, add a
+[`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) or
+[`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig) to the root of your
+project.
+
+Here's an example that disables type checking in JavaScript files.
+
+```json
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "checkJs": false
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
+```
+
 
 
 **Snippet to enable the language server:**
@@ -7248,129 +7553,6 @@ Do not run `vuels` and `volar` at the same time.
 
 To check which language servers are running, open a `.vue` file and run the `:LspInfo` command.
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`volar-api.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VS Code and the language server\.
-
-- **`volar-document.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VS Code and the language server\.
-
-- **`volar-html.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VS Code and the language server\.
-
-- **`volar.autoCompleteRefs`**: `boolean`
-
-  Default: `true`
-  
-  Auto\-complete Ref value with \`\.value\`\.
-
-- **`volar.checkVueTscVersion`**: `boolean`
-
-  Default: `true`
-  
-  Check node\_modules\/vscode\-vue\-languageservice version when start extension\.
-
-- **`volar.codeLens.pugTools`**: `boolean`
-
-  Default: `true`
-  
-  \[pug ☐\] code lens\.
-
-- **`volar.codeLens.references`**: `boolean`
-
-  Default: `true`
-  
-  \[references\] code lens\.
-
-- **`volar.codeLens.scriptSetupTools`**: `boolean`
-
-  Default: `true`
-  
-  \[ref sugar ☐\] code lens\.
-
-- **`volar.formatting.printWidth`**: `number`
-
-  Default: `100`
-  
-  HTML formatting print width\.
-
-- **`volar.icon.finder`**: `boolean`
-
-  \(Experimental\) Show code finder icon in title area of editor\.
-
-- **`volar.icon.preview`**: `boolean`
-
-  \(Experimental\) Show preview component icon in title area of editor\.
-
-- **`volar.icon.splitEditors`**: `boolean`
-
-  Default: `true`
-  
-  Show split editor icon in title area of editor\.
-
-- **`volar.lowPowerMode`**: `boolean`
-
-  Using one language server to do the work of two language serves can reduce system resource usage\, but features such as auto\-complete will be much slower\.
-
-- **`volar.preferredAttrNameCase`**: `enum { "auto-kebab", "auto-camel", "kebab", "camel" }`
-
-  Default: `"auto-kebab"`
-  
-  Preferred attr name case\.
-
-- **`volar.preferredTagNameCase`**: `enum { "auto", "both", "kebab", "pascal" }`
-
-  Default: `"auto"`
-  
-  Preferred tag name case\.
-
-- **`volar.preview.backgroundColor`**: `string`
-
-  Default: `"#fff"`
-  
-  Component preview background color\.
-
-- **`volar.preview.port`**: `number`
-
-  Default: `3333`
-  
-  Default port for component preview server\.
-
-- **`volar.preview.transparentGrid`**: `boolean`
-
-  Default: `true`
-  
-  Component preview background style\.
-
-- **`volar.takeOverBuiltinTsExtension`**: `boolean`
-
-  Default: `true`
-  
-  If built\-in VSCode TypeScript Extension disabled\, take over language support for \*\.ts\.
-
-- **`volar.tsPlugin`**: `enum { vim.NIL, true, false }`
-
-  Default: `vim.NIL`
-  
-  Enable Vue TS Server Plugin\.
-  Since TypeScript cannot handle type information for \`\.vue\` imports\, they are shimmed to be a generic Vue component type by default\. In most cases\, this is fine if you don\'t really care about component prop types outside of templates\. However\, if you wish to get actual prop types in \`\.vue\` imports \(for example to get props validation when using manual \`h\(\.\.\.\)\` calls\)\, then you need to enable this setting\.
-
-- **`volar.tsPluginStatus`**: `boolean`
-
-  Display TS Server Plugin status bar item\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -7647,7 +7829,7 @@ This server accepts configuration via the `settings` key.
 
 - **`vetur.useWorkspaceDependencies`**: `boolean`
 
-  Use dependencies from workspace\. Currently only for TypeScript\.
+  Use dependencies from workspace\. Support for TypeScript\, Prettier\, \@starptech\/prettyhtml\, prettier\-eslint\, prettier\-tslint\, stylus\-supremacy\, \@prettier\/plugin\-pug\.
 
 - **`vetur.validation.interpolation`**: `boolean`
 
@@ -7854,6 +8036,13 @@ require'lspconfig'.yamlls.setup{}
     cmd = { "yaml-language-server", "--stdio" }
     filetypes = { "yaml" }
     root_dir = root_pattern(".git") or dirname
+    settings = {
+      redhat = {
+        telemetry = {
+          enabled = false
+        }
+      }
+    }
 ```
 
 
