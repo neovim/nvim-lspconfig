@@ -22,7 +22,7 @@ jobs:
     - name: Commit changes
       env:
         COMMIT_MSG: |
-          [docgen] Update CONFIG.md
+          docs: update CONFIG.md
           skip-checks: true
       run: |
         git config user.name github-actions
@@ -51,22 +51,23 @@ jobs:
       - name: Build parser
         run: |
           export PACKPATH=$HOME/.local/share/nvim/site
-          ./build/nvim -u ~/.local/share/nvim/site/pack/vendor/start/babelfish.nvim/scripts/init.lua --headless -c 'TSInstallSync markdown' -c 'qa'
+          nvim -u ~/.local/share/nvim/site/pack/vendor/start/babelfish.nvim/scripts/init.lua --headless -c 'TSInstallSync markdown' -c 'qa'
       - name: Generating docs
         run: |
           export PATH="${PWD}/build/:${PATH}"
           export PACKPATH=$HOME/.local/share/nvim/site
-          ./build/nvim -u ~/.local/share/nvim/site/pack/vendor/start/babelfish.nvim/scripts/init.lua --headless -c 'luafile ./scripts/vimdocgen.lua' -c 'qa'
+          nvim -u ~/.local/share/nvim/site/pack/vendor/start/babelfish.nvim/scripts/init.lua --headless -c 'luafile ./scripts/vimdocgen.lua' -c 'qa'
       - name: Commit changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMIT_MSG: |
-            [docgen] Update README.md
+            docs: update README.md
             skip-checks: true
         run: |
           git config user.email "actions@github"
           git config user.name "Github Actions"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git pull
           git add doc/lspconfig.txt
           # Only commit and push if we have changes
           git diff --quiet && git diff --staged --quiet || (git commit -m "${COMMIT_MSG}"; git push origin HEAD:${GITHUB_REF})
