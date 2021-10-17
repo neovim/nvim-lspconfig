@@ -78,9 +78,8 @@ configs.eslint = {
       onIgnoredFiles = 'off',
       rulesCustomizations = {},
       run = 'onType',
-      -- If nodePath is a non-null/undefined value the eslint LSP runs into runtime exceptions.
-      --
-      -- It's recommended not to change this.
+      -- nodePath configures the directory in which the eslint server should start its node_modules resolution.
+      -- This path is relative to the workspace folder (root dir) of the server instance.
       nodePath = '',
       -- Automatically determine working directory by locating .eslintrc config files.
       --
@@ -116,6 +115,7 @@ configs.eslint = {
         else
           os.execute(string.format('open %q', result.url))
         end
+        return {}
       end,
       ['eslint/confirmESLintExecution'] = function(_, result)
         if not result then
@@ -125,9 +125,11 @@ configs.eslint = {
       end,
       ['eslint/probeFailed'] = function()
         vim.notify('ESLint probe failed.', vim.log.levels.WARN)
+        return {}
       end,
       ['eslint/noLibrary'] = function()
         vim.notify('Unable to find ESLint library.', vim.log.levels.WARN)
+        return {}
       end,
     },
   },
