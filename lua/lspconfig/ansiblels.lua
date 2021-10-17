@@ -17,6 +17,9 @@ configs[server_name] = {
         ansible = {
           path = 'ansible',
         },
+        executionEnvironment = {
+          enabled = false,
+        },
       },
     },
     filetypes = { 'yaml' },
