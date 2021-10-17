@@ -223,7 +223,10 @@ require'lspconfig'.ansiblels.setup{}
         },
         python = {
           interpreterPath = "python"
-        }
+        },
+        executionEnvironment = {
+          enabled = false,
+        },
       }
     }
 ```
