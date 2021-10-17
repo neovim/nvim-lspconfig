@@ -373,4 +373,15 @@ function M.get_other_matching_providers(filetype)
   return other_matching_configs
 end
 
+function M.get_clients_from_cmd_args(arg)
+  local result = {}
+  for id in (arg or ''):gmatch('(%d+) %((%w+)%)') do
+    result[id] = vim.lsp.get_client_by_id(tonumber(id))
+  end
+  if vim.tbl_isempty(result) then
+    return vim.lsp.get_active_clients()
+  end
+  return vim.tbl_values(result)
+end
+
 return M
