@@ -1373,7 +1373,7 @@ require'lspconfig'.denols.setup{}
       lint = false,
       unstable = false
     }
-    root_dir = root_pattern("package.json", "tsconfig.json", ".git")
+    root_dir = root_pattern("deno.json", "deno.jsonc", "package.json", "tsconfig.json", ".git")
 ```
 
 
