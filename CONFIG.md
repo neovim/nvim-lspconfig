@@ -1842,7 +1842,7 @@ require'lspconfig'.eslint.setup{}
   
   Default Values:
     cmd = { "vscode-eslint-language-server", "--stdio" }
-    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue" }
     handlers = {
       ["eslint/confirmESLintExecution"] = <function 1>,
       ["eslint/noLibrary"] = <function 2>,
