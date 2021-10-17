@@ -221,6 +221,9 @@ require'lspconfig'.ansiblels.setup{}
           enabled = true,
           path = "ansible-lint"
         },
+        executionEnvironment = {
+          enabled = false
+        },
         python = {
           interpreterPath = "python"
         }
