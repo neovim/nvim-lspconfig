@@ -53,6 +53,7 @@ configs.eslint = {
       'typescript',
       'typescriptreact',
       'typescript.tsx',
+      'vue',
     },
     -- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
     root_dir = util.root_pattern(
