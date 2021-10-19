@@ -4,7 +4,7 @@ local util = require 'lspconfig/util'
 configs.tflint = {
   default_config = {
     cmd = { 'tflint', '--langserver' },
-    filetypes = { 'terraform' },
+    filetypes = { 'terraform', 'tf' },
     root_dir = util.root_pattern('.terraform', '.git', '.tflint.hcl'),
   },
   docs = {
