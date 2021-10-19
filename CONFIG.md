@@ -7261,7 +7261,7 @@ require'lspconfig'.terraformls.setup{}
   
   Default Values:
     cmd = { "terraform-ls", "serve" }
-    filetypes = { "terraform", "tf" }
+    filetypes = { "terraform" }
     root_dir = root_pattern(".terraform", ".git")
 ```
 
@@ -7339,7 +7339,7 @@ require'lspconfig'.tflint.setup{}
   
   Default Values:
     cmd = { "tflint", "--langserver" }
-    filetypes = { "terraform", "tf" }
+    filetypes = { "terraform" }
     root_dir = root_pattern(".terraform", ".git", ".tflint.hcl")
 ```
 
