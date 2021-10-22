@@ -36,6 +36,7 @@ that config.
 - [flux-lsp](#flux-lsp)
 - [fortls](#fortls)
 - [fsautocomplete](#fsautocomplete)
+- [fstar](#fstar)
 - [gdscript](#gdscript)
 - [ghcide](#ghcide)
 - [gopls](#gopls)
@@ -2165,6 +2166,31 @@ require'lspconfig'.fsautocomplete.setup{}
     root_dir = function(startpath)
         return M.search_ancestors(startpath, matcher)
       end
+```
+
+
+## fstar
+
+https://github.com/FStarLang/FStar
+
+LSP support is included in FStar. Make sure `fstar.exe` is in your PATH.
+```
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.fstar.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "fstar.exe", "--lsp" }
+    filetypes = { "fstar" }
+    root_dir = root_pattern(".git")
 ```
 
 
