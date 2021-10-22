@@ -33,6 +33,7 @@ that config.
 - [erlangls](#erlangls)
 - [eslint](#eslint)
 - [flow](#flow)
+- [flux-lsp](#flux-lsp)
 - [fortls](#fortls)
 - [fsautocomplete](#fsautocomplete)
 - [gdscript](#gdscript)
@@ -1577,8 +1578,6 @@ This server accepts configuration via the `settings` key.
 
 - **`elixirLS.fetchDeps`**: `boolean`
 
-  Default: `true`
-  
   Automatically fetch project dependencies when compiling
 
 - **`elixirLS.mixEnv`**: `string`
@@ -1997,6 +1996,32 @@ require'lspconfig'.flow.setup{}
     cmd = { "npx", "--no-install", "flow", "lsp" }
     filetypes = { "javascript", "javascriptreact", "javascript.jsx" }
     root_dir = root_pattern(".flowconfig")
+```
+
+
+## flux-lsp
+
+https://github.com/influxdata/flux-lsp
+`flux-lsp` can be installed via `cargo`:
+```sh
+cargo install --git https://github.com/influxdata/flux-lsp
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.flux-lsp.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "flux-lsp" }
+    filetypes = { "flux" }
+    root_dir = root_pattern(".git")
 ```
 
 
