@@ -6,10 +6,7 @@ local name = 'bsl'
 configs[name] = {
   default_config = {
     filetypes = { 'bsl', 'os' },
-    root_dir = function(fname)
-      return util.find_git_ancestor(fname) or util.path.dirname(fname)
-    end,
-    log_level = vim.lsp.protocol.MessageType.Warning,
+    root_dir = util.path.dirname or util.find_git_ancestor,
   },
   docs = {
     description = [[
