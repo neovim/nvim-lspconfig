@@ -38,14 +38,6 @@ local function get_jdtls_config()
   end
 end
 
--- Non-standard notification that can be used to display progress
-local function on_language_status(_, _, result)
-  local command = vim.api.nvim_command
-  command 'echohl ModeMsg'
-  command(string.format('echo "%s"', result.message))
-  command 'echohl None'
-end
-
 -- TextDocument version is reported as 0, override with nil so that
 -- the client doesn't think the document is newer and refuses to update
 -- See: https://github.com/eclipse/eclipse.jdt.ls/issues/1695
@@ -59,6 +51,44 @@ local function fix_zero_version(workspace_edit)
     end
   end
   return workspace_edit
+end
+
+-- Compatibility shim added for breaking changes to the lsp handler signature in nvim-0.5.1
+local function remap_arguments(err, result, ctx)
+  if vim.fn.has('nvim-0.5.1') == 1 then
+    handlers[ctx.method](err, result, ctx)
+  else
+    handlers[ctx.method](err, ctx.method, result)
+  end
+end
+
+local function on_textdocument_codeaction(err, actions, ctx)
+  for _, action in ipairs(actions) do
+    -- TODO: (steelsojka) Handle more than one edit?
+    if action.command == 'java.apply.workspaceEdit' then -- 'action' is Command in java format
+      action.edit = fix_zero_version(action.edit or action.arguments[1])
+    elseif type(action.command) == 'table' and action.command.command == 'java.apply.workspaceEdit' then -- 'action' is CodeAction in java format
+      action.edit = fix_zero_version(action.edit or action.command.arguments[1])
+    end
+  end
+
+  remap_arguments(err, actions, ctx)
+end
+
+local function on_textdocument_rename(err, workspace_edit, ctx)
+  remap_arguments(err, fix_zero_version(workspace_edit), ctx)
+end
+
+local function on_workspace_applyedit(err, workspace_edit, ctx)
+  remap_arguments(err, fix_zero_version(workspace_edit), ctx)
+end
+
+-- Non-standard notification that can be used to display progress
+local function on_language_status(_, result)
+  local command = vim.api.nvim_command
+  command 'echohl ModeMsg'
+  command(string.format('echo "%s"', result.message))
+  command 'echohl None'
 end
 
 local root_files = {
@@ -114,27 +144,10 @@ configs[server_name] = {
     handlers = {
       -- Due to an invalid protocol implementation in the jdtls we have to conform these to be spec compliant.
       -- https://github.com/eclipse/eclipse.jdt.ls/issues/376
-      ['textDocument/codeAction'] = function(a, b, actions)
-        for _, action in ipairs(actions) do
-          -- TODO: (steelsojka) Handle more than one edit?
-          if action.command == 'java.apply.workspaceEdit' then -- 'action' is Command in java format
-            action.edit = fix_zero_version(action.edit or action.arguments[1])
-          elseif type(action.command) == 'table' and action.command.command == 'java.apply.workspaceEdit' then -- 'action' is CodeAction in java format
-            action.edit = fix_zero_version(action.edit or action.command.arguments[1])
-          end
-        end
-        handlers['textDocument/codeAction'](a, b, actions)
-      end,
-
-      ['textDocument/rename'] = function(a, b, workspace_edit)
-        handlers['textDocument/rename'](a, b, fix_zero_version(workspace_edit))
-      end,
-
-      ['workspace/applyEdit'] = function(a, b, workspace_edit)
-        handlers['workspace/applyEdit'](a, b, fix_zero_version(workspace_edit))
-      end,
-
-      ['language/status'] = vim.schedule_wrap(on_language_status),
+      ['textDocument/codeAction'] = util.compat_handler(on_textdocument_codeaction),
+      ['textDocument/rename'] = util.compat_handler(on_textdocument_rename),
+      ['workspace/applyEdit'] = util.compat_handler(on_workspace_applyedit),
+      ['language/status'] = util.compat_handler(vim.schedule_wrap(on_language_status)),
     },
   },
   docs = {
