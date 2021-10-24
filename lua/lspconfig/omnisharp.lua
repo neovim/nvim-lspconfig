@@ -6,11 +6,7 @@ configs[server_name] = {
   default_config = {
     filetypes = { 'cs', 'vb' },
     root_dir = function(fname)
-      local dir = util.root_pattern '*.sln'(fname) or util.root_pattern '*.csproj'(fname)
-      if vim.fn.has('win32') then
-          dir = dir:lower()
-      end
-      return dir
+      return util.root_pattern '*.sln'(fname) or util.root_pattern '*.csproj'(fname)
     end,
     on_new_config = function(new_config, new_root_dir)
       if new_root_dir then

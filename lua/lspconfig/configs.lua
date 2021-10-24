@@ -66,7 +66,13 @@ function configs.__newindex(t, config_name, config_def)
       )
     end
 
-    local get_root_dir = config.root_dir
+    local get_root_dir = function(fname, bufnum)
+        local dir = config.root_dir(fname, bufnum)
+        if vim.fn.has('win32') then
+            dir = dir:lower()
+        end
+        return dir
+    end
 
     function M.autostart()
       local root_dir = get_root_dir(api.nvim_buf_get_name(0), api.nvim_get_current_buf())
