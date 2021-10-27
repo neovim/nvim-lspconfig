@@ -1335,9 +1335,10 @@ require'lspconfig'.dartls.setup{}
   Default Values:
     cmd = { "dart", "./snapshots/analysis_server.dart.snapshot", "--lsp" }
     filetypes = { "dart" }
-    init_options = {
+    settings = {
       closingLabels = false,
       flutterOutline = false,
+      lineLength = 120,
       onlyAnalyzeProjectsWithOpenFiles = false,
       outline = false,
       suggestFromUnimportedLibraries = true
