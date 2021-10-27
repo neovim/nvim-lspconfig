@@ -36,11 +36,17 @@ configs[server_name] = {
     filetypes = { 'dart' },
     root_dir = util.root_pattern 'pubspec.yaml',
     init_options = {
-      onlyAnalyzeProjectsWithOpenFiles = false,
+      onlyAnalyzeProjectsWithOpenFiles = true,
       suggestFromUnimportedLibraries = true,
-      closingLabels = false,
-      outline = false,
-      flutterOutline = false,
+      closingLabels = true,
+      outline = true,
+      flutterOutline = true,
+    },
+    settings = {
+      dart = {
+        completeFunctionCalls = true,
+        showTodos = true,
+      },
     },
   },
   docs = {
