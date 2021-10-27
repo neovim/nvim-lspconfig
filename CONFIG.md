@@ -4433,26 +4433,13 @@ An LSP server implementation for Pascal variants that are supported by Free Pasc
 First set `cmd` to the Pascal lsp binary.
 
 Customization options are passed to pasls as environment variables for example in your `.bashrc`:
-	    ```bash
-export FPCDIR='/usr/lib/fpc/src',
-export PP='/usr/lib/fpc/3.2.2/ppcx64',
-export LAZARUSDIR='/usr/lib/lazarus',
-export FPCTARGET='',
-export FPCTARGETCPU='x86_64',
-
-		```
-
-`FPCDIR` : FPC source directory (This is the only required option for the server to work).
-
-`PP` : Path to the Free Pascal compiler executable.
-
-`LAZARUSDIR` : Path to the Lazarus sources.
-
-`FPCTARGET` : Target operating system for cross compiling.
-
-`FPCTARGETCPU` : Target CPU for cross compiling.
-
-
+```bash
+export FPCDIR='/usr/lib/fpc/src'      # FPC source directory (This is the only required option for the server to work).
+export PP='/usr/lib/fpc/3.2.2/ppcx64' # Path to the Free Pascal compiler executable.
+export LAZARUSDIR='/usr/lib/lazarus'  # Path to the Lazarus sources.
+export FPCTARGET=''                   # Target operating system for cross compiling.
+export FPCTARGETCPU='x86_64'          # Target CPU for cross compiling.
+```
 
 **Snippet to enable the language server:**
 ```lua
