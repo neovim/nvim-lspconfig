@@ -1150,12 +1150,6 @@ This server accepts configuration via the `settings` key.
 
   null
 
-- **`dart.previewLsp`**: `null|boolean`
-
-  Default: `vim.NIL`
-  
-  null
-
 - **`dart.promptToGetPackages`**: `boolean`
 
   Default: `true`
@@ -1278,9 +1272,11 @@ This server accepts configuration via the `settings` key.
   
   Whether to automatically update imports when moving or renaming files\. Currently only supports single file moves \/ renames\.
 
-- **`dart.useKnownChromeOSPorts`**: `boolean`
+- **`dart.useLsp`**: `boolean`
 
-  Whether to use specific ports for the VM service and DevTools when running in Chrome OS\. This is required to connect from the native Chrome OS browser but will prevent apps from launching if the ports are already in\-use \(for example if trying to run a second app\)\.
+  Default: `true`
+  
+  null
 
 - **`dart.useVsCodeTestRunner`**: `boolean`
 
@@ -4433,24 +4429,13 @@ An LSP server implementation for Pascal variants that are supported by Free Pasc
 First set `cmd` to the Pascal lsp binary.
 
 Customization options are passed to pasls as environment variables for example in your `.bashrc`:
-	    ```bash
-export FPCDIR='/usr/lib/fpc/src',
-export PP='/usr/lib/fpc/3.2.2/ppcx64',
-export LAZARUSDIR='/usr/lib/lazarus',
-export FPCTARGET='',
-export FPCTARGETCPU='x86_64',
-
-		```
-
-`FPCDIR` : FPC source directory (This is the only required option for the server to work).
-
-`PP` : Path to the Free Pascal compiler executable.
-
-`LAZARUSDIR` : Path to the Lazarus sources.
-
-`FPCTARGET` : Target operating system for cross compiling.
-
-`FPCTARGETCPU` : Target CPU for cross compiling.
+```bash
+export FPCDIR='/usr/lib/fpc/src'      # FPC source directory (This is the only required option for the server to work).
+export PP='/usr/lib/fpc/3.2.2/ppcx64' # Path to the Free Pascal compiler executable.
+export LAZARUSDIR='/usr/lib/lazarus'  # Path to the Lazarus sources.
+export FPCTARGET=''                   # Target operating system for cross compiling.
+export FPCTARGETCPU='x86_64'          # Target CPU for cross compiling.
+```
 
 
 
