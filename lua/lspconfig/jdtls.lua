@@ -39,10 +39,10 @@ local function get_jdtls_config()
 end
 
 -- Non-standard notification that can be used to display progress
-local function on_language_status(_, _, result)
+local function on_language_status(status_report)
   local command = vim.api.nvim_command
   command 'echohl ModeMsg'
-  command(string.format('echo "%s"', result.message))
+  command(string.format('echo "%s"', status_report.message))
   command 'echohl None'
 end
 
@@ -114,7 +114,7 @@ configs[server_name] = {
     handlers = {
       -- Due to an invalid protocol implementation in the jdtls we have to conform these to be spec compliant.
       -- https://github.com/eclipse/eclipse.jdt.ls/issues/376
-      ['textDocument/codeAction'] = function(a, b, actions)
+      ['textDocument/codeAction'] = function(a, actions, ...)
         for _, action in ipairs(actions) do
           -- TODO: (steelsojka) Handle more than one edit?
           if action.command == 'java.apply.workspaceEdit' then -- 'action' is Command in java format
@@ -123,18 +123,20 @@ configs[server_name] = {
             action.edit = fix_zero_version(action.edit or action.command.arguments[1])
           end
         end
-        handlers['textDocument/codeAction'](a, b, actions)
+        handlers['textDocument/codeAction'](a, actions, ...)
       end,
 
-      ['textDocument/rename'] = function(a, b, workspace_edit)
-        handlers['textDocument/rename'](a, b, fix_zero_version(workspace_edit))
+      ['textDocument/rename'] = function(a, workspace_edit, ...)
+        handlers['textDocument/rename'](a, fix_zero_version(workspace_edit), ...)
       end,
 
-      ['workspace/applyEdit'] = function(a, b, workspace_edit)
-        handlers['workspace/applyEdit'](a, b, fix_zero_version(workspace_edit))
+      ['workspace/applyEdit'] = function(a, workspace_edit, ...)
+        handlers['workspace/applyEdit'](a, fix_zero_version(workspace_edit), ...)
       end,
 
-      ['language/status'] = vim.schedule_wrap(on_language_status),
+      ['language/status'] = vim.schedule_wrap(function(_, result)
+        on_language_status(result)
+      end),
     },
   },
   docs = {
