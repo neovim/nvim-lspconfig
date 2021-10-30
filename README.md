@@ -2,7 +2,7 @@
 
 A [collection of common configurations](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md) for Neovim's built-in [language server client](https://neovim.io/doc/user/lsp.html).
 
-This repo handles automatically launching and initializing language servers that are installed on your system.
+This plugin allows for declaratively configuring, launching, and initializing language servers you have installed on your system. Language server configurations are community-maintained.
 
 # LSP overview
 
