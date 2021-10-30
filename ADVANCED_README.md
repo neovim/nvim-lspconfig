@@ -209,5 +209,7 @@ lspconfig.SERVER.setup{config}
     created as a result of {root_dir} returning a unique value. You can use this
     as an opportunity to further modify the new_config or use it before it is
     sent to |vim.lsp.start_client()|. If you set a custom `on_new_config`, ensure that 
-    `new_config.cmd = cmd` is present within the function body.
+    you read the original `on_new_config` defined in lspconfig, as many server configurations
+    leverage this to modify `cmd` at runtime, and this functionality should likely be duplicated
+    in your override.
 ```
