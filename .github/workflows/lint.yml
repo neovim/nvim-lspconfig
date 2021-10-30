@@ -18,7 +18,7 @@ jobs:
         sudo luarocks install luacheck
     - name: Run luacheck
       run: |
-        sudo make lint
+        luacheck lua/* test/*
   style-lint:
     runs-on: [ubuntu-latest]
     steps: 

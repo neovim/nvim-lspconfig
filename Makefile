@@ -1,10 +1,10 @@
 test:
 	sh ./scripts/run_test.sh
 lint:
+	@echo "\nRunning luacheck\n"
 	luacheck lua/* test/*
-
-style-lint:
+	@echo "\nRunning stylua\n"
 	stylua --check .
 
-.PHONY: test lint style-lint
+.PHONY: test lint
 
