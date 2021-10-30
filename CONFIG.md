@@ -1116,6 +1116,10 @@ This server accepts configuration via the `settings` key.
   
   Whether to show a notification the first few times an analysis server exception occurs\.
 
+- **`dart.onlyAnalyzeProjectsWithOpenFiles`**: `boolean`
+
+  Whether to ignore workspace folders and perform analysis based on the open files\, as if no workspace was open at all\. This allows opening large folders without causing them to be completely analyzed\.
+
 - **`dart.openDevTools`**: `enum { "never", "flutter", "always" }`
 
   Default: `"never"`
