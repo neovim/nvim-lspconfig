@@ -14,7 +14,56 @@ part of the default configuration. The allowed arguments are detailed [below](#s
 require'lspconfig'.<server>.setup{<config>}
 ```
 
-### Example: using the defaults
+### The structure of `config`
+
+The `configs` module is a singleton where configs are defined. In `vim.validate`
+parlance here is the "spec":
+
+    configs.SERVER_NAME = {
+      default_config = {'t'};
+      on_new_config = {'f', true};
+      on_attach = {'f', true};
+      commands = {'t', true};
+      docs = {'t', true};
+    }
+    docs = {
+      description = {'s', true};
+      default_config = {'t', true};
+    }
+
+- Keys in `docs.default_config` match those of
+  `configs.SERVER_NAME.default_config`, and can be used to specify custom
+  documentation. This is useful for functions, whose docs cannot be easily
+  auto-generated.
+- `commands` is a map of `name:definition` key:value pairs, where `definition`
+  is a list whose first value is a function implementing the command and the
+  rest are either array values which will be formed into flags for the command
+  or special keys like `description`. Example:
+  ```
+  commands = {
+    TexlabBuild = {
+      function()
+        buf_build(0)
+      end;
+      "-range";
+      description = "Build the current buffer";
+    };
+  };
+  ```
+
+The `configs.__newindex` metamethod consumes the config definition and returns
+an object with a `setup()` method, to be invoked by users:
+
+    require'lspconfig'.SERVER_NAME.setup{}
+
+After you set `configs.SERVER_NAME` you can add arbitrary language-specific
+functions to it if necessary.
+
+Example:
+
+    configs.texlab.buf_build = buf_build
+
+### Example: using a default config
 
 To use the defaults, just call `setup()` with an empty `config` parameter.
 For the `gopls` config, that would be:
