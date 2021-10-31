@@ -45,11 +45,6 @@ configs.clangd = {
       local filename = util.path.is_absolute(fname) and fname or util.path.join(vim.loop.cwd(), fname)
       return root_pattern(filename) or util.path.dirname(filename)
     end,
-    on_init = function(client, result)
-      if result.offsetEncoding then
-        client.offset_encoding = result.offsetEncoding
-      end
-    end,
     capabilities = default_capabilities,
   },
   commands = {
@@ -72,7 +67,6 @@ For details on how to automatically generate one using CMake look [here](https:/
 ]],
     default_config = {
       root_dir = [[root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname]],
-      on_init = [[function to handle changing offsetEncoding]],
       capabilities = [[default capabilities, with offsetEncoding utf-8]],
     },
   },
