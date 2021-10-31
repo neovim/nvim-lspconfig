@@ -7,7 +7,7 @@ local bin_name = 'docker-langserver'
 configs[server_name] = {
   default_config = {
     cmd = { bin_name, '--stdio' },
-    filetypes = { 'Dockerfile', 'dockerfile' },
+    filetypes = { 'dockerfile' },
     root_dir = util.root_pattern 'Dockerfile',
   },
   docs = {
