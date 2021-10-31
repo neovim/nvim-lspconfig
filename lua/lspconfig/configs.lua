@@ -123,7 +123,13 @@ function configs.__newindex(t, config_name, config_def)
         pcall(config.on_new_config, new_config, _root_dir)
       end
 
-      new_config.on_init = util.add_hook_after(new_config.on_init, function(client, _result)
+      new_config.on_init = util.add_hook_after(new_config.on_init, function(client, result)
+        -- Handle offset encoding by default
+        if result.offsetEncoding then
+          client.offset_encoding = result.offsetEncoding
+        end
+
+        -- Send `settings to server via workspace/didChangeConfiguration
         function client.workspace_did_change_configuration(settings)
           if not settings then
             return
