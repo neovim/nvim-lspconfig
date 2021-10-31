@@ -1456,7 +1456,7 @@ require'lspconfig'.dockerls.setup{}
   
   Default Values:
     cmd = { "docker-langserver", "--stdio" }
-    filetypes = { "Dockerfile", "dockerfile" }
+    filetypes = { "dockerfile" }
     root_dir = root_pattern("Dockerfile")
 ```
 
