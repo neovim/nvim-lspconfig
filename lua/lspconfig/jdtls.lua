@@ -55,7 +55,7 @@ end
 
 -- Compatibility shim added for breaking changes to the lsp handler signature in nvim-0.5.1
 local function remap_arguments(err, result, ctx)
-  if vim.fn.has('nvim-0.5.1') == 1 then
+  if vim.fn.has 'nvim-0.5.1' == 1 then
     handlers[ctx.method](err, result, ctx)
   else
     handlers[ctx.method](err, ctx.method, result)
