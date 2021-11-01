@@ -57,6 +57,7 @@ that config.
 - [lean3ls](#lean3ls)
 - [leanls](#leanls)
 - [lemminx](#lemminx)
+- [ltex](#ltex)
 - [metals](#metals)
 - [mint](#mint)
 - [nimls](#nimls)
@@ -4121,6 +4122,256 @@ require'lspconfig'.lemminx.setup{}
     root_dir = function(filename)
           return util.root_pattern '.git'(filename) or util.path.dirname(filename)
         end,
+```
+
+
+## ltex
+
+https://github.com/valentjn/ltex-ls
+
+LTeX Language Server: LSP language server for LanguageTool 🔍✔️ with support for LaTeX 🎓, Markdown 📝, and others
+
+To install, download the latest [release](https://github.com/valentjn/ltex-ls/releases) and ensure `ltex-ls` is on your path.
+
+
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`ltex.additionalRules.enablePickyRules`**: `boolean`
+
+  null
+
+- **`ltex.additionalRules.languageModel`**: `string`
+
+  Default: `""`
+  
+  null
+
+- **`ltex.additionalRules.motherTongue`**: `enum { "", "ar", "ast-ES", "be-BY", "br-FR", "ca-ES", "ca-ES-valencia", "da-DK", "de", "de-AT", "de-CH", "de-DE", "de-DE-x-simple-language", "el-GR", "en", "en-AU", "en-CA", "en-GB", "en-NZ", "en-US", "en-ZA", "eo", "es", "es-AR", "fa", "fr", "ga-IE", "gl-ES", "it", "ja-JP", "km-KH", "nl", "nl-BE", "pl-PL", "pt", "pt-AO", "pt-BR", "pt-MZ", "pt-PT", "ro-RO", "ru-RU", "sk-SK", "sl-SI", "sv", "ta-IN", "tl-PH", "uk-UA", "zh-CN" }`
+
+  Default: `""`
+  
+  null
+
+- **`ltex.additionalRules.neuralNetworkModel`**: `string`
+
+  Default: `""`
+  
+  null
+
+- **`ltex.additionalRules.word2VecModel`**: `string`
+
+  Default: `""`
+  
+  null
+
+- **`ltex.bibtex.fields`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
+
+- **`ltex.checkFrequency`**: `enum { "edit", "save", "manual" }`
+
+  Default: `"edit"`
+  
+  null
+
+- **`ltex.clearDiagnosticsWhenClosingFile`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`ltex.completionEnabled`**: `boolean`
+
+  null
+
+- **`ltex.configurationTarget`**: `object`
+
+  Default: `{dictionary = "workspaceFolderExternalFile",disabledRules = "workspaceFolderExternalFile",hiddenFalsePositives = "workspaceFolderExternalFile"}`
+  
+  null
+
+- **`ltex.diagnosticSeverity`**
+
+  Default: `"information"`
+  
+  null
+
+- **`ltex.dictionary`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
+
+- **`ltex.disabledRules`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
+
+- **`ltex.enabled`**
+
+  Default: `{ "bibtex", "html", "latex", "markdown", "org", "restructuredtext", "rsweave" }`
+  
+  null
+
+- **`ltex.enabledRules`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
+
+- **`ltex.hiddenFalsePositives`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
+
+- **`ltex.java.initialHeapSize`**: `integer`
+
+  Default: `64`
+  
+  null
+
+- **`ltex.java.maximumHeapSize`**: `integer`
+
+  Default: `512`
+  
+  null
+
+- **`ltex.java.path`**: `string`
+
+  Default: `""`
+  
+  null
+
+- **`ltex.language`**: `enum { "auto", "ar", "ast-ES", "be-BY", "br-FR", "ca-ES", "ca-ES-valencia", "da-DK", "de", "de-AT", "de-CH", "de-DE", "de-DE-x-simple-language", "el-GR", "en", "en-AU", "en-CA", "en-GB", "en-NZ", "en-US", "en-ZA", "eo", "es", "es-AR", "fa", "fr", "ga-IE", "gl-ES", "it", "ja-JP", "km-KH", "nl", "nl-BE", "pl-PL", "pt", "pt-AO", "pt-BR", "pt-MZ", "pt-PT", "ro-RO", "ru-RU", "sk-SK", "sl-SI", "sv", "ta-IN", "tl-PH", "uk-UA", "zh-CN" }`
+
+  Default: `"en-US"`
+  
+  null
+
+- **`ltex.languageToolHttpServerUri`**: `string`
+
+  Default: `""`
+  
+  null
+
+- **`ltex.languageToolOrg.apiKey`**: `string`
+
+  Default: `""`
+  
+  null
+
+- **`ltex.languageToolOrg.username`**: `string`
+
+  Default: `""`
+  
+  null
+
+- **`ltex.latex.commands`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
+
+- **`ltex.latex.environments`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
+
+- **`ltex.ltex-ls.languageToolHttpServerUri`**: `string`
+
+  Default: `""`
+  
+  null
+
+- **`ltex.ltex-ls.languageToolOrgApiKey`**: `string`
+
+  Default: `""`
+  
+  null
+
+- **`ltex.ltex-ls.languageToolOrgUsername`**: `string`
+
+  Default: `""`
+  
+  null
+
+- **`ltex.ltex-ls.logLevel`**: `enum { "severe", "warning", "info", "config", "fine", "finer", "finest" }`
+
+  Default: `"fine"`
+  
+  null
+
+- **`ltex.ltex-ls.path`**: `string`
+
+  Default: `""`
+  
+  null
+
+- **`ltex.markdown.nodes`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
+
+- **`ltex.sentenceCacheSize`**: `integer`
+
+  Default: `2000`
+  
+  null
+
+- **`ltex.statusBarItem`**: `boolean`
+
+  null
+
+- **`ltex.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  null
+
+</details>
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.ltex.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "ltex-ls" }
+    filetypes = { "tex", "bib", "markdown" }
+    root_dir = function(path)
+        if M.path.is_dir(M.path.join(path, '.git')) then
+          return path
+        end
+      end)
+    end
+    settings = {
+      ltex = {
+        additionalRules = {
+          enablePickyRules = true,
+          motherTongue = "en"
+        },
+        checkFrequency = "edit",
+        diagnosticSeverity = "information",
+        dictionary = {},
+        disabledRules = {},
+        enabled = { "latex", "tex", "bib", "markdown" },
+        hiddenFalsePositives = {},
+        language = "en",
+        setenceCacheSize = 2000
+      }
+    }
 ```
 
 
