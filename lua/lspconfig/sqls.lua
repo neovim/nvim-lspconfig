@@ -16,7 +16,7 @@ https://github.com/lighttiger2505/sqls
 
 ```lua
 require'lspconfig'.sqls.setup{
-  cmd = {"path/to/command", "-config" "path/to/config.yml"};
+  cmd = {"path/to/command", "-config", "path/to/config.yml"};
   ...
 }
 ```
