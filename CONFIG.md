@@ -4133,6 +4133,11 @@ LTeX Language Server: LSP language server for LanguageTool 🔍✔️ with suppo
 
 To install, download the latest [release](https://github.com/valentjn/ltex-ls/releases) and ensure `ltex-ls` is on your path.
 
+To support org files or R sweave, users can define a custom filetype autocommand (or use a plugin which defines these filetypes):
+
+```lua
+vim.cmd [[ autocmd BufRead,BufNewFile *.org set filetype=org ]]
+```
 
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
@@ -4349,29 +4354,19 @@ require'lspconfig'.ltex.setup{}
   
   Default Values:
     cmd = { "ltex-ls" }
-    filetypes = { "tex", "bib", "markdown" }
+    filetypes = { "bib", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" }
+    get_language_id = function(_, filetype)
+          local language_id = language_id_mapping[filetype]
+          if language_id then
+            return language_id
+          end
+        end,
     root_dir = function(path)
         if M.path.is_dir(M.path.join(path, '.git')) then
           return path
         end
       end)
     end
-    settings = {
-      ltex = {
-        additionalRules = {
-          enablePickyRules = true,
-          motherTongue = "en"
-        },
-        checkFrequency = "edit",
-        diagnosticSeverity = "information",
-        dictionary = {},
-        disabledRules = {},
-        enabled = { "latex", "tex", "bib", "markdown" },
-        hiddenFalsePositives = {},
-        language = "en",
-        setenceCacheSize = 2000
-      }
-    }
 ```
 
 
@@ -7204,7 +7199,7 @@ This server accepts configuration via the `settings` key.
 
   null
 
-- **`Lua.runtime.fileEncoding`**: `enum { "utf8", "ansi" }`
+- **`Lua.runtime.fileEncoding`**: `enum { "utf8", "ansi", "utf16le", "utf16be" }`
 
   Default: `"utf8"`
   
