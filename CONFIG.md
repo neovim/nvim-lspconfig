@@ -61,6 +61,7 @@ that config.
 - [metals](#metals)
 - [mint](#mint)
 - [nimls](#nimls)
+- [nls](#nls)
 - [ocamlls](#ocamlls)
 - [ocamllsp](#ocamllsp)
 - [omnisharp](#omnisharp)
@@ -4554,6 +4555,45 @@ require'lspconfig'.nimls.setup{}
     filetypes = { "nim" }
     root_dir = function(fname)
           return util.root_pattern '*.nimble'(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+        end,
+```
+
+
+## nls
+
+Nickel Language Server
+
+https://github.com/tweag/nickel
+
+`nls` can be installed with cargo from the Nickel repository.
+```sh
+git clone https://github.com/tweag/nickel.git
+cd nickel/lsp/nls
+cargo install --path .
+```
+
+```vim
+augroup filetype_nickel
+  autocmd!
+  autocmd BufReadPost *.ncl setlocal filetype=nickel
+  autocmd BufReadPost *.nickel setlocal filetype=nickel
+augroup END
+```
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.nls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+
+  Default Values:
+    cmd = { "nls" }
+    filetypes = { "ncl", "nickel" }
+    root_dir = function(fname)
+          return util.find_git_ancestor(fname) or util.path.dirname(fname)
         end,
 ```
 
