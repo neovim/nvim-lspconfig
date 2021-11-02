@@ -19,6 +19,8 @@ configs.ltex = {
       local language_id = language_id_mapping[filetype]
       if language_id then
         return language_id
+      else
+        return filetype
       end
     end,
   },
