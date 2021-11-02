@@ -1,37 +1,41 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
+local language_id_mapping = {
+  bib = 'bibtex',
+  plaintex = 'tex',
+  rnoweb = 'sweave',
+  rst = 'restructuredtext',
+  tex = 'latex',
+  xhtml = 'xhtml',
+}
+
 configs.ltex = {
   default_config = {
     cmd = { 'ltex-ls' },
-    filetypes = { 'tex', 'bib', 'markdown' },
+    filetypes = { 'bib', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex' },
     root_dir = util.find_git_ancestor,
-    settings = {
-      ltex = {
-        enabled = { 'latex', 'tex', 'bib', 'markdown' },
-        checkFrequency = 'edit',
-        language = 'en',
-        diagnosticSeverity = 'information',
-        setenceCacheSize = 2000,
-        additionalRules = {
-          enablePickyRules = true,
-          motherTongue = 'en',
-        },
-        dictionary = {},
-        disabledRules = {},
-        hiddenFalsePositives = {},
-      },
-    },
+    get_language_id = function(_, filetype)
+      local language_id = language_id_mapping[filetype]
+      if language_id then
+        return language_id
+      end
+    end,
   },
   docs = {
     package_json = 'https://raw.githubusercontent.com/valentjn/vscode-ltex/develop/package.json',
-    description = [[
+    description = [=[
 https://github.com/valentjn/ltex-ls
 
 LTeX Language Server: LSP language server for LanguageTool 🔍✔️ with support for LaTeX 🎓, Markdown 📝, and others
 
 To install, download the latest [release](https://github.com/valentjn/ltex-ls/releases) and ensure `ltex-ls` is on your path.
 
-]],
+To support org files or R sweave, users can define a custom filetype autocommand (or use a plugin which defines these filetypes):
+
+```lua
+vim.cmd [[ autocmd BufRead,BufNewFile *.org set filetype=org ]]
+```
+]=],
   },
 }
