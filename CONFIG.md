@@ -52,6 +52,7 @@ that config.
 - [jdtls](#jdtls)
 - [jedi_language_server](#jedi_language_server)
 - [jsonls](#jsonls)
+- [jsonnet](#jsonnet)
 - [julials](#julials)
 - [kotlin_language_server](#kotlin_language_server)
 - [lean3ls](#lean3ls)
@@ -3522,6 +3523,28 @@ require'lspconfig'.jsonls.setup{}
       provideFormatter = true
     }
     root_dir = root_pattern(".git") or dirname
+```
+
+## jsonnet
+
+https://github.com/jdbaldry/jsonnet-language-server
+
+A Language Server Protocol (LSP) server for Jsonnet.
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.jsonnet.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "jsonnet-language-server" }
+    filetypes = { "jsonnet", "libsonnet" }
+    root_dir = root_pattern("go.mod", ".git")
 ```
 
 
