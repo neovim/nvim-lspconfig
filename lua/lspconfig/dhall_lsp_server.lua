@@ -8,8 +8,9 @@ configs.dhall_lsp_server = {
     root_dir = function(fname)
       return util.root_pattern '.git'(fname) or util.path.dirname(fname)
     end,
-    docs = {
-      description = [[
+  },
+  docs = {
+    description = [[
 https://github.com/dhall-lang/dhall-haskell/tree/master/dhall-lsp-server
 
 language server for dhall
@@ -20,9 +21,8 @@ cabal install dhall-lsp-server
 ```
 prebuilt binaries can be found [here](https://github.com/dhall-lang/dhall-haskell/releases).
 ]],
-      default_config = {
-        root_dir = [[root_pattern(".git") or dirname]],
-      },
+    default_config = {
+      root_dir = [[root_pattern(".git") or dirname]],
     },
   },
 }

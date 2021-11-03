@@ -8,8 +8,9 @@ configs.arduino_language_server = {
     root_dir = function(fname)
       return util.root_pattern '*.ino'(fname)
     end,
-    docs = {
-      description = [[
+  },
+  docs = {
+    description = [[
 https://github.com/arduino/arduino-language-server
 
 Language server for Arduino
@@ -48,7 +49,6 @@ lspconfig.arduino_language_server.setup({
 For further instruction about configuration options, run `arduino-language-server --help`.
 
 ]],
-    },
   },
 }
 

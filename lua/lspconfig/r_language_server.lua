@@ -13,16 +13,16 @@ configs.r_language_server = {
   docs = {
     package_json = 'https://raw.githubusercontent.com/REditorSupport/vscode-r-lsp/master/package.json',
     description = [[
-    [languageserver](https://github.com/REditorSupport/languageserver) is an
-    implementation of the Microsoft's Language Server Protocol for the R
-    language.
+[languageserver](https://github.com/REditorSupport/languageserver) is an
+implementation of the Microsoft's Language Server Protocol for the R
+language.
 
-    It is released on CRAN and can be easily installed by
+It is released on CRAN and can be easily installed by
 
-    ```R
-    install.packages("languageserver")
-    ```
-    ]],
+```R
+install.packages("languageserver")
+```
+]],
     default_config = {
       root_dir = [[root_pattern(".git") or os_homedir]],
     },
