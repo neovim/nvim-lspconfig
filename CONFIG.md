@@ -145,7 +145,7 @@ require'lspconfig'.als.setup{}
   Default Values:
     cmd = { "ada_language_server" }
     filetypes = { "ada" }
-    root_dir = util.root_pattern("Makefile", ".git")
+    root_dir = util.root_pattern("Makefile", ".git", "*.gpr", "*.adc")
 ```
 
 
