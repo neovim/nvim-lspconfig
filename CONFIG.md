@@ -237,6 +237,44 @@ require'lspconfig'.ansiblels.setup{}
 
 ## arduino_language_server
 
+https://github.com/arduino/arduino-language-server
+
+Language server for Arduino
+
+The `arduino-language-server` can be installed by running:
+	go get -u github.com/arduino/arduino-language-server
+
+The `arduino-cli` tools must also be installed. Follow these instructions for your distro:
+	https://arduino.github.io/arduino-cli/latest/installation/
+
+After installing the `arduino-cli` tools, follow these instructions for generating
+a configuration file:
+	https://arduino.github.io/arduino-cli/latest/getting-started/#create-a-configuration-file
+and make sure you install any relevant platforms libraries:
+	https://arduino.github.io/arduino-cli/latest/getting-started/#install-the-core-for-your-board
+
+The language server also requires `clangd` be installed. It will look for `clangd` by default but
+the binary path can be overridden if need be.
+
+After all dependencies are installed you'll need to override the lspconfig command for the
+language server in your setup function with the necessary configurations:
+
+```lua
+lspconfig.arduino_language_server.setup({
+	cmd =  {
+		-- Required
+		"arduino-language-server",
+		"-cli-config", "/path/to/arduino-cli.yaml",
+		-- Optional
+		"-cli", "/path/to/arduino-cli",
+		"-clangd", "/path/to/clangd"
+	}
+})
+```
+
+For further instruction about configuration options, run `arduino-language-server --help`.
+
+
 
 
 **Snippet to enable the language server:**
@@ -250,9 +288,6 @@ require'lspconfig'.arduino_language_server.setup{}
   
   Default Values:
     cmd = { "arduino-language-server" }
-    docs = {
-      description = "https://github.com/arduino/arduino-language-server\n\nLanguage server for Arduino\n\nThe `arduino-language-server` can be installed by running:\n\tgo get -u github.com/arduino/arduino-language-server\n\nThe `arduino-cli` tools must also be installed. Follow these instructions for your distro:\n\thttps://arduino.github.io/arduino-cli/latest/installation/\n\nAfter installing the `arduino-cli` tools, follow these instructions for generating\na configuration file:\n\thttps://arduino.github.io/arduino-cli/latest/getting-started/#create-a-configuration-file\nand make sure you install any relevant platforms libraries:\n\thttps://arduino.github.io/arduino-cli/latest/getting-started/#install-the-core-for-your-board\n\nThe language server also requires `clangd` be installed. It will look for `clangd` by default but\nthe binary path can be overridden if need be.\n\nAfter all dependencies are installed you'll need to override the lspconfig command for the\nlanguage server in your setup function with the necessary configurations:\n\n```lua\nlspconfig.arduino_language_server.setup({\n\tcmd =  {\n\t\t-- Required\n\t\t\"arduino-language-server\",\n\t\t\"-cli-config\", \"/path/to/arduino-cli.yaml\",\n\t\t-- Optional\n\t\t\"-cli\", \"/path/to/arduino-cli\",\n\t\t\"-clangd\", \"/path/to/clangd\"\n\t}\n})\n```\n\nFor further instruction about configuration options, run `arduino-language-server --help`.\n\n"
-    }
     filetypes = { "arduino" }
     root_dir = function(fname)
           return util.root_pattern '*.ino'(fname)
@@ -1384,6 +1419,16 @@ require'lspconfig'.denols.setup{}
 
 ## dhall_lsp_server
 
+https://github.com/dhall-lang/dhall-haskell/tree/master/dhall-lsp-server
+
+language server for dhall
+
+`dhall-lsp-server` can be installed via cabal:
+```sh
+cabal install dhall-lsp-server
+```
+prebuilt binaries can be found [here](https://github.com/dhall-lang/dhall-haskell/releases).
+
 
 
 **Snippet to enable the language server:**
@@ -1397,16 +1442,8 @@ require'lspconfig'.dhall_lsp_server.setup{}
   
   Default Values:
     cmd = { "dhall-lsp-server" }
-    docs = {
-      default_config = {
-        root_dir = 'root_pattern(".git") or dirname'
-      },
-      description = "https://github.com/dhall-lang/dhall-haskell/tree/master/dhall-lsp-server\n\nlanguage server for dhall\n\n`dhall-lsp-server` can be installed via cabal:\n```sh\ncabal install dhall-lsp-server\n```\nprebuilt binaries can be found [here](https://github.com/dhall-lang/dhall-haskell/releases).\n"
-    }
     filetypes = { "dhall" }
-    root_dir = function(fname)
-          return util.root_pattern '.git'(fname) or util.path.dirname(fname)
-        end,
+    root_dir = root_pattern(".git") or dirname
 ```
 
 
@@ -2174,8 +2211,7 @@ require'lspconfig'.fsautocomplete.setup{}
 https://github.com/FStarLang/FStar
 
 LSP support is included in FStar. Make sure `fstar.exe` is in your PATH.
-```
-    
+
 
 
 **Snippet to enable the language server:**
@@ -5599,16 +5635,16 @@ require'lspconfig'.pyright.setup{}
 
 ## r_language_server
 
-    [languageserver](https://github.com/REditorSupport/languageserver) is an
-    implementation of the Microsoft's Language Server Protocol for the R
-    language.
+[languageserver](https://github.com/REditorSupport/languageserver) is an
+implementation of the Microsoft's Language Server Protocol for the R
+language.
 
-    It is released on CRAN and can be easily installed by
+It is released on CRAN and can be easily installed by
 
-    ```R
-    install.packages("languageserver")
-    ```
-    
+```R
+install.packages("languageserver")
+```
+
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
