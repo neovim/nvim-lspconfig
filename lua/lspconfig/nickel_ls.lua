@@ -1,7 +1,7 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
-configs.nls = {
+configs.nickel_ls = {
   default_config = {
     cmd = { 'nls' },
     filetypes = { 'ncl', 'nickel' },
