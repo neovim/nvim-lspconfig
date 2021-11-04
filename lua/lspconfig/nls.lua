@@ -14,7 +14,7 @@ Nickel Language Server
 
 https://github.com/tweag/nickel
 
-`nls` can be installed with nix, or cargo from the Nickel repository.
+`nls` can be installed with nix, or cargo, from the Nickel repository.
 ```sh
 git clone https://github.com/tweag/nickel.git
 ```
