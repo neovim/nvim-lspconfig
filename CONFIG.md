@@ -60,6 +60,7 @@ that config.
 - [ltex](#ltex)
 - [metals](#metals)
 - [mint](#mint)
+- [nickel_ls](#nickel_ls)
 - [nimls](#nimls)
 - [ocamlls](#ocamlls)
 - [ocamllsp](#ocamllsp)
@@ -709,653 +710,7 @@ https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec
 
 Language server for dart.
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
 
-- **`dart.additionalAnalyzerFileExtensions`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  Additional file extensions that should be analyzed \(usually used in combination with analyzer plugins\)\.
-
-- **`dart.allowAnalytics`**: `boolean`
-
-  Default: `true`
-  
-  Whether to send analytics such as startup timings\, frequency of use of features and analysis server crashes\.
-
-- **`dart.allowTestsOutsideTestFolder`**: `boolean`
-
-  null
-
-- **`dart.analysisExcludedFolders`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  An array of paths to be excluded from Dart analysis\. This option should usually be set at the Workspace level\. Excluded folders will also be ignored when detecting project types\.
-
-- **`dart.analysisServerFolding`**: `boolean`
-
-  Default: `true`
-  
-  Whether to use folding data from the Dart analysis server instead of the built\-in VS Code indent\-based folding\.
-
-- **`dart.analyzeAngularTemplates`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.analyzerAdditionalArgs`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  Additional arguments to pass to the Dart analysis server\.
-
-- **`dart.analyzerDiagnosticsPort`**: `null|number`
-
-  Default: `vim.NIL`
-  
-  The port number to be used for the Dart analyzer diagnostic server\.
-
-- **`dart.analyzerInstrumentationLogFile`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  The path to a log file for very detailed logging in the Dart analysis server that may be useful when trying to diagnose analysis server issues\.
-
-- **`dart.analyzerLogFile`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  The path to a log file for communication between Dart Code and the analysis server\.
-
-- **`dart.analyzerPath`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  The path to a custom Dart analysis server\.
-
-- **`dart.analyzerSshHost`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  An SSH host to run the analysis server\.
-  This can be useful when modifying code on a remote machine using SSHFS\.
-
-- **`dart.analyzerVmServicePort`**: `null|number`
-
-  Default: `vim.NIL`
-  
-  The port number to be used for the Dart analysis server VM service\.
-
-- **`dart.autoImportCompletions`**: `boolean`
-
-  Default: `true`
-  
-  Whether to include symbols that have not been imported in the code completion list and automatically insert the required import when selecting them \(requires restart\)\.
-
-- **`dart.automaticCommentSlashes`**: `enum { "none", "tripleSlash", "all" }`
-
-  Default: `"tripleSlash"`
-  
-  null
-
-- **`dart.buildRunnerAdditionalArgs`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`dart.checkForSdkUpdates`**: `boolean`
-
-  Default: `true`
-  
-  Whether to check you are using the latest version of the Dart SDK at startup\.
-
-- **`dart.cliConsole`**: `enum { "debugConsole", "terminal", "externalTerminal" }`
-
-  Default: `"debugConsole"`
-  
-  Whether to run Dart CLI apps in the Debug Console or a terminal\. The Debug Console has more functionality because the process is controlled by the debug adapter\, but is unable to accept input from the user via stdin\.
-
-- **`dart.closingLabels`**: `boolean`
-
-  Default: `true`
-  
-  Whether to show annotations against constructor\, method invocations and lists that span multiple lines\.
-
-- **`dart.completeFunctionCalls`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.dapLogFile`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`dart.debugExtensionBackendProtocol`**: `enum { "sse", "ws" }`
-
-  Default: `"ws"`
-  
-  The protocol to use for the Dart Debug Extension backend service and injected client\. Using WebSockets can improve performance but may fail when connecting through some proxy servers\.
-
-- **`dart.debugExternalPackageLibraries`**: `boolean`
-
-  null
-
-- **`dart.debugSdkLibraries`**: `boolean`
-
-  null
-
-- **`dart.devToolsBrowser`**: `enum { "chrome", "default" }`
-
-  Default: `"chrome"`
-  
-  Whether to launch external DevTools windows using Chrome or the system default browser\.
-
-- **`dart.devToolsLogFile`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  The path to a low\-traffic log file for the Dart DevTools service\.
-
-- **`dart.devToolsPort`**: `null|number`
-
-  Default: `vim.NIL`
-  
-  The port number to be used for the Dart DevTools\.
-
-- **`dart.devToolsReuseWindows`**: `boolean`
-
-  Default: `true`
-  
-  Whether to try to reuse existing DevTools windows instead of launching new ones\. Only works for instances of DevTools launched by the DevTools server on the local machine\.
-
-- **`dart.devToolsTheme`**: `enum { "dark", "light" }`
-
-  Default: `"dark"`
-  
-  The theme to use for Dart DevTools\.
-
-- **`dart.doNotFormat`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`dart.embedDevTools`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.enableCompletionCommitCharacters`**: `boolean`
-
-  null
-
-- **`dart.enableSdkFormatter`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.enableServerSnippets`**: `boolean`
-
-  null
-
-- **`dart.enableSnippets`**: `boolean`
-
-  Default: `true`
-  
-  Whether to include Dart and Flutter snippets in code completion\.
-
-- **`dart.env`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  Additional environment variables to be added to all Dart\/Flutter processes spawned by the Dart and Flutter extensions\.
-
-- **`dart.evaluateGettersInDebugViews`**: `boolean`
-
-  Default: `true`
-  
-  Whether to evaluate getters in order to display them in debug views \(such as the Variables\, Watch and Hovers views\)\.
-
-- **`dart.evaluateToStringInDebugViews`**: `boolean`
-
-  Default: `true`
-  
-  Whether to call toString\(\) on objects when rendering them in debug views \(such as the Variables\, Watch and Hovers views\)\. Only applies to views of 100 or fewer values for performance reasons\.
-
-- **`dart.extensionLogFile`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  The path to a low\-traffic log file for basic extension and editor issues\.
-
-- **`dart.flutterAdbConnectOnChromeOs`**: `boolean`
-
-  null
-
-- **`dart.flutterAdditionalArgs`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`dart.flutterAttachAdditionalArgs`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`dart.flutterCreateAndroidLanguage`**: `enum { "java", "kotlin" }`
-
-  Default: `"kotlin"`
-  
-  The programming language to use for Android apps when creating new projects using the \'Flutter\: New Project\' command\.
-
-- **`dart.flutterCreateIOSLanguage`**: `enum { "objc", "swift" }`
-
-  Default: `"swift"`
-  
-  The programming language to use for iOS apps when creating new projects using the \'Flutter\: New Project\' command\.
-
-- **`dart.flutterCreateOffline`**: `boolean`
-
-  Whether to use offline mode when creating new projects with the \'Flutter\: New Project\' command\.
-
-- **`dart.flutterCreateOrganization`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`dart.flutterCustomEmulators`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{properties = {args = {items = {type = "string"},type = "array"},env = vim.empty_dict(),executable = {type = "string"},id = {type = "string"},name = {type = "string"}},type = "object"}`
-  
-  Custom emulators to show in the emulator list for easier launching\. If IDs match existing emulators returned by Flutter\, the custom emulators will override them\.
-
-- **`dart.flutterDaemonLogFile`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`dart.flutterGutterIcons`**: `boolean`
-
-  Default: `true`
-  
-  Whether to show Flutter icons and colors in the editor gutter\.
-
-- **`dart.flutterHotReloadOnSave`**: `enum { "never", "always", "manual" }`
-
-  Default: `"manual"`
-  
-  null
-
-- **`dart.flutterHotRestartOnSave`**: `boolean`
-
-  Default: `true`
-  
-  Whether to automatically send a Hot Restart request during a debug session when saving files if Hot Reload is not available but Hot Restart is\.
-
-- **`dart.flutterOutline`**: `boolean`
-
-  Default: `true`
-  
-  Whether to show the Flutter Outline tree in the sidebar\.
-
-- **`dart.flutterRunAdditionalArgs`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`dart.flutterRunLogFile`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`dart.flutterScreenshotPath`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  The path to a directory to save Flutter screenshots\.
-
-- **`dart.flutterSdkPath`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`dart.flutterSdkPaths`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  An array of paths that either directly point to a Flutter SDK or the parent directory of multiple Flutter SDKs\. When set\, the version number in the status bar can be used to quickly switch between SDKs\.
-
-- **`dart.flutterSelectDeviceWhenConnected`**: `boolean`
-
-  Default: `true`
-  
-  Whether to set newly connected devices as the current device in Flutter projects\.
-
-- **`dart.flutterShowEmulators`**: `enum { "local", "always" }`
-
-  Default: `"local"`
-  
-  null
-
-- **`dart.flutterShowWebServerDevice`**: `enum { "remote", "always" }`
-
-  Default: `"remote"`
-  
-  null
-
-- **`dart.flutterStructuredErrors`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.flutterTestAdditionalArgs`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`dart.flutterTestLogFile`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`dart.flutterTrackWidgetCreation`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.flutterWebRenderer`**: `enum { "auto", "html", "canvaskit" }`
-
-  Default: `"auto"`
-  
-  null
-
-- **`dart.hotReloadProgress`**: `enum { "notification", "statusBar" }`
-
-  Default: `"notification"`
-  
-  Determines how to display Hot Restart and Hot Reload progress\.
-
-- **`dart.insertArgumentPlaceholders`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.lineLength`**: `integer`
-
-  Default: `80`
-  
-  The maximum length of a line of code\. This is used by the document formatter\.
-
-- **`dart.lspSnippetTextEdits`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.maxLogLineLength`**: `number`
-
-  Default: `2000`
-  
-  The maximum length of a line in the log file\. Lines longer than this will be truncated and suffixed with an ellipsis\.
-
-- **`dart.normalizeFileCasing`**: `boolean`
-
-  Whether to normalize file casings before sending them to the LSP server\. This may fix issues with file\_names lints not disappearing after renaming a file if the VS Code API continues to use the original casing\.
-
-- **`dart.notifyAnalyzerErrors`**: `boolean`
-
-  Default: `true`
-  
-  Whether to show a notification the first few times an analysis server exception occurs\.
-
-- **`dart.onlyAnalyzeProjectsWithOpenFiles`**: `boolean`
-
-  Whether to ignore workspace folders and perform analysis based on the open files\, as if no workspace was open at all\. This allows opening large folders without causing them to be completely analyzed\.
-
-- **`dart.openDevTools`**: `enum { "never", "flutter", "always" }`
-
-  Default: `"never"`
-  
-  Whether to automatically open DevTools at the start of a debug session\. If embedded DevTools is enabled\, this will launch the Widget Inspector embedded for Flutter projects\, or launch DevTools externally in a browser for Dart projects\.
-
-- **`dart.openTestView`**: `array`
-
-  Default: `{ "testRunStart" }`
-  
-  Array items: `{enum = { "testRunStart", "testFailure" }}`
-  
-  When to automatically switch focus to the test list \(array to support multiple values\)\.
-
-- **`dart.previewBazelWorkspaceCustomScripts`**: `boolean`
-
-  null
-
-- **`dart.previewCommitCharacters`**: `boolean`
-
-  EXPERIMENTAL\: Whether to enable commit characters for the LSP server\. In a future release\, the dart\.enableCompletionCommitCharacters setting will also apply to LSP\.
-
-- **`dart.previewFlutterUiGuides`**: `boolean`
-
-  null
-
-- **`dart.previewFlutterUiGuidesCustomTracking`**: `boolean`
-
-  EXPERIMENTAL\: Whether to enable custom tracking of Flutter UI guidelines \(to hide some latency of waiting for the next Flutter Outline\)\.
-
-- **`dart.previewHotReloadOnSaveWatcher`**: `boolean`
-
-  null
-
-- **`dart.promptToGetPackages`**: `boolean`
-
-  Default: `true`
-  
-  Whether to prompt to get packages when opening a project with out of date packages\.
-
-- **`dart.promptToRunIfErrors`**: `boolean`
-
-  Default: `true`
-  
-  Whether to prompt before running if there are errors in your project\. Test scripts will be excluded from the check unless they\'re the script being run\.
-
-- **`dart.pubAdditionalArgs`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  Additional args to pass to all \`pub\` commands\.
-
-- **`dart.pubTestLogFile`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`dart.renameFilesWithClasses`**: `enum { "never", "prompt", "always" }`
-
-  Default: `"never"`
-  
-  null
-
-- **`dart.runPubGetOnPubspecChanges`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.sdkPath`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`dart.sdkPaths`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  An array of paths that either directly point to a Dart SDK or the parent directory of multiple Dart SDKs\. When set\, the version number in the status bar can be used to quickly switch between SDKs\.
-
-- **`dart.shareDevToolsWithFlutter`**: `boolean`
-
-  Default: `true`
-  
-  Whether to eagerly run DevTools for Flutter workspaces and share the spawned server with \`flutter run\`\.
-
-- **`dart.showDartDeveloperLogs`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.showDartPadSampleCodeLens`**: `boolean`
-
-  Default: `true`
-  
-  Whether to show CodeLens actions in the editor for opening online DartPad samples\.
-
-- **`dart.showDevToolsDebugToolBarButtons`**: `boolean`
-
-  Default: `true`
-  
-  Whether to show DevTools buttons in the Debug toolbar\.
-
-- **`dart.showIgnoreQuickFixes`**: `boolean`
-
-  Default: `true`
-  
-  Whether to show quick fixes for ignoring hints and lints\.
-
-- **`dart.showInspectorNotificationsForWidgetErrors`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.showMainCodeLens`**: `boolean`
-
-  Default: `true`
-  
-  Whether to show CodeLens actions in the editor for quick running \/ debugging scripts with main functions\.
-
-- **`dart.showSkippedTests`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.showTestCodeLens`**: `boolean`
-
-  Default: `true`
-  
-  Whether to show CodeLens actions in the editor for quick running \/ debugging tests\.
-
-- **`dart.showTodos`**: `boolean`
-
-  Default: `true`
-  
-  Whether to show TODOs in the Problems list\.
-
-- **`dart.triggerSignatureHelpAutomatically`**: `boolean`
-
-  Whether to automatically trigger signature help when pressing keys such as \, and \(\.
-
-- **`dart.updateImportsOnRename`**: `boolean`
-
-  Default: `true`
-  
-  Whether to automatically update imports when moving or renaming files\. Currently only supports single file moves \/ renames\.
-
-- **`dart.useLsp`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.useVsCodeTestRunner`**: `boolean`
-
-  Default: `true`
-  
-  Whether to use the built\-in VS Code test runner\. Otherwises uses the legacy custom test runner\.
-
-- **`dart.vmAdditionalArgs`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  Additional args to pass to the Dart VM when running\/debugging command line apps\.
-
-- **`dart.vmServiceLogFile`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`dart.warnWhenEditingFilesInPubCache`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`dart.warnWhenEditingFilesOutsideWorkspace`**: `boolean`
-
-  Default: `true`
-  
-  Whether to show a warning when modifying files outside of the workspace\.
-
-- **`dart.webDaemonLogFile`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -3666,72 +3021,6 @@ This server accepts configuration via the `settings` key.
 
   Whether to automatically show the plot navigator when plotting\.
 
-- **`julia.format.calls`**: `boolean`
-
-  Default: `true`
-  
-  Format function calls\.
-
-- **`julia.format.comments`**: `boolean`
-
-  Default: `true`
-  
-  Format comments\.
-
-- **`julia.format.curly`**: `boolean`
-
-  Default: `true`
-  
-  Format braces\.
-
-- **`julia.format.docs`**: `boolean`
-
-  Default: `true`
-  
-  Format inline documentation\.
-
-- **`julia.format.indent`**: `integer`
-
-  Default: `4`
-  
-  Indent size for formatting\.
-
-- **`julia.format.indents`**: `boolean`
-
-  Default: `true`
-  
-  Format file indents\.
-
-- **`julia.format.iterOps`**: `boolean`
-
-  Default: `true`
-  
-  Format loop iterators\.
-
-- **`julia.format.keywords`**: `bool`
-
-  Default: `true`
-  
-  Ensure single spacing following keywords\.
-
-- **`julia.format.kwarg`**: `enum { "none", "single", "off" }`
-
-  Default: `"none"`
-  
-  Format whitespace around function keyword arguments\.
-
-- **`julia.format.ops`**: `boolean`
-
-  Default: `true`
-  
-  Format whitespace around operators\.
-
-- **`julia.format.tuples`**: `boolean`
-
-  Default: `true`
-  
-  Format tuples\.
-
 - **`julia.lint.call`**: `boolean`
 
   Default: `true`
@@ -3847,6 +3136,10 @@ This server accepts configuration via the `settings` key.
 - **`julia.plots.path`**: `string`
 
   The output directory to save plots to
+
+- **`julia.runtimeCompletions`**: `boolean`
+
+  Request runtime completions from the integrated REPL\.
 
 - **`julia.showRuntimeDiagnostics`**: `boolean`
 
@@ -4482,6 +3775,55 @@ require'lspconfig'.mint.setup{}
     root_dir = function(fname)
           return util.root_pattern 'mint.json'(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
         end,
+```
+
+
+## nickel_ls
+
+Nickel Language Server
+
+https://github.com/tweag/nickel
+
+`nls` can be installed with nix, or cargo, from the Nickel repository.
+```sh
+git clone https://github.com/tweag/nickel.git
+```
+
+Nix:
+```sh
+cd nickel
+nix-env -f . -i
+```
+
+cargo:
+```sh
+cd nickel/lsp/nls
+cargo install --path .
+```
+
+In order to have lspconfig detect Nickel filetypes (a prequisite for autostarting a server),
+install the [Nickel vim plugin](https://github.com/nickel-lang/vim-nickel).
+        
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.nickel_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "nls" }
+    filetypes = { "ncl", "nickel" }
+    root_dir = function(path)
+        if M.path.is_dir(M.path.join(path, '.git')) then
+          return path
+        end
+      end)
+    end
 ```
 
 
