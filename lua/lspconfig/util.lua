@@ -215,6 +215,15 @@ M.path = (function()
     return dir == root
   end
 
+  -- autocommands always want '/' delimited paths, even on windows
+  local function normalize_for_autocmd(path)
+    if is_windows then
+      return (path:gsub('\\', '/'))
+    else
+      return path
+    end
+  end
+
   return {
     is_dir = is_dir,
     is_file = is_file,
@@ -226,6 +235,7 @@ M.path = (function()
     traverse_parents = traverse_parents,
     iterate_parents = iterate_parents,
     is_descendant = is_descendant,
+    normalize_for_autocmd = normalize_for_autocmd,
   }
 end)()
 

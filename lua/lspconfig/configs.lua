@@ -77,7 +77,7 @@ function configs.__newindex(t, config_name, config_def)
       api.nvim_command(
         string.format(
           "autocmd %s unsilent lua require'lspconfig'[%q].manager.try_add_wrapper()",
-          'BufReadPost ' .. root_dir .. '/*',
+          'BufReadPost ' .. util.path.normalize_for_autocmd(root_dir) .. '/*',
           config.name
         )
       )
