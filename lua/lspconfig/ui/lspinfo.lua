@@ -47,7 +47,7 @@ local function make_config_info(config)
 
   local buffer_dir = vim.fn.expand '%:p:h'
   config_info.root_dir = config.get_root_dir(buffer_dir) or 'NA'
-  config_info.autostart = (config.autostart and 'true') or 'false'
+  config_info.autostart = (config._autostart and 'true') or 'false'
   config_info.handlers = table.concat(vim.tbl_keys(config.handlers), ', ')
   config_info.filetypes = table.concat(config.filetypes or {}, ', ')
 
