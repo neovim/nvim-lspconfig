@@ -5,10 +5,8 @@ configs.ccls = {
   default_config = {
     cmd = { 'ccls' },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
-    root_dir = function(fname)
-      return util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git')(fname)
-        or util.path.dirname(fname)
-    end,
+    root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git'),
+    single_file_support = true,
   },
   docs = {
     description = [[

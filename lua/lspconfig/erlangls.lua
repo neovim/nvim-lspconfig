@@ -5,9 +5,8 @@ configs.erlangls = {
   default_config = {
     cmd = { 'erlang_ls' },
     filetypes = { 'erlang' },
-    root_dir = function(fname)
-      return util.root_pattern('rebar.config', 'erlang.mk', '.git')(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.root_pattern('rebar.config', 'erlang.mk', '.git'),
+    single_file_support = true,
   },
   docs = {
     description = [[
@@ -25,7 +24,7 @@ Installation requirements:
     - [rebar3 3.9.1+](https://github.com/erlang/rebar3)
 ]],
     default_config = {
-      root_dir = [[root_pattern('rebar.config', 'erlang.mk', '.git') or util.path.dirname(fname)]],
+      root_dir = [[root_pattern('rebar.config', 'erlang.mk', '.git')]],
     },
   },
 }

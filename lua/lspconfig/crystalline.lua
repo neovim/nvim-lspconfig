@@ -5,9 +5,8 @@ configs.crystalline = {
   default_config = {
     cmd = { 'crystalline' },
     filetypes = { 'crystal' },
-    root_dir = function(fname)
-      return util.root_pattern 'shard.yml'(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.root_pattern 'shard.yml' or util.find_git_ancestor,
+    single_file_support = true,
   },
   docs = {
     description = [[

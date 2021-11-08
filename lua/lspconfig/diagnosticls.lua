@@ -10,8 +10,9 @@ end
 configs[server_name] = {
   default_config = {
     cmd = { bin_name, '--stdio' },
+    root_dir = util.find_git_ancestor,
+    single_file_support = true,
     filetypes = {},
-    root_dir = util.path.dirname,
   },
   docs = {
     description = [[

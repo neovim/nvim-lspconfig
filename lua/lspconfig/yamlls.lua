@@ -8,9 +8,8 @@ configs[server_name] = {
   default_config = {
     cmd = { bin_name, '--stdio' },
     filetypes = { 'yaml' },
-    root_dir = function(fname)
-      return util.root_pattern '.git'(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.root_pattern '.git',
+    single_file_support = true,
     settings = {
       -- https://github.com/redhat-developer/vscode-redhat-telemetry#how-to-disable-telemetry-reporting
       redhat = { telemetry = { enabled = false } },

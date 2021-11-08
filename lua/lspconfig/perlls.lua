@@ -22,9 +22,8 @@ configs.perlls = {
       },
     },
     filetypes = { 'perl' },
-    root_dir = function(fname)
-      return util.root_pattern '.git'(fname) or vim.fn.getcwd()
-    end,
+    root_dir = util.find_git_ancestor,
+    single_file_mode = true,
   },
   docs = {
     package_json = 'https://raw.githubusercontent.com/richterger/Perl-LanguageServer/master/clients/vscode/perl/package.json',

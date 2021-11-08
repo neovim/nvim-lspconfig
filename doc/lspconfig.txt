@@ -137,7 +137,14 @@ listed in `:help vim.lsp.start_client()` with the following unique entries:
     Controls if the `FileType` autocommand that launches a language server is
     created. If `false`, allows for deferring language servers until manually
     launched with `:LspStart` (|lspconfig-commands|).
-Heyward
+
+- {single_file_mode}
+
+    `bool` (default: nil)
+
+    Determines if a server is started without a matching root directory.
+    See |lspconfig-single-file-support|.
+
 - {on_new_config}
 
     `function(new_config, new_root_dir)`
@@ -439,27 +446,26 @@ Browsing the source of the default configurations is recommended.
 SINGLE FILE SUPPORT                              *lspconfig-single-file-support*
 
 Language servers require each project to have a `root` in order to provide
-many features that require cross-file indexing. 
+features that require cross-file indexing. 
 
 Some servers support not passing a root directory as a proxy for single file
-mode under which cross-file features may be degraded. While the built-in
-client does not require passing a root directory to a language server,
-`lspconfig` requires detecting a project root as it is used internally to
-determine whether to attach a given language server to a file or launch a new
-instance.
+mode under which cross-file features may be degraded.
 
-As `lspconfig` configurations are community supported, some community members
-have opted to have `lspconfig` detect a file's parent directory as a root.
+`lspconfig` offers limited support for an implicit single-file mode by:
 
-As a consequence:
+- first trying to resolve the root directory pattern
+- then, if `single_file_support` is enabled for a given language server
+  configuration, starting the server without sending `rootDirectory` or
+  `workspaceFolders` during initialization.
+- attaching subsequent files in the parent directory to the same server
+  instance, depending on filetype.
 
-* Multi-file "scratch" projects will still allow for cross-file features.
-* The server treats `$HOME` the same as any other large directory. The server
-  will index all files under the project root which can delay startup.
+Cross-file features (navigation, hover) may or may not work depending on the
+language server. For a full feature-set, consider moving your files to a
+directory with a project structure `lspconfig` can infer.
 
-
-This fallback pattern will be removed in a future version of `lspconfig` in
-favor of more explicit handling on a per server basis.
+Note that in the event that the LSP specification is extended to support a
+standard for single-file mode, lspconfig will adopt that standard.
 
 ==============================================================================
 COMMANDS                                                    *lspconfig-commands*

@@ -5,9 +5,8 @@ configs.dhall_lsp_server = {
   default_config = {
     cmd = { 'dhall-lsp-server' },
     filetypes = { 'dhall' },
-    root_dir = function(fname)
-      return util.root_pattern '.git'(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.find_git_ancestor,
+    single_file_support = true,
   },
   docs = {
     description = [[

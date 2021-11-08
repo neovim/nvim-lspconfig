@@ -1,12 +1,20 @@
 local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
+
+local root_files = {
+  'pyproject.toml',
+  'setup.py',
+  'setup.cfg',
+  'requirements.txt',
+  'Pipfile',
+}
 
 configs.jedi_language_server = {
   default_config = {
     cmd = { 'jedi-language-server' },
     filetypes = { 'python' },
-    root_dir = function(fname)
-      return vim.fn.getcwd()
-    end,
+    root_dir = util.root_pattern(unpack(root_files)),
+    single_file_support = true,
   },
   docs = {
     description = [[
