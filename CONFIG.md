@@ -1990,6 +1990,12 @@ This server accepts configuration via the `settings` key.
   
   An optional URL to override where to check for haskell\-language\-server releases
 
+- **`haskell.serverEnvironment`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
+
 - **`haskell.serverExecutablePath`**: `string`
 
   Default: `""`
@@ -6301,7 +6307,7 @@ This server accepts configuration via the `settings` key.
 
 - **`stylelintplus.filetypes`**: `array`
 
-  Default: `{ "css", "less", "postcss", "scss", "sugarss", "vue", "wxss" }`
+  Default: `{ "css", "less", "postcss", "sass", "scss", "sugarss", "vue", "wxss" }`
   
   Array items: `{type = "string"}`
   
@@ -6891,6 +6897,14 @@ This server accepts configuration via the `settings` key.
 
   Experimental \(opt\-in\) terraform\-ls features
 
+- **`terraform-ls.ignoreDirectoryNames`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Per\-workspace list of directory names for the language server to ignore when indexing files
+
 - **`terraform-ls.rootModules`**: `array`
 
   Default: `{}`
@@ -6910,6 +6924,12 @@ This server accepts configuration via the `settings` key.
 - **`terraform-ls.terraformLogFilePath`**: `string`
 
   Path to a file for Terraform executions to be logged into \(TF\_LOG\_PATH\) with support for variables \(e\.g\. Timestamp\, Pid\, Ppid\) via Go template syntax \{\{\.VarName\}\}
+
+- **`terraform.enableReferenceCountCodeLens`**: `boolean`
+
+  Default: `true`
+  
+  Display reference counts above top level blocks and attributes\.
 
 - **`terraform.languageServer`**: `object`
 
