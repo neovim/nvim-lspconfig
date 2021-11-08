@@ -54,24 +54,32 @@ function configs.__newindex(t, config_name, config_def)
       pcall(util.on_setup, config)
     end
 
-    local trigger
-    if config.filetypes then
-      trigger = 'FileType ' .. table.concat(config.filetypes, ',')
-    else
-      trigger = 'BufReadPost *'
-    end
-    if not (config.autostart == false) then
+    if config.autostart == true then
+      local event
+      local pattern
+      if config.filetypes then
+        event = 'FileType'
+        pattern = table.concat(config.filetypes, ',')
+      else
+        event = 'BufReadPost'
+        pattern = '*'
+      end
       api.nvim_command(
-        string.format("autocmd %s unsilent lua require'lspconfig'[%q].manager.try_add()", trigger, config.name)
+        string.format(
+          "autocmd %s %s unsilent lua require'lspconfig'[%q].manager.try_add()",
+          event,
+          pattern,
+          config.name
+        )
       )
     end
 
     local get_root_dir = config.root_dir
 
-    function M.autostart()
+    function M.launch()
       local root_dir = get_root_dir(api.nvim_buf_get_name(0), api.nvim_get_current_buf())
       if not root_dir then
-        vim.notify(string.format('Autostart for %s failed: matching root directory not detected.', config_name))
+        vim.notify(string.format('Launching %s failed: matching root directory not detected.', config_name))
         return
       end
       api.nvim_command(
@@ -94,7 +102,7 @@ function configs.__newindex(t, config_name, config_def)
     M.filetypes = config.filetypes
     M.handlers = config.handlers
     M.cmd = config.cmd
-    M._autostart = config.autostart
+    M.autostart = config.autostart
 
     -- In the case of a reload, close existing things.
     local reload = false
