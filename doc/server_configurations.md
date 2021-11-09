@@ -111,6 +111,7 @@ that config.
 - [tflint](#tflint)
 - [theme_check](#theme_check)
 - [tsserver](#tsserver)
+- [typeprof](#typeprof)
 - [vala_ls](#vala_ls)
 - [vdmj](#vdmj)
 - [vimls](#vimls)
@@ -7635,6 +7636,28 @@ require'lspconfig'.tsserver.setup{}
       hostInfo = "neovim"
     }
     root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+```
+
+
+## typeprof
+
+https://github.com/ruby/typeprof
+
+`typeprof` LSP implementation is built-in with Ruby 3.1 or higher.
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.typeprof.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+
+  Default Values:
+    cmd = { "typeprof", "--lsp", "--stdio" }
+    filetypes = { "ruby", "eruby" }
+    root_dir = root_pattern("Gemfile", ".git")
 ```
 
 
