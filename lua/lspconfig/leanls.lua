@@ -15,7 +15,9 @@ configs.leanls = {
         end
       end
 
-      return util.root_pattern 'leanpkg.toml'(fname) or stdlib_dir or util.find_git_ancestor(fname)
+      return util.root_pattern('lakefile.lean', 'lean-toolchain', 'leanpkg.toml')(fname)
+        or stdlib_dir
+        or util.find_git_ancestor(fname)
     end,
     single_file_support = true,
     on_new_config = function(config, root)
@@ -39,7 +41,7 @@ that plugin fully handles the setup of the Lean language server,
 and you shouldn't set up `leanls` both with it and `lspconfig`.
     ]],
     default_config = {
-      root_dir = [[root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname]],
+      root_dir = [[root_pattern("lakefile.lean", "lean-toolchain", "leanpkg.toml", ".git")]],
     },
   },
 }
