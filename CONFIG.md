@@ -5943,7 +5943,7 @@ require'lspconfig'.solang.setup{}
   Commands:
   
   Default Values:
-    cmd = { "solang", "--language-server" }
+    cmd = { "solang", "--language-server", "--target", "ewasm" }
     filetypes = { "solidity" }
     root_dir = root_pattern(".git")
 ```
