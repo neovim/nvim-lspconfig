@@ -7837,3 +7837,5 @@ require'lspconfig'.zls.setup{}
     filetypes = { "zig", "zir" }
     root_dir = util.root_pattern("zls.json", ".git") or current_file_dirname
 ```
+
+
