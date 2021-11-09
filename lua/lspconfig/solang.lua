@@ -3,7 +3,7 @@ local util = require 'lspconfig/util'
 
 configs.solang = {
   default_config = {
-    cmd = { 'solang', '--language-server' },
+    cmd = { 'solang', '--language-server', '--target', 'ewasm' },
     filetypes = { 'solidity' },
     root_dir = util.root_pattern '.git',
   },
