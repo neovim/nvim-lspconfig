@@ -80,9 +80,9 @@ PRs are checked with Luacheck and stylua. Please run the linter locally before s
 
 ## Generating docs
 
-Github Actions automatically generates the `CONFIG.md`. Only modify `scripts/README_template.md` or the `docs` table in the server config (the lua file). Do not modify `CONFIG.md` directly.
+Github Actions automatically generates `server_configurations.md`. Only modify `scripts/README_template.md` or the `docs` table in the server config (the lua file). Do not modify `server_configurations.md` directly.
 
-To preview the generated `CONFIG.md` locally, run `scripts/docgen.lua` from
+To preview the generated `server_configurations.md` locally, run `scripts/docgen.lua` from
 `nvim` (from the project root):
 
     nvim -R -Es +'set rtp+=$PWD' +'luafile scripts/docgen.lua'

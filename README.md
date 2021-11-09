@@ -1,6 +1,6 @@
 # nvim-lspconfig
 
-A [collection of common configurations](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md) for Neovim's built-in [language server client](https://neovim.io/doc/user/lsp.html).
+A [collection of common configurations](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md) for Neovim's built-in [language server client](https://neovim.io/doc/user/lsp.html).
 
 This plugin allows for declaratively configuring, launching, and initializing language servers you have installed on your system. Language server configurations are community-maintained.
 
@@ -32,13 +32,13 @@ These features are not implemented in this repo, but in Neovim core. See `:help 
 
 ## Quickstart
 
-1. Install a language server, e.g. [pyright](CONFIG.md#pyright)
+1. Install a language server, e.g. [pyright](doc/server_configurations.md#pyright)
 
     ```bash
     npm i -g pyright
     ```
 
-2. Add the language server setup to your init.vim. The server name must match those found in the table of contents in [CONFIG.md](CONFIG.md)
+2. Add the language server setup to your init.vim. The server name must match those found in the table of contents in [server_configurations.md](server_configurations.md)
 
     ```lua
     lua << EOF
@@ -65,7 +65,7 @@ These features are not implemented in this repo, but in Neovim core. See `:help 
 
 ## Automatically launching language servers
 
-In order to automatically launch a language server, lspconfig searches up the directory tree from your current buffer to find a file matching the `root_dir` pattern defined in each server's configuration.  For [pyright](CONFIG.md#pyright), this is any directory containing ".git", "setup.py",  "setup.cfg", "pyproject.toml", or "requirements.txt").
+In order to automatically launch a language server, lspconfig searches up the directory tree from your current buffer to find a file matching the `root_dir` pattern defined in each server's configuration.  For [pyright](doc/server_configurations.md#pyright), this is any directory containing ".git", "setup.py",  "setup.cfg", "pyproject.toml", or "requirements.txt").
 
 Language servers require each project to have a `root` in order to provide completion and search across symbols that may not be defined in your current file, and to avoid having to index your entire filesystem on each startup.
 
@@ -79,7 +79,7 @@ require'lspconfig'.rust_analyzer.setup{}
 EOF
 ```
 
-For a full list of servers, see [CONFIG.md](CONFIG.md). This document contains installation instructions and additional, optional customization suggestions for each language server. For some servers that are not on your system path (jdtls, elixirls) you will be required to manually add `cmd` as an entry in the table passed to setup. Most language servers can be installed in less than a minute.
+For a full list of servers, see [server_configurations.md](doc/server_configurations.md). This document contains installation instructions and additional, optional customization suggestions for each language server. For some servers that are not on your system path (jdtls, elixirls) you will be required to manually add `cmd` as an entry in the table passed to setup. Most language servers can be installed in less than a minute.
 
 ## Keybindings and completion
 
@@ -147,7 +147,7 @@ The most common reasons a language server does not start or attach are:
 
 1. The language server is not installed. nvim-lspconfig does not install language servers for you. You should be able to run the `cmd` defined in each server's lua module from the command line and see that the language server starts. If the `cmd` is an executable name, ensure it is on your path.
 
-2. Not triggering root detection. The language server will only start if it is opened in a directory, or child directory, containing a file which signals the *root* of the project. Most of the time, this is a `.git` folder, but each server defines the root config in the lua file. See [CONFIG.md](CONFIG.md) or the source for the list of root directories.
+2. Not triggering root detection. The language server will only start if it is opened in a directory, or child directory, containing a file which signals the *root* of the project. Most of the time, this is a `.git` folder, but each server defines the root config in the lua file. See [server_configurations.md](server_configurations.md) or the source for the list of root directories.
 
 3. Misconfiguration. You must pass `on_attach` and `capabilities` for **each** `setup {}` if you want these to take effect. You must also **not call `setup {}` twice for the same server**. The second call to `setup {}` will overwrite the first.
 
@@ -191,7 +191,7 @@ In order for neovim to launch certain executables on Windows, it must append `.c
 
 ## Contributions
 
-If you are missing a language server on the list in [CONFIG.md](CONFIG.md), contributing
+If you are missing a language server on the list in [server_configurations.md](doc/server_configurations.md), contributing
 a new configuration for it would be appreciated. You can follow these steps:
 
 1. Read [CONTRIBUTING.md](CONTRIBUTING.md).
