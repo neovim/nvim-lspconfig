@@ -1,8 +1,10 @@
-# nvim-lspconfig
+# lspconfig
 
 A [collection of common configurations](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md) for Neovim's built-in [language server client](https://neovim.io/doc/user/lsp.html).
 
 This plugin allows for declaratively configuring, launching, and initializing language servers you have installed on your system. Language server configurations are community-maintained.
+
+`lspconfig` has extensive help documentation, see `:help lspconfig`.
 
 # LSP overview
 
@@ -22,9 +24,9 @@ These features are not implemented in this repo, but in Neovim core. See `:help 
 
 ## Install
 
-* Requires [Neovim v0.5.0](https://github.com/neovim/neovim/releases/tag/v0.5.0) or [Nightly](https://github.com/neovim/neovim/releases/tag/nightly). Update Neovim and nvim-lspconfig before reporting an issue.
+* Requires [Neovim v0.5.0](https://github.com/neovim/neovim/releases/tag/v0.5.0) or [Nightly](https://github.com/neovim/neovim/releases/tag/nightly). Update Neovim and 'lspconfig' before reporting an issue.
 
-* Install nvim-lspconfig like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
+* Install 'lspconfig' like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
 
     ```vim
     Plug 'neovim/nvim-lspconfig'
@@ -65,7 +67,7 @@ These features are not implemented in this repo, but in Neovim core. See `:help 
 
 ## Automatically launching language servers
 
-In order to automatically launch a language server, lspconfig searches up the directory tree from your current buffer to find a file matching the `root_dir` pattern defined in each server's configuration.  For [pyright](doc/server_configurations.md#pyright), this is any directory containing ".git", "setup.py",  "setup.cfg", "pyproject.toml", or "requirements.txt").
+In order to automatically launch a language server, 'lspconfig' searches up the directory tree from your current buffer to find a file matching the `root_dir` pattern defined in each server's configuration.  For [pyright](doc/server_configurations.md#pyright), this is any directory containing ".git", "setup.py",  "setup.cfg", "pyproject.toml", or "requirements.txt").
 
 Language servers require each project to have a `root` in order to provide completion and search across symbols that may not be defined in your current file, and to avoid having to index your entire filesystem on each startup.
 
@@ -83,7 +85,7 @@ For a full list of servers, see [server_configurations.md](doc/server_configurat
 
 ## Keybindings and completion
 
-nvim-lspconfig does not map keybindings or enable completion by default. Manual, triggered completion can be provided by neovim's built-in omnifunc. For autocompletion, a general purpose [autocompletion plugin](https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion) is required. The following example configuration provides suggested keymaps for the most commonly used language server functions, and manually triggered completion with omnifunc (\<c-x\>\<c-o\>).
+'lspconfig' does not map keybindings or enable completion by default. Manual, triggered completion can be provided by neovim's built-in omnifunc. For autocompletion, a general purpose [autocompletion plugin](https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion) is required. The following example configuration provides suggested keymaps for the most commonly used language server functions, and manually triggered completion with omnifunc (\<c-x\>\<c-o\>).
 Note: **you must pass the defined `on_attach` as an argument to every `setup {}` call** and **the keybindings in `on_attach` only take effect after the language server has started (attached to the current buffer)**. 
 
 ```lua
@@ -141,11 +143,11 @@ The `on_attach` hook is used to only activate the bindings after the language se
 
 ## Debugging
 
-If you have an issue with lspconfig, the first step is to reproduce with a [minimal configuration](https://github.com/neovim/nvim-lspconfig/blob/master/test/minimal_init.lua).
+If you have an issue with 'lspconfig', the first step is to reproduce with a [minimal configuration](https://github.com/neovim/nvim-lspconfig/blob/master/test/minimal_init.lua).
 
 The most common reasons a language server does not start or attach are:
 
-1. The language server is not installed. nvim-lspconfig does not install language servers for you. You should be able to run the `cmd` defined in each server's lua module from the command line and see that the language server starts. If the `cmd` is an executable name, ensure it is on your path.
+1. The language server is not installed. 'lspconfig' does not install language servers for you. You should be able to run the `cmd` defined in each server's lua module from the command line and see that the language server starts. If the `cmd` is an executable name, ensure it is on your path.
 
 2. Not triggering root detection. The language server will only start if it is opened in a directory, or child directory, containing a file which signals the *root* of the project. Most of the time, this is a `.git` folder, but each server defines the root config in the lua file. See [server_configurations.md](server_configurations.md) or the source for the list of root directories.
 
