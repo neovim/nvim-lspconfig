@@ -8,11 +8,11 @@ TABLE OF CONTENTS                                                *lspconfig-toc*
 4.  Setup {}                   (|lspconfig-setup|)
 5.  Global defaults            (|lspconfig-global-defaults|)
 6.  Server configurations      (|lspconfig-configurations|)
-      6a.  Adding Servers      (|lspconfig-adding-servers|)
+      6a.  Adding servers      (|lspconfig-adding-servers|)
       6b.  Index               (|lspconfig-index|)
-7.  Root directories           (|lspconfig-root-directories|)
-      6a. Root composition     (|lspconfig-root-composition|)
-      6b. Single file support  (|lspconfig-single-file-support|)
+7.  Root directories           (|lspconfig-root-detection|)
+      7a. Advanced detection   (|lspconfig-root-advanced|)
+      7b. Single file support  (|lspconfig-single-file-support|)
 8.  Commands                   (|lspconfig-commands|)
 9.  Keybindings                (|lspconfig-keybindings|)
 10. Completion                 (|lspconfig-completion|)
@@ -100,7 +100,7 @@ language server.
 
 This autocommand calls `start_client()` or `vim.lsp.buf_attach_client()` 
 depending on whether the current file belongs to a project with a currently
-running client. See |lspconfig-root-directory| for more details.
+running client. See |lspconfig-root-detection| for more details.
 
 The `setup{}` function takes a table which contains a superset of the keys
 listed in `:help vim.lsp.start_client()` with the following unique entries:
@@ -114,7 +114,7 @@ listed in `:help vim.lsp.start_client()` with the following unique entries:
 
     If a root directory (string) is returned which is unique from any
     previously returned root_dir, a new server will be spawned with that
-    root directory. See |lspconfig-root-directory| for more details
+    root directory. See |lspconfig-root-detection| for more details
 
 - {name}
 
@@ -137,7 +137,7 @@ listed in `:help vim.lsp.start_client()` with the following unique entries:
     Controls if the `FileType` autocommand that launches a language server is
     created. If `false`, allows for deferring language servers until manually
     launched with `:LspStart` (|lspconfig-commands|).
-
+Heyward
 - {on_new_config}
 
     `function(new_config, new_root_dir)`
@@ -405,7 +405,8 @@ below returns a function that takes as its argument the current buffer path.
    root_dir = util.find_json_ancestor
 <
 ==============================================================================
-ADVANCED ROOT DIRECTORY DETECTION                   *lspconfig-root-composition*
+ADVANCED ROOT DIRECTORY DETECTION                      *lspconfig-root-advanced* 
+                                                    *lspconfig-root-composition*
 
 The `root_dir` key in `config` and `setup` can hold any function of the form
 >
@@ -586,7 +587,7 @@ For debugging `lspconfig` issues, the most common hurdles users face are:
     line. If the absolute path to the binary is not supplied in `cmd`, ensure
     it is on your PATH.
   - No root detected. `lspconfig` is built around the concept of projects. See
-    |lspconfig-root-directory| for more details. Most of the time,
+    |lspconfig-root-detection| for more details. Most of the time,
     initializing a git repo will suffice.
   - Misconfiguration. Often users will override `cmd`, `on_init`, or
     `handlers`. Ensure that you debug by using a stock configuration to ensure
