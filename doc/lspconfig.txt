@@ -238,7 +238,7 @@ passed overrides to `setup {}` are:
 
 
 ==============================================================================
-OVERRIDING GLOBAL DEFAULTS                  *lspconfig-override-global-defaults*
+OVERRIDING GLOBAL DEFAULTS                  *lspconfig-global-defaults*
 
 The global defaults for all servers can be overridden by extending the
 `default_config` table.
