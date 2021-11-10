@@ -2008,9 +2008,9 @@ This server accepts configuration via the `settings` key.
   
   null
 
-- **`haskell.trace.client`**: `enum { "off", "error", "debug" }`
+- **`haskell.trace.client`**: `enum { "off", "error", "info", "debug" }`
 
-  Default: `"error"`
+  Default: `"info"`
   
   Sets the log level in the client side\.
 
