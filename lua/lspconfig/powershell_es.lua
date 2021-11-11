@@ -4,20 +4,20 @@ local util = require 'lspconfig/util'
 local server_name = 'powershell_es'
 local temp_path = vim.fn.stdpath 'cache'
 
-local function make_cmd(bundle_path)
-  if bundle_path ~= nil then
+local function make_cmd(new_config)
+  if new_config.bundle_path ~= nil then
     local command_fmt =
       [[%s/PowerShellEditorServices/Start-EditorServices.ps1 -BundledModulesPath %s -LogPath %s/powershell_es.log -SessionDetailsPath %s/powershell_es.session.json -FeatureFlags @() -AdditionalModules @() -HostName nvim -HostProfileId 0 -HostVersion 1.0.0 -Stdio -LogLevel Normal]]
-    local command = command_fmt:format(bundle_path, bundle_path, temp_path, temp_path)
-    return { 'pwsh', '-NoLogo', '-NoProfile', '-Command', command }
+    local command = command_fmt:format(new_config.bundle_path, new_config.bundle_path, temp_path, temp_path)
+    return { new_config.shell, '-NoLogo', '-NoProfile', '-Command', command }
   end
 end
 
 configs[server_name] = {
   default_config = {
+    shell = 'pwsh',
     on_new_config = function(new_config, _)
-      local bundle_path = new_config.bundle_path
-      new_config.cmd = make_cmd(bundle_path)
+      new_config.cmd = make_cmd(new_config)
     end,
     filetypes = { 'ps1' },
     root_dir = util.find_git_ancestor,
