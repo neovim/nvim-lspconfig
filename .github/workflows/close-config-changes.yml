@@ -1,8 +1,10 @@
 name: "Close changes to config"
-on: [pull_request]
+on: [pull_request_target]
 jobs:
   close-changes:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     env:
       PR_NUMBER: ${{ github.event.pull_request.number }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
