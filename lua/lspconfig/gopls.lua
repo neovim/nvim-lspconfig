@@ -14,9 +14,6 @@ configs.gopls = {
 
       -- Then, search up the filesystem for go.mod direcrory
       local go_mod_hierarchy = {}
-      if primary_root then
-        return primary_root
-      end
       for path in util.path.iterate_parents(fname) do
         for _, p in ipairs(vim.fn.glob(util.path.join(path, 'go.mod'), true, true)) do
           if util.path.exists(p) then
