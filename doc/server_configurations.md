@@ -1815,7 +1815,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `true`
   
-  Whether to typecheck the entire project on load\. It could drive to bad perfomance in large projects\.
+  Whether to typecheck the entire project on load\. It could drive to bad performance in large projects\.
 
 - **`haskell.formattingProvider`**: `enum { "brittany", "floskell", "fourmolu", "ormolu", "stylish-haskell", "none" }`
 
