@@ -42,6 +42,17 @@ require'lspconfig'.powershell_es.setup{
 }
 ```
 
+By default the languageserver is started in `pwsh` (PowerShell Core). This can be changed by specifying `shell`.
+
+```lua
+require'lspconfig'.powershell_es.setup{
+  bundle_path = 'c:/w/PowerShellEditorServices',
+  shell = 'powershell.exe',
+}
+```
+
+Note that the execution policy needs to be set to `Unrestricted` for the languageserver run under PowerShell
+
 If necessary, specific `cmd` can be defined instead of `bundle_path`.
 See [PowerShellEditorServices](https://github.com/PowerShell/PowerShellEditorServices#stdio)
 to learn more.
