@@ -1,8 +1,0 @@
-pull_request_rules:
-  - name: disallow changing a file
-    conditions:
-      - files=doc/server_configurations.md
-    actions:
-      close:
-      comment: 
-        message: "server_configurations.md is auto-generated: edit the lua source file instead (and re-read the PR template)."
