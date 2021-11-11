@@ -17,8 +17,12 @@ configs[server_name] = {
   default_config = {
     shell = 'pwsh',
     on_new_config = function(new_config, _)
-      new_config.cmd = make_cmd(new_config)
+      -- Don't overwrite cmd if already set
+      if not new_config.cmd then
+        new_config.cmd = make_cmd(new_config)
+      end
     end,
+
     filetypes = { 'ps1' },
     root_dir = util.find_git_ancestor,
     single_file_mode = true,
