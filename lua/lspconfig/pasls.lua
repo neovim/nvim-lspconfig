@@ -5,9 +5,8 @@ configs.pasls = {
   default_config = {
     cmd = { 'pasls' },
     filetypes = { 'pascal' },
-    root_dir = function(fname)
-      return util.find_git_ancestor(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.find_git_ancestor,
+    single_file_support = true,
   },
   docs = {
     description = [[

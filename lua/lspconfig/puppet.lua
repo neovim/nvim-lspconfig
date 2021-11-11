@@ -15,9 +15,8 @@ configs[server_name] = {
   default_config = {
     cmd = { bin_name, '--stdio' },
     filetypes = { 'puppet' },
-    root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.root_pattern(unpack(root_files)),
+    single_file_support = true,
   },
   docs = {
     package_json = 'https://raw.githubusercontent.com/puppetlabs/puppet-vscode/main/package.json',

@@ -10,9 +10,8 @@ configs.perlpls = {
       },
     },
     filetypes = { 'perl' },
-    root_dir = function(fname)
-      return util.root_pattern '.git'(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.root_pattern '.git',
+    single_file_support = true,
   },
   docs = {
     package_json = 'https://raw.githubusercontent.com/FractalBoy/perl-language-server/master/client/package.json',

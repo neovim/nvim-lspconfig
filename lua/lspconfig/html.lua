@@ -8,9 +8,8 @@ configs[server_name] = {
   default_config = {
     cmd = { bin_name, '--stdio' },
     filetypes = { 'html' },
-    root_dir = function(fname)
-      return util.root_pattern('package.json', '.git')(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.root_pattern('package.json', '.git'),
+    single_file_support = true,
     settings = {},
     init_options = {
       embeddedLanguages = { css = true, javascript = true },

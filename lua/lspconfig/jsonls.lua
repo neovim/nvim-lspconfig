@@ -11,9 +11,8 @@ configs[server_name] = {
     init_options = {
       provideFormatter = true,
     },
-    root_dir = function(fname)
-      return util.root_pattern '.git'(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.root_pattern '.git',
+    single_file_support = true,
   },
   docs = {
     -- this language server config is in VSCode built-in package.json

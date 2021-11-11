@@ -7,9 +7,8 @@ local bin_name = 'efm-langserver'
 configs[server_name] = {
   default_config = {
     cmd = { bin_name },
-    root_dir = function(fname)
-      return util.root_pattern '.git'(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.find_git_ancestor,
+    single_file_support = true,
   },
 
   docs = {
@@ -31,7 +30,7 @@ require('lspconfig')['efm'].setup{
 
 ]],
     default_config = {
-      root_dir = [[util.root_pattern(".git")(fname) or util.path.dirname(fname)]],
+      root_dir = [[util.root_pattern(".git")]],
     },
   },
 }

@@ -233,18 +233,24 @@ end)()
 -- seen before, will call make_config(root_dir) and start a new client.
 function M.server_per_root_dir_manager(_make_config)
   local clients = {}
+  local single_file_clients = {}
   local manager = {}
 
-  function manager.add(root_dir)
-    if not root_dir then
-      return
-    end
-    if not M.path.is_dir(root_dir) then
-      return
+  function manager.add(root_dir, single_file_mode)
+    local client_id
+    if single_file_mode then
+      client_id = single_file_clients[root_dir]
+    else
+      if not root_dir then
+        return
+      end
+      if not M.path.is_dir(root_dir) then
+        return
+      end
+      client_id = clients[root_dir]
     end
 
     -- Check if we have a client already or start and store it.
-    local client_id = clients[root_dir]
     if not client_id then
       local new_config = _make_config(root_dir)
       -- do nothing if the client is not enabled
@@ -265,9 +271,20 @@ function M.server_per_root_dir_manager(_make_config)
       end
       new_config.on_exit = M.add_hook_before(new_config.on_exit, function()
         clients[root_dir] = nil
+        single_file_clients[root_dir] = nil
       end)
+      -- Sending rootDirectory and workspaceFolders as null is not explicitly
+      -- codified in the spec. Certain servers crash if initialized with a NULL
+      -- root directory.
+      if single_file_mode then
+        new_config.root_dir = nil
+      end
       client_id = lsp.start_client(new_config)
-      clients[root_dir] = client_id
+      if single_file_mode then
+        single_file_clients[root_dir] = client_id
+      else
+        clients[root_dir] = client_id
+      end
     end
     return client_id
   end

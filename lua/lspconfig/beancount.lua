@@ -8,9 +8,8 @@ configs[server_name] = {
   default_config = {
     cmd = { bin_name },
     filetypes = { 'beancount' },
-    root_dir = function(fname)
-      return util.find_git_ancestor(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.find_git_ancestor,
+    single_file_support = true,
     init_options = {
       -- this is the path to the beancout journal file
       journalFile = '',

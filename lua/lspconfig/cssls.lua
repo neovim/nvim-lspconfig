@@ -8,9 +8,8 @@ configs[server_name] = {
   default_config = {
     cmd = { bin_name, '--stdio' },
     filetypes = { 'css', 'scss', 'less' },
-    root_dir = function(fname)
-      return util.root_pattern('package.json', '.git')(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.root_pattern('package.json', '.git'),
+    single_file_support = true,
     settings = {
       css = { validate = true },
       scss = { validate = true },

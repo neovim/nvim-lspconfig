@@ -14,9 +14,8 @@ configs[server_name] = {
       GLOB_PATTERN = vim.env.GLOB_PATTERN or '*@(.sh|.inc|.bash|.command)',
     },
     filetypes = { 'sh' },
-    root_dir = function(fname)
-      return util.root_pattern '.git'(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.root_pattern '.git',
+    single_file_support = true,
   },
   docs = {
     description = [[

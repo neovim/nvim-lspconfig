@@ -16,8 +16,8 @@ configs.rome = {
       return util.find_package_json_ancestor(fname)
         or util.find_node_modules_ancestor(fname)
         or util.find_git_ancestor(fname)
-        or util.path.dirname(fname)
     end,
+    single_file_support = true,
   },
   docs = {
     description = [[

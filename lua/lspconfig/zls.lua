@@ -5,9 +5,8 @@ configs.zls = {
   default_config = {
     cmd = { 'zls' },
     filetypes = { 'zig', 'zir' },
-    root_dir = function(fname)
-      return util.root_pattern('zls.json', '.git')(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.root_pattern('zls.json', '.git'),
+    single_file_support = true,
   },
   docs = {
     description = [[

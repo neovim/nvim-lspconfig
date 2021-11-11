@@ -3,15 +3,12 @@ local util = require 'lspconfig/util'
 
 local server_name = 'codeqlls'
 
-local root_pattern = util.root_pattern 'qlpack.yml'
-
 configs[server_name] = {
   default_config = {
     cmd = { 'codeql', 'execute', 'language-server', '--check-errors', 'ON_CHANGE', '-q' },
     filetypes = { 'ql' },
-    root_dir = function(fname)
-      return root_pattern(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.root_pattern 'qlpack.yml',
+    single_file_support = true,
     log_level = vim.lsp.protocol.MessageType.Warning,
     before_init = function(initialize_params)
       initialize_params['workspaceFolders'] = {

@@ -43,8 +43,9 @@ configs.clangd = {
     filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
     root_dir = function(fname)
       local filename = util.path.is_absolute(fname) and fname or util.path.join(vim.loop.cwd(), fname)
-      return root_pattern(filename) or util.path.dirname(filename)
+      return root_pattern(filename)
     end,
+    single_file_support = true,
     capabilities = default_capabilities,
   },
   commands = {

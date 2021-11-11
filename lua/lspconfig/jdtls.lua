@@ -134,8 +134,8 @@ configs[server_name] = {
           return root
         end
       end
-      return vim.fn.getcwd()
     end,
+    single_file_mode = true,
     init_options = {
       workspace = get_workspace_dir(),
       jvm_args = {},

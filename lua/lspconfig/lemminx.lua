@@ -5,9 +5,8 @@ local server_name = 'lemminx'
 configs[server_name] = {
   default_config = {
     filetypes = { 'xml', 'xsd', 'svg' },
-    root_dir = function(filename)
-      return util.root_pattern '.git'(filename) or util.path.dirname(filename)
-    end,
+    root_dir = util.root_pattern '.git',
+    single_file_support = true,
   },
   docs = {
     description = [[

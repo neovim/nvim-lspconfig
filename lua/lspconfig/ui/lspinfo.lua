@@ -73,7 +73,11 @@ local function make_client_info(client)
   local client_info = {}
 
   client_info.cmd = remove_newlines(client.config.cmd)
-  client_info.root_dir = client.workspaceFolders[1].name
+  if client.workspaceFolders then
+    client_info.root_dir = client.workspaceFolders[1].name
+  else
+    client_info.root_dir = 'Running in single file mode.'
+  end
   client_info.filetypes = table.concat(client.config.filetypes or {}, ', ')
   client_info.autostart = (client.config.autostart and 'true') or 'false'
   client_info.attached_buffers_list = table.concat(vim.lsp.get_buffers_by_client_id(client.id), ', ')

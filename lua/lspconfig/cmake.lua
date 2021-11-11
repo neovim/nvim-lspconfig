@@ -5,9 +5,8 @@ configs.cmake = {
   default_config = {
     cmd = { 'cmake-language-server' },
     filetypes = { 'cmake' },
-    root_dir = function(fname)
-      return util.root_pattern('.git', 'compile_commands.json', 'build')(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.root_pattern('.git', 'compile_commands.json', 'build'),
+    single_file_support = true,
     init_options = {
       buildDirectory = 'build',
     },

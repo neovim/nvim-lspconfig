@@ -6,8 +6,9 @@ configs.taplo = {
     cmd = { 'taplo-lsp', 'run' },
     filetypes = { 'toml' },
     root_dir = function(fname)
-      return util.root_pattern '*.toml'(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+      return util.root_pattern '*.toml'(fname) or util.find_git_ancestor(fname)
     end,
+    single_file_support = true,
   },
   docs = {
     description = [[
@@ -21,7 +22,7 @@ cargo install taplo-lsp
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern("*.toml", ".git") or dirname]],
+      root_dir = [[root_pattern("*.toml", ".git")]],
     },
   },
 }

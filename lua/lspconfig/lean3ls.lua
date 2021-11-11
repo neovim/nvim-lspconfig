@@ -19,8 +19,8 @@ configs.lean3ls = {
         or util.root_pattern 'leanpkg.path'(fname)
         or stdlib_dir
         or util.find_git_ancestor(fname)
-        or util.path.dirname(fname)
     end,
+    single_file_support = true,
     on_new_config = function(config, root)
       if not config.cmd_cwd then
         config.cmd_cwd = root

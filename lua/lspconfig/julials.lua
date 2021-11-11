@@ -48,9 +48,8 @@ configs.julials = {
       new_config.cmd_cwd = root_dir
     end,
     filetypes = { 'julia' },
-    root_dir = function(fname)
-      return util.find_git_ancestor(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.find_git_ancestor,
+    single_file_support = true,
   },
   docs = {
     package_json = 'https://raw.githubusercontent.com/julia-vscode/julia-vscode/master/package.json',

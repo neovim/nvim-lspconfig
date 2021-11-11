@@ -6,8 +6,9 @@ configs.nimls = {
     cmd = { 'nimlsp' },
     filetypes = { 'nim' },
     root_dir = function(fname)
-      return util.root_pattern '*.nimble'(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+      return util.root_pattern '*.nimble'(fname) or util.find_git_ancestor(fname)
     end,
+    single_file_support = true,
   },
   docs = {
     package_json = 'https://raw.githubusercontent.com/pragmagic/vscode-nim/master/package.json',
