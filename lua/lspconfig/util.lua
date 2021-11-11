@@ -260,7 +260,7 @@ function M.server_per_root_dir_manager(_make_config)
       if not new_config.cmd then
         print(
           string.format(
-            'Error: cmd not defined for %q. You must manually set cmd in the setup{} call according to CONFIG.md.',
+            'Error: cmd not defined for %q. You must manually set cmd in the setup{} call according to server_configurations.md, see :help lspconfig-index.',
             new_config.name
           )
         )
