@@ -3182,6 +3182,12 @@ This server accepts configuration via the `settings` key.
   
   Download symbol server cache files from GitHub\.
 
+- **`julia.symbolserverUpstream`**: `string`
+
+  Default: `"https://www.julia-vscode.org/symbolcache"`
+  
+  Symbol server cache download URL\.
+
 - **`julia.trace.server`**: `enum { "off", "messages", "verbose" }`
 
   Default: `"off"`
@@ -3447,7 +3453,7 @@ require'lspconfig'.leanls.setup{}
             config.cmd_cwd = root
           end
         end,
-    root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
+    root_dir = root_pattern("lakefile.lean", "lean-toolchain", "leanpkg.toml", ".git")
     single_file_support = true
 ```
 
