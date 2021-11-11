@@ -320,6 +320,7 @@ require'lspconfig'.bashls.setup{}
     }
     filetypes = { "sh" }
     root_dir = vim's starting directory
+    single_file_support = true
 ```
 
 
@@ -348,6 +349,7 @@ require'lspconfig'.beancount.setup{}
       pythonPath = "python3"
     }
     root_dir = root_pattern("elm.json")
+    single_file_support = true
 ```
 
 
@@ -440,6 +442,7 @@ require'lspconfig'.ccls.setup{}
     cmd = { "ccls" }
     filetypes = { "c", "cpp", "objc", "objcpp" }
     root_dir = root_pattern("compile_commands.json", ".ccls", "compile_flags.txt", ".git") or dirname
+    single_file_support = true
 ```
 
 
@@ -470,6 +473,7 @@ require'lspconfig'.clangd.setup{}
     cmd = { "clangd", "--background-index" }
     filetypes = { "c", "cpp", "objc", "objcpp" }
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
+    single_file_support = true
 ```
 
 
@@ -521,6 +525,7 @@ require'lspconfig'.cmake.setup{}
       buildDirectory = "build"
     }
     root_dir = root_pattern(".git", "compile_commands.json", "build") or dirname
+    single_file_support = true
 ```
 
 
@@ -555,12 +560,13 @@ require'lspconfig'.codeqlls.setup{}
     cmd = { "codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q" }
     filetypes = { "ql" }
     log_level = 2
-    root_dir = function(fname)
-          return root_pattern(fname) or util.path.dirname(fname)
-        end,
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
     settings = {
       search_path = "list containing all search paths, eg: '~/codeql-home/codeql-repo'"
     }
+    single_file_support = true
 ```
 
 
@@ -585,6 +591,7 @@ require'lspconfig'.crystalline.setup{}
     cmd = { "crystalline" }
     filetypes = { "crystal" }
     root_dir = root_pattern('shard.yml', '.git') or dirname
+    single_file_support = true
 ```
 
 
@@ -670,6 +677,7 @@ require'lspconfig'.cssls.setup{}
         validate = true
       }
     }
+    single_file_support = true
 ```
 
 
@@ -799,6 +807,7 @@ require'lspconfig'.dhall_lsp_server.setup{}
     cmd = { "dhall-lsp-server" }
     filetypes = { "dhall" }
     root_dir = root_pattern(".git") or dirname
+    single_file_support = true
 ```
 
 
@@ -823,6 +832,7 @@ require'lspconfig'.diagnosticls.setup{}
     cmd = { "diagnostic-languageserver", "--stdio" }
     filetypes = Empty by default, override to add filetypes
     root_dir = Vim's starting directory
+    single_file_support = true
 ```
 
 
@@ -876,9 +886,10 @@ require'lspconfig'.dotls.setup{}
   Default Values:
     cmd = { "dot-language-server", "--stdio" }
     filetypes = { "dot" }
-    root_dir = function(fname)
-          return util.root_pattern(unpack(root_files))(fname) or util.path.dirname(fname)
-        end,
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
+    single_file_support = true
 ```
 
 
@@ -913,7 +924,8 @@ require'lspconfig'.efm.setup{}
   
   Default Values:
     cmd = { "efm-langserver" }
-    root_dir = util.root_pattern(".git")(fname) or util.path.dirname(fname)
+    root_dir = util.root_pattern(".git")
+    single_file_support = true
 ```
 
 
@@ -1198,7 +1210,8 @@ require'lspconfig'.erlangls.setup{}
   Default Values:
     cmd = { "erlang_ls" }
     filetypes = { "erlang" }
-    root_dir = root_pattern('rebar.config', 'erlang.mk', '.git') or util.path.dirname(fname)
+    root_dir = root_pattern('rebar.config', 'erlang.mk', '.git')
+    single_file_support = true
 ```
 
 
@@ -2131,10 +2144,11 @@ require'lspconfig'.html.setup{}
         javascript = true
       }
     }
-    root_dir = function(fname)
-          return util.root_pattern('package.json', '.git')(fname) or util.path.dirname(fname)
-        end,
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
     settings = {}
+    single_file_support = true
 ```
 
 
@@ -2669,6 +2683,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`java.quickfix.showAt`**: `enum { "line", "problem" }`
+
+  Default: `"line"`
+  
+  Show quickfixes at the problem or line level\.
+
 - **`java.recommendations.dependency.analytics.show`**: `boolean`
 
   Default: `true`
@@ -2797,6 +2817,7 @@ require'lspconfig'.jdtls.setup{}
             -- Multi-module projects
             { 'build.gradle', 'build.gradle.kts' },
           } or vim.fn.getcwd()
+    single_file_mode = true
 ```
 
 
@@ -2821,6 +2842,7 @@ require'lspconfig'.jedi_language_server.setup{}
     cmd = { "jedi-language-server" }
     filetypes = { "python" }
     root_dir = vim's starting directory
+    single_file_support = true
 ```
 
 
@@ -2919,6 +2941,7 @@ require'lspconfig'.jsonls.setup{}
       provideFormatter = true
     }
     root_dir = root_pattern(".git") or dirname
+    single_file_support = true
 ```
 
 
@@ -3205,9 +3228,13 @@ require'lspconfig'.julials.setup{}
     on_new_config = function(new_config, root_dir)
           new_config.cmd_cwd = root_dir
         end,
-    root_dir = function(fname)
-          return util.find_git_ancestor(fname) or util.path.dirname(fname)
-        end,
+    root_dir = function(path)
+        if M.path.is_dir(M.path.join(path, '.git')) then
+          return path
+        end
+      end)
+    end
+    single_file_support = true
 ```
 
 
@@ -3383,6 +3410,7 @@ require'lspconfig'.lean3ls.setup{}
           end
         end,
     root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
+    single_file_support = true
 ```
 
 
@@ -3420,6 +3448,7 @@ require'lspconfig'.leanls.setup{}
           end
         end,
     root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
+    single_file_support = true
 ```
 
 
@@ -3454,9 +3483,10 @@ require'lspconfig'.lemminx.setup{}
   
   Default Values:
     filetypes = { "xml", "xsd", "svg" }
-    root_dir = function(filename)
-          return util.root_pattern '.git'(filename) or util.path.dirname(filename)
-        end,
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
+    single_file_support = true
 ```
 
 
@@ -3779,8 +3809,9 @@ require'lspconfig'.mint.setup{}
     cmd = { "mint", "ls" }
     filetypes = { "mint" }
     root_dir = function(fname)
-          return util.root_pattern 'mint.json'(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+          return util.root_pattern 'mint.json'(fname) or util.find_git_ancestor(fname)
         end,
+    single_file_support = true
 ```
 
 
@@ -3937,8 +3968,9 @@ require'lspconfig'.nimls.setup{}
     cmd = { "nimlsp" }
     filetypes = { "nim" }
     root_dir = function(fname)
-          return util.root_pattern '*.nimble'(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+          return util.root_pattern '*.nimble'(fname) or util.find_git_ancestor(fname)
         end,
+    single_file_support = true
 ```
 
 
@@ -4086,9 +4118,13 @@ require'lspconfig'.pasls.setup{}
   Default Values:
     cmd = { "pasls" }
     filetypes = { "pascal" }
-    root_dir = function(fname)
-          return util.find_git_ancestor(fname) or util.path.dirname(fname)
-        end,
+    root_dir = function(path)
+        if M.path.is_dir(M.path.join(path, '.git')) then
+          return path
+        end
+      end)
+    end
+    single_file_support = true
 ```
 
 
@@ -4231,6 +4267,7 @@ require'lspconfig'.perlls.setup{}
         perlInc = " "
       }
     }
+    single_file_mode = true
 ```
 
 
@@ -4323,6 +4360,7 @@ require'lspconfig'.perlpls.setup{}
         }
       }
     }
+    single_file_support = true
 ```
 
 
@@ -4397,6 +4435,7 @@ require'lspconfig'.powershell_es.setup{}
           new_config.cmd = make_cmd(bundle_path)
         end,
     root_dir = git root or current directory
+    single_file_mode = true
 ```
 
 
@@ -4638,6 +4677,7 @@ require'lspconfig'.puppet.setup{}
     cmd = { "puppet-languageserver", "--stdio" }
     filetypes = { "puppet" }
     root_dir = root_pattern("manifests", ".puppet-lint.rc", "hiera.yaml", ".git")
+    single_file_support = true
 ```
 
 
@@ -4846,8 +4886,9 @@ require'lspconfig'.pylsp.setup{}
             'requirements.txt',
             'Pipfile',
           }
-          return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+          return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
         end,
+    single_file_support = true
 ```
 
 
@@ -4958,17 +4999,9 @@ require'lspconfig'.pyright.setup{}
   Default Values:
     cmd = { "pyright-langserver", "--stdio" }
     filetypes = { "python" }
-    root_dir = function(fname)
-          local root_files = {
-            'pyproject.toml',
-            'setup.py',
-            'setup.cfg',
-            'requirements.txt',
-            'Pipfile',
-            'pyrightconfig.json',
-          }
-          return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-        end,
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
     settings = {
       python = {
         analysis = {
@@ -4978,6 +5011,7 @@ require'lspconfig'.pyright.setup{}
         }
       }
     }
+    single_file_support = true
 ```
 
 
@@ -5090,9 +5124,10 @@ require'lspconfig'.racket_langserver.setup{}
   Default Values:
     cmd = { "racket", "--lib", "racket-langserver" }
     filetypes = { "racket", "scheme" }
-    root_dir = function(fname)
-          return util.root_pattern(unpack(root_files))(fname) or util.path.dirname(fname)
-        end,
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
+    single_file_support = true
 ```
 
 
@@ -5251,6 +5286,7 @@ require'lspconfig'.rome.setup{}
     cmd = { "rome", "lsp" }
     filetypes = { "javascript", "javascriptreact", "json", "typescript", "typescript.tsx", "typescriptreact" }
     root_dir = root_pattern('package.json', 'node_modules', '.git') or dirname
+    single_file_support = true
 ```
 
 
@@ -5889,6 +5925,7 @@ require'lspconfig'.scry.setup{}
     cmd = { "scry" }
     filetypes = { "crystal" }
     root_dir = root_pattern('shard.yml', '.git') or dirname
+    single_file_support = true
 ```
 
 
@@ -6237,10 +6274,11 @@ require'lspconfig'.sqls.setup{}
   Default Values:
     cmd = { "sqls" }
     filetypes = { "sql", "mysql" }
-    root_dir = function(fname)
-          return util.root_pattern 'config.yml'(fname) or util.path.dirname(fname)
-        end,
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
     settings = {}
+    single_file_support = true
 ```
 
 
@@ -6726,6 +6764,7 @@ require'lspconfig'.sumneko_lua.setup{}
         }
       }
     }
+    single_file_support = true
 ```
 
 
@@ -6871,7 +6910,8 @@ require'lspconfig'.taplo.setup{}
   Default Values:
     cmd = { "taplo-lsp", "run" }
     filetypes = { "toml" }
-    root_dir = root_pattern("*.toml", ".git") or dirname
+    root_dir = root_pattern("*.toml", ".git")
+    single_file_support = true
 ```
 
 
@@ -6925,7 +6965,7 @@ This server accepts configuration via the `settings` key.
 
   Path to a file for Terraform executions to be logged into \(TF\_LOG\_PATH\) with support for variables \(e\.g\. Timestamp\, Pid\, Ppid\) via Go template syntax \{\{\.VarName\}\}
 
-- **`terraform.enableReferenceCountCodeLens`**: `boolean`
+- **`terraform.codelens.referenceCount`**: `boolean`
 
   Default: `true`
   
@@ -7006,6 +7046,7 @@ require'lspconfig'.texlab.setup{}
         }
       }
     }
+    single_file_support = true
 ```
 
 
@@ -7736,6 +7777,7 @@ require'lspconfig'.yamlls.setup{}
         }
       }
     }
+    single_file_support = true
 ```
 
 
@@ -7836,6 +7878,7 @@ require'lspconfig'.zls.setup{}
     cmd = { "zls" }
     filetypes = { "zig", "zir" }
     root_dir = util.root_pattern("zls.json", ".git") or current_file_dirname
+    single_file_support = true
 ```
 
 
