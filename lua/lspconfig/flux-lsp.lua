@@ -8,7 +8,7 @@ configs[server_name] = {
   default_config = {
     cmd = { bin_name },
     filetypes = { 'flux' },
-    root_dir = util.root_pattern '.git',
+    root_dir = util.find_git_ancestor,
   },
   docs = {
     description = [[
@@ -19,7 +19,7 @@ cargo install --git https://github.com/influxdata/flux-lsp
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern(".git")]],
+      root_dir = [[util.find_git_ancestor]],
     },
   },
 }

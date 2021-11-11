@@ -11,7 +11,7 @@ configs[server_name] = {
     init_options = {
       provideFormatter = true,
     },
-    root_dir = util.root_pattern '.git',
+    root_dir = util.find_git_ancestor,
     single_file_support = true,
   },
   docs = {
@@ -54,7 +54,7 @@ require'lspconfig'.jsonls.setup {
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern(".git") or dirname]],
+      root_dir = [[util.find_git_ancestor]],
     },
   },
 }

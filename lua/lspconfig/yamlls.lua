@@ -8,7 +8,7 @@ configs[server_name] = {
   default_config = {
     cmd = { bin_name, '--stdio' },
     filetypes = { 'yaml' },
-    root_dir = util.root_pattern '.git',
+    root_dir = util.find_git_ancestor,
     single_file_support = true,
     settings = {
       -- https://github.com/redhat-developer/vscode-redhat-telemetry#how-to-disable-telemetry-reporting
@@ -26,7 +26,7 @@ yarn global add yaml-language-server
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern(".git") or dirname]],
+      root_dir = [[util.find_git_ancestor]],
     },
   },
 }
