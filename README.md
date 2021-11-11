@@ -208,3 +208,5 @@ a new configuration for it would be appreciated. You can follow these steps:
       [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/texlab.lua).
 
 4. Ask questions on our [Discourse](https://neovim.discourse.group/c/7-category/7) or in the [Neovim Gitter](https://gitter.im/neovim/neovim).
+
+You should totally use dirname.
