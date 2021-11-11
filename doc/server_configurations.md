@@ -319,7 +319,7 @@ require'lspconfig'.bashls.setup{}
       GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)"
     }
     filetypes = { "sh" }
-    root_dir = vim's starting directory
+    root_dir = util.find_git_ancestor
     single_file_support = true
 ```
 
@@ -394,9 +394,7 @@ require'lspconfig'.bicep.setup{}
   Default Values:
     filetypes = { "bicep" }
     init_options = {}
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
+    root_dir = util.find_git_ancestor
 ```
 
 
@@ -708,7 +706,7 @@ require'lspconfig'.cucumber_language_server.setup{}
   Default Values:
     cmd = { "cucumber-language-server", "--stdio" }
     filetypes = { "cucumber" }
-    root_dir = root_pattern(".git")
+    root_dir = util.find_git_ancestor
 ```
 
 
@@ -1427,7 +1425,7 @@ require'lspconfig'.flux-lsp.setup{}
   Default Values:
     cmd = { "flux-lsp" }
     filetypes = { "flux" }
-    root_dir = root_pattern(".git")
+    root_dir = util.find_git_ancestor
 ```
 
 
@@ -1594,7 +1592,7 @@ require'lspconfig'.fstar.setup{}
   Default Values:
     cmd = { "fstar.exe", "--lsp" }
     filetypes = { "fstar" }
-    root_dir = root_pattern(".git")
+    root_dir = util.find_git_ancestor
 ```
 
 
@@ -1733,7 +1731,7 @@ require'lspconfig'.groovyls.setup{}
   Default Values:
     cmd = { "java", "-jar", "groovy-language-server-all.jar" }
     filetypes = { "groovy" }
-    root_dir = root_pattern(".git") or vim.loop.os_homedir()
+    root_dir = util.find_git_ancestor or or vim.loop.os_homedir()
 ```
 
 
@@ -2940,7 +2938,7 @@ require'lspconfig'.jsonls.setup{}
     init_options = {
       provideFormatter = true
     }
-    root_dir = root_pattern(".git") or dirname
+    root_dir = util.find_git_ancestor
     single_file_support = true
 ```
 
@@ -3489,9 +3487,7 @@ require'lspconfig'.lemminx.setup{}
   
   Default Values:
     filetypes = { "xml", "xsd", "svg" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
+    root_dir = util.find_git_ancestor
     single_file_support = true
 ```
 
@@ -4358,7 +4354,7 @@ require'lspconfig'.perlpls.setup{}
   Default Values:
     cmd = { "pls" }
     filetypes = { "perl" }
-    root_dir = vim's starting directory
+    root_dir = util.find_git_ancestor
     settings = {
       perl = {
         perlcritic = {
@@ -5988,7 +5984,7 @@ require'lspconfig'.solang.setup{}
   Default Values:
     cmd = { "solang", "--language-server", "--target", "ewasm" }
     filetypes = { "solidity" }
-    root_dir = root_pattern(".git")
+    root_dir = util.find_git_ancestor
 ```
 
 
@@ -6826,9 +6822,7 @@ require'lspconfig'.svls.setup{}
   Default Values:
     cmd = { "svls" }
     filetypes = { "verilog", "systemverilog" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
+    root_dir = util.find_git_ancestor
 ```
 
 
@@ -7775,7 +7769,7 @@ require'lspconfig'.yamlls.setup{}
   Default Values:
     cmd = { "yaml-language-server", "--stdio" }
     filetypes = { "yaml" }
-    root_dir = root_pattern(".git") or dirname
+    root_dir = util.find_git_ancestor
     settings = {
       redhat = {
         telemetry = {
