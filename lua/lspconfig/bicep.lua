@@ -5,7 +5,7 @@ local server_name = 'bicep'
 configs[server_name] = {
   default_config = {
     filetypes = { 'bicep' },
-    root_dir = util.root_pattern '.git',
+    root_dir = util.find_git_ancestor,
     init_options = {},
   },
   docs = {
@@ -35,5 +35,8 @@ To download the latest release and place in /usr/local/bin/bicep-langserver:
     && unzip -d /usr/local/bin/bicep-langserver bicep-langserver.zip)
 ```
 ]],
+    default_config = {
+      root_dir = [[util.find_git_ancestor]],
+    },
   },
 }

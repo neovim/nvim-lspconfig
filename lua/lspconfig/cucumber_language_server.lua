@@ -5,7 +5,7 @@ configs.cucumber_language_server = {
   default_config = {
     cmd = { 'cucumber-language-server', '--stdio' },
     filetypes = { 'cucumber' },
-    root_dir = util.root_pattern '.git',
+    root_dir = util.find_git_ancestor,
   },
   docs = {
     description = [[
@@ -21,7 +21,7 @@ npm install -g @cucumber/language-server
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern(".git")]],
+      root_dir = [[util.find_git_ancestor]],
     },
   },
 }

@@ -7,7 +7,7 @@ configs[server_name] = {
   default_config = {
     cmd = { 'svls' },
     filetypes = { 'verilog', 'systemverilog' },
-    root_dir = util.root_pattern '.git',
+    root_dir = util.find_git_ancestor,
   },
   docs = {
     description = [[
@@ -20,5 +20,8 @@ Language server for verilog and SystemVerilog
  cargo install svls
  ```
     ]],
+    default_config = {
+      root_dir = [[util.find_git_ancestor]],
+    },
   },
 }
