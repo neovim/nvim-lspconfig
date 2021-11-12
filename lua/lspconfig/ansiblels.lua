@@ -23,9 +23,7 @@ configs[server_name] = {
       },
     },
     filetypes = { 'yaml', 'yaml.ansible' },
-    root_dir = function(fname)
-      return util.root_pattern('*.yml', '*.yaml', '.git')(fname)
-    end,
+    root_dir = util.root_pattern('*.yml', '*.yaml', '.git'),
   },
   docs = {
     description = [[
