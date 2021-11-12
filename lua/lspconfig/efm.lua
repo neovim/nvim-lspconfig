@@ -8,9 +8,7 @@ configs[server_name] = {
   default_config = {
     cmd = { bin_name },
     root_dir = util.find_git_ancestor,
-    -- EFM does not support NULL root directories
-    -- https://github.com/neovim/nvim-lspconfig/issues/1412
-    single_file_support = false,
+    single_file_support = true,
   },
 
   docs = {
