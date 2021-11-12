@@ -1,12 +1,12 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
-configs.jsonnet = {
+configs.jsonnet_ls = {
   default_config = {
     cmd = { 'jsonnet-language-server' },
     filetypes = { 'jsonnet', 'libsonnet' },
     root_dir = function(fname)
-      return util.root_pattern('jsonnetfile.json')(fname) or util.find_git_ancestor(fname)
+      return util.root_pattern 'jsonnetfile.json'(fname) or util.find_git_ancestor(fname)
     end,
   },
   docs = {
