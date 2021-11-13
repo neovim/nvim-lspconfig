@@ -150,6 +150,16 @@ configs[server_name] = {
 https://github.com/denoland/deno
 
 Deno's built-in language server
+
+To approrpiately highlight codefences returned from denols, you will need to augment vim.g.markdown_fenced languages
+ in your init.lua. Example:
+
+```lua
+vim.g.markdown_fenced_languages = {
+  "ts=typescript"
+}
+```
+
 ]],
     default_config = {
       root_dir = [[root_pattern("deno.json", "deno.jsonc", "package.json", "tsconfig.json", ".git")]],
