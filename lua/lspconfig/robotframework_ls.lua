@@ -8,7 +8,7 @@ configs[server_name] = {
     cmd = { 'robotframework_ls' },
     filetypes = { 'robot' },
     root_dir = function(fname)
-      return util.root_pattern '.git'(fname) or util.path.dirname(fname)
+      return util.root_pattern('robotidy.toml', 'pyproject.toml')(fname) or util.find_git_ancestor(fname)
     end,
   },
   docs = {
