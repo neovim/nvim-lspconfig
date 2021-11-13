@@ -2,6 +2,7 @@ name: "Close changes to config"
 on: [pull_request_target]
 jobs:
   close-changes:
+    if: ${{ github.actor != 'mjlbach' }}
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
