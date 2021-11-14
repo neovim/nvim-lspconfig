@@ -105,6 +105,7 @@ that config.
 - [theme_check](#theme_check)
 - [tsserver](#tsserver)
 - [vala_ls](#vala_ls)
+- [vdmj](#vdmj)
 - [vimls](#vimls)
 - [vls](#vls)
 - [volar](#volar)
@@ -7291,6 +7292,56 @@ require'lspconfig'.vala_ls.setup{}
     cmd = { "vala-language-server" }
     filetypes = { "vala", "genie" }
     root_dir = root_pattern("meson.build", ".git")
+```
+
+
+## vdmj
+
+https://github.com/nickbattle/vdmj
+
+The VDMJ language server can be installed by cloning the VDMJ repository and
+running `mvn clean install`.
+
+Various options are provided to configure the language server (see below). In
+particular:
+- `annotation_paths` is a list of folders and/or jar file paths for annotations
+that should be used with the language server;
+- any value of `debugger_port` less than zero will disable the debugger; note
+that if a non-zero value is used, only one instance of the server can be active
+at a time.
+
+More settings for VDMJ can be changed in a file called `vdmj.properties` under
+`root_dir/.vscode`. For a description of the available settings, see
+[Section 7 of the VDMJ User Guide](https://raw.githubusercontent.com/nickbattle/vdmj/master/vdmj/documentation/UserGuide.pdf).
+
+Note: proof obligations and combinatorial testing are not currently supported
+by neovim.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.vdmj.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = Generated from the options given
+    filetypes = { "vdmsl", "vdmpp", "vdmrt" }
+    options = {
+      annotation_paths = {},
+      debugger_port = -1,
+      high_precision = false,
+      java = "$JAVA_HOME/bin/java",
+      java_opts = { "-Xmx3000m", "-Xss1m" },
+      logfile = "path.join(vim.fn.stdpath 'cache', 'vdm-lsp.log')",
+      mavenrepo = "$HOME/.m2/repository/com/fujitsu",
+      version = "The latest version installed in `mavenrepo`"
+    }
+    root_dir = util.find_git_ancestor(fname) or find_vscode_ancestor(fname)
 ```
 
 
