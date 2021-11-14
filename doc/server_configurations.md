@@ -10,6 +10,7 @@ that config.
 - [bashls](#bashls)
 - [beancount](#beancount)
 - [bicep](#bicep)
+- [bsl_ls](#bsl_ls)
 - [ccls](#ccls)
 - [clangd](#clangd)
 - [clojure_lsp](#clojure_lsp)
@@ -397,6 +398,30 @@ require'lspconfig'.bicep.setup{}
     filetypes = { "bicep" }
     init_options = {}
     root_dir = util.find_git_ancestor
+```
+
+
+## bsl_ls
+
+    https://github.com/1c-syntax/bsl-language-server
+
+    Language Server Protocol implementation for 1C (BSL) - 1C:Enterprise 8 and OneScript languages.
+
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.bsl_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    filetypes = { "bsl", "os" }
+    root_dir = root_pattern(".git")
 ```
 
 
