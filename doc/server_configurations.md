@@ -7307,6 +7307,7 @@ require'lspconfig'.vala_ls.setup{}
     cmd = { "vala-language-server" }
     filetypes = { "vala", "genie" }
     root_dir = root_pattern("meson.build", ".git")
+    single_file_support = true
 ```
 
 
