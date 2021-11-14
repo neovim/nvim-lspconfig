@@ -32,6 +32,7 @@ local function get_latest_installed_version(repo)
   return sorted[#sorted]
 end
 
+-- Special case, as vdmj store particular settings under root_dir/.vscode
 local function find_vscode_ancestor(startpath)
   return util.search_ancestors(startpath, function(path)
     if util.path.is_dir(util.path.join(path, '.vscode')) then
@@ -45,7 +46,7 @@ configs[server_name] = {
     cmd = { 'java' },
     filetypes = { 'vdmsl', 'vdmpp', 'vdmrt' },
     root_dir = function(fname)
-      return util.find_git_ancestor(fname) or find_vscode_ancestor(fname) or util.path.dirname(fname)
+      return util.find_git_ancestor(fname) or find_vscode_ancestor(fname)
     end,
     options = {
       java = vim.env.JAVA_HOME and util.path.join(vim.env.JAVA_HOME, 'bin', 'java') or 'java',
@@ -82,7 +83,7 @@ by neovim.
 ]],
     default_config = {
       cmd = 'Generated from the options given',
-      root_dir = "Git root or vim's starting directory",
+      root_dir = 'util.find_git_ancestor(fname) or find_vscode_ancestor(fname)',
       options = {
         java = '$JAVA_HOME/bin/java',
         java_opts = { '-Xmx3000m', '-Xss1m' },
