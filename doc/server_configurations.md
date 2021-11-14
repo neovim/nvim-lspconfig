@@ -7277,7 +7277,7 @@ require'lspconfig'.tsserver.setup{}
 
 ## vala_ls
 
-https://github.com/benwaffle/vala-language-server
+https://github.com/Prince781/vala-language-server
 
 
 **Snippet to enable the language server:**
