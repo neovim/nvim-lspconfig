@@ -212,10 +212,10 @@ require'lspconfig'.ansiblels.setup{}
   
   Default Values:
     cmd = { "ansible-language-server", "--stdio" }
-    filetypes = { "yaml" }
-    root_dir = function(fname)
-          return util.root_pattern { '*.yml', '*.yaml' }(fname)
-        end,
+    filetypes = { "yaml", "yaml.ansible" }
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
     settings = {
       ansible = {
         ansible = {
@@ -233,6 +233,7 @@ require'lspconfig'.ansiblels.setup{}
         }
       }
     }
+    single_file_support = true
 ```
 
 
@@ -5680,6 +5681,10 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Whether to show inlay hints\.
+
+- **`rust-analyzer.inlayHints.hideNamedConstructorHints`**: `boolean`
+
+  null
 
 - **`rust-analyzer.inlayHints.maxLength`**: `null|integer`
 
