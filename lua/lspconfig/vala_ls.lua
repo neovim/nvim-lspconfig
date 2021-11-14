@@ -30,6 +30,7 @@ configs.vala_ls = {
       local root = util.search_ancestors(fname, meson_matcher)
       return root or util.find_git_ancestor(fname)
     end,
+    single_file_support = true,
   },
   docs = {
     description = 'https://github.com/Prince781/vala-language-server',
