@@ -8,7 +8,7 @@ configs[server_name] = {
   default_config = {
     cmd = { bin_name, 'server', '-m', 'stream' },
     filetypes = { 'graphql' },
-    root_dir = util.root_pattern('.git', '.graphqlrc*', '.graphql.config.*'),
+    root_dir = util.root_pattern('.git', '.graphqlrc*', '.graphql.config.*', 'graphql.config.*'),
   },
 
   docs = {
