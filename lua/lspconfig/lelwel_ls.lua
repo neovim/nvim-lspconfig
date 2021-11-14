@@ -5,9 +5,7 @@ configs.lelwel_ls = {
   default_config = {
     cmd = { 'lelwel-ls' },
     filetypes = { 'llw' },
-    root_dir = function(fname)
-      return util.find_git_ancestor(fname) or util.path.dirname(fname)
-    end,
+    root_dir = util.find_git_ancestor,
   },
   docs = {
     description = [[
