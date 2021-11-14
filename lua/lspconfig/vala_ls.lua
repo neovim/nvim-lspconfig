@@ -32,7 +32,7 @@ configs.vala_ls = {
     end,
   },
   docs = {
-    description = 'https://github.com/benwaffle/vala-language-server',
+    description = 'https://github.com/Prince781/vala-language-server',
     default_config = {
       root_dir = [[root_pattern("meson.build", ".git")]],
     },
