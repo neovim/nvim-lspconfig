@@ -22,10 +22,9 @@ configs[server_name] = {
         },
       },
     },
-    filetypes = { 'yaml' },
-    root_dir = function(fname)
-      return util.root_pattern { '*.yml', '*.yaml' }(fname)
-    end,
+    filetypes = { 'yaml', 'yaml.ansible' },
+    root_dir = util.root_pattern('ansible.cfg', '.ansible-lint'),
+    single_file_support = true,
   },
   docs = {
     description = [[
