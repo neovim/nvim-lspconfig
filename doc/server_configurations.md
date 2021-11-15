@@ -77,6 +77,7 @@ that config.
 - [puppet](#puppet)
 - [purescriptls](#purescriptls)
 - [pylsp](#pylsp)
+- [pyre](#pyre)
 - [pyright](#pyright)
 - [r_language_server](#r_language_server)
 - [racket_langserver](#racket_langserver)
@@ -5012,6 +5013,38 @@ require'lspconfig'.pylsp.setup{}
           return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
         end,
     single_file_support = true
+```
+
+
+## pyre
+
+https://pyre-check.org/
+
+`pyre` a static type checker for Python 3.
+
+`pyre` offers an extremely limited featureset. It currently only supports diagnostics,
+which are triggered on save.
+
+Do not report issues for missing features in `pyre` to `lspconfig`.
+
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.pyre.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "pyre", "persistent" }
+    filetypes = { "python" }
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
 ```
 
 
