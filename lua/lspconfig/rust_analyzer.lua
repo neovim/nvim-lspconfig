@@ -25,10 +25,10 @@ configs.rust_analyzer = {
       local cargo_metadata = ''
       local cargo_metadata_err = ''
       local cm = vim.fn.jobstart(cmd, {
-        on_stdout = function(j, d, e)
+        on_stdout = function(_, d, _)
           cargo_metadata = table.concat(d, '\n')
         end,
-        on_stderr = function(j, d, e)
+        on_stderr = function(_, d, _)
           cargo_metadata_err = table.concat(d, '\n')
         end,
         stdout_buffered = true,
