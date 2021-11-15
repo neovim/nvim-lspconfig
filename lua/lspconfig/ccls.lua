@@ -6,7 +6,8 @@ configs.ccls = {
     cmd = { 'ccls' },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
     root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git'),
-    single_file_support = true,
+    -- ccls does not support sending a null root directory
+    single_file_support = false,
   },
   docs = {
     description = [[
