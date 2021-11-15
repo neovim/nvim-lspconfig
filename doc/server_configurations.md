@@ -472,7 +472,7 @@ require'lspconfig'.ccls.setup{}
     cmd = { "ccls" }
     filetypes = { "c", "cpp", "objc", "objcpp" }
     root_dir = root_pattern("compile_commands.json", ".ccls", "compile_flags.txt", ".git") or dirname
-    single_file_support = true
+    single_file_support = false
 ```
 
 
