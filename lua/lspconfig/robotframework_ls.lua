@@ -18,7 +18,7 @@ https://github.com/robocorp/robotframework-lsp
 Language Server Protocol implementation for Robot Framework.
 ]],
     default_config = {
-      root_dir = "vim's starting directory",
+      root_dir = "util.root_pattern('robotidy.toml', 'pyproject.toml')(fname) or util.find_git_ancestor(fname)",
     },
   },
 }
