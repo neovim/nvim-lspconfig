@@ -54,6 +54,7 @@ that config.
 - [jdtls](#jdtls)
 - [jedi_language_server](#jedi_language_server)
 - [jsonls](#jsonls)
+- [jsonnet_ls](#jsonnet_ls)
 - [julials](#julials)
 - [kotlin_language_server](#kotlin_language_server)
 - [lean3ls](#lean3ls)
@@ -3055,6 +3056,30 @@ require'lspconfig'.jsonls.setup{}
     }
     root_dir = util.find_git_ancestor
     single_file_support = true
+```
+
+
+## jsonnet_ls
+
+https://github.com/jdbaldry/jsonnet-language-server
+
+A Language Server Protocol (LSP) server for Jsonnet.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.jsonnet_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "jsonnet-language-server" }
+    filetypes = { "jsonnet", "libsonnet" }
+    root_dir = root_pattern("jsonnetfile.json")
 ```
 
 
