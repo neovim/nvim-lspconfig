@@ -186,7 +186,7 @@ M.path = (function()
 
   -- Iterate the path until we find the rootdir.
   local function iterate_parents(path)
-    local function it(s, v)
+    local function it(_, v)
       if v and not is_fs_root(v) then
         v = dirname(v)
       else
