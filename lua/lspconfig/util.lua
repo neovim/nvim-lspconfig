@@ -164,6 +164,14 @@ M.path = (function()
     return result
   end
 
+  -- For now, this only normalizes the drive letter of a Windows path to lowercase
+  local function normalize_path(path)
+    local has_windows_drive_letter = path:match '^%a:'
+    if has_windows_drive_letter then
+      return path:sub(1,1):lower()..path:sub(2)
+    end
+  end
+
   -- Traverse the path calling cb along the way.
   local function traverse_parents(path, cb)
     path = uv.fs_realpath(path)
@@ -223,6 +231,7 @@ M.path = (function()
     sep = path_sep,
     dirname = dirname,
     join = path_join,
+    normalize_path = normalize_path,
     traverse_parents = traverse_parents,
     iterate_parents = iterate_parents,
     is_descendant = is_descendant,
@@ -237,6 +246,8 @@ function M.server_per_root_dir_manager(_make_config)
   local manager = {}
 
   function manager.add(root_dir, single_file_mode)
+    root_dir = M.path.normalize_path(root_dir)
+
     local client_id
     if single_file_mode then
       client_id = single_file_clients[root_dir]
