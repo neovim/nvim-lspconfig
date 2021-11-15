@@ -1,19 +1,19 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
-configs.terraformls = {
+configs.terraform_lsp = {
   default_config = {
-    cmd = { 'terraform-ls', 'serve' },
-    filetypes = { 'terraform' },
+    cmd = { 'terraform-lsp' },
+    filetypes = { 'terraform', 'hcl' },
     root_dir = util.root_pattern('.terraform', '.git'),
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/hashicorp/vscode-terraform/master/package.json',
     description = [[
-https://github.com/hashicorp/terraform-ls
+https://github.com/juliosueiras/terraform-lsp
 
 Terraform language server
-Download a released binary from https://github.com/hashicorp/terraform-ls/releases.
+Download a released binary from
+https://github.com/juliosueiras/terraform-lsp/releases.
 
 From https://github.com/hashicorp/terraform-ls#terraform-ls-vs-terraform-lsp:
 
@@ -42,3 +42,4 @@ choice:
     },
   },
 }
+-- vim:et ts=2 sw=2
