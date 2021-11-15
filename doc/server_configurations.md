@@ -58,6 +58,7 @@ that config.
 - [kotlin_language_server](#kotlin_language_server)
 - [lean3ls](#lean3ls)
 - [leanls](#leanls)
+- [lelwel_ls](#lelwel_ls)
 - [lemminx](#lemminx)
 - [ltex](#ltex)
 - [metals](#metals)
@@ -3567,6 +3568,40 @@ require'lspconfig'.leanls.setup{}
         end,
     root_dir = root_pattern("lakefile.lean", "lean-toolchain", "leanpkg.toml", ".git")
     single_file_support = true
+```
+
+
+## lelwel_ls
+
+https://github.com/0x2a-42/lelwel
+
+Language server for lelwel grammars.
+
+You can install `lelwel-ls` via cargo:
+```sh
+cargo install --features="lsp" lelwel
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.lelwel_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "lelwel-ls" }
+    filetypes = { "llw" }
+    root_dir = function(path)
+        if M.path.is_dir(M.path.join(path, '.git')) then
+          return path
+        end
+      end)
+    end
 ```
 
 
