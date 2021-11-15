@@ -103,6 +103,7 @@ that config.
 - [svls](#svls)
 - [tailwindcss](#tailwindcss)
 - [taplo](#taplo)
+- [terraform_lsp](#terraform_lsp)
 - [terraformls](#terraformls)
 - [texlab](#texlab)
 - [tflint](#tflint)
@@ -7164,12 +7165,82 @@ require'lspconfig'.taplo.setup{}
 ```
 
 
+## terraform_lsp
+
+https://github.com/juliosueiras/terraform-lsp
+
+Terraform language server
+Download a released binary from
+https://github.com/juliosueiras/terraform-lsp/releases.
+
+From https://github.com/hashicorp/terraform-ls#terraform-ls-vs-terraform-lsp:
+
+Both HashiCorp and the maintainer of terraform-lsp expressed interest in
+collaborating on a language server and are working towards a _long-term_
+goal of a single stable and feature-complete implementation.
+
+For the time being both projects continue to exist, giving users the
+choice:
+
+- `terraform-ls` providing
+  - overall stability (by relying only on public APIs)
+  - compatibility with any provider and any Terraform >=0.12.0 currently
+    less features
+  - due to project being younger and relying on public APIs which may
+    not offer the same functionality yet
+
+- `terraform-lsp` providing
+  - currently more features
+  - compatibility with a single particular Terraform (0.12.20 at time of writing)
+    - configs designed for other 0.12 versions may work, but interpretation may be inaccurate
+  - less stability (due to reliance on Terraform's own internal packages)
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.terraform_lsp.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "terraform-lsp" }
+    filetypes = { "terraform", "hcl" }
+    root_dir = root_pattern(".terraform", ".git")
+```
+
+
 ## terraformls
 
 https://github.com/hashicorp/terraform-ls
 
 Terraform language server
 Download a released binary from https://github.com/hashicorp/terraform-ls/releases.
+
+From https://github.com/hashicorp/terraform-ls#terraform-ls-vs-terraform-lsp:
+
+Both HashiCorp and the maintainer of terraform-lsp expressed interest in
+collaborating on a language server and are working towards a _long-term_
+goal of a single stable and feature-complete implementation.
+
+For the time being both projects continue to exist, giving users the
+choice:
+
+- `terraform-ls` providing
+  - overall stability (by relying only on public APIs)
+  - compatibility with any provider and any Terraform >=0.12.0 currently
+    less features
+  - due to project being younger and relying on public APIs which may
+    not offer the same functionality yet
+
+- `terraform-lsp` providing
+  - currently more features
+  - compatibility with a single particular Terraform (0.12.20 at time of writing)
+    - configs designed for other 0.12 versions may work, but interpretation may be inaccurate
+  - less stability (due to reliance on Terraform's own internal packages)
 
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
