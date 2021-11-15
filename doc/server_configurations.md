@@ -2599,6 +2599,12 @@ This server accepts configuration via the `settings` key.
   
   Specifies how modifications on build files update the Java classpath\/configuration
 
+- **`java.configuration.workspaceCacheLimit`**: `null|integer`
+
+  Default: `vim.NIL`
+  
+  The number of days \(if enabled\) to keep unused workspace cache data\. Beyond this limit\, cached workspace data may be removed\.
+
 - **`java.contentProvider.preferred`**: `string`
 
   Default: `vim.NIL`
