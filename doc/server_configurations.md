@@ -86,6 +86,7 @@ that config.
 - [rescriptls](#rescriptls)
 - [rls](#rls)
 - [rnix](#rnix)
+- [robotframework_ls](#robotframework_ls)
 - [rome](#rome)
 - [rust_analyzer](#rust_analyzer)
 - [scry](#scry)
@@ -5480,6 +5481,30 @@ require'lspconfig'.rnix.setup{}
     init_options = {}
     root_dir = vim's starting directory
     settings = {}
+```
+
+
+## robotframework_ls
+
+https://github.com/robocorp/robotframework-lsp
+
+Language Server Protocol implementation for Robot Framework.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.robotframework_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "robotframework_ls" }
+    filetypes = { "robot" }
+    root_dir = util.root_pattern('robotidy.toml', 'pyproject.toml')(fname) or util.find_git_ancestor(fname)
 ```
 
 
