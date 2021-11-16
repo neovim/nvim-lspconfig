@@ -1850,7 +1850,7 @@ require'lspconfig'.groovyls.setup{}
   Default Values:
     cmd = { "java", "-jar", "groovy-language-server-all.jar" }
     filetypes = { "groovy" }
-    root_dir = util.find_git_ancestor or or vim.loop.os_homedir()
+    root_dir = <function 1>
 ```
 
 
