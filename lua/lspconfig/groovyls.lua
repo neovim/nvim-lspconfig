@@ -12,7 +12,9 @@ configs[name] = {
       bin_name,
     },
     filetypes = { 'groovy' },
-    root_dir = util.find_git_ancestor or vim.loop.os_homedir(),
+    root_dir = function(fname)
+      return util.root_pattern 'Jenkinsfile'(fname) or util.find_git_ancestor(fname)
+    end,
   },
   docs = {
     description = [[
@@ -41,7 +43,9 @@ require'lspconfig'.groovyls.setup{
         bin_name,
       },
       filetypes = { 'groovy' },
-      root_dir = [[util.find_git_ancestor or or vim.loop.os_homedir()]],
+      root_dir = function(fname)
+        return util.root_pattern 'Jenkinsfile'(fname) or util.find_git_ancestor(fname)
+      end,
     },
   },
 }
