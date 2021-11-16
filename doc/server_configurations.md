@@ -91,6 +91,7 @@ that config.
 - [rust_analyzer](#rust_analyzer)
 - [scry](#scry)
 - [serve_d](#serve_d)
+- [sixtyfps](#sixtyfps)
 - [solang](#solang)
 - [solargraph](#solargraph)
 - [sorbet](#sorbet)
@@ -2598,6 +2599,12 @@ This server accepts configuration via the `settings` key.
   Default: `"interactive"`
   
   Specifies how modifications on build files update the Java classpath\/configuration
+
+- **`java.configuration.workspaceCacheLimit`**: `null|integer`
+
+  Default: `vim.NIL`
+  
+  The number of days \(if enabled\) to keep unused workspace cache data\. Beyond this limit\, cached workspace data may be removed\.
 
 - **`java.contentProvider.preferred`**: `string`
 
@@ -6203,6 +6210,44 @@ require'lspconfig'.serve_d.setup{}
     cmd = { "serve-d" }
     filetypes = { "d" }
     root_dir = util.root_pattern("dub.json", "dub.sdl", ".git")
+```
+
+
+## sixtyfps
+
+https://github.com/sixtyfpsui/sixtyfps
+`SixtyFPS`'s language server
+
+You can build and install `sixtyfps-lsp` binary with `cargo`:
+```sh
+cargo install sixtyfps-lsp
+```
+
+Vim does not have built-in syntax for the `sixtyfps` filetype currently.
+
+This can be added via an autocmd:
+
+```lua
+vim.cmd [[ autocmd BufRead,BufNewFile *.60 set filetype=sixtyfps ]]
+```
+
+or by installing a filetype plugin such as https://github.com/RustemB/sixtyfps-vim
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.sixtyfps.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "sixtyfps-lsp" }
+    filetypes = { "sixtyfps" }
+    single_file_support = true
 ```
 
 
