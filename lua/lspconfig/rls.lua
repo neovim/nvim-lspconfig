@@ -3,10 +3,10 @@ local util = require 'lspconfig/util'
 
 configs.rls = {
   default_config = {
-    cmd = {"rls"};
-    filetypes = {"rust"};
-    root_dir = util.root_pattern("Cargo.toml");
-  };
+    cmd = { 'rls' },
+    filetypes = { 'rust' },
+    root_dir = util.root_pattern 'Cargo.toml',
+  },
   docs = {
     description = [[
 https://github.com/rust-lang/rls
@@ -35,10 +35,9 @@ If you want to use rls for a particular build, eg nightly, set cmd as follows:
 ```lua
 cmd = {"rustup", "run", "nightly", "rls"}
 ```
-    ]];
+    ]],
     default_config = {
-      root_dir = [[root_pattern("Cargo.toml")]];
-    };
-  };
-};
--- vim:et ts=2 sw=2
+      root_dir = [[root_pattern("Cargo.toml")]],
+    },
+  },
+}

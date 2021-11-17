@@ -3,22 +3,21 @@ local util = require 'lspconfig/util'
 
 configs.scry = {
   default_config = {
-    cmd = {'scry'},
-    filetypes = {'crystal'},
+    cmd = { 'scry' },
+    filetypes = { 'crystal' },
     root_dir = function(fname)
-      return util.root_pattern('shard.yml')(fname) or
-        util.find_git_ancestor(fname) or
-        util.path.dirname(fname)
-    end
+      return util.root_pattern 'shard.yml'(fname) or util.find_git_ancestor(fname)
+    end,
+    single_file_support = true,
   },
   docs = {
-      description = [[
+    description = [[
 https://github.com/crystal-lang-tools/scry
 
 Crystal language server.
 ]],
-      default_config = {
-          root_dir = [[root_pattern('shard.yml', '.git') or dirname]]
-      }
-  }
+    default_config = {
+      root_dir = [[root_pattern('shard.yml', '.git') or dirname]],
+    },
+  },
 }

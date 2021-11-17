@@ -1,9 +1,9 @@
-local configs = require('lspconfig/configs')
-local util = require('lspconfig/util')
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
 
 configs.stylelint_lsp = {
   default_config = {
-    cmd = {'stylelint-lsp', '--stdio'},
+    cmd = { 'stylelint-lsp', '--stdio' },
     filetypes = {
       'css',
       'less',
@@ -14,13 +14,13 @@ configs.stylelint_lsp = {
       'javascript',
       'javascriptreact',
       'typescript',
-      'typescriptreact'
-    };
-    root_dir = util.root_pattern('.stylelintrc', 'package.json');
-    settings = {};
+      'typescriptreact',
+    },
+    root_dir = util.root_pattern('.stylelintrc', 'package.json'),
+    settings = {},
   },
   docs = {
-    package_json = "https://raw.githubusercontent.com/bmatcuk/coc-stylelintplus/master/package.json";
+    package_json = 'https://raw.githubusercontent.com/bmatcuk/coc-stylelintplus/master/package.json',
     description = [[
 https://github.com/bmatcuk/stylelint-lsp
 
@@ -41,9 +41,9 @@ require'lspconfig'.stylelint_lsp.setup{
   }
 }
 ```
-]];
+]],
     default_config = {
-      root_dir = [[ root_pattern('.stylelintrc', 'package.json') ]];
-    };
-  };
+      root_dir = [[ root_pattern('.stylelintrc', 'package.json') ]],
+    },
+  },
 }

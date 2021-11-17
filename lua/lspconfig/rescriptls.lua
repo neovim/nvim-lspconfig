@@ -1,14 +1,14 @@
-local lspconfig = require('lspconfig')
-local configs = require('lspconfig/configs')
+local lspconfig = require 'lspconfig'
+local configs = require 'lspconfig/configs'
 
 local name = 'rescriptls'
 
 configs[name] = {
   default_config = {
     cmd = {},
-    filetypes = {'rescript'},
+    filetypes = { 'rescript' },
     root_dir = lspconfig.util.root_pattern('bsconfig.json', '.git'),
-    settings = {}
+    settings = {},
   },
   docs = {
     description = [[
@@ -40,6 +40,6 @@ cmd = {
 
 Another option is to use vscode extension [release](https://github.com/rescript-lang/rescript-vscode/releases).
 Take a look at [here](https://github.com/rescript-lang/rescript-vscode#use-with-other-editors) for instructions.
-]]
-  }
+]],
+  },
 }

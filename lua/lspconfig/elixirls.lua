@@ -1,17 +1,17 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
-local server_name = "elixirls"
+local server_name = 'elixirls'
 configs[server_name] = {
   default_config = {
-    filetypes = {"elixir", "eelixir"};
+    filetypes = { 'elixir', 'eelixir' },
     root_dir = function(fname)
-        return util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
-    end;
-    };
-    docs = {
-        package_json = "https://raw.githubusercontent.com/JakeBecker/vscode-elixir-ls/master/package.json";
-        description = [[
+      return util.root_pattern('mix.exs', '.git')(fname) or vim.loop.os_homedir()
+    end,
+  },
+  docs = {
+    package_json = 'https://raw.githubusercontent.com/elixir-lsp/vscode-elixir-ls/master/package.json',
+    description = [[
 https://github.com/elixir-lsp/elixir-ls
 
 `elixir-ls` can be installed by following the instructions [here](https://github.com/elixir-lsp/elixir-ls#building-and-running).
@@ -34,11 +34,11 @@ require'lspconfig'.elixirls.setup{
     ...
 }
 ```
-]];
-            default_config = {
-                root_dir = [[root_pattern("mix.exs", ".git") or vim.loop.os_homedir()]];
-            };
-    };
+]],
+    default_config = {
+      root_dir = [[root_pattern("mix.exs", ".git") or vim.loop.os_homedir()]],
+    },
+  },
 }
 
 -- vim:et ts=2 sw=2

@@ -1,17 +1,21 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
-local name = "groovyls"
-local bin_name = "groovy-language-server-all.jar"
+local name = 'groovyls'
+local bin_name = 'groovy-language-server-all.jar'
 
 configs[name] = {
   default_config = {
     cmd = {
-      "java", "-jar", bin_name
+      'java',
+      '-jar',
+      bin_name,
     },
-    filetypes = {"groovy"};
-    root_dir = util.root_pattern(".git") or vim.loop.os_homedir();
-  };
+    filetypes = { 'groovy' },
+    root_dir = function(fname)
+      return util.root_pattern 'Jenkinsfile'(fname) or util.find_git_ancestor(fname)
+    end,
+  },
   docs = {
     description = [[
 https://github.com/prominic/groovy-language-server.git
@@ -31,15 +35,17 @@ require'lspconfig'.groovyls.setup{
     ...
 }
 ```
-]];
+]],
     default_config = {
       cmd = {
-        "java", "-jar", bin_name
+        'java',
+        '-jar',
+        bin_name,
       },
-      filetypes = {"groovy"};
-      root_dir = [[root_pattern(".git") or vim.loop.os_homedir()]];
-    };
-  };
+      filetypes = { 'groovy' },
+      root_dir = function(fname)
+        return util.root_pattern 'Jenkinsfile'(fname) or util.find_git_ancestor(fname)
+      end,
+    },
+  },
 }
-
--- vim:et ts=2 sw=2

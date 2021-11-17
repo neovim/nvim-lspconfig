@@ -1,13 +1,13 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
-local name = "vls"
+local name = 'vls'
 
 configs[name] = {
   default_config = {
-    filetypes = {"vlang"};
-    root_dir = util.root_pattern("v.mod", ".git");
-  };
+    filetypes = { 'vlang' },
+    root_dir = util.root_pattern('v.mod', '.git'),
+  },
   docs = {
     description = [[
 https://github.com/vlang/vls
@@ -27,10 +27,9 @@ require'lspconfig'.vls.setup {
   cmd = {vls_binary},
 }
 ```
-]];
+]],
     default_config = {
-      root_dir = [[root_pattern("v.mod", ".git")]];
-    };
-  };
+      root_dir = [[root_pattern("v.mod", ".git")]],
+    },
+  },
 }
--- vim:et ts=2

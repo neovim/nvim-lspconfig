@@ -3,19 +3,18 @@ local util = require 'lspconfig/util'
 local server_name = 'als'
 local bin_name = 'ada_language_server'
 
-if vim.fn.has('win32') == 1 then
+if vim.fn.has 'win32' == 1 then
   bin_name = 'ada_language_server.exe'
 end
 
 configs[server_name] = {
   default_config = {
-    cmd = {bin_name};
-    filetypes = {"ada"};
-    -- *.gpr and *.adc would be nice to have here
-    root_dir = util.root_pattern("Makefile", ".git");
-  };
+    cmd = { bin_name },
+    filetypes = { 'ada' },
+    root_dir = util.root_pattern('Makefile', '.git', '*.gpr', '*.adc'),
+  },
   docs = {
-    package_json = "https://raw.githubusercontent.com/AdaCore/ada_language_server/master/integration/vscode/ada/package.json";
+    package_json = 'https://raw.githubusercontent.com/AdaCore/ada_language_server/master/integration/vscode/ada/package.json',
     description = [[
 https://github.com/AdaCore/ada_language_server
 
@@ -33,11 +32,9 @@ require('lspconfig').als.setup{
     }
 }
 ```
-]];
+]],
     default_config = {
-      root_dir = [[util.root_pattern("Makefile", ".git")]];
-    };
-  };
-};
-
--- vim:et ts=2 sw=2
+      root_dir = [[util.root_pattern("Makefile", ".git", "*.gpr", "*.adc")]],
+    },
+  },
+}

@@ -3,18 +3,18 @@ local util = require 'lspconfig/util'
 
 configs.haxe_language_server = {
   default_config = {
-    cmd = {"haxe-language-server"};
-    filetypes = {"haxe"};
-    root_dir = util.root_pattern("*.hxml");
+    cmd = { 'haxe-language-server' },
+    filetypes = { 'haxe' },
+    root_dir = util.root_pattern '*.hxml',
     settings = {
       haxe = {
-        executable = "haxe";
-      };
-    };
+        executable = 'haxe',
+      },
+    },
     init_options = {
-      displayArguments = {"build.hxml"};
-    };
-  };
+      displayArguments = { 'build.hxml' },
+    },
+  },
   docs = {
     description = [[
 https://github.com/vshaxe/haxe-language-server
@@ -42,7 +42,7 @@ your project's root directory. If your file is named something different,
 specify it using the `init_options.displayArguments` setting.
 ]],
     default_config = {
-      root_dir = [[root_pattern("*.hxml")]];
-    };
-  }
+      root_dir = [[root_pattern("*.hxml")]],
+    },
+  },
 }

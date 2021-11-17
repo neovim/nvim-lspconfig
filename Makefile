@@ -1,6 +1,12 @@
 test:
 	sh ./scripts/run_test.sh
-lint:
-	luacheck lua/* test/*
-.PHONY: test lint
 
+lint:
+	@printf "\nRunning luacheck\n"
+	luacheck lua/* test/*
+	@printf "\nRunning selene\n"
+	selene --display-style=quiet .
+	@printf "\nRunning stylua\n"
+	stylua --check .
+
+.PHONY: test lint

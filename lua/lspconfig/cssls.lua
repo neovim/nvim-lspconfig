@@ -1,35 +1,33 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
-local server_name = "cssls"
-local bin_name = "css-languageserver"
-
-local root_pattern = util.root_pattern("package.json")
+local server_name = 'cssls'
+local bin_name = 'vscode-css-language-server'
 
 configs[server_name] = {
   default_config = {
-    cmd = {bin_name, "--stdio"};
-    filetypes = {"css", "scss", "less"};
-    root_dir = function(fname)
-      return root_pattern(fname) or vim.loop.os_homedir()
-    end;
+    cmd = { bin_name, '--stdio' },
+    filetypes = { 'css', 'scss', 'less' },
+    root_dir = util.root_pattern('package.json', '.git'),
+    single_file_support = true,
     settings = {
       css = { validate = true },
       scss = { validate = true },
-      less = { validate = true }
-     };
-  };
+      less = { validate = true },
+    },
+  },
   docs = {
     description = [[
-https://github.com/vscode-langservers/vscode-css-languageserver-bin
+
+https://github.com/hrsh7th/vscode-langservers-extracted
 
 `css-languageserver` can be installed via `npm`:
+
 ```sh
-npm install -g vscode-css-languageserver-bin
+npm i -g vscode-langservers-extracted
 ```
 
-Neovim does not currently include built-in snippets. `vscode-css-languageserver` only provides completions when snippet support is enabled.
-To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
+Neovim does not currently include built-in snippets. `vscode-css-language-server` only provides completions when snippet support is enabled. To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
 
 ```lua
 --Enable (broadcasting) snippet capability for completion
@@ -40,11 +38,9 @@ require'lspconfig'.cssls.setup {
   capabilities = capabilities,
 }
 ```
-]];
+]],
     default_config = {
-      root_dir = [[root_pattern("package.json")]];
-    };
-  };
+      root_dir = [[root_pattern("package.json", ".git") or bufdir]],
+    },
+  },
 }
-
--- vim:et ts=2 sw=2

@@ -35,15 +35,26 @@ function win_float.default_opts(options)
 
   local opts = {
     relative = 'editor',
-    row      = top,
-    col      = left,
-    width    = width,
-    height   = height,
-    style    = 'minimal'
+    row = top,
+    col = left,
+    width = width,
+    height = height,
+    style = 'minimal',
+    border = {
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+      { ' ', 'NormalFloat' },
+    },
   }
 
   return opts
 end
+
 --- Create window that takes up certain percentags of the current screen.
 ---
 --- Works regardless of current buffers, tabs, splits, etc.
@@ -57,7 +68,7 @@ function win_float.percentage_range_window(col_range, row_range, options)
   options = apply_defaults(options, win_float.default_options)
 
   local win_opts = win_float.default_opts(options)
-  win_opts.relative = "editor"
+  win_opts.relative = 'editor'
 
   local height_percentage, row_start_percentage
   if type(row_range) == 'number' then
@@ -73,7 +84,7 @@ function win_float.percentage_range_window(col_range, row_range, options)
   end
 
   win_opts.height = math.ceil(vim.o.lines * height_percentage)
-  win_opts.row = math.ceil(vim.o.lines *  row_start_percentage)
+  win_opts.row = math.ceil(vim.o.lines * row_start_percentage)
 
   local width_percentage, col_start_percentage
   if type(col_range) == 'number' then
@@ -90,22 +101,12 @@ function win_float.percentage_range_window(col_range, row_range, options)
 
   win_opts.col = math.floor(vim.o.columns * col_start_percentage)
   win_opts.width = math.floor(vim.o.columns * width_percentage)
-  win_opts.border = {
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"},
-      {" ", "NormalFloat"}
-  }
 
   local bufnr = options.bufnr or vim.api.nvim_create_buf(false, true)
   local win_id = vim.api.nvim_open_win(bufnr, true, win_opts)
   vim.api.nvim_win_set_buf(win_id, bufnr)
 
-  vim.cmd('setlocal nocursorcolumn')
+  vim.cmd 'setlocal nocursorcolumn ts=2 sw=2'
 
   return {
     bufnr = bufnr,

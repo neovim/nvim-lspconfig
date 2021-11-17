@@ -3,13 +3,13 @@ local util = require 'lspconfig/util'
 
 configs.hie = {
   default_config = {
-    cmd = {"hie-wrapper", "--lsp"};
-    filetypes = {"haskell"};
-    root_dir = util.root_pattern("stack.yaml", "package.yaml", ".git");
-  };
+    cmd = { 'hie-wrapper', '--lsp' },
+    filetypes = { 'haskell' },
+    root_dir = util.root_pattern('stack.yaml', 'package.yaml', '.git'),
+  },
 
   docs = {
-    package_json = "https://raw.githubusercontent.com/alanz/vscode-hie-server/master/package.json";
+    package_json = 'https://raw.githubusercontent.com/alanz/vscode-hie-server/master/package.json',
     description = [[
 https://github.com/haskell/haskell-ide-engine
 
@@ -27,12 +27,10 @@ init_options = {
   }
 }
 ```
-        ]];
+        ]],
 
     default_config = {
-      root_dir = [[root_pattern("stack.yaml", "package.yaml", ".git")]];
-    };
-  };
-};
-
--- vim:et ts=2 sw=2
+      root_dir = [[root_pattern("stack.yaml", "package.yaml", ".git")]],
+    },
+  },
+}

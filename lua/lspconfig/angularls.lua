@@ -19,15 +19,17 @@ configs[server_name] = {
     cmd = {
       'ngserver',
       '--stdio',
-      '--tsProbeLocations', default_probe_dir,
-      '--ngProbeLocations', default_probe_dir
-    };
-    filetypes = {'typescript', 'html', 'typescriptreact', 'typescript.tsx'};
+      '--tsProbeLocations',
+      default_probe_dir,
+      '--ngProbeLocations',
+      default_probe_dir,
+    },
+    filetypes = { 'typescript', 'html', 'typescriptreact', 'typescript.tsx' },
     -- Check for angular.json or .git first since that is the root of the project.
     -- Don't check for tsconfig.json or package.json since there are multiple of these
     -- in an angular monorepo setup.
-    root_dir = util.root_pattern('angular.json', '.git');
-  };
+    root_dir = util.root_pattern('angular.json', '.git'),
+  },
   on_new_config = function(new_config, new_root_dir)
     local new_probe_dir = get_probe_dir(new_root_dir)
 
@@ -35,10 +37,12 @@ configs[server_name] = {
     new_config.cmd = {
       'ngserver',
       '--stdio',
-      '--tsProbeLocations', new_probe_dir,
-      '--ngProbeLocations', new_probe_dir
+      '--tsProbeLocations',
+      new_probe_dir,
+      '--ngProbeLocations',
+      new_probe_dir,
     }
-  end;
+  end,
   docs = {
     description = [[
 https://github.com/angular/vscode-ng-language-service
@@ -58,9 +62,9 @@ require'lspconfig'.angularls.setup{
   end,
 }
 ```
-    ]];
+    ]],
     default_config = {
-      root_dir = [[root_pattern("angular.json", ".git")]];
-    };
-  }
+      root_dir = [[root_pattern("angular.json", ".git")]],
+    },
+  },
 }
