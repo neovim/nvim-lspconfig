@@ -10,19 +10,17 @@ local function jsonnet_path(root_dir)
   return table.concat(paths, ':')
 end
 
-local function get_root_dir(fname)
-  return util.root_pattern('jsonnetfile.json')(fname) or util.find_git_ancestor(fname)
-end
-
 configs.jsonnet_ls = {
   default_config = {
     cmd = { 'jsonnet-language-server' },
     cmd_env = { JSONNET_PATH = vim.fn.getcwd() }, -- will be overwritten by `on_new_config`
     filetypes = { 'jsonnet', 'libsonnet' },
-    root_dir = get_root_dir,
-    on_new_config = function(new_config, file_dir)
+    root_dir = function(fname)
+      return util.root_pattern 'jsonnetfile.json'(fname) or util.find_git_ancestor(fname)
+    end,
+    on_new_config = function(new_config, root_dir)
       new_config.cmd_env = {
-        JSONNET_PATH = jsonnet_path(get_root_dir(file_dir))
+        JSONNET_PATH = jsonnet_path(root_dir)
       }
     end
   },
