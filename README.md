@@ -2,7 +2,8 @@
 
 A [collection of common configurations](doc/server_configurations.md) for Neovim's built-in [language server client](https://neovim.io/doc/user/lsp.html).
 
-This plugin allows for declaratively configuring, launching, and initializing language servers you have installed on your system. Language server configurations are community-maintained.
+This plugin allows for declaratively configuring, launching, and initializing language servers you have installed on your system. 
+** Disclaimer: Language server configurations are provided on a best-effort basis and are community-maintained. See (#contributions).**
 
 `lspconfig` has extensive help documentation, see `:help lspconfig`.
 
@@ -208,3 +209,5 @@ a new configuration for it would be appreciated. You can follow these steps:
       [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/texlab.lua).
 
 4. Ask questions on our [Discourse](https://neovim.discourse.group/c/7-category/7) or in the [Neovim Gitter](https://gitter.im/neovim/neovim).
+
+You can also help out by testing [PRs with the `needs-testing`](https://github.com/neovim/nvim-lspconfig/issues?q=is%3Apr+is%3Aopen+label%3Aneeds-testing) label) that affect language servers you use regularly.
