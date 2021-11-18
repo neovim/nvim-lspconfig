@@ -3088,6 +3088,11 @@ require'lspconfig'.jsonnet_ls.setup{}
   Default Values:
     cmd = { "jsonnet-language-server" }
     filetypes = { "jsonnet", "libsonnet" }
+    on_new_config = function(new_config, root_dir)
+          new_config.cmd_env = {
+            JSONNET_PATH = jsonnet_path(root_dir),
+          }
+        end,
     root_dir = root_pattern("jsonnetfile.json")
 ```
 
