@@ -19,9 +19,9 @@ configs.jsonnet_ls = {
     end,
     on_new_config = function(new_config, root_dir)
       new_config.cmd_env = {
-        JSONNET_PATH = jsonnet_path(root_dir)
+        JSONNET_PATH = jsonnet_path(root_dir),
       }
-    end
+    end,
   },
   docs = {
     description = [[
