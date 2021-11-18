@@ -116,7 +116,7 @@ configs[server_name] = {
       'typescriptreact',
       'typescript.tsx',
     },
-    root_dir = util.root_pattern('deno.json', 'deno.jsonc', 'package.json', 'tsconfig.json', '.git'),
+    root_dir = util.root_pattern('deno.json', 'deno.jsonc', 'tsconfig.json', '.git'),
     init_options = {
       enable = true,
       lint = false,
@@ -162,7 +162,7 @@ vim.g.markdown_fenced_languages = {
 
 ]],
     default_config = {
-      root_dir = [[root_pattern("deno.json", "deno.jsonc", "package.json", "tsconfig.json", ".git")]],
+      root_dir = [[root_pattern("deno.json", "deno.jsonc", "tsconfig.json", ".git")]],
     },
   },
 }
