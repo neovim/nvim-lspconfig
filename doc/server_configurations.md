@@ -824,7 +824,7 @@ require'lspconfig'.denols.setup{}
       lint = false,
       unstable = false
     }
-    root_dir = root_pattern("deno.json", "deno.jsonc", "package.json", "tsconfig.json", ".git")
+    root_dir = root_pattern("deno.json", "deno.jsonc", "tsconfig.json", ".git")
 ```
 
 
@@ -6743,6 +6743,22 @@ require'lspconfig'.sumneko_lua.setup {
 
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
+
+- **`Lua.IntelliSense.traceBeSetted`**: `boolean`
+
+  null
+
+- **`Lua.IntelliSense.traceFieldInject`**: `boolean`
+
+  null
+
+- **`Lua.IntelliSense.traceLocalSet`**: `boolean`
+
+  null
+
+- **`Lua.IntelliSense.traceReturn`**: `boolean`
+
+  null
 
 - **`Lua.color.mode`**: `enum { "Grammar", "Semantic", "SemanticEnhanced" }`
 
