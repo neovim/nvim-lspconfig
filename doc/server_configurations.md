@@ -7401,7 +7401,9 @@ require'lspconfig'.texlab.setup{}
   Default Values:
     cmd = { "texlab" }
     filetypes = { "tex", "bib" }
-    root_dir = vim's starting directory
+    root_dir = function(fname)
+          return util.root_pattern '.latexmkrc'(fname) or util.find_git_ancestor(fname)
+        end,
     settings = {
       texlab = {
         auxDirectory = ".",
