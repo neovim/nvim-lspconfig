@@ -13,7 +13,6 @@ end
 configs.jsonnet_ls = {
   default_config = {
     cmd = { 'jsonnet-language-server' },
-    cmd_env = { JSONNET_PATH = vim.fn.getcwd() }, -- will be overwritten by `on_new_config`
     filetypes = { 'jsonnet', 'libsonnet' },
     root_dir = function(fname)
       return util.root_pattern 'jsonnetfile.json'(fname) or util.find_git_ancestor(fname)
