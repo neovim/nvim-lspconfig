@@ -3381,12 +3381,9 @@ require'lspconfig'.julials.setup{}
     on_new_config = function(new_config, root_dir)
           new_config.cmd_cwd = root_dir
         end,
-    root_dir = function(path)
-        if M.path.is_dir(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
+    root_dir = function(fname)
+          return util.root_pattern 'Project.toml'(fname) or util.find_git_ancestor(fname)
+        end,
     single_file_support = true
 ```
 
