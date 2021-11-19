@@ -51,7 +51,8 @@ configs.julials = {
     root_dir = function(fname)
       return util.root_pattern 'Project.toml'(fname) or util.find_git_ancestor(fname)
     end,
-    single_file_support = true,
+    -- LanguageServer.jl crashes when sending a null root directory
+    single_file_support = false,
   },
   docs = {
     package_json = 'https://raw.githubusercontent.com/julia-vscode/julia-vscode/master/package.json',
