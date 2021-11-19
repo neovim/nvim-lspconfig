@@ -18,4 +18,3 @@ Clojure Language Server
     },
   },
 }
-"
