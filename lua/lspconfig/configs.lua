@@ -184,6 +184,10 @@ function configs.__newindex(t, config_name, config_def)
       end)
 
       new_config.root_dir = _root_dir
+      new_config.workspace_folders =  {{
+        uri = vim.uri_from_fname(_root_dir);
+        name = string.format("%s", _root_dir);
+      }}
       return new_config
     end
 

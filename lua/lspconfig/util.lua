@@ -282,6 +282,7 @@ function M.server_per_root_dir_manager(_make_config)
       -- root directory.
       if single_file_mode then
         new_config.root_dir = nil
+        new_config.workspace_folders = nil
       end
       client_id = lsp.start_client(new_config)
       if single_file_mode then
