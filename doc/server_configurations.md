@@ -1324,7 +1324,8 @@ require'lspconfig'.esbonio.setup{}
     cmd = { "python3", "-m", "esbonio" }
     filetypes = { "rst" }
     root_dir = function(path)
-        if M.path.is_dir(M.path.join(path, '.git')) then
+        -- Support git directories and git files (worktrees)
+        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
           return path
         end
       end)
@@ -3134,6 +3135,12 @@ This server accepts configuration via the `settings` key.
   
   Additional Julia arguments\.
 
+- **`julia.cellDelimiters`**: `array`
+
+  Default: `{ "^##(?!#)", "^#(\\s?)%%", "^#-" }`
+  
+  Cell delimiter regular expressions for Julia files\.
+
 - **`julia.completionmode`**: `enum { "exportedonly", "import", "qualify" }`
 
   Default: `"qualify"`
@@ -3422,7 +3429,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `250`
   
-  \[DEPRECATED\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possibile stability issues\.
+  \[DEPRECATED\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possible stability issues\.
 
 - **`kotlin.debugAdapter.enabled`**: `boolean`
 
@@ -3466,7 +3473,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `5005`
   
-  \[DEBUG\] If transport is stdio this enables you to attach to the running langugage server with a debugger\. This is ONLY useful if you need to debug the language server ITSELF\.
+  \[DEBUG\] If transport is stdio this enables you to attach to the running language server with a debugger\. This is ONLY useful if you need to debug the language server ITSELF\.
 
 - **`kotlin.languageServer.enabled`**: `boolean`
 
@@ -3496,7 +3503,7 @@ This server accepts configuration via the `settings` key.
 
   Default: `250`
   
-  \[DEBUG\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possibile stability issues\.
+  \[DEBUG\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possible stability issues\.
 
 - **`kotlin.snippetsEnabled`**: `boolean`
 
@@ -3633,7 +3640,8 @@ require'lspconfig'.lelwel_ls.setup{}
     cmd = { "lelwel-ls" }
     filetypes = { "llw" }
     root_dir = function(path)
-        if M.path.is_dir(M.path.join(path, '.git')) then
+        -- Support git directories and git files (worktrees)
+        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
           return path
         end
       end)
@@ -3916,7 +3924,8 @@ require'lspconfig'.ltex.setup{}
           end
         end,
     root_dir = function(path)
-        if M.path.is_dir(M.path.join(path, '.git')) then
+        -- Support git directories and git files (worktrees)
+        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
           return path
         end
       end)
@@ -4043,7 +4052,8 @@ require'lspconfig'.nickel_ls.setup{}
     cmd = { "nls" }
     filetypes = { "ncl", "nickel" }
     root_dir = function(path)
-        if M.path.is_dir(M.path.join(path, '.git')) then
+        -- Support git directories and git files (worktrees)
+        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
           return path
         end
       end)
@@ -4306,7 +4316,8 @@ require'lspconfig'.pasls.setup{}
     cmd = { "pasls" }
     filetypes = { "pascal" }
     root_dir = function(path)
-        if M.path.is_dir(M.path.join(path, '.git')) then
+        -- Support git directories and git files (worktrees)
+        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
           return path
         end
       end)
