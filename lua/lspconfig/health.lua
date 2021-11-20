@@ -2,6 +2,9 @@ local M = {}
 function M.check()
   local configs = require 'lspconfig/configs'
 
+  if configs == nil or not next(configs) then
+    vim.fn['health#report_warn'] [[Can't find any config.]]
+  end
   for _, top_level_config in pairs(configs) do
     -- Only check configs that have a make_config function.
     if not (top_level_config.make_config == nil) then
