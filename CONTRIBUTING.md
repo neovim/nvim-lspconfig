@@ -13,6 +13,8 @@ The point of lspconfig is to provide the minimal configuration necessary for a s
 
 The general form of adding a new language server is to start with a minimal skeleton. This includes populated the `config` table with a `default_config` and `docs` table.
 
+When choosing a server name, convert all dashes (`-`) to underscores (`_`) If the name of the server is a unique name (`pyright`, `clangd`) or a commonly used abbreviation (`zls`), prefer this as the server name. If the server instead follows the pattern x-language-server, prefer the convention `x_ls` (`jsonnet_ls`). 
+
 `default_config` should include, at minimum the following:
 * `cmd`: a list which includes the executable name as the first entry, with arguments constituting subsequent list elements (`--stdio` is common)
 * `filetypes`: a list for filetypes a 
