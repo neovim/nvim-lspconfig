@@ -530,7 +530,7 @@ require'lspconfig'.clojure_lsp.setup{}
   Default Values:
     cmd = { "clojure-lsp" }
     filetypes = { "clojure", "edn" }
-    root_dir = root_pattern("project.clj", "deps.edn", "build.boot", ".git")
+    root_dir = root_pattern("project.clj", "deps.edn", "build.boot", "shadow-cljs.edn", ".git")
 ```
 
 
