@@ -96,6 +96,7 @@ that config.
 - [solargraph](#solargraph)
 - [sorbet](#sorbet)
 - [sourcekit](#sourcekit)
+- [spectral_ls](#spectral_ls)
 - [sqlls](#sqlls)
 - [sqls](#sqls)
 - [stylelint_lsp](#stylelint_lsp)
@@ -4988,7 +4989,7 @@ This server accepts configuration via the `settings` key.
 
 - **`purescript.fullBuildOnSave`**: `boolean`
 
-  Whether to perform a full build on save with the configured build command \(rather than IDE server fast rebuild\)\. This is not generally recommended because it is slow\, but it does mean that dependant modules are rebuilt as necessary\.
+  Whether to perform a full build on save with the configured build command \(rather than IDE server fast rebuild\)\. This is not generally recommended because it is slow\, but it does mean that dependent modules are rebuilt as necessary\.
 
 - **`purescript.importsPreferredModules`**: `array`
 
@@ -6518,6 +6519,83 @@ require'lspconfig'.sourcekit.setup{}
     cmd = { "sourcekit-lsp" }
     filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" }
     root_dir = root_pattern("Package.swift", ".git")
+```
+
+
+## spectral_ls
+
+https://github.com/luizcorreia/spectral-language-server
+ `A flexible JSON/YAML linter for creating automated style guides, with baked in support for OpenAPI v2 & v3.`
+
+`spectral-language-server` can be installed via `npm`:
+```sh
+npm i -g spectral-language-server
+```
+See [vscode-spectral](https://github.com/stoplightio/vscode-spectral#extension-settings) for configuration options.
+
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`spectral.enable`**: `boolean`
+
+  Default: `true`
+  
+  Controls whether or not Spectral is enabled\.
+
+- **`spectral.rulesetFile`**: `string`
+
+  Location of the ruleset file to use when validating\. If omitted\, the default is a \.spectral\.yml\/\.spectral\.json in the same folder as the document being validated\. Paths are relative to the workspace\.
+
+- **`spectral.run`**: `enum { "onSave", "onType" }`
+
+  Default: `"onType"`
+  
+  Run the linter on save \(onSave\) or as you type \(onType\)\.
+
+- **`spectral.trace.server`**: `enum { "off", "messages", "verbose" }`
+
+  Default: `"off"`
+  
+  Traces the communication between VS Code and the language server\.
+
+- **`spectral.validateFiles`**: `array`
+
+  Array items: `{type = "string"}`
+  
+  An array of file globs \(e\.g\.\, \`\*\*\/\*\.yaml\`\) in minimatch glob format which should be validated by Spectral\. If language identifiers are also specified\, the file must match both in order to be validated\.
+
+- **`spectral.validateLanguages`**: `array`
+
+  Default: `{ "json", "yaml" }`
+  
+  Array items: `{type = "string"}`
+  
+  An array of language IDs which should be validated by Spectral\. If file globs are also specified\, the file must match both in order to be validated\.
+
+</details>
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.spectral_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "spectral-language-server", "--stdio" }
+    filetypes = { "yaml", "json", "yml" }
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
+    settings = {
+      enable = true,
+      run = "onType",
+      validateLanguages = { "yaml", "json", "yml" }
+    }
+    single_file_support = true
 ```
 
 
