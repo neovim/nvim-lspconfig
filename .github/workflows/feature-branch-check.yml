@@ -1,4 +1,4 @@
-name: Close Master PR
+name: Close Non-Feature Branches
 
 on:
   pull_request_target:
