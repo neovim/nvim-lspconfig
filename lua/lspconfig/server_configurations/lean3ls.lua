@@ -4,6 +4,7 @@ return {
   default_config = {
     cmd = { 'lean-language-server', '--stdio', '--', '-M', '4096', '-T', '100000' },
     filetypes = { 'lean3' },
+    offset_encoding = "utf-32",
     root_dir = function(fname)
       -- check if inside elan stdlib
       local stdlib_dir
