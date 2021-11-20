@@ -1,7 +1,7 @@
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
-local server_name = 'spectral'
+local server_name = 'spectral_ls'
 local bin_name = 'spectral-language-server'
 
 configs[server_name] = {
