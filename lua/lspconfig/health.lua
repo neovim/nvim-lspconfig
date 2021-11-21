@@ -2,7 +2,7 @@ local M = {}
 function M.check()
   local configs = require 'lspconfig/configs'
 
-  if not configs or #configs == 0 then
+  if not configs or vim.tbl_count(configs) == 0 then
     vim.fn['health#report_warn'] [[Can't find any config.]]
   end
   for _, top_level_config in pairs(configs) do
