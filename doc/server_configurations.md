@@ -5606,6 +5606,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.cache.warmup`**: `boolean`
+
+  Default: `true`
+  
+  null
+
 - **`rust-analyzer.callInfo.full`**: `boolean`
 
   Default: `true`
