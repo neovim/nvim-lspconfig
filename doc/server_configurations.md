@@ -3568,11 +3568,6 @@ require'lspconfig'.lean3ls.setup{}
   Default Values:
     cmd = { "lean-language-server", "--stdio", "--", "-M", "4096", "-T", "100000" }
     filetypes = { "lean3" }
-    on_new_config = function(config, root)
-          if not config.cmd_cwd then
-            config.cmd_cwd = root
-          end
-        end,
     root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
     single_file_support = true
 ```
@@ -3606,11 +3601,6 @@ require'lspconfig'.leanls.setup{}
   Default Values:
     cmd = { "lean", "--server" }
     filetypes = { "lean" }
-    on_new_config = function(config, root)
-          if not config.cmd_cwd then
-            config.cmd_cwd = root
-          end
-        end,
     root_dir = root_pattern("lakefile.lean", "lean-toolchain", "leanpkg.toml", ".git")
     single_file_support = true
 ```
@@ -4179,7 +4169,7 @@ https://github.com/ocaml-lsp/ocaml-language-server
 
 `ocaml-language-server` can be installed via `npm`
 ```sh
-npm install -g ocaml-langauge-server
+npm install -g ocaml-language-server
 ```
     
 
