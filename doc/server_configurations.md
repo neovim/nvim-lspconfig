@@ -2679,6 +2679,10 @@ This server accepts configuration via the `settings` key.
   
   Configure glob patterns for excluding folders\. Use \`\!\` to negate patterns to allow subfolders imports\. You have to include a parent directory\. The order is important\.
 
+- **`java.import.generatesMetadataFilesAtProjectRoot`**: `boolean`
+
+  null
+
 - **`java.import.gradle.arguments`**: `string`
 
   Default: `vim.NIL`
