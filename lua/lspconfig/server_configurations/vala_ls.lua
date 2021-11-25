@@ -1,4 +1,4 @@
-local util = require 'lspconfig/util'
+local util = require 'lspconfig.util'
 
 local meson_matcher = function(path)
   local pattern = 'meson.build'

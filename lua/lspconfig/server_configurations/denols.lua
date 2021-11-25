@@ -1,4 +1,4 @@
-local util = require 'lspconfig/util'
+local util = require 'lspconfig.util'
 local lsp = vim.lsp
 
 local function deno_uri_to_uri(uri)

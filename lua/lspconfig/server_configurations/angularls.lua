@@ -1,4 +1,4 @@
-local util = require 'lspconfig/util'
+local util = require 'lspconfig.util'
 
 -- Angular requires a node_modules directory to probe for @angular/language-service and typescript
 -- in order to use your projects configured versions.

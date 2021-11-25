@@ -1,9 +1,9 @@
-local lspconfig = require 'lspconfig'
+local util = require 'lspconfig.util'
 
 return {
   default_config = {
     filetypes = { 'java' },
-    root_dir = lspconfig.util.root_pattern('build.gradle', 'pom.xml', '.git'),
+    root_dir = util.root_pattern('build.gradle', 'pom.xml', '.git'),
     settings = {},
   },
   docs = {

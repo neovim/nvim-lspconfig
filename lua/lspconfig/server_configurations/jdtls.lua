@@ -1,4 +1,4 @@
-local util = require 'lspconfig/util'
+local util = require 'lspconfig.util'
 local handlers = require 'vim.lsp.handlers'
 
 local sysname = vim.loop.os_uname().sysname

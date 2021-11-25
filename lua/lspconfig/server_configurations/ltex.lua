@@ -1,4 +1,4 @@
-local util = require 'lspconfig/util'
+local util = require 'lspconfig.util'
 
 local language_id_mapping = {
   bib = 'bibtex',

@@ -1,4 +1,4 @@
-local util = require 'lspconfig/util'
+local util = require 'lspconfig.util'
 
 local function get_typescript_server_path(root_dir)
   local project_root = util.find_node_modules_ancestor(root_dir)
@@ -105,7 +105,7 @@ require'lspconfig'.volar.setup{
 - use a global TypeScript Server installation if a local server is not found
 
 ```lua
-local util = require 'lspconfig/util'
+local util = require 'lspconfig.util'
 
 local function get_typescript_server_path(root_dir)
   local project_root = util.find_node_modules_ancestor(root_dir)

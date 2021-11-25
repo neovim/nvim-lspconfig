@@ -1,4 +1,4 @@
-local util = require 'lspconfig/util'
+local util = require 'lspconfig.util'
 
 if vim.fn.has 'nvim-0.5.1' == 0 then
   vim.notify('The VDMJ language server requires nvim > 0.5', vim.log.levels.ERROR)

@@ -1,4 +1,4 @@
-local util = require 'lspconfig/util'
+local util = require 'lspconfig.util'
 
 -- common jsonnet library paths
 local function jsonnet_path(root_dir)

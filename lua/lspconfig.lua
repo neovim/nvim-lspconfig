@@ -1,7 +1,7 @@
-local configs = require 'lspconfig/configs'
+local configs = require 'lspconfig.configs'
 
 local M = {
-  util = require 'lspconfig/util',
+  util = require 'lspconfig.util',
 }
 
 M._root = {}
@@ -16,7 +16,7 @@ function M._root._setup()
   M._root.commands = {
     LspInfo = {
       function()
-        require 'lspconfig/ui/lspinfo'()
+        require 'lspconfig.ui.lspinfo'()
       end,
       '-nargs=0',
       description = '`:LspInfo` Displays attached, active, and configured language servers',

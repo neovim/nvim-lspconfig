@@ -1,6 +1,6 @@
 local M = {}
 function M.check()
-  local configs = require 'lspconfig/configs'
+  local configs = require 'lspconfig.configs'
 
   if not configs or vim.tbl_count(configs) == 0 then
     vim.fn['health#report_warn'] [[Can't find any config.]]

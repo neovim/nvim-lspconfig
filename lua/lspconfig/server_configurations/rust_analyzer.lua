@@ -1,4 +1,4 @@
-local util = require 'lspconfig/util'
+local util = require 'lspconfig.util'
 
 local function reload_workspace(bufnr)
   bufnr = util.validate_bufnr(bufnr)

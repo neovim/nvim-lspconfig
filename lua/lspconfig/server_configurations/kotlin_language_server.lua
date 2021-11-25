@@ -1,4 +1,4 @@
-local util = require 'lspconfig/util'
+local util = require 'lspconfig.util'
 
 local bin_name = 'kotlin-language-server'
 if vim.fn.has 'win32' == 1 then

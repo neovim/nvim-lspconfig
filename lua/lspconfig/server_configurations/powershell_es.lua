@@ -1,4 +1,4 @@
-local util = require 'lspconfig/util'
+local util = require 'lspconfig.util'
 
 local temp_path = vim.fn.stdpath 'cache'
 
