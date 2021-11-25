@@ -199,11 +199,11 @@ function configs.__newindex(t, config_name, config_def)
     end)
 
     function manager.try_add(bufnr)
+      bufnr = bufnr or api.nvim_get_current_buf()
+
       if config.pre_attach and not config.pre_attach(bufnr) then
         return
       end
-
-      bufnr = bufnr or api.nvim_get_current_buf()
 
       if vim.api.nvim_buf_get_option(bufnr, 'buftype') == 'nofile' then
         return
