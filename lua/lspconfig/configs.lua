@@ -10,6 +10,7 @@ function configs.__newindex(t, config_name, config_def)
     default_config = { config_def.default_config, 't' },
     on_new_config = { config_def.on_new_config, 'f', true },
     on_attach = { config_def.on_attach, 'f', true },
+    pre_attach = { config_def.pre_attach, 'f', true },
     commands = { config_def.commands, 't', true },
   }
   if config_def.commands then
@@ -198,6 +199,10 @@ function configs.__newindex(t, config_name, config_def)
     end)
 
     function manager.try_add(bufnr)
+      if config.pre_attach and not config.pre_attach(bufnr) then
+        return
+      end
+
       bufnr = bufnr or api.nvim_get_current_buf()
 
       if vim.api.nvim_buf_get_option(bufnr, 'buftype') == 'nofile' then
