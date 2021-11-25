@@ -84,9 +84,9 @@ require'lspconfig'.{{template_name}}.setup{}
 
 local function require_all_configs()
   -- Configs are lazy-loaded, tickle them to populate the `configs` singleton.
-  for _, v in ipairs(vim.fn.glob('lua/lspconfig/*.lua', 1, 1)) do
+  for _, v in ipairs(vim.fn.glob('lua/lspconfig/server_configurations/*.lua', 1, 1)) do
     local module_name = v:gsub('.*/', ''):gsub('%.lua$', '')
-    require('lspconfig/' .. module_name)
+    require('lspconfig/server_configurations/' .. module_name)
   end
 end
 
