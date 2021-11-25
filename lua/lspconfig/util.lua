@@ -271,8 +271,10 @@ function M.server_per_root_dir_manager(_make_config)
         single_file_clients[root_dir] = nil
       end)
 
-      -- Launch the server in the root directory used internally by lspconfig, if applicable
-      new_config.cwd = root_dir
+      -- Launch the server in the root directory used internally by lspconfig, if otherwise unset
+      if not new_config.cmd_cwd then
+        new_config.cmd_cwd = root_dir
+      end
 
       -- Sending rootDirectory and workspaceFolders as null is not explicitly
       -- codified in the spec. Certain servers crash if initialized with a NULL
