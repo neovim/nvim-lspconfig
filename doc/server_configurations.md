@@ -374,7 +374,14 @@ Bicep language server can be installed by downloading and extracting a release o
 
 Bicep language server requires the [dotnet-sdk](https://dotnet.microsoft.com/download) to be installed.
 
-**By default, bicep language server doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of the unzipped run script or binary.
+Neovim does not have built-in support for the bicep filetype which is required for lspconfig to automatically launch the language server.
+
+Filetype detection can be added via an autocmd:
+```lua
+vim.cmd [[ autocmd BufNewFile,BufRead *.bicep set filetype=bicep ]]
+```
+
+**By default, bicep language server does not have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of the unzipped run script or binary.
 
 ```lua
 local bicep_lsp_bin = "/path/to/bicep-langserver/Bicep.LangServer.dll"
