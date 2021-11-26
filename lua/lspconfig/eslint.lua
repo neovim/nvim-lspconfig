@@ -20,13 +20,13 @@ local function fix_all(opts)
   end
 
   local request
-  if opts.sync or false then
+  if opts.sync then
     request = function(bufnr, method, params)
-      eslint_lsp_client.request(method, params, nil, bufnr)
+      eslint_lsp_client.request_sync(method, params, nil, bufnr)
     end
   else
     request = function(bufnr, method, params)
-      eslint_lsp_client.request_sync(method, params, nil, bufnr)
+      eslint_lsp_client.request(method, params, nil, bufnr)
     end
   end
 
