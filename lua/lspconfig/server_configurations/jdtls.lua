@@ -132,7 +132,7 @@ return {
         end
       end
     end,
-    single_file_mode = true,
+    single_file_support = true,
     init_options = {
       workspace = get_workspace_dir(),
       jvm_args = {},
