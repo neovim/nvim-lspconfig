@@ -386,7 +386,7 @@ function M.get_active_clients_list_by_ft(filetype)
 end
 
 function M.get_other_matching_providers(filetype)
-  local configs = require 'lspconfig/configs'
+  local configs = require 'lspconfig.configs'
   local active_clients_list = M.get_active_clients_list_by_ft(filetype)
   local other_matching_configs = {}
   for _, config in pairs(configs) do

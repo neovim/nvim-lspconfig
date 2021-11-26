@@ -1,6 +1,6 @@
-local configs = require 'lspconfig/configs'
-local windows = require 'lspconfig/ui/windows'
-local util = require 'lspconfig/util'
+local configs = require 'lspconfig.configs'
+local windows = require 'lspconfig.ui.windows'
+local util = require 'lspconfig.util'
 
 local error_messages = {
   cmd_not_found = 'Unable to find executable. Please check your path and ensure the server is installed',
