@@ -236,9 +236,9 @@ function M.server_per_root_dir_manager(_make_config)
   local single_file_clients = {}
   local manager = {}
 
-  function manager.add(root_dir, single_file_mode)
+  function manager.add(root_dir, single_file_support)
     local client_id
-    if single_file_mode then
+    if single_file_support then
       client_id = single_file_clients[root_dir]
     else
       if not root_dir then
@@ -280,7 +280,7 @@ function M.server_per_root_dir_manager(_make_config)
       -- Sending rootDirectory and workspaceFolders as null is not explicitly
       -- codified in the spec. Certain servers crash if initialized with a NULL
       -- root directory.
-      if single_file_mode then
+      if single_file_support then
         new_config.root_dir = nil
         new_config.workspace_folders = nil
       end
@@ -291,7 +291,7 @@ function M.server_per_root_dir_manager(_make_config)
         return
       end
 
-      if single_file_mode then
+      if single_file_support then
         single_file_clients[root_dir] = client_id
       else
         clients[root_dir] = client_id
