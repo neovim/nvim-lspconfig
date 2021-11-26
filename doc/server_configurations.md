@@ -2953,7 +2953,7 @@ require'lspconfig'.jdtls.setup{}
             -- Multi-module projects
             { 'build.gradle', 'build.gradle.kts' },
           } or vim.fn.getcwd()
-    single_file_mode = true
+    single_file_support = true
 ```
 
 
@@ -4469,7 +4469,7 @@ require'lspconfig'.perlls.setup{}
         perlInc = " "
       }
     }
-    single_file_mode = true
+    single_file_support = true
 ```
 
 
@@ -4651,7 +4651,7 @@ require'lspconfig'.powershell_es.setup{}
         end,
     root_dir = git root or current directory
     shell = "pwsh"
-    single_file_mode = true
+    single_file_support = true
 ```
 
 
