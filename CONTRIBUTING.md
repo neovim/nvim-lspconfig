@@ -29,8 +29,8 @@ A minimal example for adding a new language server is shown below for `pyright`,
 
 ```lua
 -- Only `configs` must be required, util is optional if you are using the root resolver functions, which is usually the case.
-local configs = require 'lspconfig/configs'
-local util = require 'lspconfig/util'
+local configs = require 'lspconfig.configs'
+local util = require 'lspconfig.util'
 
 -- Having server name defined here is the convention, this is often times also the first entry in the `cmd` table.
 local server_name = 'pyright'
