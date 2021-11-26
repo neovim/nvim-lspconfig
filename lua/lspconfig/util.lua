@@ -272,7 +272,8 @@ function M.server_per_root_dir_manager(_make_config)
       end)
 
       -- Launch the server in the root directory used internally by lspconfig, if otherwise unset
-      if not new_config.cmd_cwd then
+      -- also check that the path exist
+      if not new_config.cmd_cwd and uv.fs_realpath(root_dir) then
         new_config.cmd_cwd = root_dir
       end
 
