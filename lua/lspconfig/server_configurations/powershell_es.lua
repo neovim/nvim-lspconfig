@@ -23,7 +23,7 @@ return {
 
     filetypes = { 'ps1' },
     root_dir = util.find_git_ancestor,
-    single_file_mode = true,
+    single_file_support = true,
   },
   docs = {
     description = [[

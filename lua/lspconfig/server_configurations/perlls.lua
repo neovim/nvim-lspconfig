@@ -22,7 +22,7 @@ return {
     },
     filetypes = { 'perl' },
     root_dir = util.find_git_ancestor,
-    single_file_mode = true,
+    single_file_support = true,
   },
   docs = {
     package_json = 'https://raw.githubusercontent.com/richterger/Perl-LanguageServer/master/clients/vscode/perl/package.json',

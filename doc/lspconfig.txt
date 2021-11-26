@@ -138,7 +138,7 @@ listed in `:help vim.lsp.start_client()` with the following unique entries:
     created. If `false`, allows for deferring language servers until manually
     launched with `:LspStart` (|lspconfig-commands|).
 
-- {single_file_mode}
+- {single_file_support}
 
     `bool` (default: nil)
 
