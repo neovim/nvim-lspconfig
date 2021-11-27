@@ -72,7 +72,7 @@ QUICKSTART                                                *lspconfig-quickstart*
 >
     require'lspconfig'.clangd.setup{}
 <
-- create a new project, ensure it contains a root marker which matches the
+- create a new project, ensure that it contains a root marker which matches the
   server requirements specified in |lspconfig-server-configurations|.
 
 - open a file within that project, such as `main.c`.
