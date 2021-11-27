@@ -41,7 +41,7 @@ These features are not implemented in this repo, but in Neovim core. See `:help 
     npm i -g pyright
     ```
 
-2. Add the language server setup to your init.vim. The server name must match those found in the table of contents in [server_configurations.md](doc/server_configurations.md) accessible via `:help lspconfig-server-configurations`
+2. Add the language server setup to your init.vim. The server name must match those found in the table of contents in [server_configurations.md](doc/server_configurations.md). This list is also accessible via `:help lspconfig-server-configurations`.
 
     ```lua
     lua << EOF
