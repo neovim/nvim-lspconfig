@@ -279,8 +279,8 @@ The global defaults for all servers can be overridden by extending the
 ==============================================================================
 SERVER CONFIGURATIONS                                 *lspconfig-configurations*
 
-See |lspconfig-server-configurations| for the complete list of language
-servers configurations.
+See |lspconfig-server-configurations| by typing `K` over it for the complete
+list of language servers configurations.
 
 While the `setup {}` function is the primary interface to `lspconfig`, for
 servers for which there is not a configuration, it is necessary to define a
