@@ -82,7 +82,7 @@ require'lspconfig'.rust_analyzer.setup{}
 EOF
 ```
 
-For a full list of servers, see [server_configurations.md](doc/server_configurations.md) accessible via `:help lspconfig-server-configurations`. This document contains installation instructions and additional, optional customization suggestions for each language server. For some servers that are not on your system path (jdtls, elixirls) you will be required to manually add `cmd` as an entry in the table passed to setup. Most language servers can be installed in less than a minute.
+For a full list of servers, see [server_configurations.md](doc/server_configurations.md) or `:help lspconfig-server-configurations`. This document contains installation instructions and additional, optional, customization suggestions for each language server. For some servers that are not on your system path (e.g., `jdtls`, `elixirls`), you will be required to manually add `cmd` as an entry in the table passed to `setup`. Most language servers can be installed in less than a minute.
 
 ## Keybindings and completion
 
