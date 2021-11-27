@@ -43,7 +43,7 @@ return {
         cargo_workspace_dir = vim.fn.json_decode(cargo_metadata)['workspace_root']
       else
         vim.notify(
-          string.format('lspconfig: cmd [%q] failed:\n%s', table.concat(cmd, ' '), cargo_metadata_err),
+          string.format('[lspconfig] cmd (%q) failed:\n%s', table.concat(cmd, ' '), cargo_metadata_err),
           vim.log.levels.WARN
         )
       end

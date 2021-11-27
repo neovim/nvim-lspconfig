@@ -105,7 +105,7 @@ function configs.__newindex(t, config_name, config_def)
         M.manager.add(pseudo_root, true)
       else
         vim.notify(
-          string.format('lspconfig: Autostart for %s failed: matching root directory not detected.', config_name)
+          string.format('[lspconfig] Autostart for %s failed: matching root directory not detected.', config_name)
         )
       end
     end

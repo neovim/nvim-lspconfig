@@ -76,7 +76,7 @@ function mt:__index(k)
     else
       vim.notify(
         string.format(
-          'lspconfig: Cannot access configuration for %s. Ensure this server is listed in '
+          '[lspconfig] Cannot access configuration for %s. Ensure this server is listed in '
             .. '`server_configurations.md` or added as a custom server.',
           k
         ),

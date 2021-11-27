@@ -260,7 +260,7 @@ function M.server_per_root_dir_manager(_make_config)
       if not new_config.cmd then
         vim.notify(
           string.format(
-            'lspconfig: cmd not defined for %q. Manually set cmd in the setup {} call according to server_configurations.md, see :help lspconfig-index.',
+            '[lspconfig] cmd not defined for %q. Manually set cmd in the setup {} call according to server_configurations.md, see :help lspconfig-index.',
             new_config.name
           ),
           vim.log.levels.ERROR
