@@ -285,15 +285,15 @@ local function generate_helptags()
   edit doc/tags
   set noswapfile
   set noreadonly
-  silent /lspconfig-servers/
-  call setline('.', "lspconfig-servers	server_configurations.md	/# Configurations")
+  silent /lspconfig-server-configurations/
+  call setline('.', "lspconfig-server-configurations	server_configurations.md	/# Configurations")
   silent write
   ]]
   print 'Added doc/server_configurations.md to helptags'
 
   vim.cmd [[
   edit doc/server_configurations.md
-  call append('$', ["", "vim:ft=markdown"])
+  call append('$', "vim:ft=markdown")
   silent write
   ]]
   print 'Added modeline to doc/server_configurations.md'
