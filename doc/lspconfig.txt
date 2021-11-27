@@ -77,8 +77,8 @@ QUICKSTART                                                *lspconfig-quickstart*
 
 - open a file within that project, such as `main.c`.
 
-- If you need more information about a server configuration read it's entry in
-  |lspconfig-server-configurations|
+- If you need more information about a server configuration, read the corresponding
+  entry in |lspconfig-server-configurations|.
 
 ==============================================================================
 THE SETUP METAMETHOD                                           *lspconfig-setup*
