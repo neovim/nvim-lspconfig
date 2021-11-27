@@ -38,8 +38,7 @@ primary functionalities:
 `lspconfig` is not required to use the built-in client, it is only one front-end
 interface for when a language server specific plugin is not available.
 
-See |lspconfig-server-configurations| for the reference to the complete list
-of language servers.
+See |lspconfig-server-configurations| for the complete list of language servers.
 
 ==============================================================================
 LSP OVERVIEW                                                     *lspconfig-lsp*
