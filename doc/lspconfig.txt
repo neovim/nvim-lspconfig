@@ -576,7 +576,7 @@ The first step in debugging is to test with a minimal configuration (such as
 plugins or misconfiguration.
 
 Should that fail, identifying which component is the culprit is challenging.
-The following are the *only* categories of bugs that pertain to `lspconfig`.
+The following are the only categories of bugs that pertain to `lspconfig`.
 
 - The root directory inferred for your project is wrong, or it should be
   detected but is not due to a bug in the `lspconfig` path utilities.
