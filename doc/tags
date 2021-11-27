@@ -14,8 +14,8 @@ lspconfig-root-composition	lspconfig.txt	/*lspconfig-root-composition*
 lspconfig-root-detection	lspconfig.txt	/*lspconfig-root-detection*
 lspconfig-root-dir	lspconfig.txt	/*lspconfig-root-dir*
 lspconfig-scope	lspconfig.txt	/*lspconfig-scope*
-lspconfig-server-configurations	server_configurations.md	/# Configurations
 lspconfig-setup	lspconfig.txt	/*lspconfig-setup*
 lspconfig-single-file-support	lspconfig.txt	/*lspconfig-single-file-support*
 lspconfig-toc	lspconfig.txt	/*lspconfig-toc*
 lspconfig.txt	lspconfig.txt	/*lspconfig.txt*
+lspconfig-server-configurations	server_configurations.md	/# Configurations

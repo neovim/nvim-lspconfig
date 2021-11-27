@@ -285,8 +285,7 @@ local function generate_helptags()
   edit doc/tags
   set noswapfile
   set noreadonly
-  silent /lspconfig-server-configurations/
-  call setline('.', "lspconfig-server-configurations	server_configurations.md	/# Configurations")
+  call append('$', "lspconfig-server-configurations	server_configurations.md	/# Configurations")
   silent write
   ]]
   print 'Added doc/server_configurations.md to helptags'
@@ -299,9 +298,9 @@ local function generate_helptags()
   print 'Added modeline to doc/server_configurations.md'
 end
 
-require_all_configs()
-generate_readme('scripts/README_template.md', {
-  implemented_servers_list = make_implemented_servers_list(),
-  lsp_server_details = make_lsp_sections(),
-})
+-- require_all_configs()
+-- generate_readme('scripts/README_template.md', {
+--   implemented_servers_list = make_implemented_servers_list(),
+--   lsp_server_details = make_lsp_sections(),
+-- })
 generate_helptags()
