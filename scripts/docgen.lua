@@ -298,9 +298,9 @@ local function generate_helptags()
   print 'Added modeline to doc/server_configurations.md'
 end
 
--- require_all_configs()
--- generate_readme('scripts/README_template.md', {
---   implemented_servers_list = make_implemented_servers_list(),
---   lsp_server_details = make_lsp_sections(),
--- })
+require_all_configs()
+generate_readme('scripts/README_template.md', {
+  implemented_servers_list = make_implemented_servers_list(),
+  lsp_server_details = make_lsp_sections(),
+})
 generate_helptags()
