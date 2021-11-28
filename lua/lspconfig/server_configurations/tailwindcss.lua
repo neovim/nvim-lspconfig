@@ -80,7 +80,7 @@ return {
           'className',
           'classList',
           'ngClass',
-        }
+        },
       },
     },
     on_new_config = function(new_config)
