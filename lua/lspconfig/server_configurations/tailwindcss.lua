@@ -2,13 +2,6 @@ local util = require 'lspconfig.util'
 
 local bin_name = 'tailwindcss-language-server'
 
-local class_attributes = {
-  'class',
-  'className',
-  'classList',
-  'ngClass',
-}
-
 return {
   default_config = {
     cmd = { bin_name, '--stdio' },
@@ -82,7 +75,12 @@ return {
           invalidTailwindDirective = 'error',
           recommendedVariantOrder = 'warning',
         },
-        classAttributes = class_attributes
+        classAttributes = {
+          'class',
+          'className',
+          'classList',
+          'ngClass',
+        }
       },
     },
     on_new_config = function(new_config)
