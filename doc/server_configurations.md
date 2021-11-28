@@ -1424,7 +1424,7 @@ require'lspconfig'.eslint.setup{}
       useESLintClass = false,
       validate = "on",
       workingDirectory = {
-        mode = "auto"
+        mode = "location"
       }
     }
 ```
