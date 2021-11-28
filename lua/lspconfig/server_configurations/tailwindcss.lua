@@ -6,6 +6,7 @@ local class_attributes = {
   'class',
   'className',
   'classList',
+  'ngClass',
 }
 
 return {
