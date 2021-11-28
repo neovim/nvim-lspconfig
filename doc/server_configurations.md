@@ -8445,7 +8445,7 @@ require'lspconfig'.yamlls.setup{}
   
   Default Values:
     cmd = { "yaml-language-server", "--stdio" }
-    filetypes = { "yaml" }
+    filetypes = { "yaml", "yaml.docker-compose" }
     root_dir = util.find_git_ancestor
     settings = {
       redhat = {
