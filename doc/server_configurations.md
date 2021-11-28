@@ -3789,7 +3789,7 @@ This server accepts configuration via the `settings` key.
 
 - **`ltex.enabled`**
 
-  Default: `{ "bibtex", "html", "latex", "markdown", "org", "restructuredtext", "rsweave" }`
+  Default: `{ "bibtex", "context", "context.tex", "html", "latex", "markdown", "org", "restructuredtext", "rsweave" }`
   
   null
 
@@ -7298,6 +7298,7 @@ require'lspconfig'.tailwindcss.setup{}
     root_dir = root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', 'node_modules', '.git')
     settings = {
       tailwindCSS = {
+        classAttributes = { "class", "className", "classList", "ngClass" },
         lint = {
           cssConflict = "warning",
           invalidApply = "error",
