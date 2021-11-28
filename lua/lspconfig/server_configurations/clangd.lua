@@ -2,10 +2,15 @@ local util = require 'lspconfig.util'
 
 -- https://clangd.llvm.org/extensions.html#switch-between-sourceheader
 local function switch_source_header(bufnr)
+  local clangd_client = nil
+  for _, v in ipairs(vim.lsp.buf_get_clients(0)) do
+    if v.name == 'clangd' then
+      clangd_client = v
+    end
+  end
   bufnr = util.validate_bufnr(bufnr)
   local params = { uri = vim.uri_from_bufnr(bufnr) }
-  vim.lsp.buf_request(
-    bufnr,
+  clangd_client.request(
     'textDocument/switchSourceHeader',
     params,
     util.compat_handler(function(err, result)
@@ -17,7 +22,8 @@ local function switch_source_header(bufnr)
         return
       end
       vim.api.nvim_command('edit ' .. vim.uri_to_fname(result))
-    end)
+    end),
+    bufnr
   )
 end
 
