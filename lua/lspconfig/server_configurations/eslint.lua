@@ -81,10 +81,8 @@ return {
       -- nodePath configures the directory in which the eslint server should start its node_modules resolution.
       -- This path is relative to the workspace folder (root dir) of the server instance.
       nodePath = '',
-      -- Automatically determine working directory by locating .eslintrc config files.
-      --
-      -- It's recommended not to change this.
-      workingDirectory = { mode = 'auto' },
+      -- use the workspace folder location or the file location (if no workspace folder is open) as the working directory
+      workingDirectory = { mode = 'location' },
       codeAction = {
         disableRuleComment = {
           enable = true,
