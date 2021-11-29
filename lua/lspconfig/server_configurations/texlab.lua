@@ -17,7 +17,7 @@ local texlab_forward_status = vim.tbl_add_reverse_lookup {
 
 local function buf_build(bufnr)
   local texlab_client = nil
-  for _, v in ipairs(vim.lsp.buf_get_clients(0)) do
+  for _, v in ipairs(vim.lsp.buf_get_clients(bufnr)) do
     if v.name == 'texlab' then
       texlab_client = v
     end
@@ -26,22 +26,26 @@ local function buf_build(bufnr)
   local params = {
     textDocument = { uri = vim.uri_from_bufnr(bufnr) },
   }
-  texlab_client.request(
-    'textDocument/build',
-    params,
-    util.compat_handler(function(err, result)
-      if err then
-        error(tostring(err))
-      end
-      print('Build ' .. texlab_build_status[result.status])
-    end),
-    bufnr
-  )
+  if texlab_client then
+    texlab_client.request(
+      'textDocument/build',
+      params,
+      util.compat_handler(function(err, result)
+        if err then
+          error(tostring(err))
+        end
+        print('Build ' .. texlab_build_status[result.status])
+      end),
+      bufnr
+    )
+  else
+    print 'method textDocument/build is not supported by any servers active on the current buffer'
+  end
 end
 
 local function buf_search(bufnr)
   local texlab_client = nil
-  for _, v in ipairs(vim.lsp.buf_get_clients(0)) do
+  for _, v in ipairs(vim.lsp.buf_get_clients(bufnr)) do
     if v.name == 'texlab' then
       texlab_client = v
     end
@@ -51,17 +55,22 @@ local function buf_search(bufnr)
     textDocument = { uri = vim.uri_from_bufnr(bufnr) },
     position = { line = vim.fn.line '.' - 1, character = vim.fn.col '.' },
   }
-  texlab_client.request(
-    'textDocument/forwardSearch',
-    params,
-    util.compat_handler(function(err, result)
-      if err then
-        error(tostring(err))
-      end
-      print('Search ' .. texlab_forward_status[result.status])
-    end),
-    bufnr
-  )
+
+  if texlab_client then
+    texlab_client.request(
+      'textDocument/forwardSearch',
+      params,
+      util.compat_handler(function(err, result)
+        if err then
+          error(tostring(err))
+        end
+        print('Search ' .. texlab_forward_status[result.status])
+      end),
+      bufnr
+    )
+  else
+    print 'method textDocument/forwardSearch is not supported by any servers active on the current buffer'
+  end
 end
 
 -- bufnr isn't actually required here, but we need a valid buffer in order to
