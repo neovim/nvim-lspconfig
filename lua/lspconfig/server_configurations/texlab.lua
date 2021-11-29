@@ -16,8 +16,8 @@ local texlab_forward_status = vim.tbl_add_reverse_lookup {
 }
 
 local function buf_build(bufnr)
-  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   bufnr = util.validate_bufnr(bufnr)
+  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   local params = {
     textDocument = { uri = vim.uri_from_bufnr(bufnr) },
   }
@@ -39,8 +39,8 @@ local function buf_build(bufnr)
 end
 
 local function buf_search(bufnr)
-  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   bufnr = util.validate_bufnr(bufnr)
+  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   local params = {
     textDocument = { uri = vim.uri_from_bufnr(bufnr) },
     position = { line = vim.fn.line '.' - 1, character = vim.fn.col '.' },

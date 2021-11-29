@@ -418,8 +418,6 @@ function M.get_active_client_by_name(bufnr, servername)
   for _, client in ipairs(vim.lsp.buf_get_clients(bufnr)) do
     if client.name == servername then
       return client
-    else
-      return client
     end
   end
 end

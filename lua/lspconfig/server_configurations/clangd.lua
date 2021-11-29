@@ -2,8 +2,8 @@ local util = require 'lspconfig.util'
 
 -- https://clangd.llvm.org/extensions.html#switch-between-sourceheader
 local function switch_source_header(bufnr)
-  local clangd_client = util.get_active_client_by_name(bufnr, 'clangd')
   bufnr = util.validate_bufnr(bufnr)
+  local clangd_client = util.get_active_client_by_name(bufnr, 'clangd')
   local params = { uri = vim.uri_from_bufnr(bufnr) }
   if clangd_client then
     clangd_client.request(
