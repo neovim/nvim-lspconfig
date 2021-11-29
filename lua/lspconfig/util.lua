@@ -414,4 +414,14 @@ function M.get_clients_from_cmd_args(arg)
   return vim.tbl_values(result)
 end
 
+function M.get_active_client_by_name(bufnr, servername)
+  local client = nil
+  for _, v in ipairs(vim.lsp.buf_get_clients(bufnr)) do
+    if v.name == servername then
+      client = v
+    end
+  end
+  return client
+end
+
 return M
