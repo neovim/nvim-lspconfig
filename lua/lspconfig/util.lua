@@ -415,7 +415,7 @@ function M.get_clients_from_cmd_args(arg)
 end
 
 function M.get_active_client_by_name(bufnr, servername)
-  for _, client in ipairs(vim.lsp.buf_get_clients(bufnr)) do
+  for _, client in pairs(vim.lsp.buf_get_clients(bufnr)) do
     if client.name == servername then
       return client
     end
