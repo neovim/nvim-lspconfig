@@ -1,5 +1,4 @@
 local util = require 'lspconfig.util'
-local lsp = vim.lsp
 
 local texlab_build_status = vim.tbl_add_reverse_lookup {
   Success = 0,
@@ -17,39 +16,49 @@ local texlab_forward_status = vim.tbl_add_reverse_lookup {
 
 local function buf_build(bufnr)
   bufnr = util.validate_bufnr(bufnr)
+  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   local params = {
     textDocument = { uri = vim.uri_from_bufnr(bufnr) },
   }
-  lsp.buf_request(
-    bufnr,
-    'textDocument/build',
-    params,
-    util.compat_handler(function(err, result)
-      if err then
-        error(tostring(err))
-      end
-      print('Build ' .. texlab_build_status[result.status])
-    end)
-  )
+  if texlab_client then
+    texlab_client.request(
+      'textDocument/build',
+      params,
+      util.compat_handler(function(err, result)
+        if err then
+          error(tostring(err))
+        end
+        print('Build ' .. texlab_build_status[result.status])
+      end),
+      bufnr
+    )
+  else
+    print 'method textDocument/build is not supported by any servers active on the current buffer'
+  end
 end
 
 local function buf_search(bufnr)
   bufnr = util.validate_bufnr(bufnr)
+  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   local params = {
     textDocument = { uri = vim.uri_from_bufnr(bufnr) },
     position = { line = vim.fn.line '.' - 1, character = vim.fn.col '.' },
   }
-  lsp.buf_request(
-    bufnr,
-    'textDocument/forwardSearch',
-    params,
-    util.compat_handler(function(err, result)
-      if err then
-        error(tostring(err))
-      end
-      print('Search ' .. texlab_forward_status[result.status])
-    end)
-  )
+  if texlab_client then
+    texlab_client.request(
+      'textDocument/forwardSearch',
+      params,
+      util.compat_handler(function(err, result)
+        if err then
+          error(tostring(err))
+        end
+        print('Search ' .. texlab_forward_status[result.status])
+      end),
+      bufnr
+    )
+  else
+    print 'method textDocument/forwardSearch is not supported by any servers active on the current buffer'
+  end
 end
 
 -- bufnr isn't actually required here, but we need a valid buffer in order to
