@@ -42,6 +42,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [gdscript](#gdscript)
 - [ghcide](#ghcide)
 - [gopls](#gopls)
+- [golangcilsp](#golangcilsp)
 - [graphql](#graphql)
 - [groovyls](#groovyls)
 - [haxe_language_server](#haxe_language_server)
@@ -1798,6 +1799,34 @@ require'lspconfig'.gopls.setup{}
   Default Values:
     cmd = { "gopls" }
     filetypes = { "go", "gomod" }
+    root_dir = root_pattern("go.mod", ".git")
+```
+
+
+
+## golangcilsp
+
+https://github.com/nametake/golangci-lint-langserver
+https://github.com/golangci/golangci-lint
+
+Combination of lint server and client
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.golangcilsp.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "golangci-lint-langserver" }
+    filetypes = { "go", "gomod" }
+	init_options = {
+		command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json" };
+	},
     root_dir = root_pattern("go.mod", ".git")
 ```
 
