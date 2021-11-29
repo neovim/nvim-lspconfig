@@ -41,6 +41,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [fstar](#fstar)
 - [gdscript](#gdscript)
 - [ghcide](#ghcide)
+- [golangci_lint_ls](#golangci_lint_ls)
 - [gopls](#gopls)
 - [graphql](#graphql)
 - [groovyls](#groovyls)
@@ -1775,6 +1776,43 @@ require'lspconfig'.ghcide.setup{}
     cmd = { "ghcide", "--lsp" }
     filetypes = { "haskell", "lhaskell" }
     root_dir = root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml")
+```
+
+
+## golangci_lint_ls
+
+Combination of both lint server and client
+
+https://github.com/nametake/golangci-lint-langserver
+https://github.com/golangci/golangci-lint
+
+
+Installation of binaries needed is done via
+
+```
+go install github.com/nametake/golangci-lint-langserver@latest
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.42.1
+```
+
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.golangci_lint_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "golangci-lint-langserver" }
+    filetypes = { "go", "gomod" }
+    init_options = {
+      command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json" }
+    }
+    root_dir = root_pattern('go.mod', '.git')
 ```
 
 
