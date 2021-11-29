@@ -1,5 +1,4 @@
 local util = require 'lspconfig.util'
-local lsp = vim.lsp
 
 local texlab_build_status = vim.tbl_add_reverse_lookup {
   Success = 0,
