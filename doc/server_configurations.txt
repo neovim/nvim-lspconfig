@@ -1696,7 +1696,7 @@ require'lspconfig'.fsautocomplete.setup{}
   Commands:
   
   Default Values:
-    cmd = { "dotnet", "fsautocomplete", "--background-service-enabled" }
+    cmd = { "fsautocomplete", "--background-service-enabled" }
     filetypes = { "fsharp" }
     init_options = {
       AutomaticWorkspaceInit = true
