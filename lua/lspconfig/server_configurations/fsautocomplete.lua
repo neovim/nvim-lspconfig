@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'dotnet', 'fsautocomplete', '--background-service-enabled' },
+    cmd = { 'fsautocomplete', '--background-service-enabled' },
     root_dir = util.root_pattern('*.sln', '*.fsproj', '.git'),
     filetypes = { 'fsharp' },
     init_options = {
