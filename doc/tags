@@ -18,4 +18,3 @@ lspconfig-setup	lspconfig.txt	/*lspconfig-setup*
 lspconfig-single-file-support	lspconfig.txt	/*lspconfig-single-file-support*
 lspconfig-toc	lspconfig.txt	/*lspconfig-toc*
 lspconfig.txt	lspconfig.txt	/*lspconfig.txt*
-lspconfig-server-configurations	server_configurations.md	/# Configurations

@@ -1,5 +1,5 @@
 local util = require 'lspconfig.util'
-local api, validate, lsp = vim.api, vim.validate, vim.lsp
+local api, validate = vim.api, vim.validate
 local tbl_extend = vim.tbl_extend
 
 local configs = {}
@@ -130,7 +130,7 @@ function configs.__newindex(t, config_name, config_def)
     local make_config = function(_root_dir)
       local new_config = vim.tbl_deep_extend('keep', vim.empty_dict(), config)
       new_config = vim.tbl_deep_extend('keep', new_config, default_config)
-      new_config.capabilities = new_config.capabilities or lsp.protocol.make_client_capabilities()
+      new_config.capabilities = new_config.capabilities or vim.lsp.protocol.make_client_capabilities()
       new_config.capabilities = vim.tbl_deep_extend('keep', new_config.capabilities, {
         workspace = {
           configuration = true,
@@ -225,7 +225,7 @@ function configs.__newindex(t, config_name, config_def)
       end
 
       if id then
-        lsp.buf_attach_client(bufnr, id)
+        vim.lsp.buf_attach_client(bufnr, id)
       end
     end
 
@@ -249,7 +249,7 @@ function configs.__newindex(t, config_name, config_def)
   end
 
   function M._setup_buffer(client_id, bufnr)
-    local client = lsp.get_client_by_id(client_id)
+    local client = vim.lsp.get_client_by_id(client_id)
     if not client then
       return
     end
