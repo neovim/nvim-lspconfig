@@ -1,5 +1,4 @@
 local util = require 'lspconfig.util'
-local lsp = vim.lsp
 
 local function deno_uri_to_uri(uri)
   -- denols returns deno:/https/deno.land/std%400.85.0/http/server.ts
@@ -23,7 +22,7 @@ local function buf_cache(bufnr)
   local params = {}
   params['referrer'] = { uri = vim.uri_from_bufnr(bufnr) }
   params['uris'] = {}
-  lsp.buf_request(bufnr, 'deno/cache', params, function(err)
+  vim.lsp.buf_request(bufnr, 'deno/cache', params, function(err)
     if err then
       error(tostring(err))
     end
@@ -48,7 +47,7 @@ local function virtual_text_document_handler(uri, result)
     vim.api.nvim_buf_set_option(bufnr, 'readonly', true)
     vim.api.nvim_buf_set_option(bufnr, 'modified', false)
     vim.api.nvim_buf_set_option(bufnr, 'modifiable', false)
-    lsp.buf_attach_client(bufnr, client_id)
+    vim.lsp.buf_attach_client(bufnr, client_id)
   end
 end
 
@@ -58,7 +57,7 @@ local function virtual_text_document(uri)
       uri = uri,
     },
   }
-  local result = lsp.buf_request_sync(0, 'deno/virtualTextDocument', params)
+  local result = vim.lsp.buf_request_sync(0, 'deno/virtualTextDocument', params)
   virtual_text_document_handler(uri, result)
 end
 
@@ -79,27 +78,27 @@ local function denols_handler(err, result, ctx)
   -- TODO remove this conditional when the handler is no longer being wrapped
   -- with util.compat_handler (just use the else clause)
   if vim.fn.has 'nvim-0.5.1' then
-    lsp.handlers[ctx.method](err, result, ctx)
+    vim.lsp.handlers[ctx.method](err, result, ctx)
   else
-    lsp.handlers[ctx.method](err, ctx.method, result)
+    vim.lsp.handlers[ctx.method](err, ctx.method, result)
   end
 end
 
 local function denols_definition()
-  local params = lsp.util.make_position_params()
+  local params = vim.lsp.util.make_position_params()
   params.textDocument.uri = uri_to_deno_uri(params.textDocument.uri)
-  lsp.buf_request(0, 'textDocument/definition', params)
+  vim.lsp.buf_request(0, 'textDocument/definition', params)
 end
 
 local function denols_references(context)
   vim.validate { context = { context, 't', true } }
-  local params = lsp.util.make_position_params()
+  local params = vim.lsp.util.make_position_params()
   params.context = context or {
     includeDeclaration = true,
   }
   params[vim.type_idx] = vim.types.dictionary
   params.textDocument.uri = uri_to_deno_uri(params.textDocument.uri)
-  lsp.buf_request(0, 'textDocument/references', params)
+  vim.lsp.buf_request(0, 'textDocument/references', params)
 end
 
 return {

@@ -30,7 +30,7 @@ local root_pattern = util.root_pattern('compile_commands.json', 'compile_flags.t
 
 local default_capabilities = vim.tbl_deep_extend(
   'force',
-  util.default_config.capabilities or vim.lsp.protocol.make_client_capabilities(),
+  util.default_config.capabilities or require('vim.lsp.protocol').make_client_capabilities(),
   {
     textDocument = {
       completion = {

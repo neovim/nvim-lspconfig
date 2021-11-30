@@ -1,15 +1,12 @@
 local vim = vim
 local validate = vim.validate
 local api = vim.api
-local lsp = vim.lsp
 local uv = vim.loop
 local fn = vim.fn
 
 local M = {}
 
 M.default_config = {
-  log_level = lsp.protocol.MessageType.Warning,
-  message_level = lsp.protocol.MessageType.Warning,
   settings = vim.empty_dict(),
   init_options = vim.empty_dict(),
   handlers = {},
@@ -285,7 +282,7 @@ function M.server_per_root_dir_manager(_make_config)
         new_config.root_dir = nil
         new_config.workspace_folders = nil
       end
-      client_id = lsp.start_client(new_config)
+      client_id = vim.lsp.start_client(new_config)
 
       -- Handle failures in start_client
       if not client_id then

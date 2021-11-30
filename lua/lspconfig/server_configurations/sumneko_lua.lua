@@ -5,7 +5,6 @@ return {
     filetypes = { 'lua' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
-    log_level = vim.lsp.protocol.MessageType.Warning,
     settings = { Lua = { telemetry = { enable = false } } },
   },
   docs = {
