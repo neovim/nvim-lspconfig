@@ -275,27 +275,7 @@ local function generate_readme(template_file, params)
   local writer = io.open('doc/server_configurations.md', 'w')
   writer:write(readme_data)
   writer:close()
-end
-
-local function generate_helptags()
-  -- Modify a help tag to point to server_configurations.md and append a modeline to it so it can be
-  -- displayed with the right filetype when using :help
-  vim.cmd [[
-  helptags ./doc
-  edit doc/tags
-  set noswapfile
-  set noreadonly
-  call append('$', "lspconfig-server-configurations	server_configurations.md	/# Configurations")
-  silent write
-  ]]
-  print 'Added doc/server_configurations.md to helptags'
-
-  vim.cmd [[
-  edit doc/server_configurations.md
-  call append('$', "vim:ft=markdown")
-  silent write
-  ]]
-  print 'Added modeline to doc/server_configurations.md'
+  uv.fs_copyfile('doc/server_configurations.md', 'doc/server_configurations.txt')
 end
 
 require_all_configs()
@@ -303,4 +283,3 @@ generate_readme('scripts/README_template.md', {
   implemented_servers_list = make_implemented_servers_list(),
   lsp_server_details = make_lsp_sections(),
 })
-generate_helptags()
