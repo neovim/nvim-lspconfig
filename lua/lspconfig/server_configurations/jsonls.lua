@@ -1,6 +1,9 @@
 local util = require 'lspconfig.util'
 
 local bin_name = 'vscode-json-language-server'
+if vim.fn.has 'win32' == 1 then
+  bin_name = bin_name .. '.cmd'
+end
 
 return {
   default_config = {
