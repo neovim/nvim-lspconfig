@@ -5024,6 +5024,18 @@ This server accepts configuration via the `settings` key.
   
   List of codegen targets to pass to the compiler for rebuild\. e\.g\. js\, corefn\. If not specified \(rather than empty array\) this will not be passed and the compiler will default to js\. Requires 0\.12\.1+
 
+- **`purescript.declarationTypeCodeLens`**: `boolean`
+
+  Default: `true`
+  
+  Enable declaration codelens to add types to declarations
+
+- **`purescript.exportsCodeLens`**: `boolean`
+
+  Default: `true`
+  
+  Enable declaration codelenses for export management
+
 - **`purescript.fastRebuild`**: `boolean`
 
   Default: `true`
