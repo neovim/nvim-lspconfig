@@ -1,8 +1,15 @@
 local util = require 'lspconfig.util'
 
+local bin_name = 'vls'
+local cmd = { bin_name }
+
+if vim.fn.has 'win32' == 1 then
+  cmd = { 'cmd.exe', '/C', bin_name }
+end
+
 return {
   default_config = {
-    cmd = { 'vls' },
+    cmd = cmd,
     filetypes = { 'vue' },
     root_dir = util.root_pattern('package.json', 'vue.config.js'),
     init_options = {

@@ -46,9 +46,15 @@ local volar_init_options = {
   },
 }
 
+local bin_name = 'volar-server'
+local cmd = { bin_name, '--stdio' }
+
+if vim.fn.has 'win32' == 1 then
+  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
+end
 return {
   default_config = {
-    cmd = { 'volar-server', '--stdio' },
+    cmd = cmd,
     filetypes = { 'vue' },
     root_dir = util.root_pattern 'package.json',
     init_options = volar_init_options,
