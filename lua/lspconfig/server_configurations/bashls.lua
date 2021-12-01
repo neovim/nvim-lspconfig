@@ -1,8 +1,15 @@
 local util = require 'lspconfig.util'
 
+local bin_name = 'bash-language-server'
+local cmd = { bin_name, 'start' }
+
+if vim.fn.has 'win32' == 1 then
+  cmd = { 'cmd.exe', '/C', bin_name, 'start' }
+end
+
 return {
   default_config = {
-    cmd = { 'bash-language-server', 'start' },
+    cmd = cmd,
     cmd_env = {
       -- Prevent recursive scanning which will cause issues when opening a file
       -- directly in the home directory (e.g. ~/foo.sh).
