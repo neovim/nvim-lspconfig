@@ -28,20 +28,6 @@ vscode-json-language-server, a language server for JSON and JSON schema
 npm i -g vscode-langservers-extracted
 ```
 
-vscode-json-language-server only provides range formatting. You can map a command that applies range formatting to the entire document:
-
-```lua
-require'lspconfig'.jsonls.setup {
-    commands = {
-      Format = {
-        function()
-          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-        end
-      }
-    }
-}
-```
-
 Neovim does not currently include built-in snippets. `vscode-json-language-server` only provides completions when snippet support is enabled. To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
 
 ```lua
