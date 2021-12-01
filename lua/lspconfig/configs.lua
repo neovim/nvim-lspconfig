@@ -185,13 +185,15 @@ function configs.__newindex(t, config_name, config_def)
         end
       end)
 
-      new_config.root_dir = _root_dir
-      new_config.workspace_folders = {
-        {
-          uri = vim.uri_from_fname(_root_dir),
-          name = string.format('%s', _root_dir),
-        },
-      }
+      if _root_dir then
+        new_config.root_dir = _root_dir
+        new_config.workspace_folders = {
+          {
+            uri = vim.uri_from_fname(_root_dir),
+            name = string.format('%s', _root_dir),
+          },
+        }
+      end
       return new_config
     end
 
@@ -216,7 +218,13 @@ function configs.__newindex(t, config_name, config_def)
       if root_dir then
         id = manager.add(root_dir, false)
       elseif config.single_file_support then
-        local pseudo_root = util.path.dirname(api.nvim_buf_get_name(0))
+        local bufname = api.nvim_buf_get_name(0)
+        local pseudo_root
+        if bufname ~= "" then
+          pseudo_root = util.path.dirname(bufname)
+        else
+          pseudo_root = vim.loop.cwd()
+        end
         id = manager.add(pseudo_root, true)
       else
         vim.notify(
