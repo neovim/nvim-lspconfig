@@ -828,7 +828,7 @@ require'lspconfig'.denols.setup{}
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
     handlers = {
       ["textDocument/definition"] = <function 1>,
-      ["textDocument/references"] = <function 2>
+      ["textDocument/references"] = <function 1>
     }
     init_options = {
       enable = true,
