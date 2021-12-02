@@ -76,13 +76,7 @@ local function denols_handler(err, result, ctx)
     end
   end
 
-  -- TODO remove this conditional when the handler is no longer being wrapped
-  -- with util.compat_handler (just use the else clause)
-  if vim.fn.has 'nvim-0.5.1' then
-    lsp.handlers[ctx.method](err, result, ctx)
-  else
-    lsp.handlers[ctx.method](err, ctx.method, result)
-  end
+  lsp.handlers[ctx.method](err, result, ctx)
 end
 
 local function denols_definition()
@@ -120,8 +114,8 @@ return {
       unstable = false,
     },
     handlers = {
-      ['textDocument/definition'] = util.compat_handler(denols_handler),
-      ['textDocument/references'] = util.compat_handler(denols_handler),
+      ['textDocument/definition'] = denols_handler,
+      ['textDocument/references'] = denols_handler,
     },
   },
   commands = {
