@@ -16,27 +16,6 @@ M.default_config = {
 -- global on_setup hook
 M.on_setup = nil
 
--- add compatibility shim for breaking signature change
--- from https://github.com/mfussenegger/nvim-lsp-compl/
--- TODO: remove after Neovim release
-function M.compat_handler(handler)
-  return function(...)
-    local config_or_client_id = select(4, ...)
-    local is_new = type(config_or_client_id) ~= 'number'
-    if is_new then
-      return handler(...)
-    else
-      local err = select(1, ...)
-      local method = select(2, ...)
-      local result = select(3, ...)
-      local client_id = select(4, ...)
-      local bufnr = select(5, ...)
-      local config = select(6, ...)
-      return handler(err, result, { method = method, client_id = client_id, bufnr = bufnr }, config)
-    end
-  end
-end
-
 function M.validate_bufnr(bufnr)
   validate {
     bufnr = { bufnr, 'n' },

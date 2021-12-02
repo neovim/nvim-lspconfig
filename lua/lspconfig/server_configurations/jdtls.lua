@@ -50,15 +50,6 @@ local function fix_zero_version(workspace_edit)
   return workspace_edit
 end
 
--- Compatibility shim added for breaking changes to the lsp handler signature in nvim-0.5.1
-local function remap_arguments(err, result, ctx)
-  if vim.fn.has 'nvim-0.5.1' == 1 then
-    handlers[ctx.method](err, result, ctx)
-  else
-    handlers[ctx.method](err, ctx.method, result)
-  end
-end
-
 local function on_textdocument_codeaction(err, actions, ctx)
   for _, action in ipairs(actions) do
     -- TODO: (steelsojka) Handle more than one edit?
@@ -69,15 +60,15 @@ local function on_textdocument_codeaction(err, actions, ctx)
     end
   end
 
-  remap_arguments(err, actions, ctx)
+  handlers[ctx.method](err, actions, ctx)
 end
 
 local function on_textdocument_rename(err, workspace_edit, ctx)
-  remap_arguments(err, fix_zero_version(workspace_edit), ctx)
+  handlers[ctx.method](err, fix_zero_version(workspace_edit), ctx)
 end
 
 local function on_workspace_applyedit(err, workspace_edit, ctx)
-  remap_arguments(err, fix_zero_version(workspace_edit), ctx)
+  handlers[ctx.method](err, fix_zero_version(workspace_edit), ctx)
 end
 
 -- Non-standard notification that can be used to display progress
@@ -141,10 +132,10 @@ return {
     handlers = {
       -- Due to an invalid protocol implementation in the jdtls we have to conform these to be spec compliant.
       -- https://github.com/eclipse/eclipse.jdt.ls/issues/376
-      ['textDocument/codeAction'] = util.compat_handler(on_textdocument_codeaction),
-      ['textDocument/rename'] = util.compat_handler(on_textdocument_rename),
-      ['workspace/applyEdit'] = util.compat_handler(on_workspace_applyedit),
-      ['language/status'] = util.compat_handler(vim.schedule_wrap(on_language_status)),
+      ['textDocument/codeAction'] = on_textdocument_codeaction,
+      ['textDocument/rename'] = on_textdocument_rename,
+      ['workspace/applyEdit'] = on_workspace_applyedit,
+      ['language/status'] = vim.schedule_wrap(on_language_status),
     },
   },
   docs = {

@@ -25,7 +25,7 @@ These features are not implemented in this repo, but in Neovim core. See `:help 
 
 ## Install
 
-* Requires [Neovim v0.5.0](https://github.com/neovim/neovim/releases/tag/v0.5.0) or [Nightly](https://github.com/neovim/neovim/releases/tag/nightly). Update Neovim and 'lspconfig' before reporting an issue.
+* Requires [Neovim v0.6.0](https://github.com/neovim/neovim/releases/tag/v0.6.0) or [Nightly](https://github.com/neovim/neovim/releases/tag/nightly). Update Neovim and 'lspconfig' before reporting an issue.
 
 * Install 'lspconfig' like any other Vim plugin, e.g. with [vim-plug](https://github.com/junegunn/vim-plug):
 

@@ -21,17 +21,12 @@ local function buf_build(bufnr)
     textDocument = { uri = vim.uri_from_bufnr(bufnr) },
   }
   if texlab_client then
-    texlab_client.request(
-      'textDocument/build',
-      params,
-      util.compat_handler(function(err, result)
-        if err then
-          error(tostring(err))
-        end
-        print('Build ' .. texlab_build_status[result.status])
-      end),
-      bufnr
-    )
+    texlab_client.request('textDocument/build', params, function(err, result)
+      if err then
+        error(tostring(err))
+      end
+      print('Build ' .. texlab_build_status[result.status])
+    end, bufnr)
   else
     print 'method textDocument/build is not supported by any servers active on the current buffer'
   end
@@ -45,17 +40,12 @@ local function buf_search(bufnr)
     position = { line = vim.fn.line '.' - 1, character = vim.fn.col '.' },
   }
   if texlab_client then
-    texlab_client.request(
-      'textDocument/forwardSearch',
-      params,
-      util.compat_handler(function(err, result)
-        if err then
-          error(tostring(err))
-        end
-        print('Search ' .. texlab_forward_status[result.status])
-      end),
-      bufnr
-    )
+    texlab_client.request('textDocument/forwardSearch', params, function(err, result)
+      if err then
+        error(tostring(err))
+      end
+      print('Search ' .. texlab_forward_status[result.status])
+    end, bufnr)
   else
     print 'method textDocument/forwardSearch is not supported by any servers active on the current buffer'
   end
