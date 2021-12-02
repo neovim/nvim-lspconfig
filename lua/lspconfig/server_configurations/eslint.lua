@@ -110,6 +110,8 @@ return {
         local sysname = vim.loop.os_uname().sysname
         if sysname:match 'Windows' then
           os.execute(string.format('start %q', result.url))
+        elseif sysname:match 'Linux' then
+          os.execute(string.format('xdg-open %q', result.url))
         else
           os.execute(string.format('open %q', result.url))
         end
