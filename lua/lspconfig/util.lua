@@ -280,7 +280,7 @@ function M.server_per_root_dir_manager(_make_config)
   function manager.clients()
     local res = {}
     for _, id in pairs(clients) do
-      local client = lsp.get_client_by_id(id)
+      local client = vim.lsp.get_client_by_id(id)
       if client then
         table.insert(res, client)
       end

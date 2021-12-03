@@ -75,7 +75,7 @@ local function denols_handler(err, result, ctx)
     end
   end
 
-  lsp.handlers[ctx.method](err, result, ctx)
+  vim.lsp.handlers[ctx.method](err, result, ctx)
 end
 
 local function denols_definition()
