@@ -26,7 +26,7 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 require'lspconfig'.sumneko_lua.setup {
-  cmd = { "/path/to/lua-language-server" };
+  cmd = { "/path/to/lua-language-server" }, -- full path to the binary
   settings = {
     Lua = {
       runtime = {
