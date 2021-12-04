@@ -76,7 +76,7 @@ with the commit body containing additional details.
 
 ## Lint
 
-PRs are checked with Luacheck and stylua. Please run the linter locally before submitting a PR:
+PRs are checked with [luacheck](https://github.com/mpeterv/luacheck), [StyLua](https://github.com/JohnnyMorganz/StyLua) and [selene](https://github.com/Kampfkarren/selene). Please run the linter locally before submitting a PR:
 
     make lint
 
