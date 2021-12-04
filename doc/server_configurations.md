@@ -83,6 +83,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [pylsp](#pylsp)
 - [pyre](#pyre)
 - [pyright](#pyright)
+- [quick_lint_js](#quick_lint_js)
 - [r_language_server](#r_language_server)
 - [racket_langserver](#racket_langserver)
 - [rescriptls](#rescriptls)
@@ -5304,6 +5305,34 @@ require'lspconfig'.pyright.setup{}
       }
     }
     single_file_support = true
+```
+
+
+## quick_lint_js
+
+https://quick-lint-js.com/
+
+quick-lint-js finds bugs in JavaScript programs.
+
+See installation [instructions](https://quick-lint-js.com/install/)
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.quick_lint_js.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "quick-lint-js", "--lsp-server" }
+    filetypes = { "javascript" }
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
 ```
 
 
