@@ -1865,7 +1865,7 @@ require'lspconfig'.graphql.setup{}
   
   Default Values:
     cmd = { "graphql-lsp", "server", "-m", "stream" }
-    filetypes = { "graphql" }
+    filetypes = { "graphql", "typescriptreact", "javascriptreact" }
     root_dir = root_pattern('.git', '.graphqlrc*', '.graphql.config.*')
 ```
 
