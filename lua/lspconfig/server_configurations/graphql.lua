@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'graphql-lsp', 'server', '-m', 'stream' },
-    filetypes = { 'graphql' },
+    filetypes = { 'graphql', 'typescriptreact', 'javascriptreact' },
     root_dir = util.root_pattern('.git', '.graphqlrc*', '.graphql.config.*', 'graphql.config.*'),
   },
 
