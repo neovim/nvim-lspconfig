@@ -5333,6 +5333,7 @@ require'lspconfig'.quick_lint_js.setup{}
     root_dir = function(startpath)
         return M.search_ancestors(startpath, matcher)
       end
+    single_file_support = true
 ```
 
 
