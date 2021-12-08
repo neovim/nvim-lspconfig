@@ -16,7 +16,18 @@ The general form of adding a new language server is to start with a minimal skel
 When choosing a server name, convert all dashes (`-`) to underscores (`_`) If the name of the server is a unique name (`pyright`, `clangd`) or a commonly used abbreviation (`zls`), prefer this as the server name. If the server instead follows the pattern x-language-server, prefer the convention `x_ls` (`jsonnet_ls`). 
 
 `default_config` should include, at minimum the following:
-* `cmd`: a list which includes the executable name as the first entry, with arguments constituting subsequent list elements (`--stdio` is common)
+* `cmd`: a list which includes the executable name as the first entry, with arguments constituting subsequent list elements (`--stdio` is common).
+Note that Windows has a limitation when it comes to directly invoking a server that's installed by `npm` or `gem`, so it requires additional handling.
+
+```lua
+local bin_name = 'typescript-language-server'
+local cmd = { bin_name, '--stdio' }
+
+if vim.fn.has 'win32' == 1 then
+  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
+end
+```
+
 * `filetypes`: a list for filetypes a 
 * `root_dir`: a function (or function handle) which returns the root of the project used to determine if lspconfig should launch a new language server, or attach a previously launched server when you open a new buffer matching the filetype of the server. Note, lspconfig does not offer a dedicated single file mode (this is not codified in the spec). Do not add `vim.fn.cwd` or `util.path.dirname` in `root_dir`. A future version of lspconfig will provide emulation of a single file mode until this is formally codified in the specification. A good fallback is `util.find_git_ancestor`, see other configurations for examples.
 
