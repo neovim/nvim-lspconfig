@@ -12,7 +12,7 @@ return {
   default_config = {
     cmd = cmd,
     filetypes = { 'lean3' },
-    offset_encoding = "utf-32",
+    offset_encoding = 'utf-32',
     root_dir = function(fname)
       -- check if inside elan stdlib
       local stdlib_dir
