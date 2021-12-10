@@ -6,7 +6,7 @@ return {
   default_config = {
     cmd = { bin_name, '--stdio' },
     filetypes = { 'yaml', 'json', 'yml' },
-    root_dir = util.root_pattern('.spectral.yaml', '.spectral.yml'),
+    root_dir = util.root_pattern('.spectral.yaml', '.spectral.yml', '.spectral.json', '.spectral.js'),
     single_file_support = true,
     settings = {
       enable = true,
