@@ -97,6 +97,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [sixtyfps](#sixtyfps)
 - [solang](#solang)
 - [solargraph](#solargraph)
+- [solidity_ls](#solidity_ls)
 - [sorbet](#sorbet)
 - [sourcekit](#sourcekit)
 - [spectral](#spectral)
@@ -6509,6 +6510,30 @@ require'lspconfig'.solargraph.setup{}
         diagnostics = true
       }
     }
+```
+
+
+## solidity_ls
+
+npm install -g solidity-language-server
+
+solidity-language-server is a language server for the solidity language ported from the vscode solidity extension
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.solidity_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "solidity-language-server", "--stdio" }
+    filetypes = { "solidity" }
+    root_dir = root_pattern(".git", "package.json")
 ```
 
 
