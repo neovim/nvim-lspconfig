@@ -6498,7 +6498,7 @@ require'lspconfig'.solargraph.setup{}
   Commands:
   
   Default Values:
-    cmd = { "solargraph", "stdio" }
+    cmd = { "solargraph", "--stdio" }
     filetypes = { "ruby" }
     init_options = {
       formatting = true
