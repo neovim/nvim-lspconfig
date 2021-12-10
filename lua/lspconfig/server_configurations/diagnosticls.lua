@@ -1,13 +1,15 @@
 local util = require 'lspconfig.util'
 
 local bin_name = 'diagnostic-languageserver'
+local cmd = { bin_name, '--stdio' }
+
 if vim.fn.has 'win32' == 1 then
-  bin_name = bin_name .. '.cmd'
+  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
 return {
   default_config = {
-    cmd = { bin_name, '--stdio' },
+    cmd = cmd,
     root_dir = util.find_git_ancestor,
     single_file_support = true,
     filetypes = {},

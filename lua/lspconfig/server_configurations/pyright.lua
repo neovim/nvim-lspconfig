@@ -1,8 +1,10 @@
 local util = require 'lspconfig.util'
 
 local bin_name = 'pyright-langserver'
+local cmd = { bin_name, '--stdio' }
+
 if vim.fn.has 'win32' == 1 then
-  bin_name = bin_name .. '.cmd'
+  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
 local root_files = {
@@ -24,7 +26,7 @@ end
 
 return {
   default_config = {
-    cmd = { bin_name, '--stdio' },
+    cmd = cmd,
     filetypes = { 'python' },
     root_dir = util.root_pattern(unpack(root_files)),
     single_file_support = true,

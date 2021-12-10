@@ -1,13 +1,15 @@
 local util = require 'lspconfig.util'
 
 local bin_name = 'vim-language-server'
+local cmd = { bin_name, '--stdio' }
+
 if vim.fn.has 'win32' == 1 then
-  bin_name = bin_name .. '.cmd'
+  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
 return {
   default_config = {
-    cmd = { bin_name, '--stdio' },
+    cmd = cmd,
     filetypes = { 'vim' },
     root_dir = function(fname)
       return util.find_git_ancestor(fname) or vim.fn.getcwd()

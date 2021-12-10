@@ -1,8 +1,15 @@
 local util = require 'lspconfig.util'
 
+local bin_name = 'graphql-lsp'
+local cmd = { bin_name, 'server', '-m', 'stream' }
+
+if vim.fn.has 'win32' == 1 then
+  cmd = { 'cmd.exe', '/C', bin_name, 'server', '-m', 'stream' }
+end
+
 return {
   default_config = {
-    cmd = { 'graphql-lsp', 'server', '-m', 'stream' },
+    cmd = cmd,
     filetypes = { 'graphql', 'typescriptreact', 'javascriptreact' },
     root_dir = util.root_pattern('.git', '.graphqlrc*', '.graphql.config.*', 'graphql.config.*'),
   },

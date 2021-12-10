@@ -188,10 +188,6 @@ Please see the [wiki](https://github.com/neovim/nvim-lspconfig/wiki) for additio
 * [Project local settings](https://github.com/neovim/nvim-lspconfig/wiki/Project-local-settings)
 * [Recommended plugins for enhanced language server features](https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins)
 
-## Windows
-
-In order for neovim to launch certain executables on Windows, it must append `.cmd` to the command name. To work around this, manually append `.cmd` to the entry `cmd` in a given plugin's setup{} call.
-
 ## Contributions
 
 If you are missing a language server on the list in [server_configurations.md](doc/server_configurations.md), contributing
