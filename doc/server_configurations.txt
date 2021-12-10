@@ -3614,6 +3614,7 @@ require'lspconfig'.lean3ls.setup{}
   Default Values:
     cmd = { "lean-language-server", "--stdio", "--", "-M", "4096", "-T", "100000" }
     filetypes = { "lean3" }
+    offset_encoding = "utf-32"
     root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
     single_file_support = true
 ```
