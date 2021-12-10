@@ -3961,6 +3961,7 @@ require'lspconfig'.ltex.setup{}
         end
       end)
     end
+    single_file_support = true
 ```
 
 
