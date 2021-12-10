@@ -13,7 +13,9 @@ return {
   default_config = {
     cmd = { 'ltex-ls' },
     filetypes = { 'bib', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex' },
-    root_dir = util.find_git_ancestor,
+    root_dir = function(fname)
+      return util.root_pattern '.latexmkrc'(fname) or util.find_git_ancestor(fname)
+    end,
     get_language_id = function(_, filetype)
       local language_id = language_id_mapping[filetype]
       if language_id then
