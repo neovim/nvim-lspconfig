@@ -3692,15 +3692,6 @@ https://github.com/eclipse/lemminx
 
 The easiest way to install the server is to get a binary at https://download.jboss.org/jbosstools/vscode/stable/lemminx-binary/ and place it in your PATH.
 
-**By default, lemminx doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of your unzipped lemminx.
-
-```lua
-require'lspconfig'.lemminx.setup{
-    cmd = { "/path/to/lemminx/lemminx" };
-    ...
-}
-```
-
 NOTE to macOS users: Binaries from unidentified developers are blocked by default. If you trust the downloaded binary from jboss.org, run it once, cancel the prompt, then remove the binary from Gatekeeper quarantine with `xattr -d com.apple.quarantine lemminx`. It should now run without being blocked.
 
 
@@ -3716,6 +3707,7 @@ require'lspconfig'.lemminx.setup{}
   Commands:
   
   Default Values:
+    cmd = { "lemminx" }
     filetypes = { "xml", "xsd", "svg" }
     root_dir = util.find_git_ancestor
     single_file_support = true
@@ -6690,15 +6682,6 @@ require'lspconfig'.spectral.setup{}
 
 https://github.com/joe-re/sql-language-server
 
-`cmd` value is **not set** by default. The `cmd` value can be overridden in the `setup` table;
-
-```lua
-require'lspconfig'.sqlls.setup{
-  cmd = {"path/to/command", "up", "--method", "stdio"};
-  ...
-}
-```
-
 This LSP can be installed via  `npm`. Find further instructions on manual installation of the sql-language-server at [joe-re/sql-language-server](https://github.com/joe-re/sql-language-server).
 <br>
     
@@ -6714,6 +6697,7 @@ require'lspconfig'.sqlls.setup{}
   Commands:
   
   Default Values:
+    cmd = { "sql-language-server", "up", "--method", "stdio" }
     filetypes = { "sql", "mysql" }
     root_dir = function(startpath)
         return M.search_ancestors(startpath, matcher)
