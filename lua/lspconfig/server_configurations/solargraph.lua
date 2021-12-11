@@ -1,10 +1,10 @@
 local util = require 'lspconfig.util'
 
 local bin_name = 'solargraph'
-local cmd = { bin_name, '--stdio' }
+local cmd = { bin_name, 'stdio' }
 
 if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
+  cmd = { 'cmd.exe', '/C', bin_name, 'stdio' }
 end
 
 return {
