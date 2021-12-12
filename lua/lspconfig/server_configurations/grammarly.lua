@@ -15,7 +15,7 @@ Requires some manual installation:
 2. Build the server:
 
 ```bash
-pnpm run build:packages && pnpm run build:server
+pnpm install && pnpm run build:packages && pnpm run build:server
 ```
 
 (you can install pnpm with `npm install -g pnpm`)
