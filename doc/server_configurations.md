@@ -1274,7 +1274,7 @@ require'lspconfig'.erlangls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "erlang_ls" }
+    cmd = "erlang_ls"
     filetypes = { "erlang" }
     root_dir = root_pattern('rebar.config', 'erlang.mk', '.git')
     single_file_support = true
