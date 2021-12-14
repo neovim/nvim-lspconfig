@@ -25,7 +25,7 @@ See [this heading](https://github.com/mtoohey31/grammarly#differences-between-up
 pnpm install && pnpm run build:packages && pnpm run build:server
 ```
 
-(pnpm can be installed with `npm install -g pnpm`)
+(pnpm can be installed with `npm install -g pnpm`, note that it should be used as opposed to npm or yarn because the upstream lockfile is a pnpm lockfile.)
 
 3. Configure the server, by adding the path to the server's `index.js`. The example below will need to be modified to point to the location of the Grammarly repo.
 
