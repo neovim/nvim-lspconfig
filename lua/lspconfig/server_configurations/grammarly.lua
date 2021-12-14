@@ -9,11 +9,16 @@ return {
     description = [[
 https://github.com/znck/grammarly
 
+(Note: this upstream repo requires a custom language client, see the instructions for a fork which works with any client.)
+
 A language server which provides access to Grammarly analysis via the API.
 
 Requires some manual installation:
 
-1. Clone the Grammarly repo, the upstream is [here](https://github.com/znck/grammarly), it's designed to work with a custom client though, so it requires some modifications. Using [this fork's `generic-client-compat` branch](https://github.com/mtoohey31/grammarly/tree/generic-client-compat) is recommended.
+1. Clone [this fork](https://github.com/mtoohey31/grammarly) with `git clone https://github.com/mtoohey31/grammarly`.
+
+See [this heading](https://github.com/mtoohey31/grammarly#differences-between-upstream) for a full list of differences between the upstream repo and the fork.
+
 2. Build the server:
 
 ```bash
