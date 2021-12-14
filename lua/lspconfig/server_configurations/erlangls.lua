@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 
-local cmd = 'erlang_ls'
+local cmd = { 'erlang_ls' }
 if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', 'erlang_ls.cmd' }
 end
