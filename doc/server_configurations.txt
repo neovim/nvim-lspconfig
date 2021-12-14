@@ -1023,6 +1023,14 @@ require'lspconfig'.elixirls.setup{
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
+- **`elixirLS.additionalWatchedExtensions`**: `array`
+
+  Default: `{}`
+  
+  Array items: `{type = "string"}`
+  
+  Additional file types capable of triggering a build on change
+
 - **`elixirLS.dialyzerEnabled`**: `boolean`
 
   Default: `true`
@@ -1046,6 +1054,10 @@ This server accepts configuration via the `settings` key.
 - **`elixirLS.enableTestLenses`**: `boolean`
 
   Show code lenses to run tests in terminal
+
+- **`elixirLS.envVariables`**: `object`
+
+  Environment variables to use for compilation
 
 - **`elixirLS.fetchDeps`**: `boolean`
 
@@ -1274,7 +1286,7 @@ require'lspconfig'.erlangls.setup{}
   Commands:
   
   Default Values:
-    cmd = "erlang_ls"
+    cmd = { "erlang_ls" }
     filetypes = { "erlang" }
     root_dir = root_pattern('rebar.config', 'erlang.mk', '.git')
     single_file_support = true
