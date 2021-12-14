@@ -20,6 +20,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [crystalline](#crystalline)
 - [csharp_ls](#csharp_ls)
 - [cssls](#cssls)
+- [cssmodules_ls](#cssmodules_ls)
 - [cucumber_language_server](#cucumber_language_server)
 - [dartls](#dartls)
 - [denols](#denols)
@@ -723,6 +724,35 @@ require'lspconfig'.cssls.setup{}
       }
     }
     single_file_support = true
+```
+
+
+## cssmodules_ls
+
+https://github.com/antonk52/cssmodules-language-server
+
+Language server for autocompletion and go-to-definition functionality for CSS modules.
+
+You can install cssmodules-language-server via npm:
+```sh
+npm install -g cssmodules-language-server
+```
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.cssmodules_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "cssmodules-language-server" }
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
+    root_dir = root_pattern("package.json")
 ```
 
 
