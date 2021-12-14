@@ -7,7 +7,9 @@ return {
   },
   docs = {
     description = [[
-Grammarly in an LSP, using the Grammarly API.
+https://github.com/znck/grammarly
+
+A language server which provides access to Grammarly analysis via the API.
 
 Requires some manual installation:
 
