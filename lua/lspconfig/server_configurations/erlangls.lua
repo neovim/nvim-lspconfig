@@ -7,7 +7,7 @@ end
 
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { cmd },
     filetypes = { 'erlang' },
     root_dir = util.root_pattern('rebar.config', 'erlang.mk', '.git'),
     single_file_support = true,
