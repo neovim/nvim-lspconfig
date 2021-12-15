@@ -218,7 +218,7 @@ function configs.__newindex(t, config_name, config_def)
       if root_dir then
         id = manager.add(root_dir, false)
       elseif config.single_file_support then
-        local bufname = api.nvim_buf_get_name(0)
+        local bufname = api.nvim_buf_get_name(bufnr)
         local pseudo_root
         if bufname ~= "" then
           pseudo_root = util.path.dirname(bufname)
