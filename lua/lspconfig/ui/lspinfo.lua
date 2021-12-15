@@ -203,7 +203,9 @@ return function()
   vim.api.nvim_buf_set_option(bufnr, 'filetype', 'lspinfo')
 
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<esc>', '<cmd>bd<CR>', { noremap = true })
-  vim.lsp.util.close_preview_autocmd({ 'BufHidden', 'BufLeave' }, win_id)
+  vim.api.nvim_command(
+    string.format('autocmd BufHidden,BufLeave <buffer> ++once lua pcall(vim.api.nvim_win_close, %d, true)', win_id)
+  )
 
   vim.fn.matchadd(
     'Error',
