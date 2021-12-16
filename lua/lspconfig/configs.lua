@@ -216,8 +216,10 @@ function configs.__newindex(t, config_name, config_def)
       if root_dir then
         id = manager.add(root_dir, false)
       elseif config.single_file_support then
-        local pseudo_root = util.path.dirname(api.nvim_buf_get_name(0))
-        id = manager.add(pseudo_root, true)
+        local bufname = api.nvim_buf_get_name(bufnr)
+        if bufname ~= '' then
+          id = manager.add(util.path.dirname(bufname), true)
+        end
       else
         vim.notify(
           string.format('[lspconfig] Autostart for %s failed: matching root directory not detected.', config_name)
