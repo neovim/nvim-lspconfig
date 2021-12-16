@@ -612,7 +612,6 @@ require'lspconfig'.codeqlls.setup{}
     settings = {
       search_path = "list containing all search paths, eg: '~/codeql-home/codeql-repo'"
     }
-    single_file_support = true
 ```
 
 
