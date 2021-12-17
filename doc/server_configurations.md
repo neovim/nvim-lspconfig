@@ -37,7 +37,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [esbonio](#esbonio)
 - [eslint](#eslint)
 - [flow](#flow)
-- [flux-lsp](#flux-lsp)
+- [flux_lsp](#flux_lsp)
 - [fortls](#fortls)
 - [fsautocomplete](#fsautocomplete)
 - [fstar](#fstar)
@@ -1582,7 +1582,7 @@ require'lspconfig'.flow.setup{}
 ```
 
 
-## flux-lsp
+## flux_lsp
 
 https://github.com/influxdata/flux-lsp
 `flux-lsp` can be installed via `cargo`:
@@ -1594,7 +1594,7 @@ cargo install --git https://github.com/influxdata/flux-lsp
 
 **Snippet to enable the language server:**
 ```lua
-require'lspconfig'.flux-lsp.setup{}
+require'lspconfig'.flux_lsp.setup{}
 ```
 
 **Commands and default values:**
@@ -1605,6 +1605,7 @@ require'lspconfig'.flux-lsp.setup{}
     cmd = { "flux-lsp" }
     filetypes = { "flux" }
     root_dir = util.find_git_ancestor
+    single_file_support = true
 ```
 
 
@@ -5886,7 +5887,7 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.completion.snippets`**: `object`
 
-  Default: `vim.empty_dict()`
+  Default: `{["Arc::new"] = {body = "Arc::new(${receiver})",description = "Put the expression into an `Arc`",postfix = "arc",requires = "std::sync::Arc",scope = "expr"},["Box::pin"] = {body = "Box::pin(${receiver})",description = "Put the expression into a pinned `Box`",postfix = "pinbox",requires = "std::boxed::Box",scope = "expr"},Err = {body = "Err(${receiver})",description = "Wrap the expression in a `Result::Err`",postfix = "err",scope = "expr"},Ok = {body = "Ok(${receiver})",description = "Wrap the expression in a `Result::Ok`",postfix = "ok",scope = "expr"},["Rc::new"] = {body = "Rc::new(${receiver})",description = "Put the expression into an `Rc`",postfix = "rc",requires = "std::rc::Rc",scope = "expr"},Some = {body = "Some(${receiver})",description = "Wrap the expression in an `Option::Some`",postfix = "some",scope = "expr"}}`
   
   null
 
