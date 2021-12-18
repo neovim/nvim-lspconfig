@@ -45,7 +45,9 @@ These features are not implemented in this repo, but in Neovim core. See `:help 
 
     ```lua
     lua << EOF
-    require'lspconfig'.pyright.setup{}
+    require'lspconfig'.pyright.setup{
+      on_attach=on_attach
+    }
     EOF
     ```
 
