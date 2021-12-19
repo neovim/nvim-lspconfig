@@ -21,6 +21,8 @@ https://github.com/emacs-grammarly/unofficial-grammarly-language-server
 ```sh
 npm i -g @emacs-grammarly/unofficial-grammarly-language-server
 ```
+
+WARNING: Since this language server uses Grammarly's API, any document you open with it running is shared with them. Please evaluate their [privacy policy](https://www.grammarly.com/privacy-policy) before you use this.
 ]],
     default_config = {
       root_dir = [[util.find_git_ancestor]],
