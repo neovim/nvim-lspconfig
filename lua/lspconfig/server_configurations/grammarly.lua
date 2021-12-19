@@ -5,6 +5,7 @@ return {
     cmd = { 'unofficial-grammarly-language-server', '--stdio' },
     filetypes = { 'markdown' },
     root_dir = util.find_git_ancestor,
+    single_file_support = true,
     handlers = {
       ['$/updateDocumentState'] = function()
         return ''
