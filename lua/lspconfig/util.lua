@@ -388,7 +388,7 @@ function M.get_clients_from_cmd_args(arg)
     result[id] = vim.lsp.get_client_by_id(tonumber(id))
   end
   if vim.tbl_isempty(result) then
-    return vim.lsp.get_active_clients()
+    return M.get_managed_clients()
   end
   return vim.tbl_values(result)
 end
@@ -399,6 +399,17 @@ function M.get_active_client_by_name(bufnr, servername)
       return client
     end
   end
+end
+
+function M.get_managed_clients()
+  local configs = require 'lspconfig.configs'
+  local clients = {}
+  for _, config in pairs(configs) do
+    if config.manager then
+      vim.list_extend(clients, config.manager.clients())
+    end
+  end
+  return clients
 end
 
 return M
