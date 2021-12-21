@@ -997,7 +997,7 @@ General purpose Language Server that can use specified error message format gene
 
 Requires at minimum EFM version [v0.0.38](https://github.com/mattn/efm-langserver/releases/tag/v0.0.38) to support
 launching the language server on single files. If on an older version of EFM, disable single file support:
-    
+
 ```lua
 require('lspconfig')['efm'].setup{
   settings = ..., -- You must populate this according to the EFM readme
@@ -1005,7 +1005,7 @@ require('lspconfig')['efm'].setup{
   single_file_support = false, -- This is the important line for supporting older version of EFM
 }
 ```
-    
+
 Note: In order for neovim's built-in language server client to send the appropriate `languageId` to EFM, **you must
 specify `filetypes` in your call to `setup{}`**. Otherwise `lspconfig` will launch EFM on the `BufEnter` instead
 of the `FileType` autocommand, and the `filetype` variable used to populate the `languageId` will not yet be set.
