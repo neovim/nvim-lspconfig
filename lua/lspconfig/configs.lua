@@ -79,11 +79,12 @@ function configs.__newindex(t, config_name, config_def)
     function M.launch()
       local root_dir
       if get_root_dir then
-        local buf_name = api.nvim_buf_get_name(0)
-        if buf_name == '' or not buf_name then
+        local bufnr = api.nvim_get_current_buf()
+        local bufname = api.nvim_buf_get_name(bufnr)
+        if not util.bufname_valid(bufname) then
           return
         end
-        root_dir = get_root_dir(util.path.sanitize(buf_name), api.nvim_get_current_buf())
+        root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
       end
 
       if root_dir then
@@ -95,11 +96,11 @@ function configs.__newindex(t, config_name, config_def)
           )
         )
         for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-          local buf_name = api.nvim_buf_get_name(bufnr)
-          if buf_name == '' or not buf_name then
+          local bufname = api.nvim_buf_get_name(bufnr)
+          if util.bufname_valid(bufname) then
             return
           end
-          local buf_dir = util.path.sanitize(buf_name)
+          local buf_dir = util.path.sanitize(bufname)
           if buf_dir:sub(1, root_dir:len()) == root_dir then
             M.manager.try_add_wrapper(bufnr)
           end
@@ -109,11 +110,11 @@ function configs.__newindex(t, config_name, config_def)
         -- Effectively this is the root from lspconfig's perspective, as we use
         -- this to attach additional files in the same parent folder to the same server.
         -- We just no longer send rootDirectory or workspaceFolders during initialization.
-        local buf_name = api.nvim_buf_get_name(0)
-        if buf_name == '' or not buf_name then
+        local bufname = api.nvim_buf_get_name(0)
+        if not util.bufname_valid(bufname) then
           return
         end
-        local pseudo_root = util.path.dirname(util.path.sanitize(buf_name))
+        local pseudo_root = util.path.dirname(util.path.sanitize(bufname))
         M.manager.add(pseudo_root, true)
       else
         vim.notify(
@@ -221,11 +222,11 @@ function configs.__newindex(t, config_name, config_def)
       local id
       local root_dir
 
-      local buf_name = api.nvim_buf_get_name(bufnr)
-      if buf_name == '' or not buf_name then
+      local bufname = api.nvim_buf_get_name(bufnr)
+      if not util.bufname_valid(bufname) then
         return
       end
-      local buf_path = util.path.sanitize(buf_name)
+      local buf_path = util.path.sanitize(bufname)
 
       if get_root_dir then
         root_dir = get_root_dir(buf_path, bufnr)
