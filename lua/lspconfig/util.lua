@@ -19,6 +19,14 @@ M.default_config = {
 -- global on_setup hook
 M.on_setup = nil
 
+function M.bufname_valid(bufname)
+  if bufname and bufname ~= '' and (bufname:match '^([a-zA-Z]:).*' or bufname:match '^/') then
+    return true
+  else
+    return false
+  end
+end
+
 function M.validate_bufnr(bufnr)
   validate {
     bufnr = { bufnr, 'n' },
