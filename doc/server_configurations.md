@@ -6303,16 +6303,6 @@ This server accepts configuration via the `settings` key.
   
   Trace requests to the rust\-analyzer \(this is usually overly verbose and not recommended for regular users\)\.
 
-- **`rust-analyzer.updates.askBeforeDownload`**: `boolean`
-
-  Whether to ask for permission before downloading any files from the Internet\.
-
-- **`rust-analyzer.updates.channel`**: `enum { "stable", "nightly" }`
-
-  Default: `"stable"`
-  
-  null
-
 - **`rust-analyzer.workspace.symbol.search.kind`**: `enum { "only_types", "all_symbols" }`
 
   Default: `"only_types"`
