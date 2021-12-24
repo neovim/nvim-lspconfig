@@ -121,6 +121,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [typeprof](#typeprof)
 - [vala_ls](#vala_ls)
 - [vdmj](#vdmj)
+- [verible](#verible)
 - [vimls](#vimls)
 - [vls](#vls)
 - [volar](#volar)
@@ -7956,6 +7957,41 @@ require'lspconfig'.vdmj.setup{}
       version = "The latest version installed in `mavenrepo`"
     }
     root_dir = util.find_git_ancestor(fname) or find_vscode_ancestor(fname)
+```
+
+
+## verible
+
+https://github.com/chipsalliance/verible
+
+A linter and formatter for verilog and SystemVerilog files.
+
+Release binaries can be downloaded from [here](https://github.com/chipsalliance/verible/releases)
+and placed in a directory on PATH.
+
+See https://github.com/chipsalliance/verible/tree/master/verilog/tools/ls/README.md for options.
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.verible.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "verible-verilog-ls" }
+    filetypes = { "systemverilog", "verilog" }
+    root_dir = function(path)
+        -- Support git directories and git files (worktrees)
+        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
+          return path
+        end
+      end)
+    end
 ```
 
 
