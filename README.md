@@ -200,9 +200,9 @@ a new configuration for it would be appreciated. You can follow these steps:
 
 3. Create a new file at `lua/lspconfig/SERVER_NAME.lua`.
 
-    - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/)
+    - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/)
       to get started. Most configs are simple. For an extensive example see
-      [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/texlab.lua).
+      [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/texlab.lua).
 
 4. Ask questions on our [Discourse](https://neovim.discourse.group/c/7-category/7) or in the [Neovim Gitter](https://gitter.im/neovim/neovim).
 
