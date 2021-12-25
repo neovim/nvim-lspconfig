@@ -98,11 +98,10 @@ function configs.__newindex(t, config_name, config_def)
         for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
           local bufname = api.nvim_buf_get_name(bufnr)
           if util.bufname_valid(bufname) then
-            return
-          end
-          local buf_dir = util.path.sanitize(bufname)
-          if buf_dir:sub(1, root_dir:len()) == root_dir then
-            M.manager.try_add_wrapper(bufnr)
+            local buf_dir = util.path.sanitize(bufname)
+            if buf_dir:sub(1, root_dir:len()) == root_dir then
+              M.manager.try_add_wrapper(bufnr)
+            end
           end
         end
       elseif config.single_file_support then
