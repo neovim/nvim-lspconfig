@@ -9,6 +9,7 @@ return {
     end,
   },
   docs = {
+    package_json = 'https://raw.githubusercontent.com/josa42/coc-go/master/package.json',
     description = [[
 https://github.com/golang/tools/tree/master/gopls
 
