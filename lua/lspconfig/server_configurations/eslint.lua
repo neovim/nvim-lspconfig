@@ -148,6 +148,7 @@ return {
     },
   },
   docs = {
+    package_json = 'https://raw.githubusercontent.com/microsoft/vscode-eslint/main/package.json',
     description = [[
 https://github.com/hrsh7th/vscode-langservers-extracted
 
