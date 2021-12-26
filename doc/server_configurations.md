@@ -1999,7 +1999,7 @@ require'lspconfig'.gopls.setup{}
   
   Default Values:
     cmd = { "gopls" }
-    filetypes = { "go", "gomod" }
+    filetypes = { "go", "gomod", "gotmpl" }
     root_dir = root_pattern("go.mod", ".git")
 ```
 
