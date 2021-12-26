@@ -137,6 +137,7 @@ return {
     },
   },
   docs = {
+    package_json = 'https://raw.githubusercontent.com/denoland/vscode_deno/main/package.json',
     description = [[
 https://github.com/denoland/deno
 
