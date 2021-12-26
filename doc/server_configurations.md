@@ -843,6 +843,110 @@ vim.g.markdown_fenced_languages = {
 ```
 
 
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`deno.cache`**: `string`
+
+  Default: `vim.NIL`
+  
+  null
+
+- **`deno.codeLens.implementations`**: `boolean`
+
+  null
+
+- **`deno.codeLens.references`**: `boolean`
+
+  null
+
+- **`deno.codeLens.referencesAllFunctions`**: `boolean`
+
+  null
+
+- **`deno.codeLens.test`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`deno.codeLens.testArgs`**: `array`
+
+  Default: `{ "--allow-all" }`
+  
+  Array items: `{type = "string"}`
+  
+  null
+
+- **`deno.config`**: `string`
+
+  Default: `vim.NIL`
+  
+  null
+
+- **`deno.enable`**: `boolean`
+
+  null
+
+- **`deno.importMap`**: `string`
+
+  Default: `vim.NIL`
+  
+  null
+
+- **`deno.internalDebug`**: `boolean`
+
+  null
+
+- **`deno.lint`**: `boolean`
+
+  null
+
+- **`deno.path`**: `string`
+
+  Default: `vim.NIL`
+  
+  null
+
+- **`deno.suggest.autoImports`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`deno.suggest.completeFunctionCalls`**: `boolean`
+
+  null
+
+- **`deno.suggest.imports.autoDiscover`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`deno.suggest.imports.hosts`**: `object`
+
+  Default: `{["https://cdn.nest.land"] = true,["https://crux.land"] = true,["https://deno.land"] = true}`
+  
+  null
+
+- **`deno.suggest.names`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`deno.suggest.paths`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`deno.unstable`**: `boolean`
+
+  null
+
+</details>
 
 
 **Snippet to enable the language server:**
