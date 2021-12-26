@@ -6,9 +6,10 @@ return {
     filetypes = { 'lean' },
     root_dir = function(fname)
       -- check if inside elan stdlib
+      fname = util.path.sanitize(fname)
       local stdlib_dir
       do
-        local _, endpos = fname:find(util.path.sep .. util.path.join('lib', 'lean'))
+        local _, endpos = fname:find '/lib/lean'
         if endpos then
           stdlib_dir = fname:sub(1, endpos)
         end
