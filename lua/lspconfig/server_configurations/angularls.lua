@@ -49,6 +49,7 @@ return {
     }
   end,
   docs = {
+    package_json = 'https://raw.githubusercontent.com/angular/vscode-ng-language-service/master/package.json',
     description = [[
 https://github.com/angular/vscode-ng-language-service
 
