@@ -16,7 +16,7 @@ return {
     single_file_support = true,
   },
   docs = {
-    package_json = 'https://github.com/pappasam/coc-jedi/blob/main/package.json',
+    package_json = 'https://raw.githubusercontent.com/pappasam/coc-jedi/main/package.json',
     description = [[
 https://github.com/pappasam/jedi-language-server
 
