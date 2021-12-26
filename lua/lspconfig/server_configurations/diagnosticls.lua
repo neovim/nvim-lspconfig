@@ -15,6 +15,7 @@ return {
     filetypes = {},
   },
   docs = {
+    package_json = 'https://raw.githubusercontent.com/iamcco/coc-diagnostic/master/package.json',
     description = [[
 https://github.com/iamcco/diagnostic-languageserver
 
