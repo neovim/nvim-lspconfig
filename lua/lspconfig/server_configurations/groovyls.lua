@@ -13,6 +13,7 @@ return {
     end,
   },
   docs = {
+    package_json = 'https://raw.githubusercontent.com/GroovyLanguageServer/groovy-language-server/master/vscode-extension/package.json',
     description = [[
 https://github.com/prominic/groovy-language-server.git
 
