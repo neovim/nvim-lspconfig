@@ -56,6 +56,7 @@ return {
     },
   },
   docs = {
+    package_json = 'https://raw.githubusercontent.com/clangd/vscode-clangd/master/package.json',
     description = [[
 https://clangd.llvm.org/installation.html
 
