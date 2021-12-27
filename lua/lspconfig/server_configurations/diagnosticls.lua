@@ -15,7 +15,8 @@ return {
     filetypes = {},
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/iamcco/coc-diagnostic/master/package.json',
+    -- Since diagnostic-languageserver is configured using initializationOptions, it is inappropriate to specify package_json.
+    -- package_json = 'https://raw.githubusercontent.com/iamcco/coc-diagnostic/master/package.json',
     description = [[
 https://github.com/iamcco/diagnostic-languageserver
 
