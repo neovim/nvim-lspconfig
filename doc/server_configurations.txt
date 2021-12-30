@@ -100,6 +100,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [sixtyfps](#sixtyfps)
 - [solang](#solang)
 - [solargraph](#solargraph)
+- [solc](#solc)
 - [solidity_ls](#solidity_ls)
 - [sorbet](#sorbet)
 - [sourcekit](#sourcekit)
@@ -6754,6 +6755,30 @@ require'lspconfig'.solargraph.setup{}
         diagnostics = true
       }
     }
+```
+
+
+## solc
+
+https://docs.soliditylang.org/en/latest/installing-solidity.html
+
+solc is the native language server for the Solidity language.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.solc.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "solc", "--lsp" }
+    filetypes = { "solidity" }
+    root_dir = root_pattern(".git")
 ```
 
 
