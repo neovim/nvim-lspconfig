@@ -9,9 +9,14 @@ local language_id_mapping = {
   xhtml = 'xhtml',
 }
 
+local bin_name = 'ltex-ls'
+if vim.fn.has 'win32' == 1 then
+  bin_name = bin_name .. '.bat'
+end
+
 return {
   default_config = {
-    cmd = { 'ltex-ls' },
+    cmd = { bin_name },
     filetypes = { 'bib', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
