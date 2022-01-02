@@ -60,22 +60,24 @@ end
 
 function M.create_module_commands(module_name, commands)
   for command_name, def in pairs(commands) do
-    local parts = { 'command!' }
-    -- Insert attributes.
-    for k, v in pairs(def) do
-      if type(k) == 'string' and type(v) == 'boolean' and v then
-        table.insert(parts, '-' .. k)
-      elseif type(k) == 'number' and type(v) == 'string' and v:match '^%-' then
-        table.insert(parts, v)
+    if type(def) == 'table' then
+      local parts = { 'command!' }
+      -- Insert attributes.
+      for k, v in pairs(def) do
+        if type(k) == 'string' and type(v) == 'boolean' and v then
+          table.insert(parts, '-' .. k)
+        elseif type(k) == 'number' and type(v) == 'string' and v:match '^%-' then
+          table.insert(parts, v)
+        end
       end
+      table.insert(parts, command_name)
+      -- The command definition.
+      table.insert(
+        parts,
+        string.format("lua require'lspconfig'[%q].commands[%q][1](<f-args>)", module_name, command_name)
+      )
+      api.nvim_command(table.concat(parts, ' '))
     end
-    table.insert(parts, command_name)
-    -- The command definition.
-    table.insert(
-      parts,
-      string.format("lua require'lspconfig'[%q].commands[%q][1](<f-args>)", module_name, command_name)
-    )
-    api.nvim_command(table.concat(parts, ' '))
   end
 end
 
