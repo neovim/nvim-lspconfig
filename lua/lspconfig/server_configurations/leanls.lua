@@ -19,6 +19,10 @@ return {
         or stdlib_dir
         or util.find_git_ancestor(fname)
     end,
+    on_new_config = function(config, root_dir)
+      -- add root dir as command-line argument for `ps aux`
+      table.insert(config.cmd, root_dir)
+    end,
     single_file_support = true,
   },
   docs = {
