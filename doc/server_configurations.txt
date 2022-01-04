@@ -3844,6 +3844,10 @@ require'lspconfig'.leanls.setup{}
   Default Values:
     cmd = { "lean", "--server" }
     filetypes = { "lean" }
+    on_new_config = function(config, root_dir)
+          -- add root dir as command-line argument for `ps aux`
+          table.insert(config.cmd, root_dir)
+        end,
     root_dir = root_pattern("lakefile.lean", "lean-toolchain", "leanpkg.toml", ".git")
     single_file_support = true
 ```
