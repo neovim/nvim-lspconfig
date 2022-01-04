@@ -520,7 +520,7 @@ require'lspconfig'.clangd.setup{}
   
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8
-    cmd = { "clangd", "--background-index" }
+    cmd = { "clangd" }
     filetypes = { "c", "cpp", "objc", "objcpp" }
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
     single_file_support = true
