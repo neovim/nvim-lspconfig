@@ -4145,7 +4145,7 @@ require'lspconfig'.ltex.setup{}
   
   Default Values:
     cmd = { "ltex-ls" }
-    filetypes = { "bib", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" }
+    filetypes = { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" }
     get_language_id = function(_, filetype)
           local language_id = language_id_mapping[filetype]
           if language_id then
