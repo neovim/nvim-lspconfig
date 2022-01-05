@@ -927,7 +927,7 @@ This server accepts configuration via the `settings` key.
 
 - **`deno.suggest.imports.hosts`**: `object`
 
-  Default: `{["https://cdn.nest.land"] = true,["https://crux.land"] = true,["https://deno.land"] = true}`
+  Default: `{["https://crux.land"] = true,["https://deno.land"] = true,["https://x.nest.land"] = true}`
   
   null
 
