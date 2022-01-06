@@ -7571,7 +7571,7 @@ Language server for Taplo, a TOML toolkit.
 
 `taplo-lsp` can be installed via `cargo`:
 ```sh
-cargo install taplo-lsp
+cargo install --locked taplo-lsp
 ```
     
 
