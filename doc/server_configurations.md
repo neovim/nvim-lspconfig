@@ -6314,6 +6314,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.procMacro.ignored`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
+
 - **`rust-analyzer.procMacro.server`**: `null|string`
 
   Default: `vim.NIL`
@@ -7235,6 +7241,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`Lua.hint.arrayIndex`**: `enum { "Enable", "Auto", "Disable" }`
+
+  Default: `"Auto"`
+  
+  null
+
 - **`Lua.hint.enable`**: `boolean`
 
   null
@@ -7571,7 +7583,7 @@ Language server for Taplo, a TOML toolkit.
 
 `taplo-lsp` can be installed via `cargo`:
 ```sh
-cargo install taplo-lsp
+cargo install --locked taplo-lsp
 ```
     
 
