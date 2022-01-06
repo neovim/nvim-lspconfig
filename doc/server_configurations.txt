@@ -959,8 +959,6 @@ require'lspconfig'.denols.setup{}
 ```lua
   Commands:
   - DenolsCache: Cache a module and all of its dependencies.
-  - DenolsDefinition: Jump to definition. This handle deno:/ schema in deno:// buffer.
-  - DenolsReferences: List references. This handle deno:/ schema in deno:// buffer.
   
   Default Values:
     cmd = { "deno", "lsp" }
