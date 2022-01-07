@@ -38,7 +38,7 @@ local default_capabilities = vim.tbl_deep_extend(
 
 return {
   default_config = {
-    cmd = { 'clangd', '--background-index' },
+    cmd = { 'clangd' },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
     root_dir = function(fname)
       local filename = util.path.is_absolute(fname) and fname or util.path.join(vim.loop.cwd(), fname)

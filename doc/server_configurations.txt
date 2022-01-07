@@ -37,7 +37,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [esbonio](#esbonio)
 - [eslint](#eslint)
 - [flow](#flow)
-- [flux-lsp](#flux-lsp)
+- [flux_lsp](#flux_lsp)
 - [fortls](#fortls)
 - [fsautocomplete](#fsautocomplete)
 - [fstar](#fstar)
@@ -45,6 +45,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [ghcide](#ghcide)
 - [golangci_lint_ls](#golangci_lint_ls)
 - [gopls](#gopls)
+- [grammarly](#grammarly)
 - [graphql](#graphql)
 - [groovyls](#groovyls)
 - [haxe_language_server](#haxe_language_server)
@@ -87,6 +88,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [quick_lint_js](#quick_lint_js)
 - [r_language_server](#r_language_server)
 - [racket_langserver](#racket_langserver)
+- [remark_ls](#remark_ls)
 - [rescriptls](#rescriptls)
 - [rls](#rls)
 - [rnix](#rnix)
@@ -98,6 +100,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [sixtyfps](#sixtyfps)
 - [solang](#solang)
 - [solargraph](#solargraph)
+- [solc](#solc)
 - [solidity_ls](#solidity_ls)
 - [sorbet](#sorbet)
 - [sourcekit](#sourcekit)
@@ -119,6 +122,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [typeprof](#typeprof)
 - [vala_ls](#vala_ls)
 - [vdmj](#vdmj)
+- [verible](#verible)
 - [vimls](#vimls)
 - [vls](#vls)
 - [volar](#volar)
@@ -516,7 +520,7 @@ require'lspconfig'.clangd.setup{}
   
   Default Values:
     capabilities = default capabilities, with offsetEncoding utf-8
-    cmd = { "clangd", "--background-index" }
+    cmd = { "clangd" }
     filetypes = { "c", "cpp", "objc", "objcpp" }
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
     single_file_support = true
@@ -612,7 +616,6 @@ require'lspconfig'.codeqlls.setup{}
     settings = {
       search_path = "list containing all search paths, eg: '~/codeql-home/codeql-repo'"
     }
-    single_file_support = true
 ```
 
 
@@ -841,6 +844,110 @@ vim.g.markdown_fenced_languages = {
 ```
 
 
+This server accepts configuration via the `settings` key.
+<details><summary>Available settings:</summary>
+
+- **`deno.cache`**: `string`
+
+  Default: `vim.NIL`
+  
+  null
+
+- **`deno.codeLens.implementations`**: `boolean`
+
+  null
+
+- **`deno.codeLens.references`**: `boolean`
+
+  null
+
+- **`deno.codeLens.referencesAllFunctions`**: `boolean`
+
+  null
+
+- **`deno.codeLens.test`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`deno.codeLens.testArgs`**: `array`
+
+  Default: `{ "--allow-all" }`
+  
+  Array items: `{type = "string"}`
+  
+  null
+
+- **`deno.config`**: `string`
+
+  Default: `vim.NIL`
+  
+  null
+
+- **`deno.enable`**: `boolean`
+
+  null
+
+- **`deno.importMap`**: `string`
+
+  Default: `vim.NIL`
+  
+  null
+
+- **`deno.internalDebug`**: `boolean`
+
+  null
+
+- **`deno.lint`**: `boolean`
+
+  null
+
+- **`deno.path`**: `string`
+
+  Default: `vim.NIL`
+  
+  null
+
+- **`deno.suggest.autoImports`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`deno.suggest.completeFunctionCalls`**: `boolean`
+
+  null
+
+- **`deno.suggest.imports.autoDiscover`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`deno.suggest.imports.hosts`**: `object`
+
+  Default: `{["https://crux.land"] = true,["https://deno.land"] = true,["https://x.nest.land"] = true}`
+  
+  null
+
+- **`deno.suggest.names`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`deno.suggest.paths`**: `boolean`
+
+  Default: `true`
+  
+  null
+
+- **`deno.unstable`**: `boolean`
+
+  null
+
+</details>
 
 
 **Snippet to enable the language server:**
@@ -852,8 +959,6 @@ require'lspconfig'.denols.setup{}
 ```lua
   Commands:
   - DenolsCache: Cache a module and all of its dependencies.
-  - DenolsDefinition: Jump to definition. This handle deno:/ schema in deno:// buffer.
-  - DenolsReferences: List references. This handle deno:/ schema in deno:// buffer.
   
   Default Values:
     cmd = { "deno", "lsp" }
@@ -995,6 +1100,17 @@ https://github.com/mattn/efm-langserver
 
 General purpose Language Server that can use specified error message format generated from specified command.
 
+Requires at minimum EFM version [v0.0.38](https://github.com/mattn/efm-langserver/releases/tag/v0.0.38) to support
+launching the language server on single files. If on an older version of EFM, disable single file support:
+
+```lua
+require('lspconfig')['efm'].setup{
+  settings = ..., -- You must populate this according to the EFM readme
+  filetypes = ..., -- Populate this according to the note below
+  single_file_support = false, -- This is the important line for supporting older version of EFM
+}
+```
+
 Note: In order for neovim's built-in language server client to send the appropriate `languageId` to EFM, **you must
 specify `filetypes` in your call to `setup{}`**. Otherwise `lspconfig` will launch EFM on the `BufEnter` instead
 of the `FileType` autocommand, and the `filetype` variable used to populate the `languageId` will not yet be set.
@@ -1021,7 +1137,7 @@ require'lspconfig'.efm.setup{}
   Default Values:
     cmd = { "efm-langserver" }
     root_dir = util.root_pattern(".git")
-    single_file_support = false
+    single_file_support = true
 ```
 
 
@@ -1583,7 +1699,7 @@ require'lspconfig'.flow.setup{}
 ```
 
 
-## flux-lsp
+## flux_lsp
 
 https://github.com/influxdata/flux-lsp
 `flux-lsp` can be installed via `cargo`:
@@ -1595,7 +1711,7 @@ cargo install --git https://github.com/influxdata/flux-lsp
 
 **Snippet to enable the language server:**
 ```lua
-require'lspconfig'.flux-lsp.setup{}
+require'lspconfig'.flux_lsp.setup{}
 ```
 
 **Commands and default values:**
@@ -1606,6 +1722,7 @@ require'lspconfig'.flux-lsp.setup{}
     cmd = { "flux-lsp" }
     filetypes = { "flux" }
     root_dir = util.find_git_ancestor
+    single_file_support = true
 ```
 
 
@@ -1881,8 +1998,42 @@ require'lspconfig'.gopls.setup{}
   
   Default Values:
     cmd = { "gopls" }
-    filetypes = { "go", "gomod" }
+    filetypes = { "go", "gomod", "gotmpl" }
     root_dir = root_pattern("go.mod", ".git")
+```
+
+
+## grammarly
+
+https://github.com/emacs-grammarly/unofficial-grammarly-language-server
+
+`unofficial-grammarly-language-server` can be installed via `npm`:
+
+```sh
+npm i -g @emacs-grammarly/unofficial-grammarly-language-server
+```
+
+WARNING: Since this language server uses Grammarly's API, any document you open with it running is shared with them. Please evaluate their [privacy policy](https://www.grammarly.com/privacy-policy) before using this.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.grammarly.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "unofficial-grammarly-language-server", "--stdio" }
+    filetypes = { "markdown" }
+    handlers = {
+      ["$/updateDocumentState"] = <function 1>
+    }
+    root_dir = util.find_git_ancestor
+    single_file_support = true
 ```
 
 
@@ -3691,6 +3842,10 @@ require'lspconfig'.leanls.setup{}
   Default Values:
     cmd = { "lean", "--server" }
     filetypes = { "lean" }
+    on_new_config = function(config, root_dir)
+          -- add root dir as command-line argument for `ps aux`
+          table.insert(config.cmd, root_dir)
+        end,
     root_dir = root_pattern("lakefile.lean", "lean-toolchain", "leanpkg.toml", ".git")
     single_file_support = true
 ```
@@ -3988,7 +4143,7 @@ require'lspconfig'.ltex.setup{}
   
   Default Values:
     cmd = { "ltex-ls" }
-    filetypes = { "bib", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" }
+    filetypes = { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" }
     get_language_id = function(_, filetype)
           local language_id = language_id_mapping[filetype]
           if language_id then
@@ -4144,87 +4299,6 @@ https://github.com/PMunch/nimlsp
 nimble install nimlsp
 ```
     
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`nim.buildCommand`**: `string`
-
-  Default: `"c"`
-  
-  Nim build command \(c\, cpp\, doc\, etc\)
-
-- **`nim.buildOnSave`**: `boolean`
-
-  Execute build task from tasks\.json file on save\.
-
-- **`nim.enableNimsuggest`**: `boolean`
-
-  Default: `true`
-  
-  Enable calling nimsuggest process to provide completion suggestions\, hover suggestions\, etc\.
-  This option requires restart to take effect\.
-
-- **`nim.licenseString`**: `string`
-
-  Default: `""`
-  
-  Optional license text that will be inserted on nim file creation\.
-
-- **`nim.lintOnSave`**: `boolean`
-
-  Default: `true`
-  
-  Check code by using \'nim check\' on save\.
-
-- **`nim.logNimsuggest`**: `boolean`
-
-  Enable verbose logging of nimsuggest to use profile directory\.
-
-- **`nim.nimprettyIndent`**: `integer`
-
-  Default: `0`
-  
-  Nimpretty\: set the number of spaces that is used for indentation
-  \-\-indent\:0 means autodetection \(default behaviour\)\.
-
-- **`nim.nimprettyMaxLineLen`**: `integer`
-
-  Default: `80`
-  
-  Nimpretty\: set the desired maximum line length \(default\: 80\)\.
-
-- **`nim.nimsuggestRestartTimeout`**: `integer`
-
-  Default: `60`
-  
-  Nimsuggest will be restarted after this timeout in minutes\, if 0 then restart disabled\.
-  This option requires restart to take effect\.
-
-- **`nim.project`**: `array`
-
-  Default: `{}`
-  
-  Nim project file\, if empty use current selected\.
-
-- **`nim.projectMapping`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  For non project mode list of per file project mapping using regex\, for example \`\`\`\{\"\(\.\*\)\.inim\"\: \"\$1\.nim\"\}\`\`\`
-
-- **`nim.runOutputDirectory`**: `string`
-
-  Default: `""`
-  
-  Output directory for run selected file command\. The directory is relative to the workspace root\.
-
-- **`nim.test-project`**: `string`
-
-  Default: `""`
-  
-  Optional test project\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -5495,6 +5569,63 @@ require'lspconfig'.racket_langserver.setup{}
 ```
 
 
+## remark_ls
+
+https://github.com/remarkjs/remark-language-server
+
+`remark-language-server` can be installed via `npm`:
+```sh
+npm install -g remark-language-server
+```
+
+`remark-language-server` uses the same
+[configuration files](https://github.com/remarkjs/remark/tree/main/packages/remark-cli#example-config-files-json-yaml-js)
+as `remark-cli`.
+
+This uses a plugin based system. Each plugin needs to be installed locally using `npm` or `yarn`.
+
+For example, given the following `.remarkrc.json`:
+
+```json
+{
+  "presets": [
+    "remark-preset-lint-recommended"
+  ]
+}
+```
+
+`remark-preset-lint-recommended` needs to be installed in the local project:
+
+```sh
+npm install remark-preset-lint-recommended
+```
+
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.remark_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "remark-language-server", "--stdio" }
+    filetypes = { "markdown" }
+    root_dir = function(path)
+        -- Support git directories and git files (worktrees)
+        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
+          return path
+        end
+      end)
+    end
+    single_file_support = true
+```
+
+
 ## rescriptls
 
 https://github.com/rescript-lang/rescript-vscode
@@ -5887,7 +6018,7 @@ This server accepts configuration via the `settings` key.
 
 - **`rust-analyzer.completion.snippets`**: `object`
 
-  Default: `vim.empty_dict()`
+  Default: `{["Arc::new"] = {body = "Arc::new(${receiver})",description = "Put the expression into an `Arc`",postfix = "arc",requires = "std::sync::Arc",scope = "expr"},["Box::pin"] = {body = "Box::pin(${receiver})",description = "Put the expression into a pinned `Box`",postfix = "pinbox",requires = "std::boxed::Box",scope = "expr"},Err = {body = "Err(${receiver})",description = "Wrap the expression in a `Result::Err`",postfix = "err",scope = "expr"},Ok = {body = "Ok(${receiver})",description = "Wrap the expression in a `Result::Ok`",postfix = "ok",scope = "expr"},["Rc::new"] = {body = "Rc::new(${receiver})",description = "Put the expression into an `Rc`",postfix = "rc",requires = "std::rc::Rc",scope = "expr"},Some = {body = "Some(${receiver})",description = "Wrap the expression in an `Option::Some`",postfix = "some",scope = "expr"}}`
   
   null
 
@@ -6183,6 +6314,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.procMacro.ignored`**: `object`
+
+  Default: `vim.empty_dict()`
+  
+  null
+
 - **`rust-analyzer.procMacro.server`**: `null|string`
 
   Default: `vim.NIL`
@@ -6256,16 +6393,6 @@ This server accepts configuration via the `settings` key.
   Default: `"off"`
   
   Trace requests to the rust\-analyzer \(this is usually overly verbose and not recommended for regular users\)\.
-
-- **`rust-analyzer.updates.askBeforeDownload`**: `boolean`
-
-  Whether to ask for permission before downloading any files from the Internet\.
-
-- **`rust-analyzer.updates.channel`**: `enum { "stable", "nightly" }`
-
-  Default: `"stable"`
-  
-  null
 
 - **`rust-analyzer.workspace.symbol.search.kind`**: `enum { "only_types", "all_symbols" }`
 
@@ -6555,6 +6682,30 @@ require'lspconfig'.solargraph.setup{}
         diagnostics = true
       }
     }
+```
+
+
+## solc
+
+https://docs.soliditylang.org/en/latest/installing-solidity.html
+
+solc is the native language server for the Solidity language.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.solc.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "solc", "--lsp" }
+    filetypes = { "solidity" }
+    root_dir = root_pattern(".git")
 ```
 
 
@@ -7090,6 +7241,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`Lua.hint.arrayIndex`**: `enum { "Enable", "Auto", "Disable" }`
+
+  Default: `"Auto"`
+  
+  null
+
 - **`Lua.hint.enable`**: `boolean`
 
   null
@@ -7426,7 +7583,7 @@ Language server for Taplo, a TOML toolkit.
 
 `taplo-lsp` can be installed via `cargo`:
 ```sh
-cargo install taplo-lsp
+cargo install --locked taplo-lsp
 ```
     
 
@@ -7862,6 +8019,41 @@ require'lspconfig'.vdmj.setup{}
       version = "The latest version installed in `mavenrepo`"
     }
     root_dir = util.find_git_ancestor(fname) or find_vscode_ancestor(fname)
+```
+
+
+## verible
+
+https://github.com/chipsalliance/verible
+
+A linter and formatter for verilog and SystemVerilog files.
+
+Release binaries can be downloaded from [here](https://github.com/chipsalliance/verible/releases)
+and placed in a directory on PATH.
+
+See https://github.com/chipsalliance/verible/tree/master/verilog/tools/ls/README.md for options.
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.verible.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "verible-verilog-ls" }
+    filetypes = { "systemverilog", "verilog" }
+    root_dir = function(path)
+        -- Support git directories and git files (worktrees)
+        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
+          return path
+        end
+      end)
+    end
 ```
 
 

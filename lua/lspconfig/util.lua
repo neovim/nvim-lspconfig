@@ -19,6 +19,14 @@ M.default_config = {
 -- global on_setup hook
 M.on_setup = nil
 
+function M.bufname_valid(bufname)
+  if bufname and bufname ~= '' and (bufname:match '^([a-zA-Z]:).*' or bufname:match '^/') then
+    return true
+  else
+    return false
+  end
+end
+
 function M.validate_bufnr(bufnr)
   validate {
     bufnr = { bufnr, 'n' },
@@ -87,6 +95,16 @@ end
 
 -- Some path utilities
 M.path = (function()
+  local is_windows = uv.os_uname().version:match 'Windows'
+
+  local function sanitize(path)
+    if is_windows then
+      path = path:sub(1, 1):upper() .. path:sub(2)
+      path = path:gsub('\\', '/')
+    end
+    return path
+  end
+
   local function exists(filename)
     local stat = uv.fs_stat(filename)
     return stat and stat.type or false
@@ -100,16 +118,10 @@ M.path = (function()
     return exists(filename) == 'file'
   end
 
-  local is_windows = uv.os_uname().version:match 'Windows'
-  local path_sep = is_windows and '\\' or '/'
-
-  local is_fs_root
-  if is_windows then
-    is_fs_root = function(path)
+  local function is_fs_root(path)
+    if is_windows then
       return path:match '^%a:$'
-    end
-  else
-    is_fs_root = function(path)
+    else
       return path == '/'
     end
   end
@@ -122,25 +134,25 @@ M.path = (function()
     end
   end
 
-  local dirname
-  do
-    local strip_dir_pat = path_sep .. '([^' .. path_sep .. ']+)$'
-    local strip_sep_pat = path_sep .. '$'
-    dirname = function(path)
-      if not path or #path == 0 then
-        return
-      end
-      local result = path:gsub(strip_sep_pat, ''):gsub(strip_dir_pat, '')
-      if #result == 0 then
+  local function dirname(path)
+    local strip_dir_pat = '/([^/]+)$'
+    local strip_sep_pat = '/$'
+    if not path or #path == 0 then
+      return
+    end
+    local result = path:gsub(strip_sep_pat, ''):gsub(strip_dir_pat, '')
+    if #result == 0 then
+      if is_windows then
+        return path:sub(1, 2):upper()
+      else
         return '/'
       end
-      return result
     end
+    return result
   end
 
   local function path_join(...)
-    local result = table.concat(vim.tbl_flatten { ... }, path_sep):gsub(path_sep .. '+', path_sep)
-    return result
+    return table.concat(vim.tbl_flatten { ... }, '/')
   end
 
   -- Traverse the path calling cb along the way.
@@ -199,9 +211,9 @@ M.path = (function()
     is_file = is_file,
     is_absolute = is_absolute,
     exists = exists,
-    sep = path_sep,
     dirname = dirname,
     join = path_join,
+    sanitize = sanitize,
     traverse_parents = traverse_parents,
     iterate_parents = iterate_parents,
     is_descendant = is_descendant,
@@ -215,18 +227,17 @@ function M.server_per_root_dir_manager(_make_config)
   local single_file_clients = {}
   local manager = {}
 
-  function manager.add(root_dir, single_file_support)
+  function manager.add(root_dir, single_file)
     local client_id
-    if single_file_support then
+    -- This is technically unnecessary, as lspconfig's path utilities should be hermetic,
+    -- however users are free to return strings in custom root resolvers.
+    root_dir = M.path.sanitize(root_dir)
+    if single_file then
       client_id = single_file_clients[root_dir]
-    else
-      if not root_dir then
-        return
-      end
-      if not M.path.is_dir(root_dir) then
-        return
-      end
+    elseif root_dir and M.path.is_dir(root_dir) then
       client_id = clients[root_dir]
+    else
+      return
     end
 
     -- Check if we have a client already or start and store it.
@@ -260,7 +271,7 @@ function M.server_per_root_dir_manager(_make_config)
       -- Sending rootDirectory and workspaceFolders as null is not explicitly
       -- codified in the spec. Certain servers crash if initialized with a NULL
       -- root directory.
-      if single_file_support then
+      if single_file then
         new_config.root_dir = nil
         new_config.workspace_folders = nil
       end
@@ -271,7 +282,7 @@ function M.server_per_root_dir_manager(_make_config)
         return
       end
 
-      if single_file_support then
+      if single_file then
         single_file_clients[root_dir] = client_id
       else
         clients[root_dir] = client_id
@@ -388,7 +399,7 @@ function M.get_clients_from_cmd_args(arg)
     result[id] = vim.lsp.get_client_by_id(tonumber(id))
   end
   if vim.tbl_isempty(result) then
-    return vim.lsp.get_active_clients()
+    return M.get_managed_clients()
   end
   return vim.tbl_values(result)
 end
@@ -399,6 +410,17 @@ function M.get_active_client_by_name(bufnr, servername)
       return client
     end
   end
+end
+
+function M.get_managed_clients()
+  local configs = require 'lspconfig.configs'
+  local clients = {}
+  for _, config in pairs(configs) do
+    if config.manager then
+      vim.list_extend(clients, config.manager.clients())
+    end
+  end
+  return clients
 end
 
 return M

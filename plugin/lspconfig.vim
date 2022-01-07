@@ -10,7 +10,7 @@ end
 lsp_get_active_client_ids = function()
   return vim.tbl_map(function(client)
     return ("%d (%s)"):format(client.id, client.name)
-  end, vim.lsp.get_active_clients())
+  end, require'lspconfig.util'.get_managed_clients())
 end
 require'lspconfig'._root._setup()
 EOF
