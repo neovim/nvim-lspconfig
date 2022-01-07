@@ -2,9 +2,11 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
+    -- `foam-ls` can be a shell script executing:
+    -- node /path/to/foam-language-server/lib/foam-ls.js --stdio
     cmd = { 'foam-ls' },
     filetypes = { 'foam', 'OpenFOAM' },
-    root_dir = util.root_pattern('system'),
+    root_dir = util.root_pattern('system/controlDict'),
     log_level = vim.lsp.protocol.MessageType.Warning,
   },
   docs = {
@@ -12,16 +14,13 @@ return {
     description = [[
 https://github.com/FoamScience/foam-language-server
 
-`foam-language-server` can be installed via `npm` (requires a sourced OpenFOAM installation):
+`foam-language-server` can be installed via `npm`
 ```sh
-npm install
+npm install foam-language-server
 ```
-
-Supported OpenFOAM forks/version:
-    - Foam-Extend 4.0 and later
 ]],
     default_config = {
-      root_dir = [[root_pattern("system")]],
+      root_dir = [[root_pattern("system/controlDict")]],
     },
   },
 }
