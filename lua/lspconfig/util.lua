@@ -405,11 +405,17 @@ function M.get_clients_from_cmd_args(arg)
 end
 
 function M.get_active_client_by_name(bufnr, servername)
-  for _, client in pairs(vim.lsp.buf_get_clients(bufnr)) do
+  for _, client in pairs(M.buf_get_managed_clients(bufnr)) do
     if client.name == servername then
       return client
     end
   end
+end
+
+function M.buf_get_managed_clients(bufnr)
+  return vim.tbl_filter(function(client)
+    return vim.lsp.buf_is_attached(bufnr, client.id)
+  end, M.get_managed_clients())
 end
 
 function M.get_managed_clients()

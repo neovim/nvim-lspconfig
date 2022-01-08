@@ -115,8 +115,8 @@ end
 return function()
   -- These options need to be cached before switching to the floating
   -- buffer.
-  local buf_clients = vim.lsp.buf_get_clients()
-  local clients = vim.lsp.get_active_clients()
+  local buf_clients = util.buf_get_managed_clients()
+  local clients = util.get_managed_clients()
   local buffer_filetype = vim.bo.filetype
 
   local win_info = windows.percentage_range_window(0.8, 0.7)
