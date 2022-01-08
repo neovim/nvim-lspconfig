@@ -250,6 +250,11 @@ function configs.__newindex(t, config_name, config_def)
 
     function manager.try_add_wrapper(bufnr)
       local buf_filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+
+      if not config.filetypes then
+        return
+      end
+
       for _, filetype in ipairs(config.filetypes) do
         if buf_filetype == filetype then
           manager.try_add(bufnr)
