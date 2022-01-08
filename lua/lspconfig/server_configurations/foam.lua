@@ -1,10 +1,22 @@
 local util = require 'lspconfig.util'
+local bin_name = 'foam-ls'
+local cmd = { bin_name }
+
+if vim.fn.has 'win32' == 1 then
+  cmd = { 'cmd.exe', '/C', bin_name }
+end
 
 return {
   default_config = {
-    cmd = { 'foam-ls' },
+    cmd = cmd,
     filetypes = { 'foam', 'OpenFOAM' },
-    root_dir = util.root_pattern('system'),
+    root_dir = function (fname)
+        return util.search_ancestors(fname, function (path)
+            if util.path.exists(util.path.join(path, "system", "controlDict")) then
+               return path
+            end
+        end)
+    end,
     log_level = vim.lsp.protocol.MessageType.Warning,
   },
   docs = {
@@ -17,8 +29,5 @@ https://github.com/FoamScience/foam-language-server
 npm install -g foam-language-server
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern("system")]],
-    },
   },
 }
