@@ -16,7 +16,7 @@ https://github.com/FoamScience/foam-language-server
 
 `foam-language-server` can be installed via `npm`
 ```sh
-npm install foam-language-server
+npm install -g foam-language-server
 ```
 ]],
     default_config = {
