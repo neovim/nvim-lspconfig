@@ -249,6 +249,7 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     function manager.try_add_wrapper(bufnr)
+      bufnr = bufnr or api.nvim_get_current_buf()
       local buf_filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
       for _, filetype in ipairs(config.filetypes) do
         if buf_filetype == filetype then
