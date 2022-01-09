@@ -66,7 +66,7 @@ function configs.__newindex(t, config_name, config_def)
       end
       api.nvim_command(
         string.format(
-          "autocmd %s %s unsilent lua require'lspconfig'[%q].manager.try_add(0)",
+          "autocmd %s %s unsilent lua require'lspconfig'[%q].manager.try_add()",
           event,
           pattern,
           config.name
@@ -90,7 +90,7 @@ function configs.__newindex(t, config_name, config_def)
       if root_dir then
         api.nvim_command(
           string.format(
-            "autocmd BufReadPost %s/* unsilent lua require'lspconfig'[%q].manager.try_add_wrapper(0)",
+            "autocmd BufReadPost %s/* unsilent lua require'lspconfig'[%q].manager.try_add_wrapper()",
             vim.fn.fnameescape(root_dir),
             config.name
           )
@@ -249,6 +249,7 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     function manager.try_add_wrapper(bufnr)
+      bufnr = bufnr or api.nvim_get_current_buf()
       local buf_filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
       for _, filetype in ipairs(config.filetypes) do
         if buf_filetype == filetype then
