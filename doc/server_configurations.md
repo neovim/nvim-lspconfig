@@ -38,6 +38,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [eslint](#eslint)
 - [flow](#flow)
 - [flux_lsp](#flux_lsp)
+- [foam_ls](#foam_ls)
 - [fortls](#fortls)
 - [fsautocomplete](#fsautocomplete)
 - [fstar](#fstar)
@@ -1723,6 +1724,39 @@ require'lspconfig'.flux_lsp.setup{}
     filetypes = { "flux" }
     root_dir = util.find_git_ancestor
     single_file_support = true
+```
+
+
+## foam_ls
+
+https://github.com/FoamScience/foam-language-server
+
+`foam-language-server` can be installed via `npm`
+```sh
+npm install -g foam-language-server
+```
+
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.foam_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "foam-ls", "--stdio" }
+    filetypes = { "foam", "OpenFOAM" }
+    root_dir = function(path)
+            if util.path.exists(util.path.join(path, 'system', 'controlDict')) then
+              return path
+            end
+          end)
+        end,
 ```
 
 
@@ -5834,6 +5868,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.assist.exprFillDefault`**: `enum { "todo", "default" }`
+
+  Default: `"todo"`
+  
+  null
+
 - **`rust-analyzer.assist.importEnforceGranularity`**: `boolean`
 
   null
@@ -7727,8 +7767,6 @@ This server accepts configuration via the `settings` key.
 
 - **`terraform.codelens.referenceCount`**: `boolean`
 
-  Default: `true`
-  
   Display reference counts above top level blocks and attributes\.
 
 - **`terraform.languageServer`**: `object`
