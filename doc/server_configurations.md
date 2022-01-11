@@ -2500,6 +2500,7 @@ require'lspconfig'.hls.setup{}
         formattingProvider = "ormolu"
       }
     }
+    single_file_support = true
 ```
 
 
