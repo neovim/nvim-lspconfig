@@ -139,7 +139,6 @@ return {
     },
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/redhat-developer/vscode-java/master/package.json',
     description = [[
 https://projects.eclipse.org/projects/eclipse.jdt.ls
 
