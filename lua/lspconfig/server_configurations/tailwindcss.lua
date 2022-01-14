@@ -31,6 +31,7 @@ return {
       -- 'HTML (Eex)',
       -- 'HTML (EEx)',
       'html-eex',
+      'heex',
       'jade',
       'leaf',
       'liquid',
