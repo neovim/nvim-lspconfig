@@ -2043,9 +2043,9 @@ require'lspconfig'.golangci_lint_ls.setup{}
     cmd = { "golangci-lint-langserver" }
     filetypes = { "go", "gomod" }
     init_options = {
-      command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json" }
+      command = { "golangci-lint", "run", "--out-format", "json" }
     }
-    root_dir = root_pattern('go.mod', '.git')
+    root_dir = root_pattern('go.work') or root_pattern('go.mod', '.golangci.yaml', '.git')
 ```
 
 
