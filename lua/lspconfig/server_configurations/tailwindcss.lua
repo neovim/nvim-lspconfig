@@ -87,6 +87,13 @@ return {
           'classList',
           'ngClass',
         },
+        files = {
+          exclude = {
+            '**/.git/**',
+            '**/node_modules/**',
+            '**/.hg/**',
+          },
+        },
       },
     },
     on_new_config = function(new_config)
