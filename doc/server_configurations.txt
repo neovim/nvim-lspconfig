@@ -3068,6 +3068,15 @@ This server accepts configuration via the `settings` key.
   
   Defines allowed\/disallowed SHA\-256 checksums of Gradle Wrappers
 
+- **`java.jdt.ls.java.home`**: `string|null`
+
+  Default: `vim.NIL`
+  
+  Specifies the folder path to the JDK \(11 or more recent\) used to launch the Java Language Server\. This setting will replace the Java extension\'s embedded JRE to start the Java Language Server\. 
+  
+  On Windows\, backslashes must be escaped\, i\.e\.
+  \"java\.jdt\.ls\.java\.home\"\:\"C\:\\\\Program Files\\\\Java\\\\jdk11\.0\_8\"
+
 - **`java.jdt.ls.vmargs`**: `string|null`
 
   Default: `"-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m"`
@@ -3979,7 +3988,7 @@ require'lspconfig'.lemminx.setup{}
   
   Default Values:
     cmd = { "lemminx" }
-    filetypes = { "xml", "xsd", "svg" }
+    filetypes = { "xml", "xsd", "xsl", "xslt", "svg" }
     root_dir = util.find_git_ancestor
     single_file_support = true
 ```
