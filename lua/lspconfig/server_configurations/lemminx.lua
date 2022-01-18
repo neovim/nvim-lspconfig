@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'lemminx' },
-    filetypes = { 'xml', 'xsd', 'svg' },
+    filetypes = { 'xml', 'xsd', 'xsl', 'xslt', 'svg' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
   },
