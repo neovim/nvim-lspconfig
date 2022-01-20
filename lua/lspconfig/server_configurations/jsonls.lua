@@ -10,7 +10,7 @@ end
 return {
   default_config = {
     cmd = cmd,
-    filetypes = { 'json' },
+    filetypes = { 'json', 'jsonc' },
     init_options = {
       provideFormatter = true,
     },
