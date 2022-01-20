@@ -4,9 +4,6 @@ return {
   default_config = {
     cmd = { 'awk-language-server' },
     filetypes = { 'awk' },
-    root_dir = function(fname)
-      return util.path.dirname(fname)
-    end,
     single_file_support = true,
     handlers = {
       ['workspace/workspaceFolders'] = function()
