@@ -5,17 +5,17 @@ return {
     cmd = { 'awk-language-server' },
     filetypes = { 'awk' },
     root_dir = function(fname)
-        return util.path.dirname(fname)
+      return util.path.dirname(fname)
     end,
     single_file_support = true,
     handlers = {
-        ['workspace/workspaceFolders'] = function()
+      ['workspace/workspaceFolders'] = function()
         return {
           result = nil,
           error = nil,
         }
-        end
-      }
+      end,
+    },
   },
   docs = {
     description = [[
