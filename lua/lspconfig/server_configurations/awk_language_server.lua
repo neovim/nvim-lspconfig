@@ -1,18 +1,15 @@
 local util = require 'lspconfig.util'
 
+if vim.version().major == 0 and vim.version().minor < 7 then
+  vim.notify('The AWK language server requires nvim >= 0.7', vim.log.levels.ERROR)
+  return
+end
+
 return {
   default_config = {
     cmd = { 'awk-language-server' },
     filetypes = { 'awk' },
     single_file_support = true,
-    handlers = {
-      ['workspace/workspaceFolders'] = function()
-        return {
-          result = nil,
-          error = nil,
-        }
-      end,
-    },
   },
   docs = {
     description = [[
