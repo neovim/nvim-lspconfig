@@ -9,7 +9,12 @@ return {
   default_config = {
     cmd = { bin_name },
     filetypes = { 'ada' },
-    root_dir = util.root_pattern('Makefile', '.git', '*.gpr', '*.adc'),
+    root_dir = function() return '/' end,
+    lspinfo = function(cfg)
+      local extra = {}
+      table.insert(extra, 'GPR project:     ' .. cfg.settings.ada.projectFile)
+      return extra
+    end,
   },
   docs = {
     package_json = 'https://raw.githubusercontent.com/AdaCore/ada_language_server/master/integration/vscode/ada/package.json',
