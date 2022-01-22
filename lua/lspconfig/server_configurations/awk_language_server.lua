@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 if vim.version().major == 0 and vim.version().minor < 7 then
   vim.notify('The AWK language server requires nvim >= 0.7', vim.log.levels.ERROR)
   return
