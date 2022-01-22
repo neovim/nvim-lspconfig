@@ -169,6 +169,11 @@ require'lspconfig'.als.setup{}
   Default Values:
     cmd = { "ada_language_server" }
     filetypes = { "ada" }
+    lspinfo = function(cfg)
+          local extra = {}
+          table.insert(extra, 'GPR project:     ' .. cfg.settings.ada.projectFile)
+          return extra
+        end,
     root_dir = util.root_pattern("Makefile", ".git", "*.gpr", "*.adc")
 ```
 
