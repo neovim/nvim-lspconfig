@@ -1254,7 +1254,7 @@ This server accepts configuration via the `settings` key.
 
 - **`elixirLS.mixTarget`**: `string`
 
-  Mix target to use for compilation \(requires Elixir \>\= 1\.8\)
+  Mix target to use for compilation
 
 - **`elixirLS.projectDir`**: `string`
 
