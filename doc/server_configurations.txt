@@ -9,6 +9,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [ansiblels](#ansiblels)
 - [arduino_language_server](#arduino_language_server)
 - [asm_lsp](#asm_lsp)
+- [awk_ls](#awk_ls)
 - [bashls](#bashls)
 - [beancount](#beancount)
 - [bicep](#bicep)
@@ -350,6 +351,33 @@ require'lspconfig'.asm_lsp.setup{}
         end
       end)
     end
+```
+
+
+## awk_ls
+
+https://github.com/Beaglefoot/awk-language-server/
+
+`awk-language-server` can be installed via `npm`:
+```sh
+npm install -g awk-language-server
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.awk_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "awk-language-server" }
+    filetypes = { "awk" }
+    single_file_support = true
 ```
 
 
