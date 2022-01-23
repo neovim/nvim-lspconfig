@@ -127,7 +127,7 @@ The most common reasons a language server does not start or attach are:
 
 3. Not triggering root detection. **Some** language servers will only start if it is opened in a directory, or child directory, containing a file which signals the *root* of the project. Most of the time, this is a `.git` folder, but each server defines the root config in the lua file. See [server_configurations.md](doc/server_configurations.md) or the source for the list of root directories.
 
-4.You must pass `on_attach` and `capabilities` for **each** `setup {}` if you want these to take effect. 
+4. You must pass `on_attach` and `capabilities` for **each** `setup {}` if you want these to take effect. 
 
 5. **Do not call `setup {}` twice for the same server**. The second call to `setup {}` will overwrite the first.
 
