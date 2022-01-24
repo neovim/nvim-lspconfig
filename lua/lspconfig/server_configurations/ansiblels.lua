@@ -37,9 +37,10 @@ https://github.com/ansible/ansible-language-server
 
 Language server for the ansible configuration management tool.
 
-`ansible-language-server` can be installed via `yarn`:
+`ansible-language-server` can be installed via `npm`:
+
 ```sh
-yarn global add ansible-language-server
+npm install -g @ansible/ansible-language-server
 ```
 ]],
   },
