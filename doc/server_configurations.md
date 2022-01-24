@@ -4939,11 +4939,12 @@ require'lspconfig'.powershell_es.setup{}
 
 ## prismals
 
+Language Server for the Prisma JavaScript and TypeScript ORM
+  
+`@prisma/language-server` can be installed via npm
+```sh
 npm install -g @prisma/language-server
-
-'prismals, a language server for the prisma javascript and typescript orm'
-
-
+```
 
 **Snippet to enable the language server:**
 ```lua
