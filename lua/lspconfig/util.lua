@@ -135,8 +135,8 @@ M.path = (function()
   end
 
   local function dirname(path)
-    local strip_dir_pat = '/([^/]+)$'
-    local strip_sep_pat = '/$'
+    local strip_dir_pat = is_windows and '\\([^\\]+)$' or '/([^/]+)$'
+    local strip_sep_pat = is_windows and '\\$' or '/$'
     if not path or #path == 0 then
       return
     end
@@ -152,7 +152,7 @@ M.path = (function()
   end
 
   local function path_join(...)
-    return table.concat(vim.tbl_flatten { ... }, '/')
+    return table.concat(vim.tbl_flatten { ... }, is_windows and '\\' or '/')
   end
 
   -- Traverse the path calling cb along the way.
