@@ -919,6 +919,14 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`deno.certificateStores`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
+  
+  null
+
 - **`deno.codeLens.implementations`**: `boolean`
 
   null
@@ -1006,6 +1014,20 @@ This server accepts configuration via the `settings` key.
 - **`deno.suggest.paths`**: `boolean`
 
   Default: `true`
+  
+  null
+
+- **`deno.tlsCertificate`**: `string`
+
+  Default: `vim.NIL`
+  
+  null
+
+- **`deno.unsafelyIgnoreCertificateErrors`**: `array`
+
+  Default: `vim.NIL`
+  
+  Array items: `{type = "string"}`
   
   null
 
@@ -6455,6 +6477,12 @@ This server accepts configuration via the `settings` key.
   
   null
 
+- **`rust-analyzer.primeCaches.numThreads`**: `number`
+
+  Default: `0`
+  
+  null
+
 - **`rust-analyzer.procMacro.enable`**: `boolean`
 
   Default: `true`
@@ -7338,7 +7366,7 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.diagnostics.workspaceDelay`**: `integer`
 
-  Default: `0`
+  Default: `3`
   
   null
 
@@ -7538,13 +7566,13 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.workspace.maxPreload`**: `integer`
 
-  Default: `1000`
+  Default: `5000`
   
   null
 
 - **`Lua.workspace.preloadFileSize`**: `integer`
 
-  Default: `100`
+  Default: `500`
   
   null
 
