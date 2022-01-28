@@ -11,6 +11,7 @@
           buildInputs = [
             pkgs.stylua
             pkgs.luaPackages.luacheck
+            pkgs.selene
           ];
         };
       }
