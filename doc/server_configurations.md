@@ -4624,13 +4624,7 @@ require'lspconfig'.pasls.setup{}
   Default Values:
     cmd = { "pasls" }
     filetypes = { "pascal" }
-    root_dir = function(path)
-        -- Support git directories and git files (worktrees)
-        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
+    root_dir = root_pattern("*.lpi", "*.lpk", ".git")
     single_file_support = true
 ```
 
