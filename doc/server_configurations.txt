@@ -99,6 +99,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [robotframework_ls](#robotframework_ls)
 - [rome](#rome)
 - [rust_analyzer](#rust_analyzer)
+- [salt_ls](#salt_ls)
 - [scry](#scry)
 - [serve_d](#serve_d)
 - [sixtyfps](#sixtyfps)
@@ -6601,6 +6602,35 @@ require'lspconfig'.rust_analyzer.setup{}
     settings = {
       ["rust-analyzer"] = {}
     }
+```
+
+
+## salt_ls
+
+Language server for Salt configuration files.
+https://github.com/dcermak/salt-lsp
+
+The language server can be installed with `pip`:
+```sh
+pip install salt-lsp
+```
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.salt_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "salt_lsp_server" }
+    filetypes = { "sls" }
+    root_dir = root_pattern('.git')
+    single_file_support = true
 ```
 
 
