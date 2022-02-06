@@ -3975,9 +3975,19 @@ require'lspconfig'.leanls.setup{}
   Commands:
   
   Default Values:
-    cmd = { "lean", "--server" }
+    cmd = { "lake", "serve", "--" }
     filetypes = { "lean" }
-    on_new_config = function(config, root_dir)
+    on_new_config = function(_, d, _)
+              lake_version = table.concat(d, '\n')
+            end,
+            stdout_buffered = true,
+          })
+          if lake_job > 0 and vim.fn.jobwait({ lake_job })[1] == 0 then
+            local major = lake_version:match 'Lake version (%d).'
+            if major and tonumber(major) < 3 then
+              config.cmd = legacy_cmd
+            end
+          end
           -- add root dir as command-line argument for `ps aux`
           table.insert(config.cmd, root_dir)
         end,
