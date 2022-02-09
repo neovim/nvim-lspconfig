@@ -1,12 +1,11 @@
 local util = require 'lspconfig.util'
 
--- Only Lake 3.0+ supports lake serve, so for old enough Lean 4,
--- we fallback to the builtin LSP.
-local legacy_cmd = { 'lean', '--server' }
-
 return {
   default_config = {
     cmd = { 'lake', 'serve', '--' },
+    -- Only Lake 3.0+ supports lake serve, so for old enough Lean 4,
+    -- we fallback to the builtin LSP.
+    legacy_cmd = { 'lean', '--server' },
     filetypes = { 'lean' },
     root_dir = function(fname)
       -- check if inside elan stdlib
@@ -24,18 +23,24 @@ return {
         or util.find_git_ancestor(fname)
     end,
     on_new_config = function(config, root_dir)
-      local lake_version = ''
-      local lake_job = vim.fn.jobstart({ 'lake', '--version' }, {
-        on_stdout = function(_, d, _)
-          lake_version = table.concat(d, '\n')
-        end,
-        stdout_buffered = true,
-      })
-      if lake_job > 0 and vim.fn.jobwait({ lake_job })[1] == 0 then
-        local major = lake_version:match 'Lake version (%d).'
-        if major and tonumber(major) < 3 then
-          config.cmd = legacy_cmd
+      local use_lake_serve = false
+      if util.path.exists(util.path.join(root_dir, 'lakefile.lean')) then
+        local lake_version = ''
+        local lake_job = vim.fn.jobstart({ 'lake', '--version' }, {
+          on_stdout = function(_, d, _)
+            lake_version = table.concat(d, '\n')
+          end,
+          stdout_buffered = true,
+        })
+        if lake_job > 0 and vim.fn.jobwait({ lake_job })[1] == 0 then
+          local major = lake_version:match 'Lake version (%d).'
+          if major and tonumber(major) >= 3 then
+            use_lake_serve = true
+          end
         end
+      end
+      if not use_lake_serve then
+        config.cmd = config.legacy_cmd
       end
       -- add root dir as command-line argument for `ps aux`
       table.insert(config.cmd, root_dir)
