@@ -12,6 +12,12 @@ return {
       fname = util.path.sanitize(fname)
       local stdlib_dir
       do
+        local _, endpos = fname:find '/src/lean'
+        if endpos then
+          stdlib_dir = fname:sub(1, endpos)
+        end
+      end
+      if not stdlib_dir then
         local _, endpos = fname:find '/lib/lean'
         if endpos then
           stdlib_dir = fname:sub(1, endpos)
