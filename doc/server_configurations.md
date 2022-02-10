@@ -1729,12 +1729,6 @@ This server accepts configuration via the `settings` key.
   
   Absolute path to flow binary\. Special var \$\{workspaceFolder\} or \$\{flowconfigDir\} can be used in path \(NOTE\: in windows you can use \'\/\' and can omit \'\.cmd\' in path\)
 
-- **`flow.runOnEdit`**: `boolean`
-
-  Default: `true`
-  
-  If true will run flow on every edit\, otherwise will run only when changes are saved \(Note\: \'useLSP\: true\' only supports syntax errors\)
-
 - **`flow.showUncovered`**: `boolean`
 
   If true will show uncovered code by default
@@ -7406,7 +7400,7 @@ This server accepts configuration via the `settings` key.
 
 - **`Lua.diagnostics.workspaceDelay`**: `integer`
 
-  Default: `3`
+  Default: `3000`
   
   null
 
