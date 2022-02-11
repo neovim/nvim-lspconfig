@@ -116,10 +116,6 @@ function configs.__newindex(t, config_name, config_def)
         local pseudo_root = util.path.dirname(util.path.sanitize(bufname))
         local client_id = M.manager.add(pseudo_root, true)
         vim.lsp.buf_attach_client(vim.api.nvim_get_current_buf(), client_id)
-      else
-        vim.notify(
-          string.format('[lspconfig] Autostart for %s failed: matching root directory not detected.', config_name)
-        )
       end
     end
 
@@ -237,10 +233,6 @@ function configs.__newindex(t, config_name, config_def)
       elseif config.single_file_support then
         local pseudo_root = util.path.dirname(buf_path)
         id = manager.add(pseudo_root, true)
-      else
-        vim.notify(
-          string.format('[lspconfig] Autostart for %s failed: matching root directory not detected.', config_name)
-        )
       end
 
       if id then
