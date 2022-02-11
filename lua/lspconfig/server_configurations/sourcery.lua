@@ -11,7 +11,7 @@ local root_files = {
 
 return {
   default_config = {
-    cmd = { 'sourcey', 'lsp' },
+    cmd = { 'sourcery', 'lsp' },
     filetypes = { 'python' },
     init_options = {
       editor_version = 'vim',
