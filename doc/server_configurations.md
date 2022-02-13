@@ -1430,10 +1430,7 @@ require'lspconfig'.elmls.setup{}
     cmd = { "elm-language-server" }
     filetypes = { "elm" }
     init_options = {
-      elmAnalyseTrigger = "change",
-      elmFormatPath = "elm-format",
-      elmPath = "elm",
-      elmTestPath = "elm-test"
+      elmAnalyseTrigger = "change"
     }
     root_dir = root_pattern("elm.json")
 ```
