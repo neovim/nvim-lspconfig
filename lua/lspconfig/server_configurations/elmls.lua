@@ -25,9 +25,6 @@ return {
       end
     end,
     init_options = {
-      elmPath = '',
-      elmFormatPath = '',
-      elmTestPath = '',
       elmAnalyseTrigger = 'change',
     },
   },
