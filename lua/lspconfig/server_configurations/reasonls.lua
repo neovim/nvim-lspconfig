@@ -14,13 +14,10 @@ Reason language server
 **By default, reasonls doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path.
 You have to install the language server manually.
 
-You can instsall reason language server from [reason-language-server](https://github.com/jaredly/reason-language-server) repository.
-
-Clone the vim-reason repo and point `cmd` to `server.js` inside `server/out` directory:
+You can install reason language server from [reason-language-server](https://github.com/jaredly/reason-language-server) repository.
 
 ```lua
 cmd = {'<path_to_reason_language_server>'}
-
 ```
 ]],
   },
