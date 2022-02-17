@@ -20,10 +20,10 @@ configs[server_name] = {
 		-- The description should include at minimum the link to the github
 		-- project, and ideally the steps to install the language server.
 		description = [[
-			https://github.com/suoto/hdl_checker
-			Language server for hdl-checker.
-			Install using: `pip install hdl-checker --upgrade`
-		]],
+https://github.com/suoto/hdl_checker
+Language server for hdl-checker.
+Install using: `pip install hdl-checker --upgrade`
+]],
 		default_config = {
 			root_dir = [[util.find_git_ancestor]],
 		},
