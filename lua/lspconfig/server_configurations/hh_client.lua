@@ -7,6 +7,7 @@ return {
     root_dir = util.root_pattern '.hhconfig',
   },
   docs = {
+    package_json = 'https://raw.githubusercontent.com/slackhq/vscode-hack/master/package.json',
     description = [[
 https://hhvm.com/
 https://github.com/facebook/hhvm
