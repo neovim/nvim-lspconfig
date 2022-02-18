@@ -3,9 +3,6 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'lake', 'serve', '--' },
-    -- Only Lake 3.0+ supports lake serve, so for old enough Lean 4,
-    -- we fallback to the builtin LSP.
-    legacy_cmd = { 'lean', '--server' },
     filetypes = { 'lean' },
     root_dir = function(fname)
       -- check if inside elan stdlib
@@ -28,6 +25,12 @@ return {
         or stdlib_dir
         or util.find_git_ancestor(fname)
     end,
+    options = {
+      -- Only Lake 3.0+ supports lake serve, so for old enough Lean 4,
+      -- or core Lean itself, this command (typically using the in-built
+      -- Lean 4 language server) will be used instead.
+      no_lake_lsp_cmd = { 'lean', '--server' },
+    },
     on_new_config = function(config, root_dir)
       local use_lake_serve = false
       if util.path.exists(util.path.join(root_dir, 'lakefile.lean')) then
@@ -46,7 +49,7 @@ return {
         end
       end
       if not use_lake_serve then
-        config.cmd = config.legacy_cmd
+        config.cmd = config.options.no_lake_lsp_cmd
       end
       -- add root dir as command-line argument for `ps aux`
       table.insert(config.cmd, root_dir)
