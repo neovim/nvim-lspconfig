@@ -24,7 +24,7 @@ return {
   },
   docs = {
     description = [[
-https://github.com/jdbaldry/jsonnet-language-server
+https://github.com/grafana/jsonnet-language-server
 
 A Language Server Protocol (LSP) server for Jsonnet.
 ]],
