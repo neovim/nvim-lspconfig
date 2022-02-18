@@ -2113,6 +2113,7 @@ require'lspconfig'.gopls.setup{}
     cmd = { "gopls" }
     filetypes = { "go", "gomod", "gotmpl" }
     root_dir = root_pattern("go.mod", ".git")
+    single_file_support = true
 ```
 
 
@@ -2932,8 +2933,6 @@ This server accepts configuration via the `settings` key.
 
 - **`java.configuration.checkProjectSettingsExclusions`**: `boolean`
 
-  Default: `true`
-  
   Controls whether to exclude extension\-generated project settings files \(\.project\, \.classpath\, \.factorypath\, \.settings\/\) from the file explorer\.
 
 - **`java.configuration.maven.globalSettings`**: `string`
@@ -3489,11 +3488,11 @@ julia --project=/path/to/my/project -e 'using Pkg; Pkg.instantiate()'
 This server accepts configuration via the `settings` key.
 <details><summary>Available settings:</summary>
 
-- **`julia.NumThreads`**: `integer|null`
+- **`julia.NumThreads`**: `integer|string|null`
 
   Default: `vim.NIL`
   
-  Number of threads to use for Julia processes\.
+  null
 
 - **`julia.additionalArgs`**: `array`
 
@@ -3686,6 +3685,12 @@ This server accepts configuration via the `settings` key.
   Default: `"julia_vscode"`
   
   null
+
+- **`julia.persistentSession.warnOnKill`**: `boolean`
+
+  Default: `true`
+  
+  Warn when stopping a persistent session\.
 
 - **`julia.plots.path`**: `string`
 
