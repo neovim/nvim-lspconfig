@@ -27,7 +27,7 @@ return {
         },
       },
     },
-    filetypes = { 'yaml', 'yaml.ansible' },
+    filetypes = { 'yaml.ansible' },
     root_dir = util.root_pattern('ansible.cfg', '.ansible-lint'),
     single_file_support = true,
   },
