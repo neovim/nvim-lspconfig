@@ -238,7 +238,7 @@ require'lspconfig'.ansiblels.setup{}
   
   Default Values:
     cmd = { "ansible-language-server", "--stdio" }
-    filetypes = { "yaml", "yaml.ansible" }
+    filetypes = { "yaml.ansible" }
     root_dir = function(startpath)
         return M.search_ancestors(startpath, matcher)
       end
