@@ -1,11 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'hdl_checker'
-local cmd = { bin_name, '--lsp' }
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'hdl_checker', '--lsp' },
     filetypes = { 'vhdl', 'verilog', 'systemverilog' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
