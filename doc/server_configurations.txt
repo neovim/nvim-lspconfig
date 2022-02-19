@@ -103,6 +103,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [scry](#scry)
 - [serve_d](#serve_d)
 - [sixtyfps](#sixtyfps)
+- [slint_lsp](#slint_lsp)
 - [solang](#solang)
 - [solargraph](#solargraph)
 - [solc](#solc)
@@ -6736,6 +6737,42 @@ require'lspconfig'.sixtyfps.setup{}
   Default Values:
     cmd = { "sixtyfps-lsp" }
     filetypes = { "sixtyfps" }
+    single_file_support = true
+```
+
+
+## slint_lsp
+
+https://github.com/slint-ui/slint
+`Slint`'s language server
+
+You can build and install `slint-lsp` binary with `cargo`:
+```sh
+cargo install slint-lsp
+```
+
+Vim does not have built-in syntax for the `slint` filetype at this time.
+
+This can be added via an autocmd:
+
+```lua
+vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.slint_lsp.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "slint-lsp" }
+    filetypes = { "slint" }
     single_file_support = true
 ```
 
