@@ -52,6 +52,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [graphql](#graphql)
 - [groovyls](#groovyls)
 - [haxe_language_server](#haxe_language_server)
+- [hdl_checker](#hdl_checker)
 - [hie](#hie)
 - [hls](#hls)
 - [html](#html)
@@ -2269,6 +2270,31 @@ require'lspconfig'.haxe_language_server.setup{}
         executable = "haxe"
       }
     }
+```
+
+
+## hdl_checker
+
+https://github.com/suoto/hdl_checker
+Language server for hdl-checker.
+Install using: `pip install hdl-checker --upgrade`
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.hdl_checker.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "hdl_checker", "--lsp" }
+    filetypes = { "vhdl", "verilog", "systemverilog" }
+    root_dir = util.find_git_ancestor
+    single_file_support = true
 ```
 
 
