@@ -3979,19 +3979,26 @@ require'lspconfig'.leanls.setup{}
     cmd = { "lake", "serve", "--" }
     filetypes = { "lean" }
     on_new_config = function(_, d, _)
-              lake_version = table.concat(d, '\n')
-            end,
-            stdout_buffered = true,
-          })
-          if lake_job > 0 and vim.fn.jobwait({ lake_job })[1] == 0 then
-            local major = lake_version:match 'Lake version (%d).'
-            if major and tonumber(major) < 3 then
-              config.cmd = legacy_cmd
+                lake_version = table.concat(d, '\n')
+              end,
+              stdout_buffered = true,
+            })
+            if lake_job > 0 and vim.fn.jobwait({ lake_job })[1] == 0 then
+              local major = lake_version:match 'Lake version (%d).'
+              if major and tonumber(major) >= 3 then
+                use_lake_serve = true
+              end
             end
+          end
+          if not use_lake_serve then
+            config.cmd = config.options.no_lake_lsp_cmd
           end
           -- add root dir as command-line argument for `ps aux`
           table.insert(config.cmd, root_dir)
         end,
+    options = {
+      no_lake_lsp_cmd = { "lean", "--server" }
+    }
     root_dir = root_pattern("lakefile.lean", "lean-toolchain", "leanpkg.toml", ".git")
     single_file_support = true
 ```
