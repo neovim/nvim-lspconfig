@@ -16,13 +16,19 @@ return {
     init_options = {
       editor_version = 'vim',
       extension_version = 'vim.lsp',
-      token = '<YOUR_TOKEN>',
+      token = nil,
     },
     root_dir = function(fname)
       return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
     end,
     single_file_support = true,
   },
+  on_new_config = function(new_config, _)
+    if not new_config.init_options.token then
+      local notify = vim.notify_once or vim.notify
+      notify('[lspconfig] The authentication token must be provided in config.init_options', vim.log.levels.ERROR)
+    end
+  end,
   docs = {
     description = [[
 https://github.com/sourcery-ai/sourcery
