@@ -53,6 +53,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [groovyls](#groovyls)
 - [haxe_language_server](#haxe_language_server)
 - [hdl_checker](#hdl_checker)
+- [hhvm](#hhvm)
 - [hie](#hie)
 - [hls](#hls)
 - [html](#html)
@@ -2295,6 +2296,32 @@ require'lspconfig'.hdl_checker.setup{}
     filetypes = { "vhdl", "verilog", "systemverilog" }
     root_dir = util.find_git_ancestor
     single_file_support = true
+```
+
+
+## hhvm
+
+Language server for programs written in Hack
+https://hhvm.com/
+https://github.com/facebook/hhvm
+See below for how to setup HHVM & typechecker:
+https://docs.hhvm.com/hhvm/getting-started/getting-started
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.hhvm.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "hh_client", "lsp" }
+    filetypes = { "php", "hack" }
+    root_dir = root_pattern(".hhconfig")
 ```
 
 
@@ -7484,6 +7511,16 @@ This server accepts configuration via the `settings` key.
 - **`Lua.diagnostics.workspaceRate`**: `integer`
 
   Default: `100`
+  
+  null
+
+- **`Lua.format.defaultConfig`**: `object`
+
+  null
+
+- **`Lua.format.enable`**: `boolean`
+
+  Default: `"true"`
   
   null
 
