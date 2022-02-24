@@ -3023,7 +3023,7 @@ This server accepts configuration via the `settings` key.
 
 - **`java.configuration.workspaceCacheLimit`**: `null|integer`
 
-  Default: `vim.NIL`
+  Default: `90`
   
   The number of days \(if enabled\) to keep unused workspace cache data\. Beyond this limit\, cached workspace data may be removed\.
 
@@ -3628,6 +3628,10 @@ This server accepts configuration via the `settings` key.
   Default: `"both"`
   
   Specifies how to show inline execution results
+
+- **`julia.execution.saveOnEval`**: `boolean`
+
+  null
 
 - **`julia.focusPlotNavigator`**: `boolean`
 
@@ -7842,7 +7846,7 @@ require'lspconfig'.tailwindcss.setup{}
   
   Default Values:
     cmd = { "tailwindcss-language-server", "--stdio" }
-    filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "django-html", "edge", "eelixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte" }
+    filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "django-html", "htmldjango", "edge", "eelixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte" }
     init_options = {
       userLanguages = {
         eelixir = "html-eex",
