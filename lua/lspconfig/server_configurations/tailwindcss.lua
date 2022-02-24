@@ -18,6 +18,7 @@ return {
       'astro-markdown',
       'blade',
       'django-html',
+      'htmldjango',
       'edge',
       'eelixir', -- vim ft
       'ejs',
