@@ -10,7 +10,6 @@ return {
     settings = { Lua = { telemetry = { enable = false } } },
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/sumneko/vscode-lua/master/package.json',
     description = [[
 https://github.com/sumneko/lua-language-server
 

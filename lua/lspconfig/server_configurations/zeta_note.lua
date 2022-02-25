@@ -6,7 +6,6 @@ return {
     root_dir = util.root_pattern '.zeta.toml',
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/artempyanykh/zeta-note-vscode/main/package.json',
     description = [[
 https://github.com/artempyanykh/zeta-note
 

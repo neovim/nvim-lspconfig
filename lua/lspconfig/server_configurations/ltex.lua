@@ -30,7 +30,6 @@ return {
     end,
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/valentjn/vscode-ltex/develop/package.json',
     description = [=[
 https://github.com/valentjn/ltex-ls
 

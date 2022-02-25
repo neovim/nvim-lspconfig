@@ -14,7 +14,6 @@ return {
     root_dir = util.root_pattern('bower.json', 'psc-package.json', 'spago.dhall'),
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/nwolverson/vscode-ide-purescript/master/package.json',
     description = [[
 https://github.com/nwolverson/purescript-language-server
 `purescript-language-server` can be installed via `npm`

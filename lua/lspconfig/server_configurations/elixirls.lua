@@ -8,7 +8,6 @@ return {
     end,
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/elixir-lsp/vscode-elixir-ls/master/package.json',
     description = [[
 https://github.com/elixir-lsp/elixir-ls
 

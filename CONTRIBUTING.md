@@ -65,9 +65,6 @@ configs[server_name] = {
     end,
   },
   docs = {
-    -- extremely important: the package.json that contains language server settings, not the package.json that contains javascript dependencies for the project, or the package.json that contains vscode specific settings
-    package_json = 'https://raw.githubusercontent.com/microsoft/pyright/master/packages/vscode-pyright/package.json',
-
     -- The description should include at minimum the link to the github project, and ideally the steps to install the language server.
     description = [[
 https://github.com/microsoft/pyright

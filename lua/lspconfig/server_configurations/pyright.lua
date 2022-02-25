@@ -47,7 +47,6 @@ return {
     },
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/microsoft/pyright/master/packages/vscode-pyright/package.json',
     description = [[
 https://github.com/microsoft/pyright
 
