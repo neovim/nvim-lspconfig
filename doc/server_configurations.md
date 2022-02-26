@@ -48,6 +48,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [ghcide](#ghcide)
 - [golangci_lint_ls](#golangci_lint_ls)
 - [gopls](#gopls)
+- [gradle](#gradle)
 - [grammarly](#grammarly)
 - [graphql](#graphql)
 - [groovyls](#groovyls)
@@ -2117,6 +2118,16 @@ require'lspconfig'.gopls.setup{}
     filetypes = { "go", "gomod", "gotmpl" }
     root_dir = root_pattern("go.mod", ".git")
     single_file_support = true
+```
+
+
+## gradle
+
+https://github.com/microsoft/vscode-gradle
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.gradle_ls.setup{}
 ```
 
 
