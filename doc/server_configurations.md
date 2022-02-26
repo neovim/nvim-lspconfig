@@ -1793,6 +1793,8 @@ npm install -g graphql-language-service-cli
 require'lspconfig'.graphql.setup{}
 ```
 
+Note that you must also have [the graphql package](https://github.com/graphql/graphql-js) installed and create a [GraphQL config file](https://www.graphql-config.com/docs/user/user-introduction).
+
 **Commands and default values:**
 ```lua
   Commands:
