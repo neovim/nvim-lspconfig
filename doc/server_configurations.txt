@@ -48,6 +48,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [ghcide](#ghcide)
 - [golangci_lint_ls](#golangci_lint_ls)
 - [gopls](#gopls)
+- [gradle_ls](#gradle_ls)
 - [grammarly](#grammarly)
 - [graphql](#graphql)
 - [groovyls](#groovyls)
@@ -1712,6 +1713,32 @@ require'lspconfig'.gopls.setup{}
     filetypes = { "go", "gomod", "gotmpl" }
     root_dir = root_pattern("go.mod", ".git")
     single_file_support = true
+```
+
+
+## gradle_ls
+
+https://github.com/microsoft/vscode-gradle
+
+Microsoft's lsp server for gradle files
+
+If you're setting this up manually, build vscode-gradle using `./gradlew installDist` and point `cmd` to the `gradle-language-server` generated in the build directory
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.gradle_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "gradle-language-server" }
+    filetypes = { "groovy" }
+    root_dir = root_pattern("settings.gradle")
 ```
 
 
