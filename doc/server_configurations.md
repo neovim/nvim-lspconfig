@@ -78,6 +78,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [nimls](#nimls)
 - [ocamlls](#ocamlls)
 - [ocamllsp](#ocamllsp)
+- [ols](#ols)
 - [omnisharp](#omnisharp)
 - [opencl_ls](#opencl_ls)
 - [pasls](#pasls)
@@ -2859,6 +2860,31 @@ require'lspconfig'.ocamllsp.setup{}
       return language_id_of[ftype]
     end
     root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
+```
+
+## ols
+
+           https://github.com/DanielGavin/ols
+
+
+           `Odin Language Server`.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.ols.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+
+  Default Values:
+    cmd = { "ols" }
+    filetypes = { "odin" }
+    root_dir = util.root_pattern("ols.json", ".git") or current_file_dirname
+    single_file_support = true
 ```
 
 
