@@ -3048,6 +3048,9 @@ require'lspconfig'.perlpls.setup{}
       perl = {
         perlcritic = {
           enabled = false
+        },
+        syntax = {
+          enabled = true
         }
       }
     }
