@@ -3045,8 +3045,11 @@ require'lspconfig'.perlpls.setup{}
     settings = {
       perl = {
         perlcritic = {
-          enabled = false
-        }
+          enabled = false,
+        },
+        syntax = {
+          enabled = true,
+        },
       }
     }
     single_file_support = true

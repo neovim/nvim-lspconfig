@@ -6,6 +6,7 @@ return {
     settings = {
       perl = {
         perlcritic = { enabled = false },
+        syntax = { enabled = true },
       },
     },
     filetypes = { 'perl' },
