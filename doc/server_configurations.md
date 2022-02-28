@@ -1786,6 +1786,8 @@ https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-
 npm install -g graphql-language-service-cli
 ```
 
+Note that you must also have [the graphql package](https://github.com/graphql/graphql-js) installed and create a [GraphQL config file](https://www.graphql-config.com/docs/user/user-introduction).
+
 
 
 **Snippet to enable the language server:**
