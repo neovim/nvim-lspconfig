@@ -15,6 +15,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [bicep](#bicep)
 - [bsl_ls](#bsl_ls)
 - [ccls](#ccls)
+- [clarity_lsp](#clarity_lsp)
 - [clangd](#clangd)
 - [clojure_lsp](#clojure_lsp)
 - [cmake](#cmake)
