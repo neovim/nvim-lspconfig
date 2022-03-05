@@ -4,8 +4,7 @@ return {
   default_config = {
     cmd = {"reason-language-server"},
     filetypes = { 'reason' },
-    root_dir = util.root_pattern('bsconfig.json', '.git'),
-    settings = {},
+    root_dir = util.root_pattern('bsconfig.json', '.git')
   },
   docs = {
     description = [[
