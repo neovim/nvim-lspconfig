@@ -16,6 +16,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [bsl_ls](#bsl_ls)
 - [ccls](#ccls)
 - [clangd](#clangd)
+- [clarity_lsp](#clarity_lsp)
 - [clojure_lsp](#clojure_lsp)
 - [cmake](#cmake)
 - [codeqlls](#codeqlls)
@@ -595,6 +596,30 @@ require'lspconfig'.clangd.setup{}
     filetypes = { "c", "cpp", "objc", "objcpp" }
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
     single_file_support = true
+```
+
+
+## clarity_lsp
+
+`clarity-lsp` is a language server for the Clarity language. Clarity is a decidable smart contract language that optimizes for predictability and security. Smart contracts allow developers to encode essential business logic on a blockchain.
+
+To learn how to configure the clarity language server, see the [clarity-lsp documentation](https://github.com/hirosystems/clarity-lsp).
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.clarity_lsp.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "clarity-lsp" }
+    filetypes = { "clar", "clarity" }
+    root_dir = root_pattern(".git")
 ```
 
 
