@@ -12,7 +12,6 @@ return {
         -- "lua", -- Also works for lua, but you may get type errors that cannot be resolved within lua itself
      },
      root_dir = util.root_pattern("tlconfig.lua", ".git"),
-     settings = {},
   },
   docs = {
     description = [[
