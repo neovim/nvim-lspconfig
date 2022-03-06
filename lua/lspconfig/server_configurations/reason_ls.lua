@@ -2,9 +2,9 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = {"reason-language-server"},
+    cmd = { 'reason-language-server' },
     filetypes = { 'reason' },
-    root_dir = util.root_pattern('bsconfig.json', '.git')
+    root_dir = util.root_pattern('bsconfig.json', '.git'),
   },
   docs = {
     description = [[
@@ -21,4 +21,3 @@ cmd = {'<path_to_reason_language_server>'}
 ]],
   },
 }
-
