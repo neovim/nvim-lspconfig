@@ -98,6 +98,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [quick_lint_js](#quick_lint_js)
 - [r_language_server](#r_language_server)
 - [racket_langserver](#racket_langserver)
+- [reason_ls](#reason_ls)
 - [remark_ls](#remark_ls)
 - [rescriptls](#rescriptls)
 - [rls](#rls)
@@ -3573,6 +3574,39 @@ require'lspconfig'.racket_langserver.setup{}
       end)
     end
     single_file_support = true
+```
+
+
+## reason_ls
+
+Reason language server
+
+**By default, reason_ls doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path.
+You have to install the language server manually.
+
+You can install reason language server from [reason-language-server](https://github.com/jaredly/reason-language-server) repository.
+
+```lua
+cmd = {'<path_to_reason_language_server>'}
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.reason_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "reason-language-server" }
+    filetypes = { "reason" }
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
 ```
 
 
