@@ -127,6 +127,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [svls](#svls)
 - [tailwindcss](#tailwindcss)
 - [taplo](#taplo)
+- [teal_ls](#teal_ls)
 - [terraform_lsp](#terraform_lsp)
 - [terraformls](#terraformls)
 - [texlab](#texlab)
@@ -4603,6 +4604,33 @@ require'lspconfig'.taplo.setup{}
     filetypes = { "toml" }
     root_dir = root_pattern("*.toml", ".git")
     single_file_support = true
+```
+
+
+## teal_ls
+
+https://github.com/teal-language/teal-language-server
+
+Install with:
+```
+luarocks install --dev teal-language-server
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.teal_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "teal-language-server" }
+    filetypes = { "teal" }
+    root_dir = root_pattern("tlconfig.lua", ".git")
 ```
 
 
