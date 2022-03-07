@@ -82,6 +82,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [ols](#ols)
 - [omnisharp](#omnisharp)
 - [opencl_ls](#opencl_ls)
+- [openscad_ls](#openscad_ls)
 - [pasls](#pasls)
 - [perlls](#perlls)
 - [perlnavigator](#perlnavigator)
@@ -2993,6 +2994,52 @@ require'lspconfig'.opencl_ls.setup{}
     cmd = { "opencl-language-server" }
     filetypes = { "opencl" }
     root_dir = util.root_pattern(".git")
+```
+
+
+## openscad_ls
+
+https://github.com/dzhu/openscad-language-server
+
+A Language Server Protocol server for OpenSCAD
+
+You can build and install `openscad-language-server` binary with `cargo`:
+```sh
+cargo install openscad-language-server
+```
+
+Vim does not have built-in syntax for the `openscad` filetype currently.
+
+This can be added via an autocmd:
+
+```lua
+vim.cmd [[ autocmd BufRead,BufNewFile *.scad set filetype=openscad ]]
+```
+
+or by installing a filetype plugin such as https://github.com/sirtaj/vim-openscad
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.openscad_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "openscad-language-server" }
+    filetypes = { "openscad" }
+    root_dir = function(path)
+        -- Support git directories and git files (worktrees)
+        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
+          return path
+        end
+      end)
+    end
+    single_file_support = true
 ```
 
 
