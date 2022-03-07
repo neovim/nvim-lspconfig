@@ -5,7 +5,7 @@ return {
      cmd = {
         "teal-language-server",
         -- use this to enable logging in /tmp/teal-language-server.log
-        -- "logging=on", 
+        -- "logging=on",
      },
      filetypes = {
         "teal",
