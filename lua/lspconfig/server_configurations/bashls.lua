@@ -25,6 +25,11 @@ return {
     description = [[
 https://github.com/mads-hartmann/bash-language-server
 
+`bash-language-server` can be installed via `npm`:
+```sh
+npm i -g bash-language-server
+```
+
 Language server for bash, written using tree sitter in typescript.
 ]],
     default_config = {
