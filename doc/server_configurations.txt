@@ -88,6 +88,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [perlnavigator](#perlnavigator)
 - [perlpls](#perlpls)
 - [phpactor](#phpactor)
+- [please](#please)
 - [powershell_es](#powershell_es)
 - [prismals](#prismals)
 - [psalm](#psalm)
@@ -396,6 +397,11 @@ require'lspconfig'.awk_ls.setup{}
 ## bashls
 
 https://github.com/mads-hartmann/bash-language-server
+
+`bash-language-server` can be installed via `npm`:
+```sh
+npm i -g bash-language-server
+```
 
 Language server for bash, written using tree sitter in typescript.
 
@@ -3234,6 +3240,35 @@ require'lspconfig'.phpactor.setup{}
     cmd = { "phpactor", "language-server" }
     filetypes = { "php" }
     root_dir = root_pattern("composer.json", ".git")
+```
+
+
+## please
+
+https://github.com/thought-machine/please
+
+High-performance extensible build system for reproducible multi-language builds.
+
+The `plz` binary will automatically install the LSP for you on first run
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.please.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "plz", "tool", "lps" }
+    filetypes = { "bzl" }
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
+    single_file_support = true
 ```
 
 
