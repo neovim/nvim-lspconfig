@@ -118,6 +118,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [solidity_ls](#solidity_ls)
 - [sorbet](#sorbet)
 - [sourcekit](#sourcekit)
+- [sourcery](#sourcery)
 - [spectral](#spectral)
 - [sqlls](#sqlls)
 - [sqls](#sqls)
@@ -4251,6 +4252,53 @@ require'lspconfig'.sourcekit.setup{}
     cmd = { "sourcekit-lsp" }
     filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" }
     root_dir = root_pattern("Package.swift", ".git")
+```
+
+
+## sourcery
+
+https://github.com/sourcery-ai/sourcery
+
+Refactor Python instantly using the power of AI.
+
+It requires the initializationOptions param to be populated as shown below and will respond with the list of ServerCapabilities that it supports.
+
+init_options = {
+    --- The Sourcery token for authenticating the user.
+    --- This is retrieved from the Sourcery website and must be
+    --- provided by each user. The extension must provide a
+    --- configuration option for the user to provide this value.
+    token = <YOUR_TOKEN>
+
+    --- The extension's name and version as defined by the extension.
+    extension_version = 'vim.lsp'
+
+    --- The editor's name and version as defined by the editor.
+    editor_version = 'vim'
+}
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.sourcery.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "sourcery", "lsp" }
+    filetypes = { "python" }
+    init_options = {
+      editor_version = "vim",
+      extension_version = "vim.lsp"
+    }
+    root_dir = function(fname)
+          return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+        end,
+    single_file_support = true
 ```
 
 
