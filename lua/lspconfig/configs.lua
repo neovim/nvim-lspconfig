@@ -88,12 +88,18 @@ function configs.__newindex(t, config_name, config_def)
       end
 
       if root_dir then
-        api.nvim_command(
+        api.nvim_exec(
           string.format(
-            "autocmd BufReadPost %s/* unsilent lua require'lspconfig'[%q].manager.try_add_wrapper()",
+            [[
+            augroup lspconfig-%s
+                autocmd!
+                autocmd BufReadPost %s/* unsilent lua require'lspconfig'[%q].manager.try_add_wrapper()
+            augroup END
+            ]],
+            config.name,
             vim.fn.fnameescape(root_dir),
             config.name
-          )
+          ), false
         )
         for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
           local bufname = api.nvim_buf_get_name(bufnr)

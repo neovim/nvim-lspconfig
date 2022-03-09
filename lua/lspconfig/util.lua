@@ -299,6 +299,12 @@ function M.server_per_root_dir_manager(_make_config)
         table.insert(res, client)
       end
     end
+    for _, id in pairs(single_file_clients) do
+      local client = lsp.get_client_by_id(id)
+      if client then
+        table.insert(res, client)
+      end
+    end
     return res
   end
 

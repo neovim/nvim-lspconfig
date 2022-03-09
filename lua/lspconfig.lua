@@ -44,6 +44,7 @@ function M._root._setup()
     LspStop = {
       function(cmd_args)
         for _, client in ipairs(M.util.get_clients_from_cmd_args(cmd_args)) do
+          vim.api.nvim_command(string.format("silent! autocmd! lspconfig-%s",client.name))
           client.stop()
         end
       end,
