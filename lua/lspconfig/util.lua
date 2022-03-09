@@ -395,7 +395,7 @@ end
 
 function M.get_clients_from_cmd_args(arg)
   local result = {}
-  for id in (arg or ''):gmatch '(%d+) %((%w+)%)' do
+  for id in (arg or ''):gmatch '(%d+)' do
     result[id] = vim.lsp.get_client_by_id(tonumber(id))
   end
   if vim.tbl_isempty(result) then
