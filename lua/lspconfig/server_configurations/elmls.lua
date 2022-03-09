@@ -29,7 +29,6 @@ return {
     },
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/elm-tooling/elm-language-client-vscode/master/package.json',
     description = [[
 https://github.com/elm-tooling/elm-language-server#installation
 

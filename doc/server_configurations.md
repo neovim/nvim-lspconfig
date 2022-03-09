@@ -16,6 +16,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [bsl_ls](#bsl_ls)
 - [ccls](#ccls)
 - [clangd](#clangd)
+- [clarity_lsp](#clarity_lsp)
 - [clojure_lsp](#clojure_lsp)
 - [cmake](#cmake)
 - [codeqlls](#codeqlls)
@@ -48,6 +49,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [ghcide](#ghcide)
 - [golangci_lint_ls](#golangci_lint_ls)
 - [gopls](#gopls)
+- [gradle_ls](#gradle_ls)
 - [grammarly](#grammarly)
 - [graphql](#graphql)
 - [groovyls](#groovyls)
@@ -77,12 +79,16 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [nimls](#nimls)
 - [ocamlls](#ocamlls)
 - [ocamllsp](#ocamllsp)
+- [ols](#ols)
 - [omnisharp](#omnisharp)
 - [opencl_ls](#opencl_ls)
+- [openscad_ls](#openscad_ls)
 - [pasls](#pasls)
 - [perlls](#perlls)
+- [perlnavigator](#perlnavigator)
 - [perlpls](#perlpls)
 - [phpactor](#phpactor)
+- [please](#please)
 - [powershell_es](#powershell_es)
 - [prismals](#prismals)
 - [psalm](#psalm)
@@ -94,6 +100,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [quick_lint_js](#quick_lint_js)
 - [r_language_server](#r_language_server)
 - [racket_langserver](#racket_langserver)
+- [reason_ls](#reason_ls)
 - [remark_ls](#remark_ls)
 - [rescriptls](#rescriptls)
 - [rls](#rls)
@@ -112,6 +119,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [solidity_ls](#solidity_ls)
 - [sorbet](#sorbet)
 - [sourcekit](#sourcekit)
+- [sourcery](#sourcery)
 - [spectral](#spectral)
 - [sqlls](#sqlls)
 - [sqls](#sqls)
@@ -121,6 +129,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [svls](#svls)
 - [tailwindcss](#tailwindcss)
 - [taplo](#taplo)
+- [teal_ls](#teal_ls)
 - [terraform_lsp](#terraform_lsp)
 - [terraformls](#terraformls)
 - [texlab](#texlab)
@@ -158,7 +167,6 @@ require('lspconfig').als.setup{
     }
 }
 ```
-
 
 
 
@@ -390,6 +398,11 @@ require'lspconfig'.awk_ls.setup{}
 
 https://github.com/mads-hartmann/bash-language-server
 
+`bash-language-server` can be installed via `npm`:
+```sh
+npm i -g bash-language-server
+```
+
 Language server for bash, written using tree sitter in typescript.
 
 
@@ -594,6 +607,30 @@ require'lspconfig'.clangd.setup{}
     filetypes = { "c", "cpp", "objc", "objcpp" }
     root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
     single_file_support = true
+```
+
+
+## clarity_lsp
+
+`clarity-lsp` is a language server for the Clarity language. Clarity is a decidable smart contract language that optimizes for predictability and security. Smart contracts allow developers to encode essential business logic on a blockchain.
+
+To learn how to configure the clarity language server, see the [clarity-lsp documentation](https://github.com/hirosystems/clarity-lsp).
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.clarity_lsp.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "clarity-lsp" }
+    filetypes = { "clar", "clarity" }
+    root_dir = root_pattern(".git")
 ```
 
 
@@ -868,7 +905,6 @@ Language server for dart.
 
 
 
-
 **Snippet to enable the language server:**
 ```lua
 require'lspconfig'.dartls.setup{}
@@ -914,132 +950,6 @@ vim.g.markdown_fenced_languages = {
 ```
 
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`deno.cache`**: `string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`deno.certificateStores`**: `array`
-
-  Default: `vim.NIL`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`deno.codeLens.implementations`**: `boolean`
-
-  null
-
-- **`deno.codeLens.references`**: `boolean`
-
-  null
-
-- **`deno.codeLens.referencesAllFunctions`**: `boolean`
-
-  null
-
-- **`deno.codeLens.test`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`deno.codeLens.testArgs`**: `array`
-
-  Default: `{ "--allow-all" }`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`deno.config`**: `string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`deno.enable`**: `boolean`
-
-  null
-
-- **`deno.importMap`**: `string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`deno.internalDebug`**: `boolean`
-
-  null
-
-- **`deno.lint`**: `boolean`
-
-  null
-
-- **`deno.path`**: `string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`deno.suggest.autoImports`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`deno.suggest.completeFunctionCalls`**: `boolean`
-
-  null
-
-- **`deno.suggest.imports.autoDiscover`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`deno.suggest.imports.hosts`**: `object`
-
-  Default: `{["https://crux.land"] = true,["https://deno.land"] = true,["https://x.nest.land"] = true}`
-  
-  null
-
-- **`deno.suggest.names`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`deno.suggest.paths`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`deno.tlsCertificate`**: `string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`deno.unsafelyIgnoreCertificateErrors`**: `array`
-
-  Default: `vim.NIL`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`deno.unstable`**: `boolean`
-
-  null
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -1258,84 +1168,6 @@ require'lspconfig'.elixirls.setup{
 }
 ```
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`elixirLS.additionalWatchedExtensions`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  Additional file types capable of triggering a build on change
-
-- **`elixirLS.dialyzerEnabled`**: `boolean`
-
-  Default: `true`
-  
-  Run ElixirLS\'s rapid Dialyzer when code is saved
-
-- **`elixirLS.dialyzerFormat`**: `enum { "dialyzer", "dialyxir_short", "dialyxir_long" }`
-
-  Default: `"dialyxir_long"`
-  
-  Formatter to use for Dialyzer warnings
-
-- **`elixirLS.dialyzerWarnOpts`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{enum = { "error_handling", "no_behaviours", "no_contracts", "no_fail_call", "no_fun_app", "no_improper_lists", "no_match", "no_missing_calls", "no_opaque", "no_return", "no_undefined_callbacks", "no_unused", "underspecs", "unknown", "unmatched_returns", "overspecs", "specdiffs" },type = "string"}`
-  
-  Dialyzer options to enable or disable warnings\. See Dialyzer\'s documentation for options\. Note that the \"race\_conditions\" option is unsupported
-
-- **`elixirLS.enableTestLenses`**: `boolean`
-
-  Show code lenses to run tests in terminal
-
-- **`elixirLS.envVariables`**: `object`
-
-  Environment variables to use for compilation
-
-- **`elixirLS.fetchDeps`**: `boolean`
-
-  Automatically fetch project dependencies when compiling
-
-- **`elixirLS.mixEnv`**: `string`
-
-  Default: `"test"`
-  
-  Mix environment to use for compilation
-
-- **`elixirLS.mixTarget`**: `string`
-
-  Mix target to use for compilation
-
-- **`elixirLS.projectDir`**: `string`
-
-  Default: `""`
-  
-  Subdirectory containing Mix project if not in the project root
-
-- **`elixirLS.signatureAfterComplete`**: `boolean`
-
-  Default: `true`
-  
-  Show signature help after confirming autocomplete
-
-- **`elixirLS.suggestSpecs`**: `boolean`
-
-  Default: `true`
-  
-  Suggest \@spec annotations inline using Dialyzer\'s inferred success typings \(Requires Dialyzer\)
-
-- **`elixirLS.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VS Code and the Elixir language server\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -1362,62 +1194,6 @@ If you don't want to use Nvim to install it, then you can use:
 npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
 ```
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`elmLS.disableElmLSDiagnostics`**: `boolean`
-
-  Disable linting diagnostics from the language server\.
-
-- **`elmLS.elmFormatPath`**: `string`
-
-  Default: `""`
-  
-  The path to your elm\-format executable\. Should be empty by default\, in that case it will assume the name and try to first get it from a local npm installation or a global one\. If you set it manually it will not try to load from the npm folder\.
-
-- **`elmLS.elmPath`**: `string`
-
-  Default: `""`
-  
-  The path to your elm executable\. Should be empty by default\, in that case it will assume the name and try to first get it from a local npm installation or a global one\. If you set it manually it will not try to load from the npm folder\.
-
-- **`elmLS.elmReviewDiagnostics`**: `enum { "off", "warning", "error" }`
-
-  Default: `"off"`
-  
-  Set severity or disable linting diagnostics for elm\-review\.
-
-- **`elmLS.elmReviewPath`**: `string`
-
-  Default: `""`
-  
-  The path to your elm\-review executable\. Should be empty by default\, in that case it will assume the name and try to first get it from a local npm installation or a global one\. If you set it manually it will not try to load from the npm folder\.
-
-- **`elmLS.elmTestPath`**: `string`
-
-  Default: `""`
-  
-  The path to your elm\-test executable\. Should be empty by default\, in that case it will assume the name and try to first get it from a local npm installation or a global one\. If you set it manually it will not try to load from the npm folder\.
-
-- **`elmLS.elmTestRunner.showElmTestOutput`**: `boolean`
-
-  Show output of elm\-test as terminal task
-
-- **`elmLS.onlyUpdateDiagnosticsOnSave`**: `boolean`
-
-  Only update compiler diagnostics on save\, not on document change\.
-
-- **`elmLS.skipInstallPackageConfirmation`**: `boolean`
-
-  Skips confirmation for the Install Package code action\.
-
-- **`elmLS.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VS Code and the language server\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -1696,74 +1472,6 @@ See below for lsp command options.
 npx flow lsp --help
 ```
     
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`flow.coverageSeverity`**: `enum { "error", "warn", "info" }`
-
-  Default: `"info"`
-  
-  Type coverage diagnostic severity
-
-- **`flow.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Is flow enabled
-
-- **`flow.lazyMode`**: `string`
-
-  Default: `vim.NIL`
-  
-  Set value to enable flow lazy mode
-
-- **`flow.logLevel`**: `enum { "error", "warn", "info", "trace" }`
-
-  Default: `"info"`
-  
-  Log level for output panel logs
-
-- **`flow.pathToFlow`**: `string`
-
-  Default: `"flow"`
-  
-  Absolute path to flow binary\. Special var \$\{workspaceFolder\} or \$\{flowconfigDir\} can be used in path \(NOTE\: in windows you can use \'\/\' and can omit \'\.cmd\' in path\)
-
-- **`flow.showUncovered`**: `boolean`
-
-  If true will show uncovered code by default
-
-- **`flow.stopFlowOnExit`**: `boolean`
-
-  Default: `true`
-  
-  Stop Flow on Exit
-
-- **`flow.trace.server`**
-
-  Default: `"off"`
-  
-  Traces the communication between VSCode and the flow lsp service\.
-
-- **`flow.useBundledFlow`**: `boolean`
-
-  Default: `true`
-  
-  If true will use flow bundled with this plugin if nothing works
-
-- **`flow.useCodeSnippetOnFunctionSuggest`**: `boolean`
-
-  Default: `true`
-  
-  Complete functions with their parameter signature\.
-
-- **`flow.useNPMPackagedFlow`**: `boolean`
-
-  Default: `true`
-  
-  Support using flow through your node\_modules folder\, WARNING\: Checking this box is a security risk\. When you open a project we will immediately run code contained within it\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -1820,7 +1528,6 @@ npm install -g foam-language-server
 
 
 
-
 **Snippet to enable the language server:**
 ```lua
 require'lspconfig'.foam_ls.setup{}
@@ -1848,80 +1555,6 @@ https://github.com/hansec/fortran-language-server
 
 Fortran Language Server for the Language Server Protocol
     
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`fortran-ls.autocompletePrefix`**: `boolean`
-
-  Filter autocomplete suggestions with variable prefix
-
-- **`fortran-ls.disableDiagnostics`**: `boolean`
-
-  Disable diagnostics \(requires v1\.12\.0+\)\.
-
-- **`fortran-ls.displayVerWarning`**: `boolean`
-
-  Default: `true`
-  
-  Provides notifications when the underlying language server is out of date\.
-
-- **`fortran-ls.enableCodeActions`**: `boolean`
-
-  Enable experimental code actions \(requires v1\.7\.0+\)\.
-
-- **`fortran-ls.executablePath`**: `string`
-
-  Default: `"fortls"`
-  
-  Path to the Fortran language server \(fortls\)\.
-
-- **`fortran-ls.hoverSignature`**: `boolean`
-
-  Show signature information in hover for argument \(also enables \'variableHover\'\)\.
-
-- **`fortran-ls.includeSymbolMem`**: `boolean`
-
-  Default: `true`
-  
-  Include type members in document outline \(also used for \'Go to Symbol in File\'\)
-
-- **`fortran-ls.incrementalSync`**: `boolean`
-
-  Default: `true`
-  
-  Use incremental synchronization for file changes\.
-
-- **`fortran-ls.lowercaseIntrinsics`**: `boolean`
-
-  Use lowercase for intrinsics and keywords in autocomplete requests\.
-
-- **`fortran-ls.maxCommentLineLength`**: `number`
-
-  Default: `-1`
-  
-  Maximum comment line length \(requires v1\.8\.0+\)\.
-
-- **`fortran-ls.maxLineLength`**: `number`
-
-  Default: `-1`
-  
-  Maximum line length \(requires v1\.8\.0+\)\.
-
-- **`fortran-ls.notifyInit`**: `boolean`
-
-  Notify when workspace initialization is complete \(requires v1\.7\.0+\)\.
-
-- **`fortran-ls.useSignatureHelp`**: `boolean`
-
-  Default: `true`
-  
-  Use signature help instead of snippets when available\.
-
-- **`fortran-ls.variableHover`**: `boolean`
-
-  Show hover information for variables\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -2120,6 +1753,32 @@ require'lspconfig'.gopls.setup{}
 ```
 
 
+## gradle_ls
+
+https://github.com/microsoft/vscode-gradle
+
+Microsoft's lsp server for gradle files
+
+If you're setting this up manually, build vscode-gradle using `./gradlew installDist` and point `cmd` to the `gradle-language-server` generated in the build directory
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.gradle_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "gradle-language-server" }
+    filetypes = { "groovy" }
+    root_dir = root_pattern("settings.gradle")
+```
+
+
 ## grammarly
 
 https://github.com/emacs-grammarly/unofficial-grammarly-language-server
@@ -2163,6 +1822,8 @@ https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-
 ```sh
 npm install -g graphql-language-service-cli
 ```
+
+Note that you must also have [the graphql package](https://github.com/graphql/graphql-js) installed and create a [GraphQL config file](https://www.graphql-config.com/docs/user/user-introduction).
 
 
 
@@ -2344,238 +2005,6 @@ init_options = {
 }
 ```
         
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`haskell.checkProject`**: `boolean`
-
-  Default: `true`
-  
-  Whether to typecheck the entire project on load\. It could drive to bad perfomance in large projects\.
-
-- **`haskell.formattingProvider`**: `enum { "brittany", "floskell", "fourmolu", "ormolu", "stylish-haskell", "none" }`
-
-  Default: `"ormolu"`
-  
-  The formatter to use when formatting a document or range\. Ensure the plugin is enabled\.
-
-- **`haskell.logFile`**: `string`
-
-  Default: `""`
-  
-  If set\, redirects the logs to a file\.
-
-- **`haskell.maxCompletions`**: `integer`
-
-  Default: `40`
-  
-  Maximum number of completions sent to the editor\.
-
-- **`haskell.openDocumentationInHackage`**: `boolean`
-
-  Default: `true`
-  
-  When opening \'Documentation\' for external libraries\, open in hackage by default\. Set to false to instead open in vscode\.
-
-- **`haskell.openSourceInHackage`**: `boolean`
-
-  Default: `true`
-  
-  When opening \'Source\' for external libraries\, open in hackage by default\. Set to false to instead open in vscode\.
-
-- **`haskell.plugin.class.globalOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables type class plugin
-
-- **`haskell.plugin.eval.globalOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables eval plugin
-
-- **`haskell.plugin.ghcide-completions.config.autoExtendOn`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`haskell.plugin.ghcide-completions.config.snippetsOn`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`haskell.plugin.ghcide-type-lenses.config.mode`**: `enum { "always", "exported", "diagnostics" }`
-
-  Default: `true`
-  
-  Control how type lenses are shown
-
-- **`haskell.plugin.ghcide-type-lenses.globalOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables type lenses plugin
-
-- **`haskell.plugin.haddockComments.globalOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables haddock comments plugin
-
-- **`haskell.plugin.hlint.codeActionsOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables hlint code actions \(apply hints\)
-
-- **`haskell.plugin.hlint.config.flags`**: `array`
-
-  Default: `{}`
-  
-  null
-
-- **`haskell.plugin.hlint.diagnosticsOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables hlint diagnostics
-
-- **`haskell.plugin.importLens.codeActionsOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables explicit imports code actions
-
-- **`haskell.plugin.importLens.codeLensOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables explicit imports code lenses
-
-- **`haskell.plugin.moduleName.globalOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables module name plugin
-
-- **`haskell.plugin.pragmas.codeActionsOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables pragmas code actions
-
-- **`haskell.plugin.pragmas.completionOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables pragmas completions
-
-- **`haskell.plugin.refineImports.globalOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables refine imports plugin
-
-- **`haskell.plugin.retrie.globalOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables retrie plugin
-
-- **`haskell.plugin.splice.globalOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables splice plugin \(expand template haskell definitions\)
-
-- **`haskell.plugin.tactics.config.auto_gas`**: `integer`
-
-  Default: `4`
-  
-  null
-
-- **`haskell.plugin.tactics.config.hole_severity`**: `enum { 1, 2, 3, 4, vim.NIL }`
-
-  Default: `vim.NIL`
-  
-  The severity to use when showing hole diagnostics\.
-
-- **`haskell.plugin.tactics.config.max_use_ctor_actions`**: `integer`
-
-  Default: `5`
-  
-  null
-
-- **`haskell.plugin.tactics.config.proofstate_styling`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`haskell.plugin.tactics.config.timeout_duration`**: `integer`
-
-  Default: `2`
-  
-  null
-
-- **`haskell.plugin.tactics.globalOn`**: `boolean`
-
-  Default: `true`
-  
-  Enables Wingman \(tactics\) plugin
-
-- **`haskell.releasesDownloadStoragePath`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`haskell.releasesURL`**: `string`
-
-  Default: `""`
-  
-  An optional URL to override where to check for haskell\-language\-server releases
-
-- **`haskell.serverEnvironment`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  null
-
-- **`haskell.serverExecutablePath`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`haskell.serverExtraArgs`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`haskell.trace.client`**: `enum { "off", "error", "info", "debug" }`
-
-  Default: `"info"`
-  
-  Sets the log level in the client side\.
-
-- **`haskell.trace.server`**: `enum { "off", "messages" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VS Code and the language server\.
-
-- **`haskell.updateBehavior`**: `enum { "keep-up-to-date", "prompt", "never-check" }`
-
-  Default: `"keep-up-to-date"`
-  
-  null
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -2778,56 +2207,6 @@ Java language server
 
 Point `cmd` to `lang_server_linux.sh` or the equivalent script for macOS/Windows provided by java-language-server
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`java.addExports`**: `array`
-
-  Array items: `{type = "string"}`
-  
-  List of modules to allow access to\, for example \[\"jdk\.compiler\/com\.sun\.tools\.javac\.api\"\]
-
-- **`java.classPath`**: `array`
-
-  Array items: `{type = "string"}`
-  
-  Relative paths from workspace root to \.jar files\, \.zip files\, or folders that should be included in the Java class path
-
-- **`java.debugTestMethod`**: `array`
-
-  Array items: `{type = "string"}`
-  
-  Command to debug one test method\, for example \[\"mvn\"\, \"test\"\, \"\-Dmaven\.surefire\.debug\"\, \"\-Dtest\=\$\{class\}\#\$\{method\}\"\. The test should start paused\, listening for the debugger on port 5005\.
-
-- **`java.externalDependencies`**: `array`
-
-  Array items: `{pattern = "^[^:]+:[^:]+:[^:]+(:[^:]+:[^:]+)?$",type = "string"}`
-  
-  External dependencies of the form groupId\:artifactId\:version or groupId\:artifactId\:packaging\:version\:scope
-
-- **`java.home`**: `string`
-
-  Absolute path to your Java home directory
-
-- **`java.testClass`**: `array`
-
-  Array items: `{type = "string"}`
-  
-  Command to run all tests in a class\, for example \[\"mvn\"\, \"test\"\, \"\-Dtest\=\$\{class\}\"
-
-- **`java.testMethod`**: `array`
-
-  Array items: `{type = "string"}`
-  
-  Command to run one test method\, for example \[\"mvn\"\, \"test\"\, \"\-Dtest\=\$\{class\}\#\$\{method\}\"
-
-- **`java.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VSCode and the language server\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -2886,459 +2265,6 @@ For automatic installation you can use the following unofficial installers/launc
       require'lspconfig'.jdtls.setup{ cmd = { 'jdtls' } }
     ```
     
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`java.autobuild.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable the \'auto build\'
-
-- **`java.codeGeneration.generateComments`**: `boolean`
-
-  Generate method comments when generating the methods\.
-
-- **`java.codeGeneration.hashCodeEquals.useInstanceof`**: `boolean`
-
-  Use \'instanceof\' to compare types when generating the hashCode and equals methods\.
-
-- **`java.codeGeneration.hashCodeEquals.useJava7Objects`**: `boolean`
-
-  Use Objects\.hash and Objects\.equals when generating the hashCode and equals methods\. This setting only applies to Java 7 and higher\.
-
-- **`java.codeGeneration.insertionLocation`**: `enum { "afterCursor", "beforeCursor", "lastMember" }`
-
-  Default: `"afterCursor"`
-  
-  Specifies the insertion location of the code generated by source actions\.
-
-- **`java.codeGeneration.toString.codeStyle`**: `enum { "STRING_CONCATENATION", "STRING_BUILDER", "STRING_BUILDER_CHAINED", "STRING_FORMAT" }`
-
-  Default: `"STRING_CONCATENATION"`
-  
-  The code style for generating the toString method\.
-
-- **`java.codeGeneration.toString.limitElements`**: `integer`
-
-  Default: `0`
-  
-  Limit number of items in arrays\/collections\/maps to list\, if 0 then list all\.
-
-- **`java.codeGeneration.toString.listArrayContents`**: `boolean`
-
-  Default: `true`
-  
-  List contents of arrays instead of using native toString\(\)\.
-
-- **`java.codeGeneration.toString.skipNullValues`**: `boolean`
-
-  Skip null values when generating the toString method\.
-
-- **`java.codeGeneration.toString.template`**: `string`
-
-  Default: `"${object.className} [${member.name()}=${member.value}, ${otherMembers}]"`
-  
-  The template for generating the toString method\.
-
-- **`java.codeGeneration.useBlocks`**: `boolean`
-
-  Use blocks in \'if\' statements when generating the methods\.
-
-- **`java.completion.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable code completion support
-
-- **`java.completion.favoriteStaticMembers`**: `array`
-
-  Default: `{ "org.junit.Assert.*", "org.junit.Assume.*", "org.junit.jupiter.api.Assertions.*", "org.junit.jupiter.api.Assumptions.*", "org.junit.jupiter.api.DynamicContainer.*", "org.junit.jupiter.api.DynamicTest.*", "org.mockito.Mockito.*", "org.mockito.ArgumentMatchers.*", "org.mockito.Answers.*" }`
-  
-  Defines a list of static members or types with static members\. Content assist will propose those static members even if the import is missing\.
-
-- **`java.completion.filteredTypes`**: `array`
-
-  Default: `{ "java.awt.*", "com.sun.*", "sun.*", "jdk.*", "org.graalvm.*", "io.micrometer.shaded.*" }`
-  
-  Defines the type filters\. All types whose fully qualified name matches the selected filter strings will be ignored in content assist or quick fix proposals and when organizing imports\. For example \'java\.awt\.\*\' will hide all types from the awt packages\.
-
-- **`java.completion.guessMethodArguments`**: `boolean`
-
-  When set to true\, method arguments are guessed when a method is selected from as list of code assist proposals\.
-
-- **`java.completion.importOrder`**: `array`
-
-  Default: `{ "java", "javax", "com", "org" }`
-  
-  Defines the sorting order of import statements\. A package or type name prefix \(e\.g\. \'org\.eclipse\'\) is a valid entry\. An import is always added to the most specific group\.
-
-- **`java.completion.maxResults`**: `integer`
-
-  Default: `0`
-  
-  null
-
-- **`java.completion.overwrite`**: `boolean`
-
-  Default: `true`
-  
-  When set to true\, code completion overwrites the current text\. When set to false\, code is simply added instead\.
-
-- **`java.configuration.checkProjectSettingsExclusions`**: `boolean`
-
-  Controls whether to exclude extension\-generated project settings files \(\.project\, \.classpath\, \.factorypath\, \.settings\/\) from the file explorer\.
-
-- **`java.configuration.maven.globalSettings`**: `string`
-
-  Default: `vim.NIL`
-  
-  Path to Maven\'s global settings\.xml
-
-- **`java.configuration.maven.notCoveredPluginExecutionSeverity`**: `enum { "ignore", "warning", "error" }`
-
-  Default: `"warning"`
-  
-  Specifies severity if the plugin execution is not covered by Maven build lifecycle\.
-
-- **`java.configuration.maven.userSettings`**: `string`
-
-  Default: `vim.NIL`
-  
-  Path to Maven\'s user settings\.xml
-
-- **`java.configuration.runtimes`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{additionalProperties = false,default = vim.empty_dict(),properties = {default = {description = "Is default runtime? Only one runtime can be default.",type = "boolean"},javadoc = {description = "JDK javadoc path.",type = "string"},name = {description = "Java Execution Environment name. Must be unique.",enum = { "J2SE-1.5", "JavaSE-1.6", "JavaSE-1.7", "JavaSE-1.8", "JavaSE-9", "JavaSE-10", "JavaSE-11", "JavaSE-12", "JavaSE-13", "JavaSE-14", "JavaSE-15", "JavaSE-16", "JavaSE-17" },type = "string"},path = {description = 'JDK home path. Should be the JDK installation directory, not the Java bin path.\n On Windows, backslashes must be escaped, i.e.\n"path":"C:\\\\Program Files\\\\Java\\\\jdk1.8.0_161".',pattern = ".*(?<!\\/bin|\\/bin\\/|\\\\bin|\\\\bin\\\\)$",type = "string"},sources = {description = "JDK sources path.",type = "string"}},required = { "path", "name" },type = "object"}`
-  
-  Map Java Execution Environments to local JDKs\.
-
-- **`java.configuration.updateBuildConfiguration`**: `enum { "disabled", "interactive", "automatic" }`
-
-  Default: `"interactive"`
-  
-  Specifies how modifications on build files update the Java classpath\/configuration
-
-- **`java.configuration.workspaceCacheLimit`**: `null|integer`
-
-  Default: `90`
-  
-  The number of days \(if enabled\) to keep unused workspace cache data\. Beyond this limit\, cached workspace data may be removed\.
-
-- **`java.contentProvider.preferred`**: `string`
-
-  Default: `vim.NIL`
-  
-  Preferred content provider \(a 3rd party decompiler id\, usually\)
-
-- **`java.eclipse.downloadSources`**: `boolean`
-
-  Enable\/disable download of Maven source artifacts for Eclipse projects\.
-
-- **`java.errors.incompleteClasspath.severity`**: `enum { "ignore", "info", "warning", "error" }`
-
-  Default: `"warning"`
-  
-  Specifies the severity of the message when the classpath is incomplete for a Java file
-
-- **`java.foldingRange.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable smart folding range support\. If disabled\, it will use the default indentation\-based folding range provided by VS Code\.
-
-- **`java.format.comments.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Includes the comments during code formatting\.
-
-- **`java.format.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable default Java formatter
-
-- **`java.format.onType.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable automatic block formatting when typing \`\;\`\, \`\<enter\>\` or \`\}\`
-
-- **`java.format.settings.profile`**: `string`
-
-  Default: `vim.NIL`
-  
-  Optional formatter profile name from the Eclipse formatter settings\.
-
-- **`java.format.settings.url`**: `string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`java.home`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  Specifies the folder path to the JDK \(11 or more recent\) used to launch the Java Language Server\.
-  On Windows\, backslashes must be escaped\, i\.e\.
-  \"java\.home\"\:\"C\:\\\\Program Files\\\\Java\\\\jdk11\.0\_8\"
-
-- **`java.implementationsCodeLens.enabled`**: `boolean`
-
-  Enable\/disable the implementations code lens\.
-
-- **`java.import.exclusions`**: `array`
-
-  Default: `{ "**/node_modules/**", "**/.metadata/**", "**/archetype-resources/**", "**/META-INF/maven/**" }`
-  
-  Configure glob patterns for excluding folders\. Use \`\!\` to negate patterns to allow subfolders imports\. You have to include a parent directory\. The order is important\.
-
-- **`java.import.generatesMetadataFilesAtProjectRoot`**: `boolean`
-
-  null
-
-- **`java.import.gradle.arguments`**: `string`
-
-  Default: `vim.NIL`
-  
-  Arguments to pass to Gradle\.
-
-- **`java.import.gradle.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable the Gradle importer\.
-
-- **`java.import.gradle.home`**: `string`
-
-  Default: `vim.NIL`
-  
-  Use Gradle from the specified local installation directory or GRADLE\_HOME if the Gradle wrapper is missing or disabled and no \'java\.import\.gradle\.version\' is specified\.
-
-- **`java.import.gradle.java.home`**: `string`
-
-  Default: `vim.NIL`
-  
-  The location to the JVM used to run the Gradle daemon\.
-
-- **`java.import.gradle.jvmArguments`**: `string`
-
-  Default: `vim.NIL`
-  
-  JVM arguments to pass to Gradle\.
-
-- **`java.import.gradle.offline.enabled`**: `boolean`
-
-  Enable\/disable the Gradle offline mode\.
-
-- **`java.import.gradle.user.home`**: `string`
-
-  Default: `vim.NIL`
-  
-  Setting for GRADLE\_USER\_HOME\.
-
-- **`java.import.gradle.version`**: `string`
-
-  Default: `vim.NIL`
-  
-  Use Gradle from the specific version if the Gradle wrapper is missing or disabled\.
-
-- **`java.import.gradle.wrapper.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Use Gradle from the \'gradle\-wrapper\.properties\' file\.
-
-- **`java.import.maven.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable the Maven importer\.
-
-- **`java.imports.gradle.wrapper.checksums`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{additionalProperties = false,default = vim.empty_dict(),properties = {allowed = {default = true,label = "Is allowed?",type = "boolean"},sha256 = {label = "SHA-256 checksum.",type = "string"}},required = { "sha256" },type = "object",uniqueItems = true}`
-  
-  Defines allowed\/disallowed SHA\-256 checksums of Gradle Wrappers
-
-- **`java.jdt.ls.java.home`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  Specifies the folder path to the JDK \(11 or more recent\) used to launch the Java Language Server\. This setting will replace the Java extension\'s embedded JRE to start the Java Language Server\. 
-  
-  On Windows\, backslashes must be escaped\, i\.e\.
-  \"java\.jdt\.ls\.java\.home\"\:\"C\:\\\\Program Files\\\\Java\\\\jdk11\.0\_8\"
-
-- **`java.jdt.ls.vmargs`**: `string|null`
-
-  Default: `"-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m"`
-  
-  Specifies extra VM arguments used to launch the Java Language Server\. Eg\. use \`\-XX\:+UseParallelGC \-XX\:GCTimeRatio\=4 \-XX\:AdaptiveSizePolicyWeight\=90 \-Dsun\.zip\.disableMemoryMapping\=true \-Xmx1G \-Xms100m \` to optimize memory usage with the parallel garbage collector
-
-- **`java.maven.downloadSources`**: `boolean`
-
-  Enable\/disable download of Maven source artifacts as part of importing Maven projects\.
-
-- **`java.maven.updateSnapshots`**: `boolean`
-
-  Force update of Snapshots\/Releases\.
-
-- **`java.maxConcurrentBuilds`**: `integer`
-
-  Default: `1`
-  
-  Max simultaneous project builds
-
-- **`java.progressReports.enabled`**: `boolean`
-
-  Default: `true`
-  
-  \[Experimental\] Enable\/disable progress reports from background processes on the server\.
-
-- **`java.project.importHint`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable the server\-mode switch information\, when Java projects import is skipped on startup\.
-
-- **`java.project.importOnFirstTimeStartup`**: `enum { "disabled", "interactive", "automatic" }`
-
-  Default: `"automatic"`
-  
-  Specifies whether to import the Java projects\, when opening the folder in Hybrid mode for the first time\.
-
-- **`java.project.outputPath`**: `string|null`
-
-  Default: `""`
-  
-  null
-
-- **`java.project.referencedLibraries`**: `array|object`
-
-  Default: `{ "lib/**/*.jar" }`
-  
-  Configure glob patterns for referencing local libraries to a Java project\.
-
-- **`java.project.resourceFilters`**: `array`
-
-  Default: `{ "node_modules", ".git" }`
-  
-  Excludes files and folders from being refreshed by the Java Language Server\, which can improve the overall performance\. For example\, \[\"node\_modules\"\,\"\.git\"\] will exclude all files and folders named \'node\_modules\' or \'\.git\'\. Defaults to \[\"node\_modules\"\,\"\.git\"\]\.
-
-- **`java.project.sourcePaths`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`java.quickfix.showAt`**: `enum { "line", "problem" }`
-
-  Default: `"line"`
-  
-  Show quickfixes at the problem or line level\.
-
-- **`java.recommendations.dependency.analytics.show`**: `boolean`
-
-  Default: `true`
-  
-  Show the recommended Dependency Analytics extension\.
-
-- **`java.references.includeAccessors`**: `boolean`
-
-  Default: `true`
-  
-  Include getter\, setter and builder\/constructor when finding references\.
-
-- **`java.references.includeDecompiledSources`**: `boolean`
-
-  Default: `true`
-  
-  Include the decompiled sources when finding references\.
-
-- **`java.referencesCodeLens.enabled`**: `boolean`
-
-  Enable\/disable the references code lens\.
-
-- **`java.saveActions.organizeImports`**: `boolean`
-
-  Enable\/disable auto organize imports on save action
-
-- **`java.selectionRange.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable Smart Selection support for Java\. Disabling this option will not affect the VS Code built\-in word\-based and bracket\-based smart selection\.
-
-- **`java.server.launchMode`**: `enum { "Standard", "LightWeight", "Hybrid" }`
-
-  Default: `"Hybrid"`
-  
-  The launch mode for the Java extension
-
-- **`java.settings.url`**: `string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`java.showBuildStatusOnStart.enabled`**
-
-  Default: `"notification"`
-  
-  Automatically show build status on startup\.
-
-- **`java.signatureHelp.enabled`**: `boolean`
-
-  Enable\/disable the signature help\.
-
-- **`java.sources.organizeImports.starThreshold`**: `integer`
-
-  Default: `99`
-  
-  Specifies the number of imports added before a star\-import declaration is used\.
-
-- **`java.sources.organizeImports.staticStarThreshold`**: `integer`
-
-  Default: `99`
-  
-  Specifies the number of static imports added before a star\-import declaration is used\.
-
-- **`java.symbols.includeSourceMethodDeclarations`**: `boolean`
-
-  null
-
-- **`java.templates.fileHeader`**: `array`
-
-  Default: `{}`
-  
-  null
-
-- **`java.templates.typeComment`**: `array`
-
-  Default: `{}`
-  
-  null
-
-- **`java.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VS Code and the Java language server\.
-
-- **`java.typeHierarchy.lazyLoad`**: `boolean`
-
-  Enable\/disable lazy loading the content in type hierarchy\. Lazy loading could save a lot of loading time but every type should be expanded manually to load its content\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -3426,46 +2352,6 @@ require'lspconfig'.jsonls.setup {
 }
 ```
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`json.colorDecorators.enable`**: `boolean`
-
-  Default: `true`
-  
-  \%json\.colorDecorators\.enable\.desc\%
-
-- **`json.format.enable`**: `boolean`
-
-  Default: `true`
-  
-  \%json\.format\.enable\.desc\%
-
-- **`json.maxItemsComputed`**: `number`
-
-  Default: `5000`
-  
-  \%json\.maxItemsComputed\.desc\%
-
-- **`json.schemaDownload.enable`**: `boolean`
-
-  Default: `true`
-  
-  \%json\.enableSchemaDownload\.desc\%
-
-- **`json.schemas`**: `array`
-
-  Array items: `{default = {fileMatch = { "/myfile" },url = "schemaURL"},properties = {fileMatch = {description = "%json.schemas.fileMatch.desc%",items = {default = "MyFile.json",description = "%json.schemas.fileMatch.item.desc%",type = "string"},minItems = 1,type = "array"},schema = {["$ref"] = "http://json-schema.org/draft-07/schema#",description = "%json.schemas.schema.desc%"},url = {default = "/user.schema.json",description = "%json.schemas.url.desc%",type = "string"}},type = "object"}`
-  
-  \%json\.schemas\.desc\%
-
-- **`json.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  \%json\.tracing\.desc\%
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -3544,272 +2430,6 @@ Julia project, you must make sure that the project is instantiated:
 julia --project=/path/to/my/project -e 'using Pkg; Pkg.instantiate()'
 ```
     
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`julia.NumThreads`**: `integer|string|null`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`julia.additionalArgs`**: `array`
-
-  Default: `{}`
-  
-  Additional Julia arguments\.
-
-- **`julia.cellDelimiters`**: `array`
-
-  Default: `{ "^##(?!#)", "^#(\\s?)%%", "^#-" }`
-  
-  Cell delimiter regular expressions for Julia files\.
-
-- **`julia.completionmode`**: `enum { "exportedonly", "import", "qualify" }`
-
-  Default: `"qualify"`
-  
-  Sets the mode for completions\.
-
-- **`julia.debuggerDefaultCompiled`**: `array`
-
-  Default: `{ "Base.", "-Base.!", "-Base.all", "-Base.all!", "-Base.any", "-Base.any!", "-Base.cd", "-Base.iterate", "-Base.collect", "-Base.collect_similar", "-Base._collect", "-Base.collect_to!", "-Base.collect_to_with_first!", "-Base.filter", "-Base.filter!", "-Base.foreach", "-Base.findall", "-Base.findfirst", "-Base.findlast", "-Base.findnext", "-Base.findprev", "-Base.Generator", "-Base.map", "-Base.map!", "-Base.maximum!", "-Base.minimum!", "-Base.mktemp", "-Base.mktempdir", "-Base.open", "-Base.prod!", "-Base.redirect_stderr", "-Base.redirect_stdin", "-Base.redirect_stdout", "-Base.reenable_sigint", "-Base.setindex!", "-Base.setprecision", "-Base.setrounding", "-Base.show", "-Base.sprint", "-Base.sum", "-Base.sum!", "-Base.task_local_storage", "-Base.timedwait", "-Base.withenv", "-Base.Broadcast", "Core", "Core.Compiler.", "Core.IR", "Core.Intrinsics", "DelimitedFiles", "Distributed", "LinearAlgebra.", "Serialization", "Statistics", "-Statistics.mean", "SparseArrays", "Mmap" }`
-  
-  Functions or modules that are set to compiled mode when setting the defaults\.
-
-- **`julia.deleteJuliaCovFiles`**: `boolean`
-
-  Default: `"true"`
-  
-  Delete Julia \.cov files when running tests with coverage\, leaving only a \.lcov file behind\.
-
-- **`julia.editor`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`julia.enableCrashReporter`**: `boolean|null`
-
-  Default: `vim.NIL`
-  
-  Enable crash reports to be sent to the julia VS Code extension developers\.
-
-- **`julia.enableTelemetry`**: `boolean|null`
-
-  Default: `vim.NIL`
-  
-  Enable usage data and errors to be sent to the julia VS Code extension developers\.
-
-- **`julia.environmentPath`**: `string|null`
-
-  Default: `vim.NIL`
-  
-  Path to a julia environment\. VS Code needs to be reloaded for changes to take effect\.
-
-- **`julia.executablePath`**: `string`
-
-  Default: `""`
-  
-  Points to the julia executable\.
-
-- **`julia.execution.codeInREPL`**: `boolean`
-
-  Print executed code in REPL and append it to the REPL history\.
-
-- **`julia.execution.inlineResults.colors`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  null
-
-- **`julia.execution.resultType`**: `enum { "REPL", "inline", "inline, errors in REPL", "both" }`
-
-  Default: `"both"`
-  
-  Specifies how to show inline execution results
-
-- **`julia.execution.saveOnEval`**: `boolean`
-
-  null
-
-- **`julia.focusPlotNavigator`**: `boolean`
-
-  Whether to automatically show the plot navigator when plotting\.
-
-- **`julia.lint.call`**: `boolean`
-
-  Default: `true`
-  
-  This compares  call signatures against all known methods for the called function\. Calls with too many or too few arguments\, or unknown keyword parameters are highlighted\.
-
-- **`julia.lint.constif`**: `boolean`
-
-  Default: `true`
-  
-  Check for constant conditionals in if statements that result in branches never being reached\.\.
-
-- **`julia.lint.datadecl`**: `boolean`
-
-  Default: `true`
-  
-  Check variables used in type declarations are datatypes\.
-
-- **`julia.lint.disabledDirs`**: `array`
-
-  Default: `{ "docs", "test" }`
-  
-  null
-
-- **`julia.lint.iter`**: `boolean`
-
-  Default: `true`
-  
-  Check iterator syntax of loops\. Will identify\, for example\, attempts to iterate over single values\.
-
-- **`julia.lint.lazy`**: `boolean`
-
-  Default: `true`
-  
-  Check for deterministic lazy boolean operators\.
-
-- **`julia.lint.missingrefs`**: `enum { "none", "symbols", "all" }`
-
-  Default: `"none"`
-  
-  Highlight unknown symbols\. The \`symbols\` option will not mark unknown fields\.
-
-- **`julia.lint.modname`**: `boolean`
-
-  Default: `true`
-  
-  Check submodule names do not shadow their parent\'s name\.
-
-- **`julia.lint.nothingcomp`**: `boolean`
-
-  Default: `true`
-  
-  Check for use of \`\=\=\` rather than \`\=\=\=\` when comparing against \`nothing\`\. 
-
-- **`julia.lint.pirates`**: `boolean`
-
-  Default: `true`
-  
-  Check for type piracy \- the overloading of external functions with methods specified for external datatypes\. \'External\' here refers to imported code\.
-
-- **`julia.lint.run`**: `boolean`
-
-  Default: `true`
-  
-  Run the linter on active files\.
-
-- **`julia.lint.typeparam`**: `boolean`
-
-  Default: `true`
-  
-  Check parameters declared in \`where\` statements or datatype declarations are used\.
-
-- **`julia.lint.useoffuncargs`**: `boolean`
-
-  Default: `true`
-  
-  Check that all declared arguments are used within the function body\.
-
-- **`julia.liveTestFile`**: `string`
-
-  Default: `"test/runtests.jl"`
-  
-  A workspace relative path to a Julia file that contains the tests that should be run for live testing\.
-
-- **`julia.packageServer`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`julia.persistentSession.enabled`**: `boolean`
-
-  null
-
-- **`julia.persistentSession.shell`**: `string`
-
-  Default: `"/bin/sh"`
-  
-  Shell used to start the persistent session\.
-
-- **`julia.persistentSession.shellExecutionArgument`**: `string`
-
-  Default: `"-c"`
-  
-  null
-
-- **`julia.persistentSession.tmuxSessionName`**: `string`
-
-  Default: `"julia_vscode"`
-  
-  null
-
-- **`julia.persistentSession.warnOnKill`**: `boolean`
-
-  Default: `true`
-  
-  Warn when stopping a persistent session\.
-
-- **`julia.plots.path`**: `string`
-
-  The output directory to save plots to
-
-- **`julia.runtimeCompletions`**: `boolean`
-
-  Request runtime completions from the integrated REPL\.
-
-- **`julia.showRuntimeDiagnostics`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`julia.symbolCacheDownload`**: `boolean|null`
-
-  Default: `vim.NIL`
-  
-  Download symbol server cache files from GitHub\.
-
-- **`julia.symbolserverUpstream`**: `string`
-
-  Default: `"https://www.julia-vscode.org/symbolcache"`
-  
-  Symbol server cache download URL\.
-
-- **`julia.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VS Code and the language server\.
-
-- **`julia.useCustomSysimage`**: `boolean`
-
-  Use an existing custom sysimage when starting the REPL
-
-- **`julia.usePlotPane`**: `boolean`
-
-  Default: `true`
-  
-  Display plots within VS Code\. Might require a restart of the Julia process\.
-
-- **`julia.useProgressFrontend`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`julia.useRevise`**: `boolean`
-
-  Default: `true`
-  
-  Load Revise\.jl on startup of the REPL\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -3846,114 +2466,6 @@ require'lspconfig'.julials.setup{}
     https://github.com/udalov/kotlin-vim (recommended)
     Note that there is no LICENSE specified yet.
     
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`kotlin.compiler.jvm.target`**: `string`
-
-  Default: `"default"`
-  
-  Specifies the JVM target\, e\.g\. \"1\.6\" or \"1\.8\"
-
-- **`kotlin.completion.snippets.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Specifies whether code completion should provide snippets \(true\) or plain\-text items \(false\)\.
-
-- **`kotlin.debounceTime`**: `integer`
-
-  Default: `250`
-  
-  \[DEPRECATED\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possible stability issues\.
-
-- **`kotlin.debugAdapter.enabled`**: `boolean`
-
-  Default: `true`
-  
-  \[Recommended\] Specifies whether the debug adapter should be used\. When enabled a debugger for Kotlin will be available\.
-
-- **`kotlin.debugAdapter.path`**: `string`
-
-  Default: `""`
-  
-  Optionally a custom path to the debug adapter executable\.
-
-- **`kotlin.externalSources.autoConvertToKotlin`**: `boolean`
-
-  Default: `true`
-  
-  Specifies whether decompiled\/external classes should be auto\-converted to Kotlin\.
-
-- **`kotlin.externalSources.useKlsScheme`**: `boolean`
-
-  Default: `true`
-  
-  \[Recommended\] Specifies whether URIs inside JARs should be represented using the \'kls\'\-scheme\.
-
-- **`kotlin.indexing.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Whether global symbols in the project should be indexed automatically in the background\. This enables e\.g\. code completion for unimported classes and functions\.
-
-- **`kotlin.languageServer.debugAttach.autoSuspend`**: `boolean`
-
-  \[DEBUG\] If enabled \(together with debugAttach\.enabled\)\, the language server will not immediately launch but instead listen on the specified attach port and wait for a debugger\. This is ONLY useful if you need to debug the language server ITSELF\.
-
-- **`kotlin.languageServer.debugAttach.enabled`**: `boolean`
-
-  \[DEBUG\] Whether the language server should listen for debuggers\, i\.e\. be debuggable while running in VSCode\. This is ONLY useful if you need to debug the language server ITSELF\.
-
-- **`kotlin.languageServer.debugAttach.port`**: `integer`
-
-  Default: `5005`
-  
-  \[DEBUG\] If transport is stdio this enables you to attach to the running language server with a debugger\. This is ONLY useful if you need to debug the language server ITSELF\.
-
-- **`kotlin.languageServer.enabled`**: `boolean`
-
-  Default: `true`
-  
-  \[Recommended\] Specifies whether the language server should be used\. When enabled the extension will provide code completions and linting\, otherwise just syntax highlighting\. Might require a reload to apply\.
-
-- **`kotlin.languageServer.path`**: `string`
-
-  Default: `""`
-  
-  Optionally a custom path to the language server executable\.
-
-- **`kotlin.languageServer.port`**: `integer`
-
-  Default: `0`
-  
-  The port to which the client will attempt to connect to\. A random port is used if zero\. Only used if the transport layer is TCP\.
-
-- **`kotlin.languageServer.transport`**: `enum { "stdio", "tcp" }`
-
-  Default: `"stdio"`
-  
-  The transport layer beneath the language server protocol\. Note that the extension will launch the server even if a TCP socket is used\.
-
-- **`kotlin.linting.debounceTime`**: `integer`
-
-  Default: `250`
-  
-  \[DEBUG\] Specifies the debounce time limit\. Lower to increase responsiveness at the cost of possible stability issues\.
-
-- **`kotlin.snippetsEnabled`**: `boolean`
-
-  Default: `true`
-  
-  \[DEPRECATED\] Specifies whether code completion should provide snippets \(true\) or plain\-text items \(false\)\.
-
-- **`kotlin.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VSCode and the Kotlin language server\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -4139,208 +2651,6 @@ To support org files or R sweave, users can define a custom filetype autocommand
 vim.cmd [[ autocmd BufRead,BufNewFile *.org set filetype=org ]]
 ```
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`ltex.additionalRules.enablePickyRules`**: `boolean`
-
-  null
-
-- **`ltex.additionalRules.languageModel`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`ltex.additionalRules.motherTongue`**: `enum { "", "ar", "ast-ES", "be-BY", "br-FR", "ca-ES", "ca-ES-valencia", "da-DK", "de", "de-AT", "de-CH", "de-DE", "de-DE-x-simple-language", "el-GR", "en", "en-AU", "en-CA", "en-GB", "en-NZ", "en-US", "en-ZA", "eo", "es", "es-AR", "fa", "fr", "ga-IE", "gl-ES", "it", "ja-JP", "km-KH", "nl", "nl-BE", "pl-PL", "pt", "pt-AO", "pt-BR", "pt-MZ", "pt-PT", "ro-RO", "ru-RU", "sk-SK", "sl-SI", "sv", "ta-IN", "tl-PH", "uk-UA", "zh-CN" }`
-
-  Default: `""`
-  
-  null
-
-- **`ltex.additionalRules.neuralNetworkModel`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`ltex.additionalRules.word2VecModel`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`ltex.bibtex.fields`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  null
-
-- **`ltex.checkFrequency`**: `enum { "edit", "save", "manual" }`
-
-  Default: `"edit"`
-  
-  null
-
-- **`ltex.clearDiagnosticsWhenClosingFile`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`ltex.completionEnabled`**: `boolean`
-
-  null
-
-- **`ltex.configurationTarget`**: `object`
-
-  Default: `{dictionary = "workspaceFolderExternalFile",disabledRules = "workspaceFolderExternalFile",hiddenFalsePositives = "workspaceFolderExternalFile"}`
-  
-  null
-
-- **`ltex.diagnosticSeverity`**
-
-  Default: `"information"`
-  
-  null
-
-- **`ltex.dictionary`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  null
-
-- **`ltex.disabledRules`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  null
-
-- **`ltex.enabled`**
-
-  Default: `{ "bibtex", "context", "context.tex", "html", "latex", "markdown", "org", "restructuredtext", "rsweave" }`
-  
-  null
-
-- **`ltex.enabledRules`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  null
-
-- **`ltex.hiddenFalsePositives`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  null
-
-- **`ltex.java.initialHeapSize`**: `integer`
-
-  Default: `64`
-  
-  null
-
-- **`ltex.java.maximumHeapSize`**: `integer`
-
-  Default: `512`
-  
-  null
-
-- **`ltex.java.path`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`ltex.language`**: `enum { "auto", "ar", "ast-ES", "be-BY", "br-FR", "ca-ES", "ca-ES-valencia", "da-DK", "de", "de-AT", "de-CH", "de-DE", "de-DE-x-simple-language", "el-GR", "en", "en-AU", "en-CA", "en-GB", "en-NZ", "en-US", "en-ZA", "eo", "es", "es-AR", "fa", "fr", "ga-IE", "gl-ES", "it", "ja-JP", "km-KH", "nl", "nl-BE", "pl-PL", "pt", "pt-AO", "pt-BR", "pt-MZ", "pt-PT", "ro-RO", "ru-RU", "sk-SK", "sl-SI", "sv", "ta-IN", "tl-PH", "uk-UA", "zh-CN" }`
-
-  Default: `"en-US"`
-  
-  null
-
-- **`ltex.languageToolHttpServerUri`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`ltex.languageToolOrg.apiKey`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`ltex.languageToolOrg.username`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`ltex.latex.commands`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  null
-
-- **`ltex.latex.environments`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  null
-
-- **`ltex.ltex-ls.languageToolHttpServerUri`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`ltex.ltex-ls.languageToolOrgApiKey`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`ltex.ltex-ls.languageToolOrgUsername`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`ltex.ltex-ls.logLevel`**: `enum { "severe", "warning", "info", "config", "fine", "finer", "finest" }`
-
-  Default: `"fine"`
-  
-  null
-
-- **`ltex.ltex-ls.path`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`ltex.markdown.nodes`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  null
-
-- **`ltex.sentenceCacheSize`**: `integer`
-
-  Default: `2000`
-  
-  null
-
-- **`ltex.statusBarItem`**: `boolean`
-
-  null
-
-- **`ltex.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  null
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -4591,6 +2901,31 @@ require'lspconfig'.ocamllsp.setup{}
 ```
 
 
+## ols
+
+           https://github.com/DanielGavin/ols
+
+           `Odin Language Server`.
+        
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.ols.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "ols" }
+    filetypes = { "odin" }
+    root_dir = util.root_pattern("ols.json", ".git")
+    single_file_support = true
+```
+
+
 ## omnisharp
 
 https://github.com/omnisharp/omnisharp-roslyn
@@ -4670,6 +3005,52 @@ require'lspconfig'.opencl_ls.setup{}
 ```
 
 
+## openscad_ls
+
+https://github.com/dzhu/openscad-language-server
+
+A Language Server Protocol server for OpenSCAD
+
+You can build and install `openscad-language-server` binary with `cargo`:
+```sh
+cargo install openscad-language-server
+```
+
+Vim does not have built-in syntax for the `openscad` filetype currently.
+
+This can be added via an autocmd:
+
+```lua
+vim.cmd [[ autocmd BufRead,BufNewFile *.scad set filetype=openscad ]]
+```
+
+or by installing a filetype plugin such as https://github.com/sirtaj/vim-openscad
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.openscad_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "openscad-language-server" }
+    filetypes = { "openscad" }
+    root_dir = function(path)
+        -- Support git directories and git files (worktrees)
+        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
+          return path
+        end
+      end)
+    end
+    single_file_support = true
+```
+
+
 ## pasls
 
 https://github.com/genericptr/pascal-language-server
@@ -4720,114 +3101,6 @@ https://github.com/richterger/Perl-LanguageServer/tree/master/clients/vscode/per
 
 To use the language server, ensure that you have Perl::LanguageServer installed and perl command is on your path.
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`perl.cacheDir`**: `string`
-
-  Default: `vim.NIL`
-  
-  directory for caching of parsed symbols\, if the directory does not exists\, it will be created\, defaults to \$\{workspace\}\/\.vscode\/perl\-lang\. This should be one unqiue directory per project and an absolute path\.
-
-- **`perl.debugAdapterPort`**: `string`
-
-  Default: `"13603"`
-  
-  port to use for connection between vscode and debug adapter inside Perl\:\:LanguageServer\. On a multi user system every user must use a different port\.
-
-- **`perl.disableCache`**: `boolean`
-
-  if true\, the LanguageServer will not cache the result of parsing source files on disk\, so it can be used within readonly directories
-
-- **`perl.enable`**: `boolean`
-
-  Default: `true`
-  
-  enable\/disable this extension
-
-- **`perl.fileFilter`**: `array`
-
-  Default: `vim.NIL`
-  
-  array for filtering perl file\, defaults to \*\.pm|\*\.pl
-
-- **`perl.ignoreDirs`**: `array`
-
-  Default: `vim.NIL`
-  
-  directories to ignore\, defaults to \.vscode\, \.git\, \.svn
-
-- **`perl.logFile`**: `string`
-
-  Default: `vim.NIL`
-  
-  If set\, log output is written to the given logfile\, instead of displaying it in the vscode output pane\. Log output is always appended so you are responsible for rotating the file\.
-
-- **`perl.logLevel`**: `integer`
-
-  Default: `0`
-  
-  Log level 0\-2
-
-- **`perl.pathMap`**: `array`
-
-  Default: `vim.NIL`
-  
-  mapping of local to remote paths
-
-- **`perl.perlCmd`**: `string`
-
-  Default: `vim.NIL`
-  
-  defaults to perl
-
-- **`perl.perlInc`**: `array`
-
-  Default: `vim.NIL`
-  
-  array with paths to add to perl library path\. This setting is used by the syntax checker and for the debuggee and also for the LanguageServer itself\. perl\.perlInc should be absolute paths\.
-
-- **`perl.showLocalVars`**: `boolean`
-
-  if true\, show also local variables in symbol view
-
-- **`perl.sshAddr`**: `string`
-
-  Default: `vim.NIL`
-  
-  ip address of remote system
-
-- **`perl.sshArgs`**: `array`
-
-  Default: `vim.NIL`
-  
-  optional arguments for ssh
-
-- **`perl.sshCmd`**: `string`
-
-  Default: `vim.NIL`
-  
-  defaults to ssh on unix and plink on windows
-
-- **`perl.sshPort`**: `string`
-
-  Default: `vim.NIL`
-  
-  optional\, port for ssh to remote system
-
-- **`perl.sshUser`**: `string`
-
-  Default: `vim.NIL`
-  
-  user for ssh login
-
-- **`perl.sshWorkspaceRoot`**: `string`
-
-  Default: `vim.NIL`
-  
-  path of the workspace root on remote system
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -4855,6 +3128,59 @@ require'lspconfig'.perlls.setup{}
 ```
 
 
+## perlnavigator
+
+https://github.com/bscan/PerlNavigator
+
+A Perl language server
+
+**By default, perlnavigator doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path.
+You have to install the language server manually.
+
+Clone the PerlNavigator repo, install based on the [instructions](https://github.com/bscan/PerlNavigator#installation-for-other-editors),
+and point `cmd` to `server.js` inside the `server/out` directory:
+
+```lua
+cmd = {'node', '<path_to_repo>/server/out/server.js', '--stdio'}
+```
+
+At minimum, you will need `perl` in your path. If you want to use a non-standard `perl` you will need to set your configuration like so:
+```lua
+settings = {
+  perlnavigator = {
+    perlPath = '/some/odd/location/my-perl'
+  }
+}
+```
+
+The `contributes.configuration.properties` section of `perlnavigator`'s `package.json` has all available configuration settings. All
+settings have a reasonable default, but, at minimum, you may want to point `perlnavigator` at your `perltidy` and `perlcritic` configurations.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.perlnavigator.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = {}
+    filetypes = { "perl" }
+    root_dir = function(path)
+        -- Support git directories and git files (worktrees)
+        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
+          return path
+        end
+      end)
+    end
+    single_file_support = true
+```
+
+
 ## perlpls
 
 https://github.com/FractalBoy/perl-language-server
@@ -4864,64 +3190,6 @@ https://metacpan.org/pod/PLS
 
 To use the language server, ensure that you have PLS installed and that it is in your path
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`perl.cwd`**: `string`
-
-  Default: `"."`
-  
-  Current working directory to use
-
-- **`perl.inc`**: `array`
-
-  Default: `{}`
-  
-  Paths to add to \@INC\.
-
-- **`perl.perlcritic.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable perlcritic
-
-- **`perl.perlcritic.perlcriticrc`**: `string`
-
-  Default: `"~/.perlcriticrc"`
-  
-  Path to \.perlcriticrc
-
-- **`perl.perltidyrc`**: `string`
-
-  Default: `"~/.perltidyrc"`
-  
-  Path to \.perltidyrc
-
-- **`perl.pls`**: `string`
-
-  Default: `"pls"`
-  
-  Path to the pls executable script
-
-- **`perl.plsargs`**: `array`
-
-  Default: `{}`
-  
-  Arguments to pass to the pls command
-
-- **`perl.syntax.enabled`**: `boolean`
-
-  Default: `true`
-  
-  Enable syntax checking
-
-- **`perl.syntax.perl`**: `string`
-
-  Default: `""`
-  
-  Path to the perl binary to use for syntax checking
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -4941,6 +3209,9 @@ require'lspconfig'.perlpls.setup{}
       perl = {
         perlcritic = {
           enabled = false
+        },
+        syntax = {
+          enabled = true
         }
       }
     }
@@ -4969,6 +3240,35 @@ require'lspconfig'.phpactor.setup{}
     cmd = { "phpactor", "language-server" }
     filetypes = { "php" }
     root_dir = root_pattern("composer.json", ".git")
+```
+
+
+## please
+
+https://github.com/thought-machine/please
+
+High-performance extensible build system for reproducible multi-language builds.
+
+The `plz` binary will automatically install the LSP for you on first run
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.please.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "plz", "tool", "lps" }
+    filetypes = { "bzl" }
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
+    single_file_support = true
 ```
 
 
@@ -5113,156 +3413,6 @@ Installation:
 
 - Ensure you can run `puppet-languageserver` from outside the editor-services directory.
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`puppet.editorService.debugFilePath`**: `string`
-
-  Default: `""`
-  
-  The absolute filepath where the Puppet Editor Service will output the debugging log\. By default no logfile is generated
-
-- **`puppet.editorService.enable`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable advanced Puppet Language Features
-
-- **`puppet.editorService.featureFlags`**: `array`
-
-  Default: `{}`
-  
-  An array of strings of experimental features to enable in the Puppet Editor Service
-
-- **`puppet.editorService.foldingRange.enable`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable syntax aware code folding provider
-
-- **`puppet.editorService.foldingRange.showLastLine`**: `boolean`
-
-  Show or hide the last line in code folding regions
-
-- **`puppet.editorService.formatOnType.enable`**: `boolean`
-
-  Enable\/disable the Puppet document on\-type formatter\, for example hashrocket alignment
-
-- **`puppet.editorService.formatOnType.maxFileSize`**: `integer`
-
-  Default: `4096`
-  
-  Sets the maximum file size \(in Bytes\) that document on\-type formatting will occur\. Setting this to zero \(0\) will disable the file size check\. Note that large file sizes can cause performance issues\.
-
-- **`puppet.editorService.hover.showMetadataInfo`**: `boolean`
-
-  Default: `true`
-  
-  Enable or disable showing Puppet Module version information in the metadata\.json file
-
-- **`puppet.editorService.loglevel`**: `enum { "debug", "error", "normal", "warning", "verbose" }`
-
-  Default: `"normal"`
-  
-  Set the logging verbosity level for the Puppet Editor Service\, with Debug producing the most output and Error producing the least
-
-- **`puppet.editorService.protocol`**: `enum { "stdio", "tcp" }`
-
-  Default: `"stdio"`
-  
-  The protocol used to communicate with the Puppet Editor Service\. By default the local STDIO protocol is used\.
-
-- **`puppet.editorService.puppet.confdir`**: `string`
-
-  Default: `""`
-  
-  The Puppet configuration directory\. See https\:\/\/puppet\.com\/docs\/puppet\/latest\/dirs\_confdir\.html for more information
-
-- **`puppet.editorService.puppet.environment`**: `string`
-
-  Default: `""`
-  
-  The Puppet environment to use\. See https\:\/\/puppet\.com\/docs\/puppet\/latest\/config\_print\.html\#environments for more information
-
-- **`puppet.editorService.puppet.modulePath`**: `string`
-
-  Default: `""`
-  
-  Additional module paths to use when starting the Editor Services\. On Windows this is delimited with a semicolon\, and on all other platforms\, with a colon\. For example C\:\\Path1\;C\:\\Path2
-
-- **`puppet.editorService.puppet.vardir`**: `string`
-
-  Default: `""`
-  
-  The Puppet cache directory\. See https\:\/\/puppet\.com\/docs\/puppet\/latest\/dirs\_vardir\.html for more information
-
-- **`puppet.editorService.puppet.version`**: `string`
-
-  Default: `""`
-  
-  The version of Puppet to use\. For example \'5\.4\.0\'\. This is generally only applicable when using the PDK installation type\. If Puppet Editor Services is unable to use this version\, it will default to the latest available version of Puppet\.
-
-- **`puppet.editorService.tcp.address`**: `string`
-
-  The IP address or hostname of the remote Puppet Editor Service to connect to\, for example \'computer\.domain\' or \'192\.168\.0\.1\'\. Only applicable when the editorService\.protocol is set to tcp
-
-- **`puppet.editorService.tcp.port`**: `integer`
-
-  The TCP Port of the remote Puppet Editor Service to connect to\. Only applicable when the editorService\.protocol is set to tcp
-
-- **`puppet.editorService.timeout`**: `integer`
-
-  Default: `10`
-  
-  The timeout to connect to the Puppet Editor Service
-
-- **`puppet.format.enable`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable the Puppet document formatter
-
-- **`puppet.installDirectory`**: `string`
-
-  null
-
-- **`puppet.installType`**: `enum { "auto", "pdk", "agent" }`
-
-  Default: `"auto"`
-  
-  null
-
-- **`puppet.notification.nodeGraph`**: `enum { "messagebox", "statusbar", "none" }`
-
-  Default: `"messagebox"`
-  
-  The type of notification used when a node graph is being generated\. Default value of messagebox
-
-- **`puppet.notification.puppetResource`**: `enum { "messagebox", "statusbar", "none" }`
-
-  Default: `"messagebox"`
-  
-  The type of notification used when a running Puppet Resouce\. Default value of messagebox
-
-- **`puppet.pdk.checkVersion`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable checking if installed PDK version is latest
-
-- **`puppet.titleBar.pdkNewModule.enable`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable the PDK New Module icon in the Editor Title Bar
-
-- **`puppet.validate.resolvePuppetfiles`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable using dependency resolution for Puppetfiles
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -5290,164 +3440,6 @@ https://github.com/nwolverson/purescript-language-server
 npm install -g purescript-language-server
 ```
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`purescript.addNpmPath`**: `boolean`
-
-  Whether to add the local npm bin directory to the PATH for purs IDE server and build command\.
-
-- **`purescript.addPscPackageSources`**: `boolean`
-
-  Whether to add psc\-package sources to the globs passed to the IDE server for source locations \(specifically the output of \`psc\-package sources\`\, if this is a psc\-package project\)\. Update due to adding packages\/changing package set requires psc\-ide server restart\.
-
-- **`purescript.addSpagoSources`**: `boolean`
-
-  Default: `true`
-  
-  Whether to add spago sources to the globs passed to the IDE server for source locations \(specifically the output of \`spago sources\`\, if this is a spago project\)\. Update due to adding packages\/changing package set requires psc\-ide server restart\.
-
-- **`purescript.autoStartPscIde`**: `boolean`
-
-  Default: `true`
-  
-  Whether to automatically start\/connect to purs IDE server when editing a PureScript file \(includes connecting to an existing running instance\)\. If this is disabled\, various features like autocomplete\, tooltips\, and other type info will not work until start command is run manually\.
-
-- **`purescript.autocompleteAddImport`**: `boolean`
-
-  Default: `true`
-  
-  Whether to automatically add imported identifiers when accepting autocomplete result\.
-
-- **`purescript.autocompleteAllModules`**: `boolean`
-
-  Default: `true`
-  
-  Whether to always autocomplete from all built modules\, or just those imported in the file\. Suggestions from all modules always available by explicitly triggering autocomplete\.
-
-- **`purescript.autocompleteGrouped`**: `boolean`
-
-  Default: `true`
-  
-  Whether to group completions in autocomplete results\. Requires compiler 0\.11\.6
-
-- **`purescript.autocompleteLimit`**: `null|integer`
-
-  Default: `vim.NIL`
-  
-  Maximum number of results to fetch for an autocompletion request\. May improve performance on large projects\.
-
-- **`purescript.buildCommand`**: `string`
-
-  Default: `"spago build --purs-args --json-errors"`
-  
-  Build command to use with arguments\. Not passed to shell\. eg \`spago build \-\-purs\-args \-\-json\-errors\`
-
-- **`purescript.buildOpenedFiles`**: `boolean`
-
-  null
-
-- **`purescript.censorWarnings`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  The warning codes to censor\, both for fast rebuild and a full build\. Unrelated to any psa setup\. e\.g\.\: \[\"ShadowedName\"\,\"MissingTypeDeclaration\"\]
-
-- **`purescript.codegenTargets`**: `array`
-
-  Default: `vim.NIL`
-  
-  Array items: `{type = "string"}`
-  
-  List of codegen targets to pass to the compiler for rebuild\. e\.g\. js\, corefn\. If not specified \(rather than empty array\) this will not be passed and the compiler will default to js\. Requires 0\.12\.1+
-
-- **`purescript.declarationTypeCodeLens`**: `boolean`
-
-  Default: `true`
-  
-  Enable declaration codelens to add types to declarations
-
-- **`purescript.exportsCodeLens`**: `boolean`
-
-  Default: `true`
-  
-  Enable declaration codelenses for export management
-
-- **`purescript.fastRebuild`**: `boolean`
-
-  Default: `true`
-  
-  Enable purs IDE server fast rebuild
-
-- **`purescript.formatter`**: `enum { "none", "purty", "purs-tidy", "pose" }`
-
-  Default: `"purty"`
-  
-  Tool to use to for formatting\. Must be installed and on PATH \(or npm installed with addNpmPath set\)
-
-- **`purescript.fullBuildOnSave`**: `boolean`
-
-  Whether to perform a full build on save with the configured build command \(rather than IDE server fast rebuild\)\. This is not generally recommended because it is slow\, but it does mean that dependent modules are rebuilt as necessary\.
-
-- **`purescript.importsPreferredModules`**: `array`
-
-  Default: `{ "Prelude" }`
-  
-  Array items: `{type = "string"}`
-  
-  Module to prefer to insert when adding imports which have been re\-exported\. In order of preference\, most preferred first\.
-
-- **`purescript.outputDirectory`**: `string`
-
-  Default: `"output/"`
-  
-  Override purs ide output directory \(output\/ if not specified\)\. This should match up to your build command
-
-- **`purescript.packagePath`**: `string`
-
-  Default: `""`
-  
-  Path to installed packages\. Will be used to control globs passed to IDE server for source locations\.  Change requires IDE server restart\.
-
-- **`purescript.preludeModule`**: `string`
-
-  Default: `"Prelude"`
-  
-  Module to consider as your default prelude\, if an auto\-complete suggestion comes from this module it will be imported unqualified\.
-
-- **`purescript.pscIdePort`**: `integer|null`
-
-  Default: `vim.NIL`
-  
-  Port to use for purs IDE server \(whether an existing server or to start a new one\)\. By default a random port is chosen \(or an existing port in \.psc\-ide\-port if present\)\, if this is specified no attempt will be made to select an alternative port on failure\.
-
-- **`purescript.pscIdelogLevel`**: `string`
-
-  Default: `""`
-  
-  Log level for purs IDE server
-
-- **`purescript.pursExe`**: `string`
-
-  Default: `"purs"`
-  
-  Location of purs executable \(resolved wrt PATH\)
-
-- **`purescript.sourcePath`**: `string`
-
-  Default: `"src"`
-  
-  Path to application source root\. Will be used to control globs passed to IDE server for source locations\. Change requires IDE server restart\.
-
-- **`purescript.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VSCode and the PureScript language service\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -5543,92 +3535,6 @@ https://github.com/microsoft/pyright
 
 `pyright`, a static type checker and language server for python
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`pyright.disableLanguageServices`**: `boolean`
-
-  Disables type completion\, definitions\, and references\.
-
-- **`pyright.disableOrganizeImports`**: `boolean`
-
-  Disables the “Organize Imports” command\.
-
-- **`python.analysis.autoImportCompletions`**: `boolean`
-
-  Default: `true`
-  
-  Offer auto\-import completions\.
-
-- **`python.analysis.autoSearchPaths`**: `boolean`
-
-  Default: `true`
-  
-  Automatically add common search paths like \'src\'\?
-
-- **`python.analysis.diagnosticMode`**: `enum { "openFilesOnly", "workspace" }`
-
-  Default: `"openFilesOnly"`
-  
-  null
-
-- **`python.analysis.diagnosticSeverityOverrides`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  Allows a user to override the severity levels for individual diagnostics\.
-
-- **`python.analysis.extraPaths`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  Additional import search resolution paths
-
-- **`python.analysis.logLevel`**: `enum { "Error", "Warning", "Information", "Trace" }`
-
-  Default: `"Information"`
-  
-  Specifies the level of logging for the Output panel
-
-- **`python.analysis.stubPath`**: `string`
-
-  Default: `"typings"`
-  
-  Path to directory containing custom type stub files\.
-
-- **`python.analysis.typeCheckingMode`**: `enum { "off", "basic", "strict" }`
-
-  Default: `"basic"`
-  
-  Defines the default rule set for type checking\.
-
-- **`python.analysis.typeshedPaths`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  Paths to look for typeshed modules\.
-
-- **`python.analysis.useLibraryCodeForTypes`**: `boolean`
-
-  Use library implementations to extract type information when type stub is not present\.
-
-- **`python.pythonPath`**: `string`
-
-  Default: `"python"`
-  
-  Path to Python\, you can use a custom version of Python\.
-
-- **`python.venvPath`**: `string`
-
-  Default: `""`
-  
-  Path to folder with a list of Virtual Environments\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -5701,60 +3607,6 @@ It is released on CRAN and can be easily installed by
 install.packages("languageserver")
 ```
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`r.lsp.args`**: `array`
-
-  Default: `{}`
-  
-  The command line arguments to use when launching R Language Server
-
-- **`r.lsp.debug`**: `boolean`
-
-  Debug R Language Server
-
-- **`r.lsp.diagnostics`**: `boolean`
-
-  Default: `true`
-  
-  Enable Diagnostics
-
-- **`r.lsp.lang`**: `string`
-
-  Default: `""`
-  
-  Override default LANG environment variable
-
-- **`r.lsp.path`**: `string`
-
-  Default: `""`
-  
-  Path to R binary for launching Language Server
-
-- **`r.lsp.use_stdio`**: `boolean`
-
-  Use STDIO connection instead of TCP\. \(Unix\/macOS users only\)
-
-- **`r.rpath.linux`**: `string`
-
-  Default: `""`
-  
-  Path to an R executable for Linux\. Must be \"vanilla\" R\, not radian etc\.\!
-
-- **`r.rpath.mac`**: `string`
-
-  Default: `""`
-  
-  Path to an R executable for macOS\. Must be \"vanilla\" R\, not radian etc\.\!
-
-- **`r.rpath.windows`**: `string`
-
-  Default: `""`
-  
-  Path to an R executable for Windows\. Must be \"vanilla\" R\, not radian etc\.\!
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -5806,6 +3658,39 @@ require'lspconfig'.racket_langserver.setup{}
       end)
     end
     single_file_support = true
+```
+
+
+## reason_ls
+
+Reason language server
+
+**By default, reason_ls doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path.
+You have to install the language server manually.
+
+You can install reason language server from [reason-language-server](https://github.com/jaredly/reason-language-server) repository.
+
+```lua
+cmd = {'<path_to_reason_language_server>'}
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.reason_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "reason-language-server" }
+    filetypes = { "reason" }
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+      end
 ```
 
 
@@ -6057,608 +3942,6 @@ rust-analyzer (aka rls 2.0), a language server for Rust
 
 See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#settings) for extra settings.
     
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`$generated-end`**
-
-  null
-
-- **`$generated-start`**
-
-  null
-
-- **`rust-analyzer.assist.allowMergingIntoGlobImports`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.assist.exprFillDefault`**: `enum { "todo", "default" }`
-
-  Default: `"todo"`
-  
-  null
-
-- **`rust-analyzer.assist.importEnforceGranularity`**: `boolean`
-
-  null
-
-- **`rust-analyzer.assist.importGranularity`**: `enum { "preserve", "crate", "module", "item" }`
-
-  Default: `"crate"`
-  
-  null
-
-- **`rust-analyzer.assist.importGroup`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.assist.importPrefix`**: `enum { "plain", "self", "crate" }`
-
-  Default: `"plain"`
-  
-  null
-
-- **`rust-analyzer.cache.warmup`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.callInfo.full`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.cargo.allFeatures`**: `boolean`
-
-  null
-
-- **`rust-analyzer.cargo.autoreload`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.cargo.features`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`rust-analyzer.cargo.noDefaultFeatures`**: `boolean`
-
-  null
-
-- **`rust-analyzer.cargo.noSysroot`**: `boolean`
-
-  null
-
-- **`rust-analyzer.cargo.runBuildScripts`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.cargo.target`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`rust-analyzer.cargo.unsetTest`**: `array`
-
-  Default: `{ "core" }`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`rust-analyzer.cargo.useRustcWrapperForBuildScripts`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.cargoRunner`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  Custom cargo runner extension ID\.
-
-- **`rust-analyzer.checkOnSave.allFeatures`**: `null|boolean`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`rust-analyzer.checkOnSave.allTargets`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.checkOnSave.command`**: `string`
-
-  Default: `"check"`
-  
-  null
-
-- **`rust-analyzer.checkOnSave.enable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.checkOnSave.extraArgs`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`rust-analyzer.checkOnSave.features`**: `null|array`
-
-  Default: `vim.NIL`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`rust-analyzer.checkOnSave.noDefaultFeatures`**: `null|boolean`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`rust-analyzer.checkOnSave.overrideCommand`**: `null|array`
-
-  Default: `vim.NIL`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`rust-analyzer.checkOnSave.target`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`rust-analyzer.completion.addCallArgumentSnippets`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.completion.addCallParenthesis`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.completion.autoimport.enable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.completion.autoself.enable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.completion.postfix.enable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.completion.snippets`**: `object`
-
-  Default: `{["Arc::new"] = {body = "Arc::new(${receiver})",description = "Put the expression into an `Arc`",postfix = "arc",requires = "std::sync::Arc",scope = "expr"},["Box::pin"] = {body = "Box::pin(${receiver})",description = "Put the expression into a pinned `Box`",postfix = "pinbox",requires = "std::boxed::Box",scope = "expr"},Err = {body = "Err(${receiver})",description = "Wrap the expression in a `Result::Err`",postfix = "err",scope = "expr"},Ok = {body = "Ok(${receiver})",description = "Wrap the expression in a `Result::Ok`",postfix = "ok",scope = "expr"},["Rc::new"] = {body = "Rc::new(${receiver})",description = "Put the expression into an `Rc`",postfix = "rc",requires = "std::rc::Rc",scope = "expr"},Some = {body = "Some(${receiver})",description = "Wrap the expression in an `Option::Some`",postfix = "some",scope = "expr"}}`
-  
-  null
-
-- **`rust-analyzer.debug.engine`**: `enum { "auto", "vadimcn.vscode-lldb", "ms-vscode.cpptools" }`
-
-  Default: `"auto"`
-  
-  Preferred debug engine\.
-
-- **`rust-analyzer.debug.engineSettings`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  null
-
-- **`rust-analyzer.debug.openDebugPane`**: `boolean`
-
-  null
-
-- **`rust-analyzer.debug.sourceFileMap`**: `object|string`
-
-  Default: `{["/rustc/<id>"] = "${env:USERPROFILE}/.rustup/toolchains/<toolchain-id>/lib/rustlib/src/rust"}`
-  
-  Optional source file mappings passed to the debug engine\.
-
-- **`rust-analyzer.diagnostics.disabled`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`rust-analyzer.diagnostics.enable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.diagnostics.enableExperimental`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.diagnostics.remapPrefix`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  null
-
-- **`rust-analyzer.diagnostics.warningsAsHint`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`rust-analyzer.diagnostics.warningsAsInfo`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`rust-analyzer.experimental.procAttrMacros`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.files.excludeDirs`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`rust-analyzer.files.watcher`**: `string`
-
-  Default: `"client"`
-  
-  null
-
-- **`rust-analyzer.highlightRelated.breakPoints`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.highlightRelated.exitPoints`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.highlightRelated.references`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.highlightRelated.yieldPoints`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.highlighting.strings`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.hover.documentation`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.hover.linksInHover`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.hoverActions.debug`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.hoverActions.enable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.hoverActions.gotoTypeDef`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.hoverActions.implementations`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.hoverActions.references`**: `boolean`
-
-  null
-
-- **`rust-analyzer.hoverActions.run`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.inlayHints.chainingHints`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.inlayHints.enable`**: `boolean`
-
-  Default: `true`
-  
-  Whether to show inlay hints\.
-
-- **`rust-analyzer.inlayHints.hideNamedConstructorHints`**: `boolean`
-
-  null
-
-- **`rust-analyzer.inlayHints.maxLength`**: `null|integer`
-
-  Default: `25`
-  
-  null
-
-- **`rust-analyzer.inlayHints.parameterHints`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.inlayHints.smallerHints`**: `boolean`
-
-  Default: `true`
-  
-  Whether inlay hints font size should be smaller than editor\'s font size\.
-
-- **`rust-analyzer.inlayHints.typeHints`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.joinLines.joinAssignments`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.joinLines.joinElseIf`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.joinLines.removeTrailingComma`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.joinLines.unwrapTrivialBlock`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.lens.debug`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.lens.enable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.lens.enumVariantReferences`**: `boolean`
-
-  null
-
-- **`rust-analyzer.lens.forceCustomCommands`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.lens.implementations`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.lens.methodReferences`**: `boolean`
-
-  null
-
-- **`rust-analyzer.lens.references`**: `boolean`
-
-  null
-
-- **`rust-analyzer.lens.run`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.linkedProjects`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = { "string", "object" }}`
-  
-  null
-
-- **`rust-analyzer.lruCapacity`**: `null|integer`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`rust-analyzer.notifications.cargoTomlNotFound`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.primeCaches.numThreads`**: `number`
-
-  Default: `0`
-  
-  null
-
-- **`rust-analyzer.procMacro.enable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`rust-analyzer.procMacro.ignored`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  null
-
-- **`rust-analyzer.procMacro.server`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`rust-analyzer.runnableEnv`**
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`rust-analyzer.runnables.cargoExtraArgs`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`rust-analyzer.runnables.overrideCargo`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`rust-analyzer.rustcSource`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`rust-analyzer.rustfmt.enableRangeFormatting`**: `boolean`
-
-  null
-
-- **`rust-analyzer.rustfmt.extraArgs`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`rust-analyzer.rustfmt.overrideCommand`**: `null|array`
-
-  Default: `vim.NIL`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`rust-analyzer.server.extraEnv`**: `null|object`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`rust-analyzer.server.path`**: `null|string`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`rust-analyzer.trace.extension`**: `boolean`
-
-  Enable logging of VS Code extensions itself\.
-
-- **`rust-analyzer.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Trace requests to the rust\-analyzer \(this is usually overly verbose and not recommended for regular users\)\.
-
-- **`rust-analyzer.workspace.symbol.search.kind`**: `enum { "only_types", "all_symbols" }`
-
-  Default: `"only_types"`
-  
-  null
-
-- **`rust-analyzer.workspace.symbol.search.scope`**: `enum { "workspace", "workspace_and_dependencies" }`
-
-  Default: `"workspace"`
-  
-  null
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -6878,104 +4161,6 @@ You can install solargraph via gem install.
 gem install --user-install solargraph
 ```
     
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`solargraph.autoformat`**: `enum { true, false }`
-
-  Enable automatic formatting while typing \(WARNING\: experimental\)
-
-- **`solargraph.bundlerPath`**: `string`
-
-  Default: `"bundle"`
-  
-  Path to the bundle executable\, defaults to \'bundle\'\. Needs to be an absolute path for the \'bundle\' exec\/shim
-
-- **`solargraph.checkGemVersion`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Automatically check if a new version of the Solargraph gem is available\.
-
-- **`solargraph.commandPath`**: `string`
-
-  Default: `"solargraph"`
-  
-  Path to the solargraph command\.  Set this to an absolute path to select from multiple installed Ruby versions\.
-
-- **`solargraph.completion`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Enable completion
-
-- **`solargraph.definitions`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Enable definitions \(go to\, etc\.\)
-
-- **`solargraph.diagnostics`**: `enum { true, false }`
-
-  Enable diagnostics
-
-- **`solargraph.externalServer`**: `object`
-
-  Default: `{host = "localhost",port = 7658}`
-  
-  The host and port to use for external transports\. \(Ignored for stdio and socket transports\.\)
-
-- **`solargraph.folding`**: `boolean`
-
-  Default: `true`
-  
-  Enable folding ranges
-
-- **`solargraph.formatting`**: `enum { true, false }`
-
-  Enable document formatting
-
-- **`solargraph.hover`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Enable hover
-
-- **`solargraph.logLevel`**: `enum { "warn", "info", "debug" }`
-
-  Default: `"warn"`
-  
-  Level of debug info to log\. \`warn\` is least and \`debug\` is most\.
-
-- **`solargraph.references`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Enable finding references
-
-- **`solargraph.rename`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Enable symbol renaming
-
-- **`solargraph.symbols`**: `enum { true, false }`
-
-  Default: `true`
-  
-  Enable symbols
-
-- **`solargraph.transport`**: `enum { "socket", "stdio", "external" }`
-
-  Default: `"socket"`
-  
-  The type of transport to use\.
-
-- **`solargraph.useBundler`**: `boolean`
-
-  Use \`bundle exec\` to run solargraph\. \(If this is true\, the solargraph\.commandPath setting is ignored\.\)
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -7105,6 +4290,53 @@ require'lspconfig'.sourcekit.setup{}
 ```
 
 
+## sourcery
+
+https://github.com/sourcery-ai/sourcery
+
+Refactor Python instantly using the power of AI.
+
+It requires the initializationOptions param to be populated as shown below and will respond with the list of ServerCapabilities that it supports.
+
+init_options = {
+    --- The Sourcery token for authenticating the user.
+    --- This is retrieved from the Sourcery website and must be
+    --- provided by each user. The extension must provide a
+    --- configuration option for the user to provide this value.
+    token = <YOUR_TOKEN>
+
+    --- The extension's name and version as defined by the extension.
+    extension_version = 'vim.lsp'
+
+    --- The editor's name and version as defined by the editor.
+    editor_version = 'vim'
+}
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.sourcery.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "sourcery", "lsp" }
+    filetypes = { "python" }
+    init_options = {
+      editor_version = "vim",
+      extension_version = "vim.lsp"
+    }
+    root_dir = function(fname)
+          return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+        end,
+    single_file_support = true
+```
+
+
 ## spectral
 
 https://github.com/luizcorreia/spectral-language-server
@@ -7116,46 +4348,6 @@ npm i -g spectral-language-server
 ```
 See [vscode-spectral](https://github.com/stoplightio/vscode-spectral#extension-settings) for configuration options.
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`spectral.enable`**: `boolean`
-
-  Default: `true`
-  
-  Controls whether or not Spectral is enabled\.
-
-- **`spectral.rulesetFile`**: `string`
-
-  Location of the ruleset file to use when validating\. If omitted\, the default is a \.spectral\.yml\/\.spectral\.json in the same folder as the document being validated\. Paths are relative to the workspace\.
-
-- **`spectral.run`**: `enum { "onSave", "onType" }`
-
-  Default: `"onType"`
-  
-  Run the linter on save \(onSave\) or as you type \(onType\)\.
-
-- **`spectral.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VS Code and the language server\.
-
-- **`spectral.validateFiles`**: `array`
-
-  Array items: `{type = "string"}`
-  
-  An array of file globs \(e\.g\.\, \`\*\*\/\*\.yaml\`\) in minimatch glob format which should be validated by Spectral\. If language identifiers are also specified\, the file must match both in order to be validated\.
-
-- **`spectral.validateLanguages`**: `array`
-
-  Default: `{ "json", "yaml" }`
-  
-  Array items: `{type = "string"}`
-  
-  An array of language IDs which should be validated by Spectral\. If file globs are also specified\, the file must match both in order to be validated\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -7267,70 +4459,6 @@ require'lspconfig'.stylelint_lsp.setup{
 }
 ```
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`stylelintplus.autoFixOnFormat`**: `boolean`
-
-  Auto\-fix on format request\.
-
-- **`stylelintplus.autoFixOnSave`**: `boolean`
-
-  Auto\-fix and format on save\.
-
-- **`stylelintplus.config`**: `object`
-
-  Default: `vim.NIL`
-  
-  Stylelint config\. If config and configFile are unset\, stylelint will automatically look for a config file\.
-
-- **`stylelintplus.configFile`**: `string`
-
-  Default: `vim.NIL`
-  
-  Stylelint config file\. If config and configFile are unset\, stylelint will automatically look for a config file\.
-
-- **`stylelintplus.configOverrides`**: `object`
-
-  Default: `vim.NIL`
-  
-  Stylelint config overrides\. These will be applied on top of the config\, configFile\, or auto\-discovered config file loaded by stylelint\.
-
-- **`stylelintplus.cssInJs`**: `boolean`
-
-  Run stylelint on javascript\/typescript files\.
-
-- **`stylelintplus.enable`**: `boolean`
-
-  Default: `true`
-  
-  If false\, stylelint will not validate the file\.
-
-- **`stylelintplus.filetypes`**: `array`
-
-  Default: `{ "css", "less", "postcss", "sass", "scss", "sugarss", "vue", "wxss" }`
-  
-  Array items: `{type = "string"}`
-  
-  Filetypes that coc\-stylelintplus will lint\.
-
-- **`stylelintplus.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Capture trace messages from the server\.
-
-- **`stylelintplus.validateOnSave`**: `boolean`
-
-  Validate after saving\. Automatically enabled if autoFixOnSave is enabled\.
-
-- **`stylelintplus.validateOnType`**: `boolean`
-
-  Default: `true`
-  
-  Validate after making changes\.
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -7389,358 +4517,6 @@ require'lspconfig'.sumneko_lua.setup {
 }
 ```
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`Lua.IntelliSense.traceBeSetted`**: `boolean`
-
-  null
-
-- **`Lua.IntelliSense.traceFieldInject`**: `boolean`
-
-  null
-
-- **`Lua.IntelliSense.traceLocalSet`**: `boolean`
-
-  null
-
-- **`Lua.IntelliSense.traceReturn`**: `boolean`
-
-  null
-
-- **`Lua.completion.autoRequire`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.completion.callSnippet`**: `enum { "Disable", "Both", "Replace" }`
-
-  Default: `"Disable"`
-  
-  null
-
-- **`Lua.completion.displayContext`**: `integer`
-
-  Default: `0`
-  
-  null
-
-- **`Lua.completion.enable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.completion.keywordSnippet`**: `enum { "Disable", "Both", "Replace" }`
-
-  Default: `"Replace"`
-  
-  null
-
-- **`Lua.completion.postfix`**: `string`
-
-  Default: `"@"`
-  
-  null
-
-- **`Lua.completion.requireSeparator`**: `string`
-
-  Default: `"."`
-  
-  null
-
-- **`Lua.completion.showParams`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.completion.showWord`**: `enum { "Enable", "Fallback", "Disable" }`
-
-  Default: `"Fallback"`
-  
-  null
-
-- **`Lua.completion.workspaceWord`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.diagnostics.disable`**: `array`
-
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`Lua.diagnostics.enable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.diagnostics.globals`**: `array`
-
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`Lua.diagnostics.ignoredFiles`**: `enum { "Enable", "Opened", "Disable" }`
-
-  Default: `"Opened"`
-  
-  null
-
-- **`Lua.diagnostics.libraryFiles`**: `enum { "Enable", "Opened", "Disable" }`
-
-  Default: `"Opened"`
-  
-  null
-
-- **`Lua.diagnostics.neededFileStatus`**: `object`
-
-  null
-
-- **`Lua.diagnostics.severity`**: `object`
-
-  null
-
-- **`Lua.diagnostics.workspaceDelay`**: `integer`
-
-  Default: `3000`
-  
-  null
-
-- **`Lua.diagnostics.workspaceRate`**: `integer`
-
-  Default: `100`
-  
-  null
-
-- **`Lua.format.defaultConfig`**: `object`
-
-  null
-
-- **`Lua.format.enable`**: `boolean`
-
-  Default: `"true"`
-  
-  null
-
-- **`Lua.hint.arrayIndex`**: `enum { "Enable", "Auto", "Disable" }`
-
-  Default: `"Auto"`
-  
-  null
-
-- **`Lua.hint.enable`**: `boolean`
-
-  null
-
-- **`Lua.hint.paramName`**: `enum { "All", "Literal", "Disable" }`
-
-  Default: `"All"`
-  
-  null
-
-- **`Lua.hint.paramType`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.hint.setType`**: `boolean`
-
-  null
-
-- **`Lua.hover.enable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.hover.enumsLimit`**: `integer`
-
-  Default: `5`
-  
-  null
-
-- **`Lua.hover.previewFields`**: `integer`
-
-  Default: `20`
-  
-  null
-
-- **`Lua.hover.viewNumber`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.hover.viewString`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.hover.viewStringMax`**: `integer`
-
-  Default: `1000`
-  
-  null
-
-- **`Lua.misc.parameters`**: `array`
-
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`Lua.runtime.builtin`**: `object`
-
-  null
-
-- **`Lua.runtime.fileEncoding`**: `enum { "utf8", "ansi", "utf16le", "utf16be" }`
-
-  Default: `"utf8"`
-  
-  null
-
-- **`Lua.runtime.nonstandardSymbol`**: `array`
-
-  Array items: `{enum = { "//", "/**/", "`", "+=", "-=", "*=", "/=", "||", "&&", "!", "!=", "continue" },type = "string"}`
-  
-  null
-
-- **`Lua.runtime.path`**: `array`
-
-  Default: `{ "?.lua", "?/init.lua" }`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`Lua.runtime.pathStrict`**: `boolean`
-
-  null
-
-- **`Lua.runtime.plugin`**: `string`
-
-  Default: `""`
-  
-  null
-
-- **`Lua.runtime.special`**: `object`
-
-  null
-
-- **`Lua.runtime.unicodeName`**: `boolean`
-
-  null
-
-- **`Lua.runtime.version`**: `enum { "Lua 5.1", "Lua 5.2", "Lua 5.3", "Lua 5.4", "LuaJIT" }`
-
-  Default: `"Lua 5.4"`
-  
-  null
-
-- **`Lua.semantic.annotation`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.semantic.enable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.semantic.keyword`**: `boolean`
-
-  null
-
-- **`Lua.semantic.variable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.signatureHelp.enable`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.telemetry.enable`**: `boolean|null`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`Lua.window.progressBar`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.window.statusBar`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.workspace.checkThirdParty`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.workspace.ignoreDir`**: `array`
-
-  Default: `{ ".vscode" }`
-  
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`Lua.workspace.ignoreSubmodules`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.workspace.library`**: `array`
-
-  Array items: `{type = "string"}`
-  
-  null
-
-- **`Lua.workspace.maxPreload`**: `integer`
-
-  Default: `5000`
-  
-  null
-
-- **`Lua.workspace.preloadFileSize`**: `integer`
-
-  Default: `500`
-  
-  null
-
-- **`Lua.workspace.useGitIgnore`**: `boolean`
-
-  Default: `true`
-  
-  null
-
-- **`Lua.workspace.userThirdParty`**: `array`
-
-  Array items: `{type = "string"}`
-  
-  null
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -7914,6 +4690,33 @@ require'lspconfig'.taplo.setup{}
 ```
 
 
+## teal_ls
+
+https://github.com/teal-language/teal-language-server
+
+Install with:
+```
+luarocks install --dev teal-language-server
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.teal_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "teal-language-server" }
+    filetypes = { "teal" }
+    root_dir = root_pattern("tlconfig.lua", ".git")
+```
+
+
 ## terraform_lsp
 
 https://github.com/juliosueiras/terraform-lsp
@@ -7991,60 +4794,6 @@ choice:
     - configs designed for other 0.12 versions may work, but interpretation may be inaccurate
   - less stability (due to reliance on Terraform's own internal packages)
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`terraform-ls.excludeRootModules`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  Per\-workspace list of module directories for the language server to exclude
-
-- **`terraform-ls.experimentalFeatures`**: `object`
-
-  Experimental \(opt\-in\) terraform\-ls features
-
-- **`terraform-ls.ignoreDirectoryNames`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  Per\-workspace list of directory names for the language server to ignore when indexing files
-
-- **`terraform-ls.rootModules`**: `array`
-
-  Default: `{}`
-  
-  Array items: `{type = "string"}`
-  
-  Per\-workspace list of module directories for the language server to read
-
-- **`terraform-ls.terraformExecPath`**: `string`
-
-  Path to the Terraform binary
-
-- **`terraform-ls.terraformExecTimeout`**: `string`
-
-  Overrides Terraform execution timeout \(e\.g\. 30s\)
-
-- **`terraform-ls.terraformLogFilePath`**: `string`
-
-  Path to a file for Terraform executions to be logged into \(TF\_LOG\_PATH\) with support for variables \(e\.g\. Timestamp\, Pid\, Ppid\) via Go template syntax \{\{\.VarName\}\}
-
-- **`terraform.codelens.referenceCount`**: `boolean`
-
-  Display reference counts above top level blocks and attributes\.
-
-- **`terraform.languageServer`**: `object`
-
-  Default: `{args = { "serve" },external = true,maxNumberOfProblems = 100,pathToBinary = "",["trace.server"] = "off"}`
-  
-  Language Server settings
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -8590,238 +5339,6 @@ Vue language server(vls)
 npm install -g vls
 ```
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`vetur.completion.autoImport`**: `boolean`
-
-  Default: `true`
-  
-  Include completion for module export and auto import them
-
-- **`vetur.completion.scaffoldSnippetSources`**: `object`
-
-  Default: `{user = "🗒️",vetur = "✌",workspace = "💼"}`
-  
-  Where Vetur source Scaffold Snippets from and how to indicate them\. Set a source to \"\" to disable it\.
-  
-  \- workspace\: \`\<WORKSPACE\>\/\.vscode\/vetur\/snippets\`\.
-  \- user\: \`\<USER\-DATA\-DIR\>\/User\/snippets\/vetur\`\.
-  \- vetur\: Bundled in Vetur\.
-  
-  The default is\:
-  \`\`\`
-  \"vetur\.completion\.scaffoldSnippetSources\"\: \{
-    \"workspace\"\: \"💼\"\,
-    \"user\"\: \"🗒️\"\,
-    \"vetur\"\: \"✌\"
-  \}
-  \`\`\`
-  
-  Alternatively\, you can do\:
-  
-  \`\`\`
-  \"vetur\.completion\.scaffoldSnippetSources\"\: \{
-    \"workspace\"\: \"\(W\)\"\,
-    \"user\"\: \"\(U\)\"\,
-    \"vetur\"\: \"\(V\)\"
-  \}
-  \`\`\`
-  
-  Read more\: https\:\/\/vuejs\.github\.io\/vetur\/snippet\.html\.
-
-- **`vetur.completion.tagCasing`**: `enum { "initial", "kebab" }`
-
-  Default: `"kebab"`
-  
-  Casing conversion for tag completion
-
-- **`vetur.dev.logLevel`**: `enum { "INFO", "DEBUG" }`
-
-  Default: `"INFO"`
-  
-  Log level for VLS
-
-- **`vetur.dev.vlsPath`**: `string`
-
-  Path to vls for Vetur developers\. There are two ways of using it\. 
-  
-  1\. Clone vuejs\/vetur from GitHub\, build it and point it to the ABSOLUTE path of \`\/server\`\.
-  2\. \`yarn global add vls\` and point Vetur to the installed location \(\`yarn global dir\` + node\_modules\/vls\)
-
-- **`vetur.dev.vlsPort`**: `number`
-
-  Default: `-1`
-  
-  The port that VLS listens to\. Can be used for attaching to the VLS Node process for debugging \/ profiling\.
-
-- **`vetur.experimental.templateInterpolationService`**: `boolean`
-
-  Enable template interpolation service that offers hover \/ definition \/ references in Vue interpolations\.
-
-- **`vetur.format.defaultFormatter.css`**: `enum { "none", "prettier" }`
-
-  Default: `"prettier"`
-  
-  Default formatter for \<style\> region
-
-- **`vetur.format.defaultFormatter.html`**: `enum { "none", "prettyhtml", "js-beautify-html", "prettier" }`
-
-  Default: `"prettier"`
-  
-  Default formatter for \<template\> region
-
-- **`vetur.format.defaultFormatter.js`**: `enum { "none", "prettier", "prettier-eslint", "vscode-typescript" }`
-
-  Default: `"prettier"`
-  
-  Default formatter for \<script\> region
-
-- **`vetur.format.defaultFormatter.less`**: `enum { "none", "prettier" }`
-
-  Default: `"prettier"`
-  
-  Default formatter for \<style lang\=\'less\'\> region
-
-- **`vetur.format.defaultFormatter.postcss`**: `enum { "none", "prettier" }`
-
-  Default: `"prettier"`
-  
-  Default formatter for \<style lang\=\'postcss\'\> region
-
-- **`vetur.format.defaultFormatter.pug`**: `enum { "none", "prettier" }`
-
-  Default: `"prettier"`
-  
-  Default formatter for \<template lang\=\'pug\'\> region
-
-- **`vetur.format.defaultFormatter.sass`**: `enum { "none", "sass-formatter" }`
-
-  Default: `"sass-formatter"`
-  
-  Default formatter for \<style lang\=\'sass\'\> region
-
-- **`vetur.format.defaultFormatter.scss`**: `enum { "none", "prettier" }`
-
-  Default: `"prettier"`
-  
-  Default formatter for \<style lang\=\'scss\'\> region
-
-- **`vetur.format.defaultFormatter.stylus`**: `enum { "none", "stylus-supremacy" }`
-
-  Default: `"stylus-supremacy"`
-  
-  Default formatter for \<style lang\=\'stylus\'\> region
-
-- **`vetur.format.defaultFormatter.ts`**: `enum { "none", "prettier", "prettier-tslint", "vscode-typescript" }`
-
-  Default: `"prettier"`
-  
-  Default formatter for \<script\> region
-
-- **`vetur.format.defaultFormatterOptions`**: `object`
-
-  Default: `{["js-beautify-html"] = {wrap_attributes = "force-expand-multiline"},prettyhtml = {printWidth = 100,singleQuote = false,sortAttributes = false,wrapAttributes = false}}`
-  
-  Options for all default formatters
-
-- **`vetur.format.enable`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable the Vetur document formatter\.
-
-- **`vetur.format.options.tabSize`**: `number`
-
-  Default: `2`
-  
-  Number of spaces per indentation level\. Inherited by all formatters\.
-
-- **`vetur.format.options.useTabs`**: `boolean`
-
-  Use tabs for indentation\. Inherited by all formatters\.
-
-- **`vetur.format.scriptInitialIndent`**: `boolean`
-
-  Whether to have initial indent for \<script\> region
-
-- **`vetur.format.styleInitialIndent`**: `boolean`
-
-  Whether to have initial indent for \<style\> region
-
-- **`vetur.grammar.customBlocks`**: `object`
-
-  Default: `{docs = "md",i18n = "json"}`
-  
-  Mapping from custom block tag name to language name\. Used for generating grammar to support syntax highlighting for custom blocks\.
-
-- **`vetur.ignoreProjectWarning`**: `boolean`
-
-  Vetur will warn about not setup correctly for the project\. You can disable it\.
-
-- **`vetur.languageFeatures.codeActions`**: `boolean`
-
-  Default: `true`
-  
-  Whether to enable codeActions
-
-- **`vetur.languageFeatures.semanticTokens`**: `boolean`
-
-  Default: `true`
-  
-  Whether to enable semantic highlighting\. Currently only works for typescript
-
-- **`vetur.languageFeatures.updateImportOnFileMove`**: `boolean`
-
-  Default: `true`
-  
-  Whether to automatic updating import path when rename or move a file
-
-- **`vetur.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VS Code and Vue Language Server\.
-
-- **`vetur.underline.refValue`**: `boolean`
-
-  Default: `true`
-  
-  Enable underline \`\.value\` when using composition API\.
-
-- **`vetur.useWorkspaceDependencies`**: `boolean`
-
-  Use dependencies from workspace\. Support for TypeScript\, Prettier\, \@starptech\/prettyhtml\, prettier\-eslint\, prettier\-tslint\, stylus\-supremacy\, \@prettier\/plugin\-pug\.
-
-- **`vetur.validation.interpolation`**: `boolean`
-
-  Default: `true`
-  
-  Validate interpolations in \<template\> region using TypeScript language service
-
-- **`vetur.validation.script`**: `boolean`
-
-  Default: `true`
-  
-  Validate js\/ts in \<script\>
-
-- **`vetur.validation.style`**: `boolean`
-
-  Default: `true`
-  
-  Validate css\/scss\/less\/postcss in \<style\>
-
-- **`vetur.validation.template`**: `boolean`
-
-  Default: `true`
-  
-  Validate vue\-html in \<template\> using eslint\-plugin\-vue
-
-- **`vetur.validation.templateProps`**: `boolean`
-
-  Validate props usage in \<template\> region\. Show error\/warning for not passing declared props to child components and show error for passing wrongly typed interpolation expressions
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -8940,102 +5457,6 @@ require('lspconfig').yamlls.setup {
 ```
 
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`redhat.telemetry.enabled`**: `boolean`
-
-  Default: `vim.NIL`
-  
-  null
-
-- **`yaml.completion`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable completion feature
-
-- **`yaml.customTags`**: `array`
-
-  Default: `{}`
-  
-  Custom tags for the parser to use
-
-- **`yaml.disableAdditionalProperties`**: `boolean`
-
-  Globally set additionalProperties to false for all objects\. So if its true\, no extra properties are allowed inside yaml\.
-
-- **`yaml.format.bracketSpacing`**: `boolean`
-
-  Default: `true`
-  
-  Print spaces between brackets in objects
-
-- **`yaml.format.enable`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable default YAML formatter
-
-- **`yaml.format.printWidth`**: `integer`
-
-  Default: `80`
-  
-  Specify the line length that the printer will wrap on
-
-- **`yaml.format.proseWrap`**: `enum { "preserve", "never", "always" }`
-
-  Default: `"preserve"`
-  
-  Always\: wrap prose if it exeeds the print width\, Never\: never wrap the prose\, Preserve\: wrap prose as\-is
-
-- **`yaml.format.singleQuote`**: `boolean`
-
-  Use single quotes instead of double quotes
-
-- **`yaml.hover`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable hover feature
-
-- **`yaml.maxItemsComputed`**: `integer`
-
-  Default: `5000`
-  
-  The maximum number of outline symbols and folding regions computed \(limited for performance reasons\)\.
-
-- **`yaml.schemaStore.enable`**: `boolean`
-
-  Default: `true`
-  
-  Automatically pull available YAML schemas from JSON Schema Store
-
-- **`yaml.schemaStore.url`**: `string`
-
-  Default: `"https://www.schemastore.org/api/json/catalog.json"`
-  
-  URL of schema store catalog to use
-
-- **`yaml.schemas`**: `object`
-
-  Default: `vim.empty_dict()`
-  
-  Associate schemas to YAML files in the current workspace
-
-- **`yaml.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"off"`
-  
-  Traces the communication between VSCode and the YAML language service\.
-
-- **`yaml.validate`**: `boolean`
-
-  Default: `true`
-  
-  Enable\/disable validation feature
-
-</details>
 
 
 **Snippet to enable the language server:**
@@ -9078,25 +5499,6 @@ require'lspconfig'.zeta_note.setup{
 }
 ```
 
-This server accepts configuration via the `settings` key.
-<details><summary>Available settings:</summary>
-
-- **`zetaNote.customCommand`**: `string`
-
-  When set use this command to run the language server\.
-  The command is split on spaces\: first part is the command name\, the rest is the arguments\.
-
-- **`zetaNote.customCommandDir`**: `string`
-
-  null
-
-- **`zetaNote.trace.server`**: `enum { "off", "messages", "verbose" }`
-
-  Default: `"verbose"`
-  
-  Level of verbosity in communicating with the server
-
-</details>
 
 
 **Snippet to enable the language server:**

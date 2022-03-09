@@ -50,7 +50,6 @@ return {
     single_file_support = true,
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/julia-vscode/julia-vscode/master/package.json',
     description = [[
 https://github.com/julia-vscode/julia-vscode
 

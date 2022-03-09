@@ -15,7 +15,6 @@ return {
     },
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/stoplightio/vscode-spectral/master/package.json',
     description = [[
 https://github.com/luizcorreia/spectral-language-server
  `A flexible JSON/YAML linter for creating automated style guides, with baked in support for OpenAPI v2 & v3.`

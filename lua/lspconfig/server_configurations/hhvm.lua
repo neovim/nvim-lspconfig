@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = {'hh_client', 'lsp'},
+    cmd = { 'hh_client', 'lsp' },
     filetypes = { 'php', 'hack' },
     root_dir = util.root_pattern '.hhconfig',
   },

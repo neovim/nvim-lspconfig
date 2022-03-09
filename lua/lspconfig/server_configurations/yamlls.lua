@@ -19,7 +19,6 @@ return {
     },
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/redhat-developer/vscode-yaml/master/package.json',
     description = [[
 https://github.com/redhat-developer/yaml-language-server
 

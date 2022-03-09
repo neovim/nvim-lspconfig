@@ -19,7 +19,6 @@ return {
     end,
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/FoamScience/foam-language-server/master/package.json',
     description = [[
 https://github.com/FoamScience/foam-language-server
 

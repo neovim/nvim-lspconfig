@@ -26,7 +26,6 @@ return {
     settings = {},
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/bmatcuk/coc-stylelintplus/master/package.json',
     description = [[
 https://github.com/bmatcuk/stylelint-lsp
 
