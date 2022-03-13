@@ -5276,7 +5276,7 @@ require'lspconfig'.volar.setup{}
   Commands:
   
   Default Values:
-    cmd = { "volar-server", "--stdio" }
+    cmd = { "vue-language-server", "--stdio" }
     filetypes = { "vue" }
     init_options = {
       documentFeatures = {
@@ -5302,6 +5302,7 @@ require'lspconfig'.volar.setup{}
         documentHighlight = true,
         documentLink = true,
         hover = true,
+        implementation = true,
         references = true,
         rename = true,
         renameFileRefactoring = true,
