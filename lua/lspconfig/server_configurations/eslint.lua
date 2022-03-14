@@ -98,6 +98,13 @@ return {
         uri = new_root_dir,
         name = vim.fn.fnamemodify(new_root_dir, ':t'),
       }
+
+      -- Support Yarn2 (PnP) projects
+      local pnp_cjs = util.path.join(new_root_dir, '.pnp.cjs')
+      local pnp_js = util.path.join(new_root_dir, '.pnp.js')
+      if util.path.exists(pnp_cjs) or util.path.exists(pnp_js) then
+        config.cmd = { 'yarn', 'exec', unpack(cmd) }
+      end
     end,
     handlers = {
       ['eslint/openDoc'] = function(_, result)
