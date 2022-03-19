@@ -445,7 +445,7 @@ require'lspconfig'.beancount.setup{}
   Commands:
   
   Default Values:
-    cmd = { "beancount-langserver" }
+    cmd = { "beancount-langserver", "--stdio" }
     filetypes = { "beancount" }
     init_options = {
       journalFile = "",
