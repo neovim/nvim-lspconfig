@@ -75,6 +75,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [ltex](#ltex)
 - [metals](#metals)
 - [mint](#mint)
+- [mm0_ls](#mm0_ls)
 - [nickel_ls](#nickel_ls)
 - [nimls](#nimls)
 - [ocamlls](#ocamlls)
@@ -2758,6 +2759,40 @@ require'lspconfig'.mint.setup{}
     root_dir = function(fname)
           return util.root_pattern 'mint.json'(fname) or util.find_git_ancestor(fname)
         end,
+    single_file_support = true
+```
+
+
+## mm0_ls
+
+https://github.com/digama0/mm0
+
+Language Server for the metamath-zero theorem prover.
+
+Requires [mm0-rs](https://github.com/digama0/mm0/tree/master/mm0-rs) to be installed
+and available on the `PATH`.
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.mm0_ls.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "mm0-rs", "server" }
+    filetypes = { "metamath-zero" }
+    root_dir = function(path)
+        -- Support git directories and git files (worktrees)
+        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
+          return path
+        end
+      end)
+    end
     single_file_support = true
 ```
 
