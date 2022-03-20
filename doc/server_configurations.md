@@ -267,9 +267,7 @@ require'lspconfig'.ansiblels.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
   - `settings` : 
   ```lua
@@ -356,9 +354,7 @@ require'lspconfig'.arduino_language_server.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
 
 
@@ -390,13 +386,7 @@ require'lspconfig'.asm_lsp.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-      -- Support git directories and git files (worktrees)
-      if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-        return path
-      end
-    end)
-  end
+  see source file
   ```
 
 
@@ -815,14 +805,7 @@ require'lspconfig'.codeqlls.setup{}
 **Default values:**
   - `before_init` : 
   ```lua
-  function(initialize_params)
-        initialize_params['workspaceFolders'] = {
-          {
-            name = 'workspace',
-            uri = initialize_params['rootUri'],
-          },
-        }
-      end,
+  see source file
   ```
   - `cmd` : 
   ```lua
@@ -838,9 +821,7 @@ require'lspconfig'.codeqlls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
   - `settings` : 
   ```lua
@@ -918,9 +899,7 @@ require'lspconfig'.csharp_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
 
 
@@ -1297,13 +1276,7 @@ require'lspconfig'.dotls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-      -- Support git directories and git files (worktrees)
-      if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-        return path
-      end
-    end)
-  end
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -1620,13 +1593,7 @@ require'lspconfig'.esbonio.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-      -- Support git directories and git files (worktrees)
-      if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-        return path
-      end
-    end)
-  end
+  see source file
   ```
 
 
@@ -1680,21 +1647,11 @@ require'lspconfig'.eslint.setup{}
   ```
   - `on_new_config` : 
   ```lua
-  function(config, new_root_dir)
-        -- The "workspaceFolder" is a VSCode concept. It limits how far the
-        -- server will traverse the file system when locating the ESLint config
-        -- file (e.g., .eslintrc).
-        config.settings.workspaceFolder = {
-          uri = new_root_dir,
-          name = vim.fn.fnamemodify(new_root_dir, ':t'),
-        }
-      end,
+  see source file
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
   - `settings` : 
   ```lua
@@ -1828,12 +1785,7 @@ require'lspconfig'.foam_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-          if util.path.exists(util.path.join(path, 'system', 'controlDict')) then
-            return path
-          end
-        end)
-      end,
+  see source file
   ```
 
 
@@ -1916,9 +1868,7 @@ require'lspconfig'.fsautocomplete.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
 
 
@@ -2238,9 +2188,7 @@ require'lspconfig'.groovyls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(fname)
-        return util.root_pattern 'Jenkinsfile'(fname) or util.find_git_ancestor(fname)
-      end,
+  see source file
   ```
 
 
@@ -2438,20 +2386,7 @@ require'lspconfig'.hls.setup{}
   ```
   - `lspinfo` : 
   ```lua
-  function on_stdout(_, data, _)
-          local version = data[1]
-          table.insert(extra, 'version:   ' .. version)
-        end
-  
-        local opts = {
-          cwd = cfg.cwd,
-          stdout_buffered = true,
-          on_stdout = on_stdout,
-        }
-        local chanid = vim.fn.jobstart({ cfg.cmd[1], '--version' }, opts)
-        vim.fn.jobwait { chanid }
-        return extra
-      end,
+  see source file
   ```
   - `root_dir` : 
   ```lua
@@ -2525,9 +2460,7 @@ require'lspconfig'.html.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
   - `settings` : 
   ```lua
@@ -2589,9 +2522,7 @@ require'lspconfig'.idris2_lsp.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
 
 
@@ -2650,9 +2581,7 @@ require'lspconfig'.java_language_server.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
   - `settings` : 
   ```lua
@@ -2870,11 +2799,7 @@ require'lspconfig'.jsonnet_ls.setup{}
   ```
   - `on_new_config` : 
   ```lua
-  function(new_config, root_dir)
-        new_config.cmd_env = {
-          JSONNET_PATH = jsonnet_path(root_dir),
-        }
-      end,
+  see source file
   ```
   - `root_dir` : 
   ```lua
@@ -2923,9 +2848,7 @@ require'lspconfig'.julials.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(fname)
-        return util.root_pattern 'Project.toml'(fname) or util.find_git_ancestor(fname)
-      end,
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -3051,24 +2974,7 @@ require'lspconfig'.leanls.setup{}
   ```
   - `on_new_config` : 
   ```lua
-  function(_, d, _)
-              lake_version = table.concat(d, '\n')
-            end,
-            stdout_buffered = true,
-          })
-          if lake_job > 0 and vim.fn.jobwait({ lake_job })[1] == 0 then
-            local major = lake_version:match 'Lake version (%d).'
-            if major and tonumber(major) >= 3 then
-              use_lake_serve = true
-            end
-          end
-        end
-        if not use_lake_serve then
-          config.cmd = config.options.no_lake_lsp_cmd
-        end
-        -- add root dir as command-line argument for `ps aux`
-        table.insert(config.cmd, root_dir)
-      end,
+  see source file
   ```
   - `options` : 
   ```lua
@@ -3116,13 +3022,7 @@ require'lspconfig'.lelwel_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-      -- Support git directories and git files (worktrees)
-      if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-        return path
-      end
-    end)
-  end
+  see source file
   ```
 
 
@@ -3195,24 +3095,11 @@ require'lspconfig'.ltex.setup{}
   ```
   - `get_language_id` : 
   ```lua
-  function(_, filetype)
-        local language_id = language_id_mapping[filetype]
-        if language_id then
-          return language_id
-        else
-          return filetype
-        end
-      end,
+  see source file
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-      -- Support git directories and git files (worktrees)
-      if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-        return path
-      end
-    end)
-  end
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -3307,9 +3194,7 @@ require'lspconfig'.mint.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(fname)
-        return util.root_pattern 'mint.json'(fname) or util.find_git_ancestor(fname)
-      end,
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -3345,13 +3230,7 @@ require'lspconfig'.mm0_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-      -- Support git directories and git files (worktrees)
-      if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-        return path
-      end
-    end)
-  end
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -3404,13 +3283,7 @@ require'lspconfig'.nickel_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-      -- Support git directories and git files (worktrees)
-      if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-        return path
-      end
-    end)
-  end
+  see source file
   ```
 
 
@@ -3441,9 +3314,7 @@ require'lspconfig'.nimls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(fname)
-        return util.root_pattern '*.nimble'(fname) or util.find_git_ancestor(fname)
-      end,
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -3514,9 +3385,7 @@ require'lspconfig'.ocamllsp.setup{}
   ```
   - `get_language_id` : 
   ```lua
-  function(_, ftype)
-    return language_id_of[ftype]
-  end
+  see source file
   ```
   - `root_dir` : 
   ```lua
@@ -3605,12 +3474,7 @@ require'lspconfig'.omnisharp.setup{}
   ```
   - `on_new_config` : 
   ```lua
-  function(new_config, new_root_dir)
-        if new_root_dir then
-          table.insert(new_config.cmd, '-s')
-          table.insert(new_config.cmd, new_root_dir)
-        end
-      end,
+  see source file
   ```
   - `root_dir` : 
   ```lua
@@ -3689,13 +3553,7 @@ require'lspconfig'.openscad_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-      -- Support git directories and git files (worktrees)
-      if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-        return path
-      end
-    end)
-  end
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -3739,13 +3597,7 @@ require'lspconfig'.pasls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-      -- Support git directories and git files (worktrees)
-      if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-        return path
-      end
-    end)
-  end
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -3846,13 +3698,7 @@ require'lspconfig'.perlnavigator.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-      -- Support git directories and git files (worktrees)
-      if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-        return path
-      end
-    end)
-  end
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -3965,9 +3811,7 @@ require'lspconfig'.please.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -4030,12 +3874,7 @@ require'lspconfig'.powershell_es.setup{}
   ```
   - `on_new_config` : 
   ```lua
-  function(new_config, _)
-        -- Don't overwrite cmd if already set
-        if not new_config.cmd then
-          new_config.cmd = make_cmd(new_config)
-        end
-      end,
+  see source file
   ```
   - `root_dir` : 
   ```lua
@@ -4263,16 +4102,7 @@ require'lspconfig'.pylsp.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(fname)
-        local root_files = {
-          'pyproject.toml',
-          'setup.py',
-          'setup.cfg',
-          'requirements.txt',
-          'Pipfile',
-        }
-        return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-      end,
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -4311,9 +4141,7 @@ require'lspconfig'.pyre.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
 
 
@@ -4343,9 +4171,7 @@ require'lspconfig'.pyright.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
   - `settings` : 
   ```lua
@@ -4392,9 +4218,7 @@ require'lspconfig'.quick_lint_js.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -4470,13 +4294,7 @@ require'lspconfig'.racket_langserver.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-      -- Support git directories and git files (worktrees)
-      if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-        return path
-      end
-    end)
-  end
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -4516,9 +4334,7 @@ require'lspconfig'.reason_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
 
 
@@ -4573,13 +4389,7 @@ require'lspconfig'.remark_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-      -- Support git directories and git files (worktrees)
-      if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-        return path
-      end
-    end)
-  end
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -4637,9 +4447,7 @@ require'lspconfig'.rescriptls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
   - `settings` : 
   ```lua
@@ -5286,9 +5094,7 @@ require'lspconfig'.sourcery.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(fname)
-        return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-      end,
+  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -5326,9 +5132,7 @@ require'lspconfig'.spectral.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
   - `settings` : 
   ```lua
@@ -5370,9 +5174,7 @@ require'lspconfig'.sqlls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
   - `settings` : 
   ```lua
@@ -5412,9 +5214,7 @@ require'lspconfig'.sqls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
   - `settings` : 
   ```lua
@@ -5658,18 +5458,7 @@ require'lspconfig'.tailwindcss.setup{}
   ```
   - `on_new_config` : 
   ```lua
-  function(new_config)
-        if not new_config.settings then
-          new_config.settings = {}
-        end
-        if not new_config.settings.editor then
-          new_config.settings.editor = {}
-        end
-        if not new_config.settings.editor.tabSize then
-          -- set tab size for hover
-          new_config.settings.editor.tabSize = vim.lsp.util.get_effective_tabstop()
-        end
-      end,
+  see source file
   ```
   - `root_dir` : 
   ```lua
@@ -5899,9 +5688,7 @@ require'lspconfig'.texlab.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(fname)
-        return util.root_pattern '.latexmkrc'(fname) or util.find_git_ancestor(fname)
-      end,
+  see source file
   ```
   - `settings` : 
   ```lua
@@ -6004,9 +5791,7 @@ require'lspconfig'.theme_check.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
   - `settings` : 
   ```lua
@@ -6219,13 +6004,7 @@ require'lspconfig'.verible.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(path)
-      -- Support git directories and git files (worktrees)
-      if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-        return path
-      end
-    end)
-  end
+  see source file
   ```
 
 
@@ -6278,9 +6057,7 @@ require'lspconfig'.vimls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function(fname)
-        return util.find_git_ancestor(fname) or vim.fn.getcwd()
-      end,
+  see source file
   ```
 
 
@@ -6447,21 +6224,11 @@ require'lspconfig'.volar.setup{}
   ```
   - `on_new_config` : 
   ```lua
-  function(new_config, new_root_dir)
-        if
-          new_config.init_options
-          and new_config.init_options.typescript
-          and new_config.init_options.typescript.serverPath == ''
-        then
-          new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
-        end
-      end,
+  see source file
   ```
   - `root_dir` : 
   ```lua
-  function(startpath)
-      return M.search_ancestors(startpath, matcher)
-    end
+  see source file
   ```
 
 
