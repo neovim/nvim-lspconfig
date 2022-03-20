@@ -106,17 +106,18 @@ local function make_lsp_sections()
 
       params.commands = make_section(0, '\n\n', {
         function()
-          if not template_def.commands or #template_def.commands == 0 then
+          if not template_def.commands or #vim.tbl_keys(template_def.commands) == 0 then
             return
           end
-          return '**Commands:**\n' .. make_section(0, '\n', {
-            sorted_map_table(template_def.commands, function(name, def)
-              if def.description then
-                return string.format('- %s: %s', name, def.description)
-              end
-              return string.format('- %s', name)
-            end),
-          })
+          return '**Commands:**\n'
+            .. make_section(0, '\n', {
+              sorted_map_table(template_def.commands, function(name, def)
+                if def.description then
+                  return string.format('- %s: %s', name, def.description)
+                end
+                return string.format('- %s', name)
+              end),
+            })
         end,
       })
 
