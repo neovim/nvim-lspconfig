@@ -673,7 +673,8 @@ For details on how to automatically generate one using CMake look [here](https:/
 ```lua
 require'lspconfig'.clangd.setup{}
 ```
-
+**Commands:**
+- ClangdSwitchSourceHeader: Switch between source/header
 
 **Default values:**
   - `capabilities` : 
@@ -1127,7 +1128,8 @@ vim.g.markdown_fenced_languages = {
 ```lua
 require'lspconfig'.denols.setup{}
 ```
-
+**Commands:**
+- DenolsCache: Cache a module and all of its dependencies.
 
 **Default values:**
   - `cmd` : 
@@ -1655,7 +1657,8 @@ Messages already handled in lspconfig: eslint/openDoc, eslint/confirmESLintExecu
 ```lua
 require'lspconfig'.eslint.setup{}
 ```
-
+**Commands:**
+- EslintFixAll: Fix all eslint problems for this buffer
 
 **Default values:**
   - `cmd` : 
@@ -4326,7 +4329,8 @@ https://github.com/microsoft/pyright
 ```lua
 require'lspconfig'.pyright.setup{}
 ```
-
+**Commands:**
+- PyrightOrganizeImports: Organize Imports
 
 **Default values:**
   - `cmd` : 
@@ -4817,7 +4821,8 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
 ```lua
 require'lspconfig'.rust_analyzer.setup{}
 ```
-
+**Commands:**
+- CargoReload: Reload current cargo workspace
 
 **Default values:**
   - `cmd` : 
@@ -5879,7 +5884,9 @@ See https://github.com/latex-lsp/texlab/blob/master/docs/options.md for configur
 ```lua
 require'lspconfig'.texlab.setup{}
 ```
-
+**Commands:**
+- TexlabBuild: Build the current buffer
+- TexlabForward: Forward search from current position
 
 **Default values:**
   - `cmd` : 
@@ -6678,7 +6685,9 @@ A plain text note-taking assistant
 ```lua
 require'lspconfig'.zk.setup{}
 ```
-
+**Commands:**
+- ZkIndex: Index
+- ZkNew: ZkNew
 
 **Default values:**
   - `cmd` : 
