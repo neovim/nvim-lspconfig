@@ -109,14 +109,15 @@ local function make_lsp_sections()
           if not template_def.commands or #template_def.commands == 0 then
             return
           end
-          return '**Commands:**\n' .. make_section(0, '\n', {
-            sorted_map_table(template_def.commands, function(name, def)
-              if def.description then
-                return string.format('- %s: %s', name, def.description)
-              end
-              return string.format('- %s', name)
-            end),
-          })
+          return '**Commands:**\n'
+            .. make_section(0, '\n', {
+              sorted_map_table(template_def.commands, function(name, def)
+                if def.description then
+                  return string.format('- %s: %s', name, def.description)
+                end
+                return string.format('- %s', name)
+              end),
+            })
         end,
       })
 
@@ -131,22 +132,7 @@ local function make_lsp_sections()
               if description and type(description) ~= 'string' then
                 description = inspect(description)
               elseif not description and type(v) == 'function' then
-                local info = debug.getinfo(v)
-                local file = io.open(string.sub(info.source, 2), 'r')
-
-                local fileContent = {}
-                for line in file:lines() do
-                  table.insert(fileContent, line)
-                end
-                io.close(file)
-
-                local root_dir = {}
-                for i = info.linedefined, info.lastlinedefined do
-                  table.insert(root_dir, fileContent[i])
-                end
-
-                description = table.concat(root_dir, '\n')
-                description = string.gsub(description, '.*function', 'function')
+                description = 'see source file'
               end
               return string.format('- `%s` : \n```lua\n%s\n```', k, description or inspect(v))
             end),
