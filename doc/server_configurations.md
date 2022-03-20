@@ -92,6 +92,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [please](#please)
 - [powershell_es](#powershell_es)
 - [prismals](#prismals)
+- [prosemd_lsp](#prosemd_lsp)
 - [psalm](#psalm)
 - [puppet](#puppet)
 - [purescriptls](#purescriptls)
@@ -3401,6 +3402,33 @@ require'lspconfig'.prismals.setup{}
         prismaFmtBinPath = ""
       }
     }
+```
+
+
+## prosemd_lsp
+
+https://github.com/kitten/prosemd-lsp
+
+An experimental LSP for Markdown.
+
+Please see the manual installation instructions: https://github.com/kitten/prosemd-lsp#manual-installation
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.prosemd_lsp.setup{}
+```
+
+**Commands and default values:**
+```lua
+  Commands:
+  
+  Default Values:
+    cmd = { "prosemd-lsp", "--stdio" }
+    filetypes = { "markdown" }
+    root_dir = <function 1>
+    single_file_support = true
 ```
 
 
