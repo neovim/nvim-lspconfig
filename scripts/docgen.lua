@@ -132,22 +132,7 @@ local function make_lsp_sections()
               if description and type(description) ~= 'string' then
                 description = inspect(description)
               elseif not description and type(v) == 'function' then
-                local info = debug.getinfo(v)
-                local file = io.open(string.sub(info.source, 2), 'r')
-
-                local fileContent = {}
-                for line in file:lines() do
-                  table.insert(fileContent, line)
-                end
-                io.close(file)
-
-                local root_dir = {}
-                for i = info.linedefined, info.lastlinedefined do
-                  table.insert(root_dir, fileContent[i])
-                end
-
-                description = table.concat(root_dir, '\n')
-                description = string.gsub(description, '.*function', 'function')
+                description = 'see source file'
               end
               return string.format('- `%s` : \n```lua\n%s\n```', k, description or inspect(v))
             end),
