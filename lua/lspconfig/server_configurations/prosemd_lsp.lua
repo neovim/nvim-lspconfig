@@ -4,9 +4,7 @@ return {
   default_config = {
     cmd = { 'prosemd-lsp', '--stdio' },
     filetypes = { 'markdown' },
-    root_dir = function(fname)
-      return util.find_git_ancestor(fname) or vim.fn.getcwd()
-    end,
+    root_dir = util.find_git_ancestor,
     single_file_support = true,
   },
   docs = {
@@ -14,9 +12,11 @@ return {
 https://github.com/kitten/prosemd-lsp
 
 An experimental LSP for Markdown.
+
+Please see the manual installation instructions: https://github.com/kitten/prosemd-lsp#manual-installation
 ]],
     default_config = {
-      root_dir = [[find_git_ancestor(fname) or vim.fn.getcwd()]],
+      root_dir = util.find_git_ancestor,
     },
   },
 }
