@@ -58,6 +58,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [hhvm](#hhvm)
 - [hie](#hie)
 - [hls](#hls)
+- [hoon_ls](#hoon_ls)
 - [html](#html)
 - [idris2_lsp](#idris2_lsp)
 - [intelephense](#intelephense)
@@ -2399,6 +2400,52 @@ require'lspconfig'.hls.setup{}
       formattingProvider = "ormolu"
     }
   }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+
+## hoon_ls
+
+https://github.com/urbit/hoon-language-server
+
+A language server for Hoon.
+
+The language server can be installed via `npm install -g hoon-language-server`
+
+Install and build Urbit. Then, start a fake ~zod with `urbit -lF zod -c zod`.
+And start the language server at the Urbit Dojo prompt with: `|start %language-server`
+
+If your ship does not run on port 8080 change the `cmd` setting:
+
+```lua
+require'lspconfig'.elixirls.setup{
+    cmd = { 'hoon-language-server', '-p', '80' }
+}
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.hoon_ls.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "hoon-language-server", "-p", "8080" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "hoon" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
   ```
   - `single_file_support` : 
   ```lua
