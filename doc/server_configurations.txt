@@ -2417,13 +2417,6 @@ The language server can be installed via `npm install -g hoon-language-server`
 
 Install and build Urbit. Then, start a fake ~zod with `urbit -lF zod -c zod`.
 And start the language server at the Urbit Dojo prompt with: `|start %language-server`
-
-If your ship does not run on port 8080 change the `cmd` setting:
-
-```lua
-require'lspconfig'.elixirls.setup{
-    cmd = { 'hoon-language-server', '-p', '80' }
-}
 ```
 
 
