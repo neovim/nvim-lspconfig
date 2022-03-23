@@ -2413,11 +2413,10 @@ https://github.com/urbit/hoon-language-server
 
 A language server for Hoon.
 
-The language server can be installed via `npm install -g hoon-language-server`
+The language server can be installed via `npm install -g @hoon-language-server`
 
-Install and build Urbit. Then, start a fake ~zod with `urbit -lF zod -c zod`.
-And start the language server at the Urbit Dojo prompt with: `|start %language-server`
-```
+Start a fake ~zod with `urbit -F zod`.
+Start the language server at the Urbit Dojo prompt with: `|start %language-server`
 
 
 
@@ -2430,7 +2429,7 @@ require'lspconfig'.hoon_ls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "hoon-language-server", "-p", "8080" }
+  { "hoon-language-server" }
   ```
   - `filetypes` : 
   ```lua
