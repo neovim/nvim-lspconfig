@@ -399,7 +399,9 @@ function M.get_clients_from_cmd_args(arg)
     result[id] = vim.lsp.get_client_by_id(tonumber(id))
   end
   if vim.tbl_isempty(result) then
-    return M.get_managed_clients()
+    for id, _ in pairs(vim.lsp.buf_get_clients()) do
+      result[id] = vim.lsp.get_client_by_id(tonumber(id))
+    end
   end
   return vim.tbl_values(result)
 end
