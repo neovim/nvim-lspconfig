@@ -134,11 +134,18 @@ listed in `:help vim.lsp.start_client()` with the following unique entries:
 
 - {autostart}
 
-    `bool` (default: true)
+    `bool | function(root_dir, path_utils) (default: true)`
 
     Controls if the `FileType` autocommand that launches a language server is
     created. If `false`, allows for deferring language servers until manually
     launched with `:LspStart` (|lspconfig-commands|).
+
+    If a callback function is given instead of a boolean, the `FileType`
+    autocommand is created as if the value was true. However the callback will
+    run on matching filetypes with the calculated root directory and a small
+    collection of path utilities. They can be used to determine if the
+    language server is sutible for the current project. The server will only
+    be started if this function returns `true`.
 
 - {single_file_support}
 

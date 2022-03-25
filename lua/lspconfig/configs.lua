@@ -54,7 +54,7 @@ function configs.__newindex(t, config_name, config_def)
       pcall(util.on_setup, config)
     end
 
-    if config.autostart == true then
+    if config.autostart then
       local event
       local pattern
       if config.filetypes then
@@ -64,12 +64,14 @@ function configs.__newindex(t, config_name, config_def)
         event = 'BufReadPost'
         pattern = '*'
       end
+      local autostart_callback = type(config.autostart) == 'function'
       api.nvim_command(
         string.format(
-          "autocmd %s %s unsilent lua require'lspconfig'[%q].manager.try_add()",
+          "autocmd %s %s unsilent lua require'lspconfig'[%q].manager.try_add(nil, %s)",
           event,
           pattern,
-          config.name
+          config.name,
+          autostart_callback
         )
       )
     end
@@ -208,8 +210,9 @@ function configs.__newindex(t, config_name, config_def)
       return make_config(root_dir)
     end)
 
-    function manager.try_add(bufnr)
+    function manager.try_add(bufnr, autostart_callback)
       bufnr = bufnr or api.nvim_get_current_buf()
+      autostart_callback = autostart_callback and type(config.autostart) == 'function'
 
       if vim.api.nvim_buf_get_option(bufnr, 'buftype') == 'nofile' then
         return
@@ -228,11 +231,22 @@ function configs.__newindex(t, config_name, config_def)
         root_dir = get_root_dir(buf_path, bufnr)
       end
 
+      local should_add = false
+      local single_file = false
       if root_dir then
-        id = manager.add(root_dir, false)
+        should_add = true
       elseif config.single_file_support then
-        local pseudo_root = util.path.dirname(buf_path)
-        id = manager.add(pseudo_root, true)
+        root_dir = util.path.dirname(buf_path)
+        should_add = true
+        single_file = true
+      end
+
+      if autostart_callback and should_add then
+        should_add = config.autostart(root_dir, util.path)
+      end
+
+      if should_add then
+        id = manager.add(root_dir, single_file)
       end
 
       if id then
