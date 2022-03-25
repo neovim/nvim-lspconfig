@@ -5,6 +5,9 @@ return {
     cmd = { 'srb', 'tc', '--lsp' },
     filetypes = { 'ruby' },
     root_dir = util.root_pattern('Gemfile', '.git'),
+    autostart = function(root_dir, path_utils)
+      return path_utils.exists(path_utils.sanitize(root_dir .. '/sorbet'))
+    end,
   },
   docs = {
     description = [[
@@ -20,7 +23,10 @@ gem install sorbet
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern("Gemfile", ".git")]],
+      root_dir = [[root_pattern('Gemfile', '.git')]],
+      autostart = [[function(root_dir, path_utils)
+  return path_utils.exists(path_utils.sanitize(root_dir .. '/sorbet'))
+end]],
     },
   },
 }
