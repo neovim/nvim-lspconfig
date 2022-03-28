@@ -160,7 +160,7 @@ npm i -g vscode-langservers-extracted
 
 vscode-eslint-language-server provides an EslintFixAll command that can be used to format document on save
 ```vim
-autocmd BufWritePre <buffer> <cmd>EslintFixAll<CR>
+autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
 ```
 
 See [vscode-eslint](https://github.com/microsoft/vscode-eslint/blob/55871979d7af184bf09af491b6ea35ebd56822cf/server/src/eslintServer.ts#L216-L229) for configuration options.
