@@ -136,7 +136,7 @@ function configs.__newindex(t, config_name, config_def)
       M.manager = nil
     end
 
-    local make_config = function(_root_dir)
+    local make_config = function(root_dir)
       local new_config = vim.tbl_deep_extend('keep', vim.empty_dict(), config)
       new_config = vim.tbl_deep_extend('keep', new_config, default_config)
       new_config.capabilities = new_config.capabilities or lsp.protocol.make_client_capabilities()
@@ -147,10 +147,10 @@ function configs.__newindex(t, config_name, config_def)
       })
 
       if config_def.on_new_config then
-        pcall(config_def.on_new_config, new_config, _root_dir)
+        pcall(config_def.on_new_config, new_config, root_dir)
       end
       if config.on_new_config then
-        pcall(config.on_new_config, new_config, _root_dir)
+        pcall(config.on_new_config, new_config, root_dir)
       end
 
       new_config.on_init = util.add_hook_after(new_config.on_init, function(client, result)
@@ -194,18 +194,18 @@ function configs.__newindex(t, config_name, config_def)
         end
       end)
 
-      new_config.root_dir = _root_dir
+      new_config.root_dir = root_dir
       new_config.workspace_folders = {
         {
-          uri = vim.uri_from_fname(_root_dir),
-          name = string.format('%s', _root_dir),
+          uri = vim.uri_from_fname(root_dir),
+          name = string.format('%s', root_dir),
         },
       }
       return new_config
     end
 
-    local manager = util.server_per_root_dir_manager(function(_root_dir)
-      return make_config(_root_dir)
+    local manager = util.server_per_root_dir_manager(function(root_dir)
+      return make_config(root_dir)
     end)
 
     function manager.try_add(bufnr)
@@ -257,7 +257,7 @@ function configs.__newindex(t, config_name, config_def)
 
     M.manager = manager
     M.make_config = make_config
-    if reload and not (config.autostart == false) then
+    if reload and config.autostart ~= false then
       for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
         manager.try_add_wrapper(bufnr)
       end
