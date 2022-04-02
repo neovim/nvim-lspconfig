@@ -73,7 +73,12 @@ function M.create_module_commands(module_name, commands)
     -- The command definition.
     table.insert(
       parts,
-      string.format("lua require'lspconfig'[%q].commands[%q][1](<f-args>)", module_name, command_name)
+      string.format(
+        "lua require'lspconfig'[%q].commands[%q][1](%s)",
+        module_name,
+        command_name,
+        def.arguments or '<f-args>'
+      )
     )
     api.nvim_command(table.concat(parts, ' '))
   end

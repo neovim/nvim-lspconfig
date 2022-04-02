@@ -299,17 +299,20 @@ where the structure of the docs table is as follows:
 `commands` is a map of `name:definition` key:value pairs, where `definition`
 is a list whose first value is a function implementing the command, and the
 rest are either array values which will be formed into flags for the command,
-or special keys like `description`. Example:
+or special keys like `description` or `arguments`. `arguments` is useful
+in case special arguments are passed to the function, e.g. `<line1>` and
+`<line2>` when `-range` is used. Example:
 >
   commands = {
-    TexlabBuild = {
-      function()
-        buf_build(0)
-      end;
-      "-range";
-      description = "Build the current buffer";
-    };
-  };
+    FormatRange = {
+      function(start, stop)
+        ...
+      end,
+      "-range",
+      arguments = "<line1>, <line2>",
+      description = "Formats just code between start and stop",
+    },
+  },
 <
 The `configs.__newindex` metamethod consumes the config definition and returns
 an object with a `setup()` method, to be invoked by users:
