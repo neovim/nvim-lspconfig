@@ -85,7 +85,7 @@ THE SETUP METAMETHOD                                           *lspconfig-setup*
 
 `lspconfig` consists of a collection of language server configurations. Each
 configuration exposes a `setup {}` metamethod which makes it easy to directly
-use the default configuration or selectively override the defaults. 
+use the default configuration or selectively override the defaults.
 `setup {}` is the primary interface by which users interact with `lspconfig`.
 
 Using the default configuration for a server is simple:
@@ -96,11 +96,11 @@ The available server names are listed in |lspconfig-server-configurations| and
 match the server name in `config.SERVER_NAME` defined in each configuration's
 source file.
 
-The purpose of `setup{}` is to wrap the call to Nvim's built-in 
-`vim.lsp.start_client()` with an autocommand that automatically launch a 
+The purpose of `setup{}` is to wrap the call to Nvim's built-in
+`vim.lsp.start_client()` with an autocommand that automatically launch a
 language server.
 
-This autocommand calls `start_client()` or `vim.lsp.buf_attach_client()` 
+This autocommand calls `start_client()` or `vim.lsp.buf_attach_client()`
 depending on whether the current file belongs to a project with a currently
 running client. See |lspconfig-root-detection| for more details.
 
@@ -180,7 +180,7 @@ passed overrides to `setup {}` are:
   the command that launches the server. The first entry is the binary used
   to run the language server. Additional entries are passed as arguments.
 
-  The equivalent `cmd` for: 
+  The equivalent `cmd` for:
 >
   foo --bar baz
 <
@@ -211,12 +211,12 @@ passed overrides to `setup {}` are:
   language server attaches. Most commonly used for settings buffer
   local keybindings. See |lspconfig-keybindings| for a usage example.
 
-- {settings} `table <string, string|table|bool>`  
+- {settings} `table <string, string|table|bool>`
 
   The `settings` table is sent in `on_init` via a
   `workspace/didChangeConfiguration` notification from the Nvim client to
   the language server. These settings allow a user to change optional runtime
-  settings of the language server. 
+  settings of the language server.
 
   As an example, to set the following settings found in the pyright
   documentation:
@@ -379,7 +379,7 @@ current directory in this traversal matches a given root pattern.
 The following utility functions are provided by `lspconfig`. Each function call
 below returns a function that takes as its argument the current buffer path.
 
-- `util.root_pattern`: function which takes multiple arguments, each 
+- `util.root_pattern`: function which takes multiple arguments, each
   corresponding to a different root pattern against which the contents of the
   current directory are matched using |vim.fin.glob()| while traversing up the
   filesystem.
@@ -406,7 +406,7 @@ Note: On Windows, `lspconfig` always assumes forward slash normalized paths with
 capitalized drive letters.
 
 ==============================================================================
-ADVANCED ROOT DIRECTORY DETECTION                      *lspconfig-root-advanced* 
+ADVANCED ROOT DIRECTORY DETECTION                      *lspconfig-root-advanced*
                                                     *lspconfig-root-composition*
 
 The `root_dir` key in `config` and `setup` can hold any function of the form
@@ -440,7 +440,7 @@ Browsing the source of the default configurations is recommended.
 SINGLE FILE SUPPORT                              *lspconfig-single-file-support*
 
 Language servers require each project to have a `root` in order to provide
-features that require cross-file indexing. 
+features that require cross-file indexing.
 
 Some servers support not passing a root directory as a proxy for single file
 mode under which cross-file features may be degraded.
