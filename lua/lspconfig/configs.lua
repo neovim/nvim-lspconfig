@@ -182,15 +182,17 @@ function configs.__newindex(t, config_name, config_def)
         if bufnr == api.nvim_get_current_buf() then
           M._setup_buffer(client.id, bufnr)
         else
-          api.nvim_command(
-            string.format(
-              "autocmd BufEnter <buffer=%d> ++once lua require'lspconfig'[%q]._setup_buffer(%d,%d)",
-              bufnr,
-              config_name,
-              client.id,
-              bufnr
+          if (vim.api.nvim_buf_is_valid(bufnr)) then
+            api.nvim_command(
+              string.format(
+                "autocmd BufEnter <buffer=%d> ++once lua require'lspconfig'[%q]._setup_buffer(%d,%d)",
+                bufnr,
+                config_name,
+                client.id,
+                bufnr
+              )
             )
-          )
+          end
         end
       end)
 
