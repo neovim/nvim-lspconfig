@@ -222,7 +222,7 @@ end)()
 
 -- Returns a function(root_dir), which, when called with a root_dir it hasn't
 -- seen before, will call make_config(root_dir) and start a new client.
-function M.server_per_root_dir_manager(_make_config)
+function M.server_per_root_dir_manager(make_config)
   local clients = {}
   local single_file_clients = {}
   local manager = {}
@@ -242,7 +242,7 @@ function M.server_per_root_dir_manager(_make_config)
 
     -- Check if we have a client already or start and store it.
     if not client_id then
-      local new_config = _make_config(root_dir)
+      local new_config = make_config(root_dir)
       -- do nothing if the client is not enabled
       if new_config.enabled == false then
         return
@@ -395,7 +395,7 @@ end
 
 function M.get_clients_from_cmd_args(arg)
   local result = {}
-  for id in (arg or ''):gmatch '(%d+) %((%w+)%)' do
+  for id in (arg or ''):gmatch '(%d+)' do
     result[id] = vim.lsp.get_client_by_id(tonumber(id))
   end
   if vim.tbl_isempty(result) then

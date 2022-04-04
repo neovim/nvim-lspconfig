@@ -58,6 +58,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [hhvm](#hhvm)
 - [hie](#hie)
 - [hls](#hls)
+- [hoon_ls](#hoon_ls)
 - [html](#html)
 - [idris2_lsp](#idris2_lsp)
 - [intelephense](#intelephense)
@@ -75,6 +76,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [ltex](#ltex)
 - [metals](#metals)
 - [mint](#mint)
+- [mm0_ls](#mm0_ls)
 - [nickel_ls](#nickel_ls)
 - [nimls](#nimls)
 - [ocamlls](#ocamlls)
@@ -91,6 +93,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [please](#please)
 - [powershell_es](#powershell_es)
 - [prismals](#prismals)
+- [prosemd_lsp](#prosemd_lsp)
 - [psalm](#psalm)
 - [puppet](#puppet)
 - [purescriptls](#purescriptls)
@@ -175,15 +178,20 @@ require('lspconfig').als.setup{
 require'lspconfig'.als.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "ada_language_server" }
-    filetypes = { "ada" }
-    root_dir = util.root_pattern("Makefile", ".git", "*.gpr", "*.adc")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "ada_language_server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "ada" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.root_pattern("Makefile", ".git", "*.gpr", "*.adc")
+  ```
 
 
 ## angularls
@@ -213,15 +221,20 @@ require'lspconfig'.angularls.setup{
 require'lspconfig'.angularls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "ngserver", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" }
-    filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" }
-    root_dir = root_pattern("angular.json", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "ngserver", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "typescript", "html", "typescriptreact", "typescript.tsx" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("angular.json", ".git")
+  ```
 
 
 ## ansiblels
@@ -243,35 +256,44 @@ npm install -g @ansible/ansible-language-server
 require'lspconfig'.ansiblels.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "ansible-language-server", "--stdio" }
-    filetypes = { "yaml.ansible" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-    settings = {
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "ansible-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "yaml.ansible" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `settings` : 
+  ```lua
+  {
+    ansible = {
       ansible = {
-        ansible = {
-          path = "ansible"
-        },
-        ansibleLint = {
-          enabled = true,
-          path = "ansible-lint"
-        },
-        executionEnvironment = {
-          enabled = false
-        },
-        python = {
-          interpreterPath = "python"
-        }
+        path = "ansible"
+      },
+      ansibleLint = {
+        enabled = true,
+        path = "ansible-lint"
+      },
+      executionEnvironment = {
+        enabled = false
+      },
+      python = {
+        interpreterPath = "python"
       }
     }
-    single_file_support = true
-```
+  }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## arduino_language_server
@@ -321,17 +343,20 @@ For further instruction about configuration options, run `arduino-language-serve
 require'lspconfig'.arduino_language_server.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "arduino-language-server" }
-    filetypes = { "arduino" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "arduino-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "arduino" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## asm_lsp
@@ -350,21 +375,20 @@ cargo install asm-lsp
 require'lspconfig'.asm_lsp.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "asm-lsp" }
-    filetypes = { "asm", "vmasm" }
-    root_dir = function(path)
-        -- Support git directories and git files (worktrees)
-        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "asm-lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "asm", "vmasm" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## awk_ls
@@ -383,15 +407,20 @@ npm install -g awk-language-server
 require'lspconfig'.awk_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "awk-language-server" }
-    filetypes = { "awk" }
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "awk-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "awk" }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## bashls
@@ -412,19 +441,30 @@ Language server for bash, written using tree sitter in typescript.
 require'lspconfig'.bashls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "bash-language-server", "start" }
-    cmd_env = {
-      GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)"
-    }
-    filetypes = { "sh" }
-    root_dir = util.find_git_ancestor
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "bash-language-server", "start" }
+  ```
+  - `cmd_env` : 
+  ```lua
+  {
+    GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)"
+  }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "sh" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## beancount
@@ -440,20 +480,31 @@ See https://github.com/polarmutex/beancount-language-server#configuration for co
 require'lspconfig'.beancount.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "beancount-langserver" }
-    filetypes = { "beancount" }
-    init_options = {
-      journalFile = "",
-      pythonPath = "python3"
-    }
-    root_dir = root_pattern("elm.json")
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "beancount-langserver", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "beancount" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    journalFile = "",
+    pythonPath = "python3"
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("elm.json")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## bicep
@@ -497,15 +548,20 @@ To download the latest release and place in /usr/local/bin/bicep-langserver:
 require'lspconfig'.bicep.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    filetypes = { "bicep" }
-    init_options = {}
-    root_dir = util.find_git_ancestor
-```
+
+**Default values:**
+  - `filetypes` : 
+  ```lua
+  { "bicep" }
+  ```
+  - `init_options` : 
+  ```lua
+  {}
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
 
 
 ## bsl_ls
@@ -522,14 +578,16 @@ require'lspconfig'.bicep.setup{}
 require'lspconfig'.bsl_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    filetypes = { "bsl", "os" }
-    root_dir = root_pattern(".git")
-```
+
+**Default values:**
+  - `filetypes` : 
+  ```lua
+  { "bsl", "os" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".git")
+  ```
 
 
 ## ccls
@@ -566,17 +624,28 @@ lspconfig.ccls.setup {
 require'lspconfig'.ccls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "ccls" }
-    filetypes = { "c", "cpp", "objc", "objcpp" }
-    offset_encoding = "utf-32"
-    root_dir = root_pattern("compile_commands.json", ".ccls", ".git")
-    single_file_support = false
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "ccls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "c", "cpp", "objc", "objcpp" }
+  ```
+  - `offset_encoding` : 
+  ```lua
+  "utf-32"
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("compile_commands.json", ".ccls", ".git")
+  ```
+  - `single_file_support` : 
+  ```lua
+  false
+  ```
 
 
 ## clangd
@@ -595,19 +664,30 @@ For details on how to automatically generate one using CMake look [here](https:/
 ```lua
 require'lspconfig'.clangd.setup{}
 ```
+**Commands:**
+- ClangdSwitchSourceHeader: Switch between source/header
 
-**Commands and default values:**
-```lua
-  Commands:
-  - ClangdSwitchSourceHeader: Switch between source/header
-  
-  Default Values:
-    capabilities = default capabilities, with offsetEncoding utf-8
-    cmd = { "clangd" }
-    filetypes = { "c", "cpp", "objc", "objcpp" }
-    root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
-    single_file_support = true
-```
+**Default values:**
+  - `capabilities` : 
+  ```lua
+  default capabilities, with offsetEncoding utf-8
+  ```
+  - `cmd` : 
+  ```lua
+  { "clangd" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "c", "cpp", "objc", "objcpp" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## clarity_lsp
@@ -623,15 +703,20 @@ To learn how to configure the clarity language server, see the [clarity-lsp docu
 require'lspconfig'.clarity_lsp.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "clarity-lsp" }
-    filetypes = { "clar", "clarity" }
-    root_dir = root_pattern(".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "clarity-lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "clar", "clarity" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".git")
+  ```
 
 
 ## clojure_lsp
@@ -647,15 +732,20 @@ Clojure Language Server
 require'lspconfig'.clojure_lsp.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "clojure-lsp" }
-    filetypes = { "clojure", "edn" }
-    root_dir = root_pattern("project.clj", "deps.edn", "build.boot", "shadow-cljs.edn", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "clojure-lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "clojure", "edn" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("project.clj", "deps.edn", "build.boot", "shadow-cljs.edn", ".git")
+  ```
 
 
 ## cmake
@@ -671,19 +761,30 @@ CMake LSP Implementation
 require'lspconfig'.cmake.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "cmake-language-server" }
-    filetypes = { "cmake" }
-    init_options = {
-      buildDirectory = "build"
-    }
-    root_dir = root_pattern(".git", "compile_commands.json", "build") or dirname
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "cmake-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "cmake" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    buildDirectory = "build"
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".git", "compile_commands.json", "build") or dirname
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## codeqlls
@@ -701,29 +802,34 @@ https://github.com/github/codeql-cli-binaries
 require'lspconfig'.codeqlls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    before_init = function(initialize_params)
-          initialize_params['workspaceFolders'] = {
-            {
-              name = 'workspace',
-              uri = initialize_params['rootUri'],
-            },
-          }
-        end,
-    cmd = { "codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q" }
-    filetypes = { "ql" }
-    log_level = 2
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-    settings = {
-      search_path = "list containing all search paths, eg: '~/codeql-home/codeql-repo'"
-    }
-```
+
+**Default values:**
+  - `before_init` : 
+  ```lua
+  see source file
+  ```
+  - `cmd` : 
+  ```lua
+  { "codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "ql" }
+  ```
+  - `log_level` : 
+  ```lua
+  2
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `settings` : 
+  ```lua
+  {
+    search_path = "list containing all search paths, eg: '~/codeql-home/codeql-repo'"
+  }
+  ```
 
 
 ## crystalline
@@ -739,16 +845,24 @@ Crystal language server.
 require'lspconfig'.crystalline.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "crystalline" }
-    filetypes = { "crystal" }
-    root_dir = root_pattern('shard.yml', '.git') or dirname
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "crystalline" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "crystal" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern('shard.yml', '.git') or dirname
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## csharp_ls
@@ -768,20 +882,26 @@ The preferred way to install csharp-ls is with `dotnet tool install --global csh
 require'lspconfig'.csharp_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "csharp-ls" }
-    filetypes = { "cs" }
-    init_options = {
-      AutomaticWorkspaceInit = true
-    }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "csharp-ls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "cs" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    AutomaticWorkspaceInit = true
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## cssls
@@ -814,27 +934,38 @@ require'lspconfig'.cssls.setup {
 require'lspconfig'.cssls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "vscode-css-language-server", "--stdio" }
-    filetypes = { "css", "scss", "less" }
-    root_dir = root_pattern("package.json", ".git") or bufdir
-    settings = {
-      css = {
-        validate = true
-      },
-      less = {
-        validate = true
-      },
-      scss = {
-        validate = true
-      }
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "vscode-css-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "css", "scss", "less" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("package.json", ".git") or bufdir
+  ```
+  - `settings` : 
+  ```lua
+  {
+    css = {
+      validate = true
+    },
+    less = {
+      validate = true
+    },
+    scss = {
+      validate = true
     }
-    single_file_support = true
-```
+  }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## cssmodules_ls
@@ -855,15 +986,20 @@ npm install -g cssmodules-language-server
 require'lspconfig'.cssmodules_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "cssmodules-language-server" }
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
-    root_dir = root_pattern("package.json")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "cssmodules-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "javascript", "javascriptreact", "typescript", "typescriptreact" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("package.json")
+  ```
 
 
 ## cucumber_language_server
@@ -886,15 +1022,20 @@ npm install -g @cucumber/language-server
 require'lspconfig'.cucumber_language_server.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "cucumber-language-server", "--stdio" }
-    filetypes = { "cucumber" }
-    root_dir = util.find_git_ancestor
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "cucumber-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "cucumber" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
 
 
 ## dartls
@@ -910,28 +1051,39 @@ Language server for dart.
 require'lspconfig'.dartls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "dart", "./snapshots/analysis_server.dart.snapshot", "--lsp" }
-    filetypes = { "dart" }
-    init_options = {
-      closingLabels = true,
-      flutterOutline = true,
-      onlyAnalyzeProjectsWithOpenFiles = true,
-      outline = true,
-      suggestFromUnimportedLibraries = true
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "dart", "./snapshots/analysis_server.dart.snapshot", "--lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "dart" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    closingLabels = true,
+    flutterOutline = true,
+    onlyAnalyzeProjectsWithOpenFiles = true,
+    outline = true,
+    suggestFromUnimportedLibraries = true
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("pubspec.yaml")
+  ```
+  - `settings` : 
+  ```lua
+  {
+    dart = {
+      completeFunctionCalls = true,
+      showTodos = true
     }
-    root_dir = root_pattern("pubspec.yaml")
-    settings = {
-      dart = {
-        completeFunctionCalls = true,
-        showTodos = true
-      }
-    }
-```
+  }
+  ```
 
 
 ## denols
@@ -956,26 +1108,37 @@ vim.g.markdown_fenced_languages = {
 ```lua
 require'lspconfig'.denols.setup{}
 ```
+**Commands:**
+- DenolsCache: Cache a module and all of its dependencies.
 
-**Commands and default values:**
-```lua
-  Commands:
-  - DenolsCache: Cache a module and all of its dependencies.
-  
-  Default Values:
-    cmd = { "deno", "lsp" }
-    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
-    handlers = {
-      ["textDocument/definition"] = <function 1>,
-      ["textDocument/references"] = <function 1>
-    }
-    init_options = {
-      enable = true,
-      lint = false,
-      unstable = false
-    }
-    root_dir = root_pattern("deno.json", "deno.jsonc", "tsconfig.json", ".git")
-```
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "deno", "lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  ```
+  - `handlers` : 
+  ```lua
+  {
+    ["textDocument/definition"] = <function 1>,
+    ["textDocument/references"] = <function 1>
+  }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    enable = true,
+    lint = false,
+    unstable = false
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("deno.json", "deno.jsonc", "tsconfig.json", ".git")
+  ```
 
 
 ## dhall_lsp_server
@@ -997,16 +1160,24 @@ prebuilt binaries can be found [here](https://github.com/dhall-lang/dhall-haskel
 require'lspconfig'.dhall_lsp_server.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "dhall-lsp-server" }
-    filetypes = { "dhall" }
-    root_dir = root_pattern(".git") or dirname
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "dhall-lsp-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "dhall" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".git") or dirname
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## diagnosticls
@@ -1022,16 +1193,24 @@ Diagnostic language server integrate with linters.
 require'lspconfig'.diagnosticls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "diagnostic-languageserver", "--stdio" }
-    filetypes = Empty by default, override to add filetypes
-    root_dir = Vim's starting directory
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "diagnostic-languageserver", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  Empty by default, override to add filetypes
+  ```
+  - `root_dir` : 
+  ```lua
+  Vim's starting directory
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## dockerls
@@ -1050,16 +1229,24 @@ npm install -g dockerfile-language-server-nodejs
 require'lspconfig'.dockerls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "docker-langserver", "--stdio" }
-    filetypes = { "dockerfile" }
-    root_dir = root_pattern("Dockerfile")
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "docker-langserver", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "dockerfile" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("Dockerfile")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## dotls
@@ -1078,22 +1265,24 @@ npm install -g dot-language-server
 require'lspconfig'.dotls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "dot-language-server", "--stdio" }
-    filetypes = { "dot" }
-    root_dir = function(path)
-        -- Support git directories and git files (worktrees)
-        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "dot-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "dot" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## efm
@@ -1132,15 +1321,20 @@ require('lspconfig')['efm'].setup{
 require'lspconfig'.efm.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "efm-langserver" }
-    root_dir = util.root_pattern(".git")
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "efm-langserver" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.root_pattern(".git")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## elixirls
@@ -1175,14 +1369,16 @@ require'lspconfig'.elixirls.setup{
 require'lspconfig'.elixirls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    filetypes = { "elixir", "eelixir" }
-    root_dir = root_pattern("mix.exs", ".git") or vim.loop.os_homedir()
-```
+
+**Default values:**
+  - `filetypes` : 
+  ```lua
+  { "elixir", "eelixir" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("mix.exs", ".git") or vim.loop.os_homedir()
+  ```
 
 
 ## elmls
@@ -1201,18 +1397,26 @@ npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
 require'lspconfig'.elmls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "elm-language-server" }
-    filetypes = { "elm" }
-    init_options = {
-      elmAnalyseTrigger = "change"
-    }
-    root_dir = root_pattern("elm.json")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "elm-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "elm" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    elmAnalyseTrigger = "change"
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("elm.json")
+  ```
 
 
 ## ember
@@ -1232,15 +1436,20 @@ npm install -g @lifeart/ember-language-server
 require'lspconfig'.ember.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "ember-language-server", "--stdio" }
-    filetypes = { "handlebars", "typescript", "javascript" }
-    root_dir = root_pattern("ember-cli-build.js", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "ember-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "handlebars", "typescript", "javascript" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("ember-cli-build.js", ".git")
+  ```
 
 
 ## emmet_ls
@@ -1259,16 +1468,24 @@ npm install -g emmet-ls
 require'lspconfig'.emmet_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "emmet-ls", "--stdio" }
-    filetypes = { "html", "css" }
-    root_dir = git root
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "emmet-ls", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "html", "css" }
+  ```
+  - `root_dir` : 
+  ```lua
+  git root
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## erlangls
@@ -1293,16 +1510,24 @@ Installation requirements:
 require'lspconfig'.erlangls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "erlang_ls" }
-    filetypes = { "erlang" }
-    root_dir = root_pattern('rebar.config', 'erlang.mk', '.git')
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "erlang_ls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "erlang" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern('rebar.config', 'erlang.mk', '.git')
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## esbonio
@@ -1357,21 +1582,20 @@ A full list and explanation of the available options can be found [here](https:/
 require'lspconfig'.esbonio.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "python3", "-m", "esbonio" }
-    filetypes = { "rst" }
-    root_dir = function(path)
-        -- Support git directories and git files (worktrees)
-        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "python3", "-m", "esbonio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "rst" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## eslint
@@ -1387,7 +1611,7 @@ npm i -g vscode-langservers-extracted
 
 vscode-eslint-language-server provides an EslintFixAll command that can be used to format document on save
 ```vim
-autocmd BufWritePre <buffer> <cmd>EslintFixAll<CR>
+autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
 ```
 
 See [vscode-eslint](https://github.com/microsoft/vscode-eslint/blob/55871979d7af184bf09af491b6ea35ebd56822cf/server/src/eslintServer.ts#L216-L229) for configuration options.
@@ -1401,61 +1625,65 @@ Messages already handled in lspconfig: eslint/openDoc, eslint/confirmESLintExecu
 ```lua
 require'lspconfig'.eslint.setup{}
 ```
+**Commands:**
+- EslintFixAll: Fix all eslint problems for this buffer
 
-**Commands and default values:**
-```lua
-  Commands:
-  - EslintFixAll: Fix all eslint problems for this buffer
-  
-  Default Values:
-    cmd = { "vscode-eslint-language-server", "--stdio" }
-    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue" }
-    handlers = {
-      ["eslint/confirmESLintExecution"] = <function 1>,
-      ["eslint/noLibrary"] = <function 2>,
-      ["eslint/openDoc"] = <function 3>,
-      ["eslint/probeFailed"] = <function 4>
-    }
-    on_new_config = function(config, new_root_dir)
-          -- The "workspaceFolder" is a VSCode concept. It limits how far the
-          -- server will traverse the file system when locating the ESLint config
-          -- file (e.g., .eslintrc).
-          config.settings.workspaceFolder = {
-            uri = new_root_dir,
-            name = vim.fn.fnamemodify(new_root_dir, ':t'),
-          }
-        end,
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-    settings = {
-      codeAction = {
-        disableRuleComment = {
-          enable = true,
-          location = "separateLine"
-        },
-        showDocumentation = {
-          enable = true
-        }
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "vscode-eslint-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue" }
+  ```
+  - `handlers` : 
+  ```lua
+  {
+    ["eslint/confirmESLintExecution"] = <function 1>,
+    ["eslint/noLibrary"] = <function 2>,
+    ["eslint/openDoc"] = <function 3>,
+    ["eslint/probeFailed"] = <function 4>
+  }
+  ```
+  - `on_new_config` : 
+  ```lua
+  see source file
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `settings` : 
+  ```lua
+  {
+    codeAction = {
+      disableRuleComment = {
+        enable = true,
+        location = "separateLine"
       },
-      codeActionOnSave = {
-        enable = false,
-        mode = "all"
-      },
-      format = true,
-      nodePath = "",
-      onIgnoredFiles = "off",
-      packageManager = "npm",
-      quiet = false,
-      rulesCustomizations = {},
-      run = "onType",
-      useESLintClass = false,
-      validate = "on",
-      workingDirectory = {
-        mode = "location"
+      showDocumentation = {
+        enable = true
       }
+    },
+    codeActionOnSave = {
+      enable = false,
+      mode = "all"
+    },
+    format = true,
+    nodePath = "",
+    onIgnoredFiles = "off",
+    packageManager = "npm",
+    quiet = false,
+    rulesCustomizations = {},
+    run = "onType",
+    useESLintClass = false,
+    validate = "on",
+    workingDirectory = {
+      mode = "location"
     }
-```
+  }
+  ```
 
 
 ## flow
@@ -1479,15 +1707,20 @@ npx flow lsp --help
 require'lspconfig'.flow.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "npx", "--no-install", "flow", "lsp" }
-    filetypes = { "javascript", "javascriptreact", "javascript.jsx" }
-    root_dir = root_pattern(".flowconfig")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "npx", "--no-install", "flow", "lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "javascript", "javascriptreact", "javascript.jsx" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".flowconfig")
+  ```
 
 
 ## flux_lsp
@@ -1505,16 +1738,24 @@ cargo install --git https://github.com/influxdata/flux-lsp
 require'lspconfig'.flux_lsp.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "flux-lsp" }
-    filetypes = { "flux" }
-    root_dir = util.find_git_ancestor
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "flux-lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "flux" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## foam_ls
@@ -1533,20 +1774,20 @@ npm install -g foam-language-server
 require'lspconfig'.foam_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "foam-ls", "--stdio" }
-    filetypes = { "foam", "OpenFOAM" }
-    root_dir = function(path)
-            if util.path.exists(util.path.join(path, 'system', 'controlDict')) then
-              return path
-            end
-          end)
-        end,
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "foam-ls", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "foam", "OpenFOAM" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## fortls
@@ -1562,18 +1803,26 @@ Fortran Language Server for the Language Server Protocol
 require'lspconfig'.fortls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "fortls" }
-    filetypes = { "fortran" }
-    root_dir = root_pattern(".fortls")
-    settings = {
-      nthreads = 1
-    }
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "fortls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "fortran" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".fortls")
+  ```
+  - `settings` : 
+  ```lua
+  {
+    nthreads = 1
+  }
+  ```
 
 
 ## fsautocomplete
@@ -1602,20 +1851,26 @@ This is automatically done by plugins such as [PhilT/vim-fsharp](https://github.
 require'lspconfig'.fsautocomplete.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "fsautocomplete", "--background-service-enabled" }
-    filetypes = { "fsharp" }
-    init_options = {
-      AutomaticWorkspaceInit = true
-    }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "fsautocomplete", "--background-service-enabled" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "fsharp" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    AutomaticWorkspaceInit = true
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## fstar
@@ -1631,15 +1886,20 @@ LSP support is included in FStar. Make sure `fstar.exe` is in your PATH.
 require'lspconfig'.fstar.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "fstar.exe", "--lsp" }
-    filetypes = { "fstar" }
-    root_dir = util.find_git_ancestor
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "fstar.exe", "--lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "fstar" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
 
 
 ## gdscript
@@ -1655,15 +1915,20 @@ Language server for GDScript, used by Godot Engine.
 require'lspconfig'.gdscript.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "nc", "localhost", "6008" }
-    filetypes = { "gd", "gdscript", "gdscript3" }
-    root_dir = util.root_pattern("project.godot", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "nc", "localhost", "6008" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "gd", "gdscript", "gdscript3" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.root_pattern("project.godot", ".git")
+  ```
 
 
 ## ghcide
@@ -1680,15 +1945,20 @@ A library for building Haskell IDE tooling.
 require'lspconfig'.ghcide.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "ghcide", "--lsp" }
-    filetypes = { "haskell", "lhaskell" }
-    root_dir = root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "ghcide", "--lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "haskell", "lhaskell" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml")
+  ```
 
 
 ## golangci_lint_ls
@@ -1714,18 +1984,26 @@ go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.42.1
 require'lspconfig'.golangci_lint_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "golangci-lint-langserver" }
-    filetypes = { "go", "gomod" }
-    init_options = {
-      command = { "golangci-lint", "run", "--out-format", "json" }
-    }
-    root_dir = root_pattern('go.work') or root_pattern('go.mod', '.golangci.yaml', '.git')
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "golangci-lint-langserver" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "go", "gomod" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    command = { "golangci-lint", "run", "--out-format", "json" }
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern('go.work') or root_pattern('go.mod', '.golangci.yaml', '.git')
+  ```
 
 
 ## gopls
@@ -1741,16 +2019,24 @@ Google's lsp server for golang.
 require'lspconfig'.gopls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "gopls" }
-    filetypes = { "go", "gomod", "gotmpl" }
-    root_dir = root_pattern("go.mod", ".git")
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "gopls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "go", "gomod", "gotmpl" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("go.mod", ".git")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## gradle_ls
@@ -1768,15 +2054,20 @@ If you're setting this up manually, build vscode-gradle using `./gradlew install
 require'lspconfig'.gradle_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "gradle-language-server" }
-    filetypes = { "groovy" }
-    root_dir = root_pattern("settings.gradle")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "gradle-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "groovy" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("settings.gradle")
+  ```
 
 
 ## grammarly
@@ -1798,19 +2089,30 @@ WARNING: Since this language server uses Grammarly's API, any document you open 
 require'lspconfig'.grammarly.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "unofficial-grammarly-language-server", "--stdio" }
-    filetypes = { "markdown" }
-    handlers = {
-      ["$/updateDocumentState"] = <function 1>
-    }
-    root_dir = util.find_git_ancestor
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "unofficial-grammarly-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "markdown" }
+  ```
+  - `handlers` : 
+  ```lua
+  {
+    ["$/updateDocumentState"] = <function 1>
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## graphql
@@ -1832,15 +2134,20 @@ Note that you must also have [the graphql package](https://github.com/graphql/gr
 require'lspconfig'.graphql.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "graphql-lsp", "server", "-m", "stream" }
-    filetypes = { "graphql", "typescriptreact", "javascriptreact" }
-    root_dir = root_pattern('.git', '.graphqlrc*', '.graphql.config.*')
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "graphql-lsp", "server", "-m", "stream" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "graphql", "typescriptreact", "javascriptreact" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern('.git', '.graphqlrc*', '.graphql.config.*')
+  ```
 
 
 ## groovyls
@@ -1870,17 +2177,20 @@ require'lspconfig'.groovyls.setup{
 require'lspconfig'.groovyls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "java", "-jar", "groovy-language-server-all.jar" }
-    filetypes = { "groovy" }
-    root_dir = function(fname)
-          return util.root_pattern 'Jenkinsfile'(fname) or util.find_git_ancestor(fname)
-        end,
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "java", "-jar", "groovy-language-server-all.jar" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "groovy" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## haxe_language_server
@@ -1916,23 +2226,34 @@ specify it using the `init_options.displayArguments` setting.
 require'lspconfig'.haxe_language_server.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "haxe-language-server" }
-    filetypes = { "haxe" }
-    init_options = {
-      displayArguments = { "build.hxml" }
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "haxe-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "haxe" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    displayArguments = { "build.hxml" }
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("*.hxml")
+  ```
+  - `settings` : 
+  ```lua
+  {
+    haxe = {
+      executable = "haxe"
     }
-    root_dir = root_pattern("*.hxml")
-    settings = {
-      haxe = {
-        executable = "haxe"
-      }
-    }
-```
+  }
+  ```
 
 
 ## hdl_checker
@@ -1948,16 +2269,24 @@ Install using: `pip install hdl-checker --upgrade`
 require'lspconfig'.hdl_checker.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "hdl_checker", "--lsp" }
-    filetypes = { "vhdl", "verilog", "systemverilog" }
-    root_dir = util.find_git_ancestor
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "hdl_checker", "--lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "vhdl", "verilog", "systemverilog" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## hhvm
@@ -1975,15 +2304,20 @@ https://docs.hhvm.com/hhvm/getting-started/getting-started
 require'lspconfig'.hhvm.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "hh_client", "lsp" }
-    filetypes = { "php", "hack" }
-    root_dir = root_pattern(".hhconfig")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "hh_client", "lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "php", "hack" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".hhconfig")
+  ```
 
 
 ## hie
@@ -2012,15 +2346,20 @@ init_options = {
 require'lspconfig'.hie.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "hie-wrapper", "--lsp" }
-    filetypes = { "haskell" }
-    root_dir = root_pattern("stack.yaml", "package.yaml", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "hie-wrapper", "--lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "haskell" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("stack.yaml", "package.yaml", ".git")
+  ```
 
 
 ## hls
@@ -2036,35 +2375,74 @@ Haskell Language Server
 require'lspconfig'.hls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "haskell-language-server-wrapper", "--lsp" }
-    filetypes = { "haskell", "lhaskell" }
-    lspinfo = function on_stdout(_, data, _)
-            local version = data[1]
-            table.insert(extra, 'version:   ' .. version)
-          end
-    
-          local opts = {
-            cwd = cfg.cwd,
-            stdout_buffered = true,
-            on_stdout = on_stdout,
-          }
-          local chanid = vim.fn.jobstart({ cfg.cmd[1], '--version' }, opts)
-          vim.fn.jobwait { chanid }
-          return extra
-        end,
-    root_dir = root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")
-    settings = {
-      haskell = {
-        formattingProvider = "ormolu"
-      }
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "haskell-language-server-wrapper", "--lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "haskell", "lhaskell" }
+  ```
+  - `lspinfo` : 
+  ```lua
+  see source file
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")
+  ```
+  - `settings` : 
+  ```lua
+  {
+    haskell = {
+      formattingProvider = "ormolu"
     }
-    single_file_support = true
+  }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+
+## hoon_ls
+
+https://github.com/urbit/hoon-language-server
+
+A language server for Hoon.
+
+The language server can be installed via `npm install -g @hoon-language-server`
+
+Start a fake ~zod with `urbit -F zod`.
+Start the language server at the Urbit Dojo prompt with: `|start %language-server`
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.hoon_ls.setup{}
 ```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "hoon-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "hoon" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## html
@@ -2098,27 +2476,39 @@ require'lspconfig'.html.setup {
 require'lspconfig'.html.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "vscode-html-language-server", "--stdio" }
-    filetypes = { "html" }
-    init_options = {
-      configurationSection = { "html", "css", "javascript" },
-      embeddedLanguages = {
-        css = true,
-        javascript = true
-      },
-      provideFormatter = true
-    }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-    settings = {}
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "vscode-html-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "html" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    configurationSection = { "html", "css", "javascript" },
+    embeddedLanguages = {
+      css = true,
+      javascript = true
+    },
+    provideFormatter = true
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `settings` : 
+  ```lua
+  {}
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## idris2_lsp
@@ -2159,17 +2549,20 @@ repo for the release of a compatible versioned branch.
 require'lspconfig'.idris2_lsp.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "idris2-lsp" }
-    filetypes = { "idris2" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "idris2-lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "idris2" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## intelephense
@@ -2188,15 +2581,20 @@ npm install -g intelephense
 require'lspconfig'.intelephense.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "intelephense", "--stdio" }
-    filetypes = { "php" }
-    root_dir = root_pattern("composer.json", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "intelephense", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "php" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("composer.json", ".git")
+  ```
 
 
 ## java_language_server
@@ -2214,17 +2612,20 @@ Point `cmd` to `lang_server_linux.sh` or the equivalent script for macOS/Windows
 require'lspconfig'.java_language_server.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    filetypes = { "java" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-    settings = {}
-```
+
+**Default values:**
+  - `filetypes` : 
+  ```lua
+  { "java" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `settings` : 
+  ```lua
+  {}
+  ```
 
 
 ## jdtls
@@ -2272,36 +2673,50 @@ For automatic installation you can use the following unofficial installers/launc
 require'lspconfig'.jdtls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "/usr/lib/jvm/temurin-11-jdk-amd64/bin/java", "-Declipse.application=org.eclipse.jdt.ls.core.id1", "-Dosgi.bundles.defaultStartLevel=4", "-Declipse.product=org.eclipse.jdt.ls.core.product", "-Dlog.protocol=true", "-Dlog.level=ALL", "-Xms1g", "-Xmx2G", "--add-modules=ALL-SYSTEM", "--add-opens", "java.base/java.util=ALL-UNNAMED", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "-jar", "/plugins/org.eclipse.equinox.launcher_*.jar", "-configuration", "config_linux", "-data", "/home/runner/workspace" }
-    filetypes = { "java" }
-    handlers = {
-      ["language/status"] = <function 1>,
-      ["textDocument/codeAction"] = <function 2>,
-      ["textDocument/rename"] = <function 3>,
-      ["workspace/applyEdit"] = <function 4>
-    }
-    init_options = {
-      jvm_args = {},
-      workspace = "/home/runner/workspace"
-    }
-    root_dir = {
-            -- Single-module projects
-            {
-              'build.xml', -- Ant
-              'pom.xml', -- Maven
-              'settings.gradle', -- Gradle
-              'settings.gradle.kts', -- Gradle
-            },
-            -- Multi-module projects
-            { 'build.gradle', 'build.gradle.kts' },
-          } or vim.fn.getcwd()
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "/usr/lib/jvm/temurin-11-jdk-amd64/bin/java", "-Declipse.application=org.eclipse.jdt.ls.core.id1", "-Dosgi.bundles.defaultStartLevel=4", "-Declipse.product=org.eclipse.jdt.ls.core.product", "-Dlog.protocol=true", "-Dlog.level=ALL", "-Xms1g", "-Xmx2G", "--add-modules=ALL-SYSTEM", "--add-opens", "java.base/java.util=ALL-UNNAMED", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "-jar", "/plugins/org.eclipse.equinox.launcher_*.jar", "-configuration", "config_linux", "-data", "/home/runner/workspace" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "java" }
+  ```
+  - `handlers` : 
+  ```lua
+  {
+    ["language/status"] = <function 1>,
+    ["textDocument/codeAction"] = <function 2>,
+    ["textDocument/rename"] = <function 3>,
+    ["workspace/applyEdit"] = <function 4>
+  }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    jvm_args = {},
+    workspace = "/home/runner/workspace"
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  {
+          -- Single-module projects
+          {
+            'build.xml', -- Ant
+            'pom.xml', -- Maven
+            'settings.gradle', -- Gradle
+            'settings.gradle.kts', -- Gradle
+          },
+          -- Multi-module projects
+          { 'build.gradle', 'build.gradle.kts' },
+        } or vim.fn.getcwd()
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## jedi_language_server
@@ -2317,16 +2732,24 @@ https://github.com/pappasam/jedi-language-server
 require'lspconfig'.jedi_language_server.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "jedi-language-server" }
-    filetypes = { "python" }
-    root_dir = vim's starting directory
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "jedi-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "python" }
+  ```
+  - `root_dir` : 
+  ```lua
+  vim's starting directory
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## jsonls
@@ -2359,19 +2782,30 @@ require'lspconfig'.jsonls.setup {
 require'lspconfig'.jsonls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "vscode-json-language-server", "--stdio" }
-    filetypes = { "json", "jsonc" }
-    init_options = {
-      provideFormatter = true
-    }
-    root_dir = util.find_git_ancestor
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "vscode-json-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "json", "jsonc" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    provideFormatter = true
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## jsonnet_ls
@@ -2392,20 +2826,24 @@ go install github.com/grafana/jsonnet-language-server@latest
 require'lspconfig'.jsonnet_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "jsonnet-language-server" }
-    filetypes = { "jsonnet", "libsonnet" }
-    on_new_config = function(new_config, root_dir)
-          new_config.cmd_env = {
-            JSONNET_PATH = jsonnet_path(root_dir),
-          }
-        end,
-    root_dir = root_pattern("jsonnetfile.json")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "jsonnet-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "jsonnet", "libsonnet" }
+  ```
+  - `on_new_config` : 
+  ```lua
+  see source file
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("jsonnetfile.json")
+  ```
 
 
 ## julials
@@ -2437,18 +2875,24 @@ julia --project=/path/to/my/project -e 'using Pkg; Pkg.instantiate()'
 require'lspconfig'.julials.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "julia", "--startup-file=no", "--history-file=no", "-e", '    # Load LanguageServer.jl: attempt to load from ~/.julia/environments/nvim-lspconfig\n    # with the regular load path as a fallback\n    ls_install_path = joinpath(\n        get(DEPOT_PATH, 1, joinpath(homedir(), ".julia")),\n        "environments", "nvim-lspconfig"\n    )\n    pushfirst!(LOAD_PATH, ls_install_path)\n    using LanguageServer\n    popfirst!(LOAD_PATH)\n    depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n    project_path = let\n        dirname(something(\n            ## 1. Finds an explicitly set project (JULIA_PROJECT)\n            Base.load_path_expand((\n                p = get(ENV, "JULIA_PROJECT", nothing);\n                p === nothing ? nothing : isempty(p) ? nothing : p\n            )),\n            ## 2. Look for a Project.toml file in the current working directory,\n            ##    or parent directories, with $HOME as an upper boundary\n            Base.current_project(),\n            ## 3. First entry in the load path\n            get(Base.load_path(), 1, nothing),\n            ## 4. Fallback to default global environment,\n            ##    this is more or less unreachable\n            Base.load_path_expand("@v#.#"),\n        ))\n    end\n    @info "Running language server" VERSION pwd() project_path depot_path\n    server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path)\n    server.runlinter = true\n    run(server)\n  ' }
-    filetypes = { "julia" }
-    root_dir = function(fname)
-          return util.root_pattern 'Project.toml'(fname) or util.find_git_ancestor(fname)
-        end,
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "julia", "--startup-file=no", "--history-file=no", "-e", '    # Load LanguageServer.jl: attempt to load from ~/.julia/environments/nvim-lspconfig\n    # with the regular load path as a fallback\n    ls_install_path = joinpath(\n        get(DEPOT_PATH, 1, joinpath(homedir(), ".julia")),\n        "environments", "nvim-lspconfig"\n    )\n    pushfirst!(LOAD_PATH, ls_install_path)\n    using LanguageServer\n    popfirst!(LOAD_PATH)\n    depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n    project_path = let\n        dirname(something(\n            ## 1. Finds an explicitly set project (JULIA_PROJECT)\n            Base.load_path_expand((\n                p = get(ENV, "JULIA_PROJECT", nothing);\n                p === nothing ? nothing : isempty(p) ? nothing : p\n            )),\n            ## 2. Look for a Project.toml file in the current working directory,\n            ##    or parent directories, with $HOME as an upper boundary\n            Base.current_project(),\n            ## 3. First entry in the load path\n            get(Base.load_path(), 1, nothing),\n            ## 4. Fallback to default global environment,\n            ##    this is more or less unreachable\n            Base.load_path_expand("@v#.#"),\n        ))\n    end\n    @info "Running language server" VERSION pwd() project_path depot_path\n    server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path)\n    server.runlinter = true\n    run(server)\n  ' }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "julia" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## kotlin_language_server
@@ -2473,15 +2917,20 @@ require'lspconfig'.julials.setup{}
 require'lspconfig'.kotlin_language_server.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "kotlin-language-server" }
-    filetypes = { "kotlin" }
-    root_dir = root_pattern("settings.gradle")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "kotlin-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "kotlin" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("settings.gradle")
+  ```
 
 
 ## lean3ls
@@ -2507,17 +2956,28 @@ and you shouldn't set up `lean3ls` both with it and `lspconfig`.
 require'lspconfig'.lean3ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "lean-language-server", "--stdio", "--", "-M", "4096", "-T", "100000" }
-    filetypes = { "lean3" }
-    offset_encoding = "utf-32"
-    root_dir = root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "lean-language-server", "--stdio", "--", "-M", "4096", "-T", "100000" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "lean3" }
+  ```
+  - `offset_encoding` : 
+  ```lua
+  "utf-32"
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## leanls
@@ -2541,37 +3001,34 @@ and you shouldn't set up `leanls` both with it and `lspconfig`.
 require'lspconfig'.leanls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "lake", "serve", "--" }
-    filetypes = { "lean" }
-    on_new_config = function(_, d, _)
-                lake_version = table.concat(d, '\n')
-              end,
-              stdout_buffered = true,
-            })
-            if lake_job > 0 and vim.fn.jobwait({ lake_job })[1] == 0 then
-              local major = lake_version:match 'Lake version (%d).'
-              if major and tonumber(major) >= 3 then
-                use_lake_serve = true
-              end
-            end
-          end
-          if not use_lake_serve then
-            config.cmd = config.options.no_lake_lsp_cmd
-          end
-          -- add root dir as command-line argument for `ps aux`
-          table.insert(config.cmd, root_dir)
-        end,
-    options = {
-      no_lake_lsp_cmd = { "lean", "--server" }
-    }
-    root_dir = root_pattern("lakefile.lean", "lean-toolchain", "leanpkg.toml", ".git")
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "lake", "serve", "--" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "lean" }
+  ```
+  - `on_new_config` : 
+  ```lua
+  see source file
+  ```
+  - `options` : 
+  ```lua
+  {
+    no_lake_lsp_cmd = { "lean", "--server" }
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("lakefile.lean", "lean-toolchain", "leanpkg.toml", ".git")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## lelwel_ls
@@ -2592,21 +3049,20 @@ cargo install --features="lsp" lelwel
 require'lspconfig'.lelwel_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "lelwel-ls" }
-    filetypes = { "llw" }
-    root_dir = function(path)
-        -- Support git directories and git files (worktrees)
-        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "lelwel-ls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "llw" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## lemminx
@@ -2625,16 +3081,24 @@ NOTE to macOS users: Binaries from unidentified developers are blocked by defaul
 require'lspconfig'.lemminx.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "lemminx" }
-    filetypes = { "xml", "xsd", "xsl", "xslt", "svg" }
-    root_dir = util.find_git_ancestor
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "lemminx" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "xml", "xsd", "xsl", "xslt", "svg" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## ltex
@@ -2658,30 +3122,28 @@ vim.cmd [[ autocmd BufRead,BufNewFile *.org set filetype=org ]]
 require'lspconfig'.ltex.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "ltex-ls" }
-    filetypes = { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" }
-    get_language_id = function(_, filetype)
-          local language_id = language_id_mapping[filetype]
-          if language_id then
-            return language_id
-          else
-            return filetype
-          end
-        end,
-    root_dir = function(path)
-        -- Support git directories and git files (worktrees)
-        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "ltex-ls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" }
+  ```
+  - `get_language_id` : 
+  ```lua
+  see source file
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## metals
@@ -2715,23 +3177,34 @@ cs bootstrap \
 require'lspconfig'.metals.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "metals" }
-    filetypes = { "scala" }
-    init_options = {
-      compilerOptions = {
-        snippetAutoIndent = false
-      },
-      isHttpEnabled = true,
-      statusBarProvider = "show-message"
-    }
-    message_level = 4
-    root_dir = util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "metals" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "scala" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    compilerOptions = {
+      snippetAutoIndent = false
+    },
+    isHttpEnabled = true,
+    statusBarProvider = "show-message"
+  }
+  ```
+  - `message_level` : 
+  ```lua
+  4
+  ```
+  - `root_dir` : 
+  ```lua
+  util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml")
+  ```
 
 
 ## mint
@@ -2748,18 +3221,60 @@ The language server is included since version 0.12.0.
 require'lspconfig'.mint.setup{}
 ```
 
-**Commands and default values:**
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "mint", "ls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "mint" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+
+## mm0_ls
+
+https://github.com/digama0/mm0
+
+Language Server for the metamath-zero theorem prover.
+
+Requires [mm0-rs](https://github.com/digama0/mm0/tree/master/mm0-rs) to be installed
+and available on the `PATH`.
+    
+
+
+**Snippet to enable the language server:**
 ```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "mint", "ls" }
-    filetypes = { "mint" }
-    root_dir = function(fname)
-          return util.root_pattern 'mint.json'(fname) or util.find_git_ancestor(fname)
-        end,
-    single_file_support = true
+require'lspconfig'.mm0_ls.setup{}
 ```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "mm0-rs", "server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "metamath-zero" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## nickel_ls
@@ -2795,21 +3310,20 @@ install the [Nickel vim plugin](https://github.com/nickel-lang/vim-nickel).
 require'lspconfig'.nickel_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "nls" }
-    filetypes = { "ncl", "nickel" }
-    root_dir = function(path)
-        -- Support git directories and git files (worktrees)
-        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "nls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "ncl", "nickel" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## nimls
@@ -2827,18 +3341,24 @@ nimble install nimlsp
 require'lspconfig'.nimls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "nimlsp" }
-    filetypes = { "nim" }
-    root_dir = function(fname)
-          return util.root_pattern '*.nimble'(fname) or util.find_git_ancestor(fname)
-        end,
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "nimlsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "nim" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## ocamlls
@@ -2857,15 +3377,20 @@ npm install -g ocaml-language-server
 require'lspconfig'.ocamlls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "ocaml-language-server", "--stdio" }
-    filetypes = { "ocaml", "reason" }
-    root_dir = root_pattern("*.opam", "esy.json", "package.json")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "ocaml-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "ocaml", "reason" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("*.opam", "esy.json", "package.json")
+  ```
 
 
 ## ocamllsp
@@ -2887,18 +3412,24 @@ opam install ocaml-lsp-server
 require'lspconfig'.ocamllsp.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "ocamllsp" }
-    filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason" }
-    get_language_id = function(_, ftype)
-      return language_id_of[ftype]
-    end
-    root_dir = root_pattern("*.opam", "esy.json", "package.json", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "ocamllsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason" }
+  ```
+  - `get_language_id` : 
+  ```lua
+  see source file
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("*.opam", "esy.json", "package.json", ".git")
+  ```
 
 
 ## ols
@@ -2914,16 +3445,24 @@ require'lspconfig'.ocamllsp.setup{}
 require'lspconfig'.ols.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "ols" }
-    filetypes = { "odin" }
-    root_dir = util.root_pattern("ols.json", ".git")
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "ols" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "odin" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.root_pattern("ols.json", ".git")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## omnisharp
@@ -2962,21 +3501,24 @@ find /path/to/omnisharp-osx | xargs xattr -r -d com.apple.quarantine
 require'lspconfig'.omnisharp.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    filetypes = { "cs", "vb" }
-    init_options = {}
-    on_new_config = function(new_config, new_root_dir)
-          if new_root_dir then
-            table.insert(new_config.cmd, '-s')
-            table.insert(new_config.cmd, new_root_dir)
-          end
-        end,
-    root_dir = root_pattern(".sln") or root_pattern(".csproj")
-```
+
+**Default values:**
+  - `filetypes` : 
+  ```lua
+  { "cs", "vb" }
+  ```
+  - `init_options` : 
+  ```lua
+  {}
+  ```
+  - `on_new_config` : 
+  ```lua
+  see source file
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".sln") or root_pattern(".csproj")
+  ```
 
 
 ## opencl_ls
@@ -2994,15 +3536,20 @@ Prebuilt binaries are available for Linux, macOS and Windows [here](https://gith
 require'lspconfig'.opencl_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "opencl-language-server" }
-    filetypes = { "opencl" }
-    root_dir = util.root_pattern(".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "opencl-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "opencl" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.root_pattern(".git")
+  ```
 
 
 ## openscad_ls
@@ -3033,22 +3580,24 @@ or by installing a filetype plugin such as https://github.com/sirtaj/vim-opensca
 require'lspconfig'.openscad_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "openscad-language-server" }
-    filetypes = { "openscad" }
-    root_dir = function(path)
-        -- Support git directories and git files (worktrees)
-        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "openscad-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "openscad" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## pasls
@@ -3075,22 +3624,24 @@ export FPCTARGETCPU='x86_64'          # Target CPU for cross compiling.
 require'lspconfig'.pasls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "pasls" }
-    filetypes = { "pascal" }
-    root_dir = function(path)
-        -- Support git directories and git files (worktrees)
-        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "pasls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "pascal" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## perlls
@@ -3108,24 +3659,35 @@ To use the language server, ensure that you have Perl::LanguageServer installed 
 require'lspconfig'.perlls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "perl", "-MPerl::LanguageServer", "-e", "Perl::LanguageServer::run", "--", "--port 13603", "--nostdio 0", "--version 2.1.0" }
-    filetypes = { "perl" }
-    root_dir = vim's starting directory
-    settings = {
-      perl = {
-        fileFilter = { ".pm", ".pl" },
-        ignoreDirs = ".git",
-        perlCmd = "perl",
-        perlInc = " "
-      }
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "perl", "-MPerl::LanguageServer", "-e", "Perl::LanguageServer::run", "--", "--port 13603", "--nostdio 0", "--version 2.1.0" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "perl" }
+  ```
+  - `root_dir` : 
+  ```lua
+  vim's starting directory
+  ```
+  - `settings` : 
+  ```lua
+  {
+    perl = {
+      fileFilter = { ".pm", ".pl" },
+      ignoreDirs = ".git",
+      perlCmd = "perl",
+      perlInc = " "
     }
-    single_file_support = true
-```
+  }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## perlnavigator
@@ -3163,22 +3725,24 @@ settings have a reasonable default, but, at minimum, you may want to point `perl
 require'lspconfig'.perlnavigator.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = {}
-    filetypes = { "perl" }
-    root_dir = function(path)
-        -- Support git directories and git files (worktrees)
-        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  {}
+  ```
+  - `filetypes` : 
+  ```lua
+  { "perl" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## perlpls
@@ -3197,26 +3761,37 @@ To use the language server, ensure that you have PLS installed and that it is in
 require'lspconfig'.perlpls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "pls" }
-    filetypes = { "perl" }
-    root_dir = util.find_git_ancestor
-    settings = {
-      perl = {
-        perlcritic = {
-          enabled = false
-        },
-        syntax = {
-          enabled = true
-        }
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "pls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "perl" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
+  - `settings` : 
+  ```lua
+  {
+    perl = {
+      perlcritic = {
+        enabled = false
+      },
+      syntax = {
+        enabled = true
       }
     }
-    single_file_support = true
-```
+  }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## phpactor
@@ -3232,15 +3807,20 @@ Installation: https://phpactor.readthedocs.io/en/master/usage/standalone.html#gl
 require'lspconfig'.phpactor.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "phpactor", "language-server" }
-    filetypes = { "php" }
-    root_dir = root_pattern("composer.json", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "phpactor", "language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "php" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("composer.json", ".git")
+  ```
 
 
 ## please
@@ -3258,18 +3838,24 @@ The `plz` binary will automatically install the LSP for you on first run
 require'lspconfig'.please.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "plz", "tool", "lps" }
-    filetypes = { "bzl" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "plz", "tool", "lps" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "bzl" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## powershell_es
@@ -3319,22 +3905,28 @@ require'lspconfig'.powershell_es.setup{
 require'lspconfig'.powershell_es.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    filetypes = { "ps1" }
-    on_new_config = function(new_config, _)
-          -- Don't overwrite cmd if already set
-          if not new_config.cmd then
-            new_config.cmd = make_cmd(new_config)
-          end
-        end,
-    root_dir = git root or current directory
-    shell = "pwsh"
-    single_file_support = true
-```
+
+**Default values:**
+  - `filetypes` : 
+  ```lua
+  { "ps1" }
+  ```
+  - `on_new_config` : 
+  ```lua
+  see source file
+  ```
+  - `root_dir` : 
+  ```lua
+  git root or current directory
+  ```
+  - `shell` : 
+  ```lua
+  "pwsh"
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## prismals
@@ -3353,20 +3945,63 @@ npm install -g @prisma/language-server
 require'lspconfig'.prismals.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "prisma-language-server", "--stdio" }
-    filetypes = { "prisma" }
-    root_dir = root_pattern(".git", "package.json")
-    settings = {
-      prisma = {
-        prismaFmtBinPath = ""
-      }
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "prisma-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "prisma" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".git", "package.json")
+  ```
+  - `settings` : 
+  ```lua
+  {
+    prisma = {
+      prismaFmtBinPath = ""
     }
+  }
+  ```
+
+
+## prosemd_lsp
+
+https://github.com/kitten/prosemd-lsp
+
+An experimental LSP for Markdown.
+
+Please see the manual installation instructions: https://github.com/kitten/prosemd-lsp#manual-installation
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.prosemd_lsp.setup{}
 ```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "prosemd-lsp", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "markdown" }
+  ```
+  - `root_dir` : 
+  ```lua
+  <function 1>
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## psalm
@@ -3385,15 +4020,20 @@ composer global require vimeo/psalm
 require'lspconfig'.psalm.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "psalm-language-server" }
-    filetypes = { "php" }
-    root_dir = root_pattern("psalm.xml", "psalm.xml.dist")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "psalm-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "php" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("psalm.xml", "psalm.xml.dist")
+  ```
 
 
 ## puppet
@@ -3420,16 +4060,24 @@ Installation:
 require'lspconfig'.puppet.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "puppet-languageserver", "--stdio" }
-    filetypes = { "puppet" }
-    root_dir = root_pattern("manifests", ".puppet-lint.rc", "hiera.yaml", ".git")
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "puppet-languageserver", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "puppet" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("manifests", ".puppet-lint.rc", "hiera.yaml", ".git")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## purescriptls
@@ -3447,15 +4095,20 @@ npm install -g purescript-language-server
 require'lspconfig'.purescriptls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "purescript-language-server", "--stdio" }
-    filetypes = { "purescript" }
-    root_dir = root_pattern("spago.dhall, 'psc-package.json', bower.json")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "purescript-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "purescript" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("spago.dhall, 'psc-package.json', bower.json")
+  ```
 
 
 ## pylsp
@@ -3476,25 +4129,24 @@ Note: This is a community fork of `pyls`.
 require'lspconfig'.pylsp.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "pylsp" }
-    filetypes = { "python" }
-    root_dir = function(fname)
-          local root_files = {
-            'pyproject.toml',
-            'setup.py',
-            'setup.cfg',
-            'requirements.txt',
-            'Pipfile',
-          }
-          return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-        end,
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "pylsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "python" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## pyre
@@ -3516,17 +4168,20 @@ Do not report issues for missing features in `pyre` to `lspconfig`.
 require'lspconfig'.pyre.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "pyre", "persistent" }
-    filetypes = { "python" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "pyre", "persistent" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "python" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## pyright
@@ -3541,29 +4196,38 @@ https://github.com/microsoft/pyright
 ```lua
 require'lspconfig'.pyright.setup{}
 ```
+**Commands:**
+- PyrightOrganizeImports: Organize Imports
 
-**Commands and default values:**
-```lua
-  Commands:
-  - PyrightOrganizeImports: Organize Imports
-  
-  Default Values:
-    cmd = { "pyright-langserver", "--stdio" }
-    filetypes = { "python" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-    settings = {
-      python = {
-        analysis = {
-          autoSearchPaths = true,
-          diagnosticMode = "workspace",
-          useLibraryCodeForTypes = true
-        }
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "pyright-langserver", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "python" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `settings` : 
+  ```lua
+  {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        diagnosticMode = "workspace",
+        useLibraryCodeForTypes = true
       }
     }
-    single_file_support = true
-```
+  }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## quick_lint_js
@@ -3581,18 +4245,24 @@ See installation [instructions](https://quick-lint-js.com/install/)
 require'lspconfig'.quick_lint_js.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "quick-lint-js", "--lsp-server" }
-    filetypes = { "javascript" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "quick-lint-js", "--lsp-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "javascript" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## r_language_server
@@ -3614,16 +4284,24 @@ install.packages("languageserver")
 require'lspconfig'.r_language_server.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "R", "--slave", "-e", "languageserver::run()" }
-    filetypes = { "r", "rmd" }
-    log_level = 2
-    root_dir = root_pattern(".git") or os_homedir
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "R", "--slave", "-e", "languageserver::run()" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "r", "rmd" }
+  ```
+  - `log_level` : 
+  ```lua
+  2
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".git") or os_homedir
+  ```
 
 
 ## racket_langserver
@@ -3643,22 +4321,24 @@ Install via `raco`: `raco pkg install racket-langserver`
 require'lspconfig'.racket_langserver.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "racket", "--lib", "racket-langserver" }
-    filetypes = { "racket", "scheme" }
-    root_dir = function(path)
-        -- Support git directories and git files (worktrees)
-        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "racket", "--lib", "racket-langserver" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "racket", "scheme" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## reason_ls
@@ -3681,17 +4361,20 @@ cmd = {'<path_to_reason_language_server>'}
 require'lspconfig'.reason_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "reason-language-server" }
-    filetypes = { "reason" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "reason-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "reason" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## remark_ls
@@ -3733,22 +4416,24 @@ npm install remark-preset-lint-recommended
 require'lspconfig'.remark_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "remark-language-server", "--stdio" }
-    filetypes = { "markdown" }
-    root_dir = function(path)
-        -- Support git directories and git files (worktrees)
-        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "remark-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "markdown" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## rescriptls
@@ -3789,18 +4474,24 @@ Take a look at [here](https://github.com/rescript-lang/rescript-vscode#use-with-
 require'lspconfig'.rescriptls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = {}
-    filetypes = { "rescript" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-    settings = {}
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  {}
+  ```
+  - `filetypes` : 
+  ```lua
+  { "rescript" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `settings` : 
+  ```lua
+  {}
+  ```
 
 
 ## rls
@@ -3839,15 +4530,20 @@ cmd = {"rustup", "run", "nightly", "rls"}
 require'lspconfig'.rls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "rls" }
-    filetypes = { "rust" }
-    root_dir = root_pattern("Cargo.toml")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "rls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "rust" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("Cargo.toml")
+  ```
 
 
 ## rnix
@@ -3868,17 +4564,28 @@ This server accepts configuration via the `settings` key.
 require'lspconfig'.rnix.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "rnix-lsp" }
-    filetypes = { "nix" }
-    init_options = {}
-    root_dir = vim's starting directory
-    settings = {}
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "rnix-lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "nix" }
+  ```
+  - `init_options` : 
+  ```lua
+  {}
+  ```
+  - `root_dir` : 
+  ```lua
+  vim's starting directory
+  ```
+  - `settings` : 
+  ```lua
+  {}
+  ```
 
 
 ## robotframework_ls
@@ -3894,15 +4601,20 @@ Language Server Protocol implementation for Robot Framework.
 require'lspconfig'.robotframework_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "robotframework_ls" }
-    filetypes = { "robot" }
-    root_dir = util.root_pattern('robotidy.toml', 'pyproject.toml')(fname) or util.find_git_ancestor(fname)
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "robotframework_ls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "robot" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.root_pattern('robotidy.toml', 'pyproject.toml')(fname) or util.find_git_ancestor(fname)
+  ```
 
 
 ## rome
@@ -3922,16 +4634,24 @@ npm install [-g] rome
 require'lspconfig'.rome.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "rome", "lsp" }
-    filetypes = { "javascript", "javascriptreact", "json", "typescript", "typescript.tsx", "typescriptreact" }
-    root_dir = root_pattern('package.json', 'node_modules', '.git') or dirname
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "rome", "lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "javascript", "javascriptreact", "json", "typescript", "typescript.tsx", "typescriptreact" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern('package.json', 'node_modules', '.git') or dirname
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## rust_analyzer
@@ -3948,20 +4668,28 @@ See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#
 ```lua
 require'lspconfig'.rust_analyzer.setup{}
 ```
+**Commands:**
+- CargoReload: Reload current cargo workspace
 
-**Commands and default values:**
-```lua
-  Commands:
-  - CargoReload: Reload current cargo workspace
-  
-  Default Values:
-    cmd = { "rust-analyzer" }
-    filetypes = { "rust" }
-    root_dir = root_pattern("Cargo.toml", "rust-project.json")
-    settings = {
-      ["rust-analyzer"] = {}
-    }
-```
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "rust-analyzer" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "rust" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("Cargo.toml", "rust-project.json")
+  ```
+  - `settings` : 
+  ```lua
+  {
+    ["rust-analyzer"] = {}
+  }
+  ```
 
 
 ## salt_ls
@@ -3981,16 +4709,24 @@ pip install salt-lsp
 require'lspconfig'.salt_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "salt_lsp_server" }
-    filetypes = { "sls" }
-    root_dir = root_pattern('.git')
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "salt_lsp_server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "sls" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern('.git')
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## scry
@@ -4006,16 +4742,24 @@ Crystal language server.
 require'lspconfig'.scry.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "scry" }
-    filetypes = { "crystal" }
-    root_dir = root_pattern('shard.yml', '.git') or dirname
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "scry" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "crystal" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern('shard.yml', '.git') or dirname
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## serve_d
@@ -4032,15 +4776,20 @@ require'lspconfig'.scry.setup{}
 require'lspconfig'.serve_d.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "serve-d" }
-    filetypes = { "d" }
-    root_dir = util.root_pattern("dub.json", "dub.sdl", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "serve-d" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "d" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.root_pattern("dub.json", "dub.sdl", ".git")
+  ```
 
 
 ## sixtyfps
@@ -4070,15 +4819,20 @@ or by installing a filetype plugin such as https://github.com/RustemB/sixtyfps-v
 require'lspconfig'.sixtyfps.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "sixtyfps-lsp" }
-    filetypes = { "sixtyfps" }
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "sixtyfps-lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "sixtyfps" }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## slint_lsp
@@ -4106,15 +4860,20 @@ vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
 require'lspconfig'.slint_lsp.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "slint-lsp" }
-    filetypes = { "slint" }
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "slint-lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "slint" }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## solang
@@ -4138,15 +4897,20 @@ There is currently no support for completion, goto definition, references, or ot
 require'lspconfig'.solang.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "solang", "--language-server", "--target", "ewasm" }
-    filetypes = { "solidity" }
-    root_dir = util.find_git_ancestor
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "solang", "--language-server", "--target", "ewasm" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "solidity" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
 
 
 ## solargraph
@@ -4168,23 +4932,34 @@ gem install --user-install solargraph
 require'lspconfig'.solargraph.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "solargraph", "stdio" }
-    filetypes = { "ruby" }
-    init_options = {
-      formatting = true
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "solargraph", "stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "ruby" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    formatting = true
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("Gemfile", ".git")
+  ```
+  - `settings` : 
+  ```lua
+  {
+    solargraph = {
+      diagnostics = true
     }
-    root_dir = root_pattern("Gemfile", ".git")
-    settings = {
-      solargraph = {
-        diagnostics = true
-      }
-    }
-```
+  }
+  ```
 
 
 ## solc
@@ -4200,15 +4975,20 @@ solc is the native language server for the Solidity language.
 require'lspconfig'.solc.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "solc", "--lsp" }
-    filetypes = { "solidity" }
-    root_dir = root_pattern(".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "solc", "--lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "solidity" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".git")
+  ```
 
 
 ## solidity_ls
@@ -4224,15 +5004,20 @@ solidity-language-server is a language server for the solidity language ported f
 require'lspconfig'.solidity_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "solidity-language-server", "--stdio" }
-    filetypes = { "solidity" }
-    root_dir = root_pattern(".git", "package.json")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "solidity-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "solidity" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".git", "package.json")
+  ```
 
 
 ## sorbet
@@ -4255,15 +5040,20 @@ gem install sorbet
 require'lspconfig'.sorbet.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "srb", "tc", "--lsp" }
-    filetypes = { "ruby" }
-    root_dir = root_pattern("Gemfile", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "srb", "tc", "--lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "ruby" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("Gemfile", ".git")
+  ```
 
 
 ## sourcekit
@@ -4279,15 +5069,20 @@ Language server for Swift and C/C++/Objective-C.
 require'lspconfig'.sourcekit.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "sourcekit-lsp" }
-    filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" }
-    root_dir = root_pattern("Package.swift", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "sourcekit-lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "swift", "c", "cpp", "objective-c", "objective-cpp" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("Package.swift", ".git")
+  ```
 
 
 ## sourcery
@@ -4319,22 +5114,31 @@ init_options = {
 require'lspconfig'.sourcery.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "sourcery", "lsp" }
-    filetypes = { "python" }
-    init_options = {
-      editor_version = "vim",
-      extension_version = "vim.lsp"
-    }
-    root_dir = function(fname)
-          return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-        end,
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "sourcery", "lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "python" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    editor_version = "vim",
+    extension_version = "vim.lsp"
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## spectral
@@ -4355,23 +5159,32 @@ See [vscode-spectral](https://github.com/stoplightio/vscode-spectral#extension-s
 require'lspconfig'.spectral.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "spectral-language-server", "--stdio" }
-    filetypes = { "yaml", "json", "yml" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-    settings = {
-      enable = true,
-      run = "onType",
-      validateLanguages = { "yaml", "json", "yml" }
-    }
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "spectral-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "yaml", "json", "yml" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `settings` : 
+  ```lua
+  {
+    enable = true,
+    run = "onType",
+    validateLanguages = { "yaml", "json", "yml" }
+  }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## sqlls
@@ -4388,18 +5201,24 @@ This LSP can be installed via  `npm`. Find further instructions on manual instal
 require'lspconfig'.sqlls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "sql-language-server", "up", "--method", "stdio" }
-    filetypes = { "sql", "mysql" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-    settings = {}
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "sql-language-server", "up", "--method", "stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "sql", "mysql" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `settings` : 
+  ```lua
+  {}
+  ```
 
 
 ## sqls
@@ -4422,19 +5241,28 @@ Sqls can be installed via `go get github.com/lighttiger2505/sqls`. Instructions 
 require'lspconfig'.sqls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "sqls" }
-    filetypes = { "sql", "mysql" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-    settings = {}
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "sqls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "sql", "mysql" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `settings` : 
+  ```lua
+  {}
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## stylelint_lsp
@@ -4466,16 +5294,24 @@ require'lspconfig'.stylelint_lsp.setup{
 require'lspconfig'.stylelint_lsp.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "stylelint-lsp", "--stdio" }
-    filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss", "javascript", "javascriptreact", "typescript", "typescriptreact" }
-    root_dir =  root_pattern('.stylelintrc', 'package.json') 
-    settings = {}
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "stylelint-lsp", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "css", "less", "scss", "sugarss", "vue", "wxss", "javascript", "javascriptreact", "typescript", "typescriptreact" }
+  ```
+  - `root_dir` : 
+  ```lua
+   root_pattern('.stylelintrc', 'package.json') 
+  ```
+  - `settings` : 
+  ```lua
+  {}
+  ```
 
 
 ## sumneko_lua
@@ -4524,24 +5360,38 @@ require'lspconfig'.sumneko_lua.setup {
 require'lspconfig'.sumneko_lua.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "lua-language-server" }
-    filetypes = { "lua" }
-    log_level = 2
-    root_dir = root_pattern(".git") or bufdir
-    settings = {
-      Lua = {
-        telemetry = {
-          enable = false
-        }
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "lua-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "lua" }
+  ```
+  - `log_level` : 
+  ```lua
+  2
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".git") or bufdir
+  ```
+  - `settings` : 
+  ```lua
+  {
+    Lua = {
+      telemetry = {
+        enable = false
       }
     }
-    single_file_support = true
-```
+  }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## svelte
@@ -4560,15 +5410,20 @@ npm install -g svelte-language-server
 require'lspconfig'.svelte.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "svelteserver", "--stdio" }
-    filetypes = { "svelte" }
-    root_dir = root_pattern("package.json", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "svelteserver", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "svelte" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("package.json", ".git")
+  ```
 
 
 ## svls
@@ -4589,15 +5444,20 @@ Language server for verilog and SystemVerilog
 require'lspconfig'.svls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "svls" }
-    filetypes = { "verilog", "systemverilog" }
-    root_dir = util.find_git_ancestor
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "svls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "verilog", "systemverilog" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
 
 
 ## tailwindcss
@@ -4616,48 +5476,51 @@ npm install -g @tailwindcss/language-server
 require'lspconfig'.tailwindcss.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "tailwindcss-language-server", "--stdio" }
-    filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "django-html", "htmldjango", "edge", "eelixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte" }
-    init_options = {
-      userLanguages = {
-        eelixir = "html-eex",
-        eruby = "erb"
-      }
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "tailwindcss-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "aspnetcorerazor", "astro", "astro-markdown", "blade", "django-html", "htmldjango", "edge", "eelixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    userLanguages = {
+      eelixir = "html-eex",
+      eruby = "erb"
     }
-    on_new_config = function(new_config)
-          if not new_config.settings then
-            new_config.settings = {}
-          end
-          if not new_config.settings.editor then
-            new_config.settings.editor = {}
-          end
-          if not new_config.settings.editor.tabSize then
-            -- set tab size for hover
-            new_config.settings.editor.tabSize = vim.lsp.util.get_effective_tabstop()
-          end
-        end,
-    root_dir = root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', 'node_modules', '.git')
-    settings = {
-      tailwindCSS = {
-        classAttributes = { "class", "className", "classList", "ngClass" },
-        lint = {
-          cssConflict = "warning",
-          invalidApply = "error",
-          invalidConfigPath = "error",
-          invalidScreen = "error",
-          invalidTailwindDirective = "error",
-          invalidVariant = "error",
-          recommendedVariantOrder = "warning"
-        },
-        validate = true
-      }
+  }
+  ```
+  - `on_new_config` : 
+  ```lua
+  see source file
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', 'node_modules', '.git')
+  ```
+  - `settings` : 
+  ```lua
+  {
+    tailwindCSS = {
+      classAttributes = { "class", "className", "classList", "ngClass" },
+      lint = {
+        cssConflict = "warning",
+        invalidApply = "error",
+        invalidConfigPath = "error",
+        invalidScreen = "error",
+        invalidTailwindDirective = "error",
+        invalidVariant = "error",
+        recommendedVariantOrder = "warning"
+      },
+      validate = true
     }
-```
+  }
+  ```
 
 
 ## taplo
@@ -4678,16 +5541,24 @@ cargo install --locked taplo-lsp
 require'lspconfig'.taplo.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "taplo-lsp", "run" }
-    filetypes = { "toml" }
-    root_dir = root_pattern("*.toml", ".git")
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "taplo-lsp", "run" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "toml" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("*.toml", ".git")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## teal_ls
@@ -4706,15 +5577,20 @@ luarocks install --dev teal-language-server
 require'lspconfig'.teal_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "teal-language-server" }
-    filetypes = { "teal" }
-    root_dir = root_pattern("tlconfig.lua", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "teal-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "teal" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("tlconfig.lua", ".git")
+  ```
 
 
 ## terraform_lsp
@@ -4754,15 +5630,20 @@ choice:
 require'lspconfig'.terraform_lsp.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "terraform-lsp" }
-    filetypes = { "terraform", "hcl" }
-    root_dir = root_pattern(".terraform", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "terraform-lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "terraform", "hcl" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".terraform", ".git")
+  ```
 
 
 ## terraformls
@@ -4801,15 +5682,20 @@ choice:
 require'lspconfig'.terraformls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "terraform-ls", "serve" }
-    filetypes = { "terraform" }
-    root_dir = root_pattern(".terraform", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "terraform-ls", "serve" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "terraform" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".terraform", ".git")
+  ```
 
 
 ## texlab
@@ -4826,46 +5712,55 @@ See https://github.com/latex-lsp/texlab/blob/master/docs/options.md for configur
 ```lua
 require'lspconfig'.texlab.setup{}
 ```
+**Commands:**
+- TexlabBuild: Build the current buffer
+- TexlabForward: Forward search from current position
 
-**Commands and default values:**
-```lua
-  Commands:
-  - TexlabBuild: Build the current buffer
-  - TexlabForward: Forward search from current position
-  
-  Default Values:
-    cmd = { "texlab" }
-    filetypes = { "tex", "bib" }
-    root_dir = function(fname)
-          return util.root_pattern '.latexmkrc'(fname) or util.find_git_ancestor(fname)
-        end,
-    settings = {
-      texlab = {
-        auxDirectory = ".",
-        bibtexFormatter = "texlab",
-        build = {
-          args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-          executable = "latexmk",
-          forwardSearchAfter = false,
-          onSave = false
-        },
-        chktex = {
-          onEdit = false,
-          onOpenAndSave = false
-        },
-        diagnosticsDelay = 300,
-        formatterLineLength = 80,
-        forwardSearch = {
-          args = {}
-        },
-        latexFormatter = "latexindent",
-        latexindent = {
-          modifyLineBreaks = false
-        }
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "texlab" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "tex", "bib" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `settings` : 
+  ```lua
+  {
+    texlab = {
+      auxDirectory = ".",
+      bibtexFormatter = "texlab",
+      build = {
+        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+        executable = "latexmk",
+        forwardSearchAfter = false,
+        onSave = false
+      },
+      chktex = {
+        onEdit = false,
+        onOpenAndSave = false
+      },
+      diagnosticsDelay = 300,
+      formatterLineLength = 80,
+      forwardSearch = {
+        args = {}
+      },
+      latexFormatter = "latexindent",
+      latexindent = {
+        modifyLineBreaks = false
       }
     }
-    single_file_support = true
-```
+  }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## tflint
@@ -4882,15 +5777,20 @@ Installation instructions can be found in https://github.com/terraform-linters/t
 require'lspconfig'.tflint.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "tflint", "--langserver" }
-    filetypes = { "terraform" }
-    root_dir = root_pattern(".terraform", ".git", ".tflint.hcl")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "tflint", "--langserver" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "terraform" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".terraform", ".git", ".tflint.hcl")
+  ```
 
 
 ## theme_check
@@ -4918,18 +5818,24 @@ require lspconfig.theme_check.setup {
 require'lspconfig'.theme_check.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "theme-check-language-server", "--stdio" }
-    filetypes = { "liquid" }
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-    settings = {}
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "theme-check-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "liquid" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `settings` : 
+  ```lua
+  {}
+  ```
 
 
 ## tsserver
@@ -4968,18 +5874,26 @@ Here's an example that disables type checking in JavaScript files.
 require'lspconfig'.tsserver.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "typescript-language-server", "--stdio" }
-    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
-    init_options = {
-      hostInfo = "neovim"
-    }
-    root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "typescript-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    hostInfo = "neovim"
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+  ```
 
 
 ## typeprof
@@ -4995,15 +5909,20 @@ https://github.com/ruby/typeprof
 require'lspconfig'.typeprof.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "typeprof", "--lsp", "--stdio" }
-    filetypes = { "ruby", "eruby" }
-    root_dir = root_pattern("Gemfile", ".git")
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "typeprof", "--lsp", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "ruby", "eruby" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("Gemfile", ".git")
+  ```
 
 
 ## vala_ls
@@ -5016,16 +5935,24 @@ https://github.com/Prince781/vala-language-server
 require'lspconfig'.vala_ls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "vala-language-server" }
-    filetypes = { "vala", "genie" }
-    root_dir = root_pattern("meson.build", ".git")
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "vala-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "vala", "genie" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("meson.build", ".git")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## vdmj
@@ -5057,25 +5984,33 @@ by neovim.
 require'lspconfig'.vdmj.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = Generated from the options given
-    filetypes = { "vdmsl", "vdmpp", "vdmrt" }
-    options = {
-      annotation_paths = {},
-      debugger_port = -1,
-      high_precision = false,
-      java = "$JAVA_HOME/bin/java",
-      java_opts = { "-Xmx3000m", "-Xss1m" },
-      logfile = "path.join(vim.fn.stdpath 'cache', 'vdm-lsp.log')",
-      mavenrepo = "$HOME/.m2/repository/com/fujitsu",
-      version = "The latest version installed in `mavenrepo`"
-    }
-    root_dir = util.find_git_ancestor(fname) or find_vscode_ancestor(fname)
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  Generated from the options given
+  ```
+  - `filetypes` : 
+  ```lua
+  { "vdmsl", "vdmpp", "vdmrt" }
+  ```
+  - `options` : 
+  ```lua
+  {
+    annotation_paths = {},
+    debugger_port = -1,
+    high_precision = false,
+    java = "$JAVA_HOME/bin/java",
+    java_opts = { "-Xmx3000m", "-Xss1m" },
+    logfile = "path.join(vim.fn.stdpath 'cache', 'vdm-lsp.log')",
+    mavenrepo = "$HOME/.m2/repository/com/fujitsu",
+    version = "The latest version installed in `mavenrepo`"
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor(fname) or find_vscode_ancestor(fname)
+  ```
 
 
 ## verible
@@ -5096,21 +6031,20 @@ See https://github.com/chipsalliance/verible/tree/master/verilog/tools/ls/README
 require'lspconfig'.verible.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "verible-verilog-ls" }
-    filetypes = { "systemverilog", "verilog" }
-    root_dir = function(path)
-        -- Support git directories and git files (worktrees)
-        if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-          return path
-        end
-      end)
-    end
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "verible-verilog-ls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "systemverilog", "verilog" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## vimls
@@ -5129,35 +6063,41 @@ npm install -g vim-language-server
 require'lspconfig'.vimls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "vim-language-server", "--stdio" }
-    filetypes = { "vim" }
-    init_options = {
-      diagnostic = {
-        enable = true
-      },
-      indexes = {
-        count = 3,
-        gap = 100,
-        projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
-        runtimepath = true
-      },
-      iskeyword = "@,48-57,_,192-255,-#",
-      runtimepath = "",
-      suggest = {
-        fromRuntimepath = true,
-        fromVimruntime = true
-      },
-      vimruntime = ""
-    }
-    root_dir = function(fname)
-          return util.find_git_ancestor(fname) or vim.fn.getcwd()
-        end,
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "vim-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "vim" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    diagnostic = {
+      enable = true
+    },
+    indexes = {
+      count = 3,
+      gap = 100,
+      projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
+      runtimepath = true
+    },
+    iskeyword = "@,48-57,_,192-255,-#",
+    runtimepath = "",
+    suggest = {
+      fromRuntimepath = true,
+      fromVimruntime = true
+    },
+    vimruntime = ""
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## vls
@@ -5187,26 +6127,28 @@ require'lspconfig'.vls.setup {
 require'lspconfig'.vls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    filetypes = { "vlang" }
-    root_dir = root_pattern("v.mod", ".git")
-```
+
+**Default values:**
+  - `filetypes` : 
+  ```lua
+  { "vlang" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("v.mod", ".git")
+  ```
 
 
 ## volar
 
-https://github.com/johnsoncodehk/volar/tree/master/packages/server
+https://github.com/johnsoncodehk/volar/tree/master/packages/vue-language-server
 
 Volar language server for Vue
 
 Volar can be installed via npm:
 
 ```sh
-npm install -g @volar/server
+npm install -g @volar/vue-language-server
 ```
 
 Volar by default supports Vue 3 projects. Vue 2 projects need [additional configuration](https://github.com/johnsoncodehk/volar/blob/master/extensions/vscode-vue-language-features/README.md?plain=1#L28-L63).
@@ -5256,11 +6198,9 @@ local function get_typescript_server_path(root_dir)
 end
 
 require'lspconfig'.volar.setup{
-  config = {
-    on_new_config = function(new_config, new_root_dir)
-      new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
-    end,
-  }
+  on_new_config = function(new_config, new_root_dir)
+    new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
+  end,
 }
 ```
     
@@ -5271,62 +6211,64 @@ require'lspconfig'.volar.setup{
 require'lspconfig'.volar.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "volar-server", "--stdio" }
-    filetypes = { "vue" }
-    init_options = {
-      documentFeatures = {
-        documentColor = false,
-        documentFormatting = {
-          defaultPrintWidth = 100
-        },
-        documentSymbol = true,
-        foldingRange = true,
-        linkedEditingRange = true,
-        selectionRange = true
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "vue-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "vue" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    documentFeatures = {
+      documentColor = false,
+      documentFormatting = {
+        defaultPrintWidth = 100
       },
-      languageFeatures = {
-        callHierarchy = true,
-        codeAction = true,
-        codeLens = true,
-        completion = {
-          defaultAttrNameCase = "kebabCase",
-          defaultTagNameCase = "both"
-        },
-        definition = true,
-        diagnostics = true,
-        documentHighlight = true,
-        documentLink = true,
-        hover = true,
-        references = true,
-        rename = true,
-        renameFileRefactoring = true,
-        schemaRequestService = true,
-        semanticTokens = false,
-        signatureHelp = true,
-        typeDefinition = true
+      documentSymbol = true,
+      foldingRange = true,
+      linkedEditingRange = true,
+      selectionRange = true
+    },
+    languageFeatures = {
+      callHierarchy = true,
+      codeAction = true,
+      codeLens = true,
+      completion = {
+        defaultAttrNameCase = "kebabCase",
+        defaultTagNameCase = "both"
       },
-      typescript = {
-        serverPath = ""
-      }
+      definition = true,
+      diagnostics = true,
+      documentHighlight = true,
+      documentLink = true,
+      hover = true,
+      implementation = true,
+      references = true,
+      rename = true,
+      renameFileRefactoring = true,
+      schemaRequestService = true,
+      semanticTokens = false,
+      signatureHelp = true,
+      typeDefinition = true
+    },
+    typescript = {
+      serverPath = ""
     }
-    on_new_config = function(new_config, new_root_dir)
-          if
-            new_config.init_options
-            and new_config.init_options.typescript
-            and new_config.init_options.typescript.serverPath == ''
-          then
-            new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
-          end
-        end,
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-      end
-```
+  }
+  ```
+  - `on_new_config` : 
+  ```lua
+  see source file
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
 
 
 ## vuels
@@ -5346,53 +6288,61 @@ npm install -g vls
 require'lspconfig'.vuels.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "vls" }
-    filetypes = { "vue" }
-    init_options = {
-      config = {
-        css = {},
-        emmet = {},
-        html = {
-          suggest = {}
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "vls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "vue" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    config = {
+      css = {},
+      emmet = {},
+      html = {
+        suggest = {}
+      },
+      javascript = {
+        format = {}
+      },
+      stylusSupremacy = {},
+      typescript = {
+        format = {}
+      },
+      vetur = {
+        completion = {
+          autoImport = false,
+          tagCasing = "kebab",
+          useScaffoldSnippets = false
         },
-        javascript = {
-          format = {}
-        },
-        stylusSupremacy = {},
-        typescript = {
-          format = {}
-        },
-        vetur = {
-          completion = {
-            autoImport = false,
-            tagCasing = "kebab",
-            useScaffoldSnippets = false
+        format = {
+          defaultFormatter = {
+            js = "none",
+            ts = "none"
           },
-          format = {
-            defaultFormatter = {
-              js = "none",
-              ts = "none"
-            },
-            defaultFormatterOptions = {},
-            scriptInitialIndent = false,
-            styleInitialIndent = false
-          },
-          useWorkspaceDependencies = false,
-          validation = {
-            script = true,
-            style = true,
-            template = true
-          }
+          defaultFormatterOptions = {},
+          scriptInitialIndent = false,
+          styleInitialIndent = false
+        },
+        useWorkspaceDependencies = false,
+        validation = {
+          script = true,
+          style = true,
+          template = true
         }
       }
     }
-    root_dir = root_pattern("package.json", "vue.config.js")
-```
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("package.json", "vue.config.js")
+  ```
 
 
 ## yamlls
@@ -5464,23 +6414,34 @@ require('lspconfig').yamlls.setup {
 require'lspconfig'.yamlls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "yaml-language-server", "--stdio" }
-    filetypes = { "yaml", "yaml.docker-compose" }
-    root_dir = util.find_git_ancestor
-    settings = {
-      redhat = {
-        telemetry = {
-          enabled = false
-        }
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "yaml-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "yaml", "yaml.docker-compose" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
+  - `settings` : 
+  ```lua
+  {
+    redhat = {
+      telemetry = {
+        enabled = false
       }
     }
-    single_file_support = true
-```
+  }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## zeta_note
@@ -5506,14 +6467,16 @@ require'lspconfig'.zeta_note.setup{
 require'lspconfig'.zeta_note.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    filetypes = { "markdown" }
-    root_dir = root_pattern(".zeta.toml")
-```
+
+**Default values:**
+  - `filetypes` : 
+  ```lua
+  { "markdown" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".zeta.toml")
+  ```
 
 
 ## zk
@@ -5528,25 +6491,30 @@ A plain text note-taking assistant
 ```lua
 require'lspconfig'.zk.setup{}
 ```
+**Commands:**
+- ZkIndex: Index
+- ZkNew: ZkNew
 
-**Commands and default values:**
-```lua
-  Commands:
-  - ZkIndex: Index
-  - ZkNew: ZkNew
-  
-  Default Values:
-    cmd = { "zk", "lsp" }
-    filetypes = { "markdown" }
-    root_dir = root_pattern(".zk")
-```
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "zk", "lsp" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "markdown" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".zk")
+  ```
 
 
 ## zls
 
-           https://github.com/zigtools/zls
+https://github.com/zigtools/zls
 
-           `Zig LSP implementation + Zig Language Server`.
+Zig LSP implementation + Zig Language Server
         
 
 
@@ -5555,16 +6523,24 @@ require'lspconfig'.zk.setup{}
 require'lspconfig'.zls.setup{}
 ```
 
-**Commands and default values:**
-```lua
-  Commands:
-  
-  Default Values:
-    cmd = { "zls" }
-    filetypes = { "zig", "zir" }
-    root_dir = util.root_pattern("zls.json", ".git") or current_file_dirname
-    single_file_support = true
-```
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "zls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "zig", "zir" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.root_pattern("zls.json", ".git") or current_file_dirname
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 

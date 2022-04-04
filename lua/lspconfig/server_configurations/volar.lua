@@ -12,6 +12,7 @@ local volar_init_options = {
     serverPath = '',
   },
   languageFeatures = {
+    implementation = true,
     -- not supported - https://github.com/neovim/neovim/pull/14122
     semanticTokens = false,
     references = true,
@@ -46,7 +47,7 @@ local volar_init_options = {
   },
 }
 
-local bin_name = 'volar-server'
+local bin_name = 'vue-language-server'
 local cmd = { bin_name, '--stdio' }
 
 if vim.fn.has 'win32' == 1 then
@@ -70,14 +71,14 @@ return {
   },
   docs = {
     description = [[
-https://github.com/johnsoncodehk/volar/tree/master/packages/server
+https://github.com/johnsoncodehk/volar/tree/master/packages/vue-language-server
 
 Volar language server for Vue
 
 Volar can be installed via npm:
 
 ```sh
-npm install -g @volar/server
+npm install -g @volar/vue-language-server
 ```
 
 Volar by default supports Vue 3 projects. Vue 2 projects need [additional configuration](https://github.com/johnsoncodehk/volar/blob/master/extensions/vscode-vue-language-features/README.md?plain=1#L28-L63).
@@ -127,11 +128,9 @@ local function get_typescript_server_path(root_dir)
 end
 
 require'lspconfig'.volar.setup{
-  config = {
-    on_new_config = function(new_config, new_root_dir)
-      new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
-    end,
-  }
+  on_new_config = function(new_config, new_root_dir)
+    new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
+  end,
 }
 ```
     ]],
