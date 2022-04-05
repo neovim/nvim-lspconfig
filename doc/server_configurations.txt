@@ -5529,9 +5529,9 @@ https://taplo.tamasfe.dev/lsp/
 
 Language server for Taplo, a TOML toolkit.
 
-`taplo-lsp` can be installed via `cargo`:
+`taplo-cli` can be installed via `cargo`:
 ```sh
-cargo install --locked taplo-lsp
+cargo install --locked taplo-cli
 ```
     
 
@@ -5545,7 +5545,7 @@ require'lspconfig'.taplo.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "taplo-lsp", "run" }
+  { "taplo", "lsp", "stdio" }
   ```
   - `filetypes` : 
   ```lua
