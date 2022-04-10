@@ -5376,7 +5376,7 @@ require'lspconfig'.sumneko_lua.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".git") or bufdir
+  root_pattern(".luarc.json", ".luacheckrc", ".stylua.toml", "selene.toml", ".git")
   ```
   - `settings` : 
   ```lua
