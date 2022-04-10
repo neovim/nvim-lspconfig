@@ -786,7 +786,7 @@ require'lspconfig'.cmake.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".git", "compile_commands.json", "build") or dirname
+  root_pattern(".git", "compile_commands.json", "build")
   ```
   - `single_file_support` : 
   ```lua
@@ -864,7 +864,7 @@ require'lspconfig'.crystalline.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern('shard.yml', '.git') or dirname
+  root_pattern('shard.yml', '.git')
   ```
   - `single_file_support` : 
   ```lua
@@ -1179,7 +1179,7 @@ require'lspconfig'.dhall_lsp_server.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".git") or dirname
+  root_pattern(".git")
   ```
   - `single_file_support` : 
   ```lua
@@ -2979,7 +2979,7 @@ require'lspconfig'.lean3ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
+  root_pattern("leanpkg.toml") or root_pattern(".git")
   ```
   - `single_file_support` : 
   ```lua
@@ -4653,7 +4653,7 @@ require'lspconfig'.rome.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern('package.json', 'node_modules', '.git') or dirname
+  root_pattern('package.json', 'node_modules', '.git')
   ```
   - `single_file_support` : 
   ```lua
@@ -4761,7 +4761,7 @@ require'lspconfig'.scry.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern('shard.yml', '.git') or dirname
+  root_pattern('shard.yml', '.git')
   ```
   - `single_file_support` : 
   ```lua
@@ -6542,7 +6542,7 @@ require'lspconfig'.zls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  util.root_pattern("zls.json", ".git") or current_file_dirname
+  util.root_pattern("zls.json", ".git")
   ```
   - `single_file_support` : 
   ```lua
