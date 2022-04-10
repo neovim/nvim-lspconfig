@@ -4,35 +4,23 @@ local handlers = require 'vim.lsp.handlers'
 local sysname = vim.loop.os_uname().sysname
 local env = {
   HOME = vim.loop.os_homedir(),
-  JAVA_HOME = os.getenv 'JAVA_HOME',
-  JDTLS_HOME = os.getenv 'JDTLS_HOME',
-  WORKSPACE = os.getenv 'WORKSPACE',
+  XDG_CACHE_HOME = os.getenv 'XDG_CACHE_HOME',
 }
 
-local function get_java_executable()
-  local executable = env.JAVA_HOME and util.path.join(env.JAVA_HOME, 'bin', 'java') or 'java'
-
-  return sysname:match 'Windows' and executable .. '.exe' or executable
+local function get_cache_dir()
+  return env.XDG_CACHE_HOME and env.XDG_CACHE_HOME or util.path.join(env.HOME, '.cache')
 end
 
-local function get_workspace_dir()
-  return env.WORKSPACE and env.WORKSPACE or util.path.join(env.HOME, 'workspace')
+local function get_jdtls_cache_dir()
+  return util.path.join(get_cache_dir(), 'jdtls')
 end
 
-local function get_jdtls_jar()
-  return vim.fn.expand '$JDTLS_HOME/plugins/org.eclipse.equinox.launcher_*.jar'
+local function get_jdtls_config_dir()
+  return util.path.join(get_jdtls_cache_dir(), 'config')
 end
 
-local function get_jdtls_config()
-  if sysname:match 'Linux' then
-    return util.path.join(env.JDTLS_HOME, 'config_linux')
-  elseif sysname:match 'Darwin' then
-    return util.path.join(env.JDTLS_HOME, 'config_mac')
-  elseif sysname:match 'Windows' then
-    return util.path.join(env.JDTLS_HOME, 'config_win')
-  else
-    return util.path.join(env.JDTLS_HOME, 'config_linux')
-  end
+local function get_jdtls_workspace_dir()
+  return util.path.join(get_jdtls_cache_dir(), 'workspace')
 end
 
 -- TextDocument version is reported as 0, override with nil so that
@@ -94,25 +82,11 @@ local root_files = {
 return {
   default_config = {
     cmd = {
-      get_java_executable(),
-      '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-      '-Dosgi.bundles.defaultStartLevel=4',
-      '-Declipse.product=org.eclipse.jdt.ls.core.product',
-      '-Dlog.protocol=true',
-      '-Dlog.level=ALL',
-      '-Xms1g',
-      '-Xmx2G',
-      '--add-modules=ALL-SYSTEM',
-      '--add-opens',
-      'java.base/java.util=ALL-UNNAMED',
-      '--add-opens',
-      'java.base/java.lang=ALL-UNNAMED',
-      '-jar',
-      get_jdtls_jar(),
+      'jdtls',
       '-configuration',
-      get_jdtls_config(),
+      get_jdtls_config_dir(),
       '-data',
-      get_workspace_dir(),
+      get_jdtls_workspace_dir(),
     },
     filetypes = { 'java' },
     root_dir = function(fname)
@@ -125,7 +99,7 @@ return {
     end,
     single_file_support = true,
     init_options = {
-      workspace = get_workspace_dir(),
+      workspace = get_jdtls_workspace_dir(),
       jvm_args = {},
       os_config = nil,
     },
@@ -151,19 +125,6 @@ you can keep reading here.
 For manual installation you can download precompiled binaries from the
 [official downloads site](http://download.eclipse.org/jdtls/snapshots/?d)
 
-Due to the nature of java, settings cannot be inferred. Please set the following
-environmental variables to match your installation. If you need per-project configuration
-[direnv](https://github.com/direnv/direnv) is highly recommended.
-
-```bash
-# Mandatory:
-# .bashrc
-export JDTLS_HOME=/path/to/jdtls_root # Directory with the plugin and configs directories
-
-# Optional:
-export JAVA_HOME=/path/to/java_home # In case you don't have java in path or want to use a version in particular
-export WORKSPACE=/path/to/workspace # Defaults to $HOME/workspace
-```
 ```lua
   -- init.lua
   require'lspconfig'.jdtls.setup{}
