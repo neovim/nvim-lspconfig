@@ -1,10 +1,18 @@
 local util = require 'lspconfig.util'
 
+local root_files = {
+  '.luarc.json',
+  '.luacheckrc',
+  '.stylua.toml',
+  'selene.toml',
+}
 return {
   default_config = {
     cmd = { 'lua-language-server' },
     filetypes = { 'lua' },
-    root_dir = util.find_git_ancestor,
+    root_dir = function(fname)
+      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+    end,
     single_file_support = true,
     log_level = vim.lsp.protocol.MessageType.Warning,
     settings = { Lua = { telemetry = { enable = false } } },
@@ -49,7 +57,7 @@ require'lspconfig'.sumneko_lua.setup {
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern(".git") or bufdir]],
+      root_dir = [[root_pattern(".luarc.json", ".luacheckrc", ".stylua.toml", "selene.toml", ".git")]],
     },
   },
 }
