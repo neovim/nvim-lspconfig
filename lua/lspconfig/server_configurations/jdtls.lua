@@ -4,6 +4,7 @@ local handlers = require 'vim.lsp.handlers'
 local env = {
   HOME = vim.loop.os_homedir(),
   XDG_CACHE_HOME = os.getenv 'XDG_CACHE_HOME',
+  JDTLS_JVM_ARGS = os.getenv 'JDTLS_JVM_ARGS',
 }
 
 local function get_cache_dir()
@@ -20,6 +21,15 @@ end
 
 local function get_jdtls_workspace_dir()
   return util.path.join(get_jdtls_cache_dir(), 'workspace')
+end
+
+local function get_jdtls_jvm_args()
+  local args = {}
+  for a in string.gmatch((env.JDTLS_JVM_ARGS or ''), '%S+') do
+    local arg = string.format('--jvm-arg=%s', a)
+    table.insert(args, arg)
+  end
+  return unpack(args)
 end
 
 -- TextDocument version is reported as 0, override with nil so that
@@ -86,6 +96,7 @@ return {
       get_jdtls_config_dir(),
       '-data',
       get_jdtls_workspace_dir(),
+      get_jdtls_jvm_args(),
     },
     filetypes = { 'java' },
     root_dir = function(fname)
@@ -128,6 +139,14 @@ and ensure that the `PATH` variable contains the `bin` directory of the extracte
 ```lua
   -- init.lua
   require'lspconfig'.jdtls.setup{}
+```
+
+You can also pass extra custom jvm arguments with the JDTLS_JVM_ARGS environment variable as a space separated list of arguments,
+that will be converted to multiple --jvm-arg=<param> args when passed to the jdtls script. This will allow for example tweaking
+the jvm arguments or integration with external tools like lombok:
+
+```sh
+export JDTLS_JVM_ARGS="-javaagent:$HOME/.local/share/java/lombok.jar"
 ```
 
 For automatic installation you can use the following unofficial installers/launchers under your own risk:
