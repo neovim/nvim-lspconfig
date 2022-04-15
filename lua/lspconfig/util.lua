@@ -3,7 +3,6 @@ local validate = vim.validate
 local api = vim.api
 local lsp = vim.lsp
 local uv = vim.loop
-local fn = vim.fn
 
 local M = {}
 
@@ -61,39 +60,39 @@ function M.add_hook_after(func, new_fn)
   end
 end
 
-function M.create_module_commands(module_name, commands)
-  for command_name, def in pairs(commands) do
-    local parts = { 'command!' }
-    -- Insert attributes.
-    for k, v in pairs(def) do
-      if type(k) == 'string' and type(v) == 'boolean' and v then
-        table.insert(parts, '-' .. k)
-      elseif type(k) == 'number' and type(v) == 'string' and v:match '^%-' then
-        table.insert(parts, v)
+-- Maps lspconfig-style command options to nvim_create_user_command (i.e. |command-attributes|) option names.
+local opts_aliases = {
+  ['description'] = 'desc',
+}
+
+---@param command_definition table<string | integer, any>
+function M._parse_user_command_options(command_definition)
+  ---@type table<string, string | boolean | number>
+  local opts = {}
+  for k, v in pairs(command_definition) do
+    if type(k) == 'string' then
+      local attribute = k.gsub(k, '^%-+', '')
+      opts[opts_aliases[attribute] or attribute] = v
+    elseif type(k) == 'number' and type(v) == 'string' and v:match '^%-' then
+      -- Splits strings like "-nargs=* -complete=customlist,v:lua.something" into { "-nargs=*", "-complete=customlist,v:lua.something" }
+      for _, command_attribute in ipairs(vim.split(v, '%s')) do
+        -- Splits attribute into a key-value pair, like "-nargs=*" to { "-nargs", "*" }
+        local attribute, value = unpack(vim.split(command_attribute, '=', { plain = true }))
+        attribute = attribute.gsub(attribute, '^%-+', '')
+        opts[opts_aliases[attribute] or attribute] = value or true
       end
     end
-    table.insert(parts, command_name)
-    -- The command definition.
-    table.insert(
-      parts,
-      string.format("lua require'lspconfig'[%q].commands[%q][1](<f-args>)", module_name, command_name)
-    )
-    api.nvim_command(table.concat(parts, ' '))
   end
+  return opts
 end
 
-function M.has_bins(...)
-  for i = 1, select('#', ...) do
-    if 0 == fn.executable((select(i, ...))) then
-      return false
-    end
+function M.create_module_commands(module_name, commands)
+  for command_name, def in pairs(commands) do
+    local opts = M._parse_user_command_options(def)
+    api.nvim_create_user_command(command_name, function(info)
+      require('lspconfig')[module_name].commands[command_name][1](unpack(info.fargs))
+    end, opts)
   end
-  return true
-end
-
-M.script_path = function()
-  local str = debug.getinfo(2, 'S').source:sub(2)
-  return str:match '(.*[/\\])'
 end
 
 -- Some path utilities
@@ -409,17 +408,6 @@ function M.get_other_matching_providers(filetype)
   return other_matching_configs
 end
 
-function M.get_clients_from_cmd_args(arg)
-  local result = {}
-  for id in (arg or ''):gmatch '(%d+)' do
-    result[id] = vim.lsp.get_client_by_id(tonumber(id))
-  end
-  if vim.tbl_isempty(result) then
-    return M.get_managed_clients()
-  end
-  return vim.tbl_values(result)
-end
-
 function M.get_active_client_by_name(bufnr, servername)
   for _, client in pairs(vim.lsp.buf_get_clients(bufnr)) do
     if client.name == servername then
@@ -438,6 +426,17 @@ function M.get_managed_clients()
     end
   end
   return clients
+end
+
+function M.available_servers()
+  local servers = {}
+  local configs = require 'lspconfig.configs'
+  for server, config in pairs(configs) do
+    if config.manager ~= nil then
+      table.insert(servers, server)
+    end
+  end
+  return servers
 end
 
 -- For zipfile: or tarfile: virtual paths, returns the path to the archive.

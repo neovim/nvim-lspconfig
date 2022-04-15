@@ -32,7 +32,7 @@ describe('lspconfig', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
-            local not_exist_dir = vim.fn.getcwd().."/not/exsts"
+            local not_exist_dir = vim.fn.getcwd().."/not/exists"
             return lspconfig.util.path.exists(not_exist_dir) == false
           ]])
         end)
@@ -76,7 +76,7 @@ describe('lspconfig', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
-            local not_exist_dir = vim.fn.getcwd().."/not/exsts"
+            local not_exist_dir = vim.fn.getcwd().."/not/exists"
             return not lspconfig.util.path.is_dir(not_exist_dir)
           ]])
         end)
@@ -213,7 +213,43 @@ describe('lspconfig', function()
         ]])
       end)
     end)
+
+    describe('user commands', function()
+      it('should translate command definition to nvim_create_user_command options', function()
+        eq(
+          {
+            nargs = '*',
+            complete = 'custom,v:lua.some_global',
+          },
+          exec_lua [[
+            local util = require("lspconfig.util")
+            return util._parse_user_command_options({
+              function () end,
+              "-nargs=* -complete=custom,v:lua.some_global"
+            })
+          ]]
+        )
+
+        eq(
+          {
+            desc = 'My awesome description.',
+            nargs = '*',
+            complete = 'custom,v:lua.another_global',
+          },
+          exec_lua [[
+            local util = require("lspconfig.util")
+            return util._parse_user_command_options({
+              function () end,
+              ["-nargs"] = "*",
+              "-complete=custom,v:lua.another_global",
+              description = "My awesome description."
+            })
+          ]]
+        )
+      end)
+    end)
   end)
+
   describe('config', function()
     it('normalizes user, server, and base default configs', function()
       eq(
@@ -283,7 +319,7 @@ describe('lspconfig', function()
         local _ = lspconfig.sumneko_lua
         local _ = lspconfig.tsserver
         lspconfig.rust_analyzer.setup {}
-        return lspconfig.available_servers()
+        return require("lspconfig.util").available_servers()
       ]],
         { 'rust_analyzer' }
       )
