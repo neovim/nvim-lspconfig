@@ -56,12 +56,15 @@ return {
       ['rust-analyzer'] = {},
     },
   },
-  commands = {
-    CargoReload = {
-      function()
+  user_commands = {
+    {
+      name = 'CargoReload',
+      command = function()
         reload_workspace(0)
       end,
-      description = 'Reload current cargo workspace',
+      opts = {
+        desc = 'Reload current cargo workspace',
+      },
     },
   },
   docs = {

@@ -6,18 +6,22 @@ return {
     filetypes = { 'markdown' },
     root_dir = util.root_pattern '.zk',
   },
-  commands = {
-    ZkIndex = {
-      function()
+  user_commands = {
+    {
+      name = 'ZkIndex',
+      command = function()
         vim.lsp.buf.execute_command {
           command = 'zk.index',
           arguments = { vim.api.nvim_buf_get_name(0) },
         }
       end,
-      description = 'Index',
+      opts = {
+        desc = 'Index',
+      },
     },
-    ZkNew = {
-      function(...)
+    {
+      name = 'ZkNew',
+      command = function(...)
         vim.lsp.buf_request(0, 'workspace/executeCommand', {
           command = 'zk.new',
           arguments = {
@@ -31,8 +35,9 @@ return {
           vim.cmd('edit ' .. result.path)
         end)
       end,
-
-      description = 'ZkNew',
+      opts = {
+        desc = 'ZkNew',
+      },
     },
   },
   docs = {

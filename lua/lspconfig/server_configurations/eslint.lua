@@ -139,12 +139,15 @@ return {
       end,
     },
   },
-  commands = {
-    EslintFixAll = {
-      function()
+  user_commands = {
+    {
+      name = 'EslintFixAll',
+      command = function()
         fix_all { sync = true, bufnr = 0 }
       end,
-      description = 'Fix all eslint problems for this buffer',
+      opts = {
+        desc = 'Fix all eslint problems for this buffer',
+      },
     },
   },
   docs = {

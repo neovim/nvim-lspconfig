@@ -83,12 +83,15 @@ return {
       ['textDocument/references'] = denols_handler,
     },
   },
-  commands = {
-    DenolsCache = {
-      function()
+  user_commands = {
+    {
+      name = 'DenolsCache',
+      command = function()
         buf_cache(0)
       end,
-      description = 'Cache a module and all of its dependencies.',
+      opts = {
+        desc = 'Cache a module and all of its dependencies.',
+      },
     },
   },
   docs = {

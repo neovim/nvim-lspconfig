@@ -10,17 +10,17 @@ function configs.__newindex(t, config_name, config_def)
     default_config = { config_def.default_config, 't' },
     on_new_config = { config_def.on_new_config, 'f', true },
     on_attach = { config_def.on_attach, 'f', true },
-    commands = { config_def.commands, 't', true },
+    user_commands = { config_def.user_commands, 't', true },
   }
-  if config_def.commands then
-    for k, v in pairs(config_def.commands) do
+  if config_def.user_commands then
+    for _, v in pairs(config_def.user_commands) do
       validate {
-        ['command.name'] = { k, 's' },
-        ['command.fn'] = { v[1], 'f' },
+        name = { v.name, 's' },
+        command = { v.command, 'f' },
       }
     end
   else
-    config_def.commands = {}
+    config_def.user_commands = {}
   end
 
   local M = {}
@@ -37,13 +37,13 @@ function configs.__newindex(t, config_name, config_def)
       filetypes = { config.filetype, 't', true },
       on_new_config = { config.on_new_config, 'f', true },
       on_attach = { config.on_attach, 'f', true },
-      commands = { config.commands, 't', true },
+      user_commands = { config.user_commands, 't', true },
     }
-    if config.commands then
-      for k, v in pairs(config.commands) do
+    if config.user_commands then
+      for _, v in pairs(config.user_commands) do
         validate {
-          ['command.name'] = { k, 's' },
-          ['command.fn'] = { v[1], 'f' },
+          name = { v.name, 's' },
+          command = { v.command, 'f' },
         }
       end
     end
@@ -64,14 +64,14 @@ function configs.__newindex(t, config_name, config_def)
         event = 'BufReadPost'
         pattern = '*'
       end
-      api.nvim_command(
-        string.format(
-          "autocmd %s %s unsilent lua require'lspconfig'[%q].manager.try_add()",
-          event,
-          pattern,
-          config.name
-        )
-      )
+      local lsp_group = vim.api.nvim_create_augroup('lspconfig', { clear = false })
+      vim.api.nvim_create_autocmd(event, {
+        pattern = pattern,
+        callback = function()
+          M.manager.try_add()
+        end,
+        group = lsp_group,
+      })
     end
 
     local get_root_dir = config.root_dir
@@ -88,13 +88,14 @@ function configs.__newindex(t, config_name, config_def)
       end
 
       if root_dir then
-        api.nvim_command(
-          string.format(
-            "autocmd BufReadPost %s/* unsilent lua require'lspconfig'[%q].manager.try_add_wrapper()",
-            vim.fn.fnameescape(root_dir),
-            config.name
-          )
-        )
+        local lsp_group = vim.api.nvim_create_augroup('lspconfig', { clear = false })
+        vim.api.nvim_create_autocmd('BufReadPost', {
+          pattern = vim.fn.fnameescape(root_dir) .. '/*',
+          callback = function()
+            M.manager.try_add_wrapper()
+          end,
+          group = lsp_group,
+        })
         for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
           local bufname = api.nvim_buf_get_name(bufnr)
           if util.bufname_valid(bufname) then
@@ -182,15 +183,15 @@ function configs.__newindex(t, config_name, config_def)
         if bufnr == api.nvim_get_current_buf() then
           M._setup_buffer(client.id, bufnr)
         else
-          api.nvim_command(
-            string.format(
-              "autocmd BufEnter <buffer=%d> ++once lua require'lspconfig'[%q]._setup_buffer(%d,%d)",
-              bufnr,
-              config_name,
-              client.id,
-              bufnr
-            )
-          )
+          local lsp_group = vim.api.nvim_create_augroup('lspconfig', { clear = false })
+          vim.api.nvim_create_autocmd('BufEnter', {
+            callback = function()
+              M._setup_buffer(client.id, bufnr)
+            end,
+            group = lsp_group,
+            buffer = bufnr,
+            once = true,
+          })
         end
       end)
 
@@ -272,18 +273,15 @@ function configs.__newindex(t, config_name, config_def)
     if client.config._on_attach then
       client.config._on_attach(client, bufnr)
     end
-    if client.config.commands and not vim.tbl_isempty(client.config.commands) then
-      M.commands = vim.tbl_deep_extend('force', M.commands, client.config.commands)
+    if client.config.user_commands then
+      M.user_commands = client.config.user_commands
     end
-    if not M.commands_created and not vim.tbl_isempty(M.commands) then
-      -- Create the module commands
-      util.create_module_commands(config_name, M.commands)
-      M.commands_created = true
+    for _, command_info in pairs(M.user_commands or {}) do
+      vim.api.nvim_create_user_command(command_info.name, command_info.command, command_info.opts or {})
     end
   end
 
-  M.commands_created = false
-  M.commands = config_def.commands
+  M.user_commands = config_def.user_commands
   M.name = config_name
   M.document_config = config_def
 

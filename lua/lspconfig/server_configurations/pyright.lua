@@ -40,10 +40,13 @@ return {
       },
     },
   },
-  commands = {
-    PyrightOrganizeImports = {
-      organize_imports,
-      description = 'Organize Imports',
+  user_commands = {
+    {
+      name = 'PyrightOrganizeImports',
+      command = organize_imports,
+      opts = {
+        desc = 'Organize Imports',
+      },
     },
   },
   docs = {

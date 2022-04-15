@@ -53,12 +53,15 @@ return {
     single_file_support = true,
     capabilities = default_capabilities,
   },
-  commands = {
-    ClangdSwitchSourceHeader = {
-      function()
+  user_commands = {
+    {
+      name = 'ClangdSwitchSourceHeader',
+      command = function()
         switch_source_header(0)
       end,
-      description = 'Switch between source/header',
+      opts = {
+        desc = 'Switch between source/header',
+      },
     },
   },
   docs = {

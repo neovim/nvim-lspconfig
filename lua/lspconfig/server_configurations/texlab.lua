@@ -100,18 +100,24 @@ return {
       },
     },
   },
-  commands = {
-    TexlabBuild = {
-      function()
+  user_commands = {
+    {
+      name = 'TexlabBuild',
+      command = function()
         buf_build(0)
       end,
-      description = 'Build the current buffer',
+      opts = {
+        desc = 'Build the current buffer',
+      },
     },
-    TexlabForward = {
-      function()
+    {
+      name = 'TexlabForward',
+      command = function()
         buf_search(0)
       end,
-      description = 'Forward search from current position',
+      opts = {
+        desc = 'Forward search from current position',
+      },
     },
   },
   docs = {

@@ -3,7 +3,6 @@ local validate = vim.validate
 local api = vim.api
 local lsp = vim.lsp
 local uv = vim.loop
-local fn = vim.fn
 
 local M = {}
 
@@ -56,41 +55,6 @@ function M.add_hook_after(func, new_fn)
   else
     return new_fn
   end
-end
-
-function M.create_module_commands(module_name, commands)
-  for command_name, def in pairs(commands) do
-    local parts = { 'command!' }
-    -- Insert attributes.
-    for k, v in pairs(def) do
-      if type(k) == 'string' and type(v) == 'boolean' and v then
-        table.insert(parts, '-' .. k)
-      elseif type(k) == 'number' and type(v) == 'string' and v:match '^%-' then
-        table.insert(parts, v)
-      end
-    end
-    table.insert(parts, command_name)
-    -- The command definition.
-    table.insert(
-      parts,
-      string.format("lua require'lspconfig'[%q].commands[%q][1](<f-args>)", module_name, command_name)
-    )
-    api.nvim_command(table.concat(parts, ' '))
-  end
-end
-
-function M.has_bins(...)
-  for i = 1, select('#', ...) do
-    if 0 == fn.executable((select(i, ...))) then
-      return false
-    end
-  end
-  return true
-end
-
-M.script_path = function()
-  local str = debug.getinfo(2, 'S').source:sub(2)
-  return str:match '(.*[/\\])'
 end
 
 -- Some path utilities
@@ -391,17 +355,6 @@ function M.get_other_matching_providers(filetype)
     end
   end
   return other_matching_configs
-end
-
-function M.get_clients_from_cmd_args(arg)
-  local result = {}
-  for id in (arg or ''):gmatch '(%d+)' do
-    result[id] = vim.lsp.get_client_by_id(tonumber(id))
-  end
-  if vim.tbl_isempty(result) then
-    return M.get_managed_clients()
-  end
-  return vim.tbl_values(result)
 end
 
 function M.get_active_client_by_name(bufnr, servername)

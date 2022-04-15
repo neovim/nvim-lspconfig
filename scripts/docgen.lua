@@ -74,7 +74,7 @@ local lsp_section_template = [[
 ```lua
 require'lspconfig'.{{template_name}}.setup{}
 ```
-{{commands}}
+{{user_commands}}
 
 **Default values:**
 {{default_values}}
@@ -100,22 +100,23 @@ local function make_lsp_sections()
       local params = {
         template_name = template_name,
         preamble = '',
-        commands = '',
+        user_commands = '',
         default_values = '',
       }
 
-      params.commands = make_section(0, '\n\n', {
+      params.user_commands = make_section(0, '\n\n', {
         function()
-          if not template_def.commands or #vim.tbl_keys(template_def.commands) == 0 then
+          if not template_def.user_commands or #vim.tbl_keys(template_def.user_commands) == 0 then
             return
           end
           return '**Commands:**\n'
             .. make_section(0, '\n', {
-              sorted_map_table(template_def.commands, function(name, def)
-                if def.description then
-                  return string.format('- %s: %s', name, def.description)
+              -- TODO: fixme
+              sorted_map_table(template_def.user_commands, function(_, def)
+                if def.opts and def.opts.name then
+                  return string.format('- %s: %s', def.name, def.opts.desc)
                 end
-                return string.format('- %s', name)
+                return string.format('- %s', def.name)
               end),
             })
         end,
