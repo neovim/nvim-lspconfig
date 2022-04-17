@@ -127,6 +127,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [spectral](#spectral)
 - [sqlls](#sqlls)
 - [sqls](#sqls)
+- [steep](#steep)
 - [stylelint_lsp](#stylelint_lsp)
 - [sumneko_lua](#sumneko_lua)
 - [svelte](#svelte)
@@ -5308,6 +5309,37 @@ require'lspconfig'.sqls.setup{}
   - `single_file_support` : 
   ```lua
   true
+  ```
+
+
+## steep
+
+https://github.com/soutaro/steep
+
+`steep` is a static type checker for Ruby.
+
+You need `Steepfile` to make it work. Generate it with `steep init`.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.steep.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "steep", "langserver" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "ruby", "eruby" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("Steepfile", ".git")
   ```
 
 
