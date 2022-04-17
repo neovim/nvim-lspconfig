@@ -9,6 +9,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [ansiblels](#ansiblels)
 - [arduino_language_server](#arduino_language_server)
 - [asm_lsp](#asm_lsp)
+- [astro](#astro)
 - [awk_ls](#awk_ls)
 - [bashls](#bashls)
 - [beancount](#beancount)
@@ -388,6 +389,44 @@ require'lspconfig'.asm_lsp.setup{}
   - `root_dir` : 
   ```lua
   see source file
+  ```
+
+
+## astro
+
+https://github.com/withastro/language-tools/tree/main/packages/language-server
+
+`astro-ls` can be installed via `npm`:
+```sh
+npm install -g @astrojs/language-server
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.astro.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "astro-ls", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "astro" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    configuration = {}
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
   ```
 
 
