@@ -5398,7 +5398,17 @@ https://github.com/sumneko/lua-language-server
 
 Lua language server.
 
-`lua-language-server` can be installed by following the instructions [here](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run). The default `cmd` assumes that the `lua-language-server` binary can be found in `$PATH`.
+`lua-language-server` can be installed by following the instructions [here](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
+
+The default `cmd` assumes that the `lua-language-server` binary can be found in `$PATH`.
+
+If you primarily use `lua-language-server` for Neovim, and want to provide completions,
+analysis, and location handling for plugins on runtime path, you can use the following
+settings.
+
+Note: that these settings will meaningfully increase the time until `lua-language-server` can service
+initial requests (completion, location) upon starting as well as time to first diagnostics.
+Completion results will include a workspace indexing progress message until the server has finished indexing.
 
 ```lua
 local runtime_path = vim.split(package.path, ';')
@@ -5430,6 +5440,11 @@ require'lspconfig'.sumneko_lua.setup {
   },
 }
 ```
+
+See `lua-language-server`'s [documentation](https://github.com/sumneko/lua-language-server/blob/master/locale/en-us/setting.lua) for an explanation of the above fields:
+* [Lua.runtime.path](https://github.com/sumneko/lua-language-server/blob/076dd3e5c4e03f9cef0c5757dfa09a010c0ec6bf/locale/en-us/setting.lua#L5-L13)
+* [Lua.workspace.library](https://github.com/sumneko/lua-language-server/blob/076dd3e5c4e03f9cef0c5757dfa09a010c0ec6bf/locale/en-us/setting.lua#L77-L78)
+
 
 
 
