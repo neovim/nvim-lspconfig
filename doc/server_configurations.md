@@ -9,6 +9,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [ansiblels](#ansiblels)
 - [arduino_language_server](#arduino_language_server)
 - [asm_lsp](#asm_lsp)
+- [astro](#astro)
 - [awk_ls](#awk_ls)
 - [bashls](#bashls)
 - [beancount](#beancount)
@@ -126,6 +127,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [spectral](#spectral)
 - [sqlls](#sqlls)
 - [sqls](#sqls)
+- [steep](#steep)
 - [stylelint_lsp](#stylelint_lsp)
 - [sumneko_lua](#sumneko_lua)
 - [svelte](#svelte)
@@ -391,6 +393,44 @@ require'lspconfig'.asm_lsp.setup{}
   ```
 
 
+## astro
+
+https://github.com/withastro/language-tools/tree/main/packages/language-server
+
+`astro-ls` can be installed via `npm`:
+```sh
+npm install -g @astrojs/language-server
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.astro.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "astro-ls", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "astro" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    configuration = {}
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+  ```
+
+
 ## awk_ls
 
 https://github.com/Beaglefoot/awk-language-server/
@@ -652,11 +692,9 @@ require'lspconfig'.ccls.setup{}
 
 https://clangd.llvm.org/installation.html
 
-**NOTE:** Clang >= 9 is recommended! See [this issue for more](https://github.com/neovim/nvim-lsp/issues/23).
+**NOTE:** Clang >= 11 is recommended! See [this issue for more](https://github.com/neovim/nvim-lsp/issues/23).
 
-clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
-as compile_commands.json or, for simpler projects, a compile_flags.txt.
-For details on how to automatically generate one using CMake look [here](https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html). Alternatively, you can use [Bear](https://github.com/rizsotto/Bear).
+clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified as compile_commands.json, see https://clangd.llvm.org/installation#compile_commandsjson
 
 
 
@@ -682,7 +720,16 @@ require'lspconfig'.clangd.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
+          root_pattern(
+            '.clangd',
+            '.clang-tidy',
+            '.clang-format',
+            'compile_commands.json',
+            'compile_flags.txt',
+            'configure.ac',
+            '.git'
+          )
+        
   ```
   - `single_file_support` : 
   ```lua
@@ -779,7 +826,7 @@ require'lspconfig'.cmake.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".git", "compile_commands.json", "build") or dirname
+  root_pattern(".git", "compile_commands.json", "build")
   ```
   - `single_file_support` : 
   ```lua
@@ -857,7 +904,7 @@ require'lspconfig'.crystalline.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern('shard.yml', '.git') or dirname
+  root_pattern('shard.yml', '.git')
   ```
   - `single_file_support` : 
   ```lua
@@ -1172,7 +1219,7 @@ require'lspconfig'.dhall_lsp_server.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".git") or dirname
+  root_pattern(".git")
   ```
   - `single_file_support` : 
   ```lua
@@ -2972,7 +3019,7 @@ require'lspconfig'.lean3ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("leanpkg.toml") or root_pattern(".git") or path.dirname
+  root_pattern("leanpkg.toml") or root_pattern(".git")
   ```
   - `single_file_support` : 
   ```lua
@@ -4646,7 +4693,7 @@ require'lspconfig'.rome.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern('package.json', 'node_modules', '.git') or dirname
+  root_pattern('package.json', 'node_modules', '.git')
   ```
   - `single_file_support` : 
   ```lua
@@ -4754,7 +4801,7 @@ require'lspconfig'.scry.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern('shard.yml', '.git') or dirname
+  root_pattern('shard.yml', '.git')
   ```
   - `single_file_support` : 
   ```lua
@@ -5265,6 +5312,37 @@ require'lspconfig'.sqls.setup{}
   ```
 
 
+## steep
+
+https://github.com/soutaro/steep
+
+`steep` is a static type checker for Ruby.
+
+You need `Steepfile` to make it work. Generate it with `steep init`.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.steep.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "steep", "langserver" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "ruby", "eruby" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern("Steepfile", ".git")
+  ```
+
+
 ## stylelint_lsp
 
 https://github.com/bmatcuk/stylelint-lsp
@@ -5376,7 +5454,7 @@ require'lspconfig'.sumneko_lua.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".git") or bufdir
+  root_pattern(".luarc.json", ".luacheckrc", ".stylua.toml", "selene.toml", ".git")
   ```
   - `settings` : 
   ```lua
@@ -5529,9 +5607,9 @@ https://taplo.tamasfe.dev/lsp/
 
 Language server for Taplo, a TOML toolkit.
 
-`taplo-lsp` can be installed via `cargo`:
+`taplo-cli` can be installed via `cargo`:
 ```sh
-cargo install --locked taplo-lsp
+cargo install --locked taplo-cli
 ```
     
 
@@ -5545,7 +5623,7 @@ require'lspconfig'.taplo.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "taplo-lsp", "run" }
+  { "taplo", "lsp", "stdio" }
   ```
   - `filetypes` : 
   ```lua
@@ -6085,6 +6163,7 @@ require'lspconfig'.vimls.setup{}
       projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
       runtimepath = true
     },
+    isNeovim = true,
     iskeyword = "@,48-57,_,192-255,-#",
     runtimepath = "",
     suggest = {
@@ -6097,6 +6176,10 @@ require'lspconfig'.vimls.setup{}
   - `root_dir` : 
   ```lua
   see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
   ```
 
 
@@ -6535,7 +6618,7 @@ require'lspconfig'.zls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  util.root_pattern("zls.json", ".git") or current_file_dirname
+  util.root_pattern("zls.json", ".git")
   ```
   - `single_file_support` : 
   ```lua
