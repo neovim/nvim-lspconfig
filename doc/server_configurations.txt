@@ -680,7 +680,7 @@ require'lspconfig'.ccls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("compile_commands.json", ".ccls", ".git")
+  root_pattern("compile_commands.json", ".ccls")
   ```
   - `single_file_support` : 
   ```lua
