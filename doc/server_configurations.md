@@ -2914,6 +2914,8 @@ Julia project, you must make sure that the project is instantiated:
 ```sh
 julia --project=/path/to/my/project -e 'using Pkg; Pkg.instantiate()'
 ```
+
+You can find the capabilities of Julia language server [here](https://github.com/julia-vscode/LanguageServer.jl/wiki/Specification).
     
 
 
