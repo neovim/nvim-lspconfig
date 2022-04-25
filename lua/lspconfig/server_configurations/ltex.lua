@@ -9,10 +9,15 @@ local language_id_mapping = {
   xhtml = 'xhtml',
 }
 
+local bin_name = 'ltex-ls'
+if vim.fn.has 'win32' == 1 then
+  bin_name = bin_name .. '.bat'
+end
+
 return {
   default_config = {
-    cmd = { 'ltex-ls' },
-    filetypes = { 'bib', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex' },
+    cmd = { bin_name },
+    filetypes = { 'bib', 'gitcommit', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
     get_language_id = function(_, filetype)
@@ -25,7 +30,6 @@ return {
     end,
   },
   docs = {
-    package_json = 'https://raw.githubusercontent.com/valentjn/vscode-ltex/develop/package.json',
     description = [=[
 https://github.com/valentjn/ltex-ls
 

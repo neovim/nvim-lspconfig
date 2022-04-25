@@ -10,7 +10,7 @@ end
 return {
   default_config = {
     cmd = cmd,
-    filetypes = { 'json' },
+    filetypes = { 'json', 'jsonc' },
     init_options = {
       provideFormatter = true,
     },
@@ -19,7 +19,6 @@ return {
   },
   docs = {
     -- this language server config is in VSCode built-in package.json
-    package_json = 'https://raw.githubusercontent.com/microsoft/vscode/master/extensions/json-language-features/package.json',
     description = [[
 https://github.com/hrsh7th/vscode-langservers-extracted
 

@@ -18,6 +18,7 @@ return {
       'astro-markdown',
       'blade',
       'django-html',
+      'htmldjango',
       'edge',
       'eelixir', -- vim ft
       'ejs',
@@ -31,6 +32,7 @@ return {
       -- 'HTML (Eex)',
       -- 'HTML (EEx)',
       'html-eex',
+      'heex',
       'jade',
       'leaf',
       'liquid',

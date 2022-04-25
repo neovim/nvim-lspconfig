@@ -20,9 +20,12 @@ return {
   },
   docs = {
     description = [[
-npm install -g @prisma/language-server
+Language Server for the Prisma JavaScript and TypeScript ORM
 
-'prismals, a language server for the prisma javascript and typescript orm'
+`@prisma/language-server` can be installed via npm
+```sh
+npm install -g @prisma/language-server
+```
 ]],
     default_config = {
       root_dir = [[root_pattern(".git", "package.json")]],

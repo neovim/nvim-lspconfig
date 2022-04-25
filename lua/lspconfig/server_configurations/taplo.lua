@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'taplo-lsp', 'run' },
+    cmd = { 'taplo', 'lsp', 'stdio' },
     filetypes = { 'toml' },
     root_dir = function(fname)
       return util.root_pattern '*.toml'(fname) or util.find_git_ancestor(fname)
@@ -15,9 +15,9 @@ https://taplo.tamasfe.dev/lsp/
 
 Language server for Taplo, a TOML toolkit.
 
-`taplo-lsp` can be installed via `cargo`:
+`taplo-cli` can be installed via `cargo`:
 ```sh
-cargo install taplo-lsp
+cargo install --locked taplo-cli
 ```
     ]],
     default_config = {

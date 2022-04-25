@@ -27,7 +27,7 @@ return {
         },
       },
     },
-    filetypes = { 'yaml', 'yaml.ansible' },
+    filetypes = { 'yaml.ansible' },
     root_dir = util.root_pattern('ansible.cfg', '.ansible-lint'),
     single_file_support = true,
   },
@@ -37,9 +37,10 @@ https://github.com/ansible/ansible-language-server
 
 Language server for the ansible configuration management tool.
 
-`ansible-language-server` can be installed via `yarn`:
+`ansible-language-server` can be installed via `npm`:
+
 ```sh
-yarn global add ansible-language-server
+npm install -g @ansible/ansible-language-server
 ```
 ]],
   },
