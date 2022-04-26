@@ -4392,14 +4392,7 @@ require'lspconfig'.racket_langserver.setup{}
 
 Reason language server
 
-**By default, reason_ls doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path.
-You have to install the language server manually.
-
 You can install reason language server from [reason-language-server](https://github.com/jaredly/reason-language-server) repository.
-
-```lua
-cmd = {'<path_to_reason_language_server>'}
-```
 
 
 
@@ -6205,17 +6198,6 @@ https://github.com/vlang/vls
 V language server.
 
 `v-language-server` can be installed by following the instructions [here](https://github.com/vlang/vls#installation).
-
-**By default, v-language-server doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of your unzipped and compiled v-language-server.
-
-```lua
--- set the path to the vls installation;
-local vls_root_path = vim.fn.stdpath('cache')..'/lspconfig/vls'
-local vls_binary = vls_root_path.."/cmd/vls/vls"
-
-require'lspconfig'.vls.setup {
-  cmd = {vls_binary},
-}
 ```
 
 
@@ -6227,6 +6209,10 @@ require'lspconfig'.vls.setup{}
 
 
 **Default values:**
+  - `cmd` : 
+  ```lua
+  { "vls" }
+  ```
   - `filetypes` : 
   ```lua
   { "vlang" }
@@ -6549,13 +6535,6 @@ https://github.com/artempyanykh/zeta-note
 Markdown LSP server for easy note-taking with cross-references and diagnostics.
 
 Binaries can be downloaded from https://github.com/artempyanykh/zeta-note/releases
-
-**By default, zeta-note doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of your zeta-note binary.
-
-```lua
-require'lspconfig'.zeta_note.setup{
-  cmd = {'path/to/zeta-note'}
-}
 ```
 
 
@@ -6567,6 +6546,10 @@ require'lspconfig'.zeta_note.setup{}
 
 
 **Default values:**
+  - `cmd` : 
+  ```lua
+  { "zeta-note" }
+  ```
   - `filetypes` : 
   ```lua
   { "markdown" }
