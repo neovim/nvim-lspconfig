@@ -51,7 +51,10 @@ function configs.__newindex(t, config_name, config_def)
     config = tbl_extend('keep', config, default_config)
 
     if util.on_setup then
-      pcall(util.on_setup, config)
+      local ok, new_config = pcall(util.on_setup, config)
+      if ok and new_config then
+        config = new_config
+      end
     end
 
     if config.autostart == true then
