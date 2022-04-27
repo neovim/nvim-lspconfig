@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { "zeta-note" },
+    cmd = { 'zeta-note' },
     filetypes = { 'markdown' },
     root_dir = util.root_pattern '.zeta.toml',
   },
