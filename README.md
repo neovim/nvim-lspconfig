@@ -158,6 +158,7 @@ The following support tab-completion for all arguments:
 
 Please see the [wiki](https://github.com/neovim/nvim-lspconfig/wiki) for additional topics, including:
 
+* [Automatic server installation](https://github.com/neovim/nvim-lspconfig/wiki/Installing-language-servers#automatically)
 * [Snippets support](https://github.com/neovim/nvim-lspconfig/wiki/Snippets)
 * [Project local settings](https://github.com/neovim/nvim-lspconfig/wiki/Project-local-settings)
 * [Recommended plugins for enhanced language server features](https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins)
