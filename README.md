@@ -35,7 +35,7 @@ See also `:help lspconfig`.
    nvim main.py
    ```
 4. Run `:LspInfo` to see the status or to troubleshoot.
-5. See [Keybindings and completion](#Keybindings-and-completion) to setup common mappings and omnifunc completion.
+5. See [Suggested configuration](#Suggested-configuration) to setup common mappings and omnifunc completion.
 
 See [server_configurations.md](doc/server_configurations.md) (`:help lspconfig-all` from Nvim) for the full list of configs, including installation instructions and additional, optional, customization suggestions for each language server. For servers that are not on your system path (e.g., `jdtls`, `elixirls`), you must manually add `cmd` to the `setup` parameter. Most language servers can be installed in less than a minute.
 
