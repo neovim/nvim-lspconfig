@@ -2,15 +2,12 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'beancount-langserver', '--stdio' },
-    filetypes = { 'beancount' },
+    cmd = { 'beancount-language-server', '--stdio' },
+    filetypes = { 'beancount', 'bean' },
     root_dir = util.find_git_ancestor,
-    single_file_support = true,
     init_options = {
       -- this is the path to the beancout journal file
-      journalFile = '',
-      -- this is the path to the python binary with beancount installed
-      pythonPath = 'python3',
+      journel_file = '',
     },
   },
   docs = {

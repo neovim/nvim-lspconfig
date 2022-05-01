@@ -524,28 +524,18 @@ require'lspconfig'.beancount.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "beancount-langserver", "--stdio" }
+  { "beancount-language-server", "--stdio" }
   ```
   - `filetypes` : 
   ```lua
-  { "beancount" }
+  { "beancount", "bean" }
   ```
   - `init_options` : 
   ```lua
   {
-    journalFile = "",
-    pythonPath = "python3"
+    journal_file = ""
   }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("elm.json")
-  ```
-  - `single_file_support` : 
-  ```lua
-  true
-  ```
-
 
 ## bicep
 
