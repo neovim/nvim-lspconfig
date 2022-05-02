@@ -30,12 +30,28 @@ local function remove_newlines(cmd)
   return cmd
 end
 
+local function is_cmd_executable(config)
+  local cmd = config.cmd[1]
+  local path = config.cmd_env and config.cmd_env.PATH
+  if path then
+    local old_path = vim.env.PATH
+    local is_executable = pcall(function()
+      vim.env.PATH = path
+      assert(vim.fn.executable(cmd) == 1)
+    end)
+    vim.env.PATH = old_path
+    return is_executable
+  else
+    return vim.fn.executable(cmd) == 1
+  end
+end
+
 local function make_config_info(config)
   local config_info = {}
   config_info.name = config.name
   if config.cmd then
     config_info.cmd = remove_newlines(config.cmd)
-    if vim.fn.executable(config.cmd[1]) == 1 then
+    if is_cmd_executable(config) then
       config_info.cmd_is_executable = 'true'
     else
       config_info.cmd_is_executable = error_messages.cmd_not_found
