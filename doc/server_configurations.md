@@ -3467,7 +3467,7 @@ require'lspconfig'.ocamllsp.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason" }
+  { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" }
   ```
   - `get_language_id` : 
   ```lua
@@ -3475,7 +3475,7 @@ require'lspconfig'.ocamllsp.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("*.opam", "esy.json", "package.json", ".git")
+  root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace")
   ```
 
 
