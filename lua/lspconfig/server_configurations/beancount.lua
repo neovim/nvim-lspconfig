@@ -7,7 +7,7 @@ return {
     root_dir = util.find_git_ancestor,
     init_options = {
       -- this is the path to the beancout journal file
-      journel_file = '',
+      journalFile = '',
     },
   },
   docs = {
@@ -17,7 +17,7 @@ https://github.com/polarmutex/beancount-language-server#installation
 See https://github.com/polarmutex/beancount-language-server#configuration for configuration options
 ]],
     default_config = {
-      root_dir = [[root_pattern("elm.json")]],
+      root_dir = [[root_pattern(".git")]]
     },
   },
 }
