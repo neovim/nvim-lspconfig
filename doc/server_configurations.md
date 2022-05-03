@@ -4195,6 +4195,27 @@ require'lspconfig'.pylsp.setup{}
   true
   ```
 
+**Enabling/disabling plugins:**
+  - Disable `mccabe` complexity checking (enabled by default), or enable `pylint` (disabled by default) : 
+  ```lua
+require('lspconfig').pylsp.setup {
+  on_attach = on_attach,
+  flags = {
+    -- This will be the default in neovim 0.7+
+    debounce_text_changes = 150,
+  },
+  settings = {
+    pylsp = {
+      plugins = {
+        -- pylint = { enabled = true },
+        mccabe = { enabled = false }
+      }
+    }
+  }
+}
+  ```
+
+  You can use [williamboman/nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer) to find a listing of all the plugins and their settings.
 
 ## pyre
 
