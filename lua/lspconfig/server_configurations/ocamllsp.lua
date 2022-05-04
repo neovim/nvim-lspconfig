@@ -6,7 +6,7 @@ local language_id_of = {
   ocamlinterface = 'ocaml.interface',
   ocamllex = 'ocaml.ocamllex',
   reason = 'reason',
-  dune = 'dune'
+  dune = 'dune',
 }
 
 local get_language_id = function(_, ftype)

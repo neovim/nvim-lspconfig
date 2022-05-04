@@ -30,18 +30,14 @@ local root_files = {
   'configure.ac', -- AutoTools
 }
 
-local default_capabilities = vim.tbl_deep_extend(
-  'force',
-  util.default_config.capabilities or vim.lsp.protocol.make_client_capabilities(),
-  {
-    textDocument = {
-      completion = {
-        editsNearCursor = true,
-      },
+local default_capabilities = {
+  textDocument = {
+    completion = {
+      editsNearCursor = true,
     },
-    offsetEncoding = { 'utf-8', 'utf-16' },
-  }
-)
+  },
+  offsetEncoding = { 'utf-8', 'utf-16' },
+}
 
 return {
   default_config = {
