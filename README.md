@@ -158,6 +158,7 @@ The following support tab-completion for all arguments:
 
 Please see the [wiki](https://github.com/neovim/nvim-lspconfig/wiki) for additional topics, including:
 
+* [Automatic server installation](https://github.com/neovim/nvim-lspconfig/wiki/Installing-language-servers#automatically)
 * [Snippets support](https://github.com/neovim/nvim-lspconfig/wiki/Snippets)
 * [Project local settings](https://github.com/neovim/nvim-lspconfig/wiki/Project-local-settings)
 * [Recommended plugins for enhanced language server features](https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins)
@@ -175,6 +176,6 @@ a new configuration for it would be appreciated. You can follow these steps:
       to get started. Most configs are simple. For an extensive example see
       [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/texlab.lua).
 
-3. Ask questions on our [Discourse](https://neovim.discourse.group/c/7-category/7) or in the [Neovim Gitter](https://gitter.im/neovim/neovim).
+3. Ask questions on our [Discourse](https://neovim.discourse.group/c/7-category/7) or in the [Neovim Matrix room](https://app.element.io/#/room/#neovim:matrix.org).
 
-You can also help out by testing [PRs with the `needs-testing`](https://github.com/neovim/nvim-lspconfig/issues?q=is%3Apr+is%3Aopen+label%3Aneeds-testing) label) that affect language servers you use regularly.
+You can also help out by testing [PRs with the `needs-testing`](https://github.com/neovim/nvim-lspconfig/issues?q=is%3Apr+is%3Aopen+label%3Aneeds-testing) label that affect language servers you use regularly.

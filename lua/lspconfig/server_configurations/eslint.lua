@@ -63,6 +63,7 @@ return {
     },
     -- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
     root_dir = util.root_pattern(
+      '.eslintrc',
       '.eslintrc.js',
       '.eslintrc.cjs',
       '.eslintrc.yaml',
