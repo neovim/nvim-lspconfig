@@ -29,7 +29,19 @@ return {
   `glint-language-server` is installed when adding `@glint/core` to your project's devDependencies:
 
   ```sh
+  npm install @glint/core --save-dev
+  ```
+
+  or
+
+  ```sh
   yarn add -D @glint/core
+  ```
+
+  or
+
+  ```sh
+  pnpm add -D @glint/core
   ```
 ]],
   },
