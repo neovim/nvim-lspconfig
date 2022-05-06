@@ -6257,7 +6257,7 @@ The default config looks for TS in the local node_modules. The alternatives are:
 require'lspconfig'.volar.setup{
   init_options = {
     typescript = {
-      serverPath = '/path/to/.npm/lib/node_modules/typescript/lib/tsserverlib.js'
+      serverPath = '/path/to/.npm/lib/node_modules/typescript/lib/tsserverlibrary.js'
     }
   }
 }
