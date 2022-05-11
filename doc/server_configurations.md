@@ -48,6 +48,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [fstar](#fstar)
 - [gdscript](#gdscript)
 - [ghcide](#ghcide)
+- [glint](#glint)
 - [golangci_lint_ls](#golangci_lint_ls)
 - [gopls](#gopls)
 - [gradle_ls](#gradle_ls)
@@ -2005,6 +2006,57 @@ require'lspconfig'.ghcide.setup{}
   - `root_dir` : 
   ```lua
   root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml")
+  ```
+
+
+## glint
+
+  https://github.com/typed-ember/glint
+
+  https://typed-ember.gitbook.io/glint/
+
+  `glint-language-server` is installed when adding `@glint/core` to your project's devDependencies:
+
+  ```sh
+  npm install @glint/core --save-dev
+  ```
+
+  or
+
+  ```sh
+  yarn add -D @glint/core
+  ```
+
+  or
+
+  ```sh
+  pnpm add -D @glint/core
+  ```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.glint.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "glint-language-server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "html.handlebars", "handlebars", "typescript", "typescript.glimmer", "javascript", "javascript.glimmer" }
+  ```
+  - `on_new_config` : 
+  ```lua
+  see source file
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
   ```
 
 
