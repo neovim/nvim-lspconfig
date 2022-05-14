@@ -1840,10 +1840,11 @@ require'lspconfig'.foam_ls.setup{}
 
 ## fortls
 
-https://github.com/hansec/fortran-language-server
+https://github.com/gnikit/fortls
 
-Fortran Language Server for the Language Server Protocol
-    
+fortls is a Fortran Language Server, settings to the server can be passed either
+through `cmd` or through a local configuration file. For more information
+see the `fortls` [documentation](https://gnikit.github.io/fortls/options.html).
 
 
 **Snippet to enable the language server:**
@@ -1855,7 +1856,7 @@ require'lspconfig'.fortls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "fortls" }
+    { "fortls", "--notify_init", "--hover_signature", "--hover_language=fortran", "--use_signature_help" }
   ```
   - `filetypes` : 
   ```lua
@@ -1864,12 +1865,6 @@ require'lspconfig'.fortls.setup{}
   - `root_dir` : 
   ```lua
   root_pattern(".fortls")
-  ```
-  - `settings` : 
-  ```lua
-  {
-    nthreads = 1
-  }
   ```
 
 
