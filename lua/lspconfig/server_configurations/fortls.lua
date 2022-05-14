@@ -2,20 +2,24 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'fortls' },
+    cmd = {
+      'fortls',
+      '--notify_init',
+      '--hover_signature',
+      '--hover_language=fortran',
+      '--use_signature_help',
+    },
     filetypes = { 'fortran' },
     root_dir = function(fname)
       return util.root_pattern '.fortls'(fname) or util.find_git_ancestor(fname)
     end,
-    settings = {
-      nthreads = 1,
-    },
+    settings = {},
   },
   docs = {
     description = [[
-https://github.com/hansec/fortran-language-server
+https://github.com/gnikit/fortls
 
-Fortran Language Server for the Language Server Protocol
+fortls - Fortran Language Server
     ]],
     default_config = {
       root_dir = [[root_pattern(".fortls")]],
