@@ -1103,7 +1103,7 @@ require'lspconfig'.dartls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "dart", "./snapshots/analysis_server.dart.snapshot", "--lsp" }
+  { "dart", "language-server" }
   ```
   - `filetypes` : 
   ```lua
