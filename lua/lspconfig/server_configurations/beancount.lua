@@ -18,7 +18,7 @@ https://github.com/polarmutex/beancount-language-server#installation
 See https://github.com/polarmutex/beancount-language-server#configuration for configuration options
 ]],
     default_config = {
-      root_dir = [[root_pattern(".git")]]
+      root_dir = [[root_pattern(".git")]],
     },
   },
 }
