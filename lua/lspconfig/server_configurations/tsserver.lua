@@ -2,9 +2,11 @@ local util = require 'lspconfig.util'
 
 local bin_name = 'typescript-language-server'
 local cmd = { bin_name, '--stdio' }
+local detached = true
 
 if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
+  detached = false
 end
 
 return {
@@ -23,6 +25,7 @@ return {
       return util.root_pattern 'tsconfig.json'(fname)
         or util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
     end,
+    detached = detached,
   },
   docs = {
     description = [[

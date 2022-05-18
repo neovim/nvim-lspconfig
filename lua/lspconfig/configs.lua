@@ -38,6 +38,7 @@ function configs.__newindex(t, config_name, config_def)
       on_new_config = { config.on_new_config, 'f', true },
       on_attach = { config.on_attach, 'f', true },
       commands = { config.commands, 't', true },
+      detached = { config.detached, 'b', true },
     }
     if config.commands then
       for k, v in pairs(config.commands) do
