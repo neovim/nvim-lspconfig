@@ -21,6 +21,13 @@ function M._root._setup()
       '-nargs=0',
       description = '`:LspInfo` Displays attached, active, and configured language servers',
     },
+    LspLog = {
+      function()
+        vim.cmd(string.format('tabnew %s', vim.lsp.get_log_path()))
+      end,
+      '-nargs=0',
+      description = "`:LspLog` Opens neovim's LSP client log in a new tab window.",
+    },
     LspStart = {
       function(server_name)
         if server_name then

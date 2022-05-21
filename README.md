@@ -140,7 +140,7 @@ vim.lsp.set_log_level("debug")
 Attempt to run the language server, and open the log with:
 
 ```
-:lua vim.cmd('e'..vim.lsp.get_log_path())
+:LspLog
 ```
 Most of the time, the reason for failure is present in the logs.
 
