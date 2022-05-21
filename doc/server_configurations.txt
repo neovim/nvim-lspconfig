@@ -525,22 +525,21 @@ require'lspconfig'.beancount.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "beancount-langserver", "--stdio" }
+  { "beancount-language-server", "--stdio" }
   ```
   - `filetypes` : 
   ```lua
-  { "beancount" }
+  { "beancount", "bean" }
   ```
   - `init_options` : 
   ```lua
   {
-    journalFile = "",
-    pythonPath = "python3"
+    journalFile = ""
   }
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("elm.json")
+  root_pattern(".git")
   ```
   - `single_file_support` : 
   ```lua
@@ -1103,7 +1102,7 @@ require'lspconfig'.dartls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "dart", "./snapshots/analysis_server.dart.snapshot", "--lsp" }
+  { "dart", "language-server" }
   ```
   - `filetypes` : 
   ```lua
@@ -1840,9 +1839,17 @@ require'lspconfig'.foam_ls.setup{}
 
 ## fortls
 
-https://github.com/hansec/fortran-language-server
+https://github.com/gnikit/fortls
 
-Fortran Language Server for the Language Server Protocol
+fortls is a Fortran Language Server, the server can be installed via pip
+
+```sh
+pip install fortls
+```
+
+Settings to the server can be passed either through the `cmd` option or through
+a local configuration file e.g. `.fortls`. For more information
+see the `fortls` [documentation](https://gnikit.github.io/fortls/options.html).
     
 
 
@@ -1855,7 +1862,7 @@ require'lspconfig'.fortls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "fortls" }
+  { "fortls", "--notify_init", "--hover_signature", "--hover_language=fortran", "--use_signature_help" }
   ```
   - `filetypes` : 
   ```lua
@@ -1867,9 +1874,7 @@ require'lspconfig'.fortls.setup{}
   ```
   - `settings` : 
   ```lua
-  {
-    nthreads = 1
-  }
+  {}
   ```
 
 
@@ -5456,18 +5461,12 @@ initial requests (completion, location) upon starting as well as time to first d
 Completion results will include a workspace indexing progress message until the server has finished indexing.
 
 ```lua
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
 require'lspconfig'.sumneko_lua.setup {
   settings = {
     Lua = {
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
@@ -6287,9 +6286,11 @@ Volar can be installed via npm:
 npm install -g @volar/vue-language-server
 ```
 
-Volar by default supports Vue 3 projects. Vue 2 projects need [additional configuration](https://github.com/johnsoncodehk/volar/blob/master/extensions/vscode-vue-language-features/README.md?plain=1#L28-L63).
+Volar by default supports Vue 3 projects. Vue 2 projects need
+[additional configuration](https://github.com/johnsoncodehk/volar/blob/master/extensions/vscode-vue-language-features/README.md?plain=1#L28-L63).
 
 **Take Over Mode**
+
 Volar can serve as a language server for both Vue and TypeScript via [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471).
 
 To enable Take Over Mode, override the default filetypes in `setup{}` as follows:
@@ -6301,7 +6302,9 @@ require'lspconfig'.volar.setup{
 ```
 
 **Overriding the default TypeScript Server used by Volar**
-The default config looks for TS in the local node_modules. The alternatives are:
+
+The default config looks for TS in the local `node_modules`. This can lead to issues
+e.g. when working on a [monorepo](https://monorepo.tools/). The alternatives are:
 
 - use a global TypeScript Server installation
 
@@ -6310,26 +6313,33 @@ require'lspconfig'.volar.setup{
   init_options = {
     typescript = {
       serverPath = '/path/to/.npm/lib/node_modules/typescript/lib/tsserverlib.js'
+      -- Alternative location if installed as root:
+      -- serverPath = '/usr/local/lib/node_modules/typescript/lib/tsserverlibrary.js'
     }
   }
 }
 ```
 
-- use a global TypeScript Server installation if a local server is not found
+- use a local server and fall back to a global TypeScript Server installation
 
 ```lua
 local util = require 'lspconfig.util'
-
 local function get_typescript_server_path(root_dir)
-  local project_root = util.find_node_modules_ancestor(root_dir)
 
-  local local_tsserverlib = project_root ~= nil and util.path.join(project_root, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js')
-  local global_tsserverlib = '/home/[yourusernamehere]/.npm/lib/node_modules/typescript/lib/tsserverlibrary.js'
-
-  if local_tsserverlib and util.path.exists(local_tsserverlib) then
-    return local_tsserverlib
+  local global_ts = '/home/[yourusernamehere]/.npm/lib/node_modules/typescript/lib/tsserverlibrary.js'
+  -- Alternative location if installed as root:
+  -- local global_ts = '/usr/local/lib/node_modules/typescript/lib/tsserverlibrary.js'
+  local found_ts = ''
+  local function check_dir(path)
+    found_ts =  util.path.join(path, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js')
+    if util.path.exists(found_ts) then
+      return path
+    end
+  end
+  if util.search_ancestors(root_dir, check_dir) then
+    return found_ts
   else
-    return global_tsserverlib
+    return global_ts
   end
 end
 
