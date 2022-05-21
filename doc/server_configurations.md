@@ -5461,18 +5461,12 @@ initial requests (completion, location) upon starting as well as time to first d
 Completion results will include a workspace indexing progress message until the server has finished indexing.
 
 ```lua
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
 require'lspconfig'.sumneko_lua.setup {
   settings = {
     Lua = {
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
