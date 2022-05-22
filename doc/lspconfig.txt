@@ -608,7 +608,7 @@ the built-in client, specifically considering the RPC logs. Example:
 Attempt to run the language server, and open the log with:
 
 >
-    :lua vim.cmd('e'..vim.lsp.get_log_path())
+    :LspLog
 <
 Note that `ERROR` messages containing `stderr` only indicate that the log was
 sent to `stderr`. Many servers counter-intuitively send harmless messages
