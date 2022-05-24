@@ -10,6 +10,17 @@ local function reload_workspace(bufnr)
   end)
 end
 
+local function open_docs(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  vim.lsp.buf_request(bufnr, 'experimental/externalDocs', vim.lsp.util.make_position_params(), function(err, url)
+    if err then
+      error(tostring(err))
+    else
+      vim.fn['netrw#BrowseX'](url, 0)
+    end
+  end)
+end
+
 return {
   default_config = {
     cmd = { 'rust-analyzer' },
@@ -62,6 +73,12 @@ return {
         reload_workspace(0)
       end,
       description = 'Reload current cargo workspace',
+    },
+    RustOpenDocs = {
+      function()
+        open_docs(0)
+      end,
+      description = 'Open documentation for the symbol under the cursor in default browser',
     },
   },
   docs = {
