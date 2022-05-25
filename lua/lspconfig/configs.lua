@@ -112,7 +112,11 @@ function configs.__newindex(t, config_name, config_def)
         local bufname = api.nvim_buf_get_name(0)
         local pseudo_root
         if not util.bufname_valid(bufname) then
-          pseudo_root = vim.fn.getcwd()
+          if config.unnamed_buffer_support then
+            pseudo_root = vim.fn.getcwd()
+          else
+            return
+          end
         else
           pseudo_root = util.path.dirname(util.path.sanitize(bufname))
         end
