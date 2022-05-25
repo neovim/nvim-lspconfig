@@ -146,7 +146,7 @@ listed in `:help vim.lsp.start_client()` with the following unique entries:
 
 - {unnamed_buffer_support}
 
-    `bool` (default: nil)
+    `bool` (default: false)
 
     Determines if a server is started without a matching root directory.
     See |lspconfig-single-file-support|.
