@@ -20,6 +20,7 @@ return {
     filetypes = { 'bib', 'gitcommit', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
+    unnamed_buffer_support = true,
     get_language_id = function(_, filetype)
       local language_id = language_id_mapping[filetype]
       if language_id then

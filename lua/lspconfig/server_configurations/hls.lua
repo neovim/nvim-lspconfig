@@ -6,6 +6,7 @@ return {
     filetypes = { 'haskell', 'lhaskell' },
     root_dir = util.root_pattern('*.cabal', 'stack.yaml', 'cabal.project', 'package.yaml', 'hie.yaml'),
     single_file_support = true,
+    unnamed_buffer_support = true,
     settings = {
       haskell = {
         formattingProvider = 'ormolu',

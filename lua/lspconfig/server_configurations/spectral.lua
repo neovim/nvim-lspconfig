@@ -8,6 +8,7 @@ return {
     filetypes = { 'yaml', 'json', 'yml' },
     root_dir = util.root_pattern('.spectral.yaml', '.spectral.yml', '.spectral.json', '.spectral.js'),
     single_file_support = true,
+    unnamed_buffer_support = true,
     settings = {
       enable = true,
       run = 'onType',

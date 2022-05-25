@@ -71,6 +71,7 @@ return {
       return util.root_pattern '.latexmkrc'(fname) or util.find_git_ancestor(fname)
     end,
     single_file_support = true,
+    unnamed_buffer_support = true,
     settings = {
       texlab = {
         rootDirectory = nil,

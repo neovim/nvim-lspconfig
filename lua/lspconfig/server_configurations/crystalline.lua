@@ -6,6 +6,7 @@ return {
     filetypes = { 'crystal' },
     root_dir = util.root_pattern 'shard.yml' or util.find_git_ancestor,
     single_file_support = true,
+    unnamed_buffer_support = true,
   },
   docs = {
     description = [[

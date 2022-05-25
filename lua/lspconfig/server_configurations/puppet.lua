@@ -13,6 +13,7 @@ return {
     filetypes = { 'puppet' },
     root_dir = util.root_pattern(unpack(root_files)),
     single_file_support = true,
+    unnamed_buffer_support = true,
   },
   docs = {
     description = [[

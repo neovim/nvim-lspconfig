@@ -13,6 +13,7 @@ return {
     filetypes = { 'vim' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
+    unnamed_buffer_support = true,
     init_options = {
       isNeovim = true,
       iskeyword = '@,48-57,_,192-255,-#',

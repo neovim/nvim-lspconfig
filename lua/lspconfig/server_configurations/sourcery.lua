@@ -22,6 +22,7 @@ return {
       return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
     end,
     single_file_support = true,
+    unnamed_buffer_support = true,
   },
   on_new_config = function(new_config, _)
     if not new_config.init_options.token then

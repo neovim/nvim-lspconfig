@@ -30,6 +30,7 @@ return {
     filetypes = { 'python' },
     root_dir = util.root_pattern(unpack(root_files)),
     single_file_support = true,
+    unnamed_buffer_support = true,
     settings = {
       python = {
         analysis = {

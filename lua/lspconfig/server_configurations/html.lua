@@ -13,6 +13,7 @@ return {
     filetypes = { 'html' },
     root_dir = util.root_pattern('package.json', '.git'),
     single_file_support = true,
+    unnamed_buffer_support = true,
     settings = {},
     init_options = {
       provideFormatter = true,
