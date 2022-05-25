@@ -13,7 +13,6 @@ return {
     filetypes = { 'html', 'css' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
-    unnamed_buffer_support = true,
   },
   docs = {
     description = [[
@@ -27,7 +26,6 @@ npm install -g emmet-ls
     default_config = {
       root_dir = 'git root',
       single_file_support = true,
-      unnamed_buffer_support = true,
     },
   },
 }

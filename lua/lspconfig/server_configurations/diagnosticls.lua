@@ -12,7 +12,6 @@ return {
     cmd = cmd,
     root_dir = util.find_git_ancestor,
     single_file_support = true,
-    unnamed_buffer_support = true,
     filetypes = {},
   },
   docs = {

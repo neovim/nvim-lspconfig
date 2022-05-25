@@ -124,7 +124,6 @@ return {
       end
     end,
     single_file_support = true,
-    unnamed_buffer_support = true,
     init_options = {
       workspace = get_workspace_dir(),
       jvm_args = {},

@@ -55,7 +55,6 @@ return {
       table.insert(config.cmd, root_dir)
     end,
     single_file_support = true,
-    unnamed_buffer_support = true,
   },
   docs = {
     description = [[

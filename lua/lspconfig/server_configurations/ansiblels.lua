@@ -30,7 +30,6 @@ return {
     filetypes = { 'yaml.ansible' },
     root_dir = util.root_pattern('ansible.cfg', '.ansible-lint'),
     single_file_support = true,
-    unnamed_buffer_support = true,
   },
   docs = {
     description = [[

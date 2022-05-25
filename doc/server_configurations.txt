@@ -297,7 +297,7 @@ require'lspconfig'.ansiblels.setup{}
   ```lua
   true
   ```
-  - `unnamed_buffer_support` : 
+ - `unnamed_buffer_support` : 
   ```lua
   true
   ```

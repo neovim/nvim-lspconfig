@@ -9,7 +9,6 @@ return {
       return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
     end,
     single_file_support = true,
-    unnamed_buffer_support = true,
     init_options = {
       buildDirectory = 'build',
     },
