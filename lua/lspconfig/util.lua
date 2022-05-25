@@ -14,6 +14,7 @@ M.default_config = {
   init_options = vim.empty_dict(),
   handlers = {},
   autostart = true,
+  unnamed_buffer_support = false,
   capabilities = lsp.protocol.make_client_capabilities(),
 }
 
