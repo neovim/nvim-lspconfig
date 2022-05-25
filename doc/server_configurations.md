@@ -298,6 +298,11 @@ require'lspconfig'.ansiblels.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## arduino_language_server
 
@@ -463,6 +468,11 @@ require'lspconfig'.awk_ls.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## bashls
 
@@ -507,6 +517,11 @@ require'lspconfig'.bashls.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## beancount
 
@@ -542,6 +557,11 @@ require'lspconfig'.beancount.setup{}
   root_pattern(".git")
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -687,6 +707,11 @@ require'lspconfig'.ccls.setup{}
   false
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  false
+  ```
+
 
 ## clangd
 
@@ -729,9 +754,14 @@ require'lspconfig'.clangd.setup{}
             'configure.ac',
             '.git'
           )
-        
+
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -833,6 +863,11 @@ require'lspconfig'.cmake.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## codeqlls
 
@@ -907,6 +942,11 @@ require'lspconfig'.crystalline.setup{}
   root_pattern('shard.yml', '.git')
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -1010,6 +1050,11 @@ require'lspconfig'.cssls.setup{}
   }
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -1226,6 +1271,11 @@ require'lspconfig'.dhall_lsp_server.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## diagnosticls
 
@@ -1255,6 +1305,11 @@ require'lspconfig'.diagnosticls.setup{}
   Vim's starting directory
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -1295,6 +1350,11 @@ require'lspconfig'.dockerls.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## dotls
 
@@ -1327,6 +1387,11 @@ require'lspconfig'.dotls.setup{}
   see source file
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -1379,6 +1444,11 @@ require'lspconfig'.efm.setup{}
   util.root_pattern(".git")
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -1534,6 +1604,11 @@ require'lspconfig'.emmet_ls.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## erlangls
 
@@ -1572,6 +1647,11 @@ require'lspconfig'.erlangls.setup{}
   root_pattern('rebar.config', 'erlang.mk', '.git')
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -1800,6 +1880,11 @@ require'lspconfig'.flux_lsp.setup{}
   util.find_git_ancestor
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -2142,6 +2227,11 @@ require'lspconfig'.gopls.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## gradle_ls
 
@@ -2214,6 +2304,11 @@ require'lspconfig'.grammarly.setup{}
   util.find_git_ancestor
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -2392,6 +2487,11 @@ require'lspconfig'.hdl_checker.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## hhvm
 
@@ -2510,6 +2610,11 @@ require'lspconfig'.hls.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## hoon_ls
 
@@ -2544,6 +2649,11 @@ require'lspconfig'.hoon_ls.setup{}
   see source file
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -2610,6 +2720,11 @@ require'lspconfig'.html.setup{}
   {}
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -2822,6 +2937,11 @@ require'lspconfig'.jdtls.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## jedi_language_server
 
@@ -2851,6 +2971,11 @@ require'lspconfig'.jedi_language_server.setup{}
   vim's starting directory
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -2907,6 +3032,11 @@ require'lspconfig'.jsonls.setup{}
   util.find_git_ancestor
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -2998,6 +3128,11 @@ require'lspconfig'.julials.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## kotlin_language_server
 
@@ -3083,6 +3218,11 @@ require'lspconfig'.lean3ls.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## leanls
 
@@ -3130,6 +3270,11 @@ require'lspconfig'.leanls.setup{}
   root_pattern("lakefile.lean", "lean-toolchain", "leanpkg.toml", ".git")
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -3204,6 +3349,11 @@ require'lspconfig'.lemminx.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## ltex
 
@@ -3245,6 +3395,11 @@ require'lspconfig'.ltex.setup{}
   see source file
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -3344,6 +3499,11 @@ require'lspconfig'.mint.setup{}
   true
   ```
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
+
 
 ## mm0_ls
 
@@ -3376,6 +3536,11 @@ require'lspconfig'.mm0_ls.setup{}
   see source file
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -3460,6 +3625,10 @@ require'lspconfig'.nimls.setup{}
   see source file
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -3564,6 +3733,10 @@ require'lspconfig'.ols.setup{}
   util.root_pattern("ols.json", ".git")
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -3702,6 +3875,10 @@ require'lspconfig'.openscad_ls.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## pasls
@@ -3743,6 +3920,10 @@ require'lspconfig'.pasls.setup{}
   see source file
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -3789,6 +3970,10 @@ require'lspconfig'.perlls.setup{}
   }
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -3847,6 +4032,10 @@ require'lspconfig'.perlnavigator.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## perlpls
@@ -3893,6 +4082,10 @@ require'lspconfig'.perlpls.setup{}
   }
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -3957,6 +4150,10 @@ require'lspconfig'.please.setup{}
   see source file
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -4028,6 +4225,10 @@ require'lspconfig'.powershell_es.setup{}
   "pwsh"
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -4103,6 +4304,10 @@ require'lspconfig'.prosemd_lsp.setup{}
   <function 1>
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -4182,6 +4387,10 @@ require'lspconfig'.puppet.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## purescriptls
@@ -4248,6 +4457,10 @@ require'lspconfig'.pylsp.setup{}
   see source file
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -4332,6 +4545,10 @@ require'lspconfig'.pyright.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## quick_lint_js
@@ -4364,6 +4581,10 @@ require'lspconfig'.quick_lint_js.setup{}
   see source file
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -4440,6 +4661,10 @@ require'lspconfig'.racket_langserver.setup{}
   see source file
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -4528,6 +4753,10 @@ require'lspconfig'.remark_ls.setup{}
   see source file
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -4749,6 +4978,10 @@ require'lspconfig'.rome.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## rust_analyzer
@@ -4824,6 +5057,10 @@ require'lspconfig'.salt_ls.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## scry
@@ -4854,6 +5091,10 @@ require'lspconfig'.scry.setup{}
   root_pattern('shard.yml', '.git')
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -4930,6 +5171,10 @@ require'lspconfig'.sixtyfps.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## slint_lsp
@@ -4968,6 +5213,10 @@ require'lspconfig'.slint_lsp.setup{}
   { "slint" }
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -5236,6 +5485,10 @@ require'lspconfig'.sourcery.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## spectral
@@ -5279,6 +5532,10 @@ require'lspconfig'.spectral.setup{}
   }
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -5357,6 +5614,10 @@ require'lspconfig'.sqls.setup{}
   {}
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -5529,6 +5790,10 @@ require'lspconfig'.sumneko_lua.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## svelte
@@ -5693,6 +5958,10 @@ require'lspconfig'.taplo.setup{}
   root_pattern("*.toml", ".git")
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -5898,6 +6167,10 @@ require'lspconfig'.texlab.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## tflint
@@ -6090,6 +6363,10 @@ require'lspconfig'.vala_ls.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## vdmj
@@ -6237,6 +6514,10 @@ require'lspconfig'.vimls.setup{}
   see source file
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -6588,6 +6869,10 @@ require'lspconfig'.yamlls.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## zeta_note
@@ -6681,6 +6966,10 @@ require'lspconfig'.zls.setup{}
   util.root_pattern("zls.json", ".git")
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```

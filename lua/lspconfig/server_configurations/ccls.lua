@@ -15,7 +15,7 @@ return {
     offset_encoding = 'utf-32',
     -- ccls does not support sending a null root directory
     single_file_support = false,
-    unnamed_buffer_support = true,
+    unnamed_buffer_support = false,
   },
   docs = {
     description = [[

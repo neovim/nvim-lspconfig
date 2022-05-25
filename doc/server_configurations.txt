@@ -297,6 +297,10 @@ require'lspconfig'.ansiblels.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## arduino_language_server
@@ -462,6 +466,10 @@ require'lspconfig'.awk_ls.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## bashls
@@ -506,6 +514,10 @@ require'lspconfig'.bashls.setup{}
   ```lua
   true
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## beancount
@@ -542,6 +554,10 @@ require'lspconfig'.beancount.setup{}
   root_pattern(".git")
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```
@@ -686,6 +702,10 @@ require'lspconfig'.ccls.setup{}
   ```lua
   false
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
 
 
 ## clangd
@@ -732,6 +752,10 @@ require'lspconfig'.clangd.setup{}
         
   ```
   - `single_file_support` : 
+  ```lua
+  true
+  ```
+  - `unnamed_buffer_support` : 
   ```lua
   true
   ```

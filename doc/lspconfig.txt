@@ -144,6 +144,10 @@ listed in `:help vim.lsp.start_client()` with the following unique entries:
 
     `bool` (default: nil)
 
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
     Determines if a server is started without a matching root directory.
     See |lspconfig-single-file-support|.
 
@@ -449,6 +453,10 @@ mode under which cross-file features may be degraded.
   configuration, starting the server without sending `rootDirectory` or
   `workspaceFolders` during initialization.
 - attaching subsequent files in the parent directory to the same server
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
   instance, depending on filetype.
 
 Cross-file features (navigation, hover) may or may not work depending on the
