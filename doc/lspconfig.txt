@@ -144,10 +144,10 @@ listed in `:help vim.lsp.start_client()` with the following unique entries:
 
     `bool` (default: nil)
 
-  - `unnamed_buffer_support` : 
-  ```lua
-  true
-  ```
+- {unnamed_buffer_support}
+
+    `bool` (default: nil)
+
     Determines if a server is started without a matching root directory.
     See |lspconfig-single-file-support|.
 
@@ -439,6 +439,7 @@ Browsing the source of the default configurations is recommended.
 
 ==============================================================================
 SINGLE FILE SUPPORT                              *lspconfig-single-file-support*
+                                              *lspconfig-unnamed-buffer-support*
 
 Language servers require each project to have a `root` in order to provide
 features that require cross-file indexing. 
@@ -452,11 +453,9 @@ mode under which cross-file features may be degraded.
 - then, if `single_file_support` is enabled for a given language server
   configuration, starting the server without sending `rootDirectory` or
   `workspaceFolders` during initialization.
+- If the buffer is unnamed and `unnamed_buffer_support` is enabled, the client
+  would attach with the `vim.fn.getcwd()`
 - attaching subsequent files in the parent directory to the same server
-  - `unnamed_buffer_support` : 
-  ```lua
-  true
-  ```
   instance, depending on filetype.
 
 Cross-file features (navigation, hover) may or may not work depending on the
