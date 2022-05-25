@@ -81,7 +81,7 @@ function configs.__newindex(t, config_name, config_def)
       if get_root_dir then
         local bufnr = api.nvim_get_current_buf()
         local bufname = api.nvim_buf_get_name(bufnr)
-        if not util.bufname_valid(bufname) then
+        if not util.bufname_valid(bufname) and not config.unnamed_buffer_support then
           return
         end
         root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
@@ -110,10 +110,16 @@ function configs.__newindex(t, config_name, config_def)
         -- this to attach additional files in the same parent folder to the same server.
         -- We just no longer send rootDirectory or workspaceFolders during initialization.
         local bufname = api.nvim_buf_get_name(0)
+        local pseudo_root
         if not util.bufname_valid(bufname) then
-          return
+          if config.unnamed_buffer_support then
+            pseudo_root = vim.fn.getcwd()
+          else
+            return
+          end
+        else
+          pseudo_root = util.path.dirname(util.path.sanitize(bufname))
         end
-        local pseudo_root = util.path.dirname(util.path.sanitize(bufname))
         local client_id = M.manager.add(pseudo_root, true)
         vim.lsp.buf_attach_client(vim.api.nvim_get_current_buf(), client_id)
       end

@@ -2906,6 +2906,10 @@ require'lspconfig'.jsonls.setup{}
   ```lua
   util.find_git_ancestor
   ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
+  ```
   - `single_file_support` : 
   ```lua
   true
@@ -6573,6 +6577,10 @@ require'lspconfig'.yamlls.setup{}
   - `root_dir` : 
   ```lua
   util.find_git_ancestor
+  ```
+  - `unnamed_buffer_support` : 
+  ```lua
+  true
   ```
   - `settings` : 
   ```lua
