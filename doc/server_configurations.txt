@@ -1178,13 +1178,12 @@ require'lspconfig'.denols.setup{}
   ```lua
   {
     enable = true,
-    lint = false,
     unstable = false
   }
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("deno.json", "deno.jsonc", "tsconfig.json", ".git")
+  root_pattern("deno.json", "deno.jsonc", ".git")
   ```
 
 
