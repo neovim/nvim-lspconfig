@@ -26,7 +26,7 @@ function M._root._setup()
         vim.cmd(string.format('tabnew %s', vim.lsp.get_log_path()))
       end,
       '-nargs=0',
-      description = "`:LspLog` Opens the Nvim LSP client log.",
+      description = '`:LspLog` Opens the Nvim LSP client log.',
     },
     LspStart = {
       function(server_name)
