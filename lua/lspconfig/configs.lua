@@ -88,6 +88,7 @@ function configs.__newindex(t, config_name, config_def)
       end
 
       if root_dir then
+        -- Lazy-launching: attach when a buffer in this directory is opened.
         api.nvim_command(
           string.format(
             "autocmd BufReadPost %s/* unsilent lua require'lspconfig'[%q].manager.try_add_wrapper()",
@@ -95,6 +96,7 @@ function configs.__newindex(t, config_name, config_def)
             config.name
           )
         )
+        -- Attach for all existing buffers in this directory.
         for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
           local bufname = api.nvim_buf_get_name(bufnr)
           if util.bufname_valid(bufname) then
@@ -157,7 +159,7 @@ function configs.__newindex(t, config_name, config_def)
           client.offset_encoding = result.offsetEncoding
         end
 
-        -- Send `settings to server via workspace/didChangeConfiguration
+        -- Send `settings` to server via workspace/didChangeConfiguration
         function client.workspace_did_change_configuration(settings)
           if not settings then
             return
@@ -208,6 +210,8 @@ function configs.__newindex(t, config_name, config_def)
       return make_config(root_dir)
     end)
 
+    -- Try to attach the buffer `bufnr` to a client using this config, creating
+    -- a new client if one doesn't already exist for `bufnr`.
     function manager.try_add(bufnr)
       bufnr = bufnr or api.nvim_get_current_buf()
 
@@ -240,6 +244,8 @@ function configs.__newindex(t, config_name, config_def)
       end
     end
 
+    -- Check that the buffer `bufnr` has a valid filetype according to
+    -- `config.filetypes`, then do `manager.try_add(bufnr)`.
     function manager.try_add_wrapper(bufnr)
       bufnr = bufnr or api.nvim_get_current_buf()
       local buf_filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
@@ -250,6 +256,7 @@ function configs.__newindex(t, config_name, config_def)
             return
           end
         end
+      -- `config.filetypes = nil` means all filetypes are valid.
       else
         manager.try_add(bufnr)
       end

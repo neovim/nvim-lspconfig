@@ -295,9 +295,10 @@ function M.server_per_root_dir_manager(make_config)
     return client_id
   end
 
-  function manager.clients()
+  function manager.clients(single_file)
     local res = {}
-    for _, id in pairs(clients) do
+    local client_list = single_file and single_file_clients or clients
+    for _, id in pairs(client_list) do
       local client = lsp.get_client_by_id(id)
       if client then
         table.insert(res, client)
@@ -422,6 +423,7 @@ function M.get_managed_clients()
   for _, config in pairs(configs) do
     if config.manager then
       vim.list_extend(clients, config.manager.clients())
+      vim.list_extend(clients, config.manager.clients(true))
     end
   end
   return clients
