@@ -2176,12 +2176,12 @@ require'lspconfig'.gradle_ls.setup{}
 
 ## grammarly
 
-https://github.com/emacs-grammarly/unofficial-grammarly-language-server
+https://github.com/znck/grammarly
 
-`unofficial-grammarly-language-server` can be installed via `npm`:
+`grammarly-languageserver` can be installed via `npm`:
 
 ```sh
-npm i -g @emacs-grammarly/unofficial-grammarly-language-server
+npm i -g grammarly-languageserver
 ```
 
 WARNING: Since this language server uses Grammarly's API, any document you open with it running is shared with them. Please evaluate their [privacy policy](https://www.grammarly.com/privacy-policy) before using this.
@@ -2197,7 +2197,7 @@ require'lspconfig'.grammarly.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "unofficial-grammarly-language-server", "--stdio" }
+  { "grammarly-languageserver", "--stdio" }
   ```
   - `filetypes` : 
   ```lua
