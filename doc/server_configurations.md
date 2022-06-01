@@ -2249,7 +2249,7 @@ require'lspconfig'.graphql.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern('.git', '.graphqlrc*', '.graphql.config.*')
+  util.root_pattern('.git', '.graphqlrc*', '.graphql.config.*', 'graphql.config.*')
   ```
 
 
