@@ -150,6 +150,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [vls](#vls)
 - [volar](#volar)
 - [vuels](#vuels)
+- [wgsl_analyzer](#wgsl_analyzer)
 - [yamlls](#yamlls)
 - [zeta_note](#zeta_note)
 - [zk](#zk)
@@ -6487,6 +6488,42 @@ require'lspconfig'.vuels.setup{}
   - `root_dir` : 
   ```lua
   root_pattern("package.json", "vue.config.js")
+  ```
+
+
+## wgsl_analyzer
+
+https://github.com/wgsl-analyzer/wgsl-analyzer
+
+`wgsl_analyzer` can be installed via `cargo`:
+```sh
+cargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer wgsl_analyzer
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.wgsl_analyzer.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "wgsl_analyzer" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "wgsl" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".git"
+  ```
+  - `settings` : 
+  ```lua
+  {}
   ```
 
 
