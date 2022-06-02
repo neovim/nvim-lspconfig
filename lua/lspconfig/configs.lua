@@ -256,7 +256,7 @@ function configs.__newindex(t, config_name, config_def)
             return
           end
         end
-      -- `config.filetypes = nil` means all filetypes are valid.
+        -- `config.filetypes = nil` means all filetypes are valid.
       else
         manager.try_add(bufnr)
       end
