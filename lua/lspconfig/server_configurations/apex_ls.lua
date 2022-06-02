@@ -16,9 +16,9 @@ return {
           '-Dlwc.typegeneration.disabled=true',
         }
         if config.apex_jvm_max_heap then
-          table.insert(config.cmd, "-Xmx" .. config.apex_jvm_max_heap)
+          table.insert(config.cmd, '-Xmx' .. config.apex_jvm_max_heap)
         end
-        table.insert(config.cmd, "apex.jorje.lsp.ApexLanguageServerLauncher")
+        table.insert(config.cmd, 'apex.jorje.lsp.ApexLanguageServerLauncher')
       end
     end,
   },

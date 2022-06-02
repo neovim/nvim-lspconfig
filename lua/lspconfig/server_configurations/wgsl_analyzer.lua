@@ -11,8 +11,8 @@ return {
   default_config = {
     cmd = cmd,
     filetypes = { 'wgsl' },
-    root_dir = util.root_pattern('.git'),
-    settings = {}
+    root_dir = util.root_pattern '.git',
+    settings = {},
   },
   docs = {
     description = [[
@@ -25,6 +25,6 @@ cargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer wgsl_analyzer
 ]],
     default_config = {
       root_dir = [[root_pattern(".git"]],
-    }
-  }
+    },
+  },
 }
