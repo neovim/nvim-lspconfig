@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'dart', 'language-server' },
+    cmd = { 'dart', 'language-server', '--protocol=lsp' },
     filetypes = { 'dart' },
     root_dir = util.root_pattern 'pubspec.yaml',
     init_options = {
