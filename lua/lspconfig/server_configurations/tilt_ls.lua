@@ -12,6 +12,11 @@ return {
 https://github.com/tilt-dev/tilt
 
 Tilt language server.
+
+You might need to add filetype detection manually:
+
+```vim
+autocmd BufRead Tiltfile setf=tiltfile
 ```
 ]],
     default_config = {
