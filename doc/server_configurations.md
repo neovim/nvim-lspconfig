@@ -7,6 +7,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [als](#als)
 - [angularls](#angularls)
 - [ansiblels](#ansiblels)
+- [apex_ls](#apex_ls)
 - [arduino_language_server](#arduino_language_server)
 - [asm_lsp](#asm_lsp)
 - [astro](#astro)
@@ -297,6 +298,46 @@ require'lspconfig'.ansiblels.setup{}
   - `single_file_support` : 
   ```lua
   true
+  ```
+
+
+## apex_ls
+
+https://github.com/forcedotcom/salesforcedx-vscode
+
+Language server for Apex.
+
+For manual installation, download the JAR file from the [VSCode
+extension](https://github.com/forcedotcom/salesforcedx-vscode/tree/develop/packages/salesforcedx-vscode-apex).
+
+```lua
+require'lspconfig'.apex_ls.setup {
+  apex_jar_path = '/path/to/apex-jorje-lsp.jar',
+  apex_enable_semantic_errors = false, -- Whether to allow Apex Language Server to surface semantic errors
+  apex_enable_completion_statistics = false, -- Whether to allow Apex Language Server to collect telemetry on code completion usage
+}
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.apex_ls.setup{}
+```
+
+
+**Default values:**
+  - `filetypes` : 
+  ```lua
+  { "apexcode" }
+  ```
+  - `on_new_config` : 
+  ```lua
+  see source file
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern('sfdx-project.json')
   ```
 
 
