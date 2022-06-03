@@ -133,6 +133,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [stylelint_lsp](#stylelint_lsp)
 - [sumneko_lua](#sumneko_lua)
 - [svelte](#svelte)
+- [svlangserver](#svlangserver)
 - [svls](#svls)
 - [tailwindcss](#tailwindcss)
 - [taplo](#taplo)
@@ -5601,6 +5602,53 @@ require'lspconfig'.svelte.setup{}
   - `root_dir` : 
   ```lua
   root_pattern("package.json", ".git")
+  ```
+
+
+## svlangserver
+
+https://github.com/imc-trading/svlangserver
+
+`svlangserver`, a language server for systemverilog
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.svlangserver.setup{}
+```
+**Commands:**
+- SvlangserverBuildIndex: Instructs language server to rerun indexing
+- SvlangserverReportHierarchy: Generates hierarchy for the given module
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "svlangserver" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "verilog", "systemverilog" }
+  ```
+  - `on_init` : 
+  ```lua
+  see source file
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `settings` : 
+  ```lua
+  {
+    systemverilog = {
+      includeIndexing = { "*.{v,vh,sv,svh}", "**/*.{v,vh,sv,svh}" }
+    }
+  }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
   ```
 
 
