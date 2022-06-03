@@ -1103,7 +1103,7 @@ require'lspconfig'.dartls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "dart", "language-server" }
+  { "dart", "language-server", "--protocol=lsp" }
   ```
   - `filetypes` : 
   ```lua
