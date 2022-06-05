@@ -5,11 +5,11 @@ local cmd = { bin_name, 'server' }
 
 return {
   default_config = {
-    cmd = { 'marksman', 'server' },
+    cmd = cmd,
     filetypes = { 'markdown' },
     root_dir = function(fname)
-      local root_files = { ".marksman.toml" }
-      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) 
+      local root_files = { '.marksman.toml' }
+      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
     end,
   },
   docs = {
