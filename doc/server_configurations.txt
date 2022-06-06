@@ -149,6 +149,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [vdmj](#vdmj)
 - [verible](#verible)
 - [vimls](#vimls)
+- [visualforce_ls](#visualforce_ls)
 - [vls](#vls)
 - [volar](#volar)
 - [vuels](#vuels)
@@ -6328,6 +6329,54 @@ require'lspconfig'.vimls.setup{}
   - `single_file_support` : 
   ```lua
   true
+  ```
+
+
+## visualforce_ls
+
+https://github.com/forcedotcom/salesforcedx-vscode
+
+Language server for Visualforce.
+
+For manual installation, download the .vsix archive file from the
+[forcedotcom/salesforcedx-vscode](https://github.com/forcedotcom/salesforcedx-vscode)
+GitHub releases. Then, configure `cmd` to run the Node script at the unpacked location:
+
+```lua
+require'lspconfig'.visualforce_ls.setup {
+  cmd = {
+    'node',
+    '/path/to/unpacked/archive/extension/node_modules/@salesforce/salesforcedx-visualforce-language-server/out/src/visualforceServer.js',
+    '--stdio'
+  }
+}
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.visualforce_ls.setup{}
+```
+
+
+**Default values:**
+  - `filetypes` : 
+  ```lua
+  { "visualforce" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    embeddedLanguages = {
+      css = true,
+      javascript = true
+    }
+  }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern('sfdx-project.json')
   ```
 
 
