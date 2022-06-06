@@ -77,6 +77,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [lelwel_ls](#lelwel_ls)
 - [lemminx](#lemminx)
 - [ltex](#ltex)
+- [marksman](#marksman)
 - [metals](#metals)
 - [mint](#mint)
 - [mm0_ls](#mm0_ls)
@@ -155,7 +156,6 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [vuels](#vuels)
 - [wgsl_analyzer](#wgsl_analyzer)
 - [yamlls](#yamlls)
-- [zeta_note](#zeta_note)
 - [zk](#zk)
 - [zls](#zls)
 
@@ -3290,6 +3290,39 @@ require'lspconfig'.ltex.setup{}
   - `single_file_support` : 
   ```lua
   true
+  ```
+
+
+## marksman
+
+https://github.com/artempyanykh/marksman
+
+Marksman is a Markdown LSP server providing completion, cross-references, diagnostics, and more.
+
+Marksman works on MacOS, Linux, and Windows and is distributed as a self-contained binary for each OS.
+
+Pre-built binaries can be downloaded from https://github.com/artempyanykh/marksman/releases
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.marksman.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "marksman", "server" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "markdown" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".git", ".marksman.toml")
   ```
 
 
@@ -6761,38 +6794,6 @@ require'lspconfig'.yamlls.setup{}
   - `single_file_support` : 
   ```lua
   true
-  ```
-
-
-## zeta_note
-
-https://github.com/artempyanykh/zeta-note
-
-Markdown LSP server for easy note-taking with cross-references and diagnostics.
-
-Binaries can be downloaded from https://github.com/artempyanykh/zeta-note/releases
-```
-
-
-
-**Snippet to enable the language server:**
-```lua
-require'lspconfig'.zeta_note.setup{}
-```
-
-
-**Default values:**
-  - `cmd` : 
-  ```lua
-  { "zeta-note" }
-  ```
-  - `filetypes` : 
-  ```lua
-  { "markdown" }
-  ```
-  - `root_dir` : 
-  ```lua
-  root_pattern(".zeta.toml")
   ```
 
 
