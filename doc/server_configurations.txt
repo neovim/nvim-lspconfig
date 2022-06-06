@@ -144,6 +144,7 @@ that config. This file is accessible in neovim via `:help lspconfig-server-confi
 - [texlab](#texlab)
 - [tflint](#tflint)
 - [theme_check](#theme_check)
+- [tilt_ls](#tilt_ls)
 - [tsserver](#tsserver)
 - [typeprof](#typeprof)
 - [vala_ls](#vala_ls)
@@ -6095,6 +6096,45 @@ require'lspconfig'.theme_check.setup{}
   - `settings` : 
   ```lua
   {}
+  ```
+
+
+## tilt_ls
+
+https://github.com/tilt-dev/tilt
+
+Tilt language server.
+
+You might need to add filetype detection manually:
+
+```vim
+autocmd BufRead Tiltfile setf=tiltfile
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.tilt_ls.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "tilt", "lsp", "start" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "tiltfile" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern(".git")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
   ```
 
 
