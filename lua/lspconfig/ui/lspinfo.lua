@@ -5,7 +5,7 @@ local util = require 'lspconfig.util'
 local error_messages = {
   cmd_not_found = 'Unable to find executable. Please check your path and ensure the server is installed',
   no_filetype_defined = 'No filetypes defined, Please define filetypes in setup()',
-  root_dir_not_found = 'Unable to find workspace directory.',
+  root_dir_not_found = 'Not found.',
 }
 
 local helptags = {
