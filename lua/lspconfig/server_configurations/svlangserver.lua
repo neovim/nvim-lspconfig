@@ -27,7 +27,7 @@ return {
     cmd = cmd,
     filetypes = { 'verilog', 'systemverilog' },
     root_dir = function(fname)
-      return util.root_pattern '.nvim'(fname) or util.find_git_ancestor(fname)
+      return util.root_pattern '.svlangserver'(fname) or util.find_git_ancestor(fname)
     end,
     single_file_support = true,
     settings = {
@@ -35,16 +35,6 @@ return {
         includeIndexing = { '*.{v,vh,sv,svh}', '**/*.{v,vh,sv,svh}' },
       },
     },
-    on_init = function(client)
-      local json = ''
-      for line in io.lines(client.config.root_dir .. '/.nvim/lspconfig.json') do
-        json = json .. line
-      end
-      json = vim.json.decode(json)
-      client.config.cmd = { json.languageserver.svlangserver.command }
-      client.config.filetypes = json.languageserver.svlangserver.filetypes
-      client.config.settings = json.languageserver.svlangserver.settings
-    end,
   },
   commands = {
     SvlangserverBuildIndex = {
@@ -60,7 +50,16 @@ return {
     description = [[
 https://github.com/imc-trading/svlangserver
 
-`svlangserver`, a language server for systemverilog
+Language server for SystemVerilog.
+
+`svlangserver` can be installed via `npm`:
+
+```sh
+$ npm install -g @imc-trading/svlangserver
+```
 ]],
+    default_config = {
+      root_dir = [[root_pattern(".svlangserver", ".git")]],
+    },
   },
 }
