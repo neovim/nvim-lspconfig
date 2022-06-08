@@ -26,7 +26,9 @@ return {
   default_config = {
     cmd = cmd,
     filetypes = { 'verilog', 'systemverilog' },
-    root_dir = util.find_git_ancestor,
+    root_dir = function(fname)
+      return util.root_pattern '.svlangserver'(fname) or util.find_git_ancestor(fname)
+    end,
     single_file_support = true,
     settings = {
       systemverilog = {
@@ -57,7 +59,7 @@ $ npm install -g @imc-trading/svlangserver
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern(".git")]],
+      root_dir = [[root_pattern(".svlangserver", ".git")]],
     },
   },
 }
