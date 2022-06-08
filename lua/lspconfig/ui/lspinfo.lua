@@ -46,7 +46,11 @@ local function make_config_info(config)
   end
 
   local buffer_dir = vim.fn.expand '%:p:h'
-  config_info.root_dir = config.get_root_dir(buffer_dir) or 'NA'
+  if config.get_root_dir then
+    config_info.root_dir = config.get_root_dir(buffer_dir) or 'NA'
+  else
+    config_info.root_dir = 'Running in single file mode.'
+  end
   config_info.autostart = (config.autostart and 'true') or 'false'
   config_info.handlers = table.concat(vim.tbl_keys(config.handlers), ', ')
   config_info.filetypes = table.concat(config.filetypes or {}, ', ')
