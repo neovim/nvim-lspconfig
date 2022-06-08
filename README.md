@@ -1,27 +1,12 @@
-# lspconfig
+# nvim-lspconfig
 
-A [collection of common configurations](doc/server_configurations.md) for Neovim's built-in [language server client](https://neovim.io/doc/user/lsp.html).
+[Configs](doc/server_configurations.md) for the [Nvim LSP client](https://neovim.io/doc/user/lsp.html) (`:help lsp`).
 
-This plugin allows for declaratively configuring, launching, and initializing language servers you have installed on your system. 
-**Disclaimer: Language server configurations are provided on a best-effort basis and are community-maintained. See [contributions](#contributions).**
+* **Do not file Nvim LSP client issues here.** The Nvim LSP client does not live here. This is only a collection of LSP configs.
+* If you found a bug in the Nvim LSP client, [report it at the Nvim core repo](https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&template=lsp_bug_report.yml).
+* These configs are **best-effort and unsupported.** See [contributions](#contributions).
 
-`lspconfig` has extensive help documentation, see `:help lspconfig`.
-
-# LSP overview
-
-Neovim supports the Language Server Protocol (LSP), which means it acts as a client to language servers and includes a Lua framework `vim.lsp` for building enhanced LSP tools. LSP facilitates features like:
-
-- go-to-definition
-- find-references
-- hover
-- completion
-- rename
-- format
-- refactor
-
-Neovim provides an interface for all of these features, and the language server client is designed to be highly extensible to allow plugins to integrate language server features which are not yet present in Neovim core such as [**auto**-completion](https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion) (as opposed to manual completion with omnifunc) and [snippet integration](https://github.com/neovim/nvim-lspconfig/wiki/Snippets).
-
-**These features are not implemented in this repo**, but in Neovim core. See `:help lsp` for more details.
+See also `:help lspconfig`.
 
 ## Install
 
