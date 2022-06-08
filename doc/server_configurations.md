@@ -5644,7 +5644,13 @@ require'lspconfig'.svelte.setup{}
 
 https://github.com/imc-trading/svlangserver
 
-`svlangserver`, a language server for systemverilog
+Language server for SystemVerilog.
+
+`svlangserver` can be installed via `npm`:
+
+```sh
+$ npm install -g @imc-trading/svlangserver
+```
 
 
 
@@ -5665,13 +5671,9 @@ require'lspconfig'.svlangserver.setup{}
   ```lua
   { "verilog", "systemverilog" }
   ```
-  - `on_init` : 
-  ```lua
-  see source file
-  ```
   - `root_dir` : 
   ```lua
-  see source file
+  root_pattern(".svlangserver", ".git")
   ```
   - `settings` : 
   ```lua
