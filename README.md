@@ -26,11 +26,11 @@ See also `:help lspconfig`.
 
 1. Install a language server, e.g. [pyright](doc/server_configurations.md#pyright)
 
-    ```bash
-    npm i -g pyright
+    ```console
+    $ npm i -g pyright
     ```
 
-2. Add the language server setup to your init.lua.
+2. Add the language server setup to your `init.lua` or inside a `lua` block inside your `init.vim`
 
     ```lua
     require'lspconfig'.pyright.setup{}
@@ -38,8 +38,8 @@ See also `:help lspconfig`.
 
 3. Launch neovim, the language server will now be attached and providing diagnostics (see `:LspInfo`)
 
-    ```
-    nvim main.py
+    ```console
+    $ nvim main.py
     ```
 
 4. See [Keybindings and completion](#Keybindings-and-completion) for mapping useful functions and enabling omnifunc completion
