@@ -4264,10 +4264,11 @@ require'lspconfig'.puppet.setup{}
 ## purescriptls
 
 https://github.com/nwolverson/purescript-language-server
-`purescript-language-server` can be installed via `npm`
-```sh
-npm install -g purescript-language-server
-```
+
+The `purescript-language-server` can be added to your project and `$PATH` via
+
+* JavaScript package manager such as npm, pnpm, Yarn, et al.
+* Nix under the `nodePackages` and `nodePackages_latest` package sets
 
 
 
@@ -4288,7 +4289,7 @@ require'lspconfig'.purescriptls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("spago.dhall, 'psc-package.json', bower.json")
+  root_pattern('spago.dhall', 'psc-package.json', 'bower.json', 'flake.nix', 'shell.nix'),
   ```
 
 
