@@ -125,7 +125,7 @@ PRs are checked with [luacheck](https://github.com/mpeterv/luacheck), [StyLua](h
 
 ## Generating docs
 
-Github Actions automatically generates `server_configurations.md`. Only modify `scripts/README_template.md` or the `docs` table in the server config (the lua file). Do not modify `server_configurations.md` directly.
+Github Actions automatically generates `server_configurations.md`. Only modify `scripts/README_template.md` or the `docs` table in the server config Lua file. Do not modify `server_configurations.md` directly.
 
 To preview the generated `server_configurations.md` locally, run `scripts/docgen.lua` from
 `nvim` (from the project root):
