@@ -17,7 +17,7 @@ Language server for Taplo, a TOML toolkit.
 
 `taplo-cli` can be installed via `cargo`:
 ```sh
-cargo install --locked taplo-cli
+cargo install --features lsp --locked taplo-cli
 ```
     ]],
     default_config = {
