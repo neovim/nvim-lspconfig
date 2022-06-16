@@ -2833,23 +2833,19 @@ you can keep reading here.
 
 For manual installation you can download precompiled binaries from the
 [official downloads site](http://download.eclipse.org/jdtls/snapshots/?d)
+and ensure that the `PATH` variable contains the `bin` directory of the extracted archive.
 
-Due to the nature of java, settings cannot be inferred. Please set the following
-environmental variables to match your installation. If you need per-project configuration
-[direnv](https://github.com/direnv/direnv) is highly recommended.
-
-```bash
-# Mandatory:
-# .bashrc
-export JDTLS_HOME=/path/to/jdtls_root # Directory with the plugin and configs directories
-
-# Optional:
-export JAVA_HOME=/path/to/java_home # In case you don't have java in path or want to use a version in particular
-export WORKSPACE=/path/to/workspace # Defaults to $HOME/workspace
-```
 ```lua
   -- init.lua
   require'lspconfig'.jdtls.setup{}
+```
+
+You can also pass extra custom jvm arguments with the JDTLS_JVM_ARGS environment variable as a space separated list of arguments,
+that will be converted to multiple --jvm-arg=<param> args when passed to the jdtls script. This will allow for example tweaking
+the jvm arguments or integration with external tools like lombok:
+
+```sh
+export JDTLS_JVM_ARGS="-javaagent:$HOME/.local/share/java/lombok.jar"
 ```
 
 For automatic installation you can use the following unofficial installers/launchers under your own risk:
@@ -2870,7 +2866,7 @@ require'lspconfig'.jdtls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "/usr/lib/jvm/temurin-11-jdk-amd64/bin/java", "-Declipse.application=org.eclipse.jdt.ls.core.id1", "-Dosgi.bundles.defaultStartLevel=4", "-Declipse.product=org.eclipse.jdt.ls.core.product", "-Dlog.protocol=true", "-Dlog.level=ALL", "-Xms1g", "-Xmx2G", "--add-modules=ALL-SYSTEM", "--add-opens", "java.base/java.util=ALL-UNNAMED", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "-jar", "/plugins/org.eclipse.equinox.launcher_*.jar", "-configuration", "config_linux", "-data", "/home/runner/workspace" }
+  { "jdtls", "-configuration", "/home/runner/.cache/jdtls/config", "-data", "/home/runner/.cache/jdtls/workspace" }
   ```
   - `filetypes` : 
   ```lua
@@ -2889,7 +2885,7 @@ require'lspconfig'.jdtls.setup{}
   ```lua
   {
     jvm_args = {},
-    workspace = "/home/runner/workspace"
+    workspace = "/home/runner/.cache/jdtls/workspace"
   }
   ```
   - `root_dir` : 
