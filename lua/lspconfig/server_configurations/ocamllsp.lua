@@ -28,7 +28,6 @@ https://github.com/ocaml/ocaml-lsp
 
 To install the lsp server in a particular opam switch:
 ```sh
-opam pin add ocaml-lsp-server https://github.com/ocaml/ocaml-lsp.git
 opam install ocaml-lsp-server
 ```
     ]],
