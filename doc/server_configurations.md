@@ -5012,10 +5012,10 @@ require'lspconfig'.scry.setup{}
 
 ## serve_d
 
-           https://github.com/Pure-D/serve-d
+https://github.com/Pure-D/serve-d
 
-           `Microsoft language server protocol implementation for D using workspace-d.`
-           Download a binary from https://github.com/Pure-D/serve-d/releases and put it in your $PATH.
+Microsoft language server protocol implementation for D using workspace-d.
+Download a binary from https://github.com/Pure-D/serve-d/releases and put it in your $PATH.
         
 
 
@@ -6915,7 +6915,7 @@ require'lspconfig'.yamlls.setup{}
 
 ## zk
 
-github.com/mickael-menu/zk
+https://github.com/mickael-menu/zk
 
 A plain text note-taking assistant
 
