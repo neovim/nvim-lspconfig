@@ -890,7 +890,7 @@ require'lspconfig'.cmake.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".git", "compile_commands.json", "build")
+  root_pattern('CMakePresets.json', 'CTestConfig.cmake', '.git', 'build', 'cmake')
   ```
   - `single_file_support` : 
   ```lua
