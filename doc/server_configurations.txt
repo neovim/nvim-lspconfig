@@ -3597,7 +3597,9 @@ require'lspconfig'.nickel_ls.setup{}
 ## nimls
 
 https://github.com/PMunch/nimlsp
+
 `nimlsp` can be installed via the `nimble` package manager:
+
 ```sh
 nimble install nimlsp
 ```
