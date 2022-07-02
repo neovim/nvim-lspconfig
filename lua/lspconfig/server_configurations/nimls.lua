@@ -19,5 +19,6 @@ https://github.com/PMunch/nimlsp
 nimble install nimlsp
 ```
     ]],
+    root_dir = [[util.root_pattern '*.nimble'(fname) or util.find_git_ancestor(fname)]],
   },
 }
