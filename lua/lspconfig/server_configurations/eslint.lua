@@ -103,7 +103,7 @@ return {
       local pnp_cjs = util.path.join(new_root_dir, '.pnp.cjs')
       local pnp_js = util.path.join(new_root_dir, '.pnp.js')
       if util.path.exists(pnp_cjs) or util.path.exists(pnp_js) then
-        config.cmd = { 'yarn', 'exec', unpack(cmd) }
+        config.cmd = vim.list_extend({ 'yarn', 'exec' }, cmd)
       end
     end,
     handlers = {
