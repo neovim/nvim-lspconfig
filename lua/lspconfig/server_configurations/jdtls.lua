@@ -81,6 +81,7 @@ local root_files = {
   {
     'build.xml', -- Ant
     'pom.xml', -- Maven
+    '.git', -- Git
     'settings.gradle', -- Gradle
     'settings.gradle.kts', -- Gradle
   },
