@@ -2268,6 +2268,14 @@ require'lspconfig'.gradle_ls.setup{}
   ```lua
   { "groovy" }
   ```
+  - `init_options` : 
+  ```lua
+  {
+    settings = {
+      gradleWrapperEnabled = true
+    }
+  }
+  ```
   - `root_dir` : 
   ```lua
   root_pattern("settings.gradle")
