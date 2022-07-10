@@ -18,19 +18,21 @@ local function virtual_text_document_handler(uri, result)
   end
 
   for client_id, res in pairs(result) do
-    local lines = vim.split(res.result, '\n')
-    local bufnr = vim.uri_to_bufnr(uri)
+    if res.result ~= nil then
+        local lines = vim.split(res.result, '\n')
+        local bufnr = vim.uri_to_bufnr(uri)
 
-    local current_buf = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-    if #current_buf ~= 0 then
-      return nil
+        local current_buf = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+        if #current_buf ~= 0 then
+          return nil
+        end
+
+        vim.api.nvim_buf_set_lines(bufnr, 0, -1, nil, lines)
+        vim.api.nvim_buf_set_option(bufnr, 'readonly', true)
+        vim.api.nvim_buf_set_option(bufnr, 'modified', false)
+        vim.api.nvim_buf_set_option(bufnr, 'modifiable', false)
+        lsp.buf_attach_client(bufnr, client_id)
     end
-
-    vim.api.nvim_buf_set_lines(bufnr, 0, -1, nil, lines)
-    vim.api.nvim_buf_set_option(bufnr, 'readonly', true)
-    vim.api.nvim_buf_set_option(bufnr, 'modified', false)
-    vim.api.nvim_buf_set_option(bufnr, 'modifiable', false)
-    lsp.buf_attach_client(bufnr, client_id)
   end
 end
 
