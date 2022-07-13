@@ -157,23 +157,16 @@ return function()
 
   local buf_lines = {}
 
-  local buf_client_names = {}
-  for _, client in pairs(buf_clients) do
-    table.insert(buf_client_names, client.name)
-  end
-
   local buf_client_ids = {}
   for _, client in pairs(buf_clients) do
     table.insert(buf_client_ids, client.id)
   end
 
   local other_active_clients = {}
-  local client_names = {}
   for _, client in pairs(clients) do
     if not vim.tbl_contains(buf_client_ids, client.id) then
       table.insert(other_active_clients, client)
     end
-    table.insert(client_names, client.name)
   end
 
   local header = {
