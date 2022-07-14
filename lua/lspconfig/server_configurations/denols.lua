@@ -35,7 +35,6 @@ local function virtual_text_document_handler(uri, result)
         vim.api.nvim_buf_set_option(bufnr, 'readonly', true)
         vim.api.nvim_buf_set_option(bufnr, 'modified', false)
         vim.api.nvim_buf_set_option(bufnr, 'modifiable', false)
-        lsp.buf_attach_client(bufnr, client_id)
     end
   end
 end
