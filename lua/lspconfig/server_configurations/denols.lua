@@ -17,7 +17,7 @@ local function virtual_text_document_handler(uri, result)
     return nil
   end
 
-  for client_id, res in pairs(result) do
+  for _, res in pairs(result) do
     -- Error might be present because of race, deno server will eventually send a result. #1995
     if res.error ~= nil then
         require('vim.lsp.log').warn('deno/virtual_text_document handler failed (might be a temporary issue), error: '
