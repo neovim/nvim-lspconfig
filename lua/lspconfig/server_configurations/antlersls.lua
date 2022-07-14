@@ -11,7 +11,7 @@ return {
   default_config = {
     cmd = cmd,
     filetypes = { 'html', 'antlers' },
-    root_dir = util.root_pattern('composer.json'),
+    root_dir = util.root_pattern 'composer.json',
   },
   docs = {
     description = [[
