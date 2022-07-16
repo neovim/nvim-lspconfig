@@ -20,22 +20,23 @@ local function virtual_text_document_handler(uri, result)
   for client_id, res in pairs(result) do
     -- Error might be present because of race, deno server will eventually send a result. #1995
     if res.error ~= nil then
-        require('vim.lsp.log').warn('deno/virtual_text_document handler failed (might be a temporary issue), error: '
-            .. tostring(res.error))
+      require('vim.lsp.log').warn(
+        'deno/virtual_text_document handler failed (might be a temporary issue), error: ' .. tostring(res.error)
+      )
     else
-        local lines = vim.split(res.result, '\n')
-        local bufnr = vim.uri_to_bufnr(uri)
+      local lines = vim.split(res.result, '\n')
+      local bufnr = vim.uri_to_bufnr(uri)
 
-        local current_buf = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-        if #current_buf ~= 0 then
-          return nil
-        end
+      local current_buf = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+      if #current_buf ~= 0 then
+        return nil
+      end
 
-        vim.api.nvim_buf_set_lines(bufnr, 0, -1, nil, lines)
-        vim.api.nvim_buf_set_option(bufnr, 'readonly', true)
-        vim.api.nvim_buf_set_option(bufnr, 'modified', false)
-        vim.api.nvim_buf_set_option(bufnr, 'modifiable', false)
-        lsp.buf_attach_client(bufnr, client_id)
+      vim.api.nvim_buf_set_lines(bufnr, 0, -1, nil, lines)
+      vim.api.nvim_buf_set_option(bufnr, 'readonly', true)
+      vim.api.nvim_buf_set_option(bufnr, 'modified', false)
+      vim.api.nvim_buf_set_option(bufnr, 'modifiable', false)
+      lsp.buf_attach_client(bufnr, client_id)
     end
   end
 end
