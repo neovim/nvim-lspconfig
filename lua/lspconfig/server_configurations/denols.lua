@@ -5,7 +5,7 @@ local function buf_cache(bufnr)
   local params = {}
   params['referrer'] = { uri = vim.uri_from_bufnr(bufnr) }
   params['uris'] = {}
-  lsp.buf_request(bufnr, 'deno/cache', params, function(err) end)
+  lsp.buf_request(bufnr, 'deno/cache', params, function(_) end)
 end
 
 local function virtual_text_document_handler(uri, result)
