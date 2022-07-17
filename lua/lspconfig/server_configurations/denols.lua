@@ -13,7 +13,7 @@ local function virtual_text_document_handler(uri, result)
     return nil
   end
 
-  for client_id, res in pairs(result) do
+  for _, res in pairs(result) do
     -- Error might be present because of race, deno server will eventually send a result. #1995
     if res.error ~= nil then
       require('vim.lsp.log').warn(
@@ -32,7 +32,6 @@ local function virtual_text_document_handler(uri, result)
       vim.api.nvim_buf_set_option(bufnr, 'readonly', true)
       vim.api.nvim_buf_set_option(bufnr, 'modified', false)
       vim.api.nvim_buf_set_option(bufnr, 'modifiable', false)
-      lsp.buf_attach_client(bufnr, client_id)
     end
   end
 end
@@ -67,6 +66,8 @@ end
 return {
   default_config = {
     cmd = { 'deno', 'lsp' },
+    -- single file support is required for now to make the lsp work correctly, see #2000
+    single_file_support = true,
     filetypes = {
       'javascript',
       'javascriptreact',
