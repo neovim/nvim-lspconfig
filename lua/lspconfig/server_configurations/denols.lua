@@ -70,6 +70,8 @@ end
 return {
   default_config = {
     cmd = { 'deno', 'lsp' },
+    -- single file support is required for now to make the lsp work correctly, see #2000
+    single_file_support = true,
     filetypes = {
       'javascript',
       'javascriptreact',
