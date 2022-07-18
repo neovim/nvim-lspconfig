@@ -772,7 +772,7 @@ require'lspconfig'.ccls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  <function 1>
+  root_pattern('compile_commands.json', '.ccls', '.git')
   ```
   - `single_file_support` : 
   ```lua
@@ -1281,6 +1281,10 @@ require'lspconfig'.denols.setup{}
   - `root_dir` : 
   ```lua
   root_pattern("deno.json", "deno.jsonc", ".git")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
   ```
 
 
@@ -2612,7 +2616,7 @@ require'lspconfig'.hie.setup{}
 https://github.com/haskell/haskell-language-server
 
 Haskell Language Server
-        
+    
 
 
 **Snippet to enable the language server:**
@@ -2636,7 +2640,13 @@ require'lspconfig'.hls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")
+  function (filepath)
+    return (
+      util.root_pattern('hie.yaml', 'stack.yaml', 'cabal.project')(filepath)
+      or util.root_pattern('*.cabal', 'package.yaml')(filepath)
+    )
+  end
+        
   ```
   - `settings` : 
   ```lua
