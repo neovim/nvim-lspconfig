@@ -8,6 +8,28 @@ local function buf_cache(bufnr)
   lsp.buf_request(bufnr, 'deno/cache', params, function(_) end)
 end
 
+local function deno_task(bufnr)
+  local answer = lsp.buf_request_sync(bufnr, 'deno/task')
+  local tasks = answer[1].result
+
+  vim.ui.select(tasks, {
+    prompt = 'Select deno task to run',
+    format_item = function(task)
+      return task.name
+    end,
+  }, function(choice)
+    if choice == nil then
+      return
+    end
+    vim.api.nvim_command 'new lua_terminal'
+    vim.api.nvim_command 'wincmd J'
+    vim.api.nvim_command('resize ' .. tonumber(vim.api.nvim_exec('echo &lines', true)) / 4)
+    local lua_terminal_job_id = vim.fn.termopen(os.getenv 'SHELL')
+    vim.fn.jobsend(lua_terminal_job_id, 'deno task ' .. choice.name .. '\n')
+    vim.cmd 'startinsert'
+  end)
+end
+
 local function virtual_text_document_handler(uri, result)
   if not result then
     return nil
@@ -92,6 +114,12 @@ return {
         buf_cache(0)
       end,
       description = 'Cache a module and all of its dependencies.',
+    },
+    DenolsTask = {
+      function()
+        deno_task(0)
+      end,
+      description = 'Run deno task.',
     },
   },
   docs = {
