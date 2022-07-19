@@ -84,6 +84,13 @@ return {
     handlers = {
       ['textDocument/definition'] = denols_handler,
       ['textDocument/references'] = denols_handler,
+      ['workspace/executeCommand'] = function(err, result, context)
+        if context.params.command == 'deno.cache' then
+          buf_cache(context.bufnr)
+        else
+          lsp.handlers[context.method](err, result, context)
+        end
+      end,
     },
   },
   commands = {
