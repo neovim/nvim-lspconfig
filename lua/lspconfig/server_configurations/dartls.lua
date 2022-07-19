@@ -1,11 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'dart'
-local cmd = { bin_name, 'language-server', '--protocol=lsp' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, 'language-server', '--protocol=lsp' }
-end
+local cmd = (vim.fn.has 'win32' == 1
+  and { 'cmd.exe', '/C', 'dart', 'language-server', '--protocol=lsp' }
+  or { 'dart', 'language-server', '--protocol=lsp' })
 
 return {
   default_config = {
