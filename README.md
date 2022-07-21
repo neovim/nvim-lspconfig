@@ -24,7 +24,7 @@ See also `:help lspconfig`.
 
 1. Install a language server, e.g. [pyright](doc/server_configurations.md#pyright)
    ```bash
-   pip3 install pyright
+   pip install pyright
    ```
 2. Add the language server setup to your init.lua.
    ```lua
