@@ -6214,7 +6214,7 @@ require'lspconfig'.texlab.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "tex", "bib" }
+  { "tex", "plaintex", "bib" }
   ```
   - `root_dir` : 
   ```lua
