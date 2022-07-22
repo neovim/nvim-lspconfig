@@ -1268,7 +1268,8 @@ require'lspconfig'.denols.setup{}
   ```lua
   {
     ["textDocument/definition"] = <function 1>,
-    ["textDocument/references"] = <function 1>
+    ["textDocument/references"] = <function 1>,
+    ["workspace/executeCommand"] = <function 2>
   }
   ```
   - `init_options` : 
