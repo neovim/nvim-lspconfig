@@ -63,7 +63,7 @@ local function denols_handler(err, result, ctx)
   lsp.handlers[ctx.method](err, result, ctx)
 end
 
-return {
+local denols = {
   default_config = {
     cmd = { 'deno', 'lsp' },
     -- single file support is required for now to make the lsp work correctly, see #2000
@@ -80,6 +80,7 @@ return {
     init_options = {
       enable = true,
       unstable = false,
+      suggest = { imports = { hosts = {} } },
     },
     handlers = {
       ['textDocument/definition'] = denols_handler,
@@ -122,3 +123,9 @@ vim.g.markdown_fenced_languages = {
     },
   },
 }
+
+local deno_land_host = {}
+deno_land_host['https://deno.land'] = true
+denols.default_config.init_options.suggest.imports.hosts = deno_land_host
+
+return denols
