@@ -77,9 +77,11 @@ return {
       'typescript.tsx',
     },
     root_dir = util.root_pattern('deno.json', 'deno.jsonc', '.git'),
-    init_options = {
-      enable = true,
-      unstable = false,
+    settings = {
+      deno = {
+        enable = true,
+        unstable = false,
+      },
     },
     handlers = {
       ['textDocument/definition'] = denols_handler,
@@ -90,6 +92,19 @@ return {
         else
           lsp.handlers[context.method](err, result, context)
         end
+      end,
+      ['deno/registryState'] = function(_, result, context)
+        -- https://github.com/denoland/vscode_deno/blob/45d343516ab1250867a5cb254460278f0ceca2a2/client/src/notification_handlers.ts
+        local client = lsp.get_client_by_id(context.client_id)
+        local suggest_imports_config = (client.config.settings.deno.suggest or {}).imports or {}
+        local hosts = suggest_imports_config.hosts or {}
+        hosts[result.origin] = true
+
+        local new = { deno = { suggest = { imports = { hosts = hosts } } } }
+        client.config.settings = vim.tbl_deep_extend('force', client.config.settings, new)
+        client.notify('workspace/didChangeConfiguration', {
+          settings = new,
+        })
       end,
     },
   },
