@@ -2269,7 +2269,7 @@ require'lspconfig'.gopls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "go", "gomod", "gotmpl" }
+  { "go", "gomod", "gowork", "gotmpl" }
   ```
   - `root_dir` : 
   ```lua
