@@ -47,7 +47,7 @@ return {
           vim.log.levels.WARN
         )
       end
-      return cargo_workspace_dir
+      return util.path.sanitize(cargo_workspace_dir)
         or cargo_crate_dir
         or util.root_pattern 'rust-project.json'(fname)
         or util.find_git_ancestor(fname)
