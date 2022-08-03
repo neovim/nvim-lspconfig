@@ -21,9 +21,14 @@ return {
         },
         ansible = {
           path = 'ansible',
+          useFullyQualifiedCollectionNames = true,
         },
         executionEnvironment = {
           enabled = false,
+        },
+        completion = {
+          provideRedirectModules = true,
+          provideModuleOptionAliases = true,
         },
       },
     },
