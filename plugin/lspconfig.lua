@@ -9,7 +9,7 @@ end
 
 -- init lspconfig commands
 local lspconfig_init = function()
-  if vim.fn.exists 'g:lspconfig' == 1 then
+  if vim.fn.exists('g:lspconfig') == 1 then
     return
   end
   vim.g.lspconfig = 1
