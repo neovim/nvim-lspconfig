@@ -76,10 +76,10 @@ function configs.__newindex(t, config_name, config_def)
 
     local get_root_dir = config.root_dir
 
-    function M.launch()
+    function M.launch(init_bufnr)
       local root_dir
       if get_root_dir then
-        local bufnr = api.nvim_get_current_buf()
+        local bufnr = init_bufnr or api.nvim_get_current_buf()
         local bufname = api.nvim_buf_get_name(bufnr)
         if not util.bufname_valid(bufname) then
           return

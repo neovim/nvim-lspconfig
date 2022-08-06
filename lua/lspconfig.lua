@@ -10,6 +10,15 @@ function M.available_servers()
   return vim.tbl_keys(configs)
 end
 
+local function restart_client(client, bufnr)
+  client.stop()
+  vim.defer_fn(function()
+    if bufnr == nil or vim.api.nvim_buf_is_valid(bufnr) then
+      configs[client.name].launch(bufnr)
+    end
+  end, 500)
+end
+
 -- Called from plugin/lspconfig.vim because it requires knowing that the last
 -- script in scriptnames to be executed is lspconfig.
 function M._root._setup()
@@ -55,19 +64,36 @@ function M._root._setup()
         end
       end,
       '-nargs=? -complete=customlist,v:lua.lsp_get_active_client_ids',
-      description = '`:LspStop` Manually stops the given language client(s).',
+      description = '`:LspStop` Manually stops the given language client(s),'
+        .. ' if none are given stops current buffer client(s).'
+        .. ' `:LspStop!` Manually stops all language client(s).',
+      bang = function()
+        for _, client in ipairs(vim.tbl_values(M.util.get_managed_clients())) do
+          client.stop()
+        end
+      end,
     },
     LspRestart = {
       function(cmd_args)
         for _, client in ipairs(M.util.get_clients_from_cmd_args(cmd_args)) do
-          client.stop()
-          vim.defer_fn(function()
-            configs[client.name].launch()
-          end, 500)
+          restart_client(client)
         end
       end,
       '-nargs=? -complete=customlist,v:lua.lsp_get_active_client_ids',
-      description = '`:LspRestart` Manually restart the given language client(s).',
+      description = '`:LspRestart` Manually restart the given language client(s).'
+        .. ' if none are given restarts current buffer client(s).'
+        .. ' `:LspRestart!` Manually restarts all language client(s).',
+      bang = function()
+        local client_to_bufnr = {}
+        for _, bufnr in pairs(vim.api.nvim_list_bufs()) do
+          for _, client in pairs(vim.lsp.get_active_clients { bufnr = bufnr }) do
+            client_to_bufnr[client.id] = bufnr
+          end
+        end
+        for _, client in ipairs(vim.tbl_values(M.util.get_managed_clients())) do
+          restart_client(client, client_to_bufnr[client.id])
+        end
+      end,
     },
   }
 

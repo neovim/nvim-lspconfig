@@ -62,6 +62,9 @@ end
 function M.create_module_commands(module_name, commands)
   for command_name, def in pairs(commands) do
     local parts = { 'command!' }
+    if def.bang then
+      table.insert(parts, '-bang')
+    end
     -- Insert attributes.
     for k, v in pairs(def) do
       if type(k) == 'string' and type(v) == 'boolean' and v then
@@ -74,7 +77,16 @@ function M.create_module_commands(module_name, commands)
     -- The command definition.
     table.insert(
       parts,
-      string.format("lua require'lspconfig'[%q].commands[%q][1](<f-args>)", module_name, command_name)
+      def.bang
+          and string.format(
+            "lua if '<bang>' == '!' then require'lspconfig'[%q].commands[%q].bang(<f-args>) "
+              .. "else require'lspconfig'[%q].commands[%q][1](<f-args>) end",
+            module_name,
+            command_name,
+            module_name,
+            command_name
+          )
+        or string.format("lua require'lspconfig'[%q].commands[%q][1](<f-args>)", module_name, command_name)
     )
     api.nvim_command(table.concat(parts, ' '))
   end
@@ -412,7 +424,7 @@ function M.get_clients_from_cmd_args(arg)
     result[id] = vim.lsp.get_client_by_id(tonumber(id))
   end
   if vim.tbl_isempty(result) then
-    return M.get_managed_clients()
+    return M.get_managed_clients(vim.api.nvim_get_current_buf())
   end
   return vim.tbl_values(result)
 end
@@ -425,13 +437,24 @@ function M.get_active_client_by_name(bufnr, servername)
   end
 end
 
-function M.get_managed_clients()
+function M.get_managed_clients(bufnr)
   local configs = require 'lspconfig.configs'
+  local all_clients = {}
+  -- if a buffer is provided, only return clients associated with that buffer
+  for _, client in pairs(vim.lsp.get_active_clients { bufnr = bufnr }) do
+    all_clients[client.id] = client
+  end
   local clients = {}
   for _, config in pairs(configs) do
     if config.manager then
-      vim.list_extend(clients, config.manager.clients())
-      vim.list_extend(clients, config.manager.clients(true))
+      local manager_clients = {}
+      vim.list_extend(manager_clients, config.manager.clients())
+      vim.list_extend(manager_clients, config.manager.clients(true))
+      for _, client in pairs(manager_clients) do
+        if all_clients[client.id] then
+          table.insert(clients, client)
+        end
+      end
     end
   end
   return clients

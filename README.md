@@ -133,8 +133,10 @@ Most of the time, the reason for failure is present in the logs.
 
 * `:LspInfo` shows the status of active and configured language servers.
 * `:LspStart <config_name>` Start the requested server name. Will only successfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command. Defaults to all servers matching current buffer filetype.
-* `:LspStop <client_id>` Defaults to stopping all buffer clients.
-* `:LspRestart <client_id>` Defaults to restarting all buffer clients.
+* `:LspStop <client_id>` Stops the given client(s), or those for the current buffer if none are given.
+* `:LspStop!` Stop all buffer clients.
+* `:LspRestart <client_id>` Restarts the given client(s), or those for the current buffer if none are given.
+* `:LspRestart!` Restarts all buffer clients.
 
 ## Wiki
 
