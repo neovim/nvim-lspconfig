@@ -7,7 +7,13 @@ local M = {
 M._root = {}
 
 function M.available_servers()
-  return vim.tbl_keys(configs)
+  local servers = {}
+  for server, config in pairs(configs) do
+    if config.manager ~= nil then
+      table.insert(servers, server)
+    end
+  end
+  return servers
 end
 
 -- Called from plugin/lspconfig.vim because it requires knowing that the last
