@@ -8,7 +8,7 @@ local function buf_cache(bufnr, client)
   client.request_sync('deno/cache', params)
 end
 
-local function virtual_text_document_handler(uri, res)
+local function virtual_text_document_handler(uri, res, client)
   if not res then
     return nil
   end
@@ -25,6 +25,7 @@ local function virtual_text_document_handler(uri, res)
   vim.api.nvim_buf_set_option(bufnr, 'readonly', true)
   vim.api.nvim_buf_set_option(bufnr, 'modified', false)
   vim.api.nvim_buf_set_option(bufnr, 'modifiable', false)
+  lsp.buf_attach_client(bufnr, client.id)
 end
 
 local function virtual_text_document(uri, client)
@@ -34,7 +35,7 @@ local function virtual_text_document(uri, client)
     },
   }
   local result = client.request_sync('deno/virtualTextDocument', params)
-  virtual_text_document_handler(uri, result)
+  virtual_text_document_handler(uri, result, client)
 end
 
 local function denols_handler(err, result, ctx)
@@ -58,8 +59,6 @@ end
 return {
   default_config = {
     cmd = { 'deno', 'lsp' },
-    -- single file support is required for now to make the lsp work correctly, see #2000
-    single_file_support = true,
     filetypes = {
       'javascript',
       'javascriptreact',
