@@ -9,13 +9,15 @@ end
 
 -- init lspconfig commands
 local lspconfig_init = function()
-  if vim.fn.exists('g:lspconfig') == 1 then
+  if vim.fn.exists 'g:lspconfig' == 1 then
     return
   end
   vim.g.lspconfig = 1
 
-  api.nvim_create_user_command('LspInfo', require 'lspconfig.ui.lspinfo', {
-    nargs = 0,
+  api.nvim_create_user_command('LspInfo', function(args)
+    require 'lspconfig.ui.lspinfo'(args.fargs)
+  end, {
+    nargs = '?',
     desc = '`:LspInfo` Displays attached, active, and configured language servers',
   })
 

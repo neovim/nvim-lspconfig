@@ -144,7 +144,23 @@ local function make_client_info(client)
   return lines
 end
 
-return function()
+local function parse_args(args)
+  if next(args) == nil then
+    return nil
+  end
+
+  local options = {}
+  for _, arg in pairs(args) do
+    if arg:find '=' then
+      local opt_with_val = vim.split(arg, '=')
+      options[opt_with_val[1]] = opt_with_val[2]
+    end
+  end
+
+  return options
+end
+
+return function(args)
   -- These options need to be cached before switching to the floating
   -- buffer.
   local buf_clients = vim.lsp.buf_get_clients()
@@ -152,7 +168,10 @@ return function()
   local buffer_filetype = vim.bo.filetype
   local original_bufnr = vim.api.nvim_get_current_buf()
 
-  local win_info = windows.percentage_range_window(0.8, 0.7)
+  args = args or nil
+  local options = parse_args(args)
+
+  local win_info = windows.percentage_range_window(0.8, 0.7, options)
   local bufnr, win_id = win_info.bufnr, win_info.win_id
 
   local buf_lines = {}
