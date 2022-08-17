@@ -18,19 +18,18 @@ local localSettings = {
     typeHints = true,
     parameterHints = true,
     structLayoutHints = true,
-    typeVerbosity = "compact", -- "full", "inner"
+    typeVerbosity = 'compact', -- "full", "inner"
   },
   diagnostics = {
     typeErrors = true,
     nagaParsingErrors = true,
     nagaValidationErrors = true,
-    nagaVersion = "main", -- "0.8", "0.9"
-  }
+    nagaVersion = 'main', -- "0.8", "0.9"
+  },
 }
 
-
 vim.lsp.handlers['wgsl-analyzer/requestConfiguration'] = function(err, result, ctx, config)
-    return localSettings, nil
+  return localSettings, nil
 end
 
 return {
@@ -38,7 +37,7 @@ return {
     cmd = cmd,
     filetypes = { 'wgsl' },
     root_dir = util.root_pattern '.git',
-    settings = localSettings ,
+    settings = localSettings,
   },
   on_new_config = function(newConfig, _)
     vim.lsp.handlers['wgsl-analyzer/requestConfiguration'] = function(err, result, ctx, config)
