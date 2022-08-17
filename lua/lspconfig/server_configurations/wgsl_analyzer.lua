@@ -29,7 +29,7 @@ local localSettings = {
 }
 
 
-vim.lsp.handlers['wgsl-analyzer/requestConfiguration'] = function(err, result, ctx, config) 
+vim.lsp.handlers['wgsl-analyzer/requestConfiguration'] = function(err, result, ctx, config)
     return localSettings, nil
 end
 
@@ -40,8 +40,8 @@ return {
     root_dir = util.root_pattern '.git',
     settings = localSettings ,
   },
-  on_new_config = function(newConfig, _) 
-    vim.lsp.handlers['wgsl-analyzer/requestConfiguration'] = function(err, result, ctx, config) 
+  on_new_config = function(newConfig, _)
+    vim.lsp.handlers['wgsl-analyzer/requestConfiguration'] = function(err, result, ctx, config)
       return newConfig.settings, nil
     end
   end,
