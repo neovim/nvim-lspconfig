@@ -12,7 +12,7 @@ end
 
 -- start lsp server by server_name
 function M.lsp_start(server_name)
-  if server_name then
+  if string.len(server_name) > 0 then
     if configs[server_name] then
       configs[server_name].launch()
     end

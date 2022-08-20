@@ -28,8 +28,8 @@ local lspconfig_init = function()
     desc = '`:LspLog` Opens the Nvim LSP client log.',
   })
 
-  api.nvim_create_user_command('LspStart', function(server_name)
-    lspconfig.lsp_start(server_name)
+  api.nvim_create_user_command('LspStart', function(args)
+    lspconfig.lsp_start(args.args)
   end, {
     nargs = '?',
     complete = function(arg)
