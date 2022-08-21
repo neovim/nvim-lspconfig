@@ -1,5 +1,10 @@
+if vim.fn.exists 'g:lspconfig' == 1 then
+  return
+end
+
+vim.g.lspconfig = 1
+
 local api = vim.api
-local lspconfig = require 'lspconfig'
 
 local lsp_get_active_client_ids = function()
   return vim.tbl_map(function(client)
@@ -7,10 +12,6 @@ local lsp_get_active_client_ids = function()
   end, require('lspconfig.util').get_managed_clients())
 end
 
-if vim.fn.exists 'g:lspconfig' == 1 then
-  return
-end
-vim.g.lspconfig = 1
 
 api.nvim_create_user_command('LspInfo', function(args)
   require 'lspconfig.ui.lspinfo'(args.fargs)
@@ -27,10 +28,12 @@ end, {
 })
 
 api.nvim_create_user_command('LspStart', function(args)
+  local lspconfig = require 'lspconfig'
   lspconfig.lsp_start(args.args)
 end, {
   nargs = '?',
   complete = function(arg)
+    local lspconfig = require 'lspconfig'
     local list = lspconfig.available_servers()
     return vim.tbl_filter(function(s)
       return string.match(s, '^' .. arg)
@@ -40,6 +43,7 @@ end, {
 })
 
 api.nvim_create_user_command('LspStop', function(cmd_args)
+  local lspconfig = require 'lspconfig'
   for _, client in ipairs(lspconfig.util.get_clients_from_cmd_args(cmd_args)) do
     client.stop()
   end
@@ -50,6 +54,7 @@ end, {
 })
 
 api.nvim_create_user_command('LspRestart', function(cmd_args)
+  local lspconfig = require 'lspconfig'
   lspconfig.lsp_restart(cmd_args)
 end, {
   nargs = '?',
