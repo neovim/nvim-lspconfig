@@ -32,7 +32,7 @@ describe('lspconfig', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
-            local not_exist_dir = vim.fn.getcwd().."/not/exsts"
+            local not_exist_dir = vim.fn.getcwd().."/not/exists"
             return lspconfig.util.path.exists(not_exist_dir) == false
           ]])
         end)
@@ -76,7 +76,7 @@ describe('lspconfig', function()
           ok(exec_lua [[
             local lspconfig = require("lspconfig")
 
-            local not_exist_dir = vim.fn.getcwd().."/not/exsts"
+            local not_exist_dir = vim.fn.getcwd().."/not/exists"
             return not lspconfig.util.path.is_dir(not_exist_dir)
           ]])
         end)
