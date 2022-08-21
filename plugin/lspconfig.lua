@@ -27,8 +27,7 @@ end, {
 })
 
 api.nvim_create_user_command('LspStart', function(args)
-  local lspconfig = require 'lspconfig'
-  lspconfig.lsp_start(args.args)
+  require('lspconfig').lsp_start(args.args)
 end, {
   nargs = '?',
   complete = function(arg)
