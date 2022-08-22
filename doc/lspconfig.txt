@@ -416,9 +416,10 @@ standard for single-file mode, lspconfig will adopt that standard.
 ==============================================================================
 COMMANDS                                                    *lspconfig-commands*
 
-- `:LspInfo` shows the status of active and configured language servers. Note
-  that client id refers to the Nvim RPC instance connected to a given
-  language server.
+- `:LspInfo <boder=boder_style>` shows the status of active and configured language
+  servers. Note that client id refers to the Nvim RPC instance connected to a
+  given language server. boder style can be `single` `double` `rounded` `solid`
+  `shadow` default is none.
 
 The following commands support tab-completion for all arguments. All commands
 that require a client id can either leverage tab-completion or the info
