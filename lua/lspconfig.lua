@@ -6,8 +6,8 @@ local M = {
 
 function M.available_servers()
   vim.deprecate(
-    'require("lspconfig").available_servers',
-    'require("lspconfig.util").available_servers',
+    'lspconfig.available_servers',
+    'lspconfig.util.available_servers',
     '0.1.4',
     'lspconfig'
   )
