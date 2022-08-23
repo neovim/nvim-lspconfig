@@ -251,5 +251,19 @@ describe('lspconfig', function()
         }
       )
     end)
+
+    it("excludes indexed server configs that haven't been set up", function()
+      eq(
+        exec_lua [[
+        local lspconfig = require("lspconfig")
+        local actual = nil
+        local _ = lspconfig.sumneko_lua
+        local _ = lspconfig.tsserver
+        lspconfig.rust_analyzer.setup {}
+        return lspconfig.available_servers()
+      ]],
+        { 'rust_analyzer' }
+      )
+    end)
   end)
 end)
