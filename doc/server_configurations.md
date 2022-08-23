@@ -1359,10 +1359,6 @@ require'lspconfig'.denols.setup{}
   ```lua
   root_pattern("deno.json", "deno.jsonc", ".git")
   ```
-  - `single_file_support` : 
-  ```lua
-  true
-  ```
 
 
 ## dhall_lsp_server
