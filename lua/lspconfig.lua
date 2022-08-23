@@ -4,6 +4,16 @@ local M = {
   util = require 'lspconfig.util',
 }
 
+function M.available_servers()
+  vim.deprecate(
+    'lspconfig.available_servers',
+    'lspconfig.util.available_servers',
+    '0.1.4',
+    'lspconfig'
+  )
+  return M.util.available_servers()
+end
+
 local mt = {}
 function mt:__index(k)
   if configs[k] == nil then
