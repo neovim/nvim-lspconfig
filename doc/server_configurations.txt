@@ -3743,7 +3743,7 @@ cd nickel/lsp/nls
 cargo install --path .
 ```
 
-In order to have lspconfig detect Nickel filetypes (a prequisite for autostarting a server),
+In order to have lspconfig detect Nickel filetypes (a prerequisite for autostarting a server),
 install the [Nickel vim plugin](https://github.com/nickel-lang/vim-nickel).
         
 
