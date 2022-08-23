@@ -190,6 +190,29 @@ describe('lspconfig', function()
         ]])
       end)
     end)
+
+    describe('strip_archive_subpath', function()
+      it('strips zipfile subpaths', function()
+        ok(exec_lua [[
+          local lspconfig = require("lspconfig")
+          return lspconfig.util.strip_archive_subpath("zipfile:///one/two.zip::three/four") == "/one/two.zip"
+        ]])
+      end)
+
+      it('strips tarfile subpaths', function()
+        ok(exec_lua [[
+          local lspconfig = require("lspconfig")
+          return lspconfig.util.strip_archive_subpath("tarfile:/one/two.tgz::three/four") == "/one/two.tgz"
+        ]])
+      end)
+
+      it('returns non-archive paths as-is', function()
+        ok(exec_lua [[
+          local lspconfig = require("lspconfig")
+          return lspconfig.util.strip_archive_subpath("/one/two.zip") == "/one/two.zip"
+        ]])
+      end)
+    end)
   end)
   describe('config', function()
     it('normalizes user, server, and base default configs', function()

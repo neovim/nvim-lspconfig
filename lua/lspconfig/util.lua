@@ -21,11 +21,13 @@ M.default_config = {
 M.on_setup = nil
 
 function M.bufname_valid(bufname)
-  if bufname and bufname ~= '' and (bufname:match '^([a-zA-Z]:).*' or bufname:match '^/') then
-    return true
-  else
+  if not bufname then
     return false
   end
+  if bufname:match '^/' or bufname:match '^[a-zA-Z]:' or bufname:match '^zipfile://' or bufname:match '^tarfile:' then
+    return true
+  end
+  return false
 end
 
 function M.validate_bufnr(bufnr)
@@ -341,6 +343,7 @@ function M.root_pattern(...)
     end
   end
   return function(startpath)
+    startpath = M.strip_archive_subpath(startpath)
     return M.search_ancestors(startpath, matcher)
   end
 end
@@ -435,6 +438,15 @@ function M.get_managed_clients()
     end
   end
   return clients
+end
+
+-- For zipfile: or tarfile: virtual paths, returns the path to the archive.
+-- Other paths are returned unaltered.
+function M.strip_archive_subpath(path)
+  -- Matches regex from zip.vim / tar.vim
+  path = vim.fn.substitute(path, 'zipfile://\\(.\\{-}\\)::[^\\\\].*$', '\\1', '')
+  path = vim.fn.substitute(path, 'tarfile:\\(.\\{-}\\)::.*$', '\\1', '')
+  return path
 end
 
 return M
