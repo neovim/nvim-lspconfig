@@ -16,10 +16,15 @@ if vim.fn.has 'nvim-0.7' ~= 1 then
   return
 end
 
+local completion_sort = function(items)
+  table.sort(items)
+  return items
+end
+
 local lsp_complete_configured_servers = function(arg)
-  return vim.tbl_filter(function(s)
+  return completion_sort(vim.tbl_filter(function(s)
     return s:sub(1, #arg) == arg
-  end, require('lspconfig.util').available_servers())
+  end, require('lspconfig.util').available_servers()))
 end
 
 local lsp_get_active_client_ids = function(arg)
@@ -27,9 +32,9 @@ local lsp_get_active_client_ids = function(arg)
     return ('%d (%s)'):format(client.id, client.name)
   end, require('lspconfig.util').get_managed_clients())
 
-  return vim.tbl_filter(function(s)
+  return completion_sort(vim.tbl_filter(function(s)
     return s:sub(1, #arg) == arg
-  end, clients)
+  end, clients))
 end
 
 local get_clients_from_cmd_args = function(arg)
@@ -91,8 +96,12 @@ end, {
 })
 
 api.nvim_create_user_command('LspStop', function(info)
+  local current_buf = vim.api.nvim_get_current_buf()
   for _, client in ipairs(get_clients_from_cmd_args(info.args)) do
-    client.stop()
+    local filetypes = client.config.filetypes
+    if filetypes and vim.tbl_contains(filetypes, vim.bo[current_buf].filetype) then
+      client.stop()
+    end
   end
 end, {
   desc = 'Manually stops the given language client(s)',
