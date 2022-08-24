@@ -156,8 +156,9 @@ local function generate_servers_list(servers_ctx)
   local lines, hi_scope = {}, {}
   local space = ' '
   local server_name_sep = ',' .. space
-  local length, start_index, _end_index, names = #header, 1, 0, ''
+  local length, start_index, _end_index = #header, 1, 0
 
+  local names = ''
   for i = 1, #servers do
     local next_index = i == #servers and i or i + 1
     -- check the lines is empty or not
