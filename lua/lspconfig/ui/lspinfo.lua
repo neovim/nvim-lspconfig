@@ -216,7 +216,7 @@ return function()
 
   local matching_config_header = {
     '',
-    'Configured servers list: ' .. table.concat(vim.tbl_keys(configs), ', '),
+    'Configured servers list: ' .. table.concat(util.available_servers(), ', '),
   }
   vim.list_extend(buf_lines, matching_config_header)
 
