@@ -279,21 +279,13 @@ return function()
   api.nvim_buf_set_option(bufnr, 'modifiable', false)
   api.nvim_buf_set_option(bufnr, 'filetype', 'lspinfo')
 
-  api.nvim_buf_attach(bufnr, false, {
-    on_detach = function()
-      if api.nvim_win_is_valid(win_id) then
-        api.nvim_win_close(win_id, true)
-      end
-    end,
-  })
-
   vim.keymap.set('n', '<ESC>', function()
     if api.nvim_buf_is_valid(bufnr) then
       api.nvim_buf_delete(bufnr, { force = true })
     end
   end, { buffer = bufnr, nowait = true })
 
-  api.nvim_create_autocmd({ 'BufLeave,', 'BufHidden' }, {
+  api.nvim_create_autocmd({'BufDelete', 'BufLeave,', 'BufHidden' }, {
     once = true,
     buffer = bufnr,
     callback = function()
