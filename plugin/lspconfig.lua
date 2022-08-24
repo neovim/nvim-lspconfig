@@ -43,15 +43,11 @@ local get_clients_from_cmd_args = function(arg)
   return vim.tbl_values(result)
 end
 
-local highlights = {
+for group, hi in pairs {
   LspInfoBorder = { link = 'Function', default = true },
   LspInfoList = { link = 'Visual', default = true },
-}
-
-do
-  for group, hi in pairs(highlights) do
-    api.nvim_set_hl(0, group, hi)
-  end
+} do
+  api.nvim_set_hl(0, group, hi)
 end
 
 -- Called from plugin/lspconfig.vim because it requires knowing that the last
