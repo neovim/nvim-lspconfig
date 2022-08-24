@@ -1,6 +1,8 @@
 -- The following is extracted and modified from plenary.vnim by
 -- TJ Devries. It is not a stable API, and is expected to change
 --
+local api = vim.api
+
 local function apply_defaults(original, defaults)
   if original == nil then
     original = {}
@@ -85,6 +87,7 @@ function win_float.percentage_range_window(col_range, row_range, options)
 
   win_opts.height = math.ceil(vim.o.lines * height_percentage)
   win_opts.row = math.ceil(vim.o.lines * row_start_percentage)
+  win_opts.border = options.border or 'single'
 
   local width_percentage, col_start_percentage
   if type(col_range) == 'number' then
@@ -102,15 +105,19 @@ function win_float.percentage_range_window(col_range, row_range, options)
   win_opts.col = math.floor(vim.o.columns * col_start_percentage)
   win_opts.width = math.floor(vim.o.columns * width_percentage)
 
-  local bufnr = options.bufnr or vim.api.nvim_create_buf(false, true)
-  local win_id = vim.api.nvim_open_win(bufnr, true, win_opts)
-  vim.api.nvim_win_set_buf(win_id, bufnr)
+  local bufnr = options.bufnr or api.nvim_create_buf(false, true)
+  local win_id = api.nvim_open_win(bufnr, true, win_opts)
+  api.nvim_win_set_option(win_id, 'winhl', 'FloatBorder:LspInfoBorder')
+  api.nvim_win_set_buf(win_id, bufnr)
 
-  vim.cmd 'setlocal nocursorcolumn ts=2 sw=2'
+  api.nvim_win_set_option(win_id, 'cursorcolumn', false)
+  api.nvim_buf_set_option(bufnr, 'tabstop', 2)
+  api.nvim_buf_set_option(bufnr, 'shiftwidth', 2)
 
   return {
     bufnr = bufnr,
     win_id = win_id,
+    opts = win_opts,
   }
 end
 

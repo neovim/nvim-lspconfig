@@ -1,3 +1,4 @@
+local api = vim.api
 local configs = require 'lspconfig.configs'
 local windows = require 'lspconfig.ui.windows'
 local util = require 'lspconfig.util'
@@ -52,7 +53,7 @@ local function make_config_info(config, bufnr)
     config_info.cmd_is_executable = 'NA'
   end
 
-  local buffer_dir = vim.api.nvim_buf_call(bufnr, function()
+  local buffer_dir = api.nvim_buf_call(bufnr, function()
     return vim.fn.expand '%:p:h'
   end)
   local root_dir = config.get_root_dir(buffer_dir)
@@ -144,16 +145,80 @@ local function make_client_info(client)
   return lines
 end
 
-return function()
+--- if the server lists length longer than window it should be show in a
+--- new line
+--- | LspInfo window                                       | --out of window
+--- | Configured servers list:  server_name, server_name1, | server_name2
+--- |                           server_name3, server_name4,| --new change
+---@prviate
+local function generate_servers_list(servers_ctx)
+  local header, servers, width = servers_ctx.header, servers_ctx.servers, servers_ctx.width
+  local lines, hi_scope = {}, {}
+  local space = ' '
+  local server_name_sep = ',' .. space
+  local length, start_index, _end_index, names = #header, 1, 0, ''
+
+  for i = 1, #servers do
+    local next_index = i == #servers and i or i + 1
+    -- check the lines is empty or not
+    local header_empty = next(lines) == nil and true or false
+    length = length + #server_name_sep + #servers[i]
+    table.insert(hi_scope, { length - #server_name_sep - #servers[i], length - #server_name_sep })
+
+    if (length + #servers[next_index]) > width or length == width then
+      _end_index = i
+    end
+
+    -- when the index is last one and still has the server names not insert
+    if i == #servers and length ~= 0 then
+      _end_index = i
+    end
+
+    if _end_index > 0 then
+      names = table.concat(servers, server_name_sep, start_index, _end_index)
+      names = header_empty and header .. names or space:rep(#header) .. names
+      table.insert(lines, space)
+      table.insert(lines, names)
+      length = #header
+      start_index = i + 1
+      _end_index = 0
+    end
+  end
+
+  return lines, hi_scope
+end
+
+---@prviate
+local function floating_win_option(fargs)
+  fargs = fargs or nil
+  if not fargs then
+    return nil
+  end
+
+  local options = {}
+  for _, arg in pairs(fargs) do
+    if arg:find '=' then
+      local opt_with_val = vim.split(arg, '=')
+      options[opt_with_val[1]] = opt_with_val[2]
+    end
+  end
+
+  return options
+end
+
+return function(fargs)
   -- These options need to be cached before switching to the floating
   -- buffer.
   local buf_clients = vim.lsp.buf_get_clients()
   local clients = vim.lsp.get_active_clients()
   local buffer_filetype = vim.bo.filetype
-  local original_bufnr = vim.api.nvim_get_current_buf()
+  local original_bufnr = api.nvim_get_current_buf()
 
-  local win_info = windows.percentage_range_window(0.8, 0.7)
+  local floating_option = floating_win_option(fargs)
+  local win_info = windows.percentage_range_window(0.8, 0.7, floating_option)
   local bufnr, win_id = win_info.bufnr, win_info.win_id
+  -- float window width
+  local floating_width = win_info.opts.width
 
   local buf_lines = {}
 
@@ -214,24 +279,53 @@ return function()
     end
   end
 
-  local matching_config_header = {
-    '',
-    'Configured servers list: ' .. table.concat(vim.tbl_keys(configs), ', '),
+  local configured_head = 'Configured servers list: '
+  local start_row = #buf_lines
+  local servers_ctx = {
+    servers = vim.tbl_keys(configs),
+    width = floating_width,
+    header = configured_head,
   }
-  vim.list_extend(buf_lines, matching_config_header)
+  local servers_list, hi_scope = generate_servers_list(servers_ctx)
+
+  vim.list_extend(buf_lines, servers_list)
 
   local fmt_buf_lines = indent_lines(buf_lines, ' ')
 
   fmt_buf_lines = vim.lsp.util._trim(fmt_buf_lines, {})
 
-  vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, fmt_buf_lines)
-  vim.api.nvim_buf_set_option(bufnr, 'modifiable', false)
-  vim.api.nvim_buf_set_option(bufnr, 'filetype', 'lspinfo')
+  api.nvim_buf_set_lines(bufnr, 0, -1, true, fmt_buf_lines)
+  api.nvim_buf_set_option(bufnr, 'modifiable', false)
+  api.nvim_buf_set_option(bufnr, 'filetype', 'lspinfo')
 
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<esc>', '<cmd>bd<CR>', { noremap = true })
-  vim.api.nvim_command(
-    string.format('autocmd BufHidden,BufLeave <buffer> ++once lua pcall(vim.api.nvim_win_close, %d, true)', win_id)
-  )
+  api.nvim_buf_attach(bufnr, false, {
+    on_detach = function()
+      if api.nvim_win_is_valid(win_id) then
+        api.nvim_win_close(win_id, true)
+      end
+    end,
+  })
+
+  vim.keymap.set('n', '<ESC>', function()
+    if api.nvim_buf_is_valid(bufnr) then
+      api.nvim_buf_delete(bufnr, { force = true })
+    end
+  end, { buffer = bufnr, nowait = true })
+
+  local au_id
+  au_id = api.nvim_create_autocmd({ 'BufLeave,BufHidden' }, {
+    once = true,
+    buffer = bufnr,
+    callback = function()
+      if api.nvim_win_is_valid(win_id) then
+        api.nvim_win_close(win_id, true)
+      end
+
+      if au_id then
+        pcall(api.nvim_del_autocmd, au_id)
+      end
+    end,
+  })
 
   vim.fn.matchadd(
     'Error',
@@ -247,11 +341,19 @@ return function()
   vim.cmd 'let m=matchadd("error", "false")'
   for _, config in pairs(configs) do
     vim.fn.matchadd('Title', '\\%(Client\\|Config\\):.*\\zs' .. config.name .. '\\ze')
-    vim.fn.matchadd('Visual', 'list:.*\\zs' .. config.name .. '\\ze')
     if config.filetypes then
       for _, ft in pairs(config.filetypes) do
         vim.fn.matchadd('Type', '\\%(filetypes\\|filetype\\):.*\\zs' .. ft .. '\\ze')
       end
     end
+  end
+
+  for i, scope in pairs(hi_scope) do
+    local start_col, end_col = unpack(scope)
+    if start_col == #configured_head then
+      start_row = i == 1 and start_row + 1 or start_row + 2
+    end
+
+    api.nvim_buf_add_highlight(bufnr, 0, 'LspInfoList', start_row, start_col + 1, end_col + 1)
   end
 end

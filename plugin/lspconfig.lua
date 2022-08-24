@@ -1,3 +1,5 @@
+local api = vim.api
+
 if vim.g.lspconfig ~= nil then
   return
 end
@@ -41,15 +43,27 @@ local get_clients_from_cmd_args = function(arg)
   return vim.tbl_values(result)
 end
 
+local highlights = {
+  LspInfoBorder = { link = 'Function', default = true },
+  LspInfoList = { link = 'Visual', default = true },
+}
+
+do
+  for group, hi in pairs(highlights) do
+    api.nvim_set_hl(0, group, hi)
+  end
+end
+
 -- Called from plugin/lspconfig.vim because it requires knowing that the last
 -- script in scriptnames to be executed is lspconfig.
-vim.api.nvim_create_user_command('LspInfo', function()
-  require 'lspconfig.ui.lspinfo'()
+api.nvim_create_user_command('LspInfo', function(args)
+  require 'lspconfig.ui.lspinfo'(args.fargs)
 end, {
+  nargs = '*',
   desc = 'Displays attached, active, and configured language servers',
 })
 
-vim.api.nvim_create_user_command('LspStart', function(info)
+api.nvim_create_user_command('LspStart', function(info)
   local server_name = info.args[1] ~= '' and info.args
   if server_name then
     local config = require('lspconfig.configs')[server_name]
@@ -67,7 +81,7 @@ end, {
   nargs = '?',
   complete = lsp_complete_configured_servers,
 })
-vim.api.nvim_create_user_command('LspRestart', function(info)
+api.nvim_create_user_command('LspRestart', function(info)
   for _, client in ipairs(get_clients_from_cmd_args(info.args)) do
     client.stop()
     vim.defer_fn(function()
@@ -80,7 +94,7 @@ end, {
   complete = lsp_get_active_client_ids,
 })
 
-vim.api.nvim_create_user_command('LspStop', function(info)
+api.nvim_create_user_command('LspStop', function(info)
   for _, client in ipairs(get_clients_from_cmd_args(info.args)) do
     client.stop()
   end
