@@ -263,7 +263,7 @@ return function()
   local configured_head = 'Configured servers list: '
   local start_row = #buf_lines
   local servers_ctx = {
-    servers = vim.tbl_keys(configs),
+    servers = util.available_servers(),
     width = floating_width,
     header = configured_head,
   }

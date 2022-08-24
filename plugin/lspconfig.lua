@@ -19,7 +19,7 @@ end
 local lsp_complete_configured_servers = function(arg)
   return vim.tbl_filter(function(s)
     return s:sub(1, #arg) == arg
-  end, vim.tbl_keys(require 'lspconfig.configs'))
+  end, require('lspconfig.util').available_servers())
 end
 
 local lsp_get_active_client_ids = function(arg)
