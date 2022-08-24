@@ -293,17 +293,12 @@ return function()
     end
   end, { buffer = bufnr, nowait = true })
 
-  local au_id
-  au_id = api.nvim_create_autocmd({ 'BufLeave,BufHidden' }, {
+  api.nvim_create_autocmd({ 'BufLeave,','BufHidden' }, {
     once = true,
     buffer = bufnr,
     callback = function()
       if api.nvim_win_is_valid(win_id) then
         api.nvim_win_close(win_id, true)
-      end
-
-      if au_id then
-        pcall(api.nvim_del_autocmd, au_id)
       end
     end,
   })

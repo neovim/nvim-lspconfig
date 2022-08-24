@@ -55,7 +55,6 @@ end
 api.nvim_create_user_command('LspInfo', function()
   require 'lspconfig.ui.lspinfo'()
 end, {
-  nargs = '*',
   desc = 'Displays attached, active, and configured language servers',
 })
 

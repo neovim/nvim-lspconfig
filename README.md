@@ -140,9 +140,8 @@ Most of the time, the reason for failure is present in the logs.
 
 * `LspInfoBorder` set the color of `LspInfo` window border. use
   ```lua
-  require('lspconfig.ui.windows').default_options {
-    border = 'single' or other style
-  }
+  -- Accepts the same values as the `border` option to `:h nvim_open_win()`
+  require('lspconfig.ui.windows').default_options.border = 'single' -- or other style
   ```
 * `LspInfoList` set the color of servers name list in `LspInfo` window.
 
