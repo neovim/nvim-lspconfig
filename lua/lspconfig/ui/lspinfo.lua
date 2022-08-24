@@ -158,7 +158,6 @@ local function generate_servers_list(servers_ctx)
   local server_name_sep = ',' .. space
   local length, start_index, _end_index = #header, 1, 0
 
-  local names = ''
   for i = 1, #servers do
     local next_index = i == #servers and i or i + 1
     -- check the lines is empty or not
@@ -176,7 +175,7 @@ local function generate_servers_list(servers_ctx)
     end
 
     if _end_index > 0 then
-      names = table.concat(servers, server_name_sep, start_index, _end_index)
+      local names = table.concat(servers, server_name_sep, start_index, _end_index)
       names = header_empty and header .. names or space:rep(#header) .. names
       table.insert(lines, space)
       table.insert(lines, names)
