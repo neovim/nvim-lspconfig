@@ -293,7 +293,7 @@ return function()
     end
   end, { buffer = bufnr, nowait = true })
 
-  api.nvim_create_autocmd({ 'BufLeave,','BufHidden' }, {
+  api.nvim_create_autocmd({ 'BufLeave,', 'BufHidden' }, {
     once = true,
     buffer = bufnr,
     callback = function()
