@@ -215,6 +215,9 @@ return function()
     end
   end
 
+  -- insert the tips at the top of window
+  table.insert(buf_lines, 'Use [q] or [Esc] to quit the window')
+
   local header = {
     '',
     'Language client log: ' .. (vim.lsp.get_log_path()),
@@ -279,20 +282,25 @@ return function()
   api.nvim_buf_set_option(bufnr, 'modifiable', false)
   api.nvim_buf_set_option(bufnr, 'filetype', 'lspinfo')
 
-  vim.keymap.set('n', '<ESC>', function()
+  local augroup = api.nvim_create_augroup('lspinfo', { clear = false })
+
+  local function close()
+    api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
     if api.nvim_buf_is_valid(bufnr) then
       api.nvim_buf_delete(bufnr, { force = true })
     end
-  end, { buffer = bufnr, nowait = true })
+    if api.nvim_win_is_valid(win_id) then
+      api.nvim_win_close(win_id, true)
+    end
+  end
 
+  vim.keymap.set('n', '<ESC>', close, { buffer = bufnr, nowait = true })
+  vim.keymap.set('n', 'q', close, { buffer = bufnr, nowait = true })
   api.nvim_create_autocmd({ 'BufDelete', 'BufLeave', 'BufHidden' }, {
     once = true,
     buffer = bufnr,
-    callback = function()
-      if api.nvim_win_is_valid(win_id) then
-        api.nvim_win_close(win_id, true)
-      end
-    end,
+    callback = close,
+    group = augroup,
   })
 
   vim.fn.matchadd(
@@ -315,6 +323,8 @@ return function()
       end
     end
   end
+
+  api.nvim_buf_add_highlight(bufnr, 0, 'LspInfoTips', 0, 0, -1)
 
   for i, scope in pairs(hi_scope) do
     local start_col, end_col = unpack(scope)
