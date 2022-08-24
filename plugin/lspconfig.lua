@@ -14,10 +14,15 @@ if vim.fn.has 'nvim-0.7' ~= 1 then
   return
 end
 
+local completion_sort = function (items)
+  table.sort(items)
+  return items
+end
+
 local lsp_complete_configured_servers = function(arg)
-  return vim.tbl_filter(function(s)
+  return completion_sort(vim.tbl_filter(function(s)
     return s:sub(1, #arg) == arg
-  end, vim.tbl_keys(require 'lspconfig.configs'))
+  end, vim.tbl_keys(require 'lspconfig.configs')))
 end
 
 local lsp_get_active_client_ids = function(arg)
@@ -25,9 +30,9 @@ local lsp_get_active_client_ids = function(arg)
     return ('%d (%s)'):format(client.id, client.name)
   end, require('lspconfig.util').get_managed_clients())
 
-  return vim.tbl_filter(function(s)
+  return completion_sort(vim.tbl_filter(function(s)
     return s:sub(1, #arg) == arg
-  end, clients)
+  end, clients))
 end
 
 local get_clients_from_cmd_args = function(arg)
