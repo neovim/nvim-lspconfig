@@ -150,7 +150,7 @@ end
 --- | LspInfo window                                       | --out of window
 --- | Configured servers list:  server_name, server_name1, | server_name2
 --- |                           server_name3, server_name4,| --new change
----@prviate
+---@private
 local function generate_servers_list(servers_ctx)
   local header, servers, width = servers_ctx.header, servers_ctx.servers, servers_ctx.width
   local lines, hi_scope = {}, {}
@@ -188,7 +188,7 @@ local function generate_servers_list(servers_ctx)
   return lines, hi_scope
 end
 
----@prviate
+---@private
 local function floating_win_option(fargs)
   fargs = fargs or nil
   if not fargs then
