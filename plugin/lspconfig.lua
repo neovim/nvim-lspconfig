@@ -44,7 +44,7 @@ local get_clients_from_cmd_args = function(arg)
 end
 
 for group, hi in pairs {
-  LspInfoBorder = { link = 'Function', default = true },
+  LspInfoBorder = { link = 'Label', default = true },
   LspInfoList = { link = 'Visual', default = true },
   LspInfoTips = { link = 'Comment', default = true },
 } do

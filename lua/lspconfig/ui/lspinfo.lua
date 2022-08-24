@@ -145,49 +145,6 @@ local function make_client_info(client)
   return lines
 end
 
---- if the server lists length longer than window it should be show in a
---- new line
---- | LspInfo window                                       | --out of window
---- | Configured servers list:  server_name, server_name1, | server_name2
---- |                           server_name3, server_name4,| --new change
----@private
-local function generate_servers_list(servers_ctx)
-  local header, servers, width = servers_ctx.header, servers_ctx.servers, servers_ctx.width
-  local lines, hi_scope = {}, {}
-  local space = ' '
-  local server_name_sep = ',' .. space
-  local length, start_index, _end_index = #header, 1, 0
-
-  for i = 1, #servers do
-    local next_index = i == #servers and i or i + 1
-    -- check the lines is empty or not
-    local header_empty = next(lines) == nil and true or false
-    length = length + #server_name_sep + #servers[i]
-    table.insert(hi_scope, { length - #server_name_sep - #servers[i], length - #server_name_sep })
-
-    if (length + #servers[next_index]) > width or length == width then
-      _end_index = i
-    end
-
-    -- when the index is last one and still has the server names not insert
-    if i == #servers and length ~= 0 then
-      _end_index = i
-    end
-
-    if _end_index > 0 then
-      local names = table.concat(servers, server_name_sep, start_index, _end_index)
-      names = header_empty and header .. names or space:rep(#header) .. names
-      table.insert(lines, space)
-      table.insert(lines, names)
-      length = #header
-      start_index = i + 1
-      _end_index = 0
-    end
-  end
-
-  return lines, hi_scope
-end
-
 return function()
   -- These options need to be cached before switching to the floating
   -- buffer.
@@ -196,10 +153,13 @@ return function()
   local buffer_filetype = vim.bo.filetype
   local original_bufnr = api.nvim_get_current_buf()
 
+  windows.default_options.wrap = true
+  windows.default_options.breakindent = true
+  windows.default_options.breakindentopt = 'shift:25'
+  windows.default_options.showbreak = 'NONE'
+
   local win_info = windows.percentage_range_window(0.8, 0.7)
   local bufnr, win_id = win_info.bufnr, win_info.win_id
-  -- float window width
-  local floating_width = win_info.opts.width
 
   local buf_lines = {}
 
@@ -263,16 +223,12 @@ return function()
     end
   end
 
-  local configured_head = 'Configured servers list: '
-  local start_row = #buf_lines
-  local servers_ctx = {
-    servers = util.available_servers(),
-    width = floating_width,
-    header = configured_head,
+  local matching_config_header = {
+    '',
+    'Configured servers list: ' .. table.concat(util.available_servers(), ', '),
   }
-  local servers_list, hi_scope = generate_servers_list(servers_ctx)
 
-  vim.list_extend(buf_lines, servers_list)
+  vim.list_extend(buf_lines, matching_config_header)
 
   local fmt_buf_lines = indent_lines(buf_lines, ' ')
 
@@ -317,6 +273,7 @@ return function()
   vim.cmd 'let m=matchadd("error", "false")'
   for _, config in pairs(configs) do
     vim.fn.matchadd('Title', '\\%(Client\\|Config\\):.*\\zs' .. config.name .. '\\ze')
+    vim.fn.matchadd('Function', 'list:.*\\zs' .. config.name .. '\\ze')
     if config.filetypes then
       for _, ft in pairs(config.filetypes) do
         vim.fn.matchadd('Type', '\\%(filetypes\\|filetype\\):.*\\zs' .. ft .. '\\ze')
@@ -325,13 +282,4 @@ return function()
   end
 
   api.nvim_buf_add_highlight(bufnr, 0, 'LspInfoTips', 0, 0, -1)
-
-  for i, scope in pairs(hi_scope) do
-    local start_col, end_col = unpack(scope)
-    if start_col == #configured_head then
-      start_row = i == 1 and start_row + 1 or start_row + 2
-    end
-
-    api.nvim_buf_add_highlight(bufnr, 0, 'LspInfoList', start_row, start_col + 1, end_col + 1)
-  end
 end

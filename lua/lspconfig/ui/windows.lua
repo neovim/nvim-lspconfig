@@ -22,9 +22,16 @@ end
 local win_float = {}
 
 win_float.default_options = {
-  winblend = 15,
   percentage = 0.9,
 }
+
+local _mt = {
+  __newindex = function(t, k, v)
+    rawset(t, k, v)
+  end,
+}
+
+setmetatable(win_float.default_options, _mt)
 
 function win_float.default_opts(options)
   options = apply_defaults(options, win_float.default_options)
@@ -110,6 +117,15 @@ function win_float.percentage_range_window(col_range, row_range, options)
   local bufnr = options.bufnr or api.nvim_create_buf(false, true)
   local win_id = api.nvim_open_win(bufnr, true, win_opts)
   api.nvim_win_set_option(win_id, 'winhl', 'FloatBorder:LspInfoBorder')
+
+  local not_options = { 'percentage', 'border' }
+
+  for k, v in pairs(win_float.default_options) do
+    if not vim.tbl_contains(not_options, k) then
+      vim.opt_local[k] = v
+    end
+  end
+
   api.nvim_win_set_buf(win_id, bufnr)
 
   api.nvim_win_set_option(win_id, 'cursorcolumn', false)
@@ -119,7 +135,6 @@ function win_float.percentage_range_window(col_range, row_range, options)
   return {
     bufnr = bufnr,
     win_id = win_id,
-    opts = win_opts,
   }
 end
 
