@@ -14,7 +14,7 @@ if vim.fn.has 'nvim-0.7' ~= 1 then
   return
 end
 
-local completion_sort = function (items)
+local completion_sort = function(items)
   table.sort(items)
   return items
 end
