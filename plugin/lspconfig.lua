@@ -83,7 +83,8 @@ end, {
 vim.api.nvim_create_user_command('LspStop', function(info)
   local current_buf = vim.api.nvim_get_current_buf()
   for _, client in ipairs(get_clients_from_cmd_args(info.args)) do
-    if vim.tbl_contains(client.config.filetypes, vim.bo[current_buf].filetype) then
+    local filetypes = client.config.filetypes
+    if filetypes and vim.tbl_contains(filetypes, vim.bo[current_buf].filetype) then
       client.stop()
     end
   end
