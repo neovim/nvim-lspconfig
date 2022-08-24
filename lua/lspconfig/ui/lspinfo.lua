@@ -188,25 +188,7 @@ local function generate_servers_list(servers_ctx)
   return lines, hi_scope
 end
 
----@private
-local function floating_win_option(fargs)
-  fargs = fargs or nil
-  if not fargs then
-    return nil
-  end
-
-  local options = {}
-  for _, arg in pairs(fargs) do
-    if arg:find '=' then
-      local opt_with_val = vim.split(arg, '=')
-      options[opt_with_val[1]] = opt_with_val[2]
-    end
-  end
-
-  return options
-end
-
-return function(fargs)
+return function()
   -- These options need to be cached before switching to the floating
   -- buffer.
   local buf_clients = vim.lsp.buf_get_clients()
@@ -214,8 +196,7 @@ return function(fargs)
   local buffer_filetype = vim.bo.filetype
   local original_bufnr = api.nvim_get_current_buf()
 
-  local floating_option = floating_win_option(fargs)
-  local win_info = windows.percentage_range_window(0.8, 0.7, floating_option)
+  local win_info = windows.percentage_range_window(0.8, 0.7)
   local bufnr, win_id = win_info.bufnr, win_info.win_id
   -- float window width
   local floating_width = win_info.opts.width

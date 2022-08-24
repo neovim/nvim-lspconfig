@@ -52,8 +52,8 @@ end
 
 -- Called from plugin/lspconfig.vim because it requires knowing that the last
 -- script in scriptnames to be executed is lspconfig.
-api.nvim_create_user_command('LspInfo', function(args)
-  require 'lspconfig.ui.lspinfo'(args.fargs)
+api.nvim_create_user_command('LspInfo', function()
+  require 'lspconfig.ui.lspinfo'()
 end, {
   nargs = '*',
   desc = 'Displays attached, active, and configured language servers',

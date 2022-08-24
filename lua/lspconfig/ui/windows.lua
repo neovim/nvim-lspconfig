@@ -54,6 +54,8 @@ function win_float.default_opts(options)
     },
   }
 
+  opts.border = options.border and options.border
+
   return opts
 end
 

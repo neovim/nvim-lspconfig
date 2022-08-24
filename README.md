@@ -131,14 +131,19 @@ Most of the time, the reason for failure is present in the logs.
 
 ## Commands
 
-* `:LspInfo <border=border_style>` shows the status of active and configured language servers.
+* `:LspInfo` shows the status of active and configured language servers.
 * `:LspStart <config_name>` Start the requested server name. Will only successfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command. Defaults to all servers matching current buffer filetype.
 * `:LspStop <client_id>` Defaults to stopping all buffer clients.
 * `:LspRestart <client_id>` Defaults to restarting all buffer clients.
 
 ## Highlights
 
-* `LspInfoBorder` set the color of `LspInfo` window border.
+* `LspInfoBorder` set the color of `LspInfo` window border. use
+  ```lua
+  require('lspconfig.ui.windows').default_options {
+    border = 'single' or other style
+  }
+  ```
 * `LspInfoList` set the color of servers name list in `LspInfo` window.
 
 ## Wiki
