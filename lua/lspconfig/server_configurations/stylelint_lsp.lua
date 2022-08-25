@@ -99,7 +99,7 @@ au('BufWritePre', {
   command = 'StylelintFixAll',
 })
 ```
-]]   ,
+]],
     default_config = {
       root_dir = [[ root_pattern('.stylelintrc', 'package.json') ]],
     },
