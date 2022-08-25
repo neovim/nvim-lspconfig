@@ -5758,7 +5758,7 @@ require'lspconfig'.solc.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".git")
+  root_pattern('hardhat.config.*', '.git')
   ```
 
 
