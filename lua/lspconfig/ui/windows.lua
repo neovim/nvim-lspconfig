@@ -21,9 +21,7 @@ end
 
 local win_float = {}
 
-win_float.default_options = {
-  percentage = 0.9,
-}
+win_float.default_options = {}
 
 local _mt = {
   __newindex = function(t, k, v)
@@ -34,7 +32,7 @@ local _mt = {
 setmetatable(win_float.default_options, _mt)
 
 function win_float.default_opts(options)
-  options = apply_defaults(options, win_float.default_options)
+  options = apply_defaults(options, { percentage = 0.9 })
 
   local width = math.floor(vim.o.columns * options.percentage)
   local height = math.floor(vim.o.lines * options.percentage)
@@ -118,10 +116,8 @@ function win_float.percentage_range_window(col_range, row_range, options)
   local win_id = api.nvim_open_win(bufnr, true, win_opts)
   api.nvim_win_set_option(win_id, 'winhl', 'FloatBorder:LspInfoBorder')
 
-  local not_options = { 'percentage', 'border' }
-
   for k, v in pairs(win_float.default_options) do
-    if not vim.tbl_contains(not_options, k) then
+    if k ~= 'border' then
       vim.opt_local[k] = v
     end
   end
