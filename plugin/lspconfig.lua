@@ -51,7 +51,7 @@ end
 for group, hi in pairs {
   LspInfoBorder = { link = 'Label', default = true },
   LspInfoList = { link = 'Function', default = true },
-  LspInfoTips = { link = 'Comment', default = true },
+  LspInfoTip = { link = 'Comment', default = true },
   LspInfoTitle = { link = 'Title', default = true },
   LspInfoFiletype = { link = 'Type', default = true },
 } do

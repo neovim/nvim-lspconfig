@@ -281,5 +281,5 @@ return function()
     end
   end
 
-  api.nvim_buf_add_highlight(bufnr, 0, 'LspInfoTips', 0, 0, -1)
+  api.nvim_buf_add_highlight(bufnr, 0, 'LspInfoTip', 0, 0, -1)
 end

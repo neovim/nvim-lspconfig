@@ -631,6 +631,19 @@ options, the `lspconfig` wiki lists community created plugins that build upon
 the built-in client to provide functionality tailored to specific language
 servers.
 
-==============================================================================
+================================================================================
+Highlights                                                   *lspconfig-highlight*
+
+`LspInfoBorder` the highlight group of `LspInfo` window border. Use:
+>
+  -- Accepts the same values as the `border` option to |nvim_open_win()|
+  require('lspconfig.ui.windows').default_options.border = 'single' -- or other sty
+<
+`LspInfoList` the highlight group of servers name list
+`LspInfoTip` the highlight group of tips that the first line
+`LspInfoTitle` the highlight group of client name
+`LspInfoFiletype` the highlight group of the `filetypes` area
+
+================================================================================
 
 vim:tw=78:ts=8:ft=help:norl:
