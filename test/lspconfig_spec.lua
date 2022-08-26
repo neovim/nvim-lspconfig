@@ -213,41 +213,6 @@ describe('lspconfig', function()
         ]])
       end)
     end)
-
-    describe('user commands', function()
-      it('should translate command definition to nvim_create_user_command options', function()
-        eq(
-          {
-            nargs = '*',
-            complete = 'custom,v:lua.some_global',
-          },
-          exec_lua [[
-            local util = require("lspconfig.util")
-            return util._parse_user_command_options({
-              function () end,
-              "-nargs=* -complete=custom,v:lua.some_global"
-            })
-          ]]
-        )
-
-        eq(
-          {
-            desc = 'My awesome description.',
-            nargs = '*',
-            complete = 'custom,v:lua.another_global',
-          },
-          exec_lua [[
-            local util = require("lspconfig.util")
-            return util._parse_user_command_options({
-              function () end,
-              ["-nargs"] = "*",
-              "-complete=custom,v:lua.another_global",
-              description = "My awesome description."
-            })
-          ]]
-        )
-      end)
-    end)
   end)
 
   describe('config', function()
