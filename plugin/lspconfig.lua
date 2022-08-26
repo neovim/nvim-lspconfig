@@ -55,17 +55,18 @@ end, {
 })
 
 vim.api.nvim_create_user_command('LspStart', function(info)
-  local server_name = info.args[1] ~= '' and info.args
+  local server_name = string.len(info.args) > 0 and info.args or nil
   if server_name then
     local config = require('lspconfig.configs')[server_name]
     if config then
       config.launch()
+      return
     end
-  else
-    local other_matching_configs = require('lspconfig.util').get_other_matching_providers(vim.bo.filetype)
-    for _, config in ipairs(other_matching_configs) do
-      config.launch()
-    end
+  end
+
+  local other_matching_configs = require('lspconfig.util').get_other_matching_providers(vim.bo.filetype)
+  for _, config in ipairs(other_matching_configs) do
+    config.launch()
   end
 end, {
   desc = 'Manually launches a language server',
