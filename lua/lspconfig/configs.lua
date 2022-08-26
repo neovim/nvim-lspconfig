@@ -10,7 +10,18 @@ function configs.__newindex(t, config_name, config_def)
     default_config = { config_def.default_config, 't' },
     on_new_config = { config_def.on_new_config, 'f', true },
     on_attach = { config_def.on_attach, 'f', true },
+    commands = { config_def.commands, 't', true },
   }
+  if config_def.commands then
+    for k, v in pairs(config_def.commands) do
+      validate {
+        ['command.name'] = { k, 's' },
+        ['command.fn'] = { v[1], 'f' },
+      }
+    end
+  else
+    config_def.commands = {}
+  end
 
   local M = {}
 
@@ -28,7 +39,16 @@ function configs.__newindex(t, config_name, config_def)
       filetypes = { config.filetype, 't', true },
       on_new_config = { config.on_new_config, 'f', true },
       on_attach = { config.on_attach, 'f', true },
+      commands = { config.commands, 't', true },
     }
+    if config.commands then
+      for k, v in pairs(config.commands) do
+        validate {
+          ['command.name'] = { k, 's' },
+          ['command.fn'] = { v[1], 'f' },
+        }
+      end
+    end
 
     config = tbl_deep_extend('keep', config, default_config)
 
@@ -267,8 +287,15 @@ function configs.__newindex(t, config_name, config_def)
     if client.config._on_attach then
       client.config._on_attach(client, bufnr)
     end
+    if client.config.commands and not vim.tbl_isempty(client.config.commands) then
+      M.commands = vim.tbl_deep_extend('force', M.commands, client.config.commands)
+    end
+    if not M.commands_created and not vim.tbl_isempty(M.commands) then
+      util.create_module_commands(config_name, M.commands)
+    end
   end
 
+  M.commands = config_def.commands
   M.name = config_name
   M.document_config = config_def
 
