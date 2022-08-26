@@ -136,9 +136,6 @@ Most of the time, the reason for failure is present in the logs.
 * `:LspStop <client_id>` Defaults to stopping all buffer clients.
 * `:LspRestart <client_id>` Defaults to restarting all buffer clients.
 
-## Highlights
-
-
 ## Wiki
 
 See the [wiki](https://github.com/neovim/nvim-lspconfig/wiki) for additional topics, including:
