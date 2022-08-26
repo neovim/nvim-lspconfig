@@ -276,7 +276,7 @@ return function()
     vim.fn.matchadd('LspInfoList', 'list:.*\\zs' .. config.name .. '\\ze')
     if config.filetypes then
       for _, ft in pairs(config.filetypes) do
-        vim.fn.matchadd('LspInfoFileType', '\\%(filetypes\\|filetype\\):.*\\zs' .. ft .. '\\ze')
+        vim.fn.matchadd('LspInfoFiletype', '\\%(filetypes\\|filetype\\):.*\\zs' .. ft .. '\\ze')
       end
     end
   end
