@@ -60,6 +60,41 @@ function M.add_hook_after(func, new_fn)
   end
 end
 
+-- Maps lspconfig-style command options to nvim_create_user_command (i.e. |command-attributes|) option names.
+local opts_aliases = {
+  ['description'] = 'desc',
+}
+
+---@param command_definition table<string | integer, any>
+function M._parse_user_command_options(command_definition)
+  ---@type table<string, string | boolean | number>
+  local opts = {}
+  for k, v in pairs(command_definition) do
+    if type(k) == 'string' then
+      local attribute = k.gsub(k, '^%-+', '')
+      opts[opts_aliases[attribute] or attribute] = v
+    elseif type(k) == 'number' and type(v) == 'string' and v:match '^%-' then
+      -- Splits strings like "-nargs=* -complete=customlist,v:lua.something" into { "-nargs=*", "-complete=customlist,v:lua.something" }
+      for _, command_attribute in ipairs(vim.split(v, '%s')) do
+        -- Splits attribute into a key-value pair, like "-nargs=*" to { "-nargs", "*" }
+        local attribute, value = unpack(vim.split(command_attribute, '=', { plain = true }))
+        attribute = attribute.gsub(attribute, '^%-+', '')
+        opts[opts_aliases[attribute] or attribute] = value or true
+      end
+    end
+  end
+  return opts
+end
+
+function M.create_module_commands(module_name, commands)
+  for command_name, def in pairs(commands) do
+    local opts = M._parse_user_command_options(def)
+    api.nvim_create_user_command(command_name, function(info)
+      require('lspconfig')[module_name].commands[command_name][1](unpack(info.fargs))
+    end, opts)
+  end
+end
+
 -- Some path utilities
 M.path = (function()
   local is_windows = uv.os_uname().version:match 'Windows'

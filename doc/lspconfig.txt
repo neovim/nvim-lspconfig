@@ -267,6 +267,7 @@ validating using `vim.validate` is:
       default_config = {'t'},
       on_new_config = {'f', true},
       on_attach = {'f', true},
+      commands = {'t', true},
       docs = {'t', true},
     }
 <
@@ -276,6 +277,34 @@ where the structure of the docs table is as follows:
       description = {'s', true},
       default_config = {'t', true},
     }
+<
+`commands` is a map of `name:definition` key:value pairs, where `definition`
+is a list whose first value is a function implementing the command, and the
+rest are either array values which will be formed into flags for the command,
+or special keys like `description`.
+
+Warning: Commands is deprecated and will be removed in future releases.
+It is recommended to use `vim.api.nvim_create_user_command()` instead in an `on_attach` function.
+
+Example:
+>
+  local function organize_imports()
+    local params = {
+      command = 'pyright.organizeimports',
+      arguments = { vim.uri_from_bufnr(0) },
+    }
+    vim.lsp.buf.execute_command(params)
+  end
+
+  local on_attach = function(client, bufnr)
+    if client.name == "pyright" then
+      vim.api.nvim_create_user_command("PyrightOrganizeImports", organize_imports, {desc = 'Organize Imports'})
+    end
+  end
+
+  require("lspconfig")['pyright'].setup({
+    on_attach = on_attach
+  })
 <
 
 The `configs.__newindex` metamethod consumes the config definition and returns
