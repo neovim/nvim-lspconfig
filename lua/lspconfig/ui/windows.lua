@@ -23,14 +23,6 @@ local win_float = {}
 
 win_float.default_options = {}
 
-local _mt = {
-  __newindex = function(t, k, v)
-    rawset(t, k, v)
-  end,
-}
-
-setmetatable(win_float.default_options, _mt)
-
 function win_float.default_opts(options)
   options = apply_defaults(options, { percentage = 0.9 })
 
