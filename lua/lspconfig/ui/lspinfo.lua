@@ -272,11 +272,11 @@ return function()
   vim.cmd 'let m=matchadd("string", "true")'
   vim.cmd 'let m=matchadd("error", "false")'
   for _, config in pairs(configs) do
-    vim.fn.matchadd('Title', '\\%(Client\\|Config\\):.*\\zs' .. config.name .. '\\ze')
+    vim.fn.matchadd('LspInfoTitle', '\\%(Client\\|Config\\):.*\\zs' .. config.name .. '\\ze')
     vim.fn.matchadd('LspInfoList', 'list:.*\\zs' .. config.name .. '\\ze')
     if config.filetypes then
       for _, ft in pairs(config.filetypes) do
-        vim.fn.matchadd('Type', '\\%(filetypes\\|filetype\\):.*\\zs' .. ft .. '\\ze')
+        vim.fn.matchadd('LspInfoFileType', '\\%(filetypes\\|filetype\\):.*\\zs' .. ft .. '\\ze')
       end
     end
   end
