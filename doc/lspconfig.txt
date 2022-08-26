@@ -278,29 +278,6 @@ where the structure of the docs table is as follows:
     }
 <
 
-Custom commands only work for servers
-
-Example:
->
-  local function organize_imports()
-    local params = {
-      command = 'pyright.organizeimports',
-      arguments = { vim.uri_from_bufnr(0) },
-    }
-    vim.lsp.buf.execute_command(params)
-  end
-
-  local on_attach = function(client, bufnr)
-    if client.name == "pyright" then
-      vim.api.nvim_create_user_command("PyrightOrganizeImports", organize_imports, {desc = 'Organize Imports'})
-    end
-  end
-
-  require("lspconfig")['pyright'].setup({
-    on_attach = on_attach
-  })
-<
-
 The `configs.__newindex` metamethod consumes the config definition and returns
 an object with a `setup()` method, to be invoked by users:
 >

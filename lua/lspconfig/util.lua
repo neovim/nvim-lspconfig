@@ -64,7 +64,7 @@ end
 function M.create_module_commands(module_name, commands)
   vim.deprecate('util.create_module_commands', nil, '0.1.4', 'vim.api.nvim_create_user_command')
   for command_name, def in pairs(commands) do
-    local _, opts = unpack(def)
+    local opts = def[2]
     api.nvim_create_user_command(command_name, function(info)
       require('lspconfig')[module_name].commands[command_name][1](unpack(info.fargs))
     end, opts)
