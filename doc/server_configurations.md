@@ -258,7 +258,7 @@ require'lspconfig'.angularls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("angular.json", ".git")
+  root_pattern("angular.json")
   ```
 
 
