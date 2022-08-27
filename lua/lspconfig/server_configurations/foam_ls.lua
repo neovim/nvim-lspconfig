@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 local bin_name = 'foam-ls'
 local cmd = { bin_name, '--stdio' }
 
-if vim.fn.has 'win32' == 1 then
+if util.is_windows then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 

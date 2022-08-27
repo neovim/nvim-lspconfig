@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 local bin_name = 'svlangserver'
 local cmd = { bin_name }
 
-if vim.fn.has 'win32' == 1 then
+if util.is_windows then
   cmd = { 'cmd.exe', '/C', bin_name }
 end
 

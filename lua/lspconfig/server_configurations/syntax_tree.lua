@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 local bin_name = 'stree'
 local cmd = { bin_name, 'lsp' }
 
-if vim.fn.has 'win32' == 1 then
+if util.is_windows then
   cmd = { 'cmd.exe', '/C', bin_name, 'lsp' }
 end
 

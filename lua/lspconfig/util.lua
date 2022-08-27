@@ -19,6 +19,11 @@ M.default_config = {
 -- global on_setup hook
 M.on_setup = nil
 
+---To check if running windows
+---NOTE: sometimes `os_uname().sysname` returns `Windows_NT` so it is better to pattern match
+---@type boolean
+M.is_windows = string.match(uv.os_uname().sysname, '^Windows') ~= nil
+
 function M.bufname_valid(bufname)
   if not bufname then
     return false
@@ -97,10 +102,8 @@ end
 
 -- Some path utilities
 M.path = (function()
-  local is_windows = uv.os_uname().version:match 'Windows'
-
   local function sanitize(path)
-    if is_windows then
+    if M.is_windows then
       path = path:sub(1, 1):upper() .. path:sub(2)
       path = path:gsub('\\', '/')
     end
@@ -121,7 +124,7 @@ M.path = (function()
   end
 
   local function is_fs_root(path)
-    if is_windows then
+    if M.is_windows then
       return path:match '^%a:$'
     else
       return path == '/'
@@ -129,7 +132,7 @@ M.path = (function()
   end
 
   local function is_absolute(filename)
-    if is_windows then
+    if M.is_windows then
       return filename:match '^%a:' or filename:match '^\\\\'
     else
       return filename:match '^/'
@@ -144,7 +147,7 @@ M.path = (function()
     end
     local result = path:gsub(strip_sep_pat, ''):gsub(strip_dir_pat, '')
     if #result == 0 then
-      if is_windows then
+      if M.is_windows then
         return path:sub(1, 2):upper()
       else
         return '/'
@@ -208,7 +211,7 @@ M.path = (function()
     return dir == root
   end
 
-  local path_separator = is_windows and ';' or ':'
+  local path_separator = M.is_windows and ';' or ':'
 
   return {
     is_dir = is_dir,

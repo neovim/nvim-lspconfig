@@ -28,10 +28,11 @@ When choosing a server name, convert all dashes (`-`) to underscores (`_`) If th
 Note that Windows has a limitation when it comes to directly invoking a server that's installed by `npm` or `gem`, so it requires additional handling.
 
 ```lua
+local util = require 'lspconfig.util'
 local bin_name = 'typescript-language-server'
 local cmd = { bin_name, '--stdio' }
 
-if vim.fn.has 'win32' == 1 then
+if util.is_windows then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 ```
@@ -52,7 +53,7 @@ local util = require 'lspconfig.util'
 local bin_name = 'pyright-langserver'
 local cmd = { bin_name, '--stdio' }
 
-if vim.fn.has 'win32' == 1 then
+if util.is_windows then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 

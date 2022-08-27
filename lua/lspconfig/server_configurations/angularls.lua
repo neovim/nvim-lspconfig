@@ -22,7 +22,7 @@ local args = {
 
 local cmd = { bin_name, unpack(args) }
 
-if vim.fn.has 'win32' == 1 then
+if util.is_windows then
   cmd = { 'cmd.exe', '/C', bin_name, unpack(args) }
 end
 

@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 local bin_name = 'psalm-language-server'
 
-if vim.fn.has 'win32' == 1 then
+if util.is_windows then
   bin_name = bin_name .. '.bat'
 end
 

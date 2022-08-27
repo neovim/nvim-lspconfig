@@ -11,7 +11,7 @@ local root_files = {
 local bin_name = 'lua-language-server'
 local cmd = { bin_name }
 
-if vim.fn.has 'win32' == 1 then
+if util.is_windows then
   cmd = { 'cmd.exe', '/C', bin_name }
 end
 

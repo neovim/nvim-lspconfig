@@ -1,7 +1,7 @@
 local util = require 'lspconfig.util'
 
 local cmd = (
-  vim.fn.has 'win32' == 1 and { 'cmd.exe', '/C', 'dart', 'language-server', '--protocol=lsp' }
+  util.is_windows and { 'cmd.exe', '/C', 'dart', 'language-server', '--protocol=lsp' }
   or { 'dart', 'language-server', '--protocol=lsp' }
 )
 

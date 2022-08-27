@@ -50,7 +50,7 @@ local volar_init_options = {
 local bin_name = 'vue-language-server'
 local cmd = { bin_name, '--stdio' }
 
-if vim.fn.has 'win32' == 1 then
+if util.is_windows then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 return {

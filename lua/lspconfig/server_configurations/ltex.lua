@@ -10,7 +10,7 @@ local language_id_mapping = {
 }
 
 local bin_name = 'ltex-ls'
-if vim.fn.has 'win32' == 1 then
+if util.is_windows then
   bin_name = bin_name .. '.bat'
 end
 
