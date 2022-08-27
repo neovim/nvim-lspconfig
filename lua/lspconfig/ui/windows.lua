@@ -29,7 +29,7 @@ function win_float.default_opts(options)
   local width = math.floor(vim.o.columns * options.percentage)
   local height = math.floor(vim.o.lines * options.percentage)
 
-  local top = math.floor(((vim.fn.winwidth(0) - height) / 2))
+  local top = math.floor(((vim.o.lines - height) / 2))
   local left = math.floor((vim.o.columns - width) / 2)
 
   local opts = {
