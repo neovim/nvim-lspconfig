@@ -29,7 +29,7 @@ function win_float.default_opts(options)
   local width = math.floor(vim.o.columns * options.percentage)
   local height = math.floor(vim.o.lines * options.percentage)
 
-  local top = math.floor(((vim.o.lines - height) / 2) - 1)
+  local top = math.floor(((vim.fn.winwidth(0) - height) / 2))
   local left = math.floor((vim.o.columns - width) / 2)
 
   local opts = {
@@ -76,7 +76,7 @@ function win_float.percentage_range_window(col_range, row_range, options)
     assert(row_range <= 1)
     assert(row_range > 0)
     height_percentage = row_range
-    row_start_percentage = (1 - height_percentage) / 2
+    row_start_percentage = (1 - height_percentage) / 3
   elseif type(row_range) == 'table' then
     height_percentage = row_range[2] - row_range[1]
     row_start_percentage = row_range[1]
