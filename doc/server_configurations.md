@@ -3621,6 +3621,14 @@ require'lspconfig'.metals.setup{}
 
 
 **Default values:**
+  - `capabilities` : 
+  ```lua
+  {
+    workspace = {
+      configuration = false
+    }
+  }
+  ```
   - `cmd` : 
   ```lua
   { "metals" }
