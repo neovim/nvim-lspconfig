@@ -6981,7 +6981,7 @@ require'lspconfig'.vdmj.setup{}
     java = "$JAVA_HOME/bin/java",
     java_opts = { "-Xmx3000m", "-Xss1m" },
     logfile = "path.join(vim.fn.stdpath 'cache', 'vdm-lsp.log')",
-    mavenrepo = "$HOME/.m2/repository/com/fujitsu",
+    mavenrepo = "$HOME/.m2/repository/dk/au/ece/vdmj",
     version = "The latest version installed in `mavenrepo`"
   }
   ```
