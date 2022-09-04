@@ -8,7 +8,7 @@ local cmd = { bin_name, 'start' }
 return {
   default_config = {
     cmd = cmd,
-    filetypes = { '.uvl' },
+    filetypes = { 'uvl' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
   },
