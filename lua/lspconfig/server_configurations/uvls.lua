@@ -1,7 +1,7 @@
 
 local util = require 'lspconfig.util'
 
-local bin_name = 'uvlss'
+local bin_name = 'uvls'
 local cmd = { bin_name, 'start' }
 
 
