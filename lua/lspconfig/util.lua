@@ -99,6 +99,10 @@ end
 M.path = (function()
   local is_windows = uv.os_uname().version:match 'Windows'
 
+  local function escape_wildcards(path)
+    return path:gsub('([%[%]%?%*])', '\\%1')
+  end
+
   local function sanitize(path)
     if is_windows then
       path = path:sub(1, 1):upper() .. path:sub(2)
@@ -211,6 +215,7 @@ M.path = (function()
   local path_separator = is_windows and ';' or ':'
 
   return {
+    escape_wildcards = escape_wildcards,
     is_dir = is_dir,
     is_file = is_file,
     is_absolute = is_absolute,
@@ -334,7 +339,7 @@ function M.root_pattern(...)
   local patterns = vim.tbl_flatten { ... }
   local function matcher(path)
     for _, pattern in ipairs(patterns) do
-      for _, p in ipairs(vim.fn.glob(M.path.join(path, pattern), true, true)) do
+      for _, p in ipairs(vim.fn.glob(M.path.join(M.path.escape_wildcards(path), pattern), true, true)) do
         if M.path.exists(p) then
           return path
         end
