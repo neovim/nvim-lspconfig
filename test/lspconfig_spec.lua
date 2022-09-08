@@ -324,5 +324,23 @@ describe('lspconfig', function()
         { 'rust_analyzer' }
       )
     end)
+
+    it('provides user_config to the on_setup hook', function()
+      eq(
+        exec_lua [[
+        local lspconfig = require "lspconfig"
+        local util = require "lspconfig.util"
+        local user_config
+        util.on_setup = function (_, _user_config)
+          user_config = _user_config
+        end
+        lspconfig.rust_analyzer.setup { custom_user_config = "custom" }
+        return user_config
+      ]],
+        {
+          custom_user_config = 'custom',
+        }
+      )
+    end)
   end)
 end)

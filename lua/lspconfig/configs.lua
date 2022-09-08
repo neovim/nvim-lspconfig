@@ -30,19 +30,19 @@ function configs.__newindex(t, config_name, config_def)
   -- Force this part.
   default_config.name = config_name
 
-  function M.setup(config)
+  function M.setup(user_config)
     local lsp_group = vim.api.nvim_create_augroup('lspconfig', { clear = false })
 
     validate {
-      cmd = { config.cmd, 't', true },
-      root_dir = { config.root_dir, 'f', true },
-      filetypes = { config.filetype, 't', true },
-      on_new_config = { config.on_new_config, 'f', true },
-      on_attach = { config.on_attach, 'f', true },
-      commands = { config.commands, 't', true },
+      cmd = { user_config.cmd, 't', true },
+      root_dir = { user_config.root_dir, 'f', true },
+      filetypes = { user_config.filetype, 't', true },
+      on_new_config = { user_config.on_new_config, 'f', true },
+      on_attach = { user_config.on_attach, 'f', true },
+      commands = { user_config.commands, 't', true },
     }
-    if config.commands then
-      for k, v in pairs(config.commands) do
+    if user_config.commands then
+      for k, v in pairs(user_config.commands) do
         validate {
           ['command.name'] = { k, 's' },
           ['command.fn'] = { v[1], 'f' },
@@ -50,10 +50,10 @@ function configs.__newindex(t, config_name, config_def)
       end
     end
 
-    config = tbl_deep_extend('keep', config, default_config)
+    local config = tbl_deep_extend('keep', user_config, default_config)
 
     if util.on_setup then
-      pcall(util.on_setup, config)
+      pcall(util.on_setup, config, user_config)
     end
 
     if config.autostart == true then
