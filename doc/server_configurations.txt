@@ -861,7 +861,7 @@ require'lspconfig'.clangd.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "c", "cpp", "objc", "objcpp", "cuda" }
+  { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
   ```
   - `root_dir` : 
   ```lua
