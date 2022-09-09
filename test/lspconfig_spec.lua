@@ -18,6 +18,22 @@ end)
 describe('lspconfig', function()
   describe('util', function()
     describe('path', function()
+      describe('escape_wildcards', function()
+        it('doesnt escape if not needed', function()
+          ok(exec_lua [[
+            local lspconfig = require("lspconfig")
+
+            return lspconfig.util.path.escape_wildcards('/usr/local/test/fname.lua') == '/usr/local/test/fname.lua'
+          ]])
+        end)
+        it('escapes if needed', function()
+          ok(exec_lua [[
+            local lspconfig = require("lspconfig")
+
+            return lspconfig.util.path.escape_wildcards('/usr/local/test/[sq brackets] fname?*.lua') == '/usr/local/test/\\[sq brackets\\] fname\\?\\*.lua'
+          ]])
+        end)
+      end)
       describe('exists', function()
         it('is present directory', function()
           ok(exec_lua [[
