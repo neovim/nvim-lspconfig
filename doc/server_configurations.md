@@ -913,7 +913,7 @@ require'lspconfig'.clarity_lsp.setup{}
 
 ## clojure_lsp
 
-https://github.com/snoe/clojure-lsp
+https://github.com/clojure-lsp/clojure-lsp
 
 Clojure Language Server
 
