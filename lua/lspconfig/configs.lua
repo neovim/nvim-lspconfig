@@ -291,7 +291,13 @@ function configs.__newindex(t, config_name, config_def)
       M.commands = vim.tbl_deep_extend('force', M.commands, client.config.commands)
     end
     if not M.commands_created and not vim.tbl_isempty(M.commands) then
-      util.create_module_commands(config_name, M.commands)
+      local user_commands = {}
+      for k, v in pairs(M.commands) do
+        if k:match '^%u' then
+          user_commands[k] = v
+        end
+      end
+      util.create_module_commands(config_name, user_commands)
     end
   end
 
