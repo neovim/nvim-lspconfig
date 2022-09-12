@@ -1,5 +1,4 @@
 local api = vim.api
-local configs = require 'lspconfig.configs'
 local windows = require 'lspconfig.ui.windows'
 local util = require 'lspconfig.util'
 
@@ -269,17 +268,15 @@ return function()
       .. error_messages.root_dir_not_found
   )
 
-  vim.cmd 'let m=matchadd("string", "true")'
-  vim.cmd 'let m=matchadd("error", "false")'
-  for _, config in pairs(configs) do
-    vim.fn.matchadd('LspInfoTitle', '\\%(Client\\|Config\\):.*\\zs' .. config.name .. '\\ze')
-    vim.fn.matchadd('LspInfoList', 'list:.*\\zs' .. config.name .. '\\ze')
-    if config.filetypes then
-      for _, ft in pairs(config.filetypes) do
-        vim.fn.matchadd('LspInfoFiletype', '\\%(filetypes\\|filetype\\):.*\\zs' .. ft .. '\\ze')
-      end
-    end
-  end
+  vim.cmd [[
+    syn keyword String true
+    syn keyword Error false
+    syn match LspInfoFiletypeList /\<filetypes\?:\s*\zs.*\ze/ contains=LspInfoFiletype
+    syn match LspInfoFiletype /\k\+/ contained
+    syn match LspInfoTitle /^\s*\%(Client\|Config\):\s*\zs\k\+\ze/
+    syn match LspInfoListList /^\s*Configured servers list:\s*\zs.*\ze/ contains=LspInfoList
+    syn match LspInfoList /\k\+/ contained
+  ]]
 
   api.nvim_buf_add_highlight(bufnr, 0, 'LspInfoTip', 0, 0, -1)
 end
