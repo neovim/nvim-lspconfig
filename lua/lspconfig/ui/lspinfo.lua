@@ -55,7 +55,7 @@ local function make_config_info(config, bufnr)
   local buffer_dir = api.nvim_buf_call(bufnr, function()
     return vim.fn.expand '%:p:h'
   end)
-  local root_dir = config.get_root_dir(buffer_dir)
+  local root_dir = config.get_root_dir and config.get_root_dir(buffer_dir)
   if root_dir then
     config_info.root_dir = root_dir
   else
