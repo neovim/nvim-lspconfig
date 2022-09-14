@@ -43,20 +43,20 @@ local function make_config_info(config, bufnr)
 
   local cmd_type = {
     ['function'] = function()
-      return 'cmd is the function type'
+      local cmd = 'cmd is the function type'
+      return cmd, 'NA'
     end,
     ['table'] = function()
-      return remove_newlines(config_info.cmd)
+      local cmd = remove_newlines(config_info.cmd)
+      if vim.fn.executable(config.cmd[1]) == 1 then
+        return cmd, 'true'
+      end
+      return cmd, error_messages.cmd_not_found
     end,
   }
 
   if config.cmd then
-    config_info.cmd = cmd_type[type(config.cmd)]()
-    if vim.fn.executable(config.cmd[1]) == 1 then
-      config_info.cmd_is_executable = 'true'
-    else
-      config_info.cmd_is_executable = error_messages.cmd_not_found
-    end
+    config_info.cmd, config_info.cmd_is_executable = cmd_type[type(config.cmd)]()
   else
     config_info.cmd = 'cmd not defined'
     config_info.cmd_is_executable = 'NA'
