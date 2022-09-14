@@ -36,27 +36,27 @@ local function remove_newlines(cmd)
   return cmd
 end
 
+local cmd_type = {
+  ['function'] = function(config)
+    local cmd = 'cmd is the function type'
+    return cmd, 'NA'
+  end,
+  ['table'] = function(config)
+    local cmd = remove_newlines(config.cmd)
+    if vim.fn.executable(config.cmd[1]) == 1 then
+      return cmd, 'true'
+    end
+    return cmd, error_messages.cmd_not_found
+  end,
+}
+
 local function make_config_info(config, bufnr)
   local config_info = {}
   config_info.name = config.name
   config_info.helptags = {}
 
-  local cmd_type = {
-    ['function'] = function()
-      local cmd = 'cmd is the function type'
-      return cmd, 'NA'
-    end,
-    ['table'] = function()
-      local cmd = remove_newlines(config_info.cmd)
-      if vim.fn.executable(config.cmd[1]) == 1 then
-        return cmd, 'true'
-      end
-      return cmd, error_messages.cmd_not_found
-    end,
-  }
-
   if config.cmd then
-    config_info.cmd, config_info.cmd_is_executable = cmd_type[type(config.cmd)]()
+    config_info.cmd, config_info.cmd_is_executable = cmd_type[type(config.cmd)](config)
   else
     config_info.cmd = 'cmd not defined'
     config_info.cmd_is_executable = 'NA'
@@ -114,7 +114,7 @@ end
 local function make_client_info(client)
   local client_info = {}
 
-  client_info.cmd = remove_newlines(client.config.cmd)
+  client_info.cmd, _ = cmd_type[type(client.config.cmd)](client.config)
   if client.workspaceFolders then
     client_info.root_dir = client.workspaceFolders[1].name
   else
