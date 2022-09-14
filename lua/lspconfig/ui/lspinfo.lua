@@ -37,9 +37,8 @@ local function remove_newlines(cmd)
 end
 
 local cmd_type = {
-  ['function'] = function(config)
-    local cmd = 'cmd is the function type'
-    return cmd, 'NA'
+  ['function'] = function(_)
+    return '<function>', 'NA'
   end,
   ['table'] = function(config)
     local cmd = remove_newlines(config.cmd)
@@ -114,7 +113,7 @@ end
 local function make_client_info(client)
   local client_info = {}
 
-  client_info.cmd, _ = cmd_type[type(client.config.cmd)](client.config)
+  client_info.cmd = cmd_type[type(client.config.cmd)](client.config)
   if client.workspaceFolders then
     client_info.root_dir = client.workspaceFolders[1].name
   else
