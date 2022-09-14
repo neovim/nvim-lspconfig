@@ -43,7 +43,7 @@ local function make_config_info(config, bufnr)
   if config.cmd then
     local cmd
     if type(config.cmd) == 'function' then
-      config_info.cmd = "custom cmd a function type"
+      config_info.cmd = 'cmd is the function type'
     else
       config_info.cmd = remove_newlines(cmd)
     end
