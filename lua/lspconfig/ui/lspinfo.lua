@@ -40,12 +40,18 @@ local function make_config_info(config, bufnr)
   local config_info = {}
   config_info.name = config.name
   config_info.helptags = {}
+
+  local cmd_type = {
+    ['function'] = function()
+      return 'cmd is the function type'
+    end,
+    ['table'] = function()
+      return remove_newlines(config_info.cmd)
+    end,
+  }
+
   if config.cmd then
-    if type(config.cmd) == 'function' then
-      config_info.cmd = 'cmd is the function type'
-    else
-      config_info.cmd = remove_newlines(config_info.cmd)
-    end
+    config_info.cmd = cmd_type[type(config.cmd)]()
     if vim.fn.executable(config.cmd[1]) == 1 then
       config_info.cmd_is_executable = 'true'
     else
