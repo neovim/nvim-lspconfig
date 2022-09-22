@@ -41,6 +41,22 @@ https://github.com/withastro/language-tools/tree/main/packages/language-server
 `astro-ls` can be installed via `npm`:
 ```sh
 npm install -g @astrojs/language-server
+
+To use `tsserver` integration, you need to install it via `npm`:
+```sh
+npm install -g typescript
+```
+
+Then configure `astro-ls` to use `typescript.js` file which comes with `typescript` package. It's locaed in `lib/typescript.js`:
+
+```lua
+require 'lspconfig'.astro.setup {
+  init_options = {
+    typescript = {
+      serverPath = "<YOUR_PATH_TO_GLOBAL_NPM_PACKAGES>/node_modules/typescript/lib/typescript.js"
+    },
+  },
+}
 ```
 ]],
     default_config = {
