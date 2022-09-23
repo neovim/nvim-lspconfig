@@ -1648,7 +1648,7 @@ require'lspconfig'.elixirls.setup{}
 **Default values:**
   - `filetypes` : 
   ```lua
-  { "elixir", "eelixir", "heex" }
+  { "elixir", "eelixir", "heex", "surface" }
   ```
   - `root_dir` : 
   ```lua
