@@ -1911,7 +1911,7 @@ require'lspconfig'.eslint.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue" }
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte" }
   ```
   - `handlers` : 
   ```lua
