@@ -50,6 +50,7 @@ return {
       'typescriptreact',
       'typescript.tsx',
       'vue',
+      'svelte',
     },
     -- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
     root_dir = util.root_pattern(
