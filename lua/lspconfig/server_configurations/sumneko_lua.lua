@@ -6,6 +6,7 @@ local root_files = {
   '.stylua.toml',
   'stylua.toml',
   'selene.toml',
+  'lua/',
 }
 
 local bin_name = 'lua-language-server'
