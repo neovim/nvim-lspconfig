@@ -6,7 +6,6 @@ local root_files = {
   '.stylua.toml',
   'stylua.toml',
   'selene.toml',
-  'lua/',
 }
 
 local bin_name = 'lua-language-server'
@@ -21,7 +20,7 @@ return {
     cmd = cmd,
     filetypes = { 'lua' },
     root_dir = function(fname)
-      local root = util.root_pattern(unpack(root_files))(fname)
+      local root = util.root_pattern(unpack(root_files))(fname) or util.root_pattern 'lua/'(fname)
       if root and root ~= vim.env.HOME then
         return root
       end
