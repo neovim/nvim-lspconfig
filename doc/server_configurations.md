@@ -2529,6 +2529,12 @@ require'lspconfig'.grammarly.setup{}
     ["$/updateDocumentState"] = <function 1>
   }
   ```
+  - `init_options` : 
+  ```lua
+  {
+    clientId = "client_BaDkMgx4X19X9UxxYRCXZo"
+  }
+  ```
   - `root_dir` : 
   ```lua
   util.find_git_ancestor
