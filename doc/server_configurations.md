@@ -3680,6 +3680,10 @@ require'lspconfig'.marksman.setup{}
   ```lua
   root_pattern(".git", ".marksman.toml")
   ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## metals
