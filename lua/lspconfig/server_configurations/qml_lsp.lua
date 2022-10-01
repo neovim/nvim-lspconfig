@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'qml-lsp' },
-    filetypes = { 'qml' },
+    filetypes = { 'qmljs' },
     root_dir = util.root_pattern '*.qml',
   },
   docs = {
