@@ -12,7 +12,7 @@ return {
     description = [[
 https://github.com/erg-lang/erg-language-server
 
-ELS (erg-language-server) is a language server for the Erg programing language.
+ELS (erg-language-server) is a language server for the Erg programming language.
 
 `els` can be installed via `cargo`:
  ```sh
