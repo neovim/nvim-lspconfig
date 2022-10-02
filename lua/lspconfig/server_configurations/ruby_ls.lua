@@ -14,6 +14,16 @@ return {
     cmd = cmd,
     filetypes = { 'ruby' },
     root_dir = util.root_pattern('Gemfile', '.git'),
+    init_options = {
+      enabledFeatures = {
+        'codeActions',
+        'diagnostics',
+        'documentHighlights',
+        'documentSymbols',
+        'formatting',
+        'inlayHint',
+      },
+    },
   },
   docs = {
     description = [[
