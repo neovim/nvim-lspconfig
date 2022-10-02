@@ -1,8 +1,14 @@
 local util = require 'lspconfig.util'
 
+local cmd = { 'nc', 'localhost', '6008' }
+
+if vim.fn.has 'nvim-0.8' == 1 then
+  cmd = vim.lsp.rpc.connect('localhost', '6008')
+end
+
 return {
   default_config = {
-    cmd = { 'nc', 'localhost', '6008' },
+    cmd = cmd,
     filetypes = { 'gd', 'gdscript', 'gdscript3' },
     root_dir = util.root_pattern('project.godot', '.git'),
   },
