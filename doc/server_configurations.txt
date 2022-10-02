@@ -2238,7 +2238,7 @@ require'lspconfig'.gdscript.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "nc", "localhost", "6008" }
+  see source file
   ```
   - `filetypes` : 
   ```lua
