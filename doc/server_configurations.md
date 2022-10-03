@@ -5627,6 +5627,12 @@ require'lspconfig'.ruby_ls.setup{}
   ```lua
   { "ruby" }
   ```
+  - `init_options` : 
+  ```lua
+  {
+    enabledFeatures = { "codeActions", "diagnostics", "documentHighlights", "documentSymbols", "formatting", "inlayHint" }
+  }
+  ```
   - `root_dir` : 
   ```lua
   root_pattern("Gemfile", ".git")
