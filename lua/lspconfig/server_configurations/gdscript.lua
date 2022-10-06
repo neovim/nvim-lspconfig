@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 local cmd = { 'nc', 'localhost', '6008' }
 
 if vim.fn.has 'nvim-0.8' == 1 then
-  cmd = vim.lsp.rpc.connect('localhost', '6008')
+  cmd = vim.lsp.rpc.connect('127.0.0.1', '6008')
 end
 
 return {
