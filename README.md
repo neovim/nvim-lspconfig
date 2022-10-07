@@ -6,7 +6,7 @@
 * If you found a bug in the Nvim LSP client, [report it at the Nvim core repo](https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&template=lsp_bug_report.yml).
 * These configs are **best-effort and unsupported.** See [contributions](#contributions).
 
-See also `:help lspconfig`.
+See also `:help lsp-config`.
 
 ## Install
 
