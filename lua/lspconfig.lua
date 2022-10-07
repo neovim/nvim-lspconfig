@@ -1,18 +1,18 @@
-local configs = require 'lspconfig.configs'
+require 'user.lspconfig.configs'
 
 local M = {
-  util = require 'lspconfig.util',
+  util = require 'user.lspconfig.util',
 }
 
 function M.available_servers()
-  vim.deprecate('lspconfig.available_servers', 'lspconfig.util.available_servers', '0.1.4', 'lspconfig')
+  vim.deprecate('user.lspconfig.available_servers', 'user.lspconfig.util.available_servers', '0.1.4', 'lspconfig')
   return M.util.available_servers()
 end
 
 local mt = {}
 function mt:__index(k)
   if configs[k] == nil then
-    local success, config = pcall(require, 'lspconfig.server_configurations.' .. k)
+    local success, config = pcall(require, 'user.lspconfig.server_configurations.' .. k)
     if success then
       configs[k] = config
     else
