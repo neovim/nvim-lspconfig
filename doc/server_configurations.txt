@@ -7635,7 +7635,7 @@ require'lspconfig'.volar.setup{}
       typeDefinition = true
     },
     typescript = {
-      serverPath = ""
+      tsdk = ""
     }
   }
   ```
