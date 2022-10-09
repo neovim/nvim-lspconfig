@@ -19,7 +19,7 @@ return {
   docs = {
     description = [[
 Reference:
-https://help.semmle.com/codeql/codeql-cli.html
+https://codeql.github.com/docs/codeql-cli/
 
 Binaries:
 https://github.com/github/codeql-cli-binaries
