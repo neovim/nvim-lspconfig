@@ -1036,7 +1036,7 @@ require'lspconfig'.cmake.setup{}
 ## codeqlls
 
 Reference:
-https://help.semmle.com/codeql/codeql-cli.html
+https://codeql.github.com/docs/codeql-cli/
 
 Binaries:
 https://github.com/github/codeql-cli-binaries
@@ -2998,7 +2998,7 @@ experimental).
 
 Idris2-Lsp requires a build of Idris 2 that includes the "Idris 2 API" package.
 Package managers with known support for this build include the
-[AUR](https://aur.archlinux.org/packages/idris2-api-git/) and
+[AUR](https://aur.archlinux.org/packages/idris2/) and
 [Homebrew](https://formulae.brew.sh/formula/idris2#default).
 
 If your package manager does not support the Idris 2 API, you will need to build
@@ -7508,7 +7508,7 @@ require'lspconfig'.vls.setup{}
 
 ## volar
 
-https://github.com/johnsoncodehk/volar/tree/master/packages/vue-language-server
+https://github.com/johnsoncodehk/volar/tree/20d713b/packages/vue-language-server
 
 Volar language server for Vue
 
