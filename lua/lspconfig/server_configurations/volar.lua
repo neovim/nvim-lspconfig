@@ -5,7 +5,7 @@ local function get_typescript_server_path(root_dir)
   return project_root and (util.path.join(project_root, 'node_modules', 'typescript', 'lib')) or ''
 end
 
--- https://github.com/johnsoncodehk/volar/blob/master/packages/shared/src/types.ts
+-- https://github.com/johnsoncodehk/volar/blob/20d713b/packages/shared/src/types.ts
 local volar_init_options = {
   typescript = {
     tsdk = '',
@@ -70,7 +70,7 @@ return {
   },
   docs = {
     description = [[
-https://github.com/johnsoncodehk/volar/tree/master/packages/vue-language-server
+https://github.com/johnsoncodehk/volar/tree/20d713b/packages/vue-language-server
 
 Volar language server for Vue
 
