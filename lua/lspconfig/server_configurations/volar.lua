@@ -2,14 +2,13 @@ local util = require 'lspconfig.util'
 
 local function get_typescript_server_path(root_dir)
   local project_root = util.find_node_modules_ancestor(root_dir)
-  return project_root and (util.path.join(project_root, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js'))
-    or ''
+  return project_root and (util.path.join(project_root, 'node_modules', 'typescript', 'lib')) or ''
 end
 
 -- https://github.com/johnsoncodehk/volar/blob/master/packages/shared/src/types.ts
 local volar_init_options = {
   typescript = {
-    serverPath = '',
+    tsdk = '',
   },
   languageFeatures = {
     implementation = true,
@@ -63,9 +62,9 @@ return {
       if
         new_config.init_options
         and new_config.init_options.typescript
-        and new_config.init_options.typescript.serverPath == ''
+        and new_config.init_options.typescript.tsdk == ''
       then
-        new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
+        new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
       end
     end,
   },
