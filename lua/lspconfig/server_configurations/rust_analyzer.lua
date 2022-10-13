@@ -22,16 +22,11 @@ return {
         cmd[#cmd + 1] = util.path.join(cargo_crate_dir, 'Cargo.toml')
       end
       local cargo_metadata = ''
-      local cargo_metadata_err = ''
       local cm = vim.fn.jobstart(cmd, {
         on_stdout = function(_, d, _)
           cargo_metadata = table.concat(d, '\n')
         end,
-        on_stderr = function(_, d, _)
-          cargo_metadata_err = table.concat(d, '\n')
-        end,
         stdout_buffered = true,
-        stderr_buffered = true,
       })
       if cm > 0 then
         cm = vim.fn.jobwait({ cm })[1]
@@ -44,11 +39,6 @@ return {
         if cargo_workspace_dir ~= nil then
           cargo_workspace_dir = util.path.sanitize(cargo_workspace_dir)
         end
-      else
-        vim.notify(
-          string.format('[lspconfig] cmd (%q) failed:\n%s', table.concat(cmd, ' '), cargo_metadata_err),
-          vim.log.levels.WARN
-        )
       end
       return cargo_workspace_dir
         or cargo_crate_dir
