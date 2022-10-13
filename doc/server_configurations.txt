@@ -1950,7 +1950,7 @@ require'lspconfig'.eslint.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte" }
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte", "astro" }
   ```
   - `handlers` : 
   ```lua
