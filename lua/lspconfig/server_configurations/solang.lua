@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'solang', '--language-server', '--target', 'ewasm' },
+    cmd = { 'solang', 'language-server', '--target', 'evm' },
     filetypes = { 'solidity' },
     root_dir = util.find_git_ancestor,
   },
