@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'donat'
+local bin_name = 'dotnet'
 local dll_path = '/opt/dafny/DafnyLanguageServer.dll'
 local cmd = {bin_name, dll_path}
 if vim.fn.has 'win32' == 1 then
