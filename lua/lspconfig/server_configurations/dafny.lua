@@ -6,7 +6,7 @@ local root_files = {
 }
 return {
   default_config = {
-    filetypes = { 'dfy', 'dafny'},
+    filetypes = { 'dfy', 'dafny' },
     cmd = { 'dotnet', '/opt/dafny/DafnyLanguageServer.dll' },
     root_dir = function(fname)
       return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
