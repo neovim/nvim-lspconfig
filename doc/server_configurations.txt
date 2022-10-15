@@ -2177,7 +2177,7 @@ require'lspconfig'.fsautocomplete.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "fsautocomplete", "--background-service-enabled" }
+  { "fsautocomplete", "--adaptive-lsp-server-enabled" }
   ```
   - `filetypes` : 
   ```lua
