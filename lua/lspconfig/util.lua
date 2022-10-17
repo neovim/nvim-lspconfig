@@ -340,7 +340,7 @@ function M.root_pattern(...)
   local function matcher(path)
     for _, pattern in ipairs(patterns) do
       for _, p in ipairs(vim.fn.glob(M.path.join(M.path.escape_wildcards(path), pattern), true, true)) do
-        if M.path.exists(p) then
+        if M.path.exists(p) and p ~= vim.env.HOME then
           return path
         end
       end
