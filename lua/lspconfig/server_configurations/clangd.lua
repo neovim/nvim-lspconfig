@@ -21,12 +21,13 @@ local function switch_source_header(bufnr)
   end
 end
 
-local root_files = {
+local workspace_markers = {
   '.clangd',
   '.clang-tidy',
   '.clang-format',
   'compile_commands.json',
   'compile_flags.txt',
+  '.git',
   'configure.ac', -- AutoTools
 }
 
@@ -43,9 +44,8 @@ return {
   default_config = {
     cmd = { 'clangd' },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
-    root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
+    workspace_markers = workspace_markers,
     single_file_support = true,
     capabilities = default_capabilities,
   },
@@ -71,17 +71,6 @@ https://clangd.llvm.org/installation.html
   specified as compile_commands.json, see https://clangd.llvm.org/installation#compile_commandsjson
 ]],
     default_config = {
-      root_dir = [[
-        root_pattern(
-          '.clangd',
-          '.clang-tidy',
-          '.clang-format',
-          'compile_commands.json',
-          'compile_flags.txt',
-          'configure.ac',
-          '.git'
-        )
-      ]],
       capabilities = [[default capabilities, with offsetEncoding utf-8]],
     },
   },

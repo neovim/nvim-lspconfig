@@ -1,3 +1,4 @@
+local workspace_markers = { 'tsconfig.json', 'package.json', 'jsconfig.json', '.git' }
 local util = require 'lspconfig.util'
 
 local bin_name = 'typescript-language-server'
@@ -11,6 +12,7 @@ return {
   default_config = {
     init_options = { hostInfo = 'neovim' },
     cmd = cmd,
+    workspace_markers = workspace_markers,
     filetypes = {
       'javascript',
       'javascriptreact',
@@ -19,10 +21,7 @@ return {
       'typescriptreact',
       'typescript.tsx',
     },
-    root_dir = function(fname)
-      return util.root_pattern 'tsconfig.json'(fname)
-        or util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -53,8 +52,5 @@ Here's an example that disables type checking in JavaScript files.
 }
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")]],
-    },
   },
 }
