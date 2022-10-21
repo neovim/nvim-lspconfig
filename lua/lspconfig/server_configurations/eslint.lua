@@ -1,5 +1,6 @@
 local util = require 'lspconfig.util'
 local lsp = vim.lsp
+local is_windows = vim.fn.has 'win32' == 1
 
 local function fix_all(opts)
   opts = opts or {}
@@ -35,8 +36,36 @@ end
 local bin_name = 'vscode-eslint-language-server'
 local cmd = { bin_name, '--stdio' }
 
-if vim.fn.has 'win32' == 1 then
+if is_windows then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
+end
+
+local root_file = {
+  '.eslintrc',
+  '.eslintrc.js',
+  '.eslintrc.cjs',
+  '.eslintrc.yaml',
+  '.eslintrc.yml',
+  '.eslintrc.json',
+  'package.json',
+}
+
+local root_with_package = util.find_package_json_ancestor(vim.fn.expand '%:p:h')
+
+if root_with_package then
+  local must_remove = false
+  local path_sep = is_windows and '\\' or '/'
+  for line in io.lines(root_with_package .. path_sep .. 'package.json') do
+    if line:find 'eslintConfig' then
+      must_remove = false
+    else
+      must_remove = true
+    end
+  end
+
+  if must_remove then
+    table.remove(root_file, #root_file)
+  end
 end
 
 return {
@@ -54,15 +83,7 @@ return {
       'astro',
     },
     -- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
-    root_dir = util.root_pattern(
-      '.eslintrc',
-      '.eslintrc.js',
-      '.eslintrc.cjs',
-      '.eslintrc.yaml',
-      '.eslintrc.yml',
-      '.eslintrc.json',
-      'package.json'
-    ),
+    root_dir = util.root_pattern(unpack(root_file)),
     -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
     settings = {
       validate = 'on',
