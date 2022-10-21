@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 local lsp = vim.lsp
-local path_sep = vim.fn.has 'win32' == 1 and '\\' or '/'
+local is_windows = vim.fn.has 'win32' == 1
 
 local function fix_all(opts)
   opts = opts or {}
@@ -36,7 +36,7 @@ end
 local bin_name = 'vscode-eslint-language-server'
 local cmd = { bin_name, '--stdio' }
 
-if vim.fn.has 'win32' == 1 then
+if is_windows then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
@@ -54,6 +54,7 @@ local root_with_package = util.find_package_json_ancestor(vim.fn.expand '%:p:h')
 
 if root_with_package then
   local must_remove = false
+  local path_sep = is_windows and '\\' or '/'
   for line in io.lines(root_with_package .. path_sep .. 'package.json') do
     if line:find 'eslintConfig' then
       must_remove = false
