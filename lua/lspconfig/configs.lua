@@ -34,7 +34,16 @@ function configs.__newindex(t, config_name, config_def)
     local lsp_group = vim.api.nvim_create_augroup('lspconfig', { clear = false })
 
     validate {
-      cmd = { user_config.cmd, 't', true },
+      cmd = (function()
+        if type(user_config.cmd) == 'table' then
+          return { user_config.cmd, 't', true }
+        elseif type(user_config.cmd) == 'function' then
+          return { { user_config.cmd }, 't', true } -- hanld vim.lsp.rpc.connect
+        else
+          return { nil, 't', true }
+        end
+      end)(),
+      --cmd = { user_config.cmd, 't', true },
       root_dir = { user_config.root_dir, 'f', true },
       filetypes = { user_config.filetype, 't', true },
       on_new_config = { user_config.on_new_config, 'f', true },
