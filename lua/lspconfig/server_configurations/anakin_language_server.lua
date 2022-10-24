@@ -17,7 +17,51 @@ return {
     single_file_support = true,
     settings = {
       anakinls = {
-        pyflakes_errors = { 'UndefinedName', 'UndefinedLocal' },
+        pyflakes_errors = {
+          -- https://github.com/PyCQA/pyflakes/blob/master/pyflakes/messages.py
+
+          -- TODO: Is this a good idea...?
+          
+          'ImportStarNotPermitted',
+
+          'UndefinedExport',
+          'UndefinedLocal',
+          'UndefinedName',
+
+          'DuplicateArgument',
+          'MultiValueRepeatedKeyLiteral',
+          'MultiValueRepeatedKeyVariable',
+
+          'FutureFeatureNotDefined',
+          'LateFutureImport',
+
+          'ReturnOutsideFunction',
+          'YieldOutsideFunction',
+          'ContinueOutsideLoop',
+          'BreakOutsideLoop',
+
+          'TwoStarredExpressions',
+          'TooManyExpressionsInStarredAssignment',
+
+          'ForwardAnnotationSyntaxError',
+          'RaiseNotImplemented',
+
+          'StringDotFormatExtraPositionalArguments',
+          'StringDotFormatExtraNamedArguments',
+          'StringDotFormatMissingArgument',
+          'StringDotFormatMixingAutomatic',
+          'StringDotFormatInvalidFormat',
+
+          'PercentFormatInvalidFormat',
+          'PercentFormatMixedPositionalAndNamed',
+          'PercentFormatUnsupportedFormat',
+          'PercentFormatPositionalCountMismatch',
+          'PercentFormatExtraNamedArguments',
+          'PercentFormatMissingArgument',
+          'PercentFormatExpectedMapping',
+          'PercentFormatExpectedSequence',
+          'PercentFormatStarRequiresSequence',
+        },
       },
     },
   },
