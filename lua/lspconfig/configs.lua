@@ -224,7 +224,7 @@ function configs.__newindex(t, config_name, config_def)
               callback = function()
                 M._setup_buffer(client.id, bufnr)
               end,
-              group = group_id,
+              group = get_augroup_id(),
               buffer = bufnr,
               once = true,
               desc = 'Reattaches the server with the updated configurations if changed.',
