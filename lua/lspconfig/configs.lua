@@ -31,8 +31,6 @@ function configs.__newindex(t, config_name, config_def)
   default_config.name = config_name
 
   function M.setup(user_config)
-    local lsp_group = vim.api.nvim_create_augroup('lspconfig', { clear = false })
-
     validate {
       cmd = {
         user_config.cmd,
@@ -56,13 +54,31 @@ function configs.__newindex(t, config_name, config_def)
 
     local config = tbl_deep_extend('keep', user_config, default_config)
 
+    local get_augroup_id = function()
+      local group_name = 'lspconfig_' .. config.name
+      local group_id
+      if not configs.lsp_groups[group_name] then
+        group_id = api.nvim_create_augroup(group_name, { clear = true })
+        configs.lsp_groups[group_name] = group_id
+      else
+        group_id = configs.lsp_groups[group_name]
+      end
+      return group_id
+    end
+
+    if not configs.lsp_groups then
+      configs.lsp_groups = {}
+    end
+
     if util.on_setup then
       pcall(util.on_setup, config, user_config)
     end
 
-    if config.autostart == true then
+    local gen_lspconfig_augroup = function()
       local event
       local pattern
+      local group_id = get_augroup_id()
+
       if config.filetypes then
         event = 'FileType'
         pattern = table.concat(config.filetypes, ',')
@@ -75,12 +91,16 @@ function configs.__newindex(t, config_name, config_def)
         callback = function()
           M.manager.try_add()
         end,
-        group = lsp_group,
+        group = group_id,
         desc = string.format(
           'Checks whether server %s should start a new instance or attach to an existing one.',
           config.name
         ),
       })
+    end
+
+    if config.autostart == true then
+      gen_lspconfig_augroup()
     end
 
     local get_root_dir = config.root_dir
@@ -97,12 +117,13 @@ function configs.__newindex(t, config_name, config_def)
       end
 
       if root_dir then
+        local group_id = get_augroup_id()
         vim.api.nvim_create_autocmd('BufReadPost', {
           pattern = vim.fn.fnameescape(root_dir) .. '/*',
           callback = function()
             M.manager.try_add_wrapper()
           end,
-          group = lsp_group,
+          group = group_id,
           desc = string.format(
             'Checks whether server %s should attach to a newly opened buffer inside workspace %q.',
             config.name,
@@ -130,6 +151,10 @@ function configs.__newindex(t, config_name, config_def)
         local pseudo_root = util.path.dirname(util.path.sanitize(bufname))
         local client_id = M.manager.add(pseudo_root, true)
         vim.lsp.buf_attach_client(vim.api.nvim_get_current_buf(), client_id)
+
+        if not configs.lsp_groups['lspconfig' .. config.name] then
+          gen_lspconfig_augroup()
+        end
       end
     end
 
@@ -199,7 +224,7 @@ function configs.__newindex(t, config_name, config_def)
               callback = function()
                 M._setup_buffer(client.id, bufnr)
               end,
-              group = lsp_group,
+              group = group_id,
               buffer = bufnr,
               once = true,
               desc = 'Reattaches the server with the updated configurations if changed.',

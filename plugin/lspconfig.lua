@@ -103,17 +103,28 @@ api.nvim_create_user_command('LspStop', function(info)
   local current_buf = vim.api.nvim_get_current_buf()
   local server_name = string.len(info.args) > 0 and info.args or nil
 
+  local remove_the_augroup = function(client)
+    local configs = getmetatable(require 'lspconfig.configs')
+    local group_name = 'lspconfig_' .. client.config.name
+    if configs.lsp_groups[group_name] then
+      pcall(api.nvim_del_augroup_by_id, configs.lsp_groups[group_name])
+      configs.lsp_groups[group_name] = nil
+    end
+  end
+
   if not server_name then
     local servers_on_buffer = vim.lsp.get_active_clients { buffer = current_buf }
     for _, client in ipairs(servers_on_buffer) do
       local filetypes = client.config.filetypes
       if filetypes and vim.tbl_contains(filetypes, vim.bo[current_buf].filetype) then
         client.stop()
+        remove_the_augroup(client)
       end
     end
   else
     for _, client in ipairs(get_clients_from_cmd_args(server_name)) do
       client.stop()
+      remove_the_augroup(client)
     end
   end
 end, {
