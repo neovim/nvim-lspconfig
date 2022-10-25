@@ -18,10 +18,8 @@ return {
     settings = {
       anakinls = {
         pyflakes_errors = {
-          -- https://github.com/PyCQA/pyflakes/blob/master/pyflakes/messages.py
+          -- Full list: https://github.com/PyCQA/pyflakes/blob/master/pyflakes/messages.py
 
-          -- TODO: Is this a good idea...?
-          
           'ImportStarNotPermitted',
 
           'UndefinedExport',
