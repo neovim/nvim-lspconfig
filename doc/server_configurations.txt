@@ -7656,7 +7656,7 @@ require'lspconfig'.vls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "vls" }
+  { "v", "ls" }
   ```
   - `filetypes` : 
   ```lua
