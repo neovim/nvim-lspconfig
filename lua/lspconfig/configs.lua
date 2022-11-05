@@ -1,5 +1,5 @@
 local util = require 'lspconfig.util'
-local api, validate, lsp = vim.api, vim.validate, vim.lsp
+local api, validate, lsp, uv, fn = vim.api, vim.validate, vim.lsp, vim.loop, vim.fn
 local tbl_deep_extend = vim.tbl_deep_extend
 
 local configs = {}
@@ -31,7 +31,7 @@ function configs.__newindex(t, config_name, config_def)
   default_config.name = config_name
 
   function M.setup(user_config)
-    local lsp_group = vim.api.nvim_create_augroup('lspconfig', { clear = false })
+    local lsp_group = api.nvim_create_augroup('lspconfig', { clear = false })
 
     validate {
       cmd = {
@@ -70,7 +70,7 @@ function configs.__newindex(t, config_name, config_def)
         event = 'BufReadPost'
         pattern = '*'
       end
-      vim.api.nvim_create_autocmd(event, {
+      api.nvim_create_autocmd(event, {
         pattern = pattern,
         callback = function()
           M.manager.try_add()
@@ -90,15 +90,19 @@ function configs.__newindex(t, config_name, config_def)
       if get_root_dir then
         local bufnr = api.nvim_get_current_buf()
         local bufname = api.nvim_buf_get_name(bufnr)
-        if not util.bufname_valid(bufname) then
+        if #bufname == 0 and not config.single_file_support then
           return
+        elseif #bufname ~= 0 then
+          if not util.bufname_valid(bufname) then
+            return
+          end
+          root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
         end
-        root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
       end
 
       if root_dir then
-        vim.api.nvim_create_autocmd('BufReadPost', {
-          pattern = vim.fn.fnameescape(root_dir) .. '/*',
+        api.nvim_create_autocmd('BufReadPost', {
+          pattern = fn.fnameescape(root_dir) .. '/*',
           callback = function()
             M.manager.try_add_wrapper()
           end,
@@ -109,7 +113,7 @@ function configs.__newindex(t, config_name, config_def)
             root_dir
           ),
         })
-        for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+        for _, bufnr in ipairs(api.nvim_list_bufs()) do
           local bufname = api.nvim_buf_get_name(bufnr)
           if util.bufname_valid(bufname) then
             local buf_dir = util.path.sanitize(bufname)
@@ -124,12 +128,17 @@ function configs.__newindex(t, config_name, config_def)
         -- this to attach additional files in the same parent folder to the same server.
         -- We just no longer send rootDirectory or workspaceFolders during initialization.
         local bufname = api.nvim_buf_get_name(0)
-        if not util.bufname_valid(bufname) then
-          return
+        local pseudo_root
+        if #bufname == 0 then
+          pseudo_root = uv.cwd()
+        else
+          if not util.bufname_valid(bufname) then
+            return
+          end
+          pseudo_root = util.path.dirname(util.path.sanitize(bufname))
         end
-        local pseudo_root = util.path.dirname(util.path.sanitize(bufname))
         local client_id = M.manager.add(pseudo_root, true)
-        vim.lsp.buf_attach_client(vim.api.nvim_get_current_buf(), client_id)
+        lsp.buf_attach_client(api.nvim_get_current_buf(), client_id)
       end
     end
 
@@ -194,8 +203,8 @@ function configs.__newindex(t, config_name, config_def)
         if bufnr == api.nvim_get_current_buf() then
           M._setup_buffer(client.id, bufnr)
         else
-          if vim.api.nvim_buf_is_valid(bufnr) then
-            vim.api.nvim_create_autocmd('BufEnter', {
+          if api.nvim_buf_is_valid(bufnr) then
+            api.nvim_create_autocmd('BufEnter', {
               callback = function()
                 M._setup_buffer(client.id, bufnr)
               end,
@@ -227,7 +236,7 @@ function configs.__newindex(t, config_name, config_def)
     function manager.try_add(bufnr)
       bufnr = bufnr or api.nvim_get_current_buf()
 
-      if vim.api.nvim_buf_get_option(bufnr, 'buftype') == 'nofile' then
+      if api.nvim_buf_get_option(bufnr, 'buftype') == 'nofile' then
         return
       end
 
@@ -235,8 +244,12 @@ function configs.__newindex(t, config_name, config_def)
       local root_dir
 
       local bufname = api.nvim_buf_get_name(bufnr)
-      if not util.bufname_valid(bufname) then
+      if #bufname == 0 and not config.single_file_support then
         return
+      elseif #bufname ~= 0 then
+        if not util.bufname_valid(bufname) then
+          return
+        end
       end
       local buf_path = util.path.sanitize(bufname)
 
@@ -247,7 +260,12 @@ function configs.__newindex(t, config_name, config_def)
       if root_dir then
         id = manager.add(root_dir, false)
       elseif config.single_file_support then
-        local pseudo_root = util.path.dirname(buf_path)
+        local pseudo_root
+        if #bufname == 0 then
+          pseudo_root = uv.cwd()
+        else
+          pseudo_root = util.path.dirname(buf_path)
+        end
         id = manager.add(pseudo_root, true)
       end
 
@@ -260,7 +278,7 @@ function configs.__newindex(t, config_name, config_def)
     -- `config.filetypes`, then do `manager.try_add(bufnr)`.
     function manager.try_add_wrapper(bufnr)
       bufnr = bufnr or api.nvim_get_current_buf()
-      local buf_filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+      local buf_filetype = api.nvim_buf_get_option(bufnr, 'filetype')
       if config.filetypes then
         for _, filetype in ipairs(config.filetypes) do
           if buf_filetype == filetype then
@@ -277,7 +295,7 @@ function configs.__newindex(t, config_name, config_def)
     M.manager = manager
     M.make_config = make_config
     if reload and config.autostart ~= false then
-      for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+      for _, bufnr in ipairs(api.nvim_list_bufs()) do
         manager.try_add_wrapper(bufnr)
       end
     end
