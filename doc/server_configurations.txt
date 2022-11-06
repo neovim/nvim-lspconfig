@@ -6664,7 +6664,7 @@ require'lspconfig'.sumneko_lua.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".luarc.json", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", ".git")
+  root_pattern(".luarc.json", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git")
   ```
   - `settings` : 
   ```lua
