@@ -47,6 +47,7 @@ local root_file = {
   '.eslintrc.yaml',
   '.eslintrc.yml',
   '.eslintrc.json',
+  'eslint.config.js',
   'package.json',
 }
 
