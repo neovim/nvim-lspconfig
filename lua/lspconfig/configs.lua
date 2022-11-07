@@ -128,15 +128,10 @@ function configs.__newindex(t, config_name, config_def)
         -- this to attach additional files in the same parent folder to the same server.
         -- We just no longer send rootDirectory or workspaceFolders during initialization.
         local bufname = api.nvim_buf_get_name(0)
-        local pseudo_root
-        if #bufname == 0 then
-          pseudo_root = uv.cwd()
-        else
-          if not util.bufname_valid(bufname) then
-            return
-          end
-          pseudo_root = util.path.dirname(util.path.sanitize(bufname))
+        if #bufname ~= 0 and not util.bufname_valid(bufname) then
+          return
         end
+        local pseudo_root = #bufname == 0 and uv.cwd() or util.path.dirname(util.path.sanitize(bufname))
         local client_id = M.manager.add(pseudo_root, true)
         lsp.buf_attach_client(api.nvim_get_current_buf(), client_id)
       end
@@ -260,12 +255,7 @@ function configs.__newindex(t, config_name, config_def)
       if root_dir then
         id = manager.add(root_dir, false)
       elseif config.single_file_support then
-        local pseudo_root
-        if #bufname == 0 then
-          pseudo_root = uv.cwd()
-        else
-          pseudo_root = util.path.dirname(buf_path)
-        end
+        local pseudo_root = #bufname == 0 and uv.cmd() or util.path.dirname(buf_path)
         id = manager.add(pseudo_root, true)
       end
 
