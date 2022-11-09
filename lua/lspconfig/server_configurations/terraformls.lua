@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.terraform', '.git' }
+
 return {
   default_config = {
     cmd = { 'terraform-ls', 'serve' },
     filetypes = { 'terraform' },
-    root_dir = util.root_pattern('.terraform', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -36,7 +38,7 @@ choice:
   - less stability (due to reliance on Terraform's own internal packages)
 ]],
     default_config = {
-      root_dir = [[root_pattern(".terraform", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

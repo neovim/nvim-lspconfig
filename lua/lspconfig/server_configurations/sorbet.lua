@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'Gemfile', '.git' }
+
 return {
   default_config = {
     cmd = { 'srb', 'tc', '--lsp' },
     filetypes = { 'ruby' },
-    root_dir = util.root_pattern('Gemfile', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -20,7 +22,7 @@ gem install sorbet
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern("Gemfile", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

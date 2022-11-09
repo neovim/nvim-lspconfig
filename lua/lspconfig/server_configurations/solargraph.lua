@@ -7,6 +7,8 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, 'stdio' }
 end
 
+local workspace_markers = { 'Gemfile', '.git' }
+
 return {
   default_config = {
     cmd = cmd,
@@ -17,7 +19,7 @@ return {
     },
     init_options = { formatting = true },
     filetypes = { 'ruby' },
-    root_dir = util.root_pattern('Gemfile', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -32,7 +34,7 @@ gem install --user-install solargraph
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern("Gemfile", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

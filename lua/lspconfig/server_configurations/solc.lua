@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'hardhat.config.*', '.git' }
+
 return {
   default_config = {
     cmd = { 'solc', '--lsp' },
     filetypes = { 'solidity' },
-    root_dir = util.root_pattern('hardhat.config.*', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -13,7 +15,7 @@ https://docs.soliditylang.org/en/latest/installing-solidity.html
 solc is the native language server for the Solidity language.
 ]],
     default_config = {
-      root_dir = [[root_pattern('hardhat.config.*', '.git')]],
+      workspace_markers = workspace_markers,
     },
   },
 }

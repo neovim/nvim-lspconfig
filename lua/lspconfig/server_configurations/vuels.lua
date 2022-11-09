@@ -7,11 +7,13 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name }
 end
 
+local workspace_markers = { 'package.json', 'vue.config.js' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'vue' },
-    root_dir = util.root_pattern('package.json', 'vue.config.js'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     init_options = {
       config = {
         vetur = {
@@ -62,7 +64,7 @@ npm install -g vls
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern("package.json", "vue.config.js")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

@@ -7,11 +7,13 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
+local workspace_markers = { 'package.json', '.git' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'css', 'scss', 'less' },
-    root_dir = util.root_pattern('package.json', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
     settings = {
       css = { validate = true },
@@ -43,7 +45,7 @@ require'lspconfig'.cssls.setup {
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern("package.json", ".git") or bufdir]],
+      workspace_markers = workspace_markers,
     },
   },
 }

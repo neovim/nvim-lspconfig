@@ -1,5 +1,7 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'tlconfig.lua', '.git' }
+
 return {
   default_config = {
     cmd = {
@@ -8,10 +10,11 @@ return {
       -- "logging=on",
     },
     filetypes = {
+      workspace_markers = workspace_markers,
       'teal',
       -- "lua", -- Also works for lua, but you may get type errors that cannot be resolved within lua itself
     },
-    root_dir = util.root_pattern('tlconfig.lua', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -23,7 +26,7 @@ luarocks install --dev teal-language-server
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern("tlconfig.lua", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

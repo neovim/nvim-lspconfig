@@ -56,10 +56,13 @@ local function denols_handler(err, result, ctx)
   lsp.handlers[ctx.method](err, result, ctx)
 end
 
+local workspace_markers = { 'deno.json', 'deno.jsonc', '.git' }
+
 return {
   default_config = {
     cmd = { 'deno', 'lsp' },
     filetypes = {
+      workspace_markers = workspace_markers,
       'javascript',
       'javascriptreact',
       'javascript.jsx',
@@ -67,7 +70,7 @@ return {
       'typescriptreact',
       'typescript.tsx',
     },
-    root_dir = util.root_pattern('deno.json', 'deno.jsonc', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     init_options = {
       enable = true,
       unstable = false,
@@ -115,7 +118,7 @@ vim.g.markdown_fenced_languages = {
 
 ]],
     default_config = {
-      root_dir = [[root_pattern("deno.json", "deno.jsonc", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

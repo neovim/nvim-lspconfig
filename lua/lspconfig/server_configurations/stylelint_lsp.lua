@@ -7,10 +7,13 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
+local workspace_markers = { '.stylelintrc', 'package.json' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = {
+      workspace_markers = workspace_markers,
       'css',
       'less',
       'scss',
@@ -22,7 +25,7 @@ return {
       'typescript',
       'typescriptreact',
     },
-    root_dir = util.root_pattern('.stylelintrc', 'package.json'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     settings = {},
   },
   docs = {
@@ -48,7 +51,7 @@ require'lspconfig'.stylelint_lsp.setup{
 ```
 ]],
     default_config = {
-      root_dir = [[ root_pattern('.stylelintrc', 'package.json') ]],
+      workspace_markers = workspace_markers,
     },
   },
 }

@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'dub.json', 'dub.sdl', '.git' }
+
 return {
   default_config = {
     cmd = { 'serve-d' },
     filetypes = { 'd' },
-    root_dir = util.root_pattern('dub.json', 'dub.sdl', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -14,7 +16,7 @@ return {
            Download a binary from https://github.com/Pure-D/serve-d/releases and put it in your $PATH.
         ]],
     default_config = {
-      root_dir = [[util.root_pattern("dub.json", "dub.sdl", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }
