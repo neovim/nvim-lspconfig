@@ -5811,7 +5811,7 @@ require'lspconfig'.rome.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "rome", "lsp" }
+  { "rome", "lsp-proxy" }
   ```
   - `filetypes` : 
   ```lua
