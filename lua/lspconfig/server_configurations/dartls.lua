@@ -5,11 +5,13 @@ local cmd = (
   or { 'dart', 'language-server', '--protocol=lsp' }
 )
 
+local workspace_markers = { 'pubspec.yaml' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'dart' },
-    root_dir = util.root_pattern 'pubspec.yaml',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     init_options = {
       onlyAnalyzeProjectsWithOpenFiles = true,
       suggestFromUnimportedLibraries = true,
@@ -31,7 +33,7 @@ https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec
 Language server for dart.
 ]],
     default_config = {
-      root_dir = [[root_pattern("pubspec.yaml")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

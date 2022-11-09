@@ -52,11 +52,13 @@ local cmd = { bin_name, '--stdio' }
 if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
+local workspace_markers = { 'package.json' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'vue' },
-    root_dir = util.root_pattern 'package.json',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     init_options = volar_init_options,
     on_new_config = function(new_config, new_root_dir)
       if

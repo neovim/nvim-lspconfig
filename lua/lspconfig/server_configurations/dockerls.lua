@@ -7,11 +7,13 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
+local workspace_markers = { 'Dockerfile' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'dockerfile' },
-    root_dir = util.root_pattern 'Dockerfile',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -24,7 +26,7 @@ npm install -g dockerfile-language-server-nodejs
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern("Dockerfile")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

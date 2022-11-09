@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = { 'clarity-lsp' },
     filetypes = { 'clar', 'clarity' },
-    root_dir = util.root_pattern '.git',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -13,7 +15,7 @@ return {
 To learn how to configure the clarity language server, see the [clarity-lsp documentation](https://github.com/hirosystems/clarity-lsp).
 ]],
     default_config = {
-      root_dir = [[root_pattern(".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

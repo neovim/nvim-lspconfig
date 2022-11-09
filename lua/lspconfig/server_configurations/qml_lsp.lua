@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '*.qml' }
+
 return {
   default_config = {
     cmd = { 'qml-lsp' },
     filetypes = { 'qmljs' },
-    root_dir = util.root_pattern '*.qml',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[

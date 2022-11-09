@@ -2,11 +2,13 @@ local util = require 'lspconfig.util'
 
 local bin_name = 'theme-check-language-server'
 
+local workspace_markers = { '.theme-check.yml' }
+
 return {
   default_config = {
     cmd = { bin_name, '--stdio' },
     filetypes = { 'liquid' },
-    root_dir = util.root_pattern '.theme-check.yml',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     settings = {},
   },
   docs = {

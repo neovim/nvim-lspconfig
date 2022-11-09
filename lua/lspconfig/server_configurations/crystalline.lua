@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'shard.yml', '.git' }
+
 return {
   default_config = {
     cmd = { 'crystalline' },
     filetypes = { 'crystal' },
-    root_dir = util.root_pattern 'shard.yml' or util.find_git_ancestor,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -14,7 +16,7 @@ https://github.com/elbywan/crystalline
 Crystal language server.
 ]],
     default_config = {
-      root_dir = [[root_pattern('shard.yml', '.git')]],
+      workspace_markers = workspace_markers,
     },
   },
 }
