@@ -26,14 +26,17 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, unpack(args) }
 end
 
+local workspace_markers = { 'angular.json' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'typescript', 'html', 'typescriptreact', 'typescript.tsx' },
+    workspace_markers = workspace_markers,
     -- Check for angular.json since that is the root of the project.
     -- Don't check for tsconfig.json or package.json since there are multiple of these
     -- in an angular monorepo setup.
-    root_dir = util.root_pattern 'angular.json',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   on_new_config = function(new_config, new_root_dir)
     local new_probe_dir = get_probe_dir(new_root_dir)
@@ -69,7 +72,7 @@ require'lspconfig'.angularls.setup{
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern("angular.json")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

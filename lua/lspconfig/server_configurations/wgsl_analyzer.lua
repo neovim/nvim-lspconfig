@@ -7,11 +7,14 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name }
 end
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'wgsl' },
-    root_dir = util.root_pattern '.git',
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     settings = {},
   },
   docs = {
@@ -24,7 +27,7 @@ cargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer wgsl_analyzer
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern(".git"]],
+      workspace_markers = workspace_markers,
     },
   },
 }

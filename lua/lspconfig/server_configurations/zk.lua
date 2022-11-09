@@ -1,10 +1,13 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.zk' }
+
 return {
   default_config = {
     cmd = { 'zk', 'lsp' },
     filetypes = { 'markdown' },
-    root_dir = util.root_pattern '.zk',
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   commands = {
     ZkIndex = {
@@ -42,7 +45,7 @@ https://github.com/mickael-menu/zk
 A plain text note-taking assistant
 ]],
     default_config = {
-      root_dir = [[root_pattern(".zk")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

@@ -1,10 +1,13 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.flowconfig' }
+
 return {
   default_config = {
     cmd = { 'npx', '--no-install', 'flow', 'lsp' },
     filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx' },
-    root_dir = util.root_pattern '.flowconfig',
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -21,7 +24,7 @@ npx flow lsp --help
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern(".flowconfig")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

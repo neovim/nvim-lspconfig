@@ -1,10 +1,13 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '*.hxml' }
+
 return {
   default_config = {
     cmd = { 'haxe-language-server' },
     filetypes = { 'haxe' },
-    root_dir = util.root_pattern '*.hxml',
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     settings = {
       haxe = {
         executable = 'haxe',
@@ -41,7 +44,7 @@ your project's root directory. If your file is named something different,
 specify it using the `init_options.displayArguments` setting.
 ]],
     default_config = {
-      root_dir = [[root_pattern("*.hxml")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

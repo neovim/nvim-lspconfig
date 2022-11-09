@@ -1,10 +1,13 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'Cargo.toml' }
+
 return {
   default_config = {
     cmd = { 'rls' },
     filetypes = { 'rust' },
-    root_dir = util.root_pattern 'Cargo.toml',
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -36,7 +39,7 @@ cmd = {"rustup", "run", "nightly", "rls"}
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern("Cargo.toml")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

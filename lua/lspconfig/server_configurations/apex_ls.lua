@@ -1,9 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'sfdx-project.json' }
+
 return {
   default_config = {
     filetypes = { 'apexcode' },
-    root_dir = util.root_pattern 'sfdx-project.json',
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     on_new_config = function(config)
       if not config.cmd and config.apex_jar_path then
         config.cmd = {
@@ -40,7 +43,7 @@ require'lspconfig'.apex_ls.setup {
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern('sfdx-project.json')]],
+      workspace_markers = workspace_markers,
     },
   },
 }
