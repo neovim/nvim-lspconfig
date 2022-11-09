@@ -222,9 +222,9 @@ require'lspconfig'.als.setup{}
   ```lua
   { "ada" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  util.root_pattern("Makefile", ".git", "*.gpr", "*.adc")
+  { "Makefile", ".git", "*.gpr", "*.adc" }
   ```
 
 
@@ -265,9 +265,9 @@ require'lspconfig'.angularls.setup{}
   ```lua
   { "typescript", "html", "typescriptreact", "typescript.tsx" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("angular.json")
+  { "angular.json" }
   ```
 
 
@@ -299,10 +299,6 @@ require'lspconfig'.ansiblels.setup{}
   - `filetypes` : 
   ```lua
   { "yaml.ansible" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `settings` : 
   ```lua
@@ -356,10 +352,6 @@ require'lspconfig'.antlersls.setup{}
   ```lua
   { "html", "antlers" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
 
 
 ## apex_ls
@@ -392,13 +384,9 @@ require'lspconfig'.apex_ls.setup{}
   ```lua
   { "apexcode" }
   ```
-  - `on_new_config` : 
+  - `workspace_markers` : 
   ```lua
-  see source file
-  ```
-  - `root_dir` : 
-  ```lua
-  root_pattern('sfdx-project.json')
+  { "sfdx-project.json" }
   ```
 
 
@@ -469,10 +457,6 @@ require'lspconfig'.arduino_language_server.setup{}
   ```lua
   { "arduino" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
 
 
 ## asm_lsp
@@ -500,10 +484,6 @@ require'lspconfig'.asm_lsp.setup{}
   - `filetypes` : 
   ```lua
   { "asm", "vmasm" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
 
 
@@ -542,13 +522,9 @@ require'lspconfig'.astro.setup{}
     }
   }
   ```
-  - `on_new_config` : 
+  - `workspace_markers` : 
   ```lua
-  see source file
-  ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+  { "package.json", "tsconfig.json", "jsconfig.json", ".git" }
   ```
 
 
@@ -618,13 +594,13 @@ require'lspconfig'.bashls.setup{}
   ```lua
   { "sh" }
   ```
-  - `root_dir` : 
-  ```lua
-  util.find_git_ancestor
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -657,13 +633,13 @@ require'lspconfig'.beancount.setup{}
     journalFile = ""
   }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern(".git")
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -718,9 +694,9 @@ require'lspconfig'.bicep.setup{}
   ```lua
   {}
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  util.find_git_ancestor
+  { ".git" }
   ```
 
 
@@ -756,13 +732,13 @@ require'lspconfig'.blueprint_ls.setup{}
   ```lua
   { "blueprint" }
   ```
-  - `root_dir` : 
-  ```lua
-  util.find_git_ancestor
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -786,9 +762,9 @@ require'lspconfig'.bsl_ls.setup{}
   ```lua
   { "bsl", "os" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern(".git")
+  { ".git" }
   ```
 
 
@@ -874,13 +850,13 @@ require'lspconfig'.ccls.setup{}
   ```lua
   "utf-32"
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern('compile_commands.json', '.ccls', '.git')
-  ```
   - `single_file_support` : 
   ```lua
   false
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "compile_commands.json", ".ccls", ".git" }
   ```
 
 
@@ -919,22 +895,13 @@ require'lspconfig'.clangd.setup{}
   ```lua
   { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
   ```
-  - `root_dir` : 
-  ```lua
-          root_pattern(
-            '.clangd',
-            '.clang-tidy',
-            '.clang-format',
-            'compile_commands.json',
-            'compile_flags.txt',
-            'configure.ac',
-            '.git'
-          )
-        
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", ".git", "configure.ac" }
   ```
 
 
@@ -961,9 +928,9 @@ require'lspconfig'.clarity_lsp.setup{}
   ```lua
   { "clar", "clarity" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern(".git")
+  { ".git" }
   ```
 
 
@@ -990,9 +957,9 @@ require'lspconfig'.clojure_lsp.setup{}
   ```lua
   { "clojure", "edn" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("project.clj", "deps.edn", "build.boot", "shadow-cljs.edn", ".git")
+  { "project.clj", "deps.edn", "build.boot", "shadow-cljs.edn", ".git" }
   ```
 
 
@@ -1052,10 +1019,6 @@ require'lspconfig'.codeqlls.setup{}
 
 
 **Default values:**
-  - `before_init` : 
-  ```lua
-  see source file
-  ```
   - `cmd` : 
   ```lua
   { "codeql", "execute", "language-server", "--check-errors", "ON_CHANGE", "-q" }
@@ -1067,10 +1030,6 @@ require'lspconfig'.codeqlls.setup{}
   - `log_level` : 
   ```lua
   2
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `settings` : 
   ```lua
@@ -1103,13 +1062,13 @@ require'lspconfig'.crystalline.setup{}
   ```lua
   { "crystal" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern('shard.yml', '.git')
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "shard.yml", ".git" }
   ```
 
 
@@ -1145,10 +1104,6 @@ require'lspconfig'.csharp_ls.setup{}
   {
     AutomaticWorkspaceInit = true
   }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
 
 
@@ -1192,10 +1147,6 @@ require'lspconfig'.cssls.setup{}
   ```lua
   { "css", "scss", "less" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("package.json", ".git") or bufdir
-  ```
   - `settings` : 
   ```lua
   {
@@ -1213,6 +1164,10 @@ require'lspconfig'.cssls.setup{}
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "package.json", ".git" }
   ```
 
 
@@ -1280,9 +1235,9 @@ require'lspconfig'.cucumber_language_server.setup{}
   ```lua
   { "cucumber" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  util.find_git_ancestor
+  { ".git" }
   ```
 
 
@@ -1352,10 +1307,6 @@ require'lspconfig'.dartls.setup{}
     suggestFromUnimportedLibraries = true
   }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("pubspec.yaml")
-  ```
   - `settings` : 
   ```lua
   {
@@ -1364,6 +1315,10 @@ require'lspconfig'.dartls.setup{}
       showTodos = true
     }
   }
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "pubspec.yaml" }
   ```
 
 
@@ -1399,7 +1354,9 @@ require'lspconfig'.denols.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx",
+    workspace_markers = { "deno.json", "deno.jsonc", ".git" }
+  }
   ```
   - `handlers` : 
   ```lua
@@ -1415,10 +1372,6 @@ require'lspconfig'.denols.setup{}
     enable = true,
     unstable = false
   }
-  ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("deno.json", "deno.jsonc", ".git")
   ```
 
 
@@ -1451,13 +1404,13 @@ require'lspconfig'.dhall_lsp_server.setup{}
   ```lua
   { "dhall" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern(".git")
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -1520,13 +1473,13 @@ require'lspconfig'.dockerls.setup{}
   ```lua
   { "dockerfile" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("Dockerfile")
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "Dockerfile" }
   ```
 
 
@@ -1556,10 +1509,6 @@ require'lspconfig'.dotls.setup{}
   ```lua
   { "dot" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
@@ -1579,6 +1528,7 @@ launching the language server on single files. If on an older version of EFM, di
 require('lspconfig')['efm'].setup{
   settings = ..., -- You must populate this according to the EFM readme
   filetypes = ..., -- Populate this according to the note below
+  workspace_markers = workspace_markers,
   single_file_support = false, -- This is the important line for supporting older version of EFM
 }
 ```
@@ -1607,10 +1557,6 @@ require'lspconfig'.efm.setup{}
   - `cmd` : 
   ```lua
   { "efm-langserver" }
-  ```
-  - `root_dir` : 
-  ```lua
-  util.root_pattern(".git")
   ```
   - `single_file_support` : 
   ```lua
@@ -1727,9 +1673,9 @@ require'lspconfig'.ember.setup{}
   ```lua
   { "handlebars", "typescript", "javascript" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("ember-cli-build.js", ".git")
+  { "ember-cli-build.js", ".git" }
   ```
 
 
@@ -1797,9 +1743,9 @@ require'lspconfig'.erg_language_server.setup{}
   ```lua
   { "erg" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("package.er") or find_git_ancestor
+  { "package.er", ".git" }
   ```
 
 
@@ -1835,13 +1781,13 @@ require'lspconfig'.erlangls.setup{}
   ```lua
   { "erlang" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern('rebar.config', 'erlang.mk', '.git')
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "rebar.config", "erlang.mk", ".git" }
   ```
 
 
@@ -1907,10 +1853,6 @@ require'lspconfig'.esbonio.setup{}
   ```lua
   { "rst" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
 
 
 ## eslint
@@ -1961,14 +1903,6 @@ require'lspconfig'.eslint.setup{}
     ["eslint/openDoc"] = <function 3>,
     ["eslint/probeFailed"] = <function 4>
   }
-  ```
-  - `on_new_config` : 
-  ```lua
-  see source file
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `settings` : 
   ```lua
@@ -2033,9 +1967,9 @@ require'lspconfig'.flow.setup{}
   ```lua
   { "javascript", "javascriptreact", "javascript.jsx" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern(".flowconfig")
+  { ".flowconfig" }
   ```
 
 
@@ -2064,13 +1998,13 @@ require'lspconfig'.flux_lsp.setup{}
   ```lua
   { "flux" }
   ```
-  - `root_dir` : 
-  ```lua
-  util.find_git_ancestor
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -2099,10 +2033,6 @@ require'lspconfig'.foam_ls.setup{}
   - `filetypes` : 
   ```lua
   { "foam", "OpenFOAM" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
 
 
@@ -2136,10 +2066,6 @@ require'lspconfig'.fortls.setup{}
   - `filetypes` : 
   ```lua
   { "fortran" }
-  ```
-  - `root_dir` : 
-  ```lua
-  root_pattern(".fortls")
   ```
   - `settings` : 
   ```lua
@@ -2189,10 +2115,6 @@ require'lspconfig'.fsautocomplete.setup{}
     AutomaticWorkspaceInit = true
   }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
 
 
 ## fsharp_language_server
@@ -2233,10 +2155,6 @@ require'lspconfig'.fsharp_language_server.setup{}
     AutomaticWorkspaceInit = true
   }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `settings` : 
   ```lua
   {}
@@ -2266,9 +2184,9 @@ require'lspconfig'.fstar.setup{}
   ```lua
   { "fstar" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  util.find_git_ancestor
+  { ".git" }
   ```
 
 
@@ -2287,17 +2205,13 @@ require'lspconfig'.gdscript.setup{}
 
 
 **Default values:**
-  - `cmd` : 
-  ```lua
-  see source file
-  ```
   - `filetypes` : 
   ```lua
   { "gd", "gdscript", "gdscript3" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  util.root_pattern("project.godot", ".git")
+  { "project.godot", ".git" }
   ```
 
 
@@ -2325,9 +2239,9 @@ require'lspconfig'.ghcide.setup{}
   ```lua
   { "haskell", "lhaskell" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml")
+  { "stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml" }
   ```
 
 
@@ -2357,13 +2271,13 @@ require'lspconfig'.ghdl_ls.setup{}
   ```lua
   { "vhdl" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "hdl-prj.json", ".git" }
   ```
 
 
@@ -2408,14 +2322,6 @@ require'lspconfig'.glint.setup{}
   ```lua
   { "html.handlebars", "handlebars", "typescript", "typescript.glimmer", "javascript", "javascript.glimmer" }
   ```
-  - `on_new_config` : 
-  ```lua
-  see source file
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
 
 
 ## glslls
@@ -2454,10 +2360,6 @@ require'lspconfig'.glslls.setup{}
   - `filetypes` : 
   ```lua
   { "glsl" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -2623,13 +2525,13 @@ require'lspconfig'.grammarly.setup{}
     clientId = "client_BaDkMgx4X19X9UxxYRCXZo"
   }
   ```
-  - `root_dir` : 
-  ```lua
-  util.find_git_ancestor
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -2662,9 +2564,9 @@ require'lspconfig'.graphql.setup{}
   ```lua
   { "graphql", "typescriptreact", "javascriptreact" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  util.root_pattern('.git', '.graphqlrc*', '.graphql.config.*', 'graphql.config.*')
+  { ".git", ".graphqlrc*", ".graphql.config.*", "graphql.config.*" }
   ```
 
 
@@ -2705,9 +2607,9 @@ require'lspconfig'.groovyls.setup{}
   ```lua
   { "groovy" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  see source file
+  { "Jenkinsfile", ".git" }
   ```
 
 
@@ -2760,10 +2662,6 @@ require'lspconfig'.haxe_language_server.setup{}
     displayArguments = { "build.hxml" }
   }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("*.hxml")
-  ```
   - `settings` : 
   ```lua
   {
@@ -2771,6 +2669,10 @@ require'lspconfig'.haxe_language_server.setup{}
       executable = "haxe"
     }
   }
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "*.hxml" }
   ```
 
 
@@ -2797,13 +2699,13 @@ require'lspconfig'.hdl_checker.setup{}
   ```lua
   { "vhdl", "verilog", "systemverilog" }
   ```
-  - `root_dir` : 
-  ```lua
-  util.find_git_ancestor
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -2832,9 +2734,9 @@ require'lspconfig'.hhvm.setup{}
   ```lua
   { "php", "hack" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern(".hhconfig")
+  { ".hhconfig" }
   ```
 
 
@@ -2874,9 +2776,9 @@ require'lspconfig'.hie.setup{}
   ```lua
   { "haskell" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("stack.yaml", "package.yaml", ".git")
+  { "stack.yaml", "package.yaml", ".git" }
   ```
 
 
@@ -2902,10 +2804,6 @@ require'lspconfig'.hls.setup{}
   - `filetypes` : 
   ```lua
   { "haskell", "lhaskell" }
-  ```
-  - `lspinfo` : 
-  ```lua
-  see source file
   ```
   - `root_dir` : 
   ```lua
@@ -2958,10 +2856,6 @@ require'lspconfig'.hoon_ls.setup{}
   - `filetypes` : 
   ```lua
   { "hoon" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -3021,10 +2915,6 @@ require'lspconfig'.html.setup{}
     provideFormatter = true
   }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `settings` : 
   ```lua
   {}
@@ -3083,10 +2973,6 @@ require'lspconfig'.idris2_lsp.setup{}
   ```lua
   { "idris2" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
 
 
 ## intelephense
@@ -3142,10 +3028,6 @@ require'lspconfig'.java_language_server.setup{}
   ```lua
   { "java" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `settings` : 
   ```lua
   {}
@@ -3197,7 +3079,7 @@ require'lspconfig'.jdtls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "jdtls", "-configuration", "/home/runner/.cache/jdtls/config", "-data", "/home/runner/.cache/jdtls/workspace" }
+  { "jdtls", "-configuration", "/home/hatsu/.cache/jdtls/config", "-data", "/home/hatsu/.cache/jdtls/workspace" }
   ```
   - `filetypes` : 
   ```lua
@@ -3216,7 +3098,7 @@ require'lspconfig'.jdtls.setup{}
   ```lua
   {
     jvm_args = {},
-    workspace = "/home/runner/.cache/jdtls/workspace"
+    workspace = "/home/hatsu/.cache/jdtls/workspace"
   }
   ```
   - `root_dir` : 
@@ -3318,13 +3200,13 @@ require'lspconfig'.jsonls.setup{}
     provideFormatter = true
   }
   ```
-  - `root_dir` : 
-  ```lua
-  util.find_git_ancestor
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -3356,13 +3238,9 @@ require'lspconfig'.jsonnet_ls.setup{}
   ```lua
   { "jsonnet", "libsonnet" }
   ```
-  - `on_new_config` : 
+  - `workspace_markers` : 
   ```lua
-  see source file
-  ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("jsonnetfile.json")
+  { "jsonnetfile.json", ".git" }
   ```
 
 
@@ -3405,13 +3283,13 @@ require'lspconfig'.julials.setup{}
   ```lua
   { "julia" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "Project.toml", ".git" }
   ```
 
 
@@ -3531,10 +3409,6 @@ require'lspconfig'.leanls.setup{}
   ```lua
   { "lean" }
   ```
-  - `on_new_config` : 
-  ```lua
-  see source file
-  ```
   - `options` : 
   ```lua
   {
@@ -3579,10 +3453,6 @@ require'lspconfig'.lelwel_ls.setup{}
   ```lua
   { "llw" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
 
 
 ## lemminx
@@ -3611,13 +3481,13 @@ require'lspconfig'.lemminx.setup{}
   ```lua
   { "xml", "xsd", "xsl", "xslt", "svg" }
   ```
-  - `root_dir` : 
-  ```lua
-  util.find_git_ancestor
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -3652,14 +3522,6 @@ require'lspconfig'.ltex.setup{}
   ```lua
   { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" }
   ```
-  - `get_language_id` : 
-  ```lua
-  see source file
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
@@ -3685,9 +3547,9 @@ require'lspconfig'.luau_lsp.setup{}
   ```lua
   { "luau" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern(".git")
+  { ".git" }
   ```
 
 
@@ -3726,10 +3588,6 @@ require'lspconfig'.m68k.setup{}
   ```lua
   { "asm68k" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
@@ -3763,13 +3621,13 @@ require'lspconfig'.marksman.setup{}
   ```lua
   { "markdown" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern(".git", ".marksman.toml")
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".marksman.toml", ".git" }
   ```
 
 
@@ -3826,9 +3684,9 @@ require'lspconfig'.metals.setup{}
   ```lua
   4
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml")
+  { "build.sbt", "build.sc", "build.gradle", "pom.xml" }
   ```
 
 
@@ -3856,13 +3714,13 @@ require'lspconfig'.mint.setup{}
   ```lua
   { "mint" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "mint.json", ".git" }
   ```
 
 
@@ -3890,10 +3748,6 @@ require'lspconfig'.mlir_lsp_server.setup{}
   - `filetypes` : 
   ```lua
   { "mlir" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -3926,9 +3780,9 @@ require'lspconfig'.mlir_pdll_lsp_server.setup{}
   ```lua
   { "pdll" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  see source file
+  { "pdll_compile_commands.yml", ".git" }
   ```
 
 
@@ -3957,10 +3811,6 @@ require'lspconfig'.mm0_ls.setup{}
   - `filetypes` : 
   ```lua
   { "metamath-zero" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -4081,10 +3931,6 @@ require'lspconfig'.nickel_ls.setup{}
   ```lua
   { "ncl", "nickel" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
 
 
 ## nil_ls
@@ -4113,13 +3959,13 @@ require'lspconfig'.nil_ls.setup{}
   ```lua
   { "nix" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("flake.nix", ".git")
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "flake.nix", ".git" }
   ```
 
 
@@ -4150,13 +3996,13 @@ require'lspconfig'.nimls.setup{}
   ```lua
   { "nim" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "*.nimble", ".git" }
   ```
 
 
@@ -4188,9 +4034,9 @@ require'lspconfig'.nxls.setup{}
   ```lua
   { "json", "jsonc" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  util.root_pattern
+  { "nx.json", ".git" }
   ```
 
 
@@ -4220,9 +4066,9 @@ require'lspconfig'.ocamlls.setup{}
   ```lua
   { "ocaml", "reason" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("*.opam", "esy.json", "package.json")
+  { "*.opam", "esy.json", "package.json" }
   ```
 
 
@@ -4254,13 +4100,9 @@ require'lspconfig'.ocamllsp.setup{}
   ```lua
   { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" }
   ```
-  - `get_language_id` : 
+  - `workspace_markers` : 
   ```lua
-  see source file
-  ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace")
+  { "*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace" }
   ```
 
 
@@ -4287,13 +4129,13 @@ require'lspconfig'.ols.setup{}
   ```lua
   { "odin" }
   ```
-  - `root_dir` : 
-  ```lua
-  util.root_pattern("ols.json", ".git")
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "ols.json", ".git" }
   ```
 
 
@@ -4387,10 +4229,6 @@ require'lspconfig'.omnisharp.setup{}
   ```lua
   {}
   ```
-  - `on_new_config` : 
-  ```lua
-  see source file
-  ```
   - `organize_imports_on_format` : 
   ```lua
   false
@@ -4430,9 +4268,9 @@ require'lspconfig'.opencl_ls.setup{}
   ```lua
   { "opencl" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  util.root_pattern(".git")
+  { ".git" }
   ```
 
 
@@ -4474,10 +4312,6 @@ require'lspconfig'.openscad_ls.setup{}
   ```lua
   { "openscad" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
@@ -4517,10 +4351,6 @@ require'lspconfig'.pasls.setup{}
   - `filetypes` : 
   ```lua
   { "pascal" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -4619,10 +4449,6 @@ require'lspconfig'.perlnavigator.setup{}
   ```lua
   { "perl" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
@@ -4655,10 +4481,6 @@ require'lspconfig'.perlpls.setup{}
   ```lua
   { "perl" }
   ```
-  - `root_dir` : 
-  ```lua
-  util.find_git_ancestor
-  ```
   - `settings` : 
   ```lua
   {
@@ -4675,6 +4497,10 @@ require'lspconfig'.perlpls.setup{}
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -4765,10 +4591,6 @@ require'lspconfig'.please.setup{}
   ```lua
   { "bzl" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
@@ -4828,10 +4650,6 @@ require'lspconfig'.powershell_es.setup{}
   ```lua
   { "ps1" }
   ```
-  - `on_new_config` : 
-  ```lua
-  see source file
-  ```
   - `root_dir` : 
   ```lua
   git root or current directory
@@ -4872,10 +4690,6 @@ require'lspconfig'.prismals.setup{}
   ```lua
   { "prisma" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern(".git", "package.json")
-  ```
   - `settings` : 
   ```lua
   {
@@ -4883,6 +4697,10 @@ require'lspconfig'.prismals.setup{}
       prismaFmtBinPath = ""
     }
   }
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git", "package.json" }
   ```
 
 
@@ -4947,9 +4765,9 @@ require'lspconfig'.psalm.setup{}
   ```lua
   { "php" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("psalm.xml", "psalm.xml.dist")
+  { "psalm.xml", "psalm.xml.dist" }
   ```
 
 
@@ -5023,9 +4841,9 @@ require'lspconfig'.purescriptls.setup{}
   ```lua
   { "purescript" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern('spago.dhall', 'psc-package.json', 'bower.json', 'flake.nix', 'shell.nix'),
+  { "bower.json", "psc-package.json", "spago.dhall", "flake.nix", "shell.nix" }
   ```
 
 
@@ -5074,13 +4892,13 @@ require'lspconfig'.pylsp.setup{}
   ```lua
   { "python" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
   ```
 
 
@@ -5113,10 +4931,6 @@ require'lspconfig'.pyre.setup{}
   ```lua
   { "python" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
 
 
 ## pyright
@@ -5142,10 +4956,6 @@ require'lspconfig'.pyright.setup{}
   - `filetypes` : 
   ```lua
   { "python" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `settings` : 
   ```lua
@@ -5188,10 +4998,6 @@ require'lspconfig'.qml_lsp.setup{}
   ```lua
   { "qmljs" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
 
 
 ## qmlls
@@ -5216,10 +5022,6 @@ require'lspconfig'.qmlls.setup{}
   - `filetypes` : 
   ```lua
   { "qmljs" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -5251,10 +5053,6 @@ require'lspconfig'.quick_lint_js.setup{}
   - `filetypes` : 
   ```lua
   { "javascript" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -5328,10 +5126,6 @@ require'lspconfig'.racket_langserver.setup{}
   ```lua
   { "racket", "scheme" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
@@ -5360,10 +5154,6 @@ require'lspconfig'.reason_ls.setup{}
   - `filetypes` : 
   ```lua
   { "reason" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
 
 
@@ -5416,21 +5206,15 @@ require'lspconfig'.relay_lsp.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx",
+    workspace_markers = { "relay.config.*", "package.json" }
+  }
   ```
   - `handlers` : 
   ```lua
   {
     ["window/showStatus"] = <function 1>
   }
-  ```
-  - `on_new_config` : 
-  ```lua
-  see source file
-  ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("relay.config.*", "package.json")
   ```
 
 
@@ -5482,10 +5266,6 @@ require'lspconfig'.remark_ls.setup{}
   - `filetypes` : 
   ```lua
   { "markdown" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `single_file_support` : 
   ```lua
@@ -5541,10 +5321,6 @@ require'lspconfig'.rescriptls.setup{}
   ```lua
   { "rescript" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `settings` : 
   ```lua
   {}
@@ -5597,9 +5373,9 @@ require'lspconfig'.rls.setup{}
   ```lua
   { "rust" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("Cargo.toml")
+  { "Cargo.toml" }
   ```
 
 
@@ -5668,9 +5444,9 @@ require'lspconfig'.robotframework_ls.setup{}
   ```lua
   { "robot" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  util.root_pattern('robotidy.toml', 'pyproject.toml')(fname) or util.find_git_ancestor(fname)
+  { "robotidy.toml", "pyproject.toml", ".git" }
   ```
 
 
@@ -5750,9 +5526,9 @@ require'lspconfig'.ruby_ls.setup{}
     enabledFeatures = { "codeActions", "diagnostics", "documentHighlights", "documentSymbols", "formatting", "inlayHint" }
   }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("Gemfile", ".git")
+  { "Gemfile", ".git" }
   ```
 
 
@@ -5821,13 +5597,13 @@ require'lspconfig'.salt_ls.setup{}
   ```lua
   { "sls" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern('.git')
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -5854,13 +5630,13 @@ require'lspconfig'.scry.setup{}
   ```lua
   { "crystal" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern('shard.yml', '.git')
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "shard.yml", ".git" }
   ```
 
 
@@ -5888,9 +5664,9 @@ require'lspconfig'.serve_d.setup{}
   ```lua
   { "d" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  util.root_pattern("dub.json", "dub.sdl", ".git")
+  { "dub.json", "dub.sdl", ".git" }
   ```
 
 
@@ -6009,9 +5785,9 @@ require'lspconfig'.solang.setup{}
   ```lua
   { "solidity" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  util.find_git_ancestor
+  { ".git" }
   ```
 
 
@@ -6050,10 +5826,6 @@ require'lspconfig'.solargraph.setup{}
     formatting = true
   }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("Gemfile", ".git")
-  ```
   - `settings` : 
   ```lua
   {
@@ -6061,6 +5833,10 @@ require'lspconfig'.solargraph.setup{}
       diagnostics = true
     }
   }
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "Gemfile", ".git" }
   ```
 
 
@@ -6087,9 +5863,9 @@ require'lspconfig'.solc.setup{}
   ```lua
   { "solidity" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern('hardhat.config.*', '.git')
+  { "hardhat.config.*", ".git" }
   ```
 
 
@@ -6145,10 +5921,6 @@ require'lspconfig'.solidity.setup{}
   ```lua
   { "solidity" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("package.json", ".git")
-  ```
   - `settings` : 
   ```lua
   {
@@ -6157,6 +5929,10 @@ require'lspconfig'.solidity.setup{}
       remapping = {}
     }
   }
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git", "package.json" }
   ```
 
 
@@ -6183,9 +5959,9 @@ require'lspconfig'.solidity_ls.setup{}
   ```lua
   { "solidity" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern(".git", "package.json")
+  { ".git", "package.json" }
   ```
 
 
@@ -6219,9 +5995,9 @@ require'lspconfig'.sorbet.setup{}
   ```lua
   { "ruby" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("Gemfile", ".git")
+  { "Gemfile", ".git" }
   ```
 
 
@@ -6248,9 +6024,9 @@ require'lspconfig'.sourcekit.setup{}
   ```lua
   { "swift", "c", "cpp", "objective-c", "objective-cpp" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("Package.swift", ".git")
+  { "Package.swift", ".git" }
   ```
 
 
@@ -6300,13 +6076,13 @@ require'lspconfig'.sourcery.setup{}
     extension_version = "vim.lsp"
   }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
   ```
 
 
@@ -6337,10 +6113,6 @@ require'lspconfig'.spectral.setup{}
   - `filetypes` : 
   ```lua
   { "yaml", "json", "yml" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `settings` : 
   ```lua
@@ -6380,10 +6152,6 @@ require'lspconfig'.sqlls.setup{}
   ```lua
   { "sql", "mysql" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `settings` : 
   ```lua
   {}
@@ -6420,10 +6188,6 @@ require'lspconfig'.sqls.setup{}
   ```lua
   { "sql", "mysql" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `settings` : 
   ```lua
   {}
@@ -6459,9 +6223,9 @@ require'lspconfig'.steep.setup{}
   ```lua
   { "ruby", "eruby" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("Steepfile", ".git")
+  { "Steepfile", ".git" }
   ```
 
 
@@ -6502,11 +6266,9 @@ require'lspconfig'.stylelint_lsp.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "css", "less", "scss", "sugarss", "vue", "wxss", "javascript", "javascriptreact", "typescript", "typescriptreact" }
-  ```
-  - `root_dir` : 
-  ```lua
-   root_pattern('.stylelintrc', 'package.json') 
+  { "css", "less", "scss", "sugarss", "vue", "wxss", "javascript", "javascriptreact", "typescript", "typescriptreact",
+    workspace_markers = { ".stylelintrc", "package.json" }
+  }
   ```
   - `settings` : 
   ```lua
@@ -6583,10 +6345,6 @@ require'lspconfig'.sumneko_lua.setup{}
   ```lua
   2
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern(".luarc.json", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", ".git")
-  ```
   - `settings` : 
   ```lua
   {
@@ -6600,6 +6358,10 @@ require'lspconfig'.sumneko_lua.setup{}
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".luarc.json", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "lua/", ".git" }
   ```
 
 
@@ -6631,9 +6393,9 @@ require'lspconfig'.svelte.setup{}
   ```lua
   { "svelte" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("package.json", ".git")
+  { "package.json", ".git" }
   ```
 
 
@@ -6668,10 +6430,6 @@ require'lspconfig'.svlangserver.setup{}
   ```lua
   { "verilog", "systemverilog" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern(".svlangserver", ".git")
-  ```
   - `settings` : 
   ```lua
   {
@@ -6683,6 +6441,10 @@ require'lspconfig'.svlangserver.setup{}
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".svlangserver", ".git" }
   ```
 
 
@@ -6714,9 +6476,9 @@ require'lspconfig'.svls.setup{}
   ```lua
   { "verilog", "systemverilog" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  util.find_git_ancestor
+  { ".git" }
   ```
 
 
@@ -6793,10 +6555,6 @@ require'lspconfig'.tailwindcss.setup{}
     }
   }
   ```
-  - `on_new_config` : 
-  ```lua
-  see source file
-  ```
   - `root_dir` : 
   ```lua
   root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', 'node_modules', '.git')
@@ -6849,13 +6607,13 @@ require'lspconfig'.taplo.setup{}
   ```lua
   { "toml" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("*.toml", ".git")
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "*.toml", ".git" }
   ```
 
 
@@ -6884,9 +6642,9 @@ require'lspconfig'.tblgen_lsp_server.setup{}
   ```lua
   { "tablegen" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  see source file
+  { "tablegen_compile_commands.yml", ".git" }
   ```
 
 
@@ -6914,11 +6672,9 @@ require'lspconfig'.teal_ls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "teal" }
-  ```
-  - `root_dir` : 
-  ```lua
-  root_pattern("tlconfig.lua", ".git")
+  { "teal",
+    workspace_markers = { "tlconfig.lua", ".git" }
+  }
   ```
 
 
@@ -6969,9 +6725,9 @@ require'lspconfig'.terraform_lsp.setup{}
   ```lua
   { "terraform", "hcl" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern(".terraform", ".git")
+  { ".terraform", ".git" }
   ```
 
 
@@ -7021,9 +6777,9 @@ require'lspconfig'.terraformls.setup{}
   ```lua
   { "terraform" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern(".terraform", ".git")
+  { ".terraform", ".git" }
   ```
 
 
@@ -7053,10 +6809,6 @@ require'lspconfig'.texlab.setup{}
   - `filetypes` : 
   ```lua
   { "tex", "plaintex", "bib" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
   - `settings` : 
   ```lua
@@ -7090,6 +6842,10 @@ require'lspconfig'.texlab.setup{}
   ```lua
   true
   ```
+  - `workspace_markers` : 
+  ```lua
+  { ".latexmkrc", ".git" }
+  ```
 
 
 ## tflint
@@ -7116,9 +6872,9 @@ require'lspconfig'.tflint.setup{}
   ```lua
   { "terraform" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern(".terraform", ".git", ".tflint.hcl")
+  { ".terraform", ".git", ".tflint.hcl" }
   ```
 
 
@@ -7157,10 +6913,6 @@ require'lspconfig'.theme_check.setup{}
   ```lua
   { "liquid" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `settings` : 
   ```lua
   {}
@@ -7196,13 +6948,13 @@ require'lspconfig'.tilt_ls.setup{}
   ```lua
   { "tiltfile" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern(".git")
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -7258,9 +7010,9 @@ require'lspconfig'.tsserver.setup{}
     hostInfo = "neovim"
   }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+  { "tsconfig.json", "package.json", "jsconfig.json", ".git" }
   ```
 
 
@@ -7287,9 +7039,9 @@ require'lspconfig'.typeprof.setup{}
   ```lua
   { "ruby", "eruby" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("Gemfile", ".git")
+  { "Gemfile", ".git" }
   ```
 
 
@@ -7409,10 +7161,6 @@ require'lspconfig'.verible.setup{}
   ```lua
   { "systemverilog", "verilog" }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
 
 
 ## veridian
@@ -7444,10 +7192,6 @@ require'lspconfig'.veridian.setup{}
   - `filetypes` : 
   ```lua
   { "systemverilog", "verilog" }
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
   ```
 
 
@@ -7499,10 +7243,6 @@ require'lspconfig'.vimls.setup{}
     vimruntime = ""
   }
   ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
   - `single_file_support` : 
   ```lua
   true
@@ -7551,9 +7291,9 @@ require'lspconfig'.visualforce_ls.setup{}
     }
   }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern('sfdx-project.json')
+  { "sfdx-project.json" }
   ```
 
 
@@ -7583,9 +7323,9 @@ require'lspconfig'.vls.setup{}
   ```lua
   { "vlang" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("v.mod", ".git")
+  { "v.mod", ".git" }
   ```
 
 
@@ -7722,14 +7462,6 @@ require'lspconfig'.volar.setup{}
     }
   }
   ```
-  - `on_new_config` : 
-  ```lua
-  see source file
-  ```
-  - `root_dir` : 
-  ```lua
-  see source file
-  ```
 
 
 ## vuels
@@ -7800,9 +7532,9 @@ require'lspconfig'.vuels.setup{}
     }
   }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern("package.json", "vue.config.js")
+  { "package.json", "vue.config.js" }
   ```
 
 
@@ -7832,13 +7564,13 @@ require'lspconfig'.wgsl_analyzer.setup{}
   ```lua
   { "wgsl" }
   ```
-  - `root_dir` : 
-  ```lua
-  root_pattern(".git"
-  ```
   - `settings` : 
   ```lua
   {}
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -7921,10 +7653,6 @@ require'lspconfig'.yamlls.setup{}
   ```lua
   { "yaml", "yaml.docker-compose" }
   ```
-  - `root_dir` : 
-  ```lua
-  util.find_git_ancestor
-  ```
   - `settings` : 
   ```lua
   {
@@ -7938,6 +7666,10 @@ require'lspconfig'.yamlls.setup{}
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { ".git" }
   ```
 
 
@@ -7966,9 +7698,9 @@ require'lspconfig'.zk.setup{}
   ```lua
   { "markdown" }
   ```
-  - `root_dir` : 
+  - `workspace_markers` : 
   ```lua
-  root_pattern(".zk")
+  { ".zk" }
   ```
 
 
@@ -7995,13 +7727,13 @@ require'lspconfig'.zls.setup{}
   ```lua
   { "zig", "zir" }
   ```
-  - `root_dir` : 
-  ```lua
-  util.root_pattern("zls.json", ".git")
-  ```
   - `single_file_support` : 
   ```lua
   true
+  ```
+  - `workspace_markers` : 
+  ```lua
+  { "zls.json", ".git" }
   ```
 
 
