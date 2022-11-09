@@ -7,6 +7,8 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
+local workspace_markers = { 'ansible.cfg', '.ansible-lint' }
+
 return {
   default_config = {
     cmd = cmd,
@@ -28,7 +30,7 @@ return {
       },
     },
     filetypes = { 'yaml.ansible' },
-    root_dir = util.root_pattern('ansible.cfg', '.ansible-lint'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {

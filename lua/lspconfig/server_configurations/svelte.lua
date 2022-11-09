@@ -7,11 +7,14 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
+local workspace_markers = { 'package.json', '.git' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'svelte' },
-    root_dir = util.root_pattern('package.json', '.git'),
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -25,7 +28,7 @@ npm install -g svelte-language-server
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern("package.json", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

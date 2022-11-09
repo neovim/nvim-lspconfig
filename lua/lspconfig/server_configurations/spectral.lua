@@ -2,11 +2,13 @@ local util = require 'lspconfig.util'
 
 local bin_name = 'spectral-language-server'
 
+local workspace_markers = { '.spectral.yaml', '.spectral.yml', '.spectral.json', '.spectral.js' }
+
 return {
   default_config = {
     cmd = { bin_name, '--stdio' },
     filetypes = { 'yaml', 'json', 'yml' },
-    root_dir = util.root_pattern('.spectral.yaml', '.spectral.yml', '.spectral.json', '.spectral.js'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
     settings = {
       enable = true,

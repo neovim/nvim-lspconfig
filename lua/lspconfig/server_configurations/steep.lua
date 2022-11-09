@@ -1,10 +1,13 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'Steepfile', '.git' }
+
 return {
   default_config = {
     cmd = { 'steep', 'langserver' },
     filetypes = { 'ruby', 'eruby' },
-    root_dir = util.root_pattern('Steepfile', '.git'),
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -15,7 +18,7 @@ https://github.com/soutaro/steep
 You need `Steepfile` to make it work. Generate it with `steep init`.
 ]],
     default_config = {
-      root_dir = [[root_pattern("Steepfile", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

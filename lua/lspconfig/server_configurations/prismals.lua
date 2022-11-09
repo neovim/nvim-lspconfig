@@ -7,16 +7,19 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
+local workspace_markers = { '.git', 'package.json' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'prisma' },
+    workspace_markers = workspace_markers,
     settings = {
       prisma = {
         prismaFmtBinPath = '',
       },
     },
-    root_dir = util.root_pattern('.git', 'package.json'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -28,7 +31,7 @@ npm install -g @prisma/language-server
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern(".git", "package.json")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

@@ -1,10 +1,13 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git', 'package.json' }
+
 return {
   default_config = {
     cmd = { 'solidity-ls', '--stdio' },
     filetypes = { 'solidity' },
-    root_dir = util.root_pattern('.git', 'package.json'),
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     settings = { solidity = { includePath = '', remapping = {} } },
   },
   docs = {
@@ -43,7 +46,7 @@ After installing with package.json, just create a `remappings.txt` with:
 You can omit the node_modules as well.
 ]],
     default_config = {
-      root_dir = [[root_pattern("package.json", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

@@ -7,11 +7,14 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
+local workspace_markers = { 'ember-cli-build.js', '.git' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'handlebars', 'typescript', 'javascript' },
-    root_dir = util.root_pattern('ember-cli-build.js', '.git'),
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -24,7 +27,7 @@ npm install -g @lifeart/ember-language-server
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern("ember-cli-build.js", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

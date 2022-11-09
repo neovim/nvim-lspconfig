@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '*.lpi', '*.lpk', '.git' }
+
 return {
   default_config = {
     cmd = { 'pasls' },
     filetypes = { 'pascal' },
-    root_dir = util.root_pattern('*.lpi', '*.lpk', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {

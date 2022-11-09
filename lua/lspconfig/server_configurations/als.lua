@@ -5,11 +5,14 @@ if vim.fn.has 'win32' == 1 then
   bin_name = 'ada_language_server.exe'
 end
 
+local workspace_markers = { 'Makefile', '.git', '*.gpr', '*.adc' }
+
 return {
   default_config = {
     cmd = { bin_name },
     filetypes = { 'ada' },
-    root_dir = util.root_pattern('Makefile', '.git', '*.gpr', '*.adc'),
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -31,7 +34,7 @@ require('lspconfig').als.setup{
 ```
 ]],
     default_config = {
-      root_dir = [[util.root_pattern("Makefile", ".git", "*.gpr", "*.adc")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

@@ -1,9 +1,11 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '*.sln', '*.fsproj', '.git' }
+
 return {
   default_config = {
     cmd = { 'dotnet', 'FSharpLanguageServer.dll' },
-    root_dir = util.root_pattern('*.sln', '*.fsproj', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     filetypes = { 'fsharp' },
     init_options = {
       AutomaticWorkspaceInit = true,
