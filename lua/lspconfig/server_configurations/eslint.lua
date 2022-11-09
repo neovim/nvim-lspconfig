@@ -48,24 +48,18 @@ local root_file = {
   '.eslintrc.yml',
   '.eslintrc.json',
   'eslint.config.js',
-  'package.json',
 }
 
 local root_with_package = util.find_package_json_ancestor(vim.fn.expand '%:p:h')
 
 if root_with_package then
-  local must_remove = false
+  -- only add package.json if it contains eslintConfig field
   local path_sep = is_windows and '\\' or '/'
   for line in io.lines(root_with_package .. path_sep .. 'package.json') do
     if line:find 'eslintConfig' then
-      must_remove = false
-    else
-      must_remove = true
+      table.insert(root_file, 'package.json')
+      break
     end
-  end
-
-  if must_remove then
-    table.remove(root_file, #root_file)
   end
 end
 
