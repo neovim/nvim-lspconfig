@@ -1,15 +1,16 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'mint.json', '.git' }
+
 return {
   default_config = {
     cmd = { 'mint', 'ls' },
     filetypes = { 'mint' },
-    root_dir = function(fname)
-      return util.root_pattern 'mint.json'(fname) or util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
+    workspace_markers = workspace_markers,
     description = [[
 https://www.mint-lang.com
 

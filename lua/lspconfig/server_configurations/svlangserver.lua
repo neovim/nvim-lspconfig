@@ -22,13 +22,13 @@ local function report_hierarchy()
   vim.lsp.buf.execute_command(params)
 end
 
+local workspace_markers = { '.svlangserver', '.git' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'verilog', 'systemverilog' },
-    root_dir = function(fname)
-      return util.root_pattern '.svlangserver'(fname) or util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
     settings = {
       systemverilog = {
@@ -59,7 +59,7 @@ $ npm install -g @imc-trading/svlangserver
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern(".svlangserver", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

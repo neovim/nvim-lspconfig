@@ -1,5 +1,7 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'Jenkinsfile', '.git' }
+
 return {
   default_config = {
     cmd = {
@@ -8,9 +10,7 @@ return {
       'groovy-language-server-all.jar',
     },
     filetypes = { 'groovy' },
-    root_dir = function(fname)
-      return util.root_pattern 'Jenkinsfile'(fname) or util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -32,5 +32,6 @@ require'lspconfig'.groovyls.setup{
 }
 ```
 ]],
+    workspace_markers = workspace_markers,
   },
 }

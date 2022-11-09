@@ -1,12 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '*.toml', '.git' }
+
 return {
   default_config = {
     cmd = { 'taplo', 'lsp', 'stdio' },
     filetypes = { 'toml' },
-    root_dir = function(fname)
-      return util.root_pattern '*.toml'(fname) or util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -21,7 +21,7 @@ cargo install --features lsp --locked taplo-cli
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern("*.toml", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }
