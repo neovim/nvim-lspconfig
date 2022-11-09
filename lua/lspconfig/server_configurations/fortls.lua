@@ -1,5 +1,7 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.fortls', '.git' }
+
 return {
   default_config = {
     cmd = {
@@ -10,9 +12,7 @@ return {
       '--use_signature_help',
     },
     filetypes = { 'fortran' },
-    root_dir = function(fname)
-      return util.root_pattern '.fortls'(fname) or util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     settings = {},
   },
   docs = {
@@ -30,7 +30,7 @@ a local configuration file e.g. `.fortls`. For more information
 see the `fortls` [documentation](https://gnikit.github.io/fortls/options.html).
     ]],
     default_config = {
-      root_dir = [[root_pattern(".fortls")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

@@ -9,13 +9,14 @@ local function jsonnet_path(root_dir)
   return table.concat(paths, ':')
 end
 
+local workspace_markers = { 'jsonnetfile.json', '.git' }
+
 return {
   default_config = {
     cmd = { 'jsonnet-language-server' },
     filetypes = { 'jsonnet', 'libsonnet' },
-    root_dir = function(fname)
-      return util.root_pattern 'jsonnetfile.json'(fname) or util.find_git_ancestor(fname)
-    end,
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     on_new_config = function(new_config, root_dir)
       if not new_config.cmd_env then
         new_config.cmd_env = {}
@@ -37,7 +38,7 @@ go install github.com/grafana/jsonnet-language-server@latest
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern("jsonnetfile.json")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

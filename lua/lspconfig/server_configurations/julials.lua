@@ -40,13 +40,14 @@ local cmd = {
   ]],
 }
 
+local workspace_markers = { 'Project.toml', '.git' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'julia' },
-    root_dir = function(fname)
-      return util.root_pattern 'Project.toml'(fname) or util.find_git_ancestor(fname)
-    end,
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -71,5 +72,6 @@ Julia project, you must make sure that the project is instantiated:
 julia --project=/path/to/my/project -e 'using Pkg; Pkg.instantiate()'
 ```
     ]],
+    workspace_markers = workspace_markers,
   },
 }

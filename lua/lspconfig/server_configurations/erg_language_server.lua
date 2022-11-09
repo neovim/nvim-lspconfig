@@ -1,12 +1,13 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'package.er', '.git' }
+
 return {
   default_config = {
     cmd = { 'els' },
     filetypes = { 'erg' },
-    root_dir = function(fname)
-      return util.root_pattern 'package.er'(fname) or util.find_git_ancestor(fname)
-    end,
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -20,7 +21,7 @@ ELS (erg-language-server) is a language server for the Erg programming language.
  ```
     ]],
     default_config = {
-      root_dir = [[root_pattern("package.er") or find_git_ancestor]],
+      workspace_markers = workspace_markers,
     },
   },
 }

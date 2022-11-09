@@ -1,26 +1,26 @@
 local util = require 'lspconfig.util'
 
-local root_files = {
+local workspace_markers = {
   'pyproject.toml',
   'setup.py',
   'setup.cfg',
   'requirements.txt',
   'Pipfile',
   'pyrightconfig.json',
+  '.git',
 }
 
 return {
   default_config = {
     cmd = { 'sourcery', 'lsp' },
     filetypes = { 'python' },
+    workspace_markers = workspace_markers,
     init_options = {
       editor_version = 'vim',
       extension_version = 'vim.lsp',
       token = nil,
     },
-    root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   on_new_config = function(new_config, _)
@@ -51,5 +51,6 @@ init_options = {
     editor_version = 'vim'
 }
 ]],
+    workspace_markers = workspace_markers,
   },
 }

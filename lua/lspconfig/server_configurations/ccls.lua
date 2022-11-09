@@ -1,17 +1,17 @@
 local util = require 'lspconfig.util'
 
-local root_files = {
+local workspace_markers = {
   'compile_commands.json',
   '.ccls',
+  '.git',
 }
 
 return {
   default_config = {
     cmd = { 'ccls' },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
-    root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-    end,
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     offset_encoding = 'utf-32',
     -- ccls does not support sending a null root directory
     single_file_support = false,
@@ -44,7 +44,7 @@ lspconfig.ccls.setup {
 
 ]],
     default_config = {
-      root_dir = [[root_pattern('compile_commands.json', '.ccls', '.git')]],
+      workspace_markers = workspace_markers,
     },
   },
 }
