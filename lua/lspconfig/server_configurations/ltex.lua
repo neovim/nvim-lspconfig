@@ -14,11 +14,13 @@ if vim.fn.has 'win32' == 1 then
   bin_name = bin_name .. '.bat'
 end
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = { bin_name },
     filetypes = { 'bib', 'gitcommit', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex' },
-    root_dir = util.find_git_ancestor,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
     get_language_id = function(_, filetype)
       local language_id = language_id_mapping[filetype]

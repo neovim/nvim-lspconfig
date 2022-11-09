@@ -1,9 +1,11 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = { 'efm-langserver' },
-    root_dir = util.find_git_ancestor,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
 
@@ -20,6 +22,7 @@ launching the language server on single files. If on an older version of EFM, di
 require('lspconfig')['efm'].setup{
   settings = ..., -- You must populate this according to the EFM readme
   filetypes = ..., -- Populate this according to the note below
+  workspace_markers = workspace_markers,
   single_file_support = false, -- This is the important line for supporting older version of EFM
 }
 ```
@@ -37,7 +40,7 @@ require('lspconfig')['efm'].setup{
 
 ]],
     default_config = {
-      root_dir = [[util.root_pattern(".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }
