@@ -1,10 +1,10 @@
 local util = require 'lspconfig.util'
 
 local bin_name = 'rome'
-local cmd = { bin_name, 'lsp' }
+local cmd = { bin_name, 'lsp-proxy' }
 
 if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, 'lsp' }
+  cmd = { 'cmd.exe', '/C', bin_name, 'lsp-proxy' }
 end
 
 return {
