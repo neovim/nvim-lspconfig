@@ -7,6 +7,8 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, 'start' }
 end
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = cmd,
@@ -18,7 +20,8 @@ return {
       GLOB_PATTERN = vim.env.GLOB_PATTERN or '*@(.sh|.inc|.bash|.command)',
     },
     filetypes = { 'sh' },
-    root_dir = util.find_git_ancestor,
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -33,7 +36,7 @@ npm i -g bash-language-server
 Language server for bash, written using tree sitter in typescript.
 ]],
     default_config = {
-      root_dir = [[util.find_git_ancestor]],
+      workspace_markers = workspace_markers,
     },
   },
 }

@@ -1,9 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     filetypes = { 'bicep' },
-    root_dir = util.find_git_ancestor,
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     init_options = {},
   },
   docs = {
@@ -41,7 +44,7 @@ To download the latest release and place in /usr/local/bin/bicep-langserver:
 ```
 ]=],
     default_config = {
-      root_dir = [[util.find_git_ancestor]],
+      workspace_markers = workspace_markers,
     },
   },
 }

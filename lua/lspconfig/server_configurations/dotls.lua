@@ -7,11 +7,13 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'dot' },
-    root_dir = util.find_git_ancestor,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {

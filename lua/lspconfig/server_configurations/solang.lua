@@ -1,10 +1,13 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = { 'solang', '--language-server', '--target', 'ewasm' },
     filetypes = { 'solidity' },
-    root_dir = util.find_git_ancestor,
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -21,7 +24,7 @@ There is currently no support for completion, goto definition, references, or ot
 
 ]],
     default_config = {
-      root_dir = [[util.find_git_ancestor]],
+      workspace_markers = workspace_markers,
     },
   },
 }

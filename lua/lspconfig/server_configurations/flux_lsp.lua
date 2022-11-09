@@ -1,10 +1,13 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = { 'flux-lsp' },
     filetypes = { 'flux' },
-    root_dir = util.find_git_ancestor,
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -16,7 +19,7 @@ cargo install --git https://github.com/influxdata/flux-lsp
 ```
 ]],
     default_config = {
-      root_dir = [[util.find_git_ancestor]],
+      workspace_markers = workspace_markers,
     },
   },
 }

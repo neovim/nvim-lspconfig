@@ -1,10 +1,13 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = { 'lemminx' },
     filetypes = { 'xml', 'xsd', 'xsl', 'xslt', 'svg' },
-    root_dir = util.find_git_ancestor,
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -17,7 +20,7 @@ NOTE to macOS users: Binaries from unidentified developers are blocked by defaul
 
 ]],
     default_config = {
-      root_dir = [[util.find_git_ancestor]],
+      workspace_markers = workspace_markers,
     },
   },
 }

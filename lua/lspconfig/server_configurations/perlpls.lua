@@ -1,5 +1,7 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = { 'pls' },
@@ -10,7 +12,8 @@ return {
       },
     },
     filetypes = { 'perl' },
-    root_dir = util.find_git_ancestor,
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -23,7 +26,7 @@ https://metacpan.org/pod/PLS
 To use the language server, ensure that you have PLS installed and that it is in your path
 ]],
     default_config = {
-      root_dir = [[util.find_git_ancestor]],
+      workspace_markers = workspace_markers,
     },
   },
 }

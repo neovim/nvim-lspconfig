@@ -1,10 +1,13 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = { 'luau-lsp', 'lsp' },
     filetypes = { 'luau' },
-    root_dir = util.find_git_ancestor,
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     [[
@@ -21,7 +24,7 @@ autocmd BufRead,BufNewFile *.luau setf luau
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern(".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

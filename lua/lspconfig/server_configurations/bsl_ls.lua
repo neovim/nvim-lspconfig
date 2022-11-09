@@ -1,9 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     filetypes = { 'bsl', 'os' },
-    root_dir = util.find_git_ancestor,
+    workspace_markers = workspace_markers,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -13,7 +16,7 @@ return {
 
     ]],
     default_config = {
-      root_dir = [[root_pattern(".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }
