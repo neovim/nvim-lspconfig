@@ -40,7 +40,7 @@ if is_windows then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
-local root_file = {
+local workspace_markers = {
   '.eslintrc',
   '.eslintrc.js',
   '.eslintrc.cjs',
@@ -57,7 +57,7 @@ if root_with_package then
   local path_sep = is_windows and '\\' or '/'
   for line in io.lines(root_with_package .. path_sep .. 'package.json') do
     if line:find 'eslintConfig' then
-      table.insert(root_file, 'package.json')
+      table.insert(workspace_markers, 'package.json')
       break
     end
   end
@@ -78,7 +78,7 @@ return {
       'astro',
     },
     -- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
-    root_dir = util.root_pattern(unpack(root_file)),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
     settings = {
       validate = 'on',
@@ -191,5 +191,6 @@ Messages handled in lspconfig: `eslint/openDoc`, `eslint/confirmESLintExecution`
 
 Additional messages you can handle: `eslint/noConfig`
 ]],
+    workspace_markers = workspace_markers,
   },
 }

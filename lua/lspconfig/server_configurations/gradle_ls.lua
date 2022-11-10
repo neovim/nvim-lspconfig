@@ -5,20 +5,15 @@ if vim.fn.has 'win32' == 1 then
   bin_name = bin_name .. '.bat'
 end
 
-local root_files = {
+local workspace_markers = {
   'settings.gradle', -- Gradle (multi-project)
-}
-
-local fallback_root_files = {
-  'build.gradle', -- Gradle
+  'build.gradle', -- Gradle (fallback)
 }
 
 return {
   default_config = {
     filetypes = { 'groovy' },
-    root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname) or util.root_pattern(unpack(fallback_root_files))(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     cmd = { bin_name },
     -- gradle-language-server expects init_options.settings to be defined
     init_options = {
@@ -36,7 +31,7 @@ Microsoft's lsp server for gradle files
 If you're setting this up manually, build vscode-gradle using `./gradlew installDist` and point `cmd` to the `gradle-language-server` generated in the build directory
 ]],
     default_config = {
-      root_dir = [[root_pattern("settings.gradle")]],
+      workspace_markers = workspace_markers,
       cmd = { 'gradle-language-server' },
       init_options = {
         settings = {

@@ -10,24 +10,19 @@ end
 --  These are configuration files for the various build systems supported by
 --  Kotlin. I am not sure whether the language server supports Ant projects,
 --  but I'm keeping it here as well since Ant does support Kotlin.
-local root_files = {
+local workspace_markers = {
   'settings.gradle', -- Gradle (multi-project)
   'settings.gradle.kts', -- Gradle (multi-project)
   'build.xml', -- Ant
   'pom.xml', -- Maven
-}
-
-local fallback_root_files = {
-  'build.gradle', -- Gradle
-  'build.gradle.kts', -- Gradle
+  'build.gradle', -- Gradle (fallback)
+  'build.gradle.kts', -- Gradle (fallback)
 }
 
 return {
   default_config = {
     filetypes = { 'kotlin' },
-    root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname) or util.root_pattern(unpack(fallback_root_files))(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     cmd = { bin_name },
   },
   docs = {
@@ -46,7 +41,7 @@ return {
     Note that there is no LICENSE specified yet.
     ]],
     default_config = {
-      root_dir = [[root_pattern("settings.gradle")]],
+      workspace_markers = workspace_markers,
       cmd = { 'kotlin-language-server' },
       capabilities = [[
       smart code completion,

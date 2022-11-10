@@ -1,15 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'hie.yaml', 'stack.yaml', 'cabal.project', '*.cabal', 'package.yaml' }
+
 return {
   default_config = {
     cmd = { 'haskell-language-server-wrapper', '--lsp' },
     filetypes = { 'haskell', 'lhaskell' },
-    root_dir = function(filepath)
-      return (
-        util.root_pattern('hie.yaml', 'stack.yaml', 'cabal.project')(filepath)
-        or util.root_pattern('*.cabal', 'package.yaml')(filepath)
-      )
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
     settings = {
       haskell = {
@@ -42,14 +39,7 @@ Haskell Language Server
     ]],
 
     default_config = {
-      root_dir = [[
-function (filepath)
-  return (
-    util.root_pattern('hie.yaml', 'stack.yaml', 'cabal.project')(filepath)
-    or util.root_pattern('*.cabal', 'package.yaml')(filepath)
-  )
-end
-      ]],
+      workspace_markers = workspace_markers,
     },
   },
 }
