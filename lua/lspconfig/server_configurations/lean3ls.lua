@@ -8,10 +8,13 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, unpack(args) }
 end
 
+local workspace_markers = { 'leanpkg.toml', 'leanpkg.path' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'lean3' },
+    workspace_markers = workspace_markers,
     offset_encoding = 'utf-32',
     root_dir = function(fname)
       fname = util.path.sanitize(fname)
@@ -24,10 +27,7 @@ return {
         end
       end
 
-      return util.root_pattern 'leanpkg.toml'(fname)
-        or util.root_pattern 'leanpkg.path'(fname)
-        or stdlib_dir
-        or util.find_git_ancestor(fname)
+      return util.root_pattern(unpack(workspace_markers))(fname) or stdlib_dir or util.find_git_ancestor(fname)
     end,
     single_file_support = true,
   },
@@ -48,7 +48,7 @@ that plugin fully handles the setup of the Lean language server,
 and you shouldn't set up `lean3ls` both with it and `lspconfig`.
     ]],
     default_config = {
-      root_dir = [[root_pattern("leanpkg.toml") or root_pattern(".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

@@ -7,13 +7,15 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
+local workspace_markers = { 'composer.json', '.git' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'php' },
     root_dir = function(pattern)
       local cwd = vim.loop.cwd()
-      local root = util.root_pattern('composer.json', '.git')(pattern)
+      local root = util.root_pattern(unpack(workspace_markers))(pattern)
 
       -- prefer cwd if root is a descendant
       return util.path.is_descendant(cwd, root) and cwd or root
@@ -29,7 +31,7 @@ npm install -g intelephense
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern("composer.json", ".git")]],
+      workspace_markers = workspace_markers,
       init_options = [[{
         storagePath = Optional absolute path to storage dir. Defaults to os.tmpdir().
         globalStoragePath = Optional absolute path to a global storage dir. Defaults to os.homedir().

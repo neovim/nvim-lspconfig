@@ -7,13 +7,13 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, 'start' }
 end
 
+local workspace_markers = { 'buf.work.yaml', '.git' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'proto' },
-    root_dir = function(fname)
-      return util.root_pattern('buf.work.yaml', '.git')(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -27,7 +27,7 @@ go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
 bufls is a Protobuf language server compatible with Buf modules and workspaces
 ]],
     default_config = {
-      root_dir = [[root_pattern("buf.work.yaml", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

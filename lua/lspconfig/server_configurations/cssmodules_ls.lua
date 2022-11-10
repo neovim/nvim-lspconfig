@@ -7,11 +7,13 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name }
 end
 
+local workspace_markers = { 'package.json' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
-    root_dir = util.find_package_json_ancestor,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -25,7 +27,7 @@ npm install -g cssmodules-language-server
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern("package.json")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

@@ -1,5 +1,7 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.sln', '.csproj' }
+
 return {
   default_config = {
     -- Enables support for reading code style, naming convention and analyzer
@@ -38,9 +40,7 @@ return {
     analyze_open_documents_only = false,
 
     filetypes = { 'cs', 'vb' },
-    root_dir = function(fname)
-      return util.root_pattern '*.sln'(fname) or util.root_pattern '*.csproj'(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     on_new_config = function(new_config, new_root_dir)
       table.insert(new_config.cmd, '-z') -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
       vim.list_extend(new_config.cmd, { '-s', new_root_dir })
@@ -133,7 +133,7 @@ require'lspconfig'.omnisharp.setup {
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern(".sln") or root_pattern(".csproj")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

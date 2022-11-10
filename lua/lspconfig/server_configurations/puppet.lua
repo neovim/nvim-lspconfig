@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 
-local root_files = {
+local workspace_markers = {
   'manifests',
   '.puppet-lint.rc',
   'hiera.yaml',
@@ -11,7 +11,7 @@ return {
   default_config = {
     cmd = { 'puppet-languageserver', '--stdio' },
     filetypes = { 'puppet' },
-    root_dir = util.root_pattern(unpack(root_files)),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -32,7 +32,7 @@ Installation:
 - Ensure you can run `puppet-languageserver` from outside the editor-services directory.
 ]],
     default_config = {
-      root_dir = [[root_pattern("manifests", ".puppet-lint.rc", "hiera.yaml", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

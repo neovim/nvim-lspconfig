@@ -7,13 +7,13 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, 'lsp' }
 end
 
+local workspace_markers = { '.streerc', 'Gemfile', '.git' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'ruby' },
-    root_dir = function(fname)
-      return util.root_pattern '.streerc'(fname) or util.root_pattern('Gemfile', '.git')(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -31,7 +31,7 @@ gem install syntax_tree
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern(".streerc", "Gemfile", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

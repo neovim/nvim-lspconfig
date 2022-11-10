@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 
-local root_files = {
+local workspace_markers = {
   'pyproject.toml',
   'setup.py',
   'setup.cfg',
@@ -12,7 +12,7 @@ return {
   default_config = {
     cmd = { 'jedi-language-server' },
     filetypes = { 'python' },
-    root_dir = util.root_pattern(unpack(root_files)),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -22,7 +22,7 @@ https://github.com/pappasam/jedi-language-server
 `jedi-language-server`, a language server for Python, built on top of jedi
     ]],
     default_config = {
-      root_dir = "vim's starting directory",
+      workspace_markers = workspace_markers,
     },
   },
 }
