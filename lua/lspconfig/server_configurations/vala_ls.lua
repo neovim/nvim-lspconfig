@@ -27,7 +27,11 @@ return {
   default_config = {
     cmd = { 'vala-language-server' },
     filetypes = { 'vala', 'genie' },
-    root_dir = util.root_pattern(unpack(workspace_markers)),
+    root_dir = function(fname)
+      -- TODO(kylo252): can't we just use 'meson_options.txt' instead?
+      local root = util.search_ancestors(fname, meson_matcher)
+      return root or util.find_git_ancestor(fname)
+    end,
     single_file_support = true,
   },
   docs = {
