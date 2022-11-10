@@ -1,11 +1,13 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
 return {
   default_config = {
     cmd = { 'rnix-lsp' },
     filetypes = { 'nix' },
     root_dir = function(fname)
-      return util.find_git_ancestor(fname) or vim.loop.os_homedir()
+      -- FIXME(kylo252): why does this use homedir?
+      return util.root_pattern(unpack(workspace_markers))(fname) or vim.loop.os_homedir()
     end,
     settings = {},
     init_options = {},
@@ -22,7 +24,7 @@ This server accepts configuration via the `settings` key.
 
     ]],
     default_config = {
-      root_dir = "vim's starting directory",
+      workspace_markers = workspace_markers,
     },
   },
 }

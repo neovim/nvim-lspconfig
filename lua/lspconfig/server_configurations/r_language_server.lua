@@ -1,11 +1,14 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = { 'R', '--slave', '-e', 'languageserver::run()' },
     filetypes = { 'r', 'rmd' },
     root_dir = function(fname)
-      return util.find_git_ancestor(fname) or vim.loop.os_homedir()
+      -- FIXME(kylo252): why does this use homedir?
+      return util.root_pattern(unpack(workspace_markers))(fname) or vim.loop.os_homedir()
     end,
     log_level = vim.lsp.protocol.MessageType.Warning,
   },
@@ -22,7 +25,7 @@ install.packages("languageserver")
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern(".git") or os_homedir]],
+      workspace_markers = workspace_markers,
     },
   },
 }
