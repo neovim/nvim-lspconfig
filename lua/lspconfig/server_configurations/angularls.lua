@@ -33,7 +33,7 @@ return {
     -- Check for angular.json since that is the root of the project.
     -- Don't check for tsconfig.json or package.json since there are multiple of these
     -- in an angular monorepo setup.
-    root_dir = util.root_pattern 'angular.json',
+    root_dir = util.root_pattern 'angular.json' 'project.json',
   },
   on_new_config = function(new_config, new_root_dir)
     local new_probe_dir = get_probe_dir(new_root_dir)
