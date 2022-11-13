@@ -9,6 +9,22 @@ local root_files = {
   'pyrightconfig.json',
 }
 
+local get_token_from_auth_file = function()
+  local config_home = vim.fn.getenv 'XDG_CONFIG_HOME' or vim.fn.expand '~/.config'
+  local auth_file_path = config_home .. '/sourcery/auth.yaml'
+
+  if vim.fn.filereadable(auth_file_path) == 1 then
+    local content = vim.fn.readfile(auth_file_path)
+
+    for _, line in ipairs(content) do
+      local token = line:match 'sourcery_token: (.+)'
+      if token then
+        return token
+      end
+    end
+  end
+end
+
 return {
   default_config = {
     cmd = { 'sourcery', 'lsp' },
@@ -24,6 +40,10 @@ return {
     single_file_support = true,
   },
   on_new_config = function(new_config, _)
+    local possibly_token = get_token_from_auth_file()
+    if possibly_token then
+      new_config.init_options.token = possibly_token
+    end
     if not new_config.init_options.token then
       local notify = vim.notify_once or vim.notify
       notify('[lspconfig] The authentication token must be provided in config.init_options', vim.log.levels.ERROR)
@@ -54,6 +74,8 @@ require'lspconfig'.sourcery.setup {
     },
 }
 ```
+
+Alternatively, you can login to sourcery by running `sourcery login` with sourcery-cli and your token will be grabbed from sourcery config file.
 ]],
   },
 }
