@@ -1,15 +1,15 @@
 local util = require 'lspconfig.util'
 
 return {
-	default_config = {
-		filetypes = { 'arduino' },
-		root_dir = util.root_pattern '*.ino',
-		cmd = {
-			"arduino-language-server",
-		}
-	},
-	docs = {
-		description = [[
+  default_config = {
+    filetypes = { 'arduino' },
+    root_dir = util.root_pattern '*.ino',
+    cmd = {
+      'arduino-language-server',
+    },
+  },
+  docs = {
+    description = [[
 https://github.com/arduino/arduino-language-server
 
 Language server for Arduino
@@ -80,5 +80,5 @@ Your folder structure should look like this:
 
 For further instruction about configuration options, run `arduino-language-server --help`.
 ]],
-	},
+  },
 }
