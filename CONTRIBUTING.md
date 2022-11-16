@@ -36,7 +36,8 @@ if vim.fn.has 'win32' == 1 then
 end
 ```
 
-* `filetypes`: a list for filetypes a 
+* `filetypes`: a list for filetypes that server supports.
+* `workspace_markers`: a list for file patterns that determines the root of the workspace folder that will be passed to the language server.
 * `root_dir`: a function (or function handle) which returns the root of the project used to determine if lspconfig should launch a new language server, or attach a previously launched server when you open a new buffer matching the filetype of the server. Note, lspconfig does not offer a dedicated single file mode (this is not codified in the spec). Do not add `vim.fn.cwd` or `util.path.dirname` in `root_dir`. A future version of lspconfig will provide emulation of a single file mode until this is formally codified in the specification. A good fallback is `util.find_git_ancestor`, see other configurations for examples.
 
 Additionally, the following options are often added:
@@ -56,7 +57,7 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
-local root_files = {
+local workspace_markers = {
   'pyproject.toml',
   'setup.py',
   'setup.cfg',
@@ -77,7 +78,7 @@ return {
   default_config = {
     cmd = cmd,
     filetypes = { 'python' },
-    root_dir = util.root_pattern(unpack(root_files)),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
     settings = {
       python = {
@@ -101,6 +102,7 @@ https://github.com/microsoft/pyright
 
 `pyright`, a static type checker and language server for python
 ]],
+    workspace_markers = workspace_markers,
   },
 }
 ```
