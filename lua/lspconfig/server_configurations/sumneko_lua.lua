@@ -22,9 +22,13 @@ return {
     cmd = cmd,
     filetypes = { 'lua' },
     root_dir = function(fname)
-      local root = util.root_pattern(unpack(root_files))(fname) or util.root_pattern 'lua/'(fname)
+      local root = util.root_pattern(unpack(root_files))(fname)
       if root and root ~= vim.env.HOME then
         return root
+      end
+      root = util.root_pattern 'lua/'(fname)
+      if root then
+        return root .. '/lua/'
       end
       return util.find_git_ancestor(fname)
     end,
