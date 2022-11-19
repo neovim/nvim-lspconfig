@@ -10,9 +10,12 @@ local root_files = {
 }
 
 local get_token_from_auth_file = function()
-  local config_home = vim.fn.getenv 'XDG_CONFIG_HOME' or vim.fn.expand '~/.config'
-  local auth_file_path = config_home .. '/sourcery/auth.yaml'
+  local is_windows = vim.fn.has 'win32' == 1
+  local path_sep = is_windows and '\\' or '/'
 
+  local config_home = is_windows and vim.fn.getenv 'APPDATA'
+    or (vim.fn.getenv 'XDG_CONFIG_HOME' or vim.fn.expand '~/.config')
+  local auth_file_path = config_home .. path_sep .. 'sourcery' .. path_sep .. 'auth.yaml'
   if vim.fn.filereadable(auth_file_path) == 1 then
     local content = vim.fn.readfile(auth_file_path)
 
