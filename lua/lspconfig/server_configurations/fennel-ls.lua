@@ -5,7 +5,7 @@ return {
     cmd = { "fennel-ls" },
     filetypes = { "fennel" },
     root_dir = function(dir) return util.find_git_ancestor(dir) end,
-    settings = {}
+    settings = {},
   },
   docs = {
     description = [[
