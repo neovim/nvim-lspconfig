@@ -3358,10 +3358,11 @@ require'lspconfig'.jdtls.setup{}
   - `handlers` : 
   ```lua
   {
-    ["language/status"] = <function 1>,
-    ["textDocument/codeAction"] = <function 2>,
-    ["textDocument/rename"] = <function 3>,
-    ["workspace/applyEdit"] = <function 4>
+    ["$/progress"] = <function 1>,
+    ["language/status"] = <function 2>,
+    ["textDocument/codeAction"] = <function 3>,
+    ["textDocument/rename"] = <function 4>,
+    ["workspace/applyEdit"] = <function 5>
   }
   ```
   - `init_options` : 
