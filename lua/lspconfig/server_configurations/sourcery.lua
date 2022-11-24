@@ -16,7 +16,6 @@ return {
     init_options = {
       editor_version = 'vim',
       extension_version = 'vim.lsp',
-      token = nil,
     },
     root_dir = function(fname)
       return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
@@ -35,21 +34,25 @@ https://github.com/sourcery-ai/sourcery
 
 Refactor Python instantly using the power of AI.
 
-It requires the initializationOptions param to be populated as shown below and will respond with the list of ServerCapabilities that it supports.
+It requires the init_options param to be populated as shown below and will respond with the list of ServerCapabilities that it supports:
 
-init_options = {
-    --- The Sourcery token for authenticating the user.
-    --- This is retrieved from the Sourcery website and must be
-    --- provided by each user. The extension must provide a
-    --- configuration option for the user to provide this value.
-    token = <YOUR_TOKEN>
+```lua
+require'lspconfig'.sourcery.setup {
+    init_options = {
+        --- The Sourcery token for authenticating the user.
+        --- This is retrieved from the Sourcery website and must be
+        --- provided by each user. The extension must provide a
+        --- configuration option for the user to provide this value.
+        token = <YOUR_TOKEN>,
 
-    --- The extension's name and version as defined by the extension.
-    extension_version = 'vim.lsp'
+        --- The extension's name and version as defined by the extension.
+        extension_version = 'vim.lsp',
 
-    --- The editor's name and version as defined by the editor.
-    editor_version = 'vim'
+        --- The editor's name and version as defined by the editor.
+        editor_version = 'vim',
+    },
 }
+```
 ]],
   },
 }
