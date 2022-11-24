@@ -1,4 +1,5 @@
 std = "neovim"
+exclude = ["neovim/*"]
 
 [rules]
 global_usage = "allow"
