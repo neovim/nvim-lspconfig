@@ -84,6 +84,9 @@ return {
       validate = 'on',
       packageManager = 'npm',
       useESLintClass = false,
+      experimental = {
+        useFlatConfig = false,
+      },
       codeActionOnSave = {
         enable = false,
         mode = 'all',
@@ -93,6 +96,9 @@ return {
       onIgnoredFiles = 'off',
       rulesCustomizations = {},
       run = 'onType',
+      problems = {
+        shortenToSingleLine = false,
+      },
       -- nodePath configures the directory in which the eslint server should start its node_modules resolution.
       -- This path is relative to the workspace folder (root dir) of the server instance.
       nodePath = '',
