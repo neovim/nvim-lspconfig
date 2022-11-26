@@ -5,7 +5,7 @@ return {
     cmd = { 'fennel-ls' },
     filetypes = { 'fennel' },
     root_dir = function(dir)
-         return util.find_git_ancestor(dir)
+      return util.find_git_ancestor(dir)
     end,
     settings = {},
   },
@@ -14,6 +14,6 @@ return {
 https://sr.ht/~xerool/fennel-ls/
 
 A language server for fennel.
-]]   ,
+]],
   },
 }
