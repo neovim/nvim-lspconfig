@@ -1,4 +1,4 @@
-local api = vim.api
+local api, lsp = vim.api, vim.lsp
 
 if vim.g.lspconfig ~= nil then
   return
@@ -40,7 +40,7 @@ end
 local get_clients_from_cmd_args = function(arg)
   local result = {}
   for id in (arg or ''):gmatch '(%d+)' do
-    result[id] = vim.lsp.get_client_by_id(tonumber(id))
+    result[id] = lsp.get_client_by_id(tonumber(id))
   end
   if vim.tbl_isempty(result) then
     return require('lspconfig.util').get_managed_clients()
@@ -104,7 +104,7 @@ api.nvim_create_user_command('LspStop', function(info)
   local server_name = string.len(info.args) > 0 and info.args or nil
 
   if not server_name then
-    local servers_on_buffer = vim.lsp.get_active_clients { buffer = current_buf }
+    local servers_on_buffer = lsp.get_active_clients { buffer = current_buf }
     for _, client in ipairs(servers_on_buffer) do
       local filetypes = client.config.filetypes
       if filetypes and vim.tbl_contains(filetypes, vim.bo[current_buf].filetype) then
@@ -123,7 +123,7 @@ end, {
 })
 
 api.nvim_create_user_command('LspLog', function()
-  vim.cmd(string.format('tabnew %s', vim.lsp.get_log_path()))
+  vim.cmd(string.format('tabnew %s', lsp.get_log_path()))
 end, {
   desc = 'Opens the Nvim LSP client log.',
 })
