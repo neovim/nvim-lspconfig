@@ -9,23 +9,23 @@ local root_files = {
   'pyrightconfig.json',
 }
 
-local get_token_from_auth_file = function()
+local token_in_auth_file = function()
   local is_windows = vim.fn.has 'win32' == 1
   local path_sep = is_windows and '\\' or '/'
 
-  local config_home = is_windows and vim.fn.getenv 'APPDATA'
-    or (vim.fn.getenv 'XDG_CONFIG_HOME' or vim.fn.expand '~/.config')
+  local config_home = is_windows and vim.fn.getenv 'APPDATA' or vim.fn.expand '~/.config'
   local auth_file_path = config_home .. path_sep .. 'sourcery' .. path_sep .. 'auth.yaml'
+
   if vim.fn.filereadable(auth_file_path) == 1 then
     local content = vim.fn.readfile(auth_file_path)
-
     for _, line in ipairs(content) do
-      local token = line:match 'sourcery_token: (.+)'
-      if token then
-        return token
+      if line:match 'sourcery_token: (.+)' then
+        return true
       end
     end
   end
+
+  return false
 end
 
 return {
@@ -43,13 +43,12 @@ return {
     single_file_support = true,
   },
   on_new_config = function(new_config, _)
-    local possibly_token = get_token_from_auth_file()
-    if possibly_token then
-      new_config.init_options.token = possibly_token
-    end
-    if not new_config.init_options.token then
+    if not new_config.init_options.token and not token_in_auth_file() then
       local notify = vim.notify_once or vim.notify
-      notify('[lspconfig] The authentication token must be provided in config.init_options', vim.log.levels.ERROR)
+      notify(
+        '[lspconfig] The authentication token must be provided in config.init_options or configured via "sourcery login"',
+        vim.log.levels.ERROR
+      )
     end
   end,
   docs = {
@@ -78,7 +77,7 @@ require'lspconfig'.sourcery.setup {
 }
 ```
 
-Alternatively, you can login to sourcery by running `sourcery login` with sourcery-cli and your token will be grabbed from sourcery config file.
+Alternatively, you can login to sourcery by running `sourcery login` with sourcery-cli.
 ]],
   },
 }
