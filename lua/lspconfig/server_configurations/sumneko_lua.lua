@@ -42,7 +42,7 @@ https://github.com/sumneko/lua-language-server
 
 Lua language server.
 
-`lua-language-server` can be installed by following the instructions [here](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
+`lua-language-server` can be installed by following the instructions [here](https://github.com/sumneko/lua-language-server/wiki/Getting-Started#command-line).
 
 The default `cmd` assumes that the `lua-language-server` binary can be found in `$PATH`.
 
