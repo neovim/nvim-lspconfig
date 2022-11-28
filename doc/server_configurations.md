@@ -6513,6 +6513,8 @@ require'lspconfig'.sourcery.setup {
 }
 ```
 
+Alternatively, you can login to sourcery by running `sourcery login` with sourcery-cli.
+
 
 
 **Snippet to enable the language server:**
