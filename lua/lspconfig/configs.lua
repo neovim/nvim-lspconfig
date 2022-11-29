@@ -56,10 +56,6 @@ function configs.__newindex(t, config_name, config_def)
 
     local config = tbl_deep_extend('keep', user_config, default_config)
 
-    if util.on_setup then
-      pcall(util.on_setup, config, user_config)
-    end
-
     if config.autostart == true then
       local event
       local pattern

@@ -16,9 +16,6 @@ M.default_config = {
   capabilities = lsp.protocol.make_client_capabilities(),
 }
 
--- global on_setup hook
-M.on_setup = nil
-
 function M.bufname_valid(bufname)
   if not bufname then
     return false
