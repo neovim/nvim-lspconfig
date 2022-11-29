@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = {'gleam', 'lsp'},
+    cmd = { 'gleam', 'lsp' },
     filetypes = { 'gleam' },
     root_dir = function(fname)
       return util.root_pattern('gleam.toml', '.git')(fname)
