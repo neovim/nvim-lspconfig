@@ -3,7 +3,7 @@ local bin_name = 'scheme-langserver'
 local cmd = { bin_name }
 local root_files = {
   'Akku.manifest',
-  '.git'
+  '.git'，
 }
 
 return {
