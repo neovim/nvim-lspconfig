@@ -12,7 +12,6 @@ if vim.fn.has 'nvim-0.7' ~= 1 then
     version_info.minor,
     version_info.patch
   )
-  vim.notify_once(warning_str)
   return
 end
 
