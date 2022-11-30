@@ -10,7 +10,7 @@ See also `:help lsp-config`.
 
 ## Install
 
-* Requires [Neovim latest stable release](https://github.com/neovim/neovim/releases/latest) or [Nightly](https://github.com/neovim/neovim/releases/tag/nightly). Update Nvim and nvim-lspconfig before reporting an issue.
+* Requires neovim version 0.7 above. Update Nvim and nvim-lspconfig before reporting an issue.
 * Install nvim-lspconfig like any other Vim plugin, e.g. with [packer.nvim](https://github.com/wbthomason/packer.nvim):
   ```lua
   local use = require('packer').use
