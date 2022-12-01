@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'nc', 'localhost', '5757' },
+    cmd = { 'nc', 'localhost', os.getenv 'UNISON_LSP_PORT' or '5757' },
     filetypes = { 'unison' },
     root_dir = util.root_pattern '*.u',
     settings = {},
