@@ -1,13 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'Move.toml' }
+
 return {
   default_config = {
     cmd = { 'move-analyzer' },
     filetypes = { 'move' },
-    root_dir = function(fname)
-      local move_package_dir = util.root_pattern 'Move.toml'(fname)
-      return move_package_dir
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   commands = {},
   docs = {
@@ -25,7 +24,7 @@ cargo install --git https://github.com/move-language/move move-analyzer
 See [`move-analyzer`'s doc](https://github.com/move-language/move/blob/1b258a06e3c7d2bc9174578aac92cca3ac19de71/language/move-analyzer/editors/code/README.md#how-to-install) for details.
     ]],
     default_config = {
-      root_dir = [[root_pattern("Move.toml")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'Package.swift', '.git' }
+
 return {
   default_config = {
     cmd = { 'sourcekit-lsp' },
     filetypes = { 'swift', 'c', 'cpp', 'objective-c', 'objective-cpp' },
-    root_dir = util.root_pattern('Package.swift', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -13,7 +15,7 @@ https://github.com/apple/sourcekit-lsp
 Language server for Swift and C/C++/Objective-C.
     ]],
     default_config = {
-      root_dir = [[root_pattern("Package.swift", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

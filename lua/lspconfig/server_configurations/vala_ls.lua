@@ -21,11 +21,14 @@ local meson_matcher = function(path)
   end
 end
 
+local workspace_markers = { 'meson.build', '.git' }
+
 return {
   default_config = {
     cmd = { 'vala-language-server' },
     filetypes = { 'vala', 'genie' },
     root_dir = function(fname)
+      -- TODO(kylo252): can't we just use 'meson_options.txt' instead?
       local root = util.search_ancestors(fname, meson_matcher)
       return root or util.find_git_ancestor(fname)
     end,
@@ -34,7 +37,7 @@ return {
   docs = {
     description = 'https://github.com/Prince781/vala-language-server',
     default_config = {
-      root_dir = [[root_pattern("meson.build", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

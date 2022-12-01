@@ -1,11 +1,11 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     filetypes = { 'dfy', 'dafny' },
-    root_dir = function(fname)
-      util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -16,5 +16,6 @@ return {
 
     Note that there is no default cmd set. You must set it yourself. The recommended way is to use `{"dotnet", "<Path to your language server>"}`.
 ]],
+    workspace_markers = workspace_markers,
   },
 }

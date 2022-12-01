@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'stack.yaml', 'package.yaml', '.git' }
+
 return {
   default_config = {
     cmd = { 'hie-wrapper', '--lsp' },
     filetypes = { 'haskell' },
-    root_dir = util.root_pattern('stack.yaml', 'package.yaml', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
 
   docs = {
@@ -28,7 +30,7 @@ init_options = {
         ]],
 
     default_config = {
-      root_dir = [[root_pattern("stack.yaml", "package.yaml", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'config.yml' }
+
 return {
   default_config = {
     cmd = { 'sqls' },
     filetypes = { 'sql', 'mysql' },
-    root_dir = util.root_pattern 'config.yml',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
     settings = {},
   },

@@ -1,12 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '*.nimble', '.git' }
+
 return {
   default_config = {
     cmd = { 'nimlsp' },
     filetypes = { 'nim' },
-    root_dir = function(fname)
-      return util.root_pattern '*.nimble'(fname) or util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -19,5 +19,6 @@ https://github.com/PMunch/nimlsp
 nimble install nimlsp
 ```
     ]],
+    workspace_markers = workspace_markers,
   },
 }

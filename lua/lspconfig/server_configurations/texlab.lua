@@ -63,13 +63,13 @@ end
 --   end)
 -- end
 
+local workspace_markers = { '.latexmkrc', '.git' }
+
 return {
   default_config = {
     cmd = { 'texlab' },
     filetypes = { 'tex', 'plaintex', 'bib' },
-    root_dir = function(fname)
-      return util.root_pattern '.latexmkrc'(fname) or util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
     settings = {
       texlab = {
@@ -122,5 +122,6 @@ A completion engine built from scratch for (La)TeX.
 
 See https://github.com/latex-lsp/texlab/wiki/Configuration for configuration options.
 ]],
+    workspace_markers = workspace_markers,
   },
 }

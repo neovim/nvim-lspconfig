@@ -7,6 +7,8 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, 'start' }
 end
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = cmd,
@@ -18,7 +20,7 @@ return {
       GLOB_PATTERN = vim.env.GLOB_PATTERN or '*@(.blp)',
     },
     filetypes = { 'blueprint' },
-    root_dir = util.find_git_ancestor,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -31,7 +33,7 @@ Language server for the blurprint markup language, written in python and part
 of the blueprint-compiler.
 ]],
     default_config = {
-      root_dir = [[util.find_git_ancestor]],
+      workspace_markers = workspace_markers,
     },
   },
 }

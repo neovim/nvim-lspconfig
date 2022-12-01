@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '*.ipkg' }
+
 return {
   default_config = {
     cmd = { 'idris2-lsp' },
     filetypes = { 'idris2' },
-    root_dir = util.root_pattern '*.ipkg',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[

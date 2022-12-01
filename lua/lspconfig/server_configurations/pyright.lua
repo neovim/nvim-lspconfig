@@ -7,7 +7,7 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
-local root_files = {
+local workspace_markers = {
   'pyproject.toml',
   'setup.py',
   'setup.cfg',
@@ -28,7 +28,7 @@ return {
   default_config = {
     cmd = cmd,
     filetypes = { 'python' },
-    root_dir = util.root_pattern(unpack(root_files)),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
     settings = {
       python = {
@@ -52,5 +52,6 @@ https://github.com/microsoft/pyright
 
 `pyright`, a static type checker and language server for python
 ]],
+    workspace_markers = workspace_markers,
   },
 }

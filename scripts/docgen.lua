@@ -132,7 +132,7 @@ local function make_lsp_sections()
               if description and type(description) ~= 'string' then
                 description = inspect(description)
               elseif not description and type(v) == 'function' then
-                description = 'see source file'
+                return
               end
               return string.format('- `%s` : \n```lua\n%s\n```', k, description or inspect(v))
             end),

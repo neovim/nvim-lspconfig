@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = { 'opencl-language-server' },
     filetypes = { 'opencl' },
-    root_dir = util.find_git_ancestor,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -15,7 +17,7 @@ Build instructions can be found [here](https://github.com/Galarius/opencl-langua
 Prebuilt binaries are available for Linux, macOS and Windows [here](https://github.com/Galarius/opencl-language-server/releases).
 ]],
     default_config = {
-      root_dir = [[util.root_pattern(".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

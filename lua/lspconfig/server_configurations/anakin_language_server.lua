@@ -1,19 +1,17 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = {
+  'pyproject.toml',
+  'setup.py',
+  'setup.cfg',
+  'requirements.txt',
+  'Pipfile',
+}
 return {
   default_config = {
     cmd = { 'anakinls' },
     filetypes = { 'python' },
-    root_dir = function(fname)
-      local root_files = {
-        'pyproject.toml',
-        'setup.py',
-        'setup.cfg',
-        'requirements.txt',
-        'Pipfile',
-      }
-      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
     settings = {
       anakinls = {
@@ -74,5 +72,6 @@ Available options:
 * Initialization: https://github.com/muffinmad/anakin-language-server#initialization-option
 * Configuration: https://github.com/muffinmad/anakin-language-server#configuration-options
     ]],
+    workspace_markers = workspace_markers,
   },
 }

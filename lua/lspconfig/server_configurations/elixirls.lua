@@ -1,10 +1,13 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'mix.exs', '.git' }
+
 return {
   default_config = {
     filetypes = { 'elixir', 'eelixir', 'heex', 'surface' },
     root_dir = function(fname)
-      return util.root_pattern('mix.exs', '.git')(fname) or vim.loop.os_homedir()
+      -- FIXME(kylo252): why does this use homedir?
+      return util.root_pattern(unpack(workspace_markers))(fname) or vim.loop.os_homedir()
     end,
   },
   docs = {
@@ -33,7 +36,7 @@ require'lspconfig'.elixirls.setup{
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern("mix.exs", ".git") or vim.loop.os_homedir()]],
+      workspace_markers = workspace_markers,
     },
   },
 }

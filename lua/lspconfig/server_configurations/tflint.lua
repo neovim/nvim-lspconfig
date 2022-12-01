@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.terraform', '.git', '.tflint.hcl' }
+
 return {
   default_config = {
     cmd = { 'tflint', '--langserver' },
     filetypes = { 'terraform' },
-    root_dir = util.root_pattern('.terraform', '.git', '.tflint.hcl'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -14,7 +16,7 @@ A pluggable Terraform linter that can act as lsp server.
 Installation instructions can be found in https://github.com/terraform-linters/tflint#installation.
 ]],
     default_config = {
-      root_dir = [[root_pattern(".terraform", ".git", ".tflint.hcl")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

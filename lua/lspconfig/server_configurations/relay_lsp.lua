@@ -8,6 +8,8 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, 'lsp' }
 end
 
+local workspace_markers = { 'relay.config.*', 'package.json' }
+
 return {
   default_config = {
     -- (default: false) Whether or not we should automatically start the
@@ -21,6 +23,7 @@ return {
 
     cmd = cmd,
     filetypes = {
+      workspace_markers = workspace_markers,
       'javascript',
       'javascriptreact',
       'javascript.jsx',
@@ -28,7 +31,7 @@ return {
       'typescriptreact',
       'typescript.tsx',
     },
-    root_dir = util.root_pattern('relay.config.*', 'package.json'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     on_new_config = function(config, root_dir)
       local project_root = util.find_node_modules_ancestor(root_dir)
       local node_bin_path = util.path.join(project_root, 'node_modules', '.bin')
@@ -109,7 +112,7 @@ return {
     ```
     ]],
     default_config = {
-      root_dir = [[root_pattern("relay.config.*", "package.json")]],
+      workspace_markers = workspace_markers,
       auto_start_compiler = false,
       path_to_config = nil,
     },

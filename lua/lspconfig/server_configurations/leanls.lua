@@ -1,5 +1,7 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'lakefile.lean', 'lean-toolchain', 'leanpkg.toml' }
+
 return {
   default_config = {
     cmd = { 'lake', 'serve', '--' },
@@ -21,9 +23,7 @@ return {
         end
       end
 
-      return util.root_pattern('lakefile.lean', 'lean-toolchain', 'leanpkg.toml')(fname)
-        or stdlib_dir
-        or util.find_git_ancestor(fname)
+      return util.root_pattern(unpack(workspace_markers))(fname) or stdlib_dir or util.find_git_ancestor(fname)
     end,
     options = {
       -- Only Lake 3.0+ supports lake serve, so for old enough Lean 4,
@@ -71,7 +71,7 @@ that plugin fully handles the setup of the Lean language server,
 and you shouldn't set up `leanls` both with it and `lspconfig`.
     ]],
     default_config = {
-      root_dir = [[root_pattern("lakefile.lean", "lean-toolchain", "leanpkg.toml", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

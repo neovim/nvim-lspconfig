@@ -7,6 +7,16 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
+local workspace_markers = {
+  'tailwind.config.js',
+  'tailwind.config.ts',
+  'postcss.config.js',
+  'postcss.config.ts',
+  'package.json',
+  'node_modules',
+  '.git',
+}
+
 return {
   default_config = {
     cmd = cmd,
@@ -103,13 +113,7 @@ return {
         new_config.settings.editor.tabSize = vim.lsp.util.get_effective_tabstop()
       end
     end,
-    root_dir = function(fname)
-      return util.root_pattern('tailwind.config.js', 'tailwind.config.ts')(fname)
-        or util.root_pattern('postcss.config.js', 'postcss.config.ts')(fname)
-        or util.find_package_json_ancestor(fname)
-        or util.find_node_modules_ancestor(fname)
-        or util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -121,7 +125,7 @@ npm install -g @tailwindcss/language-server
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', 'node_modules', '.git')]],
+      workspace_markers = workspace_markers,
     },
   },
 }

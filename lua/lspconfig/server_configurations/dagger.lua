@@ -1,12 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'cue.mod', '.git' }
+
 return {
   default_config = {
     cmd = { 'cuelsp' },
     filetypes = { 'cue' },
-    root_dir = function(fname)
-      return util.root_pattern('cue.mod', '.git')(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -16,7 +16,7 @@ https://github.com/dagger/cuelsp
 Dagger's lsp server for cuelang.
 ]],
     default_config = {
-      root_dir = [[root_pattern("cue.mod", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

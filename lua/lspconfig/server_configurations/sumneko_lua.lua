@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 
-local root_files = {
+local workspace_markers = {
   '.luarc.json',
   '.luarc.jsonc',
   '.luacheckrc',
@@ -8,6 +8,8 @@ local root_files = {
   'stylua.toml',
   'selene.toml',
   'selene.yml',
+  'lua/',
+  '.git',
 }
 
 local bin_name = 'lua-language-server'
@@ -21,17 +23,7 @@ return {
   default_config = {
     cmd = cmd,
     filetypes = { 'lua' },
-    root_dir = function(fname)
-      local root = util.root_pattern(unpack(root_files))(fname)
-      if root and root ~= vim.env.HOME then
-        return root
-      end
-      root = util.root_pattern 'lua/'(fname)
-      if root then
-        return root .. '/lua/'
-      end
-      return util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
     log_level = vim.lsp.protocol.MessageType.Warning,
     settings = { Lua = { telemetry = { enable = false } } },
@@ -85,7 +77,7 @@ See `lua-language-server`'s [documentation](https://github.com/sumneko/lua-langu
 
 ]],
     default_config = {
-      root_dir = [[root_pattern(".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

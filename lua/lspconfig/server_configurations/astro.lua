@@ -13,11 +13,13 @@ local function get_typescript_server_path(root_dir)
     or ''
 end
 
+local workspace_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'astro' },
-    root_dir = util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     init_options = {
       typescript = {
         serverPath = '',
@@ -44,7 +46,7 @@ npm install -g @astrojs/language-server
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

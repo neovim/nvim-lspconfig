@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = { 'openscad-language-server' },
     filetypes = { 'openscad' },
-    root_dir = util.find_git_ancestor,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {

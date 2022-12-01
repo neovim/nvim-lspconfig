@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'package.json', 'jsconfig.json', '.git' }
+
 return {
   default_config = {
     cmd = { 'quick-lint-js', '--lsp-server' },
     filetypes = { 'javascript' },
-    root_dir = util.root_pattern('package.json', 'jsconfig.json', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {

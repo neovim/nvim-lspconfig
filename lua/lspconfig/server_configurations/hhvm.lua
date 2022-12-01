@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.hhconfig' }
+
 return {
   default_config = {
     cmd = { 'hh_client', 'lsp' },
     filetypes = { 'php', 'hack' },
-    root_dir = util.root_pattern '.hhconfig',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -15,7 +17,7 @@ See below for how to setup HHVM & typechecker:
 https://docs.hhvm.com/hhvm/getting-started/getting-started
     ]],
     default_config = {
-      root_dir = [[root_pattern(".hhconfig")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

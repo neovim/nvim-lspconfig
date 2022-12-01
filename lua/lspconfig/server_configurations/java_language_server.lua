@@ -1,9 +1,11 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'build.gradle', 'pom.xml', '.git' }
+
 return {
   default_config = {
     filetypes = { 'java' },
-    root_dir = util.root_pattern('build.gradle', 'pom.xml', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     settings = {},
   },
   docs = {

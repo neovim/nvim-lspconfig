@@ -7,11 +7,13 @@ if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
+local workspace_markers = { 'composer.json' }
+
 return {
   default_config = {
     cmd = cmd,
     filetypes = { 'html', 'antlers' },
-    root_dir = util.root_pattern 'composer.json',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[

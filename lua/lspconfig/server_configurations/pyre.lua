@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.pyre_configuration' }
+
 return {
   default_config = {
     cmd = { 'pyre', 'persistent' },
     filetypes = { 'python' },
-    root_dir = util.root_pattern '.pyre_configuration',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[

@@ -1,13 +1,11 @@
 local util = require 'lspconfig.util'
 
-local root_files = { '.git', 'build', 'cmake' }
+local workspace_markers = { '.git', 'build', 'cmake' }
 return {
   default_config = {
     cmd = { 'neocmakelsp', '--stdio' },
     filetypes = { 'cmake' },
-    root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname)
-    end,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -17,7 +15,7 @@ https://github.com/Decodetalkers/neocmakelsp
 CMake LSP Implementation
 ]],
     default_config = {
-      root_dir = [[root_pattern('.git', 'cmake')]],
+      workspace_markers = workspace_markers,
     },
   },
 }

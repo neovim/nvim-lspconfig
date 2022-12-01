@@ -1,9 +1,11 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '*.ino' }
+
 return {
   default_config = {
     filetypes = { 'arduino' },
-    root_dir = util.root_pattern '*.ino',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[

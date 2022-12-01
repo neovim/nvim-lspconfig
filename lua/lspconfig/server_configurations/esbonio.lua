@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = { 'python3', '-m', 'esbonio' },
     filetypes = { 'rst' },
-    root_dir = util.find_git_ancestor,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[

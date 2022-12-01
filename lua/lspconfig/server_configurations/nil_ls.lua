@@ -1,11 +1,14 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { 'flake.nix', '.git' }
+
 return {
   default_config = {
     cmd = { 'nil' },
     filetypes = { 'nix' },
+    workspace_markers = workspace_markers,
     single_file_support = true,
-    root_dir = util.root_pattern('flake.nix', '.git'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -17,7 +20,7 @@ If you are using Nix with Flakes support, run `nix profile install github:oxalic
 Check the repository README for more information.
     ]],
     default_config = {
-      root_dir = [[root_pattern("flake.nix", ".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

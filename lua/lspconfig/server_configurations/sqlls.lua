@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.sqllsrc.json' }
+
 return {
   default_config = {
     cmd = { 'sql-language-server', 'up', '--method', 'stdio' },
     filetypes = { 'sql', 'mysql' },
-    root_dir = util.root_pattern '.sqllsrc.json',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     settings = {},
   },
   docs = {

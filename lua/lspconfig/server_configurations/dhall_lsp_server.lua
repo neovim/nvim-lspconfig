@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     cmd = { 'dhall-lsp-server' },
     filetypes = { 'dhall' },
-    root_dir = util.find_git_ancestor,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
@@ -20,7 +22,7 @@ cabal install dhall-lsp-server
 prebuilt binaries can be found [here](https://github.com/dhall-lang/dhall-haskell/releases).
 ]],
     default_config = {
-      root_dir = [[root_pattern(".git")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

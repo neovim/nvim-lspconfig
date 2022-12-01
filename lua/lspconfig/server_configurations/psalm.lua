@@ -6,11 +6,13 @@ if vim.fn.has 'win32' == 1 then
   bin_name = bin_name .. '.bat'
 end
 
+local workspace_markers = { 'psalm.xml', 'psalm.xml.dist' }
+
 return {
   default_config = {
     cmd = { bin_name },
     filetypes = { 'php' },
-    root_dir = util.root_pattern('psalm.xml', 'psalm.xml.dist'),
+    root_dir = util.root_pattern(unpack(workspace_markers)),
   },
   docs = {
     description = [[
@@ -23,7 +25,7 @@ composer global require vimeo/psalm
 ]],
     default_config = {
       cmd = { 'psalm-language-server' },
-      root_dir = [[root_pattern("psalm.xml", "psalm.xml.dist")]],
+      workspace_markers = workspace_markers,
     },
   },
 }

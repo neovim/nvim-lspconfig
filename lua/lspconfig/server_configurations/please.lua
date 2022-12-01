@@ -1,10 +1,12 @@
 local util = require 'lspconfig.util'
 
+local workspace_markers = { '.plzconfig' }
+
 return {
   default_config = {
     cmd = { 'plz', 'tool', 'lps' },
     filetypes = { 'bzl' },
-    root_dir = util.root_pattern '.plzconfig',
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {

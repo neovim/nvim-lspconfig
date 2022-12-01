@@ -11,6 +11,8 @@ local function make_cmd(new_config)
   end
 end
 
+local workspace_markers = { '.git' }
+
 return {
   default_config = {
     shell = 'pwsh',
@@ -22,7 +24,7 @@ return {
     end,
 
     filetypes = { 'ps1' },
-    root_dir = util.find_git_ancestor,
+    root_dir = util.root_pattern(unpack(workspace_markers)),
     single_file_support = true,
   },
   docs = {
