@@ -70,6 +70,10 @@ local function make_config_info(config, bufnr)
   else
     config_info.root_dir = error_messages.root_dir_not_found
     vim.list_extend(config_info.helptags, helptags[error_messages.root_dir_not_found])
+    local root_dir_pattern = util.server_root_pattern[config_info.name]
+    if root_dir_pattern then
+      config_info.root_dir = config_info.root_dir .. ' Searched for: ' .. table.concat(root_dir_pattern, ',')
+    end
   end
 
   config_info.autostart = (config.autostart and 'true') or 'false'

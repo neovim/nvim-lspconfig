@@ -16,6 +16,8 @@ M.default_config = {
   capabilities = lsp.protocol.make_client_capabilities(),
 }
 
+M.server_root_pattern = {}
+
 -- global on_setup hook
 M.on_setup = nil
 
@@ -335,6 +337,18 @@ function M.search_ancestors(startpath, func)
   end
 end
 
+---@private
+local function get_config_by_ft()
+  local configs = require 'lspconfig.configs'
+  local servers = M.available_servers()
+  for _, server in pairs(servers) do
+    local fts = configs[server].filetypes
+    if fts and vim.tbl_contains(fts, vim.bo.filetype) then
+      return server
+    end
+  end
+end
+
 function M.root_pattern(...)
   local patterns = vim.tbl_flatten { ... }
   local function matcher(path)
@@ -347,6 +361,16 @@ function M.root_pattern(...)
     end
   end
   return function(startpath)
+    local server_name = get_config_by_ft()
+    if server_name then
+      if M.server_root_pattern[server_name] then
+        for _, v in pairs(patterns) do
+          table.insert(M.server_root_pattern[server_name], v)
+        end
+      else
+        M.server_root_pattern[server_name] = patterns
+      end
+    end
     startpath = M.strip_archive_subpath(startpath)
     return M.search_ancestors(startpath, matcher)
   end
@@ -383,7 +407,7 @@ function M.find_package_json_ancestor(startpath)
 end
 
 function M.get_active_clients_list_by_ft(filetype)
-  local clients = vim.lsp.get_active_clients()
+  local clients = lsp.get_active_clients()
   local clients_list = {}
   for _, client in pairs(clients) do
     local filetypes = client.config.filetypes or {}
@@ -414,7 +438,7 @@ function M.get_other_matching_providers(filetype)
 end
 
 function M.get_active_client_by_name(bufnr, servername)
-  for _, client in pairs(vim.lsp.buf_get_clients(bufnr)) do
+  for _, client in pairs(lsp.buf_get_clients(bufnr)) do
     if client.name == servername then
       return client
     end
