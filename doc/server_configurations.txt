@@ -366,18 +366,19 @@ require'lspconfig'.ansiblels.setup{}
   ```lua
   {
     ansible = {
-      ansible = {
-        path = "ansible"
-      },
-      ansibleLint = {
+      path = "ansible"
+    },
+    executionEnvironment = {
+      enabled = false
+    },
+    python = {
+      interpreterPath = "python"
+    },
+    validation = {
+      enabled = true,
+      lint = {
         enabled = true,
         path = "ansible-lint"
-      },
-      executionEnvironment = {
-        enabled = false
-      },
-      python = {
-        interpreterPath = "python"
       }
     }
   }
