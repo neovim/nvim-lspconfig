@@ -11,19 +11,20 @@ return {
   default_config = {
     cmd = cmd,
     settings = {
+      python = {
+        interpreterPath = 'python',
+      },
       ansible = {
-        python = {
-          interpreterPath = 'python',
-        },
-        ansibleLint = {
-          path = 'ansible-lint',
+        path = 'ansible',
+      },
+      executionEnvironment = {
+        enabled = false,
+      },
+      validation = {
+        enabled = true,
+        lint = {
           enabled = true,
-        },
-        ansible = {
-          path = 'ansible',
-        },
-        executionEnvironment = {
-          enabled = false,
+          path = 'ansible-lint',
         },
       },
     },
