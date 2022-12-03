@@ -362,14 +362,8 @@ function M.root_pattern(...)
   end
   return function(startpath)
     local server_name = get_config_by_ft()
-    if server_name then
-      if M.server_root_pattern[server_name] then
-        for _, v in pairs(patterns) do
-          table.insert(M.server_root_pattern[server_name], v)
-        end
-      else
-        M.server_root_pattern[server_name] = patterns
-      end
+    if server_name and not M.server_root_pattern[server_name] then
+      M.server_root_pattern[server_name] = patterns
     end
     startpath = M.strip_archive_subpath(startpath)
     return M.search_ancestors(startpath, matcher)
