@@ -51,6 +51,7 @@ local cmd_type = {
 
 local function make_config_info(config, bufnr)
   local config_info = {}
+  local default_config = require(string.format('lspconfig.server_configurations.%s', config.name)).default_config
   config_info.name = config.name
   config_info.helptags = {}
 
@@ -70,6 +71,15 @@ local function make_config_info(config, bufnr)
   else
     config_info.root_dir = error_messages.root_dir_not_found
     vim.list_extend(config_info.helptags, helptags[error_messages.root_dir_not_found])
+    if config.get_root_dir == default_config.root_dir then
+      local root_dir_pattern = vim.tbl_get(config, 'document_config', 'docs', 'default_config', 'root_dir')
+      if root_dir_pattern then
+        config_info.root_dir = config_info.root_dir
+          .. ' Searched for: '
+          .. remove_newlines(vim.split(root_dir_pattern, '\n'))
+          .. '.'
+      end
+    end
   end
 
   config_info.autostart = (config.autostart and 'true') or 'false'
