@@ -87,12 +87,28 @@ end, {
 })
 
 api.nvim_create_user_command('LspRestart', function(info)
+  local detach_clients = {}
   for _, client in ipairs(get_clients_from_cmd_args(info.args)) do
     client.stop()
-    vim.defer_fn(function()
-      require('lspconfig.configs')[client.name].launch()
-    end, 500)
+    detach_clients[client.name] = client
   end
+  local timer = vim.loop.new_timer()
+  timer:start(
+    500,
+    100,
+    vim.schedule_wrap(function()
+      for client_name, client in pairs(detach_clients) do
+        if client.is_stopped() then
+          require('lspconfig.configs')[client_name].launch()
+          detach_clients[client_name] = nil
+        end
+      end
+
+      if next(detach_clients) == nil and not timer:is_closing() then
+        timer:close()
+      end
+    end)
+  )
 end, {
   desc = 'Manually restart the given language client(s)',
   nargs = '?',
