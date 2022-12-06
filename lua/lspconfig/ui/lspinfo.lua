@@ -70,13 +70,6 @@ local function make_config_info(config, bufnr)
   else
     config_info.root_dir = error_messages.root_dir_not_found
     vim.list_extend(config_info.helptags, helptags[error_messages.root_dir_not_found])
-    local root_dir_pattern = vim.tbl_get(config, 'document_config', 'docs', 'default_config', 'root_dir')
-    if root_dir_pattern then
-      config_info.root_dir = config_info.root_dir
-        .. ' Searched for: '
-        .. remove_newlines(vim.split(root_dir_pattern, '\n'))
-        .. '.'
-    end
   end
 
   config_info.autostart = (config.autostart and 'true') or 'false'

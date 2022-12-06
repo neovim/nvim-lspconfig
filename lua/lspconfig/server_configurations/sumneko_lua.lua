@@ -2,10 +2,12 @@ local util = require 'lspconfig.util'
 
 local root_files = {
   '.luarc.json',
+  '.luarc.jsonc',
   '.luacheckrc',
   '.stylua.toml',
   'stylua.toml',
   'selene.toml',
+  'selene.yml',
 }
 
 local bin_name = 'lua-language-server'
@@ -20,9 +22,13 @@ return {
     cmd = cmd,
     filetypes = { 'lua' },
     root_dir = function(fname)
-      local root = util.root_pattern(unpack(root_files))(fname) or util.root_pattern 'lua/'(fname)
+      local root = util.root_pattern(unpack(root_files))(fname)
       if root and root ~= vim.env.HOME then
         return root
+      end
+      root = util.root_pattern 'lua/'(fname)
+      if root then
+        return root .. '/lua/'
       end
       return util.find_git_ancestor(fname)
     end,
@@ -36,7 +42,7 @@ https://github.com/sumneko/lua-language-server
 
 Lua language server.
 
-`lua-language-server` can be installed by following the instructions [here](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run).
+`lua-language-server` can be installed by following the instructions [here](https://github.com/sumneko/lua-language-server/wiki/Getting-Started#command-line).
 
 The default `cmd` assumes that the `lua-language-server` binary can be found in `$PATH`.
 
@@ -79,7 +85,7 @@ See `lua-language-server`'s [documentation](https://github.com/sumneko/lua-langu
 
 ]],
     default_config = {
-      root_dir = [[root_pattern(".luarc.json", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", ".git")]],
+      root_dir = [[root_pattern(".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git")]],
     },
   },
 }

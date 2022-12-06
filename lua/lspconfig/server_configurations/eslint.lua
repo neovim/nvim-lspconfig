@@ -47,24 +47,19 @@ local root_file = {
   '.eslintrc.yaml',
   '.eslintrc.yml',
   '.eslintrc.json',
-  'package.json',
+  'eslint.config.js',
 }
 
 local root_with_package = util.find_package_json_ancestor(vim.fn.expand '%:p:h')
 
 if root_with_package then
-  local must_remove = false
+  -- only add package.json if it contains eslintConfig field
   local path_sep = is_windows and '\\' or '/'
   for line in io.lines(root_with_package .. path_sep .. 'package.json') do
     if line:find 'eslintConfig' then
-      must_remove = false
-    else
-      must_remove = true
+      table.insert(root_file, 'package.json')
+      break
     end
-  end
-
-  if must_remove then
-    table.remove(root_file, #root_file)
   end
 end
 
@@ -89,6 +84,9 @@ return {
       validate = 'on',
       packageManager = 'npm',
       useESLintClass = false,
+      experimental = {
+        useFlatConfig = false,
+      },
       codeActionOnSave = {
         enable = false,
         mode = 'all',
@@ -98,6 +96,9 @@ return {
       onIgnoredFiles = 'off',
       rulesCustomizations = {},
       run = 'onType',
+      problems = {
+        shortenToSingleLine = false,
+      },
       -- nodePath configures the directory in which the eslint server should start its node_modules resolution.
       -- This path is relative to the workspace folder (root dir) of the server instance.
       nodePath = '',
