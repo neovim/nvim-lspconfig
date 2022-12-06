@@ -442,6 +442,8 @@ mode under which cross-file features may be degraded.
   `workspaceFolders` during initialization.
 - attaching subsequent files in the parent directory to the same server
   instance, depending on filetype.
+- also supports unnamed buffer if filetype matches the server filetype
+  settings.
 
 Cross-file features (navigation, hover) may or may not work depending on the
 language server. For a full feature-set, consider moving your files to a

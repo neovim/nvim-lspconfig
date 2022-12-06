@@ -20,9 +20,6 @@ M.default_config = {
 M.on_setup = nil
 
 function M.bufname_valid(bufname)
-  if not bufname then
-    return false
-  end
   if bufname:match '^/' or bufname:match '^[a-zA-Z]:' or bufname:match '^zipfile://' or bufname:match '^tarfile:' then
     return true
   end
