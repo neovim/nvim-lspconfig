@@ -15,6 +15,6 @@ This gives valuable warnings for potential issues in the code,
             but does not support refactorings.
 
 It can be installed with cargo: https://crates.io/crates/starlark
-        ]],
+]],
   },
 }
