@@ -8,7 +8,7 @@ return {
   },
   docs = {
     description = [[
-            https://github.com/facebookexperimental/starlark-rust/
+https://github.com/facebookexperimental/starlark-rust/
 The LSP part of `starlark-rust` is not currently documented,
             but the implementation works well for linting.
             This gives valuable warnings for potential issues in the code,
