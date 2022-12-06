@@ -14,7 +14,7 @@ The LSP part of `starlark-rust` is not currently documented,
 This gives valuable warnings for potential issues in the code,
             but does not support refactorings.
 
-            It can be installed with cargo: https://crates.io/crates/starlark
+It can be installed with cargo: https://crates.io/crates/starlark
         ]],
   },
 }
