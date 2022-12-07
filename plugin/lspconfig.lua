@@ -117,19 +117,28 @@ end, {
 
 api.nvim_create_user_command('LspStop', function(info)
   local current_buf = vim.api.nvim_get_current_buf()
-  local server_name = string.len(info.args) > 0 and info.args or nil
+  local server_name, force
+  local arguments = vim.split(info.args, '%s')
+  for _, v in pairs(arguments) do
+    if v == '++force' then
+      force = true
+    end
+    if v:find '%(' then
+      server_name = v
+    end
+  end
 
   if not server_name then
     local servers_on_buffer = lsp.get_active_clients { buffer = current_buf }
     for _, client in ipairs(servers_on_buffer) do
       local filetypes = client.config.filetypes
       if filetypes and vim.tbl_contains(filetypes, vim.bo[current_buf].filetype) then
-        client.stop()
+        client.stop(force)
       end
     end
   else
     for _, client in ipairs(get_clients_from_cmd_args(server_name)) do
-      client.stop()
+      client.stop(force)
     end
   end
 end, {

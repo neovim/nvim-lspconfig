@@ -467,7 +467,8 @@ contained in `:LspInfo`:
   if it successfully resolves a root directory. Note: Defaults to all
   configured servers matching the current buffer filetype.
 - `:LspStop <client_id>` stops the server with the given client id. Defaults to
-  stopping all servers active on the current buffer.
+  stopping all servers active on the current buffer. if you want to force stop
+  a language server you can do it like `:LspStop <client_id> ++force`
 - `:LspRestart <client_id>` restarts the client with the given client id, and
   will attempt to reattach to all previously attached buffers.
 
