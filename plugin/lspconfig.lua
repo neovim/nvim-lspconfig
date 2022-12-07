@@ -131,8 +131,7 @@ api.nvim_create_user_command('LspStop', function(info)
   if not server_name then
     local servers_on_buffer = lsp.get_active_clients { buffer = current_buf }
     for _, client in ipairs(servers_on_buffer) do
-      local filetypes = client.config.filetypes
-      if filetypes and vim.tbl_contains(filetypes, vim.bo[current_buf].filetype) then
+      if client.attached_buffers[current_buf] then
         client.stop(force)
       end
     end
