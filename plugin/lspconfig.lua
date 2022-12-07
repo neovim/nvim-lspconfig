@@ -117,24 +117,35 @@ end, {
 
 api.nvim_create_user_command('LspStop', function(info)
   local current_buf = vim.api.nvim_get_current_buf()
-  local server_name = string.len(info.args) > 0 and info.args or nil
+  local server_name, force
+
+  if next(info.fargs) ~= nil then
+    for _, v in pairs(info.fargs) do
+      if v:find '%=' then
+        v = vim.trim(v)
+        force = vim.split(v, '=')[2] == 'true' and true or nil
+      else
+        server_name = v
+      end
+    end
+  end
 
   if not server_name then
     local servers_on_buffer = lsp.get_active_clients { buffer = current_buf }
     for _, client in ipairs(servers_on_buffer) do
       local filetypes = client.config.filetypes
       if filetypes and vim.tbl_contains(filetypes, vim.bo[current_buf].filetype) then
-        client.stop()
+        client.stop(force)
       end
     end
   else
     for _, client in ipairs(get_clients_from_cmd_args(server_name)) do
-      client.stop()
+      client.stop(force)
     end
   end
 end, {
   desc = 'Manually stops the given language client(s)',
-  nargs = '?',
+  nargs = '+',
   complete = lsp_get_active_client_ids,
 })
 
