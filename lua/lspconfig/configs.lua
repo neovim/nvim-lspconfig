@@ -255,7 +255,7 @@ function configs.__newindex(t, config_name, config_def)
       if root_dir then
         id = manager.add(root_dir, false)
       elseif config.single_file_support then
-        local pseudo_root = #bufname == 0 and uv.cmd() or util.path.dirname(buf_path)
+        local pseudo_root = #bufname == 0 and uv.cwd() or util.path.dirname(buf_path)
         id = manager.add(pseudo_root, true)
       end
 
