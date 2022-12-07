@@ -118,15 +118,13 @@ end, {
 api.nvim_create_user_command('LspStop', function(info)
   local current_buf = vim.api.nvim_get_current_buf()
   local server_name, force
-
-  if next(info.fargs) ~= nil then
-    for _, v in pairs(info.fargs) do
-      if v:find '%=' then
-        v = vim.trim(v)
-        force = vim.split(v, '=')[2] == 'true' and true or nil
-      else
-        server_name = v
-      end
+  local arguments = vim.split(info.args, '%s')
+  for _, v in pairs(arguments) do
+    if v == '++force' then
+      force = true
+    end
+    if v:find '%(' then
+      server_name = v
     end
   end
 
@@ -145,7 +143,7 @@ api.nvim_create_user_command('LspStop', function(info)
   end
 end, {
   desc = 'Manually stops the given language client(s)',
-  nargs = '+',
+  nargs = '?',
   complete = lsp_get_active_client_ids,
 })
 
