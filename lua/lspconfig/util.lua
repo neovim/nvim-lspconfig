@@ -253,7 +253,11 @@ function M.server_per_root_dir_manager(make_config)
       if clients[1] then
         local client = lsp.get_client_by_id(clients[1])
         if client.name == new_config.name then
-          lsp.buf.add_workspace_folder(root_dir)
+          local params = lsp.util.make_workspace_params(
+            { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
+            { {} }
+          )
+          table.insert(client.workspace_folders, params.event.added[1])
           return clients[1]
         end
       end
