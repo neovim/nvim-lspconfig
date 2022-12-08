@@ -250,12 +250,11 @@ function M.server_per_root_dir_manager(make_config)
     -- Check if we have a client already or start and store it.
     if not client_id then
       local new_config = make_config(root_dir)
-      if next(clients) ~= nil then
-        for _, id in pairs(clients) do
-          local client = lsp.get_client_by_id(id)
-          if client.name == new_config.name then
-            return id
-          end
+      if clients[1] then
+        local client = lsp.get_client_by_id(clients[1])
+        if client.name == new_config.name then
+          lsp.buf.add_workspace_folder(root_dir)
+          return clients[1]
         end
       end
       -- do nothing if the client is not enabled
