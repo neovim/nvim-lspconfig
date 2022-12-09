@@ -1,4 +1,4 @@
-local api = vim.api
+local api, fn = vim.api, vim.fn
 local windows = require 'lspconfig.ui.windows'
 local util = require 'lspconfig.util'
 
@@ -107,8 +107,9 @@ local function make_client_info(client)
   local client_info = {}
 
   client_info.cmd = cmd_type[type(client.config.cmd)](client.config)
-  if client.workspaceFolders then
-    client_info.root_dir = client.workspaceFolders[1].name
+  local workspace_folders = fn.has 'nvim-0.9' == 1 and client.workspace_folders or client.workspaceFolders
+  if workspace_folders then
+    client_info.root_dir = workspace_folders[1].name
   else
     client_info.root_dir = 'Running in single file mode.'
   end
