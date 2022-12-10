@@ -112,7 +112,7 @@ local function make_client_info(client, fname)
   if workspace_folders then
     for _, schema in pairs(workspace_folders) do
       local result = vim.fs.find(tail_fname, { path = schema.name, type = 'file' })[1]
-      if result and result == fname then
+      if result and vim.loop.fs_realpath(result) == vim.loop.fs_realpath(fname) then
         client_info.root_dir = schema.name
       end
     end
