@@ -1,4 +1,4 @@
-local api, fn = vim.api, vim.fn
+local api, fn, lsp = vim.api, vim.fn, vim.lsp
 local windows = require 'lspconfig.ui.windows'
 local util = require 'lspconfig.util'
 
@@ -103,14 +103,21 @@ local function make_config_info(config, bufnr)
   return lines
 end
 
-local function make_client_info(client)
+local function make_client_info(client, fname)
   local client_info = {}
 
   client_info.cmd = cmd_type[type(client.config.cmd)](client.config)
   local workspace_folders = fn.has 'nvim-0.9' == 1 and client.workspace_folders or client.workspaceFolders
+  local tail_fname = fn.fnamemodify(fname, ':t')
   if workspace_folders then
-    client_info.root_dir = workspace_folders[1].name
-  else
+    for _, schema in pairs(workspace_folders) do
+      local result = vim.fs.find(tail_fname, { path = schema.name, type = 'file' })[1]
+      if result and result == fname then
+        client_info.root_dir = schema.name
+      end
+    end
+  end
+  if not client_info.root_dir then
     client_info.root_dir = 'Running in single file mode.'
   end
   client_info.filetypes = table.concat(client.config.filetypes or {}, ', ')
@@ -123,8 +130,6 @@ local function make_client_info(client)
       .. client.name
       .. ' (id: '
       .. tostring(client.id)
-      .. ', pid: '
-      .. tostring(client.rpc.pid)
       .. ', bufnr: ['
       .. client_info.attached_buffers_list
       .. '])',
@@ -150,10 +155,11 @@ end
 return function()
   -- These options need to be cached before switching to the floating
   -- buffer.
-  local buf_clients = vim.lsp.buf_get_clients()
-  local clients = vim.lsp.get_active_clients()
-  local buffer_filetype = vim.bo.filetype
   local original_bufnr = api.nvim_get_current_buf()
+  local buf_clients = lsp.get_active_clients { bufnr = original_bufnr }
+  local clients = lsp.get_active_clients()
+  local buffer_filetype = vim.bo.filetype
+  local fname = api.nvim_buf_get_name(original_bufnr)
 
   windows.default_options.wrap = true
   windows.default_options.breakindent = true
@@ -194,7 +200,7 @@ return function()
 
   vim.list_extend(buf_lines, buffer_clients_header)
   for _, client in pairs(buf_clients) do
-    local client_info = make_client_info(client)
+    local client_info = make_client_info(client, fname)
     vim.list_extend(buf_lines, client_info)
   end
 
@@ -206,7 +212,7 @@ return function()
     vim.list_extend(buf_lines, other_active_section_header)
   end
   for _, client in pairs(other_active_clients) do
-    local client_info = make_client_info(client)
+    local client_info = make_client_info(client, fname)
     vim.list_extend(buf_lines, client_info)
   end
 

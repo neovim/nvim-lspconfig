@@ -247,20 +247,34 @@ function M.server_per_root_dir_manager(make_config)
       return
     end
 
+    local get_client_from_cache = function(conf)
+      local id
+      if vim.tbl_count(clients) == 1 then
+        id = vim.tbl_values(clients)[1]
+      elseif vim.tbl_count(single_file_clients) == 1 then
+        id = vim.tbl_values(single_file_clients)[1]
+      end
+      local client = lsp.get_client_by_id(id)
+      if client and client.name == conf.name then
+        return client
+      end
+      return nil
+    end
+
     -- Check if we have a client already or start and store it.
     if not client_id then
       local new_config = make_config(root_dir)
-      if vim.tbl_count(clients) == 1 then
-        local id = vim.tbl_values(clients)[1]
-        local client = lsp.get_client_by_id(id)
-        if client and client.name == new_config.name then
-          local params = lsp.util.make_workspace_params(
-            { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
-            { {} }
-          )
-          table.insert(client.workspace_folders, params.event.added[1])
-          return id
+      local client = get_client_from_cache(new_config)
+      if client then
+        local params = lsp.util.make_workspace_params(
+          { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
+          { {} }
+        )
+        if not client.workspace_folders then
+          client.workspace_folders = {}
         end
+        table.insert(client.workspace_folders, params.event.added[1])
+        return client.id
       end
       -- do nothing if the client is not enabled
       if new_config.enabled == false then
