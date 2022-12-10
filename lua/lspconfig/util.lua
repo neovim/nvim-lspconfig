@@ -253,6 +253,8 @@ function M.server_per_root_dir_manager(make_config)
         id = vim.tbl_values(clients)[1]
       elseif vim.tbl_count(single_file_clients) == 1 then
         id = vim.tbl_values(single_file_clients)[1]
+      else
+        return
       end
       local client = lsp.get_client_by_id(id)
       if client and client.name == conf.name then
