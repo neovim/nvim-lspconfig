@@ -116,9 +116,9 @@ local function make_client_info(client, fname)
   local fname_parts = vim.split(fname, sep, { trimempty = true })
   --remove the host name, don't include them before compare
   fname_parts = { unpack(fname_parts, 3) }
-  local matched = true
   if workspace_folders then
     for _, schema in pairs(workspace_folders) do
+      local matched = true
       local root = uv.fs_realpath(schema.name)
       root = is_windows and root:lower() or root
       local root_parts = vim.split(root, sep, { trimempty = true })
