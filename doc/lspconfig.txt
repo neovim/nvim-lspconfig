@@ -147,7 +147,7 @@ passed overrides to `setup {}` are:
 <
   is:
 >
-  {'foo', '--bar', 'baz}
+  {'foo', '--bar', 'baz'}
 <
 - {handlers} `list[functions]`
 
