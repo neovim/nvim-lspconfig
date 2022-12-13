@@ -438,8 +438,22 @@ function M.get_other_matching_providers(filetype)
   return other_matching_configs
 end
 
+function M.get_config_by_ft(filetype)
+  local configs = require 'lspconfig.configs'
+  local matching_configs = {}
+  for _, config in pairs(configs) do
+    local filetypes = config.filetypes or {}
+    for _, ft in pairs(filetypes) do
+      if ft == filetype then
+        table.insert(matching_configs, config)
+      end
+    end
+  end
+  return matching_configs
+end
+
 function M.get_active_client_by_name(bufnr, servername)
-  for _, client in pairs(vim.lsp.buf_get_clients(bufnr)) do
+  for _, client in pairs(vim.lsp.get_active_clients { bufnr = bufnr }) do
     if client.name == servername then
       return client
     end
