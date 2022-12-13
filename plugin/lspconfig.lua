@@ -76,8 +76,8 @@ api.nvim_create_user_command('LspStart', function(info)
     end
   end
 
-  local other_matching_configs = require('lspconfig.util').get_other_matching_providers(vim.bo.filetype)
-  for _, config in ipairs(other_matching_configs) do
+  local matching_configs = require('lspconfig.util').get_config_by_ft(vim.bo.filetype)
+  for _, config in ipairs(matching_configs) do
     config.launch()
   end
 end, {
