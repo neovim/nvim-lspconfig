@@ -192,6 +192,7 @@ M.path = (function()
         return
       end
     end
+
     return it, path, path
   end
 
@@ -267,7 +268,7 @@ function M.server_per_root_dir_manager(make_config)
     if not client_id then
       local new_config = make_config(root_dir)
       local client = get_client_from_cache(new_config)
-      if client then
+      if client and client.config.root_dir == root_dir then
         local params = lsp.util.make_workspace_params(
           { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
           { {} }
@@ -285,7 +286,8 @@ function M.server_per_root_dir_manager(make_config)
       if not new_config.cmd then
         vim.notify(
           string.format(
-            '[lspconfig] cmd not defined for %q. Manually set cmd in the setup {} call according to server_configurations.md, see :help lspconfig-index.',
+            '[lspconfig] cmd not defined for %q. Manually set cmd in the setup {} call according to server_configurations.md, see :help lspconfig-index.'
+            ,
             new_config.name
           ),
           vim.log.levels.ERROR
@@ -371,11 +373,13 @@ function M.root_pattern(...)
       end
     end
   end
+
   return function(startpath)
     startpath = M.strip_archive_subpath(startpath)
     return M.search_ancestors(startpath, matcher)
   end
 end
+
 function M.find_git_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     -- Support git directories and git files (worktrees)
@@ -384,6 +388,7 @@ function M.find_git_ancestor(startpath)
     end
   end)
 end
+
 function M.find_mercurial_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     -- Support Mercurial directories
@@ -392,6 +397,7 @@ function M.find_mercurial_ancestor(startpath)
     end
   end)
 end
+
 function M.find_node_modules_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     if M.path.is_dir(M.path.join(path, 'node_modules')) then
@@ -399,6 +405,7 @@ function M.find_node_modules_ancestor(startpath)
     end
   end)
 end
+
 function M.find_package_json_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     if M.path.is_file(M.path.join(path, 'package.json')) then
