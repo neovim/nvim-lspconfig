@@ -453,4 +453,31 @@ function M.strip_archive_subpath(path)
   return path
 end
 
+
+function M.find_bin_path(bin_name)
+  local bin_path = os.getenv 'NVM_BIN'
+
+  if bin_path == nil then
+    local paths = {}
+    local sep = ':'
+    if vim.fn.has 'win32' == 1 then
+      sep = ';'
+    end
+    local path = os.getenv 'PATH'
+    if path ~= nil then
+      for str in string.gmatch(path, '([^' .. sep .. ']+)') do
+        table.insert(paths, str)
+      end
+    end
+    for _, p in ipairs(paths) do
+      local candidate = M.path.join(p, bin_name)
+      if M.path.is_file(candidate) then
+        return candidate
+      end
+    end
+  else
+    return M.path.join(bin_path, bin_name)
+  end
+end
+
 return M
