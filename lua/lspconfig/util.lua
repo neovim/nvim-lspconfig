@@ -260,6 +260,7 @@ function M.server_per_root_dir_manager(make_config)
       if
         client
         and client.name == conf.name
+        and client.server_capabilities
         and client.server_capabilities.workspaceFolders
         and client.server_capabilities.workspaceFolders.supported
       then
