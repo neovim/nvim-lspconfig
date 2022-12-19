@@ -1,7 +1,7 @@
 local _MODREV, _SPECREV = 'scm', '-1'
 
 rockspec_format = "3.0"
-package = 'nvim_lspconfig'
+package = 'nvim-lspconfig'
 version = _MODREV .. _SPECREV
 
 description = {
