@@ -2,16 +2,11 @@ local util = require 'lspconfig.util'
 
 local bin_name = 'trig-language-server'
 local full_path = util.find_bin_path(bin_name)
-
 local cmd = { 'node', full_path, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', 'node', full_path, '--stdio' }
-end
 
 return {
   default_config = {
-    cmd = cmd,
+    cmd = util.adapt_command_windows(cmd),
     filetypes = { 'trig' },
     root_dir = function(fname)
       return util.find_git_ancestor(fname)
