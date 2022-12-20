@@ -317,7 +317,7 @@ function M.server_per_root_dir_manager(make_config)
     return client_id
   end
 
-  function manager.clients(single_file)
+  function manager.clients()
     local res = {}
     for _, id in pairs(clients) do
       local client = lsp.get_client_by_id(id)
