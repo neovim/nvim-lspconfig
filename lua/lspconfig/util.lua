@@ -257,7 +257,13 @@ function M.server_per_root_dir_manager(make_config)
         return
       end
       local client = lsp.get_client_by_id(id)
-      if client and client.name == conf.name then
+      if
+        client
+        and client.server_capabilities
+        and client.server_capabilities.workspaceFolders
+        and client.server_capabilities.workspaceFolders.supported
+        and client.name == conf.name
+      then
         return client
       end
       return nil
