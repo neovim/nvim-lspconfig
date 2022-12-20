@@ -17,7 +17,7 @@ cd  uvls
 cargo install --path .
 ```
 Note: To activate properly nvim needs to know the uvl filetype.
-You can add it via: 
+You can add it via:
 ```lua
 vim.cmd(\[\[au BufRead,BufNewFile *.uvl setfiletype uvl\]\])
 ```
