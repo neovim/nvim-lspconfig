@@ -231,112 +231,95 @@ end)()
 -- seen before, will call make_config(root_dir) and start a new client.
 function M.server_per_root_dir_manager(make_config)
   local clients = {}
-  local single_file_clients = {}
   local manager = {}
 
   function manager.add(root_dir, single_file)
     local client_id
-    -- This is technically unnecessary, as lspconfig's path utilities should be hermetic,
-    -- however users are free to return strings in custom root resolvers.
     root_dir = M.path.sanitize(root_dir)
-    if single_file then
-      client_id = single_file_clients[root_dir]
-    elseif root_dir and M.path.is_dir(root_dir) then
-      client_id = clients[root_dir]
-    else
-      return
+
+    if clients[root_dir] then
+      return clients[root_dir]
     end
 
     local get_client_from_cache = function(conf)
-      local id
-      if vim.tbl_count(clients) == 1 then
-        id = vim.tbl_values(clients)[1]
-      elseif vim.tbl_count(single_file_clients) == 1 then
-        id = vim.tbl_values(single_file_clients)[1]
-      else
+      if vim.tbl_count(clients) == 0 then
         return
       end
-      local client = lsp.get_client_by_id(id)
-      if
-        client
-        and client.server_capabilities
-        and client.server_capabilities.workspaceFolders
-        and client.server_capabilities.workspaceFolders.supported
-        and client.name == conf.name
-      then
-        return client
+
+      for _, id in pairs(clients) do
+        local client = lsp.get_client_by_id(id)
+        if
+          client
+          and client.name == conf.name
+          and client.server_capabilities
+          and client.server_capabilities.workspace
+          and client.server_capabilities.workspace.workspaceFolders.supported
+        then
+          return client
+        end
       end
       return nil
     end
 
-    -- Check if we have a client already or start and store it.
-    if not client_id then
-      local new_config = make_config(root_dir)
-      local client = get_client_from_cache(new_config)
-      if client then
-        local params = lsp.util.make_workspace_params(
-          { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
-          { {} }
-        )
-        client.rpc.notify('workspace/didChangeWorkspaceFolders', params)
-        if not client.workspace_folders then
-          client.workspace_folders = {}
-        end
-        table.insert(client.workspace_folders, params.event.added[1])
-        return client.id
-      end
-      -- do nothing if the client is not enabled
-      if new_config.enabled == false then
-        return
-      end
-      if not new_config.cmd then
-        vim.notify(
-          string.format(
-            '[lspconfig] cmd not defined for %q. Manually set cmd in the setup {} call according to server_configurations.md, see :help lspconfig-index.',
-            new_config.name
-          ),
-          vim.log.levels.ERROR
-        )
-        return
-      end
-      new_config.on_exit = M.add_hook_before(new_config.on_exit, function()
-        clients[root_dir] = nil
-        single_file_clients[root_dir] = nil
-      end)
+    local new_config = make_config(root_dir)
+    local client = get_client_from_cache(new_config)
 
-      -- Launch the server in the root directory used internally by lspconfig, if otherwise unset
-      -- also check that the path exist
-      if not new_config.cmd_cwd and uv.fs_realpath(root_dir) then
-        new_config.cmd_cwd = root_dir
+    if client then
+      local params = lsp.util.make_workspace_params({ { uri = vim.uri_from_fname(root_dir), name = root_dir } }, { {} })
+      client.rpc.notify('workspace/didChangeWorkspaceFolders', params)
+      if not client.workspace_folders then
+        client.workspace_folders = {}
       end
-
-      -- Sending rootDirectory and workspaceFolders as null is not explicitly
-      -- codified in the spec. Certain servers crash if initialized with a NULL
-      -- root directory.
-      if single_file then
-        new_config.root_dir = nil
-        new_config.workspace_folders = nil
-      end
-      client_id = lsp.start_client(new_config)
-
-      -- Handle failures in start_client
-      if not client_id then
-        return
-      end
-
-      if single_file then
-        single_file_clients[root_dir] = client_id
-      else
-        clients[root_dir] = client_id
-      end
+      table.insert(client.workspace_folders, params.event.added[1])
+      clients[root_dir] = client.id
+      return client.id
     end
+
+    -- do nothing if the client is not enabled
+    if new_config.enabled == false then
+      return
+    end
+    if not new_config.cmd then
+      vim.notify(
+        string.format(
+          '[lspconfig] cmd not defined for %q. Manually set cmd in the setup {} call according to server_configurations.md, see :help lspconfig-index.',
+          new_config.name
+        ),
+        vim.log.levels.ERROR
+      )
+      return
+    end
+    new_config.on_exit = M.add_hook_before(new_config.on_exit, function()
+      clients[root_dir] = nil
+    end)
+
+    -- Launch the server in the root directory used internally by lspconfig, if otherwise unset
+    -- also check that the path exist
+    if not new_config.cmd_cwd and uv.fs_realpath(root_dir) then
+      new_config.cmd_cwd = root_dir
+    end
+
+    -- Sending rootDirectory and workspaceFolders as null is not explicitly
+    -- codified in the spec. Certain servers crash if initialized with a NULL
+    -- root directory.
+    if single_file then
+      new_config.root_dir = nil
+      new_config.workspace_folders = nil
+    end
+    client_id = lsp.start_client(new_config)
+
+    -- Handle failures in start_client
+    if not client_id then
+      return
+    end
+
+    clients[root_dir] = client_id
     return client_id
   end
 
   function manager.clients(single_file)
     local res = {}
-    local client_list = single_file and single_file_clients or clients
-    for _, id in pairs(client_list) do
+    for _, id in pairs(clients) do
       local client = lsp.get_client_by_id(id)
       if client then
         table.insert(res, client)
