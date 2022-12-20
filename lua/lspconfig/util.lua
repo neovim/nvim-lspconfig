@@ -272,7 +272,7 @@ function M.server_per_root_dir_manager(make_config)
           { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
           { {} }
         )
-        vim.lsp.buf_notify(0, 'workspace/didChangeWorkspaceFolders', params)
+        client.rpc.notify('workspace/didChangeWorkspaceFolders', params)
         if not client.workspace_folders then
           client.workspace_folders = {}
         end
