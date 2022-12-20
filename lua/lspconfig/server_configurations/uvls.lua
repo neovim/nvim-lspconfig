@@ -19,7 +19,7 @@ cargo install --path .
 Note: To activate properly nvim needs to know the uvl filetype.
 You can add it via: 
 ```lua
-vim.cmd(\[\[au BufRead,BufNewFile *.uvl		setfiletype uvl\]\])
+vim.cmd(\[\[au BufRead,BufNewFile *.uvl setfiletype uvl\]\])
 ```
 ]],
     default_config = {
