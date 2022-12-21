@@ -10,40 +10,6 @@ local volar_init_options = {
   typescript = {
     tsdk = '',
   },
-  languageFeatures = {
-    implementation = true,
-    -- not supported - https://github.com/neovim/neovim/pull/14122
-    semanticTokens = false,
-    references = true,
-    definition = true,
-    typeDefinition = true,
-    callHierarchy = true,
-    hover = true,
-    rename = true,
-    renameFileRefactoring = true,
-    signatureHelp = true,
-    codeAction = true,
-    completion = {
-      defaultTagNameCase = 'both',
-      defaultAttrNameCase = 'kebabCase',
-    },
-    schemaRequestService = true,
-    documentHighlight = true,
-    documentLink = true,
-    codeLens = true,
-    diagnostics = true,
-  },
-  documentFeatures = {
-    -- not supported - https://github.com/neovim/neovim/pull/13654
-    documentColor = false,
-    selectionRange = true,
-    foldingRange = true,
-    linkedEditingRange = true,
-    documentSymbol = true,
-    documentFormatting = {
-      defaultPrintWidth = 100,
-    },
-  },
 }
 
 local bin_name = 'vue-language-server'
