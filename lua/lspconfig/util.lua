@@ -272,12 +272,15 @@ function M.server_per_root_dir_manager(make_config)
     local client = get_client_from_cache(new_config)
 
     if client then
-      local params = lsp.util.make_workspace_params({ { uri = vim.uri_from_fname(root_dir), name = root_dir } }, { {} })
+      if single_file then
+        return client.id
+      end
+      local params = { uri = vim.uri_from_fname(root_dir), name = root_dir }
       client.rpc.notify('workspace/didChangeWorkspaceFolders', params)
       if not client.workspace_folders then
         client.workspace_folders = {}
       end
-      table.insert(client.workspace_folders, params.event.added[1])
+      table.insert(client.workspace_folders, params)
       if not clients[root_dir] then
         clients[root_dir] = {}
       end
