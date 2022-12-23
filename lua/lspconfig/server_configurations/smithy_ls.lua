@@ -7,7 +7,7 @@ local root_files = {
   'smithy-build.json',
   'build.gradle',
   'build.gradle.kts',
-  '.git'
+  '.git',
 }
 
 return {
