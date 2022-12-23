@@ -112,7 +112,7 @@ local function make_client_info(client, fname)
   local workspace_folders = fn.has 'nvim-0.9' == 1 and client.workspace_folders or client.workspaceFolders
   local uv = vim.loop
   local is_windows = uv.os_uname().version:match 'Windows'
-  fname = vim.fn.fnamemodify(vim.fn.resolve(fname), ':p')
+  fname = vim.loop.fs_realpath(fname)
   local sep = is_windows and '\\' or '/'
   local fname_parts = vim.split(fname, sep, { trimempty = true })
   if workspace_folders then
