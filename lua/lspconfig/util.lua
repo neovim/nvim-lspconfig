@@ -237,22 +237,33 @@ function M.server_per_root_dir_manager(make_config)
     local client_id
     root_dir = M.path.sanitize(root_dir)
 
-    if clients[root_dir] then
-      return clients[root_dir]
+    local client_id_iterator = function(client_ids, conf)
+      for _, id in ipairs(client_ids) do
+        local client = lsp.get_client_by_id(id)
+        if client and client.name == conf.name and client.server_capabilities.workspace then
+          return client
+        end
+      end
     end
 
     local get_client_from_cache = function(conf)
       if vim.tbl_count(clients) == 0 then
         return
       end
+      local client
 
-      for _, id in pairs(clients) do
-        local client = lsp.get_client_by_id(id)
-        if client and client.name == conf.name and client.server_capabilities.workspace then
-          return client
+      if clients[root_dir] then
+        client = client_id_iterator(clients[root_dir], conf)
+      else
+        for _, ids in pairs(clients) do
+          client = client_id_iterator(ids, conf)
+          if client then
+            break
+          end
         end
       end
-      return nil
+
+      return client
     end
 
     local new_config = make_config(root_dir)
@@ -265,7 +276,10 @@ function M.server_per_root_dir_manager(make_config)
         client.workspace_folders = {}
       end
       table.insert(client.workspace_folders, params.event.added[1])
-      clients[root_dir] = client.id
+      if not clients[root_dir] then
+        clients[root_dir] = {}
+      end
+      table.insert(clients[root_dir], client.id)
       return client.id
     end
 
@@ -296,6 +310,7 @@ function M.server_per_root_dir_manager(make_config)
     -- Sending rootDirectory and workspaceFolders as null is not explicitly
     -- codified in the spec. Certain servers crash if initialized with a NULL
     -- root directory.
+    print('here', single_file)
     if single_file then
       new_config.root_dir = nil
       new_config.workspace_folders = nil
@@ -307,7 +322,10 @@ function M.server_per_root_dir_manager(make_config)
       return
     end
 
-    clients[root_dir] = client_id
+    if not clients[root_dir] then
+      clients[root_dir] = {}
+    end
+    table.insert(clients[root_dir], client_id)
     return client_id
   end
 
