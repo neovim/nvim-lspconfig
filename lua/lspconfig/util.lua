@@ -310,7 +310,6 @@ function M.server_per_root_dir_manager(make_config)
     -- Sending rootDirectory and workspaceFolders as null is not explicitly
     -- codified in the spec. Certain servers crash if initialized with a NULL
     -- root directory.
-    print('here', single_file)
     if single_file then
       new_config.root_dir = nil
       new_config.workspace_folders = nil
