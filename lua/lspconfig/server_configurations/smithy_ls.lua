@@ -26,5 +26,5 @@ https://github.com/awslabs/smithy-language-server
     default_config = {
       root_dir = util.root_pattern(unpack(root_files)),
     },
-  }
+  },
 }
