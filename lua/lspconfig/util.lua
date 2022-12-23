@@ -230,6 +230,7 @@ end)()
 -- Returns a function(root_dir), which, when called with a root_dir it hasn't
 -- seen before, will call make_config(root_dir) and start a new client.
 function M.server_per_root_dir_manager(make_config)
+  -- a table store the root dir with clients in this dir
   local clients = {}
   local manager = {}
 
@@ -248,6 +249,7 @@ function M.server_per_root_dir_manager(make_config)
       end
     end
 
+    -- get client which support workspace from clients table
     local get_client_from_cache = function(conf)
       if vim.tbl_count(clients) == 0 then
         return
@@ -272,15 +274,17 @@ function M.server_per_root_dir_manager(make_config)
     local client = get_client_from_cache(new_config)
 
     if client then
+      -- if in single file mode just return this client id don't insert the new
+      -- root dir into the workspace_folders
       if single_file then
         return client.id
       end
-      local params = { uri = vim.uri_from_fname(root_dir), name = root_dir }
+      local params = lsp.util.make_workspace_params({ { uri = vim.uri_from_fname(root_dir), name = root_dir } }, { {} })
       client.rpc.notify('workspace/didChangeWorkspaceFolders', params)
       if not client.workspace_folders then
         client.workspace_folders = {}
       end
-      table.insert(client.workspace_folders, params)
+      table.insert(client.workspace_folders, params.event.added[1])
       if not clients[root_dir] then
         clients[root_dir] = {}
       end
