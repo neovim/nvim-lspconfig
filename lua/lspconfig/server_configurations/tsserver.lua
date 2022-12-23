@@ -26,7 +26,7 @@ return {
   },
   docs = {
     description = [[
-https://github.com/theia-ide/typescript-language-server
+https://github.com/typescript-language-server/typescript-language-server
 
 `typescript-language-server` depends on `typescript`. Both packages can be installed via `npm`:
 ```sh
