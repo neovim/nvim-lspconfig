@@ -113,8 +113,13 @@ local function make_client_info(client, fname)
   local uv = vim.loop
   local is_windows = uv.os_uname().version:match 'Windows'
   fname = vim.loop.fs_realpath(fname) or vim.fn.fnamemodify(vim.fn.resolve(fname), ':p')
+  if is_windows then
+    fname:gsub('%/', '%\\')
+  end
   local sep = is_windows and '\\' or '/'
-  local fname_parts = vim.split(fname, sep, { trimempty = true })
+  local fname_parts = vim.tbl_filter(function(v)
+    return v ~= ''
+  end, vim.split(fname, sep))
   if workspace_folders then
     for _, schema in pairs(workspace_folders) do
       local matched = true
