@@ -6497,7 +6497,7 @@ require'lspconfig'.smithy_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  <function 1>
+  root_pattern("smithy-build.json", "build.gradle", "build.gradle.kts", ".git")
   ```
   - `single_file_support` : 
   ```lua
