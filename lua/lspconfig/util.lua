@@ -243,7 +243,12 @@ function M.server_per_root_dir_manager(make_config)
         local client = lsp.get_client_by_id(id)
         -- if found the workspace field in server_capabilities the server support workspace
         -- if server not support the worskspace spawn a new server instance then.
-        if client and client.name == conf.name and client.server_capabilities.workspace then
+        if
+          client
+          and client.name == conf.name
+          and client.server_capabilities
+          and client.server_capabilities.workspace
+        then
           return client
         end
       end
