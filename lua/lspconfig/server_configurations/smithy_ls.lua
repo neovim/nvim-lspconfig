@@ -24,7 +24,7 @@ https://github.com/awslabs/smithy-language-server
 `Smithy Language Server`, A Language Server Protocol implementation for the Smithy IDL
 ]],
     default_config = {
-      root_dir = util.root_pattern(unpack(root_files)),
+      root_dir = [[root_pattern("smithy-build.json", "build.gradle", "build.gradle.kts", ".git")]],
     },
   },
 }
