@@ -36,5 +36,6 @@ require'lspconfig'.ruff_lsp.setup{
 ```
 
   ]],
+    root_dir = [[root_pattern("pyproject.toml", ".git")]],
   },
 }
