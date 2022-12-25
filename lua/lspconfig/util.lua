@@ -241,7 +241,12 @@ function M.server_per_root_dir_manager(make_config)
     local client_id_iterator = function(client_ids, conf)
       for _, id in ipairs(client_ids) do
         local client = lsp.get_client_by_id(id)
-        if client and client.name == conf.name and client.supports_method 'workspace/workspaceFolders' then
+        if
+          client
+          and client.name == conf.name
+          and client.supports_method
+          and client.supports_method 'workspace/workspaceFolders'
+        then
           return client
         end
       end
