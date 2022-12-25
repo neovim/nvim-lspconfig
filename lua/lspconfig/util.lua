@@ -285,6 +285,10 @@ function M.server_per_root_dir_manager(make_config)
       end
       local params = lsp.util.make_workspace_params({ { uri = vim.uri_from_fname(root_dir), name = root_dir } }, { {} })
       client.rpc.notify('workspace/didChangeWorkspaceFolders', params)
+      if not client.workspace_folders then
+        client.workspace_folders = {}
+      end
+      table.insert(client.workspace_folders, params.event.added[1])
       -- some server does not support dynamically adding or removing workspaces.
       -- when adding new workspace restart the server
       local timer = vim.loop.new_timer()
@@ -298,10 +302,6 @@ function M.server_per_root_dir_manager(make_config)
           end
         end)
       )
-      if not client.workspace_folders then
-        client.workspace_folders = {}
-      end
-      table.insert(client.workspace_folders, params.event.added[1])
       if not clients[root_dir] then
         clients[root_dir] = {}
       end
