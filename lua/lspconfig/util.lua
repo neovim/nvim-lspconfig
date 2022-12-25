@@ -244,8 +244,9 @@ function M.server_per_root_dir_manager(make_config)
         if
           client
           and client.name == conf.name
-          and client.supports_method
-          and client.supports_method 'workspace/workspaceFolders'
+          and client.config
+          and client.config.capabilities
+          and client.config.capabilities.workspace
         then
           return client
         end
