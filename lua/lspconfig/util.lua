@@ -350,7 +350,8 @@ function M.server_per_root_dir_manager(make_config)
       -- if in single file mode just return this client id don't insert the new
       -- root dir into the workspace_folders
       if single_file then
-        return client.id
+        lsp.buf_attach_client(bufnr, client.id)
+        return
       end
 
       if not client.initialized then
