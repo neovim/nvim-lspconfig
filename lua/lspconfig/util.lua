@@ -270,70 +270,8 @@ function M.server_per_root_dir_manager(make_config)
 
     local new_config = make_config(root_dir)
     local client = get_client_from_cache(new_config)
-    local start_new_client
 
-    local register_workspace_folders = function(client_instance)
-      local params = lsp.util.make_workspace_params({ { uri = vim.uri_from_fname(root_dir), name = root_dir } }, { {} })
-      client_instance.rpc.notify('workspace/didChangeWorkspaceFolders', params)
-      if not client_instance.workspace_folders then
-        client.workspace_folders = {}
-      end
-      table.insert(client_instance.workspace_folders, params.event.added[1])
-      if not clients[root_dir] then
-        clients[root_dir] = {}
-      end
-      table.insert(clients[root_dir], client_instance.id)
-    end
-
-    if client then
-      local server_support_workspace = function(client_instance)
-        if
-          client_instance.server_capabilities and client_instance.server_capabilities.workspace
-          -- according the lsp spec doc the server capability is optional
-          -- some servers not add this field. so use the workspace to check is enough?
-          -- and client_instance.server_capabilities.workspace.workspaceFolders
-        then
-          return true
-        end
-        return false
-      end
-      -- if in single file mode just return this client id don't insert the new
-      -- root dir into the workspace_folders
-      if single_file then
-        return client.id
-      end
-
-      if not client.initialized then
-        local timer = vim.loop.new_timer()
-        timer:start(
-          0,
-          10,
-          vim.schedule_wrap(function()
-            if client.initialized and not timer:is_closing() then
-              if server_support_workspace(client) then
-                lsp.buf_attach_client(bufnr, client.id)
-                register_workspace_folders(client)
-                --TODO(glepnir): some server does not support dynamically adding or removing workspaces.
-                -- like sumneko_lua, If the workspaces change, should restart the server.
-                -- How to know the server needs to be restarted? or just restart the server no
-                -- matter is what ???
-              end
-              timer:stop()
-              timer:close()
-            end
-          end)
-        )
-        return
-      end
-
-      if server_support_workspace(client) then
-        lsp.buf_attach_client(bufnr, client.id)
-        register_workspace_folders(client)
-        return
-      end
-    end
-
-    start_new_client = function()
+    local start_new_client = function()
       -- do nothing if the client is not enabled
       if new_config.enabled == false then
         return
@@ -378,6 +316,73 @@ function M.server_per_root_dir_manager(make_config)
         clients[root_dir] = {}
       end
       table.insert(clients[root_dir], client_id)
+    end
+
+    if client then
+      local register_workspace_folders = function(client_instance)
+        local params = lsp.util.make_workspace_params(
+          { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
+          { {} }
+        )
+        client_instance.rpc.notify('workspace/didChangeWorkspaceFolders', params)
+        if not client_instance.workspace_folders then
+          client.workspace_folders = {}
+        end
+        table.insert(client_instance.workspace_folders, params.event.added[1])
+        if not clients[root_dir] then
+          clients[root_dir] = {}
+        end
+        table.insert(clients[root_dir], client_instance.id)
+      end
+
+      local server_support_workspace = function(client_instance)
+        if
+          client_instance.server_capabilities and client_instance.server_capabilities.workspace
+          -- according the lsp spec doc the server capability is optional
+          -- some servers not add this field. so use the workspace to check is enough?
+          -- and client_instance.server_capabilities.workspace.workspaceFolders
+        then
+          return true
+        end
+        return false
+      end
+
+      -- if in single file mode just return this client id don't insert the new
+      -- root dir into the workspace_folders
+      if single_file then
+        return client.id
+      end
+
+      if not client.initialized then
+        local timer = vim.loop.new_timer()
+        timer:start(
+          0,
+          10,
+          vim.schedule_wrap(function()
+            if client.initialized and not timer:is_closing() then
+              if server_support_workspace(client) then
+                lsp.buf_attach_client(bufnr, client.id)
+                register_workspace_folders(client)
+                --TODO(glepnir): some server does not support dynamically adding or removing workspaces.
+                -- like sumneko_lua, If the workspaces change, should restart the server.
+                -- How to know the server needs to be restarted? or just restart the server no
+                -- matter is what ???
+              end
+              -- if not support workspace spawn a new one
+              start_new_client()
+              timer:stop()
+              timer:close()
+            end
+          end)
+        )
+        return
+      end
+
+      if server_support_workspace(client) then
+        lsp.buf_attach_client(bufnr, client.id)
+        register_workspace_folders(client)
+        return
+      end
     end
 
     start_new_client()
