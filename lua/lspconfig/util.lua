@@ -234,20 +234,14 @@ function M.server_per_root_dir_manager(make_config)
   local clients = {}
   local manager = {}
 
-  function manager.add(root_dir, single_file)
+  function manager.add(root_dir, single_file, bufnr)
     local client_id
     root_dir = M.path.sanitize(root_dir)
 
     local client_id_iterator = function(client_ids, conf)
       for _, id in ipairs(client_ids) do
         local client = lsp.get_client_by_id(id)
-        if
-          client
-          and client.name == conf.name
-          and client.config
-          and client.config.capabilities
-          and client.config.capabilities.workspace
-        then
+        if client and client.name == conf.name then
           return client
         end
       end
@@ -277,67 +271,124 @@ function M.server_per_root_dir_manager(make_config)
     local new_config = make_config(root_dir)
     local client = get_client_from_cache(new_config)
 
-    if client then
-      -- if in single file mode just return this client id don't insert the new
-      -- root dir into the workspace_folders
+    local start_new_client = function()
+      -- do nothing if the client is not enabled
+      if new_config.enabled == false then
+        return
+      end
+      if not new_config.cmd then
+        vim.notify(
+          string.format(
+            '[lspconfig] cmd not defined for %q. Manually set cmd in the setup {} call according to server_configurations.md, see :help lspconfig-index.',
+            new_config.name
+          ),
+          vim.log.levels.ERROR
+        )
+        return
+      end
+      new_config.on_exit = M.add_hook_before(new_config.on_exit, function()
+        clients[root_dir] = nil
+      end)
+
+      -- Launch the server in the root directory used internally by lspconfig, if otherwise unset
+      -- also check that the path exist
+      if not new_config.cmd_cwd and uv.fs_realpath(root_dir) then
+        new_config.cmd_cwd = root_dir
+      end
+
+      -- Sending rootDirectory and workspaceFolders as null is not explicitly
+      -- codified in the spec. Certain servers crash if initialized with a NULL
+      -- root directory.
       if single_file then
-        return client.id
+        new_config.root_dir = nil
+        new_config.workspace_folders = nil
       end
-      local params = lsp.util.make_workspace_params({ { uri = vim.uri_from_fname(root_dir), name = root_dir } }, { {} })
-      client.rpc.notify('workspace/didChangeWorkspaceFolders', params)
-      if not client.workspace_folders then
-        client.workspace_folders = {}
+      client_id = lsp.start_client(new_config)
+
+      -- Handle failures in start_client
+      if not client_id then
+        return
       end
-      table.insert(client.workspace_folders, params.event.added[1])
+
+      lsp.buf_attach_client(bufnr, client_id)
+
       if not clients[root_dir] then
         clients[root_dir] = {}
       end
-      table.insert(clients[root_dir], client.id)
-      return client.id
+      table.insert(clients[root_dir], client_id)
     end
 
-    -- do nothing if the client is not enabled
-    if new_config.enabled == false then
-      return
-    end
-    if not new_config.cmd then
-      vim.notify(
-        string.format(
-          '[lspconfig] cmd not defined for %q. Manually set cmd in the setup {} call according to server_configurations.md, see :help lspconfig-index.',
-          new_config.name
-        ),
-        vim.log.levels.ERROR
-      )
-      return
-    end
-    new_config.on_exit = M.add_hook_before(new_config.on_exit, function()
-      clients[root_dir] = nil
-    end)
+    if client then
+      local register_workspace_folders = function(client_instance)
+        local params = lsp.util.make_workspace_params(
+          { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
+          { {} }
+        )
+        for _, schema in ipairs(client_instance.workspace_folders or {}) do
+          if schema.name == params.event.added[1].name then
+            return
+          end
+        end
+        client_instance.rpc.notify('workspace/didChangeWorkspaceFolders', params)
+        if not client_instance.workspace_folders then
+          client.workspace_folders = {}
+        end
+        table.insert(client_instance.workspace_folders, params.event.added[1])
+        if not clients[root_dir] then
+          clients[root_dir] = {}
+        end
+        table.insert(clients[root_dir], client_instance.id)
+      end
 
-    -- Launch the server in the root directory used internally by lspconfig, if otherwise unset
-    -- also check that the path exist
-    if not new_config.cmd_cwd and uv.fs_realpath(root_dir) then
-      new_config.cmd_cwd = root_dir
+      local server_support_workspace = function(client_instance)
+        if
+          client_instance.server_capabilities and client_instance.server_capabilities.workspace
+          -- according the lsp spec doc the server capability is optional
+          -- some servers not add this field. so use the workspace to check is enough?
+          -- and client_instance.server_capabilities.workspace.workspaceFolders
+        then
+          return true
+        end
+        return false
+      end
+
+      -- if in single file mode just return this client id don't insert the new
+      -- root dir into the workspace_folders
+      if single_file then
+        lsp.buf_attach_client(bufnr, client.id)
+        return
+      end
+
+      if not client.initialized then
+        local timer = vim.loop.new_timer()
+        timer:start(
+          0,
+          10,
+          vim.schedule_wrap(function()
+            if client.initialized and not timer:is_closing() then
+              if server_support_workspace(client) then
+                lsp.buf_attach_client(bufnr, client.id)
+                register_workspace_folders(client)
+              else
+                -- if not support workspace spawn a new one
+                start_new_client()
+              end
+              timer:stop()
+              timer:close()
+            end
+          end)
+        )
+        return
+      end
+
+      if server_support_workspace(client) then
+        lsp.buf_attach_client(bufnr, client.id)
+        register_workspace_folders(client)
+        return
+      end
     end
 
-    -- Sending rootDirectory and workspaceFolders as null is not explicitly
-    -- codified in the spec. Certain servers crash if initialized with a NULL
-    -- root directory.
-    if single_file then
-      new_config.root_dir = nil
-      new_config.workspace_folders = nil
-    end
-    client_id = lsp.start_client(new_config)
-
-    -- Handle failures in start_client
-    if not client_id then
-      return
-    end
-
-    if not clients[root_dir] then
-      clients[root_dir] = {}
-    end
-    table.insert(clients[root_dir], client_id)
+    start_new_client()
     return client_id
   end
 
