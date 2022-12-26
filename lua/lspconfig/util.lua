@@ -320,6 +320,11 @@ function M.server_per_root_dir_manager(make_config)
 
     if client then
       local register_workspace_folders = function(client_instance)
+        for _, schema in ipairs(client_instance.workspace_folders or {}) do
+          if schema.name == root_dir then
+            return
+          end
+        end
         local params = lsp.util.make_workspace_params(
           { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
           { {} }
