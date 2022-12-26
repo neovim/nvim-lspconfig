@@ -369,13 +369,10 @@ function M.server_per_root_dir_manager(make_config)
               if server_support_workspace(client) then
                 lsp.buf_attach_client(bufnr, client.id)
                 register_workspace_folders(client)
-                --TODO(glepnir): some server does not support dynamically adding or removing workspaces.
-                -- like sumneko_lua, If the workspaces change, should restart the server.
-                -- How to know the server needs to be restarted? or just restart the server no
-                -- matter is what ???
+              else
+                -- if not support workspace spawn a new one
+                start_new_client()
               end
-              -- if not support workspace spawn a new one
-              start_new_client()
               timer:stop()
               timer:close()
             end

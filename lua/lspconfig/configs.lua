@@ -132,8 +132,7 @@ function configs.__newindex(t, config_name, config_def)
           return
         end
         local pseudo_root = #bufname == 0 and uv.cwd() or util.path.dirname(util.path.sanitize(bufname))
-        local client_id = M.manager.add(pseudo_root, true)
-        lsp.buf_attach_client(api.nvim_get_current_buf(), client_id)
+        M.manager.add(pseudo_root, true, api.nvim_get_current_buf())
       end
     end
 
