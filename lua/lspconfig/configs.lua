@@ -235,7 +235,6 @@ function configs.__newindex(t, config_name, config_def)
         return
       end
 
-      local id
       local root_dir
 
       local bufname = api.nvim_buf_get_name(bufnr)
@@ -253,14 +252,10 @@ function configs.__newindex(t, config_name, config_def)
       end
 
       if root_dir then
-        id = manager.add(root_dir, false)
+        manager.add(root_dir, false, bufnr)
       elseif config.single_file_support then
         local pseudo_root = #bufname == 0 and uv.cwd() or util.path.dirname(buf_path)
-        id = manager.add(pseudo_root, true)
-      end
-
-      if id then
-        lsp.buf_attach_client(bufnr, id)
+        manager.add(pseudo_root, true, bufnr)
       end
     end
 
