@@ -318,80 +318,63 @@ function M.server_per_root_dir_manager(make_config)
       table.insert(clients[root_dir], client_id)
     end
 
-    if client then
-      local register_workspace_folders = function(client_instance)
-        local params = {
-          event = {
-            added = { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
-            removed = {},
-          },
-        }
-        for _, schema in ipairs(client_instance.workspace_folders or {}) do
-          if schema.name == root_dir then
-            return
-          end
-        end
-        client_instance.rpc.notify('workspace/didChangeWorkspaceFolders', params)
-        if not client_instance.workspace_folders then
-          client.workspace_folders = {}
-        end
-        table.insert(client_instance.workspace_folders, params.event.added[1])
-        if not clients[root_dir] then
-          clients[root_dir] = {}
-        end
-        table.insert(clients[root_dir], client_instance.id)
-      end
-
-      local server_support_workspace = function(client_instance)
-        if
-          client_instance.server_capabilities and client_instance.server_capabilities.workspace
-          -- according the lsp spec doc the server capability is optional
-          -- some servers not add this field. so use the workspace to check is enough?
-          -- and client_instance.server_capabilities.workspace.workspaceFolders
-        then
-          return true
-        end
-        return false
-      end
-
-      -- if in single file mode just return this client id don't insert the new
-      -- root dir into the workspace_folders
-      if single_file then
-        lsp.buf_attach_client(bufnr, client.id)
-        return
-      end
-
-      if not client.initialized then
-        local timer = vim.loop.new_timer()
-        timer:start(
-          0,
-          10,
-          vim.schedule_wrap(function()
-            if client.initialized and not timer:is_closing() then
-              if server_support_workspace(client) then
-                lsp.buf_attach_client(bufnr, client.id)
-                register_workspace_folders(client)
-              else
-                -- if not support workspace spawn a new one
-                start_new_client()
-              end
-              timer:stop()
-              timer:close()
-            end
-          end)
-        )
-        return
-      end
-
-      if server_support_workspace(client) then
-        lsp.buf_attach_client(bufnr, client.id)
-        register_workspace_folders(client)
-        return
-      end
+    if not client then
+      start_new_client()
+      return
     end
 
-    start_new_client()
-    return client_id
+    --TODO(glepnir): do we need check language server support the workspaceFOlders?
+    --some server support it but the it not show in server_capabilities
+    local register_workspace_folders = function(client_instance)
+      local params = {
+        event = {
+          added = { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
+          removed = {},
+        },
+      }
+      for _, schema in ipairs(client_instance.workspace_folders or {}) do
+        if schema.name == root_dir then
+          return
+        end
+      end
+      client_instance.rpc.notify('workspace/didChangeWorkspaceFolders', params)
+      if not client_instance.workspace_folders then
+        client.workspace_folders = {}
+      end
+      table.insert(client_instance.workspace_folders, params.event.added[1])
+      if not clients[root_dir] then
+        clients[root_dir] = {}
+      end
+      table.insert(clients[root_dir], client_instance.id)
+    end
+
+    -- if in single file mode just return this client id don't insert the new
+    -- root dir into the workspace_folders
+    if single_file then
+      lsp.buf_attach_client(bufnr, client.id)
+      return
+    end
+
+    --this for reload from session if have mulitple same filetype buffers in session.
+    --first buffer spawn a new client second buffer need wait for the client initialized
+    if not client.initialized then
+      local timer = vim.loop.new_timer()
+      timer:start(
+        0,
+        10,
+        vim.schedule_wrap(function()
+          if client.initialized and not timer:is_closing() then
+            lsp.buf_attach_client(bufnr, client.id)
+            register_workspace_folders(client)
+            timer:stop()
+            timer:close()
+          end
+        end)
+      )
+      return
+    end
+    lsp.buf_attach_client(bufnr, client.id)
+    register_workspace_folders(client)
   end
 
   function manager.clients()
