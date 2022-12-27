@@ -271,6 +271,56 @@ function M.server_per_root_dir_manager(make_config)
     local new_config = make_config(root_dir)
     local client = get_client_from_cache(new_config)
 
+    --TODO(glepnir): do we need check language server support the workspaceFOlders?
+    --some server support it but the it not show in server_capabilities
+    local register_workspace_folders = function(client_instance)
+      local params = {
+        event = {
+          added = { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
+          removed = {},
+        },
+      }
+      for _, schema in ipairs(client_instance.workspace_folders or {}) do
+        if schema.name == root_dir then
+          return
+        end
+      end
+      client_instance.rpc.notify('workspace/didChangeWorkspaceFolders', params)
+      if not client_instance.workspace_folders then
+        client.workspace_folders = {}
+      end
+      table.insert(client_instance.workspace_folders, params.event.added[1])
+      if not clients[root_dir] then
+        clients[root_dir] = {}
+      end
+      table.insert(clients[root_dir], client_instance.id)
+    end
+
+    local attach_after_client_initialized = function(buffer_nr, client_instance)
+      local timer = vim.loop.new_timer()
+      timer:start(
+        0,
+        10,
+        vim.schedule_wrap(function()
+          if client_instance.initialized and not timer:is_closing() then
+            lsp.buf_attach_client(buffer_nr, client_instance.id)
+            register_workspace_folders(client_instance)
+            timer:stop()
+            timer:close()
+          end
+        end)
+      )
+    end
+
+    if client and clients[root_dir] then
+      if client.initialized then
+        lsp.buf_attach_client(bufnr, client.id)
+      else
+        attach_after_client_initialized(bufnr, client)
+      end
+      return
+    end
+
     local start_new_client = function()
       -- do nothing if the client is not enabled
       if new_config.enabled == false then
@@ -323,31 +373,6 @@ function M.server_per_root_dir_manager(make_config)
       return
     end
 
-    --TODO(glepnir): do we need check language server support the workspaceFOlders?
-    --some server support it but the it not show in server_capabilities
-    local register_workspace_folders = function(client_instance)
-      local params = {
-        event = {
-          added = { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
-          removed = {},
-        },
-      }
-      for _, schema in ipairs(client_instance.workspace_folders or {}) do
-        if schema.name == root_dir then
-          return
-        end
-      end
-      client_instance.rpc.notify('workspace/didChangeWorkspaceFolders', params)
-      if not client_instance.workspace_folders then
-        client.workspace_folders = {}
-      end
-      table.insert(client_instance.workspace_folders, params.event.added[1])
-      if not clients[root_dir] then
-        clients[root_dir] = {}
-      end
-      table.insert(clients[root_dir], client_instance.id)
-    end
-
     -- if in single file mode just return this client id don't insert the new
     -- root dir into the workspace_folders
     if single_file then
@@ -358,21 +383,10 @@ function M.server_per_root_dir_manager(make_config)
     --this for reload from session if have mulitple same filetype buffers in session.
     --first buffer spawn a new client second buffer need wait for the client initialized
     if not client.initialized then
-      local timer = vim.loop.new_timer()
-      timer:start(
-        0,
-        10,
-        vim.schedule_wrap(function()
-          if client.initialized and not timer:is_closing() then
-            lsp.buf_attach_client(bufnr, client.id)
-            register_workspace_folders(client)
-            timer:stop()
-            timer:close()
-          end
-        end)
-      )
+      attach_after_client_initialized(bufnr, client)
       return
     end
+
     lsp.buf_attach_client(bufnr, client.id)
     register_workspace_folders(client)
   end
