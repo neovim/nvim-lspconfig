@@ -380,7 +380,7 @@ function M.server_per_root_dir_manager(make_config)
       return
     end
 
-    --this for reload from session if have mulitple same filetype buffers in session.
+    --this for reload from session if have multiple same filetype buffers in session.
     --first buffer spawn a new client second buffer need wait for the client initialized
     if not client.initialized then
       attach_after_client_initialized(bufnr, client)
