@@ -2,6 +2,7 @@ local util = require 'lspconfig.util'
 
 local root_files = {
   'pyproject.toml',
+  'ruff.toml',
 }
 
 return {
@@ -26,8 +27,8 @@ Extra CLI arguments for `ruff` can be provided via
 
 ```lua
 require'lspconfig'.ruff_lsp.setup{
-  settings = {
-    ruff_lsp = {
+  init_options = {
+    settings = {
       -- Any extra CLI arguments for `ruff` go here.
       args = {},
     }
@@ -36,6 +37,6 @@ require'lspconfig'.ruff_lsp.setup{
 ```
 
   ]],
-    root_dir = [[root_pattern("pyproject.toml", ".git")]],
+    root_dir = [[root_pattern("pyproject.toml", "ruff.toml", ".git")]],
   },
 }
