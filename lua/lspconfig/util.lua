@@ -393,10 +393,12 @@ function M.server_per_root_dir_manager(make_config)
 
   function manager.clients()
     local res = {}
-    for _, id in pairs(clients) do
-      local client = lsp.get_client_by_id(id)
-      if client then
-        table.insert(res, client)
+    for _, client_ids in pairs(clients) do
+      for _, id in pairs(client_ids) do
+        local client = lsp.get_client_by_id(id)
+        if client then
+          table.insert(res, client)
+        end
       end
     end
     return res
