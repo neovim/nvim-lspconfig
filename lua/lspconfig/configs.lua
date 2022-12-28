@@ -60,32 +60,49 @@ function configs.__newindex(t, config_name, config_def)
       pcall(util.on_setup, config, user_config)
     end
 
-    if config.autostart == true then
-      local event
-      local pattern
-      if config.filetypes then
-        event = 'FileType'
-        pattern = table.concat(config.filetypes, ',')
-      else
-        event = 'BufReadPost'
-        pattern = '*'
+    local register_autocmd = function()
+      if config.autostart == true then
+        local event
+        local pattern
+        if config.filetypes then
+          event = 'FileType'
+          pattern = table.concat(config.filetypes, ',')
+        else
+          event = 'BufReadPost'
+          pattern = '*'
+        end
+        api.nvim_create_autocmd(event, {
+          pattern = pattern,
+          callback = function()
+            M.manager.try_add()
+          end,
+          group = lsp_group,
+          desc = string.format(
+            'Checks whether server %s should start a new instance or attach to an existing one.',
+            config.name
+          ),
+        })
       end
-      api.nvim_create_autocmd(event, {
-        pattern = pattern,
-        callback = function()
-          M.manager.try_add()
-        end,
-        group = lsp_group,
-        desc = string.format(
-          'Checks whether server %s should start a new instance or attach to an existing one.',
-          config.name
-        ),
-      })
     end
+
+    register_autocmd()
+
+    api.nvim_create_autocmd('LspDetach', {
+      callback = function()
+        pcall(api.nvim_del_augroup_by_name, 'lspconfig')
+        lsp_group = nil
+      end,
+      desc = 'remove lspconfig augroup',
+    })
 
     local get_root_dir = config.root_dir
 
     function M.launch()
+      if not lsp_group then
+        lsp_group = api.nvim_create_augroup('lspconfig', { clear = false })
+        register_autocmd()
+      end
+
       local root_dir
       if get_root_dir then
         local bufnr = api.nvim_get_current_buf()
