@@ -34,6 +34,6 @@ settings = {
 
 The `contributes.configuration.properties` section of `raku_navigator`'s `package.json` has all available configuration settings. All
 settings have a reasonable default, but, at minimum, you may want to point `raku_navigator` at your `raku_tidy` and `raku_critic` configurations.
-]]   ,
+]],
   },
 }
