@@ -6126,8 +6126,8 @@ Extra CLI arguments for `ruff` can be provided via
 
 ```lua
 require'lspconfig'.ruff_lsp.setup{
-  settings = {
-    ruff_lsp = {
+  init_options = {
+    settings = {
       -- Any extra CLI arguments for `ruff` go here.
       args = {},
     }
