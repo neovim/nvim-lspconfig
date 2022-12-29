@@ -72,8 +72,8 @@ function configs.__newindex(t, config_name, config_def)
       end
       api.nvim_create_autocmd(event, {
         pattern = pattern,
-        callback = function()
-          M.manager.try_add()
+        callback = function(opt)
+          M.manager.try_add(opt.buf)
         end,
         group = lsp_group,
         desc = string.format(

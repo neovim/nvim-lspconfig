@@ -304,7 +304,9 @@ function M.server_per_root_dir_manager(make_config)
         vim.schedule_wrap(function()
           if client_instance.initialized and not timer:is_closing() then
             lsp.buf_attach_client(buffer_nr, client_instance.id)
-            register_workspace_folders(client_instance)
+            if not single_file then
+              register_workspace_folders(client_instance)
+            end
             timer:stop()
             timer:close()
           end
