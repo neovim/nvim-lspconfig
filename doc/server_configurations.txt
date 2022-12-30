@@ -3090,6 +3090,14 @@ require'lspconfig'.hie.setup{}
 https://github.com/haskell/haskell-language-server
 
 Haskell Language Server
+
+If you are using HLS 1.9.0.0, enable the language server to launch on Cabal files as well:
+
+```lua
+require('lspconfig')['hls'].setup{
+  filetypes = { 'haskell', 'lhaskell', 'cabal' },
+}
+```
     
 
 
@@ -3126,6 +3134,7 @@ require'lspconfig'.hls.setup{}
   ```lua
   {
     haskell = {
+      cabalFormattingProvider = "cabalfmt",
       formattingProvider = "ormolu"
     }
   }
