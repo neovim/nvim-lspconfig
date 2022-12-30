@@ -300,14 +300,14 @@ function M.server_per_root_dir_manager(make_config)
       table.insert(client_instance.workspace_folders, params.event.added[1])
     end
 
-    local attach_after_client_initialized = function(buffer_nr, client_instance)
+    local attach_after_client_initialized = function(client_instance)
       local timer = vim.loop.new_timer()
       timer:start(
         0,
         10,
         vim.schedule_wrap(function()
           if client_instance.initialized and not timer:is_closing() then
-            lsp.buf_attach_client(buffer_nr, client_instance.id)
+            lsp.buf_attach_client(bufnr, client_instance.id)
             if not single_file then
               register_workspace_folders(client_instance)
             end
@@ -327,7 +327,7 @@ function M.server_per_root_dir_manager(make_config)
         end
         register_to_clients(client.id)
       else
-        attach_after_client_initialized(bufnr, client)
+        attach_after_client_initialized(client)
       end
       return
     end
@@ -381,7 +381,6 @@ function M.server_per_root_dir_manager(make_config)
     end
 
     lsp.buf_attach_client(bufnr, client_id)
-    register_workspace_folders(lsp.get_client_by_id(client_id))
     register_to_clients(client_id)
   end
 
