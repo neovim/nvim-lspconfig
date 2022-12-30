@@ -235,7 +235,6 @@ function M.server_per_root_dir_manager(make_config)
   local manager = {}
 
   function manager.add(root_dir, single_file, bufnr)
-    local client_id
     root_dir = M.path.sanitize(root_dir)
 
     local client_id_iterator = function(client_ids, conf)
@@ -244,6 +243,15 @@ function M.server_per_root_dir_manager(make_config)
         if client and client.name == conf.name then
           return client
         end
+      end
+    end
+
+    local register_to_clients = function(id)
+      if not clients[root_dir] then
+        clients[root_dir] = {}
+      end
+      if not vim.tbl_contains(clients[root_dir], id) then
+        table.insert(clients[root_dir], id)
       end
     end
 
@@ -287,26 +295,23 @@ function M.server_per_root_dir_manager(make_config)
       end
       client_instance.rpc.notify('workspace/didChangeWorkspaceFolders', params)
       if not client_instance.workspace_folders then
-        client.workspace_folders = {}
+        client_instance.workspace_folders = {}
       end
       table.insert(client_instance.workspace_folders, params.event.added[1])
-      if not clients[root_dir] then
-        clients[root_dir] = {}
-      end
-      table.insert(clients[root_dir], client_instance.id)
     end
 
-    local attach_after_client_initialized = function(buffer_nr, client_instance)
+    local attach_after_client_initialized = function(client_instance)
       local timer = vim.loop.new_timer()
       timer:start(
         0,
         10,
         vim.schedule_wrap(function()
           if client_instance.initialized and not timer:is_closing() then
-            lsp.buf_attach_client(buffer_nr, client_instance.id)
+            lsp.buf_attach_client(bufnr, client_instance.id)
             if not single_file then
               register_workspace_folders(client_instance)
             end
+            register_to_clients(client_instance.id)
             timer:stop()
             timer:close()
           end
@@ -314,15 +319,20 @@ function M.server_per_root_dir_manager(make_config)
       )
     end
 
-    if client and clients[root_dir] then
+    if client then
       if client.initialized then
         lsp.buf_attach_client(bufnr, client.id)
+        if not single_file then
+          register_workspace_folders(client)
+        end
+        register_to_clients(client.id)
       else
-        attach_after_client_initialized(bufnr, client)
+        attach_after_client_initialized(client)
       end
       return
     end
 
+    local client_id
     local start_new_client = function()
       -- do nothing if the client is not enabled
       if new_config.enabled == false then
@@ -339,7 +349,11 @@ function M.server_per_root_dir_manager(make_config)
         return
       end
       new_config.on_exit = M.add_hook_before(new_config.on_exit, function()
-        clients[root_dir] = nil
+        for k, v in pairs(clients[root_dir]) do
+          if v == client_id then
+            table.remove(clients[root_dir], k)
+          end
+        end
       end)
 
       -- Launch the server in the root directory used internally by lspconfig, if otherwise unset
@@ -356,41 +370,18 @@ function M.server_per_root_dir_manager(make_config)
         new_config.workspace_folders = nil
       end
       client_id = lsp.start_client(new_config)
-
-      -- Handle failures in start_client
-      if not client_id then
-        return
-      end
-
-      lsp.buf_attach_client(bufnr, client_id)
-
-      if not clients[root_dir] then
-        clients[root_dir] = {}
-      end
-      table.insert(clients[root_dir], client_id)
     end
 
     if not client then
       start_new_client()
+    end
+
+    if not client_id then
       return
     end
 
-    -- if in single file mode just return this client id don't insert the new
-    -- root dir into the workspace_folders
-    if single_file then
-      lsp.buf_attach_client(bufnr, client.id)
-      return
-    end
-
-    --this for reload from session if have multiple same filetype buffers in session.
-    --first buffer spawn a new client second buffer need wait for the client initialized
-    if not client.initialized then
-      attach_after_client_initialized(bufnr, client)
-      return
-    end
-
-    lsp.buf_attach_client(bufnr, client.id)
-    register_workspace_folders(client)
+    lsp.buf_attach_client(bufnr, client_id)
+    register_to_clients(client_id)
   end
 
   function manager.clients()
