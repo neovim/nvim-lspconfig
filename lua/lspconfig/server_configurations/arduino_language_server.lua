@@ -4,6 +4,9 @@ return {
   default_config = {
     filetypes = { 'arduino' },
     root_dir = util.root_pattern '*.ino',
+    cmd = {
+      'arduino-language-server',
+    },
   },
   docs = {
     description = [[
@@ -26,35 +29,53 @@ instructions](https://arduino.github.io/arduino-cli/latest/getting-started/#crea
 for generating a configuration file if you haven't done so already, and make
 sure you [install any relevant platforms
 libraries](https://arduino.github.io/arduino-cli/latest/getting-started/#install-the-core-for-your-board).
-Make sure to save the full path to the created `arduino-cli.yaml` file for later.
 
 The language server also requires `clangd` to be installed. Follow [these
 installation instructions](https://clangd.llvm.org/installation) for your
 platform.
 
-Next, you will need to decide which FQBN to use.
-To identify the available FQBNs for boards you currently have connected, you may use the `arduino-cli` command, like so:
+If you don't have a sketch yet create one.
+
+```sh
+$ arduino-cli sketch new test
+$ cd  test
+```
+
+You will need a `sketch.json` file in order for the language server to understand your project. It will also save you passing options to `arduino-cli` each time you compile or upload a file. You can generate the file like using the following commands.
+
+
+First gather some information about your board. Make sure your board is connected and run the following:
 
 ```sh
 $ arduino-cli board list
 Port         Protocol Type              Board Name  FQBN            Core
 /dev/ttyACM0 serial   Serial Port (USB) Arduino Uno arduino:avr:uno arduino:avr
-                                                    ^^^^^^^^^^^^^^^
 ```
 
-After all dependencies are installed you'll need to set the command for the
-language server in your setup:
+Then generate the file:
 
-```lua
-require'lspconfig'.arduino_language_server.setup {
-  cmd = {
-    "arduino-language-server",
-    "-cli-config", "/path/to/arduino-cli.yaml",
-    "-fqbn", "arduino:avr:uno",
-    "-cli", "arduino-cli",
-    "-clangd", "clangd"
+```sh
+arduino-cli board attach -p /dev/ttyACM0 test.ino
+```
+
+The resulting file should like like this:
+
+```json
+{
+  "cpu": {
+    "fqbn": "arduino:avr:uno",
+    "name": "Arduino Uno",
+    "port": "serial:///dev/ttyACM0"
   }
 }
+```
+
+Your folder structure should look like this:
+
+```
+.
+├── test.ino
+└── sketch.json
 ```
 
 For further instruction about configuration options, run `arduino-language-server --help`.
