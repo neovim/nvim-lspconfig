@@ -23,6 +23,7 @@ return {
       return util.root_pattern 'tsconfig.json'(fname)
         or util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
     end,
+    single_file_support = true,
   },
   docs = {
     description = [[
