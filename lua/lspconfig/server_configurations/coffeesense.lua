@@ -11,7 +11,7 @@ return {
   default_config = {
     cmd = cmd,
     filetypes = { 'coffee' },
-    root_dir = util.root_pattern('package.json'),
+    root_dir = util.root_pattern 'package.json',
     single_file_support = true,
   },
   docs = {
