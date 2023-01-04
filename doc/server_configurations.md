@@ -7947,6 +7947,10 @@ require'lspconfig'.tsserver.setup{}
   ```lua
   root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
   ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## turtle_ls
