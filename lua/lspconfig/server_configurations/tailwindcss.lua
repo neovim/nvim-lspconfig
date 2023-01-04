@@ -105,10 +105,6 @@ return {
     end,
     root_dir = function(fname)
       return util.root_pattern('tailwind.config.js', 'tailwind.config.ts')(fname)
-        or util.root_pattern('postcss.config.js', 'postcss.config.ts')(fname)
-        or util.find_package_json_ancestor(fname)
-        or util.find_node_modules_ancestor(fname)
-        or util.find_git_ancestor(fname)
     end,
   },
   docs = {
@@ -121,7 +117,7 @@ npm install -g @tailwindcss/language-server
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', 'node_modules', '.git')]],
+      root_dir = [[root_pattern('tailwind.config.js', 'tailwind.config.ts')]],
     },
   },
 }
