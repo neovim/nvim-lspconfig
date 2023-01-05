@@ -1,10 +1,19 @@
 local util = require 'lspconfig.util'
 
+local language_id_mapping = {
+  tf = 'terraform',
+  tfvars = 'terraform-vars',
+}
+
 return {
   default_config = {
     cmd = { 'terraform-ls', 'serve' },
     filetypes = { 'terraform' },
-    root_dir = util.root_pattern('.terraform', '.git'),
+    root_dir = util.root_pattern('*.tf', '*.tfvars'),
+    single_file_support = true,
+    get_language_id = function(_, filetype)
+      return language_id_mapping[filetype] or filetype
+    end,
   },
   docs = {
     description = [[
@@ -36,7 +45,7 @@ choice:
   - less stability (due to reliance on Terraform's own internal packages)
 ]],
     default_config = {
-      root_dir = [[root_pattern(".terraform", ".git")]],
+      root_dir = [[root_pattern("*.tf", "*.tfvars")]],
     },
   },
 }
