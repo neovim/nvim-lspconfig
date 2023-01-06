@@ -202,7 +202,7 @@ return function()
   end
 
   -- insert the tips at the top of window
-  table.insert(buf_lines, 'Quit[q]  ShowDoc[tab]')
+  table.insert(buf_lines, 'Server Doc <TAB> use q or <esc> to quit')
 
   local header = {
     '',
@@ -305,13 +305,18 @@ return function()
     syn match LspInfoList /\k\+/ contained
   ]]
 
-  api.nvim_buf_add_highlight(bufnr, 0, 'LspInfoTip', 0, 1, 8)
-  api.nvim_buf_add_highlight(bufnr, 0, 'LspInfoTip', 0, 10, -1)
+  api.nvim_buf_add_highlight(bufnr, 0, 'LspInfoTip', 0, 0, -1)
 
   local function show_doc()
     local lines = {}
     for _, client in pairs(buf_clients) do
       local config = require('lspconfig.configs')[client.name]
+      local desc = vim.tbl_get(config, 'document_config', 'docs', 'description')
+      vim.list_extend(lines, vim.split(desc, '\n'))
+      table.insert(lines, '')
+    end
+
+    for _, config in pairs(other_matching_configs) do
       local desc = vim.tbl_get(config, 'document_config', 'docs', 'description')
       vim.list_extend(lines, vim.split(desc, '\n'))
       table.insert(lines, '')
@@ -324,11 +329,14 @@ return function()
     vim.wo[info.win_id].conceallevel = 2
     vim.bo[info.bufnr].syntax = 'on'
 
-    vim.keymap.set('n', 'q', function()
+    local close_doc_win = function()
       if api.nvim_win_is_valid(info.win_id) then
         api.nvim_win_close(info.win_id, true)
       end
-    end, { buffer = info.bufnr })
+    end
+
+    vim.keymap.set('n', 'q', close_doc_win, { buffer = info.bufnr })
+    vim.keymap.set('n', '<ESC>', close_doc_win, { buffer = info.bufnr })
   end
 
   vim.keymap.set('n', '<TAB>', function()
