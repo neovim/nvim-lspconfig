@@ -268,7 +268,7 @@ return function()
 
   local function close()
     api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-    if api.nvim_buf_is_valid(bufnr) then
+    if api.nvim_buf_is_valid(bufnr) and api.nvim_buf_is_loaded(bufnr) then
       api.nvim_buf_delete(bufnr, { force = true })
     end
     if api.nvim_win_is_valid(win_id) then
@@ -339,7 +339,5 @@ return function()
     vim.keymap.set('n', '<ESC>', close_doc_win, { buffer = info.bufnr })
   end
 
-  vim.keymap.set('n', '<TAB>', function()
-    show_doc()
-  end, { buffer = true, nowait = true })
+  vim.keymap.set('n', '<TAB>', show_doc, { buffer = true, nowait = true })
 end
