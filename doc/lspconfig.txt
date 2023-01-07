@@ -237,7 +237,7 @@ configuration entry, such as `cmd`.
 
 >
   local lspconfig = require 'lspconfig'
-  lspconfig.util.on_setup = util.add_hook_before(lspconfig.util.on_setup, function(config)
+  lspconfig.util.on_setup = lspconfig.util.add_hook_before(lspconfig.util.on_setup, function(config)
     if some_condition and config.name == "clangd" then
       local custom_server_prefix = "/my/custom/server/prefix"
       config.cmd = { custom_server_prefix .. "/bin/clangd" }
