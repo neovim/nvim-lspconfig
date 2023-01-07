@@ -33,6 +33,7 @@ return {
       return util.find_git_ancestor(fname)
     end,
     single_file_support = true,
+    new_folder_restart = true,
     log_level = vim.lsp.protocol.MessageType.Warning,
     settings = { Lua = { telemetry = { enable = false } } },
   },

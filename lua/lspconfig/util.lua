@@ -279,9 +279,12 @@ function M.server_per_root_dir_manager(make_config)
     local new_config = make_config(root_dir)
     local client = get_client_from_cache(new_config)
 
-    --TODO(glepnir): do we need check language server support the workspaceFOlders?
-    --some server support it but the it not show in server_capabilities
     local register_workspace_folders = function(client_instance)
+      if single_file then
+        register_to_clients(client_instance.id)
+        return
+      end
+
       local params = {
         event = {
           added = { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
@@ -298,6 +301,27 @@ function M.server_per_root_dir_manager(make_config)
         client_instance.workspace_folders = {}
       end
       table.insert(client_instance.workspace_folders, params.event.added[1])
+      if client_instance.config.new_folder_restart then
+        client_instance.stop()
+        local attached_buffers = client_instance.attached_buffers
+        new_config.workspace_folders = client_instance.workspace_folders
+        local id = lsp.start_client(new_config)
+        for buf in pairs(attached_buffers) do
+          lsp.buf_attach_client(buf, id)
+        end
+        --remove id from cache
+        for _, client_ids in pairs(clients) do
+          for k, v in pairs(client_ids) do
+            if v == client_instance.id then
+              table.remove(client_ids, k)
+              table.insert(client_ids, id)
+            end
+          end
+        end
+        register_to_clients(id)
+        return
+      end
+      register_to_clients(client_instance.id)
     end
 
     local attach_after_client_initialized = function(client_instance)
@@ -308,10 +332,7 @@ function M.server_per_root_dir_manager(make_config)
         vim.schedule_wrap(function()
           if client_instance.initialized and not timer:is_closing() then
             lsp.buf_attach_client(bufnr, client_instance.id)
-            if not single_file then
-              register_workspace_folders(client_instance)
-            end
-            register_to_clients(client_instance.id)
+            register_workspace_folders(client_instance)
             timer:stop()
             timer:close()
           end
@@ -322,10 +343,7 @@ function M.server_per_root_dir_manager(make_config)
     if client then
       if client.initialized then
         lsp.buf_attach_client(bufnr, client.id)
-        if not single_file then
-          register_workspace_folders(client)
-        end
-        register_to_clients(client.id)
+        register_workspace_folders(client)
       else
         attach_after_client_initialized(client)
       end
