@@ -202,7 +202,7 @@ return function()
   end
 
   -- insert the tips at the top of window
-  table.insert(buf_lines, 'Server Doc <TAB> use q or <esc> to quit')
+  table.insert(buf_lines, 'Press q or <Esc> to close this window. Press <Tab> to view server documentation.')
 
   local header = {
     '',
