@@ -202,7 +202,7 @@ return function()
   end
 
   -- insert the tips at the top of window
-  table.insert(buf_lines, 'Press q or <Esc> to close this window. Press <Tab> to view server documentation.')
+  table.insert(buf_lines, 'Press q or <Esc> to close this window. Press <Tab> to view server doc.')
 
   local header = {
     '',
@@ -309,25 +309,46 @@ return function()
 
   local function show_doc()
     local lines = {}
+    local function append_lines(config)
+      local desc = vim.tbl_get(config, 'document_config', 'docs', 'description')
+      if desc then
+        table.insert(lines, string.format('# %s', config.name))
+        table.insert(lines, '')
+        vim.list_extend(lines, vim.split(desc, '\n'))
+        table.insert(lines, '')
+      end
+    end
+
+    table.insert(lines, 'Press <Tab> to close server info.')
+    table.insert(lines, '')
+
     for _, client in pairs(buf_clients) do
       local config = require('lspconfig.configs')[client.name]
-      local desc = vim.tbl_get(config, 'document_config', 'docs', 'description')
-      vim.list_extend(lines, vim.split(desc, '\n'))
-      table.insert(lines, '')
+      if config then
+        append_lines(config)
+      end
     end
 
     for _, config in pairs(other_matching_configs) do
-      local desc = vim.tbl_get(config, 'document_config', 'docs', 'description')
-      vim.list_extend(lines, vim.split(desc, '\n'))
-      table.insert(lines, '')
+      if config then
+        if config then
+          append_lines(config)
+        end
+      end
     end
 
     local info = windows.percentage_range_window(0.8, 0.7)
+    lines = indent_lines(lines, ' ')
+    lines = vim.lsp.util._trim(lines, {})
     api.nvim_buf_set_lines(info.bufnr, 0, -1, false, lines)
+    api.nvim_buf_add_highlight(info.bufnr, 0, 'LspInfoTip', 0, 0, -1)
+
     vim.bo[info.bufnr].filetype = 'markdown'
+    vim.bo[info.bufnr].syntax = 'on'
     vim.wo[info.win_id].concealcursor = 'niv'
     vim.wo[info.win_id].conceallevel = 2
-    vim.bo[info.bufnr].syntax = 'on'
+    vim.wo[info.win_id].breakindent = false
+    vim.wo[info.win_id].breakindentopt = ''
 
     local close_doc_win = function()
       if api.nvim_win_is_valid(info.win_id) then
@@ -335,8 +356,7 @@ return function()
       end
     end
 
-    vim.keymap.set('n', 'q', close_doc_win, { buffer = info.bufnr })
-    vim.keymap.set('n', '<ESC>', close_doc_win, { buffer = info.bufnr })
+    vim.keymap.set('n', '<TAB>', close_doc_win, { buffer = info.bufnr })
   end
 
   vim.keymap.set('n', '<TAB>', show_doc, { buffer = true, nowait = true })
