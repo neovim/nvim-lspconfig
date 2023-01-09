@@ -268,7 +268,7 @@ return function()
 
   local function close()
     api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-    if api.nvim_buf_is_valid(bufnr) and api.nvim_buf_is_loaded(bufnr) then
+    if api.nvim_buf_is_loaded(bufnr) then
       api.nvim_buf_delete(bufnr, { force = true })
     end
     if api.nvim_win_is_valid(win_id) then
@@ -310,6 +310,9 @@ return function()
   local function show_doc()
     local lines = {}
     local function append_lines(config)
+      if not config then
+        return
+      end
       local desc = vim.tbl_get(config, 'document_config', 'docs', 'description')
       if desc then
         table.insert(lines, string.format('# %s', config.name))
@@ -324,17 +327,11 @@ return function()
 
     for _, client in pairs(buf_clients) do
       local config = require('lspconfig.configs')[client.name]
-      if config then
-        append_lines(config)
-      end
+      append_lines(config)
     end
 
     for _, config in pairs(other_matching_configs) do
-      if config then
-        if config then
-          append_lines(config)
-        end
-      end
+      append_lines(config)
     end
 
     local info = windows.percentage_range_window(0.8, 0.7)
