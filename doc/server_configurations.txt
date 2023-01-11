@@ -857,11 +857,15 @@ require'lspconfig'.blueprint_ls.setup{}
   true
   ```
 
+
 ## brightscript
 
-[https://github.com/RokuCommunity/brighterscript]
-
-`brightscript` can be installed via `npm install brighterscript -g`.
+      https://github.com/RokuCommunity/brighterscript
+      `brightscript` can be installed via `npm`:
+      ```sh
+      npm install -g brighterscript
+      ```
+      
 
 
 **Snippet to enable the language server:**
@@ -871,17 +875,21 @@ require'lspconfig'.brightscript.setup{}
 
 
 **Default values:**
-  - `cmd` :
+  - `cmd` : 
   ```lua
   { "bsc", "--lsp", "--stdio" }
   ```
-  - `filetypes` :
+  - `filetypes` : 
   ```lua
   { "brs" }
   ```
-  - `root_dir` :
+  - `root_dir` : 
   ```lua
-  util.root_pattern('makefile', 'Makefile', '.git'),
+  root_pattern(".git")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
   ```
 
 
