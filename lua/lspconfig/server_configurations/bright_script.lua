@@ -1,6 +1,6 @@
 local bin_name = 'bsc'
 local cmd = { bin_name, '--lsp', '--stdio' }
-local util = require "lspconfig/util"
+local util = require 'lspconfig/util'
 
 if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
