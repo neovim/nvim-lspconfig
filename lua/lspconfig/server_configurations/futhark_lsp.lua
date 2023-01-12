@@ -2,6 +2,7 @@ local util = require 'lspconfig.util'
 
 local cmd = { 'futhark', 'lsp' }
 
+-- not tested on windows
 if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', 'futhark', 'lsp' }
 end
