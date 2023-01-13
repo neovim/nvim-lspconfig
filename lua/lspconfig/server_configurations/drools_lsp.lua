@@ -28,7 +28,7 @@ return {
           table.insert(config.cmd, o)
         end
         --- @diagnostic disable-next-line:missing-parameter
-        vim.list_extend(config.cmd, { '-cp', drools_jar, 'org.drools.lsp.server.Main' })
+        vim.list_extend(config.cmd, { '-jar', drools_jar })
       end
     end,
   },
@@ -46,9 +46,8 @@ Configuration information:
 require('lspconfig').drools_lsp.setup {
   cmd = {
     '/path/to/java',
-    '-cp',
+    '-jar',
     '/path/to/drools-lsp-server-jar-with-dependencies.jar',
-    'org.drools.lsp.server.Main',
   },
 }
 
