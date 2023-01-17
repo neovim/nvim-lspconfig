@@ -127,6 +127,9 @@ Attempt to run the language server, and open the log with:
 ```
 :LspLog
 ```
+
+The log can also be found in `~/.local/state/nvim` by default.
+
 Most of the time, the reason for failure is present in the logs.
 
 ## Commands
