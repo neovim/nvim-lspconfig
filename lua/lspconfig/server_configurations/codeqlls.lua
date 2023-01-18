@@ -1,5 +1,7 @@
 local util = require 'lspconfig.util'
 
+local workspace_folders = {}
+
 return {
   default_config = {
     cmd = { 'codeql', 'execute', 'language-server', '--check-errors', 'ON_CHANGE', '-q' },
@@ -7,12 +9,8 @@ return {
     root_dir = util.root_pattern 'qlpack.yml',
     log_level = vim.lsp.protocol.MessageType.Warning,
     before_init = function(initialize_params)
-      initialize_params['workspaceFolders'] = {
-        {
-          name = 'workspace',
-          uri = initialize_params['rootUri'],
-        },
-      }
+      table.insert(workspace_folders, { name = 'workspace', uri = initialize_params['rootUri'] })
+      initialize_params['workspaceFolders'] = workspace_folders
     end,
     settings = {
       search_path = vim.empty_dict(),
@@ -21,7 +19,7 @@ return {
   docs = {
     description = [[
 Reference:
-https://help.semmle.com/codeql/codeql-cli.html
+https://codeql.github.com/docs/codeql-cli/
 
 Binaries:
 https://github.com/github/codeql-cli-binaries
@@ -37,6 +35,10 @@ https://github.com/github/codeql-cli-binaries
       local search_path = '--search-path='
       for _, path in ipairs(config.settings.search_path) do
         search_path = search_path .. vim.fn.expand(path) .. ':'
+        table.insert(workspace_folders, {
+          name = 'workspace',
+          uri = string.format('file://%s', path),
+        })
       end
       config.cmd = { 'codeql', 'execute', 'language-server', '--check-errors', 'ON_CHANGE', '-q', search_path }
     else

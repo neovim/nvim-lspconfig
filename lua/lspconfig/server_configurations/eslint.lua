@@ -1,5 +1,6 @@
 local util = require 'lspconfig.util'
 local lsp = vim.lsp
+local is_windows = vim.fn.has 'win32' == 1
 
 local function fix_all(opts)
   opts = opts or {}
@@ -35,8 +36,31 @@ end
 local bin_name = 'vscode-eslint-language-server'
 local cmd = { bin_name, '--stdio' }
 
-if vim.fn.has 'win32' == 1 then
+if is_windows then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
+end
+
+local root_file = {
+  '.eslintrc',
+  '.eslintrc.js',
+  '.eslintrc.cjs',
+  '.eslintrc.yaml',
+  '.eslintrc.yml',
+  '.eslintrc.json',
+  'eslint.config.js',
+}
+
+local root_with_package = util.find_package_json_ancestor(vim.fn.expand '%:p:h')
+
+if root_with_package then
+  -- only add package.json if it contains eslintConfig field
+  local path_sep = is_windows and '\\' or '/'
+  for line in io.lines(root_with_package .. path_sep .. 'package.json') do
+    if line:find 'eslintConfig' then
+      table.insert(root_file, 'package.json')
+      break
+    end
+  end
 end
 
 return {
@@ -51,22 +75,18 @@ return {
       'typescript.tsx',
       'vue',
       'svelte',
+      'astro',
     },
     -- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
-    root_dir = util.root_pattern(
-      '.eslintrc',
-      '.eslintrc.js',
-      '.eslintrc.cjs',
-      '.eslintrc.yaml',
-      '.eslintrc.yml',
-      '.eslintrc.json',
-      'package.json'
-    ),
+    root_dir = util.root_pattern(unpack(root_file)),
     -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
     settings = {
       validate = 'on',
       packageManager = 'npm',
       useESLintClass = false,
+      experimental = {
+        useFlatConfig = false,
+      },
       codeActionOnSave = {
         enable = false,
         mode = 'all',
@@ -76,6 +96,9 @@ return {
       onIgnoredFiles = 'off',
       rulesCustomizations = {},
       run = 'onType',
+      problems = {
+        shortenToSingleLine = false,
+      },
       -- nodePath configures the directory in which the eslint server should start its node_modules resolution.
       -- This path is relative to the workspace folder (root dir) of the server instance.
       nodePath = '',

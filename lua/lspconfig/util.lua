@@ -20,9 +20,6 @@ M.default_config = {
 M.on_setup = nil
 
 function M.bufname_valid(bufname)
-  if not bufname then
-    return false
-  end
   if bufname:match '^/' or bufname:match '^[a-zA-Z]:' or bufname:match '^zipfile://' or bufname:match '^tarfile:' then
     return true
   end
@@ -233,26 +230,110 @@ end)()
 -- Returns a function(root_dir), which, when called with a root_dir it hasn't
 -- seen before, will call make_config(root_dir) and start a new client.
 function M.server_per_root_dir_manager(make_config)
+  -- a table store the root dir with clients in this dir
   local clients = {}
-  local single_file_clients = {}
   local manager = {}
 
-  function manager.add(root_dir, single_file)
-    local client_id
-    -- This is technically unnecessary, as lspconfig's path utilities should be hermetic,
-    -- however users are free to return strings in custom root resolvers.
+  function manager.add(root_dir, single_file, bufnr)
     root_dir = M.path.sanitize(root_dir)
-    if single_file then
-      client_id = single_file_clients[root_dir]
-    elseif root_dir and M.path.is_dir(root_dir) then
-      client_id = clients[root_dir]
-    else
+
+    local client_id_iterator = function(client_ids, conf)
+      for _, id in ipairs(client_ids) do
+        local client = lsp.get_client_by_id(id)
+        if client and client.name == conf.name then
+          return client
+        end
+      end
+    end
+
+    local register_to_clients = function(id)
+      if not clients[root_dir] then
+        clients[root_dir] = {}
+      end
+      if not vim.tbl_contains(clients[root_dir], id) then
+        table.insert(clients[root_dir], id)
+      end
+    end
+
+    -- get client which support workspace from clients table
+    local get_client_from_cache = function(conf)
+      if vim.tbl_count(clients) == 0 then
+        return
+      end
+      local client
+
+      if clients[root_dir] then
+        client = client_id_iterator(clients[root_dir], conf)
+      else
+        for _, ids in pairs(clients) do
+          client = client_id_iterator(ids, conf)
+          if client then
+            break
+          end
+        end
+      end
+
+      return client
+    end
+
+    local new_config = make_config(root_dir)
+    local client = get_client_from_cache(new_config)
+
+    --TODO(glepnir): do we need check language server support the workspaceFOlders?
+    --some server support it but the it not show in server_capabilities
+    local register_workspace_folders = function(client_instance)
+      local params = {
+        event = {
+          added = { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
+          removed = {},
+        },
+      }
+      for _, schema in ipairs(client_instance.workspace_folders or {}) do
+        if schema.name == root_dir then
+          return
+        end
+      end
+      client_instance.rpc.notify('workspace/didChangeWorkspaceFolders', params)
+      if not client_instance.workspace_folders then
+        client_instance.workspace_folders = {}
+      end
+      table.insert(client_instance.workspace_folders, params.event.added[1])
+    end
+
+    local attach_after_client_initialized = function(client_instance)
+      local timer = vim.loop.new_timer()
+      timer:start(
+        0,
+        10,
+        vim.schedule_wrap(function()
+          if client_instance.initialized and not timer:is_closing() then
+            lsp.buf_attach_client(bufnr, client_instance.id)
+            if not single_file then
+              register_workspace_folders(client_instance)
+            end
+            register_to_clients(client_instance.id)
+            timer:stop()
+            timer:close()
+          end
+        end)
+      )
+    end
+
+    if client then
+      if client.initialized then
+        lsp.buf_attach_client(bufnr, client.id)
+        if not single_file then
+          register_workspace_folders(client)
+        end
+        register_to_clients(client.id)
+      else
+        attach_after_client_initialized(client)
+      end
       return
     end
 
-    -- Check if we have a client already or start and store it.
-    if not client_id then
-      local new_config = make_config(root_dir)
+    local client_id
+    local start_new_client = function()
       -- do nothing if the client is not enabled
       if new_config.enabled == false then
         return
@@ -268,8 +349,11 @@ function M.server_per_root_dir_manager(make_config)
         return
       end
       new_config.on_exit = M.add_hook_before(new_config.on_exit, function()
-        clients[root_dir] = nil
-        single_file_clients[root_dir] = nil
+        for k, v in pairs(clients[root_dir]) do
+          if v == client_id then
+            table.remove(clients[root_dir], k)
+          end
+        end
       end)
 
       -- Launch the server in the root directory used internally by lspconfig, if otherwise unset
@@ -286,28 +370,28 @@ function M.server_per_root_dir_manager(make_config)
         new_config.workspace_folders = nil
       end
       client_id = lsp.start_client(new_config)
-
-      -- Handle failures in start_client
-      if not client_id then
-        return
-      end
-
-      if single_file then
-        single_file_clients[root_dir] = client_id
-      else
-        clients[root_dir] = client_id
-      end
     end
-    return client_id
+
+    if not client then
+      start_new_client()
+    end
+
+    if not client_id then
+      return
+    end
+
+    lsp.buf_attach_client(bufnr, client_id)
+    register_to_clients(client_id)
   end
 
-  function manager.clients(single_file)
+  function manager.clients()
     local res = {}
-    local client_list = single_file and single_file_clients or clients
-    for _, id in pairs(client_list) do
-      local client = lsp.get_client_by_id(id)
-      if client then
-        table.insert(res, client)
+    for _, client_ids in pairs(clients) do
+      for _, id in pairs(client_ids) do
+        local client = lsp.get_client_by_id(id)
+        if client then
+          table.insert(res, client)
+        end
       end
     end
     return res
@@ -413,8 +497,22 @@ function M.get_other_matching_providers(filetype)
   return other_matching_configs
 end
 
+function M.get_config_by_ft(filetype)
+  local configs = require 'lspconfig.configs'
+  local matching_configs = {}
+  for _, config in pairs(configs) do
+    local filetypes = config.filetypes or {}
+    for _, ft in pairs(filetypes) do
+      if ft == filetype then
+        table.insert(matching_configs, config)
+      end
+    end
+  end
+  return matching_configs
+end
+
 function M.get_active_client_by_name(bufnr, servername)
-  for _, client in pairs(vim.lsp.buf_get_clients(bufnr)) do
+  for _, client in pairs(vim.lsp.get_active_clients { bufnr = bufnr }) do
     if client.name == servername then
       return client
     end

@@ -120,6 +120,7 @@ return {
       ['textDocument/rename'] = on_textdocument_rename,
       ['workspace/applyEdit'] = on_workspace_applyedit,
       ['language/status'] = vim.schedule_wrap(on_language_status),
+      ['$/progress'] = vim.schedule_wrap(on_language_status),
     },
   },
   docs = {

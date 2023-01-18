@@ -15,15 +15,18 @@ return {
         python = {
           interpreterPath = 'python',
         },
-        ansibleLint = {
-          path = 'ansible-lint',
-          enabled = true,
-        },
         ansible = {
           path = 'ansible',
         },
         executionEnvironment = {
           enabled = false,
+        },
+        validation = {
+          enabled = true,
+          lint = {
+            enabled = true,
+            path = 'ansible-lint',
+          },
         },
       },
     },

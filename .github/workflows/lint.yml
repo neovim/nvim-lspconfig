@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run luacheck
-        uses: lunarmodules/luacheck@v0
+        uses: lunarmodules/luacheck@v1
         with:
           args: lua/* test/*
 
@@ -30,8 +30,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Lint with stylua
-        uses: JohnnyMorganz/stylua-action@v1.1.2
+        uses: JohnnyMorganz/stylua-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # CLI arguments
+          version: latest
           args: --check .

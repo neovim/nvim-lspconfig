@@ -19,7 +19,7 @@ experimental).
 
 Idris2-Lsp requires a build of Idris 2 that includes the "Idris 2 API" package.
 Package managers with known support for this build include the
-[AUR](https://aur.archlinux.org/packages/idris2-api-git/) and
+[AUR](https://aur.archlinux.org/packages/idris2/) and
 [Homebrew](https://formulae.brew.sh/formula/idris2#default).
 
 If your package manager does not support the Idris 2 API, you will need to build

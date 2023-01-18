@@ -6,11 +6,11 @@
 * If you found a bug in the Nvim LSP client, [report it at the Nvim core repo](https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&template=lsp_bug_report.yml).
 * These configs are **best-effort and unsupported.** See [contributions](#contributions).
 
-See also `:help lspconfig`.
+See also `:help lsp-config`.
 
 ## Install
 
-* Requires [Neovim latest stable release](https://github.com/neovim/neovim/releases/latest) or [Nightly](https://github.com/neovim/neovim/releases/tag/nightly). Update Nvim and nvim-lspconfig before reporting an issue.
+* Requires neovim version 0.7 above. Update Nvim and nvim-lspconfig before reporting an issue.
 * Install nvim-lspconfig like any other Vim plugin, e.g. with [packer.nvim](https://github.com/wbthomason/packer.nvim):
   ```lua
   local use = require('packer').use
@@ -77,7 +77,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
 local lsp_flags = {

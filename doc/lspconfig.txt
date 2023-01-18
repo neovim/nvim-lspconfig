@@ -147,7 +147,7 @@ passed overrides to `setup {}` are:
 <
   is:
 >
-  {'foo', '--bar', 'baz}
+  {'foo', '--bar', 'baz'}
 <
 - {handlers} `list[functions]`
 
@@ -237,7 +237,7 @@ configuration entry, such as `cmd`.
 
 >
   local lspconfig = require 'lspconfig'
-  lspconfig.util.on_setup = util.add_hook_before(lspconfig.util.on_setup, function(config)
+  lspconfig.util.on_setup = lspconfig.util.add_hook_before(lspconfig.util.on_setup, function(config)
     if some_condition and config.name == "clangd" then
       local custom_server_prefix = "/my/custom/server/prefix"
       config.cmd = { custom_server_prefix .. "/bin/clangd" }
@@ -442,6 +442,8 @@ mode under which cross-file features may be degraded.
   `workspaceFolders` during initialization.
 - attaching subsequent files in the parent directory to the same server
   instance, depending on filetype.
+- also supports unnamed buffer if filetype matches the server filetype
+  settings.
 
 Cross-file features (navigation, hover) may or may not work depending on the
 language server. For a full feature-set, consider moving your files to a
@@ -465,7 +467,8 @@ contained in `:LspInfo`:
   if it successfully resolves a root directory. Note: Defaults to all
   configured servers matching the current buffer filetype.
 - `:LspStop <client_id>` stops the server with the given client id. Defaults to
-  stopping all servers active on the current buffer.
+  stopping all servers active on the current buffer. if you want to force stop
+  a language server you can do it like `:LspStop <client_id> ++force`
 - `:LspRestart <client_id>` restarts the client with the given client id, and
   will attempt to reattach to all previously attached buffers.
 
@@ -509,7 +512,7 @@ attached to a given buffer.
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
   end
 
   local lsp_flags = {

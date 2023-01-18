@@ -1,4 +1,4 @@
-local api = vim.api
+local api, fn, lsp = vim.api, vim.fn, vim.lsp
 local windows = require 'lspconfig.ui.windows'
 local util = require 'lspconfig.util'
 
@@ -70,13 +70,6 @@ local function make_config_info(config, bufnr)
   else
     config_info.root_dir = error_messages.root_dir_not_found
     vim.list_extend(config_info.helptags, helptags[error_messages.root_dir_not_found])
-    local root_dir_pattern = vim.tbl_get(config, 'document_config', 'docs', 'default_config', 'root_dir')
-    if root_dir_pattern then
-      config_info.root_dir = config_info.root_dir
-        .. ' Searched for: '
-        .. remove_newlines(vim.split(root_dir_pattern, '\n'))
-        .. '.'
-    end
   end
 
   config_info.autostart = (config.autostart and 'true') or 'false'
@@ -110,13 +103,39 @@ local function make_config_info(config, bufnr)
   return lines
 end
 
-local function make_client_info(client)
+---@param client table
+---@param fname string
+local function make_client_info(client, fname)
   local client_info = {}
 
   client_info.cmd = cmd_type[type(client.config.cmd)](client.config)
-  if client.workspaceFolders then
-    client_info.root_dir = client.workspaceFolders[1].name
-  else
+  local workspace_folders = fn.has 'nvim-0.9' == 1 and client.workspace_folders or client.workspaceFolders
+  local uv = vim.loop
+  local is_windows = uv.os_uname().version:match 'Windows'
+  fname = vim.fn.fnamemodify(vim.fn.resolve(fname), ':p')
+  local sep = is_windows and '\\' or '/'
+  local fname_parts = vim.split(fname, sep, { trimempty = true })
+  if workspace_folders then
+    for _, schema in pairs(workspace_folders) do
+      local matched = true
+      local root = uv.fs_realpath(schema.name)
+      local root_parts = vim.split(root, sep, { trimempty = true })
+
+      for i = 1, #root_parts do
+        if root_parts[i] ~= fname_parts[i] then
+          matched = false
+          break
+        end
+      end
+
+      if matched then
+        client_info.root_dir = schema.name
+        break
+      end
+    end
+  end
+
+  if not client_info.root_dir then
     client_info.root_dir = 'Running in single file mode.'
   end
   client_info.filetypes = table.concat(client.config.filetypes or {}, ', ')
@@ -129,8 +148,6 @@ local function make_client_info(client)
       .. client.name
       .. ' (id: '
       .. tostring(client.id)
-      .. ', pid: '
-      .. tostring(client.rpc.pid)
       .. ', bufnr: ['
       .. client_info.attached_buffers_list
       .. '])',
@@ -156,10 +173,11 @@ end
 return function()
   -- These options need to be cached before switching to the floating
   -- buffer.
-  local buf_clients = vim.lsp.buf_get_clients()
-  local clients = vim.lsp.get_active_clients()
-  local buffer_filetype = vim.bo.filetype
   local original_bufnr = api.nvim_get_current_buf()
+  local buf_clients = lsp.get_active_clients { bufnr = original_bufnr }
+  local clients = lsp.get_active_clients()
+  local buffer_filetype = vim.bo.filetype
+  local fname = api.nvim_buf_get_name(original_bufnr)
 
   windows.default_options.wrap = true
   windows.default_options.breakindent = true
@@ -184,7 +202,7 @@ return function()
   end
 
   -- insert the tips at the top of window
-  table.insert(buf_lines, 'Use [q] or [Esc] to quit the window')
+  table.insert(buf_lines, 'Press q or <Esc> to close this window. Press <Tab> to view server doc.')
 
   local header = {
     '',
@@ -200,7 +218,7 @@ return function()
 
   vim.list_extend(buf_lines, buffer_clients_header)
   for _, client in pairs(buf_clients) do
-    local client_info = make_client_info(client)
+    local client_info = make_client_info(client, fname)
     vim.list_extend(buf_lines, client_info)
   end
 
@@ -212,7 +230,7 @@ return function()
     vim.list_extend(buf_lines, other_active_section_header)
   end
   for _, client in pairs(other_active_clients) do
-    local client_info = make_client_info(client)
+    local client_info = make_client_info(client, fname)
     vim.list_extend(buf_lines, client_info)
   end
 
@@ -250,7 +268,7 @@ return function()
 
   local function close()
     api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-    if api.nvim_buf_is_valid(bufnr) then
+    if api.nvim_buf_is_loaded(bufnr) then
       api.nvim_buf_delete(bufnr, { force = true })
     end
     if api.nvim_win_is_valid(win_id) then
@@ -260,7 +278,7 @@ return function()
 
   vim.keymap.set('n', '<ESC>', close, { buffer = bufnr, nowait = true })
   vim.keymap.set('n', 'q', close, { buffer = bufnr, nowait = true })
-  api.nvim_create_autocmd({ 'BufDelete', 'BufLeave', 'BufHidden' }, {
+  api.nvim_create_autocmd({ 'BufDelete', 'BufHidden' }, {
     once = true,
     buffer = bufnr,
     callback = close,
@@ -288,4 +306,55 @@ return function()
   ]]
 
   api.nvim_buf_add_highlight(bufnr, 0, 'LspInfoTip', 0, 0, -1)
+
+  local function show_doc()
+    local lines = {}
+    local function append_lines(config)
+      if not config then
+        return
+      end
+      local desc = vim.tbl_get(config, 'document_config', 'docs', 'description')
+      if desc then
+        table.insert(lines, string.format('# %s', config.name))
+        table.insert(lines, '')
+        vim.list_extend(lines, vim.split(desc, '\n'))
+        table.insert(lines, '')
+      end
+    end
+
+    table.insert(lines, 'Press <Tab> to close server info.')
+    table.insert(lines, '')
+
+    for _, client in pairs(buf_clients) do
+      local config = require('lspconfig.configs')[client.name]
+      append_lines(config)
+    end
+
+    for _, config in pairs(other_matching_configs) do
+      append_lines(config)
+    end
+
+    local info = windows.percentage_range_window(0.8, 0.7)
+    lines = indent_lines(lines, ' ')
+    lines = vim.lsp.util._trim(lines, {})
+    api.nvim_buf_set_lines(info.bufnr, 0, -1, false, lines)
+    api.nvim_buf_add_highlight(info.bufnr, 0, 'LspInfoTip', 0, 0, -1)
+
+    vim.bo[info.bufnr].filetype = 'markdown'
+    vim.bo[info.bufnr].syntax = 'on'
+    vim.wo[info.win_id].concealcursor = 'niv'
+    vim.wo[info.win_id].conceallevel = 2
+    vim.wo[info.win_id].breakindent = false
+    vim.wo[info.win_id].breakindentopt = ''
+
+    local close_doc_win = function()
+      if api.nvim_win_is_valid(info.win_id) then
+        api.nvim_win_close(info.win_id, true)
+      end
+    end
+
+    vim.keymap.set('n', '<TAB>', close_doc_win, { buffer = info.bufnr })
+  end
+
+  vim.keymap.set('n', '<TAB>', show_doc, { buffer = true, nowait = true })
 end
