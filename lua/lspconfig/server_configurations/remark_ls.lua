@@ -10,8 +10,16 @@ end
 return {
   default_config = {
     cmd = cmd,
-    filetypes = { 'markdown', "mdx" },
-    root_dir = util.root_pattern('.remarkrc', '.remarkrc.js', '.remarkrc.cjs', '.remarkrc.mjs', '.remarkrc.yml', '.remarkrc.yaml', '.remarkignore'),
+    filetypes = { 'markdown', 'mdx' },
+    root_dir = util.root_pattern(
+      '.remarkrc',
+      '.remarkrc.js',
+      '.remarkrc.cjs',
+      '.remarkrc.mjs',
+      '.remarkrc.yml',
+      '.remarkrc.yaml',
+      '.remarkignore'
+    ),
     single_file_support = true,
   },
   docs = {
