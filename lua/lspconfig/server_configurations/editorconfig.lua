@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 
-local root_files = { '.editorconfig', '.git' }
+local root_files = { '.editorconfig' }
 return {
   default_config = {
     cmd = { 'ecls', '--stdio' },
