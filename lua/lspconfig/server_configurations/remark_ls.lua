@@ -10,9 +10,10 @@ end
 return {
   default_config = {
     cmd = cmd,
-    filetypes = { 'markdown', 'mdx' },
+    filetypes = { 'markdown' },
     root_dir = util.root_pattern(
       '.remarkrc',
+      '.remarkrc.json',
       '.remarkrc.js',
       '.remarkrc.cjs',
       '.remarkrc.mjs',
