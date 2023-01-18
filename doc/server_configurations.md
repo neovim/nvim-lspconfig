@@ -2136,13 +2136,14 @@ require'lspconfig'.emmet_ls.setup{}
 
 ## erg_language_server
 
-https://github.com/erg-lang/erg-language-server
+https://github.com/erg-lang/erg#flags ELS
 
 ELS (erg-language-server) is a language server for the Erg programming language.
 
-`els` can be installed via `cargo`:
+erg-language-server can be installed via `cargo` and used as follows:
  ```sh
- cargo install els
+ cargo install erg --features els
+ erg --language-server
  ```
     
 
@@ -2156,7 +2157,7 @@ require'lspconfig'.erg_language_server.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "els" }
+  { "erg", "--language-server" }
   ```
   - `filetypes` : 
   ```lua
