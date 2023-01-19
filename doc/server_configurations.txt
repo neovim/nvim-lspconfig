@@ -7951,7 +7951,7 @@ require'lspconfig'.terraformls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "terraform" }
+  { "terraform", "terraform-vars" }
   ```
   - `root_dir` : 
   ```lua
