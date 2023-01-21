@@ -1815,33 +1815,19 @@ Configuration information:
 ```lua
 -- Option 1) Specify the entire command:
 require('lspconfig').drools_lsp.setup {
-  cmd = {
-    '/path/to/java',
-    '-cp',
-    '/path/to/drools-lsp-server-jar-with-dependencies.jar',
-    'org.drools.lsp.server.Main',
-  },
+  cmd = { '/path/to/java', '-jar', '/path/to/drools-lsp-server-jar-with-dependencies.jar' },
 }
 
--- Option 2) Specify just the jar location (the JAVA_HOME environment variable will be respected):
+-- Option 2) Specify just the jar path (the JAVA_HOME environment variable will be respected if present):
 require('lspconfig').drools_lsp.setup {
-  settings = {
-    drools = {
-      jar = '/path/to/drools-lsp-server-jar-with-dependencies.jar',
-    },
-  },
+  drools = { jar = '/path/to/drools-lsp-server-jar-with-dependencies.jar' },
 }
 
--- Option 3) Specify the jar location plus the java bin path and/or java opts:
+-- Option 3) Specify the java bin and/or java opts in addition to the jar path:
 require('lspconfig').drools_lsp.setup {
-  settings = {
-    java = {
-      bin = '/path/to/java',
-      opts = { '-Xmx500m' },
-    },
-    drools = {
-      jar = '/path/to/drools-lsp-server-jar-with-dependencies.jar',
-    },
+  drools = {
+    java { bin = '/path/to/java', opts = { '-Xmx100m' } },
+    jar = '/path/to/drools-lsp-server-jar-with-dependencies.jar',
   },
 }
 ```
