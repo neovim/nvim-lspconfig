@@ -19,6 +19,9 @@ return {
     },
     filetypes = { 'sh' },
     root_dir = util.find_git_ancestor,
+    settings = {
+      bashIde = {},
+    },
     single_file_support = true,
   },
   docs = {
