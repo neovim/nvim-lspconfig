@@ -1827,15 +1827,15 @@ require('lspconfig').drools_lsp.setup {
 -- Option 3) Specify the java bin and/or java opts in addition to the jar path:
 require('lspconfig').drools_lsp.setup {
   drools = {
-    java { bin = '/path/to/java', opts = { '-Xmx100m' } },
+    java = { bin = '/path/to/java', opts = { '-Xmx100m' } },
     jar = '/path/to/drools-lsp-server-jar-with-dependencies.jar',
   },
 }
 ```
 
-It is also recommended to set up automatic filetype detection for drools (`*.drl`) files, for example:
-```vim
-autocmd BufRead,BufNewFile *.drl set filetype=drools
+Neovim does not yet have automatic detection for the `drools` filetype, but it can be added with:
+```lua
+vim.cmd [[ autocmd BufNewFile,BufRead *.drl set filetype=drools ]]
 ```
 
 
