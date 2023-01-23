@@ -227,6 +227,34 @@ M.path = (function()
   }
 end)()
 
+-- Compare client configurations to determine if new client should be spawned instead of using workspace dir
+local function client_configs_eq(c1, c2)
+  local never = function()
+    return false
+  end
+  -- Config keys to compare with fallbacks that will be used when deep_equal returns false
+  local fallbacks = {
+    name = never,
+    cmd_env = never,
+    settings = never,
+    -- When any is nil then consider cmd_cwd as equal. This is because client.config.cmd_cwd is being set to
+    -- root_dir, so we consider configs to be different only if user provided non-nil cmd_cwd in new config.
+    cmd_cwd = function(a, b)
+      return a == nil or b == nil
+    end,
+    -- cmd can be a function (see vim.lsp.start_client), so for now assume that functions are always equal
+    cmd = function(a, b)
+      return type(a) == 'function' and type(b) == 'function'
+    end,
+  }
+  for key, fallback in pairs(fallbacks) do
+    if not (vim.deep_equal(c1[key], c2[key]) or fallback(c1[key], c2[key])) then
+      return false
+    end
+  end
+  return true
+end
+
 -- Returns a function(root_dir), which, when called with a root_dir it hasn't
 -- seen before, will call make_config(root_dir) and start a new client.
 function M.server_per_root_dir_manager(make_config)
@@ -240,7 +268,7 @@ function M.server_per_root_dir_manager(make_config)
     local client_id_iterator = function(client_ids, conf)
       for _, id in ipairs(client_ids) do
         local client = lsp.get_client_by_id(id)
-        if client and client.name == conf.name then
+        if client and client_configs_eq(client.config, conf) then
           return client
         end
       end
