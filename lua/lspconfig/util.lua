@@ -340,7 +340,7 @@ function M.server_per_root_dir_manager(make_config)
 
     local function supported_workspace_folders(client_instance)
       local supported =
-        vim.tbl_get(client_instance, 'server_capabilities', 'workspace', 'workspaceFolders,', 'supported')
+        vim.tbl_get(client_instance, 'server_capabilities', 'workspace', 'workspaceFolders', 'supported')
       if supported then
         return true
       end
