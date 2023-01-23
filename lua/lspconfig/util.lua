@@ -351,10 +351,11 @@ function M.server_per_root_dir_manager(make_config)
       if supported_workspace_folders(client_instance) then
         lsp.buf_attach_client(bufnr, client_instance.id)
         register_workspace_folders(client_instance)
+        register_to_clients(client_instance.id)
       else
-        client_instance = start_new_client()
+        local id = start_new_client()
+        register_to_clients(id)
       end
-      register_to_clients(client_instance.id)
     end
 
     local attach_after_client_initialized = function(client_instance)
