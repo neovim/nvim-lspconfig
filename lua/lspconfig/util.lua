@@ -279,9 +279,7 @@ function M.server_per_root_dir_manager(make_config)
     local new_config = make_config(root_dir)
     local client = get_client_from_cache(new_config)
 
-    --TODO(glepnir): do we need check language server support the workspaceFOlders?
-    --some server support it but the it not show in server_capabilities
-    local register_workspace_folders = function(client_instance)
+    local function register_workspace_folders(client_instance)
       local params = {
         event = {
           added = { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
@@ -298,38 +296,6 @@ function M.server_per_root_dir_manager(make_config)
         client_instance.workspace_folders = {}
       end
       table.insert(client_instance.workspace_folders, params.event.added[1])
-    end
-
-    local attach_after_client_initialized = function(client_instance)
-      local timer = vim.loop.new_timer()
-      timer:start(
-        0,
-        10,
-        vim.schedule_wrap(function()
-          if client_instance.initialized and not timer:is_closing() then
-            lsp.buf_attach_client(bufnr, client_instance.id)
-            if not single_file then
-              register_workspace_folders(client_instance)
-            end
-            register_to_clients(client_instance.id)
-            timer:stop()
-            timer:close()
-          end
-        end)
-      )
-    end
-
-    if client then
-      if client.initialized then
-        lsp.buf_attach_client(bufnr, client.id)
-        if not single_file then
-          register_workspace_folders(client)
-        end
-        register_to_clients(client.id)
-      else
-        attach_after_client_initialized(client)
-      end
-      return
     end
 
     local client_id
@@ -372,10 +338,54 @@ function M.server_per_root_dir_manager(make_config)
       client_id = lsp.start_client(new_config)
     end
 
-    if not client then
-      start_new_client()
+    local function supported_workspace_folders(client_instance)
+      local supported =
+        vim.tbl_get(client_instance, 'server_capabilities', 'workspace', 'workspaceFolders,', 'supported')
+      if supported then
+        return true
+      end
+      return false
     end
 
+    local function attach_or_spawn_new(client_instance)
+      if supported_workspace_folders(client_instance) then
+        lsp.buf_attach_client(bufnr, client_instance.id)
+        register_workspace_folders(client_instance)
+      else
+        client_instance = start_new_client()
+      end
+      register_to_clients(client_instance.id)
+    end
+
+    local attach_after_client_initialized = function(client_instance)
+      local timer = vim.loop.new_timer()
+      timer:start(
+        0,
+        10,
+        vim.schedule_wrap(function()
+          if client_instance.initialized and client_instance.server_capabilities and not timer:is_closing() then
+            attach_or_spawn_new(client_instance)
+            timer:stop()
+            timer:close()
+          end
+        end)
+      )
+    end
+
+    if client then
+      if single_file then
+        lsp.buf_attach_client(bufnr, client.id)
+      -- make sure neovim had exchanged capabilities from language server
+      -- it's useful to check server support workspaceFolders or not
+      elseif client.initialized and client.server_capabilities then
+        attach_or_spawn_new(client)
+      elseif (client.initialized and not client.server_capabilities) or not client.initialized then
+        attach_after_client_initialized(client)
+      end
+      return
+    end
+
+    start_new_client()
     if not client_id then
       return
     end
