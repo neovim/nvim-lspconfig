@@ -29,7 +29,7 @@ https://github.com/yioneko/vtsls
 
 `vtsls` can be installed with npm:
 ```sh
-npm install -g @vtsls/language-server 
+npm install -g @vtsls/language-server
 ```
 
 To configure a Typescript project, add a
