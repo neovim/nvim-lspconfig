@@ -234,15 +234,6 @@ function M.server_per_root_dir_manager(make_config)
   local clients = {}
   local manager = {}
 
-  local function register_to_clients(root, id)
-    if not clients[root] then
-      clients[root] = {}
-    end
-    if not vim.tbl_contains(clients[root], id) then
-      table.insert(clients[root], id)
-    end
-  end
-
   function manager.add(root_dir, single_file, bufnr)
     root_dir = M.path.sanitize(root_dir)
 
@@ -261,6 +252,15 @@ function M.server_per_root_dir_manager(make_config)
         if client.name == client_name then
           return client
         end
+      end
+    end
+
+    local function register_to_clients(root, id)
+      if not clients[root] then
+        clients[root] = {}
+      end
+      if not vim.tbl_contains(clients[root], id) then
+        table.insert(clients[root], id)
       end
     end
 
