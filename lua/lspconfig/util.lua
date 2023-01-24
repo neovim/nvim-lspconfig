@@ -345,7 +345,7 @@ function M.server_per_root_dir_manager(make_config)
     -- eg:
     -- session have two same filetype in two project. file A trigger Filetyp event
     -- start server. file B also trigger Filetype event. we start server is async.
-    -- tha mean when file A spawn new server this server maybe not initialized and
+    -- that mean when file A spawn new server this server maybe not initialized and
     -- don't exchanged server_capabilities so the File B need wait the server initialized
     -- if server support workspaceFolders then regisert File B root into workspaceFolders
     -- otherwise spawn a new one.
