@@ -338,7 +338,7 @@ function M.server_per_root_dir_manager(make_config)
           return
         end
       end
-      register_to_clients(client_id)
+      register_to_clients(root_dir, client_id)
     end
 
     -- this function used for some situation like load from session
