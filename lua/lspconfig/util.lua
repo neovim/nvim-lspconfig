@@ -337,6 +337,7 @@ function M.server_per_root_dir_manager(make_config)
         if not client_id then
           return
         end
+        lsp.buf_attach_client(bufnr, client_id)
       end
       register_to_clients(root_dir, client_id)
     end
