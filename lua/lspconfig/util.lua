@@ -242,6 +242,15 @@ function M.server_per_root_dir_manager(make_config)
         return
       end
 
+      if clients[root_dir] then
+        for _, id in pairs(clients[root_dir]) do
+          local client = lsp.get_client_by_id(id)
+          if client.name == client_name then
+            return client
+          end
+        end
+      end
+
       local all_client_ids = {}
       vim.tbl_map(function(val)
         vim.list_extend(all_client_ids, { unpack(val) })
