@@ -377,6 +377,11 @@ function M.server_per_root_dir_manager(make_config)
       return
     end
 
+    if clients[root_dir] then
+      lsp.buf_attach_client(bufnr, client.id)
+      return
+    end
+
     if single_file then
       lsp.buf_attach_client(bufnr, client.id)
       return
