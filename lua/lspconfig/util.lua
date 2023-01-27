@@ -237,103 +237,64 @@ function M.server_per_root_dir_manager(make_config)
   function manager.add(root_dir, single_file, bufnr)
     root_dir = M.path.sanitize(root_dir)
 
-    local client_id_iterator = function(client_ids, conf)
-      for _, id in ipairs(client_ids) do
+    local function get_client_from_cache(client_name)
+      if vim.tbl_count(clients) == 0 then
+        return
+      end
+
+      if clients[root_dir] then
+        for _, id in pairs(clients[root_dir]) do
+          local client = lsp.get_client_by_id(id)
+          if client.name == client_name then
+            return client
+          end
+        end
+      end
+
+      local all_client_ids = {}
+      vim.tbl_map(function(val)
+        vim.list_extend(all_client_ids, { unpack(val) })
+      end, clients)
+
+      for _, id in ipairs(all_client_ids) do
         local client = lsp.get_client_by_id(id)
-        if client and client.name == conf.name then
+        if client.name == client_name then
           return client
         end
       end
     end
 
-    local register_to_clients = function(id)
-      if not clients[root_dir] then
-        clients[root_dir] = {}
+    local function register_to_clients(root, id)
+      if not clients[root] then
+        clients[root] = {}
       end
-      if not vim.tbl_contains(clients[root_dir], id) then
-        table.insert(clients[root_dir], id)
+      if not vim.tbl_contains(clients[root], id) then
+        table.insert(clients[root], id)
       end
-    end
-
-    -- get client which support workspace from clients table
-    local get_client_from_cache = function(conf)
-      if vim.tbl_count(clients) == 0 then
-        return
-      end
-      local client
-
-      if clients[root_dir] then
-        client = client_id_iterator(clients[root_dir], conf)
-      else
-        for _, ids in pairs(clients) do
-          client = client_id_iterator(ids, conf)
-          if client then
-            break
-          end
-        end
-      end
-
-      return client
     end
 
     local new_config = make_config(root_dir)
-    local client = get_client_from_cache(new_config)
 
-    --TODO(glepnir): do we need check language server support the workspaceFOlders?
-    --some server support it but the it not show in server_capabilities
-    local register_workspace_folders = function(client_instance)
+    local function register_workspace_folders(client)
       local params = {
         event = {
           added = { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
           removed = {},
         },
       }
-      for _, schema in ipairs(client_instance.workspace_folders or {}) do
+      for _, schema in ipairs(client.workspace_folders or {}) do
         if schema.name == root_dir then
           return
         end
       end
-      client_instance.rpc.notify('workspace/didChangeWorkspaceFolders', params)
-      if not client_instance.workspace_folders then
-        client_instance.workspace_folders = {}
+      client.rpc.notify('workspace/didChangeWorkspaceFolders', params)
+      if not client.workspace_folders then
+        client.workspace_folders = {}
       end
-      table.insert(client_instance.workspace_folders, params.event.added[1])
+      table.insert(client.workspace_folders, params.event.added[1])
     end
 
-    local attach_after_client_initialized = function(client_instance)
-      local timer = vim.loop.new_timer()
-      timer:start(
-        0,
-        10,
-        vim.schedule_wrap(function()
-          if client_instance.initialized and not timer:is_closing() then
-            lsp.buf_attach_client(bufnr, client_instance.id)
-            if not single_file then
-              register_workspace_folders(client_instance)
-            end
-            register_to_clients(client_instance.id)
-            timer:stop()
-            timer:close()
-          end
-        end)
-      )
-    end
-
-    if client then
-      if client.initialized then
-        lsp.buf_attach_client(bufnr, client.id)
-        if not single_file then
-          register_workspace_folders(client)
-        end
-        register_to_clients(client.id)
-      else
-        attach_after_client_initialized(client)
-      end
-      return
-    end
-
-    local client_id
-    local start_new_client = function()
+    local function start_new_client()
       -- do nothing if the client is not enabled
       if new_config.enabled == false then
         return
@@ -349,9 +310,10 @@ function M.server_per_root_dir_manager(make_config)
         return
       end
       new_config.on_exit = M.add_hook_before(new_config.on_exit, function()
-        for k, v in pairs(clients[root_dir]) do
-          if v == client_id then
-            table.remove(clients[root_dir], k)
+        for index, id in pairs(clients[root_dir]) do
+          local exist = lsp.get_client_by_id(id)
+          if exist.name == new_config.name then
+            table.remove(clients[root_dir], index)
           end
         end
       end)
@@ -369,19 +331,78 @@ function M.server_per_root_dir_manager(make_config)
         new_config.root_dir = nil
         new_config.workspace_folders = nil
       end
-      client_id = lsp.start_client(new_config)
+      return lsp.start_client(new_config)
     end
+
+    local function attach_or_spawn(client)
+      local supported = vim.tbl_get(client, 'server_capabilities', 'workspace', 'workspaceFolders', 'supported')
+      local client_id
+      if supported then
+        lsp.buf_attach_client(bufnr, client.id)
+        register_workspace_folders(client)
+        client_id = client.id
+      else
+        client_id = start_new_client()
+        if not client_id then
+          return
+        end
+        lsp.buf_attach_client(bufnr, client_id)
+      end
+      register_to_clients(root_dir, client_id)
+    end
+
+    -- this function used for some situation like load from session
+    -- eg:
+    -- session have two same filetype in two project. file A trigger Filetyp event
+    -- start server. file B also trigger Filetype event. we start server is async.
+    -- that mean when file A spawn new server this server maybe not initialized and
+    -- don't exchanged server_capabilities so the File B need wait the server initialized
+    -- if server support workspaceFolders then regisert File B root into workspaceFolders
+    -- otherwise spawn a new one.
+    local attach_after_client_initialized = function(client_instance)
+      local timer = vim.loop.new_timer()
+      timer:start(
+        0,
+        10,
+        vim.schedule_wrap(function()
+          if client_instance.initialized and client_instance.server_capabilities and not timer:is_closing() then
+            attach_or_spawn(client_instance)
+            timer:stop()
+            timer:close()
+          end
+        end)
+      )
+    end
+
+    local client = get_client_from_cache(new_config.name)
 
     if not client then
-      start_new_client()
-    end
-
-    if not client_id then
+      local client_id = start_new_client()
+      if not client_id then
+        return
+      end
+      lsp.buf_attach_client(bufnr, client_id)
+      register_to_clients(root_dir, client_id)
       return
     end
 
-    lsp.buf_attach_client(bufnr, client_id)
-    register_to_clients(client_id)
+    if clients[root_dir] then
+      lsp.buf_attach_client(bufnr, client.id)
+      return
+    end
+
+    if single_file then
+      lsp.buf_attach_client(bufnr, client.id)
+      return
+    end
+
+    -- make sure neovim had exchanged capabilities from language server
+    -- it's useful to check server support workspaceFolders or not
+    if client.initialized and client.server_capabilities then
+      attach_or_spawn(client)
+    else
+      attach_after_client_initialized(client)
+    end
   end
 
   function manager.clients()
