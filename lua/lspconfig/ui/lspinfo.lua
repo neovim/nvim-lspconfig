@@ -186,6 +186,7 @@ return function()
 
   local win_info = windows.percentage_range_window(0.8, 0.7)
   local bufnr, win_id = win_info.bufnr, win_info.win_id
+  api.nvim_set_option_value('bufhidden', 'wipe', { buf = bufnr })
 
   local buf_lines = {}
 
@@ -268,9 +269,6 @@ return function()
 
   local function close()
     api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-    if api.nvim_buf_is_loaded(bufnr) then
-      api.nvim_buf_delete(bufnr, { force = true })
-    end
     if api.nvim_win_is_valid(win_id) then
       api.nvim_win_close(win_id, true)
     end
@@ -347,7 +345,7 @@ return function()
     vim.wo[info.win_id].breakindent = false
     vim.wo[info.win_id].breakindentopt = ''
 
-    local close_doc_win = function()
+    local function close_doc_win()
       if api.nvim_win_is_valid(info.win_id) then
         api.nvim_win_close(info.win_id, true)
       end
