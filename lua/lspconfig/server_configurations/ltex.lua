@@ -7,6 +7,7 @@ local language_id_mapping = {
   rst = 'restructuredtext',
   tex = 'latex',
   xhtml = 'xhtml',
+  pandoc = 'markdown',
 }
 
 local bin_name = 'ltex-ls'
@@ -17,7 +18,7 @@ end
 return {
   default_config = {
     cmd = { bin_name },
-    filetypes = { 'bib', 'gitcommit', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex' },
+    filetypes = { 'bib', 'gitcommit', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex', 'pandoc' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
     get_language_id = function(_, filetype)
