@@ -4179,7 +4179,7 @@ require'lspconfig'.ltex.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" }
+  { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc" }
   ```
   - `get_language_id` : 
   ```lua
