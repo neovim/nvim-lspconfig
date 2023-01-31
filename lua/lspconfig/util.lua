@@ -245,7 +245,7 @@ function M.server_per_root_dir_manager(make_config)
       if clients[root_dir] then
         for _, id in pairs(clients[root_dir]) do
           local client = lsp.get_client_by_id(id)
-          if client.name == client_name then
+          if client and client.name == client_name then
             return client
           end
         end
@@ -258,7 +258,7 @@ function M.server_per_root_dir_manager(make_config)
 
       for _, id in ipairs(all_client_ids) do
         local client = lsp.get_client_by_id(id)
-        if client.name == client_name then
+        if client and client.name == client_name then
           return client
         end
       end
