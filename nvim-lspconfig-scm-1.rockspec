@@ -20,15 +20,8 @@ dependencies = {
 }
 
 source = {
-  url = 'https://github.com/neovim/nvim-lspconfig/archive/v' .. _MODREV .. '.zip',
-  dir = 'nvim-lspconfig-' .. _MODREV,
+  url = 'git://github.com/neovim/nvim-lspconfig',
 }
-
-if _MODREV == 'scm' then
-  source = {
-    url = 'git://github.com/neovim/nvim-lspconfig',
-  }
-end
 
 build = {
   type = 'builtin',
