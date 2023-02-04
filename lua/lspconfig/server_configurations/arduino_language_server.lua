@@ -79,6 +79,8 @@ Your folder structure should look like this:
 ```
 
 For further instruction about configuration options, run `arduino-language-server --help`.
+
+Note that an [upstream bug](https://github.com/arduino/arduino-ide/issues/159) makes keywords in some cases become undefined by the language server.
 ]],
   },
 }
