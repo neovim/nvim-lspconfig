@@ -118,7 +118,7 @@ local function make_client_info(client, fname)
   if workspace_folders then
     for _, schema in pairs(workspace_folders) do
       local matched = true
-      local root = uv.fs_realpath(schema.name)
+      local root = vim.fn.fnamemodify(schema.name, ":p")
       local root_parts = vim.split(root, sep, { trimempty = true })
 
       for i = 1, #root_parts do

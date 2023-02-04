@@ -160,7 +160,7 @@ M.path = (function()
 
   -- Traverse the path calling cb along the way.
   local function traverse_parents(path, cb)
-    path = uv.fs_realpath(path)
+    path = vim.fn.fnamemodify(path, ':p')
     local dir = path
     -- Just in case our algo is buggy, don't infinite loop.
     for _ = 1, 100 do
@@ -186,7 +186,7 @@ M.path = (function()
       else
         return
       end
-      if v and uv.fs_realpath(v) then
+      if v and vim.fn.isdirectory(v) then
         return v, path
       else
         return
@@ -358,7 +358,7 @@ function M.server_per_root_dir_manager(make_config)
 
       -- Launch the server in the root directory used internally by lspconfig, if otherwise unset
       -- also check that the path exist
-      if not new_config.cmd_cwd and uv.fs_realpath(root_dir) then
+      if not new_config.cmd_cwd and vim.fn.isdirectory(root_dir) then
         new_config.cmd_cwd = root_dir
       end
 
