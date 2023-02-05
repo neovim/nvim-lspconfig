@@ -10,7 +10,7 @@ See also `:help lsp-config`.
 
 ## Install
 
-[![LuaRocks](https://img.shields.io/luarocks/v/teto/nvim-lspconfig?logo=lua&color=purple)](https://luarocks.org/modules/teto/nvim-lspconfig)
+[![LuaRocks](https://img.shields.io/luarocks/v/neovim/nvim-lspconfig?logo=lua&color=purple)](https://luarocks.org/modules/neovim/nvim-lspconfig)
 
 * Requires neovim version 0.7 above. Update Nvim and nvim-lspconfig before reporting an issue.
 * Install nvim-lspconfig like any other Vim plugin, e.g. with [packer.nvim](https://github.com/wbthomason/packer.nvim):
