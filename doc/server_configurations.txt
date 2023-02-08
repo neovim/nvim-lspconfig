@@ -6984,7 +6984,7 @@ require'lspconfig'.solang.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "solang", "--language-server", "--target", "ewasm" }
+  { "solang", "language-server", "--target", "evm" }
   ```
   - `filetypes` : 
   ```lua
