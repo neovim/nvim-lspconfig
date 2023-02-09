@@ -1,10 +1,35 @@
 local util = require 'lspconfig.util'
+local is_windows = vim.fn.has 'win32' == 1
 
 local bin_name = 'stylelint-lsp'
 local cmd = { bin_name, '--stdio' }
 
-if vim.fn.has 'win32' == 1 then
+if is_windows == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
+end
+
+local root_file = {
+  '.stylelintrc',
+  '.stylelintrc.cjs',
+  '.stylelintrc.js',
+  '.stylelintrc.json',
+  '.stylelintrc.yaml',
+  '.stylelintrc.yml',
+  'stylelint.config.cjs',
+  'stylelint.config.js',
+}
+
+local root_with_package = util.find_package_json_ancestor(vim.fn.expand '%:p:h')
+
+if root_with_package then
+  -- only add package.json if it contains stylelint field
+  local path_sep = is_windows and '\\' or '/'
+  for line in io.lines(root_with_package .. path_sep .. 'package.json') do
+    if line:find 'stylelint' then
+      table.insert(root_file, 'package.json')
+      break
+    end
+  end
 end
 
 return {
@@ -22,7 +47,7 @@ return {
       'typescript',
       'typescriptreact',
     },
-    root_dir = util.root_pattern('.stylelintrc', 'package.json'),
+    root_dir = util.root_pattern(unpack(root_file)),
     settings = {},
   },
   docs = {
@@ -47,8 +72,5 @@ require'lspconfig'.stylelint_lsp.setup{
 }
 ```
 ]],
-    default_config = {
-      root_dir = [[ root_pattern('.stylelintrc', 'package.json') ]],
-    },
   },
 }
