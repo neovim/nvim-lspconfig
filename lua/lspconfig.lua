@@ -12,18 +12,23 @@ end
 ---@class Alias
 ---@field to string The new name of the server
 ---@field version string The version that the alias will be removed in
----@type table<string, Alias>
-local server_aliases = {
-  sumneko_lua = {
-    to = 'lua_language_server',
-    version = '0.2.0',
-  },
-}
+---@param name string
+---@return Alias
+local function server_alias(name)
+  local aliases = {
+    sumneko_lua = {
+      to = 'lua_language_server',
+      version = '0.2.0',
+    },
+  }
+
+  return aliases[name]
+end
 
 local mt = {}
 function mt:__index(k)
   if configs[k] == nil then
-    local alias = server_aliases[k]
+    local alias = server_alias(k)
     if alias then
       vim.deprecate(k, alias.to, alias.version, 'lspconfig')
       k = alias.to
