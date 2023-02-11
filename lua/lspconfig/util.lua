@@ -487,7 +487,7 @@ function M.find_package_json_ancestor(startpath)
   end)
 end
 
-function M.add_package_json_to_config_files_if_field_exists(config_files, field)
+function M.insert_package_json(config_files, field)
   local root_with_package = M.find_package_json_ancestor(vim.fn.expand '%:p:h')
 
   if root_with_package then
