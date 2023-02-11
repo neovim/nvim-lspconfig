@@ -4,6 +4,8 @@ local api = vim.api
 local lsp = vim.lsp
 local uv = vim.loop
 
+local is_windows = uv.os_uname().version:match 'Windows'
+
 local M = {}
 
 M.default_config = {
@@ -94,8 +96,6 @@ end
 
 -- Some path utilities
 M.path = (function()
-  local is_windows = uv.os_uname().version:match 'Windows'
-
   local function escape_wildcards(path)
     return path:gsub('([%[%]%?%*])', '\\%1')
   end
@@ -485,6 +485,21 @@ function M.find_package_json_ancestor(startpath)
       return path
     end
   end)
+end
+
+function M.add_package_json_to_config_files_if_field_exists(config_files, field)
+  local root_with_package = M.find_package_json_ancestor(vim.fn.expand '%:p:h')
+
+  if root_with_package then
+    -- only add package.json if it contains field parameter
+    local path_sep = is_windows and '\\' or '/'
+    for line in io.lines(root_with_package .. path_sep .. 'package.json') do
+      if line:find(field) then
+        return table.insert(config_files, 'package.json')
+      end
+    end
+  end
+  return config_files
 end
 
 function M.get_active_clients_list_by_ft(filetype)
