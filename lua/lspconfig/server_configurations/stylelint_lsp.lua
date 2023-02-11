@@ -18,7 +18,7 @@ local root_file = {
   'stylelint.config.js',
 }
 
-root_file = util.add_package_json_to_config_files_if_field_exists(root_file, 'stylelint')
+root_file = util.insert_package_json(root_file, 'stylelint')
 
 return {
   default_config = {

@@ -49,7 +49,7 @@ local root_file = {
   'eslint.config.js',
 }
 
-root_file = util.add_package_json_to_config_files_if_field_exists(root_file, 'eslintConfig')
+root_file = util.insert_package_json(root_file, 'eslintConfig')
 
 return {
   default_config = {
