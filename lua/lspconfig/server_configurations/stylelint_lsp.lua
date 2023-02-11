@@ -1,10 +1,9 @@
 local util = require 'lspconfig.util'
-local is_windows = vim.fn.has 'win32' == 1
 
 local bin_name = 'stylelint-lsp'
 local cmd = { bin_name, '--stdio' }
 
-if is_windows == 1 then
+if vim.fn.has 'win32' == 1 == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
@@ -19,18 +18,7 @@ local root_file = {
   'stylelint.config.js',
 }
 
-local root_with_package = util.find_package_json_ancestor(vim.fn.expand '%:p:h')
-
-if root_with_package then
-  -- only add package.json if it contains stylelint field
-  local path_sep = is_windows and '\\' or '/'
-  for line in io.lines(root_with_package .. path_sep .. 'package.json') do
-    if line:find 'stylelint' then
-      table.insert(root_file, 'package.json')
-      break
-    end
-  end
-end
+root_file = util.add_package_json_to_config_files_if_field_exists(root_file, 'stylelint')
 
 return {
   default_config = {
