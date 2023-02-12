@@ -7572,7 +7572,7 @@ require'lspconfig'.stylelint_lsp.setup{}
   ```
   - `root_dir` : 
   ```lua
-   root_pattern('.stylelintrc', 'package.json') 
+  see source file
   ```
   - `settings` : 
   ```lua
