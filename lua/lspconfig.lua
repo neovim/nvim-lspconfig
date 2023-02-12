@@ -20,6 +20,10 @@ local function server_alias(name)
       to = 'fennel_ls',
       version = '0.2.0',
     },
+    ['starlark-rust'] = {
+      to = 'starlark_rust',
+      version = '0.2.0',
+    },
     sumneko_lua = {
       to = 'lua_ls',
       version = '0.2.0',
