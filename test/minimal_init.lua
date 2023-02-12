@@ -52,7 +52,7 @@ end
 
 -- Add the server that troubles you here
 local name = 'pyright'
-local cmd = { 'pyright-langserver', '--stdio' } -- needed for elixirls, omnisharp, sumneko_lua
+local cmd = { 'pyright-langserver', '--stdio' } -- needed for elixirls, lua_ls, omnisharp
 if not name then
   print 'You have not defined a server name, please edit minimal_init.lua'
 end

@@ -332,7 +332,7 @@ describe('lspconfig', function()
         exec_lua [[
         local lspconfig = require("lspconfig")
         local actual = nil
-        local _ = lspconfig.sumneko_lua
+        local _ = lspconfig.lua_ls
         local _ = lspconfig.tsserver
         lspconfig.rust_analyzer.setup {}
         return require("lspconfig.util").available_servers()
