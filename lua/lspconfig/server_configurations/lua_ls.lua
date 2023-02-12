@@ -55,7 +55,7 @@ initial requests (completion, location) upon starting as well as time to first d
 Completion results will include a workspace indexing progress message until the server has finished indexing.
 
 ```lua
-require'lspconfig'.lua_language_server.setup {
+require'lspconfig'.lua_ls.setup {
   settings = {
     Lua = {
       runtime = {

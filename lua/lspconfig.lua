@@ -17,7 +17,7 @@ end
 local function server_alias(name)
   local aliases = {
     sumneko_lua = {
-      to = 'lua_language_server',
+      to = 'lua_ls',
       version = '0.2.0',
     },
   }
