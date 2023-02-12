@@ -495,7 +495,8 @@ function M.insert_package_json(config_files, field)
     local path_sep = is_windows and '\\' or '/'
     for line in io.lines(root_with_package .. path_sep .. 'package.json') do
       if line:find(field) then
-        return table.insert(config_files, 'package.json')
+        table.insert(config_files, 'package.json')
+        break
       end
     end
   end
