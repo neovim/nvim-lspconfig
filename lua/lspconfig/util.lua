@@ -421,22 +421,18 @@ function M.server_per_root_dir_manager(make_config)
   return manager
 end
 
-function M.search_ancestors(startpath, func)
-  validate { func = { func, 'f' } }
-  local guard = 100
-  for path in M.path.iterate_parents(startpath) do
-    -- Prevent infinite recursion if our algorithm breaks
-    guard = guard - 1
-    if guard == 0 then
-      return
-    end
-
-    if func(path) then
-      return path
+local function searcher(startpath, patterns, tail)
+  tail = tail or false
+  for _, pattern in pairs(patterns) do
+    local res = vim.fs.find(pattern, { path = startpath, upward = true, stop = vim.env.HOME, type = 'directories' })
+    if #res ~= 0 then
+      --return latest item as root
+      return res[(tail and #res or 1)]
     end
   end
 end
 
+--TODO:rewrite there
 function M.root_pattern(...)
   local patterns = vim.tbl_flatten { ... }
   local function matcher(path)
@@ -450,38 +446,45 @@ function M.root_pattern(...)
   end
   return function(startpath)
     startpath = M.strip_archive_subpath(startpath)
-    return M.search_ancestors(startpath, matcher)
+    return function()
+      local guard = 100
+      for path in M.path.iterate_parents(startpath) do
+        -- Prevent infinite recursion if our algorithm breaks
+        guard = guard - 1
+        if guard == 0 then
+          return
+        end
+
+        if matcher(path) then
+          return path
+        end
+      end
+    end
   end
 end
+
 function M.find_git_ancestor(startpath)
-  return M.search_ancestors(startpath, function(path)
-    -- Support git directories and git files (worktrees)
-    if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
-      return path
-    end
-  end)
+  return function()
+    return searcher(startpath, { '.git' })
+  end
 end
+
 function M.find_mercurial_ancestor(startpath)
-  return M.search_ancestors(startpath, function(path)
-    -- Support Mercurial directories
-    if M.path.is_dir(M.path.join(path, '.hg')) then
-      return path
-    end
-  end)
+  return function()
+    return searcher(startpath, { '.hg' })
+  end
 end
+
 function M.find_node_modules_ancestor(startpath)
-  return M.search_ancestors(startpath, function(path)
-    if M.path.is_dir(M.path.join(path, 'node_modules')) then
-      return path
-    end
-  end)
+  return function()
+    return searcher(startpath, { '.hg' }, true)
+  end
 end
+
 function M.find_package_json_ancestor(startpath)
-  return M.search_ancestors(startpath, function(path)
-    if M.path.is_file(M.path.join(path, 'package.json')) then
-      return path
-    end
-  end)
+  return function()
+    return searcher(startpath, { 'package.json' }, true)
+  end
 end
 
 function M.insert_package_json(config_files, field)
