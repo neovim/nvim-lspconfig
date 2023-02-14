@@ -1767,7 +1767,7 @@ require'lspconfig'.docker_compose_language_service.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "docker-compose-language-service", "--stdio" }
+  { "docker-compose-langserver", "--stdio" }
   ```
   - `filetypes` : 
   ```lua
