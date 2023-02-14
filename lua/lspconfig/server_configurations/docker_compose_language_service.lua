@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'docker-compose-language-service'
+local bin_name = 'docker-compose-langserver'
 local cmd = { bin_name, '--stdio' }
 
 if vim.fn.has 'win32' == 1 then
