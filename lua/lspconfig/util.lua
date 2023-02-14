@@ -477,7 +477,7 @@ end
 
 function M.find_node_modules_ancestor(startpath)
   return function()
-    return searcher(startpath, { '.hg' }, true)
+    return searcher(startpath, { 'node_modules' }, true)
   end
 end
 
