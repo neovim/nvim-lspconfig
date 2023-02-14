@@ -423,9 +423,6 @@ end
 
 function M.search_ancestors(startpath, func)
   validate { func = { func, 'f' } }
-  if func(startpath) then
-    return startpath
-  end
   local guard = 100
   for path in M.path.iterate_parents(startpath) do
     -- Prevent infinite recursion if our algorithm breaks
