@@ -298,9 +298,9 @@ return function()
     syn keyword Error false
     syn match LspInfoFiletypeList /\<filetypes\?:\s*\zs.*\ze/ contains=LspInfoFiletype
     syn match LspInfoFiletype /\k\+/ contained
-    syn match LspInfoTitle /^\s*\%(Client\|Config\):\s*\zs\k\+\ze/
+    syn match LspInfoTitle /^\s*\%(Client\|Config\):\s*\zs\S\+\ze/
     syn match LspInfoListList /^\s*Configured servers list:\s*\zs.*\ze/ contains=LspInfoList
-    syn match LspInfoList /\k\+/ contained
+    syn match LspInfoList /\S\+/ contained
   ]]
 
   api.nvim_buf_add_highlight(bufnr, 0, 'LspInfoTip', 0, 0, -1)
