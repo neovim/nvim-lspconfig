@@ -3801,7 +3801,7 @@ require'lspconfig'.jdtls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "jdtls", "-configuration", "/home/runner/.cache/jdtls/config", "-data", "/home/runner/.cache/jdtls/workspace" }
+  { "jdtls", "-configuration", "/home/user/.cache/jdtls/config", "-data", "/home/user/.cache/jdtls/workspace" }
   ```
   - `filetypes` : 
   ```lua
@@ -3821,7 +3821,7 @@ require'lspconfig'.jdtls.setup{}
   ```lua
   {
     jvm_args = {},
-    workspace = "/home/runner/.cache/jdtls/workspace"
+    workspace = "/home/user/.cache/jdtls/workspace"
   }
   ```
   - `root_dir` : 
