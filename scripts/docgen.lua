@@ -85,8 +85,8 @@ local function require_all_configs()
   -- Make sure username doesn't leak into the generated document
   local old_home = vim.env.HOME
   local old_cache_home = vim.env.XDG_CACHE_HOME
-  vim.env.HOME = '/home/username'
-  vim.env.XDG_CACHE_HOME = '/home/username/.cache'
+  vim.env.HOME = '/home/user'
+  vim.env.XDG_CACHE_HOME = '/home/user/.cache'
 
   -- Configs are lazy-loaded, tickle them to populate the `configs` singleton.
   for _, v in ipairs(vim.fn.glob('lua/lspconfig/server_configurations/*.lua', 1, 1)) do
