@@ -118,7 +118,7 @@ local function make_client_info(client, fname)
   end
   local sep = is_windows and '\\' or '/'
   local fname_parts = vim.tbl_filter(function(v)
-    return v ~= ''
+    return #v > 0
   end, vim.split(fname, sep))
   if workspace_folders then
     for _, schema in pairs(workspace_folders) do
