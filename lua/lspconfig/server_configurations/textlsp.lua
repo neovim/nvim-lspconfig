@@ -16,7 +16,7 @@ return {
     settings = {
       textLSP = {
         analysers = {
-          -- by defalt all analysers are disaled in textLSP, since many of them
+          -- by default all analysers are disabled in textLSP, since many of them
           -- need custom settings. See github page. LanguageTool is enaled here
           -- only for a quick test.
           languagetool = {
