@@ -39,8 +39,9 @@ return {
         },
       },
     },
-    docs = {
-      description = [[
+  },
+  docs = {
+    description = [[
 https://github.com/hangyav/textLSP
 
 `textLSP` is an LSP server for text spell and grammar checking with various AI tools.
@@ -48,10 +49,9 @@ It supports multiple text file formats, such as LaTeX, Org or txt.
 
 For the available text analyzer tools and their configuration, see the [GitHub](https://github.com/hangyav/textLSP) page.
 By default, all analyzers are disabled in textLSP, since most of them need special settings.
-For quick testing, LanguageTool is enabled in the default configuration.
+For quick testing, LanguageTool is enabled in the default `nvim-lspconfig` configuration.
 
 To install run: `pip install textLSP`
 ]],
-    },
   },
 }
