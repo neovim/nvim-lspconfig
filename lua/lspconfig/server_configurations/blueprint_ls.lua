@@ -27,7 +27,7 @@ https://gitlab.gnome.org/jwestman/blueprint-compiler
 
 `blueprint-compiler` can be installed via your system package manager.
 
-Language server for the blurprint markup language, written in python and part
+Language server for the blueprint markup language, written in python and part
 of the blueprint-compiler.
 ]],
     default_config = {
