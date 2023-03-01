@@ -24,7 +24,7 @@ Then enable cairo language server in your lua configuration.
 require'lspconfig'.cairo_ls.setup{}
 ```
 
-*cairo-language-server is still under active developpment, some features might not work yet !*
+*cairo-language-server is still under active development, some features might not work yet !*
 ]],
     default_config = {
       root_dir = [[root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")]],
