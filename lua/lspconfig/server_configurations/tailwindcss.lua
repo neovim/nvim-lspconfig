@@ -17,6 +17,7 @@ return {
       'astro',
       'astro-markdown',
       'blade',
+      'clojure',
       'django-html',
       'htmldjango',
       'edge',
