@@ -4,7 +4,7 @@ local api = vim.api
 local lsp = vim.lsp
 local uv = vim.loop
 
-local is_windows = uv.os_uname().sysname == 'Windows_NT'
+local is_windows = uv.os_uname().version:match 'Windows'
 
 local M = {}
 
