@@ -23,10 +23,10 @@ You have to install the language server manually.
 npm install -g azure-pipelines-language-server
 ```
 
-Once installed, point `cmd` to `server.js` inside the `server/out` directory:
+Once installed, point `cmd` to `server.js` inside the `out` directory:
 
 ```lua
-cmd = {'node', '<path_to_repo>/server/out/server.js', '--stdio'}
+cmd = {'node', '<path_to_azure_pipelines_install>/out/server.js', '--stdio'}
 ```
 
 By default `azure-pipelines-ls` will only work in files named `azure-pipelines.yml`, this can be changed by providing additional settings like so:
