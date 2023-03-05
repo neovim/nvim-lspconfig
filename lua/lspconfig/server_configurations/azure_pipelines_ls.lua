@@ -4,7 +4,7 @@ return {
   default_config = {
     cmd = {},
     filetypes = { 'yaml' },
-    root_dir = util.find_git_ancestor,
+    root_dir = util.root_pattern 'azure-pipelines.yml',
     single_file_support = true,
     settings = {},
   },
