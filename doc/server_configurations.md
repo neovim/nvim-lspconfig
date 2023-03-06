@@ -559,6 +559,9 @@ Your folder structure should look like this:
 
 For further instruction about configuration options, run `arduino-language-server --help`.
 
+Note that an upstream bug makes keywords in some cases become undefined by the language server.
+Ref: https://github.com/arduino/arduino-ide/issues/159
+
 
 
 **Snippet to enable the language server:**
