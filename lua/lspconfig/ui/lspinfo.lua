@@ -191,7 +191,7 @@ return function()
 
   local win_info = windows.percentage_range_window(0.8, 0.7)
   local bufnr, win_id = win_info.bufnr, win_info.win_id
-  vim.bo[bufnr].bufhidden = 'wipe'
+  api.nvim_buf_set_option(bufnr, 'bufhidden', 'wipe')
 
   local buf_lines = {}
 
