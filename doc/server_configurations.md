@@ -6960,7 +6960,19 @@ https://github.com/rust-analyzer/rust-analyzer
 
 rust-analyzer (aka rls 2.0), a language server for Rust
 
-See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#settings) for extra settings.
+
+See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#settings) for extra settings. The settings can be used like this:
+```lua
+require'lspconfig'.rust_analyzer.setup{
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = false;
+      }
+    }
+  }
+}
+```
     
 
 
@@ -6983,12 +6995,6 @@ require'lspconfig'.rust_analyzer.setup{}
   - `root_dir` : 
   ```lua
   root_pattern("Cargo.toml", "rust-project.json")
-  ```
-  - `settings` : 
-  ```lua
-  {
-    ["rust-analyzer"] = {}
-  }
   ```
 
 
