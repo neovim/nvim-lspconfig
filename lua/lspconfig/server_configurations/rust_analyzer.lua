@@ -55,9 +55,6 @@ return {
         or util.root_pattern 'rust-project.json'(fname)
         or util.find_git_ancestor(fname)
     end,
-    settings = {
-      ['rust-analyzer'] = {},
-    },
   },
   commands = {
     CargoReload = {
@@ -73,7 +70,19 @@ https://github.com/rust-analyzer/rust-analyzer
 
 rust-analyzer (aka rls 2.0), a language server for Rust
 
-See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#settings) for extra settings.
+
+See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#settings) for extra settings. The settings can be used like this:
+```lua
+require'lspconfig'.rust_analyzer.setup{
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = false;
+      }
+    }
+  }
+}
+```
     ]],
     default_config = {
       root_dir = [[root_pattern("Cargo.toml", "rust-project.json")]],
