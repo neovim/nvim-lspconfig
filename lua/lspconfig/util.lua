@@ -421,6 +421,50 @@ function M.server_per_root_dir_manager(make_config)
   return manager
 end
 
+---using vim.fs module which enable in nvim 0.8 version
+---
+---@param start_path string  current file path
+---@param patterns table  search patterns
+---@param ignore   boolean|nil when result include the start_path ignore it or not
+---@private
+local function fs_searcher(start_path, patterns, ignore)
+  ignore = ignore or nil
+  for _, pattern in pairs(patterns) do
+    local result = vim.fs.find(
+      pattern,
+      { path = start_path, upward = true, stop = vim.env.HOME, type = 'directory', limit = math.huge }
+    )
+    io.write(vim.inspect(result), start_path, ' ')
+    if #result > 1 and ignore and vim.fs.dirname(result[1]) == start_path then
+      return vim.fs.dirname(result[#result])
+    elseif #result > 0 and not ignore then
+      return vim.fs.dirname(result[1])
+    end
+  end
+end
+
+---root pattern by using vim.fs module which enabled in nvim 0.8 version above
+---@param patterns table|string start search path
+---@param ignore   boolean if result has start path ignore it or not
+function M.fs_root_pattern(patterns, ignore)
+  vim.validate {
+    patterns = { patterns, { 's', 't' } },
+  }
+  patterns = type(patterns) == 'string' and { patterns } or patterns
+  return function(start_path)
+    return fs_searcher(start_path, patterns, ignore)
+  end
+end
+
+---find roo dir by search node_modules dir
+---@param start_path string
+---@param ignore boolean
+function M.fs_node_modules_ancestor(start_path, ignore)
+  return function()
+    return fs_searcher(start_path, { 'node_modules' }, ignore)
+  end
+end
+
 function M.search_ancestors(startpath, func)
   validate { func = { func, 'f' } }
   if func(startpath) then

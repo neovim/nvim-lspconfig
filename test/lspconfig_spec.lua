@@ -359,4 +359,22 @@ describe('lspconfig', function()
       )
     end)
   end)
+
+  describe('root_dir find by using vim.fs module', function()
+    it('ignore start_path', function()
+      ok(exec_lua [[
+        vim.api.nvim_command("cd ../test/")
+        local cwd = vim.fn.getcwd()
+        if vim.fn.isdirectory(cwd ..'/node_modules/') == 0 then
+          vim.fn.mkdir(cwd ..'/node_modules/')
+        end
+        if vim.fn.isdirectory(cwd ..'/test_dir/node_modules') == 0 then
+          vim.fn.mkdir(cwd..'/test_dir/node_modules/')
+        end
+        local lspconfig = require('lspconfig')
+        local root_dir = lspconfig.util.fs_node_modules_ancestor(cwd ..'/test_dir', true)()
+        return root_dir == cwd
+      ]])
+    end)
+  end)
 end)
