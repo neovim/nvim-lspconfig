@@ -5,9 +5,14 @@ local root_files = {
   '.vhdl_ls.toml',
 }
 
+local cmd = { 'vhdl_ls' }
+if vim.fn.has 'win32' == 1 then
+  cmd = { 'cmd.exe', '/C', 'vhdl_ls' }
+end
+
 return {
   default_config = {
-    cmd = { 'vhdl_ls' },
+    cmd = cmd,
     filetypes = { 'vhd' },
     root_dir = util.root_pattern(unpack(root_files)),
     single_file_support = true,
