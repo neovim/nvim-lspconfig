@@ -9035,7 +9035,7 @@ require'lspconfig'.vhdl_ls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "vhd" }
+  { "vhd", "vhdl" }
   ```
   - `root_dir` : 
   ```lua
