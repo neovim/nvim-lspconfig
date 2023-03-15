@@ -13,7 +13,7 @@ end
 return {
   default_config = {
     cmd = cmd,
-    filetypes = { 'vhd', 'vdhl' },
+    filetypes = { 'vhd', 'vhdl' },
     root_dir = util.root_pattern(unpack(root_files)),
     single_file_support = true,
   },
