@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'v', 'ls' },
-    filetypes = { 'vlang' },
+    filetypes = { 'v', 'vlang' },
     root_dir = util.root_pattern('v.mod', '.git'),
   },
   docs = {
