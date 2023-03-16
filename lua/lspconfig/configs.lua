@@ -85,12 +85,19 @@ function configs.__newindex(t, config_name, config_def)
 
     local get_root_dir = config.root_dir
 
+    local function run_in_single(single)
+      vim.validate {
+        single = { single, { 'nil', 'b', 'f' } },
+      }
+      return (type(single) == 'boolean' or single == nil) and single or single()
+    end
+
     function M.launch()
       local root_dir
       if get_root_dir then
         local bufnr = api.nvim_get_current_buf()
         local bufname = api.nvim_buf_get_name(bufnr)
-        if #bufname == 0 and not config.single_file_support then
+        if #bufname == 0 and not run_in_single(config.single_file_support) then
           return
         elseif #bufname ~= 0 then
           if not util.bufname_valid(bufname) then
@@ -123,6 +130,9 @@ function configs.__newindex(t, config_name, config_def)
           end
         end
       elseif config.single_file_support then
+        if not run_in_single(config.single_file_support) then
+          return
+        end
         -- This allows on_new_config to use the parent directory of the file
         -- Effectively this is the root from lspconfig's perspective, as we use
         -- this to attach additional files in the same parent folder to the same server.
@@ -237,7 +247,7 @@ function configs.__newindex(t, config_name, config_def)
       local root_dir
 
       local bufname = api.nvim_buf_get_name(bufnr)
-      if #bufname == 0 and not config.single_file_support then
+      if #bufname == 0 and not run_in_single(config.single_file_support) then
         return
       elseif #bufname ~= 0 then
         if not util.bufname_valid(bufname) then
@@ -253,6 +263,9 @@ function configs.__newindex(t, config_name, config_def)
       if root_dir then
         manager.add(root_dir, false, bufnr)
       elseif config.single_file_support then
+        if not run_in_single(config.single_file_support) then
+          return
+        end
         local pseudo_root = #bufname == 0 and uv.cwd() or util.path.dirname(buf_path)
         manager.add(pseudo_root, true, bufnr)
       end

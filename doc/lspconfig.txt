@@ -103,7 +103,7 @@ listed in `:help vim.lsp.start_client()` with the following unique entries:
 
 - {single_file_support}
 
-    `bool` (default: nil)
+    `bool` | `function` (default: nil)
 
     Determines if a server is started without a matching root directory.
     See |lspconfig-single-file-support|.
