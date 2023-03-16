@@ -21,7 +21,7 @@ local function virtual_text_document_handler(uri, res, client)
     return nil
   end
 
-  vim.api.nvim_buf_set_lines(bufnr, 0, -1, nil, lines)
+  vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
   vim.api.nvim_buf_set_option(bufnr, 'readonly', true)
   vim.api.nvim_buf_set_option(bufnr, 'modified', false)
   vim.api.nvim_buf_set_option(bufnr, 'modifiable', false)
