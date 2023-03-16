@@ -421,20 +421,19 @@ function M.server_per_root_dir_manager(make_config)
   return manager
 end
 
----using vim.fs module which enable in nvim 0.8 version
+---search path from start_path by match patterns, use vim.fs module.
 ---
 ---@param start_path string  current file path
 ---@param patterns table  search patterns
 ---@param ignore   boolean|nil when result include the start_path ignore it or not
 ---@private
-local function fs_searcher(start_path, patterns, ignore)
+local function fs_search(start_path, patterns, ignore)
   ignore = ignore or nil
   for _, pattern in pairs(patterns) do
     local result = vim.fs.find(
       pattern,
       { path = start_path, upward = true, stop = vim.env.HOME, type = 'directory', limit = math.huge }
     )
-    io.write(vim.inspect(result), start_path, ' ')
     if #result > 1 and ignore and vim.fs.dirname(result[1]) == start_path then
       return vim.fs.dirname(result[#result])
     elseif #result > 0 and not ignore then
@@ -452,7 +451,7 @@ function M.fs_root_pattern(patterns, ignore)
   }
   patterns = type(patterns) == 'string' and { patterns } or patterns
   return function(start_path)
-    return fs_searcher(start_path, patterns, ignore)
+    return fs_search(start_path, patterns, ignore)
   end
 end
 
