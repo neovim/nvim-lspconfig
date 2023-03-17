@@ -9177,7 +9177,7 @@ require'lspconfig'.vls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "vlang" }
+  { "v", "vlang" }
   ```
   - `root_dir` : 
   ```lua
