@@ -105,7 +105,7 @@ M.path = (function()
       path = path:sub(1, 1):upper() .. path:sub(2)
       path = path:gsub('\\', '/')
     end
-    return path
+    return vim.fn.expand(path)
   end
 
   local function exists(filename)
