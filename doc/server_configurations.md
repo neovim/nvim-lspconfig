@@ -1298,7 +1298,7 @@ require'lspconfig'.clojure_lsp.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("project.clj", "deps.edn", "build.boot", "shadow-cljs.edn", ".git")
+  root_pattern("project.clj", "deps.edn", "build.boot", "shadow-cljs.edn", ".git", "bb.edn")
   ```
 
 
