@@ -6228,6 +6228,7 @@ require'lspconfig'.pyright.setup{}
 ```
 **Commands:**
 - PyrightOrganizeImports: Organize Imports
+- PyrightSetPythonPath: Reconfigure pyright with the provided python path
 
 **Default values:**
   - `cmd` : 
