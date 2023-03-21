@@ -24,6 +24,17 @@ local function organize_imports()
   vim.lsp.buf.execute_command(params)
 end
 
+local function set_python_path(path)
+  local clients = vim.lsp.get_active_clients {
+    bufnr = vim.api.nvim_get_current_buf(),
+    name = 'pyright',
+  }
+  for _, client in ipairs(clients) do
+    client.config.settings = vim.tbl_deep_extend('force', client.config.settings, { python = { pythonPath = path } })
+    client.notify('workspace/didChangeConfiguration', { settings = nil })
+  end
+end
+
 return {
   default_config = {
     cmd = cmd,
@@ -44,6 +55,12 @@ return {
     PyrightOrganizeImports = {
       organize_imports,
       description = 'Organize Imports',
+    },
+    PyrightSetPythonPath = {
+      set_python_path,
+      description = 'Reconfigure pyright with the provided python path',
+      nargs = 1,
+      complete = 'file',
     },
   },
   docs = {
