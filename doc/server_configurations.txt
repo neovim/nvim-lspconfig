@@ -792,12 +792,6 @@ require'lspconfig'.bashls.setup{}
   ```lua
   { "bash-language-server", "start" }
   ```
-  - `cmd_env` : 
-  ```lua
-  {
-    GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)"
-  }
-  ```
   - `filetypes` : 
   ```lua
   { "sh" }
@@ -805,6 +799,14 @@ require'lspconfig'.bashls.setup{}
   - `root_dir` : 
   ```lua
   util.find_git_ancestor
+  ```
+  - `settings` : 
+  ```lua
+  {
+    bashIde = {
+      globPattern = "*@(.sh|.inc|.bash|.command)"
+    }
+  }
   ```
   - `single_file_support` : 
   ```lua
