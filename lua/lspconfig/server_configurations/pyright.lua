@@ -45,7 +45,7 @@ return {
       python = {
         analysis = {
           autoSearchPaths = true,
-          useLibraryCodeForTypes = true,
+          useLibraryCodeForTypes = false,
           diagnosticMode = 'workspace',
         },
       },
