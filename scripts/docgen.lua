@@ -196,7 +196,7 @@ local function make_lsp_sections()
                         end
 
                         -- https://github.github.com/gfm/#backslash-escapes
-                        local function excape_markdown_punctuations(str)
+                        local function escape_markdown_punctuations(str)
                           local pattern =
                             '\\(\\*\\|\\.\\|?\\|!\\|"\\|#\\|\\$\\|%\\|\'\\|(\\|)\\|,\\|-\\|\\/\\|:\\|;\\|<\\|=\\|>\\|@\\|\\[\\|\\\\\\|\\]\\|\\^\\|_\\|`\\|{\\|\\\\|\\|}\\)'
                           return fn.substitute(str, pattern, '\\\\\\0', 'g')
@@ -223,7 +223,7 @@ local function make_lsp_sections()
                           make_section(2, '\n\n', {
                             { v.default and 'Default: ' .. tick(inspect(v.default, { newline = '', indent = '' })) },
                             { v.items and 'Array items: ' .. tick(inspect(v.items, { newline = '', indent = '' })) },
-                            { excape_markdown_punctuations(v.description) },
+                            { escape_markdown_punctuations(v.description) },
                           }),
                         })
                       end)
