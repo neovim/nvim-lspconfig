@@ -338,8 +338,8 @@ function M.server_per_root_dir_manager(make_config)
       local supported = vim.tbl_get(client, 'server_capabilities', 'workspace', 'workspaceFolders', 'supported')
       local client_id
       if supported then
-        lsp.buf_attach_client(bufnr, client.id)
         register_workspace_folders(client)
+        lsp.buf_attach_client(bufnr, client.id)
         client_id = client.id
       else
         client_id = start_new_client()
