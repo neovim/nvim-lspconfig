@@ -18,6 +18,4 @@ jobs:
             This plugin allows for declaratively configuring,
             launching, and initializing language servers you have installed on your system.
             Language server configurations are community-maintained.
-          copy_directories: |
-            doc
           licence: "Apache/2.0"
