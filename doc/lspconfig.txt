@@ -370,7 +370,7 @@ below returns a function that takes as its argument the current buffer path.
 
 - `util.root_pattern`: function which takes multiple arguments, each 
   corresponding to a different root pattern against which the contents of the
-  current directory are matched using |vim.fin.glob()| while traversing up the
+  current directory are matched using |vim.fn.glob()| while traversing up the
   filesystem.
 >
    root_dir = util.root_pattern('pyproject.toml', 'requirements.txt')
