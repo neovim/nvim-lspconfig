@@ -12,6 +12,17 @@ function configs.__newindex(t, config_name, config_def)
     on_attach = { config_def.on_attach, 'f', true },
     commands = { config_def.commands, 't', true },
   }
+
+  if config_def.default_config.deprecate then
+    vim.deprecate(
+      config_name,
+      config_def.default_config.deprecate.to,
+      config_def.default_config.deprecate.version,
+      'lspconfig',
+      false
+    )
+  end
+
   if config_def.commands then
     for k, v in pairs(config_def.commands) do
       validate {

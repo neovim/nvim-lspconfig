@@ -33,7 +33,7 @@ function mt:__index(k)
   if configs[k] == nil then
     local alias = server_alias(k)
     if alias then
-      vim.deprecate(k, alias.to, alias.version, 'lspconfig')
+      vim.deprecate(k, alias.to, alias.version, 'lspconfig', false)
       k = alias.to
     end
 
