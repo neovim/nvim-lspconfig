@@ -1634,12 +1634,13 @@ require'lspconfig'.cucumber_language_server.setup{}
 
 ## dafny
 
-    NeoVim support for the Dafny language server.
-    Please follow the instructions and compile the language server from source:
-    https://github.com/dafny-lang/language-server-csharp
+    Support for the Dafny language server.
 
-    Note that there is no default cmd set. You must set it yourself. The recommended way is to use `{"dotnet", "<Path to your language server>"}`.
-
+    The default `cmd` uses "dafny server", which works on Dafny 4.0.0+. For
+    older versions of Dafny, you can compile the language server from source at
+    [dafny-lang/language-server-csharp](https://github.com/dafny-lang/language-server-csharp)
+    and set `cmd = {"dotnet", "<Path to your language server>"}`.
+    
 
 
 **Snippet to enable the language server:**
@@ -1649,6 +1650,10 @@ require'lspconfig'.dafny.setup{}
 
 
 **Default values:**
+  - `cmd` : 
+  ```lua
+  { "dafny", "server" }
+  ```
   - `filetypes` : 
   ```lua
   { "dfy", "dafny" }
