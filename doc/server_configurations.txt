@@ -7754,6 +7754,13 @@ require'lspconfig'.sqls.setup{}
   ```lua
   { "sqls" }
   ```
+  - `deprecate` : 
+  ```lua
+  {
+    to = "sqlls",
+    version = "0.2.0"
+  }
+  ```
   - `filetypes` : 
   ```lua
   { "sql", "mysql" }
