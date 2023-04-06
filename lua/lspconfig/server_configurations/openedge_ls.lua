@@ -21,7 +21,7 @@ return {
         config.cmd[#config.cmd + 1] = '-jar'
         config.cmd[#config.cmd + 1] = config.oe_jar_path
         if config.dlc then
-          table.insert(config.cmd, '--dlc')
+          config.cmd[#config.cmd + 1] = '--dlc'
           table.insert(config.cmd, config.dlc)
         end
         if config.trace then
