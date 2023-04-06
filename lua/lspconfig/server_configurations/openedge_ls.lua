@@ -16,7 +16,7 @@ return {
           '--add-opens=java.base/java.text=ALL-UNNAMED',
         }
         if config.debug then
-          table.insert(config.cmd, '-Dorg.slf4j.simpleLogger.defaultLogLevel=DEBUG')
+          config.cmd[#config.cmd + 1] =  '-Dorg.slf4j.simpleLogger.defaultLogLevel=DEBUG'
         end
         table.insert(config.cmd, '-jar')
         table.insert(config.cmd, config.oe_jar_path)
