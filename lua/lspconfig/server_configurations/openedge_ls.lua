@@ -16,7 +16,7 @@ return {
           '--add-opens=java.base/java.text=ALL-UNNAMED',
         }
         if config.debug then
-          config.cmd[#config.cmd + 1] =  '-Dorg.slf4j.simpleLogger.defaultLogLevel=DEBUG'
+          config.cmd[#config.cmd + 1] = '-Dorg.slf4j.simpleLogger.defaultLogLevel=DEBUG'
         end
         config.cmd[#config.cmd + 1] = '-jar'
         config.cmd[#config.cmd + 1] = config.oe_jar_path
