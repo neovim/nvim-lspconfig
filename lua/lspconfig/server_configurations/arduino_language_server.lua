@@ -1,5 +1,9 @@
 local util = require 'lspconfig.util'
 
+local default_capabilities = vim.lsp.protocol.make_client_capabilities()
+default_capabilities.textDocument.semanticTokens = vim.NIL
+default_capabilities.workspace.semanticTokens = vim.NIL
+
 return {
   default_config = {
     filetypes = { 'arduino' },
@@ -7,6 +11,7 @@ return {
     cmd = {
       'arduino-language-server',
     },
+    capabilities = default_capabilities,
   },
   docs = {
     description = [[
