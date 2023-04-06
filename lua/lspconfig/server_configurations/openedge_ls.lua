@@ -18,7 +18,7 @@ return {
         if config.debug then
           config.cmd[#config.cmd + 1] =  '-Dorg.slf4j.simpleLogger.defaultLogLevel=DEBUG'
         end
-        table.insert(config.cmd, '-jar')
+        config.cmd[#config.cmd + 1] = '-jar'
         table.insert(config.cmd, config.oe_jar_path)
         if config.dlc then
           table.insert(config.cmd, '--dlc')
