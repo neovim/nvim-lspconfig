@@ -25,7 +25,7 @@ return {
           config.cmd[#config.cmd + 1] = config.dlc
         end
         if config.trace then
-          table.insert(config.cmd, '--trace')
+          config.cmd[#config.cmd + 1] = '--trace'
         end
       end
     end,
