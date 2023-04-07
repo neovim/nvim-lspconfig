@@ -15,7 +15,7 @@ return {
         'Pipfile',
         'pyproject.toml',
       }
-      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
     end,
     settings = {
       python = {
