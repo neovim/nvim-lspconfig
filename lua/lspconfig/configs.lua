@@ -204,7 +204,7 @@ function configs.__newindex(t, config_name, config_def)
 
       -- Save the old _on_attach so that we can reference it via the BufEnter.
       new_config._on_attach = new_config.on_attach
-      new_config.on_attach = vim.schedule_wrap(function(client, bufnr)
+      new_config.on_attach = function(client, bufnr)
         if bufnr == api.nvim_get_current_buf() then
           M._setup_buffer(client.id, bufnr)
         else
@@ -220,7 +220,7 @@ function configs.__newindex(t, config_name, config_def)
             })
           end
         end
-      end)
+      end
 
       new_config.root_dir = root_dir
       new_config.workspace_folders = {
