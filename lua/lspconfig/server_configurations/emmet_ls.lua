@@ -10,7 +10,7 @@ end
 return {
   default_config = {
     cmd = cmd,
-    filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'eruby' },
+    filetypes = { 'astro', 'css', 'eruby', 'html', 'javascriptreact', 'less', 'sass', 'scss', 'typescriptreact', 'vue' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
   },
