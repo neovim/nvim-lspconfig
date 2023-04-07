@@ -4907,6 +4907,10 @@ require'lspconfig'.millet.setup{}
   ```lua
   see source file
   ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## mint
