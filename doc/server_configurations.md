@@ -2490,7 +2490,7 @@ require'lspconfig'.emmet_ls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "astro", "css", "eruby", "html", "javascriptreact", "less", "sass", "scss", "svelte", "typescriptreact", "vue" }
+  { "astro", "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "sass", "scss", "svelte", "typescriptreact", "vue" }
   ```
   - `root_dir` : 
   ```lua
