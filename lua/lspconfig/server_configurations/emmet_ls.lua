@@ -15,6 +15,7 @@ return {
       'css',
       'eruby',
       'html',
+      'htmldjango',
       'javascriptreact',
       'less',
       'sass',
