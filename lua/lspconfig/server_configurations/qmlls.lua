@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'qmlls' },
+    cmd = { '/usr/bin/qmlls6' },
     filetypes = { 'qmljs' },
     root_dir = function(fname)
       return util.find_git_ancestor(fname)
