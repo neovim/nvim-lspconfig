@@ -3,7 +3,7 @@ local util = require('lspconfig').util
 local bin_name = 'pylyzer'
 local cmd = { bin_name, '--server' }
 
-if vim.fn.has('win32') == 1 then
+if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', bin_name, '--server' }
 end
 
