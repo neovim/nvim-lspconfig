@@ -487,15 +487,16 @@ function M.find_package_json_ancestor(startpath)
   end)
 end
 
-function M.insert_package_json(config_files, field)
-  local root_with_package = M.find_package_json_ancestor(vim.fn.expand '%:p:h')
+function M.insert_package_json(config_files, field, fname)
+  local path = vim.fn.fnamemodify(fname, ':h')
+  local root_with_package = M.find_package_json_ancestor(path)
 
   if root_with_package then
     -- only add package.json if it contains field parameter
     local path_sep = is_windows and '\\' or '/'
     for line in io.lines(root_with_package .. path_sep .. 'package.json') do
       if line:find(field) then
-        table.insert(config_files, 'package.json')
+        config_files[#config_files + 1] = 'package.json'
         break
       end
     end

@@ -49,8 +49,6 @@ local root_file = {
   'eslint.config.js',
 }
 
-root_file = util.insert_package_json(root_file, 'eslintConfig')
-
 return {
   default_config = {
     cmd = cmd,
@@ -66,7 +64,10 @@ return {
       'astro',
     },
     -- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
-    root_dir = util.root_pattern(unpack(root_file)),
+    root_dir = function(fname)
+      root_file = util.insert_package_json(root_file, 'eslintConfig', fname)
+      return util.root_pattern(unpack(root_file))(fname)
+    end,
     -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
     settings = {
       validate = 'on',
