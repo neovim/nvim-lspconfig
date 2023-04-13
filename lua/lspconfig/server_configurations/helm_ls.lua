@@ -24,7 +24,7 @@ Helm Language server. (This LSP is in early development)
 
 The default `cmd` assumes that the `helm_ls` binary can be found in `$PATH`.
 
-You'll need [vim-helm](https://github.com/towolf/vim-helm) plugin installed before using helm_ls
+If need Helm file highlight use [vim-helm](https://github.com/towolf/vim-helm) plugin.
 ]],
     default_config = {
       root_dir = [[root_pattern("Chart.yaml)]],
