@@ -3720,7 +3720,7 @@ require'lspconfig'.helm_ls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { { "helm_ls" }, "serve" }
+  { "helm_ls", "serve" }
   ```
   - `filetypes` : 
   ```lua
