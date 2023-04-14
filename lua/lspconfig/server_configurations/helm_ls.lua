@@ -1,7 +1,7 @@
 local util = require 'lspconfig.util'
 
 local bin_name = 'helm_ls'
-local cmd = { bin_name, "serve" }
+local cmd = { bin_name, 'serve' }
 
 if vim.fn.has 'win32' == 1 then
   cmd = { 'cmd.exe', '/C', unpack(cmd) }
