@@ -1,15 +1,15 @@
 local util = require 'lspconfig.util'
 
 local bin_name = 'helm_ls'
-local cmd = { bin_name }
+local cmd = { bin_name, 'serve' }
 
 if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name }
+  cmd = { 'cmd.exe', '/C', unpack(cmd) }
 end
 
 return {
   default_config = {
-    cmd = { cmd, 'serve' },
+    cmd = cmd,
     filetypes = { 'helm' },
     root_dir = util.root_pattern 'Chart.yaml',
     single_file_support = true,
