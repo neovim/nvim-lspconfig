@@ -13,14 +13,7 @@ See also `:help lsp-config`.
 [![LuaRocks](https://img.shields.io/luarocks/v/neovim/nvim-lspconfig?logo=lua&color=purple)](https://luarocks.org/modules/neovim/nvim-lspconfig)
 
 * Requires neovim version 0.8 above. Update Nvim and nvim-lspconfig before reporting an issue.
-* Install nvim-lspconfig like any other Vim plugin, e.g. with [packer.nvim](https://github.com/wbthomason/packer.nvim):
-  ```lua
-  local use = require('packer').use
-  require('packer').startup(function()
-    use 'wbthomason/packer.nvim' -- Package manager
-    use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
-  end)
-  ```
+* Install nvim-lspconfig as a normal plugin through neovim builtin `packadd` or a plugin manager
 
 ## Quickstart
 
