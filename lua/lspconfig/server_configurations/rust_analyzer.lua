@@ -31,12 +31,7 @@ local function get_workspace_dir(args)
     args = args,
     cwd = uv.cwd(),
     stdio = { nil, stdout, stderr },
-  }, function(err, code)
-    if err then
-      print('[Lspconfig] rust_analyzer exit code ' .. code)
-      assert(err)
-    end
-
+  }, function(code, signal)
     safe_close(stdout)
     safe_close(stderr)
     safe_close(handle)
