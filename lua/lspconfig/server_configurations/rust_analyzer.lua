@@ -13,7 +13,6 @@ end
 
 local function get_workspace_dir(args)
   local co = coroutine.running()
-  print(co)
   if not co then
     return
   end
@@ -33,6 +32,11 @@ local function get_workspace_dir(args)
     cwd = uv.cwd(),
     stdio = { nil, stdout, stderr },
   }, function(err, code)
+    if err then
+      print('[Lspconfig] rust_analyzer exit code ' .. code)
+      assert(not err)
+    end
+
     safe_close(stdout)
     safe_close(stderr)
     safe_close(handle)
@@ -43,7 +47,6 @@ local function get_workspace_dir(args)
     local data = table.concat(chunks, '')
     chunks = vim.json.decode(data)
     local workspace_root = chunks and chunks['workspace_root'] or nil
-    print(workspace_root, 'on_exit', coroutine.status(co))
     coroutine.resume(co, workspace_root)
   end)
 
@@ -60,8 +63,9 @@ local function get_workspace_dir(args)
       vim.notify(string.format('[lspconfig] cmd (%q) failed:\n%s', table.concat(args, ' '), data), vim.log.levels.WARN)
     end
   end)
-  print 'in dir'
-  return coroutine.yield()
+
+  local workspace_root = coroutine.yield()
+  return workspace_root
 end
 
 return {
@@ -76,25 +80,12 @@ return {
         args[#args + 1] = util.path.join(cargo_crate_dir, 'Cargo.toml')
       end
 
-      local dir = function()
-        return get_workspace_dir(args)
-      end
-
-      local co = coroutine.create(function()
-        print 'here'
-        local result = dir()
-        print 'here1'
-        coroutine.yield(result)
-      end)
-      local _, cargo_workspace_root = coroutine.resume(co)
-
-      print(cargo_workspace_root, coroutine.status(co), co)
+      local cargo_workspace_root = get_workspace_dir(args)
 
       if cargo_workspace_root then
         cargo_workspace_root = util.path.sanitize(cargo_workspace_root)
       end
 
-      print 'end'
       return cargo_workspace_root
         or cargo_crate_dir
         or util.root_pattern 'rust-project.json'(fname)

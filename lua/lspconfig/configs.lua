@@ -245,8 +245,6 @@ function configs.__newindex(t, config_name, config_def)
         return
       end
 
-      local root_dir
-
       local bufname = api.nvim_buf_get_name(bufnr)
       if #bufname == 0 and not config.single_file_support then
         return
@@ -257,16 +255,25 @@ function configs.__newindex(t, config_name, config_def)
       end
       local buf_path = util.path.sanitize(bufname)
 
-      if get_root_dir then
-        root_dir = get_root_dir(buf_path, bufnr)
-      end
+      local co = coroutine.create(function()
+        local root_dir
+        if get_root_dir then
+          root_dir = get_root_dir(buf_path, bufnr)
+        end
 
-      if root_dir then
-        manager.add(root_dir, false, bufnr)
-      elseif config.single_file_support then
-        local pseudo_root = #bufname == 0 and uv.cwd() or util.path.dirname(buf_path)
-        manager.add(pseudo_root, true, bufnr)
-      end
+        if root_dir then
+          vim.schedule(function()
+            manager.add(root_dir, false, bufnr)
+          end)
+        elseif config.single_file_support then
+          local pseudo_root = #bufname == 0 and uv.cwd() or util.path.dirname(buf_path)
+          vim.schedule(function()
+            manager.add(pseudo_root, true, bufnr)
+          end)
+        end
+      end)
+
+      coroutine.resume(co)
     end
 
     -- Check that the buffer `bufnr` has a valid filetype according to
