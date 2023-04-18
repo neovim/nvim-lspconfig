@@ -34,7 +34,7 @@ local function get_workspace_dir(args)
   }, function(err, code)
     if err then
       print('[Lspconfig] rust_analyzer exit code ' .. code)
-      assert(not err)
+      assert(err)
     end
 
     safe_close(stdout)
