@@ -12,6 +12,7 @@ local function reload_workspace(bufnr)
 end
 
 local function get_workspace_dir(args)
+  assert(coroutine.running())
   local co = coroutine.running()
   if not co then
     return

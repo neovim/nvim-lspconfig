@@ -97,54 +97,54 @@ function configs.__newindex(t, config_name, config_def)
     local get_root_dir = config.root_dir
 
     function M.launch()
-      local root_dir
-      if get_root_dir then
-        local bufnr = api.nvim_get_current_buf()
-        local bufname = api.nvim_buf_get_name(bufnr)
-        if #bufname == 0 and not config.single_file_support then
-          return
-        elseif #bufname ~= 0 then
-          if not util.bufname_valid(bufname) then
-            return
-          end
-          root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
-        end
+      local bufnr = api.nvim_get_current_buf()
+      local bufname = api.nvim_buf_get_name(bufnr)
+      if (#bufname == 0 and not config.single_file_support) or (#bufname ~= 0 and not util.bufname_valid(bufname)) then
+        return
       end
 
-      if root_dir then
-        api.nvim_create_autocmd('BufReadPost', {
-          pattern = fn.fnameescape(root_dir) .. '/*',
-          callback = function()
-            M.manager.try_add_wrapper()
-          end,
-          group = lsp_group,
-          desc = string.format(
-            'Checks whether server %s should attach to a newly opened buffer inside workspace %q.',
-            config.name,
-            root_dir
-          ),
-        })
-        for _, bufnr in ipairs(api.nvim_list_bufs()) do
-          local bufname = api.nvim_buf_get_name(bufnr)
-          if util.bufname_valid(bufname) then
-            local buf_dir = util.path.sanitize(bufname)
-            if buf_dir:sub(1, root_dir:len()) == root_dir then
-              M.manager.try_add_wrapper(bufnr)
+      coroutine.resume(coroutine.create(vim.schedule_wrap(function()
+        local root_dir
+        if get_root_dir then
+          root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
+        end
+
+        if root_dir then
+          api.nvim_create_autocmd('BufReadPost', {
+            pattern = fn.fnameescape(root_dir) .. '/*',
+            callback = function()
+              M.manager.try_add_wrapper()
+            end,
+            group = lsp_group,
+            desc = string.format(
+              'Checks whether server %s should attach to a newly opened buffer inside workspace %q.',
+              config.name,
+              root_dir
+            ),
+          })
+
+          for _, buf in ipairs(api.nvim_list_bufs()) do
+            local buf_name = api.nvim_buf_get_name(buf)
+            if util.bufname_valid(buf_name) then
+              local buf_dir = util.path.sanitize(buf_name)
+              if buf_dir:sub(1, root_dir:len()) == root_dir then
+                M.manager.try_add_wrapper(buf)
+              end
             end
           end
+        elseif config.single_file_support then
+          -- This allows on_new_config to use the parent directory of the file
+          -- Effectively this is the root from lspconfig's perspective, as we use
+          -- this to attach additional files in the same parent folder to the same server.
+          -- We just no longer send rootDirectory or workspaceFolders during initialization.
+          local buf_name = api.nvim_buf_get_name(0)
+          if #buf_name ~= 0 and not util.bufname_valid(buf_name) then
+            return
+          end
+          local pseudo_root = #buf_name == 0 and uv.cwd() or util.path.dirname(util.path.sanitize(buf_name))
+          M.manager.add(pseudo_root, true, api.nvim_get_current_buf())
         end
-      elseif config.single_file_support then
-        -- This allows on_new_config to use the parent directory of the file
-        -- Effectively this is the root from lspconfig's perspective, as we use
-        -- this to attach additional files in the same parent folder to the same server.
-        -- We just no longer send rootDirectory or workspaceFolders during initialization.
-        local bufname = api.nvim_buf_get_name(0)
-        if #bufname ~= 0 and not util.bufname_valid(bufname) then
-          return
-        end
-        local pseudo_root = #bufname == 0 and uv.cwd() or util.path.dirname(util.path.sanitize(bufname))
-        M.manager.add(pseudo_root, true, api.nvim_get_current_buf())
-      end
+      end)))
     end
 
     -- Used by :LspInfo
