@@ -255,7 +255,7 @@ function configs.__newindex(t, config_name, config_def)
       end
       local buf_path = util.path.sanitize(bufname)
 
-      local co = coroutine.create(function()
+      coroutine.resume(coroutine.create(function()
         local root_dir
         if get_root_dir then
           root_dir = get_root_dir(buf_path, bufnr)
@@ -271,9 +271,7 @@ function configs.__newindex(t, config_name, config_def)
             manager.add(pseudo_root, true, bufnr)
           end)
         end
-      end)
-
-      coroutine.resume(co)
+      end))
     end
 
     -- Check that the buffer `bufnr` has a valid filetype according to

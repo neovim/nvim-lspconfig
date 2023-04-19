@@ -59,8 +59,7 @@ local function get_workspace_dir(args)
     end
   end)
 
-  local workspace_root = coroutine.yield()
-  return workspace_root
+  return (coroutine.yield())
 end
 
 return {
