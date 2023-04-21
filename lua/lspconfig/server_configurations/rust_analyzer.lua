@@ -1,5 +1,4 @@
 local util = require 'lspconfig.util'
-local uv = vim.loop
 
 local function reload_workspace(bufnr)
   bufnr = util.validate_bufnr(bufnr)
@@ -11,54 +10,40 @@ local function reload_workspace(bufnr)
   end)
 end
 
-local function get_workspace_dir(args)
+local function get_workspace_dir(cmd)
   assert(coroutine.running())
   local co = coroutine.running()
   if not co then
     return
   end
 
-  local function safe_close(handle)
-    if not uv.is_closing(handle) then
-      uv.close(handle)
-    end
-  end
-
-  local stdout = uv.new_pipe(false)
-  local stderr = uv.new_pipe(false)
   local chunks = {}
-  local handle
-  handle = uv.spawn('cargo', {
-    args = args,
-    cwd = uv.cwd(),
-    stdio = { nil, stdout, stderr },
-  }, function(code, signal)
-    safe_close(stdout)
-    safe_close(stderr)
-    safe_close(handle)
-    if next(chunks) == nil then
-      return
-    end
+  local jobid = vim.fn.jobstart(cmd, {
+    on_stdout = function(_, data, _)
+      chunks[#chunks + 1] = unpack(data)
+    end,
+    on_stderr = function(_, data, _)
+      vim.api.nvim_err_write(table.concat(data, '\n'))
+    end,
+    on_exit = function()
+      if next(chunks) == nil then
+        coroutine.resume(co, nil)
+        return
+      end
 
-    local data = table.concat(chunks, '')
-    chunks = vim.json.decode(data)
-    local workspace_root = chunks and chunks['workspace_root'] or nil
-    coroutine.resume(co, workspace_root)
-  end)
+      local data = table.concat(chunks, '')
+      chunks = vim.json.decode(data)
+      local workspace_root = chunks and chunks['workspace_root'] or nil
+      coroutine.resume(co, workspace_root)
+    end,
+    stdout_buffered = true,
+    stderr_buffered = true,
+  })
 
-  stdout:read_start(function(err, data)
-    assert(not err)
-    if data then
-      chunks[#chunks + 1] = data
-    end
-  end)
-
-  stderr:read_start(function(err, data)
-    assert(not err)
-    if data then
-      vim.notify(string.format('[lspconfig] cmd (%q) failed:\n%s', table.concat(args, ' '), data), vim.log.levels.WARN)
-    end
-  end)
+  if jobid < 0 then
+    vim.api.nvim_err_writeln('Failed to start cargo metadata job id:' .. jobid)
+    return
+  end
 
   return (coroutine.yield())
 end
@@ -69,13 +54,13 @@ return {
     filetypes = { 'rust' },
     root_dir = function(fname)
       local cargo_crate_dir = util.root_pattern 'Cargo.toml'(fname)
-      local args = { 'metadata', '--no-deps', '--format-version', '1' }
+      local cmd = { 'cargo', 'metadata', '--no-deps', '--format-version', '1' }
       if cargo_crate_dir ~= nil then
-        args[#args + 1] = '--manifest-path'
-        args[#args + 1] = util.path.join(cargo_crate_dir, 'Cargo.toml')
+        cmd[#cmd + 1] = '--manifest-path'
+        cmd[#cmd + 1] = util.path.join(cargo_crate_dir, 'Cargo.toml')
       end
 
-      local cargo_workspace_root = get_workspace_dir(args)
+      local cargo_workspace_root = get_workspace_dir(cmd)
 
       if cargo_workspace_root then
         cargo_workspace_root = util.path.sanitize(cargo_workspace_root)
