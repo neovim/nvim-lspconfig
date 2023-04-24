@@ -684,7 +684,7 @@ require'lspconfig'.arduino_language_server.setup{}
       applyEdit = true,
       configuration = true,
       didChangeWatchedFiles = {
-        dynamicRegistration = false,
+        dynamicRegistration = true,
         relativePatternSupport = true
       },
       semanticTokens = vim.NIL,
@@ -3463,7 +3463,7 @@ require'lspconfig'.gopls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("go.mod", ".git")
+  root_pattern("go.work", "go.mod", ".git")
   ```
   - `single_file_support` : 
   ```lua
@@ -3766,7 +3766,7 @@ require'lspconfig'.helm_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("Chart.yaml)
+  root_pattern("Chart.yaml")
   ```
   - `single_file_support` : 
   ```lua
