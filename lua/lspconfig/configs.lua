@@ -103,6 +103,8 @@ function configs.__newindex(t, config_name, config_def)
         return
       end
 
+      local pwd = uv.cwd()
+
       coroutine.resume(coroutine.create(vim.schedule_wrap(function()
         local root_dir
         if get_root_dir then
@@ -137,12 +139,11 @@ function configs.__newindex(t, config_name, config_def)
           -- Effectively this is the root from lspconfig's perspective, as we use
           -- this to attach additional files in the same parent folder to the same server.
           -- We just no longer send rootDirectory or workspaceFolders during initialization.
-          local buf_name = api.nvim_buf_get_name(0)
-          if #buf_name ~= 0 and not util.bufname_valid(buf_name) then
+          if not api.nvim_buf_is_valid(bufnr) or (#bufname ~= 0 and not util.bufname_valid(bufname)) then
             return
           end
-          local pseudo_root = #buf_name == 0 and uv.cwd() or util.path.dirname(util.path.sanitize(buf_name))
-          M.manager.add(pseudo_root, true, api.nvim_get_current_buf())
+          local pseudo_root = #bufname == 0 and pwd or util.path.dirname(util.path.sanitize(bufname))
+          M.manager.add(pseudo_root, true, bufnr)
         end
       end)))
     end
@@ -244,6 +245,7 @@ function configs.__newindex(t, config_name, config_def)
       if api.nvim_buf_get_option(bufnr, 'buftype') == 'nofile' then
         return
       end
+      local pwd = uv.cwd()
 
       local bufname = api.nvim_buf_get_name(bufnr)
       if #bufname == 0 and not config.single_file_support then
@@ -266,7 +268,7 @@ function configs.__newindex(t, config_name, config_def)
             manager.add(root_dir, false, bufnr)
           end)
         elseif config.single_file_support then
-          local pseudo_root = #bufname == 0 and uv.cwd() or util.path.dirname(buf_path)
+          local pseudo_root = #bufname == 0 and pwd or util.path.dirname(buf_path)
           vim.schedule(function()
             manager.add(pseudo_root, true, bufnr)
           end)
