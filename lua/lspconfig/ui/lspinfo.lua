@@ -116,21 +116,13 @@ local function make_client_info(client, fname)
   if is_windows then
     fname:gsub('%/', '%\\')
   end
-  local sep = is_windows and '\\' or '/'
-  local fname_parts = vim.tbl_filter(function(v)
-    return #v > 0
-  end, vim.split(fname, sep))
+
   if workspace_folders then
     for _, schema in pairs(workspace_folders) do
       local matched = true
-      local root = uv.fs_realpath(schema.name)
-      local root_parts = vim.split(root, sep, { trimempty = true })
-
-      for i = 1, #root_parts do
-        if root_parts[i] ~= fname_parts[i] then
-          matched = false
-          break
-        end
+      local root_dir = uv.fs_realpath(schema.name)
+      if fname:sub(1, root_dir:len()) ~= root_dir then
+        matched = false
       end
 
       if matched then
