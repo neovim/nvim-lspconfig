@@ -832,19 +832,10 @@ https://github.com/microsoft/azure-pipelines-language-server
 
 An Azure Pipelines language server
 
-**By default, `azure-pipelines-ls` doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path.
-You have to install the language server manually.
-
 `azure-pipelines-ls` can be installed via `npm`:
 
 ```sh
 npm install -g azure-pipelines-language-server
-```
-
-Once installed, point `cmd` to `server.js` inside the `out` directory:
-
-```lua
-cmd = {'node', '<path_to_azure_pipelines_install>/out/server.js', '--stdio'}
 ```
 
 By default `azure-pipelines-ls` will only work in files named `azure-pipelines.yml`, this can be changed by providing additional settings like so:
@@ -878,7 +869,7 @@ require'lspconfig'.azure_pipelines_ls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  {}
+  { "azure-pipelines-language-server", "--stdio" }
   ```
   - `filetypes` : 
   ```lua
