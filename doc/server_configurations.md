@@ -3487,7 +3487,7 @@ require'lspconfig'.golangci_lint_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern('go.work') or root_pattern('go.mod', '.golangci.yaml', '.git')
+  root_pattern('.golangci.yml', '.golangci.yaml', '.golangci.toml', '.golangci.json', 'go.work', 'go.mod', '.git')
   ```
 
 
