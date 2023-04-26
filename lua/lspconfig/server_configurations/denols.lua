@@ -8,7 +8,7 @@ local function buf_cache(bufnr, client)
   client.request('deno/cache', params, function(err, _result, ctx)
     if err then
       local uri = ctx.params.referrer.uri
-      vim.api.nvim_err_writeln('cache command failed for ' .. uri)
+      vim.api.nvim_err_writeln('cache command failed for ' .. vim.uri_to_fname(uri))
     end
   end, bufnr)
 end
