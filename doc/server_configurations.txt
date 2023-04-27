@@ -1960,6 +1960,12 @@ require'lspconfig'.denols.setup{}
   ```lua
   { "deno", "lsp" }
   ```
+  - `cmd_env` : 
+  ```lua
+  {
+    NO_COLOR = true
+  }
+  ```
   - `filetypes` : 
   ```lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
