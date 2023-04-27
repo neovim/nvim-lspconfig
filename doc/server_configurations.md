@@ -7977,7 +7977,7 @@ require'lspconfig'.sourcery.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "python" }
+  { "javascript", "javascriptreact", "python", "typescript", "typescriptreact" }
   ```
   - `init_options` : 
   ```lua
