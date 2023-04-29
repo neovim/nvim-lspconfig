@@ -105,7 +105,7 @@ function configs.__newindex(t, config_name, config_def)
 
       local pwd = uv.cwd()
 
-      coroutine.resume(coroutine.create(vim.schedule_wrap(function()
+      coroutine.resume(coroutine.create(function()
         local root_dir
         if get_root_dir then
           root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
@@ -145,7 +145,7 @@ function configs.__newindex(t, config_name, config_def)
           local pseudo_root = #bufname == 0 and pwd or util.path.dirname(util.path.sanitize(bufname))
           M.manager.add(pseudo_root, true, bufnr)
         end
-      end)))
+      end))
     end
 
     -- Used by :LspInfo

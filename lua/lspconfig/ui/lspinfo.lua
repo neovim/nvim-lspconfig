@@ -66,7 +66,7 @@ local function make_config_info(config, bufnr)
   end)
 
   if config.get_root_dir then
-    config_info.root_dir = coroutine.resume(coroutine.create(vim.schedul_wrap(function()
+    _, config_info.root_dir = coroutine.resume(coroutine.create(vim.schedule_wrap(function()
       local root_dir = config.get_root_dir(buffer_dir)
       coroutine.yield(root_dir)
     end)))
