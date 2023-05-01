@@ -105,7 +105,7 @@ function configs.__newindex(t, config_name, config_def)
 
       local pwd = uv.cwd()
 
-      coroutine.resume(coroutine.create(function()
+      local function try_launch()
         local root_dir
         if get_root_dir then
           root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
@@ -130,7 +130,7 @@ function configs.__newindex(t, config_name, config_def)
             if util.bufname_valid(buf_name) then
               local buf_dir = util.path.sanitize(buf_name)
               if buf_dir:sub(1, root_dir:len()) == root_dir then
-                M.manager.try_add_wrapper(buf)
+                M.manager.try_add_wrapper(buf, root_dir)
               end
             end
           end
@@ -145,7 +145,9 @@ function configs.__newindex(t, config_name, config_def)
           local pseudo_root = #bufname == 0 and pwd or util.path.dirname(util.path.sanitize(bufname))
           M.manager.add(pseudo_root, true, bufnr)
         end
-      end))
+      end
+
+      util.async_run(try_launch)
     end
 
     -- Used by :LspInfo
@@ -239,7 +241,7 @@ function configs.__newindex(t, config_name, config_def)
 
     -- Try to attach the buffer `bufnr` to a client using this config, creating
     -- a new client if one doesn't already exist for `bufnr`.
-    function manager.try_add(bufnr)
+    function manager.try_add(bufnr, project_root)
       bufnr = bufnr or api.nvim_get_current_buf()
 
       if api.nvim_buf_get_option(bufnr, 'buftype') == 'nofile' then
@@ -255,6 +257,12 @@ function configs.__newindex(t, config_name, config_def)
           return
         end
       end
+
+      if project_root then
+        manager.add(project_root, false, bufnr)
+        return
+      end
+
       local buf_path = util.path.sanitize(bufname)
 
       local function check_fast(root_dir, single_mode)
@@ -267,7 +275,7 @@ function configs.__newindex(t, config_name, config_def)
         end)
       end
 
-      coroutine.resume(coroutine.create(function()
+      local function try_start()
         local root_dir
         if get_root_dir then
           root_dir = get_root_dir(buf_path, bufnr)
@@ -279,24 +287,25 @@ function configs.__newindex(t, config_name, config_def)
           local pseudo_root = #bufname == 0 and pwd or util.path.dirname(buf_path)
           check_fast(pseudo_root, true)
         end
-      end))
+      end
+      util.async_run(try_start)
     end
 
     -- Check that the buffer `bufnr` has a valid filetype according to
     -- `config.filetypes`, then do `manager.try_add(bufnr)`.
-    function manager.try_add_wrapper(bufnr)
+    function manager.try_add_wrapper(bufnr, project_root)
       bufnr = bufnr or api.nvim_get_current_buf()
       local buf_filetype = api.nvim_buf_get_option(bufnr, 'filetype')
       if config.filetypes then
         for _, filetype in ipairs(config.filetypes) do
           if buf_filetype == filetype then
-            manager.try_add(bufnr)
+            manager.try_add(bufnr, project_root)
             return
           end
         end
         -- `config.filetypes = nil` means all filetypes are valid.
       else
-        manager.try_add(bufnr)
+        manager.try_add(bufnr, project_root)
       end
     end
 

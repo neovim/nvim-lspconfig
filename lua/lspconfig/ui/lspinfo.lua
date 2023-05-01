@@ -68,7 +68,12 @@ local function make_config_info(config, bufnr)
   if config.get_root_dir then
     local root_dir
     local status = coroutine.resume(coroutine.create(function()
-      root_dir = config.get_root_dir(buffer_dir)
+      local status, err = pcall(function()
+        root_dir = config.get_root_dir(buffer_dir)
+      end)
+      if not status then
+        print('lspconfig: unhandled error: ' .. tostring(err))
+      end
     end))
     config_info.root_dir = status and root_dir or error_messages.root_dir_not_found
   else

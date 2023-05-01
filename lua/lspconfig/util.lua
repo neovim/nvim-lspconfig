@@ -588,4 +588,18 @@ function M.strip_archive_subpath(path)
   return path
 end
 
+function M.async_run(fn)
+  vim.validate {
+    fn = { fn, 'f' },
+  }
+  local co = coroutine.create(function()
+    local status, err = pcall(fn)
+
+    if not status then
+      print('lspconfig: unhandled error: ' .. tostring(err))
+    end
+  end)
+  coroutine.resume(co)
+end
+
 return M
