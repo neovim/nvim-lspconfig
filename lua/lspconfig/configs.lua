@@ -257,6 +257,16 @@ function configs.__newindex(t, config_name, config_def)
       end
       local buf_path = util.path.sanitize(bufname)
 
+      local function check_fast(root_dir, single_mode)
+        if not vim.in_fast_event() then
+          manager.add(root_dir, single_mode, bufnr)
+          return
+        end
+        vim.schedule(function()
+          manager.add(root_dir, single_mode, bufnr)
+        end)
+      end
+
       coroutine.resume(coroutine.create(function()
         local root_dir
         if get_root_dir then
@@ -264,14 +274,10 @@ function configs.__newindex(t, config_name, config_def)
         end
 
         if root_dir then
-          vim.schedule(function()
-            manager.add(root_dir, false, bufnr)
-          end)
+          check_fast(root_dir, false)
         elseif config.single_file_support then
           local pseudo_root = #bufname == 0 and pwd or util.path.dirname(buf_path)
-          vim.schedule(function()
-            manager.add(pseudo_root, true, bufnr)
-          end)
+          check_fast(pseudo_root, true)
         end
       end))
     end
