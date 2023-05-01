@@ -683,7 +683,7 @@ require'lspconfig'.arduino_language_server.setup{}
       applyEdit = true,
       configuration = true,
       didChangeWatchedFiles = {
-        dynamicRegistration = true,
+        dynamicRegistration = false,
         relativePatternSupport = true
       },
       semanticTokens = vim.NIL,
