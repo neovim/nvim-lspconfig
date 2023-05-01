@@ -72,17 +72,10 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     if config.autostart == true then
-      local event
-      local pattern
-      if config.filetypes then
-        event = 'FileType'
-        pattern = table.concat(config.filetypes, ',')
-      else
-        event = 'BufReadPost'
-        pattern = '*'
-      end
-      api.nvim_create_autocmd(event, {
-        pattern = pattern,
+      local event_conf = config.filetyes and { event = 'FileType', pattern = table.concat(config.filetypes), ',' }
+        or { event = 'BufReadPost' }
+      api.nvim_create_autocmd(event_conf.event, {
+        pattern = event_conf.pattern or '*',
         callback = function(opt)
           M.manager.try_add(opt.buf)
         end,
@@ -114,8 +107,8 @@ function configs.__newindex(t, config_name, config_def)
         if root_dir then
           api.nvim_create_autocmd('BufReadPost', {
             pattern = fn.fnameescape(root_dir) .. '/*',
-            callback = function()
-              M.manager.try_add_wrapper()
+            callback = function(arg)
+              M.manager.try_add_wrapper(arg.buf, root_dir)
             end,
             group = lsp_group,
             desc = string.format(
@@ -294,15 +287,8 @@ function configs.__newindex(t, config_name, config_def)
     -- Check that the buffer `bufnr` has a valid filetype according to
     -- `config.filetypes`, then do `manager.try_add(bufnr)`.
     function manager.try_add_wrapper(bufnr, project_root)
-      bufnr = bufnr or api.nvim_get_current_buf()
-      local buf_filetype = api.nvim_buf_get_option(bufnr, 'filetype')
-      if config.filetypes then
-        for _, filetype in ipairs(config.filetypes) do
-          if buf_filetype == filetype then
-            manager.try_add(bufnr, project_root)
-            return
-          end
-        end
+      if config.filetypes and vim.tbl_contains(config.filetypes, vim.bo[bufnr].filetype) then
+        manager.try_add(bufnr, project_root)
         -- `config.filetypes = nil` means all filetypes are valid.
       else
         manager.try_add(bufnr, project_root)
