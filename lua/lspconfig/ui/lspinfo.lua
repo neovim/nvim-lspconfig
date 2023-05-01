@@ -66,9 +66,9 @@ local function make_config_info(config, bufnr)
   end)
 
   if config.get_root_dir then
-    local status, root_dir = coroutine.resume(coroutine.create(vim.schedule_wrap(function()
-      local root_dir = config.get_root_dir(buffer_dir)
-      coroutine.yield(root_dir)
+    local root_dir
+    local status = coroutine.resume(coroutine.create(vim.schedule_wrap(function()
+      root_dir = config.get_root_dir(buffer_dir)
     end)))
     config_info.root_dir = status and root_dir or error_messages.root_dir_not_found
   else
