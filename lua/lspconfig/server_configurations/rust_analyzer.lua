@@ -11,11 +11,7 @@ local function reload_workspace(bufnr)
 end
 
 local function get_workspace_dir(cmd)
-  assert(coroutine.running())
-  local co = coroutine.running()
-  if not co then
-    return
-  end
+  local co = assert(coroutine.running())
 
   local chunks = {}
   local jobid = vim.fn.jobstart(cmd, {
