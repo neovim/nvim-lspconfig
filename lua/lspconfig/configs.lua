@@ -72,7 +72,7 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     if config.autostart == true then
-      local event_conf = config.filetyes and { event = 'FileType', pattern = table.concat(config.filetypes), ',' }
+      local event_conf = config.filetypes and { event = 'FileType', pattern = table.concat(config.filetypes, ',') }
         or { event = 'BufReadPost' }
       api.nvim_create_autocmd(event_conf.event, {
         pattern = event_conf.pattern or '*',
@@ -325,8 +325,6 @@ function configs.__newindex(t, config_name, config_def)
   M.document_config = config_def
 
   rawset(t, config_name, M)
-
-  return M
 end
 
 return setmetatable({}, configs)
