@@ -98,7 +98,7 @@ function configs.__newindex(t, config_name, config_def)
 
       local pwd = uv.cwd()
 
-      local function try_launch()
+      util.async_run(function()
         local root_dir
         if get_root_dir then
           root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
@@ -138,9 +138,7 @@ function configs.__newindex(t, config_name, config_def)
           local pseudo_root = #bufname == 0 and pwd or util.path.dirname(util.path.sanitize(bufname))
           M.manager.add(pseudo_root, true, bufnr)
         end
-      end
-
-      util.async_run(try_launch)
+      end)
     end
 
     -- Used by :LspInfo
@@ -268,7 +266,7 @@ function configs.__newindex(t, config_name, config_def)
         end)
       end
 
-      local function try_start()
+      util.async_run(function()
         local root_dir
         if get_root_dir then
           root_dir = get_root_dir(buf_path, bufnr)
@@ -280,8 +278,7 @@ function configs.__newindex(t, config_name, config_def)
           local pseudo_root = #bufname == 0 and pwd or util.path.dirname(buf_path)
           check_fast(pseudo_root, true)
         end
-      end
-      util.async_run(try_start)
+      end)
     end
 
     -- Check that the buffer `bufnr` has a valid filetype according to

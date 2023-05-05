@@ -16,32 +16,27 @@ local function get_workspace_dir(cmd)
   local chunks = {}
   local jobid = vim.fn.jobstart(cmd, {
     on_stdout = function(_, data, _)
-      chunks[#chunks + 1] = unpack(data)
+      chunks[#chunks + 1] = table.concat(data, '\n')
     end,
     on_stderr = function(_, data, _)
       vim.api.nvim_err_write(table.concat(data, '\n'))
     end,
     on_exit = function()
-      if next(chunks) == nil then
-        coroutine.resume(co, nil)
-        return
-      end
-
-      local data = table.concat(chunks, '')
-      chunks = vim.json.decode(data)
-      local workspace_root = chunks and chunks['workspace_root'] or nil
-      coroutine.resume(co, workspace_root)
+      coroutine.resume(co)
     end,
     stdout_buffered = true,
     stderr_buffered = true,
   })
 
-  if jobid < 0 then
+  if jobid <= 0 then
     vim.api.nvim_err_writeln('Failed to start cargo metadata job id:' .. jobid)
     return
   end
 
-  return (coroutine.yield())
+  coroutine.yield()
+  local data = table.concat(chunks, '')
+  chunks = vim.json.decode(data)
+  return chunks and chunks['workspace_root'] or nil
 end
 
 return {
