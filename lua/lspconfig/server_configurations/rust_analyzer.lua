@@ -13,13 +13,14 @@ end
 local function get_workspace_dir(cmd)
   local co = assert(coroutine.running())
 
-  local chunks = {}
+  local stdout = {}
+  local stderr = {}
   local jobid = vim.fn.jobstart(cmd, {
     on_stdout = function(_, data, _)
-      chunks[#chunks + 1] = table.concat(data, '\n')
+      stdout[#stdout + 1] = table.concat(data, '\n')
     end,
     on_stderr = function(_, data, _)
-      vim.api.nvim_err_write(table.concat(data, '\n'))
+      stderr[#stderr + 1] = table.concat(data, '\n')
     end,
     on_exit = function()
       coroutine.resume(co)
@@ -29,13 +30,13 @@ local function get_workspace_dir(cmd)
   })
 
   if jobid <= 0 then
-    vim.api.nvim_err_writeln('Failed to start cargo metadata job id:' .. jobid)
+    vim.notify(('[lspconfig] cmd (%q) failed:\n%s'):format(table.concat(cmd, ' '), table.concat(stderr, '')), vim.log.levels.WARN)
     return
   end
 
   coroutine.yield()
-  chunks = vim.json.decode(table.concat(chunks, ''))
-  return chunks and chunks['workspace_root'] or nil
+  stdout = vim.json.decode(table.concat(stdout, ''))
+  return stdout and stdout['workspace_root'] or nil
 end
 
 return {
