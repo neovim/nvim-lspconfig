@@ -4,6 +4,30 @@ local tbl_deep_extend = vim.tbl_deep_extend
 
 local configs = {}
 
+local function reenter()
+  if vim.in_fast_event() then
+    local co = assert(coroutine.running())
+    vim.schedule(function()
+      coroutine.resume(co)
+    end)
+    coroutine.yield()
+  end
+end
+
+local function async_run(func)
+  vim.validate {
+    fn = { func, 'f' },
+  }
+  local co = coroutine.create(function()
+    local status, err = pcall(func)
+
+    if not status then
+      vim.notify(('[lspconfig] unhandled error: %s'):format(tostring(err)), vim.log.levels.WARN)
+    end
+  end)
+  coroutine.resume(co)
+end
+
 function configs.__newindex(t, config_name, config_def)
   validate {
     name = { config_name, 's' },
@@ -98,10 +122,11 @@ function configs.__newindex(t, config_name, config_def)
 
       local pwd = uv.cwd()
 
-      util.async_run(function()
+      async_run(function()
         local root_dir
         if get_root_dir then
           root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
+          reenter()
           if not api.nvim_buf_is_valid(bufnr) then
             return
           end
@@ -259,17 +284,7 @@ function configs.__newindex(t, config_name, config_def)
 
       local buf_path = util.path.sanitize(bufname)
 
-      local function check_fast(root_dir, single_mode)
-        if not vim.in_fast_event() then
-          manager.add(root_dir, single_mode, bufnr)
-          return
-        end
-        vim.schedule(function()
-          manager.add(root_dir, single_mode, bufnr)
-        end)
-      end
-
-      util.async_run(function()
+      async_run(function()
         local root_dir
         if get_root_dir then
           root_dir = get_root_dir(buf_path, bufnr)
@@ -279,10 +294,10 @@ function configs.__newindex(t, config_name, config_def)
         end
 
         if root_dir then
-          check_fast(root_dir, false)
+          manager.add(root_dir, false, bufnr)
         elseif config.single_file_support then
           local pseudo_root = #bufname == 0 and pwd or util.path.dirname(buf_path)
-          check_fast(pseudo_root, true)
+          manager.add(pseudo_root, true, bufnr)
         end
       end)
     end
