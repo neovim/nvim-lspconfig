@@ -2,16 +2,25 @@ local api, fn, lsp = vim.api, vim.fn, vim.lsp
 local windows = require 'lspconfig.ui.windows'
 local util = require 'lspconfig.util'
 
-local error_messages = {
-  cmd_not_found = 'Unable to find executable. Please check your path and ensure the server is installed',
-  no_filetype_defined = 'No filetypes defined, Please define filetypes in setup()',
-  root_dir_not_found = 'Not found.',
-}
+---@return string | table
+local function get_error_msg(type)
+  local error_messages = {
+    cmd_not_found = 'Unable to find executable. Please check your path and ensure the server is installed',
+    no_filetype_defined = 'No filetypes defined, Please define filetypes in setup()',
+    root_dir_not_found = 'Not found.',
+    async_root_dir_function = 'Asynchronous root_dir functions are not supported in :LspInfo',
+  }
+  return type and error_messages[type] or error_messages
+end
 
-local helptags = {
-  [error_messages.no_filetype_defined] = { 'lspconfig-setup' },
-  [error_messages.root_dir_not_found] = { 'lspconfig-root-detection' },
-}
+local function get_helptags(type)
+  local msg = get_error_msg()
+  local helptags = {
+    [msg.no_filetype_defined] = { 'lspconfig-setup' },
+    [msg.root_dir_not_found] = { 'lspconfig-root-detection' },
+  }
+  return helptags[type]
+end
 
 local function trim_blankspace(cmd)
   local trimmed_cmd = {}
@@ -45,7 +54,7 @@ local cmd_type = {
     if vim.fn.executable(config.cmd[1]) == 1 then
       return cmd, 'true'
     end
-    return cmd, error_messages.cmd_not_found
+    return cmd, get_error_msg 'cmd_not_found'
   end,
 }
 
@@ -79,13 +88,13 @@ local function make_config_info(config, bufnr)
     if root_dir then
       config_info.root_dir = root_dir
     elseif coroutine.status(co) == 'suspended' then
-      config_info.root_dir = error_messages.async_root_dir_function
+      config_info.root_dir = get_error_msg 'async_root_dir_function'
     else
-      config_info.root_dir = error_messages.root_dir_not_found
+      config_info.root_dir = get_error_msg 'root_dir_not_found'
     end
   else
-    config_info.root_dir = error_messages.root_dir_not_found
-    vim.list_extend(config_info.helptags, helptags[error_messages.root_dir_not_found])
+    config_info.root_dir = get_error_msg 'root_dir_not_found'
+    vim.list_extend(config_info.helptags, get_helptags(get_error_msg 'root_dir_not_found'))
   end
 
   config_info.autostart = (config.autostart and 'true') or 'false'
@@ -306,12 +315,12 @@ return function()
 
   vim.fn.matchadd(
     'Error',
-    error_messages.no_filetype_defined
+    get_error_msg 'no_filetype_defined'
       .. '.\\|'
       .. 'cmd not defined\\|'
-      .. error_messages.cmd_not_found
+      .. get_error_msg 'cmd_not_found'
       .. '\\|'
-      .. error_messages.root_dir_not_found
+      .. get_error_msg 'root_dir_not_found'
   )
 
   vim.cmd [[
