@@ -102,6 +102,9 @@ function configs.__newindex(t, config_name, config_def)
         local root_dir
         if get_root_dir then
           root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
+          if not api.nvim_buf_is_valid(bufnr) then
+            return
+          end
         end
 
         if root_dir then
