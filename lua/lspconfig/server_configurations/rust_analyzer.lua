@@ -30,7 +30,10 @@ local function get_workspace_dir(cmd)
   })
 
   if jobid <= 0 then
-    vim.notify(('[lspconfig] cmd (%q) failed:\n%s'):format(table.concat(cmd, ' '), table.concat(stderr, '')), vim.log.levels.WARN)
+    vim.notify(
+      ('[lspconfig] cmd (%q) failed:\n%s'):format(table.concat(cmd, ' '), table.concat(stderr, '')),
+      vim.log.levels.WARN
+    )
     return
   end
 

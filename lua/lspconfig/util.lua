@@ -596,7 +596,7 @@ function M.async_run(fn)
     local status, err = pcall(fn)
 
     if not status then
-      vim.notify(('[lspconfig] unhandled error: %s'):format(tostring(err), vim.log.levels.WARN)
+      vim.notify(('[lspconfig] unhandled error: %s'):format(tostring(err)), vim.log.levels.WARN)
     end
   end)
   coroutine.resume(co)

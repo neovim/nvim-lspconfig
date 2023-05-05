@@ -73,7 +73,7 @@ local function make_config_info(config, bufnr)
         root_dir = config.get_root_dir(buffer_dir)
       end)
       if not status then
-        vim.notify(('[lspconfig] unhandled error: %s'):format(tostring(err), vim.log.levels.WARN)
+        vim.notify(('[lspconfig] unhandled error: %s'):format(tostring(err), vim.log.levels.WARN))
       end
     end)
     coroutine.resume(co)
