@@ -290,9 +290,8 @@ function configs.__newindex(t, config_name, config_def)
     -- Check that the buffer `bufnr` has a valid filetype according to
     -- `config.filetypes`, then do `manager.try_add(bufnr)`.
     function manager.try_add_wrapper(bufnr, project_root)
+      -- `config.filetypes = nil` means all filetypes are valid.
       if not config.filetypes or vim.tbl_contains(config.filetypes, vim.bo[bufnr].filetype) then
-        manager.try_add(bufnr, project_root)
-      else
         manager.try_add(bufnr, project_root)
       end
     end
