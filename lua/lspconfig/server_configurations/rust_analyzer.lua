@@ -34,8 +34,7 @@ local function get_workspace_dir(cmd)
   end
 
   coroutine.yield()
-  local data = table.concat(chunks, '')
-  chunks = vim.json.decode(data)
+  chunks = vim.json.decode(table.concat(chunks, ''))
   return chunks and chunks['workspace_root'] or nil
 end
 
