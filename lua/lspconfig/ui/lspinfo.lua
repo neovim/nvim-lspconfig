@@ -67,15 +67,22 @@ local function make_config_info(config, bufnr)
 
   if config.get_root_dir then
     local root_dir
-    local status = coroutine.resume(coroutine.create(function()
+    local co = coroutine.create(function()
       local status, err = pcall(function()
         root_dir = config.get_root_dir(buffer_dir)
       end)
       if not status then
         print('lspconfig: unhandled error: ' .. tostring(err))
       end
-    end))
-    config_info.root_dir = status and root_dir or error_messages.root_dir_not_found
+    end)
+    coroutine.resume(co)
+    if root_dir then
+      config_info.root_dir = root_dir
+    elseif coroutine.status(co) == 'suspended' then
+      config_info.root_dir = error_messages.async_root_dir_function
+    else
+      config_info.root_dir = error_messages.root_dir_not_found
+    end
   else
     config_info.root_dir = error_messages.root_dir_not_found
     vim.list_extend(config_info.helptags, helptags[error_messages.root_dir_not_found])
