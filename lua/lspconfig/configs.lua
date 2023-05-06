@@ -15,17 +15,12 @@ local function reenter()
 end
 
 local function async_run(func)
-  vim.validate {
-    fn = { func, 'f' },
-  }
-  local co = coroutine.create(function()
+  coroutine.resume(coroutine.create(function()
     local status, err = pcall(func)
-
     if not status then
       vim.notify(('[lspconfig] unhandled error: %s'):format(tostring(err)), vim.log.levels.WARN)
     end
-  end)
-  coroutine.resume(co)
+  end))
 end
 
 function configs.__newindex(t, config_name, config_def)
