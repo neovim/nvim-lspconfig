@@ -11,7 +11,16 @@ return {
   default_config = {
     cmd = cmd,
     filetypes = { 'markdown' },
-    root_dir = util.find_git_ancestor,
+    root_dir = util.root_pattern(
+      '.remarkrc',
+      '.remarkrc.json',
+      '.remarkrc.js',
+      '.remarkrc.cjs',
+      '.remarkrc.mjs',
+      '.remarkrc.yml',
+      '.remarkrc.yaml',
+      '.remarkignore'
+    ),
     single_file_support = true,
   },
   docs = {
