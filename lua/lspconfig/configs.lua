@@ -4,6 +4,25 @@ local tbl_deep_extend = vim.tbl_deep_extend
 
 local configs = {}
 
+local function reenter()
+  if vim.in_fast_event() then
+    local co = assert(coroutine.running())
+    vim.schedule(function()
+      coroutine.resume(co)
+    end)
+    coroutine.yield()
+  end
+end
+
+local function async_run(func)
+  coroutine.resume(coroutine.create(function()
+    local status, err = pcall(func)
+    if not status then
+      vim.notify(('[lspconfig] unhandled error: %s'):format(tostring(err)), vim.log.levels.WARN)
+    end
+  end))
+end
+
 function configs.__newindex(t, config_name, config_def)
   validate {
     name = { config_name, 's' },
@@ -72,17 +91,10 @@ function configs.__newindex(t, config_name, config_def)
     end
 
     if config.autostart == true then
-      local event
-      local pattern
-      if config.filetypes then
-        event = 'FileType'
-        pattern = table.concat(config.filetypes, ',')
-      else
-        event = 'BufReadPost'
-        pattern = '*'
-      end
-      api.nvim_create_autocmd(event, {
-        pattern = pattern,
+      local event_conf = config.filetypes and { event = 'FileType', pattern = config.filetypes }
+        or { event = 'BufReadPost' }
+      api.nvim_create_autocmd(event_conf.event, {
+        pattern = event_conf.pattern or '*',
         callback = function(opt)
           M.manager.try_add(opt.buf)
         end,
@@ -97,54 +109,59 @@ function configs.__newindex(t, config_name, config_def)
     local get_root_dir = config.root_dir
 
     function M.launch()
-      local root_dir
-      if get_root_dir then
-        local bufnr = api.nvim_get_current_buf()
-        local bufname = api.nvim_buf_get_name(bufnr)
-        if #bufname == 0 and not config.single_file_support then
-          return
-        elseif #bufname ~= 0 then
-          if not util.bufname_valid(bufname) then
-            return
-          end
-          root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
-        end
+      local bufnr = api.nvim_get_current_buf()
+      local bufname = api.nvim_buf_get_name(bufnr)
+      if (#bufname == 0 and not config.single_file_support) or (#bufname ~= 0 and not util.bufname_valid(bufname)) then
+        return
       end
 
-      if root_dir then
-        api.nvim_create_autocmd('BufReadPost', {
-          pattern = fn.fnameescape(root_dir) .. '/*',
-          callback = function()
-            M.manager.try_add_wrapper()
-          end,
-          group = lsp_group,
-          desc = string.format(
-            'Checks whether server %s should attach to a newly opened buffer inside workspace %q.',
-            config.name,
-            root_dir
-          ),
-        })
-        for _, bufnr in ipairs(api.nvim_list_bufs()) do
-          local bufname = api.nvim_buf_get_name(bufnr)
-          if util.bufname_valid(bufname) then
-            local buf_dir = util.path.sanitize(bufname)
-            if buf_dir:sub(1, root_dir:len()) == root_dir then
-              M.manager.try_add_wrapper(bufnr)
-            end
+      local pwd = uv.cwd()
+
+      async_run(function()
+        local root_dir
+        if get_root_dir then
+          root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
+          reenter()
+          if not api.nvim_buf_is_valid(bufnr) then
+            return
           end
         end
-      elseif config.single_file_support then
-        -- This allows on_new_config to use the parent directory of the file
-        -- Effectively this is the root from lspconfig's perspective, as we use
-        -- this to attach additional files in the same parent folder to the same server.
-        -- We just no longer send rootDirectory or workspaceFolders during initialization.
-        local bufname = api.nvim_buf_get_name(0)
-        if #bufname ~= 0 and not util.bufname_valid(bufname) then
-          return
+
+        if root_dir then
+          api.nvim_create_autocmd('BufReadPost', {
+            pattern = fn.fnameescape(root_dir) .. '/*',
+            callback = function(arg)
+              M.manager.try_add_wrapper(arg.buf, root_dir)
+            end,
+            group = lsp_group,
+            desc = string.format(
+              'Checks whether server %s should attach to a newly opened buffer inside workspace %q.',
+              config.name,
+              root_dir
+            ),
+          })
+
+          for _, buf in ipairs(api.nvim_list_bufs()) do
+            local buf_name = api.nvim_buf_get_name(buf)
+            if util.bufname_valid(buf_name) then
+              local buf_dir = util.path.sanitize(buf_name)
+              if buf_dir:sub(1, root_dir:len()) == root_dir then
+                M.manager.try_add_wrapper(buf, root_dir)
+              end
+            end
+          end
+        elseif config.single_file_support then
+          -- This allows on_new_config to use the parent directory of the file
+          -- Effectively this is the root from lspconfig's perspective, as we use
+          -- this to attach additional files in the same parent folder to the same server.
+          -- We just no longer send rootDirectory or workspaceFolders during initialization.
+          if not api.nvim_buf_is_valid(bufnr) or (#bufname ~= 0 and not util.bufname_valid(bufname)) then
+            return
+          end
+          local pseudo_root = #bufname == 0 and pwd or util.path.dirname(util.path.sanitize(bufname))
+          M.manager.add(pseudo_root, true, bufnr)
         end
-        local pseudo_root = #bufname == 0 and uv.cwd() or util.path.dirname(util.path.sanitize(bufname))
-        M.manager.add(pseudo_root, true, api.nvim_get_current_buf())
-      end
+      end)
     end
 
     -- Used by :LspInfo
@@ -238,14 +255,13 @@ function configs.__newindex(t, config_name, config_def)
 
     -- Try to attach the buffer `bufnr` to a client using this config, creating
     -- a new client if one doesn't already exist for `bufnr`.
-    function manager.try_add(bufnr)
+    function manager.try_add(bufnr, project_root)
       bufnr = bufnr or api.nvim_get_current_buf()
 
       if api.nvim_buf_get_option(bufnr, 'buftype') == 'nofile' then
         return
       end
-
-      local root_dir
+      local pwd = uv.cwd()
 
       local bufname = api.nvim_buf_get_name(bufnr)
       if #bufname == 0 and not config.single_file_support then
@@ -255,35 +271,39 @@ function configs.__newindex(t, config_name, config_def)
           return
         end
       end
+
+      if project_root then
+        manager.add(project_root, false, bufnr)
+        return
+      end
+
       local buf_path = util.path.sanitize(bufname)
 
-      if get_root_dir then
-        root_dir = get_root_dir(buf_path, bufnr)
-      end
+      async_run(function()
+        local root_dir
+        if get_root_dir then
+          root_dir = get_root_dir(buf_path, bufnr)
+          reenter()
+          if not api.nvim_buf_is_valid(bufnr) then
+            return
+          end
+        end
 
-      if root_dir then
-        manager.add(root_dir, false, bufnr)
-      elseif config.single_file_support then
-        local pseudo_root = #bufname == 0 and uv.cwd() or util.path.dirname(buf_path)
-        manager.add(pseudo_root, true, bufnr)
-      end
+        if root_dir then
+          manager.add(root_dir, false, bufnr)
+        elseif config.single_file_support then
+          local pseudo_root = #bufname == 0 and pwd or util.path.dirname(buf_path)
+          manager.add(pseudo_root, true, bufnr)
+        end
+      end)
     end
 
     -- Check that the buffer `bufnr` has a valid filetype according to
     -- `config.filetypes`, then do `manager.try_add(bufnr)`.
-    function manager.try_add_wrapper(bufnr)
-      bufnr = bufnr or api.nvim_get_current_buf()
-      local buf_filetype = api.nvim_buf_get_option(bufnr, 'filetype')
-      if config.filetypes then
-        for _, filetype in ipairs(config.filetypes) do
-          if buf_filetype == filetype then
-            manager.try_add(bufnr)
-            return
-          end
-        end
-        -- `config.filetypes = nil` means all filetypes are valid.
-      else
-        manager.try_add(bufnr)
+    function manager.try_add_wrapper(bufnr, project_root)
+      -- `config.filetypes = nil` means all filetypes are valid.
+      if not config.filetypes or vim.tbl_contains(config.filetypes, vim.bo[bufnr].filetype) then
+        manager.try_add(bufnr, project_root)
       end
     end
 
@@ -317,8 +337,6 @@ function configs.__newindex(t, config_name, config_def)
   M.document_config = config_def
 
   rawset(t, config_name, M)
-
-  return M
 end
 
 return setmetatable({}, configs)

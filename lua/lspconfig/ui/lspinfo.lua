@@ -6,6 +6,7 @@ local error_messages = {
   cmd_not_found = 'Unable to find executable. Please check your path and ensure the server is installed',
   no_filetype_defined = 'No filetypes defined, Please define filetypes in setup()',
   root_dir_not_found = 'Not found.',
+  async_root_dir_function = 'Asynchronous root_dir functions are not supported in :LspInfo',
 }
 
 local helptags = {
@@ -15,8 +16,8 @@ local helptags = {
 
 local function trim_blankspace(cmd)
   local trimmed_cmd = {}
-  for _, str in pairs(cmd) do
-    table.insert(trimmed_cmd, str:match '^%s*(.*)')
+  for _, str in ipairs(cmd) do
+    trimmed_cmd[#trimmed_cmd + 1] = str:match '^%s*(.*)'
   end
   return trimmed_cmd
 end
@@ -64,9 +65,25 @@ local function make_config_info(config, bufnr)
   local buffer_dir = api.nvim_buf_call(bufnr, function()
     return vim.fn.expand '%:p:h'
   end)
-  local root_dir = config.get_root_dir and config.get_root_dir(buffer_dir)
-  if root_dir then
-    config_info.root_dir = root_dir
+
+  if config.get_root_dir then
+    local root_dir
+    local co = coroutine.create(function()
+      local status, err = pcall(function()
+        root_dir = config.get_root_dir(buffer_dir)
+      end)
+      if not status then
+        vim.notify(('[lspconfig] unhandled error: %s'):format(tostring(err), vim.log.levels.WARN))
+      end
+    end)
+    coroutine.resume(co)
+    if root_dir then
+      config_info.root_dir = root_dir
+    elseif coroutine.status(co) == 'suspended' then
+      config_info.root_dir = error_messages.async_root_dir_function
+    else
+      config_info.root_dir = error_messages.root_dir_not_found
+    end
   else
     config_info.root_dir = error_messages.root_dir_not_found
     vim.list_extend(config_info.helptags, helptags[error_messages.root_dir_not_found])
@@ -118,7 +135,7 @@ local function make_client_info(client, fname)
   end
 
   if workspace_folders then
-    for _, schema in pairs(workspace_folders) do
+    for _, schema in ipairs(workspace_folders) do
       local matched = true
       local root_dir = uv.fs_realpath(schema.name)
       if fname:sub(1, root_dir:len()) ~= root_dir then
@@ -188,19 +205,19 @@ return function()
   local buf_lines = {}
 
   local buf_client_ids = {}
-  for _, client in pairs(buf_clients) do
-    table.insert(buf_client_ids, client.id)
+  for _, client in ipairs(buf_clients) do
+    buf_client_ids[#buf_client_ids + 1] = client.id
   end
 
   local other_active_clients = {}
-  for _, client in pairs(clients) do
+  for _, client in ipairs(clients) do
     if not vim.tbl_contains(buf_client_ids, client.id) then
-      table.insert(other_active_clients, client)
+      other_active_clients[#other_active_clients + 1] = client
     end
   end
 
   -- insert the tips at the top of window
-  table.insert(buf_lines, 'Press q or <Esc> to close this window. Press <Tab> to view server doc.')
+  buf_lines[#buf_lines + 1] = 'Press q or <Esc> to close this window. Press <Tab> to view server doc.'
 
   local header = {
     '',
@@ -215,7 +232,7 @@ return function()
   }
 
   vim.list_extend(buf_lines, buffer_clients_header)
-  for _, client in pairs(buf_clients) do
+  for _, client in ipairs(buf_clients) do
     local client_info = make_client_info(client, fname)
     vim.list_extend(buf_lines, client_info)
   end
@@ -227,7 +244,7 @@ return function()
   if not vim.tbl_isempty(other_active_clients) then
     vim.list_extend(buf_lines, other_active_section_header)
   end
-  for _, client in pairs(other_active_clients) do
+  for _, client in ipairs(other_active_clients) do
     local client_info = make_client_info(client, fname)
     vim.list_extend(buf_lines, client_info)
   end
@@ -242,7 +259,7 @@ return function()
 
   if not vim.tbl_isempty(other_matching_configs) then
     vim.list_extend(buf_lines, other_matching_configs_header)
-    for _, config in pairs(other_matching_configs) do
+    for _, config in ipairs(other_matching_configs) do
       vim.list_extend(buf_lines, make_config_info(config, original_bufnr))
     end
   end
@@ -310,22 +327,22 @@ return function()
       end
       local desc = vim.tbl_get(config, 'document_config', 'docs', 'description')
       if desc then
-        table.insert(lines, string.format('# %s', config.name))
-        table.insert(lines, '')
+        lines[#lines + 1] = string.format('# %s', config.name)
+        lines[#lines + 1] = ''
         vim.list_extend(lines, vim.split(desc, '\n'))
-        table.insert(lines, '')
+        lines[#lines + 1] = ''
       end
     end
 
-    table.insert(lines, 'Press <Tab> to close server info.')
-    table.insert(lines, '')
+    lines[#lines + 1] = 'Press <Tab> to close server info.'
+    lines[#lines + 1] = ''
 
-    for _, client in pairs(buf_clients) do
+    for _, client in ipairs(buf_clients) do
       local config = require('lspconfig.configs')[client.name]
       append_lines(config)
     end
 
-    for _, config in pairs(other_matching_configs) do
+    for _, config in ipairs(other_matching_configs) do
       append_lines(config)
     end
 
