@@ -27,7 +27,7 @@ The default `cmd` assumes that the `helm_ls` binary can be found in `$PATH`.
 If need Helm file highlight use [vim-helm](https://github.com/towolf/vim-helm) plugin.
 ]],
     default_config = {
-      root_dir = [[root_pattern("Chart.yaml)]],
+      root_dir = [[root_pattern("Chart.yaml")]],
     },
   },
 }

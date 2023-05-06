@@ -1,5 +1,5 @@
 local util = require 'lspconfig.util'
-local bin_name = 'nimlsp'
+local bin_name = 'nimlangserver'
 local cmd = { bin_name }
 
 if vim.fn.has 'win32' == 1 then
@@ -17,12 +17,12 @@ return {
   },
   docs = {
     description = [[
-https://github.com/PMunch/nimlsp
+https://github.com/nim-lang/langserver
 
-`nimlsp` can be installed via the `nimble` package manager:
 
+`nim-langserver` can be installed via the `nimble` package manager:
 ```sh
-nimble install nimlsp
+nimble install nimlangserver
 ```
     ]],
   },

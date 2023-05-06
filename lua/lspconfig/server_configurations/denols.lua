@@ -5,7 +5,12 @@ local function buf_cache(bufnr, client)
   local params = {}
   params['referrer'] = { uri = vim.uri_from_bufnr(bufnr) }
   params['uris'] = {}
-  client.request_sync('deno/cache', params)
+  client.request('deno/cache', params, function(err, _result, ctx)
+    if err then
+      local uri = ctx.params.referrer.uri
+      vim.api.nvim_err_writeln('cache command failed for ' .. vim.uri_to_fname(uri))
+    end
+  end, bufnr)
 end
 
 local function virtual_text_document_handler(uri, res, client)
@@ -59,6 +64,7 @@ end
 return {
   default_config = {
     cmd = { 'deno', 'lsp' },
+    cmd_env = { NO_COLOR = true },
     filetypes = {
       'javascript',
       'javascriptreact',
