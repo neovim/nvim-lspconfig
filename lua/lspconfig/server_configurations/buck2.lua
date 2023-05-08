@@ -1,13 +1,8 @@
 local util = require 'lspconfig.util'
 
-local cmd = { 'buck2', 'lsp' }
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', 'buck2', 'lsp' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'buck2', 'lsp' },
     filetypes = { 'bzl' },
     root_dir = function(fname)
       return util.root_pattern '.buckconfig'(fname)

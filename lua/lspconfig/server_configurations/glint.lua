@@ -1,15 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'glint-language-server'
-local cmd = { bin_name }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'glint-language-server' },
     on_new_config = function(config, new_root_dir)
       local project_root = util.find_node_modules_ancestor(new_root_dir)
       -- Glint should not be installed globally.

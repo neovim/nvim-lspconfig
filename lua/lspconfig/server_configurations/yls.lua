@@ -1,15 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'yls'
-local cmd = { bin_name, '-vv' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '-vv' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'yls', '-vv' },
     filetypes = { 'yar', 'yara' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,

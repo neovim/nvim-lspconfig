@@ -1,15 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'cssmodules-language-server'
-local cmd = { bin_name }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'cssmodules-language-server' },
     filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
     root_dir = util.find_package_json_ancestor,
   },

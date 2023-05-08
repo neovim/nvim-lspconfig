@@ -1,16 +1,9 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'typescript-language-server'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
-
 return {
   default_config = {
     init_options = { hostInfo = 'neovim' },
-    cmd = cmd,
+    cmd = { 'typescript-language-server', '--stdio' },
     filetypes = {
       'javascript',
       'javascriptreact',

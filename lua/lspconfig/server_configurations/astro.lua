@@ -1,12 +1,5 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'astro-ls'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
-
 local function get_typescript_server_path(root_dir)
   local project_root = util.find_node_modules_ancestor(root_dir)
   return project_root and (util.path.join(project_root, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js'))
@@ -15,7 +8,7 @@ end
 
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'astro-ls', '--stdio' },
     filetypes = { 'astro' },
     root_dir = util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
     init_options = {

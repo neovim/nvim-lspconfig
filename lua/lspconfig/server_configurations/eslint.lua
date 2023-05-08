@@ -32,13 +32,6 @@ local function fix_all(opts)
   })
 end
 
-local bin_name = 'vscode-eslint-language-server'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
-
 local root_file = {
   '.eslintrc',
   '.eslintrc.js',
@@ -51,7 +44,7 @@ local root_file = {
 
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'vscode-eslint-language-server', '--stdio' },
     filetypes = {
       'javascript',
       'javascriptreact',

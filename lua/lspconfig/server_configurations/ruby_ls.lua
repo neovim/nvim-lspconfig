@@ -1,17 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'ruby-lsp'
-
--- defaults to stdio
-local cmd = { bin_name }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'ruby-lsp' },
     filetypes = { 'ruby' },
     root_dir = util.root_pattern('Gemfile', '.git'),
     init_options = {

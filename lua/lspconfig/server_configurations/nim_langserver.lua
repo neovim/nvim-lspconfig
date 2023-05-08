@@ -1,14 +1,8 @@
 local util = require 'lspconfig.util'
-local bin_name = 'nimlangserver'
-local cmd = { bin_name }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name }
-end
 
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'nimlangserver' },
     filetypes = { 'nim' },
     root_dir = function(fname)
       return util.root_pattern '*.nimble'(fname) or util.find_git_ancestor(fname)

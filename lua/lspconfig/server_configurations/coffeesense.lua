@@ -1,15 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'coffeesense-language-server'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'coffeesense-language-server', '--stdio' },
     filetypes = { 'coffee' },
     root_dir = util.root_pattern 'package.json',
     single_file_support = true,

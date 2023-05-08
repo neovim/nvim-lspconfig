@@ -1,6 +1,7 @@
 local util = require 'lspconfig.util'
 local api, validate, lsp, uv, fn = vim.api, vim.validate, vim.lsp, vim.loop, vim.fn
 local tbl_deep_extend = vim.tbl_deep_extend
+local iswin = uv.os_uname().version:match 'Windows'
 
 local configs = {}
 
@@ -82,6 +83,10 @@ function configs.__newindex(t, config_name, config_def)
           ['command.fn'] = { v[1], 'f' },
         }
       end
+    end
+
+    if iswin then
+      user_config.cmd = { 'cmd.exe', '/C', unpack(user_config.cmd) }
     end
 
     local config = tbl_deep_extend('keep', user_config, default_config)

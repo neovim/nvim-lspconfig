@@ -1,15 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'bash-language-server'
-local cmd = { bin_name, 'start' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, 'start' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'bash-language-server', 'start' },
     settings = {
       bashIde = {
         -- Glob pattern for finding and parsing shell script files in the workspace.
