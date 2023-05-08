@@ -1,13 +1,6 @@
 local util = require 'lspconfig.util'
 local log = require 'vim.lsp.log'
 
-local bin_name = 'relay-compiler'
-local cmd = { bin_name, 'lsp' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, 'lsp' }
-end
-
 return {
   default_config = {
     -- (default: false) Whether or not we should automatically start the
@@ -19,7 +12,7 @@ return {
     -- helpful if your relay project is in a nested directory.
     path_to_config = nil,
 
-    cmd = cmd,
+    cmd = { 'relay-compiler', 'lsp' },
     filetypes = {
       'javascript',
       'javascriptreact',
@@ -32,7 +25,7 @@ return {
     on_new_config = function(config, root_dir)
       local project_root = util.find_node_modules_ancestor(root_dir)
       local node_bin_path = util.path.join(project_root, 'node_modules', '.bin')
-      local compiler_cmd = { util.path.join(node_bin_path, bin_name), '--watch' }
+      local compiler_cmd = { util.path.join(node_bin_path, 'relay-compiler'), '--watch' }
       local path = node_bin_path .. util.path.path_separator .. vim.env.PATH
       if config.cmd_env then
         config.cmd_env.PATH = path

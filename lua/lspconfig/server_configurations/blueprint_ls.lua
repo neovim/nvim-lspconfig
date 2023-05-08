@@ -1,15 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'blueprint-compiler'
-local cmd = { bin_name, 'lsp' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, 'start' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'blueprint-compiler', vim.fn.has 'win32' and 'start' or 'lsp' },
     cmd_env = {
       -- Prevent recursive scanning which will cause issues when opening a file
       -- directly in the home directory (e.g. ~/foo.sh).

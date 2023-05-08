@@ -1,16 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'lean-language-server'
-local args = { '--stdio', '--', '-M', '4096', '-T', '100000' }
-local cmd = { bin_name, unpack(args) }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, unpack(args) }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'lean-language-server', '--stdio', '--', '-M', '4096', '-T', '100000' },
     filetypes = { 'lean3' },
     offset_encoding = 'utf-32',
     root_dir = function(fname)

@@ -10,16 +10,9 @@ local root_files = {
   'selene.yml',
 }
 
-local bin_name = 'lua-language-server'
-local cmd = { bin_name }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'lua-language-server' },
     filetypes = { 'lua' },
     root_dir = function(fname)
       local root = util.root_pattern(unpack(root_files))(fname)

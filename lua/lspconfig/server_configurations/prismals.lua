@@ -1,15 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'prisma-language-server'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'prisma-language-server', '--stdio' },
     filetypes = { 'prisma' },
     settings = {
       prisma = {

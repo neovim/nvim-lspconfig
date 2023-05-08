@@ -1,15 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'textlsp'
-local cmd = { bin_name }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'textlsp' },
     filetypes = { 'text', 'tex', 'org' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,

@@ -1,14 +1,8 @@
 local util = require 'lspconfig.util'
 
-local cmd = { 'futhark', 'lsp' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', 'futhark', 'lsp' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'futhark', 'lsp' },
     filetypes = { 'futhark', 'fut' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,

@@ -28,12 +28,7 @@ When choosing a server name, convert all dashes (`-`) to underscores (`_`) If th
 Note that Windows has a limitation when it comes to directly invoking a server that's installed by `npm` or `gem`, so it requires additional handling.
 
 ```lua
-local bin_name = 'typescript-language-server'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
+cmd = { 'typescript-language-server', '--stdio' }
 ```
 
 * `filetypes`: a list for filetypes a 
@@ -48,13 +43,6 @@ An example for adding a new language server is shown below for `pyright`, a pyth
 
 ```lua
 local util = require 'lspconfig.util'
-
-local bin_name = 'pyright-langserver'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
 
 local root_files = {
   'pyproject.toml',
@@ -75,7 +63,7 @@ end
 
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'pyright-langserver', '--stdio' },
     filetypes = { 'python' },
     root_dir = util.root_pattern(unpack(root_files)),
     single_file_support = true,

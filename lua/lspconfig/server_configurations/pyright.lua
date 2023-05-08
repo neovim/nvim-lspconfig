@@ -1,12 +1,5 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'pyright-langserver'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
-
 local root_files = {
   'pyproject.toml',
   'setup.py',
@@ -37,7 +30,7 @@ end
 
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'pyright-langserver', '--stdio' },
     filetypes = { 'python' },
     root_dir = util.root_pattern(unpack(root_files)),
     single_file_support = true,
