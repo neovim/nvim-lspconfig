@@ -7359,7 +7359,8 @@ require'lspconfig'.ruby_ls.setup{}
   - `init_options` : 
   ```lua
   {
-    enabledFeatures = { "codeActions", "diagnostics", "documentHighlights", "documentSymbols", "formatting", "inlayHint" }
+    enabledFeatures = { "codeActions", "diagnostics", "documentHighlights", "documentSymbols", "formatting", "inlayHint" },
+    formatter = "auto"
   }
   ```
   - `root_dir` : 
