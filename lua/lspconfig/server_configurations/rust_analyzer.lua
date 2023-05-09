@@ -76,7 +76,7 @@ return {
   },
   docs = {
     description = [[
-https://github.com/rust-analyzer/rust-analyzer
+https://github.com/rust-lang/rust-analyzer
 
 rust-analyzer (aka rls 2.0), a language server for Rust
 
