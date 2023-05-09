@@ -1,15 +1,8 @@
 local util = require('lspconfig').util
 
-local bin_name = 'pylyzer'
-local cmd = { bin_name, '--server' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--server' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'pylyzer', '--server' },
     filetypes = { 'python' },
     root_dir = function(fname)
       local root_files = {

@@ -86,6 +86,14 @@ function configs.__newindex(t, config_name, config_def)
 
     local config = tbl_deep_extend('keep', user_config, default_config)
 
+    if config.cmd then
+      local original = config.cmd[1]
+      config.cmd[1] = vim.fn.exepath(config.cmd[1])
+      if #config.cmd[1] == 0 then
+        config.cmd[1] = original
+      end
+    end
+
     if util.on_setup then
       pcall(util.on_setup, config, user_config)
     end

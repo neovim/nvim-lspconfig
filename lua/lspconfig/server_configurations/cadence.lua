@@ -1,25 +1,17 @@
 local util = require 'lspconfig.util'
 
-local config_name = 'flow.json'
-local bin_name = 'flow'
-local cmd = { 'flow', 'cadence', 'language-server' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, 'cadence', 'language-server' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'flow', 'cadence', 'language-server' },
     filetypes = { 'cdc' },
     init_options = {
       numberOfAccounts = '1',
     },
     root_dir = function(fname, _)
-      return util.root_pattern(config_name)(fname) or vim.env.HOME
+      return util.root_pattern 'flow.json'(fname) or vim.env.HOME
     end,
     on_new_config = function(new_config, new_root_dir)
-      new_config.init_options.configPath = util.path.join(new_root_dir, config_name)
+      new_config.init_options.configPath = util.path.join(new_root_dir, 'flow.json')
     end,
   },
   docs = {

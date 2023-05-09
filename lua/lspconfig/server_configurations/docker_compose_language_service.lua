@@ -1,15 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'docker-compose-langserver'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'docker-compose-langserver', '--stdio' },
     filetypes = { 'yaml' },
     root_dir = util.root_pattern 'docker-compose.yaml',
     single_file_support = true,

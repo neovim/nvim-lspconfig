@@ -1,14 +1,8 @@
 local util = require 'lspconfig.util'
 
-local cmd = { 'vtsls', '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', unpack(cmd) }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'vtsls', '--stdio' },
     filetypes = {
       'javascript',
       'javascriptreact',
