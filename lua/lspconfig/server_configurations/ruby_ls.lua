@@ -14,6 +14,7 @@ return {
         'formatting',
         'inlayHint',
       },
+      formatter = 'auto',
     },
   },
   docs = {
