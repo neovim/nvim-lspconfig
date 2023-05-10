@@ -6,8 +6,12 @@ on:
       - master
 
 jobs:
-  ubuntu:
-    runs-on: ubuntu-latest
+  test:
+    name: Run Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
     steps:
       - uses: actions/checkout@v3
       - uses: rhysd/action-setup-vim@v1
@@ -29,18 +33,4 @@ jobs:
         run: |
           luarocks install luacheck
           luarocks install vusted
-          make test
-
-  macos:
-    runs-on: macos-latest
-    steps:
-    - name: Checkout sources
-      uses: actions/checkout@v3
-    - name: Setup build dependencies
-      run: |
-        brew install luarocks
-        brew install neovim
-    - name: Run test with building Nvim
-      run: |
-        luarocks install vusted
-        make test
+          vusted ./tests
