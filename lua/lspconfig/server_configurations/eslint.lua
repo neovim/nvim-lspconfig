@@ -113,7 +113,7 @@ return {
       }
 
       -- Support flat config
-      if #vim.fs.find('eslint.config.js', { path = new_root_dir, type = 'file' }) == 1 then
+      if vim.fn.filereadable(new_root_dir .. "/eslint.config.js") then
         config.settings.experimental.useFlatConfig = true
       end
 
