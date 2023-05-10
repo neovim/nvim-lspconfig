@@ -7426,12 +7426,12 @@ require'lspconfig'.ruff_lsp.setup{}
 
 ## rust_analyzer
 
-https://github.com/rust-analyzer/rust-analyzer
+https://github.com/rust-lang/rust-analyzer
 
 rust-analyzer (aka rls 2.0), a language server for Rust
 
 
-See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#settings) for extra settings. The settings can be used like this:
+See [docs](https://github.com/rust-lang/rust-analyzer/blob/master/docs/user/generated_config.adoc) for extra settings. The settings can be used like this:
 ```lua
 require'lspconfig'.rust_analyzer.setup{
   settings = {
