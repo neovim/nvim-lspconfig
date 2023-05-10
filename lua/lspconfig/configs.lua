@@ -86,7 +86,7 @@ function configs.__newindex(t, config_name, config_def)
 
     local config = tbl_deep_extend('keep', user_config, default_config)
 
-    if config.cmd and type(config.cmd) == 'table' then
+    if config.cmd and type(config.cmd) == 'table' and not vim.tbl_isempty(config.cmd) then
       local original = config.cmd[1]
       config.cmd[1] = vim.fn.exepath(config.cmd[1])
       if #config.cmd[1] == 0 then
