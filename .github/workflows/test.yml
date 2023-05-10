@@ -33,4 +33,4 @@ jobs:
         run: |
           luarocks install luacheck
           luarocks install vusted
-          vusted ./tests
+          vusted ./test
