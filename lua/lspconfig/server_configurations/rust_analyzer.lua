@@ -17,7 +17,10 @@ local function get_workspace_dir(cmd)
   local stderr = {}
   local jobid = vim.fn.jobstart(cmd, {
     on_stdout = function(_, data, _)
-      stdout[#stdout + 1] = table.concat(data, '\n')
+      data = table.concat(data, '\n')
+      if #data > 0 then
+        stdout[#stdout + 1] = data
+      end
     end,
     on_stderr = function(_, data, _)
       stderr[#stderr + 1] = table.concat(data, '\n')
@@ -38,6 +41,9 @@ local function get_workspace_dir(cmd)
   end
 
   coroutine.yield()
+  if next(stdout) == nil then
+    return nil
+  end
   stdout = vim.json.decode(table.concat(stdout, ''))
   return stdout and stdout['workspace_root'] or nil
 end
