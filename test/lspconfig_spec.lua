@@ -51,7 +51,7 @@ describe('lspconfig', function()
           -- change the working directory to test directory
           vim.api.nvim_command 'cd ./test/test_dir/'
           local file = vim.fn.getcwd() .. '/not_exists.txt'
-          eq(true, lspconfig.util.path.exists(file) == false)
+          assert.is_false(lspconfig.util.path.exists(file))
         end)
       end)
 
@@ -59,7 +59,7 @@ describe('lspconfig', function()
         it('is directory', function()
           local lspconfig = require 'lspconfig'
           local cwd = vim.fn.getcwd()
-          eq(true, lspconfig.util.path.is_dir(cwd))
+          assert.is_true(lspconfig.util.path.is_dir(cwd))
         end)
 
         it('is not present directory', function()
@@ -116,9 +116,8 @@ describe('lspconfig', function()
 
         it('is not absolute', function()
           local lspconfig = require 'lspconfig'
-          eq(true, lspconfig.util.path.is_absolute 'foo/bar' == nil)
-
-          eq(true, lspconfig.util.path.is_absolute '../foo/bar' == nil)
+          assert.is_nil(lspconfig.util.path.is_absolute 'foo/bar')
+          assert.is_nil(lspconfig.util.path.is_absolute '../foo/bar')
         end)
       end)
 
