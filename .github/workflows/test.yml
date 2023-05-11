@@ -21,7 +21,7 @@ jobs:
           version: nightly
 
       - name: luajit
-        uses: leafo/gh-actions-lua@v8
+        uses: leafo/gh-actions-lua@v10
         with:
           luaVersion: "luajit-2.1.0-beta3"
 
