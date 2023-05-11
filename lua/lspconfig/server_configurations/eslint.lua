@@ -105,6 +105,11 @@ return {
         name = vim.fn.fnamemodify(new_root_dir, ':t'),
       }
 
+      -- Support flat config
+      if vim.fn.filereadable(new_root_dir .. '/eslint.config.js') == 1 then
+        config.settings.experimental.useFlatConfig = true
+      end
+
       -- Support Yarn2 (PnP) projects
       local pnp_cjs = util.path.join(new_root_dir, '.pnp.cjs')
       local pnp_js = util.path.join(new_root_dir, '.pnp.js')
