@@ -113,7 +113,8 @@ return {
       }
 
       -- Support flat config
-      if vim.fn.filereadable(new_root_dir .. '/eslint.config.js') == 1 then
+      local path_sep = vim.fn.has 'win32' == 1 and '\\' or '/'
+      if vim.fn.filereadable(new_root_dir .. path_sep .. 'eslint.config.js') == 1 then
         config.settings.experimental.useFlatConfig = true
       end
 
