@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'fsautocomplete', '--adaptive-lsp-server-enabled' },
-    root_dir = util.root_pattern('*.sln', '*.fsproj', '.git'),
+    root_dir = util.root_pattern('*.sln', '*.fsproj', '*.fsx', '.git'),
     filetypes = { 'fsharp' },
     init_options = {
       AutomaticWorkspaceInit = true,
