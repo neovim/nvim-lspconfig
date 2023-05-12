@@ -473,6 +473,28 @@ contained in `:LspInfo`:
   will attempt to reattach to all previously attached buffers.
 
 ==============================================================================
+SERVER LIFECYCLE MANAGEMENT                                *lspconfig-lifecycle*
+
+`lspconfig` may automatically stop or restart workspace LSP servers by using 
+`:LspStart` / `:LspStop` commands. When `nvim` loses focus it will automatically
+stop buffer-bound LSP server upon clearing timeout threshold and restart
+otherwise. 
+
+Disabled by default. To turn it on set the following global config option.
+Make sure it's set before |load-plugins| cycle and any |lspconfig-setup|.
+
+>
+  -- Table is expected
+  vim.g.lspconfigServerLifeCycle = {
+    -- ms before server is stopped (30 minutes by default)
+    timeout = 1000 * 60 * 30
+  }
+  ...
+  local lspconfig = require('lspconfig')
+  ....
+
+
+==============================================================================
 EXAMPLE KEYBINDINGS                                      *lspconfig-keybindings*
 
 `lspconfig`, and the core client, do not map any keybindings by default. The

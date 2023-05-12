@@ -39,6 +39,10 @@ See [server_configurations.md](doc/server_configurations.md) (`:help lspconfig-a
 nvim-lspconfig does not set keybindings or enable completion by default. The following example configuration provides suggested keymaps for the most commonly used language server functions, and manually triggered completion with omnifunc (\<c-x\>\<c-o\>).
 
 ```lua
+-- Uncomment to automatically start/stop servers when nvim is idle (non-focused) 
+-- See :h lspconfig-lifecycle for details
+-- vim.g.lspconfigServerLifeCycle = { timeout = 1000 * 60 * 30 }
+
 -- Setup language servers.
 local lspconfig = require('lspconfig')
 lspconfig.pyright.setup {}
