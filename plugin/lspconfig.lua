@@ -54,6 +54,7 @@ for group, hi in pairs {
   LspInfoTip = { link = 'Comment', default = true },
   LspInfoTitle = { link = 'Title', default = true },
   LspInfoFiletype = { link = 'Type', default = true },
+  LspInfoCurrentWorkspace = { link = 'Boolean', default = true },
 } do
   api.nvim_set_hl(0, group, hi)
 end
