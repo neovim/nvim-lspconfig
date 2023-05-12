@@ -150,3 +150,54 @@ api.nvim_create_user_command('LspLog', function()
 end, {
   desc = 'Opens the Nvim LSP client log.',
 })
+
+--- Start/stop servers when nvim session looses focus and restart them on demand.
+-- This features is motivated by the fact that some servers may gain serious
+-- memory footprint and may incur performance issues. Added on May 12, 2023
+vim.api.nvim_create_augroup('LspconfigServerLifeCycle', { clear = true })
+vim.api.nvim_create_autocmd({
+  'FocusGained',
+}, {
+  pattern = '*',
+  group = 'LspconfigServerLifeCycle',
+  desc = 'Lspconfig: restart halted lsp servers for given',
+  callback = function()
+    if _G.nvimLspconfigTimer then
+      _G.nvimLspconfigTimer:stop()
+      _G.nvimLspconfigTimer:close()
+      _G.nvimLspconfigTimer = nil
+    end
+    if #vim.lsp.get_active_clients() <= 1 then
+      vim.cmd 'LspStart'
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({
+  'FocusLost',
+}, {
+  pattern = '*',
+  group = 'LspconfigServerLifeCycle',
+  desc = 'Lspconfig: halt lsp servers when focus is lost',
+  callback = function()
+    if not _G.nvimLspconfigTimer and #vim.lsp.get_active_clients() > 0 then
+      local timeout = 1000 * 60 * 5 -- 5 minutes
+      _G.nvimLspconfigTimer = vim.loop.new_timer()
+      _G.nvimLspconfigTimer:start(
+        timeout,
+        0,
+        vim.schedule_wrap(function()
+          local activeServers = #vim.lsp.get_active_clients()
+          vim.cmd 'LspStop'
+          vim.notify(
+            ('[lspconfig]: nvim has lost focus, stop current language servers. Number of servers left: %s'):format(
+              activeServers
+            ),
+            vim.log.levels.INFO
+          )
+          _G.nvimLspconfigTimer = nil
+        end)
+      )
+    end
+  end,
+})
