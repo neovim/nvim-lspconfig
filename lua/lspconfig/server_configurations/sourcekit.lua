@@ -4,7 +4,7 @@ return {
   default_config = {
     cmd = { 'sourcekit-lsp' },
     filetypes = { 'swift', 'c', 'cpp', 'objective-c', 'objective-cpp' },
-    root_dir = util.root_pattern('Package.swift', '.git'),
+    root_dir = util.root_pattern('Package.swift', 'buildServer.json', 'compile_commands.json', '.git'),
   },
   docs = {
     description = [[
