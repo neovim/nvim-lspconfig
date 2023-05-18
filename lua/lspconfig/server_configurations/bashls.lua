@@ -21,7 +21,7 @@ return {
   },
   docs = {
     description = [[
-https://github.com/mads-hartmann/bash-language-server
+https://github.com/bash-lsp/bash-language-server
 
 `bash-language-server` can be installed via `npm`:
 ```sh
