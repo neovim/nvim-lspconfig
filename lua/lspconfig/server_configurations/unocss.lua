@@ -12,7 +12,7 @@ return {
       'svelte',
     },
     root_dir = function(fname)
-      return util.root_pattern('unocss.config.js', 'unocss.config.ts')(fname)
+      return util.root_pattern('unocss.config.js', 'unocss.config.ts', 'uno.config.js', 'uno.config.ts')(fname)
     end,
   },
   docs = {
@@ -25,7 +25,7 @@ npm i unocss-language-server -g
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern('unocss.config.js', 'unocss.config.ts')]],
+      root_dir = [[root_pattern('unocss.config.js', 'unocss.config.ts', 'uno.config.js', 'uno.config.ts')]],
     },
   },
 }
