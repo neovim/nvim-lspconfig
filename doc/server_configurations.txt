@@ -896,7 +896,7 @@ require'lspconfig'.azure_pipelines_ls.setup{}
 
 ## bashls
 
-https://github.com/mads-hartmann/bash-language-server
+https://github.com/bash-lsp/bash-language-server
 
 `bash-language-server` can be installed via `npm`:
 ```sh
