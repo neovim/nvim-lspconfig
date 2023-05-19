@@ -9315,7 +9315,7 @@ require'lspconfig'.unocss.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern('unocss.config.js', 'unocss.config.ts')
+  root_pattern('unocss.config.js', 'unocss.config.ts', 'uno.config.js', 'uno.config.ts')
   ```
 
 
