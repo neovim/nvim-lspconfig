@@ -14,7 +14,7 @@ return {
           arguments = { vim.api.nvim_buf_get_name(0) },
         }
       end,
-      description = 'Index',
+      description = 'ZkIndex',
     },
     ZkNew = {
       function(...)
