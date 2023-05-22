@@ -10160,7 +10160,7 @@ A plain text note-taking assistant
 require'lspconfig'.zk.setup{}
 ```
 **Commands:**
-- ZkIndex: Index
+- ZkIndex: ZkIndex
 - ZkNew: ZkNew
 
 **Default values:**
