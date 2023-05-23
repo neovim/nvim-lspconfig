@@ -8132,7 +8132,7 @@ require'lspconfig'.sourcekit.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("Package.swift", ".git")
+  root_pattern("Package.swift", "buildServer.json", "compile_commands.json", ".git")
   ```
 
 
