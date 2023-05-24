@@ -36,8 +36,8 @@ cmd = { 'typescript-language-server', '--stdio' }
 
 Additionally, the following options are often added:
 
-* `init_options`: a table sent during initialization, corresponding to initializationOptions sent in [initializeParams](https://microsoft.github.io/language-server-protocol/specifications/specification-3-17/#initializeParams) as part of the first request sent from client to server during startup.
-* `settings`: a table sent during [`workspace/didChangeConfiguration`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-17/#didChangeConfigurationParams) shortly after server initialization. This is an undocumented convention for most language servers. There is often some duplication with initOptions.
+* `init_options`: a table sent during initialization, corresponding to initializationOptions sent in [initializeParams](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#initializeParams) as part of the first request sent from client to server during startup.
+* `settings`: a table sent during [`workspace/didChangeConfiguration`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#didChangeConfigurationParams) shortly after server initialization. This is an undocumented convention for most language servers. There is often some duplication with initOptions.
 
 An example for adding a new language server is shown below for `pyright`, a python language server included in lspconfig:
 
