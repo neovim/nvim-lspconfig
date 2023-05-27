@@ -1058,7 +1058,7 @@ require'lspconfig'.blueprint_ls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "blueprint-compiler", "start" }
+  { "blueprint-compiler", "lsp" }
   ```
   - `cmd_env` : 
   ```lua
