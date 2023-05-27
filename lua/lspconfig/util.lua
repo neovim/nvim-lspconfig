@@ -227,52 +227,19 @@ M.path = (function()
   }
 end)()
 
-local function check_in_workspace(client, root_dir)
-  if not client.workspace_folders then
-    return false
-  end
-
-  for _, dir in ipairs(client.workspace_folders) do
-    if (root_dir .. '/'):sub(1, #dir.name + 1) == dir.name .. '/' then
-      return true
-    end
-  end
-
-  return false
-end
-
 -- Returns a function(root_dir), which, when called with a root_dir it hasn't
 -- seen before, will call make_config(root_dir) and start a new client.
 function M.server_per_root_dir_manager(make_config)
-  -- a table store the root dir with clients in this dir
-  local clients = {}
+  M.workspace = require('lspconfig.workspace').workspace_init()
   local manager = {}
 
   function manager.add(root_dir, single_file, bufnr)
     root_dir = M.path.sanitize(root_dir)
 
-    local function get_client_from_cache(client_name)
-      if vim.tbl_count(clients) == 0 then
-        return
-      end
-
-      if clients[root_dir] then
-        for _, id in pairs(clients[root_dir]) do
-          local client = lsp.get_client_by_id(id)
-          if client and client.name == client_name then
-            return client
-          end
-        end
-      end
-
-      local all_client_ids = {}
-      vim.tbl_map(function(val)
-        vim.list_extend(all_client_ids, { unpack(val) })
-      end, clients)
-
-      for _, id in ipairs(all_client_ids) do
-        local client = lsp.get_client_by_id(id)
-        if client and client.name == client_name then
+    local function get_client_from_workspace(client_name)
+      local clients = M.workspace:get_all_clients()
+      for _, client in ipairs(clients) do
+        if client.name == client_name then
           return client
         end
       end
@@ -280,12 +247,16 @@ function M.server_per_root_dir_manager(make_config)
 
     local function attach_and_cache(root, client_id)
       lsp.buf_attach_client(bufnr, client_id)
-      if not clients[root] then
-        clients[root] = {}
+      local current = M.workspace.current
+      local tuple = M.workspace[current]:get(root)
+      if not tuple then
+        M.workspace[current]:append {
+          root,
+          client_id,
+        }
+        return
       end
-      if not vim.tbl_contains(clients[root], client_id) then
-        clients[root][#clients[root] + 1] = client_id
-      end
+      tuple[#tuple + 1] = client_id
     end
 
     local new_config = make_config(root_dir)
@@ -321,11 +292,16 @@ function M.server_per_root_dir_manager(make_config)
         return
       end
       new_config.on_exit = M.add_hook_before(new_config.on_exit, function()
-        for index, id in pairs(clients[root_dir]) do
-          local exist = lsp.get_client_by_id(id)
-          if exist.name == new_config.name then
-            table.remove(clients[root_dir], index)
-          end
+        for _, data in pairs(M.workspace) do
+          vim.tbl_map(function(tuple)
+            for i = 2, #tuple do
+              local client = vim.lsp.get_client_by_id(tuple[i])
+              if client and client.name == new_config.name then
+                table.remove(tuple, i)
+                break
+              end
+            end
+          end, data)
         end
       end)
 
@@ -350,7 +326,8 @@ function M.server_per_root_dir_manager(make_config)
     end
 
     local function attach_or_spawn(client)
-      if check_in_workspace(client, root_dir) then
+      local space = M.workspace:find_space_by_client(client.id)
+      if space and space == M.workspace.current then
         return attach_and_cache(root_dir, client.id)
       end
 
@@ -376,13 +353,13 @@ function M.server_per_root_dir_manager(make_config)
       )
     end
 
-    local client = get_client_from_cache(new_config.name)
+    local client = get_client_from_workspace(new_config.name)
 
     if not client then
       return start_new_client()
     end
 
-    if clients[root_dir] or single_file then
+    if single_file then
       lsp.buf_attach_client(bufnr, client.id)
       return
     end
@@ -397,16 +374,7 @@ function M.server_per_root_dir_manager(make_config)
   end
 
   function manager.clients()
-    local res = {}
-    for _, client_ids in pairs(clients) do
-      for _, id in ipairs(client_ids) do
-        local client = lsp.get_client_by_id(id)
-        if client then
-          res[#res + 1] = client
-        end
-      end
-    end
-    return res
+    return M.workspace:get_all_clients()
   end
 
   return manager
@@ -546,6 +514,11 @@ function M.get_active_client_by_name(bufnr, servername)
       return client
     end
   end
+end
+
+function M.get_workspace_list()
+  local client = vim.lsp.get_active_clients()[1]
+  print(client.config.manager)
 end
 
 function M.get_managed_clients()

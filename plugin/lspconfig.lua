@@ -151,3 +151,17 @@ api.nvim_create_user_command('LspLog', function()
 end, {
   desc = 'Opens the Nvim LSP client log.',
 })
+
+api.nvim_create_user_command('LspWorkspaceList', function()
+  require('lspconfig.util').workspace:all_list()
+end, {
+  desc = 'Show all workspaces',
+})
+
+api.nvim_create_user_command('LspWorkspaceAdd', function(arg)
+  local name = arg.args
+  require('lspconfig.util').workspace:create(name)
+end, {
+  nargs = '+',
+  desc = 'Create a workspace',
+})
