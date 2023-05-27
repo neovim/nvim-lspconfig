@@ -264,7 +264,7 @@ function M.server_per_root_dir_manager(make_config)
     local function register_workspace_folders(client)
       local params = {
         event = {
-          added = { { uri = vim.uri_from_fname(root_dir), name = root_dir } },
+          added = { { uri = vim.uri_from_fname(root_dir), name = M.workspace.current } },
           removed = {},
         },
       }
@@ -317,6 +317,10 @@ function M.server_per_root_dir_manager(make_config)
       if single_file then
         new_config.root_dir = nil
         new_config.workspace_folders = nil
+      else
+        new_config.workspace_folders = {
+          { uri = vim.uri_from_fname(root_dir), name = M.workspace.current },
+        }
       end
       local client_id = lsp.start_client(new_config)
       if not client_id then
@@ -326,7 +330,7 @@ function M.server_per_root_dir_manager(make_config)
     end
 
     local function attach_or_spawn(client)
-      local space = M.workspace:find_space_by_client(client.id)
+      local space = M.workspace:find_space(client.id)
       if space and space == M.workspace.current then
         return attach_and_cache(root_dir, client.id)
       end

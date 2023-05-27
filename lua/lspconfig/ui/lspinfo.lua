@@ -1,4 +1,4 @@
-local api, fn, lsp = vim.api, vim.fn, vim.lsp
+local api, lsp = vim.api, vim.lsp
 local windows = require 'lspconfig.ui.windows'
 local util = require 'lspconfig.util'
 
@@ -121,61 +121,24 @@ local function make_config_info(config, bufnr)
 end
 
 ---@param client table
----@param fname string
-local function make_client_info(client, fname)
-  local client_info = {}
-
-  client_info.cmd = cmd_type[type(client.config.cmd)](client.config)
-  local workspace_folders = fn.has 'nvim-0.9' == 1 and client.workspace_folders or client.workspaceFolders
-  local uv = vim.loop
-  fname = uv.fs_realpath(fname) or fn.fnamemodify(fn.resolve(fname), ':p')
-
-  local folders = {}
-
-  if workspace_folders then
-    for i, schema in ipairs(workspace_folders) do
-      local name = schema.name
-      local matched = true
-      local root_dir = uv.fs_realpath(schema.name)
-      if fname:sub(1, root_dir:len()) ~= root_dir then
-        matched = false
-      end
-
-      if matched then
-        table.insert(folders, 1, '[' .. name:gsub(vim.env.HOME .. '/', '') .. ']')
-      else
-        folders[#folders + 1] = '[' .. name:gsub(vim.env.HOME .. '/', '') .. ']'
-      end
-
-      if i == #workspace_folders and not matched then
-        table.insert(folders, 1, '[Single Mode]')
-      end
-    end
-  end
-
-  if not vim.tbl_isempty(folders) then
-    client_info.workspace = table.concat(folders, ' ')
-  end
-  client_info.filetypes = table.concat(client.config.filetypes or {}, ', ')
-  client_info.autostart = (client.config.autostart and 'true') or 'false'
-  client_info.attached_buffers_list = table.concat(vim.lsp.get_buffers_by_client_id(client.id), ', ')
-
+local function make_client_info(client)
   local lines = {
     '',
-    'Client: '
-      .. client.name
-      .. ' (id: '
-      .. tostring(client.id)
-      .. ', bufnr: ['
-      .. client_info.attached_buffers_list
-      .. '])',
+    'Client: ' .. client.name .. ' (id: ' .. tostring(client.id) .. ', bufnr: [' .. table.concat(
+      vim.lsp.get_buffers_by_client_id(client.id),
+      ', '
+    ) .. '])',
   }
 
+  local root = client.config.root_dir or vim.loop.cwd()
+  local workspace = util.workspace:find_space(client.id, root)
+
   local info_lines = {
-    'filetypes:       ' .. client_info.filetypes,
-    'autostart:       ' .. client_info.autostart,
-    'workspace:       ' .. client_info.workspace,
-    'servercmd:       ' .. client_info.cmd,
+    'servercmd:       ' .. cmd_type[type(client.config.cmd)](client.config),
+    'filetypes:       ' .. table.concat(client.config.filetypes or {}, ', '),
+    'autostart:       ' .. ((client.config.autostart and 'true') or 'false'),
+    'workspace:       ' .. workspace,
+    'root  dir:       ' .. (client.config.root_dir or 'Running in single mode'),
   }
 
   if client.config.lspinfo then
@@ -195,7 +158,6 @@ return function()
   local buf_clients = lsp.get_active_clients { bufnr = original_bufnr }
   local clients = lsp.get_active_clients()
   local buffer_filetype = vim.bo.filetype
-  local fname = api.nvim_buf_get_name(original_bufnr)
 
   windows.default_options.wrap = true
   windows.default_options.breakindent = true
@@ -237,7 +199,7 @@ return function()
 
   vim.list_extend(buf_lines, buffer_clients_header)
   for _, client in ipairs(buf_clients) do
-    local client_info = make_client_info(client, fname)
+    local client_info = make_client_info(client)
     vim.list_extend(buf_lines, client_info)
   end
 
@@ -249,7 +211,7 @@ return function()
     vim.list_extend(buf_lines, other_active_section_header)
   end
   for _, client in ipairs(other_active_clients) do
-    local client_info = make_client_info(client, fname)
+    local client_info = make_client_info(client)
     vim.list_extend(buf_lines, client_info)
   end
 
@@ -317,7 +279,6 @@ return function()
     syn match Number /buffer:\s*\zs\d\+\ze/
     syn match LspInfoFiletypeList /\<filetypes\?:\s*\zs.*\ze/ contains=LspInfoFiletype
     syn match LspInfoFiletype /\k\+/ contained
-    syn match LspInfoCurrentWorkspace /\<workspace\?:\s*\zs\[.\{-}]\ze/
     syn match LspInfoTitle /^\s*\%(Client\|Config\):\s*\zs\S\+\ze/
     syn match LspInfoListList /^\s*Configured servers list:\s*\zs.*\ze/ contains=LspInfoList
     syn match LspInfoList /\S\+/ contained

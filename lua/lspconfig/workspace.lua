@@ -81,11 +81,15 @@ function wk:all_list()
   print(vim.inspect(res))
 end
 
-function wk:find_space_by_client(client_id)
+function wk:find_space(client_id, root)
   for space, data in pairs(self) do
     for _, tuple in ipairs(data) do
       if vim.tbl_contains(tuple, client_id) then
-        return space
+        if root and tuple[1] == root then
+          return space
+        else
+          return space
+        end
       end
     end
   end
@@ -104,9 +108,7 @@ function wk:get_all_clients()
 end
 
 local function workspace_init()
-  local instance = wk:new()
-  instance:change 'default'
-  return instance
+  return wk:new()
 end
 
 return {
