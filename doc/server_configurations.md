@@ -600,7 +600,7 @@ require'lspconfig'.arduino_language_server.setup{}
           }
         },
         dataSupport = true,
-        dynamicRegistration = false,
+        dynamicRegistration = true,
         isPreferredSupport = true,
         resolveSupport = {
           properties = { "edit" }
@@ -624,6 +624,7 @@ require'lspconfig'.arduino_language_server.setup{}
         linkSupport = true
       },
       definition = {
+        dynamicRegistration = true,
         linkSupport = true
       },
       documentHighlight = {
@@ -636,9 +637,12 @@ require'lspconfig'.arduino_language_server.setup{}
           valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
         }
       },
+      formatting = {
+        dynamicRegistration = true
+      },
       hover = {
         contentFormat = { "markdown", "plaintext" },
-        dynamicRegistration = false
+        dynamicRegistration = true
       },
       implementation = {
         linkSupport = true
@@ -649,11 +653,14 @@ require'lspconfig'.arduino_language_server.setup{}
           valueSet = { 1, 2 }
         }
       },
+      rangeFormatting = {
+        dynamicRegistration = true
+      },
       references = {
         dynamicRegistration = false
       },
       rename = {
-        dynamicRegistration = false,
+        dynamicRegistration = true,
         prepareSupport = true
       },
       semanticTokens = vim.NIL,
