@@ -44,7 +44,11 @@ return {
     cmd = { 'clangd' },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
     root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+      local root = util.root_pattern(unpack(root_files))(fname)
+      if root and root ~= vim.env.HOME then
+        return root
+      end
+      return util.find_git_ancestor(fname)
     end,
     single_file_support = true,
     capabilities = default_capabilities,
