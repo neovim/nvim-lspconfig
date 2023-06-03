@@ -48,11 +48,28 @@ local function get_workspace_dir(cmd)
   return stdout and stdout['workspace_root'] or nil
 end
 
+local function is_library(fname)
+  local cargo_home = os.getenv 'CARGO_HOME' or util.path.join(vim.env.HOME, '.cargo')
+  local registry = util.path.join(cargo_home, 'registry', 'src')
+  local toolchains = util.path.join(vim.env.HOME, '.rustup', 'toolchains')
+  for _, item in ipairs { toolchains, registry } do
+    if fname:sub(1, #item) == item then
+      local clients = vim.lsp.get_active_clients { name = 'rust_analyzer' }
+      return clients[#clients].config.root_dir
+    end
+  end
+end
+
 return {
   default_config = {
     cmd = { 'rust-analyzer' },
     filetypes = { 'rust' },
     root_dir = function(fname)
+      local reuse_active = is_library(fname)
+      if reuse_active then
+        return reuse_active
+      end
+
       local cargo_crate_dir = util.root_pattern 'Cargo.toml'(fname)
       local cmd = { 'cargo', 'metadata', '--no-deps', '--format-version', '1' }
       if cargo_crate_dir ~= nil then
