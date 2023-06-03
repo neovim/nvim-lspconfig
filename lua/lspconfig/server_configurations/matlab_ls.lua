@@ -8,7 +8,7 @@ return {
     single_file_support = false,
     settings = {
       matlab = {
-        indexWorkspace = true,
+        indexWorkspace = false,
         installPath = '',
         matlabConnectionTiming = 'onStart',
         telemetry = true,
