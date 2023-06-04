@@ -798,10 +798,7 @@ require'lspconfig'.astro.setup{}
   - `init_options` : 
   ```lua
   {
-    configuration = {},
-    typescript = {
-      serverPath = ""
-    }
+    typescript = {}
   }
   ```
   - `on_new_config` : 
