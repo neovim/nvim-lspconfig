@@ -80,6 +80,7 @@ return {
         classAttributes = {
           'class',
           'className',
+          'class:list',
           'classList',
           'ngClass',
         },
