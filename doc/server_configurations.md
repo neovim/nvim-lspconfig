@@ -9451,6 +9451,13 @@ require'lspconfig'.typst_lsp.setup{}
   ```lua
   see source file
   ```
+  
+  - `settings` : 
+  ```lua
+  {
+		exportPdf = "onSave" -- Choose onType, onSave or never.
+  }
+  ```  
 
 
 ## unison
