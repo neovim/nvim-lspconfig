@@ -593,7 +593,7 @@ require'lspconfig'.arduino_language_server.setup{}
   ```lua
   {
     general = {
-      positionEncodings = { "utf-8", "utf-16", "utf-32" }
+      positionEncodings = { "utf-16" }
     },
     textDocument = {
       callHierarchy = {
@@ -9921,7 +9921,6 @@ https://github.com/vlang/vls
 V language server.
 
 `v-language-server` can be installed by following the instructions [here](https://github.com/vlang/vls#installation).
-```
 
 
 
