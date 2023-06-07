@@ -8838,7 +8838,7 @@ require'lspconfig'.tailwindcss.setup{}
   ```lua
   {
     tailwindCSS = {
-      classAttributes = { "class", "className", "classList", "ngClass" },
+      classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
       lint = {
         cssConflict = "warning",
         invalidApply = "error",
