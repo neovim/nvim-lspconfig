@@ -60,6 +60,14 @@ local function is_library(fname)
   end
 end
 
+local function register_cap()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.experimental = {
+    serverStatusNotification = true,
+  }
+  return capabilities
+end
+
 return {
   default_config = {
     cmd = { 'rust-analyzer' },
@@ -88,6 +96,7 @@ return {
         or util.root_pattern 'rust-project.json'(fname)
         or util.find_git_ancestor(fname)
     end,
+    capabilities = register_cap(),
   },
   commands = {
     CargoReload = {
