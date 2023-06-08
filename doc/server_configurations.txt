@@ -10253,7 +10253,6 @@ To configure a Typescript project, add a
 [`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)
 or [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig) to
 the root of your project.
-```
 
 
 
