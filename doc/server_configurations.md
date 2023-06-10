@@ -5610,7 +5610,7 @@ require'lspconfig'.nixd.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("flake.nix", ".git")
+  root_pattern(".nixd.json", "flake.nix",".git")
   ```
   - `single_file_support` : 
   ```lua
