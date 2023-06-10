@@ -5,7 +5,9 @@ return {
     cmd = { 'nixd' },
     filetypes = { 'nix' },
     single_file_support = true,
-    root_dir = util.root_pattern('flake.nix', '.git'),
+    root_dir = function(fname)
+      return util.root_pattern(unpack { 'nixd.json', 'flake.nix' })(fname) or util.find_git_ancestor(fname)
+    end,
   },
   docs = {
     description = [[
@@ -17,7 +19,7 @@ If you are using Nix with Flakes support, run `nix profile install github:nix-co
 Check the repository README for more information.
     ]],
     default_config = {
-      root_dir = [[root_pattern("flake.nix", ".git")]],
+      root_dir = [[root_pattern(".nixd.json", "flake.nix",".git")]],
     },
   },
 }
