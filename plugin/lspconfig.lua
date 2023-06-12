@@ -90,7 +90,9 @@ api.nvim_create_user_command('LspRestart', function(info)
   local detach_clients = {}
   for _, client in ipairs(get_clients_from_cmd_args(info.args)) do
     client.stop()
-    detach_clients[client.name] = client
+    if #client.attached_buffers > 0 then
+      detach_clients[client.name] = client
+    end
   end
   local timer = vim.loop.new_timer()
   timer:start(
