@@ -654,6 +654,12 @@ require'lspconfig'.arduino_language_server.setup{}
       implementation = {
         linkSupport = true
       },
+      inlayHint = {
+        dynamicRegistration = false,
+        resolveSupport = {
+          properties = {}
+        }
+      },
       publishDiagnostics = {
         relatedInformation = true,
         tagSupport = {
@@ -708,6 +714,9 @@ require'lspconfig'.arduino_language_server.setup{}
       didChangeWatchedFiles = {
         dynamicRegistration = true,
         relativePatternSupport = true
+      },
+      inlayHint = {
+        refreshSupport = true
       },
       semanticTokens = vim.NIL,
       symbol = {
@@ -7714,6 +7723,12 @@ require'lspconfig'.rust_analyzer.setup{}
       implementation = {
         linkSupport = true
       },
+      inlayHint = {
+        dynamicRegistration = false,
+        resolveSupport = {
+          properties = {}
+        }
+      },
       publishDiagnostics = {
         relatedInformation = true,
         tagSupport = {
@@ -7783,6 +7798,9 @@ require'lspconfig'.rust_analyzer.setup{}
       didChangeWatchedFiles = {
         dynamicRegistration = true,
         relativePatternSupport = true
+      },
+      inlayHint = {
+        refreshSupport = true
       },
       semanticTokens = {
         refreshSupport = true
