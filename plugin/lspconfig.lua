@@ -91,7 +91,7 @@ api.nvim_create_user_command('LspRestart', function(info)
   for _, client in ipairs(get_clients_from_cmd_args(info.args)) do
     client.stop()
     if #client.attached_buffers > 0 then
-      detach_clients[client.name] = client
+      detach_clients[client.name] = { client, client.attached_buffers }
     end
   end
   local timer = vim.loop.new_timer()
@@ -99,9 +99,12 @@ api.nvim_create_user_command('LspRestart', function(info)
     500,
     100,
     vim.schedule_wrap(function()
-      for client_name, client in pairs(detach_clients) do
+      for client_name, tuple in pairs(detach_clients) do
+        local client, attached_buffers = unpack(tuple)
         if client.is_stopped() then
-          require('lspconfig.configs')[client_name].launch()
+          for buf in pairs(attached_buffers) do
+            require('lspconfig.configs')[client_name].launch(buf)
+          end
           detach_clients[client_name] = nil
         end
       end
