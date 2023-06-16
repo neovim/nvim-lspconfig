@@ -2,6 +2,15 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
+    cmd = {
+      'java',
+      '--add-opens=java.base/java.lang=ALL-UNNAMED',
+      '--add-opens=java.base/java.math=ALL-UNNAMED',
+      '--add-opens=java.base/java.util=ALL-UNNAMED',
+      '--add-opens=java.base/java.util.concurrent=ALL-UNNAMED',
+      '--add-opens=java.base/java.net=ALL-UNNAMED',
+      '--add-opens=java.base/java.text=ALL-UNNAMED',
+    },
     filetypes = { 'progress' },
     root_dir = util.root_pattern 'openedge-project.json',
     on_new_config = function(config)
