@@ -10,44 +10,6 @@ local function reload_workspace(bufnr)
   end)
 end
 
-local function get_workspace_dir(cmd)
-  local co = assert(coroutine.running())
-
-  local stdout = {}
-  local stderr = {}
-  local jobid = vim.fn.jobstart(cmd, {
-    on_stdout = function(_, data, _)
-      data = table.concat(data, '\n')
-      if #data > 0 then
-        stdout[#stdout + 1] = data
-      end
-    end,
-    on_stderr = function(_, data, _)
-      stderr[#stderr + 1] = table.concat(data, '\n')
-    end,
-    on_exit = function()
-      coroutine.resume(co)
-    end,
-    stdout_buffered = true,
-    stderr_buffered = true,
-  })
-
-  if jobid <= 0 then
-    vim.notify(
-      ('[lspconfig] cmd (%q) failed:\n%s'):format(table.concat(cmd, ' '), table.concat(stderr, '')),
-      vim.log.levels.WARN
-    )
-    return
-  end
-
-  coroutine.yield()
-  if next(stdout) == nil then
-    return nil
-  end
-  stdout = vim.json.decode(table.concat(stdout, ''))
-  return stdout and stdout['workspace_root'] or nil
-end
-
 local function is_library(fname)
   local cargo_home = os.getenv 'CARGO_HOME' or util.path.join(vim.env.HOME, '.cargo')
   local registry = util.path.join(cargo_home, 'registry', 'src')
@@ -88,10 +50,14 @@ return {
         cmd[#cmd + 1] = util.path.join(cargo_crate_dir, 'Cargo.toml')
       end
 
-      local cargo_workspace_root = get_workspace_dir(cmd)
+      local result = util.async_run_command(cmd)
+      local cargo_workspace_root
 
-      if cargo_workspace_root then
-        cargo_workspace_root = util.path.sanitize(cargo_workspace_root)
+      if result and result[1] then
+        result = vim.json.decode(table.concat(result, ''))
+        if result['workspace_root'] then
+          cargo_workspace_root = util.path.sanitize(result['workspace_root'])
+        end
       end
 
       return cargo_workspace_root
