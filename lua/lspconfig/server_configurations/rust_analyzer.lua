@@ -20,7 +20,9 @@ local function is_library(fname)
   for _, item in ipairs { toolchains, registry } do
     if fname:sub(1, #item) == item then
       local clients = vim.lsp.get_active_clients { name = 'rust_analyzer' }
-      return clients[#clients].config.root_dir
+      if clients[#clients].config then
+        return clients[#clients].config.root_dir
+      end
     end
   end
 end
