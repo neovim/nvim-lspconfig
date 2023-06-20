@@ -1,13 +1,16 @@
 local util = require 'lspconfig.util'
 
 local root_files = {
+  '.busted',
+  '.git',
+  '.luacheckrc',
   '.luarc.json',
   '.luarc.jsonc',
-  '.luacheckrc',
   '.stylua.toml',
-  'stylua.toml',
+  'config.ld', -- ldoc
   'selene.toml',
   'selene.yml',
+  'stylua.toml',
 }
 
 return {
