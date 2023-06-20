@@ -7624,9 +7624,9 @@ require'lspconfig'.ruby_ls.setup{}
 
 ## ruff_lsp
 
-https://github.com/charliermarsh/ruff-lsp
+https://github.com/astral-sh/ruff-lsp
 
-A Language Server Protocol implementation for Ruff, an extremely fast Python linter and code transformation tool, written in Rust. It can be installed via pip
+A Language Server Protocol implementation for Ruff, an extremely fast Python linter and code transformation tool, written in Rust. It can be installed via pip.
 
 ```sh
 pip install ruff-lsp
