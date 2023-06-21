@@ -8,7 +8,15 @@ end
 return {
   default_config = {
     cmd = { 'astro-ls', '--stdio' },
-    filetypes = { 'astro' },
+    filetypes = {
+      'astro',
+      'javascript',
+      'javascriptreact',
+      'javascript.jsx',
+      'typescript',
+      'typescriptreact',
+      'typescript.tsx',
+    },
     root_dir = util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
     init_options = {
       typescript = {},
