@@ -1,4 +1,5 @@
 local util = require 'lspconfig.util'
+local cmd_init = nil
 
 return {
   default_config = {
@@ -42,38 +43,44 @@ return {
       return util.root_pattern '*.sln'(fname) or util.root_pattern '*.csproj'(fname)
     end,
     on_new_config = function(new_config, new_root_dir)
-      new_config.cmd = { 'omnisharp' }
+      -- store the initial value of `cmd` for later use
+      if not cmd_init then
+        cmd_init = {}
+        for _, v in pairs(new_config.cmd) do
+          table.insert(cmd_init, v)
+        end
+      end
+      -- copy the fields of `cmd_init` into `new_config.cmd`
+      new_config.cmd = {}
+      for _, v in pairs(cmd_init) do
+        table.insert(new_config.cmd, v)
+      end
+      -- add hard-coded command arguments
       table.insert(new_config.cmd, '-z') -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
       vim.list_extend(new_config.cmd, { '-s', new_root_dir })
       vim.list_extend(new_config.cmd, { '--hostPID', tostring(vim.fn.getpid()) })
       table.insert(new_config.cmd, 'DotNet:enablePackageRestore=false')
       vim.list_extend(new_config.cmd, { '--encoding', 'utf-8' })
       table.insert(new_config.cmd, '--languageserver')
-
+      -- add configuration-dependent command arguments
       if new_config.enable_editorconfig_support then
         table.insert(new_config.cmd, 'FormattingOptions:EnableEditorConfigSupport=true')
       end
-
       if new_config.organize_imports_on_format then
         table.insert(new_config.cmd, 'FormattingOptions:OrganizeImports=true')
       end
-
       if new_config.enable_ms_build_load_projects_on_demand then
         table.insert(new_config.cmd, 'MsBuild:LoadProjectsOnDemand=true')
       end
-
       if new_config.enable_roslyn_analyzers then
         table.insert(new_config.cmd, 'RoslynExtensionsOptions:EnableAnalyzersSupport=true')
       end
-
       if new_config.enable_import_completion then
         table.insert(new_config.cmd, 'RoslynExtensionsOptions:EnableImportCompletion=true')
       end
-
       if new_config.sdk_include_prereleases then
         table.insert(new_config.cmd, 'Sdk:IncludePrereleases=true')
       end
-
       if new_config.analyze_open_documents_only then
         table.insert(new_config.cmd, 'RoslynExtensionsOptions:AnalyzeOpenDocumentsOnly=true')
       end
