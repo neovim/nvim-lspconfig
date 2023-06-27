@@ -1,5 +1,4 @@
 local util = require 'lspconfig.util'
-local cmd_init = nil
 
 return {
   default_config = {
@@ -43,18 +42,8 @@ return {
       return util.root_pattern '*.sln'(fname) or util.root_pattern '*.csproj'(fname)
     end,
     on_new_config = function(new_config, new_root_dir)
-      -- store the initial value of `cmd` for later use
-      if not cmd_init then
-        cmd_init = {}
-        for _, v in pairs(new_config.cmd) do
-          table.insert(cmd_init, v)
-        end
-      end
-      -- copy the fields of `cmd_init` into `new_config.cmd`
-      new_config.cmd = {}
-      for _, v in pairs(cmd_init) do
-        table.insert(new_config.cmd, v)
-      end
+      -- unpack the initial value of `cmd`
+      new_config.cmd = { unpack(new_config.cmd or {}) }
       -- add hard-coded command arguments
       table.insert(new_config.cmd, '-z') -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
       vim.list_extend(new_config.cmd, { '-s', new_root_dir })
