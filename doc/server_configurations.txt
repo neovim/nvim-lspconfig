@@ -657,7 +657,7 @@ require'lspconfig'.arduino_language_server.setup{}
         linkSupport = true
       },
       inlayHint = {
-        dynamicRegistration = false,
+        dynamicRegistration = true,
         resolveSupport = {
           properties = {}
         }
@@ -7775,7 +7775,7 @@ require'lspconfig'.rust_analyzer.setup{}
         linkSupport = true
       },
       inlayHint = {
-        dynamicRegistration = false,
+        dynamicRegistration = true,
         resolveSupport = {
           properties = {}
         }
