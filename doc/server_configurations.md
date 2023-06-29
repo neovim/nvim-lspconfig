@@ -2682,7 +2682,7 @@ require'lspconfig'.ember.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "handlebars", "typescript", "javascript" }
+  { "handlebars", "typescript", "javascript", "typescript.glimmer", "javascript.glimmer" }
   ```
   - `root_dir` : 
   ```lua
