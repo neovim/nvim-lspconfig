@@ -143,7 +143,7 @@ a new configuration for it helps others, especially if the server requires speci
     - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/)
       to get started. Most configs are simple. For an extensive example see
       [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/texlab.lua).
-3. Ask questions on our [Discourse](https://neovim.discourse.group/c/7-category/7) or in the [Neovim Matrix room](https://app.element.io/#/room/#neovim:matrix.org).
+3. Ask questions on [GitHub Discussions](https://github.com/neovim/neovim/discussions) or in the [Neovim Matrix room](https://app.element.io/#/room/#neovim:matrix.org).
 
 ### Release process
 
