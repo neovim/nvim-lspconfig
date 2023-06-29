@@ -56,21 +56,27 @@ return {
       if new_config.enable_editorconfig_support then
         table.insert(new_config.cmd, 'FormattingOptions:EnableEditorConfigSupport=true')
       end
+
       if new_config.organize_imports_on_format then
         table.insert(new_config.cmd, 'FormattingOptions:OrganizeImports=true')
       end
+
       if new_config.enable_ms_build_load_projects_on_demand then
         table.insert(new_config.cmd, 'MsBuild:LoadProjectsOnDemand=true')
       end
+
       if new_config.enable_roslyn_analyzers then
         table.insert(new_config.cmd, 'RoslynExtensionsOptions:EnableAnalyzersSupport=true')
       end
+
       if new_config.enable_import_completion then
         table.insert(new_config.cmd, 'RoslynExtensionsOptions:EnableImportCompletion=true')
       end
+
       if new_config.sdk_include_prereleases then
         table.insert(new_config.cmd, 'Sdk:IncludePrereleases=true')
       end
+
       if new_config.analyze_open_documents_only then
         table.insert(new_config.cmd, 'RoslynExtensionsOptions:AnalyzeOpenDocumentsOnly=true')
       end
