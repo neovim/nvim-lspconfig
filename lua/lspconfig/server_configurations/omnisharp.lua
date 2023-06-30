@@ -41,14 +41,18 @@ return {
     root_dir = function(fname)
       return util.root_pattern '*.sln'(fname) or util.root_pattern '*.csproj'(fname)
     end,
-    on_new_config = function(new_config, new_root_dir)
+    on_new_config = function(new_config, _)
+      -- Get the initially configured value of `cmd`
+      new_config.cmd = { unpack(new_config.cmd or {}) }
+
+      -- Append hard-coded command arguments
       table.insert(new_config.cmd, '-z') -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
-      vim.list_extend(new_config.cmd, { '-s', new_root_dir })
       vim.list_extend(new_config.cmd, { '--hostPID', tostring(vim.fn.getpid()) })
       table.insert(new_config.cmd, 'DotNet:enablePackageRestore=false')
       vim.list_extend(new_config.cmd, { '--encoding', 'utf-8' })
       table.insert(new_config.cmd, '--languageserver')
 
+      -- Append configuration-dependent command arguments
       if new_config.enable_editorconfig_support then
         table.insert(new_config.cmd, 'FormattingOptions:EnableEditorConfigSupport=true')
       end
@@ -76,6 +80,10 @@ return {
       if new_config.analyze_open_documents_only then
         table.insert(new_config.cmd, 'RoslynExtensionsOptions:AnalyzeOpenDocumentsOnly=true')
       end
+
+      -- Disable the handling of multiple workspaces in a single instance
+      new_config.capabilities = vim.deepcopy(new_config.capabilities)
+      new_config.capabilities.workspace.workspaceFolders = false -- https://github.com/OmniSharp/omnisharp-roslyn/issues/909
     end,
     init_options = {},
   },
