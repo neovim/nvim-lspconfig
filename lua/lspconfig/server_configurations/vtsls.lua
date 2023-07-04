@@ -26,7 +26,7 @@ https://github.com/yioneko/vtsls
 npm install -g @vtsls/language-server
 ```
 
-To configure a Typescript project, add a
+To configure a TypeScript project, add a
 [`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)
 or [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig) to
 the root of your project.
