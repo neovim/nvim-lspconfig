@@ -32,7 +32,9 @@ return {
   default_config = {
     cmd = { 'pyright-langserver', '--stdio' },
     filetypes = { 'python' },
-    root_dir = util.root_pattern(unpack(root_files)),
+    root_dir = function()
+      return util.root_pattern(unpack(root_files))() or vim.loop.cwd()
+    end,
     single_file_support = true,
     settings = {
       python = {
