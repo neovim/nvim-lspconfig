@@ -7630,7 +7630,7 @@ require'lspconfig'.rubocop.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "bundle", "exec", "rubocop", "--lsp" }
+  { "rubocop", "--lsp" }
   ```
   - `filetypes` : 
   ```lua
