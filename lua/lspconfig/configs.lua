@@ -98,7 +98,7 @@ function configs.__newindex(t, config_name, config_def)
 
     if config.autostart == true then
       local event_conf = config.filetypes and { event = 'FileType', pattern = config.filetypes }
-        or { event = 'BufReadPost' }
+        or { event = { 'BufReadPost', 'BufNewFile' } }
       api.nvim_create_autocmd(event_conf.event, {
         pattern = event_conf.pattern or '*',
         callback = function(opt)
@@ -139,7 +139,7 @@ function configs.__newindex(t, config_name, config_def)
         end
 
         if root_dir then
-          api.nvim_create_autocmd('BufReadPost', {
+          api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
             pattern = fn.fnameescape(root_dir) .. '/*',
             callback = function(arg)
               if #M.manager:clients() == 0 then
