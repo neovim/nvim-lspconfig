@@ -74,6 +74,7 @@ function configs.__newindex(t, config_name, config_def)
       on_new_config = { user_config.on_new_config, 'f', true },
       on_attach = { user_config.on_attach, 'f', true },
       commands = { user_config.commands, 't', true },
+      shebangs = { user_config.shebangs, 't', true },
     }
     if user_config.commands then
       for k, v in pairs(user_config.commands) do
