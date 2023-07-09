@@ -158,6 +158,21 @@ function configs.__newindex(t, config_name, config_def)
               end
             end
           end
+        elseif config.shebangs and #config.shebangs ~= 0 then
+          if not api.nvim_buf_is_valid(bufnr) or (#bufname ~= 0 and not util.bufname_valid(bufname)) then
+            return
+          end
+          local maybeshebang = api.nvim_buf_get_lines(bufnr, 0, 1, false)[1]
+          if not maybeshebang:match '^#!' then
+            return
+          end
+          for _, shebang in ipairs(config.shebangs) do
+            if maybeshebang:find(shebang) then
+              local pseudo_root = #bufname == 0 and pwd or util.path.dirname(util.path.sanitize(bufname))
+              M.manager.add(pseudo_root, true, bufnr)
+              break
+            end
+          end
         elseif config.single_file_support then
           -- This allows on_new_config to use the parent directory of the file
           -- Effectively this is the root from lspconfig's perspective, as we use
@@ -299,6 +314,18 @@ function configs.__newindex(t, config_name, config_def)
 
         if root_dir then
           manager.add(root_dir, false, bufnr)
+        elseif config.shebangs and #config.shebangs ~= 0 then
+          local maybeshebang = api.nvim_buf_get_lines(bufnr, 0, 1, false)[1]
+          if not maybeshebang:match '^#!' then
+            return
+          end
+          for _, shebang in ipairs(config.shebangs) do
+            if maybeshebang:find(shebang) then
+              local pseudo_root = #bufname == 0 and pwd or util.path.dirname(buf_path)
+              manager.add(pseudo_root, true, bufnr)
+              break
+            end
+          end
         elseif config.single_file_support then
           local pseudo_root = #bufname == 0 and pwd or util.path.dirname(buf_path)
           manager.add(pseudo_root, true, bufnr)
