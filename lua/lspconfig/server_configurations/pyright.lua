@@ -34,7 +34,7 @@ return {
     cmd = { 'pyright-langserver', '--stdio' },
     filetypes = { 'python' },
     root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname) or vim.loop.cwd()
+      return util.root_pattern(unpack(root_files))(fname)
     end,
     single_file_support = true,
     settings = {
