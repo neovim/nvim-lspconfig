@@ -36,7 +36,6 @@ return {
     root_dir = function(fname)
       return util.root_pattern(unpack(root_files))(fname)
     end,
-    root_dir = util.root_pattern(unpack(root_files)),
     single_file_support = true,
     settings = {
       python = {
