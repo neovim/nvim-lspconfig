@@ -642,6 +642,9 @@ require'lspconfig'.arduino_language_server.setup{}
         dynamicRegistration = true,
         linkSupport = true
       },
+      diagnostic = {
+        dynamicRegistration = false
+      },
       documentHighlight = {
         dynamicRegistration = false
       },
@@ -669,6 +672,7 @@ require'lspconfig'.arduino_language_server.setup{}
         }
       },
       publishDiagnostics = {
+        dataSupport = true,
         relatedInformation = true,
         tagSupport = {
           valueSet = { 1, 2 }
@@ -7929,6 +7933,9 @@ require'lspconfig'.rust_analyzer.setup{}
         dynamicRegistration = true,
         linkSupport = true
       },
+      diagnostic = {
+        dynamicRegistration = false
+      },
       documentHighlight = {
         dynamicRegistration = false
       },
@@ -7956,6 +7963,7 @@ require'lspconfig'.rust_analyzer.setup{}
         }
       },
       publishDiagnostics = {
+        dataSupport = true,
         relatedInformation = true,
         tagSupport = {
           valueSet = { 1, 2 }
