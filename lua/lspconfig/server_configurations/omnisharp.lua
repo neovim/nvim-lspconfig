@@ -40,12 +40,7 @@ return {
     filetypes = { 'cs', 'vb' },
     root_dir = function(fname)
       local root_patterns = { '*.sln', '*.csproj', 'omnisharp.json', 'function.json' }
-      for _, pattern in ipairs(root_patterns) do
-        local match = util.root_pattern(pattern)(fname)
-        if match then
-          return match
-        end
-      end
+      return util.root_pattern(root_patterns)(fname)
     end,
     on_new_config = function(new_config, _)
       -- Get the initially configured value of `cmd`
