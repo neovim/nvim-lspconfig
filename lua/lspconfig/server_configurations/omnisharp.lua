@@ -39,7 +39,8 @@ return {
 
     filetypes = { 'cs', 'vb' },
     root_dir = function(fname)
-      return util.root_pattern '*.sln'(fname) or util.root_pattern '*.csproj'(fname)
+      local root_patterns = { '*.sln', '*.csproj', 'omnisharp.json', 'function.json' }
+      return util.root_pattern(root_patterns)(fname)
     end,
     on_new_config = function(new_config, _)
       -- Get the initially configured value of `cmd`
