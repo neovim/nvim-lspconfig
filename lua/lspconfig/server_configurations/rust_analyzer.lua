@@ -2,12 +2,16 @@ local util = require 'lspconfig.util'
 
 local function reload_workspace(bufnr)
   bufnr = util.validate_bufnr(bufnr)
-  vim.lsp.buf_request(bufnr, 'rust-analyzer/reloadWorkspace', nil, function(err)
-    if err then
-      error(tostring(err))
-    end
-    vim.notify 'Cargo workspace reloaded'
-  end)
+  local clients = vim.lsp.get_active_clients { name = 'rust_analyzer', bufnr = bufnr }
+  for _, client in ipairs(clients) do
+    vim.notify 'Reloading Cargo Workspace'
+    client.request('rust-analyzer/reloadWorkspace', nil, function(err)
+      if err then
+        error(tostring(err))
+      end
+      vim.notify 'Cargo workspace reloaded'
+    end, 0)
+  end
 end
 
 local function is_library(fname)
