@@ -5,6 +5,12 @@ return {
     cmd = { 'efm-langserver' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
+    init_options = {
+      documentFormatting = true,
+      documentRangeFormatting = true,
+      hover = true,
+      codeAction = true,
+    },
   },
 
   docs = {
