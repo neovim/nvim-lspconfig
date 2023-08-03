@@ -168,7 +168,7 @@ passed overrides to `setup {}` are:
 
   Callback invoked by Nvim's built-in client when attaching a buffer to a
   language server. Often used to set Nvim (buffer or global) options or to
-  override the Nvim client properties (`resolved_capabilities`) after a
+  override the Nvim client properties (`server_capabilities`) after a
   language server attaches. Most commonly used for settings buffer
   local keybindings. See |lspconfig-keybindings| for a usage example.
 
