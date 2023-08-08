@@ -63,7 +63,7 @@ require'lspconfig'.lua_ls.setup {
           -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
           -- library = vim.api.nvim_get_runtime_file("", true)
         }
-      }
+      })
 
       client.notify("workspace/didChangeConfiguration", { settings = settings })
     end
