@@ -4973,7 +4973,7 @@ https://github.com/luals/lua-language-server
 
 Lua language server.
 
-`lua-language-server` can be installed by following the instructions [here](https://github.com/luals/lua-language-server/wiki/Getting-Started#command-line).
+`lua-language-server` can be installed by following the instructions [here](https://luals.github.io/#neovim-install).
 
 The default `cmd` assumes that the `lua-language-server` binary can be found in `$PATH`.
 
@@ -5010,9 +5010,9 @@ require'lspconfig'.lua_ls.setup {
 }
 ```
 
-See `lua-language-server`'s [documentation](https://github.com/luals/lua-language-server/blob/master/locale/en-us/setting.lua) for an explanation of the above fields:
-* [Lua.runtime.path](https://github.com/luals/lua-language-server/blob/076dd3e5c4e03f9cef0c5757dfa09a010c0ec6bf/locale/en-us/setting.lua#L5-L13)
-* [Lua.workspace.library](https://github.com/luals/lua-language-server/blob/076dd3e5c4e03f9cef0c5757dfa09a010c0ec6bf/locale/en-us/setting.lua#L77-L78)
+See `lua-language-server`'s [documentation](https://luals.github.io/wiki/settings/) for an explanation of the above fields:
+* [Lua.runtime.path](https://luals.github.io/wiki/settings/#runtimepath)
+* [Lua.workspace.library](https://luals.github.io/wiki/settings/#workspacelibrary)
 
 
 
