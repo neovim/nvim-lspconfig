@@ -463,14 +463,46 @@ The following commands support tab-completion for all arguments. All commands
 that require a client id can either leverage tab-completion or the info
 contained in `:LspInfo`:
 
+                                                             *:LspStart*
 - `:LspStart <config_name>` launches the requested (configured) client, but only
   if it successfully resolves a root directory. Note: Defaults to all
   configured servers matching the current buffer filetype.
+                                                             *:LspStop*
 - `:LspStop <client_id>` stops the server with the given client id. Defaults to
   stopping all servers active on the current buffer. if you want to force stop
   a language server you can do it like `:LspStop <client_id> ++force`
+                                                             *:LspRestart*
 - `:LspRestart <client_id>` restarts the client with the given client id, and
   will attempt to reattach to all previously attached buffers.
+                                                             *:LspReconfigure*
+- `:LspReconfigure <nested_key=value>...` temporarily overrides LSP server
+  settings, until the server is stopped or restarted, for the server(s)
+  attached to the current buffer. See |lspconfig-lspreconfigure| for usage.
+
+==============================================================================
+LspReconfigure                                        *lspconfig-lspreconfigure*
+
+`:LspReconfigure <nested_key=value>...` has one or more arguments to assign
+new settings to the language server(s) attached to the current buffer. Each
+argument is in a `nested_key=value` format, and the syntax of keys and values
+is:
+
+- `nested_key`: The format of {nested_key} can usually be copied directly from
+  the server's documentation (e.g. `language-server.diagnostics.disable`).
+- `value`: The format of {value} is a JSON literal, with the some exceptions:
+
+  - For convenience, a bare string literal does not need to be quoted.
+    Example: `lang.setting=string_value`
+  - Lists of strings can be comma-separated without brackets or quotes.
+    Example: `lang.diagnostics.disable=E101,E505`
+  - A list value with a single item can be assigned by adding a trailing
+    comma: `lang.diagnostics.disable=E101,`
+
+  Strings in lists and mappings must be quoted, i.e. `["first","second"]` and
+  `{"key":"value"}`.
+
+Note: In both parameters, all spaces must be escaped with backslash, even in a
+quoted string, because the command line splits arguments on spaces.
 
 ==============================================================================
 EXAMPLE KEYBINDINGS                                      *lspconfig-keybindings*

@@ -400,4 +400,82 @@ function M.strip_archive_subpath(path)
   return path
 end
 
+function M.autotable()
+  local auto_mt = {
+    __index = function(self, key)
+      local mt = getmetatable(self)
+      local t = {}
+      setmetatable(t, { __index = mt.__index })
+      self[key] = t
+      return t
+    end,
+  }
+
+  return setmetatable({}, auto_mt)
+end
+
+function M.tbl_from_assignments(assignments)
+  local final_table = M.autotable()
+  for _, assignment in ipairs(assignments) do
+    local k, v = assignment:match '^([^=]+)=(.*)$'
+    if k == nil or v == nil then
+      error(('%s is not a KEY=VALUE expression'):format(assignment), 2)
+    end
+    -- Quote any nested key values that aren't valid Lua Names
+    k = k:gsub('[\'"]', '\\%0') -- Escape quotes
+    k = k:gsub('%.?([^.]*[^%a%d_.][^.]*)', '["%1"]') -- Quote values containing non-Name characters
+    k = k:gsub('%.?(%d[^.[]*)', '["%1"]') -- Quote values starting with numbers
+
+    -- An empty string is via an assignment expression of the form 'var=',
+    -- so convert the empty string to nil. If an empty string literal
+    -- is desired, the expression can be written as 'var=""'
+    if #v == 0 then
+      v = nil
+    else
+      -- Do not quote JSON literals, but add quotes to any other string
+      -- n.b. This includes single-quote because getting a JSON parsing
+      --      error for a single-quoted string is better than unexpectedly
+      --      wrapping a single-quoted string in double quotes.
+      if not v:match '^[-0-9[{"\']' then
+        -- Turn any comma-separated lists into JSON list syntax;
+        -- this includes a single item with a trailing comma, which
+        -- is stripped to make it JSON.
+        if v:match ',' then
+          v = '[' .. v:gsub('[^,]+', '"%0"'):gsub(',$', '') .. ']'
+        elseif not (v == 'true' or v == 'false' or v == 'null') then
+          v = '"' .. v .. '"'
+        end
+      end
+      _, v = xpcall(function()
+        return vim.json.decode(v)
+      end, function(e)
+        error(('Could not parse value: %s; %s'):format(v, e), 2)
+      end)
+    end
+    -- Write the given assignment KEY=VALUE as a lua expression:
+    -- t.KEY = VALUE; then use loadstring to parse it as a function.
+    -- KEY (in variable k) may be an arbitrarily-nested key like
+    -- Lua.diagnostics.Disable. Handle and report any parsing errors.
+    local table_accessor = (k:sub(1, 1) == '[') and 't' or 't.'
+    local assignment_func, err = loadstring(table_accessor .. k .. ' = v')
+    if err ~= nil then
+      local match = err:match ']:%d+: (.+)$'
+      if match ~= nil then
+        err = match[1]
+      end
+      error(('%s is not a valid nested key: %s'):format(k, err), 2)
+    else
+      assert(assignment_func)
+      -- Inject the to-be-returned table and the value into the loadstring-parsed
+      -- assignment expression as variables `t` and `v`, then call it. This could
+      -- result in an error if, for example, the expression 'a.b=string' appears
+      -- before 'a.b.c="nested string"' in the arguments.
+      local do_assignment = setfenv(assignment_func, { t = final_table, v = v })
+      do_assignment()
+    end
+  end
+
+  return final_table
+end
+
 return M

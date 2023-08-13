@@ -155,3 +155,23 @@ api.nvim_create_user_command('LspLog', function()
 end, {
   desc = 'Opens the Nvim LSP client log.',
 })
+
+api.nvim_create_user_command('LspReconfigure', function(args)
+  local success, result = pcall(require('lspconfig.util').tbl_from_assignments, args.fargs)
+  if not success then
+    assert(type(result) == 'string')
+    vim.notify(result, vim.log.levels.ERROR)
+    return
+  else
+    assert(type(result) == 'table')
+    local bufnr = api.nvim_get_current_buf()
+    local buf_clients = lsp.get_active_clients { bufnr = bufnr }
+    for _, client in ipairs(buf_clients) do
+      client.config.settings = vim.tbl_deep_extend('keep', result, client.config.settings)
+      client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+    end
+  end
+end, {
+  desc = 'Reconfigure LSP servers attached to the current buffer',
+  nargs = '+',
+})
