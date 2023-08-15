@@ -4,9 +4,7 @@ return {
   default_config = {
     cmd = { 'thriftls' },
     filetypes = { 'thrift' },
-    root_dir = function(fname)
-      return util.root_pattern('.thrift')(fname)
-    end,
+    root_dir = util.root_pattern '.thrift',
     single_file_support = true,
   },
   docs = {
@@ -14,7 +12,7 @@ return {
 https://github.com/joyme123/thrift-ls
 
 you can install thriftls by mason or download binary here: https://github.com/joyme123/thrift-ls/releases
-    ]],
+]],
     default_config = {
       root_dir = [[root_pattern(".thrift")]],
     },
