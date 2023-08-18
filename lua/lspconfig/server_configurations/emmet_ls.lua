@@ -9,7 +9,6 @@ return {
       'eruby',
       'html',
       'htmldjango',
-      'javascript',
       'javascriptreact',
       'less',
       'pug',
