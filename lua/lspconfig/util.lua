@@ -278,6 +278,18 @@ function M.server_per_root_dir_manager(make_config)
       end
     end
 
+    local function register_client_single(client)
+      if not client.single_buffers then
+        client.single_buffers = {}
+      end
+      client.single_buffers[bufnr] = true
+      api.nvim_buf_attach(bufnr, false, {
+        on_detach = function()
+          client.single_buffers[bufnr] = nil
+        end,
+      })
+    end
+
     local function attach_and_cache(root, client_id)
       lsp.buf_attach_client(bufnr, client_id)
       if not clients[root] then
@@ -347,6 +359,9 @@ function M.server_per_root_dir_manager(make_config)
         return
       end
       attach_and_cache(root_dir, client_id)
+      if not new_config.root_dir then
+        register_client_single(vim.lsp.get_client_by_id(client_id))
+      end
     end
 
     local function attach_or_spawn(client)
@@ -384,7 +399,10 @@ function M.server_per_root_dir_manager(make_config)
 
     if clients[root_dir] or single_file then
       lsp.buf_attach_client(bufnr, client.id)
-      return
+      if clients[root_dir] then
+        return
+      end
+      register_client_single(client)
     end
 
     -- make sure neovim had exchanged capabilities from language server

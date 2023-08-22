@@ -121,37 +121,39 @@ local function make_config_info(config, bufnr)
 end
 
 ---@param client table
----@param fname string
-local function make_client_info(client, fname)
+---@param bufnr integer
+local function make_client_info(client, bufnr)
   local client_info = {}
 
   client_info.cmd = cmd_type[type(client.config.cmd)](client.config)
   local workspace_folders = fn.has 'nvim-0.9' == 1 and client.workspace_folders or client.workspaceFolders
   local uv = vim.loop
   local is_windows = uv.os_uname().version:match 'Windows'
+  local fname = api.nvim_buf_get_name(bufnr)
   fname = uv.fs_realpath(fname) or fn.fnamemodify(fn.resolve(fname), ':p')
   if is_windows then
     fname:gsub('%/', '%\\')
   end
 
-  if workspace_folders then
-    for _, schema in ipairs(workspace_folders) do
-      local matched = true
-      local root_dir = uv.fs_realpath(schema.name)
-      if fname:sub(1, root_dir:len()) ~= root_dir then
-        matched = false
-      end
+  for _, schema in ipairs(workspace_folders or {}) do
+    local matched = true
+    local root_dir = uv.fs_realpath(schema.name)
+    if fname:sub(1, root_dir:len()) ~= root_dir then
+      matched = false
+    end
 
-      if matched then
-        client_info.root_dir = schema.name
-        break
-      end
+    if matched then
+      client_info.root_dir = schema.name
+      break
     end
   end
 
-  if not client_info.root_dir then
+  if client.single_buffers and client.single_buffers[bufnr] then
     client_info.root_dir = 'Running in single file mode.'
+  elseif client.config.root_dir then
+    client_info.root_dir = client.config.root_dir
   end
+
   client_info.filetypes = table.concat(client.config.filetypes or {}, ', ')
   client_info.autostart = (client.config.autostart and 'true') or 'false'
   client_info.attached_buffers_list = table.concat(vim.lsp.get_buffers_by_client_id(client.id), ', ')
@@ -168,10 +170,10 @@ local function make_client_info(client, fname)
   }
 
   local info_lines = {
+    'servercmd:       ' .. client_info.cmd,
     'filetypes:       ' .. client_info.filetypes,
     'autostart:       ' .. client_info.autostart,
-    'root directory:  ' .. client_info.root_dir,
-    'cmd:             ' .. client_info.cmd,
+    'root  dir:       ' .. client_info.root_dir,
   }
 
   if client.config.lspinfo then
@@ -191,7 +193,6 @@ return function()
   local buf_clients = lsp.get_active_clients { bufnr = original_bufnr }
   local clients = lsp.get_active_clients()
   local buffer_filetype = vim.bo.filetype
-  local fname = api.nvim_buf_get_name(original_bufnr)
 
   windows.default_options.wrap = true
   windows.default_options.breakindent = true
@@ -228,12 +229,12 @@ return function()
 
   local buffer_clients_header = {
     '',
-    tostring(#vim.tbl_keys(buf_clients)) .. ' client(s) attached to this buffer: ',
+    tostring(#vim.tbl_keys(buf_clients)) .. ' client(s) attached to this buffer: ' .. original_bufnr,
   }
 
   vim.list_extend(buf_lines, buffer_clients_header)
   for _, client in ipairs(buf_clients) do
-    local client_info = make_client_info(client, fname)
+    local client_info = make_client_info(client, original_bufnr)
     vim.list_extend(buf_lines, client_info)
   end
 
@@ -245,7 +246,7 @@ return function()
     vim.list_extend(buf_lines, other_active_section_header)
   end
   for _, client in ipairs(other_active_clients) do
-    local client_info = make_client_info(client, fname)
+    local client_info = make_client_info(client, original_bufnr)
     vim.list_extend(buf_lines, client_info)
   end
 
@@ -310,6 +311,7 @@ return function()
   vim.cmd [[
     syn keyword String true
     syn keyword Error false
+    syn match Number /buffer:\s*\zs\d\+\ze/
     syn match LspInfoFiletypeList /\<filetypes\?:\s*\zs.*\ze/ contains=LspInfoFiletype
     syn match LspInfoFiletype /\k\+/ contained
     syn match LspInfoTitle /^\s*\%(Client\|Config\):\s*\zs\S\+\ze/
