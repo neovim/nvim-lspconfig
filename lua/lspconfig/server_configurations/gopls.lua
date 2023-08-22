@@ -1,4 +1,5 @@
 local util = require 'lspconfig.util'
+local async = require 'lspconfig.async'
 local mod_cache = nil
 
 return {
@@ -8,7 +9,7 @@ return {
     root_dir = function(fname)
       -- see: https://github.com/neovim/nvim-lspconfig/issues/804
       if not mod_cache then
-        local result = util.async_run_command 'go env GOMODCACHE'
+        local result = async.run_command 'go env GOMODCACHE'
         if result and result[1] then
           mod_cache = vim.trim(result[1])
         end

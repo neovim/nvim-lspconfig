@@ -1,4 +1,5 @@
 local util = require 'lspconfig.util'
+local async = require 'lspconfig.async'
 
 local function reload_workspace(bufnr)
   bufnr = util.validate_bufnr(bufnr)
@@ -54,7 +55,7 @@ return {
         cmd[#cmd + 1] = util.path.join(cargo_crate_dir, 'Cargo.toml')
       end
 
-      local result = util.async_run_command(cmd)
+      local result = async.run_command(cmd)
       local cargo_workspace_root
 
       if result and result[1] then
