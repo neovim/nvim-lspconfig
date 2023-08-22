@@ -3,7 +3,12 @@ local async = require 'lspconfig.async'
 local api, validate, lsp, uv, fn = vim.api, vim.validate, vim.lsp, vim.loop, vim.fn
 local tbl_deep_extend = vim.tbl_deep_extend
 
-local configs = {}
+--- @class lspconfig.ConfigDef
+--- @field on_new_config fun(config: lspconfig.Config, root_dir: string)
+--- @field on_attach fun()
+--- @field default_config lspconfig.Config
+--- @field commands table<string,{[1]: function}>
+--- @field docs {description: string}
 
 --- @class lspconfig.Config : lsp.ClientConfig
 --- @field enabled? boolean
@@ -13,6 +18,7 @@ local configs = {}
 --- @field on_new_config? function
 --- @field autostart? boolean
 --- @field package _on_attach? fun(client: lsp.Client, bufnr: integer)
+--- @field deprecate table
 
 --- @param cmd any
 local function sanitize_cmd(cmd)
@@ -25,7 +31,9 @@ local function sanitize_cmd(cmd)
   end
 end
 
-function configs.__newindex(t, config_name, config_def)
+--- @param config_name string
+--- @param config_def lspconfig.ConfigDef
+local function validate_configdef(config_name, config_def)
   validate {
     name = { config_name, 's' },
     default_config = { config_def.default_config, 't' },
@@ -54,239 +62,286 @@ function configs.__newindex(t, config_name, config_def)
   else
     config_def.commands = {}
   end
+end
 
-  local M = {}
+---@param user_config lspconfig.Config
+local function validate_user_config(user_config)
+  validate {
+    cmd = {
+      user_config.cmd,
+      { 'f', 't' },
+      true,
+    },
+    root_dir = { user_config.root_dir, 'f', true },
+    filetypes = { user_config.filetype, 't', true },
+    on_new_config = { user_config.on_new_config, 'f', true },
+    on_attach = { user_config.on_attach, 'f', true },
+    commands = { user_config.commands, 't', true },
+  }
+  if user_config.commands then
+    for k, v in pairs(user_config.commands) do
+      validate {
+        ['command.name'] = { k, 's' },
+        ['command.fn'] = { v[1], 'f' },
+      }
+    end
+  end
+end
 
-  local default_config = tbl_deep_extend('keep', config_def.default_config, util.default_config)
+--- @class lspconfig.SetupObj
+--- @field name string
+--- @field _config_def lspconfig.ConfigDef
+--- @field _manager? lspconfig.Manager
+--- @field _config? lspconfig.Config
+local SetupObj = {}
+
+--- @package
+--- @param name string
+--- @param config_def lspconfig.ConfigDef
+--- @return lspconfig.SetupObj
+function SetupObj.new(name, config_def)
+  return setmetatable({
+    name = name,
+    _config_def = config_def,
+    commands = config_def.commands,
+    document_config = config_def,
+  }, {
+    __index = SetupObj
+  })
+end
+
+--- @package
+--- @param bufnr? integer
+function SetupObj:_launch(bufnr)
+  local config = self._config
+  if not config then
+    return
+  end
+
+  bufnr = bufnr or api.nvim_get_current_buf()
+  local bufname = api.nvim_buf_get_name(bufnr)
+  if (#bufname == 0 and not config.single_file_support) or (#bufname ~= 0 and not util.bufname_valid(bufname)) then
+    return
+  end
+
+  local pwd = uv.cwd()
+
+  async.run(function()
+    local root_dir --- @type string?
+    if config.root_dir then
+      root_dir = config.root_dir(util.path.sanitize(bufname), bufnr)
+      async.reenter()
+      if not api.nvim_buf_is_valid(bufnr) then
+        return
+      end
+    end
+
+    if root_dir then
+      api.nvim_create_autocmd('BufReadPost', {
+        pattern = fn.fnameescape(root_dir) .. '/*',
+        callback = function(arg)
+          self._manager:try_add_wrapper(arg.buf, root_dir)
+        end,
+        group = 'lspconfig',
+        desc = string.format(
+          'Checks whether server %s should attach to a newly opened buffer inside workspace %q.',
+          config.name,
+          root_dir
+        ),
+      })
+
+      for _, buf in ipairs(api.nvim_list_bufs()) do
+        local buf_name = api.nvim_buf_get_name(buf)
+        if util.bufname_valid(buf_name) then
+          local buf_dir = util.path.sanitize(buf_name)
+          if buf_dir:sub(1, root_dir:len()) == root_dir then
+            self._manager:try_add_wrapper(buf, root_dir)
+          end
+        end
+      end
+    elseif config.single_file_support then
+      -- This allows on_new_config to use the parent directory of the file
+      -- Effectively this is the root from lspconfig's perspective, as we use
+      -- this to attach additional files in the same parent folder to the same server.
+      -- We just no longer send rootDirectory or workspaceFolders during initialization.
+      if not api.nvim_buf_is_valid(bufnr) or (#bufname ~= 0 and not util.bufname_valid(bufname)) then
+        return
+      end
+      local pseudo_root = #bufname == 0 and pwd or util.path.dirname(util.path.sanitize(bufname))
+      self._manager:add(assert(pseudo_root), true, bufnr)
+    end
+  end)
+end
+
+--- @private
+--- @param config lspconfig.Config
+--- @param root_dir string
+--- @return lspconfig.Config
+function SetupObj:_make_config(config, root_dir)
+  local new_config = tbl_deep_extend('keep', vim.empty_dict(), config) --[[@as lspconfig.Config]]
+  new_config.capabilities = tbl_deep_extend('keep', new_config.capabilities, {
+    workspace = {
+      configuration = true,
+    },
+  })
+
+  if self._config_def.on_new_config then
+    pcall(self._config_def.on_new_config, new_config, root_dir)
+  end
+  if config.on_new_config then
+    pcall(config.on_new_config, new_config, root_dir)
+  end
+
+  new_config.on_init = util.add_hook_after(new_config.on_init, function(client, result)
+    -- Handle offset encoding by default
+    if result.offsetEncoding then
+      client.offset_encoding = result.offsetEncoding
+    end
+
+    -- Send `settings` to server via workspace/didChangeConfiguration
+    function client.workspace_did_change_configuration(settings)
+      if not settings then
+        return
+      end
+      if vim.tbl_isempty(settings) then
+        settings = { [vim.type_idx] = vim.types.dictionary }
+      end
+      return client.notify('workspace/didChangeConfiguration', {
+        settings = settings,
+      })
+    end
+    if not vim.tbl_isempty(new_config.settings) then
+      client.workspace_did_change_configuration(new_config.settings)
+    end
+  end)
+
+  -- Save the old _on_attach so that we can reference it via the BufEnter.
+  new_config._on_attach = new_config.on_attach
+  new_config.on_attach = function(client, bufnr)
+    if bufnr == api.nvim_get_current_buf() then
+      self:_setup_buffer(client.id, bufnr)
+    else
+      if api.nvim_buf_is_valid(bufnr) then
+        api.nvim_create_autocmd('BufEnter', {
+          callback = function()
+            self:_setup_buffer(client.id, bufnr)
+          end,
+          group = 'lspconfig',
+          buffer = bufnr,
+          once = true,
+          desc = 'Reattaches the server with the updated configurations if changed.',
+        })
+      end
+    end
+  end
+
+  new_config.root_dir = root_dir
+  new_config.workspace_folders = {
+    {
+      uri = vim.uri_from_fname(root_dir),
+      name = string.format('%s', root_dir),
+    },
+  }
+  return new_config
+end
+
+--- @package
+--- @param user_config lspconfig.Config
+function SetupObj:_setup(user_config)
+  local default_config = tbl_deep_extend('keep', self._config_def.default_config, util.default_config)
 
   -- Force this part.
-  default_config.name = config_name
+  default_config.name = self.name
+  local lsp_group = api.nvim_create_augroup('lspconfig', { clear = false })
+
+  validate_user_config(user_config)
+
+  local config = tbl_deep_extend('keep', user_config, default_config)
+
+  sanitize_cmd(config.cmd)
+
+  if util.on_setup then
+    -- Used for testing
+    pcall(util.on_setup, config, user_config)
+  end
+
+  if config.autostart == true then
+    local event_conf = config.filetypes and { event = 'FileType', pattern = config.filetypes }
+      or { event = 'BufReadPost' }
+    api.nvim_create_autocmd(event_conf.event, {
+      pattern = event_conf.pattern or '*',
+      callback = function(opt)
+        self._manager:try_add(opt.buf)
+      end,
+      group = lsp_group,
+      desc = string.format(
+        'Checks whether server %s should start a new instance or attach to an existing one.',
+        config.name
+      ),
+    })
+  end
+
+  self._config = config
+
+  -- In the case of a reload, close existing things.
+  local reload = self._manager ~= nil
+
+  if reload then
+    for _, client in ipairs(self._manager:clients()) do
+      client.stop(true)
+    end
+    self._manager = nil
+  end
+
+  local make_config = function(root_dir)
+    return self:_make_config(config, root_dir)
+  end
+
+  self._manager = require('lspconfig.manager').new(config, make_config)
+
+  if reload and config.autostart ~= false then
+    for _, bufnr in ipairs(api.nvim_list_bufs()) do
+      self._manager:try_add_wrapper(bufnr)
+    end
+  end
+end
+
+--- @private
+--- @param client_id integer
+--- @param bufnr integer
+function SetupObj:_setup_buffer(client_id, bufnr)
+  local client = lsp.get_client_by_id(client_id)
+  if not client then
+    return
+  end
+  local config = client.config --[[@as lspconfig.Config]]
+  if config._on_attach then
+    config._on_attach(client, bufnr)
+  end
+  if client.config.commands and not vim.tbl_isempty(client.config.commands) then
+    self.commands = vim.tbl_deep_extend('force', self.commands, client.config.commands)
+  end
+  if not vim.tbl_isempty(self.commands) then
+    util.create_module_commands(self.name, self.commands)
+  end
+end
+
+local configs = {}
+
+--- @param t table
+--- @param config_name string
+--- @param config_def lspconfig.ConfigDef
+function configs.__newindex(t, config_name, config_def)
+  validate_configdef(config_name, config_def)
+
+  local M = SetupObj.new(config_name, config_def)
 
   --- @param user_config lspconfig.Config
   function M.setup(user_config)
-    local lsp_group = api.nvim_create_augroup('lspconfig', { clear = false })
-
-    validate {
-      cmd = {
-        user_config.cmd,
-        { 'f', 't' },
-        true,
-      },
-      root_dir = { user_config.root_dir, 'f', true },
-      filetypes = { user_config.filetype, 't', true },
-      on_new_config = { user_config.on_new_config, 'f', true },
-      on_attach = { user_config.on_attach, 'f', true },
-      commands = { user_config.commands, 't', true },
-    }
-    if user_config.commands then
-      for k, v in pairs(user_config.commands) do
-        validate {
-          ['command.name'] = { k, 's' },
-          ['command.fn'] = { v[1], 'f' },
-        }
-      end
-    end
-
-    local config = tbl_deep_extend('keep', user_config, default_config)
-
-    sanitize_cmd(config.cmd)
-
-    if util.on_setup then
-      pcall(util.on_setup, config, user_config)
-    end
-
-    if config.autostart == true then
-      local event_conf = config.filetypes and { event = 'FileType', pattern = config.filetypes }
-        or { event = 'BufReadPost' }
-      api.nvim_create_autocmd(event_conf.event, {
-        pattern = event_conf.pattern or '*',
-        callback = function(opt)
-          M.manager:try_add(opt.buf)
-        end,
-        group = lsp_group,
-        desc = string.format(
-          'Checks whether server %s should start a new instance or attach to an existing one.',
-          config.name
-        ),
-      })
-    end
-
-    local get_root_dir = config.root_dir
-
-    function M.launch(bufnr)
-      bufnr = bufnr or api.nvim_get_current_buf()
-      local bufname = api.nvim_buf_get_name(bufnr)
-      if (#bufname == 0 and not config.single_file_support) or (#bufname ~= 0 and not util.bufname_valid(bufname)) then
-        return
-      end
-
-      local pwd = uv.cwd()
-
-      async.run(function()
-        local root_dir
-        if get_root_dir then
-          root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
-          async.reenter()
-          if not api.nvim_buf_is_valid(bufnr) then
-            return
-          end
-        end
-
-        if root_dir then
-          api.nvim_create_autocmd('BufReadPost', {
-            pattern = fn.fnameescape(root_dir) .. '/*',
-            callback = function(arg)
-              M.manager:try_add_wrapper(arg.buf, root_dir)
-            end,
-            group = lsp_group,
-            desc = string.format(
-              'Checks whether server %s should attach to a newly opened buffer inside workspace %q.',
-              config.name,
-              root_dir
-            ),
-          })
-
-          for _, buf in ipairs(api.nvim_list_bufs()) do
-            local buf_name = api.nvim_buf_get_name(buf)
-            if util.bufname_valid(buf_name) then
-              local buf_dir = util.path.sanitize(buf_name)
-              if buf_dir:sub(1, root_dir:len()) == root_dir then
-                M.manager:try_add_wrapper(buf, root_dir)
-              end
-            end
-          end
-        elseif config.single_file_support then
-          -- This allows on_new_config to use the parent directory of the file
-          -- Effectively this is the root from lspconfig's perspective, as we use
-          -- this to attach additional files in the same parent folder to the same server.
-          -- We just no longer send rootDirectory or workspaceFolders during initialization.
-          if not api.nvim_buf_is_valid(bufnr) or (#bufname ~= 0 and not util.bufname_valid(bufname)) then
-            return
-          end
-          local pseudo_root = #bufname == 0 and pwd or util.path.dirname(util.path.sanitize(bufname))
-          M.manager:add(pseudo_root, true, bufnr)
-        end
-      end)
-    end
-
-    -- Used by :LspInfo
-    M.get_root_dir = get_root_dir
-    M.filetypes = config.filetypes
-    M.handlers = config.handlers
-    M.cmd = config.cmd
-    M.autostart = config.autostart
-
-    -- In the case of a reload, close existing things.
-    local reload = false
-    if M.manager then
-      for _, client in ipairs(M.manager:clients()) do
-        client.stop(true)
-      end
-      reload = true
-      M.manager = nil
-    end
-
-    local make_config = function(root_dir)
-      local new_config = tbl_deep_extend('keep', vim.empty_dict(), config) --[[@as lspconfig.Config]]
-      new_config.capabilities = tbl_deep_extend('keep', new_config.capabilities, {
-        workspace = {
-          configuration = true,
-        },
-      })
-
-      if config_def.on_new_config then
-        pcall(config_def.on_new_config, new_config, root_dir)
-      end
-      if config.on_new_config then
-        pcall(config.on_new_config, new_config, root_dir)
-      end
-
-      new_config.on_init = util.add_hook_after(new_config.on_init, function(client, result)
-        -- Handle offset encoding by default
-        if result.offsetEncoding then
-          client.offset_encoding = result.offsetEncoding
-        end
-
-        -- Send `settings` to server via workspace/didChangeConfiguration
-        function client.workspace_did_change_configuration(settings)
-          if not settings then
-            return
-          end
-          if vim.tbl_isempty(settings) then
-            settings = { [vim.type_idx] = vim.types.dictionary }
-          end
-          return client.notify('workspace/didChangeConfiguration', {
-            settings = settings,
-          })
-        end
-        if not vim.tbl_isempty(new_config.settings) then
-          client.workspace_did_change_configuration(new_config.settings)
-        end
-      end)
-
-      -- Save the old _on_attach so that we can reference it via the BufEnter.
-      new_config._on_attach = new_config.on_attach
-      new_config.on_attach = function(client, bufnr)
-        if bufnr == api.nvim_get_current_buf() then
-          M._setup_buffer(client.id, bufnr)
-        else
-          if api.nvim_buf_is_valid(bufnr) then
-            api.nvim_create_autocmd('BufEnter', {
-              callback = function()
-                M._setup_buffer(client.id, bufnr)
-              end,
-              group = lsp_group,
-              buffer = bufnr,
-              once = true,
-              desc = 'Reattaches the server with the updated configurations if changed.',
-            })
-          end
-        end
-      end
-
-      new_config.root_dir = root_dir
-      new_config.workspace_folders = {
-        {
-          uri = vim.uri_from_fname(root_dir),
-          name = string.format('%s', root_dir),
-        },
-      }
-      return new_config
-    end
-
-    local manager = require('lspconfig.manager').new(config, make_config)
-
-    M.manager = manager
-    M.make_config = make_config
-    if reload and config.autostart ~= false then
-      for _, bufnr in ipairs(api.nvim_list_bufs()) do
-        manager:try_add_wrapper(bufnr)
-      end
-    end
+    M:_setup(user_config)
   end
-
-  function M._setup_buffer(client_id, bufnr)
-    local client = lsp.get_client_by_id(client_id)
-    if not client then
-      return
-    end
-    local config = client.config --[[@as lspconfig.Config]]
-    if config._on_attach then
-      config._on_attach(client, bufnr)
-    end
-    if client.config.commands and not vim.tbl_isempty(client.config.commands) then
-      M.commands = vim.tbl_deep_extend('force', M.commands, client.config.commands)
-    end
-    if not M.commands_created and not vim.tbl_isempty(M.commands) then
-      util.create_module_commands(config_name, M.commands)
-    end
-  end
-
-  M.commands = config_def.commands
-  M.name = config_name
-  M.document_config = config_def
 
   rawset(t, config_name, M)
 end
 
-return setmetatable({}, configs)
+return setmetatable({}, configs) --[[@as table<string,lspconfig.SetupObj>]]

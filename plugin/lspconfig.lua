@@ -71,14 +71,14 @@ api.nvim_create_user_command('LspStart', function(info)
   if server_name then
     local config = require('lspconfig.configs')[server_name]
     if config then
-      config.launch()
+      config:_launch()
       return
     end
   end
 
   local matching_configs = require('lspconfig.util').get_config_by_ft(vim.bo.filetype)
   for _, config in ipairs(matching_configs) do
-    config.launch()
+    config:_launch()
   end
 end, {
   desc = 'Manually launches a language server',
@@ -103,7 +103,7 @@ api.nvim_create_user_command('LspRestart', function(info)
         local client, attached_buffers = unpack(tuple)
         if client.is_stopped() then
           for buf in pairs(attached_buffers) do
-            require('lspconfig.configs')[client_name].launch(buf)
+            require('lspconfig.configs')[client_name]:_launch(buf)
           end
           detach_clients[client_name] = nil
         end

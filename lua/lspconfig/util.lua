@@ -330,13 +330,15 @@ function M.get_active_clients_list_by_ft(filetype)
   return clients_list
 end
 
+--- @param filetype string
+--- @return lspconfig.SetupObj[]
 function M.get_other_matching_providers(filetype)
   local configs = require 'lspconfig.configs'
   local active_clients_list = M.get_active_clients_list_by_ft(filetype)
   local other_matching_configs = {}
   for _, config in pairs(configs) do
     if not vim.tbl_contains(active_clients_list, config.name) then
-      local filetypes = config.filetypes or {}
+      local filetypes = config._config.filetypes or {}
       for _, ft in pairs(filetypes) do
         if ft == filetype then
           table.insert(other_matching_configs, config)
@@ -347,11 +349,13 @@ function M.get_other_matching_providers(filetype)
   return other_matching_configs
 end
 
+--- @param filetype string
+--- @return lspconfig.SetupObj[]
 function M.get_config_by_ft(filetype)
   local configs = require 'lspconfig.configs'
   local matching_configs = {}
   for _, config in pairs(configs) do
-    local filetypes = config.filetypes or {}
+    local filetypes = config._config.filetypes or {}
     for _, ft in pairs(filetypes) do
       if ft == filetype then
         table.insert(matching_configs, config)
@@ -373,9 +377,9 @@ function M.get_managed_clients()
   local configs = require 'lspconfig.configs'
   local clients = {}
   for _, config in pairs(configs) do
-    if config.manager then
-      vim.list_extend(clients, config.manager.clients())
-      vim.list_extend(clients, config.manager.clients(true))
+    if config._manager then
+      vim.list_extend(clients, config._manager.clients())
+      vim.list_extend(clients, config._manager.clients(true))
     end
   end
   return clients
@@ -385,7 +389,7 @@ function M.available_servers()
   local servers = {}
   local configs = require 'lspconfig.configs'
   for server, config in pairs(configs) do
-    if config.manager ~= nil then
+    if config._manager ~= nil then
       table.insert(servers, server)
     end
   end

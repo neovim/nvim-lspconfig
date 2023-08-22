@@ -277,7 +277,7 @@ function M:try_add(bufnr, project_root)
       self:add(root_dir, false, bufnr)
     elseif self.config.single_file_support then
       local pseudo_root = #bufname == 0 and pwd or util.path.dirname(buf_path)
-      self:add(pseudo_root, true, bufnr)
+      self:add(assert(pseudo_root), true, bufnr)
     end
   end)
 end

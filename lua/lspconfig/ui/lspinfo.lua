@@ -50,6 +50,8 @@ local cmd_type = {
   end,
 }
 
+--- @param config lspconfig.Config
+--- @param bufnr integer
 local function make_config_info(config, bufnr)
   local config_info = {}
   config_info.name = config.name
@@ -66,11 +68,11 @@ local function make_config_info(config, bufnr)
     return vim.fn.expand '%:p:h'
   end)
 
-  if config.get_root_dir then
+  if config.root_dir then
     local root_dir
     local co = coroutine.create(function()
       local status, err = pcall(function()
-        root_dir = config.get_root_dir(buffer_dir)
+        root_dir = config.root_dir(buffer_dir)
       end)
       if not status then
         vim.notify(('[lspconfig] unhandled error: %s'):format(tostring(err), vim.log.levels.WARN))
@@ -259,8 +261,8 @@ return function()
 
   if not vim.tbl_isempty(other_matching_configs) then
     vim.list_extend(buf_lines, other_matching_configs_header)
-    for _, config in ipairs(other_matching_configs) do
-      vim.list_extend(buf_lines, make_config_info(config, original_bufnr))
+    for _, setup_obj in ipairs(other_matching_configs) do
+      vim.list_extend(buf_lines, make_config_info(setup_obj._config, original_bufnr))
     end
   end
 
