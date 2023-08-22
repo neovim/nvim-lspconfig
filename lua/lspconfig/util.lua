@@ -401,38 +401,4 @@ function M.strip_archive_subpath(path)
   return path
 end
 
-function M.async_run_command(cmd)
-  local co = assert(coroutine.running())
-
-  local stdout = {}
-  local stderr = {}
-  local jobid = vim.fn.jobstart(cmd, {
-    on_stdout = function(_, data, _)
-      data = table.concat(data, '\n')
-      if #data > 0 then
-        stdout[#stdout + 1] = data
-      end
-    end,
-    on_stderr = function(_, data, _)
-      stderr[#stderr + 1] = table.concat(data, '\n')
-    end,
-    on_exit = function()
-      coroutine.resume(co)
-    end,
-    stdout_buffered = true,
-    stderr_buffered = true,
-  })
-
-  if jobid <= 0 then
-    vim.notify(('[lspconfig] cmd go failed:\n%s'):format(table.concat(stderr, '')), vim.log.levels.WARN)
-    return
-  end
-
-  coroutine.yield()
-  if next(stdout) == nil then
-    return nil
-  end
-  return stdout and stdout or nil
-end
-
 return M
