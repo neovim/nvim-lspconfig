@@ -14,6 +14,17 @@ local configs = {}
 --- @field autostart? boolean
 --- @field package _on_attach? fun(client: lsp.Client, bufnr: integer)
 
+--- @param cmd any
+local function sanitize_cmd(cmd)
+  if cmd and type(cmd) == 'table' and not vim.tbl_isempty(cmd) then
+    local original = cmd[1]
+    cmd[1] = vim.fn.exepath(cmd[1])
+    if #cmd[1] == 0 then
+      cmd[1] = original
+    end
+  end
+end
+
 function configs.__newindex(t, config_name, config_def)
   validate {
     name = { config_name, 's' },
@@ -78,14 +89,7 @@ function configs.__newindex(t, config_name, config_def)
 
     local config = tbl_deep_extend('keep', user_config, default_config)
 
-    local cmd = config.cmd
-    if cmd and type(cmd) == 'table' and not vim.tbl_isempty(cmd) then
-      local original = cmd[1]
-      cmd[1] = vim.fn.exepath(cmd[1])
-      if #cmd[1] == 0 then
-        cmd[1] = original
-      end
-    end
+    sanitize_cmd(config.cmd)
 
     if util.on_setup then
       pcall(util.on_setup, config, user_config)
