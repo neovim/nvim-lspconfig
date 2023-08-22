@@ -378,8 +378,7 @@ function M.get_managed_clients()
   local clients = {}
   for _, config in pairs(configs) do
     if config._manager then
-      vim.list_extend(clients, config._manager.clients())
-      vim.list_extend(clients, config._manager.clients(true))
+      vim.list_extend(clients, config._manager:clients())
     end
   end
   return clients
