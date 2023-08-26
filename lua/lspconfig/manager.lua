@@ -25,11 +25,11 @@ end
 --- @class lspconfig.Manager
 --- @field _clients table<string,table>
 --- @field config lspconfig.Config
---- @field make_config fun(root_dir: string): lspconfig.Config
+--- @field make_config fun(root_dir: string, single_file: boolean): lspconfig.Config
 local M = {}
 
 --- @param config lspconfig.Config
---- @param make_config fun(root_dir: string): lspconfig.Config
+--- @param make_config fun(root_dir: string, single_file: boolean): lspconfig.Config
 --- @return lspconfig.Manager
 function M.new(config, make_config)
   return setmetatable({
@@ -200,7 +200,7 @@ end
 ---@param bufnr integer
 function M:add(root_dir, single_file, bufnr)
   root_dir = util.path.sanitize(root_dir)
-  local new_config = self.make_config(root_dir)
+  local new_config = self.make_config(root_dir, single_file)
   local client = self:_get_client_from_cache(root_dir, new_config.name)
 
   if not client then

@@ -186,7 +186,7 @@ function configs.__newindex(t, config_name, config_def)
       M.manager = nil
     end
 
-    local make_config = function(root_dir)
+    local make_config = function(root_dir, single_file)
       local new_config = tbl_deep_extend('keep', vim.empty_dict(), config) --[[@as lspconfig.Config]]
       new_config.capabilities = tbl_deep_extend('keep', new_config.capabilities, {
         workspace = {
@@ -195,10 +195,10 @@ function configs.__newindex(t, config_name, config_def)
       })
 
       if config_def.on_new_config then
-        pcall(config_def.on_new_config, new_config, root_dir)
+        pcall(config_def.on_new_config, new_config, root_dir, single_file)
       end
       if config.on_new_config then
-        pcall(config.on_new_config, new_config, root_dir)
+        pcall(config.on_new_config, new_config, root_dir, single_file)
       end
 
       new_config.on_init = util.add_hook_after(new_config.on_init, function(client, result)

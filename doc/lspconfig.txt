@@ -110,7 +110,7 @@ listed in `:help vim.lsp.start_client()` with the following unique entries:
 
 - {on_new_config}
 
-    `function(new_config, new_root_dir)`
+    `function(new_config, new_root_dir, single_file)`
 
     Function executed after a root directory is detected. This is used to
     modify the server configuration (including `cmd` itself). Most commonly,
