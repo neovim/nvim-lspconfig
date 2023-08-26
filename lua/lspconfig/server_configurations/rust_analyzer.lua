@@ -70,7 +70,13 @@ return {
         or util.root_pattern 'rust-project.json'(fname)
         or util.find_git_ancestor(fname)
     end,
+    single_file_support = true,
     capabilities = register_cap(),
+    on_new_config = function(config, _, single_file)
+      if single_file then
+        config.init_options.detachedFiles = { vim.api.nvim_buf_get_name(0) }
+      end
+    end,
   },
   commands = {
     CargoReload = {
