@@ -102,7 +102,11 @@ function configs.__newindex(t, config_name, config_def)
       api.nvim_create_autocmd(event_conf.event, {
         pattern = event_conf.pattern or '*',
         callback = function(opt)
-          M.manager:try_add(opt.buf)
+          -- Use vim.schedule() to ensure filetype detection happens first.
+          -- Sometimes, BufNewFile triggers before 'filetype' is set.
+          vim.schedule(function()
+            M.manager:try_add(opt.buf)
+          end)
         end,
         group = lsp_group,
         desc = string.format(
@@ -145,7 +149,12 @@ function configs.__newindex(t, config_name, config_def)
               if #M.manager:clients() == 0 then
                 return true
               end
-              M.manager:try_add_wrapper(arg.buf, root_dir)
+
+              -- Use vim.schedule() to ensure filetype detection happens first.
+              -- Sometimes, BufNewFile triggers before 'filetype' is set.
+              vim.schedule(function()
+                M.manager:try_add_wrapper(arg.buf, root_dir)
+              end)
             end,
             group = lsp_group,
             desc = string.format(
