@@ -20,18 +20,16 @@ return {
   },
   docs = {
     description = [[
-https://rome.tools
+https://biomejs.dev
 
-Language server for the Rome Frontend Toolchain.
-
-(Unmaintained, use [Biome](https://biomejs.dev/blog/annoucing-biome) instead.)
+Toolchain of the web. [Successor of Rome](https://biomejs.dev/blog/annoucing-biome).
 
 ```sh
-npm install [-g] rome
+npm install [-g] @biomejs/biome
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern('package.json', 'node_modules', '.git')]],
+      root_dir = [[root_pattern('package.json', 'node_modules', '.git', 'biome.json')]],
     },
   },
 }
