@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'rome', 'lsp-proxy' },
+    cmd = { 'biome', 'lsp-proxy' },
     filetypes = {
       'javascript',
       'javascriptreact',
