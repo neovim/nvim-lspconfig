@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'docker-compose-langserver', '--stdio' },
-    filetypes = { 'yaml' },
+    filetypes = { 'yaml.docker-compose' },
     root_dir = util.root_pattern 'docker-compose.yaml',
     single_file_support = true,
   },
