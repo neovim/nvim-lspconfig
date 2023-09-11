@@ -16,10 +16,11 @@ local function reload_workspace(bufnr)
 end
 
 local function is_library(fname)
-  local cargo_home = os.getenv 'CARGO_HOME' or util.path.join(vim.env.HOME, '.cargo')
+  local user_home = util.path.sanitize(vim.env.HOME)
+  local cargo_home = os.getenv 'CARGO_HOME' or util.path.join(user_home, '.cargo')
   local registry = util.path.join(cargo_home, 'registry', 'src')
 
-  local rustup_home = os.getenv 'RUSTUP_HOME' or util.path.join(vim.env.HOME, '.rustup')
+  local rustup_home = os.getenv 'RUSTUP_HOME' or util.path.join(user_home, '.rustup')
   local toolchains = util.path.join(rustup_home, 'toolchains')
 
   for _, item in ipairs { toolchains, registry } do
