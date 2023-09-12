@@ -1448,7 +1448,7 @@ require'lspconfig'.ccls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "c", "cpp", "objc", "objcpp" }
+  { "c", "cpp", "objc", "objcpp", "cuda" }
   ```
   - `offset_encoding` : 
   ```lua
