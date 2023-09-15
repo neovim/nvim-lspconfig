@@ -138,7 +138,7 @@ local function make_client_info(client, fname)
     for _, schema in ipairs(workspace_folders) do
       local matched = true
       local root_dir = uv.fs_realpath(schema.name)
-      if fname:sub(1, root_dir:len()) ~= root_dir then
+      if root_dir == nil or fname:sub(1, root_dir:len()) ~= root_dir then
         matched = false
       end
 
