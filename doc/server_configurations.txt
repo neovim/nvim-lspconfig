@@ -2157,16 +2157,26 @@ require'lspconfig'.denols.setup{}
     ["workspace/executeCommand"] = <function 2>
   }
   ```
-  - `init_options` : 
-  ```lua
-  {
-    enable = true,
-    unstable = false
-  }
-  ```
   - `root_dir` : 
   ```lua
   root_pattern("deno.json", "deno.jsonc", ".git")
+  ```
+  - `settings` : 
+  ```lua
+  {
+    deno = {
+      enable = true,
+      suggest = {
+        imports = {
+          hosts = {
+            ["https://crux.land"] = true,
+            ["https://deno.land"] = true,
+            ["https://x.nest.land"] = true
+          }
+        }
+      }
+    }
+  }
   ```
 
 
