@@ -74,9 +74,19 @@ return {
       'typescript.tsx',
     },
     root_dir = util.root_pattern('deno.json', 'deno.jsonc', '.git'),
-    init_options = {
-      enable = true,
-      unstable = false,
+    settings = {
+      deno = {
+        enable = true,
+        suggest = {
+          imports = {
+            hosts = {
+              ['https://deno.land'] = true,
+              ['https://crux.land'] = true,
+              ['https://x.nest.land'] = true,
+            },
+          },
+        },
+      },
     },
     handlers = {
       ['textDocument/definition'] = denols_handler,
