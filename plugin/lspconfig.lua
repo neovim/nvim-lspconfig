@@ -155,3 +155,14 @@ api.nvim_create_user_command('LspLog', function()
 end, {
   desc = 'Opens the Nvim LSP client log.',
 })
+
+api.nvim_create_user_command('LspLogClear', function()
+  vim.ui.input({ prompt = 'Confirm clearing the Nvim LSP logs (y/n): ' }, function(input)
+    if string.lower(input) ~= 'y' then
+      return
+    end
+    io.open(vim.lsp.get_log_path(), 'w'):close()
+  end)
+end, {
+  desc = 'Clears the Nvim LSP client logs',
+})
