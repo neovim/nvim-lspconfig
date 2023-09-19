@@ -8,6 +8,7 @@ local root_files = {
   'stylua.toml',
   'selene.toml',
   'selene.yml',
+  'main.lua',
 }
 
 return {
