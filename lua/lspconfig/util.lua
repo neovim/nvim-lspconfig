@@ -265,6 +265,10 @@ function M.root_pattern(...)
   end
 end
 
+function M.containing_dir(path)
+  return M.path.dirname(path)
+end
+
 function M.find_git_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     -- Support git directories and git files (worktrees)
