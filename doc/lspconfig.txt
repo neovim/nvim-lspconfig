@@ -375,11 +375,15 @@ below returns a function that takes as its argument the current buffer path.
 >
    root_dir = util.root_pattern('pyproject.toml', 'requirements.txt')
 <
+- `util.containing_dir`: a function that returns the first parent directory.
+>
+   root_dir = util.containing_dir
+<
 - `util.find_git_ancestor`: a function that locates the first parent directory
   containing a `.git` directory.
 >
    root_dir = util.find_git_ancestor
-
+<
 - `util.find_node_modules_ancestor`: a function that locates the first parent
   directory containing a `node_modules` directory.
 >
