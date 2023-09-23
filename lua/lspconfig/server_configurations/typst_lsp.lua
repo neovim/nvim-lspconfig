@@ -5,7 +5,7 @@ return {
     cmd = { 'typst-lsp' },
     filetypes = { 'typst' },
     root_dir = function(fname)
-      return util.find_git_ancestor(fname)
+      return util.find_git_ancestor(fname) or util.containing_dir(fname)
     end,
   },
   docs = {
