@@ -8770,7 +8770,11 @@ require'lspconfig'.solidity_ls.setup{}
 
 https://github.com/NomicFoundation/hardhat-vscode/blob/development/server/README.md
 
+`nomicfoundation-solidity-language-server` can be installed via `npm`:
+
+```sh
 npm install -g @ignored/solidity-language-server
+```
 
 A language server for the Solidity programming language, built by the Nomic Foundation for the Ethereum community.
 
@@ -8793,7 +8797,11 @@ require'lspconfig'.solidity_ls_nomicfoundation.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".git", "package.json")
+  root_pattern("hardhat.config.js", "hardhat.config.ts", "foundry.toml", "remappings.txt", "truffle.js", "truffle-config.js", "ape-config.yaml", ".git", "package.json")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
   ```
 
 
