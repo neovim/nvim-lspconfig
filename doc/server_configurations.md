@@ -7880,7 +7880,8 @@ require'lspconfig'.robotframework_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  util.root_pattern('robotidy.toml', 'pyproject.toml')(fname) or util.find_git_ancestor(fname)
+  util.root_pattern('robotidy.toml', 'pyproject.toml', 'conda.yaml', 'robot.yaml')(fname)
+    or util.find_git_ancestor(fname)
   ```
 
 
