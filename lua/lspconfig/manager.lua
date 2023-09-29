@@ -232,6 +232,40 @@ function M:clients()
   return res
 end
 
+function M:remove(bufnr)
+  local clients_for_buffer = vim.lsp.get_active_clients {
+    bufnr = bufnr
+  }
+  for i, client in ipairs(clients_for_buffer) do
+    if vim.lsp.buf_is_attached(bufnr, i) then
+      vim.lsp.buf_detach_client(bufnr, i)
+    end
+  end
+
+  local timer = uv.new_timer()
+  timer:start(1000, 0, function()
+    -- wait a little bit: if we unload a buffer, but load another one
+    -- immediately, and editing a file in the same root_dir, we don't want to
+    -- stop the client, to restart it immediately after
+    self:stop_unused_clients()
+  end)
+end
+
+function M:stop_unused_clients()
+  local clients = self._clients
+  for root, clts in pairs(clients) do
+    for i = #clts, 1, -1 do
+      client_id = clts[i]
+      local client = lsp.get_client_by_id(client_id)
+      if client and #vim.lsp.get_buffers_by_client_id(client_id) == 0 then
+        print("stoping", client.name)
+        client.stop()
+        table.remove(clts, i)
+      end
+    end
+  end
+end
+
 --- Try to attach the buffer `bufnr` to a client using this config, creating
 --- a new client if one doesn't already exist for `bufnr`.
 --- @param bufnr integer
