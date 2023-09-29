@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'mutt-language-server' },
-    filetypes = { 'python' },
+    filetypes = { 'muttrc', 'neomuttrc' },
     root_dir = util.find_git_ancestor(),
     single_file_support = true,
     settings = {},
