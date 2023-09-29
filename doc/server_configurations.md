@@ -5631,7 +5631,7 @@ require'lspconfig'.mutt_ls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "python" }
+  { "muttrc", "neomuttrc" }
   ```
   - `settings` : 
   ```lua
