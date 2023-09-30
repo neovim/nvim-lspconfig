@@ -138,7 +138,7 @@ local function make_client_info(client, fname)
     for _, schema in ipairs(workspace_folders) do
       local matched = true
       local root_dir = uv.fs_realpath(schema.name)
-      if fname:sub(1, root_dir:len()) ~= root_dir then
+      if root_dir == nil or fname:sub(1, root_dir:len()) ~= root_dir then
         matched = false
       end
 
@@ -273,8 +273,6 @@ return function()
 
   local fmt_buf_lines = indent_lines(buf_lines, ' ')
 
-  fmt_buf_lines = vim.lsp.util._trim(fmt_buf_lines, {})
-
   api.nvim_buf_set_lines(bufnr, 0, -1, true, fmt_buf_lines)
   api.nvim_buf_set_option(bufnr, 'modifiable', false)
   api.nvim_buf_set_option(bufnr, 'filetype', 'lspinfo')
@@ -348,7 +346,6 @@ return function()
 
     local info = windows.percentage_range_window(0.8, 0.7)
     lines = indent_lines(lines, ' ')
-    lines = vim.lsp.util._trim(lines, {})
     api.nvim_buf_set_lines(info.bufnr, 0, -1, false, lines)
     api.nvim_buf_add_highlight(info.bufnr, 0, 'LspInfoTip', 0, 0, -1)
 

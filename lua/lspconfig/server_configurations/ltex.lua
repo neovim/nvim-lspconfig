@@ -18,7 +18,7 @@ end
 return {
   default_config = {
     cmd = { bin_name },
-    filetypes = { 'bib', 'gitcommit', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex', 'pandoc' },
+    filetypes = { 'bib', 'gitcommit', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex', 'pandoc', 'quarto', 'rmd' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
     get_language_id = function(_, filetype)
