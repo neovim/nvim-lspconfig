@@ -7338,7 +7338,7 @@ require'lspconfig'.qmlls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "qmljs" }
+  { "qml", "qmljs" }
   ```
   - `root_dir` : 
   ```lua
