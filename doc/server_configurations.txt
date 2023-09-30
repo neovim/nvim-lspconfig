@@ -3059,7 +3059,6 @@ require'lspconfig'.eslint.setup{}
     format = true,
     nodePath = "",
     onIgnoredFiles = "off",
-    packageManager = "npm",
     problems = {
       shortenToSingleLine = false
     },
