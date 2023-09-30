@@ -6500,7 +6500,7 @@ require'lspconfig'.perlls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "perl", "-MPerl::LanguageServer", "-e", "Perl::LanguageServer::run", "--", "--port 13603", "--nostdio 0", "--version 2.1.0" }
+  { "perl", "-MPerl::LanguageServer", "-e", "Perl::LanguageServer::run", "--", "--port 13603", "--nostdio 0" }
   ```
   - `filetypes` : 
   ```lua
