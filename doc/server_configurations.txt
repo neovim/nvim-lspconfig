@@ -5005,7 +5005,7 @@ require'lspconfig'.ltex.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc" }
+  { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc", "quarto", "rmd" }
   ```
   - `get_language_id` : 
   ```lua
