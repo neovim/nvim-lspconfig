@@ -64,7 +64,7 @@ return {
     -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
     settings = {
       validate = 'on',
-      packageManager = 'npm',
+      packageManager = nil,
       useESLintClass = false,
       experimental = {
         useFlatConfig = false,
