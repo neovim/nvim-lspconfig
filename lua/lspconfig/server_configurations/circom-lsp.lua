@@ -12,7 +12,7 @@ return {
     cmd = { 'circom-lsp' },
     filetypes = { 'circom' },
     root_dir = function()
-      local root = util.root_pattern(root_files)(vim.fn.expand('%:p'))
+      local root = util.root_pattern(root_files)(vim.fn.expand '%:p')
       return root or vim.api.nvim_buf_get_name(0)
     end,
   },
@@ -24,4 +24,3 @@ return {
     ]],
   },
 }
-
