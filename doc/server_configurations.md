@@ -5272,7 +5272,7 @@ require'lspconfig'.marksman.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "markdown" }
+  { "markdown", "markdown.mdx" }
   ```
   - `root_dir` : 
   ```lua
