@@ -1,20 +1,8 @@
-local util = require 'lspconfig.util'
-
-local root_files = {
-  'package.json',
-  'tsconfig.json',
-  'pyproject.toml',
-  'Cargo.toml',
-}
-
 return {
   default_config = {
     cmd = { 'circom-lsp' },
     filetypes = { 'circom' },
-    root_dir = function()
-      local root = util.root_pattern(root_files)(vim.fn.expand '%:p')
-      return root or vim.api.nvim_buf_get_name(0)
-    end,
+    single_file_support = true,
   },
   docs = {
     description = [[
@@ -24,3 +12,4 @@ return {
     ]],
   },
 }
+
