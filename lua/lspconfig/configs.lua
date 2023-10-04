@@ -115,6 +115,9 @@ function configs.__newindex(t, config_name, config_def)
 
     function M.launch(bufnr)
       bufnr = bufnr or api.nvim_get_current_buf()
+      if not api.nvim_buf_is_valid(bufnr) then
+        return
+      end
       local bufname = api.nvim_buf_get_name(bufnr)
       if (#bufname == 0 and not config.single_file_support) or (#bufname ~= 0 and not util.bufname_valid(bufname)) then
         return
