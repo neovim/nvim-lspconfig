@@ -4,7 +4,9 @@ return {
   default_config = {
     cmd = { 'uiua', 'lsp' },
     filetypes = { 'uiua' },
-    root_dir = util.find_git_ancestor,
+    root_dir = function(fname)
+      return util.root_pattern('main.ua', '.fmt.ua')(fname) or util.find_git_ancestor(fname)
+    end,
   },
   docs = {
     description = [[
@@ -17,7 +19,13 @@ The Uiua interpreter can be installed with `cargo install uiua`
     default_config = {
       cmd = { 'uiua', 'lsp' },
       filetypes = { 'uiua' },
-      root_dir = [[util.find_git_ancestor]],
+      root_dir = [[
+        root_pattern(
+          'main.ua',
+          'fmt.ua',
+          '.git'
+        )
+      ]],
     },
   },
 }
