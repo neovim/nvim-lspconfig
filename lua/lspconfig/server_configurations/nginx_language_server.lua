@@ -5,7 +5,7 @@ return {
     cmd = { 'nginx-language-server' },
     filetypes = { 'nginx' },
     root_dir = function(fname)
-      return util.root_pattern('nginx.conf', '.git') or util.find_git_ancestor(fname)
+      return util.root_pattern('nginx.conf', '.git')(fname) or util.find_git_ancestor(fname)
     end,
     single_file_support = true,
   },
