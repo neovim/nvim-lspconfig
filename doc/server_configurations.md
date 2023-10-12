@@ -8171,6 +8171,10 @@ require'lspconfig'.ruby_ls.setup{}
   ```lua
   root_pattern("Gemfile", ".git")
   ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## ruff_lsp
