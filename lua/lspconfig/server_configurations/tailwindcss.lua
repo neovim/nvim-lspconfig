@@ -20,6 +20,7 @@ return {
       'erb',
       'eruby', -- vim ft
       'gohtml',
+      'gohtmltmpl',
       'haml',
       'handlebars',
       'hbs',
