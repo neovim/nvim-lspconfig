@@ -8,7 +8,6 @@ return {
     root_dir = function(fname)
       return util.find_git_ancestor(fname)
     end,
-    settings = {},
   },
   docs = {
     description = [[
