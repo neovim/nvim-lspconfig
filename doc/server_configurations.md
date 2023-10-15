@@ -3759,7 +3759,7 @@ require'lspconfig'.glsl_analyzer.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "glsl" }
+  { "glsl", "vert", "tesc", "tese", "frag", "geom", "comp" }
   ```
   - `root_dir` : 
   ```lua
@@ -3806,7 +3806,7 @@ require'lspconfig'.glslls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "glsl" }
+  { "glsl", "vert", "tesc", "tese", "frag", "geom", "comp" }
   ```
   - `root_dir` : 
   ```lua
