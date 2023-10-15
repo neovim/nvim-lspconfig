@@ -4,8 +4,9 @@ return {
   default_config = {
     cmd = { 'htmx-lsp' },
     filetypes = { 'html' },
+    single_file_support = true,
     root_dir = function(fname)
-      return util.find_git_ancestor(fname) or vim.fn.expand '%:p:h' or vim.loop.os_homedir()
+      return util.find_git_ancestor(fname)
     end,
     settings = {},
   },
