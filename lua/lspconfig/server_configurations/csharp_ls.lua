@@ -4,10 +4,8 @@ return {
   default_config = {
     cmd = { 'csharp-ls' },
     root_dir = function(fname)
-      return util.root_pattern '*.sln'(fname)
-        or util.root_pattern('*.csproj', '*.fsproj', '.git')(fname)
-        or util.root_pattern '*.fsproj'(fname)
-        or util.root_pattern '.git'(fname)
+      return util.root_pattern '*.sln' (fname)
+          or util.root_pattern('*.csproj')(fname)
     end,
     filetypes = { 'cs' },
     init_options = {
