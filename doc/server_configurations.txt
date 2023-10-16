@@ -2784,7 +2784,7 @@ require'lspconfig'.elixirls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("mix.exs", ".git") or vim.loop.os_homedir()
+  util.find_git_ancestor(fname) or util.root_pattern 'mix.exs'(fname) or vim.loop.os_homedir()
   ```
 
 
