@@ -9068,7 +9068,7 @@ https://github.com/NomicFoundation/hardhat-vscode/blob/development/server/README
 `nomicfoundation-solidity-language-server` can be installed via `npm`:
 
 ```sh
-npm install -g @ignored/solidity-language-server
+npm install @nomicfoundation/solidity-language-server -g
 ```
 
 A language server for the Solidity programming language, built by the Nomic Foundation for the Ethereum community.
