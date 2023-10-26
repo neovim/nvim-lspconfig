@@ -4,8 +4,9 @@ return {
   default_config = {
     filetypes = { 'elixir', 'eelixir', 'heex', 'surface' },
     root_dir = function(fname)
-      return util.find_git_ancestor(fname) or util.root_pattern 'mix.exs'(fname) or vim.loop.os_homedir()
+      return util.find_git_ancestor(fname) or util.root_pattern 'mix.exs'(fname)
     end,
+    single_file_support = true,
   },
   docs = {
     description = [[
