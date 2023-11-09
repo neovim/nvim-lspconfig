@@ -844,7 +844,7 @@ require'lspconfig'.asm_lsp.setup{}
 https://ast-grep.github.io/
 
 ast-grep(sg) is a fast and polyglot tool for code structural search, lint, rewriting at large scale.
-
+ast-grep LSP only works in projects that have `sgconfig.y[a]ml` in their root directories.
 ```sh
 npm install [-g] @ast-grep/cli
 ```
@@ -868,7 +868,7 @@ require'lspconfig'.ast_grep.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern('sgconfig.yaml')
+  root_pattern('sgconfig.yaml', 'sgconfig.yml')
   ```
   - `single_file_support` : 
   ```lua
