@@ -2097,12 +2097,6 @@ Here's an example that disables type checking in JavaScript files.
     "node_modules"
   ]
 }
-
-The best way to utilize the Custom Elements Language Server is to enable the [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest)(CEM) in your project by installing
-a CEM generator like one provided by [The Open WC Team](https://github.com/open-wc/custom-elements-manifest/tree/master/packages/analyzer).
-
-Generating a CEM in watch mode will provide you with the best user experience. If your dependencies ship with a Custom Elements Manifest, those will be utilized also.
-
 ```
 
 
@@ -2117,10 +2111,6 @@ require'lspconfig'.custom_elements_ls.setup{}
   - `cmd` : 
   ```lua
   { "custom-elements-languageserver", "--stdio" }
-  ```
-  - `filetypes` : 
-  ```lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "html" }
   ```
   - `init_options` : 
   ```lua
