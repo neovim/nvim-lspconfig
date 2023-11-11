@@ -18,7 +18,7 @@ return {
       'dart',
       'lua',
     },
-    root_dir = util.root_pattern 'sgconfig.yaml',
+    root_dir = util.root_pattern('sgconfig.yaml', 'sgconfig.yml'),
     single_file_support = true,
   },
   docs = {
@@ -26,13 +26,13 @@ return {
 https://ast-grep.github.io/
 
 ast-grep(sg) is a fast and polyglot tool for code structural search, lint, rewriting at large scale.
-
+ast-grep LSP only works in projects that have `sgconfig.y[a]ml` in their root directories.
 ```sh
 npm install [-g] @ast-grep/cli
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern('sgconfig.yaml')]],
+      root_dir = [[root_pattern('sgconfig.yaml', 'sgconfig.yml')]],
     },
   },
 }
