@@ -7653,6 +7653,10 @@ require'lspconfig'.pylyzer.setup{}
     }
   }
   ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## pyre
