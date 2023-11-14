@@ -775,6 +775,9 @@ require'lspconfig'.arduino_language_server.setup{}
     workspace = {
       applyEdit = true,
       configuration = true,
+      didChangeConfiguration = {
+        dynamicRegistration = false
+      },
       didChangeWatchedFiles = {
         dynamicRegistration = true,
         relativePatternSupport = true
@@ -8651,6 +8654,9 @@ require'lspconfig'.rust_analyzer.setup{}
     workspace = {
       applyEdit = true,
       configuration = true,
+      didChangeConfiguration = {
+        dynamicRegistration = false
+      },
       didChangeWatchedFiles = {
         dynamicRegistration = true,
         relativePatternSupport = true
