@@ -720,7 +720,7 @@ require'lspconfig'.arduino_language_server.setup{}
       inlayHint = {
         dynamicRegistration = true,
         resolveSupport = {
-          properties = {}
+          properties = { "textEdits", "tooltip", "location", "command" }
         }
       },
       publishDiagnostics = {
@@ -8581,7 +8581,7 @@ require'lspconfig'.rust_analyzer.setup{}
       inlayHint = {
         dynamicRegistration = true,
         resolveSupport = {
-          properties = {}
+          properties = { "textEdits", "tooltip", "location", "command" }
         }
       },
       publishDiagnostics = {
