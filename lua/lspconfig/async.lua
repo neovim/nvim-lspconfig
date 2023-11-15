@@ -16,6 +16,8 @@ function M.run_command(cmd)
 
   local stdout = {}
   local stderr = {}
+  local exit_code = nil
+
   local jobid = vim.fn.jobstart(cmd, {
     on_stdout = function(_, data, _)
       data = table.concat(data, '\n')
@@ -26,7 +28,8 @@ function M.run_command(cmd)
     on_stderr = function(_, data, _)
       stderr[#stderr + 1] = table.concat(data, '\n')
     end,
-    on_exit = function()
+    on_exit = function(_, code, _)
+      exit_code = code
       coroutine.resume(co)
     end,
     stdout_buffered = true,
@@ -34,11 +37,20 @@ function M.run_command(cmd)
   })
 
   if jobid <= 0 then
-    vim.notify(('[lspconfig] cmd go failed:\n%s'):format(table.concat(stderr, '')), vim.log.levels.WARN)
-    return
+    vim.notify(('[lspconfig] unable to run cmd: %s'):format(cmd), vim.log.levels.WARN)
+    return nil
   end
 
   coroutine.yield()
+
+  if exit_code ~= 0 then
+    vim.notify(
+      ('[lspconfig] cmd failed with code %d: %s\n%s'):format(exit_code, cmd, table.concat(stderr, '')),
+      vim.log.levels.WARN
+    )
+    return nil
+  end
+
   if next(stdout) == nil then
     return nil
   end
