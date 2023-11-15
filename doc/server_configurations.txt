@@ -8159,10 +8159,13 @@ require'lspconfig'.remark_ls.setup{}
 ## rescriptls
 
 https://github.com/rescript-lang/rescript-vscode/tree/master/server
+
 ReScript Language Server can be installed via npm:
 ```sh
 npm install -g @rescript/language-server
 ```
+
+See the init_options supported (see https://github.com/rescript-lang/rescript-vscode/tree/master/server/config.md):
 
 
 
@@ -8180,6 +8183,14 @@ require'lspconfig'.rescriptls.setup{}
   - `filetypes` : 
   ```lua
   { "rescript" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    extensionConfiguration = {
+      askToStartBuild = false
+    }
+  }
   ```
   - `root_dir` : 
   ```lua
