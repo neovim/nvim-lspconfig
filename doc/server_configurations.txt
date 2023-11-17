@@ -6447,6 +6447,10 @@ require'lspconfig'.nushell.setup{}
   ```lua
   util.find_git_ancestor
   ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## nxls
