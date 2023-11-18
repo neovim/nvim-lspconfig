@@ -50,19 +50,26 @@ return {
       end
 
       local cargo_crate_dir = util.root_pattern 'Cargo.toml'(fname)
-      local cmd = { 'cargo', 'metadata', '--no-deps', '--format-version', '1' }
-      if cargo_crate_dir ~= nil then
-        cmd[#cmd + 1] = '--manifest-path'
-        cmd[#cmd + 1] = util.path.join(cargo_crate_dir, 'Cargo.toml')
-      end
-
-      local result = async.run_command(cmd)
       local cargo_workspace_root
 
-      if result and result[1] then
-        result = vim.json.decode(table.concat(result, ''))
-        if result['workspace_root'] then
-          cargo_workspace_root = util.path.sanitize(result['workspace_root'])
+      if cargo_crate_dir ~= nil then
+        local cmd = {
+          'cargo',
+          'metadata',
+          '--no-deps',
+          '--format-version',
+          '1',
+          '--manifest-path',
+          util.path.join(cargo_crate_dir, 'Cargo.toml'),
+        }
+
+        local result = async.run_command(cmd)
+
+        if result and result[1] then
+          result = vim.json.decode(table.concat(result, ''))
+          if result['workspace_root'] then
+            cargo_workspace_root = util.path.sanitize(result['workspace_root'])
+          end
         end
       end
 
