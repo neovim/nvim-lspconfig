@@ -4,10 +4,7 @@ return {
   default_config = {
     init_options = { hostInfo = 'neovim' },
     cmd = { 'custom-elements-languageserver', '--stdio' },
-    root_dir = function(fname)
-      return util.root_pattern 'tsconfig.json'(fname)
-        or util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
-    end,
+    root_dir = util.root_pattern('tsconfig.json', 'package.json', 'jsconfig.json', '.git'),
   },
   docs = {
     description = [[
@@ -36,7 +33,7 @@ Here's an example that disables type checking in JavaScript files.
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")]],
+      root_dir = [[root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")]],
     },
   },
 }

@@ -15,9 +15,6 @@ local root_files = {
   'settings.gradle.kts', -- Gradle (multi-project)
   'build.xml', -- Ant
   'pom.xml', -- Maven
-}
-
-local fallback_root_files = {
   'build.gradle', -- Gradle
   'build.gradle.kts', -- Gradle
 }
@@ -25,9 +22,7 @@ local fallback_root_files = {
 return {
   default_config = {
     filetypes = { 'kotlin' },
-    root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname) or util.root_pattern(unpack(fallback_root_files))(fname)
-    end,
+    root_dir = util.root_pattern(unpack(root_files)),
     cmd = { bin_name },
   },
   docs = {

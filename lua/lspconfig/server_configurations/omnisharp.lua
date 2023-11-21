@@ -38,15 +38,7 @@ return {
     analyze_open_documents_only = false,
 
     filetypes = { 'cs', 'vb' },
-    root_dir = function(fname)
-      local root_patterns = { '*.sln', '*.csproj', 'omnisharp.json', 'function.json' }
-      for _, pattern in ipairs(root_patterns) do
-        local found = util.root_pattern(pattern)(fname)
-        if found then
-          return found
-        end
-      end
-    end,
+    root_dir = util.root_pattern('*.sln', '*.csproj', 'omnisharp.json', 'function.json'),
     on_new_config = function(new_config, _)
       -- Get the initially configured value of `cmd`
       new_config.cmd = { unpack(new_config.cmd or {}) }
@@ -149,7 +141,7 @@ require'lspconfig'.omnisharp.setup {
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern(".sln") or root_pattern(".csproj")]],
+      root_dir = [[root_pattern("*.sln", "*.csproj", "omnisharp.json", "function.json")]],
     },
   },
 }

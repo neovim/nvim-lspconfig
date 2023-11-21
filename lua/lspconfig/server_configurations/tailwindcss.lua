@@ -100,11 +100,16 @@ return {
       end
     end,
     root_dir = function(fname)
-      return util.root_pattern('tailwind.config.js', 'tailwind.config.cjs', 'tailwind.config.mjs', 'tailwind.config.ts')(
-        fname
-      ) or util.root_pattern('postcss.config.js', 'postcss.config.cjs', 'postcss.config.mjs', 'postcss.config.ts')(
-        fname
-      ) or util.find_package_json_ancestor(fname) or util.find_node_modules_ancestor(fname) or util.find_git_ancestor(
+      return util.root_pattern(
+        'tailwind.config.js',
+        'tailwind.config.cjs',
+        'tailwind.config.mjs',
+        'tailwind.config.ts',
+        'postcss.config.js',
+        'postcss.config.cjs',
+        'postcss.config.mjs',
+        'postcss.config.ts'
+      )(fname) or util.find_package_json_ancestor(fname) or util.find_node_modules_ancestor(fname) or util.find_git_ancestor(
         fname
       )
     end,

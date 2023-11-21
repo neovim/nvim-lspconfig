@@ -11,10 +11,7 @@ return {
       'typescriptreact',
       'typescript.tsx',
     },
-    root_dir = function(fname)
-      return util.root_pattern 'tsconfig.json'(fname)
-        or util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
-    end,
+    root_dir = util.root_pattern('tsconfig.json', 'package.json', 'jsconfig.json', '.git'),
     single_file_support = true,
   },
   docs = {
@@ -32,7 +29,7 @@ or [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig) to
 the root of your project.
 ]],
     default_config = {
-      root_dir = [[root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")]],
+      root_dir = [[root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")]],
     },
   },
 }
