@@ -1528,7 +1528,7 @@ require'lspconfig'.cairo_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+  root_pattern("Scarb.toml", "cairo_project.toml", ".git")
   ```
 
 
@@ -2198,7 +2198,7 @@ require'lspconfig'.custom_elements_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+  root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")
   ```
 
 
@@ -4142,7 +4142,7 @@ require'lspconfig'.gradle_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("settings.gradle")
+  root_pattern("settings.gradle", "build.gradle")
   ```
 
 
@@ -4560,13 +4560,7 @@ require'lspconfig'.hls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  function (filepath)
-    return (
-      util.root_pattern('hie.yaml', 'stack.yaml', 'cabal.project')(filepath)
-      or util.root_pattern('*.cabal', 'package.yaml')(filepath)
-    )
-  end
-        
+  root_pattern("hie.yaml", "stack.yaml", "cabal.project", "*.cabal", "package.yaml")
   ```
   - `settings` : 
   ```lua
@@ -6731,7 +6725,7 @@ require'lspconfig'.omnisharp.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".sln") or root_pattern(".csproj")
+  root_pattern("*.sln", "*.csproj", "omnisharp.json", "function.json")
   ```
   - `sdk_include_prereleases` : 
   ```lua
@@ -10715,7 +10709,7 @@ require'lspconfig'.tsserver.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+  root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")
   ```
   - `single_file_support` : 
   ```lua
@@ -11573,7 +11567,7 @@ require'lspconfig'.vtsls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+  root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")
   ```
   - `single_file_support` : 
   ```lua
