@@ -8,7 +8,7 @@ return {
   default_config = {
     cmd = { 'typos-lsp' },
     filetypes = { '*' },
-    root_dir = util.root_pattern(unpack(root_files)) or util.find_git_ancestor(),
+    root_dir = util.root_pattern('pyproject.toml', '.git'),
     single_file_support = true,
     settings = {},
   },
