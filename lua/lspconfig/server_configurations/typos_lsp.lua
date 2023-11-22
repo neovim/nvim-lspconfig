@@ -1,6 +1,5 @@
 local util = require 'lspconfig.util'
 
-
 return {
   default_config = {
     cmd = { 'typos-lsp' },
