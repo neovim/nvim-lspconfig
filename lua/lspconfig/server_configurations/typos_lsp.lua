@@ -1,8 +1,5 @@
 local util = require 'lspconfig.util'
 
-local root_files = {
-  'pyproject.toml',
-}
 
 return {
   default_config = {
