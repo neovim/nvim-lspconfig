@@ -5,8 +5,8 @@ if vim.g.lspconfig ~= nil then
 end
 vim.g.lspconfig = 1
 
-local version_info = vim.version()
 if vim.fn.has 'nvim-0.7' ~= 1 then
+  local version_info = vim.version()
   local warning_str = string.format(
     '[lspconfig] requires neovim 0.7 or later. Detected neovim version: 0.%s.%s',
     version_info.minor,
