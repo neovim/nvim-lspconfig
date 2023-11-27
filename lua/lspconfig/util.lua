@@ -268,10 +268,14 @@ function M.root_pattern(...)
   end
 end
 
-function M.find_git_ancestor(startpath)
+function M.find_git_ancestor(startpath, options)
+  local _options = {
+    exclude_git_files = options and options.exclude_git_files,
+  }
+
   return M.search_ancestors(startpath, function(path)
     -- Support git directories and git files (worktrees)
-    if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
+    if M.path.is_dir(M.path.join(path, '.git')) or (M.path.is_file(M.path.join(path, '.git')) and not _options.exclude_git_files) then
       return path
     end
   end)
