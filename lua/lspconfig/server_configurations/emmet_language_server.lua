@@ -4,7 +4,6 @@ return {
   default_config = {
     cmd = { 'emmet-language-server', '--stdio' },
     filetypes = {
-      'astro',
       'css',
       'eruby',
       'html',
@@ -14,9 +13,7 @@ return {
       'pug',
       'sass',
       'scss',
-      'svelte',
       'typescriptreact',
-      'vue',
     },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
