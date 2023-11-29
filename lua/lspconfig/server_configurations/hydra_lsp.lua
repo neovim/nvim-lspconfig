@@ -5,6 +5,7 @@ return {
     cmd = { 'hydra-lsp' },
     filetypes = { 'yaml' },
     root_dir = util.root_pattern '.git',
+    single_file_support = true,
   },
   docs = {
     description = [[
