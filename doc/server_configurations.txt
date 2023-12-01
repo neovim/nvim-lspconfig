@@ -5686,12 +5686,6 @@ require'lspconfig'.matlab_ls.setup{}
   ```lua
   { "matlab" }
   ```
-  - `handlers` : 
-  ```lua
-  {
-    ["workspace/configuration"] = <function 1>
-  }
-  ```
   - `root_dir` : 
   ```lua
   see source file
@@ -5699,7 +5693,7 @@ require'lspconfig'.matlab_ls.setup{}
   - `settings` : 
   ```lua
   {
-    matlab = {
+    MATLAB = {
       indexWorkspace = false,
       installPath = "",
       matlabConnectionTiming = "onStart",
