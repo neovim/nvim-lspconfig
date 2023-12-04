@@ -5127,6 +5127,10 @@ require'lspconfig'.jsonnet_ls.setup{}
   ```lua
   root_pattern("jsonnetfile.json")
   ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## julials
