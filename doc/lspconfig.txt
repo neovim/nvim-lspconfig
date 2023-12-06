@@ -477,9 +477,9 @@ contained in `:LspInfo`:
 EXAMPLE KEYBINDINGS                                      *lspconfig-keybindings*
 
 `lspconfig`, and the core client, do not map any keybindings by default. The
-following is an example Lua block which demonstrates how to leverage
+following is an example Lua block which demonstrates how to leverage the
 `LspAttach` (Nvim 0.8+) autocommand to apply keybindings after a language
-servers has attached to a given buffer.
+server has attached to a given buffer.
 >
   -- Setup language servers.
   local lspconfig = require('lspconfig')
