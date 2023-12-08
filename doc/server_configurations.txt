@@ -2059,6 +2059,12 @@ require'lspconfig'.cssls.setup{}
   ```lua
   { "css", "scss", "less" }
   ```
+  - `init_options` : 
+  ```lua
+  {
+    provideFormatter = true
+  }
+  ```
   - `root_dir` : 
   ```lua
   root_pattern("package.json", ".git") or bufdir
