@@ -29,8 +29,5 @@ npm i -g @sap/cds-lsp
 ```
 
 ]],
-    default_config = {
-      root_dir = [[root_pattern("package.json", ".git") or bufdir]],
-    },
   },
 }
