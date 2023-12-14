@@ -7602,7 +7602,7 @@ require'lspconfig'.psalm.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "psalm-language-server" }
+  { "psalm", "--language-server" }
   ```
   - `filetypes` : 
   ```lua
