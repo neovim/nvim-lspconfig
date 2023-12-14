@@ -7,7 +7,7 @@ local cmd = {
 
 return {
   default_config = {
-    cmd = cmd,
+    cmd = {'psalm', '--language-server'},
     filetypes = { 'php' },
     root_dir = util.root_pattern('psalm.xml', 'psalm.xml.dist'),
   },
