@@ -21,7 +21,7 @@ composer global require vimeo/psalm
 ```
 ]],
     default_config = {
-      cmd = cmd,
+      cmd = {'psalm', '--language-server'},
       root_dir = [[root_pattern("psalm.xml", "psalm.xml.dist")]],
     },
   },
