@@ -1,14 +1,13 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'psalm-language-server'
-
-if vim.fn.has 'win32' == 1 then
-  bin_name = bin_name .. '.bat'
-end
+local cmd = {
+  'psalm',
+  '--language-server',
+}
 
 return {
   default_config = {
-    cmd = { bin_name },
+    cmd = cmd,
     filetypes = { 'php' },
     root_dir = util.root_pattern('psalm.xml', 'psalm.xml.dist'),
   },
@@ -22,7 +21,7 @@ composer global require vimeo/psalm
 ```
 ]],
     default_config = {
-      cmd = { 'psalm-language-server' },
+      cmd = cmd,
       root_dir = [[root_pattern("psalm.xml", "psalm.xml.dist")]],
     },
   },
