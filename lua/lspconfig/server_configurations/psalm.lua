@@ -1,9 +1,5 @@
 local util = require 'lspconfig.util'
 
-local cmd = {
-  'psalm',
-  '--language-server',
-}
 
 return {
   default_config = {
