@@ -24,6 +24,9 @@ return {
     filetypes = { 'kotlin' },
     root_dir = util.root_pattern(unpack(root_files)),
     cmd = { bin_name },
+    init_options = {
+      storagePath = util.root_pattern(unpack(root_files))(vim.fn.expand '%:p:h'),
+    },
   },
   docs = {
     description = [[
