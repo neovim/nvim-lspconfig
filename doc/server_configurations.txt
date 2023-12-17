@@ -5256,6 +5256,9 @@ require'lspconfig'.julials.setup{}
     You could refer for this capability to:
     https://github.com/udalov/kotlin-vim (recommended)
     Note that there is no LICENSE specified yet.
+
+    For faster startup, you can setup caching by specifying a storagePath
+    in the init_options. The default is your home directory.
     
 
 
@@ -5274,9 +5277,15 @@ require'lspconfig'.kotlin_language_server.setup{}
   ```lua
   { "kotlin" }
   ```
+  - `init_options` : 
+  ```lua
+  {
+    storagePath = "Enables caching and use project root to store cache data. See source"
+  }
+  ```
   - `root_dir` : 
   ```lua
-  root_pattern("settings.gradle")
+  See source
   ```
 
 
