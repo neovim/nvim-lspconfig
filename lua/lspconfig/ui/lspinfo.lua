@@ -184,6 +184,33 @@ local function make_client_info(client, fname)
   return lines
 end
 
+---Returns the id of the client on the current line
+---@return number|nil
+local function get_client_id_under_cursor()
+  local line = vim.api.nvim_get_current_line()
+  local id = string.match(line, 'id:%s*(%d+)')
+  if id then
+    return tonumber(id)
+  else
+    return nil
+  end
+end
+
+---Prints the LSP client object to a new buffer
+---@param filter table
+local show_client_config = function(filter)
+  local output = vim.lsp.get_clients(filter)
+  vim.cmd [[
+    execute 'vsplit | enew'
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
+    setlocal wrap
+    set syntax=lua
+]]
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(vim.inspect(output), '\n'))
+end
+
 return function()
   -- These options need to be cached before switching to the floating
   -- buffer.
@@ -217,7 +244,8 @@ return function()
   end
 
   -- insert the tips at the top of window
-  buf_lines[#buf_lines + 1] = 'Press q or <Esc> to close this window. Press <Tab> to view server doc.'
+  buf_lines[#buf_lines + 1] =
+    'Press q or <Esc> to close this window. Press <Tab> to view server doc. Press K on an active client to show the client object.'
 
   local header = {
     '',
@@ -366,4 +394,11 @@ return function()
   end
 
   vim.keymap.set('n', '<TAB>', show_doc, { buffer = true, nowait = true })
+
+  vim.keymap.set('n', 'K', function()
+    local id = get_client_id_under_cursor() -- or vim.v.count
+    local filter = id == 0 and {} or { id = id }
+    show_client_config(filter)
+    close()
+  end, { buffer = true, nowait = true, desc = 'Show LSP client object' })
 end
