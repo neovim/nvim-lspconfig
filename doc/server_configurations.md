@@ -12048,7 +12048,7 @@ require'lspconfig'.zls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  util.root_pattern("zls.json", ".git")
+  util.root_pattern("zls.json", "build.zig", ".git")
   ```
   - `single_file_support` : 
   ```lua
