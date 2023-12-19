@@ -2475,9 +2475,7 @@ require'lspconfig'.denols.setup{}
       suggest = {
         imports = {
           hosts = {
-            ["https://crux.land"] = true,
-            ["https://deno.land"] = true,
-            ["https://x.nest.land"] = true
+            ["https://deno.land"] = true
           }
         }
       }
