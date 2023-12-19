@@ -27,9 +27,9 @@ local function virtual_text_document_handler(uri, res, client)
   end
 
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-  vim.api.nvim_buf_set_option(bufnr, 'readonly', true)
-  vim.api.nvim_buf_set_option(bufnr, 'modified', false)
-  vim.api.nvim_buf_set_option(bufnr, 'modifiable', false)
+  vim.api.nvim_set_option_value('readonly', true, { buf = bufnr })
+  vim.api.nvim_set_option_value('modified', false, { buf = bufnr })
+  vim.api.nvim_set_option_value('modifiable', false, { buf = bufnr })
   lsp.buf_attach_client(bufnr, client.id)
 end
 
@@ -81,8 +81,6 @@ return {
           imports = {
             hosts = {
               ['https://deno.land'] = true,
-              ['https://crux.land'] = true,
-              ['https://x.nest.land'] = true,
             },
           },
         },
