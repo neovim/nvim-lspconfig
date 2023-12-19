@@ -81,8 +81,6 @@ return {
           imports = {
             hosts = {
               ['https://deno.land'] = true,
-              ['https://crux.land'] = true,
-              ['https://x.nest.land'] = true,
             },
           },
         },
