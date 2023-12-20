@@ -9658,7 +9658,7 @@ require'lspconfig'.spectral.setup{}
 
 ## spyglassmc_language_server
 
-https://github.com/SpyglassMC/Spyglass/tree/main/packages/language-serve
+https://github.com/SpyglassMC/Spyglass/tree/main/packages/language-server
 
 Language server for Minecraft datapacks.
 
