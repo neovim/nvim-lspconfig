@@ -14,7 +14,7 @@ return {
   },
   docs = {
     description = [[
-https://github.com/lighttiger2505/sqls
+https://github.com/sqls-server/sqls
 
 ```lua
 require'lspconfig'.sqls.setup{
@@ -22,7 +22,7 @@ require'lspconfig'.sqls.setup{
   ...
 }
 ```
-Sqls can be installed via `go get github.com/lighttiger2505/sqls`. Instructions for compiling Sqls from the source can be found at [lighttiger2505/sqls](https://github.com/lighttiger2505/sqls).
+Sqls can be installed via `go get github.com/sqls-server/sqls`. Instructions for compiling Sqls from the source can be found at [sqls-server/sqls](https://github.com/sqls-server/sqls).
 
     ]],
   },
