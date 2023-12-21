@@ -1,9 +1,9 @@
-local api, lsp = vim.api, vim.lsp
-
 if vim.g.lspconfig ~= nil then
   return
 end
 vim.g.lspconfig = 1
+
+local api, lsp = vim.api, vim.lsp
 
 if vim.fn.has 'nvim-0.8' ~= 1 then
   local version_info = vim.version()
