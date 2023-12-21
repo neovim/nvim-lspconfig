@@ -15,7 +15,14 @@ local function organize_imports()
     command = 'pyright.organizeimports',
     arguments = { vim.uri_from_bufnr(0) },
   }
-  vim.lsp.buf.execute_command(params)
+
+  local clients = vim.lsp.get_active_clients {
+    bufnr = vim.api.nvim_get_current_buf(),
+    name = 'pyright',
+  }
+  for _, client in ipairs(clients) do
+    client.request('workspace/executeCommand', params, nil, 0)
+  end
 end
 
 local function set_python_path(path)
