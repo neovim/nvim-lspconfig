@@ -390,7 +390,7 @@ below returns a function that takes as its argument the current buffer path.
 - `util.find_package_json_ancestor`: a function that locates the first parent
   directory containing a `package.json`.
 >
-   root_dir = util.find_json_ancestor
+   root_dir = util.find_package_json_ancestor
 <
 Note: On Windows, `lspconfig` always assumes forward slash normalized paths with
 capitalized drive letters.
