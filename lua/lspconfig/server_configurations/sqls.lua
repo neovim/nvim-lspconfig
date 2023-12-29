@@ -7,10 +7,6 @@ return {
     root_dir = util.root_pattern 'config.yml',
     single_file_support = true,
     settings = {},
-    deprecate = {
-      to = 'sqlls',
-      version = '0.2.0',
-    },
   },
   docs = {
     description = [[
