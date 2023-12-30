@@ -5,7 +5,6 @@ return {
     cmd = { 'ols' },
     filetypes = { 'odin' },
     root_dir = util.root_pattern('ols.json', '.git', '*.odin'),
-    single_file_support = false,
   },
   docs = {
     description = [[
