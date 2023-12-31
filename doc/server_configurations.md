@@ -6717,11 +6717,7 @@ require'lspconfig'.ols.setup{}
   ```
   - `root_dir` : 
   ```lua
-  util.root_pattern("ols.json", ".git")
-  ```
-  - `single_file_support` : 
-  ```lua
-  true
+  util.root_pattern("ols.json", ".git", "*.odin")
   ```
 
 
