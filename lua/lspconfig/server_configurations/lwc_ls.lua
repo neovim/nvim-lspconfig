@@ -17,8 +17,7 @@ https://github.com/forcedotcom/lightning-language-server/
 
 Language server for Lightning Web Components.
 
-For manual installation, utilize the official 
-[NPM package](https://www.npmjs.com/package/@salesforce/lwc-language-server). 
+For manual installation, utilize the official [NPM package](https://www.npmjs.com/package/@salesforce/lwc-language-server).
 Then, configure `cmd` to run the Node script at the unpacked location:
 
 ```lua
