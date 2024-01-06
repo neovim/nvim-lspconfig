@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'lwc-language-server', '--stdio' }
+    cmd = { 'lwc-language-server', '--stdio' },
     filetypes = { 'javascript', 'html' },
     root_dir = util.root_pattern 'sfdx-project.json',
     init_options = {
