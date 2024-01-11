@@ -4,7 +4,7 @@ return {
   default_config = {
     cmd = { 'spyglassmc-language-server', '--stdio' },
     filetypes = { 'mcfunction' },
-    root_dir = util.root_pattern 'pack.mcmeta',
+    root_dir = function() return vim.loop.cwd() end,
     single_file_support = true,
   },
   docs = {
