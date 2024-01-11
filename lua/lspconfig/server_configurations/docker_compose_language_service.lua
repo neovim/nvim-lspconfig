@@ -17,6 +17,8 @@ This project contains a language service for Docker Compose.
 ```sh
 npm install @microsoft/compose-language-service
 ```
+
+Note: If the docker-compose-langserver doesn't startup when entering a `docker-compose.yaml` file, make sure that the filetype is `yaml.docker-compose`. You can set with: `:set filetype=yaml.docker-compose`.
 ]],
     default_config = {
       root_dir = [[root_pattern("docker-compose.yaml")]],
