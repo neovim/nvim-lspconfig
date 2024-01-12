@@ -2422,7 +2422,7 @@ require'lspconfig'.dartls.setup{}
 
 https://dcm.dev/
 
-Language server for dart.
+Language server for DCM analyzer.
 
 
 
@@ -2435,7 +2435,7 @@ require'lspconfig'.dcmls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "dcm", "start-server" }
+  { "dcm", "start-server", "client=neovim" }
   ```
   - `filetypes` : 
   ```lua
