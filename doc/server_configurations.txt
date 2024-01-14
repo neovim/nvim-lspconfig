@@ -2435,7 +2435,7 @@ require'lspconfig'.dcmls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "dcm", "start-server", "client=neovim" }
+  { "dcm", "start-server", "--client=neovim" }
   ```
   - `filetypes` : 
   ```lua
