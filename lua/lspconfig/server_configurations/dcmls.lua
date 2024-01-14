@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'dcm', 'start-server', 'client=neovim' },
+    cmd = { 'dcm', 'start-server', '--client=neovim' },
     filetypes = { 'dart' },
     root_dir = util.root_pattern 'pubspec.yaml',
   },
