@@ -14,6 +14,18 @@ local texlab_forward_status = vim.tbl_add_reverse_lookup {
   Unconfigured = 3,
 }
 
+local function buf_cancel_build()
+  local texlab_client = util.get_active_client_by_name(0, 'texlab')
+  if texlab_client then
+    texlab_client.request('workspace/executeCommand', { command = 'texlab.cancelBuild' }, function(err)
+      if err then
+        error(tostring(err))
+      end
+      print 'Build cancelled'
+    end, 0)
+  end
+end
+
 local function buf_build(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
@@ -113,6 +125,12 @@ return {
         buf_search(0)
       end,
       description = 'Forward search from current position',
+    },
+    TexlabCancel = {
+      function()
+        buf_cancel_build()
+      end,
+      description = 'Cancel the current build',
     },
   },
   docs = {
