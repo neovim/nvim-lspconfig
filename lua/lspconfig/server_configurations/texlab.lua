@@ -21,7 +21,7 @@ local function buf_cancel_build()
       if err then
         error(tostring(err))
       end
-      print 'Build cancelled'
+      vim.notify 'Build cancelled'
     end, 0)
   end
 end
