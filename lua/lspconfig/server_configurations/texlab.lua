@@ -21,7 +21,7 @@ local function buf_cancel_build()
       if err then
         error(tostring(err))
       end
-      print 'Cancel build'
+      print 'Build cancelled'
     end, 0)
   end
 end
@@ -130,7 +130,7 @@ return {
       function()
         buf_cancel_build()
       end,
-      description = 'Cancel the current build',
+      description = 'Cancel the current build, includes the onSave builds',
     },
   },
   docs = {
