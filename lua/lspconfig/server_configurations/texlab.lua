@@ -17,7 +17,7 @@ local texlab_forward_status = vim.tbl_add_reverse_lookup {
 local function buf_cancel_build()
   local texlab_client = util.get_active_client_by_name(0, 'texlab')
   if texlab_client then
-    texlab_client.request('workspace/executeCommand', { command = 'texlab.cancelBuild' }, function(err, result)
+    texlab_client.request('workspace/executeCommand', { command = 'texlab.cancelBuild' }, function(err)
       if err then
         error(tostring(err))
       end
