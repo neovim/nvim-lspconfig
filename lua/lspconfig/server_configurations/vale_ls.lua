@@ -5,6 +5,7 @@ return {
     cmd = { 'vale-ls' },
     filetypes = { 'markdown', 'text' },
     root_dir = util.root_pattern '.vale.ini',
+    single_file_support = true,
   },
   docs = {
     description = [[
