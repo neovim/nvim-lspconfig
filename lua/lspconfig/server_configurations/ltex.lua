@@ -7,6 +7,7 @@ local language_id_mapping = {
   rst = 'restructuredtext',
   tex = 'latex',
   pandoc = 'markdown',
+  text = 'plaintext',
 }
 
 local bin_name = 'ltex-ls'
