@@ -15,8 +15,22 @@ if vim.fn.has 'win32' == 1 then
   bin_name = bin_name .. '.bat'
 end
 
-local filetypes =
-  { 'bib', 'gitcommit', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex', 'pandoc', 'quarto', 'rmd' }
+local filetypes = {
+  'bib',
+  'gitcommit',
+  'markdown',
+  'org',
+  'plaintex',
+  'rst',
+  'rnoweb',
+  'tex',
+  'pandoc',
+  'quarto',
+  'rmd',
+  'context',
+  'html',
+  'xhtml',
+}
 
 local function get_language_id(_, filetype)
   local language_id = language_id_mapping[filetype]
