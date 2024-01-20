@@ -11383,6 +11383,10 @@ require'lspconfig'.vale_ls.setup{}
   ```lua
   see source file
   ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## vdmj
