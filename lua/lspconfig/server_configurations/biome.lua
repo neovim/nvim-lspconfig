@@ -12,12 +12,8 @@ return {
       'typescript.tsx',
       'typescriptreact',
     },
-    root_dir = function(fname)
-      return util.find_package_json_ancestor(fname)
-        or util.find_node_modules_ancestor(fname)
-        or util.find_git_ancestor(fname)
-    end,
-    single_file_support = true,
+    root_dir = util.root_pattern 'biome.json',
+    single_file_support = false,
   },
   docs = {
     description = [[
@@ -30,7 +26,7 @@ npm install [-g] @biomejs/biome
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern('package.json', 'node_modules', '.git', 'biome.json')]],
+      root_dir = [[root_pattern('biome.json')]],
     },
   },
 }
