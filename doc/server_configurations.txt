@@ -1239,11 +1239,11 @@ require'lspconfig'.biome.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern('package.json', 'node_modules', '.git', 'biome.json')
+  root_pattern('biome.json')
   ```
   - `single_file_support` : 
   ```lua
-  true
+  false
   ```
 
 
