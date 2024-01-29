@@ -5918,6 +5918,16 @@ require'lspconfig'.mdx_analyzer.setup{}
   ```lua
   { "markdown.mdx" }
   ```
+  - `init_options` : 
+  ```lua
+  {
+    typescript = {}
+  }
+  ```
+  - `on_new_config` : 
+  ```lua
+  see source file
+  ```
   - `root_dir` : 
   ```lua
   see source file
