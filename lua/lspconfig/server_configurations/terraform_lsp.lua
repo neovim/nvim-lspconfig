@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'terraform-lsp' },
-    filetypes = { 'terraform', 'hcl' },
+    filetypes = { 'terraform', 'hcl', 'tf' },
     root_dir = util.root_pattern('.terraform', '.git'),
   },
   docs = {
