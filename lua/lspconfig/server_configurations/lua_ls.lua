@@ -21,7 +21,7 @@ return {
       end
       root = util.root_pattern 'lua/'(fname)
       if root then
-        return root .. '/lua/'
+        return root
       end
       return util.find_git_ancestor(fname)
     end,

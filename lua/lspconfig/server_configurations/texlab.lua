@@ -82,7 +82,7 @@ return {
   default_config = {
     cmd = { 'texlab' },
     filetypes = { 'tex', 'plaintex', 'bib' },
-    root_dir = util.root_pattern('.latexmkrc', '.git'),
+    root_dir = util.root_pattern('.git', '.latexmkrc'),
     single_file_support = true,
     settings = {
       texlab = {

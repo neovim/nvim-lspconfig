@@ -1239,11 +1239,11 @@ require'lspconfig'.biome.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern('package.json', 'node_modules', '.git', 'biome.json')
+  root_pattern('biome.json')
   ```
   - `single_file_support` : 
   ```lua
-  true
+  false
   ```
 
 
@@ -5917,6 +5917,16 @@ require'lspconfig'.mdx_analyzer.setup{}
   - `filetypes` : 
   ```lua
   { "markdown.mdx" }
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    typescript = {}
+  }
+  ```
+  - `on_new_config` : 
+  ```lua
+  see source file
   ```
   - `root_dir` : 
   ```lua
@@ -11382,6 +11392,10 @@ require'lspconfig'.vale_ls.setup{}
   - `root_dir` : 
   ```lua
   see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
   ```
 
 

@@ -139,6 +139,9 @@ function configs.__newindex(t, config_name, config_def)
           api.nvim_create_autocmd('BufReadPost', {
             pattern = fn.fnameescape(root_dir) .. '/*',
             callback = function(arg)
+              if #M.manager:clients() == 0 then
+                return true
+              end
               M.manager:try_add_wrapper(arg.buf, root_dir)
             end,
             group = lsp_group,
