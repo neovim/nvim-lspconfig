@@ -10294,7 +10294,7 @@ require'lspconfig'.swift_mesonls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  util.root_pattern("meson_options.txt", ".git")
+  util.root_pattern("meson_options.txt", "meson.options", ".git")
   ```
 
 
