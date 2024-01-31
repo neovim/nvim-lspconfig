@@ -5637,7 +5637,7 @@ require'lspconfig'.ltex.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc", "quarto", "rmd" }
+  { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc", "quarto", "rmd", "context", "html", "xhtml" }
   ```
   - `get_language_id` : 
   ```lua
@@ -5646,6 +5646,14 @@ require'lspconfig'.ltex.setup{}
   - `root_dir` : 
   ```lua
   see source file
+  ```
+  - `settings` : 
+  ```lua
+  {
+    ltex = {
+      enabled = { "bibtex", "gitcommit", "markdown", "org", "tex", "restructuredtext", "rsweave", "latex", "quarto", "rmd", "context", "html", "xhtml" }
+    }
+  }
   ```
   - `single_file_support` : 
   ```lua
