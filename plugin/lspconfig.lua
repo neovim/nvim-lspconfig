@@ -40,12 +40,12 @@ end
 local get_clients_from_cmd_args = function(arg)
   local result = {}
   for id in (arg or ''):gmatch '(%d+)' do
-    result[id] = lsp.get_client_by_id(tonumber(id))
+    result[#result + 1] = lsp.get_client_by_id(tonumber(id))
   end
-  if vim.tbl_isempty(result) then
+  if #result == 0 then
     return require('lspconfig.util').get_managed_clients()
   end
-  return vim.tbl_values(result)
+  return result
 end
 
 for group, hi in pairs {
