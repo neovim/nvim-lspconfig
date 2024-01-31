@@ -4559,6 +4559,10 @@ require'lspconfig'.helm_ls.setup{}
 
 
 **Default values:**
+  - `capabilities` : 
+  ```lua
+  default capabilities, with dynamicRegistration for didChangeWatchedFiles true
+  ```
   - `cmd` : 
   ```lua
   { "helm_ls", "serve" }
