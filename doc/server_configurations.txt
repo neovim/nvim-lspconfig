@@ -11209,6 +11209,10 @@ require'lspconfig'.typst_lsp.setup{}
   ```lua
   see source file
   ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## uiua
