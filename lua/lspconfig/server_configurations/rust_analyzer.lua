@@ -19,12 +19,13 @@ local function is_library(fname)
   local user_home = util.path.sanitize(vim.env.HOME)
   local cargo_home = os.getenv 'CARGO_HOME' or util.path.join(user_home, '.cargo')
   local registry = util.path.join(cargo_home, 'registry', 'src')
+  local git_registry = util.path.join(cargo_home, 'git', 'checkouts')
 
   local rustup_home = os.getenv 'RUSTUP_HOME' or util.path.join(user_home, '.rustup')
   local toolchains = util.path.join(rustup_home, 'toolchains')
 
-  for _, item in ipairs { toolchains, registry } do
-    if fname:sub(1, #item) == item then
+  for _, item in ipairs { toolchains, registry, git_registry } do
+    if util.path.is_descendant(item, fname) then
       local clients = vim.lsp.get_active_clients { name = 'rust_analyzer' }
       return #clients > 0 and clients[#clients].config.root_dir or nil
     end
