@@ -4823,7 +4823,7 @@ require'lspconfig'.html.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "html" }
+  { "html", "templ" }
   ```
   - `init_options` : 
   ```lua
@@ -4876,7 +4876,7 @@ require'lspconfig'.htmx.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "html" }
+  { "html", "templ" }
   ```
   - `root_dir` : 
   ```lua
@@ -10410,14 +10410,15 @@ require'lspconfig'.tailwindcss.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte" }
+  { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
   ```
   - `init_options` : 
   ```lua
   {
     userLanguages = {
       eelixir = "html-eex",
-      eruby = "erb"
+      eruby = "erb",
+      templ = "html"
     }
   }
   ```
