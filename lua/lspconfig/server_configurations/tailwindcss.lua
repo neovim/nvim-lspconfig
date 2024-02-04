@@ -59,11 +59,13 @@ return {
       -- mixed
       'vue',
       'svelte',
+      'templ',
     },
     init_options = {
       userLanguages = {
         eelixir = 'html-eex',
         eruby = 'erb',
+        templ = 'html',
       },
     },
     settings = {
