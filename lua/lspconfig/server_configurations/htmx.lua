@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'htmx-lsp' },
-    filetypes = { 'html' },
+    filetypes = { 'html', 'templ' },
     single_file_support = true,
     root_dir = function(fname)
       return util.find_git_ancestor(fname)
