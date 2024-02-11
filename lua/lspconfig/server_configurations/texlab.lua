@@ -70,7 +70,7 @@ return {
   default_config = {
     cmd = { 'texlab' },
     filetypes = { 'tex', 'plaintex', 'bib' },
-    root_dir = util.root_pattern('.git', '.latexmkrc'),
+    root_dir = util.root_pattern('.git', '.latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic.toml'),
     single_file_support = true,
     settings = {
       texlab = {
