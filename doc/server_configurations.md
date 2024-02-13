@@ -2692,7 +2692,7 @@ require'lspconfig'.docker_compose_language_service.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("docker-compose.yaml")
+  root_pattern("docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml")
   ```
   - `single_file_support` : 
   ```lua
