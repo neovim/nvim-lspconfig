@@ -2,12 +2,13 @@ local util = require 'lspconfig.util'
 local lsp = vim.lsp
 
 local function buf_cache(bufnr, client)
-  local params = {}
-  params['referrer'] = { uri = vim.uri_from_bufnr(bufnr) }
-  params['uris'] = {}
-  client.request('deno/cache', params, function(err, _result, ctx)
+  local params = {
+    command = 'deno.cache',
+    arguments = { {}, vim.uri_from_bufnr(bufnr) },
+  }
+  client.request('workspace/executeCommand', params, function(err, _result, ctx)
     if err then
-      local uri = ctx.params.referrer.uri
+      local uri = ctx.params.arguments[2]
       vim.api.nvim_err_writeln('cache command failed for ' .. vim.uri_to_fname(uri))
     end
   end, bufnr)
@@ -90,24 +91,14 @@ return {
       ['textDocument/definition'] = denols_handler,
       ['textDocument/typeDefinition'] = denols_handler,
       ['textDocument/references'] = denols_handler,
-      ['workspace/executeCommand'] = function(err, result, context, config)
-        if context.params.command == 'deno.cache' then
-          buf_cache(context.bufnr, vim.lsp.get_client_by_id(context.client_id))
-        else
-          lsp.handlers[context.method](err, result, context, config)
-        end
-      end,
     },
   },
   commands = {
     DenolsCache = {
       function()
-        local clients = vim.lsp.get_active_clients()
-        for _, client in ipairs(clients) do
-          if client.name == 'denols' then
-            buf_cache(0, client)
-            break
-          end
+        local clients = vim.lsp.get_active_clients { bufnr = 0, name = 'denols' }
+        if #clients > 0 then
+          buf_cache(0, clients[#clients])
         end
       end,
       description = 'Cache a module and all of its dependencies.',
