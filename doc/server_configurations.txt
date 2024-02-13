@@ -2527,8 +2527,7 @@ require'lspconfig'.denols.setup{}
   {
     ["textDocument/definition"] = <function 1>,
     ["textDocument/references"] = <function 1>,
-    ["textDocument/typeDefinition"] = <function 1>,
-    ["workspace/executeCommand"] = <function 2>
+    ["textDocument/typeDefinition"] = <function 1>
   }
   ```
   - `root_dir` : 
