@@ -8374,7 +8374,7 @@ require'lspconfig'.quick_lint_js.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "javascript" }
+  { "javascript", "typescript" }
   ```
   - `root_dir` : 
   ```lua
