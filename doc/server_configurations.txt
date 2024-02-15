@@ -9864,9 +9864,15 @@ require'lspconfig'.solidity.setup{}
 
 ## solidity_ls
 
-npm install -g solidity-language-server
+https://github.com/juanfranblanco/vscode-solidity
 
-solidity-language-server is a language server for the solidity language ported from the vscode solidity extension
+`vscode-solidity-server` can be installed via `npm`:
+
+```sh
+npm install -g vscode-solidity-server
+```
+
+`vscode-solidity-server` is a language server for the Solidity language ported from the VSCode "solidity" extension.
 
 
 
@@ -9879,7 +9885,7 @@ require'lspconfig'.solidity_ls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "solidity-language-server", "--stdio" }
+  { "vscode-solidity-server", "--stdio" }
   ```
   - `filetypes` : 
   ```lua
@@ -9887,7 +9893,11 @@ require'lspconfig'.solidity_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".git", "package.json")
+  root_pattern("hardhat.config.js", "hardhat.config.ts", "foundry.toml", "remappings.txt", "truffle.js", "truffle-config.js", "ape-config.yaml", ".git", "package.json")
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
   ```
 
 
