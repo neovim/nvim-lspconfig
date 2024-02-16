@@ -11394,11 +11394,11 @@ require'lspconfig'.typeprof.setup{}
 ## typos_lsp
 
 https://github.com/crate-ci/typos
-https://github.com/tekumara/typos-vscode
+https://github.com/tekumara/typos-lsp
 
 A Language Server Protocol implementation for Typos, a low false-positive
 source code spell checker, written in Rust. Download it from the releases page
-on GitHub: https://github.com/tekumara/typos-vscode/releases
+on GitHub: https://github.com/tekumara/typos-lsp/releases
     
 
 
