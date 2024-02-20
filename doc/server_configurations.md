@@ -677,7 +677,7 @@ require'lspconfig'.arduino_language_server.setup{}
       codeAction = {
         codeActionLiteralSupport = {
           codeActionKind = {
-            valueSet = { "", "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports" }
+            valueSet = { "", "Empty", "QuickFix", "Refactor", "RefactorExtract", "RefactorInline", "RefactorRewrite", "Source", "SourceOrganizeImports", "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports" }
           }
         },
         dataSupport = true,
@@ -3621,7 +3621,7 @@ require'lspconfig'.fennel_ls.setup{}
       codeAction = {
         codeActionLiteralSupport = {
           codeActionKind = {
-            valueSet = { "", "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports" }
+            valueSet = { "", "Empty", "QuickFix", "Refactor", "RefactorExtract", "RefactorInline", "RefactorRewrite", "Source", "SourceOrganizeImports", "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports" }
           }
         },
         dataSupport = true,
@@ -7093,7 +7093,7 @@ require'lspconfig'.ocamllsp.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" }
+  { "ocaml", "menhir", "ocamlinterface", "ocamllex", "reason", "dune" }
   ```
   - `get_language_id` : 
   ```lua
@@ -9124,7 +9124,7 @@ require'lspconfig'.rust_analyzer.setup{}
       codeAction = {
         codeActionLiteralSupport = {
           codeActionKind = {
-            valueSet = { "", "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports" }
+            valueSet = { "", "Empty", "QuickFix", "Refactor", "RefactorExtract", "RefactorInline", "RefactorRewrite", "Source", "SourceOrganizeImports", "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports" }
           }
         },
         dataSupport = true,
