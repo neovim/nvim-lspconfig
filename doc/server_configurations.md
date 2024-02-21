@@ -11362,7 +11362,9 @@ require'lspconfig'.turtle_ls.setup{}
 
 https://github.com/moetelo/twiggy
 
-Can be installed via Mason, which uses the server bundled with the VSCode extension.
+`twiggy-language-server` can be installed via `npm`:
+```sh
+npm install -g twiggy-language-server
 ```
 
 
@@ -11376,7 +11378,7 @@ require'lspconfig'.twig_language_server.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "twig-language-server", "--stdio" }
+  { "twiggy-language-server", "--stdio" }
   ```
   - `filetypes` : 
   ```lua

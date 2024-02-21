@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'twig-language-server', '--stdio' },
+    cmd = { 'twiggy-language-server', '--stdio' },
     filetypes = { 'twig' },
     root_dir = util.root_pattern('composer.json', '.git'),
     single_file_support = true,
@@ -11,7 +11,9 @@ return {
     description = [[
 https://github.com/moetelo/twiggy
 
-Can be installed via Mason, which uses the server bundled with the VSCode extension.
+`twiggy-language-server` can be installed via `npm`:
+```sh
+npm install -g twiggy-language-server
 ```
 ]],
     default_config = {
