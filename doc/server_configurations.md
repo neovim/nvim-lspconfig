@@ -8134,7 +8134,7 @@ require'lspconfig'.purescriptls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern('spago.dhall', 'psc-package.json', 'bower.json', 'flake.nix', 'shell.nix'),
+  root_pattern('bower.json', 'flake.nix', 'psc-package.json', 'shell.nix', 'spago.dhall', 'spago.yaml'),
   ```
 
 
