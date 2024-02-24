@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 
--- set os dependant library path
+-- set os dependent library path
 local function library_path(path)
   path = path or '/usr/local/lib'
   if vim.fn.has 'macunix' then
