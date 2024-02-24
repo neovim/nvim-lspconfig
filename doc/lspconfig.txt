@@ -174,7 +174,7 @@ passed overrides to `setup {}` are:
 
 - {settings} `table <string, string|table|bool>`  
 
-  The `settings` table is sent in `on_init` via a
+  The `settings` table is sent after initialization via a
   `workspace/didChangeConfiguration` notification from the Nvim client to
   the language server. These settings allow a user to change optional runtime
   settings of the language server. 
