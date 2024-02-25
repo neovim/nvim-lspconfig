@@ -225,9 +225,6 @@ function configs.__newindex(t, config_name, config_def)
             settings = settings,
           })
         end
-        if not vim.tbl_isempty(new_config.settings) then
-          client.workspace_did_change_configuration(new_config.settings)
-        end
       end)
 
       -- Save the old _on_attach so that we can reference it via the BufEnter.
