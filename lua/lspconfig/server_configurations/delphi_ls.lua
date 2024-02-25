@@ -10,7 +10,7 @@ return {
       --look for *.delphilsp.json - Delphi lsp config file
       settingsFile = vim.fs.find(function(name)
         return name:match(".*%.delphilsp.json$")
-      end, { limit = math.huge, type = "file", upward = true })[1],
+      end, { limit = 3, type = "file", upward = true })[1],
     },
   },
   docs = {
