@@ -1,13 +1,15 @@
 local util = require 'lspconfig.util'
 
 -- set os dependent library path
-local function library_path(path)
+local function library_path(path, cmd_env)
   path = path or '/usr/local/lib'
-  if vim.fn.has 'macunix' then
-    return { DYLD_LIBRARY_PATH = path }
-  elseif vim.fn.has 'linux' then
-    return { LD_LIBRARY_PATH = path }
+  cmd_env = cmd_env or {}
+  if vim.fn.has 'macunix' and not cmd_env.DYLD_LIBRARY_PATH then
+    cmd_env.DYLD_LIBRARY_PATH = path
+  elseif vim.fn.has 'linux' and not cmd_env.LD_LIBRARY_PATH then
+    cmd_env.LD_LIBRARY_PATH = path
   end
+  return cmd_env
 end
 
 return {
@@ -19,7 +21,7 @@ return {
     libcbqnPath = nil,
     on_new_config = function(new_config, _)
       if new_config.libcbqnPath then
-        new_config.cmd_env = library_path(new_config.libcbqnPath)
+        new_config.cmd_env = library_path(new_config.libcbqnPath, new_config.cmd_env)
       end
     end,
   },

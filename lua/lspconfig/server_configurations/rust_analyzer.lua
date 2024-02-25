@@ -44,6 +44,7 @@ return {
   default_config = {
     cmd = { 'rust-analyzer' },
     filetypes = { 'rust' },
+    single_file_support = true,
     root_dir = function(fname)
       local reuse_active = is_library(fname)
       if reuse_active then

@@ -59,6 +59,8 @@ require'lspconfig'.lua_ls.setup {
             checkThirdParty = false,
             library = {
               vim.env.VIMRUNTIME
+              -- Depending on the usage, you might want to add additional paths here.
+              -- E.g.: For using `vim.*` functions, add vim.env.VIMRUNTIME/lua.
               -- "${3rd}/luv/library"
               -- "${3rd}/busted/library",
             }
