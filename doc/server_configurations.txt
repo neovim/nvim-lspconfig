@@ -9364,6 +9364,10 @@ require'lspconfig'.rust_analyzer.setup{}
   ```lua
   root_pattern("Cargo.toml", "rust-project.json")
   ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## salt_ls
