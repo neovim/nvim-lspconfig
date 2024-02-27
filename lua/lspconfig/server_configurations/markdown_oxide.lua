@@ -1,8 +1,6 @@
 return {
   default_config = {
-    root_dir = function()
-      return vim.fn.getcwd()
-    end, -- this is applicable because markdown vaults have no defined root files
+    root_dir = lspconfig.util.root_pattern('.git', vim.fn.getcwd()),
     filetypes = { 'markdown' },
     cmd = { 'markdown-oxide' },
   },
