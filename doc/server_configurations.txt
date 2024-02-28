@@ -700,6 +700,9 @@ require'lspconfig'.arduino_language_server.setup{}
         completionItemKind = {
           valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
         },
+        completionList = {
+          itemDefaults = { "editRange", "insertTextFormat", "insertTextMode", "data" }
+        },
         contextSupport = false,
         dynamicRegistration = false
       },
@@ -3687,6 +3690,9 @@ require'lspconfig'.fennel_ls.setup{}
         },
         completionItemKind = {
           valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
+        },
+        completionList = {
+          itemDefaults = { "editRange", "insertTextFormat", "insertTextMode", "data" }
         },
         contextSupport = false,
         dynamicRegistration = false
@@ -9220,6 +9226,9 @@ require'lspconfig'.rust_analyzer.setup{}
         completionItemKind = {
           valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
         },
+        completionList = {
+          itemDefaults = { "editRange", "insertTextFormat", "insertTextMode", "data" }
+        },
         contextSupport = false,
         dynamicRegistration = false
       },
@@ -11913,7 +11922,7 @@ require'lspconfig'.veridian.setup{}
 
 ## veryl_ls
 
-https://github.com/dalance/veryl
+https://github.com/veryl-lang/veryl
 
 Language server for Veryl
 
