@@ -46,4 +46,3 @@ lspconfig.harper_ls.setup {
     },
   },
 }
-
