@@ -11134,6 +11134,11 @@ choice:
     - configs designed for other 0.12 versions may work, but interpretation may be inaccurate
   - less stability (due to reliance on Terraform's own internal packages)
 
+Note, that the `settings` configuration option uses the `workspace/didChangeConfiguration` event,
+[which is not supported by terraform-ls](https://github.com/hashicorp/terraform-ls/blob/main/docs/features.md).
+Instead you should use `init_options` which passes the settings as part of the LSP initialize call
+[as is required by terraform-ls](https://github.com/hashicorp/terraform-ls/blob/main/docs/SETTINGS.md#how-to-pass-settings).
+
 
 
 **Snippet to enable the language server:**
@@ -11150,6 +11155,10 @@ require'lspconfig'.terraformls.setup{}
   - `filetypes` : 
   ```lua
   { "terraform", "terraform-vars" }
+  ```
+  - `init_options` : 
+  ```lua
+  {}
   ```
   - `root_dir` : 
   ```lua
