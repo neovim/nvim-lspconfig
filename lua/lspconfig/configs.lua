@@ -5,14 +5,14 @@ local tbl_deep_extend = vim.tbl_deep_extend
 
 local configs = {}
 
---- @class lspconfig.Config : lsp.ClientConfig
+--- @class lspconfig.Config : vim.lsp.ClientConfig
 --- @field enabled? boolean
 --- @field single_file_support? boolean
 --- @field filetypes? string[]
 --- @field filetype? string
 --- @field on_new_config? function
 --- @field autostart? boolean
---- @field package _on_attach? fun(client: lsp.Client, bufnr: integer)
+--- @field package _on_attach? fun(client: vim.lsp.Client, bufnr: integer)
 
 --- @param cmd any
 local function sanitize_cmd(cmd)

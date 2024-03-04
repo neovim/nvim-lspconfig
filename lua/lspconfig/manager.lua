@@ -5,7 +5,7 @@ local uv = vim.loop
 local async = require 'lspconfig.async'
 local util = require 'lspconfig.util'
 
----@param client lsp.Client
+---@param client vim.lsp.Client
 ---@param root_dir string
 ---@return boolean
 local function check_in_workspace(client, root_dir)
@@ -88,7 +88,7 @@ end
 --- @private
 --- @param bufnr integer
 --- @param root_dir string
---- @param client lsp.Client
+--- @param client vim.lsp.Client
 function M:_register_workspace_folders(bufnr, root_dir, client)
   local params = {
     event = {
@@ -160,7 +160,7 @@ end
 --- @param bufnr integer
 --- @param new_config lspconfig.Config
 --- @param root_dir string
---- @param client lsp.Client
+--- @param client vim.lsp.Client
 --- @param single_file boolean
 function M:_attach_or_spawn(bufnr, new_config, root_dir, client, single_file)
   if check_in_workspace(client, root_dir) then
@@ -178,7 +178,7 @@ end
 --- @param bufnr integer
 --- @param new_config lspconfig.Config
 --- @param root_dir string
---- @param client lsp.Client
+--- @param client vim.lsp.Client
 --- @param single_file boolean
 function M:_attach_after_client_initialized(bufnr, new_config, root_dir, client, single_file)
   local timer = assert(vim.loop.new_timer())
@@ -222,7 +222,7 @@ function M:add(root_dir, single_file, bufnr)
   end
 end
 
---- @return lsp.Client[]
+--- @return vim.lsp.Client[]
 function M:clients()
   local res = {}
   for _, client_ids in pairs(self._clients) do
