@@ -1152,7 +1152,7 @@ require'lspconfig'.beancount.setup{}
   - `init_options` : 
   ```lua
   {
-    journalFile = ""
+    journal_file = ""
   }
   ```
   - `root_dir` : 
