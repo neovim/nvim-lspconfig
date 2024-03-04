@@ -8,7 +8,7 @@ return {
     single_file_support = true,
     init_options = {
       -- this is the path to the beancout journal file
-      journalFile = '',
+      journal_file = '',
     },
   },
   docs = {
