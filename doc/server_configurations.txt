@@ -2194,6 +2194,27 @@ require'lspconfig'.css_variables.setup{}
   ```lua
   root_pattern("package.json", ".git") or bufdir
   ```
+  - `settings` : 
+  ```lua
+  cssVariables = {
+    lookupFiles = { '**/*.less', '**/*.scss', '**/*.sass', '**/*.css' },
+    blacklistFolders = {
+      '**/.cache',
+      '**/.DS_Store',
+      '**/.git',
+      '**/.hg',
+      '**/.next',
+      '**/.svn',
+      '**/bower_components',
+      '**/CVS',
+      '**/dist',
+      '**/node_modules',
+      '**/tests',
+      '**/tmp',
+    },
+  },
+        
+  ```
 
 
 ## cssls
