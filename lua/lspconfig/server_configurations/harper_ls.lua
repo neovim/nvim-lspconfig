@@ -24,10 +24,22 @@ return {
   },
   docs = {
     description = [[
-https://github.com/chilipepperhott/harper_ls
+https://github.com/chilipepperhott/harper
 
 The language server for Harper, the slim, clean language checker for developers.
-As of right now, there are no settings to be configured for `harper_ls`.
+
+See [docs](https://github.com/chilipepperhott/harper/tree/master/harper-ls#configuration) for more information on settings.
+
+In short, however, they should look something like this:
+```lua
+lspconfig.harper_ls.setup {
+  settings = {
+    ["harper-ls"] = {
+      userDictPath = "~/dict.txt"
+    }
+  },
+}
+```
     ]],
     default_config = {
       root_dir = [[bufdir]],
