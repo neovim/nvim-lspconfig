@@ -4,7 +4,7 @@ return {
   default_config = {
     cmd = { 'tabby-agent', '--lsp', '--stdio' },
     filetypes = {},
-    root_dir = util.root_pattern '.git',
+    root_dir = util.find_git_ancestor,
     single_file_support = true,
   },
   docs = {
