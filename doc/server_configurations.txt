@@ -11227,10 +11227,6 @@ require'lspconfig'.terraformls.setup{}
   ```lua
   { "terraform", "terraform-vars" }
   ```
-  - `init_options` : 
-  ```lua
-  {}
-  ```
   - `root_dir` : 
   ```lua
   root_pattern(".terraform", ".git")
