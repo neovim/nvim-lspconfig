@@ -11540,6 +11540,37 @@ Here's an example that disables type checking in JavaScript files.
 }
 ```
 
+# Vue support
+
+As of 2.0.0, Volar no longer supports TypeScript itself. Instead, a plugin adds
+adds Vue support to this language server.
+
+```lua
+require'lspconfig'.tsserver.setup{
+  init_options = {
+    plugins = {
+      {
+        name = "@vue/typescript-plugin",
+        location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+        languages = {"javascript", "typescript", "vue"},
+      },
+    },
+  },
+  filetypes = {
+    "javascript",
+    "typescript",
+    "vue",
+  },
+}
+```
+
+`location` MUST be defined. If the plugin is installed in `node_modules`,
+`location` can have any value.
+
+`languages` must include `vue` even if it is listed in `filetypes`.
+
+`filetypes` is extended here to include Vue SFC.
+
 
 
 **Snippet to enable the language server:**
@@ -12378,9 +12409,14 @@ npm install -g @vue/language-server
 Volar by default supports Vue 3 projects. Vue 2 projects need
 [additional configuration](https://github.com/vuejs/language-tools/tree/master/packages/vscode-vue#usage).
 
+**TypeScript support**
+As of release 2.0.0, Volar no longer wraps around tsserver. For typescript
+support, `tsserver` needs to be configured with the `@vue/typescript-plugin`
+plugin.
+
 **Take Over Mode**
 
-Volar can serve as a language server for both Vue and TypeScript via [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471).
+Volar (prior to 2.0.0), can serve as a language server for both Vue and TypeScript via [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471).
 
 To enable Take Over Mode, override the default filetypes in `setup{}` as follows:
 
