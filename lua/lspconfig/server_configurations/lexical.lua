@@ -4,7 +4,7 @@ return {
   default_config = {
     filetypes = { 'elixir', 'eelixir', 'heex', 'surface' },
     root_dir = function(fname)
-      return util.find_git_ancestor(fname) or util.root_pattern 'mix.exs'(fname)
+      return util.root_pattern 'mix.exs'(fname) or util.find_git_ancestor(fname)
     end,
     single_file_support = true,
   },
