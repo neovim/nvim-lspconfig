@@ -5,7 +5,6 @@ return {
     cmd = { 'terraform-ls', 'serve' },
     filetypes = { 'terraform', 'terraform-vars' },
     root_dir = util.root_pattern('.terraform', '.git'),
-    init_options = {},
   },
   docs = {
     description = [[
