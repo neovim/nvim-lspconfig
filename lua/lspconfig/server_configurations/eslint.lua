@@ -40,6 +40,7 @@ local root_file = {
   '.eslintrc.yml',
   '.eslintrc.json',
   'eslint.config.js',
+  'eslint.config.mjs',
 }
 
 return {
@@ -106,7 +107,8 @@ return {
       }
 
       -- Support flat config
-      if vim.fn.filereadable(new_root_dir .. '/eslint.config.js') == 1 then
+      if vim.fn.filereadable(new_root_dir .. '/eslint.config.js') == 1
+          or vim.fn.filereadable(new_root_dir .. '/eslint.config.mjs') == 1 then
         config.settings.experimental.useFlatConfig = true
       end
 
