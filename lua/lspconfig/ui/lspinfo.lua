@@ -120,7 +120,7 @@ local function make_config_info(config, bufnr)
   return lines
 end
 
----@param client table
+---@param client vim.lsp.Client
 ---@param fname string
 local function make_client_info(client, fname)
   local client_info = {}
@@ -200,7 +200,7 @@ return function()
 
   local win_info = windows.percentage_range_window(0.8, 0.7)
   local bufnr, win_id = win_info.bufnr, win_info.win_id
-  api.nvim_buf_set_option(bufnr, 'bufhidden', 'wipe')
+  vim.bo.bufhidden = 'wipe'
 
   local buf_lines = {}
 
@@ -274,8 +274,8 @@ return function()
   local fmt_buf_lines = indent_lines(buf_lines, ' ')
 
   api.nvim_buf_set_lines(bufnr, 0, -1, true, fmt_buf_lines)
-  api.nvim_buf_set_option(bufnr, 'modifiable', false)
-  api.nvim_buf_set_option(bufnr, 'filetype', 'lspinfo')
+  vim.bo.modifiable = false
+  vim.bo.filetype = 'lspinfo'
 
   local augroup = api.nvim_create_augroup('lspinfo', { clear = false })
 

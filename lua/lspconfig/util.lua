@@ -100,6 +100,8 @@ M.path = (function()
     return path:gsub('([%[%]%?%*])', '\\%1')
   end
 
+  --- @param path string
+  --- @return string
   local function sanitize(path)
     if is_windows then
       path = path:sub(1, 1):upper() .. path:sub(2)
@@ -108,19 +110,27 @@ M.path = (function()
     return path
   end
 
+  --- @param filename string
+  --- @return string|false
   local function exists(filename)
     local stat = uv.fs_stat(filename)
     return stat and stat.type or false
   end
 
+  --- @param filename string
+  --- @return boolean
   local function is_dir(filename)
     return exists(filename) == 'directory'
   end
 
+  --- @param filename string
+  --- @return boolean
   local function is_file(filename)
     return exists(filename) == 'file'
   end
 
+  --- @param path string
+  --- @return boolean
   local function is_fs_root(path)
     if is_windows then
       return path:match '^%a:$'
@@ -129,6 +139,8 @@ M.path = (function()
     end
   end
 
+  --- @param filename string
+  --- @return boolean
   local function is_absolute(filename)
     if is_windows then
       return filename:match '^%a:' or filename:match '^\\\\'
@@ -137,13 +149,14 @@ M.path = (function()
     end
   end
 
-  --- @param path string
-  --- @return string?
+  --- @generic T: string?
+  --- @param path T
+  --- @return T
   local function dirname(path)
     local strip_dir_pat = '/([^/]+)$'
     local strip_sep_pat = '/$'
     if not path or #path == 0 then
-      return
+      return path
     end
     local result = path:gsub(strip_sep_pat, ''):gsub(strip_dir_pat, '')
     if #result == 0 then
