@@ -685,7 +685,7 @@ require'lspconfig'.arduino_language_server.setup{}
       codeAction = {
         codeActionLiteralSupport = {
           codeActionKind = {
-            valueSet = { "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports" }
+            valueSet = { "", "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports" }
           }
         },
         dataSupport = true,
@@ -3799,7 +3799,7 @@ require'lspconfig'.fennel_ls.setup{}
       codeAction = {
         codeActionLiteralSupport = {
           codeActionKind = {
-            valueSet = { "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports" }
+            valueSet = { "", "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports" }
           }
         },
         dataSupport = true,
@@ -9415,7 +9415,7 @@ require'lspconfig'.rust_analyzer.setup{}
       codeAction = {
         codeActionLiteralSupport = {
           codeActionKind = {
-            valueSet = { "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports" }
+            valueSet = { "", "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports" }
           }
         },
         dataSupport = true,
