@@ -46,7 +46,7 @@ Here's an example that disables type checking in JavaScript files.
 
 ### Vue support
 
-As of 2.0.0, Volar no longer supports TypeScript itself. Instead, a plugin adds
+As of 2.0.0, Volar no longer supports TypeScript itself. Instead, a plugin
 adds Vue support to this language server.
 
 *IMPORTANT*: It is crucial to ensure that `@vue/typescript-plugin` and `volar `are of identical versions.
