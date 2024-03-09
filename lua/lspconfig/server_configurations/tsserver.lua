@@ -49,7 +49,7 @@ Here's an example that disables type checking in JavaScript files.
 As of 2.0.0, Volar no longer supports TypeScript itself. Instead, a plugin adds
 adds Vue support to this language server.
 
-*IMPORTENT*: It is crucial to ensure that `@vue/typescript-plugin` and `volar `are of identical versions.
+*IMPORTANT*: It is crucial to ensure that `@vue/typescript-plugin` and `volar `are of identical versions.
 
 ```lua
 require'lspconfig'.tsserver.setup{
