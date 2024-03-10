@@ -12,7 +12,7 @@ return {
       'typescript.tsx',
       'typescriptreact',
     },
-    root_dir = util.root_pattern 'biome.json',
+    root_dir = util.root_pattern('biome.json', 'biome.jsonc'),
     single_file_support = false,
   },
   docs = {
@@ -26,7 +26,7 @@ npm install [-g] @biomejs/biome
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern('biome.json')]],
+      root_dir = [[root_pattern('biome.json', 'biome.jsonc')]],
     },
   },
 }
