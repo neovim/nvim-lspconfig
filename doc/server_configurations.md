@@ -6083,6 +6083,19 @@ To support org files or R sweave, users can define a custom filetype autocommand
 vim.cmd [[ autocmd BufRead,BufNewFile *.org set filetype=org ]]
 ```
 
+**Load vim's build-in dictionary** 
+
+By default ltex maintains its own dictionary, but you can add vim's build-in dictionary to it (the one that words were added to when you trigger `zg`).
+```
+   settings = {
+    ltex = {
+      language = 'en',
+      dictionary = {
+        ['en'] = {":~/.vim/spell/en.utf-8.add"}, -- or neovim equivalent ~/.config/nvim/spell/en.utf-8.add
+      },
+    },
+```
+Notice that it seems that the default config won't send `$lang` or system locale to ltex, so if you want to specify a language you need to do it by putting both `language=` and then `dictionary = { ['Klingon']={"nuqneH"},}`.
 
 
 **Snippet to enable the language server:**
