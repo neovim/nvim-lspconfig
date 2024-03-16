@@ -5,10 +5,6 @@ return {
     root_dir = function()
       return vim.fn.getcwd()
     end,
-    settings = {
-      -- doesn't export PDF by default
-      exportPdf = "never", 
-    },
   },
   docs = {
     description = [[
