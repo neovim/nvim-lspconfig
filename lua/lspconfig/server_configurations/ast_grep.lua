@@ -19,7 +19,6 @@ return {
       'lua',
     },
     root_dir = util.root_pattern('sgconfig.yaml', 'sgconfig.yml'),
-    single_file_support = true,
   },
   docs = {
     description = [[
