@@ -6,7 +6,8 @@ return {
       return vim.fn.getcwd()
     end,
     settings = {
-      exportPdf = "never", -- doesn't export PDF by default
+      -- doesn't export PDF by default
+      exportPdf = "never", 
     },
   },
   docs = {
