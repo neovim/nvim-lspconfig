@@ -11,7 +11,7 @@ return {
         return vim.fn.getcwd()
       end
     end,
-    single_file_support = true,
+    single_file_support = false,
   },
   docs = {
     description = [[
