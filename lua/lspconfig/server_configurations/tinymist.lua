@@ -4,13 +4,7 @@ return {
   default_config = {
     cmd = { 'tinymist' },
     filetypes = { 'typst' },
-    root_dir = function(fname)
-      if util.find_git_ancestor(fname) then
-        return util.find_git_ancestor(fname)
-      else
-        return vim.fn.getcwd()
-      end
-    end,
+    root_dir = util.find_git_ancestor,
     single_file_support = false,
   },
   docs = {
