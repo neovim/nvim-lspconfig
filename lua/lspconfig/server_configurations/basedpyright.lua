@@ -49,7 +49,7 @@ return {
     end,
     single_file_support = true,
     settings = {
-      python = {
+      basedpyright = {
         analysis = {
           autoSearchPaths = true,
           useLibraryCodeForTypes = true,
