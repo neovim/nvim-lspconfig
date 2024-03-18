@@ -1115,7 +1115,7 @@ require'lspconfig'.basedpyright.setup{}
   - `settings` : 
   ```lua
   {
-    python = {
+    basedpyright = {
       analysis = {
         autoSearchPaths = true,
         diagnosticMode = "openFilesOnly",
