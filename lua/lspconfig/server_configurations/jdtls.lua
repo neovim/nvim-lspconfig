@@ -77,6 +77,8 @@ local function on_language_status(_, result)
 end
 
 local root_files = {
+  -- Multi-module projects
+  { '.git', 'build.gradle', 'build.gradle.kts' },
   -- Single-module projects
   {
     'build.xml', -- Ant
@@ -84,8 +86,6 @@ local root_files = {
     'settings.gradle', -- Gradle
     'settings.gradle.kts', -- Gradle
   },
-  -- Multi-module projects
-  { 'build.gradle', 'build.gradle.kts' },
 }
 
 return {
