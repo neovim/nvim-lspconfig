@@ -203,8 +203,7 @@ function M:add(root_dir, single_file, bufnr)
   local new_config = self.make_config(root_dir)
   local client = get_client(self._clients, root_dir, new_config.name)
 
-  ---If single_file_mode is false then root_dir should match client otherwise start a new client
-  if not client or (not single_file and client.config.root_dir and client.config.root_dir ~= root_dir) then
+  if not client then
     return self:_start_new_client(bufnr, new_config, root_dir, single_file)
   end
 
