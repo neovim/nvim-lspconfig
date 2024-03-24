@@ -109,6 +109,18 @@ function configs.__newindex(t, config_name, config_def)
           config.name
         ),
       })
+
+      api.nvim_create_autocmd('BufUnload', {
+        callback = function(opt)
+          M.manager:remove(opt.buf)
+        end,
+        group = lsp_group,
+        desc = string.format(
+        'Unload server %s if not used anymore.',
+        config.name
+        ),
+      })
+
     end
 
     local get_root_dir = config.root_dir
