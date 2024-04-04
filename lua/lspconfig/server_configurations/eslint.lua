@@ -41,6 +41,10 @@ local root_file = {
   '.eslintrc.json',
   'eslint.config.js',
   'eslint.config.mjs',
+  'eslint.config.cjs',
+  'eslint.config.ts',
+  'eslint.config.mts',
+  'eslint.config.cts',
 }
 
 return {
@@ -110,6 +114,10 @@ return {
       if
         vim.fn.filereadable(new_root_dir .. '/eslint.config.js') == 1
         or vim.fn.filereadable(new_root_dir .. '/eslint.config.mjs') == 1
+        or vim.fn.filereadable(new_root_dir .. '/eslint.config.cjs') == 1
+        or vim.fn.filereadable(new_root_dir .. '/eslint.config.ts') == 1
+        or vim.fn.filereadable(new_root_dir .. '/eslint.config.mts') == 1
+        or vim.fn.filereadable(new_root_dir .. '/eslint.config.cts') == 1
       then
         config.settings.experimental.useFlatConfig = true
       end

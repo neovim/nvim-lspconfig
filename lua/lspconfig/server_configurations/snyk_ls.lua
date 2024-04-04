@@ -6,7 +6,9 @@ return {
     root_dir = util.root_pattern '.git',
     single_file_support = true,
     settings = {},
-    init_options = {},
+    init_options = {
+      activateSnykCode = 'true',
+    },
   },
   docs = {
     description = [[
