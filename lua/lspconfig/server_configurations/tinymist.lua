@@ -4,8 +4,10 @@ return {
   default_config = {
     cmd = { 'tinymist' },
     filetypes = { 'typst' },
-    root_dir = util.find_git_ancestor,
-    single_file_support = false,
+    root_dir = function()
+      return vim.fn.getcwd()
+    end,
+    single_file_support = true,
   },
   docs = {
     description = [[
