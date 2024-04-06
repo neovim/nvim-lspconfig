@@ -38,8 +38,6 @@ CSS variables autocompletion and go-to-definition
 ```sh
 npm i -g css-variables-language-server
 ```
-
-```
 ]],
     default_config = {
       root_dir = [[root_pattern("package.json", ".git") or bufdir]],
