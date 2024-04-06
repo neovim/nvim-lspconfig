@@ -2226,8 +2226,6 @@ CSS variables autocompletion and go-to-definition
 npm i -g css-variables-language-server
 ```
 
-```
-
 
 
 **Snippet to enable the language server:**
