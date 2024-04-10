@@ -30,6 +30,8 @@ local filetypes = {
   'context',
   'html',
   'xhtml',
+  'mail',
+  'text',
 }
 
 local function get_language_id(_, filetype)
