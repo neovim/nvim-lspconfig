@@ -4,7 +4,7 @@ return {
   default_config = {
     cmd = { 'als' },
     filetypes = { 'agda' },
-    root_dir = util.root_pattern('.git', '.agda-lib'),
+    root_dir = util.root_pattern('.git', '*.agda-lib'),
     single_file_support = true,
   },
   docs = {
