@@ -16,7 +16,7 @@ A Perl language server. It can be installed via npm:
 ```sh
 npm i -g perlnavigator-server
 ```
-    
+
 At minimum, you will need `perl` in your path. If you want to use a non-standard `perl` you will need to set your configuration like so:
 ```lua
 settings = {
