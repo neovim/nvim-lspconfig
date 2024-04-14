@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'yaml-language-server', '--stdio' },
-    filetypes = { 'yaml', 'yaml.docker-compose' },
+    filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
     settings = {
