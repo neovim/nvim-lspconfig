@@ -4551,18 +4551,18 @@ require'lspconfig'.gitlab_ci_ls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "yaml" }
+  { "yaml.gitlab" }
   ```
   - `init_options` : 
   ```lua
   {
-    cache_path = "/home/user/.cache/gitlab-ci-ls/",
-    log_path = "/home/user/.cache/gitlab-ci-ls//log/gitlab-ci-ls.log"
+    cache_path = "util.path.join(vim.loop.os_homedir(), '.cache/gitlab-ci-ls/')",
+    log_path = "util.path.join(util.path.join(vim.loop.os_homedir(), '.cache/gitlab-ci-ls/'), 'log/gitlab-ci-ls.log')"
   }
   ```
   - `root_dir` : 
   ```lua
-  <function 1>
+  util.root_pattern('.gitlab*', '.git')
   ```
 
 
@@ -13324,7 +13324,7 @@ require'lspconfig'.yamlls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "yaml", "yaml.docker-compose" }
+  { "yaml", "yaml.docker-compose", "yaml.gitlab" }
   ```
   - `root_dir` : 
   ```lua
