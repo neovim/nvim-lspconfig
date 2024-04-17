@@ -15,7 +15,7 @@
     in {
       devShells = forAllSystems (pkgs: {
         default = with pkgs; mkShell {
-          buildInputs = [
+          packages = [
             stylua
             luaPackages.luacheck
             luajitPackages.vusted
