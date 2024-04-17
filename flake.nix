@@ -3,14 +3,18 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system}; in
-      rec {
-        devShell = with pkgs; mkShell {
+    let
+      forAllSystems = function: nixpkgs.lib.genAttrs [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ] (system: function nixpkgs.legacyPackages.${system});
+    in {
+      devShells = forAllSystems (pkgs: {
+        default = with pkgs; mkShell {
           buildInputs = [
             stylua
             luaPackages.luacheck
@@ -18,6 +22,6 @@
             selene
           ];
         };
-      }
-    );
+      });
+    };
 }
