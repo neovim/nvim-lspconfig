@@ -10334,13 +10334,17 @@ require'lspconfig'.snyk_ls.setup{}
   ```lua
   { "snyk-ls" }
   ```
+  - `filetypes` : 
+  ```lua
+  { "go", "gomod", "javascript", "typescript", "json", "python", "requirements", "helm", "yaml" }
+  ```
   - `init_options` : 
   ```lua
   Configuration from https://github.com/snyk/snyk-ls#configuration-1
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".git")
+  root_pattern(".git", ".snyk")
   ```
   - `settings` : 
   ```lua
