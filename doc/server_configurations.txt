@@ -6658,6 +6658,10 @@ require'lspconfig'.markdown_oxide.setup{}
   ```lua
   see source file
   ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
 
 
 ## marksman
