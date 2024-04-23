@@ -2703,7 +2703,7 @@ require'lspconfig'.debputy.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "debcontrol", "debchangelog", "make" }
+  { "debcontrol", "debcopyright", "debchangelog", "make", "yaml" }
   ```
   - `root_dir` : 
   ```lua
