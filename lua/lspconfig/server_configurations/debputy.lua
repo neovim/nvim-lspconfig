@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'debputy', 'lsp', 'server' },
-    filetypes = { 'debcontrol', 'debchangelog', 'make' },
+    filetypes = { 'debcontrol', 'debcopyright', 'debchangelog', 'make', 'yaml' },
     root_dir = util.root_pattern 'debian',
   },
   docs = {
