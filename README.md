@@ -4,7 +4,7 @@
 
 * **Do not file Nvim LSP client issues here.** The Nvim LSP client does not live here. This is only a collection of LSP configs.
 * If you found a bug in the Nvim LSP client, [report it at the Nvim core repo](https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&template=lsp_bug_report.yml).
-* These configs are **best-effort and unsupported.** See [contributions](#contributions).
+* These configs are **best-effort and supported by the community.** See [contributions](#contributions).
 
 See also `:help lspconfig`.
 
@@ -13,7 +13,12 @@ See also `:help lspconfig`.
 [![LuaRocks](https://img.shields.io/luarocks/v/neovim/nvim-lspconfig?logo=lua&color=purple)](https://luarocks.org/modules/neovim/nvim-lspconfig)
 
 * Requires neovim version 0.8 above. Update Nvim and nvim-lspconfig before reporting an issue.
-* Install nvim-lspconfig as a normal plugin through neovim builtin `packadd` or a plugin manager
+
+* Install nvim-lspconfig using builtin packages:
+
+      git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
+
+* Alternatively, nvim-lspconfig can be installed using a 3rd party plugin manager (consult the documentation for your plugin manager for details).
 
 ## Quickstart
 
@@ -29,68 +34,74 @@ See also `:help lspconfig`.
    ```
    nvim main.py
    ```
-4. Run `:LspInfo` to see the status or to troubleshoot.
-5. See [Suggested configuration](#Suggested-configuration) to setup common mappings and omnifunc completion.
+4. Run `:checkhealth lsp` to see the status or to troubleshoot.
 
 See [server_configurations.md](doc/server_configurations.md) (`:help lspconfig-all` from Nvim) for the full list of configs, including installation instructions and additional, optional, customization suggestions for each language server. For servers that are not on your system path (e.g., `jdtls`, `elixirls`), you must manually add `cmd` to the `setup` parameter. Most language servers can be installed in less than a minute.
 
-## Suggested configuration
+## Configuration
 
-nvim-lspconfig does not set keybindings or enable completion by default. The following example configuration provides suggested keymaps for the most commonly used language server functions, and manually triggered completion with omnifunc (\<c-x\>\<c-o\>).
+Nvim sets some default options whenever a buffer attaches to an LSP client. See [`:h lsp-config`][lsp-config] for more details. In particular, the following options are set:
+
+* [`'tagfunc'`][tagfunc]
+  - Enables "go to definition" capabilities using [`<C-]>`][tagjump] and other [tag commands][tag-commands].
+* [`'omnifunc'`][omnifunc]
+  - Enables (manual) omni mode completion with `<C-X><C-O>` in Insert mode. For *auto*completion, an [autocompletion plugin](https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion) is required.
+* [`'formatexpr'`][formatexpr]
+  - Enables LSP formatting with [`gq`][gq].
+
+Nvim also maps `K` to [`vim.lsp.buf.hover()`][vim.lsp.buf.hover] in Normal mode.
+
+[lsp-config]: https://neovim.io/doc/user/lsp.html#lsp-config
+[tagfunc]: https://neovim.io/doc/user/tagsrch.html#tag-function
+[omnifunc]: https://neovim.io/doc/user/options.html#'omnifunc'
+[formatexpr]: https://neovim.io/doc/user/options.html#'formatexpr'
+[gq]: https://neovim.io/doc/user/change.html#gq
+[vim.lsp.buf.hover]: https://neovim.io/doc/user/lsp.html#vim.lsp.buf.hover()
+[tagjump]: https://neovim.io/doc/user/tagsrch.html#CTRL-%5D
+[tag-commands]: https://neovim.io/doc/user/tagsrch.html#tag-commands
+
+Further customization can be achieved using the [`LspAttach`][LspAttach] autocommand event. Example:
+
+[LspAttach]: https://neovim.io/doc/user/lsp.html#LspAttach
+
 
 ```lua
--- Setup language servers.
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    vim.keymap.set('n', 'crr', vim.lsp.buf.rename, { buffer = args.buf })
+    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, { buffer = args.buf })
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = args.buf })
+  end,
+})
+```
+
+See [`:h lsp-buf`][lsp-buf] for details on other LSP functions.
+
+[lsp-buf]: https://neovim.io/doc/user/lsp.html#lsp-buf
+
+The [`LspDetach`][LspAttach] autocommand event can be used to "cleanup" mappings if a buffer becomes detached from an LSP server:
+
+```lua
+vim.api.nvim_create_autocmd('LspDetach', {
+  callback = function(args)
+    vim.keymap.del('n', 'crr', { buffer = args.buf })
+    vim.keymap.set({ 'n', 'v' }, '<space>ca', { buffer = args.buf })
+    vim.keymap.set('n', 'gr', { buffer = args.buf })
+  end,
+})
+```
+
+Additional configuration options can be provided for each LSP server by passing arguments to the `setup` function. See `:h lspconfig-setup` for details. Example:
+
+```lua
 local lspconfig = require('lspconfig')
-lspconfig.pyright.setup {}
-lspconfig.tsserver.setup {}
 lspconfig.rust_analyzer.setup {
   -- Server-specific settings. See `:help lspconfig-setup`
   settings = {
     ['rust-analyzer'] = {},
   },
 }
-
-
--- Global mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-
--- Use LspAttach autocommand to only map the following keys
--- after the language server attaches to the current buffer
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-  callback = function(ev)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-    -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wl', function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<space>f', function()
-      vim.lsp.buf.format { async = true }
-    end, opts)
-  end,
-})
 ```
-
-Manual, triggered completion is provided by Nvim's builtin omnifunc. For *auto*completion, a general purpose [autocompletion plugin](https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion) is required.
 
 ## Troubleshooting
 
