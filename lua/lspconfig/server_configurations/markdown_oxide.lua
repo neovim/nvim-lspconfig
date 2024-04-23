@@ -2,8 +2,9 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    root_dir = util.find_git_ancestor,
-    single_file_support = true,
+    root_dir = function(fname, _)
+      return require("lspconfig").util.root_pattern('.git', '.obsidian', '.moxide.toml')(fname) or vim.uv.cwd()
+    end,
     filetypes = { 'markdown' },
     cmd = { 'markdown-oxide' },
   },
