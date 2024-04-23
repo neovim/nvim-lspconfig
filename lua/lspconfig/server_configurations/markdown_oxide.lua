@@ -1,9 +1,10 @@
 return {
   default_config = {
     root_dir = function(fname, _)
-      return require("lspconfig").util.root_pattern('.git', '.obsidian', '.moxide.toml')(fname) or vim.uv.cwd()
+      return require('lspconfig').util.root_pattern('.git', '.obsidian', '.moxide.toml')(fname)
     end,
     filetypes = { 'markdown' },
+    single_file_support = true,
     cmd = { 'markdown-oxide' },
   },
   docs = {
