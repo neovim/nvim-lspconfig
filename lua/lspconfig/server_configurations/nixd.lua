@@ -19,7 +19,7 @@ If you are using Nix with Flakes support, run `nix profile install github:nix-co
 Check the repository README for more information.
     ]],
     default_config = {
-      root_dir = [[root_pattern(".nixd.json", "flake.nix",".git")]],
+      root_dir = [[root_pattern("flake.nix",".git")]],
     },
   },
 }
