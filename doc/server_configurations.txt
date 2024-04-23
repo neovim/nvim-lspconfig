@@ -6630,9 +6630,12 @@ require'lspconfig'.m68k.setup{}
 
 https://github.com/Feel-ix-343/markdown-oxide
 
-Markdown language server with advanced linking support made to be completely compatible with Obsidian; An Obsidian Language Server
+Let's record your consciousness! Bring your own text editor!
+Implemented as a language server compatible with any text
+editor, Markdown-Oxide is attempting to be the best PKM
+system for software enthusiasts.
 
-Check the readme to see how to get nvim-cmp properly working.
+Check the readme to see how to properly setup nvim-cmp.
     
 
 
@@ -6654,10 +6657,6 @@ require'lspconfig'.markdown_oxide.setup{}
   - `root_dir` : 
   ```lua
   see source file
-  ```
-  - `single_file_support` : 
-  ```lua
-  true
   ```
 
 
