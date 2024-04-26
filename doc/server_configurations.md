@@ -10369,7 +10369,7 @@ require'lspconfig'.snyk_ls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "go", "gomod", "javascript", "typescript", "json", "python", "requirements", "helm", "yaml" }
+  { "go", "gomod", "javascript", "typescript", "json", "python", "requirements", "helm", "yaml", "terraform", "terraform-vars" }
   ```
   - `init_options` : 
   ```lua
