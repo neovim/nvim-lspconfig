@@ -149,8 +149,13 @@ function M:_start_new_client(bufnr, new_config, root_dir, single_file)
     new_config.root_dir = nil
     new_config.workspace_folders = nil
   end
-  local client_id = lsp.start_client(new_config)
+
+  -- TODO: Replace lsp.start_client with lsp.start
+  local client_id, err = lsp.start_client(new_config)
   if not client_id then
+    if err then
+      vim.notify(err, vim.log.levels.WARN)
+    end
     return
   end
   self:_attach_and_cache(bufnr, root_dir, client_id)
