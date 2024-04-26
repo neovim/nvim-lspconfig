@@ -51,6 +51,15 @@ Nvim sets some default options whenever a buffer attaches to an LSP client. See 
 
 Nvim also maps `K` to [`vim.lsp.buf.hover()`][vim.lsp.buf.hover] in Normal mode.
 
+Nvim 0.10 and newer creates the following default maps unconditionally:
+
+* `crr` in Normal and Visual mode maps to `vim.lsp.buf.code_action()`
+* `crn` in Normal mode maps to `vim.lsp.buf.rename()`
+* `gr` in Normal mode maps to `vim.lsp.buf.references()`
+* `<C-S>` in Insert mode maps to `vim.lsp.buf.signature_help()`
+* `[d` and `]d` map to `vim.diagnostic.goto_prev()` and `vim.diagnostic.goto_next()` (respectively)
+* `<C-W>d` maps to `vim.diagnostic.open_float()`
+
 [lsp-config]: https://neovim.io/doc/user/lsp.html#lsp-config
 [tagfunc]: https://neovim.io/doc/user/tagsrch.html#tag-function
 [omnifunc]: https://neovim.io/doc/user/options.html#'omnifunc'
@@ -60,36 +69,14 @@ Nvim also maps `K` to [`vim.lsp.buf.hover()`][vim.lsp.buf.hover] in Normal mode.
 [tagjump]: https://neovim.io/doc/user/tagsrch.html#CTRL-%5D
 [tag-commands]: https://neovim.io/doc/user/tagsrch.html#tag-commands
 
-Further customization can be achieved using the [`LspAttach`][LspAttach] autocommand event. Example:
-
-[LspAttach]: https://neovim.io/doc/user/lsp.html#LspAttach
-
-
-```lua
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    vim.keymap.set('n', 'crr', vim.lsp.buf.rename, { buffer = args.buf })
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, { buffer = args.buf })
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = args.buf })
-  end,
-})
-```
-
+Further customization can be achieved using the [`LspAttach`][LspAttach] autocommand event.
+The [`LspDetach`][LspAttach] autocommand event can be used to "cleanup" mappings if a buffer becomes detached from an LSP server.
+See [`:h LspAttach`][LspAttach] and [`:h LspDetach`][LspDetach] for details and examples.
 See [`:h lsp-buf`][lsp-buf] for details on other LSP functions.
 
+[LspAttach]: https://neovim.io/doc/user/lsp.html#LspAttach
+[LspDetach]: https://neovim.io/doc/user/lsp.html#LspDetach
 [lsp-buf]: https://neovim.io/doc/user/lsp.html#lsp-buf
-
-The [`LspDetach`][LspAttach] autocommand event can be used to "cleanup" mappings if a buffer becomes detached from an LSP server:
-
-```lua
-vim.api.nvim_create_autocmd('LspDetach', {
-  callback = function(args)
-    vim.keymap.del('n', 'crr', { buffer = args.buf })
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', { buffer = args.buf })
-    vim.keymap.set('n', 'gr', { buffer = args.buf })
-  end,
-})
-```
 
 Additional configuration options can be provided for each LSP server by passing arguments to the `setup` function. See `:h lspconfig-setup` for details. Example:
 
