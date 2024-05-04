@@ -12680,7 +12680,7 @@ require'lspconfig'.vale_ls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "markdown", "text" }
+  { "markdown", "text", "tex" }
   ```
   - `root_dir` : 
   ```lua
