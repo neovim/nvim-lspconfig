@@ -53,11 +53,6 @@ Nvim also maps `K` to [`vim.lsp.buf.hover()`][vim.lsp.buf.hover] in Normal mode.
 
 Nvim 0.10 and newer creates the following default maps unconditionally:
 
-* `crr` in Normal mode maps to `vim.lsp.buf.code_action()`
-* `<C-R>r` and `<C-R><C-R>` in Visual mode map to `vim.lsp.buf.code_action()`
-* `crn` in Normal mode maps to `vim.lsp.buf.rename()`
-* `gr` in Normal mode maps to `vim.lsp.buf.references()`
-* `<C-S>` in Insert mode maps to `vim.lsp.buf.signature_help()`
 * `[d` and `]d` map to `vim.diagnostic.goto_prev()` and `vim.diagnostic.goto_next()` (respectively)
 * `<C-W>d` maps to `vim.diagnostic.open_float()`
 
