@@ -3450,7 +3450,10 @@ require'lspconfig'.elmls.setup{}
   - `init_options` : 
   ```lua
   {
-    elmAnalyseTrigger = "change"
+    disableElmLSDiagnostics = false,
+    elmReviewDiagnostics = "off",
+    onlyUpdateDiagnosticsOnSave = false,
+    skipInstallPackageConfirmation = false
   }
   ```
   - `root_dir` : 
