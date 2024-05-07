@@ -3004,6 +3004,21 @@ https://github.com/rcjsuen/dockerfile-language-server-nodejs
 ```sh
 npm install -g dockerfile-language-server-nodejs
 ```
+
+Additional configuration can be applied in the following way:
+```lua
+require("lspconfig").dockerls.setup {
+    settings = {
+        docker = {
+	    languageserver = {
+	        formatter = {
+		    ignoreMultilineInstructions = true,
+		},
+	    },
+	}
+    }
+}
+```
     
 
 
