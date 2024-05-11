@@ -29,6 +29,8 @@ https://shopify.dev/docs/api/shopify-cli
 ```lua
 require lspconfig.shopify_theme_ls.setup {}
 ```
+
+Note: This LSP already includes Theme Check so you don't need to use the `theme_check` server configuration as well.
 ]],
   },
 }
