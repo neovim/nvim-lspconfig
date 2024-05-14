@@ -1,14 +1,10 @@
 local util = require 'lspconfig.util'
 
-local root_files = {
-  '.pbls.toml',
-}
-
 return {
   default_config = {
     cmd = { 'pbls' },
     filetypes = { 'proto' },
-    root_dir = util.root_pattern(unpack(root_files)) or util.find_git_ancestor(),
+    root_dir = util.root_pattern('.pbls.toml', '.git'),
   },
   docs = {
     description = [[
