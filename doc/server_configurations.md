@@ -7379,11 +7379,7 @@ require'lspconfig'.neocmake.setup{}
 
 https://github.com/elixir-tools/next-ls
 
-`next-ls` can be installed by following the instructions [here](https://www.elixir-tools.dev/docs/next-ls/installation/).
-
-**By default, next-ls sets its `cmd` to `nextls`; this assumes it was installed via [Homebrew](https://www.elixir-tools.dev/docs/next-ls/installation/#homebrew).**
-
-'root_dir' is chosen like this: if two or more directories containing `mix.exs` were found when searching directories upward, the second one (higher up) is chosen, with the assumption that it is the root of an umbrella app. Otherwise the directory containing the single mix.exs that was found is chosen.
+**By default, next-ls does not set its `cmd`. Please see the following [detailed instructions](https://www.elixir-tools.dev/docs/next-ls/installation/) for possible installation methods.**
 
 
 
@@ -7394,17 +7390,13 @@ require'lspconfig'.nextls.setup{}
 
 
 **Default values:**
-  - `cmd` : 
-  ```lua
-  { "nextls" }
-  ```
   - `filetypes` : 
   ```lua
   { "elixir", "eelixir", "heex", "surface" }
   ```
   - `root_dir` : 
   ```lua
-  {{see description above}}
+  see source file
   ```
   - `single_file_support` : 
   ```lua
