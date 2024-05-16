@@ -9136,7 +9136,7 @@ language.
 
 It is released on CRAN and can be easily installed by
 
-```R
+```r
 install.packages("languageserver")
 ```
 
