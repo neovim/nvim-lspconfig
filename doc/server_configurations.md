@@ -3518,12 +3518,12 @@ require'lspconfig'.elp.setup{}
 
 ## ember
 
-https://github.com/lifeart/ember-language-server
+https://github.com/ember-tooling/ember-language-server
 
 `ember-language-server` can be installed via `npm`:
 
 ```sh
-npm install -g @lifeart/ember-language-server
+npm install -g @ember-tooling/ember-language-server
 ```
 
 
