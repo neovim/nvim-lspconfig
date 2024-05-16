@@ -7381,17 +7381,7 @@ https://github.com/elixir-tools/next-ls
 
 `next-ls` can be installed by following the instructions [here](https://www.elixir-tools.dev/docs/next-ls/installation/).
 
-**By default, next-ls doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path or platform. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of your unzipped next-ls.
-
-```lua
-require'lspconfig'.nextls.setup{
-    -- Unix
-    cmd = { "/path/to/next-ls/next_ls_<darwin|linux>_<arm64|amd64>" };
-    -- Windows
-    cmd = { "/path/to/next-ls/next_ls_windows_amd64.exe" };
-    ...
-}
-```
+**By default, next-ls sets its `cmd` to `nextls`; this assumes it was installed via [Homebrew](https://www.elixir-tools.dev/docs/next-ls/installation/#homebrew).**
 
 'root_dir' is chosen like this: if two or more directories containing `mix.exs` were found when searching directories upward, the second one (higher up) is chosen, with the assumption that it is the root of an umbrella app. Otherwise the directory containing the single mix.exs that was found is chosen.
 
@@ -7404,6 +7394,10 @@ require'lspconfig'.nextls.setup{}
 
 
 **Default values:**
+  - `cmd` : 
+  ```lua
+  { "nextls" }
+  ```
   - `filetypes` : 
   ```lua
   { "elixir", "eelixir", "heex", "surface" }
