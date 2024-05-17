@@ -3,7 +3,7 @@ local validate = vim.validate
 local api = vim.api
 local lsp = vim.lsp
 local uv = vim.loop
-local nvim_nine = vim.fn.has 'nvim-0.9' == 1
+local nvim_ten = vim.fn.has 'nvim-0.10' == 1
 
 local is_windows = uv.os_uname().version:match 'Windows'
 
@@ -263,11 +263,11 @@ function M.search_ancestors(startpath, func)
 end
 
 function M.tbl_flatten(t)
-  return nvim_nine and vim.tbl_flatten(t) or vim.iter(t):flatten(math.huge):totable()
+  return nvim_ten and vim.iter(t):flatten(math.huge):totable() or vim.tbl_flatten(t)
 end
 
 local function get_lsp_clients(filter)
-  return nvim_nine and lsp.get_active_clients(filter) or lsp.get_clients(filter)
+  return nvim_ten and lsp.get_clients(filter) or lsp.get_active_clients(filter)
 end
 
 function M.root_pattern(...)
