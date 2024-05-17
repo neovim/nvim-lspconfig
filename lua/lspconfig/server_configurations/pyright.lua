@@ -16,7 +16,7 @@ local function organize_imports()
     arguments = { vim.uri_from_bufnr(0) },
   }
 
-  local clients = vim.lsp.get_active_clients {
+  local clients = util.get_lsp_clients {
     bufnr = vim.api.nvim_get_current_buf(),
     name = 'pyright',
   }
@@ -26,7 +26,7 @@ local function organize_imports()
 end
 
 local function set_python_path(path)
-  local clients = vim.lsp.get_active_clients {
+  local clients = util.get_lsp_clients {
     bufnr = vim.api.nvim_get_current_buf(),
     name = 'pyright',
   }

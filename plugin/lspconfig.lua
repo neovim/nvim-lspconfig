@@ -135,7 +135,7 @@ api.nvim_create_user_command('LspStop', function(info)
   end
 
   if not server_id then
-    local servers_on_buffer = lsp.get_active_clients { bufnr = current_buf }
+    local servers_on_buffer = require('lspconfig.util').get_lsp_clients { bufnr = current_buf }
     for _, client in ipairs(servers_on_buffer) do
       if client.attached_buffers[current_buf] then
         client.stop(force)
