@@ -266,7 +266,7 @@ function M.tbl_flatten(t)
   return nvim_ten and vim.iter(t):flatten(math.huge):totable() or vim.tbl_flatten(t)
 end
 
-local function get_lsp_clients(filter)
+function M.get_lsp_clients(filter)
   return nvim_ten and lsp.get_clients(filter) or lsp.get_active_clients(filter)
 end
 
@@ -342,7 +342,7 @@ function M.insert_package_json(config_files, field, fname)
 end
 
 function M.get_active_clients_list_by_ft(filetype)
-  local clients = get_lsp_clients()
+  local clients = M.get_lsp_clients()
   local clients_list = {}
   for _, client in pairs(clients) do
     local filetypes = client.config.filetypes or {}
@@ -388,7 +388,7 @@ end
 
 function M.get_active_client_by_name(bufnr, servername)
   --TODO(glepnir): remove this for loop when we want only support 0.10+
-  for _, client in pairs(get_lsp_clients { bufnr = bufnr }) do
+  for _, client in pairs(M.get_lsp_clients { bufnr = bufnr }) do
     if client.name == servername then
       return client
     end

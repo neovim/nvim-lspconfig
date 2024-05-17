@@ -1,4 +1,4 @@
-local api, fn, lsp = vim.api, vim.fn, vim.lsp
+local api, fn = vim.api, vim.fn
 local windows = require 'lspconfig.ui.windows'
 local util = require 'lspconfig.util'
 
@@ -188,8 +188,8 @@ return function()
   -- These options need to be cached before switching to the floating
   -- buffer.
   local original_bufnr = api.nvim_get_current_buf()
-  local buf_clients = lsp.get_active_clients { bufnr = original_bufnr }
-  local clients = lsp.get_active_clients()
+  local buf_clients = util.get_lsp_clients { bufnr = original_bufnr }
+  local clients = util.get_lsp_clients()
   local buffer_filetype = vim.bo.filetype
   local fname = api.nvim_buf_get_name(original_bufnr)
 
