@@ -11,12 +11,12 @@ return {
     description = [[
 https://github.com/Feel-ix-343/markdown-oxide
 
-Let's record your consciousness! Bring your own text editor!
-Implemented as a language server compatible with any text
-editor, Markdown-Oxide is attempting to be the best PKM
-system for software enthusiasts.
+Editor Agnostic PKM: you bring the text editor and we
+bring the PKM.
 
-Check the readme to see how to properly setup nvim-cmp.
+Inspired by and compatible with Obsidian. 
+
+Check the readme to see how to properly setup.
     ]],
   },
   commands = {
