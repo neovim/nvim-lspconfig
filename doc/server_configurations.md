@@ -516,7 +516,7 @@ require'lspconfig'.angularls.setup{}
 
 ## ansiblels
 
-https://github.com/ansible/ansible-language-server
+https://github.com/ansible/vscode-ansible
 
 Language server for the ansible configuration management tool.
 
