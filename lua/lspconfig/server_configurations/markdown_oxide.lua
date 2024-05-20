@@ -22,21 +22,21 @@ Check the readme to see how to properly setup.
   commands = {
     Today = {
       function()
-        vim.lsp.buf.execute_command({command="jump", arguments={"today"}})
+        vim.lsp.buf.execute_command { command = 'jump', arguments = { 'today' } }
       end,
-      description = "Open today's daily note"
+      description = "Open today's daily note",
     },
     Tomorrow = {
       function()
-        vim.lsp.buf.execute_command({command="jump", arguments={"tomorrow"}})
+        vim.lsp.buf.execute_command { command = 'jump', arguments = { 'tomorrow' } }
       end,
-      description = "Open tomorrow's daily note"
+      description = "Open tomorrow's daily note",
     },
     Yesterday = {
       function()
-        vim.lsp.buf.execute_command({command="jump", arguments={"yesterday"}})
+        vim.lsp.buf.execute_command { command = 'jump', arguments = { 'yesterday' } }
       end,
-      description = "Open yesterday's daily note"
+      description = "Open yesterday's daily note",
     },
   }
 }
