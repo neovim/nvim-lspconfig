@@ -38,5 +38,5 @@ Check the readme to see how to properly setup.
       end,
       description = "Open yesterday's daily note",
     },
-  }
+  },
 }
