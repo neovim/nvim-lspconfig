@@ -40,4 +40,3 @@ Check the readme to see how to properly setup.
     },
   }
 }
-}
