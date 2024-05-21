@@ -4,7 +4,7 @@ return {
   default_config = {
     cmd = { 'mutt-language-server' },
     filetypes = { 'muttrc', 'neomuttrc' },
-    root_dir = util.find_git_ancestor(),
+    root_dir = util.find_git_ancestor,
     single_file_support = true,
     settings = {},
   },
