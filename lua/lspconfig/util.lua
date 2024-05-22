@@ -263,7 +263,11 @@ function M.search_ancestors(startpath, func)
 end
 
 function M.tbl_flatten(t)
-  return nvim_ten and vim.iter(t):flatten(math.huge):totable() or vim.tbl_flatten(t)
+  if(nvim_ten)then
+    return vim.tbl_flatten(t)
+  else
+    return vim.iter(t):flatten(math.huge):totable()
+  end
 end
 
 function M.get_lsp_clients(filter)
