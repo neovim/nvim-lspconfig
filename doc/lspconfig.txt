@@ -285,7 +285,8 @@ rest are either array values which will be formed into flags for the command,
 or special keys like `description`.
 
 Warning: Commands is deprecated and will be removed in future releases.
-It is recommended to use `vim.api.nvim_create_user_command()` instead in an `on_attach` function.
+It is recommended to use `vim.api.nvim_create_user_command()` instead in an
+|LspAttach| autocommand handler.
 
 Example:
 >
@@ -297,15 +298,16 @@ Example:
     vim.lsp.buf.execute_command(params)
   end
 
-  local on_attach = function(client, bufnr)
-    if client.name == "pyright" then
-      vim.api.nvim_create_user_command("PyrightOrganizeImports", organize_imports, {desc = 'Organize Imports'})
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+      local client = vim.lsp.get_client_by_id(ev.data.client_id)
+      if client.name == "pyright" then
+        vim.api.nvim_create_user_command("PyrightOrganizeImports", organize_imports, {desc = 'Organize Imports'})
+      end
     end
   end
 
-  require("lspconfig")['pyright'].setup({
-    on_attach = on_attach
-  })
+  require("lspconfig")['pyright'].setup{}
 <
 
 The `configs.__newindex` metamethod consumes the config definition and returns
