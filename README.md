@@ -95,7 +95,7 @@ The most common reasons a language server does not start or attach are:
 1. The language server is not installed. nvim-lspconfig does not install language servers for you. You should be able to run the `cmd` defined in each server's Lua module from the command line and see that the language server starts. If the `cmd` is an executable name instead of an absolute path to the executable, ensure it is on your path.
 2. Missing filetype plugins. Certain languages are not detecting by vim/neovim because they have not yet been added to the filetype detection system. Ensure `:set ft?` shows the filetype and not an empty value.
 3. Not triggering root detection. **Some** language servers will only start if it is opened in a directory, or child directory, containing a file which signals the *root* of the project. Most of the time, this is a `.git` folder, but each server defines the root config in the lua file. See [server_configurations.md](doc/server_configurations.md) or the source for the list of root directories.
-4. You must pass `on_attach` and `capabilities` for **each** `setup {}` if you want these to take effect.
+4. You must pass `capabilities` for **each** `setup {}` if you want these to take effect.
 5. **Do not call `setup {}` twice for the same server**. The second call to `setup {}` will overwrite the first.
 
 Before reporting a bug, check your logs and the output of `:LspInfo`. Add the following to your init.vim to enable logging:
