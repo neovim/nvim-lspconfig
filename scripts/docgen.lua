@@ -39,15 +39,12 @@ local function indent(n, s)
 end
 
 local function make_parts(fns)
-  return vim
-    .iter(fns)
-    :map(function(v)
-      if type(v) == 'function' then
-        v = v()
-      end
-      return { v }
-    end)
-    :totable()
+  return util.tbl_flatten(map_list(fns, function(v)
+    if type(v) == 'function' then
+      v = v()
+    end
+    return { v }
+  end))
 end
 
 local function make_section(indentlvl, sep, parts)
