@@ -7,7 +7,7 @@ return {
     filetypes = { 'xml.csproj', 'xml.fsproj', 'sln' },
     root_dir = util.find_git_ancestor,
     init_options = {},
-    cmd = { 'dotnet', host_dll_name }
+    cmd = { 'dotnet', host_dll_name },
   },
   docs = {
     description = [[
