@@ -12589,7 +12589,7 @@ require'lspconfig'.tsserver.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")
+  root_pattern("tsconfig.json", "jsconfig.json", "package.json", ".git")
   ```
   - `single_file_support` : 
   ```lua
