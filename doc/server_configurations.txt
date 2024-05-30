@@ -758,7 +758,10 @@ require'lspconfig'.arduino_language_server.setup{}
           deprecatedSupport = false,
           documentationFormat = { "markdown", "plaintext" },
           preselectSupport = false,
-          snippetSupport = false
+          resolveSupport = {
+            properties = { "additionalTextEdits" }
+          },
+          snippetSupport = true
         },
         completionItemKind = {
           valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
@@ -3940,9 +3943,6 @@ require'lspconfig'.eslint.setup{}
       enable = false,
       mode = "all"
     },
-    experimental = {
-      useFlatConfig = false
-    },
     format = true,
     nodePath = "",
     onIgnoredFiles = "off",
@@ -3953,6 +3953,7 @@ require'lspconfig'.eslint.setup{}
     rulesCustomizations = {},
     run = "onType",
     useESLintClass = false,
+    useFlatConfig = false,
     validate = "on",
     workingDirectory = {
       mode = "location"
@@ -4076,7 +4077,10 @@ require'lspconfig'.fennel_ls.setup{}
           deprecatedSupport = false,
           documentationFormat = { "markdown", "plaintext" },
           preselectSupport = false,
-          snippetSupport = false
+          resolveSupport = {
+            properties = { "additionalTextEdits" }
+          },
+          snippetSupport = true
         },
         completionItemKind = {
           valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
@@ -10181,7 +10185,10 @@ require'lspconfig'.rust_analyzer.setup{}
           deprecatedSupport = false,
           documentationFormat = { "markdown", "plaintext" },
           preselectSupport = false,
-          snippetSupport = false
+          resolveSupport = {
+            properties = { "additionalTextEdits" }
+          },
+          snippetSupport = true
         },
         completionItemKind = {
           valueSet = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }
