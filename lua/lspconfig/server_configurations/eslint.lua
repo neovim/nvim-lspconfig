@@ -71,9 +71,7 @@ return {
       validate = 'on',
       packageManager = nil,
       useESLintClass = false,
-      experimental = {
-        useFlatConfig = false,
-      },
+      useFlatConfig = false,
       codeActionOnSave = {
         enable = false,
         mode = 'all',
@@ -119,7 +117,7 @@ return {
         or vim.fn.filereadable(new_root_dir .. '/eslint.config.mts') == 1
         or vim.fn.filereadable(new_root_dir .. '/eslint.config.cts') == 1
       then
-        config.settings.experimental.useFlatConfig = true
+        config.settings.useFlatConfig = true
       end
 
       -- Support Yarn2 (PnP) projects
