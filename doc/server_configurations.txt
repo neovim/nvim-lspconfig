@@ -3943,6 +3943,9 @@ require'lspconfig'.eslint.setup{}
       enable = false,
       mode = "all"
     },
+    experimental = {
+      useFlatConfig = false
+    },
     format = true,
     nodePath = "",
     onIgnoredFiles = "off",
@@ -3953,7 +3956,6 @@ require'lspconfig'.eslint.setup{}
     rulesCustomizations = {},
     run = "onType",
     useESLintClass = false,
-    useFlatConfig = false,
     validate = "on",
     workingDirectory = {
       mode = "location"
