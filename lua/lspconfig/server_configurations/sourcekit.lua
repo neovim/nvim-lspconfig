@@ -19,7 +19,7 @@ https://github.com/apple/sourcekit-lsp
 Language server for Swift and C/C++/Objective-C.
     ]],
     default_config = {
-      root_dir = [[root_pattern("buildServer.json", "*.xcodeproj", "*.xcworkspace", ".git", "compile_commands.json", "Package.swift")]],
+      root_dir = [[root_pattern("buildServer.json", "*.xcodeproj", "*.xcworkspace", "compile_commands.json", "Package.swift", ".git")]],
     },
   },
 }
