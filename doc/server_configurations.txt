@@ -10735,7 +10735,7 @@ require'lspconfig'.sourcekit.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("buildServer.json", "*.xcodeproj", "*.xcworkspace", ".git", "compile_commands.json", "Package.swift")
+  root_pattern("buildServer.json", "*.xcodeproj", "*.xcworkspace", "compile_commands.json", "Package.swift", ".git")
   ```
 
 
