@@ -10225,6 +10225,10 @@ require'lspconfig'.slint_lsp.setup{}
   ```lua
   { "slint" }
   ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
   - `single_file_support` : 
   ```lua
   true
