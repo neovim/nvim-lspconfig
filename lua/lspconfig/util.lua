@@ -3,6 +3,7 @@ local validate = vim.validate
 local api = vim.api
 local lsp = vim.lsp
 local uv = vim.loop
+local nvim_eleven = vim.fn.has 'nvim-0.11' == 1
 
 local is_windows = uv.os_uname().version:match 'Windows'
 
@@ -170,7 +171,7 @@ M.path = (function()
   end
 
   local function path_join(...)
-    return table.concat(vim.tbl_flatten { ... }, '/')
+    return table.concat(M.tbl_flatten { ... }, '/')
   end
 
   -- Traverse the path calling cb along the way.
@@ -261,8 +262,16 @@ function M.search_ancestors(startpath, func)
   end
 end
 
+function M.tbl_flatten(t)
+  return nvim_eleven and vim.iter(t):flatten(math.huge):totable() or vim.tbl_flatten(t)
+end
+
+function M.get_lsp_clients(filter)
+  return nvim_eleven and lsp.get_clients(filter) or lsp.get_active_clients(filter)
+end
+
 function M.root_pattern(...)
-  local patterns = vim.tbl_flatten { ... }
+  local patterns = M.tbl_flatten { ... }
   return function(startpath)
     startpath = M.strip_archive_subpath(startpath)
     for _, pattern in ipairs(patterns) do
@@ -333,7 +342,7 @@ function M.insert_package_json(config_files, field, fname)
 end
 
 function M.get_active_clients_list_by_ft(filetype)
-  local clients = vim.lsp.get_active_clients()
+  local clients = M.get_lsp_clients()
   local clients_list = {}
   for _, client in pairs(clients) do
     local filetypes = client.config.filetypes or {}
@@ -378,7 +387,8 @@ function M.get_config_by_ft(filetype)
 end
 
 function M.get_active_client_by_name(bufnr, servername)
-  for _, client in pairs(vim.lsp.get_active_clients { bufnr = bufnr }) do
+  --TODO(glepnir): remove this for loop when we want only support 0.10+
+  for _, client in pairs(M.get_lsp_clients { bufnr = bufnr }) do
     if client.name == servername then
       return client
     end

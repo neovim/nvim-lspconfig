@@ -1,9 +1,6 @@
 local util = require 'lspconfig.util'
-local lsp = vim.lsp
 local api = vim.api
 
-local default_capabilities = lsp.protocol.make_client_capabilities()
-default_capabilities.offsetEncoding = { 'utf-8', 'utf-16' }
 local elm_root_pattern = util.root_pattern 'elm.json'
 
 return {
@@ -18,7 +15,13 @@ return {
       end
     end,
     init_options = {
-      elmAnalyseTrigger = 'change',
+      elmReviewDiagnostics = 'off', -- 'off' | 'warning' | 'error'
+      skipInstallPackageConfirmation = false,
+      disableElmLSDiagnostics = false,
+      onlyUpdateDiagnosticsOnSave = false,
+    },
+    capabilities = {
+      offsetEncoding = { 'utf-8', 'utf-16' },
     },
   },
   docs = {

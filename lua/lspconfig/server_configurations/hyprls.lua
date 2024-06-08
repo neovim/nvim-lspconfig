@@ -2,22 +2,21 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'mutt-language-server' },
-    filetypes = { 'muttrc', 'neomuttrc' },
+    cmd = { 'hyprls', '--stdio' },
+    filetypes = { '*.hl', 'hypr*.conf', '.config/hypr/*.conf' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
-    settings = {},
   },
   docs = {
     description = [[
-https://github.com/neomutt/mutt-language-server
+https://github.com/hyprland-community/hyprls
 
-A language server for (neo)mutt's muttrc. It can be installed via pip.
-
+`hyprls` can be installed via `go`:
 ```sh
-pip install mutt-language-server
+go install github.com/ewen-lbh/hyprls/cmd/hyprls@latest
 ```
-  ]],
+
+]],
     default_config = {
       root_dir = [[util.find_git_ancestor]],
     },

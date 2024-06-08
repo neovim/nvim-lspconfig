@@ -4,7 +4,19 @@ return {
   default_config = {
     cmd = { 'snyk-ls' },
     root_dir = util.root_pattern('.git', '.snyk'),
-    filetypes = { 'go', 'gomod', 'javascript', 'typescript', 'json', 'python', 'requirements', 'helm', 'yaml' },
+    filetypes = {
+      'go',
+      'gomod',
+      'javascript',
+      'typescript',
+      'json',
+      'python',
+      'requirements',
+      'helm',
+      'yaml',
+      'terraform',
+      'terraform-vars',
+    },
     single_file_support = true,
     settings = {},
     init_options = {

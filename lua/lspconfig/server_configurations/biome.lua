@@ -14,6 +14,7 @@ return {
       'astro',
       'svelte',
       'vue',
+      'css',
     },
     root_dir = util.root_pattern('biome.json', 'biome.jsonc'),
     single_file_support = false,

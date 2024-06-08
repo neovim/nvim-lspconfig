@@ -1,8 +1,5 @@
 local util = require 'lspconfig.util'
 
-local default_capabilities = vim.lsp.protocol.make_client_capabilities()
-default_capabilities.offsetEncoding = { 'utf-8', 'utf-16' }
-
 return {
   default_config = {
     cmd = { 'fennel-ls' },
@@ -11,7 +8,9 @@ return {
       return util.find_git_ancestor(dir)
     end,
     settings = {},
-    capabilities = default_capabilities,
+    capabilities = {
+      offsetEncoding = { 'utf-8', 'utf-16' },
+    },
   },
   docs = {
     description = [[

@@ -12,7 +12,7 @@ return {
       'typescriptreact',
       'typescript.tsx',
     },
-    root_dir = util.root_pattern('tsconfig.json', 'package.json', 'jsconfig.json', '.git'),
+    root_dir = util.root_pattern('tsconfig.json', 'jsconfig.json', 'package.json', '.git'),
     single_file_support = true,
   },
   docs = {
@@ -82,7 +82,7 @@ require'lspconfig'.tsserver.setup{
 `filetypes` is extended here to include Vue SFC.
 ]],
     default_config = {
-      root_dir = [[root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")]],
+      root_dir = [[root_pattern("tsconfig.json", "jsconfig.json", "package.json", ".git")]],
     },
   },
 }
