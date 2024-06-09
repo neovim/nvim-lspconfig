@@ -25,7 +25,8 @@ local function is_library(fname)
   local toolchains = util.path.join(rustup_home, 'toolchains')
 
   for _, item in ipairs { toolchains, registry, git_registry } do
-    if util.path.is_descendant(item, fname) then
+    -- see if fname is a descendant of above roots
+    if fname:sub(1, #item) == item then
       local clients = util.get_lsp_clients { name = 'rust_analyzer' }
       return #clients > 0 and clients[#clients].config.root_dir or nil
     end
