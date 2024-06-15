@@ -18,7 +18,7 @@ The point of lspconfig is to provide the minimal configuration necessary for a s
 
 ## Adding a server to lspconfig
 
-The general form of adding a new language server is to start with a minimal skeleton. This includes populated the `config` table with a `default_config` and `docs` table.
+The general form of adding a new language server is to start with a minimal skeleton. This includes populating the `config` table with a `default_config` and `docs` table.
 
 When choosing a server name, convert all dashes (`-`) to underscores (`_`) If the name of the server is a unique name (`pyright`, `clangd`) or a commonly used abbreviation (`zls`), prefer this as the server name. If the server instead follows the pattern x-language-server, prefer the convention `x_ls` (`jsonnet_ls`). 
 
@@ -30,7 +30,7 @@ Note that Windows has a limitation when it comes to directly invoking a server t
 cmd = { 'typescript-language-server', '--stdio' }
 ```
 
-* `filetypes`: a list for filetypes a 
+* `filetypes`: a list for filetypes the server should match with
 * `root_dir`: a function (or function handle) which returns the root of the project used to determine if lspconfig should launch a new language server, or attach a previously launched server when you open a new buffer matching the filetype of the server. Note, lspconfig does not offer a dedicated single file mode (this is not codified in the spec). Do not add `vim.fn.cwd` or `util.path.dirname` in `root_dir`. A future version of lspconfig will provide emulation of a single file mode until this is formally codified in the specification. A good fallback is `util.find_git_ancestor`, see other configurations for examples.
 
 Additionally, the following options are often added:
