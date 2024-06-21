@@ -6085,21 +6085,17 @@ require'lspconfig'.koka.setup{}
 
 
 **Default values:**
-  - `capabilities` : 
-  ```lua
-  default capabilities, with offsetEncoding utf-8
-  ```
   - `cmd` : 
   ```lua
-  { "koka", "--language-server" }
+  { "koka", "--language-server", "--lsstdio" }
   ```
   - `filetypes` : 
   ```lua
-  { "kk" }
+  { "koka" }
   ```
   - `root_dir` : 
   ```lua
-        
+  git directory
   ```
   - `single_file_support` : 
   ```lua
