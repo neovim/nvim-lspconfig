@@ -27,7 +27,7 @@ return {
         SimplifyNameAnalyzer = true,
         ResolveNamespaces = true,
         EnableReferenceCodeLens = true,
-      }
+      },
     },
   },
   docs = {
