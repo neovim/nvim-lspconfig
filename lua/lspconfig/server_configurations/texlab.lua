@@ -67,7 +67,7 @@ local function dependency_graph(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   if not texlab_client then
-    vim.notify('Texlab client not found', vim.log.levels.ERROR)
+    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
   texlab_client.request('workspace/executeCommand', { command = 'texlab.showDependencyGraph' }, function(err, result)
     if err then
