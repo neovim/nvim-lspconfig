@@ -56,34 +56,31 @@ end
 
 local function buf_cancel_build(bufnr)
   bufnr = util.validate_bufnr(bufnr)
-  if util.get_active_client_by_name(bufnr, 'texlab') then
-    vim.lsp.buf.execute_command { command = 'texlab.cancelBuild' }
-    vim.notify('Build cancelled', vim.log.levels.INFO)
-  else
-    vim.notify('Texlab client not found', vim.log.levels.ERROR)
+  if not util.get_active_client_by_name(bufnr, 'texlab') then
+    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
+  vim.lsp.buf.execute_command { command = 'texlab.cancelBuild' }
+  vim.notify('Build cancelled', vim.log.levels.INFO)
 end
 
 local function dependency_graph(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
-  if texlab_client then
-    texlab_client.request('workspace/executeCommand', { command = 'texlab.showDependencyGraph' }, function(err, result)
-      if err then
-        vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
-      end
-      vim.notify('The dependency graph has been generated:\n' .. result, vim.log.levels.INFO)
-    end, 0)
-  else
+  if not texlab_client then
     vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
+  texlab_client.request('workspace/executeCommand', { command = 'texlab.showDependencyGraph' }, function(err, result)
+    if err then
+      return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
+    end
+    vim.notify('The dependency graph has been generated:\n' .. result, vim.log.levels.INFO)
+  end, 0)
 end
 
 local function cleanArtifacts(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   if not util.get_active_client_by_name(bufnr, 'texlab') then
-    vim.notify('Texlab client not found', vim.log.levels.ERROR)
-    return
+    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
   vim.lsp.buf.execute_command {
     command = 'texlab.cleanArtifacts',
@@ -95,8 +92,7 @@ end
 local function cleanAuxiliary(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   if not util.get_active_client_by_name(bufnr, 'texlab') then
-    vim.notify('Texlab client not found', vim.log.levels.ERROR)
-    return
+    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
   vim.lsp.buf.execute_command {
     command = 'texlab.cleanAuxiliary',
