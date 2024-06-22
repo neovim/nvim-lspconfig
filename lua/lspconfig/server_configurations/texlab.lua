@@ -65,7 +65,7 @@ local function buf_cancel_build(bufnr)
 end
 
 local function dependency_graph(bufnr)
-  bufnr = util.validate_bufnr(0) or bufnr
+  bufnr = util.validate_bufnr(bufnr)
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   if texlab_client then
     texlab_client.request('workspace/executeCommand', { command = 'texlab.showDependencyGraph' }, function(err, result)
