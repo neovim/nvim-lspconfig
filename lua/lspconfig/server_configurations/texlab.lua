@@ -54,6 +54,53 @@ local function buf_search(bufnr)
   end
 end
 
+local function buf_cancel_build(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  if not util.get_active_client_by_name(bufnr, 'texlab') then
+    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+  end
+  vim.lsp.buf.execute_command { command = 'texlab.cancelBuild' }
+  vim.notify('Build cancelled', vim.log.levels.INFO)
+end
+
+local function dependency_graph(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
+  if not texlab_client then
+    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+  end
+  texlab_client.request('workspace/executeCommand', { command = 'texlab.showDependencyGraph' }, function(err, result)
+    if err then
+      return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
+    end
+    vim.notify('The dependency graph has been generated:\n' .. result, vim.log.levels.INFO)
+  end, 0)
+end
+
+local function cleanArtifacts(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  if not util.get_active_client_by_name(bufnr, 'texlab') then
+    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+  end
+  vim.lsp.buf.execute_command {
+    command = 'texlab.cleanArtifacts',
+    arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+  }
+  vim.notify('Artifacts cleaned successfully', vim.log.levels.INFO)
+end
+
+local function cleanAuxiliary(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  if not util.get_active_client_by_name(bufnr, 'texlab') then
+    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+  end
+  vim.lsp.buf.execute_command {
+    command = 'texlab.cleanAuxiliary',
+    arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+  }
+  vim.notify('Auxiliary files cleaned successfully', vim.log.levels.INFO)
+end
+
 -- bufnr isn't actually required here, but we need a valid buffer in order to
 -- be able to find the client for buf_request.
 -- TODO find a client by looking through buffers for a valid client?
@@ -113,6 +160,30 @@ return {
         buf_search(0)
       end,
       description = 'Forward search from current position',
+    },
+    TexlabCancelBuild = {
+      function()
+        buf_cancel_build(0)
+      end,
+      description = 'Cancel the current build',
+    },
+    TexlabDependencyGraph = {
+      function()
+        dependency_graph(0)
+      end,
+      description = 'Show the dependency graph',
+    },
+    TexlabCleanArtifacts = {
+      function()
+        cleanArtifacts(0)
+      end,
+      description = 'Clean the artifacts',
+    },
+    TexlabCleanAuxiliary = {
+      function()
+        cleanAuxiliary(0)
+      end,
+      description = 'Clean the auxiliary files',
     },
   },
   docs = {
