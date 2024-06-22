@@ -5584,7 +5584,7 @@ require'lspconfig'.hyprls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "*.hl", "hypr*.conf", ".config/hypr/*.conf" }
+  { "hyprlang", "*.hl", "hypr*.conf", ".config/hypr/*.conf" }
   ```
   - `root_dir` : 
   ```lua
