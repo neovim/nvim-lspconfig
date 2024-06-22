@@ -56,10 +56,8 @@ end
 
 local function buf_cancel_build(bufnr)
   bufnr = util.validate_bufnr(0) or bufnr
-  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
-  if texlab_client then
-    local pars = { command = 'texlab.cancelBuild' }
-    vim.lsp.buf.execute_command(pars)
+  if util.get_active_client_by_name(bufnr, 'texlab') then
+    vim.lsp.buf.execute_command { command = 'texlab.cancelBuild' }
     vim.notify('Build cancelled', vim.log.levels.INFO)
   else
     vim.notify('Texlab client not found', vim.log.levels.ERROR)
@@ -83,31 +81,27 @@ end
 
 local function cleanArtifacts(bufnr)
   bufnr = util.validate_bufnr(bufnr)
-  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
-  if not texlab_client then
+  if not util.get_active_client_by_name(bufnr, 'texlab') then
     vim.notify('Texlab client not found', vim.log.levels.ERROR)
     return
   end
-  local pars = {
+  vim.lsp.buf.execute_command {
     command = 'texlab.cleanArtifacts',
     arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
   }
-  vim.lsp.buf.execute_command(pars)
   vim.notify('Artifacts cleaned successfully', vim.log.levels.INFO)
 end
 
 local function cleanAuxiliary(bufnr)
   bufnr = util.validate_bufnr(bufnr)
-  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
-  if not texlab_client then
+  if not util.get_active_client_by_name(bufnr, 'texlab') then
     vim.notify('Texlab client not found', vim.log.levels.ERROR)
     return
   end
-  local pars = {
+  vim.lsp.buf.execute_command {
     command = 'texlab.cleanAuxiliary',
     arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
   }
-  vim.lsp.buf.execute_command(pars)
   vim.notify('Auxiliary files cleaned successfully', vim.log.levels.INFO)
 end
 
