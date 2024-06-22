@@ -55,7 +55,7 @@ local function buf_search(bufnr)
 end
 
 local function buf_cancel_build(bufnr)
-  bufnr = util.validate_bufnr(0) or bufnr
+  bufnr = util.validate_bufnr(bufnr)
   if util.get_active_client_by_name(bufnr, 'texlab') then
     vim.lsp.buf.execute_command { command = 'texlab.cancelBuild' }
     vim.notify('Build cancelled', vim.log.levels.INFO)
