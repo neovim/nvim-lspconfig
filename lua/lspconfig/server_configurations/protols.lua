@@ -5,9 +5,7 @@ return {
     cmd = { 'protols' },
     filetypes = { 'proto' },
     single_file_support = true,
-    root_dir = function(fname)
-      return util.find_git_ancestor(fname)
-    end,
+    root_dir = util.find_git_ancestor,
   },
   docs = {
     description = [[
