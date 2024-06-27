@@ -26,10 +26,6 @@ https://shopify.dev/docs/api/shopify-cli
 
 `shopify` can be installed via npm `npm install -g @shopify/cli`.
 
-```lua
-require lspconfig.shopify_theme_ls.setup {}
-```
-
 Note: This LSP already includes Theme Check so you don't need to use the `theme_check` server configuration as well.
 ]],
   },
