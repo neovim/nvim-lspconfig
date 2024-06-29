@@ -101,6 +101,29 @@ local function cleanAuxiliary(bufnr)
   vim.notify('Auxiliary files cleaned successfully', vim.log.levels.INFO)
 end
 
+local function buf_find_envs(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
+  if not texlab_client then
+    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+  end
+  local pos = vim.api.nvim_win_get_cursor(0)
+  texlab_client.request('workspace/executeCommand', {
+    command = 'texlab.findEnvironments',
+    arguments = {
+      {
+        textDocument = { uri = vim.uri_from_bufnr(bufnr) },
+        position = { line = pos[1] - 1, character = pos[2] },
+      },
+    },
+  }, function(err, result)
+    if err then
+      return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
+    end
+    return vim.notify('The environments are:\n' .. vim.inspect(result), vim.log.levels.INFO)
+  end, bufnr)
+end
+
 -- bufnr isn't actually required here, but we need a valid buffer in order to
 -- be able to find the client for buf_request.
 -- TODO find a client by looking through buffers for a valid client?
@@ -184,6 +207,12 @@ return {
         cleanAuxiliary(0)
       end,
       description = 'Clean the auxiliary files',
+    },
+    TexlabFindEnvironments = {
+      function()
+        buf_find_envs(0)
+      end,
+      description = 'Find the environments at current position',
     },
   },
   docs = {
