@@ -11965,6 +11965,7 @@ require'lspconfig'.texlab.setup{}
 - TexlabCleanArtifacts: Clean the artifacts
 - TexlabCleanAuxiliary: Clean the auxiliary files
 - TexlabDependencyGraph: Show the dependency graph
+- TexlabFindEnvironments: Find the environments at current position
 - TexlabForward: Forward search from current position
 
 **Default values:**
