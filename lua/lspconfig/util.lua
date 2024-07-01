@@ -88,10 +88,12 @@ end
 
 function M.create_module_commands(module_name, commands)
   for command_name, def in pairs(commands) do
-    local opts = M._parse_user_command_options(def)
-    api.nvim_create_user_command(command_name, function(info)
-      require('lspconfig')[module_name].commands[command_name][1](unpack(info.fargs))
-    end, opts)
+    if type(def) ~= 'function' then
+      local opts = M._parse_user_command_options(def)
+      api.nvim_create_user_command(command_name, function(info)
+        require('lspconfig')[module_name].commands[command_name][1](unpack(info.fargs))
+      end, opts)
+    end
   end
 end
 
