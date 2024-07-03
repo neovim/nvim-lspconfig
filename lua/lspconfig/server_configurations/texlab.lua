@@ -133,7 +133,6 @@ local function buf_change_env(bufnr)
   if not new or new == '' then
     return vim.notify('No environment name provided', vim.log.levels.WARN)
   end
-  new = tostring(new)
   local pos = vim.api.nvim_win_get_cursor(0)
   vim.lsp.buf.execute_command {
     command = 'texlab.changeEnvironment',
@@ -141,7 +140,7 @@ local function buf_change_env(bufnr)
       {
         textDocument = { uri = vim.uri_from_bufnr(bufnr) },
         position = { line = pos[1] - 1, character = pos[2] },
-        newName = new,
+        newName = tostring(new),
       },
     },
   }
