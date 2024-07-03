@@ -124,6 +124,29 @@ local function buf_find_envs(bufnr)
   end, bufnr)
 end
 
+local function buf_change_env(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  if not util.get_active_client_by_name(bufnr, 'texlab') then
+    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+  end
+  local new = vim.fn.input 'Enter the new environment name: '
+  if not new or new == '' then
+    return vim.notify('No environment name provided', vim.log.levels.WARN)
+  end
+  new = tostring(new)
+  local pos = vim.api.nvim_win_get_cursor(0)
+  vim.lsp.buf.execute_command {
+    command = 'texlab.changeEnvironment',
+    arguments = {
+      {
+        textDocument = { uri = vim.uri_from_bufnr(bufnr) },
+        position = { line = pos[1] - 1, character = pos[2] },
+        newName = new,
+      },
+    },
+  }
+end
+
 -- bufnr isn't actually required here, but we need a valid buffer in order to
 -- be able to find the client for buf_request.
 -- TODO find a client by looking through buffers for a valid client?
@@ -213,6 +236,12 @@ return {
         buf_find_envs(0)
       end,
       description = 'Find the environments at current position',
+    },
+    TexlabChangeEnvironment = {
+      function()
+        buf_change_env(0)
+      end,
+      description = 'Change the environment at current position',
     },
   },
   docs = {
