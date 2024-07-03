@@ -11962,6 +11962,7 @@ require'lspconfig'.texlab.setup{}
 **Commands:**
 - TexlabBuild: Build the current buffer
 - TexlabCancelBuild: Cancel the current build
+- TexlabChangeEnvironment: Change the environment at current position
 - TexlabCleanArtifacts: Clean the artifacts
 - TexlabCleanAuxiliary: Clean the auxiliary files
 - TexlabDependencyGraph: Show the dependency graph
