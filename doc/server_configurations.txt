@@ -11690,6 +11690,11 @@ require'lspconfig'.tailwindcss.setup{}
   {
     tailwindCSS = {
       classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+      includeLanguages = {
+        eelixir = "html-eex",
+        eruby = "erb",
+        templ = "html"
+      },
       lint = {
         cssConflict = "warning",
         invalidApply = "error",
