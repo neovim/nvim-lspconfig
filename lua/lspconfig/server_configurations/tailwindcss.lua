@@ -87,6 +87,11 @@ return {
           'classList',
           'ngClass',
         },
+        includeLanguages = {
+          eelixir = 'html-eex',
+          eruby = 'erb',
+          templ = 'html',
+        },
       },
     },
     on_new_config = function(new_config)
