@@ -19,6 +19,8 @@ return {
     description = [[
 https://github.com/typescript-language-server/typescript-language-server
 
+`ts_ls`, aka `typescript-language-server`, is a Language Server Protocol implementation for TypeScript wrapping `tsserver`. Note that `ts_ls` is not `tsserver`.
+
 `typescript-language-server` depends on `typescript`. Both packages can be installed via `npm`:
 ```sh
 npm install -g typescript typescript-language-server
@@ -52,7 +54,7 @@ adds Vue support to this language server.
 *IMPORTANT*: It is crucial to ensure that `@vue/typescript-plugin` and `volar `are of identical versions.
 
 ```lua
-require'lspconfig'.tsserver.setup{
+require'lspconfig'.ts_ls.setup{
   init_options = {
     plugins = {
       {
