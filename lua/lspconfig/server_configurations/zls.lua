@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'zls' },
+    cmd = { 'zls', '--config-path', '"zls.json"' },
     filetypes = { 'zig', 'zir' },
     root_dir = util.root_pattern('zls.json', 'build.zig', '.git'),
     single_file_support = true,
@@ -14,6 +14,7 @@ https://github.com/zigtools/zls
 Zig LSP implementation + Zig Language Server
         ]],
     default_config = {
+      cmd = { 'zls', '--config-path', '"zls.json"' },
       root_dir = [[util.root_pattern("zls.json", "build.zig", ".git")]],
     },
   },
