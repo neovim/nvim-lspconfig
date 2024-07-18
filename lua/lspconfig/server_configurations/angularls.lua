@@ -21,7 +21,7 @@ return {
       '--ngProbeLocations',
       default_probe_dir,
     },
-    filetypes = { 'typescript', 'html', 'typescriptreact', 'typescript.tsx' },
+    filetypes = { 'typescript', 'html', 'typescriptreact', 'typescript.tsx', 'htmlangular' },
     -- Check for angular.json since that is the root of the project.
     -- Don't check for tsconfig.json or package.json since there are multiple of these
     -- in an angular monorepo setup.
