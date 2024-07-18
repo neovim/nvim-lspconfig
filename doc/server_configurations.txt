@@ -6280,8 +6280,8 @@ https://github.com/leanprover/lean4
 Lean installation instructions can be found
 [here](https://leanprover-community.github.io/get_started.html#regular-install).
 
-The Lean 4 language server is built-in with a Lean 4 install
-(and can be manually run with, e.g., `lean --server`).
+The Lean language server is included in any Lean installation and
+does not require any additional packages.
 
 Note: that if you're using [lean.nvim](https://github.com/Julian/lean.nvim),
 that plugin fully handles the setup of the Lean language server,
@@ -6308,15 +6308,9 @@ require'lspconfig'.leanls.setup{}
   ```lua
   see source file
   ```
-  - `options` : 
-  ```lua
-  {
-    no_lake_lsp_cmd = { "lean", "--server" }
-  }
-  ```
   - `root_dir` : 
   ```lua
-  root_pattern("lakefile.lean", "lean-toolchain", "leanpkg.toml", ".git")
+  root_pattern("lakefile.toml", "lakefile.lean", "lean-toolchain", ".git")
   ```
   - `single_file_support` : 
   ```lua
