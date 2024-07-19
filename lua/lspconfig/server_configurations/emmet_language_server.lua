@@ -14,6 +14,7 @@ return {
       'sass',
       'scss',
       'typescriptreact',
+      'htmlangular',
     },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
