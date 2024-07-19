@@ -9960,22 +9960,29 @@ require'lspconfig'.ruby_lsp.setup{}
 
 https://github.com/astral-sh/ruff
 
-A Language Server Protocol implementation for Ruff, an extremely fast Python linter and code formatter, written in Rust. It can be installed via pip.
+A Language Server Protocol implementation for Ruff, an extremely fast Python linter and code formatter, written in Rust. It can be installed via `pip`.
 
 ```sh
 pip install ruff
 ```
 
-_Requires Ruff v0.3.3 or later._
+**Available in Ruff `v0.4.5` in beta and stabilized in Ruff `v0.5.3`.**
 
-This is the new Rust-based version of the original `ruff-lsp` implementation. It's currently in alpha, meaning that some features are under development. Currently, the following capabilities are supported:
+This is the new built-in language server written in Rust. It supports the same feature set as `ruff-lsp`, but with superior performance and no installation required. Note that the `ruff-lsp` server will continue to be maintained until further notice.
 
-1. Diagnostics
-2. Code actions
-3. Formatting
-4. Range Formatting
+Server settings can be provided via:
 
-Please note that the `ruff-lsp` server will continue to be maintained until further notice.
+```lua
+require('lspconfig').ruff.setup({
+  init_options = {
+    settings = {
+      -- Server settings should go here
+    }
+  }
+})
+
+Refer to the [documentation](https://docs.astral.sh/ruff/editors/) for more details.
+```
 
   
 
@@ -9989,7 +9996,7 @@ require'lspconfig'.ruff.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "ruff", "server", "--preview" }
+  { "ruff", "server" }
   ```
   - `filetypes` : 
   ```lua
