@@ -515,7 +515,7 @@ require'lspconfig'.angularls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "typescript", "html", "typescriptreact", "typescript.tsx" }
+  { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" }
   ```
   - `root_dir` : 
   ```lua
@@ -3650,7 +3650,7 @@ require'lspconfig'.emmet_language_server.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "typescriptreact" }
+  { "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "typescriptreact", "htmlangular" }
   ```
   - `root_dir` : 
   ```lua
@@ -3686,7 +3686,7 @@ require'lspconfig'.emmet_ls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "astro", "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "svelte", "typescriptreact", "vue" }
+  { "astro", "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "svelte", "typescriptreact", "vue", "htmlangular" }
   ```
   - `root_dir` : 
   ```lua
@@ -11700,7 +11700,7 @@ require'lspconfig'.tailwindcss.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
+  { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
   ```
   - `init_options` : 
   ```lua
@@ -11728,6 +11728,7 @@ require'lspconfig'.tailwindcss.setup{}
       includeLanguages = {
         eelixir = "html-eex",
         eruby = "erb",
+        htmlangular = "html",
         templ = "html"
       },
       lint = {
