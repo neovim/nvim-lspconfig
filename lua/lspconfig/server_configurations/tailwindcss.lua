@@ -26,8 +26,6 @@ return {
       'hbs',
       'html',
       'htmlangular',
-      -- 'HTML (Eex)',
-      -- 'HTML (EEx)',
       'html-eex',
       'heex',
       'jade',
