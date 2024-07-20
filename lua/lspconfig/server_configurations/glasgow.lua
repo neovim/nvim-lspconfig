@@ -18,7 +18,7 @@ Provides language features for WGSL (WebGPU Shading Language):
     - Fields and swizzles.
     - Builtin types and functions (`dot`, `reflect`, `textureSample`, `vec3`, `mat4x2`, etc.)
 - Hover Documentation:
-    - Funtion signatures.
+    - Function signatures.
     - Variable types.
     - Includes builtin types and functions. Text is taken from the WGSL specification.
 - Goto Definition
