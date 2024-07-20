@@ -36,4 +36,3 @@ cargo install glasgow
     },
   },
 }
-
