@@ -13,6 +13,7 @@ local configs = {}
 --- @field on_new_config? function
 --- @field autostart? boolean
 --- @field package _on_attach? fun(client: vim.lsp.Client, bufnr: integer)
+--- @field root_dir? string|fun(filename: string, bufnr: number)
 
 --- @param cmd any
 local function sanitize_cmd(cmd)
