@@ -77,6 +77,12 @@ return {
         serverStatusNotification = true,
       },
     },
+    before_init = function(init_params, config)
+      -- See https://github.com/rust-lang/rust-analyzer/blob/eb5da56d839ae0a9e9f50774fa3eb78eb0964550/docs/dev/lsp-extensions.md?plain=1#L26
+      if config.settings and config.settings['rust-analyzer'] then
+        init_params.initializationOptions = config.settings['rust-analyzer']
+      end
+    end,
   },
   commands = {
     CargoReload = {
@@ -105,6 +111,9 @@ require'lspconfig'.rust_analyzer.setup{
   }
 }
 ```
+
+Note: do not set `init_options` for this LS config, it will be automatically populated by the contents of settings["rust-analyzer"] per
+https://github.com/rust-lang/rust-analyzer/blob/eb5da56d839ae0a9e9f50774fa3eb78eb0964550/docs/dev/lsp-extensions.md?plain=1#L26.
     ]],
     default_config = {
       root_dir = [[root_pattern("Cargo.toml", "rust-project.json")]],
