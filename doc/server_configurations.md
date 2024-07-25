@@ -5171,7 +5171,7 @@ require'lspconfig'.harper_ls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "markdown", "rust", "typescript", "typescriptreact", "javascript", "python", "go", "c", "cpp", "ruby", "swift", "csharp", "toml", "lua" }
+  { "markdown", "rust", "typescript", "typescriptreact", "javascript", "python", "go", "c", "cpp", "ruby", "swift", "csharp", "toml", "lua", "gitcommit", "java", "html" }
   ```
   - `root_dir` : 
   ```lua
