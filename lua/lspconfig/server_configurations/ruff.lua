@@ -38,9 +38,9 @@ require('lspconfig').ruff.setup({
     }
   }
 })
+```
 
 Refer to the [documentation](https://docs.astral.sh/ruff/editors/) for more details.
-```
 
   ]],
     root_dir = [[root_pattern("pyproject.toml", "ruff.toml", ".ruff.toml", ".git")]],
