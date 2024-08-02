@@ -167,7 +167,6 @@ return {
           onSave = false,
           forwardSearchAfter = false,
         },
-        auxDirectory = '.',
         forwardSearch = {
           executable = nil,
           args = {},
