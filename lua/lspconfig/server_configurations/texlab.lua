@@ -30,7 +30,10 @@ local function buf_build(bufnr)
       vim.notify('Build ' .. texlab_build_status[result.status], vim.log.levels.INFO)
     end, bufnr)
   else
-    vim.notify('method textDocument/build is not supported by any servers active on the current buffer', vim.log.levels.WARN)
+    vim.notify(
+      'method textDocument/build is not supported by any servers active on the current buffer',
+      vim.log.levels.WARN
+    )
   end
 end
 
@@ -50,7 +53,10 @@ local function buf_search(bufnr)
       vim.notify('Search ' .. texlab_forward_status[result.status], vim.log.levels.INFO)
     end, bufnr)
   else
-    vim.notify('method textDocument/forwardSearch is not supported by any servers active on the current buffer', vim.log.levels.WARN)
+    vim.notify(
+      'method textDocument/forwardSearch is not supported by any servers active on the current buffer',
+      vim.log.levels.WARN
+    )
   end
 end
 
