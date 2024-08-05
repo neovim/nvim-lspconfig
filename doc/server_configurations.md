@@ -13852,6 +13852,7 @@ require'lspconfig'.zk.setup{}
 ```
 **Commands:**
 - ZkIndex: ZkIndex
+- ZkList: ZkList
 - ZkNew: ZkNew
 
 **Default values:**
