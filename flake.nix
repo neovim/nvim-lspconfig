@@ -1,21 +1,28 @@
 {
   description = "Quickstart configurations for the Nvim LSP client";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs";
+  };
 
   outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system}; in
-      rec {
-        devShell = pkgs.mkShell {
-          buildInputs = [
-            pkgs.stylua
-            pkgs.luaPackages.luacheck
-            pkgs.luajitPackages.vusted
-            pkgs.selene
+    let
+      forAllSystems = function: nixpkgs.lib.genAttrs [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ] (system: function nixpkgs.legacyPackages.${system});
+    in {
+      devShells = forAllSystems (pkgs: {
+        default = with pkgs; mkShell {
+          packages = [
+            stylua
+            luaPackages.luacheck
+            luajitPackages.vusted
+            selene
           ];
         };
-      }
-    );
+      });
+    };
 }
