@@ -4237,7 +4237,7 @@ require'lspconfig'.foam_ls.setup{}
 
 ## fortls
 
-https://github.com/gnikit/fortls
+https://fortls.fortran-lang.org/index.html
 
 fortls is a Fortran Language Server, the server can be installed via pip
 
@@ -4247,7 +4247,7 @@ pip install fortls
 
 Settings to the server can be passed either through the `cmd` option or through
 a local configuration file e.g. `.fortls`. For more information
-see the `fortls` [documentation](https://gnikit.github.io/fortls/options.html).
+see the `fortls` [documentation](https://fortls.fortran-lang.org/options.html).
     
 
 
