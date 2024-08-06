@@ -1,4 +1,9 @@
 local util = require 'lspconfig.util'
+local bin_name = 'DaedalusLanguageServer'
+
+if vim.fn.has 'win32' == 1 then
+  bin_name = bin_name + '.exe'
+end
 
 local root_files = {
   'Gothic.src',
@@ -12,7 +17,7 @@ local root_files = {
 
 return {
   default_config = {
-    cmd = { 'DaedalusLanguageServer' },
+    cmd = { bin_name },
     filetypes = { 'd' },
     root_dir = util.root_pattern(unpack(root_files)),
     settings = {
