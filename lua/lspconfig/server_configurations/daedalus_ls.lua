@@ -7,7 +7,7 @@ local root_files = {
   'Music.src',
   'ParticleFX.src',
   'SFX.src',
-  'VisualFX.src'
+  'VisualFX.src',
 }
 
 return {
@@ -24,5 +24,5 @@ return {
         srcFileEncoding = 'Windows-1252',
       },
     },
-  }
+  },
 }
