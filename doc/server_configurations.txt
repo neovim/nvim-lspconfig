@@ -6975,7 +6975,7 @@ require'lspconfig'.mesonlsp.setup{}
   ```
   - `root_dir` : 
   ```lua
-  util.root_pattern("meson_options.txt", "meson.options", ".git")
+  util.root_pattern("meson.build", "meson_options.txt", "meson.options", ".git")
   ```
 
 
@@ -11747,7 +11747,7 @@ require'lspconfig'.swift_mesonls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  util.root_pattern("meson_options.txt", "meson.options", ".git")
+  util.root_pattern("meson.build", "meson_options.txt", "meson.options", ".git")
   ```
 
 
