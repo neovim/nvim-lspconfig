@@ -10038,7 +10038,7 @@ require'lspconfig'.ruby_lsp.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "ruby" }
+  { "ruby", "eruby" }
   ```
   - `init_options` : 
   ```lua
