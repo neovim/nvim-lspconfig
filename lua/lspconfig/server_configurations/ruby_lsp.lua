@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'ruby-lsp' },
-    filetypes = { 'ruby', 'eruby' },
+    filetypes = { 'ruby' },
     root_dir = util.root_pattern('Gemfile', '.git'),
     init_options = {
       formatter = 'auto',
