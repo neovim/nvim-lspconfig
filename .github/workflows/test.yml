@@ -23,7 +23,7 @@ jobs:
       - name: luajit
         uses: leafo/gh-actions-lua@v10
         with:
-          luaVersion: "luajit-2.1.0-beta3"
+          luaVersion: "luajit-openresty"
 
       - name: luarocks
         uses: leafo/gh-actions-luarocks@v4
