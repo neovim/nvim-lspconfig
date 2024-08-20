@@ -3,7 +3,6 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'typos-lsp' },
-    filetypes = { '*' },
     root_dir = util.root_pattern('typos.toml', '_typos.toml', '.typos.toml'),
     single_file_support = true,
     settings = {},
