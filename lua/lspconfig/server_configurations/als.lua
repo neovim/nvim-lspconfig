@@ -10,6 +10,10 @@ return {
     cmd = { bin_name },
     filetypes = { 'ada' },
     root_dir = util.root_pattern('Makefile', '.git', '*.gpr', '*.adc'),
+    deprecate = {
+      to = 'github.com/TamaMcGlinn/nvim-lspconfig-ada',
+      version = '0.2.0',
+    },
   },
   docs = {
     description = [[
