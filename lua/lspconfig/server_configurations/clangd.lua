@@ -27,11 +27,8 @@ local function symbol_info(bufnr)
   if not clangd_client then
     return vim.notify('Clangd client not found', vim.log.levels.ERROR)
   end
-  local pos = vim.api.nvim_win_get_cursor(0)
-  vim.lsp.buf_request(0, 'textDocument/symbolInfo', {
-    textDocument = { uri = vim.uri_from_bufnr(0) },
-    position = { line = pos[1] - 1, character = pos[2] },
-  }, function(err, res)
+  local params = vim.lsp.util.make_position_params()
+  vim.lsp.buf_request(0, 'textDocument/symbolInfo', params, function(err, res)
     if err or #res == 0 then
       -- Clangd always returns an error, there is not reason to parse it
       return
