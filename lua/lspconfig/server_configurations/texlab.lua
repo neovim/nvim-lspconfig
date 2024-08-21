@@ -17,13 +17,8 @@ local texlab_forward_status = {
 local function buf_build()
   local bufnr = vim.api.nvim_get_current_buf()
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
-  local pos = vim.api.nvim_win_get_cursor(0)
-  local params = {
-    textDocument = { uri = vim.uri_from_bufnr(bufnr) },
-    position = { line = pos[1] - 1, character = pos[2] },
-  }
   if texlab_client then
-    texlab_client.request('textDocument/build', params, function(err, result)
+    texlab_client.request('textDocument/build', vim.lsp.util.make_position_params(), function(err, result)
       if err then
         error(tostring(err))
       end
@@ -40,13 +35,8 @@ end
 local function buf_search()
   local bufnr = vim.api.nvim_get_current_buf()
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
-  local pos = vim.api.nvim_win_get_cursor(0)
-  local params = {
-    textDocument = { uri = vim.uri_from_bufnr(bufnr) },
-    position = { line = pos[1] - 1, character = pos[2] },
-  }
   if texlab_client then
-    texlab_client.request('textDocument/forwardSearch', params, function(err, result)
+    texlab_client.request('textDocument/forwardSearch', vim.lsp.util.make_position_params(), function(err, result)
       if err then
         error(tostring(err))
       end
