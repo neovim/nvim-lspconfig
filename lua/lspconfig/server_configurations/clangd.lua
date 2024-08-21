@@ -21,8 +21,8 @@ local function switch_source_header(bufnr)
   end
 end
 
-local function symbol_info(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
+local function symbol_info()
+  local bufnr = vim.api.nvim_get_current_buf()
   local clangd_client = util.get_active_client_by_name(bufnr, 'clangd')
   if not clangd_client then
     return vim.notify('Clangd client not found', vim.log.levels.ERROR)
