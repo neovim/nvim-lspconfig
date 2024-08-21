@@ -113,20 +113,30 @@ local function buf_find_envs(bufnr)
   if not texlab_client then
     return vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
-  local pos = vim.api.nvim_win_get_cursor(0)
   texlab_client.request('workspace/executeCommand', {
     command = 'texlab.findEnvironments',
-    arguments = {
-      {
-        textDocument = { uri = vim.uri_from_bufnr(bufnr) },
-        position = { line = pos[1] - 1, character = pos[2] },
-      },
-    },
+    arguments = { vim.lsp.util.make_position_params() },
   }, function(err, result)
     if err then
       return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
     end
-    return vim.notify('The environments are:\n' .. vim.inspect(result), vim.log.levels.INFO)
+    local env_names = {}
+    local max_length = 1
+    for _, env in ipairs(result) do
+      table.insert(env_names, env.name.text)
+      max_length = math.max(max_length, string.len(env.name.text))
+    end
+    for i, name in ipairs(env_names) do
+      env_names[i] = string.rep(' ', i - 1) .. name
+    end
+    vim.lsp.util.open_floating_preview(env_names, '', {
+      height = #env_names,
+      width = math.max((max_length + #env_names - 1), (string.len 'Environments')),
+      focusable = false,
+      focus = false,
+      border = require('lspconfig.ui.windows').default_options.border or 'single',
+      title = 'Environments',
+    })
   end, bufnr)
 end
 
