@@ -5716,7 +5716,7 @@ require'lspconfig'.hyprls.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "hyprlang", "*.hl", "hypr*.conf", ".config/hypr/*.conf" }
+  { "hyprlang" }
   ```
   - `root_dir` : 
   ```lua
@@ -12788,10 +12788,6 @@ require'lspconfig'.typos_lsp.setup{}
   - `cmd` : 
   ```lua
   { "typos-lsp" }
-  ```
-  - `filetypes` : 
-  ```lua
-  { "*" }
   ```
   - `root_dir` : 
   ```lua
