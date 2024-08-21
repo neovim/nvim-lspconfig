@@ -5,6 +5,7 @@ return {
     cmd = { 'luau-lsp', 'lsp' },
     filetypes = { 'luau' },
     root_dir = util.find_git_ancestor,
+    single_file_support = true,
   },
   docs = {
     [[

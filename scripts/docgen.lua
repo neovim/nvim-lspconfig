@@ -4,7 +4,6 @@ local util = require 'lspconfig.util'
 local inspect = vim.inspect
 local uv = vim.loop
 local fn = vim.fn
-local tbl_flatten = vim.tbl_flatten
 
 local function template(s, params)
   return (s:gsub('{{([^{}]+)}}', params))
@@ -40,7 +39,7 @@ local function indent(n, s)
 end
 
 local function make_parts(fns)
-  return tbl_flatten(map_list(fns, function(v)
+  return util.tbl_flatten(map_list(fns, function(v)
     if type(v) == 'function' then
       v = v()
     end
@@ -82,11 +81,21 @@ require'lspconfig'.{{template_name}}.setup{}
 ]]
 
 local function require_all_configs()
+  -- Make sure username doesn't leak into the generated document
+  local old_home = vim.env.HOME
+  local old_cache_home = vim.env.XDG_CACHE_HOME
+  vim.env.HOME = '/home/user'
+  vim.env.XDG_CACHE_HOME = '/home/user/.cache'
+
   -- Configs are lazy-loaded, tickle them to populate the `configs` singleton.
   for _, v in ipairs(vim.fn.glob('lua/lspconfig/server_configurations/*.lua', 1, 1)) do
     local module_name = v:gsub('.*/', ''):gsub('%.lua$', '')
     configs[module_name] = require('lspconfig.server_configurations.' .. module_name)
   end
+
+  -- Reset the environment variables
+  vim.env.HOME = old_home
+  vim.env.XDG_CACHE_HOME = old_cache_home
 end
 
 local function make_lsp_sections()
@@ -186,7 +195,7 @@ local function make_lsp_sections()
                         end
 
                         -- https://github.github.com/gfm/#backslash-escapes
-                        local function excape_markdown_punctuations(str)
+                        local function escape_markdown_punctuations(str)
                           local pattern =
                             '\\(\\*\\|\\.\\|?\\|!\\|"\\|#\\|\\$\\|%\\|\'\\|(\\|)\\|,\\|-\\|\\/\\|:\\|;\\|<\\|=\\|>\\|@\\|\\[\\|\\\\\\|\\]\\|\\^\\|_\\|`\\|{\\|\\\\|\\|}\\)'
                           return fn.substitute(str, pattern, '\\\\\\0', 'g')
@@ -205,7 +214,7 @@ local function make_lsp_sections()
                                 return tick('enum ' .. inspect(v.enum))
                               end
                               if v.type then
-                                return tick(table.concat(tbl_flatten { v.type }, '|'))
+                                return tick(table.concat(util.tbl_flatten { v.type }, '|'))
                               end
                             end,
                           }),
@@ -213,7 +222,7 @@ local function make_lsp_sections()
                           make_section(2, '\n\n', {
                             { v.default and 'Default: ' .. tick(inspect(v.default, { newline = '', indent = '' })) },
                             { v.items and 'Array items: ' .. tick(inspect(v.items, { newline = '', indent = '' })) },
-                            { excape_markdown_punctuations(v.description) },
+                            { escape_markdown_punctuations(v.description) },
                           }),
                         })
                       end)

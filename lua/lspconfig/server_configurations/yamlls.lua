@@ -1,16 +1,9 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'yaml-language-server'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
-    filetypes = { 'yaml', 'yaml.docker-compose' },
+    cmd = { 'yaml-language-server', '--stdio' },
+    filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab' },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
     settings = {
@@ -49,9 +42,9 @@ require('lspconfig').yamlls.setup {
     yaml = {
       ... -- other settings. note this overrides the lspconfig defaults.
       schemas = {
-        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
-        ["../path/relative/to/file.yml"] = "/.github/workflows/*"
-        ["/path/from/root/of/project"] = "/.github/workflows/*"
+        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+        ["../path/relative/to/file.yml"] = "/.github/workflows/*",
+        ["/path/from/root/of/project"] = "/.github/workflows/*",
       },
     },
   }

@@ -1,4 +1,4 @@
-*lspconfig.txt*         For Nvim version 0.7+
+*lspconfig.txt*         For Nvim version 0.8+
 
 nvim-lspconfig provides user-contributed configs for the Nvim |lsp| client.
 
@@ -21,7 +21,7 @@ primary functionalities:
    managing language server instances
 
 nvim-lspconfig is not required to use the builtin Nvim |lsp| client, it is
-just a convenience layer.
+just a convenience layer. See |lsp-quickstart|.
 
 See |lspconfig-all| for the complete list of language server configurations.
 
@@ -147,7 +147,7 @@ passed overrides to `setup {}` are:
 <
   is:
 >
-  {'foo', '--bar', 'baz}
+  {'foo', '--bar', 'baz'}
 <
 - {handlers} `list[functions]`
 
@@ -168,13 +168,14 @@ passed overrides to `setup {}` are:
 
   Callback invoked by Nvim's built-in client when attaching a buffer to a
   language server. Often used to set Nvim (buffer or global) options or to
-  override the Nvim client properties (`resolved_capabilities`) after a
-  language server attaches. Most commonly used for settings buffer
-  local keybindings. See |lspconfig-keybindings| for a usage example.
+  override the Nvim client properties (`server_capabilities`) after a
+  language server attaches.
 
-- {settings} `table <string, string|table|bool>`  
+  Prefer using an |LspAttach| autocommand handler instead.
 
-  The `settings` table is sent in `on_init` via a
+- {settings} `table <string, string|table|bool>`
+
+  The `settings` table is sent after initialization via a
   `workspace/didChangeConfiguration` notification from the Nvim client to
   the language server. These settings allow a user to change optional runtime
   settings of the language server. 
@@ -237,7 +238,7 @@ configuration entry, such as `cmd`.
 
 >
   local lspconfig = require 'lspconfig'
-  lspconfig.util.on_setup = util.add_hook_before(lspconfig.util.on_setup, function(config)
+  lspconfig.util.on_setup = lspconfig.util.add_hook_before(lspconfig.util.on_setup, function(config)
     if some_condition and config.name == "clangd" then
       local custom_server_prefix = "/my/custom/server/prefix"
       config.cmd = { custom_server_prefix .. "/bin/clangd" }
@@ -284,7 +285,8 @@ rest are either array values which will be formed into flags for the command,
 or special keys like `description`.
 
 Warning: Commands is deprecated and will be removed in future releases.
-It is recommended to use `vim.api.nvim_create_user_command()` instead in an `on_attach` function.
+It is recommended to use `vim.api.nvim_create_user_command()` instead in an
+|LspAttach| autocommand handler.
 
 Example:
 >
@@ -296,15 +298,16 @@ Example:
     vim.lsp.buf.execute_command(params)
   end
 
-  local on_attach = function(client, bufnr)
-    if client.name == "pyright" then
-      vim.api.nvim_create_user_command("PyrightOrganizeImports", organize_imports, {desc = 'Organize Imports'})
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+      local client = vim.lsp.get_client_by_id(ev.data.client_id)
+      if client.name == "pyright" then
+        vim.api.nvim_create_user_command("PyrightOrganizeImports", organize_imports, {desc = 'Organize Imports'})
+      end
     end
   end
 
-  require("lspconfig")['pyright'].setup({
-    on_attach = on_attach
-  })
+  require("lspconfig")['pyright'].setup{}
 <
 
 The `configs.__newindex` metamethod consumes the config definition and returns
@@ -370,8 +373,9 @@ below returns a function that takes as its argument the current buffer path.
 
 - `util.root_pattern`: function which takes multiple arguments, each 
   corresponding to a different root pattern against which the contents of the
-  current directory are matched using |vim.fin.glob()| while traversing up the
-  filesystem.
+  current directory are matched using |vim.fn.glob()| while traversing up the
+  filesystem. Parent directories are traversed once per pattern, in the order
+  the patterns are specified.
 >
    root_dir = util.root_pattern('pyproject.toml', 'requirements.txt')
 <
@@ -389,7 +393,7 @@ below returns a function that takes as its argument the current buffer path.
 - `util.find_package_json_ancestor`: a function that locates the first parent
   directory containing a `package.json`.
 >
-   root_dir = util.find_json_ancestor
+   root_dir = util.find_package_json_ancestor
 <
 Note: On Windows, `lspconfig` always assumes forward slash normalized paths with
 capitalized drive letters.
@@ -442,6 +446,8 @@ mode under which cross-file features may be degraded.
   `workspaceFolders` during initialization.
 - attaching subsequent files in the parent directory to the same server
   instance, depending on filetype.
+- also supports unnamed buffer if filetype matches the server filetype
+  settings.
 
 Cross-file features (navigation, hover) may or may not work depending on the
 language server. For a full feature-set, consider moving your files to a
@@ -465,79 +471,16 @@ contained in `:LspInfo`:
   if it successfully resolves a root directory. Note: Defaults to all
   configured servers matching the current buffer filetype.
 - `:LspStop <client_id>` stops the server with the given client id. Defaults to
-  stopping all servers active on the current buffer.
+  stopping all servers active on the current buffer. if you want to force stop
+  a language server you can do it like `:LspStop <client_id> ++force`
 - `:LspRestart <client_id>` restarts the client with the given client id, and
   will attempt to reattach to all previously attached buffers.
-
-==============================================================================
-EXAMPLE KEYBINDINGS                                      *lspconfig-keybindings*
-
-`lspconfig`, and the core client, do not map any keybindings by default. The
-following is an example Lua block which demonstrates how to leverage
-`on-attach` to selectively apply keybindings after a language servers has
-attached to a given buffer.
->
->
-  -- Mappings.
-  -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-  local opts = { noremap=true, silent=true }
-  vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-  vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-
-  -- Use an on_attach function to only map the following keys
-  -- after the language server attaches to the current buffer
-  local on_attach = function(client, bufnr)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    -- Mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local bufopts = { noremap=true, silent=true, buffer=bufnr }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wl', function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-  end
-
-  local lsp_flags = {
-    -- This is the default in Nvim 0.7+
-    debounce_text_changes = 150,
-  }
-  require('lspconfig')['pyright'].setup{
-      on_attach = on_attach,
-      flags = lsp_flags,
-  }
-  require('lspconfig')['tsserver'].setup{
-      on_attach = on_attach,
-      flags = lsp_flags,
-  }
-  require('lspconfig')['rust_analyzer'].setup{
-      on_attach = on_attach,
-      flags = lsp_flags,
-      -- Server-specific settings...
-      settings = {
-        ["rust-analyzer"] = {}
-      }
-  }
 
 ==============================================================================
 COMPLETION SUPPORT                                        *lspconfig-completion*
 
 Manually triggered completion can be provided by Nvim's built-in omnifunc.
-See |lsp-config|.
+See |lspconfig|.
 
 For autocompletion, Nvim does not provide built-in functionality. Consult the
 nvim-lspconfig wiki, which provides configuration examples for using

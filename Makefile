@@ -1,5 +1,5 @@
 test:
-	sh ./scripts/run_test.sh
+	vusted ./test
 
 lint:
 	@printf "\nRunning luacheck\n"

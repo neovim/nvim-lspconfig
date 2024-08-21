@@ -1,15 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'rome'
-local cmd = { bin_name, 'lsp-proxy' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, 'lsp-proxy' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'rome', 'lsp-proxy' },
     filetypes = {
       'javascript',
       'javascriptreact',
@@ -30,6 +23,8 @@ return {
 https://rome.tools
 
 Language server for the Rome Frontend Toolchain.
+
+(Unmaintained, use [Biome](https://biomejs.dev/blog/annoucing-biome) instead.)
 
 ```sh
 npm install [-g] rome

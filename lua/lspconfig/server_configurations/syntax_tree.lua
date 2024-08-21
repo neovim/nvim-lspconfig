@@ -1,19 +1,10 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'stree'
-local cmd = { bin_name, 'lsp' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, 'lsp' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'stree', 'lsp' },
     filetypes = { 'ruby' },
-    root_dir = function(fname)
-      return util.root_pattern '.streerc'(fname) or util.root_pattern('Gemfile', '.git')(fname)
-    end,
+    root_dir = util.root_pattern('.streerc', 'Gemfile', '.git'),
   },
   docs = {
     description = [[

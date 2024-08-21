@@ -1,15 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'tailwindcss-language-server'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'tailwindcss-language-server', '--stdio' },
     -- filetypes copied and adjusted from tailwindcss-intellisense
     filetypes = {
       -- html
@@ -17,6 +10,7 @@ return {
       'astro',
       'astro-markdown',
       'blade',
+      'clojure',
       'django-html',
       'htmldjango',
       'edge',
@@ -26,12 +20,12 @@ return {
       'erb',
       'eruby', -- vim ft
       'gohtml',
+      'gohtmltmpl',
       'haml',
       'handlebars',
       'hbs',
       'html',
-      -- 'HTML (Eex)',
-      -- 'HTML (EEx)',
+      'htmlangular',
       'html-eex',
       'heex',
       'jade',
@@ -64,12 +58,7 @@ return {
       -- mixed
       'vue',
       'svelte',
-    },
-    init_options = {
-      userLanguages = {
-        eelixir = 'html-eex',
-        eruby = 'erb',
-      },
+      'templ',
     },
     settings = {
       tailwindCSS = {
@@ -86,8 +75,15 @@ return {
         classAttributes = {
           'class',
           'className',
+          'class:list',
           'classList',
           'ngClass',
+        },
+        includeLanguages = {
+          eelixir = 'html-eex',
+          eruby = 'erb',
+          templ = 'html',
+          htmlangular = 'html',
         },
       },
     },
@@ -104,11 +100,18 @@ return {
       end
     end,
     root_dir = function(fname)
-      return util.root_pattern('tailwind.config.js', 'tailwind.config.ts')(fname)
-        or util.root_pattern('postcss.config.js', 'postcss.config.ts')(fname)
-        or util.find_package_json_ancestor(fname)
-        or util.find_node_modules_ancestor(fname)
-        or util.find_git_ancestor(fname)
+      return util.root_pattern(
+        'tailwind.config.js',
+        'tailwind.config.cjs',
+        'tailwind.config.mjs',
+        'tailwind.config.ts',
+        'postcss.config.js',
+        'postcss.config.cjs',
+        'postcss.config.mjs',
+        'postcss.config.ts'
+      )(fname) or util.find_package_json_ancestor(fname) or util.find_node_modules_ancestor(fname) or util.find_git_ancestor(
+        fname
+      )
     end,
   },
   docs = {
@@ -121,7 +124,7 @@ npm install -g @tailwindcss/language-server
 ```
 ]],
     default_config = {
-      root_dir = [[root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', 'node_modules', '.git')]],
+      root_dir = [[root_pattern('tailwind.config.js', 'tailwind.config.cjs', 'tailwind.config.mjs', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.cjs', 'postcss.config.mjs', 'postcss.config.ts', 'package.json', 'node_modules', '.git')]],
     },
   },
 }

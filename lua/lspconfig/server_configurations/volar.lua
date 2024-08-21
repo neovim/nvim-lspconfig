@@ -10,51 +10,11 @@ local volar_init_options = {
   typescript = {
     tsdk = '',
   },
-  languageFeatures = {
-    implementation = true,
-    -- not supported - https://github.com/neovim/neovim/pull/14122
-    semanticTokens = false,
-    references = true,
-    definition = true,
-    typeDefinition = true,
-    callHierarchy = true,
-    hover = true,
-    rename = true,
-    renameFileRefactoring = true,
-    signatureHelp = true,
-    codeAction = true,
-    completion = {
-      defaultTagNameCase = 'both',
-      defaultAttrNameCase = 'kebabCase',
-    },
-    schemaRequestService = true,
-    documentHighlight = true,
-    documentLink = true,
-    codeLens = true,
-    diagnostics = true,
-  },
-  documentFeatures = {
-    -- not supported - https://github.com/neovim/neovim/pull/13654
-    documentColor = false,
-    selectionRange = true,
-    foldingRange = true,
-    linkedEditingRange = true,
-    documentSymbol = true,
-    documentFormatting = {
-      defaultPrintWidth = 100,
-    },
-  },
 }
 
-local bin_name = 'vue-language-server'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'vue-language-server', '--stdio' },
     filetypes = { 'vue' },
     root_dir = util.root_pattern 'package.json',
     init_options = volar_init_options,
@@ -77,15 +37,20 @@ Volar language server for Vue
 Volar can be installed via npm:
 
 ```sh
-npm install -g @volar/vue-language-server
+npm install -g @vue/language-server
 ```
 
 Volar by default supports Vue 3 projects. Vue 2 projects need
-[additional configuration](https://github.com/johnsoncodehk/volar/blob/master/extensions/vscode-vue-language-features/README.md?plain=1#L28-L63).
+[additional configuration](https://github.com/vuejs/language-tools/tree/master/packages/vscode-vue#usage).
+
+**TypeScript support**
+As of release 2.0.0, Volar no longer wraps around tsserver. For typescript
+support, `tsserver` needs to be configured with the `@vue/typescript-plugin`
+plugin.
 
 **Take Over Mode**
 
-Volar can serve as a language server for both Vue and TypeScript via [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471).
+Volar (prior to 2.0.0), can serve as a language server for both Vue and TypeScript via [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471).
 
 To enable Take Over Mode, override the default filetypes in `setup{}` as follows:
 

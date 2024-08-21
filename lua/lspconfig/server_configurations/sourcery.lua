@@ -31,7 +31,7 @@ end
 return {
   default_config = {
     cmd = { 'sourcery', 'lsp' },
-    filetypes = { 'python' },
+    filetypes = { 'javascript', 'javascriptreact', 'python', 'typescript', 'typescriptreact' },
     init_options = {
       editor_version = 'vim',
       extension_version = 'vim.lsp',

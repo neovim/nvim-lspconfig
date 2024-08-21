@@ -1,63 +1,88 @@
 local util = require 'lspconfig.util'
+local async = require 'lspconfig.async'
 
 local function reload_workspace(bufnr)
   bufnr = util.validate_bufnr(bufnr)
-  vim.lsp.buf_request(bufnr, 'rust-analyzer/reloadWorkspace', nil, function(err)
-    if err then
-      error(tostring(err))
+  local clients = util.get_lsp_clients { bufnr = bufnr, name = 'rust_analyzer' }
+  for _, client in ipairs(clients) do
+    vim.notify 'Reloading Cargo Workspace'
+    client.request('rust-analyzer/reloadWorkspace', nil, function(err)
+      if err then
+        error(tostring(err))
+      end
+      vim.notify 'Cargo workspace reloaded'
+    end, 0)
+  end
+end
+
+local function is_library(fname)
+  local user_home = util.path.sanitize(vim.env.HOME)
+  local cargo_home = os.getenv 'CARGO_HOME' or util.path.join(user_home, '.cargo')
+  local registry = util.path.join(cargo_home, 'registry', 'src')
+  local git_registry = util.path.join(cargo_home, 'git', 'checkouts')
+
+  local rustup_home = os.getenv 'RUSTUP_HOME' or util.path.join(user_home, '.rustup')
+  local toolchains = util.path.join(rustup_home, 'toolchains')
+
+  for _, item in ipairs { toolchains, registry, git_registry } do
+    if util.path.is_descendant(item, fname) then
+      local clients = util.get_lsp_clients { name = 'rust_analyzer' }
+      return #clients > 0 and clients[#clients].config.root_dir or nil
     end
-    vim.notify 'Cargo workspace reloaded'
-  end)
+  end
 end
 
 return {
   default_config = {
     cmd = { 'rust-analyzer' },
     filetypes = { 'rust' },
+    single_file_support = true,
     root_dir = function(fname)
+      local reuse_active = is_library(fname)
+      if reuse_active then
+        return reuse_active
+      end
+
       local cargo_crate_dir = util.root_pattern 'Cargo.toml'(fname)
-      local cmd = { 'cargo', 'metadata', '--no-deps', '--format-version', '1' }
+      local cargo_workspace_root
+
       if cargo_crate_dir ~= nil then
-        cmd[#cmd + 1] = '--manifest-path'
-        cmd[#cmd + 1] = util.path.join(cargo_crate_dir, 'Cargo.toml')
-      end
-      local cargo_metadata = ''
-      local cargo_metadata_err = ''
-      local cm = vim.fn.jobstart(cmd, {
-        on_stdout = function(_, d, _)
-          cargo_metadata = table.concat(d, '\n')
-        end,
-        on_stderr = function(_, d, _)
-          cargo_metadata_err = table.concat(d, '\n')
-        end,
-        stdout_buffered = true,
-        stderr_buffered = true,
-      })
-      if cm > 0 then
-        cm = vim.fn.jobwait({ cm })[1]
-      else
-        cm = -1
-      end
-      local cargo_workspace_dir = nil
-      if cm == 0 then
-        cargo_workspace_dir = vim.json.decode(cargo_metadata)['workspace_root']
-        if cargo_workspace_dir ~= nil then
-          cargo_workspace_dir = util.path.sanitize(cargo_workspace_dir)
+        local cmd = {
+          'cargo',
+          'metadata',
+          '--no-deps',
+          '--format-version',
+          '1',
+          '--manifest-path',
+          util.path.join(cargo_crate_dir, 'Cargo.toml'),
+        }
+
+        local result = async.run_command(cmd)
+
+        if result and result[1] then
+          result = vim.json.decode(table.concat(result, ''))
+          if result['workspace_root'] then
+            cargo_workspace_root = util.path.sanitize(result['workspace_root'])
+          end
         end
-      else
-        vim.notify(
-          string.format('[lspconfig] cmd (%q) failed:\n%s', table.concat(cmd, ' '), cargo_metadata_err),
-          vim.log.levels.WARN
-        )
       end
-      return cargo_workspace_dir
+
+      return cargo_workspace_root
         or cargo_crate_dir
         or util.root_pattern 'rust-project.json'(fname)
         or util.find_git_ancestor(fname)
     end,
-    settings = {
-      ['rust-analyzer'] = {},
+    capabilities = {
+      experimental = {
+        serverStatusNotification = true,
+      },
     },
+    before_init = function(init_params, config)
+      -- See https://github.com/rust-lang/rust-analyzer/blob/eb5da56d839ae0a9e9f50774fa3eb78eb0964550/docs/dev/lsp-extensions.md?plain=1#L26
+      if config.settings and config.settings['rust-analyzer'] then
+        init_params.initializationOptions = config.settings['rust-analyzer']
+      end
+    end,
   },
   commands = {
     CargoReload = {
@@ -69,11 +94,26 @@ return {
   },
   docs = {
     description = [[
-https://github.com/rust-analyzer/rust-analyzer
+https://github.com/rust-lang/rust-analyzer
 
 rust-analyzer (aka rls 2.0), a language server for Rust
 
-See [docs](https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user#settings) for extra settings.
+
+See [docs](https://github.com/rust-lang/rust-analyzer/blob/master/docs/user/generated_config.adoc) for extra settings. The settings can be used like this:
+```lua
+require'lspconfig'.rust_analyzer.setup{
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = false;
+      }
+    }
+  }
+}
+```
+
+Note: do not set `init_options` for this LS config, it will be automatically populated by the contents of settings["rust-analyzer"] per
+https://github.com/rust-lang/rust-analyzer/blob/eb5da56d839ae0a9e9f50774fa3eb78eb0964550/docs/dev/lsp-extensions.md?plain=1#L26.
     ]],
     default_config = {
       root_dir = [[root_pattern("Cargo.toml", "rust-project.json")]],

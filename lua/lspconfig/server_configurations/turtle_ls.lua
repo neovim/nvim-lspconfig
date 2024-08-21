@@ -12,7 +12,7 @@ if bin_path == nil then
   local path = os.getenv 'PATH'
   if path ~= nil then
     for str in string.gmatch(path, '([^' .. sep .. ']+)') do
-      table.insert(paths, str)
+      paths[#paths + 1] = str
     end
   end
   for _, p in ipairs(paths) do
@@ -26,15 +26,9 @@ else
   full_path = util.path.join(bin_path, bin_name)
 end
 
-local cmd = { 'node', full_path, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', 'node', full_path, '--stdio' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'node', full_path, '--stdio' },
     filetypes = { 'turtle', 'ttl' },
     root_dir = function(fname)
       return util.find_git_ancestor(fname)

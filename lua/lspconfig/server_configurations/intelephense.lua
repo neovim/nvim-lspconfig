@@ -1,15 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'intelephense'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'intelephense', '--stdio' },
     filetypes = { 'php' },
     root_dir = function(pattern)
       local cwd = vim.loop.cwd()

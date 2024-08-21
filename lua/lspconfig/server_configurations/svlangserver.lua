@@ -1,12 +1,5 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'svlangserver'
-local cmd = { bin_name }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name }
-end
-
 local function build_index()
   local params = {
     command = 'systemverilog.build_index',
@@ -24,7 +17,7 @@ end
 
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'svlangserver' },
     filetypes = { 'verilog', 'systemverilog' },
     root_dir = function(fname)
       return util.root_pattern '.svlangserver'(fname) or util.find_git_ancestor(fname)

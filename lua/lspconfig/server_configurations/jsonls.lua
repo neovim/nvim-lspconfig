@@ -1,15 +1,8 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'vscode-json-language-server'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'vscode-json-language-server', '--stdio' },
     filetypes = { 'json', 'jsonc' },
     init_options = {
       provideFormatter = true,
@@ -29,7 +22,7 @@ vscode-json-language-server, a language server for JSON and JSON schema
 npm i -g vscode-langservers-extracted
 ```
 
-Neovim does not currently include built-in snippets. `vscode-json-language-server` only provides completions when snippet support is enabled. To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
+`vscode-json-language-server` only provides completions when snippet support is enabled. If you use Neovim older than v0.10 you need to enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
 
 ```lua
 --Enable (broadcasting) snippet capability for completion

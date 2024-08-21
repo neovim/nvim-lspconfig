@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Run luacheck
-        uses: lunarmodules/luacheck@v0
+        uses: lunarmodules/luacheck@v1
         with:
           args: lua/* test/*
 
@@ -27,11 +27,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Lint with stylua
-        uses: JohnnyMorganz/stylua-action@v1.1.2
+        uses: JohnnyMorganz/stylua-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # CLI arguments
+          version: latest
           args: --check .

@@ -8,7 +8,15 @@ return {
       command = { 'golangci-lint', 'run', '--out-format', 'json' },
     },
     root_dir = function(fname)
-      return util.root_pattern 'go.work'(fname) or util.root_pattern('go.mod', '.golangci.yaml', '.git')(fname)
+      return util.root_pattern(
+        '.golangci.yml',
+        '.golangci.yaml',
+        '.golangci.toml',
+        '.golangci.json',
+        'go.work',
+        'go.mod',
+        '.git'
+      )(fname)
     end,
   },
   docs = {
@@ -28,7 +36,7 @@ go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
 ]],
     default_config = {
-      root_dir = [[root_pattern('go.work') or root_pattern('go.mod', '.golangci.yaml', '.git')]],
+      root_dir = [[root_pattern('.golangci.yml', '.golangci.yaml', '.golangci.toml', '.golangci.json', 'go.work', 'go.mod', '.git')]],
     },
   },
 }

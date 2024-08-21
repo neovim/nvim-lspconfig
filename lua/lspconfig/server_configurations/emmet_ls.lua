@@ -1,16 +1,24 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'emmet-ls'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
-
 return {
   default_config = {
-    cmd = cmd,
-    filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+    cmd = { 'emmet-ls', '--stdio' },
+    filetypes = {
+      'astro',
+      'css',
+      'eruby',
+      'html',
+      'htmldjango',
+      'javascriptreact',
+      'less',
+      'pug',
+      'sass',
+      'scss',
+      'svelte',
+      'typescriptreact',
+      'vue',
+      'htmlangular',
+    },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
   },

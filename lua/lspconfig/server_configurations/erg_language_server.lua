@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'els' },
+    cmd = { 'erg', '--language-server' },
     filetypes = { 'erg' },
     root_dir = function(fname)
       return util.root_pattern 'package.er'(fname) or util.find_git_ancestor(fname)
@@ -10,13 +10,14 @@ return {
   },
   docs = {
     description = [[
-https://github.com/erg-lang/erg-language-server
+https://github.com/erg-lang/erg#flags ELS
 
 ELS (erg-language-server) is a language server for the Erg programming language.
 
-`els` can be installed via `cargo`:
+erg-language-server can be installed via `cargo` and used as follows:
  ```sh
- cargo install els
+ cargo install erg --features els
+ erg --language-server
  ```
     ]],
     default_config = {

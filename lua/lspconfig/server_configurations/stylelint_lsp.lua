@@ -1,15 +1,21 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'stylelint-lsp'
-local cmd = { bin_name, '--stdio' }
+local root_file = {
+  '.stylelintrc',
+  '.stylelintrc.cjs',
+  '.stylelintrc.js',
+  '.stylelintrc.json',
+  '.stylelintrc.yaml',
+  '.stylelintrc.yml',
+  'stylelint.config.cjs',
+  'stylelint.config.js',
+}
 
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-end
+root_file = util.insert_package_json(root_file, 'stylelint')
 
 return {
   default_config = {
-    cmd = cmd,
+    cmd = { 'stylelint-lsp', '--stdio' },
     filetypes = {
       'css',
       'less',
@@ -22,7 +28,7 @@ return {
       'typescript',
       'typescriptreact',
     },
-    root_dir = util.root_pattern('.stylelintrc', 'package.json'),
+    root_dir = util.root_pattern(unpack(root_file)),
     settings = {},
   },
   docs = {
@@ -47,8 +53,5 @@ require'lspconfig'.stylelint_lsp.setup{
 }
 ```
 ]],
-    default_config = {
-      root_dir = [[ root_pattern('.stylelintrc', 'package.json') ]],
-    },
   },
 }

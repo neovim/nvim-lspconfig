@@ -5,6 +5,7 @@ return {
     cmd = { 'millet' },
     filetypes = { 'sml' },
     root_dir = util.root_pattern 'millet.toml',
+    single_file_support = true,
   },
   docs = {
     description = [[

@@ -4,16 +4,12 @@ return {
   default_config = {
     cmd = { 'haskell-language-server-wrapper', '--lsp' },
     filetypes = { 'haskell', 'lhaskell' },
-    root_dir = function(filepath)
-      return (
-        util.root_pattern('hie.yaml', 'stack.yaml', 'cabal.project')(filepath)
-        or util.root_pattern('*.cabal', 'package.yaml')(filepath)
-      )
-    end,
+    root_dir = util.root_pattern('hie.yaml', 'stack.yaml', 'cabal.project', '*.cabal', 'package.yaml'),
     single_file_support = true,
     settings = {
       haskell = {
         formattingProvider = 'ormolu',
+        cabalFormattingProvider = 'cabalfmt',
       },
     },
     lspinfo = function(cfg)
@@ -39,17 +35,18 @@ return {
 https://github.com/haskell/haskell-language-server
 
 Haskell Language Server
+
+If you are using HLS 1.9.0.0, enable the language server to launch on Cabal files as well:
+
+```lua
+require('lspconfig')['hls'].setup{
+  filetypes = { 'haskell', 'lhaskell', 'cabal' },
+}
+```
     ]],
 
     default_config = {
-      root_dir = [[
-function (filepath)
-  return (
-    util.root_pattern('hie.yaml', 'stack.yaml', 'cabal.project')(filepath)
-    or util.root_pattern('*.cabal', 'package.yaml')(filepath)
-  )
-end
-      ]],
+      root_dir = [[root_pattern("hie.yaml", "stack.yaml", "cabal.project", "*.cabal", "package.yaml")]],
     },
   },
 }

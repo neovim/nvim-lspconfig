@@ -5,7 +5,7 @@ local temp_path = vim.fn.stdpath 'cache'
 local function make_cmd(new_config)
   if new_config.bundle_path ~= nil then
     local command_fmt =
-      [[%s/PowerShellEditorServices/Start-EditorServices.ps1 -BundledModulesPath %s -LogPath %s/powershell_es.log -SessionDetailsPath %s/powershell_es.session.json -FeatureFlags @() -AdditionalModules @() -HostName nvim -HostProfileId 0 -HostVersion 1.0.0 -Stdio -LogLevel Normal]]
+      [[& '%s/PowerShellEditorServices/Start-EditorServices.ps1' -BundledModulesPath '%s' -LogPath '%s/powershell_es.log' -SessionDetailsPath '%s/powershell_es.session.json' -FeatureFlags @() -AdditionalModules @() -HostName nvim -HostProfileId 0 -HostVersion 1.0.0 -Stdio -LogLevel Normal]]
     local command = command_fmt:format(new_config.bundle_path, new_config.bundle_path, temp_path, temp_path)
     return { new_config.shell, '-NoLogo', '-NoProfile', '-Command', command }
   end
