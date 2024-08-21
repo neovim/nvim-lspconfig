@@ -14,8 +14,8 @@ local texlab_forward_status = {
   [3] = 'Unconfigured',
 }
 
-local function buf_build(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
+local function buf_build()
+  local bufnr = vim.api.nvim_get_current_buf()
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   local pos = vim.api.nvim_win_get_cursor(0)
   local params = {
@@ -37,8 +37,8 @@ local function buf_build(bufnr)
   end
 end
 
-local function buf_search(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
+local function buf_search()
+  local bufnr = vim.api.nvim_get_current_buf()
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   local pos = vim.api.nvim_win_get_cursor(0)
   local params = {
@@ -60,8 +60,8 @@ local function buf_search(bufnr)
   end
 end
 
-local function buf_cancel_build(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
+local function buf_cancel_build()
+  local bufnr = vim.api.nvim_get_current_buf()
   if not util.get_active_client_by_name(bufnr, 'texlab') then
     return vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
@@ -69,8 +69,8 @@ local function buf_cancel_build(bufnr)
   vim.notify('Build cancelled', vim.log.levels.INFO)
 end
 
-local function dependency_graph(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
+local function dependency_graph()
+  local bufnr = vim.api.nvim_get_current_buf()
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   if not texlab_client then
     return vim.notify('Texlab client not found', vim.log.levels.ERROR)
@@ -83,8 +83,8 @@ local function dependency_graph(bufnr)
   end, 0)
 end
 
-local function cleanArtifacts(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
+local function cleanArtifacts()
+  local bufnr = vim.api.nvim_get_current_buf()
   if not util.get_active_client_by_name(bufnr, 'texlab') then
     return vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
@@ -95,8 +95,8 @@ local function cleanArtifacts(bufnr)
   vim.notify('Artifacts cleaned successfully', vim.log.levels.INFO)
 end
 
-local function cleanAuxiliary(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
+local function cleanAuxiliary()
+  local bufnr = vim.api.nvim_get_current_buf()
   if not util.get_active_client_by_name(bufnr, 'texlab') then
     return vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
@@ -107,8 +107,8 @@ local function cleanAuxiliary(bufnr)
   vim.notify('Auxiliary files cleaned successfully', vim.log.levels.INFO)
 end
 
-local function buf_find_envs(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
+local function buf_find_envs()
+  local bufnr = vim.api.nvim_get_current_buf()
   local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
   if not texlab_client then
     return vim.notify('Texlab client not found', vim.log.levels.ERROR)
@@ -140,8 +140,8 @@ local function buf_find_envs(bufnr)
   end, bufnr)
 end
 
-local function buf_change_env(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
+local function buf_change_env()
+  local bufnr = vim.api.nvim_get_current_buf()
   if not util.get_active_client_by_name(bufnr, 'texlab') then
     return vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
@@ -161,18 +161,6 @@ local function buf_change_env(bufnr)
     },
   }
 end
-
--- bufnr isn't actually required here, but we need a valid buffer in order to
--- be able to find the client for buf_request.
--- TODO find a client by looking through buffers for a valid client?
--- local function build_cancel_all(bufnr)
---   bufnr = util.validate_bufnr(bufnr)
---   local params = { token = "texlab-build-*" }
---   lsp.buf_request(bufnr, 'window/progress/cancel', params, function(err, method, result, client_id)
---     if err then error(tostring(err)) end
---     print("Cancel result", vim.inspect(result))
---   end)
--- end
 
 return {
   default_config = {
@@ -212,49 +200,49 @@ return {
   commands = {
     TexlabBuild = {
       function()
-        buf_build(0)
+        buf_build()
       end,
       description = 'Build the current buffer',
     },
     TexlabForward = {
       function()
-        buf_search(0)
+        buf_search()
       end,
       description = 'Forward search from current position',
     },
     TexlabCancelBuild = {
       function()
-        buf_cancel_build(0)
+        buf_cancel_build()
       end,
       description = 'Cancel the current build',
     },
     TexlabDependencyGraph = {
       function()
-        dependency_graph(0)
+        dependency_graph()
       end,
       description = 'Show the dependency graph',
     },
     TexlabCleanArtifacts = {
       function()
-        cleanArtifacts(0)
+        cleanArtifacts()
       end,
       description = 'Clean the artifacts',
     },
     TexlabCleanAuxiliary = {
       function()
-        cleanAuxiliary(0)
+        cleanAuxiliary()
       end,
       description = 'Clean the auxiliary files',
     },
     TexlabFindEnvironments = {
       function()
-        buf_find_envs(0)
+        buf_find_envs()
       end,
       description = 'Find the environments at current position',
     },
     TexlabChangeEnvironment = {
       function()
-        buf_change_env(0)
+        buf_change_env()
       end,
       description = 'Change the environment at current position',
     },
