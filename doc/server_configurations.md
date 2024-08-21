@@ -1950,6 +1950,7 @@ https://clangd.llvm.org/installation.html
 require'lspconfig'.clangd.setup{}
 ```
 **Commands:**
+- ClangdShowSymbolInfo: Show symbol info
 - ClangdSwitchSourceHeader: Switch between source/header
 
 **Default values:**
