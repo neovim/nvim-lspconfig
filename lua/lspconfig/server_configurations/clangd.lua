@@ -83,7 +83,7 @@ return {
     },
     ClangdShowSymbolInfo = {
       function()
-        symbol_info(0)
+        symbol_info()
       end,
       description = 'Show symbol info',
     },
