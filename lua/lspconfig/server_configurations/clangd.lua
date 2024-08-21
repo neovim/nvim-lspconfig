@@ -21,6 +21,31 @@ local function switch_source_header(bufnr)
   end
 end
 
+local function symbol_info()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clangd_client = util.get_active_client_by_name(bufnr, 'clangd')
+  if not clangd_client or not clangd_client.supports_method 'textDocument/symbolInfo' then
+    return vim.notify('Clangd client not found', vim.log.levels.ERROR)
+  end
+  local params = vim.lsp.util.make_position_params()
+  clangd_client.request('textDocument/symbolInfo', params, function(err, res)
+    if err or #res == 0 then
+      -- Clangd always returns an error, there is not reason to parse it
+      return
+    end
+    local container = string.format('container: %s', res[1].containerName) ---@type string
+    local name = string.format('name: %s', res[1].name) ---@type string
+    vim.lsp.util.open_floating_preview({ name, container }, '', {
+      height = 2,
+      width = math.max(string.len(name), string.len(container)),
+      focusable = false,
+      focus = false,
+      border = require('lspconfig.ui.windows').default_options.border or 'single',
+      title = 'Symbol Info',
+    })
+  end, bufnr)
+end
+
 local root_files = {
   '.clangd',
   '.clang-tidy',
@@ -55,6 +80,12 @@ return {
         switch_source_header(0)
       end,
       description = 'Switch between source/header',
+    },
+    ClangdShowSymbolInfo = {
+      function()
+        symbol_info()
+      end,
+      description = 'Show symbol info',
     },
   },
   docs = {
