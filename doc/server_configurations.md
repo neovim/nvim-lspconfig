@@ -397,48 +397,6 @@ require'lspconfig'.aiken.setup{}
   ```
 
 
-## als
-
-https://github.com/AdaCore/ada_language_server
-
-Installation instructions can be found [here](https://github.com/AdaCore/ada_language_server#Install).
-
-Can be configured by passing a "settings" object to `als.setup{}`:
-
-```lua
-require('lspconfig').als.setup{
-    settings = {
-      ada = {
-        projectFile = "project.gpr";
-        scenarioVariables = { ... };
-      }
-    }
-}
-```
-
-
-
-**Snippet to enable the language server:**
-```lua
-require'lspconfig'.als.setup{}
-```
-
-
-**Default values:**
-  - `cmd` : 
-  ```lua
-  { "ada_language_server" }
-  ```
-  - `filetypes` : 
-  ```lua
-  { "ada" }
-  ```
-  - `root_dir` : 
-  ```lua
-  util.root_pattern("Makefile", ".git", "*.gpr", "*.adc")
-  ```
-
-
 ## anakin_language_server
 
 https://pypi.org/project/anakin-language-server/
