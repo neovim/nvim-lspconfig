@@ -8,7 +8,17 @@ return {
     settings = {},
     init_options = {
       extensionConfiguration = {
+        -- buggy, prompts much too often, superseded by incrementalTypechecking, below
         askToStartBuild = false,
+
+        allowBuiltInFormatter = true, -- lower latency
+        incrementalTypechecking = { -- removes the need for external build process
+          enabled = true,
+          acrossFiles = true,
+        },
+        cache = { projectConfig = { enabled = true } }, -- speed up latency dramatically
+        codeLens = true,
+        inlayHints = { enable = true },
       },
     },
   },
@@ -21,7 +31,21 @@ ReScript Language Server can be installed via npm:
 npm install -g @rescript/language-server
 ```
 
-See the init_options supported (see https://github.com/rescript-lang/rescript-vscode/tree/master/server/config.md):
+See [package.json](https://github.com/rescript-lang/rescript-vscode/blob/master/package.json#L139)
+for init_options supported.
+
+For example, in order to disable the `inlayHints` option:
+```lua
+require'lspconfig'.pylsp.setup{
+  settings = {
+    rescript = {
+      settings = {
+        inlayHints = { enable = false },
+      },
+    },
+  }
+}
+```
 ]],
     root_dir = [[root_pattern('bsconfig.json', 'rescript.json', '.git')]],
   },
