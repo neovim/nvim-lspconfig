@@ -10331,7 +10331,7 @@ require'lspconfig'.scheme_langserver.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "scheme-langserver" }
+  { "scheme-langserver", "~/.scheme-langserver.log", "enable", "disable" }
   ```
   - `filetypes` : 
   ```lua
