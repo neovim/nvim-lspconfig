@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 local bin_name = 'scheme-langserver'
-local cmd = { bin_name, "~/.scheme-langserver.log", "enable", "disable" }
+local cmd = { bin_name, '~/.scheme-langserver.log', 'enable', 'disable' }
 local root_files = {
   'Akku.manifest',
   '.git',
