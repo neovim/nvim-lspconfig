@@ -429,6 +429,13 @@ require'lspconfig'.als.setup{}
   ```lua
   { "ada_language_server" }
   ```
+  - `deprecate` : 
+  ```lua
+  {
+    to = "github.com/TamaMcGlinn/nvim-lspconfig-ada",
+    version = "0.2.0"
+  }
+  ```
   - `filetypes` : 
   ```lua
   { "ada" }
