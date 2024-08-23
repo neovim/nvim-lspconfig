@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'R', '--slave', '-e', 'languageserver::run()' },
+    cmd = { 'R', '--no-echo', '-e', 'languageserver::run()' },
     filetypes = { 'r', 'rmd' },
     root_dir = function(fname)
       return util.find_git_ancestor(fname) or vim.loop.os_homedir()
