@@ -9413,7 +9413,7 @@ require'lspconfig'.r_language_server.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "R", "--slave", "-e", "languageserver::run()" }
+  { "R", "--no-echo", "-e", "languageserver::run()" }
   ```
   - `filetypes` : 
   ```lua
