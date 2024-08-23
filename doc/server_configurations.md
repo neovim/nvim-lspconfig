@@ -9755,7 +9755,21 @@ ReScript Language Server can be installed via npm:
 npm install -g @rescript/language-server
 ```
 
-See the init_options supported (see https://github.com/rescript-lang/rescript-vscode/tree/master/server/config.md):
+See [package.json](https://github.com/rescript-lang/rescript-vscode/blob/master/package.json#L139)
+for init_options supported.
+
+For example, in order to disable the `inlayHints` option:
+```lua
+require'lspconfig'.pylsp.setup{
+  settings = {
+    rescript = {
+      settings = {
+        inlayHints = { enable = false },
+      },
+    },
+  }
+}
+```
 
 
 
@@ -9778,7 +9792,21 @@ require'lspconfig'.rescriptls.setup{}
   ```lua
   {
     extensionConfiguration = {
-      askToStartBuild = false
+      allowBuiltInFormatter = true,
+      askToStartBuild = false,
+      cache = {
+        projectConfig = {
+          enabled = true
+        }
+      },
+      codeLens = true,
+      incrementalTypechecking = {
+        acrossFiles = true,
+        enabled = true
+      },
+      inlayHints = {
+        enable = true
+      }
     }
   }
   ```
