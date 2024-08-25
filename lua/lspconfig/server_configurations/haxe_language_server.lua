@@ -4,7 +4,7 @@ return {
   default_config = {
     cmd = { 'haxe-language-server' },
     filetypes = { 'haxe' },
-    root_dir = util.root_pattern '*.hxml',
+    root_dir = util.root_pattern('*.hxml', '.git'),
     settings = {
       haxe = {
         executable = 'haxe',
@@ -41,7 +41,7 @@ your project's root directory. If your file is named something different,
 specify it using the `init_options.displayArguments` setting.
 ]],
     default_config = {
-      root_dir = [[root_pattern("*.hxml")]],
+      root_dir = [[root_pattern("*.hxml", ".git")]],
     },
   },
 }
