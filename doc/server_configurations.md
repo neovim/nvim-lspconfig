@@ -5247,9 +5247,20 @@ lspconfig.haxe_language_server.setup({
 })
 ```
 
-By default, an HXML compiler arguments file named `build.hxml` is expected in
-your project's root directory. If your file is named something different,
-specify it using the `init_options.displayArguments` setting.
+By default, the language server is configured with the HXML compiler arguments
+contained in the first `.hxml` file found in your project's root directory.
+If you want to specify which one to use, set the `init_options.displayArguments`
+setting:
+
+```lua
+lspconfig.haxe_language_server.setup({
+  -- ...
+  init_options = {
+    displayArguments = { "build.hxml" },
+  },
+})
+```
+
 
 
 
@@ -5270,13 +5281,15 @@ require'lspconfig'.haxe_language_server.setup{}
   ```
   - `init_options` : 
   ```lua
-  {
-    displayArguments = { "build.hxml" }
-  }
+  default value is set by on_new_config
+  ```
+  - `on_new_config` : 
+  ```lua
+  see source file
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("*.hxml")
+  root_pattern("*.hxml", ".git")
   ```
   - `settings` : 
   ```lua
