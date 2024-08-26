@@ -1,18 +1,33 @@
 local util = require 'lspconfig.util'
 
+local function find_hxml(path)
+  return vim.fs.find(function(name)
+    return name:match '.hxml$'
+  end, { path = path, type = 'file' })
+end
+
 return {
   default_config = {
     cmd = { 'haxe-language-server' },
     filetypes = { 'haxe' },
-    root_dir = util.root_pattern '*.hxml',
+    root_dir = util.root_pattern('*.hxml', '.git'),
     settings = {
       haxe = {
         executable = 'haxe',
       },
     },
-    init_options = {
-      displayArguments = { 'build.hxml' },
-    },
+    init_options = {},
+    on_new_config = function(new_config, new_root_dir)
+      if new_config.init_options.displayArguments then
+        return
+      end
+
+      local hxml = find_hxml(new_root_dir)[1]
+      if hxml then
+        vim.notify('Using HXML: ' .. hxml)
+        new_config.init_options.displayArguments = { hxml }
+      end
+    end,
   },
   docs = {
     description = [[
@@ -36,12 +51,24 @@ lspconfig.haxe_language_server.setup({
 })
 ```
 
-By default, an HXML compiler arguments file named `build.hxml` is expected in
-your project's root directory. If your file is named something different,
-specify it using the `init_options.displayArguments` setting.
+By default, the language server is configured with the HXML compiler arguments
+contained in the first `.hxml` file found in your project's root directory.
+If you want to specify which one to use, set the `init_options.displayArguments`
+setting:
+
+```lua
+lspconfig.haxe_language_server.setup({
+  -- ...
+  init_options = {
+    displayArguments = { "build.hxml" },
+  },
+})
+```
+
 ]],
     default_config = {
-      root_dir = [[root_pattern("*.hxml")]],
+      root_dir = [[root_pattern("*.hxml", ".git")]],
+      init_options = 'default value is set by on_new_config',
     },
   },
 }
