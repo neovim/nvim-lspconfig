@@ -13781,7 +13781,7 @@ require'lspconfig'.wgsl_analyzer.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".git"
+  root_pattern(".git")
   ```
   - `settings` : 
   ```lua
