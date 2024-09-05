@@ -27,6 +27,10 @@ local function server_alias(name)
       to = 'lua_ls',
       version = '0.2.0',
     },
+    tsserver = {
+      to = 'ts_ls',
+      version = '0.2.0',
+    },
   }
 
   return aliases[name]

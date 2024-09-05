@@ -44,8 +44,8 @@ Volar by default supports Vue 3 projects. Vue 2 projects need
 [additional configuration](https://github.com/vuejs/language-tools/tree/master/packages/vscode-vue#usage).
 
 **TypeScript support**
-As of release 2.0.0, Volar no longer wraps around tsserver. For typescript
-support, `tsserver` needs to be configured with the `@vue/typescript-plugin`
+As of release 2.0.0, Volar no longer wraps around ts_ls. For typescript
+support, `ts_ls` needs to be configured with the `@vue/typescript-plugin`
 plugin.
 
 **Take Over Mode**
