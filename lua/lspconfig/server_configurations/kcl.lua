@@ -10,7 +10,7 @@ return {
     description = [[
 https://github.com/kcl-lang/kcl.nvim
 
-Language server for the KCL configuration adn policy language.
+Language server for the KCL configuration and policy language.
 
 ]],
     default_config = {
