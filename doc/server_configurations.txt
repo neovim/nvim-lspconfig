@@ -10731,7 +10731,7 @@ require'lspconfig'.snakeskin_ls.setup{}
 **Default values:**
   - `cmd` : 
   ```lua
-  { "npx", "@snakeskin/cli", "lsp", "--stdio" }
+  { "snakeskin-cli", "lsp", "--stdio" }
   ```
   - `filetypes` : 
   ```lua
