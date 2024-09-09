@@ -8,11 +8,11 @@ return {
   },
   docs = {
     description = [[
-https://github.com/v-analyzer/v-analyzer
+https://github.com/vlang/v-analyzer
 
 V language server.
 
-`v-analyzer` can be installed by following the instructions [here](https://github.com/v-analyzer/v-analyzer#installation).
+`v-analyzer` can be installed by following the instructions [here](https://github.com/vlang/v-analyzer#installation).
 ]],
     default_config = {
       root_dir = [[root_pattern("v.mod", ".git")]],
