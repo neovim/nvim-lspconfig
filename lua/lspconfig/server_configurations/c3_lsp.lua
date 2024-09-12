@@ -4,7 +4,7 @@ return {
   default_config = {
     cmd = { 'c3lsp' },
     root_dir = function(fname)
-      return util.root_pattern 'project.json'(fname) or util.root_pattern '.git'(fname)
+      return util.root_pattern { 'project.json', '.git' }(fname)
     end,
     filetypes = { 'c3', 'c3i' },
   },
