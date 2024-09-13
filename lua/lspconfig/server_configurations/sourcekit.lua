@@ -3,13 +3,22 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'sourcekit-lsp' },
-    filetypes = { 'swift', 'c', 'cpp', 'objective-c', 'objective-cpp' },
+    filetypes = { 'swift', 'objc', 'objcpp', 'c', 'cpp' },
     root_dir = function(filename, _)
       return util.root_pattern 'buildServer.json'(filename)
         or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
         -- better to keep it at the end, because some modularized apps contain multiple Package.swift files
         or util.root_pattern('compile_commands.json', 'Package.swift')(filename)
         or util.find_git_ancestor(filename)
+    end,
+    get_language_id = function(_, ftype)
+      if ftype == "objc" then
+        return "objective-c"
+      end
+      if ftype == "objcpp" then
+        return "objective-cpp"
+      end
+      return ftype
     end,
   },
   docs = {
