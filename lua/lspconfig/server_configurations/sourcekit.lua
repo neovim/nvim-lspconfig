@@ -12,13 +12,8 @@ return {
         or util.find_git_ancestor(filename)
     end,
     get_language_id = function(_, ftype)
-      if ftype == 'objc' then
-        return 'objective-c'
-      end
-      if ftype == 'objcpp' then
-        return 'objective-cpp'
-      end
-      return ftype
+    local t = { objc = 'objective-c', objcpp = 'objective-cpp' }
+    return t[ftype] or ftype
     end,
   },
   docs = {
