@@ -11263,7 +11263,11 @@ require'lspconfig'.sourcekit.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "swift", "c", "cpp", "objective-c", "objective-cpp" }
+  { "swift", "objc", "objcpp", "c", "cpp" }
+  ```
+  - `get_language_id` : 
+  ```lua
+  see source file
   ```
   - `root_dir` : 
   ```lua
