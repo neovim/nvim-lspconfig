@@ -17,6 +17,9 @@ M.default_config = {
   handlers = {},
   autostart = true,
   capabilities = lsp.protocol.make_client_capabilities(),
+  should_attach = function(_, _)
+    return true
+  end,
 }
 
 -- global on_setup hook

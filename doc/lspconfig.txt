@@ -122,6 +122,14 @@ listed in `:help vim.lsp.start_client()` with the following unique entries:
     should likely be included in your new override. Some configurations
     use `on_new_config` to dynamically set or modify `cmd`.
 
+- {should_attach}
+
+    `function(filename, bufnr)` (default: function that returns true)
+
+    Called before the language server is attached to a buffer. If it evaluates
+    to false, the language server will not be attached. Useful for
+    conditionally enabling an LSP based on the current project.
+
 Note: all entries passed to `setup {}` override the entry in the default
 configuration. There is no composition.
 

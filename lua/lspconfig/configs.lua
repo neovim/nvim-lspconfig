@@ -14,6 +14,7 @@ local configs = {}
 --- @field autostart? boolean
 --- @field package _on_attach? fun(client: vim.lsp.Client, bufnr: integer)
 --- @field root_dir? string|fun(filename: string, bufnr: number)
+--- @field should_attach? fun(filename: string, bufnr: integer)
 
 --- @param cmd any
 local function sanitize_cmd(cmd)

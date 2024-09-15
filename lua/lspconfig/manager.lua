@@ -249,6 +249,10 @@ function M:try_add(bufnr, project_root)
   end
 
   local bufname = api.nvim_buf_get_name(bufnr)
+  if not self.config.should_attach(bufname, bufnr) then
+    return
+  end
+
   if #bufname == 0 and not self.config.single_file_support then
     return
   end
