@@ -10,11 +10,6 @@ local language_id_mapping = {
   text = 'plaintext',
 }
 
-local bin_name = 'ltex-ls'
-if vim.fn.has 'win32' == 1 then
-  bin_name = bin_name .. '.bat'
-end
-
 local filetypes = {
   'bib',
   'gitcommit',
@@ -56,7 +51,7 @@ end
 
 return {
   default_config = {
-    cmd = { bin_name },
+    cmd = { 'ltex-ls' },
     filetypes = filetypes,
     root_dir = util.find_git_ancestor,
     single_file_support = true,
