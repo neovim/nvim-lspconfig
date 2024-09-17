@@ -268,8 +268,14 @@ return function()
     '',
     'Configured servers list: ' .. table.concat(util.available_servers(), ', '),
   }
-
+  local deprecated_servers = {}
   vim.list_extend(buf_lines, matching_config_header)
+  for server_name, deprecate in pairs(require('lspconfig').server_aliases()) do
+    table.insert(deprecated_servers, ('%s -> %s'):format(server_name, deprecate.to))
+  end
+  if #deprecated_servers > 0 then
+    vim.list_extend(buf_lines, { '', 'Deprecated servers: ' .. table.concat(deprecated_servers, ' ') })
+  end
 
   local fmt_buf_lines = indent_lines(buf_lines, ' ')
 
