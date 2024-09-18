@@ -39,8 +39,8 @@ M.server_aliases = function(name)
   if name then
     return aliases[name]
   end
-  local result = {}
-  for server_name, deprecated in pairs(aliases) do
+  local used_aliases = {}
+  for name, alias in pairs(aliases) do
     if deprecated.inconfig then
       result[server_name] = deprecated
     end
