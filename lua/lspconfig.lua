@@ -4,6 +4,8 @@ local M = {
   util = require 'lspconfig.util',
 }
 
+--- Deprecated config names.
+---
 ---@class Alias
 ---@field to string The new name of the server
 ---@field version string The version that the alias will be removed in
