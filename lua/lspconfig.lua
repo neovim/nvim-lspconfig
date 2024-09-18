@@ -32,6 +32,7 @@ local aliases = {
 }
 
 ---@return Alias
+---@param name Get this alias, or nil to get all aliases that were used in the current session.
 M.server_aliases = function(name)
   if name then
     return aliases[name]
