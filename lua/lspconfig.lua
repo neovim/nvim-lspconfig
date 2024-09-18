@@ -34,18 +34,18 @@ local aliases = {
 }
 
 ---@return Alias
----@param name Get this alias, or nil to get all aliases that were used in the current session.
+---@param name string|nil get this alias, or nil to get all aliases that were used in the current session.
 M.server_aliases = function(name)
   if name then
     return aliases[name]
   end
   local used_aliases = {}
-  for name, alias in pairs(aliases) do
-    if deprecated.inconfig then
-      result[server_name] = deprecated
+  for sname, alias in pairs(aliases) do
+    if alias.inconfig then
+      used_aliases[sname] = alias
     end
   end
-  return result
+  return used_aliases
 end
 
 local mt = {}
