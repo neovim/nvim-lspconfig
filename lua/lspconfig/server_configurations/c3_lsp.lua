@@ -5,13 +5,13 @@ return {
     cmd = { 'c3lsp' },
     root_dir = function(fname)
       --look for a project directory
-      local path = util.root_pattern { 'project.json', 'manifest.json' }(fname);
+      local path = util.root_pattern { 'project.json', 'manifest.json' }(fname)
       if path ~= nil then
-        return path;
+        return path
       end
 
       --look for .git directory
-      return util.find_git_ancestors(fname);
+      return util.find_git_ancestors(fname)
 
     end,
     filetypes = { 'c3', 'c3i' },
