@@ -4,7 +4,21 @@ return {
   default_config = {
     cmd = { 'c3lsp' },
     root_dir = function(fname)
-      return util.root_pattern { 'project.json', '.git' }(fname)
+      --look for a project directory
+      local path = util.root_pattern {"project.json"}(fname);
+      if path ~= nil then
+        return path;
+      end
+
+      --look for a library directory
+      path = util.root_pattern {"manifest.json"}(fname);
+      if path ~= nil then
+        return path;
+      end
+
+      --look for .git directory
+      return util.find_git_ancestors(fname);
+
     end,
     filetypes = { 'c3', 'c3i' },
   },
@@ -13,9 +27,6 @@ return {
 https://github.com/pherrymason/c3-lsp
 
 Language Server for c3.
-    ]],
-    default_config = {
-      root_dir = [[root_pattern("project.json", ".git")]],
-    },
+]],
   },
 }
