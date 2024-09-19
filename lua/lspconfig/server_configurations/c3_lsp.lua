@@ -9,7 +9,7 @@ return {
       if path ~= nil then
         return path;
       end
-      
+
       --look for .git directory
       return util.find_git_ancestors(fname);
 
