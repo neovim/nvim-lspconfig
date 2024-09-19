@@ -12,7 +12,6 @@ return {
 
       --look for .git directory
       return util.find_git_ancestors(fname)
-
     end,
     filetypes = { 'c3', 'c3i' },
   },
