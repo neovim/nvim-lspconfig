@@ -5,7 +5,7 @@ return {
     cmd = { 'c3lsp' },
     root_dir = function(fname)
       --look for a project directory
-      local path = util.root_pattern {"project.json"}(fname);
+      local path = util.root_pattern {'project.json', 'manifest.json'}(fname);
       if path ~= nil then
         return path;
       end
