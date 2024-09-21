@@ -4,7 +4,7 @@ return {
   default_config = {
     cmd = { 'c3lsp' },
     root_dir = function(fname)
-      return util.root_pattern { 'project.json', '.git' }(fname)
+      return util.root_patttern { 'project.json', 'manifest.json', '.git' }(fname)
     end,
     filetypes = { 'c3', 'c3i' },
   },
@@ -13,9 +13,6 @@ return {
 https://github.com/pherrymason/c3-lsp
 
 Language Server for c3.
-    ]],
-    default_config = {
-      root_dir = [[root_pattern("project.json", ".git")]],
-    },
+]],
   },
 }
