@@ -1673,7 +1673,7 @@ require'lspconfig'.bzl.setup{}
 https://github.com/pherrymason/c3-lsp
 
 Language Server for c3.
-    
+
 
 
 **Snippet to enable the language server:**
@@ -1693,7 +1693,7 @@ require'lspconfig'.c3_lsp.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("project.json", ".git")
+  see source file
   ```
 
 
