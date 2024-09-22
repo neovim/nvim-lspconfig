@@ -73,7 +73,7 @@ function configs.__newindex(t, config_name, config_def)
         { 'f', 't' },
         true,
       },
-      root_dir = { user_config.root_dir, 'f', true },
+      root_dir = { user_config.root_dir, { 's', 'f' }, true },
       filetypes = { user_config.filetype, 't', true },
       on_new_config = { user_config.on_new_config, 'f', true },
       on_attach = { user_config.on_attach, 'f', true },
@@ -128,12 +128,14 @@ function configs.__newindex(t, config_name, config_def)
 
       async.run(function()
         local root_dir
-        if get_root_dir then
+        if type(get_root_dir) == 'function' then
           root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
           async.reenter()
           if not api.nvim_buf_is_valid(bufnr) then
             return
           end
+        elseif type(get_root_dir) == 'string' then
+          root_dir = get_root_dir
         end
 
         if root_dir then
