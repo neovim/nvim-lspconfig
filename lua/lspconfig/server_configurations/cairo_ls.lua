@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'cairo-language-server'
+local bin_name = 'scarb-cairo-language-server'
 local cmd = { bin_name, '/C', '--node-ipc' }
 
 return {
@@ -14,9 +14,9 @@ return {
     description = [[
 [Cairo Language Server](https://github.com/starkware-libs/cairo/tree/main/crates/cairo-lang-language-server)
 
-First, install cairo following [this tutorial](https://medium.com/@elias.tazartes/ahead-of-the-curve-install-cairo-1-0-alpha-and-prepare-for-regenesis-85f4e3940e20)
+First, install Cairo following [this tutorial](https://book.cairo-lang.org/ch01-01-installation.html)
 
-Then enable cairo language server in your lua configuration.
+Then enable Cairo Language Server in your Lua configuration.
 ```lua
 require'lspconfig'.cairo_ls.setup{}
 ```
