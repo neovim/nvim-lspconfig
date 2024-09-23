@@ -270,12 +270,14 @@ function M:try_add(bufnr, project_root)
 
   async.run(function()
     local root_dir
-    if get_root_dir then
+    if type(get_root_dir) == 'function' then
       root_dir = get_root_dir(buf_path, bufnr)
       async.reenter()
       if not api.nvim_buf_is_valid(bufnr) then
         return
       end
+    elseif type(get_root_dir) == 'string' then
+      root_dir = get_root_dir
     end
 
     if root_dir then
