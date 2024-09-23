@@ -12,9 +12,11 @@ return {
         local result = async.run_command { 'go', 'env', 'GOMODCACHE' }
         if result and result[1] then
           mod_cache = vim.trim(result[1])
+        else
+          mod_cache = vim.fn.system 'go env GOMODCACHE'
         end
       end
-      if fname:sub(1, #mod_cache) == mod_cache then
+      if mod_cache and fname:sub(1, #mod_cache) == mod_cache then
         local clients = util.get_lsp_clients { name = 'gopls' }
         if #clients > 0 then
           return clients[#clients].config.root_dir
