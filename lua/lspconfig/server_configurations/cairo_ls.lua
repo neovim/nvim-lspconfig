@@ -1,12 +1,9 @@
 local util = require 'lspconfig.util'
 
-local bin_name = 'scarb-cairo-language-server'
-local cmd = { bin_name, '/C', '--node-ipc' }
-
 return {
   default_config = {
     init_options = { hostInfo = 'neovim' },
-    cmd = cmd,
+    cmd = { 'scarb-cairo-language-server', '/C', '--node-ipc' },
     filetypes = { 'cairo' },
     root_dir = util.root_pattern('Scarb.toml', 'cairo_project.toml', '.git'),
   },
