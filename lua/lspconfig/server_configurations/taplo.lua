@@ -19,7 +19,7 @@ cargo install --features lsp --locked taplo-cli
 ```
     ]],
     default_config = {
-      root_dir = [[root_pattern("*.toml", ".git")]],
+      root_dir = [[root_pattern(".git")]],
     },
   },
 }
