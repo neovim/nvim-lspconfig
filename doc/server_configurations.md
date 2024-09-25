@@ -12059,7 +12059,7 @@ require'lspconfig'.taplo.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern("*.toml", ".git")
+  root_pattern(".git")
   ```
   - `single_file_support` : 
   ```lua
