@@ -19,11 +19,13 @@ return {
       if root and root ~= vim.env.HOME then
         return root
       end
-      root = util.root_pattern 'lua/'(fname)
-      if root then
-        return root
+      local root_lua = util.root_pattern 'lua/'(fname)
+      local root_git = util.find_git_ancestor(fname)
+      if string.len(root_lua or '') >= string.len(root_git or '') then
+        return root_lua
+      else
+        return root_git
       end
-      return util.find_git_ancestor(fname)
     end,
     single_file_support = true,
     log_level = vim.lsp.protocol.MessageType.Warning,
@@ -83,8 +85,5 @@ See `lua-language-server`'s [documentation](https://luals.github.io/wiki/setting
 * [Lua.workspace.library](https://luals.github.io/wiki/settings/#workspacelibrary)
 
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git")]],
-    },
   },
 }
