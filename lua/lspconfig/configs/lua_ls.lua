@@ -19,13 +19,9 @@ return {
       if root and root ~= vim.env.HOME then
         return root
       end
-      local root_lua = util.root_pattern 'lua/'(fname)
-      local root_git = util.find_git_ancestor(fname)
-      if string.len(root_lua or '') >= string.len(root_git or '') then
-        return root_lua
-      else
-        return root_git
-      end
+      local root_lua = util.root_pattern 'lua/'(fname) or ''
+      local root_git = util.find_git_ancestor(fname) or ''
+      return #root_lua >= #root_git and root_lua or root_git
     end,
     single_file_support = true,
     log_level = vim.lsp.protocol.MessageType.Warning,
