@@ -36,11 +36,13 @@ View the [documentation for all configs](doc/server_configurations.md) or `:help
    ```lua
    require'lspconfig'.pyright.setup{}
    ```
-3. Launch Nvim, the language server will attach and provide diagnostics.
+3. Ensure your project/workspace contains a root marker which matches the server requirements
+   specified in `:help lspconfig-all`.
+4. Open a code file in Nvim. LSP will attach and provide diagnostics.
    ```
    nvim main.py
    ```
-4. Run `:checkhealth lsp` to see the status or to troubleshoot.
+5. Run `:checkhealth lsp` to see the status or to troubleshoot.
 
 Read `:help lspconfig` for details. Read `:help lspconfig-all` for the full list of server-specific details.
 For servers not on your `$PATH` (e.g., `jdtls`, `elixirls`), you must manually set the `cmd` parameter when calling `setup()`.
@@ -94,7 +96,7 @@ lspconfig.rust_analyzer.setup {
 The most common reasons a language server does not start or attach are:
 
 1. Language server is not installed. nvim-lspconfig does not install language servers for you. You should be able to run the `cmd` defined in each server's Lua module from the command line and see that the language server starts. If the `cmd` is an executable name instead of an absolute path to the executable, ensure it is on your path.
-2. Missing filetype plugins. Certain languages are not detecting by vim/neovim because they have not yet been added to the filetype detection system. Ensure `:set ft?` shows the filetype and not an empty value.
+2. Missing filetype plugins. Certain languages are not detecting by Vim/Nvim because they have not yet been added to the filetype detection system. Ensure `:set ft?` shows the filetype and not an empty value.
 3. Not triggering root detection. **Some** language servers will only start if it is opened in a directory, or child directory, containing a file which signals the *root* of the project. Most of the time, this is a `.git` folder, but each server defines the root config in the lua file. See [server_configurations.md](doc/server_configurations.md) or the source for the list of root directories.
 4. You must pass `capabilities` for **each** `setup {}` if you want these to take effect.
 5. **Do not call `setup {}` twice for the same server**. The second call to `setup {}` will overwrite the first.
