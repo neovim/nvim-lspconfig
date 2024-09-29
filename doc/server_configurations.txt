@@ -11689,7 +11689,7 @@ require'lspconfig'.stylelint_lsp.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "css", "less", "scss", "sugarss", "vue", "wxss", "javascript", "javascriptreact", "typescript", "typescriptreact" }
+  { "css", "less", "scss", "sugarss", "vue", "wxss" }
   ```
   - `root_dir` : 
   ```lua
