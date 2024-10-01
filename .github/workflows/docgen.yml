@@ -22,11 +22,11 @@ jobs:
     - name: Commit changes
       env:
         COMMIT_MSG: |
-          docs: update server_configurations.md
+          docs: update configs.md
           skip-checks: true
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add doc/server_configurations.md doc/server_configurations.txt
+        git add doc/configs.md doc/configs.txt
         # Only commit and push if we have changes
         git diff --quiet && git diff --staged --quiet || (git commit -m "${COMMIT_MSG}"; git push)

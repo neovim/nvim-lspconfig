@@ -88,9 +88,9 @@ local function require_all_configs()
   vim.env.XDG_CACHE_HOME = '/home/user/.cache'
 
   -- Configs are lazy-loaded, tickle them to populate the `configs` singleton.
-  for _, v in ipairs(vim.fn.glob('lua/lspconfig/server_configurations/*.lua', 1, 1)) do
+  for _, v in ipairs(vim.fn.glob('lua/lspconfig/configs/*.lua', 1, 1)) do
     local module_name = v:gsub('.*/', ''):gsub('%.lua$', '')
-    configs[module_name] = require('lspconfig.server_configurations.' .. module_name)
+    configs[module_name] = require('lspconfig.configs.' .. module_name)
   end
 
   -- Reset the environment variables
@@ -268,10 +268,10 @@ local function generate_readme(template_file, params)
   local input_template = readfile(template_file)
   local readme_data = template(input_template, params)
 
-  local writer = io.open('doc/server_configurations.md', 'w')
+  local writer = assert(io.open('doc/configs.md', 'w'))
   writer:write(readme_data)
   writer:close()
-  uv.fs_copyfile('doc/server_configurations.md', 'doc/server_configurations.txt')
+  uv.fs_copyfile('doc/configs.md', 'doc/configs.txt')
 end
 
 require_all_configs()

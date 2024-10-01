@@ -3,7 +3,7 @@
 nvim-lspconfig is a "data only" repo, providing basic, default [Nvim LSP client](https://neovim.io/doc/user/lsp.html)
 configurations for various LSP servers.
 
-View the [documentation for all configs](doc/server_configurations.md) or `:help lspconfig-all` from Nvim.
+View the [documentation for all configs](doc/configs.md) or `:help lspconfig-all` from Nvim.
 
 ## Important ⚠️
 
@@ -28,7 +28,7 @@ View the [documentation for all configs](doc/server_configurations.md) or `:help
 
 ## Quickstart
 
-1. Install a language server, e.g. [pyright](doc/server_configurations.md#pyright)
+1. Install a language server, e.g. [pyright](doc/configs.md#pyright)
    ```bash
    npm i -g pyright
    ```
@@ -97,7 +97,7 @@ The most common reasons a language server does not start or attach are:
 
 1. Language server is not installed. nvim-lspconfig does not install language servers for you. You should be able to run the `cmd` defined in each server's Lua module from the command line and see that the language server starts. If the `cmd` is an executable name instead of an absolute path to the executable, ensure it is on your path.
 2. Missing filetype plugins. Certain languages are not detecting by Vim/Nvim because they have not yet been added to the filetype detection system. Ensure `:set ft?` shows the filetype and not an empty value.
-3. Not triggering root detection. **Some** language servers will only start if it is opened in a directory, or child directory, containing a file which signals the *root* of the project. Most of the time, this is a `.git` folder, but each server defines the root config in the lua file. See [server_configurations.md](doc/server_configurations.md) or the source for the list of root directories.
+3. Not triggering root detection. **Some** language servers will only start if it is opened in a directory, or child directory, containing a file which signals the *root* of the project. Most of the time, this is a `.git` folder, but each server defines the root config in the lua file. See [doc/configs.md](doc/configs.md) or the source for the list of root directories.
 4. You must pass `capabilities` for **each** `setup {}` if you want these to take effect.
 5. **Do not call `setup {}` twice for the same server**. The second call to `setup {}` will overwrite the first.
 
@@ -127,14 +127,14 @@ Most of the time, the reason for failure is present in the logs.
 
 ## Contributions
 
-If a language server is missing from [server_configurations.md](doc/server_configurations.md), contributing
+If a language server is missing from [configs.md](doc/configs.md), contributing
 a new configuration for it helps others, especially if the server requires special setup. Follow these steps:
 
 1. Read [CONTRIBUTING.md](CONTRIBUTING.md).
-2. Create a new file at `lua/lspconfig/server_configurations/SERVER_NAME.lua`.
-    - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/)
+2. Create a new file at `lua/lspconfig/configs/SERVER_NAME.lua`.
+    - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/)
       to get started. Most configs are simple. For an extensive example see
-      [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/texlab.lua).
+      [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/texlab.lua).
 3. Ask questions on [GitHub Discussions](https://github.com/neovim/neovim/discussions) or in the [Neovim Matrix room](https://app.element.io/#/room/#neovim:matrix.org).
 
 ### Release process

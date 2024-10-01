@@ -8,4 +8,4 @@ jobs:
       - name: Install codespell
         run: pip install codespell
       - name: Use codespell
-        run: codespell --quiet-level=2 --check-hidden --skip=./doc/server_configurations.md,./doc/server_configurations.txt --ignore-words=.codespellignorewords
+        run: codespell --quiet-level=2 --check-hidden --skip=./doc/configs.md,./doc/configs.txt --ignore-words=.codespellignorewords
