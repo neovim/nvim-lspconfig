@@ -58,14 +58,13 @@ function mt:__index(k)
       k = alias.to
     end
 
-    local success, config = pcall(require, 'lspconfig.server_configurations.' .. k)
+    local success, config = pcall(require, 'lspconfig.configs.' .. k)
     if success then
       configs[k] = config
     else
       vim.notify(
         string.format(
-          '[lspconfig] Cannot access configuration for %s. Ensure this server is listed in '
-            .. '`server_configurations.md` or added as a custom server.',
+          '[lspconfig] config "%s" not found. Ensure it is listed in `configs.md` or added as a custom server.',
           k
         ),
         vim.log.levels.WARN
