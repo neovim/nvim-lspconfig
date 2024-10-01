@@ -6730,7 +6730,7 @@ require'lspconfig'.lua_ls.setup{}
   ```
   - `root_dir` : 
   ```lua
-  root_pattern(".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git")
+  see source file
   ```
   - `single_file_support` : 
   ```lua
