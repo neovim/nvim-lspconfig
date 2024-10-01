@@ -368,23 +368,28 @@ standard for single-file mode, lspconfig will adopt that standard.
 ==============================================================================
 COMMANDS                                                    *lspconfig-commands*
 
-- `:LspInfo` shows the status of active and configured language servers. Note
-  that client id refers to the Nvim RPC instance connected to a given
-  language server. Also shows a list of deprecated servers that have been
-  configured.
+:LspInfo                                                            *:LspInfo*
+Shows the status of all configured language servers. Note that client id
+refers to the Nvim RPC channel connected to a given language server. Also
+lists deprecated servers.
 
 The following commands support tab-completion for all arguments. All commands
 that require a client id can either leverage tab-completion or the info
 contained in `:LspInfo`:
 
-- `:LspStart <config_name>` launches the requested (configured) client, but only
-  if it successfully resolves a root directory. Note: Defaults to all
-  configured servers matching the current buffer filetype.
-- `:LspStop <client_id>` stops the server with the given client id. Defaults to
-  stopping all servers active on the current buffer. if you want to force stop
-  a language server you can do it like `:LspStop <client_id> ++force`
-- `:LspRestart <client_id>` restarts the client with the given client id, and
-  will attempt to reattach to all previously attached buffers.
+:LspStart [config_name]                                            *:LspStart*
+Launches the requested (configured) client, but only if it successfully
+resolves a root directory. Note: Defaults to all configured servers matching
+the current buffer filetype.
+
+:LspStop [client_id]                                                *:LspStop*
+Stops the server with the given client id. Defaults to stopping all servers
+active on the current buffer. To force stop a language server: >
+    :LspStop <client_id> ++force
+
+:LspRestart [client_id]                                          *:LspRestart*
+Restarts the client with the given client id, and attempts to reattach to all
+previously attached buffers.
 
 ==============================================================================
 COMPLETION SUPPORT                                        *lspconfig-completion*
