@@ -6252,6 +6252,9 @@ Julia project, you must make sure that the project is instantiated:
 ```sh
 julia --project=/path/to/my/project -e 'using Pkg; Pkg.instantiate()'
 ```
+
+Note: The julia programming language searches for global environments within the `environments/`
+folder of `$JULIA_DEPOT_PATH` entries. By default this simply `~/.julia/environments`
     
 
 
@@ -6259,7 +6262,8 @@ julia --project=/path/to/my/project -e 'using Pkg; Pkg.instantiate()'
 ```lua
 require'lspconfig'.julials.setup{}
 ```
-
+**Commands:**
+- JuliaActivateEnv: Activate a Julia environment
 
 **Default values:**
   - `cmd` : 
