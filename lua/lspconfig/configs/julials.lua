@@ -7,7 +7,7 @@ local function activate_env(path)
   local bufnr = vim.api.nvim_get_current_buf()
   local julials_clients = vim.lsp.get_clients { bufnr = bufnr, name = 'julials' }
   assert(
-    #julials_clients == 0,
+    #julials_clients > 0,
     'method julia/activateenvironment is not supported by any servers active on the current buffer'
   )
   local function _activate_env(environment)
