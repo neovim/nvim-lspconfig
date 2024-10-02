@@ -20,6 +20,17 @@ local function map_list(t, func)
   return res
 end
 
+local function map_sorted(t, func)
+  local res = {}
+  for k, v in vim.spairs(t) do
+    local x = func(k, v)
+    if x ~= nil then
+      table.insert(res, x)
+    end
+  end
+  return res
+end
+
 local function indent(n, s)
   local prefix
   if type(n) == 'number' then
@@ -54,14 +65,6 @@ end
 local function readfile(path)
   assert(util.path.is_file(path))
   return io.open(path):read '*a'
-end
-
-local function sorted_map_table(t, func)
-  local keys = vim.tbl_keys(t)
-  table.sort(keys)
-  return map_list(keys, function(k)
-    return func(k, t[k])
-  end)
 end
 
 local lsp_section_template = [[
@@ -102,7 +105,7 @@ local function make_lsp_sections()
   return make_section(
     0,
     '\n',
-    sorted_map_table(configs, function(template_name, template_object)
+    map_sorted(configs, function(template_name, template_object)
       local template_def = template_object.config_def
       local docs = template_def.docs
 
@@ -120,7 +123,7 @@ local function make_lsp_sections()
           end
           return '**Commands:**\n'
             .. make_section(0, '\n', {
-              sorted_map_table(template_def.commands, function(name, def)
+              map_sorted(template_def.commands, function(name, def)
                 if def.description then
                   return string.format('- %s: %s', name, def.description)
                 end
@@ -136,7 +139,7 @@ local function make_lsp_sections()
             return
           end
           return make_section(0, '\n', {
-            sorted_map_table(template_def.default_config, function(k, v)
+            map_sorted(template_def.default_config, function(k, v)
               local description = ((docs or {}).default_config or {})[k]
               if description and type(description) ~= 'string' then
                 description = inspect(description)
@@ -186,7 +189,7 @@ local function make_lsp_sections()
                     make_section(
                       0,
                       '\n\n',
-                      sorted_map_table(default_settings.properties, function(k, v)
+                      map_sorted(default_settings.properties, function(k, v)
                         local function tick(s)
                           return string.format('`%s`', s)
                         end
@@ -254,7 +257,7 @@ local function make_implemented_servers_list()
   return make_section(
     0,
     '\n',
-    sorted_map_table(configs, function(k)
+    map_sorted(configs, function(k)
       return template('- [{{server}}](#{{server}})', { server = k })
     end)
   )
