@@ -76,4 +76,14 @@ function mt:__index(k)
   return configs[k]
 end
 
+local minimum_neovim_version = '0.9'
+if vim.fn.has('nvim-' .. minimum_neovim_version) == 0 then
+  local msg = string.format(
+    'nvim-lspconfig requires Nvim version %s, but you are running: %s',
+    vim.version.parse(minimum_neovim_version),
+    vim.version()
+  )
+  error(msg)
+end
+
 return setmetatable(M, mt)
