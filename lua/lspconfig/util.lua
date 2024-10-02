@@ -172,10 +172,6 @@ M.path = (function()
     return result
   end
 
-  local function path_join(...)
-    return table.concat(M.tbl_flatten { ... }, '/')
-  end
-
   -- Traverse the path calling cb along the way.
   local function traverse_parents(path, cb)
     path = uv.fs_realpath(path)
@@ -236,7 +232,6 @@ M.path = (function()
     is_absolute = is_absolute,
     exists = exists,
     dirname = dirname,
-    join = path_join,
     sanitize = sanitize,
     traverse_parents = traverse_parents,
     iterate_parents = iterate_parents,
@@ -278,7 +273,7 @@ function M.root_pattern(...)
     startpath = M.strip_archive_subpath(startpath)
     for _, pattern in ipairs(patterns) do
       local match = M.search_ancestors(startpath, function(path)
-        for _, p in ipairs(vim.fn.glob(M.path.join(M.path.escape_wildcards(path), pattern), true, true)) do
+        for _, p in ipairs(vim.fn.glob(vim.fs.joinpath(M.path.escape_wildcards(path), pattern), true, true)) do
           if M.path.exists(p) then
             return path
           end
@@ -295,7 +290,7 @@ end
 function M.find_git_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     -- Support git directories and git files (worktrees)
-    if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
+    if M.path.is_dir(vim.fs.joinpath(path, '.git')) or M.path.is_file(vim.fs.joinpath(path, '.git')) then
       return path
     end
   end)
@@ -304,7 +299,7 @@ end
 function M.find_mercurial_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     -- Support Mercurial directories
-    if M.path.is_dir(M.path.join(path, '.hg')) then
+    if M.path.is_dir(vim.fs.joinpath(path, '.hg')) then
       return path
     end
   end)
@@ -312,7 +307,7 @@ end
 
 function M.find_node_modules_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
-    if M.path.is_dir(M.path.join(path, 'node_modules')) then
+    if M.path.is_dir(vim.fs.joinpath(path, 'node_modules')) then
       return path
     end
   end)
@@ -320,7 +315,7 @@ end
 
 function M.find_package_json_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
-    if M.path.is_file(M.path.join(path, 'package.json')) then
+    if M.path.is_file(vim.fs.joinpath(path, 'package.json')) then
       return path
     end
   end)

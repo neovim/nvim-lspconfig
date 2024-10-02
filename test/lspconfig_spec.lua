@@ -120,14 +120,6 @@ describe('lspconfig', function()
           assert.is_nil(lspconfig.util.path.is_absolute '../foo/bar')
         end)
       end)
-
-      describe('join', function()
-        it('', function()
-          local lspconfig = require 'lspconfig'
-          local res = lspconfig.util.path.join('foo', 'bar', 'baz')
-          eq('foo/bar/baz', res)
-        end)
-      end)
     end)
 
     describe('root_pattern', function()

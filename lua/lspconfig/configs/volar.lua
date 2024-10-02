@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 local function get_typescript_server_path(root_dir)
   local project_root = util.find_node_modules_ancestor(root_dir)
-  return project_root and (util.path.join(project_root, 'node_modules', 'typescript', 'lib')) or ''
+  return project_root and (vim.fs.joinpath(project_root, 'node_modules', 'typescript', 'lib')) or ''
 end
 
 -- https://github.com/johnsoncodehk/volar/blob/20d713b/packages/shared/src/types.ts
@@ -90,7 +90,7 @@ local function get_typescript_server_path(root_dir)
   -- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
   local found_ts = ''
   local function check_dir(path)
-    found_ts =  util.path.join(path, 'node_modules', 'typescript', 'lib')
+    found_ts =  vim.fs.joinpath(path, 'node_modules', 'typescript', 'lib')
     if util.path.exists(found_ts) then
       return path
     end

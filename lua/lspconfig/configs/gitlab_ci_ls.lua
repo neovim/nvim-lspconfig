@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 
-local cache_dir = util.path.join(vim.uv.os_homedir(), '.cache/gitlab-ci-ls/')
+local cache_dir = vim.fs.joinpath(vim.uv.os_homedir(), '.cache/gitlab-ci-ls/')
 return {
   default_config = {
     cmd = { 'gitlab-ci-ls' },
@@ -8,7 +8,7 @@ return {
     root_dir = util.root_pattern('.gitlab*', '.git'),
     init_options = {
       cache_path = cache_dir,
-      log_path = util.path.join(cache_dir, 'log/gitlab-ci-ls.log'),
+      log_path = vim.fs.joinpath(cache_dir, 'log/gitlab-ci-ls.log'),
     },
   },
   docs = {
@@ -25,8 +25,8 @@ cargo install gitlab-ci-ls
       filetypes = { 'yaml.gitlab' },
       root_dir = [[util.root_pattern('.gitlab*', '.git')]],
       init_options = {
-        cache_path = [[util.path.join(vim.uv.os_homedir(), '.cache/gitlab-ci-ls/')]],
-        log_path = [[util.path.join(util.path.join(vim.uv.os_homedir(), '.cache/gitlab-ci-ls/'), 'log/gitlab-ci-ls.log')]],
+        cache_path = [[vim.fs.joinpath(vim.uv.os_homedir(), '.cache/gitlab-ci-ls/')]],
+        log_path = [[vim.fs.joinpath(vim.fs.joinpath(vim.uv.os_homedir(), '.cache/gitlab-ci-ls/'), 'log/gitlab-ci-ls.log')]],
       },
     },
   },

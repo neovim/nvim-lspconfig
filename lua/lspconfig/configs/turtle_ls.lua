@@ -16,14 +16,14 @@ if bin_path == nil then
     end
   end
   for _, p in ipairs(paths) do
-    local candidate = util.path.join(p, bin_name)
+    local candidate = vim.fs.joinpath(p, bin_name)
     if util.path.is_file(candidate) then
       full_path = candidate
       break
     end
   end
 else
-  full_path = util.path.join(bin_path, bin_name)
+  full_path = vim.fs.joinpath(bin_path, bin_name)
 end
 
 return {

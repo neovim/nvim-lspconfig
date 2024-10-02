@@ -3,8 +3,8 @@ local util = require 'lspconfig.util'
 -- common jsonnet library paths
 local function jsonnet_path(root_dir)
   local paths = {
-    util.path.join(root_dir, 'lib'),
-    util.path.join(root_dir, 'vendor'),
+    vim.fs.joinpath(root_dir, 'lib'),
+    vim.fs.joinpath(root_dir, 'vendor'),
   }
   return table.concat(paths, ':')
 end

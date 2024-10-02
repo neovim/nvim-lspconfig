@@ -24,8 +24,8 @@ return {
     root_dir = util.root_pattern('relay.config.*', 'package.json'),
     on_new_config = function(config, root_dir)
       local project_root = util.find_node_modules_ancestor(root_dir)
-      local node_bin_path = util.path.join(project_root, 'node_modules', '.bin')
-      local compiler_cmd = { util.path.join(node_bin_path, 'relay-compiler'), '--watch' }
+      local node_bin_path = vim.fs.joinpath(project_root, 'node_modules', '.bin')
+      local compiler_cmd = { vim.fs.joinpath(node_bin_path, 'relay-compiler'), '--watch' }
       local path = node_bin_path .. util.path.path_separator .. vim.env.PATH
       if config.cmd_env then
         config.cmd_env.PATH = path
@@ -35,7 +35,7 @@ return {
 
       if config.path_to_config then
         config.path_to_config = util.path.sanitize(config.path_to_config)
-        local path_to_config = util.path.join(root_dir, config.path_to_config)
+        local path_to_config = vim.fs.joinpath(root_dir, config.path_to_config)
         if util.path.exists(path_to_config) then
           vim.list_extend(config.cmd, { config.path_to_config })
           vim.list_extend(compiler_cmd, { config.path_to_config })

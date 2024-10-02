@@ -161,7 +161,7 @@ local function make_lsp_sections()
             end
           end,
           function()
-            local package_json_name = util.path.join(tempdir, template_name .. '.package.json')
+            local package_json_name = vim.fs.joinpath(tempdir, template_name .. '.package.json')
             if docs.package_json then
               if not util.path.is_file(package_json_name) then
                 os.execute(string.format('curl -v -L -o %q %q', package_json_name, docs.package_json))

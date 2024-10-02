@@ -8,19 +8,19 @@ local env = {
 }
 
 local function get_cache_dir()
-  return env.XDG_CACHE_HOME and env.XDG_CACHE_HOME or util.path.join(env.HOME, '.cache')
+  return env.XDG_CACHE_HOME and env.XDG_CACHE_HOME or vim.fs.joinpath(env.HOME, '.cache')
 end
 
 local function get_jdtls_cache_dir()
-  return util.path.join(get_cache_dir(), 'jdtls')
+  return vim.fs.joinpath(get_cache_dir(), 'jdtls')
 end
 
 local function get_jdtls_config_dir()
-  return util.path.join(get_jdtls_cache_dir(), 'config')
+  return vim.fs.joinpath(get_jdtls_cache_dir(), 'config')
 end
 
 local function get_jdtls_workspace_dir()
-  return util.path.join(get_jdtls_cache_dir(), 'workspace')
+  return vim.fs.joinpath(get_jdtls_cache_dir(), 'workspace')
 end
 
 local function get_jdtls_jvm_args()

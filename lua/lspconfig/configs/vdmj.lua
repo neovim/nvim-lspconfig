@@ -1,16 +1,16 @@
 local util = require 'lspconfig.util'
 
 local function get_default_mavenrepo()
-  local repo = util.path.join(vim.env.HOME, '.m2', 'repository', 'dk', 'au', 'ece', 'vdmj')
+  local repo = vim.fs.joinpath(vim.env.HOME, '.m2', 'repository', 'dk', 'au', 'ece', 'vdmj')
   if util.path.exists(repo) then
     return repo
   else
-    return util.path.join(vim.env.HOME, '.m2', 'repository', 'com', 'fujitsu')
+    return vim.fs.joinpath(vim.env.HOME, '.m2', 'repository', 'com', 'fujitsu')
   end
 end
 
 local function get_jar_path(config, package, version)
-  return util.path.join(config.options.mavenrepo, package, version, package .. '-' .. version .. '.jar')
+  return vim.fs.joinpath(config.options.mavenrepo, package, version, package .. '-' .. version .. '.jar')
 end
 
 local function with_precision(version, is_high_precision)
@@ -18,11 +18,11 @@ local function with_precision(version, is_high_precision)
 end
 
 local function get_latest_installed_version(repo)
-  local path = util.path.join(repo, 'lsp')
+  local path = vim.fs.joinpath(repo, 'lsp')
   local sort = vim.fn.sort
 
   local subdirs = function(file)
-    local stat = vim.uv.fs_stat(util.path.join(path, file))
+    local stat = vim.uv.fs_stat(vim.fs.joinpath(path, file))
     return stat.type == 'directory' and 1 or 0
   end
 
@@ -34,7 +34,7 @@ end
 -- Special case, as vdmj store particular settings under root_dir/.vscode
 local function find_vscode_ancestor(startpath)
   return util.search_ancestors(startpath, function(path)
-    if util.path.is_dir(util.path.join(path, '.vscode')) then
+    if util.path.is_dir(vim.fs.joinpath(path, '.vscode')) then
       return path
     end
   end)
@@ -48,11 +48,11 @@ return {
       return util.find_git_ancestor(fname) or find_vscode_ancestor(fname)
     end,
     options = {
-      java = vim.env.JAVA_HOME and util.path.join(vim.env.JAVA_HOME, 'bin', 'java') or 'java',
+      java = vim.env.JAVA_HOME and vim.fs.joinpath(vim.env.JAVA_HOME, 'bin', 'java') or 'java',
       java_opts = { '-Xmx3000m', '-Xss1m' },
       annotation_paths = {},
       mavenrepo = get_default_mavenrepo(),
-      logfile = util.path.join(vim.fn.stdpath 'cache', 'vdm-lsp.log'),
+      logfile = vim.fs.joinpath(vim.fn.stdpath 'cache', 'vdm-lsp.log'),
       debugger_port = -1,
       high_precision = false,
     },
@@ -88,7 +88,7 @@ by neovim.
         annotation_paths = {},
         mavenrepo = '$HOME/.m2/repository/dk/au/ece/vdmj',
         version = 'The latest version installed in `mavenrepo`',
-        logfile = "path.join(vim.fn.stdpath 'cache', 'vdm-lsp.log')",
+        logfile = "vim.fs.joinpath(vim.fn.stdpath 'cache', 'vdm-lsp.log')",
         debugger_port = -1,
         high_precision = false,
       },
@@ -104,7 +104,7 @@ by neovim.
       get_jar_path(config, 'vdmj', version),
       get_jar_path(config, 'annotations', version),
       get_jar_path(config, 'lsp', version),
-      util.path.join(root_dir, '.vscode'),
+      vim.fs.joinpath(root_dir, '.vscode'),
       unpack(config.options.annotation_paths),
     }, ':')
 

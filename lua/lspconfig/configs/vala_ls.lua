@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 local meson_matcher = function(path)
   local pattern = 'meson.build'
-  local f = vim.fn.glob(util.path.join(path, pattern))
+  local f = vim.fn.glob(vim.fs.joinpath(path, pattern))
   if f == '' then
     return nil
   end
