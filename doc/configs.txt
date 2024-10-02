@@ -14174,6 +14174,10 @@ require'lspconfig'.zls.setup{}
   ```lua
   { "zig", "zir" }
   ```
+  - `on_new_config` : 
+  ```lua
+  see source file
+  ```
   - `root_dir` : 
   ```lua
   util.root_pattern("zls.json", "build.zig", ".git")
