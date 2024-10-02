@@ -2,7 +2,7 @@ require 'lspconfig'
 local configs = require 'lspconfig.configs'
 local util = require 'lspconfig.util'
 local inspect = vim.inspect
-local uv = vim.loop
+local uv = vim.uv
 local fn = vim.fn
 
 local function template(s, params)

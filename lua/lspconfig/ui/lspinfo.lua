@@ -127,7 +127,7 @@ local function make_client_info(client, fname)
 
   client_info.cmd = cmd_type[type(client.config.cmd)](client.config)
   local workspace_folders = fn.has 'nvim-0.9' == 1 and client.workspace_folders or client.workspaceFolders
-  local uv = vim.loop
+  local uv = vim.uv
   local is_windows = uv.os_uname().version:match 'Windows'
   fname = uv.fs_realpath(fname) or fn.fnamemodify(fn.resolve(fname), ':p')
   if is_windows then
