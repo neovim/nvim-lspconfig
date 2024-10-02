@@ -4686,8 +4686,8 @@ require'lspconfig'.gitlab_ci_ls.setup{}
   - `init_options` : 
   ```lua
   {
-    cache_path = "util.path.join(vim.loop.os_homedir(), '.cache/gitlab-ci-ls/')",
-    log_path = "util.path.join(util.path.join(vim.loop.os_homedir(), '.cache/gitlab-ci-ls/'), 'log/gitlab-ci-ls.log')"
+    cache_path = "util.path.join(vim.uv.os_homedir(), '.cache/gitlab-ci-ls/')",
+    log_path = "util.path.join(util.path.join(vim.uv.os_homedir(), '.cache/gitlab-ci-ls/'), 'log/gitlab-ci-ls.log')"
   }
   ```
   - `root_dir` : 
@@ -6672,7 +6672,7 @@ require'lspconfig'.lua_ls.setup {
   on_init = function(client)
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
-      if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+      if vim.uv.fs_stat(path..'/.luarc.json') or vim.uv.fs_stat(path..'/.luarc.jsonc') then
         return
       end
     end
