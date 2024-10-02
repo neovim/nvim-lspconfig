@@ -28,20 +28,26 @@ QUICKSTART                                                *lspconfig-quickstart*
 5. Run `:checkhealth lsp` to see the status or to troubleshoot.
 
 ==============================================================================
-THE SETUP METHOD                                               *lspconfig-setup*
+USAGE                                                        *lspconfig-usage*
 
 `lspconfig` consists of a collection of language server configurations. Each
-configuration exposes a `setup {}` metamethod which makes it easy to directly
-use the default configuration or selectively override the defaults. 
-`setup {}` is the primary interface by which users interact with `lspconfig`.
+configuration exposes a `setup{}` metamethod which makes it easy to directly
+use the default configuration or selectively override the defaults. `setup{}`
+is the primary interface by which users interact with `lspconfig`.
 
-Using the default configuration for a server is simple:
->
+To activate a config, call its `setup{}` function. Each config name listed in
+|lspconfig-all| is available as `config.<name>`. For example to activate the
+"clangd" config: >lua
+
     require'lspconfig'.clangd.setup{}
 <
-The available server names listed in |lspconfig-all| match the
-`config.SERVER_NAME` defined in each configuration's source file.
+                                                        *lspconfig-config_def*
+You can use the `config_def` field to get the static config definition without
+activating it: >lua
 
+    local config = require'lspconfig'.clangd.config_def
+<
+                                                             *lspconfig-setup*
 `setup{}` wraps |vim.lsp.start_client()| or |vim.lsp.buf_attach_client()|
 functions (depending on whether the current file belongs to a project with
 a currently running client; see |lspconfig-root-detection|).
@@ -80,12 +86,12 @@ the following added keys:
   included in your new override. Some configurations use `on_new_config` to
   dynamically set or modify `cmd`.
 
-Note: all entries passed to `setup {}` override the entry in the default
-configuration. There is no composition.
+Note: all fields passed to `setup{}` override the respective field in the
+default configuration. There is no composition.
 
 All `config` elements described in `:help vim.lsp.start_client()` can
-additionally be overridden via the `setup {}` call. The most commonly
-passed overrides to `setup {}` are:
+additionally be overridden via the `setup{}` call. The most commonly passed
+overrides to `setup{}` are:
 
 - {settings} `table <string, string|table|bool>`
 
@@ -101,7 +107,7 @@ passed overrides to `setup {}` are:
   `pyright.disableOrganizeImports`: `boolean`
 
   Nested keys need to be translated into a nested table and passed to
-  the settings field in `setup {}` as follows:
+  the settings field in `setup{}` as follows:
 >
   require('lspconfig').pyright.setup{
     settings = {
@@ -115,12 +121,9 @@ passed overrides to `setup {}` are:
 ==============================================================================
 OVERRIDING GLOBAL DEFAULTS                           *lspconfig-global-defaults*
 
-WARNING: This API is deprecated. Use |LspAttach| from Nvim core instead.
-
 The global defaults for all servers can be overridden by extending the
-`default_config` table.
+`default_config` table. `setup{}` can override these defaults. >lua
 
->
   local lspconfig = require'lspconfig'
   lspconfig.util.default_config = vim.tbl_extend(
     "force",
@@ -142,12 +145,9 @@ The global defaults for all servers can be overridden by extending the
     }
   )
 <
-`setup {}` can additionally override these defaults in subsequent calls.
 
 ==============================================================================
 SETUP HOOK                                                *lspconfig-setup-hook*
-
-WARNING: This API is deprecated. Use |LspAttach| from Nvim core instead.
 
 `lspconfig` will execute the `on_setup` hook for each setup call to a server after
 validating its configuration, and before attempting to launch the server
@@ -268,7 +268,7 @@ The steps for adding and enabling a new server configuration are:
 ROOT DETECTION                                        *lspconfig-root-detection*
                                                             *lspconfig-root-dir*
 
-WARNING: This API is deprecated. Use |vim.fs| from Nvim core instead.
+WARNING: This API is deprecated. Use |vim.fs.root()| from Nvim core instead.
 
 A project's `root_dir` is used by `lspconfig` to determine whether `lspconfig`
 should start a new server, or attach a previous one, to the current file.
@@ -280,7 +280,7 @@ each server, optionally overridable by the `filetypes` table passed to
 
 This autocommand triggers a search from the current file position in the
 filesystem hierarchy up to the top level directory of your filesystem. The
-`root_dir` entry of each configuration is a function that returns true if the
+`root_dir` field of each configuration is a function that returns true if the
 current directory in this traversal matches a given root pattern.
 
 The following utility functions are provided by `lspconfig`. Each function call
@@ -306,10 +306,10 @@ Note: On Windows, `lspconfig` always assumes forward slash normalized paths with
 capitalized drive letters.
 
 ==============================================================================
-ADVANCED ROOT DIRECTORY DETECTION                      *lspconfig-root-advanced* 
+ADVANCED ROOT DIRECTORY DETECTION                      *lspconfig-root-advanced*
                                                     *lspconfig-root-composition*
 
-WARNING: This API is deprecated. Use |vim.fs| from Nvim core instead.
+WARNING: This API is deprecated. Use |vim.fs.root()| from Nvim core instead.
 
 The `root_dir` key in `config` and `setup` can hold any function of the form
 >
