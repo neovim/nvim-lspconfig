@@ -1,6 +1,6 @@
 local api = vim.api
 local lsp = vim.lsp
-local uv = vim.uv
+local uv = vim.uv or vim.loop
 
 local async = require 'lspconfig.async'
 local util = require 'lspconfig.util'

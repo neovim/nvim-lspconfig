@@ -2,6 +2,7 @@ local M = {}
 local health = require('vim.health')
 
 local api, fn = vim.api, vim.fn
+local uv = vim.uv or vim.loop
 local util = require 'lspconfig.util'
 
 local error_messages = {
@@ -122,7 +123,6 @@ local function make_client_info(client, fname)
 
   client_info.cmd = cmd_type[type(client.config.cmd)](client.config)
   local workspace_folders = fn.has 'nvim-0.9' == 1 and client.workspace_folders or client.workspaceFolders
-  local uv = vim.uv
   fname = vim.fs.normalize(uv.fs_realpath(fname) or fn.fnamemodify(fn.resolve(fname), ':p'))
 
   if workspace_folders then
@@ -189,8 +189,8 @@ local function check_lspconfig(bufnr)
     health.warn('Deprecated servers: ' .. table.concat(deprecated_servers, ', '))
   end
 
-  local buf_clients = not bufnr and {} or vim.lsp.get_clients { bufnr = bufnr }
-  local clients = vim.lsp.get_clients()
+  local buf_clients = not bufnr and {} or util.get_lsp_clients { bufnr = bufnr }
+  local clients = util.get_lsp_clients()
   local buffer_filetype = bufnr and vim.fn.getbufvar(bufnr, '&filetype') or '(invalid buffer)'
   local fname = bufnr and api.nvim_buf_get_name(bufnr) or '(invalid buffer)'
 
