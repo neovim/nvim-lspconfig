@@ -325,6 +325,7 @@ Nvim by running `:help lspconfig-all`.
 - [visualforce_ls](#visualforce_ls)
 - [vls](#vls)
 - [volar](#volar)
+- [vscoqtop](#vscoqtop)
 - [vtsls](#vtsls)
 - [vuels](#vuels)
 - [wgsl_analyzer](#wgsl_analyzer)
@@ -13700,6 +13701,37 @@ require'lspconfig'.volar.setup{}
   - `root_dir` : 
   ```lua
   see source file
+  ```
+
+
+## vscoqtop
+
+https://github.com/coq-community/vscoq
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.vscoqtop.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "vscoqtop" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "coq" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
   ```
 
 
