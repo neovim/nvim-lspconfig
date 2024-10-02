@@ -19,7 +19,7 @@ View the [documentation for all configs](doc/configs.md) or `:help lspconfig-all
 
 [![LuaRocks](https://img.shields.io/luarocks/v/neovim/nvim-lspconfig?logo=lua&color=purple)](https://luarocks.org/modules/neovim/nvim-lspconfig)
 
-* Requires Nvim 0.10 above. Update Nvim and nvim-lspconfig before reporting an issue.
+* Requires Nvim 0.9 above. Update Nvim and nvim-lspconfig before reporting an issue.
 * Install nvim-lspconfig using Vim's "packages" feature:
   ```
   git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
