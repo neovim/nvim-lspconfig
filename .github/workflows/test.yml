@@ -20,17 +20,13 @@ jobs:
           neovim: true
           version: nightly
 
-      - name: luajit
-        uses: leafo/gh-actions-lua@v10
+      - uses: leafo/gh-actions-lua@v10
         with:
           luaVersion: "luajit-openresty"
+      - uses: leafo/gh-actions-luarocks@v4
 
-      - name: luarocks
-        uses: leafo/gh-actions-luarocks@v4
+      - name: Install vusted
+        run: luarocks install vusted
 
-      - name: run test
-        shell: bash
-        run: |
-          luarocks install luacheck
-          luarocks install vusted
-          vusted ./test
+      - name: Run test
+        run: vusted ./test

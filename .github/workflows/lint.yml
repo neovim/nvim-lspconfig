@@ -6,32 +6,47 @@ on:
       - master
 
 jobs:
-  lint:
+  luacheck:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout sources
-        uses: actions/checkout@v4
-
-      - name: Run luacheck
-        uses: lunarmodules/luacheck@v1
+      - uses: actions/checkout@v4
+      - uses: lunarmodules/luacheck@v1
         with:
           args: lua/* test/*
 
-      - name: Run selene
-        uses: NTBBloodbath/selene-action@v1.0.0
+  selene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: NTBBloodbath/selene-action@v1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --display-style=quiet .
 
-  style-lint:
+  stylua:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout sources
-        uses: actions/checkout@v4
-
-      - name: Lint with stylua
-        uses: JohnnyMorganz/stylua-action@v4
+      - uses: actions/checkout@v4
+      - uses: JohnnyMorganz/stylua-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: latest
           args: --check .
+
+  codespell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install codespell
+      - run: codespell --quiet-level=2 --check-hidden --skip=./doc/configs.md,./doc/configs.txt --ignore-words=.codespellignorewords
+
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: npm install --save-dev @commitlint/{cli,config-conventional}
+      - run: |
+          echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+      - run: npx commitlint --from HEAD~1 --to HEAD --verbose
