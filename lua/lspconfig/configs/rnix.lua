@@ -5,7 +5,7 @@ return {
     cmd = { 'rnix-lsp' },
     filetypes = { 'nix' },
     root_dir = function(fname)
-      return util.find_git_ancestor(fname) or vim.loop.os_homedir()
+      return util.find_git_ancestor(fname) or vim.uv.os_homedir()
     end,
     settings = {},
     init_options = {},

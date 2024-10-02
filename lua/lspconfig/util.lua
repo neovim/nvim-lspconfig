@@ -2,7 +2,7 @@ local vim = vim
 local validate = vim.validate
 local api = vim.api
 local lsp = vim.lsp
-local uv = vim.loop
+local uv = vim.uv
 local nvim_eleven = vim.fn.has 'nvim-0.11' == 1
 
 local is_windows = uv.os_uname().version:match 'Windows'
