@@ -107,8 +107,7 @@ overrides to `setup{}` are:
   `pyright.disableOrganizeImports`: `boolean`
 
   Nested keys need to be translated into a nested table and passed to
-  the settings field in `setup{}` as follows:
->
+  the settings field in `setup{}` as follows: >lua
   require('lspconfig').pyright.setup{
     settings = {
       pyright = {
@@ -317,8 +316,8 @@ The `root_dir` key in `config` and `setup` can hold any function of the form
   returns nil | string
 >
 This allows for rich composition of root directory patterns which is necessary
-for some project structures. Example (for Kotlin):
->
+for some project structures. Example (for Kotlin): >lua
+
   local root_files = {
     'settings.gradle', -- Gradle (multi-project)
     'settings.gradle.kts', -- Gradle (multi-project)
@@ -369,6 +368,7 @@ standard for single-file mode, lspconfig will adopt that standard.
 COMMANDS                                                    *lspconfig-commands*
 
 :LspInfo                                                            *:LspInfo*
+Deprecated alias to `:check lspconfig`.
 Shows the status of all configured language servers. Note that client id
 refers to the Nvim RPC channel connected to a given language server. Also
 lists deprecated servers.
@@ -459,8 +459,8 @@ Note that it will not report any configuration changes applied in
 LOGGING                                                      *lspconfig-logging*
 
 When debugging language servers, it is helpful to enable additional logging in
-the built-in client, specifically considering the RPC logs. Example:
->
+the built-in client, specifically considering the RPC logs. Example: >lua
+
   vim.lsp.set_log_level 'trace'
   if vim.fn.has 'nvim-0.5.1' == 1 then
     require('vim.lsp.log').set_format_func(vim.inspect)
@@ -486,14 +486,10 @@ from `lspconfig` in time.
 ==============================================================================
 Highlights                                                *lspconfig-highlight*
 
-LspInfoTitle        Client name
-LspInfoList         Server name list
-LspInfoFiletype     `filetypes` area
-LspInfoTip          Tip
-LspInfoBorder       Window border
-    To set the border use: >
-        require('lspconfig.ui.windows').default_options.border = 'single'
-<    Accepts the same values as the `border` option to |nvim_open_win()|
+WARNING: The `require('lspconfig.ui.windows')` API was removed.
+LspInfo is provided by a healthcheck instead: >
+    :checkhealth lspconfig
+<
 
 ==============================================================================
 
