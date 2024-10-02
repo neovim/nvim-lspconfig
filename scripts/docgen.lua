@@ -103,7 +103,7 @@ local function make_lsp_sections()
     0,
     '\n',
     sorted_map_table(configs, function(template_name, template_object)
-      local template_def = template_object.document_config
+      local template_def = template_object.config_def
       local docs = template_def.docs
 
       local params = {

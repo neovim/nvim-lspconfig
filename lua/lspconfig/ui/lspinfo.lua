@@ -329,7 +329,7 @@ return function()
       if not config then
         return
       end
-      local desc = vim.tbl_get(config, 'document_config', 'docs', 'description')
+      local desc = vim.tbl_get(config, 'config_def', 'docs', 'description')
       if desc then
         lines[#lines + 1] = string.format('# %s', config.name)
         lines[#lines + 1] = ''

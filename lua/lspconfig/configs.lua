@@ -26,6 +26,9 @@ local function sanitize_cmd(cmd)
   end
 end
 
+---@param t table
+---@param config_name string
+---@param config_def table Config definition read from `lspconfig.configs.<name>`.
 function configs.__newindex(t, config_name, config_def)
   validate {
     name = { config_name, 's' },
@@ -178,7 +181,7 @@ function configs.__newindex(t, config_name, config_def)
       end)
     end
 
-    -- Used by :LspInfo
+    -- Used by :LspInfo (evil, mutable aliases?)
     M.get_root_dir = get_root_dir
     M.filetypes = config.filetypes
     M.handlers = config.handlers
@@ -290,7 +293,9 @@ function configs.__newindex(t, config_name, config_def)
 
   M.commands = config_def.commands
   M.name = config_name
-  M.document_config = config_def
+  -- Expose the (original?) values of a config (non-active, or before `setup()`).
+  M.config_def = config_def
+  M.document_config = config_def -- For back-compat.
 
   rawset(t, config_name, M)
 end
