@@ -9,7 +9,7 @@ local M = {
 ---@class Alias
 ---@field to string The new name of the server
 ---@field version string The version that the alias will be removed in
----@field inconfig? boolean need shown in lspinfo
+---@field inconfig? boolean should display in healthcheck (`:checkhealth lspconfig`)
 local aliases = {
   ['fennel-ls'] = {
     to = 'fennel_ls',
