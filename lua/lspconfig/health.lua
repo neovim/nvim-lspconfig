@@ -34,6 +34,13 @@ local function remove_newlines(cmd)
   return cmd
 end
 
+--- Prettify a path for presentation.
+local function fmtpath(p)
+  local r = vim.fn.fnamemodify(p, ':~')
+  -- If the path ends with "~" add a space (:checkhealth currently uses ft=help).
+  return r .. (vim.endswith(r, '~') and ' ' or '')
+end
+
 local cmd_type = {
   ['function'] = function(_)
     return '<function>', 'NA'
@@ -75,7 +82,7 @@ local function make_config_info(config, bufnr)
     end)
     coroutine.resume(co)
     if root_dir then
-      config_info.root_dir = vim.fn.fnamemodify(root_dir, ':~')
+      config_info.root_dir = root_dir
     elseif coroutine.status(co) == 'suspended' then
       config_info.root_dir = error_messages.async_root_dir_function
     else
@@ -96,8 +103,8 @@ local function make_config_info(config, bufnr)
 
   local info_lines = {
     'filetypes:         ' .. config_info.filetypes,
-    'root directory:    ' .. config_info.root_dir,
-    'cmd:               ' .. config_info.cmd,
+    'root directory:    ' .. fmtpath(config_info.root_dir),
+    'cmd:               ' .. fmtpath(config_info.cmd),
     'cmd is executable: ' .. config_info.cmd_is_executable,
     'autostart:         ' .. config_info.autostart,
     'custom handlers:   ' .. config_info.handlers,
@@ -128,7 +135,7 @@ local function make_client_info(client, fname)
   if workspace_folders then
     for _, schema in ipairs(workspace_folders) do
       local matched = true
-      local root_dir = vim.fn.fnamemodify(uv.fs_realpath(schema.name), ':~')
+      local root_dir = uv.fs_realpath(schema.name)
       if root_dir == nil or fname:sub(1, root_dir:len()) ~= root_dir then
         matched = false
       end
@@ -159,9 +166,9 @@ local function make_client_info(client, fname)
 
   local info_lines = {
     'filetypes:       ' .. client_info.filetypes,
+    'root directory:  ' .. fmtpath(client_info.root_dir),
+    'cmd:             ' .. fmtpath(client_info.cmd),
     'autostart:       ' .. client_info.autostart,
-    'root directory:  ' .. client_info.root_dir,
-    'cmd:             ' .. client_info.cmd,
   }
 
   if client.config.lspinfo then
@@ -207,7 +214,7 @@ local function check_lspconfig(bufnr)
   end
 
   health.start(('LSP configs active in this buffer (id=%s)'):format(bufnr or '(invalid buffer)'))
-  health.info('Language client log: ' .. (vim.fn.fnamemodify(vim.lsp.get_log_path(), ':~')))
+  health.info('Language client log: ' .. fmtpath(vim.lsp.get_log_path()))
   health.info(('Detected filetype: `%s`'):format(buffer_filetype))
   health.info(('%d client(s) attached to this buffer'):format(#vim.tbl_keys(buf_clients)))
   for _, client in ipairs(buf_clients) do
@@ -278,13 +285,13 @@ local function check_lspdocs(buf_clients, other_matching_configs)
 end
 
 function M.check()
+  -- XXX: create "q" mapping until :checkhealth has this feature in Nvim stable.
+  vim.cmd [[nnoremap <buffer> q <c-w>q]]
+
   -- XXX: :checkhealth switches to its buffer before invoking the healthcheck(s).
   local orig_bufnr = vim.fn.bufnr('#')
   local buf_clients, other_matching_configs = check_lspconfig(orig_bufnr)
   check_lspdocs(buf_clients, other_matching_configs)
-
-  -- XXX: create "q" mapping until :checkhealth has this feature in Nvim stable.
-  vim.cmd [[nnoremap <buffer> q <c-w>q]]
 end
 
 return M
