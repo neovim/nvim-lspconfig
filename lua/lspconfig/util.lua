@@ -1,4 +1,3 @@
-local vim = vim
 local validate = vim.validate
 local api = vim.api
 local lsp = vim.lsp
