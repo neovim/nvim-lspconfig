@@ -310,6 +310,7 @@ Nvim by running `:help lspconfig-all`.
 - [typos_lsp](#typos_lsp)
 - [typst_lsp](#typst_lsp)
 - [uiua](#uiua)
+- [ungrammar_languageserver](#ungrammar_languageserver)
 - [unison](#unison)
 - [unocss](#unocss)
 - [uvls](#uvls)
@@ -13019,6 +13020,56 @@ require'lspconfig'.uiua.setup{}
             '.git'
           )
         
+  ```
+
+
+## ungrammar_languageserver
+
+https://github.com/binhtran432k/ungrammar-language-features
+Language Server for Ungrammar.
+
+Ungrammar Language Server can be installed via npm:
+```sh
+npm i ungrammar-languageserver -g
+```
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.ungrammar_languageserver.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "ungrammar-languageserver", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "ungrammar" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
+  ```
+  - `settings` : 
+  ```lua
+  {
+    ungrammar = {
+      format = {
+        enable = true
+      },
+      validate = {
+        enable = true
+      }
+    }
+  }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
   ```
 
 
