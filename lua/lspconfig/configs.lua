@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 local async = require 'lspconfig.async'
-local api, validate, lsp, uv, fn = vim.api, vim.validate, vim.lsp, (vim.uv or vim.loop), vim.fn
+local api, validate, lsp, uv, fn = vim.api, vim.validate, vim.lsp, vim.uv, vim.fn
 local tbl_deep_extend = vim.tbl_deep_extend
 
 local configs = {}

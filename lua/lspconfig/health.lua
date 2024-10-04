@@ -2,7 +2,7 @@ local M = {}
 local health = require('vim.health')
 
 local api, fn = vim.api, vim.fn
-local uv = vim.uv or vim.loop
+local uv = vim.uv
 local util = require 'lspconfig.util'
 
 local error_messages = {
