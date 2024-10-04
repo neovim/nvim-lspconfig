@@ -12,13 +12,13 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
+        nvim_version: [nightly, 'v0.9.5']
     steps:
       - uses: actions/checkout@v4
       - uses: rhysd/action-setup-vim@v1
-        id: vim
         with:
           neovim: true
-          version: nightly
+          version: ${{ matrix.nvim_version }}
 
       - uses: leafo/gh-actions-lua@v10
         with:
