@@ -160,6 +160,7 @@ Nvim by running `:help lspconfig-all`.
 - [lwc_ls](#lwc_ls)
 - [m68k](#m68k)
 - [markdown_oxide](#markdown_oxide)
+- [marko-js](#marko-js)
 - [marksman](#marksman)
 - [matlab_ls](#matlab_ls)
 - [mdx_analyzer](#mdx_analyzer)
@@ -6901,6 +6902,40 @@ require'lspconfig'.markdown_oxide.setup{}
   - `single_file_support` : 
   ```lua
   true
+  ```
+
+
+## marko-js
+
+      https://github.com/marko-js/language-server
+
+      Using the Language Server Protocol to improve Marko's developer experience.
+
+      Can be installed via npm:
+      ```
+      npm i -g @marko/language-server
+      ```
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.marko-js.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "marko-language-server", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "marko" }
+  ```
+  - `root_dir` : 
+  ```lua
+  see source file
   ```
 
 
