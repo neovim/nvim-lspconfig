@@ -101,15 +101,11 @@ function configs.__newindex(t, config_name, config_def)
 
     if config.autostart == true then
       local event_conf = config.filetypes and { event = 'FileType', pattern = config.filetypes }
-        or { event = { 'BufReadPost', 'BufNewFile' } }
+        or { event = 'BufReadPost' }
       api.nvim_create_autocmd(event_conf.event, {
         pattern = event_conf.pattern or '*',
         callback = function(opt)
-          -- Use vim.schedule() to ensure filetype detection happens first.
-          -- Sometimes, BufNewFile triggers before 'filetype' is set.
-          vim.schedule(function()
-            M.manager:try_add(opt.buf)
-          end)
+          M.manager:try_add(opt.buf)
         end,
         group = lsp_group,
         desc = string.format(
@@ -146,18 +142,13 @@ function configs.__newindex(t, config_name, config_def)
         end
 
         if root_dir then
-          api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
+          api.nvim_create_autocmd('BufReadPost', {
             pattern = fn.fnameescape(root_dir) .. '/*',
             callback = function(arg)
               if #M.manager:clients() == 0 then
                 return true
               end
-
-              -- Use vim.schedule() to ensure filetype detection happens first.
-              -- Sometimes, BufNewFile triggers before 'filetype' is set.
-              vim.schedule(function()
-                M.manager:try_add_wrapper(arg.buf, root_dir)
-              end)
+              M.manager:try_add_wrapper(arg.buf, root_dir)
             end,
             group = lsp_group,
             desc = string.format(
