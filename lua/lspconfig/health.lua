@@ -36,6 +36,9 @@ end
 
 --- Prettify a path for presentation.
 local function fmtpath(p)
+  if vim.startswith(p, 'Running') then
+    return p
+  end
   local r = vim.fn.fnamemodify(p, ':~')
   -- If the path ends with "~" add a space (:checkhealth currently uses ft=help).
   return r .. (vim.endswith(r, '~') and ' ' or '')
