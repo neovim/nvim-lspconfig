@@ -7,8 +7,7 @@ vim.lsp.handlers['regal/startDebugging'] = function(_, result)
 
   local ok, dap = pcall(require, 'dap')
   if not ok then
-    return nil,
-      vim.lsp.rpc.rpc_response_error(vim.lsp.protocol.ErrorCodes.InvalidRequest, 'nvim-dap is not installed')
+    return nil, vim.lsp.rpc.rpc_response_error(vim.lsp.protocol.ErrorCodes.InvalidRequest, 'nvim-dap is not installed')
   end
 
   if dap.session() then
