@@ -14,18 +14,20 @@ return {
           return nil, vim.lsp.rpc.rpc_response_error(vim.lsp.protocol.ErrorCodes.InvalidRequest)
         end
 
-        local ok, dap = pcall(require, "dap")
+        local ok, dap = pcall(require, 'dap')
         if not ok then
-          return nil, vim.lsp.rpc.rpc_response_error(vim.lsp.protocol.ErrorCodes.InvalidRequest, "nvim-dap is not installed")
+          return nil,
+            vim.lsp.rpc.rpc_response_error(vim.lsp.protocol.ErrorCodes.InvalidRequest, "nvim-dap is not installed")
         end
 
         if not dap.session() == nil then
-          return nil, vim.lsp.rpc.rpc_response_error(vim.lsp.protocol.ErrorCodes.InvalidRequest, "active debug session exists")
+          return nil,
+            vim.lsp.rpc.rpc_response_error(vim.lsp.protocol.ErrorCodes.InvalidRequest, "active debug session exists")
         end
 
-        dap.run(vim.tbl_deep_extend("force", result, { bundlePaths = {"${workspaceFolder}"}}))
+        dap.run(vim.tbl_deep_extend("force", result, { bundlePaths = { '${workspaceFolder}' } }))
 
-        return {ok = true}
+        return { ok = true }
       end,
     },
   },
