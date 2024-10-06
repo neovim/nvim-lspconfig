@@ -127,7 +127,7 @@ If using nix, you can use `nix develop` to install these to a local nix shell.
 ## Generating docs
 
 GitHub Actions automatically generates `configs.md`. Only modify
-`scripts/README_template.md` or the `docs` table in the server config Lua file.
+`scripts/docs_template.md` or the `docs` table in the config code.
 Do not modify `configs.md` directly.
 
 To preview the generated `configs.md` locally, run `scripts/docgen.lua` from

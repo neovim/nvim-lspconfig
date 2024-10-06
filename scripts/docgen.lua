@@ -278,7 +278,7 @@ local function generate_readme(template_file, params)
 end
 
 require_all_configs()
-generate_readme('scripts/README_template.md', {
+generate_readme('scripts/docs_template.md', {
   implemented_servers_list = make_implemented_servers_list(),
   lsp_server_details = make_lsp_sections(),
 })
