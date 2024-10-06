@@ -15,7 +15,7 @@ return {
       'cpp',
       'ruby',
       'swift',
-      'csharp',
+      'cs',
       'toml',
       'lua',
       'gitcommit',
