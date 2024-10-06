@@ -9,4 +9,6 @@ Nvim by running `:help lspconfig-all`.
 
 {{lsp_server_details}}
 
+<!--
 vim:ft=markdown
+-->
