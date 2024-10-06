@@ -68,13 +68,13 @@ local function readfile(path)
 end
 
 local lsp_section_template = [[
-## {{template_name}}
+## {{config_name}}
 
 {{preamble}}
 
 **Snippet to enable the language server:**
 ```lua
-require'lspconfig'.{{template_name}}.setup{}
+require'lspconfig'.{{config_name}}.setup{}
 ```
 {{commands}}
 
@@ -105,12 +105,12 @@ local function make_lsp_sections()
   return make_section(
     0,
     '\n',
-    map_sorted(configs, function(template_name, template_object)
+    map_sorted(configs, function(config_name, template_object)
       local template_def = template_object.config_def
       local docs = template_def.docs
 
       local params = {
-        template_name = template_name,
+        config_name = config_name,
         preamble = '',
         commands = '',
         default_values = '',
@@ -161,13 +161,13 @@ local function make_lsp_sections()
             end
           end,
           function()
-            local package_json_name = util.path.join(tempdir, template_name .. '.package.json')
+            local package_json_name = util.path.join(tempdir, config_name .. '.package.json')
             if docs.package_json then
               if not util.path.is_file(package_json_name) then
                 os.execute(string.format('curl -v -L -o %q %q', package_json_name, docs.package_json))
               end
               if not util.path.is_file(package_json_name) then
-                print(string.format('Failed to download package.json for %q at %q', template_name, docs.package_json))
+                print(string.format('Failed to download package.json for %q at %q', config_name, docs.package_json))
                 os.exit(1)
                 return
               end
@@ -204,8 +204,8 @@ local function make_lsp_sections()
                           return fn.substitute(str, pattern, '\\\\\\0', 'g')
                         end
 
-                        -- local function pre(s) return string.format("<pre>%s</pre>", s) end
-                        -- local function code(s) return string.format("<code>%s</code>", s) end
+                        -- local function pre(s) return string.format('<pre>%s</pre>', s) end
+                        -- local function code(s) return string.format('<code>%s</code>', s) end
                         if not (type(v) == 'table') then
                           return
                         end
