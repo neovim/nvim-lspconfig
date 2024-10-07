@@ -149,6 +149,7 @@ Nvim by running `:help lspconfig-all`.
 - [kcl](#kcl)
 - [koka](#koka)
 - [kotlin_language_server](#kotlin_language_server)
+- [kulala_ls](#kulala_ls)
 - [lean3ls](#lean3ls)
 - [leanls](#leanls)
 - [lelwel_ls](#lelwel_ls)
@@ -6396,6 +6397,39 @@ require'lspconfig'.kotlin_language_server.setup{}
   - `root_dir` : 
   ```lua
   See source
+  ```
+
+
+## kulala_ls
+
+https://github.com/mistweaverco/kulala-ls
+
+A minimal language server for HTTP syntax.
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.kulala_ls.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "kulala-ls", "--stdio" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "http" }
+  ```
+  - `root_dir` : 
+  ```lua
+  root_pattern('.git')
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
   ```
 
 
