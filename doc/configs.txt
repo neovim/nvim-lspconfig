@@ -156,6 +156,7 @@ Nvim by running `:help lspconfig-all`.
 - [lelwel_ls](#lelwel_ls)
 - [lemminx](#lemminx)
 - [lexical](#lexical)
+- [lsp_ai](#lsp_ai)
 - [ltex](#ltex)
 - [lua_ls](#lua_ls)
 - [luau_lsp](#luau_lsp)
@@ -6668,6 +6669,40 @@ require'lspconfig'.lexical.setup{}
   - `root_dir` : 
   ```lua
   see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+
+## lsp_ai
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.lsp_ai.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "lsp-ai" }
+  ```
+  - `filetypes` : 
+  ```lua
+  {}
+  ```
+  - `init_options` : 
+  ```lua
+  {
+    memory = {
+      file_store = vim.empty_dict()
+    },
+    models = vim.empty_dict()
+  }
   ```
   - `single_file_support` : 
   ```lua
