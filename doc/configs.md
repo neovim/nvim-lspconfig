@@ -23,6 +23,7 @@ Nvim by running `:help lspconfig-all`.
 - [ballerina](#ballerina)
 - [basedpyright](#basedpyright)
 - [bashls](#bashls)
+- [basics_ls](#basics_ls)
 - [bazelrc_lsp](#bazelrc_lsp)
 - [beancount](#beancount)
 - [bicep](#bicep)
@@ -1144,6 +1145,51 @@ require'lspconfig'.bashls.setup{}
   {
     bashIde = {
       globPattern = "*@(.sh|.inc|.bash|.command)"
+    }
+  }
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+
+## basics_ls
+
+https://github.com/antonk52/basics-language-server/
+
+Buffer, path, and snippet completion
+
+```sh
+npm install -g basics-language-server
+```
+
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.basics_ls.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "basics-language-server" }
+  ```
+  - `settings` : 
+  ```lua
+  {
+    buffer = {
+      enable = true,
+      minCompletionLength = 4
+    },
+    path = {
+      enable = true
+    },
+    snippet = {
+      enable = false,
+      sources = {}
     }
   }
   ```
