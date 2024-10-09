@@ -153,7 +153,7 @@ local function make_lsp_sections()
       })
 
       if docs then
-        local tempdir = os.getenv 'DOCGEN_TEMPDIR' or uv.fs_mkdtemp '/tmp/nvim-lsp.XXXXXX'
+        local tempdir = os.getenv 'DOCGEN_TEMPDIR' or uv.fs_mkdtemp '/tmp/nvim-lspconfig.XXXXXX'
         local preamble_parts = make_parts {
           function()
             if docs.description and #docs.description > 0 then
