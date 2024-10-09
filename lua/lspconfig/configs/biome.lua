@@ -26,7 +26,7 @@ https://biomejs.dev
 Toolchain of the web. [Successor of Rome](https://biomejs.dev/blog/annoucing-biome).
 
 ```sh
-npm install [-g] @biomejs/biome
+npm install -g @biomejs/biome
 ```
 ]],
     default_config = {
