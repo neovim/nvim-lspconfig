@@ -12,7 +12,8 @@ return {
     },
   },
   docs = {
-    [[
+    description = {
+      [[
 https://github.com/SilasMarvin/lsp-ai
 
 LSP-AI is an open source language server that serves as a backend for AI-powered functionality in your favorite code
@@ -23,5 +24,6 @@ You will need to provide configuration for the inference backends and models you
 completion/code actions. See the [wiki docs](https://github.com/SilasMarvin/lsp-ai/wiki/Configuration) and
 [examples](https://github.com/SilasMarvin/lsp-ai/blob/main/examples/nvim) for more information.
 ]],
+    },
   },
 }
