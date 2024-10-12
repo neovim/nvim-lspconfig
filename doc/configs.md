@@ -212,6 +212,7 @@ Nvim by running `:help lspconfig-all`.
 - [pico8_ls](#pico8_ls)
 - [pkgbuild_language_server](#pkgbuild_language_server)
 - [please](#please)
+- [poryscript_pls](#poryscript_pls)
 - [postgres_lsp](#postgres_lsp)
 - [powershell_es](#powershell_es)
 - [prismals](#prismals)
@@ -8953,6 +8954,39 @@ require'lspconfig'.please.setup{}
   - `root_dir` : 
   ```lua
   see source file
+  ```
+  - `single_file_support` : 
+  ```lua
+  true
+  ```
+
+
+## poryscript_pls
+
+https://github.com/huderlem/poryscript-pls
+
+Language server for poryscript (a high level scripting language for GBA-era Pokémon decompilation projects)
+    
+
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.poryscript_pls.setup{}
+```
+
+
+**Default values:**
+  - `cmd` : 
+  ```lua
+  { "poryscript-pls" }
+  ```
+  - `filetypes` : 
+  ```lua
+  { "pory" }
+  ```
+  - `root_dir` : 
+  ```lua
+  util.find_git_ancestor
   ```
   - `single_file_support` : 
   ```lua
