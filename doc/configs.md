@@ -1359,7 +1359,7 @@ require'lspconfig'.biome.setup{}
   ```
   - `filetypes` : 
   ```lua
-  { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescript.tsx", "typescriptreact", "astro", "svelte", "vue", "css" }
+  { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescript.tsx", "typescriptreact", "graphql", "css", "astro", "svelte", "vue", "css" }
   ```
   - `root_dir` : 
   ```lua
