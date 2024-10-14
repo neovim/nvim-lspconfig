@@ -110,22 +110,30 @@ end, {
 
 api.nvim_create_user_command('LspStop', function(info)
   local current_buf = vim.api.nvim_get_current_buf()
-  local server_id, force
+  local server_id, force, server_name
   local arguments = vim.split(info.args, '%s')
   for _, v in pairs(arguments) do
     if v == '++force' then
       force = true
     elseif v:find '^[0-9]+$' then
       server_id = v
+    else
+      server_name = v
     end
   end
 
   if not server_id then
     local servers_on_buffer = require('lspconfig.util').get_lsp_clients { bufnr = current_buf }
+    local found = false
     for _, client in ipairs(servers_on_buffer) do
-      if client.attached_buffers[current_buf] then
+      if client.attached_buffers[current_buf] and (server_name and (server_name == client.config.name) or true) then
         client.stop(force)
+        found = true
       end
+    end
+
+    if server_name and not found then
+      vim.notify(('nvim-lspconfig: config "%s" not found'):format(server_name), vim.log.levels.WARN)
     end
   else
     for _, client in ipairs(get_clients_from_cmd_args(server_id)) do
