@@ -12518,7 +12518,6 @@ require'lspconfig'.texlab.setup{}
   ```lua
   {
     texlab = {
-      auxDirectory = ".",
       bibtexFormatter = "texlab",
       build = {
         args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
