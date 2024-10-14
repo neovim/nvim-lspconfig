@@ -11,6 +11,8 @@ return {
       'typescript',
       'typescript.tsx',
       'typescriptreact',
+      'graphql',
+      'css',
       'astro',
       'svelte',
       'vue',
