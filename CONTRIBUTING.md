@@ -20,7 +20,7 @@ The point of lspconfig is to provide the minimal configuration necessary for a s
 New configs must meet these criteria (to avoid spam/quasi-marketing/vanity projects):
 
 - GitHub Stars: The server repository should have at least 100 stars, or some other evidence (such as vscode marketplace downloads) that the LSP server is reasonably popular and is not spam/quasi-marketing/vanity projects.
-- VS Code Market: The server should have a reasonable amount of downloads in the VS Code marketplace.
+- Provide some reference or evidence that the language targeted by the LSP server has an active user base.
 
 This helps ensure that we only include actively maintained and widely used servers to provide a better experience for
 the community.
