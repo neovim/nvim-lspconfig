@@ -6158,7 +6158,7 @@ cp $(go env GOPATH)/bin/jq-lsp /usr/local/bin
 Note: To activate properly nvim needs to know the jq filetype.
 You can add it via:
 ```lua
-vim.cmd(\[\[au BufRead,BufNewFile *.jq setfiletype jq\]\])
+vim.cmd([[au BufRead,BufNewFile *.jq setfiletype jq]])
 ```
 
 
@@ -13312,7 +13312,7 @@ cargo install --path .
 Note: To activate properly nvim needs to know the uvl filetype.
 You can add it via:
 ```lua
-vim.cmd(\[\[au BufRead,BufNewFile *.uvl setfiletype uvl\]\])
+vim.cmd([[au BufRead,BufNewFile *.uvl setfiletype uvl]])
 ```
 
 
