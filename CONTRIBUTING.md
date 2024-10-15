@@ -17,6 +17,14 @@ The point of lspconfig is to provide the minimal configuration necessary for a s
 
 ## Adding a server to lspconfig
 
+New configs must meet these criteria (to avoid spam/quasi-marketing/vanity projects):
+
+- GitHub Stars: The server repository should have at least 100 stars, or some other evidence (such as vscode marketplace downloads) that the LSP server is reasonably popular and is not spam/quasi-marketing/vanity projects.
+- Provide some reference or evidence that the language targeted by the LSP server has an active user base.
+
+This helps ensure that we only include actively maintained and widely used servers to provide a better experience for
+the community.
+
 To add a new language server, start with a minimal skeleton. See `:help lspconfig-new`.
 
 When choosing a config name, convert dashes (`-`) to underscores (`_`). If the name of the server is a unique name (`pyright`, `clangd`) or a commonly used abbreviation (`zls`), prefer this as the server name. If the server instead follows the pattern x-language-server, prefer the convention `x_ls` (`jsonnet_ls`). 
