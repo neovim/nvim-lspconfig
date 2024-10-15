@@ -382,8 +382,8 @@ Launches the requested (configured) client, but only if it successfully
 resolves a root directory. Note: Defaults to all configured servers matching
 the current buffer filetype.
 
-:LspStop [client_id] or [client_name]                              *:LspStop*
-Stops the server with the given client id or client name. Defaults to stopping
+:LspStop [client_id] or [config_name]                              *:LspStop*
+Stops the server with the given client-id or config name. Defaults to stopping
 all servers active on the current buffer. To force stop a language server: >
     :LspStop <client_id> ++force
 
