@@ -7,7 +7,7 @@ return {
     single_file_support = true,
   },
   docs = {
-    description = [[
+    description = [=[
 https://codeberg.org/caradhras/uvls
 Language server for UVL, written using tree sitter and rust.
 You can install the server easily using cargo:
@@ -19,9 +19,9 @@ cargo install --path .
 Note: To activate properly nvim needs to know the uvl filetype.
 You can add it via:
 ```lua
-vim.cmd(\[\[au BufRead,BufNewFile *.uvl setfiletype uvl\]\])
+vim.cmd([[au BufRead,BufNewFile *.uvl setfiletype uvl]])
 ```
-]],
+]=],
     default_config = {
       root_dir = [[util.find_git_ancestor]],
     },

@@ -7,7 +7,7 @@ return {
     single_file_support = true,
   },
   docs = {
-    description = [[
+    description = [=[
 https://github.com/wader/jq-lsp
 Language server for jq, written using Go.
 You can install the server easily using go install:
@@ -20,9 +20,9 @@ cp $(go env GOPATH)/bin/jq-lsp /usr/local/bin
 Note: To activate properly nvim needs to know the jq filetype.
 You can add it via:
 ```lua
-vim.cmd(\[\[au BufRead,BufNewFile *.jq setfiletype jq\]\])
+vim.cmd([[au BufRead,BufNewFile *.jq setfiletype jq]])
 ```
-]],
+]=],
     default_config = {
       root_dir = [[util.find_git_ancestor]],
     },
