@@ -174,11 +174,6 @@ local function make_client_info(client, fname)
     'autostart:       ' .. client_info.autostart,
   }
 
-  if client.config.lspinfo then
-    local server_specific_info = client.config.lspinfo(client.config)
-    info_lines = vim.list_extend(info_lines, server_specific_info)
-  end
-
   vim.list_extend(lines, info_lines)
 
   return table.concat(lines, '\n')
