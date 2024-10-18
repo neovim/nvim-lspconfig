@@ -39,14 +39,14 @@ end
 --- If a version string is not found, returns the concatenated output.
 ---
 --- @param cmd string[]
-local function try_get_version(cmd)
+local function try_fmt_version(cmd)
   local out = vim.fn.system(cmd)
   if not out then
     return nil
   end
-  local version_line = out:match('[^\r\n]+%d+%.[0-9.]+[^\r\n]+')
-  local s = vim.trim(version_line and version_line or out:gsub('[\r\n]', ' '))
-  return s
+  local v_line = out:match('[^\r\n]+%d+%.[0-9.]+[^\r\n]+')
+  local fallback = ('`%s` (output of `%s`)'):format(out:gsub('[\r\n]', ' '), table.concat(cmd, ' '))
+  return vim.trim(v_line and ('`%s`'):format(v_line) or fallback)
 end
 
 --- Prettify a path for presentation.
@@ -125,7 +125,7 @@ local function make_config_info(config, bufnr)
     'filetypes:         ' .. config_info.filetypes,
     'root directory:    ' .. fmtpath(config_info.root_dir),
     'cmd:               ' .. fmtpath(config_info.cmd),
-    ('%-18s `%s`'):format('version:', try_get_version(cmd_version)),
+    ('%-18s %s'):format('version:', try_fmt_version(cmd_version)),
     'cmd is executable: ' .. config_info.cmd_is_executable,
     'autostart:         ' .. config_info.autostart,
     'custom handlers:   ' .. config_info.handlers,
@@ -175,6 +175,8 @@ local function make_client_info(client, fname)
   client_info.autostart = (client.config.autostart and 'true') or 'false'
   client_info.attached_buffers_list = table.concat(vim.lsp.get_buffers_by_client_id(client.id), ', ')
 
+  local cmd_version = { client_info.cmd, '--version' }
+
   local lines = {
     'Client: '
       .. client.name
@@ -189,6 +191,7 @@ local function make_client_info(client, fname)
     'filetypes:       ' .. client_info.filetypes,
     'root directory:  ' .. fmtpath(client_info.root_dir),
     'cmd:             ' .. fmtpath(client_info.cmd),
+    ('%-18s %s'):format('version:', try_fmt_version(cmd_version)),
     'autostart:       ' .. client_info.autostart,
   }
 
