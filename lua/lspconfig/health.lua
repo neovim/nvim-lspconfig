@@ -34,6 +34,21 @@ local function remove_newlines(cmd)
   return cmd
 end
 
+--- Finds a "x.y.z" version string from the output of `cmd`, and returns the whole line.
+---
+--- If a version string is not found, returns the concatenated output.
+---
+--- @param cmd string[]
+local function try_get_version(cmd)
+  local out = vim.fn.system(cmd)
+  if not out then
+    return nil
+  end
+  local version_line = out:match('[^\r\n]+%d+%.[0-9.]+[^\r\n]+')
+  local s = vim.trim(version_line and version_line or out:gsub('[\r\n]', ' '))
+  return s
+end
+
 --- Prettify a path for presentation.
 local function fmtpath(p)
   if vim.startswith(p, 'Running') then
@@ -104,10 +119,13 @@ local function make_config_info(config, bufnr)
     'Config: ' .. config_info.name,
   }
 
+  local cmd_version = { config_info.cmd, '--version' }
+
   local info_lines = {
     'filetypes:         ' .. config_info.filetypes,
     'root directory:    ' .. fmtpath(config_info.root_dir),
     'cmd:               ' .. fmtpath(config_info.cmd),
+    ('%-18s `%s`'):format('version:', try_get_version(cmd_version)),
     'cmd is executable: ' .. config_info.cmd_is_executable,
     'autostart:         ' .. config_info.autostart,
     'custom handlers:   ' .. config_info.handlers,
