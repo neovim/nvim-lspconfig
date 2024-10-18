@@ -34,19 +34,56 @@ local function remove_newlines(cmd)
   return cmd
 end
 
---- Finds a "x.y.z" version string from the output of `cmd`, and returns the whole line.
+--- Tries to run `cmd` and kills it if it takes more than `ms` milliseconds.
+---
+--- This avoids hangs if a command waits for input (especially LSP servers).
+---
+--- @param cmd string[]
+local function try_get_cmd_output(cmd)
+  local out = nil
+  local function on_data(_, data, _)
+    out = (out or '') .. table.concat(data, '\n')
+  end
+  local chanid = vim.fn.jobstart(cmd, {
+    -- cwd = ?,
+    stdout_buffered = true,
+    stderr_buffered = true,
+    on_stdout = on_data,
+    on_stderr = on_data,
+  })
+  vim.fn.jobwait({ chanid }, 1000)
+  return out
+end
+
+--- Finds a "x.y.z" version string from the output of `prog` after attempting to invoke it with `--version`, `-v`,
+--- `--help`, etc.
+---
+--- Returns the whole line.
 ---
 --- If a version string is not found, returns the concatenated output.
 ---
---- @param cmd string[]
-local function try_fmt_version(cmd)
-  local out = vim.fn.system(cmd)
-  if not out then
-    return nil
+--- @param prog string
+local function try_fmt_version(prog)
+  local out = nil
+  local cmd --[=[@type string[]]=]
+  local tried = ''
+  for _, v_arg in ipairs { '--version', '-v', '--help', '-h' } do
+    cmd = { prog, v_arg }
+    out = try_get_cmd_output(cmd)
+    if out then
+      break
+    end
+    tried = tried .. ('`%s %s`\n'):format(prog, v_arg)
   end
-  local v_line = out:match('[^\r\n]+%d+%.[0-9.]+[^\r\n]+')
-  local fallback = ('`%s` (output of `%s`)'):format(out:gsub('[\r\n]', ' '), table.concat(cmd, ' '))
-  return vim.trim(v_line and ('`%s`'):format(v_line) or fallback)
+
+  local v_line = out and out:match('[^\r\n]*%d+%.[0-9.]+[^\r\n]*') or nil
+  if v_line then
+    return ('`%s`'):format(vim.trim(v_line))
+  end
+  if out then
+    return ('`%s` (output of `%s`)'):format(vim.trim(out:gsub('[\r\n]', ' ')) or '?', table.concat(cmd, ' '))
+  end
+  return '? Failed to get version from cmd. Tried:\n' .. tried
 end
 
 --- Prettify a path for presentation.
@@ -72,17 +109,35 @@ local cmd_type = {
   end,
 }
 
-local function make_config_info(config, bufnr)
-  local config_info = {}
-  config_info.name = config.name
-  config_info.helptags = {}
+--- Builds info displayed by both make_config_info and make_client_info.
+local function make_info(config_or_client)
+  local info = vim.deepcopy(config_or_client)
+  local config = config_or_client.config and config_or_client.config or config_or_client
 
   if config.cmd then
-    config_info.cmd, config_info.cmd_is_executable = cmd_type[type(config.cmd)](config)
+    info.cmd_desc, info.cmd_is_executable = cmd_type[type(config.cmd)](config)
   else
-    config_info.cmd = 'cmd not defined'
-    config_info.cmd_is_executable = 'NA'
+    info.cmd_desc = 'cmd not defined'
+    info.cmd_is_executable = 'NA'
   end
+
+  info.autostart = (config.autostart and 'true') or 'false'
+  info.filetypes = table.concat(config.filetypes or {}, ', ')
+
+  local info_lines = {
+    'filetypes:         ' .. info.filetypes,
+    'cmd:               ' .. fmtpath(info.cmd_desc),
+    ('%-18s %s'):format('version:', try_fmt_version(config.cmd[1])),
+    'executable:        ' .. info.cmd_is_executable,
+    'autostart:         ' .. info.autostart,
+  }
+
+  return info, info_lines
+end
+
+local function make_config_info(config, bufnr)
+  local config_info, info_lines = make_info(config)
+  config_info.helptags = {}
 
   local buffer_dir = api.nvim_buf_call(bufnr, function()
     return vim.fn.expand '%:p:h'
@@ -111,45 +166,30 @@ local function make_config_info(config, bufnr)
     vim.list_extend(config_info.helptags, helptags[error_messages.root_dir_not_found])
   end
 
-  config_info.autostart = (config.autostart and 'true') or 'false'
-  config_info.handlers = table.concat(vim.tbl_keys(config.handlers), ', ')
-  config_info.filetypes = table.concat(config.filetypes or {}, ', ')
+  local handlers = vim.tbl_keys(config.handlers)
+  config_info.handlers = table.concat(handlers, ', ')
 
-  local lines = {
-    'Config: ' .. config_info.name,
-  }
-
-  local cmd_version = { config_info.cmd, '--version' }
-
-  local info_lines = {
-    'filetypes:         ' .. config_info.filetypes,
-    'root directory:    ' .. fmtpath(config_info.root_dir),
-    'cmd:               ' .. fmtpath(config_info.cmd),
-    ('%-18s %s'):format('version:', try_fmt_version(cmd_version)),
-    'cmd is executable: ' .. config_info.cmd_is_executable,
-    'autostart:         ' .. config_info.autostart,
-    'custom handlers:   ' .. config_info.handlers,
-  }
+  table.insert(info_lines, 1, 'Config: ' .. config_info.name)
+  table.insert(info_lines, 'root directory:    ' .. fmtpath(config_info.root_dir))
+  if #handlers > 0 then
+    table.insert(info_lines, 'custom handlers:   ' .. config_info.handlers)
+  end
 
   if vim.tbl_count(config_info.helptags) > 0 then
     local help = vim.tbl_map(function(helptag)
       return string.format(':h %s', helptag)
     end, config_info.helptags)
-    info_lines = vim.list_extend({
-      'Refer to ' .. table.concat(help, ', ') .. ' for help.',
-    }, info_lines)
+    table.insert(info_lines, 'Refer to ' .. table.concat(help, ', ') .. ' for help.')
   end
 
-  vim.list_extend(lines, info_lines)
-  return table.concat(lines, '\n')
+  return table.concat(info_lines, '\n')
 end
 
 ---@param client vim.lsp.Client
 ---@param fname string
 local function make_client_info(client, fname)
-  local client_info = {}
+  local client_info, info_lines = make_info(client)
 
-  client_info.cmd = cmd_type[type(client.config.cmd)](client.config)
   local workspace_folders = fn.has 'nvim-0.9' == 1 and client.workspace_folders or client.workspaceFolders
   fname = vim.fs.normalize(uv.fs_realpath(fname) or fn.fnamemodify(fn.resolve(fname), ':p'))
 
@@ -171,33 +211,15 @@ local function make_client_info(client, fname)
   if not client_info.root_dir then
     client_info.root_dir = 'Running in single file mode.'
   end
-  client_info.filetypes = table.concat(client.config.filetypes or {}, ', ')
-  client_info.autostart = (client.config.autostart and 'true') or 'false'
   client_info.attached_buffers_list = table.concat(vim.lsp.get_buffers_by_client_id(client.id), ', ')
 
-  local cmd_version = { client_info.cmd, '--version' }
+  table.insert(
+    info_lines,
+    1,
+    ('Client: %s (id: %s, bufnr: [%s])'):format(client.name, client.id, client_info.attached_buffers_list)
+  )
 
-  local lines = {
-    'Client: '
-      .. client.name
-      .. ' (id: '
-      .. tostring(client.id)
-      .. ', bufnr: ['
-      .. client_info.attached_buffers_list
-      .. '])',
-  }
-
-  local info_lines = {
-    'filetypes:       ' .. client_info.filetypes,
-    'root directory:  ' .. fmtpath(client_info.root_dir),
-    'cmd:             ' .. fmtpath(client_info.cmd),
-    ('%-18s %s'):format('version:', try_fmt_version(cmd_version)),
-    'autostart:       ' .. client_info.autostart,
-  }
-
-  vim.list_extend(lines, info_lines)
-
-  return table.concat(lines, '\n')
+  return table.concat(info_lines, '\n')
 end
 
 local function check_lspconfig(bufnr)
@@ -232,7 +254,7 @@ local function check_lspconfig(bufnr)
     end
   end
 
-  health.start(('LSP configs active in this buffer (id=%s)'):format(bufnr or '(invalid buffer)'))
+  health.start(('LSP configs active in this buffer (bufnr: %s)'):format(bufnr or '(invalid buffer)'))
   health.info('Language client log: ' .. fmtpath(vim.lsp.get_log_path()))
   health.info(('Detected filetype: `%s`'):format(buffer_filetype))
   health.info(('%d client(s) attached to this buffer'):format(#vim.tbl_keys(buf_clients)))
@@ -249,7 +271,7 @@ local function check_lspconfig(bufnr)
 
   local other_matching_configs = not bufnr and {} or util.get_other_matching_providers(buffer_filetype)
   if not vim.tbl_isempty(other_matching_configs) then
-    health.info(('Other clients that match the "%s" filetype: '):format(buffer_filetype))
+    health.info(('Other clients that match the "%s" filetype:'):format(buffer_filetype))
     for _, config in ipairs(other_matching_configs) do
       health.info(make_config_info(config, bufnr))
     end
