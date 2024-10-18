@@ -5592,10 +5592,6 @@ require'lspconfig'.hls.setup{}
   ```lua
   { "haskell", "lhaskell" }
   ```
-  - `lspinfo` : 
-  ```lua
-  see source file
-  ```
   - `root_dir` : 
   ```lua
   root_pattern("hie.yaml", "stack.yaml", "cabal.project", "*.cabal", "package.yaml")
