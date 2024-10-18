@@ -4,6 +4,7 @@ end
 vim.g.lspconfig = 1
 
 local api, lsp = vim.api, vim.lsp
+local util = require('lspconfig.util')
 
 if vim.fn.has 'nvim-0.8' ~= 1 then
   local version_info = vim.version()
@@ -24,13 +25,13 @@ end
 local lsp_complete_configured_servers = function(arg)
   return completion_sort(vim.tbl_filter(function(s)
     return s:sub(1, #arg) == arg
-  end, require('lspconfig.util').available_servers()))
+  end, util.available_servers()))
 end
 
 local lsp_get_active_client_ids = function(arg)
   local clients = vim.tbl_map(function(client)
     return ('%d (%s)'):format(client.id, client.name)
-  end, require('lspconfig.util').get_managed_clients())
+  end, util.get_managed_clients())
 
   return completion_sort(vim.tbl_filter(function(s)
     return s:sub(1, #arg) == arg
@@ -43,7 +44,7 @@ local get_clients_from_cmd_args = function(arg)
     result[#result + 1] = lsp.get_client_by_id(tonumber(id))
   end
   if #result == 0 then
-    return require('lspconfig.util').get_managed_clients()
+    return util.get_managed_clients()
   end
   return result
 end
@@ -62,7 +63,7 @@ api.nvim_create_user_command('LspStart', function(info)
     end
   end
 
-  local matching_configs = require('lspconfig.util').get_config_by_ft(vim.bo.filetype)
+  local matching_configs = util.get_config_by_ft(vim.bo.filetype)
   for _, config in ipairs(matching_configs) do
     config.launch()
   end
@@ -140,7 +141,7 @@ api.nvim_create_user_command('LspStop', function(info)
     end
   end
 
-  local servers_on_buffer = require('lspconfig.util').get_lsp_clients { bufnr = current_buf }
+  local servers_on_buffer = util.get_lsp_clients { bufnr = current_buf }
   for _, client in ipairs(servers_on_buffer) do
     if client.attached_buffers[current_buf] and filter(client) then
       client.stop(force)
