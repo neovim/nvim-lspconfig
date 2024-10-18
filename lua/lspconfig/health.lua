@@ -67,7 +67,7 @@ local function try_fmt_version(prog)
   local out = nil
   local cmd --[=[@type string[]]=]
   local tried = ''
-  for _, v_arg in ipairs { '--version', '-v', '--help', '-h' } do
+  for _, v_arg in ipairs { 'version', '--version', '-v', '--help', '-h' } do
     cmd = { prog, v_arg }
     out = try_get_cmd_output(cmd)
     if out then
