@@ -128,7 +128,7 @@ api.nvim_create_user_command('LspStop', function(info)
         return server_id == client.id
       end
       found = false
-      err_msg = ('nvim-lspconfig: server id "%s" not found'):format(server_id)
+      err_msg = ('nvim-lspconfig: client id "%s" not found'):format(server_id)
     elseif v ~= '' then
       server_name = v
       ---@param client vim.lsp.Client
