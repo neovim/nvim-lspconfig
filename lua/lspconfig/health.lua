@@ -39,6 +39,7 @@ end
 --- This avoids hangs if a command waits for input (especially LSP servers).
 ---
 --- @param cmd string[]
+--- @return string? # Command output (stdout+stderr), or `nil` on timeout or nonzero exit.
 local function try_get_cmd_output(cmd)
   local out = nil
   local function on_data(_, data, _)
@@ -51,8 +52,9 @@ local function try_get_cmd_output(cmd)
     on_stdout = on_data,
     on_stderr = on_data,
   })
-  vim.fn.jobwait({ chanid }, 1000)
-  return out
+  local rv = vim.fn.jobwait({ chanid }, 300)
+  vim.fn.jobstop(chanid)
+  return rv[1] == 0 and out or nil
 end
 
 --- Finds a "x.y.z" version string from the output of `prog` after attempting to invoke it with `--version`, `-v`,
@@ -64,26 +66,21 @@ end
 ---
 --- @param prog string
 local function try_fmt_version(prog)
-  local out = nil
-  local cmd --[=[@type string[]]=]
-  local tried = ''
-  for _, v_arg in ipairs { 'version', '--version', '-v', '--help', '-h' } do
-    cmd = { prog, v_arg }
-    out = try_get_cmd_output(cmd)
-    if out then
-      break
+  local all = nil --- Collected output from all attempts.
+  local tried = '' --- Attempted commands.
+  for _, v_arg in ipairs { '--version', '-v', 'version', '--help', '-h' } do
+    local cmd = { prog, v_arg }
+    local out = try_get_cmd_output(cmd)
+    all = out and ('%s\n%s'):format(all or '', out) or all
+    local v_line = out and out:match('[^\r\n]*%d+%.[0-9.]+[^\r\n]*') or nil
+    if v_line then
+      return ('`%s`'):format(vim.trim(v_line))
     end
     tried = tried .. ('`%s %s`\n'):format(prog, v_arg)
   end
 
-  local v_line = out and out:match('[^\r\n]*%d+%.[0-9.]+[^\r\n]*') or nil
-  if v_line then
-    return ('`%s`'):format(vim.trim(v_line))
-  end
-  if out then
-    return ('`%s` (output of `%s`)'):format(vim.trim(out:gsub('[\r\n]', ' ')) or '?', table.concat(cmd, ' '))
-  end
-  return '? Failed to get version from cmd. Tried:\n' .. tried
+  all = all and vim.trim(all:sub(1, 80):gsub('[\r\n]', ' ')) .. '…' or '?'
+  return ('`%s` (Failed to get version) Tried:\n%s'):format(all, tried)
 end
 
 --- Prettify a path for presentation.
