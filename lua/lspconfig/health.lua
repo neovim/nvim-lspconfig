@@ -121,10 +121,11 @@ local function make_info(config_or_client)
   info.autostart = (config.autostart and 'true') or 'false'
   info.filetypes = table.concat(config.filetypes or {}, ', ')
 
+  local version = type(config.cmd) == 'function' and '? (cmd is a function)' or try_fmt_version(config.cmd[1])
   local info_lines = {
     'filetypes:         ' .. info.filetypes,
     'cmd:               ' .. fmtpath(info.cmd_desc),
-    ('%-18s %s'):format('version:', try_fmt_version(config.cmd[1])),
+    ('%-18s %s'):format('version:', version),
     'executable:        ' .. info.cmd_is_executable,
     'autostart:         ' .. info.autostart,
   }
