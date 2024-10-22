@@ -21,6 +21,9 @@ return {
       end
       local root_lua = util.root_pattern 'lua/'(fname) or ''
       local root_git = util.find_git_ancestor(fname) or ''
+      if root_lua == '' and root_git == '' then
+        return
+      end
       return #root_lua >= #root_git and root_lua or root_git
     end,
     single_file_support = true,
