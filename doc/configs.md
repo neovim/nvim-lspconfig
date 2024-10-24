@@ -4339,7 +4339,7 @@ require'lspconfig'.gradle_ls.setup{}
       }
     }
     ```
-  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/gradle_ls.lua:14](../lua/lspconfig/configs/gradle_ls.lua#L14)
+  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/gradle_ls.lua:9](../lua/lspconfig/configs/gradle_ls.lua#L9)
 
 
 ## grammarly
@@ -4652,7 +4652,7 @@ require'lspconfig'.helm_ls.setup{}
     ```lua
     { "helm" }
     ```
-  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/helm_ls.lua:12](../lua/lspconfig/configs/helm_ls.lua#L12)
+  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/helm_ls.lua:4](../lua/lspconfig/configs/helm_ls.lua#L4)
   - `single_file_support` : `true`
 
 
@@ -5015,6 +5015,24 @@ https://intelephense.com/
 npm install -g intelephense
 ```
 
+```lua
+-- See https://github.com/bmewburn/intelephense-docs/blob/master/installation.md#initialisation-options
+init_options = {
+  storagePath = …, -- Optional absolute path to storage dir. Defaults to os.tmpdir().
+  globalStoragePath = …, -- Optional absolute path to a global storage dir. Defaults to os.homedir().
+  licenceKey = …, -- Optional licence key or absolute path to a text file containing the licence key.
+  clearCache = …, -- Optional flag to clear server state. State can also be cleared by deleting {storagePath}/intelephense
+}
+-- See https://github.com/bmewburn/intelephense-docs
+settings = {
+  intelephense = {
+    files = {
+      maxSize = 1000000;
+    };
+  };
+}
+```
+
 **Snippet to enable the language server:**
 ```lua
 require'lspconfig'.intelephense.setup{}
@@ -5149,7 +5167,7 @@ require'lspconfig'.jdtls.setup{}
       workspace = "/home/user/.cache/jdtls/workspace"
     }
     ```
-  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/jdtls.lua:92](../lua/lspconfig/configs/jdtls.lua#L92)
+  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/jdtls.lua:80](../lua/lspconfig/configs/jdtls.lua#L80)
   - `single_file_support` : `true`
 
 
@@ -6530,7 +6548,7 @@ require'lspconfig'.neocmake.setup{}
     ```lua
     { "cmake" }
     ```
-  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/neocmake.lua:5](../lua/lspconfig/configs/neocmake.lua#L5)
+  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/neocmake.lua:4](../lua/lspconfig/configs/neocmake.lua#L4)
   - `single_file_support` : `true`
 
 
@@ -8735,7 +8753,7 @@ require'lspconfig'.ruff.setup{}
     ```lua
     { "python" }
     ```
-  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ruff.lua:10](../lua/lspconfig/configs/ruff.lua#L10)
+  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ruff.lua:4](../lua/lspconfig/configs/ruff.lua#L4)
   - `settings` :
     ```lua
     {}
@@ -8781,7 +8799,7 @@ require'lspconfig'.ruff_lsp.setup{}
     ```lua
     { "python" }
     ```
-  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ruff_lsp.lua:9](../lua/lspconfig/configs/ruff_lsp.lua#L9)
+  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ruff_lsp.lua:4](../lua/lspconfig/configs/ruff_lsp.lua#L4)
   - `settings` :
     ```lua
     {}
@@ -9188,7 +9206,7 @@ require'lspconfig'.smithy_ls.setup{}
     ```lua
     { "smithy" }
     ```
-  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/smithy_ls.lua:14](../lua/lspconfig/configs/smithy_ls.lua#L14)
+  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/smithy_ls.lua:7](../lua/lspconfig/configs/smithy_ls.lua#L7)
   - `single_file_support` : `true`
 
 
