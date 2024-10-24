@@ -9,11 +9,6 @@ local function template(s, params)
   return (s:gsub('{{([^{}]+)}}', params))
 end
 
---- "@/.../nvim-lspconfig/lua/lspconfig/util.lua" => "./util.lua"
-local function relpath(p)
-  return p:gsub([=[.*[/\\]lua[/\\]lspconfig[/\\]]=], '')
-end
-
 local function map_list(t, func)
   local res = {}
   for i, v in ipairs(t) do
@@ -140,15 +135,17 @@ local function make_lsp_sections()
         end,
       })
 
-      params.default_values = make_section(2, '\n\n', {
+      params.default_values = make_section(2, '\n', {
         function()
           if not template_def.default_config then
             return
           end
           return make_section(0, '\n', {
             map_sorted(template_def.default_config, function(k, v)
-              if type(v) ~= 'function' then
-                return ('- `%s` :\n```lua\n%s\n```'):format(k, inspect(v))
+              if type(v) == 'boolean' then
+                return ('- `%s` : `%s`'):format(k, v)
+              elseif type(v) ~= 'function' then
+                return ('- `%s` :\n  ```lua\n%s\n  ```'):format(k, indent(2, inspect(v)))
               end
 
               local file = assert(io.open(config_file, 'r'))
@@ -163,7 +160,7 @@ local function make_lsp_sections()
               io.close(file)
 
               -- XXX: "../" because the path is outside of the doc/ dir.
-              return ('- `%s` source (use "gF" to visit): [../%s:%d](../%s#L%d)\n'):format(
+              return ('- `%s` source (use "gF" to visit): [../%s:%d](../%s#L%d)'):format(
                 k,
                 config_file,
                 linenr,
