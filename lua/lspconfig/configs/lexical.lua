@@ -10,14 +10,14 @@ return {
   },
   docs = {
     description = [[
-    https://github.com/lexical-lsp/lexical
+https://github.com/lexical-lsp/lexical
 
-    Lexical is a next-generation language server for the Elixir programming language.
+Lexical is a next-generation language server for the Elixir programming language.
 
-    Follow the [Detailed Installation Instructions](https://github.com/lexical-lsp/lexical/blob/main/pages/installation.md)
+Follow the [Detailed Installation Instructions](https://github.com/lexical-lsp/lexical/blob/main/pages/installation.md)
 
-    **By default, `lexical` doesn't have a `cmd` set.**
-    This is because nvim-lspconfig does not make assumptions about your path.
-    ]],
+**By default, `lexical` doesn't have a `cmd` set.**
+This is because nvim-lspconfig does not make assumptions about your path.
+]],
   },
 }

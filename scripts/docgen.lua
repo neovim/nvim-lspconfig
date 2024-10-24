@@ -72,13 +72,12 @@ local lsp_section_template = [[
 
 {{preamble}}
 
-**Snippet to enable the language server:**
+Snippet to enable the language server:
 ```lua
 require'lspconfig'.{{config_name}}.setup{}
 ```
 {{commands}}
-
-**Default config:**
+Default config:
 {{default_values}}
 
 ]]
@@ -118,24 +117,23 @@ local function make_lsp_sections()
         default_values = '',
       }
 
-      params.commands = make_section(0, '\n\n', {
+      params.commands = make_section(0, '\n', {
         function()
           if not template_def.commands or #vim.tbl_keys(template_def.commands) == 0 then
             return
           end
-          return '**Commands:**\n'
-            .. make_section(0, '\n', {
-              map_sorted(template_def.commands, function(name, def)
-                if def.description then
-                  return string.format('- %s: %s', name, def.description)
-                end
-                return string.format('- %s', name)
-              end),
-            })
+          return ('\nCommands:\n%s\n'):format(make_section(0, '\n', {
+            map_sorted(template_def.commands, function(name, def)
+              if def.description then
+                return string.format('- %s: %s', name, def.description)
+              end
+              return string.format('- %s', name)
+            end),
+          }))
         end,
       })
 
-      params.default_values = make_section(2, '\n', {
+      params.default_values = make_section(0, '\n', {
         function()
           if not template_def.default_config then
             return
@@ -213,9 +211,6 @@ local function make_lsp_sections()
                         local function tick(s)
                           return string.format('`%s`', s)
                         end
-                        local function bold(s)
-                          return string.format('**%s**', s)
-                        end
 
                         -- https://github.github.com/gfm/#backslash-escapes
                         local function escape_markdown_punctuations(str)
@@ -231,7 +226,7 @@ local function make_lsp_sections()
                         end
                         return make_section(0, '\n', {
                           '- ' .. make_section(0, ': ', {
-                            bold(tick(k)),
+                            tick(k),
                             function()
                               if v.enum then
                                 return tick('enum ' .. inspect(v.enum))
