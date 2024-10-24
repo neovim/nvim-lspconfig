@@ -19,8 +19,5 @@ cabal install dhall-lsp-server
 ```
 prebuilt binaries can be found [here](https://github.com/dhall-lang/dhall-haskell/releases).
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".git")]],
-    },
   },
 }

@@ -30,8 +30,5 @@ Toolchain of the web. [Successor of Rome](https://biomejs.dev/blog/annoucing-bio
 npm install [-g] @biomejs/biome
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern('biome.json', 'biome.jsonc')]],
-    },
   },
 }

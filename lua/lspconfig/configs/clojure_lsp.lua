@@ -12,8 +12,5 @@ https://github.com/clojure-lsp/clojure-lsp
 
 Clojure Language Server
 ]],
-    default_config = {
-      root_dir = [[root_pattern("project.clj", "deps.edn", "build.boot", "shadow-cljs.edn", ".git", "bb.edn")]],
-    },
   },
 }

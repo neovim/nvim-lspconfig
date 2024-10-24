@@ -15,8 +15,5 @@ https://docs.stack.build/docs/cli/installation
 
 https://docs.stack.build/docs/vscode/starlark-language-server
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".git")]],
-    },
   },
 }

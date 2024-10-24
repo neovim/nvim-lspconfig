@@ -22,8 +22,5 @@ pip install autotools-language-server
 
 Language server for autoconf, automake and make using tree sitter in python.
 ]],
-    default_config = {
-      root_dir = { 'configure.ac', 'Makefile', 'Makefile.am', '*.mk' },
-    },
   },
 }

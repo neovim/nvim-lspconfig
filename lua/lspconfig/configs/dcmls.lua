@@ -12,8 +12,5 @@ https://dcm.dev/
 
 Language server for DCM analyzer.
 ]],
-    default_config = {
-      root_dir = [[root_pattern("pubspec.yaml")]],
-    },
   },
 }

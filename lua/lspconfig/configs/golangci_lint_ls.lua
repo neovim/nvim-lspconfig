@@ -35,8 +35,5 @@ go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 ```
 
 ]],
-    default_config = {
-      root_dir = [[root_pattern('.golangci.yml', '.golangci.yaml', '.golangci.toml', '.golangci.json', 'go.work', 'go.mod', '.git')]],
-    },
   },
 }

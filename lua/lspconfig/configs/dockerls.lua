@@ -31,8 +31,5 @@ require("lspconfig").dockerls.setup {
 }
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern("Dockerfile")]],
-    },
   },
 }

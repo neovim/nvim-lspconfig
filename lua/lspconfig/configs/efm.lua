@@ -36,8 +36,5 @@ require('lspconfig')['efm'].setup{
 ```
 
 ]],
-    default_config = {
-      root_dir = [[util.root_pattern(".git")]],
-    },
   },
 }

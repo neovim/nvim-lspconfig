@@ -36,8 +36,5 @@ require'lspconfig'.cssls.setup {
 }
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern("package.json", ".git") or bufdir]],
-    },
   },
 }

@@ -16,8 +16,5 @@ https://github.com/ember-tooling/ember-language-server
 npm install -g @ember-tooling/ember-language-server
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern("ember-cli-build.js", ".git")]],
-    },
   },
 }

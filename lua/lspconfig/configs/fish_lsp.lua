@@ -19,8 +19,5 @@ scope aware symbol analysis, per-token hover generation, and many others.
 
 [homepage](https://www.fish-lsp.dev/)
 ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

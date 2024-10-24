@@ -13,6 +13,7 @@ return {
       initialize_params['workspaceFolders'] = workspace_folders
     end,
     settings = {
+      -- List containing all search paths, eg: '~/codeql-home/codeql-repo'.
       search_path = vim.empty_dict(),
     },
   },
@@ -24,11 +25,6 @@ https://codeql.github.com/docs/codeql-cli/
 Binaries:
 https://github.com/github/codeql-cli-binaries
         ]],
-    default_config = {
-      settings = {
-        search_path = [[list containing all search paths, eg: '~/codeql-home/codeql-repo']],
-      },
-    },
   },
   on_new_config = function(config)
     if type(config.settings.search_path) == 'table' and not vim.tbl_isempty(config.settings.search_path) then

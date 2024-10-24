@@ -19,8 +19,5 @@ Language server for Cucumber.
 npm install -g @cucumber/language-server
 ```
     ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

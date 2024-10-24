@@ -17,9 +17,5 @@ A language server for Gleam Programming Language.
 
 It can be i
 ]],
-    default_config = {
-      cmd = { 'gleam', 'lsp' },
-      root_dir = [[root_pattern("gleam.toml", ".git")]],
-    },
   },
 }

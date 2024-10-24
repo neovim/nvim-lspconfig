@@ -20,8 +20,5 @@ require'lspconfig'.cairo_ls.setup{}
 
 *cairo-language-server is still under active development, some features might not work yet !*
 ]],
-    default_config = {
-      root_dir = [[root_pattern("Scarb.toml", "cairo_project.toml", ".git")]],
-    },
   },
 }

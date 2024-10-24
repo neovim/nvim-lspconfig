@@ -20,14 +20,5 @@ Language Server for Gitlab CI
 `gitlab-ci-ls` can be installed via cargo:
 cargo install gitlab-ci-ls
 ]],
-    default_config = {
-      cmd = { 'gitlab-ci-ls' },
-      filetypes = { 'yaml.gitlab' },
-      root_dir = [[util.root_pattern('.gitlab*', '.git')]],
-      init_options = {
-        cache_path = [[util.path.join(vim.uv.os_homedir(), '.cache/gitlab-ci-ls/')]],
-        log_path = [[util.path.join(util.path.join(vim.uv.os_homedir(), '.cache/gitlab-ci-ls/'), 'log/gitlab-ci-ls.log')]],
-      },
-    },
   },
 }

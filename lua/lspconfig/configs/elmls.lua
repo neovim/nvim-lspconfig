@@ -33,8 +33,5 @@ If you don't want to use Nvim to install it, then you can use:
 npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern("elm.json")]],
-    },
   },
 }

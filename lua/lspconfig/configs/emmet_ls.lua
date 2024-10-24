@@ -31,9 +31,5 @@ Package can be installed via `npm`:
 npm install -g emmet-ls
 ```
 ]],
-    default_config = {
-      root_dir = 'git root',
-      single_file_support = true,
-    },
   },
 }

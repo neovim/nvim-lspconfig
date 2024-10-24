@@ -15,8 +15,5 @@ https://github.com/dagger/cuelsp
 
 Dagger's lsp server for cuelang.
 ]],
-    default_config = {
-      root_dir = [[root_pattern("cue.mod", ".git")]],
-    },
   },
 }

@@ -16,8 +16,5 @@ https://github.com/RokuCommunity/brighterscript
 npm install -g brighterscript
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".git")]],
-    },
   },
 }

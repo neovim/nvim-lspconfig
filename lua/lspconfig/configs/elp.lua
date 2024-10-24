@@ -14,8 +14,5 @@ https://whatsapp.github.io/erlang-language-platform
 ELP integrates Erlang into modern IDEs via the language server protocol and was
 inspired by rust-analyzer.
 ]],
-    default_config = {
-      root_dir = [[root_pattern('rebar.config', 'erlang.mk', '.git')]],
-    },
   },
 }

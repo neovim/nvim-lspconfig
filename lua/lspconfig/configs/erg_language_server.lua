@@ -20,8 +20,5 @@ erg-language-server can be installed via `cargo` and used as follows:
  erg --language-server
  ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern("package.er") or find_git_ancestor]],
-    },
   },
 }
