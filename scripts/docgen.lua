@@ -83,7 +83,7 @@ require'lspconfig'.{{config_name}}.setup{}
 ```
 {{commands}}
 
-**Default values:**
+**Default config:**
 {{default_values}}
 
 ]]
@@ -113,6 +113,8 @@ local function make_lsp_sections()
     map_sorted(configs, function(config_name, template_object)
       local template_def = template_object.config_def
       local docs = template_def.docs
+      -- "lua/lspconfig/configs/xx.lua"
+      local config_file = ('lua/lspconfig/configs/%s.lua'):format(config_name)
 
       local params = {
         config_name = config_name,
@@ -145,31 +147,29 @@ local function make_lsp_sections()
           end
           return make_section(0, '\n', {
             map_sorted(template_def.default_config, function(k, v)
-              local description = template_def.default_config[k]
               if type(v) ~= 'function' then
-                description = inspect(v)
-              else
-                local info = debug.getinfo(v)
-                local relname = relpath(info.source)
-                local file = assert(io.open(string.sub(info.source, 2), 'r'))
-
-                local fnbody = ''
-                local linenr = 0
-                for line in file:lines() do
-                  linenr = linenr + 1
-                  if linenr >= info.linedefined and linenr <= info.lastlinedefined then
-                    fnbody = ('%s\n%s'):format(fnbody, line)
-                  end
-                end
-                io.close(file)
-
-                description = ('-- Source (use "gF" to visit): %s:%d\n'):format(
-                  relname,
-                  info.linedefined,
-                  string.gsub(fnbody, '.*function', 'function')
-                )
+                return ('- `%s` :\n```lua\n%s\n```'):format(k, inspect(v))
               end
-              return string.format('- `%s` : \n```lua\n%s\n```', k, description or inspect(v))
+
+              local file = assert(io.open(config_file, 'r'))
+              local linenr = 0
+              -- Find the line where `default_config` is defined.
+              for line in file:lines() do
+                linenr = linenr + 1
+                if line:find('%sdefault_config%s') then
+                  break
+                end
+              end
+              io.close(file)
+
+              -- XXX: "../" because the path is outside of the doc/ dir.
+              return ('- `%s` source (use "gF" to visit): [../%s:%d](../%s#L%d)\n'):format(
+                k,
+                config_file,
+                linenr,
+                config_file,
+                linenr
+              )
             end),
           })
         end,
