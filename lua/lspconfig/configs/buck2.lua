@@ -20,8 +20,5 @@ To better detect Buck2 project files, the following can be added:
 vim.cmd [[ autocmd BufRead,BufNewFile *.bxl,BUCK,TARGETS set filetype=bzl ]]
 ```
 ]=],
-    default_config = {
-      root_dir = [[root_pattern(".buckconfig")]],
-    },
   },
 }

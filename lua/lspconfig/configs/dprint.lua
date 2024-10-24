@@ -26,8 +26,5 @@ https://github.com/dprint/dprint
 
 Pluggable and configurable code formatting platform written in Rust.
   ]],
-    default_config = {
-      root_dir = util.root_pattern('dprint.json', '.dprint.json', 'dprint.jsonc', '.dprint.jsonc'),
-    },
   },
 }

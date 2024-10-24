@@ -20,8 +20,5 @@ Can be installed from npm or github.
 npm install -g language-server-bitbake
 ```
     ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

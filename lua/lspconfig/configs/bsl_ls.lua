@@ -12,8 +12,5 @@ return {
     Language Server Protocol implementation for 1C (BSL) - 1C:Enterprise 8 and OneScript languages.
 
     ]],
-    default_config = {
-      root_dir = [[root_pattern(".git")]],
-    },
   },
 }

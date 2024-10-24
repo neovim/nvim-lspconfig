@@ -40,8 +40,5 @@ To download the latest release and place in /usr/local/bin/bicep-langserver:
     && unzip -d /usr/local/bin/bicep-langserver bicep-langserver.zip)
 ```
 ]=],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

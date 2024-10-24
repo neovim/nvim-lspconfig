@@ -38,8 +38,5 @@ If CBQN has been installed in a non-standard directory or can't be installed glo
 This will set the environment variables `LD_LIBRARY_PATH` (Linux) or `DYLD_LIBRARY_PATH` (macOS) to the provided path.
 
   ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

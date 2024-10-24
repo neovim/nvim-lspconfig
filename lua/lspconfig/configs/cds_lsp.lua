@@ -1,17 +1,11 @@
 local util = require 'lspconfig.util'
 
-local root_files = {
-  'package.json',
-  'db',
-  'srv',
-}
-
 return {
   default_config = {
     cmd = { 'cds-lsp', '--stdio' },
     filetypes = { 'cds' },
     -- init_options = { provideFormatter = true }, -- needed to enable formatting capabilities
-    root_dir = util.root_pattern(unpack(root_files)),
+    root_dir = util.root_pattern('package.json', 'db', 'srv'),
     single_file_support = true,
     settings = {
       cds = { validate = true },

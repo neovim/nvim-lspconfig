@@ -25,8 +25,5 @@ The `flow` command from flow-cli must be available. For install instructions see
 
 By default the configuration is taken from the closest `flow.json` or the `flow.json` in the users home directory.
 ]],
-    default_config = {
-      root_dir = [[util.root_pattern('flow.json') or vim.env.HOME]],
-    },
   },
 }

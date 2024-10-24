@@ -60,8 +60,5 @@ require'lspconfig'.angularls.setup{
 }
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern("angular.json")]],
-    },
   },
 }

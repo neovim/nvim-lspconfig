@@ -12,8 +12,5 @@ return {
 
 To learn how to configure the clarity language server, see the [clarity-lsp documentation](https://github.com/hirosystems/clarity-lsp).
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".git")]],
-    },
   },
 }

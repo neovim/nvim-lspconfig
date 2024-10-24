@@ -30,8 +30,5 @@ npm i -g bash-language-server
 
 Language server for bash, written using tree sitter in typescript.
 ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

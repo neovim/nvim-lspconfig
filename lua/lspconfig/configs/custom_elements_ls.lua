@@ -32,8 +32,5 @@ Here's an example that disables type checking in JavaScript files.
 }
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")]],
-    },
   },
 }

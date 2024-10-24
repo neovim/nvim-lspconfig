@@ -17,8 +17,5 @@ You can install cssmodules-language-server via npm:
 npm install -g cssmodules-language-server
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern("package.json")]],
-    },
   },
 }

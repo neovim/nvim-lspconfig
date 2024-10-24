@@ -30,8 +30,5 @@ ast-grep LSP only works in projects that have `sgconfig.y[a]ml` in their root di
 npm install [-g] @ast-grep/cli
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern('sgconfig.yaml', 'sgconfig.yml')]],
-    },
   },
 }

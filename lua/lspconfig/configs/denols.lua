@@ -120,8 +120,5 @@ vim.g.markdown_fenced_languages = {
 ```
 
 ]],
-    default_config = {
-      root_dir = [[root_pattern("deno.json", "deno.jsonc", ".git")]],
-    },
   },
 }

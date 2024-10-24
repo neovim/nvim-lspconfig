@@ -28,8 +28,5 @@ https://github.com/withastro/language-tools/tree/main/packages/language-server
 npm install -g @astrojs/language-server
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")]],
-    },
   },
 }

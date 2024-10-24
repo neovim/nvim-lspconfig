@@ -23,8 +23,5 @@ https://gitlab.gnome.org/jwestman/blueprint-compiler
 Language server for the blueprint markup language, written in python and part
 of the blueprint-compiler.
 ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

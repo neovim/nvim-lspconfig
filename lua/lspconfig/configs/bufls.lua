@@ -19,8 +19,5 @@ go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
 
 bufls is a Protobuf language server compatible with Buf modules and workspaces
 ]],
-    default_config = {
-      root_dir = [[root_pattern("buf.work.yaml", ".git")]],
-    },
   },
 }

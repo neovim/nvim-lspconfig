@@ -28,9 +28,5 @@ Package can be installed via `npm`:
 npm install -g @olrtg/emmet-language-server
 ```
 ]],
-    default_config = {
-      root_dir = 'git root',
-      single_file_support = true,
-    },
   },
 }

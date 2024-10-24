@@ -20,8 +20,5 @@ See below for lsp command options.
 npx flow lsp --help
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern(".flowconfig")]],
-    },
   },
 }

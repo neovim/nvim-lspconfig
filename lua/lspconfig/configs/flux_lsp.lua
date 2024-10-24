@@ -15,8 +15,5 @@ https://github.com/influxdata/flux-lsp
 cargo install --git https://github.com/influxdata/flux-lsp
 ```
 ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

@@ -31,8 +31,5 @@ Provides language features for WGSL (WebGPU Shading Language):
 cargo install glasgow
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".git")]],
-    },
   },
 }
