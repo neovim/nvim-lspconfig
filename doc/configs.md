@@ -1679,7 +1679,7 @@ require'lspconfig'.ccls.setup{}
     ```lua
     "utf-32"
     ```
-  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ccls.lua:9](../lua/lspconfig/configs/ccls.lua#L9)
+  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ccls.lua:4](../lua/lspconfig/configs/ccls.lua#L4)
   - `single_file_support` : `false`
 
 
@@ -1708,7 +1708,7 @@ require'lspconfig'.cds_lsp.setup{}
     ```lua
     { "cds" }
     ```
-  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cds_lsp.lua:10](../lua/lspconfig/configs/cds_lsp.lua#L10)
+  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cds_lsp.lua:4](../lua/lspconfig/configs/cds_lsp.lua#L4)
   - `settings` :
     ```lua
     {
@@ -1865,7 +1865,7 @@ require'lspconfig'.cmake.setup{}
       buildDirectory = "build"
     }
     ```
-  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cmake.lua:5](../lua/lspconfig/configs/cmake.lua#L5)
+  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cmake.lua:4](../lua/lspconfig/configs/cmake.lua#L4)
   - `single_file_support` : `true`
 
 
@@ -2654,7 +2654,7 @@ require'lspconfig'.diagnosticls.setup{}
     ```lua
     {}
     ```
-  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/diagnosticls.lua:4](../lua/lspconfig/configs/diagnosticls.lua#L4)
+  - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/diagnosticls.lua:5](../lua/lspconfig/configs/diagnosticls.lua#L5)
   - `single_file_support` : `true`
 
 
