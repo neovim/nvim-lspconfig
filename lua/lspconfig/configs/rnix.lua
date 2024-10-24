@@ -21,8 +21,5 @@ To install manually, run `cargo install rnix-lsp`. If you are using nix, rnix-ls
 This server accepts configuration via the `settings` key.
 
     ]],
-    default_config = {
-      root_dir = "vim's starting directory",
-    },
   },
 }

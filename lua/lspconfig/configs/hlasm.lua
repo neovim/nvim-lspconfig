@@ -13,8 +13,5 @@ return {
 
     To learn how to configure the HLASM language server, see the [HLASM Language Support documentation](https://github.com/eclipse-che4z/che-che4z-lsp-for-hlasm).
     ]],
-    default_config = {
-      root_dir = [[root_pattern(".hlasmplugin")]],
-    },
   },
 }

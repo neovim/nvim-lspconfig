@@ -10,8 +10,5 @@ return {
     description = [[
 https://github.com/rubocop/rubocop
     ]],
-    default_config = {
-      root_dir = [[root_pattern("Gemfile", ".git")]],
-    },
   },
 }

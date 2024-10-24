@@ -79,20 +79,6 @@ More settings for VDMJ can be changed in a file called `vdmj.properties` under
 Note: proof obligations and combinatorial testing are not currently supported
 by neovim.
 ]],
-    default_config = {
-      cmd = 'Generated from the options given',
-      root_dir = 'util.find_git_ancestor(fname) or find_vscode_ancestor(fname)',
-      options = {
-        java = '$JAVA_HOME/bin/java',
-        java_opts = { '-Xmx3000m', '-Xss1m' },
-        annotation_paths = {},
-        mavenrepo = '$HOME/.m2/repository/dk/au/ece/vdmj',
-        version = 'The latest version installed in `mavenrepo`',
-        logfile = "path.join(vim.fn.stdpath 'cache', 'vdm-lsp.log')",
-        debugger_port = -1,
-        high_precision = false,
-      },
-    },
   },
   on_new_config = function(config, root_dir)
     local version = with_precision(

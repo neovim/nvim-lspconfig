@@ -18,8 +18,5 @@ Check the repository README for more information.
 
 _See an example config at https://github.com/oxalica/nil/blob/main/dev/nvim-lsp.nix._
     ]],
-    default_config = {
-      root_dir = [[root_pattern("flake.nix", ".git")]],
-    },
   },
 }

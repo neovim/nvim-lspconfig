@@ -14,8 +14,5 @@ Build instructions can be found [here](https://github.com/Galarius/opencl-langua
 
 Prebuilt binaries are available for Linux, macOS and Windows [here](https://github.com/Galarius/opencl-language-server/releases).
 ]],
-    default_config = {
-      root_dir = [[util.root_pattern(".git")]],
-    },
   },
 }

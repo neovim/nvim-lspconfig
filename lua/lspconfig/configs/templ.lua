@@ -14,8 +14,5 @@ https://templ.guide
 
 The official language server for the templ HTML templating language.
 ]],
-    default_config = {
-      root_dir = [[root_pattern('go.work', 'go.mod', '.git')]],
-    },
   },
 }

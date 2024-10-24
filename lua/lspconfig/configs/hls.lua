@@ -28,9 +28,5 @@ require('lspconfig')['hls'].setup{
 }
 ```
     ]],
-
-    default_config = {
-      root_dir = [[root_pattern("hie.yaml", "stack.yaml", "cabal.project", "*.cabal", "package.yaml")]],
-    },
   },
 }

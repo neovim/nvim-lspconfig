@@ -23,8 +23,5 @@ Marksman works on MacOS, Linux, and Windows and is distributed as a self-contain
 
 Pre-built binaries can be downloaded from https://github.com/artempyanykh/marksman/releases
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".git", ".marksman.toml")]],
-    },
   },
 }

@@ -16,8 +16,5 @@ https://github.com/dfinity/vscode-motoko
 
 Language server for the Motoko programming language.
     ]],
-    default_config = {
-      root_dir = [[root_pattern("dfx.json", ".git")]],
-    },
   },
 }

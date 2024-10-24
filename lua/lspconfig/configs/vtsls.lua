@@ -28,8 +28,5 @@ To configure a TypeScript project, add a
 or [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig) to
 the root of your project.
 ]],
-    default_config = {
-      root_dir = [[root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")]],
-    },
   },
 }

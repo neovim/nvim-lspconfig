@@ -13,8 +13,5 @@ https://github.com/nerdypepper/statix
 
 lints and suggestions for the nix programming language
     ]],
-    default_config = {
-      root_dir = [[root_pattern("flake.nix", ".git")]],
-    },
   },
 }

@@ -31,8 +31,5 @@ https://github.com/richterger/Perl-LanguageServer/tree/master/clients/vscode/per
 
 To use the language server, ensure that you have Perl::LanguageServer installed and perl command is on your path.
 ]],
-    default_config = {
-      root_dir = "vim's starting directory",
-    },
   },
 }

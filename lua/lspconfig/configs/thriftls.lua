@@ -13,8 +13,5 @@ https://github.com/joyme123/thrift-ls
 
 you can install thriftls by mason or download binary here: https://github.com/joyme123/thrift-ls/releases
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".thrift")]],
-    },
   },
 }

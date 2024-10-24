@@ -37,8 +37,5 @@ The language server can be installed with `go`:
 go install github.com/grafana/jsonnet-language-server@latest
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern("jsonnetfile.json")]],
-    },
   },
 }

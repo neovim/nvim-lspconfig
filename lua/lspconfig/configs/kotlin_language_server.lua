@@ -23,8 +23,9 @@ return {
   default_config = {
     filetypes = { 'kotlin' },
     root_dir = util.root_pattern(unpack(root_files)),
-    cmd = { bin_name },
+    cmd = { bin_name }, -- kotlin-language-server
     init_options = {
+      -- Enables caching and use project root to store cache data.
       storagePath = util.root_pattern(unpack(root_files))(vim.fn.expand '%:p:h'),
     },
   },
@@ -46,12 +47,5 @@ return {
     For faster startup, you can setup caching by specifying a storagePath
     in the init_options. The default is your home directory.
     ]],
-    default_config = {
-      root_dir = [[See source]],
-      cmd = { 'kotlin-language-server' },
-      init_options = {
-        storagePath = [[Enables caching and use project root to store cache data. See source]],
-      },
-    },
   },
 }

@@ -23,8 +23,5 @@ Checkout the repo for more info.
 
 Note: This LSP will start on `scheme.guile` filetype. You can set this file type using `:help modeline` or adding https://gitlab.com/HiPhish/guile.vim to your plugins to automatically set it.
     ]],
-    default_config = {
-      root_dir = [[root_pattern("guix.scm", ".git")]],
-    },
   },
 }

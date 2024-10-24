@@ -20,9 +20,5 @@ A linter for Rego, with support for running as an LSP server.
 go install github.com/StyraInc/regal@latest
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern("*.rego", ".git")]],
-      single_file_support = true,
-    },
   },
 }

@@ -20,8 +20,5 @@ Language Server for the Prisma JavaScript and TypeScript ORM
 npm install -g @prisma/language-server
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".git", "package.json")]],
-    },
   },
 }

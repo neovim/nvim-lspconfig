@@ -19,8 +19,5 @@ Sorbet up for new projects: https://sorbet.org/docs/adopting.
 gem install sorbet
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern("Gemfile", ".git")]],
-    },
   },
 }

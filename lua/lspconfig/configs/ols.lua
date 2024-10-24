@@ -12,8 +12,5 @@ return {
 
            `Odin Language Server`.
         ]],
-    default_config = {
-      root_dir = [[util.root_pattern("ols.json", ".git", "*.odin")]],
-    },
   },
 }

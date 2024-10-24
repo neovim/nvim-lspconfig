@@ -37,8 +37,5 @@ require('lspconfig').slangd.setup{
 Available options are documented [here](https://github.com/shader-slang/slang-vscode-extension/tree/main?tab=readme-ov-file#configurations)
 or in more detail [here](https://github.com/shader-slang/slang-vscode-extension/blob/main/package.json#L70).
 ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

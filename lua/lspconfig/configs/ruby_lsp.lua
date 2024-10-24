@@ -26,8 +26,5 @@ group :development do
 end
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern("Gemfile", ".git")]],
-    },
   },
 }

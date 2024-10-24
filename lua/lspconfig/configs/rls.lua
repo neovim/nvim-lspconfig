@@ -35,8 +35,5 @@ If you want to use rls for a particular build, eg nightly, set cmd as follows:
 cmd = {"rustup", "run", "nightly", "rls"}
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern("Cargo.toml")]],
-    },
   },
 }

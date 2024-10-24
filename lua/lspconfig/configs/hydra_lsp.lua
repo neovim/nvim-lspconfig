@@ -13,8 +13,5 @@ https://github.com/Retsediv/hydra-lsp
 
 LSP for Hydra Python package config files.
 ]],
-    default_config = {
-      root_dir = [[util.root_pattern '.git']],
-    },
   },
 }

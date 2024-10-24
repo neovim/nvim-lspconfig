@@ -65,8 +65,5 @@ require'lspconfig'.powershell_es.setup{
 }
 ```
 ]],
-    default_config = {
-      root_dir = 'git root or current directory',
-    },
   },
 }

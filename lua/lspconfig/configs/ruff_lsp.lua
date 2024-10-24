@@ -1,15 +1,10 @@
 local util = require 'lspconfig.util'
 
-local root_files = {
-  'pyproject.toml',
-  'ruff.toml',
-}
-
 return {
   default_config = {
     cmd = { 'ruff-lsp' },
     filetypes = { 'python' },
-    root_dir = util.root_pattern(unpack(root_files)) or util.find_git_ancestor(),
+    root_dir = util.root_pattern('pyproject.toml', 'ruff.toml') or util.find_git_ancestor(),
     single_file_support = true,
     settings = {},
   },
@@ -37,6 +32,5 @@ require'lspconfig'.ruff_lsp.setup{
 ```
 
   ]],
-    root_dir = [[root_pattern("pyproject.toml", "ruff.toml", ".git")]],
   },
 }

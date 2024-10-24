@@ -48,8 +48,5 @@ require('lspconfig').['openedge_ls'].setup {
 }
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern('openedge-project.json')]],
-    },
   },
 }

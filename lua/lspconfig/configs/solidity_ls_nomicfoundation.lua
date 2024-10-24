@@ -29,8 +29,5 @@ npm install -g @nomicfoundation/solidity-language-server
 
 A language server for the Solidity programming language, built by the Nomic Foundation for the Ethereum community.
 ]],
-    default_config = {
-      root_dir = [[root_pattern("]] .. table.concat(root_files, '", "') .. [[", ".git", "package.json")]],
-    },
   },
 }

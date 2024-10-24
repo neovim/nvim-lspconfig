@@ -13,8 +13,5 @@ https://github.com/nushell/nushell
 
 Nushell built-in language server.
 ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

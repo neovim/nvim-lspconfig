@@ -14,8 +14,5 @@ https://github.com/facebook/hhvm
 See below for how to setup HHVM & typechecker:
 https://docs.hhvm.com/hhvm/getting-started/getting-started
     ]],
-    default_config = {
-      root_dir = [[root_pattern(".hhconfig")]],
-    },
   },
 }

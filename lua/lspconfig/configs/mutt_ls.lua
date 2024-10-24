@@ -18,8 +18,5 @@ A language server for (neo)mutt's muttrc. It can be installed via pip.
 pip install mutt-language-server
 ```
   ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

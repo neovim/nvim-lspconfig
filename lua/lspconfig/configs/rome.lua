@@ -30,8 +30,5 @@ Language server for the Rome Frontend Toolchain.
 npm install [-g] rome
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern('package.json', 'node_modules', '.git')]],
-    },
   },
 }

@@ -17,8 +17,5 @@ The language server can be installed with `pip`:
 pip install salt-lsp
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern('.git')]],
-    },
   },
 }

@@ -19,8 +19,5 @@ You might need to add filetype detection manually:
 autocmd BufRead Tiltfile setf=tiltfile
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".git")]],
-    },
   },
 }

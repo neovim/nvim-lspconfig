@@ -16,8 +16,5 @@ https://github.com/moetelo/twiggy
 npm install -g twiggy-language-server
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern("composer.json", ".git")]],
-    },
   },
 }

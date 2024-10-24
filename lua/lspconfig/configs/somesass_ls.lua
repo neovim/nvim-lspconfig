@@ -33,8 +33,5 @@ The language server provides:
 - Suggestions and hover info for built-in Sass modules, when used with @use.
 
 ]],
-    default_config = {
-      root_dir = [[root_pattern("package.json", ".git") or bufdir]],
-    },
   },
 }

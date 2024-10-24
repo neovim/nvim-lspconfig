@@ -14,8 +14,5 @@ V language server.
 
 `v-language-server` can be installed by following the instructions [here](https://github.com/vlang/vls#installation).
 ]],
-    default_config = {
-      root_dir = [[root_pattern("v.mod", ".git")]],
-    },
   },
 }

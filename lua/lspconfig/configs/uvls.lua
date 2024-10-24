@@ -22,8 +22,5 @@ You can add it via:
 vim.cmd([[au BufRead,BufNewFile *.uvl setfiletype uvl]])
 ```
 ]=],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

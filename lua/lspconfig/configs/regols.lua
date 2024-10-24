@@ -20,9 +20,5 @@ OPA Rego language server.
 go install github.com/kitagry/regols@latest
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern("*.rego", ".git")]],
-      single_file_support = true,
-    },
   },
 }

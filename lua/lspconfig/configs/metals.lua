@@ -33,8 +33,5 @@ Note: that if you're using [nvim-metals](https://github.com/scalameta/nvim-metal
 
 To install Metals, make sure to have [coursier](https://get-coursier.io/docs/cli-installation) installed, and once you do you can install the latest Metals with `cs install metals`.
 ]],
-    default_config = {
-      root_dir = [[util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml")]],
-    },
   },
 }

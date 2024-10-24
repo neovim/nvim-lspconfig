@@ -20,8 +20,5 @@ The language server only provides the following capabilities:
 There is currently no support for completion, goto definition, references, or other functionality.
 
 ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

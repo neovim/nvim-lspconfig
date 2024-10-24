@@ -137,8 +137,5 @@ require'lspconfig'.omnisharp.setup {
 }
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern("*.sln", "*.csproj", "omnisharp.json", "function.json")]],
-    },
   },
 }

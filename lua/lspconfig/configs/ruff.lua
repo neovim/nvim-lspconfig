@@ -1,16 +1,10 @@
 local util = require 'lspconfig.util'
 
-local root_files = {
-  'pyproject.toml',
-  'ruff.toml',
-  '.ruff.toml',
-}
-
 return {
   default_config = {
     cmd = { 'ruff', 'server' },
     filetypes = { 'python' },
-    root_dir = util.root_pattern(unpack(root_files)) or util.find_git_ancestor(),
+    root_dir = util.root_pattern('pyproject.toml', 'ruff.toml', '.ruff.toml') or util.find_git_ancestor(),
     single_file_support = true,
     settings = {},
   },
@@ -43,6 +37,5 @@ require('lspconfig').ruff.setup({
 Refer to the [documentation](https://docs.astral.sh/ruff/editors/) for more details.
 
   ]],
-    root_dir = [[root_pattern("pyproject.toml", "ruff.toml", ".ruff.toml", ".git")]],
   },
 }

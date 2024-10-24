@@ -44,8 +44,5 @@ lspconfig.harper_ls.setup {
 }
 ```
     ]],
-    default_config = {
-      root_dir = [[bufdir]],
-    },
   },
 }

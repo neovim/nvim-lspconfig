@@ -17,8 +17,5 @@ go install github.com/ewen-lbh/hyprls/cmd/hyprls@latest
 ```
 
 ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

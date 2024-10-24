@@ -29,8 +29,5 @@ npm install -g vscode-solidity-server
 
 `vscode-solidity-server` is a language server for the Solidity language ported from the VSCode "solidity" extension.
 ]],
-    default_config = {
-      root_dir = [[root_pattern("]] .. table.concat(root_files, '", "') .. [[", ".git", "package.json")]],
-    },
   },
 }

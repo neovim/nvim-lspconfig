@@ -15,8 +15,5 @@ https://github.com/ocaml-lsp/ocaml-language-server
 npm install -g ocaml-language-server
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern("*.opam", "esy.json", "package.json")]],
-    },
   },
 }

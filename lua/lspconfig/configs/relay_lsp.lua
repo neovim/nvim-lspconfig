@@ -101,10 +101,5 @@ return {
     }
     ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern("relay.config.*", "package.json")]],
-      auto_start_compiler = false,
-      path_to_config = nil,
-    },
   },
 }

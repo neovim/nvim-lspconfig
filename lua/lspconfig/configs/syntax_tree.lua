@@ -21,8 +21,5 @@ build formatters, linters, language servers, and more.
 gem install syntax_tree
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern(".streerc", "Gemfile", ".git")]],
-    },
   },
 }

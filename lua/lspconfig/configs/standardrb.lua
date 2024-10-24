@@ -12,8 +12,5 @@ https://github.com/testdouble/standard
 
 Ruby Style Guide, with linter & automatic code fixer.
     ]],
-    default_config = {
-      root_dir = [[root_pattern("Gemfile", ".git")]],
-    },
   },
 }

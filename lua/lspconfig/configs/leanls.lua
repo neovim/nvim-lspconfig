@@ -45,8 +45,5 @@ Note: that if you're using [lean.nvim](https://github.com/Julian/lean.nvim),
 that plugin fully handles the setup of the Lean language server,
 and you shouldn't set up `leanls` both with it and `lspconfig`.
     ]],
-    default_config = {
-      root_dir = [[root_pattern("lakefile.toml", "lakefile.lean", "lean-toolchain", ".git")]],
-    },
   },
 }

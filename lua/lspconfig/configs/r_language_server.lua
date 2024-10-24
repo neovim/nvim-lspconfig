@@ -21,8 +21,5 @@ It is released on CRAN and can be easily installed by
 install.packages("languageserver")
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".git") or os_homedir]],
-    },
   },
 }
