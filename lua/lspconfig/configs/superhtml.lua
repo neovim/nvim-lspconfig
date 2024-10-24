@@ -25,8 +25,5 @@ require'lspconfig'.superhtml.setup {
 }
 ```
         ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

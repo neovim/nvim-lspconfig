@@ -17,8 +17,5 @@ Language server for Veryl
  cargo install veryl-ls
  ```
     ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

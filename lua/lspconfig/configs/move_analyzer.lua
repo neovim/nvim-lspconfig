@@ -24,8 +24,5 @@ cargo install --git https://github.com/move-language/move move-analyzer
 
 See [`move-analyzer`'s doc](https://github.com/move-language/move/blob/1b258a06e3c7d2bc9174578aac92cca3ac19de71/language/move-analyzer/editors/code/README.md#how-to-install) for details.
     ]],
-    default_config = {
-      root_dir = [[root_pattern("Move.toml")]],
-    },
   },
 }

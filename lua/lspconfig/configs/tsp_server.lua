@@ -17,8 +17,5 @@ The language server for TypeSpec, a language for defining cloud service APIs and
 npm install -g @typespec/compiler
 ```
 ]],
-    default_config = {
-      root_dir = [[util.root_pattern("tspconfig.yaml", ".git")]],
-    },
   },
 }

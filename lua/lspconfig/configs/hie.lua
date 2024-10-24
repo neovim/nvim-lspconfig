@@ -26,9 +26,5 @@ init_options = {
 }
 ```
         ]],
-
-    default_config = {
-      root_dir = [[root_pattern("stack.yaml", "package.yaml", ".git")]],
-    },
   },
 }

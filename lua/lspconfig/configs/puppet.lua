@@ -31,8 +31,5 @@ Installation:
 
 - Ensure you can run `puppet-languageserver` from outside the editor-services directory.
 ]],
-    default_config = {
-      root_dir = [[root_pattern("manifests", ".puppet-lint.rc", "hiera.yaml", ".git")]],
-    },
   },
 }

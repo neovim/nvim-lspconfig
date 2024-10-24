@@ -30,8 +30,5 @@ require'lspconfig'.lwc_ls.setup {
 }
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern('sfdx-project.json')]],
-    },
   },
 }

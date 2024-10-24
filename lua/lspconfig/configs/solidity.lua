@@ -42,8 +42,5 @@ After installing with package.json, just create a `remappings.txt` with:
 
 You can omit the node_modules as well.
 ]],
-    default_config = {
-      root_dir = [[root_pattern("package.json", ".git")]],
-    },
   },
 }

@@ -76,18 +76,6 @@ local function on_language_status(_, result)
   command 'echohl None'
 end
 
-local root_files = {
-  -- Multi-module projects
-  { '.git', 'build.gradle', 'build.gradle.kts' },
-  -- Single-module projects
-  {
-    'build.xml', -- Ant
-    'pom.xml', -- Maven
-    'settings.gradle', -- Gradle
-    'settings.gradle.kts', -- Gradle
-  },
-}
-
 return {
   default_config = {
     cmd = {
@@ -100,6 +88,17 @@ return {
     },
     filetypes = { 'java' },
     root_dir = function(fname)
+      local root_files = {
+        -- Multi-module projects
+        { '.git', 'build.gradle', 'build.gradle.kts' },
+        -- Single-module projects
+        {
+          'build.xml', -- Ant
+          'pom.xml', -- Maven
+          'settings.gradle', -- Gradle
+          'settings.gradle.kts', -- Gradle
+        },
+      }
       for _, patterns in ipairs(root_files) do
         local root = util.root_pattern(unpack(patterns))(fname)
         if root then
@@ -156,18 +155,5 @@ For automatic installation you can use the following unofficial installers/launc
       require'lspconfig'.jdtls.setup{ cmd = { 'jdtls' } }
     ```
     ]],
-    default_config = {
-      root_dir = [[{
-        -- Single-module projects
-        {
-          'build.xml', -- Ant
-          'pom.xml', -- Maven
-          'settings.gradle', -- Gradle
-          'settings.gradle.kts', -- Gradle
-        },
-        -- Multi-module projects
-        { 'build.gradle', 'build.gradle.kts' },
-      } or vim.fn.getcwd()]],
-    },
   },
 }

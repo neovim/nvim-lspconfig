@@ -54,8 +54,5 @@ Vue language server(vls)
 npm install -g vls
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern("package.json", "vue.config.js")]],
-    },
   },
 }

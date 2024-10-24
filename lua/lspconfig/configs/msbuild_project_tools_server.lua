@@ -23,8 +23,5 @@ lspconfig.msbuild_project_tools_server.setup {
 ```
 
 ]],
-    default_config = {
-      root_dir = [[root_pattern('.git')]],
-    },
   },
 }

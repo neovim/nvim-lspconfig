@@ -17,8 +17,5 @@ Language server for verilog and SystemVerilog
  cargo install svls
  ```
     ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

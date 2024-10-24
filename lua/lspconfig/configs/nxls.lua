@@ -17,8 +17,5 @@ nxls, a language server for Nx Workspaces
 npm i -g nxls
 ```
 ]],
-    default_config = {
-      root_dir = [[util.root_pattern]],
-    },
   },
 }

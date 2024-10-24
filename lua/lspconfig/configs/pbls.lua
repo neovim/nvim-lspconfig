@@ -19,8 +19,5 @@ cargo install --git https://git.sr.ht/~rrc/pbls
 
 pbls is a Language Server for protobuf
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".pbls.toml", ".git")]],
-    },
   },
 }

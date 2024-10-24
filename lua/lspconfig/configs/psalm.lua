@@ -15,9 +15,5 @@ Can be installed with composer.
 composer global require vimeo/psalm
 ```
 ]],
-    default_config = {
-      cmd = { 'psalm', '--language-server' },
-      root_dir = [[root_pattern("psalm.xml", "psalm.xml.dist")]],
-    },
   },
 }

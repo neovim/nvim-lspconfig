@@ -14,8 +14,5 @@ https://crates.io/crates/rune-languageserver
 A language server for the [Rune](https://rune-rs.github.io/) Language,
 an embeddable dynamic programming language for Rust
         ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

@@ -14,8 +14,5 @@ https://github.com/soutaro/steep
 
 You need `Steepfile` to make it work. Generate it with `steep init`.
 ]],
-    default_config = {
-      root_dir = [[root_pattern("Steepfile", ".git")]],
-    },
   },
 }

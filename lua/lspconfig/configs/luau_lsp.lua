@@ -21,8 +21,5 @@ You might also have to set up automatic filetype detection for Luau files, for e
 autocmd BufRead,BufNewFile *.luau setf luau
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".git")]],
-    },
   },
 }

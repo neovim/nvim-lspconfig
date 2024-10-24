@@ -15,8 +15,5 @@ https://github.com/crystal-lang-tools/scry
 
 Crystal language server.
 ]],
-    default_config = {
-      root_dir = [[root_pattern('shard.yml', '.git')]],
-    },
   },
 }

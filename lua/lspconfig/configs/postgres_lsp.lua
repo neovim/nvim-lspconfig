@@ -13,8 +13,5 @@ https://github.com/supabase/postgres_lsp
 
 A Language Server for Postgres
         ]],
-    default_config = {
-      root_dir = [[util.root_pattern 'root-file.txt']],
-    },
   },
 }

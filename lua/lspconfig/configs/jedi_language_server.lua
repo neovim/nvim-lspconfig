@@ -22,8 +22,5 @@ https://github.com/pappasam/jedi-language-server
 
 `jedi-language-server`, a language server for Python, built on top of jedi
     ]],
-    default_config = {
-      root_dir = "vim's starting directory",
-    },
   },
 }

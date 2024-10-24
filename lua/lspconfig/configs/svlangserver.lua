@@ -51,8 +51,5 @@ Language server for SystemVerilog.
 $ npm install -g @imc-trading/svlangserver
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".svlangserver", ".git")]],
-    },
   },
 }

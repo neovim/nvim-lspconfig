@@ -40,8 +40,5 @@ Note, that the `settings` configuration option uses the `workspace/didChangeConf
 Instead you should use `init_options` which passes the settings as part of the LSP initialize call
 [as is required by terraform-ls](https://github.com/hashicorp/terraform-ls/blob/main/docs/SETTINGS.md#how-to-pass-settings).
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".terraform", ".git")]],
-    },
   },
 }

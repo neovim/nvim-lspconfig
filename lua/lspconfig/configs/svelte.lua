@@ -17,8 +17,5 @@ Note: assuming that [ts_ls](#ts_ls) is setup, full JavaScript/TypeScript support
 npm install -g svelte-language-server
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern("package.json", ".git")]],
-    },
   },
 }

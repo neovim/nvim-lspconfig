@@ -27,8 +27,5 @@ Ungrammar Language Server can be installed via npm:
 npm i ungrammar-languageserver -g
 ```
     ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

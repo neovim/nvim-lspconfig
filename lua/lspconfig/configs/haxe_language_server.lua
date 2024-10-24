@@ -16,6 +16,7 @@ return {
         executable = 'haxe',
       },
     },
+    -- Default value is set by on_new_config.
     init_options = {},
     on_new_config = function(new_config, new_root_dir)
       if new_config.init_options.displayArguments then
@@ -66,9 +67,5 @@ lspconfig.haxe_language_server.setup({
 ```
 
 ]],
-    default_config = {
-      root_dir = [[root_pattern("*.hxml", ".git")]],
-      init_options = 'default value is set by on_new_config',
-    },
   },
 }

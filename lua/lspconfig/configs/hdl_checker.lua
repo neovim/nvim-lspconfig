@@ -13,8 +13,5 @@ https://github.com/suoto/hdl_checker
 Language server for hdl-checker.
 Install using: `pip install hdl-checker --upgrade`
 ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

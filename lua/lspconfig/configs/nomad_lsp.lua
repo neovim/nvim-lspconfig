@@ -29,8 +29,5 @@ However, a `hcl.nomad` or `nomad` filetype should be defined.
 
 Description of your jobs should be written in `.nomad` files for the LSP client to configure the server's `root_dir` configuration option.
 ]],
-    default_config = {
-      root_dir = [[util.root_pattern("hcl.nomad", "nomad")]],
-    },
   },
 }

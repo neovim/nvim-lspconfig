@@ -22,8 +22,5 @@ https://metacpan.org/pod/PLS
 
 To use the language server, ensure that you have PLS installed and that it is in your path
 ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

@@ -42,8 +42,5 @@ UnoCSS Language Server can be installed via npm:
 npm i unocss-language-server -g
 ```
 ]],
-    default_config = {
-      root_dir = [[root_pattern('unocss.config.js', 'unocss.config.ts', 'uno.config.js', 'uno.config.ts')]],
-    },
   },
 }

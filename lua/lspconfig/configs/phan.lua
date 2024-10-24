@@ -32,9 +32,5 @@ https://github.com/phan/phan
 
 Installation: https://github.com/phan/phan#getting-started
 ]],
-    default_config = {
-      cmd = cmd,
-      root_dir = [[root_pattern("composer.json", ".git")]],
-    },
   },
 }

@@ -31,8 +31,5 @@ To install the lsp server in a particular opam switch:
 opam install ocaml-lsp-server
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace")]],
-    },
   },
 }

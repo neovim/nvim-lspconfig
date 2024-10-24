@@ -18,8 +18,5 @@ Nix language server, based on nix libraries.
 If you are using Nix with Flakes support, run `nix profile install github:nix-community/nixd` to install.
 Check the repository README for more information.
     ]],
-    default_config = {
-      root_dir = [[root_pattern("flake.nix",".git")]],
-    },
   },
 }

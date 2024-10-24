@@ -23,8 +23,5 @@ You can add it via:
 vim.cmd([[au BufRead,BufNewFile *.jq setfiletype jq]])
 ```
 ]=],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

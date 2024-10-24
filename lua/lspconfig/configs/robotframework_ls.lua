@@ -15,9 +15,5 @@ https://github.com/robocorp/robotframework-lsp
 
 Language Server Protocol implementation for Robot Framework.
 ]],
-    default_config = {
-      root_dir = "util.root_pattern('robotidy.toml', 'pyproject.toml', 'conda.yaml', 'robot.yaml')(fname)"
-        .. '\n  or util.find_git_ancestor(fname)',
-    },
   },
 }

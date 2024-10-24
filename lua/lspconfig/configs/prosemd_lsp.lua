@@ -15,8 +15,5 @@ An experimental LSP for Markdown.
 
 Please see the manual installation instructions: https://github.com/kitten/prosemd-lsp#manual-installation
 ]],
-    default_config = {
-      root_dir = util.find_git_ancestor,
-    },
   },
 }

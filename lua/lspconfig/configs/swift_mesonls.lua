@@ -12,8 +12,5 @@ https://github.com/JCWasmx86/Swift-MesonLSP
 
 Meson language server written in Swift
 ]],
-    default_config = {
-      root_dir = [[util.root_pattern("meson.build", "meson_options.txt", "meson.options", ".git")]],
-    },
   },
 }

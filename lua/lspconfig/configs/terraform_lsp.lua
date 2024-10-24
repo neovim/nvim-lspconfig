@@ -36,8 +36,5 @@ choice:
     - configs designed for other 0.12 versions may work, but interpretation may be inaccurate
   - less stability (due to reliance on Terraform's own internal packages)
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".terraform", ".git")]],
-    },
   },
 }

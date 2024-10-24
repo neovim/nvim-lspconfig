@@ -18,8 +18,5 @@ Language server for Taplo, a TOML toolkit.
 cargo install --features lsp --locked taplo-cli
 ```
     ]],
-    default_config = {
-      root_dir = [[root_pattern(".git")]],
-    },
   },
 }
