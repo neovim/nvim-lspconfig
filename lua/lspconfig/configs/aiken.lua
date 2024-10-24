@@ -17,9 +17,5 @@ A language server for Aiken Programming Language.
 
 It can be i
 ]],
-    default_config = {
-      cmd = { 'aiken', 'lsp' },
-      root_dir = [[root_pattern("aiken.toml", ".git")]],
-    },
   },
 }

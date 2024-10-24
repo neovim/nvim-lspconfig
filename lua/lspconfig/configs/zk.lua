@@ -72,8 +72,5 @@ https://github.com/mickael-menu/zk
 
 A plain text note-taking assistant
 ]],
-    default_config = {
-      root_dir = [[root_pattern(".zk")]],
-    },
   },
 }

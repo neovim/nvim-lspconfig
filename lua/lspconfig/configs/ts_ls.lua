@@ -83,8 +83,5 @@ require'lspconfig'.ts_ls.setup{
 
 `filetypes` is extended here to include Vue SFC.
 ]],
-    default_config = {
-      root_dir = [[root_pattern("tsconfig.json", "jsconfig.json", "package.json", ".git")]],
-    },
   },
 }

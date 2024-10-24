@@ -179,18 +179,18 @@ The `configs` module is a singleton where configs are defined. The
 `vim.validate` schema is: >
 
     configs.SERVER_NAME = {
-      default_config = {'t'},
-      on_new_config = {'f', true},
-      on_attach = {'f', true},
-      commands = {'t', true},
-      docs = {'t', true},
+      default_config = {'table'},
+      on_new_config = {'function', true},
+      on_attach = {'function', true},
+      commands = {'table', true},
+      docs = {'table', true},
     }
 <
 where the structure of `docs` is: >
 
     docs = {
-      description = {'s', true},
-      default_config = {'t', true},
+      description = {'string', true},
+      default_config = {'table', true},
     }
 <
 `commands` is a map of `name:definition` key:value pairs, where `definition`

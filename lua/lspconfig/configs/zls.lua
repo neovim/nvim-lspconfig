@@ -18,9 +18,5 @@ https://github.com/zigtools/zls
 
 Zig LSP implementation + Zig Language Server
         ]],
-    default_config = {
-      cmd = { 'zls' },
-      root_dir = [[util.root_pattern("zls.json", "build.zig", ".git")]],
-    },
   },
 }

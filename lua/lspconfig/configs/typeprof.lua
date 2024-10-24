@@ -12,8 +12,5 @@ https://github.com/ruby/typeprof
 
 `typeprof` is the built-in analysis and LSP tool for Ruby 3.1+.
     ]],
-    default_config = {
-      root_dir = [[root_pattern("Gemfile", ".git")]],
-    },
   },
 }

@@ -78,7 +78,7 @@ require'lspconfig'.{{config_name}}.setup{}
 ```
 {{commands}}
 
-**Default values:**
+**Default config:**
 {{default_values}}
 
 ]]
@@ -108,6 +108,8 @@ local function make_lsp_sections()
     map_sorted(configs, function(config_name, template_object)
       local template_def = template_object.config_def
       local docs = template_def.docs
+      -- "lua/lspconfig/configs/xx.lua"
+      local config_file = ('lua/lspconfig/configs/%s.lua'):format(config_name)
 
       local params = {
         config_name = config_name,
@@ -133,20 +135,38 @@ local function make_lsp_sections()
         end,
       })
 
-      params.default_values = make_section(2, '\n\n', {
+      params.default_values = make_section(2, '\n', {
         function()
           if not template_def.default_config then
             return
           end
           return make_section(0, '\n', {
             map_sorted(template_def.default_config, function(k, v)
-              local description = ((docs or {}).default_config or {})[k]
-              if description and type(description) ~= 'string' then
-                description = inspect(description)
-              elseif not description and type(v) == 'function' then
-                description = 'see source file'
+              if type(v) == 'boolean' then
+                return ('- `%s` : `%s`'):format(k, v)
+              elseif type(v) ~= 'function' then
+                return ('- `%s` :\n  ```lua\n%s\n  ```'):format(k, indent(2, inspect(v)))
               end
-              return string.format('- `%s` : \n```lua\n%s\n```', k, description or inspect(v))
+
+              local file = assert(io.open(config_file, 'r'))
+              local linenr = 0
+              -- Find the line where `default_config` is defined.
+              for line in file:lines() do
+                linenr = linenr + 1
+                if line:find('%sdefault_config%s') then
+                  break
+                end
+              end
+              io.close(file)
+
+              -- XXX: "../" because the path is outside of the doc/ dir.
+              return ('- `%s` source (use "gF" to visit): [../%s:%d](../%s#L%d)'):format(
+                k,
+                config_file,
+                linenr,
+                config_file,
+                linenr
+              )
             end),
           })
         end,
@@ -245,7 +265,7 @@ local function make_lsp_sections()
         if #preamble_parts > 0 then
           table.insert(preamble_parts, '')
         end
-        params.preamble = table.concat(preamble_parts, '\n')
+        params.preamble = vim.trim(table.concat(preamble_parts, '\n'))
       end
 
       return template(lsp_section_template, params)

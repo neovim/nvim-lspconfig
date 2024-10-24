@@ -46,33 +46,29 @@ local function symbol_info()
   end, bufnr)
 end
 
-local root_files = {
-  '.clangd',
-  '.clang-tidy',
-  '.clang-format',
-  'compile_commands.json',
-  'compile_flags.txt',
-  'configure.ac', -- AutoTools
-}
-
-local default_capabilities = {
-  textDocument = {
-    completion = {
-      editsNearCursor = true,
-    },
-  },
-  offsetEncoding = { 'utf-8', 'utf-16' },
-}
-
 return {
   default_config = {
     cmd = { 'clangd' },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
     root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+      return util.root_pattern(
+        '.clangd',
+        '.clang-tidy',
+        '.clang-format',
+        'compile_commands.json',
+        'compile_flags.txt',
+        'configure.ac' -- AutoTools
+      )(fname) or util.find_git_ancestor(fname)
     end,
     single_file_support = true,
-    capabilities = default_capabilities,
+    capabilities = {
+      textDocument = {
+        completion = {
+          editsNearCursor = true,
+        },
+      },
+      offsetEncoding = { 'utf-8', 'utf-16' },
+    },
   },
   commands = {
     ClangdSwitchSourceHeader = {
@@ -101,19 +97,5 @@ https://clangd.llvm.org/installation.html
 - clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html)
   specified as compile_commands.json, see https://clangd.llvm.org/installation#compile_commandsjson
 ]],
-    default_config = {
-      root_dir = [[
-        root_pattern(
-          '.clangd',
-          '.clang-tidy',
-          '.clang-format',
-          'compile_commands.json',
-          'compile_flags.txt',
-          'configure.ac',
-          '.git'
-        )
-      ]],
-      capabilities = [[default capabilities, with offsetEncoding utf-8]],
-    },
   },
 }
