@@ -68,7 +68,7 @@ end
 local function try_fmt_version(prog)
   local all = nil --- Collected output from all attempts.
   local tried = '' --- Attempted commands.
-  for _, v_arg in ipairs { '--version', '-v', 'version', '--help', '-h' } do
+  for _, v_arg in ipairs { '--version', '-version', 'version', '--help' } do
     local cmd = { prog, v_arg }
     local out = try_get_cmd_output(cmd)
     all = out and ('%s\n%s'):format(all or '', out) or all
