@@ -10,8 +10,5 @@ return {
     description = [[
 https://github.com/npezza93/ttags
     ]],
-    default_config = {
-      root_dir = [[root_pattern(".git")]],
-    },
   },
 }

@@ -14,8 +14,5 @@ https://ziggy-lang.io/documentation/ziggy-lsp/
 Language server for schema files of the Ziggy data serialization format
 
 ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

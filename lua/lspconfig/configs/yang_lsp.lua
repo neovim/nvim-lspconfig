@@ -12,8 +12,5 @@ https://github.com/TypeFox/yang-lsp
 
 A Language Server for the YANG data modeling language.
 ]],
-    default_config = {
-      root_dir = [[util.find_git_ancestor]],
-    },
   },
 }

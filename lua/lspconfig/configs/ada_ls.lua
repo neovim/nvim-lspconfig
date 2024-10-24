@@ -25,8 +25,5 @@ require('lspconfig').ada_ls.setup{
 }
 ```
 ]],
-    default_config = {
-      root_dir = [[util.root_pattern("Makefile", ".git", "*.gpr", "*.adc")]],
-    },
   },
 }

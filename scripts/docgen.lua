@@ -9,6 +9,11 @@ local function template(s, params)
   return (s:gsub('{{([^{}]+)}}', params))
 end
 
+--- "@/.../nvim-lspconfig/lua/lspconfig/util.lua" => "./util.lua"
+local function relpath(p)
+  return p:gsub([=[.*[/\\]lua[/\\]lspconfig[/\\]]=], '')
+end
+
 local function map_list(t, func)
   local res = {}
   for i, v in ipairs(t) do
@@ -140,11 +145,29 @@ local function make_lsp_sections()
           end
           return make_section(0, '\n', {
             map_sorted(template_def.default_config, function(k, v)
-              local description = ((docs or {}).default_config or {})[k]
-              if description and type(description) ~= 'string' then
-                description = inspect(description)
-              elseif not description and type(v) == 'function' then
-                description = 'see source file'
+              local description = template_def.default_config[k]
+              if type(v) ~= 'function' then
+                description = inspect(v)
+              else
+                local info = debug.getinfo(v)
+                local relname = relpath(info.source)
+                local file = assert(io.open(string.sub(info.source, 2), 'r'))
+
+                local fnbody = ''
+                local linenr = 0
+                for line in file:lines() do
+                  linenr = linenr + 1
+                  if linenr >= info.linedefined and linenr <= info.lastlinedefined then
+                    fnbody = ('%s\n%s'):format(fnbody, line)
+                  end
+                end
+                io.close(file)
+
+                description = ('-- Source (use "gF" to visit): %s:%d\n'):format(
+                  relname,
+                  info.linedefined,
+                  string.gsub(fnbody, '.*function', 'function')
+                )
               end
               return string.format('- `%s` : \n```lua\n%s\n```', k, description or inspect(v))
             end),
@@ -245,7 +268,7 @@ local function make_lsp_sections()
         if #preamble_parts > 0 then
           table.insert(preamble_parts, '')
         end
-        params.preamble = table.concat(preamble_parts, '\n')
+        params.preamble = vim.trim(table.concat(preamble_parts, '\n'))
       end
 
       return template(lsp_section_template, params)
