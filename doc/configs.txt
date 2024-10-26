@@ -306,6 +306,7 @@ Nvim by running `:help lspconfig-all`.
 - [tilt_ls](#tilt_ls)
 - [tinymist](#tinymist)
 - [ts_ls](#ts_ls)
+- [ts_query_ls](#ts_query_ls)
 - [tsp_server](#tsp_server)
 - [ttags](#ttags)
 - [turtle_ls](#turtle_ls)
@@ -10558,6 +10559,61 @@ Default config:
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ts_ls.lua:4](../lua/lspconfig/configs/ts_ls.lua#L4)
 - `single_file_support` : `true`
+
+
+## ts_query_ls
+
+https://github.com/ribru17/ts_query_ls
+Can be configured by passing a "settings" object to `ts_query_ls.setup{}`:
+```lua
+require('lspconfig').ts_query_ls.setup{
+    settings = {
+      parser_install_directories = {
+        -- If using nvim-treesitter with lazy.nvim
+        vim.fs.joinpath(
+          vim.fn.stdpath('data'),
+          '/lazy/nvim-treesitter/parser/'
+        ),
+      },
+      -- This setting is provided by default
+      parser_aliases = {
+        ecma = 'javascript',
+        jsx = 'javascript',
+        php_only = 'php',
+      },
+      -- E.g. zed support
+      language_retrieval_patterns = {
+        'languages/src/([^/]+)/[^/]+\\.scm$',
+      },
+    },
+}
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.ts_query_ls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "ts_query_ls" }
+  ```
+- `filetypes` :
+  ```lua
+  { "query" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ts_query_ls.lua:4](../lua/lspconfig/configs/ts_query_ls.lua#L4)
+- `settings` :
+  ```lua
+  {
+    parser_aliases = {
+      ecma = "javascript",
+      jsx = "javascript",
+      php_only = "php"
+    }
+  }
+  ```
 
 
 ## tsp_server
