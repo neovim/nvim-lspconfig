@@ -15,6 +15,7 @@ return {
       'toml',
       'rust',
       'roslyn',
+      'graphql',
     },
     root_dir = util.root_pattern('dprint.json', '.dprint.json', 'dprint.jsonc', '.dprint.jsonc'),
     single_file_support = true,
