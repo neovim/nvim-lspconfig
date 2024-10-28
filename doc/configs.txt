@@ -2798,7 +2798,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "jsonc", "markdown", "python", "toml", "rust", "roslyn" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "jsonc", "markdown", "python", "toml", "rust", "roslyn", "graphql" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/dprint.lua:4](../lua/lspconfig/configs/dprint.lua#L4)
 - `settings` :
