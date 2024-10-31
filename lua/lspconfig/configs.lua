@@ -10,7 +10,7 @@ local configs = {}
 --- @field single_file_support? boolean
 --- @field filetypes? string[]
 --- @field filetype? string
---- @field on_new_config? fun(new_config: lspconfig.Config?)
+--- @field on_new_config? fun(new_config: lspconfig.Config?, new_root_dir: string)
 --- @field autostart? boolean
 --- @field package _on_attach? fun(client: vim.lsp.Client, bufnr: integer)
 --- @field root_dir? string|fun(filename: string, bufnr: number)
