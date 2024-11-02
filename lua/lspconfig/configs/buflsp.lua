@@ -1,13 +1,9 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
 
     cmd = { 'buf', 'beta', 'lsp' },
     filetypes = { 'proto' },
-    root_dir = function(fname)
-      return require('lspconfig.util').root_pattern('buf.work.yaml', '.git')(fname)
-    end,
+    root_dir = require('lspconfig.util').root_pattern('buf.yaml', '.git'),
   },
   docs = {
     description = [[
