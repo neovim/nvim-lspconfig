@@ -85,7 +85,7 @@ end
 
 --- Prettify a path for presentation.
 local function fmtpath(p)
-  if vim.startswith(p, 'Running') then
+  if vim.startswith(p, 'Running') or vim.startswith(p, 'Not') then
     return p
   end
   local isdir = 0 ~= vim.fn.isdirectory(vim.fn.expand(p))
@@ -298,10 +298,10 @@ end
 local function check_lspdocs(buf_clients, other_matching_configs)
   health.start('Docs for active configs:')
 
-  local lines = {}
-  local function append_lines(config)
+  local function fmt_doc(config)
+    local lines = {}
     if not config then
-      return
+      return lines
     end
     local desc = vim.tbl_get(config, 'config_def', 'docs', 'description')
     if desc then
@@ -310,18 +310,17 @@ local function check_lspdocs(buf_clients, other_matching_configs)
       vim.list_extend(lines, vim.split(desc, '\n'))
       lines[#lines + 1] = ''
     end
+    return lines
   end
 
   for _, client in ipairs(buf_clients) do
     local config = require('lspconfig.configs')[client.name]
-    append_lines(config)
+    health.info(table.concat(fmt_doc(config), '\n'))
   end
 
   for _, config in ipairs(other_matching_configs) do
-    append_lines(config)
+    health.info(table.concat(fmt_doc(config), '\n'))
   end
-
-  health.info(table.concat(lines, '\n'))
 end
 
 function M.check()
