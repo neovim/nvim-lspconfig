@@ -427,4 +427,19 @@ function M.strip_archive_subpath(path)
   return path
 end
 
+function M.restart(client, opts)
+  opts = opts or {}
+  local bufnr = opts.bufnr or api.nvim_get_current_buf()
+  local settings = opts.settings or client.config.settings
+
+  client.stop()
+
+  local config = require("lspconfig.configs")[client.name]
+  config.setup({
+    settings = settings
+  })
+
+  config.launch(bufnr)
+end
+
 return M

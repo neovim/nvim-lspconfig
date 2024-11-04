@@ -109,6 +109,46 @@ end, {
   complete = lsp_get_active_client_ids,
 })
 
+api.nvim_create_user_command('LspRestart', function(info)
+  local detach_clients = {}
+  for _, client in ipairs(get_clients_from_cmd_args(info.args)) do
+    local settings = client.config.settings
+    client.stop()
+    if vim.tbl_count(client.attached_buffers) > 0 then
+      detach_clients[client.name] = { client, lsp.get_buffers_by_client_id(client.id), settings }
+    end
+  end
+  local timer = vim.uv.new_timer()
+  timer:start(
+    500,
+    100,
+    vim.schedule_wrap(function()
+      for client_name, tuple in pairs(detach_clients) do
+        if require('lspconfig.configs')[client_name] then
+          local client, attached_buffers, settings = unpack(tuple)
+          if client.is_stopped() then
+            for _, buf in pairs(attached_buffers) do
+              require('lspconfig.configs')[client_name].setup({
+                settings = settings
+              })
+              require('lspconfig.configs')[client_name].launch(buf)
+            end
+            detach_clients[client_name] = nil
+          end
+        end
+      end
+
+      if next(detach_clients) == nil and not timer:is_closing() then
+        timer:close()
+      end
+    end)
+  )
+end, {
+  desc = 'Manually restart the given language client(s) with updated settings',
+  nargs = '?',
+  complete = lsp_get_active_client_ids,
+})
+
 api.nvim_create_user_command('LspStop', function(info)
   local current_buf = vim.api.nvim_get_current_buf()
   local server_id, force, server_name, err_msg
