@@ -31,6 +31,10 @@ local aliases = {
     to = 'ts_ls',
     version = '0.2.1',
   },
+  bufls = {
+    to = 'bufls',
+    version = '0.2.1',
+  },
 }
 
 ---@return Alias
