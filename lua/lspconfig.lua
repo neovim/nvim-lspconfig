@@ -36,7 +36,7 @@ local aliases = {
     version = '0.2.1',
   },
   bufls = {
-    to = 'bufls',
+    to = 'buf_ls',
     version = '0.2.1',
   },
 }
