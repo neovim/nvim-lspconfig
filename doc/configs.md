@@ -37,6 +37,7 @@ Nvim by running `:help lspconfig-all`.
 - [bsl_ls](#bsl_ls)
 - [buck2](#buck2)
 - [buddy_ls](#buddy_ls)
+- [buf_ls](#buf_ls)
 - [bufls](#bufls)
 - [bzl](#bzl)
 - [c3_lsp](#c3_lsp)
@@ -1451,6 +1452,31 @@ Default config:
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/buddy_ls.lua:4](../lua/lspconfig/configs/buddy_ls.lua#L4)
 - `single_file_support` : `true`
+
+
+## buf_ls
+
+https://github.com/bufbuild/buf
+
+buf beta lsp included in the cli itself
+
+buf beta lsp is a Protobuf language server compatible with Buf modules and workspaces
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.buf_ls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "buf", "beta", "lsp", "--timeout=0", "--log-format=text" }
+  ```
+- `filetypes` :
+  ```lua
+  { "proto" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/buf_ls.lua:2](../lua/lspconfig/configs/buf_ls.lua#L2)
 
 
 ## bufls
