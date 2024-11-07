@@ -26,8 +26,16 @@ If you have installed nextflow language server, you can set the `cmd` custom pat
 
 ```lua
 require'lspconfig'.nextflow_ls.setup{
-    cmd = { "java", "-jar", "path/to/nextflow_ls/language-server-all.jar" },
-    ...
+    cmd = { 'java', '-jar', 'nextflow-language-server-all.jar' },
+    filetypes = { 'nextflow' },
+    root_dir = util.root_pattern('nextflow.config', '.git'),
+    settings = {
+      nextflow = {
+        files = {
+          exclude = { '.git', '.nf-test', 'work' },
+        },
+      },
+    },
 }
 ```
 ]],
