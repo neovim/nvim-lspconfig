@@ -183,6 +183,7 @@ Nvim by running `:help lspconfig-all`.
 - [mutt_ls](#mutt_ls)
 - [nelua_lsp](#nelua_lsp)
 - [neocmake](#neocmake)
+- [nextflow_ls](#nextflow_ls)
 - [nextls](#nextls)
 - [nginx_language_server](#nginx_language_server)
 - [nickel_ls](#nickel_ls)
@@ -6414,6 +6415,59 @@ Default config:
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/neocmake.lua:4](../lua/lspconfig/configs/neocmake.lua#L4)
 - `single_file_support` : `true`
+
+
+## nextflow_ls
+
+https://github.com/nextflow-io/language-server
+
+Requirements:
+ - Java 17+
+
+`nextflow_ls` can be installed by following the instructions [here](https://github.com/nextflow-io/language-server#development).
+
+If you have installed nextflow language server, you can set the `cmd` custom path as follow:
+
+```lua
+require'lspconfig'.nextflow_ls.setup{
+    cmd = { 'java', '-jar', 'nextflow-language-server-all.jar' },
+    filetypes = { 'nextflow' },
+    root_dir = util.root_pattern('nextflow.config', '.git'),
+    settings = {
+      nextflow = {
+        files = {
+          exclude = { '.git', '.nf-test', 'work' },
+        },
+      },
+    },
+}
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.nextflow_ls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "java", "-jar", "nextflow-language-server-all.jar" }
+  ```
+- `filetypes` :
+  ```lua
+  { "nextflow" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/nextflow_ls.lua:4](../lua/lspconfig/configs/nextflow_ls.lua#L4)
+- `settings` :
+  ```lua
+  {
+    nextflow = {
+      files = {
+        exclude = { ".git", ".nf-test", "work" }
+      }
+    }
+  }
+  ```
 
 
 ## nextls
