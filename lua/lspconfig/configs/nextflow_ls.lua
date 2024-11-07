@@ -17,7 +17,7 @@ return {
   },
   docs = {
     description = [[
-https://github.com/nextflow-io/language-server.git
+https://github.com/nextflow-io/language-server
 
 Requirements:
  - Java 17+
