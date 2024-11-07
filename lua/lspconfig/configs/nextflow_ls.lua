@@ -4,9 +4,7 @@ return {
   default_config = {
     cmd = { 'java', '-jar', 'nextflow-language-server-all.jar' },
     filetypes = { 'nextflow' },
-    root_dir = function(fname)
-      return util.root_pattern('nextflow.config')(fname) or util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern('nextflow.config', '.git'),
     settings = {
       nextflow = {
         files = {
