@@ -1,4 +1,5 @@
 local util = require 'lspconfig.util'
+local nvim_eleven = vim.fn.has 'nvim-0.11' == 1
 
 local texlab_build_status = {
   [0] = 'Success',
@@ -52,8 +53,14 @@ end
 
 local function buf_cancel_build()
   local bufnr = vim.api.nvim_get_current_buf()
-  if not util.get_active_client_by_name(bufnr, 'texlab') then
+  local client = util.get_active_client_by_name(bufnr, 'texlab')
+  if not client then
     return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+  end
+  if nvim_eleven == 1 then
+    return client:exec_cmd({
+      command = 'texlab.cancelBuild',
+    }, { bufnr = bufnr })
   end
   vim.lsp.buf.execute_command { command = 'texlab.cancelBuild' }
   vim.notify('Build cancelled', vim.log.levels.INFO)
