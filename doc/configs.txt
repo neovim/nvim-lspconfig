@@ -10326,7 +10326,7 @@ Default config:
   ```lua
   { "tex", "plaintex", "bib" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/texlab.lua:163](../lua/lspconfig/configs/texlab.lua#L163)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/texlab.lua:191](../lua/lspconfig/configs/texlab.lua#L191)
 - `settings` :
   ```lua
   {
