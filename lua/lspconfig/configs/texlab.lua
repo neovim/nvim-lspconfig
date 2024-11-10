@@ -1,5 +1,4 @@
 local util = require 'lspconfig.util'
-local nvim_eleven = vim.fn.has 'nvim-0.11' == 1
 
 local texlab_build_status = {
   [0] = 'Success',
