@@ -58,6 +58,7 @@ local function buf_cancel_build()
   end
   if vim.fn.has 'nvim-0.11' == 1 then
     return client:exec_cmd({
+      title = 'cancel',
       command = 'texlab.cancelBuild',
     }, { bufnr = bufnr })
   end
