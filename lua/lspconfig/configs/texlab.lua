@@ -57,7 +57,7 @@ local function buf_cancel_build()
   if not client then
     return vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
-  if nvim_eleven == 1 then
+  if vim.fn.has 'nvim-0.11' == 1 then
     return client:exec_cmd({
       command = 'texlab.cancelBuild',
     }, { bufnr = bufnr })
