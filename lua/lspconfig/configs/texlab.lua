@@ -167,7 +167,8 @@ end
 
 local function buf_change_env()
   local bufnr = vim.api.nvim_get_current_buf()
-  if not util.get_active_client_by_name(bufnr, 'texlab') then
+  local client = util.get_active_client_by_name(bufnr, 'texlab')
+  if not client then
     return vim.notify('Texlab client not found', vim.log.levels.ERROR)
   end
   local new = vim.fn.input 'Enter the new environment name: '
@@ -175,6 +176,19 @@ local function buf_change_env()
     return vim.notify('No environment name provided', vim.log.levels.WARN)
   end
   local pos = vim.api.nvim_win_get_cursor(0)
+  if vim.fn.has 'nvim-0.11' == 1 then
+    return client:exec_cmd({
+      title = 'change_environment',
+      command = 'texlab.changeEnvironment',
+      arguments = {
+        {
+          textDocument = { uri = vim.uri_from_bufnr(bufnr) },
+          position = { line = pos[1] - 1, character = pos[2] },
+          newName = tostring(new),
+        },
+      },
+    }, { bufnr = bufnr })
+  end
   vim.lsp.buf.execute_command {
     command = 'texlab.changeEnvironment',
     arguments = {
