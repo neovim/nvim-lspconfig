@@ -82,8 +82,22 @@ end
 
 local function cleanArtifacts()
   local bufnr = vim.api.nvim_get_current_buf()
-  if not util.get_active_client_by_name(bufnr, 'texlab') then
+  local client = util.get_active_client_by_name(bufnr, 'texlab')
+  if not client then
     return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+  end
+  if vim.fn.has 'nvim-0.11' == 1 then
+    return client:exec_cmd({
+      title = 'clean_artifacts',
+      command = 'texlab.cleanArtifacts',
+      arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+    }, { bufnr = bufnr }, function(err, _)
+      if err then
+        vim.notify('Failed to clean artifacts: ' .. err.message, vim.log.levels.ERROR)
+      else
+        vim.notify('Artifacts cleaned successfully', vim.log.levels.INFO)
+      end
+    end)
   end
   vim.lsp.buf.execute_command {
     command = 'texlab.cleanArtifacts',
@@ -94,8 +108,22 @@ end
 
 local function cleanAuxiliary()
   local bufnr = vim.api.nvim_get_current_buf()
-  if not util.get_active_client_by_name(bufnr, 'texlab') then
+  local client = util.get_active_client_by_name(bufnr, 'texlab')
+  if not client then
     return vim.notify('Texlab client not found', vim.log.levels.ERROR)
+  end
+  if vim.fn.has 'nvim-0.11' == 1 then
+    return client:exec_cmd({
+      title = 'clean_auxiliary',
+      command = 'texlab.cleanAuxiliary',
+      arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+    }, { bufnr = bufnr }, function(err, _)
+      if err then
+        vim.notify('Failed to clean auxiliary files: ' .. err.message, vim.log.levels.ERROR)
+      else
+        vim.notify('Auxiliary files cleaned successfully', vim.log.levels.INFO)
+      end
+    end)
   end
   vim.lsp.buf.execute_command {
     command = 'texlab.cleanAuxiliary',
