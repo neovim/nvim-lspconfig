@@ -4,9 +4,7 @@ return {
   default_config = {
     cmd = { 'robotcode', 'language-server' },
     filetypes = { 'robot', 'resource' },
-    root_dir = function(fname)
-      return util.root_pattern('robot.toml', 'pyproject.toml', 'Pipfile')(fname) or util.find_git_ancestor(fname)
-    end,
+    root_dir = util.root_pattern('robot.toml', 'pyproject.toml', 'Pipfile', '.git'),
     single_file_support = true,
     get_language_id = function(_, _)
       return 'robotframework'
