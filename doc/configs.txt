@@ -244,6 +244,7 @@ Nvim by running `:help lspconfig-all`.
 - [rescriptls](#rescriptls)
 - [rls](#rls)
 - [rnix](#rnix)
+- [robotcode](#robotcode)
 - [robotframework_ls](#robotframework_ls)
 - [roc_ls](#roc_ls)
 - [rome](#rome)
@@ -8424,6 +8425,31 @@ Default config:
   ```lua
   {}
   ```
+
+
+## robotcode
+
+https://robotcode.io
+
+RobotCode - Language Server Protocol implementation for Robot Framework.
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.robotcode.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "robotcode", "language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "robot", "resource" }
+  ```
+- `get_language_id` source (use "gF" to visit): [../lua/lspconfig/configs/robotcode.lua:4](../lua/lspconfig/configs/robotcode.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/robotcode.lua:4](../lua/lspconfig/configs/robotcode.lua#L4)
+- `single_file_support` : `true`
 
 
 ## robotframework_ls
