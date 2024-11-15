@@ -30,7 +30,7 @@ end
 
 local lsp_get_active_client_ids = function(arg)
   local clients = vim.tbl_map(function(client)
-    return ('%d (%s)'):format(client.id, client.name)
+    return ('%d:%s'):format(client.id, client.name)
   end, util.get_managed_clients())
 
   return completion_sort(vim.tbl_filter(function(s)
@@ -81,7 +81,7 @@ api.nvim_create_user_command('LspRestart', function(info)
       detach_clients[client.name] = { client, lsp.get_buffers_by_client_id(client.id) }
     end
   end
-  local timer = vim.uv.new_timer()
+  local timer = assert(vim.uv.new_timer())
   timer:start(
     500,
     100,
