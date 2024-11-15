@@ -8579,7 +8579,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "ruby" }
+  { "ruby", "eruby" }
   ```
 - `init_options` :
   ```lua
