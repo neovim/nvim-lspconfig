@@ -11175,7 +11175,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "markdown", "text", "tex" }
+  { "markdown", "text", "tex", "rst" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/vale_ls.lua:4](../lua/lspconfig/configs/vale_ls.lua#L4)
 - `single_file_support` : `true`
