@@ -122,8 +122,10 @@ Most of the time, the reason for failure is present in the logs.
 
 * `:LspInfo` (deprecated alias to `:che lspconfig`) shows the status of active and configured language servers.
 * `:LspStart <config_name>` Start the requested server name. Will only successfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command. Defaults to all servers matching current buffer filetype.
-* `:LspStop <client_id>` Defaults to stopping all buffer clients.
-* `:LspRestart <client_id>` Defaults to restarting all buffer clients.
+* `:LspStop {<client_id> or <config_name>} ...` Stops the servers with the given client-ids or config names. Defaults to
+stopping all servers active on the current buffer. To force stop add `++force`
+* `:LspRestart {<client_id> or <config_name>} ...` Restarts the clients with the given client-ids or config names, and attempts to reattach to all
+previously attached buffers. 
 
 ## Contributions
 

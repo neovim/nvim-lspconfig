@@ -28,9 +28,9 @@ local lsp_complete_configured_servers = function(arg)
   end, util.available_servers()))
 end
 
-local lsp_get_active_client_ids = function(arg)
+local lsp_get_active_clients = function(arg)
   local clients = vim.tbl_map(function(client)
-    return ('%d:%s'):format(client.id, client.name)
+    return ('%s'):format(client.name)
   end, util.get_managed_clients())
 
   return completion_sort(vim.tbl_filter(function(s)
@@ -38,13 +38,38 @@ local lsp_get_active_client_ids = function(arg)
   end, clients))
 end
 
+---@return vim.lsp.Client[] clients
 local get_clients_from_cmd_args = function(arg)
   local result = {}
-  for id in (arg or ''):gmatch '(%d+)' do
-    result[#result + 1] = lsp.get_client_by_id(tonumber(id))
+  local managed_clients = util.get_managed_clients()
+  local clients = {}
+  for _, client in pairs(managed_clients) do
+    clients[client.name] = client
   end
+
+  local err_msg = ''
+  arg = arg:gsub('[%a-_]+', function(name)
+    if clients[name] then
+      return clients[name].id
+    end
+    err_msg = err_msg .. ('config "%s" not found\n'):format(name)
+    return ''
+  end)
+  for id in (arg or ''):gmatch '(%d+)' do
+    local client = lsp.get_client_by_id(tonumber(id))
+    if client == nil then
+      err_msg = err_msg .. ('client id "%s" not found\n'):format(id)
+    end
+    result[#result + 1] = client
+  end
+
+  if err_msg ~= '' then
+    vim.notify(('nvim-lspconfig:\n%s'):format(err_msg:sub(1, -2)), vim.log.levels.WARN)
+    return result
+  end
+
   if #result == 0 then
-    return util.get_managed_clients()
+    return managed_clients
   end
   return result
 end
@@ -106,56 +131,34 @@ api.nvim_create_user_command('LspRestart', function(info)
 end, {
   desc = 'Manually restart the given language client(s)',
   nargs = '?',
-  complete = lsp_get_active_client_ids,
+  complete = lsp_get_active_clients,
 })
 
 api.nvim_create_user_command('LspStop', function(info)
-  local current_buf = vim.api.nvim_get_current_buf()
-  local server_id, force, server_name, err_msg
-  local arguments = vim.split(info.args, '%s')
+  ---@type string
+  local args = info.args
+  local force = false
+  args = args:gsub('%+%+force', function()
+    force = true
+    return ''
+  end)
 
-  local filter = function()
-    return true
-  end
-  local found = true
+  local clients = {}
 
-  for _, v in pairs(arguments) do
-    if v == '++force' then
-      force = true
-    elseif v:find '^[0-9]+$' then
-      server_id = tonumber(v)
-      ---@param client vim.lsp.Client
-      filter = function(client)
-        return server_id == client.id
-      end
-      found = false
-      err_msg = ('nvim-lspconfig: client id "%s" not found'):format(server_id)
-    elseif v ~= '' then
-      server_name = v
-      ---@param client vim.lsp.Client
-      filter = function(client)
-        return server_name == client.config.name
-      end
-      err_msg = ('nvim-lspconfig: config "%s" not found'):format(server_name)
-      found = false
-    end
+  -- default to stopping all servers on current buffer
+  if #args == 0 then
+    clients = util.get_lsp_clients({ bufnr = vim.api.nvim_get_current_buf() })
+  else
+    clients = get_clients_from_cmd_args(args)
   end
 
-  local servers_on_buffer = util.get_lsp_clients { bufnr = current_buf }
-  for _, client in ipairs(servers_on_buffer) do
-    if client.attached_buffers[current_buf] and filter(client) then
-      client.stop(force)
-      found = true
-    end
-  end
-
-  if not found then
-    vim.notify(err_msg, vim.log.levels.WARN)
+  for _, client in ipairs(clients) do
+    client.stop(force)
   end
 end, {
   desc = 'Manually stops the given language client(s)',
   nargs = '?',
-  complete = lsp_get_active_client_ids,
+  complete = lsp_get_active_clients,
 })
 
 api.nvim_create_user_command('LspLog', function()
