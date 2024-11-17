@@ -5,23 +5,6 @@ local uv = vim.uv or vim.loop
 local async = require 'lspconfig.async'
 local util = require 'lspconfig.util'
 
----@param client vim.lsp.Client
----@param root_dir string
----@return boolean
-local function check_in_workspace(client, root_dir)
-  if not client.workspace_folders then
-    return false
-  end
-
-  for _, dir in ipairs(client.workspace_folders) do
-    if (root_dir .. '/'):sub(1, #dir.name + 1) == dir.name .. '/' then
-      return true
-    end
-  end
-
-  return false
-end
-
 --- @class lspconfig.Manager
 --- @field _clients table<string,integer[]>
 --- @field config lspconfig.Config
@@ -168,10 +151,6 @@ end
 --- @param client vim.lsp.Client
 --- @param single_file boolean
 function M:_attach_or_spawn(bufnr, new_config, root_dir, client, single_file)
-  if check_in_workspace(client, root_dir) then
-    return self:_attach_and_cache(bufnr, root_dir, client.id)
-  end
-
   local supported = vim.tbl_get(client, 'server_capabilities', 'workspace', 'workspaceFolders', 'supported')
   if supported then
     return self:_register_workspace_folders(bufnr, root_dir, client)
