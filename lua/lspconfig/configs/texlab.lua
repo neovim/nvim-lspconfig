@@ -1,4 +1,5 @@
 local util = require 'lspconfig.util'
+local client_proxy = util.client_proxy
 
 local function client_with_fn(fn)
   return function()
@@ -7,7 +8,7 @@ local function client_with_fn(fn)
     if not client then
       return vim.notify(('texlab client not found in bufnr %d'):format(bufnr), vim.log.levels.ERROR)
     end
-    fn(client, bufnr)
+    fn(client_proxy(client), bufnr)
   end
 end
 

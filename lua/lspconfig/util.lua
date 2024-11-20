@@ -2,9 +2,9 @@ local validate = vim.validate
 local api = vim.api
 local lsp = vim.lsp
 local uv = vim.uv or vim.loop
-local nvim_eleven = vim.fn.has 'nvim-0.11' == 1
+local nvim_eleven = vim.fn.has('nvim-0.11') == 1
 
-local iswin = uv.os_uname().version:match 'Windows'
+local iswin = uv.os_uname().version:match('Windows')
 
 local M = {}
 
@@ -22,16 +22,21 @@ M.default_config = {
 M.on_setup = nil
 
 function M.bufname_valid(bufname)
-  if bufname:match '^/' or bufname:match '^[a-zA-Z]:' or bufname:match '^zipfile://' or bufname:match '^tarfile:' then
+  if
+    bufname:match('^/')
+    or bufname:match('^[a-zA-Z]:')
+    or bufname:match('^zipfile://')
+    or bufname:match('^tarfile:')
+  then
     return true
   end
   return false
 end
 
 function M.validate_bufnr(bufnr)
-  validate {
+  validate({
     bufnr = { bufnr, 'n' },
-  }
+  })
   return bufnr == 0 and api.nvim_get_current_buf() or bufnr
 end
 
@@ -72,7 +77,7 @@ function M._parse_user_command_options(command_definition)
     if type(k) == 'string' then
       local attribute = k.gsub(k, '^%-+', '')
       opts[opts_aliases[attribute] or attribute] = v
-    elseif type(k) == 'number' and type(v) == 'string' and v:match '^%-' then
+    elseif type(k) == 'number' and type(v) == 'string' and v:match('^%-') then
       -- Splits strings like "-nargs=* -complete=customlist,v:lua.something" into { "-nargs=*", "-complete=customlist,v:lua.something" }
       for _, command_attribute in ipairs(vim.split(v, '%s')) do
         -- Splits attribute into a key-value pair, like "-nargs=*" to { "-nargs", "*" }
@@ -135,7 +140,7 @@ M.path = (function()
   --- @return boolean
   local function is_fs_root(path)
     if iswin then
-      return path:match '^%a:$'
+      return path:match('^%a:$')
     else
       return path == '/'
     end
@@ -145,9 +150,9 @@ M.path = (function()
   --- @return boolean
   local function is_absolute(filename)
     if iswin then
-      return filename:match '^%a:' or filename:match '^\\\\'
+      return filename:match('^%a:') or filename:match('^\\\\')
     else
-      return filename:match '^/'
+      return filename:match('^/')
     end
   end
 
@@ -172,7 +177,7 @@ M.path = (function()
   end
 
   local function path_join(...)
-    return table.concat(M.tbl_flatten { ... }, '/')
+    return table.concat(M.tbl_flatten({ ... }), '/')
   end
 
   -- Traverse the path calling cb along the way.
@@ -245,7 +250,7 @@ M.path = (function()
 end)()
 
 function M.search_ancestors(startpath, func)
-  validate { func = { func, 'f' } }
+  validate({ func = { func, 'f' } })
   if func(startpath) then
     return startpath
   end
@@ -272,7 +277,7 @@ function M.get_lsp_clients(filter)
 end
 
 function M.root_pattern(...)
-  local patterns = M.tbl_flatten { ... }
+  local patterns = M.tbl_flatten({ ... })
   return function(startpath)
     startpath = M.strip_archive_subpath(startpath)
     for _, pattern in ipairs(patterns) do
@@ -357,7 +362,7 @@ function M.get_active_clients_list_by_ft(filetype)
 end
 
 function M.get_other_matching_providers(filetype)
-  local configs = require 'lspconfig.configs'
+  local configs = require('lspconfig.configs')
   local active_clients_list = M.get_active_clients_list_by_ft(filetype)
   local other_matching_configs = {}
   for _, config in pairs(configs) do
@@ -374,7 +379,7 @@ function M.get_other_matching_providers(filetype)
 end
 
 function M.get_config_by_ft(filetype)
-  local configs = require 'lspconfig.configs'
+  local configs = require('lspconfig.configs')
   local matching_configs = {}
   for _, config in pairs(configs) do
     local filetypes = config.filetypes or {}
@@ -389,7 +394,7 @@ end
 
 function M.get_active_client_by_name(bufnr, servername)
   --TODO(glepnir): remove this for loop when we want only support 0.10+
-  for _, client in pairs(M.get_lsp_clients { bufnr = bufnr }) do
+  for _, client in pairs(M.get_lsp_clients({ bufnr = bufnr })) do
     if client.name == servername then
       return client
     end
@@ -397,7 +402,7 @@ function M.get_active_client_by_name(bufnr, servername)
 end
 
 function M.get_managed_clients()
-  local configs = require 'lspconfig.configs'
+  local configs = require('lspconfig.configs')
   local clients = {}
   for _, config in pairs(configs) do
     if config.manager then
@@ -409,7 +414,7 @@ end
 
 function M.available_servers()
   local servers = {}
-  local configs = require 'lspconfig.configs'
+  local configs = require('lspconfig.configs')
   for server, config in pairs(configs) do
     if config.manager ~= nil then
       table.insert(servers, server)
@@ -425,6 +430,23 @@ function M.strip_archive_subpath(path)
   path = vim.fn.substitute(path, 'zipfile://\\(.\\{-}\\)::[^\\\\].*$', '\\1', '')
   path = vim.fn.substitute(path, 'tarfile:\\(.\\{-}\\)::.*$', '\\1', '')
   return path
+end
+
+-- Client proxy for nightly change of deprecate client method
+-- @see https://github.com/neovim/neovim/pull/31207
+function M.client_proxy(client)
+  local proxy = {}
+  setmetatable(proxy, {
+    __index = function(_, key)
+      local method = client[key]
+      if method and type(method) == 'function' then
+        return function(...)
+          return nvim_eleven and method(client, ...) or method(...)
+        end
+      end
+    end,
+  })
+  return proxy
 end
 
 return M

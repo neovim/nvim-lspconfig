@@ -1,4 +1,5 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
+local client_proxy = util.client_proxy
 
 -- https://clangd.llvm.org/extensions.html#switch-between-sourceheader
 local function switch_source_header(bufnr)
@@ -6,29 +7,29 @@ local function switch_source_header(bufnr)
   local clangd_client = util.get_active_client_by_name(bufnr, 'clangd')
   local params = { uri = vim.uri_from_bufnr(bufnr) }
   if clangd_client then
-    clangd_client.request('textDocument/switchSourceHeader', params, function(err, result)
+    client_proxy(clangd_client).request('textDocument/switchSourceHeader', params, function(err, result)
       if err then
         error(tostring(err))
       end
       if not result then
-        print 'Corresponding file cannot be determined'
+        print('Corresponding file cannot be determined')
         return
       end
       vim.api.nvim_command('edit ' .. vim.uri_to_fname(result))
     end, bufnr)
   else
-    print 'method textDocument/switchSourceHeader is not supported by any servers active on the current buffer'
+    print('method textDocument/switchSourceHeader is not supported by any servers active on the current buffer')
   end
 end
 
 local function symbol_info()
   local bufnr = vim.api.nvim_get_current_buf()
   local clangd_client = util.get_active_client_by_name(bufnr, 'clangd')
-  if not clangd_client or not clangd_client.supports_method 'textDocument/symbolInfo' then
+  if not clangd_client or not client_proxy(clangd_client).supports_method('textDocument/symbolInfo') then
     return vim.notify('Clangd client not found', vim.log.levels.ERROR)
   end
   local params = vim.lsp.util.make_position_params()
-  clangd_client.request('textDocument/symbolInfo', params, function(err, res)
+  client_proxy(clangd_client).request('textDocument/symbolInfo', params, function(err, res)
     if err or #res == 0 then
       -- Clangd always returns an error, there is not reason to parse it
       return

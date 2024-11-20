@@ -1,4 +1,4 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 local lsp = vim.lsp
 
 local function buf_cache(bufnr, client)
@@ -6,7 +6,7 @@ local function buf_cache(bufnr, client)
     command = 'deno.cache',
     arguments = { {}, vim.uri_from_bufnr(bufnr) },
   }
-  client.request('workspace/executeCommand', params, function(err, _result, ctx)
+  util.client_proxy(client).request('workspace/executeCommand', params, function(err, _, ctx)
     if err then
       local uri = ctx.params.arguments[2]
       vim.api.nvim_err_writeln('cache command failed for ' .. vim.uri_to_fname(uri))
@@ -40,7 +40,7 @@ local function virtual_text_document(uri, client)
       uri = uri,
     },
   }
-  local result = client.request_sync('deno/virtualTextDocument', params)
+  local result = util.client_proxy(client).request_sync('deno/virtualTextDocument', params)
   virtual_text_document_handler(uri, result, client)
 end
 
@@ -52,7 +52,7 @@ local function denols_handler(err, result, ctx, config)
   local client = vim.lsp.get_client_by_id(ctx.client_id)
   for _, res in pairs(result) do
     local uri = res.uri or res.targetUri
-    if uri:match '^deno:' then
+    if uri:match('^deno:') then
       virtual_text_document(uri, client)
       res['uri'] = uri
       res['targetUri'] = uri
@@ -96,7 +96,7 @@ return {
   commands = {
     DenolsCache = {
       function()
-        local clients = util.get_lsp_clients { bufnr = 0, name = 'denols' }
+        local clients = util.get_lsp_clients({ bufnr = 0, name = 'denols' })
         if #clients > 0 then
           buf_cache(0, clients[#clients])
         end

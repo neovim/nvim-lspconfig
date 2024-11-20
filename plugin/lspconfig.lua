@@ -6,7 +6,7 @@ vim.g.lspconfig = 1
 local api, lsp = vim.api, vim.lsp
 local util = require('lspconfig.util')
 
-if vim.fn.has 'nvim-0.8' ~= 1 then
+if vim.fn.has('nvim-0.8') ~= 1 then
   local version_info = vim.version()
   local warning_str = string.format(
     '[lspconfig] requires neovim 0.8 or later. Detected neovim version: 0.%s.%s',
@@ -55,7 +55,7 @@ local get_clients_from_cmd_args = function(arg)
     err_msg = err_msg .. ('config "%s" not found\n'):format(name)
     return ''
   end)
-  for id in (arg or ''):gmatch '(%d+)' do
+  for id in (arg or ''):gmatch('(%d+)') do
     local client = lsp.get_client_by_id(tonumber(id))
     if client == nil then
       err_msg = err_msg .. ('client id "%s" not found\n'):format(id)
@@ -101,7 +101,7 @@ end, {
 api.nvim_create_user_command('LspRestart', function(info)
   local detach_clients = {}
   for _, client in ipairs(get_clients_from_cmd_args(info.args)) do
-    client.stop()
+    util.client_proxy(client).stop()
     if vim.tbl_count(client.attached_buffers) > 0 then
       detach_clients[client.name] = { client, lsp.get_buffers_by_client_id(client.id) }
     end
@@ -114,7 +114,7 @@ api.nvim_create_user_command('LspRestart', function(info)
       for client_name, tuple in pairs(detach_clients) do
         if require('lspconfig.configs')[client_name] then
           local client, attached_buffers = unpack(tuple)
-          if client.is_stopped() then
+          if util.client_proxy(client).is_stopped() then
             for _, buf in pairs(attached_buffers) do
               require('lspconfig.configs')[client_name].launch(buf)
             end
@@ -153,7 +153,7 @@ api.nvim_create_user_command('LspStop', function(info)
   end
 
   for _, client in ipairs(clients) do
-    client.stop(force)
+    util.client_proxy(client).stop(force)
   end
 end, {
   desc = 'Manually stops the given language client(s)',

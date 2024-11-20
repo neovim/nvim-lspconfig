@@ -1,22 +1,23 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 local lsp = vim.lsp
 
 local function fix_all(opts)
   opts = opts or {}
 
-  local eslint_lsp_client = util.get_active_client_by_name(opts.bufnr, 'eslint')
-  if eslint_lsp_client == nil then
+  local client = util.get_active_client_by_name(opts.bufnr, 'eslint')
+  if client == nil then
     return
   end
 
+  client = util.client_proxy(client)
   local request
   if opts.sync then
     request = function(bufnr, method, params)
-      eslint_lsp_client.request_sync(method, params, nil, bufnr)
+      client.request_sync(method, params, nil, bufnr)
     end
   else
     request = function(bufnr, method, params)
-      eslint_lsp_client.request(method, params, nil, bufnr)
+      client.request(method, params, nil, bufnr)
     end
   end
 
@@ -135,9 +136,9 @@ return {
           return
         end
         local sysname = vim.uv.os_uname().sysname
-        if sysname:match 'Windows' then
+        if sysname:match('Windows') then
           os.execute(string.format('start %q', result.url))
-        elseif sysname:match 'Linux' then
+        elseif sysname:match('Linux') then
           os.execute(string.format('xdg-open %q', result.url))
         else
           os.execute(string.format('open %q', result.url))
@@ -163,7 +164,7 @@ return {
   commands = {
     EslintFixAll = {
       function()
-        fix_all { sync = true, bufnr = 0 }
+        fix_all({ sync = true, bufnr = 0 })
       end,
       description = 'Fix all eslint problems for this buffer',
     },

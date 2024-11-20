@@ -1,5 +1,5 @@
-local util = require 'lspconfig.util'
-local async = require 'lspconfig.async'
+local util = require('lspconfig.util')
+local async = require('lspconfig.async')
 local api, validate, lsp, uv, fn = vim.api, vim.validate, vim.lsp, (vim.uv or vim.loop), vim.fn
 local tbl_deep_extend = vim.tbl_deep_extend
 
@@ -30,13 +30,13 @@ end
 ---@param config_name string
 ---@param config_def table Config definition read from `lspconfig.configs.<name>`.
 function configs.__newindex(t, config_name, config_def)
-  validate {
+  validate({
     name = { config_name, 's' },
     default_config = { config_def.default_config, 't' },
     on_new_config = { config_def.on_new_config, 'f', true },
     on_attach = { config_def.on_attach, 'f', true },
     commands = { config_def.commands, 't', true },
-  }
+  })
 
   if config_def.default_config.deprecate then
     vim.deprecate(
@@ -50,10 +50,10 @@ function configs.__newindex(t, config_name, config_def)
 
   if config_def.commands then
     for k, v in pairs(config_def.commands) do
-      validate {
+      validate({
         ['command.name'] = { k, 's' },
         ['command.fn'] = { v[1], 'f' },
-      }
+      })
     end
   else
     config_def.commands = {}
@@ -70,7 +70,7 @@ function configs.__newindex(t, config_name, config_def)
   function M.setup(user_config)
     local lsp_group = api.nvim_create_augroup('lspconfig', { clear = false })
 
-    validate {
+    validate({
       cmd = {
         user_config.cmd,
         { 'f', 't' },
@@ -81,13 +81,13 @@ function configs.__newindex(t, config_name, config_def)
       on_new_config = { user_config.on_new_config, 'f', true },
       on_attach = { user_config.on_attach, 'f', true },
       commands = { user_config.commands, 't', true },
-    }
+    })
     if user_config.commands then
       for k, v in pairs(user_config.commands) do
-        validate {
+        validate({
           ['command.name'] = { k, 's' },
           ['command.fn'] = { v[1], 'f' },
-        }
+        })
       end
     end
 
@@ -192,7 +192,7 @@ function configs.__newindex(t, config_name, config_def)
     local reload = false
     if M.manager then
       for _, client in ipairs(M.manager:clients()) do
-        client.stop(true)
+        util.client_proxy(client).stop(true)
       end
       reload = true
       M.manager = nil

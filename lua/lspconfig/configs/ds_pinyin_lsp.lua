@@ -1,7 +1,7 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 
 local bin_name = 'ds-pinyin-lsp'
-if vim.fn.has 'win32' == 1 then
+if vim.fn.has('win32') == 1 then
   bin_name = bin_name .. '.exe'
 end
 
@@ -9,11 +9,11 @@ local function ds_pinyin_lsp_off(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local ds_pinyin_lsp_client = util.get_active_client_by_name(bufnr, 'ds_pinyin_lsp')
   if ds_pinyin_lsp_client then
-    ds_pinyin_lsp_client.notify('$/turn/completion', {
+    util.client_proxy(ds_pinyin_lsp_client).notify('$/turn/completion', {
       ['completion_on'] = false,
     })
   else
-    vim.notify 'notification $/turn/completion is not supported by any servers active on the current buffer'
+    vim.notify('notification $/turn/completion is not supported by any servers active on the current buffer')
   end
 end
 
@@ -21,11 +21,11 @@ local function ds_pinyin_lsp_on(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local ds_pinyin_lsp_client = util.get_active_client_by_name(bufnr, 'ds_pinyin_lsp')
   if ds_pinyin_lsp_client then
-    ds_pinyin_lsp_client.notify('$/turn/completion', {
+    util.client_proxy(ds_pinyin_lsp_client).notify('$/turn/completion', {
       ['completion_on'] = true,
     })
   else
-    vim.notify 'notification $/turn/completion is not supported by any servers active on the current buffer'
+    vim.notify('notification $/turn/completion is not supported by any servers active on the current buffer')
   end
 end
 

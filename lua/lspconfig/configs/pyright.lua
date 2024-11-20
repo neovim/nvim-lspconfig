@@ -21,7 +21,7 @@ local function organize_imports()
     name = 'pyright',
   }
   for _, client in ipairs(clients) do
-    client.request('workspace/executeCommand', params, nil, 0)
+    util.client_proxy(client).request('workspace/executeCommand', params, nil, 0)
   end
 end
 
@@ -36,7 +36,7 @@ local function set_python_path(path)
     else
       client.config.settings = vim.tbl_deep_extend('force', client.config.settings, { python = { pythonPath = path } })
     end
-    client.notify('workspace/didChangeConfiguration', { settings = nil })
+    util.client_proxy(client).notify('workspace/didChangeConfiguration', { settings = nil })
   end
 end
 
