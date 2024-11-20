@@ -1,61 +1,47 @@
 local util = require 'lspconfig.util'
 
-local texlab_build_status = {
-  [0] = 'Success',
-  [1] = 'Error',
-  [2] = 'Failure',
-  [3] = 'Cancelled',
-}
-
-local texlab_forward_status = {
-  [0] = 'Success',
-  [1] = 'Error',
-  [2] = 'Failure',
-  [3] = 'Unconfigured',
-}
-
-local function buf_build()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
-  if texlab_client then
-    texlab_client.request('textDocument/build', vim.lsp.util.make_position_params(), function(err, result)
-      if err then
-        error(tostring(err))
-      end
-      vim.notify('Build ' .. texlab_build_status[result.status], vim.log.levels.INFO)
-    end, bufnr)
-  else
-    vim.notify(
-      'method textDocument/build is not supported by any servers active on the current buffer',
-      vim.log.levels.WARN
-    )
+local function client_with_fn(fn)
+  return function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local client = util.get_active_client_by_name(bufnr, 'texlab')
+    if not client then
+      return vim.notify(('texlab client not found in bufnr %d'):format(bufnr), vim.log.levels.ERROR)
+    end
+    fn(client, bufnr)
   end
 end
 
-local function buf_search()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
-  if texlab_client then
-    texlab_client.request('textDocument/forwardSearch', vim.lsp.util.make_position_params(), function(err, result)
-      if err then
-        error(tostring(err))
-      end
-      vim.notify('Search ' .. texlab_forward_status[result.status], vim.log.levels.INFO)
-    end, bufnr)
-  else
-    vim.notify(
-      'method textDocument/forwardSearch is not supported by any servers active on the current buffer',
-      vim.log.levels.WARN
-    )
-  end
+local function buf_build(client, bufnr)
+  client.request('textDocument/build', vim.lsp.util.make_position_params(), function(err, result)
+    if err then
+      error(tostring(err))
+    end
+    local texlab_build_status = {
+      [0] = 'Success',
+      [1] = 'Error',
+      [2] = 'Failure',
+      [3] = 'Cancelled',
+    }
+    vim.notify('Build ' .. texlab_build_status[result.status], vim.log.levels.INFO)
+  end, bufnr)
 end
 
-local function buf_cancel_build()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local client = util.get_active_client_by_name(bufnr, 'texlab')
-  if not client then
-    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
-  end
+local function buf_search(client, bufnr)
+  client.request('textDocument/forwardSearch', vim.lsp.util.make_position_params(), function(err, result)
+    if err then
+      error(tostring(err))
+    end
+    local texlab_forward_status = {
+      [0] = 'Success',
+      [1] = 'Error',
+      [2] = 'Failure',
+      [3] = 'Unconfigured',
+    }
+    vim.notify('Search ' .. texlab_forward_status[result.status], vim.log.levels.INFO)
+  end, bufnr)
+end
+
+local function buf_cancel_build(client, bufnr)
   if vim.fn.has 'nvim-0.11' == 1 then
     return client:exec_cmd({
       title = 'cancel',
@@ -66,13 +52,8 @@ local function buf_cancel_build()
   vim.notify('Build cancelled', vim.log.levels.INFO)
 end
 
-local function dependency_graph()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
-  if not texlab_client then
-    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
-  end
-  texlab_client.request('workspace/executeCommand', { command = 'texlab.showDependencyGraph' }, function(err, result)
+local function dependency_graph(client)
+  client.request('workspace/executeCommand', { command = 'texlab.showDependencyGraph' }, function(err, result)
     if err then
       return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
     end
@@ -80,65 +61,37 @@ local function dependency_graph()
   end, 0)
 end
 
-local function cleanArtifacts()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local client = util.get_active_client_by_name(bufnr, 'texlab')
-  if not client then
-    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
-  end
-  if vim.fn.has 'nvim-0.11' == 1 then
-    return client:exec_cmd({
-      title = 'clean_artifacts',
-      command = 'texlab.cleanArtifacts',
-      arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
-    }, { bufnr = bufnr }, function(err, _)
-      if err then
-        vim.notify('Failed to clean artifacts: ' .. err.message, vim.log.levels.ERROR)
-      else
-        vim.notify('Artifacts cleaned successfully', vim.log.levels.INFO)
-      end
-    end)
-  end
-  vim.lsp.buf.execute_command {
-    command = 'texlab.cleanArtifacts',
-    arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+local function command_factory(cmd)
+  local cmd_tbl = {
+    Auxiliary = 'texlab.cleanAuxiliary',
+    Artifacts = 'texlab.cleanArtifacts',
+    CancelBuild = 'texlab.cancelBuild',
   }
-  vim.notify('Artifacts cleaned successfully', vim.log.levels.INFO)
+  return function(client, bufnr)
+    if vim.fn.has 'nvim-0.11' == 1 then
+      return client:exec_cmd({
+        title = ('clean_%s'):format(cmd),
+        command = cmd_tbl[cmd],
+        arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+      }, { bufnr = bufnr }, function(err, _)
+        if err then
+          vim.notify(('Failed to clean %s files: %s'):format(cmd, err.message), vim.log.levels.ERROR)
+        else
+          vim.notify(('cmmand %s execute successfully'):format(cmd), vim.log.levels.INFO)
+        end
+      end)
+    end
+
+    vim.lsp.buf.execute_command {
+      command = cmd_tbl[cmd],
+      arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+    }
+    vim.notify(('command %s execute successfully'):format(cmd_tbl[cmd]))
+  end
 end
 
-local function cleanAuxiliary()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local client = util.get_active_client_by_name(bufnr, 'texlab')
-  if not client then
-    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
-  end
-  if vim.fn.has 'nvim-0.11' == 1 then
-    return client:exec_cmd({
-      title = 'clean_auxiliary',
-      command = 'texlab.cleanAuxiliary',
-      arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
-    }, { bufnr = bufnr }, function(err, _)
-      if err then
-        vim.notify('Failed to clean auxiliary files: ' .. err.message, vim.log.levels.ERROR)
-      else
-        vim.notify('Auxiliary files cleaned successfully', vim.log.levels.INFO)
-      end
-    end)
-  end
-  vim.lsp.buf.execute_command {
-    command = 'texlab.cleanAuxiliary',
-    arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
-  }
-  vim.notify('Auxiliary files cleaned successfully', vim.log.levels.INFO)
-end
-
-local function buf_find_envs()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local texlab_client = util.get_active_client_by_name(bufnr, 'texlab')
-  if not texlab_client then
-    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
-  end
-  texlab_client.request('workspace/executeCommand', {
+local function buf_find_envs(client, bufnr)
+  client.request('workspace/executeCommand', {
     command = 'texlab.findEnvironments',
     arguments = { vim.lsp.util.make_position_params() },
   }, function(err, result)
@@ -165,16 +118,26 @@ local function buf_find_envs()
   end, bufnr)
 end
 
-local function buf_change_env()
-  local bufnr = vim.api.nvim_get_current_buf()
-  if not util.get_active_client_by_name(bufnr, 'texlab') then
-    return vim.notify('Texlab client not found', vim.log.levels.ERROR)
-  end
+local function buf_change_env(client, bufnr)
   local new = vim.fn.input 'Enter the new environment name: '
   if not new or new == '' then
     return vim.notify('No environment name provided', vim.log.levels.WARN)
   end
   local pos = vim.api.nvim_win_get_cursor(0)
+  if vim.fn.has 'nvim-0.11' == 1 then
+    return client:exec_cmd({
+      title = 'change_environment',
+      command = 'texlab.changeEnvironment',
+      arguments = {
+        {
+          textDocument = { uri = vim.uri_from_bufnr(bufnr) },
+          position = { line = pos[1] - 1, character = pos[2] },
+          newName = tostring(new),
+        },
+      },
+    }, { bufnr = bufnr })
+  end
+
   vim.lsp.buf.execute_command {
     command = 'texlab.changeEnvironment',
     arguments = {
@@ -223,51 +186,35 @@ return {
   },
   commands = {
     TexlabBuild = {
-      function()
-        buf_build()
-      end,
+      client_with_fn(buf_build),
       description = 'Build the current buffer',
     },
     TexlabForward = {
-      function()
-        buf_search()
-      end,
+      client_with_fn(buf_search),
       description = 'Forward search from current position',
     },
     TexlabCancelBuild = {
-      function()
-        buf_cancel_build()
-      end,
+      client_with_fn(buf_cancel_build),
       description = 'Cancel the current build',
     },
     TexlabDependencyGraph = {
-      function()
-        dependency_graph()
-      end,
+      client_with_fn(dependency_graph),
       description = 'Show the dependency graph',
     },
     TexlabCleanArtifacts = {
-      function()
-        cleanArtifacts()
-      end,
+      client_with_fn(command_factory('Artifacts')),
       description = 'Clean the artifacts',
     },
     TexlabCleanAuxiliary = {
-      function()
-        cleanAuxiliary()
-      end,
+      client_with_fn(command_factory('Auxiliary')),
       description = 'Clean the auxiliary files',
     },
     TexlabFindEnvironments = {
-      function()
-        buf_find_envs()
-      end,
+      client_with_fn(buf_find_envs),
       description = 'Find the environments at current position',
     },
     TexlabChangeEnvironment = {
-      function()
-        buf_change_env()
-      end,
+      client_with_fn(buf_change_env),
       description = 'Change the environment at current position',
     },
   },
