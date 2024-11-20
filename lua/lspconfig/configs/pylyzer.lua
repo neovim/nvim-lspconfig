@@ -23,11 +23,8 @@ return {
         checkOnType = false,
       },
     },
-    ergPath = vim.fn.getenv('HOME') .. '/.erg',
     on_new_config = function(new_config, _)
-      if new_config.ergPath then
-        new_config.cmd_env.ERG_PATH = new_config.ergPath
-      end
+      new_config.cmd_env.ERG_PATH = vim.fn.getenv('HOME') .. '/.erg'
     end,
   },
   docs = {
@@ -37,8 +34,8 @@ return {
   `pylyzer`, a fast static code analyzer & language server for Python.
 
   `pylyzer` requires Erg as dependency, and finds it via `ERG_PATH` environment variable.
-  By default `ERG_PATH` is set to `~/.erg` when `lspconfig` runs `pylyzer`,
-  pass `ergPath = "/path/to/erg"` if you want to change it.
+  In the default config `ERG_PATH` is set to `~/.erg`, as shown in the `on_new_config` function.
+  Add a `on_new_config` on your own if you want to change it.
 
   To install Erg, simply extract tarball/zip from [Erg releases](https://github.com/erg-lang/erg/releases/latest)
   to the the path where you want to install it, e.g. `~/.erg`.
