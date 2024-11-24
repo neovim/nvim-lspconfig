@@ -8,6 +8,7 @@ local configs = {}
 --- @class lspconfig.Config : vim.lsp.ClientConfig
 --- @field enabled? boolean
 --- @field single_file_support? boolean
+--- @field silent? boolean
 --- @field filetypes? string[]
 --- @field filetype? string
 --- @field on_new_config? fun(new_config: lspconfig.Config?, new_root_dir: string)
@@ -105,7 +106,7 @@ function configs.__newindex(t, config_name, config_def)
       api.nvim_create_autocmd(event_conf.event, {
         pattern = event_conf.pattern or '*',
         callback = function(opt)
-          M.manager:try_add(opt.buf)
+          M.manager:try_add(opt.buf, nil, config.silent)
         end,
         group = lsp_group,
         desc = string.format(
@@ -176,7 +177,7 @@ function configs.__newindex(t, config_name, config_def)
             return
           end
           local pseudo_root = #bufname == 0 and pwd or util.path.dirname(util.path.sanitize(bufname))
-          M.manager:add(pseudo_root, true, bufnr)
+          M.manager:add(pseudo_root, true, bufnr, config.silent)
         end
       end)
     end

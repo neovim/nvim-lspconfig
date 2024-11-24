@@ -85,7 +85,8 @@ end
 --- @param new_config lspconfig.Config
 --- @param root_dir string
 --- @param single_file boolean
-function M:_start_client(bufnr, new_config, root_dir, single_file)
+--- @param silent boolean
+function M:_start_client(bufnr, new_config, root_dir, single_file, silent)
   -- do nothing if the client is not enabled
   if new_config.enabled == false then
     return
@@ -129,6 +130,7 @@ function M:_start_client(bufnr, new_config, root_dir, single_file)
 
   local client_id = lsp.start(new_config, {
     bufnr = bufnr,
+    silent = silent,
     reuse_client = function(existing_client)
       if (self._clients[root_dir] or {})[existing_client.name] then
         self:_notify_workspace_folder_added(root_dir, existing_client)
@@ -153,9 +155,11 @@ end
 ---@param root_dir string
 ---@param single_file boolean
 ---@param bufnr integer
+---@param silent boolean
+function M:add(root_dir, single_file, bufnr, silent)
   root_dir = util.path.sanitize(root_dir)
   local new_config = self.make_config(root_dir)
-  self:_start_client(bufnr, new_config, root_dir, single_file)
+  self:_start_client(bufnr, new_config, root_dir, single_file, silent)
 end
 
 --- @return vim.lsp.Client[]
@@ -173,7 +177,8 @@ end
 --- a new client if one doesn't already exist for `bufnr`.
 --- @param bufnr integer
 --- @param project_root? string
-function M:try_add(bufnr, project_root)
+--- @param silent boolean
+function M:try_add(bufnr, project_root, silent)
   bufnr = bufnr or api.nvim_get_current_buf()
 
   if vim.bo[bufnr].buftype == 'nofile' then
@@ -190,7 +195,7 @@ function M:try_add(bufnr, project_root)
   end
 
   if project_root then
-    self:add(project_root, false, bufnr)
+    self:add(project_root, false, bufnr, silent)
     return
   end
 
@@ -213,10 +218,10 @@ function M:try_add(bufnr, project_root)
     end
 
     if root_dir then
-      self:add(root_dir, false, bufnr)
+      self:add(root_dir, false, bufnr, silent)
     elseif self.config.single_file_support then
       local pseudo_root = #bufname == 0 and pwd or util.path.dirname(buf_path)
-      self:add(pseudo_root, true, bufnr)
+      self:add(pseudo_root, true, bufnr, silent)
     end
   end)
 end
@@ -229,7 +234,7 @@ function M:try_add_wrapper(bufnr, project_root)
   local config = self.config
   -- `config.filetypes = nil` means all filetypes are valid.
   if not config.filetypes or vim.tbl_contains(config.filetypes, vim.bo[bufnr].filetype) then
-    self:try_add(bufnr, project_root)
+    self:try_add(bufnr, project_root, config.silent)
   end
 end
 
