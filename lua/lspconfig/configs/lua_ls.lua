@@ -16,7 +16,7 @@ return {
     filetypes = { 'lua' },
     root_dir = function(fname)
       local root = util.root_pattern(unpack(root_files))(fname)
-      if root and root ~= vim.env.HOME then
+      if root and root ~= vim.env.HOME and root ~= (vim.env.CONFIG or vim.env.HOME .. '.config') then
         return root
       end
       local root_lua = util.root_pattern 'lua/'(fname) or ''
