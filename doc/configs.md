@@ -1778,7 +1778,7 @@ Default config:
   ```lua
   { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/clangd.lua:50](../lua/lspconfig/configs/clangd.lua#L50)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/clangd.lua:51](../lua/lspconfig/configs/clangd.lua#L51)
 - `single_file_support` : `true`
 
 
@@ -10352,7 +10352,7 @@ Default config:
   ```lua
   { "tex", "plaintex", "bib" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/texlab.lua:154](../lua/lspconfig/configs/texlab.lua#L154)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/texlab.lua:159](../lua/lspconfig/configs/texlab.lua#L159)
 - `settings` :
   ```lua
   {
