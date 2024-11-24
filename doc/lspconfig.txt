@@ -75,6 +75,9 @@ the following added keys:
 - {single_file_support} (`bool`) (default: nil) Determines if a server is
   started without a matching root directory. See |lspconfig-single-file-support|.
 
+- {silent} (`bool`) (default: false) Whether to suppress error reporting if the
+  LSP server fails to start.
+
 - {on_new_config} (`function(new_config, new_root_dir)`) Function executed
   after a root directory is detected. This is used to modify the server
   configuration (including `cmd` itself). Most commonly, this is used to
