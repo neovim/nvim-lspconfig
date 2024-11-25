@@ -117,7 +117,7 @@ local function buf_find_envs(client, bufnr)
       width = math.max((max_length + #env_names - 1), (string.len 'Environments')),
       focusable = false,
       focus = false,
-      border = require('lspconfig.ui.windows').default_options.border or 'single',
+      border = 'single',
       title = 'Environments',
     })
   end, bufnr)
