@@ -102,14 +102,9 @@ M.path = (function()
     return path:gsub('([%[%]%?%*])', '\\%1')
   end
 
-  --- @param path string
-  --- @return string
+  --- @deprecated use `vim.fs.normalize` instead
   local function sanitize(path)
-    if iswin then
-      path = path:sub(1, 1):upper() .. path:sub(2)
-      path = path:gsub('\\', '/')
-    end
-    return path
+    return vim.fs.normalize(path)
   end
 
   --- @param filename string

@@ -133,7 +133,7 @@ function configs.__newindex(t, config_name, config_def)
       async.run(function()
         local root_dir
         if type(get_root_dir) == 'function' then
-          root_dir = get_root_dir(util.path.sanitize(bufname), bufnr)
+          root_dir = get_root_dir(vim.fs.normalize(bufname), bufnr)
           async.reenter()
           if not api.nvim_buf_is_valid(bufnr) then
             return
@@ -162,7 +162,7 @@ function configs.__newindex(t, config_name, config_def)
           for _, buf in ipairs(api.nvim_list_bufs()) do
             local buf_name = api.nvim_buf_get_name(buf)
             if util.bufname_valid(buf_name) then
-              local buf_dir = util.path.sanitize(buf_name)
+              local buf_dir = vim.fs.normalize(buf_name)
               if buf_dir:sub(1, root_dir:len()) == root_dir then
                 M.manager:try_add_wrapper(buf, root_dir)
               end
@@ -176,7 +176,7 @@ function configs.__newindex(t, config_name, config_def)
           if not api.nvim_buf_is_valid(bufnr) or (#bufname ~= 0 and not util.bufname_valid(bufname)) then
             return
           end
-          local pseudo_root = #bufname == 0 and pwd or vim.fs.dirname(util.path.sanitize(bufname))
+          local pseudo_root = #bufname == 0 and pwd or vim.fs.dirname(vim.fs.normalize(bufname))
           M.manager:add(pseudo_root, true, bufnr, config.silent)
         end
       end)
