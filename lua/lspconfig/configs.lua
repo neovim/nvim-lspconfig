@@ -176,7 +176,7 @@ function configs.__newindex(t, config_name, config_def)
           if not api.nvim_buf_is_valid(bufnr) or (#bufname ~= 0 and not util.bufname_valid(bufname)) then
             return
           end
-          local pseudo_root = #bufname == 0 and pwd or util.path.dirname(util.path.sanitize(bufname))
+          local pseudo_root = #bufname == 0 and pwd or vim.fs.dirname(util.path.sanitize(bufname))
           M.manager:add(pseudo_root, true, bufnr, config.silent)
         end
       end)
