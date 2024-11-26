@@ -43,7 +43,7 @@ reading your `config` source code, so the less indirection in your code, the mor
 * `root_dir`: function which returns the root of the project, used to decide if lspconfig should launch a new language server, or attach a previously launched server when you open a new buffer matching the filetype of the server.
     * See `:help lspconfig-new`.
     * See `vim.fs.root()`
-    * Do not use `vim.fn.cwd` or `util.path.dirname`.
+    * Do not use `vim.fn.cwd` or `vim.fs.dirname`.
 
 Additionally, these options are often useful:
 
