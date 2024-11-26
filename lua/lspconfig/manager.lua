@@ -222,7 +222,7 @@ function M:try_add(bufnr, project_root, silent)
     if root_dir then
       self:add(root_dir, false, bufnr, silent)
     elseif self.config.single_file_support then
-      local pseudo_root = #bufname == 0 and pwd or util.path.dirname(buf_path)
+      local pseudo_root = #bufname == 0 and pwd or vim.fs.dirname(buf_path)
       self:add(pseudo_root, true, bufnr, silent)
     end
   end)

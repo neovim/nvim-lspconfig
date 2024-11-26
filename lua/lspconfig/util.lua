@@ -155,20 +155,7 @@ M.path = (function()
   --- @param path T
   --- @return T
   local function dirname(path)
-    local strip_dir_pat = '/([^/]+)$'
-    local strip_sep_pat = '/$'
-    if not path or #path == 0 then
-      return path
-    end
-    local result = path:gsub(strip_sep_pat, ''):gsub(strip_dir_pat, '')
-    if #result == 0 then
-      if iswin then
-        return path:sub(1, 2):upper()
-      else
-        return '/'
-      end
-    end
-    return result
+    return vim.fs.dirname(path)
   end
 
   local function path_join(...)
@@ -181,7 +168,7 @@ M.path = (function()
     local dir = path
     -- Just in case our algo is buggy, don't infinite loop.
     for _ = 1, 100 do
-      dir = dirname(dir)
+      dir = vim.fs.dirname(dir)
       if not dir then
         return
       end
@@ -199,7 +186,7 @@ M.path = (function()
   local function iterate_parents(path)
     local function it(_, v)
       if v and not is_fs_root(v) then
-        v = dirname(v)
+        v = vim.fs.dirname(v)
       else
         return
       end
