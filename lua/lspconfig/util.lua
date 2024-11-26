@@ -151,9 +151,7 @@ M.path = (function()
     end
   end
 
-  --- @generic T: string?
-  --- @param path T
-  --- @return T
+  ---@deprecated use `vim.fs.dirname` instead
   local function dirname(path)
     return vim.fs.dirname(path)
   end
