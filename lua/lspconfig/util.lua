@@ -151,11 +151,6 @@ M.path = (function()
     end
   end
 
-  ---@deprecated use `vim.fs.dirname` instead
-  local function dirname(path)
-    return vim.fs.dirname(path)
-  end
-
   local function path_join(...)
     return table.concat(M.tbl_flatten { ... }, '/')
   end
@@ -219,7 +214,6 @@ M.path = (function()
     is_file = is_file,
     is_absolute = is_absolute,
     exists = exists,
-    dirname = dirname,
     join = path_join,
     sanitize = sanitize,
     traverse_parents = traverse_parents,
@@ -411,5 +405,8 @@ function M.strip_archive_subpath(path)
   path = vim.fn.substitute(path, 'tarfile:\\(.\\{-}\\)::.*$', '\\1', '')
   return path
 end
+
+---@deprecated use `vim.fs.dirname` instead
+M.path.dirname = vim.fs.dirname
 
 return M
