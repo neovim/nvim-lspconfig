@@ -58,10 +58,12 @@ end
 --- @param root_dir string
 --- @param client vim.lsp.Client
 function M:_notify_workspace_folder_added(root_dir, client)
-  if
-    is_dir_in_workspace_folders(client, root_dir)
-    or not vim.tbl_get(client, 'server_capabilities', 'workspace', 'workspaceFolders', 'supported')
-  then
+  if is_dir_in_workspace_folders(client, root_dir) then
+    return
+  end
+
+  local supported = vim.tbl_get(client, 'server_capabilities', 'workspace', 'workspaceFolders', 'supported')
+  if not supported then
     return
   end
 
@@ -130,10 +132,6 @@ function M:_start_client(bufnr, new_config, root_dir, single_file, silent)
     bufnr = bufnr,
     silent = silent,
     reuse_client = function(existing_client)
-      if not vim.tbl_get(existing_client, 'server_capabilities', 'workspace', 'workspaceFolders', 'supported') then
-        return false
-      end
-
       if (self._clients[root_dir] or {})[existing_client.name] then
         self:_notify_workspace_folder_added(root_dir, existing_client)
         return true
