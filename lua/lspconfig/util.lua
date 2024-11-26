@@ -1,8 +1,8 @@
-local validate = vim.validate
 local api = vim.api
 local lsp = vim.lsp
 local uv = vim.uv or vim.loop
 local nvim_eleven = vim.fn.has 'nvim-0.11' == 1
+local nvim_ten = vim.fn.has('nvim-0.10') == 1
 
 local iswin = uv.os_uname().version:match 'Windows'
 
@@ -29,10 +29,7 @@ function M.bufname_valid(bufname)
 end
 
 function M.validate_bufnr(bufnr)
-  validate {
-    bufnr = { bufnr, 'n' },
-  }
-  return bufnr == 0 and api.nvim_get_current_buf() or bufnr
+  return (bufnr == 0 or not bufnr) and api.nvim_get_current_buf() or bufnr
 end
 
 function M.add_hook_before(func, new_fn)
@@ -105,11 +102,7 @@ M.path = (function()
   --- @param path string
   --- @return string
   local function sanitize(path)
-    if iswin then
-      path = path:sub(1, 1):upper() .. path:sub(2)
-      path = path:gsub('\\', '/')
-    end
-    return path
+    return vim.fs.normalize(path)
   end
 
   --- @param filename string
@@ -151,41 +144,13 @@ M.path = (function()
     end
   end
 
-  --- @generic T: string?
-  --- @param path T
-  --- @return T
-  local function dirname(path)
-    local strip_dir_pat = '/([^/]+)$'
-    local strip_sep_pat = '/$'
-    if not path or #path == 0 then
-      return path
-    end
-    local result = path:gsub(strip_sep_pat, ''):gsub(strip_dir_pat, '')
-    if #result == 0 then
-      if iswin then
-        return path:sub(1, 2):upper()
-      else
-        return '/'
-      end
-    end
-    return result
-  end
-
   local function path_join(...)
-    return table.concat(M.tbl_flatten { ... }, '/')
+    return nvim_ten and vim.fs.joinpath(...) or table.concat(M.tbl_flatten { ... }, '/')
   end
 
   -- Traverse the path calling cb along the way.
   local function traverse_parents(path, cb)
-    path = uv.fs_realpath(path)
-    local dir = path
-    -- Just in case our algo is buggy, don't infinite loop.
-    for _ = 1, 100 do
-      dir = dirname(dir)
-      if not dir then
-        return
-      end
-      -- If we can't ascend further, then stop looking.
+    for dir in vim.fs.parents(path) do
       if cb(dir, path) then
         return dir, path
       end
@@ -197,19 +162,7 @@ M.path = (function()
 
   -- Iterate the path until we find the rootdir.
   local function iterate_parents(path)
-    local function it(_, v)
-      if v and not is_fs_root(v) then
-        v = dirname(v)
-      else
-        return
-      end
-      if v and uv.fs_realpath(v) then
-        return v, path
-      else
-        return
-      end
-    end
-    return it, path, path
+    return vim.fs.parents(path)
   end
 
   local function is_descendant(root, path)
@@ -234,7 +187,6 @@ M.path = (function()
     is_file = is_file,
     is_absolute = is_absolute,
     exists = exists,
-    dirname = dirname,
     join = path_join,
     sanitize = sanitize,
     traverse_parents = traverse_parents,
@@ -245,7 +197,9 @@ M.path = (function()
 end)()
 
 function M.search_ancestors(startpath, func)
-  validate { func = { func, 'f' } }
+  if not func or type(func) ~= 'function' then
+    return api.nvim_err_writeln('func is missing or not function type in search_ancestors')
+  end
   if func(startpath) then
     return startpath
   end
@@ -361,7 +315,7 @@ function M.get_other_matching_providers(filetype)
   local active_clients_list = M.get_active_clients_list_by_ft(filetype)
   local other_matching_configs = {}
   for _, config in pairs(configs) do
-    if not vim.tbl_contains(active_clients_list, config.name) then
+    if not vim.list_contains(active_clients_list, config.name) then
       local filetypes = config.filetypes or {}
       for _, ft in pairs(filetypes) do
         if ft == filetype then
