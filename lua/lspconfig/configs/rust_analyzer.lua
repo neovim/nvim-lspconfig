@@ -16,7 +16,7 @@ local function reload_workspace(bufnr)
 end
 
 local function is_library(fname)
-  local user_home = util.path.sanitize(vim.env.HOME)
+  local user_home = vim.fs.normalize(vim.env.HOME)
   local cargo_home = os.getenv 'CARGO_HOME' or util.path.join(user_home, '.cargo')
   local registry = util.path.join(cargo_home, 'registry', 'src')
   local git_registry = util.path.join(cargo_home, 'git', 'checkouts')
@@ -62,7 +62,7 @@ return {
         if result and result[1] then
           result = vim.json.decode(table.concat(result, ''))
           if result['workspace_root'] then
-            cargo_workspace_root = util.path.sanitize(result['workspace_root'])
+            cargo_workspace_root = vim.fs.normalize(result['workspace_root'])
           end
         end
       end

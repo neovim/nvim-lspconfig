@@ -157,7 +157,7 @@ end
 ---@param bufnr integer
 ---@param silent boolean
 function M:add(root_dir, single_file, bufnr, silent)
-  root_dir = util.path.sanitize(root_dir)
+  root_dir = vim.fs.normalize(root_dir)
   local new_config = self.make_config(root_dir)
   self:_start_client(bufnr, new_config, root_dir, single_file, silent)
 end
@@ -199,7 +199,7 @@ function M:try_add(bufnr, project_root, silent)
     return
   end
 
-  local buf_path = util.path.sanitize(bufname)
+  local buf_path = vim.fs.normalize(bufname)
 
   local get_root_dir = self.config.root_dir
 

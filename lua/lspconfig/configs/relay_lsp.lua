@@ -34,7 +34,7 @@ return {
       end
 
       if config.path_to_config then
-        config.path_to_config = util.path.sanitize(config.path_to_config)
+        config.path_to_config = vim.fs.normalize(config.path_to_config)
         local path_to_config = util.path.join(root_dir, config.path_to_config)
         if util.path.exists(path_to_config) then
           vim.list_extend(config.cmd, { config.path_to_config })
