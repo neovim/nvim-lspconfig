@@ -11544,7 +11544,7 @@ local function get_typescript_server_path(root_dir)
   local found_ts = ''
   local function check_dir(path)
     found_ts =  util.path.join(path, 'node_modules', 'typescript', 'lib')
-    if util.path.exists(found_ts) then
+    if vim.loop.fs_stat(found_ts) then
       return path
     end
   end
