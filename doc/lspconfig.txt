@@ -17,13 +17,13 @@ Note: nvim-lspconfig is just a convenience layer, it is NOT required for Nvim
 ==============================================================================
 QUICKSTART                                                *lspconfig-quickstart*
 
-1. Install a language server, e.g. pyright. >
+1. Install a language server, e.g. pyright. >bash
    npm i -g pyright
-2. Add the language server setup to your init.lua. >
+2. Add the language server setup to your init.lua. >lua
    require'lspconfig'.pyright.setup{}
 3. Ensure your project/workspace contains a root marker which matches the
    server requirements specified in |lspconfig-all|.
-4. Open a code file in Nvim. LSP will attach and provide diagnostics. >
+4. Open a code file in Nvim. LSP will attach and provide diagnostics. >bash
    nvim main.py
 5. Run `:checkhealth lsp` to see the status or to troubleshoot.
 
@@ -156,7 +156,7 @@ validating its configuration, and before attempting to launch the server
 itself. One typical usage is to allow ad-hoc substitution for any
 configuration entry, such as `cmd`.
 
->
+>lua
   local lspconfig = require 'lspconfig'
   lspconfig.util.on_setup = lspconfig.util.add_hook_before(lspconfig.util.on_setup, function(config)
     if some_condition and config.name == "clangd" then
@@ -179,7 +179,7 @@ For servers for which there is not a configuration, it is necessary to define
 a configuration. This can be done through the `configs` module.
 
 The `configs` module is a singleton where configs are defined. The
-`vim.validate` schema is: >
+`vim.validate` schema is: >lua
 
     configs.SERVER_NAME = {
       default_config = {'table'},
@@ -189,7 +189,7 @@ The `configs` module is a singleton where configs are defined. The
       docs = {'table', true},
     }
 <
-where the structure of `docs` is: >
+where the structure of `docs` is: >lua
 
     docs = {
       description = {'string', true},
@@ -206,7 +206,7 @@ It is recommended to use `vim.api.nvim_create_user_command()` instead in an
 |LspAttach| autocommand handler.
 
 Example:
->
+>lua
   local function organize_imports()
     local params = {
       command = 'pyright.organizeimports',
@@ -229,14 +229,14 @@ Example:
 
 The `configs.__newindex` metamethod consumes the config definition and returns
 an object with a `setup()` method, to be invoked by users:
->
+>lua
     require'lspconfig'.SERVER_NAME.setup{}
 
 After you set `configs.SERVER_NAME` you can add arbitrary language-specific
 functions to it if necessary.
 
 Example:
->
+>lua
     configs.texlab.buf_build = buf_build
 <
 
@@ -263,7 +263,7 @@ The steps for adding and enabling a new server configuration are:
      }
    end
 
-2. Call `setup()` to enable the FileType autocmd >
+2. Call `setup()` to enable the FileType autocmd >lua
    lspconfig.foo_lsp.setup{}
 <
 ==============================================================================
@@ -314,7 +314,7 @@ ADVANCED ROOT DIRECTORY DETECTION                      *lspconfig-root-advanced*
 WARNING: This API is deprecated. Use |vim.fs.root()| from Nvim core instead.
 
 The `root_dir` key in `config` and `setup` can hold any function of the form
->
+>lua
   function custom_root_dir(filename, bufnr)
   returns nil | string
 >
@@ -388,7 +388,7 @@ the current buffer filetype.
 :LspStop [client_id] or [config_name] ...                        *:LspStop*
 Stops the servers with the given client-ids or config names. Defaults to
 stopping all servers active on the current buffer. To force stop language
-servers: >
+servers: >vim
     :LspStop ++force
 
 :LspRestart [client_id] or [config_name] ...                     *:LspRestart*
@@ -472,7 +472,7 @@ the built-in client, specifically considering the RPC logs. Example: >lua
 <
 Attempt to run the language server, and open the log with:
 
->
+>vim
     :LspLog
 <
 Note that `ERROR` messages containing `stderr` only indicate that the log was
@@ -491,7 +491,7 @@ from `lspconfig` in time.
 Highlights                                                *lspconfig-highlight*
 
 WARNING: The `require('lspconfig.ui.windows')` API was removed.
-LspInfo is provided by a healthcheck instead: >
+LspInfo is provided by a healthcheck instead: >vim
     :checkhealth lspconfig
 <
 
