@@ -24,36 +24,6 @@ describe('lspconfig', function()
           eq('/usr/local/test/\\[sq brackets\\] fname\\?\\*.lua', res)
         end)
       end)
-      describe('exists', function()
-        it('is present directory', function()
-          local lspconfig = require 'lspconfig'
-
-          local cwd = vim.fn.getcwd()
-          eq(true, lspconfig.util.path.exists(cwd) ~= false)
-        end)
-
-        it('is not present directory', function()
-          local lspconfig = require 'lspconfig'
-          local not_exist_dir = vim.fn.getcwd() .. '/not/exists'
-          eq(true, lspconfig.util.path.exists(not_exist_dir) == false)
-        end)
-
-        it('is present file', function()
-          local lspconfig = require 'lspconfig'
-          -- change the working directory to test directory
-          vim.api.nvim_command 'cd ./test/test_dir/'
-          local file = vim.fn.getcwd() .. '/root_marker.txt'
-          eq(true, lspconfig.util.path.exists(file) ~= false)
-        end)
-
-        it('is not present file', function()
-          local lspconfig = require 'lspconfig'
-          -- change the working directory to test directory
-          vim.api.nvim_command 'cd ./test/test_dir/'
-          local file = vim.fn.getcwd() .. '/not_exists.txt'
-          assert.is_false(lspconfig.util.path.exists(file))
-        end)
-      end)
 
       describe('is_dir', function()
         it('is directory', function()
