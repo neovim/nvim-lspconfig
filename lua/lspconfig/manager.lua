@@ -73,7 +73,7 @@ function M:_notify_workspace_folder_added(root_dir, client)
       removed = {},
     },
   }
-  client.rpc.notify(lsp.protocol.Methods.workspace_didChangeWorkspaceFolders, params)
+  client.rpc.notify('workspace/didChangeWorkspaceFolders', params)
   if not client.workspace_folders then
     client.workspace_folders = {}
   end
