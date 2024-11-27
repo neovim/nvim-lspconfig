@@ -102,11 +102,6 @@ M.path = (function()
     return path:gsub('([%[%]%?%*])', '\\%1')
   end
 
-  --- @deprecated use `vim.fs.normalize` instead
-  local function sanitize(path)
-    return vim.fs.normalize(path)
-  end
-
   --- @param filename string
   --- @return string|false
   local function exists(filename)
@@ -144,11 +139,6 @@ M.path = (function()
     else
       return filename:match '^/'
     end
-  end
-
-  ---@deprecated use `vim.fs.dirname` instead
-  local function dirname(path)
-    return vim.fs.dirname(path)
   end
 
   local function path_join(...)
@@ -214,9 +204,7 @@ M.path = (function()
     is_file = is_file,
     is_absolute = is_absolute,
     exists = exists,
-    dirname = dirname,
     join = path_join,
-    sanitize = sanitize,
     traverse_parents = traverse_parents,
     iterate_parents = iterate_parents,
     is_descendant = is_descendant,
@@ -406,5 +394,11 @@ function M.strip_archive_subpath(path)
   path = vim.fn.substitute(path, 'tarfile:\\(.\\{-}\\)::.*$', '\\1', '')
   return path
 end
+
+---@deprecated use `vim.fs.dirname` instead
+M.dirname = vim.fs.dirname
+
+--- @deprecated use `vim.fs.normalize` instead
+M.sanitize = vim.fs.normalize
 
 return M
