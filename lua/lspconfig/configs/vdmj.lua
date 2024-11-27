@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 local function get_default_mavenrepo()
   local repo = util.path.join(vim.env.HOME, '.m2', 'repository', 'dk', 'au', 'ece', 'vdmj')
-  if util.path.exists(repo) then
+  if vim.loop.fs_stat(repo) then
     return repo
   else
     return util.path.join(vim.env.HOME, '.m2', 'repository', 'com', 'fujitsu')
