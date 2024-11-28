@@ -109,13 +109,6 @@ M.path = (function()
     return stat and stat.type == 'directory' or false
   end
 
-  --- @param filename string
-  --- @return boolean
-  local function is_file(filename)
-    local stat = uv.fs_stat(filename)
-    return stat and stat.type == 'file' or false
-  end
-
   --- @param path string
   --- @return boolean
   local function is_fs_root(path)
@@ -196,7 +189,6 @@ M.path = (function()
   return {
     escape_wildcards = escape_wildcards,
     is_dir = is_dir,
-    is_file = is_file,
     is_absolute = is_absolute,
     join = path_join,
     traverse_parents = traverse_parents,
@@ -256,7 +248,8 @@ end
 function M.find_git_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     -- Support git directories and git files (worktrees)
-    if M.path.is_dir(M.path.join(path, '.git')) or M.path.is_file(M.path.join(path, '.git')) then
+    local gitpath = M.path.join(path, '.git')
+    if M.path.is_dir(gitpath) or (uv.fs_stat(gitpath) or {}).type == 'file' then
       return path
     end
   end)
@@ -281,7 +274,8 @@ end
 
 function M.find_package_json_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
-    if M.path.is_file(M.path.join(path, 'package.json')) then
+    local jsonpath = M.path.join(path, 'package.json')
+    if (uv.fs_stat(jsonpath) or {}).type == 'file' then
       return path
     end
   end)
@@ -390,6 +384,13 @@ function M.strip_archive_subpath(path)
 end
 
 --- Deprecated functions
+
+--- @deprecated use `(vim.loop.fs_stat(path) or {}).type == 'file'` instead
+--- @param path string
+--- @return boolean
+function M.path.is_file(path)
+  return (vim.loop.fs_stat(path) or {}).type == 'file'
+end
 
 --- @deprecated use `vim.fs.dirname` instead
 M.path.dirname = vim.fs.dirname
