@@ -246,14 +246,6 @@ function M.find_git_ancestor(startpath)
   end)
 end
 
-function M.find_node_modules_ancestor(startpath)
-  return M.search_ancestors(startpath, function(path)
-    if vim.fn.isdirectory(M.path.join(path, 'node_modules')) == 1 then
-      return path
-    end
-  end)
-end
-
 function M.find_package_json_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     local jsonpath = M.path.join(path, 'package.json')
@@ -398,6 +390,11 @@ end
 --- @deprecated use `vim.fs.find('.hg', { path = startpath, upward = true })[1]` instead
 function M.find_mercurial_ancestor(startpath)
   return vim.fs.find('.hg', { path = startpath, upward = true })[1]
+end
+
+--- @deprecated use `vim.fs.find('node_modules', { path = startpath, upward = true })[1]` instead
+function M.find_node_modules_ancestor(startpath)
+  return vim.fs.find('node_modules', { path = startpath, upward = true })[1]
 end
 
 return M
