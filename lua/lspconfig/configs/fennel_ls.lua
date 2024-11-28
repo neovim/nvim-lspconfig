@@ -6,7 +6,8 @@ return {
     filetypes = { 'fennel' },
     root_dir = function(dir)
       local has_fls_project_cfg = function(path)
-        return util.path.is_file(vim.fs.joinpath(path, 'flsproject.fnl'))
+        local fnlpath = vim.fs.joinpath(path, 'flsproject.fnl')
+        return (vim.loop.fs_stat(fnlpath) or {}).type == 'file'
       end
       return util.search_ancestors(dir, has_fls_project_cfg) or vim.fs.root(0, '.git')
     end,
