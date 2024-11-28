@@ -247,15 +247,6 @@ function M.find_git_ancestor(startpath)
   end)
 end
 
-function M.find_mercurial_ancestor(startpath)
-  return M.search_ancestors(startpath, function(path)
-    -- Support Mercurial directories
-    if vim.fn.isdirectory(M.path.join(path, '.hg')) == 1 then
-      return path
-    end
-  end)
-end
-
 function M.find_node_modules_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     if vim.fn.isdirectory(M.path.join(path, 'node_modules')) == 1 then
@@ -403,6 +394,11 @@ M.path.sanitize = vim.fs.normalize
 function M.path.exists(filename)
   local stat = uv.fs_stat(filename)
   return stat and stat.type or false
+end
+
+--- @deprecated use `vim.fs.find('.hg', { path = startpath, upward = true })` instead
+function M.find_mercurial_ancestor(startpath)
+  return vim.fs.find('.hg', { path = startpath, upward = true })
 end
 
 return M
