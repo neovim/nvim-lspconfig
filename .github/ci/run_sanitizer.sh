@@ -15,7 +15,7 @@ if git diff --pickaxe-all -U0 -G "${SEARCH_PATTERN}" "${REF_BRANCH}" "${PR_BRANC
   exit 1
 fi
 
-SEARCH_PATTERN='(util\.path\.dirname|util\.path\.sanitize|util\.path\.exists|util\.path\.is_file)'
+SEARCH_PATTERN='(util\.path\.dirname|util\.path\.sanitize|util\.path\.exists|util\.path\.is_file|util\.path\.is_dir)'
 
 if git diff --pickaxe-all -U0 -G "${SEARCH_PATTERN}" "${REF_BRANCH}" "${PR_BRANCH}" -- '*.lua' | grep -Ev '\.lua$' | grep -E "^\+.*${SEARCH_PATTERN}" ; then
   echo
