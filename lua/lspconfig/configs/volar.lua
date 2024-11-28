@@ -1,7 +1,7 @@
 local util = require 'lspconfig.util'
 
 local function get_typescript_server_path(root_dir)
-  local project_root = util.find_node_modules_ancestor(root_dir)
+  local project_root = vim.fs.find('node_modules', { path = root_dir, upward = true })[1]
   return project_root and (util.path.join(project_root, 'node_modules', 'typescript', 'lib')) or ''
 end
 
