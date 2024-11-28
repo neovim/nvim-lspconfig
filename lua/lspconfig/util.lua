@@ -102,13 +102,6 @@ M.path = (function()
     return path:gsub('([%[%]%?%*])', '\\%1')
   end
 
-  --- @param filename string
-  --- @return boolean
-  local function is_dir(filename)
-    local stat = uv.fs_stat(filename)
-    return stat and stat.type == 'directory' or false
-  end
-
   --- @param path string
   --- @return boolean
   local function is_fs_root(path)
@@ -188,7 +181,6 @@ M.path = (function()
 
   return {
     escape_wildcards = escape_wildcards,
-    is_dir = is_dir,
     is_absolute = is_absolute,
     join = path_join,
     traverse_parents = traverse_parents,
@@ -249,7 +241,7 @@ function M.find_git_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     -- Support git directories and git files (worktrees)
     local gitpath = M.path.join(path, '.git')
-    if M.path.is_dir(gitpath) or (uv.fs_stat(gitpath) or {}).type == 'file' then
+    if vim.fn.isdirectory(gitpath) == 1 or (uv.fs_stat(gitpath) or {}).type == 'file' then
       return path
     end
   end)
@@ -258,7 +250,7 @@ end
 function M.find_mercurial_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     -- Support Mercurial directories
-    if M.path.is_dir(M.path.join(path, '.hg')) then
+    if vim.fn.isdirectory(M.path.join(path, '.hg')) == 1 then
       return path
     end
   end)
@@ -266,7 +258,7 @@ end
 
 function M.find_node_modules_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
-    if M.path.is_dir(M.path.join(path, 'node_modules')) then
+    if vim.fn.isdirectory(M.path.join(path, 'node_modules')) == 1 then
       return path
     end
   end)
@@ -384,6 +376,13 @@ function M.strip_archive_subpath(path)
 end
 
 --- Deprecated functions
+
+--- @deprecated use `vim.fn.isdirectory(path) == 1` instead
+--- @param filename string
+--- @return boolean
+function M.path.is_dir(filename)
+  return vim.fn.isdirectory(filename) == 1
+end
 
 --- @deprecated use `(vim.loop.fs_stat(path) or {}).type == 'file'` instead
 --- @param path string

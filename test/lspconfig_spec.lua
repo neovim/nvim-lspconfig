@@ -25,30 +25,6 @@ describe('lspconfig', function()
         end)
       end)
 
-      describe('is_dir', function()
-        it('is directory', function()
-          local lspconfig = require 'lspconfig'
-          local cwd = vim.fn.getcwd()
-          assert.is_true(lspconfig.util.path.is_dir(cwd))
-        end)
-
-        it('is not present directory', function()
-          local lspconfig = require 'lspconfig'
-          local not_exist_dir = vim.fn.getcwd() .. '/not/exists'
-          eq(true, not lspconfig.util.path.is_dir(not_exist_dir))
-        end)
-
-        it('is file', function()
-          local lspconfig = require 'lspconfig'
-
-          -- change the working directory to test directory
-          vim.api.nvim_command 'cd ./test/test_dir/'
-          local file = vim.fn.getcwd() .. '/root_marker.txt'
-
-          eq(true, not lspconfig.util.path.is_dir(file))
-        end)
-      end)
-
       describe('is_absolute', function()
         it('is absolute', function()
           local lspconfig = require 'lspconfig'

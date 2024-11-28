@@ -34,7 +34,7 @@ end
 -- Special case, as vdmj store particular settings under root_dir/.vscode
 local function find_vscode_ancestor(startpath)
   return util.search_ancestors(startpath, function(path)
-    if util.path.is_dir(util.path.join(path, '.vscode')) then
+    if vim.fn.isdirectory(util.path.join(path, '.vscode')) == 1 then
       return path
     end
   end)
