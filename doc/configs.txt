@@ -1047,7 +1047,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "sh" }
+  { "bash", "sh" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bashls.lua:4](../lua/lspconfig/configs/bashls.lua#L4)
 - `settings` :
