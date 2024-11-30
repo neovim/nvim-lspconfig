@@ -1047,7 +1047,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "bash", "sh" }
+  { "sh" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bashls.lua:4](../lua/lspconfig/configs/bashls.lua#L4)
 - `settings` :
@@ -2826,7 +2826,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "jsonc", "markdown", "python", "toml", "rust", "roslyn", "graphql" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "jsonc", "markdown", "python", "toml", "rust", "roslyn" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/dprint.lua:4](../lua/lspconfig/configs/dprint.lua#L4)
 - `settings` :
@@ -4407,11 +4407,11 @@ Default config:
 
 ## harper_ls
 
-https://github.com/elijah-potter/harper
+https://github.com/chilipepperhott/harper
 
 The language server for Harper, the slim, clean language checker for developers.
 
-See [docs](https://github.com/elijah-potter/harper/blob/master/harper-ls/README.md#configuration) for more information on settings.
+See [docs](https://github.com/chilipepperhott/harper/tree/master/harper-ls#configuration) for more information on settings.
 
 In short, however, they should look something like this:
 ```lua
@@ -4436,7 +4436,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "c", "cpp", "cs", "gitcommit", "go", "html", "java", "javascript", "lua", "markdown", "nix", "python", "ruby", "rust", "swift", "toml", "typescript", "typescriptreact" }
+  { "markdown", "rust", "typescript", "typescriptreact", "javascript", "python", "go", "c", "cpp", "ruby", "swift", "cs", "toml", "lua", "gitcommit", "java", "html" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/harper_ls.lua:4](../lua/lspconfig/configs/harper_ls.lua#L4)
 - `single_file_support` : `true`
@@ -8579,7 +8579,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "ruby", "eruby" }
+  { "ruby" }
   ```
 - `init_options` :
   ```lua
@@ -11175,7 +11175,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "markdown", "text", "tex", "rst" }
+  { "markdown", "text", "tex" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/vale_ls.lua:4](../lua/lspconfig/configs/vale_ls.lua#L4)
 - `single_file_support` : `true`
@@ -11223,7 +11223,7 @@ Default config:
     annotation_paths = {},
     debugger_port = -1,
     high_precision = false,
-    java = "/usr/lib/jvm/temurin-11-jdk-amd64/bin/java",
+    java = "java",
     java_opts = { "-Xmx3000m", "-Xss1m" },
     logfile = "/home/user/.cache/nvim/vdm-lsp.log",
     mavenrepo = "/home/user/.m2/repository/com/fujitsu"
@@ -11544,7 +11544,7 @@ local function get_typescript_server_path(root_dir)
   local found_ts = ''
   local function check_dir(path)
     found_ts =  util.path.join(path, 'node_modules', 'typescript', 'lib')
-    if vim.loop.fs_stat(found_ts) then
+    if util.path.exists(found_ts) then
       return path
     end
   end
