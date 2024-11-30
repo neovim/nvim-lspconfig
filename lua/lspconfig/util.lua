@@ -396,9 +396,9 @@ function M.path.exists(filename)
   return stat and stat.type or false
 end
 
---- @deprecated use `vim.fs.find('.hg', { path = startpath, upward = true })` instead
+--- @deprecated use `vim.fs.find('.hg', { path = startpath, upward = true })[1]` instead
 function M.find_mercurial_ancestor(startpath)
-  return vim.fs.find('.hg', { path = startpath, upward = true })
+  return vim.fs.find('.hg', { path = startpath, upward = true })[1]
 end
 
 return M
