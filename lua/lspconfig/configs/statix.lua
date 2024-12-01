@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'statix' },
+    cmd = { 'statix', 'check', '--stdin' },
     filetypes = { 'nix' },
     single_file_support = true,
     root_dir = util.root_pattern('flake.nix', '.git'),
