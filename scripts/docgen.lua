@@ -63,7 +63,7 @@ local function make_section(indentlvl, sep, parts)
 end
 
 local function readfile(path)
-  assert((uv.fs_stat(path) or {}).type == 'file')
+  assert(vim.fn.getftype(path) == 'file')
   return io.open(path):read '*a'
 end
 
@@ -181,10 +181,10 @@ local function make_lsp_sections()
           function()
             local package_json_name = util.path.join(tempdir, config_name .. '.package.json')
             if docs.package_json then
-              if not ((uv.fs_stat(package_json_name) or {}).type == 'file') then
+              if vim.fn.getftype(package_json_name) ~= 'file' then
                 os.execute(string.format('curl -v -L -o %q %q', package_json_name, docs.package_json))
               end
-              if not ((uv.fs_stat(package_json_name) or {}).type == 'file') then
+              if vim.fn.getftype(package_json_name) ~= 'file' then
                 print(string.format('Failed to download package.json for %q at %q', config_name, docs.package_json))
                 os.exit(1)
                 return
