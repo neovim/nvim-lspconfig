@@ -2,7 +2,6 @@ local M = {}
 local health = require('vim.health')
 
 local api, fn = vim.api, vim.fn
-local uv = vim.uv or vim.loop
 local util = require 'lspconfig.util'
 
 local error_messages = {
@@ -191,12 +190,12 @@ local function make_client_info(client, fname)
   local client_info, info_lines = make_info(client)
 
   local workspace_folders = fn.has 'nvim-0.9' == 1 and client.workspace_folders or client.workspaceFolders
-  fname = vim.fs.normalize(uv.fs_realpath(fname) or fn.fnamemodify(fn.resolve(fname), ':p'))
+  fname = vim.fs.normalize(vim.loop.fs_realpath(fname) or fn.fnamemodify(fn.resolve(fname), ':p'))
 
   if workspace_folders then
     for _, schema in ipairs(workspace_folders) do
       local matched = true
-      local root_dir = uv.fs_realpath(schema.name)
+      local root_dir = vim.loop.fs_realpath(schema.name)
       if root_dir == nil or fname:sub(1, root_dir:len()) ~= root_dir then
         matched = false
       end

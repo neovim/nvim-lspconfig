@@ -1,10 +1,9 @@
 local validate = vim.validate
 local api = vim.api
 local lsp = vim.lsp
-local uv = vim.uv or vim.loop
 local nvim_eleven = vim.fn.has 'nvim-0.11' == 1
 
-local iswin = uv.os_uname().version:match 'Windows'
+local iswin = vim.loop.os_uname().version:match 'Windows'
 
 local M = {}
 
@@ -128,7 +127,7 @@ M.path = (function()
 
   -- Traverse the path calling cb along the way.
   local function traverse_parents(path, cb)
-    path = uv.fs_realpath(path)
+    path = vim.loop.fs_realpath(path)
     local dir = path
     -- Just in case our algo is buggy, don't infinite loop.
     for _ = 1, 100 do
@@ -154,7 +153,7 @@ M.path = (function()
       else
         return
       end
-      if v and uv.fs_realpath(v) then
+      if v and vim.loop.fs_realpath(v) then
         return v, path
       else
         return
@@ -224,7 +223,7 @@ function M.root_pattern(...)
     for _, pattern in ipairs(patterns) do
       local match = M.search_ancestors(startpath, function(path)
         for _, p in ipairs(vim.fn.glob(M.path.join(M.path.escape_wildcards(path), pattern), true, true)) do
-          if uv.fs_stat(p) then
+          if vim.loop.fs_stat(p) then
             return path
           end
         end
@@ -392,7 +391,7 @@ M.path.sanitize = vim.fs.normalize
 --- @param filename string
 --- @return string|false
 function M.path.exists(filename)
-  local stat = uv.fs_stat(filename)
+  local stat = vim.loop.fs_stat(filename)
   return stat and stat.type or false
 end
 
