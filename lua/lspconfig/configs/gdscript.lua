@@ -1,11 +1,7 @@
 local util = require 'lspconfig.util'
 
 local port = os.getenv 'GDScript_Port' or '6005'
-local cmd = { 'nc', 'localhost', port }
-
-if vim.fn.has 'nvim-0.8' == 1 then
-  cmd = vim.lsp.rpc.connect('127.0.0.1', port)
-end
+local cmd = vim.lsp.rpc.connect('127.0.0.1', tonumber(port))
 
 return {
   default_config = {

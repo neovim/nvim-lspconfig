@@ -471,9 +471,7 @@ When debugging language servers, it is helpful to enable additional logging in
 the built-in client, specifically considering the RPC logs. Example: >lua
 
   vim.lsp.set_log_level 'trace'
-  if vim.fn.has 'nvim-0.5.1' == 1 then
-    require('vim.lsp.log').set_format_func(vim.inspect)
-  end
+  require('vim.lsp.log').set_format_func(vim.inspect)
 <
 Attempt to run the language server, and open the log with:
 
