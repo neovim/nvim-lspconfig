@@ -5,7 +5,7 @@ return {
     cmd = { 'R', '--no-echo', '-e', 'languageserver::run()' },
     filetypes = { 'r', 'rmd' },
     root_dir = function(fname)
-      return util.find_git_ancestor(fname) or vim.uv.os_homedir()
+      return util.find_git_ancestor(fname) or vim.loop.os_homedir()
     end,
     log_level = vim.lsp.protocol.MessageType.Warning,
   },

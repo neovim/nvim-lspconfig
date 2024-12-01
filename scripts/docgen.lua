@@ -2,7 +2,6 @@ require 'lspconfig'
 local configs = require 'lspconfig.configs'
 local util = require 'lspconfig.util'
 local inspect = vim.inspect
-local uv = vim.uv
 local fn = vim.fn
 
 local function template(s, params)
@@ -171,7 +170,7 @@ local function make_lsp_sections()
       })
 
       if docs then
-        local tempdir = os.getenv 'DOCGEN_TEMPDIR' or uv.fs_mkdtemp '/tmp/nvim-lspconfig.XXXXXX'
+        local tempdir = os.getenv 'DOCGEN_TEMPDIR' or vim.loop.fs_mkdtemp '/tmp/nvim-lspconfig.XXXXXX'
         local preamble_parts = make_parts {
           function()
             if docs.description and #docs.description > 0 then
@@ -289,7 +288,7 @@ local function generate_readme(template_file, params)
   local writer = assert(io.open('doc/configs.md', 'w'))
   writer:write(readme_data)
   writer:close()
-  uv.fs_copyfile('doc/configs.md', 'doc/configs.txt')
+  vim.loop.fs_copyfile('doc/configs.md', 'doc/configs.txt')
 end
 
 require_all_configs()

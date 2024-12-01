@@ -22,7 +22,7 @@ local function get_latest_installed_version(repo)
   local sort = vim.fn.sort
 
   local subdirs = function(file)
-    local stat = vim.uv.fs_stat(util.path.join(path, file))
+    local stat = vim.loop.fs_stat(util.path.join(path, file))
     return stat.type == 'directory' and 1 or 0
   end
 
