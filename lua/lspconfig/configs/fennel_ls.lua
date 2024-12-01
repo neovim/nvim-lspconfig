@@ -12,6 +12,7 @@ return {
       return util.search_ancestors(dir, has_fls_project_cfg) or vim.fs.root(0, '.git')
     end,
     settings = {},
+    single_file_support = true,
     capabilities = {
       offsetEncoding = { 'utf-8', 'utf-16' },
     },
