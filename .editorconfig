@@ -1,13 +1,14 @@
 root = true
 
 [*]
-max_line_length = 120
 indent_style = space
 indent_size = 2
 tab_width = 8
 end_of_line = lf
 insert_final_newline = true
-charset = utf-8
+
+[*.lua]
+max_line_length = 120
 
 [{Makefile,**/Makefile,runtime/doc/*.txt}]
 indent_style = tab
