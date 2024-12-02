@@ -9734,7 +9734,7 @@ require'lspconfig'.statix.setup{}
 Default config:
 - `cmd` :
   ```lua
-  { "statix" }
+  { "statix", "check", "--stdin" }
   ```
 - `filetypes` :
   ```lua
