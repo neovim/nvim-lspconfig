@@ -5,6 +5,8 @@ local tbl_deep_extend = vim.tbl_deep_extend
 
 local configs = {}
 
+--- @alias lspconfig.Config.command {[1]:string|fun(args: vim.api.keyset.create_user_command.command_args)}|vim.api.keyset.user_command
+
 --- @class lspconfig.Config : vim.lsp.ClientConfig
 --- @field enabled? boolean
 --- @field single_file_support? boolean
@@ -15,6 +17,7 @@ local configs = {}
 --- @field autostart? boolean
 --- @field package _on_attach? fun(client: vim.lsp.Client, bufnr: integer)
 --- @field root_dir? string|fun(filename: string, bufnr: number)
+--- @field commands? table<string, lspconfig.Config.command>
 
 --- @param cmd any
 local function sanitize_cmd(cmd)
