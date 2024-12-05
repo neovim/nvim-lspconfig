@@ -10,56 +10,52 @@ local language_id_mapping = {
   text = 'plaintext',
 }
 
-local filetypes = {
-  'bib',
-  'gitcommit',
-  'markdown',
-  'org',
-  'plaintex',
-  'rst',
-  'rnoweb',
-  'tex',
-  'pandoc',
-  'quarto',
-  'rmd',
-  'context',
-  'html',
-  'xhtml',
-  'mail',
-  'text',
-}
-
 local function get_language_id(_, filetype)
   return language_id_mapping[filetype] or filetype
 end
 
-local enabled_ids = {
-  'bibtex',
-  'context',
-  'gitcommit',
-  'html',
-  'mail',
-  'markdown',
-  'org',
-  'quarto',
-  'restructuredtext',
-  'rmd',
-  'rsweave',
-  'tex',
-  'text',
-  'xhtml',
-}
-
 return {
   default_config = {
     cmd = { 'ltex-ls-plus' },
-    filetypes = filetypes,
+    filetypes = {
+      'bib',
+      'gitcommit',
+      'markdown',
+      'org',
+      'plaintex',
+      'rst',
+      'rnoweb',
+      'tex',
+      'pandoc',
+      'quarto',
+      'rmd',
+      'context',
+      'html',
+      'xhtml',
+      'mail',
+      'text',
+    },
     root_dir = util.find_git_ancestor,
     single_file_support = true,
     get_language_id = get_language_id,
     settings = {
       ltex = {
-        enabled = enabled_ids,
+        enabled = {
+          'bibtex',
+          'context',
+          'gitcommit',
+          'html',
+          'mail',
+          'markdown',
+          'org',
+          'quarto',
+          'restructuredtext',
+          'rmd',
+          'rsweave',
+          'tex',
+          'text',
+          'xhtml',
+        },
       },
     },
   },
