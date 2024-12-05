@@ -39,6 +39,10 @@ local aliases = {
     to = 'buf_ls',
     version = '0.2.1',
   },
+  typst_lsp = {
+    to = 'tinymist',
+    version = '0.2.1',
+  },
 }
 
 ---@return Alias
