@@ -240,7 +240,7 @@ function M.find_git_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     -- Support git directories and git files (worktrees)
     local gitpath = M.path.join(path, '.git')
-    if vim.fn.isdirectory(gitpath) == 1 or (uv.fs_stat(gitpath) or {}).type == 'file' then
+    if vim.fn.isdirectory(gitpath) == 1 or (vim.loop.fs_stat(gitpath) or {}).type == 'file' then
       return path
     end
   end)
@@ -257,7 +257,7 @@ end
 function M.find_package_json_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     local jsonpath = M.path.join(path, 'package.json')
-    if (uv.fs_stat(jsonpath) or {}).type == 'file' then
+    if (vim.loop.fs_stat(jsonpath) or {}).type == 'file' then
       return path
     end
   end)
