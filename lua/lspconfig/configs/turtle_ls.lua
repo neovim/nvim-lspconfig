@@ -17,7 +17,7 @@ if bin_path == nil then
   end
   for _, p in ipairs(paths) do
     local candidate = util.path.join(p, bin_name)
-    if vim.fn.getftype(candidate) == 'file' then
+    if (vim.loop.fs_stat(candidate) or {}).type == 'file' then
       full_path = candidate
       break
     end
