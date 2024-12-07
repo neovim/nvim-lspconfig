@@ -160,6 +160,7 @@ Nvim by running `:help lspconfig-all`.
 - [lexical](#lexical)
 - [lsp_ai](#lsp_ai)
 - [ltex](#ltex)
+- [ltex_plus](#ltex_plus)
 - [lua_ls](#lua_ls)
 - [luau_lsp](#luau_lsp)
 - [lwc_ls](#lwc_ls)
@@ -5637,6 +5638,57 @@ Default config:
   {
     ltex = {
       enabled = { "bibtex", "gitcommit", "markdown", "org", "tex", "restructuredtext", "rsweave", "latex", "quarto", "rmd", "context", "html", "xhtml", "mail", "plaintext" }
+    }
+  }
+  ```
+- `single_file_support` : `true`
+
+
+## ltex_plus
+
+https://github.com/ltex-plus/ltex-ls-plus
+
+LTeX Language Server: LSP language server for LanguageTool 🔍✔️ with support for LaTeX 🎓, Markdown 📝, and others
+
+To install, download the latest [release](https://github.com/ltex-plus/ltex-ls-plus) and ensure `ltex-ls-plus` is on your path.
+
+This server accepts configuration via the `settings` key.
+
+```lua
+  settings = {
+    ltex = {
+      language = "en-GB",
+    },
+  },
+```
+
+To support org files or R sweave, users can define a custom filetype autocommand (or use a plugin which defines these filetypes):
+
+```lua
+vim.cmd [[ autocmd BufRead,BufNewFile *.org set filetype=org ]]
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.ltex_plus.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "ltex-ls-plus" }
+  ```
+- `filetypes` :
+  ```lua
+  { "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "text", "typst", "xhtml" }
+  ```
+- `get_language_id` source (use "gF" to visit): [../lua/lspconfig/configs/ltex_plus.lua:18](../lua/lspconfig/configs/ltex_plus.lua#L18)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ltex_plus.lua:18](../lua/lspconfig/configs/ltex_plus.lua#L18)
+- `settings` :
+  ```lua
+  {
+    ltex = {
+      enabled = { "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "text", "typst", "xhtml" }
     }
   }
   ```
