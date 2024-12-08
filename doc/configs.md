@@ -3849,12 +3849,12 @@ require'lspconfig'.gdscript.setup{}
 ```
 
 Default config:
-- `cmd` source (use "gF" to visit): [../lua/lspconfig/configs/gdscript.lua:11](../lua/lspconfig/configs/gdscript.lua#L11)
+- `cmd` source (use "gF" to visit): [../lua/lspconfig/configs/gdscript.lua:7](../lua/lspconfig/configs/gdscript.lua#L7)
 - `filetypes` :
   ```lua
   { "gd", "gdscript", "gdscript3" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/gdscript.lua:11](../lua/lspconfig/configs/gdscript.lua#L11)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/gdscript.lua:7](../lua/lspconfig/configs/gdscript.lua#L7)
 
 
 ## gdshader_lsp
