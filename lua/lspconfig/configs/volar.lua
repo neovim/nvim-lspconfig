@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 local function get_typescript_server_path(root_dir)
   local project_root = vim.fs.find('node_modules', { path = root_dir, upward = true })[1]
-  return project_root and (util.path.join(project_root, 'node_modules', 'typescript', 'lib')) or ''
+  return project_root and (util.path.join(project_root, 'typescript', 'lib')) or ''
 end
 
 -- https://github.com/johnsoncodehk/volar/blob/20d713b/packages/shared/src/types.ts
