@@ -82,30 +82,20 @@ require'lspconfig'.volar.setup{
 - use a local server and fall back to a global TypeScript Server installation
 
 ```lua
-local util = require 'lspconfig.util'
-local function get_typescript_server_path(root_dir)
-
-  local global_ts = '/home/[yourusernamehere]/.npm/lib/node_modules/typescript/lib'
-  -- Alternative location if installed as root:
-  -- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
-  local found_ts = ''
-  local function check_dir(path)
-    found_ts =  util.path.join(path, 'node_modules', 'typescript', 'lib')
-    if vim.loop.fs_stat(found_ts) then
-      return path
+require'lspconfig'.volar.setup{
+  init_options = {
+    typescript = {
+      tsdk = '/path/to/.npm/lib/node_modules/typescript/lib'
+      -- Alternative location if installed as root:
+      -- tsdk = '/usr/local/lib/node_modules/typescript/lib'
+    }
+  },
+  on_new_config = function(new_config, new_root_dir)
+    local lib_path = vim.fs.find('node_modules/typescript/lib', { path = new_root_dir, upward = true })[1]
+    if lib_path then
+      new_config.init_options.typescript.tsdk = lib_path
     end
   end
-  if util.search_ancestors(root_dir, check_dir) then
-    return found_ts
-  else
-    return global_ts
-  end
-end
-
-require'lspconfig'.volar.setup{
-  on_new_config = function(new_config, new_root_dir)
-    new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
-  end,
 }
 ```
     ]],
