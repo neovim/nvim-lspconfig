@@ -5,7 +5,7 @@ local function get_typescript_server_path(root_dir)
   return project_root and (util.path.join(project_root, 'typescript', 'lib')) or ''
 end
 
--- https://github.com/johnsoncodehk/volar/blob/20d713b/packages/shared/src/types.ts
+-- https://github.com/vuejs/language-tools/blob/master/packages/language-server/lib/types.ts
 local volar_init_options = {
   typescript = {
     tsdk = '',
@@ -30,64 +30,68 @@ return {
   },
   docs = {
     description = [[
-https://github.com/johnsoncodehk/volar/tree/20d713b/packages/vue-language-server
+https://github.com/vuejs/language-tools/tree/master/packages/language-server
 
 Volar language server for Vue
 
 Volar can be installed via npm:
-
 ```sh
 npm install -g @vue/language-server
 ```
 
-Volar by default supports Vue 3 projects. Vue 2 projects need
-[additional configuration](https://github.com/vuejs/language-tools/tree/master/packages/vscode-vue#usage).
+Volar by default supports Vue 3 projects.
+For Vue 2 projects, [additional configuration](https://github.com/vuejs/language-tools/blob/master/extensions/vscode/README.md?plain=1#L19) are required.
 
-**TypeScript support**
-As of release 2.0.0, Volar no longer wraps around ts_ls. For typescript
-support, `ts_ls` needs to be configured with the `@vue/typescript-plugin`
-plugin.
+**Hybrid Mode (by default)**
 
-**Take Over Mode**
+In this mode, the Vue Language Server exclusively manages the CSS/HTML sections.
+You need the `ts_ls` server with the `@vue/typescript-plugin` plugin to support TypeScript in `.vue` files.
+See `ts_ls` section for more information
 
-Volar (prior to 2.0.0), can serve as a language server for both Vue and TypeScript via [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471).
+**No Hybrid Mode**
 
-To enable Take Over Mode, override the default filetypes in `setup{}` as follows:
-
+Volar will run embedded `ts_ls` therefore there is no need to run it separately.
 ```lua
-require'lspconfig'.volar.setup{
-  filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'}
+local lspconfig = require('lspconfig')
+
+lspconfig.volar.setup {
+  -- add filetypes for typescript, javascript and vue
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+  init_options = {
+    vue = {
+      -- disable hybrid mode
+      hybridMode = false,
+    },
+  },
 }
+-- you must remove ts_ls setup
+-- lspconfig.ts_ls.setup {}
 ```
 
 **Overriding the default TypeScript Server used by Volar**
 
-The default config looks for TS in the local `node_modules`. This can lead to issues
+The default config looks for TypeScript in the local `node_modules`. This can lead to issues
 e.g. when working on a [monorepo](https://monorepo.tools/). The alternatives are:
 
 - use a global TypeScript Server installation
-
 ```lua
-require'lspconfig'.volar.setup{
+require'lspconfig'.volar.setup {
   init_options = {
     typescript = {
-      tsdk = '/path/to/.npm/lib/node_modules/typescript/lib'
-      -- Alternative location if installed as root:
-      -- tsdk = '/usr/local/lib/node_modules/typescript/lib'
+      -- replace with your global TypeScript library path
+      tsdk = '/path/to/node_modules/typescript/lib'
     }
   }
 }
 ```
 
 - use a local server and fall back to a global TypeScript Server installation
-
 ```lua
-require'lspconfig'.volar.setup{
+require'lspconfig'.volar.setup {
   init_options = {
     typescript = {
-      tsdk = '/path/to/.npm/lib/node_modules/typescript/lib'
-      -- Alternative location if installed as root:
-      -- tsdk = '/usr/local/lib/node_modules/typescript/lib'
+      -- replace with your global TypeScript library path
+      tsdk = '/path/to/node_modules/typescript/lib'
     }
   },
   on_new_config = function(new_config, new_root_dir)
