@@ -1,9 +1,6 @@
 local util = require 'lspconfig.util'
 
 local bin_name = 'kotlin-language-server'
-if vim.fn.has 'win32' == 1 then
-  bin_name = bin_name .. '.cmd'
-end
 
 --- The presence of one of these files indicates a project root directory
 --
