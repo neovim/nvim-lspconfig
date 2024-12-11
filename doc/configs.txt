@@ -5378,7 +5378,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/kotlin_language_server.lua:23](../lua/lspconfig/configs/kotlin_language_server.lua#L23)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/kotlin_language_server.lua:20](../lua/lspconfig/configs/kotlin_language_server.lua#L20)
 
 
 ## kulala_ls
