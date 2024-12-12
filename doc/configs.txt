@@ -10626,7 +10626,7 @@ Default config:
   { "typst" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/tinymist.lua:4](../lua/lspconfig/configs/tinymist.lua#L4)
-- `single_file_support` : `false`
+- `single_file_support` : `true`
 
 
 ## ts_ls
