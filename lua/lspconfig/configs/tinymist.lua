@@ -5,7 +5,7 @@ return {
     cmd = { 'tinymist' },
     filetypes = { 'typst' },
     root_dir = util.find_git_ancestor,
-    single_file_support = false,
+    single_file_support = true,
   },
   docs = {
     description = [[
