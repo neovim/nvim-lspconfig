@@ -2171,7 +2171,7 @@ Default config:
   ```lua
   { "javascript", "javascriptreact", "typescript", "typescriptreact" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cssmodules_ls.lua:4](../lua/lspconfig/configs/cssmodules_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cssmodules_ls.lua:2](../lua/lspconfig/configs/cssmodules_ls.lua#L2)
 
 
 ## cucumber_language_server
@@ -7760,7 +7760,7 @@ Default config:
   ```lua
   { "pug" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/pug.lua:4](../lua/lspconfig/configs/pug.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/pug.lua:2](../lua/lspconfig/configs/pug.lua#L2)
 
 
 ## puppet
