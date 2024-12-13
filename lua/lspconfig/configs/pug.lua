@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'pug-lsp' },
     filetypes = { 'pug' },
-    root_dir = util.find_package_json_ancestor,
+    root_dir = function(fname)
+      return vim.fs.find('package.json', { path = fname, upward = true })[1]
+    end,
   },
   docs = {
     description = [[

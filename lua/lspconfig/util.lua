@@ -246,18 +246,9 @@ function M.find_git_ancestor(startpath)
   end)
 end
 
-function M.find_package_json_ancestor(startpath)
-  return M.search_ancestors(startpath, function(path)
-    local jsonpath = M.path.join(path, 'package.json')
-    if (vim.loop.fs_stat(jsonpath) or {}).type == 'file' then
-      return path
-    end
-  end)
-end
-
 function M.insert_package_json(config_files, field, fname)
   local path = vim.fn.fnamemodify(fname, ':h')
-  local root_with_package = M.find_package_json_ancestor(path)
+  local root_with_package = vim.fs.find('package.json', { path = path, upward = true })[1]
 
   if root_with_package then
     -- only add package.json if it contains field parameter
@@ -395,6 +386,11 @@ end
 --- @deprecated use `vim.fs.find('node_modules', { path = startpath, upward = true })[1]` instead
 function M.find_node_modules_ancestor(startpath)
   return vim.fs.find('node_modules', { path = startpath, upward = true })[1]
+end
+
+--- @deprecated use `vim.fs.find('package.json', { path = startpath, upward = true })[1]` instead
+function M.find_package_json_ancestor(startpath)
+  return vim.fs.find('package.json', { path = startpath, upward = true })[1]
 end
 
 return M
