@@ -59,7 +59,7 @@ return {
         'compile_commands.json',
         'compile_flags.txt',
         'configure.ac' -- AutoTools
-      )(fname) or util.find_git_ancestor(fname)
+      )(fname) or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
     single_file_support = true,
     capabilities = {

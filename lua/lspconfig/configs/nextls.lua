@@ -4,7 +4,8 @@ return {
   default_config = {
     filetypes = { 'elixir', 'eelixir', 'heex', 'surface' },
     root_dir = function(fname)
-      return util.root_pattern 'mix.exs'(fname) or util.find_git_ancestor(fname)
+      return util.root_pattern 'mix.exs'(fname)
+        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },

@@ -11,7 +11,8 @@ return {
     },
     filetypes = { 'fortran' },
     root_dir = function(fname)
-      return util.root_pattern '.fortls'(fname) or util.find_git_ancestor(fname)
+      return util.root_pattern '.fortls'(fname)
+        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
     settings = {},
   },

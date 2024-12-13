@@ -5,7 +5,8 @@ return {
     cmd = { 'ccls' },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
     root_dir = function(fname)
-      return util.root_pattern('compile_commands.json', '.ccls')(fname) or util.find_git_ancestor(fname)
+      return util.root_pattern('compile_commands.json', '.ccls')(fname)
+        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
     offset_encoding = 'utf-32',
     -- ccls does not support sending a null root directory

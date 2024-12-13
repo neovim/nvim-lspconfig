@@ -236,16 +236,6 @@ function M.root_pattern(...)
   end
 end
 
-function M.find_git_ancestor(startpath)
-  return M.search_ancestors(startpath, function(path)
-    -- Support git directories and git files (worktrees)
-    local gitpath = M.path.join(path, '.git')
-    if vim.fn.isdirectory(gitpath) == 1 or (vim.loop.fs_stat(gitpath) or {}).type == 'file' then
-      return path
-    end
-  end)
-end
-
 function M.insert_package_json(config_files, field, fname)
   local path = vim.fn.fnamemodify(fname, ':h')
   local root_with_package = vim.fs.dirname(vim.fs.find('package.json', { path = path, upward = true })[1])
@@ -391,6 +381,11 @@ end
 --- @deprecated use `vim.fs.dirname(vim.fs.find('package.json', { path = startpath, upward = true })[1])` instead
 function M.find_package_json_ancestor(startpath)
   return vim.fs.dirname(vim.fs.find('package.json', { path = startpath, upward = true })[1])
+end
+
+--- @deprecated use `vim.fs.dirname(vim.fs.find('.git', { path = startpath, upward = true })[1])` instead
+function M.find_git_ancestor(startpath)
+  return vim.fs.dirname(vim.fs.find('.git', { path = startpath, upward = true })[1])
 end
 
 return M

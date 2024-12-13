@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local temp_path = vim.fn.stdpath 'cache'
 
 local function make_cmd(new_config)
@@ -22,7 +20,9 @@ return {
     end,
 
     filetypes = { 'ps1' },
-    root_dir = util.find_git_ancestor,
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
   },
   docs = {

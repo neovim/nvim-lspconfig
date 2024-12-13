@@ -5,7 +5,8 @@ return {
     cmd = { 'tblgen-lsp-server' },
     filetypes = { 'tablegen' },
     root_dir = function(fname)
-      return util.root_pattern 'tablegen_compile_commands.yml'(fname) or util.find_git_ancestor(fname)
+      return util.root_pattern 'tablegen_compile_commands.yml'(fname)
+        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
   },
   docs = {

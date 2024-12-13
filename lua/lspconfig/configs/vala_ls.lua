@@ -27,7 +27,7 @@ return {
     filetypes = { 'vala', 'genie' },
     root_dir = function(fname)
       local root = util.search_ancestors(fname, meson_matcher)
-      return root or util.find_git_ancestor(fname)
+      return root or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },

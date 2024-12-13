@@ -5,7 +5,8 @@ return {
     cmd = { 'ghdl-ls' },
     filetypes = { 'vhdl' },
     root_dir = function(fname)
-      return util.root_pattern 'hdl-prj.json'(fname) or util.find_git_ancestor(fname)
+      return util.root_pattern 'hdl-prj.json'(fname)
+        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },
