@@ -12,8 +12,8 @@ return {
       'typescriptreact',
     },
     root_dir = function(fname)
-      return vim.fs.find('package.json', { path = fname, upward = true })[1]
-        or vim.fs.find('node_modules', { path = fname, upward = true })[1]
+      return vim.fs.dirname(vim.fs.find('package.json', { path = fname, upward = true })[1])
+        or vim.fs.dirname(vim.fs.find('node_modules', { path = fname, upward = true })[1])
         or util.find_git_ancestor(fname)
     end,
     single_file_support = true,
