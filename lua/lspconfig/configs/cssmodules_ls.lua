@@ -3,7 +3,7 @@ return {
     cmd = { 'cssmodules-language-server' },
     filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
     root_dir = function(fname)
-      return vim.fs.find('package.json', { path = fname, upward = true })[1]
+      return vim.fs.dirname(vim.fs.find('package.json', { path = fname, upward = true })[1])
     end,
   },
   docs = {

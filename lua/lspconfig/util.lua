@@ -248,7 +248,7 @@ end
 
 function M.insert_package_json(config_files, field, fname)
   local path = vim.fn.fnamemodify(fname, ':h')
-  local root_with_package = vim.fs.find('package.json', { path = path, upward = true })[1]
+  local root_with_package = vim.fs.dirname(vim.fs.find('package.json', { path = path, upward = true })[1])
 
   if root_with_package then
     -- only add package.json if it contains field parameter
@@ -380,17 +380,17 @@ end
 
 --- @deprecated use `vim.fs.find('.hg', { path = startpath, upward = true })[1]` instead
 function M.find_mercurial_ancestor(startpath)
-  return vim.fs.find('.hg', { path = startpath, upward = true })[1]
+  return vim.fs.dirname(vim.fs.find('.hg', { path = startpath, upward = true })[1])
 end
 
 --- @deprecated use `vim.fs.find('node_modules', { path = startpath, upward = true })[1]` instead
 function M.find_node_modules_ancestor(startpath)
-  return vim.fs.find('node_modules', { path = startpath, upward = true })[1]
+  return vim.fs.dirname(vim.fs.find('node_modules', { path = startpath, upward = true })[1])
 end
 
 --- @deprecated use `vim.fs.find('package.json', { path = startpath, upward = true })[1]` instead
 function M.find_package_json_ancestor(startpath)
-  return vim.fs.find('package.json', { path = startpath, upward = true })[1]
+  return vim.fs.dirname(vim.fs.find('package.json', { path = startpath, upward = true })[1])
 end
 
 return M
