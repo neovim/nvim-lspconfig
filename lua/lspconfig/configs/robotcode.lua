@@ -17,7 +17,7 @@ https://robotcode.io
 RobotCode - Language Server Protocol implementation for Robot Framework.
 ]],
     default_config = {
-      root_dir = "util.root_pattern('robot.toml', 'pyproject.toml', 'Pipfile')(fname) or util.find_git_ancestor(fname)",
+      root_dir = "util.root_pattern('robot.toml', 'pyproject.toml', 'Pipfile')(fname) or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])",
       settings = {},
     },
   },

@@ -19,7 +19,7 @@ return {
       return util.root_pattern 'leanpkg.toml'(fname)
         or util.root_pattern 'leanpkg.path'(fname)
         or stdlib_dir
-        or util.find_git_ancestor(fname)
+        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },

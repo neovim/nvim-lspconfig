@@ -45,7 +45,7 @@ return {
     cmd = { 'java' },
     filetypes = { 'vdmsl', 'vdmpp', 'vdmrt' },
     root_dir = function(fname)
-      return util.find_git_ancestor(fname) or find_vscode_ancestor(fname)
+      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]) or find_vscode_ancestor(fname)
     end,
     options = {
       java = vim.env.JAVA_HOME and util.path.join(vim.env.JAVA_HOME, 'bin', 'java') or 'java',

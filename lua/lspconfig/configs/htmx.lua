@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'htmx-lsp' },
@@ -53,7 +51,7 @@ return {
     },
     single_file_support = true,
     root_dir = function(fname)
-      return util.find_git_ancestor(fname)
+      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
   },
   docs = {

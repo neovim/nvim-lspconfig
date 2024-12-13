@@ -70,7 +70,7 @@ return {
       return cargo_workspace_root
         or cargo_crate_dir
         or util.root_pattern 'rust-project.json'(fname)
-        or util.find_git_ancestor(fname)
+        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
     capabilities = {
       experimental = {

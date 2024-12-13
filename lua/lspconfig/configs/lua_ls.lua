@@ -20,7 +20,7 @@ return {
         return root
       end
       local root_lua = util.root_pattern 'lua/'(fname) or ''
-      local root_git = util.find_git_ancestor(fname) or ''
+      local root_git = vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]) or ''
       if root_lua == '' and root_git == '' then
         return
       end

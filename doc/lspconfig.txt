@@ -294,9 +294,17 @@ below returns a function that takes as its argument the current buffer path.
   filesystem. Parent directories are traversed once per pattern, in the order
   the patterns are specified. >
    root_dir = util.root_pattern('pyproject.toml', 'requirements.txt')
-- `util.find_git_ancestor`: a function that locates the first parent directory
-  containing a `.git` directory. >
-   root_dir = util.find_git_ancestor
+
+- Locate the first parent dir containing a ".git" file or directory: >lua
+  vim.fs.dirname(vim.fs.find('.git', { path = root_dir, upward = true })[1])
+<
+  If you have Nvim 0.10 or newer then >lua
+  vim.fs.root(root_dir, ".git")
+<
+  can be used instead.
+  - Note: The old `util.find_git_ancestor` API is deprecated and will
+    be removed.
+<
 - Locate the first parent dir containing a "node_modules" dir: >lua
   vim.fs.dirname(vim.fs.find('node_modules', { path = root_dir, upward = true })[1])
 <

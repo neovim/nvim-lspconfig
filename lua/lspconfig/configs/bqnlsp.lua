@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 -- set os dependent library path
 local function library_path(path, cmd_env)
   path = path or '/usr/local/lib'
@@ -16,7 +14,9 @@ return {
   default_config = {
     cmd = { 'bqnlsp' },
     filetypes = { 'bqn' },
-    root_dir = util.find_git_ancestor,
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
     libcbqnPath = nil,
     on_new_config = function(new_config, _)

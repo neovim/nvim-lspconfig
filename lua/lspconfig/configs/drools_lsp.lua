@@ -37,7 +37,9 @@ end
 return {
   default_config = {
     filetypes = { 'drools' },
-    root_dir = util.find_git_ancestor,
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
     on_new_config = function(new_config)
       new_config.cmd = get_cmd(new_config)
