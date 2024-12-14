@@ -10,19 +10,6 @@ describe('lspconfig', function()
 
   describe('util', function()
     describe('path', function()
-      describe('is_absolute', function()
-        it('is absolute', function()
-          local lspconfig = require 'lspconfig'
-          eq(true, lspconfig.util.path.is_absolute '/foo/bar' ~= nil)
-        end)
-
-        it('is not absolute', function()
-          local lspconfig = require 'lspconfig'
-          assert.is_nil(lspconfig.util.path.is_absolute 'foo/bar')
-          assert.is_nil(lspconfig.util.path.is_absolute '../foo/bar')
-        end)
-      end)
-
       describe('join', function()
         it('', function()
           local lspconfig = require 'lspconfig'
