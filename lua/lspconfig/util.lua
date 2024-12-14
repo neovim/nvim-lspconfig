@@ -107,16 +107,6 @@ M.path = (function()
     end
   end
 
-  --- @param filename string
-  --- @return boolean
-  local function is_absolute(filename)
-    if iswin then
-      return filename:match '^%a:' or filename:match '^\\\\'
-    else
-      return filename:match '^/'
-    end
-  end
-
   local function path_join(...)
     return table.concat(M.tbl_flatten { ... }, '/')
   end
@@ -175,7 +165,6 @@ M.path = (function()
   local path_separator = iswin and ';' or ':'
 
   return {
-    is_absolute = is_absolute,
     join = path_join,
     traverse_parents = traverse_parents,
     iterate_parents = iterate_parents,
