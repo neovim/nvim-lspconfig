@@ -740,7 +740,7 @@ Default config:
   ```lua
   { "asm", "vmasm" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/asm_lsp.lua:4](../lua/lspconfig/configs/asm_lsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/asm_lsp.lua:2](../lua/lspconfig/configs/asm_lsp.lua#L2)
 
 
 ## ast_grep
@@ -1050,7 +1050,7 @@ Default config:
   ```lua
   { "bash", "sh" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bashls.lua:4](../lua/lspconfig/configs/bashls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bashls.lua:2](../lua/lspconfig/configs/bashls.lua#L2)
 - `settings` :
   ```lua
   {
@@ -1158,7 +1158,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/beancount.lua:4](../lua/lspconfig/configs/beancount.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/beancount.lua:2](../lua/lspconfig/configs/beancount.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -1210,7 +1210,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bicep.lua:4](../lua/lspconfig/configs/bicep.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bicep.lua:2](../lua/lspconfig/configs/bicep.lua#L2)
 
 
 ## biome
@@ -1259,7 +1259,7 @@ Default config:
   ```lua
   { "bitbake" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bitbake_language_server.lua:4](../lua/lspconfig/configs/bitbake_language_server.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bitbake_language_server.lua:2](../lua/lspconfig/configs/bitbake_language_server.lua#L2)
 
 
 ## bitbake_ls
@@ -1289,7 +1289,7 @@ Default config:
   ```lua
   { "bitbake" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bitbake_ls.lua:4](../lua/lspconfig/configs/bitbake_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bitbake_ls.lua:2](../lua/lspconfig/configs/bitbake_ls.lua#L2)
 - `single_file_support` : `false`
 
 
@@ -1322,7 +1322,7 @@ Default config:
   ```lua
   { "blueprint" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/blueprint_ls.lua:4](../lua/lspconfig/configs/blueprint_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/blueprint_ls.lua:2](../lua/lspconfig/configs/blueprint_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -1352,8 +1352,8 @@ Default config:
   ```lua
   { "bqn" }
   ```
-- `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/bqnlsp.lua:16](../lua/lspconfig/configs/bqnlsp.lua#L16)
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bqnlsp.lua:16](../lua/lspconfig/configs/bqnlsp.lua#L16)
+- `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/bqnlsp.lua:14](../lua/lspconfig/configs/bqnlsp.lua#L14)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bqnlsp.lua:14](../lua/lspconfig/configs/bqnlsp.lua#L14)
 - `single_file_support` : `true`
 
 
@@ -1400,7 +1400,7 @@ Default config:
   ```lua
   { "bsl", "os" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bsl_ls.lua:4](../lua/lspconfig/configs/bsl_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bsl_ls.lua:2](../lua/lspconfig/configs/bsl_ls.lua#L2)
 
 
 ## buck2
@@ -1453,7 +1453,7 @@ Default config:
   ```lua
   { "mlir" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/buddy_ls.lua:4](../lua/lspconfig/configs/buddy_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/buddy_ls.lua:2](../lua/lspconfig/configs/buddy_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -1733,7 +1733,7 @@ Default config:
   ```lua
   { "circom" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/circom-lsp.lua:4](../lua/lspconfig/configs/circom-lsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/circom-lsp.lua:2](../lua/lspconfig/configs/circom-lsp.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -1877,7 +1877,7 @@ Default config:
   ```lua
   { "cobol" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cobol_ls.lua:4](../lua/lspconfig/configs/cobol_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cobol_ls.lua:2](../lua/lspconfig/configs/cobol_ls.lua#L2)
 
 
 ## codeqlls
@@ -2201,7 +2201,7 @@ Default config:
   ```lua
   { "cucumber" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cucumber_language_server.lua:4](../lua/lspconfig/configs/cucumber_language_server.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cucumber_language_server.lua:2](../lua/lspconfig/configs/cucumber_language_server.lua#L2)
 
 
 ## custom_elements_ls
@@ -2275,7 +2275,7 @@ Default config:
   ```lua
   { "cypher" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cypher_ls.lua:4](../lua/lspconfig/configs/cypher_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cypher_ls.lua:2](../lua/lspconfig/configs/cypher_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -2337,7 +2337,7 @@ Default config:
   ```lua
   { "dfy", "dafny" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/dafny.lua:4](../lua/lspconfig/configs/dafny.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/dafny.lua:2](../lua/lspconfig/configs/dafny.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -2599,7 +2599,7 @@ Default config:
   ```lua
   { "dhall" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/dhall_lsp_server.lua:4](../lua/lspconfig/configs/dhall_lsp_server.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/dhall_lsp_server.lua:2](../lua/lspconfig/configs/dhall_lsp_server.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -2623,7 +2623,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/diagnosticls.lua:5](../lua/lspconfig/configs/diagnosticls.lua#L5)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/diagnosticls.lua:3](../lua/lspconfig/configs/diagnosticls.lua#L3)
 - `single_file_support` : `true`
 
 
@@ -2651,7 +2651,7 @@ Default config:
   ```lua
   { "tex", "plaintex", "context" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/digestif.lua:4](../lua/lspconfig/configs/digestif.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/digestif.lua:2](../lua/lspconfig/configs/digestif.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -2675,7 +2675,7 @@ Default config:
   ```lua
   { "html", "htmldjango" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/djlsp.lua:4](../lua/lspconfig/configs/djlsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/djlsp.lua:2](../lua/lspconfig/configs/djlsp.lua#L2)
 - `settings` :
   ```lua
   {}
@@ -2778,7 +2778,7 @@ Default config:
   ```lua
   { "smt2", "tptp", "p", "cnf", "icnf", "zf" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/dolmenls.lua:4](../lua/lspconfig/configs/dolmenls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/dolmenls.lua:2](../lua/lspconfig/configs/dolmenls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -2805,7 +2805,7 @@ Default config:
   ```lua
   { "dot" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/dotls.lua:4](../lua/lspconfig/configs/dotls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/dotls.lua:2](../lua/lspconfig/configs/dotls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -3025,7 +3025,7 @@ Default config:
   ```lua
   { "efm-langserver" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/efm.lua:4](../lua/lspconfig/configs/efm.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/efm.lua:2](../lua/lspconfig/configs/efm.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -3187,7 +3187,7 @@ Default config:
   ```lua
   { "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "typescriptreact", "htmlangular" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/emmet_language_server.lua:4](../lua/lspconfig/configs/emmet_language_server.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/emmet_language_server.lua:2](../lua/lspconfig/configs/emmet_language_server.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -3214,7 +3214,7 @@ Default config:
   ```lua
   { "astro", "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "svelte", "typescriptreact", "vue", "htmlangular" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/emmet_ls.lua:4](../lua/lspconfig/configs/emmet_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/emmet_ls.lua:2](../lua/lspconfig/configs/emmet_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -3339,7 +3339,7 @@ Default config:
   ```lua
   { "rst" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/esbonio.lua:4](../lua/lspconfig/configs/esbonio.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/esbonio.lua:2](../lua/lspconfig/configs/esbonio.lua#L2)
 
 
 ## eslint
@@ -3457,7 +3457,7 @@ Default config:
   ```lua
   { "fsd" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/facility_language_server.lua:4](../lua/lspconfig/configs/facility_language_server.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/facility_language_server.lua:2](../lua/lspconfig/configs/facility_language_server.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -3481,7 +3481,7 @@ Default config:
   ```lua
   { "fennel" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/fennel_language_server.lua:4](../lua/lspconfig/configs/fennel_language_server.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/fennel_language_server.lua:2](../lua/lspconfig/configs/fennel_language_server.lua#L2)
 - `settings` :
   ```lua
   {}
@@ -3557,7 +3557,7 @@ Default config:
   ```lua
   { "fish" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/fish_lsp.lua:4](../lua/lspconfig/configs/fish_lsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/fish_lsp.lua:2](../lua/lspconfig/configs/fish_lsp.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -3614,7 +3614,7 @@ Default config:
   ```lua
   { "flux" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/flux_lsp.lua:4](../lua/lspconfig/configs/flux_lsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/flux_lsp.lua:2](../lua/lspconfig/configs/flux_lsp.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -3805,7 +3805,7 @@ Default config:
   ```lua
   { "fstar" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/fstar.lua:4](../lua/lspconfig/configs/fstar.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/fstar.lua:2](../lua/lspconfig/configs/fstar.lua#L2)
 
 
 ## futhark_lsp
@@ -3833,7 +3833,7 @@ Default config:
   ```lua
   { "futhark", "fut" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/futhark_lsp.lua:4](../lua/lspconfig/configs/futhark_lsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/futhark_lsp.lua:2](../lua/lspconfig/configs/futhark_lsp.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -3955,7 +3955,7 @@ Default config:
   ```lua
   { "dts" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ginko_ls.lua:4](../lua/lspconfig/configs/ginko_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ginko_ls.lua:2](../lua/lspconfig/configs/ginko_ls.lua#L2)
 - `settings` :
   ```lua
   {}
@@ -4032,7 +4032,7 @@ Default config:
   ```lua
   { "wgsl" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/glasgow.lua:4](../lua/lspconfig/configs/glasgow.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/glasgow.lua:2](../lua/lspconfig/configs/glasgow.lua#L2)
 - `settings` :
   ```lua
   {}
@@ -4132,7 +4132,7 @@ Default config:
   ```lua
   { "glsl", "vert", "tesc", "tese", "frag", "geom", "comp" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/glsl_analyzer.lua:4](../lua/lspconfig/configs/glsl_analyzer.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/glsl_analyzer.lua:2](../lua/lspconfig/configs/glsl_analyzer.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -4170,7 +4170,7 @@ Default config:
   ```lua
   { "glsl", "vert", "tesc", "tese", "frag", "geom", "comp" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/glslls.lua:4](../lua/lspconfig/configs/glslls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/glslls.lua:2](../lua/lspconfig/configs/glslls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -4307,7 +4307,7 @@ Default config:
     clientId = "client_BaDkMgx4X19X9UxxYRCXZo"
   }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/grammarly.lua:4](../lua/lspconfig/configs/grammarly.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/grammarly.lua:2](../lua/lspconfig/configs/grammarly.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -4441,7 +4441,7 @@ Default config:
   ```lua
   { "c", "cpp", "cs", "gitcommit", "go", "html", "java", "javascript", "lua", "markdown", "nix", "python", "ruby", "rust", "swift", "toml", "typescript", "typescriptreact" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/harper_ls.lua:4](../lua/lspconfig/configs/harper_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/harper_ls.lua:2](../lua/lspconfig/configs/harper_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -4531,7 +4531,7 @@ Default config:
   ```lua
   { "vhdl", "verilog", "systemverilog" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/hdl_checker.lua:4](../lua/lspconfig/configs/hdl_checker.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/hdl_checker.lua:2](../lua/lspconfig/configs/hdl_checker.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -4726,7 +4726,7 @@ Default config:
   ```lua
   { "hoon" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/hoon_ls.lua:4](../lua/lspconfig/configs/hoon_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/hoon_ls.lua:2](../lua/lspconfig/configs/hoon_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -4812,7 +4812,7 @@ Default config:
   ```lua
   { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/htmx.lua:4](../lua/lspconfig/configs/htmx.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/htmx.lua:2](../lua/lspconfig/configs/htmx.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -4863,7 +4863,7 @@ Default config:
   ```lua
   { "hyprlang" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/hyprls.lua:4](../lua/lspconfig/configs/hyprls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/hyprls.lua:2](../lua/lspconfig/configs/hyprls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -5134,7 +5134,7 @@ Default config:
   ```lua
   "jinja_lsp"
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/jinja_lsp.lua:4](../lua/lspconfig/configs/jinja_lsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/jinja_lsp.lua:2](../lua/lspconfig/configs/jinja_lsp.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -5169,7 +5169,7 @@ Default config:
   ```lua
   { "jq" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/jqls.lua:3](../lua/lspconfig/configs/jqls.lua#L3)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/jqls.lua:2](../lua/lspconfig/configs/jqls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -5216,7 +5216,7 @@ Default config:
     provideFormatter = true
   }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/jsonls.lua:4](../lua/lspconfig/configs/jsonls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/jsonls.lua:2](../lua/lspconfig/configs/jsonls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -5338,7 +5338,7 @@ Default config:
   ```lua
   { "koka" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/koka.lua:4](../lua/lspconfig/configs/koka.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/koka.lua:2](../lua/lspconfig/configs/koka.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -5401,7 +5401,7 @@ Default config:
   ```lua
   { "http" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/kulala_ls.lua:4](../lua/lspconfig/configs/kulala_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/kulala_ls.lua:2](../lua/lspconfig/configs/kulala_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -5501,7 +5501,7 @@ Default config:
   ```lua
   { "llw" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/lelwel_ls.lua:4](../lua/lspconfig/configs/lelwel_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/lelwel_ls.lua:2](../lua/lspconfig/configs/lelwel_ls.lua#L2)
 
 
 ## lemminx
@@ -5526,7 +5526,7 @@ Default config:
   ```lua
   { "xml", "xsd", "xsl", "xslt", "svg" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/lemminx.lua:4](../lua/lspconfig/configs/lemminx.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/lemminx.lua:2](../lua/lspconfig/configs/lemminx.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -5631,8 +5631,8 @@ Default config:
   ```lua
   { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc", "quarto", "rmd", "context", "html", "xhtml", "mail", "text" }
   ```
-- `get_language_id` source (use "gF" to visit): [../lua/lspconfig/configs/ltex.lua:53](../lua/lspconfig/configs/ltex.lua#L53)
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ltex.lua:53](../lua/lspconfig/configs/ltex.lua#L53)
+- `get_language_id` source (use "gF" to visit): [../lua/lspconfig/configs/ltex.lua:51](../lua/lspconfig/configs/ltex.lua#L51)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ltex.lua:51](../lua/lspconfig/configs/ltex.lua#L51)
 - `settings` :
   ```lua
   {
@@ -5682,8 +5682,8 @@ Default config:
   ```lua
   { "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "text", "typst", "xhtml" }
   ```
-- `get_language_id` source (use "gF" to visit): [../lua/lspconfig/configs/ltex_plus.lua:18](../lua/lspconfig/configs/ltex_plus.lua#L18)
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ltex_plus.lua:18](../lua/lspconfig/configs/ltex_plus.lua#L18)
+- `get_language_id` source (use "gF" to visit): [../lua/lspconfig/configs/ltex_plus.lua:16](../lua/lspconfig/configs/ltex_plus.lua#L16)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ltex_plus.lua:16](../lua/lspconfig/configs/ltex_plus.lua#L16)
 - `settings` :
   ```lua
   {
@@ -5789,7 +5789,7 @@ Default config:
   ```lua
   { "luau" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/luau_lsp.lua:4](../lua/lspconfig/configs/luau_lsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/luau_lsp.lua:2](../lua/lspconfig/configs/luau_lsp.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -5932,7 +5932,7 @@ Default config:
   ```lua
   { "marko" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/marko-js.lua:4](../lua/lspconfig/configs/marko-js.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/marko-js.lua:2](../lua/lspconfig/configs/marko-js.lua#L2)
 
 
 ## marksman
@@ -5983,7 +5983,7 @@ Default config:
   ```lua
   { "matlab" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/matlab_ls.lua:4](../lua/lspconfig/configs/matlab_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/matlab_ls.lua:2](../lua/lspconfig/configs/matlab_ls.lua#L2)
 - `settings` :
   ```lua
   {
@@ -6187,7 +6187,7 @@ Default config:
   ```lua
   { "mlir" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/mlir_lsp_server.lua:4](../lua/lspconfig/configs/mlir_lsp_server.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/mlir_lsp_server.lua:2](../lua/lspconfig/configs/mlir_lsp_server.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -6239,7 +6239,7 @@ Default config:
   ```lua
   { "metamath-zero" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/mm0_ls.lua:4](../lua/lspconfig/configs/mm0_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/mm0_ls.lua:2](../lua/lspconfig/configs/mm0_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -6265,7 +6265,7 @@ Default config:
   ```lua
   { "mojo" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/mojo.lua:4](../lua/lspconfig/configs/mojo.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/mojo.lua:2](../lua/lspconfig/configs/mojo.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -6361,7 +6361,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/msbuild_project_tools_server.lua:6](../lua/lspconfig/configs/msbuild_project_tools_server.lua#L6)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/msbuild_project_tools_server.lua:4](../lua/lspconfig/configs/msbuild_project_tools_server.lua#L4)
 
 
 ## mutt_ls
@@ -6388,7 +6388,7 @@ Default config:
   ```lua
   { "muttrc", "neomuttrc" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/mutt_ls.lua:4](../lua/lspconfig/configs/mutt_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/mutt_ls.lua:2](../lua/lspconfig/configs/mutt_ls.lua#L2)
 - `settings` :
   ```lua
   {}
@@ -6613,7 +6613,7 @@ Default config:
   ```lua
   { "ncl", "nickel" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/nickel_ls.lua:4](../lua/lspconfig/configs/nickel_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/nickel_ls.lua:2](../lua/lspconfig/configs/nickel_ls.lua#L2)
 
 
 ## nil_ls
@@ -6814,7 +6814,7 @@ Default config:
   ```lua
   { "nu" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/nushell.lua:4](../lua/lspconfig/configs/nushell.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/nushell.lua:2](../lua/lspconfig/configs/nushell.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -7036,7 +7036,7 @@ Default config:
   ```lua
   { "opencl" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/opencl_ls.lua:4](../lua/lspconfig/configs/opencl_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/opencl_ls.lua:2](../lua/lspconfig/configs/opencl_ls.lua#L2)
 
 
 ## openedge_ls
@@ -7106,7 +7106,7 @@ Default config:
   ```lua
   { "openscad" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/openscad_ls.lua:4](../lua/lspconfig/configs/openscad_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/openscad_ls.lua:2](../lua/lspconfig/configs/openscad_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -7135,7 +7135,7 @@ Default config:
   ```lua
   { "openscad" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/openscad_lsp.lua:4](../lua/lspconfig/configs/openscad_lsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/openscad_lsp.lua:2](../lua/lspconfig/configs/openscad_lsp.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -7159,7 +7159,7 @@ Default config:
   ```lua
   { "pact" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/pact_ls.lua:4](../lua/lspconfig/configs/pact_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/pact_ls.lua:2](../lua/lspconfig/configs/pact_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -7250,7 +7250,7 @@ Default config:
   ```lua
   { "perl" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/perlls.lua:4](../lua/lspconfig/configs/perlls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/perlls.lua:2](../lua/lspconfig/configs/perlls.lua#L2)
 - `settings` :
   ```lua
   {
@@ -7301,7 +7301,7 @@ Default config:
   ```lua
   { "perl" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/perlnavigator.lua:4](../lua/lspconfig/configs/perlnavigator.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/perlnavigator.lua:2](../lua/lspconfig/configs/perlnavigator.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -7328,7 +7328,7 @@ Default config:
   ```lua
   { "perl" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/perlpls.lua:4](../lua/lspconfig/configs/perlpls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/perlpls.lua:2](../lua/lspconfig/configs/perlpls.lua#L2)
 - `settings` :
   ```lua
   {
@@ -7365,7 +7365,7 @@ Default config:
   ```lua
   { "pest" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/pest_ls.lua:4](../lua/lspconfig/configs/pest_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/pest_ls.lua:2](../lua/lspconfig/configs/pest_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -7463,7 +7463,7 @@ Default config:
   ```lua
   { "PKGBUILD" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/pkgbuild_language_server.lua:4](../lua/lspconfig/configs/pkgbuild_language_server.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/pkgbuild_language_server.lua:2](../lua/lspconfig/configs/pkgbuild_language_server.lua#L2)
 
 
 ## please
@@ -7512,7 +7512,7 @@ Default config:
   ```lua
   { "pory" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/poryscript_pls.lua:4](../lua/lspconfig/configs/poryscript_pls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/poryscript_pls.lua:2](../lua/lspconfig/configs/poryscript_pls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -7590,8 +7590,8 @@ Default config:
   ```lua
   { "ps1" }
   ```
-- `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/powershell_es.lua:15](../lua/lspconfig/configs/powershell_es.lua#L15)
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/powershell_es.lua:15](../lua/lspconfig/configs/powershell_es.lua#L15)
+- `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/powershell_es.lua:13](../lua/lspconfig/configs/powershell_es.lua#L13)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/powershell_es.lua:13](../lua/lspconfig/configs/powershell_es.lua#L13)
 - `shell` :
   ```lua
   "pwsh"
@@ -7679,7 +7679,7 @@ Default config:
   ```lua
   { "markdown" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/prosemd_lsp.lua:4](../lua/lspconfig/configs/prosemd_lsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/prosemd_lsp.lua:2](../lua/lspconfig/configs/prosemd_lsp.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -7708,7 +7708,7 @@ Default config:
   ```lua
   { "proto" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/protols.lua:4](../lua/lspconfig/configs/protols.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/protols.lua:2](../lua/lspconfig/configs/protols.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -8016,7 +8016,7 @@ Default config:
   ```lua
   { "qml", "qmljs" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/qmlls.lua:4](../lua/lspconfig/configs/qmlls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/qmlls.lua:2](../lua/lspconfig/configs/qmlls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -8076,7 +8076,7 @@ Default config:
   ```lua
   2
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/r_language_server.lua:4](../lua/lspconfig/configs/r_language_server.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/r_language_server.lua:2](../lua/lspconfig/configs/r_language_server.lua#L2)
 
 
 ## racket_langserver
@@ -8103,7 +8103,7 @@ Default config:
   ```lua
   { "racket", "scheme" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/racket_langserver.lua:4](../lua/lspconfig/configs/racket_langserver.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/racket_langserver.lua:2](../lua/lspconfig/configs/racket_langserver.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -8143,7 +8143,7 @@ Default config:
   ```lua
   { "raku" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/raku_navigator.lua:4](../lua/lspconfig/configs/raku_navigator.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/raku_navigator.lua:2](../lua/lspconfig/configs/raku_navigator.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -8474,7 +8474,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/rnix.lua:4](../lua/lspconfig/configs/rnix.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/rnix.lua:2](../lua/lspconfig/configs/rnix.lua#L2)
 - `settings` :
   ```lua
   {}
@@ -8550,7 +8550,7 @@ Default config:
   ```lua
   { "roc" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/roc_ls.lua:4](../lua/lspconfig/configs/roc_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/roc_ls.lua:2](../lua/lspconfig/configs/roc_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -8580,7 +8580,7 @@ Default config:
   ```lua
   { "javascript", "javascriptreact", "json", "typescript", "typescript.tsx", "typescriptreact" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/rome.lua:4](../lua/lspconfig/configs/rome.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/rome.lua:2](../lua/lspconfig/configs/rome.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -8761,7 +8761,7 @@ Default config:
   ```lua
   { "rune" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/rune_languageserver.lua:4](../lua/lspconfig/configs/rune_languageserver.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/rune_languageserver.lua:2](../lua/lspconfig/configs/rune_languageserver.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -8842,7 +8842,7 @@ Default config:
   ```lua
   { "sls" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/salt_ls.lua:4](../lua/lspconfig/configs/salt_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/salt_ls.lua:2](../lua/lspconfig/configs/salt_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -9025,7 +9025,7 @@ Default config:
   ```lua
   { "hlsl", "shaderslang" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/slangd.lua:9](../lua/lspconfig/configs/slangd.lua#L9)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/slangd.lua:8](../lua/lspconfig/configs/slangd.lua#L8)
 - `single_file_support` : `true`
 
 
@@ -9061,7 +9061,7 @@ Default config:
   ```lua
   { "slint" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/slint_lsp.lua:4](../lua/lspconfig/configs/slint_lsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/slint_lsp.lua:2](../lua/lspconfig/configs/slint_lsp.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -9220,7 +9220,7 @@ Default config:
   ```lua
   { "solidity" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/solang.lua:4](../lua/lspconfig/configs/solang.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/solang.lua:2](../lua/lspconfig/configs/solang.lua#L2)
 
 
 ## solargraph
@@ -9747,7 +9747,7 @@ Default config:
   ```lua
   { "star", "bzl", "BUILD.bazel" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/starlark_rust.lua:4](../lua/lspconfig/configs/starlark_rust.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/starlark_rust.lua:2](../lua/lspconfig/configs/starlark_rust.lua#L2)
 
 
 ## starpls
@@ -9930,7 +9930,7 @@ Default config:
   ```lua
   { "superhtml", "html" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/superhtml.lua:4](../lua/lspconfig/configs/superhtml.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/superhtml.lua:2](../lua/lspconfig/configs/superhtml.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -10029,7 +10029,7 @@ Default config:
   ```lua
   { "verilog", "systemverilog" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/svls.lua:4](../lua/lspconfig/configs/svls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/svls.lua:2](../lua/lspconfig/configs/svls.lua#L2)
 
 
 ## swift_mesonls
@@ -10113,7 +10113,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/tabby_ml.lua:4](../lua/lspconfig/configs/tabby_ml.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/tabby_ml.lua:2](../lua/lspconfig/configs/tabby_ml.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -10193,7 +10193,7 @@ Default config:
   ```lua
   { "toml" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/taplo.lua:4](../lua/lspconfig/configs/taplo.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/taplo.lua:2](../lua/lspconfig/configs/taplo.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -10464,7 +10464,7 @@ Default config:
   ```lua
   { "text", "tex", "org" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/textlsp.lua:4](../lua/lspconfig/configs/textlsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/textlsp.lua:2](../lua/lspconfig/configs/textlsp.lua#L2)
 - `settings` :
   ```lua
   {
@@ -10602,7 +10602,7 @@ Default config:
   ```lua
   { "tiltfile" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/tilt_ls.lua:4](../lua/lspconfig/configs/tilt_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/tilt_ls.lua:2](../lua/lspconfig/configs/tilt_ls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -10625,7 +10625,7 @@ Default config:
   ```lua
   { "typst" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/tinymist.lua:4](../lua/lspconfig/configs/tinymist.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/tinymist.lua:2](../lua/lspconfig/configs/tinymist.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -10974,7 +10974,7 @@ Default config:
   ```lua
   { "typst" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/typst_lsp.lua:4](../lua/lspconfig/configs/typst_lsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/typst_lsp.lua:2](../lua/lspconfig/configs/typst_lsp.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -11027,7 +11027,7 @@ Default config:
   ```lua
   { "ungrammar" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ungrammar_languageserver.lua:4](../lua/lspconfig/configs/ungrammar_languageserver.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ungrammar_languageserver.lua:2](../lua/lspconfig/configs/ungrammar_languageserver.lua#L2)
 - `settings` :
   ```lua
   {
@@ -11125,7 +11125,7 @@ Default config:
   ```lua
   { "uvl" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/uvls.lua:3](../lua/lspconfig/configs/uvls.lua#L3)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/uvls.lua:2](../lua/lspconfig/configs/uvls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -11185,7 +11185,7 @@ Default config:
   ```lua
   { "yaml.openapi", "json.openapi" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/vacuum.lua:4](../lua/lspconfig/configs/vacuum.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/vacuum.lua:2](../lua/lspconfig/configs/vacuum.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -11311,7 +11311,7 @@ Default config:
   ```lua
   { "systemverilog", "verilog" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/verible.lua:4](../lua/lspconfig/configs/verible.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/verible.lua:2](../lua/lspconfig/configs/verible.lua#L2)
 
 
 ## veridian
@@ -11341,7 +11341,7 @@ Default config:
   ```lua
   { "systemverilog", "verilog" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/veridian.lua:4](../lua/lspconfig/configs/veridian.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/veridian.lua:2](../lua/lspconfig/configs/veridian.lua#L2)
 
 
 ## veryl_ls
@@ -11369,7 +11369,7 @@ Default config:
   ```lua
   { "veryl" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/veryl_ls.lua:4](../lua/lspconfig/configs/veryl_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/veryl_ls.lua:2](../lua/lspconfig/configs/veryl_ls.lua#L2)
 
 
 ## vhdl_ls
@@ -11464,7 +11464,7 @@ Default config:
     vimruntime = ""
   }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/vimls.lua:4](../lua/lspconfig/configs/vimls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/vimls.lua:2](../lua/lspconfig/configs/vimls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -11863,7 +11863,7 @@ Default config:
   ```lua
   { "yaml", "yaml.docker-compose", "yaml.gitlab" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/yamlls.lua:4](../lua/lspconfig/configs/yamlls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/yamlls.lua:2](../lua/lspconfig/configs/yamlls.lua#L2)
 - `settings` :
   ```lua
   {
@@ -11897,7 +11897,7 @@ Default config:
   ```lua
   { "yang" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/yang_lsp.lua:4](../lua/lspconfig/configs/yang_lsp.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/yang_lsp.lua:2](../lua/lspconfig/configs/yang_lsp.lua#L2)
 
 
 ## yls
@@ -11924,7 +11924,7 @@ Default config:
   ```lua
   { "yar", "yara" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/yls.lua:4](../lua/lspconfig/configs/yls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/yls.lua:2](../lua/lspconfig/configs/yls.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -11948,7 +11948,7 @@ Default config:
   ```lua
   { "ziggy" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ziggy.lua:4](../lua/lspconfig/configs/ziggy.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ziggy.lua:2](../lua/lspconfig/configs/ziggy.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -11972,7 +11972,7 @@ Default config:
   ```lua
   { "ziggy_schema" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ziggy_schema.lua:4](../lua/lspconfig/configs/ziggy_schema.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ziggy_schema.lua:2](../lua/lspconfig/configs/ziggy_schema.lua#L2)
 - `single_file_support` : `true`
 
 
