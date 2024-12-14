@@ -10,21 +10,6 @@ describe('lspconfig', function()
 
   describe('util', function()
     describe('path', function()
-      describe('escape_wildcards', function()
-        it('doesnt escape if not needed', function()
-          local lspconfig = require 'lspconfig'
-
-          local res = lspconfig.util.path.escape_wildcards '/usr/local/test/fname.lua'
-          eq('/usr/local/test/fname.lua', res)
-        end)
-        it('escapes if needed', function()
-          local lspconfig = require 'lspconfig'
-
-          local res = lspconfig.util.path.escape_wildcards '/usr/local/test/[sq brackets] fname?*.lua'
-          eq('/usr/local/test/\\[sq brackets\\] fname\\?\\*.lua', res)
-        end)
-      end)
-
       describe('is_absolute', function()
         it('is absolute', function()
           local lspconfig = require 'lspconfig'
