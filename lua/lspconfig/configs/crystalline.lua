@@ -5,7 +5,8 @@ return {
     cmd = { 'crystalline' },
     filetypes = { 'crystal' },
     root_dir = function(fname)
-      return util.root_pattern 'shard.yml' or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return util.root_pattern('shard.yml')(fname)
+        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },
