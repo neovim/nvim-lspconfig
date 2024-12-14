@@ -378,17 +378,17 @@ function M.path.exists(filename)
   return stat and stat.type or false
 end
 
---- @deprecated use `vim.fs.find('.hg', { path = startpath, upward = true })[1]` instead
+--- @deprecated use `vim.fs.dirname(vim.fs.find('.hg', { path = startpath, upward = true })[1])` instead
 function M.find_mercurial_ancestor(startpath)
   return vim.fs.dirname(vim.fs.find('.hg', { path = startpath, upward = true })[1])
 end
 
---- @deprecated use `vim.fs.find('node_modules', { path = startpath, upward = true })[1]` instead
+--- @deprecated use `vim.fs.dirname(vim.fs.find('node_modules', { path = startpath, upward = true })[1])` instead
 function M.find_node_modules_ancestor(startpath)
   return vim.fs.dirname(vim.fs.find('node_modules', { path = startpath, upward = true })[1])
 end
 
---- @deprecated use `vim.fs.find('package.json', { path = startpath, upward = true })[1]` instead
+--- @deprecated use `vim.fs.dirname(vim.fs.find('package.json', { path = startpath, upward = true })[1])` instead
 function M.find_package_json_ancestor(startpath)
   return vim.fs.dirname(vim.fs.find('package.json', { path = startpath, upward = true })[1])
 end
