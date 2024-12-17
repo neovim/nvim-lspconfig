@@ -45,7 +45,7 @@ local get_clients_from_cmd_args = function(arg)
     return ''
   end)
   for id in (arg or ''):gmatch '(%d+)' do
-    local client = lsp.get_client_by_id(tonumber(id))
+    local client = lsp.get_client_by_id(assert(tonumber(id)))
     if client == nil then
       err_msg = err_msg .. ('client id "%s" not found\n'):format(id)
     end

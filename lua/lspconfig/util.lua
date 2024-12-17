@@ -28,9 +28,9 @@ function M.bufname_valid(bufname)
 end
 
 function M.validate_bufnr(bufnr)
-  validate {
-    bufnr = { bufnr, 'n' },
-  }
+  if nvim_eleven then
+    validate('bufnr', bufnr, 'number')
+  end
   return bufnr == 0 and api.nvim_get_current_buf() or bufnr
 end
 
@@ -174,7 +174,9 @@ M.path = (function()
 end)()
 
 function M.search_ancestors(startpath, func)
-  validate { func = { func, 'f' } }
+  if nvim_eleven then
+    validate('func', func, 'function')
+  end
   if func(startpath) then
     return startpath
   end
@@ -190,14 +192,6 @@ function M.search_ancestors(startpath, func)
       return path
     end
   end
-end
-
-function M.tbl_flatten(t)
-  return nvim_eleven and vim.iter(t):flatten(math.huge):totable() or vim.tbl_flatten(t)
-end
-
-function M.get_lsp_clients(filter)
-  return nvim_eleven and lsp.get_clients(filter) or lsp.get_active_clients(filter)
 end
 
 local function escape_wildcards(path)
@@ -245,6 +239,7 @@ function M.get_active_clients_list_by_ft(filetype)
   local clients = M.get_lsp_clients()
   local clients_list = {}
   for _, client in pairs(clients) do
+    --- @diagnostic disable-next-line:undefined-field
     local filetypes = client.config.filetypes or {}
     for _, ft in pairs(filetypes) do
       if ft == filetype then
@@ -324,6 +319,18 @@ function M.strip_archive_subpath(path)
   path = vim.fn.substitute(path, 'zipfile://\\(.\\{-}\\)::[^\\\\].*$', '\\1', '')
   path = vim.fn.substitute(path, 'tarfile:\\(.\\{-}\\)::.*$', '\\1', '')
   return path
+end
+
+--- Functions that can be removed once minimum required neovim version is high enough
+
+function M.tbl_flatten(t)
+  --- @diagnostic disable-next-line:deprecated
+  return nvim_eleven and vim.iter(t):flatten(math.huge):totable() or vim.tbl_flatten(t)
+end
+
+function M.get_lsp_clients(filter)
+  --- @diagnostic disable-next-line:deprecated
+  return nvim_eleven and lsp.get_clients(filter) or lsp.get_active_clients(filter)
 end
 
 --- Deprecated functions
