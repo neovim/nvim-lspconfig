@@ -6343,6 +6343,27 @@ lspconfig.msbuild_project_tools_server.setup {
 }
 ```
 
+There's no builtin filetypes for msbuild files, would require some filetype aliases:
+
+```lua
+vim.filetype.add({
+  extension = {
+    props = 'msbuild',
+    tasks = 'msbuild',
+    targets = 'msbuild',
+  },
+  pattern = {
+    [ [[.*\..*proj]] ] = 'msbuild',
+  },
+})
+```
+
+Optionally tell treesitter to treat `msbuild` as `xml` so you can get syntax highlighting if you have the treesitter-xml-parser installed.
+
+```lua
+vim.treesitter.language.register('xml', { 'msbuild' })
+```
+
 Snippet to enable the language server:
 ```lua
 require'lspconfig'.msbuild_project_tools_server.setup{}
@@ -6355,7 +6376,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "xml.csproj", "xml.fsproj", "sln" }
+  { "msbuild" }
   ```
 - `init_options` :
   ```lua
@@ -11277,7 +11298,7 @@ Default config:
     annotation_paths = {},
     debugger_port = -1,
     high_precision = false,
-    java = "/usr/lib/jvm/temurin-11-jdk-amd64/bin/java",
+    java = "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
     java_opts = { "-Xmx3000m", "-Xss1m" },
     logfile = "/home/user/.cache/nvim/vdm-lsp.log",
     mavenrepo = "/home/user/.m2/repository/com/fujitsu"
