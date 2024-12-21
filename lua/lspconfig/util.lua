@@ -158,13 +158,10 @@ M.path = (function()
     return dir == root
   end
 
-  local path_separator = iswin and ';' or ':'
-
   return {
     traverse_parents = traverse_parents,
     iterate_parents = iterate_parents,
     is_descendant = is_descendant,
-    path_separator = path_separator,
   }
 end)()
 
@@ -362,6 +359,9 @@ end
 function M.path.join(...)
   return table.concat({ ... }, '/')
 end
+
+--- @deprecated use `vim.fn.has('win32') == 1 and ';' or ':'` instead
+M.path.path_separator = vim.fn.has('win32') == 1 and ';' or ':'
 
 --- @deprecated use `vim.fs.dirname(vim.fs.find('.hg', { path = startpath, upward = true })[1])` instead
 function M.find_mercurial_ancestor(startpath)

@@ -26,7 +26,7 @@ return {
       local project_root = vim.fs.find('node_modules', { path = root_dir, upward = true })[1]
       local node_bin_path = project_root .. '/node_modules/.bin'
       local compiler_cmd = { node_bin_path .. '/relay-compiler', '--watch' }
-      local path = node_bin_path .. util.path.path_separator .. vim.env.PATH
+      local path = node_bin_path .. (vim.fn.has('win32') == 1 and ';' or ':') .. vim.env.PATH
       if config.cmd_env then
         config.cmd_env.PATH = path
       else
