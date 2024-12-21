@@ -107,10 +107,6 @@ M.path = (function()
     end
   end
 
-  local function path_join(...)
-    return table.concat(M.tbl_flatten { ... }, '/')
-  end
-
   -- Traverse the path calling cb along the way.
   local function traverse_parents(path, cb)
     path = vim.loop.fs_realpath(path)
@@ -165,7 +161,6 @@ M.path = (function()
   local path_separator = iswin and ';' or ':'
 
   return {
-    join = path_join,
     traverse_parents = traverse_parents,
     iterate_parents = iterate_parents,
     is_descendant = is_descendant,
@@ -204,7 +199,7 @@ function M.root_pattern(...)
     startpath = M.strip_archive_subpath(startpath)
     for _, pattern in ipairs(patterns) do
       local match = M.search_ancestors(startpath, function(path)
-        for _, p in ipairs(vim.fn.glob(M.path.join(escape_wildcards(path), pattern), true, true)) do
+        for _, p in ipairs(vim.fn.glob(table.concat({ escape_wildcards(path), pattern }, '/'), true, true)) do
           if vim.loop.fs_stat(p) then
             return path
           end
@@ -361,6 +356,11 @@ M.path.sanitize = vim.fs.normalize
 function M.path.exists(filename)
   local stat = vim.loop.fs_stat(filename)
   return stat and stat.type or false
+end
+
+--- @deprecated use `table.concat({"path1", "path2"})` or regular string concatenation instead
+function M.path.join(...)
+  return table.concat({ ... }, '/')
 end
 
 --- @deprecated use `vim.fs.dirname(vim.fs.find('.hg', { path = startpath, upward = true })[1])` instead

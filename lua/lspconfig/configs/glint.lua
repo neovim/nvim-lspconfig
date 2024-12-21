@@ -6,7 +6,7 @@ return {
     on_new_config = function(config, new_root_dir)
       local project_root = vim.fs.find('node_modules', { path = new_root_dir, upward = true })[1]
       -- Glint should not be installed globally.
-      local node_bin_path = util.path.join(project_root, 'node_modules', '.bin')
+      local node_bin_path = project_root .. '/node_modules/.bin'
       local path = node_bin_path .. util.path.path_separator .. vim.env.PATH
       if config.cmd_env then
         config.cmd_env.PATH = path

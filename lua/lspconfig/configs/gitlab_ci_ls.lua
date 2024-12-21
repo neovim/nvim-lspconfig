@@ -1,6 +1,6 @@
 local util = require 'lspconfig.util'
 
-local cache_dir = util.path.join(vim.loop.os_homedir(), '.cache/gitlab-ci-ls/')
+local cache_dir = vim.loop.os_homedir() .. '/.cache/gitlab-ci-ls/'
 return {
   default_config = {
     cmd = { 'gitlab-ci-ls' },
@@ -8,7 +8,7 @@ return {
     root_dir = util.root_pattern('.gitlab*', '.git'),
     init_options = {
       cache_path = cache_dir,
-      log_path = util.path.join(cache_dir, 'log/gitlab-ci-ls.log'),
+      log_path = cache_dir .. '/log/gitlab-ci-ls.log',
     },
   },
   docs = {

@@ -17,12 +17,12 @@ end
 
 local function is_library(fname)
   local user_home = vim.fs.normalize(vim.env.HOME)
-  local cargo_home = os.getenv 'CARGO_HOME' or util.path.join(user_home, '.cargo')
-  local registry = util.path.join(cargo_home, 'registry', 'src')
-  local git_registry = util.path.join(cargo_home, 'git', 'checkouts')
+  local cargo_home = os.getenv 'CARGO_HOME' or user_home .. '/.cargo'
+  local registry = cargo_home .. '/registry/src'
+  local git_registry = cargo_home .. '/git/checkouts'
 
-  local rustup_home = os.getenv 'RUSTUP_HOME' or util.path.join(user_home, '.rustup')
-  local toolchains = util.path.join(rustup_home, 'toolchains')
+  local rustup_home = os.getenv 'RUSTUP_HOME' or user_home .. '/.rustup'
+  local toolchains = rustup_home .. '/toolchains'
 
   for _, item in ipairs { toolchains, registry, git_registry } do
     if util.path.is_descendant(item, fname) then
@@ -54,7 +54,7 @@ return {
           '--format-version',
           '1',
           '--manifest-path',
-          util.path.join(cargo_crate_dir, 'Cargo.toml'),
+          cargo_crate_dir .. '/Cargo.toml',
         }
 
         local result = async.run_command(cmd)
