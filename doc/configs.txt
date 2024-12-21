@@ -2881,8 +2881,8 @@ Default config:
   ```lua
   { "drools" }
   ```
-- `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/drools_lsp.lua:38](../lua/lspconfig/configs/drools_lsp.lua#L38)
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/drools_lsp.lua:38](../lua/lspconfig/configs/drools_lsp.lua#L38)
+- `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/drools_lsp.lua:36](../lua/lspconfig/configs/drools_lsp.lua#L36)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/drools_lsp.lua:36](../lua/lspconfig/configs/drools_lsp.lua#L36)
 - `single_file_support` : `true`
 
 
@@ -10869,7 +10869,7 @@ Default config:
   ```lua
   { "turtle", "ttl" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/turtle_ls.lua:30](../lua/lspconfig/configs/turtle_ls.lua#L30)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/turtle_ls.lua:28](../lua/lspconfig/configs/turtle_ls.lua#L28)
 
 
 ## tvm_ffi_navigator
