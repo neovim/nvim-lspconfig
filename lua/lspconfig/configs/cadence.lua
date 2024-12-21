@@ -11,7 +11,7 @@ return {
       return util.root_pattern 'flow.json'(fname) or vim.env.HOME
     end,
     on_new_config = function(new_config, new_root_dir)
-      new_config.init_options.configPath = util.path.join(new_root_dir, 'flow.json')
+      new_config.init_options.configPath = new_root_dir .. '/flow.json'
     end,
   },
   docs = {

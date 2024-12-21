@@ -9,16 +9,6 @@ describe('lspconfig', function()
   end)
 
   describe('util', function()
-    describe('path', function()
-      describe('join', function()
-        it('', function()
-          local lspconfig = require 'lspconfig'
-          local res = lspconfig.util.path.join('foo', 'bar', 'baz')
-          eq('foo/bar/baz', res)
-        end)
-      end)
-    end)
-
     describe('root_pattern', function()
       it('resolves to a_marker.txt', function()
         local lspconfig = require 'lspconfig'

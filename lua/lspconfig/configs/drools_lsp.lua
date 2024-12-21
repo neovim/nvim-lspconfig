@@ -1,9 +1,7 @@
-local util = require 'lspconfig.util'
-
 local function get_java_bin(config)
   local java_bin = vim.tbl_get(config, 'drools', 'java', 'bin')
   if not java_bin then
-    java_bin = vim.env.JAVA_HOME and util.path.join(vim.env.JAVA_HOME, 'bin', 'java') or 'java'
+    java_bin = vim.env.JAVA_HOME and (vim.env.JAVA_HOME .. '/bin/java') or 'java'
     if vim.fn.has 'win32' == 1 then
       java_bin = java_bin .. '.exe'
     end

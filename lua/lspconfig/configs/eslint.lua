@@ -123,8 +123,8 @@ return {
       end
 
       -- Support Yarn2 (PnP) projects
-      local pnp_cjs = util.path.join(new_root_dir, '.pnp.cjs')
-      local pnp_js = util.path.join(new_root_dir, '.pnp.js')
+      local pnp_cjs = new_root_dir .. '/.pnp.cjs'
+      local pnp_js = new_root_dir .. '/.pnp.js'
       if vim.loop.fs_stat(pnp_cjs) or vim.loop.fs_stat(pnp_js) then
         config.cmd = vim.list_extend({ 'yarn', 'exec' }, config.cmd)
       end
