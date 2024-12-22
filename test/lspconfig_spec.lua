@@ -1,7 +1,9 @@
 local root = vim.fn.getcwd()
 
 describe('lspconfig', function()
+  --- @diagnostic disable-next-line:undefined-field
   local eq = assert.are.equal
+  --- @diagnostic disable-next-line:undefined-field
   local same = assert.are.same
 
   before_each(function()

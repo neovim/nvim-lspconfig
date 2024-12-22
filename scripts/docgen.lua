@@ -41,7 +41,7 @@ local function indent(n, s)
     assert(type(n) == 'string', 'n must be number or string')
     prefix = n
   end
-  local lines = vim.split(s, '\n', true)
+  local lines = vim.split(s, '\n')
   for i, line in ipairs(lines) do
     lines[i] = prefix .. line
   end
@@ -89,7 +89,7 @@ local function require_all_configs()
   vim.env.XDG_CACHE_HOME = '/home/user/.cache'
 
   -- Configs are lazy-loaded, tickle them to populate the `configs` singleton.
-  for _, v in ipairs(vim.fn.glob('lua/lspconfig/configs/*.lua', 1, 1)) do
+  for _, v in ipairs(vim.fn.glob('lua/lspconfig/configs/*.lua', true, true)) do
     local module_name = v:gsub('.*/', ''):gsub('%.lua$', '')
     configs[module_name] = require('lspconfig.configs.' .. module_name)
   end
