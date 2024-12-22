@@ -17,6 +17,7 @@ Nvim by running `:help lspconfig-all`.
 - [asm_lsp](#asm_lsp)
 - [ast_grep](#ast_grep)
 - [astro](#astro)
+- [autohotkey_lsp](#autohotkey_lsp)
 - [autotools_ls](#autotools_ls)
 - [awk_ls](#awk_ls)
 - [azure_pipelines_ls](#azure_pipelines_ls)
@@ -801,6 +802,69 @@ Default config:
   ```
 - `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/astro.lua:9](../lua/lspconfig/configs/astro.lua#L9)
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/astro.lua:9](../lua/lspconfig/configs/astro.lua#L9)
+
+
+## autohotkey_lsp
+
+https://github.com/thqby/vscode-autohotkey2-lsp
+
+AutoHotkey v2.0 LSP implementation
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.autohotkey_lsp.setup{}
+```
+
+Default config:
+- `autostart` : `true`
+- `cmd` :
+  ```lua
+  { "autohotkey_lsp", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "autohotkey" }
+  ```
+- `flags` :
+  ```lua
+  {
+    debounce_text_changes = 500
+  }
+  ```
+- `init_options` :
+  ```lua
+  {
+    ActionWhenV1IsDetected = "Continue",
+    AutoLibInclude = "All",
+    CommentTags = "^;;\\s*(?<tag>.+)",
+    CompleteFunctionParens = false,
+    Diagnostics = {
+      ClassStaticMemberCheck = true,
+      ParamsCheck = true
+    },
+    FormatOptions = {
+      array_style = "expand",
+      brace_style = "One True Brace",
+      break_chained_methods = false,
+      ignore_comment = false,
+      indent_string = "\t",
+      max_preserve_newlines = 2,
+      object_style = "none",
+      preserve_newlines = true,
+      space_after_double_colon = true,
+      space_before_conditional = true,
+      space_in_empty_paren = false,
+      space_in_other = true,
+      space_in_paren = false,
+      wrap_line_length = 0
+    },
+    InterpreterPath = "",
+    SymbolFoldinFromOpenBrace = false,
+    locale = "en-us"
+  }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/autohotkey_lsp.lua:8](../lua/lspconfig/configs/autohotkey_lsp.lua#L8)
+- `single_file_support` : `true`
 
 
 ## autotools_ls
