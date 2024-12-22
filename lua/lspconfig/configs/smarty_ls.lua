@@ -1,5 +1,9 @@
 local util = require 'lspconfig.util'
 
+local function is_descendant(root, path)
+  return vim.startswith(vim.fs.normalize(path), vim.fs.normalize(root))
+end
+
 return {
   default_config = {
     cmd = { 'smarty-language-server', '--stdio' },
@@ -9,7 +13,7 @@ return {
       local root = util.root_pattern('composer.json', '.git')(pattern)
 
       -- prefer cwd if root is a descendant
-      return util.path.is_descendant(cwd, root) and cwd or root
+      return is_descendant(cwd, root) and cwd or root
     end,
     settings = {
       smarty = {

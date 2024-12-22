@@ -15,6 +15,10 @@ local function reload_workspace(bufnr)
   end
 end
 
+local function is_descendant(root, path)
+  return vim.startswith(vim.fs.normalize(path), vim.fs.normalize(root))
+end
+
 local function is_library(fname)
   local user_home = vim.fs.normalize(vim.env.HOME)
   local cargo_home = os.getenv 'CARGO_HOME' or user_home .. '/.cargo'
@@ -25,7 +29,7 @@ local function is_library(fname)
   local toolchains = rustup_home .. '/toolchains'
 
   for _, item in ipairs { toolchains, registry, git_registry } do
-    if util.path.is_descendant(item, fname) then
+    if is_descendant(item, fname) then
       local clients = util.get_lsp_clients { name = 'rust_analyzer' }
       return #clients > 0 and clients[#clients].config.root_dir or nil
     end

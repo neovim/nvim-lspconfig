@@ -127,23 +127,8 @@ M.path = (function()
     end
   end
 
-  local function is_descendant(root, path)
-    if not path then
-      return false
-    end
-
-    local function cb(dir, _)
-      return dir == root
-    end
-
-    local dir, _ = traverse_parents(path, cb)
-
-    return dir == root
-  end
-
   return {
     traverse_parents = traverse_parents,
-    is_descendant = is_descendant,
   }
 end)()
 
@@ -347,6 +332,14 @@ M.path.path_separator = vim.fn.has('win32') == 1 and ';' or ':'
 
 --- @deprecated use `vim.fs.parents(path)` instead
 M.path.iterate_parents = vim.fs.parents
+
+--- @deprecated
+function M.path.is_descendant(root, path)
+    root, path = vim.loop.fs_realpath(root), vim.loop.fs_realpath(path)
+    if root == nil or path == nil then return false end
+    root, path = vim.fs.normalize(root), vim.fs.normalize(path)
+    return vim.startswith(path, root .. '/')
+end
 
 --- @deprecated use `vim.fs.dirname(vim.fs.find('.hg', { path = startpath, upward = true })[1])` instead
 function M.find_mercurial_ancestor(startpath)
