@@ -142,7 +142,6 @@ M.path = (function()
   end
 
   return {
-    traverse_parents = traverse_parents,
     is_descendant = is_descendant,
   }
 end)()
