@@ -8,7 +8,7 @@ end
 return {
   default_config = {
     cmd = { 'mdx-language-server', '--stdio' },
-    filetypes = { 'markdown.mdx' },
+    filetypes = { 'mdx' },
     root_dir = util.root_pattern 'package.json',
     single_file_support = true,
     settings = {},
