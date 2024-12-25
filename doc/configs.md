@@ -6080,7 +6080,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "markdown.mdx" }
+  { "mdx" }
   ```
 - `init_options` :
   ```lua
