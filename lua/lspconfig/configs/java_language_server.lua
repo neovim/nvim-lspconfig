@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     filetypes = { 'java' },
-    root_dir = util.root_pattern('build.gradle', 'pom.xml', '.git'),
+    root_dir = util.root_pattern('build.gradle', 'build.gradle.kts', 'pom.xml', '.git'),
     settings = {},
   },
   docs = {
