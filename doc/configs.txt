@@ -62,6 +62,7 @@ Nvim by running `:help lspconfig-all`.
 - [cssls](#cssls)
 - [cssmodules_ls](#cssmodules_ls)
 - [cucumber_language_server](#cucumber_language_server)
+- [cue](#cue)
 - [custom_elements_ls](#custom_elements_ls)
 - [cypher_ls](#cypher_ls)
 - [daedalus_ls](#daedalus_ls)
@@ -2266,6 +2267,30 @@ Default config:
   { "cucumber" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cucumber_language_server.lua:2](../lua/lspconfig/configs/cucumber_language_server.lua#L2)
+
+
+## cue
+
+https://github.com/cue-lang/cue
+
+CUE makes it easy to validate data, write schemas, and ensure configurations align with policies.
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.cue.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "cue", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "cue" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/cue.lua:4](../lua/lspconfig/configs/cue.lua#L4)
+- `single_file_support` : `true`
 
 
 ## custom_elements_ls
