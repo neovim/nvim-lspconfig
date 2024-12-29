@@ -1,16 +1,11 @@
 local util = require 'lspconfig.util'
 
-local root_files = {
-  'cue.mod',
-  '.git',
-}
-
 return {
   default_config = {
     cmd = { 'cue', 'lsp' },
     filetypes = { 'cue' },
     root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname)
+      return util.root_pattern(unpack({ 'cue.mod', '.git' }))(fname)
     end,
     single_file_support = true,
   },
