@@ -19,7 +19,6 @@ local function switch_source_header(bufnr)
   end, bufnr)
 end
 
-
 return {
   default_config = {
     cmd = { 'ccls' },
