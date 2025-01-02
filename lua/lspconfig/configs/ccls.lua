@@ -1,13 +1,14 @@
 local util = require 'lspconfig.util'
 
 local function switch_source_header(bufnr)
+  local method_name = 'textDocument/switchSourceHeader'
   bufnr = util.validate_bufnr(bufnr)
   local client = util.get_active_client_by_name(bufnr, 'ccls')
   if not client then
-    vim.notify('method textdocument/switchsourceheader is not supported by any servers active on the current buffer')
+    return vim.notify(('method %s is not supported by any servers active on the current buffer'):format(method_name))
   end
   local params = vim.lsp.util.make_text_document_params(bufnr)
-  client.request('textDocument/switchsourceheader', params, function(err, result)
+  client.request(method_name, params, function(err, result)
     if err then
       error(tostring(err))
     end
