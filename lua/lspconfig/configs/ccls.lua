@@ -7,7 +7,7 @@ local function switch_source_header(bufnr)
     vim.notify('method textdocument/switchsourceheader is not supported by any servers active on the current buffer')
   end
   local params = vim.lsp.util.make_text_document_params(bufnr)
-  client.request('textdocument/switchsourceheader', params, function(err, result)
+  client.request('textDocument/switchsourceheader', params, function(err, result)
     if err then
       error(tostring(err))
     end
