@@ -1725,6 +1725,9 @@ Snippet to enable the language server:
 require'lspconfig'.ccls.setup{}
 ```
 
+Commands:
+- CclsSwitchSourceHeader: Switch between source/header
+
 Default config:
 - `cmd` :
   ```lua
@@ -1738,7 +1741,7 @@ Default config:
   ```lua
   "utf-32"
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ccls.lua:4](../lua/lspconfig/configs/ccls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ccls.lua:23](../lua/lspconfig/configs/ccls.lua#L23)
 - `single_file_support` : `false`
 
 
