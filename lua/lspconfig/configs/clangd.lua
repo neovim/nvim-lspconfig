@@ -2,23 +2,23 @@ local util = require 'lspconfig.util'
 
 -- https://clangd.llvm.org/extensions.html#switch-between-sourceheader
 local function switch_source_header(bufnr)
+  local method_name = 'textDocument/switchSourceHeader'
   bufnr = util.validate_bufnr(bufnr)
-  local clangd_client = util.get_active_client_by_name(bufnr, 'clangd')
-  local params = { uri = vim.uri_from_bufnr(bufnr) }
-  if clangd_client then
-    clangd_client.request('textDocument/switchSourceHeader', params, function(err, result)
-      if err then
-        error(tostring(err))
-      end
-      if not result then
-        print 'Corresponding file cannot be determined'
-        return
-      end
-      vim.api.nvim_command('edit ' .. vim.uri_to_fname(result))
-    end, bufnr)
-  else
-    print 'method textDocument/switchSourceHeader is not supported by any servers active on the current buffer'
+  local client = util.get_active_client_by_name(bufnr, 'ccls')
+  if not client then
+    return vim.notify(('method %s is not supported by any servers active on the current buffer'):format(method_name))
   end
+  local params = vim.lsp.util.make_text_document_params(bufnr)
+  client.request(method_name, params, function(err, result)
+    if err then
+      error(tostring(err))
+    end
+    if not result then
+      vim.notify('corresponding file cannot be determined')
+      return
+    end
+    vim.cmd.edit(vim.uri_to_fname(result))
+  end, bufnr)
 end
 
 local function symbol_info()
