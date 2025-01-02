@@ -1,5 +1,24 @@
 local util = require 'lspconfig.util'
 
+local function switch_source_header(bufnr)
+  bufnr = util.validate_bufnr(bufnr)
+  local client = util.get_active_client_by_name(bufnr, 'ccls')
+  if not client then
+    vim.notify('method textdocument/switchsourceheader is not supported by any servers active on the current buffer')
+  end
+  local params = vim.lsp.util.make_text_document_params(bufnr)
+  client.request('textdocument/switchsourceheader', params, function(err, result)
+    if err then
+      error(tostring(err))
+    end
+    if not result then
+      vim.notify('corresponding file cannot be determined')
+      return
+    end
+    vim.cmd.edit(vim.uri_to_fname(result))
+  end, bufnr)
+end
+
 return {
   default_config = {
     cmd = { 'ccls' },
@@ -11,6 +30,14 @@ return {
     offset_encoding = 'utf-32',
     -- ccls does not support sending a null root directory
     single_file_support = false,
+  },
+  commands = {
+    CclsSwitchSourceHeader = {
+      function()
+        switch_source_header(0)
+      end,
+      description = 'Switch between source/header',
+    },
   },
   docs = {
     description = [[
