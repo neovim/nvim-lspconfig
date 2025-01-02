@@ -3,22 +3,22 @@ local util = require 'lspconfig.util'
 local function switch_source_header(bufnr)
   bufnr = util.validate_bufnr(bufnr)
   local client = util.get_active_client_by_name(bufnr, 'ccls')
-  local params = { uri = vim.uri_from_bufnr(bufnr) }
-  if client then
-    client.request('textDocument/switchSourceHeader', params, function(err, result)
-      if err then
-        error(tostring(err))
-      end
-      if not result then
-        print 'Corresponding file cannot be determined'
-        return
-      end
-      vim.api.nvim_command('edit ' .. vim.uri_to_fname(result))
-    end, bufnr)
-  else
-    print 'method textDocument/switchSourceHeader is not supported by any servers active on the current buffer'
+  if not client then
+    vim.notify('method textdocument/switchsourceheader is not supported by any servers active on the current buffer')
   end
+  local params = vim.lsp.util.make_text_document_params(bufnr)
+  client.request('textdocument/switchsourceheader', params, function(err, result)
+    if err then
+      error(tostring(err))
+    end
+    if not result then
+      vim.notify('corresponding file cannot be determined')
+      return
+    end
+    vim.cmd.edit(vim.uri_to_fname(result))
+  end, bufnr)
 end
+
 
 return {
   default_config = {
