@@ -7760,8 +7760,8 @@ Default config:
   ```lua
   { "ps1" }
   ```
-- `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/powershell_es.lua:13](../lua/lspconfig/configs/powershell_es.lua#L13)
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/powershell_es.lua:13](../lua/lspconfig/configs/powershell_es.lua#L13)
+- `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/powershell_es.lua:14](../lua/lspconfig/configs/powershell_es.lua#L14)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/powershell_es.lua:14](../lua/lspconfig/configs/powershell_es.lua#L14)
 - `shell` :
   ```lua
   "pwsh"
