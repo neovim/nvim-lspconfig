@@ -1,4 +1,5 @@
 local temp_path = vim.fn.stdpath 'cache'
+local util = require 'lspconfig.util'
 
 local function make_cmd(new_config)
   if new_config.bundle_path ~= nil then
@@ -20,9 +21,7 @@ return {
     end,
 
     filetypes = { 'ps1' },
-    root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-    end,
+    root_dir = util.root_pattern('PSScriptAnalyzerSettings.psd1', '.git'),
     single_file_support = true,
   },
   docs = {
