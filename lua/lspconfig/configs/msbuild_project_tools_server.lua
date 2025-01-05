@@ -1,11 +1,10 @@
 local host_dll_name = 'MSBuildProjectTools.LanguageServer.Host.dll'
+local util = require 'lspconfig.util'
 
 return {
   default_config = {
     filetypes = { 'msbuild' },
-    root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-    end,
+    root_dir = util.root_pattern('*.sln', '*.slnx', '*.*proj', '.git'),
     init_options = {},
     cmd = { 'dotnet', host_dll_name },
   },
