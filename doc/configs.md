@@ -17,6 +17,7 @@ Nvim by running `:help lspconfig-all`.
 - [asm_lsp](#asm_lsp)
 - [ast_grep](#ast_grep)
 - [astro](#astro)
+- [atlas](#atlas)
 - [autohotkey_lsp](#autohotkey_lsp)
 - [autotools_ls](#autotools_ls)
 - [awk_ls](#awk_ls)
@@ -803,6 +804,62 @@ Default config:
   ```
 - `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/astro.lua:9](../lua/lspconfig/configs/astro.lua#L9)
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/astro.lua:9](../lua/lspconfig/configs/astro.lua#L9)
+
+
+## atlas
+
+https://github.com/ariga/atlas
+
+Language server for Atlas config and scheme files.
+
+You may also need to configure the filetype for *.hcl files:
+
+`autocmd BufNewFile,BufRead atlas.hcl set filetype=atlas-config`
+`autocmd BufNewFile,BufRead *.my.hcl set filetype=atlas-schema-mysql`
+`autocmd BufNewFile,BufRead *.pg.hcl set filetype=atlas-schema-postgresql`
+`autocmd BufNewFile,BufRead *.lt.hcl set filetype=atlas-schema-sqlite`
+`autocmd BufNewFile,BufRead *.ch.hcl set filetype=atlas-schema-clickhouse`
+`autocmd BufNewFile,BufRead *.ms.hcl set filetype=atlas-schema-mssql`
+`autocmd BufNewFile,BufRead *.rs.hcl set filetype=atlas-schema-redshift`
+`autocmd BufNewFile,BufRead *.test.hcl set filetype=atlas-test`
+`autocmd BufNewFile,BufRead *.plan.hcl set filetype=atlas-plan`
+
+or
+
+```lua
+vim.filetype.add({
+  filename = {
+    ['atlas.hcl'] = 'atlas-config',
+  },
+  pattern = {
+    ['.*/*.my.hcl'] = 'atlas-schema-mysql',
+    ['.*/*.pg.hcl'] = 'atlas-schema-postgresql',
+    ['.*/*.lt.hcl'] = 'atlas-schema-sqlite',
+    ['.*/*.ch.hcl'] = 'atlas-schema-clickhouse',
+    ['.*/*.ms.hcl'] = 'atlas-schema-mssql',
+    ['.*/*.rs.hcl'] = 'atlas-schema-redshift',
+    ['.*/*.test.hcl'] = 'atlas-test',
+    ['.*/*.plan.hcl'] = 'atlas-plan',
+  },
+})
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.atlas.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "atlas", "tool", "lsp", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "atlas-*" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/atlas.lua:4](../lua/lspconfig/configs/atlas.lua#L4)
+- `single_file_support` : `true`
 
 
 ## autohotkey_lsp
