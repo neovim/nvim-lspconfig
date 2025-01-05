@@ -29,6 +29,26 @@ You may also need to configure the filetype for *.hcl files:
 `autocmd BufNewFile,BufRead *.test.hcl set filetype=atlas-test`
 `autocmd BufNewFile,BufRead *.plan.hcl set filetype=atlas-plan`
 
+or
+
+```lua
+vim.filetype.add({
+  filename = {
+    ['atlas.hcl'] = 'atlas-config',
+  },
+  pattern = {
+    ['.*/*.my.hcl'] = 'atlas-schema-mysql',
+    ['.*/*.pg.hcl'] = 'atlas-schema-postgresql',
+    ['.*/*.lt.hcl'] = 'atlas-schema-sqlite',
+    ['.*/*.ch.hcl'] = 'atlas-schema-clickhouse',
+    ['.*/*.ms.hcl'] = 'atlas-schema-mssql',
+    ['.*/*.rs.hcl'] = 'atlas-schema-redshift',
+    ['.*/*.test.hcl'] = 'atlas-test',
+    ['.*/*.plan.hcl'] = 'atlas-plan',
+  },
+})
+```
+
 ]],
   },
 }
