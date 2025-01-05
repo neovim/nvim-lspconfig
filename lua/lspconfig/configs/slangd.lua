@@ -7,7 +7,7 @@ end
 return {
   default_config = {
     cmd = { bin_name },
-    filetypes = { 'hlsl', 'shaderslang' },
+    filetypes = { 'hlsl', 'slang' },
     root_dir = function(fname)
       return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
