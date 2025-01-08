@@ -1952,6 +1952,7 @@ Default config:
   { "clojure", "edn" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/clojure_lsp.lua:4](../lua/lspconfig/configs/clojure_lsp.lua#L4)
+- `single_file_support` : `true`
 
 
 ## cmake
