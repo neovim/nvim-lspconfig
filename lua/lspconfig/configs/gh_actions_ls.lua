@@ -4,7 +4,7 @@ return {
   default_config = {
     cmd = { 'gh-actions-language-server', '--stdio' },
     filetypes = { 'yaml.github' },
-    root_dir = util.root_pattern('.github', '.git'),
+    root_dir = util.root_pattern('.github'),
     single_file_support = true,
   },
   docs = {
