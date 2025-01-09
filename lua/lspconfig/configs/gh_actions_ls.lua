@@ -6,6 +6,13 @@ return {
     filetypes = { 'yaml.github' },
     root_dir = util.root_pattern('.github'),
     single_file_support = true,
+    capabilities = {
+      workspace = {
+        didChangeWorkspaceFolders = {
+          dynamicRegistration = true,
+        },
+      },
+    },
   },
   docs = {
     description = [[
