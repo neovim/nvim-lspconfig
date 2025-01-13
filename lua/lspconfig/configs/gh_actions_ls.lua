@@ -11,6 +11,8 @@ return {
     root_dir = function(filename)
       return filename:find('/%.github/workflows/.+%.ya?ml') and util.root_pattern('.github') or nil
     end,
+    -- Disabling "single file support" is a hack to avoid enabling this LS for
+    -- every random yaml file, so `root_dir()` can control the enablement.
     single_file_support = false,
 
     capabilities = {
