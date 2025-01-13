@@ -4,10 +4,15 @@ return {
   default_config = {
     cmd = { 'gh-actions-language-server', '--stdio' },
     filetypes = { 'yaml' },
+
+    -- Only attach to yaml files that are GitHub workflows instead of all yaml
+    -- files. (A nil root_dir and no single_file_support results in the LSP not
+    -- attaching.) For details, see #3558
     root_dir = function(filename)
       return filename:find('/%.github/workflows/.+%.ya?ml') and util.root_pattern('.github') or nil
     end,
     single_file_support = false,
+
     capabilities = {
       workspace = {
         didChangeWorkspaceFolders = {
