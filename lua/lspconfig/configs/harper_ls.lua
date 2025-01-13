@@ -20,6 +20,8 @@ return {
       'toml',
       'typescript',
       'typescriptreact',
+      'haskell',
+      'cmake',
       'typst',
     },
     root_dir = function(fname)

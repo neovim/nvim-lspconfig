@@ -17,6 +17,7 @@ Nvim by running `:help lspconfig-all`.
 - [asm_lsp](#asm_lsp)
 - [ast_grep](#ast_grep)
 - [astro](#astro)
+- [atlas](#atlas)
 - [autohotkey_lsp](#autohotkey_lsp)
 - [autotools_ls](#autotools_ls)
 - [awk_ls](#awk_ls)
@@ -111,6 +112,7 @@ Nvim by running `:help lspconfig-all`.
 - [futhark_lsp](#futhark_lsp)
 - [gdscript](#gdscript)
 - [gdshader_lsp](#gdshader_lsp)
+- [gh_actions_ls](#gh_actions_ls)
 - [ghcide](#ghcide)
 - [ghdl_ls](#ghdl_ls)
 - [ginko_ls](#ginko_ls)
@@ -260,6 +262,7 @@ Nvim by running `:help lspconfig-all`.
 - [salt_ls](#salt_ls)
 - [scheme_langserver](#scheme_langserver)
 - [scry](#scry)
+- [selene3p_ls](#selene3p_ls)
 - [serve_d](#serve_d)
 - [shopify_theme_ls](#shopify_theme_ls)
 - [sixtyfps](#sixtyfps)
@@ -290,6 +293,7 @@ Nvim by running `:help lspconfig-all`.
 - [steep](#steep)
 - [stimulus_ls](#stimulus_ls)
 - [stylelint_lsp](#stylelint_lsp)
+- [stylua3p_ls](#stylua3p_ls)
 - [superhtml](#superhtml)
 - [svelte](#svelte)
 - [svlangserver](#svlangserver)
@@ -803,6 +807,62 @@ Default config:
   ```
 - `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/astro.lua:9](../lua/lspconfig/configs/astro.lua#L9)
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/astro.lua:9](../lua/lspconfig/configs/astro.lua#L9)
+
+
+## atlas
+
+https://github.com/ariga/atlas
+
+Language server for Atlas config and scheme files.
+
+You may also need to configure the filetype for *.hcl files:
+
+`autocmd BufNewFile,BufRead atlas.hcl set filetype=atlas-config`
+`autocmd BufNewFile,BufRead *.my.hcl set filetype=atlas-schema-mysql`
+`autocmd BufNewFile,BufRead *.pg.hcl set filetype=atlas-schema-postgresql`
+`autocmd BufNewFile,BufRead *.lt.hcl set filetype=atlas-schema-sqlite`
+`autocmd BufNewFile,BufRead *.ch.hcl set filetype=atlas-schema-clickhouse`
+`autocmd BufNewFile,BufRead *.ms.hcl set filetype=atlas-schema-mssql`
+`autocmd BufNewFile,BufRead *.rs.hcl set filetype=atlas-schema-redshift`
+`autocmd BufNewFile,BufRead *.test.hcl set filetype=atlas-test`
+`autocmd BufNewFile,BufRead *.plan.hcl set filetype=atlas-plan`
+
+or
+
+```lua
+vim.filetype.add({
+  filename = {
+    ['atlas.hcl'] = 'atlas-config',
+  },
+  pattern = {
+    ['.*/*.my.hcl'] = 'atlas-schema-mysql',
+    ['.*/*.pg.hcl'] = 'atlas-schema-postgresql',
+    ['.*/*.lt.hcl'] = 'atlas-schema-sqlite',
+    ['.*/*.ch.hcl'] = 'atlas-schema-clickhouse',
+    ['.*/*.ms.hcl'] = 'atlas-schema-mssql',
+    ['.*/*.rs.hcl'] = 'atlas-schema-redshift',
+    ['.*/*.test.hcl'] = 'atlas-test',
+    ['.*/*.plan.hcl'] = 'atlas-plan',
+  },
+})
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.atlas.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "atlas", "tool", "lsp", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "atlas-*" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/atlas.lua:4](../lua/lspconfig/configs/atlas.lua#L4)
+- `single_file_support` : `true`
 
 
 ## autohotkey_lsp
@@ -1725,6 +1785,9 @@ Snippet to enable the language server:
 require'lspconfig'.ccls.setup{}
 ```
 
+Commands:
+- CclsSwitchSourceHeader: Switch between source/header
+
 Default config:
 - `cmd` :
   ```lua
@@ -1738,7 +1801,7 @@ Default config:
   ```lua
   "utf-32"
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ccls.lua:4](../lua/lspconfig/configs/ccls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ccls.lua:24](../lua/lspconfig/configs/ccls.lua#L24)
 - `single_file_support` : `false`
 
 
@@ -1892,6 +1955,7 @@ Default config:
   { "clojure", "edn" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/clojure_lsp.lua:4](../lua/lspconfig/configs/clojure_lsp.lua#L4)
+- `single_file_support` : `true`
 
 
 ## cmake
@@ -3969,6 +4033,46 @@ Default config:
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/gdshader_lsp.lua:4](../lua/lspconfig/configs/gdshader_lsp.lua#L4)
 
 
+## gh_actions_ls
+
+https://github.com/lttb/gh-actions-language-server
+
+Language server for GitHub Actions.
+
+`gh-actions-language-server` can be installed via `npm`:
+
+```sh
+npm install -g gh-actions-language-server
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.gh_actions_ls.setup{}
+```
+
+Default config:
+- `capabilities` :
+  ```lua
+  {
+    workspace = {
+      didChangeWorkspaceFolders = {
+        dynamicRegistration = true
+      }
+    }
+  }
+  ```
+- `cmd` :
+  ```lua
+  { "gh-actions-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "yaml" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/gh_actions_ls.lua:4](../lua/lspconfig/configs/gh_actions_ls.lua#L4)
+- `single_file_support` : `false`
+
+
 ## ghcide
 
 https://github.com/digital-asset/ghcide
@@ -4528,7 +4632,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "c", "cpp", "cs", "gitcommit", "go", "html", "java", "javascript", "lua", "markdown", "nix", "python", "ruby", "rust", "swift", "toml", "typescript", "typescriptreact" }
+  { "c", "cpp", "cs", "gitcommit", "go", "html", "java", "javascript", "lua", "markdown", "nix", "python", "ruby", "rust", "swift", "toml", "typescript", "typescriptreact", "haskell", "cmake" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/harper_ls.lua:2](../lua/lspconfig/configs/harper_ls.lua#L2)
 - `single_file_support` : `true`
@@ -6471,7 +6575,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/msbuild_project_tools_server.lua:4](../lua/lspconfig/configs/msbuild_project_tools_server.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/msbuild_project_tools_server.lua:5](../lua/lspconfig/configs/msbuild_project_tools_server.lua#L5)
 
 
 ## mutt_ls
@@ -7700,8 +7804,8 @@ Default config:
   ```lua
   { "ps1" }
   ```
-- `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/powershell_es.lua:13](../lua/lspconfig/configs/powershell_es.lua#L13)
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/powershell_es.lua:13](../lua/lspconfig/configs/powershell_es.lua#L13)
+- `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/powershell_es.lua:14](../lua/lspconfig/configs/powershell_es.lua#L14)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/powershell_es.lua:14](../lua/lspconfig/configs/powershell_es.lua#L14)
 - `shell` :
   ```lua
   "pwsh"
@@ -8726,9 +8830,7 @@ Install the gem. There's no need to require it, since the server is used as a
 standalone executable.
 
 ```sh
-group :development do
-  gem "ruby-lsp", require: false
-end
+gem install ruby-lsp
 ```
 
 Snippet to enable the language server:
@@ -9002,6 +9104,29 @@ Default config:
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/scry.lua:4](../lua/lspconfig/configs/scry.lua#L4)
 - `single_file_support` : `true`
+
+
+## selene3p_ls
+
+https://github.com/antonk52/lua-3p-language-servers
+
+3rd party Language Server for Selene lua linter
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.selene3p_ls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "selene-3p-language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "lua" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/selene3p_ls.lua:4](../lua/lspconfig/configs/selene3p_ls.lua#L4)
 
 
 ## serve_d
@@ -10006,6 +10131,29 @@ Default config:
   ```lua
   {}
   ```
+
+
+## stylua3p_ls
+
+https://github.com/antonk52/lua-3p-language-servers
+
+3rd party Language Server for Stylua lua formatter
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.stylua3p_ls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "stylua-3p-language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "lua" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/stylua3p_ls.lua:4](../lua/lspconfig/configs/stylua3p_ls.lua#L4)
 
 
 ## superhtml

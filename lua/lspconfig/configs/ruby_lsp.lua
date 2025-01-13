@@ -21,9 +21,7 @@ Install the gem. There's no need to require it, since the server is used as a
 standalone executable.
 
 ```sh
-group :development do
-  gem "ruby-lsp", require: false
-end
+gem install ruby-lsp
 ```
     ]],
   },
