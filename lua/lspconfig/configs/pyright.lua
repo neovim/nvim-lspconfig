@@ -40,6 +40,21 @@ local function set_python_path(path)
   end
 end
 
+local python_bin = function(venv)
+  if vim.fn.has('win32') == 1 then
+    return venv .. '\\Scripts\\python.exe'
+  end
+  return venv .. '/bin/python'
+end
+
+local try_local_python_path = function()
+  local venv_path = os.getenv('VIRTUAL_ENV')
+  if venv_path then
+    return python_bin(venv_path)
+  end
+  return nil
+end
+
 return {
   default_config = {
     cmd = { 'pyright-langserver', '--stdio' },
@@ -55,6 +70,7 @@ return {
           useLibraryCodeForTypes = true,
           diagnosticMode = 'openFilesOnly',
         },
+        pythonPath = try_local_python_path(),
       },
     },
   },
