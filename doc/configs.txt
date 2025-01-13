@@ -261,6 +261,7 @@ Nvim by running `:help lspconfig-all`.
 - [salt_ls](#salt_ls)
 - [scheme_langserver](#scheme_langserver)
 - [scry](#scry)
+- [selene3p_ls](#selene3p_ls)
 - [serve_d](#serve_d)
 - [shopify_theme_ls](#shopify_theme_ls)
 - [sixtyfps](#sixtyfps)
@@ -291,6 +292,7 @@ Nvim by running `:help lspconfig-all`.
 - [steep](#steep)
 - [stimulus_ls](#stimulus_ls)
 - [stylelint_lsp](#stylelint_lsp)
+- [stylua3p_ls](#stylua3p_ls)
 - [superhtml](#superhtml)
 - [svelte](#svelte)
 - [svlangserver](#svlangserver)
@@ -9063,6 +9065,29 @@ Default config:
 - `single_file_support` : `true`
 
 
+## selene3p_ls
+
+https://github.com/antonk52/lua-3p-language-servers
+
+3rd party Language Server for Selene lua linter
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.selene3p_ls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "selene-3p-language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "lua" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/selene3p_ls.lua:4](../lua/lspconfig/configs/selene3p_ls.lua#L4)
+
+
 ## serve_d
 
 https://github.com/Pure-D/serve-d
@@ -10065,6 +10090,29 @@ Default config:
   ```lua
   {}
   ```
+
+
+## stylua3p_ls
+
+https://github.com/antonk52/lua-3p-language-servers
+
+3rd party Language Server for Stylua lua formatter
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.stylua3p_ls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "stylua-3p-language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "lua" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/stylua3p_ls.lua:4](../lua/lspconfig/configs/stylua3p_ls.lua#L4)
 
 
 ## superhtml
