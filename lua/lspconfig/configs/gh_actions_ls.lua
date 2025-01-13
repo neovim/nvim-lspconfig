@@ -5,10 +5,7 @@ return {
     cmd = { 'gh-actions-language-server', '--stdio' },
     filetypes = { 'yaml' },
     root_dir = function(filename)
-      if not filename:find('/%.github/workflows/.+%.ya?ml') then
-        return
-      end
-      return util.root_pattern('.github')
+      return filename:find('/%.github/workflows/.+%.ya?ml') and util.root_pattern('.github') or nil
     end,
     single_file_support = false,
     capabilities = {
