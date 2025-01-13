@@ -20,6 +20,16 @@ https://github.com/lttb/gh-actions-language-server
 
 Language server for GitHub Actions.
 
+The server is registered for the special `yaml.github` filetype. You need to configure this filetype pattern for GitHub workflow files.
+
+```lua
+vim.filetype.add({
+  pattern = {
+    ['.*/%.github[%w/]+workflows[%w/]+.*%.ya?ml'] = 'yaml.github',
+  },
+})
+```
+
 `gh-actions-language-server` can be installed via `npm`:
 
 ```sh
