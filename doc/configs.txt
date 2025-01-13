@@ -112,6 +112,7 @@ Nvim by running `:help lspconfig-all`.
 - [futhark_lsp](#futhark_lsp)
 - [gdscript](#gdscript)
 - [gdshader_lsp](#gdshader_lsp)
+- [gh_actions_ls](#gh_actions_ls)
 - [ghcide](#ghcide)
 - [ghdl_ls](#ghdl_ls)
 - [ginko_ls](#ginko_ls)
@@ -4030,6 +4031,56 @@ Default config:
   { "gdshader", "gdshaderinc" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/gdshader_lsp.lua:4](../lua/lspconfig/configs/gdshader_lsp.lua#L4)
+
+
+## gh_actions_ls
+
+https://github.com/lttb/gh-actions-language-server
+
+Language server for GitHub Actions.
+
+The server is registered for the special `yaml.github` filetype. You need to configure this filetype pattern for GitHub workflow files.
+
+```lua
+vim.filetype.add({
+  pattern = {
+    ['.*/%.github[%w/]+workflows[%w/]+.*%.ya?ml'] = 'yaml.github',
+  },
+})
+```
+
+`gh-actions-language-server` can be installed via `npm`:
+
+```sh
+npm install -g gh-actions-language-server
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.gh_actions_ls.setup{}
+```
+
+Default config:
+- `capabilities` :
+  ```lua
+  {
+    workspace = {
+      didChangeWorkspaceFolders = {
+        dynamicRegistration = true
+      }
+    }
+  }
+  ```
+- `cmd` :
+  ```lua
+  { "gh-actions-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "yaml.github" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/gh_actions_ls.lua:4](../lua/lspconfig/configs/gh_actions_ls.lua#L4)
+- `single_file_support` : `true`
 
 
 ## ghcide
