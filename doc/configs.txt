@@ -8,6 +8,7 @@ Nvim by running `:help lspconfig-all`.
 - [ada_ls](#ada_ls)
 - [agda_ls](#agda_ls)
 - [aiken](#aiken)
+- [alloy_ls](#alloy_ls)
 - [anakin_language_server](#anakin_language_server)
 - [angularls](#angularls)
 - [ansiblels](#ansiblels)
@@ -439,6 +440,30 @@ Default config:
   { "aiken" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/aiken.lua:4](../lua/lspconfig/configs/aiken.lua#L4)
+
+
+## alloy_ls
+
+https://github.com/AlloyTools/org.alloytools.alloy
+
+Alloy is a formal specification language for describing structures and a tool for exploring them.
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.alloy_ls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "alloy", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "alloy" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/alloy_ls.lua:2](../lua/lspconfig/configs/alloy_ls.lua#L2)
+- `single_file_support` : `true`
 
 
 ## anakin_language_server
