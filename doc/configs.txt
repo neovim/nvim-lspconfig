@@ -4632,7 +4632,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "c", "cpp", "cs", "gitcommit", "go", "html", "java", "javascript", "lua", "markdown", "nix", "python", "ruby", "rust", "swift", "toml", "typescript", "typescriptreact", "haskell", "cmake" }
+  { "c", "cpp", "cs", "gitcommit", "go", "html", "java", "javascript", "lua", "markdown", "nix", "python", "ruby", "rust", "swift", "toml", "typescript", "typescriptreact", "haskell", "cmake", "typst" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/harper_ls.lua:2](../lua/lspconfig/configs/harper_ls.lua#L2)
 - `single_file_support` : `true`
