@@ -9,8 +9,9 @@ return {
     -- files. (A nil root_dir and no single_file_support results in the LSP not
     -- attaching.) For details, see #3558
     root_dir = function(filename)
-      return filename:find('/%.github/workflows/.+%.ya?ml') and util.root_pattern('.github')(filename) or nil
+      return filename:find('/%.(github|forgejo|gitea)/workflows/.+%.ya?ml') and util.root_pattern('.github', '.forgejo', '.gitea')(filename) or nil
     end,
+
     -- Disabling "single file support" is a hack to avoid enabling this LS for
     -- every random yaml file, so `root_dir()` can control the enablement.
     single_file_support = false,
