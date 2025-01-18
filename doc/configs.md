@@ -770,7 +770,7 @@ Default config:
 
 https://github.com/bergercookie/asm-lsp
 
-Language Server for GAS/GO Assembly
+Language Server for NASM/GAS/GO Assembly
 
 `asm-lsp` can be installed via cargo:
 cargo install asm-lsp
@@ -790,6 +790,7 @@ Default config:
   { "asm", "vmasm" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/asm_lsp.lua:2](../lua/lspconfig/configs/asm_lsp.lua#L2)
+- `single_file_support` : `true`
 
 
 ## ast_grep
