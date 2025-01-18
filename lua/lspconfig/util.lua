@@ -5,7 +5,7 @@ local nvim_eleven = vim.fn.has 'nvim-0.11' == 1
 
 local iswin = vim.loop.os_uname().version:match 'Windows'
 
-local M = {}
+local M = { path = {} }
 
 M.default_config = {
   log_level = lsp.protocol.MessageType.Warning,
@@ -94,57 +94,6 @@ function M.create_module_commands(module_name, commands)
     end
   end
 end
-
--- Some path utilities
-M.path = (function()
-  --- @param path string
-  --- @return boolean
-  local function is_fs_root(path)
-    if iswin then
-      return path:match '^%a:$'
-    else
-      return path == '/'
-    end
-  end
-
-  -- Traverse the path calling cb along the way.
-  local function traverse_parents(path, cb)
-    path = vim.loop.fs_realpath(path)
-    local dir = path
-    -- Just in case our algo is buggy, don't infinite loop.
-    for _ = 1, 100 do
-      dir = vim.fs.dirname(dir)
-      if not dir then
-        return
-      end
-      -- If we can't ascend further, then stop looking.
-      if cb(dir, path) then
-        return dir, path
-      end
-      if is_fs_root(dir) then
-        break
-      end
-    end
-  end
-
-  local function is_descendant(root, path)
-    if not path then
-      return false
-    end
-
-    local function cb(dir, _)
-      return dir == root
-    end
-
-    local dir, _ = traverse_parents(path, cb)
-
-    return dir == root
-  end
-
-  return {
-    is_descendant = is_descendant,
-  }
-end)()
 
 function M.search_ancestors(startpath, func)
   if nvim_eleven then
@@ -294,7 +243,52 @@ function M.strip_archive_subpath(path)
   return path
 end
 
---- Functions that can be removed once minimum required neovim version is high enough
+--- Public functions that can be deprecated once minimum required neovim version is high enough
+
+local function is_fs_root(path)
+  if iswin then
+    return path:match '^%a:$'
+  else
+    return path == '/'
+  end
+end
+
+-- Traverse the path calling cb along the way.
+local function traverse_parents(path, cb)
+  path = vim.loop.fs_realpath(path)
+  local dir = path
+  -- Just in case our algo is buggy, don't infinite loop.
+  for _ = 1, 100 do
+    dir = vim.fs.dirname(dir)
+    if not dir then
+      return
+    end
+    -- If we can't ascend further, then stop looking.
+    if cb(dir, path) then
+      return dir, path
+    end
+    if is_fs_root(dir) then
+      break
+    end
+  end
+end
+
+--- This can be replaced with `vim.fs.relpath` once minimum neovim version is at least 0.11.
+function M.path.is_descendant(root, path)
+  if not path then
+    return false
+  end
+
+  local function cb(dir, _)
+    return dir == root
+  end
+
+  local dir, _ = traverse_parents(path, cb)
+
+  return dir == root
+end
+
+--- Helper functions that can be removed once minimum required neovim version is high enough
 
 function M.tbl_flatten(t)
   --- @diagnostic disable-next-line:deprecated
