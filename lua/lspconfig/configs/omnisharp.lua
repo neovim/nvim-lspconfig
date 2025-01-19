@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     settings = {
@@ -42,7 +40,11 @@ return {
     },
 
     filetypes = { 'cs', 'vb' },
-    root_dir = util.root_pattern('*.sln', '*.csproj', 'omnisharp.json', 'function.json'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find({ '*.sln', '*.csproj', 'omnisharp.json', 'function.json' }, { path = fname, upward = true })[1]
+      )
+    end,
     on_new_config = function(new_config, _)
       -- Get the initially configured value of `cmd`
       new_config.cmd = { unpack(new_config.cmd or {}) }

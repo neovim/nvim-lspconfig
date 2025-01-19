@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local root_files = {
   '.shopifyignore',
   '.theme-check.yml',
@@ -15,7 +13,9 @@ return {
       'language-server',
     },
     filetypes = { 'liquid' },
-    root_dir = util.root_pattern(unpack(root_files)),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ unpack(root_files) }, { path = fname, upward = true })[1])
+    end,
     settings = {},
   },
   docs = {

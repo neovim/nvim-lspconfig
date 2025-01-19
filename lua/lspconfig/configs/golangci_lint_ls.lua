@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'golangci-lint-langserver' },
@@ -8,15 +6,12 @@ return {
       command = { 'golangci-lint', 'run', '--out-format', 'json' },
     },
     root_dir = function(fname)
-      return util.root_pattern(
-        '.golangci.yml',
-        '.golangci.yaml',
-        '.golangci.toml',
-        '.golangci.json',
-        'go.work',
-        'go.mod',
-        '.git'
-      )(fname)
+      return vim.fs.dirname(
+        vim.fs.find(
+          { '.golangci.yml', '.golangci.yaml', '.golangci.toml', '.golangci.json', 'go.work', 'go.mod', '.git' },
+          { path = fname, upward = true }
+        )[1]
+      )
     end,
   },
   docs = {

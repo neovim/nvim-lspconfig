@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local language_id_of = {
   menhir = 'ocaml.menhir',
   ocaml = 'ocaml',
@@ -17,7 +15,14 @@ return {
   default_config = {
     cmd = { 'ocamllsp' },
     filetypes = { 'ocaml', 'menhir', 'ocamlinterface', 'ocamllex', 'reason', 'dune' },
-    root_dir = util.root_pattern('*.opam', 'esy.json', 'package.json', '.git', 'dune-project', 'dune-workspace'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find(
+          { '*.opam', 'esy.json', 'package.json', '.git', 'dune-project', 'dune-workspace' },
+          { path = fname, upward = true }
+        )[1]
+      )
+    end,
     get_language_id = get_language_id,
   },
   docs = {

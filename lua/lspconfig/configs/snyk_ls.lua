@@ -1,9 +1,9 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'snyk-ls' },
-    root_dir = util.root_pattern('.git', '.snyk'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.git', '.snyk' }, { path = fname, upward = true })[1])
+    end,
     filetypes = {
       'go',
       'gomod',

@@ -1,4 +1,4 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 
 local function client_with_fn(fn)
   return function()
@@ -46,13 +46,13 @@ local function buf_search(client, bufnr)
 end
 
 local function buf_cancel_build(client, bufnr)
-  if vim.fn.has 'nvim-0.11' == 1 then
+  if vim.fn.has('nvim-0.11') == 1 then
     return client:exec_cmd({
       title = 'cancel',
       command = 'texlab.cancelBuild',
     }, { bufnr = bufnr })
   end
-  vim.lsp.buf.execute_command { command = 'texlab.cancelBuild' }
+  vim.lsp.buf.execute_command({ command = 'texlab.cancelBuild' })
   vim.notify('Build cancelled', vim.log.levels.INFO)
 end
 
@@ -72,7 +72,7 @@ local function command_factory(cmd)
     CancelBuild = 'texlab.cancelBuild',
   }
   return function(client, bufnr)
-    if vim.fn.has 'nvim-0.11' == 1 then
+    if vim.fn.has('nvim-0.11') == 1 then
       return client:exec_cmd({
         title = ('clean_%s'):format(cmd),
         command = cmd_tbl[cmd],
@@ -86,10 +86,10 @@ local function command_factory(cmd)
       end)
     end
 
-    vim.lsp.buf.execute_command {
+    vim.lsp.buf.execute_command({
       command = cmd_tbl[cmd],
       arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
-    }
+    })
     vim.notify(('command %s execute successfully'):format(cmd_tbl[cmd]))
   end
 end
@@ -114,7 +114,7 @@ local function buf_find_envs(client, bufnr)
     end
     vim.lsp.util.open_floating_preview(env_names, '', {
       height = #env_names,
-      width = math.max((max_length + #env_names - 1), (string.len 'Environments')),
+      width = math.max((max_length + #env_names - 1), (string.len('Environments'))),
       focusable = false,
       focus = false,
       border = 'single',
@@ -124,12 +124,12 @@ local function buf_find_envs(client, bufnr)
 end
 
 local function buf_change_env(client, bufnr)
-  local new = vim.fn.input 'Enter the new environment name: '
+  local new = vim.fn.input('Enter the new environment name: ')
   if not new or new == '' then
     return vim.notify('No environment name provided', vim.log.levels.WARN)
   end
   local pos = vim.api.nvim_win_get_cursor(0)
-  if vim.fn.has 'nvim-0.11' == 1 then
+  if vim.fn.has('nvim-0.11') == 1 then
     return client:exec_cmd({
       title = 'change_environment',
       command = 'texlab.changeEnvironment',
@@ -143,7 +143,7 @@ local function buf_change_env(client, bufnr)
     }, { bufnr = bufnr })
   end
 
-  vim.lsp.buf.execute_command {
+  vim.lsp.buf.execute_command({
     command = 'texlab.changeEnvironment',
     arguments = {
       {
@@ -152,14 +152,21 @@ local function buf_change_env(client, bufnr)
         newName = tostring(new),
       },
     },
-  }
+  })
 end
 
 return {
   default_config = {
     cmd = { 'texlab' },
     filetypes = { 'tex', 'plaintex', 'bib' },
-    root_dir = util.root_pattern('.git', '.latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic.toml'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find(
+          { '.git', '.latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic.toml' },
+          { path = fname, upward = true }
+        )[1]
+      )
+    end,
     single_file_support = true,
     settings = {
       texlab = {

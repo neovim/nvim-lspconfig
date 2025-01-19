@@ -1,4 +1,4 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 local lsp = vim.lsp
 
 local function buf_cache(bufnr, client)
@@ -52,7 +52,7 @@ local function denols_handler(err, result, ctx, config)
   local client = vim.lsp.get_client_by_id(ctx.client_id)
   for _, res in pairs(result) do
     local uri = res.uri or res.targetUri
-    if uri:match '^deno:' then
+    if uri:match('^deno:') then
       virtual_text_document(uri, client)
       res['uri'] = uri
       res['targetUri'] = uri
@@ -74,7 +74,9 @@ return {
       'typescriptreact',
       'typescript.tsx',
     },
-    root_dir = util.root_pattern('deno.json', 'deno.jsonc', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'deno.json', 'deno.jsonc', '.git' }, { path = fname, upward = true })[1])
+    end,
     settings = {
       deno = {
         enable = true,
@@ -96,7 +98,7 @@ return {
   commands = {
     DenolsCache = {
       function()
-        local clients = util.get_lsp_clients { bufnr = 0, name = 'denols' }
+        local clients = util.get_lsp_clients({ bufnr = 0, name = 'denols' })
         if #clients > 0 then
           buf_cache(0, clients[#clients])
         end

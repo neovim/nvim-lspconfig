@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'nxls', '--stdio' },
     filetypes = { 'json', 'jsonc' },
-    root_dir = util.root_pattern('nx.json', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'nx.json', '.git' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

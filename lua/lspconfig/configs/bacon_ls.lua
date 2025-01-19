@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'bacon-ls' },
     filetypes = { 'rust' },
-    root_dir = util.root_pattern('.bacon-locations', 'Cargo.toml'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.bacon-locations', 'Cargo.toml' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
     settings = {},
   },

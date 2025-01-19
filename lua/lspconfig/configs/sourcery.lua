@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local root_files = {
   'pyproject.toml',
   'setup.py',
@@ -10,16 +8,16 @@ local root_files = {
 }
 
 local token_in_auth_file = function()
-  local is_windows = vim.fn.has 'win32' == 1
+  local is_windows = vim.fn.has('win32') == 1
   local path_sep = is_windows and '\\' or '/'
 
-  local config_home = is_windows and vim.fn.getenv 'APPDATA' or vim.fn.expand '~/.config'
+  local config_home = is_windows and vim.fn.getenv('APPDATA') or vim.fn.expand('~/.config')
   local auth_file_path = config_home .. path_sep .. 'sourcery' .. path_sep .. 'auth.yaml'
 
   if vim.fn.filereadable(auth_file_path) == 1 then
     local content = vim.fn.readfile(auth_file_path)
     for _, line in ipairs(content) do
-      if line:match 'sourcery_token: (.+)' then
+      if line:match('sourcery_token: (.+)') then
         return true
       end
     end
@@ -38,8 +36,7 @@ return {
       token = nil,
     },
     root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ '.git', unpack(root_files) }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },

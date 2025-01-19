@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'stree', 'lsp' },
     filetypes = { 'ruby' },
-    root_dir = util.root_pattern('.streerc', 'Gemfile', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.streerc', 'Gemfile', '.git' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

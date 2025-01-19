@@ -1,12 +1,12 @@
-local util = require 'lspconfig.util'
-
 local bin_name = 'theme-check-language-server'
 
 return {
   default_config = {
     cmd = { bin_name, '--stdio' },
     filetypes = { 'liquid' },
-    root_dir = util.root_pattern '.theme-check.yml',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.theme-check.yml' }, { path = fname, upward = true })[1])
+    end,
     settings = {},
   },
   docs = {

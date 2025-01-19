@@ -1,10 +1,12 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'metals' },
     filetypes = { 'scala' },
-    root_dir = util.root_pattern('build.sbt', 'build.sc', 'build.gradle', 'pom.xml'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find({ 'build.sbt', 'build.sc', 'build.gradle', 'pom.xml' }, { path = fname, upward = true })[1]
+      )
+    end,
     message_level = vim.lsp.protocol.MessageType.Log,
     init_options = {
       statusBarProvider = 'show-message',

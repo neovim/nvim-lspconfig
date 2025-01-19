@@ -1,4 +1,4 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 
 -- https://clangd.llvm.org/extensions.html#switch-between-sourceheader
 local function switch_source_header(bufnr)
@@ -24,7 +24,7 @@ end
 local function symbol_info()
   local bufnr = vim.api.nvim_get_current_buf()
   local clangd_client = util.get_active_client_by_name(bufnr, 'clangd')
-  if not clangd_client or not clangd_client.supports_method 'textDocument/symbolInfo' then
+  if not clangd_client or not clangd_client.supports_method('textDocument/symbolInfo') then
     return vim.notify('Clangd client not found', vim.log.levels.ERROR)
   end
   local win = vim.api.nvim_get_current_win()
@@ -52,14 +52,15 @@ return {
     cmd = { 'clangd' },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
     root_dir = function(fname)
-      return util.root_pattern(
+      return vim.fs.dirname(vim.fs.find({
         '.clangd',
         '.clang-tidy',
         '.clang-format',
         'compile_commands.json',
         'compile_flags.txt',
-        'configure.ac' -- AutoTools
-      )(fname) or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+        'configure.ac', -- AutoTools
+        '.git',
+      }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
     capabilities = {

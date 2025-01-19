@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'tflint', '--langserver' },
     filetypes = { 'terraform' },
-    root_dir = util.root_pattern('.terraform', '.git', '.tflint.hcl'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.terraform', '.git', '.tflint.hcl' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

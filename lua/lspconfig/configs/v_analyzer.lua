@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'v-analyzer' },
     filetypes = { 'v', 'vsh', 'vv' },
-    root_dir = util.root_pattern('v.mod', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'v.mod', '.git' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

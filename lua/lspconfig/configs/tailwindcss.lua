@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'tailwindcss-language-server', '--stdio' },
@@ -100,7 +98,7 @@ return {
       end
     end,
     root_dir = function(fname)
-      return util.root_pattern(
+      return vim.fs.dirname(vim.fs.find({
         'tailwind.config.js',
         'tailwind.config.cjs',
         'tailwind.config.mjs',
@@ -108,10 +106,12 @@ return {
         'postcss.config.js',
         'postcss.config.cjs',
         'postcss.config.mjs',
-        'postcss.config.ts'
-      )(fname) or vim.fs.dirname(vim.fs.find('package.json', { path = fname, upward = true })[1]) or vim.fs.dirname(
-        vim.fs.find('node_modules', { path = fname, upward = true })[1]
-      ) or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+        'postcss.config.ts',
+      }, { path = fname, upward = true })[1]) or vim.fs.dirname(
+        vim.fs.find('package.json', { path = fname, upward = true })[1]
+      ) or vim.fs.dirname(vim.fs.find('node_modules', { path = fname, upward = true })[1]) or vim.fs.dirname(
+        vim.fs.find({ '.git' }, { path = fname, upward = true })[1]
+      )
     end,
   },
   docs = {

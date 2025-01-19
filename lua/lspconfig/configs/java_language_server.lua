@@ -1,9 +1,11 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     filetypes = { 'java' },
-    root_dir = util.root_pattern('build.gradle', 'build.gradle.kts', 'pom.xml', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find({ 'build.gradle', 'build.gradle.kts', 'pom.xml', '.git' }, { path = fname, upward = true })[1]
+      )
+    end,
     settings = {},
   },
   docs = {

@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local function build_index()
   local params = {
     command = 'systemverilog.build_index',
@@ -10,7 +8,7 @@ end
 local function report_hierarchy()
   local params = {
     command = 'systemverilog.report_hierarchy',
-    arguments = { vim.fn.expand '<cword>' },
+    arguments = { vim.fn.expand('<cword>') },
   }
   vim.lsp.buf.execute_command(params)
 end
@@ -20,8 +18,7 @@ return {
     cmd = { 'svlangserver' },
     filetypes = { 'verilog', 'systemverilog' },
     root_dir = function(fname)
-      return util.root_pattern '.svlangserver'(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ '.svlangserver', '.git' }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
     settings = {

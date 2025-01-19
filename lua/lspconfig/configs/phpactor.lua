@@ -1,4 +1,4 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 
 return {
   default_config = {
@@ -6,7 +6,9 @@ return {
     filetypes = { 'php' },
     root_dir = function(pattern)
       local cwd = vim.loop.cwd()
-      local root = util.root_pattern('composer.json', '.git', '.phpactor.json', '.phpactor.yml')(pattern)
+      local root = vim.fs.dirname(
+        vim.fs.find({ 'composer.json', '.git', '.phpactor.json', '.phpactor.yml' }, { path = pattern, upward = true })[1]
+      )
 
       -- prefer cwd if root is a descendant
       return util.path.is_descendant(cwd, root) and cwd or root

@@ -1,11 +1,9 @@
-local util = require 'lspconfig.util'
-
 local root_files = { 'Project.toml', 'JuliaProject.toml' }
 
 local function activate_env(path)
-  assert(vim.fn.has 'nvim-0.10' == 1, 'requires Nvim 0.10 or newer')
+  assert(vim.fn.has('nvim-0.10') == 1, 'requires Nvim 0.10 or newer')
   local bufnr = vim.api.nvim_get_current_buf()
-  local julials_clients = vim.lsp.get_clients { bufnr = bufnr, name = 'julials' }
+  local julials_clients = vim.lsp.get_clients({ bufnr = bufnr, name = 'julials' })
   assert(
     #julials_clients > 0,
     'method julia/activateenvironment is not supported by any servers active on the current buffer'
@@ -35,8 +33,8 @@ local function activate_env(path)
     _activate_env(path)
   else
     local depot_paths = vim.env.JULIA_DEPOT_PATH
-        and vim.split(vim.env.JULIA_DEPOT_PATH, vim.fn.has 'win32' == 1 and ';' or ':')
-      or { vim.fn.expand '~/.julia' }
+        and vim.split(vim.env.JULIA_DEPOT_PATH, vim.fn.has('win32') == 1 and ';' or ':')
+      or { vim.fn.expand('~/.julia') }
     local environments = {}
     vim.list_extend(environments, vim.fs.find(root_files, { type = 'file', upward = true, limit = math.huge }))
     for _, depot_path in ipairs(depot_paths) do
@@ -44,7 +42,7 @@ local function activate_env(path)
       vim.list_extend(
         environments,
         vim.fs.find(function(name, env_path)
-          return vim.tbl_contains(root_files, name) and string.sub(env_path, #depot_env + 1):match '^/[^/]*$'
+          return vim.tbl_contains(root_files, name) and string.sub(env_path, #depot_env + 1):match('^/[^/]*$')
         end, { path = depot_env, type = 'file', limit = math.huge })
       )
     end
@@ -98,8 +96,7 @@ return {
     cmd = cmd,
     filetypes = { 'julia' },
     root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ unpack(root_files), '.git' }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },

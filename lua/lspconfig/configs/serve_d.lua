@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'serve-d' },
     filetypes = { 'd' },
-    root_dir = util.root_pattern('dub.json', 'dub.sdl', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'dub.json', 'dub.sdl', '.git' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

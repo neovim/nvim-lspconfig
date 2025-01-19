@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'gh-actions-language-server', '--stdio' },
@@ -10,7 +8,7 @@ return {
     -- attaching.) For details, see #3558
     root_dir = function(filename)
       return filename:find('/%.(github|forgejo|gitea)/workflows/.+%.ya?ml')
-          and util.root_pattern('.github', '.forgejo', '.gitea')(filename)
+          and vim.fs.dirname(vim.fs.find('.github', { path = filename, upward = true })[1])
         or nil
     end,
 

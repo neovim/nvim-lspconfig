@@ -1,10 +1,12 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'quick-lint-js', '--lsp-server' },
     filetypes = { 'javascript', 'typescript' },
-    root_dir = util.root_pattern('package.json', 'jsconfig.json', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find({ 'package.json', 'jsconfig.json', '.git' }, { path = fname, upward = true })[1]
+      )
+    end,
     single_file_support = true,
   },
   docs = {

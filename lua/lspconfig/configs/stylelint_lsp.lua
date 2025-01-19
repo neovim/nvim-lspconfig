@@ -1,4 +1,4 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 
 local root_file = {
   '.stylelintrc',
@@ -24,7 +24,9 @@ return {
       'vue',
       'wxss',
     },
-    root_dir = util.root_pattern(unpack(root_file)),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ unpack(root_file) }, { path = fname, upward = true })[1])
+    end,
     settings = {},
   },
   docs = {

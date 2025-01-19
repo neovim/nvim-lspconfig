@@ -1,12 +1,9 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'move-analyzer' },
     filetypes = { 'move' },
     root_dir = function(fname)
-      local move_package_dir = util.root_pattern 'Move.toml'(fname)
-      return move_package_dir
+      return vim.fs.dirname(vim.fs.find({ 'Move.toml' }, { path = fname, upward = true })[1])
     end,
   },
   commands = {},

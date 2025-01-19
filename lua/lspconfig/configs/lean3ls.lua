@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'lean-language-server', '--stdio', '--', '-M', '4096', '-T', '100000' },
@@ -10,16 +8,16 @@ return {
       -- check if inside elan stdlib
       local stdlib_dir
       do
-        local _, endpos = fname:find '/lean/library'
+        local _, endpos = fname:find('/lean/library')
         if endpos then
           stdlib_dir = fname:sub(1, endpos)
         end
       end
 
-      return util.root_pattern 'leanpkg.toml'(fname)
-        or util.root_pattern 'leanpkg.path'(fname)
+      return vim.fs.dirname(vim.fs.find('leanpkg.toml', { path = fname, upward = true })[1])
+        or vim.fs.dirname(vim.fs.find('leanpkg.path', { path = fname, upward = true })[1])
         or stdlib_dir
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+        or vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },

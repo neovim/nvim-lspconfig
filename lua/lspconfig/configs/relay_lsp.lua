@@ -1,5 +1,4 @@
-local util = require 'lspconfig.util'
-local log = require 'vim.lsp.log'
+local log = require('vim.lsp.log')
 
 return {
   default_config = {
@@ -21,7 +20,9 @@ return {
       'typescriptreact',
       'typescript.tsx',
     },
-    root_dir = util.root_pattern('relay.config.*', 'package.json'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'relay.config.*', 'package.json' }, { path = fname, upward = true })[1])
+    end,
     on_new_config = function(config, root_dir)
       local project_root = vim.fs.find('node_modules', { path = root_dir, upward = true })[1]
       local node_bin_path = project_root .. '/node_modules/.bin'
@@ -40,13 +41,13 @@ return {
           vim.list_extend(config.cmd, { config.path_to_config })
           vim.list_extend(compiler_cmd, { config.path_to_config })
         else
-          log.error "[Relay LSP] Can't find Relay config file. Fallback to the default location..."
+          log.error("[Relay LSP] Can't find Relay config file. Fallback to the default location...")
         end
       end
       if config.auto_start_compiler then
         vim.fn.jobstart(compiler_cmd, {
           on_exit = function()
-            log.info '[Relay LSP] Relay Compiler exited'
+            log.info('[Relay LSP] Relay Compiler exited')
           end,
           cwd = project_root,
         })

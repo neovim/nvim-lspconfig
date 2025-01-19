@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'DelphiLSP.exe' },
     filetypes = { 'pascal' },
-    root_dir = util.root_pattern '*.dpr',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '*.dpr' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = false,
   },
   docs = {

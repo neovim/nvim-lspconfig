@@ -1,7 +1,8 @@
-local util = require 'lspconfig.util'
 local api = vim.api
 
-local elm_root_pattern = util.root_pattern 'elm.json'
+local elm_root_pattern = function(fname)
+  return vim.fs.dirname(vim.fs.find({ 'elm.json' }, { path = fname, upward = true })[1])
+end
 
 return {
   default_config = {
@@ -10,7 +11,7 @@ return {
     filetypes = { 'elm' },
     root_dir = function(fname)
       local filetype = api.nvim_buf_get_option(0, 'filetype')
-      if filetype == 'elm' or (filetype == 'json' and fname:match 'elm%.json$') then
+      if filetype == 'elm' or (filetype == 'json' and fname:match('elm%.json$')) then
         return elm_root_pattern(fname)
       end
     end,

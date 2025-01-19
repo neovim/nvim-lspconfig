@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'hlasm_language_server' },
     filetypes = { 'hlasm' },
-    root_dir = util.root_pattern '.hlasmplugin',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.hlasmplugin' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
   },
   docs = {

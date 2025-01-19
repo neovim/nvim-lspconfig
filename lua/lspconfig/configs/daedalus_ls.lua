@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local root_files = {
   'Gothic.src',
   'Camera.src',
@@ -14,7 +12,9 @@ return {
   default_config = {
     cmd = { 'DaedalusLanguageServer' },
     filetypes = { 'd' },
-    root_dir = util.root_pattern(unpack(root_files)),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ unpack(root_files) }, { path = fname, upward = true })[1])
+    end,
     settings = {
       DaedalusLanguageServer = {
         loglevel = 'debug',

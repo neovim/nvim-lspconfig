@@ -1,4 +1,4 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 
 local root_files = {
   'pyproject.toml',
@@ -16,20 +16,20 @@ local function organize_imports()
     arguments = { vim.uri_from_bufnr(0) },
   }
 
-  local clients = util.get_lsp_clients {
+  local clients = util.get_lsp_clients({
     bufnr = vim.api.nvim_get_current_buf(),
     name = 'basedpyright',
-  }
+  })
   for _, client in ipairs(clients) do
     client.request('workspace/executeCommand', params, nil, 0)
   end
 end
 
 local function set_python_path(path)
-  local clients = util.get_lsp_clients {
+  local clients = util.get_lsp_clients({
     bufnr = vim.api.nvim_get_current_buf(),
     name = 'basedpyright',
-  }
+  })
   for _, client in ipairs(clients) do
     if client.settings then
       client.settings.python = vim.tbl_deep_extend('force', client.settings.python or {}, { pythonPath = path })
@@ -45,7 +45,7 @@ return {
     cmd = { 'basedpyright-langserver', '--stdio' },
     filetypes = { 'python' },
     root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname)
+      return vim.fs.dirname(vim.fs.find({ unpack(root_files) }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
     settings = {

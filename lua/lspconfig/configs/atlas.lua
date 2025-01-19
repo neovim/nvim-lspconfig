@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'atlas', 'tool', 'lsp', '--stdio' },
@@ -7,7 +5,7 @@ return {
       'atlas-*',
     },
     root_dir = function(fname)
-      return util.root_pattern('atlas.hcl')(fname)
+      return vim.fs.dirname(vim.fs.find({ 'atlas.hcl' }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },

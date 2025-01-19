@@ -2,9 +2,9 @@
 local function library_path(path, cmd_env)
   path = path or '/usr/local/lib'
   cmd_env = cmd_env or {}
-  if vim.fn.has 'macunix' and not cmd_env.DYLD_LIBRARY_PATH then
+  if vim.fn.has('macunix') and not cmd_env.DYLD_LIBRARY_PATH then
     cmd_env.DYLD_LIBRARY_PATH = path
-  elseif vim.fn.has 'linux' and not cmd_env.LD_LIBRARY_PATH then
+  elseif vim.fn.has('linux') and not cmd_env.LD_LIBRARY_PATH then
     cmd_env.LD_LIBRARY_PATH = path
   end
   return cmd_env
@@ -15,7 +15,7 @@ return {
     cmd = { 'bqnlsp' },
     filetypes = { 'bqn' },
     root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
     libcbqnPath = nil,

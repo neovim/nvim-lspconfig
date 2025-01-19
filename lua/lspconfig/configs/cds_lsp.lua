@@ -1,11 +1,11 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'cds-lsp', '--stdio' },
     filetypes = { 'cds' },
     -- init_options = { provideFormatter = true }, -- needed to enable formatting capabilities
-    root_dir = util.root_pattern('package.json', 'db', 'srv'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'package.json', 'db', 'srv' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
     settings = {
       cds = { validate = true },

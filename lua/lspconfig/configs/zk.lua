@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local function find_zk_root(startpath)
   for dir in vim.fs.parents(startpath) do
     if vim.fn.isdirectory(vim.fs.joinpath(dir, '.zk')) == 1 then
@@ -12,15 +10,17 @@ return {
   default_config = {
     cmd = { 'zk', 'lsp' },
     filetypes = { 'markdown' },
-    root_dir = util.root_pattern '.zk',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.zk' }, { path = fname, upward = true })[1])
+    end,
   },
   commands = {
     ZkIndex = {
       function()
-        vim.lsp.buf.execute_command {
+        vim.lsp.buf.execute_command({
           command = 'zk.index',
           arguments = { vim.api.nvim_buf_get_name(0) },
-        }
+        })
       end,
       description = 'ZkIndex',
     },

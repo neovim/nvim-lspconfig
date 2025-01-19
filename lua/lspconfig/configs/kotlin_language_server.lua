@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local bin_name = 'kotlin-language-server'
 
 --- The presence of one of these files indicates a project root directory
@@ -19,11 +17,13 @@ local root_files = {
 return {
   default_config = {
     filetypes = { 'kotlin' },
-    root_dir = util.root_pattern(unpack(root_files)),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
+    end,
     cmd = { bin_name }, -- kotlin-language-server
     init_options = {
       -- Enables caching and use project root to store cache data.
-      storagePath = util.root_pattern(unpack(root_files))(vim.fn.expand '%:p:h'),
+      storagePath = vim.fs.dirname(vim.fs.find(root_files, { path = vim.fn.expand('%:p:h'), upward = true })[1]),
     },
   },
   docs = {

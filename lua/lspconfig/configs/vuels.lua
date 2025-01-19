@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'vls' },
     filetypes = { 'vue' },
-    root_dir = util.root_pattern('package.json', 'vue.config.js'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'package.json', 'vue.config.js' }, { path = fname, upward = true })[1])
+    end,
     init_options = {
       config = {
         vetur = {

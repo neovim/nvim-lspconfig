@@ -1,10 +1,10 @@
-local util = require 'lspconfig/util'
-
 return {
   default_config = {
     cmd = { 'earthlyls' },
     filetypes = { 'earthfile' },
-    root_dir = util.root_pattern 'Earthfile',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'Earthfile' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local root_files = {
   '.luarc.json',
   '.luarc.jsonc',
@@ -15,12 +13,12 @@ return {
     cmd = { 'lua-language-server' },
     filetypes = { 'lua' },
     root_dir = function(fname)
-      local root = util.root_pattern(unpack(root_files))(fname)
+      local root = vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
       if root and root ~= vim.env.HOME then
         return root
       end
-      local root_lua = util.root_pattern 'lua/'(fname) or ''
-      local root_git = vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]) or ''
+      local root_lua = vim.fs.dirname(vim.fs.find('lua/', { path = fname, upward = true })[1]) or ''
+      local root_git = vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1]) or ''
       if root_lua == '' and root_git == '' then
         return
       end

@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'dart', 'language-server', '--protocol=lsp' },
     filetypes = { 'dart' },
-    root_dir = util.root_pattern 'pubspec.yaml',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'pubspec.yaml' }, { path = fname, upward = true })[1])
+    end,
     init_options = {
       onlyAnalyzeProjectsWithOpenFiles = true,
       suggestFromUnimportedLibraries = true,

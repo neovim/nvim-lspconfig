@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'gdshader-lsp', '--stdio' },
     filetypes = { 'gdshader', 'gdshaderinc' },
-    root_dir = util.root_pattern 'project.godot',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'project.godot' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

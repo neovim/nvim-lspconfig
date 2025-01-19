@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'debputy', 'lsp', 'server' },
     filetypes = { 'debcontrol', 'debcopyright', 'debchangelog', 'make', 'yaml' },
-    root_dir = util.root_pattern 'debian',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'debian' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'dprint', 'lsp' },
@@ -17,7 +15,11 @@ return {
       'roslyn',
       'graphql',
     },
-    root_dir = util.root_pattern('dprint.json', '.dprint.json', 'dprint.jsonc', '.dprint.jsonc'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find({ 'dprint.json', '.dprint.json', 'dprint.jsonc', '.dprint.jsonc' }, { path = fname, upward = true })[1]
+      )
+    end,
     single_file_support = true,
     settings = {},
   },

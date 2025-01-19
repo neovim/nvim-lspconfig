@@ -1,32 +1,32 @@
-local util = require 'lspconfig.util'
-local async = require 'lspconfig.async'
+local util = require('lspconfig.util')
+local async = require('lspconfig.async')
 
 local function reload_workspace(bufnr)
   bufnr = util.validate_bufnr(bufnr)
-  local clients = util.get_lsp_clients { bufnr = bufnr, name = 'rust_analyzer' }
+  local clients = util.get_lsp_clients({ bufnr = bufnr, name = 'rust_analyzer' })
   for _, client in ipairs(clients) do
-    vim.notify 'Reloading Cargo Workspace'
+    vim.notify('Reloading Cargo Workspace')
     client.request('rust-analyzer/reloadWorkspace', nil, function(err)
       if err then
         error(tostring(err))
       end
-      vim.notify 'Cargo workspace reloaded'
+      vim.notify('Cargo workspace reloaded')
     end, 0)
   end
 end
 
 local function is_library(fname)
   local user_home = vim.fs.normalize(vim.env.HOME)
-  local cargo_home = os.getenv 'CARGO_HOME' or user_home .. '/.cargo'
+  local cargo_home = os.getenv('CARGO_HOME') or user_home .. '/.cargo'
   local registry = cargo_home .. '/registry/src'
   local git_registry = cargo_home .. '/git/checkouts'
 
-  local rustup_home = os.getenv 'RUSTUP_HOME' or user_home .. '/.rustup'
+  local rustup_home = os.getenv('RUSTUP_HOME') or user_home .. '/.rustup'
   local toolchains = rustup_home .. '/toolchains'
 
-  for _, item in ipairs { toolchains, registry, git_registry } do
+  for _, item in ipairs({ toolchains, registry, git_registry }) do
     if util.path.is_descendant(item, fname) then
-      local clients = util.get_lsp_clients { name = 'rust_analyzer' }
+      local clients = util.get_lsp_clients({ name = 'rust_analyzer' })
       return #clients > 0 and clients[#clients].config.root_dir or nil
     end
   end
@@ -43,7 +43,7 @@ return {
         return reuse_active
       end
 
-      local cargo_crate_dir = util.root_pattern 'Cargo.toml'(fname)
+      local cargo_crate_dir = vim.fs.dirname(vim.fs.find('Cargo.toml', { path = fname, upward = true })[1])
       local cargo_workspace_root
 
       if cargo_crate_dir ~= nil then
@@ -69,8 +69,8 @@ return {
 
       return cargo_workspace_root
         or cargo_crate_dir
-        or util.root_pattern 'rust-project.json'(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+        or vim.fs.dirname(vim.fs.find('rust-project.json', { path = fname, upward = true })[1])
+        or vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1])
     end,
     capabilities = {
       experimental = {

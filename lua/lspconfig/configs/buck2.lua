@@ -1,11 +1,9 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'buck2', 'lsp' },
     filetypes = { 'bzl' },
     root_dir = function(fname)
-      return util.root_pattern '.buckconfig'(fname)
+      return vim.fs.dirname(vim.fs.find({ '.buckconfig' }, { path = fname, upward = true })[1])
     end,
   },
   docs = {

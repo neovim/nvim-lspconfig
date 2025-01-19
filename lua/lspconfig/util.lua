@@ -120,26 +120,6 @@ local function escape_wildcards(path)
   return path:gsub('([%[%]%?%*])', '\\%1')
 end
 
-function M.root_pattern(...)
-  local patterns = M.tbl_flatten { ... }
-  return function(startpath)
-    startpath = M.strip_archive_subpath(startpath)
-    for _, pattern in ipairs(patterns) do
-      local match = M.search_ancestors(startpath, function(path)
-        for _, p in ipairs(vim.fn.glob(table.concat({ escape_wildcards(path), pattern }, '/'), true, true)) do
-          if vim.loop.fs_stat(p) then
-            return path
-          end
-        end
-      end)
-
-      if match ~= nil then
-        return match
-      end
-    end
-  end
-end
-
 function M.insert_package_json(config_files, field, fname)
   local path = vim.fn.fnamemodify(fname, ':h')
   local root_with_package = vim.fs.dirname(vim.fs.find('package.json', { path = path, upward = true })[1])
@@ -359,6 +339,27 @@ end
 --- @deprecated use `vim.fs.dirname(vim.fs.find('.git', { path = startpath, upward = true })[1])` instead
 function M.find_git_ancestor(startpath)
   return vim.fs.dirname(vim.fs.find('.git', { path = startpath, upward = true })[1])
+end
+
+--- @deprecated use `vim.fs.dirname(vim.fs.find({'fname1', 'fname2'}, { path = startpath, upward = true })[1])` instead
+function M.root_pattern(...)
+  local patterns = M.tbl_flatten { ... }
+  return function(startpath)
+    startpath = M.strip_archive_subpath(startpath)
+    for _, pattern in ipairs(patterns) do
+      local match = M.search_ancestors(startpath, function(path)
+        for _, p in ipairs(vim.fn.glob(table.concat({ escape_wildcards(path), pattern }, '/'), true, true)) do
+          if vim.loop.fs_stat(p) then
+            return path
+          end
+        end
+      end)
+
+      if match ~= nil then
+        return match
+      end
+    end
+  end
 end
 
 return M

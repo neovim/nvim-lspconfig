@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'reason-language-server' },
     filetypes = { 'reason' },
-    root_dir = util.root_pattern('bsconfig.json', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'bsconfig.json', '.git' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

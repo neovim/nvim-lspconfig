@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'hh_client', 'lsp' },
     filetypes = { 'php', 'hack' },
-    root_dir = util.root_pattern '.hhconfig',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.hhconfig' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

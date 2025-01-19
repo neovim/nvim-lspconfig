@@ -1,4 +1,4 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 
 local function get_default_mavenrepo()
   local repo = vim.env.HOME .. '/.m2/repository/dk/au/ece/vdmj'
@@ -45,7 +45,7 @@ return {
     cmd = { 'java' },
     filetypes = { 'vdmsl', 'vdmpp', 'vdmrt' },
     root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]) or find_vscode_ancestor(fname)
+      return vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1]) or find_vscode_ancestor(fname)
     end,
     options = {
       java = vim.env.JAVA_HOME and (vim.env.JAVA_HOME .. '/bin/java') or 'java',
@@ -115,6 +115,6 @@ by neovim.
       dap,
     }
 
-    config.cmd = util.tbl_flatten { java_cmd, vdmj_cmd }
+    config.cmd = util.tbl_flatten({ java_cmd, vdmj_cmd })
   end,
 }

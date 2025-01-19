@@ -1,10 +1,8 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'csharp-ls' },
     root_dir = function(fname)
-      return util.root_pattern '*.sln'(fname) or util.root_pattern '*.csproj'(fname)
+      return vim.fs.dirname(vim.fs.find({ '*.sln', '*.csproj' }, { path = fname, upward = true })[1])
     end,
     filetypes = { 'cs' },
     init_options = {

@@ -1,12 +1,9 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'mlir-pdll-lsp-server' },
     filetypes = { 'pdll' },
     root_dir = function(fname)
-      return util.root_pattern 'pdll_compile_commands.yml'(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ 'pdll_compile_commands.yml', '.git' }, { path = fname, upward = true })[1])
     end,
   },
   docs = {

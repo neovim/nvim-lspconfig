@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = {
@@ -9,8 +7,7 @@ return {
     },
     filetypes = { 'groovy' },
     root_dir = function(fname)
-      return util.root_pattern 'Jenkinsfile'(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ 'Jenkinsfile', '.git' }, { path = fname, upward = true })[1])
     end,
   },
   docs = {

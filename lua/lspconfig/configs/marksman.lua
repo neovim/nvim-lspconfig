@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local bin_name = 'marksman'
 local cmd = { bin_name, 'server' }
 
@@ -9,8 +7,7 @@ return {
     filetypes = { 'markdown', 'markdown.mdx' },
     root_dir = function(fname)
       local root_files = { '.marksman.toml' }
-      return util.root_pattern(unpack(root_files))(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ unpack(root_files), '.git' }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },

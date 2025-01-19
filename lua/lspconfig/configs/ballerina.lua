@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'bal', 'start-language-server' },
     filetypes = { 'ballerina' },
-    root_dir = util.root_pattern 'Ballerina.toml',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'Ballerina.toml' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

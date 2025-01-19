@@ -1,12 +1,9 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'erg', '--language-server' },
     filetypes = { 'erg' },
     root_dir = function(fname)
-      return util.root_pattern 'package.er'(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ 'package.er', '.git' }, { path = fname, upward = true })[1])
     end,
   },
   docs = {

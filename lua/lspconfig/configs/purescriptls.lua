@@ -1,17 +1,15 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'purescript-language-server', '--stdio' },
     filetypes = { 'purescript' },
-    root_dir = util.root_pattern(
-      'bower.json',
-      'flake.nix',
-      'psc-package.json',
-      'shell.nix',
-      'spago.dhall',
-      'spago.yaml'
-    ),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find(
+          { 'bower.json', 'flake.nix', 'psc-package.json', 'shell.nix', 'spago.dhall', 'spago.yaml' },
+          { path = fname, upward = true }
+        )[1]
+      )
+    end,
   },
   docs = {
     description = [[

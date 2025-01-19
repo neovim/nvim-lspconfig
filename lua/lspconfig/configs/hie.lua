@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'hie-wrapper', '--lsp' },
     filetypes = { 'haskell' },
-    root_dir = util.root_pattern('stack.yaml', 'package.yaml', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'stack.yaml', 'package.yaml', '.git' }, { path = fname, upward = true })[1])
+    end,
   },
 
   docs = {

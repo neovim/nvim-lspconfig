@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'qml-lsp' },
     filetypes = { 'qmljs' },
-    root_dir = util.root_pattern '*.qml',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '*.qml' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

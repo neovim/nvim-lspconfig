@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'zls' },
@@ -9,7 +7,9 @@ return {
       end
     end,
     filetypes = { 'zig', 'zir' },
-    root_dir = util.root_pattern('zls.json', 'build.zig', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'zls.json', 'build.zig', '.git' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
   },
   docs = {

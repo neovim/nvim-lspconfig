@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'steep', 'langserver' },
     filetypes = { 'ruby', 'eruby' },
-    root_dir = util.root_pattern('Steepfile', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'Steepfile', '.git' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

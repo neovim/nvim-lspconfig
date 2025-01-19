@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'ada_language_server' },
     filetypes = { 'ada' },
-    root_dir = util.root_pattern('Makefile', '.git', '*.gpr', '*.adc'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'Makefile', '.git', '*.gpr', '*.adc' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

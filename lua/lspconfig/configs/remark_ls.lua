@@ -1,19 +1,19 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'remark-language-server', '--stdio' },
     filetypes = { 'markdown' },
-    root_dir = util.root_pattern(
-      '.remarkrc',
-      '.remarkrc.json',
-      '.remarkrc.js',
-      '.remarkrc.cjs',
-      '.remarkrc.mjs',
-      '.remarkrc.yml',
-      '.remarkrc.yaml',
-      '.remarkignore'
-    ),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({
+        '.remarkrc',
+        '.remarkrc.json',
+        '.remarkrc.js',
+        '.remarkrc.cjs',
+        '.remarkrc.mjs',
+        '.remarkrc.yml',
+        '.remarkrc.yaml',
+        '.remarkignore',
+      }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
   },
   docs = {

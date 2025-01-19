@@ -3,7 +3,7 @@ return {
     cmd = { 'cucumber-language-server', '--stdio' },
     filetypes = { 'cucumber' },
     root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1])
     end,
   },
   docs = {

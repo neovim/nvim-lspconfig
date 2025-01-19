@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'erlang_ls' },
     filetypes = { 'erlang' },
-    root_dir = util.root_pattern('rebar.config', 'erlang.mk', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'rebar.config', 'erlang.mk', '.git' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
   },
   docs = {

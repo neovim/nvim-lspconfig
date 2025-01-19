@@ -1,10 +1,15 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'docker-compose-langserver', '--stdio' },
     filetypes = { 'yaml.docker-compose' },
-    root_dir = util.root_pattern('docker-compose.yaml', 'docker-compose.yml', 'compose.yaml', 'compose.yml'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find(
+          { 'docker-compose.yaml', 'docker-compose.yml', 'compose.yaml', 'compose.yml' },
+          { path = fname, upward = true }
+        )[1]
+      )
+    end,
     single_file_support = true,
   },
   docs = {

@@ -1,11 +1,9 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'aiken', 'lsp' },
     filetypes = { 'aiken' },
     root_dir = function(fname)
-      return util.root_pattern('aiken.toml', '.git')(fname)
+      return vim.fs.dirname(vim.fs.find({ 'aiken.toml', '.git' }, { path = fname, upward = true })[1])
     end,
   },
   docs = {

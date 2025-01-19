@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'biome', 'lsp-proxy' },
@@ -17,7 +15,9 @@ return {
       'typescriptreact',
       'vue',
     },
-    root_dir = util.root_pattern('biome.json', 'biome.jsonc'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'biome.json', 'biome.jsonc' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = false,
   },
   docs = {

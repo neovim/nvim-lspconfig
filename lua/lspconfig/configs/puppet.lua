@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local root_files = {
   'manifests',
   '.puppet-lint.rc',
@@ -11,7 +9,9 @@ return {
   default_config = {
     cmd = { 'puppet-languageserver', '--stdio' },
     filetypes = { 'puppet' },
-    root_dir = util.root_pattern(unpack(root_files)),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ unpack(root_files) }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
   },
   docs = {

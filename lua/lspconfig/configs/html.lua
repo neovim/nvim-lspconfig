@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'vscode-html-language-server', '--stdio' },
     filetypes = { 'html', 'templ' },
-    root_dir = util.root_pattern('package.json', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'package.json', '.git' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
     settings = {},
     init_options = {

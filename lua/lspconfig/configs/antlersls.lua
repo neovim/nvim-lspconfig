@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'antlersls', '--stdio' },
     filetypes = { 'html', 'antlers' },
-    root_dir = util.root_pattern 'composer.json',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'composer.json' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = {
@@ -14,7 +12,9 @@ return {
       'stdio',
     },
     filetypes = { 'prolog' },
-    root_dir = util.root_pattern 'pack.pl',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'pack.pl' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
   },
   docs = {

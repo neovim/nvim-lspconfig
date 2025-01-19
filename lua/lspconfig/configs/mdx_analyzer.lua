@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local function get_typescript_server_path(root_dir)
   local project_root = vim.fs.dirname(vim.fs.find('node_modules', { path = root_dir, upward = true })[1])
   return project_root and (project_root .. '/node_modules/typescript/lib') or ''
@@ -9,7 +7,9 @@ return {
   default_config = {
     cmd = { 'mdx-language-server', '--stdio' },
     filetypes = { 'mdx' },
-    root_dir = util.root_pattern 'package.json',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'package.json' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
     settings = {},
     init_options = {

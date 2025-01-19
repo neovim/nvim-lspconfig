@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'lwc-language-server', '--stdio' },
     filetypes = { 'javascript', 'html' },
-    root_dir = util.root_pattern 'sfdx-project.json',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'sfdx-project.json' }, { path = fname, upward = true })[1])
+    end,
     init_options = {
       embeddedLanguages = {
         javascript = true,

@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'als' },
     filetypes = { 'agda' },
-    root_dir = util.root_pattern('.git', '*.agda-lib'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.git', '*.agda-lib' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
   },
   docs = {

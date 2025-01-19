@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     init_options = { hostInfo = 'neovim' },
@@ -12,7 +10,11 @@ return {
       'typescriptreact',
       'typescript.tsx',
     },
-    root_dir = util.root_pattern('tsconfig.json', 'jsconfig.json', 'package.json', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find({ 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' }, { path = fname, upward = true })[1]
+      )
+    end,
     single_file_support = true,
   },
   docs = {

@@ -1,11 +1,9 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'bufls', 'serve' },
     filetypes = { 'proto' },
     root_dir = function(fname)
-      return util.root_pattern('buf.work.yaml', '.git')(fname)
+      return vim.fs.dirname(vim.fs.find({ 'buf.work.yaml', '.git' }, { path = fname, upward = true })[1])
     end,
   },
   docs = {

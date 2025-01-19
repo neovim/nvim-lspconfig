@@ -1,4 +1,4 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 
 local meson_matcher = function(path)
   local pattern = 'meson.build'
@@ -8,10 +8,10 @@ local meson_matcher = function(path)
   end
   for line in io.lines(f) do
     -- skip meson comments
-    if not line:match '^%s*#.*' then
+    if not line:match('^%s*#.*') then
       local str = line:gsub('%s+', '')
       if str ~= '' then
-        if str:match '^project%(' then
+        if str:match('^project%(') then
           return path
         else
           break
@@ -27,7 +27,7 @@ return {
     filetypes = { 'vala', 'genie' },
     root_dir = function(fname)
       local root = util.search_ancestors(fname, meson_matcher)
-      return root or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return root or vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },

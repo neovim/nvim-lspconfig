@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local root_files = { 'configure.ac', 'Makefile', 'Makefile.am', '*.mk' }
 
 return {
@@ -7,7 +5,7 @@ return {
     cmd = { 'autotools-language-server' },
     filetypes = { 'config', 'automake', 'make' },
     root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname)
+      return vim.fs.dirname(vim.fs.find({ unpack(root_files) }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },

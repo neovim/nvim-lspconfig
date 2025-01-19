@@ -1,10 +1,9 @@
-local util = require 'lspconfig.util'
-local handlers = require 'vim.lsp.handlers'
+local handlers = require('vim.lsp.handlers')
 
 local env = {
   HOME = vim.loop.os_homedir(),
-  XDG_CACHE_HOME = os.getenv 'XDG_CACHE_HOME',
-  JDTLS_JVM_ARGS = os.getenv 'JDTLS_JVM_ARGS',
+  XDG_CACHE_HOME = os.getenv('XDG_CACHE_HOME'),
+  JDTLS_JVM_ARGS = os.getenv('JDTLS_JVM_ARGS'),
 }
 
 local function get_cache_dir()
@@ -71,9 +70,9 @@ end
 -- Non-standard notification that can be used to display progress
 local function on_language_status(_, result)
   local command = vim.api.nvim_command
-  command 'echohl ModeMsg'
+  command('echohl ModeMsg')
   command(string.format('echo "%s"', result.message))
-  command 'echohl None'
+  command('echohl None')
 end
 
 return {
@@ -100,7 +99,7 @@ return {
         },
       }
       for _, patterns in ipairs(root_files) do
-        local root = util.root_pattern(unpack(patterns))(fname)
+        local root = vim.fs.dirname(vim.fs.find(patterns, { path = fname, upward = true })[1])
         if root then
           return root
         end

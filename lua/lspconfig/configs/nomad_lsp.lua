@@ -1,7 +1,6 @@
-local util = require 'lspconfig.util'
 local bin_name = 'nomad-lsp'
 
-if vim.fn.has 'win32' == 1 then
+if vim.fn.has('win32') == 1 then
   bin_name = bin_name .. '.exe'
 end
 
@@ -9,7 +8,9 @@ return {
   default_config = {
     cmd = { bin_name },
     filetypes = { 'hcl.nomad', 'nomad' },
-    root_dir = util.root_pattern '*.nomad',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '*.nomad' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

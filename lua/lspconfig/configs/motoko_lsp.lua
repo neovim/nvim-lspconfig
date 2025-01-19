@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'motoko-lsp', '--stdio' },
     filetypes = { 'motoko' },
-    root_dir = util.root_pattern('dfx.json', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'dfx.json', '.git' }, { path = fname, upward = true })[1])
+    end,
     init_options = {
       formatter = 'auto',
     },

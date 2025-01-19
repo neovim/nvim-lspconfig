@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'solidity-ls', '--stdio' },
     filetypes = { 'solidity' },
-    root_dir = util.root_pattern('.git', 'package.json'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.git', 'package.json' }, { path = fname, upward = true })[1])
+    end,
     settings = { solidity = { includePath = '', remapping = {} } },
   },
   docs = {
@@ -18,7 +18,7 @@ Make sure that solc is installed and it's the same version of the file.  solc-se
 Solidity language server is a LSP with autocomplete, go to definition and diagnostics.
 
 If you use brownie, use this root_dir:
-root_dir = util.root_pattern('brownie-config.yaml', '.git')
+root_dir =  function(fname) return vim.fs.dirname(vim.fs.find({'brownie-config.yaml', '.git'}, { path = fname, upward = true })[1])    end
 
 on includePath, you can add an extra path to search for external libs, on remapping you can remap lib <> path, like:
 
@@ -30,7 +30,9 @@ on includePath, you can add an extra path to search for external libs, on remapp
 Change the root_dir to:
 
 ```lua
-root_pattern("brownie-config.yaml", ".git")
+root_dir = function(fname)
+  return vim.fs.dirname(vim.fs.find({ 'brownie-config.yaml', '.git' }, { path = fname, upward = true })[1])
+end
 ```
 
 The best way of using it is to have a package.json in your project folder with the packages that you will use.

@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'prisma-language-server', '--stdio' },
@@ -9,7 +7,9 @@ return {
         prismaFmtBinPath = '',
       },
     },
-    root_dir = util.root_pattern('.git', 'package.json'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.git', 'package.json' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

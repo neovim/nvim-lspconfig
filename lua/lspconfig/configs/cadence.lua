@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'flow', 'cadence', 'language-server' },
@@ -7,8 +5,8 @@ return {
     init_options = {
       numberOfAccounts = '1',
     },
-    root_dir = function(fname, _)
-      return util.root_pattern 'flow.json'(fname) or vim.env.HOME
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find('flow.json', { path = fname, upward = true })[1]) or vim.env.HOME
     end,
     on_new_config = function(new_config, new_root_dir)
       new_config.init_options.configPath = new_root_dir .. '/flow.json'

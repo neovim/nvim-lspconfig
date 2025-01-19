@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'ast-grep', 'lsp' },
@@ -18,7 +16,9 @@ return {
       'dart',
       'lua',
     },
-    root_dir = util.root_pattern('sgconfig.yaml', 'sgconfig.yml'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'sgconfig.yaml', 'sgconfig.yml' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

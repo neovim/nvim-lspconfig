@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 -- Angular requires a node_modules directory to probe for @angular/language-service and typescript
 -- in order to use your projects configured versions.
 -- This defaults to the vim cwd, but will get overwritten by the resolved root of the file.
@@ -25,7 +23,9 @@ return {
     -- Check for angular.json since that is the root of the project.
     -- Don't check for tsconfig.json or package.json since there are multiple of these
     -- in an angular monorepo setup.
-    root_dir = util.root_pattern 'angular.json',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'angular.json' }, { path = fname, upward = true })[1])
+    end,
   },
   on_new_config = function(new_config, new_root_dir)
     local new_probe_dir = get_probe_dir(new_root_dir)

@@ -3,7 +3,7 @@ return {
     cmd = { 'ginko_ls' },
     filetypes = { 'dts' },
     root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1])
     end,
     settings = {},
   },

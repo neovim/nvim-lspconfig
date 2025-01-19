@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
-    cmd = { 'nc', 'localhost', os.getenv 'UNISON_LSP_PORT' or '5757' },
+    cmd = { 'nc', 'localhost', os.getenv('UNISON_LSP_PORT') or '5757' },
     filetypes = { 'unison' },
-    root_dir = util.root_pattern '*.u',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '*.u' }, { path = fname, upward = true })[1])
+    end,
     settings = {},
   },
   docs = {

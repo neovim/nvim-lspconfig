@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = {
@@ -8,7 +6,9 @@ return {
     filetypes = {
       'teal',
     },
-    root_dir = util.root_pattern 'tlconfig.lua',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'tlconfig.lua' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

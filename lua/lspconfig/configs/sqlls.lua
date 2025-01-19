@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'sql-language-server', 'up', '--method', 'stdio' },
     filetypes = { 'sql', 'mysql' },
-    root_dir = util.root_pattern '.sqllsrc.json',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.sqllsrc.json' }, { path = fname, upward = true })[1])
+    end,
     settings = {},
   },
   docs = {

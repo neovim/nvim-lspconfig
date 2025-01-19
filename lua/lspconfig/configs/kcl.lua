@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'kcl-language-server' },
     filetypes = { 'kcl' },
-    root_dir = util.root_pattern '.git',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

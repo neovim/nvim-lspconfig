@@ -1,11 +1,11 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'statix', 'check', '--stdin' },
     filetypes = { 'nix' },
     single_file_support = true,
-    root_dir = util.root_pattern('flake.nix', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'flake.nix', '.git' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'ocaml-language-server', '--stdio' },
     filetypes = { 'ocaml', 'reason' },
-    root_dir = util.root_pattern('*.opam', 'esy.json', 'package.json'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '*.opam', 'esy.json', 'package.json' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

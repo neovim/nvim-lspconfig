@@ -1,10 +1,10 @@
-local util = require('lspconfig.util')
-
 return {
   default_config = {
     cmd = { 'selene-3p-language-server' },
     filetypes = { 'lua' },
-    root_dir = util.root_pattern('selene.toml'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'selene.toml' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

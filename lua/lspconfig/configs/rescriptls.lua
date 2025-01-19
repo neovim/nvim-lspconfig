@@ -1,10 +1,12 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'rescript-language-server', '--stdio' },
     filetypes = { 'rescript' },
-    root_dir = util.root_pattern('bsconfig.json', 'rescript.json', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find({ 'bsconfig.json', 'rescript.json', '.git' }, { path = fname, upward = true })[1]
+      )
+    end,
     settings = {},
     init_options = {
       extensionConfiguration = {
@@ -47,6 +49,5 @@ require'lspconfig'.pylsp.setup{
 }
 ```
 ]],
-    root_dir = [[root_pattern('bsconfig.json', 'rescript.json', '.git')]],
   },
 }

@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'lake', 'serve', '--' },
@@ -9,21 +7,21 @@ return {
       fname = vim.fs.normalize(fname)
       local stdlib_dir
       do
-        local _, endpos = fname:find '/src/lean'
+        local _, endpos = fname:find('/src/lean')
         if endpos then
           stdlib_dir = fname:sub(1, endpos)
         end
       end
       if not stdlib_dir then
-        local _, endpos = fname:find '/lib/lean'
+        local _, endpos = fname:find('/lib/lean')
         if endpos then
           stdlib_dir = fname:sub(1, endpos)
         end
       end
 
-      return util.root_pattern('lakefile.toml', 'lakefile.lean', 'lean-toolchain')(fname)
-        or stdlib_dir
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(
+        vim.fs.find({ 'lakefile.toml', 'lakefile.lean', 'lean-toolchain' }, { path = fname, upward = true })[1]
+      ) or stdlib_dir or vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1])
     end,
     on_new_config = function(config, root_dir)
       -- add root dir as command-line argument for `ps aux`

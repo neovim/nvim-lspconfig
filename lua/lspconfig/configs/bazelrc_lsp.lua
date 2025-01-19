@@ -1,10 +1,12 @@
-local util = require 'lspconfig/util'
-
 return {
   default_config = {
     cmd = { 'bazelrc-lsp' },
     filetypes = { 'bazelrc' },
-    root_dir = util.root_pattern('WORKSPACE', 'WORKSPACE.bazel', 'MODULE.bazel'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find({ 'WORKSPACE', 'WORKSPACE.bazel', 'MODULE.bazel' }, { path = fname, upward = true })[1]
+      )
+    end,
   },
   docs = {
     description = [[

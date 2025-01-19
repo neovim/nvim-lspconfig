@@ -53,8 +53,6 @@ Additionally, these options are often useful:
 An example for adding a new config is shown below:
 
 ```lua
-local util = require 'lspconfig.util'
-
 local function organize_imports()
   local params = {
     command = 'pyright.organizeimports',
@@ -67,14 +65,14 @@ return {
   default_config = {
     cmd = { 'pyright-langserver', '--stdio' },
     filetypes = { 'python' },
-    root_dir = util.root_pattern(
-      'pyproject.toml',
-      'setup.py',
-      'setup.cfg',
-      'requirements.txt',
-      'Pipfile',
-      'pyrightconfig.json',
-    ),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find(
+          { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', 'pyrightconfig.json' },
+          { path = fname, upward = true }
+        )[1]
+      )
+    end,
     single_file_support = true,
     settings = {
       python = {

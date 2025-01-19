@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'pyre', 'persistent' },
     filetypes = { 'python' },
-    root_dir = util.root_pattern '.pyre_configuration',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.pyre_configuration' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

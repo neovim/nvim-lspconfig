@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'vale-ls' },
     filetypes = { 'markdown', 'text', 'tex', 'rst' },
-    root_dir = util.root_pattern '.vale.ini',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.vale.ini' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
   },
   docs = {

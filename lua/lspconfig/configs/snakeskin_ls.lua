@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'snakeskin-cli', 'lsp', '--stdio' },
     filetypes = { 'ss' },
-    root_dir = util.root_pattern 'package.json',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'package.json' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

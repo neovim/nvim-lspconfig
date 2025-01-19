@@ -245,7 +245,7 @@ ADDING NEW SERVERS                                    *lspconfig-new*
 
 The steps for adding and enabling a new server configuration are:
 
-1. Define the configuration (see also |vim.fs.root()|): >lua
+1. Define the configuration: >lua
    local lspconfig = require 'lspconfig'
    local configs = require 'lspconfig.configs'
 
@@ -256,7 +256,7 @@ The steps for adding and enabling a new server configuration are:
          cmd = {'/home/neovim/lua-language-server/run.sh'},
          filetypes = {'lua'},
          root_dir = function(fname)
-           return lspconfig.util.find_git_ancestor(fname)
+           return vim.fs.root(fname, '.git')
          end,
          settings = {},
        },
@@ -295,34 +295,38 @@ below returns a function that takes as its argument the current buffer path.
   the patterns are specified. >
    root_dir = util.root_pattern('pyproject.toml', 'requirements.txt')
 
+- WARNING: `util.root_pattern` is deprecated and will be removed in the future.
+  Instead, use >lua
+  vim.fs.dirname(vim.fs.find({ 'pyproject.toml', 'requirements.txt' }, { path = fname, upward = true })[1])
+<
 - Locate the first parent dir containing a ".git" file or directory: >lua
-  vim.fs.dirname(vim.fs.find('.git', { path = root_dir, upward = true })[1])
+  vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
 <
   If you have Nvim 0.10 or newer then >lua
-  vim.fs.root(root_dir, ".git")
+  vim.fs.root(fname, ".git")
 <
   can be used instead.
-  - Note: The old `util.find_git_ancestor` API is deprecated and will
+  - WARNING: The old `util.find_git_ancestor` API is deprecated and will
     be removed.
 <
 - Locate the first parent dir containing a "node_modules" dir: >lua
-  vim.fs.dirname(vim.fs.find('node_modules', { path = root_dir, upward = true })[1])
+  vim.fs.dirname(vim.fs.find('node_modules', { path = fname, upward = true })[1])
 <
   If you have Nvim 0.10 or newer then >lua
-  vim.fs.root(root_dir, "node_modules")
+  vim.fs.root(fname, "node_modules")
 <
   can be used instead.
-  - Note: The old `util.find_node_modules_ancestor` API is deprecated and will
+  - WARNING: The old `util.find_node_modules_ancestor` API is deprecated and will
     be removed.
 
 - Locate the first parent dir containing a "package.json" dir: >lua
-  vim.fs.dirname(vim.fs.find('package.json', { path = root_dir, upward = true })[1])
+  vim.fs.dirname(vim.fs.find('package.json', { path = fname, upward = true })[1])
 <
   If you have Nvim 0.10 or newer then >lua
-  vim.fs.root(root_dir, "package.json")
+  vim.fs.root(fname, "package.json")
 <
   can be used instead.
-  - Note: The old `util.find_package_json_ancestor` API is deprecated and will
+  - WARNING: The old `util.find_package_json_ancestor` API is deprecated and will
     be removed.
 <
 Note: On Windows, `lspconfig` always assumes forward slash normalized paths with
@@ -354,8 +358,8 @@ for some project structures. Example (for Kotlin): >lua
     'build.gradle.kts', -- Gradle
   }
   root_dir = function(fname)
-    local primary = util.root_pattern(unpack(root_files))(fname)
-    local fallback = util.root_pattern(unpack(fallback_root_files))(fname)
+    local primary = vim.fs.root(fname, root_files)
+    local fallback = vim.fs.root(fname, fallback_root_files)
     return primary or fallback
   end
 <

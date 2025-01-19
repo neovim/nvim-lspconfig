@@ -1,7 +1,7 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 
 local bin_name = 'ds-pinyin-lsp'
-if vim.fn.has 'win32' == 1 then
+if vim.fn.has('win32') == 1 then
   bin_name = bin_name .. '.exe'
 end
 
@@ -13,7 +13,7 @@ local function ds_pinyin_lsp_off(bufnr)
       ['completion_on'] = false,
     })
   else
-    vim.notify 'notification $/turn/completion is not supported by any servers active on the current buffer'
+    vim.notify('notification $/turn/completion is not supported by any servers active on the current buffer')
   end
 end
 
@@ -25,7 +25,7 @@ local function ds_pinyin_lsp_on(bufnr)
       ['completion_on'] = true,
     })
   else
-    vim.notify 'notification $/turn/completion is not supported by any servers active on the current buffer'
+    vim.notify('notification $/turn/completion is not supported by any servers active on the current buffer')
   end
 end
 
@@ -34,7 +34,7 @@ return {
     cmd = { bin_name },
     filetypes = { 'markdown', 'org' },
     root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
     init_options = {

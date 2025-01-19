@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'ts_query_ls' },
     filetypes = { 'query' },
-    root_dir = util.root_pattern('queries', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'queries', '.git' }, { path = fname, upward = true })[1])
+    end,
     settings = {
       parser_aliases = {
         ecma = 'javascript',

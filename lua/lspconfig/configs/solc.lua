@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'solc', '--lsp' },
     filetypes = { 'solidity' },
-    root_dir = util.root_pattern('hardhat.config.*', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'hardhat.config.*', '.git' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

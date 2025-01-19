@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'helm_ls', 'serve' },
     filetypes = { 'helm' },
-    root_dir = util.root_pattern 'Chart.yaml',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'Chart.yaml' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
     capabilities = {
       workspace = {

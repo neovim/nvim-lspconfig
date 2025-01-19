@@ -1,11 +1,12 @@
-local util = require 'lspconfig.util'
 local bin_name = 'ntt'
 
 return {
   default_config = {
     cmd = { bin_name, 'langserver' },
     filetypes = { 'ttcn' },
-    root_dir = util.root_pattern '.git',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

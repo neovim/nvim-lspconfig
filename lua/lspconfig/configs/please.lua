@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'plz', 'tool', 'lps' },
     filetypes = { 'bzl' },
-    root_dir = util.root_pattern '.plzconfig',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.plzconfig' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
   },
   docs = {

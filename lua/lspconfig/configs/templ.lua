@@ -1,11 +1,9 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'templ', 'lsp' },
     filetypes = { 'templ' },
     root_dir = function(fname)
-      return util.root_pattern('go.work', 'go.mod', '.git')(fname)
+      return vim.fs.dirname(vim.fs.find({ 'go.work', 'go.mod', '.git' }, { path = fname, upward = true })[1])
     end,
   },
   docs = {

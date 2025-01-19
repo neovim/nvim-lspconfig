@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = {
@@ -11,8 +9,7 @@ return {
     },
     filetypes = { 'fortran' },
     root_dir = function(fname)
-      return util.root_pattern '.fortls'(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ '.fortls', '.git' }, { path = fname, upward = true })[1])
     end,
     settings = {},
   },

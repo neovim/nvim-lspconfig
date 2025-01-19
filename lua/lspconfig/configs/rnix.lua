@@ -3,7 +3,7 @@ return {
     cmd = { 'rnix-lsp' },
     filetypes = { 'nix' },
     root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]) or vim.loop.os_homedir()
+      return vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1]) or vim.loop.os_homedir()
     end,
     settings = {},
     init_options = {},

@@ -1,11 +1,11 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     name = 'somesass_ls',
     cmd = { 'some-sass-language-server', '--stdio' },
     filetypes = { 'scss', 'sass' },
-    root_dir = util.root_pattern('.git', '.package.json'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.git', '.package.json' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
     settings = {
       somesass = {

@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'stimulus-language-server', '--stdio' },
     filetypes = { 'html', 'ruby', 'eruby', 'blade', 'php' },
-    root_dir = util.root_pattern('Gemfile', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'Gemfile', '.git' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

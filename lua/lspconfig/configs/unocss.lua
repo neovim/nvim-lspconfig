@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'unocss-language-server', '--stdio' },
@@ -30,7 +28,12 @@ return {
       'rust',
     },
     root_dir = function(fname)
-      return util.root_pattern('unocss.config.js', 'unocss.config.ts', 'uno.config.js', 'uno.config.ts')(fname)
+      return vim.fs.dirname(
+        vim.fs.find(
+          { 'unocss.config.js', 'unocss.config.ts', 'uno.config.js', 'uno.config.ts' },
+          { path = fname, upward = true }
+        )[1]
+      )
     end,
   },
   docs = {

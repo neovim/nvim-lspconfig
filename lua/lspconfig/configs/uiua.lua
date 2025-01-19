@@ -1,12 +1,9 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'uiua', 'lsp' },
     filetypes = { 'uiua' },
     root_dir = function(fname)
-      return util.root_pattern('main.ua', '.fmt.ua')(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ 'main.ua', '.fmt.ua', '.git' }, { path = fname, upward = true })[1])
     end,
   },
   docs = {

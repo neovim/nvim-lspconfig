@@ -1,10 +1,12 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'graphql-lsp', 'server', '-m', 'stream' },
     filetypes = { 'graphql', 'typescriptreact', 'javascriptreact' },
-    root_dir = util.root_pattern('.graphqlrc*', '.graphql.config.*', 'graphql.config.*'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find({ '.graphqlrc*', '.graphql.config.*', 'graphql.config.*' }, { path = fname, upward = true })[1]
+      )
+    end,
   },
 
   docs = {

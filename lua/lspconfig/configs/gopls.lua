@@ -1,5 +1,5 @@
-local util = require 'lspconfig.util'
-local async = require 'lspconfig.async'
+local util = require('lspconfig.util')
+local async = require('lspconfig.async')
 local mod_cache = nil
 
 return {
@@ -9,20 +9,20 @@ return {
     root_dir = function(fname)
       -- see: https://github.com/neovim/nvim-lspconfig/issues/804
       if not mod_cache then
-        local result = async.run_command { 'go', 'env', 'GOMODCACHE' }
+        local result = async.run_command({ 'go', 'env', 'GOMODCACHE' })
         if result and result[1] then
           mod_cache = vim.trim(result[1])
         else
-          mod_cache = vim.fn.system 'go env GOMODCACHE'
+          mod_cache = vim.fn.system('go env GOMODCACHE')
         end
       end
       if mod_cache and fname:sub(1, #mod_cache) == mod_cache then
-        local clients = util.get_lsp_clients { name = 'gopls' }
+        local clients = util.get_lsp_clients({ name = 'gopls' })
         if #clients > 0 then
           return clients[#clients].config.root_dir
         end
       end
-      return util.root_pattern('go.work', 'go.mod', '.git')(fname)
+      return vim.fs.dirname(vim.fs.find({ 'go.work', 'go.mod', '.git' }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },

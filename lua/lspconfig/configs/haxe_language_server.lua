@@ -1,8 +1,6 @@
-local util = require 'lspconfig.util'
-
 local function find_hxml(path)
   return vim.fs.find(function(name)
-    return name:match '.hxml$'
+    return name:match('.hxml$')
   end, { path = path, type = 'file' })
 end
 
@@ -10,7 +8,9 @@ return {
   default_config = {
     cmd = { 'haxe-language-server' },
     filetypes = { 'haxe' },
-    root_dir = util.root_pattern('*.hxml', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '*.hxml', '.git' }, { path = fname, upward = true })[1])
+    end,
     settings = {
       haxe = {
         executable = 'haxe',

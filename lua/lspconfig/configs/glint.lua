@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'glint-language-server' },
@@ -22,14 +20,14 @@ return {
       'javascript',
       'javascript.glimmer',
     },
-    root_dir = util.root_pattern(
-      '.glintrc.yml',
-      '.glintrc',
-      '.glintrc.json',
-      '.glintrc.js',
-      'glint.config.js',
-      'package.json'
-    ),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find(
+          { '.glintrc.yml', '.glintrc', '.glintrc.json', '.glintrc.js', 'glint.config.js', 'package.json' },
+          { path = fname, upward = true }
+        )[1]
+      )
+    end,
   },
   docs = {
     description = [[

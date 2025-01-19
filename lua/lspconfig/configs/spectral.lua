@@ -1,12 +1,17 @@
-local util = require 'lspconfig.util'
-
 local bin_name = 'spectral-language-server'
 
 return {
   default_config = {
     cmd = { bin_name, '--stdio' },
     filetypes = { 'yaml', 'json', 'yml' },
-    root_dir = util.root_pattern('.spectral.yaml', '.spectral.yml', '.spectral.json', '.spectral.js'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find(
+          { '.spectral.yaml', '.spectral.yml', '.spectral.json', '.spectral.js' },
+          { path = fname, upward = true }
+        )[1]
+      )
+    end,
     single_file_support = true,
     settings = {
       enable = true,

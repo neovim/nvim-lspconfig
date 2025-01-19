@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'pasls' },
     filetypes = { 'pascal' },
-    root_dir = util.root_pattern('*.lpi', '*.lpk', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '*.lpi', '*.lpk', '.git' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
   },
   docs = {

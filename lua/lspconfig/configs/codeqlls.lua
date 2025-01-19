@@ -1,12 +1,12 @@
-local util = require 'lspconfig.util'
-
 local workspace_folders = {}
 
 return {
   default_config = {
     cmd = { 'codeql', 'execute', 'language-server', '--check-errors', 'ON_CHANGE', '-q' },
     filetypes = { 'ql' },
-    root_dir = util.root_pattern 'qlpack.yml',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'qlpack.yml' }, { path = fname, upward = true })[1])
+    end,
     log_level = vim.lsp.protocol.MessageType.Warning,
     before_init = function(initialize_params)
       table.insert(workspace_folders, { name = 'workspace', uri = initialize_params['rootUri'] })

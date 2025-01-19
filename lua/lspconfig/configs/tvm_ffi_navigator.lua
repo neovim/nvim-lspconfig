@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'python', '-m', 'ffi_navigator.langserver' },
     filetypes = { 'python', 'cpp' },
-    root_dir = util.root_pattern('pyproject.toml', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'pyproject.toml', '.git' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

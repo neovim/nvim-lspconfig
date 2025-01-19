@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'java', '-jar', 'nextflow-language-server-all.jar' },
     filetypes = { 'nextflow' },
-    root_dir = util.root_pattern('nextflow.config', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'nextflow.config', '.git' }, { path = fname, upward = true })[1])
+    end,
     settings = {
       nextflow = {
         files = {
@@ -28,7 +28,7 @@ If you have installed nextflow language server, you can set the `cmd` custom pat
 require'lspconfig'.nextflow_ls.setup{
     cmd = { 'java', '-jar', 'nextflow-language-server-all.jar' },
     filetypes = { 'nextflow' },
-    root_dir = util.root_pattern('nextflow.config', '.git'),
+    root_dir =  function(fname) return vim.fs.dirname(vim.fs.find({'nextflow.config', '.git'}, { path = fname, upward = true })[1])    end,
     settings = {
       nextflow = {
         files = {

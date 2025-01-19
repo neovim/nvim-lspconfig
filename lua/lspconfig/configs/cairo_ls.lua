@@ -1,11 +1,13 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     init_options = { hostInfo = 'neovim' },
     cmd = { 'scarb-cairo-language-server', '/C', '--node-ipc' },
     filetypes = { 'cairo' },
-    root_dir = util.root_pattern('Scarb.toml', 'cairo_project.toml', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find({ 'Scarb.toml', 'cairo_project.toml', '.git' }, { path = fname, upward = true })[1]
+      )
+    end,
   },
   docs = {
     description = [[

@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'psalm', '--language-server' },
     filetypes = { 'php' },
-    root_dir = util.root_pattern('psalm.xml', 'psalm.xml.dist'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'psalm.xml', 'psalm.xml.dist' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

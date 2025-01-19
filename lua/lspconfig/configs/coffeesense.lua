@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'coffeesense-language-server', '--stdio' },
     filetypes = { 'coffee' },
-    root_dir = util.root_pattern 'package.json',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'package.json' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
   },
   docs = {

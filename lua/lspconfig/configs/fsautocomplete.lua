@@ -1,9 +1,9 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'fsautocomplete', '--adaptive-lsp-server-enabled' },
-    root_dir = util.root_pattern('*.sln', '*.fsproj', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '*.sln', '*.fsproj', '.git' }, { path = fname, upward = true })[1])
+    end,
     filetypes = { 'fsharp' },
     init_options = {
       AutomaticWorkspaceInit = true,

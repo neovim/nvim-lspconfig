@@ -2,7 +2,7 @@ return {
   default_config = {
     cmd = { 'mm0-rs', 'server' },
     root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1])
     end,
     filetypes = { 'metamath-zero' },
     single_file_support = true,

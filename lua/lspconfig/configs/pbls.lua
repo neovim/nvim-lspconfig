@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'pbls' },
     filetypes = { 'proto' },
-    root_dir = util.root_pattern('.pbls.toml', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.pbls.toml', '.git' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[

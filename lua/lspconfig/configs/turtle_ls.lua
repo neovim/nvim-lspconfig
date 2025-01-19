@@ -1,13 +1,13 @@
 local bin_name = 'turtle-language-server'
-local bin_path = os.getenv 'NVM_BIN'
+local bin_path = os.getenv('NVM_BIN')
 local full_path
 if bin_path == nil then
   local paths = {}
   local sep = ':'
-  if vim.fn.has 'win32' == 1 then
+  if vim.fn.has('win32') == 1 then
     sep = ';'
   end
-  local path = os.getenv 'PATH'
+  local path = os.getenv('PATH')
   if path ~= nil then
     for str in string.gmatch(path, '([^' .. sep .. ']+)') do
       paths[#paths + 1] = str
@@ -29,7 +29,7 @@ return {
     cmd = { 'node', full_path, '--stdio' },
     filetypes = { 'turtle', 'ttl' },
     root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ '.git' }, { path = fname, upward = true })[1])
     end,
   },
   docs = {

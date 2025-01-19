@@ -1,4 +1,4 @@
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 local lsp = vim.lsp
 
 local function fix_all(opts)
@@ -64,7 +64,7 @@ return {
     -- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
     root_dir = function(fname)
       root_file = util.insert_package_json(root_file, 'eslintConfig', fname)
-      return util.root_pattern(unpack(root_file))(fname)
+      return vim.fs.dirname(vim.fs.find(root_file, { path = fname, upward = true })[1])
     end,
     -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
     settings = {
@@ -135,9 +135,9 @@ return {
           return
         end
         local sysname = vim.loop.os_uname().sysname
-        if sysname:match 'Windows' then
+        if sysname:match('Windows') then
           os.execute(string.format('start %q', result.url))
-        elseif sysname:match 'Linux' then
+        elseif sysname:match('Linux') then
           os.execute(string.format('xdg-open %q', result.url))
         else
           os.execute(string.format('open %q', result.url))
@@ -163,7 +163,7 @@ return {
   commands = {
     EslintFixAll = {
       function()
-        fix_all { sync = true, bufnr = 0 }
+        fix_all({ sync = true, bufnr = 0 })
       end,
       description = 'Fix all eslint problems for this buffer',
     },

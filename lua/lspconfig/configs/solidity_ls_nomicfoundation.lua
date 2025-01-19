@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local root_files = {
   'hardhat.config.js',
   'hardhat.config.ts',
@@ -14,7 +12,9 @@ return {
   default_config = {
     cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
     filetypes = { 'solidity' },
-    root_dir = util.root_pattern(unpack(root_files)) or util.root_pattern('.git', 'package.json'),
+    root_dir = function(fname)
+      vim.fs.dirname(vim.fs.find({ unpack(root_files), '.git', 'package.json' }, { path = fname, upward = true })[1])
+    end,
     single_file_support = true,
   },
   docs = {

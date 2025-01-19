@@ -1,4 +1,3 @@
-local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'guile-lsp-server' },
@@ -6,8 +5,7 @@ return {
       'scheme.guile',
     },
     root_dir = function(fname)
-      return util.root_pattern 'guix.scm'(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return vim.fs.dirname(vim.fs.find({ 'guix.scm', '.git' }, { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },

@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'vtsls', '--stdio' },
@@ -11,7 +9,11 @@ return {
       'typescriptreact',
       'typescript.tsx',
     },
-    root_dir = util.root_pattern('tsconfig.json', 'package.json', 'jsconfig.json', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(
+        vim.fs.find({ 'tsconfig.json', 'package.json', 'jsconfig.json', '.git' }, { path = fname, upward = true })[1]
+      )
+    end,
     single_file_support = true,
   },
   docs = {

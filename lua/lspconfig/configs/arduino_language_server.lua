@@ -1,9 +1,9 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     filetypes = { 'arduino' },
-    root_dir = util.root_pattern '*.ino',
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '*.ino' }, { path = fname, upward = true })[1])
+    end,
     cmd = {
       'arduino-language-server',
     },

@@ -1,10 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'ruby-lsp' },
     filetypes = { 'ruby', 'eruby' },
-    root_dir = util.root_pattern('Gemfile', '.git'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ 'Gemfile', '.git' }, { path = fname, upward = true })[1])
+    end,
     init_options = {
       formatter = 'auto',
     },

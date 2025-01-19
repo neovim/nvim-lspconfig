@@ -1,10 +1,10 @@
-local util = require('lspconfig.util')
-
 return {
   default_config = {
     cmd = { 'stylua-3p-language-server' },
     filetypes = { 'lua' },
-    root_dir = util.root_pattern('.stylua.toml', 'stylua.toml'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ '.stylua.toml', 'stylua.toml' }, { path = fname, upward = true })[1])
+    end,
   },
   docs = {
     description = [[
