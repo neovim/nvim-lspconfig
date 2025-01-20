@@ -14,7 +14,7 @@ end
 local lsp_complete_configured_servers = function(arg)
   return completion_sort(vim.tbl_filter(function(s)
     return s:sub(1, #arg) == arg
-  end, util.available_servers()))
+  end, util._available_servers()))
 end
 
 local lsp_get_active_clients = function(arg)
