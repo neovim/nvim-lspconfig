@@ -4116,12 +4116,6 @@ Default config:
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/gh_actions_ls.lua:4](../lua/lspconfig/configs/gh_actions_ls.lua#L4)
 - `single_file_support` : `false`
 
-### Compatibility with forgejo/gitea
-
-The projects [forgejo](https://forgejo.org/) and [gitea](https://about.gitea.com/)
-design their actions to be as compatible to github as possible.  
-There are only [a few differences](https://docs.gitea.com/usage/actions/comparison#unsupported-workflows-syntax) between the systems.  
-The `gh_actions_ls` is therefore enabled for those `yaml` files as well.
 
 ## ghcide
 
