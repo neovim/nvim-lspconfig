@@ -223,7 +223,7 @@ function M.get_managed_clients()
   return clients
 end
 
-function M.available_servers()
+function M._available_servers()
   local servers = {}
   local configs = require 'lspconfig.configs'
   for server, config in pairs(configs) do

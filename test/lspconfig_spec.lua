@@ -144,7 +144,7 @@ describe('lspconfig', function()
       local _ = lspconfig.lua_ls
       local _ = lspconfig.tsserver
       lspconfig.rust_analyzer.setup {}
-      same({ 'rust_analyzer' }, require('lspconfig.util').available_servers())
+      same({ 'rust_analyzer' }, require('lspconfig.util')._available_servers())
     end)
 
     it('provides user_config to the on_setup hook', function()

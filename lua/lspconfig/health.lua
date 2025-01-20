@@ -224,7 +224,7 @@ local function check_lspconfig(bufnr)
   bufnr = (bufnr and bufnr ~= -1) and bufnr or nil
 
   health.start('LSP configs active in this session (globally)')
-  health.info('Configured servers: ' .. table.concat(util.available_servers(), ', '))
+  health.info('Configured servers: ' .. table.concat(util._available_servers(), ', '))
   local deprecated_servers = {}
   for server_name, deprecate in pairs(require('lspconfig').server_aliases()) do
     table.insert(deprecated_servers, ('%s -> %s'):format(server_name, deprecate.to))
