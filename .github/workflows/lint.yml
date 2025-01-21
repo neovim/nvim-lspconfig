@@ -58,6 +58,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
       - run: npm install --save-dev @commitlint/{cli,config-conventional}
       - run: |
           echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
