@@ -9,9 +9,19 @@ return {
     -- files. (A nil root_dir and no single_file_support results in the LSP not
     -- attaching.) For details, see #3558
     root_dir = function(filename)
-      return filename:find('/%.(github|forgejo|gitea)/workflows/.+%.ya?ml')
-          and util.root_pattern('.github', '.forgejo', '.gitea')(filename)
-        or nil
+      local patterns = {
+        { pattern = '/%.github/workflows/.+%.ya?ml', root = '.github' },
+        { pattern = '/%.forgejo/workflows/.+%.ya?ml', root = '.forgejo' },
+        { pattern = '/%.gitea/workflows/.+%.ya?ml', root = '.gitea' },
+      }
+
+      for _, entry in ipairs(patterns) do
+        if filename:find(entry.pattern) then
+          return util.root_pattern(entry.root)(filename)
+        end
+      end
+
+      return nil
     end,
 
     -- Disabling "single file support" is a hack to avoid enabling this LS for
