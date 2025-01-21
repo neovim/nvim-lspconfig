@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'gh-actions-language-server', '--stdio' },
@@ -17,7 +15,10 @@ return {
 
       for _, entry in ipairs(patterns) do
         if filename:find(entry.pattern) then
-          return util.root_pattern(entry.root)(filename)
+          local match = vim.fs.find(entry.root, { path = filename, upward = true })[1]
+          if match then
+            return match
+          end
         end
       end
 
