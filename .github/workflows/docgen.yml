@@ -18,7 +18,7 @@ jobs:
         version: nightly
     - name: Run docgen
       run: |
-        scripts/docgen.sh
+        scripts/docgen.lua
     - name: Commit changes
       env:
         COMMIT_MSG: |
