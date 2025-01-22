@@ -1,3 +1,8 @@
+-- This entire module will only be usfeul for Nvim older than 0.11, since vim.lsp.config makes this module obsolete. So
+-- it's easier to just disable all warnings for now and remove this file when it's no longer relevant.
+--- @diagnostic disable: assign-type-mismatch
+--- @diagnostic disable: param-type-mismatch
+
 local util = require 'lspconfig.util'
 local async = require 'lspconfig.async'
 local api, validate, lsp, fn = vim.api, vim.validate, vim.lsp, vim.fn
