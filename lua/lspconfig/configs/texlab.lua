@@ -81,7 +81,7 @@ local function command_factory(cmd)
         if err then
           vim.notify(('Failed to clean %s files: %s'):format(cmd, err.message), vim.log.levels.ERROR)
         else
-          vim.notify(('cmmand %s execute successfully'):format(cmd), vim.log.levels.INFO)
+          vim.notify(('command %s executed successfully'):format(cmd), vim.log.levels.INFO)
         end
       end)
     end
@@ -90,7 +90,7 @@ local function command_factory(cmd)
       command = cmd_tbl[cmd],
       arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
     }
-    vim.notify(('command %s execute successfully'):format(cmd_tbl[cmd]))
+    vim.notify(('command %s executed successfully'):format(cmd_tbl[cmd]))
   end
 end
 
