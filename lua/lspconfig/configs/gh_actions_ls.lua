@@ -7,18 +7,17 @@ return {
     -- files. (A nil root_dir and no single_file_support results in the LSP not
     -- attaching.) For details, see #3558
     root_dir = function(filename)
-      local patterns = {
-        { pattern = '/%.github/workflows/.+%.ya?ml', root = '.github' },
-        { pattern = '/%.forgejo/workflows/.+%.ya?ml', root = '.forgejo' },
-        { pattern = '/%.gitea/workflows/.+%.ya?ml', root = '.gitea' },
+      local dirs_to_check = {
+        '.github/workflows',
+        '.forgejo/workflows',
+        '.gitea/workflows',
       }
 
-      for _, entry in ipairs(patterns) do
-        if filename:find(entry.pattern) then
-          local match = vim.fs.find(entry.root, { path = filename, upward = true })[1]
-          if match then
-            return match
-          end
+      local dir = vim.fs.dirname(filename)
+      for _, subdir in ipairs(dirs_to_check) do
+        local match = vim.fs.find(subdir, { path = dir, upward = true })[1]
+        if match and vim.fn.isdirectory(match) == 1 and vim.fs.dirname(filename) == match then
+          return match
         end
       end
 
