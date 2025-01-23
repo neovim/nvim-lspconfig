@@ -4118,7 +4118,7 @@ Default config:
   ```lua
   { "yaml" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/gh_actions_ls.lua:4](../lua/lspconfig/configs/gh_actions_ls.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/gh_actions_ls.lua:2](../lua/lspconfig/configs/gh_actions_ls.lua#L2)
 - `single_file_support` : `false`
 
 
