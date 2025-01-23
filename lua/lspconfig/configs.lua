@@ -5,7 +5,7 @@
 
 local util = require 'lspconfig.util'
 local async = require 'lspconfig.async'
-local api, validate, lsp, fn = vim.api, vim.validate, vim.lsp, vim.fn
+local api, lsp, fn = vim.api, vim.lsp, vim.fn
 local tbl_deep_extend = vim.tbl_deep_extend
 
 local configs = {}
@@ -39,14 +39,6 @@ end
 ---@param config_name string
 ---@param config_def table Config definition read from `lspconfig.configs.<name>`.
 function configs.__newindex(t, config_name, config_def)
-  validate {
-    name = { config_name, 's' },
-    default_config = { config_def.default_config, 't' },
-    on_new_config = { config_def.on_new_config, 'f', true },
-    on_attach = { config_def.on_attach, 'f', true },
-    commands = { config_def.commands, 't', true },
-  }
-
   if config_def.default_config.deprecate then
     vim.deprecate(
       config_name,
@@ -57,16 +49,7 @@ function configs.__newindex(t, config_name, config_def)
     )
   end
 
-  if config_def.commands then
-    for k, v in pairs(config_def.commands) do
-      validate {
-        ['command.name'] = { k, 's' },
-        ['command.fn'] = { v[1], 'f' },
-      }
-    end
-  else
-    config_def.commands = {}
-  end
+  config_def.commands = config_def.commands or {}
 
   local M = {}
 
@@ -78,27 +61,6 @@ function configs.__newindex(t, config_name, config_def)
   --- @param user_config lspconfig.Config
   function M.setup(user_config)
     local lsp_group = api.nvim_create_augroup('lspconfig', { clear = false })
-
-    validate {
-      cmd = {
-        user_config.cmd,
-        { 'f', 't' },
-        true,
-      },
-      root_dir = { user_config.root_dir, { 's', 'f' }, true },
-      filetypes = { user_config.filetype, 't', true },
-      on_new_config = { user_config.on_new_config, 'f', true },
-      on_attach = { user_config.on_attach, 'f', true },
-      commands = { user_config.commands, 't', true },
-    }
-    if user_config.commands then
-      for k, v in pairs(user_config.commands) do
-        validate {
-          ['command.name'] = { k, 's' },
-          ['command.fn'] = { v[1], 'f' },
-        }
-      end
-    end
 
     local config = tbl_deep_extend('keep', user_config, default_config)
 
