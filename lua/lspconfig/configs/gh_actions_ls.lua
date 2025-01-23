@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'gh-actions-language-server', '--stdio' },
@@ -9,9 +7,21 @@ return {
     -- files. (A nil root_dir and no single_file_support results in the LSP not
     -- attaching.) For details, see #3558
     root_dir = function(filename)
-      return filename:find('/%.(github|forgejo|gitea)/workflows/.+%.ya?ml')
-          and util.root_pattern('.github', '.forgejo', '.gitea')(filename)
-        or nil
+      local dirs_to_check = {
+        '.github/workflows',
+        '.forgejo/workflows',
+        '.gitea/workflows',
+      }
+
+      local dir = vim.fs.dirname(filename)
+      for _, subdir in ipairs(dirs_to_check) do
+        local match = vim.fs.find(subdir, { path = dir, upward = true })[1]
+        if match and vim.fn.isdirectory(match) == 1 and vim.fs.dirname(filename) == match then
+          return match
+        end
+      end
+
+      return nil
     end,
 
     -- Disabling "single file support" is a hack to avoid enabling this LS for
