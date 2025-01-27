@@ -23,6 +23,8 @@ return {
       'haskell',
       'cmake',
       'typst',
+      'php',
+      'dart',
     },
     root_dir = function(fname)
       return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
@@ -31,13 +33,13 @@ return {
   },
   docs = {
     description = [[
-https://github.com/elijah-potter/harper
+https://github.com/automattic/harper
 
 The language server for Harper, the slim, clean language checker for developers.
 
-See [docs](https://github.com/elijah-potter/harper/blob/master/harper-ls/README.md#configuration) for more information on settings.
+See our [documentation](https://writewithharper.com/docs/integrations/neovim) for more information on settings.
 
-In short, however, they should look something like this:
+In short, they should look something like this:
 ```lua
 lspconfig.harper_ls.setup {
   settings = {
