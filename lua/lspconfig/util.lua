@@ -223,7 +223,8 @@ function M.get_managed_clients()
   return clients
 end
 
-function M._available_servers()
+--- @deprecated use `vim.lsp.config` in Nvim 0.11+ instead.
+function M.available_servers()
   local servers = {}
   local configs = require 'lspconfig.configs'
   for server, config in pairs(configs) do
