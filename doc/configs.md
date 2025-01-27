@@ -209,6 +209,7 @@ Nvim by running `:help lspconfig-all`.
 - [openedge_ls](#openedge_ls)
 - [openscad_ls](#openscad_ls)
 - [openscad_lsp](#openscad_lsp)
+- [oxlint](#oxlint)
 - [pact_ls](#pact_ls)
 - [pasls](#pasls)
 - [pbls](#pbls)
@@ -7400,6 +7401,34 @@ Default config:
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/openscad_lsp.lua:2](../lua/lspconfig/configs/openscad_lsp.lua#L2)
 - `single_file_support` : `true`
+
+
+## oxlint
+
+https://oxc.rs
+
+A collection of JavaScript tools written in Rust.
+
+```sh
+npm install [-g] oxlint
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.oxlint.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "oxc_language_server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "astro", "javascript", "javascriptreact", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/oxlint.lua:4](../lua/lspconfig/configs/oxlint.lua#L4)
+- `single_file_support` : `false`
 
 
 ## pact_ls
