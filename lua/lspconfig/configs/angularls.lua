@@ -12,6 +12,10 @@ end
 local function get_angular_core_version(root_dir)
   local project_root = vim.fs.dirname(vim.fs.find('node_modules', { path = root_dir, upward = true })[1])
 
+  if not project_root then
+    return ''
+  end
+
   local package_json = project_root .. '/package.json'
   if not vim.loop.fs_stat(package_json) then
     return ''
