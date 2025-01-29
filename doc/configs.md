@@ -550,13 +550,13 @@ require'lspconfig'.angularls.setup{}
 Default config:
 - `cmd` :
   ```lua
-  { "ngserver", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" }
+  { "ngserver", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "", "--angularCoreVersion", "" }
   ```
 - `filetypes` :
   ```lua
   { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/angularls.lua:15](../lua/lspconfig/configs/angularls.lua#L15)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/angularls.lua:39](../lua/lspconfig/configs/angularls.lua#L39)
 
 
 ## ansiblels
