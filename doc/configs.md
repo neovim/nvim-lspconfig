@@ -4653,13 +4653,13 @@ Default config:
 
 ## harper_ls
 
-https://github.com/elijah-potter/harper
+https://github.com/automattic/harper
 
 The language server for Harper, the slim, clean language checker for developers.
 
-See [docs](https://github.com/elijah-potter/harper/blob/master/harper-ls/README.md#configuration) for more information on settings.
+See our [documentation](https://writewithharper.com/docs/integrations/neovim) for more information on settings.
 
-In short, however, they should look something like this:
+In short, they should look something like this:
 ```lua
 lspconfig.harper_ls.setup {
   settings = {
@@ -4682,7 +4682,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "c", "cpp", "cs", "gitcommit", "go", "html", "java", "javascript", "lua", "markdown", "nix", "python", "ruby", "rust", "swift", "toml", "typescript", "typescriptreact", "haskell", "cmake", "typst" }
+  { "c", "cpp", "cs", "gitcommit", "go", "html", "java", "javascript", "lua", "markdown", "nix", "python", "ruby", "rust", "swift", "toml", "typescript", "typescriptreact", "haskell", "cmake", "typst", "php", "dart" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/harper_ls.lua:2](../lua/lspconfig/configs/harper_ls.lua#L2)
 - `single_file_support` : `true`
