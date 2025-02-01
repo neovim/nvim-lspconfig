@@ -59,7 +59,7 @@ return {
 
     -- We need to check our probe directories because they may have changed.
     new_config.cmd = {
-      'ngserver',
+      vim.fn.exepath('ngserver'),
       '--stdio',
       '--tsProbeLocations',
       new_probe_dir,
