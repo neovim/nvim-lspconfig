@@ -86,6 +86,7 @@ Nvim by running `:help lspconfig-all`.
 - [dprint](#dprint)
 - [drools_lsp](#drools_lsp)
 - [ds_pinyin_lsp](#ds_pinyin_lsp)
+- [dts_lsp](#dts_lsp)
 - [earthlyls](#earthlyls)
 - [ecsact](#ecsact)
 - [efm](#efm)
@@ -3133,6 +3134,45 @@ Default config:
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ds_pinyin_lsp.lua:33](../lua/lspconfig/configs/ds_pinyin_lsp.lua#L33)
 - `single_file_support` : `true`
+
+
+## dts_lsp
+
+`dts-lsp` is an LSP for Devicetree files built on top of tree-sitter-devicetree grammar.
+Language servers can be used in many editors, such as Visual Studio Code, Emacs
+or Vim
+
+Install `dts-lsp` from https://github.com/igor-prusov/dts-lsp and add it to path
+
+`dts-lsp` doesn't require any configuration.
+
+More about Devicetree:
+https://www.devicetree.org/
+https://docs.zephyrproject.org/latest/build/dts/index.html
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.dts_lsp.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "dts-lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "dts", "dtsi", "overlay" }
+  ```
+- `name` :
+  ```lua
+  "dts_lsp"
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/dts_lsp.lua:2](../lua/lspconfig/configs/dts_lsp.lua#L2)
+- `settings` :
+  ```lua
+  {}
+  ```
 
 
 ## earthlyls
