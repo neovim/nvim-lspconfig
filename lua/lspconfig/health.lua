@@ -51,7 +51,7 @@ local function try_get_cmd_output(cmd)
     on_stdout = on_data,
     on_stderr = on_data,
   })
-  local rv = vim.fn.jobwait({ chanid }, 300)
+  local rv = vim.fn.jobwait({ chanid }, 500)
   vim.fn.jobstop(chanid)
   return rv[1] == 0 and out or nil
 end
