@@ -349,6 +349,7 @@ Nvim by running `:help lspconfig-all`.
 - [vscoqtop](#vscoqtop)
 - [vtsls](#vtsls)
 - [vuels](#vuels)
+- [wasm_language_tools](#wasm_language_tools)
 - [wgsl_analyzer](#wgsl_analyzer)
 - [yamlls](#yamlls)
 - [yang_lsp](#yang_lsp)
@@ -12132,6 +12133,30 @@ Default config:
   }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/vuels.lua:4](../lua/lspconfig/configs/vuels.lua#L4)
+
+
+## wasm_language_tools
+
+https://github.com/g-plane/wasm-language-tools
+
+WebAssembly Language Tools aims to provide and improve the editing experience of WebAssembly Text Format.
+It also provides an out-of-the-box formatter (a.k.a. pretty printer) for WebAssembly Text Format.
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.wasm_language_tools.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "wat_server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "wat" }
+  ```
+- `single_file_support` : `true`
 
 
 ## wgsl_analyzer
