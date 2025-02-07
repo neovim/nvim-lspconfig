@@ -894,6 +894,20 @@ vim.filetype.add({
 })
 ```
 
+Optionally, tell treesitter to treat Atlas filetypes as HCL for better syntax highlighting:
+
+```lua
+vim.treesitter.language.register('hcl', 'atlas-config')
+vim.treesitter.language.register('hcl', 'atlas-schema-mysql')
+vim.treesitter.language.register('hcl', 'atlas-schema-postgresql')
+vim.treesitter.language.register('hcl', 'atlas-schema-sqlite')
+vim.treesitter.language.register('hcl', 'atlas-schema-clickhouse')
+vim.treesitter.language.register('hcl', 'atlas-schema-mssql')
+vim.treesitter.language.register('hcl', 'atlas-schema-redshift')
+vim.treesitter.language.register('hcl', 'atlas-test')
+vim.treesitter.language.register('hcl', 'atlas-plan')
+```
+
 Snippet to enable the language server:
 ```lua
 require'lspconfig'.atlas.setup{}
