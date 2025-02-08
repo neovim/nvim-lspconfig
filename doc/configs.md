@@ -7478,6 +7478,14 @@ Default config:
   ```lua
   { "oxc_language_server" }
   ```
+- `commands` :
+  ```lua
+  {
+    OxcFixAll = { <function 1>,
+      description = "Apply fixes to current buffer using oxlint (--fix)"
+    }
+  }
+  ```
 - `filetypes` :
   ```lua
   { "astro", "javascript", "javascriptreact", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
