@@ -19,7 +19,7 @@ return {
     commands = {
       OxcFixAll = {
         function()
-          local client = util.get_active_client_by_name(0, 'oxlint')
+          local client = vim.lsp.get_clients({ bufnr = 0, name = 'oxlint' })[0]
           if client == nil then
             return
           end
