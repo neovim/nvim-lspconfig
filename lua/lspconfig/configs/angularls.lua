@@ -29,6 +29,8 @@ local function get_angular_core_version(root_dir)
 
   local angular_core_version = json.dependencies['@angular/core']
 
+  angular_core_version = angular_core_version and angular_core_version:match('%d+%.%d+%.%d+')
+
   return angular_core_version
 end
 
