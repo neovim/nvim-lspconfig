@@ -558,7 +558,7 @@ Default config:
   ```lua
   { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/angularls.lua:39](../lua/lspconfig/configs/angularls.lua#L39)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/angularls.lua:41](../lua/lspconfig/configs/angularls.lua#L41)
 
 
 ## ansiblels
