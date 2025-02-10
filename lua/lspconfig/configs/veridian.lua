@@ -14,10 +14,15 @@ A SystemVerilog LanguageServer.
 
 Download the latest release for your OS from the releases page
 
-# install with slang feature, if C++17 compiler is available
+Install with slang feature, if C++17 compiler is available:
+```
 cargo install --git https://github.com/vivekmalneedi/veridian.git --all-features
-# install if C++17 compiler is not available
+```
+
+Install if C++17 compiler is not available:
+```
 cargo install --git https://github.com/vivekmalneedi/veridian.git
+```
     ]],
   },
 }
