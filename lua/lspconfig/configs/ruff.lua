@@ -1,5 +1,23 @@
 local util = require 'lspconfig.util'
 
+local function execute_command(command)
+  local bufnr = vim.api.nvim_get_current_buf()
+  local client = vim.lsp.get_clients({ bufnr = bufnr, name = 'ruff' })[1]
+  if client == nil then
+    return
+  end
+
+  client.request('workspace/executeCommand', {
+    command = command,
+    arguments = {
+      {
+        uri = vim.uri_from_bufnr(bufnr),
+        version = vim.lsp.util.buf_versions[bufnr],
+      },
+    },
+  }, nil, bufnr)
+end
+
 return {
   default_config = {
     cmd = { 'ruff', 'server' },
@@ -10,6 +28,26 @@ return {
     end,
     single_file_support = true,
     settings = {},
+  },
+  commands = {
+    RuffFixAll = {
+      function()
+        execute_command('ruff.applyAutofix')
+      end,
+      description = 'Fix all auto-fixable problems in the current buffer',
+    },
+    RuffOrganizeImports = {
+      function()
+        execute_command('ruff.applyOrganizeImports')
+      end,
+      description = 'Organize imports in the current buffer ',
+    },
+    RuffFormat = {
+      function()
+        execute_command('ruff.applyFormat')
+      end,
+      description = 'Format the current buffer',
+    },
   },
   docs = {
     description = [[
@@ -38,7 +76,6 @@ require('lspconfig').ruff.setup({
 ```
 
 Refer to the [documentation](https://docs.astral.sh/ruff/editors/) for more details.
-
-  ]],
+]],
   },
 }
