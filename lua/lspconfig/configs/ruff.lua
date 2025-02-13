@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 local function execute_command(command)
   local bufnr = vim.api.nvim_get_current_buf()
-  local client = vim.lsp.get_clients({ bufnr = bufnr, name = 'ruff' })[1]
+  local client = vim.lsp.get_clients({ bufnr = bufnr, name = 'ruff', method = 'workspace/executeCommand' })[1]
   if client == nil then
     return
   end
