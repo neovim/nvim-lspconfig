@@ -8425,7 +8425,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "r", "rmd" }
+  { "r", "rmd", "quarto" }
   ```
 - `log_level` :
   ```lua
