@@ -7,6 +7,19 @@ local function execute_command(command)
     return
   end
 
+  if vim.fn.has 'nvim-0.11' == 1 then
+    return client:exec_cmd({
+      title = command,
+      command = command,
+      arguments = {
+        {
+          uri = vim.uri_from_bufnr(bufnr),
+          version = vim.lsp.util.buf_versions[bufnr],
+        },
+      },
+    }, { bufnr = bufnr })
+  end
+
   client.request('workspace/executeCommand', {
     command = command,
     arguments = {
