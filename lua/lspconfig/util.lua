@@ -20,13 +20,15 @@ M.default_config = {
 -- global on_setup hook
 M.on_setup = nil
 
+---@param bufname string
+---@return boolean
 function M.bufname_valid(bufname)
-  if bufname:match '^/' or bufname:match '^[a-zA-Z]:' or bufname:match '^zipfile://' or bufname:match '^tarfile:' then
-    return true
-  end
-  return false
+  return (bufname:find '^/' or bufname:find '^[a-zA-Z]:' or bufname:find '^zipfile://' or bufname:find '^tarfile:')
+    ~= nil
 end
 
+---@param bufnr integer
+---@return integer
 function M.validate_bufnr(bufnr)
   if nvim_eleven then
     validate('bufnr', bufnr, 'number')
@@ -95,47 +97,47 @@ function M.create_module_commands(module_name, commands)
   end
 end
 
-function M.search_ancestors(startpath, func)
+---@param startpath string
+---@param cb fun(path: string): boolean?
+---@return string?
+function M.search_ancestors(startpath, cb)
   if nvim_eleven then
-    validate('func', func, 'function')
+    validate('func', cb, 'function')
   end
-  if func(startpath) then
+  if cb(startpath) then
     return startpath
   end
+
   local guard = 100
   for path in vim.fs.parents(startpath) do
+    if cb(path) then
+      return path
+    end
     -- Prevent infinite recursion if our algorithm breaks
     guard = guard - 1
     if guard == 0 then
       return
     end
-
-    if func(path) then
-      return path
-    end
   end
 end
 
+---@param path string
+---@return string
 local function escape_wildcards(path)
-  return path:gsub('([%[%]%?%*])', '\\%1')
+  return (path:gsub('[%[%]%?%*]', '\\%0'))
 end
 
+---@return fun(startpath: string): string?
 function M.root_pattern(...)
   local patterns = M.tbl_flatten { ... }
-  return function(startpath)
-    startpath = M.strip_archive_subpath(startpath)
-    for _, pattern in ipairs(patterns) do
-      local match = M.search_ancestors(startpath, function(path)
-        for _, p in ipairs(vim.fn.glob(table.concat({ escape_wildcards(path), pattern }, '/'), true, true)) do
-          if vim.loop.fs_stat(p) then
-            return path
-          end
-        end
-      end)
 
-      if match ~= nil then
-        return match
-      end
+  return function(startpath)
+    for _, pattern in ipairs(patterns) do
+      return M.search_ancestors(M.strip_archive_subpath(startpath), function(path)
+        -- NOTE: `glob()` only returns results for paths that exist.
+        -- The last `true` arg below means don't resolve/check symlink targets (e.g. allow "broken" symlinks).
+        return #vim.fn.glob(escape_wildcards(path) .. '/' .. pattern, true, true, true) > 0
+      end)
     end
   end
 end
@@ -157,6 +159,7 @@ function M.insert_package_json(config_files, field, fname)
   return config_files
 end
 
+---@param filetype string
 function M.get_active_clients_list_by_ft(filetype)
   local clients = M.get_lsp_clients()
   local clients_list = {}
@@ -172,6 +175,7 @@ function M.get_active_clients_list_by_ft(filetype)
   return clients_list
 end
 
+---@param filetype string
 function M.get_other_matching_providers(filetype)
   local configs = require 'lspconfig.configs'
   local active_clients_list = M.get_active_clients_list_by_ft(filetype)
@@ -189,6 +193,7 @@ function M.get_other_matching_providers(filetype)
   return other_matching_configs
 end
 
+---@param filetype string
 function M.get_config_by_ft(filetype)
   local configs = require 'lspconfig.configs'
   local matching_configs = {}
@@ -235,20 +240,24 @@ function M.available_servers()
   return servers
 end
 
--- For zipfile: or tarfile: virtual paths, returns the path to the archive.
--- Other paths are returned unaltered.
+---For zipfile: or tarfile: virtual paths, returns the path to the archive.
+---Other paths are returned unaltered.
+---@param path string
+---@return string
 function M.strip_archive_subpath(path)
   -- Matches regex from zip.vim / tar.vim
-  path = vim.fn.substitute(path, 'zipfile://\\(.\\{-}\\)::[^\\\\].*$', '\\1', '')
-  path = vim.fn.substitute(path, 'tarfile:\\(.\\{-}\\)::.*$', '\\1', '')
+  path = vim.fn.substitute(path, [[zipfile://\(.\{-}\)::[^\\].*$]], '\\1', '')
+  path = vim.fn.substitute(path, [[tarfile:\(.\{-}\)::.*$]], '\\1', '')
   return path
 end
 
 --- Public functions that can be deprecated once minimum required neovim version is high enough
 
+---@param path string
+---@return boolean
 local function is_fs_root(path)
   if iswin then
-    return path:match '^%a:$'
+    return path:match '^%a:$' ~= nil
   else
     return path == '/'
   end
