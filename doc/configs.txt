@@ -322,6 +322,7 @@ Nvim by running `:help lspconfig-all`.
 - [ts_query_ls](#ts_query_ls)
 - [tsp_server](#tsp_server)
 - [ttags](#ttags)
+- [turbo_ls](#turbo_ls)
 - [turtle_ls](#turtle_ls)
 - [tvm_ffi_navigator](#tvm_ffi_navigator)
 - [twiggy_language_server](#twiggy_language_server)
@@ -11222,6 +11223,42 @@ Default config:
   { "ruby", "rust", "javascript", "haskell" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/ttags.lua:4](../lua/lspconfig/configs/ttags.lua#L4)
+
+
+## turbo_ls
+
+https://www.npmjs.com/package/turbo-language-server
+
+`turbo-language-server` can be installed via `npm`:
+
+```sh
+npm install -g turbo-language-server
+```
+
+or via `yarn`:
+
+```sh
+yarn global add turbo-language-server
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.turbo_ls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "turbo-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "html", "ruby", "eruby", "blade", "php" }
+  ```
+- `root_dir` :
+  ```lua
+  "/home/runner/work/nvim-lspconfig/nvim-lspconfig"
+  ```
 
 
 ## turtle_ls
