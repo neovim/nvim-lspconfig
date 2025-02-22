@@ -8,6 +8,7 @@ Nvim by running `:help lspconfig-all`.
 - [ada_ls](#ada_ls)
 - [agda_ls](#agda_ls)
 - [aiken](#aiken)
+- [air](#air)
 - [alloy_ls](#alloy_ls)
 - [anakin_language_server](#anakin_language_server)
 - [angularls](#angularls)
@@ -444,6 +445,35 @@ Default config:
   { "aiken" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/aiken.lua:4](../lua/lspconfig/configs/aiken.lua#L4)
+
+
+## air
+
+https://github.com/posit-dev/air
+
+Air is an R formatter and language server, written in Rust.
+
+Refer to the [documentation](https://posit-dev.github.io/air/editors.html) for more details.
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.air.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "air", "language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "r" }
+  ```
+- `root_dir` :
+  ```lua
+  "/home/runner/work/nvim-lspconfig/nvim-lspconfig"
+  ```
+- `single_file_support` : `true`
 
 
 ## alloy_ls
