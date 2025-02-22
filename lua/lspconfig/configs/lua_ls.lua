@@ -8,23 +8,14 @@ local root_files = {
   'stylua.toml',
   'selene.toml',
   'selene.yml',
+  '.git',
 }
 
 return {
   default_config = {
     cmd = { 'lua-language-server' },
     filetypes = { 'lua' },
-    root_dir = function(fname)
-      local root_file = util.root_pattern(unpack(root_files))(fname) or ''
-      local root_lua = util.root_pattern 'lua/'(fname) or ''
-      local root_git = vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]) or ''
-      if root_file == '' and root_lua == '' and root_git == '' then
-        return
-      end
-      local root = #root_file >= #root_lua and root_file or root_lua
-      root = #root >= #root_git and root or root_git
-      return root
-    end,
+    root_dir = util.root_pattern(root_files),
     single_file_support = true,
     log_level = vim.lsp.protocol.MessageType.Warning,
   },
