@@ -1,13 +1,8 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'air', 'language-server' },
     filetypes = { 'r' },
-    root_dir = function(fname)
-      return util.root_pattern('air.toml', '.air.toml')(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-    end,
+    root_dir = vim.fs.root(0, { 'air.toml', '.air.toml', '.git' }),
     single_file_support = true,
   },
   docs = {
