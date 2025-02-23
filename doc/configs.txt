@@ -6096,7 +6096,7 @@ Default config:
   ```lua
   2
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/lua_ls.lua:14](../lua/lspconfig/configs/lua_ls.lua#L14)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/lua_ls.lua:15](../lua/lspconfig/configs/lua_ls.lua#L15)
 - `single_file_support` : `true`
 
 
