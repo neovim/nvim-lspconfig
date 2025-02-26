@@ -9907,6 +9907,17 @@ require'lspconfig'.sourcekit.setup{}
 ```
 
 Default config:
+- `capabilities` :
+  ```lua
+  {
+    textDocument = {
+      diagnostic = {
+        dynamicRegistration = true,
+        relatedDocumentSupport = true
+      }
+    }
+  }
+  ```
 - `cmd` :
   ```lua
   { "sourcekit-lsp" }
