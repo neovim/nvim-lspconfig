@@ -131,7 +131,7 @@ local function make_lsp_sections()
             map_sorted(template_def.default_config, function(k, v)
               if type(v) == 'boolean' then
                 return ('- `%s` : `%s`'):format(k, v)
-              elseif type(v) ~= 'function' then
+              elseif type(v) ~= 'function' and k ~= 'root_dir' then
                 return ('- `%s` :\n  ```lua\n%s\n  ```'):format(k, indent(2, inspect(v)))
               end
 

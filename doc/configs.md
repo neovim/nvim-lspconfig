@@ -469,10 +469,7 @@ Default config:
   ```lua
   { "r" }
   ```
-- `root_dir` :
-  ```lua
-  "/home/runner/work/nvim-lspconfig/nvim-lspconfig"
-  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/air.lua:2](../lua/lspconfig/configs/air.lua#L2)
 - `single_file_support` : `true`
 
 
@@ -11296,10 +11293,7 @@ Default config:
   ```lua
   { "html", "ruby", "eruby", "blade", "php" }
   ```
-- `root_dir` :
-  ```lua
-  "/home/runner/work/nvim-lspconfig/nvim-lspconfig"
-  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/turbo_ls.lua:2](../lua/lspconfig/configs/turbo_ls.lua#L2)
 
 
 ## turtle_ls
