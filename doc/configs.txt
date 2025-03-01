@@ -1352,7 +1352,7 @@ require'lspconfig'.bazelrc_lsp.setup{}
 Default config:
 - `cmd` :
   ```lua
-  { "bazelrc-lsp" }
+  { "bazelrc-lsp", "lsp" }
   ```
 - `filetypes` :
   ```lua
