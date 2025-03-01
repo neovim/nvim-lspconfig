@@ -2,7 +2,7 @@ local util = require 'lspconfig/util'
 
 return {
   default_config = {
-    cmd = { 'bazelrc-lsp' },
+    cmd = { 'bazelrc-lsp', 'lsp' },
     filetypes = { 'bazelrc' },
     root_dir = util.root_pattern('WORKSPACE', 'WORKSPACE.bazel', 'MODULE.bazel'),
   },
