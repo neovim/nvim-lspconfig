@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'postgres_lsp' },
+    cmd = { 'postgres_lsp', 'lsp-proxy' },
     filetypes = { 'sql' },
     root_dir = util.root_pattern 'root-file.txt',
     single_file_support = true,
