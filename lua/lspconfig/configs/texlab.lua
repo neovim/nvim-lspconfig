@@ -14,7 +14,30 @@ end
 local function buf_build(client, bufnr)
   local win = vim.api.nvim_get_current_win()
   local params = vim.lsp.util.make_position_params(win, client.offset_encoding)
+
+  local spinner_frames = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
+  local frame_index = 1
+  local progress_handle = nil
+  local is_building = true
+  local function update_spinner()
+    if not is_building then
+      return
+    end
+    local message = 'Building LaTeX ' .. spinner_frames[frame_index]
+    if progress_handle then
+      vim.notify(message, vim.log.levels.INFO, { replace = progress_handle })
+    else
+      progress_handle = vim.notify(message, vim.log.levels.INFO)
+    end
+
+    frame_index = (frame_index % #spinner_frames) + 1
+    vim.defer_fn(update_spinner, 100)
+  end
+  progress_handle = vim.notify('Building LaTeX ...', vim.log.levels.INFO)
+  vim.defer_fn(update_spinner, 100)
+
   client.request('textDocument/build', params, function(err, result)
+    is_building = false
     if err then
       error(tostring(err))
     end
