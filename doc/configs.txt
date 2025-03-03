@@ -7926,7 +7926,7 @@ require'lspconfig'.postgres_lsp.setup{}
 Default config:
 - `cmd` :
   ```lua
-  { "postgres_lsp" }
+  { "postgres_lsp", "lsp-proxy" }
   ```
 - `filetypes` :
   ```lua
