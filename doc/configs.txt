@@ -4384,9 +4384,8 @@ Default config:
 https://github.com/gleam-lang/gleam
 
 A language server for Gleam Programming Language.
-[Installation](https://gleam.run/getting-started/installing/)
 
-It can be i
+It comes with the Gleam compiler, for installation see: [Installing Gleam](https://gleam.run/getting-started/installing/)
 
 Snippet to enable the language server:
 ```lua
