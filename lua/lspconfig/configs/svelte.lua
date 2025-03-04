@@ -1,10 +1,31 @@
 local util = require 'lspconfig.util'
 
+local function migrate_to_svelte_5()
+  local params = {
+    command = 'migrate_to_svelte_5',
+    arguments = { vim.uri_from_bufnr(0) },
+  }
+
+  local clients = util.get_lsp_clients({
+    bufnr = vim.api.nvim_get_current_buf(),
+    name = 'svelte',
+  })
+  for _, client in ipairs(clients) do
+    client.request('workspace/executeCommand', params, nil, 0)
+  end
+end
+
 return {
   default_config = {
     cmd = { 'svelteserver', '--stdio' },
     filetypes = { 'svelte' },
     root_dir = util.root_pattern('package.json', '.git'),
+  },
+  commands = {
+    MigrateToSvelte5 = {
+      migrate_to_svelte_5,
+      description = 'Migrate Component to Svelte 5 Syntax',
+    },
   },
   docs = {
     description = [[
