@@ -304,6 +304,7 @@ Nvim by running `:help lspconfig-all`.
 - [svls](#svls)
 - [swift_mesonls](#swift_mesonls)
 - [syntax_tree](#syntax_tree)
+- [systemd-language-server](#systemd-language-server)
 - [tabby_ml](#tabby_ml)
 - [tailwindcss](#tailwindcss)
 - [taplo](#taplo)
@@ -10535,6 +10536,35 @@ Default config:
   { "ruby" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/syntax_tree.lua:4](../lua/lspconfig/configs/syntax_tree.lua#L4)
+
+
+## systemd-language-server
+
+https://github.com/psacawa/systemd-language-server
+
+`systemd-language-server` can be installed via `pip`:
+```sh
+pip install systemd-language-server
+```
+
+Language Server for Systemd unit files
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.systemd-language-server.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "systemd-language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "systemd" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/systemd-language-server.lua:2](../lua/lspconfig/configs/systemd-language-server.lua#L2)
+- `single_file_support` : `true`
 
 
 ## tabby_ml
