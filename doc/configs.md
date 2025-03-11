@@ -304,7 +304,7 @@ Nvim by running `:help lspconfig-all`.
 - [svls](#svls)
 - [swift_mesonls](#swift_mesonls)
 - [syntax_tree](#syntax_tree)
-- [systemd-language-server](#systemd-language-server)
+- [systemd_ls](#systemd_ls)
 - [tabby_ml](#tabby_ml)
 - [tailwindcss](#tailwindcss)
 - [taplo](#taplo)
@@ -10538,7 +10538,7 @@ Default config:
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/syntax_tree.lua:4](../lua/lspconfig/configs/syntax_tree.lua#L4)
 
 
-## systemd-language-server
+## systemd_ls
 
 https://github.com/psacawa/systemd-language-server
 
@@ -10551,7 +10551,7 @@ Language Server for Systemd unit files
 
 Snippet to enable the language server:
 ```lua
-require'lspconfig'.systemd-language-server.setup{}
+require'lspconfig'.systemd_ls.setup{}
 ```
 
 Default config:
@@ -10563,7 +10563,7 @@ Default config:
   ```lua
   { "systemd" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/systemd-language-server.lua:2](../lua/lspconfig/configs/systemd-language-server.lua#L2)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/systemd_ls.lua:2](../lua/lspconfig/configs/systemd_ls.lua#L2)
 - `single_file_support` : `true`
 
 
