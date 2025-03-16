@@ -239,7 +239,6 @@ Nvim by running `:help lspconfig-all`.
 - [pylyzer](#pylyzer)
 - [pyre](#pyre)
 - [pyright](#pyright)
-- [qml_lsp](#qml_lsp)
 - [qmlls](#qmlls)
 - [quick_lint_js](#quick_lint_js)
 - [r_language_server](#r_language_server)
@@ -8369,34 +8368,13 @@ Default config:
 - `single_file_support` : `true`
 
 
-## qml_lsp
-
-https://invent.kde.org/sdk/qml-lsp
-
-LSP implementation for QML (autocompletion, live linting, etc. in editors)
-
-Snippet to enable the language server:
-```lua
-require'lspconfig'.qml_lsp.setup{}
-```
-
-Default config:
-- `cmd` :
-  ```lua
-  { "qml-lsp" }
-  ```
-- `filetypes` :
-  ```lua
-  { "qmljs" }
-  ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/qml_lsp.lua:4](../lua/lspconfig/configs/qml_lsp.lua#L4)
-
-
 ## qmlls
 
-https://github.com/qt/qtdeclarative
+https://doc.qt.io/qt-6/qtqml-tooling-qmlls.html
 
-LSP implementation for QML (autocompletion, live linting, etc. in editors),
+> QML Language Server is a tool shipped with Qt that helps you write code in your favorite (LSP-supporting) editor.
+
+Source in the [QtDeclarative repository](https://code.qt.io/cgit/qt/qtdeclarative.git/)
 
 Snippet to enable the language server:
 ```lua
