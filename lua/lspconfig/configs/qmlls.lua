@@ -9,9 +9,11 @@ return {
   },
   docs = {
     description = [[
-https://github.com/qt/qtdeclarative
+https://doc.qt.io/qt-6/qtqml-tooling-qmlls.html
 
-LSP implementation for QML (autocompletion, live linting, etc. in editors),
+> QML Language Server is a tool shipped with Qt that helps you write code in your favorite (LSP-supporting) editor.
+
+Source in the [QtDeclarative repository](https://code.qt.io/cgit/qt/qtdeclarative.git/)
         ]],
   },
 }
