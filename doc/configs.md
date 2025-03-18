@@ -188,6 +188,7 @@ Nvim by running `:help lspconfig-all`.
 - [motoko_lsp](#motoko_lsp)
 - [move_analyzer](#move_analyzer)
 - [msbuild_project_tools_server](#msbuild_project_tools_server)
+- [muon](#muon)
 - [mutt_ls](#mutt_ls)
 - [nelua_lsp](#nelua_lsp)
 - [neocmake](#neocmake)
@@ -6721,6 +6722,27 @@ Default config:
   {}
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/msbuild_project_tools_server.lua:5](../lua/lspconfig/configs/msbuild_project_tools_server.lua#L5)
+
+
+## muon
+
+https://muon.build
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.muon.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "muon", "analyze", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "meson" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/muon.lua:4](../lua/lspconfig/configs/muon.lua#L4)
 
 
 ## mutt_ls
