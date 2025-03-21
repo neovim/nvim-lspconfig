@@ -1,12 +1,10 @@
-local util = require 'lspconfig.util'
-
 return {
   default_config = {
     cmd = { 'postgrestools', 'lsp-proxy' },
     filetypes = {
       'sql',
     },
-    root_dir = util.root_pattern('postgrestools.jsonc'),
+    root_dir = vim.fs.root(0, { 'postgrestools.jsonc' }),
     single_file_support = false,
   },
   docs = {
