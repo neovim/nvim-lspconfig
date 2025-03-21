@@ -15,4 +15,3 @@ A collection of language tools and a Language Server Protocol (LSP) implementati
         ]],
   },
 }
-
