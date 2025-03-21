@@ -58,6 +58,7 @@ return {
           'rnoweb',
           'rst',
           'tex',
+          'latex',
           'text',
           'typst',
           'xhtml',
