@@ -7935,9 +7935,9 @@ Default config:
 
 ## postgres_lsp
 
-https://github.com/supabase/postgres_lsp
+https://pgtools.dev
 
-A Language Server for Postgres
+A collection of language tools and a Language Server Protocol (LSP) implementation for Postgres, focusing on developer experience and reliable SQL tooling.
 
 Snippet to enable the language server:
 ```lua
@@ -7947,14 +7947,13 @@ require'lspconfig'.postgres_lsp.setup{}
 Default config:
 - `cmd` :
   ```lua
-  { "postgres_lsp", "lsp-proxy" }
+  { "postgrestools", "lsp-proxy" }
   ```
 - `filetypes` :
   ```lua
   { "sql" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/postgres_lsp.lua:4](../lua/lspconfig/configs/postgres_lsp.lua#L4)
-- `single_file_support` : `true`
+- `single_file_support` : `false`
 
 
 ## powershell_es
