@@ -5,7 +5,7 @@ return {
     cmd = { 'golangci-lint-langserver' },
     filetypes = { 'go', 'gomod' },
     init_options = {
-      command = { 'golangci-lint', 'run', '--out.json.path', 'stdout' },
+      command = { 'golangci-lint', 'run', '--output.json.path', 'stdout' },
     },
     root_dir = function(fname)
       return util.root_pattern(
