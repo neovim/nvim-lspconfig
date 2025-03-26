@@ -392,14 +392,8 @@ standard for single-file mode, lspconfig will adopt that standard.
 COMMANDS                                                    *lspconfig-commands*
 
 :LspInfo                                                            *:LspInfo*
-Deprecated alias to `:check lspconfig`.
-Shows the status of all configured language servers. Note that client id
-refers to the Nvim RPC channel connected to a given language server. Also
-lists deprecated servers.
-
-The following commands support tab-completion for all arguments. All commands
-that require a client id can either leverage tab-completion or the info
-contained in `:LspInfo`:
+Alias to `:checkhealth vim.lsp`. Shows the status of active LSP clients and
+servers.
 
 :LspStart [config_name]                                            *:LspStart*
 Launches the requested (configured) client, but only if it successfully
@@ -474,8 +468,7 @@ For debugging nvim-lspconfig issues, the most common hurdles users face are:
     `handlers`. Ensure that you debug by using a stock configuration to ensure
     your customizations are not introducing issues.
 
-|LspInfo| provides an overview of your active and configured language servers
-which can be useful for debugging.
+|:LspInfo| provides an overview which can be useful for debugging.
 
 Note that it will not report any configuration changes applied in
 `on_new_config`.
@@ -511,7 +504,7 @@ Highlights                                                *lspconfig-highlight*
 
 WARNING: The `require('lspconfig.ui.windows')` API was removed.
 LspInfo is provided by a healthcheck instead: >vim
-    :checkhealth lspconfig
+    :checkhealth vim.lsp
 <
 
 ==============================================================================

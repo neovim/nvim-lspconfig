@@ -65,7 +65,7 @@ end
 
 -- Called from plugin/lspconfig.vim because it requires knowing that the last
 -- script in scriptnames to be executed is lspconfig.
-api.nvim_create_user_command('LspInfo', ':che lspconfig', { desc = 'Deprecated alias to `:che lspconfig`' })
+api.nvim_create_user_command('LspInfo', ':checkhealth vim.lsp', { desc = 'Alias to `:checkhealth vim.lsp`' })
 
 api.nvim_create_user_command('LspStart', function(info)
   local server_name = string.len(info.args) > 0 and info.args or nil
