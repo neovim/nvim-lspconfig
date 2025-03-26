@@ -120,7 +120,7 @@ Most of the time, the reason for failure is present in the logs.
 
 ## Commands
 
-* `:LspInfo` (deprecated alias to `:che lspconfig`) shows the status of active and configured language servers.
+* `:LspInfo` (alias to `:checkhealth vim.lsp`) shows the status of active and configured language servers.
 * `:LspStart <config_name>` Start the requested server name. Will only successfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command. Defaults to all servers matching current buffer filetype.
 * `:LspStop [<client_id_or_name> ...]` Stops the given server(s). Defaults to
 stopping all servers active on the current buffer. To force stop add `++force`

@@ -323,6 +323,12 @@ local function check_lspdocs(buf_clients, other_matching_configs)
 end
 
 function M.check()
+  if vim.fn.has('nvim-0.11') == 1 then
+    vim.deprecate(':checkhealth lspconfig', ':checkhealth vim.lsp', '0.12', 'nvim-lspconfig', false)
+    vim.cmd [[checkhealth vim.lsp]]
+    return
+  end
+
   -- XXX: create "q" mapping until :checkhealth has this feature in Nvim stable.
   vim.cmd [[nnoremap <buffer> q <c-w>q]]
 
