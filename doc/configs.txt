@@ -341,6 +341,7 @@ Nvim by running `:help lspconfig-all`.
 - [vala_ls](#vala_ls)
 - [vale_ls](#vale_ls)
 - [vdmj](#vdmj)
+- [vectorcode_server](#vectorcode_server)
 - [verible](#verible)
 - [veridian](#veridian)
 - [veryl_ls](#veryl_ls)
@@ -11796,6 +11797,30 @@ Default config:
   }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/vdmj.lua:44](../lua/lspconfig/configs/vdmj.lua#L44)
+
+
+## vectorcode_server
+
+https://github.com/Davidyz/VectorCode
+
+A Language Server Protocol implementation for VectorCode, a code repository indexing tool.
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.vectorcode_server.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "vectorcode-server" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/vectorcode_server.lua:2](../lua/lspconfig/configs/vectorcode_server.lua#L2)
+- `settings` :
+  ```lua
+  {}
+  ```
+- `single_file_support` : `false`
 
 
 ## verible
