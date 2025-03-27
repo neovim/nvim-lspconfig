@@ -4546,7 +4546,7 @@ Default config:
 - `init_options` :
   ```lua
   {
-    command = { "golangci-lint", "run", "--output.json.path", "stdout" }
+    command = { "golangci-lint", "run", "--output.json.path=stdout", "--show-stats=false" }
   }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/golangci_lint_ls.lua:4](../lua/lspconfig/configs/golangci_lint_ls.lua#L4)
