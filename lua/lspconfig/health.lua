@@ -324,8 +324,16 @@ end
 
 function M.check()
   if vim.fn.has('nvim-0.11') == 1 then
-    vim.deprecate(':checkhealth lspconfig', ':checkhealth vim.lsp', '0.12', 'nvim-lspconfig', false)
-    vim.cmd [[checkhealth vim.lsp]]
+    local bufempty = vim.fn.line('$') < 3
+    if bufempty then
+      -- Infer that `:checkhealth lspconfig` was called directly.
+      health.info('`:checkhealth lspconfig` was removed. Use `:checkhealth vim.lsp` instead.')
+      vim.deprecate(':checkhealth lspconfig', ':checkhealth vim.lsp', '0.12', 'nvim-lspconfig', false)
+    else
+      -- Healthcheck was auto-discovered  by `:checkhealth` (no args).
+      health.info('Skipped. This healthcheck is redundant with `:checkhealth vim.lsp`.')
+    end
+
     return
   end
 
