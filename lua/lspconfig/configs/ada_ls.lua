@@ -4,7 +4,7 @@ return {
   default_config = {
     cmd = { 'ada_language_server' },
     filetypes = { 'ada' },
-    root_dir = util.root_pattern('Makefile', '.git', '*.gpr', '*.adc'),
+    root_dir = util.root_pattern('Makefile', '.git', 'alire.toml', '*.gpr', '*.adc'),
   },
   docs = {
     description = [[
