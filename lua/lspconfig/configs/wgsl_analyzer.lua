@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 return {
   default_config = {
-    cmd = { 'wgsl_analyzer' },
+    cmd = { 'wgsl-analyzer' },
     filetypes = { 'wgsl' },
     root_dir = util.root_pattern '.git',
     settings = {},
@@ -11,9 +11,9 @@ return {
     description = [[
 https://github.com/wgsl-analyzer/wgsl-analyzer
 
-`wgsl_analyzer` can be installed via `cargo`:
+`wgsl-analyzer` can be installed via `cargo`:
 ```sh
-cargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer wgsl_analyzer
+cargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer wgsl-analyzer
 ```
 ]],
   },
