@@ -12328,9 +12328,9 @@ Default config:
 
 https://github.com/wgsl-analyzer/wgsl-analyzer
 
-`wgsl-analyzer` can be installed via `cargo`:
+`wgsl_analyzer` can be installed via `cargo`:
 ```sh
-cargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer wgsl-analyzer
+cargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer wgsl_analyzer
 ```
 
 Snippet to enable the language server:
