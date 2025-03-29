@@ -5,7 +5,7 @@ return {
       'sql',
     },
     root_dir = vim.fs.root(0, { 'postgrestools.jsonc' }),
-    single_file_support = false,
+    single_file_support = true,
   },
   docs = {
     description = [[
