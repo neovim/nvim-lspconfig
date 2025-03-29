@@ -7954,7 +7954,7 @@ Default config:
   ```lua
   { "sql" }
   ```
-- `single_file_support` : `false`
+- `single_file_support` : `true`
 
 
 ## powershell_es
