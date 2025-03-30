@@ -1,4 +1,4 @@
---!/usr/bin/env -S nvim -l
+#!/usr/bin/env -S nvim -l
 local root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
 vim.opt.rtp:append(root)
 
