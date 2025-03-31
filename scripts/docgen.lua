@@ -82,7 +82,7 @@ Default config:
 ]]
 
 local lsp_section_template_md = [[
-### {{config_name}}
+## {{config_name}}
 
 {{preamble}}
 
