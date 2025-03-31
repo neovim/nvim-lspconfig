@@ -292,7 +292,7 @@ local function make_implemented_servers_list()
     0,
     '\n',
     map_sorted(configs, function(k)
-      return string.format('- |%s|', k)
+      return template('- [{{server}}](#{{server}})', { server = k })
     end)
   )
 end
