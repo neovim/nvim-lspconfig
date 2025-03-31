@@ -2,13 +2,6 @@
 
 LSP configurations provided by nvim-lspconfig are listed below.
 
-Type |gO| to see the table of contents.
-
-==============================================================================
-Implemented servers:
-
-{{implemented_servers_list}}
-
 ==============================================================================
 
 {{lsp_server_details}}
