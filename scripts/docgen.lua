@@ -66,8 +66,9 @@ local function relpath(from, to)
 end
 
 local lsp_section_template_txt = [[
-{{tagline}}
 ==============================================================================
+{{tagline}}
+
 {{preamble}}
 
 Snippet to enable the language server:
