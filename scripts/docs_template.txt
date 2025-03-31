@@ -3,7 +3,6 @@
 LSP configurations provided by nvim-lspconfig are listed below.
 
 Type |gO| to see the table of contents.
-Press |K| on a heptag to jump to its documentation.
 
 ==============================================================================
 Implemented servers:
