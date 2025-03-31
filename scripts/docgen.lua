@@ -298,7 +298,6 @@ local function make_implemented_servers_list()
 end
 
 local function generate_readme(template_file, params, output_file)
-
   local input_template = readfile(template_file)
   local readme_data = template(input_template, params)
 
