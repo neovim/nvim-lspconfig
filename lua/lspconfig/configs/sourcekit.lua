@@ -16,6 +16,11 @@ return {
       return t[ftype] or ftype
     end,
     capabilities = {
+      workspace = {
+        didChangeWatchedFiles = {
+          dynamicRegistration = true,
+        },
+      },
       textDocument = {
         diagnostic = {
           dynamicRegistration = true,
@@ -26,7 +31,7 @@ return {
   },
   docs = {
     description = [[
-https://github.com/apple/sourcekit-lsp
+https://github.com/swiftlang/sourcekit-lsp
 
 Language server for Swift and C/C++/Objective-C.
     ]],
