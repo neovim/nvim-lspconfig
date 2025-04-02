@@ -35,7 +35,8 @@ local function map_sorted(t, func)
 end
 
 local function indent(n, s)
-  return vim.text.indent(n, s)
+  local prefix = string.rep(' ', n)
+  return s:gsub('([^\n]+)', prefix .. '%1')
 end
 
 local function make_parts(fns)
@@ -48,7 +49,11 @@ local function make_parts(fns)
 end
 
 local function make_section(indentlvl, sep, parts)
-  return indent(indentlvl, table.concat(make_parts(parts), sep))
+  local flat = make_parts(parts)
+  if not flat or #flat == 0 then
+    return ''
+  end
+  return indent(indentlvl, table.concat(flat, sep))
 end
 
 local function readfile(path)
@@ -56,8 +61,13 @@ local function readfile(path)
   return io.open(path):read '*a'
 end
 
-local lsp_section_template = [[
-## {{config_name}}
+local function relpath(from, to)
+  return to:gsub('^' .. vim.pesc(from) .. '/', '')
+end
+
+local lsp_section_template_txt = [[
+==============================================================================
+{{tagline}}
 
 {{preamble}}
 
@@ -69,6 +79,22 @@ require'lspconfig'.{{config_name}}.setup{}
 Default config:
 {{default_values}}
 
+]]
+
+local lsp_section_template_md = [[
+## {{config_name}}
+
+{{preamble}}
+
+**Snippet to enable the language server:**
+```lua
+require'lspconfig'.{{config_name}}.setup{}
+```
+{{commands}}
+**Default config:**
+{{default_values}}
+
+---
 ]]
 
 local function require_all_configs()
@@ -89,7 +115,7 @@ local function require_all_configs()
   vim.env.XDG_CACHE_HOME = old_cache_home
 end
 
-local function make_lsp_sections()
+local function make_lsp_sections(is_markdown)
   return make_section(
     0,
     '\n',
@@ -104,6 +130,8 @@ local function make_lsp_sections()
         preamble = '',
         commands = '',
         default_values = '',
+        tagline = is_markdown and ''
+          or string.format('%s                                                       *%s*', config_name, config_name),
       }
 
       params.commands = make_section(0, '\n', {
@@ -145,7 +173,7 @@ local function make_lsp_sections()
                 end
               end
               io.close(file)
-              local config_relpath = vim.fs.relpath(root, config_file)
+              local config_relpath = relpath(root, config_file)
 
               -- XXX: "../" because the path is outside of the doc/ dir.
               return ('- `%s` source (use "gF" to visit): [../%s:%d](../%s#L%d)'):format(
@@ -253,7 +281,8 @@ local function make_lsp_sections()
         params.preamble = vim.trim(table.concat(preamble_parts, '\n'))
       end
 
-      return template(lsp_section_template, params)
+      local template_used = is_markdown and lsp_section_template_md or lsp_section_template_txt
+      return template(template_used, params)
     end)
   )
 end
@@ -268,24 +297,22 @@ local function make_implemented_servers_list()
   )
 end
 
-local function generate_readme(template_file, params)
-  vim.validate('lsp_server_details', params.lsp_server_details, 'string')
-  vim.validate('implemented_servers_list', params.implemented_servers_list, 'string')
-
+local function generate_readme(template_file, params, output_file)
   local input_template = readfile(template_file)
   local readme_data = template(input_template, params)
 
-  local conf_md = vim.fs.joinpath(root, 'doc/configs.md')
-  local conf_txt = vim.fs.joinpath(root, 'doc/configs.txt')
-
-  local writer = assert(io.open(conf_md, 'w'))
+  local writer = assert(io.open(output_file, 'w'))
   writer:write(readme_data)
   writer:close()
-  vim.loop.fs_copyfile(conf_md, conf_txt)
 end
 
 require_all_configs()
 generate_readme(vim.fs.joinpath(root, 'scripts/docs_template.md'), {
   implemented_servers_list = make_implemented_servers_list(),
-  lsp_server_details = make_lsp_sections(),
-})
+  lsp_server_details = make_lsp_sections(true),
+}, vim.fs.joinpath(root, 'doc/configs.md'))
+
+generate_readme(vim.fs.joinpath(root, 'scripts/docs_template.txt'), {
+  implemented_servers_list = make_implemented_servers_list(),
+  lsp_server_details = make_lsp_sections(false),
+}, vim.fs.joinpath(root, 'doc/configs.txt'))

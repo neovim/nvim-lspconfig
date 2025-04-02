@@ -1,0 +1,9 @@
+*lspconfig-all*                              *lspconfig-server-configurations*
+
+LSP configurations provided by nvim-lspconfig are listed below.
+
+==============================================================================
+
+{{lsp_server_details}}
+
+" vim:tw=78:ft=help:norl:expandtab:sw=4
