@@ -61,13 +61,23 @@ local function readfile(path)
   return io.open(path):read '*a'
 end
 
-local function relpath(from, to)
-  return to:gsub('^' .. vim.pesc(from) .. '/', '')
-end
+local section_template_txt = [[
+------------------------------------------------------------------------------
+{{config_name}}
 
-local lsp_section_template_txt = [[
-==============================================================================
-{{tagline}}
+{{preamble}}
+
+Snippet to enable the language server: >lua
+  require'lspconfig'.{{config_name}}.setup{}
+
+{{commands}}
+Default config:
+{{default_values}}
+
+]]
+
+local section_template_md = [[
+## {{config_name}}
 
 {{preamble}}
 
@@ -77,21 +87,6 @@ require'lspconfig'.{{config_name}}.setup{}
 ```
 {{commands}}
 Default config:
-{{default_values}}
-
-]]
-
-local lsp_section_template_md = [[
-## {{config_name}}
-
-{{preamble}}
-
-**Snippet to enable the language server:**
-```lua
-require'lspconfig'.{{config_name}}.setup{}
-```
-{{commands}}
-**Default config:**
 {{default_values}}
 
 ---
@@ -130,8 +125,6 @@ local function make_lsp_sections(is_markdown)
         preamble = '',
         commands = '',
         default_values = '',
-        tagline = is_markdown and ''
-          or string.format('%s                                                       *%s*', config_name, config_name),
       }
 
       params.commands = make_section(0, '\n', {
@@ -173,7 +166,7 @@ local function make_lsp_sections(is_markdown)
                 end
               end
               io.close(file)
-              local config_relpath = relpath(root, config_file)
+              local config_relpath = vim.fs.relpath(root, config_file)
 
               -- XXX: "../" because the path is outside of the doc/ dir.
               return ('- `%s` source (use "gF" to visit): [../%s:%d](../%s#L%d)'):format(
@@ -281,7 +274,7 @@ local function make_lsp_sections(is_markdown)
         params.preamble = vim.trim(table.concat(preamble_parts, '\n'))
       end
 
-      local template_used = is_markdown and lsp_section_template_md or lsp_section_template_txt
+      local template_used = is_markdown and section_template_md or section_template_txt
       return template(template_used, params)
     end)
   )

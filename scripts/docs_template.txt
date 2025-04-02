@@ -1,9 +1,14 @@
-*lspconfig-all*                              *lspconfig-server-configurations*
+*lspconfig-all*
 
 LSP configurations provided by nvim-lspconfig are listed below.
 
+                                      Type |gO| to see the table of contents.
+
 ==============================================================================
+LSP configs
 
 {{lsp_server_details}}
 
-" vim:tw=78:ft=help:norl:expandtab:sw=4
+==============================================================================
+
+ vim:tw=78:ft=help:norl:expandtab:sw=4
