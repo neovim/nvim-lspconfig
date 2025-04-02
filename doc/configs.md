@@ -9907,7 +9907,7 @@ Default config:
 
 ## sourcekit
 
-https://github.com/apple/sourcekit-lsp
+https://github.com/swiftlang/sourcekit-lsp
 
 Language server for Swift and C/C++/Objective-C.
 
@@ -9924,6 +9924,11 @@ Default config:
       diagnostic = {
         dynamicRegistration = true,
         relatedDocumentSupport = true
+      }
+    },
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true
       }
     }
   }
