@@ -10350,7 +10350,7 @@ Default config:
   ```lua
   { "tablegen" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/tblgen_lsp_server.lua:4](../lua/lspconfig/configs/tblgen_lsp_server.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/tblgen_lsp_server.lua:15](../lua/lspconfig/configs/tblgen_lsp_server.lua#L15)
 
 
 ------------------------------------------------------------------------------
