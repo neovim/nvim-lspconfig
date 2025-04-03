@@ -36,36 +36,34 @@ end
 --
 -- `pyright`, a static type checker and language server for python
 return {
-  default_config = {
-    cmd = { 'pyright-langserver', '--stdio' },
-    filetypes = { 'python' },
-    root_markers = {
-      'pyproject.toml',
-      'setup.py',
-      'setup.cfg',
-      'requirements.txt',
-      'Pipfile',
-      'pyrightconfig.json',
-      '.git',
-    },
-    settings = {
-      python = {
-        analysis = {
-          autoSearchPaths = true,
-          useLibraryCodeForTypes = true,
-          diagnosticMode = 'openFilesOnly',
-        },
+  cmd = { 'pyright-langserver', '--stdio' },
+  filetypes = { 'python' },
+  root_markers = {
+    'pyproject.toml',
+    'setup.py',
+    'setup.cfg',
+    'requirements.txt',
+    'Pipfile',
+    'pyrightconfig.json',
+    '.git',
+  },
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = 'openFilesOnly',
       },
     },
-    on_attach = function()
-      vim.api.nvim_buf_create_user_command(0, 'PyrightOrganizeImports', organize_imports, {
-        desc = 'Organize Imports',
-      })
-      vim.api.nvim_buf_create_user_command(0, 'PyrightSetPythonPath', set_python_path, {
-        desc = 'Reconfigure pyright with the provided python path',
-        nargs = 1,
-        complete = 'file',
-      })
-    end,
   },
+  on_attach = function()
+    vim.api.nvim_buf_create_user_command(0, 'PyrightOrganizeImports', organize_imports, {
+      desc = 'Organize Imports',
+    })
+    vim.api.nvim_buf_create_user_command(0, 'PyrightSetPythonPath', set_python_path, {
+      desc = 'Reconfigure pyright with the provided python path',
+      nargs = 1,
+      complete = 'file',
+    })
+  end,
 }
