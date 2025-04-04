@@ -3790,8 +3790,8 @@ Default config:
     ["eslint/probeFailed"] = <function 4>
   }
   ```
-- `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/eslint.lua:51](../lua/lspconfig/configs/eslint.lua#L51)
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/eslint.lua:51](../lua/lspconfig/configs/eslint.lua#L51)
+- `on_new_config` source (use "gF" to visit): [../lua/lspconfig/configs/eslint.lua:73](../lua/lspconfig/configs/eslint.lua#L73)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/eslint.lua:73](../lua/lspconfig/configs/eslint.lua#L73)
 - `settings` :
   ```lua
   {
