@@ -108,6 +108,7 @@ Nvim by running `:help lspconfig-all`.
 - [flux_lsp](#flux_lsp)
 - [foam_ls](#foam_ls)
 - [fortls](#fortls)
+- [fountain-lsp-server](#fountain-lsp-server)
 - [fsautocomplete](#fsautocomplete)
 - [fsharp_language_server](#fsharp_language_server)
 - [fstar](#fstar)
@@ -4073,6 +4074,34 @@ Default config:
   { "fortran" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/fortls.lua:4](../lua/lspconfig/configs/fortls.lua#L4)
+- `settings` :
+  ```lua
+  {}
+  ```
+
+---
+
+## fountain-lsp-server
+
+https://github.com/oparaskos/fountain-lsp-server
+
+This is a Language Server for fountain files, a simple markup syntax for writing, editing, and sharing screenplays in plain, human-readable text.
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.fountain-lsp-server.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { 'fountain-lsp-server', '--stdio' },
+  ```
+- `filetypes` :
+  ```lua
+  { "fountain" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/fountain-lsp-server.lua:4](../lua/lspconfig/configs/fortls.lua#L4)
 - `settings` :
   ```lua
   {}
