@@ -47,6 +47,28 @@ local root_file = {
   'eslint.config.cts',
 }
 
+--- Find the closest directory containing the ESLint library.
+--- Using the repository root as the ESLint library location is a common practice
+--- but handling different versions in monorepos can cause the LSP not to point to
+--- the correct instance.
+---
+--- @return string|nil (path) The path to the closest directory containing the ESLint library, or nil if not found.
+local function get_eslint_closest_dir()
+  local cwd = vim.fn.getcwd()
+  local eslint_node_modules = vim.fn.finddir('node_modules/eslint', cwd .. ';')
+
+  if eslint_node_modules == '' then
+    return nil
+  end
+
+  if eslint_node_modules == 'node_modules/eslint' then
+    return cwd
+  end
+
+  -- Strip the node_modules/eslint part
+  return eslint_node_modules:match '(.*)/node_modules/eslint'
+end
+
 return {
   default_config = {
     cmd = { 'vscode-eslint-language-server', '--stdio' },
@@ -102,6 +124,8 @@ return {
       },
     },
     on_new_config = function(config, new_root_dir)
+      new_root_dir = get_eslint_closest_dir() or new_root_dir
+
       -- The "workspaceFolder" is a VSCode concept. It limits how far the
       -- server will traverse the file system when locating the ESLint config
       -- file (e.g., .eslintrc).
