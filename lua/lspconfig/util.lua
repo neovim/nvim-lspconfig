@@ -117,7 +117,14 @@ function M.search_ancestors(startpath, func)
 end
 
 local function escape_wildcards(path)
-  return path:gsub('([%[%]%?%*])', '\\%1')
+  -- Escape all potentially problematic special characters
+  -- Covers:
+  -- - Wildcards and pattern matching: [ ] ? * $ ( ) ^ % . + - ~
+  -- - Escape character: \
+  -- - Shell special characters: ` ' " ; | & < >
+  -- - Whitespace: %s (spaces, tabs, etc.)
+  -- The gsub function replaces any matches with the same character preceded by a backslash
+  return path:gsub('([%[%]%?%*%$%(%)%^%%%.%+%-%~\\`\'";|&<>%s])', '\\%1')
 end
 
 function M.root_pattern(...)
