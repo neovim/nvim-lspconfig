@@ -1,0 +1,14 @@
+---@brief
+---
+---https://github.com/wgsl-analyzer/wgsl-analyzer
+--
+-- `wgsl_analyzer` can be installed via `cargo`:
+-- ```sh
+-- cargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer wgsl_analyzer
+-- ```
+return {
+  cmd = { 'wgsl_analyzer' },
+  filetypes = { 'wgsl' },
+  root_markers = { '.git' },
+  settings = {},
+}
