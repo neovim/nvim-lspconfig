@@ -1,4 +1,4 @@
-*lspconfig.txt*         For Nvim version 0.8+
+*lspconfig.txt*         For Nvim version 0.10+
 
 nvim-lspconfig provides user-contributed configs for the Nvim |lsp| client.
 
@@ -48,22 +48,8 @@ activating it: >lua
     local config = require'lspconfig'.clangd.config_def
 <
                                                              *lspconfig-setup*
-`setup{}` wraps |vim.lsp.start_client()| or |vim.lsp.buf_attach_client()|
-functions (depending on whether the current file belongs to a project with
-a currently running client; see |lspconfig-root-detection|).
-
-`setup{}` takes a superset of the keys listed in |vim.lsp.start_client()| with
-the following added keys:
-
-- {root_dir} (`function(filename, bufnr)`) Returns either a filepath (string)
-  or nil. The language server will only start if the function returns
-  a filepath.
-
-  If a root directory (string) is returned which is unique from any previously
-  returned root_dir, a new server will be spawned with that root directory.
-  See |lspconfig-root-detection| for more details
-
-- {name} (`string`) Defaults to the server's name (`clangd`, `pyright`, etc.).
+`setup{}` wraps |vim.lsp.start()|, and takes a superset of its parameters,
+adding the following keys:
 
 - {filetypes} (`list[string] | nil`) Set of filetypes for which to attempt to
   resolve {root_dir}. May be empty, or server may specify a default value.
@@ -92,19 +78,15 @@ the following added keys:
 Note: all fields passed to `setup{}` override the respective field in the
 default configuration. There is no composition.
 
-All `config` elements described in `:help vim.lsp.start_client()` can
-additionally be overridden via the `setup{}` call. The most commonly passed
-overrides to `setup{}` are:
+All |vim.lsp.start()| `config` fields (described in |vim.lsp.ClientConfig|)
+can be overridden via the `setup{}` call. The most common overrides are:
 
-- {settings} `table <string, string|table|bool>`
-
-  The `settings` table is sent after initialization via a
-  `workspace/didChangeConfiguration` notification from the Nvim client to
+- {settings} Table is sent after initialization via
+  a `workspace/didChangeConfiguration` notification from the Nvim client to
   the language server. These settings allow a user to change optional runtime
-  settings of the language server. 
+  settings of the language server.
 
-  As an example, to set the following settings found in the pyright
-  documentation:
+  Example: set the following settings found in the pyright documentation:
 
   `pyright.disableLanguageServices`: `boolean`
   `pyright.disableOrganizeImports`: `boolean`
@@ -120,224 +102,59 @@ overrides to `setup{}` are:
     }
   }
 <
+
 ==============================================================================
-OVERRIDING GLOBAL DEFAULTS                           *lspconfig-global-defaults*
+COMMANDS                                                    *lspconfig-commands*
 
-The global defaults for all servers can be overridden by extending the
-`default_config` table. `setup{}` can override these defaults. >lua
+:LspInfo                                                            *:LspInfo*
+Alias to `:checkhealth vim.lsp`. Shows the status of active LSP clients and
+servers.
 
-  local lspconfig = require'lspconfig'
-  lspconfig.util.default_config = vim.tbl_extend(
-    "force",
-    lspconfig.util.default_config,
-    {
-      autostart = false,
-      handlers = {
-        ["window/logMessage"] = function(err, method, params, client_id)
-            if params and params.type <= vim.lsp.protocol.MessageType.Log then
-              vim.lsp.handlers["window/logMessage"](err, method, params, client_id)
-            end
-          end,
-        ["window/showMessage"] = function(err, method, params, client_id)
-            if params and params.type <= vim.lsp.protocol.MessageType.Warning.Error then
-              vim.lsp.handlers["window/showMessage"](err, method, params, client_id)
-            end
-          end,
-      }
-    }
-  )
-<
+:LspStart [config_name]                                            *:LspStart*
+Launches the requested (configured) client, but only if it successfully
+resolves a root directory. Note: Defaults to all configured servers matching
+the current buffer filetype.
+
+:LspStop [client_id] or [config_name] ...                        *:LspStop*
+Stops the servers with the given client-ids or config names. Defaults to
+stopping all servers active on the current buffer. To force stop language
+servers: >vim
+    :LspStop ++force
+
+:LspRestart [client_id] or [config_name] ...                     *:LspRestart*
+Restarts the clients with the given client-ids or config names, and attempts
+to reattach to all previously attached buffers.
 
 ==============================================================================
 SERVER CONFIGS                                        *lspconfig-configurations*
 
 See |lspconfig-all| for the list of provided LSP configurations.
 
-For servers for which there is not a configuration, it is necessary to define
-a configuration. This can be done through the `configs` module.
+For servers that don't have a config, define one via `vim.lsp.config()`
+(requires Nvim 0.11 or later), see |lsp-config|.
 
-The `configs` module is a singleton where configs are defined. The
-`vim.validate` schema is: >lua
+==============================================================================
+COMPLETION SUPPORT                                        *lspconfig-completion*
 
-    configs.SERVER_NAME = {
-      default_config = {'table'},
-      on_new_config = {'function', true},
-      on_attach = {'function', true},
-      commands = {'table', true},
-      docs = {'table', true},
-    }
-<
-where the structure of `docs` is: >lua
-
-    docs = {
-      description = {'string', true},
-      default_config = {'table', true},
-    }
-<
-`commands` is a map of `name:definition` key:value pairs, where `definition`
-is a list whose first value is a function implementing the command, and the
-rest are either array values which will be formed into flags for the command,
-or special keys like `description`.
-
-WARNING: Commands is deprecated and will be removed in future releases.
-It is recommended to use `vim.api.nvim_create_user_command()` instead in an
-|LspAttach| autocommand handler.
-
-Example:
->lua
-  local function organize_imports()
-    local params = {
-      command = 'pyright.organizeimports',
-      arguments = { vim.uri_from_bufnr(0) },
-    }
-    vim.lsp.buf.execute_command(params)
-  end
-
-  vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(ev)
-      local client = vim.lsp.get_client_by_id(ev.data.client_id)
-      if client.name == "pyright" then
-        vim.api.nvim_create_user_command("PyrightOrganizeImports", organize_imports, {desc = 'Organize Imports'})
-      end
-    end
-  end
-
-  require("lspconfig")['pyright'].setup{}
-<
-
-The `configs.__newindex` metamethod consumes the config definition and returns
-an object with a `setup()` method, to be invoked by users:
->lua
-    require'lspconfig'.SERVER_NAME.setup{}
-
-After you set `configs.SERVER_NAME` you can add arbitrary language-specific
-functions to it if necessary.
-
-Example:
->lua
-    configs.texlab.buf_build = buf_build
-<
+See |lsp-completion|.
 
 ==============================================================================
 ADDING NEW SERVERS                                    *lspconfig-new*
 
-The steps for adding and enabling a new server configuration are:
+See |lsp-config| (requires Nvim 0.11 or later).
 
-1. Define the configuration (see also |vim.fs.root()|): >lua
-   local lspconfig = require 'lspconfig'
-   local configs = require 'lspconfig.configs'
-
-   -- Check if the config is already defined (useful when reloading this file)
-   if not configs.foo_lsp then
-     configs.foo_lsp = {
-       default_config = {
-         cmd = {'/home/neovim/lua-language-server/run.sh'},
-         filetypes = {'lua'},
-         root_dir = function(fname)
-           return lspconfig.util.find_git_ancestor(fname)
-         end,
-         settings = {},
-       },
-     }
-   end
-
-2. Call `setup()` to enable the FileType autocmd >lua
-   lspconfig.foo_lsp.setup{}
-<
 ==============================================================================
 ROOT DETECTION                                        *lspconfig-root-detection*
-                                                            *lspconfig-root-dir*
-
-WARNING: This API is deprecated. Use |vim.fs.root()| from Nvim core instead.
 
 A project's `root_dir` is used by `lspconfig` to determine whether `lspconfig`
 should start a new server, or attach a previous one, to the current file.
 
-`lspconfig` automatically launches language servers by defining a filetype
-autocommand based on the `filetypes` specified in the default configuration of
-each server, optionally overridable by the `filetypes` table passed to
-`setup`.
-
-This autocommand triggers a search from the current file position in the
-filesystem hierarchy up to the top level directory of your filesystem. The
-`root_dir` field of each configuration is a function that returns true if the
-current directory in this traversal matches a given root pattern.
-
-The following utility functions are provided by `lspconfig`. Each function call
-below returns a function that takes as its argument the current buffer path.
-
-- `util.root_pattern`: function which takes multiple arguments, each 
-  corresponding to a different root pattern against which the contents of the
-  current directory are matched using |vim.fn.glob()| while traversing up the
-  filesystem. Parent directories are traversed once per pattern, in the order
-  the patterns are specified. >
-   root_dir = util.root_pattern('pyproject.toml', 'requirements.txt')
-
-- Locate the first parent dir containing a ".git" file or directory: >lua
-  vim.fs.dirname(vim.fs.find('.git', { path = root_dir, upward = true })[1])
-<
-  If you have Nvim 0.10 or newer then >lua
-  vim.fs.root(root_dir, ".git")
-<
-  can be used instead.
-  - Note: The old `util.find_git_ancestor` API is deprecated and will
-    be removed.
-<
-- Locate the first parent dir containing a "node_modules" dir: >lua
-  vim.fs.dirname(vim.fs.find('node_modules', { path = root_dir, upward = true })[1])
-<
-  If you have Nvim 0.10 or newer then >lua
-  vim.fs.root(root_dir, "node_modules")
-<
-  can be used instead.
-  - Note: The old `util.find_node_modules_ancestor` API is deprecated and will
-    be removed.
-
-- Locate the first parent dir containing a "package.json" dir: >lua
-  vim.fs.dirname(vim.fs.find('package.json', { path = root_dir, upward = true })[1])
-<
-  If you have Nvim 0.10 or newer then >lua
-  vim.fs.root(root_dir, "package.json")
-<
-  can be used instead.
-  - Note: The old `util.find_package_json_ancestor` API is deprecated and will
-    be removed.
-<
-Note: On Windows, `lspconfig` always assumes forward slash normalized paths with
-capitalized drive letters.
+Nvim provides |vim.fs.root()| to make it easy to find a "root marker" file.
 
 ==============================================================================
 ADVANCED ROOT DIRECTORY DETECTION                      *lspconfig-root-advanced*
-                                                    *lspconfig-root-composition*
-
-WARNING: This API is deprecated. Use |vim.fs.root()| from Nvim core instead.
-
-The `root_dir` key in `config` and `setup` can hold any function of the form
->lua
-  function custom_root_dir(filename, bufnr)
-  returns nil | string
->
-This allows for rich composition of root directory patterns which is necessary
-for some project structures. Example (for Kotlin): >lua
-
-  local root_files = {
-    'settings.gradle', -- Gradle (multi-project)
-    'settings.gradle.kts', -- Gradle (multi-project)
-    'build.xml', -- Ant
-    'pom.xml', -- Maven
-  }
-
-  local fallback_root_files = {
-    'build.gradle', -- Gradle
-    'build.gradle.kts', -- Gradle
-  }
-  root_dir = function(fname)
-    local primary = util.root_pattern(unpack(root_files))(fname)
-    local fallback = util.root_pattern(unpack(fallback_root_files))(fname)
-    return primary or fallback
-  end
-<
-Browsing the source of the default configurations is recommended.
+The `root_dir` field of |vim.lsp.Config| (Nvim 0.11 or later) may be
+a function.
 
 ==============================================================================
 SINGLE FILE SUPPORT                              *lspconfig-single-file-support*
@@ -367,33 +184,6 @@ Note that in the event that the LSP specification is extended to support a
 standard for single-file mode, lspconfig will adopt that standard.
 
 ==============================================================================
-COMMANDS                                                    *lspconfig-commands*
-
-:LspInfo                                                            *:LspInfo*
-Alias to `:checkhealth vim.lsp`. Shows the status of active LSP clients and
-servers.
-
-:LspStart [config_name]                                            *:LspStart*
-Launches the requested (configured) client, but only if it successfully
-resolves a root directory. Note: Defaults to all configured servers matching
-the current buffer filetype.
-
-:LspStop [client_id] or [config_name] ...                        *:LspStop*
-Stops the servers with the given client-ids or config names. Defaults to
-stopping all servers active on the current buffer. To force stop language
-servers: >vim
-    :LspStop ++force
-
-:LspRestart [client_id] or [config_name] ...                     *:LspRestart*
-Restarts the clients with the given client-ids or config names, and attempts
-to reattach to all previously attached buffers.
-
-==============================================================================
-COMPLETION SUPPORT                                        *lspconfig-completion*
-
-See |lsp-config|.
-
-==============================================================================
 DEBUGGING AND TROUBLESHOOTING                              *lspconfig-debugging*
 
 While using language servers should be easy, debugging issues can be
@@ -407,7 +197,7 @@ is typically (in rough order):
 - nvim-lspconfig
 
 The first step in debugging is to test with a minimal configuration:
-https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&template=lsp_bug_report.yml(such as
+https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&template=lsp_bug_report.yml
 Historically, many problems are due to plugins or misconfiguration.
 
 Should that fail, identifying which component is the culprit is challenging.
@@ -434,9 +224,8 @@ For debugging nvim-lspconfig issues, the most common hurdles users face are:
   - Missing filetype plugins. Certain languages are not detecting by
     Vim/Nvim because they have not yet been added to the filetype detection
     system. Ensure `:set ft?` shows the filetype and not an empty value.
-  - Not triggering root detection. nvim-lspconfig is built around the concept of projects. See
-    |lspconfig-root-detection| for more details. Most of the time,
-    initializing a git repo will suffice.
+  - Not triggering root detection. nvim-lspconfig is built around the concept
+    of projects. See |lspconfig-root-detection|.
   - Not triggering root detection. Some language servers will only start
     if it is opened in a directory, or child directory, containing a file
     which signals the *root* of the project. Most of the time, this is
@@ -447,9 +236,6 @@ For debugging nvim-lspconfig issues, the most common hurdles users face are:
     your customizations are not introducing issues.
 
 |:LspInfo| provides an overview which can be useful for debugging.
-
-Note that it will not report any configuration changes applied in
-`on_new_config`.
 
 ==============================================================================
 LOGGING                                                      *lspconfig-logging*
@@ -468,22 +254,6 @@ Attempt to run the language server, and open the log with:
 Note that `ERROR` messages containing `stderr` only indicate that the log was
 sent to `stderr`. Many servers counter-intuitively send harmless messages
 via stderr.
-
-==============================================================================
-SCOPE                                                         *lspconfig-scope*
-
-`lspconfig` is a community effort to create default configurations that fit
-within the scope of an official plugin for Nvim. All features that are not
-strictly providing default configurations for language servers will be removed
-from `lspconfig` in time.
-
-==============================================================================
-Highlights                                                *lspconfig-highlight*
-
-WARNING: The `require('lspconfig.ui.windows')` API was removed.
-LspInfo is provided by a healthcheck instead: >vim
-    :checkhealth vim.lsp
-<
 
 ==============================================================================
 
