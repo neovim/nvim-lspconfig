@@ -10701,6 +10701,9 @@ Snippet to enable the language server:
 require'lspconfig'.svelte.setup{}
 ```
 
+Commands:
+- MigrateToSvelte5: Migrate Component to Svelte 5 Syntax
+
 Default config:
 - `cmd` :
   ```lua
@@ -10710,7 +10713,7 @@ Default config:
   ```lua
   { "svelte" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/svelte.lua:4](../lua/lspconfig/configs/svelte.lua#L4)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/svelte.lua:17](../lua/lspconfig/configs/svelte.lua#L17)
 
 ---
 
