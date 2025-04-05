@@ -5283,6 +5283,30 @@ Default config:
 
 
 ------------------------------------------------------------------------------
+just
+
+https://github.com/terror/just-lsp
+
+`just-lsp` is an LSP for just built on top of the tree-sitter-just parser.
+
+Snippet to enable the language server: >lua
+  require'lspconfig'.just.setup{}
+
+
+Default config:
+- `cmd` :
+  ```lua
+  { "just-lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "just" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/just.lua:2](../lua/lspconfig/configs/just.lua#L2)
+- `single_file_support` : `true`
+
+
+------------------------------------------------------------------------------
 kcl
 
 https://github.com/kcl-lang/kcl.nvim

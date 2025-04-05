@@ -155,6 +155,7 @@ Nvim by running `:help lspconfig-all`.
 - [jsonls](#jsonls)
 - [jsonnet_ls](#jsonnet_ls)
 - [julials](#julials)
+- [just](#just)
 - [kcl](#kcl)
 - [koka](#koka)
 - [kotlin_language_server](#kotlin_language_server)
@@ -5784,6 +5785,31 @@ Default config:
   { "julia" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/julials.lua:97](../lua/lspconfig/configs/julials.lua#L97)
+- `single_file_support` : `true`
+
+---
+
+## just
+
+https://github.com/terror/just-lsp
+
+`just-lsp` is an LSP for just built on top of the tree-sitter-just parser.
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.just.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "just-lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "just" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/just.lua:2](../lua/lspconfig/configs/just.lua#L2)
 - `single_file_support` : `true`
 
 ---
