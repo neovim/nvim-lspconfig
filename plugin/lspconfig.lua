@@ -138,7 +138,7 @@ api.nvim_create_user_command('LspStop', function(info)
 
   -- default to stopping all servers on current buffer
   if #args == 0 then
-    clients = util.get_lsp_clients({ bufnr = vim.api.nvim_get_current_buf() })
+    clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
   else
     clients = get_clients_from_cmd_args(args)
   end
