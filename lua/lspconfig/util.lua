@@ -157,38 +157,6 @@ function M.insert_package_json(config_files, field, fname)
   return config_files
 end
 
-function M.get_active_clients_list_by_ft(filetype)
-  local clients = M.get_lsp_clients()
-  local clients_list = {}
-  for _, client in pairs(clients) do
-    --- @diagnostic disable-next-line:undefined-field
-    local filetypes = client.config.filetypes or {}
-    for _, ft in pairs(filetypes) do
-      if ft == filetype then
-        table.insert(clients_list, client.name)
-      end
-    end
-  end
-  return clients_list
-end
-
-function M.get_other_matching_providers(filetype)
-  local configs = require 'lspconfig.configs'
-  local active_clients_list = M.get_active_clients_list_by_ft(filetype)
-  local other_matching_configs = {}
-  for _, config in pairs(configs) do
-    if not vim.tbl_contains(active_clients_list, config.name) then
-      local filetypes = config.filetypes or {}
-      for _, ft in pairs(filetypes) do
-        if ft == filetype then
-          table.insert(other_matching_configs, config)
-        end
-      end
-    end
-  end
-  return other_matching_configs
-end
-
 function M.get_config_by_ft(filetype)
   local configs = require 'lspconfig.configs'
   local matching_configs = {}
@@ -360,6 +328,40 @@ end
 --- @deprecated use `vim.fs.dirname(vim.fs.find('.git', { path = startpath, upward = true })[1])` instead
 function M.find_git_ancestor(startpath)
   return vim.fs.dirname(vim.fs.find('.git', { path = startpath, upward = true })[1])
+end
+
+--- @deprecated Will be removed. Do not use.
+function M.get_active_clients_list_by_ft(filetype)
+  local clients = M.get_lsp_clients()
+  local clients_list = {}
+  for _, client in pairs(clients) do
+    --- @diagnostic disable-next-line:undefined-field
+    local filetypes = client.config.filetypes or {}
+    for _, ft in pairs(filetypes) do
+      if ft == filetype then
+        table.insert(clients_list, client.name)
+      end
+    end
+  end
+  return clients_list
+end
+
+--- @deprecated Will be removed. Do not use.
+function M.get_other_matching_providers(filetype)
+  local configs = require 'lspconfig.configs'
+  local active_clients_list = M.get_active_clients_list_by_ft(filetype)
+  local other_matching_configs = {}
+  for _, config in pairs(configs) do
+    if not vim.tbl_contains(active_clients_list, config.name) then
+      local filetypes = config.filetypes or {}
+      for _, ft in pairs(filetypes) do
+        if ft == filetype then
+          table.insert(other_matching_configs, config)
+        end
+      end
+    end
+  end
+  return other_matching_configs
 end
 
 return M
