@@ -149,28 +149,6 @@ The global defaults for all servers can be overridden by extending the
 <
 
 ==============================================================================
-SETUP HOOK                                                *lspconfig-setup-hook*
-
-`lspconfig` will execute the `on_setup` hook for each setup call to a server after
-validating its configuration, and before attempting to launch the server
-itself. One typical usage is to allow ad-hoc substitution for any
-configuration entry, such as `cmd`.
-
->lua
-  local lspconfig = require 'lspconfig'
-  lspconfig.util.on_setup = lspconfig.util.add_hook_before(lspconfig.util.on_setup, function(config)
-    if some_condition and config.name == "clangd" then
-      local custom_server_prefix = "/my/custom/server/prefix"
-      config.cmd = { custom_server_prefix .. "/bin/clangd" }
-    end
-  end)
-
-
-Note: This is primarily targeted at plugins developers, so make sure to use
-`util.add_hook_before()` as a wrapper instead of overriding the original function
-completely, to void breaking external integrations with lspconfig.
-
-==============================================================================
 SERVER CONFIGS                                        *lspconfig-configurations*
 
 See |lspconfig-all| for the list of provided LSP configurations.

@@ -34,30 +34,6 @@ function M.validate_bufnr(bufnr)
   return bufnr == 0 and api.nvim_get_current_buf() or bufnr
 end
 
-function M.add_hook_before(func, new_fn)
-  if func then
-    return function(...)
-      -- TODO which result?
-      new_fn(...)
-      return func(...)
-    end
-  else
-    return new_fn
-  end
-end
-
-function M.add_hook_after(func, new_fn)
-  if func then
-    return function(...)
-      -- TODO which result?
-      func(...)
-      return new_fn(...)
-    end
-  else
-    return new_fn
-  end
-end
-
 -- Maps lspconfig-style command options to nvim_create_user_command (i.e. |command-attributes|) option names.
 local opts_aliases = {
   ['description'] = 'desc',
@@ -365,6 +341,32 @@ end
 function M.get_lsp_clients(filter)
   --- @diagnostic disable-next-line:deprecated
   return nvim_eleven and lsp.get_clients(filter) or lsp.get_active_clients(filter)
+end
+
+--- @deprecated Will be removed. Do not use.
+function M.add_hook_before(func, new_fn)
+  if func then
+    return function(...)
+      -- TODO which result?
+      new_fn(...)
+      return func(...)
+    end
+  else
+    return new_fn
+  end
+end
+
+--- @deprecated Will be removed. Do not use.
+function M.add_hook_after(func, new_fn)
+  if func then
+    return function(...)
+      -- TODO which result?
+      func(...)
+      return new_fn(...)
+    end
+  else
+    return new_fn
+  end
 end
 
 return M
