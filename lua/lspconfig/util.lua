@@ -173,7 +173,7 @@ end
 
 function M.get_active_client_by_name(bufnr, servername)
   --TODO(glepnir): remove this for loop when we want only support 0.10+
-  for _, client in pairs(M.get_lsp_clients { bufnr = bufnr }) do
+  for _, client in pairs(vim.lsp.get_clients { bufnr = bufnr }) do
     if client.name == servername then
       return client
     end
@@ -264,12 +264,9 @@ function M.tbl_flatten(t)
   return nvim_eleven and vim.iter(t):flatten(math.huge):totable() or vim.tbl_flatten(t)
 end
 
-function M.get_lsp_clients(filter)
-  --- @diagnostic disable-next-line:deprecated
-  return nvim_eleven and lsp.get_clients(filter) or lsp.get_active_clients(filter)
-end
-
+---
 --- Deprecated functions
+---
 
 --- @deprecated use `vim.fn.isdirectory(path) == 1` instead
 --- @param filename string
@@ -332,7 +329,7 @@ end
 
 --- @deprecated Will be removed. Do not use.
 function M.get_active_clients_list_by_ft(filetype)
-  local clients = M.get_lsp_clients()
+  local clients = vim.lsp.get_clients()
   local clients_list = {}
   for _, client in pairs(clients) do
     --- @diagnostic disable-next-line:undefined-field
@@ -362,6 +359,12 @@ function M.get_other_matching_providers(filetype)
     end
   end
   return other_matching_configs
+end
+
+--- @deprecated Use vim.lsp.get_clients instead.
+function M.get_lsp_clients(filter)
+  --- @diagnostic disable-next-line:deprecated
+  return nvim_eleven and lsp.get_clients(filter) or lsp.get_active_clients(filter)
 end
 
 return M

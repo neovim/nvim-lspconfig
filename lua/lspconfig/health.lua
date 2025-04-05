@@ -235,8 +235,8 @@ local function check_lspconfig(bufnr)
     health.warn('Deprecated servers: ' .. table.concat(deprecated_servers, ', '))
   end
 
-  local buf_clients = not bufnr and {} or util.get_lsp_clients { bufnr = bufnr }
-  local clients = util.get_lsp_clients()
+  local buf_clients = not bufnr and {} or vim.lsp.get_clients { bufnr = bufnr }
+  local clients = vim.lsp.get_clients()
   local buffer_filetype = bufnr and vim.fn.getbufvar(bufnr, '&filetype') or '(invalid buffer)'
   local fname = bufnr and api.nvim_buf_get_name(bufnr) or '(invalid buffer)'
 

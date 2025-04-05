@@ -96,7 +96,7 @@ return {
   commands = {
     DenolsCache = {
       function()
-        local clients = util.get_lsp_clients { bufnr = 0, name = 'denols' }
+        local clients = vim.lsp.get_clients { bufnr = 0, name = 'denols' }
         if #clients > 0 then
           buf_cache(0, clients[#clients])
         end
