@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        nvim_version: [nightly, 'v0.9.5']
+        nvim_version: [nightly, 'v0.10.4']
     steps:
       - uses: actions/checkout@v4
       - uses: rhysd/action-setup-vim@v1
