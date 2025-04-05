@@ -124,7 +124,7 @@ local function escape_wildcards(path)
   -- - Shell special characters: ` ' " ; | & < >
   -- - Whitespace: %s (spaces, tabs, etc.)
   -- The gsub function replaces any matches with the same character preceded by a backslash
-  return path:gsub('([%[%]%?%*%$%(%)%^%%%.%+%-%~\\`\'";|&<>%s])', '\\%1')
+  return path:gsub('([' .. vim.pesc('[]?*$()^%.+-~') .. '\\`\'";|&<>%s])', '\\%1')
 end
 
 function M.root_pattern(...)
