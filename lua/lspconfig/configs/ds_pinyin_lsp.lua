@@ -7,7 +7,7 @@ end
 
 local function ds_pinyin_lsp_off(bufnr)
   bufnr = util.validate_bufnr(bufnr)
-  local ds_pinyin_lsp_client = util.get_active_client_by_name(bufnr, 'ds_pinyin_lsp')
+  local ds_pinyin_lsp_client = vim.lsp.get_clients({ bufnr = bufnr, name = 'ds_pinyin_lsp' })[1]
   if ds_pinyin_lsp_client then
     ds_pinyin_lsp_client.notify('$/turn/completion', {
       ['completion_on'] = false,
@@ -19,7 +19,7 @@ end
 
 local function ds_pinyin_lsp_on(bufnr)
   bufnr = util.validate_bufnr(bufnr)
-  local ds_pinyin_lsp_client = util.get_active_client_by_name(bufnr, 'ds_pinyin_lsp')
+  local ds_pinyin_lsp_client = vim.lsp.get_clients({ bufnr = bufnr, name = 'ds_pinyin_lsp' })[1]
   if ds_pinyin_lsp_client then
     ds_pinyin_lsp_client.notify('$/turn/completion', {
       ['completion_on'] = true,

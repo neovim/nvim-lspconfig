@@ -4,7 +4,7 @@ local lsp = vim.lsp
 local function fix_all(opts)
   opts = opts or {}
 
-  local eslint_lsp_client = util.get_active_client_by_name(opts.bufnr, 'eslint')
+  local eslint_lsp_client = vim.lsp.get_clients({ bufnr = opts.bufnr, name = 'eslint' })[1]
   if eslint_lsp_client == nil then
     return
   end

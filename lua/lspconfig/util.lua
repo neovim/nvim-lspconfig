@@ -147,15 +147,9 @@ function M.get_config_by_ft(filetype)
   return matching_configs
 end
 
-function M.get_active_client_by_name(bufnr, servername)
-  --TODO(glepnir): remove this for loop when we want only support 0.10+
-  for _, client in pairs(vim.lsp.get_clients { bufnr = bufnr }) do
-    if client.name == servername then
-      return client
-    end
-  end
-end
-
+--- Note: In Nvim 0.11+ this currently has no public interface, the healthcheck uses the private
+--- `vim.lsp._enabled_configs`:
+--- https://github.com/neovim/neovim/blob/28e819018520a2300eaeeec6794ffcd614b25dd2/runtime/lua/vim/lsp/health.lua#L186
 function M.get_managed_clients()
   local configs = require 'lspconfig.configs'
   local clients = {}
@@ -367,6 +361,11 @@ function M.add_hook_after(func, new_fn)
   else
     return new_fn
   end
+end
+
+--- @deprecated Will be removed. Do not use.
+function M.get_active_client_by_name(bufnr, servername)
+  return vim.lsp.get_clients({ bufnr = bufnr, name = servername })[1]
 end
 
 return M
