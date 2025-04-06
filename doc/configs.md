@@ -102,6 +102,7 @@ Nvim by running `:help lspconfig-all`.
 - [esbonio](#esbonio)
 - [eslint](#eslint)
 - [facility_language_server](#facility_language_server)
+- [fart](#fart)
 - [fennel_language_server](#fennel_language_server)
 - [fennel_ls](#fennel_ls)
 - [fish_lsp](#fish_lsp)
@@ -3888,6 +3889,49 @@ Default config:
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/facility_language_server.lua:2](../lua/lspconfig/configs/facility_language_server.lua#L2)
 - `single_file_support` : `true`
+
+---
+
+## fart
+
+https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec
+
+Language server for Flutter/Dart.
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.fart.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "dart", "language-server", "--protocol=lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "dart" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    closingLabels = true,
+    flutterOutline = true,
+    onlyAnalyzeProjectsWithOpenFiles = true,
+    outline = true,
+    suggestFromUnimportedLibraries = true
+  }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/fart.lua:4](../lua/lspconfig/configs/fart.lua#L4)
+- `settings` :
+  ```lua
+  {
+    dart = {
+      completeFunctionCalls = true,
+      showTodos = true
+    }
+  }
+  ```
 
 ---
 
