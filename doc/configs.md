@@ -257,6 +257,7 @@ Nvim by running `:help lspconfig-all`.
 - [robotframework_ls](#robotframework_ls)
 - [roc_ls](#roc_ls)
 - [rome](#rome)
+- [rpmspec](#rpmspec)
 - [rubocop](#rubocop)
 - [ruby_lsp](#ruby_lsp)
 - [ruff](#ruff)
@@ -9255,6 +9256,35 @@ Default config:
   { "javascript", "javascriptreact", "json", "typescript", "typescript.tsx", "typescriptreact" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/rome.lua:2](../lua/lspconfig/configs/rome.lua#L2)
+- `single_file_support` : `true`
+
+---
+
+## rpmspec
+
+https://github.com/dcermak/rpm-spec-language-server
+
+Language server protocol (LSP) support for RPM Spec files.
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.rpmspec.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "python3", "-mrpm_lsp_server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "spec" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/rpmspec.lua:2](../lua/lspconfig/configs/rpmspec.lua#L2)
+- `settings` :
+  ```lua
+  {}
+  ```
 - `single_file_support` : `true`
 
 ---
