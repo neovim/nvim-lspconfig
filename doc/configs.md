@@ -35,6 +35,7 @@ Nvim by running `:help lspconfig-all`.
 - [bitbake_language_server](#bitbake_language_server)
 - [bitbake_ls](#bitbake_ls)
 - [blueprint_ls](#blueprint_ls)
+- [bqls](#bqls)
 - [bqnlsp](#bqnlsp)
 - [bright_script](#bright_script)
 - [bsl_ls](#bsl_ls)
@@ -1585,6 +1586,39 @@ Default config:
   { "blueprint" }
   ```
 - `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/blueprint_ls.lua:2](../lua/lspconfig/configs/blueprint_ls.lua#L2)
+- `single_file_support` : `true`
+
+---
+
+## bqls
+
+https://github.com/kitagry/bqls
+
+The `bqls` BigQuery language server can be installed by running:
+
+```sh
+$ go install github.com/kitagry/bqls@latest
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.bqls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "bqls" }
+  ```
+- `filetypes` :
+  ```lua
+  { "sql" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bqls.lua:2](../lua/lspconfig/configs/bqls.lua#L2)
+- `settings` :
+  ```lua
+  {}
+  ```
 - `single_file_support` : `true`
 
 ---

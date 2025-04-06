@@ -1202,6 +1202,38 @@ Default config:
 
 
 ------------------------------------------------------------------------------
+bqls
+
+https://github.com/kitagry/bqls
+
+The `bqls` BigQuery language server can be installed by running:
+
+```sh
+$ go install github.com/kitagry/bqls@latest
+```
+
+Snippet to enable the language server: >lua
+  require'lspconfig'.bqls.setup{}
+
+
+Default config:
+- `cmd` :
+  ```lua
+  { "bqls" }
+  ```
+- `filetypes` :
+  ```lua
+  { "sql" }
+  ```
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/bqls.lua:2](../lua/lspconfig/configs/bqls.lua#L2)
+- `settings` :
+  ```lua
+  {}
+  ```
+- `single_file_support` : `true`
+
+
+------------------------------------------------------------------------------
 bqnlsp
 
 https://git.sr.ht/~detegr/bqnlsp
