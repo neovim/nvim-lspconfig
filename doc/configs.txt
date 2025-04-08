@@ -10842,6 +10842,13 @@ tinymist
 https://github.com/Myriad-Dreamin/tinymist
 An integrated language service for Typst [taɪpst]. You can also call it "微霭" [wēi ǎi] in Chinese.
 
+Currently some of Tinymist's workspace commands are supported, namely:
+`LspTinymistExportSvg`, `LspTinymistExportPng`, `LspTinymistExportPdf
+`LspTinymistExportMarkdown`, `LspTinymistExportText`, `LspTinymistExportQuery`,
+`LspTinymistExportAnsiHighlight`, `LspTinymistGetServerInfo`,
+`LspTinymistGetDocumentTrace`, `LspTinymistGetWorkspaceLabels`, and
+`LspTinymistGetDocumentMetrics`.
+
 Snippet to enable the language server: >lua
   require'lspconfig'.tinymist.setup{}
 
@@ -10855,7 +10862,8 @@ Default config:
   ```lua
   { "typst" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/tinymist.lua:2](../lua/lspconfig/configs/tinymist.lua#L2)
+- `on_attach` source (use "gF" to visit): [../lua/lspconfig/configs/tinymist.lua:46](../lua/lspconfig/configs/tinymist.lua#L46)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/tinymist.lua:46](../lua/lspconfig/configs/tinymist.lua#L46)
 - `single_file_support` : `true`
 
 
