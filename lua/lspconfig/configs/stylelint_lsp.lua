@@ -2,11 +2,13 @@ local util = require 'lspconfig.util'
 
 local root_file = {
   '.stylelintrc',
+  '.stylelintrc.mjs',
   '.stylelintrc.cjs',
   '.stylelintrc.js',
   '.stylelintrc.json',
   '.stylelintrc.yaml',
   '.stylelintrc.yml',
+  'stylelint.config.mjs',
   'stylelint.config.cjs',
   'stylelint.config.js',
 }
@@ -17,7 +19,9 @@ return {
   default_config = {
     cmd = { 'stylelint-lsp', '--stdio' },
     filetypes = {
+      'astro',
       'css',
+      'html',
       'less',
       'scss',
       'sugarss',
