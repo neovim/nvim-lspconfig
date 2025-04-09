@@ -10064,9 +10064,9 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "css", "less", "scss", "sugarss", "vue", "wxss" }
+  { "astro", "css", "html", "less", "scss", "sugarss", "vue", "wxss" }
   ```
-- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/stylelint_lsp.lua:17](../lua/lspconfig/configs/stylelint_lsp.lua#L17)
+- `root_dir` source (use "gF" to visit): [../lua/lspconfig/configs/stylelint_lsp.lua:19](../lua/lspconfig/configs/stylelint_lsp.lua#L19)
 - `settings` :
   ```lua
   {}
