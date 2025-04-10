@@ -17,7 +17,7 @@ local function get_angular_core_version(root_dir)
   end
 
   local package_json = project_root .. '/package.json'
-  if not vim.loop.fs_stat(package_json) then
+  if not vim.uv.fs_stat(package_json) then
     return ''
   end
 

@@ -190,12 +190,12 @@ local function make_client_info(client, fname)
   local client_info, info_lines = make_info(client)
 
   local workspace_folders = client.workspace_folders
-  fname = vim.fs.normalize(vim.loop.fs_realpath(fname) or fn.fnamemodify(fn.resolve(fname), ':p'))
+  fname = vim.fs.normalize(vim.uv.fs_realpath(fname) or fn.fnamemodify(fn.resolve(fname), ':p'))
 
   if workspace_folders then
     for _, schema in ipairs(workspace_folders) do
       local matched = true
-      local root_dir = vim.loop.fs_realpath(schema.name)
+      local root_dir = vim.uv.fs_realpath(schema.name)
       if root_dir == nil or fname:sub(1, root_dir:len()) ~= root_dir then
         matched = false
       end

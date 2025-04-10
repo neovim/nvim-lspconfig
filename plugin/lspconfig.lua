@@ -97,7 +97,7 @@ api.nvim_create_user_command('LspRestart', function(info)
       detach_clients[client.name] = { client, lsp.get_buffers_by_client_id(client.id) }
     end
   end
-  local timer = assert(vim.loop.new_timer())
+  local timer = assert(vim.uv.new_timer())
   timer:start(
     500,
     100,

@@ -6,7 +6,7 @@ return {
     filetypes = { 'foam', 'OpenFOAM' },
     root_dir = function(fname)
       return util.search_ancestors(fname, function(path)
-        if vim.loop.fs_stat(path .. '/system/controlDict') then
+        if vim.uv.fs_stat(path .. '/system/controlDict') then
           return path
         end
       end)

@@ -22,7 +22,7 @@ local function activate_env(path)
     path = vim.fs.normalize(vim.fn.fnamemodify(vim.fn.expand(path), ':p'))
     local found_env = false
     for _, project_file in ipairs(root_files) do
-      local file = vim.loop.fs_stat(vim.fs.joinpath(path, project_file))
+      local file = vim.uv.fs_stat(vim.fs.joinpath(path, project_file))
       if file and file.type then
         found_env = true
         break

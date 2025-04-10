@@ -57,7 +57,7 @@ local function make_section(indentlvl, sep, parts)
 end
 
 local function readfile(path)
-  assert((vim.loop.fs_stat(path) or {}).type == 'file')
+  assert((vim.uv.fs_stat(path) or {}).type == 'file')
   return io.open(path):read '*a'
 end
 
@@ -182,7 +182,7 @@ local function make_lsp_sections(is_markdown)
       })
 
       if docs then
-        local tempdir = os.getenv 'DOCGEN_TEMPDIR' or vim.loop.fs_mkdtemp '/tmp/nvim-lspconfig.XXXXXX'
+        local tempdir = os.getenv 'DOCGEN_TEMPDIR' or vim.uv.fs_mkdtemp '/tmp/nvim-lspconfig.XXXXXX'
         local preamble_parts = make_parts {
           function()
             if docs.description and #docs.description > 0 then
@@ -192,10 +192,10 @@ local function make_lsp_sections(is_markdown)
           function()
             local package_json_name = table.concat({ tempdir, config_name .. '.package.json' }, '/')
             if docs.package_json then
-              if not ((vim.loop.fs_stat(package_json_name) or {}).type == 'file') then
+              if not ((vim.uv.fs_stat(package_json_name) or {}).type == 'file') then
                 os.execute(string.format('curl -v -L -o %q %q', package_json_name, docs.package_json))
               end
-              if not ((vim.loop.fs_stat(package_json_name) or {}).type == 'file') then
+              if not ((vim.uv.fs_stat(package_json_name) or {}).type == 'file') then
                 print(string.format('Failed to download package.json for %q at %q', config_name, docs.package_json))
                 os.exit(1)
                 return
