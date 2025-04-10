@@ -7,7 +7,7 @@ return {
     root_dir = function(dir)
       local has_fls_project_cfg = function(path)
         local fnlpath = vim.fs.joinpath(path, 'flsproject.fnl')
-        return (vim.loop.fs_stat(fnlpath) or {}).type == 'file'
+        return (vim.uv.fs_stat(fnlpath) or {}).type == 'file'
       end
       return util.search_ancestors(dir, has_fls_project_cfg) or vim.fs.root(0, '.git')
     end,

@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 local function get_default_mavenrepo()
   local repo = vim.env.HOME .. '/.m2/repository/dk/au/ece/vdmj'
-  if vim.loop.fs_stat(repo) then
+  if vim.uv.fs_stat(repo) then
     return repo
   else
     return vim.env.HOME .. '/.m2/repository/com/fujitsu'
@@ -22,7 +22,7 @@ local function get_latest_installed_version(repo)
   local sort = vim.fn.sort
 
   local subdirs = function(file)
-    local stat = vim.loop.fs_stat(table.concat({ path, file }, '/'))
+    local stat = vim.uv.fs_stat(table.concat({ path, file }, '/'))
     return stat.type == 'directory' and 1 or 0
   end
 

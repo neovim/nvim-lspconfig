@@ -5,7 +5,7 @@ return {
     cmd = { 'intelephense', '--stdio' },
     filetypes = { 'php' },
     root_dir = function(pattern)
-      local cwd = vim.loop.cwd()
+      local cwd = vim.uv.cwd()
       local root = util.root_pattern('composer.json', '.git')(pattern)
 
       -- prefer cwd if root is a descendant

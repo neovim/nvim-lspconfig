@@ -22,12 +22,3 @@ if git diff --pickaxe-all -U0 -G "${SEARCH_PATTERN}" "${REF_BRANCH}" "${PR_BRANC
   echo 'Do not use deprecated util functions: '"${SEARCH_PATTERN}"
   exit 1
 fi
-
-SEARCH_PATTERN='(vim\.uv)'
-
-if git diff --pickaxe-all -U0 -G "${SEARCH_PATTERN}" "${REF_BRANCH}" "${PR_BRANCH}" -- '*.lua' | grep -Ev '\.lua$' | grep -E "^\+.*${SEARCH_PATTERN}" ; then
-  echo
-  echo 'Do not use modules that are too new: '"${SEARCH_PATTERN}"
-  echo 'Consult README to check the minimum supported neovim version.'
-  exit 1
-fi

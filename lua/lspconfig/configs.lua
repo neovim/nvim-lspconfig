@@ -98,7 +98,7 @@ function configs.__newindex(t, config_name, config_def)
         return
       end
 
-      local pwd = vim.loop.cwd()
+      local pwd = vim.uv.cwd()
 
       async.run(function()
         local root_dir

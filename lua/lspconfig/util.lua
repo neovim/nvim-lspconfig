@@ -3,7 +3,7 @@ local api = vim.api
 local lsp = vim.lsp
 local nvim_eleven = vim.fn.has 'nvim-0.11' == 1
 
-local iswin = vim.loop.os_uname().version:match 'Windows'
+local iswin = vim.uv.os_uname().version:match 'Windows'
 
 local M = { path = {} }
 
@@ -103,7 +103,7 @@ function M.root_pattern(...)
     for _, pattern in ipairs(patterns) do
       local match = M.search_ancestors(startpath, function(path)
         for _, p in ipairs(vim.fn.glob(table.concat({ escape_wildcards(path), pattern }, '/'), true, true)) do
-          if vim.loop.fs_stat(p) then
+          if vim.uv.fs_stat(p) then
             return path
           end
         end
@@ -194,7 +194,7 @@ end
 
 -- Traverse the path calling cb along the way.
 local function traverse_parents(path, cb)
-  path = vim.loop.fs_realpath(path)
+  path = vim.uv.fs_realpath(path)
   local dir = path
   -- Just in case our algo is buggy, don't infinite loop.
   for _ = 1, 100 do
@@ -245,11 +245,11 @@ function M.path.is_dir(filename)
   return vim.fn.isdirectory(filename) == 1
 end
 
---- @deprecated use `(vim.loop.fs_stat(path) or {}).type == 'file'` instead
+--- @deprecated use `(vim.uv.fs_stat(path) or {}).type == 'file'` instead
 --- @param path string
 --- @return boolean
 function M.path.is_file(path)
-  return (vim.loop.fs_stat(path) or {}).type == 'file'
+  return (vim.uv.fs_stat(path) or {}).type == 'file'
 end
 
 --- @deprecated use `vim.fs.dirname` instead
@@ -258,11 +258,11 @@ M.path.dirname = vim.fs.dirname
 --- @deprecated use `vim.fs.normalize` instead
 M.path.sanitize = vim.fs.normalize
 
---- @deprecated use `vim.loop.fs_stat` instead
+--- @deprecated use `vim.uv.fs_stat` instead
 --- @param filename string
 --- @return string|false
 function M.path.exists(filename)
-  local stat = vim.loop.fs_stat(filename)
+  local stat = vim.uv.fs_stat(filename)
   return stat and stat.type or false
 end
 

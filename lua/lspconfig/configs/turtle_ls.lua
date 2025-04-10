@@ -15,7 +15,7 @@ if bin_path == nil then
   end
   for _, p in ipairs(paths) do
     local candidate = table.concat({ p, bin_name }, '/')
-    if (vim.loop.fs_stat(candidate) or {}).type == 'file' then
+    if (vim.uv.fs_stat(candidate) or {}).type == 'file' then
       full_path = candidate
       break
     end

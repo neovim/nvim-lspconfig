@@ -115,7 +115,7 @@ function M:_start_client(bufnr, new_config, root_dir, single_file, silent)
 
   -- Launch the server in the root directory used internally by lspconfig, if otherwise unset
   -- also check that the path exist
-  if not new_config.cmd_cwd and vim.loop.fs_realpath(root_dir) then
+  if not new_config.cmd_cwd and vim.uv.fs_realpath(root_dir) then
     new_config.cmd_cwd = root_dir
   end
 
@@ -202,7 +202,7 @@ function M:try_add(bufnr, project_root, silent)
 
   local get_root_dir = self.config.root_dir
 
-  local pwd = assert(vim.loop.cwd())
+  local pwd = assert(vim.uv.cwd())
 
   async.run(function()
     local root_dir
