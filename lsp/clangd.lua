@@ -4,7 +4,7 @@ local util = require 'lspconfig.util'
 local function switch_source_header(bufnr)
   local method_name = 'textDocument/switchSourceHeader'
   bufnr = util.validate_bufnr(bufnr)
-  local client = util.get_active_client_by_name(bufnr, 'clangd')
+  local client = vim.lsp.get_clients({ bufnr = bufnr, name = 'clangd' })[1]
   if not client then
     return vim.notify(('method %s is not supported by any servers active on the current buffer'):format(method_name))
   end
@@ -23,7 +23,7 @@ end
 
 local function symbol_info()
   local bufnr = vim.api.nvim_get_current_buf()
-  local clangd_client = util.get_active_client_by_name(bufnr, 'clangd')
+  local clangd_client = vim.lsp.get_clients({ bufnr = bufnr, name = 'clangd' })[1]
   if not clangd_client or not clangd_client.supports_method 'textDocument/symbolInfo' then
     return vim.notify('Clangd client not found', vim.log.levels.ERROR)
   end

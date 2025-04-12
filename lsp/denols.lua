@@ -107,7 +107,7 @@ return {
   },
   on_attach = function()
     vim.api.nvim_buf_create_user_command(0, 'DenolsCache', function()
-      local clients = util.get_lsp_clients { bufnr = 0, name = 'denols' }
+      local clients = vim.lsp.get_clients { bufnr = 0, name = 'denols' }
       if #clients > 0 then
         buf_cache(0, clients[#clients])
       end
