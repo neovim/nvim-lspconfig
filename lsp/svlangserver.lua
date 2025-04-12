@@ -1,0 +1,44 @@
+local function build_index()
+  local params = {
+    command = 'systemverilog.build_index',
+  }
+  vim.lsp.buf.execute_command(params)
+end
+
+local function report_hierarchy()
+  local params = {
+    command = 'systemverilog.report_hierarchy',
+    arguments = { vim.fn.expand '<cword>' },
+  }
+  vim.lsp.buf.execute_command(params)
+end
+
+---@brief
+---
+---https://github.com/imc-trading/svlangserver
+--
+-- Language server for SystemVerilog.
+--
+-- `svlangserver` can be installed via `npm`:
+--
+-- ```sh
+-- $ npm install -g @imc-trading/svlangserver
+-- ```
+return {
+  cmd = { 'svlangserver' },
+  filetypes = { 'verilog', 'systemverilog' },
+  root_markers = { '.svlangserver', '.git' },
+  settings = {
+    systemverilog = {
+      includeIndexing = { '*.{v,vh,sv,svh}', '**/*.{v,vh,sv,svh}' },
+    },
+  },
+  on_attach = function()
+    vim.api.nvim_buf_create_user_command(0, 'SvlangserverBuildIndex', build_index, {
+      desc = 'Instructs language server to rerun indexing',
+    })
+    vim.api.nvim_buf_create_user_command(0, 'SvlangserverReportHierarchy', report_hierarchy, {
+      desc = 'Generates hierarchy for the given module',
+    })
+  end,
+}
