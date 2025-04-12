@@ -11,9 +11,9 @@ local util = require 'lspconfig.util'
 -- The preferred way to install csharp-ls is with `dotnet tool install --global csharp-ls`.
 return {
   cmd = { 'csharp-ls' },
-  root_dir = function(bufnr, done_callback)
+  root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
-    done_callback(util.root_pattern '*.sln'(fname) or util.root_pattern '*.csproj'(fname))
+    on_dir(util.root_pattern '*.sln'(fname) or util.root_pattern '*.csproj'(fname))
   end,
   filetypes = { 'cs' },
   init_options = {

@@ -20,9 +20,9 @@ local util = require 'lspconfig.util'
 --
 return {
   cmd = { 'fsautocomplete', '--adaptive-lsp-server-enabled' },
-  root_dir = function(bufnr, done_callback)
+  root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
-    done_callback(util.root_pattern('*.sln', '*.fsproj', '.git')(fname))
+    on_dir(util.root_pattern('*.sln', '*.fsproj', '.git')(fname))
   end,
   filetypes = { 'fsharp' },
   init_options = {

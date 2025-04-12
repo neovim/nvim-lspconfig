@@ -71,9 +71,9 @@ local util = require 'lspconfig.util'
 -- Ref: https://github.com/arduino/arduino-ide/issues/159
 return {
   filetypes = { 'arduino' },
-  root_dir = function(bufnr, done_callback)
+  root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
-    done_callback(util.root_pattern('*.ino')(fname))
+    on_dir(util.root_pattern('*.ino')(fname))
   end,
   cmd = {
     'arduino-language-server',

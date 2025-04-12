@@ -19,7 +19,7 @@ return {
   cmd = { 'lean-language-server', '--stdio', '--', '-M', '4096', '-T', '100000' },
   filetypes = { 'lean3' },
   offset_encoding = 'utf-32',
-  root_dir = function(bufnr, done_callback)
+  root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     fname = vim.fs.normalize(fname)
     -- check if inside elan stdlib
@@ -31,7 +31,7 @@ return {
       end
     end
 
-    done_callback(
+    on_dir(
       util.root_pattern 'leanpkg.toml'(fname)
         or util.root_pattern 'leanpkg.path'(fname)
         or stdlib_dir

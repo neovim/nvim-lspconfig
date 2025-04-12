@@ -21,11 +21,11 @@ end
 return {
   cmd = { 'gopls' },
   filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
-  root_dir = function(bufnr, done_callback)
+  root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     -- see: https://github.com/neovim/nvim-lspconfig/issues/804
     if mod_cache then
-      done_callback(get_root(fname))
+      on_dir(get_root(fname))
       return
     end
     local cmd = { 'go', 'env', 'GOMODCACHE' }
@@ -34,7 +34,7 @@ return {
         if output.stdout then
           mod_cache = vim.trim(output.stdout)
         end
-        done_callback(get_root(fname))
+        on_dir(get_root(fname))
       else
         vim.notify(('[gopls] cmd failed with code %d: %s\n%s'):format(output.code, cmd, output.stderr))
       end

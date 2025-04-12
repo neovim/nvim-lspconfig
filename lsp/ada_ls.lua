@@ -22,8 +22,8 @@ local util = require 'lspconfig.util'
 return {
   cmd = { 'ada_language_server' },
   filetypes = { 'ada' },
-  root_dir = function(bufnr, done_callback)
+  root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
-    done_callback(util.root_pattern('Makefile', '.git', 'alire.toml', '*.gpr', '*.adc')(fname))
+    on_dir(util.root_pattern('Makefile', '.git', 'alire.toml', '*.gpr', '*.adc')(fname))
   end,
 }

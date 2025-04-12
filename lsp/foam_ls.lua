@@ -11,9 +11,9 @@ local util = require 'lspconfig.util'
 return {
   cmd = { 'foam-ls', '--stdio' },
   filetypes = { 'foam', 'OpenFOAM' },
-  root_dir = function(bufnr, done_callback)
+  root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
-    done_callback(util.search_ancestors(fname, function(path)
+    on_dir(util.search_ancestors(fname, function(path)
       if vim.uv.fs_stat(path .. '/system/controlDict') then
         return path
       end

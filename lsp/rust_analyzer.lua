@@ -56,7 +56,7 @@ end
 return {
   cmd = { 'rust-analyzer' },
   filetypes = { 'rust' },
-  root_dir = function(bufnr, done_callback)
+  root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     local reuse_active = is_library(fname)
     if reuse_active then
@@ -67,7 +67,7 @@ return {
     local cargo_workspace_root
 
     if cargo_crate_dir == nil then
-      done_callback(
+      on_dir(
         util.root_pattern 'rust-project.json'(fname)
           or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
       )
@@ -93,7 +93,7 @@ return {
           end
         end
 
-        done_callback(cargo_workspace_root or cargo_crate_dir)
+        on_dir(cargo_workspace_root or cargo_crate_dir)
       else
         vim.notify(('[rust_analyzer] cmd failed with code %d: %s\n%s'):format(output.code, cmd, output.stderr))
       end

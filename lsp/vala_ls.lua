@@ -27,9 +27,9 @@ end
 return {
   cmd = { 'vala-language-server' },
   filetypes = { 'vala', 'genie' },
-  root_dir = function(bufnr, done_callback)
+  root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     local root = util.search_ancestors(fname, meson_matcher)
-    done_callback(root or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]))
+    on_dir(root or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]))
   end,
 }

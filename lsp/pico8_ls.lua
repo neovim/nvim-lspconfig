@@ -8,9 +8,9 @@ local util = require 'lspconfig.util'
 return {
   cmd = { 'pico8-ls', '--stdio' },
   filetypes = { 'p8' },
-  root_dir = function(bufnr, done_callback)
+  root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
-    done_callback(util.root_pattern('*.p8')(fname))
+    on_dir(util.root_pattern('*.p8')(fname))
   end,
   settings = {},
 }

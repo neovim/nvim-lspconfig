@@ -8,9 +8,9 @@ local util = require 'lspconfig.util'
 return {
   cmd = { 'sourcekit-lsp' },
   filetypes = { 'swift', 'objc', 'objcpp', 'c', 'cpp' },
-  root_dir = function(bufnr, done_callback)
+  root_dir = function(bufnr, on_dir)
     local filename = vim.api.nvim_buf_get_name(bufnr)
-    done_callback(
+    on_dir(
       util.root_pattern 'buildServer.json'(filename)
         or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
         -- better to keep it at the end, because some modularized apps contain multiple Package.swift files
