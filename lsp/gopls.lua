@@ -1,4 +1,3 @@
-local util = require 'lspconfig.util'
 local mod_cache = nil
 
 ---@param fname string

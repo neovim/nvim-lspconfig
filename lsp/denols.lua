@@ -1,4 +1,3 @@
-local util = require 'lspconfig.util'
 local lsp = vim.lsp
 
 local function buf_cache(bufnr, client)

@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local function organize_imports()
   local params = {
     command = 'basedpyright.organizeimports',

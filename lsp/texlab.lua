@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local function client_with_fn(fn)
   return function()
     local bufnr = vim.api.nvim_get_current_buf()
