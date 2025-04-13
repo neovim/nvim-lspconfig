@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/rydesun/fennel-language-server
+-- https://github.com/rydesun/fennel-language-server
 --
 -- Fennel language server protocol (LSP) support.
 return {

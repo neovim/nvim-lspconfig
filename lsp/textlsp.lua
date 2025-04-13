@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/hangyav/textLSP
+-- https://github.com/hangyav/textLSP
 --
 -- `textLSP` is an LSP server for text spell and grammar checking with various AI tools.
 -- It supports multiple text file formats, such as LaTeX, Org or txt.

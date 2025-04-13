@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/Gbury/dolmen/blob/master/doc/lsp.md
+-- https://github.com/Gbury/dolmen/blob/master/doc/lsp.md
 --
 -- `dolmenls` can be installed via `opam`
 -- ```sh

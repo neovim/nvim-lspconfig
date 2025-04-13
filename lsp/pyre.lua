@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://pyre-check.org/
+-- https://pyre-check.org/
 --
 -- `pyre` a static type checker for Python 3.
 --

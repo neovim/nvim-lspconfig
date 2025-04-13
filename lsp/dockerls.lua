@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/rcjsuen/dockerfile-language-server-nodejs
+-- https://github.com/rcjsuen/dockerfile-language-server-nodejs
 --
 -- `docker-langserver` can be installed via `npm`:
 -- ```sh

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/qiuxiang/solidity-ls
+-- https://github.com/qiuxiang/solidity-ls
 --
 -- npm i solidity-ls -g
 --

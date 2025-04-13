@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/iamcco/diagnostic-languageserver
+-- https://github.com/iamcco/diagnostic-languageserver
 --
 -- Diagnostic language server integrate with linters.
 return {

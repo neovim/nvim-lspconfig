@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/nolanderc/glsl_analyzer
+-- https://github.com/nolanderc/glsl_analyzer
 --
 -- Language server for GLSL
 return {

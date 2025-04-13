@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/dev-cycles/contextive
+-- https://github.com/dev-cycles/contextive
 --
 -- Language Server for Contextive.
 --

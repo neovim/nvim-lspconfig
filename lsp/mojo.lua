@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/modularml/mojo
+-- https://github.com/modularml/mojo
 --
 -- `mojo-lsp-server` can be installed [via Modular](https://developer.modular.com/download)
 --

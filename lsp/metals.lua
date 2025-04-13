@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://scalameta.org/metals/
+-- https://scalameta.org/metals/
 --
 -- Scala language server with rich IDE features.
 --

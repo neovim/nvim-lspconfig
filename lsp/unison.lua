@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/unisonweb/unison/blob/trunk/docs/language-server.markdown
+-- https://github.com/unisonweb/unison/blob/trunk/docs/language-server.markdown
 return {
   cmd = { 'nc', 'localhost', os.getenv 'UNISON_LSP_PORT' or '5757' },
   filetypes = { 'unison' },

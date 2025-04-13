@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/Feel-ix-343/markdown-oxide
+-- https://github.com/Feel-ix-343/markdown-oxide
 --
 -- Editor Agnostic PKM: you bring the text editor and we
 -- bring the PKM.

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/eclipse/lemminx
+-- https://github.com/eclipse/lemminx
 --
 -- The easiest way to install the server is to get a binary from https://github.com/redhat-developer/vscode-xml/releases and place it on your PATH.
 --

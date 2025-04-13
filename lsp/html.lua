@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/hrsh7th/vscode-langservers-extracted
+-- https://github.com/hrsh7th/vscode-langservers-extracted
 --
 -- `vscode-html-language-server` can be installed via `npm`:
 -- ```sh

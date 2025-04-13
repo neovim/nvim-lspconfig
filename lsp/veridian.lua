@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/vivekmalneedi/veridian
+-- https://github.com/vivekmalneedi/veridian
 --
 -- A SystemVerilog LanguageServer.
 --

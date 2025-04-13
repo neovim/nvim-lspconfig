@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://templ.guide
+-- https://templ.guide
 --
 -- The official language server for the templ HTML templating language.
 return {

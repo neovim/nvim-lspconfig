@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/georgewfraser/java-language-server
+-- https://github.com/georgewfraser/java-language-server
 --
 -- Java language server
 --

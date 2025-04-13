@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/arduino/arduino-language-server
+-- https://github.com/arduino/arduino-language-server
 --
 -- Language server for Arduino
 --

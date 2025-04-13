@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://docs.soliditylang.org/en/latest/installing-solidity.html
+-- https://docs.soliditylang.org/en/latest/installing-solidity.html
 --
 -- solc is the native language server for the Solidity language.
 return {

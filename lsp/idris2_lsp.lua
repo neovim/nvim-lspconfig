@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/idris-community/idris2-lsp
+-- https://github.com/idris-community/idris2-lsp
 --
 -- The Idris 2 language server.
 --

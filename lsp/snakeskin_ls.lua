@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://www.npmjs.com/package/@snakeskin/cli
+-- https://www.npmjs.com/package/@snakeskin/cli
 --
 -- `snakeskin cli` can be installed via `npm`:
 -- ```sh

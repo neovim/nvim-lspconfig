@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/microsoft/azure-pipelines-language-server
+-- https://github.com/microsoft/azure-pipelines-language-server
 --
 -- An Azure Pipelines language server
 --

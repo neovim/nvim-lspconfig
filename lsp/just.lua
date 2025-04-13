@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/terror/just-lsp
+-- https://github.com/terror/just-lsp
 --
 -- `just-lsp` is an LSP for just built on top of the tree-sitter-just parser.
 return {

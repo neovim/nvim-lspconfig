@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/pherrymason/c3-lsp
+-- https://github.com/pherrymason/c3-lsp
 --
 -- Language Server for c3.
 return {

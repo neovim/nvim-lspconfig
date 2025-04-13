@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/xna00/unocss-language-server
+-- https://github.com/xna00/unocss-language-server
 --
 -- UnoCSS Language Server can be installed via npm:
 -- ```sh

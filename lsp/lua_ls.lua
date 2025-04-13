@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/luals/lua-language-server
+-- https://github.com/luals/lua-language-server
 --
 -- Lua language server.
 --

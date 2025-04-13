@@ -93,7 +93,7 @@ local cmd = {
 
 ---@brief
 ---
----https://github.com/julia-vscode/julia-vscode
+-- https://github.com/julia-vscode/julia-vscode
 --
 -- LanguageServer.jl can be installed with `julia` and `Pkg`:
 -- ```sh

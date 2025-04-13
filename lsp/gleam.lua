@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/gleam-lang/gleam
+-- https://github.com/gleam-lang/gleam
 --
 -- A language server for Gleam Programming Language.
 --

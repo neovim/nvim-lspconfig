@@ -4,7 +4,7 @@ local cache_dir = vim.uv.os_homedir() .. '/.cache/gitlab-ci-ls/'
 
 ---@brief
 ---
----https://github.com/alesbrelih/gitlab-ci-ls
+-- https://github.com/alesbrelih/gitlab-ci-ls
 --
 -- Language Server for Gitlab CI
 --

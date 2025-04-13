@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/roc-lang/roc/tree/main/crates/language_server#roc_language_server
+-- https://github.com/roc-lang/roc/tree/main/crates/language_server#roc_language_server
 --
 -- The built-in language server for the Roc programming language.
 -- [Installation](https://github.com/roc-lang/roc/tree/main/crates/language_server#installing)

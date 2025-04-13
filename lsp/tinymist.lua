@@ -44,7 +44,7 @@ end
 
 ---@brief
 ---
----https://github.com/Myriad-Dreamin/tinymist
+-- https://github.com/Myriad-Dreamin/tinymist
 -- An integrated language service for Typst [taɪpst]. You can also call it "微霭" [wēi ǎi] in Chinese.
 --
 -- Currently some of Tinymist's workspace commands are supported, namely:

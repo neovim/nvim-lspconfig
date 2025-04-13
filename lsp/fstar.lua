@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/FStarLang/FStar
+-- https://github.com/FStarLang/FStar
 --
 -- LSP support is included in FStar. Make sure `fstar.exe` is in your PATH.
 return {

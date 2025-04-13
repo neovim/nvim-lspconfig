@@ -49,7 +49,7 @@ end
 
 ---@brief
 ---
----https://github.com/valentjn/ltex-ls
+-- https://github.com/valentjn/ltex-ls
 --
 -- LTeX Language Server: LSP language server for LanguageTool 🔍✔️ with support for LaTeX 🎓, Markdown 📝, and others
 --

@@ -6,7 +6,7 @@ end
 
 ---@brief
 ---
----https://github.com/thqby/vscode-autohotkey2-lsp
+-- https://github.com/thqby/vscode-autohotkey2-lsp
 --
 -- AutoHotkey v2.0 LSP implementation
 return {

@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://intelephense.com/
+-- https://intelephense.com/
 --
 -- `intelephense` can be installed via `npm`:
 -- ```sh

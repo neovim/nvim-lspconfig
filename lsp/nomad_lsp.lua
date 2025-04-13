@@ -7,7 +7,7 @@ end
 
 ---@brief
 ---
----https://github.com/juliosueiras/nomad-lsp
+-- https://github.com/juliosueiras/nomad-lsp
 --
 -- Written in Go, compilation is needed for `nomad_lsp` to be used. Please see the [original repository](https://github.com/juliosuieras/nomad-lsp).
 --

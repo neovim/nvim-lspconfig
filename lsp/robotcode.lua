@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://robotcode.io
+-- https://robotcode.io
 --
 -- RobotCode - Language Server Protocol implementation for Robot Framework.
 return {

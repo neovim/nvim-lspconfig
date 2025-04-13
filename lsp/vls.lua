@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/vlang/vls
+-- https://github.com/vlang/vls
 --
 -- V language server.
 --

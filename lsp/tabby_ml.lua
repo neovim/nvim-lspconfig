@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://tabby.tabbyml.com/blog/running-tabby-as-a-language-server
+-- https://tabby.tabbyml.com/blog/running-tabby-as-a-language-server
 --
 -- Language server for Tabby, an opensource, self-hosted AI coding assistant.
 --

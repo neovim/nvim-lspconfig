@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/facebook/buck2
+-- https://github.com/facebook/buck2
 --
 -- Build system, successor to Buck
 --

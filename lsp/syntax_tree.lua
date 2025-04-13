@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://ruby-syntax-tree.github.io/syntax_tree/
+-- https://ruby-syntax-tree.github.io/syntax_tree/
 --
 -- A fast Ruby parser and formatter.
 --

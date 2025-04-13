@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/JCWasmx86/Swift-MesonLSP
+-- https://github.com/JCWasmx86/Swift-MesonLSP
 --
 -- Meson language server written in Swift
 return {

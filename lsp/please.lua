@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/thought-machine/please
+-- https://github.com/thought-machine/please
 --
 -- High-performance extensible build system for reproducible multi-language builds.
 --

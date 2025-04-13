@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/clojure-lsp/clojure-lsp
+-- https://github.com/clojure-lsp/clojure-lsp
 --
 -- Clojure Language Server
 return {

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/swyddfa/esbonio
+-- https://github.com/swyddfa/esbonio
 --
 -- Esbonio is a language server for [Sphinx](https://www.sphinx-doc.org/en/master/) documentation projects.
 -- The language server can be installed via pip

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://solargraph.org/
+-- https://solargraph.org/
 --
 -- solargraph, a language server for Ruby
 --

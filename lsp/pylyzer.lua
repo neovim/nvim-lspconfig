@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/mtshiba/pylyzer
+-- https://github.com/mtshiba/pylyzer
 --
 -- `pylyzer`, a fast static code analyzer & language server for Python.
 return {

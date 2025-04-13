@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/Galarius/opencl-language-server
+-- https://github.com/Galarius/opencl-language-server
 --
 -- Build instructions can be found [here](https://github.com/Galarius/opencl-language-server/blob/main/_dev/build.md).
 --

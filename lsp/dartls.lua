@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec
+-- https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec
 --
 -- Language server for dart.
 return {

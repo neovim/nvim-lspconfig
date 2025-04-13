@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/DanielGavin/ols
+-- https://github.com/DanielGavin/ols
 --
 -- `Odin Language Server`.
 return {

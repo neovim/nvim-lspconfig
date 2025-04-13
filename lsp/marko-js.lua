@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/marko-js/language-server
+-- https://github.com/marko-js/language-server
 
 -- Using the Language Server Protocol to improve Marko's developer experience.
 

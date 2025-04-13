@@ -2,7 +2,7 @@ local bin_name = 'theme-check-language-server'
 
 ---@brief
 ---
----https://github.com/Shopify/shopify-cli
+-- https://github.com/Shopify/shopify-cli
 --
 -- `theme-check-language-server` is bundled with `shopify-cli` or it can also be installed via
 --

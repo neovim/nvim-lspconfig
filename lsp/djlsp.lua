@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/fourdigits/django-template-lsp
+-- https://github.com/fourdigits/django-template-lsp
 
 -- `djlsp`, a language server for Django templates.
 return {

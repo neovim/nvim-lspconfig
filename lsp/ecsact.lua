@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/ecsact-dev/ecsact_lsp_server
+-- https://github.com/ecsact-dev/ecsact_lsp_server
 --
 -- Language server for Ecsact.
 --

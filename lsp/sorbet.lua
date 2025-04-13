@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://sorbet.org
+-- https://sorbet.org
 --
 -- Sorbet is a fast, powerful type checker designed for Ruby.
 --

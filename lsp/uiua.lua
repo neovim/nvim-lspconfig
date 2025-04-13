@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/uiua-lang/uiua/
+-- https://github.com/uiua-lang/uiua/
 --
 -- The builtin language server of the Uiua interpreter.
 --

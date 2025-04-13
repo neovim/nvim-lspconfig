@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/snyk/snyk-ls
+-- https://github.com/snyk/snyk-ls
 --
 -- LSP for Snyk Open Source, Snyk Infrastructure as Code, and Snyk Code.
 return {

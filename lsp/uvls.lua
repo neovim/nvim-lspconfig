@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://codeberg.org/caradhras/uvls
+-- https://codeberg.org/caradhras/uvls
 -- Language server for UVL, written using tree sitter and rust.
 -- You can install the server easily using cargo:
 -- ```sh

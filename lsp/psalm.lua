@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/vimeo/psalm
+-- https://github.com/vimeo/psalm
 --
 -- Can be installed with composer.
 -- ```sh

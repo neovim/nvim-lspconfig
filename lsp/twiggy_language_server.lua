@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/moetelo/twiggy
+-- https://github.com/moetelo/twiggy
 --
 -- `twiggy-language-server` can be installed via `npm`:
 -- ```sh

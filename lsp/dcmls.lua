@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://dcm.dev/
+-- https://dcm.dev/
 --
 -- Language server for DCM analyzer.
 return {

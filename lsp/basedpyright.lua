@@ -30,7 +30,7 @@ end
 
 ---@brief
 ---
----https://detachhead.github.io/basedpyright
+-- https://detachhead.github.io/basedpyright
 --
 -- `basedpyright`, a static type checker and language server for python
 return {

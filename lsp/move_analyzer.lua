@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/move-language/move/tree/main/language/move-analyzer
+-- https://github.com/move-language/move/tree/main/language/move-analyzer
 --
 -- Language server for Move
 --

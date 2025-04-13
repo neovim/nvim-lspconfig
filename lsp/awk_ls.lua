@@ -5,7 +5,7 @@ end
 
 ---@brief
 ---
----https://github.com/Beaglefoot/awk-language-server/
+-- https://github.com/Beaglefoot/awk-language-server/
 --
 -- `awk-language-server` can be installed via `npm`:
 -- ```sh

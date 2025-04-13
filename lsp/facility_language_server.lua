@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/FacilityApi/FacilityLanguageServer
+-- https://github.com/FacilityApi/FacilityLanguageServer
 --
 -- Facility language server protocol (LSP) support.
 return {

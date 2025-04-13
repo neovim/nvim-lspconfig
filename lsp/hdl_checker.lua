@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/suoto/hdl_checker
+-- https://github.com/suoto/hdl_checker
 -- Language server for hdl-checker.
 -- Install using: `pip install hdl-checker --upgrade`
 return {

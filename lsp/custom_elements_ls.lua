@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/Matsuuu/custom-elements-language-server
+-- https://github.com/Matsuuu/custom-elements-language-server
 --
 -- `custom-elements-languageserver` depends on `typescript`. Both packages can be installed via `npm`:
 -- ```sh

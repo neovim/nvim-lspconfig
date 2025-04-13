@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/mrjosh/helm-ls
+-- https://github.com/mrjosh/helm-ls
 --
 -- Helm Language server. (This LSP is in early development)
 --

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://shopify.github.io/ruby-lsp/
+-- https://shopify.github.io/ruby-lsp/
 --
 -- This gem is an implementation of the language server protocol specification for
 -- Ruby, used to improve editor features.

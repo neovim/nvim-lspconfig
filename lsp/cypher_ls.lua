@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/neo4j/cypher-language-support/tree/main/packages/language-server
+-- https://github.com/neo4j/cypher-language-support/tree/main/packages/language-server
 --
 -- `cypher-language-server`, language server for Cypher query language.
 -- Part of the umbrella project cypher-language-support: https://github.com/neo4j/cypher-language-support

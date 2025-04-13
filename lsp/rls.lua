@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/rust-lang/rls
+-- https://github.com/rust-lang/rls
 --
 -- rls, a language server for Rust
 --

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/sqls-server/sqls
+-- https://github.com/sqls-server/sqls
 --
 -- ```lua
 -- vim.lsp.config('sqls', {

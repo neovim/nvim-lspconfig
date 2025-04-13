@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/FractalBoy/perl-language-server
+-- https://github.com/FractalBoy/perl-language-server
 -- https://metacpan.org/pod/PLS
 --
 -- `PLS`, another language server for Perl.

@@ -3,7 +3,7 @@ local cmd = { bin_name, 'server' }
 
 ---@brief
 ---
----https://github.com/artempyanykh/marksman
+-- https://github.com/artempyanykh/marksman
 --
 -- Marksman is a Markdown LSP server providing completion, cross-references, diagnostics, and more.
 --

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://gitlab.gnome.org/jwestman/blueprint-compiler
+-- https://gitlab.gnome.org/jwestman/blueprint-compiler
 --
 -- `blueprint-compiler` can be installed via your system package manager.
 --

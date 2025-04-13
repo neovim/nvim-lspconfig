@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/astral-sh/ruff
+-- https://github.com/astral-sh/ruff
 --
 -- A Language Server Protocol implementation for Ruff, an extremely fast Python linter and code formatter, written in Rust. It can be installed via `pip`.
 --

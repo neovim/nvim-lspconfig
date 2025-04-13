@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://www.npmjs.com/package/turbo-language-server
+-- https://www.npmjs.com/package/turbo-language-server
 --
 -- `turbo-language-server` can be installed via `npm`:
 --

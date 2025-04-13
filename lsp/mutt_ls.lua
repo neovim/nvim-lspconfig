@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/neomutt/mutt-language-server
+-- https://github.com/neomutt/mutt-language-server
 --
 -- A language server for (neo)mutt's muttrc. It can be installed via pip.
 --

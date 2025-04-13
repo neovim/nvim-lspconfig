@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/hrsh7th/vscode-langservers-extracted
+-- https://github.com/hrsh7th/vscode-langservers-extracted
 --
 -- `css-languageserver` can be installed via `npm`:
 --

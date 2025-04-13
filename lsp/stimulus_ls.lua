@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://www.npmjs.com/package/stimulus-language-server
+-- https://www.npmjs.com/package/stimulus-language-server
 --
 -- `stimulus-lsp` can be installed via `npm`:
 --

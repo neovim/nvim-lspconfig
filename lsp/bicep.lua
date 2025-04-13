@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/azure/bicep
+-- https://github.com/azure/bicep
 -- Bicep language server
 --
 -- Bicep language server can be installed by downloading and extracting a release of bicep-langserver.zip from [Bicep GitHub releases](https://github.com/Azure/bicep/releases).

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/bergercookie/asm-lsp
+-- https://github.com/bergercookie/asm-lsp
 --
 -- Language Server for NASM/GAS/GO Assembly
 --

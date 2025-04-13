@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/crisidev/bacon-ls
+-- https://github.com/crisidev/bacon-ls
 --
 -- A Language Server Protocol wrapper for [bacon](https://dystroy.org/bacon/).
 -- It offers textDocument/diagnostic and workspace/diagnostic capabilities for Rust

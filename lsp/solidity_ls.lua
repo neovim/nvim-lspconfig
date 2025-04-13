@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/juanfranblanco/vscode-solidity
+-- https://github.com/juanfranblanco/vscode-solidity
 --
 -- `vscode-solidity-server` can be installed via `npm`:
 --

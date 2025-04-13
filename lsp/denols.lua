@@ -63,7 +63,7 @@ end
 
 ---@brief
 ---
----https://github.com/denoland/deno
+-- https://github.com/denoland/deno
 --
 -- Deno's built-in language server
 --

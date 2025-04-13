@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://git.sr.ht/~rrc/pbls
+-- https://git.sr.ht/~rrc/pbls
 --
 -- Prerequisites: Ensure protoc is on your $PATH.
 --

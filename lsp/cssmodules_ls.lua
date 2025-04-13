@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/antonk52/cssmodules-language-server
+-- https://github.com/antonk52/cssmodules-language-server
 --
 -- Language server for autocompletion and go-to-definition functionality for CSS modules.
 --

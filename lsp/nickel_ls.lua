@@ -1,6 +1,6 @@
 ---@brief
 ---
----Nickel Language Server
+-- Nickel Language Server
 --
 -- https://github.com/tweag/nickel
 --

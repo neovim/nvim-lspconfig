@@ -2,11 +2,8 @@
 local root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
 vim.opt.rtp:append(root)
 
-require 'lspconfig'
-local configs = require 'lspconfig.configs'
 local util = require 'lspconfig.util'
 local inspect = vim.inspect
-local fn = vim.fn
 
 local function template(s, params)
   return (s:gsub('{{([^{}]+)}}', params))
@@ -68,7 +65,7 @@ local section_template_txt = [[
 {{preamble}}
 
 Snippet to enable the language server: >lua
-  require'lspconfig'.{{config_name}}.setup{}
+  vim.lsp.enable('{{config_name}}')
 
 {{commands}}
 Default config:
@@ -92,48 +89,48 @@ Default config:
 ---
 ]]
 
-local function require_all_configs()
-  -- Make sure username doesn't leak into the generated document
-  local old_home = vim.env.HOME
-  local old_cache_home = vim.env.XDG_CACHE_HOME
-  vim.env.HOME = '/home/user'
-  vim.env.XDG_CACHE_HOME = '/home/user/.cache'
-
-  -- Configs are lazy-loaded, tickle them to populate the `configs` singleton.
-  for _, v in ipairs(vim.fn.glob(vim.fs.joinpath(root, 'lua/lspconfig/configs/*.lua'), true, true)) do
-    local module_name = v:gsub('.*/', ''):gsub('%.lua$', '')
-    configs[module_name] = require('lspconfig.configs.' .. module_name)
+--- Gets docstring by looking for "@brief" in a Lua code docstring.
+local function extract_brief(text)
+  local doc = text:match('%-%-+ *%@brief.-(\n%-%-.*)')
+  if not doc then
+    return ''
   end
-
-  -- Reset the environment variables
-  vim.env.HOME = old_home
-  vim.env.XDG_CACHE_HOME = old_cache_home
+  -- Remove all lines following the last comment ("-- …").
+  doc = doc:match('(.-)\n[^-]+')
+  -- Remove "--" prefix from all lines.
+  doc = doc:gsub('\n%-%-+', '\n')
+  -- Remove leading whitespace (shared indent).
+  doc = vim.trim(vim.text.indent(0, doc))
+  return doc
 end
 
 local function make_lsp_sections(is_markdown)
-  return make_section(
-    0,
-    '\n',
-    map_sorted(configs, function(config_name, template_object)
-      local template_def = template_object.config_def
-      local docs = template_def.docs
-      -- "lua/lspconfig/configs/xx.lua"
-      local config_file = (vim.fs.joinpath(root, 'lua/lspconfig/configs/%s.lua')):format(config_name)
+  local lsp_files = vim.fs.find(function(f)
+    return f:match('.*%.lua$')
+  end, { type = 'file', path = vim.fs.joinpath(root, 'lsp'), limit = math.huge })
+  local config_sections = {}
 
+  for _, config_file in ipairs(lsp_files) do
+    -- "lua/xx.lua"
+    local config_name = config_file:match('lsp/(.-)%.lua$')
+    if config_name then
+      local config = require('lsp.' .. config_name)
+      local docstring = extract_brief(readfile(config_file))
       local params = {
         config_name = config_name,
-        preamble = '',
+        preamble = docstring,
         commands = '',
         default_values = '',
       }
 
+      -- TODO: get commands by parsing `nvim_buf_create_user_command` calls.
       params.commands = make_section(0, '\n', {
         function()
-          if not template_def.commands or #vim.tbl_keys(template_def.commands) == 0 then
+          if not config.commands or #vim.tbl_keys(config.commands) == 0 then
             return
           end
           return ('\nCommands:\n%s\n'):format(make_section(0, '\n', {
-            map_sorted(template_def.commands, function(name, def)
+            map_sorted(config.commands, function(name, def)
               if def.description then
                 return string.format('- %s: %s', name, def.description)
               end
@@ -145,11 +142,8 @@ local function make_lsp_sections(is_markdown)
 
       params.default_values = make_section(0, '\n', {
         function()
-          if not template_def.default_config then
-            return
-          end
           return make_section(0, '\n', {
-            map_sorted(template_def.default_config, function(k, v)
+            map_sorted(config, function(k, v)
               if type(v) == 'boolean' then
                 return ('- `%s` : `%s`'):format(k, v)
               elseif type(v) ~= 'function' and k ~= 'root_dir' then
@@ -158,10 +152,10 @@ local function make_lsp_sections(is_markdown)
 
               local file = assert(io.open(config_file, 'r'))
               local linenr = 0
-              -- Find the line where `default_config` is defined.
+              -- Find the `return` line, where the config starts.
               for line in file:lines() do
                 linenr = linenr + 1
-                if line:find('%sdefault_config%s') then
+                if line:find('^return') then
                   break
                 end
               end
@@ -169,7 +163,7 @@ local function make_lsp_sections(is_markdown)
               local config_relpath = vim.fs.relpath(root, config_file)
 
               -- XXX: "../" because the path is outside of the doc/ dir.
-              return ('- `%s` source (use "gF" to visit): [../%s:%d](../%s#L%d)'):format(
+              return ('- `%s` source (use "gF" to open): [../%s:%d](../%s#L%d)'):format(
                 k,
                 config_relpath,
                 linenr,
@@ -181,113 +175,29 @@ local function make_lsp_sections(is_markdown)
         end,
       })
 
-      if docs then
-        local tempdir = os.getenv 'DOCGEN_TEMPDIR' or vim.uv.fs_mkdtemp '/tmp/nvim-lspconfig.XXXXXX'
-        local preamble_parts = make_parts {
-          function()
-            if docs.description and #docs.description > 0 then
-              return docs.description
-            end
-          end,
-          function()
-            local package_json_name = table.concat({ tempdir, config_name .. '.package.json' }, '/')
-            if docs.package_json then
-              if not ((vim.uv.fs_stat(package_json_name) or {}).type == 'file') then
-                os.execute(string.format('curl -v -L -o %q %q', package_json_name, docs.package_json))
-              end
-              if not ((vim.uv.fs_stat(package_json_name) or {}).type == 'file') then
-                print(string.format('Failed to download package.json for %q at %q', config_name, docs.package_json))
-                os.exit(1)
-                return
-              end
-              local data = vim.json.decode(readfile(package_json_name))
-              -- The entire autogenerated section.
-              return make_section(0, '\n', {
-                -- The default settings section
-                function()
-                  local default_settings = (data.contributes or {}).configuration
-                  if not default_settings.properties then
-                    return
-                  end
-                  -- The outer section.
-                  return make_section(0, '\n', {
-                    'This server accepts configuration via the `settings` key.',
-                    '<details><summary>Available settings:</summary>',
-                    '',
-                    -- The list of properties.
-                    make_section(
-                      0,
-                      '\n\n',
-                      map_sorted(default_settings.properties, function(k, v)
-                        local function tick(s)
-                          return string.format('`%s`', s)
-                        end
-
-                        -- https://github.github.com/gfm/#backslash-escapes
-                        local function escape_markdown_punctuations(str)
-                          local pattern =
-                            '\\(\\*\\|\\.\\|?\\|!\\|"\\|#\\|\\$\\|%\\|\'\\|(\\|)\\|,\\|-\\|\\/\\|:\\|;\\|<\\|=\\|>\\|@\\|\\[\\|\\\\\\|\\]\\|\\^\\|_\\|`\\|{\\|\\\\|\\|}\\)'
-                          return fn.substitute(str, pattern, '\\\\\\0', 'g')
-                        end
-
-                        -- local function pre(s) return string.format('<pre>%s</pre>', s) end
-                        -- local function code(s) return string.format('<code>%s</code>', s) end
-                        if not (type(v) == 'table') then
-                          return
-                        end
-                        return make_section(0, '\n', {
-                          '- ' .. make_section(0, ': ', {
-                            tick(k),
-                            function()
-                              if v.enum then
-                                return tick('enum ' .. inspect(v.enum))
-                              end
-                              if v.type then
-                                return tick(table.concat(util.tbl_flatten { v.type }, '|'))
-                              end
-                            end,
-                          }),
-                          '',
-                          make_section(2, '\n\n', {
-                            { v.default and 'Default: ' .. tick(inspect(v.default, { newline = '', indent = '' })) },
-                            { v.items and 'Array items: ' .. tick(inspect(v.items, { newline = '', indent = '' })) },
-                            { escape_markdown_punctuations(v.description) },
-                          }),
-                        })
-                      end)
-                    ),
-                    '',
-                    '</details>',
-                  })
-                end,
-              })
-            end
-          end,
-        }
-        if not os.getenv 'DOCGEN_TEMPDIR' then
-          os.execute('rm -rf ' .. tempdir)
-        end
-        -- Insert a newline after the preamble if it exists.
-        if #preamble_parts > 0 then
-          table.insert(preamble_parts, '')
-        end
-        params.preamble = vim.trim(table.concat(preamble_parts, '\n'))
-      end
-
       local template_used = is_markdown and section_template_md or section_template_txt
-      return template(template_used, params)
-    end)
-  )
+      table.insert(config_sections, template(template_used, params))
+    end
+  end
+
+  return make_section(0, '\n', config_sections)
 end
 
-local function make_implemented_servers_list()
-  return make_section(
-    0,
-    '\n',
-    map_sorted(configs, function(k)
-      return template('- [{{server}}](#{{server}})', { server = k })
-    end)
-  )
+--- Gets the list of config names and returns "table of contents" as markdown.
+local function make_toc()
+  local lsp_files = vim.fs.find(function(f)
+    return f:match('.*%.lua$')
+  end, { type = 'file', path = vim.fs.joinpath(root, 'lsp'), limit = math.huge })
+  local server_list = {}
+
+  for _, file_path in ipairs(lsp_files) do
+    local config_name = file_path:match('lsp/(.-)%.lua$')
+    if config_name then
+      table.insert(server_list, template('- [{{server}}](#{{server}})', { server = config_name }))
+    end
+  end
+
+  return make_section(0, '\n', server_list)
 end
 
 local function generate_readme(template_file, params, output_file)
@@ -299,13 +209,12 @@ local function generate_readme(template_file, params, output_file)
   writer:close()
 end
 
-require_all_configs()
 generate_readme(vim.fs.joinpath(root, 'scripts/docs_template.md'), {
-  implemented_servers_list = make_implemented_servers_list(),
+  toc = make_toc(),
   lsp_server_details = make_lsp_sections(true),
 }, vim.fs.joinpath(root, 'doc/configs.md'))
 
 generate_readme(vim.fs.joinpath(root, 'scripts/docs_template.txt'), {
-  implemented_servers_list = make_implemented_servers_list(),
+  toc = make_toc(),
   lsp_server_details = make_lsp_sections(false),
 }, vim.fs.joinpath(root, 'doc/configs.txt'))

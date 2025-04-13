@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/landeaux/vscode-smarty-langserver-extracted
+-- https://github.com/landeaux/vscode-smarty-langserver-extracted
 --
 -- Language server for Smarty.
 --

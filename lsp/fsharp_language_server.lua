@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----F# Language Server
+-- F# Language Server
 -- https://github.com/faldor20/fsharp-language-server
 --
 -- An implementation of the language server protocol using the F# Compiler Service.

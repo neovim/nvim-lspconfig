@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/diku-dk/futhark
+-- https://github.com/diku-dk/futhark
 --
 -- Futhark Language Server
 --

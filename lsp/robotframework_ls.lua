@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/robocorp/robotframework-lsp
+-- https://github.com/robocorp/robotframework-lsp
 --
 -- Language Server Protocol implementation for Robot Framework.
 return {

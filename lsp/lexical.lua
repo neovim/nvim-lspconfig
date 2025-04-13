@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/lexical-lsp/lexical
+-- https://github.com/lexical-lsp/lexical
 --
 -- Lexical is a next-generation language server for the Elixir programming language.
 --

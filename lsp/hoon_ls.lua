@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/urbit/hoon-language-server
+-- https://github.com/urbit/hoon-language-server
 --
 -- A language server for Hoon.
 --

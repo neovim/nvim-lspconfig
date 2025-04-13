@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://www.npmjs.com/package/antlers-language-server
+-- https://www.npmjs.com/package/antlers-language-server
 --
 -- `antlersls` can be installed via `npm`:
 -- ```sh

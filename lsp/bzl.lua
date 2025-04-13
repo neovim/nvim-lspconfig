@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://bzl.io/
+-- https://bzl.io/
 --
 -- https://docs.stack.build/docs/cli/installation
 --

@@ -1,6 +1,6 @@
 ---@brief
 ---
----Install vhdl_ls from https://github.com/VHDL-LS/rust_hdl and add it to path
+-- Install vhdl_ls from https://github.com/VHDL-LS/rust_hdl and add it to path
 --
 -- Configuration
 --

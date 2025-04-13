@@ -15,7 +15,7 @@ end
 
 ---@brief
 ---
----https://github.com/ocaml/ocaml-lsp
+-- https://github.com/ocaml/ocaml-lsp
 --
 -- `ocaml-lsp` can be installed as described in [installation guide](https://github.com/ocaml/ocaml-lsp#installation).
 --

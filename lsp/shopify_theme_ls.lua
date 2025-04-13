@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://shopify.dev/docs/api/shopify-cli
+-- https://shopify.dev/docs/api/shopify-cli
 --
 -- [Language Server](https://shopify.dev/docs/themes/tools/cli/language-server) and Theme Check (linter) for Shopify themes.
 --

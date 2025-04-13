@@ -4,7 +4,7 @@ local root_files = { 'configure.ac', 'Makefile', 'Makefile.am', '*.mk' }
 
 ---@brief
 ---
----https://github.com/Freed-Wu/autotools-language-server
+-- https://github.com/Freed-Wu/autotools-language-server
 --
 -- `autotools-language-server` can be installed via `pip`:
 -- ```sh

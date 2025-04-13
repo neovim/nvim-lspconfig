@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/ndonfris/fish-lsp
+-- https://github.com/ndonfris/fish-lsp
 --
 -- A Language Server Protocol (LSP) tailored for the fish shell.
 -- This project aims to enhance the coding experience for fish,

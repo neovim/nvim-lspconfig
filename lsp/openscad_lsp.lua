@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/Leathong/openscad-LSP
+-- https://github.com/Leathong/openscad-LSP
 --
 -- A Language Server Protocol server for OpenSCAD
 --

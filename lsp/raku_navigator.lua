@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/bscan/RakuNavigator
+-- https://github.com/bscan/RakuNavigator
 -- A Raku language server
 -- **By default, raku_navigator doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path.
 -- You have to install the language server manually.

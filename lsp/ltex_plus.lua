@@ -14,7 +14,7 @@ end
 
 ---@brief
 ---
----https://github.com/ltex-plus/ltex-ls-plus
+-- https://github.com/ltex-plus/ltex-ls-plus
 --
 -- LTeX Language Server: LSP language server for LanguageTool 🔍✔️ with support for LaTeX 🎓, Markdown 📝, and others
 --

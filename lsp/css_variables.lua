@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/vunguyentuan/vscode-css-variables/tree/master/packages/css-variables-language-server
+-- https://github.com/vunguyentuan/vscode-css-variables/tree/master/packages/css-variables-language-server
 --
 -- CSS variables autocompletion and go-to-definition
 --

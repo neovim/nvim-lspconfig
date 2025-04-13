@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/fsharp/FsAutoComplete
+-- https://github.com/fsharp/FsAutoComplete
 --
 -- Language Server for F# provided by FsAutoComplete (FSAC).
 --

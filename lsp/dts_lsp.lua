@@ -1,6 +1,6 @@
 ---@brief
 ---
----`dts-lsp` is an LSP for Devicetree files built on top of tree-sitter-devicetree grammar.
+-- `dts-lsp` is an LSP for Devicetree files built on top of tree-sitter-devicetree grammar.
 -- Language servers can be used in many editors, such as Visual Studio Code, Emacs
 -- or Vim
 --

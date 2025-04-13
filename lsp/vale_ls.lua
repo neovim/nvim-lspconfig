@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/errata-ai/vale-ls
+-- https://github.com/errata-ai/vale-ls
 --
 -- An implementation of the Language Server Protocol (LSP) for the Vale command-line tool.
 return {

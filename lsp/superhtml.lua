@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/kristoff-it/superhtml
+-- https://github.com/kristoff-it/superhtml
 --
 -- HTML Language Server & Templating Language Library
 --

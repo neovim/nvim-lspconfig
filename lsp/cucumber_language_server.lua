@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://cucumber.io
+-- https://cucumber.io
 -- https://github.com/cucumber/common
 -- https://www.npmjs.com/package/@cucumber/language-server
 --

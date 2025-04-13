@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/typescript-language-server/typescript-language-server
+-- https://github.com/typescript-language-server/typescript-language-server
 --
 -- `ts_ls`, aka `typescript-language-server`, is a Language Server Protocol implementation for TypeScript wrapping `tsserver`. Note that `ts_ls` is not `tsserver`.
 --

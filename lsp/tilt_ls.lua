@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/tilt-dev/tilt
+-- https://github.com/tilt-dev/tilt
 --
 -- Tilt language server.
 --

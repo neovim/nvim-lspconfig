@@ -23,7 +23,7 @@ end
 
 ---@brief
 ---
----https://github.com/Prince781/vala-language-server
+-- https://github.com/Prince781/vala-language-server
 return {
   cmd = { 'vala-language-server' },
   filetypes = { 'vala', 'genie' },

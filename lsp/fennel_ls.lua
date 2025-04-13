@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://sr.ht/~xerool/fennel-ls/
+-- https://sr.ht/~xerool/fennel-ls/
 --
 -- A language server for fennel.
 --

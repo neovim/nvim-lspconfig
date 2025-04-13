@@ -15,7 +15,7 @@ end
 
 ---@brief
 ---
----https://github.com/imc-trading/svlangserver
+-- https://github.com/imc-trading/svlangserver
 --
 -- Language server for SystemVerilog.
 --

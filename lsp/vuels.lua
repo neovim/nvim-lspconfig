@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/vuejs/vetur/tree/master/server
+-- https://github.com/vuejs/vetur/tree/master/server
 --
 -- Vue language server(vls)
 -- `vue-language-server` can be installed via `npm`:

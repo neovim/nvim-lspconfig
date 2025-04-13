@@ -2,7 +2,7 @@ local cmd = { 'scheme-langserver', '~/.scheme-langserver.log', 'enable', 'disabl
 
 ---@brief
 ---
----https://github.com/ufo5260987423/scheme-langserver
+-- https://github.com/ufo5260987423/scheme-langserver
 -- `scheme-langserver`, a language server protocol implementation for scheme.
 -- And for nvim user, please add .sls to scheme file extension list.
 return {

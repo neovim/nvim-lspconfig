@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-cli
+-- https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-cli
 --
 -- `graphql-lsp` can be installed via `npm`:
 --

@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/haskell/haskell-language-server
+-- https://github.com/haskell/haskell-language-server
 --
 -- Haskell Language Server
 --

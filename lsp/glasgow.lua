@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/nolanderc/glasgow
+-- https://github.com/nolanderc/glasgow
 --
 -- Provides language features for WGSL (WebGPU Shading Language):
 -- - Completions:

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/soutaro/steep
+-- https://github.com/soutaro/steep
 --
 -- `steep` is a static type checker for Ruby.
 --

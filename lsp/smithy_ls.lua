@@ -3,7 +3,7 @@ local cmd = { 'smithy-language-server', '0' }
 
 ---@brief
 ---
----https://github.com/awslabs/smithy-language-server
+-- https://github.com/awslabs/smithy-language-server
 --
 -- `Smithy Language Server`, A Language Server Protocol implementation for the Smithy IDL
 return {

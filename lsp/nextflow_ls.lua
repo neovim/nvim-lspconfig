@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/nextflow-io/language-server
+-- https://github.com/nextflow-io/language-server
 --
 -- Requirements:
 --  - Java 17+

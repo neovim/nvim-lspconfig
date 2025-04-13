@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/coq-community/vscoq
+-- https://github.com/coq-community/vscoq
 return {
   cmd = { 'vscoqtop' },
   filetypes = { 'coq' },

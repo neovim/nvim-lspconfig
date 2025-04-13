@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/nix-community/nixd
+-- https://github.com/nix-community/nixd
 --
 -- Nix language server, based on nix libraries.
 --

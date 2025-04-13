@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/astoff/digestif
+-- https://github.com/astoff/digestif
 --
 -- Digestif is a code analyzer, and a language server, for LaTeX, ConTeXt et caterva. It provides
 --

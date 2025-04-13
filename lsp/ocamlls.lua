@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/ocaml-lsp/ocaml-language-server
+-- https://github.com/ocaml-lsp/ocaml-language-server
 --
 -- `ocaml-language-server` can be installed via `npm`
 -- ```sh

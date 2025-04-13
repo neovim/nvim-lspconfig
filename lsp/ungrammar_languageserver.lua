@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/binhtran432k/ungrammar-language-features
+-- https://github.com/binhtran432k/ungrammar-language-features
 -- Language Server for Ungrammar.
 --
 -- Ungrammar Language Server can be installed via npm:

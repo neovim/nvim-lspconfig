@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/kitagry/regols
+-- https://github.com/kitagry/regols
 --
 -- OPA Rego language server.
 --

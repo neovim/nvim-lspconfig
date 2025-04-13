@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/redhat-developer/yaml-language-server
+-- https://github.com/redhat-developer/yaml-language-server
 --
 -- `yaml-language-server` can be installed via `yarn`:
 -- ```sh

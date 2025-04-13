@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/JCWasmx86/mesonlsp
+-- https://github.com/JCWasmx86/mesonlsp
 --
 -- An unofficial, unendorsed language server for meson written in C++
 return {

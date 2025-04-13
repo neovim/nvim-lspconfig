@@ -8,7 +8,7 @@ end
 
 ---@brief
 ---
----https://github.com/mickael-menu/zk
+-- https://github.com/mickael-menu/zk
 --
 -- A plain text note-taking assistant
 return {

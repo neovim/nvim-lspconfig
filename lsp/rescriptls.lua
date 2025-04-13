@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/rescript-lang/rescript-vscode/tree/master/server
+-- https://github.com/rescript-lang/rescript-vscode/tree/master/server
 --
 -- ReScript Language Server can be installed via npm:
 -- ```sh

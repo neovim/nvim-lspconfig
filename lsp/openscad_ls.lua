@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/dzhu/openscad-language-server
+-- https://github.com/dzhu/openscad-language-server
 --
 -- A Language Server Protocol server for OpenSCAD
 --

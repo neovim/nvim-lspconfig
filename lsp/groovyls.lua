@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/prominic/groovy-language-server.git
+-- https://github.com/prominic/groovy-language-server.git
 --
 -- Requirements:
 --  - Linux/macOS (for now)

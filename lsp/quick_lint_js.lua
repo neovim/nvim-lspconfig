@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://quick-lint-js.com/
+-- https://quick-lint-js.com/
 --
 -- quick-lint-js finds bugs in JavaScript programs.
 --

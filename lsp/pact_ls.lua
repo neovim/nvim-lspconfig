@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/kadena-io/pact-lsp
+-- https://github.com/kadena-io/pact-lsp
 --
 -- The Pact language server
 return {

@@ -26,7 +26,7 @@ end
 
 ---@brief
 ---
----https://github.com/stardog-union/stardog-language-servers/tree/master/packages/turtle-language-server
+-- https://github.com/stardog-union/stardog-language-servers/tree/master/packages/turtle-language-server
 -- `turtle-language-server`, An editor-agnostic server providing language intelligence (diagnostics, hover tooltips, etc.) for the W3C standard Turtle RDF syntax via the Language Server Protocol.
 -- installable via npm install -g turtle-language-server or yarn global add turtle-language-server.
 -- requires node.

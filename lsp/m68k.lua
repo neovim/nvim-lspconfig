@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/grahambates/m68k-lsp
+-- https://github.com/grahambates/m68k-lsp
 --
 -- Language server for Motorola 68000 family assembly
 --

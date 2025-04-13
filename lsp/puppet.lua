@@ -1,6 +1,6 @@
 ---@brief
 ---
----LSP server for Puppet.
+-- LSP server for Puppet.
 --
 -- Installation:
 --

@@ -14,7 +14,7 @@ end
 
 ---@brief
 ---
----https://github.com/golang/tools/tree/master/gopls
+-- https://github.com/golang/tools/tree/master/gopls
 --
 -- Google's lsp server for golang.
 return {
