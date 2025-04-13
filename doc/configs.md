@@ -28,7 +28,6 @@ Nvim by running `:help lspconfig-all`.
 - [bazelrc_lsp](#bazelrc_lsp)
 - [beancount](#beancount)
 - [bicep](#bicep)
-- [biome](#biome)
 - [bitbake_language_server](#bitbake_language_server)
 - [blueprint_ls](#blueprint_ls)
 - [bqls](#bqls)
@@ -779,7 +778,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "c", "cpp", "rust", "go", "java", "python", "javascript", "typescript", "html", "css", "kotlin", "dart", "lua" }
+  { "c", "cpp", "rust", "go", "java", "python", "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "html", "css", "kotlin", "dart", "lua" }
   ```
 - `root_markers` :
   ```lua
@@ -1369,37 +1368,6 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
-  ```
-
----
-
-## biome
-
-https://biomejs.dev
-
-Toolchain of the web. [Successor of Rome](https://biomejs.dev/blog/annoucing-biome).
-
-```sh
-npm install [-g] @biomejs/biome
-```
-
-Snippet to enable the language server:
-```lua
-require'lspconfig'.biome.setup{}
-```
-
-Default config:
-- `cmd` :
-  ```lua
-  { "biome", "lsp-proxy" }
-  ```
-- `filetypes` :
-  ```lua
-  { "astro", "css", "graphql", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
-  ```
-- `root_markers` :
-  ```lua
-  { "biome.json", "biome.jsonc" }
   ```
 
 ---
