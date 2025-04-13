@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/hyprland-community/hyprls
+-- https://github.com/hyprland-community/hyprls
 --
 -- `hyprls` can be installed via `go`:
 -- ```sh

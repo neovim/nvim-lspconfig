@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/elixir-lsp/elixir-ls
+-- https://github.com/elixir-lsp/elixir-ls
 --
 -- `elixir-ls` can be installed by following the instructions [here](https://github.com/elixir-lsp/elixir-ls#building-and-running).
 --

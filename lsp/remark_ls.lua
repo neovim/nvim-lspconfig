@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/remarkjs/remark-language-server
+-- https://github.com/remarkjs/remark-language-server
 --
 -- `remark-language-server` can be installed via `npm`:
 -- ```sh

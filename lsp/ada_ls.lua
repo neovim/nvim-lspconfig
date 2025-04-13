@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/AdaCore/ada_language_server
+-- https://github.com/AdaCore/ada_language_server
 --
 -- Installation instructions can be found [here](https://github.com/AdaCore/ada_language_server#Install).
 --

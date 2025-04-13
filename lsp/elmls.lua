@@ -5,7 +5,7 @@ local elm_root_pattern = util.root_pattern 'elm.json'
 
 ---@brief
 ---
----https://github.com/elm-tooling/elm-language-server#installation
+-- https://github.com/elm-tooling/elm-language-server#installation
 --
 -- If you don't want to use Nvim to install it, then you can use:
 -- ```sh

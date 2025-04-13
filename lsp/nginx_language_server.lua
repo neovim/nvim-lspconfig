@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://pypi.org/project/nginx-language-server/
+-- https://pypi.org/project/nginx-language-server/
 --
 -- `nginx-language-server` can be installed via pip:
 --

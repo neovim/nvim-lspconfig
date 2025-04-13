@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/salesforce-misc/bazelrc-lsp
+-- https://github.com/salesforce-misc/bazelrc-lsp
 --
 -- `bazelrc-lsp` is a LSP for `.bazelrc` configuration files.
 --

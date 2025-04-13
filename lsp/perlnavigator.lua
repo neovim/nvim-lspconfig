@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/bscan/PerlNavigator
+-- https://github.com/bscan/PerlNavigator
 --
 -- A Perl language server. It can be installed via npm:
 --

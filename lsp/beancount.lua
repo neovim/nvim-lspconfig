@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/polarmutex/beancount-language-server#installation
+-- https://github.com/polarmutex/beancount-language-server#installation
 --
 -- See https://github.com/polarmutex/beancount-language-server#configuration for configuration options
 return {

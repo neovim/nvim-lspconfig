@@ -49,7 +49,7 @@ end
 
 ---@brief
 ---
----https://clangd.llvm.org/installation.html
+-- https://clangd.llvm.org/installation.html
 --
 -- - **NOTE:** Clang >= 11 is recommended! See [#23](https://github.com/neovim/nvim-lspconfig/issues/23).
 -- - If `compile_commands.json` lives in a build directory, you should

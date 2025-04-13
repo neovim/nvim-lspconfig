@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/leanprover/lean-client-js/tree/master/lean-language-server
+-- https://github.com/leanprover/lean-client-js/tree/master/lean-language-server
 --
 -- Lean installation instructions can be found
 -- [here](https://leanprover-community.github.io/get_started.html#regular-install).

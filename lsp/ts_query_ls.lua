@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/ribru17/ts_query_ls
+-- https://github.com/ribru17/ts_query_ls
 -- Can be configured by passing a "settings" object to `vim.lsp.config('ts_query_ls', {})`:
 -- ```lua
 -- vim.lsp.config('ts_query_ls', {

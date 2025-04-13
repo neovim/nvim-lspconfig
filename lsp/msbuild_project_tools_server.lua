@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/tintoy/msbuild-project-tools-server/
+-- https://github.com/tintoy/msbuild-project-tools-server/
 --
 -- MSBuild Project Tools Server can be installed by following the README.MD on the above repository.
 --

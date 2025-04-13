@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/tqchen/ffi-navigator
+-- https://github.com/tqchen/ffi-navigator
 --
 -- The Language Server for FFI calls in TVM to be able jump between python and C++
 --

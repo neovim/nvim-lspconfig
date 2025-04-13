@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/veryl-lang/veryl
+-- https://github.com/veryl-lang/veryl
 --
 -- Language server for Veryl
 --

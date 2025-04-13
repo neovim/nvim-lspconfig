@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/dalance/svls
+-- https://github.com/dalance/svls
 --
 -- Language server for verilog and SystemVerilog
 --

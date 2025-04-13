@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://codeberg.org/rgherdt/scheme-lsp-server
+-- https://codeberg.org/rgherdt/scheme-lsp-server
 --
 -- The recommended way is to install guile-lsp-server is using Guix. Unfortunately it is still not available at the official Guix channels, but you can use the provided channel guix.scm in the repo:
 -- ```sh

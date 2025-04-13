@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/aiken-lang/aiken
+-- https://github.com/aiken-lang/aiken
 --
 -- A language server for Aiken Programming Language.
 -- [Installation](https://aiken-lang.org/installation-instructions)

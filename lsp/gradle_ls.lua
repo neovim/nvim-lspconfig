@@ -5,7 +5,7 @@ end
 
 ---@brief
 ---
----https://github.com/microsoft/vscode-gradle
+-- https://github.com/microsoft/vscode-gradle
 --
 -- Microsoft's lsp server for gradle files
 --

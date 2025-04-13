@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/posit-dev/air
+-- https://github.com/posit-dev/air
 --
 -- Air is an R formatter and language server, written in Rust.
 --

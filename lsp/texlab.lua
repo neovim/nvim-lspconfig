@@ -155,7 +155,7 @@ end
 
 ---@brief
 ---
----https://github.com/latex-lsp/texlab
+-- https://github.com/latex-lsp/texlab
 --
 -- A completion engine built from scratch for (La)TeX.
 --

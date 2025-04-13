@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/chipsalliance/verible
+-- https://github.com/chipsalliance/verible
 --
 -- A linter and formatter for verilog and SystemVerilog files.
 --

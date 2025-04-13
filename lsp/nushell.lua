@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/nushell/nushell
+-- https://github.com/nushell/nushell
 --
 -- Nushell built-in language server.
 return {

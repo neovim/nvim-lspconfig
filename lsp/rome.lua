@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://rome.tools
+-- https://rome.tools
 --
 -- Language server for the Rome Frontend Toolchain.
 --

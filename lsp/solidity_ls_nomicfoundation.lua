@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/NomicFoundation/hardhat-vscode/blob/development/server/README.md
+-- https://github.com/NomicFoundation/hardhat-vscode/blob/development/server/README.md
 --
 -- `nomicfoundation-solidity-language-server` can be installed via `npm`:
 --

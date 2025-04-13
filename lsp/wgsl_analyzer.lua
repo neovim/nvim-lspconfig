@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/wgsl-analyzer/wgsl-analyzer
+-- https://github.com/wgsl-analyzer/wgsl-analyzer
 --
 -- `wgsl-analyzer` can be installed via `cargo`:
 -- ```sh

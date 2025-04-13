@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/nrwl/nx-console/tree/master/apps/nxls
+-- https://github.com/nrwl/nx-console/tree/master/apps/nxls
 --
 -- nxls, a language server for Nx Workspaces
 --

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/nwolverson/purescript-language-server
+-- https://github.com/nwolverson/purescript-language-server
 --
 -- The `purescript-language-server` can be added to your project and `$PATH` via
 --

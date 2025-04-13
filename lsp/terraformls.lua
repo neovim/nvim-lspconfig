@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/hashicorp/terraform-ls
+-- https://github.com/hashicorp/terraform-ls
 --
 -- Terraform language server
 -- Download a released binary from https://github.com/hashicorp/terraform-ls/releases.

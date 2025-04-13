@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/hrsh7th/vscode-langservers-extracted
+-- https://github.com/hrsh7th/vscode-langservers-extracted
 --
 -- vscode-json-language-server, a language server for JSON and JSON schema
 --

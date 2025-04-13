@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/richterger/Perl-LanguageServer/tree/master/clients/vscode/perl
+-- https://github.com/richterger/Perl-LanguageServer/tree/master/clients/vscode/perl
 --
 -- `Perl-LanguageServer`, a language server for Perl.
 --

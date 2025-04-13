@@ -77,7 +77,7 @@ end
 
 ---@brief
 ---
----https://projects.eclipse.org/projects/eclipse.jdt.ls
+-- https://projects.eclipse.org/projects/eclipse.jdt.ls
 --
 -- Language server for Java.
 --

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/sixtyfpsui/sixtyfps
+-- https://github.com/sixtyfpsui/sixtyfps
 -- `SixtyFPS`'s language server
 --
 -- You can build and install `sixtyfps-lsp` binary with `cargo`:

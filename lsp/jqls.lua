@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/wader/jq-lsp
+-- https://github.com/wader/jq-lsp
 -- Language server for jq, written using Go.
 -- You can install the server easily using go install:
 -- ```sh

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/crate-ci/typos
+-- https://github.com/crate-ci/typos
 -- https://github.com/tekumara/typos-lsp
 --
 -- A Language Server Protocol implementation for Typos, a low false-positive

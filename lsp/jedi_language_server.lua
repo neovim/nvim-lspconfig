@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/pappasam/jedi-language-server
+-- https://github.com/pappasam/jedi-language-server
 --
 -- `jedi-language-server`, a language server for Python, built on top of jedi
 return {

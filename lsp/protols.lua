@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/coder3101/protols
+-- https://github.com/coder3101/protols
 --
 -- `protols` can be installed via `cargo`:
 -- ```sh

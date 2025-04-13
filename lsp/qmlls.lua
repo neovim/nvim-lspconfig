@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://doc.qt.io/qt-6/qtqml-tooling-qmlls.html
+-- https://doc.qt.io/qt-6/qtqml-tooling-qmlls.html
 --
 -- > QML Language Server is a tool shipped with Qt that helps you write code in your favorite (LSP-supporting) editor.
 --

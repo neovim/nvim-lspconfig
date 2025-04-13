@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/ansible/vscode-ansible
+-- https://github.com/ansible/vscode-ansible
 --
 -- Language server for the ansible configuration management tool.
 --

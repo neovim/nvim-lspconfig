@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://taplo.tamasfe.dev/cli/usage/language-server.html
+-- https://taplo.tamasfe.dev/cli/usage/language-server.html
 --
 -- Language server for Taplo, a TOML toolkit.
 --

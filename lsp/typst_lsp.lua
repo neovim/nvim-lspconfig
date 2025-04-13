@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/nvarner/typst-lsp
+-- https://github.com/nvarner/typst-lsp
 --
 -- Language server for Typst.
 return {

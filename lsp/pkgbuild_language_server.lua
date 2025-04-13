@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/Freed-Wu/pkgbuild-language-server
+-- https://github.com/Freed-Wu/pkgbuild-language-server
 --
 -- Language server for ArchLinux/Windows Msys2's PKGBUILD.
 return {

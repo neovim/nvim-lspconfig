@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://salsa.debian.org/debian/debputy
+-- https://salsa.debian.org/debian/debputy
 --
 -- Language Server for Debian packages.
 return {

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/jamesnvc/lsp_server
+-- https://github.com/jamesnvc/lsp_server
 --
 -- Language Server Protocol server for SWI-Prolog
 return {

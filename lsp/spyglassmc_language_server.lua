@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/SpyglassMC/Spyglass/tree/main/packages/language-server
+-- https://github.com/SpyglassMC/Spyglass/tree/main/packages/language-server
 --
 -- Language server for Minecraft datapacks.
 --

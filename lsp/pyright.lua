@@ -30,7 +30,7 @@ end
 
 ---@brief
 ---
----https://github.com/microsoft/pyright
+-- https://github.com/microsoft/pyright
 --
 -- `pyright`, a static type checker and language server for python
 return {

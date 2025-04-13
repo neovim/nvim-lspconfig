@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://mlir.llvm.org/docs/Tools/MLIRLSP/#pdll-lsp-language-server--mlir-pdll-lsp-server
+-- https://mlir.llvm.org/docs/Tools/MLIRLSP/#pdll-lsp-language-server--mlir-pdll-lsp-server
 --
 -- The Language Server for the LLVM PDLL language
 --

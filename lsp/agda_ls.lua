@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/agda/agda-language-server
+-- https://github.com/agda/agda-language-server
 --
 -- Language Server for Agda.
 return {

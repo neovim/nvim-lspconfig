@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/iamcco/vim-language-server
+-- https://github.com/iamcco/vim-language-server
 --
 -- You can install vim-language-server via npm:
 -- ```sh

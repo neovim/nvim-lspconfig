@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/python-lsp/python-lsp-server
+-- https://github.com/python-lsp/python-lsp-server
 --
 -- A Python 3.6+ implementation of the Language Server Protocol.
 --

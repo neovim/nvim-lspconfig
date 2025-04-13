@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/ThePrimeagen/htmx-lsp
+-- https://github.com/ThePrimeagen/htmx-lsp
 --
 -- `htmx-lsp` can be installed via `cargo`:
 -- ```sh

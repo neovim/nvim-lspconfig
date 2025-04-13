@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/dhall-lang/dhall-haskell/tree/master/dhall-lsp-server
+-- https://github.com/dhall-lang/dhall-haskell/tree/master/dhall-lsp-server
 --
 -- language server for dhall
 --

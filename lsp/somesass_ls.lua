@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/wkillerud/some-sass/tree/main/packages/language-server
+-- https://github.com/wkillerud/some-sass/tree/main/packages/language-server
 --
 -- `some-sass-language-server` can be installed via `npm`:
 --

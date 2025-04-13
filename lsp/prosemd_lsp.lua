@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/kitten/prosemd-lsp
+-- https://github.com/kitten/prosemd-lsp
 --
 -- An experimental LSP for Markdown.
 --

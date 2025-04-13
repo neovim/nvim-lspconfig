@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://erlang-ls.github.io
+-- https://erlang-ls.github.io
 --
 -- Language Server for Erlang.
 --

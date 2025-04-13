@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/microsoft/compose-language-service
+-- https://github.com/microsoft/compose-language-service
 -- This project contains a language service for Docker Compose.
 --
 -- `compose-language-service` can be installed via `npm`:

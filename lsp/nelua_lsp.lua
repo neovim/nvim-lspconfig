@@ -1,3 +1,5 @@
+-- @brief
+--
 -- https://github.com/codehz/nelua-lsp
 --
 -- nelua-lsp is an experimental nelua language server.

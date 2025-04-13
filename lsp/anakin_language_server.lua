@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://pypi.org/project/anakin-language-server/
+-- https://pypi.org/project/anakin-language-server/
 --
 -- `anakin-language-server` is yet another Jedi Python language server.
 --

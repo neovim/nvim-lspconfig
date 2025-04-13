@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/regen100/cmake-language-server
+-- https://github.com/regen100/cmake-language-server
 --
 -- CMake LSP Implementation
 return {

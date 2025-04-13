@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/elbywan/crystalline
+-- https://github.com/elbywan/crystalline
 --
 -- Crystal language server.
 return {

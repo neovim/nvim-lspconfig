@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/AlloyTools/org.alloytools.alloy
+-- https://github.com/AlloyTools/org.alloytools.alloy
 --
 -- Alloy is a formal specification language for describing structures and a tool for exploring them.
 --

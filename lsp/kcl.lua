@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/kcl-lang/kcl.nvim
+-- https://github.com/kcl-lang/kcl.nvim
 --
 -- Language server for the KCL configuration and policy language.
 --

@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/razzmatazz/csharp-language-server
+-- https://github.com/razzmatazz/csharp-language-server
 --
 -- Language Server for C#.
 --

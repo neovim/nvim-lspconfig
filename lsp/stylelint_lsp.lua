@@ -17,7 +17,7 @@ root_file = util.insert_package_json(root_file, 'stylelint')
 
 ---@brief
 ---
----https://github.com/bmatcuk/stylelint-lsp
+-- https://github.com/bmatcuk/stylelint-lsp
 --
 -- `stylelint-lsp` can be installed via `npm`:
 --

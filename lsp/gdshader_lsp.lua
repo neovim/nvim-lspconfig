@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/godofavacyn/gdshader-lsp
+-- https://github.com/godofavacyn/gdshader-lsp
 --
 -- A language server for the Godot Shading language.
 return {

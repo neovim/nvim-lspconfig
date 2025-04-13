@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/aca/emmet-ls
+-- https://github.com/aca/emmet-ls
 --
 -- Package can be installed via `npm`:
 -- ```sh

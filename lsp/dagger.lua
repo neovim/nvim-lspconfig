@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/dagger/cuelsp
+-- https://github.com/dagger/cuelsp
 --
 -- Dagger's lsp server for cuelang.
 return {

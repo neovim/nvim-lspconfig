@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/azdavis/millet
+-- https://github.com/azdavis/millet
 --
 -- Millet, a language server for Standard ML
 --

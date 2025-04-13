@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/bash-lsp/bash-language-server
+-- https://github.com/bash-lsp/bash-language-server
 --
 -- `bash-language-server` can be installed via `npm`:
 -- ```sh

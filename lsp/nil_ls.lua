@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/oxalica/nil
+-- https://github.com/oxalica/nil
 --
 -- A new language server for Nix Expression Language.
 --

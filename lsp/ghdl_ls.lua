@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/ghdl/ghdl-language-server
+-- https://github.com/ghdl/ghdl-language-server
 --
 -- A language server for VHDL, using ghdl as its backend.
 --

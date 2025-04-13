@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/JohnnyMorganz/luau-lsp
+-- https://github.com/JohnnyMorganz/luau-lsp
 --
 -- Language server for the [Luau](https://luau-lang.org/) language.
 --

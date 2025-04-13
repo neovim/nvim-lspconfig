@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/forcedotcom/salesforcedx-vscode
+-- https://github.com/forcedotcom/salesforcedx-vscode
 --
 -- Language server for Visualforce.
 --

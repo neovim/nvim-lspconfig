@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/bufbuild/buf-language-server
+-- https://github.com/bufbuild/buf-language-server
 --
 -- `buf-language-server` can be installed via `go install`:
 -- ```sh

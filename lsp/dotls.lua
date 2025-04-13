@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/nikeee/dot-language-server
+-- https://github.com/nikeee/dot-language-server
 --
 -- `dot-language-server` can be installed via `npm`:
 -- ```sh

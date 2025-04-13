@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/forcedotcom/lightning-language-server/
+-- https://github.com/forcedotcom/lightning-language-server/
 --
 -- Language server for Lightning Web Components.
 --

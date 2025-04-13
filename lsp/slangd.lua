@@ -6,7 +6,7 @@ end
 
 ---@brief
 ---
----https://github.com/shader-slang/slang
+-- https://github.com/shader-slang/slang
 --
 -- The `slangd` binary can be downloaded as part of [slang releases](https://github.com/shader-slang/slang/releases) or
 -- by [building `slang` from source](https://github.com/shader-slang/slang/blob/master/docs/building.md).

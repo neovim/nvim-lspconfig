@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/microsoft/typespec
+-- https://github.com/microsoft/typespec
 --
 -- The language server for TypeSpec, a language for defining cloud service APIs and shapes.
 --

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/Retsediv/hydra-lsp
+-- https://github.com/Retsediv/hydra-lsp
 --
 -- LSP for Hydra Python package config files.
 return {

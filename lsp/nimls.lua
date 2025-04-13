@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/PMunch/nimlsp
+-- https://github.com/PMunch/nimlsp
 --
 -- `nimlsp` can be installed via the `nimble` package manager:
 --

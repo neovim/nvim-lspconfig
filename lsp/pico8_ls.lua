@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/japhib/pico8-ls
+-- https://github.com/japhib/pico8-ls
 --
 -- Full language support for the PICO-8 dialect of Lua.
 return {

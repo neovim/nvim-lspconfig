@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/phpactor/phpactor
+-- https://github.com/phpactor/phpactor
 --
 -- Installation: https://phpactor.readthedocs.io/en/master/usage/standalone.html#global-installation
 return {

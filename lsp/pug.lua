@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/opa-oz/pug-lsp
+-- https://github.com/opa-oz/pug-lsp
 --
 -- An implementation of the Language Protocol Server for [Pug.js](http://pugjs.org)
 --

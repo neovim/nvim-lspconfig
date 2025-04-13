@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/nim-lang/langserver
+-- https://github.com/nim-lang/langserver
 --
 --
 -- `nim-langserver` can be installed via the `nimble` package manager:

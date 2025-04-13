@@ -15,7 +15,7 @@ local cmd = {
 
 ---@brief
 ---
----https://github.com/phan/phan
+-- https://github.com/phan/phan
 --
 -- Installation: https://github.com/phan/phan#getting-started
 return {

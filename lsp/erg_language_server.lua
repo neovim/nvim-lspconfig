@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/erg-lang/erg#flags ELS
+-- https://github.com/erg-lang/erg#flags ELS
 --
 -- ELS (erg-language-server) is a language server for the Erg programming language.
 --

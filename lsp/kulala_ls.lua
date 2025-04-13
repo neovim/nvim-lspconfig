@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/mistweaverco/kulala-ls
+-- https://github.com/mistweaverco/kulala-ls
 --
 -- A minimal language server for HTTP syntax.
 return {

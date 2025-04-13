@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://cap.cloud.sap/docs/
+-- https://cap.cloud.sap/docs/
 --
 -- `cds-lsp` can be installed via `npm`:
 --

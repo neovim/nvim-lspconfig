@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/kitagry/bqls
+-- https://github.com/kitagry/bqls
 --
 -- The `bqls` BigQuery language server can be installed by running:
 --

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/automattic/harper
+-- https://github.com/automattic/harper
 --
 -- The language server for Harper, the slim, clean language checker for developers.
 --

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/0x2a-42/lelwel
+-- https://github.com/0x2a-42/lelwel
 --
 -- Language server for lelwel grammars.
 --

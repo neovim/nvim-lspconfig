@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://muon.build
+-- https://muon.build
 return {
   cmd = { 'muon', 'analyze', 'lsp' },
   filetypes = { 'meson' },

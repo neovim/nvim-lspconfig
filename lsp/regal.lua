@@ -2,7 +2,7 @@ local util = require 'lspconfig.util'
 
 ---@brief
 ---
----https://github.com/StyraInc/regal
+-- https://github.com/StyraInc/regal
 --
 -- A linter for Rego, with support for running as an LSP server.
 --

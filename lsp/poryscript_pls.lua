@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/huderlem/poryscript-pls
+-- https://github.com/huderlem/poryscript-pls
 --
 -- Language server for poryscript (a high level scripting language for GBA-era Pokémon decompilation projects)
 return {

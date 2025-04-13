@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/znck/grammarly
+-- https://github.com/znck/grammarly
 --
 -- `grammarly-languageserver` can be installed via `npm`:
 --

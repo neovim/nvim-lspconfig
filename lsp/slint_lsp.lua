@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/slint-ui/slint
+-- https://github.com/slint-ui/slint
 -- `Slint`'s language server
 --
 -- You can build and install `slint-lsp` binary with `cargo`:

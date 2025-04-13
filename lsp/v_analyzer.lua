@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/vlang/v-analyzer
+-- https://github.com/vlang/v-analyzer
 --
 -- V language server.
 --

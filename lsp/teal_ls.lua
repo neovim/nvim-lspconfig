@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/teal-language/teal-language-server
+-- https://github.com/teal-language/teal-language-server
 --
 -- Install with:
 -- ```

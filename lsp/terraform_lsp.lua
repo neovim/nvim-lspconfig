@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/juliosueiras/terraform-lsp
+-- https://github.com/juliosueiras/terraform-lsp
 --
 -- Terraform language server
 -- Download a released binary from

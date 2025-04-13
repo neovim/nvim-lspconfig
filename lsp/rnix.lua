@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/nix-community/rnix-lsp
+-- https://github.com/nix-community/rnix-lsp
 --
 -- A language server for Nix providing basic completion and formatting via nixpkgs-fmt.
 --

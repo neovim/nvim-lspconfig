@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/ariga/atlas
+-- https://github.com/ariga/atlas
 --
 -- Language server for Atlas config and scheme files.
 --

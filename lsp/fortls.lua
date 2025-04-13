@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://fortls.fortran-lang.org/index.html
+-- https://fortls.fortran-lang.org/index.html
 --
 -- fortls is a Fortran Language Server, the server can be installed via pip
 --

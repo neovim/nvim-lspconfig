@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/dcermak/rpm-spec-language-server
+-- https://github.com/dcermak/rpm-spec-language-server
 --
 -- Language server protocol (LSP) support for RPM Spec files.
 return {

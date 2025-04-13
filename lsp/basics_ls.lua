@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/antonk52/basics-language-server/
+-- https://github.com/antonk52/basics-language-server/
 --
 -- Buffer, path, and snippet completion
 --

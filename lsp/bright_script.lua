@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/RokuCommunity/brighterscript
+-- https://github.com/RokuCommunity/brighterscript
 --
 -- `brightscript` can be installed via `npm`:
 -- ```sh

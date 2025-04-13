@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/digama0/mm0
+-- https://github.com/digama0/mm0
 --
 -- Language Server for the metamath-zero theorem prover.
 --

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/yioneko/vtsls
+-- https://github.com/yioneko/vtsls
 --
 -- `vtsls` can be installed with npm:
 -- ```sh

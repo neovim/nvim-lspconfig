@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/svenstaro/glsl-language-server
+-- https://github.com/svenstaro/glsl-language-server
 --
 -- Language server implementation for GLSL
 --

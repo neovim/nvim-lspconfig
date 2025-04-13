@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://mlir.llvm.org/docs/Tools/MLIRLSP/#mlir-lsp-language-server--mlir-lsp-server=
+-- https://mlir.llvm.org/docs/Tools/MLIRLSP/#mlir-lsp-language-server--mlir-lsp-server=
 --
 -- The Language Server for the LLVM MLIR language
 --

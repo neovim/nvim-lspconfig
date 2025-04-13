@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://pypi.org/project/yls-yara/
+-- https://pypi.org/project/yls-yara/
 --
 -- An YLS plugin adding YARA linting capabilities.
 --

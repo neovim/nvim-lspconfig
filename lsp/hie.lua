@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/haskell/haskell-ide-engine
+-- https://github.com/haskell/haskell-ide-engine
 --
 -- the following init_options are supported (see https://github.com/haskell/haskell-ide-engine#configuration):
 -- ```lua

@@ -1,6 +1,6 @@
 ---@brief
 ---
----https://github.com/phil294/coffeesense
+-- https://github.com/phil294/coffeesense
 --
 -- CoffeeSense Language Server
 -- `coffeesense-language-server` can be installed via `npm`:
