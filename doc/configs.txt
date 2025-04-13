@@ -3475,6 +3475,53 @@ Default config:
 
 
 ------------------------------------------------------------------------------
+gh_actions_ls
+
+https://github.com/lttb/gh-actions-language-server
+
+Language server for GitHub Actions.
+
+The projects [forgejo](https://forgejo.org/) and [gitea](https://about.gitea.com/)
+design their actions to be as compatible to github as possible
+with only [a few differences](https://docs.gitea.com/usage/actions/comparison#unsupported-workflows-syntax) between the systems.
+The `gh_actions_ls` is therefore enabled for those `yaml` files as well.
+
+The `gh-actions-language-server` can be installed via `npm`:
+
+```sh
+npm install -g gh-actions-language-server
+```
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('gh_actions_ls')
+
+
+Default config:
+- `capabilities` :
+  ```lua
+  {
+    workspace = {
+      didChangeWorkspaceFolders = {
+        dynamicRegistration = true
+      }
+    }
+  }
+  ```
+- `cmd` :
+  ```lua
+  { "gh-actions-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "yaml" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".github/workflows", ".forgejo/workflows", ".gitea/workflows" }
+  ```
+
+
+------------------------------------------------------------------------------
 ghcide
 
 https://github.com/digital-asset/ghcide

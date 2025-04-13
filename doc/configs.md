@@ -102,6 +102,7 @@ Nvim by running `:help lspconfig-all`.
 - [futhark_lsp](#futhark_lsp)
 - [gdscript](#gdscript)
 - [gdshader_lsp](#gdshader_lsp)
+- [gh_actions_ls](#gh_actions_ls)
 - [ghcide](#ghcide)
 - [ghdl_ls](#ghdl_ls)
 - [ginko_ls](#ginko_ls)
@@ -3895,6 +3896,54 @@ Default config:
 - `root_markers` :
   ```lua
   { "project.godot" }
+  ```
+
+---
+
+## gh_actions_ls
+
+https://github.com/lttb/gh-actions-language-server
+
+Language server for GitHub Actions.
+
+The projects [forgejo](https://forgejo.org/) and [gitea](https://about.gitea.com/)
+design their actions to be as compatible to github as possible
+with only [a few differences](https://docs.gitea.com/usage/actions/comparison#unsupported-workflows-syntax) between the systems.
+The `gh_actions_ls` is therefore enabled for those `yaml` files as well.
+
+The `gh-actions-language-server` can be installed via `npm`:
+
+```sh
+npm install -g gh-actions-language-server
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.gh_actions_ls.setup{}
+```
+
+Default config:
+- `capabilities` :
+  ```lua
+  {
+    workspace = {
+      didChangeWorkspaceFolders = {
+        dynamicRegistration = true
+      }
+    }
+  }
+  ```
+- `cmd` :
+  ```lua
+  { "gh-actions-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "yaml" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".github/workflows", ".forgejo/workflows", ".gitea/workflows" }
   ```
 
 ---
