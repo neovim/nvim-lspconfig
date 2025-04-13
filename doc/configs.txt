@@ -1021,6 +1021,36 @@ Default config:
 
 
 ------------------------------------------------------------------------------
+biome
+
+https://biomejs.dev
+
+Toolchain of the web. [Successor of Rome](https://biomejs.dev/blog/annoucing-biome).
+
+```sh
+npm install [-g] @biomejs/biome
+```
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('biome')
+
+
+Default config:
+- `cmd` :
+  ```lua
+  { "biome", "lsp-proxy" }
+  ```
+- `filetypes` :
+  ```lua
+  { "astro", "css", "graphql", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
+  ```
+- `root_markers` :
+  ```lua
+  { "biome.json", "biome.jsonc" }
+  ```
+
+
+------------------------------------------------------------------------------
 bitbake_language_server
 
 🛠️ bitbake language server
