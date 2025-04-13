@@ -3,17 +3,15 @@
 nvim-lspconfig is a "data only" repo, providing basic, default [Nvim LSP client](https://neovim.io/doc/user/lsp.html)
 configurations for various LSP servers.
 
-View the [documentation for all configs](doc/configs.md) or `:help lspconfig-all` from Nvim.
+View [all configs](doc/configs.md) or `:help lspconfig-all` from Nvim.
 
 ## Important ⚠️
 
-* If you found a bug in the Nvim LSP functionality (`:help lsp`), [report it to Neovim core](https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&template=lsp_bug_report.yml).
+* These configs are **best-effort and supported by the community (you).** See [contributions](#contributions).
+* If you found a bug in Nvim LSP (`:help lsp`), [report it to Neovim core](https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&template=lsp_bug_report.yml).
     * **Do not** report it here. Only configuration data lives here.
-* These configs are **best-effort and supported by the community.** See [contributions](#contributions).
-* **Note:** This repo only provides *configurations*. Its programmatic API is deprecated and should not be used externally.
-    * [Work is planned](https://github.com/neovim/neovim/issues/28479) to selectively upstream the
-      "framework" parts (*not* the configs) of nvim-lspconfig, to Nvim core, and deprecate them in
-      nvim-lspconfig.
+* This repo only provides *configurations*. Its programmatic API is deprecated and must not be used externally.
+    * The "framework" parts (*not* the configs) of nvim-lspconfig [will be upstreamed to Nvim core](https://github.com/neovim/neovim/issues/28479).
 
 ## Install
 
@@ -33,17 +31,15 @@ View the [documentation for all configs](doc/configs.md) or `:help lspconfig-all
    npm i -g pyright
    ```
 2. Add the language server setup to your init.lua.
-   ```lua
-   -- neovim < 0.11
-   require'lspconfig'.pyright.setup{}
-   -- neovim >= 0.11
-   vim.lsp.enable('pyright')
-   ```
-
-    > For more information see [`vim.lsp` support](#vim.lsp-support).
-
-3. Ensure your project/workspace contains a root marker which matches the server requirements
-   specified in `:help lspconfig-all`.
+    - Nvim 0.11+ (see [vim.lsp.config](#vim.lsp.config))
+      ```lua
+      vim.lsp.enable('pyright')
+      ```
+    - Nvim 0.10 (legacy, **not supported**)
+      ```lua
+      require'lspconfig'.pyright.setup{}
+      ```
+3. Ensure your project/workspace contains a root marker as specified in `:help lspconfig-all`.
 4. Open a code file in Nvim. LSP will attach and provide diagnostics.
    ```
    nvim main.py
@@ -51,7 +47,7 @@ View the [documentation for all configs](doc/configs.md) or `:help lspconfig-all
 5. Run `:checkhealth lsp` to see the status or to troubleshoot.
 
 Read `:help lspconfig` for details. Read `:help lspconfig-all` for the full list of server-specific details.
-For servers not on your `$PATH` (e.g., `jdtls`, `elixirls`), you must manually set the `cmd` parameter, see [configuration](#Configuration).
+For servers not on your `$PATH` (e.g., `jdtls`, `elixirls`), you must manually set the `cmd` parameter, see [vim.lsp.config](#vim.lsp.config).
 
 ## Configuration
 
@@ -85,35 +81,31 @@ See [`:h lsp-buf`][lsp-buf] for details on other LSP functions.
 [LspDetach]: https://neovim.io/doc/user/lsp.html#LspDetach
 [lsp-buf]: https://neovim.io/doc/user/lsp.html#lsp-buf
 
-Additional configuration options can be provided for each LSP server:
+Extra settings can be specified for each LSP server:
 
-- `neovim < 0.11`
+- Nvim 0.11+ (see [vim.lsp.config](#vim.lsp.config))
+  ```lua
+  vim.lsp.config('rust_analyzer', {
+    -- Server-specific settings. See `:help lsp-quickstart`
+    settings = {
+      ['rust-analyzer'] = {},
+    },
+  })
+  ```
+- Nvim 0.10 (legacy, **not supported**)
+  ```lua
+  local lspconfig = require('lspconfig')
+  lspconfig.rust_analyzer.setup {
+    -- Server-specific settings. See `:help lspconfig-setup`
+    settings = {
+      ['rust-analyzer'] = {},
+    },
+  }
+  ```
 
-    ```lua
-    local lspconfig = require('lspconfig')
-    lspconfig.rust_analyzer.setup {
-      -- Server-specific settings. See `:help lspconfig-setup`
-      settings = {
-        ['rust-analyzer'] = {},
-      },
-    }
-    ```
+## vim.lsp.config
 
-- `neovim >= 0.11`
-
-    ```lua
-    vim.lsp.config('rust_analyzer', {
-      -- Server-specific settings. See `:help lspconfig-setup`
-      settings = {
-        ['rust-analyzer'] = {},
-      },
-    })
-    ```
-    > For more information see [`vim.lsp` support](#vim.lsp-support).
-
-## `vim.lsp` support
-
-`nvim-lspconfig` includes configurations compatible with `vim.lsp` under [`lsp/`](./lsp/), so servers can be enabled with:
+`nvim-lspconfig` includes configurations compatible with `vim.lsp` under [`lsp/`](./lsp/), so servers can be enabled (auto-activated when a filetype is opened) with:
 
 ```lua
 vim.lsp.enable('pyright')
@@ -122,13 +114,15 @@ vim.lsp.enable('pyright')
 and configured with:
 
 ```lua
-vim.lsp.config('pyright', {})
+vim.lsp.config('pyright', {
+  cmd = { … },
+})
 ```
 
 which extends the configuration under [`lsp/`](./lsp/). For further information see [`:help lsp-config`][lsp-config].
 
 > [!WARNING]  
-> Some servers are currently NOT supported and should be configured the old way, see `:help lspconfig-setup`
+> Some servers are [currently missing](https://github.com/neovim/nvim-lspconfig/issues/3705).
 
 ## Troubleshooting
 
@@ -178,7 +172,7 @@ a new configuration for it helps others, especially if the server requires speci
       [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lsp/texlab.lua).
 3. Ask questions on [GitHub Discussions](https://github.com/neovim/neovim/discussions) or in the [Neovim Matrix room](https://app.element.io/#/room/#neovim:matrix.org).
 
-### Release process
+## Release process
 
 To publish a release:
 
