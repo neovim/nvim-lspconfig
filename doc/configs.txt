@@ -3590,8 +3590,8 @@ Default config:
 - `init_options` :
   ```lua
   {
-    cache_path = ".//.cache/gitlab-ci-ls/",
-    log_path = ".//.cache/gitlab-ci-ls//log/gitlab-ci-ls.log"
+    cache_path = "/home/runner/.cache/gitlab-ci-ls/",
+    log_path = "/home/runner/.cache/gitlab-ci-ls//log/gitlab-ci-ls.log"
   }
   ```
 - `root_dir` source (use "gF" to open): [../lsp/gitlab_ci_ls.lua:13](../lsp/gitlab_ci_ls.lua#L13)
@@ -4592,7 +4592,7 @@ Snippet to enable the language server: >lua
 Default config:
 - `cmd` :
   ```lua
-  { "jdtls", "-configuration", ".//.cache/jdtls/config", "-data", ".//.cache/jdtls/workspace" }
+  { "jdtls", "-configuration", "/home/runner/.cache/jdtls/config", "-data", "/home/runner/.cache/jdtls/workspace" }
   ```
 - `filetypes` :
   ```lua
@@ -4611,7 +4611,7 @@ Default config:
   ```lua
   {
     jvm_args = {},
-    workspace = ".//.cache/jdtls/workspace"
+    workspace = "/home/runner/.cache/jdtls/workspace"
   }
   ```
 - `root_markers` :
@@ -10522,7 +10522,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { "typos.toml", "_typos.toml", ".typos.toml" }
+  { "typos.toml", "_typos.toml", ".typos.toml", "pyproject.toml", "Cargo.toml" }
   ```
 - `settings` :
   ```lua
