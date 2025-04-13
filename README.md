@@ -172,10 +172,10 @@ If a language server is missing from [configs.md](doc/configs.md), contributing
 a new configuration for it helps others, especially if the server requires special setup. Follow these steps:
 
 1. Read [CONTRIBUTING.md](CONTRIBUTING.md).
-2. Create a new file at `lua/lspconfig/configs/SERVER_NAME.lua`.
-    - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/)
+2. Create a new file at `lsp/SERVER_NAME.lua`.
+    - Copy an [existing config](https://github.com/neovim/nvim-lspconfig/tree/master/lsp)
       to get started. Most configs are simple. For an extensive example see
-      [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/texlab.lua).
+      [texlab.lua](https://github.com/neovim/nvim-lspconfig/blob/master/lsp/texlab.lua).
 3. Ask questions on [GitHub Discussions](https://github.com/neovim/neovim/discussions) or in the [Neovim Matrix room](https://app.element.io/#/room/#neovim:matrix.org).
 
 ### Release process
