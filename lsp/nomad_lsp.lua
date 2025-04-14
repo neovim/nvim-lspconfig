@@ -1,4 +1,3 @@
-local util = require 'lspconfig.util'
 local bin_name = 'nomad-lsp'
 
 if vim.fn.has 'win32' == 1 then
@@ -25,8 +24,7 @@ end
 return {
   cmd = { bin_name },
   filetypes = { 'hcl.nomad', 'nomad' },
-  root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern '*.nomad'(fname))
+  root_markers = function(name, _)
+    return vim.glob.to_lpeg('*.nomad'):match(name) ~= nil
   end,
 }
