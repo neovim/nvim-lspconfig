@@ -22,15 +22,15 @@ return {
     '--hostPID', tostring(vim.fn.getpid()),
     'DotNet:enablePackageRestore=false',
     '--encoding', 'utf-8',
-    '--languageserver'
+    '--languageserver',
   },
   filetypes = { 'cs', 'vb' },
   root_dir = util.root_pattern('*.sln', '*.csproj', 'omnisharp.json', 'function.json'),
   init_options = {},
   capabilities = {
     workspace = {
-      workspaceFolders = false -- https://github.com/OmniSharp/omnisharp-roslyn/issues/909
-    }
+      workspaceFolders = false, -- https://github.com/OmniSharp/omnisharp-roslyn/issues/909
+    },
   },
   settings = {
     FormattingOptions = {
@@ -69,12 +69,12 @@ return {
     RenameOptions = {
       RenameInComments = nil,
       RenameOverloads = nil,
-      RenameInStrings = nil
+      RenameInStrings = nil,
     },
     Sdk = {
       -- Specifies whether to include preview versions of the .NET SDK when
       -- determining which version to use for project loading.
       IncludePrereleases = true,
     },
-  }
+  },
 }
