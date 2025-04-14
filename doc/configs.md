@@ -7835,21 +7835,20 @@ A Python 3.6+ implementation of the Language Server Protocol.
 See the [project's README](https://github.com/python-lsp/python-lsp-server) for installation instructions.
 
 Configuration options are documented [here](https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md).
-In order to configure an option, it must be translated to a nested Lua table and included in the `settings` argument to the `config('pylsp', {})` function.
+In order to configure an option, it must be translated to a nested Lua table and included in the `settings` argument to the `setup()` function.
 For example, in order to set the `pylsp.plugins.pycodestyle.ignore` option:
 ```lua
-vim.lsp.config('pylsp', {
+require'lspconfig'.pylsp.setup{
   settings = {
     pylsp = {
       plugins = {
         pycodestyle = {
-          ignore = {'W391'},
-          maxLineLength = 100
-        }
-      }
-    }
-  }
-})
+          ignore = {'W391'},  -- Blank line at end of file
+        },
+      },
+    },
+  },
+}
 ```
 
 Note: This is a community fork of `pyls`.
