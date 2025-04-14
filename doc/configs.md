@@ -3945,6 +3945,7 @@ Default config:
   ```lua
   { ".github/workflows", ".forgejo/workflows", ".gitea/workflows" }
   ```
+- `workspace_required` : `true`
 
 ---
 
