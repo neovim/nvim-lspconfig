@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
 -- https://github.com/idris-community/idris2-lsp
@@ -33,8 +31,7 @@ local util = require 'lspconfig.util'
 return {
   cmd = { 'idris2-lsp' },
   filetypes = { 'idris2' },
-  root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern '*.ipkg'(fname))
+  root_markers = function(name, _)
+    return vim.glob.to_lpeg('*.ipkg'):match(name) ~= nil
   end,
 }
