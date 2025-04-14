@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
 -- https://github.com/razzmatazz/csharp-language-server
@@ -11,9 +9,14 @@ local util = require 'lspconfig.util'
 -- The preferred way to install csharp-ls is with `dotnet tool install --global csharp-ls`.
 return {
   cmd = { 'csharp-ls' },
-  root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern '*.sln'(fname) or util.root_pattern '*.csproj'(fname))
+  root_markers = function(name, _)
+    local patterns = { '*.sln', '*.csproj' }
+    for _, pattern in ipairs(patterns) do
+      if vim.glob.to_lpeg(pattern):match(name) ~= nil then
+        return true
+      end
+    end
+    return false
   end,
   filetypes = { 'cs' },
   init_options = {
