@@ -33,13 +33,19 @@
 --- ```
 
 local host_dll_name = 'MSBuildProjectTools.LanguageServer.Host.dll'
-local util = require 'lspconfig.util'
 
 return {
   filetypes = { 'msbuild' },
   root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern('*.sln', '*.slnx', '*.*proj', '.git')(fname))
+    on_dir(vim.fs.root(bufnr, function(name, _)
+      local patterns = { '*.sln', '*.slnx', '*.*proj', '.git' }
+      for _, pattern in ipairs(patterns) do
+        if vim.glob.to_lpeg(pattern):match(name) ~= nil then
+          return true
+        end
+      end
+      return false
+    end))
   end,
   init_options = {},
   cmd = { 'dotnet', host_dll_name },
