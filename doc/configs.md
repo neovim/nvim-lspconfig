@@ -189,6 +189,7 @@ Nvim by running `:help lspconfig-all`.
 - [ocamlls](#ocamlls)
 - [ocamllsp](#ocamllsp)
 - [ols](#ols)
+- [omnisharp](#omnisharp)
 - [opencl_ls](#opencl_ls)
 - [openscad_ls](#openscad_ls)
 - [openscad_lsp](#openscad_lsp)
@@ -7032,6 +7033,67 @@ Default config:
   { "odin" }
   ```
 - `root_dir` source (use "gF" to open): [../lsp/ols.lua:8](../lsp/ols.lua#L8)
+
+---
+
+## omnisharp
+
+https://github.com/omnisharp/omnisharp-roslyn
+OmniSharp server based on Roslyn workspaces
+
+`omnisharp-roslyn` can be installed by downloading and extracting a release from [here](https://github.com/OmniSharp/omnisharp-roslyn/releases).
+OmniSharp can also be built from source by following the instructions [here](https://github.com/omnisharp/omnisharp-roslyn#downloading-omnisharp).
+
+OmniSharp requires the [dotnet-sdk](https://dotnet.microsoft.com/download) to be installed.
+
+**By default, omnisharp-roslyn doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of the unzipped run script or binary.
+
+For `go_to_definition` to work fully, extended `textDocument/definition` handler is needed, for example see [omnisharp-extended-lsp.nvim](https://github.com/Hoffs/omnisharp-extended-lsp.nvim)
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.omnisharp.setup{}
+```
+
+Default config:
+- `capabilities` :
+  ```lua
+  {
+    workspace = {
+      workspaceFolders = false
+    }
+  }
+  ```
+- `cmd` :
+  ```lua
+  { "OmniSharp", "-z", "--hostPID", "1878", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  ```
+- `filetypes` :
+  ```lua
+  { "cs", "vb" }
+  ```
+- `init_options` :
+  ```lua
+  {}
+  ```
+- `root_markers` :
+  ```lua
+  { ".sln", ".csproj", "omnisharp.json", "function.json" }
+  ```
+- `settings` :
+  ```lua
+  {
+    FormattingOptions = {
+      EnableEditorConfigSupport = true
+    },
+    MsBuild = {},
+    RenameOptions = {},
+    RoslynExtensionsOptions = {},
+    Sdk = {
+      IncludePrereleases = true
+    }
+  }
+  ```
 
 ---
 
