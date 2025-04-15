@@ -21,6 +21,5 @@ return {
     'manifests',
     '.puppet-lint.rc',
     'hiera.yaml',
-    '.git',
   },
 }

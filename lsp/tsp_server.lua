@@ -11,5 +11,5 @@
 return {
   cmd = { 'tsp-server', '--stdio' },
   filetypes = { 'typespec' },
-  root_markers = { 'tspconfig.yaml', '.git' },
+  root_markers = { 'tspconfig.yaml' },
 }

@@ -11,5 +11,5 @@
 -- After the download unzip the Contextive.LanguageServer binary and copy the file into a folder that is included in your system's PATH.
 return {
   cmd = { 'Contextive.LanguageServer' },
-  root_markers = { '.contextive', '.git' },
+  root_markers = { '.contextive' },
 }

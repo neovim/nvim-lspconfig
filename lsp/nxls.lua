@@ -11,5 +11,5 @@
 return {
   cmd = { 'nxls', '--stdio' },
   filetypes = { 'json', 'jsonc' },
-  root_markers = { 'nx.json', '.git' },
+  root_markers = { 'nx.json' },
 }

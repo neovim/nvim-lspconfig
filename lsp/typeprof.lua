@@ -6,5 +6,5 @@
 return {
   cmd = { 'typeprof', '--lsp', '--stdio' },
   filetypes = { 'ruby', 'eruby' },
-  root_markers = { 'Gemfile', '.git' },
+  root_markers = { 'Gemfile' },
 }

@@ -10,6 +10,5 @@ return {
   filetypes = { 'scheme' },
   root_markers = {
     'Akku.manifest',
-    '.git',
   },
 }

@@ -24,7 +24,7 @@ end
 return {
   cmd = { 'svelteserver', '--stdio' },
   filetypes = { 'svelte' },
-  root_markers = { 'package.json', '.git' },
+  root_markers = { 'package.json' },
   on_attach = function()
     vim.api.nvim_buf_create_user_command(
       0,

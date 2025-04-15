@@ -25,5 +25,5 @@
 -- ```
 return {
   filetypes = { 'nelua' },
-  root_markers = { 'Makefile', '.git', '*.nelua' },
+  root_markers = { 'Makefile', '*.nelua' },
 }

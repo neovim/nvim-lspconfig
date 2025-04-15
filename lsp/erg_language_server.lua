@@ -12,5 +12,5 @@
 return {
   cmd = { 'erg', '--language-server' },
   filetypes = { 'erg' },
-  root_markers = { 'package.er', '.git' },
+  root_markers = { 'package.er' },
 }

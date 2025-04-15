@@ -5,6 +5,6 @@
 -- Language Server for c3.
 return {
   cmd = { 'c3lsp' },
-  root_markers = { 'project.json', 'manifest.json', '.git' },
+  root_markers = { 'project.json', 'manifest.json' },
   filetypes = { 'c3', 'c3i' },
 }

@@ -6,5 +6,5 @@
 return {
   cmd = { 'robotframework_ls' },
   filetypes = { 'robot' },
-  root_markers = { 'robotidy.toml', 'pyproject.toml', 'conda.yaml', 'robot.yaml', '.git' },
+  root_markers = { 'robotidy.toml', 'pyproject.toml', 'conda.yaml', 'robot.yaml' },
 }

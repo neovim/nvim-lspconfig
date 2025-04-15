@@ -10,5 +10,5 @@
 -- This is because nvim-lspconfig does not make assumptions about your path.
 return {
   filetypes = { 'elixir', 'eelixir', 'heex', 'surface' },
-  root_markers = { 'mix.exs', '.git' },
+  root_markers = { 'mix.exs' },
 }

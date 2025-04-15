@@ -6,5 +6,5 @@
 return {
   cmd = { 'Swift-MesonLSP', '--lsp' },
   filetypes = { 'meson' },
-  root_markers = { 'meson.build', 'meson_options.txt', 'meson.options', '.git' },
+  root_markers = { 'meson.build', 'meson_options.txt', 'meson.options' },
 }

@@ -6,5 +6,5 @@
 return {
   cmd = { 'reason-language-server' },
   filetypes = { 'reason' },
-  root_markers = { 'bsconfig.json', '.git' },
+  root_markers = { 'bsconfig.json' },
 }

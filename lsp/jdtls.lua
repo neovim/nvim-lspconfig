@@ -120,7 +120,6 @@ return {
   filetypes = { 'java' },
   root_markers = {
     -- Multi-module projects
-    '.git',
     'build.gradle',
     'build.gradle.kts',
     -- Single-module projects

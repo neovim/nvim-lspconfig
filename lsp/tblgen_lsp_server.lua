@@ -19,5 +19,5 @@ end
 return {
   cmd = get_command(),
   filetypes = { 'tablegen' },
-  root_markers = { 'tablegen_compile_commands.yml', '.git' },
+  root_markers = { 'tablegen_compile_commands.yml' },
 }

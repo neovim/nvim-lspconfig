@@ -28,7 +28,7 @@
 return {
   cmd = { 'ts_query_ls' },
   filetypes = { 'query' },
-  root_markers = { 'queries', '.git' },
+  root_markers = { 'queries' },
   settings = {
     parser_aliases = {
       ecma = 'javascript',

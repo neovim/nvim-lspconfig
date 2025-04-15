@@ -25,7 +25,7 @@
 return {
   cmd = { 'java', '-jar', 'nextflow-language-server-all.jar' },
   filetypes = { 'nextflow' },
-  root_markers = { 'nextflow.config', '.git' },
+  root_markers = { 'nextflow.config' },
   settings = {
     nextflow = {
       files = {
