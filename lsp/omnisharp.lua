@@ -18,13 +18,15 @@ return {
   cmd = {
     'OmniSharp',
     '-z', -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
-    '--hostPID', tostring(vim.fn.getpid()),
+    '--hostPID',
+    tostring(vim.fn.getpid()),
     'DotNet:enablePackageRestore=false',
-    '--encoding', 'utf-8',
+    '--encoding',
+    'utf-8',
     '--languageserver',
   },
   filetypes = { 'cs', 'vb' },
-  root_markers = {'.sln', '.csproj', 'omnisharp.json', 'function.json'},
+  root_markers = { '.sln', '.csproj', 'omnisharp.json', 'function.json' },
   init_options = {},
   capabilities = {
     workspace = {
