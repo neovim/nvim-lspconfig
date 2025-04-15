@@ -61,8 +61,8 @@ to the legacy nvim-lspconfig interface:
 - `single_file_support` is assumed by default. Can be disabled by specifying
   `workspace_required=false` (see |vim.lsp.ClientConfig|).
 
-- `.git` is not included as a root_marker on LSPs provided by lspconfig. You
-  can enable the `.git` marker on all LSPs with: >lua
+- ".git" is not included as a `root_marker` on LSPs provided by lspconfig. You
+  can enable the ".git" marker on all LSPs with: >lua
 
   vim.lsp.config("*", {
     root_markers = { '.git' }
