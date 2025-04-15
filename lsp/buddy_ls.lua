@@ -7,5 +7,4 @@
 return {
   cmd = { 'buddy-lsp-server' },
   filetypes = { 'mlir' },
-  root_markers = { '.git' },
 }

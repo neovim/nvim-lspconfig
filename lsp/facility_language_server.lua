@@ -6,5 +6,4 @@
 return {
   cmd = { 'facility-language-server' },
   filetypes = { 'fsd' },
-  root_markers = { '.git' },
 }

@@ -10,5 +10,4 @@
 return {
   cmd = { 'yls', '-vv' },
   filetypes = { 'yar', 'yara' },
-  root_markers = { '.git' },
 }

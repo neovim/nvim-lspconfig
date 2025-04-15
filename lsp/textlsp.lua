@@ -13,7 +13,6 @@
 return {
   cmd = { 'textlsp' },
   filetypes = { 'text', 'tex', 'org' },
-  root_markers = { '.git' },
   settings = {
     textLSP = {
       analysers = {

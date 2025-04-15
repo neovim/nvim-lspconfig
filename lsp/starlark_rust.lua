@@ -10,5 +10,4 @@
 return {
   cmd = { 'starlark', '--lsp' },
   filetypes = { 'star', 'bzl', 'BUILD.bazel' },
-  root_markers = { '.git' },
 }

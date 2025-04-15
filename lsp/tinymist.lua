@@ -56,7 +56,6 @@ end
 return {
   cmd = { 'tinymist' },
   filetypes = { 'typst' },
-  root_markers = { '.git' },
   on_attach = function(_)
     for _, command in ipairs {
       'tinymist.exportSvg',

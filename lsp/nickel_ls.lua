@@ -26,5 +26,4 @@
 return {
   cmd = { 'nls' },
   filetypes = { 'ncl', 'nickel' },
-  root_markers = { '.git' },
 }

@@ -6,5 +6,4 @@
 return {
   cmd = { 'pkgbuild-language-server' },
   filetypes = { 'PKGBUILD' },
-  root_markers = { '.git' },
 }

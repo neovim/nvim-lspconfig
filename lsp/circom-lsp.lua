@@ -6,5 +6,4 @@
 return {
   cmd = { 'circom-lsp' },
   filetypes = { 'circom' },
-  root_markers = { '.git' },
 }

@@ -5,5 +5,4 @@
 return {
   cmd = { 'koka', '--language-server', '--lsstdio' },
   filetypes = { 'koka' },
-  root_markers = { '.git' },
 }

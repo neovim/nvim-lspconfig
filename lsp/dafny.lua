@@ -9,5 +9,4 @@
 return {
   cmd = { 'dafny', 'server' },
   filetypes = { 'dfy', 'dafny' },
-  root_markers = { '.git' },
 }

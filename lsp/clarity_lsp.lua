@@ -6,5 +6,4 @@
 return {
   cmd = { 'clarity-lsp' },
   filetypes = { 'clar', 'clarity' },
-  root_markers = { '.git' },
 }

@@ -48,7 +48,6 @@ end
 return {
   cmd = { bin_name },
   filetypes = { 'markdown', 'org' },
-  root_markers = { '.git' },
   init_options = {
     completion_on = true,
     show_symbols = true,

@@ -21,5 +21,4 @@
 return {
   cmd = { 'openscad-language-server' },
   filetypes = { 'openscad' },
-  root_markers = { '.git' },
 }

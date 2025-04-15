@@ -33,6 +33,5 @@
 -- ```
 return {
   filetypes = { 'bicep' },
-  root_markers = { '.git' },
   init_options = {},
 }

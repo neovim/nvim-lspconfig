@@ -33,5 +33,4 @@ end
 return {
   cmd = { 'node', full_path, '--stdio' },
   filetypes = { 'turtle', 'ttl' },
-  root_markers = { '.git' },
 }

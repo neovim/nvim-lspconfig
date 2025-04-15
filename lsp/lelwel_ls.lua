@@ -11,5 +11,4 @@
 return {
   cmd = { 'lelwel-ls' },
   filetypes = { 'llw' },
-  root_markers = { '.git' },
 }

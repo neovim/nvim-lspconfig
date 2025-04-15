@@ -8,6 +8,5 @@
 -- and available on the `PATH`.
 return {
   cmd = { 'mm0-rs', 'server' },
-  root_markers = { '.git' },
   filetypes = { 'metamath-zero' },
 }

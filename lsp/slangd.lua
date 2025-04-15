@@ -31,5 +31,4 @@ end
 return {
   cmd = { bin_name },
   filetypes = { 'hlsl', 'shaderslang' },
-  root_markers = { '.git' },
 }

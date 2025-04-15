@@ -6,5 +6,4 @@
 return {
   cmd = { 'fstar.exe', '--lsp' },
   filetypes = { 'fstar' },
-  root_markers = { '.git' },
 }

@@ -6,5 +6,4 @@
 return {
   cmd = { 'pest-language-server' },
   filetypes = { 'pest' },
-  root_markers = { '.git' },
 }
