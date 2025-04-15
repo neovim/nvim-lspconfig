@@ -13,7 +13,6 @@
 -- For `go_to_definition` to work fully, extended `textDocument/definition` handler is needed, for example see [omnisharp-extended-lsp.nvim](https://github.com/Hoffs/omnisharp-extended-lsp.nvim)
 --
 --
-local util = require 'lspconfig.util'
 
 return {
   cmd = {
@@ -25,7 +24,7 @@ return {
     '--languageserver',
   },
   filetypes = { 'cs', 'vb' },
-  root_dir = util.root_pattern('*.sln', '*.csproj', 'omnisharp.json', 'function.json'),
+  root_markers = {'.sln', '.csproj', 'omnisharp.json', 'function.json'},
   init_options = {},
   capabilities = {
     workspace = {
