@@ -28,6 +28,7 @@ Nvim by running `:help lspconfig-all`.
 - [bazelrc_lsp](#bazelrc_lsp)
 - [beancount](#beancount)
 - [bicep](#bicep)
+- [biome](#biome)
 - [bitbake_language_server](#bitbake_language_server)
 - [blueprint_ls](#blueprint_ls)
 - [bqls](#bqls)
@@ -1371,6 +1372,35 @@ Default config:
   ```lua
   { ".git" }
   ```
+
+---
+
+## biome
+
+https://biomejs.dev
+
+Toolchain of the web. [Successor of Rome](https://biomejs.dev/blog/annoucing-biome).
+
+```sh
+npm install [-g] @biomejs/biome
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.biome.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "biome", "lsp-proxy" }
+  ```
+- `filetypes` :
+  ```lua
+  { "astro", "css", "graphql", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
+  ```
+- `root_dir` source (use "gF" to open): [../lsp/biome.lua:12](../lsp/biome.lua#L12)
+- `workspace_required` : `true`
 
 ---
 
@@ -7067,7 +7097,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1844", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1869", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua
