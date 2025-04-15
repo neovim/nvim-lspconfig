@@ -268,6 +268,7 @@ Nvim by running `:help lspconfig-all`.
 - [spyglassmc_language_server](#spyglassmc_language_server)
 - [sqlls](#sqlls)
 - [sqls](#sqls)
+- [sqruff](#sqruff)
 - [standardrb](#standardrb)
 - [starlark_rust](#starlark_rust)
 - [starpls](#starpls)
@@ -7066,7 +7067,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1878", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1844", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua
@@ -9839,6 +9840,33 @@ Default config:
 - `settings` :
   ```lua
   {}
+  ```
+
+---
+
+## sqruff
+
+https://github.com/quarylabs/sqruff
+
+`sqruff` can be installed by following the instructions [here](https://github.com/quarylabs/sqruff?tab=readme-ov-file#installation)
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.sqruff.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "sqruff", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "sql" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".sqruff", ".git" }
   ```
 
 ---

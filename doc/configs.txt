@@ -6552,7 +6552,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1878", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1844", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua
@@ -9247,6 +9247,32 @@ Default config:
 - `settings` :
   ```lua
   {}
+  ```
+
+
+------------------------------------------------------------------------------
+sqruff
+
+https://github.com/quarylabs/sqruff
+
+`sqruff` can be installed by following the instructions [here](https://github.com/quarylabs/sqruff?tab=readme-ov-file#installation)
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('sqruff')
+
+
+Default config:
+- `cmd` :
+  ```lua
+  { "sqruff", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "sql" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".sqruff", ".git" }
   ```
 
 
