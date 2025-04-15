@@ -121,6 +121,13 @@ vim.lsp.config('pyright', {
 
 which extends the configuration under [`lsp/`](./lsp/). For further information see [`:help lsp-config`][lsp-config].
 
+Extending all configs is also possible, for example adding '.git' as a root_marker for all LSPs:
+```lua
+vim.lsp.config('*', {
+  root_markers = { '.git' }
+})
+```
+
 > [!WARNING]  
 > Some servers are [currently missing](https://github.com/neovim/nvim-lspconfig/issues/3705).
 
