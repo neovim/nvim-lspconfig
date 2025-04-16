@@ -27,6 +27,18 @@ local lsp_get_active_clients = function(arg)
   end, clients))
 end
 
+local complete_client = function(arg)
+  return vim
+    .iter(vim.lsp.get_clients())
+    :map(function(client)
+      return client.name
+    end)
+    :filter(function(name)
+      return name:sub(1, #arg) == arg
+    end)
+    :totable()
+end
+
 ---@return vim.lsp.Client[] clients
 local get_clients_from_cmd_args = function(arg)
   local result = {}
@@ -125,7 +137,7 @@ end, {
   complete = lsp_get_active_clients,
 })
 
-api.nvim_create_user_command('LspStop', function(info)
+vim.api.nvim_create_user_command('LspStop', function(info)
   ---@type string
   local args = info.args
   local force = false
@@ -140,18 +152,25 @@ api.nvim_create_user_command('LspStop', function(info)
   if #args == 0 then
     clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
   else
-    clients = get_clients_from_cmd_args(args)
+    clients = vim
+      .iter(vim.split(args, ' '))
+      :map(function(name)
+        local client = vim.lsp.get_clients({ name = name })[1]
+        if client == nil then
+          vim.notify(("Invalid server name '%s'"):format(name))
+        end
+        return client
+      end)
+      :totable()
   end
 
   for _, client in ipairs(clients) do
-    -- Can remove diagnostic disabling when changing to client:stop(force) in nvim 0.11+
-    --- @diagnostic disable: param-type-mismatch
-    client.stop(force)
+    client:stop(force)
   end
 end, {
   desc = 'Manually stops the given language client(s)',
-  nargs = '?',
-  complete = lsp_get_active_clients,
+  nargs = '+',
+  complete = complete_client,
 })
 
 api.nvim_create_user_command('LspLog', function()
