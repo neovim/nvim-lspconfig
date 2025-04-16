@@ -337,6 +337,7 @@ Nvim by running `:help lspconfig-all`.
 - [ziggy](#ziggy)
 - [ziggy_schema](#ziggy_schema)
 - [zk](#zk)
+- [zls](#zls)
 
 ## ada_ls
 
@@ -7097,7 +7098,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1860", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1858", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua
@@ -12336,6 +12337,34 @@ Default config:
   ```lua
   { ".zk" }
   ```
+
+---
+
+## zls
+
+https://github.com/zigtools/zls
+
+Zig LSP implementation + Zig Language Server
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.zls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "zls" }
+  ```
+- `filetypes` :
+  ```lua
+  { "zig", "zir" }
+  ```
+- `root_markers` :
+  ```lua
+  { "zls.json", "build.zig", ".git" }
+  ```
+- `workspace_required` : `false`
 
 ---
 
