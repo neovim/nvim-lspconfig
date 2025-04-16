@@ -34,7 +34,7 @@ local lsp = vim.lsp
 local function fix_all(opts)
   opts = opts or {}
 
-  local bufnr = opts.bufnr or 0
+  local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
   vim.validate('bufnr', bufnr, 'number')
 
   local client = opts.client or vim.lsp.get_clients({ bufnr = bufnr, name = 'eslint' })[1]
