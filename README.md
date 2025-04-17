@@ -31,7 +31,7 @@ View [all configs](doc/configs.md) or `:help lspconfig-all` from Nvim.
    npm i -g pyright
    ```
 2. Add the language server setup to your init.lua.
-    - Nvim 0.11+ (see [vim.lsp.config](#vim.lsp.config))
+    - Nvim 0.11+ (see [vim.lsp.config](#vimlspconfig))
       ```lua
       vim.lsp.enable('pyright')
       ```

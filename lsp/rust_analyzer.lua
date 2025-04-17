@@ -58,9 +58,10 @@ return {
   filetypes = { 'rust' },
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
-    local reuse_active = is_library(fname)
-    if reuse_active then
-      return reuse_active
+    local reused_dir = is_library(fname)
+    if reused_dir then
+      on_dir(reused_dir)
+      return
     end
 
     local cargo_crate_dir = util.root_pattern 'Cargo.toml'(fname)

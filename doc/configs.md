@@ -15,6 +15,7 @@ Nvim by running `:help lspconfig-all`.
 - [arduino_language_server](#arduino_language_server)
 - [asm_lsp](#asm_lsp)
 - [ast_grep](#ast_grep)
+- [astro](#astro)
 - [atlas](#atlas)
 - [autohotkey_lsp](#autohotkey_lsp)
 - [autotools_ls](#autotools_ls)
@@ -326,6 +327,7 @@ Nvim by running `:help lspconfig-all`.
 - [vimls](#vimls)
 - [visualforce_ls](#visualforce_ls)
 - [vls](#vls)
+- [volar](#volar)
 - [vscoqtop](#vscoqtop)
 - [vtsls](#vtsls)
 - [vuels](#vuels)
@@ -337,6 +339,7 @@ Nvim by running `:help lspconfig-all`.
 - [ziggy](#ziggy)
 - [ziggy_schema](#ziggy_schema)
 - [zk](#zk)
+- [zls](#zls)
 
 ## ada_ls
 
@@ -786,6 +789,43 @@ Default config:
 - `root_markers` :
   ```lua
   { "sgconfig.yaml", "sgconfig.yml" }
+  ```
+
+---
+
+## astro
+
+https://github.com/withastro/language-tools/tree/main/packages/language-server
+
+ `astro-ls` can be installed via `npm`:
+ ```sh
+ npm install -g @astrojs/language-server
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.astro.setup{}
+```
+
+Default config:
+- `before_init` source (use "gF" to open): [../lsp/astro.lua:15](../lsp/astro.lua#L15)
+- `cmd` :
+  ```lua
+  { "astro-ls", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "astro" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    typescript = {}
+  }
+  ```
+- `root_markers` :
+  ```lua
+  { "package.json", "tsconfig.json", "jsconfig.json", ".git" }
   ```
 
 ---
@@ -7097,7 +7137,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1860", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1853", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua
@@ -11917,6 +11957,111 @@ Default config:
 
 ---
 
+## volar
+
+https://github.com/vuejs/language-tools/tree/master/packages/language-server
+
+Volar language server for Vue
+
+Volar can be installed via npm:
+```sh
+npm install -g @vue/language-server
+```
+
+Volar by default supports Vue 3 projects.
+For Vue 2 projects, [additional configuration](https://github.com/vuejs/language-tools/blob/master/extensions/vscode/README.md?plain=1#L19) are required.
+
+**Hybrid Mode (by default)**
+
+In this mode, the Vue Language Server exclusively manages the CSS/HTML sections.
+You need the `ts_ls` server with the `@vue/typescript-plugin` plugin to support TypeScript in `.vue` files.
+See `ts_ls` section for more information
+
+**No Hybrid Mode**
+
+Volar will run embedded `ts_ls` therefore there is no need to run it separately.
+```lua
+local lspconfig = require('lspconfig')
+
+lspconfig.volar.setup {
+  -- add filetypes for typescript, javascript and vue
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+  init_options = {
+    vue = {
+      -- disable hybrid mode
+      hybridMode = false,
+    },
+  },
+}
+-- you must remove ts_ls setup
+-- lspconfig.ts_ls.setup {}
+```
+
+**Overriding the default TypeScript Server used by Volar**
+
+The default config looks for TypeScript in the local `node_modules`. This can lead to issues
+e.g. when working on a [monorepo](https://monorepo.tools/). The alternatives are:
+
+- use a global TypeScript Server installation
+```lua
+require'lspconfig'.volar.setup {
+  init_options = {
+    typescript = {
+      -- replace with your global TypeScript library path
+      tsdk = '/path/to/node_modules/typescript/lib'
+    }
+  }
+}
+```
+
+- use a local server and fall back to a global TypeScript Server installation
+```lua
+require'lspconfig'.volar.setup {
+  init_options = {
+    typescript = {
+      -- replace with your global TypeScript library path
+      tsdk = '/path/to/node_modules/typescript/lib'
+    }
+  },
+  on_new_config = function(new_config, new_root_dir)
+    local lib_path = vim.fs.find('node_modules/typescript/lib', { path = new_root_dir, upward = true })[1]
+    if lib_path then
+      new_config.init_options.typescript.tsdk = lib_path
+    end
+  end
+}
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.volar.setup{}
+```
+
+Default config:
+- `before_init` source (use "gF" to open): [../lsp/volar.lua:87](../lsp/volar.lua#L87)
+- `cmd` :
+  ```lua
+  { "vue-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "vue" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    typescript = {
+      tsdk = ""
+    }
+  }
+  ```
+- `root_markers` :
+  ```lua
+  { "package.json" }
+  ```
+
+---
+
 ## vscoqtop
 
 https://github.com/coq-community/vscoq
@@ -12336,6 +12481,34 @@ Default config:
   ```lua
   { ".zk" }
   ```
+
+---
+
+## zls
+
+https://github.com/zigtools/zls
+
+Zig LSP implementation + Zig Language Server
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.zls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "zls" }
+  ```
+- `filetypes` :
+  ```lua
+  { "zig", "zir" }
+  ```
+- `root_markers` :
+  ```lua
+  { "zls.json", "build.zig", ".git" }
+  ```
+- `workspace_required` : `false`
 
 ---
 
