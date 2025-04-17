@@ -15,6 +15,7 @@ Nvim by running `:help lspconfig-all`.
 - [arduino_language_server](#arduino_language_server)
 - [asm_lsp](#asm_lsp)
 - [ast_grep](#ast_grep)
+- [astro](#astro)
 - [atlas](#atlas)
 - [autohotkey_lsp](#autohotkey_lsp)
 - [autotools_ls](#autotools_ls)
@@ -787,6 +788,43 @@ Default config:
 - `root_markers` :
   ```lua
   { "sgconfig.yaml", "sgconfig.yml" }
+  ```
+
+---
+
+## astro
+
+https://github.com/withastro/language-tools/tree/main/packages/language-server
+
+ `astro-ls` can be installed via `npm`:
+ ```sh
+ npm install -g @astrojs/language-server
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.astro.setup{}
+```
+
+Default config:
+- `before_init` source (use "gF" to open): [../lsp/astro.lua:15](../lsp/astro.lua#L15)
+- `cmd` :
+  ```lua
+  { "astro-ls", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "astro" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    typescript = {}
+  }
+  ```
+- `root_markers` :
+  ```lua
+  { "package.json", "tsconfig.json", "jsconfig.json", ".git" }
   ```
 
 ---
@@ -7098,7 +7136,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1894", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1864", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua

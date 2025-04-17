@@ -449,6 +449,42 @@ Default config:
 
 
 ------------------------------------------------------------------------------
+astro
+
+https://github.com/withastro/language-tools/tree/main/packages/language-server
+
+ `astro-ls` can be installed via `npm`:
+ ```sh
+ npm install -g @astrojs/language-server
+```
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('astro')
+
+
+Default config:
+- `before_init` source (use "gF" to open): [../lsp/astro.lua:15](../lsp/astro.lua#L15)
+- `cmd` :
+  ```lua
+  { "astro-ls", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "astro" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    typescript = {}
+  }
+  ```
+- `root_markers` :
+  ```lua
+  { "package.json", "tsconfig.json", "jsconfig.json", ".git" }
+  ```
+
+
+------------------------------------------------------------------------------
 atlas
 
 https://github.com/ariga/atlas
@@ -6580,7 +6616,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1894", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1864", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua
