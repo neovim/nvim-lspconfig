@@ -1,8 +1,8 @@
 ---@brief
 ---
--- https://github.com/elbywan/crystalline
---
--- Crystal language server.
+--- https://github.com/elbywan/crystalline
+---
+--- Crystal language server.
 return {
   cmd = { 'crystalline' },
   filetypes = { 'crystal' },

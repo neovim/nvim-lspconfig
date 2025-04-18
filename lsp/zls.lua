@@ -1,7 +1,7 @@
 ---@brief
--- https://github.com/zigtools/zls
---
--- Zig LSP implementation + Zig Language Server
+--- https://github.com/zigtools/zls
+---
+--- Zig LSP implementation + Zig Language Server
 
 return {
   cmd = { 'zls' },

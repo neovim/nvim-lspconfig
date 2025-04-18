@@ -1,8 +1,8 @@
 ---@brief
 ---
--- https://github.com/robocorp/robotframework-lsp
---
--- Language Server Protocol implementation for Robot Framework.
+--- https://github.com/robocorp/robotframework-lsp
+---
+--- Language Server Protocol implementation for Robot Framework.
 return {
   cmd = { 'robotframework_ls' },
   filetypes = { 'robot' },

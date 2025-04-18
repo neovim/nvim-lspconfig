@@ -1,14 +1,15 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
--- https://github.com/nim-lang/langserver
---
---
--- `nim-langserver` can be installed via the `nimble` package manager:
--- ```sh
--- nimble install nimlangserver
--- ```
+--- https://github.com/nim-lang/langserver
+---
+---
+--- `nim-langserver` can be installed via the `nimble` package manager:
+--- ```sh
+--- nimble install nimlangserver
+--- ```
+
+local util = require 'lspconfig.util'
+
 return {
   cmd = { 'nimlangserver' },
   filetypes = { 'nim' },

@@ -1,8 +1,9 @@
 ---@brief
 ---
--- https://github.com/glehmann/earthlyls
---
--- A fast language server for earthly.
+--- https://github.com/glehmann/earthlyls
+---
+--- A fast language server for earthly.
+
 return {
   cmd = { 'earthlyls' },
   filetypes = { 'earthfile' },

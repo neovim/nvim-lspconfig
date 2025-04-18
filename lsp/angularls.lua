@@ -1,7 +1,8 @@
 -- Angular requires a node_modules directory to probe for @angular/language-service and typescript
 -- in order to use your projects configured versions.
 local root_dir = vim.fn.getcwd()
-local project_root = vim.fs.dirname(vim.fs.find('node_modules', { path = root_dir, upward = true })[1])
+local node_modules_dir = vim.fs.find('node_modules', { path = root_dir, upward = true })[1]
+local project_root = node_modules_dir and vim.fs.dirname(node_modules_dir) or '?'
 
 local function get_probe_dir()
   return project_root and (project_root .. '/node_modules') or ''
@@ -40,7 +41,8 @@ local default_angular_core_version = get_angular_core_version()
 --       - bin
 --         - ngserver
 --   - typescript
-local ngserver_path = vim.fs.dirname(vim.uv.fs_realpath(vim.fn.exepath('ngserver')))
+local ngserver_exe = vim.fn.exepath('ngserver')
+local ngserver_path = #(ngserver_exe or '') > 0 and vim.fs.dirname(vim.uv.fs_realpath(ngserver_exe)) or '?'
 local extension_path = vim.fs.normalize(vim.fs.joinpath(ngserver_path, '../../../'))
 
 -- angularls will get module by `require.resolve(PROBE_PATH, MODULE_NAME)` of nodejs
@@ -54,22 +56,22 @@ local ng_probe_dirs = vim
 
 ---@brief
 ---
--- https://github.com/angular/vscode-ng-language-service
--- `angular-language-server` can be installed via npm `npm install -g @angular/language-server`.
---
--- Note, that if you override the default `cmd`, you must also update `on_new_config` to set `new_config.cmd` during startup.
---
--- ```lua
--- local project_library_path = "/path/to/project/lib"
--- local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
---
--- require'lspconfig'.angularls.setup{
---   cmd = cmd,
---   on_new_config = function(new_config,new_root_dir)
---     new_config.cmd = cmd
---   end,
--- }
--- ```
+--- https://github.com/angular/vscode-ng-language-service
+--- `angular-language-server` can be installed via npm `npm install -g @angular/language-server`.
+---
+--- Note, that if you override the default `cmd`, you must also update `on_new_config` to set `new_config.cmd` during startup.
+---
+--- ```lua
+--- local project_library_path = "/path/to/project/lib"
+--- local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
+---
+--- require'lspconfig'.angularls.setup{
+---   cmd = cmd,
+---   on_new_config = function(new_config,new_root_dir)
+---     new_config.cmd = cmd
+---   end,
+--- }
+--- ```
 
 return {
   cmd = {

@@ -1,3 +1,20 @@
+---@brief
+---
+--- https://github.com/iamcco/ds-pinyin-lsp
+--- Dead simple Pinyin language server for input Chinese without IME(input method).
+--- To install, download the latest [release](https://github.com/iamcco/ds-pinyin-lsp/releases) and ensure `ds-pinyin-lsp` is on your path.
+--- And make ensure the database file `dict.db3` is also downloaded. And put the path to `dict.dbs` in the following code.
+---
+--- ```lua
+---
+--- vim.lsp.config('ds_pinyin_lsp', {
+---     init_options = {
+---         db_path = "your_path_to_database"
+---     }
+--- })
+---
+--- ```
+
 local util = require 'lspconfig.util'
 
 local bin_name = 'ds-pinyin-lsp'
@@ -29,22 +46,6 @@ local function ds_pinyin_lsp_on(bufnr)
   end
 end
 
----@brief
----
--- https://github.com/iamcco/ds-pinyin-lsp
--- Dead simple Pinyin language server for input Chinese without IME(input method).
--- To install, download the latest [release](https://github.com/iamcco/ds-pinyin-lsp/releases) and ensure `ds-pinyin-lsp` is on your path.
--- And make ensure the database file `dict.db3` is also downloaded. And put the path to `dict.dbs` in the following code.
---
--- ```lua
---
--- vim.lsp.config('ds_pinyin_lsp', {
---     init_options = {
---         db_path = "your_path_to_database"
---     }
--- })
---
--- ```
 return {
   cmd = { bin_name },
   filetypes = { 'markdown', 'org' },

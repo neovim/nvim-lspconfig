@@ -1,15 +1,16 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
--- https://github.com/kitagry/regols
---
--- OPA Rego language server.
---
--- `regols` can be installed by running:
--- ```sh
--- go install github.com/kitagry/regols@latest
--- ```
+--- https://github.com/kitagry/regols
+---
+--- OPA Rego language server.
+---
+--- `regols` can be installed by running:
+--- ```sh
+--- go install github.com/kitagry/regols@latest
+--- ```
+
+local util = require 'lspconfig.util'
+
 return {
   cmd = { 'regols' },
   filetypes = { 'rego' },

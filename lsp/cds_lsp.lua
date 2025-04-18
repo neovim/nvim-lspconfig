@@ -1,12 +1,12 @@
 ---@brief
 ---
--- https://cap.cloud.sap/docs/
---
--- `cds-lsp` can be installed via `npm`:
---
--- ```sh
--- npm i -g @sap/cds-lsp
--- ```
+--- https://cap.cloud.sap/docs/
+---
+--- `cds-lsp` can be installed via `npm`:
+---
+--- ```sh
+--- npm i -g @sap/cds-lsp
+--- ```
 return {
   cmd = { 'cds-lsp', '--stdio' },
   filetypes = { 'cds' },

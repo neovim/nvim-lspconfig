@@ -1,8 +1,8 @@
 ---@brief
 ---
--- https://github.com/jamesnvc/lsp_server
---
--- Language Server Protocol server for SWI-Prolog
+--- https://github.com/jamesnvc/lsp_server
+---
+--- Language Server Protocol server for SWI-Prolog
 return {
   cmd = {
     'swipl',

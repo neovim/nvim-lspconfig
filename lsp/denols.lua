@@ -1,3 +1,18 @@
+---@brief
+---
+--- https://github.com/denoland/deno
+---
+--- Deno's built-in language server
+---
+--- To appropriately highlight codefences returned from denols, you will need to augment vim.g.markdown_fenced languages
+---  in your init.lua. Example:
+---
+--- ```lua
+--- vim.g.markdown_fenced_languages = {
+---   "ts=typescript"
+--- }
+--- ```
+
 local lsp = vim.lsp
 
 local function buf_cache(bufnr, client)
@@ -61,20 +76,6 @@ local function denols_handler(err, result, ctx, config)
   lsp.handlers[ctx.method](err, result, ctx, config)
 end
 
----@brief
----
--- https://github.com/denoland/deno
---
--- Deno's built-in language server
---
--- To appropriately highlight codefences returned from denols, you will need to augment vim.g.markdown_fenced languages
---  in your init.lua. Example:
---
--- ```lua
--- vim.g.markdown_fenced_languages = {
---   "ts=typescript"
--- }
--- ```
 return {
   cmd = { 'deno', 'lsp' },
   cmd_env = { NO_COLOR = true },

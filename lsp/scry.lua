@@ -1,8 +1,8 @@
 ---@brief
 ---
--- https://github.com/crystal-lang-tools/scry
---
--- Crystal language server.
+--- https://github.com/crystal-lang-tools/scry
+---
+--- Crystal language server.
 return {
   cmd = { 'scry' },
   filetypes = { 'crystal' },

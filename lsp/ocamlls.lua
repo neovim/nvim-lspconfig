@@ -1,13 +1,14 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
--- https://github.com/ocaml-lsp/ocaml-language-server
---
--- `ocaml-language-server` can be installed via `npm`
--- ```sh
--- npm install -g ocaml-language-server
--- ```
+--- https://github.com/ocaml-lsp/ocaml-language-server
+---
+--- `ocaml-language-server` can be installed via `npm`
+--- ```sh
+--- npm install -g ocaml-language-server
+--- ```
+
+local util = require 'lspconfig.util'
+
 return {
   cmd = { 'ocaml-language-server', '--stdio' },
   filetypes = { 'ocaml', 'reason' },

@@ -1,10 +1,10 @@
 ---@brief
 ---
--- https://bzl.io/
---
--- https://docs.stack.build/docs/cli/installation
---
--- https://docs.stack.build/docs/vscode/starlark-language-server
+--- https://bzl.io/
+---
+--- https://docs.stack.build/docs/cli/installation
+---
+--- https://docs.stack.build/docs/vscode/starlark-language-server
 return {
   cmd = { 'bzl', 'lsp', 'serve' },
   filetypes = { 'bzl' },

@@ -1,11 +1,11 @@
 ---@brief
 ---
--- https://gitlab.gnome.org/jwestman/blueprint-compiler
---
--- `blueprint-compiler` can be installed via your system package manager.
---
--- Language server for the blueprint markup language, written in python and part
--- of the blueprint-compiler.
+--- https://gitlab.gnome.org/jwestman/blueprint-compiler
+---
+--- `blueprint-compiler` can be installed via your system package manager.
+---
+--- Language server for the blueprint markup language, written in python and part
+--- of the blueprint-compiler.
 return {
   cmd = { 'blueprint-compiler', 'lsp' },
   cmd_env = {

@@ -1,6 +1,6 @@
 ---@brief
 ---
--- 🛠️ bitbake language server
+--- 🛠️ bitbake language server
 return {
   cmd = { 'bitbake-language-server' },
   filetypes = { 'bitbake' },
