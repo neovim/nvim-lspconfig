@@ -1,8 +1,8 @@
 ---@brief
 ---
--- https://github.com/JCWasmx86/Swift-MesonLSP
---
--- Meson language server written in Swift
+--- https://github.com/JCWasmx86/Swift-MesonLSP
+---
+--- Meson language server written in Swift
 return {
   cmd = { 'Swift-MesonLSP', '--lsp' },
   filetypes = { 'meson' },

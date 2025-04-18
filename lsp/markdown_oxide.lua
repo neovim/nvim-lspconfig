@@ -1,13 +1,13 @@
 ---@brief
 ---
--- https://github.com/Feel-ix-343/markdown-oxide
---
--- Editor Agnostic PKM: you bring the text editor and we
--- bring the PKM.
---
--- Inspired by and compatible with Obsidian.
---
--- Check the readme to see how to properly setup.
+--- https://github.com/Feel-ix-343/markdown-oxide
+---
+--- Editor Agnostic PKM: you bring the text editor and we
+--- bring the PKM.
+---
+--- Inspired by and compatible with Obsidian.
+---
+--- Check the readme to see how to properly setup.
 return {
   root_markers = { '.git', '.obsidian', '.moxide.toml' },
   filetypes = { 'markdown' },

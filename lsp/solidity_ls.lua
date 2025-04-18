@@ -1,14 +1,14 @@
 ---@brief
 ---
--- https://github.com/juanfranblanco/vscode-solidity
---
--- `vscode-solidity-server` can be installed via `npm`:
---
--- ```sh
--- npm install -g vscode-solidity-server
--- ```
---
--- `vscode-solidity-server` is a language server for the Solidity language ported from the VSCode "solidity" extension.
+--- https://github.com/juanfranblanco/vscode-solidity
+---
+--- `vscode-solidity-server` can be installed via `npm`:
+---
+--- ```sh
+--- npm install -g vscode-solidity-server
+--- ```
+---
+--- `vscode-solidity-server` is a language server for the Solidity language ported from the VSCode "solidity" extension.
 return {
   cmd = { 'vscode-solidity-server', '--stdio' },
   filetypes = { 'solidity' },

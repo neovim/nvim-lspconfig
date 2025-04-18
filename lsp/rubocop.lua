@@ -1,6 +1,6 @@
 ---@brief
 ---
--- https://github.com/rubocop/rubocop
+--- https://github.com/rubocop/rubocop
 return {
   cmd = { 'rubocop', '--lsp' },
   filetypes = { 'ruby' },

@@ -1,8 +1,8 @@
 ---@brief
 ---
--- https://robotcode.io
---
--- RobotCode - Language Server Protocol implementation for Robot Framework.
+--- https://robotcode.io
+---
+--- RobotCode - Language Server Protocol implementation for Robot Framework.
 return {
   cmd = { 'robotcode', 'language-server' },
   filetypes = { 'robot', 'resource' },

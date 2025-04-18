@@ -1,13 +1,13 @@
 ---@brief
 ---
--- https://pypi.org/project/anakin-language-server/
---
--- `anakin-language-server` is yet another Jedi Python language server.
---
--- Available options:
---
--- * Initialization: https://github.com/muffinmad/anakin-language-server#initialization-option
--- * Configuration: https://github.com/muffinmad/anakin-language-server#configuration-options
+--- https://pypi.org/project/anakin-language-server/
+---
+--- `anakin-language-server` is yet another Jedi Python language server.
+---
+--- Available options:
+---
+--- * Initialization: https://github.com/muffinmad/anakin-language-server#initialization-option
+--- * Configuration: https://github.com/muffinmad/anakin-language-server#configuration-options
 return {
   cmd = { 'anakinls' },
   filetypes = { 'python' },

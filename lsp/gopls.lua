@@ -1,3 +1,9 @@
+---@brief
+---
+--- https://github.com/golang/tools/tree/master/gopls
+---
+--- Google's lsp server for golang.
+
 local mod_cache = nil
 
 ---@param fname string
@@ -12,11 +18,6 @@ local function get_root(fname)
   return vim.fs.root(fname, { 'go.work', 'go.mod', '.git' })
 end
 
----@brief
----
--- https://github.com/golang/tools/tree/master/gopls
---
--- Google's lsp server for golang.
 return {
   cmd = { 'gopls' },
   filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },

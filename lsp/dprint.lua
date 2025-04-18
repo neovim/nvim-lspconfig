@@ -1,8 +1,8 @@
 ---@brief
 ---
--- https://github.com/dprint/dprint
---
--- Pluggable and configurable code formatting platform written in Rust.
+--- https://github.com/dprint/dprint
+---
+--- Pluggable and configurable code formatting platform written in Rust.
 return {
   cmd = { 'dprint', 'lsp' },
   filetypes = {

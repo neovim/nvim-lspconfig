@@ -1,14 +1,14 @@
 ---@brief
 ---
--- https://github.com/sqls-server/sqls
---
--- ```lua
--- vim.lsp.config('sqls', {
---   cmd = {"path/to/command", "-config", "path/to/config.yml"};
---   ...
--- })
--- ```
--- Sqls can be installed via `go get github.com/sqls-server/sqls`. Instructions for compiling Sqls from the source can be found at [sqls-server/sqls](https://github.com/sqls-server/sqls).
+--- https://github.com/sqls-server/sqls
+---
+--- ```lua
+--- vim.lsp.config('sqls', {
+---   cmd = {"path/to/command", "-config", "path/to/config.yml"};
+---   ...
+--- })
+--- ```
+--- Sqls can be installed via `go get github.com/sqls-server/sqls`. Instructions for compiling Sqls from the source can be found at [sqls-server/sqls](https://github.com/sqls-server/sqls).
 return {
   cmd = { 'sqls' },
   filetypes = { 'sql', 'mysql' },

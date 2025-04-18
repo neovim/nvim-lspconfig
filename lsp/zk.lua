@@ -1,3 +1,9 @@
+---@brief
+---
+--- https://github.com/mickael-menu/zk
+---
+--- A plain text note-taking assistant
+
 local function find_zk_root(startpath)
   for dir in vim.fs.parents(startpath) do
     if vim.fn.isdirectory(vim.fs.joinpath(dir, '.zk')) == 1 then
@@ -6,11 +12,6 @@ local function find_zk_root(startpath)
   end
 end
 
----@brief
----
--- https://github.com/mickael-menu/zk
---
--- A plain text note-taking assistant
 return {
   cmd = { 'zk', 'lsp' },
   filetypes = { 'markdown' },

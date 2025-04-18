@@ -1,10 +1,11 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
--- https://github.com/japhib/pico8-ls
---
--- Full language support for the PICO-8 dialect of Lua.
+--- https://github.com/japhib/pico8-ls
+---
+--- Full language support for the PICO-8 dialect of Lua.
+
+local util = require 'lspconfig.util'
+
 return {
   cmd = { 'pico8-ls', '--stdio' },
   filetypes = { 'p8' },

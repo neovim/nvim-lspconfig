@@ -1,8 +1,8 @@
 ---@brief
 ---
--- https://github.com/JCWasmx86/mesonlsp
---
--- An unofficial, unendorsed language server for meson written in C++
+--- https://github.com/JCWasmx86/mesonlsp
+---
+--- An unofficial, unendorsed language server for meson written in C++
 return {
   cmd = { 'mesonlsp', '--lsp' },
   filetypes = { 'meson' },

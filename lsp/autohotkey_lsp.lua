@@ -6,9 +6,9 @@ end
 
 ---@brief
 ---
--- https://github.com/thqby/vscode-autohotkey2-lsp
---
--- AutoHotkey v2.0 LSP implementation
+--- https://github.com/thqby/vscode-autohotkey2-lsp
+---
+--- AutoHotkey v2.0 LSP implementation
 return {
   cmd = { 'autohotkey_lsp', '--stdio' },
   filetypes = { 'autohotkey' },

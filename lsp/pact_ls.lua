@@ -1,8 +1,8 @@
 ---@brief
 ---
--- https://github.com/kadena-io/pact-lsp
---
--- The Pact language server
+--- https://github.com/kadena-io/pact-lsp
+---
+--- The Pact language server
 return {
   cmd = { 'pact-lsp' },
   filetypes = { 'pact' },

@@ -1,3 +1,7 @@
+---@brief
+---
+--- https://github.com/Prince781/vala-language-server
+
 local util = require 'lspconfig.util'
 
 local meson_matcher = function(path)
@@ -21,9 +25,6 @@ local meson_matcher = function(path)
   end
 end
 
----@brief
----
--- https://github.com/Prince781/vala-language-server
 return {
   cmd = { 'vala-language-server' },
   filetypes = { 'vala', 'genie' },
