@@ -2940,6 +2940,39 @@ Default config:
 
 
 ------------------------------------------------------------------------------
+emmylua_ls
+
+https://github.com/EmmyLuaLs/emmylua-analyzer-rust
+
+Emmylua Analyzer Rust. Language Server for Lua.
+
+`emmylua_ls` can be installed using `cargo` by following the instructions[here]
+(https://github.com/EmmyLuaLs/emmylua-analyzer-rust?tab=readme-ov-file#install).
+
+The default `cmd` assumes that the `emmylua_ls` binary can be found in `$PATH`.
+It might require you to provide cargo binaries installation path in it.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('emmylua_ls')
+
+
+Default config:
+- `cmd` :
+  ```lua
+  { "emmylua_ls" }
+  ```
+- `filetypes` :
+  ```lua
+  { "lua" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".luarc.json", ".emmyrc.json", ".luacheckrc", ".git" }
+  ```
+- `workspace_required` : `false`
+
+
+------------------------------------------------------------------------------
 erg_language_server
 
 https://github.com/erg-lang/erg#flags ELS
@@ -6616,7 +6649,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1882", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1961", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua
