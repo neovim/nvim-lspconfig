@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
 -- https://github.com/haskell/haskell-language-server
@@ -16,9 +14,14 @@ local util = require 'lspconfig.util'
 return {
   cmd = { 'haskell-language-server-wrapper', '--lsp' },
   filetypes = { 'haskell', 'lhaskell' },
-  root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern('hie.yaml', 'stack.yaml', 'cabal.project', '*.cabal', 'package.yaml')(fname))
+  root_markers = function(name, _)
+    local patterns = { 'hie.yaml', 'stack.yaml', 'cabal.project', '*.cabal', 'package.yaml' }
+    for _, pattern in ipairs(patterns) do
+      if vim.glob.to_lpeg(pattern):match(name) ~= nil then
+        return true
+      end
+    end
+    return false
   end,
   settings = {
     haskell = {

@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
 -- https://github.com/genericptr/pascal-language-server
@@ -19,8 +17,13 @@ local util = require 'lspconfig.util'
 return {
   cmd = { 'pasls' },
   filetypes = { 'pascal' },
-  root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern('*.lpi', '*.lpk', '.git')(fname))
+  root_markers = function(name, _)
+    local patterns = { '*.lpi', '*.lpk', '.git' }
+    for _, pattern in ipairs(patterns) do
+      if vim.glob.to_lpeg(pattern):match(name) ~= nil then
+        return true
+      end
+    end
+    return false
   end,
 }

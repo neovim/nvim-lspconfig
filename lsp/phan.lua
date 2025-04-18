@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 local cmd = {
   'phan',
   '-m',
@@ -22,11 +20,10 @@ return {
   cmd = cmd,
   filetypes = { 'php' },
   root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
     local cwd = vim.uv.cwd()
-    local root = util.root_pattern('composer.json', '.git')(fname)
+    local root = vim.fs.root(bufnr, { 'composer.json', '.git' })
 
     -- prefer cwd if root is a descendant
-    on_dir(util.path.is_descendant(cwd, root) and cwd or root)
+    on_dir(vim.fs.relpath(cwd, root) ~= nil and cwd or root)
   end,
 }

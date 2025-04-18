@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
 -- F# Language Server
@@ -16,9 +14,14 @@ local util = require 'lspconfig.util'
 -- `autocmd BufNewFile,BufRead *.fs,*.fsx,*.fsi set filetype=fsharp`
 return {
   cmd = { 'dotnet', 'FSharpLanguageServer.dll' },
-  root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern('*.sln', '*.fsproj', '.git')(fname))
+  root_markers = function(name, _)
+    local patterns = { '*.sln', '*.fsproj', '.git' }
+    for _, pattern in ipairs(patterns) do
+      if vim.glob.to_lpeg(pattern):match(name) ~= nil then
+        return true
+      end
+    end
+    return false
   end,
   filetypes = { 'fsharp' },
   init_options = {

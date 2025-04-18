@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
 -- https://github.com/DanielGavin/ols
@@ -8,8 +6,13 @@ local util = require 'lspconfig.util'
 return {
   cmd = { 'ols' },
   filetypes = { 'odin' },
-  root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern('ols.json', '.git', '*.odin')(fname))
+  root_markers = function(name, _)
+    local patterns = { 'ols.json', '.git', '*.odin' }
+    for _, pattern in ipairs(patterns) do
+      if vim.glob.to_lpeg(pattern):match(name) ~= nil then
+        return true
+      end
+    end
+    return false
   end,
 }

@@ -1,11 +1,9 @@
-local util = require 'lspconfig.util'
-
 local function reload_workspace(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
+  vim.validate('bufnr', bufnr, 'number')
   local clients = vim.lsp.get_clients { bufnr = bufnr, name = 'rust_analyzer' }
   for _, client in ipairs(clients) do
     vim.notify 'Reloading Cargo Workspace'
-    client.request('rust-analyzer/reloadWorkspace', nil, function(err)
+    client:request('rust-analyzer/reloadWorkspace', nil, function(err)
       if err then
         error(tostring(err))
       end
@@ -24,7 +22,7 @@ local function is_library(fname)
   local toolchains = rustup_home .. '/toolchains'
 
   for _, item in ipairs { toolchains, registry, git_registry } do
-    if util.path.is_descendant(item, fname) then
+    if vim.fs.relpath(item, fname) ~= nil then
       local clients = vim.lsp.get_clients { name = 'rust_analyzer' }
       return #clients > 0 and clients[#clients].config.root_dir or nil
     end
@@ -64,14 +62,11 @@ return {
       return
     end
 
-    local cargo_crate_dir = util.root_pattern 'Cargo.toml'(fname)
+    local cargo_crate_dir = vim.fs.root(bufnr, 'Cargo.toml')
     local cargo_workspace_root
 
     if cargo_crate_dir == nil then
-      on_dir(
-        util.root_pattern 'rust-project.json'(fname)
-          or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-      )
+      on_dir(vim.fs.root(bufnr, { 'rust-project.json', '.git' }))
       return
     end
 

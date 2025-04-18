@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
 -- https://github.com/leanprover/lean-client-js/tree/master/lean-language-server
@@ -31,11 +29,6 @@ return {
       end
     end
 
-    on_dir(
-      util.root_pattern 'leanpkg.toml'(fname)
-        or util.root_pattern 'leanpkg.path'(fname)
-        or stdlib_dir
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-    )
+    on_dir(vim.fs.root(bufnr, { 'leanpkg.toml', 'leanpkg.path' }) or stdlib_dir or vim.fs.root(bufnr, '.git'))
   end,
 }

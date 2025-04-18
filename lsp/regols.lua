@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
 -- https://github.com/kitagry/regols
@@ -13,8 +11,13 @@ local util = require 'lspconfig.util'
 return {
   cmd = { 'regols' },
   filetypes = { 'rego' },
-  root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern '*.rego'(fname) or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]))
+  root_markers = function(name, _)
+    local patterns = { '*.rego', '.git' }
+    for _, pattern in ipairs(patterns) do
+      if vim.glob.to_lpeg(pattern):match(name) ~= nil then
+        return true
+      end
+    end
+    return false
   end,
 }

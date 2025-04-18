@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
 -- https://github.com/japhib/pico8-ls
@@ -8,9 +6,8 @@ local util = require 'lspconfig.util'
 return {
   cmd = { 'pico8-ls', '--stdio' },
   filetypes = { 'p8' },
-  root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern('*.p8')(fname))
+  root_markers = function(name, _)
+    return vim.glob.to_lpeg('*.p8'):match(name) ~= nil
   end,
   settings = {},
 }
