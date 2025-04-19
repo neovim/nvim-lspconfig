@@ -60,7 +60,8 @@ Nvim sets some default options and mappings when a buffer attaches to LSP (see [
 * [`'formatexpr'`][formatexpr]
     - Enables LSP formatting with [`gq`][gq].
 * `K` maps to [`vim.lsp.buf.hover()`][vim.lsp.buf.hover] in Normal mode.
-* `[d` and `]d` map to `vim.diagnostic.goto_prev()` and `vim.diagnostic.goto_next()`, respectively.
+* `[d` and `]d` map to `vim.diagnostic.jump()` with `{count=-1}` and
+  `vim.diagnostic.jump()` with `{count=1}`, respectively.
 * `<C-W>d` maps to `vim.diagnostic.open_float()`.
 
 [lsp-config]: https://neovim.io/doc/user/lsp.html#lsp-config
