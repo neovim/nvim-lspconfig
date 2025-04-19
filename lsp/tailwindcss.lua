@@ -5,8 +5,6 @@
 ---
 --- npm install -g @tailwindcss/language-server
 
-local util = require 'lspconfig.util'
-
 return {
   cmd = { 'tailwindcss-language-server', '--stdio' },
   -- filetypes copied and adjusted from tailwindcss-intellisense
@@ -104,20 +102,14 @@ return {
       config.settings.editor.tabSize = vim.lsp.util.get_effective_tabstop()
     end
   end,
-  root_dir = function(bufnr, on_dir)
-    local root_files = {
-      'tailwind.config.js',
-      'tailwind.config.cjs',
-      'tailwind.config.mjs',
-      'tailwind.config.ts',
-      'postcss.config.js',
-      'postcss.config.cjs',
-      'postcss.config.mjs',
-      'postcss.config.ts',
-    }
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    root_files = util.insert_package_json(root_files, 'tailwindcss', fname)
-    local root_dir = vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
-    on_dir(root_dir)
-  end,
+  root_markers = {
+    'tailwind.config.js',
+    'tailwind.config.cjs',
+    'tailwind.config.mjs',
+    'tailwind.config.ts',
+    'postcss.config.js',
+    'postcss.config.cjs',
+    'postcss.config.mjs',
+    'postcss.config.ts',
+  },
 }
