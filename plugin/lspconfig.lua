@@ -3,129 +3,129 @@ if vim.g.lspconfig ~= nil then
 end
 vim.g.lspconfig = 1
 
-local api, lsp = vim.api, vim.lsp
-local util = require('lspconfig.util')
-
-local completion_sort = function(items)
-  table.sort(items)
-  return items
+local complete_client = function(arg)
+  return vim
+    .iter(vim.lsp.get_clients())
+    :map(function(client)
+      return client.name
+    end)
+    :filter(function(name)
+      return name:sub(1, #arg) == arg
+    end)
+    :totable()
 end
 
-local lsp_complete_configured_servers = function(arg)
-  return completion_sort(vim.tbl_filter(function(s)
-    return s:sub(1, #arg) == arg
-  end, util.available_servers()))
-end
-
-local lsp_get_active_clients = function(arg)
-  local clients = vim.tbl_map(function(client)
-    return ('%s'):format(client.name)
-  end, util.get_managed_clients())
-
-  return completion_sort(vim.tbl_filter(function(s)
-    return s:sub(1, #arg) == arg
-  end, clients))
-end
-
----@return vim.lsp.Client[] clients
-local get_clients_from_cmd_args = function(arg)
-  local result = {}
-  local managed_clients = util.get_managed_clients()
-  local clients = {}
-  for _, client in pairs(managed_clients) do
-    clients[client.name] = client
-  end
-
-  local err_msg = ''
-  arg = arg:gsub('[%a-_]+', function(name)
-    if clients[name] then
-      return clients[name].id
-    end
-    err_msg = err_msg .. ('config "%s" not found\n'):format(name)
-    return ''
-  end)
-  for id in (arg or ''):gmatch '(%d+)' do
-    local client = lsp.get_client_by_id(assert(tonumber(id)))
-    if client == nil then
-      err_msg = err_msg .. ('client id "%s" not found\n'):format(id)
-    end
-    result[#result + 1] = client
-  end
-
-  if err_msg ~= '' then
-    vim.notify(('nvim-lspconfig:\n%s'):format(err_msg:sub(1, -2)), vim.log.levels.WARN)
-    return result
-  end
-
-  if #result == 0 then
-    return managed_clients
-  end
-  return result
+local complete_config = function(arg)
+  return vim
+    .iter(vim.tbl_keys(vim.lsp._enabled_configs))
+    :filter(function(name)
+      return name:sub(1, #arg) == arg
+    end)
+    :totable()
 end
 
 -- Called from plugin/lspconfig.vim because it requires knowing that the last
 -- script in scriptnames to be executed is lspconfig.
-api.nvim_create_user_command('LspInfo', ':checkhealth vim.lsp', { desc = 'Alias to `:checkhealth vim.lsp`' })
+vim.api.nvim_create_user_command('LspInfo', ':checkhealth vim.lsp', { desc = 'Alias to `:checkhealth vim.lsp`' })
 
-api.nvim_create_user_command('LspStart', function(info)
-  local server_name = string.len(info.args) > 0 and info.args or nil
-  if server_name then
-    local config = require('lspconfig.configs')[server_name]
-    if config then
-      config.launch()
-      return
+vim.api.nvim_create_user_command('LspStart', function(info)
+  local config = vim.lsp.config[info.args]
+  local buffers_to_attach = {}
+
+  if config == nil then
+    vim.notify(("Invalid server name '%s'"):format(info.args))
+    return
+  end
+
+  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+    local filetype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
+    if vim.tbl_contains(config.filetypes, filetype) then
+      buffers_to_attach[#buffers_to_attach + 1] = bufnr
     end
   end
 
-  local matching_configs = util.get_config_by_ft(vim.bo.filetype)
-  for _, config in ipairs(matching_configs) do
-    config.launch()
+  for _, bufnr in ipairs(buffers_to_attach) do
+    if type(config.root_dir) == 'function' then
+      ---@param root_dir string
+      config.root_dir(bufnr, function(root_dir)
+        config.root_dir = root_dir
+        vim.schedule(function()
+          vim.lsp.start(config, {
+            bufnr = bufnr,
+            reuse_client = config.reuse_client,
+            _root_markers = config.root_markers,
+          })
+        end)
+      end)
+    else
+      vim.lsp.start(config, {
+        bufnr = bufnr,
+        reuse_client = config.reuse_client,
+        _root_markers = config.root_markers,
+      })
+    end
   end
 end, {
   desc = 'Manually launches a language server',
   nargs = '?',
-  complete = lsp_complete_configured_servers,
+  complete = complete_config,
 })
 
-api.nvim_create_user_command('LspRestart', function(info)
+vim.api.nvim_create_user_command('LspRestart', function(info)
+  local clients = vim
+    .iter(info.fargs)
+    :map(function(name)
+      local client = vim.lsp.get_clients({ name = name })[1]
+      if client == nil then
+        vim.notify(("Invalid server name '%s'"):format(name))
+      end
+      return client
+    end)
+    :totable()
+
   local detach_clients = {}
-  for _, client in ipairs(get_clients_from_cmd_args(info.args)) do
-    -- Can remove diagnostic disabling when changing to client:stop() in nvim 0.11+
-    --- @diagnostic disable: missing-parameter
-    client.stop()
-    if vim.tbl_count(client.attached_buffers) > 0 then
-      detach_clients[client.name] = { client, lsp.get_buffers_by_client_id(client.id) }
-    end
+  for _, client in ipairs(clients) do
+    detach_clients[vim.lsp.config[client.name]] = vim.lsp.get_buffers_by_client_id(client.id)
+    client:stop()
   end
+
   local timer = assert(vim.uv.new_timer())
   timer:start(
     500,
-    100,
+    0,
     vim.schedule_wrap(function()
-      for client_name, tuple in pairs(detach_clients) do
-        if require('lspconfig.configs')[client_name] then
-          local client, attached_buffers = unpack(tuple)
-          if client.is_stopped() then
-            for _, buf in pairs(attached_buffers) do
-              require('lspconfig.configs')[client_name].launch(buf)
-            end
-            detach_clients[client_name] = nil
+      for config, buffers in pairs(detach_clients) do
+        for _, bufnr in ipairs(buffers) do
+          if type(config.root_dir) == 'function' then
+            ---@param root_dir string
+            config.root_dir(bufnr, function(root_dir)
+              config.root_dir = root_dir
+              vim.schedule(function()
+                vim.lsp.start(config, {
+                  bufnr = bufnr,
+                  reuse_client = config.reuse_client,
+                  _root_markers = config.root_markers,
+                })
+              end)
+            end)
+          else
+            vim.lsp.start(config, {
+              bufnr = bufnr,
+              reuse_client = config.reuse_client,
+              _root_markers = config.root_markers,
+            })
           end
         end
-      end
-
-      if next(detach_clients) == nil and not timer:is_closing() then
-        timer:close()
       end
     end)
   )
 end, {
   desc = 'Manually restart the given language client(s)',
-  nargs = '?',
-  complete = lsp_get_active_clients,
+  nargs = '*',
+  complete = complete_client,
 })
 
-api.nvim_create_user_command('LspStop', function(info)
+vim.api.nvim_create_user_command('LspStop', function(info)
   ---@type string
   local args = info.args
   local force = false
@@ -140,22 +140,29 @@ api.nvim_create_user_command('LspStop', function(info)
   if #args == 0 then
     clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
   else
-    clients = get_clients_from_cmd_args(args)
+    clients = vim
+      .iter(vim.split(args, ' '))
+      :map(function(name)
+        local client = vim.lsp.get_clients({ name = name })[1]
+        if client == nil then
+          vim.notify(("Invalid server name '%s'"):format(name))
+        end
+        return client
+      end)
+      :totable()
   end
 
   for _, client in ipairs(clients) do
-    -- Can remove diagnostic disabling when changing to client:stop(force) in nvim 0.11+
-    --- @diagnostic disable: param-type-mismatch
-    client.stop(force)
+    client:stop(force)
   end
 end, {
   desc = 'Manually stops the given language client(s)',
-  nargs = '?',
-  complete = lsp_get_active_clients,
+  nargs = '+',
+  complete = complete_client,
 })
 
-api.nvim_create_user_command('LspLog', function()
-  vim.cmd(string.format('tabnew %s', lsp.get_log_path()))
+vim.api.nvim_create_user_command('LspLog', function()
+  vim.cmd(string.format('tabnew %s', vim.lsp.get_log_path()))
 end, {
   desc = 'Opens the Nvim LSP client log.',
 })
