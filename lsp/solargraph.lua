@@ -18,5 +18,5 @@ return {
   },
   init_options = { formatting = true },
   filetypes = { 'ruby' },
-  root_markers = { 'Gemfile', '.git' },
+  root_markers = { 'Gemfile' },
 }

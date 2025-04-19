@@ -8,5 +8,4 @@
 return {
   cmd = { 'opencl-language-server' },
   filetypes = { 'opencl' },
-  root_markers = { '.git' },
 }

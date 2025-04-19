@@ -10,6 +10,5 @@
 return {
   cmd = { 'ginko_ls' },
   filetypes = { 'dts' },
-  root_markers = { '.git' },
   settings = {},
 }

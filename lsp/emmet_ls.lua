@@ -24,5 +24,4 @@ return {
     'vue',
     'htmlangular',
   },
-  root_markers = { '.git' },
 }

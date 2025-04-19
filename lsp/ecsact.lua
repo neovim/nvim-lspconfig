@@ -9,5 +9,4 @@
 return {
   cmd = { 'ecsact_lsp_server', '--stdio' },
   filetypes = { 'ecsact' },
-  root_markers = { '.git' },
 }

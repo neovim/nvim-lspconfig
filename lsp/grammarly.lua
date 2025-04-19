@@ -12,7 +12,6 @@
 return {
   cmd = { 'grammarly-languageserver', '--stdio' },
   filetypes = { 'markdown' },
-  root_markers = { '.git' },
   handlers = {
     ['$/updateDocumentState'] = function()
       return ''

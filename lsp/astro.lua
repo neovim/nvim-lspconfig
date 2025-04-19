@@ -15,7 +15,7 @@ end
 return {
   cmd = { 'astro-ls', '--stdio' },
   filetypes = { 'astro' },
-  root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
+  root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json' },
   init_options = {
     typescript = {},
   },

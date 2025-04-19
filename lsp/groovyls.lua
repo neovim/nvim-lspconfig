@@ -24,5 +24,5 @@ return {
     'groovy-language-server-all.jar',
   },
   filetypes = { 'groovy' },
-  root_markers = { 'Jenkinsfile', '.git' },
+  root_markers = { 'Jenkinsfile' },
 }

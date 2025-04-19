@@ -9,5 +9,5 @@
 return {
   cmd = { 'python', '-m', 'ffi_navigator.langserver' },
   filetypes = { 'python', 'cpp' },
-  root_markers = { 'pyproject.toml', '.git' },
+  root_markers = { 'pyproject.toml' },
 }

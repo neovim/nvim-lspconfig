@@ -35,6 +35,6 @@
 return {
   cmd = { 'solidity-ls', '--stdio' },
   filetypes = { 'solidity' },
-  root_markers = { '.git', 'package.json' },
+  root_markers = { 'package.json' },
   settings = { solidity = { includePath = '', remapping = {} } },
 }

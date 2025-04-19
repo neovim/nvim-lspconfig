@@ -58,7 +58,6 @@ return {
     'typst',
     'xhtml',
   },
-  root_markers = { '.git' },
   get_language_id = get_language_id,
   settings = {
     ltex = {

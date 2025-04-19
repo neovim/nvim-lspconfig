@@ -58,5 +58,4 @@ return {
     'svelte',
     'templ',
   },
-  root_markers = { '.git' },
 }

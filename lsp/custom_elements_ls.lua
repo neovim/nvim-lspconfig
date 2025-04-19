@@ -26,5 +26,5 @@
 return {
   init_options = { hostInfo = 'neovim' },
   cmd = { 'custom-elements-languageserver', '--stdio' },
-  root_dir = { 'tsconfig.json', 'package.json', 'jsconfig.json', '.git' },
+  root_dir = { 'tsconfig.json', 'package.json', 'jsconfig.json' },
 }

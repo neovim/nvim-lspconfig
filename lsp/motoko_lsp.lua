@@ -6,7 +6,7 @@
 return {
   cmd = { 'motoko-lsp', '--stdio' },
   filetypes = { 'motoko' },
-  root_markers = { 'dfx.json', '.git' },
+  root_markers = { 'dfx.json' },
   init_options = {
     formatter = 'auto',
   },

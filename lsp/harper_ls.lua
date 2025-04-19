@@ -43,5 +43,4 @@ return {
     'php',
     'dart',
   },
-  root_markers = { '.git' },
 }

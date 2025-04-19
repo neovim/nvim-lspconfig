@@ -25,7 +25,7 @@
 return {
   cmd = { 'rescript-language-server', '--stdio' },
   filetypes = { 'rescript' },
-  root_markers = { 'bsconfig.json', 'rescript.json', '.git' },
+  root_markers = { 'bsconfig.json', 'rescript.json' },
   settings = {},
   init_options = {
     extensionConfiguration = {

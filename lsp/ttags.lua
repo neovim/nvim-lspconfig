@@ -4,5 +4,4 @@
 return {
   cmd = { 'ttags', 'lsp' },
   filetypes = { 'ruby', 'rust', 'javascript', 'haskell' },
-  root_markers = { '.git' },
 }

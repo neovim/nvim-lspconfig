@@ -12,7 +12,6 @@ return {
     'requirements.txt',
     'Pipfile',
     'pyproject.toml',
-    '.git',
   },
   settings = {
     python = {

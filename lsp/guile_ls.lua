@@ -15,5 +15,5 @@ return {
   filetypes = {
     'scheme.guile',
   },
-  root_markers = { 'guix.scm', '.git' },
+  root_markers = { 'guix.scm' },
 }

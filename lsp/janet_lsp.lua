@@ -9,5 +9,5 @@ return {
     '--stdio',
   },
   filetypes = { 'janet' },
-  root_markers = { 'project.janet', '.git' },
+  root_markers = { 'project.janet' },
 }

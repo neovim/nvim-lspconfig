@@ -7,5 +7,4 @@
 return {
   cmd = { 'rune-languageserver' },
   filetypes = { 'rune' },
-  root_markers = { '.git' },
 }

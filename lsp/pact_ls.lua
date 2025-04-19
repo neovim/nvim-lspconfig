@@ -6,5 +6,4 @@
 return {
   cmd = { 'pact-lsp' },
   filetypes = { 'pact' },
-  root_markers = { '.git' },
 }

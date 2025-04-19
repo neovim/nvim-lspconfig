@@ -9,5 +9,5 @@
 return {
   cmd = { 'aiken', 'lsp' },
   filetypes = { 'aiken' },
-  root_markers = { 'aiken.toml', '.git' },
+  root_markers = { 'aiken.toml' },
 }

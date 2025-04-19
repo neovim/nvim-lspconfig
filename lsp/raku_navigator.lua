@@ -22,5 +22,4 @@
 return {
   cmd = {},
   filetypes = { 'raku' },
-  root_markers = { '.git' },
 }

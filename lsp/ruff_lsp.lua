@@ -23,6 +23,6 @@
 return {
   cmd = { 'ruff-lsp' },
   filetypes = { 'python' },
-  root_markers = { 'pyproject.toml', 'ruff.toml', '.git' },
+  root_markers = { 'pyproject.toml', 'ruff.toml' },
   settings = {},
 }

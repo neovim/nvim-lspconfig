@@ -87,7 +87,7 @@ return {
     'typescriptreact',
     'typescript.tsx',
   },
-  root_markers = { 'deno.json', 'deno.jsonc', '.git' },
+  root_markers = { 'deno.json', 'deno.jsonc' },
   settings = {
     deno = {
       enable = true,

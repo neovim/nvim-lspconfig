@@ -21,5 +21,4 @@ return {
     'typescriptreact',
     'htmlangular',
   },
-  root_markers = { '.git' },
 }

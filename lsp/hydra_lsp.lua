@@ -6,5 +6,4 @@
 return {
   cmd = { 'hydra-lsp' },
   filetypes = { 'yaml' },
-  root_markers = { '.git' },
 }

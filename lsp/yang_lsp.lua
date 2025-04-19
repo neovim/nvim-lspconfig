@@ -6,5 +6,4 @@
 return {
   cmd = { 'yang-language-server' },
   filetypes = { 'yang' },
-  root_markers = { '.git' },
 }

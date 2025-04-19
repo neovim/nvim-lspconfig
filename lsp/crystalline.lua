@@ -6,5 +6,5 @@
 return {
   cmd = { 'crystalline' },
   filetypes = { 'crystal' },
-  root_markers = { 'shard.yml', '.git' },
+  root_markers = { 'shard.yml' },
 }

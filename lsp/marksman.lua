@@ -14,5 +14,5 @@ local cmd = { bin_name, 'server' }
 return {
   cmd = cmd,
   filetypes = { 'markdown', 'markdown.mdx' },
-  root_markers = { '.marksman.toml', '.git' },
+  root_markers = { '.marksman.toml' },
 }

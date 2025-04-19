@@ -14,7 +14,7 @@
 return {
   cmd = { 'ruby-lsp' },
   filetypes = { 'ruby', 'eruby' },
-  root_markers = { 'Gemfile', '.git' },
+  root_markers = { 'Gemfile' },
   init_options = {
     formatter = 'auto',
   },

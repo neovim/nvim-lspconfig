@@ -6,5 +6,4 @@
 return {
   cmd = { 'ziggy', 'lsp' },
   filetypes = { 'ziggy' },
-  root_markers = { '.git' },
 }

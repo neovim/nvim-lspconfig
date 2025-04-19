@@ -11,5 +11,4 @@
 return {
   cmd = { 'veryl-ls' },
   filetypes = { 'veryl' },
-  root_markers = { '.git' },
 }

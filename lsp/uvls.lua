@@ -16,5 +16,4 @@
 return {
   cmd = { 'uvls' },
   filetypes = { 'uvl' },
-  root_markers = { '.git' },
 }

@@ -9,5 +9,4 @@
 return {
   cmd = { 'dolmenls' },
   filetypes = { 'smt2', 'tptp', 'p', 'cnf', 'icnf', 'zf' },
-  root_markers = { '.git' },
 }

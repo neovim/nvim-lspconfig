@@ -24,5 +24,4 @@ return {
     },
   },
   filetypes = { 'perl' },
-  root_markers = { '.git' },
 }

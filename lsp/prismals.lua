@@ -14,5 +14,5 @@ return {
       prismaFmtBinPath = '',
     },
   },
-  root_markers = { '.git', 'package.json' },
+  root_markers = { 'package.json' },
 }

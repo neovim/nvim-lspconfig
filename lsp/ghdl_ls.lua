@@ -9,5 +9,5 @@
 return {
   cmd = { 'ghdl-ls' },
   filetypes = { 'vhdl' },
-  root_markers = { 'hdl-prj.json', '.git' },
+  root_markers = { 'hdl-prj.json' },
 }

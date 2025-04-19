@@ -7,5 +7,5 @@
 return {
   cmd = { 'mint', 'ls' },
   filetypes = { 'mint' },
-  root_markers = { 'mint.json', '.git' },
+  root_markers = { 'mint.json' },
 }

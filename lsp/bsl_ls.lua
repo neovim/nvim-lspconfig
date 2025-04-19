@@ -6,5 +6,4 @@
 
 return {
   filetypes = { 'bsl', 'os' },
-  root_markers = { '.git' },
 }

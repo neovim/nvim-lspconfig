@@ -24,5 +24,4 @@
 return {
   cmd = { 'alloy', 'lsp' },
   filetypes = { 'alloy' },
-  root_markers = { '.git' },
 }
