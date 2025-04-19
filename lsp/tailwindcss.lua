@@ -102,6 +102,7 @@ return {
       config.settings.editor.tabSize = vim.lsp.util.get_effective_tabstop()
     end
   end,
+  workspace_required = true,
   root_markers = {
     'tailwind.config.js',
     'tailwind.config.cjs',
