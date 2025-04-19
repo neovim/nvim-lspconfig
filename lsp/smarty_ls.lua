@@ -1,16 +1,17 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
--- https://github.com/landeaux/vscode-smarty-langserver-extracted
---
--- Language server for Smarty.
---
--- `smarty-language-server` can be installed via `npm`:
---
--- ```sh
--- npm i -g vscode-smarty-langserver-extracted
--- ```
+--- https://github.com/landeaux/vscode-smarty-langserver-extracted
+---
+--- Language server for Smarty.
+---
+--- `smarty-language-server` can be installed via `npm`:
+---
+--- ```sh
+--- npm i -g vscode-smarty-langserver-extracted
+--- ```
+
+local util = require 'lspconfig.util'
+
 return {
   cmd = { 'smarty-language-server', '--stdio' },
   filetypes = { 'smarty' },

@@ -1,6 +1,6 @@
 ---@brief
 ---
----Cobol language support
+--- Cobol language support
 return {
   cmd = { 'cobol-language-support' },
   filetypes = { 'cobol' },

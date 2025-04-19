@@ -1,8 +1,8 @@
 ---@brief
 ---
--- https://github.com/dagger/cuelsp
---
--- Dagger's lsp server for cuelang.
+--- https://github.com/dagger/cuelsp
+---
+--- Dagger's lsp server for cuelang.
 return {
   cmd = { 'cuelsp' },
   filetypes = { 'cue' },

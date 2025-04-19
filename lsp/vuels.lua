@@ -1,12 +1,12 @@
 ---@brief
 ---
--- https://github.com/vuejs/vetur/tree/master/server
---
--- Vue language server(vls)
--- `vue-language-server` can be installed via `npm`:
--- ```sh
--- npm install -g vls
--- ```
+--- https://github.com/vuejs/vetur/tree/master/server
+---
+--- Vue language server(vls)
+--- `vue-language-server` can be installed via `npm`:
+--- ```sh
+--- npm install -g vls
+--- ```
 return {
   cmd = { 'vls' },
   filetypes = { 'vue' },

@@ -1,3 +1,9 @@
+---@brief
+---
+--- https://github.com/phan/phan
+---
+--- Installation: https://github.com/phan/phan#getting-started
+
 local util = require 'lspconfig.util'
 
 local cmd = {
@@ -13,11 +19,6 @@ local cmd = {
   '--allow-polyfill-parser',
 }
 
----@brief
----
--- https://github.com/phan/phan
---
--- Installation: https://github.com/phan/phan#getting-started
 return {
   cmd = cmd,
   filetypes = { 'php' },

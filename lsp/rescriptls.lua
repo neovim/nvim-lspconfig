@@ -1,27 +1,27 @@
 ---@brief
 ---
--- https://github.com/rescript-lang/rescript-vscode/tree/master/server
---
--- ReScript Language Server can be installed via npm:
--- ```sh
--- npm install -g @rescript/language-server
--- ```
---
--- See [package.json](https://github.com/rescript-lang/rescript-vscode/blob/master/package.json#L139)
--- for init_options supported.
---
--- For example, in order to disable the `inlayHints` option:
--- ```lua
--- vim.lsp.config('rescriptls', {
---   settings = {
---     rescript = {
---       settings = {
---         inlayHints = { enable = false },
---       },
---     },
---   })
--- }
--- ```
+--- https://github.com/rescript-lang/rescript-vscode/tree/master/server
+---
+--- ReScript Language Server can be installed via npm:
+--- ```sh
+--- npm install -g @rescript/language-server
+--- ```
+---
+--- See [package.json](https://github.com/rescript-lang/rescript-vscode/blob/master/package.json#L139)
+--- for init_options supported.
+---
+--- For example, in order to disable the `inlayHints` option:
+--- ```lua
+--- vim.lsp.config('rescriptls', {
+---   settings = {
+---     rescript = {
+---       settings = {
+---         inlayHints = { enable = false },
+---       },
+---     },
+---   })
+--- }
+--- ```
 return {
   cmd = { 'rescript-language-server', '--stdio' },
   filetypes = { 'rescript' },

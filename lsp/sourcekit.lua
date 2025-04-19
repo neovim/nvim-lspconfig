@@ -1,10 +1,11 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
--- https://github.com/swiftlang/sourcekit-lsp
---
--- Language server for Swift and C/C++/Objective-C.
+--- https://github.com/swiftlang/sourcekit-lsp
+---
+--- Language server for Swift and C/C++/Objective-C.
+
+local util = require 'lspconfig.util'
+
 return {
   cmd = { 'sourcekit-lsp' },
   filetypes = { 'swift', 'objc', 'objcpp', 'c', 'cpp' },

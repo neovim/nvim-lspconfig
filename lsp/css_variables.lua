@@ -1,14 +1,14 @@
 ---@brief
 ---
--- https://github.com/vunguyentuan/vscode-css-variables/tree/master/packages/css-variables-language-server
---
--- CSS variables autocompletion and go-to-definition
---
--- `css-variables-language-server` can be installed via `npm`:
---
--- ```sh
--- npm i -g css-variables-language-server
--- ```
+--- https://github.com/vunguyentuan/vscode-css-variables/tree/master/packages/css-variables-language-server
+---
+--- CSS variables autocompletion and go-to-definition
+---
+--- `css-variables-language-server` can be installed via `npm`:
+---
+--- ```sh
+--- npm i -g css-variables-language-server
+--- ```
 return {
   cmd = { 'css-variables-language-server', '--stdio' },
   filetypes = { 'css', 'scss', 'less' },

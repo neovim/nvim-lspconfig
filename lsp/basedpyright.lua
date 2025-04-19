@@ -1,3 +1,9 @@
+---@brief
+---
+--- https://detachhead.github.io/basedpyright
+---
+--- `basedpyright`, a static type checker and language server for python
+
 local function organize_imports()
   local params = {
     command = 'basedpyright.organizeimports',
@@ -28,11 +34,6 @@ local function set_python_path(path)
   end
 end
 
----@brief
----
--- https://detachhead.github.io/basedpyright
---
--- `basedpyright`, a static type checker and language server for python
 return {
   cmd = { 'basedpyright-langserver', '--stdio' },
   filetypes = { 'python' },

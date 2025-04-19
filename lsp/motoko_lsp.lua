@@ -1,8 +1,8 @@
 ---@brief
 ---
--- https://github.com/dfinity/vscode-motoko
---
--- Language server for the Motoko programming language.
+--- https://github.com/dfinity/vscode-motoko
+---
+--- Language server for the Motoko programming language.
 return {
   cmd = { 'motoko-lsp', '--stdio' },
   filetypes = { 'motoko' },

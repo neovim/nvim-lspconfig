@@ -1,3 +1,15 @@
+---@brief
+---
+--- https://github.com/imc-trading/svlangserver
+---
+--- Language server for SystemVerilog.
+---
+--- `svlangserver` can be installed via `npm`:
+---
+--- ```sh
+--- $ npm install -g @imc-trading/svlangserver
+--- ```
+
 local function build_index()
   local params = {
     command = 'systemverilog.build_index',
@@ -13,17 +25,6 @@ local function report_hierarchy()
   vim.lsp.buf.execute_command(params)
 end
 
----@brief
----
--- https://github.com/imc-trading/svlangserver
---
--- Language server for SystemVerilog.
---
--- `svlangserver` can be installed via `npm`:
---
--- ```sh
--- $ npm install -g @imc-trading/svlangserver
--- ```
 return {
   cmd = { 'svlangserver' },
   filetypes = { 'verilog', 'systemverilog' },

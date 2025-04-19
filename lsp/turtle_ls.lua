@@ -1,3 +1,10 @@
+---@brief
+---
+--- https://github.com/stardog-union/stardog-language-servers/tree/master/packages/turtle-language-server
+--- `turtle-language-server`, An editor-agnostic server providing language intelligence (diagnostics, hover tooltips, etc.) for the W3C standard Turtle RDF syntax via the Language Server Protocol.
+--- installable via npm install -g turtle-language-server or yarn global add turtle-language-server.
+--- requires node.
+
 local bin_name = 'turtle-language-server'
 local bin_path = os.getenv 'NVM_BIN'
 local full_path
@@ -24,12 +31,6 @@ else
   full_path = table.concat({ bin_path, bin_name }, '/')
 end
 
----@brief
----
--- https://github.com/stardog-union/stardog-language-servers/tree/master/packages/turtle-language-server
--- `turtle-language-server`, An editor-agnostic server providing language intelligence (diagnostics, hover tooltips, etc.) for the W3C standard Turtle RDF syntax via the Language Server Protocol.
--- installable via npm install -g turtle-language-server or yarn global add turtle-language-server.
--- requires node.
 return {
   cmd = { 'node', full_path, '--stdio' },
   filetypes = { 'turtle', 'ttl' },

@@ -1,13 +1,13 @@
 ---@brief
 ---
--- https://github.com/ThePrimeagen/htmx-lsp
---
--- `htmx-lsp` can be installed via `cargo`:
--- ```sh
--- cargo install htmx-lsp
--- ```
---
--- Lsp is still very much work in progress and experimental. Use at your own risk.
+--- https://github.com/ThePrimeagen/htmx-lsp
+---
+--- `htmx-lsp` can be installed via `cargo`:
+--- ```sh
+--- cargo install htmx-lsp
+--- ```
+---
+--- Lsp is still very much work in progress and experimental. Use at your own risk.
 return {
   cmd = { 'htmx-lsp' },
   filetypes = { -- filetypes copied and adjusted from tailwindcss-intellisense

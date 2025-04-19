@@ -1,10 +1,11 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
--- https://github.com/phpactor/phpactor
---
--- Installation: https://phpactor.readthedocs.io/en/master/usage/standalone.html#global-installation
+--- https://github.com/phpactor/phpactor
+---
+--- Installation: https://phpactor.readthedocs.io/en/master/usage/standalone.html#global-installation
+
+local util = require 'lspconfig.util'
+
 return {
   cmd = { 'phpactor', 'language-server' },
   filetypes = { 'php' },

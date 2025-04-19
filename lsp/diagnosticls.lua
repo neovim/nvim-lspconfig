@@ -1,8 +1,8 @@
 ---@brief
 ---
--- https://github.com/iamcco/diagnostic-languageserver
---
--- Diagnostic language server integrate with linters.
+--- https://github.com/iamcco/diagnostic-languageserver
+---
+--- Diagnostic language server integrate with linters.
 return {
   -- Configuration from https://github.com/iamcco/diagnostic-languageserver#config--document
   cmd = { 'diagnostic-languageserver', '--stdio' },

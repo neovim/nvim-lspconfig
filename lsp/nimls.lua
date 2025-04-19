@@ -1,14 +1,15 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
--- https://github.com/PMunch/nimlsp
---
--- `nimlsp` can be installed via the `nimble` package manager:
---
--- ```sh
--- nimble install nimlsp
--- ```
+--- https://github.com/PMunch/nimlsp
+---
+--- `nimlsp` can be installed via the `nimble` package manager:
+---
+--- ```sh
+--- nimble install nimlsp
+--- ```
+
+local util = require 'lspconfig.util'
+
 return {
   cmd = { 'nimlsp' },
   filetypes = { 'nim' },

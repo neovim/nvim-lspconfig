@@ -5,12 +5,12 @@ end
 
 ---@brief
 ---
--- https://github.com/withastro/language-tools/tree/main/packages/language-server
---
--- `astro-ls` can be installed via `npm`:
--- ```sh
--- npm install -g @astrojs/language-server
---```
+--- https://github.com/withastro/language-tools/tree/main/packages/language-server
+---
+--- `astro-ls` can be installed via `npm`:
+--- ```sh
+--- npm install -g @astrojs/language-server
+--- ```
 
 return {
   cmd = { 'astro-ls', '--stdio' },

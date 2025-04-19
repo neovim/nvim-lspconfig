@@ -1,14 +1,14 @@
 ---@brief
 ---
--- https://solargraph.org/
---
--- solargraph, a language server for Ruby
---
--- You can install solargraph via gem install.
---
--- ```sh
--- gem install --user-install solargraph
--- ```
+--- https://solargraph.org/
+---
+--- solargraph, a language server for Ruby
+---
+--- You can install solargraph via gem install.
+---
+--- ```sh
+--- gem install --user-install solargraph
+--- ```
 return {
   cmd = { 'solargraph', 'stdio' },
   settings = {

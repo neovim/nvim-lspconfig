@@ -1,6 +1,6 @@
 ---@brief
 ---
--- https://github.com/ejgallego/coq-lsp/
+--- https://github.com/ejgallego/coq-lsp/
 return {
   cmd = { 'coq-lsp' },
   filetypes = { 'coq' },

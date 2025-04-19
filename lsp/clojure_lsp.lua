@@ -1,8 +1,8 @@
 ---@brief
 ---
--- https://github.com/clojure-lsp/clojure-lsp
---
--- Clojure Language Server
+--- https://github.com/clojure-lsp/clojure-lsp
+---
+--- Clojure Language Server
 return {
   cmd = { 'clojure-lsp' },
   filetypes = { 'clojure', 'edn' },

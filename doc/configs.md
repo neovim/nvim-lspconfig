@@ -10,6 +10,7 @@ Nvim by running `:help lspconfig-all`.
 - [air](#air)
 - [alloy_ls](#alloy_ls)
 - [anakin_language_server](#anakin_language_server)
+- [angularls](#angularls)
 - [ansiblels](#ansiblels)
 - [antlersls](#antlersls)
 - [arduino_language_server](#arduino_language_server)
@@ -87,6 +88,7 @@ Nvim by running `:help lspconfig-all`.
 - [ember](#ember)
 - [emmet_language_server](#emmet_language_server)
 - [emmet_ls](#emmet_ls)
+- [emmylua_ls](#emmylua_ls)
 - [erg_language_server](#erg_language_server)
 - [erlangls](#erlangls)
 - [esbonio](#esbonio)
@@ -547,6 +549,46 @@ Default config:
 
 ---
 
+## angularls
+
+https://github.com/angular/vscode-ng-language-service
+`angular-language-server` can be installed via npm `npm install -g @angular/language-server`.
+
+Note, that if you override the default `cmd`, you must also update `on_new_config` to set `new_config.cmd` during startup.
+
+```lua
+local project_library_path = "/path/to/project/lib"
+local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
+
+require'lspconfig'.angularls.setup{
+  cmd = cmd,
+  on_new_config = function(new_config,new_root_dir)
+    new_config.cmd = cmd
+  end,
+}
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.angularls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "ngserver", "--stdio", "--tsProbeLocations", "../..,?/node_modules", "--ngProbeLocations", "../../@angular/language-server/node_modules,?/node_modules/@angular/language-server/node_modules", "--angularCoreVersion", "" }
+  ```
+- `filetypes` :
+  ```lua
+  { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" }
+  ```
+- `root_markers` :
+  ```lua
+  { "angular.json", "nx.json" }
+  ```
+
+---
+
 ## ansiblels
 
 https://github.com/ansible/vscode-ansible
@@ -797,9 +839,9 @@ Default config:
 
 https://github.com/withastro/language-tools/tree/main/packages/language-server
 
- `astro-ls` can be installed via `npm`:
- ```sh
- npm install -g @astrojs/language-server
+`astro-ls` can be installed via `npm`:
+```sh
+npm install -g @astrojs/language-server
 ```
 
 Snippet to enable the language server:
@@ -1149,8 +1191,8 @@ Default config:
 
 Ballerina language server
 
- The Ballerina language's CLI tool comes with its own language server implementation.
- The `bal` command line tool must be installed and available in your system's PATH.
+The Ballerina language's CLI tool comes with its own language server implementation.
+The `bal` command line tool must be installed and available in your system's PATH.
 
 Snippet to enable the language server:
 ```lua
@@ -1193,7 +1235,7 @@ Default config:
   ```lua
   { "python" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/basedpyright.lua:36](../lsp/basedpyright.lua#L36)
+- `on_attach` source (use "gF" to open): [../lsp/basedpyright.lua:37](../lsp/basedpyright.lua#L37)
 - `root_markers` :
   ```lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
@@ -1772,14 +1814,14 @@ Default config:
 
 [Cairo Language Server](https://github.com/starkware-libs/cairo/tree/main/crates/cairo-lang-language-server)
 
- First, install Cairo following [this tutorial](https://book.cairo-lang.org/ch01-01-installation.html)
+First, install Cairo following [this tutorial](https://book.cairo-lang.org/ch01-01-installation.html)
 
- Then enable Cairo Language Server in your Lua configuration.
- ```lua
- vim.lsp.enable('cairo_ls')
- ```
+Then enable Cairo Language Server in your Lua configuration.
+```lua
+vim.lsp.enable('cairo_ls')
+```
 
- *cairo-language-server is still under active development, some features might not work yet !*
+*cairo-language-server is still under active development, some features might not work yet !*
 
 Snippet to enable the language server:
 ```lua
@@ -1851,7 +1893,7 @@ Default config:
 
 [Circom Language Server](https://github.com/rubydusa/circom-lsp)
 
- `circom-lsp`, the language server for the Circom language.
+`circom-lsp`, the language server for the Circom language.
 
 Snippet to enable the language server:
 ```lua
@@ -1912,7 +1954,7 @@ Default config:
   ```lua
   { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/clangd.lua:62](../lsp/clangd.lua#L62)
+- `on_attach` source (use "gF" to open): [../lsp/clangd.lua:63](../lsp/clangd.lua#L63)
 - `root_markers` :
   ```lua
   { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" }
@@ -2689,7 +2731,7 @@ Default config:
     ["textDocument/typeDefinition"] = <function 1>
   }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/denols.lua:78](../lsp/denols.lua#L78)
+- `on_attach` source (use "gF" to open): [../lsp/denols.lua:79](../lsp/denols.lua#L79)
 - `root_markers` :
   ```lua
   { "deno.json", "deno.jsonc", ".git" }
@@ -2806,6 +2848,8 @@ Default config:
 ## djlsp
 
 https://github.com/fourdigits/django-template-lsp
+
+`djlsp`, a language server for Django templates.
 
 Snippet to enable the language server:
 ```lua
@@ -3045,7 +3089,7 @@ Default config:
     show_symbols_only_follow_by_hanzi = false
   }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/ds_pinyin_lsp.lua:48](../lsp/ds_pinyin_lsp.lua#L48)
+- `on_attach` source (use "gF" to open): [../lsp/ds_pinyin_lsp.lua:49](../lsp/ds_pinyin_lsp.lua#L49)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -3233,7 +3277,7 @@ Default config:
     skipInstallPackageConfirmation = false
   }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/elmls.lua:14](../lsp/elmls.lua#L14)
+- `root_dir` source (use "gF" to open): [../lsp/elmls.lua:15](../lsp/elmls.lua#L15)
 
 ---
 
@@ -3356,6 +3400,40 @@ Default config:
 
 ---
 
+## emmylua_ls
+
+https://github.com/EmmyLuaLs/emmylua-analyzer-rust
+
+Emmylua Analyzer Rust. Language Server for Lua.
+
+`emmylua_ls` can be installed using `cargo` by following the instructions[here]
+(https://github.com/EmmyLuaLs/emmylua-analyzer-rust?tab=readme-ov-file#install).
+
+The default `cmd` assumes that the `emmylua_ls` binary can be found in `$PATH`.
+It might require you to provide cargo binaries installation path in it.
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.emmylua_ls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "emmylua_ls" }
+  ```
+- `filetypes` :
+  ```lua
+  { "lua" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".luarc.json", ".emmyrc.json", ".luacheckrc", ".git" }
+  ```
+- `workspace_required` : `false`
+
+---
+
 ## erg_language_server
 
 https://github.com/erg-lang/erg#flags ELS
@@ -3363,10 +3441,11 @@ https://github.com/erg-lang/erg#flags ELS
 ELS (erg-language-server) is a language server for the Erg programming language.
 
 erg-language-server can be installed via `cargo` and used as follows:
- ```sh
- cargo install erg --features els
- erg --language-server
- ```
+
+```sh
+cargo install erg --features els
+erg --language-server
+```
 
 Snippet to enable the language server:
 ```lua
@@ -3578,7 +3657,7 @@ Default config:
   ```lua
   { "fennel" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/fennel_ls.lua:11](../lsp/fennel_ls.lua#L11)
+- `root_dir` source (use "gF" to open): [../lsp/fennel_ls.lua:12](../lsp/fennel_ls.lua#L12)
 - `settings` :
   ```lua
   {}
@@ -3792,7 +3871,7 @@ Default config:
     AutomaticWorkspaceInit = true
   }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/fsautocomplete.lua:21](../lsp/fsautocomplete.lua#L21)
+- `root_dir` source (use "gF" to open): [../lsp/fsautocomplete.lua:22](../lsp/fsautocomplete.lua#L22)
 - `settings` :
   ```lua
   {
@@ -3854,7 +3933,7 @@ Default config:
     AutomaticWorkspaceInit = true
   }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/fsharp_language_server.lua:17](../lsp/fsharp_language_server.lua#L17)
+- `root_dir` source (use "gF" to open): [../lsp/fsharp_language_server.lua:18](../lsp/fsharp_language_server.lua#L18)
 - `settings` :
   ```lua
   {}
@@ -4144,7 +4223,7 @@ Default config:
     log_path = "/home/runner/.cache/gitlab-ci-ls//log/gitlab-ci-ls.log"
   }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/gitlab_ci_ls.lua:13](../lsp/gitlab_ci_ls.lua#L13)
+- `root_dir` source (use "gF" to open): [../lsp/gitlab_ci_ls.lua:14](../lsp/gitlab_ci_ls.lua#L14)
 
 ---
 
@@ -4301,16 +4380,16 @@ Default config:
 
 Combination of both lint server and client
 
- https://github.com/nametake/golangci-lint-langserver
- https://github.com/golangci/golangci-lint
+https://github.com/nametake/golangci-lint-langserver
+https://github.com/golangci/golangci-lint
 
 
- Installation of binaries needed is done via
+Installation of binaries needed is done via
 
- ```
- go install github.com/nametake/golangci-lint-langserver@latest
- go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
- ```
+```
+go install github.com/nametake/golangci-lint-langserver@latest
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+```
 
 Snippet to enable the language server:
 ```lua
@@ -4359,7 +4438,7 @@ Default config:
   ```lua
   { "go", "gomod", "gowork", "gotmpl" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/gopls.lua:20](../lsp/gopls.lua#L20)
+- `root_dir` source (use "gF" to open): [../lsp/gopls.lua:21](../lsp/gopls.lua#L21)
 
 ---
 
@@ -4471,7 +4550,7 @@ Default config:
   ```lua
   { "graphql", "typescriptreact", "javascriptreact" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/graphql.lua:14](../lsp/graphql.lua#L14)
+- `root_dir` source (use "gF" to open): [../lsp/graphql.lua:15](../lsp/graphql.lua#L15)
 
 ---
 
@@ -4663,10 +4742,10 @@ Default config:
 ## hhvm
 
 Language server for programs written in Hack
- https://hhvm.com/
- https://github.com/facebook/hhvm
- See below for how to setup HHVM & typechecker:
- https://docs.hhvm.com/hhvm/getting-started/getting-started
+https://hhvm.com/
+https://github.com/facebook/hhvm
+See below for how to setup HHVM & typechecker:
+https://docs.hhvm.com/hhvm/getting-started/getting-started
 
 Snippet to enable the language server:
 ```lua
@@ -4733,7 +4812,7 @@ Default config:
 
 `hlasm_language_server` is a language server for the High Level Assembler language used on IBM SystemZ mainframes.
 
- To learn how to configure the HLASM language server, see the [HLASM Language Support documentation](https://github.com/eclipse-che4z/che-che4z-lsp-for-hlasm).
+To learn how to configure the HLASM language server, see the [HLASM Language Support documentation](https://github.com/eclipse-che4z/che-che4z-lsp-for-hlasm).
 
 Snippet to enable the language server:
 ```lua
@@ -5023,7 +5102,7 @@ Default config:
   ```lua
   { "idris2" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/idris2_lsp.lua:33](../lsp/idris2_lsp.lua#L33)
+- `root_dir` source (use "gF" to open): [../lsp/idris2_lsp.lua:34](../lsp/idris2_lsp.lua#L34)
 
 ---
 
@@ -5068,7 +5147,7 @@ Default config:
   ```lua
   { "php" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/intelephense.lua:29](../lsp/intelephense.lua#L29)
+- `root_dir` source (use "gF" to open): [../lsp/intelephense.lua:30](../lsp/intelephense.lua#L30)
 
 ---
 
@@ -5394,7 +5473,7 @@ Default config:
   ```lua
   { "julia" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/julials.lua:118](../lsp/julials.lua#L118)
+- `on_attach` source (use "gF" to open): [../lsp/julials.lua:119](../lsp/julials.lua#L119)
 - `root_markers` :
   ```lua
   { "Project.toml", "JuliaProject.toml" }
@@ -5485,8 +5564,20 @@ Default config:
 ## kotlin_language_server
 
 A kotlin language server which was developed for internal usage and
- released afterwards. Maintaining is not done by the original author,
- but by fwcd.
+released afterwards. Maintaining is not done by the original author,
+but by fwcd.
+
+It is built via gradle and developed on github.
+Source and additional description:
+https://github.com/fwcd/kotlin-language-server
+
+This server requires vim to be aware of the kotlin-filetype.
+You could refer for this capability to:
+https://github.com/udalov/kotlin-vim (recommended)
+Note that there is no LICENSE specified yet.
+
+For faster startup, you can setup caching by specifying a storagePath
+in the init_options. The default is your home directory.
 
 Snippet to enable the language server:
 ```lua
@@ -5574,7 +5665,7 @@ Default config:
   ```lua
   "utf-32"
   ```
-- `root_dir` source (use "gF" to open): [../lsp/lean3ls.lua:18](../lsp/lean3ls.lua#L18)
+- `root_dir` source (use "gF" to open): [../lsp/lean3ls.lua:19](../lsp/lean3ls.lua#L19)
 
 ---
 
@@ -5743,7 +5834,7 @@ Default config:
   ```lua
   { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc", "quarto", "rmd", "context", "html", "xhtml", "mail", "text" }
   ```
-- `get_language_id` source (use "gF" to open): [../lsp/ltex.lua:73](../lsp/ltex.lua#L73)
+- `get_language_id` source (use "gF" to open): [../lsp/ltex.lua:74](../lsp/ltex.lua#L74)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -5797,7 +5888,7 @@ Default config:
   ```lua
   { "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "text", "typst", "xhtml" }
   ```
-- `get_language_id` source (use "gF" to open): [../lsp/ltex_plus.lua:38](../lsp/ltex_plus.lua#L38)
+- `get_language_id` source (use "gF" to open): [../lsp/ltex_plus.lua:39](../lsp/ltex_plus.lua#L39)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -6046,6 +6137,13 @@ Default config:
 ## marko-js
 
 https://github.com/marko-js/language-server
+
+Using the Language Server Protocol to improve Marko's developer experience.
+
+Can be installed via npm:
+```
+npm i -g @marko/language-server
+```
 
 Snippet to enable the language server:
 ```lua
@@ -6478,7 +6576,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir` source (use "gF" to open): [../lsp/msbuild_project_tools_server.lua:37](../lsp/msbuild_project_tools_server.lua#L37)
+- `root_dir` source (use "gF" to open): [../lsp/msbuild_project_tools_server.lua:38](../lsp/msbuild_project_tools_server.lua#L38)
 
 ---
 
@@ -6834,7 +6932,7 @@ Default config:
   ```lua
   { "nim" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/nim_langserver.lua:12](../lsp/nim_langserver.lua#L12)
+- `root_dir` source (use "gF" to open): [../lsp/nim_langserver.lua:13](../lsp/nim_langserver.lua#L13)
 
 ---
 
@@ -6862,7 +6960,7 @@ Default config:
   ```lua
   { "nim" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/nimls.lua:12](../lsp/nimls.lua#L12)
+- `root_dir` source (use "gF" to open): [../lsp/nimls.lua:13](../lsp/nimls.lua#L13)
 
 ---
 
@@ -6928,7 +7026,7 @@ Default config:
   ```lua
   { "hcl.nomad", "nomad" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/nomad_lsp.lua:25](../lsp/nomad_lsp.lua#L25)
+- `root_dir` source (use "gF" to open): [../lsp/nomad_lsp.lua:26](../lsp/nomad_lsp.lua#L26)
 
 ---
 
@@ -7049,7 +7147,7 @@ Default config:
   ```lua
   { "ocaml", "reason" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/ocamlls.lua:11](../lsp/ocamlls.lua#L11)
+- `root_dir` source (use "gF" to open): [../lsp/ocamlls.lua:12](../lsp/ocamlls.lua#L12)
 
 ---
 
@@ -7078,8 +7176,8 @@ Default config:
   ```lua
   { "ocaml", "menhir", "ocamlinterface", "ocamllex", "reason", "dune" }
   ```
-- `get_language_id` source (use "gF" to open): [../lsp/ocamllsp.lua:26](../lsp/ocamllsp.lua#L26)
-- `root_dir` source (use "gF" to open): [../lsp/ocamllsp.lua:26](../lsp/ocamllsp.lua#L26)
+- `get_language_id` source (use "gF" to open): [../lsp/ocamllsp.lua:27](../lsp/ocamllsp.lua#L27)
+- `root_dir` source (use "gF" to open): [../lsp/ocamllsp.lua:27](../lsp/ocamllsp.lua#L27)
 
 ---
 
@@ -7103,7 +7201,7 @@ Default config:
   ```lua
   { "odin" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/ols.lua:8](../lsp/ols.lua#L8)
+- `root_dir` source (use "gF" to open): [../lsp/ols.lua:9](../lsp/ols.lua#L9)
 
 ---
 
@@ -7137,7 +7235,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1853", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1942", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua
@@ -7329,7 +7427,7 @@ Default config:
   ```lua
   { "pascal" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/pasls.lua:19](../lsp/pasls.lua#L19)
+- `root_dir` source (use "gF" to open): [../lsp/pasls.lua:20](../lsp/pasls.lua#L20)
 
 ---
 
@@ -7540,7 +7638,7 @@ Default config:
   ```lua
   { "php" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/phan.lua:21](../lsp/phan.lua#L21)
+- `root_dir` source (use "gF" to open): [../lsp/phan.lua:22](../lsp/phan.lua#L22)
 
 ---
 
@@ -7564,7 +7662,7 @@ Default config:
   ```lua
   { "php" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/phpactor.lua:8](../lsp/phpactor.lua#L8)
+- `root_dir` source (use "gF" to open): [../lsp/phpactor.lua:9](../lsp/phpactor.lua#L9)
 
 ---
 
@@ -7588,7 +7686,7 @@ Default config:
   ```lua
   { "p8" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/pico8_ls.lua:8](../lsp/pico8_ls.lua#L8)
+- `root_dir` source (use "gF" to open): [../lsp/pico8_ls.lua:9](../lsp/pico8_ls.lua#L9)
 - `settings` :
   ```lua
   {}
@@ -7710,10 +7808,10 @@ Default config:
 
 Language Server for the Prisma JavaScript and TypeScript ORM
 
- `@prisma/language-server` can be installed via npm
- ```sh
- npm install -g @prisma/language-server
- ```
+`@prisma/language-server` can be installed via npm
+```sh
+npm install -g @prisma/language-server
+```
 
 Snippet to enable the language server:
 ```lua
@@ -8098,7 +8196,7 @@ Default config:
   ```lua
   { "python" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/pyright.lua:36](../lsp/pyright.lua#L36)
+- `on_attach` source (use "gF" to open): [../lsp/pyright.lua:37](../lsp/pyright.lua#L37)
 - `root_markers` :
   ```lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
@@ -8179,14 +8277,14 @@ Default config:
 ## r_language_server
 
 [languageserver](https://github.com/REditorSupport/languageserver) is an
- implementation of the Microsoft's Language Server Protocol for the R
- language.
+implementation of the Microsoft's Language Server Protocol for the R
+language.
 
- It is released on CRAN and can be easily installed by
+It is released on CRAN and can be easily installed by
 
- ```r
- install.packages("languageserver")
- ```
+```r
+install.packages("languageserver")
+```
 
 Snippet to enable the language server:
 ```lua
@@ -8210,11 +8308,11 @@ Default config:
 
 [https://github.com/jeapostrophe/racket-langserver](https://github.com/jeapostrophe/racket-langserver)
 
- The Racket language server. This project seeks to use
- [DrRacket](https://github.com/racket/drracket)'s public API to provide
- functionality that mimics DrRacket's code tools as closely as possible.
+The Racket language server. This project seeks to use
+[DrRacket](https://github.com/racket/drracket)'s public API to provide
+functionality that mimics DrRacket's code tools as closely as possible.
 
- Install via `raco`: `raco pkg install racket-langserver`
+Install via `raco`: `raco pkg install racket-langserver`
 
 Snippet to enable the language server:
 ```lua
@@ -8284,7 +8382,7 @@ Default config:
 
 Reason language server
 
- You can install reason language server from [reason-language-server](https://github.com/jaredly/reason-language-server) repository.
+You can install reason language server from [reason-language-server](https://github.com/jaredly/reason-language-server) repository.
 
 Snippet to enable the language server:
 ```lua
@@ -8332,7 +8430,7 @@ Default config:
   ```lua
   { "rego" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/regal.lua:13](../lsp/regal.lua#L13)
+- `root_dir` source (use "gF" to open): [../lsp/regal.lua:14](../lsp/regal.lua#L14)
 
 ---
 
@@ -8361,7 +8459,7 @@ Default config:
   ```lua
   { "rego" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/regols.lua:13](../lsp/regols.lua#L13)
+- `root_dir` source (use "gF" to open): [../lsp/regols.lua:14](../lsp/regols.lua#L14)
 
 ---
 
@@ -8946,7 +9044,7 @@ require'lspconfig'.rust_analyzer.setup{}
 ```
 
 Default config:
-- `before_init` source (use "gF" to open): [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
+- `before_init` source (use "gF" to open): [../lsp/rust_analyzer.lua:57](../lsp/rust_analyzer.lua#L57)
 - `capabilities` :
   ```lua
   {
@@ -8963,20 +9061,20 @@ Default config:
   ```lua
   { "rust" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
-- `root_dir` source (use "gF" to open): [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
+- `on_attach` source (use "gF" to open): [../lsp/rust_analyzer.lua:57](../lsp/rust_analyzer.lua#L57)
+- `root_dir` source (use "gF" to open): [../lsp/rust_analyzer.lua:57](../lsp/rust_analyzer.lua#L57)
 
 ---
 
 ## salt_ls
 
 Language server for Salt configuration files.
- https://github.com/dcermak/salt-lsp
+https://github.com/dcermak/salt-lsp
 
- The language server can be installed with `pip`:
- ```sh
- pip install salt-lsp
- ```
+The language server can be installed with `pip`:
+```sh
+pip install salt-lsp
+```
 
 Snippet to enable the language server:
 ```lua
@@ -9295,7 +9393,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir` source (use "gF" to open): [../lsp/smarty_ls.lua:14](../lsp/smarty_ls.lua#L14)
+- `root_dir` source (use "gF" to open): [../lsp/smarty_ls.lua:15](../lsp/smarty_ls.lua#L15)
 - `settings` :
   ```lua
   {
@@ -9761,8 +9859,8 @@ Default config:
   ```lua
   { "swift", "objc", "objcpp", "c", "cpp" }
   ```
-- `get_language_id` source (use "gF" to open): [../lsp/sourcekit.lua:8](../lsp/sourcekit.lua#L8)
-- `root_dir` source (use "gF" to open): [../lsp/sourcekit.lua:8](../lsp/sourcekit.lua#L8)
+- `get_language_id` source (use "gF" to open): [../lsp/sourcekit.lua:9](../lsp/sourcekit.lua#L9)
+- `root_dir` source (use "gF" to open): [../lsp/sourcekit.lua:9](../lsp/sourcekit.lua#L9)
 
 ---
 
@@ -9850,7 +9948,6 @@ Default config:
 https://github.com/joe-re/sql-language-server
 
 This LSP can be installed via  `npm`. Find further instructions on manual installation of the sql-language-server at [joe-re/sql-language-server](https://github.com/joe-re/sql-language-server).
-<br>
 
 Snippet to enable the language server:
 ```lua
@@ -9972,7 +10069,7 @@ Default config:
 
 https://github.com/facebookexperimental/starlark-rust/
 The LSP part of `starlark-rust` is not currently documented,
- but the implementation works well for linting.
+but the implementation works well for linting.
 This gives valuable warnings for potential issues in the code,
 but does not support refactorings.
 
@@ -10257,7 +10354,7 @@ Default config:
   ```lua
   { "svelte" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/svelte.lua:24](../lsp/svelte.lua#L24)
+- `on_attach` source (use "gF" to open): [../lsp/svelte.lua:25](../lsp/svelte.lua#L25)
 - `root_markers` :
   ```lua
   { "package.json", ".git" }
@@ -10291,7 +10388,7 @@ Default config:
   ```lua
   { "verilog", "systemverilog" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/svlangserver.lua:27](../lsp/svlangserver.lua#L27)
+- `on_attach` source (use "gF" to open): [../lsp/svlangserver.lua:28](../lsp/svlangserver.lua#L28)
 - `root_markers` :
   ```lua
   { ".svlangserver", ".git" }
@@ -10718,7 +10815,7 @@ Default config:
   ```lua
   { "tex", "plaintex", "bib" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/texlab.lua:163](../lsp/texlab.lua#L163)
+- `on_attach` source (use "gF" to open): [../lsp/texlab.lua:164](../lsp/texlab.lua#L164)
 - `root_markers` :
   ```lua
   { ".git", ".latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" }
@@ -10965,7 +11062,7 @@ Default config:
   ```lua
   { "typst" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/tinymist.lua:56](../lsp/tinymist.lua#L56)
+- `on_attach` source (use "gF" to open): [../lsp/tinymist.lua:57](../lsp/tinymist.lua#L57)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -11486,7 +11583,7 @@ Default config:
   ```lua
   { "unison" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/unison.lua:6](../lsp/unison.lua#L6)
+- `root_dir` source (use "gF" to open): [../lsp/unison.lua:7](../lsp/unison.lua#L7)
 - `settings` :
   ```lua
   {}
@@ -11646,7 +11743,7 @@ Default config:
   ```lua
   { "vala", "genie" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/vala_ls.lua:27](../lsp/vala_ls.lua#L27)
+- `root_dir` source (use "gF" to open): [../lsp/vala_ls.lua:28](../lsp/vala_ls.lua#L28)
 
 ---
 
@@ -12038,7 +12135,7 @@ require'lspconfig'.volar.setup{}
 ```
 
 Default config:
-- `before_init` source (use "gF" to open): [../lsp/volar.lua:87](../lsp/volar.lua#L87)
+- `before_init` source (use "gF" to open): [../lsp/volar.lua:88](../lsp/volar.lua#L88)
 - `cmd` :
   ```lua
   { "vue-language-server", "--stdio" }
@@ -12476,7 +12573,7 @@ Default config:
   ```lua
   { "markdown" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/zk.lua:14](../lsp/zk.lua#L14)
+- `on_attach` source (use "gF" to open): [../lsp/zk.lua:15](../lsp/zk.lua#L15)
 - `root_markers` :
   ```lua
   { ".zk" }

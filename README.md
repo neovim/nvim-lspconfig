@@ -47,7 +47,7 @@ View [all configs](doc/configs.md) or `:help lspconfig-all` from Nvim.
 5. Run `:checkhealth lsp` to see the status or to troubleshoot.
 
 Read `:help lspconfig` for details. Read `:help lspconfig-all` for the full list of server-specific details.
-For servers not on your `$PATH` (e.g., `jdtls`, `elixirls`), you must manually set the `cmd` parameter, see [vim.lsp.config](#vim.lsp.config).
+For servers not on your `$PATH` (e.g., `jdtls`, `elixirls`), you must manually set the `cmd` parameter, see [vim.lsp.config](#vimlspconfig).
 
 ## Configuration
 
@@ -60,7 +60,8 @@ Nvim sets some default options and mappings when a buffer attaches to LSP (see [
 * [`'formatexpr'`][formatexpr]
     - Enables LSP formatting with [`gq`][gq].
 * `K` maps to [`vim.lsp.buf.hover()`][vim.lsp.buf.hover] in Normal mode.
-* `[d` and `]d` map to `vim.diagnostic.goto_prev()` and `vim.diagnostic.goto_next()`, respectively.
+* `[d` and `]d` map to `vim.diagnostic.jump()` with `{count=-1}` and
+  `vim.diagnostic.jump()` with `{count=1}`, respectively.
 * `<C-W>d` maps to `vim.diagnostic.open_float()`.
 
 [lsp-config]: https://neovim.io/doc/user/lsp.html#lsp-config
@@ -83,7 +84,7 @@ See [`:h lsp-buf`][lsp-buf] for details on other LSP functions.
 
 Extra settings can be specified for each LSP server:
 
-- Nvim 0.11+ (see [vim.lsp.config](#vim.lsp.config))
+- Nvim 0.11+ (see [vim.lsp.config](#vimlspconfig))
   ```lua
   vim.lsp.config('rust_analyzer', {
     -- Server-specific settings. See `:help lsp-quickstart`

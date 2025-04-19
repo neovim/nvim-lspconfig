@@ -1,3 +1,9 @@
+---@brief
+---
+--- https://github.com/microsoft/pyright
+---
+--- `pyright`, a static type checker and language server for python
+
 local function organize_imports()
   local params = {
     command = 'pyright.organizeimports',
@@ -28,11 +34,6 @@ local function set_python_path(path)
   end
 end
 
----@brief
----
--- https://github.com/microsoft/pyright
---
--- `pyright`, a static type checker and language server for python
 return {
   cmd = { 'pyright-langserver', '--stdio' },
   filetypes = { 'python' },

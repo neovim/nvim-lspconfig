@@ -1,6 +1,6 @@
 ---@brief
 ---
----Support for the Dafny language server.
+--- Support for the Dafny language server.
 
 -- The default `cmd` uses "dafny server", which works on Dafny 4.0.0+. For
 -- older versions of Dafny, you can compile the language server from source at

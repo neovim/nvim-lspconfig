@@ -1,3 +1,15 @@
+---@brief
+---
+--- https://github.com/Myriad-Dreamin/tinymist
+--- An integrated language service for Typst [taɪpst]. You can also call it "微霭" [wēi ǎi] in Chinese.
+---
+--- Currently some of Tinymist's workspace commands are supported, namely:
+--- `LspTinymistExportSvg`, `LspTinymistExportPng`, `LspTinymistExportPdf
+--- `LspTinymistExportMarkdown`, `LspTinymistExportText`, `LspTinymistExportQuery`,
+--- `LspTinymistExportAnsiHighlight`, `LspTinymistGetServerInfo`,
+--- `LspTinymistGetDocumentTrace`, `LspTinymistGetWorkspaceLabels`, and
+--- `LspTinymistGetDocumentMetrics`.
+
 ---@param command_name string
 ---@return fun():nil run_tinymist_command, string cmd_name, string cmd_desc
 local function create_tinymist_command(command_name)
@@ -42,17 +54,6 @@ local function create_tinymist_command(command_name)
   return run_tinymist_command, cmd_name, cmd_desc
 end
 
----@brief
----
--- https://github.com/Myriad-Dreamin/tinymist
--- An integrated language service for Typst [taɪpst]. You can also call it "微霭" [wēi ǎi] in Chinese.
---
--- Currently some of Tinymist's workspace commands are supported, namely:
--- `LspTinymistExportSvg`, `LspTinymistExportPng`, `LspTinymistExportPdf
--- `LspTinymistExportMarkdown`, `LspTinymistExportText`, `LspTinymistExportQuery`,
--- `LspTinymistExportAnsiHighlight`, `LspTinymistGetServerInfo`,
--- `LspTinymistGetDocumentTrace`, `LspTinymistGetWorkspaceLabels`, and
--- `LspTinymistGetDocumentMetrics`.
 return {
   cmd = { 'tinymist' },
   filetypes = { 'typst' },
