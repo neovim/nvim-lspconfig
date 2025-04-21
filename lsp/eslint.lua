@@ -44,8 +44,8 @@ return {
     'svelte',
     'astro',
   },
-  on_init = function(client)
-    vim.api.nvim_create_user_command('LspEslintFixAll', function()
+  on_attach = function(client)
+    vim.api.nvim_buf_create_user_command(0, 'LspEslintFixAll', function()
       local bufnr = vim.api.nvim_get_current_buf()
 
       client:exec_cmd({
