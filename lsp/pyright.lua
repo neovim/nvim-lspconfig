@@ -4,21 +4,6 @@
 ---
 --- `pyright`, a static type checker and language server for python
 
-local function organize_imports()
-  local params = {
-    command = 'pyright.organizeimports',
-    arguments = { vim.uri_from_bufnr(0) },
-  }
-
-  local clients = vim.lsp.get_clients {
-    bufnr = vim.api.nvim_get_current_buf(),
-    name = 'pyright',
-  }
-  for _, client in ipairs(clients) do
-    client.request('workspace/executeCommand', params, nil, 0)
-  end
-end
-
 local function set_python_path(path)
   local clients = vim.lsp.get_clients {
     bufnr = vim.api.nvim_get_current_buf(),
@@ -55,11 +40,16 @@ return {
       },
     },
   },
-  on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'LspPyrightOrganizeImports', organize_imports, {
+  on_attach = function(client, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspPyrightOrganizeImports', function()
+      client:exec_cmd({
+        command = 'pyright.organizeimports',
+        arguments = { vim.uri_from_bufnr(bufnr) },
+      })
+    end, {
       desc = 'Organize Imports',
     })
-    vim.api.nvim_buf_create_user_command(0, 'LspPyrightSetPythonPath', set_python_path, {
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspPyrightSetPythonPath', set_python_path, {
       desc = 'Reconfigure pyright with the provided python path',
       nargs = 1,
       complete = 'file',

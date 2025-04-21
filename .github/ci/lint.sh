@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # USAGE: To run locally:
-#   bash .github/ci/run_sanitizer.sh origin/master HEAD
+#   bash .github/ci/lint.sh origin/master HEAD
 
 set -e
 
@@ -23,6 +23,15 @@ _check_lsp_cmd_prefix() {
   if git grep -P 'nvim_buf_create_user_command' -- 'lsp/*.lua' | grep -v "$exclude" | grep --color -v Lsp ; then
     echo
     echo 'Command names must start with "Lsp" prefix'
+    exit 1
+  fi
+}
+
+# Enforce client:exec_cmd().
+_check_exec_cmd() {
+  if git grep -P 'workspace.executeCommand' -- 'lsp/*.lua' ; then
+    echo
+    echo 'Use client:exec_cmd() instead of calling request("workspace/executeCommand") directly. Example: lsp/pyright.lua'
     exit 1
   fi
 }
@@ -50,4 +59,5 @@ _check_deprecated_utils() {
 
 _check_cmd_buflocal
 _check_lsp_cmd_prefix
+_check_exec_cmd
 _check_deprecated_utils
