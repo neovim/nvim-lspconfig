@@ -63,12 +63,12 @@ local function buf_cancel_build(client, bufnr)
 end
 
 local function dependency_graph(client)
-  client.request('workspace/executeCommand', { command = 'texlab.showDependencyGraph' }, function(err, result)
+  client:exec_cmd({ command = 'texlab.showDependencyGraph' }, { bufnr = 0 }, function(err, result)
     if err then
       return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
     end
     vim.notify('The dependency graph has been generated:\n' .. result, vim.log.levels.INFO)
-  end, 0)
+  end)
 end
 
 local function command_factory(cmd)
@@ -102,10 +102,10 @@ end
 
 local function buf_find_envs(client, bufnr)
   local win = vim.api.nvim_get_current_win()
-  client.request('workspace/executeCommand', {
+  client:exec_cmd({
     command = 'texlab.findEnvironments',
     arguments = { vim.lsp.util.make_position_params(win, client.offset_encoding) },
-  }, function(err, result)
+  }, { bufnr = bufnr }, function(err, result)
     if err then
       return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
     end
@@ -126,7 +126,7 @@ local function buf_find_envs(client, bufnr)
       border = 'single',
       title = 'Environments',
     })
-  end, bufnr)
+  end)
 end
 
 local function buf_change_env(client, bufnr)
