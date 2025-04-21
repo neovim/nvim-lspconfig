@@ -289,6 +289,7 @@ Nvim by running `:help lspconfig-all`.
 - [syntax_tree](#syntax_tree)
 - [systemd_ls](#systemd_ls)
 - [tabby_ml](#tabby_ml)
+- [tailwindcss](#tailwindcss)
 - [taplo](#taplo)
 - [tblgen_lsp_server](#tblgen_lsp_server)
 - [teal_ls](#teal_ls)
@@ -7235,7 +7236,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1980", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1870", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua
@@ -10561,6 +10562,61 @@ Default config:
   ```lua
   { ".git" }
   ```
+
+---
+
+## tailwindcss
+
+https://github.com/tailwindlabs/tailwindcss-intellisense
+
+Tailwind CSS Language Server can be installed via npm:
+
+npm install -g @tailwindcss/language-server
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.tailwindcss.setup{}
+```
+
+Default config:
+- `before_init` source (use "gF" to open): [../lsp/tailwindcss.lua:8](../lsp/tailwindcss.lua#L8)
+- `cmd` :
+  ```lua
+  { "tailwindcss-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
+  ```
+- `root_markers` :
+  ```lua
+  { "tailwind.config.js", "tailwind.config.cjs", "tailwind.config.mjs", "tailwind.config.ts", "postcss.config.js", "postcss.config.cjs", "postcss.config.mjs", "postcss.config.ts" }
+  ```
+- `settings` :
+  ```lua
+  {
+    tailwindCSS = {
+      classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+      includeLanguages = {
+        eelixir = "html-eex",
+        eruby = "erb",
+        htmlangular = "html",
+        templ = "html"
+      },
+      lint = {
+        cssConflict = "warning",
+        invalidApply = "error",
+        invalidConfigPath = "error",
+        invalidScreen = "error",
+        invalidTailwindDirective = "error",
+        invalidVariant = "error",
+        recommendedVariantOrder = "warning"
+      },
+      validate = true
+    }
+  }
+  ```
+- `workspace_required` : `true`
 
 ---
 
