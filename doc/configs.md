@@ -3632,7 +3632,7 @@ Default config:
     ["eslint/probeFailed"] = <function 4>
   }
   ```
-- `on_init` source (use "gF" to open): [../lsp/eslint.lua:34](../lsp/eslint.lua#L34)
+- `on_attach` source (use "gF" to open): [../lsp/eslint.lua:34](../lsp/eslint.lua#L34)
 - `root_dir` source (use "gF" to open): [../lsp/eslint.lua:34](../lsp/eslint.lua#L34)
 - `settings` :
   ```lua
@@ -7337,7 +7337,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1902", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1865", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua
@@ -10483,7 +10483,7 @@ Default config:
   ```lua
   { "svelte" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/svelte.lua:25](../lsp/svelte.lua#L25)
+- `on_attach` source (use "gF" to open): [../lsp/svelte.lua:12](../lsp/svelte.lua#L12)
 - `root_markers` :
   ```lua
   { "package.json", ".git" }
@@ -11246,7 +11246,7 @@ Default config:
   ```lua
   { "typst" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/tinymist.lua:57](../lsp/tinymist.lua#L57)
+- `on_attach` source (use "gF" to open): [../lsp/tinymist.lua:52](../lsp/tinymist.lua#L52)
 - `root_markers` :
   ```lua
   { ".git" }
