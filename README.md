@@ -1,13 +1,12 @@
 # nvim-lspconfig
 
 nvim-lspconfig is a "data only" repo, providing basic, default [Nvim LSP client](https://neovim.io/doc/user/lsp.html)
-configurations for various LSP servers.
-
-View [all configs](doc/configs.md) or `:help lspconfig-all` from Nvim.
+configurations for various LSP servers. View [all configs](doc/configs.md) or `:help lspconfig-all` from Nvim.
 
 ## Important ⚠️
 
 * These configs are **best-effort and supported by the community (you).** See [contributions](#contributions).
+* Ask questions on [GitHub Discussions](https://github.com/neovim/neovim/discussions), not the issue tracker.
 * If you found a bug in Nvim LSP (`:help lsp`), [report it to Neovim core](https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&template=lsp_bug_report.yml).
     * **Do not** report it here. Only configuration data lives here.
 * This repo only provides *configurations*. Its programmatic API is deprecated and must not be used externally.
@@ -137,10 +136,8 @@ vim.lsp.config('*', {
 The most common reasons a language server does not start or attach are:
 
 1. Language server is not installed. nvim-lspconfig does not install language servers for you. You should be able to run the `cmd` defined in each server's Lua module from the command line and see that the language server starts. If the `cmd` is an executable name instead of an absolute path to the executable, ensure it is on your path.
-2. Missing filetype plugins. Certain languages are not detecting by Vim/Nvim because they have not yet been added to the filetype detection system. Ensure `:set ft?` shows the filetype and not an empty value.
-3. Not triggering root detection. **Some** language servers will only start if it is opened in a directory, or child directory, containing a file which signals the *root* of the project. Most of the time, this is a `.git` folder, but each server defines the root config in the lua file. See [doc/configs.md](doc/configs.md) or the source for the list of root directories.
-4. You must pass `capabilities` for **each** `setup {}` if you want these to take effect.
-5. **Do not call `setup {}` twice for the same server**. The second call to `setup {}` will overwrite the first.
+2. Missing filetype plugins. Certain languages are not detected by Vim/Nvim because they have not yet been added to the filetype detection system. Ensure `:set filetype?` shows the filetype and not an empty value.
+3. Not triggering root detection. **Some** language servers require a "workspace", which is found by looking for an ancestor directory that contains a "root marker". The most common root marker is `.git/`, but each config defines other "root marker" names. Root markers/directories are listed in [doc/configs.md](doc/configs.md).
 
 ## Bug reports
 
@@ -163,10 +160,8 @@ Most of the time, the reason for failure is present in the logs.
 
 * `:LspInfo` (alias to `:checkhealth vim.lsp`) shows the status of active and configured language servers.
 * `:LspStart <config_name>` Start the requested server name. Will only successfully start if the command detects a root directory matching the current config. Pass `autostart = false` to your `.setup{}` call for a language server if you would like to launch clients solely with this command. Defaults to all servers matching current buffer filetype.
-* `:LspStop [<client_id_or_name> ...]` Stops the given server(s). Defaults to
-stopping all servers active on the current buffer. To force stop add `++force`
-* `:LspRestart [<client_id_or_name> ...]` Restarts the given client(s), and attempts to reattach to all
-previously attached buffers. 
+* `:LspStop [<client_id_or_name> ...]` Stops the given server(s). Defaults to stopping all servers active on the current buffer. To force stop add `++force`
+* `:LspRestart [<client_id_or_name> ...]` Restarts the given client(s), and attempts to reattach to all previously attached buffers.
 
 ## Contributions
 
