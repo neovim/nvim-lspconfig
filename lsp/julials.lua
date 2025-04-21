@@ -121,7 +121,7 @@ return {
   filetypes = { 'julia' },
   root_markers = root_files,
   on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'JuliaActivateEnv', activate_env, {
+    vim.api.nvim_buf_create_user_command(0, 'LspJuliaActivateEnv', activate_env, {
       desc = 'Activate a Julia environment',
       nargs = '?',
       complete = 'file',

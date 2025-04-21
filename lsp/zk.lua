@@ -17,7 +17,7 @@ return {
   filetypes = { 'markdown' },
   root_markers = { '.zk' },
   on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'ZkIndex', function()
+    vim.api.nvim_buf_create_user_command(0, 'LspZkIndex', function()
       vim.lsp.buf.execute_command {
         command = 'zk.index',
         arguments = { vim.api.nvim_buf_get_name(0) },
@@ -26,7 +26,7 @@ return {
       desc = 'ZkIndex',
     })
 
-    vim.api.nvim_buf_create_user_command(0, 'ZkList', function()
+    vim.api.nvim_buf_create_user_command(0, 'LspZkList', function()
       local bufpath = vim.api.nvim_buf_get_name(0)
       local root = find_zk_root(bufpath)
 
@@ -48,7 +48,7 @@ return {
       desc = 'ZkList',
     })
 
-    vim.api.nvim_buf_create_user_command(0, 'ZkNew', function(...)
+    vim.api.nvim_buf_create_user_command(0, 'LspZkNew', function(...)
       vim.lsp.buf_request(0, 'workspace/executeCommand', {
         command = 'zk.new',
         arguments = {

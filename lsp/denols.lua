@@ -106,7 +106,7 @@ return {
     ['textDocument/references'] = denols_handler,
   },
   on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'DenolsCache', function()
+    vim.api.nvim_buf_create_user_command(0, 'LspDenolsCache', function()
       local clients = vim.lsp.get_clients { bufnr = 0, name = 'denols' }
       if #clients > 0 then
         buf_cache(0, clients[#clients])

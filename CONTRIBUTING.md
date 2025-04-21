@@ -49,9 +49,9 @@ end
 
 ---@brief
 ---
--- https://github.com/microsoft/pyright
---
--- `pyright`, a static type checker and language server for python
+--- https://github.com/microsoft/pyright
+---
+--- `pyright`, a static type checker and language server for python
 return {
   cmd = { 'pyright-langserver', '--stdio' },
   filetypes = { 'python' },
@@ -73,7 +73,7 @@ return {
     },
   },
   on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'PyrightOrganizeImports', organize_imports, {})
+    vim.api.nvim_buf_create_user_command(0, 'LspPyrightOrganizeImports', organize_imports, {})
   end,
 }
 ```
