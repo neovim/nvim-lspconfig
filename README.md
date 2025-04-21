@@ -8,6 +8,7 @@ View [all configs](doc/configs.md) or `:help lspconfig-all` from Nvim.
 ## Important ⚠️
 
 * These configs are **best-effort and supported by the community (you).** See [contributions](#contributions).
+* Ask questions on [GitHub Discussions](https://github.com/neovim/neovim/discussions), not the issue tracker.
 * If you found a bug in Nvim LSP (`:help lsp`), [report it to Neovim core](https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&template=lsp_bug_report.yml).
     * **Do not** report it here. Only configuration data lives here.
 * This repo only provides *configurations*. Its programmatic API is deprecated and must not be used externally.
