@@ -56,10 +56,10 @@ return {
     },
   },
   on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'PyrightOrganizeImports', organize_imports, {
+    vim.api.nvim_buf_create_user_command(0, 'LspPyrightOrganizeImports', organize_imports, {
       desc = 'Organize Imports',
     })
-    vim.api.nvim_buf_create_user_command(0, 'PyrightSetPythonPath', set_python_path, {
+    vim.api.nvim_buf_create_user_command(0, 'LspPyrightSetPythonPath', set_python_path, {
       desc = 'Reconfigure pyright with the provided python path',
       nargs = 1,
       complete = 'file',
