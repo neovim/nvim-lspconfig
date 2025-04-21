@@ -209,6 +209,7 @@ Nvim by running `:help lspconfig-all`.
 - [pico8_ls](#pico8_ls)
 - [pkgbuild_language_server](#pkgbuild_language_server)
 - [please](#please)
+- [pli](#pli)
 - [poryscript_pls](#poryscript_pls)
 - [postgres_lsp](#postgres_lsp)
 - [prismals](#prismals)
@@ -7236,7 +7237,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1870", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1857", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua
@@ -7747,6 +7748,33 @@ Default config:
 - `root_markers` :
   ```lua
   { ".plzconfig" }
+  ```
+
+---
+
+## pli
+
+`pli_language_server` is a language server for the PL/I language used on IBM SystemZ mainframes.
+
+To learn how to configure the PL/I language server, see the [PL/I Language Support documentation](https://github.com/zowe/zowe-pli-language-support).
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.pli.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "pli_language_server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "pli" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".pliplugin" }
   ```
 
 ---
