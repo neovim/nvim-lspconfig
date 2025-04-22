@@ -19,7 +19,6 @@ Language server protocol (LSP) support for RPM Spec files.
 ```sh
 pip install rpm-spec-language-server
 ```
-
 ]],
   },
 }
