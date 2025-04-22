@@ -8,7 +8,7 @@ local fs = vim.fs
 ---@param client vim.lsp.Client
 ---@param target string
 local function on_init_sln(client, target)
-  vim.notify("Initializing: " .. target, vim.log.levels.INFO, { title = "roslyn-ls" })
+  vim.notify("Initializing: " .. target, vim.log.levels.INFO, { title = "roslyn_ls" })
   ---@diagnostic disable-next-line: param-type-mismatch
   client:request("solution/open", {
       solution = vim.uri_from_fname(target),
@@ -20,7 +20,7 @@ end
 ---@param client vim.lsp.Client
 ---@param project_files string[]
 local function on_init_project(client, project_files)
-  vim.notify("Initializing: projects", vim.log.levels.INFO, { title = "roslyn-ls" })
+  vim.notify("Initializing: projects", vim.log.levels.INFO, { title = "roslyn_ls" })
   ---@diagnostic disable-next-line: param-type-mismatch
   client:request("project/open", {
       projects = vim.tbl_map(function(file)
@@ -34,19 +34,16 @@ end
 local function roslyn_handlers()
   return {
         ["workspace/projectInitializationComplete"] = function(_, _, ctx)
-            vim.notify("Roslyn project initialization complete", vim.log.levels.INFO, { title = "roslyn.nvim" })
+            vim.notify("Roslyn project initialization complete", vim.log.levels.INFO, { title = "roslyn_ls" })
 
             local buffers = vim.lsp.get_buffers_by_client_id(ctx.client_id)
             for _, buf in ipairs(buffers) do
                 vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = buf })
             end
-
-            ---NOTE: This is used by rzls.nvim for init
-            vim.api.nvim_exec_autocmds("User", { pattern = "RoslynInitialized", modeline = false })
         end,
         ["workspace/_roslyn_projectHasUnresolvedDependencies"] = function()
-            vim.notify("Detected missing dependencies. Run dotnet restore command.", vim.log.levels.ERROR, {
-                title = "roslyn.nvim",
+            vim.notify("Detected missing dependencies. Run `dotnet restore` command.", vim.log.levels.ERROR, {
+                title = "roslyn_ls",
             })
             return vim.NIL
         end,
@@ -56,11 +53,11 @@ local function roslyn_handlers()
             ---@diagnostic disable-next-line: param-type-mismatch
             client:request("workspace/_roslyn_restore", result, function(err, response)
                 if err then
-                    vim.notify(err.message, vim.log.levels.ERROR, { title = "roslyn.nvim" })
+                    vim.notify(err.message, vim.log.levels.ERROR, { title = "roslyn_ls" })
                 end
                 if response then
                     for _, v in ipairs(response) do
-                        vim.notify(v.message, vim.log.levels.INFO, { title = "roslyn.nvim" })
+                        vim.notify(v.message, vim.log.levels.INFO, { title = "roslyn_ls" })
                     end
                 end
             end)
@@ -71,7 +68,7 @@ local function roslyn_handlers()
             vim.notify(
                 "Razor is not supported.\nPlease use https://github.com/tris203/rzls.nvim",
                 vim.log.levels.WARN,
-                { title = "roslyn.nvim" }
+                { title = "roslyn_ls" }
             )
             return vim.NIL
         end,
@@ -82,35 +79,18 @@ end
 return {
   name = "roslyn_ls",
   offset_encoding = 'utf-8',
-  ---@param dispatchers vim.lsp.rpc.Dispatchers
-  cmd = function (dispatchers)
-    local pipe_name = "/tmp/422df9c8340645ba8966061884b388aa.sock"
-    vim.system({
-        "roslyn_ls", -- or provide the location of dll manually "dotnet", "Microsoft.CodeAnalysis.LanguageServer.dll",
-        "--logLevel",
-        "Trace",
-        "--extensionLogDirectory", -- this property is required by the server
-        fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
-        "--pipe",
-        pipe_name
-      })
-    uv.sleep(1500)
-    return vim.lsp.rpc.connect(pipe_name)(dispatchers)
-  end,
+  cmd = {
+    "roslyn_ls", -- or provide the location of dll manually "dotnet", "Microsoft.CodeAnalysis.LanguageServer.dll",
+    "--logLevel",
+    "Trace",
+    "--extensionLogDirectory", -- this property is required by the server
+    fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
+    "--stdio",
+  },
   filetypes = { "cs" },
   root_markers = { '.sln', '.csproj' },
   handlers = roslyn_handlers(),
   on_attach = function (client, bufnr)
-    -- enable inlay hints if LSP server supports it
-    if client.supports_method("textDocument/inlayHint") then
-      vim.lsp.inlay_hint.enable(true, { bufnr=bufnr })
-    end
-
-    -- enable semantic tokens highligting hints
-    if client.supports_method("textDocument/semanticTokens") then
-      client.server_capabilities.semanticTokensProvider = true
-    end
-
     local bufname = vim.api.nvim_buf_get_name(bufnr)
     -- don't try to find sln or csproj for files from libraries
     -- outside of the project
@@ -144,15 +124,6 @@ return {
     end
   end,
   capabilities = {
-      -- HACK: Enable filewatching to later just not watch any files
-      -- This is to not make the server watch files and make everything super slow in certain situations
-      workspace = {
-          didChangeWatchedFiles = {
-              dynamicRegistration = true,
-              -- enable file watcher capabilities for lsp clients
-              relativePatternSupport = true,
-          },
-      },
       -- HACK: Doesn't show any diagnostics if we do not set this to true
       textDocument = {
           diagnostic = {
