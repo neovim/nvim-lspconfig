@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
 --- https://github.com/AdaCore/ada_language_server
@@ -19,6 +17,9 @@ local util = require 'lspconfig.util'
 ---     }
 --- })
 --- ```
+
+local util = require 'lspconfig.util'
+
 return {
   cmd = { 'ada_language_server' },
   filetypes = { 'ada' },

@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
 --- https://github.com/FoamScience/foam-language-server
@@ -8,6 +6,9 @@ local util = require 'lspconfig.util'
 --- ```sh
 --- npm install -g foam-language-server
 --- ```
+
+local util = require 'lspconfig.util'
+
 return {
   cmd = { 'foam-ls', '--stdio' },
   filetypes = { 'foam', 'OpenFOAM' },

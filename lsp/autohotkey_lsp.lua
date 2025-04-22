@@ -1,14 +1,16 @@
--- NOTE: AutoHotkey is used only on windows
-local function get_autohotkey_path()
-  local path = vim.fn.exepath('autohotkey.exe')
-  return #path > 0 and path or ''
-end
-
 ---@brief
 ---
 --- https://github.com/thqby/vscode-autohotkey2-lsp
 ---
 --- AutoHotkey v2.0 LSP implementation
+---
+--- NOTE: AutoHotkey is Windows-only.
+
+local function get_autohotkey_path()
+  local path = vim.fn.exepath('autohotkey.exe')
+  return #path > 0 and path or ''
+end
+
 return {
   cmd = { 'autohotkey_lsp', '--stdio' },
   filetypes = { 'autohotkey' },

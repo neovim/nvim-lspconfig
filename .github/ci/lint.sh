@@ -17,6 +17,15 @@ _check_cmd_buflocal() {
   fi
 }
 
+# Check that "@brief" docstring is the first line of each "lsp/*.lua" config.
+_check_brief_placement() {
+  if find ./lsp -type f -name "*.lua" -exec awk 'NR==1 && !/brief/{print FILENAME}' {} \; | grep --color=never '.' ; then
+    echo
+    echo '`@brief` docstring must be at the top of the config source file'
+    exit 1
+  fi
+}
+
 # Enforce "Lsp" prefix on all user commands.
 _check_lsp_cmd_prefix() {
   local exclude='tinymist'
@@ -58,6 +67,7 @@ _check_deprecated_utils() {
 }
 
 _check_cmd_buflocal
+_check_brief_placement
 _check_lsp_cmd_prefix
 _check_exec_cmd
 _check_deprecated_utils

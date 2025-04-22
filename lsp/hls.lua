@@ -1,5 +1,3 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
 --- https://github.com/haskell/haskell-language-server
@@ -13,6 +11,9 @@ local util = require 'lspconfig.util'
 ---   filetypes = { 'haskell', 'lhaskell', 'cabal' },
 --- })
 --- ```
+
+local util = require 'lspconfig.util'
+
 return {
   cmd = { 'haskell-language-server-wrapper', '--lsp' },
   filetypes = { 'haskell', 'lhaskell' },
