@@ -12,7 +12,7 @@ local function on_init_sln(client, target)
   ---@diagnostic disable-next-line: param-type-mismatch
   client:request('solution/open', {
     solution = vim.uri_from_fname(target),
-  }, function (_, _, _) end)
+  }, function(_, _, _) end)
 end
 
 ---@param client vim.lsp.Client
@@ -24,7 +24,7 @@ local function on_init_project(client, project_files)
     projects = vim.tbl_map(function(file)
       return vim.uri_from_fname(file)
     end, project_files),
-  }, function (_, _, _) end)
+  }, function(_, _, _) end)
 end
 
 local function roslyn_handlers()
@@ -86,14 +86,14 @@ return {
   filetypes = { 'cs' },
   root_markers = { '.sln', '.csproj' },
   handlers = roslyn_handlers(),
-  on_attach = function (client, bufnr)
+  on_attach = function(client, bufnr)
     local bufname = vim.api.nvim_buf_get_name(bufnr)
     -- don't try to find sln or csproj for files from libraries
     -- outside of the project
     if not bufname:match('^' .. fs.joinpath('/tmp/MetadataAsSource/')) then
       -- try find solutions root first
       local root_dir = nil
-      root_dir = fs.root(bufnr, function (name, path)
+      root_dir = fs.root(bufnr, function(name, path)
         local match = name:match('%.sln$') ~= nil
         if match then
           local sln_file = fs.joinpath(path, name)
@@ -104,11 +104,11 @@ return {
 
       if not root_dir then
         -- try find solutions root first
-        root_dir = fs.root(bufnr, function (name, path)
+        root_dir = fs.root(bufnr, function(name, path)
           local match = name:match('%.csproj$') ~= nil
           if match then
             local csproj_file = fs.joinpath(path, name)
-            on_init_project(client, {csproj_file})
+            on_init_project(client, { csproj_file })
           end
           return match
         end)
@@ -130,7 +130,7 @@ return {
   settings = {
     ['csharp|background_analysis'] = {
       dotnet_analyzer_diagnostics_scope = 'fullSolution',
-      dotnet_compiler_diagnostics_scope = 'fullSolution'
+      dotnet_compiler_diagnostics_scope = 'fullSolution',
     },
     ['csharp|inlay_hints'] = {
       csharp_enable_inlay_hints_for_implicit_object_creation = true,
@@ -147,7 +147,7 @@ return {
       dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
     },
     ['csharp|symbol_search'] = {
-      dotnet_search_reference_assemblies = true
+      dotnet_search_reference_assemblies = true,
     },
     ['csharp|completion'] = {
       dotnet_show_name_completion_suggestions = true,
@@ -157,6 +157,5 @@ return {
     ['csharp|code_lens'] = {
       dotnet_enable_references_code_lens = true,
     },
-  }
+  },
 }
-
