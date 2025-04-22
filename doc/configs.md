@@ -164,6 +164,7 @@ Nvim by running `:help lspconfig-all`.
 - [markdown_oxide](#markdown_oxide)
 - [marko-js](#marko-js)
 - [marksman](#marksman)
+- [mdx_analyzer](#mdx_analyzer)
 - [mesonlsp](#mesonlsp)
 - [metals](#metals)
 - [millet](#millet)
@@ -6299,6 +6300,45 @@ Default config:
 
 ---
 
+## mdx_analyzer
+
+https://github.com/mdx-js/mdx-analyzer
+
+`mdx-analyzer`, a language server for MDX
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.mdx_analyzer.setup{}
+```
+
+Default config:
+- `before_init` source (use "gF" to open): [../lsp/mdx_analyzer.lua:11](../lsp/mdx_analyzer.lua#L11)
+- `cmd` :
+  ```lua
+  { "mdx-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "mdx" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    typescript = {}
+  }
+  ```
+- `root_markers` :
+  ```lua
+  { "package.json" }
+  ```
+- `settings` :
+  ```lua
+  {}
+  ```
+- `single_file_support` : `true`
+
+---
+
 ## mesonlsp
 
 https://github.com/JCWasmx86/mesonlsp
@@ -7337,7 +7377,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1856", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1875", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua
