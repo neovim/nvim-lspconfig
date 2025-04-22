@@ -3,7 +3,6 @@ local root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait
 vim.opt.rtp:append(root)
 
 local util = require 'lspconfig.util'
-local inspect = vim.inspect
 
 local function template(s, params)
   return (s:gsub('{{([^{}]+)}}', params))
@@ -147,7 +146,7 @@ local function make_lsp_sections(is_markdown)
               if type(v) == 'boolean' then
                 return ('- `%s` : `%s`'):format(k, v)
               elseif type(v) ~= 'function' and k ~= 'root_dir' then
-                return ('- `%s` :\n  ```lua\n%s\n  ```'):format(k, indent(2, inspect(v)))
+                return ('- `%s` :\n  ```lua\n%s\n  ```'):format(k, indent(2, vim.inspect(v)))
               end
 
               local file = assert(io.open(config_file, 'r'))

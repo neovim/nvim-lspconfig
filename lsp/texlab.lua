@@ -63,12 +63,12 @@ local function buf_cancel_build(client, bufnr)
 end
 
 local function dependency_graph(client)
-  client.request('workspace/executeCommand', { command = 'texlab.showDependencyGraph' }, function(err, result)
+  client:exec_cmd({ command = 'texlab.showDependencyGraph' }, { bufnr = 0 }, function(err, result)
     if err then
       return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
     end
     vim.notify('The dependency graph has been generated:\n' .. result, vim.log.levels.INFO)
-  end, 0)
+  end)
 end
 
 local function command_factory(cmd)
@@ -102,10 +102,10 @@ end
 
 local function buf_find_envs(client, bufnr)
   local win = vim.api.nvim_get_current_win()
-  client.request('workspace/executeCommand', {
+  client:exec_cmd({
     command = 'texlab.findEnvironments',
     arguments = { vim.lsp.util.make_position_params(win, client.offset_encoding) },
-  }, function(err, result)
+  }, { bufnr = bufnr }, function(err, result)
     if err then
       return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
     end
@@ -126,7 +126,7 @@ local function buf_find_envs(client, bufnr)
       border = 'single',
       title = 'Environments',
     })
-  end, bufnr)
+  end)
 end
 
 local function buf_change_env(client, bufnr)
@@ -193,28 +193,28 @@ return {
     },
   },
   on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'TexlabBuild', client_with_fn(buf_build), {
+    vim.api.nvim_buf_create_user_command(0, 'LspTexlabBuild', client_with_fn(buf_build), {
       desc = 'Build the current buffer',
     })
-    vim.api.nvim_buf_create_user_command(0, 'TexlabForward', client_with_fn(buf_search), {
+    vim.api.nvim_buf_create_user_command(0, 'LspTexlabForward', client_with_fn(buf_search), {
       desc = 'Forward search from current position',
     })
-    vim.api.nvim_buf_create_user_command(0, 'TexlabCancelBuild', client_with_fn(buf_cancel_build), {
+    vim.api.nvim_buf_create_user_command(0, 'LspTexlabCancelBuild', client_with_fn(buf_cancel_build), {
       desc = 'Cancel the current build',
     })
-    vim.api.nvim_buf_create_user_command(0, 'TexlabDependencyGraph', client_with_fn(dependency_graph), {
+    vim.api.nvim_buf_create_user_command(0, 'LspTexlabDependencyGraph', client_with_fn(dependency_graph), {
       desc = 'Show the dependency graph',
     })
-    vim.api.nvim_buf_create_user_command(0, 'TexlabCleanArtifacts', client_with_fn(command_factory('Artifacts')), {
+    vim.api.nvim_buf_create_user_command(0, 'LspTexlabCleanArtifacts', client_with_fn(command_factory('Artifacts')), {
       desc = 'Clean the artifacts',
     })
-    vim.api.nvim_buf_create_user_command(0, 'TexlabCleanAuxiliary', client_with_fn(command_factory('Auxiliary')), {
+    vim.api.nvim_buf_create_user_command(0, 'LspTexlabCleanAuxiliary', client_with_fn(command_factory('Auxiliary')), {
       desc = 'Clean the auxiliary files',
     })
-    vim.api.nvim_buf_create_user_command(0, 'TexlabFindEnvironments', client_with_fn(buf_find_envs), {
+    vim.api.nvim_buf_create_user_command(0, 'LspTexlabFindEnvironments', client_with_fn(buf_find_envs), {
       desc = 'Find the environments at current position',
     })
-    vim.api.nvim_buf_create_user_command(0, 'TexlabChangeEnvironment', client_with_fn(buf_change_env), {
+    vim.api.nvim_buf_create_user_command(0, 'LspTexlabChangeEnvironment', client_with_fn(buf_change_env), {
       desc = 'Change the environment at current position',
     })
   end,

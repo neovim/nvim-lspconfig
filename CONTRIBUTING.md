@@ -1,3 +1,5 @@
+# Contributing to nvim-lspconfig
+
 ## Requirements
 
 - [Lint requirements](#lint)
@@ -6,7 +8,8 @@
 
 ## Scope of nvim-lspconfig
 
-The point of lspconfig is to provide the minimal configuration necessary for a server to act in compliance with the language server protocol. In general, if a server requires custom client-side commands or off-spec handlers, then the server configuration should be added *without* those in lspconfig and receive a dedicated plugin such as nvim-jdtls, nvim-metals, etc.
+The purpose of nvim-lspconfig is to provide configuration so that users can activate LSP with a single `vim.lsp.enable('foo')` call.
+It must not provide its own "framework". Any "framework" or "util" code must be upstreamed to Nvim core.
 
 ## Pull requests (PRs)
 
@@ -15,7 +18,9 @@ The point of lspconfig is to provide the minimal configuration necessary for a s
 - Use a **rebase workflow** for small PRs.
   - After addressing review comments, it's fine to rebase and force-push.
 
-## Adding a server to lspconfig
+## New config
+
+### Criteria
 
 New configs must meet these criteria (to avoid spam/quasi-marketing/vanity projects):
 
@@ -25,33 +30,42 @@ New configs must meet these criteria (to avoid spam/quasi-marketing/vanity proje
 This helps ensure that we only include actively maintained and widely used servers to provide a better experience for
 the community.
 
-To add a new language server, start with a minimal skeleton. See `:help lspconfig-new` and other configurations in `lsp/`.
+### Walkthrough
+
+To add a new config, copy an existing config from `lsp/`. Start with `lsp/lua_ls.lua` for a simple a config, or `lsp/jdtls.lua` or `lsp/pyright.lua` for more complex examples.
 
 When choosing a config name, convert dashes (`-`) to underscores (`_`). If the name of the server is a unique name (`pyright`, `clangd`) or a commonly used abbreviation (`zls`), prefer this as the server name. If the server instead follows the pattern x-language-server, prefer the convention `x_ls` (`jsonnet_ls`). 
 
-`default_config` should include:
+The minimal config properties are:
 
-* `cmd`: a list which includes the executable name as the first entry, with arguments constituting subsequent list elements (`--stdio` is common).
+* `cmd`: command defined as a string list, where the first item is an executable and following items are its arguments (`--stdio` is common).
   ```lua
   cmd = { 'typescript-language-server', '--stdio' }
   ```
 * `filetypes`: list of filetypes that should activate this config.
-* `root_markers`: a list of files that mark the root of the project.
-    * See `:help lspconfig-new`.
+* `root_markers`: a list of files that mark the root of the project/workspace.
+    * See `:help lsp-config`.
     * See `vim.fs.root()`
 
-An example for adding a new config `lsp/pyright.lua` is shown below:
+### Commands
+
+LSP servers may provide custom `workspace/executeCommand` commands. Because LSP does not provide any way for clients to programmatically discover/list these commands, configs may define Nvim commands which invoke the `workspace/executeCommand` commands. To keep things maintainable and discoverable, configs must follow these guidelines:
+
+- Commands must be buffer-local.
+- Commands must be prefixed with `:Lsp`. This is a crude way to improve "discoverability".
+- Do NOT create commands that merely alias existing *code-actions* or *code-lenses*, which are *already* auto-discoverable via the ["gra" keymap](https://neovim.io/doc/user/lsp.html#gra) (or `vim.lsp.buf.code_action()`)
+- Use `client:exec_cmd()` (instead of `request(..., 'workspace/executeCommand')`)
+
+### Example
+
+Following is an example new config for `lsp/pyright.lua`:
 
 ```lua
-local function organize_imports()
-  -- executes lsp command. See `lsp/pyright.lua` for the full example.
-end
-
 ---@brief
 ---
--- https://github.com/microsoft/pyright
---
--- `pyright`, a static type checker and language server for python
+--- https://github.com/microsoft/pyright
+---
+--- `pyright`, a static type checker and language server for python
 return {
   cmd = { 'pyright-langserver', '--stdio' },
   filetypes = { 'python' },
@@ -72,8 +86,15 @@ return {
       },
     },
   },
-  on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'PyrightOrganizeImports', organize_imports, {})
+  on_attach = function(client, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspPyrightOrganizeImports', function()
+      client:exec_cmd({
+        command = 'pyright.organizeimports',
+        arguments = { vim.uri_from_bufnr(bufnr) },
+      })
+    end, {
+      desc = 'Organize Imports',
+    })
   end,
 }
 ```
