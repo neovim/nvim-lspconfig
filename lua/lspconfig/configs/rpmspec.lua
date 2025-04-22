@@ -1,6 +1,6 @@
 return {
   default_config = {
-    cmd = { 'python3', '-mrpm_lsp_server', '--stdio' },
+    cmd = { 'rpm_lsp_server', '--stdio' },
     filetypes = { 'spec' },
     single_file_support = true,
     root_dir = function(fname)
@@ -13,6 +13,13 @@ return {
 https://github.com/dcermak/rpm-spec-language-server
 
 Language server protocol (LSP) support for RPM Spec files.
+
+`rpm-spec-language-server` can be installed by running,
+
+```sh
+pip install rpm-spec-language-server
+```
+
 ]],
   },
 }
