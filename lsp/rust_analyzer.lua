@@ -113,7 +113,7 @@ return {
     end
   end,
   on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'CargoReload', function()
+    vim.api.nvim_buf_create_user_command(0, 'LspCargoReload', function()
       reload_workspace(0)
     end, { desc = 'Reload current cargo workspace' })
   end,

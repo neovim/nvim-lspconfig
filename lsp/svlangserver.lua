@@ -35,10 +35,10 @@ return {
     },
   },
   on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'SvlangserverBuildIndex', build_index, {
+    vim.api.nvim_buf_create_user_command(0, 'LspSvlangserverBuildIndex', build_index, {
       desc = 'Instructs language server to rerun indexing',
     })
-    vim.api.nvim_buf_create_user_command(0, 'SvlangserverReportHierarchy', report_hierarchy, {
+    vim.api.nvim_buf_create_user_command(0, 'LspSvlangserverReportHierarchy', report_hierarchy, {
       desc = 'Generates hierarchy for the given module',
     })
   end,
