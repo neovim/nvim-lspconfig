@@ -1,7 +1,3 @@
-local util = require 'lspconfig.util'
-
-local root_files = { 'configure.ac', 'Makefile', 'Makefile.am', '*.mk' }
-
 ---@brief
 ---
 --- https://github.com/Freed-Wu/autotools-language-server
@@ -12,6 +8,11 @@ local root_files = { 'configure.ac', 'Makefile', 'Makefile.am', '*.mk' }
 --- ```
 ---
 --- Language server for autoconf, automake and make using tree sitter in python.
+
+local util = require 'lspconfig.util'
+
+local root_files = { 'configure.ac', 'Makefile', 'Makefile.am', '*.mk' }
+
 return {
   cmd = { 'autotools-language-server' },
   filetypes = { 'config', 'automake', 'make' },
