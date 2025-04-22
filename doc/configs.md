@@ -381,7 +381,7 @@ Default config:
   ```lua
   { "ada" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/ada_ls.lua:22](../lsp/ada_ls.lua#L22)
+- `root_dir` source (use "gF" to open): [../lsp/ada_ls.lua:23](../lsp/ada_ls.lua#L23)
 
 ---
 
@@ -405,7 +405,7 @@ Default config:
   ```lua
   { "agda" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/agda_ls.lua:8](../lsp/agda_ls.lua#L8)
+- `root_dir` source (use "gF" to open): [../lsp/agda_ls.lua:9](../lsp/agda_ls.lua#L9)
 
 ---
 
@@ -774,7 +774,7 @@ Default config:
   ```lua
   { "arduino" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/arduino_language_server.lua:72](../lsp/arduino_language_server.lua#L72)
+- `root_dir` source (use "gF" to open): [../lsp/arduino_language_server.lua:73](../lsp/arduino_language_server.lua#L73)
 
 ---
 
@@ -960,6 +960,8 @@ https://github.com/thqby/vscode-autohotkey2-lsp
 
 AutoHotkey v2.0 LSP implementation
 
+NOTE: AutoHotkey is Windows-only.
+
 Snippet to enable the language server:
 ```lua
 require'lspconfig'.autohotkey_lsp.setup{}
@@ -1044,7 +1046,7 @@ Default config:
   ```lua
   { "config", "automake", "make" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/autotools_ls.lua:15](../lsp/autotools_ls.lua#L15)
+- `root_dir` source (use "gF" to open): [../lsp/autotools_ls.lua:16](../lsp/autotools_ls.lua#L16)
 
 ---
 
@@ -1708,7 +1710,11 @@ Default config:
 
 ## buf_ls
 
+https://github.com/bufbuild/buf
 
+buf beta lsp included in the cli itself
+
+buf beta lsp is a Protobuf language server compatible with Buf modules and workspaces
 
 Snippet to enable the language server:
 ```lua
@@ -2225,7 +2231,7 @@ Default config:
     AutomaticWorkspaceInit = true
   }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/csharp_ls.lua:12](../lsp/csharp_ls.lua#L12)
+- `root_dir` source (use "gF" to open): [../lsp/csharp_ls.lua:13](../lsp/csharp_ls.lua#L13)
 
 ---
 
@@ -2508,7 +2514,7 @@ Default config:
 
 ## daedalus_ls
 
-
+DaedalusLanguageServer
 
 Snippet to enable the language server:
 ```lua
@@ -3893,7 +3899,7 @@ Default config:
   ```lua
   { "foam", "OpenFOAM" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/foam_ls.lua:11](../lsp/foam_ls.lua#L11)
+- `root_dir` source (use "gF" to open): [../lsp/foam_ls.lua:12](../lsp/foam_ls.lua#L12)
 
 ---
 
@@ -4115,7 +4121,7 @@ require'lspconfig'.gdscript.setup{}
 ```
 
 Default config:
-- `cmd` source (use "gF" to open): [../lsp/gdscript.lua:9](../lsp/gdscript.lua#L9)
+- `cmd` source (use "gF" to open): [../lsp/gdscript.lua:10](../lsp/gdscript.lua#L10)
 - `filetypes` :
   ```lua
   { "gd", "gdscript", "gdscript3" }
@@ -4966,7 +4972,7 @@ Default config:
   ```lua
   { "haskell", "lhaskell" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/hls.lua:16](../lsp/hls.lua#L16)
+- `root_dir` source (use "gF" to open): [../lsp/hls.lua:17](../lsp/hls.lua#L17)
 - `settings` :
   ```lua
   {
@@ -7377,7 +7383,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "OmniSharp", "-z", "--hostPID", "1837", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+  { "OmniSharp", "-z", "--hostPID", "1865", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   ```
 - `filetypes` :
   ```lua
@@ -9772,7 +9778,7 @@ Default config:
   ```lua
   { "solidity" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/solc.lua:8](../lsp/solc.lua#L8)
+- `root_dir` source (use "gF" to open): [../lsp/solc.lua:9](../lsp/solc.lua#L9)
 
 ---
 
