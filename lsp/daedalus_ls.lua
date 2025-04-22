@@ -1,3 +1,7 @@
+--- @brief
+---
+--- DaedalusLanguageServer
+
 return {
   cmd = { 'DaedalusLanguageServer' },
   filetypes = { 'd' },

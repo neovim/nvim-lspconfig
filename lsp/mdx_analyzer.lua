@@ -1,11 +1,7 @@
 ---@brief
+--- https://github.com/mdx-js/mdx-analyzer
 ---
---- https://github.com/withastro/language-tools/tree/main/packages/language-server
----
---- `astro-ls` can be installed via `npm`:
---- ```sh
---- npm install -g @astrojs/language-server
---- ```
+--- `mdx-analyzer`, a language server for MDX
 
 local function get_typescript_server_path(root_dir)
   local project_root = vim.fs.dirname(vim.fs.find('node_modules', { path = root_dir, upward = true })[1])
@@ -13,9 +9,10 @@ local function get_typescript_server_path(root_dir)
 end
 
 return {
-  cmd = { 'astro-ls', '--stdio' },
-  filetypes = { 'astro' },
-  root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
+  cmd = { 'mdx-language-server', '--stdio' },
+  filetypes = { 'mdx' },
+  root_markers = { 'package.json' },
+  settings = {},
   init_options = {
     typescript = {},
   },
