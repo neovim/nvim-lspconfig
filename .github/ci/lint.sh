@@ -45,6 +45,15 @@ _check_exec_cmd() {
   fi
 }
 
+# Disallow util functions in Nvim 0.11+ (lsp/) configs.
+_check_deprecated_in_nvim_0_11() {
+  if git grep -P 'is_descendant' -- 'lsp/*.lua' ; then
+    echo
+    echo 'Use vim.fs.relpath() instead of util.path.is_descendant()'
+    exit 1
+  fi
+}
+
 _check_deprecated_utils() {
   # checks for added lines that contain search pattern and prints them
   SEARCH_PATTERN='(path\.dirname|fn\.cwd)'
@@ -70,4 +79,5 @@ _check_cmd_buflocal
 _check_brief_placement
 _check_lsp_cmd_prefix
 _check_exec_cmd
+_check_deprecated_in_nvim_0_11
 _check_deprecated_utils
