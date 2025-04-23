@@ -20,20 +20,6 @@ M.default_config = {
 -- global on_setup hook
 M.on_setup = nil
 
-function M.bufname_valid(bufname)
-  if bufname:match '^/' or bufname:match '^[a-zA-Z]:' or bufname:match '^zipfile://' or bufname:match '^tarfile:' then
-    return true
-  end
-  return false
-end
-
-function M.validate_bufnr(bufnr)
-  if nvim_eleven then
-    validate('bufnr', bufnr, 'number')
-  end
-  return bufnr == 0 and api.nvim_get_current_buf() or bufnr
-end
-
 local function escape_wildcards(path)
   return path:gsub('([%[%]%?%*])', '\\%1')
 end
@@ -372,6 +358,22 @@ function M.get_managed_clients()
     end
   end
   return clients
+end
+
+--- @deprecated Will be removed. Do not use.
+function M.bufname_valid(bufname)
+  if bufname:match '^/' or bufname:match '^[a-zA-Z]:' or bufname:match '^zipfile://' or bufname:match '^tarfile:' then
+    return true
+  end
+  return false
+end
+
+--- @deprecated Will be removed. Do not use.
+function M.validate_bufnr(bufnr)
+  if nvim_eleven then
+    validate('bufnr', bufnr, 'number')
+  end
+  return bufnr == 0 and api.nvim_get_current_buf() or bufnr
 end
 
 return M

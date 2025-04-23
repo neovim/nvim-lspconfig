@@ -11,12 +11,9 @@
 --- - clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html)
 ---   specified as compile_commands.json, see https://clangd.llvm.org/installation#compile_commandsjson
 
-local util = require 'lspconfig.util'
-
 -- https://clangd.llvm.org/extensions.html#switch-between-sourceheader
 local function switch_source_header(bufnr)
   local method_name = 'textDocument/switchSourceHeader'
-  bufnr = util.validate_bufnr(bufnr)
   local client = vim.lsp.get_clients({ bufnr = bufnr, name = 'clangd' })[1]
   if not client then
     return vim.notify(('method %s is not supported by any servers active on the current buffer'):format(method_name))
