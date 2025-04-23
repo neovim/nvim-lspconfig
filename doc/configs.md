@@ -1969,7 +1969,7 @@ Default config:
   ```lua
   { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/clangd.lua:63](../lsp/clangd.lua#L63)
+- `on_attach` source (use "gF" to open): [../lsp/clangd.lua:60](../lsp/clangd.lua#L60)
 - `root_markers` :
   ```lua
   { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" }
@@ -3104,7 +3104,7 @@ Default config:
     show_symbols_only_follow_by_hanzi = false
   }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/ds_pinyin_lsp.lua:49](../lsp/ds_pinyin_lsp.lua#L49)
+- `on_attach` source (use "gF" to open): [../lsp/ds_pinyin_lsp.lua:45](../lsp/ds_pinyin_lsp.lua#L45)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -9224,7 +9224,7 @@ require'lspconfig'.rust_analyzer.setup{}
 ```
 
 Default config:
-- `before_init` source (use "gF" to open): [../lsp/rust_analyzer.lua:57](../lsp/rust_analyzer.lua#L57)
+- `before_init` source (use "gF" to open): [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
 - `capabilities` :
   ```lua
   {
@@ -9241,8 +9241,8 @@ Default config:
   ```lua
   { "rust" }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/rust_analyzer.lua:57](../lsp/rust_analyzer.lua#L57)
-- `root_dir` source (use "gF" to open): [../lsp/rust_analyzer.lua:57](../lsp/rust_analyzer.lua#L57)
+- `on_attach` source (use "gF" to open): [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
+- `root_dir` source (use "gF" to open): [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
 
 ---
 
