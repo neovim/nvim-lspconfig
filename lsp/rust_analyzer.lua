@@ -24,7 +24,6 @@
 local util = require 'lspconfig.util'
 
 local function reload_workspace(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
   local clients = vim.lsp.get_clients { bufnr = bufnr, name = 'rust_analyzer' }
   for _, client in ipairs(clients) do
     vim.notify 'Reloading Cargo Workspace'

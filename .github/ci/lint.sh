@@ -57,6 +57,11 @@ _check_deprecated_in_nvim_0_11() {
     echo 'Use vim.iter(vim.fs.parents(fname)):find(…) instead of util.path.search_ancestors(fname,…)'
     exit 1
   fi
+  if git grep -P 'validate_bufnr' -- 'lsp/*.lua' ; then
+    echo
+    echo 'Do not use util.validate_bufnr(). Nvim stdlib already treats bufnr=0 as "current buffer".'
+    exit 1
+  fi
 }
 
 _check_deprecated_utils() {
