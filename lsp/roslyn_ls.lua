@@ -1,6 +1,6 @@
---- borrowed some source from: https://github.com/seblj/roslyn.nvim
--- config that activates keymaps and enables snippet support
----comment
+---@brief
+---
+-- https://github.com/dotnet/roslyn
 
 local uv = vim.uv
 local fs = vim.fs
@@ -10,9 +10,9 @@ local fs = vim.fs
 local function on_init_sln(client, target)
   vim.notify('Initializing: ' .. target, vim.log.levels.INFO, { title = 'roslyn_ls' })
   ---@diagnostic disable-next-line: param-type-mismatch
-  client:request('solution/open', {
+  client:notify('solution/open', {
     solution = vim.uri_from_fname(target),
-  }, function(_, _, _) end)
+  })
 end
 
 ---@param client vim.lsp.Client
@@ -20,11 +20,11 @@ end
 local function on_init_project(client, project_files)
   vim.notify('Initializing: projects', vim.log.levels.INFO, { title = 'roslyn_ls' })
   ---@diagnostic disable-next-line: param-type-mismatch
-  client:request('project/open', {
+  client:notify('project/open', {
     projects = vim.tbl_map(function(file)
       return vim.uri_from_fname(file)
     end, project_files),
-  }, function(_, _, _) end)
+  })
 end
 
 local function roslyn_handlers()
