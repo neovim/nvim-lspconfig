@@ -34,43 +34,6 @@ function M.validate_bufnr(bufnr)
   return bufnr == 0 and api.nvim_get_current_buf() or bufnr
 end
 
--- Maps lspconfig-style command options to nvim_create_user_command (i.e. |command-attributes|) option names.
-local opts_aliases = {
-  ['description'] = 'desc',
-}
-
----@param command_definition table<string | integer, any>
-function M._parse_user_command_options(command_definition)
-  ---@type table<string, string | boolean | number>
-  local opts = {}
-  for k, v in pairs(command_definition) do
-    if type(k) == 'string' then
-      local attribute = k.gsub(k, '^%-+', '')
-      opts[opts_aliases[attribute] or attribute] = v
-    elseif type(k) == 'number' and type(v) == 'string' and v:match '^%-' then
-      -- Splits strings like "-nargs=* -complete=customlist,v:lua.something" into { "-nargs=*", "-complete=customlist,v:lua.something" }
-      for _, command_attribute in ipairs(vim.split(v, '%s')) do
-        -- Splits attribute into a key-value pair, like "-nargs=*" to { "-nargs", "*" }
-        local attribute, value = unpack(vim.split(command_attribute, '=', { plain = true }))
-        attribute = attribute.gsub(attribute, '^%-+', '')
-        opts[opts_aliases[attribute] or attribute] = value or true
-      end
-    end
-  end
-  return opts
-end
-
-function M.create_module_commands(module_name, commands)
-  for command_name, def in pairs(commands) do
-    if type(def) ~= 'function' then
-      local opts = M._parse_user_command_options(def)
-      api.nvim_create_user_command(command_name, function(info)
-        require('lspconfig')[module_name].commands[command_name][1](unpack(info.fargs))
-      end, opts)
-    end
-  end
-end
-
 function M.search_ancestors(startpath, func)
   if nvim_eleven then
     validate('func', func, 'function')
@@ -133,46 +96,6 @@ function M.insert_package_json(config_files, field, fname)
   return config_files
 end
 
-function M.get_config_by_ft(filetype)
-  local configs = require 'lspconfig.configs'
-  local matching_configs = {}
-  for _, config in pairs(configs) do
-    local filetypes = config.filetypes or {}
-    for _, ft in pairs(filetypes) do
-      if ft == filetype then
-        table.insert(matching_configs, config)
-      end
-    end
-  end
-  return matching_configs
-end
-
---- Note: In Nvim 0.11+ this currently has no public interface, the healthcheck uses the private
---- `vim.lsp._enabled_configs`:
---- https://github.com/neovim/neovim/blob/28e819018520a2300eaeeec6794ffcd614b25dd2/runtime/lua/vim/lsp/health.lua#L186
-function M.get_managed_clients()
-  local configs = require 'lspconfig.configs'
-  local clients = {}
-  for _, config in pairs(configs) do
-    if config.manager then
-      vim.list_extend(clients, config.manager:clients())
-    end
-  end
-  return clients
-end
-
---- @deprecated use `vim.lsp.config` in Nvim 0.11+ instead.
-function M.available_servers()
-  local servers = {}
-  local configs = require 'lspconfig.configs'
-  for server, config in pairs(configs) do
-    if config.manager ~= nil then
-      table.insert(servers, server)
-    end
-  end
-  return servers
-end
-
 -- For zipfile: or tarfile: virtual paths, returns the path to the archive.
 -- Other paths are returned unaltered.
 function M.strip_archive_subpath(path)
@@ -182,8 +105,15 @@ function M.strip_archive_subpath(path)
   return path
 end
 
---- Public functions that can be deprecated once minimum required neovim version is high enough
+---
+---
+---
+--- Deprecated: Remove these functions when we drop support for legacy configs:
+---
+---
+---
 
+--- Deprecated in Nvim 0.11
 local function is_fs_root(path)
   if iswin then
     return path:match '^%a:$'
@@ -192,7 +122,7 @@ local function is_fs_root(path)
   end
 end
 
--- Traverse the path calling cb along the way.
+--- Deprecated in Nvim 0.11
 local function traverse_parents(path, cb)
   path = vim.uv.fs_realpath(path)
   local dir = path
@@ -212,7 +142,7 @@ local function traverse_parents(path, cb)
   end
 end
 
---- This can be replaced with `vim.fs.relpath` once minimum neovim version is at least 0.11.
+--- Deprecated in Nvim 0.11
 function M.path.is_descendant(root, path)
   if not path then
     return false
@@ -227,16 +157,37 @@ function M.path.is_descendant(root, path)
   return dir == root
 end
 
---- Helper functions that can be removed once minimum required neovim version is high enough
-
 function M.tbl_flatten(t)
   --- @diagnostic disable-next-line:deprecated
   return nvim_eleven and vim.iter(t):flatten(math.huge):totable() or vim.tbl_flatten(t)
 end
 
----
---- Deprecated functions
----
+--- @deprecated
+function M.get_config_by_ft(filetype)
+  local configs = require 'lspconfig.configs'
+  local matching_configs = {}
+  for _, config in pairs(configs) do
+    local filetypes = config.filetypes or {}
+    for _, ft in pairs(filetypes) do
+      if ft == filetype then
+        table.insert(matching_configs, config)
+      end
+    end
+  end
+  return matching_configs
+end
+
+--- @deprecated use `vim.lsp.config` in Nvim 0.11+ instead.
+function M.available_servers()
+  local servers = {}
+  local configs = require 'lspconfig.configs'
+  for server, config in pairs(configs) do
+    if config.manager ~= nil then
+      table.insert(servers, server)
+    end
+  end
+  return servers
+end
 
 --- @deprecated use `vim.fn.isdirectory(path) == 1` instead
 --- @param filename string
@@ -366,6 +317,60 @@ end
 --- @deprecated Will be removed. Do not use.
 function M.get_active_client_by_name(bufnr, servername)
   return vim.lsp.get_clients({ bufnr = bufnr, name = servername })[1]
+end
+
+-- Maps lspconfig-style command options to nvim_create_user_command (i.e. |command-attributes|) option names.
+local opts_aliases = {
+  ['description'] = 'desc',
+}
+
+--- @deprecated Will be removed. Do not use.
+---@param command_definition table<string | integer, any>
+function M._parse_user_command_options(command_definition)
+  ---@type table<string, string | boolean | number>
+  local opts = {}
+  for k, v in pairs(command_definition) do
+    if type(k) == 'string' then
+      local attribute = k.gsub(k, '^%-+', '')
+      opts[opts_aliases[attribute] or attribute] = v
+    elseif type(k) == 'number' and type(v) == 'string' and v:match '^%-' then
+      -- Splits strings like "-nargs=* -complete=customlist,v:lua.something" into { "-nargs=*", "-complete=customlist,v:lua.something" }
+      for _, command_attribute in ipairs(vim.split(v, '%s')) do
+        -- Splits attribute into a key-value pair, like "-nargs=*" to { "-nargs", "*" }
+        local attribute, value = unpack(vim.split(command_attribute, '=', { plain = true }))
+        attribute = attribute.gsub(attribute, '^%-+', '')
+        opts[opts_aliases[attribute] or attribute] = value or true
+      end
+    end
+  end
+  return opts
+end
+
+--- @deprecated Will be removed. Do not use.
+function M.create_module_commands(module_name, commands)
+  for command_name, def in pairs(commands) do
+    if type(def) ~= 'function' then
+      local opts = M._parse_user_command_options(def)
+      api.nvim_create_user_command(command_name, function(info)
+        require('lspconfig')[module_name].commands[command_name][1](unpack(info.fargs))
+      end, opts)
+    end
+  end
+end
+
+--- Note: In Nvim 0.11+ this currently has no public interface, the healthcheck uses the private
+--- `vim.lsp._enabled_configs`:
+--- https://github.com/neovim/neovim/blob/28e819018520a2300eaeeec6794ffcd614b25dd2/runtime/lua/vim/lsp/health.lua#L186
+--- @deprecated Will be removed. Do not use.
+function M.get_managed_clients()
+  local configs = require 'lspconfig.configs'
+  local clients = {}
+  for _, config in pairs(configs) do
+    if config.manager then
+      vim.list_extend(clients, config.manager:clients())
+    end
+  end
+  return clients
 end
 
 return M

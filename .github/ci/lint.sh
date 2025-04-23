@@ -66,7 +66,7 @@ _check_deprecated_utils() {
     exit 1
   fi
 
-  SEARCH_PATTERN='(util\.path\.dirname|util\.path\.sanitize|util\.path\.exists|util\.path\.is_file|util\.path\.is_dir|util\.path\.join|util\.path\.iterate_parents|util\.path\.traverse_parents|util\.find_mercurial_ancestor|util\.find_node_modules_ancestor|util\.find_package_json_ancestor|util\.find_git_ancestor|util\.get_lsp_clients|util\.get_active_client_by_name)'
+  SEARCH_PATTERN='(util\.path\.dirname|util\.path\.sanitize|util\.path\.exists|util\.path\.is_file|util\.path\.is_dir|util\.path\.join|util\.path\.iterate_parents|util\.find_mercurial_ancestor|util\.find_node_modules_ancestor|util\.find_package_json_ancestor|util\.find_git_ancestor|util\.get_lsp_clients|util\.get_active_client_by_name)'
 
   if git diff --pickaxe-all -U0 -G "${SEARCH_PATTERN}" "${REF_BRANCH}" "${PR_BRANCH}" -- '*.lua' | grep -Ev '\.lua$' | grep -E "^\+.*${SEARCH_PATTERN}" ; then
     echo
