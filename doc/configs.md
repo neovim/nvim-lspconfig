@@ -3766,7 +3766,7 @@ Default config:
   ```lua
   { "fennel" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/fennel_ls.lua:12](../lsp/fennel_ls.lua#L12)
+- `root_dir` source (use "gF" to open): [../lsp/fennel_ls.lua:10](../lsp/fennel_ls.lua#L10)
 - `settings` :
   ```lua
   {}
@@ -3899,7 +3899,7 @@ Default config:
   ```lua
   { "foam", "OpenFOAM" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/foam_ls.lua:12](../lsp/foam_ls.lua#L12)
+- `root_dir` source (use "gF" to open): [../lsp/foam_ls.lua:10](../lsp/foam_ls.lua#L10)
 
 ---
 
@@ -11976,7 +11976,7 @@ Default config:
   ```lua
   { "vala", "genie" }
   ```
-- `root_dir` source (use "gF" to open): [../lsp/vala_ls.lua:28](../lsp/vala_ls.lua#L28)
+- `root_dir` source (use "gF" to open): [../lsp/vala_ls.lua:26](../lsp/vala_ls.lua#L26)
 
 ---
 
