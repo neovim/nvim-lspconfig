@@ -10752,7 +10752,7 @@ require'lspconfig'.tailwindcss.setup{}
 ```
 
 Default config:
-- `before_init` source (use "gF" to open): [../lsp/tailwindcss.lua:8](../lsp/tailwindcss.lua#L8)
+- `before_init` source (use "gF" to open): [../lsp/tailwindcss.lua:9](../lsp/tailwindcss.lua#L9)
 - `cmd` :
   ```lua
   { "tailwindcss-language-server", "--stdio" }
@@ -10761,10 +10761,7 @@ Default config:
   ```lua
   { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
   ```
-- `root_markers` :
-  ```lua
-  { "tailwind.config.js", "tailwind.config.cjs", "tailwind.config.mjs", "tailwind.config.ts", "postcss.config.js", "postcss.config.cjs", "postcss.config.mjs", "postcss.config.ts" }
-  ```
+- `root_dir` source (use "gF" to open): [../lsp/tailwindcss.lua:9](../lsp/tailwindcss.lua#L9)
 - `settings` :
   ```lua
   {
