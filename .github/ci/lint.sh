@@ -52,6 +52,11 @@ _check_deprecated_in_nvim_0_11() {
     echo 'Use vim.fs.relpath() instead of util.path.is_descendant()'
     exit 1
   fi
+  if git grep -P 'search_ancestors' -- 'lsp/*.lua' ; then
+    echo
+    echo 'Use vim.iter(vim.fs.parents(fname)):find(…) instead of util.path.search_ancestors(fname,…)'
+    exit 1
+  fi
 }
 
 _check_deprecated_utils() {
@@ -66,7 +71,7 @@ _check_deprecated_utils() {
     exit 1
   fi
 
-  SEARCH_PATTERN='(util\.path\.dirname|util\.path\.sanitize|util\.path\.exists|util\.path\.is_file|util\.path\.is_dir|util\.path\.join|util\.path\.iterate_parents|util\.path\.traverse_parents|util\.find_mercurial_ancestor|util\.find_node_modules_ancestor|util\.find_package_json_ancestor|util\.find_git_ancestor|util\.get_lsp_clients|util\.get_active_client_by_name)'
+  SEARCH_PATTERN='(util\.path\.dirname|util\.path\.sanitize|util\.path\.exists|util\.path\.is_file|util\.path\.is_dir|util\.path\.join|util\.path\.iterate_parents|util\.find_mercurial_ancestor|util\.find_node_modules_ancestor|util\.find_package_json_ancestor|util\.find_git_ancestor|util\.get_lsp_clients|util\.get_active_client_by_name)'
 
   if git diff --pickaxe-all -U0 -G "${SEARCH_PATTERN}" "${REF_BRANCH}" "${PR_BRANCH}" -- '*.lua' | grep -Ev '\.lua$' | grep -E "^\+.*${SEARCH_PATTERN}" ; then
     echo
