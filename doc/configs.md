@@ -8969,6 +8969,12 @@ https://github.com/dcermak/rpm-spec-language-server
 
 Language server protocol (LSP) support for RPM Spec files.
 
+`rpm-spec-language-server` can be installed by running,
+
+```sh
+pip install rpm-spec-language-server
+```
+
 Snippet to enable the language server:
 ```lua
 require'lspconfig'.rpmspec.setup{}
@@ -8977,7 +8983,7 @@ require'lspconfig'.rpmspec.setup{}
 Default config:
 - `cmd` :
   ```lua
-  { "python3", "-mrpm_lsp_server", "--stdio" }
+  { "rpm_lsp_server", "--stdio" }
   ```
 - `filetypes` :
   ```lua
