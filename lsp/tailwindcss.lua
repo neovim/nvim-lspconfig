@@ -4,6 +4,7 @@
 --- Tailwind CSS Language Server can be installed via npm:
 ---
 --- npm install -g @tailwindcss/language-server
+local util = require 'lspconfig.util'
 
 return {
   cmd = { 'tailwindcss-language-server', '--stdio' },
@@ -103,14 +104,19 @@ return {
     end
   end,
   workspace_required = true,
-  root_markers = {
-    'tailwind.config.js',
-    'tailwind.config.cjs',
-    'tailwind.config.mjs',
-    'tailwind.config.ts',
-    'postcss.config.js',
-    'postcss.config.cjs',
-    'postcss.config.mjs',
-    'postcss.config.ts',
-  },
+  root_dir = function(bufnr, on_dir)
+    local root_files = {
+      'tailwind.config.js',
+      'tailwind.config.cjs',
+      'tailwind.config.mjs',
+      'tailwind.config.ts',
+      'postcss.config.js',
+      'postcss.config.cjs',
+      'postcss.config.mjs',
+      'postcss.config.ts',
+    }
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    root_files = util.insert_package_json(root_files, 'tailwindcss', fname)
+    on_dir(vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1]))
+  end,
 }
