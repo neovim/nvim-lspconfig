@@ -52,6 +52,11 @@ _check_deprecated_in_nvim_0_11() {
     echo 'Use vim.fs.relpath() instead of util.path.is_descendant()'
     exit 1
   fi
+  if git grep -P 'search_ancestors' -- 'lsp/*.lua' ; then
+    echo
+    echo 'Use vim.iter(vim.fs.parents(fname)):find(…) instead of util.path.search_ancestors(fname,…)'
+    exit 1
+  fi
 }
 
 _check_deprecated_utils() {

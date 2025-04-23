@@ -34,27 +34,6 @@ function M.validate_bufnr(bufnr)
   return bufnr == 0 and api.nvim_get_current_buf() or bufnr
 end
 
-function M.search_ancestors(startpath, func)
-  if nvim_eleven then
-    validate('func', func, 'function')
-  end
-  if func(startpath) then
-    return startpath
-  end
-  local guard = 100
-  for path in vim.fs.parents(startpath) do
-    -- Prevent infinite recursion if our algorithm breaks
-    guard = guard - 1
-    if guard == 0 then
-      return
-    end
-
-    if func(path) then
-      return path
-    end
-  end
-end
-
 local function escape_wildcards(path)
   return path:gsub('([%[%]%?%*])', '\\%1')
 end
@@ -112,6 +91,28 @@ end
 ---
 ---
 ---
+
+--- Deprecated in Nvim 0.11
+function M.search_ancestors(startpath, func)
+  if nvim_eleven then
+    validate('func', func, 'function')
+  end
+  if func(startpath) then
+    return startpath
+  end
+  local guard = 100
+  for path in vim.fs.parents(startpath) do
+    -- Prevent infinite recursion if our algorithm breaks
+    guard = guard - 1
+    if guard == 0 then
+      return
+    end
+
+    if func(path) then
+      return path
+    end
+  end
+end
 
 --- Deprecated in Nvim 0.11
 local function is_fs_root(path)
