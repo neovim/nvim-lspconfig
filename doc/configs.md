@@ -11844,6 +11844,7 @@ Default config:
   ```lua
   { "unocss.config.js", "unocss.config.ts", "uno.config.js", "uno.config.ts" }
   ```
+- `workspace_required` : `true`
 
 ---
 
