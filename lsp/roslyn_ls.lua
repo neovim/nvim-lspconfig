@@ -1,6 +1,23 @@
 ---@brief
 ---
 -- https://github.com/dotnet/roslyn
+--
+-- To install the server, compile from source or download as nuget package.
+-- Go to `https://dev.azure.com/azure-public/vside/_artifacts/feed/vs-impl/NuGet/Microsoft.CodeAnalysis.LanguageServer.<platform>/overview`
+-- replace `<platform>` with one of the following `linux-x64`, `osx-x64`, `win-x64`, `neutral` (for more info on the download location see https://github.com/dotnet/roslyn/issues/71474#issuecomment-2177303207).
+-- Download and extract it (nuget's are zip files).
+-- - if you shose `neutral` nuget version, then you have to change the `cmd` like so:
+--   cmd = {
+--     'dotnet',
+--     '<my_folder>/Microsoft.CodeAnalysis.LanguageServer.dll',
+--     '--logLevel', -- this property is required by the server
+--     'Information',
+--     '--extensionLogDirectory', -- this property is required by the server
+--     fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
+--     '--stdio',
+--   },
+--   where `<my_folder>` has to be the folder you extracted the nuget package to.
+-- - for all other platforms put the extracted folder to neovim's PATH (`vim.env.PATH`)
 
 local uv = vim.uv
 local fs = vim.fs
@@ -76,49 +93,57 @@ return {
   name = 'roslyn_ls',
   offset_encoding = 'utf-8',
   cmd = {
-    'Microsoft.CodeAnalysis.LanguageServer', -- or provide the location of dll manually 'dotnet', 'Microsoft.CodeAnalysis.LanguageServer.dll',
+    'Microsoft.CodeAnalysis.LanguageServer',
     '--logLevel',
-    'Trace',
-    '--extensionLogDirectory', -- this property is required by the server
+    'Information',
+    '--extensionLogDirectory',
     fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
     '--stdio',
   },
   filetypes = { 'cs' },
-  root_markers = { '.sln', '.csproj' },
   handlers = roslyn_handlers(),
-  on_attach = function(client, bufnr)
+  root_dir = function(bufnr, cb)
     local bufname = vim.api.nvim_buf_get_name(bufnr)
     -- don't try to find sln or csproj for files from libraries
     -- outside of the project
     if not bufname:match('^' .. fs.joinpath('/tmp/MetadataAsSource/')) then
       -- try find solutions root first
-      local root_dir = nil
-      root_dir = fs.root(bufnr, function(name, path)
-        local match = name:match('%.sln$') ~= nil
-        if match then
-          local sln_file = fs.joinpath(path, name)
-          on_init_sln(client, sln_file)
-        end
-        return match
+      local root_dir = fs.root(bufnr, function(fname, _)
+        return fname:match('%.sln$') ~= nil
       end)
 
       if not root_dir then
-        -- try find solutions root first
-        root_dir = fs.root(bufnr, function(name, path)
-          local match = name:match('%.csproj$') ~= nil
-          if match then
-            local csproj_file = fs.joinpath(path, name)
-            on_init_project(client, { csproj_file })
-          end
-          return match
+        -- try find projects root
+        root_dir = fs.root(bufnr, function(fname, _)
+          return fname:match('%.csproj$') ~= nil
         end)
       end
 
-      assert(root_dir, 'no solution and no csproj found')
-
-      client.root_dir = root_dir
+      if root_dir then
+        cb(root_dir)
+      end
     end
   end,
+  on_init = {
+    function(client)
+      local root_dir = client.config.root_dir
+
+      -- try load first solution we find
+      for entry, type in vim.fs.dir(root_dir) do
+        if type == "file" and vim.endswith(entry, ".sln") then
+          on_init_sln(client, entry)
+          return
+        end
+      end
+
+      -- if no solution is found load project
+      for entry, type in vim.fs.dir(root_dir) do
+        if type == "file" and vim.endswith(entry, ".csproj") then
+          on_init_project(client, { entry })
+        end
+      end
+    end
+  },
   capabilities = {
     -- HACK: Doesn't show any diagnostics if we do not set this to true
     textDocument = {
