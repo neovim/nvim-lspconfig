@@ -130,7 +130,7 @@ return {
 
       -- try load first solution we find
       for entry, type in vim.fs.dir(root_dir) do
-        if type == "file" and vim.endswith(entry, ".sln") then
+        if type == 'file' and vim.endswith(entry, '.sln') then
           on_init_sln(client, entry)
           return
         end
@@ -138,11 +138,11 @@ return {
 
       -- if no solution is found load project
       for entry, type in vim.fs.dir(root_dir) do
-        if type == "file" and vim.endswith(entry, ".csproj") then
+        if type == 'file' and vim.endswith(entry, '.csproj') then
           on_init_project(client, { entry })
         end
       end
-    end
+    end,
   },
   capabilities = {
     -- HACK: Doesn't show any diagnostics if we do not set this to true
