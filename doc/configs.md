@@ -243,6 +243,7 @@ Nvim by running `:help lspconfig-all`.
 - [robotframework_ls](#robotframework_ls)
 - [roc_ls](#roc_ls)
 - [rome](#rome)
+- [roslyn_ls](#roslyn_ls)
 - [rpmspec](#rpmspec)
 - [rubocop](#rubocop)
 - [ruby_lsp](#ruby_lsp)
@@ -8996,6 +8997,110 @@ Default config:
 - `root_markers` :
   ```lua
   { "package.json", "node_modules", ".git" }
+  ```
+
+---
+
+## roslyn_ls
+
+https://github.com/dotnet/roslyn
+
+To install the server, compile from source or download as nuget package.
+Go to `https://dev.azure.com/azure-public/vside/_artifacts/feed/vs-impl/NuGet/Microsoft.CodeAnalysis.LanguageServer.<platform>/overview`
+replace `<platform>` with one of the following `linux-x64`, `osx-x64`, `win-x64`, `neutral` (for more info on the download location see https://github.com/dotnet/roslyn/issues/71474#issuecomment-2177303207).
+Download and extract it (nuget's are zip files).
+- if you chose `neutral` nuget version, then you have to change the `cmd` like so:
+  cmd = {
+    'dotnet',
+    '<my_folder>/Microsoft.CodeAnalysis.LanguageServer.dll',
+    '--logLevel', -- this property is required by the server
+    'Information',
+    '--extensionLogDirectory', -- this property is required by the server
+    fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
+    '--stdio',
+  },
+  where `<my_folder>` has to be the folder you extracted the nuget package to.
+- for all other platforms put the extracted folder to neovim's PATH (`vim.env.PATH`)
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.roslyn_ls.setup{}
+```
+
+Default config:
+- `capabilities` :
+  ```lua
+  {
+    textDocument = {
+      diagnostic = {
+        dynamicRegistration = true
+      }
+    }
+  }
+  ```
+- `cmd` :
+  ```lua
+  { "Microsoft.CodeAnalysis.LanguageServer", "--logLevel", "Information", "--extensionLogDirectory", "/tmp/roslyn_ls/logs", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "cs" }
+  ```
+- `handlers` :
+  ```lua
+  {
+    ["razor/provideDynamicFileInfo"] = <function 1>,
+    ["workspace/_roslyn_projectHasUnresolvedDependencies"] = <function 2>,
+    ["workspace/_roslyn_projectNeedsRestore"] = <function 3>,
+    ["workspace/projectInitializationComplete"] = <function 4>
+  }
+  ```
+- `name` :
+  ```lua
+  "roslyn_ls"
+  ```
+- `offset_encoding` :
+  ```lua
+  "utf-8"
+  ```
+- `on_init` :
+  ```lua
+  { <function 1> }
+  ```
+- `root_dir` source (use "gF" to open): [../lsp/roslyn_ls.lua:92](../lsp/roslyn_ls.lua#L92)
+- `settings` :
+  ```lua
+  {
+    ["csharp|background_analysis"] = {
+      dotnet_analyzer_diagnostics_scope = "fullSolution",
+      dotnet_compiler_diagnostics_scope = "fullSolution"
+    },
+    ["csharp|code_lens"] = {
+      dotnet_enable_references_code_lens = true
+    },
+    ["csharp|completion"] = {
+      dotnet_provide_regex_completions = true,
+      dotnet_show_completion_items_from_unimported_namespaces = true,
+      dotnet_show_name_completion_suggestions = true
+    },
+    ["csharp|inlay_hints"] = {
+      csharp_enable_inlay_hints_for_implicit_object_creation = true,
+      csharp_enable_inlay_hints_for_implicit_variable_types = true,
+      csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+      csharp_enable_inlay_hints_for_types = true,
+      dotnet_enable_inlay_hints_for_indexer_parameters = true,
+      dotnet_enable_inlay_hints_for_literal_parameters = true,
+      dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+      dotnet_enable_inlay_hints_for_other_parameters = true,
+      dotnet_enable_inlay_hints_for_parameters = true,
+      dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+      dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+      dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true
+    },
+    ["csharp|symbol_search"] = {
+      dotnet_search_reference_assemblies = true
+    }
+  }
   ```
 
 ---
