@@ -4034,6 +4034,41 @@ Default config:
 
 
 ------------------------------------------------------------------------------
+gnls
+
+https://github.com/microsoft/gnls
+
+Microsoft's language server for GN build files.
+
+Assuming there is a `gnls` script somewhere in your `$PATH`, containing
+for example:
+
+```shell
+GNLS_SRC_DIR=</path/to/gnls>
+
+exec node ${GNLS_SRC_DIR}/build/server.js $@
+```
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('gnls')
+
+
+Default config:
+- `cmd` :
+  ```lua
+  { "gnls", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "gn" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".gn", ".git" }
+  ```
+
+
+------------------------------------------------------------------------------
 golangci_lint_ls
 
 Combination of both lint server and client

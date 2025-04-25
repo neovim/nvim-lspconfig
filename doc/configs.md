@@ -116,6 +116,7 @@ Nvim by running `:help lspconfig-all`.
 - [gleam](#gleam)
 - [glsl_analyzer](#glsl_analyzer)
 - [glslls](#glslls)
+- [gnls](#gnls)
 - [golangci_lint_ls](#golangci_lint_ls)
 - [gopls](#gopls)
 - [gradle_ls](#gradle_ls)
@@ -4481,6 +4482,42 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## gnls
+
+https://github.com/microsoft/gnls
+
+Microsoft's language server for GN build files.
+
+Assuming there is a `gnls` script somewhere in your `$PATH`, containing
+for example:
+
+```shell
+GNLS_SRC_DIR=</path/to/gnls>
+
+exec node ${GNLS_SRC_DIR}/build/server.js $@
+```
+
+Snippet to enable the language server:
+```lua
+require'lspconfig'.gnls.setup{}
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "gnls", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "gn" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".gn", ".git" }
   ```
 
 ---
