@@ -6,7 +6,7 @@
 -- Go to `https://dev.azure.com/azure-public/vside/_artifacts/feed/vs-impl/NuGet/Microsoft.CodeAnalysis.LanguageServer.<platform>/overview`
 -- replace `<platform>` with one of the following `linux-x64`, `osx-x64`, `win-x64`, `neutral` (for more info on the download location see https://github.com/dotnet/roslyn/issues/71474#issuecomment-2177303207).
 -- Download and extract it (nuget's are zip files).
--- - if you shose `neutral` nuget version, then you have to change the `cmd` like so:
+-- - if you chose `neutral` nuget version, then you have to change the `cmd` like so:
 --   cmd = {
 --     'dotnet',
 --     '<my_folder>/Microsoft.CodeAnalysis.LanguageServer.dll',
