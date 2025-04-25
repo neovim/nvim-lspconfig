@@ -129,17 +129,19 @@ return {
       local root_dir = client.config.root_dir
 
       -- try load first solution we find
-      for entry, type in vim.fs.dir(root_dir) do
+      for entry, type in fs.dir(root_dir) do
         if type == 'file' and vim.endswith(entry, '.sln') then
-          on_init_sln(client, entry)
+          local fpath = fs.joinpath(root_dir, entry)
+          on_init_sln(client, fpath)
           return
         end
       end
 
       -- if no solution is found load project
-      for entry, type in vim.fs.dir(root_dir) do
+      for entry, type in fs.dir(root_dir) do
         if type == 'file' and vim.endswith(entry, '.csproj') then
-          on_init_project(client, { entry })
+          local fpath = fs.joinpath(root_dir, entry)
+          on_init_project(client, { fpath })
         end
       end
     end,
