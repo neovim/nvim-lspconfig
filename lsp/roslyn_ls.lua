@@ -1,6 +1,6 @@
 ---@brief
 ---
--- https://github.com/dotnet/roslyn
+--- https://github.com/dotnet/roslyn
 --
 -- To install the server, compile from source or download as nuget package.
 -- Go to `https://dev.azure.com/azure-public/vside/_artifacts/feed/vs-impl/NuGet/Microsoft.CodeAnalysis.LanguageServer.<platform>/overview`
