@@ -79,7 +79,7 @@ local section_template_md = [[
 
 Snippet to enable the language server:
 ```lua
-require'lspconfig'.{{config_name}}.setup{}
+vim.lsp.enable('{{config_name}}')
 ```
 {{commands}}
 Default config:
