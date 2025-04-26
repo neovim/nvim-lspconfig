@@ -11526,6 +11526,12 @@ Default config:
   ```lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
   ```
+- `handlers` :
+  ```lua
+  {
+    ["_typescript.rename"] = <function 1>
+  }
+  ```
 - `init_options` :
   ```lua
   {
