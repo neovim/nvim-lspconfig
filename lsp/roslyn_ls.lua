@@ -131,8 +131,7 @@ return {
       -- try load first solution we find
       for entry, type in fs.dir(root_dir) do
         if type == 'file' and vim.endswith(entry, '.sln') then
-          local fpath = fs.joinpath(root_dir, entry)
-          on_init_sln(client, fpath)
+          on_init_sln(client, fs.joinpath(root_dir, entry))
           return
         end
       end
