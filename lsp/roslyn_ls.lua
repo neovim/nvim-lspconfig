@@ -139,8 +139,7 @@ return {
       -- if no solution is found load project
       for entry, type in fs.dir(root_dir) do
         if type == 'file' and vim.endswith(entry, '.csproj') then
-          local fpath = fs.joinpath(root_dir, entry)
-          on_init_project(client, { fpath })
+          on_init_project(client, { fs.joinpath(root_dir, entry) })
         end
       end
     end,
