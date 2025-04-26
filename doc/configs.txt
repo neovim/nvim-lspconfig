@@ -10830,7 +10830,9 @@ Here's an example that disables type checking in JavaScript files.
 }
 ```
 
-Source actions such as organizing imports and removing unused code are available via `:LspTypescriptSourceAction`.
+Use the `:LspTypescriptSourceAction` command to see "whole file" ("source") code-actions such as:
+- organize imports
+- remove unused code
 
 ### Vue support
 
@@ -10894,7 +10896,7 @@ Default config:
     hostInfo = "neovim"
   }
   ```
-- `on_attach` source (use "gF" to open): [../lsp/ts_ls.lua:71](../lsp/ts_ls.lua#L71)
+- `on_attach` source (use "gF" to open): [../lsp/ts_ls.lua:73](../lsp/ts_ls.lua#L73)
 - `root_markers` :
   ```lua
   { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
