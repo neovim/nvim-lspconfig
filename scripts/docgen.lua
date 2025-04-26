@@ -69,7 +69,6 @@ Snippet to enable the language server: >lua
 {{commands}}
 Default config:
 {{default_values}}
-
 ]]
 
 local section_template_md = [[
@@ -79,7 +78,7 @@ local section_template_md = [[
 
 Snippet to enable the language server:
 ```lua
-require'lspconfig'.{{config_name}}.setup{}
+vim.lsp.enable('{{config_name}}')
 ```
 {{commands}}
 Default config:
@@ -103,6 +102,74 @@ local function extract_brief(text)
   return doc
 end
 
+local function make_lsp_section(config_sections, config_name, config_file, is_markdown)
+  local config = require('lsp.' .. config_name)
+  local docstring = extract_brief(readfile(config_file))
+  local params = {
+    config_name = config_name,
+    preamble = docstring,
+    commands = '',
+    default_values = '',
+  }
+
+  -- TODO: get commands by parsing `nvim_buf_create_user_command` calls.
+  params.commands = make_section(0, '\n', {
+    function()
+      if not config.commands or #vim.tbl_keys(config.commands) == 0 then
+        return
+      end
+      return ('\nCommands:\n%s\n'):format(make_section(0, '\n', {
+        map_sorted(config.commands, function(name, def)
+          if def.description then
+            return string.format('- %s: %s', name, def.description)
+          end
+          return string.format('- %s', name)
+        end),
+      }))
+    end,
+  })
+
+  params.default_values = make_section(0, '\n', {
+    function()
+      return make_section(0, '\n', {
+        map_sorted(config, function(k, v)
+          if type(v) == 'boolean' then
+            return ('- `%s` : `%s`'):format(k, v)
+          elseif type(v) ~= 'function' and k ~= 'root_dir' then
+            if is_markdown then
+              return ('- `%s` :\n  ```lua\n%s\n  ```'):format(k, indent(2, vim.inspect(v)))
+            else
+              return ('- %s: >lua\n%s'):format(k, indent(2, vim.inspect(v)))
+            end
+          end
+
+          local file = assert(io.open(config_file, 'r'))
+          local linenr = 0
+          -- Find the `return` line, where the config starts.
+          for line in file:lines() do
+            linenr = linenr + 1
+            if line:find('^return') then
+              break
+            end
+          end
+          io.close(file)
+          local config_relpath = vim.fs.relpath(root, config_file)
+
+          -- XXX: "../" because the path is outside of the doc/ dir.
+          if is_markdown then
+            return ('- `%s`: [../%s:%d](../%s#L%d)'):format(k, config_relpath, linenr, config_relpath, linenr)
+          else
+            return ('- %s (use "gF" to view): ../%s:%d'):format(k, config_relpath, linenr)
+          end
+        end),
+      })
+    end,
+  }) .. (is_markdown and '' or '\n<') -- Workaround tree-sitter-vimdoc bug.
+
+  local t = is_markdown and section_template_md or section_template_txt
+  table.insert(config_sections, template(t, params))
+end
+
 local function make_lsp_sections(is_markdown)
   local lsp_files = vim.fs.find(function(f)
     return f:match('.*%.lua$')
@@ -113,69 +180,30 @@ local function make_lsp_sections(is_markdown)
     -- "lua/xx.lua"
     local config_name = config_file:match('lsp/(.-)%.lua$')
     if config_name then
-      local config = require('lsp.' .. config_name)
-      local docstring = extract_brief(readfile(config_file))
-      local params = {
-        config_name = config_name,
-        preamble = docstring,
-        commands = '',
-        default_values = '',
-      }
-
-      -- TODO: get commands by parsing `nvim_buf_create_user_command` calls.
-      params.commands = make_section(0, '\n', {
-        function()
-          if not config.commands or #vim.tbl_keys(config.commands) == 0 then
-            return
+      -- HACK: Avoid variable data (username, pid) in the generated document.
+      -- local old_home = vim.env.HOME
+      -- local old_cache_home = vim.env.XDG_CACHE_HOME
+      -- vim.env.HOME = '/home/user'
+      -- vim.env.XDG_CACHE_HOME = '/home/user/.cache'
+      local old_fn = vim.fn
+      local new_fn = {}
+      vim.fn = setmetatable(new_fn, {
+        __index = function(_t, key)
+          if key == 'getpid' then
+            return function()
+              return 12345
+            end
           end
-          return ('\nCommands:\n%s\n'):format(make_section(0, '\n', {
-            map_sorted(config.commands, function(name, def)
-              if def.description then
-                return string.format('- %s: %s', name, def.description)
-              end
-              return string.format('- %s', name)
-            end),
-          }))
+          return old_fn[key]
         end,
       })
 
-      params.default_values = make_section(0, '\n', {
-        function()
-          return make_section(0, '\n', {
-            map_sorted(config, function(k, v)
-              if type(v) == 'boolean' then
-                return ('- `%s` : `%s`'):format(k, v)
-              elseif type(v) ~= 'function' and k ~= 'root_dir' then
-                return ('- `%s` :\n  ```lua\n%s\n  ```'):format(k, indent(2, vim.inspect(v)))
-              end
+      make_lsp_section(config_sections, config_name, config_file, is_markdown)
 
-              local file = assert(io.open(config_file, 'r'))
-              local linenr = 0
-              -- Find the `return` line, where the config starts.
-              for line in file:lines() do
-                linenr = linenr + 1
-                if line:find('^return') then
-                  break
-                end
-              end
-              io.close(file)
-              local config_relpath = vim.fs.relpath(root, config_file)
-
-              -- XXX: "../" because the path is outside of the doc/ dir.
-              return ('- `%s` source (use "gF" to open): [../%s:%d](../%s#L%d)'):format(
-                k,
-                config_relpath,
-                linenr,
-                config_relpath,
-                linenr
-              )
-            end),
-          })
-        end,
-      })
-
-      local template_used = is_markdown and section_template_md or section_template_txt
-      table.insert(config_sections, template(template_used, params))
+      -- Reset.
+      -- vim.env.HOME = old_home
+      -- vim.env.XDG_CACHE_HOME = old_cache_home
+      vim.fn = old_fn
     end
   end
 

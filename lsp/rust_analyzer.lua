@@ -24,7 +24,6 @@
 local util = require 'lspconfig.util'
 
 local function reload_workspace(bufnr)
-  bufnr = util.validate_bufnr(bufnr)
   local clients = vim.lsp.get_clients { bufnr = bufnr, name = 'rust_analyzer' }
   for _, client in ipairs(clients) do
     vim.notify 'Reloading Cargo Workspace'
@@ -47,7 +46,7 @@ local function is_library(fname)
   local toolchains = rustup_home .. '/toolchains'
 
   for _, item in ipairs { toolchains, registry, git_registry } do
-    if util.path.is_descendant(item, fname) then
+    if vim.fs.relpath(item, fname) then
       local clients = vim.lsp.get_clients { name = 'rust_analyzer' }
       return #clients > 0 and clients[#clients].config.root_dir or nil
     end

@@ -34,5 +34,6 @@ return {
     'rescript',
     'rust',
   },
+  workspace_required = true,
   root_markers = { 'unocss.config.js', 'unocss.config.ts', 'uno.config.js', 'uno.config.ts' },
 }

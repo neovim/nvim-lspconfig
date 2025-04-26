@@ -1,10 +1,11 @@
-local util = require 'lspconfig.util'
-
 ---@brief
 ---
 --- https://docs.soliditylang.org/en/latest/installing-solidity.html
 ---
 --- solc is the native language server for the Solidity language.
+
+local util = require 'lspconfig.util'
+
 return {
   cmd = { 'solc', '--lsp' },
   filetypes = { 'solidity' },

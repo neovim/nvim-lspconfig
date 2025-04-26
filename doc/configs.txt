@@ -33,16 +33,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ada_language_server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ada" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/ada_ls.lua:22](../lsp/ada_ls.lua#L22)
-
+- root_dir (use "gF" to view): ../lsp/ada_ls.lua:23
+<
 
 ------------------------------------------------------------------------------
 agda_ls
@@ -56,16 +52,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "als" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "agda" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/agda_ls.lua:8](../lsp/agda_ls.lua#L8)
-
+- root_dir (use "gF" to view): ../lsp/agda_ls.lua:9
+<
 
 ------------------------------------------------------------------------------
 aiken
@@ -82,19 +74,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "aiken", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "aiken" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "aiken.toml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 air
@@ -110,19 +96,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "air", "language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "r" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "air.toml", ".air.toml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 alloy_ls
@@ -154,19 +134,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "alloy", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "alloy" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 anakin_language_server
@@ -185,27 +159,19 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "anakinls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "python" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     anakinls = {
       pyflakes_errors = { "ImportStarNotPermitted", "UndefinedExport", "UndefinedLocal", "UndefinedName", "DuplicateArgument", "MultiValueRepeatedKeyLiteral", "MultiValueRepeatedKeyVariable", "FutureFeatureNotDefined", "LateFutureImport", "ReturnOutsideFunction", "YieldOutsideFunction", "ContinueOutsideLoop", "BreakOutsideLoop", "TwoStarredExpressions", "TooManyExpressionsInStarredAssignment", "ForwardAnnotationSyntaxError", "RaiseNotImplemented", "StringDotFormatExtraPositionalArguments", "StringDotFormatExtraNamedArguments", "StringDotFormatMissingArgument", "StringDotFormatMixingAutomatic", "StringDotFormatInvalidFormat", "PercentFormatInvalidFormat", "PercentFormatMixedPositionalAndNamed", "PercentFormatUnsupportedFormat", "PercentFormatPositionalCountMismatch", "PercentFormatExtraNamedArguments", "PercentFormatMissingArgument", "PercentFormatExpectedMapping", "PercentFormatExpectedSequence", "PercentFormatStarRequiresSequence" }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 angularls
@@ -232,19 +198,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ngserver", "--stdio", "--tsProbeLocations", "../..,?/node_modules", "--ngProbeLocations", "../../@angular/language-server/node_modules,?/node_modules/@angular/language-server/node_modules", "--angularCoreVersion", "" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "angular.json", "nx.json" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ansiblels
@@ -264,20 +224,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ansible-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "yaml.ansible" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "ansible.cfg", ".ansible-lint" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     ansible = {
       ansible = {
@@ -298,8 +251,7 @@ Default config:
       }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 antlersls
@@ -316,19 +268,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "antlersls", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "html", "antlers" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "composer.json" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 arduino_language_server
@@ -406,8 +352,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `capabilities` :
-  ```lua
+- capabilities: >lua
   {
     textDocument = {
       semanticTokens = vim.NIL
@@ -416,17 +361,12 @@ Default config:
       semanticTokens = vim.NIL
     }
   }
-  ```
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "arduino-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "arduino" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/arduino_language_server.lua:72](../lsp/arduino_language_server.lua#L72)
-
+- root_dir (use "gF" to view): ../lsp/arduino_language_server.lua:73
+<
 
 ------------------------------------------------------------------------------
 asm_lsp
@@ -443,19 +383,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "asm-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "asm", "vmasm" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".asm-lsp.toml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ast_grep
@@ -473,19 +407,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ast-grep", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "c", "cpp", "rust", "go", "java", "python", "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "html", "css", "kotlin", "dart", "lua" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "sgconfig.yaml", "sgconfig.yml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 astro
@@ -502,26 +430,18 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `before_init` source (use "gF" to open): [../lsp/astro.lua:15](../lsp/astro.lua#L15)
-- `cmd` :
-  ```lua
+- before_init (use "gF" to view): ../lsp/astro.lua:15
+- cmd: >lua
   { "astro-ls", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "astro" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     typescript = {}
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json", "tsconfig.json", "jsconfig.json", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 atlas
@@ -586,19 +506,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "atlas", "tool", "lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "atlas-*" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "atlas.hcl" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 autohotkey_lsp
@@ -607,27 +521,22 @@ https://github.com/thqby/vscode-autohotkey2-lsp
 
 AutoHotkey v2.0 LSP implementation
 
+NOTE: AutoHotkey is Windows-only.
+
 Snippet to enable the language server: >lua
   vim.lsp.enable('autohotkey_lsp')
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "autohotkey_lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "autohotkey" }
-  ```
-- `flags` :
-  ```lua
+- flags: >lua
   {
     debounce_text_changes = 500
   }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     ActionWhenV1IsDetected = "Continue",
     AutoLibInclude = "All",
@@ -657,12 +566,9 @@ Default config:
     SymbolFoldinFromOpenBrace = false,
     locale = "en-us"
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 autotools_ls
@@ -681,16 +587,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "autotools-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "config", "automake", "make" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/autotools_ls.lua:15](../lsp/autotools_ls.lua#L15)
-
+- root_dir (use "gF" to view): ../lsp/autotools_ls.lua:16
+<
 
 ------------------------------------------------------------------------------
 awk_ls
@@ -707,15 +609,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "awk-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "awk" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 azure_pipelines_ls
@@ -755,23 +653,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "azure-pipelines-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "yaml" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "azure-pipelines.yml" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 bacon_ls
@@ -819,23 +709,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "bacon-ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "rust" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {}
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".bacon-locations", "Cargo.toml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ballerina
@@ -850,19 +732,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "bal", "start-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ballerina" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Ballerina.toml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 basedpyright
@@ -876,21 +752,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "basedpyright-langserver", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "python" }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/basedpyright.lua:22](../lsp/basedpyright.lua#L22)
-- `root_markers` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/basedpyright.lua:22
+- root_markers: >lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     basedpyright = {
       analysis = {
@@ -900,8 +769,7 @@ Default config:
       }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 bashls
@@ -920,27 +788,19 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "bash-language-server", "start" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "bash", "sh" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     bashIde = {
       globPattern = "*@(.sh|.inc|.bash|.command)"
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 basics_ls
@@ -958,12 +818,9 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "basics-language-server" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     buffer = {
       enable = true,
@@ -977,8 +834,7 @@ Default config:
       sources = {}
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 bazelrc_lsp
@@ -1002,19 +858,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "bazelrc-lsp", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "bazelrc" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "WORKSPACE", "WORKSPACE.bazel", "MODULE.bazel" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 beancount
@@ -1028,23 +878,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "beancount-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "beancount", "bean" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {}
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 bicep
@@ -1086,19 +928,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "bicep" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {}
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 biome
@@ -1116,17 +952,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "biome", "lsp-proxy" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "astro", "css", "graphql", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/biome.lua:12](../lsp/biome.lua#L12)
+- root_dir (use "gF" to view): ../lsp/biome.lua:12
 - `workspace_required` : `true`
-
+<
 
 ------------------------------------------------------------------------------
 bitbake_language_server
@@ -1138,19 +970,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "bitbake-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "bitbake" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 blueprint_ls
@@ -1167,25 +993,17 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "blueprint-compiler", "lsp" }
-  ```
-- `cmd_env` :
-  ```lua
+- cmd_env: >lua
   {
     GLOB_PATTERN = "*@(.blp)"
   }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "blueprint" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 bqls
@@ -1203,23 +1021,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "bqls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "sql" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 bright_script
@@ -1236,20 +1046,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "bsc", "--lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "brs" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "makefile", "Makefile", ".git" }
-  ```
 - `single_file_support` : `true`
-
+<
 
 ------------------------------------------------------------------------------
 bsl_ls
@@ -1263,15 +1067,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "bsl", "os" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 buck2
@@ -1291,19 +1091,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "buck2", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "bzl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".buckconfig" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 buddy_ls
@@ -1318,43 +1112,35 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "buddy-lsp-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "mlir" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 buf_ls
 
+https://github.com/bufbuild/buf
 
+buf beta lsp included in the cli itself
+
+buf beta lsp is a Protobuf language server compatible with Buf modules and workspaces
 
 Snippet to enable the language server: >lua
   vim.lsp.enable('buf_ls')
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "buf", "beta", "lsp", "--timeout=0", "--log-format=text" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "proto" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "buf.yaml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 bufls
@@ -1373,19 +1159,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "bufls", "serve" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "proto" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "buf.work.yaml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 bzl
@@ -1401,19 +1181,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "bzl", "lsp", "serve" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "bzl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "WORKSPACE", "WORKSPACE.bazel" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 c3_lsp
@@ -1427,19 +1201,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "c3lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "c3", "c3i" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "project.json", "manifest.json", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 cairo_ls
@@ -1460,25 +1228,17 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "scarb-cairo-language-server", "/C", "--node-ipc" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "cairo" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     hostInfo = "neovim"
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Scarb.toml", "cairo_project.toml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 cds_lsp
@@ -1496,27 +1256,19 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "cds-lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "cds" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json", "db", "srv" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     cds = {
       validate = true
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 circom-lsp
@@ -1530,19 +1282,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "circom-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "circom" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 clangd
@@ -1563,8 +1309,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `capabilities` :
-  ```lua
+- capabilities: >lua
   {
     offsetEncoding = { "utf-8", "utf-16" },
     textDocument = {
@@ -1573,21 +1318,14 @@ Default config:
       }
     }
   }
-  ```
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "clangd" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/clangd.lua:63](../lsp/clangd.lua#L63)
-- `root_markers` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/clangd.lua:60
+- root_markers: >lua
   { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 clarity_lsp
@@ -1601,19 +1339,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "clarity-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "clar", "clarity" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 clojure_lsp
@@ -1627,19 +1359,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "clojure-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "clojure", "edn" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "project.clj", "deps.edn", "build.boot", "shadow-cljs.edn", ".git", "bb.edn" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 cmake
@@ -1653,25 +1379,17 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "cmake-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "cmake" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     buildDirectory = "build"
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "CMakePresets.json", "CTestConfig.cmake", ".git", "build", "cmake" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 cobol_ls
@@ -1683,19 +1401,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "cobol-language-support" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "cobol" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 coffeesense
@@ -1713,19 +1425,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "coffeesense-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "coffee" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 contextive
@@ -1745,15 +1451,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "Contextive.LanguageServer" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".contextive", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 coq_lsp
@@ -1765,19 +1467,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "coq-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "coq" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "_CoqProject", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 crystalline
@@ -1791,19 +1487,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "crystalline" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "crystal" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "shard.yml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 csharp_ls
@@ -1821,22 +1511,16 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "csharp-ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "cs" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     AutomaticWorkspaceInit = true
   }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/csharp_ls.lua:12](../lsp/csharp_ls.lua#L12)
-
+- root_dir (use "gF" to view): ../lsp/csharp_ls.lua:13
+<
 
 ------------------------------------------------------------------------------
 css_variables
@@ -1856,28 +1540,20 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "css-variables-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "css", "scss", "less" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     cssVariables = {
       blacklistFolders = { "**/.cache", "**/.DS_Store", "**/.git", "**/.hg", "**/.next", "**/.svn", "**/bower_components", "**/CVS", "**/dist", "**/node_modules", "**/tests", "**/tmp" },
       lookupFiles = { "**/*.less", "**/*.scss", "**/*.sass", "**/*.css" }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 cssls
@@ -1907,26 +1583,17 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "vscode-css-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "css", "scss", "less" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     provideFormatter = true
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     css = {
       validate = true
@@ -1938,8 +1605,7 @@ Default config:
       validate = true
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 cssmodules_ls
@@ -1958,19 +1624,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "cssmodules-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "javascript", "javascriptreact", "typescript", "typescriptreact" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 cucumber_language_server
@@ -1991,19 +1651,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "cucumber-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "cucumber" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 cue
@@ -2017,19 +1671,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "cue", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "cue" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "cue.mod", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 custom_elements_ls
@@ -2063,18 +1711,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "custom-elements-languageserver", "--stdio" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     hostInfo = "neovim"
   }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/custom_elements_ls.lua:26](../lsp/custom_elements_ls.lua#L26)
-
+- root_dir (use "gF" to view): ../lsp/custom_elements_ls.lua:26
+<
 
 ------------------------------------------------------------------------------
 cypher_ls
@@ -2094,44 +1738,31 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "cypher-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "cypher" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 daedalus_ls
 
-
+DaedalusLanguageServer
 
 Snippet to enable the language server: >lua
   vim.lsp.enable('daedalus_ls')
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "DaedalusLanguageServer" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "d" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Gothic.src", "Camera.src", "Menu.src", "Music.src", "ParticleFX.src", "SFX.src", "VisualFX.src" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     DaedalusLanguageServer = {
       fileEncoding = "Windows-1252",
@@ -2143,8 +1774,7 @@ Default config:
       srcFileEncoding = "Windows-1252"
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 dafny
@@ -2156,19 +1786,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "dafny", "server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "dfy", "dafny" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 dagger
@@ -2182,19 +1806,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "cuelsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "cue" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "cue.mod", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 dartls
@@ -2208,16 +1826,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "dart", "language-server", "--protocol=lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "dart" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     closingLabels = true,
     flutterOutline = true,
@@ -2225,21 +1838,16 @@ Default config:
     outline = true,
     suggestFromUnimportedLibraries = true
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "pubspec.yaml" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     dart = {
       completeFunctionCalls = true,
       showTodos = true
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 dcmls
@@ -2253,19 +1861,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "dcm", "start-server", "--client=neovim" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "dart" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "pubspec.yaml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 debputy
@@ -2279,19 +1881,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "debputy", "lsp", "server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "debcontrol", "debcopyright", "debchangelog", "make", "yaml" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "debian" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 denols
@@ -2314,35 +1910,24 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "deno", "lsp" }
-  ```
-- `cmd_env` :
-  ```lua
+- cmd_env: >lua
   {
     NO_COLOR = true
   }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
-  ```
-- `handlers` :
-  ```lua
+- handlers: >lua
   {
     ["textDocument/definition"] = <function 1>,
     ["textDocument/references"] = <function 1>,
     ["textDocument/typeDefinition"] = <function 1>
   }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/denols.lua:66](../lsp/denols.lua#L66)
-- `root_markers` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/denols.lua:66
+- root_markers: >lua
   { "deno.json", "deno.jsonc", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     deno = {
       enable = true,
@@ -2355,8 +1940,7 @@ Default config:
       }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 dhall_lsp_server
@@ -2376,19 +1960,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "dhall-lsp-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "dhall" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 diagnosticls
@@ -2402,19 +1980,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "diagnostic-languageserver", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   {}
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 digestif
@@ -2432,19 +2004,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "digestif" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "tex", "plaintex", "context" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 djlsp
@@ -2458,23 +2024,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "djlsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "html", "htmldjango" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 docker_compose_language_service
@@ -2495,19 +2053,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "docker-compose-langserver", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "yaml.docker-compose" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 dockerls
@@ -2539,19 +2091,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "docker-langserver", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "dockerfile" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Dockerfile" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 dolmenls
@@ -2568,19 +2114,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "dolmenls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "smt2", "tptp", "p", "cnf", "icnf", "zf" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 dotls
@@ -2597,19 +2137,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "dot-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "dot" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 dprint
@@ -2623,23 +2157,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "dprint", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "jsonc", "markdown", "python", "toml", "rust", "roslyn", "graphql" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "dprint.json", ".dprint.json", "dprint.jsonc", ".dprint.jsonc" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ds_pinyin_lsp
@@ -2664,16 +2190,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ds-pinyin-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "markdown", "org" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     completion_on = true,
     match_as_same_as_input = true,
@@ -2683,13 +2204,10 @@ Default config:
     show_symbols_by_n_times = 0,
     show_symbols_only_follow_by_hanzi = false
   }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/ds_pinyin_lsp.lua:49](../lsp/ds_pinyin_lsp.lua#L49)
-- `root_markers` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/ds_pinyin_lsp.lua:45
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 dts_lsp
@@ -2711,27 +2229,17 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "dts-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "dts", "dtsi", "overlay" }
-  ```
-- `name` :
-  ```lua
+- name: >lua
   "dts_lsp"
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 earthlyls
@@ -2745,19 +2253,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "earthlyls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "earthfile" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Earthfile" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ecsact
@@ -2774,19 +2276,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ecsact_lsp_server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ecsact" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 elixirls
@@ -2822,12 +2318,10 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "elixir", "eelixir", "heex", "surface" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/elixirls.lua:28](../lsp/elixirls.lua#L28)
-
+- root_dir (use "gF" to view): ../lsp/elixirls.lua:28
+<
 
 ------------------------------------------------------------------------------
 elmls
@@ -2844,31 +2338,23 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `capabilities` :
-  ```lua
+- capabilities: >lua
   {
     offsetEncoding = { "utf-8", "utf-16" }
   }
-  ```
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "elm-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "elm" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     disableElmLSDiagnostics = false,
     elmReviewDiagnostics = "off",
     onlyUpdateDiagnosticsOnSave = false,
     skipInstallPackageConfirmation = false
   }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/elmls.lua:15](../lsp/elmls.lua#L15)
-
+- root_dir (use "gF" to view): ../lsp/elmls.lua:15
+<
 
 ------------------------------------------------------------------------------
 elp
@@ -2883,19 +2369,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "elp", "server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "erlang" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "rebar.config", "erlang.mk", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ember
@@ -2913,19 +2393,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ember-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "handlebars", "typescript", "javascript", "typescript.glimmer", "javascript.glimmer" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "ember-cli-build.js", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 emmet_language_server
@@ -2942,19 +2416,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "emmet-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "typescriptreact", "htmlangular" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 emmet_ls
@@ -2971,19 +2439,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "emmet-ls", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "astro", "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "svelte", "typescriptreact", "vue", "htmlangular" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 emmylua_ls
@@ -3003,20 +2465,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "emmylua_ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "lua" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".luarc.json", ".emmyrc.json", ".luacheckrc", ".git" }
-  ```
 - `workspace_required` : `false`
-
+<
 
 ------------------------------------------------------------------------------
 erg_language_server
@@ -3037,19 +2493,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "erg", "--language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "erg" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.er", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 erlangls
@@ -3072,19 +2522,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "erlang_ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "erlang" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "rebar.config", "erlang.mk", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 esbonio
@@ -3137,19 +2581,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "python3", "-m", "esbonio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "rst" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 eslint
@@ -3187,28 +2625,21 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `before_init` source (use "gF" to open): [../lsp/eslint.lua:34](../lsp/eslint.lua#L34)
-- `cmd` :
-  ```lua
+- before_init (use "gF" to view): ../lsp/eslint.lua:34
+- cmd: >lua
   { "vscode-eslint-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte", "astro" }
-  ```
-- `handlers` :
-  ```lua
+- handlers: >lua
   {
     ["eslint/confirmESLintExecution"] = <function 1>,
     ["eslint/noLibrary"] = <function 2>,
     ["eslint/openDoc"] = <function 3>,
     ["eslint/probeFailed"] = <function 4>
   }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/eslint.lua:34](../lsp/eslint.lua#L34)
-- `root_dir` source (use "gF" to open): [../lsp/eslint.lua:34](../lsp/eslint.lua#L34)
-- `settings` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/eslint.lua:34
+- root_dir (use "gF" to view): ../lsp/eslint.lua:34
+- settings: >lua
   {
     codeAction = {
       disableRuleComment = {
@@ -3241,8 +2672,7 @@ Default config:
       mode = "location"
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 facility_language_server
@@ -3256,19 +2686,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "facility-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "fsd" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 fennel_language_server
@@ -3282,23 +2706,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "fennel-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "fennel" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 fennel_ls
@@ -3315,26 +2731,18 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `capabilities` :
-  ```lua
+- capabilities: >lua
   {
     offsetEncoding = { "utf-8", "utf-16" }
   }
-  ```
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "fennel-ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "fennel" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/fennel_ls.lua:12](../lsp/fennel_ls.lua#L12)
-- `settings` :
-  ```lua
+- root_dir (use "gF" to view): ../lsp/fennel_ls.lua:10
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 fish_lsp
@@ -3353,25 +2761,17 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "fish-lsp", "start" }
-  ```
-- `cmd_env` :
-  ```lua
+- cmd_env: >lua
   {
     fish_lsp_show_client_popups = false
   }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "fish" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 flow
@@ -3393,19 +2793,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "npx", "--no-install", "flow", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "javascript", "javascriptreact", "javascript.jsx" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".flowconfig" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 flux_lsp
@@ -3421,19 +2815,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "flux-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "flux" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 foam_ls
@@ -3450,16 +2838,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "foam-ls", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "foam", "OpenFOAM" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/foam_ls.lua:11](../lsp/foam_ls.lua#L11)
-
+- root_dir (use "gF" to view): ../lsp/foam_ls.lua:10
+<
 
 ------------------------------------------------------------------------------
 fortls
@@ -3481,23 +2865,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "fortls", "--notify_init", "--hover_signature", "--hover_language=fortran", "--use_signature_help" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "fortran" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".fortls", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 fsautocomplete
@@ -3523,23 +2899,16 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "fsautocomplete", "--adaptive-lsp-server-enabled" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "fsharp" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     AutomaticWorkspaceInit = true
   }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/fsautocomplete.lua:22](../lsp/fsautocomplete.lua#L22)
-- `settings` :
-  ```lua
+- root_dir (use "gF" to view): ../lsp/fsautocomplete.lua:22
+- settings: >lua
   {
     FSharp = {
       EnableReferenceCodeLens = true,
@@ -3560,8 +2929,7 @@ Default config:
       keywordsAutocomplete = true
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 fsharp_language_server
@@ -3584,26 +2952,18 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "dotnet", "FSharpLanguageServer.dll" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "fsharp" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     AutomaticWorkspaceInit = true
   }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/fsharp_language_server.lua:18](../lsp/fsharp_language_server.lua#L18)
-- `settings` :
-  ```lua
+- root_dir (use "gF" to view): ../lsp/fsharp_language_server.lua:18
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 fstar
@@ -3617,19 +2977,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "fstar.exe", "--lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "fstar" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 futhark_lsp
@@ -3648,19 +3002,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "futhark", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "futhark", "fut" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 gdscript
@@ -3674,16 +3022,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` source (use "gF" to open): [../lsp/gdscript.lua:9](../lsp/gdscript.lua#L9)
-- `filetypes` :
-  ```lua
+- cmd (use "gF" to view): ../lsp/gdscript.lua:10
+- filetypes: >lua
   { "gd", "gdscript", "gdscript3" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "project.godot", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 gdshader_lsp
@@ -3697,19 +3041,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "gdshader-lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "gdshader", "gdshaderinc" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "project.godot" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 gh_actions_ls
@@ -3734,8 +3072,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `capabilities` :
-  ```lua
+- capabilities: >lua
   {
     workspace = {
       didChangeWorkspaceFolders = {
@@ -3743,21 +3080,14 @@ Default config:
       }
     }
   }
-  ```
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "gh-actions-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "yaml" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".github/workflows", ".forgejo/workflows", ".gitea/workflows" }
-  ```
 - `workspace_required` : `true`
-
+<
 
 ------------------------------------------------------------------------------
 ghcide
@@ -3772,19 +3102,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ghcide", "--lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "haskell", "lhaskell" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ghdl_ls
@@ -3801,19 +3125,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ghdl-ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "vhdl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "hdl-prj.json", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ginko_ls
@@ -3831,23 +3149,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ginko_ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "dts" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 gitlab_ci_ls
@@ -3864,23 +3174,17 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "gitlab-ci-ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "yaml.gitlab" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     cache_path = "/home/runner/.cache/gitlab-ci-ls/",
     log_path = "/home/runner/.cache/gitlab-ci-ls//log/gitlab-ci-ls.log"
   }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/gitlab_ci_ls.lua:14](../lsp/gitlab_ci_ls.lua#L14)
-
+- root_dir (use "gF" to view): ../lsp/gitlab_ci_ls.lua:14
+<
 
 ------------------------------------------------------------------------------
 glasgow
@@ -3911,23 +3215,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "glasgow" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "wgsl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 gleam
@@ -3943,19 +3239,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "gleam", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "gleam" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "gleam.toml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 glsl_analyzer
@@ -3969,23 +3259,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `capabilities` :
-  ```lua
+- capabilities: >lua
   {}
-  ```
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "glsl_analyzer" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "glsl", "vert", "tesc", "tese", "frag", "geom", "comp" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 glslls
@@ -4002,8 +3284,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `capabilities` :
-  ```lua
+- capabilities: >lua
   {
     offsetEncoding = { "utf-8", "utf-16" },
     textDocument = {
@@ -4012,20 +3293,42 @@ Default config:
       }
     }
   }
-  ```
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "glslls", "--stdin" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "glsl", "vert", "tesc", "tese", "frag", "geom", "comp" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
+<
 
+------------------------------------------------------------------------------
+gnls
+
+https://github.com/microsoft/gnls
+
+Microsoft's language server for GN build files.
+
+Assuming there is a `gnls` script somewhere in your `$PATH`, containing
+for example:
+
+```shell
+GNLS_SRC_DIR=</path/to/gnls>
+
+exec node ${GNLS_SRC_DIR}/build/server.js $@
+```
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('gnls')
+
+
+Default config:
+- cmd: >lua
+  { "gnls", "--stdio" }
+- filetypes: >lua
+  { "gn" }
+- root_markers: >lua
+  { ".gn", ".git" }
+<
 
 ------------------------------------------------------------------------------
 golangci_lint_ls
@@ -4048,25 +3351,17 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "golangci-lint-langserver" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "go", "gomod" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     command = { "golangci-lint", "run", "--output.json.path=stdout", "--show-stats=false" }
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".golangci.yml", ".golangci.yaml", ".golangci.toml", ".golangci.json", "go.work", "go.mod", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 gopls
@@ -4080,16 +3375,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "gopls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "go", "gomod", "gowork", "gotmpl" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/gopls.lua:21](../lsp/gopls.lua#L21)
-
+- root_dir (use "gF" to view): ../lsp/gopls.lua:21
+<
 
 ------------------------------------------------------------------------------
 gradle_ls
@@ -4105,27 +3396,19 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "gradle-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "groovy" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     settings = {
       gradleWrapperEnabled = true
     }
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "settings.gradle", "build.gradle" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 grammarly
@@ -4145,31 +3428,21 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "grammarly-languageserver", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "markdown" }
-  ```
-- `handlers` :
-  ```lua
+- handlers: >lua
   {
     ["$/updateDocumentState"] = <function 1>
   }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     clientId = "client_BaDkMgx4X19X9UxxYRCXZo"
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 graphql
@@ -4189,16 +3462,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "graphql-lsp", "server", "-m", "stream" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "graphql", "typescriptreact", "javascriptreact" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/graphql.lua:15](../lsp/graphql.lua#L15)
-
+- root_dir (use "gF" to view): ../lsp/graphql.lua:15
+<
 
 ------------------------------------------------------------------------------
 groovyls
@@ -4226,19 +3495,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "java", "-jar", "groovy-language-server-all.jar" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "groovy" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Jenkinsfile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 guile_ls
@@ -4259,19 +3522,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "guile-lsp-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "scheme.guile" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "guix.scm", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 harper_ls
@@ -4298,19 +3555,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "harper-ls", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "c", "cpp", "cs", "gitcommit", "go", "html", "java", "javascript", "lua", "markdown", "nix", "python", "ruby", "rust", "swift", "toml", "typescript", "typescriptreact", "haskell", "cmake", "typst", "php", "dart" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 hdl_checker
@@ -4324,19 +3575,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "hdl_checker", "--lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "vhdl", "verilog", "systemverilog" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 helm_ls
@@ -4356,8 +3601,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `capabilities` :
-  ```lua
+- capabilities: >lua
   {
     workspace = {
       didChangeWatchedFiles = {
@@ -4365,20 +3609,13 @@ Default config:
       }
     }
   }
-  ```
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "helm_ls", "serve" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "helm" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Chart.yaml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 hhvm
@@ -4394,19 +3631,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "hh_client", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "php", "hack" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".hhconfig" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 hie
@@ -4433,19 +3664,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "hie-wrapper", "--lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "haskell" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "stack.yaml", "package.yaml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 hlasm
@@ -4459,19 +3684,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "hlasm_language_server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "hlasm" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".hlasmplugin" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 hls
@@ -4493,25 +3712,19 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "haskell-language-server-wrapper", "--lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "haskell", "lhaskell" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/hls.lua:16](../lsp/hls.lua#L16)
-- `settings` :
-  ```lua
+- root_dir (use "gF" to view): ../lsp/hls.lua:17
+- settings: >lua
   {
     haskell = {
       cabalFormattingProvider = "cabalfmt",
       formattingProvider = "ormolu"
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 hoon_ls
@@ -4530,19 +3743,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "hoon-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "hoon" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 html
@@ -4574,16 +3781,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "vscode-html-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "html", "templ" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     configurationSection = { "html", "css", "javascript" },
     embeddedLanguages = {
@@ -4592,16 +3794,11 @@ Default config:
     },
     provideFormatter = true
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 htmx
@@ -4620,19 +3817,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "htmx-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 hydra_lsp
@@ -4646,19 +3837,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "hydra-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "yaml" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 hyprls
@@ -4675,19 +3860,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "hyprls", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "hyprlang" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 idris2_lsp
@@ -4726,16 +3905,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "idris2-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "idris2" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/idris2_lsp.lua:34](../lsp/idris2_lsp.lua#L34)
-
+- root_dir (use "gF" to view): ../lsp/idris2_lsp.lua:34
+<
 
 ------------------------------------------------------------------------------
 intelephense
@@ -4770,16 +3945,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "intelephense", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "php" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/intelephense.lua:30](../lsp/intelephense.lua#L30)
-
+- root_dir (use "gF" to view): ../lsp/intelephense.lua:30
+<
 
 ------------------------------------------------------------------------------
 janet_lsp
@@ -4793,19 +3964,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "janet-lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "janet" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "project.janet", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 java_language_server
@@ -4821,19 +3986,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "java" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "build.gradle", "build.gradle.kts", "pom.xml", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 jdtls
@@ -4875,35 +4034,25 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "jdtls", "-configuration", "/home/runner/.cache/jdtls/config", "-data", "/home/runner/.cache/jdtls/workspace" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "java" }
-  ```
-- `handlers` :
-  ```lua
+- handlers: >lua
   {
     ["language/status"] = <function 1>,
     ["textDocument/codeAction"] = <function 2>,
     ["textDocument/rename"] = <function 3>,
     ["workspace/applyEdit"] = <function 4>
   }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     jvm_args = {},
     workspace = "/home/runner/.cache/jdtls/workspace"
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git", "build.gradle", "build.gradle.kts", "build.xml", "pom.xml", "settings.gradle", "settings.gradle.kts" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 jedi_language_server
@@ -4917,19 +4066,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "jedi-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "python" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 jinja_lsp
@@ -4953,23 +4096,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "jinja-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "jinja" }
-  ```
-- `name` :
-  ```lua
+- name: >lua
   "jinja_lsp"
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 jqls
@@ -4994,19 +4129,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "jq-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "jq" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 jsonls
@@ -5037,25 +4166,17 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "vscode-json-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "json", "jsonc" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     provideFormatter = true
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 julials
@@ -5088,20 +4209,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "julia", "--startup-file=no", "--history-file=no", "-e", '    # Load LanguageServer.jl: attempt to load from ~/.julia/environments/nvim-lspconfig\n    # with the regular load path as a fallback\n    ls_install_path = joinpath(\n        get(DEPOT_PATH, 1, joinpath(homedir(), ".julia")),\n        "environments", "nvim-lspconfig"\n    )\n    pushfirst!(LOAD_PATH, ls_install_path)\n    using LanguageServer\n    popfirst!(LOAD_PATH)\n    depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n    project_path = let\n        dirname(something(\n            ## 1. Finds an explicitly set project (JULIA_PROJECT)\n            Base.load_path_expand((\n                p = get(ENV, "JULIA_PROJECT", nothing);\n                p === nothing ? nothing : isempty(p) ? nothing : p\n            )),\n            ## 2. Look for a Project.toml file in the current working directory,\n            ##    or parent directories, with $HOME as an upper boundary\n            Base.current_project(),\n            ## 3. First entry in the load path\n            get(Base.load_path(), 1, nothing),\n            ## 4. Fallback to default global environment,\n            ##    this is more or less unreachable\n            Base.load_path_expand("@v#.#"),\n        ))\n    end\n    @info "Running language server" VERSION pwd() project_path depot_path\n    server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path)\n    server.runlinter = true\n    run(server)\n  ' }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "julia" }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/julials.lua:119](../lsp/julials.lua#L119)
-- `root_markers` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/julials.lua:119
+- root_markers: >lua
   { "Project.toml", "JuliaProject.toml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 just
@@ -5115,19 +4230,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "just-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "just" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 kcl
@@ -5141,19 +4250,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "kcl-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "kcl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 koka
@@ -5166,19 +4269,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "koka", "--language-server", "--lsstdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "koka" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 kotlin_language_server
@@ -5204,23 +4301,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "kotlin-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "kotlin" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {}
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "settings.gradle", "settings.gradle.kts", "build.xml", "pom.xml", "build.gradle", "build.gradle.kts" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 kulala_ls
@@ -5234,19 +4323,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "kulala-ls", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "http" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 lean3ls
@@ -5270,20 +4353,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "lean-language-server", "--stdio", "--", "-M", "4096", "-T", "100000" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "lean3" }
-  ```
-- `offset_encoding` :
-  ```lua
+- offset_encoding: >lua
   "utf-32"
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/lean3ls.lua:19](../lsp/lean3ls.lua#L19)
-
+- root_dir (use "gF" to view): ../lsp/lean3ls.lua:19
+<
 
 ------------------------------------------------------------------------------
 lelwel_ls
@@ -5302,19 +4379,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "lelwel-ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "llw" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 lemminx
@@ -5330,19 +4401,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "lemminx" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "xml", "xsd", "xsl", "xslt", "svg" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 lexical
@@ -5361,15 +4426,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "elixir", "eelixir", "heex", "surface" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "mix.exs", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 lsp_ai
@@ -5389,24 +4450,18 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "lsp-ai" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   {}
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     memory = {
       file_store = vim.empty_dict()
     },
     models = vim.empty_dict()
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ltex
@@ -5438,28 +4493,20 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ltex-ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc", "quarto", "rmd", "context", "html", "xhtml", "mail", "text" }
-  ```
-- `get_language_id` source (use "gF" to open): [../lsp/ltex.lua:74](../lsp/ltex.lua#L74)
-- `root_markers` :
-  ```lua
+- get_language_id (use "gF" to view): ../lsp/ltex.lua:74
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     ltex = {
       enabled = { "bibtex", "gitcommit", "markdown", "org", "tex", "restructuredtext", "rsweave", "latex", "quarto", "rmd", "context", "html", "xhtml", "mail", "plaintext" }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ltex_plus
@@ -5491,28 +4538,20 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ltex-ls-plus" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "text", "typst", "xhtml" }
-  ```
-- `get_language_id` source (use "gF" to open): [../lsp/ltex_plus.lua:39](../lsp/ltex_plus.lua#L39)
-- `root_markers` :
-  ```lua
+- get_language_id (use "gF" to view): ../lsp/ltex_plus.lua:39
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     ltex = {
       enabled = { "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "latex", "text", "typst", "xhtml" }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 lua_ls
@@ -5574,19 +4613,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "lua-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "lua" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 luau_lsp
@@ -5608,19 +4641,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "luau-lsp", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "luau" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 lwc_ls
@@ -5647,27 +4674,19 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "lwc-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "javascript", "html" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     embeddedLanguages = {
       javascript = true
     }
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "sfdx-project.json" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 m68k
@@ -5693,19 +4712,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "m68k-lsp-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "asm68k" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Makefile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 markdown_oxide
@@ -5724,20 +4737,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "markdown-oxide" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "markdown" }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/markdown_oxide.lua:11](../lsp/markdown_oxide.lua#L11)
-- `root_markers` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/markdown_oxide.lua:11
+- root_markers: >lua
   { ".git", ".obsidian", ".moxide.toml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 marko-js
@@ -5756,19 +4763,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "marko-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "marko" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 marksman
@@ -5786,19 +4787,40 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "marksman", "server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "markdown", "markdown.mdx" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".marksman.toml", ".git" }
-  ```
+<
 
+------------------------------------------------------------------------------
+mdx_analyzer
+
+https://github.com/mdx-js/mdx-analyzer
+
+`mdx-analyzer`, a language server for MDX
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('mdx_analyzer')
+
+
+Default config:
+- before_init (use "gF" to view): ../lsp/mdx_analyzer.lua:11
+- cmd: >lua
+  { "mdx-language-server", "--stdio" }
+- filetypes: >lua
+  { "mdx" }
+- init_options: >lua
+  {
+    typescript = {}
+  }
+- root_markers: >lua
+  { "package.json" }
+- settings: >lua
+  {}
+<
 
 ------------------------------------------------------------------------------
 mesonlsp
@@ -5812,19 +4834,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "mesonlsp", "--lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "meson" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "meson.build", "meson_options.txt", "meson.options", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 metals
@@ -5846,24 +4862,17 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `capabilities` :
-  ```lua
+- capabilities: >lua
   {
     workspace = {
       configuration = false
     }
   }
-  ```
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "metals" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "scala" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     compilerOptions = {
       snippetAutoIndent = false
@@ -5871,12 +4880,9 @@ Default config:
     isHttpEnabled = true,
     statusBarProvider = "show-message"
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "build.sbt", "build.sc", "build.gradle", "pom.xml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 millet
@@ -5897,19 +4903,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "millet" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "sml" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "millet.toml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 mint
@@ -5924,19 +4924,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "mint", "ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "mint" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "mint.json", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 mlir_lsp_server
@@ -5952,19 +4946,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "mlir-lsp-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "mlir" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 mlir_pdll_lsp_server
@@ -5980,19 +4968,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "mlir-pdll-lsp-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "pdll" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "pdll_compile_commands.yml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 mm0_ls
@@ -6009,19 +4991,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "mm0-rs", "server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "metamath-zero" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 mojo
@@ -6037,19 +5013,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "mojo-lsp-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "mojo" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 motoko_lsp
@@ -6063,25 +5033,17 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "motoko-lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "motoko" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     formatter = "auto"
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "dfx.json", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 move_analyzer
@@ -6103,19 +5065,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "move-analyzer" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "move" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Move.toml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 msbuild_project_tools_server
@@ -6157,20 +5113,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "dotnet", "MSBuildProjectTools.LanguageServer.Host.dll" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "msbuild" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {}
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/msbuild_project_tools_server.lua:38](../lsp/msbuild_project_tools_server.lua#L38)
-
+- root_dir (use "gF" to view): ../lsp/msbuild_project_tools_server.lua:38
+<
 
 ------------------------------------------------------------------------------
 muon
@@ -6182,16 +5132,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "muon", "analyze", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "meson" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/muon.lua:4](../lsp/muon.lua#L4)
-
+- root_dir (use "gF" to view): ../lsp/muon.lua:4
+<
 
 ------------------------------------------------------------------------------
 mutt_ls
@@ -6209,23 +5155,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "mutt-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "muttrc", "neomuttrc" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 nelua_lsp
@@ -6259,15 +5197,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "nelua" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Makefile", ".git", "*.nelua" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 neocmake
@@ -6293,19 +5227,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "neocmakelsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "cmake" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git", "build", "cmake" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 nextflow_ls
@@ -6338,20 +5266,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "java", "-jar", "nextflow-language-server-all.jar" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "nextflow" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "nextflow.config", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     nextflow = {
       files = {
@@ -6359,8 +5280,7 @@ Default config:
       }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 nextls
@@ -6374,15 +5294,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "elixir", "eelixir", "heex", "surface" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "mix.exs", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 nginx_language_server
@@ -6400,19 +5316,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "nginx-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "nginx" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "nginx.conf", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 nickel_ls
@@ -6446,19 +5356,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "nls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ncl", "nickel" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 nil_ls
@@ -6477,19 +5381,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "nil" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "nix" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "flake.nix", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 nim_langserver
@@ -6507,16 +5405,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "nimlangserver" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "nim" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/nim_langserver.lua:13](../lsp/nim_langserver.lua#L13)
-
+- root_dir (use "gF" to view): ../lsp/nim_langserver.lua:13
+<
 
 ------------------------------------------------------------------------------
 nimls
@@ -6534,16 +5428,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "nimlsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "nim" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/nimls.lua:13](../lsp/nimls.lua#L13)
-
+- root_dir (use "gF" to view): ../lsp/nimls.lua:13
+<
 
 ------------------------------------------------------------------------------
 nixd
@@ -6560,19 +5450,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "nixd" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "nix" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "flake.nix", "git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 nomad_lsp
@@ -6598,16 +5482,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "nomad-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "hcl.nomad", "nomad" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/nomad_lsp.lua:26](../lsp/nomad_lsp.lua#L26)
-
+- root_dir (use "gF" to view): ../lsp/nomad_lsp.lua:26
+<
 
 ------------------------------------------------------------------------------
 ntt
@@ -6629,19 +5509,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ntt", "langserver" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ttcn" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 nushell
@@ -6655,19 +5529,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "nu", "--lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "nu" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 nxls
@@ -6686,19 +5554,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "nxls", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "json", "jsonc" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "nx.json", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ocamlls
@@ -6715,16 +5577,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ocaml-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ocaml", "reason" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/ocamlls.lua:12](../lsp/ocamlls.lua#L12)
-
+- root_dir (use "gF" to view): ../lsp/ocamlls.lua:12
+<
 
 ------------------------------------------------------------------------------
 ocamllsp
@@ -6743,17 +5601,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ocamllsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ocaml", "menhir", "ocamlinterface", "ocamllex", "reason", "dune" }
-  ```
-- `get_language_id` source (use "gF" to open): [../lsp/ocamllsp.lua:27](../lsp/ocamllsp.lua#L27)
-- `root_dir` source (use "gF" to open): [../lsp/ocamllsp.lua:27](../lsp/ocamllsp.lua#L27)
-
+- get_language_id (use "gF" to view): ../lsp/ocamllsp.lua:27
+- root_dir (use "gF" to view): ../lsp/ocamllsp.lua:27
+<
 
 ------------------------------------------------------------------------------
 ols
@@ -6767,16 +5621,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ols" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "odin" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/ols.lua:9](../lsp/ols.lua#L9)
-
+- root_dir (use "gF" to view): ../lsp/ols.lua:9
+<
 
 ------------------------------------------------------------------------------
 omnisharp
@@ -6798,32 +5648,21 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `capabilities` :
-  ```lua
+- capabilities: >lua
   {
     workspace = {
       workspaceFolders = false
     }
   }
-  ```
-- `cmd` :
-  ```lua
-  { "OmniSharp", "-z", "--hostPID", "1856", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
-  ```
-- `filetypes` :
-  ```lua
+- cmd: >lua
+  { "OmniSharp", "-z", "--hostPID", "12345", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
+- filetypes: >lua
   { "cs", "vb" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {}
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".sln", ".csproj", "omnisharp.json", "function.json" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     FormattingOptions = {
       EnableEditorConfigSupport = true
@@ -6835,8 +5674,7 @@ Default config:
       IncludePrereleases = true
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 opencl_ls
@@ -6852,19 +5690,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "opencl-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "opencl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 openscad_ls
@@ -6893,19 +5725,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "openscad-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "openscad" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 openscad_lsp
@@ -6924,19 +5750,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "openscad-lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "openscad" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 pact_ls
@@ -6950,19 +5770,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "pact-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "pact" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 pasls
@@ -6987,16 +5801,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "pasls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "pascal" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/pasls.lua:20](../lsp/pasls.lua#L20)
-
+- root_dir (use "gF" to view): ../lsp/pasls.lua:20
+<
 
 ------------------------------------------------------------------------------
 pbls
@@ -7017,19 +5827,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "pbls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "proto" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".pbls.toml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 perlls
@@ -7045,20 +5849,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "perl", "-MPerl::LanguageServer", "-e", "Perl::LanguageServer::run", "--", "--port 13603", "--nostdio 0" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "perl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     perl = {
       fileFilter = { ".pm", ".pl" },
@@ -7067,8 +5864,7 @@ Default config:
       perlInc = " "
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 perlnavigator
@@ -7098,19 +5894,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "perlnavigator" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "perl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 perlpls
@@ -7127,20 +5917,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "pls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "perl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     perl = {
       perlcritic = {
@@ -7151,8 +5934,7 @@ Default config:
       }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 pest_ls
@@ -7166,19 +5948,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "pest-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "pest" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 phan
@@ -7192,16 +5968,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "phan", "-m", "json", "--no-color", "--no-progress-bar", "-x", "-u", "-S", "--language-server-on-stdin", "--allow-polyfill-parser" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "php" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/phan.lua:22](../lsp/phan.lua#L22)
-
+- root_dir (use "gF" to view): ../lsp/phan.lua:22
+<
 
 ------------------------------------------------------------------------------
 phpactor
@@ -7215,16 +5987,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "phpactor", "language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "php" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/phpactor.lua:9](../lsp/phpactor.lua#L9)
-
+- root_dir (use "gF" to view): ../lsp/phpactor.lua:9
+<
 
 ------------------------------------------------------------------------------
 pico8_ls
@@ -7238,20 +6006,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "pico8-ls", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "p8" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/pico8_ls.lua:9](../lsp/pico8_ls.lua#L9)
-- `settings` :
-  ```lua
+- root_dir (use "gF" to view): ../lsp/pico8_ls.lua:9
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 pkgbuild_language_server
@@ -7265,19 +6027,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "pkgbuild-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "PKGBUILD" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 please
@@ -7293,19 +6049,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "plz", "tool", "lps" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "bzl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".plzconfig" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 pli
@@ -7319,19 +6069,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "pli_language_server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "pli" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".pliplugin" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 poryscript_pls
@@ -7345,19 +6089,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "poryscript-pls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "pory" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 postgres_lsp
@@ -7371,19 +6109,64 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "postgrestools", "lsp-proxy" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "sql" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "postgrestools.jsonc" }
-  ```
+<
 
+------------------------------------------------------------------------------
+powershell_es
+
+https://github.com/PowerShell/PowerShellEditorServices
+
+Language server for PowerShell.
+
+To install, download and extract PowerShellEditorServices.zip
+from the [releases](https://github.com/PowerShell/PowerShellEditorServices/releases).
+To configure the language server, set the property `bundle_path` to the root
+of the extracted PowerShellEditorServices.zip.
+
+```lua
+vim.lsp.config('powershell_es', {
+  bundle_path = 'c:/w/PowerShellEditorServices',
+})
+```
+
+By default the language server is started in `pwsh` (PowerShell Core). This can be changed by specifying `shell`.
+
+```lua
+vim.lsp.config('powershell_es', {
+  bundle_path = 'c:/w/PowerShellEditorServices',
+  shell = 'powershell.exe',
+})
+```
+
+Note that the execution policy needs to be set to `Unrestricted` for the languageserver run under PowerShell
+
+If necessary, specific `cmd` can be defined instead of `bundle_path`.
+See [PowerShellEditorServices](https://github.com/PowerShell/PowerShellEditorServices#standard-input-and-output)
+to learn more.
+
+```lua
+vim.lsp.config('powershell_es', {
+  cmd = {'pwsh', '-NoLogo', '-NoProfile', '-Command', "c:/PSES/Start-EditorServices.ps1 ..."},
+})
+```
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('powershell_es')
+
+
+Default config:
+- cmd (use "gF" to view): ../lsp/powershell_es.lua:39
+- filetypes: >lua
+  { "ps1" }
+- root_markers: >lua
+  { "PSScriptAnalyzerSettings.psd1", ".git" }
+<
 
 ------------------------------------------------------------------------------
 prismals
@@ -7400,27 +6183,19 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "prisma-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "prisma" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git", "package.json" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     prisma = {
       prismaFmtBinPath = ""
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 prolog_ls
@@ -7434,19 +6209,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "swipl", "-g", "use_module(library(lsp_server)).", "-g", "lsp_server:main", "-t", "halt", "--", "stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "prolog" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "pack.pl" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 prosemd_lsp
@@ -7462,19 +6231,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "prosemd-lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "markdown" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 protols
@@ -7493,19 +6256,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "protols" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "proto" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 psalm
@@ -7522,19 +6279,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "psalm", "--language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "php" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "psalm.xml", "psalm.xml.dist" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 pug
@@ -7550,19 +6301,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "pug-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "pug" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 puppet
@@ -7587,19 +6332,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "puppet-languageserver", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "puppet" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "manifests", ".puppet-lint.rc", "hiera.yaml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 purescriptls
@@ -7616,19 +6355,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "purescript-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "purescript" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "bower.json", "flake.nix", "psc-package.json", "shell.nix", "spago.dhall", "spago.yaml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 pylsp
@@ -7664,19 +6397,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "pylsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "python" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 pylyzer
@@ -7685,25 +6412,27 @@ https://github.com/mtshiba/pylyzer
 
 `pylyzer`, a fast static code analyzer & language server for Python.
 
+`pylyzer` requires Erg as dependency, and finds it via `ERG_PATH` environment variable.
+This config sets `ERG_PATH="~/.erg"`. Set `cmd_env` if you want to change it.
+To install Erg, simply extract tarball/zip from [Erg releases](https://github.com/erg-lang/erg/releases/latest)
+to the the path where you want to install it, e.g. `~/.erg`.
+
 Snippet to enable the language server: >lua
   vim.lsp.enable('pylyzer')
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "pylyzer", "--server" }
-  ```
-- `filetypes` :
-  ```lua
+- cmd_env: >lua
+  {
+    ERG_PATH = "/home/runner/.erg"
+  }
+- filetypes: >lua
   { "python" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "setup.py", "tox.ini", "requirements.txt", "Pipfile", "pyproject.toml", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     python = {
       checkOnType = false,
@@ -7712,8 +6441,7 @@ Default config:
       smartCompletion = true
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 pyre
@@ -7732,19 +6460,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "pyre", "persistent" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "python" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".pyre_configuration" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 pyright
@@ -7758,21 +6480,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "pyright-langserver", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "python" }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/pyright.lua:22](../lsp/pyright.lua#L22)
-- `root_markers` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/pyright.lua:22
+- root_markers: >lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     python = {
       analysis = {
@@ -7782,8 +6497,7 @@ Default config:
       }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 qmlls
@@ -7799,19 +6513,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "qmlls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "qml", "qmljs" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 quick_lint_js
@@ -7827,19 +6535,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "quick-lint-js", "--lsp-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "javascript", "typescript" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json", "jsconfig.json", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 r_language_server
@@ -7859,16 +6561,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "R", "--no-echo", "-e", "languageserver::run()" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "r", "rmd", "quarto" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/r_language_server.lua:12](../lsp/r_language_server.lua#L12)
-
+- root_dir (use "gF" to view): ../lsp/r_language_server.lua:12
+<
 
 ------------------------------------------------------------------------------
 racket_langserver
@@ -7886,19 +6584,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "racket", "--lib", "racket-langserver" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "racket", "scheme" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 raku_navigator
@@ -7928,19 +6620,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   {}
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "raku" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 reason_ls
@@ -7954,19 +6640,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "reason-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "reason" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "bsconfig.json", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 regal
@@ -7985,16 +6665,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "regal", "language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "rego" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/regal.lua:14](../lsp/regal.lua#L14)
-
+- root_dir (use "gF" to view): ../lsp/regal.lua:14
+<
 
 ------------------------------------------------------------------------------
 regols
@@ -8013,16 +6689,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "regols" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "rego" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/regols.lua:14](../lsp/regols.lua#L14)
-
+- root_dir (use "gF" to view): ../lsp/regols.lua:14
+<
 
 ------------------------------------------------------------------------------
 remark_ls
@@ -8061,19 +6733,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "remark-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "markdown" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".remarkrc", ".remarkrc.json", ".remarkrc.js", ".remarkrc.cjs", ".remarkrc.mjs", ".remarkrc.yml", ".remarkrc.yaml", ".remarkignore" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 rescriptls
@@ -8106,16 +6772,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "rescript-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "rescript" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     extensionConfiguration = {
       allowBuiltInFormatter = true,
@@ -8135,16 +6796,11 @@ Default config:
       }
     }
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "bsconfig.json", "rescript.json", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 rls
@@ -8181,19 +6837,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "rls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "rust" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Cargo.toml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 rnix
@@ -8211,24 +6861,16 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "rnix-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "nix" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {}
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/rnix.lua:10](../lsp/rnix.lua#L10)
-- `settings` :
-  ```lua
+- root_dir (use "gF" to view): ../lsp/rnix.lua:10
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 robotcode
@@ -8242,20 +6884,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "robotcode", "language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "robot", "resource" }
-  ```
-- `get_language_id` source (use "gF" to open): [../lsp/robotcode.lua:6](../lsp/robotcode.lua#L6)
-- `root_markers` :
-  ```lua
+- get_language_id (use "gF" to view): ../lsp/robotcode.lua:6
+- root_markers: >lua
   { "robot.toml", "pyproject.toml", "Pipfile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 robotframework_ls
@@ -8269,19 +6905,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "robotframework_ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "robot" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "robotidy.toml", "pyproject.toml", "conda.yaml", "robot.yaml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 roc_ls
@@ -8296,19 +6926,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "roc_language_server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "roc" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 rome
@@ -8328,19 +6952,100 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "rome", "lsp-proxy" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "javascript", "javascriptreact", "json", "typescript", "typescript.tsx", "typescriptreact" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json", "node_modules", ".git" }
-  ```
+<
 
+------------------------------------------------------------------------------
+roslyn_ls
+
+https://github.com/dotnet/roslyn
+
+To install the server, compile from source or download as nuget package.
+Go to `https://dev.azure.com/azure-public/vside/_artifacts/feed/vs-impl/NuGet/Microsoft.CodeAnalysis.LanguageServer.<platform>/overview`
+replace `<platform>` with one of the following `linux-x64`, `osx-x64`, `win-x64`, `neutral` (for more info on the download location see https://github.com/dotnet/roslyn/issues/71474#issuecomment-2177303207).
+Download and extract it (nuget's are zip files).
+- if you chose `neutral` nuget version, then you have to change the `cmd` like so:
+  cmd = {
+    'dotnet',
+    '<my_folder>/Microsoft.CodeAnalysis.LanguageServer.dll',
+    '--logLevel', -- this property is required by the server
+    'Information',
+    '--extensionLogDirectory', -- this property is required by the server
+    fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
+    '--stdio',
+  },
+  where `<my_folder>` has to be the folder you extracted the nuget package to.
+- for all other platforms put the extracted folder to neovim's PATH (`vim.env.PATH`)
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('roslyn_ls')
+
+
+Default config:
+- capabilities: >lua
+  {
+    textDocument = {
+      diagnostic = {
+        dynamicRegistration = true
+      }
+    }
+  }
+- cmd: >lua
+  { "Microsoft.CodeAnalysis.LanguageServer", "--logLevel", "Information", "--extensionLogDirectory", "/tmp/roslyn_ls/logs", "--stdio" }
+- filetypes: >lua
+  { "cs" }
+- handlers: >lua
+  {
+    ["razor/provideDynamicFileInfo"] = <function 1>,
+    ["workspace/_roslyn_projectHasUnresolvedDependencies"] = <function 2>,
+    ["workspace/_roslyn_projectNeedsRestore"] = <function 3>,
+    ["workspace/projectInitializationComplete"] = <function 4>
+  }
+- name: >lua
+  "roslyn_ls"
+- offset_encoding: >lua
+  "utf-8"
+- on_init: >lua
+  { <function 1> }
+- root_dir (use "gF" to view): ../lsp/roslyn_ls.lua:92
+- settings: >lua
+  {
+    ["csharp|background_analysis"] = {
+      dotnet_analyzer_diagnostics_scope = "fullSolution",
+      dotnet_compiler_diagnostics_scope = "fullSolution"
+    },
+    ["csharp|code_lens"] = {
+      dotnet_enable_references_code_lens = true
+    },
+    ["csharp|completion"] = {
+      dotnet_provide_regex_completions = true,
+      dotnet_show_completion_items_from_unimported_namespaces = true,
+      dotnet_show_name_completion_suggestions = true
+    },
+    ["csharp|inlay_hints"] = {
+      csharp_enable_inlay_hints_for_implicit_object_creation = true,
+      csharp_enable_inlay_hints_for_implicit_variable_types = true,
+      csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+      csharp_enable_inlay_hints_for_types = true,
+      dotnet_enable_inlay_hints_for_indexer_parameters = true,
+      dotnet_enable_inlay_hints_for_literal_parameters = true,
+      dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+      dotnet_enable_inlay_hints_for_other_parameters = true,
+      dotnet_enable_inlay_hints_for_parameters = true,
+      dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+      dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+      dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true
+    },
+    ["csharp|symbol_search"] = {
+      dotnet_search_reference_assemblies = true
+    }
+  }
+<
 
 ------------------------------------------------------------------------------
 rpmspec
@@ -8349,28 +7054,26 @@ https://github.com/dcermak/rpm-spec-language-server
 
 Language server protocol (LSP) support for RPM Spec files.
 
+`rpm-spec-language-server` can be installed by running,
+
+```sh
+pip install rpm-spec-language-server
+```
+
 Snippet to enable the language server: >lua
   vim.lsp.enable('rpmspec')
 
 
 Default config:
-- `cmd` :
-  ```lua
-  { "python3", "-mrpm_lsp_server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- cmd: >lua
+  { "rpm_lsp_server", "--stdio" }
+- filetypes: >lua
   { "spec" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 rubocop
@@ -8382,19 +7085,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "rubocop", "--lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ruby" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Gemfile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ruby_lsp
@@ -8416,25 +7113,17 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ruby-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ruby", "eruby" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     formatter = "auto"
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Gemfile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ruff
@@ -8470,23 +7159,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ruff", "server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "python" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ruff_lsp
@@ -8517,23 +7198,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ruff-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "python" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "pyproject.toml", "ruff.toml", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 rune_languageserver
@@ -8548,19 +7221,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "rune-languageserver" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "rune" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 rust_analyzer
@@ -8591,26 +7258,20 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `before_init` source (use "gF" to open): [../lsp/rust_analyzer.lua:57](../lsp/rust_analyzer.lua#L57)
-- `capabilities` :
-  ```lua
+- before_init (use "gF" to view): ../lsp/rust_analyzer.lua:56
+- capabilities: >lua
   {
     experimental = {
       serverStatusNotification = true
     }
   }
-  ```
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "rust-analyzer" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "rust" }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/rust_analyzer.lua:57](../lsp/rust_analyzer.lua#L57)
-- `root_dir` source (use "gF" to open): [../lsp/rust_analyzer.lua:57](../lsp/rust_analyzer.lua#L57)
-
+- on_attach (use "gF" to view): ../lsp/rust_analyzer.lua:56
+- root_dir (use "gF" to view): ../lsp/rust_analyzer.lua:56
+<
 
 ------------------------------------------------------------------------------
 salt_ls
@@ -8628,19 +7289,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "salt_lsp_server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "sls" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 scheme_langserver
@@ -8654,19 +7309,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "scheme-langserver", "~/.scheme-langserver.log", "enable", "disable" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "scheme" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Akku.manifest", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 scry
@@ -8680,19 +7329,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "scry" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "crystal" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "shard.yml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 selene3p_ls
@@ -8706,19 +7349,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "selene-3p-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "lua" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "selene.toml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 serve_d
@@ -8733,19 +7370,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "serve-d" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "d" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "dub.json", "dub.sdl", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 shopify_theme_ls
@@ -8763,23 +7394,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "shopify", "theme", "language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "liquid" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".shopifyignore", ".theme-check.yml", ".theme-check.yaml", "shopify.theme.toml" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 sixtyfps
@@ -8807,15 +7430,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "sixtyfps-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "sixtyfps" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 slangd
@@ -8848,19 +7467,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "slangd" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "hlsl", "shaderslang" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 slint_lsp
@@ -8886,19 +7499,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "slint-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "slint" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 smarty_ls
@@ -8918,21 +7525,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "smarty-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "smarty" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {}
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/smarty_ls.lua:15](../lsp/smarty_ls.lua#L15)
-- `settings` :
-  ```lua
+- root_dir (use "gF" to view): ../lsp/smarty_ls.lua:15
+- settings: >lua
   {
     css = {
       validate = true
@@ -8941,8 +7541,7 @@ Default config:
       pluginDirs = {}
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 smithy_ls
@@ -8956,19 +7555,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "smithy-language-server", "0" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "smithy" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "smithy-build.json", "build.gradle", "build.gradle.kts", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 snakeskin_ls
@@ -8985,19 +7578,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "snakeskin-cli", "lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ss" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 snyk_ls
@@ -9011,29 +7598,19 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "snyk-ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "go", "gomod", "javascript", "typescript", "json", "python", "requirements", "helm", "yaml", "terraform", "terraform-vars" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     activateSnykCode = "true"
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git", ".snyk" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 solang
@@ -9054,19 +7631,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "solang", "language-server", "--target", "evm" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "solidity" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 solargraph
@@ -9086,33 +7657,23 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "solargraph", "stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ruby" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     formatting = true
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Gemfile", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     solargraph = {
       diagnostics = true
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 solc
@@ -9126,16 +7687,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "solc", "--lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "solidity" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/solc.lua:8](../lsp/solc.lua#L8)
-
+- root_dir (use "gF" to view): ../lsp/solc.lua:9
+<
 
 ------------------------------------------------------------------------------
 solidity
@@ -9178,28 +7735,20 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "solidity-ls", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "solidity" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git", "package.json" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     solidity = {
       includePath = "",
       remapping = {}
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 solidity_ls
@@ -9219,19 +7768,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "vscode-solidity-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "solidity" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "hardhat.config.js", "hardhat.config.ts", "foundry.toml", "remappings.txt", "truffle.js", "truffle-config.js", "ape-config.yaml", ".git", "package.json" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 solidity_ls_nomicfoundation
@@ -9251,19 +7794,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "nomicfoundation-solidity-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "solidity" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "hardhat.config.js", "hardhat.config.ts", "foundry.toml", "remappings.txt", "truffle.js", "truffle-config.js", "ape-config.yaml", ".git", "package.json" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 somesass_ls
@@ -9289,31 +7826,21 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "some-sass-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "scss", "sass" }
-  ```
-- `name` :
-  ```lua
+- name: >lua
   "somesass_ls"
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git", ".package.json" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     somesass = {
       suggestAllFromOpenDocument = true
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 sorbet
@@ -9334,19 +7861,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "srb", "tc", "--lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ruby" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Gemfile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 sourcekit
@@ -9360,8 +7881,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `capabilities` :
-  ```lua
+- capabilities: >lua
   {
     textDocument = {
       diagnostic = {
@@ -9375,18 +7895,13 @@ Default config:
       }
     }
   }
-  ```
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "sourcekit-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "swift", "objc", "objcpp", "c", "cpp" }
-  ```
-- `get_language_id` source (use "gF" to open): [../lsp/sourcekit.lua:9](../lsp/sourcekit.lua#L9)
-- `root_dir` source (use "gF" to open): [../lsp/sourcekit.lua:9](../lsp/sourcekit.lua#L9)
-
+- get_language_id (use "gF" to view): ../lsp/sourcekit.lua:9
+- root_dir (use "gF" to view): ../lsp/sourcekit.lua:9
+<
 
 ------------------------------------------------------------------------------
 spectral
@@ -9405,27 +7920,19 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "spectral-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "yaml", "json", "yml" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".spectral.yaml", ".spectral.yml", ".spectral.json", ".spectral.js" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     enable = true,
     run = "onType",
     validateLanguages = { "yaml", "json", "yml" }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 spyglassmc_language_server
@@ -9451,19 +7958,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "spyglassmc-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "mcfunction" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "pack.mcmeta" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 sqlls
@@ -9477,23 +7978,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "sql-language-server", "up", "--method", "stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "sql", "mysql" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".sqllsrc.json" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 sqls
@@ -9506,30 +7999,22 @@ vim.lsp.config('sqls', {
   ...
 })
 ```
-Sqls can be installed via `go get github.com/sqls-server/sqls`. Instructions for compiling Sqls from the source can be found at [sqls-server/sqls](https://github.com/sqls-server/sqls).
+Sqls can be installed via `go install github.com/sqls-server/sqls@latest`. Instructions for compiling Sqls from the source can be found at [sqls-server/sqls](https://github.com/sqls-server/sqls).
 
 Snippet to enable the language server: >lua
   vim.lsp.enable('sqls')
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "sqls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "sql", "mysql" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "config.yml" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 sqruff
@@ -9543,19 +8028,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "sqruff", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "sql" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".sqruff", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 standardrb
@@ -9569,19 +8048,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "standardrb", "--lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ruby" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Gemfile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 starlark_rust
@@ -9599,19 +8072,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "starlark", "--lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "star", "bzl", "BUILD.bazel" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 starpls
@@ -9625,19 +8092,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "starpls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "bzl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "WORKSPACE", "WORKSPACE.bazel", "MODULE.bazel" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 statix
@@ -9651,19 +8112,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "statix", "check", "--stdin" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "nix" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "flake.nix", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 steep
@@ -9679,19 +8134,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "steep", "langserver" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ruby", "eruby" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Steepfile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 stimulus_ls
@@ -9715,19 +8164,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "stimulus-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "html", "ruby", "eruby", "blade", "php" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Gemfile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 stylelint_lsp
@@ -9757,23 +8200,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "stylelint-lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "astro", "css", "html", "less", "scss", "sugarss", "vue", "wxss" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".stylelintrc", ".stylelintrc.mjs", ".stylelintrc.cjs", ".stylelintrc.js", ".stylelintrc.json", ".stylelintrc.yaml", ".stylelintrc.yml", "stylelint.config.mjs", "stylelint.config.cjs", "stylelint.config.js" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 stylua3p_ls
@@ -9787,19 +8222,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "stylua-3p-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "lua" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".stylua.toml", "stylua.toml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 superhtml
@@ -9825,19 +8254,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "superhtml", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "superhtml", "html" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 svelte
@@ -9856,20 +8279,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "svelteserver", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "svelte" }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/svelte.lua:12](../lsp/svelte.lua#L12)
-- `root_markers` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/svelte.lua:12
+- root_markers: >lua
   { "package.json", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 svlangserver
@@ -9889,28 +8306,20 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "svlangserver" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "verilog", "systemverilog" }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/svlangserver.lua:28](../lsp/svlangserver.lua#L28)
-- `root_markers` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/svlangserver.lua:28
+- root_markers: >lua
   { ".svlangserver", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     systemverilog = {
       includeIndexing = { "*.{v,vh,sv,svh}", "**/*.{v,vh,sv,svh}" }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 svls
@@ -9929,19 +8338,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "svls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "verilog", "systemverilog" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 swift_mesonls
@@ -9955,19 +8358,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "Swift-MesonLSP", "--lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "meson" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "meson.build", "meson_options.txt", "meson.options", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 syntax_tree
@@ -9990,19 +8387,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "stree", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ruby" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".streerc", "Gemfile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 systemd_ls
@@ -10021,19 +8412,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "systemd-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "systemd" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 tabby_ml
@@ -10053,19 +8438,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "tabby-agent", "--lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   {}
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 tailwindcss
@@ -10081,21 +8460,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `before_init` source (use "gF" to open): [../lsp/tailwindcss.lua:8](../lsp/tailwindcss.lua#L8)
-- `cmd` :
-  ```lua
+- before_init (use "gF" to view): ../lsp/tailwindcss.lua:9
+- cmd: >lua
   { "tailwindcss-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
-  ```
-- `root_markers` :
-  ```lua
-  { "tailwind.config.js", "tailwind.config.cjs", "tailwind.config.mjs", "tailwind.config.ts", "postcss.config.js", "postcss.config.cjs", "postcss.config.mjs", "postcss.config.ts" }
-  ```
-- `settings` :
-  ```lua
+- root_dir (use "gF" to view): ../lsp/tailwindcss.lua:9
+- settings: >lua
   {
     tailwindCSS = {
       classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
@@ -10117,9 +8488,8 @@ Default config:
       validate = true
     }
   }
-  ```
 - `workspace_required` : `true`
-
+<
 
 ------------------------------------------------------------------------------
 taplo
@@ -10138,19 +8508,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "taplo", "lsp", "stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "toml" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 tblgen_lsp_server
@@ -10166,19 +8530,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "tblgen-lsp-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "tablegen" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "tablegen_compile_commands.yml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 teal_ls
@@ -10200,19 +8558,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "teal-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "teal" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "tlconfig.lua" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 templ
@@ -10226,19 +8578,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "templ", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "templ" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "go.work", "go.mod", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 terraform_lsp
@@ -10276,19 +8622,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "terraform-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "terraform", "hcl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".terraform", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 terraformls
@@ -10330,19 +8670,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "terraform-ls", "serve" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "terraform", "terraform-vars" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".terraform", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 texlab
@@ -10358,21 +8692,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "texlab" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "tex", "plaintex", "bib" }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/texlab.lua:164](../lsp/texlab.lua#L164)
-- `root_markers` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/texlab.lua:164
+- root_markers: >lua
   { ".git", ".latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     texlab = {
       bibtexFormatter = "texlab",
@@ -10397,8 +8724,7 @@ Default config:
       }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 textlsp
@@ -10419,20 +8745,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "textlsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "text", "tex", "org" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     textLSP = {
       analysers = {
@@ -10452,8 +8771,7 @@ Default config:
       }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 tflint
@@ -10468,19 +8786,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "tflint", "--langserver" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "terraform" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".terraform", ".git", ".tflint.hcl" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 theme_check
@@ -10505,23 +8817,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "theme-check-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "liquid" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".theme-check.yml" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 thriftls
@@ -10535,19 +8839,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "thriftls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "thrift" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".thrift" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 tilt_ls
@@ -10567,19 +8865,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "tilt", "lsp", "start" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "tiltfile" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 tinymist
@@ -10599,20 +8891,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "tinymist" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "typst" }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/tinymist.lua:52](../lsp/tinymist.lua#L52)
-- `root_markers` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/tinymist.lua:52
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ts_ls
@@ -10645,6 +8931,10 @@ Here's an example that disables type checking in JavaScript files.
   ]
 }
 ```
+
+Use the `:LspTypescriptSourceAction` command to see "whole file" ("source") code-actions such as:
+- organize imports
+- remove unused code
 
 ### Vue support
 
@@ -10688,25 +8978,22 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "typescript-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
-  ```
-- `init_options` :
-  ```lua
+- handlers: >lua
+  {
+    ["_typescript.rename"] = <function 1>
+  }
+- init_options: >lua
   {
     hostInfo = "neovim"
   }
-  ```
-- `root_markers` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/ts_ls.lua:73
+- root_markers: >lua
   { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ts_query_ls
@@ -10742,20 +9029,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ts_query_ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "query" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "queries", ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     parser_aliases = {
       ecma = "javascript",
@@ -10763,8 +9043,7 @@ Default config:
       php_only = "php"
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 tsp_server
@@ -10783,19 +9062,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "tsp-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "typespec" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "tspconfig.yaml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ttags
@@ -10807,19 +9080,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ttags", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ruby", "rust", "javascript", "haskell" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 turbo_ls
@@ -10843,19 +9110,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "turbo-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "html", "ruby", "eruby", "blade", "php" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Gemfile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 turtle_ls
@@ -10870,21 +9131,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "node",
     [3] = "--stdio"
   }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "turtle", "ttl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 tvm_ffi_navigator
@@ -10901,19 +9156,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "python", "-m", "ffi_navigator.langserver" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "python", "cpp" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "pyproject.toml", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 twiggy_language_server
@@ -10930,19 +9179,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "twiggy-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "twig" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "composer.json", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 typeprof
@@ -10956,19 +9199,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "typeprof", "--lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ruby", "eruby" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "Gemfile", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 typos_lsp
@@ -10985,19 +9222,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "typos-lsp" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "typos.toml", "_typos.toml", ".typos.toml", "pyproject.toml", "Cargo.toml" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 typst_lsp
@@ -11011,19 +9242,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "typst-lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "typst" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 uiua
@@ -11039,19 +9264,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "uiua", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "uiua" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "main.ua", ".fmt.ua", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ungrammar_languageserver
@@ -11069,20 +9288,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ungrammar-languageserver", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ungrammar" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     ungrammar = {
       format = {
@@ -11093,8 +9305,7 @@ Default config:
       }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 unison
@@ -11106,20 +9317,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "nc", "localhost", "5757" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "unison" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/unison.lua:7](../lsp/unison.lua#L7)
-- `settings` :
-  ```lua
+- root_dir (use "gF" to view): ../lsp/unison.lua:7
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 unocss
@@ -11136,19 +9341,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "unocss-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "erb", "haml", "hbs", "html", "css", "postcss", "javascript", "javascriptreact", "markdown", "ejs", "php", "svelte", "typescript", "typescriptreact", "vue-html", "vue", "sass", "scss", "less", "stylus", "astro", "rescript", "rust" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "unocss.config.js", "unocss.config.ts", "uno.config.js", "uno.config.ts" }
-  ```
-
+- `workspace_required` : `true`
+<
 
 ------------------------------------------------------------------------------
 uvls
@@ -11172,19 +9372,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "uvls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "uvl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 v_analyzer
@@ -11200,19 +9394,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "v-analyzer" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "v", "vsh", "vv" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "v.mod", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 vacuum
@@ -11237,19 +9425,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "vacuum", "language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "yaml.openapi", "json.openapi" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 vala_ls
@@ -11261,16 +9443,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "vala-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "vala", "genie" }
-  ```
-- `root_dir` source (use "gF" to open): [../lsp/vala_ls.lua:28](../lsp/vala_ls.lua#L28)
-
+- root_dir (use "gF" to view): ../lsp/vala_ls.lua:26
+<
 
 ------------------------------------------------------------------------------
 vale_ls
@@ -11284,19 +9462,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "vale-ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "markdown", "text", "tex", "rst" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".vale.ini" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 verible
@@ -11315,19 +9487,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "verible-verilog-ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "systemverilog", "verilog" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 veridian
@@ -11353,19 +9519,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "veridian" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "systemverilog", "verilog" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 veryl_ls
@@ -11384,19 +9544,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "veryl-ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "veryl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 vhdl_ls
@@ -11433,19 +9587,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "vhdl_ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "vhd", "vhdl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "vhdl_ls.toml", ".vhdl_ls.toml" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 vimls
@@ -11462,16 +9610,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "vim-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "vim" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     diagnostic = {
       enable = true
@@ -11491,12 +9634,9 @@ Default config:
     },
     vimruntime = ""
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 visualforce_ls
@@ -11524,24 +9664,18 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "visualforce" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     embeddedLanguages = {
       css = true,
       javascript = true
     }
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "sfdx-project.json" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 vls
@@ -11557,19 +9691,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "v", "ls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "v", "vlang" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "v.mod", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 volar
@@ -11652,28 +9780,20 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `before_init` source (use "gF" to open): [../lsp/volar.lua:88](../lsp/volar.lua#L88)
-- `cmd` :
-  ```lua
+- before_init (use "gF" to view): ../lsp/volar.lua:88
+- cmd: >lua
   { "vue-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "vue" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     typescript = {
       tsdk = ""
     }
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 vscoqtop
@@ -11685,19 +9805,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "vscoqtop" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "coq" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "_CoqProject", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 vtsls
@@ -11719,19 +9833,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "vtsls", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "tsconfig.json", "package.json", "jsconfig.json", ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 vuels
@@ -11749,16 +9857,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "vls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "vue" }
-  ```
-- `init_options` :
-  ```lua
+- init_options: >lua
   {
     config = {
       css = {},
@@ -11797,12 +9900,9 @@ Default config:
       }
     }
   }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "package.json", "vue.config.js" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 wasm_language_tools
@@ -11817,15 +9917,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "wat_server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "wat" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 wgsl_analyzer
@@ -11842,23 +9938,15 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "wgsl-analyzer" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "wgsl" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {}
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 yamlls
@@ -11927,20 +10015,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "yaml-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "yaml", "yaml.docker-compose", "yaml.gitlab" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-- `settings` :
-  ```lua
+- settings: >lua
   {
     redhat = {
       telemetry = {
@@ -11948,8 +10029,7 @@ Default config:
       }
     }
   }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 yang_lsp
@@ -11963,19 +10043,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "yang-language-server" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "yang" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 yls
@@ -11993,19 +10067,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "yls", "-vv" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "yar", "yara" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ziggy
@@ -12019,19 +10087,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ziggy", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ziggy" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 ziggy_schema
@@ -12045,19 +10107,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "ziggy", "lsp", "--schema" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "ziggy_schema" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { ".git" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 zk
@@ -12071,20 +10127,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "zk", "lsp" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "markdown" }
-  ```
-- `on_attach` source (use "gF" to open): [../lsp/zk.lua:15](../lsp/zk.lua#L15)
-- `root_markers` :
-  ```lua
+- on_attach (use "gF" to view): ../lsp/zk.lua:15
+- root_markers: >lua
   { ".zk" }
-  ```
-
+<
 
 ------------------------------------------------------------------------------
 zls
@@ -12098,20 +10148,14 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- `cmd` :
-  ```lua
+- cmd: >lua
   { "zls" }
-  ```
-- `filetypes` :
-  ```lua
+- filetypes: >lua
   { "zig", "zir" }
-  ```
-- `root_markers` :
-  ```lua
+- root_markers: >lua
   { "zls.json", "build.zig", ".git" }
-  ```
 - `workspace_required` : `false`
-
+<
 
 
 ==============================================================================
