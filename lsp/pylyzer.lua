@@ -5,8 +5,7 @@
 --- `pylyzer`, a fast static code analyzer & language server for Python.
 ---
 --- `pylyzer` requires Erg as dependency, and finds it via `ERG_PATH` environment variable.
---- In the default config `ERG_PATH` is set to `~/.erg`, as shown in the `on_new_config` function.
---- Add a `on_new_config` on your own if you want to change it.
+--- This config sets `ERG_PATH="~/.erg"`. Set `cmd_env` if you want to change it.
 --- To install Erg, simply extract tarball/zip from [Erg releases](https://github.com/erg-lang/erg/releases/latest)
 --- to the the path where you want to install it, e.g. `~/.erg`.
 return {
