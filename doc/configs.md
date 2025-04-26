@@ -568,12 +568,12 @@ Note, that if you override the default `cmd`, you must also update `on_new_confi
 local project_library_path = "/path/to/project/lib"
 local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
 
-require'lspconfig'.angularls.setup{
+vim.lsp.config('angularls', {
   cmd = cmd,
   on_new_config = function(new_config,new_root_dir)
     new_config.cmd = cmd
   end,
-}
+})
 ```
 
 Snippet to enable the language server:
@@ -1095,7 +1095,7 @@ npm install -g azure-pipelines-language-server
 By default `azure-pipelines-ls` will only work in files named `azure-pipelines.yml`, this can be changed by providing additional settings like so:
 ```lua
 vim.lsp.config('azure_pipelines_ls', {
-  ... -- other configuration for setup {}
+  ... -- other configuration
   settings = {
       yaml = {
           schemas = {
@@ -6882,7 +6882,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, { pattern = { "*.nelua"
 **By default, nelua-lsp doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of the unzipped run script or binary.
 
 ```lua
-vim.lsp.config('nelua_lsp.setup, {
+vim.lsp.config('nelua_lsp', {
     cmd = { "nelua", "-L", "/path/to/nelua-lsp/", "--script", "/path/to/nelua-lsp/nelua-lsp.lua" },
 })
 ```
@@ -7258,7 +7258,7 @@ Default config:
 
 https://github.com/nokia/ntt
 Installation instructions can be found [here](https://github.com/nokia/ntt#Install).
-Can be configured by passing a "settings" object to `ntt.setup{}`:
+Can be configured by passing a "settings" object to vim.lsp.config('ntt'):
 ```lua
 vim.lsp.config('ntt', {
     settings = {
@@ -9713,7 +9713,7 @@ https://github.com/shader-slang/slang
 The `slangd` binary can be downloaded as part of [slang releases](https://github.com/shader-slang/slang/releases) or
 by [building `slang` from source](https://github.com/shader-slang/slang/blob/master/docs/building.md).
 
-The server can be configured by passing a "settings" object to `slangd.setup{}`:
+The server can be configured by passing a "settings" object to vim.lsp.config('slangd'):
 
 ```lua
 vim.lsp.config('slangd', {
@@ -10654,7 +10654,7 @@ https://github.com/bmatcuk/stylelint-lsp
 npm i -g stylelint-lsp
 ```
 
-Can be configured by passing a `settings.stylelintplus` object to `stylelint_lsp.setup`:
+Can be configured by passing a `settings.stylelintplus` object to vim.lsp.config('stylelint_lsp'):
 
 ```lua
 vim.lsp.config('stylelint_lsp', {
@@ -11611,7 +11611,7 @@ vim.lsp.config('ts_ls', {
 })
 
 -- You must make sure volar is setup
--- e.g. require'lspconfig'.volar.setup{}
+-- e.g. vim.lsp.config('volar')
 -- See volar's section for more information
 ```
 
@@ -12573,7 +12573,7 @@ Volar will run embedded `ts_ls` therefore there is no need to run it separately.
 ```lua
 local lspconfig = require('lspconfig')
 
-lspconfig.volar.setup {
+vim.lsp.config('volar', {
   -- add filetypes for typescript, javascript and vue
   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
   init_options = {
@@ -12582,9 +12582,9 @@ lspconfig.volar.setup {
       hybridMode = false,
     },
   },
-}
--- you must remove ts_ls setup
--- lspconfig.ts_ls.setup {}
+})
+-- you must remove "ts_ls" config
+-- vim.lsp.config['ts_ls'] = {}
 ```
 
 **Overriding the default TypeScript Server used by Volar**
@@ -12594,19 +12594,19 @@ e.g. when working on a [monorepo](https://monorepo.tools/). The alternatives are
 
 - use a global TypeScript Server installation
 ```lua
-require'lspconfig'.volar.setup {
+vim.lsp.config('volar', {
   init_options = {
     typescript = {
       -- replace with your global TypeScript library path
       tsdk = '/path/to/node_modules/typescript/lib'
     }
   }
-}
+})
 ```
 
 - use a local server and fall back to a global TypeScript Server installation
 ```lua
-require'lspconfig'.volar.setup {
+vim.lsp.config('volar', {
   init_options = {
     typescript = {
       -- replace with your global TypeScript library path
@@ -12619,7 +12619,7 @@ require'lspconfig'.volar.setup {
       new_config.init_options.typescript.tsdk = lib_path
     end
   end
-}
+})
 ```
 
 Snippet to enable the language server:
@@ -12868,7 +12868,7 @@ root.
 
 ```lua
 vim.lsp.config('yamlls', {
-  ... -- other configuration for setup {}
+  ...
   settings = {
     yaml = {
       ... -- other settings. note this overrides the lspconfig defaults.
@@ -12890,7 +12890,7 @@ To override a schema to use a specific k8s schema version (for example, to use 1
 
 ```lua
 vim.lsp.config('yamlls', {
-  ... -- other configuration for setup {}
+  ...
   settings = {
     yaml = {
       ... -- other settings. note this overrides the lspconfig defaults.
