@@ -29,7 +29,9 @@
 --- }
 --- ```
 ---
---- Source actions such as organizing imports and removing unused code are available via `:LspTypescriptSourceAction`.
+--- Use the `:LspTypescriptSourceAction` command to see "whole file" ("source") code-actions such as:
+--- - organize imports
+--- - remove unused code
 ---
 --- ### Vue support
 ---
@@ -83,7 +85,7 @@ return {
   handlers = {
     -- handle rename request for certain code actions like extracting functions / types
     ['_typescript.rename'] = function(_, result, ctx)
-      local client = vim.lsp.get_client_by_id(ctx.client_id)
+      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
       vim.lsp.util.show_document({
         uri = result.textDocument.uri,
         range = {
@@ -96,7 +98,7 @@ return {
     end,
   },
   on_attach = function(client)
-    -- ts_ls provides code actions that have a prefix `source.` that apply to the whole file. These will only appear in
+    -- ts_ls provides `source.*` code actions that apply to the whole file. These only appear in
     -- `vim.lsp.buf.code_action()` if specified in `context.only`.
     vim.api.nvim_buf_create_user_command(0, 'LspTypescriptSourceAction', function()
       local source_actions = vim.tbl_filter(function(action)

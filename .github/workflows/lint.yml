@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  deprecated-functions:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
