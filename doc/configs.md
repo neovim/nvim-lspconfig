@@ -11475,6 +11475,8 @@ Here's an example that disables type checking in JavaScript files.
 }
 ```
 
+Source actions such as organizing imports and removing unused code are available via `:LspTypescriptSourceAction`.
+
 ### Vue support
 
 As of 2.0.0, Volar no longer supports TypeScript itself. Instead, a plugin
@@ -11538,6 +11540,7 @@ Default config:
     hostInfo = "neovim"
   }
   ```
+- `on_attach` source (use "gF" to open): [../lsp/ts_ls.lua:71](../lsp/ts_ls.lua#L71)
 - `root_markers` :
   ```lua
   { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
