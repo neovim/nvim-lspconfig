@@ -215,6 +215,7 @@ Nvim by running `:help lspconfig-all`.
 - [pli](#pli)
 - [poryscript_pls](#poryscript_pls)
 - [postgres_lsp](#postgres_lsp)
+- [powershell_es](#powershell_es)
 - [prismals](#prismals)
 - [prolog_ls](#prolog_ls)
 - [prosemd_lsp](#prosemd_lsp)
@@ -8012,6 +8013,62 @@ Default config:
 - `root_markers` :
   ```lua
   { "postgrestools.jsonc" }
+  ```
+
+---
+
+## powershell_es
+
+https://github.com/PowerShell/PowerShellEditorServices
+
+Language server for PowerShell.
+
+To install, download and extract PowerShellEditorServices.zip
+from the [releases](https://github.com/PowerShell/PowerShellEditorServices/releases).
+To configure the language server, set the property `bundle_path` to the root
+of the extracted PowerShellEditorServices.zip.
+
+```lua
+vim.lsp.config('powershell_es', {
+  bundle_path = 'c:/w/PowerShellEditorServices',
+})
+```
+
+By default the language server is started in `pwsh` (PowerShell Core). This can be changed by specifying `shell`.
+
+```lua
+vim.lsp.config('powershell_es', {
+  bundle_path = 'c:/w/PowerShellEditorServices',
+  shell = 'powershell.exe',
+})
+```
+
+Note that the execution policy needs to be set to `Unrestricted` for the languageserver run under PowerShell
+
+If necessary, specific `cmd` can be defined instead of `bundle_path`.
+See [PowerShellEditorServices](https://github.com/PowerShell/PowerShellEditorServices#standard-input-and-output)
+to learn more.
+
+```lua
+vim.lsp.config('powershell_es', {
+  cmd = {'pwsh', '-NoLogo', '-NoProfile', '-Command', "c:/PSES/Start-EditorServices.ps1 ..."},
+})
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('powershell_es')
+```
+
+Default config:
+- `cmd`: [../lsp/powershell_es.lua:39](../lsp/powershell_es.lua#L39)
+- `filetypes` :
+  ```lua
+  { "ps1" }
+  ```
+- `root_markers` :
+  ```lua
+  { "PSScriptAnalyzerSettings.psd1", ".git" }
   ```
 
 ---
