@@ -59,7 +59,7 @@
 --- })
 ---
 --- -- You must make sure volar is setup
---- -- e.g. require'lspconfig'.volar.setup{}
+--- -- e.g. vim.lsp.config('volar')
 --- -- See volar's section for more information
 --- ```
 ---

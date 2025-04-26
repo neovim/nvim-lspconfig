@@ -19,7 +19,7 @@
 --- **By default, nelua-lsp doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of the unzipped run script or binary.
 ---
 --- ```lua
---- vim.lsp.config('nelua_lsp.setup, {
+--- vim.lsp.config('nelua_lsp', {
 ---     cmd = { "nelua", "-L", "/path/to/nelua-lsp/", "--script", "/path/to/nelua-lsp/nelua-lsp.lua" },
 --- })
 --- ```

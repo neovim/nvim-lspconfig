@@ -24,7 +24,7 @@
 ---
 --- ```lua
 --- vim.lsp.config('yamlls', {
----   ... -- other configuration for setup {}
+---   ...
 ---   settings = {
 ---     yaml = {
 ---       ... -- other settings. note this overrides the lspconfig defaults.
@@ -46,7 +46,7 @@
 ---
 --- ```lua
 --- vim.lsp.config('yamlls', {
----   ... -- other configuration for setup {}
+---   ...
 ---   settings = {
 ---     yaml = {
 ---       ... -- other settings. note this overrides the lspconfig defaults.

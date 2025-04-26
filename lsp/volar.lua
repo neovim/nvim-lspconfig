@@ -24,7 +24,7 @@
 --- ```lua
 --- local lspconfig = require('lspconfig')
 ---
---- lspconfig.volar.setup {
+--- vim.lsp.config('volar', {
 ---   -- add filetypes for typescript, javascript and vue
 ---   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 ---   init_options = {
@@ -33,9 +33,9 @@
 ---       hybridMode = false,
 ---     },
 ---   },
---- }
---- -- you must remove ts_ls setup
---- -- lspconfig.ts_ls.setup {}
+--- })
+--- -- you must remove "ts_ls" config
+--- -- vim.lsp.config['ts_ls'] = {}
 --- ```
 ---
 --- **Overriding the default TypeScript Server used by Volar**
@@ -45,19 +45,19 @@
 ---
 --- - use a global TypeScript Server installation
 --- ```lua
---- require'lspconfig'.volar.setup {
+--- vim.lsp.config('volar', {
 ---   init_options = {
 ---     typescript = {
 ---       -- replace with your global TypeScript library path
 ---       tsdk = '/path/to/node_modules/typescript/lib'
 ---     }
 ---   }
---- }
+--- })
 --- ```
 ---
 --- - use a local server and fall back to a global TypeScript Server installation
 --- ```lua
---- require'lspconfig'.volar.setup {
+--- vim.lsp.config('volar', {
 ---   init_options = {
 ---     typescript = {
 ---       -- replace with your global TypeScript library path
@@ -70,7 +70,7 @@
 ---       new_config.init_options.typescript.tsdk = lib_path
 ---     end
 ---   end
---- }
+--- })
 --- ```
 
 local function get_typescript_server_path(root_dir)

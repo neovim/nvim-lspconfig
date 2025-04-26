@@ -5,7 +5,7 @@
 --- The `slangd` binary can be downloaded as part of [slang releases](https://github.com/shader-slang/slang/releases) or
 --- by [building `slang` from source](https://github.com/shader-slang/slang/blob/master/docs/building.md).
 ---
---- The server can be configured by passing a "settings" object to `slangd.setup{}`:
+--- The server can be configured by passing a "settings" object to vim.lsp.config('slangd'):
 ---
 --- ```lua
 --- vim.lsp.config('slangd', {
