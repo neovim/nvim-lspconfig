@@ -69,7 +69,6 @@ Snippet to enable the language server: >lua
 {{commands}}
 Default config:
 {{default_values}}
-
 ]]
 
 local section_template_md = [[
@@ -137,7 +136,11 @@ local function make_lsp_section(config_sections, config_name, config_file, is_ma
           if type(v) == 'boolean' then
             return ('- `%s` : `%s`'):format(k, v)
           elseif type(v) ~= 'function' and k ~= 'root_dir' then
-            return ('- `%s` :\n  ```lua\n%s\n  ```'):format(k, indent(2, vim.inspect(v)))
+            if is_markdown then
+              return ('- `%s` :\n  ```lua\n%s\n  ```'):format(k, indent(2, vim.inspect(v)))
+            else
+              return ('- %s: >lua\n%s'):format(k, indent(2, vim.inspect(v)))
+            end
           end
 
           local file = assert(io.open(config_file, 'r'))
@@ -153,20 +156,18 @@ local function make_lsp_section(config_sections, config_name, config_file, is_ma
           local config_relpath = vim.fs.relpath(root, config_file)
 
           -- XXX: "../" because the path is outside of the doc/ dir.
-          return ('- `%s` source (use "gF" to open): [../%s:%d](../%s#L%d)'):format(
-            k,
-            config_relpath,
-            linenr,
-            config_relpath,
-            linenr
-          )
+          if is_markdown then
+            return ('- `%s`: [../%s:%d](../%s#L%d)'):format(k, config_relpath, linenr, config_relpath, linenr)
+          else
+            return ('- %s (use "gF" to view): ../%s:%d'):format(k, config_relpath, linenr)
+          end
         end),
       })
     end,
-  })
+  }) .. (is_markdown and '' or '\n<') -- Workaround tree-sitter-vimdoc bug.
 
-  local template_used = is_markdown and section_template_md or section_template_txt
-  table.insert(config_sections, template(template_used, params))
+  local t = is_markdown and section_template_md or section_template_txt
+  table.insert(config_sections, template(t, params))
 end
 
 local function make_lsp_sections(is_markdown)
