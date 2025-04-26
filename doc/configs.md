@@ -5542,6 +5542,7 @@ You can install the server easily using go install:
 go install github.com/wader/jq-lsp@master
 # copy binary to $PATH
 cp $(go env GOPATH)/bin/jq-lsp /usr/local/bin
+
 ```
 Note: To activate properly nvim needs to know the jq filetype.
 You can add it via:
@@ -12123,6 +12124,7 @@ git clone https://codeberg.org/caradhras/uvls
 cd  uvls
 cargo install --path .
 ```
+
 Note: To activate properly nvim needs to know the uvl filetype.
 You can add it via:
 ```lua
