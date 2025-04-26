@@ -988,7 +988,6 @@ Default config:
   { "brs" }
 - root_markers: >lua
   { "makefile", "Makefile", ".git" }
-- `single_file_support` : `true`
 <
 
 ------------------------------------------------------------------------------

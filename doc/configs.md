@@ -1624,7 +1624,6 @@ Default config:
   ```lua
   { "makefile", "Makefile", ".git" }
   ```
-- `single_file_support` : `true`
 
 ---
 
