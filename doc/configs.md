@@ -562,17 +562,12 @@ Default config:
 https://github.com/angular/vscode-ng-language-service
 `angular-language-server` can be installed via npm `npm install -g @angular/language-server`.
 
-Note, that if you override the default `cmd`, you must also update `on_new_config` to set `new_config.cmd` during startup.
-
 ```lua
 local project_library_path = "/path/to/project/lib"
 local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
 
 vim.lsp.config('angularls', {
   cmd = cmd,
-  on_new_config = function(new_config,new_root_dir)
-    new_config.cmd = cmd
-  end,
 })
 ```
 
@@ -12613,10 +12608,10 @@ vim.lsp.config('volar', {
       tsdk = '/path/to/node_modules/typescript/lib'
     }
   },
-  on_new_config = function(new_config, new_root_dir)
+  before_init = function(params, config)
     local lib_path = vim.fs.find('node_modules/typescript/lib', { path = new_root_dir, upward = true })[1]
     if lib_path then
-      new_config.init_options.typescript.tsdk = lib_path
+      config.init_options.typescript.tsdk = lib_path
     end
   end
 })
