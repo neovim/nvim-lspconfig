@@ -3,17 +3,12 @@
 --- https://github.com/angular/vscode-ng-language-service
 --- `angular-language-server` can be installed via npm `npm install -g @angular/language-server`.
 ---
---- Note, that if you override the default `cmd`, you must also update `on_new_config` to set `new_config.cmd` during startup.
----
 --- ```lua
 --- local project_library_path = "/path/to/project/lib"
 --- local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
 ---
 --- vim.lsp.config('angularls', {
 ---   cmd = cmd,
----   on_new_config = function(new_config,new_root_dir)
----     new_config.cmd = cmd
----   end,
 --- })
 --- ```
 
