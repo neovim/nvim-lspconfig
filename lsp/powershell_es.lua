@@ -41,11 +41,7 @@ return {
     local temp_path = vim.fn.stdpath('cache')
     local bundle_path = vim.lsp.config.powershell_es.bundlePath
 
-    local shell
-    shell = vim.lsp.config.powershell_es.shell
-    if not shell then
-      shell = 'pwsh'
-    end
+    local shell = vim.lsp.config.powershell_es.shell or 'pwsh'
 
     local command_fmt =
       [[& '%s/PowerShellEditorServices/Start-EditorServices.ps1' -BundledModulesPath '%s' -LogPath '%s/powershell_es.log' -SessionDetailsPath '%s/powershell_es.session.json' -FeatureFlags @() -AdditionalModules @() -HostName nvim -HostProfileId 0 -HostVersion 1.0.0 -Stdio -LogLevel Normal]]
