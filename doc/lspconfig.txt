@@ -11,8 +11,9 @@ nvim-lspconfig is a collection of community-contributed configurations for the
 Nvim LSP client. See |lspconfig-all| for the complete list of provided
 configurations.
 
-Note: nvim-lspconfig is just a convenience layer, it is NOT required for Nvim
-|LSP| support. See |lsp-quickstart| to setup LSP without nvim-lspconfig.
+Note: nvim-lspconfig is just a collection of configs. It has no API or
+"framework". It is not required for Nvim |LSP| support. See |lsp-quickstart|
+to setup LSP without nvim-lspconfig.
 
 ==============================================================================
 QUICKSTART                                                *lspconfig-quickstart*
@@ -32,10 +33,10 @@ See also |lsp-quickstart|.
 ==============================================================================
 USAGE                                                        *lspconfig-usage*
 
-nvim-lspconfig is of a collection of language server configurations. Each
-configuration provides defaults for |vim.lsp.config()| which you can use as-is
+Each config provides defaults for |vim.lsp.config()| which you can use as-is
 (by calling `vim.lsp.enable(…)`) or override (by calling |vim.lsp.config()|
-before enable()).
+before enable()). This "composability" is a central feature of vim.lsp.config,
+which allows nvim-lspconfig to just provide the config "defaults".
 
 To activate a config, call |vim.lsp.enable()|. Each config in |lspconfig-all|
 is available as `vim.lsp.config('<name>')` and `vim.lsp.enable('<name>')`. For
@@ -55,18 +56,25 @@ without activating it: >lua
     vim.print(vim.lsp.config['clangd'])
 <
                                                  *lspconfig-vs-vim.lsp.config*
-Note the these current differences/limitations of |vim.lsp.config()| compared
-to the legacy nvim-lspconfig interface:
+Note these differences of |vim.lsp.config()| compared to the legacy
+nvim-lspconfig interface:
 
 - `single_file_support` is assumed by default. Can be disabled by specifying
   `workspace_required=false` (see |vim.lsp.ClientConfig|).
-
 - `on_new_config` is currently missing, see https://github.com/neovim/neovim/issues/32287
-  Function executed after a root directory is detected. Used to modify the
-  server configuration (including `cmd` itself).
+  - However, defining `root_dir` as a function is very flexible and may fit
+    your use-case instead. https://github.com/neovim/neovim/issues/32037#issuecomment-2825599872
 
 ==============================================================================
 COMMANDS                                                    *lspconfig-commands*
+
+Any server-specific commands provided by a config are buffer-local and
+prefixed with "Lsp". Thus you can see available commands (from a LSP-enabled
+buffer) by typing: >vim
+
+    :Lsp<tab>
+
+The following _global_ commands are provided by nvim-lspconfig:
 
 :LspInfo                                                            *:LspInfo*
 Alias to `:checkhealth vim.lsp`. Shows the status of active LSP clients and
@@ -95,15 +103,16 @@ See |lspconfig-all| for the list of provided LSP configurations.
 If a server is missing, you can define one easily via |vim.lsp.config()|
 (requires Nvim 0.11+), see |lsp-config|.
 
+------------------------------------------------------------------------------
+NEW CONFIGS                                           *lspconfig-new*
+
+To create a new config, see |lsp-config| (requires Nvim 0.11+).
+To contribute a config to nvim-lspconfig, see ../CONTRIBUTING.md.
+
 ==============================================================================
 COMPLETION SUPPORT                                        *lspconfig-completion*
 
 See |lsp-completion|.
-
-==============================================================================
-ADDING NEW SERVERS                                    *lspconfig-new*
-
-See ../CONTRIBUTING.md or |lsp-config| (requires Nvim 0.11+).
 
 ==============================================================================
 DEBUGGING AND TROUBLESHOOTING                              *lspconfig-debugging*

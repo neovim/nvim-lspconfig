@@ -67,6 +67,9 @@ _check_deprecated_in_nvim_0_11() {
   if git grep -P 'validate_bufnr' -- 'lsp/*.lua' ; then
     _fail 'Do not use util.validate_bufnr(). Nvim stdlib already treats bufnr=0 as "current buffer".'
   fi
+  if git grep -P 'single_file_support' -- 'lsp/*.lua' ; then
+    _fail 'vim.lsp.config assumes "single-file support" by default. If the LS does not support that, set workspace_required=true.'
+  fi
 }
 
 _check_deprecated_utils() {
