@@ -29,6 +29,8 @@
 --- }
 --- ```
 ---
+--- Source actions such as organizing imports and removing unused code are available via `:LspTypescriptSourceAction`.
+---
 --- ### Vue support
 ---
 --- As of 2.0.0, Volar no longer supports TypeScript itself. Instead, a plugin
@@ -93,4 +95,19 @@ return {
       return vim.NIL
     end,
   },
+  on_attach = function(client)
+    -- ts_ls provides code actions that have a prefix `source.` that apply to the whole file. These will only appear in
+    -- `vim.lsp.buf.code_action()` if specified in `context.only`.
+    vim.api.nvim_buf_create_user_command(0, 'LspTypescriptSourceAction', function()
+      local source_actions = vim.tbl_filter(function(action)
+        return vim.startswith(action, 'source.')
+      end, client.server_capabilities.codeActionProvider.codeActionKinds)
+
+      vim.lsp.buf.code_action({
+        context = {
+          only = source_actions,
+        },
+      })
+    end, {})
+  end,
 }
