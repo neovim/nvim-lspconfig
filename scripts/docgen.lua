@@ -87,8 +87,32 @@ Default config:
 ---
 ]]
 
+--- Converts markdown "```" codeblock to vimdoc format.
+local function codeblock_to_vimdoc(doc)
+  local function make_fn(before, extra)
+    return function(lang, code)
+      if not code then
+        code = lang
+        lang = ''
+      end
+      -- Indent code by 2 spaces.
+      return before .. '>' .. lang .. extra .. code:gsub('[^\n]+', '  %0')
+    end
+  end
+
+  doc = doc
+    -- "```lang" following a nonblank line.
+    :gsub('[^%s]\n```(%w+)\n(.-)\n```', make_fn(' ', '\n'))
+    -- "```lang" following a blank line.
+    :gsub('\n```(%w+)\n(.-)\n```', make_fn('', '\n'))
+    -- "```" (no language)
+    :gsub('\n```\n(..-)\n```', make_fn('', '\n'))
+
+  return doc
+end
+
 --- Gets docstring by looking for "@brief" in a Lua code docstring.
-local function extract_brief(text)
+local function extract_brief(text, is_markdown)
   local doc = text:match('%-%-+ *%@brief.-(\n%-%-.*)')
   if not doc then
     return ''
@@ -99,12 +123,18 @@ local function extract_brief(text)
   doc = doc:gsub('\n%-%-+', '\n')
   -- Remove leading whitespace (shared indent).
   doc = vim.trim(vim.text.indent(0, doc))
+
+  -- Convert codeblocks for vimdoc.
+  if not is_markdown then
+    doc = codeblock_to_vimdoc(doc)
+  end
+
   return doc
 end
 
 local function make_lsp_section(config_sections, config_name, config_file, is_markdown)
   local config = require('lsp.' .. config_name)
-  local docstring = extract_brief(readfile(config_file))
+  local docstring = extract_brief(readfile(config_file), is_markdown)
   local params = {
     config_name = config_name,
     preamble = docstring,
@@ -186,8 +216,7 @@ local function make_lsp_sections(is_markdown)
       -- vim.env.HOME = '/home/user'
       -- vim.env.XDG_CACHE_HOME = '/home/user/.cache'
       local old_fn = vim.fn
-      local new_fn = {}
-      vim.fn = setmetatable(new_fn, {
+      vim.fn = setmetatable({}, {
         __index = function(_t, key)
           if key == 'getpid' then
             return function()
