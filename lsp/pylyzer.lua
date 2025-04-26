@@ -28,7 +28,7 @@ return {
       checkOnType = false,
     },
   },
-  on_new_config = function(new_config, _)
-    new_config.cmd_env.ERG_PATH = vim.fs.joinpath(vim.uv.os_homedir(), '/.erg')
-  end,
+  cmd_env = {
+    ERG_PATH = vim.env.ERG_PATH or vim.fs.joinpath(vim.uv.os_homedir(), '.erg'),
+  },
 }
