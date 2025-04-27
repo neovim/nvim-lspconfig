@@ -46,14 +46,13 @@ end
 
 function M.insert_package_json(config_files, field, fname)
   local path = vim.fn.fnamemodify(fname, ':h')
-  local root_with_package = vim.fs.dirname(vim.fs.find('package.json', { path = path, upward = true })[1])
+  local root_with_package = vim.fs.find({ 'package.json', 'package.json5' }, { path = path, upward = true })[1]
 
   if root_with_package then
     -- only add package.json if it contains field parameter
-    local path_sep = iswin and '\\' or '/'
-    for line in io.lines(root_with_package .. path_sep .. 'package.json') do
+    for line in io.lines(root_with_package) do
       if line:find(field) then
-        config_files[#config_files + 1] = 'package.json'
+        config_files[#config_files + 1] = vim.fs.basename(root_with_package)
         break
       end
     end
