@@ -65,4 +65,14 @@ return {
     'selene.yml',
     '.git',
   },
+  settings = {
+    Lua = {
+      workspace = {
+        library = {},
+      },
+    },
+  },
+  before_init = function(init_params, config)
+    table.insert(config.settings.Lua.workspace.library, init_params.rootPath)
+  end,
 }
