@@ -74,8 +74,15 @@
 --- ```
 
 local function get_typescript_server_path(root_dir)
-  local project_root = vim.fs.dirname(vim.fs.find('node_modules', { path = root_dir, upward = true })[1])
-  return project_root and vim.fs.joinpath(project_root, 'node_modules', 'typescript', 'lib') or ''
+  local project_roots = vim.fs.find('node_modules', { path = root_dir, upward = true, limit = math.huge })
+  for _, project_root in ipairs(project_roots) do
+    local typescript_path = project_root .. '/typescript'
+    local stat = vim.loop.fs_stat(typescript_path)
+    if stat and stat.type == 'directory' then
+      return typescript_path .. '/lib'
+    end
+  end
+  return ''
 end
 
 -- https://github.com/vuejs/language-tools/blob/master/packages/language-server/lib/types.ts
