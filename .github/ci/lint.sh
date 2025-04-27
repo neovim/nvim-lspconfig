@@ -21,12 +21,6 @@ _check_generated_docs() {
   fi
 }
 
-_check_legacy_configs() {
-  if ! git diff "${REF_BRANCH}"..."${PR_BRANCH}" --exit-code -- lua/lspconfig/configs/ ; then
-    _fail 'Configs in `lua/lspconfig/configs/*` are deprecated. Add or update configs in `lsp/*` instead.'
-  fi
-}
-
 # Enforce buffer-local commands.
 _check_cmd_buflocal() {
   if git grep -P 'nvim_create_user_command' -- 'lsp/*.lua' ; then
@@ -88,11 +82,17 @@ _check_deprecated_utils() {
   fi
 }
 
+_check_legacy_configs() {
+  if ! git diff "${REF_BRANCH}"..."${PR_BRANCH}" --exit-code -- lua/lspconfig/configs/ ; then
+    _fail 'Configs in `lua/lspconfig/configs/*` are deprecated. Add or update configs in `lsp/*` instead.'
+  fi
+}
+
 _check_generated_docs
-_check_legacy_configs
 _check_cmd_buflocal
 _check_brief_placement
 _check_lsp_cmd_prefix
 _check_exec_cmd
 _check_deprecated_in_nvim_0_11
 _check_deprecated_utils
+_check_legacy_configs
