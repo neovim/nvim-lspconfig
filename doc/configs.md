@@ -6436,10 +6436,7 @@ Default config:
   ```lua
   { "meson" }
   ```
-- `root_markers` :
-  ```lua
-  { "meson.build", "meson_options.txt", "meson.options", ".git" }
-  ```
+- `root_dir`: [../lsp/mesonlsp.lua:31](../lsp/mesonlsp.lua#L31)
 
 ---
 

@@ -4645,8 +4645,7 @@ Default config:
   { "mesonlsp", "--lsp" }
 - filetypes: >lua
   { "meson" }
-- root_markers: >lua
-  { "meson.build", "meson_options.txt", "meson.options", ".git" }
+- root_dir (use "gF" to view): ../lsp/mesonlsp.lua:31
 <
 
 ------------------------------------------------------------------------------
