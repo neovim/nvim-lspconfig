@@ -80,7 +80,9 @@ return {
     local fname = vim.api.nvim_buf_get_name(bufnr)
     root_file_patterns = util.insert_package_json(root_file_patterns, 'eslintConfig', fname)
     local root_dir = vim.fs.dirname(vim.fs.find(root_file_patterns, { path = fname, upward = true })[1])
-    on_dir(root_dir)
+    if root_dir then
+      on_dir(root_dir)
+    end
   end,
   -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
   settings = {
