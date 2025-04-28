@@ -1,10 +1,5 @@
 local util = require 'lspconfig.util'
 
-local function get_typescript_server_path(root_dir)
-  local project_root = vim.fs.dirname(vim.fs.find('node_modules', { path = root_dir, upward = true })[1])
-  return project_root and (project_root .. '/node_modules/typescript/lib') or ''
-end
-
 -- https://github.com/vuejs/language-tools/blob/master/packages/language-server/lib/types.ts
 local volar_init_options = {
   typescript = {
@@ -24,7 +19,7 @@ return {
         and new_config.init_options.typescript
         and new_config.init_options.typescript.tsdk == ''
       then
-        new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+        new_config.init_options.typescript.tsdk = util.get_typescript_server_path(new_root_dir)
       end
     end,
   },
