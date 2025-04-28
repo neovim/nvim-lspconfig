@@ -397,7 +397,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/astro.lua:15
+- before_init (use "gF" to view): ../lsp/astro.lua:12
 - cmd: >lua
   { "astro-ls", "--stdio" }
 - filetypes: >lua
@@ -4614,7 +4614,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/mdx_analyzer.lua:11
+- before_init (use "gF" to view): ../lsp/mdx_analyzer.lua:8
 - cmd: >lua
   { "mdx-language-server", "--stdio" }
 - filetypes: >lua
@@ -9370,7 +9370,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/volar.lua:88
+- before_init (use "gF" to view): ../lsp/volar.lua:85
 - cmd: >lua
   { "vue-language-server", "--stdio" }
 - filetypes: >lua

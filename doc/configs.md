@@ -853,7 +853,7 @@ vim.lsp.enable('astro')
 ```
 
 Default config:
-- `before_init`: [../lsp/astro.lua:15](../lsp/astro.lua#L15)
+- `before_init`: [../lsp/astro.lua:12](../lsp/astro.lua#L12)
 - `cmd` :
   ```lua
   { "astro-ls", "--stdio" }
@@ -6390,7 +6390,7 @@ vim.lsp.enable('mdx_analyzer')
 ```
 
 Default config:
-- `before_init`: [../lsp/mdx_analyzer.lua:11](../lsp/mdx_analyzer.lua#L11)
+- `before_init`: [../lsp/mdx_analyzer.lua:8](../lsp/mdx_analyzer.lua#L8)
 - `cmd` :
   ```lua
   { "mdx-language-server", "--stdio" }
@@ -12623,7 +12623,7 @@ vim.lsp.enable('volar')
 ```
 
 Default config:
-- `before_init`: [../lsp/volar.lua:88](../lsp/volar.lua#L88)
+- `before_init`: [../lsp/volar.lua:85](../lsp/volar.lua#L85)
 - `cmd` :
   ```lua
   { "vue-language-server", "--stdio" }
