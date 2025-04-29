@@ -152,6 +152,7 @@ Nvim by running `:help lspconfig-all`.
 - [koka](#koka)
 - [kotlin_language_server](#kotlin_language_server)
 - [kulala_ls](#kulala_ls)
+- [laravel_ls](#laravel_ls)
 - [lean3ls](#lean3ls)
 - [lelwel_ls](#lelwel_ls)
 - [lemminx](#lemminx)
@@ -5808,6 +5809,35 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## laravel_ls
+
+https://github.com/laravel-ls/laravel-ls
+
+`laravel-ls`, language server for laravel
+
+The default `cmd` assumes that the `laravel-ls` binary can be found in `$PATH`.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('laravel_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "laravel-ls" }
+  ```
+- `filetypes` :
+  ```lua
+  { "php", "blade" }
+  ```
+- `root_markers` :
+  ```lua
+  { "artisan" }
   ```
 
 ---

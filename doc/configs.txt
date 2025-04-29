@@ -4163,6 +4163,28 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+laravel_ls
+
+https://github.com/laravel-ls/laravel-ls
+
+`laravel-ls`, language server for laravel
+
+The default `cmd` assumes that the `laravel-ls` binary can be found in `$PATH`.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('laravel_ls')
+
+
+Default config:
+- cmd: >lua
+  { "laravel-ls" }
+- filetypes: >lua
+  { "php", "blade" }
+- root_markers: >lua
+  { "artisan" }
+<
+
+------------------------------------------------------------------------------
 lean3ls
 
 https://github.com/leanprover/lean-client-js/tree/master/lean-language-server
