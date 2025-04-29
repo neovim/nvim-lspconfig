@@ -3712,6 +3712,7 @@ Default config:
     }
   }
   ```
+- `workspace_required` : `true`
 
 ---
 
