@@ -62,7 +62,7 @@ return {
         vim.cmd('edit ' .. result.path)
       end)
     end, {
-      description = 'ZkNew',
+      desc = 'ZkNew',
     })
   end,
 }
