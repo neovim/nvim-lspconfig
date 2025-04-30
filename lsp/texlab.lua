@@ -164,7 +164,7 @@ end
 return {
   cmd = { 'texlab' },
   filetypes = { 'tex', 'plaintex', 'bib' },
-  root_markers = { '.git', '.latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic.toml' },
+  root_markers = { '.git', '.latexmkrc', 'latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic.toml' },
   settings = {
     texlab = {
       rootDirectory = nil,
