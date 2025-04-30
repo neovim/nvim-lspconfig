@@ -43,6 +43,7 @@ Nvim by running `:help lspconfig-all`.
 - [bzl](#bzl)
 - [c3_lsp](#c3_lsp)
 - [cairo_ls](#cairo_ls)
+- [ccls](#ccls)
 - [cds_lsp](#cds_lsp)
 - [circom-lsp](#circom-lsp)
 - [clangd](#clangd)
@@ -1861,6 +1862,57 @@ Default config:
   ```lua
   { "Scarb.toml", "cairo_project.toml", ".git" }
   ```
+
+---
+
+## ccls
+
+https://github.com/MaskRay/ccls/wiki
+
+ccls relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
+as compile_commands.json or, for simpler projects, a .ccls.
+For details on how to automatically generate one using CMake look [here](https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html). Alternatively, you can use [Bear](https://github.com/rizsotto/Bear).
+
+Customization options are passed to ccls at initialization time via init_options, a list of available options can be found [here](https://github.com/MaskRay/ccls/wiki/Customization#initialization-options). For example:
+
+```lua
+vim.lsp.config("ccls", {
+  init_options = {
+    compilationDatabaseDirectory = "build";
+    index = {
+      threads = 0;
+    };
+    clang = {
+      excludeArgs = { "-frounding-math"} ;
+    };
+  }
+})
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('ccls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "ccls" }
+  ```
+- `filetypes` :
+  ```lua
+  { "c", "cpp", "objc", "objcpp", "cuda" }
+  ```
+- `offset_encoding` :
+  ```lua
+  "utf-32"
+  ```
+- `on_attach`: [../lsp/ccls.lua:40](../lsp/ccls.lua#L40)
+- `root_markers` :
+  ```lua
+  { "compile_commands.json", ".ccls", ".git" }
+  ```
+- `workspace_required` : `true`
 
 ---
 
