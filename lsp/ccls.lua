@@ -1,27 +1,26 @@
 ---@brief
 ---
--- https://github.com/MaskRay/ccls/wiki
-
--- ccls relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
--- as compile_commands.json or, for simpler projects, a .ccls.
--- For details on how to automatically generate one using CMake look [here](https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html). Alternatively, you can use [Bear](https://github.com/rizsotto/Bear).
-
--- Customization options are passed to ccls at initialization time via init_options, a list of available options can be found [here](https://github.com/MaskRay/ccls/wiki/Customization#initialization-options). For example:
-
--- ```lua
--- vim.lsp.config("ccls", {
---   init_options = {
---     compilationDatabaseDirectory = "build";
---     index = {
---       threads = 0;
---     };
---     clang = {
---       excludeArgs = { "-frounding-math"} ;
---     };
---   }
--- })
-
--- ```
+--- https://github.com/MaskRay/ccls/wiki
+---
+--- ccls relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) specified
+--- as compile_commands.json or, for simpler projects, a .ccls.
+--- For details on how to automatically generate one using CMake look [here](https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html). Alternatively, you can use [Bear](https://github.com/rizsotto/Bear).
+---
+--- Customization options are passed to ccls at initialization time via init_options, a list of available options can be found [here](https://github.com/MaskRay/ccls/wiki/Customization#initialization-options). For example:
+---
+--- ```lua
+--- vim.lsp.config("ccls", {
+---   init_options = {
+---     compilationDatabaseDirectory = "build";
+---     index = {
+---       threads = 0;
+---     };
+---     clang = {
+---       excludeArgs = { "-frounding-math"} ;
+---     };
+---   }
+--- })
+--- ```
 
 local function switch_source_header(client, bufnr)
   local method_name = 'textDocument/switchSourceHeader'
