@@ -9,6 +9,7 @@
 --- ```
 return {
   cmd = { 'ast-grep', 'lsp' },
+  workspace_required = true,
   filetypes = { -- https://ast-grep.github.io/reference/languages.html
     'c',
     'cpp',
