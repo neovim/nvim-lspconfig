@@ -9,8 +9,7 @@
 -- Customization options are passed to ccls at initialization time via init_options, a list of available options can be found [here](https://github.com/MaskRay/ccls/wiki/Customization#initialization-options). For example:
 
 -- ```lua
--- local lspconfig = require'lspconfig'
--- lspconfig.ccls.setup {
+-- vim.lsp.config("ccls", {
 --   init_options = {
 --     compilationDatabaseDirectory = "build";
 --     index = {
@@ -20,7 +19,7 @@
 --       excludeArgs = { "-frounding-math"} ;
 --     };
 --   }
--- }
+-- })
 
 -- ```
 
