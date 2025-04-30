@@ -26,6 +26,14 @@ local configs = {}
 
 --- @param cmd any
 local function sanitize_cmd(cmd)
+  -- This function is no longer necessary on unix systems, and is particularly slow in WSL, therefore we can skip the
+  -- execution.
+  -- However in windows this remain necessary as most of the times the LSPs scripts end in .cmd but the default config
+  -- dose not have the .cmd, so if this function is not executed all LSPs will fail to start.
+  -- More details here: https://github.com/neovim/nvim-lspconfig/issues/3704
+  if vim.fn.has("win32") == 0 then
+    return
+  end
   if cmd and type(cmd) == 'table' and not vim.tbl_isempty(cmd) then
     local original = cmd[1]
     cmd[1] = vim.fn.exepath(cmd[1])
