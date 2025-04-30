@@ -56,7 +56,7 @@ return {
   -- ccls does not support sending a null root directory
   workspace_required = true,
   on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'CclsSwitchSourceHeader', function()
+    vim.api.nvim_buf_create_user_command(0, 'LspCclsSwitchSourceHeader', function()
       switch_source_header(0)
     end, { desc = 'Switch between source/header' })
   end,
