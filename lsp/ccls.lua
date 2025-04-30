@@ -23,16 +23,10 @@
 
 -- ```
 
-local util = require 'lspconfig.util'
-
-local function switch_source_header(bufnr)
+local function switch_source_header(client, bufnr)
   local method_name = 'textDocument/switchSourceHeader'
-  local client = vim.lsp.get_clients({ bufnr = bufnr, name = 'ccls' })[1]
-  if not client then
-    return vim.notify(('method %s is not supported by any servers active on the current buffer'):format(method_name))
-  end
   local params = vim.lsp.util.make_text_document_params(bufnr)
-  client.request(method_name, params, function(err, result)
+  client:request(method_name, params, function(err, result)
     if err then
       error(tostring(err))
     end
@@ -47,19 +41,13 @@ end
 return {
   cmd = { 'ccls' },
   filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
-  root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(
-      util.root_pattern('compile_commands.json', '.ccls')(fname)
-        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-    )
-  end,
+  root_markers = { 'compile_commands.json', '.ccls', '.git' },
   offset_encoding = 'utf-32',
   -- ccls does not support sending a null root directory
   workspace_required = true,
-  on_attach = function()
+  on_attach = function(client)
     vim.api.nvim_buf_create_user_command(0, 'LspCclsSwitchSourceHeader', function()
-      switch_source_header(0)
+      switch_source_header(client, 0)
     end, { desc = 'Switch between source/header' })
   end,
 }
