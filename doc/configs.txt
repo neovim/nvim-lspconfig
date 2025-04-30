@@ -8355,7 +8355,7 @@ Default config:
   { "tex", "plaintex", "bib" }
 - on_attach (use "gF" to view): ../lsp/texlab.lua:164
 - root_markers: >lua
-  { ".git", ".latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" }
+  { ".git", ".latexmkrc", "latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" }
 - settings: >lua
   {
     texlab = {
