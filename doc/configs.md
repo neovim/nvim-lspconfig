@@ -837,6 +837,7 @@ Default config:
   ```lua
   { "sgconfig.yaml", "sgconfig.yml" }
   ```
+- `workspace_required` : `true`
 
 ---
 
