@@ -24,13 +24,10 @@ local configs = {}
 --- @field root_dir? string|fun(filename: string, bufnr: number)
 --- @field commands? table<string, lspconfig.Config.command>
 
+--- For Windows: calls exepath() to ensure .cmd/.bat (if appropriate) on commands. https://github.com/neovim/nvim-lspconfig/issues/3704
 --- @param cmd any
 local function sanitize_cmd(cmd)
-  -- This function is no longer necessary on unix systems, and is particularly slow in WSL, therefore we can skip the
-  -- execution.
-  -- However in windows this remain necessary as most of the times the LSPs scripts end in .cmd but the default config
-  -- dose not have the .cmd, so if this function is not executed all LSPs will fail to start.
-  -- More details here: https://github.com/neovim/nvim-lspconfig/issues/3704
+  -- exepath() is slow, so avoid it on non-Windows.
   if vim.fn.has('win32') == 0 then
     return
   end
