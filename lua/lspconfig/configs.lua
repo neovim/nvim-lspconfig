@@ -31,7 +31,7 @@ local function sanitize_cmd(cmd)
   -- However in windows this remain necessary as most of the times the LSPs scripts end in .cmd but the default config
   -- dose not have the .cmd, so if this function is not executed all LSPs will fail to start.
   -- More details here: https://github.com/neovim/nvim-lspconfig/issues/3704
-  if vim.fn.has("win32") == 0 then
+  if vim.fn.has('win32') == 0 then
     return
   end
   if cmd and type(cmd) == 'table' and not vim.tbl_isempty(cmd) then
