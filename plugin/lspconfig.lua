@@ -80,6 +80,29 @@ if vim.version.ge(vim.version(), { 0, 11, 2 }) then
       :totable()
   end
 
+  local complete_config = function(arg)
+    return vim
+      .iter(vim.api.nvim_get_runtime_file(('lsp/%s*.lua'):format(arg), true))
+      :map(function(path)
+        local file_name = path:match('[^/]*.lua$')
+        return file_name:sub(0, #file_name - 4)
+      end)
+      :totable()
+  end
+
+  api.nvim_create_user_command('LspStart', function(info)
+    if vim.lsp.config[info.args] == nil then
+      vim.notify(("Invalid server name '%s'"):format(info.args))
+      return
+    end
+
+    vim.lsp.enable(info.args)
+  end, {
+    desc = 'Enable and launch a language server',
+    nargs = '?',
+    complete = complete_config,
+  })
+
   api.nvim_create_user_command('LspRestart', function(info)
     for _, name in ipairs(info.fargs) do
       if vim.lsp.config[name] == nil then
