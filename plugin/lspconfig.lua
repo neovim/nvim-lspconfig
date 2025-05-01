@@ -103,6 +103,20 @@ if vim.version.ge(vim.version(), { 0, 11, 2 }) then
     complete = complete_client,
   })
 
+  api.nvim_create_user_command('LspStop', function(info)
+    for _, name in ipairs(info.fargs) do
+      if vim.lsp.config[name] == nil then
+        vim.notify(("Invalid server name '%s'"):format(info.args))
+      else
+        vim.lsp.enable(name, false)
+      end
+    end
+  end, {
+    desc = 'Disable and stop the given client(s)',
+    nargs = '+',
+    complete = complete_client,
+  })
+
   return
 end
 
