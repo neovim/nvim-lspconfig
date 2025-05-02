@@ -203,6 +203,7 @@ Nvim by running `:help lspconfig-all`.
 - [opencl_ls](#opencl_ls)
 - [openscad_ls](#openscad_ls)
 - [openscad_lsp](#openscad_lsp)
+- [oxlint](#oxlint)
 - [pact_ls](#pact_ls)
 - [pasls](#pasls)
 - [pbls](#pbls)
@@ -7681,6 +7682,36 @@ Default config:
   ```lua
   { ".git" }
   ```
+
+---
+
+## oxlint
+
+https://github.com/oxc-project/oxc
+
+`oxc` is a linter / formatter for JavaScript / Typescript supporting over 500 rules from ESLint and its popular plugins
+It can be installed via `npm`:
+
+```sh
+npm i -g oxlint
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('oxlint')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "oxc_language_server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  ```
+- `root_dir`: [../lsp/oxlint.lua:14](../lsp/oxlint.lua#L14)
+- `workspace_required` : `true`
 
 ---
 
