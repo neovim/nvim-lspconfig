@@ -16,7 +16,7 @@
 
 return {
   cmd = {
-    'OmniSharp',
+    vim.fn.executable('OmniSharp') == 1 and 'OmniSharp' or 'omnisharp',
     '-z', -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
     '--hostPID',
     tostring(vim.fn.getpid()),
