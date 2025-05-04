@@ -14,8 +14,6 @@
 --- that plugin fully handles the setup of the Lean language server,
 --- and you shouldn't set up `lean3ls` both with it and `lspconfig`.
 
-local util = require 'lspconfig.util'
-
 return {
   cmd = { 'lean-language-server', '--stdio', '--', '-M', '4096', '-T', '100000' },
   filetypes = { 'lean3' },
@@ -33,8 +31,7 @@ return {
     end
 
     on_dir(
-      util.root_pattern 'leanpkg.toml'(fname)
-        or util.root_pattern 'leanpkg.path'(fname)
+      vim.fs.root(fname, { 'leanpkg.toml', 'leanpkg.path' })
         or stdlib_dir
         or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     )

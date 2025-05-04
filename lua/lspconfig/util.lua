@@ -24,6 +24,9 @@ local function escape_wildcards(path)
   return path:gsub('([%[%]%?%*])', '\\%1')
 end
 
+--- Returns a function which matches a filepath against the given glob/wildcard patterns.
+---
+--- Also works with zipfile:/tarfile: buffers (via `strip_archive_subpath`).
 function M.root_pattern(...)
   local patterns = M.tbl_flatten { ... }
   return function(startpath)
@@ -44,6 +47,11 @@ function M.root_pattern(...)
   end
 end
 
+--- Appends package.json-like files to the `config_files` list if `field`
+--- is found in any such file in any ancestor of `fname`.
+---
+--- NOTE: this does a "breadth-first" search, so is broken for multi-project workspaces:
+--- https://github.com/neovim/nvim-lspconfig/issues/3818#issuecomment-2848836794
 function M.insert_package_json(config_files, field, fname)
   local path = vim.fn.fnamemodify(fname, ':h')
   local root_with_package = vim.fs.find({ 'package.json', 'package.json5' }, { path = path, upward = true })[1]
