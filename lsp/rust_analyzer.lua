@@ -21,8 +21,6 @@
 --- Note: do not set `init_options` for this LS config, it will be automatically populated by the contents of settings["rust-analyzer"] per
 --- https://github.com/rust-lang/rust-analyzer/blob/eb5da56d839ae0a9e9f50774fa3eb78eb0964550/docs/dev/lsp-extensions.md?plain=1#L26.
 
-local util = require 'lspconfig.util'
-
 local function reload_workspace(bufnr)
   local clients = vim.lsp.get_clients { bufnr = bufnr, name = 'rust_analyzer' }
   for _, client in ipairs(clients) do
@@ -64,12 +62,12 @@ return {
       return
     end
 
-    local cargo_crate_dir = util.root_pattern 'Cargo.toml'(fname)
+    local cargo_crate_dir = vim.fs.root(fname, { 'Cargo.toml' })
     local cargo_workspace_root
 
     if cargo_crate_dir == nil then
       on_dir(
-        util.root_pattern 'rust-project.json'(fname)
+        vim.fs.root(fname, { 'rust-project.json' })
           or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
       )
       return

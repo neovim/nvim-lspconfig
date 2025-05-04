@@ -4,8 +4,6 @@
 ---
 --- Installation: https://github.com/phan/phan#getting-started
 
-local util = require 'lspconfig.util'
-
 local cmd = {
   'phan',
   '-m',
@@ -25,9 +23,9 @@ return {
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     local cwd = assert(vim.uv.cwd())
-    local root = util.root_pattern('composer.json', '.git')(fname)
+    local root = vim.fs.root(fname, { 'composer.json', '.git' })
 
     -- prefer cwd if root is a descendant
-    on_dir(vim.fs.relpath(cwd, root) and cwd or root)
+    on_dir(root and vim.fs.relpath(cwd, root) and cwd)
   end,
 }

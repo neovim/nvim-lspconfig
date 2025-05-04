@@ -16,10 +16,6 @@
 --- For faster startup, you can setup caching by specifying a storagePath
 --- in the init_options. The default is your home directory.
 
-local util = require 'lspconfig.util'
-
-local bin_name = 'kotlin-language-server'
-
 --- The presence of one of these files indicates a project root directory
 --
 --  These are configuration files for the various build systems supported by
@@ -37,9 +33,9 @@ local root_files = {
 return {
   filetypes = { 'kotlin' },
   root_markers = root_files,
-  cmd = { bin_name }, -- kotlin-language-server
+  cmd = { 'kotlin-language-server' },
   init_options = {
     -- Enables caching and use project root to store cache data.
-    storagePath = util.root_pattern(unpack(root_files))(vim.fn.expand '%:p:h'),
+    storagePath = vim.fs.root(vim.fn.expand '%:p:h', root_files),
   },
 }

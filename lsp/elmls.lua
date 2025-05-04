@@ -7,10 +7,7 @@
 --- npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
 --- ```
 
-local util = require 'lspconfig.util'
 local api = vim.api
-
-local elm_root_pattern = util.root_pattern 'elm.json'
 
 return {
   cmd = { 'elm-language-server' },
@@ -20,7 +17,7 @@ return {
     local fname = api.nvim_buf_get_name(bufnr)
     local filetype = api.nvim_buf_get_option(0, 'filetype')
     if filetype == 'elm' or (filetype == 'json' and fname:match 'elm%.json$') then
-      on_dir(elm_root_pattern(fname))
+      on_dir(vim.fs.root(fname, 'elm.json'))
       return
     end
     on_dir(nil)
