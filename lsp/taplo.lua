@@ -11,5 +11,5 @@
 return {
   cmd = { 'taplo', 'lsp', 'stdio' },
   filetypes = { 'toml' },
-  root_markers = { '.git' },
+  root_markers = { '.git', '.taplo.toml', 'taplo.toml' },
 }
