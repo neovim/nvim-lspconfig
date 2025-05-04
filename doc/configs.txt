@@ -8251,7 +8251,7 @@ Default config:
 - filetypes: >lua
   { "toml" }
 - root_markers: >lua
-  { ".git" }
+  { ".taplo.toml", "taplo.toml", ".git" }
 <
 
 ------------------------------------------------------------------------------

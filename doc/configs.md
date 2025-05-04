@@ -11193,7 +11193,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { ".git" }
+  { ".taplo.toml", "taplo.toml", ".git" }
   ```
 
 ---
