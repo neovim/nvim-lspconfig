@@ -3382,7 +3382,7 @@ Default config:
     skipInstallPackageConfirmation = false
   }
   ```
-- `root_dir`: [../lsp/elmls.lua:15](../lsp/elmls.lua#L15)
+- `root_dir`: [../lsp/elmls.lua:12](../lsp/elmls.lua#L12)
 
 ---
 
@@ -5383,7 +5383,7 @@ Default config:
   ```lua
   { "php" }
   ```
-- `root_dir`: [../lsp/intelephense.lua:30](../lsp/intelephense.lua#L30)
+- `root_dir`: [../lsp/intelephense.lua:28](../lsp/intelephense.lua#L28)
 
 ---
 
@@ -5931,7 +5931,7 @@ Default config:
   ```lua
   "utf-32"
   ```
-- `root_dir`: [../lsp/lean3ls.lua:19](../lsp/lean3ls.lua#L19)
+- `root_dir`: [../lsp/lean3ls.lua:17](../lsp/lean3ls.lua#L17)
 
 ---
 
@@ -7984,7 +7984,7 @@ Default config:
   ```lua
   { "php" }
   ```
-- `root_dir`: [../lsp/phan.lua:22](../lsp/phan.lua#L22)
+- `root_dir`: [../lsp/phan.lua:20](../lsp/phan.lua#L20)
 
 ---
 
@@ -8008,7 +8008,7 @@ Default config:
   ```lua
   { "php" }
   ```
-- `root_dir`: [../lsp/phpactor.lua:9](../lsp/phpactor.lua#L9)
+- `root_dir`: [../lsp/phpactor.lua:7](../lsp/phpactor.lua#L7)
 
 ---
 
@@ -9594,7 +9594,7 @@ vim.lsp.enable('rust_analyzer')
 ```
 
 Default config:
-- `before_init`: [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
+- `before_init`: [../lsp/rust_analyzer.lua:54](../lsp/rust_analyzer.lua#L54)
 - `capabilities` :
   ```lua
   {
@@ -9611,8 +9611,8 @@ Default config:
   ```lua
   { "rust" }
   ```
-- `on_attach`: [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
-- `root_dir`: [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
+- `on_attach`: [../lsp/rust_analyzer.lua:54](../lsp/rust_analyzer.lua#L54)
+- `root_dir`: [../lsp/rust_analyzer.lua:54](../lsp/rust_analyzer.lua#L54)
 
 ---
 
@@ -9943,7 +9943,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir`: [../lsp/smarty_ls.lua:15](../lsp/smarty_ls.lua#L15)
+- `root_dir`: [../lsp/smarty_ls.lua:13](../lsp/smarty_ls.lua#L13)
 - `settings` :
   ```lua
   {

@@ -2308,7 +2308,7 @@ Default config:
     onlyUpdateDiagnosticsOnSave = false,
     skipInstallPackageConfirmation = false
   }
-- root_dir (use "gF" to view): ../lsp/elmls.lua:15
+- root_dir (use "gF" to view): ../lsp/elmls.lua:12
 <
 
 ------------------------------------------------------------------------------
@@ -3841,7 +3841,7 @@ Default config:
   { "intelephense", "--stdio" }
 - filetypes: >lua
   { "php" }
-- root_dir (use "gF" to view): ../lsp/intelephense.lua:30
+- root_dir (use "gF" to view): ../lsp/intelephense.lua:28
 <
 
 ------------------------------------------------------------------------------
@@ -4252,7 +4252,7 @@ Default config:
   { "lean3" }
 - offset_encoding: >lua
   "utf-32"
-- root_dir (use "gF" to view): ../lsp/lean3ls.lua:19
+- root_dir (use "gF" to view): ../lsp/lean3ls.lua:17
 <
 
 ------------------------------------------------------------------------------
@@ -5824,7 +5824,7 @@ Default config:
   { "phan", "-m", "json", "--no-color", "--no-progress-bar", "-x", "-u", "-S", "--language-server-on-stdin", "--allow-polyfill-parser" }
 - filetypes: >lua
   { "php" }
-- root_dir (use "gF" to view): ../lsp/phan.lua:22
+- root_dir (use "gF" to view): ../lsp/phan.lua:20
 <
 
 ------------------------------------------------------------------------------
@@ -5843,7 +5843,7 @@ Default config:
   { "phpactor", "language-server" }
 - filetypes: >lua
   { "php" }
-- root_dir (use "gF" to view): ../lsp/phpactor.lua:9
+- root_dir (use "gF" to view): ../lsp/phpactor.lua:7
 <
 
 ------------------------------------------------------------------------------
@@ -7056,7 +7056,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/rust_analyzer.lua:56
+- before_init (use "gF" to view): ../lsp/rust_analyzer.lua:54
 - capabilities: >lua
   {
     experimental = {
@@ -7067,8 +7067,8 @@ Default config:
   { "rust-analyzer" }
 - filetypes: >lua
   { "rust" }
-- on_attach (use "gF" to view): ../lsp/rust_analyzer.lua:56
-- root_dir (use "gF" to view): ../lsp/rust_analyzer.lua:56
+- on_attach (use "gF" to view): ../lsp/rust_analyzer.lua:54
+- root_dir (use "gF" to view): ../lsp/rust_analyzer.lua:54
 <
 
 ------------------------------------------------------------------------------
@@ -7315,7 +7315,7 @@ Default config:
   { "smarty" }
 - init_options: >lua
   {}
-- root_dir (use "gF" to view): ../lsp/smarty_ls.lua:15
+- root_dir (use "gF" to view): ../lsp/smarty_ls.lua:13
 - settings: >lua
   {
     css = {
