@@ -147,6 +147,7 @@ Nvim by running `:help lspconfig-all`.
 - [jinja_lsp](#jinja_lsp)
 - [jqls](#jqls)
 - [jsonls](#jsonls)
+- [jsonnet_ls](#jsonnet_ls)
 - [julials](#julials)
 - [just](#just)
 - [kcl](#kcl)
@@ -5668,6 +5669,38 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## jsonnet_ls
+
+https://github.com/grafana/jsonnet-language-server
+
+A Language Server Protocol (LSP) server for Jsonnet.
+
+The language server can be installed with `go`:
+```sh
+go install github.com/grafana/jsonnet-language-server@latest
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('jsonnet_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "jsonnet-language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "jsonnet", "libsonnet" }
+  ```
+- `root_markers` :
+  ```lua
+  { "jsonnetfile.json", ".git" }
   ```
 
 ---
