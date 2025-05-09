@@ -68,6 +68,27 @@ function M.insert_package_json(config_files, field, fname)
   return config_files
 end
 
+--- Appends mix.exs files to the `config_files` list if `field`
+--- is found in any such file in any ancestor of `fname`.
+---
+--- NOTE: this does a "breadth-first" search, so is broken for multi-project workspaces:
+--- https://github.com/neovim/nvim-lspconfig/issues/3818#issuecomment-2848836794
+function M.insert_mix_exs(config_files, field, fname)
+  local path = vim.fn.fnamemodify(fname, ':h')
+  local root_with_mix = vim.fs.find({ 'mix.lock' }, { path = path, upward = true })[1]
+
+  if root_with_mix then
+    -- only add package.json if it contains field parameter
+    for line in io.lines(root_with_mix) do
+      if line:find(field) then
+        config_files[#config_files + 1] = vim.fs.basename(root_with_mix)
+        break
+      end
+    end
+  end
+  return config_files
+end
+
 -- For zipfile: or tarfile: virtual paths, returns the path to the archive.
 -- Other paths are returned unaltered.
 function M.strip_archive_subpath(path)
