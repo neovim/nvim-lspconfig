@@ -9180,6 +9180,25 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+vectorcode_server
+
+https://github.com/Davidyz/VectorCode
+
+A Language Server Protocol implementation for VectorCode, a code repository indexing tool.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('vectorcode_server')
+
+
+Default config:
+- cmd: >lua
+  { "vectorcode-server" }
+- root_dir (use "gF" to view): ../lsp/vectorcode_server.lua:5
+- settings: >lua
+  {}
+<
+
+------------------------------------------------------------------------------
 verible
 
 https://github.com/chipsalliance/verible

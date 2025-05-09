@@ -333,6 +333,7 @@ Nvim by running `:help lspconfig-all`.
 - [vacuum](#vacuum)
 - [vala_ls](#vala_ls)
 - [vale_ls](#vale_ls)
+- [vectorcode_server](#vectorcode_server)
 - [verible](#verible)
 - [veridian](#veridian)
 - [veryl_ls](#veryl_ls)
@@ -12385,6 +12386,30 @@ Default config:
 - `root_markers` :
   ```lua
   { ".vale.ini" }
+  ```
+
+---
+
+## vectorcode_server
+
+https://github.com/Davidyz/VectorCode
+
+A Language Server Protocol implementation for VectorCode, a code repository indexing tool.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('vectorcode_server')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "vectorcode-server" }
+  ```
+- `root_dir`: [../lsp/vectorcode_server.lua:5](../lsp/vectorcode_server.lua#L5)
+- `settings` :
+  ```lua
+  {}
   ```
 
 ---
