@@ -47,46 +47,34 @@ function M.root_pattern(...)
   end
 end
 
---- Appends package.json-like files to the `config_files` list if `field`
---- is found in any such file in any ancestor of `fname`.
+--- Appends `new_names` to `root_files` if `field` is found in any such file in any ancestor of `fname`.
 ---
 --- NOTE: this does a "breadth-first" search, so is broken for multi-project workspaces:
 --- https://github.com/neovim/nvim-lspconfig/issues/3818#issuecomment-2848836794
-function M.insert_package_json(config_files, field, fname)
+---
+--- @param root_files string[] List of root-marker files to append to.
+--- @param new_names string[] Potential root-marker filenames (e.g. `{ 'package.json', 'package.json5' }`) to inspect for the given `field`.
+--- @param field string Field to search for in the given `new_names` files.
+--- @param fname string Full path of the current buffer name to start searching upwards from.
+function M.root_markers_with_field(root_files, new_names, field, fname)
   local path = vim.fn.fnamemodify(fname, ':h')
-  local root_with_package = vim.fs.find({ 'package.json', 'package.json5' }, { path = path, upward = true })[1]
+  local found = vim.fs.find(new_names, { path = path, upward = true })
 
-  if root_with_package then
-    -- only add package.json if it contains field parameter
-    for line in io.lines(root_with_package) do
+  for _, f in ipairs(found or {}) do
+    -- Match the given `field`.
+    for line in io.lines(f) do
       if line:find(field) then
-        config_files[#config_files + 1] = vim.fs.basename(root_with_package)
+        root_files[#root_files + 1] = vim.fs.basename(f)
         break
       end
     end
   end
-  return config_files
+
+  return root_files
 end
 
---- Appends mix.exs files to the `config_files` list if `field`
---- is found in any such file in any ancestor of `fname`.
----
---- NOTE: this does a "breadth-first" search, so is broken for multi-project workspaces:
---- https://github.com/neovim/nvim-lspconfig/issues/3818#issuecomment-2848836794
-function M.insert_mix_exs(config_files, field, fname)
-  local path = vim.fn.fnamemodify(fname, ':h')
-  local root_with_mix = vim.fs.find({ 'mix.lock' }, { path = path, upward = true })[1]
-
-  if root_with_mix then
-    -- only add package.json if it contains field parameter
-    for line in io.lines(root_with_mix) do
-      if line:find(field) then
-        config_files[#config_files + 1] = vim.fs.basename(root_with_mix)
-        break
-      end
-    end
-  end
-  return config_files
+function M.insert_package_json(root_files, field, fname)
+  return M.root_markers_with_field(root_files, { 'package.json', 'package.json5' }, field, fname)
 end
 
 -- For zipfile: or tarfile: virtual paths, returns the path to the archive.
