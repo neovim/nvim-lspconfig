@@ -106,6 +106,7 @@ return {
   workspace_required = true,
   root_dir = function(bufnr, on_dir)
     local root_files = {
+      -- Generic
       'tailwind.config.js',
       'tailwind.config.cjs',
       'tailwind.config.mjs',
@@ -114,6 +115,19 @@ return {
       'postcss.config.cjs',
       'postcss.config.mjs',
       'postcss.config.ts',
+      -- Phoenix
+      'assets/tailwind.config.js',
+      'assets/tailwind.config.cjs',
+      'assets/tailwind.config.mjs',
+      'assets/tailwind.config.ts',
+      -- Django
+      'theme/static_src/tailwind.config.js',
+      'theme/static_src/tailwind.config.cjs',
+      'theme/static_src/tailwind.config.mjs',
+      'theme/static_src/tailwind.config.ts',
+      -- Rails
+      'app/assets/stylesheets/application.tailwind.css',
+      'app/assets/tailwind/application.css',
     }
     local fname = vim.api.nvim_buf_get_name(bufnr)
     root_files = util.insert_package_json(root_files, 'tailwindcss', fname)
