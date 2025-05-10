@@ -55,7 +55,7 @@ Nvim sets some default options and mappings when a buffer attaches to LSP (see [
 * [`'tagfunc'`][tagfunc]
     - Enables "go to definition" capabilities using [`<C-]>`][tagjump] and other [tag commands][tag-commands].
 * [`'omnifunc'`][omnifunc]
-    - Enables (manual) omni mode completion with `<C-X><C-O>` in Insert mode. For *auto*completion, an [autocompletion plugin](https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion) is required.
+    - Enables (manual) omni mode completion with `<C-X><C-O>` in Insert mode.
 * [`'formatexpr'`][formatexpr]
     - Enables LSP formatting with [`gq`][gq].
 * `K` maps to [`vim.lsp.buf.hover()`][vim.lsp.buf.hover] in Normal mode.
