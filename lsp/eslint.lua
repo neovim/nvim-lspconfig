@@ -9,14 +9,18 @@
 --- npm i -g vscode-langservers-extracted
 --- ```
 ---
---- `vscode-eslint-language-server` provides an `EslintFixAll` command that can be used to format a document on save:
+--- The default `on_attach` config provides the `LspEslintFixAll` command that can be used to format a document on save:
 --- ```lua
---- vim.lsp.config('eslint', {
----   --- ...
+--- local base_on_attach = vim.lsp.config.eslint.on_attach
+--- vim.lsp.config("eslint", {
 ---   on_attach = function(client, bufnr)
+---     if base_on_attach then
+---       base_on_attach(client, bufnr)
+---     end
+---
 ---     vim.api.nvim_create_autocmd("BufWritePre", {
 ---       buffer = bufnr,
----       command = "EslintFixAll",
+---       command = "LspEslintFixAll",
 ---     })
 ---   end,
 --- })
