@@ -103,10 +103,6 @@ require'lspconfig'.ts_ls.setup{
     "typescript.glimmer"
   },
 }
-
--- You must make sure volar is setup
--- e.g. require'lspconfig'.volar.setup{}
--- See volar's section for more information
 ```
 
 `location` MUST be defined. If the plugin is installed in `node_modules`,
