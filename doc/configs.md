@@ -322,6 +322,7 @@ Nvim by running `:help lspconfig-all`.
 - [turtle_ls](#turtle_ls)
 - [tvm_ffi_navigator](#tvm_ffi_navigator)
 - [twiggy_language_server](#twiggy_language_server)
+- [ty](#ty)
 - [typeprof](#typeprof)
 - [typos_lsp](#typos_lsp)
 - [typst_lsp](#typst_lsp)
@@ -12051,6 +12052,35 @@ Default config:
 - `root_markers` :
   ```lua
   { "composer.json", ".git" }
+  ```
+
+---
+
+## ty
+
+https://github.com/astral-sh/ty
+
+A Language Server Protocol implementation for ty, an extremely fast Python type checker and language server, written in Rust.
+
+For installation instructions, please refer to the [ty documentation](https://github.com/astral-sh/ty/blob/main/README.md#getting-started).
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('ty')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "ty", "server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "python" }
+  ```
+- `root_markers` :
+  ```lua
+  { "ty.toml", "pyproject.toml", ".git" }
   ```
 
 ---
