@@ -8,15 +8,18 @@
 --- nimble install nimlangserver
 --- ```
 
-local util = require 'lspconfig.util'
-
 return {
   cmd = { 'nimlangserver' },
   filetypes = { 'nim' },
   root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(
-      util.root_pattern '*.nimble'(fname) or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-    )
+    on_dir(vim.fs.root(bufnr, function(name, _)
+      local patterns = { '*.nimble', '.git' }
+      for _, pattern in ipairs(patterns) do
+        if vim.glob.to_lpeg(pattern):match(name) ~= nil then
+          return true
+        end
+      end
+      return false
+    end))
   end,
 }

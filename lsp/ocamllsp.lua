@@ -9,8 +9,6 @@
 --- opam install ocaml-lsp-server
 --- ```
 
-local util = require 'lspconfig.util'
-
 local language_id_of = {
   menhir = 'ocaml.menhir',
   ocaml = 'ocaml',
@@ -28,8 +26,15 @@ return {
   cmd = { 'ocamllsp' },
   filetypes = { 'ocaml', 'menhir', 'ocamlinterface', 'ocamllex', 'reason', 'dune' },
   root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern('*.opam', 'esy.json', 'package.json', '.git', 'dune-project', 'dune-workspace')(fname))
+    on_dir(vim.fs.root(bufnr, function(name, _)
+      local patterns = { '*.opam', 'esy.json', 'package.json', '.git', 'dune-project', 'dune-workspace' }
+      for _, pattern in ipairs(patterns) do
+        if vim.glob.to_lpeg(pattern):match(name) ~= nil then
+          return true
+        end
+      end
+      return false
+    end))
   end,
   get_language_id = get_language_id,
 }
