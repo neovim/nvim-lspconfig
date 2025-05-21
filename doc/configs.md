@@ -3690,14 +3690,17 @@ It can be installed via `npm`:
 npm i -g vscode-langservers-extracted
 ```
 
-`vscode-eslint-language-server` provides an `EslintFixAll` command that can be used to format a document on save:
+The default `on_attach` config provides the `LspEslintFixAll` command that can be used to format a document on save:
 ```lua
-vim.lsp.config('eslint', {
-  --- ...
+local base_on_attach = vim.lsp.config.eslint.on_attach
+vim.lsp.config("eslint", {
   on_attach = function(client, bufnr)
+    if not base_on_attach then return end
+
+    base_on_attach(client, bufnr)
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
-      command = "EslintFixAll",
+      command = "LspEslintFixAll",
     })
   end,
 })
@@ -3715,7 +3718,7 @@ vim.lsp.enable('eslint')
 ```
 
 Default config:
-- `before_init`: [../lsp/eslint.lua:34](../lsp/eslint.lua#L34)
+- `before_init`: [../lsp/eslint.lua:37](../lsp/eslint.lua#L37)
 - `cmd` :
   ```lua
   { "vscode-eslint-language-server", "--stdio" }
@@ -3733,8 +3736,8 @@ Default config:
     ["eslint/probeFailed"] = <function 4>
   }
   ```
-- `on_attach`: [../lsp/eslint.lua:34](../lsp/eslint.lua#L34)
-- `root_dir`: [../lsp/eslint.lua:34](../lsp/eslint.lua#L34)
+- `on_attach`: [../lsp/eslint.lua:37](../lsp/eslint.lua#L37)
+- `root_dir`: [../lsp/eslint.lua:37](../lsp/eslint.lua#L37)
 - `settings` :
   ```lua
   {
