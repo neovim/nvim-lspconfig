@@ -6330,6 +6330,30 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+pyrefly
+
+https://pyrefly.org/
+
+`pyrefly`, a faster Python type checker written in Rust.
+
+ `pyrefly` is still in development, so please report any errors to
+ our issues page at https://github.com/facebook/pyrefly/issues.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('pyrefly')
+
+
+Default config:
+- cmd: >lua
+  { "pyrefly", "lsp" }
+- filetypes: >lua
+  { "python" }
+- on_exit (use "gF" to view): ../lsp/pyrefly.lua:10
+- root_markers: >lua
+  { "pyrefly.toml", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
+<
+
+------------------------------------------------------------------------------
 pyright
 
 https://github.com/microsoft/pyright
