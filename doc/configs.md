@@ -4299,11 +4299,11 @@ Default config:
   ```lua
   { "yaml" }
   ```
-- `root_markers` :
+- `init_options` :
   ```lua
-  { ".github/workflows", ".forgejo/workflows", ".gitea/workflows" }
+  {}
   ```
-- `workspace_required` : `true`
+- `root_dir`: [../lsp/gh_actions_ls.lua:16](../lsp/gh_actions_ls.lua#L16)
 
 ---
 

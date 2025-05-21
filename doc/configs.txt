@@ -3011,9 +3011,9 @@ Default config:
   { "gh-actions-language-server", "--stdio" }
 - filetypes: >lua
   { "yaml" }
-- root_markers: >lua
-  { ".github/workflows", ".forgejo/workflows", ".gitea/workflows" }
-- `workspace_required` : `true`
+- init_options: >lua
+  {}
+- root_dir (use "gF" to view): ../lsp/gh_actions_ls.lua:16
 <
 
 ------------------------------------------------------------------------------
