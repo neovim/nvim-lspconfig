@@ -35,10 +35,10 @@
 ---
 --- ### Vue support
 ---
---- As of 2.0.0, Volar no longer supports TypeScript itself. Instead, a plugin
+--- As of 2.0.0, the Vue language server no longer supports TypeScript itself. Instead, a plugin
 --- adds Vue support to this language server.
 ---
---- *IMPORTANT*: It is crucial to ensure that `@vue/typescript-plugin` and `volar `are of identical versions.
+--- *IMPORTANT*: It is crucial to ensure that `@vue/typescript-plugin` and `@vue/language-server `are of identical versions.
 ---
 --- ```lua
 --- vim.lsp.config('ts_ls', {
@@ -58,9 +58,9 @@
 ---   },
 --- })
 ---
---- -- You must make sure volar is setup
---- -- e.g. vim.lsp.config('volar')
---- -- See volar's section for more information
+--- -- You must make sure the Vue language server is setup
+--- -- e.g. vim.lsp.config('vue_ls')
+--- -- See vue_ls's section for more information
 --- ```
 ---
 --- `location` MUST be defined. If the plugin is installed in `node_modules`,
