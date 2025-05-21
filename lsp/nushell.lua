@@ -6,5 +6,7 @@
 return {
   cmd = { 'nu', '--lsp' },
   filetypes = { 'nu' },
-  root_markers = { '.git' },
+  root_dir = function(bufnr, cb)
+    cb(vim.fs.root(bufnr, { '.git' }) or vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)))
+  end,
 }
