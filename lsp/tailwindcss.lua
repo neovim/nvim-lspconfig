@@ -86,9 +86,11 @@ return {
       },
       includeLanguages = {
         eelixir = 'html-eex',
+        elixir = 'phoenix-heex',
         eruby = 'erb',
-        templ = 'html',
+        heex = 'phoenix-heex',
         htmlangular = 'html',
+        templ = 'html',
       },
     },
   },
