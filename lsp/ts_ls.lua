@@ -32,6 +32,34 @@
 --- Use the `:LspTypescriptSourceAction` command to see "whole file" ("source") code-actions such as:
 --- - organize imports
 --- - remove unused code
+--- 
+--- ### Ember support
+--- 
+--- ```lua
+--- vim.lsp.config('ts_ls',  {
+---   init_options = {
+---     plugins = {
+---       {
+---         name = "@glint/tsserver-plugin",
+---         location = "/your/path/to/@glint/tsserver-plugin",
+---         languages = {"javascript", "typescript", "typescript.glimmer", "javascript.glimmer"},
+---       },
+---     },
+---   },
+---   filetypes = {
+---     "javascript",
+---     "typescript",
+---     "javascript.glimmer",
+---     "typescript.glimmer"
+---   },
+--- })
+--- ```
+--- `location` MUST be defined. If the plugin is installed in `node_modules`,
+--- `location` can have any value.
+---
+--- `languages` must include `typescript.glimmer` and `javascript.glimmer` even if it is listed in `filetypes`.
+---
+--- `filetypes` is extended here to include the gjs and gts filetype names.
 ---
 --- ### Vue support
 ---
