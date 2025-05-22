@@ -36,7 +36,9 @@ return {
         end
         on_dir(get_root(fname))
       else
-        vim.notify(('[gopls] cmd failed with code %d: %s\n%s'):format(output.code, cmd, output.stderr))
+        vim.schedule(function()
+          vim.notify(('[gopls] cmd failed with code %d: %s\n%s'):format(output.code, cmd, output.stderr))
+        end)
       end
     end)
   end,
