@@ -169,6 +169,7 @@ Nvim by running `:help lspconfig-all`.
 - [markdown_oxide](#markdown_oxide)
 - [marko-js](#marko-js)
 - [marksman](#marksman)
+- [matlab_ls](#matlab_ls)
 - [mdx_analyzer](#mdx_analyzer)
 - [mesonlsp](#mesonlsp)
 - [metals](#metals)
@@ -6513,6 +6514,41 @@ Default config:
 - `root_markers` :
   ```lua
   { ".marksman.toml", ".git" }
+  ```
+
+---
+
+## matlab_ls
+
+https://github.com/mathworks/MATLAB-language-server
+
+MATLAB® language server implements the Microsoft® Language Server Protocol for the MATLAB language.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('matlab_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "matlab-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "matlab" }
+  ```
+- `root_dir`: [../lsp/matlab_ls.lua:6](../lsp/matlab_ls.lua#L6)
+- `settings` :
+  ```lua
+  {
+    MATLAB = {
+      indexWorkspace = true,
+      installPath = "",
+      matlabConnectionTiming = "onStart",
+      telemetry = true
+    }
+  }
   ```
 
 ---

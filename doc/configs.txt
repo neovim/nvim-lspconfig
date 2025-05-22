@@ -4708,6 +4708,34 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+matlab_ls
+
+https://github.com/mathworks/MATLAB-language-server
+
+MATLAB® language server implements the Microsoft® Language Server Protocol for the MATLAB language.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('matlab_ls')
+
+
+Default config:
+- cmd: >lua
+  { "matlab-language-server", "--stdio" }
+- filetypes: >lua
+  { "matlab" }
+- root_dir (use "gF" to view): ../lsp/matlab_ls.lua:6
+- settings: >lua
+  {
+    MATLAB = {
+      indexWorkspace = true,
+      installPath = "",
+      matlabConnectionTiming = "onStart",
+      telemetry = true
+    }
+  }
+<
+
+------------------------------------------------------------------------------
 mdx_analyzer
 
 https://github.com/mdx-js/mdx-analyzer
