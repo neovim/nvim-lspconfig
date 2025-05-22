@@ -3,6 +3,10 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'ast-grep', 'lsp' },
+    reuse_client = function(client, config)
+      config.cmd_cwd = config.root_dir
+      return client.config.cmd_cwd == config.cmd_cwd
+    end,
     filetypes = { -- https://ast-grep.github.io/reference/languages.html
       'c',
       'cpp',
