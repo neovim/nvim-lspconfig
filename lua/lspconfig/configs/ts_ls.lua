@@ -70,43 +70,7 @@ require'lspconfig'.ts_ls.setup{
     "vue",
   },
 }
-
--- You must make sure volar is setup
--- e.g. require'lspconfig'.volar.setup{}
--- See volar's section for more information
 ```
-
-`location` MUST be defined. If the plugin is installed in `node_modules`,
-`location` can have any value.
-
-`languages` must include `vue` even if it is listed in `filetypes`.
-
-`filetypes` is extended here to include Vue SFC.
-
-### Ember support
-
-```lua
-require'lspconfig'.ts_ls.setup{
-  init_options = {
-    plugins = {
-      {
-        name = "@glint/tsserver-plugin",
-        location = "/your/path/to/@glint/tsserver-plugin",
-        languages = {"javascript", "typescript", "typescript.glimmer", "javascript.glimmer"},
-      },
-    },
-  },
-  filetypes = {
-    "javascript",
-    "typescript",
-    "javascript.glimmer",
-    "typescript.glimmer"
-  },
-}
-```
-
-`location` MUST be defined. If the plugin is installed in `node_modules`,
-`location` can have any value.
 ]],
   },
 }
