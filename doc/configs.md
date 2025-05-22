@@ -341,6 +341,7 @@ Nvim by running `:help lspconfig-all`.
 - [verible](#verible)
 - [veridian](#veridian)
 - [veryl_ls](#veryl_ls)
+- [vespa_ls](#vespa_ls)
 - [vhdl_ls](#vhdl_ls)
 - [vimls](#vimls)
 - [visualforce_ls](#visualforce_ls)
@@ -12645,6 +12646,57 @@ Default config:
 - `filetypes` :
   ```lua
   { "veryl" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".git" }
+  ```
+
+---
+
+## vespa_ls
+
+https://github.com/vespa-engine/vespa/tree/master/integration/schema-language-server
+
+Vespa Language Server provides LSP features such as completion, diagnostics,
+and go-to-definition for Vespa schema files (`.sd`), profile files (`.profile`),
+and YQL query files (`.yql`).
+
+This language server requires Java 17 or higher. You can build the jar from source.
+
+You can override the default command by manually configuring it like this:
+
+```lua
+vim.lsp.config('vespa_ls', {
+  cmd = { 'java', '-jar', '/path/to/vespa-language-server.jar' },
+})
+```
+
+The project root is determined based on the presence of a `.git` directory.
+
+To make Neovim recognize the proper filetypes, add the following setting in `init.lua`:
+
+    vim.filetype.add {
+      extension = {
+        profile = 'sd',
+        sd = 'sd',
+        yql = 'yql',
+      },
+    }
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('vespa_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "java", "-jar", "vespa-language-server.jar" }
+  ```
+- `filetypes` :
+  ```lua
+  { "sd", "profile", "yql" }
   ```
 - `root_markers` :
   ```lua
