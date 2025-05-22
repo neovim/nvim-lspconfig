@@ -3272,6 +3272,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
+- before_init (use "gF" to view): ../lsp/golangci_lint_ls.lua:15
 - cmd: >lua
   { "golangci-lint-langserver" }
 - filetypes: >lua

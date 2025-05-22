@@ -4642,6 +4642,7 @@ vim.lsp.enable('golangci_lint_ls')
 ```
 
 Default config:
+- `before_init`: [../lsp/golangci_lint_ls.lua:15](../lsp/golangci_lint_ls.lua#L15)
 - `cmd` :
   ```lua
   { "golangci-lint-langserver" }
