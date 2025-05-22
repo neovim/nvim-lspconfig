@@ -8290,7 +8290,9 @@ Default config:
       classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
       includeLanguages = {
         eelixir = "html-eex",
+        elixir = "phoenix-heex",
         eruby = "erb",
+        heex = "phoenix-heex",
         htmlangular = "html",
         templ = "html"
       },
