@@ -19,5 +19,4 @@ return {
   filetypes = { 'kotlin' },
   cmd = { 'kotlin-lsp', '--stdio' },
   root_markers = root_files,
-  single_file_support = true,
 }
