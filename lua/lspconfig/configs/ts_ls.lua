@@ -77,8 +77,10 @@ require'lspconfig'.ts_ls.setup{
 ```
 `location` MUST be defined. If the plugin is installed in `node_modules`,
 `location` can have any value.
+
 `languages` must include `vue` even if it is listed in `filetypes`.
-`filetypes` is extended here to include Vue SFC.    
+
+`filetypes` is extended here to include Vue SFC.
 ]],
   },
 }
