@@ -5437,8 +5437,7 @@ Default config:
   { "nu", "--lsp" }
 - filetypes: >lua
   { "nu" }
-- root_markers: >lua
-  { ".git" }
+- root_dir (use "gF" to view): ../lsp/nushell.lua:6
 <
 
 ------------------------------------------------------------------------------

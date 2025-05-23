@@ -7478,10 +7478,7 @@ Default config:
   ```lua
   { "nu" }
   ```
-- `root_markers` :
-  ```lua
-  { ".git" }
-  ```
+- `root_dir`: [../lsp/nushell.lua:6](../lsp/nushell.lua#L6)
 
 ---
 
