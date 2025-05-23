@@ -7,14 +7,6 @@
 --
 --  These are configuration files for the various build systems supported by
 --  Kotlin.
-local root_files = {
-  'settings.gradle', -- Gradle (multi-project)
-  'settings.gradle.kts', -- Gradle (multi-project)
-  'pom.xml', -- Maven
-  'build.gradle', -- Gradle
-  'build.gradle.kts', -- Gradle
-}
-
 return {
   filetypes = { 'kotlin' },
   cmd = { 'kotlin-lsp', '--stdio' },
@@ -24,5 +16,6 @@ return {
     'pom.xml', -- Maven
     'build.gradle', -- Gradle
     'build.gradle.kts', -- Gradle
+    'workspace.json', -- Used to integrate your own build system
   },
 }
