@@ -153,6 +153,7 @@ Nvim by running `:help lspconfig-all`.
 - [kcl](#kcl)
 - [koka](#koka)
 - [kotlin_language_server](#kotlin_language_server)
+- [kotlin_lsp](#kotlin_lsp)
 - [kulala_ls](#kulala_ls)
 - [laravel_ls](#laravel_ls)
 - [lean3ls](#lean3ls)
@@ -5879,6 +5880,33 @@ Default config:
 - `root_markers` :
   ```lua
   { "settings.gradle", "settings.gradle.kts", "build.xml", "pom.xml", "build.gradle", "build.gradle.kts" }
+  ```
+
+---
+
+## kotlin_lsp
+
+Pre-alpha official Kotlin support for Visual Studio Code and an implementation of Language Server Protocol for the Kotlin language.
+
+The server is based on IntelliJ IDEA and the IntelliJ IDEA Kotlin Plugin implementation.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('kotlin_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "kotlin-lsp", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "kotlin" }
+  ```
+- `root_markers` :
+  ```lua
+  { "settings.gradle", "settings.gradle.kts", "pom.xml", "build.gradle", "build.gradle.kts", "workspace.json" }
   ```
 
 ---

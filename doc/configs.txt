@@ -4212,6 +4212,26 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+kotlin_lsp
+
+Pre-alpha official Kotlin support for Visual Studio Code and an implementation of Language Server Protocol for the Kotlin language.
+
+The server is based on IntelliJ IDEA and the IntelliJ IDEA Kotlin Plugin implementation.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('kotlin_lsp')
+
+
+Default config:
+- cmd: >lua
+  { "kotlin-lsp", "--stdio" }
+- filetypes: >lua
+  { "kotlin" }
+- root_markers: >lua
+  { "settings.gradle", "settings.gradle.kts", "pom.xml", "build.gradle", "build.gradle.kts", "workspace.json" }
+<
+
+------------------------------------------------------------------------------
 kulala_ls
 
 https://github.com/mistweaverco/kulala-ls
