@@ -1,10 +1,12 @@
+local util = require 'lspconfig.util'
+
 return {
   default_config = {
     cmd = { 'fish-lsp', 'start' },
-    cmd_env = { fish_lsp_show_client_popups = false },
     filetypes = { 'fish' },
     root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      return util.root_pattern('config.fish')(fname)
+        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
     single_file_support = true,
   },
