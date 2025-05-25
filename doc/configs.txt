@@ -8733,6 +8733,26 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+tombi
+
+https://tombi-toml.github.io/tombi/
+
+Language server for Tombi, a TOML toolkit.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('tombi')
+
+
+Default config:
+- cmd: >lua
+  { "tombi", "lsp" }
+- filetypes: >lua
+  { "toml" }
+- root_markers: >lua
+  { "tombi.toml", "pyproject.toml", ".git" }
+<
+
+------------------------------------------------------------------------------
 ts_ls
 
 https://github.com/typescript-language-server/typescript-language-server

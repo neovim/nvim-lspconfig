@@ -317,6 +317,7 @@ Nvim by running `:help lspconfig-all`.
 - [thriftls](#thriftls)
 - [tilt_ls](#tilt_ls)
 - [tinymist](#tinymist)
+- [tombi](#tombi)
 - [ts_ls](#ts_ls)
 - [ts_query_ls](#ts_query_ls)
 - [tsp_server](#tsp_server)
@@ -11803,6 +11804,33 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## tombi
+
+https://tombi-toml.github.io/tombi/
+
+Language server for Tombi, a TOML toolkit.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('tombi')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "tombi", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "toml" }
+  ```
+- `root_markers` :
+  ```lua
+  { "tombi.toml", "pyproject.toml", ".git" }
   ```
 
 ---
