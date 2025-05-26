@@ -3897,19 +3897,13 @@ Default config:
   ```lua
   { "fish-lsp", "start" }
   ```
-- `cmd_env` :
-  ```lua
-  {
-    fish_lsp_show_client_popups = false
-  }
-  ```
 - `filetypes` :
   ```lua
   { "fish" }
   ```
 - `root_markers` :
   ```lua
-  { ".git" }
+  { "config.fish", ".git" }
   ```
 
 ---
