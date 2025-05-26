@@ -842,6 +842,7 @@ Default config:
   ```lua
   { "c", "cpp", "rust", "go", "java", "python", "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "html", "css", "kotlin", "dart", "lua" }
   ```
+- `reuse_client`: [../lsp/ast_grep.lua:10](../lsp/ast_grep.lua#L10)
 - `root_markers` :
   ```lua
   { "sgconfig.yaml", "sgconfig.yml" }
