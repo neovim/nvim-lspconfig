@@ -317,6 +317,7 @@ Nvim by running `:help lspconfig-all`.
 - [thriftls](#thriftls)
 - [tilt_ls](#tilt_ls)
 - [tinymist](#tinymist)
+- [tofu_ls](#tofu_ls)
 - [tombi](#tombi)
 - [ts_ls](#ts_ls)
 - [ts_query_ls](#ts_query_ls)
@@ -11799,6 +11800,31 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## tofu_ls
+
+[OpenTofu Language Server](https://github.com/opentofu/tofu-ls)
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('tofu_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "tofu-ls", "serve" }
+  ```
+- `filetypes` :
+  ```lua
+  { "opentofu", "opentofu-vars" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".terraform", ".git" }
   ```
 
 ---

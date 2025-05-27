@@ -8730,6 +8730,24 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+tofu_ls
+
+[OpenTofu Language Server](https://github.com/opentofu/tofu-ls)
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('tofu_ls')
+
+
+Default config:
+- cmd: >lua
+  { "tofu-ls", "serve" }
+- filetypes: >lua
+  { "opentofu", "opentofu-vars" }
+- root_markers: >lua
+  { ".terraform", ".git" }
+<
+
+------------------------------------------------------------------------------
 tombi
 
 https://tombi-toml.github.io/tombi/
