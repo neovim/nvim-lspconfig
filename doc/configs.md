@@ -1857,7 +1857,7 @@ vim.lsp.enable('cairo_ls')
 Default config:
 - `cmd` :
   ```lua
-  { "scarb-cairo-language-server", "/C", "--node-ipc" }
+  { "scarb", "cairo-language-server", "/C", "--node-ipc" }
   ```
 - `filetypes` :
   ```lua

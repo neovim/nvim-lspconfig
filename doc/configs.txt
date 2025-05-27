@@ -1155,7 +1155,7 @@ Snippet to enable the language server: >lua
 
 Default config:
 - cmd: >lua
-  { "scarb-cairo-language-server", "/C", "--node-ipc" }
+  { "scarb", "cairo-language-server", "/C", "--node-ipc" }
 - filetypes: >lua
   { "cairo" }
 - init_options: >lua
