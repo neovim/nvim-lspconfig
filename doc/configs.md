@@ -216,6 +216,7 @@ Nvim by running `:help lspconfig-all`.
 - [pest_ls](#pest_ls)
 - [phan](#phan)
 - [phpactor](#phpactor)
+- [phptools](#phptools)
 - [pico8_ls](#pico8_ls)
 - [pkgbuild_language_server](#pkgbuild_language_server)
 - [please](#please)
@@ -8108,6 +8109,44 @@ Default config:
   { "php" }
   ```
 - `root_dir`: [../lsp/phpactor.lua:7](../lsp/phpactor.lua#L7)
+
+---
+
+## phptools
+
+https://www.devsense.com/
+
+`devsense-php-ls` can be installed via `npm`:
+```sh
+npm install -g devsense-php-ls
+```
+
+```lua
+-- See https://www.npmjs.com/package/devsense-php-ls
+init_options = {
+}
+-- See https://docs.devsense.com/vscode/configuration/
+settings = {
+  php = {
+  };
+}
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('phptools')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "devsense-php-ls", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "php" }
+  ```
+- `root_dir`: [../lsp/phptools.lua:24](../lsp/phptools.lua#L24)
 
 ---
 

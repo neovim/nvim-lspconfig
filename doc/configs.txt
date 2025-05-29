@@ -5918,6 +5918,36 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+phptools
+
+https://www.devsense.com/
+
+`devsense-php-ls` can be installed via `npm` >sh
+  npm install -g devsense-php-ls
+  
+>lua
+  -- See https://www.npmjs.com/package/devsense-php-ls
+  init_options = {
+  }
+  -- See https://docs.devsense.com/vscode/configuration/
+  settings = {
+    php = {
+    };
+  }
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('phptools')
+
+
+Default config:
+- cmd: >lua
+  { "devsense-php-ls", "--stdio" }
+- filetypes: >lua
+  { "php" }
+- root_dir (use "gF" to view): ../lsp/phptools.lua:24
+<
+
+------------------------------------------------------------------------------
 pico8_ls
 
 https://github.com/japhib/pico8-ls
