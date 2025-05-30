@@ -56,6 +56,7 @@ Nvim by running `:help lspconfig-all`.
 - [coq_lsp](#coq_lsp)
 - [crystalline](#crystalline)
 - [csharp_ls](#csharp_ls)
+- [cspell_ls](#cspell_ls)
 - [css_variables](#css_variables)
 - [cssls](#cssls)
 - [cssmodules_ls](#cssmodules_ls)
@@ -2295,6 +2296,27 @@ Default config:
   }
   ```
 - `root_dir`: [../lsp/csharp_ls.lua:13](../lsp/csharp_ls.lua#L13)
+
+---
+
+## cspell_ls
+
+[cspell language server](https://github.com/vlabo/cspell-lsp)
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('cspell_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "cspell-lsp", "--stdio" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".git", "cspell.json", ".cspell.json", "cspell.json", ".cSpell.json", "cSpell.json", "cspell.config.js", "cspell.config.cjs", "cspell.config.json", "cspell.config.yaml", "cspell.config.yml", "cspell.yaml", "cspell.yml" }
+  ```
 
 ---
 
