@@ -4996,7 +4996,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "helm" }
+  { "helm", "yaml.helm-values" }
   ```
 - `root_markers` :
   ```lua
@@ -13311,7 +13311,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "yaml", "yaml.docker-compose", "yaml.gitlab" }
+  { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" }
   ```
 - `root_markers` :
   ```lua

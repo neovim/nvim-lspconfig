@@ -3537,7 +3537,7 @@ Default config:
 - cmd: >lua
   { "helm_ls", "serve" }
 - filetypes: >lua
-  { "helm" }
+  { "helm", "yaml.helm-values" }
 - root_markers: >lua
   { "Chart.yaml" }
 <
@@ -9893,7 +9893,7 @@ Default config:
 - cmd: >lua
   { "yaml-language-server", "--stdio" }
 - filetypes: >lua
-  { "yaml", "yaml.docker-compose", "yaml.gitlab" }
+  { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" }
 - root_markers: >lua
   { ".git" }
 - settings: >lua
