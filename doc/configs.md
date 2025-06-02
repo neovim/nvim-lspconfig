@@ -56,6 +56,7 @@ Nvim by running `:help lspconfig-all`.
 - [coq_lsp](#coq_lsp)
 - [crystalline](#crystalline)
 - [csharp_ls](#csharp_ls)
+- [cspell_ls](#cspell_ls)
 - [css_variables](#css_variables)
 - [cssls](#cssls)
 - [cssmodules_ls](#cssmodules_ls)
@@ -2299,6 +2300,27 @@ Default config:
 
 ---
 
+## cspell_ls
+
+[cspell language server](https://github.com/vlabo/cspell-lsp)
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('cspell_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "cspell-lsp", "--stdio" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".git", "cspell.json", ".cspell.json", "cspell.json", ".cSpell.json", "cSpell.json", "cspell.config.js", "cspell.config.cjs", "cspell.config.json", "cspell.config.yaml", "cspell.config.yml", "cspell.yaml", "cspell.yml" }
+  ```
+
+---
+
 ## css_variables
 
 https://github.com/vunguyentuan/vscode-css-variables/tree/master/packages/css-variables-language-server
@@ -3477,7 +3499,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "typescriptreact", "htmlangular" }
+  { "astro", "css", "eruby", "html", "htmlangular", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "svelte", "templ", "typescriptreact", "vue" }
   ```
 - `root_markers` :
   ```lua
@@ -3507,7 +3529,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "astro", "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "svelte", "typescriptreact", "vue", "htmlangular" }
+  { "astro", "css", "eruby", "html", "htmlangular", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "svelte", "templ", "typescriptreact", "vue" }
   ```
 - `root_markers` :
   ```lua
@@ -4975,7 +4997,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "helm" }
+  { "helm", "yaml.helm-values" }
   ```
 - `root_markers` :
   ```lua
@@ -13328,7 +13350,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "yaml", "yaml.docker-compose", "yaml.gitlab" }
+  { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" }
   ```
 - `root_markers` :
   ```lua

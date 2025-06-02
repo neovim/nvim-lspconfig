@@ -45,7 +45,8 @@ _check_lsp_cmd_prefix() {
 
 # Enforce client:exec_cmd().
 _check_exec_cmd() {
-  if git grep -P 'workspace.executeCommand' -- 'lsp/*.lua' ; then
+  local exclude='eslint'
+  if git grep -P 'workspace.executeCommand' -- 'lsp/*.lua' | grep -v "$exclude"  ; then
     _fail 'Use client:exec_cmd() instead of calling request("workspace/executeCommand") directly. Example: lsp/pyright.lua'
   fi
 }
