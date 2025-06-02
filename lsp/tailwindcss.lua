@@ -127,6 +127,7 @@ return {
       'theme/static_src/tailwind.config.cjs',
       'theme/static_src/tailwind.config.mjs',
       'theme/static_src/tailwind.config.ts',
+      'theme/static_src/postcss.config.js',
       -- Rails
       'app/assets/stylesheets/application.tailwind.css',
       'app/assets/tailwind/application.css',
