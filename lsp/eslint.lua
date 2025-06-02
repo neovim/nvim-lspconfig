@@ -48,12 +48,9 @@ return {
     'astro',
   },
   workspace_required = true,
-  on_attach = function(client)
+  on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(0, 'LspEslintFixAll', function()
-      local bufnr = vim.api.nvim_get_current_buf()
-
-      client:exec_cmd({
-        title = 'Fix all Eslint errors for current buffer',
+      client:request_sync('workspace/executeCommand', {
         command = 'eslint.applyAllFixes',
         arguments = {
           {
@@ -61,7 +58,7 @@ return {
             version = lsp.util.buf_versions[bufnr],
           },
         },
-      }, { bufnr = bufnr })
+      }, nil, bufnr)
     end, {})
   end,
   -- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
