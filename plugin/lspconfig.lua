@@ -67,6 +67,12 @@ end
 -- script in scriptnames to be executed is lspconfig.
 api.nvim_create_user_command('LspInfo', ':checkhealth vim.lsp', { desc = 'Alias to `:checkhealth vim.lsp`' })
 
+api.nvim_create_user_command('LspLog', function()
+  vim.cmd(string.format('tabnew %s', lsp.get_log_path()))
+end, {
+  desc = 'Opens the Nvim LSP client log.',
+})
+
 if vim.version.ge(vim.version(), { 0, 11, 2 }) then
   local complete_client = function(arg)
     return vim
@@ -228,10 +234,4 @@ end, {
   desc = 'Manually stops the given language client(s)',
   nargs = '?',
   complete = lsp_get_active_clients,
-})
-
-api.nvim_create_user_command('LspLog', function()
-  vim.cmd(string.format('tabnew %s', lsp.get_log_path()))
-end, {
-  desc = 'Opens the Nvim LSP client log.',
 })
