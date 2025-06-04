@@ -4,13 +4,18 @@
 ---
 --- Language Server for Agda.
 
-local util = require 'lspconfig.util'
-
 return {
   cmd = { 'als' },
   filetypes = { 'agda' },
   root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern('.git', '*.agda-lib')(fname))
+    on_dir(vim.fs.root(bufnr, function(name, _)
+      local patterns = { '.git', '*.agda-lib' }
+      for _, pattern in ipairs(patterns) do
+        if vim.glob.to_lpeg(pattern):match(name) ~= nil then
+          return true
+        end
+      end
+      return false
+    end))
   end,
 }
