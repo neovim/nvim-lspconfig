@@ -32,7 +32,7 @@
 ---     && unzip -d /usr/local/bin/bicep-langserver bicep-langserver.zip)
 --- ```
 return {
-  filetypes = { 'bicep' },
+  filetypes = { 'bicep', 'bicep-params' },
   root_markers = { '.git' },
   init_options = {},
 }
