@@ -1469,7 +1469,7 @@ vim.lsp.enable('bicep')
 Default config:
 - `filetypes` :
   ```lua
-  { "bicep" }
+  { "bicep", "bicep-params" }
   ```
 - `init_options` :
   ```lua

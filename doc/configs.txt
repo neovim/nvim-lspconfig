@@ -868,7 +868,7 @@ Snippet to enable the language server: >lua
 
 Default config:
 - filetypes: >lua
-  { "bicep" }
+  { "bicep", "bicep-params" }
 - init_options: >lua
   {}
 - root_markers: >lua
