@@ -2033,7 +2033,8 @@ Default config:
   ```lua
   { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
   ```
-- `on_attach`: [../lsp/clangd.lua:60](../lsp/clangd.lua#L60)
+- `on_attach`: [../lsp/clangd.lua:63](../lsp/clangd.lua#L63)
+- `on_init`: [../lsp/clangd.lua:63](../lsp/clangd.lua#L63)
 - `root_markers` :
   ```lua
   { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" }
