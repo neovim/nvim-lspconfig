@@ -31,6 +31,14 @@
 ---
 --- Additional messages you can handle: `eslint/noConfig`
 
+local function has_eslint_config_in_package_json(fname)
+    local package_json = vim.fs.find("package.json", { upward = true, path = fname })[1]
+    if not package_json then return false end
+    local content = vim.fn.readfile(package_json)
+    local ok, parsed = pcall(vim.json.decode, table.concat(content, "\n"))
+    return ok and parsed["eslintConfig"] ~= nil
+end
+
 local util = require 'lspconfig.util'
 local lsp = vim.lsp
 
@@ -79,7 +87,9 @@ return {
     }
 
     local fname = vim.api.nvim_buf_get_name(bufnr)
-    root_file_patterns = util.insert_package_json(root_file_patterns, 'eslintConfig', fname)
+    if (has_eslint_config_in_package_json(fname)) then
+      table.insert(root_file_patterns, "package.json")
+    end
     on_dir(vim.fs.dirname(vim.fs.find(root_file_patterns, { path = fname, upward = true })[1]))
   end,
   -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
