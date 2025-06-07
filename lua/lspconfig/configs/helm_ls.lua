@@ -3,7 +3,7 @@ local util = require 'lspconfig.util'
 return {
   default_config = {
     cmd = { 'helm_ls', 'serve' },
-    filetypes = { 'helm' },
+    filetypes = { 'helm', 'yaml.helm-values' },
     root_dir = util.root_pattern 'Chart.yaml',
     single_file_support = true,
     capabilities = {
