@@ -112,9 +112,7 @@ if vim.version.ge(vim.version(), { 0, 11, 2 }) then
       end
     end
 
-    for _, name in ipairs(servers) do
-      vim.lsp.enable(name)
-    end
+    vim.lsp.enable(servers)
   end, {
     desc = 'Enable and launch a language server',
     nargs = '?',
