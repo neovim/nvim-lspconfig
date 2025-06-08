@@ -1,7 +1,7 @@
 return {
   default_config = {
     cmd = { 'yaml-language-server', '--stdio' },
-    filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab' },
+    filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab', 'yaml.helm-values' },
     root_dir = function(fname)
       return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
