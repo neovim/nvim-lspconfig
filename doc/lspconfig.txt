@@ -93,7 +93,8 @@ servers: >vim
 
 :LspRestart [client_id] or [config_name] ...                     *:LspRestart*
 Restarts the clients with the given client-ids or config names, and attempts
-to reattach to all previously attached buffers.
+to reattach to all previously attached buffers. Defaults to restarting all
+active servers.
 
 ==============================================================================
 SERVER CONFIGS                                        *lspconfig-configurations*
