@@ -11058,10 +11058,7 @@ Default config:
   { "svelte" }
   ```
 - `on_attach`: [../lsp/svelte.lua:12](../lsp/svelte.lua#L12)
-- `root_markers` :
-  ```lua
-  { "package.json", ".git" }
-  ```
+- `root_dir`: [../lsp/svelte.lua:12](../lsp/svelte.lua#L12)
 
 ---
 
