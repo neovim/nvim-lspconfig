@@ -149,8 +149,8 @@ if vim.version.ge(vim.version(), { 0, 11, 2 }) then
       end
     end)
   end, {
-    desc = 'Restart the given client(s)',
-    nargs = '*',
+    desc = 'Restart the given client',
+    nargs = '?',
     complete = complete_client,
   })
 
@@ -175,8 +175,8 @@ if vim.version.ge(vim.version(), { 0, 11, 2 }) then
       end
     end
   end, {
-    desc = 'Disable and stop the given client(s)',
-    nargs = '*',
+    desc = 'Disable and stop the given client',
+    nargs = '?',
     complete = complete_client,
   })
 
