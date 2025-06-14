@@ -15,13 +15,18 @@
 --- export FPCTARGETCPU='x86_64'          # Target CPU for cross compiling.
 --- ```
 
-local util = require 'lspconfig.util'
-
 return {
   cmd = { 'pasls' },
   filetypes = { 'pascal' },
   root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern('*.lpi', '*.lpk', '.git')(fname))
+    on_dir(vim.fs.root(bufnr, function(name, _)
+      local patterns = { '*.lpi', '*.lpk', '.git' }
+      for _, pattern in ipairs(patterns) do
+        if vim.glob.to_lpeg(pattern):match(name) ~= nil then
+          return true
+        end
+      end
+      return false
+    end))
   end,
 }
