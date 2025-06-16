@@ -8130,7 +8130,11 @@ Default config:
   ```lua
   { "php" }
   ```
-- `root_dir`: [../lsp/phpactor.lua:7](../lsp/phpactor.lua#L7)
+- `root_markers` :
+  ```lua
+  { "composer.json", ".git", ".phpactor.json", ".phpactor.yml" }
+  ```
+- `workspace_required` : `true`
 
 ---
 
