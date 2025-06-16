@@ -5414,7 +5414,10 @@ Default config:
   ```lua
   { "php" }
   ```
-- `root_dir`: [../lsp/intelephense.lua:28](../lsp/intelephense.lua#L28)
+- `root_markers` :
+  ```lua
+  { "composer.json", ".git" }
+  ```
 
 ---
 

@@ -3859,7 +3859,8 @@ Default config:
   { "intelephense", "--stdio" }
 - filetypes: >lua
   { "php" }
-- root_dir (use "gF" to view): ../lsp/intelephense.lua:28
+- root_markers: >lua
+  { "composer.json", ".git" }
 <
 
 ------------------------------------------------------------------------------
