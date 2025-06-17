@@ -117,6 +117,7 @@ Nvim by running `:help lspconfig-all`.
 - [gitlab_ci_ls](#gitlab_ci_ls)
 - [glasgow](#glasgow)
 - [gleam](#gleam)
+- [glint](#glint)
 - [glsl_analyzer](#glsl_analyzer)
 - [glslls](#glslls)
 - [gnls](#gnls)
@@ -4531,6 +4532,61 @@ Default config:
   ```lua
   { "gleam.toml", ".git" }
   ```
+
+---
+
+## glint
+
+https://github.com/typed-ember/glint
+https://typed-ember.gitbook.io/glint/
+`glint-language-server` is installed when adding `@glint/core` to your project's devDependencies:
+
+```sh
+npm install @glint/core --save-dev
+yarn add -D @glint/core
+
+This configuration uses the local installation of `glint-language-server`
+(found in the `node_modules` directory of your project).
+
+To use a global installation of `glint-language-server`,
+set the `init_options.glint.useGlobal` to `true`.
+
+vim.lsp.config('glint', {
+  init_options = {
+    glint = {
+      useGlobal = true,
+    },
+  },
+})
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('glint')
+```
+
+Default config:
+- `before_init`: [../lsp/glint.lua:25](../lsp/glint.lua#L25)
+- `cmd` :
+  ```lua
+  { "glint-language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "html.handlebars", "handlebars", "typescript", "typescript.glimmer", "javascript", "javascript.glimmer" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    glint = {
+      useGlobal = false
+    }
+  }
+  ```
+- `root_markers` :
+  ```lua
+  { ".glintrc.yml", ".glintrc", ".glintrc.json", ".glintrc.js", "glint.config.js", "package.json" }
+  ```
+- `workspace_required` : `true`
 
 ---
 
