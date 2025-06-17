@@ -29,16 +29,7 @@ function get_cmd()
   end
 
   local root_markers = vim.lsp.config.glint.root_markers
-  if not root_markers or #root_markers == 0 then
-    vim.notify('No root markers defined for glint', vim.log.levels.ERROR)
-    return nil
-  end
-
-  local root_dir = vim.fs.dirname(vim.fs.find(root_markers, { upward = true })[1])
-  if not root_dir then
-    vim.notify('Could not find root directory for glint', vim.log.levels.ERROR)
-    return nil
-  end
+  local root_dir = vim.fs.root(0, root_markers)
 
   return { root_dir .. '/node_modules/.bin/glint-language-server' }
 end
