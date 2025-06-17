@@ -22,27 +22,37 @@
 ---   },
 --- })
 
+function getCmd()
+  local useGlobal = vim.lsp.config.glint.init_options.glint.useGlobal
+  if useGlobal then
+    return { 'glint-language-server' }
+  end
+
+  local root_markers = vim.lsp.config.glint.root_markers
+  if not root_markers or #root_markers == 0 then
+    vim.notify('No root markers defined for glint', vim.log.levels.ERROR)
+    return nil
+  end
+
+  local root_dir = vim.fs.dirname(vim.fs.find(root_markers, { upward = true })[1])
+  if not root_dir then
+    vim.notify('Could not find root directory for glint', vim.log.levels.ERROR)
+    return nil
+  end
+
+  return { root_dir .. '/node_modules/.bin/glint-language-server' }
+end
+
 return {
-  cmd = { 'glint-language-server' },
+  cmd = function(dispatchers)
+    local cmd = getCmd()
+    return vim.lsp.rpc.start(cmd, dispatchers)
+  end,
   init_options = {
     glint = {
       useGlobal = false,
     },
   },
-  before_init = function(_, config)
-    if config.init_options.glint.useGlobal then
-      return
-    end
-
-    local root_dir = config.root_dir
-    if not root_dir then
-      error('No root directory found for glint')
-    end
-    config.cmd = {
-      'exec',
-      root_dir .. '/node_modules/.bin/glint-language-server',
-    }
-  end,
   filetypes = {
     'html.handlebars',
     'handlebars',
