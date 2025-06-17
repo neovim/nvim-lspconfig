@@ -4565,11 +4565,7 @@ vim.lsp.enable('glint')
 ```
 
 Default config:
-- `before_init`: [../lsp/glint.lua:25](../lsp/glint.lua#L25)
-- `cmd` :
-  ```lua
-  { "glint-language-server" }
-  ```
+- `cmd`: [../lsp/glint.lua:37](../lsp/glint.lua#L37)
 - `filetypes` :
   ```lua
   { "html.handlebars", "handlebars", "typescript", "typescript.glimmer", "javascript", "javascript.glimmer" }
