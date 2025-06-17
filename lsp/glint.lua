@@ -22,7 +22,7 @@
 ---   },
 --- })
 
-function getCmd()
+function get_cmd()
   local useGlobal = vim.lsp.config.glint.init_options.glint.useGlobal
   if useGlobal then
     return { 'glint-language-server' }
@@ -45,7 +45,7 @@ end
 
 return {
   cmd = function(dispatchers)
-    local cmd = getCmd()
+    local cmd = get_cmd()
     return vim.lsp.rpc.start(cmd, dispatchers)
   end,
   init_options = {
