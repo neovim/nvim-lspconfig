@@ -892,7 +892,7 @@ Default config:
 - cmd: >lua
   { "biome", "lsp-proxy" }
 - filetypes: >lua
-  { "astro", "css", "graphql", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
+  { "astro", "css", "graphql", "html", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
 - root_dir (use "gF" to view): ../lsp/biome.lua:12
 - `workspace_required` : `true`
 <
