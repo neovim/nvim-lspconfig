@@ -26,8 +26,8 @@ return {
       desc = 'ZkIndex',
     })
 
-    vim.api.nvim_buf_create_user_command(0, 'LspZkList', function()
-      local bufpath = vim.api.nvim_buf_get_name(0)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspZkList', function()
+      local bufpath = vim.api.nvim_buf_get_name(bufnr)
       local root = find_zk_root(bufpath)
 
       client:exec_cmd({

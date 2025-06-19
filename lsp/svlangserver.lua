@@ -34,11 +34,11 @@ return {
       includeIndexing = { '*.{v,vh,sv,svh}', '**/*.{v,vh,sv,svh}' },
     },
   },
-  on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'LspSvlangserverBuildIndex', build_index, {
+  on_attach = function(_, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspSvlangserverBuildIndex', build_index, {
       desc = 'Instructs language server to rerun indexing',
     })
-    vim.api.nvim_buf_create_user_command(0, 'LspSvlangserverReportHierarchy', report_hierarchy, {
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspSvlangserverReportHierarchy', report_hierarchy, {
       desc = 'Generates hierarchy for the given module',
     })
   end,

@@ -93,7 +93,7 @@ return {
     ['textDocument/references'] = denols_handler,
   },
   on_attach = function(client, bufnr)
-    vim.api.nvim_buf_create_user_command(0, 'LspDenolsCache', function()
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspDenolsCache', function()
       client:exec_cmd({
         command = 'deno.cache',
         arguments = { {}, vim.uri_from_bufnr(bufnr) },

@@ -69,7 +69,7 @@ return {
       'tinymist.getDocumentMetrics',
     } do
       local cmd_func, cmd_name, cmd_desc = create_tinymist_command(command, client, bufnr)
-      vim.api.nvim_buf_create_user_command(0, cmd_name, cmd_func, { nargs = 0, desc = cmd_desc })
+      vim.api.nvim_buf_create_user_command(bufnr, cmd_name, cmd_func, { nargs = 0, desc = cmd_desc })
     end
   end,
 }

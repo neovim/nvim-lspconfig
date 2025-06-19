@@ -55,12 +55,12 @@ return {
     match_long_input = true,
     max_suggest = 15,
   },
-  on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'LspDsPinyinCompletionOff', function()
-      ds_pinyin_lsp_off(0)
+  on_attach = function(_, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspDsPinyinCompletionOff', function()
+      ds_pinyin_lsp_off(bufnr)
     end, { desc = 'Turn off the ds-pinyin-lsp completion' })
-    vim.api.nvim_buf_create_user_command(0, 'LspDsPinyinCompletionOn', function()
-      ds_pinyin_lsp_on(0)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspDsPinyinCompletionOn', function()
+      ds_pinyin_lsp_on(bufnr)
     end, { desc = 'Turn on the ds-pinyin-lsp completion' })
   end,
 }
