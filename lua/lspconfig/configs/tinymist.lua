@@ -50,7 +50,7 @@ return {
       return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
     single_file_support = true,
-    on_attach = function(_)
+    on_attach = function(_, bufnr)
       for _, command in ipairs {
         'tinymist.exportSvg',
         'tinymist.exportPng',
@@ -66,7 +66,7 @@ return {
         'tinymist.getDocumentMetrics',
       } do
         local cmd_func, cmd_name, cmd_desc = create_tinymist_command(command)
-        vim.api.nvim_create_user_command(cmd_name, cmd_func, { nargs = 0, desc = cmd_desc })
+        vim.api.nvim_buf_create_user_command(bufnr, cmd_name, cmd_func, { nargs = 0, desc = cmd_desc })
       end
     end,
   },
