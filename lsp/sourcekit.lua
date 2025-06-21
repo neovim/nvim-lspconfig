@@ -4,19 +4,22 @@
 ---
 --- Language server for Swift and C/C++/Objective-C.
 
-local util = require 'lspconfig.util'
-
 return {
   cmd = { 'sourcekit-lsp' },
   filetypes = { 'swift', 'objc', 'objcpp', 'c', 'cpp' },
   root_dir = function(bufnr, on_dir)
-    local filename = vim.api.nvim_buf_get_name(bufnr)
     on_dir(
-      util.root_pattern 'buildServer.json'(filename)
-        or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
-        -- better to keep it at the end, because some modularized apps contain multiple Package.swift files
-        or util.root_pattern('compile_commands.json', 'Package.swift')(filename)
-        or vim.fs.dirname(vim.fs.find('.git', { path = filename, upward = true })[1])
+      vim.fs.root(bufnr, 'buildServer.json')
+        or vim.fs.root(bufnr, function(name, _)
+          local patterns = { '*.xcodeproj', '*.xcworkspace' }
+          for _, pattern in ipairs(patterns) do
+            if vim.glob.to_lpeg(pattern):match(name) ~= nil then
+              return true
+            end
+          end
+          return false
+        end) -- better to keep it at the end, because some modularized apps contain multiple Package.swift files
+        or vim.fs.root(bufnr, { 'compile_commands.json', 'Package.swift', '.git' })
     )
   end,
   get_language_id = function(_, ftype)

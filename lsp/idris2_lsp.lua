@@ -29,13 +29,12 @@
 --- latest commit on the `master` branch, and set a reminder to check the Idris2-Lsp
 --- repo for the release of a compatible versioned branch.
 
-local util = require 'lspconfig.util'
-
 return {
   cmd = { 'idris2-lsp' },
   filetypes = { 'idris2' },
   root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern '*.ipkg'(fname))
+    on_dir(vim.fs.root(bufnr, function(name, _)
+      return vim.glob.to_lpeg('*.ipkg'):match(name) ~= nil
+    end))
   end,
 }

@@ -68,13 +68,12 @@
 --- Note that an upstream bug makes keywords in some cases become undefined by the language server.
 --- Ref: https://github.com/arduino/arduino-ide/issues/159
 
-local util = require 'lspconfig.util'
-
 return {
   filetypes = { 'arduino' },
   root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern('*.ino')(fname))
+    on_dir(vim.fs.root(bufnr, function(name, _)
+      return vim.glob.to_lpeg('*.ino'):match(name) ~= nil
+    end))
   end,
   cmd = {
     'arduino-language-server',

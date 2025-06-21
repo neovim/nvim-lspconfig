@@ -10,13 +10,18 @@
 ---
 --- Note that you must also have [the graphql package](https://github.com/graphql/graphql-js) installed within your project and create a [GraphQL config file](https://the-guild.dev/graphql/config/docs).
 
-local util = require 'lspconfig.util'
-
 return {
   cmd = { 'graphql-lsp', 'server', '-m', 'stream' },
   filetypes = { 'graphql', 'typescriptreact', 'javascriptreact' },
   root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern('.graphqlrc*', '.graphql.config.*', 'graphql.config.*')(fname))
+    on_dir(vim.fs.root(bufnr, function(name, _)
+      local patterns = { '.graphqlrc*', '.graphql.config.*', 'graphql.config.*' }
+      for _, pattern in ipairs(patterns) do
+        if vim.glob.to_lpeg(pattern):match(name) ~= nil then
+          return true
+        end
+      end
+      return false
+    end))
   end,
 }
