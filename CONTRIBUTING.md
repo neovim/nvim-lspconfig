@@ -49,10 +49,11 @@ The minimal config properties are:
 
 ### Commands
 
-LSP servers may provide custom `workspace/executeCommand` commands. Because LSP does not provide any way for clients to programmatically discover/list these commands, configs may define Nvim commands which invoke the `workspace/executeCommand` commands. To keep things maintainable and discoverable, configs must follow these guidelines:
+LSP servers may provide custom `workspace/executeCommand` commands. Because LSP does not provide any way for clients to programmatically discover/list these commands, configs may define user commands in Nvim which invoke the `workspace/executeCommand` commands. To keep things maintainable and discoverable, configs must follow these guidelines:
 
-- Commands must be buffer-local.
-- Commands must be prefixed with `:Lsp`. This is a crude way to improve "discoverability".
+- The server-specific user commands must be buffer-local and must be created in the `on_attach` handler.
+  - Be sure to use the `bufnr` passed as the 2nd argument to `on_attach` to refer to the buffer that the server has been attached to, as it may be different from the current buffer!
+- The names of these commands must be prefixed with `:Lsp`. This is a crude way to improve "discoverability".
 - Do NOT create commands that merely alias existing *code-actions* or *code-lenses*, which are *already* auto-discoverable via the ["gra" keymap](https://neovim.io/doc/user/lsp.html#gra) (or `vim.lsp.buf.code_action()`)
 - Use `client:exec_cmd()` (instead of `request(..., 'workspace/executeCommand')`)
 
