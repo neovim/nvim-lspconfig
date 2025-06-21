@@ -7738,10 +7738,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_markers` :
-  ```lua
-  { ".sln", ".csproj", "omnisharp.json", "function.json" }
-  ```
+- `root_dir`: [../lsp/omnisharp.lua:19](../lsp/omnisharp.lua#L19)
 - `settings` :
   ```lua
   {

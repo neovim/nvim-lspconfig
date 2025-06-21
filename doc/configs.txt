@@ -5636,8 +5636,7 @@ Default config:
   { "cs", "vb" }
 - init_options: >lua
   {}
-- root_markers: >lua
-  { ".sln", ".csproj", "omnisharp.json", "function.json" }
+- root_dir (use "gF" to view): ../lsp/omnisharp.lua:19
 - settings: >lua
   {
     FormattingOptions = {
