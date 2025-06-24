@@ -45,7 +45,12 @@ return {
     cmd = { 'pyright-langserver', '--stdio' },
     filetypes = { 'python' },
     root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname)
+      local home = vim.loop.os_homedir()
+      local root = util.root_pattern(unpack(root_files))(fname)
+      if root == nil or (root == home and vim.fn.fnamemodify(fname, ':h') ~= home) then
+        root = vim.fn.fnamemodify(fname, ':h')
+      end
+      return root
     end,
     single_file_support = true,
     settings = {
