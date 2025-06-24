@@ -131,6 +131,7 @@ Nvim by running `:help lspconfig-all`.
 - [harper_ls](#harper_ls)
 - [hdl_checker](#hdl_checker)
 - [helm_ls](#helm_ls)
+- [herb_ls](#herb_ls)
 - [hhvm](#hhvm)
 - [hie](#hie)
 - [hlasm](#hlasm)
@@ -5054,6 +5055,50 @@ Default config:
 - `root_markers` :
   ```lua
   { "Chart.yaml" }
+  ```
+
+---
+
+## herb_ls
+
+https://www.npmjs.com/package/@herb-tools/language-server
+https://github.com/marcoroth/herb
+
+HTML+ERB (HTML + Embedded Ruby)
+Powerful and seamless HTML-aware ERB parsing and tooling.
+
+Herb is designed from the ground up to deeply understand `.html.erb` files,
+preserving both HTML and embedded Ruby structure without losing any details.
+
+`herb-language-server` can be installed via `npm`:
+
+```sh
+npm install -g @herb-tools/language-server
+```
+
+or via `yarn`:
+
+```sh
+yarn global add @herb-tools/language-server
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('herb_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "herb-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "html", "ruby", "eruby" }
+  ```
+- `root_markers` :
+  ```lua
+  { "Gemfile", ".git" }
   ```
 
 ---
