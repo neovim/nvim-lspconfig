@@ -8229,7 +8229,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { "composer.json", ".git", ".phpactor.json", ".phpactor.yml" }
+  { ".git", "composer.json", ".phpactor.json", ".phpactor.yml" }
   ```
 - `workspace_required` : `true`
 
