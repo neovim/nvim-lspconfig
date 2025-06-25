@@ -35,7 +35,20 @@ local util = require 'lspconfig.util'
 local lsp = vim.lsp
 
 return {
-  cmd = { 'vscode-eslint-language-server', '--stdio' },
+  cmd = function(dispatchers)
+    local eslint_cmd = { 'vscode-eslint-language-server', '--stdio' }
+    -- No bufnr or root_dir here. Always use cwd() for now.
+    local root_dir = vim.uv.cwd()
+
+    -- Support Yarn2 (PnP) projects
+    local pnp_cjs = root_dir .. '/.pnp.cjs'
+    local pnp_js = root_dir .. '/.pnp.js'
+    if vim.uv.fs_stat(pnp_cjs) or vim.uv.fs_stat(pnp_js) then
+      eslint_cmd = { 'yarn', 'exec', unpack(eslint_cmd) }
+    end
+
+    return vim.lsp.rpc.start(eslint_cmd, dispatchers)
+  end,
   filetypes = {
     'javascript',
     'javascriptreact',
@@ -146,14 +159,6 @@ return {
           config.settings.experimental.useFlatConfig = true
           break
         end
-      end
-
-      -- Support Yarn2 (PnP) projects
-      local pnp_cjs = root_dir .. '/.pnp.cjs'
-      local pnp_js = root_dir .. '/.pnp.js'
-      if vim.uv.fs_stat(pnp_cjs) or vim.uv.fs_stat(pnp_js) then
-        local cmd = config.cmd
-        config.cmd = vim.list_extend({ 'yarn', 'exec' }, cmd)
       end
     end
   end,
