@@ -87,9 +87,7 @@ Extra settings can be specified for each LSP server:
   ```lua
   vim.lsp.config('rust_analyzer', {
     -- Server-specific settings. See `:help lsp-quickstart`
-    settings = {
-      ['rust-analyzer'] = {},
-    },
+    cmd = { … },
   })
   ```
 - Nvim 0.10 (legacy, **not supported**)
