@@ -3937,7 +3937,7 @@ Default config:
 - filetypes: >lua
   { "php" }
 - root_markers: >lua
-  { "composer.json", ".git" }
+  { ".git", "composer.json" }
 <
 
 ------------------------------------------------------------------------------

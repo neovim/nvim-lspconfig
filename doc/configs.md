@@ -5513,7 +5513,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { "composer.json", ".git" }
+  { ".git", "composer.json" }
   ```
 
 ---
