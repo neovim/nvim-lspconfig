@@ -2585,7 +2585,7 @@ Default config:
 - cmd: >lua
   { "vscode-eslint-language-server", "--stdio" }
 - filetypes: >lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte", "astro" }
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte", "astro", "htmlangular" }
 - handlers: >lua
   {
     ["eslint/confirmESLintExecution"] = <function 1>,
