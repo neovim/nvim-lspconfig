@@ -1375,6 +1375,30 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+codebook
+
+https://github.com/blopker/codebook
+
+ An unholy spell checker for code.
+
+`codebook-lsp` can be installed by following the instructions [here](https://github.com/blopker/codebook/blob/main/README.md#installation).
+
+The default `cmd` assumes that the `codebook-lsp` binary can be found in `$PATH`.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('codebook')
+
+
+Default config:
+- cmd: >lua
+  { "codebook-lsp", "serve" }
+- filetypes: >lua
+  { "c", "css", "go", "haskell", "html", "javascript", "javascriptreact", "markdown", "python", "php", "ruby", "rust", "toml", "text", "typescript", "typescriptreact" }
+- root_markers: >lua
+  { ".git", "codebook.toml", ".codebook.toml" }
+<
+
+------------------------------------------------------------------------------
 coffeesense
 
 https://github.com/phil294/coffeesense
