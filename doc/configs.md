@@ -2814,7 +2814,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "debcontrol", "debcopyright", "debchangelog", "make", "yaml" }
+  { "debcontrol", "debcopyright", "debchangelog", "autopkgtest", "make", "yaml" }
   ```
 - `root_markers` :
   ```lua

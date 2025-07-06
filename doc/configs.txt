@@ -1871,7 +1871,7 @@ Default config:
 - cmd: >lua
   { "debputy", "lsp", "server" }
 - filetypes: >lua
-  { "debcontrol", "debcopyright", "debchangelog", "make", "yaml" }
+  { "debcontrol", "debcopyright", "debchangelog", "autopkgtest", "make", "yaml" }
 - root_markers: >lua
   { "debian" }
 <
