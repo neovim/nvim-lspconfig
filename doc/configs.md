@@ -4790,7 +4790,7 @@ Default config:
   ```lua
   { "go", "gomod", "gowork", "gotmpl" }
   ```
-- `root_dir`: [../lsp/gopls.lua:21](../lsp/gopls.lua#L21)
+- `root_dir`: [../lsp/gopls.lua:88](../lsp/gopls.lua#L88)
 
 ---
 
@@ -12086,10 +12086,19 @@ Snippet to enable the language server:
 vim.lsp.enable('ts_ls')
 ```
 
+Commands:
+- editor.action.showReferences
+
 Default config:
 - `cmd` :
   ```lua
   { "typescript-language-server", "--stdio" }
+  ```
+- `commands` :
+  ```lua
+  {
+    ["editor.action.showReferences"] = <function 1>
+  }
   ```
 - `filetypes` :
   ```lua
