@@ -12044,43 +12044,6 @@ Use the `:LspTypescriptSourceAction` command to see "whole file" ("source") code
 - organize imports
 - remove unused code
 
-### Vue support
-
-As of 2.0.0, the Vue language server no longer supports TypeScript itself. Instead, a plugin
-adds Vue support to this language server.
-
-*IMPORTANT*: It is crucial to ensure that `@vue/typescript-plugin` and `@vue/language-server `are of identical versions.
-
-```lua
-vim.lsp.config('ts_ls', {
-  init_options = {
-    plugins = {
-      {
-        name = "@vue/typescript-plugin",
-        location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-        languages = {"javascript", "typescript", "vue"},
-      },
-    },
-  },
-  filetypes = {
-    "javascript",
-    "typescript",
-    "vue",
-  },
-})
-
--- You must make sure the Vue language server is setup
--- e.g. vim.lsp.config('vue_ls')
--- See vue_ls's section for more information
-```
-
-`location` MUST be defined. If the plugin is installed in `node_modules`,
-`location` can have any value.
-
-`languages` must include `vue` even if it is listed in `filetypes`.
-
-`filetypes` is extended here to include Vue SFC.
-
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('ts_ls')
@@ -12116,7 +12079,7 @@ Default config:
     hostInfo = "neovim"
   }
   ```
-- `on_attach`: [../lsp/ts_ls.lua:73](../lsp/ts_ls.lua#L73)
+- `on_attach`: [../lsp/ts_ls.lua:36](../lsp/ts_ls.lua#L36)
 - `root_markers` :
   ```lua
   { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
@@ -13129,7 +13092,6 @@ vim.lsp.enable('volar')
 ```
 
 Default config:
-- `before_init`: [../lsp/volar.lua:8](../lsp/volar.lua#L8)
 - `cmd` :
   ```lua
   { "vue-language-server", "--stdio" }
@@ -13138,18 +13100,11 @@ Default config:
   ```lua
   { "vue" }
   ```
-- `init_options` :
-  ```lua
-  {
-    typescript = {
-      tsdk = ""
-    }
-  }
-  ```
 - `name` :
   ```lua
   "vue_ls"
   ```
+- `on_init`: [../lsp/volar.lua:8](../lsp/volar.lua#L8)
 - `root_markers` :
   ```lua
   { "package.json" }
@@ -13196,6 +13151,52 @@ To configure a TypeScript project, add a
 or [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig) to
 the root of your project.
 
+### Vue support
+
+Since v3.0.0, the Vue language server requires `vtsls` to support TypeScript.
+
+```
+-- If you are using mason.nvim, you can get the ts_plugin_path like this
+-- For Mason v1,
+-- local mason_registry = require('mason-registry')
+-- local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
+-- For Mason v2,
+-- local vue_language_server_path = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server'
+-- or even
+-- local vue_language_server_path = vim.fn.stdpath('data') .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
+local vue_language_server_path = '/path/to/@vue/language-server'
+local vue_plugin = {
+  name = '@vue/typescript-plugin',
+  location = vue_language_server_path,
+  languages = { 'vue' },
+  configNamespace = 'typescript',
+}
+vim.lsp.config('vtsls', {
+  settings = {
+    vtsls = {
+      tsserver = {
+        globalPlugins = {
+          vue_plugin,
+        },
+      },
+    },
+  },
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+})
+```
+
+- `location` MUST be defined. If the plugin is installed in `node_modules`, `location` can have any value.
+- `languages` must include vue even if it is listed in filetypes.
+- `filetypes` is extended here to include Vue SFC.
+
+You must make sure the Vue language server is setup. For example,
+
+```
+vim.lsp.enable('vue_ls')
+```
+
+See `vue_ls` section and https://github.com/vuejs/language-tools/wiki/Neovim for more information.
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('vtsls')
@@ -13231,64 +13232,11 @@ npm install -g @vue/language-server
 The language server only supports Vue 3 projects by default.
 For Vue 2 projects, [additional configuration](https://github.com/vuejs/language-tools/blob/master/extensions/vscode/README.md?plain=1#L19) are required.
 
-**Hybrid Mode (by default)**
+The Vue language server works in "hybrid mode" that exclusively manages the CSS/HTML sections.
+You need the `vtsls` server with the `@vue/typescript-plugin` plugin to support TypeScript in `.vue` files.
+See `vtsls` section and https://github.com/vuejs/language-tools/wiki/Neovim for more information.
 
-In this mode, the Vue Language Server exclusively manages the CSS/HTML sections.
-You need the `ts_ls` server with the `@vue/typescript-plugin` plugin to support TypeScript in `.vue` files.
-See `ts_ls` section for more information
-
-**No Hybrid Mode**
-
-The Vue language server will run embedded `ts_ls` therefore there is no need to run it separately.
-```lua
-vim.lsp.config('vue_ls', {
-  -- add filetypes for typescript, javascript and vue
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-  init_options = {
-    vue = {
-      -- disable hybrid mode
-      hybridMode = false,
-    },
-  },
-})
--- you must remove "ts_ls" config
--- vim.lsp.config['ts_ls'] = {}
-```
-
-**Overriding the default TypeScript Server used by the Vue language server**
-
-The default config looks for TypeScript in the local `node_modules`. This can lead to issues
-e.g. when working on a [monorepo](https://monorepo.tools/). The alternatives are:
-
-- use a global TypeScript Server installation
-```lua
-vim.lsp.config('vue_ls', {
-  init_options = {
-    typescript = {
-      -- replace with your global TypeScript library path
-      tsdk = '/path/to/node_modules/typescript/lib'
-    }
-  }
-})
-```
-
-- use a local server and fall back to a global TypeScript Server installation
-```lua
-vim.lsp.config('vue_ls', {
-  init_options = {
-    typescript = {
-      -- replace with your global TypeScript library path
-      tsdk = '/path/to/node_modules/typescript/lib'
-    }
-  },
-  before_init = function(params, config)
-    local lib_path = vim.fs.find('node_modules/typescript/lib', { path = new_root_dir, upward = true })[1]
-    if lib_path then
-      config.init_options.typescript.tsdk = lib_path
-    end
-  end
-})
-```
+NOTE: Since v3.0.0, the Vue Language Server [no longer supports takeover mode](https://github.com/vuejs/language-tools/pull/5248).
 
 Snippet to enable the language server:
 ```lua
@@ -13296,7 +13244,6 @@ vim.lsp.enable('vue_ls')
 ```
 
 Default config:
-- `before_init`: [../lsp/vue_ls.lua:76](../lsp/vue_ls.lua#L76)
 - `cmd` :
   ```lua
   { "vue-language-server", "--stdio" }
@@ -13305,14 +13252,7 @@ Default config:
   ```lua
   { "vue" }
   ```
-- `init_options` :
-  ```lua
-  {
-    typescript = {
-      tsdk = ""
-    }
-  }
-  ```
+- `on_init`: [../lsp/vue_ls.lua:21](../lsp/vue_ls.lua#L21)
 - `root_markers` :
   ```lua
   { "package.json" }
