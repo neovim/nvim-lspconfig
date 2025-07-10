@@ -12,80 +12,39 @@
 --- The language server only supports Vue 3 projects by default.
 --- For Vue 2 projects, [additional configuration](https://github.com/vuejs/language-tools/blob/master/extensions/vscode/README.md?plain=1#L19) are required.
 ---
---- **Hybrid Mode (by default)**
+--- The Vue language server works in "hybrid mode" that exclusively manages the CSS/HTML sections.
+--- You need the `vtsls` server with the `@vue/typescript-plugin` plugin to support TypeScript in `.vue` files.
+--- See `vtsls` section and https://github.com/vuejs/language-tools/wiki/Neovim for more information.
 ---
---- In this mode, the Vue Language Server exclusively manages the CSS/HTML sections.
---- You need the `ts_ls` server with the `@vue/typescript-plugin` plugin to support TypeScript in `.vue` files.
---- See `ts_ls` section for more information
----
---- **No Hybrid Mode**
----
---- The Vue language server will run embedded `ts_ls` therefore there is no need to run it separately.
---- ```lua
---- vim.lsp.config('vue_ls', {
----   -- add filetypes for typescript, javascript and vue
----   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
----   init_options = {
----     vue = {
----       -- disable hybrid mode
----       hybridMode = false,
----     },
----   },
---- })
---- -- you must remove "ts_ls" config
---- -- vim.lsp.config['ts_ls'] = {}
---- ```
----
---- **Overriding the default TypeScript Server used by the Vue language server**
----
---- The default config looks for TypeScript in the local `node_modules`. This can lead to issues
---- e.g. when working on a [monorepo](https://monorepo.tools/). The alternatives are:
----
---- - use a global TypeScript Server installation
---- ```lua
---- vim.lsp.config('vue_ls', {
----   init_options = {
----     typescript = {
----       -- replace with your global TypeScript library path
----       tsdk = '/path/to/node_modules/typescript/lib'
----     }
----   }
---- })
---- ```
----
---- - use a local server and fall back to a global TypeScript Server installation
---- ```lua
---- vim.lsp.config('vue_ls', {
----   init_options = {
----     typescript = {
----       -- replace with your global TypeScript library path
----       tsdk = '/path/to/node_modules/typescript/lib'
----     }
----   },
----   before_init = function(params, config)
----     local lib_path = vim.fs.find('node_modules/typescript/lib', { path = new_root_dir, upward = true })[1]
----     if lib_path then
----       config.init_options.typescript.tsdk = lib_path
----     end
----   end
---- })
---- ```
-
-local util = require 'lspconfig.util'
+--- NOTE: Since v3.0.0, the Vue Language Server [no longer supports takeover mode](https://github.com/vuejs/language-tools/pull/5248).
 
 return {
   cmd = { 'vue-language-server', '--stdio' },
   filetypes = { 'vue' },
   root_markers = { 'package.json' },
-  -- https://github.com/vuejs/language-tools/blob/v2/packages/language-server/lib/types.ts
-  init_options = {
-    typescript = {
-      tsdk = '',
-    },
-  },
-  before_init = function(_, config)
-    if config.init_options and config.init_options.typescript and config.init_options.typescript.tsdk == '' then
-      config.init_options.typescript.tsdk = util.get_typescript_server_path(config.root_dir)
+  on_init = function(client)
+    client.handlers['tsserver/request'] = function(_, result, context)
+      local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })
+      if #clients == 0 then
+        vim.notify('Could not find `vtsls` lsp client, required by `vue_ls`.', vim.log.levels.ERROR)
+        return
+      end
+      local ts_client = clients[1]
+
+      local param = unpack(result)
+      local id, command, payload = unpack(param)
+      ts_client:exec_cmd({
+        title = 'vue_request_forward', -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
+        command = 'typescript.tsserverRequest',
+        arguments = {
+          command,
+          payload,
+        },
+      }, { bufnr = context.bufnr }, function(_, r)
+        local response_data = { { id, r.body } }
+        ---@diagnostic disable-next-line: param-type-mismatch
+        client:notify('tsserver/response', response_data)
+      end)
     end
   end,
 }
