@@ -149,10 +149,7 @@ local function make_lsp_section(config_sections, config_name, config_file, is_ma
         return
       end
       return ('\nCommands:\n%s\n'):format(make_section(0, '\n', {
-        map_sorted(config.commands, function(name, def)
-          if def.description then
-            return string.format('- %s: %s', name, def.description)
-          end
+        map_sorted(config.commands, function(name, _)
           return string.format('- %s', name)
         end),
       }))
