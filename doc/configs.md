@@ -221,7 +221,6 @@ Nvim by running `:help lspconfig-all`.
 - [phan](#phan)
 - [phpactor](#phpactor)
 - [pico8_ls](#pico8_ls)
-- [pkgbuild_language_server](#pkgbuild_language_server)
 - [please](#please)
 - [pli](#pli)
 - [poryscript_pls](#poryscript_pls)
@@ -312,6 +311,7 @@ Nvim by running `:help lspconfig-all`.
 - [tblgen_lsp_server](#tblgen_lsp_server)
 - [teal_ls](#teal_ls)
 - [templ](#templ)
+- [termux_language_server](#termux_language_server)
 - [terraform_lsp](#terraform_lsp)
 - [terraformls](#terraformls)
 - [texlab](#texlab)
@@ -8295,33 +8295,6 @@ Default config:
 
 ---
 
-## pkgbuild_language_server
-
-https://github.com/Freed-Wu/pkgbuild-language-server
-
-Language server for ArchLinux/Windows Msys2's PKGBUILD.
-
-Snippet to enable the language server:
-```lua
-vim.lsp.enable('pkgbuild_language_server')
-```
-
-Default config:
-- `cmd` :
-  ```lua
-  { "pkgbuild-language-server" }
-  ```
-- `filetypes` :
-  ```lua
-  { "PKGBUILD" }
-  ```
-- `root_markers` :
-  ```lua
-  { ".git" }
-  ```
-
----
-
 ## please
 
 https://github.com/thought-machine/please
@@ -11570,6 +11543,33 @@ Default config:
 - `root_markers` :
   ```lua
   { "go.work", "go.mod", ".git" }
+  ```
+
+---
+
+## termux_language_server
+
+https://github.com/termux/termux-language-server
+
+Language server for various bash scripts such as Arch PKGBUILD, Gentoo ebuild, Termux build.sh, etc.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('termux_language_server')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "termux-language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "PKGBUILD" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".git" }
   ```
 
 ---
