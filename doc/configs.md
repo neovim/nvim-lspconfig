@@ -47,7 +47,7 @@ Nvim by running `:help lspconfig-all`.
 - [cds_lsp](#cds_lsp)
 - [circom-lsp](#circom-lsp)
 - [clangd](#clangd)
-- [clarity_lsp](#clarity_lsp)
+- [clarinet](#clarinet)
 - [clojure_lsp](#clojure_lsp)
 - [cmake](#cmake)
 - [cobol_ls](#cobol_ls)
@@ -2045,21 +2045,21 @@ Default config:
 
 ---
 
-## clarity_lsp
+## clarinet
 
-`clarity-lsp` is a language server for the Clarity language. Clarity is a decidable smart contract language that optimizes for predictability and security. Smart contracts allow developers to encode essential business logic on a blockchain.
+https://github.com/hirosystems/clarinet
 
- To learn how to configure the clarity language server, see the [clarity-lsp documentation](https://github.com/hirosystems/clarity-lsp).
+Clarinet is the fastest way to build, test, and deploy smart contracts on the Stacks blockchain.
 
 Snippet to enable the language server:
 ```lua
-vim.lsp.enable('clarity_lsp')
+vim.lsp.enable('clarinet')
 ```
 
 Default config:
 - `cmd` :
   ```lua
-  { "clarity-lsp" }
+  { "clarinet", "lsp" }
   ```
 - `filetypes` :
   ```lua
