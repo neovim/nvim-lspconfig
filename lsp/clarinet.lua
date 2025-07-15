@@ -5,5 +5,5 @@
 return {
   cmd = { 'clarinet', 'lsp' },
   filetypes = { 'clar', 'clarity' },
-  root_markers = { '.git' },
+  root_markers = { 'Clarinet.toml' },
 }
