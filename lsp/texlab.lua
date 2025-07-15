@@ -192,29 +192,29 @@ return {
       formatterLineLength = 80,
     },
   },
-  on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'LspTexlabBuild', client_with_fn(buf_build), {
+  on_attach = function(_, buf)
+    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabBuild', client_with_fn(buf_build), {
       desc = 'Build the current buffer',
     })
-    vim.api.nvim_buf_create_user_command(0, 'LspTexlabForward', client_with_fn(buf_search), {
+    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabForward', client_with_fn(buf_search), {
       desc = 'Forward search from current position',
     })
-    vim.api.nvim_buf_create_user_command(0, 'LspTexlabCancelBuild', client_with_fn(buf_cancel_build), {
+    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabCancelBuild', client_with_fn(buf_cancel_build), {
       desc = 'Cancel the current build',
     })
-    vim.api.nvim_buf_create_user_command(0, 'LspTexlabDependencyGraph', client_with_fn(dependency_graph), {
+    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabDependencyGraph', client_with_fn(dependency_graph), {
       desc = 'Show the dependency graph',
     })
-    vim.api.nvim_buf_create_user_command(0, 'LspTexlabCleanArtifacts', client_with_fn(command_factory('Artifacts')), {
+    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabCleanArtifacts', client_with_fn(command_factory('Artifacts')), {
       desc = 'Clean the artifacts',
     })
-    vim.api.nvim_buf_create_user_command(0, 'LspTexlabCleanAuxiliary', client_with_fn(command_factory('Auxiliary')), {
+    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabCleanAuxiliary', client_with_fn(command_factory('Auxiliary')), {
       desc = 'Clean the auxiliary files',
     })
-    vim.api.nvim_buf_create_user_command(0, 'LspTexlabFindEnvironments', client_with_fn(buf_find_envs), {
+    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabFindEnvironments', client_with_fn(buf_find_envs), {
       desc = 'Find the environments at current position',
     })
-    vim.api.nvim_buf_create_user_command(0, 'LspTexlabChangeEnvironment', client_with_fn(buf_change_env), {
+    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabChangeEnvironment', client_with_fn(buf_change_env), {
       desc = 'Change the environment at current position',
     })
   end,

@@ -50,7 +50,7 @@ return {
       desc = 'Organize Imports',
     })
 
-    vim.api.nvim_buf_create_user_command(0, 'LspPyrightSetPythonPath', set_python_path, {
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspPyrightSetPythonPath', set_python_path, {
       desc = 'Reconfigure basedpyright with the provided python path',
       nargs = 1,
       complete = 'file',

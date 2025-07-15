@@ -32,43 +32,6 @@
 --- Use the `:LspTypescriptSourceAction` command to see "whole file" ("source") code-actions such as:
 --- - organize imports
 --- - remove unused code
----
---- ### Vue support
----
---- As of 2.0.0, the Vue language server no longer supports TypeScript itself. Instead, a plugin
---- adds Vue support to this language server.
----
---- *IMPORTANT*: It is crucial to ensure that `@vue/typescript-plugin` and `@vue/language-server `are of identical versions.
----
---- ```lua
---- vim.lsp.config('ts_ls', {
----   init_options = {
----     plugins = {
----       {
----         name = "@vue/typescript-plugin",
----         location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
----         languages = {"javascript", "typescript", "vue"},
----       },
----     },
----   },
----   filetypes = {
----     "javascript",
----     "typescript",
----     "vue",
----   },
---- })
----
---- -- You must make sure the Vue language server is setup
---- -- e.g. vim.lsp.config('vue_ls')
---- -- See vue_ls's section for more information
---- ```
----
---- `location` MUST be defined. If the plugin is installed in `node_modules`,
---- `location` can have any value.
----
---- `languages` must include `vue` even if it is listed in `filetypes`.
----
---- `filetypes` is extended here to include Vue SFC.
 
 return {
   init_options = { hostInfo = 'neovim' },
@@ -97,10 +60,36 @@ return {
       return vim.NIL
     end,
   },
-  on_attach = function(client)
+  commands = {
+    ['editor.action.showReferences'] = function(command, ctx)
+      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+      local file_uri, position, references = unpack(command.arguments)
+
+      local quickfix_items = vim.lsp.util.locations_to_items(references, client.offset_encoding)
+      vim.fn.setqflist({}, ' ', {
+        title = command.title,
+        items = quickfix_items,
+        context = {
+          command = command,
+          bufnr = ctx.bufnr,
+        },
+      })
+
+      vim.lsp.util.show_document({
+        uri = file_uri,
+        range = {
+          start = position,
+          ['end'] = position,
+        },
+      }, client.offset_encoding)
+
+      vim.cmd('botright copen')
+    end,
+  },
+  on_attach = function(client, bufnr)
     -- ts_ls provides `source.*` code actions that apply to the whole file. These only appear in
     -- `vim.lsp.buf.code_action()` if specified in `context.only`.
-    vim.api.nvim_buf_create_user_command(0, 'LspTypescriptSourceAction', function()
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspTypescriptSourceAction', function()
       local source_actions = vim.tbl_filter(function(action)
         return vim.startswith(action, 'source.')
       end, client.server_capabilities.codeActionProvider.codeActionKinds)

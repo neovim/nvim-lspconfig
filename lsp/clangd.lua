@@ -57,6 +57,9 @@ local function symbol_info()
   end, bufnr)
 end
 
+---@class ClangdInitializeResult: lsp.InitializeResult
+---@field offsetEncoding? string
+
 return {
   cmd = { 'clangd' },
   filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
@@ -77,12 +80,19 @@ return {
     },
     offsetEncoding = { 'utf-8', 'utf-16' },
   },
-  on_attach = function()
-    vim.api.nvim_buf_create_user_command(0, 'LspClangdSwitchSourceHeader', function()
-      switch_source_header(0)
+  ---@param client vim.lsp.Client
+  ---@param init_result ClangdInitializeResult
+  on_init = function(client, init_result)
+    if init_result.offsetEncoding then
+      client.offset_encoding = init_result.offsetEncoding
+    end
+  end,
+  on_attach = function(_, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspClangdSwitchSourceHeader', function()
+      switch_source_header(bufnr)
     end, { desc = 'Switch between source/header' })
 
-    vim.api.nvim_buf_create_user_command(0, 'LspClangdShowSymbolInfo', function()
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspClangdShowSymbolInfo', function()
       symbol_info()
     end, { desc = 'Show symbol info' })
   end,

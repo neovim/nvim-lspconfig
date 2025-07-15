@@ -46,6 +46,7 @@ return {
     'vue',
     'svelte',
     'astro',
+    'htmlangular',
   },
   workspace_required = true,
   on_attach = function(client, bufnr)
