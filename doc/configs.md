@@ -2067,7 +2067,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { ".git" }
+  { "Clarinet.toml" }
   ```
 
 ---

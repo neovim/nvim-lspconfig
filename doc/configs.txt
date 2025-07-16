@@ -1309,7 +1309,7 @@ Default config:
 - filetypes: >lua
   { "clar", "clarity" }
 - root_markers: >lua
-  { ".git" }
+  { "Clarinet.toml" }
 <
 
 ------------------------------------------------------------------------------
