@@ -9284,6 +9284,19 @@ Default config:
   {}
   ```
 
+Detect file changes:
+While using @rescript/language-server >= 1.63.0 you have to detect file changes by registering the `didChangeWatchedFiles` hook.
+
+```
+capabilities = {
+    workspace = {
+        didChangeWatchedFiles = {
+            dynamicRegistration = true,
+        },
+    },
+}
+``` 
+
 ---
 
 ## rls
