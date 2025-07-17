@@ -26,8 +26,10 @@ configurations for various LSP servers. View [all configs](doc/configs.md) or `:
   git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
   ```
 * Or if you have Nvim 0.12 (in development), you can use the builtin plugin manager:
-  ```
-  vim.pack.add{ src = 'https://github.com/neovim/nvim-lspconfig' }
+  ```lua
+  vim.pack.add{
+    { src = 'https://github.com/neovim/nvim-lspconfig' },
+  }
   ```
 * Or use a 3rd-party plugin manager (consult the documentation for your plugin manager).
 
@@ -68,8 +70,8 @@ To customize, see:
 
 Extra settings can be specified for each LSP server:
 
-- Nvim 0.11+: You can extend a config as follows (see [vim.lsp.config](#vimlspconfig).
-  You can also copy any config directly from [`lsp/`](./lsp/) and put it in a local `lsp/` directory in your 'runtimepath'.
+- Nvim 0.11+: You can extend a config as follows (see [vim.lsp.config](#vimlspconfig);
+  you can also copy any config directly from [`lsp/`](./lsp/) and put it in a local `lsp/` directory in your 'runtimepath').
   ```lua
   vim.lsp.config('rust_analyzer', {
     -- Server-specific settings. See `:help lsp-quickstart`
