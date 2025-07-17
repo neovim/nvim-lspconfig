@@ -42,6 +42,8 @@ return {
     'typst',
     'php',
     'dart',
+    'clj',
+    'cljs',
   },
   root_markers = { '.git' },
 }
