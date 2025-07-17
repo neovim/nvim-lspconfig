@@ -42,6 +42,7 @@ return {
     'typst',
     'php',
     'dart',
+    'clojure',
   },
   root_markers = { '.git' },
 }
