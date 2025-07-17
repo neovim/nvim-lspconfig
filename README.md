@@ -20,10 +20,14 @@ configurations for various LSP servers. View [all configs](doc/configs.md) or `:
 
 [![LuaRocks](https://img.shields.io/luarocks/v/neovim/nvim-lspconfig?logo=lua&color=purple)](https://luarocks.org/modules/neovim/nvim-lspconfig)
 
-* Requires Nvim 0.10 above. Update Nvim and nvim-lspconfig before reporting an issue.
+* Requires Nvim 0.11+. Support for Nvim 0.10 will be removed. Update Nvim and nvim-lspconfig before reporting an issue.
 * Install nvim-lspconfig using Vim's "packages" feature:
   ```
   git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
+  ```
+* Or if you have Nvim 0.12 (in development), you can use the builtin plugin manager:
+  ```
+  vim.pack.add{ src = 'https://github.com/neovim/nvim-lspconfig' }
   ```
 * Or use a 3rd-party plugin manager (consult the documentation for your plugin manager).
 
@@ -55,16 +59,17 @@ For servers not on your `$PATH` (e.g., `jdtls`, `elixirls`), you must manually s
 ## Configuration
 
 Nvim sets default options and mappings when LSP is active in a buffer:
-* [:help lsp-defaults](https://neovim.io/doc/user/lsp.html#lsp-defaults).
+* [:help lsp-defaults](https://neovim.io/doc/user/lsp.html#lsp-defaults)
 * [:help diagnostic-defaults](https://neovim.io/doc/user/diagnostic.html#diagnostic-defaults)
 
 To customize, see:
 * [:help lsp-attach](https://neovim.io/doc/user/lsp.html#lsp-attach)
-* [`:h lsp-buf`][lsp-buf]
+* [:h lsp-buf](https://neovim.io/doc/user/lsp.html#lsp-buf)
 
 Extra settings can be specified for each LSP server:
 
-- Nvim 0.11+ (see [vim.lsp.config](#vimlspconfig))
+- Nvim 0.11+: You can extend a config as follows (see [vim.lsp.config](#vimlspconfig).
+  You can also copy any config directly from [`lsp/`](./lsp/) and put it in a local `lsp/` directory in your 'runtimepath'.
   ```lua
   vim.lsp.config('rust_analyzer', {
     -- Server-specific settings. See `:help lsp-quickstart`
@@ -83,25 +88,6 @@ Extra settings can be specified for each LSP server:
     },
   }
   ```
-
-## vim.lsp.config
-
-`nvim-lspconfig` configs live in [`lsp/`](./lsp/). Using Nvim 0.11 or newer, you can `enable()` a config: it will auto-activate when a filetype is opened.
-Example:
-
-```lua
-vim.lsp.enable('pyright')
-```
-
-and configured with:
-
-```lua
-vim.lsp.config('pyright', {
-  cmd = { … },
-})
-```
-
-which extends the configuration under [`lsp/`](./lsp/). For further information see [`:help lsp-config`][lsp-config].
 
 ## Troubleshooting
 
