@@ -9239,6 +9239,17 @@ vim.lsp.config('rescriptls', {
 }
 ```
 
+Detect file changes: While using @rescript/language-server >= 1.63.0 you have to detect file changes by registering the didChangeWatchedFiles hook.
+```lua
+capabilities = {
+    workspace = {
+        didChangeWatchedFiles = {
+            dynamicRegistration = true,
+        },
+    },
+}
+```
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('rescriptls')
