@@ -2034,7 +2034,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
+  { "c", "cpp", "objc", "objcpp", "cuda" }
   ```
 - `on_attach`: [../lsp/clangd.lua:63](../lsp/clangd.lua#L63)
 - `on_init`: [../lsp/clangd.lua:63](../lsp/clangd.lua#L63)

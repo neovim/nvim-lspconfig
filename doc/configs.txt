@@ -1285,7 +1285,7 @@ Default config:
 - cmd: >lua
   { "clangd" }
 - filetypes: >lua
-  { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
+  { "c", "cpp", "objc", "objcpp", "cuda" }
 - on_attach (use "gF" to view): ../lsp/clangd.lua:63
 - on_init (use "gF" to view): ../lsp/clangd.lua:63
 - root_markers: >lua
