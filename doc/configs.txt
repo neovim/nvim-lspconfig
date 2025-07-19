@@ -3239,7 +3239,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd (use "gF" to view): ../lsp/glint.lua:37
+- cmd (use "gF" to view): ../lsp/glint.lua:25
 - filetypes: >lua
   { "html.handlebars", "handlebars", "typescript", "typescript.glimmer", "javascript", "javascript.glimmer" }
 - init_options: >lua
