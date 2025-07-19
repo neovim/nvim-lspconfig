@@ -1501,10 +1501,7 @@ vim.lsp.enable('biome')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "biome", "lsp-proxy" }
-  ```
+- `cmd`: [../lsp/biome.lua:12](../lsp/biome.lua#L12)
 - `filetypes` :
   ```lua
   { "astro", "css", "graphql", "html", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
