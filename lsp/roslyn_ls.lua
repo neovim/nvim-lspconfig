@@ -50,8 +50,11 @@ local function roslyn_handlers()
       vim.notify('Roslyn project initialization complete', vim.log.levels.INFO, { title = 'roslyn_ls' })
 
       local buffers = vim.lsp.get_buffers_by_client_id(ctx.client_id)
+      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
       for _, buf in ipairs(buffers) do
-        vim.lsp.util._refresh('textDocument/diagnostic', { bufnr = buf })
+        client:request(vim.lsp.protocol.Methods.textDocument_diagnostic, {
+          textDocument = vim.lsp.util.make_text_document_params(buf),
+        }, nil, buf)
       end
     end,
     ['workspace/_roslyn_projectHasUnresolvedDependencies'] = function()
