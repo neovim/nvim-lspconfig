@@ -7027,7 +7027,7 @@ Default config:
   "utf-8"
 - on_init: >lua
   { <function 1> }
-- root_dir (use "gF" to view): ../lsp/roslyn_ls.lua:92
+- root_dir (use "gF" to view): ../lsp/roslyn_ls.lua:95
 - settings: >lua
   {
     ["csharp|background_analysis"] = {

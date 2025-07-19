@@ -9562,7 +9562,7 @@ Default config:
   ```lua
   { <function 1> }
   ```
-- `root_dir`: [../lsp/roslyn_ls.lua:92](../lsp/roslyn_ls.lua#L92)
+- `root_dir`: [../lsp/roslyn_ls.lua:95](../lsp/roslyn_ls.lua#L95)
 - `settings` :
   ```lua
   {
