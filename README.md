@@ -85,6 +85,39 @@ vim.lsp.config('rust_analyzer', {
 })
 ```
 
+## Create a new config
+
+To create a new config you can either (1) use `vim.lsp.config` or (2) create
+a file `lsp/<config-name>.lua` somewhere on your 'runtimepath'.
+
+### Example: define a new config as code
+
+1. Run `:lua vim.lsp.config('foo', {cmd={'true'}})`
+2. Run `:lua vim.lsp.enable('foo')`
+3. Run `:checkhealth vim.lsp`, the new config is listed under "Enabled Configurations". 😎
+
+### Example: define a new config as a file
+
+1. Create a file `lsp/foo.lua` somewhere on your 'runtimepath'.
+   ```
+   :exe 'edit' stdpath('config') .. '/lsp/foo.lua'
+   ```
+2. Add this code to the file (or copy any of the examples from the [lsp/ directory](./lsp/) in this repo):
+   ```
+   return {
+     cmd = { 'true' },
+   }
+   ```
+3. Save the file (with `++p` to ensure its parent directory is created).
+   ```
+   :write ++p
+   ```
+4. Enable the config.
+   ```
+   :lua vim.lsp.enable('foo')
+   ```
+5. Run `:checkhealth vim.lsp`, the new config is listed under "Enabled Configurations". 🌈
+
 ## Troubleshooting
 
 Start with `:checkhealth vim.lsp` to troubleshoot. The most common reasons a language server does not start or attach are:
