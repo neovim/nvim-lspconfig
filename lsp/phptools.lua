@@ -30,6 +30,6 @@ return {
     on_dir(root and vim.fs.relpath(cwd, root) and cwd)
   end,
   init_options = {
-    ["0"] = '{}', --optional premium license validation from https://www.devsense.com/purchase/validation
+    ['0'] = '{}', --optional premium license validation from https://www.devsense.com/purchase/validation
   },
 }
