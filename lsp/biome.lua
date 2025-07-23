@@ -34,11 +34,13 @@ return {
     'vue',
   },
   workspace_required = true,
-  root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
+  root_dir = function(_, on_dir)
+    -- To support monorepos, biome recommends starting the search for the root from cwd
+    -- https://biomejs.dev/guides/big-projects/#use-multiple-configuration-files
+    local cwd = vim.fn.getcwd()
     local root_files = { 'biome.json', 'biome.jsonc' }
-    root_files = util.insert_package_json(root_files, 'biome', fname)
-    local root_dir = vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
+    root_files = util.insert_package_json(root_files, 'biome', cwd)
+    local root_dir = vim.fs.dirname(vim.fs.find(root_files, { path = cwd, upward = true })[1])
     on_dir(root_dir)
   end,
 }
