@@ -126,6 +126,14 @@ Start with `:checkhealth vim.lsp` to troubleshoot. The most common reasons a lan
 2. Missing filetype plugins. Some languages are not detected by Nvim because they have not yet been added to the filetype detection system. Ensure `:set filetype?` shows the filetype and not an empty value.
 3. Not triggering root detection. Some language servers require a "workspace", which is found by looking for an ancestor directory that contains a "root marker". The most common root marker is `.git/`, but each config defines other "root marker" names. Root markers/directories are listed in `:help lspconfig-all`.
 
+   You can also explicitly set a root instead of relying on automatic detection by enabling `'exrc'` and adding an `.nvim.lua` at the desired root dir with the following code:
+   ```lua
+   vim.lsp.config('<client name>', {
+     root_dir = vim.fn.fnamemodify(debug.getinfo(1, 'S').source:sub(2), ':p:h'),
+   })
+   ```
+   Note that prior to nvim 0.12 `exrc` file is executed only if it's inside of a cwd where you start `nvim`.
+
 ## Bug reports
 
 If you found a bug with LSP functionality, [report it to Neovim core](https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&template=lsp_bug_report.yml).
