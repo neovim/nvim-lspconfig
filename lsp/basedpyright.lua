@@ -43,10 +43,13 @@ return {
   },
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'LspPyrightOrganizeImports', function()
-      client:exec_cmd({
+      local params = {
         command = 'basedpyright.organizeimports',
         arguments = { vim.uri_from_bufnr(bufnr) },
-      })
+      }
+
+      -- cannot use client:exec_cmd() as it will fail due to the LSP command not being advertised by the server
+      client.request('workspace/executeCommand', params, nil, bufnr)
     end, {
       desc = 'Organize Imports',
     })
