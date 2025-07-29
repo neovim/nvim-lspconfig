@@ -41,7 +41,7 @@ return {
           payload,
         },
       }, { bufnr = context.bufnr }, function(_, r)
-        local response_data = { { id, r.body } }
+        local response_data = { { id, r and r.body } }
         ---@diagnostic disable-next-line: param-type-mismatch
         client:notify('tsserver/response', response_data)
       end)
