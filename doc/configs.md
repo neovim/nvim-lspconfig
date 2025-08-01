@@ -77,6 +77,7 @@ Nvim by running `:help lspconfig-all`.
 - [digestif](#digestif)
 - [djlsp](#djlsp)
 - [docker_compose_language_service](#docker_compose_language_service)
+- [docker_language_server](#docker_language_server)
 - [dockerls](#dockerls)
 - [dolmenls](#dolmenls)
 - [dotls](#dotls)
@@ -3038,6 +3039,36 @@ Default config:
 - `root_markers` :
   ```lua
   { "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml" }
+  ```
+
+---
+
+## docker_language_server
+
+https://github.com/docker/docker-language-server
+
+`docker-langserver-server` can be installed via `go`:
+```sh
+go install github.com/docker/docker-language-server/cmd/docker-language-server@latest
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('docker_language_server')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "docker-language-server", "start", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "dockerfile", "yaml.docker-compose" }
+  ```
+- `root_markers` :
+  ```lua
+  { "Dockerfile", "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml", "docker-bake.json", "docker-bake.hcl", "docker-bake.override.json", "docker-bake.override.hcl" }
   ```
 
 ---
