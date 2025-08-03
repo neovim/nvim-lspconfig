@@ -6734,6 +6734,17 @@ https://github.com/mathworks/MATLAB-language-server
 
 MATLAB® language server implements the Microsoft® Language Server Protocol for the MATLAB language.
 
+Make sure to set `MATLAB.installPath` to your MATLAB path, e.g.:
+```lua
+settings = {
+  MATLAB = {
+    ...
+    installPath = '/usr/local/MATLAB/R2023a',
+    ...
+  },
+},
+```
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('matlab_ls')
@@ -6748,7 +6759,7 @@ Default config:
   ```lua
   { "matlab" }
   ```
-- `root_dir`: [../lsp/matlab_ls.lua:6](../lsp/matlab_ls.lua#L6)
+- `root_dir`: [../lsp/matlab_ls.lua:17](../lsp/matlab_ls.lua#L17)
 - `settings` :
   ```lua
   {
