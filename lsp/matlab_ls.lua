@@ -13,7 +13,7 @@ return {
   settings = {
     MATLAB = {
       indexWorkspace = true,
-      installPath = '',
+      installPath = '', -- NOTE: Set this to your MATLAB installation path.
       matlabConnectionTiming = 'onStart',
       telemetry = true,
     },
