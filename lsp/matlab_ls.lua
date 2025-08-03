@@ -9,7 +9,7 @@
 --- settings = {
 ---   MATLAB = {
 ---     ...
----     installPath = '/usr/local/MATLAB/R2023a', 
+---     installPath = '/usr/local/MATLAB/R2023a',
 ---     ...
 ---   },
 --- },
