@@ -4,8 +4,7 @@
 ---
 --- MATLAB® language server implements the Microsoft® Language Server Protocol for the MATLAB language.
 ---
---- Make sure to set `MATLAB.installPath` to your MATLAB path:
---- E.g.: 
+--- Make sure to set `MATLAB.installPath` to your MATLAB path, e.g.:
 --- ```lua
 -- settings = {
 --   MATLAB = {
