@@ -6,13 +6,13 @@
 ---
 --- Make sure to set `MATLAB.installPath` to your MATLAB path, e.g.:
 --- ```lua
--- settings = {
---   MATLAB = {
---     ...
---     installPath = '/usr/local/MATLAB/R2023a', 
---     ...
---   },
--- },
+--- settings = {
+---   MATLAB = {
+---     ...
+---     installPath = '/usr/local/MATLAB/R2023a', 
+---     ...
+---   },
+--- },
 --- ```
 return {
   cmd = { 'matlab-language-server', '--stdio' },
