@@ -24,9 +24,10 @@ return {
   root_markers = { 'package.json' },
   on_init = function(client)
     client.handlers['tsserver/request'] = function(_, result, context)
-      local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })
+      local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'ts_ls' })
+        or vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })
       if #clients == 0 then
-        vim.notify('Could not find `vtsls` lsp client, required by `vue_ls`.', vim.log.levels.ERROR)
+        vim.notify('Could not find `ts_ls` or `vtsls` lsp client, required by `vue_ls`.', vim.log.levels.ERROR)
         return
       end
       local ts_client = clients[1]
