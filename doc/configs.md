@@ -3067,6 +3067,7 @@ Default config:
   ```lua
   { "dockerfile", "yaml.docker-compose" }
   ```
+- `get_language_id`: [../lsp/docker_language_server.lua:9](../lsp/docker_language_server.lua#L9)
 - `root_markers` :
   ```lua
   { "Dockerfile", "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml", "docker-bake.json", "docker-bake.hcl", "docker-bake.override.json", "docker-bake.override.hcl" }
