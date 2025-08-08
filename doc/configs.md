@@ -326,6 +326,7 @@ Nvim by running `:help lspconfig-all`.
 - [tombi](#tombi)
 - [ts_ls](#ts_ls)
 - [ts_query_ls](#ts_query_ls)
+- [tsgo](#tsgo)
 - [tsp_server](#tsp_server)
 - [ttags](#ttags)
 - [turbo_ls](#turbo_ls)
@@ -12221,6 +12222,35 @@ Default config:
       php_only = "php"
     }
   }
+  ```
+
+---
+
+## tsgo
+
+https://github.com/microsoft/typescript-go
+
+`typescript-go` is experimental port of the TypeScript compiler (tsc) and language server (tsserver) to the Go programming language.
+
+`tsgo` can be installed via npm `npm install @typescript/native-preview`.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('tsgo')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "tsgo", "--lsp", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  ```
+- `root_markers` :
+  ```lua
+  { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
   ```
 
 ---
