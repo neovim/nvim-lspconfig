@@ -20,7 +20,7 @@ end
 local function buf_build(client, bufnr)
   local win = vim.api.nvim_get_current_win()
   local params = vim.lsp.util.make_position_params(win, client.offset_encoding)
-  client.request('textDocument/build', params, function(err, result)
+  client:request('textDocument/build', params, function(err, result)
     if err then
       error(tostring(err))
     end
@@ -37,7 +37,7 @@ end
 local function buf_search(client, bufnr)
   local win = vim.api.nvim_get_current_win()
   local params = vim.lsp.util.make_position_params(win, client.offset_encoding)
-  client.request('textDocument/forwardSearch', params, function(err, result)
+  client:request('textDocument/forwardSearch', params, function(err, result)
     if err then
       error(tostring(err))
     end
@@ -52,14 +52,10 @@ local function buf_search(client, bufnr)
 end
 
 local function buf_cancel_build(client, bufnr)
-  if vim.fn.has 'nvim-0.11' == 1 then
-    return client:exec_cmd({
-      title = 'cancel',
-      command = 'texlab.cancelBuild',
-    }, { bufnr = bufnr })
-  end
-  vim.lsp.buf.execute_command { command = 'texlab.cancelBuild' }
-  vim.notify('Build cancelled', vim.log.levels.INFO)
+  return client:exec_cmd({
+    title = 'cancel',
+    command = 'texlab.cancelBuild',
+  }, { bufnr = bufnr })
 end
 
 local function dependency_graph(client)
@@ -75,28 +71,19 @@ local function command_factory(cmd)
   local cmd_tbl = {
     Auxiliary = 'texlab.cleanAuxiliary',
     Artifacts = 'texlab.cleanArtifacts',
-    CancelBuild = 'texlab.cancelBuild',
   }
   return function(client, bufnr)
-    if vim.fn.has 'nvim-0.11' == 1 then
-      return client:exec_cmd({
-        title = ('clean_%s'):format(cmd),
-        command = cmd_tbl[cmd],
-        arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
-      }, { bufnr = bufnr }, function(err, _)
-        if err then
-          vim.notify(('Failed to clean %s files: %s'):format(cmd, err.message), vim.log.levels.ERROR)
-        else
-          vim.notify(('command %s executed successfully'):format(cmd), vim.log.levels.INFO)
-        end
-      end)
-    end
-
-    vim.lsp.buf.execute_command {
+    return client:exec_cmd({
+      title = ('clean_%s'):format(cmd),
       command = cmd_tbl[cmd],
       arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
-    }
-    vim.notify(('command %s executed successfully'):format(cmd_tbl[cmd]))
+    }, { bufnr = bufnr }, function(err, _)
+      if err then
+        vim.notify(('Failed to clean %s files: %s'):format(cmd, err.message), vim.log.levels.ERROR)
+      else
+        vim.notify(('Command %s executed successfully'):format(cmd), vim.log.levels.INFO)
+      end
+    end)
   end
 end
 
@@ -123,33 +110,22 @@ local function buf_find_envs(client, bufnr)
       width = math.max((max_length + #env_names - 1), (string.len 'Environments')),
       focusable = false,
       focus = false,
-      border = 'single',
       title = 'Environments',
     })
   end)
 end
 
 local function buf_change_env(client, bufnr)
-  local new = vim.fn.input 'Enter the new environment name: '
+  local new
+  vim.ui.input({ prompt = 'New environment name: ' }, function(input)
+    new = input
+  end)
   if not new or new == '' then
     return vim.notify('No environment name provided', vim.log.levels.WARN)
   end
   local pos = vim.api.nvim_win_get_cursor(0)
-  if vim.fn.has 'nvim-0.11' == 1 then
-    return client:exec_cmd({
-      title = 'change_environment',
-      command = 'texlab.changeEnvironment',
-      arguments = {
-        {
-          textDocument = { uri = vim.uri_from_bufnr(bufnr) },
-          position = { line = pos[1] - 1, character = pos[2] },
-          newName = tostring(new),
-        },
-      },
-    }, { bufnr = bufnr })
-  end
-
-  vim.lsp.buf.execute_command {
+  return client:exec_cmd({
+    title = 'change_environment',
     command = 'texlab.changeEnvironment',
     arguments = {
       {
@@ -158,7 +134,7 @@ local function buf_change_env(client, bufnr)
         newName = tostring(new),
       },
     },
-  }
+  }, { bufnr = bufnr })
 end
 
 return {
@@ -193,29 +169,17 @@ return {
     },
   },
   on_attach = function(_, buf)
-    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabBuild', client_with_fn(buf_build), {
-      desc = 'Build the current buffer',
-    })
-    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabForward', client_with_fn(buf_search), {
-      desc = 'Forward search from current position',
-    })
-    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabCancelBuild', client_with_fn(buf_cancel_build), {
-      desc = 'Cancel the current build',
-    })
-    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabDependencyGraph', client_with_fn(dependency_graph), {
-      desc = 'Show the dependency graph',
-    })
-    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabCleanArtifacts', client_with_fn(command_factory('Artifacts')), {
-      desc = 'Clean the artifacts',
-    })
-    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabCleanAuxiliary', client_with_fn(command_factory('Auxiliary')), {
-      desc = 'Clean the auxiliary files',
-    })
-    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabFindEnvironments', client_with_fn(buf_find_envs), {
-      desc = 'Find the environments at current position',
-    })
-    vim.api.nvim_buf_create_user_command(buf, 'LspTexlabChangeEnvironment', client_with_fn(buf_change_env), {
-      desc = 'Change the environment at current position',
-    })
+    for _, cmd in ipairs({
+      { name = 'TexlabBuild', fn = buf_build, desc = 'Build the current buffer' },
+      { name = 'TexlabForward', fn = buf_search, desc = 'Forward search from current position' },
+      { name = 'TexlabCancelBuild', fn = buf_cancel_build, desc = 'Cancel the current build' },
+      { name = 'TexlabDependencyGraph', fn = dependency_graph, desc = 'Show the dependency graph' },
+      { name = 'TexlabCleanArtifacts', fn = command_factory('Artifacts'), desc = 'Clean the artifacts' },
+      { name = 'TexlabCleanAuxiliary', fn = command_factory('Auxiliary'), desc = 'Clean the auxiliary files' },
+      { name = 'TexlabFindEnvironments', fn = buf_find_envs, desc = 'Find the environments at current position' },
+      { name = 'TexlabChangeEnvironment', fn = buf_change_env, desc = 'Change the environment at current position' },
+    }) do
+      vim.api.nvim_buf_create_user_command(buf, 'Lsp' .. cmd.name, client_with_fn(cmd.fn), { desc = cmd.desc })
+    end
   end,
 }
