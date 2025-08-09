@@ -11783,7 +11783,7 @@ Default config:
   ```lua
   { "tex", "plaintex", "bib" }
   ```
-- `on_attach`: [../lsp/texlab.lua:164](../lsp/texlab.lua#L164)
+- `on_attach`: [../lsp/texlab.lua:140](../lsp/texlab.lua#L140)
 - `root_markers` :
   ```lua
   { ".git", ".latexmkrc", "latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" }
