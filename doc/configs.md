@@ -2178,7 +2178,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "c", "css", "go", "haskell", "html", "javascript", "javascriptreact", "markdown", "python", "php", "ruby", "rust", "toml", "text", "typescript", "typescriptreact" }
+  { "c", "css", "go", "haskell", "html", "java", "javascript", "javascriptreact", "lua", "markdown", "php", "python", "ruby", "rust", "toml", "text", "typescript", "typescriptreact" }
   ```
 - `root_markers` :
   ```lua
