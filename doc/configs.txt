@@ -1285,8 +1285,8 @@ Default config:
   { "clangd" }
 - filetypes: >lua
   { "c", "cpp", "objc", "objcpp", "cuda" }
-- on_attach (use "gF" to view): ../lsp/clangd.lua:63
-- on_init (use "gF" to view): ../lsp/clangd.lua:63
+- on_attach (use "gF" to view): ../lsp/clangd.lua:64
+- on_init (use "gF" to view): ../lsp/clangd.lua:64
 - root_markers: >lua
   { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" }
 <
@@ -4813,7 +4813,7 @@ Default config:
   { "markdown-oxide" }
 - filetypes: >lua
   { "markdown" }
-- on_attach (use "gF" to view): ../lsp/markdown_oxide.lua:11
+- on_attach (use "gF" to view): ../lsp/markdown_oxide.lua:23
 - root_markers: >lua
   { ".git", ".obsidian", ".moxide.toml" }
 <
@@ -7290,7 +7290,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/rust_analyzer.lua:54
+- before_init (use "gF" to view): ../lsp/rust_analyzer.lua:55
 - capabilities: >lua
   {
     experimental = {
@@ -7301,8 +7301,8 @@ Default config:
   { "rust-analyzer" }
 - filetypes: >lua
   { "rust" }
-- on_attach (use "gF" to view): ../lsp/rust_analyzer.lua:54
-- root_dir (use "gF" to view): ../lsp/rust_analyzer.lua:54
+- on_attach (use "gF" to view): ../lsp/rust_analyzer.lua:55
+- root_dir (use "gF" to view): ../lsp/rust_analyzer.lua:55
 <
 
 ------------------------------------------------------------------------------
@@ -8314,7 +8314,7 @@ Default config:
   { "svlangserver" }
 - filetypes: >lua
   { "verilog", "systemverilog" }
-- on_attach (use "gF" to view): ../lsp/svlangserver.lua:28
+- on_attach (use "gF" to view): ../lsp/svlangserver.lua:13
 - root_markers: >lua
   { ".svlangserver", ".git" }
 - settings: >lua
@@ -8703,6 +8703,12 @@ A completion engine built from scratch for (La)TeX.
 
 See https://github.com/latex-lsp/texlab/wiki/Configuration for configuration options.
 
+There are some non standard commands supported, namely:
+`LspTexlabBuild`, `LspTexlabForward`, `LspTexlabCancelBuild`,
+`LspTexlabDependencyGraph`, `LspTexlabCleanArtifacts`,
+`LspTexlabCleanAuxiliary`, `LspTexlabFindEnvironments`,
+and `LspTexlabChangeEnvironment`.
+
 Snippet to enable the language server: >lua
   vim.lsp.enable('texlab')
 
@@ -8712,7 +8718,7 @@ Default config:
   { "texlab" }
 - filetypes: >lua
   { "tex", "plaintex", "bib" }
-- on_attach (use "gF" to view): ../lsp/texlab.lua:140
+- on_attach (use "gF" to view): ../lsp/texlab.lua:135
 - root_markers: >lua
   { ".git", ".latexmkrc", "latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" }
 - settings: >lua
@@ -8907,7 +8913,7 @@ Default config:
   { "tinymist" }
 - filetypes: >lua
   { "typst" }
-- on_attach (use "gF" to view): ../lsp/tinymist.lua:52
+- on_attach (use "gF" to view): ../lsp/tinymist.lua:48
 - root_markers: >lua
   { ".git" }
 <

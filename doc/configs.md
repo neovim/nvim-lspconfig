@@ -2035,8 +2035,8 @@ Default config:
   ```lua
   { "c", "cpp", "objc", "objcpp", "cuda" }
   ```
-- `on_attach`: [../lsp/clangd.lua:63](../lsp/clangd.lua#L63)
-- `on_init`: [../lsp/clangd.lua:63](../lsp/clangd.lua#L63)
+- `on_attach`: [../lsp/clangd.lua:64](../lsp/clangd.lua#L64)
+- `on_init`: [../lsp/clangd.lua:64](../lsp/clangd.lua#L64)
 - `root_markers` :
   ```lua
   { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" }
@@ -6659,7 +6659,7 @@ Default config:
   ```lua
   { "markdown" }
   ```
-- `on_attach`: [../lsp/markdown_oxide.lua:11](../lsp/markdown_oxide.lua#L11)
+- `on_attach`: [../lsp/markdown_oxide.lua:23](../lsp/markdown_oxide.lua#L23)
 - `root_markers` :
   ```lua
   { ".git", ".obsidian", ".moxide.toml" }
@@ -9905,7 +9905,7 @@ vim.lsp.enable('rust_analyzer')
 ```
 
 Default config:
-- `before_init`: [../lsp/rust_analyzer.lua:54](../lsp/rust_analyzer.lua#L54)
+- `before_init`: [../lsp/rust_analyzer.lua:55](../lsp/rust_analyzer.lua#L55)
 - `capabilities` :
   ```lua
   {
@@ -9922,8 +9922,8 @@ Default config:
   ```lua
   { "rust" }
   ```
-- `on_attach`: [../lsp/rust_analyzer.lua:54](../lsp/rust_analyzer.lua#L54)
-- `root_dir`: [../lsp/rust_analyzer.lua:54](../lsp/rust_analyzer.lua#L54)
+- `on_attach`: [../lsp/rust_analyzer.lua:55](../lsp/rust_analyzer.lua#L55)
+- `root_dir`: [../lsp/rust_analyzer.lua:55](../lsp/rust_analyzer.lua#L55)
 
 ---
 
@@ -11275,7 +11275,7 @@ Default config:
   ```lua
   { "verilog", "systemverilog" }
   ```
-- `on_attach`: [../lsp/svlangserver.lua:28](../lsp/svlangserver.lua#L28)
+- `on_attach`: [../lsp/svlangserver.lua:13](../lsp/svlangserver.lua#L13)
 - `root_markers` :
   ```lua
   { ".svlangserver", ".git" }
@@ -11769,6 +11769,12 @@ A completion engine built from scratch for (La)TeX.
 
 See https://github.com/latex-lsp/texlab/wiki/Configuration for configuration options.
 
+There are some non standard commands supported, namely:
+`LspTexlabBuild`, `LspTexlabForward`, `LspTexlabCancelBuild`,
+`LspTexlabDependencyGraph`, `LspTexlabCleanArtifacts`,
+`LspTexlabCleanAuxiliary`, `LspTexlabFindEnvironments`,
+and `LspTexlabChangeEnvironment`.
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('texlab')
@@ -11783,7 +11789,7 @@ Default config:
   ```lua
   { "tex", "plaintex", "bib" }
   ```
-- `on_attach`: [../lsp/texlab.lua:140](../lsp/texlab.lua#L140)
+- `on_attach`: [../lsp/texlab.lua:135](../lsp/texlab.lua#L135)
 - `root_markers` :
   ```lua
   { ".git", ".latexmkrc", "latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" }
@@ -12030,7 +12036,7 @@ Default config:
   ```lua
   { "typst" }
   ```
-- `on_attach`: [../lsp/tinymist.lua:52](../lsp/tinymist.lua#L52)
+- `on_attach`: [../lsp/tinymist.lua:48](../lsp/tinymist.lua#L48)
 - `root_markers` :
   ```lua
   { ".git" }
