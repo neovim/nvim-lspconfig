@@ -16,12 +16,15 @@ return {
   cmd = { 'zk', 'lsp' },
   filetypes = { 'markdown' },
   root_markers = { '.zk' },
+  ---@param bufnr integer
+  ---@param client vim.lsp.Client
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'LspZkIndex', function()
-      vim.lsp.buf.execute_command {
+      client:exec_cmd({
+        title = 'ZkIndex',
         command = 'zk.index',
         arguments = { vim.api.nvim_buf_get_name(bufnr) },
-      }
+      }, { bufnr = bufnr })
     end, {
       desc = 'ZkIndex',
     })
@@ -31,6 +34,7 @@ return {
       local root = find_zk_root(bufpath)
 
       client:exec_cmd({
+        title = 'ZkList',
         command = 'zk.list',
         arguments = { root, { select = { 'path' } } },
       }, { bufnr = bufnr }, function(_err, result)
@@ -50,6 +54,7 @@ return {
 
     vim.api.nvim_buf_create_user_command(bufnr, 'LspZkNew', function(...)
       client:exec_cmd({
+        title = 'ZkNew',
         command = 'zk.new',
         arguments = {
           vim.api.nvim_buf_get_name(bufnr),
