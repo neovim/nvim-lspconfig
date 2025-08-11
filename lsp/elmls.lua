@@ -15,7 +15,7 @@ return {
   filetypes = { 'elm' },
   root_dir = function(bufnr, on_dir)
     local fname = api.nvim_buf_get_name(bufnr)
-    local filetype = api.nvim_buf_get_option(0, 'filetype')
+    local filetype = vim.bo[bufnr].filetype
     if filetype == 'elm' or (filetype == 'json' and fname:match 'elm%.json$') then
       on_dir(vim.fs.root(fname, 'elm.json'))
       return
