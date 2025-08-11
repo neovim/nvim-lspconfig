@@ -5,17 +5,12 @@
 --- A completion engine built from scratch for (La)TeX.
 ---
 --- See https://github.com/latex-lsp/texlab/wiki/Configuration for configuration options.
-
-local function client_with_fn(fn)
-  return function()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local client = vim.lsp.get_clients({ bufnr = bufnr, name = 'texlab' })[1]
-    if not client then
-      return vim.notify(('texlab client not found in bufnr %d'):format(bufnr), vim.log.levels.ERROR)
-    end
-    fn(client, bufnr)
-  end
-end
+---
+--- There are some non standard commands supported, namely:
+--- `LspTexlabBuild`, `LspTexlabForward`, `LspTexlabCancelBuild`,
+--- `LspTexlabDependencyGraph`, `LspTexlabCleanArtifacts`,
+--- `LspTexlabCleanAuxiliary`, `LspTexlabFindEnvironments`,
+--- and `LspTexlabChangeEnvironment`.
 
 local function buf_build(client, bufnr)
   local win = vim.api.nvim_get_current_win()
@@ -168,7 +163,9 @@ return {
       formatterLineLength = 80,
     },
   },
-  on_attach = function(_, buf)
+  ---@param client vim.lsp.Client
+  ---@param bufnr integer
+  on_attach = function(client, bufnr)
     for _, cmd in ipairs({
       { name = 'TexlabBuild', fn = buf_build, desc = 'Build the current buffer' },
       { name = 'TexlabForward', fn = buf_search, desc = 'Forward search from current position' },
@@ -179,7 +176,9 @@ return {
       { name = 'TexlabFindEnvironments', fn = buf_find_envs, desc = 'Find the environments at current position' },
       { name = 'TexlabChangeEnvironment', fn = buf_change_env, desc = 'Change the environment at current position' },
     }) do
-      vim.api.nvim_buf_create_user_command(buf, 'Lsp' .. cmd.name, client_with_fn(cmd.fn), { desc = cmd.desc })
+      vim.api.nvim_buf_create_user_command(bufnr, 'Lsp' .. cmd.name, function()
+        cmd.fn(client, bufnr)
+      end, { desc = cmd.desc })
     end
   end,
 }
