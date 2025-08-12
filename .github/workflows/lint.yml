@@ -12,7 +12,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
@@ -24,7 +24,7 @@ jobs:
   luacheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: lunarmodules/luacheck@v1
         with:
           args: lua/* test/*
@@ -32,7 +32,7 @@ jobs:
   selene:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: NTBBloodbath/selene-action@v1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -41,7 +41,7 @@ jobs:
   stylua:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: JohnnyMorganz/stylua-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -51,14 +51,14 @@ jobs:
   codespell:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: pip install codespell
       - run: codespell --quiet-level=2 --check-hidden --skip=./doc/configs.md,./doc/configs.txt --ignore-words=.codespellignorewords
 
   commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
