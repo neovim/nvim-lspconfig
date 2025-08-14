@@ -68,7 +68,7 @@ end
 api.nvim_create_user_command('LspInfo', ':checkhealth vim.lsp', { desc = 'Alias to `:checkhealth vim.lsp`' })
 
 api.nvim_create_user_command('LspLog', function()
-  vim.cmd(string.format('tabnew %s', lsp.get_log_path()))
+  vim.cmd(string.format('tabnew %s', lsp.log.get_filename()))
 end, {
   desc = 'Opens the Nvim LSP client log.',
 })
