@@ -13,6 +13,7 @@ return {
   filetypes = {
     'c',
     'css',
+    'gitcommit',
     'go',
     'haskell',
     'html',
