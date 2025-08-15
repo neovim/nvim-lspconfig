@@ -32,6 +32,14 @@
 --- Use the `:LspTypescriptSourceAction` command to see "whole file" ("source") code-actions such as:
 --- - organize imports
 --- - remove unused code
+---
+--- ### Monorepo support
+---
+--- `ts_ls` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
+--- This works without the need of spawning multiple instances of `ts_ls`, saving memory.
+---
+--- It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
+---
 
 return {
   init_options = { hostInfo = 'neovim' },
@@ -44,7 +52,7 @@ return {
     'typescriptreact',
     'typescript.tsx',
   },
-  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+  root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb' },
   handlers = {
     -- handle rename request for certain code actions like extracting functions / types
     ['_typescript.rename'] = function(_, result, ctx)
