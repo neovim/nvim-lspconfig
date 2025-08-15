@@ -112,7 +112,7 @@ return {
     if not bufname:match('^' .. fs.joinpath('/tmp/MetadataAsSource/')) then
       -- try find solutions root first
       local root_dir = fs.root(bufnr, function(fname, _)
-        return fname:match('%.sln$') ~= nil
+        return fname:match('%.sln[x]?$') ~= nil
       end)
 
       if not root_dir then
@@ -133,7 +133,7 @@ return {
 
       -- try load first solution we find
       for entry, type in fs.dir(root_dir) do
-        if type == 'file' and vim.endswith(entry, '.sln') then
+        if type == 'file' and (vim.endswith(entry, '.sln') or vim.endswith(entry, '.slnx')) then
           on_init_sln(client, fs.joinpath(root_dir, entry))
           return
         end
