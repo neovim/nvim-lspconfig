@@ -57,6 +57,13 @@
 --- ```
 ---
 --- See `vue_ls` section and https://github.com/vuejs/language-tools/wiki/Neovim for more information.
+---
+--- ### Monorepo support
+---
+--- `vtsls` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
+--- This works without the need of spawning multiple instances of `vtsls`, saving memory.
+---
+--- It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
 
 return {
   cmd = { 'vtsls', '--stdio' },
@@ -68,5 +75,7 @@ return {
     'typescriptreact',
     'typescript.tsx',
   },
+  -- tsconfig.json, package.json are intentionally omitted because
+  -- they can be "false positives" in a monorepo. See above the monorepo documentation.
   root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb' },
 }

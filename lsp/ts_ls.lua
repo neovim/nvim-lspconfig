@@ -52,6 +52,8 @@ return {
     'typescriptreact',
     'typescript.tsx',
   },
+  -- tsconfig.json, package.json are intentionally omitted because
+  -- they can be "false positives" in a monorepo. See above the monorepo documentation.
   root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb' },
   handlers = {
     -- handle rename request for certain code actions like extracting functions / types
