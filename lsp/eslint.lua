@@ -105,11 +105,11 @@ return {
     local eslint_config_files_with_package_json =
       util.insert_package_json(eslint_config_files, 'eslintConfig', filename)
     local is_buffer_using_eslint = vim.fs.find(eslint_config_files_with_package_json, {
-      path = vim.fs.dirname(filename),
+      path = filename,
       type = 'file',
       limit = 1,
       upward = true,
-      stop = project_root,
+      stop = vim.fs.dirname(project_root),
     })[1]
     if not is_buffer_using_eslint then
       return nil

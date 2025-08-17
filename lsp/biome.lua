@@ -55,11 +55,11 @@ return {
     local biome_config_files = { 'biome.json', 'biome.jsonc' }
     biome_config_files = util.insert_package_json(biome_config_files, 'biome', filename)
     local is_buffer_using_biome = vim.fs.find(biome_config_files, {
-      path = vim.fs.dirname(filename),
+      path = filename,
       type = 'file',
       limit = 1,
       upward = true,
-      stop = project_root,
+      stop = vim.fs.dirname(project_root),
     })[1]
     if not is_buffer_using_biome then
       return nil
