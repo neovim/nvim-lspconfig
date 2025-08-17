@@ -5459,7 +5459,7 @@ https://github.com/hyprland-community/hyprls
 
 `hyprls` can be installed via `go`:
 ```sh
-go install github.com/ewen-lbh/hyprls/cmd/hyprls@latest
+go install github.com/hyprland-community/hyprls/cmd/hyprls@latest
 ```
 
 Snippet to enable the language server:
