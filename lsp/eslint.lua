@@ -39,6 +39,7 @@
 ---
 --- /!\ When using flat config files, you need to use them across all your packages in your monorepo, as it's a global setting for the server.
 
+local util = require 'lspconfig.util'
 local lsp = vim.lsp
 
 local eslint_config_files = {
@@ -97,8 +98,14 @@ return {
 
     -- We know that the buffer is using ESLint if it has a config file
     -- in its directory tree.
-    local is_buffer_using_eslint = vim.fs.find(eslint_config_files, {
-      path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)),
+    --
+    -- Eslint used to support package.json files as config files, but it doesn't anymore.
+    -- We keep this for backward compatibility.
+    local filename = vim.api.nvim_buf_get_name(bufnr)
+    local eslint_config_files_with_package_json =
+      util.insert_package_json(eslint_config_files, 'eslintConfig', filename)
+    local is_buffer_using_eslint = vim.fs.find(eslint_config_files_with_package_json, {
+      path = vim.fs.dirname(filename),
       type = 'file',
       limit = 1,
       upward = true,
