@@ -41,6 +41,21 @@
 
 local lsp = vim.lsp
 
+local eslint_config_files = {
+  '.eslintrc',
+  '.eslintrc.js',
+  '.eslintrc.cjs',
+  '.eslintrc.yaml',
+  '.eslintrc.yml',
+  '.eslintrc.json',
+  'eslint.config.js',
+  'eslint.config.mjs',
+  'eslint.config.cjs',
+  'eslint.config.ts',
+  'eslint.config.mts',
+  'eslint.config.cts',
+}
+
 return {
   cmd = { 'vscode-eslint-language-server', '--stdio' },
   filetypes = {
@@ -69,7 +84,32 @@ return {
       }, nil, bufnr)
     end, {})
   end,
-  root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb' },
+  root_dir = function(bufnr, on_dir)
+    -- The project root is where the LSP can be started from
+    -- As stated in the documentation above, this LSP supports monorepos and simple projects.
+    -- We select then from the project root, which is identied by the presence of a package
+    -- manager lock file.
+    local project_root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb' }
+    local project_root = vim.fs.root(bufnr, project_root_markers)
+    if not project_root then
+      return nil
+    end
+
+    -- We know that the buffer is using ESLint if it has a config file
+    -- in its directory tree.
+    local is_buffer_using_eslint = vim.fs.find(eslint_config_files, {
+      path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)),
+      type = 'file',
+      limit = 1,
+      upward = true,
+      stop = project_root,
+    })[1]
+    if not is_buffer_using_eslint then
+      return nil
+    end
+
+    on_dir(vim.fs.root(bufnr, project_root_markers))
+  end,
   -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
   settings = {
     validate = 'on',
@@ -118,15 +158,11 @@ return {
         name = vim.fn.fnamemodify(root_dir, ':t'),
       }
 
-      -- Support flat config
-      local flat_config_files = {
-        'eslint.config.js',
-        'eslint.config.mjs',
-        'eslint.config.cjs',
-        'eslint.config.ts',
-        'eslint.config.mts',
-        'eslint.config.cts',
-      }
+      -- Support flat config files
+      -- They contain 'config' in the file name
+      local flat_config_files = vim.tbl_filter(function(file)
+        return file:match('config')
+      end, eslint_config_files)
 
       for _, file in ipairs(flat_config_files) do
         local found_files = vim.fs.find(function(name, path)
