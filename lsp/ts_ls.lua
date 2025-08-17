@@ -77,7 +77,7 @@ return {
       return nil
     end
 
-    on_dir(vim.fs.root(bufnr, project_root_markers))
+    on_dir(project_root)
   end,
   handlers = {
     -- handle rename request for certain code actions like extracting functions / types

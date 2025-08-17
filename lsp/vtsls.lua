@@ -100,6 +100,6 @@ return {
       return nil
     end
 
-    on_dir(vim.fs.root(bufnr, project_root_markers))
+    on_dir(project_root)
   end,
 }

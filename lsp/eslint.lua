@@ -115,7 +115,7 @@ return {
       return nil
     end
 
-    on_dir(vim.fs.root(bufnr, project_root_markers))
+    on_dir(project_root)
   end,
   -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
   settings = {
