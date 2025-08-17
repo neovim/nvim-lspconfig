@@ -172,11 +172,17 @@ return {
       end, eslint_config_files)
 
       for _, file in ipairs(flat_config_files) do
-        local found_files = vim.fs.find(function(name, path)
-          return name == file and not path:match('[/\\]node_modules[/\\]')
-        end, { path = root_dir, type = 'file', limit = 1 })
+        local found_files = vim.fn.globpath(root_dir, file, true, true)
 
-        if #found_files > 0 then
+        -- Filter out files inside node_modules
+        local filtered_files = {}
+        for _, found_file in ipairs(found_files) do
+          if string.find(found_file, '[/\\]node_modules[/\\]') == nil then
+            table.insert(filtered_files, found_file)
+          end
+        end
+
+        if #filtered_files > 0 then
           config.settings.experimental = config.settings.experimental or {}
           config.settings.experimental.useFlatConfig = true
           break
