@@ -87,7 +87,7 @@ return {
   root_dir = function(bufnr, on_dir)
     -- The project root is where the LSP can be started from
     -- As stated in the documentation above, this LSP supports monorepos and simple projects.
-    -- We select then from the project root, which is identied by the presence of a package
+    -- We select then from the project root, which is identified by the presence of a package
     -- manager lock file.
     local project_root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb' }
     local project_root = vim.fs.root(bufnr, project_root_markers)
