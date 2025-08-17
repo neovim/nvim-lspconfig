@@ -253,7 +253,7 @@ local function check_lspconfig(bufnr)
   end
 
   health.start(('LSP configs active in this buffer (bufnr: %s)'):format(bufnr or '(invalid buffer)'))
-  health.info('Language client log: ' .. fmtpath(vim.lsp.get_log_path()))
+  health.info('Language client log: ' .. fmtpath(vim.lsp.log.get_filename()))
   health.info(('Detected filetype: `%s`'):format(buffer_filetype))
   health.info(('%d client(s) attached to this buffer'):format(#vim.tbl_keys(buf_clients)))
   for _, client in ipairs(buf_clients) do

@@ -21,6 +21,16 @@ return {
     end
   end,
   on_attach = function(client, bufnr)
+    -- Workaround to trigger reloading JS/TS files
+    -- See https://github.com/sveltejs/language-tools/issues/2008
+    vim.api.nvim_create_autocmd('BufWritePost', {
+      pattern = { '*.js', '*.ts' },
+      group = vim.api.nvim_create_augroup('svelte_js_ts_file_watch', {}),
+      callback = function(ctx)
+        -- internal API to sync changes that have not yet been saved to the file system
+        client:notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
+      end,
+    })
     vim.api.nvim_buf_create_user_command(bufnr, 'LspMigrateToSvelte5', function()
       client:exec_cmd({
         command = 'migrate_to_svelte_5',

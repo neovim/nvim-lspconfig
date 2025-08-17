@@ -22,21 +22,10 @@
 ---   },
 --- })
 
-function get_cmd()
-  local useGlobal = vim.lsp.config.glint.init_options.glint.useGlobal
-  if useGlobal then
-    return { 'glint-language-server' }
-  end
-
-  local root_markers = vim.lsp.config.glint.root_markers
-  local root_dir = vim.fs.root(0, root_markers)
-
-  return { root_dir .. '/node_modules/.bin/glint-language-server' }
-end
-
 return {
-  cmd = function(dispatchers)
-    local cmd = get_cmd()
+  cmd = function(dispatchers, config)
+    local cmd = (config.init_options.glint.useGlobal or not config.root_dir) and { 'glint-language-server' }
+      or { config.root_dir .. '/node_modules/.bin/glint-language-server' }
     return vim.lsp.rpc.start(cmd, dispatchers)
   end,
   init_options = {

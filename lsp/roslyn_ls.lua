@@ -50,8 +50,11 @@ local function roslyn_handlers()
       vim.notify('Roslyn project initialization complete', vim.log.levels.INFO, { title = 'roslyn_ls' })
 
       local buffers = vim.lsp.get_buffers_by_client_id(ctx.client_id)
+      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
       for _, buf in ipairs(buffers) do
-        vim.lsp.util._refresh('textDocument/diagnostic', { bufnr = buf })
+        client:request(vim.lsp.protocol.Methods.textDocument_diagnostic, {
+          textDocument = vim.lsp.util.make_text_document_params(buf),
+        }, nil, buf)
       end
     end,
     ['workspace/_roslyn_projectHasUnresolvedDependencies'] = function()
@@ -109,7 +112,7 @@ return {
     if not bufname:match('^' .. fs.joinpath('/tmp/MetadataAsSource/')) then
       -- try find solutions root first
       local root_dir = fs.root(bufnr, function(fname, _)
-        return fname:match('%.sln$') ~= nil
+        return fname:match('%.sln[x]?$') ~= nil
       end)
 
       if not root_dir then
@@ -130,7 +133,7 @@ return {
 
       -- try load first solution we find
       for entry, type in fs.dir(root_dir) do
-        if type == 'file' and vim.endswith(entry, '.sln') then
+        if type == 'file' and (vim.endswith(entry, '.sln') or vim.endswith(entry, '.slnx')) then
           on_init_sln(client, fs.joinpath(root_dir, entry))
           return
         end

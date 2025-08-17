@@ -24,9 +24,15 @@ return {
   root_markers = { 'package.json' },
   on_init = function(client)
     client.handlers['tsserver/request'] = function(_, result, context)
-      local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })
+      local ts_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'ts_ls' })
+      local vtsls_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })
+      local clients = {}
+
+      vim.list_extend(clients, ts_clients)
+      vim.list_extend(clients, vtsls_clients)
+
       if #clients == 0 then
-        vim.notify('Could not find `vtsls` lsp client, required by `vue_ls`.', vim.log.levels.ERROR)
+        vim.notify('Could not find `ts_ls` or `vtsls` lsp client, required by `vue_ls`.', vim.log.levels.ERROR)
         return
       end
       local ts_client = clients[1]
@@ -41,7 +47,7 @@ return {
           payload,
         },
       }, { bufnr = context.bufnr }, function(_, r)
-        local response_data = { { id, r.body } }
+        local response_data = { { id, r and r.body } }
         ---@diagnostic disable-next-line: param-type-mismatch
         client:notify('tsserver/response', response_data)
       end)

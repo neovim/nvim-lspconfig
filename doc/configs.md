@@ -77,6 +77,7 @@ Nvim by running `:help lspconfig-all`.
 - [digestif](#digestif)
 - [djlsp](#djlsp)
 - [docker_compose_language_service](#docker_compose_language_service)
+- [docker_language_server](#docker_language_server)
 - [dockerls](#dockerls)
 - [dolmenls](#dolmenls)
 - [dotls](#dotls)
@@ -325,6 +326,7 @@ Nvim by running `:help lspconfig-all`.
 - [tombi](#tombi)
 - [ts_ls](#ts_ls)
 - [ts_query_ls](#ts_query_ls)
+- [tsgo](#tsgo)
 - [tsp_server](#tsp_server)
 - [ttags](#ttags)
 - [turbo_ls](#turbo_ls)
@@ -1501,10 +1503,7 @@ vim.lsp.enable('biome')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "biome", "lsp-proxy" }
-  ```
+- `cmd`: [../lsp/biome.lua:12](../lsp/biome.lua#L12)
 - `filetypes` :
   ```lua
   { "astro", "css", "graphql", "html", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
@@ -2034,10 +2033,10 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
+  { "c", "cpp", "objc", "objcpp", "cuda" }
   ```
-- `on_attach`: [../lsp/clangd.lua:63](../lsp/clangd.lua#L63)
-- `on_init`: [../lsp/clangd.lua:63](../lsp/clangd.lua#L63)
+- `on_attach`: [../lsp/clangd.lua:64](../lsp/clangd.lua#L64)
+- `on_init`: [../lsp/clangd.lua:64](../lsp/clangd.lua#L64)
 - `root_markers` :
   ```lua
   { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" }
@@ -2179,7 +2178,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "c", "css", "go", "haskell", "html", "javascript", "javascriptreact", "markdown", "python", "php", "ruby", "rust", "toml", "text", "typescript", "typescriptreact" }
+  { "c", "css", "gitcommit", "go", "haskell", "html", "java", "javascript", "javascriptreact", "lua", "markdown", "php", "python", "ruby", "rust", "toml", "text", "typescript", "typescriptreact" }
   ```
 - `root_markers` :
   ```lua
@@ -3041,6 +3040,37 @@ Default config:
 - `root_markers` :
   ```lua
   { "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml" }
+  ```
+
+---
+
+## docker_language_server
+
+https://github.com/docker/docker-language-server
+
+`docker-langserver-server` can be installed via `go`:
+```sh
+go install github.com/docker/docker-language-server/cmd/docker-language-server@latest
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('docker_language_server')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "docker-language-server", "start", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "dockerfile", "yaml.docker-compose" }
+  ```
+- `get_language_id`: [../lsp/docker_language_server.lua:9](../lsp/docker_language_server.lua#L9)
+- `root_markers` :
+  ```lua
+  { "Dockerfile", "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml", "docker-bake.json", "docker-bake.hcl", "docker-bake.override.json", "docker-bake.override.hcl" }
   ```
 
 ---
@@ -4598,7 +4628,7 @@ vim.lsp.enable('glint')
 ```
 
 Default config:
-- `cmd`: [../lsp/glint.lua:37](../lsp/glint.lua#L37)
+- `cmd`: [../lsp/glint.lua:25](../lsp/glint.lua#L25)
 - `filetypes` :
   ```lua
   { "html.handlebars", "handlebars", "typescript", "typescript.glimmer", "javascript", "javascript.glimmer" }
@@ -6629,7 +6659,7 @@ Default config:
   ```lua
   { "markdown" }
   ```
-- `on_attach`: [../lsp/markdown_oxide.lua:11](../lsp/markdown_oxide.lua#L11)
+- `on_attach`: [../lsp/markdown_oxide.lua:23](../lsp/markdown_oxide.lua#L23)
 - `root_markers` :
   ```lua
   { ".git", ".obsidian", ".moxide.toml" }
@@ -6706,6 +6736,17 @@ https://github.com/mathworks/MATLAB-language-server
 
 MATLAB® language server implements the Microsoft® Language Server Protocol for the MATLAB language.
 
+Make sure to set `MATLAB.installPath` to your MATLAB path, e.g.:
+```lua
+settings = {
+  MATLAB = {
+    ...
+    installPath = '/usr/local/MATLAB/R2023a',
+    ...
+  },
+},
+```
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('matlab_ls')
@@ -6720,7 +6761,7 @@ Default config:
   ```lua
   { "matlab" }
   ```
-- `root_dir`: [../lsp/matlab_ls.lua:6](../lsp/matlab_ls.lua#L6)
+- `root_dir`: [../lsp/matlab_ls.lua:17](../lsp/matlab_ls.lua#L17)
 - `settings` :
   ```lua
   {
@@ -9239,6 +9280,17 @@ vim.lsp.config('rescriptls', {
 }
 ```
 
+Detect file changes: While using @rescript/language-server >= 1.63.0 you have to detect file changes by registering the didChangeWatchedFiles hook.
+```lua
+capabilities = {
+    workspace = {
+        didChangeWatchedFiles = {
+            dynamicRegistration = true,
+        },
+    },
+}
+```
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('rescriptls')
@@ -9554,7 +9606,7 @@ Default config:
   ```lua
   { <function 1> }
   ```
-- `root_dir`: [../lsp/roslyn_ls.lua:92](../lsp/roslyn_ls.lua#L92)
+- `root_dir`: [../lsp/roslyn_ls.lua:95](../lsp/roslyn_ls.lua#L95)
 - `settings` :
   ```lua
   {
@@ -9853,7 +9905,7 @@ vim.lsp.enable('rust_analyzer')
 ```
 
 Default config:
-- `before_init`: [../lsp/rust_analyzer.lua:54](../lsp/rust_analyzer.lua#L54)
+- `before_init`: [../lsp/rust_analyzer.lua:55](../lsp/rust_analyzer.lua#L55)
 - `capabilities` :
   ```lua
   {
@@ -9870,8 +9922,8 @@ Default config:
   ```lua
   { "rust" }
   ```
-- `on_attach`: [../lsp/rust_analyzer.lua:54](../lsp/rust_analyzer.lua#L54)
-- `root_dir`: [../lsp/rust_analyzer.lua:54](../lsp/rust_analyzer.lua#L54)
+- `on_attach`: [../lsp/rust_analyzer.lua:55](../lsp/rust_analyzer.lua#L55)
+- `root_dir`: [../lsp/rust_analyzer.lua:55](../lsp/rust_analyzer.lua#L55)
 
 ---
 
@@ -10221,7 +10273,22 @@ Default config:
 
 https://github.com/awslabs/smithy-language-server
 
-`Smithy Language Server`, A Language Server Protocol implementation for the Smithy IDL
+"Smithy Language Server", a Language server for the Smithy IDL.
+
+smithy-language-server has no docs that say how to actually install it(?), so look at:
+https://github.com/smithy-lang/smithy-vscode/blob/600cfcf0db65edce85f02e6d50f5fa2b0862bc8d/src/extension.ts#L78
+
+Maven package: https://central.sonatype.com/artifact/software.amazon.smithy/smithy-language-server
+
+Installation:
+1. Install coursier, or any tool that can install maven packages.
+   ```
+   brew install coursier
+   ```
+2. The LS is auto-installed and launched by:
+   ```
+   coursier launch software.amazon.smithy:smithy-language-server:0.7.0
+   ```
 
 Snippet to enable the language server:
 ```lua
@@ -10231,11 +10298,25 @@ vim.lsp.enable('smithy_ls')
 Default config:
 - `cmd` :
   ```lua
-  { "smithy-language-server", "0" }
+  { "coursier", "launch", "software.amazon.smithy:smithy-language-server:0.7.0", "-M", "software.amazon.smithy.lsp.Main", "--", "0" }
   ```
 - `filetypes` :
   ```lua
   { "smithy" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    compilerOptions = {
+      snippetAutoIndent = false
+    },
+    isHttpEnabled = true,
+    statusBarProvider = "show-message"
+  }
+  ```
+- `message_level` :
+  ```lua
+  4
   ```
 - `root_markers` :
   ```lua
@@ -11194,7 +11275,7 @@ Default config:
   ```lua
   { "verilog", "systemverilog" }
   ```
-- `on_attach`: [../lsp/svlangserver.lua:28](../lsp/svlangserver.lua#L28)
+- `on_attach`: [../lsp/svlangserver.lua:13](../lsp/svlangserver.lua#L13)
 - `root_markers` :
   ```lua
   { ".svlangserver", ".git" }
@@ -11688,6 +11769,12 @@ A completion engine built from scratch for (La)TeX.
 
 See https://github.com/latex-lsp/texlab/wiki/Configuration for configuration options.
 
+There are some non standard commands supported, namely:
+`LspTexlabBuild`, `LspTexlabForward`, `LspTexlabCancelBuild`,
+`LspTexlabDependencyGraph`, `LspTexlabCleanArtifacts`,
+`LspTexlabCleanAuxiliary`, `LspTexlabFindEnvironments`,
+and `LspTexlabChangeEnvironment`.
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('texlab')
@@ -11702,7 +11789,7 @@ Default config:
   ```lua
   { "tex", "plaintex", "bib" }
   ```
-- `on_attach`: [../lsp/texlab.lua:164](../lsp/texlab.lua#L164)
+- `on_attach`: [../lsp/texlab.lua:135](../lsp/texlab.lua#L135)
 - `root_markers` :
   ```lua
   { ".git", ".latexmkrc", "latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" }
@@ -11949,7 +12036,7 @@ Default config:
   ```lua
   { "typst" }
   ```
-- `on_attach`: [../lsp/tinymist.lua:52](../lsp/tinymist.lua#L52)
+- `on_attach`: [../lsp/tinymist.lua:48](../lsp/tinymist.lua#L48)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -12142,6 +12229,35 @@ Default config:
       php_only = "php"
     }
   }
+  ```
+
+---
+
+## tsgo
+
+https://github.com/microsoft/typescript-go
+
+`typescript-go` is experimental port of the TypeScript compiler (tsc) and language server (tsserver) to the Go programming language.
+
+`tsgo` can be installed via npm `npm install @typescript/native-preview`.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('tsgo')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "tsgo", "--lsp", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  ```
+- `root_markers` :
+  ```lua
+  { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
   ```
 
 ---
