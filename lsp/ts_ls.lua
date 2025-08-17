@@ -52,9 +52,33 @@ return {
     'typescriptreact',
     'typescript.tsx',
   },
-  -- tsconfig.json, package.json are intentionally omitted because
-  -- they can be "false positives" in a monorepo. See above the monorepo documentation.
-  root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb' },
+  root_dir = function(bufnr, on_dir)
+    -- The project root is where the LSP can be started from
+    -- As stated in the documentation above, this LSP supports monorepos and simple projects.
+    -- We select then from the project root, which is identied by the presence of a package
+    -- manager lock file.
+    local project_root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb' }
+    local project_root = vim.fs.root(bufnr, project_root_markers)
+    if not project_root then
+      return nil
+    end
+
+    -- We know that the buffer is using Typescript if it has a config file
+    -- in its directory tree.
+    local ts_config_files = { 'tsconfig.json', 'jsconfig.json' }
+    local is_buffer_using_typescript = vim.fs.find(ts_config_files, {
+      path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)),
+      type = 'file',
+      limit = 1,
+      upward = true,
+      stop = project_root,
+    })[1]
+    if not is_buffer_using_typescript then
+      return nil
+    end
+
+    on_dir(vim.fs.root(bufnr, project_root_markers))
+  end,
   handlers = {
     -- handle rename request for certain code actions like extracting functions / types
     ['_typescript.rename'] = function(_, result, ctx)
