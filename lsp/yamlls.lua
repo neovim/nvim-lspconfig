@@ -66,4 +66,8 @@ return {
     -- https://github.com/redhat-developer/vscode-redhat-telemetry#how-to-disable-telemetry-reporting
     redhat = { telemetry = { enabled = false } },
   },
+  on_init = function(client)
+    -- https://github.com/redhat-developer/yaml-language-server/issues/486
+    client.server_capabilities.documentFormattingProvider = true
+  end,
 }
