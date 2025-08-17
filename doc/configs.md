@@ -1497,18 +1497,22 @@ Toolchain of the web. [Successor of Rome](https://biomejs.dev/blog/annoucing-bio
 npm install [-g] @biomejs/biome
 ```
 
+### Monorepo support
+
+`biome` supports monorepos by default. It will automatically find the `biome.json` corresponding to the package you are working on, as described in the [documentation](https://biomejs.dev/guides/big-projects/#monorepo). This works without the need of spawning multiple instances of `biome`, saving memory.
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('biome')
 ```
 
 Default config:
-- `cmd`: [../lsp/biome.lua:12](../lsp/biome.lua#L12)
+- `cmd`: [../lsp/biome.lua:16](../lsp/biome.lua#L16)
 - `filetypes` :
   ```lua
   { "astro", "css", "graphql", "html", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
   ```
-- `root_dir`: [../lsp/biome.lua:12](../lsp/biome.lua#L12)
+- `root_dir`: [../lsp/biome.lua:16](../lsp/biome.lua#L16)
 - `workspace_required` : `true`
 
 ---
@@ -3805,13 +3809,21 @@ Messages handled in lspconfig: `eslint/openDoc`, `eslint/confirmESLintExecution`
 
 Additional messages you can handle: `eslint/noConfig`
 
+### Monorepo support
+
+`vscode-eslint-language-server` supports monorepos by default. It will automatically find the config file corresponding to the package you are working on. You can use different configs in different packages.
+This works without the need of spawning multiple instances of `vscode-eslint-language-server`.
+You can use a different version of ESLint in each package, but it is recommended to use the same version of ESLint in all packages. The location of the ESLint binary will be determined automatically.
+
+/!\ When using flat config files, you need to use them across all your packages in your monorepo, as it's a global setting for the server.
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('eslint')
 ```
 
 Default config:
-- `before_init`: [../lsp/eslint.lua:37](../lsp/eslint.lua#L37)
+- `before_init`: [../lsp/eslint.lua:60](../lsp/eslint.lua#L60)
 - `cmd` :
   ```lua
   { "vscode-eslint-language-server", "--stdio" }
@@ -3829,8 +3841,8 @@ Default config:
     ["eslint/probeFailed"] = <function 4>
   }
   ```
-- `on_attach`: [../lsp/eslint.lua:37](../lsp/eslint.lua#L37)
-- `root_dir`: [../lsp/eslint.lua:37](../lsp/eslint.lua#L37)
+- `on_attach`: [../lsp/eslint.lua:60](../lsp/eslint.lua#L60)
+- `root_dir`: [../lsp/eslint.lua:60](../lsp/eslint.lua#L60)
 - `settings` :
   ```lua
   {
@@ -3862,7 +3874,7 @@ Default config:
     useESLintClass = false,
     validate = "on",
     workingDirectory = {
-      mode = "location"
+      mode = "auto"
     }
   }
   ```
@@ -12131,6 +12143,13 @@ Use the `:LspTypescriptSourceAction` command to see "whole file" ("source") code
 - organize imports
 - remove unused code
 
+### Monorepo support
+
+`ts_ls` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
+This works without the need of spawning multiple instances of `ts_ls`, saving memory.
+
+It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('ts_ls')
@@ -12166,11 +12185,8 @@ Default config:
     hostInfo = "neovim"
   }
   ```
-- `on_attach`: [../lsp/ts_ls.lua:36](../lsp/ts_ls.lua#L36)
-- `root_markers` :
-  ```lua
-  { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
-  ```
+- `on_attach`: [../lsp/ts_ls.lua:44](../lsp/ts_ls.lua#L44)
+- `root_dir`: [../lsp/ts_ls.lua:44](../lsp/ts_ls.lua#L44)
 
 ---
 
@@ -12241,6 +12257,13 @@ https://github.com/microsoft/typescript-go
 
 `tsgo` can be installed via npm `npm install @typescript/native-preview`.
 
+### Monorepo support
+
+`tsgo` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
+This works without the need of spawning multiple instances of `tsgo`, saving memory.
+
+It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('tsgo')
@@ -12255,10 +12278,7 @@ Default config:
   ```lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
   ```
-- `root_markers` :
-  ```lua
-  { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
-  ```
+- `root_dir`: [../lsp/tsgo.lua:16](../lsp/tsgo.lua#L16)
 
 ---
 
@@ -13313,6 +13333,13 @@ vim.lsp.enable('vue_ls')
 
 See `vue_ls` section and https://github.com/vuejs/language-tools/wiki/Neovim for more information.
 
+### Monorepo support
+
+`vtsls` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
+This works without the need of spawning multiple instances of `vtsls`, saving memory.
+
+It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('vtsls')
@@ -13327,10 +13354,7 @@ Default config:
   ```lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
   ```
-- `root_markers` :
-  ```lua
-  { "tsconfig.json", "package.json", "jsconfig.json", ".git" }
-  ```
+- `root_dir`: [../lsp/vtsls.lua:68](../lsp/vtsls.lua#L68)
 
 ---
 
