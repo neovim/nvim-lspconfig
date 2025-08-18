@@ -7615,7 +7615,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { "flake.nix", "git" }
+  { "flake.nix", ".git" }
   ```
 
 ---

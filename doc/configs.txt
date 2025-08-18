@@ -5541,7 +5541,7 @@ Default config:
 - filetypes: >lua
   { "nix" }
 - root_markers: >lua
-  { "flake.nix", "git" }
+  { "flake.nix", ".git" }
 <
 
 ------------------------------------------------------------------------------
