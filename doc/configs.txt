@@ -10669,7 +10669,6 @@ Default config:
   { "yaml-language-server", "--stdio" }
 - filetypes: >lua
   { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" }
-- on_init (use "gF" to view): ../lsp/yamlls.lua:62
 - root_markers: >lua
   { ".git" }
 - settings: >lua
@@ -10677,6 +10676,11 @@ Default config:
     redhat = {
       telemetry = {
         enabled = false
+      }
+    },
+    yaml = {
+      format = {
+        enable = true
       }
     }
   }

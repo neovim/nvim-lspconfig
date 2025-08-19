@@ -13804,7 +13804,6 @@ Default config:
   ```lua
   { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" }
   ```
-- `on_init`: [../lsp/yamlls.lua:62](../lsp/yamlls.lua#L62)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -13815,6 +13814,11 @@ Default config:
     redhat = {
       telemetry = {
         enabled = false
+      }
+    },
+    yaml = {
+      format = {
+        enable = true
       }
     }
   }
