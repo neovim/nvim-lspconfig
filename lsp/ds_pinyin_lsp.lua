@@ -42,6 +42,7 @@ local function ds_pinyin_lsp_on(bufnr)
   end
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { bin_name },
   filetypes = { 'markdown', 'org' },

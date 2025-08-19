@@ -16,6 +16,7 @@
 
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   cmd = {
     vim.fn.executable('OmniSharp') == 1 and 'OmniSharp' or 'omnisharp',

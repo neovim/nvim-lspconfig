@@ -9,6 +9,7 @@
 --- ```
 --- See [vscode-spectral](https://github.com/stoplightio/vscode-spectral#extension-settings) for configuration options.
 
+---@type vim.lsp.Config
 return {
   cmd = { 'spectral-language-server', '--stdio' },
   filetypes = { 'yaml', 'json', 'yml' },

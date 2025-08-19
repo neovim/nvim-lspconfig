@@ -14,6 +14,7 @@
 --- that plugin fully handles the setup of the Lean language server,
 --- and you shouldn't set up `lean3ls` both with it and `lspconfig`.
 
+---@type vim.lsp.Config
 return {
   cmd = { 'lean-language-server', '--stdio', '--', '-M', '4096', '-T', '100000' },
   filetypes = { 'lean3' },

@@ -5,6 +5,7 @@
 --- An experimental LSP for Markdown.
 ---
 --- Please see the manual installation instructions: https://github.com/kitten/prosemd-lsp#manual-installation
+---@type vim.lsp.Config
 return {
   cmd = { 'prosemd-lsp', '--stdio' },
   filetypes = { 'markdown' },

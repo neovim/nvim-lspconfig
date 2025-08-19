@@ -65,6 +65,7 @@
 ---
 --- It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
 
+---@type vim.lsp.Config
 return {
   cmd = { 'vtsls', '--stdio' },
   filetypes = {

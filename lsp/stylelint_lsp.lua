@@ -37,6 +37,7 @@ local root_file = {
 
 root_file = util.insert_package_json(root_file, 'stylelint')
 
+---@type vim.lsp.Config
 return {
   cmd = { 'stylelint-lsp', '--stdio' },
   filetypes = {

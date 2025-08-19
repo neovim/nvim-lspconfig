@@ -31,6 +31,7 @@
 ---     && rm -rf /usr/local/bin/bicep-langserver \
 ---     && unzip -d /usr/local/bin/bicep-langserver bicep-langserver.zip)
 --- ```
+---@type vim.lsp.Config
 return {
   filetypes = { 'bicep', 'bicep-params' },
   root_markers = { '.git' },

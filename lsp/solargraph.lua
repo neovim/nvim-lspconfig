@@ -9,6 +9,7 @@
 --- ```sh
 --- gem install --user-install solargraph
 --- ```
+---@type vim.lsp.Config
 return {
   cmd = { 'solargraph', 'stdio' },
   settings = {

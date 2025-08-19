@@ -116,6 +116,7 @@ local cmd = {
   ]],
 }
 
+---@type vim.lsp.Config
 return {
   cmd = cmd,
   filetypes = { 'julia' },

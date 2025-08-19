@@ -71,6 +71,7 @@ do
   end
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'ltex-ls' },
   filetypes = filetypes,

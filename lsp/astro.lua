@@ -9,6 +9,7 @@
 
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   cmd = { 'astro-ls', '--stdio' },
   filetypes = { 'astro' },

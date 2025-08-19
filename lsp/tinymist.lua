@@ -45,6 +45,7 @@ local function create_tinymist_command(command_name, client, bufnr)
   return run_tinymist_command, cmd_name, cmd_desc
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'tinymist' },
   filetypes = { 'typst' },

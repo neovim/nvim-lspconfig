@@ -63,6 +63,7 @@ local function denols_handler(err, result, ctx, config)
   lsp.handlers[ctx.method](err, result, ctx, config)
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'deno', 'lsp' },
   cmd_env = { NO_COLOR = true },

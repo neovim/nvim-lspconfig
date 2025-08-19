@@ -4,6 +4,7 @@
 
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   cmd = { 'nc', 'localhost', os.getenv 'UNISON_LSP_PORT' or '5757' },
   filetypes = { 'unison' },

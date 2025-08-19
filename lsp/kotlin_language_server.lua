@@ -30,6 +30,7 @@ local root_files = {
   'build.gradle.kts', -- Gradle
 }
 
+---@type vim.lsp.Config
 return {
   filetypes = { 'kotlin' },
   root_markers = root_files,

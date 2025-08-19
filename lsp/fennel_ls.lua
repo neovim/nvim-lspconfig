@@ -7,6 +7,7 @@
 --- fennel-ls is configured using the closest file to your working directory named `flsproject.fnl`.
 --- All fennel-ls configuration options [can be found here](https://git.sr.ht/~xerool/fennel-ls/tree/HEAD/docs/manual.md#configuration).
 
+---@type vim.lsp.Config
 return {
   cmd = { 'fennel-ls' },
   filetypes = { 'fennel' },

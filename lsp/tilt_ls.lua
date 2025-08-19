@@ -9,6 +9,7 @@
 --- ```vim
 --- autocmd BufRead Tiltfile setf=tiltfile
 --- ```
+---@type vim.lsp.Config
 return {
   cmd = { 'tilt', 'lsp', 'start' },
   filetypes = { 'tiltfile' },

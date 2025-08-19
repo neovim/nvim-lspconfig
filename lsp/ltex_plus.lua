@@ -36,6 +36,7 @@ local function get_language_id(_, filetype)
   return language_id_mapping[filetype] or filetype
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'ltex-ls-plus' },
   filetypes = {

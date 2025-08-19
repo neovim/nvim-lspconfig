@@ -8,6 +8,7 @@
 ---  ```sh
 ---  cargo install veryl-ls
 ---  ```
+---@type vim.lsp.Config
 return {
   cmd = { 'veryl-ls' },
   filetypes = { 'veryl' },

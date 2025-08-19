@@ -11,6 +11,7 @@
 
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   cmd = { 'oxc_language_server' },
   filetypes = {

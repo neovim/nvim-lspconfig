@@ -18,6 +18,7 @@
 ---
 --- NOTE: Since v3.0.0, the Vue Language Server [no longer supports takeover mode](https://github.com/vuejs/language-tools/pull/5248).
 
+---@type vim.lsp.Config
 return {
   cmd = { 'vue-language-server', '--stdio' },
   filetypes = { 'vue' },

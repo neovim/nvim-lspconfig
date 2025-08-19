@@ -19,6 +19,7 @@
 
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   cmd = { 'fsautocomplete', '--adaptive-lsp-server-enabled' },
   root_dir = function(bufnr, on_dir)

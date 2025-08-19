@@ -19,6 +19,7 @@ local function set_python_path(path)
   end
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'pyright-langserver', '--stdio' },
   filetypes = { 'python' },

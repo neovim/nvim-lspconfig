@@ -10,6 +10,7 @@
 --- $ npm install -g @imc-trading/svlangserver
 --- ```
 
+---@type vim.lsp.Config
 return {
   cmd = { 'svlangserver' },
   filetypes = { 'verilog', 'systemverilog' },

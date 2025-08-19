@@ -10,6 +10,7 @@
 --- The default `cmd` assumes that the `emmylua_ls` binary can be found in `$PATH`.
 --- It might require you to provide cargo binaries installation path in it.
 
+---@type vim.lsp.Config
 return {
   cmd = { 'emmylua_ls' },
   filetypes = { 'lua' },

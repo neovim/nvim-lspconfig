@@ -6,6 +6,7 @@
 --- ```sh
 --- npm install -g antlers-language-server
 --- ```
+---@type vim.lsp.Config
 return {
   cmd = { 'antlersls', '--stdio' },
   filetypes = { 'html', 'antlers' },

@@ -20,6 +20,7 @@
 --- ```sh
 --- cargo install glasgow
 --- ```
+---@type vim.lsp.Config
 return {
   cmd = { 'glasgow' },
   filetypes = { 'wgsl' },

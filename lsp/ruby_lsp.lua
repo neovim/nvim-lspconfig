@@ -11,6 +11,7 @@
 --- ```sh
 --- gem install ruby-lsp
 --- ```
+---@type vim.lsp.Config
 return {
   cmd = { 'ruby-lsp' },
   filetypes = { 'ruby', 'eruby' },

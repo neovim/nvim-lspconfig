@@ -13,6 +13,7 @@ local util = require 'lspconfig.util'
 
 local root_files = { 'configure.ac', 'Makefile', 'Makefile.am', '*.mk' }
 
+---@type vim.lsp.Config
 return {
   cmd = { 'autotools-language-server' },
   filetypes = { 'config', 'automake', 'make' },

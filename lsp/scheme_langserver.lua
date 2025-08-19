@@ -6,6 +6,7 @@
 
 local cmd = { 'scheme-langserver', '~/.scheme-langserver.log', 'enable', 'disable' }
 
+---@type vim.lsp.Config
 return {
   cmd = cmd,
   filetypes = { 'scheme' },

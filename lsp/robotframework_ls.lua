@@ -3,6 +3,7 @@
 --- https://github.com/robocorp/robotframework-lsp
 ---
 --- Language Server Protocol implementation for Robot Framework.
+---@type vim.lsp.Config
 return {
   cmd = { 'robotframework_ls' },
   filetypes = { 'robot' },

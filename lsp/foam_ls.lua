@@ -7,6 +7,7 @@
 --- npm install -g foam-language-server
 --- ```
 
+---@type vim.lsp.Config
 return {
   cmd = { 'foam-ls', '--stdio' },
   filetypes = { 'foam', 'OpenFOAM' },

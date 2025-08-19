@@ -6,6 +6,7 @@
 --- ```sh
 --- npm install -g @olrtg/emmet-language-server
 --- ```
+---@type vim.lsp.Config
 return {
   cmd = { 'emmet-language-server', '--stdio' },
   filetypes = {

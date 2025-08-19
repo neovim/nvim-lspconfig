@@ -10,6 +10,7 @@
 --- ```
 --- prebuilt binaries can be found [here](https://github.com/dhall-lang/dhall-haskell/releases).
 
+---@type vim.lsp.Config
 return {
   cmd = { 'dhall-lsp-server' },
   filetypes = { 'dhall' },

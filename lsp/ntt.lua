@@ -12,6 +12,7 @@
 --- })
 --- ```
 
+---@type vim.lsp.Config
 return {
   cmd = { 'ntt', 'langserver' },
   filetypes = { 'ttcn' },

@@ -91,7 +91,7 @@ local function roslyn_handlers()
   }
 end
 
----@type vim.lsp.ClientConfig
+---@type vim.lsp.Config
 return {
   name = 'roslyn_ls',
   offset_encoding = 'utf-8',
