@@ -69,4 +69,8 @@ return {
     -- formatting disabled by default in yaml-language-server; enable it
     yaml = { format = { enable = true } },
   },
+  on_init = function(client)
+    -- Fix for https://github.com/redhat-developer/yaml-language-server/issues/486
+    client.server_capabilities.documentFormattingProvider = true
+  end,
 }
