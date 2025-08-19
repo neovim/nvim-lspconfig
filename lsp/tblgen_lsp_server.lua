@@ -17,6 +17,7 @@ local function get_command()
   return cmd
 end
 
+---@type vim.lsp.Config
 return {
   cmd = get_command(),
   filetypes = { 'tablegen' },

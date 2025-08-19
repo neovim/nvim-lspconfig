@@ -28,6 +28,7 @@
 --- ```sh
 --- npm install remark-preset-lint-recommended
 --- ```
+---@type vim.lsp.Config
 return {
   cmd = { 'remark-language-server', '--stdio' },
   filetypes = { 'markdown' },

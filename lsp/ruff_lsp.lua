@@ -20,6 +20,7 @@
 ---   }
 --- })
 --- ```
+---@type vim.lsp.Config
 return {
   cmd = { 'ruff-lsp' },
   filetypes = { 'python' },

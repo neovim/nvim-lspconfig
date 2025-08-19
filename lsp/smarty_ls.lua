@@ -10,6 +10,7 @@
 --- npm i -g vscode-smarty-langserver-extracted
 --- ```
 
+---@type vim.lsp.Config
 return {
   cmd = { 'smarty-language-server', '--stdio' },
   filetypes = { 'smarty' },

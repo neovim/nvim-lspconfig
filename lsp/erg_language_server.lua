@@ -11,6 +11,7 @@
 --- erg --language-server
 --- ```
 
+---@type vim.lsp.Config
 return {
   cmd = { 'erg', '--language-server' },
   filetypes = { 'erg' },

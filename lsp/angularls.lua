@@ -68,6 +68,7 @@ local ng_probe_dirs = vim
   end)
   :join(',')
 
+---@type vim.lsp.Config
 return {
   cmd = {
     'ngserver',

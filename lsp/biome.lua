@@ -13,6 +13,7 @@
 
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   cmd = function(dispatchers, config)
     local cmd = 'biome'
@@ -46,7 +47,7 @@ return {
     local project_root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
     local project_root = vim.fs.root(bufnr, project_root_markers)
     if not project_root then
-      return nil
+      return
     end
 
     -- We know that the buffer is using Biome if it has a config file
@@ -62,7 +63,7 @@ return {
       stop = vim.fs.dirname(project_root),
     })[1]
     if not is_buffer_using_biome then
-      return nil
+      return
     end
 
     on_dir(project_root)

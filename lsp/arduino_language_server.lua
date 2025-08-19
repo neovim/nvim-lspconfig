@@ -70,6 +70,7 @@
 
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   filetypes = { 'arduino' },
   root_dir = function(bufnr, on_dir)

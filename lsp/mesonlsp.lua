@@ -28,6 +28,7 @@ local meson_matcher = function(_, path)
   return false
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'mesonlsp', '--lsp' },
   filetypes = { 'meson' },

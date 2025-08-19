@@ -8,6 +8,7 @@
 --- ```sh
 --- npm install -g @typespec/compiler
 --- ```
+---@type vim.lsp.Config
 return {
   cmd = { 'tsp-server', '--stdio' },
   filetypes = { 'typespec' },

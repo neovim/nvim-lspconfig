@@ -132,6 +132,7 @@ local function buf_change_env(client, bufnr)
   }, { bufnr = bufnr })
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'texlab' },
   filetypes = { 'tex', 'plaintex', 'bib' },
@@ -163,8 +164,6 @@ return {
       formatterLineLength = 80,
     },
   },
-  ---@param client vim.lsp.Client
-  ---@param bufnr integer
   on_attach = function(client, bufnr)
     for _, cmd in ipairs({
       { name = 'TexlabBuild', fn = buf_build, desc = 'Build the current buffer' },

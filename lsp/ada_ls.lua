@@ -20,6 +20,7 @@
 
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   cmd = { 'ada_language_server' },
   filetypes = { 'ada' },

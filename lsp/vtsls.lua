@@ -65,6 +65,7 @@
 ---
 --- It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
 
+---@type vim.lsp.Config
 return {
   cmd = { 'vtsls', '--stdio' },
   filetypes = {
@@ -83,7 +84,7 @@ return {
     local project_root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
     local project_root = vim.fs.root(bufnr, project_root_markers)
     if not project_root then
-      return nil
+      return
     end
 
     -- We know that the buffer is using Typescript if it has a config file
@@ -97,7 +98,7 @@ return {
       stop = vim.fs.dirname(project_root),
     })[1]
     if not is_buffer_using_typescript then
-      return nil
+      return
     end
 
     on_dir(project_root)

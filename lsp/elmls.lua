@@ -9,6 +9,7 @@
 
 local api = vim.api
 
+---@type vim.lsp.Config
 return {
   cmd = { 'elm-language-server' },
   -- TODO(ashkan) if we comment this out, it will allow elmls to operate on elm.json. It seems like it could do that, but no other editor allows it right now.

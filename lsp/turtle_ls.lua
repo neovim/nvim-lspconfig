@@ -31,6 +31,7 @@ else
   full_path = table.concat({ bin_path, bin_name }, '/')
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'node', full_path, '--stdio' },
   filetypes = { 'turtle', 'ttl' },

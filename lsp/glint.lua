@@ -22,6 +22,7 @@
 ---   },
 --- })
 
+---@type vim.lsp.Config
 return {
   cmd = function(dispatchers, config)
     local cmd = (config.init_options.glint.useGlobal or not config.root_dir) and { 'glint-language-server' }

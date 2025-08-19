@@ -45,12 +45,11 @@ local function create_tinymist_command(command_name, client, bufnr)
   return run_tinymist_command, cmd_name, cmd_desc
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'tinymist' },
   filetypes = { 'typst' },
   root_markers = { '.git' },
-  ---@param client vim.lsp.Client
-  ---@param bufnr integer
   on_attach = function(client, bufnr)
     for _, command in ipairs {
       'tinymist.exportSvg',

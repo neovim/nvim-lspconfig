@@ -6,6 +6,7 @@
 
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   cmd = { 'pico8-ls', '--stdio' },
   filetypes = { 'p8' },

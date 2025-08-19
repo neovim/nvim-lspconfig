@@ -15,6 +15,7 @@
 
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   cmd = { 'dotnet', 'FSharpLanguageServer.dll' },
   root_dir = function(bufnr, on_dir)

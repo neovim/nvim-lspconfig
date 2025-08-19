@@ -23,6 +23,7 @@ local meson_matcher = function(path)
   end
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'vala-language-server' },
   filetypes = { 'vala', 'genie' },

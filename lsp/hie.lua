@@ -16,6 +16,7 @@
 ---   }
 --- }
 --- ```
+---@type vim.lsp.Config
 return {
   cmd = { 'hie-wrapper', '--lsp' },
   filetypes = { 'haskell' },

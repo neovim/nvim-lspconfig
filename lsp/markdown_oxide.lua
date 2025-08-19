@@ -20,6 +20,7 @@ local function command_factory(client, bufnr, cmd)
   }, { bufnr = bufnr })
 end
 
+---@type vim.lsp.Config
 return {
   root_markers = { '.git', '.obsidian', '.moxide.toml' },
   filetypes = { 'markdown' },

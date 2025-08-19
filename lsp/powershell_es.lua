@@ -36,6 +36,7 @@
 --- })
 --- ```
 
+---@type vim.lsp.Config
 return {
   cmd = function(dispatchers)
     local temp_path = vim.fn.stdpath('cache')

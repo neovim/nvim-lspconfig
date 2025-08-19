@@ -7,6 +7,7 @@
 --- functionality that mimics DrRacket's code tools as closely as possible.
 ---
 --- Install via `raco`: `raco pkg install racket-langserver`
+---@type vim.lsp.Config
 return {
   cmd = { 'racket', '--lib', 'racket-langserver' },
   filetypes = { 'racket', 'scheme' },

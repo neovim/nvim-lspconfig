@@ -11,6 +11,7 @@
 
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   cmd = { 'regal', 'language-server' },
   filetypes = { 'rego' },

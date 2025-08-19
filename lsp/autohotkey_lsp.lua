@@ -11,6 +11,7 @@ local function get_autohotkey_path()
   return #path > 0 and path or ''
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'autohotkey_lsp', '--stdio' },
   filetypes = { 'autohotkey' },

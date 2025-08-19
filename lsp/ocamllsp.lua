@@ -24,6 +24,7 @@ local get_language_id = function(_, ftype)
   return language_id_of[ftype]
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'ocamllsp' },
   filetypes = { 'ocaml', 'menhir', 'ocamlinterface', 'ocamllex', 'reason', 'dune' },

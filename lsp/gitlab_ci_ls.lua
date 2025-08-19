@@ -11,6 +11,7 @@ local util = require 'lspconfig.util'
 
 local cache_dir = vim.uv.os_homedir() .. '/.cache/gitlab-ci-ls/'
 
+---@type vim.lsp.Config
 return {
   cmd = { 'gitlab-ci-ls' },
   filetypes = { 'yaml.gitlab' },

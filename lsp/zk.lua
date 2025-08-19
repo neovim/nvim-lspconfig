@@ -12,6 +12,7 @@ local function find_zk_root(startpath)
   end
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'zk', 'lsp' },
   filetypes = { 'markdown' },

@@ -3,6 +3,7 @@
 ---
 --- Zig LSP implementation + Zig Language Server
 
+---@type vim.lsp.Config
 return {
   cmd = { 'zls' },
   filetypes = { 'zig', 'zir' },

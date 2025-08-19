@@ -10,6 +10,7 @@
 --- $ npm install -g @imc-trading/svlangserver
 --- ```
 
+---@type vim.lsp.Config
 return {
   cmd = { 'svlangserver' },
   filetypes = { 'verilog', 'systemverilog' },
@@ -19,8 +20,6 @@ return {
       includeIndexing = { '*.{v,vh,sv,svh}', '**/*.{v,vh,sv,svh}' },
     },
   },
-  ---@param client vim.lsp.Client
-  ---@param bufnr integer
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'LspSvlangserverBuildIndex', function()
       client:exec_cmd({

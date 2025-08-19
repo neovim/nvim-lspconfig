@@ -109,6 +109,7 @@ local function on_language_status(_, result)
   command 'echohl None'
 end
 
+---@type vim.lsp.Config
 return {
   cmd = {
     'jdtls',
