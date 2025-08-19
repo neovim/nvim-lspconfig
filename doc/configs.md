@@ -403,7 +403,7 @@ Default config:
   ```lua
   { "ada" }
   ```
-- `root_dir`: [../lsp/ada_ls.lua:23](../lsp/ada_ls.lua#L23)
+- `root_dir`: [../lsp/ada_ls.lua:24](../lsp/ada_ls.lua#L24)
 
 ---
 
@@ -427,7 +427,7 @@ Default config:
   ```lua
   { "agda" }
   ```
-- `root_dir`: [../lsp/agda_ls.lua:9](../lsp/agda_ls.lua#L9)
+- `root_dir`: [../lsp/agda_ls.lua:10](../lsp/agda_ls.lua#L10)
 
 ---
 
@@ -435,10 +435,11 @@ Default config:
 
 https://github.com/aiken-lang/aiken
 
-A language server for Aiken Programming Language.
-[Installation](https://aiken-lang.org/installation-instructions)
+ A language server for Aiken Programming Language.
+ [Installation](https://aiken-lang.org/installation-instructions)
 
-It can be i
+ It can be i
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -465,9 +466,10 @@ Default config:
 
 https://github.com/posit-dev/air
 
-Air is an R formatter and language server, written in Rust.
+ Air is an R formatter and language server, written in Rust.
 
-Refer to the [documentation](https://posit-dev.github.io/air/editors.html) for more details.
+ Refer to the [documentation](https://posit-dev.github.io/air/editors.html) for more details.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -494,25 +496,26 @@ Default config:
 
 https://github.com/AlloyTools/org.alloytools.alloy
 
-Alloy is a formal specification language for describing structures and a tool for exploring them.
+ Alloy is a formal specification language for describing structures and a tool for exploring them.
 
-You may also need to configure the filetype for Alloy (*.als) files:
+ You may also need to configure the filetype for Alloy (*.als) files:
 
-```
-autocmd BufNewFile,BufRead *.als set filetype=alloy
-```
+ ```
+ autocmd BufNewFile,BufRead *.als set filetype=alloy
+ ```
 
-or
+ or
 
-```lua
-vim.filetype.add({
-  pattern = {
-    ['.*/*.als'] = 'alloy',
-  },
-})
-```
+ ```lua
+ vim.filetype.add({
+   pattern = {
+     ['.*/*.als'] = 'alloy',
+   },
+ })
+ ```
 
-Alternatively, you may use a syntax plugin like https://github.com/runoshun/vim-alloy.
+ Alternatively, you may use a syntax plugin like https://github.com/runoshun/vim-alloy.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -539,12 +542,13 @@ Default config:
 
 https://pypi.org/project/anakin-language-server/
 
-`anakin-language-server` is yet another Jedi Python language server.
+ `anakin-language-server` is yet another Jedi Python language server.
 
-Available options:
+ Available options:
 
-* Initialization: https://github.com/muffinmad/anakin-language-server#initialization-option
-* Configuration: https://github.com/muffinmad/anakin-language-server#configuration-options
+ * Initialization: https://github.com/muffinmad/anakin-language-server#initialization-option
+ * Configuration: https://github.com/muffinmad/anakin-language-server#configuration-options
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -614,13 +618,14 @@ Default config:
 
 https://github.com/ansible/vscode-ansible
 
-Language server for the ansible configuration management tool.
+ Language server for the ansible configuration management tool.
 
-`ansible-language-server` can be installed via `npm`:
+ `ansible-language-server` can be installed via `npm`:
 
-```sh
-npm install -g @ansible/ansible-language-server
-```
+ ```sh
+ npm install -g @ansible/ansible-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -670,10 +675,11 @@ Default config:
 
 https://www.npmjs.com/package/antlers-language-server
 
-`antlersls` can be installed via `npm`:
-```sh
-npm install -g antlers-language-server
-```
+ `antlersls` can be installed via `npm`:
+ ```sh
+ npm install -g antlers-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -791,7 +797,7 @@ Default config:
   ```lua
   { "arduino" }
   ```
-- `root_dir`: [../lsp/arduino_language_server.lua:73](../lsp/arduino_language_server.lua#L73)
+- `root_dir`: [../lsp/arduino_language_server.lua:74](../lsp/arduino_language_server.lua#L74)
 
 ---
 
@@ -799,10 +805,11 @@ Default config:
 
 https://github.com/bergercookie/asm-lsp
 
-Language Server for NASM/GAS/GO Assembly
+ Language Server for NASM/GAS/GO Assembly
 
-`asm-lsp` can be installed via cargo:
-cargo install asm-lsp
+ `asm-lsp` can be installed via cargo:
+ cargo install asm-lsp
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -829,11 +836,12 @@ Default config:
 
 https://ast-grep.github.io/
 
-ast-grep(sg) is a fast and polyglot tool for code structural search, lint, rewriting at large scale.
-ast-grep LSP only works in projects that have `sgconfig.y[a]ml` in their root directories.
-```sh
-npm install [-g] @ast-grep/cli
-```
+ ast-grep(sg) is a fast and polyglot tool for code structural search, lint, rewriting at large scale.
+ ast-grep LSP only works in projects that have `sgconfig.y[a]ml` in their root directories.
+ ```sh
+ npm install [-g] @ast-grep/cli
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -849,7 +857,7 @@ Default config:
   ```lua
   { "c", "cpp", "rust", "go", "java", "python", "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "html", "css", "kotlin", "dart", "lua" }
   ```
-- `reuse_client`: [../lsp/ast_grep.lua:10](../lsp/ast_grep.lua#L10)
+- `reuse_client`: [../lsp/ast_grep.lua:11](../lsp/ast_grep.lua#L11)
 - `root_markers` :
   ```lua
   { "sgconfig.yaml", "sgconfig.yml" }
@@ -873,7 +881,7 @@ vim.lsp.enable('astro')
 ```
 
 Default config:
-- `before_init`: [../lsp/astro.lua:12](../lsp/astro.lua#L12)
+- `before_init`: [../lsp/astro.lua:13](../lsp/astro.lua#L13)
 - `cmd` :
   ```lua
   { "astro-ls", "--stdio" }
@@ -899,58 +907,60 @@ Default config:
 
 https://github.com/ariga/atlas
 
-Language server for Atlas config and schema files.
+ Language server for Atlas config and schema files.
 
-You may also need to configure the filetype for *.hcl files:
+ You may also need to configure the filetype for *.hcl files:
 
-```vim
-autocmd BufNewFile,BufRead atlas.hcl set filetype=atlas-config
-autocmd BufNewFile,BufRead *.my.hcl set filetype=atlas-schema-mysql
-autocmd BufNewFile,BufRead *.pg.hcl set filetype=atlas-schema-postgresql
-autocmd BufNewFile,BufRead *.lt.hcl set filetype=atlas-schema-sqlite
-autocmd BufNewFile,BufRead *.ch.hcl set filetype=atlas-schema-clickhouse
-autocmd BufNewFile,BufRead *.ms.hcl set filetype=atlas-schema-mssql
-autocmd BufNewFile,BufRead *.rs.hcl set filetype=atlas-schema-redshift
-autocmd BufNewFile,BufRead *.test.hcl set filetype=atlas-test
-autocmd BufNewFile,BufRead *.plan.hcl set filetype=atlas-plan
-autocmd BufNewFile,BufRead *.rule.hcl set filetype=atlas-rule
-```
+ ```vim
+ autocmd BufNewFile,BufRead atlas.hcl set filetype=atlas-config
+ autocmd BufNewFile,BufRead *.my.hcl set filetype=atlas-schema-mysql
+ autocmd BufNewFile,BufRead *.pg.hcl set filetype=atlas-schema-postgresql
+ autocmd BufNewFile,BufRead *.lt.hcl set filetype=atlas-schema-sqlite
+ autocmd BufNewFile,BufRead *.ch.hcl set filetype=atlas-schema-clickhouse
+ autocmd BufNewFile,BufRead *.ms.hcl set filetype=atlas-schema-mssql
+ autocmd BufNewFile,BufRead *.rs.hcl set filetype=atlas-schema-redshift
+ autocmd BufNewFile,BufRead *.test.hcl set filetype=atlas-test
+ autocmd BufNewFile,BufRead *.plan.hcl set filetype=atlas-plan
+ autocmd BufNewFile,BufRead *.rule.hcl set filetype=atlas-rule
+ ```
 
-or
+ or
 
-```lua
-vim.filetype.add({
-  filename = {
-    ['atlas.hcl'] = 'atlas-config',
-  },
-  pattern = {
-    ['.*/*.my.hcl'] = 'atlas-schema-mysql',
-    ['.*/*.pg.hcl'] = 'atlas-schema-postgresql',
-    ['.*/*.lt.hcl'] = 'atlas-schema-sqlite',
-    ['.*/*.ch.hcl'] = 'atlas-schema-clickhouse',
-    ['.*/*.ms.hcl'] = 'atlas-schema-mssql',
-    ['.*/*.rs.hcl'] = 'atlas-schema-redshift',
-    ['.*/*.test.hcl'] = 'atlas-test',
-    ['.*/*.plan.hcl'] = 'atlas-plan',
-    ['.*/*.rule.hcl'] = 'atlas-rule',
-  },
-})
-```
+ ```lua
+ vim.filetype.add({
+   filename = {
+     ['atlas.hcl'] = 'atlas-config',
+   },
+   pattern = {
+     ['.*/*.my.hcl'] = 'atlas-schema-mysql',
+     ['.*/*.pg.hcl'] = 'atlas-schema-postgresql',
+     ['.*/*.lt.hcl'] = 'atlas-schema-sqlite',
+     ['.*/*.ch.hcl'] = 'atlas-schema-clickhouse',
+     ['.*/*.ms.hcl'] = 'atlas-schema-mssql',
+     ['.*/*.rs.hcl'] = 'atlas-schema-redshift',
+     ['.*/*.test.hcl'] = 'atlas-test',
+     ['.*/*.plan.hcl'] = 'atlas-plan',
+     ['.*/*.rule.hcl'] = 'atlas-rule',
+   },
+ })
+ ```
 
-Optionally, tell treesitter to treat Atlas filetypes as HCL for better syntax highlighting:
+ Optionally, tell treesitter to treat Atlas filetypes as HCL for better syntax highlighting:
 
-```lua
-vim.treesitter.language.register('hcl', 'atlas-config')
-vim.treesitter.language.register('hcl', 'atlas-schema-mysql')
-vim.treesitter.language.register('hcl', 'atlas-schema-postgresql')
-vim.treesitter.language.register('hcl', 'atlas-schema-sqlite')
-vim.treesitter.language.register('hcl', 'atlas-schema-clickhouse')
-vim.treesitter.language.register('hcl', 'atlas-schema-mssql')
-vim.treesitter.language.register('hcl', 'atlas-schema-redshift')
-vim.treesitter.language.register('hcl', 'atlas-test')
-vim.treesitter.language.register('hcl', 'atlas-plan')
-vim.treesitter.language.register('hcl', 'atlas-rule')
-```
+ ```lua
+ vim.treesitter.language.register('hcl', 'atlas-config')
+ vim.treesitter.language.register('hcl', 'atlas-schema-mysql')
+ vim.treesitter.language.register('hcl', 'atlas-schema-postgresql')
+ vim.treesitter.language.register('hcl', 'atlas-schema-sqlite')
+ vim.treesitter.language.register('hcl', 'atlas-schema-clickhouse')
+ vim.treesitter.language.register('hcl', 'atlas-schema-mssql')
+ vim.treesitter.language.register('hcl', 'atlas-schema-redshift')
+ vim.treesitter.language.register('hcl', 'atlas-test')
+ vim.treesitter.language.register('hcl', 'atlas-plan')
+ vim.treesitter.language.register('hcl', 'atlas-rule')
+ ```
+
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1065,7 +1075,7 @@ Default config:
   ```lua
   { "config", "automake", "make" }
   ```
-- `root_dir`: [../lsp/autotools_ls.lua:16](../lsp/autotools_ls.lua#L16)
+- `root_dir`: [../lsp/autotools_ls.lua:17](../lsp/autotools_ls.lua#L17)
 
 ---
 
@@ -1099,33 +1109,34 @@ Default config:
 
 https://github.com/microsoft/azure-pipelines-language-server
 
-An Azure Pipelines language server
+ An Azure Pipelines language server
 
-`azure-pipelines-ls` can be installed via `npm`:
+ `azure-pipelines-ls` can be installed via `npm`:
 
-```sh
-npm install -g azure-pipelines-language-server
-```
+ ```sh
+ npm install -g azure-pipelines-language-server
+ ```
 
-By default `azure-pipelines-ls` will only work in files named `azure-pipelines.yml`, this can be changed by providing additional settings like so:
-```lua
-vim.lsp.config('azure_pipelines_ls', {
-  ... -- other configuration
-  settings = {
-      yaml = {
-          schemas = {
-              ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
-                  "/azure-pipeline*.y*l",
-                  "/*.azure*",
-                  "Azure-Pipelines/**/*.y*l",
-                  "Pipelines/*.y*l",
-              },
-          },
-      },
-  },
-})
-```
-The Azure Pipelines LSP is a fork of `yaml-language-server` and as such the same settings can be passed to it as `yaml-language-server`.
+ By default `azure-pipelines-ls` will only work in files named `azure-pipelines.yml`, this can be changed by providing additional settings like so:
+ ```lua
+ vim.lsp.config('azure_pipelines_ls', {
+   ... -- other configuration
+   settings = {
+       yaml = {
+           schemas = {
+               ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
+                   "/azure-pipeline*.y*l",
+                   "/*.azure*",
+                   "Azure-Pipelines/**/*.y*l",
+                   "Pipelines/*.y*l",
+               },
+           },
+       },
+   },
+ })
+ ```
+ The Azure Pipelines LSP is a fork of `yaml-language-server` and as such the same settings can be passed to it as `yaml-language-server`.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1156,41 +1167,42 @@ Default config:
 
 https://github.com/crisidev/bacon-ls
 
-A Language Server Protocol wrapper for [bacon](https://dystroy.org/bacon/).
-It offers textDocument/diagnostic and workspace/diagnostic capabilities for Rust
-workspaces using the Bacon export locations file.
+ A Language Server Protocol wrapper for [bacon](https://dystroy.org/bacon/).
+ It offers textDocument/diagnostic and workspace/diagnostic capabilities for Rust
+ workspaces using the Bacon export locations file.
 
-It requires `bacon` and `bacon-ls` to be installed on the system using
-[mason.nvim](https://github.com/williamboman/mason.nvim) or manually
+ It requires `bacon` and `bacon-ls` to be installed on the system using
+ [mason.nvim](https://github.com/williamboman/mason.nvim) or manually
 
-```sh
-$ cargo install --locked bacon bacon-ls
-```
+ ```sh
+ $ cargo install --locked bacon bacon-ls
+ ```
 
-Settings can be changed using the `init_options` dictionary:util
+ Settings can be changed using the `init_options` dictionary:util
 
-```lua
-init_options = {
-    -- Bacon export filename (default: .bacon-locations).
-    locationsFile = ".bacon-locations",
-    -- Try to update diagnostics every time the file is saved (default: true).
-    updateOnSave = true,
-    --  How many milliseconds to wait before updating diagnostics after a save (default: 1000).
-    updateOnSaveWaitMillis = 1000,
-    -- Try to update diagnostics every time the file changes (default: true).
-    updateOnChange = true,
-    -- Try to validate that bacon preferences are setup correctly to work with bacon-ls (default: true).
-    validateBaconPreferences = true,
-    -- f no bacon preferences file is found, create a new preferences file with the bacon-ls job definition (default: true).
-    createBaconPreferencesFile = true,
-    -- Run bacon in background for the bacon-ls job (default: true)
-    runBaconInBackground = true,
-    -- Command line arguments to pass to bacon running in background (default "--headless -j bacon-ls")
-    runBaconInBackgroundCommandArguments = "--headless -j bacon-ls",
-    -- How many milliseconds to wait between background diagnostics check to synchronize all open files (default: 2000).
-    synchronizeAllOpenFilesWaitMillis = 2000,
-}
-```
+ ```lua
+ init_options = {
+     -- Bacon export filename (default: .bacon-locations).
+     locationsFile = ".bacon-locations",
+     -- Try to update diagnostics every time the file is saved (default: true).
+     updateOnSave = true,
+     --  How many milliseconds to wait before updating diagnostics after a save (default: 1000).
+     updateOnSaveWaitMillis = 1000,
+     -- Try to update diagnostics every time the file changes (default: true).
+     updateOnChange = true,
+     -- Try to validate that bacon preferences are setup correctly to work with bacon-ls (default: true).
+     validateBaconPreferences = true,
+     -- f no bacon preferences file is found, create a new preferences file with the bacon-ls job definition (default: true).
+     createBaconPreferencesFile = true,
+     -- Run bacon in background for the bacon-ls job (default: true)
+     runBaconInBackground = true,
+     -- Command line arguments to pass to bacon running in background (default "--headless -j bacon-ls")
+     runBaconInBackgroundCommandArguments = "--headless -j bacon-ls",
+     -- How many milliseconds to wait between background diagnostics check to synchronize all open files (default: 2000).
+     synchronizeAllOpenFilesWaitMillis = 2000,
+ }
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1221,8 +1233,9 @@ Default config:
 
 Ballerina language server
 
-The Ballerina language's CLI tool comes with its own language server implementation.
-The `bal` command line tool must be installed and available in your system's PATH.
+ The Ballerina language's CLI tool comes with its own language server implementation.
+ The `bal` command line tool must be installed and available in your system's PATH.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1265,7 +1278,7 @@ Default config:
   ```lua
   { "python" }
   ```
-- `on_attach`: [../lsp/basedpyright.lua:22](../lsp/basedpyright.lua#L22)
+- `on_attach`: [../lsp/basedpyright.lua:23](../lsp/basedpyright.lua#L23)
 - `root_markers` :
   ```lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
@@ -1289,12 +1302,13 @@ Default config:
 
 https://github.com/bash-lsp/bash-language-server
 
-`bash-language-server` can be installed via `npm`:
-```sh
-npm i -g bash-language-server
-```
+ `bash-language-server` can be installed via `npm`:
+ ```sh
+ npm i -g bash-language-server
+ ```
 
-Language server for bash, written using tree sitter in typescript.
+ Language server for bash, written using tree sitter in typescript.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1329,11 +1343,12 @@ Default config:
 
 https://github.com/antonk52/basics-language-server/
 
-Buffer, path, and snippet completion
+ Buffer, path, and snippet completion
 
-```sh
-npm install -g basics-language-server
-```
+ ```sh
+ npm install -g basics-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1368,17 +1383,18 @@ Default config:
 
 https://github.com/salesforce-misc/bazelrc-lsp
 
-`bazelrc-lsp` is a LSP for `.bazelrc` configuration files.
+ `bazelrc-lsp` is a LSP for `.bazelrc` configuration files.
 
-The `.bazelrc` file type is not detected automatically, you can register it manually (see below) or override the filetypes:
+ The `.bazelrc` file type is not detected automatically, you can register it manually (see below) or override the filetypes:
 
-```lua
-vim.filetype.add {
-  pattern = {
-    ['.*.bazelrc'] = 'bazelrc',
-  },
-}
-```
+ ```lua
+ vim.filetype.add {
+   pattern = {
+     ['.*.bazelrc'] = 'bazelrc',
+   },
+ }
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1405,7 +1421,8 @@ Default config:
 
 https://github.com/polarmutex/beancount-language-server#installation
 
-See https://github.com/polarmutex/beancount-language-server#configuration for configuration options
+ See https://github.com/polarmutex/beancount-language-server#configuration for configuration options
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1435,36 +1452,37 @@ Default config:
 ## bicep
 
 https://github.com/azure/bicep
-Bicep language server
+ Bicep language server
 
-Bicep language server can be installed by downloading and extracting a release of bicep-langserver.zip from [Bicep GitHub releases](https://github.com/Azure/bicep/releases).
+ Bicep language server can be installed by downloading and extracting a release of bicep-langserver.zip from [Bicep GitHub releases](https://github.com/Azure/bicep/releases).
 
-Bicep language server requires the [dotnet-sdk](https://dotnet.microsoft.com/download) to be installed.
+ Bicep language server requires the [dotnet-sdk](https://dotnet.microsoft.com/download) to be installed.
 
-Neovim does not have built-in support for the bicep filetype which is required for lspconfig to automatically launch the language server.
+ Neovim does not have built-in support for the bicep filetype which is required for lspconfig to automatically launch the language server.
 
-Filetype detection can be added via an autocmd:
-```lua
-vim.cmd [[ autocmd BufNewFile,BufRead *.bicep set filetype=bicep ]]
-```
+ Filetype detection can be added via an autocmd:
+ ```lua
+ vim.cmd [[ autocmd BufNewFile,BufRead *.bicep set filetype=bicep ]]
+ ```
 
-**By default, bicep language server does not have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of the unzipped run script or binary.
+ **By default, bicep language server does not have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of the unzipped run script or binary.
 
-```lua
-local bicep_lsp_bin = "/path/to/bicep-langserver/Bicep.LangServer.dll"
-vim.lsp.config('bicep', {
-    cmd = { "dotnet", bicep_lsp_bin };
-    ...
-})
-```
+ ```lua
+ local bicep_lsp_bin = "/path/to/bicep-langserver/Bicep.LangServer.dll"
+ vim.lsp.config('bicep', {
+     cmd = { "dotnet", bicep_lsp_bin };
+     ...
+ })
+ ```
 
-To download the latest release and place in /usr/local/bin/bicep-langserver:
-```bash
-(cd $(mktemp -d) \
-    && curl -fLO https://github.com/Azure/bicep/releases/latest/download/bicep-langserver.zip \
-    && rm -rf /usr/local/bin/bicep-langserver \
-    && unzip -d /usr/local/bin/bicep-langserver bicep-langserver.zip)
-```
+ To download the latest release and place in /usr/local/bin/bicep-langserver:
+ ```bash
+ (cd $(mktemp -d) \
+     && curl -fLO https://github.com/Azure/bicep/releases/latest/download/bicep-langserver.zip \
+     && rm -rf /usr/local/bin/bicep-langserver \
+     && unzip -d /usr/local/bin/bicep-langserver bicep-langserver.zip)
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1507,12 +1525,12 @@ vim.lsp.enable('biome')
 ```
 
 Default config:
-- `cmd`: [../lsp/biome.lua:16](../lsp/biome.lua#L16)
+- `cmd`: [../lsp/biome.lua:17](../lsp/biome.lua#L17)
 - `filetypes` :
   ```lua
   { "astro", "css", "graphql", "html", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
   ```
-- `root_dir`: [../lsp/biome.lua:16](../lsp/biome.lua#L16)
+- `root_dir`: [../lsp/biome.lua:17](../lsp/biome.lua#L17)
 - `workspace_required` : `true`
 
 ---
@@ -1520,6 +1538,7 @@ Default config:
 ## bitbake_language_server
 
 🛠️ bitbake language server
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1546,10 +1565,11 @@ Default config:
 
 https://gitlab.gnome.org/jwestman/blueprint-compiler
 
-`blueprint-compiler` can be installed via your system package manager.
+ `blueprint-compiler` can be installed via your system package manager.
 
-Language server for the blueprint markup language, written in python and part
-of the blueprint-compiler.
+ Language server for the blueprint markup language, written in python and part
+ of the blueprint-compiler.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1582,11 +1602,12 @@ Default config:
 
 https://github.com/kitagry/bqls
 
-The `bqls` BigQuery language server can be installed by running:
+ The `bqls` BigQuery language server can be installed by running:
 
-```sh
-$ go install github.com/kitagry/bqls@latest
-```
+ ```sh
+ $ go install github.com/kitagry/bqls@latest
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1617,10 +1638,11 @@ Default config:
 
 https://github.com/RokuCommunity/brighterscript
 
-`brightscript` can be installed via `npm`:
-```sh
-npm install -g brighterscript
-```
+ `brightscript` can be installed via `npm`:
+ ```sh
+ npm install -g brighterscript
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1670,13 +1692,14 @@ Default config:
 
 https://github.com/facebook/buck2
 
-Build system, successor to Buck
+ Build system, successor to Buck
 
-To better detect Buck2 project files, the following can be added:
+ To better detect Buck2 project files, the following can be added:
 
-```
-vim.cmd [[ autocmd BufRead,BufNewFile *.bxl,BUCK,TARGETS set filetype=bzl ]]
-```
+ ```
+ vim.cmd [[ autocmd BufRead,BufNewFile *.bxl,BUCK,TARGETS set filetype=bzl ]]
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1702,9 +1725,10 @@ Default config:
 ## buddy_ls
 
 https://github.com/buddy-compiler/buddy-mlir#buddy-lsp-server
-The Language Server for the buddy-mlir, a drop-in replacement for mlir-lsp-server,
-supporting new dialects defined in buddy-mlir.
-`buddy-lsp-server` can be installed at the buddy-mlir repository (buddy-compiler/buddy-mlir)
+ The Language Server for the buddy-mlir, a drop-in replacement for mlir-lsp-server,
+ supporting new dialects defined in buddy-mlir.
+ `buddy-lsp-server` can be installed at the buddy-mlir repository (buddy-compiler/buddy-mlir)
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1760,12 +1784,13 @@ Default config:
 
 https://github.com/bufbuild/buf-language-server
 
-`buf-language-server` can be installed via `go install`:
-```sh
-go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
-```
+ `buf-language-server` can be installed via `go install`:
+ ```sh
+ go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
+ ```
 
-bufls is a Protobuf language server compatible with Buf modules and workspaces
+ bufls is a Protobuf language server compatible with Buf modules and workspaces
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1792,9 +1817,10 @@ Default config:
 
 https://bzl.io/
 
-https://docs.stack.build/docs/cli/installation
+ https://docs.stack.build/docs/cli/installation
 
-https://docs.stack.build/docs/vscode/starlark-language-server
+ https://docs.stack.build/docs/vscode/starlark-language-server
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1821,7 +1847,8 @@ Default config:
 
 https://github.com/pherrymason/c3-lsp
 
-Language Server for c3.
+ Language Server for c3.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1848,14 +1875,15 @@ Default config:
 
 [Cairo Language Server](https://github.com/starkware-libs/cairo/tree/main/crates/cairo-lang-language-server)
 
-First, install Cairo following [this tutorial](https://book.cairo-lang.org/ch01-01-installation.html)
+ First, install Cairo following [this tutorial](https://book.cairo-lang.org/ch01-01-installation.html)
 
-Then enable Cairo Language Server in your Lua configuration.
-```lua
-vim.lsp.enable('cairo_ls')
-```
+ Then enable Cairo Language Server in your Lua configuration.
+ ```lua
+ vim.lsp.enable('cairo_ls')
+ ```
 
-*cairo-language-server is still under active development, some features might not work yet !*
+ *cairo-language-server is still under active development, some features might not work yet !*
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1926,7 +1954,7 @@ Default config:
   ```lua
   "utf-32"
   ```
-- `on_attach`: [../lsp/ccls.lua:40](../lsp/ccls.lua#L40)
+- `on_attach`: [../lsp/ccls.lua:41](../lsp/ccls.lua#L41)
 - `root_markers` :
   ```lua
   { "compile_commands.json", ".ccls", ".git" }
@@ -1939,11 +1967,12 @@ Default config:
 
 https://cap.cloud.sap/docs/
 
-`cds-lsp` can be installed via `npm`:
+ `cds-lsp` can be installed via `npm`:
 
-```sh
-npm i -g @sap/cds-lsp
-```
+ ```sh
+ npm i -g @sap/cds-lsp
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -1978,7 +2007,8 @@ Default config:
 
 [Circom Language Server](https://github.com/rubydusa/circom-lsp)
 
-`circom-lsp`, the language server for the Circom language.
+ `circom-lsp`, the language server for the Circom language.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2039,8 +2069,8 @@ Default config:
   ```lua
   { "c", "cpp", "objc", "objcpp", "cuda" }
   ```
-- `on_attach`: [../lsp/clangd.lua:64](../lsp/clangd.lua#L64)
-- `on_init`: [../lsp/clangd.lua:64](../lsp/clangd.lua#L64)
+- `on_attach`: [../lsp/clangd.lua:65](../lsp/clangd.lua#L65)
+- `on_init`: [../lsp/clangd.lua:65](../lsp/clangd.lua#L65)
 - `root_markers` :
   ```lua
   { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" }
@@ -2052,7 +2082,8 @@ Default config:
 
 https://github.com/hirosystems/clarinet
 
-Clarinet is the fastest way to build, test, and deploy smart contracts on the Stacks blockchain.
+ Clarinet is the fastest way to build, test, and deploy smart contracts on the Stacks blockchain.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2079,7 +2110,8 @@ Default config:
 
 https://github.com/clojure-lsp/clojure-lsp
 
-Clojure Language Server
+ Clojure Language Server
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2106,7 +2138,8 @@ Default config:
 
 https://github.com/regen100/cmake-language-server
 
-CMake LSP Implementation
+ CMake LSP Implementation
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2138,6 +2171,7 @@ Default config:
 ## cobol_ls
 
 Cobol language support
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2164,11 +2198,13 @@ Default config:
 
 https://github.com/blopker/codebook
 
- An unholy spell checker for code.
+  An unholy spell checker for code.
 
-`codebook-lsp` can be installed by following the instructions [here](https://github.com/blopker/codebook/blob/main/README.md#installation).
+ `codebook-lsp` can be installed by following the instructions [here](https://github.com/blopker/codebook/blob/main/README.md#installation).
 
-The default `cmd` assumes that the `codebook-lsp` binary can be found in `$PATH`.
+ The default `cmd` assumes that the `codebook-lsp` binary can be found in `$PATH`.
+
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2195,11 +2231,12 @@ Default config:
 
 https://github.com/phil294/coffeesense
 
-CoffeeSense Language Server
-`coffeesense-language-server` can be installed via `npm`:
-```sh
-npm install -g coffeesense-language-server
-```
+ CoffeeSense Language Server
+ `coffeesense-language-server` can be installed via `npm`:
+ ```sh
+ npm install -g coffeesense-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2226,13 +2263,14 @@ Default config:
 
 https://github.com/dev-cycles/contextive
 
-Language Server for Contextive.
+ Language Server for Contextive.
 
-Contextive allows you to define terms in a central file and provides auto-completion suggestions and hover panels for these terms wherever they're used.
+ Contextive allows you to define terms in a central file and provides auto-completion suggestions and hover panels for these terms wherever they're used.
 
-To install the language server, you need to download the appropriate [GitHub release asset](https://github.com/dev-cycles/contextive/releases/) for your operating system and architecture.
+ To install the language server, you need to download the appropriate [GitHub release asset](https://github.com/dev-cycles/contextive/releases/) for your operating system and architecture.
 
-After the download unzip the Contextive.LanguageServer binary and copy the file into a folder that is included in your system's PATH.
+ After the download unzip the Contextive.LanguageServer binary and copy the file into a folder that is included in your system's PATH.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2254,6 +2292,7 @@ Default config:
 ## coq_lsp
 
 https://github.com/ejgallego/coq-lsp/
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2280,7 +2319,8 @@ Default config:
 
 https://github.com/elbywan/crystalline
 
-Crystal language server.
+ Crystal language server.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2333,13 +2373,15 @@ Default config:
     AutomaticWorkspaceInit = true
   }
   ```
-- `root_dir`: [../lsp/csharp_ls.lua:13](../lsp/csharp_ls.lua#L13)
+- `root_dir`: [../lsp/csharp_ls.lua:14](../lsp/csharp_ls.lua#L14)
 
 ---
 
 ## cspell_ls
 
 [cspell language server](https://github.com/vlabo/cspell-lsp)
+
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2362,13 +2404,14 @@ Default config:
 
 https://github.com/vunguyentuan/vscode-css-variables/tree/master/packages/css-variables-language-server
 
-CSS variables autocompletion and go-to-definition
+ CSS variables autocompletion and go-to-definition
 
-`css-variables-language-server` can be installed via `npm`:
+ `css-variables-language-server` can be installed via `npm`:
 
-```sh
-npm i -g css-variables-language-server
-```
+ ```sh
+ npm i -g css-variables-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2404,23 +2447,24 @@ Default config:
 
 https://github.com/hrsh7th/vscode-langservers-extracted
 
-`css-languageserver` can be installed via `npm`:
+ `css-languageserver` can be installed via `npm`:
 
-```sh
-npm i -g vscode-langservers-extracted
-```
+ ```sh
+ npm i -g vscode-langservers-extracted
+ ```
 
-Neovim does not currently include built-in snippets. `vscode-css-language-server` only provides completions when snippet support is enabled. To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
+ Neovim does not currently include built-in snippets. `vscode-css-language-server` only provides completions when snippet support is enabled. To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
 
-```lua
---Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+ ```lua
+ --Enable (broadcasting) snippet capability for completion
+ local capabilities = vim.lsp.protocol.make_client_capabilities()
+ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-vim.lsp.config('cssls', {
-  capabilities = capabilities,
-})
-```
+ vim.lsp.config('cssls', {
+   capabilities = capabilities,
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2467,12 +2511,13 @@ Default config:
 
 https://github.com/antonk52/cssmodules-language-server
 
-Language server for autocompletion and go-to-definition functionality for CSS modules.
+ Language server for autocompletion and go-to-definition functionality for CSS modules.
 
-You can install cssmodules-language-server via npm:
-```sh
-npm install -g cssmodules-language-server
-```
+ You can install cssmodules-language-server via npm:
+ ```sh
+ npm install -g cssmodules-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2498,15 +2543,16 @@ Default config:
 ## cucumber_language_server
 
 https://cucumber.io
-https://github.com/cucumber/common
-https://www.npmjs.com/package/@cucumber/language-server
+ https://github.com/cucumber/common
+ https://www.npmjs.com/package/@cucumber/language-server
 
-Language server for Cucumber.
+ Language server for Cucumber.
 
-`cucumber-language-server` can be installed via `npm`:
-```sh
-npm install -g @cucumber/language-server
-```
+ `cucumber-language-server` can be installed via `npm`:
+ ```sh
+ npm install -g @cucumber/language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2533,7 +2579,8 @@ Default config:
 
 https://github.com/cue-lang/cue
 
-CUE makes it easy to validate data, write schemas, and ensure configurations align with policies.
+ CUE makes it easy to validate data, write schemas, and ensure configurations align with policies.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2560,27 +2607,28 @@ Default config:
 
 https://github.com/Matsuuu/custom-elements-language-server
 
-`custom-elements-languageserver` depends on `typescript`. Both packages can be installed via `npm`:
-```sh
-npm install -g typescript custom-elements-languageserver
-```
-To configure typescript language server, add a
-[`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) or
-[`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig) to the root of your
-project.
-Here's an example that disables type checking in JavaScript files.
-```json
-{
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
-    "checkJs": false
-  },
-  "exclude": [
-    "node_modules"
-  ]
-}
-```
+ `custom-elements-languageserver` depends on `typescript`. Both packages can be installed via `npm`:
+ ```sh
+ npm install -g typescript custom-elements-languageserver
+ ```
+ To configure typescript language server, add a
+ [`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) or
+ [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig) to the root of your
+ project.
+ Here's an example that disables type checking in JavaScript files.
+ ```json
+ {
+   "compilerOptions": {
+     "module": "commonjs",
+     "target": "es6",
+     "checkJs": false
+   },
+   "exclude": [
+     "node_modules"
+   ]
+ }
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2598,7 +2646,10 @@ Default config:
     hostInfo = "neovim"
   }
   ```
-- `root_dir`: [../lsp/custom_elements_ls.lua:26](../lsp/custom_elements_ls.lua#L26)
+- `root_markers` :
+  ```lua
+  { "tsconfig.json", "package.json", "jsconfig.json", ".git" }
+  ```
 
 ---
 
@@ -2606,13 +2657,14 @@ Default config:
 
 https://github.com/neo4j/cypher-language-support/tree/main/packages/language-server
 
-`cypher-language-server`, language server for Cypher query language.
-Part of the umbrella project cypher-language-support: https://github.com/neo4j/cypher-language-support
+ `cypher-language-server`, language server for Cypher query language.
+ Part of the umbrella project cypher-language-support: https://github.com/neo4j/cypher-language-support
 
-`cypher-language-server` can be installed via `npm`:
-```sh
-npm i -g @neo4j-cypher/language-server
-```
+ `cypher-language-server` can be installed via `npm`:
+ ```sh
+ npm i -g @neo4j-cypher/language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2703,7 +2755,8 @@ Default config:
 
 https://github.com/dagger/cuelsp
 
-Dagger's lsp server for cuelang.
+ Dagger's lsp server for cuelang.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2730,7 +2783,8 @@ Default config:
 
 https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec
 
-Language server for dart.
+ Language server for dart.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2776,7 +2830,8 @@ Default config:
 
 https://dcm.dev/
 
-Language server for DCM analyzer.
+ Language server for DCM analyzer.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2803,7 +2858,8 @@ Default config:
 
 https://salsa.debian.org/debian/debputy
 
-Language Server for Debian packages.
+ Language Server for Debian packages.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2869,7 +2925,7 @@ Default config:
     ["textDocument/typeDefinition"] = <function 1>
   }
   ```
-- `on_attach`: [../lsp/denols.lua:66](../lsp/denols.lua#L66)
+- `on_attach`: [../lsp/denols.lua:67](../lsp/denols.lua#L67)
 - `root_markers` :
   ```lua
   { "deno.json", "deno.jsonc", ".git" }
@@ -2929,7 +2985,8 @@ Default config:
 
 https://github.com/iamcco/diagnostic-languageserver
 
-Diagnostic language server integrate with linters.
+ Diagnostic language server integrate with linters.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -2956,11 +3013,12 @@ Default config:
 
 https://github.com/astoff/digestif
 
-Digestif is a code analyzer, and a language server, for LaTeX, ConTeXt et caterva. It provides
+ Digestif is a code analyzer, and a language server, for LaTeX, ConTeXt et caterva. It provides
 
-context-sensitive completion, documentation, code navigation, and related functionality to any
+ context-sensitive completion, documentation, code navigation, and related functionality to any
 
-text editor that speaks the LSP protocol.
+ text editor that speaks the LSP protocol.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3052,10 +3110,11 @@ Default config:
 
 https://github.com/docker/docker-language-server
 
-`docker-langserver-server` can be installed via `go`:
-```sh
-go install github.com/docker/docker-language-server/cmd/docker-language-server@latest
-```
+ `docker-langserver-server` can be installed via `go`:
+ ```sh
+ go install github.com/docker/docker-language-server/cmd/docker-language-server@latest
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3071,7 +3130,7 @@ Default config:
   ```lua
   { "dockerfile", "yaml.docker-compose" }
   ```
-- `get_language_id`: [../lsp/docker_language_server.lua:9](../lsp/docker_language_server.lua#L9)
+- `get_language_id`: [../lsp/docker_language_server.lua:10](../lsp/docker_language_server.lua#L10)
 - `root_markers` :
   ```lua
   { "Dockerfile", "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml", "docker-bake.json", "docker-bake.hcl", "docker-bake.override.json", "docker-bake.override.hcl" }
@@ -3083,25 +3142,26 @@ Default config:
 
 https://github.com/rcjsuen/dockerfile-language-server-nodejs
 
-`docker-langserver` can be installed via `npm`:
-```sh
-npm install -g dockerfile-language-server-nodejs
-```
+ `docker-langserver` can be installed via `npm`:
+ ```sh
+ npm install -g dockerfile-language-server-nodejs
+ ```
 
-Additional configuration can be applied in the following way:
-```lua
-vim.lsp.config('dockerls', {
-    settings = {
-        docker = {
-	    languageserver = {
-	        formatter = {
-		    ignoreMultilineInstructions = true,
-		},
-	    },
-	}
-    }
-})
-```
+ Additional configuration can be applied in the following way:
+ ```lua
+ vim.lsp.config('dockerls', {
+     settings = {
+         docker = {
+ 	    languageserver = {
+ 	        formatter = {
+ 		    ignoreMultilineInstructions = true,
+ 		},
+ 	    },
+ 	}
+     }
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3128,10 +3188,11 @@ Default config:
 
 https://github.com/Gbury/dolmen/blob/master/doc/lsp.md
 
-`dolmenls` can be installed via `opam`
-```sh
-opam install dolmen_lsp
-```
+ `dolmenls` can be installed via `opam`
+ ```sh
+ opam install dolmen_lsp
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3158,10 +3219,11 @@ Default config:
 
 https://github.com/nikeee/dot-language-server
 
-`dot-language-server` can be installed via `npm`:
-```sh
-npm install -g dot-language-server
-```
+ `dot-language-server` can be installed via `npm`:
+ ```sh
+ npm install -g dot-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3188,7 +3250,8 @@ Default config:
 
 https://github.com/dprint/dprint
 
-Pluggable and configurable code formatting platform written in Rust.
+ Pluggable and configurable code formatting platform written in Rust.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3258,7 +3321,7 @@ Default config:
     show_symbols_only_follow_by_hanzi = false
   }
   ```
-- `on_attach`: [../lsp/ds_pinyin_lsp.lua:45](../lsp/ds_pinyin_lsp.lua#L45)
+- `on_attach`: [../lsp/ds_pinyin_lsp.lua:46](../lsp/ds_pinyin_lsp.lua#L46)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -3340,10 +3403,11 @@ Default config:
 
 https://github.com/ecsact-dev/ecsact_lsp_server
 
-Language server for Ecsact.
+ Language server for Ecsact.
 
-The default cmd assumes `ecsact_lsp_server` is in your PATH. Typically from the
-Ecsact SDK: https://ecsact.dev/start
+ The default cmd assumes `ecsact_lsp_server` is in your PATH. Typically from the
+ Ecsact SDK: https://ecsact.dev/start
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3407,29 +3471,30 @@ Default config:
 
 https://github.com/elixir-lsp/elixir-ls
 
-`elixir-ls` can be installed by following the instructions [here](https://github.com/elixir-lsp/elixir-ls#building-and-running).
+ `elixir-ls` can be installed by following the instructions [here](https://github.com/elixir-lsp/elixir-ls#building-and-running).
 
-1. Download the zip from https://github.com/elixir-lsp/elixir-ls/releases/latest/
-2. Unzip it and make it executable.
-   ```bash
-   unzip elixir-ls.zip -d /path/to/elixir-ls
-   # Unix
-   chmod +x /path/to/elixir-ls/language_server.sh
-   ```
+ 1. Download the zip from https://github.com/elixir-lsp/elixir-ls/releases/latest/
+ 2. Unzip it and make it executable.
+    ```bash
+    unzip elixir-ls.zip -d /path/to/elixir-ls
+    # Unix
+    chmod +x /path/to/elixir-ls/language_server.sh
+    ```
 
-**By default, elixir-ls doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of your unzipped elixir-ls.
+ **By default, elixir-ls doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of your unzipped elixir-ls.
 
-```lua
-vim.lsp.config('elixirls', {
-    -- Unix
-    cmd = { "/path/to/elixir-ls/language_server.sh" };
-    -- Windows
-    cmd = { "/path/to/elixir-ls/language_server.bat" };
-    ...
-})
-```
+ ```lua
+ vim.lsp.config('elixirls', {
+     -- Unix
+     cmd = { "/path/to/elixir-ls/language_server.sh" };
+     -- Windows
+     cmd = { "/path/to/elixir-ls/language_server.bat" };
+     ...
+ })
+ ```
 
-'root_dir' is chosen like this: if two or more directories containing `mix.exs` were found when searching directories upward, the second one (higher up) is chosen, with the assumption that it is the root of an umbrella app. Otherwise the directory containing the single mix.exs that was found is chosen.
+ 'root_dir' is chosen like this: if two or more directories containing `mix.exs` were found when searching directories upward, the second one (higher up) is chosen, with the assumption that it is the root of an umbrella app. Otherwise the directory containing the single mix.exs that was found is chosen.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3441,7 +3506,7 @@ Default config:
   ```lua
   { "elixir", "eelixir", "heex", "surface" }
   ```
-- `root_dir`: [../lsp/elixirls.lua:28](../lsp/elixirls.lua#L28)
+- `root_dir`: [../lsp/elixirls.lua:29](../lsp/elixirls.lua#L29)
 
 ---
 
@@ -3483,7 +3548,7 @@ Default config:
     skipInstallPackageConfirmation = false
   }
   ```
-- `root_dir`: [../lsp/elmls.lua:12](../lsp/elmls.lua#L12)
+- `root_dir`: [../lsp/elmls.lua:13](../lsp/elmls.lua#L13)
 
 ---
 
@@ -3491,8 +3556,9 @@ Default config:
 
 https://whatsapp.github.io/erlang-language-platform
 
-ELP integrates Erlang into modern IDEs via the language server protocol and was
-inspired by rust-analyzer.
+ ELP integrates Erlang into modern IDEs via the language server protocol and was
+ inspired by rust-analyzer.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3519,11 +3585,12 @@ Default config:
 
 https://github.com/ember-tooling/ember-language-server
 
-`ember-language-server` can be installed via `npm`:
+ `ember-language-server` can be installed via `npm`:
 
-```sh
-npm install -g @ember-tooling/ember-language-server
-```
+ ```sh
+ npm install -g @ember-tooling/ember-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3550,10 +3617,11 @@ Default config:
 
 https://github.com/olrtg/emmet-language-server
 
-Package can be installed via `npm`:
-```sh
-npm install -g @olrtg/emmet-language-server
-```
+ Package can be installed via `npm`:
+ ```sh
+ npm install -g @olrtg/emmet-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3580,10 +3648,11 @@ Default config:
 
 https://github.com/aca/emmet-ls
 
-Package can be installed via `npm`:
-```sh
-npm install -g emmet-ls
-```
+ Package can be installed via `npm`:
+ ```sh
+ npm install -g emmet-ls
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3678,16 +3747,17 @@ Default config:
 
 https://erlang-ls.github.io
 
-Language Server for Erlang.
+ Language Server for Erlang.
 
-Clone [erlang_ls](https://github.com/erlang-ls/erlang_ls)
-Compile the project with `make` and copy resulting binaries somewhere in your $PATH eg. `cp _build/*/bin/* ~/local/bin`
+ Clone [erlang_ls](https://github.com/erlang-ls/erlang_ls)
+ Compile the project with `make` and copy resulting binaries somewhere in your $PATH eg. `cp _build/*/bin/* ~/local/bin`
 
-Installation instruction can be found [here](https://github.com/erlang-ls/erlang_ls).
+ Installation instruction can be found [here](https://github.com/erlang-ls/erlang_ls).
 
-Installation requirements:
-    - [Erlang OTP 21+](https://github.com/erlang/otp)
-    - [rebar3 3.9.1+](https://github.com/erlang/rebar3)
+ Installation requirements:
+     - [Erlang OTP 21+](https://github.com/erlang/otp)
+     - [rebar3 3.9.1+](https://github.com/erlang/rebar3)
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3714,46 +3784,47 @@ Default config:
 
 https://github.com/swyddfa/esbonio
 
-Esbonio is a language server for [Sphinx](https://www.sphinx-doc.org/en/master/) documentation projects.
-The language server can be installed via pip
+ Esbonio is a language server for [Sphinx](https://www.sphinx-doc.org/en/master/) documentation projects.
+ The language server can be installed via pip
 
-```
-pip install esbonio
-```
+ ```
+ pip install esbonio
+ ```
 
-Since Sphinx is highly extensible you will get best results if you install the language server in the same
-Python environment as the one used to build your documentation. To ensure that the correct Python environment
-is picked up, you can either launch `nvim` with the correct environment activated.
+ Since Sphinx is highly extensible you will get best results if you install the language server in the same
+ Python environment as the one used to build your documentation. To ensure that the correct Python environment
+ is picked up, you can either launch `nvim` with the correct environment activated.
 
-```
-source env/bin/activate
-nvim
-```
+ ```
+ source env/bin/activate
+ nvim
+ ```
 
-Or you can modify the default `cmd` to include the full path to the Python interpreter.
+ Or you can modify the default `cmd` to include the full path to the Python interpreter.
 
-```lua
-vim.lsp.config('esbonio', {
-  cmd = { '/path/to/virtualenv/bin/python', '-m', 'esbonio' }
-})
-```
+ ```lua
+ vim.lsp.config('esbonio', {
+   cmd = { '/path/to/virtualenv/bin/python', '-m', 'esbonio' }
+ })
+ ```
 
-Esbonio supports a number of config values passed as `init_options` on startup, for example.
+ Esbonio supports a number of config values passed as `init_options` on startup, for example.
 
-```lua
-vim.lsp.config('esbonio', {
-  init_options = {
-    server = {
-      logLevel = "debug"
-    },
-    sphinx = {
-      confDir = "/path/to/docs",
-      srcDir = "${confDir}/../docs-src"
-    }
-})
-```
+ ```lua
+ vim.lsp.config('esbonio', {
+   init_options = {
+     server = {
+       logLevel = "debug"
+     },
+     sphinx = {
+       confDir = "/path/to/docs",
+       srcDir = "${confDir}/../docs-src"
+     }
+ })
+ ```
 
-A full list and explanation of the available options can be found [here](https://docs.esbon.io/en/esbonio-language-server-v0.16.4/lsp/getting-started.html?editor=neovim-lspconfig#configuration)
+ A full list and explanation of the available options can be found [here](https://docs.esbon.io/en/esbonio-language-server-v0.16.4/lsp/getting-started.html?editor=neovim-lspconfig#configuration)
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3823,7 +3894,7 @@ vim.lsp.enable('eslint')
 ```
 
 Default config:
-- `before_init`: [../lsp/eslint.lua:60](../lsp/eslint.lua#L60)
+- `before_init`: [../lsp/eslint.lua:61](../lsp/eslint.lua#L61)
 - `cmd` :
   ```lua
   { "vscode-eslint-language-server", "--stdio" }
@@ -3841,8 +3912,8 @@ Default config:
     ["eslint/probeFailed"] = <function 4>
   }
   ```
-- `on_attach`: [../lsp/eslint.lua:60](../lsp/eslint.lua#L60)
-- `root_dir`: [../lsp/eslint.lua:60](../lsp/eslint.lua#L60)
+- `on_attach`: [../lsp/eslint.lua:61](../lsp/eslint.lua#L61)
+- `root_dir`: [../lsp/eslint.lua:61](../lsp/eslint.lua#L61)
 - `settings` :
   ```lua
   {
@@ -3886,7 +3957,8 @@ Default config:
 
 https://github.com/FacilityApi/FacilityLanguageServer
 
-Facility language server protocol (LSP) support.
+ Facility language server protocol (LSP) support.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3913,7 +3985,8 @@ Default config:
 
 https://github.com/rydesun/fennel-language-server
 
-Fennel language server protocol (LSP) support.
+ Fennel language server protocol (LSP) support.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -3969,7 +4042,7 @@ Default config:
   ```lua
   { "fennel" }
   ```
-- `root_dir`: [../lsp/fennel_ls.lua:10](../lsp/fennel_ls.lua#L10)
+- `root_dir`: [../lsp/fennel_ls.lua:11](../lsp/fennel_ls.lua#L11)
 - `settings` :
   ```lua
   {}
@@ -3981,12 +4054,13 @@ Default config:
 
 https://github.com/ndonfris/fish-lsp
 
-A Language Server Protocol (LSP) tailored for the fish shell.
-This project aims to enhance the coding experience for fish,
-by introducing a suite of intelligent features like auto-completion,
-scope aware symbol analysis, per-token hover generation, and many others.
+ A Language Server Protocol (LSP) tailored for the fish shell.
+ This project aims to enhance the coding experience for fish,
+ by introducing a suite of intelligent features like auto-completion,
+ scope aware symbol analysis, per-token hover generation, and many others.
 
-[homepage](https://www.fish-lsp.dev/)
+ [homepage](https://www.fish-lsp.dev/)
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4012,16 +4086,17 @@ Default config:
 ## flow
 
 https://flow.org/
-https://github.com/facebook/flow
+ https://github.com/facebook/flow
 
-See below for how to setup Flow itself.
-https://flow.org/en/docs/install/
+ See below for how to setup Flow itself.
+ https://flow.org/en/docs/install/
 
-See below for lsp command options.
+ See below for lsp command options.
 
-```sh
-npx flow lsp --help
-```
+ ```sh
+ npx flow lsp --help
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4047,10 +4122,11 @@ Default config:
 ## flux_lsp
 
 https://github.com/influxdata/flux-lsp
-`flux-lsp` can be installed via `cargo`:
-```sh
-cargo install --git https://github.com/influxdata/flux-lsp
-```
+ `flux-lsp` can be installed via `cargo`:
+ ```sh
+ cargo install --git https://github.com/influxdata/flux-lsp
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4096,7 +4172,7 @@ Default config:
   ```lua
   { "foam", "OpenFOAM" }
   ```
-- `root_dir`: [../lsp/foam_ls.lua:10](../lsp/foam_ls.lua#L10)
+- `root_dir`: [../lsp/foam_ls.lua:11](../lsp/foam_ls.lua#L11)
 
 ---
 
@@ -4104,15 +4180,16 @@ Default config:
 
 https://fortls.fortran-lang.org/index.html
 
-fortls is a Fortran Language Server, the server can be installed via pip
+ fortls is a Fortran Language Server, the server can be installed via pip
 
-```sh
-pip install fortls
-```
+ ```sh
+ pip install fortls
+ ```
 
-Settings to the server can be passed either through the `cmd` option or through
-a local configuration file e.g. `.fortls`. For more information
-see the `fortls` [documentation](https://fortls.fortran-lang.org/options.html).
+ Settings to the server can be passed either through the `cmd` option or through
+ a local configuration file e.g. `.fortls`. For more information
+ see the `fortls` [documentation](https://fortls.fortran-lang.org/options.html).
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4177,7 +4254,7 @@ Default config:
     AutomaticWorkspaceInit = true
   }
   ```
-- `root_dir`: [../lsp/fsautocomplete.lua:22](../lsp/fsautocomplete.lua#L22)
+- `root_dir`: [../lsp/fsautocomplete.lua:23](../lsp/fsautocomplete.lua#L23)
 - `settings` :
   ```lua
   {
@@ -4239,7 +4316,7 @@ Default config:
     AutomaticWorkspaceInit = true
   }
   ```
-- `root_dir`: [../lsp/fsharp_language_server.lua:18](../lsp/fsharp_language_server.lua#L18)
+- `root_dir`: [../lsp/fsharp_language_server.lua:19](../lsp/fsharp_language_server.lua#L19)
 - `settings` :
   ```lua
   {}
@@ -4251,7 +4328,8 @@ Default config:
 
 https://github.com/FStarLang/FStar
 
-LSP support is included in FStar. Make sure `fstar.exe` is in your PATH.
+ LSP support is included in FStar. Make sure `fstar.exe` is in your PATH.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4278,12 +4356,13 @@ Default config:
 
 https://github.com/diku-dk/futhark
 
-Futhark Language Server
+ Futhark Language Server
 
-This language server comes with the futhark compiler and is run with the command
-```
-futhark lsp
-```
+ This language server comes with the futhark compiler and is run with the command
+ ```
+ futhark lsp
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4318,7 +4397,7 @@ vim.lsp.enable('gdscript')
 ```
 
 Default config:
-- `cmd`: [../lsp/gdscript.lua:10](../lsp/gdscript.lua#L10)
+- `cmd`: [../lsp/gdscript.lua:11](../lsp/gdscript.lua#L11)
 - `filetypes` :
   ```lua
   { "gd", "gdscript", "gdscript3" }
@@ -4334,7 +4413,8 @@ Default config:
 
 https://github.com/godofavacyn/gdshader-lsp
 
-A language server for the Godot Shading language.
+ A language server for the Godot Shading language.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4361,18 +4441,19 @@ Default config:
 
 https://github.com/lttb/gh-actions-language-server
 
-Language server for GitHub Actions.
+ Language server for GitHub Actions.
 
-The projects [forgejo](https://forgejo.org/) and [gitea](https://about.gitea.com/)
-design their actions to be as compatible to github as possible
-with only [a few differences](https://docs.gitea.com/usage/actions/comparison#unsupported-workflows-syntax) between the systems.
-The `gh_actions_ls` is therefore enabled for those `yaml` files as well.
+ The projects [forgejo](https://forgejo.org/) and [gitea](https://about.gitea.com/)
+ design their actions to be as compatible to github as possible
+ with only [a few differences](https://docs.gitea.com/usage/actions/comparison#unsupported-workflows-syntax) between the systems.
+ The `gh_actions_ls` is therefore enabled for those `yaml` files as well.
 
-The `gh-actions-language-server` can be installed via `npm`:
+ The `gh-actions-language-server` can be installed via `npm`:
 
-```sh
-npm install -g gh-actions-language-server
-```
+ ```sh
+ npm install -g gh-actions-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4402,7 +4483,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir`: [../lsp/gh_actions_ls.lua:16](../lsp/gh_actions_ls.lua#L16)
+- `root_dir`: [../lsp/gh_actions_ls.lua:17](../lsp/gh_actions_ls.lua#L17)
 
 ---
 
@@ -4410,8 +4491,9 @@ Default config:
 
 https://github.com/digital-asset/ghcide
 
-A library for building Haskell IDE tooling.
-"ghcide" isn't for end users now. Use "haskell-language-server" instead of "ghcide".
+ A library for building Haskell IDE tooling.
+ "ghcide" isn't for end users now. Use "haskell-language-server" instead of "ghcide".
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4438,10 +4520,11 @@ Default config:
 
 https://github.com/ghdl/ghdl-language-server
 
-A language server for VHDL, using ghdl as its backend.
+ A language server for VHDL, using ghdl as its backend.
 
-`ghdl-ls` is part of pyghdl, for installation instructions see
-[the upstream README](https://github.com/ghdl/ghdl/tree/master/pyGHDL/lsp).
+ `ghdl-ls` is part of pyghdl, for installation instructions see
+ [the upstream README](https://github.com/ghdl/ghdl/tree/master/pyGHDL/lsp).
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4473,6 +4556,7 @@ Default config:
  Install `ginko_ls` from https://github.com/Schottkyc137/ginko and add it to path
 
  `ginko_ls` doesn't require any configuration.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4529,7 +4613,7 @@ Default config:
     log_path = "/home/runner/.cache/gitlab-ci-ls//log/gitlab-ci-ls.log"
   }
   ```
-- `root_dir`: [../lsp/gitlab_ci_ls.lua:14](../lsp/gitlab_ci_ls.lua#L14)
+- `root_dir`: [../lsp/gitlab_ci_ls.lua:15](../lsp/gitlab_ci_ls.lua#L15)
 
 ---
 
@@ -4537,24 +4621,25 @@ Default config:
 
 https://github.com/nolanderc/glasgow
 
-Provides language features for WGSL (WebGPU Shading Language):
-- Completions:
-    - Local functions/variables/types.
-    - Fields and swizzles.
-    - Builtin types and functions (`dot`, `reflect`, `textureSample`, `vec3`, `mat4x2`, etc.)
-- Hover Documentation:
-    - Function signatures.
-    - Variable types.
-    - Includes builtin types and functions. Text is taken from the WGSL specification.
-- Goto Definition
-- Find all References
-- Rename
-- Formatter
+ Provides language features for WGSL (WebGPU Shading Language):
+ - Completions:
+     - Local functions/variables/types.
+     - Fields and swizzles.
+     - Builtin types and functions (`dot`, `reflect`, `textureSample`, `vec3`, `mat4x2`, etc.)
+ - Hover Documentation:
+     - Function signatures.
+     - Variable types.
+     - Includes builtin types and functions. Text is taken from the WGSL specification.
+ - Goto Definition
+ - Find all References
+ - Rename
+ - Formatter
 
-`glasgow` can be installed via `cargo`:
-```sh
-cargo install glasgow
-```
+ `glasgow` can be installed via `cargo`:
+ ```sh
+ cargo install glasgow
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4585,9 +4670,10 @@ Default config:
 
 https://github.com/gleam-lang/gleam
 
-A language server for Gleam Programming Language.
+ A language server for Gleam Programming Language.
 
-It comes with the Gleam compiler, for installation see: [Installing Gleam](https://gleam.run/getting-started/installing/)
+ It comes with the Gleam compiler, for installation see: [Installing Gleam](https://gleam.run/getting-started/installing/)
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4640,7 +4726,7 @@ vim.lsp.enable('glint')
 ```
 
 Default config:
-- `cmd`: [../lsp/glint.lua:25](../lsp/glint.lua#L25)
+- `cmd`: [../lsp/glint.lua:26](../lsp/glint.lua#L26)
 - `filetypes` :
   ```lua
   { "html.handlebars", "handlebars", "typescript", "typescript.glimmer", "javascript", "javascript.glimmer" }
@@ -4665,7 +4751,8 @@ Default config:
 
 https://github.com/nolanderc/glsl_analyzer
 
-Language server for GLSL
+ Language server for GLSL
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4696,10 +4783,11 @@ Default config:
 
 https://github.com/svenstaro/glsl-language-server
 
-Language server implementation for GLSL
+ Language server implementation for GLSL
 
-`glslls` can be compiled and installed manually, or, if your distribution has access to the AUR,
-via the `glsl-language-server` AUR package
+ `glslls` can be compiled and installed manually, or, if your distribution has access to the AUR,
+ via the `glsl-language-server` AUR package
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4737,16 +4825,17 @@ Default config:
 
 https://github.com/microsoft/gnls
 
-Microsoft's language server for GN build files.
+ Microsoft's language server for GN build files.
 
-Assuming there is a `gnls` script somewhere in your `$PATH`, containing
-for example:
+ Assuming there is a `gnls` script somewhere in your `$PATH`, containing
+ for example:
 
-```shell
-GNLS_SRC_DIR=</path/to/gnls>
+ ```shell
+ GNLS_SRC_DIR=</path/to/gnls>
 
-exec node ${GNLS_SRC_DIR}/build/server.js $@
-```
+ exec node ${GNLS_SRC_DIR}/build/server.js $@
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4773,16 +4862,17 @@ Default config:
 
 Combination of both lint server and client
 
-https://github.com/nametake/golangci-lint-langserver
-https://github.com/golangci/golangci-lint
+ https://github.com/nametake/golangci-lint-langserver
+ https://github.com/golangci/golangci-lint
 
 
-Installation of binaries needed is done via
+ Installation of binaries needed is done via
 
-```
-go install github.com/nametake/golangci-lint-langserver@latest
-go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-```
+ ```
+ go install github.com/nametake/golangci-lint-langserver@latest
+ go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4790,7 +4880,7 @@ vim.lsp.enable('golangci_lint_ls')
 ```
 
 Default config:
-- `before_init`: [../lsp/golangci_lint_ls.lua:15](../lsp/golangci_lint_ls.lua#L15)
+- `before_init`: [../lsp/golangci_lint_ls.lua:16](../lsp/golangci_lint_ls.lua#L16)
 - `cmd` :
   ```lua
   { "golangci-lint-langserver" }
@@ -4832,7 +4922,7 @@ Default config:
   ```lua
   { "go", "gomod", "gowork", "gotmpl" }
   ```
-- `root_dir`: [../lsp/gopls.lua:88](../lsp/gopls.lua#L88)
+- `root_dir`: [../lsp/gopls.lua:89](../lsp/gopls.lua#L89)
 
 ---
 
@@ -4877,13 +4967,14 @@ Default config:
 
 https://github.com/znck/grammarly
 
-`grammarly-languageserver` can be installed via `npm`:
+ `grammarly-languageserver` can be installed via `npm`:
 
-```sh
-npm i -g grammarly-languageserver
-```
+ ```sh
+ npm i -g grammarly-languageserver
+ ```
 
-WARNING: Since this language server uses Grammarly's API, any document you open with it running is shared with them. Please evaluate their [privacy policy](https://www.grammarly.com/privacy-policy) before using this.
+ WARNING: Since this language server uses Grammarly's API, any document you open with it running is shared with them. Please evaluate their [privacy policy](https://www.grammarly.com/privacy-policy) before using this.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4944,7 +5035,7 @@ Default config:
   ```lua
   { "graphql", "typescriptreact", "javascriptreact" }
   ```
-- `root_dir`: [../lsp/graphql.lua:15](../lsp/graphql.lua#L15)
+- `root_dir`: [../lsp/graphql.lua:16](../lsp/graphql.lua#L16)
 
 ---
 
@@ -4952,21 +5043,22 @@ Default config:
 
 https://github.com/prominic/groovy-language-server.git
 
-Requirements:
- - Linux/macOS (for now)
- - Java 11+
+ Requirements:
+  - Linux/macOS (for now)
+  - Java 11+
 
-`groovyls` can be installed by following the instructions [here](https://github.com/prominic/groovy-language-server.git#build).
+ `groovyls` can be installed by following the instructions [here](https://github.com/prominic/groovy-language-server.git#build).
 
-If you have installed groovy language server, you can set the `cmd` custom path as follow:
+ If you have installed groovy language server, you can set the `cmd` custom path as follow:
 
-```lua
-vim.lsp.config('groovyls', {
-    -- Unix
-    cmd = { "java", "-jar", "path/to/groovyls/groovy-language-server-all.jar" },
-    ...
-})
-```
+ ```lua
+ vim.lsp.config('groovyls', {
+     -- Unix
+     cmd = { "java", "-jar", "path/to/groovyls/groovy-language-server-all.jar" },
+     ...
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -4993,14 +5085,15 @@ Default config:
 
 https://codeberg.org/rgherdt/scheme-lsp-server
 
-The recommended way is to install guile-lsp-server is using Guix. Unfortunately it is still not available at the official Guix channels, but you can use the provided channel guix.scm in the repo:
-```sh
-guix package -f guix.scm
-```
+ The recommended way is to install guile-lsp-server is using Guix. Unfortunately it is still not available at the official Guix channels, but you can use the provided channel guix.scm in the repo:
+ ```sh
+ guix package -f guix.scm
+ ```
 
-Checkout the repo for more info.
+ Checkout the repo for more info.
 
-Note: This LSP will start on `scheme.guile` filetype. You can set this file type using `:help modeline` or adding https://gitlab.com/HiPhish/guile.vim to your plugins to automatically set it.
+ Note: This LSP will start on `scheme.guile` filetype. You can set this file type using `:help modeline` or adding https://gitlab.com/HiPhish/guile.vim to your plugins to automatically set it.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5027,20 +5120,21 @@ Default config:
 
 https://github.com/automattic/harper
 
-The language server for Harper, the slim, clean language checker for developers.
+ The language server for Harper, the slim, clean language checker for developers.
 
-See our [documentation](https://writewithharper.com/docs/integrations/neovim) for more information on settings.
+ See our [documentation](https://writewithharper.com/docs/integrations/neovim) for more information on settings.
 
-In short, they should look something like this:
-```lua
-vim.lsp.config('harper_ls', {
-  settings = {
-    ["harper-ls"] = {
-      userDictPath = "~/dict.txt"
-    }
-  },
-})
-```
+ In short, they should look something like this:
+ ```lua
+ vim.lsp.config('harper_ls', {
+   settings = {
+     ["harper-ls"] = {
+       userDictPath = "~/dict.txt"
+     }
+   },
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5066,8 +5160,9 @@ Default config:
 ## hdl_checker
 
 https://github.com/suoto/hdl_checker
-Language server for hdl-checker.
-Install using: `pip install hdl-checker --upgrade`
+ Language server for hdl-checker.
+ Install using: `pip install hdl-checker --upgrade`
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5094,13 +5189,14 @@ Default config:
 
 https://github.com/mrjosh/helm-ls
 
-Helm Language server. (This LSP is in early development)
+ Helm Language server. (This LSP is in early development)
 
-`helm Language server` can be installed by following the instructions [here](https://github.com/mrjosh/helm-ls).
+ `helm Language server` can be installed by following the instructions [here](https://github.com/mrjosh/helm-ls).
 
-The default `cmd` assumes that the `helm_ls` binary can be found in `$PATH`.
+ The default `cmd` assumes that the `helm_ls` binary can be found in `$PATH`.
 
-If need Helm file highlight use [vim-helm](https://github.com/towolf/vim-helm) plugin.
+ If need Helm file highlight use [vim-helm](https://github.com/towolf/vim-helm) plugin.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5136,25 +5232,26 @@ Default config:
 ## herb_ls
 
 https://www.npmjs.com/package/@herb-tools/language-server
-https://github.com/marcoroth/herb
+ https://github.com/marcoroth/herb
 
-HTML+ERB (HTML + Embedded Ruby)
-Powerful and seamless HTML-aware ERB parsing and tooling.
+ HTML+ERB (HTML + Embedded Ruby)
+ Powerful and seamless HTML-aware ERB parsing and tooling.
 
-Herb is designed from the ground up to deeply understand `.html.erb` files,
-preserving both HTML and embedded Ruby structure without losing any details.
+ Herb is designed from the ground up to deeply understand `.html.erb` files,
+ preserving both HTML and embedded Ruby structure without losing any details.
 
-`herb-language-server` can be installed via `npm`:
+ `herb-language-server` can be installed via `npm`:
 
-```sh
-npm install -g @herb-tools/language-server
-```
+ ```sh
+ npm install -g @herb-tools/language-server
+ ```
 
-or via `yarn`:
+ or via `yarn`:
 
-```sh
-yarn global add @herb-tools/language-server
-```
+ ```sh
+ yarn global add @herb-tools/language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5180,10 +5277,11 @@ Default config:
 ## hhvm
 
 Language server for programs written in Hack
-https://hhvm.com/
-https://github.com/facebook/hhvm
-See below for how to setup HHVM & typechecker:
-https://docs.hhvm.com/hhvm/getting-started/getting-started
+ https://hhvm.com/
+ https://github.com/facebook/hhvm
+ See below for how to setup HHVM & typechecker:
+ https://docs.hhvm.com/hhvm/getting-started/getting-started
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5210,20 +5308,21 @@ Default config:
 
 https://github.com/haskell/haskell-ide-engine
 
-the following init_options are supported (see https://github.com/haskell/haskell-ide-engine#configuration):
-```lua
-init_options = {
-  languageServerHaskell = {
-    hlintOn = bool;
-    maxNumberOfProblems = number;
-    diagnosticsDebounceDuration = number;
-    liquidOn = bool (default false);
-    completionSnippetsOn = bool (default true);
-    formatOnImportOn = bool (default true);
-    formattingProvider = string (default "brittany", alternate "floskell");
-  }
-}
-```
+ the following init_options are supported (see https://github.com/haskell/haskell-ide-engine#configuration):
+ ```lua
+ init_options = {
+   languageServerHaskell = {
+     hlintOn = bool;
+     maxNumberOfProblems = number;
+     diagnosticsDebounceDuration = number;
+     liquidOn = bool (default false);
+     completionSnippetsOn = bool (default true);
+     formatOnImportOn = bool (default true);
+     formattingProvider = string (default "brittany", alternate "floskell");
+   }
+ }
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5250,7 +5349,8 @@ Default config:
 
 `hlasm_language_server` is a language server for the High Level Assembler language used on IBM SystemZ mainframes.
 
-To learn how to configure the HLASM language server, see the [HLASM Language Support documentation](https://github.com/eclipse-che4z/che-che4z-lsp-for-hlasm).
+ To learn how to configure the HLASM language server, see the [HLASM Language Support documentation](https://github.com/eclipse-che4z/che-che4z-lsp-for-hlasm).
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5301,7 +5401,7 @@ Default config:
   ```lua
   { "haskell", "lhaskell" }
   ```
-- `root_dir`: [../lsp/hls.lua:17](../lsp/hls.lua#L17)
+- `root_dir`: [../lsp/hls.lua:18](../lsp/hls.lua#L18)
 - `settings` :
   ```lua
   {
@@ -5318,12 +5418,13 @@ Default config:
 
 https://github.com/urbit/hoon-language-server
 
-A language server for Hoon.
+ A language server for Hoon.
 
-The language server can be installed via `npm install -g @hoon-language-server`
+ The language server can be installed via `npm install -g @hoon-language-server`
 
-Start a fake ~zod with `urbit -F zod`.
-Start the language server at the Urbit Dojo prompt with: `|start %language-server`
+ Start a fake ~zod with `urbit -F zod`.
+ Start the language server at the Urbit Dojo prompt with: `|start %language-server`
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5350,25 +5451,26 @@ Default config:
 
 https://github.com/hrsh7th/vscode-langservers-extracted
 
-`vscode-html-language-server` can be installed via `npm`:
-```sh
-npm i -g vscode-langservers-extracted
-```
+ `vscode-html-language-server` can be installed via `npm`:
+ ```sh
+ npm i -g vscode-langservers-extracted
+ ```
 
-Neovim does not currently include built-in snippets. `vscode-html-language-server` only provides completions when snippet support is enabled.
-To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
+ Neovim does not currently include built-in snippets. `vscode-html-language-server` only provides completions when snippet support is enabled.
+ To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
 
-The code-formatting feature of the lsp can be controlled with the `provideFormatter` option.
+ The code-formatting feature of the lsp can be controlled with the `provideFormatter` option.
 
-```lua
---Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+ ```lua
+ --Enable (broadcasting) snippet capability for completion
+ local capabilities = vim.lsp.protocol.make_client_capabilities()
+ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-vim.lsp.config('html', {
-  capabilities = capabilities,
-})
-```
+ vim.lsp.config('html', {
+   capabilities = capabilities,
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5410,12 +5512,13 @@ Default config:
 
 https://github.com/ThePrimeagen/htmx-lsp
 
-`htmx-lsp` can be installed via `cargo`:
-```sh
-cargo install htmx-lsp
-```
+ `htmx-lsp` can be installed via `cargo`:
+ ```sh
+ cargo install htmx-lsp
+ ```
 
-Lsp is still very much work in progress and experimental. Use at your own risk.
+ Lsp is still very much work in progress and experimental. Use at your own risk.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5442,7 +5545,8 @@ Default config:
 
 https://github.com/Retsediv/hydra-lsp
 
-LSP for Hydra Python package config files.
+ LSP for Hydra Python package config files.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5469,10 +5573,11 @@ Default config:
 
 https://github.com/hyprland-community/hyprls
 
-`hyprls` can be installed via `go`:
-```sh
-go install github.com/hyprland-community/hyprls/cmd/hyprls@latest
-```
+ `hyprls` can be installed via `go`:
+ ```sh
+ go install github.com/hyprland-community/hyprls/cmd/hyprls@latest
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5540,7 +5645,7 @@ Default config:
   ```lua
   { "idris2" }
   ```
-- `root_dir`: [../lsp/idris2_lsp.lua:34](../lsp/idris2_lsp.lua#L34)
+- `root_dir`: [../lsp/idris2_lsp.lua:35](../lsp/idris2_lsp.lua#L35)
 
 ---
 
@@ -5596,7 +5701,8 @@ Default config:
 
 https://github.com/CFiggers/janet-lsp
 
-A Language Server Protocol implementation for Janet.
+ A Language Server Protocol implementation for Janet.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5623,9 +5729,10 @@ Default config:
 
 https://github.com/georgewfraser/java-language-server
 
-Java language server
+ Java language server
 
-Point `cmd` to `lang_server_linux.sh` or the equivalent script for macOS/Windows provided by java-language-server
+ Point `cmd` to `lang_server_linux.sh` or the equivalent script for macOS/Windows provided by java-language-server
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5723,7 +5830,8 @@ Default config:
 
 https://github.com/pappasam/jedi-language-server
 
-`jedi-language-server`, a language server for Python, built on top of jedi
+ `jedi-language-server`, a language server for Python, built on top of jedi
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5750,17 +5858,18 @@ Default config:
 
 jinja-lsp enhances minijinja development experience by providing Helix/Nvim users with advanced features such as autocomplete, syntax highlighting, hover, goto definition, code actions and linting.
 
-The file types are not detected automatically, you can register them manually (see below) or override the filetypes:
+ The file types are not detected automatically, you can register them manually (see below) or override the filetypes:
 
-```lua
-vim.filetype.add {
-  extension = {
-    jinja = 'jinja',
-    jinja2 = 'jinja',
-    j2 = 'jinja',
-  },
-}
-```
+ ```lua
+ vim.filetype.add {
+   extension = {
+     jinja = 'jinja',
+     jinja2 = 'jinja',
+     j2 = 'jinja',
+   },
+ }
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5790,20 +5899,21 @@ Default config:
 ## jqls
 
 https://github.com/wader/jq-lsp
-Language server for jq, written using Go.
-You can install the server easily using go install:
-```sh
-# install directly
-go install github.com/wader/jq-lsp@master
-# copy binary to $PATH
-cp $(go env GOPATH)/bin/jq-lsp /usr/local/bin
+ Language server for jq, written using Go.
+ You can install the server easily using go install:
+ ```sh
+ # install directly
+ go install github.com/wader/jq-lsp@master
+ # copy binary to $PATH
+ cp $(go env GOPATH)/bin/jq-lsp /usr/local/bin
 
-```
-Note: To activate properly nvim needs to know the jq filetype.
-You can add it via:
-```lua
-vim.cmd([[au BufRead,BufNewFile *.jq setfiletype jq]])
-```
+ ```
+ Note: To activate properly nvim needs to know the jq filetype.
+ You can add it via:
+ ```lua
+ vim.cmd([[au BufRead,BufNewFile *.jq setfiletype jq]])
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5830,24 +5940,25 @@ Default config:
 
 https://github.com/hrsh7th/vscode-langservers-extracted
 
-vscode-json-language-server, a language server for JSON and JSON schema
+ vscode-json-language-server, a language server for JSON and JSON schema
 
-`vscode-json-language-server` can be installed via `npm`:
-```sh
-npm i -g vscode-langservers-extracted
-```
+ `vscode-json-language-server` can be installed via `npm`:
+ ```sh
+ npm i -g vscode-langservers-extracted
+ ```
 
-`vscode-json-language-server` only provides completions when snippet support is enabled. If you use Neovim older than v0.10 you need to enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
+ `vscode-json-language-server` only provides completions when snippet support is enabled. If you use Neovim older than v0.10 you need to enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
 
-```lua
---Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+ ```lua
+ --Enable (broadcasting) snippet capability for completion
+ local capabilities = vim.lsp.protocol.make_client_capabilities()
+ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-vim.lsp.config('jsonls', {
-  capabilities = capabilities,
-})
-```
+ vim.lsp.config('jsonls', {
+   capabilities = capabilities,
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5880,12 +5991,13 @@ Default config:
 
 https://github.com/grafana/jsonnet-language-server
 
-A Language Server Protocol (LSP) server for Jsonnet.
+ A Language Server Protocol (LSP) server for Jsonnet.
 
-The language server can be installed with `go`:
-```sh
-go install github.com/grafana/jsonnet-language-server@latest
-```
+ The language server can be installed with `go`:
+ ```sh
+ go install github.com/grafana/jsonnet-language-server@latest
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5947,7 +6059,7 @@ Default config:
   ```lua
   { "julia" }
   ```
-- `on_attach`: [../lsp/julials.lua:119](../lsp/julials.lua#L119)
+- `on_attach`: [../lsp/julials.lua:120](../lsp/julials.lua#L120)
 - `root_markers` :
   ```lua
   { "Project.toml", "JuliaProject.toml" }
@@ -5959,7 +6071,8 @@ Default config:
 
 https://github.com/terror/just-lsp
 
-`just-lsp` is an LSP for just built on top of the tree-sitter-just parser.
+ `just-lsp` is an LSP for just built on top of the tree-sitter-just parser.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -5986,7 +6099,9 @@ Default config:
 
 https://github.com/kcl-lang/kcl.nvim
 
-Language server for the KCL configuration and policy language.
+ Language server for the KCL configuration and policy language.
+
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6012,7 +6127,8 @@ Default config:
 ## koka
 
 https://koka-lang.github.io/koka/doc/index.html
-Koka is a functional programming language with effect types and handlers.
+ Koka is a functional programming language with effect types and handlers.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6109,7 +6225,8 @@ Default config:
 
 https://github.com/mistweaverco/kulala-ls
 
-A minimal language server for HTTP syntax.
+ A minimal language server for HTTP syntax.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6195,7 +6312,7 @@ Default config:
   ```lua
   "utf-32"
   ```
-- `root_dir`: [../lsp/lean3ls.lua:17](../lsp/lean3ls.lua#L17)
+- `root_dir`: [../lsp/lean3ls.lua:18](../lsp/lean3ls.lua#L18)
 
 ---
 
@@ -6203,12 +6320,13 @@ Default config:
 
 https://github.com/0x2a-42/lelwel
 
-Language server for lelwel grammars.
+ Language server for lelwel grammars.
 
-You can install `lelwel-ls` via cargo:
-```sh
-cargo install --features="lsp" lelwel
-```
+ You can install `lelwel-ls` via cargo:
+ ```sh
+ cargo install --features="lsp" lelwel
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6235,9 +6353,10 @@ Default config:
 
 https://github.com/eclipse/lemminx
 
-The easiest way to install the server is to get a binary from https://github.com/redhat-developer/vscode-xml/releases and place it on your PATH.
+ The easiest way to install the server is to get a binary from https://github.com/redhat-developer/vscode-xml/releases and place it on your PATH.
 
-NOTE to macOS users: Binaries from unidentified developers are blocked by default. If you trust the downloaded binary, run it once, cancel the prompt, then remove the binary from Gatekeeper quarantine with `xattr -d com.apple.quarantine lemminx`. It should now run without being blocked.
+ NOTE to macOS users: Binaries from unidentified developers are blocked by default. If you trust the downloaded binary, run it once, cancel the prompt, then remove the binary from Gatekeeper quarantine with `xattr -d com.apple.quarantine lemminx`. It should now run without being blocked.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6264,12 +6383,13 @@ Default config:
 
 https://github.com/lexical-lsp/lexical
 
-Lexical is a next-generation language server for the Elixir programming language.
+ Lexical is a next-generation language server for the Elixir programming language.
 
-Follow the [Detailed Installation Instructions](https://github.com/lexical-lsp/lexical/blob/main/pages/installation.md)
+ Follow the [Detailed Installation Instructions](https://github.com/lexical-lsp/lexical/blob/main/pages/installation.md)
 
-**By default, `lexical` doesn't have a `cmd` set.**
-This is because nvim-lspconfig does not make assumptions about your path.
+ **By default, `lexical` doesn't have a `cmd` set.**
+ This is because nvim-lspconfig does not make assumptions about your path.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6292,13 +6412,14 @@ Default config:
 
 https://github.com/SilasMarvin/lsp-ai
 
-LSP-AI is an open source language server that serves as a backend for AI-powered functionality in your favorite code
-editors. It offers features like in-editor chatting with LLMs and code completions.
+ LSP-AI is an open source language server that serves as a backend for AI-powered functionality in your favorite code
+ editors. It offers features like in-editor chatting with LLMs and code completions.
 
 
-You will need to provide configuration for the inference backends and models you want to use, as well as configure
-completion/code actions. See the [wiki docs](https://github.com/SilasMarvin/lsp-ai/wiki/Configuration) and
-[examples](https://github.com/SilasMarvin/lsp-ai/blob/main/examples/nvim) for more information.
+ You will need to provide configuration for the inference backends and models you want to use, as well as configure
+ completion/code actions. See the [wiki docs](https://github.com/SilasMarvin/lsp-ai/wiki/Configuration) and
+ [examples](https://github.com/SilasMarvin/lsp-ai/blob/main/examples/nvim) for more information.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6364,7 +6485,7 @@ Default config:
   ```lua
   { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc", "quarto", "rmd", "context", "html", "xhtml", "mail", "text" }
   ```
-- `get_language_id`: [../lsp/ltex.lua:74](../lsp/ltex.lua#L74)
+- `get_language_id`: [../lsp/ltex.lua:75](../lsp/ltex.lua#L75)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -6418,7 +6539,7 @@ Default config:
   ```lua
   { "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "text", "typst", "xhtml" }
   ```
-- `get_language_id`: [../lsp/ltex_plus.lua:39](../lsp/ltex_plus.lua#L39)
+- `get_language_id`: [../lsp/ltex_plus.lua:36](../lsp/ltex_plus.lua#L36)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -6438,70 +6559,72 @@ Default config:
 
 https://github.com/luals/lua-language-server
 
-Lua language server.
+ Lua language server.
 
-`lua-language-server` can be installed by following the instructions [here](https://luals.github.io/#neovim-install).
+ `lua-language-server` can be installed by following the instructions [here](https://luals.github.io/#neovim-install).
 
-The default `cmd` assumes that the `lua-language-server` binary can be found in `$PATH`.
+ The default `cmd` assumes that the `lua-language-server` binary can be found in `$PATH`.
 
-If you primarily use `lua-language-server` for Neovim, and want to provide completions,
-analysis, and location handling for plugins on runtime path, you can use the following
-settings.
+ If you primarily use `lua-language-server` for Neovim, and want to provide completions,
+ analysis, and location handling for plugins on runtime path, you can use the following
+ settings.
 
-```lua
-vim.lsp.config('lua_ls', {
-  on_init = function(client)
-    if client.workspace_folders then
-      local path = client.workspace_folders[1].name
-      if
-        path ~= vim.fn.stdpath('config')
-        and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
-      then
-        return
-      end
-    end
+ ```lua
+ vim.lsp.config('lua_ls', {
+   on_init = function(client)
+     if client.workspace_folders then
+       local path = client.workspace_folders[1].name
+       if
+         path ~= vim.fn.stdpath('config')
+         and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+       then
+         return
+       end
+     end
 
-    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most
-        -- likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Tell the language server how to find Lua modules same way as Neovim
-        -- (see `:h lua-module-load`)
-        path = {
-          'lua/?.lua',
-          'lua/?/init.lua',
-        },
-      },
-      -- Make the server aware of Neovim runtime files
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.env.VIMRUNTIME
-          -- Depending on the usage, you might want to add additional paths
-          -- here.
-          -- '${3rd}/luv/library'
-          -- '${3rd}/busted/library'
-        }
-        -- Or pull in all of 'runtimepath'.
-        -- NOTE: this is a lot slower and will cause issues when working on
-        -- your own configuration.
-        -- See https://github.com/neovim/nvim-lspconfig/issues/3189
-        -- library = {
-        --   vim.api.nvim_get_runtime_file('', true),
-        -- }
-      }
-    })
-  end,
-  settings = {
-    Lua = {}
-  }
-})
-```
+     client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+       runtime = {
+         -- Tell the language server which version of Lua you're using (most
+         -- likely LuaJIT in the case of Neovim)
+         version = 'LuaJIT',
+         -- Tell the language server how to find Lua modules same way as Neovim
+         -- (see `:h lua-module-load`)
+         path = {
+           'lua/?.lua',
+           'lua/?/init.lua',
+         },
+       },
+       -- Make the server aware of Neovim runtime files
+       workspace = {
+         checkThirdParty = false,
+         library = {
+           vim.env.VIMRUNTIME
+           -- Depending on the usage, you might want to add additional paths
+           -- here.
+           -- '${3rd}/luv/library'
+           -- '${3rd}/busted/library'
+         }
+         -- Or pull in all of 'runtimepath'.
+         -- NOTE: this is a lot slower and will cause issues when working on
+         -- your own configuration.
+         -- See https://github.com/neovim/nvim-lspconfig/issues/3189
+         -- library = {
+         --   vim.api.nvim_get_runtime_file('', true),
+         -- }
+       }
+     })
+   end,
+   settings = {
+     Lua = {}
+   }
+ })
+ ```
 
-See `lua-language-server`'s [documentation](https://luals.github.io/wiki/settings/) for an explanation of the above fields:
-* [Lua.runtime.path](https://luals.github.io/wiki/settings/#runtimepath)
-* [Lua.workspace.library](https://luals.github.io/wiki/settings/#workspacelibrary)
+ See `lua-language-server`'s [documentation](https://luals.github.io/wiki/settings/) for an explanation of the above fields:
+ * [Lua.runtime.path](https://luals.github.io/wiki/settings/#runtimepath)
+ * [Lua.workspace.library](https://luals.github.io/wiki/settings/#workspacelibrary)
+
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6528,15 +6651,16 @@ Default config:
 
 https://github.com/JohnnyMorganz/luau-lsp
 
-Language server for the [Luau](https://luau-lang.org/) language.
+ Language server for the [Luau](https://luau-lang.org/) language.
 
-`luau-lsp` can be installed by downloading one of the release assets available at https://github.com/JohnnyMorganz/luau-lsp.
+ `luau-lsp` can be installed by downloading one of the release assets available at https://github.com/JohnnyMorganz/luau-lsp.
 
-You might also have to set up automatic filetype detection for Luau files, for example like so:
+ You might also have to set up automatic filetype detection for Luau files, for example like so:
 
-```vim
-autocmd BufRead,BufNewFile *.luau setf luau
-```
+ ```vim
+ autocmd BufRead,BufNewFile *.luau setf luau
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6563,20 +6687,21 @@ Default config:
 
 https://github.com/forcedotcom/lightning-language-server/
 
-Language server for Lightning Web Components.
+ Language server for Lightning Web Components.
 
-For manual installation, utilize the official [NPM package](https://www.npmjs.com/package/@salesforce/lwc-language-server).
-Then, configure `cmd` to run the Node script at the unpacked location:
+ For manual installation, utilize the official [NPM package](https://www.npmjs.com/package/@salesforce/lwc-language-server).
+ Then, configure `cmd` to run the Node script at the unpacked location:
 
-```lua
-vim.lsp.config('lwc_ls', {
-  cmd = {
-    'node',
-    '/path/to/node_modules/@salesforce/lwc-language-server/bin/lwc-language-server.js',
-    '--stdio'
-  }
-})
-```
+ ```lua
+ vim.lsp.config('lwc_ls', {
+   cmd = {
+     'node',
+     '/path/to/node_modules/@salesforce/lwc-language-server/bin/lwc-language-server.js',
+     '--stdio'
+   }
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6611,19 +6736,20 @@ Default config:
 
 https://github.com/grahambates/m68k-lsp
 
-Language server for Motorola 68000 family assembly
+ Language server for Motorola 68000 family assembly
 
-`m68k-lsp-server` can be installed via `npm`:
+ `m68k-lsp-server` can be installed via `npm`:
 
-```sh
-npm install -g m68k-lsp-server
-```
+ ```sh
+ npm install -g m68k-lsp-server
+ ```
 
-Ensure you are using the 68k asm syntax variant in Neovim.
+ Ensure you are using the 68k asm syntax variant in Neovim.
 
-```lua
-vim.g.asmsyntax = 'asm68k'
-```
+ ```lua
+ vim.g.asmsyntax = 'asm68k'
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6671,7 +6797,7 @@ Default config:
   ```lua
   { "markdown" }
   ```
-- `on_attach`: [../lsp/markdown_oxide.lua:23](../lsp/markdown_oxide.lua#L23)
+- `on_attach`: [../lsp/markdown_oxide.lua:24](../lsp/markdown_oxide.lua#L24)
 - `root_markers` :
   ```lua
   { ".git", ".obsidian", ".moxide.toml" }
@@ -6683,12 +6809,13 @@ Default config:
 
 https://github.com/marko-js/language-server
 
-Using the Language Server Protocol to improve Marko's developer experience.
+ Using the Language Server Protocol to improve Marko's developer experience.
 
-Can be installed via npm:
-```
-npm i -g @marko/language-server
-```
+ Can be installed via npm:
+ ```
+ npm i -g @marko/language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6746,18 +6873,19 @@ Default config:
 
 https://github.com/mathworks/MATLAB-language-server
 
-MATLAB® language server implements the Microsoft® Language Server Protocol for the MATLAB language.
+ MATLAB® language server implements the Microsoft® Language Server Protocol for the MATLAB language.
 
-Make sure to set `MATLAB.installPath` to your MATLAB path, e.g.:
-```lua
-settings = {
-  MATLAB = {
-    ...
-    installPath = '/usr/local/MATLAB/R2023a',
-    ...
-  },
-},
-```
+ Make sure to set `MATLAB.installPath` to your MATLAB path, e.g.:
+ ```lua
+ settings = {
+   MATLAB = {
+     ...
+     installPath = '/usr/local/MATLAB/R2023a',
+     ...
+   },
+ },
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6773,7 +6901,7 @@ Default config:
   ```lua
   { "matlab" }
   ```
-- `root_dir`: [../lsp/matlab_ls.lua:17](../lsp/matlab_ls.lua#L17)
+- `root_dir`: [../lsp/matlab_ls.lua:18](../lsp/matlab_ls.lua#L18)
 - `settings` :
   ```lua
   {
@@ -6800,7 +6928,7 @@ vim.lsp.enable('mdx_analyzer')
 ```
 
 Default config:
-- `before_init`: [../lsp/mdx_analyzer.lua:8](../lsp/mdx_analyzer.lua#L8)
+- `before_init`: [../lsp/mdx_analyzer.lua:9](../lsp/mdx_analyzer.lua#L9)
 - `cmd` :
   ```lua
   { "mdx-language-server", "--stdio" }
@@ -6846,7 +6974,7 @@ Default config:
   ```lua
   { "meson" }
   ```
-- `root_dir`: [../lsp/mesonlsp.lua:31](../lsp/mesonlsp.lua#L31)
+- `root_dir`: [../lsp/mesonlsp.lua:32](../lsp/mesonlsp.lua#L32)
 
 ---
 
@@ -6854,15 +6982,16 @@ Default config:
 
 https://scalameta.org/metals/
 
-Scala language server with rich IDE features.
+ Scala language server with rich IDE features.
 
-See full instructions in the Metals documentation:
+ See full instructions in the Metals documentation:
 
-https://scalameta.org/metals/docs/editors/vim#using-an-alternative-lsp-client
+ https://scalameta.org/metals/docs/editors/vim#using-an-alternative-lsp-client
 
-Note: that if you're using [nvim-metals](https://github.com/scalameta/nvim-metals), that plugin fully handles the setup and installation of Metals, and you shouldn't set up Metals both with it and `lspconfig`.
+ Note: that if you're using [nvim-metals](https://github.com/scalameta/nvim-metals), that plugin fully handles the setup and installation of Metals, and you shouldn't set up Metals both with it and `lspconfig`.
 
-To install Metals, make sure to have [coursier](https://get-coursier.io/docs/cli-installation) installed, and once you do you can install the latest Metals with `cs install metals`.
+ To install Metals, make sure to have [coursier](https://get-coursier.io/docs/cli-installation) installed, and once you do you can install the latest Metals with `cs install metals`.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6907,14 +7036,15 @@ Default config:
 
 https://github.com/azdavis/millet
 
-Millet, a language server for Standard ML
+ Millet, a language server for Standard ML
 
-To use with nvim:
+ To use with nvim:
 
-1. Install a Rust toolchain: https://rustup.rs
-2. Clone the repo
-3. Run `cargo build --release --bin millet-ls`
-4. Move `target/release/millet-ls` to somewhere on your $PATH as `millet`
+ 1. Install a Rust toolchain: https://rustup.rs
+ 2. Clone the repo
+ 3. Run `cargo build --release --bin millet-ls`
+ 4. Move `target/release/millet-ls` to somewhere on your $PATH as `millet`
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6941,8 +7071,9 @@ Default config:
 
 https://www.mint-lang.com
 
-Install Mint using the [instructions](https://www.mint-lang.com/install).
-The language server is included since version 0.12.0.
+ Install Mint using the [instructions](https://www.mint-lang.com/install).
+ The language server is included since version 0.12.0.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6969,9 +7100,10 @@ Default config:
 
 https://mlir.llvm.org/docs/Tools/MLIRLSP/#mlir-lsp-language-server--mlir-lsp-server=
 
-The Language Server for the LLVM MLIR language
+ The Language Server for the LLVM MLIR language
 
-`mlir-lsp-server` can be installed at the llvm-project repository (https://github.com/llvm/llvm-project)
+ `mlir-lsp-server` can be installed at the llvm-project repository (https://github.com/llvm/llvm-project)
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -6998,9 +7130,10 @@ Default config:
 
 https://mlir.llvm.org/docs/Tools/MLIRLSP/#pdll-lsp-language-server--mlir-pdll-lsp-server
 
-The Language Server for the LLVM PDLL language
+ The Language Server for the LLVM PDLL language
 
-`mlir-pdll-lsp-server` can be installed at the llvm-project repository (https://github.com/llvm/llvm-project)
+ `mlir-pdll-lsp-server` can be installed at the llvm-project repository (https://github.com/llvm/llvm-project)
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7027,10 +7160,11 @@ Default config:
 
 https://github.com/digama0/mm0
 
-Language Server for the metamath-zero theorem prover.
+ Language Server for the metamath-zero theorem prover.
 
-Requires [mm0-rs](https://github.com/digama0/mm0/tree/master/mm0-rs) to be installed
-and available on the `PATH`.
+ Requires [mm0-rs](https://github.com/digama0/mm0/tree/master/mm0-rs) to be installed
+ and available on the `PATH`.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7057,9 +7191,10 @@ Default config:
 
 https://github.com/modularml/mojo
 
-`mojo-lsp-server` can be installed [via Modular](https://developer.modular.com/download)
+ `mojo-lsp-server` can be installed [via Modular](https://developer.modular.com/download)
 
-Mojo is a new programming language that bridges the gap between research and production by combining Python syntax and ecosystem with systems programming and metaprogramming features.
+ Mojo is a new programming language that bridges the gap between research and production by combining Python syntax and ecosystem with systems programming and metaprogramming features.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7086,7 +7221,8 @@ Default config:
 
 https://github.com/dfinity/vscode-motoko
 
-Language server for the Motoko programming language.
+ Language server for the Motoko programming language.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7119,15 +7255,16 @@ Default config:
 
 https://github.com/move-language/move/tree/main/language/move-analyzer
 
-Language server for Move
+ Language server for Move
 
-The `move-analyzer` can be installed by running:
+ The `move-analyzer` can be installed by running:
 
-```
-cargo install --git https://github.com/move-language/move move-analyzer
-```
+ ```
+ cargo install --git https://github.com/move-language/move move-analyzer
+ ```
 
-See [`move-analyzer`'s doc](https://github.com/move-language/move/blob/1b258a06e3c7d2bc9174578aac92cca3ac19de71/language/move-analyzer/editors/code/README.md#how-to-install) for details.
+ See [`move-analyzer`'s doc](https://github.com/move-language/move/blob/1b258a06e3c7d2bc9174578aac92cca3ac19de71/language/move-analyzer/editors/code/README.md#how-to-install) for details.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7202,13 +7339,14 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir`: [../lsp/msbuild_project_tools_server.lua:38](../lsp/msbuild_project_tools_server.lua#L38)
+- `root_dir`: [../lsp/msbuild_project_tools_server.lua:39](../lsp/msbuild_project_tools_server.lua#L39)
 
 ---
 
 ## muon
 
 https://muon.build
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7224,7 +7362,7 @@ Default config:
   ```lua
   { "meson" }
   ```
-- `root_dir`: [../lsp/muon.lua:4](../lsp/muon.lua#L4)
+- `root_dir`: [../lsp/muon.lua:5](../lsp/muon.lua#L5)
 
 ---
 
@@ -7232,11 +7370,12 @@ Default config:
 
 https://github.com/neomutt/mutt-language-server
 
-A language server for (neo)mutt's muttrc. It can be installed via pip.
+ A language server for (neo)mutt's muttrc. It can be installed via pip.
 
-```sh
-pip install mutt-language-server
-```
+ ```sh
+ pip install mutt-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7267,27 +7406,28 @@ Default config:
 
 https://github.com/codehz/nelua-lsp
 
-nelua-lsp is an experimental nelua language server.
+ nelua-lsp is an experimental nelua language server.
 
-You need [nelua.vim](https://github.com/stefanos82/nelua.vim/blob/main/ftdetect/nelua.vim) for nelua files to be recognized or add this to your config:
+ You need [nelua.vim](https://github.com/stefanos82/nelua.vim/blob/main/ftdetect/nelua.vim) for nelua files to be recognized or add this to your config:
 
-in vimscript:
-```vimscript
-au BufNewFile,BufRead *.nelua setf nelua
-```
+ in vimscript:
+ ```vimscript
+ au BufNewFile,BufRead *.nelua setf nelua
+ ```
 
-in lua:
-```lua
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, { pattern = { "*.nelua" }, command = "setf nelua"})
-```
+ in lua:
+ ```lua
+ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, { pattern = { "*.nelua" }, command = "setf nelua"})
+ ```
 
-**By default, nelua-lsp doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of the unzipped run script or binary.
+ **By default, nelua-lsp doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of the unzipped run script or binary.
 
-```lua
-vim.lsp.config('nelua_lsp', {
-    cmd = { "nelua", "-L", "/path/to/nelua-lsp/", "--script", "/path/to/nelua-lsp/nelua-lsp.lua" },
-})
-```
+ ```lua
+ vim.lsp.config('nelua_lsp', {
+     cmd = { "nelua", "-L", "/path/to/nelua-lsp/", "--script", "/path/to/nelua-lsp/nelua-lsp.lua" },
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7310,19 +7450,20 @@ Default config:
 
 https://github.com/Decodetalkers/neocmakelsp
 
-CMake LSP Implementation
+ CMake LSP Implementation
 
-Neovim does not currently include built-in snippets. `neocmakelsp` only provides completions when snippet support is enabled. To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
+ Neovim does not currently include built-in snippets. `neocmakelsp` only provides completions when snippet support is enabled. To enable completion, install a snippet plugin and add the following override to your language client capabilities during setup.
 
-```lua
---Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+ ```lua
+ --Enable (broadcasting) snippet capability for completion
+ local capabilities = vim.lsp.protocol.make_client_capabilities()
+ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-vim.lsp.config('neocmake', {
-  capabilities = capabilities,
-})
-```
+ vim.lsp.config('neocmake', {
+   capabilities = capabilities,
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7349,26 +7490,27 @@ Default config:
 
 https://github.com/nextflow-io/language-server
 
-Requirements:
- - Java 17+
+ Requirements:
+  - Java 17+
 
-`nextflow_ls` can be installed by following the instructions [here](https://github.com/nextflow-io/language-server#development).
+ `nextflow_ls` can be installed by following the instructions [here](https://github.com/nextflow-io/language-server#development).
 
-If you have installed nextflow language server, you can set the `cmd` custom path as follow:
+ If you have installed nextflow language server, you can set the `cmd` custom path as follow:
 
-```lua
-vim.lsp.config('nextflow_ls', {
-    cmd = { 'java', '-jar', 'nextflow-language-server-all.jar' },
-    filetypes = { 'nextflow' },
-    settings = {
-      nextflow = {
-        files = {
-          exclude = { '.git', '.nf-test', 'work' },
-        },
-      },
-    },
-})
-```
+ ```lua
+ vim.lsp.config('nextflow_ls', {
+     cmd = { 'java', '-jar', 'nextflow-language-server-all.jar' },
+     filetypes = { 'nextflow' },
+     settings = {
+       nextflow = {
+         files = {
+           exclude = { '.git', '.nf-test', 'work' },
+         },
+       },
+     },
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7405,7 +7547,8 @@ Default config:
 
 https://github.com/elixir-tools/next-ls
 
-**By default, next-ls does not set its `cmd`. Please see the following [detailed instructions](https://www.elixir-tools.dev/docs/next-ls/installation/) for possible installation methods.**
+ **By default, next-ls does not set its `cmd`. Please see the following [detailed instructions](https://www.elixir-tools.dev/docs/next-ls/installation/) for possible installation methods.**
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7428,11 +7571,12 @@ Default config:
 
 https://pypi.org/project/nginx-language-server/
 
-`nginx-language-server` can be installed via pip:
+ `nginx-language-server` can be installed via pip:
 
-```sh
-pip install -U nginx-language-server
-```
+ ```sh
+ pip install -U nginx-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7459,27 +7603,28 @@ Default config:
 
 Nickel Language Server
 
-https://github.com/tweag/nickel
+ https://github.com/tweag/nickel
 
-`nls` can be installed with nix, or cargo, from the Nickel repository.
-```sh
-git clone https://github.com/tweag/nickel.git
-```
+ `nls` can be installed with nix, or cargo, from the Nickel repository.
+ ```sh
+ git clone https://github.com/tweag/nickel.git
+ ```
 
-Nix:
-```sh
-cd nickel
-nix-env -f . -i
-```
+ Nix:
+ ```sh
+ cd nickel
+ nix-env -f . -i
+ ```
 
-cargo:
-```sh
-cd nickel/lsp/nls
-cargo install --path .
-```
+ cargo:
+ ```sh
+ cd nickel/lsp/nls
+ cargo install --path .
+ ```
 
-In order to have lspconfig detect Nickel filetypes (a prerequisite for autostarting a server),
-install the [Nickel vim plugin](https://github.com/nickel-lang/vim-nickel).
+ In order to have lspconfig detect Nickel filetypes (a prerequisite for autostarting a server),
+ install the [Nickel vim plugin](https://github.com/nickel-lang/vim-nickel).
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7506,12 +7651,13 @@ Default config:
 
 https://github.com/oxalica/nil
 
-A new language server for Nix Expression Language.
+ A new language server for Nix Expression Language.
 
-If you are using Nix with Flakes support, run `nix profile install github:oxalica/nil` to install.
-Check the repository README for more information.
+ If you are using Nix with Flakes support, run `nix profile install github:oxalica/nil` to install.
+ Check the repository README for more information.
 
-_See an example config at https://github.com/oxalica/nil/blob/main/dev/nvim-lsp.nix._
+ _See an example config at https://github.com/oxalica/nil/blob/main/dev/nvim-lsp.nix._
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7558,7 +7704,7 @@ Default config:
   ```lua
   { "nim" }
   ```
-- `root_dir`: [../lsp/nim_langserver.lua:13](../lsp/nim_langserver.lua#L13)
+- `root_dir`: [../lsp/nim_langserver.lua:14](../lsp/nim_langserver.lua#L14)
 
 ---
 
@@ -7586,7 +7732,7 @@ Default config:
   ```lua
   { "nim" }
   ```
-- `root_dir`: [../lsp/nimls.lua:13](../lsp/nimls.lua#L13)
+- `root_dir`: [../lsp/nimls.lua:14](../lsp/nimls.lua#L14)
 
 ---
 
@@ -7594,10 +7740,11 @@ Default config:
 
 https://github.com/nix-community/nixd
 
-Nix language server, based on nix libraries.
+ Nix language server, based on nix libraries.
 
-If you are using Nix with Flakes support, run `nix profile install github:nix-community/nixd` to install.
-Check the repository README for more information.
+ If you are using Nix with Flakes support, run `nix profile install github:nix-community/nixd` to install.
+ Check the repository README for more information.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7652,7 +7799,7 @@ Default config:
   ```lua
   { "hcl.nomad", "nomad" }
   ```
-- `root_dir`: [../lsp/nomad_lsp.lua:26](../lsp/nomad_lsp.lua#L26)
+- `root_dir`: [../lsp/nomad_lsp.lua:27](../lsp/nomad_lsp.lua#L27)
 
 ---
 
@@ -7695,7 +7842,8 @@ Default config:
 
 https://github.com/nushell/nushell
 
-Nushell built-in language server.
+ Nushell built-in language server.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7711,7 +7859,7 @@ Default config:
   ```lua
   { "nu" }
   ```
-- `root_dir`: [../lsp/nushell.lua:6](../lsp/nushell.lua#L6)
+- `root_dir`: [../lsp/nushell.lua:7](../lsp/nushell.lua#L7)
 
 ---
 
@@ -7719,12 +7867,13 @@ Default config:
 
 https://github.com/nrwl/nx-console/tree/master/apps/nxls
 
-nxls, a language server for Nx Workspaces
+ nxls, a language server for Nx Workspaces
 
-`nxls` can be installed via `npm`:
-```sh
-npm i -g nxls
-```
+ `nxls` can be installed via `npm`:
+ ```sh
+ npm i -g nxls
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7770,7 +7919,7 @@ Default config:
   ```lua
   { "ocaml", "reason" }
   ```
-- `root_dir`: [../lsp/ocamlls.lua:12](../lsp/ocamlls.lua#L12)
+- `root_dir`: [../lsp/ocamlls.lua:13](../lsp/ocamlls.lua#L13)
 
 ---
 
@@ -7799,8 +7948,8 @@ Default config:
   ```lua
   { "ocaml", "menhir", "ocamlinterface", "ocamllex", "reason", "dune" }
   ```
-- `get_language_id`: [../lsp/ocamllsp.lua:27](../lsp/ocamllsp.lua#L27)
-- `root_dir`: [../lsp/ocamllsp.lua:27](../lsp/ocamllsp.lua#L27)
+- `get_language_id`: [../lsp/ocamllsp.lua:28](../lsp/ocamllsp.lua#L28)
+- `root_dir`: [../lsp/ocamllsp.lua:28](../lsp/ocamllsp.lua#L28)
 
 ---
 
@@ -7824,7 +7973,7 @@ Default config:
   ```lua
   { "odin" }
   ```
-- `root_dir`: [../lsp/ols.lua:9](../lsp/ols.lua#L9)
+- `root_dir`: [../lsp/ols.lua:10](../lsp/ols.lua#L10)
 
 ---
 
@@ -7868,7 +8017,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir`: [../lsp/omnisharp.lua:19](../lsp/omnisharp.lua#L19)
+- `root_dir`: [../lsp/omnisharp.lua:20](../lsp/omnisharp.lua#L20)
 - `settings` :
   ```lua
   {
@@ -7890,9 +8039,10 @@ Default config:
 
 https://github.com/Galarius/opencl-language-server
 
-Build instructions can be found [here](https://github.com/Galarius/opencl-language-server/blob/main/_dev/build.md).
+ Build instructions can be found [here](https://github.com/Galarius/opencl-language-server/blob/main/_dev/build.md).
 
-Prebuilt binaries are available for Linux, macOS and Windows [here](https://github.com/Galarius/opencl-language-server/releases).
+ Prebuilt binaries are available for Linux, macOS and Windows [here](https://github.com/Galarius/opencl-language-server/releases).
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7919,22 +8069,23 @@ Default config:
 
 https://github.com/dzhu/openscad-language-server
 
-A Language Server Protocol server for OpenSCAD
+ A Language Server Protocol server for OpenSCAD
 
-You can build and install `openscad-language-server` binary with `cargo`:
-```sh
-cargo install openscad-language-server
-```
+ You can build and install `openscad-language-server` binary with `cargo`:
+ ```sh
+ cargo install openscad-language-server
+ ```
 
-Vim does not have built-in syntax for the `openscad` filetype currently.
+ Vim does not have built-in syntax for the `openscad` filetype currently.
 
-This can be added via an autocmd:
+ This can be added via an autocmd:
 
-```lua
-vim.cmd [[ autocmd BufRead,BufNewFile *.scad set filetype=openscad ]]
-```
+ ```lua
+ vim.cmd [[ autocmd BufRead,BufNewFile *.scad set filetype=openscad ]]
+ ```
 
-or by installing a filetype plugin such as https://github.com/sirtaj/vim-openscad
+ or by installing a filetype plugin such as https://github.com/sirtaj/vim-openscad
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -7961,12 +8112,13 @@ Default config:
 
 https://github.com/Leathong/openscad-LSP
 
-A Language Server Protocol server for OpenSCAD
+ A Language Server Protocol server for OpenSCAD
 
-You can build and install `openscad-lsp` binary with `cargo`:
-```sh
-cargo install openscad-lsp
-```
+ You can build and install `openscad-lsp` binary with `cargo`:
+ ```sh
+ cargo install openscad-lsp
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8014,7 +8166,7 @@ Default config:
   ```lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
   ```
-- `root_dir`: [../lsp/oxlint.lua:14](../lsp/oxlint.lua#L14)
+- `root_dir`: [../lsp/oxlint.lua:15](../lsp/oxlint.lua#L15)
 - `workspace_required` : `true`
 
 ---
@@ -8023,7 +8175,8 @@ Default config:
 
 https://github.com/kadena-io/pact-lsp
 
-The Pact language server
+ The Pact language server
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8077,7 +8230,7 @@ Default config:
   ```lua
   { "pascal" }
   ```
-- `root_dir`: [../lsp/pasls.lua:20](../lsp/pasls.lua#L20)
+- `root_dir`: [../lsp/pasls.lua:21](../lsp/pasls.lua#L21)
 
 ---
 
@@ -8085,14 +8238,15 @@ Default config:
 
 https://git.sr.ht/~rrc/pbls
 
-Prerequisites: Ensure protoc is on your $PATH.
+ Prerequisites: Ensure protoc is on your $PATH.
 
-`pbls` can be installed via `cargo install`:
-```sh
-cargo install --git https://git.sr.ht/~rrc/pbls
-```
+ `pbls` can be installed via `cargo install`:
+ ```sh
+ cargo install --git https://git.sr.ht/~rrc/pbls
+ ```
 
-pbls is a Language Server for protobuf
+ pbls is a Language Server for protobuf
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8119,9 +8273,10 @@ Default config:
 
 https://github.com/richterger/Perl-LanguageServer/tree/master/clients/vscode/perl
 
-`Perl-LanguageServer`, a language server for Perl.
+ `Perl-LanguageServer`, a language server for Perl.
 
-To use the language server, ensure that you have Perl::LanguageServer installed and perl command is on your path.
+ To use the language server, ensure that you have Perl::LanguageServer installed and perl command is on your path.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8159,23 +8314,24 @@ Default config:
 
 https://github.com/bscan/PerlNavigator
 
-A Perl language server. It can be installed via npm:
+ A Perl language server. It can be installed via npm:
 
-```sh
-npm i -g perlnavigator-server
-```
+ ```sh
+ npm i -g perlnavigator-server
+ ```
 
-At minimum, you will need `perl` in your path. If you want to use a non-standard `perl` you will need to set your configuration like so:
-```lua
-settings = {
-  perlnavigator = {
-    perlPath = '/some/odd/location/my-perl'
-  }
-}
-```
+ At minimum, you will need `perl` in your path. If you want to use a non-standard `perl` you will need to set your configuration like so:
+ ```lua
+ settings = {
+   perlnavigator = {
+     perlPath = '/some/odd/location/my-perl'
+   }
+ }
+ ```
 
-The `contributes.configuration.properties` section of `perlnavigator`'s `package.json` has all available configuration settings. All
-settings have a reasonable default, but, at minimum, you may want to point `perlnavigator` at your `perltidy` and `perlcritic` configurations.
+ The `contributes.configuration.properties` section of `perlnavigator`'s `package.json` has all available configuration settings. All
+ settings have a reasonable default, but, at minimum, you may want to point `perlnavigator` at your `perltidy` and `perlcritic` configurations.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8201,11 +8357,12 @@ Default config:
 ## perlpls
 
 https://github.com/FractalBoy/perl-language-server
-https://metacpan.org/pod/PLS
+ https://metacpan.org/pod/PLS
 
-`PLS`, another language server for Perl.
+ `PLS`, another language server for Perl.
 
-To use the language server, ensure that you have PLS installed and that it is in your path
+ To use the language server, ensure that you have PLS installed and that it is in your path
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8245,7 +8402,8 @@ Default config:
 
 https://github.com/pest-parser/pest-ide-tools
 
-Language server for pest grammars.
+ Language server for pest grammars.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8288,7 +8446,7 @@ Default config:
   ```lua
   { "php" }
   ```
-- `root_dir`: [../lsp/phan.lua:20](../lsp/phan.lua#L20)
+- `root_dir`: [../lsp/phan.lua:21](../lsp/phan.lua#L21)
 
 ---
 
@@ -8340,7 +8498,7 @@ Default config:
   ```lua
   { "p8" }
   ```
-- `root_dir`: [../lsp/pico8_ls.lua:9](../lsp/pico8_ls.lua#L9)
+- `root_dir`: [../lsp/pico8_ls.lua:10](../lsp/pico8_ls.lua#L10)
 - `settings` :
   ```lua
   {}
@@ -8352,9 +8510,10 @@ Default config:
 
 https://github.com/thought-machine/please
 
-High-performance extensible build system for reproducible multi-language builds.
+ High-performance extensible build system for reproducible multi-language builds.
 
-The `plz` binary will automatically install the LSP for you on first run
+ The `plz` binary will automatically install the LSP for you on first run
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8381,7 +8540,8 @@ Default config:
 
 `pli_language_server` is a language server for the PL/I language used on IBM SystemZ mainframes.
 
-To learn how to configure the PL/I language server, see the [PL/I Language Support documentation](https://github.com/zowe/zowe-pli-language-support).
+ To learn how to configure the PL/I language server, see the [PL/I Language Support documentation](https://github.com/zowe/zowe-pli-language-support).
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8408,7 +8568,8 @@ Default config:
 
 https://github.com/huderlem/poryscript-pls
 
-Language server for poryscript (a high level scripting language for GBA-era Pokémon decompilation projects)
+ Language server for poryscript (a high level scripting language for GBA-era Pokémon decompilation projects)
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8435,7 +8596,8 @@ Default config:
 
 https://pgtools.dev
 
-A collection of language tools and a Language Server Protocol (LSP) implementation for Postgres, focusing on developer experience and reliable SQL tooling.
+ A collection of language tools and a Language Server Protocol (LSP) implementation for Postgres, focusing on developer experience and reliable SQL tooling.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8502,7 +8664,7 @@ vim.lsp.enable('powershell_es')
 ```
 
 Default config:
-- `cmd`: [../lsp/powershell_es.lua:39](../lsp/powershell_es.lua#L39)
+- `cmd`: [../lsp/powershell_es.lua:40](../lsp/powershell_es.lua#L40)
 - `filetypes` :
   ```lua
   { "ps1" }
@@ -8518,10 +8680,11 @@ Default config:
 
 Language Server for the Prisma JavaScript and TypeScript ORM
 
-`@prisma/language-server` can be installed via npm
-```sh
-npm install -g @prisma/language-server
-```
+ `@prisma/language-server` can be installed via npm
+ ```sh
+ npm install -g @prisma/language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8556,7 +8719,8 @@ Default config:
 
 https://github.com/jamesnvc/lsp_server
 
-Language Server Protocol server for SWI-Prolog
+ Language Server Protocol server for SWI-Prolog
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8583,9 +8747,10 @@ Default config:
 
 https://github.com/kitten/prosemd-lsp
 
-An experimental LSP for Markdown.
+ An experimental LSP for Markdown.
 
-Please see the manual installation instructions: https://github.com/kitten/prosemd-lsp#manual-installation
+ Please see the manual installation instructions: https://github.com/kitten/prosemd-lsp#manual-installation
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8612,12 +8777,13 @@ Default config:
 
 https://github.com/coder3101/protols
 
-`protols` can be installed via `cargo`:
-```sh
-cargo install protols
-```
+ `protols` can be installed via `cargo`:
+ ```sh
+ cargo install protols
+ ```
 
-A Language Server for proto3 files. It uses tree-sitter and runs in single file mode.
+ A Language Server for proto3 files. It uses tree-sitter and runs in single file mode.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8644,10 +8810,11 @@ Default config:
 
 https://github.com/vimeo/psalm
 
-Can be installed with composer.
-```sh
-composer global require vimeo/psalm
-```
+ Can be installed with composer.
+ ```sh
+ composer global require vimeo/psalm
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8674,9 +8841,10 @@ Default config:
 
 https://github.com/opa-oz/pug-lsp
 
-An implementation of the Language Protocol Server for [Pug.js](http://pugjs.org)
+ An implementation of the Language Protocol Server for [Pug.js](http://pugjs.org)
 
-PugLSP can be installed via `go install github.com/opa-oz/pug-lsp@latest`, or manually downloaded from [releases page](https://github.com/opa-oz/pug-lsp/releases)
+ PugLSP can be installed via `go install github.com/opa-oz/pug-lsp@latest`, or manually downloaded from [releases page](https://github.com/opa-oz/pug-lsp/releases)
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8703,18 +8871,19 @@ Default config:
 
 LSP server for Puppet.
 
-Installation:
+ Installation:
 
-- Clone the editor-services repository:
-    https://github.com/puppetlabs/puppet-editor-services
+ - Clone the editor-services repository:
+     https://github.com/puppetlabs/puppet-editor-services
 
-- Navigate into that directory and run: `bundle install`
+ - Navigate into that directory and run: `bundle install`
 
-- Install the 'puppet-lint' gem: `gem install puppet-lint`
+ - Install the 'puppet-lint' gem: `gem install puppet-lint`
 
-- Add that repository to $PATH.
+ - Add that repository to $PATH.
 
-- Ensure you can run `puppet-languageserver` from outside the editor-services directory.
+ - Ensure you can run `puppet-languageserver` from outside the editor-services directory.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8741,10 +8910,11 @@ Default config:
 
 https://github.com/nwolverson/purescript-language-server
 
-The `purescript-language-server` can be added to your project and `$PATH` via
+ The `purescript-language-server` can be added to your project and `$PATH` via
 
-* JavaScript package manager such as npm, pnpm, Yarn, et al.
-* Nix under the `nodePackages` and `nodePackages_latest` package sets
+ * JavaScript package manager such as npm, pnpm, Yarn, et al.
+ * Nix under the `nodePackages` and `nodePackages_latest` package sets
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8771,29 +8941,30 @@ Default config:
 
 https://github.com/python-lsp/python-lsp-server
 
-A Python 3.6+ implementation of the Language Server Protocol.
+ A Python 3.6+ implementation of the Language Server Protocol.
 
-See the [project's README](https://github.com/python-lsp/python-lsp-server) for installation instructions.
+ See the [project's README](https://github.com/python-lsp/python-lsp-server) for installation instructions.
 
-Configuration options are documented [here](https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md).
-In order to configure an option, it must be translated to a nested Lua table and included in the `settings` argument to the `config('pylsp', {})` function.
-For example, in order to set the `pylsp.plugins.pycodestyle.ignore` option:
-```lua
-vim.lsp.config('pylsp', {
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {
-          ignore = {'W391'},
-          maxLineLength = 100
-        }
-      }
-    }
-  }
-})
-```
+ Configuration options are documented [here](https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md).
+ In order to configure an option, it must be translated to a nested Lua table and included in the `settings` argument to the `config('pylsp', {})` function.
+ For example, in order to set the `pylsp.plugins.pycodestyle.ignore` option:
+ ```lua
+ vim.lsp.config('pylsp', {
+   settings = {
+     pylsp = {
+       plugins = {
+         pycodestyle = {
+           ignore = {'W391'},
+           maxLineLength = 100
+         }
+       }
+     }
+   }
+ })
+ ```
 
-Note: This is a community fork of `pyls`.
+ Note: This is a community fork of `pyls`.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8820,12 +8991,13 @@ Default config:
 
 https://github.com/mtshiba/pylyzer
 
-`pylyzer`, a fast static code analyzer & language server for Python.
+ `pylyzer`, a fast static code analyzer & language server for Python.
 
-`pylyzer` requires Erg as dependency, and finds it via `ERG_PATH` environment variable.
-This config sets `ERG_PATH="~/.erg"`. Set `cmd_env` if you want to change it.
-To install Erg, simply extract tarball/zip from [Erg releases](https://github.com/erg-lang/erg/releases/latest)
-to the the path where you want to install it, e.g. `~/.erg`.
+ `pylyzer` requires Erg as dependency, and finds it via `ERG_PATH` environment variable.
+ This config sets `ERG_PATH="~/.erg"`. Set `cmd_env` if you want to change it.
+ To install Erg, simply extract tarball/zip from [Erg releases](https://github.com/erg-lang/erg/releases/latest)
+ to the the path where you want to install it, e.g. `~/.erg`.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8869,12 +9041,13 @@ Default config:
 
 https://pyre-check.org/
 
-`pyre` a static type checker for Python 3.
+ `pyre` a static type checker for Python 3.
 
-`pyre` offers an extremely limited featureset. It currently only supports diagnostics,
-which are triggered on save.
+ `pyre` offers an extremely limited featureset. It currently only supports diagnostics,
+ which are triggered on save.
 
-Do not report issues for missing features in `pyre` to `lspconfig`.
+ Do not report issues for missing features in `pyre` to `lspconfig`.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -8920,7 +9093,7 @@ Default config:
   ```lua
   { "python" }
   ```
-- `on_exit`: [../lsp/pyrefly.lua:10](../lsp/pyrefly.lua#L10)
+- `on_exit`: [../lsp/pyrefly.lua:11](../lsp/pyrefly.lua#L11)
 - `root_markers` :
   ```lua
   { "pyrefly.toml", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
@@ -8948,7 +9121,7 @@ Default config:
   ```lua
   { "python" }
   ```
-- `on_attach`: [../lsp/pyright.lua:22](../lsp/pyright.lua#L22)
+- `on_attach`: [../lsp/pyright.lua:23](../lsp/pyright.lua#L23)
 - `root_markers` :
   ```lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
@@ -8972,9 +9145,10 @@ Default config:
 
 https://doc.qt.io/qt-6/qtqml-tooling-qmlls.html
 
-> QML Language Server is a tool shipped with Qt that helps you write code in your favorite (LSP-supporting) editor.
+ > QML Language Server is a tool shipped with Qt that helps you write code in your favorite (LSP-supporting) editor.
 
-Source in the [QtDeclarative repository](https://code.qt.io/cgit/qt/qtdeclarative.git/)
+ Source in the [QtDeclarative repository](https://code.qt.io/cgit/qt/qtdeclarative.git/)
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9001,9 +9175,10 @@ Default config:
 
 https://quick-lint-js.com/
 
-quick-lint-js finds bugs in JavaScript programs.
+ quick-lint-js finds bugs in JavaScript programs.
 
-See installation [instructions](https://quick-lint-js.com/install/)
+ See installation [instructions](https://quick-lint-js.com/install/)
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9029,14 +9204,15 @@ Default config:
 ## r_language_server
 
 [languageserver](https://github.com/REditorSupport/languageserver) is an
-implementation of the Microsoft's Language Server Protocol for the R
-language.
+ implementation of the Microsoft's Language Server Protocol for the R
+ language.
 
-It is released on CRAN and can be easily installed by
+ It is released on CRAN and can be easily installed by
 
-```r
-install.packages("languageserver")
-```
+ ```r
+ install.packages("languageserver")
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9052,7 +9228,7 @@ Default config:
   ```lua
   { "r", "rmd", "quarto" }
   ```
-- `root_dir`: [../lsp/r_language_server.lua:12](../lsp/r_language_server.lua#L12)
+- `root_dir`: [../lsp/r_language_server.lua:13](../lsp/r_language_server.lua#L13)
 
 ---
 
@@ -9060,11 +9236,12 @@ Default config:
 
 [https://github.com/jeapostrophe/racket-langserver](https://github.com/jeapostrophe/racket-langserver)
 
-The Racket language server. This project seeks to use
-[DrRacket](https://github.com/racket/drracket)'s public API to provide
-functionality that mimics DrRacket's code tools as closely as possible.
+ The Racket language server. This project seeks to use
+ [DrRacket](https://github.com/racket/drracket)'s public API to provide
+ functionality that mimics DrRacket's code tools as closely as possible.
 
-Install via `raco`: `raco pkg install racket-langserver`
+ Install via `raco`: `raco pkg install racket-langserver`
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9090,24 +9267,25 @@ Default config:
 ## raku_navigator
 
 https://github.com/bscan/RakuNavigator
-A Raku language server
-**By default, raku_navigator doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path.
-You have to install the language server manually.
-Clone the RakuNavigator repo, install based on the [instructions](https://github.com/bscan/raku_Navigator#installation-for-other-editors),
-and point `cmd` to `server.js` inside the `server/out` directory:
-```lua
-cmd = {'node', '<path_to_repo>/server/out/server.js', '--stdio'}
-```
-At minimum, you will need `raku` in your path. If you want to use a non-standard `raku` you will need to set your configuration like so:
-```lua
-settings = {
-  raku_navigator = {
-    rakuPath = '/some/odd/location/my-raku'
-  }
-}
-```
-The `contributes.configuration.properties` section of `raku_navigator`'s `package.json` has all available configuration settings. All
-settings have a reasonable default, but, at minimum, you may want to point `raku_navigator` at your `raku_tidy` and `raku_critic` configurations.
+ A Raku language server
+ **By default, raku_navigator doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path.
+ You have to install the language server manually.
+ Clone the RakuNavigator repo, install based on the [instructions](https://github.com/bscan/raku_Navigator#installation-for-other-editors),
+ and point `cmd` to `server.js` inside the `server/out` directory:
+ ```lua
+ cmd = {'node', '<path_to_repo>/server/out/server.js', '--stdio'}
+ ```
+ At minimum, you will need `raku` in your path. If you want to use a non-standard `raku` you will need to set your configuration like so:
+ ```lua
+ settings = {
+   raku_navigator = {
+     rakuPath = '/some/odd/location/my-raku'
+   }
+ }
+ ```
+ The `contributes.configuration.properties` section of `raku_navigator`'s `package.json` has all available configuration settings. All
+ settings have a reasonable default, but, at minimum, you may want to point `raku_navigator` at your `raku_tidy` and `raku_critic` configurations.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9134,7 +9312,8 @@ Default config:
 
 Reason language server
 
-You can install reason language server from [reason-language-server](https://github.com/jaredly/reason-language-server) repository.
+ You can install reason language server from [reason-language-server](https://github.com/jaredly/reason-language-server) repository.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9182,7 +9361,7 @@ Default config:
   ```lua
   { "rego" }
   ```
-- `root_dir`: [../lsp/regal.lua:14](../lsp/regal.lua#L14)
+- `root_dir`: [../lsp/regal.lua:15](../lsp/regal.lua#L15)
 
 ---
 
@@ -9211,7 +9390,7 @@ Default config:
   ```lua
   { "rego" }
   ```
-- `root_dir`: [../lsp/regols.lua:14](../lsp/regols.lua#L14)
+- `root_dir`: [../lsp/regols.lua:15](../lsp/regols.lua#L15)
 
 ---
 
@@ -9219,32 +9398,33 @@ Default config:
 
 https://github.com/remarkjs/remark-language-server
 
-`remark-language-server` can be installed via `npm`:
-```sh
-npm install -g remark-language-server
-```
+ `remark-language-server` can be installed via `npm`:
+ ```sh
+ npm install -g remark-language-server
+ ```
 
-`remark-language-server` uses the same
-[configuration files](https://github.com/remarkjs/remark/tree/main/packages/remark-cli#example-config-files-json-yaml-js)
-as `remark-cli`.
+ `remark-language-server` uses the same
+ [configuration files](https://github.com/remarkjs/remark/tree/main/packages/remark-cli#example-config-files-json-yaml-js)
+ as `remark-cli`.
 
-This uses a plugin based system. Each plugin needs to be installed locally using `npm` or `yarn`.
+ This uses a plugin based system. Each plugin needs to be installed locally using `npm` or `yarn`.
 
-For example, given the following `.remarkrc.json`:
+ For example, given the following `.remarkrc.json`:
 
-```json
-{
-  "presets": [
-    "remark-preset-lint-recommended"
-  ]
-}
-```
+ ```json
+ {
+   "presets": [
+     "remark-preset-lint-recommended"
+   ]
+ }
+ ```
 
-`remark-preset-lint-recommended` needs to be installed in the local project:
+ `remark-preset-lint-recommended` needs to be installed in the local project:
 
-```sh
-npm install remark-preset-lint-recommended
-```
+ ```sh
+ npm install remark-preset-lint-recommended
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9271,37 +9451,38 @@ Default config:
 
 https://github.com/rescript-lang/rescript-vscode/tree/master/server
 
-ReScript Language Server can be installed via npm:
-```sh
-npm install -g @rescript/language-server
-```
+ ReScript Language Server can be installed via npm:
+ ```sh
+ npm install -g @rescript/language-server
+ ```
 
-See [package.json](https://github.com/rescript-lang/rescript-vscode/blob/master/package.json#L139)
-for init_options supported.
+ See [package.json](https://github.com/rescript-lang/rescript-vscode/blob/master/package.json#L139)
+ for init_options supported.
 
-For example, in order to disable the `inlayHints` option:
-```lua
-vim.lsp.config('rescriptls', {
-  settings = {
-    rescript = {
-      settings = {
-        inlayHints = { enable = false },
-      },
-    },
-  })
-}
-```
+ For example, in order to disable the `inlayHints` option:
+ ```lua
+ vim.lsp.config('rescriptls', {
+   settings = {
+     rescript = {
+       settings = {
+         inlayHints = { enable = false },
+       },
+     },
+   })
+ }
+ ```
 
-Detect file changes: While using @rescript/language-server >= 1.63.0 you have to detect file changes by registering the didChangeWatchedFiles hook.
-```lua
-capabilities = {
-    workspace = {
-        didChangeWatchedFiles = {
-            dynamicRegistration = true,
-        },
-    },
-}
-```
+ Detect file changes: While using @rescript/language-server >= 1.63.0 you have to detect file changes by registering the didChangeWatchedFiles hook.
+ ```lua
+ capabilities = {
+     workspace = {
+         didChangeWatchedFiles = {
+             dynamicRegistration = true,
+         },
+     },
+ }
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9354,30 +9535,31 @@ Default config:
 
 https://github.com/rust-lang/rls
 
-rls, a language server for Rust
+ rls, a language server for Rust
 
-See https://github.com/rust-lang/rls#setup to setup rls itself.
-See https://github.com/rust-lang/rls#configuration for rls-specific settings.
-All settings listed on the rls configuration section of the readme
-must be set under settings.rust as follows:
+ See https://github.com/rust-lang/rls#setup to setup rls itself.
+ See https://github.com/rust-lang/rls#configuration for rls-specific settings.
+ All settings listed on the rls configuration section of the readme
+ must be set under settings.rust as follows:
 
-```lua
-vim.lsp.config('rls', {
-  settings = {
-    rust = {
-      unstable_features = true,
-      build_on_save = false,
-      all_features = true,
-    },
-  },
-})
-```
+ ```lua
+ vim.lsp.config('rls', {
+   settings = {
+     rust = {
+       unstable_features = true,
+       build_on_save = false,
+       all_features = true,
+     },
+   },
+ })
+ ```
 
-If you want to use rls for a particular build, eg nightly, set cmd as follows:
+ If you want to use rls for a particular build, eg nightly, set cmd as follows:
 
-```lua
-cmd = {"rustup", "run", "nightly", "rls"}
-```
+ ```lua
+ cmd = {"rustup", "run", "nightly", "rls"}
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9404,11 +9586,12 @@ Default config:
 
 https://github.com/nix-community/rnix-lsp
 
-A language server for Nix providing basic completion and formatting via nixpkgs-fmt.
+ A language server for Nix providing basic completion and formatting via nixpkgs-fmt.
 
-To install manually, run `cargo install rnix-lsp`. If you are using nix, rnix-lsp is in nixpkgs.
+ To install manually, run `cargo install rnix-lsp`. If you are using nix, rnix-lsp is in nixpkgs.
 
-This server accepts configuration via the `settings` key.
+ This server accepts configuration via the `settings` key.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9428,7 +9611,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir`: [../lsp/rnix.lua:10](../lsp/rnix.lua#L10)
+- `root_dir`: [../lsp/rnix.lua:11](../lsp/rnix.lua#L11)
 - `settings` :
   ```lua
   {}
@@ -9440,7 +9623,8 @@ Default config:
 
 https://robotcode.io
 
-RobotCode - Language Server Protocol implementation for Robot Framework.
+ RobotCode - Language Server Protocol implementation for Robot Framework.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9456,7 +9640,7 @@ Default config:
   ```lua
   { "robot", "resource" }
   ```
-- `get_language_id`: [../lsp/robotcode.lua:6](../lsp/robotcode.lua#L6)
+- `get_language_id`: [../lsp/robotcode.lua:7](../lsp/robotcode.lua#L7)
 - `root_markers` :
   ```lua
   { "robot.toml", "pyproject.toml", "Pipfile", ".git" }
@@ -9468,7 +9652,8 @@ Default config:
 
 https://github.com/robocorp/robotframework-lsp
 
-Language Server Protocol implementation for Robot Framework.
+ Language Server Protocol implementation for Robot Framework.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9495,8 +9680,9 @@ Default config:
 
 https://github.com/roc-lang/roc/tree/main/crates/language_server#roc_language_server
 
-The built-in language server for the Roc programming language.
-[Installation](https://github.com/roc-lang/roc/tree/main/crates/language_server#installing)
+ The built-in language server for the Roc programming language.
+ [Installation](https://github.com/roc-lang/roc/tree/main/crates/language_server#installing)
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9523,13 +9709,14 @@ Default config:
 
 https://rome.tools
 
-Language server for the Rome Frontend Toolchain.
+ Language server for the Rome Frontend Toolchain.
 
-(Unmaintained, use [Biome](https://biomejs.dev/blog/annoucing-biome) instead.)
+ (Unmaintained, use [Biome](https://biomejs.dev/blog/annoucing-biome) instead.)
 
-```sh
-npm install [-g] rome
-```
+ ```sh
+ npm install [-g] rome
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9660,13 +9847,14 @@ Default config:
 
 https://github.com/dcermak/rpm-spec-language-server
 
-Language server protocol (LSP) support for RPM Spec files.
+ Language server protocol (LSP) support for RPM Spec files.
 
-`rpm-spec-language-server` can be installed by running,
+ `rpm-spec-language-server` can be installed by running,
 
-```sh
-pip install rpm-spec-language-server
-```
+ ```sh
+ pip install rpm-spec-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9696,6 +9884,7 @@ Default config:
 ## rubocop
 
 https://github.com/rubocop/rubocop
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9722,15 +9911,16 @@ Default config:
 
 https://shopify.github.io/ruby-lsp/
 
-This gem is an implementation of the language server protocol specification for
-Ruby, used to improve editor features.
+ This gem is an implementation of the language server protocol specification for
+ Ruby, used to improve editor features.
 
-Install the gem. There's no need to require it, since the server is used as a
-standalone executable.
+ Install the gem. There's no need to require it, since the server is used as a
+ standalone executable.
 
-```sh
-gem install ruby-lsp
-```
+ ```sh
+ gem install ruby-lsp
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9763,29 +9953,30 @@ Default config:
 
 https://github.com/astral-sh/ruff
 
-A Language Server Protocol implementation for Ruff, an extremely fast Python linter and code formatter, written in Rust. It can be installed via `pip`.
+ A Language Server Protocol implementation for Ruff, an extremely fast Python linter and code formatter, written in Rust. It can be installed via `pip`.
 
-```sh
-pip install ruff
-```
+ ```sh
+ pip install ruff
+ ```
 
-**Available in Ruff `v0.4.5` in beta and stabilized in Ruff `v0.5.3`.**
+ **Available in Ruff `v0.4.5` in beta and stabilized in Ruff `v0.5.3`.**
 
-This is the new built-in language server written in Rust. It supports the same feature set as `ruff-lsp`, but with superior performance and no installation required. Note that the `ruff-lsp` server will continue to be maintained until further notice.
+ This is the new built-in language server written in Rust. It supports the same feature set as `ruff-lsp`, but with superior performance and no installation required. Note that the `ruff-lsp` server will continue to be maintained until further notice.
 
-Server settings can be provided via:
+ Server settings can be provided via:
 
-```lua
-vim.lsp.config('ruff', {
-  init_options = {
-    settings = {
-      -- Server settings should go here
-    }
-  }
-})
-```
+ ```lua
+ vim.lsp.config('ruff', {
+   init_options = {
+     settings = {
+       -- Server settings should go here
+     }
+   }
+ })
+ ```
 
-Refer to the [documentation](https://docs.astral.sh/ruff/editors/) for more details.
+ Refer to the [documentation](https://docs.astral.sh/ruff/editors/) for more details.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9816,24 +10007,25 @@ Default config:
 
 https://github.com/astral-sh/ruff-lsp
 
-A Language Server Protocol implementation for Ruff, an extremely fast Python linter and code transformation tool, written in Rust. It can be installed via pip.
+ A Language Server Protocol implementation for Ruff, an extremely fast Python linter and code transformation tool, written in Rust. It can be installed via pip.
 
-```sh
-pip install ruff-lsp
-```
+ ```sh
+ pip install ruff-lsp
+ ```
 
-Extra CLI arguments for `ruff` can be provided via
+ Extra CLI arguments for `ruff` can be provided via
 
-```lua
-vim.lsp.config('ruff_lsp', {
-  init_options = {
-    settings = {
-      -- Any extra CLI arguments for `ruff` go here.
-      args = {},
-    }
-  }
-})
-```
+ ```lua
+ vim.lsp.config('ruff_lsp', {
+   init_options = {
+     settings = {
+       -- Any extra CLI arguments for `ruff` go here.
+       args = {},
+     }
+   }
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9864,8 +10056,9 @@ Default config:
 
 https://crates.io/crates/rune-languageserver
 
-A language server for the [Rune](https://rune-rs.github.io/) Language,
-an embeddable dynamic programming language for Rust
+ A language server for the [Rune](https://rune-rs.github.io/) Language,
+ an embeddable dynamic programming language for Rust
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -9917,7 +10110,7 @@ vim.lsp.enable('rust_analyzer')
 ```
 
 Default config:
-- `before_init`: [../lsp/rust_analyzer.lua:55](../lsp/rust_analyzer.lua#L55)
+- `before_init`: [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
 - `capabilities` :
   ```lua
   {
@@ -9934,20 +10127,21 @@ Default config:
   ```lua
   { "rust" }
   ```
-- `on_attach`: [../lsp/rust_analyzer.lua:55](../lsp/rust_analyzer.lua#L55)
-- `root_dir`: [../lsp/rust_analyzer.lua:55](../lsp/rust_analyzer.lua#L55)
+- `on_attach`: [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
+- `root_dir`: [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
 
 ---
 
 ## salt_ls
 
 Language server for Salt configuration files.
-https://github.com/dcermak/salt-lsp
+ https://github.com/dcermak/salt-lsp
 
-The language server can be installed with `pip`:
-```sh
-pip install salt-lsp
-```
+ The language server can be installed with `pip`:
+ ```sh
+ pip install salt-lsp
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10001,7 +10195,8 @@ Default config:
 
 https://github.com/crystal-lang-tools/scry
 
-Crystal language server.
+ Crystal language server.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10028,7 +10223,8 @@ Default config:
 
 https://github.com/antonk52/lua-3p-language-servers
 
-3rd party Language Server for Selene lua linter
+ 3rd party Language Server for Selene lua linter
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10055,8 +10251,9 @@ Default config:
 
 https://github.com/Pure-D/serve-d
 
-Microsoft language server protocol implementation for D using workspace-d.
-Download a binary from https://github.com/Pure-D/serve-d/releases and put it in your $PATH.
+ Microsoft language server protocol implementation for D using workspace-d.
+ Download a binary from https://github.com/Pure-D/serve-d/releases and put it in your $PATH.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10083,11 +10280,12 @@ Default config:
 
 https://shopify.dev/docs/api/shopify-cli
 
-[Language Server](https://shopify.dev/docs/themes/tools/cli/language-server) and Theme Check (linter) for Shopify themes.
+ [Language Server](https://shopify.dev/docs/themes/tools/cli/language-server) and Theme Check (linter) for Shopify themes.
 
-`shopify` can be installed via npm `npm install -g @shopify/cli`.
+ `shopify` can be installed via npm `npm install -g @shopify/cli`.
 
-Note: This LSP already includes Theme Check so you don't need to use the `theme_check` server configuration as well.
+ Note: This LSP already includes Theme Check so you don't need to use the `theme_check` server configuration as well.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10117,22 +10315,23 @@ Default config:
 ## sixtyfps
 
 https://github.com/sixtyfpsui/sixtyfps
-`SixtyFPS`'s language server
+ `SixtyFPS`'s language server
 
-You can build and install `sixtyfps-lsp` binary with `cargo`:
-```sh
-cargo install sixtyfps-lsp
-```
+ You can build and install `sixtyfps-lsp` binary with `cargo`:
+ ```sh
+ cargo install sixtyfps-lsp
+ ```
 
-Vim does not have built-in syntax for the `sixtyfps` filetype currently.
+ Vim does not have built-in syntax for the `sixtyfps` filetype currently.
 
-This can be added via an autocmd:
+ This can be added via an autocmd:
 
-```lua
-vim.cmd [[ autocmd BufRead,BufNewFile *.60 set filetype=sixtyfps ]]
-```
+ ```lua
+ vim.cmd [[ autocmd BufRead,BufNewFile *.60 set filetype=sixtyfps ]]
+ ```
 
-or by installing a filetype plugin such as https://github.com/RustemB/sixtyfps-vim
+ or by installing a filetype plugin such as https://github.com/RustemB/sixtyfps-vim
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10200,20 +10399,21 @@ Default config:
 ## slint_lsp
 
 https://github.com/slint-ui/slint
-`Slint`'s language server
+ `Slint`'s language server
 
-You can build and install `slint-lsp` binary with `cargo`:
-```sh
-cargo install slint-lsp
-```
+ You can build and install `slint-lsp` binary with `cargo`:
+ ```sh
+ cargo install slint-lsp
+ ```
 
-Vim does not have built-in syntax for the `slint` filetype at this time.
+ Vim does not have built-in syntax for the `slint` filetype at this time.
 
-This can be added via an autocmd:
+ This can be added via an autocmd:
 
-```lua
-vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
-```
+ ```lua
+ vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10266,7 +10466,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir`: [../lsp/smarty_ls.lua:13](../lsp/smarty_ls.lua#L13)
+- `root_dir`: [../lsp/smarty_ls.lua:14](../lsp/smarty_ls.lua#L14)
 - `settings` :
   ```lua
   {
@@ -10341,10 +10541,11 @@ Default config:
 
 https://www.npmjs.com/package/@snakeskin/cli
 
-`snakeskin cli` can be installed via `npm`:
-```sh
-npm install -g @snakeskin/cli
-```
+ `snakeskin cli` can be installed via `npm`:
+ ```sh
+ npm install -g @snakeskin/cli
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10371,7 +10572,8 @@ Default config:
 
 https://github.com/snyk/snyk-ls
 
-LSP for Snyk Open Source, Snyk Infrastructure as Code, and Snyk Code.
+ LSP for Snyk Open Source, Snyk Infrastructure as Code, and Snyk Code.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10416,6 +10618,7 @@ A language server for Solidity
  * Hover
 
  There is currently no support for completion, goto definition, references, or other functionality.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10442,13 +10645,14 @@ Default config:
 
 https://solargraph.org/
 
-solargraph, a language server for Ruby
+ solargraph, a language server for Ruby
 
-You can install solargraph via gem install.
+ You can install solargraph via gem install.
 
-```sh
-gem install --user-install solargraph
-```
+ ```sh
+ gem install --user-install solargraph
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10505,7 +10709,7 @@ Default config:
   ```lua
   { "solidity" }
   ```
-- `root_dir`: [../lsp/solc.lua:9](../lsp/solc.lua#L9)
+- `root_dir`: [../lsp/solc.lua:10](../lsp/solc.lua#L10)
 
 ---
 
@@ -10513,36 +10717,37 @@ Default config:
 
 https://github.com/qiuxiang/solidity-ls
 
-npm i solidity-ls -g
+ npm i solidity-ls -g
 
-Make sure that solc is installed and it's the same version of the file.  solc-select is recommended.
+ Make sure that solc is installed and it's the same version of the file.  solc-select is recommended.
 
-Solidity language server is a LSP with autocomplete, go to definition and diagnostics.
+ Solidity language server is a LSP with autocomplete, go to definition and diagnostics.
 
-If you use brownie, use this root_markers:
-root_markers = { 'brownie-config.yaml', '.git' }
+ If you use brownie, use this root_markers:
+ root_markers = { 'brownie-config.yaml', '.git' }
 
-on includePath, you can add an extra path to search for external libs, on remapping you can remap lib <> path, like:
+ on includePath, you can add an extra path to search for external libs, on remapping you can remap lib <> path, like:
 
-```lua
-{ solidity = { includePath = '/Users/your_user/.brownie/packages/', remapping = { ["@OpenZeppelin/"] = 'OpenZeppelin/openzeppelin-contracts@4.6.0/' } } }
-```
+ ```lua
+ { solidity = { includePath = '/Users/your_user/.brownie/packages/', remapping = { ["@OpenZeppelin/"] = 'OpenZeppelin/openzeppelin-contracts@4.6.0/' } } }
+ ```
 
-**For brownie users**
-Change the root_markers to:
+ **For brownie users**
+ Change the root_markers to:
 
-```lua
-root_markers = { 'brownie-config.yaml', '.git' }
-```
+ ```lua
+ root_markers = { 'brownie-config.yaml', '.git' }
+ ```
 
-The best way of using it is to have a package.json in your project folder with the packages that you will use.
-After installing with package.json, just create a `remappings.txt` with:
+ The best way of using it is to have a package.json in your project folder with the packages that you will use.
+ After installing with package.json, just create a `remappings.txt` with:
 
-```
-@OpenZeppelin/=node_modules/OpenZeppelin/openzeppelin-contracts@4.6.0/
-```
+ ```
+ @OpenZeppelin/=node_modules/OpenZeppelin/openzeppelin-contracts@4.6.0/
+ ```
 
-You can omit the node_modules as well.
+ You can omit the node_modules as well.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10578,13 +10783,14 @@ Default config:
 
 https://github.com/juanfranblanco/vscode-solidity
 
-`vscode-solidity-server` can be installed via `npm`:
+ `vscode-solidity-server` can be installed via `npm`:
 
-```sh
-npm install -g vscode-solidity-server
-```
+ ```sh
+ npm install -g vscode-solidity-server
+ ```
 
-`vscode-solidity-server` is a language server for the Solidity language ported from the VSCode "solidity" extension.
+ `vscode-solidity-server` is a language server for the Solidity language ported from the VSCode "solidity" extension.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10611,13 +10817,14 @@ Default config:
 
 https://github.com/NomicFoundation/hardhat-vscode/blob/development/server/README.md
 
-`nomicfoundation-solidity-language-server` can be installed via `npm`:
+ `nomicfoundation-solidity-language-server` can be installed via `npm`:
 
-```sh
-npm install -g @nomicfoundation/solidity-language-server
-```
+ ```sh
+ npm install -g @nomicfoundation/solidity-language-server
+ ```
 
-A language server for the Solidity programming language, built by the Nomic Foundation for the Ethereum community.
+ A language server for the Solidity programming language, built by the Nomic Foundation for the Ethereum community.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10644,19 +10851,20 @@ Default config:
 
 https://github.com/wkillerud/some-sass/tree/main/packages/language-server
 
-`some-sass-language-server` can be installed via `npm`:
+ `some-sass-language-server` can be installed via `npm`:
 
-```sh
-npm i -g some-sass-language-server
-```
+ ```sh
+ npm i -g some-sass-language-server
+ ```
 
-The language server provides:
+ The language server provides:
 
-- Full support for @use and @forward, including aliases, prefixes and hiding.
-- Workspace-wide code navigation and refactoring, such as Rename Symbol.
-- Rich documentation through SassDoc.
-- Language features for %placeholder-selectors, both when using them and writing them.
-- Suggestions and hover info for built-in Sass modules, when used with @use.
+ - Full support for @use and @forward, including aliases, prefixes and hiding.
+ - Workspace-wide code navigation and refactoring, such as Rename Symbol.
+ - Rich documentation through SassDoc.
+ - Language features for %placeholder-selectors, both when using them and writing them.
+ - Suggestions and hover info for built-in Sass modules, when used with @use.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10695,14 +10903,15 @@ Default config:
 
 https://sorbet.org
 
-Sorbet is a fast, powerful type checker designed for Ruby.
+ Sorbet is a fast, powerful type checker designed for Ruby.
 
-You can install Sorbet via gem install. You might also be interested in how to set
-Sorbet up for new projects: https://sorbet.org/docs/adopting.
+ You can install Sorbet via gem install. You might also be interested in how to set
+ Sorbet up for new projects: https://sorbet.org/docs/adopting.
 
-```sh
-gem install sorbet
-```
+ ```sh
+ gem install sorbet
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10761,8 +10970,8 @@ Default config:
   ```lua
   { "swift", "objc", "objcpp", "c", "cpp" }
   ```
-- `get_language_id`: [../lsp/sourcekit.lua:9](../lsp/sourcekit.lua#L9)
-- `root_dir`: [../lsp/sourcekit.lua:9](../lsp/sourcekit.lua#L9)
+- `get_language_id`: [../lsp/sourcekit.lua:10](../lsp/sourcekit.lua#L10)
+- `root_dir`: [../lsp/sourcekit.lua:10](../lsp/sourcekit.lua#L10)
 
 ---
 
@@ -10810,19 +11019,20 @@ Default config:
 
 https://github.com/SpyglassMC/Spyglass/tree/main/packages/language-server
 
-Language server for Minecraft datapacks.
+ Language server for Minecraft datapacks.
 
-`spyglassmc-language-server` can be installed via `npm`:
+ `spyglassmc-language-server` can be installed via `npm`:
 
-```sh
-npm i -g @spyglassmc/language-server
-```
+ ```sh
+ npm i -g @spyglassmc/language-server
+ ```
 
-You may also need to configure the filetype:
+ You may also need to configure the filetype:
 
-`autocmd BufNewFile,BufRead *.mcfunction set filetype=mcfunction`
+ `autocmd BufNewFile,BufRead *.mcfunction set filetype=mcfunction`
 
-This is automatically done by [CrystalAlpha358/vim-mcfunction](https://github.com/CrystalAlpha358/vim-mcfunction), which also provide syntax highlight.
+ This is automatically done by [CrystalAlpha358/vim-mcfunction](https://github.com/CrystalAlpha358/vim-mcfunction), which also provide syntax highlight.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10880,13 +11090,14 @@ Default config:
 
 https://github.com/sqls-server/sqls
 
-```lua
-vim.lsp.config('sqls', {
-  cmd = {"path/to/command", "-config", "path/to/config.yml"};
-  ...
-})
-```
-Sqls can be installed via `go install github.com/sqls-server/sqls@latest`. Instructions for compiling Sqls from the source can be found at [sqls-server/sqls](https://github.com/sqls-server/sqls).
+ ```lua
+ vim.lsp.config('sqls', {
+   cmd = {"path/to/command", "-config", "path/to/config.yml"};
+   ...
+ })
+ ```
+ Sqls can be installed via `go install github.com/sqls-server/sqls@latest`. Instructions for compiling Sqls from the source can be found at [sqls-server/sqls](https://github.com/sqls-server/sqls).
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10917,7 +11128,9 @@ Default config:
 
 https://github.com/quarylabs/sqruff
 
-`sqruff` can be installed by following the instructions [here](https://github.com/quarylabs/sqruff?tab=readme-ov-file#installation)
+ `sqruff` can be installed by following the instructions [here](https://github.com/quarylabs/sqruff?tab=readme-ov-file#installation)
+
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10944,7 +11157,8 @@ Default config:
 
 https://github.com/testdouble/standard
 
-Ruby Style Guide, with linter & automatic code fixer.
+ Ruby Style Guide, with linter & automatic code fixer.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -10970,12 +11184,13 @@ Default config:
 ## starlark_rust
 
 https://github.com/facebookexperimental/starlark-rust/
-The LSP part of `starlark-rust` is not currently documented,
-but the implementation works well for linting.
-This gives valuable warnings for potential issues in the code,
-but does not support refactorings.
+ The LSP part of `starlark-rust` is not currently documented,
+ but the implementation works well for linting.
+ This gives valuable warnings for potential issues in the code,
+ but does not support refactorings.
 
-It can be installed with cargo: https://crates.io/crates/starlark
+ It can be installed with cargo: https://crates.io/crates/starlark
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11002,7 +11217,8 @@ Default config:
 
 https://github.com/withered-magic/starpls
 
-`starpls` is an LSP implementation for Starlark. Installation instructions can be found in the project's README.
+ `starpls` is an LSP implementation for Starlark. Installation instructions can be found in the project's README.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11029,7 +11245,8 @@ Default config:
 
 https://github.com/nerdypepper/statix
 
-lints and suggestions for the nix programming language
+ lints and suggestions for the nix programming language
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11056,9 +11273,10 @@ Default config:
 
 https://github.com/soutaro/steep
 
-`steep` is a static type checker for Ruby.
+ `steep` is a static type checker for Ruby.
 
-You need `Steepfile` to make it work. Generate it with `steep init`.
+ You need `Steepfile` to make it work. Generate it with `steep init`.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11085,17 +11303,18 @@ Default config:
 
 https://www.npmjs.com/package/stimulus-language-server
 
-`stimulus-lsp` can be installed via `npm`:
+ `stimulus-lsp` can be installed via `npm`:
 
-```sh
-npm install -g stimulus-language-server
-```
+ ```sh
+ npm install -g stimulus-language-server
+ ```
 
-or via `yarn`:
+ or via `yarn`:
 
-```sh
-yarn global add stimulus-language-server
-```
+ ```sh
+ yarn global add stimulus-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11169,7 +11388,8 @@ Default config:
 
 https://github.com/antonk52/lua-3p-language-servers
 
-3rd party Language Server for Stylua lua formatter
+ 3rd party Language Server for Stylua lua formatter
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11196,19 +11416,20 @@ Default config:
 
 https://github.com/kristoff-it/superhtml
 
-HTML Language Server & Templating Language Library
+ HTML Language Server & Templating Language Library
 
-This LSP is designed to tightly adhere to the HTML spec as well as enforcing
-some additional rules that ensure HTML clarity.
+ This LSP is designed to tightly adhere to the HTML spec as well as enforcing
+ some additional rules that ensure HTML clarity.
 
-If you want to disable HTML support for another HTML LSP, add the following
-to your configuration:
+ If you want to disable HTML support for another HTML LSP, add the following
+ to your configuration:
 
-```lua
-vim.lsp.config('superhtml', {
-  filetypes = { 'superhtml' }
-})
-```
+ ```lua
+ vim.lsp.config('superhtml', {
+   filetypes = { 'superhtml' }
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11256,8 +11477,8 @@ Default config:
   ```lua
   { "svelte" }
   ```
-- `on_attach`: [../lsp/svelte.lua:12](../lsp/svelte.lua#L12)
-- `root_dir`: [../lsp/svelte.lua:12](../lsp/svelte.lua#L12)
+- `on_attach`: [../lsp/svelte.lua:13](../lsp/svelte.lua#L13)
+- `root_dir`: [../lsp/svelte.lua:13](../lsp/svelte.lua#L13)
 
 ---
 
@@ -11287,7 +11508,7 @@ Default config:
   ```lua
   { "verilog", "systemverilog" }
   ```
-- `on_attach`: [../lsp/svlangserver.lua:13](../lsp/svlangserver.lua#L13)
+- `on_attach`: [../lsp/svlangserver.lua:14](../lsp/svlangserver.lua#L14)
 - `root_markers` :
   ```lua
   { ".svlangserver", ".git" }
@@ -11307,12 +11528,13 @@ Default config:
 
 https://github.com/dalance/svls
 
-Language server for verilog and SystemVerilog
+ Language server for verilog and SystemVerilog
 
-`svls` can be installed via `cargo`:
- ```sh
- cargo install svls
- ```
+ `svls` can be installed via `cargo`:
+  ```sh
+  cargo install svls
+  ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11339,7 +11561,8 @@ Default config:
 
 https://github.com/JCWasmx86/Swift-MesonLSP
 
-Meson language server written in Swift
+ Meson language server written in Swift
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11366,16 +11589,17 @@ Default config:
 
 https://ruby-syntax-tree.github.io/syntax_tree/
 
-A fast Ruby parser and formatter.
+ A fast Ruby parser and formatter.
 
-Syntax Tree is a suite of tools built on top of the internal CRuby parser. It
-provides the ability to generate a syntax tree from source, as well as the
-tools necessary to inspect and manipulate that syntax tree. It can be used to
-build formatters, linters, language servers, and more.
+ Syntax Tree is a suite of tools built on top of the internal CRuby parser. It
+ provides the ability to generate a syntax tree from source, as well as the
+ tools necessary to inspect and manipulate that syntax tree. It can be used to
+ build formatters, linters, language servers, and more.
 
-```sh
-gem install syntax_tree
-```
+ ```sh
+ gem install syntax_tree
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11402,12 +11626,13 @@ Default config:
 
 https://github.com/psacawa/systemd-language-server
 
-`systemd-language-server` can be installed via `pip`:
-```sh
-pip install systemd-language-server
-```
+ `systemd-language-server` can be installed via `pip`:
+ ```sh
+ pip install systemd-language-server
+ ```
 
-Language Server for Systemd unit files
+ Language Server for Systemd unit files
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11434,13 +11659,14 @@ Default config:
 
 https://tabby.tabbyml.com/blog/running-tabby-as-a-language-server
 
-Language server for Tabby, an opensource, self-hosted AI coding assistant.
+ Language server for Tabby, an opensource, self-hosted AI coding assistant.
 
-`tabby-agent` can be installed via `npm`:
+ `tabby-agent` can be installed via `npm`:
 
-```sh
-npm install --global tabby-agent
-```
+ ```sh
+ npm install --global tabby-agent
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11477,7 +11703,7 @@ vim.lsp.enable('tailwindcss')
 ```
 
 Default config:
-- `before_init`: [../lsp/tailwindcss.lua:9](../lsp/tailwindcss.lua#L9)
+- `before_init`: [../lsp/tailwindcss.lua:10](../lsp/tailwindcss.lua#L10)
 - `cmd` :
   ```lua
   { "tailwindcss-language-server", "--stdio" }
@@ -11486,7 +11712,7 @@ Default config:
   ```lua
   { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
   ```
-- `root_dir`: [../lsp/tailwindcss.lua:9](../lsp/tailwindcss.lua#L9)
+- `root_dir`: [../lsp/tailwindcss.lua:10](../lsp/tailwindcss.lua#L10)
 - `settings` :
   ```lua
   {
@@ -11521,12 +11747,13 @@ Default config:
 
 https://taplo.tamasfe.dev/cli/usage/language-server.html
 
-Language server for Taplo, a TOML toolkit.
+ Language server for Taplo, a TOML toolkit.
 
-`taplo-cli` can be installed via `cargo`:
-```sh
-cargo install --features lsp --locked taplo-cli
-```
+ `taplo-cli` can be installed via `cargo`:
+ ```sh
+ cargo install --features lsp --locked taplo-cli
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11582,15 +11809,16 @@ Default config:
 
 https://github.com/teal-language/teal-language-server
 
-Install with:
-```
-luarocks install teal-language-server
-```
+ Install with:
+ ```
+ luarocks install teal-language-server
+ ```
 
-Optional Command Args:
-* "--log-mode=by_date" - Enable logging in $HOME/.cache/teal-language-server. Log name will be date + pid of process
-* "--log-mode=by_proj_path" - Enable logging in $HOME/.cache/teal-language-server. Log name will be project path + pid of process
-* "--verbose=true" - Increases log level.  Does nothing unless log-mode is set
+ Optional Command Args:
+ * "--log-mode=by_date" - Enable logging in $HOME/.cache/teal-language-server. Log name will be date + pid of process
+ * "--log-mode=by_proj_path" - Enable logging in $HOME/.cache/teal-language-server. Log name will be project path + pid of process
+ * "--verbose=true" - Increases log level.  Does nothing unless log-mode is set
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11617,7 +11845,8 @@ Default config:
 
 https://templ.guide
 
-The official language server for the templ HTML templating language.
+ The official language server for the templ HTML templating language.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11644,7 +11873,8 @@ Default config:
 
 https://github.com/termux/termux-language-server
 
-Language server for various bash scripts such as Arch PKGBUILD, Gentoo ebuild, Termux build.sh, etc.
+ Language server for various bash scripts such as Arch PKGBUILD, Gentoo ebuild, Termux build.sh, etc.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11671,31 +11901,32 @@ Default config:
 
 https://github.com/juliosueiras/terraform-lsp
 
-Terraform language server
-Download a released binary from
-https://github.com/juliosueiras/terraform-lsp/releases.
+ Terraform language server
+ Download a released binary from
+ https://github.com/juliosueiras/terraform-lsp/releases.
 
-From https://github.com/hashicorp/terraform-ls#terraform-ls-vs-terraform-lsp:
+ From https://github.com/hashicorp/terraform-ls#terraform-ls-vs-terraform-lsp:
 
-Both HashiCorp and the maintainer of terraform-lsp expressed interest in
-collaborating on a language server and are working towards a _long-term_
-goal of a single stable and feature-complete implementation.
+ Both HashiCorp and the maintainer of terraform-lsp expressed interest in
+ collaborating on a language server and are working towards a _long-term_
+ goal of a single stable and feature-complete implementation.
 
-For the time being both projects continue to exist, giving users the
-choice:
+ For the time being both projects continue to exist, giving users the
+ choice:
 
-- `terraform-ls` providing
-  - overall stability (by relying only on public APIs)
-  - compatibility with any provider and any Terraform >=0.12.0 currently
-    less features
-  - due to project being younger and relying on public APIs which may
-    not offer the same functionality yet
+ - `terraform-ls` providing
+   - overall stability (by relying only on public APIs)
+   - compatibility with any provider and any Terraform >=0.12.0 currently
+     less features
+   - due to project being younger and relying on public APIs which may
+     not offer the same functionality yet
 
-- `terraform-lsp` providing
-  - currently more features
-  - compatibility with a single particular Terraform (0.12.20 at time of writing)
-    - configs designed for other 0.12 versions may work, but interpretation may be inaccurate
-  - less stability (due to reliance on Terraform's own internal packages)
+ - `terraform-lsp` providing
+   - currently more features
+   - compatibility with a single particular Terraform (0.12.20 at time of writing)
+     - configs designed for other 0.12 versions may work, but interpretation may be inaccurate
+   - less stability (due to reliance on Terraform's own internal packages)
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11722,35 +11953,36 @@ Default config:
 
 https://github.com/hashicorp/terraform-ls
 
-Terraform language server
-Download a released binary from https://github.com/hashicorp/terraform-ls/releases.
+ Terraform language server
+ Download a released binary from https://github.com/hashicorp/terraform-ls/releases.
 
-From https://github.com/hashicorp/terraform-ls#terraform-ls-vs-terraform-lsp:
+ From https://github.com/hashicorp/terraform-ls#terraform-ls-vs-terraform-lsp:
 
-Both HashiCorp and the maintainer of terraform-lsp expressed interest in
-collaborating on a language server and are working towards a _long-term_
-goal of a single stable and feature-complete implementation.
+ Both HashiCorp and the maintainer of terraform-lsp expressed interest in
+ collaborating on a language server and are working towards a _long-term_
+ goal of a single stable and feature-complete implementation.
 
-For the time being both projects continue to exist, giving users the
-choice:
+ For the time being both projects continue to exist, giving users the
+ choice:
 
-- `terraform-ls` providing
-  - overall stability (by relying only on public APIs)
-  - compatibility with any provider and any Terraform >=0.12.0 currently
-    less features
-  - due to project being younger and relying on public APIs which may
-    not offer the same functionality yet
+ - `terraform-ls` providing
+   - overall stability (by relying only on public APIs)
+   - compatibility with any provider and any Terraform >=0.12.0 currently
+     less features
+   - due to project being younger and relying on public APIs which may
+     not offer the same functionality yet
 
-- `terraform-lsp` providing
-  - currently more features
-  - compatibility with a single particular Terraform (0.12.20 at time of writing)
-    - configs designed for other 0.12 versions may work, but interpretation may be inaccurate
-  - less stability (due to reliance on Terraform's own internal packages)
+ - `terraform-lsp` providing
+   - currently more features
+   - compatibility with a single particular Terraform (0.12.20 at time of writing)
+     - configs designed for other 0.12 versions may work, but interpretation may be inaccurate
+   - less stability (due to reliance on Terraform's own internal packages)
 
-Note, that the `settings` configuration option uses the `workspace/didChangeConfiguration` event,
-[which is not supported by terraform-ls](https://github.com/hashicorp/terraform-ls/blob/main/docs/features.md).
-Instead you should use `init_options` which passes the settings as part of the LSP initialize call
-[as is required by terraform-ls](https://github.com/hashicorp/terraform-ls/blob/main/docs/SETTINGS.md#how-to-pass-settings).
+ Note, that the `settings` configuration option uses the `workspace/didChangeConfiguration` event,
+ [which is not supported by terraform-ls](https://github.com/hashicorp/terraform-ls/blob/main/docs/features.md).
+ Instead you should use `init_options` which passes the settings as part of the LSP initialize call
+ [as is required by terraform-ls](https://github.com/hashicorp/terraform-ls/blob/main/docs/SETTINGS.md#how-to-pass-settings).
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11801,7 +12033,7 @@ Default config:
   ```lua
   { "tex", "plaintex", "bib" }
   ```
-- `on_attach`: [../lsp/texlab.lua:135](../lsp/texlab.lua#L135)
+- `on_attach`: [../lsp/texlab.lua:136](../lsp/texlab.lua#L136)
 - `root_markers` :
   ```lua
   { ".git", ".latexmkrc", "latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" }
@@ -11840,14 +12072,15 @@ Default config:
 
 https://github.com/hangyav/textLSP
 
-`textLSP` is an LSP server for text spell and grammar checking with various AI tools.
-It supports multiple text file formats, such as LaTeX, Org or txt.
+ `textLSP` is an LSP server for text spell and grammar checking with various AI tools.
+ It supports multiple text file formats, such as LaTeX, Org or txt.
 
-For the available text analyzer tools and their configuration, see the [GitHub](https://github.com/hangyav/textLSP) page.
-By default, all analyzers are disabled in textLSP, since most of them need special settings.
-For quick testing, LanguageTool is enabled in the default `nvim-lspconfig` configuration.
+ For the available text analyzer tools and their configuration, see the [GitHub](https://github.com/hangyav/textLSP) page.
+ By default, all analyzers are disabled in textLSP, since most of them need special settings.
+ For quick testing, LanguageTool is enabled in the default `nvim-lspconfig` configuration.
 
-To install run: `pip install textLSP`
+ To install run: `pip install textLSP`
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11896,8 +12129,9 @@ Default config:
 
 https://github.com/terraform-linters/tflint
 
-A pluggable Terraform linter that can act as lsp server.
-Installation instructions can be found in https://github.com/terraform-linters/tflint#installation.
+ A pluggable Terraform linter that can act as lsp server.
+ Installation instructions can be found in https://github.com/terraform-linters/tflint#installation.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11966,7 +12200,8 @@ Default config:
 
 https://github.com/joyme123/thrift-ls
 
-you can install thriftls by mason or download binary here: https://github.com/joyme123/thrift-ls/releases
+ you can install thriftls by mason or download binary here: https://github.com/joyme123/thrift-ls/releases
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -11993,13 +12228,14 @@ Default config:
 
 https://github.com/tilt-dev/tilt
 
-Tilt language server.
+ Tilt language server.
 
-You might need to add filetype detection manually:
+ You might need to add filetype detection manually:
 
-```vim
-autocmd BufRead Tiltfile setf=tiltfile
-```
+ ```vim
+ autocmd BufRead Tiltfile setf=tiltfile
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12048,7 +12284,7 @@ Default config:
   ```lua
   { "typst" }
   ```
-- `on_attach`: [../lsp/tinymist.lua:48](../lsp/tinymist.lua#L48)
+- `on_attach`: [../lsp/tinymist.lua:49](../lsp/tinymist.lua#L49)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -12059,6 +12295,8 @@ Default config:
 ## tofu_ls
 
 [OpenTofu Language Server](https://github.com/opentofu/tofu-ls)
+
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12085,7 +12323,9 @@ Default config:
 
 https://tombi-toml.github.io/tombi/
 
-Language server for Tombi, a TOML toolkit.
+ Language server for Tombi, a TOML toolkit.
+
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12185,38 +12425,39 @@ Default config:
     hostInfo = "neovim"
   }
   ```
-- `on_attach`: [../lsp/ts_ls.lua:44](../lsp/ts_ls.lua#L44)
-- `root_dir`: [../lsp/ts_ls.lua:44](../lsp/ts_ls.lua#L44)
+- `on_attach`: [../lsp/ts_ls.lua:45](../lsp/ts_ls.lua#L45)
+- `root_dir`: [../lsp/ts_ls.lua:45](../lsp/ts_ls.lua#L45)
 
 ---
 
 ## ts_query_ls
 
 https://github.com/ribru17/ts_query_ls
-Can be configured by passing a "settings" object to `vim.lsp.config('ts_query_ls', {})`:
-```lua
-vim.lsp.config('ts_query_ls', {
-    settings = {
-      parser_install_directories = {
-        -- If using nvim-treesitter with lazy.nvim
-        vim.fs.joinpath(
-          vim.fn.stdpath('data'),
-          '/lazy/nvim-treesitter/parser/'
-        ),
-      },
-      -- This setting is provided by default
-      parser_aliases = {
-        ecma = 'javascript',
-        jsx = 'javascript',
-        php_only = 'php',
-      },
-      -- E.g. zed support
-      language_retrieval_patterns = {
-        'languages/src/([^/]+)/[^/]+\\.scm$',
-      },
-    },
-})
-```
+ Can be configured by passing a "settings" object to `vim.lsp.config('ts_query_ls', {})`:
+ ```lua
+ vim.lsp.config('ts_query_ls', {
+     settings = {
+       parser_install_directories = {
+         -- If using nvim-treesitter with lazy.nvim
+         vim.fs.joinpath(
+           vim.fn.stdpath('data'),
+           '/lazy/nvim-treesitter/parser/'
+         ),
+       },
+       -- This setting is provided by default
+       parser_aliases = {
+         ecma = 'javascript',
+         jsx = 'javascript',
+         php_only = 'php',
+       },
+       -- E.g. zed support
+       language_retrieval_patterns = {
+         'languages/src/([^/]+)/[^/]+\\.scm$',
+       },
+     },
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12253,16 +12494,18 @@ Default config:
 
 https://github.com/microsoft/typescript-go
 
-`typescript-go` is experimental port of the TypeScript compiler (tsc) and language server (tsserver) to the Go programming language.
+ `typescript-go` is experimental port of the TypeScript compiler (tsc) and language server (tsserver) to the Go programming language.
 
-`tsgo` can be installed via npm `npm install @typescript/native-preview`.
+ `tsgo` can be installed via npm `npm install @typescript/native-preview`.
 
-### Monorepo support
+ ### Monorepo support
 
-`tsgo` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
-This works without the need of spawning multiple instances of `tsgo`, saving memory.
+ `tsgo` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
+ This works without the need of spawning multiple instances of `tsgo`, saving memory.
 
-It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
+ It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
+
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12278,7 +12521,7 @@ Default config:
   ```lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
   ```
-- `root_dir`: [../lsp/tsgo.lua:16](../lsp/tsgo.lua#L16)
+- `root_dir`: [../lsp/tsgo.lua:17](../lsp/tsgo.lua#L17)
 
 ---
 
@@ -12286,12 +12529,13 @@ Default config:
 
 https://github.com/microsoft/typespec
 
-The language server for TypeSpec, a language for defining cloud service APIs and shapes.
+ The language server for TypeSpec, a language for defining cloud service APIs and shapes.
 
-`tsp-server` can be installed together with the typespec compiler via `npm`:
-```sh
-npm install -g @typespec/compiler
-```
+ `tsp-server` can be installed together with the typespec compiler via `npm`:
+ ```sh
+ npm install -g @typespec/compiler
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12317,6 +12561,7 @@ Default config:
 ## ttags
 
 https://github.com/npezza93/ttags
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12343,17 +12588,18 @@ Default config:
 
 https://www.npmjs.com/package/turbo-language-server
 
-`turbo-language-server` can be installed via `npm`:
+ `turbo-language-server` can be installed via `npm`:
 
-```sh
-npm install -g turbo-language-server
-```
+ ```sh
+ npm install -g turbo-language-server
+ ```
 
-or via `yarn`:
+ or via `yarn`:
 
-```sh
-yarn global add turbo-language-server
-```
+ ```sh
+ yarn global add turbo-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12410,10 +12656,11 @@ Default config:
 
 https://github.com/tqchen/ffi-navigator
 
-The Language Server for FFI calls in TVM to be able jump between python and C++
+ The Language Server for FFI calls in TVM to be able jump between python and C++
 
-FFI navigator can be installed with `pip install ffi-navigator`, buf for more details, please see
-https://github.com/tqchen/ffi-navigator?tab=readme-ov-file#installation
+ FFI navigator can be installed with `pip install ffi-navigator`, buf for more details, please see
+ https://github.com/tqchen/ffi-navigator?tab=readme-ov-file#installation
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12440,10 +12687,11 @@ Default config:
 
 https://github.com/moetelo/twiggy
 
-`twiggy-language-server` can be installed via `npm`:
-```sh
-npm install -g twiggy-language-server
-```
+ `twiggy-language-server` can be installed via `npm`:
+ ```sh
+ npm install -g twiggy-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12470,9 +12718,10 @@ Default config:
 
 https://github.com/astral-sh/ty
 
-A Language Server Protocol implementation for ty, an extremely fast Python type checker and language server, written in Rust.
+ A Language Server Protocol implementation for ty, an extremely fast Python type checker and language server, written in Rust.
 
-For installation instructions, please refer to the [ty documentation](https://github.com/astral-sh/ty/blob/main/README.md#getting-started).
+ For installation instructions, please refer to the [ty documentation](https://github.com/astral-sh/ty/blob/main/README.md#getting-started).
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12499,7 +12748,8 @@ Default config:
 
 https://github.com/ruby/typeprof
 
-`typeprof` is the built-in analysis and LSP tool for Ruby 3.1+.
+ `typeprof` is the built-in analysis and LSP tool for Ruby 3.1+.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12525,11 +12775,12 @@ Default config:
 ## typos_lsp
 
 https://github.com/crate-ci/typos
-https://github.com/tekumara/typos-lsp
+ https://github.com/tekumara/typos-lsp
 
-A Language Server Protocol implementation for Typos, a low false-positive
-source code spell checker, written in Rust. Download it from the releases page
-on GitHub: https://github.com/tekumara/typos-lsp/releases
+ A Language Server Protocol implementation for Typos, a low false-positive
+ source code spell checker, written in Rust. Download it from the releases page
+ on GitHub: https://github.com/tekumara/typos-lsp/releases
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12556,7 +12807,8 @@ Default config:
 
 https://github.com/nvarner/typst-lsp
 
-Language server for Typst.
+ Language server for Typst.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12583,9 +12835,10 @@ Default config:
 
 https://github.com/uiua-lang/uiua/
 
-The builtin language server of the Uiua interpreter.
+ The builtin language server of the Uiua interpreter.
 
-The Uiua interpreter can be installed with `cargo install uiua`
+ The Uiua interpreter can be installed with `cargo install uiua`
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12611,12 +12864,13 @@ Default config:
 ## ungrammar_languageserver
 
 https://github.com/binhtran432k/ungrammar-language-features
-Language Server for Ungrammar.
+ Language Server for Ungrammar.
 
-Ungrammar Language Server can be installed via npm:
-```sh
-npm i ungrammar-languageserver -g
-```
+ Ungrammar Language Server can be installed via npm:
+ ```sh
+ npm i ungrammar-languageserver -g
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12670,7 +12924,7 @@ Default config:
   ```lua
   { "unison" }
   ```
-- `root_dir`: [../lsp/unison.lua:7](../lsp/unison.lua#L7)
+- `root_dir`: [../lsp/unison.lua:8](../lsp/unison.lua#L8)
 - `settings` :
   ```lua
   {}
@@ -12682,10 +12936,11 @@ Default config:
 
 https://github.com/xna00/unocss-language-server
 
-UnoCSS Language Server can be installed via npm:
-```sh
-npm i unocss-language-server -g
-```
+ UnoCSS Language Server can be installed via npm:
+ ```sh
+ npm i unocss-language-server -g
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12712,19 +12967,20 @@ Default config:
 ## uvls
 
 https://codeberg.org/caradhras/uvls
-Language server for UVL, written using tree sitter and rust.
-You can install the server easily using cargo:
-```sh
-git clone https://codeberg.org/caradhras/uvls
-cd  uvls
-cargo install --path .
-```
+ Language server for UVL, written using tree sitter and rust.
+ You can install the server easily using cargo:
+ ```sh
+ git clone https://codeberg.org/caradhras/uvls
+ cd  uvls
+ cargo install --path .
+ ```
 
-Note: To activate properly nvim needs to know the uvl filetype.
-You can add it via:
-```lua
-vim.cmd([[au BufRead,BufNewFile *.uvl setfiletype uvl]])
-```
+ Note: To activate properly nvim needs to know the uvl filetype.
+ You can add it via:
+ ```lua
+ vim.cmd([[au BufRead,BufNewFile *.uvl setfiletype uvl]])
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12751,9 +13007,10 @@ Default config:
 
 https://github.com/vlang/v-analyzer
 
-V language server.
+ V language server.
 
-`v-analyzer` can be installed by following the instructions [here](https://github.com/vlang/v-analyzer#installation).
+ `v-analyzer` can be installed by following the instructions [here](https://github.com/vlang/v-analyzer#installation).
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12792,6 +13049,7 @@ Vacuum is the worlds fastest OpenAPI 3, OpenAPI 2 / Swagger linter and quality a
    },
  }
  ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12832,7 +13090,7 @@ Default config:
   ```lua
   { "vala", "genie" }
   ```
-- `root_dir`: [../lsp/vala_ls.lua:26](../lsp/vala_ls.lua#L26)
+- `root_dir`: [../lsp/vala_ls.lua:27](../lsp/vala_ls.lua#L27)
 
 ---
 
@@ -12840,7 +13098,8 @@ Default config:
 
 https://github.com/errata-ai/vale-ls
 
-An implementation of the Language Server Protocol (LSP) for the Vale command-line tool.
+ An implementation of the Language Server Protocol (LSP) for the Vale command-line tool.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12867,7 +13126,8 @@ Default config:
 
 https://github.com/Davidyz/VectorCode
 
-A Language Server Protocol implementation for VectorCode, a code repository indexing tool.
+ A Language Server Protocol implementation for VectorCode, a code repository indexing tool.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12879,7 +13139,7 @@ Default config:
   ```lua
   { "vectorcode-server" }
   ```
-- `root_dir`: [../lsp/vectorcode_server.lua:5](../lsp/vectorcode_server.lua#L5)
+- `root_dir`: [../lsp/vectorcode_server.lua:6](../lsp/vectorcode_server.lua#L6)
 - `settings` :
   ```lua
   {}
@@ -12891,12 +13151,13 @@ Default config:
 
 https://github.com/chipsalliance/verible
 
-A linter and formatter for verilog and SystemVerilog files.
+ A linter and formatter for verilog and SystemVerilog files.
 
-Release binaries can be downloaded from [here](https://github.com/chipsalliance/verible/releases)
-and placed in a directory on PATH.
+ Release binaries can be downloaded from [here](https://github.com/chipsalliance/verible/releases)
+ and placed in a directory on PATH.
 
-See https://github.com/chipsalliance/verible/tree/master/verilog/tools/ls/README.md for options.
+ See https://github.com/chipsalliance/verible/tree/master/verilog/tools/ls/README.md for options.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12923,19 +13184,20 @@ Default config:
 
 https://github.com/vivekmalneedi/veridian
 
-A SystemVerilog LanguageServer.
+ A SystemVerilog LanguageServer.
 
-Download the latest release for your OS from the releases page
+ Download the latest release for your OS from the releases page
 
-Install with slang feature, if C++17 compiler is available:
-```
-cargo install --git https://github.com/vivekmalneedi/veridian.git --all-features
-```
+ Install with slang feature, if C++17 compiler is available:
+ ```
+ cargo install --git https://github.com/vivekmalneedi/veridian.git --all-features
+ ```
 
-Install if C++17 compiler is not available:
-```
-cargo install --git https://github.com/vivekmalneedi/veridian.git
-```
+ Install if C++17 compiler is not available:
+ ```
+ cargo install --git https://github.com/vivekmalneedi/veridian.git
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -12962,12 +13224,13 @@ Default config:
 
 https://github.com/veryl-lang/veryl
 
-Language server for Veryl
+ Language server for Veryl
 
-`veryl-ls` can be installed via `cargo`:
- ```sh
- cargo install veryl-ls
- ```
+ `veryl-ls` can be installed via `cargo`:
+  ```sh
+  cargo install veryl-ls
+  ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -13045,30 +13308,31 @@ Default config:
 
 Install vhdl_ls from https://github.com/VHDL-LS/rust_hdl and add it to path
 
-Configuration
+ Configuration
 
-The language server needs to know your library mapping to perform full analysis of the code. For this it uses a configuration file in the TOML format named vhdl_ls.toml.
+ The language server needs to know your library mapping to perform full analysis of the code. For this it uses a configuration file in the TOML format named vhdl_ls.toml.
 
-vhdl_ls will load configuration files in the following order of priority (first to last):
+ vhdl_ls will load configuration files in the following order of priority (first to last):
 
-    A file named .vhdl_ls.toml in the user home folder.
-    A file name from the VHDL_LS_CONFIG environment variable.
-    A file named vhdl_ls.toml in the workspace root.
+     A file named .vhdl_ls.toml in the user home folder.
+     A file name from the VHDL_LS_CONFIG environment variable.
+     A file named vhdl_ls.toml in the workspace root.
 
-Settings in a later files overwrites those from previously loaded files.
+ Settings in a later files overwrites those from previously loaded files.
 
-Example vhdl_ls.toml
-```
-# File names are either absolute or relative to the parent folder of the vhdl_ls.toml file
-[libraries]
-lib2.files = [
-  'pkg2.vhd',
-]
-lib1.files = [
-  'pkg1.vhd',
-  'tb_ent.vhd'
-]
-```
+ Example vhdl_ls.toml
+ ```
+ # File names are either absolute or relative to the parent folder of the vhdl_ls.toml file
+ [libraries]
+ lib2.files = [
+   'pkg2.vhd',
+ ]
+ lib1.files = [
+   'pkg1.vhd',
+   'tb_ent.vhd'
+ ]
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -13095,10 +13359,11 @@ Default config:
 
 https://github.com/iamcco/vim-language-server
 
-You can install vim-language-server via npm:
-```sh
-npm install -g vim-language-server
-```
+ You can install vim-language-server via npm:
+ ```sh
+ npm install -g vim-language-server
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -13147,21 +13412,22 @@ Default config:
 
 https://github.com/forcedotcom/salesforcedx-vscode
 
-Language server for Visualforce.
+ Language server for Visualforce.
 
-For manual installation, download the .vsix archive file from the
-[forcedotcom/salesforcedx-vscode](https://github.com/forcedotcom/salesforcedx-vscode)
-GitHub releases. Then, configure `cmd` to run the Node script at the unpacked location:
+ For manual installation, download the .vsix archive file from the
+ [forcedotcom/salesforcedx-vscode](https://github.com/forcedotcom/salesforcedx-vscode)
+ GitHub releases. Then, configure `cmd` to run the Node script at the unpacked location:
 
-```lua
-vim.lsp.config('visualforce_ls', {
-  cmd = {
-    'node',
-    '/path/to/unpacked/archive/extension/node_modules/@salesforce/salesforcedx-visualforce-language-server/out/src/visualforceServer.js',
-    '--stdio'
-  }
-})
-```
+ ```lua
+ vim.lsp.config('visualforce_ls', {
+   cmd = {
+     'node',
+     '/path/to/unpacked/archive/extension/node_modules/@salesforce/salesforcedx-visualforce-language-server/out/src/visualforceServer.js',
+     '--stdio'
+   }
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -13193,9 +13459,10 @@ Default config:
 
 https://github.com/vlang/vls
 
-V language server.
+ V language server.
 
-`v-language-server` can be installed by following the instructions [here](https://github.com/vlang/vls#installation).
+ `v-language-server` can be installed by following the instructions [here](https://github.com/vlang/vls#installation).
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -13251,6 +13518,7 @@ Default config:
 ## vscoqtop
 
 https://github.com/coq-community/vscoq
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -13354,7 +13622,7 @@ Default config:
   ```lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
   ```
-- `root_dir`: [../lsp/vtsls.lua:68](../lsp/vtsls.lua#L68)
+- `root_dir`: [../lsp/vtsls.lua:69](../lsp/vtsls.lua#L69)
 
 ---
 
@@ -13392,7 +13660,7 @@ Default config:
   ```lua
   { "vue" }
   ```
-- `on_init`: [../lsp/vue_ls.lua:21](../lsp/vue_ls.lua#L21)
+- `on_init`: [../lsp/vue_ls.lua:22](../lsp/vue_ls.lua#L22)
 - `root_markers` :
   ```lua
   { "package.json" }
@@ -13404,8 +13672,9 @@ Default config:
 
 https://github.com/g-plane/wasm-language-tools
 
-WebAssembly Language Tools aims to provide and improve the editing experience of WebAssembly Text Format.
-It also provides an out-of-the-box formatter (a.k.a. pretty printer) for WebAssembly Text Format.
+ WebAssembly Language Tools aims to provide and improve the editing experience of WebAssembly Text Format.
+ It also provides an out-of-the-box formatter (a.k.a. pretty printer) for WebAssembly Text Format.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -13428,10 +13697,11 @@ Default config:
 
 https://github.com/wgsl-analyzer/wgsl-analyzer
 
-`wgsl-analyzer` can be installed via `cargo`:
-```sh
-cargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer wgsl-analyzer
-```
+ `wgsl-analyzer` can be installed via `cargo`:
+ ```sh
+ cargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer wgsl-analyzer
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -13462,62 +13732,63 @@ Default config:
 
 https://github.com/redhat-developer/yaml-language-server
 
-`yaml-language-server` can be installed via `yarn`:
-```sh
-yarn global add yaml-language-server
-```
+ `yaml-language-server` can be installed via `yarn`:
+ ```sh
+ yarn global add yaml-language-server
+ ```
 
-To use a schema for validation, there are two options:
+ To use a schema for validation, there are two options:
 
-1. Add a modeline to the file. A modeline is a comment of the form:
+ 1. Add a modeline to the file. A modeline is a comment of the form:
 
-```
-# yaml-language-server: $schema=<urlToTheSchema|relativeFilePath|absoluteFilePath}>
-```
+ ```
+ # yaml-language-server: $schema=<urlToTheSchema|relativeFilePath|absoluteFilePath}>
+ ```
 
-where the relative filepath is the path relative to the open yaml file, and the absolute filepath
-is the filepath relative to the filesystem root ('/' on unix systems)
+ where the relative filepath is the path relative to the open yaml file, and the absolute filepath
+ is the filepath relative to the filesystem root ('/' on unix systems)
 
-2. Associated a schema url, relative , or absolute (to root of project, not to filesystem root) path to
-the a glob pattern relative to the detected project root. Check `:checkhealth vim.lsp` to determine the resolved project
-root.
+ 2. Associated a schema url, relative , or absolute (to root of project, not to filesystem root) path to
+ the a glob pattern relative to the detected project root. Check `:checkhealth vim.lsp` to determine the resolved project
+ root.
 
-```lua
-vim.lsp.config('yamlls', {
-  ...
-  settings = {
-    yaml = {
-      ... -- other settings. note this overrides the lspconfig defaults.
-      schemas = {
-        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-        ["../path/relative/to/file.yml"] = "/.github/workflows/*",
-        ["/path/from/root/of/project"] = "/.github/workflows/*",
-      },
-    },
-  }
-})
-```
+ ```lua
+ vim.lsp.config('yamlls', {
+   ...
+   settings = {
+     yaml = {
+       ... -- other settings. note this overrides the lspconfig defaults.
+       schemas = {
+         ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+         ["../path/relative/to/file.yml"] = "/.github/workflows/*",
+         ["/path/from/root/of/project"] = "/.github/workflows/*",
+       },
+     },
+   }
+ })
+ ```
 
-Currently, kubernetes is special-cased in yammls, see the following upstream issues:
-* [#211](https://github.com/redhat-developer/yaml-language-server/issues/211).
-* [#307](https://github.com/redhat-developer/yaml-language-server/issues/307).
+ Currently, kubernetes is special-cased in yammls, see the following upstream issues:
+ * [#211](https://github.com/redhat-developer/yaml-language-server/issues/211).
+ * [#307](https://github.com/redhat-developer/yaml-language-server/issues/307).
 
-To override a schema to use a specific k8s schema version (for example, to use 1.18):
+ To override a schema to use a specific k8s schema version (for example, to use 1.18):
 
-```lua
-vim.lsp.config('yamlls', {
-  ...
-  settings = {
-    yaml = {
-      ... -- other settings. note this overrides the lspconfig defaults.
-      schemas = {
-        ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/refs/heads/master/v1.32.1-standalone-strict/all.json"] = "/*.k8s.yaml",
-        ... -- other schemas
-      },
-    },
-  }
-})
-```
+ ```lua
+ vim.lsp.config('yamlls', {
+   ...
+   settings = {
+     yaml = {
+       ... -- other settings. note this overrides the lspconfig defaults.
+       schemas = {
+         ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/refs/heads/master/v1.32.1-standalone-strict/all.json"] = "/*.k8s.yaml",
+         ... -- other schemas
+       },
+     },
+   }
+ })
+ ```
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -13533,7 +13804,7 @@ Default config:
   ```lua
   { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" }
   ```
-- `on_init`: [../lsp/yamlls.lua:61](../lsp/yamlls.lua#L61)
+- `on_init`: [../lsp/yamlls.lua:62](../lsp/yamlls.lua#L62)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -13555,7 +13826,8 @@ Default config:
 
 https://github.com/TypeFox/yang-lsp
 
-A Language Server for the YANG data modeling language.
+ A Language Server for the YANG data modeling language.
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -13582,11 +13854,12 @@ Default config:
 
 https://pypi.org/project/yls-yara/
 
-An YLS plugin adding YARA linting capabilities.
+ An YLS plugin adding YARA linting capabilities.
 
-This plugin runs yara.compile on every save, parses the errors, and returns list of diagnostic messages.
+ This plugin runs yara.compile on every save, parses the errors, and returns list of diagnostic messages.
 
-Language Server: https://github.com/avast/yls
+ Language Server: https://github.com/avast/yls
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -13613,7 +13886,8 @@ Default config:
 
 https://ziggy-lang.io/documentation/ziggy-lsp/
 
-Language server for the Ziggy data serialization format
+ Language server for the Ziggy data serialization format
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -13640,7 +13914,8 @@ Default config:
 
 https://ziggy-lang.io/documentation/ziggy-lsp/
 
-Language server for schema files of the Ziggy data serialization format
+ Language server for schema files of the Ziggy data serialization format
+@type vim.lsp.Config
 
 Snippet to enable the language server:
 ```lua
@@ -13683,7 +13958,7 @@ Default config:
   ```lua
   { "markdown" }
   ```
-- `on_attach`: [../lsp/zk.lua:15](../lsp/zk.lua#L15)
+- `on_attach`: [../lsp/zk.lua:16](../lsp/zk.lua#L16)
 - `root_markers` :
   ```lua
   { ".zk" }
