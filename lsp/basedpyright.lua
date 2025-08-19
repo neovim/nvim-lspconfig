@@ -15,7 +15,7 @@ local function set_python_path(path)
     else
       client.config.settings = vim.tbl_deep_extend('force', client.config.settings, { python = { pythonPath = path } })
     end
-    client.notify('workspace/didChangeConfiguration', { settings = nil })
+    client:notify('workspace/didChangeConfiguration', { settings = nil })
   end
 end
 

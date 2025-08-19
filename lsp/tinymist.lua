@@ -50,8 +50,6 @@ return {
   cmd = { 'tinymist' },
   filetypes = { 'typst' },
   root_markers = { '.git' },
-  ---@param client vim.lsp.Client
-  ---@param bufnr integer
   on_attach = function(client, bufnr)
     for _, command in ipairs {
       'tinymist.exportSvg',

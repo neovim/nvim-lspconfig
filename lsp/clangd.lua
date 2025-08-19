@@ -82,15 +82,12 @@ return {
     },
     offsetEncoding = { 'utf-8', 'utf-16' },
   },
-  ---@param client vim.lsp.Client
   ---@param init_result ClangdInitializeResult
   on_init = function(client, init_result)
     if init_result.offsetEncoding then
       client.offset_encoding = init_result.offsetEncoding
     end
   end,
-  ---@param client vim.lsp.Client
-  ---@param bufnr integer
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'LspClangdSwitchSourceHeader', function()
       switch_source_header(bufnr, client)

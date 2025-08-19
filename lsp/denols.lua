@@ -98,7 +98,7 @@ return {
       client:exec_cmd({
         command = 'deno.cache',
         arguments = { {}, vim.uri_from_bufnr(bufnr) },
-      }, { bufnr = bufnr }, function(err, _result, ctx)
+      }, { bufnr = bufnr }, function(err, _, ctx)
         if err then
           local uri = ctx.params.arguments[2]
           vim.notify('cache command failed for' .. vim.uri_to_fname(uri), vim.log.levels.ERROR)

@@ -32,10 +32,6 @@ local language_id_mapping = {
   text = 'plaintext',
 }
 
-local function get_language_id(_, filetype)
-  return language_id_mapping[filetype] or filetype
-end
-
 ---@type vim.lsp.Config
 return {
   cmd = { 'ltex-ls-plus' },
@@ -60,7 +56,9 @@ return {
     'xhtml',
   },
   root_markers = { '.git' },
-  get_language_id = get_language_id,
+  get_language_id = function(_, filetype)
+    return language_id_mapping[filetype] or filetype
+  end,
   settings = {
     ltex = {
       enabled = {
