@@ -8,6 +8,7 @@
 ---
 --- The default `cmd` assumes that the `codebook-lsp` binary can be found in `$PATH`.
 ---
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'codebook-lsp', 'serve' },

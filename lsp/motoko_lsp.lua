@@ -3,6 +3,7 @@
 --- https://github.com/dfinity/vscode-motoko
 ---
 --- Language server for the Motoko programming language.
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'motoko-lsp', '--stdio' },

@@ -9,6 +9,7 @@
 --- ```sh
 --- npm i -g css-variables-language-server
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'css-variables-language-server', '--stdio' },

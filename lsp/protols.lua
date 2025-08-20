@@ -8,6 +8,7 @@
 --- ```
 ---
 --- A Language Server for proto3 files. It uses tree-sitter and runs in single file mode.
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'protols' },

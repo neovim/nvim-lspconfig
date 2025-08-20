@@ -13,6 +13,7 @@
 --- ```sh
 --- yarn global add turbo-language-server
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'turbo-language-server', '--stdio' },

@@ -6,6 +6,7 @@
 --- ```sh
 --- npm install -g @snakeskin/cli
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'snakeskin-cli', 'lsp', '--stdio' },

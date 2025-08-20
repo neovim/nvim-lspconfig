@@ -7,6 +7,7 @@
 --- but does not support refactorings.
 ---
 --- It can be installed with cargo: https://crates.io/crates/starlark
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'starlark', '--lsp' },

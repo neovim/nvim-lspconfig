@@ -33,6 +33,7 @@
 ---     },
 --- }
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'rescript-language-server', '--stdio' },

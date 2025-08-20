@@ -10,6 +10,7 @@
 --- ```
 ---
 --- pbls is a Language Server for protobuf
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'pbls' },

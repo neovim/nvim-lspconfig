@@ -21,6 +21,7 @@
 ---   capabilities = capabilities,
 --- })
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'vscode-html-language-server', '--stdio' },

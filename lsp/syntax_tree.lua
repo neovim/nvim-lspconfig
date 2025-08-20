@@ -12,6 +12,7 @@
 --- ```sh
 --- gem install syntax_tree
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'stree', 'lsp' },

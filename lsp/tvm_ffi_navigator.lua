@@ -6,6 +6,7 @@
 ---
 --- FFI navigator can be installed with `pip install ffi-navigator`, buf for more details, please see
 --- https://github.com/tqchen/ffi-navigator?tab=readme-ov-file#installation
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'python', '-m', 'ffi_navigator.langserver' },

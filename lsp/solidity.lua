@@ -32,6 +32,7 @@
 --- ```
 ---
 --- You can omit the node_modules as well.
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'solidity-ls', '--stdio' },
