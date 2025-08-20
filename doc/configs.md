@@ -13536,6 +13536,7 @@ Default config:
   ```lua
   { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" }
   ```
+- `on_init`: [../lsp/yamlls.lua:63](../lsp/yamlls.lua#L63)
 - `root_markers` :
   ```lua
   { ".git" }
