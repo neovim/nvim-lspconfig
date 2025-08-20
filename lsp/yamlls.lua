@@ -70,7 +70,10 @@ return {
     yaml = { format = { enable = true } },
   },
   on_init = function(client)
-    -- Fix for https://github.com/redhat-developer/yaml-language-server/issues/486
+    --- https://github.com/neovim/nvim-lspconfig/pull/4016
+    --- Since formatting is disabled by default if you check `client:supports_method('textDocument/formatting')`
+    --- during `LspAttach` it will return `false`. This hack sets the capability to `true` to facilitate
+    --- autocmd's which check this capability
     client.server_capabilities.documentFormattingProvider = true
   end,
 }
