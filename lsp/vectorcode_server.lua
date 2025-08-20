@@ -2,6 +2,7 @@
 --- https://github.com/Davidyz/VectorCode
 ---
 --- A Language Server Protocol implementation for VectorCode, a code repository indexing tool.
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'vectorcode-server' },

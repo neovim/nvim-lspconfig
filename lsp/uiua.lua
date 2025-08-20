@@ -5,6 +5,7 @@
 --- The builtin language server of the Uiua interpreter.
 ---
 --- The Uiua interpreter can be installed with `cargo install uiua`
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'uiua', 'lsp' },

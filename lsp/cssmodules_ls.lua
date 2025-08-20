@@ -8,6 +8,7 @@
 --- ```sh
 --- npm install -g cssmodules-language-server
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'cssmodules-language-server' },

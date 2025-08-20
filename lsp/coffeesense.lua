@@ -7,6 +7,7 @@
 --- ```sh
 --- npm install -g coffeesense-language-server
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'coffeesense-language-server', '--stdio' },

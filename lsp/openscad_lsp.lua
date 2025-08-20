@@ -8,6 +8,7 @@
 --- ```sh
 --- cargo install openscad-lsp
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'openscad-lsp', '--stdio' },

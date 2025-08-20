@@ -8,6 +8,7 @@
 --- ```sh
 --- go install github.com/grafana/jsonnet-language-server@latest
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'jsonnet-language-server' },

@@ -9,6 +9,7 @@
 --- ```sh
 --- npm install [-g] rome
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'rome', 'lsp-proxy' },

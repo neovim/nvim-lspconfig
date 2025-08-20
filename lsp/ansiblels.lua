@@ -9,6 +9,7 @@
 --- ```sh
 --- npm install -g @ansible/ansible-language-server
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'ansible-language-server', '--stdio' },

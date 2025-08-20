@@ -22,6 +22,7 @@
 ---     },
 --- })
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'java', '-jar', 'nextflow-language-server-all.jar' },

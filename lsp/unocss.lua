@@ -6,6 +6,7 @@
 --- ```sh
 --- npm i unocss-language-server -g
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'unocss-language-server', '--stdio' },

@@ -12,6 +12,7 @@
 ---
 --- exec node ${GNLS_SRC_DIR}/build/server.js $@
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'gnls', '--stdio' },

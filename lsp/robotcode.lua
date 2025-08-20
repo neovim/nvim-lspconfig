@@ -3,6 +3,7 @@
 --- https://robotcode.io
 ---
 --- RobotCode - Language Server Protocol implementation for Robot Framework.
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'robotcode', 'language-server' },

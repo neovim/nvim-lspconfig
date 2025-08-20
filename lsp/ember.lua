@@ -7,6 +7,7 @@
 --- ```sh
 --- npm install -g @ember-tooling/ember-language-server
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'ember-language-server', '--stdio' },

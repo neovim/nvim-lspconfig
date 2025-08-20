@@ -3,6 +3,7 @@
 --- https://github.com/dprint/dprint
 ---
 --- Pluggable and configurable code formatting platform written in Rust.
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'dprint', 'lsp' },

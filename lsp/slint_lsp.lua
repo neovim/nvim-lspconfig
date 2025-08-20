@@ -15,6 +15,7 @@
 --- ```lua
 --- vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'slint-lsp' },

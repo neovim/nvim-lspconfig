@@ -9,6 +9,7 @@
 --- ```r
 --- install.packages("languageserver")
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'R', '--no-echo', '-e', 'languageserver::run()' },

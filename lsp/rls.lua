@@ -26,6 +26,7 @@
 --- ```lua
 --- cmd = {"rustup", "run", "nightly", "rls"}
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'rls' },

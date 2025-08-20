@@ -3,6 +3,7 @@
 --- https://github.com/dagger/cuelsp
 ---
 --- Dagger's lsp server for cuelang.
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'cuelsp' },

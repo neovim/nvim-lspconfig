@@ -7,6 +7,7 @@
 --- ```sh
 --- npm install [-g] @ast-grep/cli
 --- ```
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'ast-grep', 'lsp' },
