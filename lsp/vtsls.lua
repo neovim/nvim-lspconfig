@@ -82,12 +82,12 @@ return {
     -- We select then from the project root, which is identified by the presence of a package
     -- manager lock file.
     local project_root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
+
     -- Give the root markers equal priority by wrapping them in a table
     local project_root = vim.fs.root(bufnr, { project_root_markers })
-    if not project_root then
-      return
-    end
 
+    -- If project root not found `project_root` will be nil and on_dir function will be called with nil value
+    -- to allow LSP to start for standalone TS/JS files.
     on_dir(project_root)
   end,
 }

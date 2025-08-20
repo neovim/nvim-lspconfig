@@ -92,28 +92,43 @@ return {
     -- We select then from the project root, which is identified by the presence of a package
     -- manager lock file.
     local project_root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
-    -- Give the root markers equal priority by wrapping them in a table
-    local project_root = vim.fs.root(bufnr, { project_root_markers })
-    if not project_root then
-      return
-    end
 
-    -- We know that the buffer is using ESLint if it has a config file
-    -- in its directory tree.
-    --
     -- Eslint used to support package.json files as config files, but it doesn't anymore.
     -- We keep this for backward compatibility.
     local filename = vim.api.nvim_buf_get_name(bufnr)
     local eslint_config_files_with_package_json =
       util.insert_package_json(eslint_config_files, 'eslintConfig', filename)
-    local is_buffer_using_eslint = vim.fs.find(eslint_config_files_with_package_json, {
+
+    -- Give the root markers equal priority by wrapping them in a table
+    local project_root = vim.fs.root(bufnr, { project_root_markers })
+
+    -- If project root not found, we check for config root folder, because projects without lock files
+    -- and with eslint config file may exists.
+    if not project_root then
+      local config_root = vim.fs.root(bufnr, { eslint_config_files_with_package_json })
+
+      -- if config root folder not found, LSP does not need to start.
+      if not config_root then
+        return
+      end
+
+      on_dir(config_root)
+      return
+    end
+
+    -- We know that project root exists, and we check that buffer is using Eslint.
+    -- We know that the buffer is using ESLint if it has a config file
+    -- in its directory tree.
+    local lsp_config_file = vim.fs.find(eslint_config_files_with_package_json, {
       path = filename,
       type = 'file',
       limit = 1,
       upward = true,
       stop = vim.fs.dirname(project_root),
     })[1]
-    if not is_buffer_using_eslint then
+
+    -- If there is no eslint config file for current buffer, LSP does not need to start
+    if not lsp_config_file then
       return
     end
 
