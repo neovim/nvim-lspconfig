@@ -25,7 +25,7 @@ local fs = vim.fs
 ---@param client vim.lsp.Client
 ---@param target string
 local function on_init_sln(client, target)
-  vim.notify('Initializing: ' .. target, vim.log.levels.INFO, { title = 'roslyn_ls' })
+  vim.notify('Initializing: ' .. target, vim.log.levels.TRACE, { title = 'roslyn_ls' })
   ---@diagnostic disable-next-line: param-type-mismatch
   client:notify('solution/open', {
     solution = vim.uri_from_fname(target),
@@ -35,7 +35,7 @@ end
 ---@param client vim.lsp.Client
 ---@param project_files string[]
 local function on_init_project(client, project_files)
-  vim.notify('Initializing: projects', vim.log.levels.INFO, { title = 'roslyn_ls' })
+  vim.notify('Initializing: projects', vim.log.levels.TRACE, { title = 'roslyn_ls' })
   ---@diagnostic disable-next-line: param-type-mismatch
   client:notify('project/open', {
     projects = vim.tbl_map(function(file)
