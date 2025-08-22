@@ -73,6 +73,36 @@ function M.root_markers_with_field(root_files, new_names, field, fname)
   return root_files
 end
 
+--- Appends `new_names` to `root_files` if `field` is found in any such file in any ancestor of `start_path`.
+---
+--- NOTE: this does a "breadth-first" search, so is broken for multi-project workspaces:
+--- https://github.com/neovim/nvim-lspconfig/issues/3818#issuecomment-2848836794
+---
+--- @param root_files string[] List of root-marker files to append to.
+--- @param new_names string[] Potential root-marker filenames (e.g. `{ 'package.json', 'package.json5' }`) to inspect for the given `field`.
+--- @param field string Field to search for in the given `new_names` files.
+--- @param start_path string Full path of the directory or file to start searching upwards from.
+--- @param stop_path string? Full path of the directory or file to stop searching upwards to.
+--- @returns Modified copy of `root_files`
+function M.root_markers_with_field_with_stop(root_files, new_names, field, start_path, stop_path)
+  local files = vim.list_slice(root_files, 1, #root_files)
+  local path = vim.fn.fnamemodify(start_path, ':p:h')
+  local stop = stop_path and vim.fn.fnamemodify(stop_path, ':p:h')
+  local found = vim.fs.find(new_names, { path = path, upward = true, stop = stop })
+
+  for _, f in ipairs(found or {}) do
+    -- Match the given `field`.
+    for line in io.lines(f) do
+      if line:find(field) then
+        files[#files + 1] = vim.fs.basename(f)
+        break
+      end
+    end
+  end
+
+  return files
+end
+
 function M.insert_package_json(root_files, field, fname)
   return M.root_markers_with_field(root_files, { 'package.json', 'package.json5' }, field, fname)
 end
@@ -96,6 +126,115 @@ function M.get_typescript_server_path(root_dir)
     end
   end
   return ''
+end
+
+--- Conditionally appends additional root markers based on `config_field`.
+---
+--- This helper function checks if `new_root_markers`, `config_field` and `start_path` are provided,
+--- and if so, appends markers using `M.root_markers_with_field_with_stop`.
+---
+--- @param root_markers string[] Base list of root markers.
+--- @param new_root_markers? string[] Optional additional markers to append. If provided, must be not empty.
+--- @param config_field? string Field to search for in `new_root_markers`. Required if `new_root_markers` provided.
+--- @param start_path? string Path to start searching from. Required if `new_root_markers` provided.
+--- @param stop_path? string Optional path to stop searching at.
+--- @return string[] Combined list of markers.
+function M.get_root_markers(root_markers, new_root_markers, config_field, start_path, stop_path)
+  local is_new_markers = new_root_markers and #new_root_markers > 0
+  local is_config_field = config_field and #vim.trim(config_field) > 0
+  local is_start_path = start_path and #vim.trim(start_path)
+
+  local should_append_markers = is_new_markers and is_config_field and is_start_path
+
+  if should_append_markers then
+    --- @cast new_root_markers string[]
+    --- @cast config_field string
+    --- @cast start_path string
+    return M.root_markers_with_field_with_stop(root_markers, new_root_markers, config_field, start_path, stop_path)
+  end
+
+  return root_markers
+end
+
+--- @param root_markers (string|string[])[]
+--- @return (string|string[])[]
+function M.get_equal_root_markers(root_markers)
+  local nvim_eleven_point_three = vim.fn.has('nvim-0.11.3') == 1
+
+  return nvim_eleven_point_three and { root_markers } or root_markers
+end
+
+--- Determines the root directory of a project or monorepo by searching for root markers
+--- (e.g., `.git`, `package.json`) relative to the file's location or current working directory.
+---
+--- To find the root directory, we first compare the file’s directory with the current working directory (cwd) to determine
+--- if the file is inside or outside the cwd.
+---
+--- - If the file is outside the cwd, we search upwards from the file’s directory and return the root directory if found,
+---   or nil otherwise.
+--- - If the file is inside the cwd, we first search upwards from the cwd and return the first match of the root directory
+---   If no root marker is found, we then search upwards from the file’s directory to the cwd. If a root marker is found,
+---   we set the cwd as the root directory to prevent multiple instances of LSP clients for nested directories.
+---   If nothing is found, we return nil.
+---
+--- **Warning**
+--- This approach may be slow for projects with deep nesting.
+--- ---
+--- @usage
+---
+--- Example: Find root:
+--- ```lua
+--- local root = M.monorepo_get_root_dir(bufnr, {'.git'})
+--- ```
+---
+--- Example: Find root with additional markers and config field:
+---
+--- ```lua
+--- local root = M.monorepo_get_root_dir(bufnr, {'.git'}, {'package.json'}, 'eslintConfig')
+--- ```
+---
+--- @param bufnr integer Buffer number (0 or Current buffer).
+--- @param root_markers string[] List of filenames/directories (".git", "package.json", …) used to decide the workspace root.
+--- @param new_root_markers? string[] Optional list of additional root markers to inspect for `config_field`.
+--- @param config_field? string Field to search in `new_root_markers`. Required if `new_root_markers` is provided.
+--- @return string? # Full path to project root directory or nil.
+function M.monorepo_get_root_dir(bufnr, root_markers, new_root_markers, config_field)
+  local cwd = vim.fn.getcwd()
+  local file_dir = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
+  local is_file_dir_nested_within_cwd = vim.startswith(file_dir, cwd)
+
+  local markers = vim.list_slice(root_markers, 1, #root_markers)
+  local equal_priority_markers --- @type (string|string[])[]
+
+  if not is_file_dir_nested_within_cwd then
+    markers = M.get_root_markers(markers, new_root_markers, config_field, file_dir)
+    equal_priority_markers = M.get_equal_root_markers(markers)
+    return vim.fs.root(file_dir, equal_priority_markers)
+  end
+
+  -- File is inside cwd: prioritize cwd.
+  markers = M.get_root_markers(markers, new_root_markers, config_field, cwd)
+  equal_priority_markers = M.get_equal_root_markers(markers)
+  local cwd_root = vim.fs.root(cwd, equal_priority_markers)
+
+  if cwd_root then
+    return cwd_root
+  end
+
+  markers = M.get_root_markers(markers, new_root_markers, config_field, file_dir, cwd)
+  local nested_file_path_root_marker = vim.fs.find(markers, {
+    upward = true,
+    path = file_dir,
+    stop = cwd,
+  })[1]
+
+  -- Set cwd as root directory to prevent LSP from creating multiple client instances
+  -- for nested directories.
+  if nested_file_path_root_marker then
+    return cwd
+  end
+
+  return nil
 end
 
 ---
