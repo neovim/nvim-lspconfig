@@ -24,19 +24,27 @@ return {
   filetypes = { 'vue' },
   root_markers = { 'package.json' },
   on_init = function(client)
-    client.handlers['tsserver/request'] = function(_, result, context)
-      local ts_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'ts_ls' })
-      local vtsls_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })
-      local clients = {}
+    local retries = 0
 
-      vim.list_extend(clients, ts_clients)
-      vim.list_extend(clients, vtsls_clients)
+    ---@param _ lsp.ResponseError
+    ---@param result any
+    ---@param context lsp.HandlerContext
+    local function typescriptHandler(_, result, context)
+      local ts_client = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'ts_ls' })[1]
+        or vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })[1]
 
-      if #clients == 0 then
-        vim.notify('Could not find `ts_ls` or `vtsls` lsp client, required by `vue_ls`.', vim.log.levels.ERROR)
+      if not ts_client then
+        -- there can sometimes be a short delay until `ts_ls`/`vtsls` are attached so we retry for a few times until it is ready
+        if retries <= 10 then
+          retries = retries + 1
+          vim.defer_fn(function()
+            typescriptHandler(_, result, context)
+          end, 100)
+        else
+          vim.notify('Could not find `ts_ls` or `vtsls` lsp client, required by `vue_ls`.', vim.log.levels.ERROR)
+        end
         return
       end
-      local ts_client = clients[1]
 
       local param = unpack(result)
       local id, command, payload = unpack(param)
@@ -53,5 +61,7 @@ return {
         client:notify('tsserver/response', response_data)
       end)
     end
+
+    client.handlers['tsserver/request'] = typescriptHandler
   end,
 }
