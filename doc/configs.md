@@ -45,6 +45,7 @@ Nvim by running `:help lspconfig-all`.
 - [cairo_ls](#cairo_ls)
 - [ccls](#ccls)
 - [cds_lsp](#cds_lsp)
+- [cir_lsp_server](#cir_lsp_server)
 - [circom-lsp](#circom-lsp)
 - [clangd](#clangd)
 - [clarinet](#clarinet)
@@ -1970,6 +1971,35 @@ Default config:
       validate = true
     }
   }
+  ```
+
+---
+
+## cir_lsp_server
+
+https://llvm.github.io/clangir
+
+The Language Server for the LLVM ClangIR language
+
+`cir-lsp-server` can be installed at the llvm-project repository (https://github.com/llvm/llvm-project)
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('cir_lsp_server')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "cir-lsp-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "cir" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".git" }
   ```
 
 ---

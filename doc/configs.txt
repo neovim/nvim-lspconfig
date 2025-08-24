@@ -1238,6 +1238,28 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+cir_lsp_server
+
+https://llvm.github.io/clangir
+
+The Language Server for the LLVM ClangIR language
+
+`cir-lsp-server` can be installed at the llvm-project repository (https://github.com/llvm/llvm-project)
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('cir_lsp_server')
+
+
+Default config:
+- cmd: >lua
+  { "cir-lsp-server" }
+- filetypes: >lua
+  { "cir" }
+- root_markers: >lua
+  { ".git" }
+<
+
+------------------------------------------------------------------------------
 circom-lsp
 
 [Circom Language Server](https://github.com/rubydusa/circom-lsp)
