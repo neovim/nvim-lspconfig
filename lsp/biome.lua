@@ -11,7 +11,9 @@
 ---
 --- `biome` supports monorepos by default. It will automatically find the `biome.json` corresponding to the package you are working on, as described in the [documentation](https://biomejs.dev/guides/big-projects/#monorepo). This works without the need of spawning multiple instances of `biome`, saving memory.
 
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
+
+local biome_config_files = { 'biome.json', 'biome.json5' }
 
 ---@type vim.lsp.Config
 return {
@@ -40,34 +42,12 @@ return {
   },
   workspace_required = true,
   root_dir = function(bufnr, on_dir)
-    -- The project root is where the LSP can be started from
-    -- As stated in the documentation above, this LSP supports monorepos and simple projects.
-    -- We select then from the project root, which is identified by the presence of a package
-    -- manager lock file.
-    local root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
-    -- Give the root markers equal priority by wrapping them in a table
-    root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers } or root_markers
-    local project_root = vim.fs.root(bufnr, root_markers)
-    if not project_root then
+    local additional_root_markers = { 'package.json', 'package.json5' }
+    local config_field = 'biome'
+    local project_root = util.monorepo_get_root_dir(bufnr, biome_config_files, additional_root_markers, config_field)
+    if project_root then
+      on_dir(project_root)
       return
     end
-
-    -- We know that the buffer is using Biome if it has a config file
-    -- in its directory tree.
-    local filename = vim.api.nvim_buf_get_name(bufnr)
-    local biome_config_files = { 'biome.json', 'biome.jsonc' }
-    biome_config_files = util.insert_package_json(biome_config_files, 'biome', filename)
-    local is_buffer_using_biome = vim.fs.find(biome_config_files, {
-      path = filename,
-      type = 'file',
-      limit = 1,
-      upward = true,
-      stop = vim.fs.dirname(project_root),
-    })[1]
-    if not is_buffer_using_biome then
-      return
-    end
-
-    on_dir(project_root)
   end,
 }
