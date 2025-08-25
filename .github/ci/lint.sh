@@ -35,6 +35,14 @@ _check_brief_placement() {
   fi
 }
 
+# Returned object should have `---@type vim.lsp.Config` annotation.
+# TODO: use luals/emmylua type checking in CI: https://github.com/neovim/neovim/pull/33344
+_check_type() {
+  if git grep --files-without-match '\-\-\-\@type vim\.lsp\.Config' -- 'lsp/*.lua' ; then
+    _fail 'Missing `---@type vim.lsp.Config` annotation.'
+  fi
+}
+
 # Enforce "Lsp" prefix on all user commands.
 _check_lsp_cmd_prefix() {
   local exclude='tinymist'
@@ -92,6 +100,7 @@ _check_legacy_configs() {
 _check_generated_docs
 _check_cmd_buflocal
 _check_brief_placement
+_check_type
 _check_lsp_cmd_prefix
 _check_exec_cmd
 _check_deprecated_in_nvim_0_11
