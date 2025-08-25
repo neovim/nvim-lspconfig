@@ -2320,7 +2320,7 @@ Default config:
     }
   }
   ```
-- `on_attach`: [../lsp/copilot.lua:78](../lsp/copilot.lua#L78)
+- `on_attach`: [../lsp/copilot.lua:79](../lsp/copilot.lua#L79)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -13328,7 +13328,7 @@ Default config:
   ```lua
   "vue_ls"
   ```
-- `on_init`: [../lsp/volar.lua:8](../lsp/volar.lua#L8)
+- `on_init`: [../lsp/volar.lua:9](../lsp/volar.lua#L9)
 - `root_markers` :
   ```lua
   { "package.json" }

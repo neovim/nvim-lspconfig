@@ -1503,7 +1503,7 @@ Default config:
       version = "0.12.0-dev+gc1fa3c7c37"
     }
   }
-- on_attach (use "gF" to view): ../lsp/copilot.lua:78
+- on_attach (use "gF" to view): ../lsp/copilot.lua:79
 - root_markers: >lua
   { ".git" }
 - settings: >lua
@@ -9907,7 +9907,7 @@ Default config:
   { "vue" }
 - name: >lua
   "vue_ls"
-- on_init (use "gF" to view): ../lsp/volar.lua:8
+- on_init (use "gF" to view): ../lsp/volar.lua:9
 - root_markers: >lua
   { "package.json" }
 <
