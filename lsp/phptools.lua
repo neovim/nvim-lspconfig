@@ -18,6 +18,7 @@
 --- }
 --- ```
 
+---@type vim.lsp.Config
 return {
   cmd = { 'devsense-php-ls', '--stdio' },
   filetypes = { 'php' },
