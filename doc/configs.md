@@ -55,6 +55,7 @@ Nvim by running `:help lspconfig-all`.
 - [codebook](#codebook)
 - [coffeesense](#coffeesense)
 - [contextive](#contextive)
+- [copilot](#copilot)
 - [coq_lsp](#coq_lsp)
 - [crystalline](#crystalline)
 - [csharp_ls](#csharp_ls)
@@ -2277,6 +2278,60 @@ Default config:
 - `root_markers` :
   ```lua
   { ".contextive", ".git" }
+  ```
+
+---
+
+## copilot
+
+https://www.npmjs.com/package/@github/copilot-language-server
+
+The Copilot Language Server enables any editor or IDE
+to integrate with GitHub Copilot via
+[the language server protocol](https://microsoft.github.io/language-server-protocol/).
+
+**[GitHub Copilot](https://github.com/features/copilot)**
+is an AI pair programmer tool that helps you write code faster and smarter.
+
+**Sign up for [GitHub Copilot Free](https://github.com/settings/copilot)!**
+
+Please see [terms of use for GitHub Copilot](https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features#github-copilot)
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('copilot')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "copilot-language-server", "--stdio" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    editorInfo = {
+      name = "Neovim",
+      version = "0.12.0-dev+gc1fa3c7c37"
+    },
+    editorPluginInfo = {
+      name = "Neovim",
+      version = "0.12.0-dev+gc1fa3c7c37"
+    }
+  }
+  ```
+- `on_attach`: [../lsp/copilot.lua:78](../lsp/copilot.lua#L78)
+- `root_markers` :
+  ```lua
+  { ".git" }
+  ```
+- `settings` :
+  ```lua
+  {
+    telemetry = {
+      telemetryLevel = "all"
+    }
+  }
   ```
 
 ---
