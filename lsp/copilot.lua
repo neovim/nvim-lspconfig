@@ -75,6 +75,7 @@ local function sign_out(_, client)
   )
 end
 
+---@type vim.lsp.Config
 return {
   cmd = {
     'copilot-language-server',
