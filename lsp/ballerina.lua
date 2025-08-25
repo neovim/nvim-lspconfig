@@ -4,6 +4,8 @@
 ---
 --- The Ballerina language's CLI tool comes with its own language server implementation.
 --- The `bal` command line tool must be installed and available in your system's PATH.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'bal', 'start-language-server' },
   filetypes = { 'ballerina' },

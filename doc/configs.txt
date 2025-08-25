@@ -35,7 +35,7 @@ Default config:
   { "ada_language_server" }
 - filetypes: >lua
   { "ada" }
-- root_dir (use "gF" to view): ../lsp/ada_ls.lua:23
+- root_dir (use "gF" to view): ../lsp/ada_ls.lua:24
 <
 
 ------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ Default config:
   { "als" }
 - filetypes: >lua
   { "agda" }
-- root_dir (use "gF" to view): ../lsp/agda_ls.lua:9
+- root_dir (use "gF" to view): ../lsp/agda_ls.lua:10
 <
 
 ------------------------------------------------------------------------------
@@ -336,7 +336,7 @@ Default config:
   { "arduino-language-server" }
 - filetypes: >lua
   { "arduino" }
-- root_dir (use "gF" to view): ../lsp/arduino_language_server.lua:73
+- root_dir (use "gF" to view): ../lsp/arduino_language_server.lua:74
 <
 
 ------------------------------------------------------------------------------
@@ -380,7 +380,7 @@ Default config:
   { "ast-grep", "lsp" }
 - filetypes: >lua
   { "c", "cpp", "rust", "go", "java", "python", "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "html", "css", "kotlin", "dart", "lua" }
-- reuse_client (use "gF" to view): ../lsp/ast_grep.lua:10
+- reuse_client (use "gF" to view): ../lsp/ast_grep.lua:12
 - root_markers: >lua
   { "sgconfig.yaml", "sgconfig.yml" }
 - `workspace_required` : `true`
@@ -399,7 +399,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/astro.lua:12
+- before_init (use "gF" to view): ../lsp/astro.lua:13
 - cmd: >lua
   { "astro-ls", "--stdio" }
 - filetypes: >lua
@@ -552,7 +552,7 @@ Default config:
   { "autotools-language-server" }
 - filetypes: >lua
   { "config", "automake", "make" }
-- root_dir (use "gF" to view): ../lsp/autotools_ls.lua:16
+- root_dir (use "gF" to view): ../lsp/autotools_ls.lua:17
 <
 
 ------------------------------------------------------------------------------
@@ -707,7 +707,7 @@ Default config:
   { "basedpyright-langserver", "--stdio" }
 - filetypes: >lua
   { "python" }
-- on_attach (use "gF" to view): ../lsp/basedpyright.lua:22
+- on_attach (use "gF" to view): ../lsp/basedpyright.lua:23
 - root_markers: >lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
 - settings: >lua
@@ -884,15 +884,19 @@ Toolchain of the web. [Successor of Rome](https://biomejs.dev/blog/annoucing-bio
 >sh
   npm install [-g] @biomejs/biome
 
+### Monorepo support
+
+`biome` supports monorepos by default. It will automatically find the `biome.json` corresponding to the package you are working on, as described in the [documentation](https://biomejs.dev/guides/big-projects/#monorepo). This works without the need of spawning multiple instances of `biome`, saving memory.
+
 Snippet to enable the language server: >lua
   vim.lsp.enable('biome')
 
 
 Default config:
-- cmd (use "gF" to view): ../lsp/biome.lua:12
+- cmd (use "gF" to view): ../lsp/biome.lua:17
 - filetypes: >lua
   { "astro", "css", "graphql", "html", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
-- root_dir (use "gF" to view): ../lsp/biome.lua:12
+- root_dir (use "gF" to view): ../lsp/biome.lua:17
 - `workspace_required` : `true`
 <
 
@@ -1199,7 +1203,7 @@ Default config:
   { "c", "cpp", "objc", "objcpp", "cuda" }
 - offset_encoding: >lua
   "utf-32"
-- on_attach (use "gF" to view): ../lsp/ccls.lua:40
+- on_attach (use "gF" to view): ../lsp/ccls.lua:41
 - root_markers: >lua
   { "compile_commands.json", ".ccls", ".git" }
 - `workspace_required` : `true`
@@ -1231,6 +1235,28 @@ Default config:
       validate = true
     }
   }
+<
+
+------------------------------------------------------------------------------
+cir_lsp_server
+
+https://llvm.github.io/clangir
+
+The Language Server for the LLVM ClangIR language
+
+`cir-lsp-server` can be installed at the llvm-project repository (https://github.com/llvm/llvm-project)
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('cir_lsp_server')
+
+
+Default config:
+- cmd: >lua
+  { "cir-lsp-server" }
+- filetypes: >lua
+  { "cir" }
+- root_markers: >lua
+  { ".git" }
 <
 
 ------------------------------------------------------------------------------
@@ -1285,8 +1311,8 @@ Default config:
   { "clangd" }
 - filetypes: >lua
   { "c", "cpp", "objc", "objcpp", "cuda" }
-- on_attach (use "gF" to view): ../lsp/clangd.lua:63
-- on_init (use "gF" to view): ../lsp/clangd.lua:63
+- on_attach (use "gF" to view): ../lsp/clangd.lua:65
+- on_init (use "gF" to view): ../lsp/clangd.lua:65
 - root_markers: >lua
   { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" }
 <
@@ -1392,7 +1418,7 @@ Default config:
 - cmd: >lua
   { "codebook-lsp", "serve" }
 - filetypes: >lua
-  { "c", "css", "go", "haskell", "html", "javascript", "javascriptreact", "markdown", "python", "php", "ruby", "rust", "toml", "text", "typescript", "typescriptreact" }
+  { "c", "css", "gitcommit", "go", "haskell", "html", "java", "javascript", "javascriptreact", "lua", "markdown", "php", "python", "ruby", "rust", "toml", "text", "typescript", "typescriptreact" }
 - root_markers: >lua
   { ".git", "codebook.toml", ".codebook.toml" }
 <
@@ -1441,6 +1467,51 @@ Default config:
   { "Contextive.LanguageServer" }
 - root_markers: >lua
   { ".contextive", ".git" }
+<
+
+------------------------------------------------------------------------------
+copilot
+
+https://www.npmjs.com/package/@github/copilot-language-server
+
+The Copilot Language Server enables any editor or IDE
+to integrate with GitHub Copilot via
+[the language server protocol](https://microsoft.github.io/language-server-protocol/).
+
+**[GitHub Copilot](https://github.com/features/copilot)**
+is an AI pair programmer tool that helps you write code faster and smarter.
+
+**Sign up for [GitHub Copilot Free](https://github.com/settings/copilot)!**
+
+Please see [terms of use for GitHub Copilot](https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features#github-copilot)
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('copilot')
+
+
+Default config:
+- cmd: >lua
+  { "copilot-language-server", "--stdio" }
+- init_options: >lua
+  {
+    editorInfo = {
+      name = "Neovim",
+      version = "0.12.0-dev+gc1fa3c7c37"
+    },
+    editorPluginInfo = {
+      name = "Neovim",
+      version = "0.12.0-dev+gc1fa3c7c37"
+    }
+  }
+- on_attach (use "gF" to view): ../lsp/copilot.lua:79
+- root_markers: >lua
+  { ".git" }
+- settings: >lua
+  {
+    telemetry = {
+      telemetryLevel = "all"
+    }
+  }
 <
 
 ------------------------------------------------------------------------------
@@ -1505,7 +1576,7 @@ Default config:
   {
     AutomaticWorkspaceInit = true
   }
-- root_dir (use "gF" to view): ../lsp/csharp_ls.lua:13
+- root_dir (use "gF" to view): ../lsp/csharp_ls.lua:14
 <
 
 ------------------------------------------------------------------------------
@@ -1705,7 +1776,8 @@ Default config:
   {
     hostInfo = "neovim"
   }
-- root_dir (use "gF" to view): ../lsp/custom_elements_ls.lua:26
+- root_markers: >lua
+  { "tsconfig.json", "package.json", "jsconfig.json", ".git" }
 <
 
 ------------------------------------------------------------------------------
@@ -1908,7 +1980,7 @@ Default config:
     ["textDocument/references"] = <function 1>,
     ["textDocument/typeDefinition"] = <function 1>
   }
-- on_attach (use "gF" to view): ../lsp/denols.lua:66
+- on_attach (use "gF" to view): ../lsp/denols.lua:67
 - root_markers: >lua
   { "deno.json", "deno.jsonc", ".git" }
 - settings: >lua
@@ -2039,6 +2111,28 @@ Default config:
   { "yaml.docker-compose" }
 - root_markers: >lua
   { "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml" }
+<
+
+------------------------------------------------------------------------------
+docker_language_server
+
+https://github.com/docker/docker-language-server
+
+`docker-langserver-server` can be installed via `go` >sh
+  go install github.com/docker/docker-language-server/cmd/docker-language-server@latest
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('docker_language_server')
+
+
+Default config:
+- cmd: >lua
+  { "docker-language-server", "start", "--stdio" }
+- filetypes: >lua
+  { "dockerfile", "yaml.docker-compose" }
+- get_language_id (use "gF" to view): ../lsp/docker_language_server.lua:11
+- root_markers: >lua
+  { "Dockerfile", "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml", "docker-bake.json", "docker-bake.hcl", "docker-bake.override.json", "docker-bake.override.hcl" }
 <
 
 ------------------------------------------------------------------------------
@@ -2174,7 +2268,7 @@ Default config:
     show_symbols_by_n_times = 0,
     show_symbols_only_follow_by_hanzi = false
   }
-- on_attach (use "gF" to view): ../lsp/ds_pinyin_lsp.lua:45
+- on_attach (use "gF" to view): ../lsp/ds_pinyin_lsp.lua:46
 - root_markers: >lua
   { ".git" }
 <
@@ -2318,7 +2412,7 @@ Snippet to enable the language server: >lua
 Default config:
 - filetypes: >lua
   { "elixir", "eelixir", "heex", "surface" }
-- root_dir (use "gF" to view): ../lsp/elixirls.lua:28
+- root_dir (use "gF" to view): ../lsp/elixirls.lua:30
 <
 
 ------------------------------------------------------------------------------
@@ -2349,7 +2443,7 @@ Default config:
     onlyUpdateDiagnosticsOnSave = false,
     skipInstallPackageConfirmation = false
   }
-- root_dir (use "gF" to view): ../lsp/elmls.lua:12
+- root_dir (use "gF" to view): ../lsp/elmls.lua:13
 <
 
 ------------------------------------------------------------------------------
@@ -2599,12 +2693,20 @@ Messages handled in lspconfig: `eslint/openDoc`, `eslint/confirmESLintExecution`
 
 Additional messages you can handle: `eslint/noConfig`
 
+### Monorepo support
+
+`vscode-eslint-language-server` supports monorepos by default. It will automatically find the config file corresponding to the package you are working on. You can use different configs in different packages.
+This works without the need of spawning multiple instances of `vscode-eslint-language-server`.
+You can use a different version of ESLint in each package, but it is recommended to use the same version of ESLint in all packages. The location of the ESLint binary will be determined automatically.
+
+/!\ When using flat config files, you need to use them across all your packages in your monorepo, as it's a global setting for the server.
+
 Snippet to enable the language server: >lua
   vim.lsp.enable('eslint')
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/eslint.lua:37
+- before_init (use "gF" to view): ../lsp/eslint.lua:61
 - cmd: >lua
   { "vscode-eslint-language-server", "--stdio" }
 - filetypes: >lua
@@ -2616,8 +2718,8 @@ Default config:
     ["eslint/openDoc"] = <function 3>,
     ["eslint/probeFailed"] = <function 4>
   }
-- on_attach (use "gF" to view): ../lsp/eslint.lua:37
-- root_dir (use "gF" to view): ../lsp/eslint.lua:37
+- on_attach (use "gF" to view): ../lsp/eslint.lua:61
+- root_dir (use "gF" to view): ../lsp/eslint.lua:61
 - settings: >lua
   {
     codeAction = {
@@ -2648,7 +2750,7 @@ Default config:
     useESLintClass = false,
     validate = "on",
     workingDirectory = {
-      mode = "location"
+      mode = "auto"
     }
   }
 - `workspace_required` : `true`
@@ -2719,7 +2821,7 @@ Default config:
   { "fennel-ls" }
 - filetypes: >lua
   { "fennel" }
-- root_dir (use "gF" to view): ../lsp/fennel_ls.lua:10
+- root_dir (use "gF" to view): ../lsp/fennel_ls.lua:11
 - settings: >lua
   {}
 <
@@ -2812,7 +2914,7 @@ Default config:
   { "foam-ls", "--stdio" }
 - filetypes: >lua
   { "foam", "OpenFOAM" }
-- root_dir (use "gF" to view): ../lsp/foam_ls.lua:10
+- root_dir (use "gF" to view): ../lsp/foam_ls.lua:11
 <
 
 ------------------------------------------------------------------------------
@@ -2875,7 +2977,7 @@ Default config:
   {
     AutomaticWorkspaceInit = true
   }
-- root_dir (use "gF" to view): ../lsp/fsautocomplete.lua:22
+- root_dir (use "gF" to view): ../lsp/fsautocomplete.lua:23
 - settings: >lua
   {
     FSharp = {
@@ -2928,7 +3030,7 @@ Default config:
   {
     AutomaticWorkspaceInit = true
   }
-- root_dir (use "gF" to view): ../lsp/fsharp_language_server.lua:18
+- root_dir (use "gF" to view): ../lsp/fsharp_language_server.lua:19
 - settings: >lua
   {}
 <
@@ -2988,7 +3090,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd (use "gF" to view): ../lsp/gdscript.lua:10
+- cmd (use "gF" to view): ../lsp/gdscript.lua:11
 - filetypes: >lua
   { "gd", "gdscript", "gdscript3" }
 - root_markers: >lua
@@ -3050,7 +3152,7 @@ Default config:
   { "yaml" }
 - init_options: >lua
   {}
-- root_dir (use "gF" to view): ../lsp/gh_actions_ls.lua:16
+- root_dir (use "gF" to view): ../lsp/gh_actions_ls.lua:18
 <
 
 ------------------------------------------------------------------------------
@@ -3147,7 +3249,7 @@ Default config:
     cache_path = "/home/runner/.cache/gitlab-ci-ls/",
     log_path = "/home/runner/.cache/gitlab-ci-ls//log/gitlab-ci-ls.log"
   }
-- root_dir (use "gF" to view): ../lsp/gitlab_ci_ls.lua:14
+- root_dir (use "gF" to view): ../lsp/gitlab_ci_ls.lua:15
 <
 
 ------------------------------------------------------------------------------
@@ -3239,7 +3341,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd (use "gF" to view): ../lsp/glint.lua:25
+- cmd (use "gF" to view): ../lsp/glint.lua:26
 - filetypes: >lua
   { "html.handlebars", "handlebars", "typescript", "typescript.glimmer", "javascript", "javascript.glimmer" }
 - init_options: >lua
@@ -3353,7 +3455,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/golangci_lint_ls.lua:15
+- before_init (use "gF" to view): ../lsp/golangci_lint_ls.lua:17
 - cmd: >lua
   { "golangci-lint-langserver" }
 - filetypes: >lua
@@ -3382,7 +3484,7 @@ Default config:
   { "gopls" }
 - filetypes: >lua
   { "go", "gomod", "gowork", "gotmpl" }
-- root_dir (use "gF" to view): ../lsp/gopls.lua:88
+- root_dir (use "gF" to view): ../lsp/gopls.lua:89
 <
 
 ------------------------------------------------------------------------------
@@ -3465,7 +3567,7 @@ Default config:
   { "graphql-lsp", "server", "-m", "stream" }
 - filetypes: >lua
   { "graphql", "typescriptreact", "javascriptreact" }
-- root_dir (use "gF" to view): ../lsp/graphql.lua:15
+- root_dir (use "gF" to view): ../lsp/graphql.lua:16
 <
 
 ------------------------------------------------------------------------------
@@ -3738,7 +3840,7 @@ Default config:
   { "haskell-language-server-wrapper", "--lsp" }
 - filetypes: >lua
   { "haskell", "lhaskell" }
-- root_dir (use "gF" to view): ../lsp/hls.lua:17
+- root_dir (use "gF" to view): ../lsp/hls.lua:18
 - settings: >lua
   {
     haskell = {
@@ -3867,7 +3969,7 @@ hyprls
 https://github.com/hyprland-community/hyprls
 
 `hyprls` can be installed via `go` >sh
-  go install github.com/ewen-lbh/hyprls/cmd/hyprls@latest
+  go install github.com/hyprland-community/hyprls/cmd/hyprls@latest
 
 Snippet to enable the language server: >lua
   vim.lsp.enable('hyprls')
@@ -3923,7 +4025,7 @@ Default config:
   { "idris2-lsp" }
 - filetypes: >lua
   { "idris2" }
-- root_dir (use "gF" to view): ../lsp/idris2_lsp.lua:34
+- root_dir (use "gF" to view): ../lsp/idris2_lsp.lua:35
 <
 
 ------------------------------------------------------------------------------
@@ -4228,7 +4330,7 @@ Default config:
   { "julia", "--startup-file=no", "--history-file=no", "-e", '    # Load LanguageServer.jl: attempt to load from ~/.julia/environments/nvim-lspconfig\n    # with the regular load path as a fallback\n    ls_install_path = joinpath(\n        get(DEPOT_PATH, 1, joinpath(homedir(), ".julia")),\n        "environments", "nvim-lspconfig"\n    )\n    pushfirst!(LOAD_PATH, ls_install_path)\n    using LanguageServer\n    popfirst!(LOAD_PATH)\n    depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n    project_path = let\n        dirname(something(\n            ## 1. Finds an explicitly set project (JULIA_PROJECT)\n            Base.load_path_expand((\n                p = get(ENV, "JULIA_PROJECT", nothing);\n                p === nothing ? nothing : isempty(p) ? nothing : p\n            )),\n            ## 2. Look for a Project.toml file in the current working directory,\n            ##    or parent directories, with $HOME as an upper boundary\n            Base.current_project(),\n            ## 3. First entry in the load path\n            get(Base.load_path(), 1, nothing),\n            ## 4. Fallback to default global environment,\n            ##    this is more or less unreachable\n            Base.load_path_expand("@v#.#"),\n        ))\n    end\n    @info "Running language server" VERSION pwd() project_path depot_path\n    server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path)\n    server.runlinter = true\n    run(server)\n  ' }
 - filetypes: >lua
   { "julia" }
-- on_attach (use "gF" to view): ../lsp/julials.lua:119
+- on_attach (use "gF" to view): ../lsp/julials.lua:120
 - root_markers: >lua
   { "Project.toml", "JuliaProject.toml" }
 <
@@ -4414,7 +4516,7 @@ Default config:
   { "lean3" }
 - offset_encoding: >lua
   "utf-32"
-- root_dir (use "gF" to view): ../lsp/lean3ls.lua:17
+- root_dir (use "gF" to view): ../lsp/lean3ls.lua:18
 <
 
 ------------------------------------------------------------------------------
@@ -4546,7 +4648,7 @@ Default config:
   { "ltex-ls" }
 - filetypes: >lua
   { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc", "quarto", "rmd", "context", "html", "xhtml", "mail", "text" }
-- get_language_id (use "gF" to view): ../lsp/ltex.lua:74
+- get_language_id (use "gF" to view): ../lsp/ltex.lua:75
 - root_markers: >lua
   { ".git" }
 - settings: >lua
@@ -4587,7 +4689,7 @@ Default config:
   { "ltex-ls-plus" }
 - filetypes: >lua
   { "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "text", "typst", "xhtml" }
-- get_language_id (use "gF" to view): ../lsp/ltex_plus.lua:39
+- get_language_id (use "gF" to view): ../lsp/ltex_plus.lua:36
 - root_markers: >lua
   { ".git" }
 - settings: >lua
@@ -4791,7 +4893,7 @@ Default config:
   { "markdown-oxide" }
 - filetypes: >lua
   { "markdown" }
-- on_attach (use "gF" to view): ../lsp/markdown_oxide.lua:11
+- on_attach (use "gF" to view): ../lsp/markdown_oxide.lua:24
 - root_markers: >lua
   { ".git", ".obsidian", ".moxide.toml" }
 <
@@ -4850,6 +4952,15 @@ https://github.com/mathworks/MATLAB-language-server
 
 MATLAB® language server implements the Microsoft® Language Server Protocol for the MATLAB language.
 
+Make sure to set `MATLAB.installPath` to your MATLAB path, e.g. >lua
+  settings = {
+    MATLAB = {
+      ...
+      installPath = '/usr/local/MATLAB/R2023a',
+      ...
+    },
+  },
+
 Snippet to enable the language server: >lua
   vim.lsp.enable('matlab_ls')
 
@@ -4859,7 +4970,7 @@ Default config:
   { "matlab-language-server", "--stdio" }
 - filetypes: >lua
   { "matlab" }
-- root_dir (use "gF" to view): ../lsp/matlab_ls.lua:6
+- root_dir (use "gF" to view): ../lsp/matlab_ls.lua:19
 - settings: >lua
   {
     MATLAB = {
@@ -4883,7 +4994,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/mdx_analyzer.lua:8
+- before_init (use "gF" to view): ../lsp/mdx_analyzer.lua:9
 - cmd: >lua
   { "mdx-language-server", "--stdio" }
 - filetypes: >lua
@@ -4914,7 +5025,7 @@ Default config:
   { "mesonlsp", "--lsp" }
 - filetypes: >lua
   { "meson" }
-- root_dir (use "gF" to view): ../lsp/mesonlsp.lua:31
+- root_dir (use "gF" to view): ../lsp/mesonlsp.lua:32
 <
 
 ------------------------------------------------------------------------------
@@ -5186,7 +5297,7 @@ Default config:
   { "msbuild" }
 - init_options: >lua
   {}
-- root_dir (use "gF" to view): ../lsp/msbuild_project_tools_server.lua:38
+- root_dir (use "gF" to view): ../lsp/msbuild_project_tools_server.lua:39
 <
 
 ------------------------------------------------------------------------------
@@ -5203,7 +5314,7 @@ Default config:
   { "muon", "analyze", "lsp" }
 - filetypes: >lua
   { "meson" }
-- root_dir (use "gF" to view): ../lsp/muon.lua:4
+- root_dir (use "gF" to view): ../lsp/muon.lua:6
 <
 
 ------------------------------------------------------------------------------
@@ -5454,7 +5565,7 @@ Default config:
   { "nimlangserver" }
 - filetypes: >lua
   { "nim" }
-- root_dir (use "gF" to view): ../lsp/nim_langserver.lua:13
+- root_dir (use "gF" to view): ../lsp/nim_langserver.lua:14
 <
 
 ------------------------------------------------------------------------------
@@ -5475,7 +5586,7 @@ Default config:
   { "nimlsp" }
 - filetypes: >lua
   { "nim" }
-- root_dir (use "gF" to view): ../lsp/nimls.lua:13
+- root_dir (use "gF" to view): ../lsp/nimls.lua:14
 <
 
 ------------------------------------------------------------------------------
@@ -5498,7 +5609,7 @@ Default config:
 - filetypes: >lua
   { "nix" }
 - root_markers: >lua
-  { "flake.nix", "git" }
+  { "flake.nix", ".git" }
 <
 
 ------------------------------------------------------------------------------
@@ -5527,7 +5638,7 @@ Default config:
   { "nomad-lsp" }
 - filetypes: >lua
   { "hcl.nomad", "nomad" }
-- root_dir (use "gF" to view): ../lsp/nomad_lsp.lua:26
+- root_dir (use "gF" to view): ../lsp/nomad_lsp.lua:27
 <
 
 ------------------------------------------------------------------------------
@@ -5572,7 +5683,7 @@ Default config:
   { "nu", "--lsp" }
 - filetypes: >lua
   { "nu" }
-- root_dir (use "gF" to view): ../lsp/nushell.lua:6
+- root_dir (use "gF" to view): ../lsp/nushell.lua:8
 <
 
 ------------------------------------------------------------------------------
@@ -5615,7 +5726,7 @@ Default config:
   { "ocaml-language-server", "--stdio" }
 - filetypes: >lua
   { "ocaml", "reason" }
-- root_dir (use "gF" to view): ../lsp/ocamlls.lua:12
+- root_dir (use "gF" to view): ../lsp/ocamlls.lua:13
 <
 
 ------------------------------------------------------------------------------
@@ -5637,8 +5748,8 @@ Default config:
   { "ocamllsp" }
 - filetypes: >lua
   { "ocaml", "menhir", "ocamlinterface", "ocamllex", "reason", "dune" }
-- get_language_id (use "gF" to view): ../lsp/ocamllsp.lua:27
-- root_dir (use "gF" to view): ../lsp/ocamllsp.lua:27
+- get_language_id (use "gF" to view): ../lsp/ocamllsp.lua:28
+- root_dir (use "gF" to view): ../lsp/ocamllsp.lua:28
 <
 
 ------------------------------------------------------------------------------
@@ -5657,7 +5768,7 @@ Default config:
   { "ols" }
 - filetypes: >lua
   { "odin" }
-- root_dir (use "gF" to view): ../lsp/ols.lua:9
+- root_dir (use "gF" to view): ../lsp/ols.lua:10
 <
 
 ------------------------------------------------------------------------------
@@ -5692,7 +5803,7 @@ Default config:
   { "cs", "vb" }
 - init_options: >lua
   {}
-- root_dir (use "gF" to view): ../lsp/omnisharp.lua:19
+- root_dir (use "gF" to view): ../lsp/omnisharp.lua:20
 - settings: >lua
   {
     FormattingOptions = {
@@ -5802,7 +5913,7 @@ Default config:
   { "oxc_language_server" }
 - filetypes: >lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
-- root_dir (use "gF" to view): ../lsp/oxlint.lua:14
+- root_dir (use "gF" to view): ../lsp/oxlint.lua:15
 - `workspace_required` : `true`
 <
 
@@ -5851,7 +5962,7 @@ Default config:
   { "pasls" }
 - filetypes: >lua
   { "pascal" }
-- root_dir (use "gF" to view): ../lsp/pasls.lua:20
+- root_dir (use "gF" to view): ../lsp/pasls.lua:21
 <
 
 ------------------------------------------------------------------------------
@@ -6012,7 +6123,7 @@ Default config:
   { "phan", "-m", "json", "--no-color", "--no-progress-bar", "-x", "-u", "-S", "--language-server-on-stdin", "--allow-polyfill-parser" }
 - filetypes: >lua
   { "php" }
-- root_dir (use "gF" to view): ../lsp/phan.lua:20
+- root_dir (use "gF" to view): ../lsp/phan.lua:21
 <
 
 ------------------------------------------------------------------------------
@@ -6052,7 +6163,7 @@ Default config:
   { "pico8-ls", "--stdio" }
 - filetypes: >lua
   { "p8" }
-- root_dir (use "gF" to view): ../lsp/pico8_ls.lua:9
+- root_dir (use "gF" to view): ../lsp/pico8_ls.lua:10
 - settings: >lua
   {}
 <
@@ -6177,7 +6288,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd (use "gF" to view): ../lsp/powershell_es.lua:39
+- cmd (use "gF" to view): ../lsp/powershell_es.lua:40
 - filetypes: >lua
   { "ps1" }
 - root_markers: >lua
@@ -6495,7 +6606,7 @@ Default config:
   { "pyrefly", "lsp" }
 - filetypes: >lua
   { "python" }
-- on_exit (use "gF" to view): ../lsp/pyrefly.lua:10
+- on_exit (use "gF" to view): ../lsp/pyrefly.lua:11
 - root_markers: >lua
   { "pyrefly.toml", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
 <
@@ -6516,7 +6627,7 @@ Default config:
   { "pyright-langserver", "--stdio" }
 - filetypes: >lua
   { "python" }
-- on_attach (use "gF" to view): ../lsp/pyright.lua:22
+- on_attach (use "gF" to view): ../lsp/pyright.lua:23
 - root_markers: >lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
 - settings: >lua
@@ -6595,7 +6706,7 @@ Default config:
   { "R", "--no-echo", "-e", "languageserver::run()" }
 - filetypes: >lua
   { "r", "rmd", "quarto" }
-- root_dir (use "gF" to view): ../lsp/r_language_server.lua:12
+- root_dir (use "gF" to view): ../lsp/r_language_server.lua:14
 <
 
 ------------------------------------------------------------------------------
@@ -6693,7 +6804,7 @@ Default config:
   { "regal", "language-server" }
 - filetypes: >lua
   { "rego" }
-- root_dir (use "gF" to view): ../lsp/regal.lua:14
+- root_dir (use "gF" to view): ../lsp/regal.lua:15
 <
 
 ------------------------------------------------------------------------------
@@ -6715,7 +6826,7 @@ Default config:
   { "regols" }
 - filetypes: >lua
   { "rego" }
-- root_dir (use "gF" to view): ../lsp/regols.lua:14
+- root_dir (use "gF" to view): ../lsp/regols.lua:15
 <
 
 ------------------------------------------------------------------------------
@@ -6884,7 +6995,7 @@ Default config:
   { "nix" }
 - init_options: >lua
   {}
-- root_dir (use "gF" to view): ../lsp/rnix.lua:10
+- root_dir (use "gF" to view): ../lsp/rnix.lua:12
 - settings: >lua
   {}
 <
@@ -6905,7 +7016,7 @@ Default config:
   { "robotcode", "language-server" }
 - filetypes: >lua
   { "robot", "resource" }
-- get_language_id (use "gF" to view): ../lsp/robotcode.lua:6
+- get_language_id (use "gF" to view): ../lsp/robotcode.lua:8
 - root_markers: >lua
   { "robot.toml", "pyproject.toml", "Pipfile", ".git" }
 <
@@ -7259,7 +7370,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/rust_analyzer.lua:54
+- before_init (use "gF" to view): ../lsp/rust_analyzer.lua:56
 - capabilities: >lua
   {
     experimental = {
@@ -7270,8 +7381,8 @@ Default config:
   { "rust-analyzer" }
 - filetypes: >lua
   { "rust" }
-- on_attach (use "gF" to view): ../lsp/rust_analyzer.lua:54
-- root_dir (use "gF" to view): ../lsp/rust_analyzer.lua:54
+- on_attach (use "gF" to view): ../lsp/rust_analyzer.lua:56
+- root_dir (use "gF" to view): ../lsp/rust_analyzer.lua:56
 <
 
 ------------------------------------------------------------------------------
@@ -7518,7 +7629,7 @@ Default config:
   { "smarty" }
 - init_options: >lua
   {}
-- root_dir (use "gF" to view): ../lsp/smarty_ls.lua:13
+- root_dir (use "gF" to view): ../lsp/smarty_ls.lua:14
 - settings: >lua
   {
     css = {
@@ -7699,7 +7810,7 @@ Default config:
   { "solc", "--lsp" }
 - filetypes: >lua
   { "solidity" }
-- root_dir (use "gF" to view): ../lsp/solc.lua:9
+- root_dir (use "gF" to view): ../lsp/solc.lua:10
 <
 
 ------------------------------------------------------------------------------
@@ -7893,8 +8004,8 @@ Default config:
   { "sourcekit-lsp" }
 - filetypes: >lua
   { "swift", "objc", "objcpp", "c", "cpp" }
-- get_language_id (use "gF" to view): ../lsp/sourcekit.lua:9
-- root_dir (use "gF" to view): ../lsp/sourcekit.lua:9
+- get_language_id (use "gF" to view): ../lsp/sourcekit.lua:10
+- root_dir (use "gF" to view): ../lsp/sourcekit.lua:10
 <
 
 ------------------------------------------------------------------------------
@@ -8259,8 +8370,8 @@ Default config:
   { "svelteserver", "--stdio" }
 - filetypes: >lua
   { "svelte" }
-- on_attach (use "gF" to view): ../lsp/svelte.lua:12
-- root_dir (use "gF" to view): ../lsp/svelte.lua:12
+- on_attach (use "gF" to view): ../lsp/svelte.lua:13
+- root_dir (use "gF" to view): ../lsp/svelte.lua:13
 <
 
 ------------------------------------------------------------------------------
@@ -8283,7 +8394,7 @@ Default config:
   { "svlangserver" }
 - filetypes: >lua
   { "verilog", "systemverilog" }
-- on_attach (use "gF" to view): ../lsp/svlangserver.lua:28
+- on_attach (use "gF" to view): ../lsp/svlangserver.lua:14
 - root_markers: >lua
   { ".svlangserver", ".git" }
 - settings: >lua
@@ -8427,12 +8538,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/tailwindcss.lua:9
+- before_init (use "gF" to view): ../lsp/tailwindcss.lua:10
 - cmd: >lua
   { "tailwindcss-language-server", "--stdio" }
 - filetypes: >lua
   { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
-- root_dir (use "gF" to view): ../lsp/tailwindcss.lua:9
+- root_dir (use "gF" to view): ../lsp/tailwindcss.lua:10
 - settings: >lua
   {
     tailwindCSS = {
@@ -8672,6 +8783,12 @@ A completion engine built from scratch for (La)TeX.
 
 See https://github.com/latex-lsp/texlab/wiki/Configuration for configuration options.
 
+There are some non standard commands supported, namely:
+`LspTexlabBuild`, `LspTexlabForward`, `LspTexlabCancelBuild`,
+`LspTexlabDependencyGraph`, `LspTexlabCleanArtifacts`,
+`LspTexlabCleanAuxiliary`, `LspTexlabFindEnvironments`,
+and `LspTexlabChangeEnvironment`.
+
 Snippet to enable the language server: >lua
   vim.lsp.enable('texlab')
 
@@ -8681,7 +8798,7 @@ Default config:
   { "texlab" }
 - filetypes: >lua
   { "tex", "plaintex", "bib" }
-- on_attach (use "gF" to view): ../lsp/texlab.lua:164
+- on_attach (use "gF" to view): ../lsp/texlab.lua:136
 - root_markers: >lua
   { ".git", ".latexmkrc", "latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" }
 - settings: >lua
@@ -8876,7 +8993,7 @@ Default config:
   { "tinymist" }
 - filetypes: >lua
   { "typst" }
-- on_attach (use "gF" to view): ../lsp/tinymist.lua:52
+- on_attach (use "gF" to view): ../lsp/tinymist.lua:49
 - root_markers: >lua
   { ".git" }
 <
@@ -8951,6 +9068,13 @@ Use the `:LspTypescriptSourceAction` command to see "whole file" ("source") code
 - organize imports
 - remove unused code
 
+### Monorepo support
+
+`ts_ls` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
+This works without the need of spawning multiple instances of `ts_ls`, saving memory.
+
+It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
+
 Snippet to enable the language server: >lua
   vim.lsp.enable('ts_ls')
 
@@ -8975,9 +9099,8 @@ Default config:
   {
     hostInfo = "neovim"
   }
-- on_attach (use "gF" to view): ../lsp/ts_ls.lua:36
-- root_markers: >lua
-  { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
+- on_attach (use "gF" to view): ../lsp/ts_ls.lua:45
+- root_dir (use "gF" to view): ../lsp/ts_ls.lua:45
 <
 
 ------------------------------------------------------------------------------
@@ -9026,6 +9149,34 @@ Default config:
       php_only = "php"
     }
   }
+<
+
+------------------------------------------------------------------------------
+tsgo
+
+https://github.com/microsoft/typescript-go
+
+`typescript-go` is experimental port of the TypeScript compiler (tsc) and language server (tsserver) to the Go programming language.
+
+`tsgo` can be installed via npm `npm install @typescript/native-preview`.
+
+### Monorepo support
+
+`tsgo` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
+This works without the need of spawning multiple instances of `tsgo`, saving memory.
+
+It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('tsgo')
+
+
+Default config:
+- cmd: >lua
+  { "tsgo", "--lsp", "--stdio" }
+- filetypes: >lua
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+- root_dir (use "gF" to view): ../lsp/tsgo.lua:18
 <
 
 ------------------------------------------------------------------------------
@@ -9316,7 +9467,7 @@ Default config:
   { "nc", "localhost", "5757" }
 - filetypes: >lua
   { "unison" }
-- root_dir (use "gF" to view): ../lsp/unison.lua:7
+- root_dir (use "gF" to view): ../lsp/unison.lua:8
 - settings: >lua
   {}
 <
@@ -9437,7 +9588,7 @@ Default config:
   { "vala-language-server" }
 - filetypes: >lua
   { "vala", "genie" }
-- root_dir (use "gF" to view): ../lsp/vala_ls.lua:26
+- root_dir (use "gF" to view): ../lsp/vala_ls.lua:27
 <
 
 ------------------------------------------------------------------------------
@@ -9474,7 +9625,7 @@ Snippet to enable the language server: >lua
 Default config:
 - cmd: >lua
   { "vectorcode-server" }
-- root_dir (use "gF" to view): ../lsp/vectorcode_server.lua:5
+- root_dir (use "gF" to view): ../lsp/vectorcode_server.lua:7
 - settings: >lua
   {}
 <
@@ -9756,7 +9907,7 @@ Default config:
   { "vue" }
 - name: >lua
   "vue_ls"
-- on_init (use "gF" to view): ../lsp/volar.lua:8
+- on_init (use "gF" to view): ../lsp/volar.lua:9
 - root_markers: >lua
   { "package.json" }
 <
@@ -9834,6 +9985,13 @@ You must make sure the Vue language server is setup. For example,
 
 See `vue_ls` section and https://github.com/vuejs/language-tools/wiki/Neovim for more information.
 
+### Monorepo support
+
+`vtsls` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
+This works without the need of spawning multiple instances of `vtsls`, saving memory.
+
+It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
+
 Snippet to enable the language server: >lua
   vim.lsp.enable('vtsls')
 
@@ -9843,8 +10001,7 @@ Default config:
   { "vtsls", "--stdio" }
 - filetypes: >lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
-- root_markers: >lua
-  { "tsconfig.json", "package.json", "jsconfig.json", ".git" }
+- root_dir (use "gF" to view): ../lsp/vtsls.lua:69
 <
 
 ------------------------------------------------------------------------------
@@ -9875,7 +10032,7 @@ Default config:
   { "vue-language-server", "--stdio" }
 - filetypes: >lua
   { "vue" }
-- on_init (use "gF" to view): ../lsp/vue_ls.lua:21
+- on_init (use "gF" to view): ../lsp/vue_ls.lua:22
 - root_markers: >lua
   { "package.json" }
 <
@@ -9985,6 +10142,7 @@ Default config:
   { "yaml-language-server", "--stdio" }
 - filetypes: >lua
   { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" }
+- on_init (use "gF" to view): ../lsp/yamlls.lua:63
 - root_markers: >lua
   { ".git" }
 - settings: >lua
@@ -9992,6 +10150,11 @@ Default config:
     redhat = {
       telemetry = {
         enabled = false
+      }
+    },
+    yaml = {
+      format = {
+        enable = true
       }
     }
   }
@@ -10097,7 +10260,7 @@ Default config:
   { "zk", "lsp" }
 - filetypes: >lua
   { "markdown" }
-- on_attach (use "gF" to view): ../lsp/zk.lua:15
+- on_attach (use "gF" to view): ../lsp/zk.lua:16
 - root_markers: >lua
   { ".zk" }
 <

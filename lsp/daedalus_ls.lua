@@ -2,6 +2,7 @@
 ---
 --- DaedalusLanguageServer
 
+---@type vim.lsp.Config
 return {
   cmd = { 'DaedalusLanguageServer' },
   filetypes = { 'd' },

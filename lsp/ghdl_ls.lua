@@ -6,6 +6,8 @@
 ---
 --- `ghdl-ls` is part of pyghdl, for installation instructions see
 --- [the upstream README](https://github.com/ghdl/ghdl/tree/master/pyGHDL/lsp).
+
+---@type vim.lsp.Config
 return {
   cmd = { 'ghdl-ls' },
   filetypes = { 'vhdl' },

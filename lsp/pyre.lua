@@ -8,6 +8,8 @@
 --- which are triggered on save.
 ---
 --- Do not report issues for missing features in `pyre` to `lspconfig`.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'pyre', 'persistent' },
   filetypes = { 'python' },

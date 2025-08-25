@@ -7,6 +7,8 @@
 --- ```sh
 --- npm i ungrammar-languageserver -g
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'ungrammar-languageserver', '--stdio' },
   filetypes = { 'ungrammar' },

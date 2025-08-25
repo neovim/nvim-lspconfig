@@ -4,6 +4,8 @@
 ---
 --- `sqruff` can be installed by following the instructions [here](https://github.com/quarylabs/sqruff?tab=readme-ov-file#installation)
 ---
+
+---@type vim.lsp.Config
 return {
   cmd = { 'sqruff', 'lsp' },
   filetypes = { 'sql' },

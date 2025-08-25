@@ -3,6 +3,8 @@
 --- https://github.com/clojure-lsp/clojure-lsp
 ---
 --- Clojure Language Server
+
+---@type vim.lsp.Config
 return {
   cmd = { 'clojure-lsp' },
   filetypes = { 'clojure', 'edn' },

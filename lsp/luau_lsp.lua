@@ -11,6 +11,8 @@
 --- ```vim
 --- autocmd BufRead,BufNewFile *.luau setf luau
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'luau-lsp', 'lsp' },
   filetypes = { 'luau' },

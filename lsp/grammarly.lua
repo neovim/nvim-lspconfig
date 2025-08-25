@@ -9,6 +9,8 @@
 --- ```
 ---
 --- WARNING: Since this language server uses Grammarly's API, any document you open with it running is shared with them. Please evaluate their [privacy policy](https://www.grammarly.com/privacy-policy) before using this.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'grammarly-languageserver', '--stdio' },
   filetypes = { 'markdown' },

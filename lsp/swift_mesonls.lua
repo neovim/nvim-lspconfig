@@ -3,6 +3,8 @@
 --- https://github.com/JCWasmx86/Swift-MesonLSP
 ---
 --- Meson language server written in Swift
+
+---@type vim.lsp.Config
 return {
   cmd = { 'Swift-MesonLSP', '--lsp' },
   filetypes = { 'meson' },

@@ -55,6 +55,8 @@
 --- vim.treesitter.language.register('hcl', 'atlas-rule')
 --- ```
 ---
+
+---@type vim.lsp.Config
 return {
   cmd = { 'atlas', 'tool', 'lsp', '--stdio' },
   filetypes = {

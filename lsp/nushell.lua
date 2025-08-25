@@ -3,6 +3,8 @@
 --- https://github.com/nushell/nushell
 ---
 --- Nushell built-in language server.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'nu', '--lsp' },
   filetypes = { 'nu' },

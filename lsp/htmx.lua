@@ -8,6 +8,8 @@
 --- ```
 ---
 --- Lsp is still very much work in progress and experimental. Use at your own risk.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'htmx-lsp' },
   filetypes = { -- filetypes copied and adjusted from tailwindcss-intellisense

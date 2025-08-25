@@ -8,6 +8,8 @@
 ---
 --- * Initialization: https://github.com/muffinmad/anakin-language-server#initialization-option
 --- * Configuration: https://github.com/muffinmad/anakin-language-server#configuration-options
+
+---@type vim.lsp.Config
 return {
   cmd = { 'anakinls' },
   filetypes = { 'python' },

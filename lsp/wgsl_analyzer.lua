@@ -6,6 +6,8 @@
 --- ```sh
 --- cargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer wgsl-analyzer
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'wgsl-analyzer' },
   filetypes = { 'wgsl' },

@@ -11,12 +11,13 @@ local util = require 'lspconfig.util'
 
 local cache_dir = vim.uv.os_homedir() .. '/.cache/gitlab-ci-ls/'
 
+---@type vim.lsp.Config
 return {
   cmd = { 'gitlab-ci-ls' },
   filetypes = { 'yaml.gitlab' },
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern('.gitlab*', '.git')(fname))
+    on_dir(util.root_pattern('.git', '.gitlab*')(fname))
   end,
   init_options = {
     cache_path = cache_dir,

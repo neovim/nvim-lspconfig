@@ -7,6 +7,8 @@
 --- Install `ginko_ls` from https://github.com/Schottkyc137/ginko and add it to path
 ---
 --- `ginko_ls` doesn't require any configuration.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'ginko_ls' },
   filetypes = { 'dts' },

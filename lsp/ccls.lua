@@ -37,6 +37,7 @@ local function switch_source_header(client, bufnr)
   end, bufnr)
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'ccls' },
   filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },

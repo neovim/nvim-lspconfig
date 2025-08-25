@@ -5,6 +5,8 @@
 --- https://github.com/facebook/hhvm
 --- See below for how to setup HHVM & typechecker:
 --- https://docs.hhvm.com/hhvm/getting-started/getting-started
+
+---@type vim.lsp.Config
 return {
   cmd = { 'hh_client', 'lsp' },
   filetypes = { 'php', 'hack' },

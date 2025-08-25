@@ -8,6 +8,8 @@
 ---  ```sh
 ---  cargo install svls
 ---  ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'svls' },
   filetypes = { 'verilog', 'systemverilog' },

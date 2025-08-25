@@ -2,6 +2,8 @@
 ---
 --- [cspell language server](https://github.com/vlabo/cspell-lsp)
 ---
+
+---@type vim.lsp.Config
 return {
   cmd = { 'cspell-lsp', '--stdio' },
   root_markers = {

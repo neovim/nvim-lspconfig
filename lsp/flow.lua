@@ -11,6 +11,8 @@
 --- ```sh
 --- npx flow lsp --help
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'npx', '--no-install', 'flow', 'lsp' },
   filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx' },

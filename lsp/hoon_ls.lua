@@ -8,6 +8,8 @@
 ---
 --- Start a fake ~zod with `urbit -F zod`.
 --- Start the language server at the Urbit Dojo prompt with: `|start %language-server`
+
+---@type vim.lsp.Config
 return {
   cmd = { 'hoon-language-server' },
   filetypes = { 'hoon' },

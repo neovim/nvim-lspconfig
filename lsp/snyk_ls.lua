@@ -3,6 +3,8 @@
 --- https://github.com/snyk/snyk-ls
 ---
 --- LSP for Snyk Open Source, Snyk Infrastructure as Code, and Snyk Code.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'snyk-ls' },
   root_markers = { '.git', '.snyk' },

@@ -6,6 +6,8 @@
 ---
 --- Language server for the blueprint markup language, written in python and part
 --- of the blueprint-compiler.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'blueprint-compiler', 'lsp' },
   cmd_env = {

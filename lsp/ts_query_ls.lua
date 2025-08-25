@@ -25,6 +25,8 @@
 ---     },
 --- })
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'ts_query_ls' },
   filetypes = { 'query' },

@@ -6,6 +6,8 @@
 --- ```sh
 --- npm install -g emmet-ls
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'emmet-ls', '--stdio' },
   filetypes = {

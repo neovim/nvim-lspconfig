@@ -4,6 +4,7 @@
 ---
 --- Language Server Protocol implementation for 1C (BSL) - 1C:Enterprise 8 and OneScript languages.
 
+---@type vim.lsp.Config
 return {
   filetypes = { 'bsl', 'os' },
   root_markers = { '.git' },

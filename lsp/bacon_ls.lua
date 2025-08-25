@@ -37,6 +37,8 @@
 ---     synchronizeAllOpenFilesWaitMillis = 2000,
 --- }
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'bacon-ls' },
   filetypes = { 'rust' },

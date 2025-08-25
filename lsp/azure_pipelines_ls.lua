@@ -29,6 +29,8 @@
 --- })
 --- ```
 --- The Azure Pipelines LSP is a fork of `yaml-language-server` and as such the same settings can be passed to it as `yaml-language-server`.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'azure-pipelines-language-server', '--stdio' },
   filetypes = { 'yaml' },

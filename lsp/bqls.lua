@@ -7,6 +7,8 @@
 --- ```sh
 --- $ go install github.com/kitagry/bqls@latest
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'bqls' },
   filetypes = { 'sql' },

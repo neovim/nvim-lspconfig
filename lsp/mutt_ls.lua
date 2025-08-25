@@ -7,6 +7,8 @@
 --- ```sh
 --- pip install mutt-language-server
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'mutt-language-server' },
   filetypes = { 'muttrc', 'neomuttrc' },

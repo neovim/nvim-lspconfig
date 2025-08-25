@@ -4,6 +4,8 @@
 ---
 --- Language server for the KCL configuration and policy language.
 ---
+
+---@type vim.lsp.Config
 return {
   cmd = { 'kcl-language-server' },
   filetypes = { 'kcl' },

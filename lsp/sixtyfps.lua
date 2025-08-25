@@ -17,6 +17,8 @@
 --- ```
 ---
 --- or by installing a filetype plugin such as https://github.com/RustemB/sixtyfps-vim
+
+---@type vim.lsp.Config
 return {
   cmd = { 'sixtyfps-lsp' },
   filetypes = { 'sixtyfps' },

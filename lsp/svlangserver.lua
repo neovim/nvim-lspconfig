@@ -10,21 +10,7 @@
 --- $ npm install -g @imc-trading/svlangserver
 --- ```
 
-local function build_index()
-  local params = {
-    command = 'systemverilog.build_index',
-  }
-  vim.lsp.buf.execute_command(params)
-end
-
-local function report_hierarchy()
-  local params = {
-    command = 'systemverilog.report_hierarchy',
-    arguments = { vim.fn.expand '<cword>' },
-  }
-  vim.lsp.buf.execute_command(params)
-end
-
+---@type vim.lsp.Config
 return {
   cmd = { 'svlangserver' },
   filetypes = { 'verilog', 'systemverilog' },
@@ -34,11 +20,22 @@ return {
       includeIndexing = { '*.{v,vh,sv,svh}', '**/*.{v,vh,sv,svh}' },
     },
   },
-  on_attach = function(_, bufnr)
-    vim.api.nvim_buf_create_user_command(bufnr, 'LspSvlangserverBuildIndex', build_index, {
+  on_attach = function(client, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspSvlangserverBuildIndex', function()
+      client:exec_cmd({
+        title = 'Build Index',
+        command = 'systemverilog.build_index',
+      }, { bufnr = bufnr })
+    end, {
       desc = 'Instructs language server to rerun indexing',
     })
-    vim.api.nvim_buf_create_user_command(bufnr, 'LspSvlangserverReportHierarchy', report_hierarchy, {
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspSvlangserverReportHierarchy', function()
+      client:exec_cmd({
+        title = 'Build Index',
+        command = 'systemverilog.build_index',
+        arguments = { vim.fn.expand '<cword>' },
+      }, { bufnr = bufnr })
+    end, {
       desc = 'Generates hierarchy for the given module',
     })
   end,

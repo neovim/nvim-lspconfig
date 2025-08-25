@@ -8,6 +8,8 @@
 --- ```
 --- futhark lsp
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'futhark', 'lsp' },
   filetypes = { 'futhark', 'fut' },

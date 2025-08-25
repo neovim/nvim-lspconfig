@@ -17,6 +17,7 @@ local cmd = {
   '--allow-polyfill-parser',
 }
 
+---@type vim.lsp.Config
 return {
   cmd = cmd,
   filetypes = { 'php' },

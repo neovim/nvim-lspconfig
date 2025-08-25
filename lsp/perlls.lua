@@ -5,6 +5,8 @@
 --- `Perl-LanguageServer`, a language server for Perl.
 ---
 --- To use the language server, ensure that you have Perl::LanguageServer installed and perl command is on your path.
+
+---@type vim.lsp.Config
 return {
   cmd = {
     'perl',

@@ -11,6 +11,7 @@ if vim.fn.has 'win32' == 1 then
   bin_name = bin_name .. '.bat'
 end
 
+---@type vim.lsp.Config
 return {
   filetypes = { 'groovy' },
   root_markers = {

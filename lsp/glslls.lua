@@ -6,6 +6,8 @@
 ---
 --- `glslls` can be compiled and installed manually, or, if your distribution has access to the AUR,
 --- via the `glsl-language-server` AUR package
+
+---@type vim.lsp.Config
 return {
   cmd = { 'glslls', '--stdin' },
   filetypes = { 'glsl', 'vert', 'tesc', 'tese', 'frag', 'geom', 'comp' },

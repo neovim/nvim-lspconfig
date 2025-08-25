@@ -7,6 +7,8 @@
 --- To install manually, run `cargo install rnix-lsp`. If you are using nix, rnix-lsp is in nixpkgs.
 ---
 --- This server accepts configuration via the `settings` key.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'rnix-lsp' },
   filetypes = { 'nix' },

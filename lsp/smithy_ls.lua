@@ -19,6 +19,7 @@
 ---    coursier launch software.amazon.smithy:smithy-language-server:0.7.0
 ---    ```
 
+---@type vim.lsp.Config
 return {
   -- pass 0 as the first argument to use STDIN/STDOUT for communication
   cmd = {

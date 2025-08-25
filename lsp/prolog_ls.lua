@@ -3,6 +3,8 @@
 --- https://github.com/jamesnvc/lsp_server
 ---
 --- Language Server Protocol server for SWI-Prolog
+
+---@type vim.lsp.Config
 return {
   cmd = {
     'swipl',

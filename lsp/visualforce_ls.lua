@@ -17,6 +17,8 @@
 ---   }
 --- })
 --- ```
+
+---@type vim.lsp.Config
 return {
   filetypes = { 'visualforce' },
   root_markers = { 'sfdx-project.json' },

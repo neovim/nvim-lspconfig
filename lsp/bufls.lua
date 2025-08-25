@@ -8,6 +8,8 @@
 --- ```
 ---
 --- bufls is a Protobuf language server compatible with Buf modules and workspaces
+
+---@type vim.lsp.Config
 return {
   cmd = { 'bufls', 'serve' },
   filetypes = { 'proto' },

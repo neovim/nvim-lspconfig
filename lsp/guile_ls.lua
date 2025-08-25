@@ -10,6 +10,8 @@
 --- Checkout the repo for more info.
 ---
 --- Note: This LSP will start on `scheme.guile` filetype. You can set this file type using `:help modeline` or adding https://gitlab.com/HiPhish/guile.vim to your plugins to automatically set it.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'guile-lsp-server' },
   filetypes = {

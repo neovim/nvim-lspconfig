@@ -25,6 +25,8 @@
 --- ```
 ---
 --- Note: This is a community fork of `pyls`.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'pylsp' },
   filetypes = { 'python' },

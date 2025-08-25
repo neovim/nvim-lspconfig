@@ -18,6 +18,8 @@
 --- ```
 ---
 --- or by installing a filetype plugin such as https://github.com/sirtaj/vim-openscad
+
+---@type vim.lsp.Config
 return {
   cmd = { 'openscad-language-server' },
   filetypes = { 'openscad' },

@@ -7,6 +7,8 @@
 --- ```sh
 --- npm i -g @sap/cds-lsp
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'cds-lsp', '--stdio' },
   filetypes = { 'cds' },

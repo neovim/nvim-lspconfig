@@ -11,6 +11,8 @@
 --- Note: that if you're using [nvim-metals](https://github.com/scalameta/nvim-metals), that plugin fully handles the setup and installation of Metals, and you shouldn't set up Metals both with it and `lspconfig`.
 ---
 --- To install Metals, make sure to have [coursier](https://get-coursier.io/docs/cli-installation) installed, and once you do you can install the latest Metals with `cs install metals`.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'metals' },
   filetypes = { 'scala' },

@@ -31,6 +31,7 @@
 
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   cmd = { 'idris2-lsp' },
   filetypes = { 'idris2' },

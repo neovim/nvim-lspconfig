@@ -10,6 +10,8 @@
 --- ```sh
 --- npm install -g @cucumber/language-server
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'cucumber-language-server', '--stdio' },
   filetypes = { 'cucumber' },

@@ -23,6 +23,7 @@ if vim.fn.has 'win32' == 1 then
   bin_name = bin_name .. '.exe'
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { bin_name },
   filetypes = { 'hcl.nomad', 'nomad' },

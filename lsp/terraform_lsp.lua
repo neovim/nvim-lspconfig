@@ -27,6 +27,8 @@
 ---   - compatibility with a single particular Terraform (0.12.20 at time of writing)
 ---     - configs designed for other 0.12 versions may work, but interpretation may be inaccurate
 ---   - less stability (due to reliance on Terraform's own internal packages)
+
+---@type vim.lsp.Config
 return {
   cmd = { 'terraform-lsp' },
   filetypes = { 'terraform', 'hcl' },

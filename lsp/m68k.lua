@@ -15,6 +15,8 @@
 --- ```lua
 --- vim.g.asmsyntax = 'asm68k'
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'm68k-lsp-server', '--stdio' },
   filetypes = { 'asm68k' },

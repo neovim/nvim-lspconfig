@@ -4,6 +4,8 @@
 --- The Language Server for the buddy-mlir, a drop-in replacement for mlir-lsp-server,
 --- supporting new dialects defined in buddy-mlir.
 --- `buddy-lsp-server` can be installed at the buddy-mlir repository (buddy-compiler/buddy-mlir)
+
+---@type vim.lsp.Config
 return {
   cmd = { 'buddy-lsp-server' },
   filetypes = { 'mlir' },

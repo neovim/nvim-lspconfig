@@ -26,6 +26,8 @@
 ---   'tb_ent.vhd'
 --- ]
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'vhdl_ls' },
   filetypes = { 'vhd', 'vhdl' },

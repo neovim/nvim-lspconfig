@@ -7,6 +7,8 @@
 --- ```sh
 --- npm install -g basics-language-server
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'basics-language-server' },
   settings = {

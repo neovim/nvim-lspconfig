@@ -18,18 +18,37 @@
 ---
 --- NOTE: Since v3.0.0, the Vue Language Server [no longer supports takeover mode](https://github.com/vuejs/language-tools/pull/5248).
 
+---@type vim.lsp.Config
 return {
   cmd = { 'vue-language-server', '--stdio' },
   filetypes = { 'vue' },
   root_markers = { 'package.json' },
   on_init = function(client)
-    client.handlers['tsserver/request'] = function(_, result, context)
-      local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })
-      if #clients == 0 then
-        vim.notify('Could not find `vtsls` lsp client, required by `vue_ls`.', vim.log.levels.ERROR)
+    local retries = 0
+
+    ---@param _ lsp.ResponseError
+    ---@param result any
+    ---@param context lsp.HandlerContext
+    local function typescriptHandler(_, result, context)
+      local ts_client = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'ts_ls' })[1]
+        or vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })[1]
+        or vim.lsp.get_clients({ bufnr = context.bufnr, name = 'typescript-tools' })[1]
+
+      if not ts_client then
+        -- there can sometimes be a short delay until `ts_ls`/`vtsls` are attached so we retry for a few times until it is ready
+        if retries <= 10 then
+          retries = retries + 1
+          vim.defer_fn(function()
+            typescriptHandler(_, result, context)
+          end, 100)
+        else
+          vim.notify(
+            'Could not find `ts_ls`, `vtsls`, or `typescript-tools` lsp client required by `vue_ls`.',
+            vim.log.levels.ERROR
+          )
+        end
         return
       end
-      local ts_client = clients[1]
 
       local param = unpack(result)
       local id, command, payload = unpack(param)
@@ -41,10 +60,12 @@ return {
           payload,
         },
       }, { bufnr = context.bufnr }, function(_, r)
-        local response_data = { { id, r.body } }
+        local response_data = { { id, r and r.body } }
         ---@diagnostic disable-next-line: param-type-mismatch
         client:notify('tsserver/response', response_data)
       end)
     end
+
+    client.handlers['tsserver/request'] = typescriptHandler
   end,
 }

@@ -8,6 +8,8 @@
 --- scope aware symbol analysis, per-token hover generation, and many others.
 ---
 --- [homepage](https://www.fish-lsp.dev/)
+
+---@type vim.lsp.Config
 return {
   cmd = { 'fish-lsp', 'start' },
   filetypes = { 'fish' },

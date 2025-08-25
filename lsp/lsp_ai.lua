@@ -9,6 +9,8 @@
 --- You will need to provide configuration for the inference backends and models you want to use, as well as configure
 --- completion/code actions. See the [wiki docs](https://github.com/SilasMarvin/lsp-ai/wiki/Configuration) and
 --- [examples](https://github.com/SilasMarvin/lsp-ai/blob/main/examples/nvim) for more information.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'lsp-ai' },
   filetypes = {},

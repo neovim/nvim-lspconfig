@@ -8,6 +8,8 @@
 --- ```sh
 --- npm i -g nxls
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'nxls', '--stdio' },
   filetypes = { 'json', 'jsonc' },

@@ -9,6 +9,8 @@
 --- ```
 ---
 --- A language server for the Solidity programming language, built by the Nomic Foundation for the Ethereum community.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
   filetypes = { 'solidity' },

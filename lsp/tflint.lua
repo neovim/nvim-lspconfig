@@ -4,6 +4,8 @@
 ---
 --- A pluggable Terraform linter that can act as lsp server.
 --- Installation instructions can be found in https://github.com/terraform-linters/tflint#installation.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'tflint', '--langserver' },
   filetypes = { 'terraform' },

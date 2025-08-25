@@ -12,6 +12,8 @@
 --- Installation requirements:
 ---     - [Erlang OTP 21+](https://github.com/erlang/otp)
 ---     - [rebar3 3.9.1+](https://github.com/erlang/rebar3)
+
+---@type vim.lsp.Config
 return {
   cmd = { 'erlang_ls' },
   filetypes = { 'erlang' },

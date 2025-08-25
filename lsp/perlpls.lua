@@ -6,6 +6,8 @@
 --- `PLS`, another language server for Perl.
 ---
 --- To use the language server, ensure that you have PLS installed and that it is in your path
+
+---@type vim.lsp.Config
 return {
   cmd = { 'pls' },
   settings = {

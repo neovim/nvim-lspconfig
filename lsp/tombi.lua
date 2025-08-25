@@ -4,6 +4,8 @@
 ---
 --- Language server for Tombi, a TOML toolkit.
 ---
+
+---@type vim.lsp.Config
 return {
   cmd = { 'tombi', 'lsp' },
   filetypes = { 'toml' },

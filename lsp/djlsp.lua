@@ -4,6 +4,7 @@
 ---
 --- `djlsp`, a language server for Django templates.
 
+---@type vim.lsp.Config
 return {
   cmd = { 'djlsp' },
   filetypes = { 'html', 'htmldjango' },

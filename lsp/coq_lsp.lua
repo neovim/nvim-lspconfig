@@ -1,6 +1,8 @@
 ---@brief
 ---
 --- https://github.com/ejgallego/coq-lsp/
+
+---@type vim.lsp.Config
 return {
   cmd = { 'coq-lsp' },
   filetypes = { 'coq' },

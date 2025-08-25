@@ -10,6 +10,7 @@
 
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   cmd = { 'csharp-ls' },
   root_dir = function(bufnr, on_dir)

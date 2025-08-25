@@ -13,6 +13,8 @@
 ---   },
 --- }
 --- ```
+
+---@type vim.lsp.Config
 return {
   name = 'jinja_lsp',
   cmd = { 'jinja-lsp' },

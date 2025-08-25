@@ -8,19 +8,24 @@
 ---
 --- The default `cmd` assumes that the `codebook-lsp` binary can be found in `$PATH`.
 ---
+
+---@type vim.lsp.Config
 return {
   cmd = { 'codebook-lsp', 'serve' },
   filetypes = {
     'c',
     'css',
+    'gitcommit',
     'go',
     'haskell',
     'html',
+    'java',
     'javascript',
     'javascriptreact',
+    'lua',
     'markdown',
-    'python',
     'php',
+    'python',
     'ruby',
     'rust',
     'toml',

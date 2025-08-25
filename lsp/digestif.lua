@@ -7,6 +7,8 @@
 --- context-sensitive completion, documentation, code navigation, and related functionality to any
 ---
 --- text editor that speaks the LSP protocol.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'digestif' },
   filetypes = { 'tex', 'plaintex', 'context' },

@@ -23,6 +23,8 @@
 ---     cmd = { "nelua", "-L", "/path/to/nelua-lsp/", "--script", "/path/to/nelua-lsp/nelua-lsp.lua" },
 --- })
 --- ```
+
+---@type vim.lsp.Config
 return {
   filetypes = { 'nelua' },
   root_markers = { 'Makefile', '.git', '*.nelua' },

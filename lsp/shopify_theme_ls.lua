@@ -7,6 +7,8 @@
 --- `shopify` can be installed via npm `npm install -g @shopify/cli`.
 ---
 --- Note: This LSP already includes Theme Check so you don't need to use the `theme_check` server configuration as well.
+
+---@type vim.lsp.Config
 return {
   cmd = {
     'shopify',

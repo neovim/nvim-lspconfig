@@ -7,6 +7,7 @@
 -- `pyrefly` is still in development, so please report any errors to
 -- our issues page at https://github.com/facebook/pyrefly/issues.
 
+---@type vim.lsp.Config
 return {
   cmd = { 'pyrefly', 'lsp' },
   filetypes = { 'python' },

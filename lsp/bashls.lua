@@ -8,6 +8,8 @@
 --- ```
 ---
 --- Language server for bash, written using tree sitter in typescript.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'bash-language-server', 'start' },
   settings = {

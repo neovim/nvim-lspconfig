@@ -9,6 +9,8 @@
 --- ```sh
 --- npm install --global tabby-agent
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'tabby-agent', '--lsp', '--stdio' },
   filetypes = {},

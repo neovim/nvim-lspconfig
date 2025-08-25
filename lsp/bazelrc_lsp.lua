@@ -13,6 +13,8 @@
 ---   },
 --- }
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'bazelrc-lsp', 'lsp' },
   filetypes = { 'bazelrc' },

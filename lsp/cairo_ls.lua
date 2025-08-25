@@ -10,6 +10,8 @@
 --- ```
 ---
 --- *cairo-language-server is still under active development, some features might not work yet !*
+
+---@type vim.lsp.Config
 return {
   init_options = { hostInfo = 'neovim' },
   cmd = { 'scarb', 'cairo-language-server', '/C', '--node-ipc' },

@@ -6,6 +6,8 @@
 --- ```sh
 --- opam install dolmen_lsp
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'dolmenls' },
   filetypes = { 'smt2', 'tptp', 'p', 'cnf', 'icnf', 'zf' },

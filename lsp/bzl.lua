@@ -5,6 +5,8 @@
 --- https://docs.stack.build/docs/cli/installation
 ---
 --- https://docs.stack.build/docs/vscode/starlark-language-server
+
+---@type vim.lsp.Config
 return {
   cmd = { 'bzl', 'lsp', 'serve' },
   filetypes = { 'bzl' },

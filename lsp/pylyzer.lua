@@ -8,6 +8,8 @@
 --- This config sets `ERG_PATH="~/.erg"`. Set `cmd_env` if you want to change it.
 --- To install Erg, simply extract tarball/zip from [Erg releases](https://github.com/erg-lang/erg/releases/latest)
 --- to the the path where you want to install it, e.g. `~/.erg`.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'pylyzer', '--server' },
   filetypes = { 'python' },

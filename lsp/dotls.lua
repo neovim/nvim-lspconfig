@@ -6,6 +6,8 @@
 --- ```sh
 --- npm install -g dot-language-server
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'dot-language-server', '--stdio' },
   filetypes = { 'dot' },

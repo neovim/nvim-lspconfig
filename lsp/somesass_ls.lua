@@ -15,6 +15,8 @@
 --- - Rich documentation through SassDoc.
 --- - Language features for %placeholder-selectors, both when using them and writing them.
 --- - Suggestions and hover info for built-in Sass modules, when used with @use.
+
+---@type vim.lsp.Config
 return {
   name = 'somesass_ls',
   cmd = { 'some-sass-language-server', '--stdio' },

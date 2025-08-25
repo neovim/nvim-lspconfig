@@ -67,6 +67,8 @@
 --- * [Lua.runtime.path](https://luals.github.io/wiki/settings/#runtimepath)
 --- * [Lua.workspace.library](https://luals.github.io/wiki/settings/#workspacelibrary)
 ---
+
+---@type vim.lsp.Config
 return {
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },

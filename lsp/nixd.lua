@@ -6,8 +6,10 @@
 ---
 --- If you are using Nix with Flakes support, run `nix profile install github:nix-community/nixd` to install.
 --- Check the repository README for more information.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'nixd' },
   filetypes = { 'nix' },
-  root_markers = { 'flake.nix', 'git' },
+  root_markers = { 'flake.nix', '.git' },
 }

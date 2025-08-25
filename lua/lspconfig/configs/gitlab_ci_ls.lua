@@ -5,7 +5,7 @@ return {
   default_config = {
     cmd = { 'gitlab-ci-ls' },
     filetypes = { 'yaml.gitlab' },
-    root_dir = util.root_pattern('.gitlab*', '.git'),
+    root_dir = util.root_pattern('.git', '.gitlab*'),
     init_options = {
       cache_path = cache_dir,
       log_path = cache_dir .. '/log/gitlab-ci-ls.log',

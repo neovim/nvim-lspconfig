@@ -9,6 +9,8 @@
 --- The default `cmd` assumes that the `helm_ls` binary can be found in `$PATH`.
 ---
 --- If need Helm file highlight use [vim-helm](https://github.com/towolf/vim-helm) plugin.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'helm_ls', 'serve' },
   filetypes = { 'helm', 'yaml.helm-values' },

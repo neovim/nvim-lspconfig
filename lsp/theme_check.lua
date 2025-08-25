@@ -15,6 +15,7 @@
 --- })
 --- ```
 
+---@type vim.lsp.Config
 return {
   cmd = { 'theme-check-language-server', '--stdio' },
   filetypes = { 'liquid' },

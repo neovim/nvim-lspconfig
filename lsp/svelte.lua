@@ -9,11 +9,12 @@
 --- npm install -g svelte-language-server
 --- ```
 
+---@type vim.lsp.Config
 return {
   cmd = { 'svelteserver', '--stdio' },
   filetypes = { 'svelte' },
   root_dir = function(bufnr, on_dir)
-    local root_files = { 'package.json', '.git' }
+    local root_files = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
     local fname = vim.api.nvim_buf_get_name(bufnr)
     -- Svelte LSP only supports file:// schema. https://github.com/sveltejs/language-tools/issues/2777
     if vim.uv.fs_stat(fname) ~= nil then
@@ -33,6 +34,7 @@ return {
     })
     vim.api.nvim_buf_create_user_command(bufnr, 'LspMigrateToSvelte5', function()
       client:exec_cmd({
+        title = 'Migrate Component to Svelte 5 Syntax',
         command = 'migrate_to_svelte_5',
         arguments = { vim.uri_from_bufnr(bufnr) },
       })

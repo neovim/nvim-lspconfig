@@ -35,6 +35,7 @@
 local host_dll_name = 'MSBuildProjectTools.LanguageServer.Host.dll'
 local util = require 'lspconfig.util'
 
+---@type vim.lsp.Config
 return {
   filetypes = { 'msbuild' },
   root_dir = function(bufnr, on_dir)

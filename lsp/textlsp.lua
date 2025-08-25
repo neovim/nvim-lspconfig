@@ -10,6 +10,8 @@
 --- For quick testing, LanguageTool is enabled in the default `nvim-lspconfig` configuration.
 ---
 --- To install run: `pip install textLSP`
+
+---@type vim.lsp.Config
 return {
   cmd = { 'textlsp' },
   filetypes = { 'text', 'tex', 'org' },

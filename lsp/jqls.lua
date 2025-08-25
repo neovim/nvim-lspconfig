@@ -15,6 +15,8 @@
 --- ```lua
 --- vim.cmd([[au BufRead,BufNewFile *.jq setfiletype jq]])
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'jq-lsp' },
   filetypes = { 'jq' },

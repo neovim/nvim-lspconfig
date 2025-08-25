@@ -8,6 +8,8 @@
 --- Check the repository README for more information.
 ---
 --- _See an example config at https://github.com/oxalica/nil/blob/main/dev/nvim-lsp.nix._
+
+---@type vim.lsp.Config
 return {
   cmd = { 'nil' },
   filetypes = { 'nix' },

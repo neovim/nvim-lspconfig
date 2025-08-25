@@ -7,6 +7,8 @@
 --- ```sh
 --- pip install salt-lsp
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'salt_lsp_server' },
   filetypes = { 'sls' },

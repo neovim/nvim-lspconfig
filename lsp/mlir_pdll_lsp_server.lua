@@ -5,6 +5,8 @@
 --- The Language Server for the LLVM PDLL language
 ---
 --- `mlir-pdll-lsp-server` can be installed at the llvm-project repository (https://github.com/llvm/llvm-project)
+
+---@type vim.lsp.Config
 return {
   cmd = { 'mlir-pdll-lsp-server' },
   filetypes = { 'pdll' },

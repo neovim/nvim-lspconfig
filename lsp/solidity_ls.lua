@@ -9,6 +9,8 @@
 --- ```
 ---
 --- `vscode-solidity-server` is a language server for the Solidity language ported from the VSCode "solidity" extension.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'vscode-solidity-server', '--stdio' },
   filetypes = { 'solidity' },

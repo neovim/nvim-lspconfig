@@ -6,6 +6,8 @@
 --- [Installation](https://aiken-lang.org/installation-instructions)
 ---
 --- It can be i
+
+---@type vim.lsp.Config
 return {
   cmd = { 'aiken', 'lsp' },
   filetypes = { 'aiken' },

@@ -6,6 +6,8 @@
 --- ```sh
 --- npm i unocss-language-server -g
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'unocss-language-server', '--stdio' },
   -- copied from https://github.com/unocss/unocss/blob/35297359bf61917bda499db86e3728a7ebd05d6c/packages/vscode/src/autocomplete.ts#L12-L35

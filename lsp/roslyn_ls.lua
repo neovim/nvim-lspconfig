@@ -25,7 +25,7 @@ local fs = vim.fs
 ---@param client vim.lsp.Client
 ---@param target string
 local function on_init_sln(client, target)
-  vim.notify('Initializing: ' .. target, vim.log.levels.INFO, { title = 'roslyn_ls' })
+  vim.notify('Initializing: ' .. target, vim.log.levels.TRACE, { title = 'roslyn_ls' })
   ---@diagnostic disable-next-line: param-type-mismatch
   client:notify('solution/open', {
     solution = vim.uri_from_fname(target),
@@ -35,7 +35,7 @@ end
 ---@param client vim.lsp.Client
 ---@param project_files string[]
 local function on_init_project(client, project_files)
-  vim.notify('Initializing: projects', vim.log.levels.INFO, { title = 'roslyn_ls' })
+  vim.notify('Initializing: projects', vim.log.levels.TRACE, { title = 'roslyn_ls' })
   ---@diagnostic disable-next-line: param-type-mismatch
   client:notify('project/open', {
     projects = vim.tbl_map(function(file)
@@ -91,7 +91,7 @@ local function roslyn_handlers()
   }
 end
 
----@type vim.lsp.ClientConfig
+---@type vim.lsp.Config
 return {
   name = 'roslyn_ls',
   offset_encoding = 'utf-8',
@@ -112,7 +112,7 @@ return {
     if not bufname:match('^' .. fs.joinpath('/tmp/MetadataAsSource/')) then
       -- try find solutions root first
       local root_dir = fs.root(bufnr, function(fname, _)
-        return fname:match('%.sln$') ~= nil
+        return fname:match('%.sln[x]?$') ~= nil
       end)
 
       if not root_dir then
@@ -133,7 +133,7 @@ return {
 
       -- try load first solution we find
       for entry, type in fs.dir(root_dir) do
-        if type == 'file' and vim.endswith(entry, '.sln') then
+        if type == 'file' and (vim.endswith(entry, '.sln') or vim.endswith(entry, '.slnx')) then
           on_init_sln(client, fs.joinpath(root_dir, entry))
           return
         end

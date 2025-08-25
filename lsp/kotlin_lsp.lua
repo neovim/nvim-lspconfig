@@ -7,6 +7,8 @@
 --
 --  These are configuration files for the various build systems supported by
 --  Kotlin.
+
+---@type vim.lsp.Config
 return {
   filetypes = { 'kotlin' },
   cmd = { 'kotlin-lsp', '--stdio' },

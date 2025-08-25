@@ -8,6 +8,8 @@
 --- ```sh
 --- cargo install --features="lsp" lelwel
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'lelwel-ls' },
   filetypes = { 'llw' },

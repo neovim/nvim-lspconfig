@@ -14,6 +14,8 @@
 --- ```lua
 --- vim.cmd([[au BufRead,BufNewFile *.uvl setfiletype uvl]])
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'uvls' },
   filetypes = { 'uvl' },

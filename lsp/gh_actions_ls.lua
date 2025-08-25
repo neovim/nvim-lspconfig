@@ -13,6 +13,8 @@
 --- ```sh
 --- npm install -g gh-actions-language-server
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'gh-actions-language-server', '--stdio' },
   filetypes = { 'yaml' },

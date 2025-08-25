@@ -1,6 +1,8 @@
 ---@brief
 ---
 --- https://github.com/coq-community/vscoq
+
+---@type vim.lsp.Config
 return {
   cmd = { 'vscoqtop' },
   filetypes = { 'coq' },

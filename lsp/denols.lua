@@ -41,7 +41,7 @@ local function virtual_text_document(uri, client)
       uri = uri,
     },
   }
-  local result = client.request_sync('deno/virtualTextDocument', params)
+  local result = client:request_sync('deno/virtualTextDocument', params)
   virtual_text_document_handler(uri, result, client)
 end
 
@@ -63,6 +63,7 @@ local function denols_handler(err, result, ctx, config)
   lsp.handlers[ctx.method](err, result, ctx, config)
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { 'deno', 'lsp' },
   cmd_env = { NO_COLOR = true },
@@ -97,10 +98,10 @@ return {
       client:exec_cmd({
         command = 'deno.cache',
         arguments = { {}, vim.uri_from_bufnr(bufnr) },
-      }, { bufnr = bufnr }, function(err, _result, ctx)
+      }, { bufnr = bufnr }, function(err, _, ctx)
         if err then
           local uri = ctx.params.arguments[2]
-          vim.api.nvim_err_writeln('cache command failed for ' .. vim.uri_to_fname(uri))
+          vim.notify('cache command failed for' .. vim.uri_to_fname(uri), vim.log.levels.ERROR)
         end
       end)
     end, {

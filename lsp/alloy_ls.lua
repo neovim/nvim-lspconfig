@@ -21,6 +21,8 @@
 --- ```
 ---
 --- Alternatively, you may use a syntax plugin like https://github.com/runoshun/vim-alloy.
+
+---@type vim.lsp.Config
 return {
   cmd = { 'alloy', 'lsp' },
   filetypes = { 'alloy' },

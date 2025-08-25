@@ -42,6 +42,8 @@
 --- ```
 ---
 --- A full list and explanation of the available options can be found [here](https://docs.esbon.io/en/esbonio-language-server-v0.16.4/lsp/getting-started.html?editor=neovim-lspconfig#configuration)
+
+---@type vim.lsp.Config
 return {
   cmd = { 'python3', '-m', 'esbonio' },
   filetypes = { 'rst' },

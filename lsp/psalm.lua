@@ -6,6 +6,8 @@
 --- ```sh
 --- composer global require vimeo/psalm
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'psalm', '--language-server' },
   filetypes = { 'php' },

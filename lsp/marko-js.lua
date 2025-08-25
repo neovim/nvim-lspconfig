@@ -8,6 +8,8 @@
 --- ```
 --- npm i -g @marko/language-server
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'marko-language-server', '--stdio' },
   filetypes = { 'marko' },
