@@ -18,6 +18,7 @@ Nvim by running `:help lspconfig-all`.
 - [ast_grep](#ast_grep)
 - [astro](#astro)
 - [atlas](#atlas)
+- [atopile](#atopile)
 - [autohotkey_lsp](#autohotkey_lsp)
 - [autotools_ls](#autotools_ls)
 - [awk_ls](#awk_ls)
@@ -972,6 +973,35 @@ Default config:
 - `root_markers` :
   ```lua
   { "atlas.hcl" }
+  ```
+
+---
+
+## atopile
+
+https://atopile.io/
+
+A language server for atopile Programming Language.
+
+It comes with the atopile compiler, for installation see: [Installing atopile](https://docs.atopile.io/atopile/guides/install)
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('atopile')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "ato", "lsp", "start" }
+  ```
+- `filetypes` :
+  ```lua
+  { "ato" }
+  ```
+- `root_markers` :
+  ```lua
+  { "ato.yaml", ".ato", ".git" }
   ```
 
 ---

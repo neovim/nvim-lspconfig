@@ -478,6 +478,28 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+atopile
+
+https://atopile.io/
+
+A language server for atopile Programming Language.
+
+It comes with the atopile compiler, for installation see: [Installing atopile](https://docs.atopile.io/atopile/guides/install)
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('atopile')
+
+
+Default config:
+- cmd: >lua
+  { "ato", "lsp", "start" }
+- filetypes: >lua
+  { "ato" }
+- root_markers: >lua
+  { "ato.yaml", ".ato", ".git" }
+<
+
+------------------------------------------------------------------------------
 autohotkey_lsp
 
 https://github.com/thqby/vscode-autohotkey2-lsp
