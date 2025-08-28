@@ -2343,11 +2343,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g58060c2340"
+      version = "0.12.0-dev+ga33284c2c0"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g58060c2340"
+      version = "0.12.0-dev+ga33284c2c0"
     }
   }
   ```
@@ -5287,7 +5287,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "html", "ruby", "eruby" }
+  { "html", "eruby" }
   ```
 - `root_markers` :
   ```lua
