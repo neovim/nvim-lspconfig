@@ -24,6 +24,6 @@
 ---@type vim.lsp.Config
 return {
   cmd = { 'herb-language-server', '--stdio' },
-  filetypes = { 'html', 'ruby', 'eruby' },
+  filetypes = { 'html', 'eruby' },
   root_markers = { 'Gemfile', '.git' },
 }
