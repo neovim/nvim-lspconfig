@@ -43,10 +43,12 @@ return {
   },
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'LspPyrightOrganizeImports', function()
-      client:exec_cmd({
+      local params = {
         command = 'basedpyright.organizeimports',
         arguments = { vim.uri_from_bufnr(bufnr) },
-      })
+      }
+
+      client.request('workspace/executeCommand', params, nil, bufnr)
     end, {
       desc = 'Organize Imports',
     })
