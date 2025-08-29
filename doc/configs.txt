@@ -2779,6 +2779,26 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+expert
+
+https://github.com/elixir-lang/expert
+
+Expert is the official language server implementation for the Elixir programming language.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('expert')
+
+
+Default config:
+- cmd: >lua
+  { "expert" }
+- filetypes: >lua
+  { "elixir", "eelixir", "heex", "surface" }
+- root_markers: >lua
+  { "mix.exs", ".git" }
+<
+
+------------------------------------------------------------------------------
 facility_language_server
 
 https://github.com/FacilityApi/FacilityLanguageServer

@@ -101,6 +101,7 @@ Nvim by running `:help lspconfig-all`.
 - [erlangls](#erlangls)
 - [esbonio](#esbonio)
 - [eslint](#eslint)
+- [expert](#expert)
 - [facility_language_server](#facility_language_server)
 - [fennel_language_server](#fennel_language_server)
 - [fennel_ls](#fennel_ls)
@@ -3998,6 +3999,33 @@ Default config:
   }
   ```
 - `workspace_required` : `true`
+
+---
+
+## expert
+
+https://github.com/elixir-lang/expert
+
+Expert is the official language server implementation for the Elixir programming language.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('expert')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "expert" }
+  ```
+- `filetypes` :
+  ```lua
+  { "elixir", "eelixir", "heex", "surface" }
+  ```
+- `root_markers` :
+  ```lua
+  { "mix.exs", ".git" }
+  ```
 
 ---
 
