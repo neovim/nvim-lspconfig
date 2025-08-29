@@ -39,7 +39,7 @@
 ---
 --- /!\ When using flat config files, you need to use them across all your packages in your monorepo, as it's a global setting for the server.
 
-local util = require 'lspconfig.util'
+local util = require('lspconfig.util')
 local lsp = vim.lsp
 
 local eslint_config_files = {
@@ -87,38 +87,13 @@ return {
     end, {})
   end,
   root_dir = function(bufnr, on_dir)
-    -- The project root is where the LSP can be started from
-    -- As stated in the documentation above, this LSP supports monorepos and simple projects.
-    -- We select then from the project root, which is identified by the presence of a package
-    -- manager lock file.
-    local root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
-    -- Give the root markers equal priority by wrapping them in a table
-    root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers } or root_markers
-    local project_root = vim.fs.root(bufnr, root_markers)
-    if not project_root then
+    local additional_root_markers = { 'package.json', 'package.json5' }
+    local config_field = 'eslintConfig'
+    local project_root = util.monorepo_get_root_dir(bufnr, eslint_config_files, additional_root_markers, config_field)
+    if project_root then
+      on_dir(project_root)
       return
     end
-
-    -- We know that the buffer is using ESLint if it has a config file
-    -- in its directory tree.
-    --
-    -- Eslint used to support package.json files as config files, but it doesn't anymore.
-    -- We keep this for backward compatibility.
-    local filename = vim.api.nvim_buf_get_name(bufnr)
-    local eslint_config_files_with_package_json =
-      util.insert_package_json(eslint_config_files, 'eslintConfig', filename)
-    local is_buffer_using_eslint = vim.fs.find(eslint_config_files_with_package_json, {
-      path = filename,
-      type = 'file',
-      limit = 1,
-      upward = true,
-      stop = vim.fs.dirname(project_root),
-    })[1]
-    if not is_buffer_using_eslint then
-      return
-    end
-
-    on_dir(project_root)
   end,
   -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
   settings = {
