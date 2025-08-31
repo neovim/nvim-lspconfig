@@ -31,19 +31,16 @@ return {
     end
   end,
   handlers = {
-    ["actions/readFile"] = function(_, result)
-      if type(result.path) ~= "string" then
+    ['actions/readFile'] = function(_, result)
+      if type(result.path) ~= 'string' then
         return nil, nil
       end
-
       local file_path = vim.uri_to_fname(result.path)
-
       if vim.fn.filereadable(file_path) == 1 then
         local content = vim.fn.readfile(file_path)
-        local text = table.concat(content, "\n")
+        local text = table.concat(content, '\n')
         return text, nil
       end
-
       return nil, nil
     end,
   },
