@@ -2,23 +2,6 @@ return {
   default_config = {
     cmd = { 'gh-actions-language-server', '--stdio' },
     filetypes = { 'yaml' },
-    handlers = {
-      ["actions/readFile"] = function(_, result)
-        if type(result.path) ~= "string" then
-          return nil, nil
-        end
-
-        local file_path = vim.uri_to_fname(result.path)
-
-        if vim.fn.filereadable(file_path) == 1 then
-          local content = vim.fn.readfile(file_path)
-          local text = table.concat(content, "\n")
-          return text, nil
-        end
-
-        return nil, nil
-      end,
-    },
     -- Only attach to yaml files that are GitHub workflows instead of all yaml
     -- files. (A nil root_dir and no single_file_support results in the LSP not
     -- attaching.) For details, see #3558
