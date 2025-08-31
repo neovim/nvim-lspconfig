@@ -1518,11 +1518,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g4edeaaa6e2"
+      version = "0.12.0-dev+g6a330f893b"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g4edeaaa6e2"
+      version = "0.12.0-dev+g6a330f893b"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:79
@@ -10076,6 +10076,10 @@ Default config:
   { "vtsls", "--stdio" }
 - filetypes: >lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+- init_options: >lua
+  {
+    hostInfo = "neovim"
+  }
 - root_dir (use "gF" to view): ../lsp/vtsls.lua:69
 <
 

@@ -2344,11 +2344,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g4edeaaa6e2"
+      version = "0.12.0-dev+g6a330f893b"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g4edeaaa6e2"
+      version = "0.12.0-dev+g6a330f893b"
     }
   }
   ```
@@ -13544,6 +13544,12 @@ Default config:
 - `filetypes` :
   ```lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    hostInfo = "neovim"
+  }
   ```
 - `root_dir`: [../lsp/vtsls.lua:69](../lsp/vtsls.lua#L69)
 
