@@ -729,7 +729,7 @@ Default config:
   { "basedpyright-langserver", "--stdio" }
 - filetypes: >lua
   { "python" }
-- on_attach (use "gF" to view): ../lsp/basedpyright.lua:23
+- on_attach (use "gF" to view): ../lsp/basedpyright.lua:24
 - root_markers: >lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
 - settings: >lua
@@ -6702,7 +6702,7 @@ Default config:
   { "pyright-langserver", "--stdio" }
 - filetypes: >lua
   { "python" }
-- on_attach (use "gF" to view): ../lsp/pyright.lua:23
+- on_attach (use "gF" to view): ../lsp/pyright.lua:24
 - root_markers: >lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
 - settings: >lua

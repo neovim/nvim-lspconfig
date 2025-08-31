@@ -1299,7 +1299,7 @@ Default config:
   ```lua
   { "python" }
   ```
-- `on_attach`: [../lsp/basedpyright.lua:23](../lsp/basedpyright.lua#L23)
+- `on_attach`: [../lsp/basedpyright.lua:24](../lsp/basedpyright.lua#L24)
 - `root_markers` :
   ```lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
@@ -9139,7 +9139,7 @@ Default config:
   ```lua
   { "python" }
   ```
-- `on_attach`: [../lsp/pyright.lua:23](../lsp/pyright.lua#L23)
+- `on_attach`: [../lsp/pyright.lua:24](../lsp/pyright.lua#L24)
 - `root_markers` :
   ```lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
