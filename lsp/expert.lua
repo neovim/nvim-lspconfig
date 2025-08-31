@@ -7,6 +7,6 @@
 ---@type vim.lsp.Config
 return {
   filetypes = { 'elixir', 'eelixir', 'heex', 'surface' },
-  root_markers = { 'mix.exs', '.git' },
+  root_markers = { '.git', 'mix.exs' },
   cmd = { 'expert' },
 }
