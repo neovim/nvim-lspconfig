@@ -2,6 +2,7 @@ return {
   default_config = {
     cmd = { 'gh-actions-language-server', '--stdio' },
     filetypes = { 'yaml' },
+
     -- Only attach to yaml files that are GitHub workflows instead of all yaml
     -- files. (A nil root_dir and no single_file_support results in the LSP not
     -- attaching.) For details, see #3558
