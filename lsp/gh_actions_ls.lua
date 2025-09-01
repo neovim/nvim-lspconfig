@@ -37,8 +37,10 @@ return {
       end
       local file_path = vim.uri_to_fname(result.path)
       if vim.fn.filereadable(file_path) == 1 then
-        local content = vim.fn.readfile(file_path)
-        local text = table.concat(content, '\n')
+        local f = assert(io.open(file_path, 'r'))
+        local text = f:read('*a')
+        f:close()
+
         return text, nil
       end
       return nil, nil
