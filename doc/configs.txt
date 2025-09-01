@@ -1518,11 +1518,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6a330f893b"
+      version = "0.12.0-dev+gd4f789fd78"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6a330f893b"
+      version = "0.12.0-dev+gd4f789fd78"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:79
@@ -3192,6 +3192,10 @@ Default config:
   { "gh-actions-language-server", "--stdio" }
 - filetypes: >lua
   { "yaml" }
+- handlers: >lua
+  {
+    ["actions/readFile"] = <function 1>
+  }
 - init_options: >lua
   {}
 - root_dir (use "gF" to view): ../lsp/gh_actions_ls.lua:18

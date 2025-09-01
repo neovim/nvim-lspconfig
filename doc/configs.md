@@ -2344,11 +2344,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6a330f893b"
+      version = "0.12.0-dev+gd4f789fd78"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6a330f893b"
+      version = "0.12.0-dev+gd4f789fd78"
     }
   }
   ```
@@ -4544,6 +4544,12 @@ Default config:
 - `filetypes` :
   ```lua
   { "yaml" }
+  ```
+- `handlers` :
+  ```lua
+  {
+    ["actions/readFile"] = <function 1>
+  }
   ```
 - `init_options` :
   ```lua
