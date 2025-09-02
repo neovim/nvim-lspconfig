@@ -1518,11 +1518,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd4f789fd78"
+      version = "0.12.0-dev+g79bfeecdb4"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd4f789fd78"
+      version = "0.12.0-dev+g79bfeecdb4"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:79
@@ -2795,7 +2795,7 @@ Default config:
 - filetypes: >lua
   { "elixir", "eelixir", "heex", "surface" }
 - root_markers: >lua
-  { "mix.exs", ".git" }
+  { ".git", "mix.exs" }
 <
 
 ------------------------------------------------------------------------------

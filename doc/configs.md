@@ -2344,11 +2344,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd4f789fd78"
+      version = "0.12.0-dev+g79bfeecdb4"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd4f789fd78"
+      version = "0.12.0-dev+g79bfeecdb4"
     }
   }
   ```
@@ -4024,7 +4024,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { "mix.exs", ".git" }
+  { ".git", "mix.exs" }
   ```
 
 ---
