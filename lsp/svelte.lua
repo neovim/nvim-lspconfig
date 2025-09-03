@@ -14,7 +14,7 @@ return {
   cmd = { 'svelteserver', '--stdio' },
   filetypes = { 'svelte' },
   root_dir = function(bufnr, on_dir)
-    local root_files = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
+    local root_files = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock', 'deno.lock' }
     local fname = vim.api.nvim_buf_get_name(bufnr)
     -- Svelte LSP only supports file:// schema. https://github.com/sveltejs/language-tools/issues/2777
     if vim.uv.fs_stat(fname) ~= nil then
