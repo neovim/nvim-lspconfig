@@ -22,7 +22,7 @@
 local uv = vim.uv
 local fs = vim.fs
 
-local group = vim.api.nvim_create_augroup('lspconfig.roslyn_ls', { clear = false })
+local group = vim.api.nvim_create_augroup('lspconfig.roslyn_ls', { clear = true })
 
 ---@param client vim.lsp.Client
 ---@param target string
