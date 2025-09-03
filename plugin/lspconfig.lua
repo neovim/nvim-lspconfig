@@ -73,7 +73,7 @@ end, {
   desc = 'Opens the Nvim LSP client log.',
 })
 
-if vim.version.ge(vim.version(), { 0, 11, 2 }) then
+if vim.fn.has('nvim-0.11.2') == 1 then
   local complete_client = function(arg)
     return vim
       .iter(vim.lsp.get_clients())
