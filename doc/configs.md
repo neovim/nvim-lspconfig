@@ -9775,6 +9775,9 @@ Snippet to enable the language server:
 vim.lsp.enable('roslyn_ls')
 ```
 
+Commands:
+- roslyn.client.completionComplexEdit
+
 Default config:
 - `capabilities` :
   ```lua
@@ -9789,6 +9792,12 @@ Default config:
 - `cmd` :
   ```lua
   { "Microsoft.CodeAnalysis.LanguageServer", "--logLevel", "Information", "--extensionLogDirectory", "/tmp/roslyn_ls/logs", "--stdio" }
+  ```
+- `commands` :
+  ```lua
+  {
+    ["roslyn.client.completionComplexEdit"] = <function 1>
+  }
   ```
 - `filetypes` :
   ```lua
@@ -9811,11 +9820,12 @@ Default config:
   ```lua
   "utf-8"
   ```
+- `on_attach`: [../lsp/roslyn_ls.lua:108](../lsp/roslyn_ls.lua#L108)
 - `on_init` :
   ```lua
   { <function 1> }
   ```
-- `root_dir`: [../lsp/roslyn_ls.lua:95](../lsp/roslyn_ls.lua#L95)
+- `root_dir`: [../lsp/roslyn_ls.lua:108](../lsp/roslyn_ls.lua#L108)
 - `settings` :
   ```lua
   {
