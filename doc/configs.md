@@ -373,6 +373,7 @@ Nvim by running `:help lspconfig-all`.
 - [ziggy_schema](#ziggy_schema)
 - [zk](#zk)
 - [zls](#zls)
+- [zuban](#zuban)
 
 ## ada_ls
 
@@ -13940,6 +13941,33 @@ Default config:
   { "zls.json", "build.zig", ".git" }
   ```
 - `workspace_required` : `false`
+
+---
+
+## zuban
+
+https://zubanls.com/
+
+A high-performance Python Language Server and type checker implemented in Rust, by the author of Jedi.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('zuban')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "zuban", "server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "python" }
+  ```
+- `root_markers` :
+  ```lua
+  { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
+  ```
 
 ---
 

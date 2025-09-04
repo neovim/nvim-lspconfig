@@ -10385,6 +10385,26 @@ Default config:
 - `workspace_required` : `false`
 <
 
+------------------------------------------------------------------------------
+zuban
+
+https://zubanls.com/
+
+A high-performance Python Language Server and type checker implemented in Rust, by the author of Jedi.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('zuban')
+
+
+Default config:
+- cmd: >lua
+  { "zuban", "server" }
+- filetypes: >lua
+  { "python" }
+- root_markers: >lua
+  { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
+<
+
 
 ==============================================================================
 
