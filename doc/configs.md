@@ -4008,6 +4008,11 @@ https://github.com/elixir-lang/expert
 
 Expert is the official language server implementation for the Elixir programming language.
 
+'root_dir' is chosen like this: if two or more directories containing `mix.exs` were found when
+searching directories upward, the second one (higher up) is chosen, with the assumption that it
+is the root of an umbrella app. Otherwise the directory containing the single mix.exs that was
+found is chosen.
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('expert')
@@ -4022,10 +4027,7 @@ Default config:
   ```lua
   { "elixir", "eelixir", "heex", "surface" }
   ```
-- `root_markers` :
-  ```lua
-  { ".git", "mix.exs" }
-  ```
+- `root_dir`: [../lsp/expert.lua:13](../lsp/expert.lua#L13)
 
 ---
 
