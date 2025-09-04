@@ -56,6 +56,9 @@ return {
     root_dir = util.root_pattern 'angular.json',
   },
   on_new_config = function(new_config, new_root_dir)
+    -- Early return in case new config does no use ngserver
+    if new_config ~= 'ngserver' then return end
+
     local new_probe_dir = get_probe_dir(new_root_dir)
     local angular_core_version = get_angular_core_version(new_root_dir)
 
