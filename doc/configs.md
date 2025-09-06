@@ -12409,25 +12409,17 @@ https://github.com/ribru17/ts_query_ls
 Can be configured by passing a "settings" object to `vim.lsp.config('ts_query_ls', {})`:
 ```lua
 vim.lsp.config('ts_query_ls', {
-    settings = {
-      parser_install_directories = {
-        -- If using nvim-treesitter with lazy.nvim
-        vim.fs.joinpath(
-          vim.fn.stdpath('data'),
-          '/lazy/nvim-treesitter/parser/'
-        ),
-      },
-      -- This setting is provided by default
-      parser_aliases = {
-        ecma = 'javascript',
-        jsx = 'javascript',
-        php_only = 'php',
-      },
-      -- E.g. zed support
-      language_retrieval_patterns = {
-        'languages/src/([^/]+)/[^/]+\\.scm$',
-      },
+  init_options = {
+    parser_install_directories = {
+      '/my/parser/install/dir',
     },
+    -- This setting is provided by default
+    parser_aliases = {
+      ecma = 'javascript',
+      jsx = 'javascript',
+      php_only = 'php',
+    },
+  },
 })
 ```
 
@@ -12445,19 +12437,21 @@ Default config:
   ```lua
   { "query" }
   ```
-- `root_markers` :
-  ```lua
-  { "queries", ".git" }
-  ```
-- `settings` :
+- `init_options` :
   ```lua
   {
     parser_aliases = {
       ecma = "javascript",
       jsx = "javascript",
       php_only = "php"
-    }
+    },
+    parser_install_directories = { "/home/runner/.local/share/nvim/site/parser" }
   }
+  ```
+- `on_attach`: [../lsp/ts_query_ls.lua:26](../lsp/ts_query_ls.lua#L26)
+- `root_markers` :
+  ```lua
+  { ".tsqueryrc.json", ".git" }
   ```
 
 ---
