@@ -10339,7 +10339,7 @@ Default config:
 ------------------------------------------------------------------------------
 zk
 
-https://github.com/mickael-menu/zk
+https://github.com/zk-org/zk
 
 A plain text note-taking assistant
 
@@ -10352,9 +10352,10 @@ Default config:
   { "zk", "lsp" }
 - filetypes: >lua
   { "markdown" }
-- on_attach (use "gF" to view): ../lsp/zk.lua:16
+- on_attach (use "gF" to view): ../lsp/zk.lua:40
 - root_markers: >lua
   { ".zk" }
+- `workspace_required` : `true`
 <
 
 ------------------------------------------------------------------------------

@@ -13883,7 +13883,7 @@ Default config:
 
 ## zk
 
-https://github.com/mickael-menu/zk
+https://github.com/zk-org/zk
 
 A plain text note-taking assistant
 
@@ -13901,11 +13901,12 @@ Default config:
   ```lua
   { "markdown" }
   ```
-- `on_attach`: [../lsp/zk.lua:16](../lsp/zk.lua#L16)
+- `on_attach`: [../lsp/zk.lua:40](../lsp/zk.lua#L40)
 - `root_markers` :
   ```lua
   { ".zk" }
   ```
+- `workspace_required` : `true`
 
 ---
 
