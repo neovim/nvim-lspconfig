@@ -15,7 +15,7 @@ local function zk_list(client, bufnr, opts, action)
     title = 'ZkList',
     command = 'zk.list',
     arguments = { vim.api.nvim_buf_get_name(bufnr), opts },
-  }, { bufnr = bufnr }, function(err, result, _)
+  }, { bufnr = bufnr }, function(err, result)
     if err ~= nil then
       vim.api.nvim_echo({ { 'zk.list error\n' }, { vim.inspect(err) } }, true, {})
       return
@@ -45,12 +45,12 @@ return {
   root_markers = { '.zk' },
   workspace_required = true,
   on_attach = function(client, bufnr)
-    vim.api.nvim_buf_create_user_command(bufnr, 'LspZkIndex', function(_)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspZkIndex', function()
       client:exec_cmd({
         title = 'ZkIndex',
         command = 'zk.index',
         arguments = { vim.api.nvim_buf_get_name(bufnr) },
-      }, { bufnr = bufnr }, function(err, result, _)
+      }, { bufnr = bufnr }, function(err, result)
         if err ~= nil then
           vim.api.nvim_echo({ { 'zk.index error\n' }, { vim.inspect(err) } }, true, {})
           return
@@ -61,18 +61,18 @@ return {
       end)
     end, { desc = 'ZkIndex' })
 
-    vim.api.nvim_buf_create_user_command(bufnr, 'LspZkList', function(_)
-      zk_list(client, bufnr, {}, function(path, _)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspZkList', function()
+      zk_list(client, bufnr, {}, function(path)
         vim.cmd('edit ' .. path)
       end)
     end, { desc = 'ZkList' })
 
-    vim.api.nvim_buf_create_user_command(bufnr, 'LspZkTagList', function(_)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspZkTagList', function()
       client:exec_cmd({
         title = 'ZkTagList',
         command = 'zk.tag.list',
         arguments = { vim.api.nvim_buf_get_name(bufnr) },
-      }, { bufnr = bufnr }, function(err, result, _)
+      }, { bufnr = bufnr }, function(err, result)
         if err ~= nil then
           vim.api.nvim_echo({ { 'zk.tag.list error\n' }, { vim.inspect(err) } }, true, {})
           return
@@ -84,9 +84,9 @@ return {
         local tags = vim.tbl_map(function(item)
           return item.name
         end, result)
-        vim.ui.select(tags, {}, function(item, _)
+        vim.ui.select(tags, {}, function(item)
           if item ~= nil then
-            zk_list(client, bufnr, { tags = { item } }, function(path, _)
+            zk_list(client, bufnr, { tags = { item } }, function(path)
               vim.cmd('edit ' .. path)
             end)
           end
@@ -104,7 +104,7 @@ return {
           vim.api.nvim_buf_get_name(bufnr),
           { title = title, dir = dir },
         },
-      }, { bufnr = bufnr }, function(err, result, _)
+      }, { bufnr = bufnr }, function(err, result)
         if err ~= nil then
           vim.api.nvim_echo({ { 'zk.new error\n' }, { vim.inspect(err) } }, true, {})
           return
