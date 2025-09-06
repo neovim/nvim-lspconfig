@@ -69,13 +69,6 @@ local function roslyn_handlers()
       refresh_diagnostics(client)
       return vim.NIL
     end,
-
-    ['workspace/_roslyn_projectHasUnresolvedDependencies'] = function()
-      vim.notify('Detected missing dependencies. Run `dotnet restore` command.', vim.log.levels.ERROR, {
-        title = 'roslyn_ls',
-      })
-      return vim.NIL
-    end,
     ['workspace/_roslyn_projectNeedsRestore'] = function(_, result, ctx)
       local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
 
