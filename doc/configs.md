@@ -2345,11 +2345,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gf9ce939bf5"
+      version = "0.12.0-dev+gbc15b35cf6"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gf9ce939bf5"
+      version = "0.12.0-dev+gbc15b35cf6"
     }
   }
   ```
@@ -9814,9 +9814,8 @@ Default config:
   ```lua
   {
     ["razor/provideDynamicFileInfo"] = <function 1>,
-    ["workspace/_roslyn_projectHasUnresolvedDependencies"] = <function 2>,
-    ["workspace/_roslyn_projectNeedsRestore"] = <function 3>,
-    ["workspace/projectInitializationComplete"] = <function 4>
+    ["workspace/_roslyn_projectNeedsRestore"] = <function 2>,
+    ["workspace/projectInitializationComplete"] = <function 3>
   }
   ```
 - `name` :
@@ -9827,12 +9826,12 @@ Default config:
   ```lua
   "utf-8"
   ```
-- `on_attach`: [../lsp/roslyn_ls.lua:108](../lsp/roslyn_ls.lua#L108)
+- `on_attach`: [../lsp/roslyn_ls.lua:101](../lsp/roslyn_ls.lua#L101)
 - `on_init` :
   ```lua
   { <function 1> }
   ```
-- `root_dir`: [../lsp/roslyn_ls.lua:108](../lsp/roslyn_ls.lua#L108)
+- `root_dir`: [../lsp/roslyn_ls.lua:101](../lsp/roslyn_ls.lua#L101)
 - `settings` :
   ```lua
   {

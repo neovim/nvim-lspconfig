@@ -1518,11 +1518,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gf9ce939bf5"
+      version = "0.12.0-dev+gbc15b35cf6"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gf9ce939bf5"
+      version = "0.12.0-dev+gbc15b35cf6"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:79
@@ -7222,18 +7222,17 @@ Default config:
 - handlers: >lua
   {
     ["razor/provideDynamicFileInfo"] = <function 1>,
-    ["workspace/_roslyn_projectHasUnresolvedDependencies"] = <function 2>,
-    ["workspace/_roslyn_projectNeedsRestore"] = <function 3>,
-    ["workspace/projectInitializationComplete"] = <function 4>
+    ["workspace/_roslyn_projectNeedsRestore"] = <function 2>,
+    ["workspace/projectInitializationComplete"] = <function 3>
   }
 - name: >lua
   "roslyn_ls"
 - offset_encoding: >lua
   "utf-8"
-- on_attach (use "gF" to view): ../lsp/roslyn_ls.lua:108
+- on_attach (use "gF" to view): ../lsp/roslyn_ls.lua:101
 - on_init: >lua
   { <function 1> }
-- root_dir (use "gF" to view): ../lsp/roslyn_ls.lua:108
+- root_dir (use "gF" to view): ../lsp/roslyn_ls.lua:101
 - settings: >lua
   {
     ["csharp|background_analysis"] = {
