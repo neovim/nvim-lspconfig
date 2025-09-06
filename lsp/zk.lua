@@ -24,15 +24,13 @@ local function zk_list(client, bufnr, opts, action)
       return
     end
 
-    local paths = vim.tbl_map(function(item)
-      return item.path
-    end, result)
-    local titles = vim.tbl_map(function(item)
-      return item.title
-    end, result)
-    vim.ui.select(titles, {}, function(item, idx)
+    vim.ui.select(result, {
+      format_item = function(item)
+        return item.title
+      end,
+    }, function(item)
       if item ~= nil then
-        action(paths[idx], item)
+        action(item.path, item.title)
       end
     end)
   end)
@@ -81,12 +79,13 @@ return {
           return
         end
 
-        local tags = vim.tbl_map(function(item)
-          return item.name
-        end, result)
-        vim.ui.select(tags, {}, function(item)
+        vim.ui.select(result, {
+          format_item = function(item)
+            return item.name
+          end,
+        }, function(item)
           if item ~= nil then
-            zk_list(client, bufnr, { tags = { item } }, function(path)
+            zk_list(client, bufnr, { tags = { item.name } }, function(path)
               vim.cmd('edit ' .. path)
             end)
           end
