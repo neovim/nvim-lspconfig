@@ -42,12 +42,8 @@ end
 return {
   cmd = { 'zk', 'lsp' },
   filetypes = { 'markdown' },
-  root_dir = function(bufnr, on_dir)
-    local root = vim.fs.root(bufnr, '.zk')
-    if root ~= nil then
-      on_dir(root)
-    end
-  end,
+  root_markers = { '.zk' },
+  workspace_required = true,
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'LspZkIndex', function(_)
       client:exec_cmd({
