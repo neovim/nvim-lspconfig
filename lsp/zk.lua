@@ -30,7 +30,7 @@ local function zk_list(client, bufnr, opts, action)
       end,
     }, function(item)
       if item ~= nil then
-        action(item.path, item.title)
+        action(vim.fs.joinpath(client.root_dir, item.path), item.title)
       end
     end)
   end)
