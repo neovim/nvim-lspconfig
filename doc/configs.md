@@ -2345,11 +2345,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g16018b1117"
+      version = "0.12.0-dev+g0f64f0f5b6"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g16018b1117"
+      version = "0.12.0-dev+g0f64f0f5b6"
     }
   }
   ```
@@ -5855,14 +5855,6 @@ Default config:
 - `filetypes` :
   ```lua
   { "java" }
-  ```
-- `handlers` :
-  ```lua
-  {
-    ["textDocument/codeAction"] = <function 1>,
-    ["textDocument/rename"] = <function 2>,
-    ["workspace/applyEdit"] = <function 3>
-  }
   ```
 - `init_options` :
   ```lua
