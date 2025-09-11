@@ -45,6 +45,7 @@ return {
     'php',
     'dart',
     'clojure',
+    'sh',
   },
   root_markers = { '.git' },
 }
