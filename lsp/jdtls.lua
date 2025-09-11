@@ -101,14 +101,6 @@ local function on_workspace_applyedit(err, workspace_edit, ctx)
   handlers[ctx.method](err, fix_zero_version(workspace_edit), ctx)
 end
 
--- Non-standard notification that can be used to display progress
-local function on_language_status(_, result)
-  local command = vim.api.nvim_command
-  command 'echohl ModeMsg'
-  command(string.format('echo "%s"', result.message))
-  command 'echohl None'
-end
-
 ---@type vim.lsp.Config
 return {
   cmd = {
@@ -142,6 +134,5 @@ return {
     ['textDocument/codeAction'] = on_textdocument_codeaction,
     ['textDocument/rename'] = on_textdocument_rename,
     ['workspace/applyEdit'] = on_workspace_applyedit,
-    ['language/status'] = vim.schedule_wrap(on_language_status),
   },
 }
