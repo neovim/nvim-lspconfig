@@ -5859,10 +5859,9 @@ Default config:
 - `handlers` :
   ```lua
   {
-    ["language/status"] = <function 1>,
-    ["textDocument/codeAction"] = <function 2>,
-    ["textDocument/rename"] = <function 3>,
-    ["workspace/applyEdit"] = <function 4>
+    ["textDocument/codeAction"] = <function 1>,
+    ["textDocument/rename"] = <function 2>,
+    ["workspace/applyEdit"] = <function 3>
   }
   ```
 - `init_options` :
