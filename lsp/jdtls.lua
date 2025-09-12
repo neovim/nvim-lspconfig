@@ -63,6 +63,20 @@ local function get_jdtls_jvm_args()
   return unpack(args)
 end
 
+local root_markers1 = {
+  -- Multi-module projects
+  'build.gradle',
+  'build.gradle.kts',
+  -- Single-module projects
+  'build.xml', -- Ant
+  'pom.xml', -- Maven
+  'settings.gradle', -- Gradle
+  'settings.gradle.kts', -- Gradle
+}
+local root_markers2 = {
+  '.git',
+}
+
 ---@type vim.lsp.Config
 return {
   cmd = {
@@ -74,17 +88,8 @@ return {
     get_jdtls_jvm_args(),
   },
   filetypes = { 'java' },
-  root_markers = {
-    -- Multi-module projects
-    '.git',
-    'build.gradle',
-    'build.gradle.kts',
-    -- Single-module projects
-    'build.xml', -- Ant
-    'pom.xml', -- Maven
-    'settings.gradle', -- Gradle
-    'settings.gradle.kts', -- Gradle
-  },
+  root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers1, root_markers2 }
+    or vim.list_extend(root_markers1, root_markers2),
   init_options = {
     workspace = get_jdtls_workspace_dir(),
     jvm_args = {},
