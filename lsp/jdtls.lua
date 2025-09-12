@@ -76,7 +76,6 @@ return {
   filetypes = { 'java' },
   root_markers = {
     -- Multi-module projects
-    '.git',
     'build.gradle',
     'build.gradle.kts',
     -- Single-module projects
@@ -84,6 +83,7 @@ return {
     'pom.xml', -- Maven
     'settings.gradle', -- Gradle
     'settings.gradle.kts', -- Gradle
+    '.git'
   },
   init_options = {
     workspace = get_jdtls_workspace_dir(),
