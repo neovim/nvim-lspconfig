@@ -303,6 +303,7 @@ Nvim by running `:help lspconfig-all`.
 - [steep](#steep)
 - [stimulus_ls](#stimulus_ls)
 - [stylelint_lsp](#stylelint_lsp)
+- [stylua](#stylua)
 - [stylua3p_ls](#stylua3p_ls)
 - [superhtml](#superhtml)
 - [svelte](#svelte)
@@ -2345,11 +2346,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g0f64f0f5b6"
+      version = "0.12.0-dev+ga897cc17a5"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g0f64f0f5b6"
+      version = "0.12.0-dev+ga897cc17a5"
     }
   }
   ```
@@ -11365,6 +11366,33 @@ Default config:
 - `settings` :
   ```lua
   {}
+  ```
+
+---
+
+## stylua
+
+https://github.com/JohnnyMorganz/StyLua
+
+A deterministic code formatter for Lua 5.1, 5.2, 5.3, 5.4, LuaJIT, Luau and CfxLua/FiveM Lua
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('stylua')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "stylua", "--lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "lua" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".stylua.toml", "stylua.toml" }
   ```
 
 ---

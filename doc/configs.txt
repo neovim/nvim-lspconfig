@@ -1518,11 +1518,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g0f64f0f5b6"
+      version = "0.12.0-dev+ga897cc17a5"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g0f64f0f5b6"
+      version = "0.12.0-dev+ga897cc17a5"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:79
@@ -8386,6 +8386,26 @@ Default config:
   { ".stylelintrc", ".stylelintrc.mjs", ".stylelintrc.cjs", ".stylelintrc.js", ".stylelintrc.json", ".stylelintrc.yaml", ".stylelintrc.yml", "stylelint.config.mjs", "stylelint.config.cjs", "stylelint.config.js" }
 - settings: >lua
   {}
+<
+
+------------------------------------------------------------------------------
+stylua
+
+https://github.com/JohnnyMorganz/StyLua
+
+A deterministic code formatter for Lua 5.1, 5.2, 5.3, 5.4, LuaJIT, Luau and CfxLua/FiveM Lua
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('stylua')
+
+
+Default config:
+- cmd: >lua
+  { "stylua", "--lsp" }
+- filetypes: >lua
+  { "lua" }
+- root_markers: >lua
+  { ".stylua.toml", "stylua.toml" }
 <
 
 ------------------------------------------------------------------------------
