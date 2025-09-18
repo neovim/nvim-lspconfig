@@ -57,7 +57,14 @@ local default_angular_core_version = get_angular_core_version()
 --   - typescript
 local ngserver_exe = vim.fn.exepath('ngserver')
 local ngserver_path = #(ngserver_exe or '') > 0 and vim.fs.dirname(vim.uv.fs_realpath(ngserver_exe)) or '?'
-local extension_path = vim.fs.normalize(vim.fs.joinpath(ngserver_path, '../../../'))
+
+local extension_path = ''
+
+if ngserver_path:find('mason', 1, true) then
+  extension_path = vim.fs.joinpath(vim.fn.stdpath('data'), 'mason/packages/angular-language-server/node_modules')
+else
+  extension_path = vim.fs.normalize(vim.fs.joinpath(ngserver_path, '../../../'))
+end
 
 -- angularls will get module by `require.resolve(PROBE_PATH, MODULE_NAME)` of nodejs
 local ts_probe_dirs = vim.iter({ extension_path, default_probe_dir }):join(',')
