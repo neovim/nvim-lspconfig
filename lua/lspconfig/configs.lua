@@ -49,7 +49,7 @@ function configs.__newindex(t, config_name, config_def)
       config_name,
       config_def.default_config.deprecate.to,
       config_def.default_config.deprecate.version,
-      'lspconfig',
+      'nvim-lspconfig',
       false
     )
   end

@@ -77,9 +77,19 @@ end
 local mt = {}
 function mt:__index(k)
   if configs[k] == nil then
+    if vim.fn.has('nvim-0.11') == 1 then
+      vim.deprecate(
+        'The `require(\'lspconfig\')` "framework"',
+        'vim.lsp.config (see :help lspconfig-nvim-0.11)',
+        'v3.0.0',
+        'nvim-lspconfig',
+        false
+      )
+    end
+
     local alias = M.server_aliases(k)
     if alias then
-      vim.deprecate(k, alias.to, alias.version, 'lspconfig', false)
+      vim.deprecate(k, alias.to, alias.version, 'nvim-lspconfig', false)
       alias.inconfig = true
       k = alias.to
     end

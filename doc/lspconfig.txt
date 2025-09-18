@@ -116,6 +116,41 @@ COMPLETION SUPPORT                                        *lspconfig-completion*
 See |lsp-completion|.
 
 ==============================================================================
+Migrate to vim.lsp.config                                *lspconfig-nvim-0.11*
+
+The "framework" part of nvim-lspconfig is DEPRECATED. The "configs" are NOT
+deprecated, but were moved to the lsp/ directory so that |vim.lsp.config()|
+automatically finds them.
+
+This means:
+- `require'lspconfig'[…]` must NOT be used. Use `vim.lsp.config(…)` instead.
+- The `require'lspconfig'` quasi-framework will be DELETED, and is not
+  supported in Nvim 0.11+.
+- The nvim-lspconfig configs (|lspconfig-all|) now live in "lsp/" instead of
+  "lua/lspconfig/".
+- To use the configs, call `vim.lsp.config(…)` instead of `require'lspconfig'[…]`.
+
+MIGRATION INSTRUCTIONS
+
+To migrate:
+- Upgrade to Nvim 0.11 or later.
+- Change `require'lspconfig'[…]` to `vim.lsp.config(…)`.
+  - Some field names changed, see |lspconfig-vs-vim.lsp.config|.
+  - See |lsp-config| for details.
+
+BACKGROUND
+
+Since Nvim 0.11, nvim-lspconfig provides configs in its "lsp/" directory. The
+old configs still exist in "lua/lspconfig/configs/" but are deprecated and
+will be DELETED.
+
+This means the "configs" role of nvim-lspconfig continues to be relevant, but
+it is now a "data-only" repository instead of a "framework". The only change
+needed from you, and from plugins, is to use the Nvim 0.11 `vim.lsp.config`
+interface to setup LSP configs instead of the old `require'lspconfig'`
+quasi-framework.
+
+==============================================================================
 DEBUGGING AND TROUBLESHOOTING                              *lspconfig-debugging*
 
 See |lsp-log| to enable verbose logs.
