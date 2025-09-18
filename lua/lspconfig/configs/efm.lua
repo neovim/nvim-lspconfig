@@ -30,8 +30,9 @@ of the `FileType` autocommand, and the `filetype` variable used to populate the 
 
 ```lua
 require('lspconfig')['efm'].setup{
-  settings = ..., -- You must populate this according to the EFM readme
-  filetypes = { 'python','cpp','lua' }
+  settings = ..., -- You should populate this according to the EFM readme
+                  -- defaults for the filetypes listed below are provided
+  filetypes = {'cmake', 'json', 'markdown', 'rst', 'sh', 'yaml'}
 }
 ```
 
