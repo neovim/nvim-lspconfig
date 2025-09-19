@@ -13,6 +13,7 @@ Nvim by running `:help lspconfig-all`.
 - [angularls](#angularls)
 - [ansiblels](#ansiblels)
 - [antlersls](#antlersls)
+- [apex_ls](#apex_ls)
 - [arduino_language_server](#arduino_language_server)
 - [asm_lsp](#asm_lsp)
 - [ast_grep](#ast_grep)
@@ -699,6 +700,59 @@ Default config:
 - `root_markers` :
   ```lua
   { "composer.json" }
+  ```
+
+---
+
+## apex_ls
+
+https://github.com/forcedotcom/salesforcedx-vscode
+
+ Language server for Apex.
+
+ For manual installation, download the JAR file from the [VSCode
+ extension](https://github.com/forcedotcom/salesforcedx-vscode/tree/develop/packages/salesforcedx-vscode-apex) and adjust the `apex_jar_path` appropriately.
+
+ ```lua
+ vim.lsp.config('apex_ls', {
+   apex_jar_path = '/path/to/apex-jorje-lsp.jar',
+   apex_enable_semantic_errors = false, -- Whether to allow Apex Language Server to surface semantic errors
+   apex_enable_completion_statistics = false, -- Whether to allow Apex Language Server to collect telemetry on code completion usage
+ }
+```
+
+ Example configuration using Mason:
+
+```lua
+ vim.lsp.config('apex_ls', {
+   apex_jar_path = vim.fn.stdpath('data') .. '/mason/share/apex-language-server/apex-jorje-lsp.jar',
+ }
+```
+
+ For a complete experience, you may need to ensure the treesitter parsers for 'apex' are installed (:TSInstall apex) as well as configure the filetype for apex (*.cls) files:
+
+ ```lua
+ vim.filetype.add({
+   pattern = {
+     ['.*/*.cls'] = 'apex',
+   },
+ })
+ ```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('apex_ls')
+```
+
+Default config:
+- `cmd`: [../lsp/apex_ls.lua:37](../lsp/apex_ls.lua#L37)
+- `filetypes` :
+  ```lua
+  { "apex", "apexcode" }
+  ```
+- `root_markers` :
+  ```lua
+  { "sfdx-project.json" }
   ```
 
 ---
@@ -2346,11 +2400,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g63ece2b151"
+      version = "0.12.0-dev+gb756a6165a"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g63ece2b151"
+      version = "0.12.0-dev+gb756a6165a"
     }
   }
   ```
