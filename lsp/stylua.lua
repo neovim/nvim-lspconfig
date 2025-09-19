@@ -7,6 +7,11 @@
 ---@type vim.lsp.Config
 return {
   cmd = { 'stylua', '--lsp' },
+  -- server looks for configuration in CWD only, does not use rootUri
+  reuse_client = function(client, config)
+    config.cmd_cwd = config.root_dir
+    return client.config.cmd_cwd == config.cmd_cwd
+  end,
   filetypes = { 'lua' },
   root_markers = { '.stylua.toml', 'stylua.toml' },
 }
