@@ -1,32 +1,42 @@
 # nvim-lspconfig
 
-nvim-lspconfig is a "data only" repo, providing basic, default [Nvim LSP client](https://neovim.io/doc/user/lsp.html)
-configurations for various LSP servers. View [all configs](doc/configs.md) or `:help lspconfig-all` from Nvim.
+nvim-lspconfig is a collection of LSP server configurations for the [Nvim LSP client](https://neovim.io/doc/user/lsp.html).
+
+View [all configs](doc/configs.md), or run `:help lspconfig-all` from Nvim.
 
 ## Important ⚠️
 
-* These configs are **best-effort and supported by the community (you).** See [contributions](#contributions).
-* The configs live in [`lsp/`](./lsp/).
-    * Upgrade to Nvim 0.11+ and use `vim.lsp.enable('…')` (not `require'lspconfig'.….setup{}`) to enable a config.
-* The configs in `lua/lspconfig/` are *deprecated* and will be removed.
-    * Upgrade to Nvim 0.11+ and use `vim.lsp.enable('…')` (not `require'lspconfig'.….setup{}`) to enable a config.
+* `require('lspconfig')` (the legacy "framework" of nvim-lspconfig) [is **deprecated**](https://github.com/neovim/nvim-lspconfig/issues/3693) in favor of [vim.lsp.config](https://neovim.io/doc/user/lsp.html#lsp-config) (Nvim 0.11+).
+    * The [lspconfig.lua](./lua/lspconfig.lua) *module* will be dropped. Calls to `require('lspconfig')` will show a warning, which will later become an error.
+* nvim-lspconfig itself is **NOT deprecated**. It provides server-specific configs.
+    * The configs live in the [lsp/](./lsp/) directory. `vim.lsp.config` automatically finds them and merges them with any local `lsp/*.lua` configs defined by you or a plugin.
+    * The old configs in [lua/lspconfig/](./lua/lspconfig/) are **deprecated** and will be removed.
+
+### Migration instructions
+
+1. Upgrade to Nvim 0.11+
+2. (Optional) Use `vim.lsp.config('…')` (not `require'lspconfig'.….setup{}`) to *customize* or *define* a config.
+3. Use `vim.lsp.enable('…')` (not `require'lspconfig'.….setup{}`) to *enable* a config, so that it activates for its `filetypes`.
+
+## Support
+
+These configs are **best-effort and supported by the community (you).** See [contributions](#contributions).
+
 * Ask questions on [GitHub Discussions](https://github.com/neovim/neovim/discussions), not the issue tracker.
 * If you found a bug in Nvim LSP (`:help lsp`), [report it to Neovim core](https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&template=lsp_bug_report.yml).
     * **Do not** report it here. Only configuration data lives here.
-* This repo only provides self-contained *configurations*. The `require'lspconfig'` "framework" is deprecated and will be removed.
-    * The "framework" parts (*not* the configs) of nvim-lspconfig were upstreamed to Nvim core (`vim.lsp.config`).
 
 ## Install
 
 [![LuaRocks](https://img.shields.io/luarocks/v/neovim/nvim-lspconfig?logo=lua&color=purple)](https://luarocks.org/modules/neovim/nvim-lspconfig)
 
 * Requires Nvim 0.11.3+.
-    * Support for Nvim 0.10 will be removed. Upgrade Nvim and nvim-lspconfig before reporting an issue.
+    * Support for Nvim 0.10 [will be removed](https://github.com/neovim/nvim-lspconfig/issues/3693). Upgrade Nvim and nvim-lspconfig before reporting an issue.
 * Install nvim-lspconfig using Vim's "packages" feature:
   ```
   git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
   ```
-* Or if you have Nvim 0.12 (nightly), you can use the builtin `vim.pack` plugin manager:
+* Or with Nvim 0.12 (nightly), you can use the builtin `vim.pack` plugin manager:
   ```lua
   vim.pack.add{
     { src = 'https://github.com/neovim/nvim-lspconfig' },
