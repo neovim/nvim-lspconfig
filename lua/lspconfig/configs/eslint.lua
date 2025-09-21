@@ -32,7 +32,7 @@ local function fix_all(opts)
   })
 end
 
-local root_file = {
+local eslint_config_files = {
   '.eslintrc',
   '.eslintrc.js',
   '.eslintrc.cjs',
@@ -62,9 +62,35 @@ return {
       'astro',
     },
     -- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
-    root_dir = function(fname)
-      root_file = util.insert_package_json(root_file, 'eslintConfig', fname)
-      return util.root_pattern(unpack(root_file))(fname)
+    root_dir = function(filename)
+      local bufnr = vim.api.nvim_buf_get_number(filename)
+      -- The project root is where the LSP can be started from
+      -- As stated in the documentation above, this LSP supports monorepos and simple projects.
+      -- We select then from the project root, which is identified by the presence of a package
+      -- manager lock file.
+      local root_markers = { 'git', 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
+      -- We fallback to the current working directory if no project root is found
+      local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
+
+      -- We know that the buffer is using ESLint if it has a config file
+      -- in its directory tree.
+      --
+      -- Eslint used to support package.json files as config files, but it doesn't anymore.
+      -- We keep this for backward compatibility.
+      local eslint_config_files_with_package_json =
+        util.insert_package_json(eslint_config_files, 'eslintConfig', filename)
+      local is_buffer_using_eslint = vim.fs.find(eslint_config_files_with_package_json, {
+        path = filename,
+        type = 'file',
+        limit = 1,
+        upward = true,
+        stop = vim.fs.dirname(project_root),
+      })[1]
+      if not is_buffer_using_eslint then
+        return
+      end
+
+      return project_root
     end,
     -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
     settings = {
@@ -105,28 +131,46 @@ return {
       -- The "workspaceFolder" is a VSCode concept. It limits how far the
       -- server will traverse the file system when locating the ESLint config
       -- file (e.g., .eslintrc).
-      config.settings.workspaceFolder = {
-        uri = new_root_dir,
-        name = vim.fn.fnamemodify(new_root_dir, ':t'),
-      }
+      local root_dir = new_root_dir
 
-      -- Support flat config
-      if
-        vim.fn.filereadable(new_root_dir .. '/eslint.config.js') == 1
-        or vim.fn.filereadable(new_root_dir .. '/eslint.config.mjs') == 1
-        or vim.fn.filereadable(new_root_dir .. '/eslint.config.cjs') == 1
-        or vim.fn.filereadable(new_root_dir .. '/eslint.config.ts') == 1
-        or vim.fn.filereadable(new_root_dir .. '/eslint.config.mts') == 1
-        or vim.fn.filereadable(new_root_dir .. '/eslint.config.cts') == 1
-      then
-        config.settings.experimental.useFlatConfig = true
-      end
+      if root_dir then
+        config.settings = config.settings or {}
+        config.settings.workspaceFolder = {
+          uri = root_dir,
+          name = vim.fn.fnamemodify(root_dir, ':t'),
+        }
 
-      -- Support Yarn2 (PnP) projects
-      local pnp_cjs = new_root_dir .. '/.pnp.cjs'
-      local pnp_js = new_root_dir .. '/.pnp.js'
-      if vim.uv.fs_stat(pnp_cjs) or vim.uv.fs_stat(pnp_js) then
-        config.cmd = vim.list_extend({ 'yarn', 'exec' }, config.cmd)
+        -- Support flat config files
+        -- They contain 'config' in the file name
+        local flat_config_files = vim.tbl_filter(function(file)
+          return file:match('config')
+        end, eslint_config_files)
+
+        for _, file in ipairs(flat_config_files) do
+          local found_files = vim.fn.globpath(root_dir, file, true, true)
+
+          -- Filter out files inside node_modules
+          local filtered_files = {}
+          for _, found_file in ipairs(found_files) do
+            if string.find(found_file, '[/\\]node_modules[/\\]') == nil then
+              table.insert(filtered_files, found_file)
+            end
+          end
+
+          if #filtered_files > 0 then
+            config.settings.experimental = config.settings.experimental or {}
+            config.settings.experimental.useFlatConfig = true
+            break
+          end
+        end
+
+        -- Support Yarn2 (PnP) projects
+        local pnp_cjs = root_dir .. '/.pnp.cjs'
+        local pnp_js = root_dir .. '/.pnp.js'
+        if vim.uv.fs_stat(pnp_cjs) or vim.uv.fs_stat(pnp_js) then
+          local cmd = config.cmd
+          config.cmd = vim.list_extend({ 'yarn', 'exec' }, cmd)
+        end
       end
     end,
     handlers = {
