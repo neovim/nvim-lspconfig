@@ -100,6 +100,31 @@ return {
 }
 ```
 
+### Root marker priority
+
+By default, the [`root_markers` field](https://neovim.io/doc/user/lsp.html#lsp-root_markers) is ordered by priority.
+However, configs can specify "equal priority" (since Nvim 0.11.3) by placing names in a nested list.
+
+For example in this config, `'package.json'` and `'tsconfig.json'` have *equal* priority, whereas `'.git'` has lower priority.
+
+```lua
+return {
+  …
+  root_markers = { { 'package.json', 'tsconfig.json' }, { '.git' } }
+}
+```
+
+Since nvim-lspconfig still supports Nvim older than 0.11.3, avoid the "nested list" form on older versions of Nvim:
+
+```lua
+return {
+  …
+  root_markers = vim.fn.has('nvim-0.11.3') == 1
+    and { { 'package.json', 'tsconfig.json' }, { '.git' } }
+    or { 'package.json', 'tsconfig.json', '.git' }
+}
+```
+
 ## Commit style
 
 Follow the Neovim core [commit message guidelines](https://github.com/neovim/neovim/blob/master/CONTRIBUTING.md#commit-messages). Examples:
