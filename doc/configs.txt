@@ -1564,11 +1564,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc2136e3590"
+      version = "0.12.0-dev+g4adfc4b7bc"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc2136e3590"
+      version = "0.12.0-dev+g4adfc4b7bc"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:79
@@ -4610,6 +4610,32 @@ Default config:
 - offset_encoding: >lua
   "utf-32"
 - root_dir (use "gF" to view): ../lsp/lean3ls.lua:18
+<
+
+------------------------------------------------------------------------------
+leanls
+
+https://github.com/leanprover/lean4
+
+Lean installation instructions can be found
+[here](https://leanprover-community.github.io/get_started.html#regular-install).
+
+The Lean language server is included in any Lean installation and
+does not require any additional packages.
+
+Note: that if you're using [lean.nvim](https://github.com/Julian/lean.nvim),
+that plugin fully handles the setup of the Lean language server,
+and you shouldn't set up `leanls` both with it and `lspconfig`.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('leanls')
+
+
+Default config:
+- cmd (use "gF" to view): ../lsp/leanls.lua:15
+- filetypes: >lua
+  { "lean" }
+- root_dir (use "gF" to view): ../lsp/leanls.lua:15
 <
 
 ------------------------------------------------------------------------------
