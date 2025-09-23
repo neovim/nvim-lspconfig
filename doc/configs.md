@@ -11476,7 +11476,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { ".stylua.toml", "stylua.toml" }
+  { ".stylua.toml", "stylua.toml", ".editorconfig" }
   ```
 
 ---

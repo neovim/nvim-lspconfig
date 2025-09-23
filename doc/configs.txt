@@ -8477,7 +8477,7 @@ Default config:
 - filetypes: >lua
   { "lua" }
 - root_markers: >lua
-  { ".stylua.toml", "stylua.toml" }
+  { ".stylua.toml", "stylua.toml", ".editorconfig" }
 <
 
 ------------------------------------------------------------------------------
