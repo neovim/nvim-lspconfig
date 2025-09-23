@@ -85,11 +85,24 @@ Launches the requested (configured) client, but only if it successfully
 resolves a root directory. Note: Defaults to all configured servers matching
 the current buffer filetype.
 
-:LspStop [client_id] or [config_name]                            *:LspStop*
-Stops the server with the given client-id or config name. Defaults to
-stopping all servers active on the current buffer. To force stop language
-servers: >vim
-    :LspStop ++force
+:LspStop[!] [client_id_or_config_name] ...                         *:LspStop*
+Stops one or more clients by client id or config name.
+If no arguments are provided, all clients are stopped.
+If [!] is used, forcefully stops clients even if they are still initializing.
+
+This command adapts its behaviour based on the Neovim version:
+
+Neovim >= 0.11.2:
+ - Supports [!] (bang) to forcefully stop clients.
+ - Example: >vim
+   :LspStop 1 tsserver
+   :LspStop! pyright
+
+Neovim < 0.11.2:
+ - Does not support [!] (bang).
+ - Use `++force` to forcefully stop clients.
+ - Example: >vim
+   :LspStop ++force pyright
 
 :LspRestart [client_id] or [config_name]                         *:LspRestart*
 Restarts the client with the given client-id or config name, and attempts
