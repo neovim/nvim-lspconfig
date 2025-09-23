@@ -161,7 +161,27 @@ Most of the time, the reason for failure is present in the logs.
 
 * `:LspInfo` (alias to `:checkhealth vim.lsp`) shows the status of active and configured language servers.
 * `:LspStart <config_name>` Start the requested server name. Will only successfully start if the command detects a root directory matching the current config.
-* `:LspStop [<client_id_or_name>]` Stops the given server. Defaults to stopping all servers active on the current buffer. To force stop add `++force`
+* `:LspStop[!] [<client_id_or_name>] ...`
+  * Stops one or more clients by client id or config name.
+  * If no arguments are provided, all clients are stopped.
+  * If [!] is used, forcefully stops clients even if they are still initializing.
+
+This command adapts its behaviour based on the Neovim version:
+
+### Neovim >= 0.11.2
+
+* Supports [!] (bang) to forcefully stop clients.
+* Example:
+   `:LspStop 1 tsserver`
+   `:LspStop! pyright`
+
+### Neovim < 0.11.2
+
+* Does not support [!] (bang).
+* Use `++force` to forcefully stop clients.
+* Example:
+   `:LspStop ++force pyright`
+
 * `:LspRestart [<client_id_or_name>]` Restarts the given client, and attempts to reattach to all previously attached buffers. Defaults to restarting all active servers.
 
 ## Contributions
