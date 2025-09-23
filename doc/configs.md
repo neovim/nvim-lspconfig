@@ -2401,11 +2401,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g4adfc4b7bc"
+      version = "0.12.0-dev+g7837161076"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g4adfc4b7bc"
+      version = "0.12.0-dev+g7837161076"
     }
   }
   ```
