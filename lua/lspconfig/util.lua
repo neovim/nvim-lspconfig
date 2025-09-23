@@ -41,7 +41,7 @@ function M.root_pattern(...)
       end)
 
       if match ~= nil then
-        local real = vim.loop.fs_realpath(match)
+        local real = vim.uv.fs_realpath(match)
         return real or match -- fallback to original if realpath fails
       end
     end
