@@ -159,28 +159,40 @@ if vim.fn.has('nvim-0.11.2') == 1 then
   })
 
   api.nvim_create_user_command('LspStop', function(info)
+    local force = info.bang
     local clients = info.fargs
 
+    local ids = {}
     -- Default to disabling all servers on current buffer
     if #clients == 0 then
-      clients = vim
-        .iter(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() }))
+      ids = vim
+        .iter(vim.lsp.get_clients { bufnr = vim.api.nvim_get_current_buf() })
         :map(function(client)
-          return client.name
+          return client.id
+        end)
+        :totable()
+    else
+      ids = vim
+        .iter(clients)
+        :map(function(client)
+          local id = tonumber(client)
+          if id then
+            return client
+          else
+            if vim.lsp.config[client] ~= nil then
+              return vim.lsp.config[client].id
+            end
+          end
         end)
         :totable()
     end
-
-    for _, name in ipairs(clients) do
-      if vim.lsp.config[name] == nil then
-        vim.notify(("Invalid server name '%s'"):format(name))
-      else
-        vim.lsp.enable(name, false)
-      end
+    for _, id in ipairs(ids) do
+      vim.lsp.stop_client(tonumber(id), force)
     end
   end, {
     desc = 'Disable and stop the given client',
-    nargs = '?',
+    nargs = '*',
+    bang = true,
     complete = complete_client,
   })
 
