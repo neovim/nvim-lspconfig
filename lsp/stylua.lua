@@ -8,5 +8,5 @@
 return {
   cmd = { 'stylua', '--lsp' },
   filetypes = { 'lua' },
-  root_markers = { '.stylua.toml', 'stylua.toml' },
+  root_markers = { '.stylua.toml', 'stylua.toml', '.editorconfig' },
 }
