@@ -5867,8 +5867,9 @@ Default config:
   { "ocamllsp" }
 - filetypes: >lua
   { "ocaml", "menhir", "ocamlinterface", "ocamllex", "reason", "dune" }
-- get_language_id (use "gF" to view): ../lsp/ocamllsp.lua:28
-- root_dir (use "gF" to view): ../lsp/ocamllsp.lua:28
+- get_language_id (use "gF" to view): ../lsp/ocamllsp.lua:42
+- root_markers: >lua
+  { { "dune-project", "dune-workspace" }, { "*.opam", "opam", "esy.json", "package.json" }, { ".git" } }
 <
 
 ------------------------------------------------------------------------------

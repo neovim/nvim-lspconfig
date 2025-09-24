@@ -8035,8 +8035,11 @@ Default config:
   ```lua
   { "ocaml", "menhir", "ocamlinterface", "ocamllex", "reason", "dune" }
   ```
-- `get_language_id`: [../lsp/ocamllsp.lua:28](../lsp/ocamllsp.lua#L28)
-- `root_dir`: [../lsp/ocamllsp.lua:28](../lsp/ocamllsp.lua#L28)
+- `get_language_id`: [../lsp/ocamllsp.lua:42](../lsp/ocamllsp.lua#L42)
+- `root_markers` :
+  ```lua
+  { { "dune-project", "dune-workspace" }, { "*.opam", "opam", "esy.json", "package.json" }, { ".git" } }
+  ```
 
 ---
 
