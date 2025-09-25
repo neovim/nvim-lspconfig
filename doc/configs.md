@@ -2401,11 +2401,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gb256e0476b"
+      version = "0.12.0-dev+g0be3dee44f"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gb256e0476b"
+      version = "0.12.0-dev+g0be3dee44f"
     }
   }
   ```
@@ -10044,6 +10044,7 @@ Default config:
     formatter = "auto"
   }
   ```
+- `reuse_client`: [../lsp/ruby_lsp.lua:16](../lsp/ruby_lsp.lua#L16)
 - `root_markers` :
   ```lua
   { "Gemfile", ".git" }
