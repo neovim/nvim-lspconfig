@@ -2401,11 +2401,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g0be3dee44f"
+      version = "0.12.0-dev+g9da316fcc4"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g0be3dee44f"
+      version = "0.12.0-dev+g9da316fcc4"
     }
   }
   ```
@@ -5921,7 +5921,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { { "build.gradle", "build.gradle.kts", "build.xml", "pom.xml", "settings.gradle", "settings.gradle.kts" }, { ".git" } }
+  { { "mvnw", "gradlew", "build.gradle", "build.gradle.kts", ".git" }, { "build.xml", "pom.xml", "settings.gradle", "settings.gradle.kts" } }
   ```
 
 ---
