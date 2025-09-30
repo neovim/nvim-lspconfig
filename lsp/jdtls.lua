@@ -32,22 +32,8 @@
 ---       vim.lsp.config('jdtls', { cmd = { 'jdtls' } })
 ---     ```
 
-local env = {
-  HOME = vim.uv.os_homedir(),
-  XDG_CACHE_HOME = os.getenv 'XDG_CACHE_HOME',
-  JDTLS_JVM_ARGS = os.getenv 'JDTLS_JVM_ARGS',
-}
-
-local function get_cache_dir()
-  return env.XDG_CACHE_HOME and env.XDG_CACHE_HOME or env.HOME .. '/.cache'
-end
-
 local function get_jdtls_cache_dir()
-  return get_cache_dir() .. '/jdtls'
-end
-
-local function get_jdtls_config_dir()
-  return get_jdtls_cache_dir() .. '/config'
+  return vim.fn.stdpath('cache') .. '/jdtls'
 end
 
 local function get_jdtls_workspace_dir()
@@ -55,8 +41,9 @@ local function get_jdtls_workspace_dir()
 end
 
 local function get_jdtls_jvm_args()
+  local env = os.getenv('JDTLS_JVM_ARGS')
   local args = {}
-  for a in string.gmatch((env.JDTLS_JVM_ARGS or ''), '%S+') do
+  for a in string.gmatch((env or ''), '%S+') do
     local arg = string.format('--jvm-arg=%s', a)
     table.insert(args, arg)
   end
@@ -85,20 +72,34 @@ local root_markers2 = {
 
 ---@type vim.lsp.Config
 return {
-  cmd = {
-    'jdtls',
-    '-configuration',
-    get_jdtls_config_dir(),
-    '-data',
-    get_jdtls_workspace_dir(),
-    get_jdtls_jvm_args(),
-  },
+  ---@param dispatchers? vim.lsp.rpc.Dispatchers
+  ---@param config vim.lsp.Config
+  cmd = function(dispatchers, config)
+    local workspace_dir = get_jdtls_workspace_dir()
+    local data_dir = workspace_dir
+
+    if config.root_markers then
+      local root_dir = vim.fs.root(0, config.root_markers)
+      if root_dir then
+        data_dir = data_dir .. '/' .. vim.fn.fnamemodify(root_dir, ':p:h:t')
+      end
+    end
+
+    local config_cmd = {
+      'jdtls',
+      '-data',
+      data_dir,
+      get_jdtls_jvm_args(),
+    }
+
+    return vim.lsp.rpc.start(config_cmd, dispatchers, {
+      cwd = config.cmd_cwd,
+      env = config.cmd_env,
+      detached = config.detached,
+    })
+  end,
   filetypes = { 'java' },
   root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers1, root_markers2 }
     or vim.list_extend(root_markers1, root_markers2),
-  init_options = {
-    workspace = get_jdtls_workspace_dir(),
-    jvm_args = {},
-    os_config = nil,
-  },
+  init_options = {},
 }
