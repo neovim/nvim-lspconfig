@@ -5904,20 +5904,14 @@ vim.lsp.enable('jdtls')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "jdtls", "-configuration", "/home/runner/.cache/jdtls/config", "-data", "/home/runner/.cache/jdtls/workspace" }
-  ```
+- `cmd`: [../lsp/jdtls.lua:74](../lsp/jdtls.lua#L74)
 - `filetypes` :
   ```lua
   { "java" }
   ```
 - `init_options` :
   ```lua
-  {
-    jvm_args = {},
-    workspace = "/home/runner/.cache/jdtls/workspace"
-  }
+  {}
   ```
 - `root_markers` :
   ```lua

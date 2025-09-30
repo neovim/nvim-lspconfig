@@ -4243,15 +4243,11 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "jdtls", "-configuration", "/home/runner/.cache/jdtls/config", "-data", "/home/runner/.cache/jdtls/workspace" }
+- cmd (use "gF" to view): ../lsp/jdtls.lua:74
 - filetypes: >lua
   { "java" }
 - init_options: >lua
-  {
-    jvm_args = {},
-    workspace = "/home/runner/.cache/jdtls/workspace"
-  }
+  {}
 - root_markers: >lua
   { { "mvnw", "gradlew", "build.gradle", "build.gradle.kts", ".git" }, { "build.xml", "pom.xml", "settings.gradle", "settings.gradle.kts" } }
 <
