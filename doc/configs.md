@@ -12798,7 +12798,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { "ty.toml", "pyproject.toml", ".git" }
+  { "ty.toml", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" }
   ```
 
 ---
