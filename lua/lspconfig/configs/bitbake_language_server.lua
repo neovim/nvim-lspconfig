@@ -8,14 +8,7 @@ return {
   },
   docs = {
     description = [[
-https://github.com/Freed-Wu/bitbake-language-server
-
-`bash-language-server` can be installed via `pip`:
-```sh
-pip install bitbake-language-server
-```
-
-Language server for bitbake.
+🛠️ bitbake language server
 ]],
   },
 }
