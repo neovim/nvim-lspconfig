@@ -1,6 +1,6 @@
 ---@brief
 ---
---- https://github.com/Decodetalkers/neocmakelsp
+--- https://github.com/neocmakelsp/neocmakelsp
 ---
 --- CMake LSP Implementation
 ---
