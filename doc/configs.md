@@ -2408,11 +2408,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g35fc4fda99"
+      version = "0.12.0-dev+g28ccebd138"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g35fc4fda99"
+      version = "0.12.0-dev+g28ccebd138"
     }
   }
   ```
@@ -7545,7 +7545,7 @@ Default config:
 
 ## neocmake
 
-https://github.com/Decodetalkers/neocmakelsp
+https://github.com/neocmakelsp/neocmakelsp
 
 CMake LSP Implementation
 
