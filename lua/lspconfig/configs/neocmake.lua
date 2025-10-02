@@ -11,7 +11,7 @@ return {
   },
   docs = {
     description = [[
-https://github.com/neocmakelsp/neocmakelsp
+https://github.com/Decodetalkers/neocmakelsp
 
 CMake LSP Implementation
 
