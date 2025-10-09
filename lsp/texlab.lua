@@ -111,25 +111,23 @@ local function buf_find_envs(client, bufnr)
 end
 
 local function buf_change_env(client, bufnr)
-  local new
   vim.ui.input({ prompt = 'New environment name: ' }, function(input)
-    new = input
-  end)
-  if not new or new == '' then
-    return vim.notify('No environment name provided', vim.log.levels.WARN)
-  end
-  local pos = vim.api.nvim_win_get_cursor(0)
-  return client:exec_cmd({
-    title = 'change_environment',
-    command = 'texlab.changeEnvironment',
-    arguments = {
-      {
-        textDocument = { uri = vim.uri_from_bufnr(bufnr) },
-        position = { line = pos[1] - 1, character = pos[2] },
-        newName = tostring(new),
+    if not input or input == '' then
+      return vim.notify('No environment name provided', vim.log.levels.WARN)
+    end
+    local pos = vim.api.nvim_win_get_cursor(0)
+    return client:exec_cmd({
+      title = 'change_environment',
+      command = 'texlab.changeEnvironment',
+      arguments = {
+        {
+          textDocument = { uri = vim.uri_from_bufnr(bufnr) },
+          position = { line = pos[1] - 1, character = pos[2] },
+          newName = tostring(input),
+        },
       },
-    },
-  }, { bufnr = bufnr })
+    }, { bufnr = bufnr })
+  end)
 end
 
 ---@type vim.lsp.Config
