@@ -1595,11 +1595,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2abea5dc37"
+      version = "0.12.0-dev+g645206e87f"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2abea5dc37"
+      version = "0.12.0-dev+g645206e87f"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -9006,7 +9006,7 @@ Default config:
   { "texlab" }
 - filetypes: >lua
   { "tex", "plaintex", "bib" }
-- on_attach (use "gF" to view): ../lsp/texlab.lua:136
+- on_attach (use "gF" to view): ../lsp/texlab.lua:134
 - root_markers: >lua
   { ".git", ".latexmkrc", "latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" }
 - settings: >lua

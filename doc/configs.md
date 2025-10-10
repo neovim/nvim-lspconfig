@@ -2436,11 +2436,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2abea5dc37"
+      version = "0.12.0-dev+g645206e87f"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2abea5dc37"
+      version = "0.12.0-dev+g645206e87f"
     }
   }
   ```
@@ -12150,7 +12150,7 @@ Default config:
   ```lua
   { "tex", "plaintex", "bib" }
   ```
-- `on_attach`: [../lsp/texlab.lua:136](../lsp/texlab.lua#L136)
+- `on_attach`: [../lsp/texlab.lua:134](../lsp/texlab.lua#L134)
 - `root_markers` :
   ```lua
   { ".git", ".latexmkrc", "latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" }
