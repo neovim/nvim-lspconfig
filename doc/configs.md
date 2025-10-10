@@ -210,7 +210,6 @@ Nvim by running `:help lspconfig-all`.
 - [ntt](#ntt)
 - [nushell](#nushell)
 - [nxls](#nxls)
-- [ocamlls](#ocamlls)
 - [ocamllsp](#ocamllsp)
 - [ols](#ols)
 - [omnisharp](#omnisharp)
@@ -2436,11 +2435,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g645206e87f"
+      version = "0.12.0-dev+g56713ef872"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g645206e87f"
+      version = "0.12.0-dev+g56713ef872"
     }
   }
   ```
@@ -8009,33 +8008,6 @@ Default config:
   ```lua
   { "nx.json", ".git" }
   ```
-
----
-
-## ocamlls
-
-https://github.com/ocaml-lsp/ocaml-language-server
-
-`ocaml-language-server` can be installed via `npm`
-```sh
-npm install -g ocaml-language-server
-```
-
-Snippet to enable the language server:
-```lua
-vim.lsp.enable('ocamlls')
-```
-
-Default config:
-- `cmd` :
-  ```lua
-  { "ocaml-language-server", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
-  { "ocaml", "reason" }
-  ```
-- `root_dir`: [../lsp/ocamlls.lua:13](../lsp/ocamlls.lua#L13)
 
 ---
 
