@@ -2166,6 +2166,26 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+djls
+
+https://github.com/joshuadavidthomas/django-language-server
+
+`djls`, a language server for the Django web framework.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('djls')
+
+
+Default config:
+- cmd: >lua
+  { "djls", "serve" }
+- filetypes: >lua
+  { "htmldjango", "html", "python" }
+- root_markers: >lua
+  { "manage.py", "pyproject.toml", ".git" }
+<
+
+------------------------------------------------------------------------------
 djlsp
 
 https://github.com/fourdigits/django-template-lsp

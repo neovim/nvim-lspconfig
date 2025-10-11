@@ -79,6 +79,7 @@ Nvim by running `:help lspconfig-all`.
 - [dhall_lsp_server](#dhall_lsp_server)
 - [diagnosticls](#diagnosticls)
 - [digestif](#digestif)
+- [djls](#djls)
 - [djlsp](#djlsp)
 - [docker_compose_language_service](#docker_compose_language_service)
 - [docker_language_server](#docker_language_server)
@@ -3190,6 +3191,33 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## djls
+
+https://github.com/joshuadavidthomas/django-language-server
+
+`djls`, a language server for the Django web framework.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('djls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "djls", "serve" }
+  ```
+- `filetypes` :
+  ```lua
+  { "htmldjango", "html", "python" }
+  ```
+- `root_markers` :
+  ```lua
+  { "manage.py", "pyproject.toml", ".git" }
   ```
 
 ---
