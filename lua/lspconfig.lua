@@ -83,7 +83,7 @@ function mt:__index(k)
         'vim.lsp.config (see :help lspconfig-nvim-0.11)',
         'v3.0.0',
         'nvim-lspconfig',
-        false
+        true
       )
     end
 
