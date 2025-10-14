@@ -42,10 +42,10 @@ return {
     },
 
     filetypes = { 'cs', 'vb' },
-    root_dir = util.root_pattern('*.sln', '*.csproj', 'omnisharp.json', 'function.json'),
     on_new_config = function(new_config, _)
       -- Get the initially configured value of `cmd`
       new_config.cmd = { unpack(new_config.cmd or {}) }
+      root_markers = {".sln",".csproj","omnisharp.json","function.json"}
 
       -- Append hard-coded command arguments
       table.insert(new_config.cmd, '-z') -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
