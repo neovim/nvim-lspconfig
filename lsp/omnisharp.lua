@@ -14,8 +14,6 @@
 ---
 ---
 
-local util = require 'lspconfig.util'
-
 ---@type vim.lsp.Config
 return {
   cmd = {
@@ -29,15 +27,7 @@ return {
     '--languageserver',
   },
   filetypes = { 'cs', 'vb' },
-  root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(
-      util.root_pattern '*.sln'(fname)
-        or util.root_pattern '*.csproj'(fname)
-        or util.root_pattern 'omnisharp.json'(fname)
-        or util.root_pattern 'function.json'(fname)
-    )
-  end,
+  root_markers = {".sln",".csproj","omnisharp.json","function.json"},
   init_options = {},
   capabilities = {
     workspace = {
