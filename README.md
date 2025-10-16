@@ -15,8 +15,8 @@ View [all configs](doc/configs.md), or run `:help lspconfig-all` from Nvim.
 ### Migration instructions
 
 1. Upgrade to Nvim 0.11+
-2. (Optional) Use `vim.lsp.config('…')` (not `require'lspconfig'.….setup{}`) to *customize* or *define* a config.
-3. Use `vim.lsp.enable('…')` (not `require'lspconfig'.….setup{}`) to *enable* a config, so that it activates for its `filetypes`.
+2. (Optional) Use [`vim.lsp.config['…']`](https://neovim.io/doc/user/lsp.html#lsp-quickstart) (not `require'lspconfig'.….setup{}`) to *customize* or *define* a config.
+3. Use [`vim.lsp.enable('…')`](https://neovim.io/doc/user/lsp.html#vim.lsp.enable()) (not `require'lspconfig'.….setup{}`) to *enable* a config, so that it activates for its `filetypes`.
 
 ## Support
 
