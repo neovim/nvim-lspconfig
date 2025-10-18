@@ -30,10 +30,10 @@ npm install
 Complete installation instructions are given on the project page on github: https://github.com/aviatesk/JETLS
 
 To update an existing installation, use the following commands:
-```sh 
+``sh
 cd $HOME/julia/environments
 git pull
-julia --project=. -e 'using Pkg; Pkg.update()' 
+julia --project=. -e 'using Pkg; Pkg.update()'
 ```
 
     ]]
