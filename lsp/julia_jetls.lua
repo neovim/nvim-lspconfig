@@ -4,7 +4,7 @@
 ---
 --- `JETLS` is a new language server for Julia
 ---
---- To install JETLS.jl, please follow inthe installation instructions given on the project githb page
+--- To install JETLS.jl, please follow in the installation instructions given on the project github page
 
 --- Define the directory where julia environments are usually located
 local julia_envs = os.getenv('HOME') .. '.julia/environments'
