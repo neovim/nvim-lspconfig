@@ -3,10 +3,13 @@
 --- https://github.com/aviatesk/JETLS.jl
 ---
 --- `JETLS` is a new language server for Julia
+---
+--- To install JETLS.jl, please follow inthe installation instructions given on the project githb page
 
 --- Define the directory where julia environments are usually located
 local julia_envs = os.getenv('HOME') .. '.julia/environments'
 
+---@type vim.lsp.Config
 return {
   cmd = {
     'julia',
