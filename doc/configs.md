@@ -1840,7 +1840,7 @@ vim.lsp.enable('buf_ls')
 Default config:
 - `cmd` :
   ```lua
-  { "buf", "beta", "lsp", "--timeout=0", "--log-format=text" }
+  { "buf", "lsp", "serve", "--timeout=0", "--log-format=text" }
   ```
 - `filetypes` :
   ```lua

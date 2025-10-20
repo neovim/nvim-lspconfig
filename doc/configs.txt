@@ -1141,7 +1141,7 @@ Snippet to enable the language server: >lua
 
 Default config:
 - cmd: >lua
-  { "buf", "beta", "lsp", "--timeout=0", "--log-format=text" }
+  { "buf", "lsp", "serve", "--timeout=0", "--log-format=text" }
 - filetypes: >lua
   { "proto" }
 - root_markers: >lua
