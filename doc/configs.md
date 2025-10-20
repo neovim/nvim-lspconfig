@@ -41,7 +41,6 @@ Nvim by running `:help lspconfig-all`.
 - [buck2](#buck2)
 - [buddy_ls](#buddy_ls)
 - [buf_ls](#buf_ls)
-- [bufls](#bufls)
 - [bzl](#bzl)
 - [c3_lsp](#c3_lsp)
 - [cairo_ls](#cairo_ls)
@@ -1854,38 +1853,6 @@ Default config:
 
 ---
 
-## bufls
-
-https://github.com/bufbuild/buf-language-server
-
-`buf-language-server` can be installed via `go install`:
-```sh
-go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
-```
-
-bufls is a Protobuf language server compatible with Buf modules and workspaces
-
-Snippet to enable the language server:
-```lua
-vim.lsp.enable('bufls')
-```
-
-Default config:
-- `cmd` :
-  ```lua
-  { "bufls", "serve" }
-  ```
-- `filetypes` :
-  ```lua
-  { "proto" }
-  ```
-- `root_markers` :
-  ```lua
-  { "buf.work.yaml", ".git" }
-  ```
-
----
-
 ## bzl
 
 https://bzl.io/
@@ -2436,11 +2403,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gf40672be99"
+      version = "0.12.0-dev+g869e55f2aa"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gf40672be99"
+      version = "0.12.0-dev+g869e55f2aa"
     }
   }
   ```
