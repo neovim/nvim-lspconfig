@@ -2560,10 +2560,7 @@ Default config:
   ```lua
   { "css", "scss", "less" }
   ```
-- `root_markers` :
-  ```lua
-  { "package.json", ".git" }
-  ```
+- `root_dir`: [../lsp/css_variables.lua:14](../lsp/css_variables.lua#L14)
 - `settings` :
   ```lua
   {

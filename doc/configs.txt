@@ -1691,8 +1691,7 @@ Default config:
   { "css-variables-language-server", "--stdio" }
 - filetypes: >lua
   { "css", "scss", "less" }
-- root_markers: >lua
-  { "package.json", ".git" }
+- root_dir (use "gF" to view): ../lsp/css_variables.lua:14
 - settings: >lua
   {
     cssVariables = {
