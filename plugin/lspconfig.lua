@@ -128,33 +128,31 @@ if vim.fn.has('nvim-0.11.2') == 1 then
 
     -- Default to restarting all active servers
     if #clients == 0 then
-      clients = vim
-        .iter(vim.lsp.get_clients())
-        :map(function(client)
-          return client.name
-        end)
-        :totable()
+      clients = vim.lsp.get_clients()
     end
 
-    for _, name in ipairs(clients) do
+    for client in vim.iter(clients) do
+      local name = client.name
       if vim.lsp.config[name] == nil then
         vim.notify(("Invalid server name '%s'"):format(name))
       else
         vim.lsp.enable(name, false)
+        if info.bang then
+          client:stop(true)
+        end
       end
     end
 
     local timer = assert(vim.uv.new_timer())
     timer:start(500, 0, function()
-      for _, name in ipairs(clients) do
-        vim.schedule_wrap(function(x)
-          vim.lsp.enable(x)
-        end)(name)
+      for client in vim.iter(clients) do
+        vim.schedule_wrap(vim.lsp.enable)(client.name)
       end
     end)
   end, {
     desc = 'Restart the given client',
     nargs = '?',
+    bang = true,
     complete = complete_client,
   })
 
@@ -163,24 +161,24 @@ if vim.fn.has('nvim-0.11.2') == 1 then
 
     -- Default to disabling all servers on current buffer
     if #clients == 0 then
-      clients = vim
-        .iter(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() }))
-        :map(function(client)
-          return client.name
-        end)
-        :totable()
+      clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
     end
 
-    for _, name in ipairs(clients) do
+    for client in vim.iter(clients) do
+      local name = client.name
       if vim.lsp.config[name] == nil then
         vim.notify(("Invalid server name '%s'"):format(name))
       else
         vim.lsp.enable(name, false)
+        if info.bang then
+          client:stop(true)
+        end
       end
     end
   end, {
     desc = 'Disable and stop the given client',
     nargs = '?',
+    bang = true,
     complete = complete_client,
   })
 
