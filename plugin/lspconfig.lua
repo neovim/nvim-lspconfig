@@ -129,6 +129,15 @@ if vim.fn.has('nvim-0.11.2') == 1 then
     -- Default to restarting all active servers
     if #clients == 0 then
       clients = vim.lsp.get_clients()
+    else
+      clients = vim
+        .iter(clients)
+        :map(function(client_name)
+          return vim.lsp.get_clients(function(client)
+            return client.name == client_name
+          end)
+        end)
+        :to_table()
     end
 
     for client in vim.iter(clients) do
@@ -161,7 +170,16 @@ if vim.fn.has('nvim-0.11.2') == 1 then
 
     -- Default to disabling all servers on current buffer
     if #clients == 0 then
-      clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+      clients = vim.lsp.get_clients()
+    else
+      clients = vim
+        .iter(clients)
+        :map(function(client_name)
+          return vim.lsp.get_clients(function(client)
+            return client.name == client_name
+          end)
+        end)
+        :to_table()
     end
 
     for client in vim.iter(clients) do
