@@ -124,29 +124,35 @@ if vim.fn.has('nvim-0.11.2') == 1 then
   })
 
   api.nvim_create_user_command('LspRestart', function(info)
-    local clients = info.fargs
+    local client_names = info.fargs
 
     -- Default to restarting all active servers
-    if #clients == 0 then
-      clients = vim.lsp.get_clients()
+    if #client_names == 0 then
+      client_names = vim
+        .iter(vim.lsp.get_clients())
+        :map(function(client)
+          return client.name
+        end)
+        :totable()
     end
 
-    for client in vim.iter(clients) do
-      local name = client.name
+    for name in vim.iter(client_names) do
       if vim.lsp.config[name] == nil then
         vim.notify(("Invalid server name '%s'"):format(name))
       else
         vim.lsp.enable(name, false)
         if info.bang then
-          client:stop(true)
+          vim.iter(vim.lsp.get_clients({ name = name })):each(function(client)
+            client:stop(true)
+          end)
         end
       end
     end
 
     local timer = assert(vim.uv.new_timer())
     timer:start(500, 0, function()
-      for client in vim.iter(clients) do
-        vim.schedule_wrap(vim.lsp.enable)(client.name)
+      for name in vim.iter(client_names) do
+        vim.schedule_wrap(vim.lsp.enable)(name)
       end
     end)
   end, {
@@ -157,21 +163,27 @@ if vim.fn.has('nvim-0.11.2') == 1 then
   })
 
   api.nvim_create_user_command('LspStop', function(info)
-    local clients = info.fargs
+    local client_names = info.fargs
 
     -- Default to disabling all servers on current buffer
-    if #clients == 0 then
-      clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+    if #client_names == 0 then
+      client_names = vim
+        .iter(vim.lsp.get_clients())
+        :map(function(client)
+          return client.name
+        end)
+        :totable()
     end
 
-    for client in vim.iter(clients) do
-      local name = client.name
+    for name in vim.iter(client_names) do
       if vim.lsp.config[name] == nil then
         vim.notify(("Invalid server name '%s'"):format(name))
       else
         vim.lsp.enable(name, false)
         if info.bang then
-          client:stop(true)
+          vim.iter(vim.lsp.get_clients({ name = name })):each(function(client)
+            client:stop(true)
+          end)
         end
       end
     end
