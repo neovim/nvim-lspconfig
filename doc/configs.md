@@ -8710,7 +8710,7 @@ Default config:
 
 ## postgres_lsp
 
-https://pgtools.dev
+https://pg-language-server.com
 
 A collection of language tools and a Language Server Protocol (LSP) implementation for Postgres, focusing on developer experience and reliable SQL tooling.
 
@@ -8722,7 +8722,7 @@ vim.lsp.enable('postgres_lsp')
 Default config:
 - `cmd` :
   ```lua
-  { "postgrestools", "lsp-proxy" }
+  { "postgres-language-server", "lsp-proxy" }
   ```
 - `filetypes` :
   ```lua
@@ -8730,7 +8730,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { "postgrestools.jsonc" }
+  { "postgres-language-server.jsonc" }
   ```
 
 ---
