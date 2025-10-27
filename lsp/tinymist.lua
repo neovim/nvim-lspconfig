@@ -17,10 +17,7 @@
 local function create_tinymist_command(command_name, client, bufnr)
   local export_type = command_name:match 'tinymist%.export(%w+)'
   local info_type = command_name:match 'tinymist%.(%w+)'
-  if info_type and info_type:match '^get' then
-    info_type = info_type:gsub('^get', 'Get')
-  end
-  local cmd_display = export_type or info_type
+  local cmd_display = export_type or info_type:gsub('^get', 'Get'):gsub('^pin', 'Pin')
   ---@return nil
   local function run_tinymist_command()
     local arguments = { vim.api.nvim_buf_get_name(bufnr) }
@@ -64,6 +61,7 @@ return {
       'tinymist.getDocumentTrace',
       'tinymist.getWorkspaceLabels',
       'tinymist.getDocumentMetrics',
+      'tinymist.pinMain',
     } do
       local cmd_func, cmd_name, cmd_desc = create_tinymist_command(command, client, bufnr)
       vim.api.nvim_buf_create_user_command(bufnr, 'Lsp' .. cmd_name, cmd_func, { nargs = 0, desc = cmd_desc })
