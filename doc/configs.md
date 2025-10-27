@@ -2403,11 +2403,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g095b9f98f3"
+      version = "0.12.0-dev+g070f4d3da0"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g095b9f98f3"
+      version = "0.12.0-dev+g070f4d3da0"
     }
   }
   ```
@@ -12362,7 +12362,7 @@ Default config:
   ```lua
   { "typst" }
   ```
-- `on_attach`: [../lsp/tinymist.lua:49](../lsp/tinymist.lua#L49)
+- `on_attach`: [../lsp/tinymist.lua:46](../lsp/tinymist.lua#L46)
 - `root_markers` :
   ```lua
   { ".git" }

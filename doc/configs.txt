@@ -1572,11 +1572,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g095b9f98f3"
+      version = "0.12.0-dev+g070f4d3da0"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g095b9f98f3"
+      version = "0.12.0-dev+g070f4d3da0"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -9178,7 +9178,7 @@ Default config:
   { "tinymist" }
 - filetypes: >lua
   { "typst" }
-- on_attach (use "gF" to view): ../lsp/tinymist.lua:49
+- on_attach (use "gF" to view): ../lsp/tinymist.lua:46
 - root_markers: >lua
   { ".git" }
 <
