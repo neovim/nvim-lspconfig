@@ -32,12 +32,30 @@
 ---       vim.lsp.config('jdtls', { cmd = { 'jdtls' } })
 ---     ```
 
+local default_jdtls_config = require('lspconfig.configs.jdtls').default_config
+
 local function get_jdtls_cache_dir()
   return vim.fn.stdpath('cache') .. '/jdtls'
 end
 
 local function get_jdtls_workspace_dir()
   return get_jdtls_cache_dir() .. '/workspace'
+end
+
+local function resolve_root_dir(config)
+  local root_dir = config and config.root_dir
+
+  if type(root_dir) == 'function' then
+    local fname = vim.api.nvim_buf_get_name(0)
+    root_dir = root_dir(fname)
+  end
+
+  if not root_dir and type(default_jdtls_config.root_dir) == 'function' then
+    local fname = vim.api.nvim_buf_get_name(0)
+    root_dir = default_jdtls_config.root_dir(fname)
+  end
+
+  return root_dir
 end
 
 local function get_jdtls_jvm_args()
@@ -75,11 +93,13 @@ return {
   ---@param dispatchers? vim.lsp.rpc.Dispatchers
   ---@param config vim.lsp.ClientConfig
   cmd = function(dispatchers, config)
+    config = config or {}
+    local root_dir = resolve_root_dir(config)
     local workspace_dir = get_jdtls_workspace_dir()
     local data_dir = workspace_dir
 
-    if config.root_dir then
-      data_dir = data_dir .. '/' .. vim.fn.fnamemodify(config.root_dir, ':p:h:t')
+    if root_dir then
+      data_dir = data_dir .. '/' .. vim.fn.fnamemodify(root_dir, ':p:h:t')
     end
 
     local config_cmd = {
