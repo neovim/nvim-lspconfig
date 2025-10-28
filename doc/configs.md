@@ -2403,11 +2403,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g070f4d3da0"
+      version = "0.12.0-dev+g7088441de4"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g070f4d3da0"
+      version = "0.12.0-dev+g7088441de4"
     }
   }
   ```
@@ -13162,7 +13162,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "markdown", "text", "tex", "rst" }
+  { "asciidoc", "markdown", "text", "tex", "rst", "html", "xml" }
   ```
 - `root_markers` :
   ```lua
