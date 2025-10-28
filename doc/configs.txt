@@ -8861,10 +8861,7 @@ Snippet to enable the language server: >lua
 Default config:
 - cmd: >lua
   { "termux-language-server" }
-- filetypes: >lua
-  { "PKGBUILD" }
-- root_markers: >lua
-  { ".git" }
+- root_dir (use "gF" to view): ../lsp/termux_language_server.lua:10
 <
 
 ------------------------------------------------------------------------------

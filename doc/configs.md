@@ -11970,14 +11970,7 @@ Default config:
   ```lua
   { "termux-language-server" }
   ```
-- `filetypes` :
-  ```lua
-  { "PKGBUILD" }
-  ```
-- `root_markers` :
-  ```lua
-  { ".git" }
-  ```
+- `root_dir`: [../lsp/termux_language_server.lua:10](../lsp/termux_language_server.lua#L10)
 
 ---
 
