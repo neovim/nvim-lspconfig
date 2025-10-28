@@ -24,7 +24,7 @@
 ---     local bufnr = args.buf
 ---     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 ---
----     if client.name == 'gitlab_duo' and
+---     if vim.lsp.inline_completion and
 ---        client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr) then
 ---       vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
 ---
@@ -49,8 +49,6 @@
 --- })
 --- ```
 
-local curl = require('plenary.curl')
-
 -- Configuration
 local config = {
   gitlab_url = vim.env.GITLAB_URL or 'https://gitlab.com',
@@ -58,6 +56,52 @@ local config = {
   scopes = 'api',
   token_file = vim.fn.stdpath('data') .. '/gitlab_duo_oauth.json',
 }
+
+-- Helper function to make POST requests with curl via vim.system
+local function curl_post(url, data, headers)
+  local curl_args = {
+    'curl',
+    '-s',
+    '-w',
+    '\n%{http_code}',
+    '-X',
+    'POST',
+    url,
+  }
+
+  -- Add headers
+  for key, value in pairs(headers or {}) do
+    table.insert(curl_args, '-H')
+    table.insert(curl_args, key .. ': ' .. value)
+  end
+
+  -- Add data
+  if data then
+    table.insert(curl_args, '-d')
+    table.insert(curl_args, data)
+  end
+
+  local result = vim.system(curl_args, { text = true }):wait()
+
+  -- Split body and status code
+  local output = result.stdout or ''
+  local body_end = output:match('.*\n()%d+$')
+
+  local body = ''
+  local status = 0
+
+  if body_end then
+    body = output:sub(1, body_end - 2) -- -2 to remove trailing newline
+    status = tonumber(output:match('\n(%d+)$')) or 0
+  else
+    body = output
+  end
+
+  return {
+    status = status,
+    body = body,
+  }
+end
 
 -- Token management
 local function save_token(token_data)
@@ -95,10 +139,11 @@ end
 local function refresh_access_token(refresh_token)
   vim.notify('Refreshing GitLab OAuth token...', vim.log.levels.INFO)
 
-  local response = curl.post(config.gitlab_url .. '/oauth/token', {
-    body = string.format('client_id=%s&refresh_token=%s&grant_type=refresh_token', config.client_id, refresh_token),
-    headers = { ['Content-Type'] = 'application/x-www-form-urlencoded' },
-  })
+  local response = curl_post(
+    config.gitlab_url .. '/oauth/token',
+    string.format('client_id=%s&refresh_token=%s&grant_type=refresh_token', config.client_id, refresh_token),
+    { ['Content-Type'] = 'application/x-www-form-urlencoded' }
+  )
 
   if response.status ~= 200 then
     vim.notify('Failed to refresh token: ' .. (response.body or 'Unknown error'), vim.log.levels.ERROR)
@@ -139,10 +184,11 @@ end
 
 -- OAuth Device Flow
 local function device_authorization()
-  local response = curl.post(config.gitlab_url .. '/oauth/authorize_device', {
-    body = string.format('client_id=%s&scope=%s', config.client_id, config.scopes),
-    headers = { ['Content-Type'] = 'application/x-www-form-urlencoded' },
-  })
+  local response = curl_post(
+    config.gitlab_url .. '/oauth/authorize_device',
+    string.format('client_id=%s&scope=%s', config.client_id, config.scopes),
+    { ['Content-Type'] = 'application/x-www-form-urlencoded' }
+  )
 
   if response.status ~= 200 then
     vim.notify('Device authorization failed: ' .. response.status, vim.log.levels.ERROR)
@@ -165,14 +211,15 @@ local function poll_for_token(device_code, interval, client)
   local function poll()
     attempts = attempts + 1
 
-    local response = curl.post(config.gitlab_url .. '/oauth/token', {
-      body = string.format(
+    local response = curl_post(
+      config.gitlab_url .. '/oauth/token',
+      string.format(
         'client_id=%s&device_code=%s&grant_type=urn:ietf:params:oauth:grant-type:device_code',
         config.client_id,
         device_code
       ),
-      headers = { ['Content-Type'] = 'application/x-www-form-urlencoded' },
-    })
+      { ['Content-Type'] = 'application/x-www-form-urlencoded' }
+    )
 
     local ok, body = pcall(vim.json.decode, response.body)
     if not ok then
