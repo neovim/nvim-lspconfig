@@ -2403,11 +2403,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g7088441de4"
+      version = "0.12.0-dev+g6dd6c5b523"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g7088441de4"
+      version = "0.12.0-dev+g6dd6c5b523"
     }
   }
   ```
@@ -10209,6 +10209,9 @@ Default config:
   ```lua
   {
     experimental = {
+      commands = {
+        commands = { "rust-analyzer.showReferences", "rust-analyzer.runSingle", "rust-analyzer.debugSingle" }
+      },
       serverStatusNotification = true
     }
   }
