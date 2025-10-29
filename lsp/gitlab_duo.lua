@@ -7,7 +7,7 @@
 --- The GitLab LSP enables any editor or IDE to integrate with GitLab Duo
 --- for AI-powered code suggestions via the Language Server Protocol.
 ---
---- **Prerequisites:**
+--- Prerequisites:
 --- - Node.js and npm installed
 --- - GitLab account with Duo Pro license
 --- - Internet connection for OAuth device flow
@@ -116,16 +116,12 @@ local function save_token(token_data)
 end
 
 local function load_token()
-  local file = io.open(config.token_file, 'r')
-  if file then
-    local content = file:read('*all')
-    file:close()
-    local ok, token_data = pcall(vim.json.decode, content)
-    if ok then
-      return token_data
-    end
+  if vim.fn.filereadable(config.token_file) == 0 then
+    return nil
   end
-  return nil
+
+  local blob = vim.fn.readblob(config.token_file)
+  return vim.json.decode(blob)
 end
 
 local function is_token_expired(token_data)
@@ -195,11 +191,7 @@ local function device_authorization()
     return nil
   end
 
-  local ok, data = pcall(vim.json.decode, response.body)
-  if not ok then
-    vim.notify('Failed to parse authorization response', vim.log.levels.ERROR)
-    return nil
-  end
+  local data = vim.json.decode(response.body)
 
   return data
 end
@@ -273,32 +265,7 @@ local function sign_in(_bufnr, client)
     return
   end
 
-  local message = string.format(
-    'GitLab Duo Authorization\n\n'
-      .. '1. Open: %s\n'
-      .. '2. Enter code: %s\n\n'
-      .. 'Code copied to clipboard. Waiting for authorization...',
-    auth_data.verification_uri,
-    auth_data.user_code
-  )
-
-  -- Copy code to clipboard
-  vim.fn.setreg('+', auth_data.user_code)
-  vim.fn.setreg('*', auth_data.user_code)
-
-  -- Show message with option to open browser
-  local choice = vim.fn.confirm(message, '&Open Browser\n&Continue')
-
-  if choice == 1 then
-    -- Try to open browser
-    local open_cmd = vim.fn.has('mac') == 1 and 'open'
-      or vim.fn.has('unix') == 1 and 'xdg-open'
-      or vim.fn.has('win32') == 1 and 'start'
-
-    if open_cmd then
-      vim.fn.system(open_cmd .. ' ' .. auth_data.verification_uri)
-    end
-  end
+  vim.ui.open(auth_data.verification_uri .. '?user_code=' .. auth_data.user_code)
 
   poll_for_token(auth_data.device_code, auth_data.interval or 5, client)
 end
