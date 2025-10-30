@@ -2403,11 +2403,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6dd6c5b523"
+      version = "0.12.0-dev+g69bddc089f"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6dd6c5b523"
+      version = "0.12.0-dev+g69bddc089f"
     }
   }
   ```
@@ -2495,10 +2495,7 @@ vim.lsp.enable('csharp_ls')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "csharp-ls" }
-  ```
+- `cmd`: [../lsp/csharp_ls.lua:14](../lsp/csharp_ls.lua#L14)
 - `filetypes` :
   ```lua
   { "cs" }

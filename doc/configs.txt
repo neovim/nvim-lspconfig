@@ -1572,11 +1572,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6dd6c5b523"
+      version = "0.12.0-dev+g69bddc089f"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6dd6c5b523"
+      version = "0.12.0-dev+g69bddc089f"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -1644,8 +1644,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "csharp-ls" }
+- cmd (use "gF" to view): ../lsp/csharp_ls.lua:14
 - filetypes: >lua
   { "cs" }
 - init_options: >lua
