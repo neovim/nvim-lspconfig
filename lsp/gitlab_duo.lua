@@ -12,7 +12,7 @@
 --- - GitLab account with Duo Pro license
 --- - Internet connection for OAuth device flow
 ---
---- **Setup:**
+--- Setup:
 --- 1. Run :LspGitLabDuoSignIn to start OAuth authentication
 --- 2. Follow the browser prompts to authorize
 --- 3. Enable inline completion in LspAttach event (see example below)
