@@ -21,6 +21,7 @@
 return {
   cmd = { 'harper-ls', '--stdio' },
   filetypes = {
+    'asciidoc',
     'c',
     'cpp',
     'cs',
