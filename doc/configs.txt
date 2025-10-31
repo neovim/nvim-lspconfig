@@ -185,8 +185,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "ngserver", "--stdio", "--tsProbeLocations", "../..,?/node_modules", "--ngProbeLocations", "../../@angular/language-server/node_modules,?/node_modules/@angular/language-server/node_modules", "--angularCoreVersion", "" }
+- cmd (use "gF" to view): ../lsp/angularls.lua:67
 - filetypes: >lua
   { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" }
 - root_markers: >lua

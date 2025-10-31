@@ -603,10 +603,7 @@ vim.lsp.enable('angularls')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "ngserver", "--stdio", "--tsProbeLocations", "../..,?/node_modules", "--ngProbeLocations", "../../@angular/language-server/node_modules,?/node_modules/@angular/language-server/node_modules", "--angularCoreVersion", "" }
-  ```
+- `cmd`: [../lsp/angularls.lua:67](../lsp/angularls.lua#L67)
 - `filetypes` :
   ```lua
   { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" }
