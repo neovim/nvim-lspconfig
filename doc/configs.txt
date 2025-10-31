@@ -777,7 +777,7 @@ Default config:
   { "python" }
 - on_attach (use "gF" to view): ../lsp/basedpyright.lua:24
 - root_markers: >lua
-  { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
+  { "pyrightconfig.json", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
 - settings: >lua
   {
     basedpyright = {
@@ -6785,7 +6785,7 @@ Default config:
   { "python" }
 - on_attach (use "gF" to view): ../lsp/pyright.lua:24
 - root_markers: >lua
-  { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" }
+  { "pyrightconfig.json", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
 - settings: >lua
   {
     python = {
