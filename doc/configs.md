@@ -2400,11 +2400,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g69bddc089f"
+      version = "0.12.0-dev+gaccd392f4d"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g69bddc089f"
+      version = "0.12.0-dev+gaccd392f4d"
     }
   }
   ```
@@ -12332,11 +12332,11 @@ https://github.com/Myriad-Dreamin/tinymist
 An integrated language service for Typst [taɪpst]. You can also call it "微霭" [wēi ǎi] in Chinese.
 
 Currently some of Tinymist's workspace commands are supported, namely:
-`LspTinymistExportSvg`, `LspTinymistExportPng`, `LspTinymistExportPdf
+`LspTinymistExportSvg`, `LspTinymistExportPng`, `LspTinymistExportPdf`,
 `LspTinymistExportMarkdown`, `LspTinymistExportText`, `LspTinymistExportQuery`,
 `LspTinymistExportAnsiHighlight`, `LspTinymistGetServerInfo`,
-`LspTinymistGetDocumentTrace`, `LspTinymistGetWorkspaceLabels`, and
-`LspTinymistGetDocumentMetrics`.
+`LspTinymistGetDocumentTrace`, `LspTinymistGetWorkspaceLabels`,
+`LspTinymistGetDocumentMetrics`, and `LspTinymistPinMain`.
 
 Snippet to enable the language server:
 ```lua
@@ -12352,7 +12352,7 @@ Default config:
   ```lua
   { "typst" }
   ```
-- `on_attach`: [../lsp/tinymist.lua:46](../lsp/tinymist.lua#L46)
+- `on_attach`: [../lsp/tinymist.lua:45](../lsp/tinymist.lua#L45)
 - `root_markers` :
   ```lua
   { ".git" }
