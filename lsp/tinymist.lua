@@ -4,11 +4,11 @@
 --- An integrated language service for Typst [taɪpst]. You can also call it "微霭" [wēi ǎi] in Chinese.
 ---
 --- Currently some of Tinymist's workspace commands are supported, namely:
---- `LspTinymistExportSvg`, `LspTinymistExportPng`, `LspTinymistExportPdf
+--- `LspTinymistExportSvg`, `LspTinymistExportPng`, `LspTinymistExportPdf`,
 --- `LspTinymistExportMarkdown`, `LspTinymistExportText`, `LspTinymistExportQuery`,
 --- `LspTinymistExportAnsiHighlight`, `LspTinymistGetServerInfo`,
---- `LspTinymistGetDocumentTrace`, `LspTinymistGetWorkspaceLabels`, and
---- `LspTinymistGetDocumentMetrics`.
+--- `LspTinymistGetDocumentTrace`, `LspTinymistGetWorkspaceLabels`,
+--- `LspTinymistGetDocumentMetrics`, and `LspTinymistPinMain`.
 
 ---@param command_name string
 ---@param client vim.lsp.Client
@@ -27,8 +27,7 @@ local function create_tinymist_command(command_name, client, bufnr)
       if err then
         return vim.notify(err.code .. ': ' .. err.message, vim.log.levels.ERROR)
       end
-      -- If exporting, show the string result; else, show the table for inspection
-      vim.notify(export_type and res or vim.inspect(res), vim.log.levels.INFO)
+      vim.notify(vim.inspect(res), vim.log.levels.INFO)
     end
     return client:exec_cmd({
       title = title_str,
