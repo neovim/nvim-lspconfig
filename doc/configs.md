@@ -2400,11 +2400,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gaccd392f4d"
+      version = "0.12.0-dev+g130ef73e39"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gaccd392f4d"
+      version = "0.12.0-dev+g130ef73e39"
     }
   }
   ```
@@ -4102,7 +4102,7 @@ vim.lsp.enable('expert')
 Default config:
 - `cmd` :
   ```lua
-  { "expert" }
+  { "expert", "--stdio" }
   ```
 - `filetypes` :
   ```lua
