@@ -12,5 +12,5 @@ return {
   root_markers = { 'buf.yaml', '.git' },
   reuse_client = function()
     return true
-  end
+  end,
 }
