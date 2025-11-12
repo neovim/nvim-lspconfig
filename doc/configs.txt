@@ -1571,11 +1571,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2822c38f2e"
+      version = "0.12.0-dev+g653871da1b"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2822c38f2e"
+      version = "0.12.0-dev+g653871da1b"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -2507,6 +2507,8 @@ Snippet to enable the language server: >lua
 
 
 Default config:
+- cmd: >lua
+  { "elixir-ls" }
 - filetypes: >lua
   { "elixir", "eelixir", "heex", "surface" }
 - root_dir (use "gF" to view): ../lsp/elixirls.lua:34

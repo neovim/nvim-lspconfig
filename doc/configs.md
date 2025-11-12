@@ -2400,11 +2400,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2822c38f2e"
+      version = "0.12.0-dev+g653871da1b"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2822c38f2e"
+      version = "0.12.0-dev+g653871da1b"
     }
   }
   ```
@@ -3638,6 +3638,10 @@ vim.lsp.enable('elixirls')
 ```
 
 Default config:
+- `cmd` :
+  ```lua
+  { "elixir-ls" }
+  ```
 - `filetypes` :
   ```lua
   { "elixir", "eelixir", "heex", "surface" }
