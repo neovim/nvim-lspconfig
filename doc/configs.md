@@ -2400,11 +2400,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g130ef73e39"
+      version = "0.12.0-dev+g2822c38f2e"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g130ef73e39"
+      version = "0.12.0-dev+g2822c38f2e"
     }
   }
   ```
