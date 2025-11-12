@@ -36,7 +36,7 @@ local function collect_node_modules(root_dir)
   local internal_servers = fn.globpath(fn.stdpath('data'), '**/node_modules/.bin/ngserver', true, true)
   for _, exe in ipairs(internal_servers) do
     local realpath = uv.fs_realpath(exe) or exe
-    local candidate = fs.normalize(fs.joinpath(fs.dirname(realpath), '../../node_modules'))
+    local candidate = fs.normalize(fs.joinpath(fs.dirname(realpath), '../../../'))
     if uv.fs_stat(candidate) then
       table.insert(results, candidate)
     end
