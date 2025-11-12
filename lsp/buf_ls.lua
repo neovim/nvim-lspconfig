@@ -11,6 +11,7 @@ return {
   filetypes = { 'proto' },
   root_markers = { 'buf.yaml', '.git' },
   reuse_client = function()
+    -- `buf lsp serve` is meant to be used with multiple workspaces.
     return true
   end,
 }
