@@ -1143,6 +1143,7 @@ Default config:
   { "buf", "lsp", "serve", "--timeout=0", "--log-format=text" }
 - filetypes: >lua
   { "proto" }
+- reuse_client (use "gF" to view): ../lsp/buf_ls.lua:9
 - root_markers: >lua
   { "buf.yaml", ".git" }
 <

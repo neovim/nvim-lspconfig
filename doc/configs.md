@@ -1843,6 +1843,7 @@ Default config:
   ```lua
   { "proto" }
   ```
+- `reuse_client`: [../lsp/buf_ls.lua:9](../lsp/buf_ls.lua#L9)
 - `root_markers` :
   ```lua
   { "buf.yaml", ".git" }
