@@ -21,22 +21,26 @@ jobs:
             exit 1
           fi
 
-  luacheck:
+  luals:
     runs-on: ubuntu-latest
+    env:
+      LUALS_VERSION: 3.15.0
     steps:
       - uses: actions/checkout@v5
-      - uses: lunarmodules/luacheck@v1
+      - uses: rhysd/action-setup-vim@v1
         with:
-          args: lua/* test/*
+          neovim: true
+          version: nightly # Remove this to use stable.
+      - name: Install lua-language-server
+        run: |
+          mkdir -p build/luals
+          curl -L -o build/luals.tar.gz https://github.com/LuaLS/lua-language-server/releases/download/${LUALS_VERSION}/lua-language-server-${LUALS_VERSION}-linux-x64.tar.gz
+          tar -xzf build/luals.tar.gz -C build/luals
+      - name: Run luals
+        run: |
+          export VIMRUNTIME="$(nvim --headless --cmd 'echo $VIMRUNTIME' +q 2>&1)"
+          ./build/luals/bin/lua-language-server --configpath=$(pwd)/.luarc.json --check=lsp/ --checklevel=Hint
 
-  selene:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: NTBBloodbath/selene-action@v1.0.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --display-style=quiet .
 
   stylua:
     runs-on: ubuntu-latest

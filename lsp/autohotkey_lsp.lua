@@ -16,6 +16,7 @@ return {
   cmd = { 'autohotkey_lsp', '--stdio' },
   filetypes = { 'autohotkey' },
   root_markers = { 'package.json' },
+  ---@diagnostic disable-next-line: missing-fields
   flags = { debounce_text_changes = 500 },
   --capabilities = capabilities,
   --on_attach = custom_attach,

@@ -1,5 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "diagnostics" : {
+    "disable" : [
+      "inject-field",
+      "undefined-global"
+    ]
+  },
   "runtime": {
     "version": "LuaJIT"
   },

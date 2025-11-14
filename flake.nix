@@ -13,9 +13,7 @@
       default = pkgs.mkShell {
         packages = [
           pkgs.stylua
-          pkgs.luaPackages.luacheck
           pkgs.luajitPackages.vusted
-          pkgs.selene
         ];
       };
     });

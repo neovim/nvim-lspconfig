@@ -33,6 +33,7 @@ return {
       group = vim.api.nvim_create_augroup('lspconfig.svelte', {}),
       callback = function(ctx)
         -- internal API to sync changes that have not yet been saved to the file system
+        ---@diagnostic disable-next-line: param-type-mismatch
         client:notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
       end,
     })

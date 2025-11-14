@@ -36,6 +36,7 @@
 ---@type vim.lsp.Config
 return {
   cmd = function(dispatchers, config)
+    ---@diagnostic disable: undefined-field
     local local_cmd = {
       vim.env.JAVA_HOME and (vim.env.JAVA_HOME .. '/bin/java') or 'java',
       '-cp',
@@ -48,6 +49,7 @@ return {
     if config.apex_jvm_max_heap then
       table.insert(local_cmd, '-Xmx' .. config.apex_jvm_max_heap)
     end
+    ---@diagnostic enable: undefined-field
     table.insert(local_cmd, 'apex.jorje.lsp.ApexLanguageServerLauncher')
 
     return vim.lsp.rpc.start(local_cmd, dispatchers)

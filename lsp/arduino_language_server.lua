@@ -82,9 +82,11 @@ return {
   },
   capabilities = {
     textDocument = {
+      ---@diagnostic disable-next-line: assign-type-mismatch
       semanticTokens = vim.NIL,
     },
     workspace = {
+      ---@diagnostic disable-next-line: assign-type-mismatch
       semanticTokens = vim.NIL,
     },
   },
