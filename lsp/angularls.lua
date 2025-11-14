@@ -66,7 +66,7 @@ end
 ---@type vim.lsp.Config
 return {
   cmd = function(dispatchers, config)
-    local root_dir = (config and config.root) or fn.getcwd()
+    local root_dir = (config and config.root_dir) or fn.getcwd()
     local node_paths = collect_node_modules(root_dir)
 
     local ts_probe = table.concat(node_paths, ',')
