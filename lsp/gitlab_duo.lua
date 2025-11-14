@@ -370,7 +370,6 @@ return {
     },
   },
   settings = {
-    token = get_valid_token() or '',
     baseUrl = config.gitlab_url,
     logLevel = 'info',
     codeCompletion = {
