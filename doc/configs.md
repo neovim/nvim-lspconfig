@@ -122,6 +122,7 @@ Nvim by running `:help lspconfig-all`.
 - [ghdl_ls](#ghdl_ls)
 - [ginko_ls](#ginko_ls)
 - [gitlab_ci_ls](#gitlab_ci_ls)
+- [gitlab_duo](#gitlab_duo)
 - [glasgow](#glasgow)
 - [gleam](#gleam)
 - [glint](#glint)
@@ -4771,6 +4772,118 @@ Default config:
   }
   ```
 - `root_dir`: [../lsp/gitlab_ci_ls.lua:15](../lsp/gitlab_ci_ls.lua#L15)
+
+---
+
+## gitlab_duo
+
+GitLab Duo Language Server Configuration for Neovim
+
+https://gitlab.com/gitlab-org/editor-extensions/gitlab-lsp
+
+The GitLab LSP enables any editor or IDE to integrate with GitLab Duo
+for AI-powered code suggestions via the Language Server Protocol.
+
+Prerequisites:
+- Node.js and npm installed
+- GitLab account with Duo Pro license
+- Internet connection for OAuth device flow
+
+Setup:
+1. Run :LspGitLabDuoSignIn to start OAuth authentication
+2. Follow the browser prompts to authorize
+3. Enable inline completion in LspAttach event (see example below)
+
+Inline Completion Example:
+```lua
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local bufnr = args.buf
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
+    if vim.lsp.inline_completion and
+       client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr) then
+      vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
+
+      -- Tab to accept suggestion
+      vim.keymap.set('i', '<Tab>', function()
+        if vim.lsp.inline_completion.is_visible() then
+          return vim.lsp.inline_completion.accept()
+        else
+          return '<Tab>'
+        end
+      end, { expr = true, buffer = bufnr, desc = 'GitLab Duo: Accept suggestion' })
+
+      -- Alt/Option+[ for previous suggestion
+      vim.keymap.set('i', '<M-[>', vim.lsp.inline_completion.select_prev,
+        { buffer = bufnr, desc = 'GitLab Duo: Previous suggestion' })
+
+      -- Alt/Option+] for next suggestion
+      vim.keymap.set('i', '<M-]>', vim.lsp.inline_completion.select_next,
+        { buffer = bufnr, desc = 'GitLab Duo: Next suggestion' })
+    end
+  end
+})
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('gitlab_duo')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "npx", "--registry=https://gitlab.com/api/v4/packages/npm/", "@gitlab-org/gitlab-lsp", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "ruby", "go", "javascript", "typescript", "typescriptreact", "javascriptreact", "rust", "lua", "python", "java", "cpp", "c", "php", "cs", "kotlin", "swift", "scala", "vue", "svelte", "html", "css", "scss", "json", "yaml" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    editorInfo = {
+      name = "Neovim",
+      version = "0.12.0-dev+gd017f3c9a0"
+    },
+    editorPluginInfo = {
+      name = "Neovim LSP",
+      version = "0.12.0-dev+gd017f3c9a0"
+    },
+    extension = {
+      name = "Neovim LSP Client",
+      version = "0.12.0-dev+gd017f3c9a0"
+    },
+    ide = {
+      name = "Neovim",
+      vendor = "Neovim",
+      version = "0.12.0-dev+gd017f3c9a0"
+    }
+  }
+  ```
+- `on_attach`: [../lsp/gitlab_duo.lua:319](../lsp/gitlab_duo.lua#L319)
+- `on_init`: [../lsp/gitlab_duo.lua:319](../lsp/gitlab_duo.lua#L319)
+- `root_markers` :
+  ```lua
+  { ".git" }
+  ```
+- `settings` :
+  ```lua
+  {
+    baseUrl = "https://gitlab.com",
+    codeCompletion = {
+      enableSecretRedaction = true
+    },
+    featureFlags = {
+      streamCodeGenerations = false
+    },
+    logLevel = "info",
+    telemetry = {
+      enabled = false
+    }
+  }
+  ```
 
 ---
 
