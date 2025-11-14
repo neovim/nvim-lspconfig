@@ -21,22 +21,18 @@ jobs:
             exit 1
           fi
 
-  luacheck:
+  emmylua:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: lunarmodules/luacheck@v1
-        with:
-          args: lua/* test/*
-
-  selene:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: NTBBloodbath/selene-action@v1.0.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --display-style=quiet .
+      - name: Install emmylua
+        run: |
+          mkdir -p build/emmylua
+          curl -L -o emmylua.tar.gz https://github.com/EmmyLuaLs/emmylua-analyzer-rust/releases/download/0.17.0/emmylua_check-linux-x64.tar.gz
+          tar -xzf emmylua.tar.gz -C build/emmylua
+      - name: Run emmylua
+        run: |
+          ./build/emmylua/emmylua_check --config=.emmyrc.json .
 
   stylua:
     runs-on: ubuntu-latest
