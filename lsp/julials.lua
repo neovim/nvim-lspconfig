@@ -36,6 +36,7 @@ local function activate_env(path)
   local function _activate_env(environment)
     if environment then
       for _, julials_client in ipairs(julials_clients) do
+        ---@diagnostic disable-next-line: param-type-mismatch
         julials_client:notify('julia/activateenvironment', { envPath = environment })
       end
       vim.notify('Julia environment activated: \n`' .. environment .. '`', vim.log.levels.INFO)

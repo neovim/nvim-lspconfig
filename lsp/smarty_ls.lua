@@ -31,6 +31,6 @@ return {
     },
   },
   init_options = {
-    storageDir = nil,
+    storageDir = vim.NIL,
   },
 }

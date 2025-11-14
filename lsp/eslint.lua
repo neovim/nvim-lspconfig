@@ -128,6 +128,7 @@ return {
   -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
   settings = {
     validate = 'on',
+    ---@diagnostic disable-next-line: assign-type-mismatch
     packageManager = nil,
     useESLintClass = false,
     experimental = {
@@ -202,7 +203,7 @@ return {
       local pnp_js = root_dir .. '/.pnp.js'
       if vim.uv.fs_stat(pnp_cjs) or vim.uv.fs_stat(pnp_js) then
         local cmd = config.cmd
-        config.cmd = vim.list_extend({ 'yarn', 'exec' }, cmd)
+        config.cmd = vim.list_extend({ 'yarn', 'exec' }, type(cmd) == 'table' and cmd or {})
       end
     end
   end,

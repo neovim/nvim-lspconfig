@@ -96,6 +96,7 @@ return {
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'LspDenolsCache', function()
       client:exec_cmd({
+        title = 'DenolsCache',
         command = 'deno.cache',
         arguments = { {}, vim.uri_from_bufnr(bufnr) },
       }, { bufnr = bufnr }, function(err, _, ctx)
