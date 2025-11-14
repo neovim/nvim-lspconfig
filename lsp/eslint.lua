@@ -201,9 +201,8 @@ return {
       -- Support Yarn2 (PnP) projects
       local pnp_cjs = root_dir .. '/.pnp.cjs'
       local pnp_js = root_dir .. '/.pnp.js'
-      if vim.uv.fs_stat(pnp_cjs) or vim.uv.fs_stat(pnp_js) then
-        local cmd = config.cmd
-        config.cmd = vim.list_extend({ 'yarn', 'exec' }, type(cmd) == 'table' and cmd or {})
+      if type(config.cmd) == 'table' and (vim.uv.fs_stat(pnp_cjs) or vim.uv.fs_stat(pnp_js)) then
+        config.cmd = vim.list_extend({ 'yarn', 'exec' }, config.cmd --[[@as table]])
       end
     end
   end,

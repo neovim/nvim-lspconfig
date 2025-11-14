@@ -36,7 +36,7 @@ _check_brief_placement() {
 }
 
 # Returned object should have `---@type vim.lsp.Config` annotation.
-# TODO: use luals/emmylua type checking in CI: https://github.com/neovim/neovim/pull/33344
+# CI checks luals/emmylua: https://github.com/neovim/nvim-lspconfig/pull/4185
 _check_type() {
   if git grep --files-without-match '\-\-\-\@type vim\.lsp\.Config' -- 'lsp/*.lua' ; then
     _fail 'Missing `---@type vim.lsp.Config` annotation.'
