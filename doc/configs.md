@@ -1352,7 +1352,7 @@ Default config:
   ```lua
   { "python" }
   ```
-- `on_attach`: [../lsp/basedpyright.lua:24](../lsp/basedpyright.lua#L24)
+- `on_attach`: [../lsp/basedpyright.lua:25](../lsp/basedpyright.lua#L25)
 - `root_markers` :
   ```lua
   { "pyrightconfig.json", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
@@ -2401,11 +2401,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd2517acdc5"
+      version = "0.12.0-dev+gd017f3c9a0"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd2517acdc5"
+      version = "0.12.0-dev+gd017f3c9a0"
     }
   }
   ```
@@ -3456,7 +3456,7 @@ Default config:
     show_symbols_only_follow_by_hanzi = false
   }
   ```
-- `on_attach`: [../lsp/ds_pinyin_lsp.lua:46](../lsp/ds_pinyin_lsp.lua#L46)
+- `on_attach`: [../lsp/ds_pinyin_lsp.lua:48](../lsp/ds_pinyin_lsp.lua#L48)
 - `root_markers` :
   ```lua
   { ".git" }
@@ -6173,7 +6173,7 @@ Default config:
   ```lua
   { "julia" }
   ```
-- `on_attach`: [../lsp/julials.lua:120](../lsp/julials.lua#L120)
+- `on_attach`: [../lsp/julials.lua:121](../lsp/julials.lua#L121)
 - `root_markers` :
   ```lua
   { "Project.toml", "JuliaProject.toml" }
@@ -6774,7 +6774,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" }
+  { ".emmyrc.json", ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" }
   ```
 
 ---
@@ -9224,7 +9224,7 @@ Default config:
   ```lua
   { "python" }
   ```
-- `on_attach`: [../lsp/pyright.lua:24](../lsp/pyright.lua#L24)
+- `on_attach`: [../lsp/pyright.lua:25](../lsp/pyright.lua#L25)
 - `root_markers` :
   ```lua
   { "pyrightconfig.json", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
@@ -9898,12 +9898,12 @@ Default config:
   ```lua
   "utf-8"
   ```
-- `on_attach`: [../lsp/roslyn_ls.lua:101](../lsp/roslyn_ls.lua#L101)
+- `on_attach`: [../lsp/roslyn_ls.lua:100](../lsp/roslyn_ls.lua#L100)
 - `on_init` :
   ```lua
   { <function 1> }
   ```
-- `root_dir`: [../lsp/roslyn_ls.lua:101](../lsp/roslyn_ls.lua#L101)
+- `root_dir`: [../lsp/roslyn_ls.lua:100](../lsp/roslyn_ls.lua#L100)
 - `settings` :
   ```lua
   {
@@ -10553,7 +10553,9 @@ Default config:
   ```
 - `init_options` :
   ```lua
-  {}
+  {
+    storageDir = vim.NIL
+  }
   ```
 - `root_dir`: [../lsp/smarty_ls.lua:14](../lsp/smarty_ls.lua#L14)
 - `settings` :
