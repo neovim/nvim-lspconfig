@@ -226,7 +226,7 @@ local function poll_for_token(device_code, interval, client)
 
       -- Update LSP with new token
       vim.schedule(function()
-        client.notify('workspace/didChangeConfiguration', {
+        client:notify('workspace/didChangeConfiguration', {
           settings = {
             token = body.access_token,
             baseUrl = config.gitlab_url,
@@ -256,9 +256,8 @@ local function poll_for_token(device_code, interval, client)
   poll()
 end
 
----@param bufnr integer
 ---@param client vim.lsp.Client
-local function sign_in(_bufnr, client)
+local function sign_in(client)
   vim.notify('Starting GitLab device authorization...', vim.log.levels.INFO)
 
   local auth_data = device_authorization()
@@ -272,11 +271,11 @@ local function sign_in(_bufnr, client)
 end
 
 ---@param client vim.lsp.Client
-local function sign_out(_, client)
+local function sign_out(client)
   local ok = os.remove(config.token_file)
   if ok then
     vim.notify('Signed out. Token removed.', vim.log.levels.INFO)
-    client.notify('workspace/didChangeConfiguration', {
+    client:notify('workspace/didChangeConfiguration', {
       settings = { token = '' },
     })
   else
@@ -284,8 +283,7 @@ local function sign_out(_, client)
   end
 end
 
----@param client vim.lsp.Client
-local function show_status(_, _client)
+local function show_status()
   local token_data = load_token()
 
   if not token_data then
@@ -394,7 +392,7 @@ return {
           vim.schedule(function()
             local new_token_data = refresh_access_token(token_data.refresh_token)
             if new_token_data then
-              client.notify('workspace/didChangeConfiguration', {
+              client:notify('workspace/didChangeConfiguration', {
                 settings = { token = new_token_data.access_token },
               })
             else
@@ -426,15 +424,15 @@ return {
   end,
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'LspGitLabDuoSignIn', function()
-      sign_in(bufnr, client)
+      sign_in(client)
     end, { desc = 'Sign in to GitLab Duo with OAuth' })
 
     vim.api.nvim_buf_create_user_command(bufnr, 'LspGitLabDuoSignOut', function()
-      sign_out(bufnr, client)
+      sign_out(client)
     end, { desc = 'Sign out from GitLab Duo' })
 
     vim.api.nvim_buf_create_user_command(bufnr, 'LspGitLabDuoStatus', function()
-      show_status(bufnr, client)
+      show_status()
     end, { desc = 'Show GitLab Duo authentication status' })
   end,
 }
