@@ -3459,8 +3459,8 @@ Default config:
       version = "0.12.0-dev+gd017f3c9a0"
     }
   }
-- on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:319
-- on_init (use "gF" to view): ../lsp/gitlab_duo.lua:319
+- on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
+- on_init (use "gF" to view): ../lsp/gitlab_duo.lua:317
 - root_markers: >lua
   { ".git" }
 - settings: >lua

@@ -4862,8 +4862,8 @@ Default config:
     }
   }
   ```
-- `on_attach`: [../lsp/gitlab_duo.lua:319](../lsp/gitlab_duo.lua#L319)
-- `on_init`: [../lsp/gitlab_duo.lua:319](../lsp/gitlab_duo.lua#L319)
+- `on_attach`: [../lsp/gitlab_duo.lua:317](../lsp/gitlab_duo.lua#L317)
+- `on_init`: [../lsp/gitlab_duo.lua:317](../lsp/gitlab_duo.lua#L317)
 - `root_markers` :
   ```lua
   { ".git" }
