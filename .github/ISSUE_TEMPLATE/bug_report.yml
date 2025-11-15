@@ -6,11 +6,12 @@ body:
     attributes:
       value: |
         The configs in this repo are UNSUPPORTED and provided only as a starting point. We depend on users (like you) to troubleshoot issues with their specific LSP setups and [send improvements](https://github.com/neovim/nvim-lspconfig/blob/master/CONTRIBUTING.md).
-        
-        If you have a feature request or found a bug in the core Nvim `vim.lsp` module (not this repo), [report it to Nvim](https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&projects=&template=lsp_bug_report.yml).
+
+        * Ask questions on [GitHub Discussions](https://github.com/neovim/neovim/discussions), NOT the issue tracker.
+        * Report feature requests or bugs in the core Nvim `vim.lsp` module [to Nvim core](https://github.com/neovim/neovim/issues/new?assignees=&labels=bug%2Clsp&projects=&template=lsp_bug_report.yml), NOT this repo.
   - type: textarea
     attributes:
       label: "Description"
-      description: "A short description of the problem you are reporting."
+      description: "Describe the problem. ALWAYS mention your exact Nvim version and show how you defined/enabled the LSP config."
     validations:
       required: true
