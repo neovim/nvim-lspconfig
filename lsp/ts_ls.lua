@@ -59,13 +59,15 @@ return {
     -- We select then from the project root, which is identified by the presence of a package
     -- manager lock file.
     local root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
-    -- Give the root markers equal priority by wrapping them in a table
-    root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers, { '.git' } }
-      or vim.list_extend(root_markers, { '.git' })
+    if vim.fn.has('nvim-0.11') == 1 then
+      root_markers = { root_markers, { '.git' } }
+    else
+      vim.list_extend(root_markers, { '.git' })
+    end
     -- exclude deno
     local deno_path = vim.fs.root(bufnr, { 'deno.json', 'deno.lock' })
-    local project_root = vim.fs.root(bufnr, { root_markers })
-    if deno_path and not project_root or #deno_path >= #project_root then
+    local project_root = vim.fs.root(bufnr, root_markers)
+    if deno_path and (not project_root or #deno_path >= #project_root) then
       return
     end
     -- We fallback to the current working directory if no project root is found
