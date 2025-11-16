@@ -95,6 +95,12 @@ return {
     -- Give the root markers equal priority by wrapping them in a table
     root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers, { '.git' } }
       or vim.list_extend(root_markers, { '.git' })
+
+    -- exclude deno
+    if vim.fs.root(bufnr, { 'deno.json', 'deno.lock' }) then
+      return
+    end
+
     -- We fallback to the current working directory if no project root is found
     local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
 
@@ -122,6 +128,7 @@ return {
   -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
   settings = {
     validate = 'on',
+    ---@diagnostic disable-next-line: assign-type-mismatch
     packageManager = nil,
     useESLintClass = false,
     experimental = {
@@ -194,9 +201,8 @@ return {
       -- Support Yarn2 (PnP) projects
       local pnp_cjs = root_dir .. '/.pnp.cjs'
       local pnp_js = root_dir .. '/.pnp.js'
-      if vim.uv.fs_stat(pnp_cjs) or vim.uv.fs_stat(pnp_js) then
-        local cmd = config.cmd
-        config.cmd = vim.list_extend({ 'yarn', 'exec' }, cmd)
+      if type(config.cmd) == 'table' and (vim.uv.fs_stat(pnp_cjs) or vim.uv.fs_stat(pnp_js)) then
+        config.cmd = vim.list_extend({ 'yarn', 'exec' }, config.cmd --[[@as table]])
       end
     end
   end,

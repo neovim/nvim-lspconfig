@@ -48,8 +48,7 @@ end
 
 ---@param client vim.lsp.Client
 local function refresh_diagnostics(client)
-  local buffers = vim.lsp.get_buffers_by_client_id(client.id)
-  for _, buf in ipairs(buffers) do
+  for buf, _ in pairs(vim.lsp.get_client_by_id(client.id).attached_buffers) do
     if vim.api.nvim_buf_is_loaded(buf) then
       client:request(
         vim.lsp.protocol.Methods.textDocument_diagnostic,
@@ -118,6 +117,7 @@ return {
       local args = command.arguments or {}
       local uri, edit = args[1], args[2]
 
+      ---@diagnostic disable: undefined-field
       if uri and edit and edit.newText and edit.range then
         local workspace_edit = {
           changes = {
@@ -130,6 +130,7 @@ return {
           },
         }
         vim.lsp.util.apply_workspace_edit(workspace_edit, client.offset_encoding)
+      ---@diagnostic enable: undefined-field
       else
         vim.notify('roslyn_ls: completionComplexEdit args not understood: ' .. vim.inspect(args), vim.log.levels.WARN)
       end

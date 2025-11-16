@@ -1,3 +1,10 @@
+-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+-- This config is DEPRECATED.
+-- Use the configs in `lsp/` instead (requires Nvim 0.11).
+--
+-- ALL configs in `lua/lspconfig/configs/` will be DELETED.
+-- They exist only to support Nvim 0.10 or older.
+-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ---@param command_name string
 ---@return fun():nil run_tinymist_command, string cmd_name, string cmd_desc
 local function create_tinymist_command(command_name)

@@ -23,6 +23,7 @@ end
 local function ds_pinyin_lsp_off(bufnr)
   local ds_pinyin_lsp_client = vim.lsp.get_clients({ bufnr = bufnr, name = 'ds_pinyin_lsp' })[1]
   if ds_pinyin_lsp_client then
+    ---@diagnostic disable-next-line: param-type-mismatch
     ds_pinyin_lsp_client:notify('$/turn/completion', {
       ['completion_on'] = false,
     })
@@ -34,6 +35,7 @@ end
 local function ds_pinyin_lsp_on(bufnr)
   local ds_pinyin_lsp_client = vim.lsp.get_clients({ bufnr = bufnr, name = 'ds_pinyin_lsp' })[1]
   if ds_pinyin_lsp_client then
+    ---@diagnostic disable-next-line: param-type-mismatch
     ds_pinyin_lsp_client:notify('$/turn/completion', {
       ['completion_on'] = true,
     })
