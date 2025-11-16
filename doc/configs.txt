@@ -1572,11 +1572,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd017f3c9a0"
+      version = "0.12.0-dev+g30634f63e2"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd017f3c9a0"
+      version = "0.12.0-dev+g30634f63e2"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3443,20 +3443,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd017f3c9a0"
+      version = "0.12.0-dev+g30634f63e2"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gd017f3c9a0"
+      version = "0.12.0-dev+g30634f63e2"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gd017f3c9a0"
+      version = "0.12.0-dev+g30634f63e2"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gd017f3c9a0"
+      version = "0.12.0-dev+g30634f63e2"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -10196,7 +10196,7 @@ Default config:
 ------------------------------------------------------------------------------
 vscoqtop
 
-https://github.com/coq-community/vscoq
+Renamed to [vsrocq](#vsrocq)
 
 Snippet to enable the language server: >lua
   vim.lsp.enable('vscoqtop')
@@ -10204,11 +10204,31 @@ Snippet to enable the language server: >lua
 
 Default config:
 - cmd: >lua
-  { "vscoqtop" }
+  { "vsrocqtop" }
+- filetypes: >lua
+  { "coq" }
+- name: >lua
+  "vsrocq"
+- root_markers: >lua
+  { "_RocqProject", "_CoqProject", ".git" }
+<
+
+------------------------------------------------------------------------------
+vsrocq
+
+https://github.com/rocq-prover/vsrocq
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('vsrocq')
+
+
+Default config:
+- cmd: >lua
+  { "vsrocqtop" }
 - filetypes: >lua
   { "coq" }
 - root_markers: >lua
-  { "_CoqProject", ".git" }
+  { "_RocqProject", "_CoqProject", ".git" }
 <
 
 ------------------------------------------------------------------------------

@@ -365,6 +365,7 @@ Nvim by running `:help lspconfig-all`.
 - [vls](#vls)
 - [volar](#volar)
 - [vscoqtop](#vscoqtop)
+- [vsrocq](#vsrocq)
 - [vtsls](#vtsls)
 - [vue_ls](#vue_ls)
 - [wasm_language_tools](#wasm_language_tools)
@@ -2402,11 +2403,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd017f3c9a0"
+      version = "0.12.0-dev+g30634f63e2"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd017f3c9a0"
+      version = "0.12.0-dev+g30634f63e2"
     }
   }
   ```
@@ -4845,20 +4846,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd017f3c9a0"
+      version = "0.12.0-dev+g30634f63e2"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gd017f3c9a0"
+      version = "0.12.0-dev+g30634f63e2"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gd017f3c9a0"
+      version = "0.12.0-dev+g30634f63e2"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gd017f3c9a0"
+      version = "0.12.0-dev+g30634f63e2"
     }
   }
   ```
@@ -13668,7 +13669,7 @@ Default config:
 
 ## vscoqtop
 
-https://github.com/coq-community/vscoq
+Renamed to [vsrocq](#vsrocq)
 
 Snippet to enable the language server:
 ```lua
@@ -13678,7 +13679,36 @@ vim.lsp.enable('vscoqtop')
 Default config:
 - `cmd` :
   ```lua
-  { "vscoqtop" }
+  { "vsrocqtop" }
+  ```
+- `filetypes` :
+  ```lua
+  { "coq" }
+  ```
+- `name` :
+  ```lua
+  "vsrocq"
+  ```
+- `root_markers` :
+  ```lua
+  { "_RocqProject", "_CoqProject", ".git" }
+  ```
+
+---
+
+## vsrocq
+
+https://github.com/rocq-prover/vsrocq
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('vsrocq')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "vsrocqtop" }
   ```
 - `filetypes` :
   ```lua
@@ -13686,7 +13716,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { "_CoqProject", ".git" }
+  { "_RocqProject", "_CoqProject", ".git" }
   ```
 
 ---
