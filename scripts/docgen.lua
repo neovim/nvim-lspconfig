@@ -1,4 +1,9 @@
 #!/usr/bin/env -S nvim -l
+
+-- Usage:
+--
+--    HOME=./ nvim --clean -R -Es -V1 +'set rtp+=$PWD' +'luafile scripts/docgen.lua'
+
 local root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
 vim.opt.rtp:append(root)
 
@@ -44,6 +49,7 @@ local function make_parts(fns)
   end))
 end
 
+--- @return string
 local function make_section(indentlvl, sep, parts)
   local flat = make_parts(parts)
   if not flat or #flat == 0 then
@@ -88,6 +94,8 @@ Default config:
 ]]
 
 --- Converts markdown "```" codeblock to vimdoc format.
+---
+--- @return string
 local function codeblock_to_vimdoc(doc)
   local function make_fn(before, extra)
     return function(lang, code)
@@ -112,6 +120,8 @@ local function codeblock_to_vimdoc(doc)
 end
 
 --- Gets docstring by looking for "@brief" in a Lua code docstring.
+---
+--- @return string
 local function extract_brief(text, is_markdown)
   local doc = text:match('%-%-+ *%@brief.-(\n%-%-.*)')
   if not doc then
@@ -133,14 +143,23 @@ local function extract_brief(text, is_markdown)
 end
 
 local function make_lsp_section(config_sections, config_name, config_file, is_markdown)
-  local config = require('lsp.' .. config_name)
-  local docstring = extract_brief(readfile(config_file), is_markdown)
+  local t = is_markdown and section_template_md or section_template_txt
   local params = {
     config_name = config_name,
-    preamble = docstring,
+    preamble = '',
     commands = '',
     default_values = '',
   }
+
+  local ok, config = pcall(require, 'lsp.' .. config_name)
+  -- If the config throws an error (e.g. "renamed to …"), just show the error message.
+  if not ok then
+    params.preamble = config
+    table.insert(config_sections, template(t, params))
+    return
+  end
+
+  params.preamble = extract_brief(readfile(config_file), is_markdown)
 
   -- TODO: get commands by parsing `nvim_buf_create_user_command` calls.
   params.commands = make_section(0, '\n', {
@@ -193,7 +212,6 @@ local function make_lsp_section(config_sections, config_name, config_file, is_ma
     end,
   }) .. (is_markdown and '' or '\n<') -- Workaround tree-sitter-vimdoc bug.
 
-  local t = is_markdown and section_template_md or section_template_txt
   table.insert(config_sections, template(t, params))
 end
 

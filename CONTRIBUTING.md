@@ -125,6 +125,21 @@ return {
 }
 ```
 
+## Rename or deprecate a config
+
+If a config needs to be renamed or deprecated, changes its contents like this:
+
+```lua
+---@brief
+---
+--- Renamed to [vsrocq](#vsrocq)
+
+vim.deprecate('vscoqtop', 'vsrocq', '2.0.0', 'nvim-lspconfig', false)
+
+---@type vim.lsp.Config
+return vim.lsp.config.vsrocq
+```
+
 ## Commit style
 
 Follow the Neovim core [commit message guidelines](https://github.com/neovim/neovim/blob/master/CONTRIBUTING.md#commit-messages). Examples:
@@ -146,10 +161,9 @@ Follow the Neovim core [commit message guidelines](https://github.com/neovim/neo
 
 ## Lint
 
-PRs are checked with the following software:
-- [luacheck](https://github.com/luarocks/luacheck#installation)
+PRs are checked with the following analyzers:
+- [luals](https://github.com/LuaLS/lua-language-server)
 - [stylua](https://github.com/JohnnyMorganz/StyLua).
-- [selene](https://github.com/Kampfkarren/selene)
 
 To run the linter locally:
 
@@ -166,4 +180,4 @@ Do not modify `configs.md` directly.
 To preview the generated `configs.md` locally, run `scripts/docgen.lua` from
 `nvim` (from the project root):
 
-    nvim -R -Es +'set rtp+=$PWD' +'luafile scripts/docgen.lua'
+    HOME=./ nvim --clean -R -Es -V1 +'set rtp+=$PWD' +'luafile scripts/docgen.lua'
