@@ -3,8 +3,4 @@
 --- https://github.com/coq-community/vscoq
 
 ---@type vim.lsp.Config
-return {
-  cmd = { 'vscoqtop' },
-  filetypes = { 'coq' },
-  root_markers = { '_CoqProject', '.git' },
-}
+error("The 'vscoqtop' config has been renamed to 'vsrocq'.")
