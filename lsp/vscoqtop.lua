@@ -1,6 +1,8 @@
 ---@brief
 ---
---- https://github.com/coq-community/vscoq
+--- Renamed to [vsrocq](#vsrocq)
+
+vim.deprecate('vscoqtop', 'vsrocq', '2.0.0', 'nvim-lspconfig', false)
 
 ---@type vim.lsp.Config
-error("The 'vscoqtop' config has been renamed to 'vsrocq'.")
+return vim.lsp.config.vsrocq
