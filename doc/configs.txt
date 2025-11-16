@@ -185,7 +185,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd (use "gF" to view): ../lsp/angularls.lua:67
+- cmd (use "gF" to view): ../lsp/angularls.lua:93
 - filetypes: >lua
   { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" }
 - root_markers: >lua

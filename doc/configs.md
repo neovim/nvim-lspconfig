@@ -605,7 +605,7 @@ vim.lsp.enable('angularls')
 ```
 
 Default config:
-- `cmd`: [../lsp/angularls.lua:67](../lsp/angularls.lua#L67)
+- `cmd`: [../lsp/angularls.lua:93](../lsp/angularls.lua#L93)
 - `filetypes` :
   ```lua
   { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" }
