@@ -64,8 +64,8 @@ return {
       or vim.list_extend(root_markers, { '.git' })
     -- exclude deno
     local deno_path = vim.fs.root(bufnr, { 'deno.json', 'deno.lock' })
-    local project_root = vim.fs.root(bufnr, { root_markers })
-    if deno_path and not project_root or #deno_path >= #project_root then
+    local project_root = vim.fs.root(bufnr, root_markers)
+    if deno_path and (not project_root or #deno_path >= #project_root) then
       return
     end
     -- We fallback to the current working directory if no project root is found
