@@ -62,16 +62,14 @@ return {
     -- Give the root markers equal priority by wrapping them in a table
     root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers, { '.git' } }
       or vim.list_extend(root_markers, { '.git' })
-
     -- exclude deno
-    if vim.fs.root(bufnr, { 'deno.json', 'deno.lock' }) then
+    local deno_path = vim.fs.root(bufnr, { 'deno.json', 'deno.lock' })
+    local project_root = vim.fs.root(bufnr, { root_markers })
+    if deno_path and not project_root or #deno_path >= #project_root then
       return
     end
-
     -- We fallback to the current working directory if no project root is found
-    local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
-
-    on_dir(project_root)
+    on_dir(project_root or vim.fn.getcwd())
   end,
   handlers = {
     -- handle rename request for certain code actions like extracting functions / types
