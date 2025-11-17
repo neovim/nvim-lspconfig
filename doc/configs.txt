@@ -1572,11 +1572,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g30634f63e2"
+      version = "0.12.0-dev+g1be37c245f"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g30634f63e2"
+      version = "0.12.0-dev+g1be37c245f"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3443,20 +3443,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g30634f63e2"
+      version = "0.12.0-dev+g1be37c245f"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g30634f63e2"
+      version = "0.12.0-dev+g1be37c245f"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g30634f63e2"
+      version = "0.12.0-dev+g1be37c245f"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g30634f63e2"
+      version = "0.12.0-dev+g1be37c245f"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -8904,6 +8904,32 @@ Default config:
   { "tablegen" }
 - root_markers: >lua
   { "tablegen_compile_commands.yml", ".git" }
+<
+
+------------------------------------------------------------------------------
+tclsp
+
+https://github.com/nmoroze/tclint
+
+`tclsp`, a language server for Tcl
+
+`tclsp` can be installed via `pipx` >sh
+  pipx install tclint
+
+Or via `pip` >sh
+  pip install tclint
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('tclsp')
+
+
+Default config:
+- cmd: >lua
+  { "tclsp" }
+- filetypes: >lua
+  { "tcl", "sdc", "xdc", "upf" }
+- root_markers: >lua
+  { "tclint.toml", ".tclint", "pyproject.toml", ".git" }
 <
 
 ------------------------------------------------------------------------------

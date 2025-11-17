@@ -318,6 +318,7 @@ Nvim by running `:help lspconfig-all`.
 - [tailwindcss](#tailwindcss)
 - [taplo](#taplo)
 - [tblgen_lsp_server](#tblgen_lsp_server)
+- [tclsp](#tclsp)
 - [teal_ls](#teal_ls)
 - [templ](#templ)
 - [termux_language_server](#termux_language_server)
@@ -2403,11 +2404,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g30634f63e2"
+      version = "0.12.0-dev+g1be37c245f"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g30634f63e2"
+      version = "0.12.0-dev+g1be37c245f"
     }
   }
   ```
@@ -4846,20 +4847,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g30634f63e2"
+      version = "0.12.0-dev+g1be37c245f"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g30634f63e2"
+      version = "0.12.0-dev+g1be37c245f"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g30634f63e2"
+      version = "0.12.0-dev+g1be37c245f"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g30634f63e2"
+      version = "0.12.0-dev+g1be37c245f"
     }
   }
   ```
@@ -12006,6 +12007,43 @@ Default config:
 - `root_markers` :
   ```lua
   { "tablegen_compile_commands.yml", ".git" }
+  ```
+
+---
+
+## tclsp
+
+https://github.com/nmoroze/tclint
+
+`tclsp`, a language server for Tcl
+
+`tclsp` can be installed via `pipx`:
+```sh
+pipx install tclint
+```
+
+Or via `pip`:
+```sh
+pip install tclint
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('tclsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "tclsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "tcl", "sdc", "xdc", "upf" }
+  ```
+- `root_markers` :
+  ```lua
+  { "tclint.toml", ".tclint", "pyproject.toml", ".git" }
   ```
 
 ---
