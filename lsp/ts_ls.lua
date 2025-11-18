@@ -63,7 +63,7 @@ return {
     root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers, { '.git' } }
       or vim.list_extend(root_markers, { '.git' })
     -- exclude deno
-    local deno_path = vim.fs.root(bufnr, { 'deno.json', 'deno.lock' })
+    local deno_path = vim.fs.root(bufnr, { 'deno.json', 'deno.jsonc', 'deno.lock' })
     local project_root = vim.fs.root(bufnr, root_markers)
     if deno_path and (not project_root or #deno_path >= #project_root) then
       return
