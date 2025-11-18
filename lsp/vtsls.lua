@@ -90,7 +90,7 @@ return {
       or vim.list_extend(root_markers, { '.git' })
 
     -- exclude deno
-    if vim.fs.root(bufnr, { 'deno.json', 'deno.lock' }) then
+    if vim.fs.root(bufnr, { 'deno.json', 'deno.jsonc', 'deno.lock' }) then
       return
     end
 
