@@ -168,7 +168,6 @@ Nvim by running `:help lspconfig-all`.
 - [kulala_ls](#kulala_ls)
 - [laravel_ls](#laravel_ls)
 - [lean3ls](#lean3ls)
-- [leanls](#leanls)
 - [lelwel_ls](#lelwel_ls)
 - [lemminx](#lemminx)
 - [lexical](#lexical)
@@ -2404,11 +2403,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g1be37c245f"
+      version = "0.12.0-dev+g4b8980949c"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g1be37c245f"
+      version = "0.12.0-dev+g4b8980949c"
     }
   }
   ```
@@ -4847,20 +4846,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g1be37c245f"
+      version = "0.12.0-dev+g4b8980949c"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g1be37c245f"
+      version = "0.12.0-dev+g4b8980949c"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g1be37c245f"
+      version = "0.12.0-dev+g4b8980949c"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g1be37c245f"
+      version = "0.12.0-dev+g4b8980949c"
     }
   }
   ```
@@ -6537,35 +6536,6 @@ Default config:
   "utf-32"
   ```
 - `root_dir`: [../lsp/lean3ls.lua:18](../lsp/lean3ls.lua#L18)
-
----
-
-## leanls
-
-https://github.com/leanprover/lean4
-
-Lean installation instructions can be found
-[here](https://leanprover-community.github.io/get_started.html#regular-install).
-
-The Lean language server is included in any Lean installation and
-does not require any additional packages.
-
-Note: that if you're using [lean.nvim](https://github.com/Julian/lean.nvim),
-that plugin fully handles the setup of the Lean language server,
-and you shouldn't set up `leanls` both with it and `lspconfig`.
-
-Snippet to enable the language server:
-```lua
-vim.lsp.enable('leanls')
-```
-
-Default config:
-- `cmd`: [../lsp/leanls.lua:15](../lsp/leanls.lua#L15)
-- `filetypes` :
-  ```lua
-  { "lean" }
-  ```
-- `root_dir`: [../lsp/leanls.lua:15](../lsp/leanls.lua#L15)
 
 ---
 
