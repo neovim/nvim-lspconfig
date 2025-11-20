@@ -66,6 +66,13 @@ return {
     'svelte',
     'templ',
   },
+  capabilities = {
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true,
+      },
+    },
+  },
   settings = {
     tailwindCSS = {
       validate = true,
