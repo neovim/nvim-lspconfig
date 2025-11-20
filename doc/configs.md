@@ -11881,6 +11881,16 @@ vim.lsp.enable('tailwindcss')
 
 Default config:
 - `before_init`: [../lsp/tailwindcss.lua:10](../lsp/tailwindcss.lua#L10)
+- `capabilities` :
+  ```lua
+  {
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true
+      }
+    }
+  }
+  ```
 - `cmd` :
   ```lua
   { "tailwindcss-language-server", "--stdio" }

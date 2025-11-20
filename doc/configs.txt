@@ -8803,6 +8803,14 @@ Snippet to enable the language server: >lua
 
 Default config:
 - before_init (use "gF" to view): ../lsp/tailwindcss.lua:10
+- capabilities: >lua
+  {
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true
+      }
+    }
+  }
 - cmd: >lua
   { "tailwindcss-language-server", "--stdio" }
 - filetypes: >lua
