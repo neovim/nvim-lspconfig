@@ -2403,11 +2403,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+ge0308dc147"
+      version = "0.12.0-dev+g7be031f397"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+ge0308dc147"
+      version = "0.12.0-dev+g7be031f397"
     }
   }
   ```
@@ -4846,20 +4846,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+ge0308dc147"
+      version = "0.12.0-dev+g7be031f397"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+ge0308dc147"
+      version = "0.12.0-dev+g7be031f397"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+ge0308dc147"
+      version = "0.12.0-dev+g7be031f397"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+ge0308dc147"
+      version = "0.12.0-dev+g7be031f397"
     }
   }
   ```
@@ -7672,7 +7672,7 @@ vim.lsp.enable('neocmake')
 Default config:
 - `cmd` :
   ```lua
-  { "neocmakelsp", "--stdio" }
+  { "neocmakelsp", "stdio" }
   ```
 - `filetypes` :
   ```lua
