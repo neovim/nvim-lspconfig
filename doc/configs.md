@@ -6861,6 +6861,20 @@ Default config:
   ```lua
   { ".emmyrc.json", ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" }
   ```
+- `settings` :
+  ```lua
+  {
+    Lua = {
+      codeLens = {
+        enable = true
+      },
+      hint = {
+        enable = true,
+        semicolon = "Disable"
+      }
+    }
+  }
+  ```
 
 ---
 
