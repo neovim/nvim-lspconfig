@@ -1572,11 +1572,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g7be031f397"
+      version = "0.12.0-dev+g1c12073db6"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g7be031f397"
+      version = "0.12.0-dev+g1c12073db6"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3443,20 +3443,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g7be031f397"
+      version = "0.12.0-dev+g1c12073db6"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g7be031f397"
+      version = "0.12.0-dev+g1c12073db6"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g7be031f397"
+      version = "0.12.0-dev+g1c12073db6"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g7be031f397"
+      version = "0.12.0-dev+g1c12073db6"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -7637,6 +7637,40 @@ Default config:
   { "rust" }
 - on_attach (use "gF" to view): ../lsp/rust_analyzer.lua:56
 - root_dir (use "gF" to view): ../lsp/rust_analyzer.lua:56
+- settings: >lua
+  {
+    ["rust-analyzer"] = {
+      lens = {
+        debug = {
+          enable = true
+        },
+        enable = true,
+        implementations = {
+          enable = true
+        },
+        references = {
+          adt = {
+            enable = true
+          },
+          enumVariant = {
+            enable = true
+          },
+          method = {
+            enable = true
+          },
+          trait = {
+            enable = true
+          }
+        },
+        run = {
+          enable = true
+        },
+        updateTest = {
+          enable = true
+        }
+      }
+    }
+  }
 <
 
 ------------------------------------------------------------------------------

@@ -2403,11 +2403,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g7be031f397"
+      version = "0.12.0-dev+g1c12073db6"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g7be031f397"
+      version = "0.12.0-dev+g1c12073db6"
     }
   }
   ```
@@ -4846,20 +4846,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g7be031f397"
+      version = "0.12.0-dev+g1c12073db6"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g7be031f397"
+      version = "0.12.0-dev+g1c12073db6"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g7be031f397"
+      version = "0.12.0-dev+g1c12073db6"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g7be031f397"
+      version = "0.12.0-dev+g1c12073db6"
     }
   }
   ```
@@ -10324,6 +10324,42 @@ Default config:
   ```
 - `on_attach`: [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
 - `root_dir`: [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
+- `settings` :
+  ```lua
+  {
+    ["rust-analyzer"] = {
+      lens = {
+        debug = {
+          enable = true
+        },
+        enable = true,
+        implementations = {
+          enable = true
+        },
+        references = {
+          adt = {
+            enable = true
+          },
+          enumVariant = {
+            enable = true
+          },
+          method = {
+            enable = true
+          },
+          trait = {
+            enable = true
+          }
+        },
+        run = {
+          enable = true
+        },
+        updateTest = {
+          enable = true
+        }
+      }
+    }
+  }
+  ```
 
 ---
 
