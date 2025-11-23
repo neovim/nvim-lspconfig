@@ -83,8 +83,7 @@ To customize, see:
 
 Extra settings can be specified for each LSP server. With Nvim 0.11+ you can
 [extend a config](https://neovim.io/doc/user/lsp.html#lsp-config) by calling
-`vim.lsp.config('…', {…})`. (You can also copy any config directly from
-[`lsp/`](./lsp/) and put it in a local `lsp/` directory in your 'runtimepath').
+`vim.lsp.config('…', {…})`.
 
 ```lua
 vim.lsp.config('rust_analyzer', {
@@ -95,22 +94,29 @@ vim.lsp.config('rust_analyzer', {
 })
 ```
 
-## Create a new config
+### Config priority
 
-To create a new config you can either (1) use `vim.lsp.config` or (2) create
-a file `lsp/<config-name>.lua` somewhere on your 'runtimepath'.
+Configs are sourced in this order:
 
-### Example: define a new config as code
+1. `lsp/` in 'runtimepath'
+2. `after/lsp/` in 'runtimepath'
+3. `vim.lsp.config()`
+
+If you install nvim-lspconfig or similar plugins, the order that configs are applied depends on the load order. To ensure that your own config "wins" and overrides the others, use `after/lsp/` and/or `vim.lsp.config()` to override/extend the defaults.
+
+## Creating a config
+
+### As code
 
 1. Run `:lua vim.lsp.config('foo', {cmd={'true'}})`
 2. Run `:lua vim.lsp.enable('foo')`
 3. Run `:checkhealth vim.lsp`, the new config is listed under "Enabled Configurations". 😎
 
-### Example: define a new config as a file
+### As a file
 
-1. Create a file `lsp/foo.lua` somewhere on your 'runtimepath'.
+1. Create a file `after/lsp/foo.lua` somewhere on your 'runtimepath'.
    ```
-   :exe 'edit' stdpath('config') .. '/lsp/foo.lua'
+   :exe 'edit' stdpath('config') .. '/after/lsp/foo.lua'
    ```
 2. Add this code to the file (or copy any of the examples from the [lsp/ directory](./lsp/) in this repo):
    ```
