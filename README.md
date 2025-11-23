@@ -102,9 +102,7 @@ Configs are sourced in this order:
 2. `after/lsp/` in 'runtimepath'
 3. `vim.lsp.config()`
 
-If you install nvim-lspconfig or similar plugins, the `lsp/` level
-will be occupied by default configs. To avoid conflicts, use `after/lsp/`
-and/or `vim.lsp.config()` to override/extend the defaults.
+If you install nvim-lspconfig or similar plugins, the order that configs are applied depends on the load order. To ensure that your own config "wins" and overrides the others, use `after/lsp/` and/or `vim.lsp.config()` to override/extend the defaults.
 
 ## Creating a config
 
