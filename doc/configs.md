@@ -2403,11 +2403,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g4bbdffe829"
+      version = "0.12.0-dev+ge82aef2e22"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g4bbdffe829"
+      version = "0.12.0-dev+ge82aef2e22"
     }
   }
   ```
@@ -4846,20 +4846,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g4bbdffe829"
+      version = "0.12.0-dev+ge82aef2e22"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g4bbdffe829"
+      version = "0.12.0-dev+ge82aef2e22"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g4bbdffe829"
+      version = "0.12.0-dev+ge82aef2e22"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g4bbdffe829"
+      version = "0.12.0-dev+ge82aef2e22"
     }
   }
   ```
@@ -5661,7 +5661,7 @@ Default config:
   ```lua
   {
     haskell = {
-      cabalFormattingProvider = "cabalfmt",
+      cabalFormattingProvider = "cabal-fmt",
       formattingProvider = "ormolu"
     }
   }
