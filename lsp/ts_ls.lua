@@ -41,6 +41,8 @@
 --- It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
 ---
 
+local typescript = require 'lspconfig.typescript'
+
 ---@type vim.lsp.Config
 return {
   init_options = { hostInfo = 'neovim' },
@@ -54,22 +56,18 @@ return {
     'typescript.tsx',
   },
   root_dir = function(bufnr, on_dir)
-    -- The project root is where the LSP can be started from
-    -- As stated in the documentation above, this LSP supports monorepos and simple projects.
-    -- We select then from the project root, which is identified by the presence of a package
-    -- manager lock file.
-    local root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
-    -- Give the root markers equal priority by wrapping them in a table
-    root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers, { '.git' } }
-      or vim.list_extend(root_markers, { '.git' })
-    -- exclude deno
-    local deno_path = vim.fs.root(bufnr, { 'deno.json', 'deno.jsonc', 'deno.lock' })
-    local project_root = vim.fs.root(bufnr, root_markers)
-    if deno_path and (not project_root or #deno_path >= #project_root) then
+    local project = typescript.detect_project(bufnr)
+
+    if not project then
       return
     end
-    -- We fallback to the current working directory if no project root is found
-    on_dir(project_root or vim.fn.getcwd())
+
+    -- exclude deno
+    if project.kind == 'deno' then
+      return
+    end
+
+    on_dir(project.root_dir)
   end,
   handlers = {
     -- handle rename request for certain code actions like extracting functions / types
