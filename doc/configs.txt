@@ -2055,8 +2055,7 @@ Default config:
     ["textDocument/typeDefinition"] = <function 1>
   }
 - on_attach (use "gF" to view): ../lsp/denols.lua:67
-- root_markers: >lua
-  { "deno.json", "deno.jsonc", ".git" }
+- root_dir (use "gF" to view): ../lsp/denols.lua:67
 - settings: >lua
   {
     deno = {

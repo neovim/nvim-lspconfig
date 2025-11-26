@@ -3043,10 +3043,7 @@ Default config:
   }
   ```
 - `on_attach`: [../lsp/denols.lua:67](../lsp/denols.lua#L67)
-- `root_markers` :
-  ```lua
-  { "deno.json", "deno.jsonc", ".git" }
-  ```
+- `root_dir`: [../lsp/denols.lua:67](../lsp/denols.lua#L67)
 - `settings` :
   ```lua
   {
