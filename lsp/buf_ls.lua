@@ -10,8 +10,8 @@ return {
   cmd = { 'buf', 'lsp', 'serve', '--timeout=0', '--log-format=text' },
   filetypes = { 'proto' },
   root_markers = { 'buf.yaml', '.git' },
-  reuse_client = function()
+  reuse_client = function(client, config)
     -- `buf lsp serve` is meant to be used with multiple workspaces.
-    return true
+    return client.name == config.name
   end,
 }
