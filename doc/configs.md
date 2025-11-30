@@ -2403,11 +2403,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+ge4ce0c7270"
+      version = "0.12.0-dev+ga950e8ea9d"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+ge4ce0c7270"
+      version = "0.12.0-dev+ga950e8ea9d"
     }
   }
   ```
@@ -4843,20 +4843,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+ge4ce0c7270"
+      version = "0.12.0-dev+ga950e8ea9d"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+ge4ce0c7270"
+      version = "0.12.0-dev+ga950e8ea9d"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+ge4ce0c7270"
+      version = "0.12.0-dev+ga950e8ea9d"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+ge4ce0c7270"
+      version = "0.12.0-dev+ga950e8ea9d"
     }
   }
   ```
@@ -8827,6 +8827,7 @@ Default config:
   ```lua
   { "postgres-language-server.jsonc" }
   ```
+- `workspace_required` : `true`
 
 ---
 
