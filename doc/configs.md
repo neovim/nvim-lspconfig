@@ -2403,11 +2403,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+ga950e8ea9d"
+      version = "0.12.0-dev+g6d875a03bb"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+ga950e8ea9d"
+      version = "0.12.0-dev+g6d875a03bb"
     }
   }
   ```
@@ -4843,20 +4843,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+ga950e8ea9d"
+      version = "0.12.0-dev+g6d875a03bb"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+ga950e8ea9d"
+      version = "0.12.0-dev+g6d875a03bb"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+ga950e8ea9d"
+      version = "0.12.0-dev+g6d875a03bb"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+ga950e8ea9d"
+      version = "0.12.0-dev+g6d875a03bb"
     }
   }
   ```
@@ -12634,6 +12634,8 @@ Use the `:LspTypescriptSourceAction` command to see "whole file" ("source") code
 - organize imports
 - remove unused code
 
+Use the `:LspTypescriptGoToSourceDefinition` command to navigate to the source definition of a symbol (e.g., jump to the original implementation instead of type definitions).
+
 ### Monorepo support
 
 `ts_ls` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
@@ -12676,8 +12678,8 @@ Default config:
     hostInfo = "neovim"
   }
   ```
-- `on_attach`: [../lsp/ts_ls.lua:45](../lsp/ts_ls.lua#L45)
-- `root_dir`: [../lsp/ts_ls.lua:45](../lsp/ts_ls.lua#L45)
+- `on_attach`: [../lsp/ts_ls.lua:47](../lsp/ts_ls.lua#L47)
+- `root_dir`: [../lsp/ts_ls.lua:47](../lsp/ts_ls.lua#L47)
 
 ---
 
