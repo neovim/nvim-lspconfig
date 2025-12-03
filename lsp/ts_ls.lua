@@ -33,6 +33,8 @@
 --- - organize imports
 --- - remove unused code
 ---
+--- Use the `:LspTypescriptGoToSourceDefinition` command to navigate to the source definition of a symbol (e.g., jump to the original implementation instead of type definitions).
+---
 --- ### Monorepo support
 ---
 --- `ts_ls` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
@@ -128,5 +130,26 @@ return {
         },
       })
     end, {})
+
+    -- Go to source definition command
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspTypescriptGoToSourceDefinition', function()
+      local win = vim.api.nvim_get_current_win()
+      local params = vim.lsp.util.make_position_params(win, client.offset_encoding)
+      client:exec_cmd({
+        command = '_typescript.goToSourceDefinition',
+        title = 'Go to source definition',
+        arguments = { params.textDocument.uri, params.position },
+      }, { bufnr = bufnr }, function(err, result)
+        if err then
+          vim.notify('Go to source definition failed: ' .. err.message, vim.log.levels.ERROR)
+          return
+        end
+        if not result or vim.tbl_isempty(result) then
+          vim.notify('No source definition found', vim.log.levels.INFO)
+          return
+        end
+        vim.lsp.util.show_document(result[1], client.offset_encoding, { focus = true })
+      end)
+    end, { desc = 'Go to source definition' })
   end,
 }
