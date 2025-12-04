@@ -1572,11 +1572,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6d875a03bb"
+      version = "0.12.0-dev+g6383123326"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6d875a03bb"
+      version = "0.12.0-dev+g6383123326"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3442,20 +3442,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6d875a03bb"
+      version = "0.12.0-dev+g6383123326"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g6d875a03bb"
+      version = "0.12.0-dev+g6383123326"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g6d875a03bb"
+      version = "0.12.0-dev+g6383123326"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g6d875a03bb"
+      version = "0.12.0-dev+g6383123326"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317

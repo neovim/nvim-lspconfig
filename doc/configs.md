@@ -2403,11 +2403,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6d875a03bb"
+      version = "0.12.0-dev+g6383123326"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6d875a03bb"
+      version = "0.12.0-dev+g6383123326"
     }
   }
   ```
@@ -4843,20 +4843,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6d875a03bb"
+      version = "0.12.0-dev+g6383123326"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g6d875a03bb"
+      version = "0.12.0-dev+g6383123326"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g6d875a03bb"
+      version = "0.12.0-dev+g6383123326"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g6d875a03bb"
+      version = "0.12.0-dev+g6383123326"
     }
   }
   ```
