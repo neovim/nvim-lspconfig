@@ -1572,11 +1572,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6383123326"
+      version = "0.12.0-dev+g903335a6d5"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6383123326"
+      version = "0.12.0-dev+g903335a6d5"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3442,20 +3442,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6383123326"
+      version = "0.12.0-dev+g903335a6d5"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g6383123326"
+      version = "0.12.0-dev+g903335a6d5"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g6383123326"
+      version = "0.12.0-dev+g903335a6d5"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g6383123326"
+      version = "0.12.0-dev+g903335a6d5"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -7571,6 +7571,26 @@ Default config:
   { "pyproject.toml", "ruff.toml", ".git" }
 - settings: >lua
   {}
+<
+
+------------------------------------------------------------------------------
+rumdl
+
+https://github.com/rvben/rumdl
+
+Markdown Linter and Formatter written in Rust.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('rumdl')
+
+
+Default config:
+- cmd: >lua
+  { "rumdl", "server" }
+- filetypes: >lua
+  { "markdown" }
+- root_markers: >lua
+  { ".git" }
 <
 
 ------------------------------------------------------------------------------

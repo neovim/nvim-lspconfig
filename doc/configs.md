@@ -268,6 +268,7 @@ Nvim by running `:help lspconfig-all`.
 - [ruby_lsp](#ruby_lsp)
 - [ruff](#ruff)
 - [ruff_lsp](#ruff_lsp)
+- [rumdl](#rumdl)
 - [rune_languageserver](#rune_languageserver)
 - [rust_analyzer](#rust_analyzer)
 - [salt_ls](#salt_ls)
@@ -2403,11 +2404,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6383123326"
+      version = "0.12.0-dev+g903335a6d5"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6383123326"
+      version = "0.12.0-dev+g903335a6d5"
     }
   }
   ```
@@ -4843,20 +4844,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6383123326"
+      version = "0.12.0-dev+g903335a6d5"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g6383123326"
+      version = "0.12.0-dev+g903335a6d5"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g6383123326"
+      version = "0.12.0-dev+g903335a6d5"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g6383123326"
+      version = "0.12.0-dev+g903335a6d5"
     }
   }
   ```
@@ -10239,6 +10240,33 @@ Default config:
 - `settings` :
   ```lua
   {}
+  ```
+
+---
+
+## rumdl
+
+https://github.com/rvben/rumdl
+
+Markdown Linter and Formatter written in Rust.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('rumdl')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "rumdl", "server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "markdown" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".git" }
   ```
 
 ---
