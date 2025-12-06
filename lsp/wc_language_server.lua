@@ -1,4 +1,4 @@
----@brief Language server configuration for wc-language-server
+---@brief Configuration for wc-language-server
 ---@type vim.lsp.Config
 return {
   init_options = { hostInfo = 'neovim' },
