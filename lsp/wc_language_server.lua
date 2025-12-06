@@ -1,4 +1,4 @@
----@brief Configuration for wc-language-server.
+---@brief Configuration for wc-language-server
 
 ---@type vim.lsp.Config
 return {
