@@ -370,6 +370,7 @@ Nvim by running `:help lspconfig-all`.
 - [vtsls](#vtsls)
 - [vue_ls](#vue_ls)
 - [wasm_language_tools](#wasm_language_tools)
+- [wc_language_server](#wc_language_server)
 - [wgsl_analyzer](#wgsl_analyzer)
 - [yamlls](#yamlls)
 - [yang_lsp](#yang_lsp)
@@ -2404,11 +2405,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g903335a6d5"
+      version = "0.12.0-dev+g62dd74d472"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g903335a6d5"
+      version = "0.12.0-dev+g62dd74d472"
     }
   }
   ```
@@ -4844,20 +4845,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g903335a6d5"
+      version = "0.12.0-dev+g62dd74d472"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g903335a6d5"
+      version = "0.12.0-dev+g62dd74d472"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g903335a6d5"
+      version = "0.12.0-dev+g62dd74d472"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g903335a6d5"
+      version = "0.12.0-dev+g62dd74d472"
     }
   }
   ```
@@ -13970,6 +13971,88 @@ Default config:
 - `filetypes` :
   ```lua
   { "wat" }
+  ```
+
+---
+
+## wc_language_server
+
+https://github.com/wc-toolkit/wc-language-server
+
+Web Components Language Server provides intelligent editor support for Web Components and custom elements.
+It offers advanced HTML diagnostics, completion, and validation for custom elements, including support for
+attribute types, deprecation, and duplicate attribute detection.
+
+The language server uses the [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest)
+to generate component integration and validation information
+
+`wc-language-server` can be installed by following the instructions at the [GitHub repository](https://github.com/wc-toolkit/wc-language-server/blob/main/packages/neovim/README.md).
+
+The default `cmd` assumes that the `wc-language-server` binary can be found in `$PATH`.
+
+Alternatively, you can install it via [mason.nvim](https://github.com/williamboman/mason.nvim):
+```vim
+:MasonInstall wc-language-server
+```
+
+## Configuration
+
+The language server reads settings from `wc.config.js` (or `.ts/.mjs/.cjs`) at the project root.
+Use it to customize manifest sources, file scoping, and diagnostic behavior.
+
+Example `wc.config.js`:
+```js
+export default {
+  // Fetch manifest from a custom path or URL
+  manifestSrc: './dist/custom-elements.json',
+
+  // Narrow which files opt into the language server
+  include: ['src/**/*.ts', 'src/**/*.html'],
+
+  // Skip specific globs
+  exclude: ['**/*.stories.ts'],
+
+  // Per-library overrides
+  libraries: {
+    '@your/pkg': {
+      manifestSrc: 'https://cdn.example.com/custom-elements.json',
+      tagFormatter: (tag) => tag.replace(/^x-/, 'my-'),
+    },
+  },
+
+  // Customize diagnostic severity levels
+  diagnosticSeverity: {
+    duplicateAttribute: 'warning',
+    unknownElement: 'info',
+  },
+};
+```
+
+See the [configuration documentation](https://github.com/wc-toolkit/wc-language-server#configuration) for more details.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('wc_language_server')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "wc-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "html", "javascriptreact", "typescriptreact", "astro", "svelte", "vue", "markdown", "mdx", "javascript", "typescript", "css", "scss", "less" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    hostInfo = "neovim"
+  }
+  ```
+- `root_markers` :
+  ```lua
+  { "wc.config.js", "wc.config.ts", "wc.config.mjs", "wc.config.cjs", "custom-elements.json", "package.json", ".git" }
   ```
 
 ---
