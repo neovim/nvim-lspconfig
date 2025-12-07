@@ -7,7 +7,7 @@
 --- attribute types, deprecation, and duplicate attribute detection.
 ---
 --- The language server uses the [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest)
---- to generate component integration and validation information.
+--- to generate component integration and validation information
 ---
 --- `wc-language-server` can be installed by following the instructions at the [GitHub repository](https://github.com/wc-toolkit/wc-language-server/blob/main/packages/neovim/README.md).
 ---
