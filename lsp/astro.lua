@@ -5,6 +5,7 @@
 --- `astro-ls` can be installed via `npm`:
 --- ```sh
 --- npm install -g @astrojs/language-server
+--- sometimes installing typescript is also required, so just run: npm install --save-dev typescript
 --- ```
 
 local util = require 'lspconfig.util'
