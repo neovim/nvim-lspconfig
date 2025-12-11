@@ -5987,6 +5987,10 @@ vim.lsp.enable('java_language_server')
 ```
 
 Default config:
+- `cmd` :
+  ```lua
+  { "java-language-server" }
+  ```
 - `filetypes` :
   ```lua
   { "java" }

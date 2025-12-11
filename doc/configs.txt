@@ -4325,6 +4325,8 @@ Snippet to enable the language server: >lua
 
 
 Default config:
+- cmd: >lua
+  { "java-language-server" }
 - filetypes: >lua
   { "java" }
 - root_markers: >lua
