@@ -2405,11 +2405,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g62dd74d472"
+      version = "0.12.0-dev+g3a70fc8cb8"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g62dd74d472"
+      version = "0.12.0-dev+g3a70fc8cb8"
     }
   }
   ```
@@ -4845,20 +4845,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g62dd74d472"
+      version = "0.12.0-dev+g3a70fc8cb8"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g62dd74d472"
+      version = "0.12.0-dev+g3a70fc8cb8"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g62dd74d472"
+      version = "0.12.0-dev+g3a70fc8cb8"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g62dd74d472"
+      version = "0.12.0-dev+g3a70fc8cb8"
     }
   }
   ```
@@ -6605,10 +6605,8 @@ https://github.com/lexical-lsp/lexical
 
 Lexical is a next-generation language server for the Elixir programming language.
 
-Follow the [Detailed Installation Instructions](https://github.com/lexical-lsp/lexical/blob/main/pages/installation.md)
-
-**By default, `lexical` doesn't have a `cmd` set.**
-This is because nvim-lspconfig does not make assumptions about your path.
+To install from source, follow the [Detailed Installation Instructions](https://github.com/lexical-lsp/lexical/blob/main/pages/installation.md).
+Ensure to point `cmd` to the generated `_build/dev/package/lexical/start_lexical.sh` executable.
 
 Snippet to enable the language server:
 ```lua
@@ -6616,6 +6614,10 @@ vim.lsp.enable('lexical')
 ```
 
 Default config:
+- `cmd` :
+  ```lua
+  { "lexical" }
+  ```
 - `filetypes` :
   ```lua
   { "elixir", "eelixir", "heex", "surface" }
