@@ -7760,7 +7760,7 @@ Default config:
 
 https://github.com/elixir-tools/next-ls
 
-**By default, next-ls does not set its `cmd`. Please see the following [detailed instructions](https://www.elixir-tools.dev/docs/next-ls/installation/) for possible installation methods.**
+**Please see the following [detailed instructions](https://www.elixir-tools.dev/docs/next-ls/installation/) for possible installation methods.**
 
 Snippet to enable the language server:
 ```lua
@@ -7768,6 +7768,10 @@ vim.lsp.enable('nextls')
 ```
 
 Default config:
+- `cmd` :
+  ```lua
+  { "nextls", "--stdio" }
+  ```
 - `filetypes` :
   ```lua
   { "elixir", "eelixir", "heex", "surface" }
