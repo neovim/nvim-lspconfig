@@ -8174,8 +8174,6 @@ OmniSharp can also be built from source by following the instructions [here](htt
 
 OmniSharp requires the [dotnet-sdk](https://dotnet.microsoft.com/download) to be installed.
 
-**By default, omnisharp-roslyn doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of the unzipped run script or binary.
-
 For `go_to_definition` to work fully, extended `textDocument/definition` handler is needed, for example see [omnisharp-extended-lsp.nvim](https://github.com/Hoffs/omnisharp-extended-lsp.nvim)
 
 Snippet to enable the language server:
@@ -8204,7 +8202,7 @@ Default config:
   ```lua
   {}
   ```
-- `root_dir`: [../lsp/omnisharp.lua:20](../lsp/omnisharp.lua#L20)
+- `root_dir`: [../lsp/omnisharp.lua:18](../lsp/omnisharp.lua#L18)
 - `settings` :
   ```lua
   {
