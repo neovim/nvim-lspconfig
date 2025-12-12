@@ -14,7 +14,16 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'npx', '--no-install', 'flow', 'lsp' },
+  cmd = function(dispatchers)
+    local cmd = nil
+    if vim.fn.executable('flow') then
+      cmd = { 'flow', 'lsp' }
+    else
+      cmd = { 'npx', '--no-install', 'flow', 'lsp' }
+    end
+
+    return vim.lsp.rpc.start(cmd, dispatchers)
+  end,
   filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx' },
   root_markers = { '.flowconfig' },
 }
