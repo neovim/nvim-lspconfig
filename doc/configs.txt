@@ -1572,11 +1572,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g3a70fc8cb8"
+      version = "0.12.0-dev+g2b02dfa020"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g3a70fc8cb8"
+      version = "0.12.0-dev+g2b02dfa020"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -2992,8 +2992,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "npx", "--no-install", "flow", "lsp" }
+- cmd (use "gF" to view): ../lsp/flow.lua:16
 - filetypes: >lua
   { "javascript", "javascriptreact", "javascript.jsx" }
 - root_markers: >lua
@@ -3442,20 +3441,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g3a70fc8cb8"
+      version = "0.12.0-dev+g2b02dfa020"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g3a70fc8cb8"
+      version = "0.12.0-dev+g2b02dfa020"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g3a70fc8cb8"
+      version = "0.12.0-dev+g2b02dfa020"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g3a70fc8cb8"
+      version = "0.12.0-dev+g2b02dfa020"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317

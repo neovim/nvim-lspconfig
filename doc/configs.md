@@ -2405,11 +2405,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g3a70fc8cb8"
+      version = "0.12.0-dev+g2b02dfa020"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g3a70fc8cb8"
+      version = "0.12.0-dev+g2b02dfa020"
     }
   }
   ```
@@ -4265,10 +4265,7 @@ vim.lsp.enable('flow')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "npx", "--no-install", "flow", "lsp" }
-  ```
+- `cmd`: [../lsp/flow.lua:16](../lsp/flow.lua#L16)
 - `filetypes` :
   ```lua
   { "javascript", "javascriptreact", "javascript.jsx" }
@@ -4845,20 +4842,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g3a70fc8cb8"
+      version = "0.12.0-dev+g2b02dfa020"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g3a70fc8cb8"
+      version = "0.12.0-dev+g2b02dfa020"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g3a70fc8cb8"
+      version = "0.12.0-dev+g2b02dfa020"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g3a70fc8cb8"
+      version = "0.12.0-dev+g2b02dfa020"
     }
   }
   ```
