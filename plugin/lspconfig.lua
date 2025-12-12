@@ -3,6 +3,10 @@ if vim.g.lspconfig ~= nil then
 end
 vim.g.lspconfig = 1
 
+if vim.fn.has('nvim-0.12') == 1 then
+  return
+end
+
 if vim.fn.has('nvim-0.11') == 0 then
   vim.deprecate('nvim-lspconfig support for Nvim 0.10 or older', 'Nvim 0.11+', 'v3.0.0', 'nvim-lspconfig', false)
 end
