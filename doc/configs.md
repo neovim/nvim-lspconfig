@@ -37,6 +37,7 @@ Nvim by running `:help lspconfig-all`.
 - [blueprint_ls](#blueprint_ls)
 - [bqls](#bqls)
 - [bright_script](#bright_script)
+- [brioche](#brioche)
 - [bsl_ls](#bsl_ls)
 - [buck2](#buck2)
 - [buddy_ls](#buddy_ls)
@@ -1741,6 +1742,33 @@ Default config:
 
 ---
 
+## brioche
+
+https://github.com/brioche-dev/brioche
+
+`Brioche Language Server`.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('brioche')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "brioche", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "brioche" }
+  ```
+- `root_markers` :
+  ```lua
+  { "project.bri" }
+  ```
+
+---
+
 ## bsl_ls
 
 https://github.com/1c-syntax/bsl-language-server
@@ -2405,11 +2433,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2b02dfa020"
+      version = "0.12.0-dev+gc2e0fd1c35"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2b02dfa020"
+      version = "0.12.0-dev+gc2e0fd1c35"
     }
   }
   ```
@@ -4842,20 +4870,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2b02dfa020"
+      version = "0.12.0-dev+gc2e0fd1c35"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g2b02dfa020"
+      version = "0.12.0-dev+gc2e0fd1c35"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g2b02dfa020"
+      version = "0.12.0-dev+gc2e0fd1c35"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g2b02dfa020"
+      version = "0.12.0-dev+gc2e0fd1c35"
     }
   }
   ```

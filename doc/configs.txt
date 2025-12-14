@@ -1063,6 +1063,26 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+brioche
+
+https://github.com/brioche-dev/brioche
+
+`Brioche Language Server`.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('brioche')
+
+
+Default config:
+- cmd: >lua
+  { "brioche", "lsp" }
+- filetypes: >lua
+  { "brioche" }
+- root_markers: >lua
+  { "project.bri" }
+<
+
+------------------------------------------------------------------------------
 bsl_ls
 
 https://github.com/1c-syntax/bsl-language-server
@@ -1572,11 +1592,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2b02dfa020"
+      version = "0.12.0-dev+gc2e0fd1c35"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2b02dfa020"
+      version = "0.12.0-dev+gc2e0fd1c35"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3441,20 +3461,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2b02dfa020"
+      version = "0.12.0-dev+gc2e0fd1c35"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g2b02dfa020"
+      version = "0.12.0-dev+gc2e0fd1c35"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g2b02dfa020"
+      version = "0.12.0-dev+gc2e0fd1c35"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g2b02dfa020"
+      version = "0.12.0-dev+gc2e0fd1c35"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
