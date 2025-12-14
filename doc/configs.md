@@ -149,6 +149,7 @@ Nvim by running `:help lspconfig-all`.
 - [html](#html)
 - [htmx](#htmx)
 - [hydra_lsp](#hydra_lsp)
+- [hylo_ls](#hylo_ls)
 - [hyprls](#hyprls)
 - [idris2_lsp](#idris2_lsp)
 - [intelephense](#intelephense)
@@ -5840,6 +5841,37 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## hylo_ls
+
+https://github.com/hylo-lang/hylo-language-server
+
+A language server for the Hylo programming language.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('hylo_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "hylo-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "hylo" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".git" }
+  ```
+- `settings` :
+  ```lua
+  {}
   ```
 
 ---

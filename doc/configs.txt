@@ -4209,6 +4209,28 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+hylo_ls
+
+https://github.com/hylo-lang/hylo-language-server
+
+A language server for the Hylo programming language.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('hylo_ls')
+
+
+Default config:
+- cmd: >lua
+  { "hylo-language-server", "--stdio" }
+- filetypes: >lua
+  { "hylo" }
+- root_markers: >lua
+  { ".git" }
+- settings: >lua
+  {}
+<
+
+------------------------------------------------------------------------------
 hyprls
 
 https://github.com/hyprland-community/hyprls
