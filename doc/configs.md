@@ -2434,11 +2434,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc2e0fd1c35"
+      version = "0.12.0-dev+g02e10d5101"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc2e0fd1c35"
+      version = "0.12.0-dev+g02e10d5101"
     }
   }
   ```
@@ -4871,20 +4871,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc2e0fd1c35"
+      version = "0.12.0-dev+g02e10d5101"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gc2e0fd1c35"
+      version = "0.12.0-dev+g02e10d5101"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gc2e0fd1c35"
+      version = "0.12.0-dev+g02e10d5101"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gc2e0fd1c35"
+      version = "0.12.0-dev+g02e10d5101"
     }
   }
   ```
@@ -6818,7 +6818,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "text", "typst", "xhtml" }
+  { "asciidoc", "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "text", "typst", "xhtml" }
   ```
 - `get_language_id`: [../lsp/ltex_plus.lua:36](../lsp/ltex_plus.lua#L36)
 - `root_markers` :
@@ -6829,7 +6829,7 @@ Default config:
   ```lua
   {
     ltex = {
-      enabled = { "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "latex", "text", "typst", "xhtml" }
+      enabled = { "asciidoc", "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "latex", "text", "typst", "xhtml" }
     }
   }
   ```

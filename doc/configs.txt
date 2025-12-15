@@ -1592,11 +1592,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc2e0fd1c35"
+      version = "0.12.0-dev+g02e10d5101"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc2e0fd1c35"
+      version = "0.12.0-dev+g02e10d5101"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3461,20 +3461,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc2e0fd1c35"
+      version = "0.12.0-dev+g02e10d5101"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gc2e0fd1c35"
+      version = "0.12.0-dev+g02e10d5101"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gc2e0fd1c35"
+      version = "0.12.0-dev+g02e10d5101"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gc2e0fd1c35"
+      version = "0.12.0-dev+g02e10d5101"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -4946,14 +4946,14 @@ Default config:
 - cmd: >lua
   { "ltex-ls-plus" }
 - filetypes: >lua
-  { "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "text", "typst", "xhtml" }
+  { "asciidoc", "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "text", "typst", "xhtml" }
 - get_language_id (use "gF" to view): ../lsp/ltex_plus.lua:36
 - root_markers: >lua
   { ".git" }
 - settings: >lua
   {
     ltex = {
-      enabled = { "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "latex", "text", "typst", "xhtml" }
+      enabled = { "asciidoc", "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "latex", "text", "typst", "xhtml" }
     }
   }
 <
