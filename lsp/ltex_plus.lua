@@ -36,6 +36,7 @@ local language_id_mapping = {
 return {
   cmd = { 'ltex-ls-plus' },
   filetypes = {
+    'asciidoc',
     'bib',
     'context',
     'gitcommit',
@@ -62,6 +63,7 @@ return {
   settings = {
     ltex = {
       enabled = {
+        'asciidoc',
         'bib',
         'context',
         'gitcommit',
