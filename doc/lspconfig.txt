@@ -81,17 +81,26 @@ Alias to `:checkhealth vim.lsp`. Shows the status of active LSP clients and
 servers.
 
 :LspStart [config_name]                                            *:LspStart*
+
+Note: Use `:lsp enable` with Nvim 0.12+. |:lsp-enable|
+
 Launches the requested (configured) client, but only if it successfully
 resolves a root directory. Note: Defaults to all configured servers matching
 the current buffer filetype.
 
 :LspStop [client_id] or [config_name]                            *:LspStop*
+
+Note: Use `:lsp disable` with Nvim 0.12+. |:lsp-disable|
+
 Stops the server with the given client-id or config name. Defaults to
 stopping all servers active on the current buffer. To force stop language
 servers: >vim
     :LspStop!
 
 :LspRestart [client_id] or [config_name]                         *:LspRestart*
+
+Note: Use `:lsp restart` with Nvim 0.12+. |:lsp-restart|
+
 Restarts the client with the given client-id or config name, and attempts
 to reattach to all previously attached buffers. Defaults to restarting all
 active servers. To force stop language servers when restarting: >vim
