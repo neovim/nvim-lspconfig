@@ -166,9 +166,9 @@ Most of the time, the reason for failure is present in the logs.
 ## Commands
 
 * `:LspInfo` (alias to `:checkhealth vim.lsp`) shows the status of active and configured language servers.
-* `:lsp enable <config_name>` (`:LspStart <config_name>` for Nvim 0.11 or older) Start the requested server name. Will only successfully start if the command detects a root directory matching the current config.
-* `:lsp disable <client_id_or_name>` (`:LspStop [<client_id_or_name>]` for Nvim 0.11 or older) Stops the given server. Defaults to stopping all servers active on the current buffer. To force stop use `:LspStop!`
-* `:lsp restart <client_id_or_name>` (`:LspRestart [<client_id_or_name>]` for Nvim 0.11 or older) Restarts the given client, and attempts to reattach to all previously attached buffers. Defaults to restarting all active servers.
+* `:lsp enable [<config_name>]` (`:LspStart` for Nvim 0.11 or older) Start the requested server name. Will only successfully start if the command detects a root directory matching the current config.
+* `:lsp disable [<client_id_or_name>]` (`:LspStop` for Nvim 0.11 or older) Stops the given server. Defaults to stopping all servers active on the current buffer. To force stop use `:LspStop!`
+* `:lsp restart [<client_id_or_name>]` (`:LspRestart` for Nvim 0.11 or older) Restarts the given client, and attempts to reattach to all previously attached buffers. Defaults to restarting all active servers.
 
 ## Contributions
 
