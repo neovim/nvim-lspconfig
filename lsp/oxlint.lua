@@ -26,15 +26,14 @@ return {
   workspace_required = true,
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'LspOxlintFixAll', function()
-      client:request_sync('workspace/executeCommand', {
+      client:exec_cmd({
+        title = 'Apply Oxlint automatic fixes',
         command = 'oxc.fixAll',
-        arguments = {
-          {
-            uri = vim.uri_from_bufnr(bufnr),
-          },
-        },
-      }, nil, bufnr)
-    end, {})
+        arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+      })
+    end, {
+      desc = 'Apply Oxlint automatic fixes',
+    })
   end,
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
