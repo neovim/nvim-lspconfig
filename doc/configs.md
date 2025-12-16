@@ -10001,6 +10001,7 @@ Go to `https://dev.azure.com/azure-public/vside/_artifacts/feed/vs-impl/NuGet/Mi
 replace `<platform>` with one of the following `linux-x64`, `osx-x64`, `win-x64`, `neutral` (for more info on the download location see https://github.com/dotnet/roslyn/issues/71474#issuecomment-2177303207).
 Download and extract it (nuget's are zip files).
 - if you chose `neutral` nuget version, then you have to change the `cmd` like so:
+  ```lua
   cmd = {
     'dotnet',
     '<my_folder>/Microsoft.CodeAnalysis.LanguageServer.dll',
@@ -10010,6 +10011,7 @@ Download and extract it (nuget's are zip files).
     fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
     '--stdio',
   },
+  ```
   where `<my_folder>` has to be the folder you extracted the nuget package to.
 - for all other platforms put the extracted folder to neovim's PATH (`vim.env.PATH`)
 
@@ -10062,12 +10064,12 @@ Default config:
   ```lua
   "utf-8"
   ```
-- `on_attach`: [../lsp/roslyn_ls.lua:100](../lsp/roslyn_ls.lua#L100)
+- `on_attach`: [../lsp/roslyn_ls.lua:102](../lsp/roslyn_ls.lua#L102)
 - `on_init` :
   ```lua
   { <function 1> }
   ```
-- `root_dir`: [../lsp/roslyn_ls.lua:100](../lsp/roslyn_ls.lua#L100)
+- `root_dir`: [../lsp/roslyn_ls.lua:102](../lsp/roslyn_ls.lua#L102)
 - `settings` :
   ```lua
   {
