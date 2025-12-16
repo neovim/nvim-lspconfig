@@ -23,6 +23,18 @@ return {
     'typescript.tsx',
   },
   workspace_required = true,
+  on_attach = function(client, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspOxlintFixAll', function()
+      client:request_sync('workspace/executeCommand', {
+        command = 'oxc.fixAll',
+        arguments = {
+          {
+            uri = vim.uri_from_bufnr(bufnr),
+          },
+        },
+      }, nil, bufnr)
+    end, {})
+  end,
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
 
