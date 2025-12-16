@@ -25,7 +25,11 @@ return {
   workspace_required = true,
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
-    local root_markers = util.insert_package_json({ '.oxlintrc.json' }, 'oxlint', fname)
+
+    -- Oxlint resolves configuration by walking upward and using the nearest config file
+    -- to the file being processed. We therefore compute the root directory by locating
+    -- the closest `.oxlintrc.json` (or `package.json` fallback) above the buffer.
+    local root_markers = util.insert_package_json({ '.oxlintrc.json' }, 'oxlint', fname)[1]
     on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
   end,
 }
