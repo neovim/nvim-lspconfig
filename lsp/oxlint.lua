@@ -1,8 +1,9 @@
 --- @brief
 ---
 --- https://github.com/oxc-project/oxc
+--- https://oxc.rs/docs/guide/usage/linter.html
 ---
---- `oxc` is a linter / formatter for JavaScript / Typescript supporting over 500 rules from ESLint and its popular plugins
+--- `oxclint` is a linter for JavaScript / Typescript supporting over 500 rules from ESLint and its popular plugins
 --- It can be installed via `npm`:
 ---
 --- ```sh
