@@ -48,5 +48,5 @@ return {
     'clojure',
     'sh',
   },
-  root_markers = { '.git' },
+  root_markers = { '.harper-dictionary.txt', '.git' },
 }
