@@ -1592,11 +1592,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g1d22b05f8d"
+      version = "0.12.0-dev+g0197f13ed4"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g1d22b05f8d"
+      version = "0.12.0-dev+g0197f13ed4"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3461,20 +3461,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g1d22b05f8d"
+      version = "0.12.0-dev+g0197f13ed4"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g1d22b05f8d"
+      version = "0.12.0-dev+g0197f13ed4"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g1d22b05f8d"
+      version = "0.12.0-dev+g0197f13ed4"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g1d22b05f8d"
+      version = "0.12.0-dev+g0197f13ed4"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -3900,7 +3900,7 @@ Default config:
 - filetypes: >lua
   { "asciidoc", "c", "cpp", "cs", "gitcommit", "go", "html", "java", "javascript", "lua", "markdown", "nix", "python", "ruby", "rust", "swift", "toml", "typescript", "typescriptreact", "haskell", "cmake", "typst", "php", "dart", "clojure", "sh" }
 - root_markers: >lua
-  { ".git" }
+  { ".harper-dictionary.txt", ".git" }
 <
 
 ------------------------------------------------------------------------------

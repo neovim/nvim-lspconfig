@@ -2434,11 +2434,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g1d22b05f8d"
+      version = "0.12.0-dev+g0197f13ed4"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g1d22b05f8d"
+      version = "0.12.0-dev+g0197f13ed4"
     }
   }
   ```
@@ -4871,20 +4871,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g1d22b05f8d"
+      version = "0.12.0-dev+g0197f13ed4"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g1d22b05f8d"
+      version = "0.12.0-dev+g0197f13ed4"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g1d22b05f8d"
+      version = "0.12.0-dev+g0197f13ed4"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g1d22b05f8d"
+      version = "0.12.0-dev+g0197f13ed4"
     }
   }
   ```
@@ -5438,7 +5438,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { ".git" }
+  { ".harper-dictionary.txt", ".git" }
   ```
 
 ---
