@@ -3,7 +3,7 @@
 --- https://github.com/oxc-project/oxc
 --- https://oxc.rs/docs/guide/usage/linter.html
 ---
---- `oxclint` is a linter for JavaScript / Typescript supporting over 500 rules from ESLint and its popular plugins
+--- `oxlint` is a linter for JavaScript / Typescript supporting over 500 rules from ESLint and its popular plugins
 --- It can be installed via `npm`:
 ---
 --- ```sh
