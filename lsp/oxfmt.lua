@@ -33,13 +33,15 @@ return {
     local root_markers = util.insert_package_json({ '.oxfmtrc.json' }, 'oxfmt', fname)[1]
     on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
   end,
-  init_options = {
-    {
-      workspaceUri = 'file://' .. vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]),
-      options = {
-        ['fmt.experimental'] = true, -- if disable the Oxfmt LS won't do anything
-        -- ['fmt.configPath'] = null,
+  before_init = function(_, config)
+    config.settings = {
+      {
+        workspaceUri = config.root_dir,
+        options = {
+          ['fmt.experimental'] = true, -- if disable the Oxfmt LS won't do anything
+          -- ['fmt.configPath'] = null,
+        },
       },
-    },
-  },
+    }
+  end,
 }
