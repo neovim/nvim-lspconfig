@@ -316,6 +316,7 @@ Nvim by running `:help lspconfig-all`.
 - [swift_mesonls](#swift_mesonls)
 - [syntax_tree](#syntax_tree)
 - [systemd_ls](#systemd_ls)
+- [systemd_lsp](#systemd_lsp)
 - [tabby_ml](#tabby_ml)
 - [tailwindcss](#tailwindcss)
 - [taplo](#taplo)
@@ -2434,11 +2435,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g0197f13ed4"
+      version = "0.12.0-dev+g64eb2731da"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g0197f13ed4"
+      version = "0.12.0-dev+g64eb2731da"
     }
   }
   ```
@@ -4871,20 +4872,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g0197f13ed4"
+      version = "0.12.0-dev+g64eb2731da"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g0197f13ed4"
+      version = "0.12.0-dev+g64eb2731da"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g0197f13ed4"
+      version = "0.12.0-dev+g64eb2731da"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g0197f13ed4"
+      version = "0.12.0-dev+g64eb2731da"
     }
   }
   ```
@@ -11973,6 +11974,38 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## systemd_lsp
+
+https://github.com/JFryy/systemd-lsp
+
+A Language Server Protocol (LSP) implementation for Systemd unit files,
+providing editing support with syntax highlighting,
+diagnostics, autocompletion, and documentation.
+
+`systemd-lsp` can be installed via `cargo`:
+```sh
+cargo install systemd-lsp
+```
+
+A language server implementation for Systemd unit files made in Rust.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('systemd_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "systemd-lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "systemd" }
   ```
 
 ---
