@@ -9,7 +9,7 @@
 --- cargo install systemd-lsp
 --- ```
 ---
---- Language Server for Systemd unit files
+--- A language server implementation for Systemd unit files made in Rust.
 
 ---@type vim.lsp.Config
 return {
