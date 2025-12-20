@@ -1859,9 +1859,9 @@ Default config:
 
 https://github.com/bufbuild/buf
 
-buf beta lsp included in the cli itself
+buf lsp included in the cli itself
 
-buf beta lsp is a Protobuf language server compatible with Buf modules and workspaces
+buf lsp is a Protobuf language server compatible with Buf modules and workspaces
 
 Snippet to enable the language server:
 ```lua
@@ -1871,7 +1871,7 @@ vim.lsp.enable('buf_ls')
 Default config:
 - `cmd` :
   ```lua
-  { "buf", "lsp", "serve", "--timeout=0", "--log-format=text" }
+  { "buf", "lsp", "serve", "--log-format=text" }
   ```
 - `filetypes` :
   ```lua
