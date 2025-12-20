@@ -14,6 +14,6 @@
 ---@type vim.lsp.Config
 return {
   cmd = { 'systemd-lsp' },
-  filetypes = { 'systemd', 'service', 'mount', 'device', 'nspawn', 'target', 'timer' },
-  root_marker = vim.fn.getcwd()
+  filetypes = { 'systemd' },
+  root_dir = vim.fn.getcwd()
 }
