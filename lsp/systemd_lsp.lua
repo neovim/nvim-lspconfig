@@ -1,12 +1,12 @@
 ---@brief
 ---
---- A Language Server Protocol (LSP) implementation for systemd unit files,
+--- A Language Server Protocol (LSP) implementation for Systemd unit files,
 --- providing editing support with syntax highlighting,
 --- diagnostics, autocompletion, and documentation.
 ---
---- `systemd-language-server` can be installed via `pip`:
+--- `systemd-lsp` can be installed via `cargo`:
 --- ```sh
---- pip install systemd-language-server
+--- cargo install systemd-lsp
 --- ```
 ---
 --- Language Server for Systemd unit files
