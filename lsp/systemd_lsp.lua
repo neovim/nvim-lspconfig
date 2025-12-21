@@ -23,6 +23,8 @@ return {
     -- Define the systemd unit file extensions that mark a root directory.
     local systemd_extensions = { '.service', '.mount', '.device', '.nspawn', '.target', '.timer' }
 
+    ---@param path string?
+    ---@return boolean
     local function find_root_by_markers(path)
       --- @diagnostic disable-next-line: undefined-field
       -- Check for common project root markers like a '.git' directory.
@@ -32,7 +34,8 @@ return {
 
       -- Check if the current directory contains any file with the specified systemd extensions.
       for _, ext in ipairs(systemd_extensions) do
-        -- Use vim.fn.glob to find any file in 'path' ending with the current extension.
+        ---Use vim.fn.glob to find any file in 'path' ending with the current extension.
+        ---@type integer
         local files = vim.fn.glob(vim.fs.joinpath(path, '*' .. ext), false, true)
         if #files > 0 then
           return true
