@@ -20,7 +20,7 @@ return {
     'bash',
     'c',
     'cpp',
-    'csharp',
+    'cs',
     'css',
     'elixir',
     'go',
