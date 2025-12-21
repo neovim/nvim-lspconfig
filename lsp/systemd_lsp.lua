@@ -20,6 +20,7 @@
 ---
 --- ```lua
 --- vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
+---  group = vim.api.nvim_create_augroup('systemd-filetypes', { clear = true }),
 --   pattern = {
 --     '*.service',
 --     '*.mount',
