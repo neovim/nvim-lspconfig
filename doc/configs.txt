@@ -4096,6 +4096,29 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+home_assistant
+
+https://github.com/keesschollaart81/vscode-home-assistant
+
+`vscode-home-assistant` can be installed via from source or by downloading
+and extracting the VSCode "Home Assistant Config Helper" extension
+
+`vscode-home-assistant` is a language server for Home Assistant ported from the VSCode "Home Assistant Config Helper" extension.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('home_assistant')
+
+
+Default config:
+- cmd: >lua
+  { "vscode-home-assistant", "--stdio" }
+- filetypes: >lua
+  { "yaml" }
+- root_markers: >lua
+  { "configuration.yaml", "configuration.yml" }
+<
+
+------------------------------------------------------------------------------
 hoon_ls
 
 https://github.com/urbit/hoon-language-server

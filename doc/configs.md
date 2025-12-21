@@ -145,6 +145,7 @@ Nvim by running `:help lspconfig-all`.
 - [hie](#hie)
 - [hlasm](#hlasm)
 - [hls](#hls)
+- [home_assistant](#home_assistant)
 - [hoon_ls](#hoon_ls)
 - [html](#html)
 - [htmx](#htmx)
@@ -5691,6 +5692,36 @@ Default config:
       formattingProvider = "ormolu"
     }
   }
+  ```
+
+---
+
+## home_assistant
+
+https://github.com/keesschollaart81/vscode-home-assistant
+
+`vscode-home-assistant` can be installed via from source or by downloading
+and extracting the VSCode "Home Assistant Config Helper" extension
+
+`vscode-home-assistant` is a language server for Home Assistant ported from the VSCode "Home Assistant Config Helper" extension.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('home_assistant')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "vscode-home-assistant", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "yaml" }
+  ```
+- `root_markers` :
+  ```lua
+  { "configuration.yaml", "configuration.yml" }
   ```
 
 ---
