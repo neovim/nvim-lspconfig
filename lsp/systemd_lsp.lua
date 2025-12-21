@@ -12,6 +12,32 @@
 --- ```
 ---
 --- A language server implementation for Systemd unit files made in Rust.
+---
+--- > [!NOTE]
+--- >
+--- > If you want this LSP to accurately activate for any Systemd files,
+--- > make sure to use the following autocmd:
+---
+--- ```lua
+--- vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
+--   pattern = {
+--     '*.service',
+--     '*.mount',
+--     '*.device',
+--     '*.nspawn',
+--     '*.target',
+--     '*.timer',
+--     '*.path',
+--     '*.slice',
+--     '*.socket',
+--   },
+--   callback = function()
+--     local bufnr = vim.api.nvim_get_current_buf()
+--     vim.bo[bufnr].filetype = 'systemd'
+--   end,
+--   desc = 'Set filetype to systemd for systemd unit files',
+-- })
+--- ```
 
 ---@type vim.lsp.Config
 return {
