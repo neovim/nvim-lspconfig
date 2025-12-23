@@ -160,9 +160,14 @@ return {
         cb(root_dir)
       end
     else
-      local existing_client = vim.lsp.get_clients({ name = 'roslyn_ls' })[1]
-      if existing_client and existing_client.config.root_dir then
-        cb(existing_client.config.root_dir)
+      -- decompiled code
+      local prev_buf = vim.fn.bufnr('#')
+      local client = vim.lsp.get_clients({
+        name = 'roslyn_ls',
+        bufnr = prev_buf ~= 1 and prev_buf or nil,
+      })[1]
+      if client then
+        cb(client.config.root_dir)
       end
     end
   end,
