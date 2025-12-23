@@ -77,6 +77,9 @@ buffer) by typing: >vim
 The following _global_ commands are provided by nvim-lspconfig:
 
 :LspInfo                                                            *:LspInfo*
+
+Note: Use `:checkhealth vim.lsp` with Nvim 0.12+.
+
 Alias to `:checkhealth vim.lsp`. Shows the status of active LSP clients and
 servers.
 
