@@ -160,7 +160,7 @@ return {
         cb(root_dir)
       end
     else
-      -- decompiled code
+      -- Decompiled code (example: "/tmp/MetadataAsSource/f2bfba/DecompilationMetadataAsSourceFileProvider/d5782a/Console.cs")
       local prev_buf = vim.fn.bufnr('#')
       local client = vim.lsp.get_clients({
         name = 'roslyn_ls',
