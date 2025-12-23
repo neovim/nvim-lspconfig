@@ -12917,10 +12917,7 @@ vim.lsp.enable('tsgo')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "tsgo", "--lsp", "--stdio" }
-  ```
+- `cmd`: [../lsp/tsgo.lua:18](../lsp/tsgo.lua#L18)
 - `filetypes` :
   ```lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }

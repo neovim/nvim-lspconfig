@@ -9622,8 +9622,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "tsgo", "--lsp", "--stdio" }
+- cmd (use "gF" to view): ../lsp/tsgo.lua:18
 - filetypes: >lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
 - root_dir (use "gF" to view): ../lsp/tsgo.lua:18
