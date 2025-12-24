@@ -1592,11 +1592,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gb95848a8f1"
+      version = "0.12.0-dev+gc374d78095"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gb95848a8f1"
+      version = "0.12.0-dev+gc374d78095"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3461,20 +3461,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gb95848a8f1"
+      version = "0.12.0-dev+gc374d78095"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gb95848a8f1"
+      version = "0.12.0-dev+gc374d78095"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gb95848a8f1"
+      version = "0.12.0-dev+gc374d78095"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gb95848a8f1"
+      version = "0.12.0-dev+gc374d78095"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -9622,8 +9622,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "tsgo", "--lsp", "--stdio" }
+- cmd (use "gF" to view): ../lsp/tsgo.lua:18
 - filetypes: >lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
 - root_dir (use "gF" to view): ../lsp/tsgo.lua:18

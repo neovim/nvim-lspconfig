@@ -2436,11 +2436,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gb95848a8f1"
+      version = "0.12.0-dev+gc374d78095"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gb95848a8f1"
+      version = "0.12.0-dev+gc374d78095"
     }
   }
   ```
@@ -4873,20 +4873,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gb95848a8f1"
+      version = "0.12.0-dev+gc374d78095"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gb95848a8f1"
+      version = "0.12.0-dev+gc374d78095"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gb95848a8f1"
+      version = "0.12.0-dev+gc374d78095"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gb95848a8f1"
+      version = "0.12.0-dev+gc374d78095"
     }
   }
   ```
@@ -12917,10 +12917,7 @@ vim.lsp.enable('tsgo')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "tsgo", "--lsp", "--stdio" }
-  ```
+- `cmd`: [../lsp/tsgo.lua:18](../lsp/tsgo.lua#L18)
 - `filetypes` :
   ```lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
