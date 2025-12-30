@@ -79,7 +79,7 @@ return {
       '*.kube',
       '*.pod',
       '*.build',
-      '*.image'
+      '*.image',
     }
 
     local util = require('lspconfig.util')
