@@ -11979,14 +11979,7 @@ Default config:
 
 ## systemd_ls
 
-https://github.com/psacawa/systemd-language-server
-
-`systemd-language-server` can be installed via `pip`:
-```sh
-pip install systemd-language-server
-```
-
-Language Server for Systemd unit files
+stack overflow
 
 Snippet to enable the language server:
 ```lua
@@ -11994,18 +11987,7 @@ vim.lsp.enable('systemd_ls')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "systemd-language-server" }
-  ```
-- `filetypes` :
-  ```lua
-  { "systemd" }
-  ```
-- `root_markers` :
-  ```lua
-  { ".git" }
-  ```
+
 
 ---
 
