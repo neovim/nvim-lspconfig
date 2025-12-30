@@ -39,7 +39,7 @@
 ---   'kube',
 ---   'pod',
 ---   'build',
----   'image'
+---   'image',
 --- }
 ---
 --- local extension_map = {}
