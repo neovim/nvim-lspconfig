@@ -50,7 +50,7 @@
 --- vim.filetype.add {
 ---   extension = extension_map
 --- }
--- ```
+--- ```
 
 
 ---@type vim.lsp.Config
