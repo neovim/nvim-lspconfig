@@ -16,54 +16,76 @@
 --- > [!NOTE]
 --- >
 --- > If you want this LSP to accurately activate for any Systemd files,
---- > make sure to use the following autocmd:
+--- > use the following settings:
 ---
 --- ```lua
---- vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
----  group = vim.api.nvim_create_augroup('systemd-filetypes', { clear = true }),
---   pattern = {
---     '*.service',
---     '*.mount',
---     '*.device',
---     '*.nspawn',
---     '*.target',
---     '*.timer',
---     '*.path',
---     '*.slice',
---     '*.socket',
---   },
---   callback = function()
---     local bufnr = vim.api.nvim_get_current_buf()
---     vim.bo[bufnr].filetype = 'systemd'
---   end,
---   desc = 'Set filetype to systemd for systemd unit files',
--- })
+--- create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
+---   group = create_augroup('set_systemd_filetypes'),
+---   desc = 'Set filetype to systemd for systemd unit files',
+---   pattern = { -- Credit to @magnuslarsen
+---     -- systemd unit files
+---     '*.service',
+---     '*.socket',
+---     '*.timer',
+---     '*.mount',
+---     '*.automount',
+---     '*.swap',
+---     '*.target',
+---     '*.path',
+---     '*.slice',
+---     '*.scope',
+---     '*.device',
+---     -- Podman Quadlet files
+---     '*.container',
+---     '*.volume',
+---     '*.network',
+---     '*.kube',
+---     '*.pod',
+---     '*.build',
+---     '*.image',
+---   },
+---   callback = function()
+---     local bufnr = vim.api.nvim_get_current_buf()
+---     vim.bo[bufnr].filetype = 'systemd'
+---   end
+--- })
 --- ```
 
 ---@type vim.lsp.Config
 return {
   cmd = { 'systemd-lsp' },
   filetypes = { 'systemd' },
-  root_pattern = { -- Credit to @magnuslarsen
-    -- systemd unit files
-    '*.service',
-    '*.socket',
-    '*.timer',
-    '*.mount',
-    '*.automount',
-    '*.swap',
-    '*.target',
-    '*.path',
-    '*.slice',
-    '*.scope',
-    '*.device',
-    -- Podman Quadlet files
-    '*.container',
-    '*.volume',
-    '*.network',
-    '*.kube',
-    '*.pod',
-    '*.build',
-    '*.image',
-  },
+  ---@param bufnr integer
+  root_dir = function(bufnr, on_dir)
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+
+    local systemd_unit_filetypes = { -- Credit to @magnuslarsen
+      -- systemd unit files
+      '*.service',
+      '*.socket',
+      '*.timer',
+      '*.mount',
+      '*.automount',
+      '*.swap',
+      '*.target',
+      '*.path',
+      '*.slice',
+      '*.scope',
+      '*.device',
+      -- Podman Quadlet files
+      '*.container',
+      '*.volume',
+      '*.network',
+      '*.kube',
+      '*.pod',
+      '*.build',
+      '*.image'
+    }
+
+    local util = require('lspconfig.util')
+
+    for _, ft in ipairs(systemd_unit_filetypes) do
+      on_dir((util.root_pattern(ft))(fname))
+    end
+  end,
 }
