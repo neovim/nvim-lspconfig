@@ -19,8 +19,8 @@
 --- > use the following settings:
 ---
 --- ```lua
---- create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
----   group = create_augroup('set_systemd_filetypes'),
+--- vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
+---   group = vim.api.nvim_create_augroup('set_systemd_filetypes', { clear = true }),
 ---   desc = 'Set filetype to systemd for systemd unit files',
 ---   pattern = { -- Credit to @magnuslarsen
 ---     -- systemd unit files
