@@ -2436,11 +2436,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g1cde71233f"
+      version = "0.12.0-dev+g03377b9552"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g1cde71233f"
+      version = "0.12.0-dev+g03377b9552"
     }
   }
   ```
@@ -4873,20 +4873,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g1cde71233f"
+      version = "0.12.0-dev+g03377b9552"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g1cde71233f"
+      version = "0.12.0-dev+g03377b9552"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g1cde71233f"
+      version = "0.12.0-dev+g03377b9552"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g1cde71233f"
+      version = "0.12.0-dev+g03377b9552"
     }
   }
   ```
@@ -11979,14 +11979,7 @@ Default config:
 
 ## systemd_ls
 
-https://github.com/psacawa/systemd-language-server
-
-`systemd-language-server` can be installed via `pip`:
-```sh
-pip install systemd-language-server
-```
-
-Language Server for Systemd unit files
+stack overflow
 
 Snippet to enable the language server:
 ```lua
@@ -11994,18 +11987,7 @@ vim.lsp.enable('systemd_ls')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "systemd-language-server" }
-  ```
-- `filetypes` :
-  ```lua
-  { "systemd" }
-  ```
-- `root_markers` :
-  ```lua
-  { ".git" }
-  ```
+
 
 ---
 
