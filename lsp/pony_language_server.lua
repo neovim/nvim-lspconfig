@@ -1,7 +1,7 @@
 ---@brief
 ---
 --- https://github.com/ponylang/pony-language-server
-
+---
 --- Language server for the Pony programming language
 
 ---@type vim.lsp.Config
