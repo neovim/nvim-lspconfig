@@ -20,26 +20,28 @@
 ---
 --- ```lua
 --- vim.filetype.add {
----   -- systemd unit filetypes
----   ['service'] = 'systemd',
----   ['socket'] = 'systemd',
----   ['timer'] = 'systemd',
----   ['mount'] = 'systemd',
----   ['automount'] = 'systemd',
----   ['swap'] = 'systemd',
----   ['target'] = 'systemd',
----   ['path'] = 'systemd',
----   ['slice'] = 'systemd',
----   ['scope'] = 'systemd',
----   ['device'] = 'systemd',
----   -- Podman Quadlet filetypes
----   ['container'] = 'systemd',
----   ['volume'] = 'systemd',
----   ['network'] = 'systemd',
----   ['kube'] = 'systemd',
----   ['pod'] = 'systemd',
----   ['build'] = 'systemd',
----   ['image'] = 'systemd',
+---   extension = {
+---     -- systemd unit filetypes
+---     service = 'systemd',
+---     socket = 'systemd',
+---     timer = 'systemd',
+---     mount = 'systemd',
+---     automount = 'systemd',
+---     swap = 'systemd',
+---     target = 'systemd',
+---     path = 'systemd',
+---     slice = 'systemd',
+---     scope = 'systemd',
+---     device = 'systemd',
+---     -- Podman Quadlet filetypes
+---     container = 'systemd',
+---     volume = 'systemd',
+---     network = 'systemd',
+---     kube = 'systemd',
+---     pod = 'systemd',
+---     build = 'systemd',
+---     image = 'systemd',
+---   },
 --- }
 --- ```
 
