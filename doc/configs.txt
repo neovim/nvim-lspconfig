@@ -1592,11 +1592,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g03377b9552"
+      version = "0.12.0-dev+gacc3554439"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g03377b9552"
+      version = "0.12.0-dev+gacc3554439"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3461,20 +3461,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g03377b9552"
+      version = "0.12.0-dev+gacc3554439"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g03377b9552"
+      version = "0.12.0-dev+gacc3554439"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g03377b9552"
+      version = "0.12.0-dev+gacc3554439"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g03377b9552"
+      version = "0.12.0-dev+gacc3554439"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -6516,6 +6516,26 @@ Default config:
   { "pli" }
 - root_markers: >lua
   { ".pliplugin" }
+<
+
+------------------------------------------------------------------------------
+pony_language_server
+
+https://github.com/ponylang/pony-language-server
+
+Language server for the Pony programming language
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('pony_language_server')
+
+
+Default config:
+- cmd: >lua
+  { "pony-lsp" }
+- filetypes: >lua
+  { "pony" }
+- root_markers: >lua
+  { "corral.json", ".git" }
 <
 
 ------------------------------------------------------------------------------
