@@ -233,6 +233,7 @@ Nvim by running `:help lspconfig-all`.
 - [pico8_ls](#pico8_ls)
 - [please](#please)
 - [pli](#pli)
+- [pony_language_server](#pony_language_server)
 - [poryscript_pls](#poryscript_pls)
 - [postgres_lsp](#postgres_lsp)
 - [powershell_es](#powershell_es)
@@ -2436,11 +2437,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g03377b9552"
+      version = "0.12.0-dev+gacc3554439"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g03377b9552"
+      version = "0.12.0-dev+gacc3554439"
     }
   }
   ```
@@ -4873,20 +4874,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g03377b9552"
+      version = "0.12.0-dev+gacc3554439"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g03377b9552"
+      version = "0.12.0-dev+gacc3554439"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g03377b9552"
+      version = "0.12.0-dev+gacc3554439"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g03377b9552"
+      version = "0.12.0-dev+gacc3554439"
     }
   }
   ```
@@ -8871,6 +8872,33 @@ Default config:
 - `root_markers` :
   ```lua
   { ".pliplugin" }
+  ```
+
+---
+
+## pony_language_server
+
+https://github.com/ponylang/pony-language-server
+
+Language server for the Pony programming language
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('pony_language_server')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "pony-lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "pony" }
+  ```
+- `root_markers` :
+  ```lua
+  { "corral.json", ".git" }
   ```
 
 ---
