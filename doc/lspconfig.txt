@@ -64,6 +64,24 @@ nvim-lspconfig interface:
 - `on_new_config` is currently missing, see https://github.com/neovim/neovim/issues/32287
   - However, defining `root_dir` as a function is very flexible and may fit
     your use-case instead. https://github.com/neovim/neovim/issues/32037#issuecomment-2825599872
+- `root_dir` usages akin to >lua
+
+      root_dir  = require'lspconfig.util'.root_pattern(...)
+<
+
+  should be updated:
+  - If the patterns passed to `root_pattern` contain no wildcards, then 
+    `root_markers` (see |lsp-root_markers|) is likely sufficient.
+  - Otherwise, `root_pattern` can still be employed (for the time being,
+    see https://github.com/neovim/nvim-lspconfig/issues/3768), but the usage
+    should be as follows (see |lsp-root_dir|): >lua
+
+        root_dir = function(bufnr, on_dir)
+            local fname = vim.api.nvim_buf_get_name(bufnr)
+            on_dir(require'lspconfig.util'.root_pattern(...)(fname))
+        end
+<
+
 
 ==============================================================================
 COMMANDS                                                    *lspconfig-commands*
