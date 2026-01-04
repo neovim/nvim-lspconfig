@@ -2437,11 +2437,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gacc3554439"
+      version = "0.12.0-dev+g715015d3b2"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gacc3554439"
+      version = "0.12.0-dev+g715015d3b2"
     }
   }
   ```
@@ -4874,20 +4874,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gacc3554439"
+      version = "0.12.0-dev+g715015d3b2"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gacc3554439"
+      version = "0.12.0-dev+g715015d3b2"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gacc3554439"
+      version = "0.12.0-dev+g715015d3b2"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gacc3554439"
+      version = "0.12.0-dev+g715015d3b2"
     }
   }
   ```
@@ -12007,7 +12007,7 @@ Default config:
 
 ## systemd_ls
 
-stack overflow
+Renamed to [systemd_lsp](#systemd_lsp)
 
 Snippet to enable the language server:
 ```lua
@@ -12015,7 +12015,18 @@ vim.lsp.enable('systemd_ls')
 ```
 
 Default config:
-
+- `cmd` :
+  ```lua
+  { "systemd-lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "systemd" }
+  ```
+- `name` :
+  ```lua
+  "systemd_lsp"
+  ```
 
 ---
 
