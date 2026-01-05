@@ -44,20 +44,15 @@ return {
     local root_markers = util.insert_package_json({ '.oxlintrc.json' }, 'oxlint', fname)[1]
     on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
   end,
-  before_init = function(_, config)
-    config.settings = {
-      {
-        workspaceUri = config.root_dir,
-        options = {
-          -- run = 'onType',
-          -- configPath = null,
-          -- tsConfigPath = null,
-          -- unusedDisableDirectives = 'allow',
-          -- typeAware = false,
-          -- disableNestedConfig = false,
-          -- fixKind = 'safe_fix',
-        },
-      },
-    }
-  end,
+  init_options = {
+    settings = {
+      -- ['run'] = 'onType',
+      -- ['configPath'] = nil,
+      -- ['tsConfigPath'] = nil,
+      -- ['unusedDisableDirectives'] = 'allow',
+      -- ['typeAware'] = false,
+      -- ['disableNestedConfig'] = false,
+      -- ['fixKind'] = 'safe_fix',
+    },
+  },
 }
