@@ -3,7 +3,8 @@
 --- https://github.com/oxc-project/oxc
 --- https://oxc.rs/docs/guide/usage/linter.html
 ---
---- `oxlint` is a linter for JavaScript / Typescript supporting over 500 rules from ESLint and its popular plugins
+--- `oxlint` is a linter for JavaScript / TypeScript supporting over 500 rules from ESLint and its popular plugins.
+--- It also supports linting framework files (Vue, Svelte, Astro) by analyzing their <script> blocks.
 --- It can be installed via `npm`:
 ---
 --- ```sh
@@ -22,6 +23,9 @@ return {
     'typescript',
     'typescriptreact',
     'typescript.tsx',
+    'vue',
+    'svelte',
+    'astro',
   },
   workspace_required = true,
   on_attach = function(client, bufnr)
