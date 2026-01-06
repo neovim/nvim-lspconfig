@@ -3,7 +3,8 @@
 --- https://github.com/oxc-project/oxc
 --- https://oxc.rs/docs/guide/usage/formatter.html
 ---
---- `oxfmt` is a Prettier-compatible code formatter for JavaScript / Typescript.
+--- `oxfmt` is a Prettier-compatible code formatter that supports multiple languages
+--- including JavaScript, TypeScript, JSON, YAML, HTML, CSS, Markdown, and more.
 --- It can be installed via `npm`:
 ---
 --- ```sh
@@ -22,6 +23,21 @@ return {
     'typescript',
     'typescriptreact',
     'typescript.tsx',
+    'toml',
+    'json',
+    'jsonc',
+    'json5',
+    'yaml',
+    'html',
+    'vue',
+    'handlebars',
+    'hbs',
+    'css',
+    'scss',
+    'less',
+    'graphql',
+    'markdown',
+    'mdx',
   },
   workspace_required = true,
   root_dir = function(bufnr, on_dir)
