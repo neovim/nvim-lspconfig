@@ -129,6 +129,7 @@ Nvim by running `:help lspconfig-all`.
 - [glint](#glint)
 - [glsl_analyzer](#glsl_analyzer)
 - [glslls](#glslls)
+- [gn_language_server](#gn_language_server)
 - [gnls](#gnls)
 - [golangci_lint_ls](#golangci_lint_ls)
 - [gopls](#gopls)
@@ -2437,11 +2438,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gdd6ed20272"
+      version = "0.12.0-dev+g3e83f7bec7"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gdd6ed20272"
+      version = "0.12.0-dev+g3e83f7bec7"
     }
   }
   ```
@@ -4874,20 +4875,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gdd6ed20272"
+      version = "0.12.0-dev+g3e83f7bec7"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gdd6ed20272"
+      version = "0.12.0-dev+g3e83f7bec7"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gdd6ed20272"
+      version = "0.12.0-dev+g3e83f7bec7"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gdd6ed20272"
+      version = "0.12.0-dev+g3e83f7bec7"
     }
   }
   ```
@@ -5112,6 +5113,34 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## gn_language_server
+
+https://github.com/google/gn-language-server
+
+A language server for GN, the build configuration language used in Chromium,
+Fuchsia, and other projects.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('gn_language_server')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "gn-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "gn" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".gn", ".git" }
   ```
 
 ---
