@@ -2310,7 +2310,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "c", "css", "gitcommit", "go", "haskell", "html", "java", "javascript", "javascriptreact", "lua", "markdown", "php", "python", "ruby", "rust", "toml", "text", "typescript", "typescriptreact" }
+  { "c", "css", "gitcommit", "go", "haskell", "html", "java", "javascript", "javascriptreact", "lua", "markdown", "php", "python", "ruby", "rust", "swift", "toml", "text", "typescript", "typescriptreact", "zig" }
   ```
 - `root_markers` :
   ```lua
@@ -2437,11 +2437,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+gdd6ed20272"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+gdd6ed20272"
     }
   }
   ```
@@ -4874,20 +4874,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+gdd6ed20272"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+gdd6ed20272"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+gdd6ed20272"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+gdd6ed20272"
     }
   }
   ```

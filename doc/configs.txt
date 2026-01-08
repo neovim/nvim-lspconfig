@@ -1488,7 +1488,7 @@ Default config:
 - cmd: >lua
   { "codebook-lsp", "serve" }
 - filetypes: >lua
-  { "c", "css", "gitcommit", "go", "haskell", "html", "java", "javascript", "javascriptreact", "lua", "markdown", "php", "python", "ruby", "rust", "toml", "text", "typescript", "typescriptreact" }
+  { "c", "css", "gitcommit", "go", "haskell", "html", "java", "javascript", "javascriptreact", "lua", "markdown", "php", "python", "ruby", "rust", "swift", "toml", "text", "typescript", "typescriptreact", "zig" }
 - root_markers: >lua
   { ".git", "codebook.toml", ".codebook.toml" }
 <
@@ -1592,11 +1592,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+gdd6ed20272"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+gdd6ed20272"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3461,20 +3461,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+gdd6ed20272"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+gdd6ed20272"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+gdd6ed20272"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+gdd6ed20272"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
