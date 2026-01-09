@@ -1488,7 +1488,7 @@ Default config:
 - cmd: >lua
   { "codebook-lsp", "serve" }
 - filetypes: >lua
-  { "c", "css", "gitcommit", "go", "haskell", "html", "java", "javascript", "javascriptreact", "lua", "markdown", "php", "python", "ruby", "rust", "toml", "text", "typescript", "typescriptreact" }
+  { "c", "css", "gitcommit", "go", "haskell", "html", "java", "javascript", "javascriptreact", "lua", "markdown", "php", "python", "ruby", "rust", "swift", "toml", "text", "typescript", "typescriptreact", "zig" }
 - root_markers: >lua
   { ".git", "codebook.toml", ".codebook.toml" }
 <
@@ -1592,11 +1592,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+g3e83f7bec7"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+g3e83f7bec7"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3461,20 +3461,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+g3e83f7bec7"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+g3e83f7bec7"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+g3e83f7bec7"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g715015d3b2"
+      version = "0.12.0-dev+g3e83f7bec7"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -3652,6 +3652,27 @@ Default config:
   { "glsl", "vert", "tesc", "tese", "frag", "geom", "comp" }
 - root_markers: >lua
   { ".git" }
+<
+
+------------------------------------------------------------------------------
+gn_language_server
+
+https://github.com/google/gn-language-server
+
+A language server for GN, the build configuration language used in Chromium,
+Fuchsia, and other projects.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('gn_language_server')
+
+
+Default config:
+- cmd: >lua
+  { "gn-language-server", "--stdio" }
+- filetypes: >lua
+  { "gn" }
+- root_markers: >lua
+  { ".gn", ".git" }
 <
 
 ------------------------------------------------------------------------------
