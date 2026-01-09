@@ -132,12 +132,17 @@ If a config needs to be renamed or deprecated, changes its contents like this:
 ```lua
 ---@brief
 ---
---- Renamed to [vsrocq](#vsrocq)
-
-vim.deprecate('vscoqtop', 'vsrocq', '2.0.0', 'nvim-lspconfig', false)
+--- Renamed to [systemd_lsp](#systemd_lsp)
 
 ---@type vim.lsp.Config
-return vim.lsp.config.vsrocq
+return vim.tbl_extend('force', vim.lsp.config.systemd_lsp, {
+  on_init = function(...)
+    vim.deprecate('systemd_ls', 'systemd_lsp', '3.0.0', 'nvim-lspconfig', false)
+    if vim.lsp.config.systemd_lsp.on_init then
+      vim.lsp.config.systemd_lsp.on_init(...)
+    end
+  end,
+})
 ```
 
 ## Commit style
