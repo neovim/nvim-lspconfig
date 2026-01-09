@@ -47,6 +47,12 @@ return {
       return
     end
 
+    -- prevent from attaching to non file buffers
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    if not vim.uv.fs_stat(fname) then
+      return
+    end
+
     -- We fallback to the current working directory if no project root is found
     local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
 
