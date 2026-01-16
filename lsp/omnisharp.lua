@@ -8,8 +8,6 @@
 ---
 --- OmniSharp requires the [dotnet-sdk](https://dotnet.microsoft.com/download) to be installed.
 ---
---- **By default, omnisharp-roslyn doesn't have a `cmd` set.** This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set `cmd` to the absolute path ($HOME and ~ are not expanded) of the unzipped run script or binary.
----
 --- For `go_to_definition` to work fully, extended `textDocument/definition` handler is needed, for example see [omnisharp-extended-lsp.nvim](https://github.com/Hoffs/omnisharp-extended-lsp.nvim)
 ---
 ---
@@ -32,7 +30,8 @@ return {
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     on_dir(
-      util.root_pattern '*.sln'(fname)
+      util.root_pattern '*.slnx'(fname)
+        or util.root_pattern '*.sln'(fname)
         or util.root_pattern '*.csproj'(fname)
         or util.root_pattern 'omnisharp.json'(fname)
         or util.root_pattern 'function.json'(fname)

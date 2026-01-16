@@ -61,7 +61,7 @@ return {
     -- in its directory tree.
     local filename = vim.api.nvim_buf_get_name(bufnr)
     local biome_config_files = { 'biome.json', 'biome.jsonc' }
-    biome_config_files = util.insert_package_json(biome_config_files, 'biome', filename)
+    biome_config_files = util.insert_package_json(biome_config_files, 'biomejs', filename)
     local is_buffer_using_biome = vim.fs.find(biome_config_files, {
       path = filename,
       type = 'file',

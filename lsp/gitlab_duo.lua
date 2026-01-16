@@ -393,7 +393,7 @@ return {
             local new_token_data = refresh_access_token(token_data.refresh_token)
             if new_token_data then
               client:notify('workspace/didChangeConfiguration', {
-                settings = { token = new_token_data.access_token },
+                settings = { token = new_token_data.access_token, baseUrl = config.gitlab_url },
               })
             else
               vim.notify('Run :LspGitLabDuoSignIn to re-authenticate', vim.log.levels.WARN)
@@ -416,6 +416,16 @@ return {
 
     -- Check authentication status
     local token, status = get_valid_token()
+
+    if token then
+      client:notify('workspace/didChangeConfiguration', {
+        settings = {
+          token = token,
+          baseUrl = config.gitlab_url,
+        },
+      })
+    end
+
     if not token then
       vim.notify('GitLab Duo: Not authenticated. Run :LspGitLabDuoSignIn to sign in.', vim.log.levels.WARN)
     elseif status == 'refreshed' then
