@@ -2438,11 +2438,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g3e83f7bec7"
+      version = "0.12.0-dev+g2c2203c040"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g3e83f7bec7"
+      version = "0.12.0-dev+g2c2203c040"
     }
   }
   ```
@@ -4875,20 +4875,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g3e83f7bec7"
+      version = "0.12.0-dev+g2c2203c040"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g3e83f7bec7"
+      version = "0.12.0-dev+g2c2203c040"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g3e83f7bec7"
+      version = "0.12.0-dev+g2c2203c040"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g3e83f7bec7"
+      version = "0.12.0-dev+g2c2203c040"
     }
   }
   ```
@@ -6941,25 +6941,23 @@ vim.lsp.config('lua_ls', {
       workspace = {
         checkThirdParty = false,
         library = {
-          vim.env.VIMRUNTIME
+          vim.env.VIMRUNTIME,
           -- Depending on the usage, you might want to add additional paths
           -- here.
-          -- '${3rd}/luv/library'
-          -- '${3rd}/busted/library'
-        }
+          -- '${3rd}/luv/library',
+          -- '${3rd}/busted/library',
+        },
         -- Or pull in all of 'runtimepath'.
         -- NOTE: this is a lot slower and will cause issues when working on
         -- your own configuration.
         -- See https://github.com/neovim/nvim-lspconfig/issues/3189
-        -- library = {
-        --   vim.api.nvim_get_runtime_file('', true),
-        -- }
-      }
+        -- library = vim.api.nvim_get_runtime_file('', true),
+      },
     })
   end,
   settings = {
-    Lua = {}
-  }
+    Lua = {},
+  },
 })
 ```
 
