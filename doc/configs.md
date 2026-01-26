@@ -10997,7 +10997,53 @@ Default config:
 
 https://github.com/snyk/snyk-ls
 
-LSP for Snyk Open Source, Snyk Infrastructure as Code, and Snyk Code.
+**[Snyk](https://snyk.io)** is a developer security platform that helps you find and fix
+vulnerabilities in your code, open source dependencies, containers, and infrastructure as code.
+
+The Snyk Language Server provides real-time security scanning for:
+- **Snyk Open Source**: Find and fix vulnerabilities in open source dependencies
+- **Snyk Code**: Find and fix security vulnerabilities in your code
+- **Snyk Infrastructure as Code**: Find and fix security issues in Kubernetes, Terraform, and other IaC files
+
+## Authentication
+
+**Note**: Currently, only token-based authentication is supported in Neovim.
+
+1. Get your API token from https://app.snyk.io/account
+2. Set the `SNYK_TOKEN` environment variable:
+   ```sh
+   export SNYK_TOKEN="your-token-here"
+   ```
+
+## Trusted Folders
+
+Snyk requires you to trust directories before scanning them. To avoid being prompted every time:
+
+```lua
+vim.lsp.config('snyk_ls', {
+  init_options = {
+    trustedFolders = {
+      '/Users/yourname/projects',  -- Trust your projects directory
+      '/path/to/another/trusted/dir',
+    },
+  },
+})
+```
+
+**Important**: Trust the top-level directory where you store your repositories, not individual repos.
+For example, if you work on `/Users/yourname/projects/my-app`, trust `/Users/yourname/projects`.
+Only trust directories containing code you trust to scan.
+
+## Configuration
+
+Full configuration options available at https://github.com/snyk/snyk-ls#configuration-1
+
+### Advanced Configuration
+
+For **non-default multi-tenant or single-tenant setups**, you may need to specify:
+
+- `endpoint`: Custom Snyk API endpoint (e.g., `https://api.eu.snyk.io` for EU, or your single-tenant URL)
+```
 
 Snippet to enable the language server:
 ```lua
@@ -11007,16 +11053,22 @@ vim.lsp.enable('snyk_ls')
 Default config:
 - `cmd` :
   ```lua
-  { "snyk-ls" }
+  { "snyk", "language-server", "-l", "info" }
   ```
 - `filetypes` :
   ```lua
-  { "go", "gomod", "javascript", "typescript", "json", "python", "requirements", "helm", "yaml", "terraform", "terraform-vars" }
+  { "apex", "apexcode", "c", "cpp", "cs", "dart", "dockerfile", "elixir", "eelixir", "go", "gomod", "groovy", "helm", "java", "javascript", "json", "kotlin", "objc", "objcpp", "php", "python", "requirements", "ruby", "rust", "scala", "swift", "terraform", "terraform-vars", "typescript", "yaml" }
   ```
 - `init_options` :
   ```lua
   {
-    activateSnykCode = "true"
+    activateSnykCode = "false",
+    activateSnykIac = "true",
+    activateSnykOpenSource = "true",
+    integrationName = "Neovim",
+    integrationVersion = "0.12.0-dev+g95b03171df",
+    token = vim.NIL,
+    trustedFolders = {}
   }
   ```
 - `root_markers` :
