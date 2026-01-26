@@ -12125,6 +12125,7 @@ Default config:
   ```lua
   "systemd_lsp"
   ```
+- `on_init`: [../lsp/systemd_ls.lua:6](../lsp/systemd_ls.lua#L6)
 
 ---
 
@@ -14003,7 +14004,7 @@ Default config:
   ```lua
   "vue_ls"
   ```
-- `on_init`: [../lsp/volar.lua:9](../lsp/volar.lua#L9)
+- `on_init`: [../lsp/volar.lua:6](../lsp/volar.lua#L6)
 - `root_markers` :
   ```lua
   { "package.json" }
@@ -14033,6 +14034,7 @@ Default config:
   ```lua
   "vsrocq"
   ```
+- `on_init`: [../lsp/vscoqtop.lua:6](../lsp/vscoqtop.lua#L6)
 - `root_markers` :
   ```lua
   { "_RocqProject", "_CoqProject", ".git" }

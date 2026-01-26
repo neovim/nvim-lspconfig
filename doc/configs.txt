@@ -8997,6 +8997,7 @@ Default config:
   { "systemd" }
 - name: >lua
   "systemd_lsp"
+- on_init (use "gF" to view): ../lsp/systemd_ls.lua:6
 <
 
 ------------------------------------------------------------------------------
@@ -10457,7 +10458,7 @@ Default config:
   { "vue" }
 - name: >lua
   "vue_ls"
-- on_init (use "gF" to view): ../lsp/volar.lua:9
+- on_init (use "gF" to view): ../lsp/volar.lua:6
 - root_markers: >lua
   { "package.json" }
 <
@@ -10478,6 +10479,7 @@ Default config:
   { "coq" }
 - name: >lua
   "vsrocq"
+- on_init (use "gF" to view): ../lsp/vscoqtop.lua:6
 - root_markers: >lua
   { "_RocqProject", "_CoqProject", ".git" }
 <
