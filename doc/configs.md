@@ -219,6 +219,7 @@ Nvim by running `:help lspconfig-all`.
 - [opencl_ls](#opencl_ls)
 - [openscad_ls](#openscad_ls)
 - [openscad_lsp](#openscad_lsp)
+- [oso](#oso)
 - [oxlint](#oxlint)
 - [pact_ls](#pact_ls)
 - [pasls](#pasls)
@@ -8413,6 +8414,51 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## oso
+
+https://www.osohq.com/docs/develop/local-dev/env-setup
+
+Oso Polar language server.
+
+`oso-cloud` can be installed by following the instructions
+[here](https://www.osohq.com/docs/develop/local-dev/env-setup).
+
+The default `cmd` assumes that the `oso-cloud` binary can be found in the `$PATH`.
+
+You may need to configure the filetype for Polar (*.polar) files:
+
+```
+autocmd BufNewFile,BufRead *.polar set filetype=polar
+```
+
+or
+
+```lua
+vim.filetype.add({
+  pattern = {
+    ['.*/*.polar'] = 'polar',
+  },
+})
+
+Alternatively, you may use a syntax plugin like https://github.com/osohq/polar.vim
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('oso')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "oso-cloud", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "polar" }
   ```
 
 ---
