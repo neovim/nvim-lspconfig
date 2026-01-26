@@ -2,7 +2,12 @@
 ---
 --- Renamed to [vsrocq](#vsrocq)
 
-vim.deprecate('vscoqtop', 'vsrocq', '2.0.0', 'nvim-lspconfig', false)
-
 ---@type vim.lsp.Config
-return vim.lsp.config.vsrocq
+return vim.tbl_extend('force', vim.lsp.config.vsrocq, {
+  on_init = function(...)
+    vim.deprecate('vscoqtop', 'vsrocq', '3.0.0', 'nvim-lspconfig', false)
+    if vim.lsp.config.vsrocq.on_init then
+      vim.lsp.config.vsrocq.on_init(...)
+    end
+  end,
+})
