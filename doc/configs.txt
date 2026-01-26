@@ -4345,6 +4345,14 @@ Default config:
   { "php" }
 - root_markers: >lua
   { ".git", "composer.json" }
+- settings: >lua
+  {
+    intelephense = {
+      telemetry = {
+        enabled = false
+      }
+    }
+  }
 <
 
 ------------------------------------------------------------------------------

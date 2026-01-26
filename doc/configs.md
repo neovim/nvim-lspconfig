@@ -6025,6 +6025,16 @@ Default config:
   ```lua
   { ".git", "composer.json" }
   ```
+- `settings` :
+  ```lua
+  {
+    intelephense = {
+      telemetry = {
+        enabled = false
+      }
+    }
+  }
+  ```
 
 ---
 
