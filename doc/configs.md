@@ -1373,8 +1373,7 @@ Default config:
     basedpyright = {
       analysis = {
         autoSearchPaths = true,
-        diagnosticMode = "openFilesOnly",
-        useLibraryCodeForTypes = true
+        diagnosticMode = "openFilesOnly"
       }
     }
   }
@@ -5178,7 +5177,7 @@ Default config:
 - `init_options` :
   ```lua
   {
-    command = { "golangci-lint", "run", "--output.json.path=stdout", "--show-stats=false" }
+    command = { "golangci-lint", "run", "--output.text.path=", "--output.tab.path=", "--output.html.path=", "--output.checkstyle.path=", "--output.junit-xml.path=", "--output.teamcity.path=", "--output.sarif.path=", "--show-stats=false", "--output.json.path=stdout" }
   }
   ```
 - `root_markers` :
