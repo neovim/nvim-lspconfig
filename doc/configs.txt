@@ -962,7 +962,7 @@ Snippet to enable the language server: >lua
 Default config:
 - cmd (use "gF" to view): ../lsp/biome.lua:17
 - filetypes: >lua
-  { "astro", "css", "graphql", "html", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
+  { "astro", "css", "graphql", "html", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescriptreact", "vue" }
 - root_dir (use "gF" to view): ../lsp/biome.lua:17
 - `workspace_required` : `true`
 <
@@ -1592,11 +1592,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g95b03171df"
+      version = "0.12.0-dev+gb6befc7b03"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g95b03171df"
+      version = "0.12.0-dev+gb6befc7b03"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -2624,7 +2624,7 @@ Default config:
 - cmd: >lua
   { "emmet-language-server", "--stdio" }
 - filetypes: >lua
-  { "astro", "css", "eruby", "html", "htmlangular", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "svelte", "templ", "typescriptreact", "vue" }
+  { "astro", "css", "eruby", "html", "htmlangular", "htmldjango", "javascriptreact", "less", "sass", "scss", "svelte", "typescriptreact", "vue" }
 - root_markers: >lua
   { ".git" }
 <
@@ -3432,20 +3432,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g95b03171df"
+      version = "0.12.0-dev+gb6befc7b03"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g95b03171df"
+      version = "0.12.0-dev+gb6befc7b03"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g95b03171df"
+      version = "0.12.0-dev+gb6befc7b03"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g95b03171df"
+      version = "0.12.0-dev+gb6befc7b03"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -4164,7 +4164,7 @@ Default config:
 - cmd: >lua
   { "vscode-html-language-server", "--stdio" }
 - filetypes: >lua
-  { "html", "templ" }
+  { "html" }
 - init_options: >lua
   {
     configurationSection = { "html", "css", "javascript" },
@@ -8207,7 +8207,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g95b03171df",
+    integrationVersion = "0.12.0-dev+gb6befc7b03",
     token = vim.NIL,
     trustedFolders = {}
   }
@@ -9726,7 +9726,7 @@ Snippet to enable the language server: >lua
 Default config:
 - cmd (use "gF" to view): ../lsp/tsgo.lua:18
 - filetypes: >lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact" }
 - root_dir (use "gF" to view): ../lsp/tsgo.lua:18
 <
 

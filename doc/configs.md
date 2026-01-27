@@ -1607,7 +1607,7 @@ Default config:
 - `cmd`: [../lsp/biome.lua:17](../lsp/biome.lua#L17)
 - `filetypes` :
   ```lua
-  { "astro", "css", "graphql", "html", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" }
+  { "astro", "css", "graphql", "html", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescriptreact", "vue" }
   ```
 - `root_dir`: [../lsp/biome.lua:17](../lsp/biome.lua#L17)
 - `workspace_required` : `true`
@@ -2438,11 +2438,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g95b03171df"
+      version = "0.12.0-dev+gb6befc7b03"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g95b03171df"
+      version = "0.12.0-dev+gb6befc7b03"
     }
   }
   ```
@@ -3807,7 +3807,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "astro", "css", "eruby", "html", "htmlangular", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "svelte", "templ", "typescriptreact", "vue" }
+  { "astro", "css", "eruby", "html", "htmlangular", "htmldjango", "javascriptreact", "less", "sass", "scss", "svelte", "typescriptreact", "vue" }
   ```
 - `root_markers` :
   ```lua
@@ -4839,20 +4839,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g95b03171df"
+      version = "0.12.0-dev+gb6befc7b03"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g95b03171df"
+      version = "0.12.0-dev+gb6befc7b03"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g95b03171df"
+      version = "0.12.0-dev+gb6befc7b03"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g95b03171df"
+      version = "0.12.0-dev+gb6befc7b03"
     }
   }
   ```
@@ -5788,7 +5788,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "html", "templ" }
+  { "html" }
   ```
 - `init_options` :
   ```lua
@@ -11066,7 +11066,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g95b03171df",
+    integrationVersion = "0.12.0-dev+gb6befc7b03",
     token = vim.NIL,
     trustedFolders = {}
   }
@@ -13040,7 +13040,7 @@ Default config:
 - `cmd`: [../lsp/tsgo.lua:18](../lsp/tsgo.lua#L18)
 - `filetypes` :
   ```lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact" }
   ```
 - `root_dir`: [../lsp/tsgo.lua:18](../lsp/tsgo.lua#L18)
 
