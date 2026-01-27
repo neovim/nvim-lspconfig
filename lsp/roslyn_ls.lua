@@ -62,6 +62,14 @@ local function refresh_diagnostics(client)
   end
 end
 
+---@param bufname string
+---@return boolean
+local function is_decompiled(bufname)
+  local _, endpos = bufname:find('[/\\]MetadataAsSource[/\\]')
+  if endpos == nil then return false end
+  return vim.fn.finddir(bufname:sub(1, endpos), vim.env.TMP or vim.env.TEMP) ~= ""
+end
+
 local function roslyn_handlers()
   return {
     ['workspace/projectInitializationComplete'] = function(_, _, ctx)
@@ -143,7 +151,7 @@ return {
     local bufname = vim.api.nvim_buf_get_name(bufnr)
     -- don't try to find sln or csproj for files from libraries
     -- outside of the project
-    if not bufname:match('^' .. fs.joinpath('/tmp/MetadataAsSource/')) then
+    if not is_decompiled(bufname) then
       -- try find solutions root first
       local root_dir = fs.root(bufnr, function(fname, _)
         return fname:match('%.sln[x]?$') ~= nil
