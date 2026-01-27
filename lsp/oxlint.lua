@@ -10,6 +10,10 @@
 --- ```sh
 --- npm i -g oxlint
 --- ```
+---
+--- The default `on_attach` function provides an `:LspOxlintFixAll` command which
+--- can be used to fix all fixable diagnostics. See the `eslint` config entry for
+--- an example of how to use this to automatically fix all errors on write.
 
 local util = require 'lspconfig.util'
 
