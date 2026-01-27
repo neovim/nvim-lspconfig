@@ -66,7 +66,9 @@ end
 ---@return boolean
 local function is_decompiled(bufname)
   local _, endpos = bufname:find('[/\\]MetadataAsSource[/\\]')
-  if endpos == nil then return false end
+  if endpos == nil then
+    return false
+  end
   return vim.fn.finddir(bufname:sub(1, endpos), vim.env.TMP or vim.env.TEMP) ~= ""
 end
 
