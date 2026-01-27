@@ -108,6 +108,16 @@ local function roslyn_handlers()
   }
 end
 
+---@param bufname string
+---@return boolean
+local function is_decompiled(bufname)
+  local _, endpos = bufname:find('[/\\]MetadataAsSource[/\\]')
+  if endpos == nil then
+    return false
+  end
+  return vim.fn.finddir(bufname:sub(1, endpos), vim.env.TMP or vim.env.TEMP) ~= ''
+end
+
 ---@type vim.lsp.Config
 return {
   name = 'roslyn_ls',
