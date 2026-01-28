@@ -14,7 +14,13 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'ruby-lsp' },
+  cmd = function(dispatchers, config)
+    return vim.lsp.rpc.start(
+      { 'ruby-lsp' },
+      dispatchers,
+      config.root_dir and { cwd = config.cmd_cwd or config.root_dir }
+    )
+  end,
   filetypes = { 'ruby', 'eruby' },
   root_markers = { 'Gemfile', '.git' },
   init_options = {
