@@ -105,7 +105,7 @@ local function is_decompiled(bufname)
   if endpos == nil then
     return false
   end
-  return vim.fn.finddir(bufname:sub(1, endpos), vim.env.TMP or vim.env.TEMP) ~= ''
+  return vim.fn.finddir(bufname:sub(1, endpos), uv.os_tmpdir()) ~= ''
 end
 
 ---@type vim.lsp.Config
