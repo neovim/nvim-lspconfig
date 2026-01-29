@@ -7641,8 +7641,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "ruby-lsp" }
+- cmd (use "gF" to view): ../lsp/ruby_lsp.lua:16
 - filetypes: >lua
   { "ruby", "eruby" }
 - init_options: >lua

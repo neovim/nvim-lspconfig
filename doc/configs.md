@@ -10337,10 +10337,7 @@ vim.lsp.enable('ruby_lsp')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "ruby-lsp" }
-  ```
+- `cmd`: [../lsp/ruby_lsp.lua:16](../lsp/ruby_lsp.lua#L16)
 - `filetypes` :
   ```lua
   { "ruby", "eruby" }
