@@ -1,8 +1,10 @@
 --- @brief
 ---
 --- https://github.com/oxc-project/oxc
+--- https://oxc.rs/docs/guide/usage/linter.html
 ---
---- `oxc` is a linter / formatter for JavaScript / Typescript supporting over 500 rules from ESLint and its popular plugins
+--- `oxlint` is a linter for JavaScript / TypeScript supporting over 500 rules from ESLint and its popular plugins.
+--- It also supports linting framework files (Vue, Svelte, Astro) by analyzing their <script> blocks.
 --- It can be installed via `npm`:
 ---
 --- ```sh
@@ -13,7 +15,7 @@ local util = require 'lspconfig.util'
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'oxc_language_server' },
+  cmd = { 'oxlint', '--lsp' },
   filetypes = {
     'javascript',
     'javascriptreact',
@@ -21,11 +23,40 @@ return {
     'typescript',
     'typescriptreact',
     'typescript.tsx',
+    'vue',
+    'svelte',
+    'astro',
   },
   workspace_required = true,
+  on_attach = function(client, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspOxlintFixAll', function()
+      client:exec_cmd({
+        title = 'Apply Oxlint automatic fixes',
+        command = 'oxc.fixAll',
+        arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+      })
+    end, {
+      desc = 'Apply Oxlint automatic fixes',
+    })
+  end,
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
-    local root_markers = util.insert_package_json({ '.oxlintrc.json' }, 'oxlint', fname)
+
+    -- Oxlint resolves configuration by walking upward and using the nearest config file
+    -- to the file being processed. We therefore compute the root directory by locating
+    -- the closest `.oxlintrc.json` (or `package.json` fallback) above the buffer.
+    local root_markers = util.insert_package_json({ '.oxlintrc.json' }, 'oxlint', fname)[1]
     on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
   end,
+  init_options = {
+    settings = {
+      -- ['run'] = 'onType',
+      -- ['configPath'] = nil,
+      -- ['tsConfigPath'] = nil,
+      -- ['unusedDisableDirectives'] = 'allow',
+      -- ['typeAware'] = false,
+      -- ['disableNestedConfig'] = false,
+      -- ['fixKind'] = 'safe_fix',
+    },
+  },
 }
