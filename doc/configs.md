@@ -220,6 +220,7 @@ Nvim by running `:help lspconfig-all`.
 - [openscad_ls](#openscad_ls)
 - [openscad_lsp](#openscad_lsp)
 - [oso](#oso)
+- [oxfmt](#oxfmt)
 - [oxlint](#oxlint)
 - [pact_ls](#pact_ls)
 - [pasls](#pasls)
@@ -8462,11 +8463,45 @@ Default config:
 
 ---
 
+## oxfmt
+
+https://github.com/oxc-project/oxc
+https://oxc.rs/docs/guide/usage/formatter.html
+
+`oxfmt` is a Prettier-compatible code formatter that supports multiple languages
+including JavaScript, TypeScript, JSON, YAML, HTML, CSS, Markdown, and more.
+It can be installed via `npm`:
+
+```sh
+npm i -g oxfmt
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('oxfmt')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "oxfmt", "--lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "toml", "json", "jsonc", "json5", "yaml", "html", "vue", "handlebars", "hbs", "css", "scss", "less", "graphql", "markdown", "mdx" }
+  ```
+- `root_dir`: [../lsp/oxfmt.lua:17](../lsp/oxfmt.lua#L17)
+- `workspace_required` : `true`
+
+---
+
 ## oxlint
 
 https://github.com/oxc-project/oxc
+https://oxc.rs/docs/guide/usage/linter.html
 
-`oxc` is a linter / formatter for JavaScript / Typescript supporting over 500 rules from ESLint and its popular plugins
+`oxlint` is a linter for JavaScript / TypeScript supporting over 500 rules from ESLint and its popular plugins.
+It also supports linting framework files (Vue, Svelte, Astro) by analyzing their <script> blocks.
 It can be installed via `npm`:
 
 ```sh
@@ -8481,13 +8516,20 @@ vim.lsp.enable('oxlint')
 Default config:
 - `cmd` :
   ```lua
-  { "oxc_language_server" }
+  { "oxlint", "--lsp" }
   ```
 - `filetypes` :
   ```lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte", "astro" }
   ```
-- `root_dir`: [../lsp/oxlint.lua:15](../lsp/oxlint.lua#L15)
+- `init_options` :
+  ```lua
+  {
+    settings = {}
+  }
+  ```
+- `on_attach`: [../lsp/oxlint.lua:17](../lsp/oxlint.lua#L17)
+- `root_dir`: [../lsp/oxlint.lua:17](../lsp/oxlint.lua#L17)
 - `workspace_required` : `true`
 
 ---
