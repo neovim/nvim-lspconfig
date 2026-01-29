@@ -1666,6 +1666,7 @@ Default config:
 - cmd (use "gF" to view): ../lsp/csharp_ls.lua:14
 - filetypes: >lua
   { "cs" }
+- get_language_id (use "gF" to view): ../lsp/csharp_ls.lua:14
 - init_options: >lua
   {
     AutomaticWorkspaceInit = true

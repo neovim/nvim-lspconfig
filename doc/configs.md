@@ -2535,6 +2535,7 @@ Default config:
   ```lua
   { "cs" }
   ```
+- `get_language_id`: [../lsp/csharp_ls.lua:14](../lsp/csharp_ls.lua#L14)
 - `init_options` :
   ```lua
   {
