@@ -18,7 +18,7 @@ return {
     return vim.lsp.rpc.start(
       { 'ruby-lsp' },
       dispatchers,
-      config.root_dir and { cwd = config.cmd_cwd or config.root_dir }
+      config and config.root_dir and { cwd = config.cmd_cwd or config.root_dir }
     )
   end,
   filetypes = { 'ruby', 'eruby' },
