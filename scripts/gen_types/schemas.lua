@@ -159,7 +159,7 @@ function M.fetch_schema(schema)
 
   local properties = vim.empty_dict()
 
-  if util.islist(config) then
+  if vim.islist(config) then
     for _, c in pairs(config) do
       if c.properties then
         for k, v in pairs(c.properties) do
