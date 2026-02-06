@@ -2474,11 +2474,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gddd1bf757f"
+      version = "0.12.0-dev+gdb133879b2"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gddd1bf757f"
+      version = "0.12.0-dev+gdb133879b2"
     }
   }
   ```
@@ -4876,20 +4876,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gddd1bf757f"
+      version = "0.12.0-dev+gdb133879b2"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gddd1bf757f"
+      version = "0.12.0-dev+gdb133879b2"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gddd1bf757f"
+      version = "0.12.0-dev+gdb133879b2"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gddd1bf757f"
+      version = "0.12.0-dev+gdb133879b2"
     }
   }
   ```
@@ -11141,7 +11141,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+gddd1bf757f",
+    integrationVersion = "0.12.0-dev+gdb133879b2",
     token = vim.NIL,
     trustedFolders = {}
   }
@@ -13655,7 +13655,7 @@ Default config:
 
 ## vala_ls
 
-https://github.com/Prince781/vala-language-server
+https://github.com/vala-lang/vala-language-server
 
 Snippet to enable the language server:
 ```lua
