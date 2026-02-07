@@ -13,6 +13,36 @@
 ---
 --- It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
 ---
+--- Some care must be taken here to correctly infer whether a file is part of a Deno program, or a TS program that
+--- expects to run in Node or Web Browsers. This supports having a Deno module using the denols LSP as a part of a
+--- mostly-not-Deno monorepo. We do this by finding the nearest package manager lock file, and the nearest deno.json
+--- or deno.jsonc.
+---
+--- Example:
+---
+--- ```
+--- project-root
+--- +-- node_modules/...
+--- +-- package-lock.json
+--- +-- package.json
+--- +-- packages
+---     +-- deno-module
+---     |   +-- deno.json
+---     |   +-- package.json <-- It's normal for Deno projects to have package.json files!
+---     |   +-- src
+---     |       +-- index.ts <-- this is a Deno file
+---     +-- node-module
+---         +-- package.json
+---         +-- src
+---             +-- index.ts <-- a non-Deno file (ie, should use ts_ls or tsgols)
+--- ```
+---
+--- From the file being edited, we walk up to find the nearest package manager lockfile. This is PROJECT ROOT.
+--- From the file being edited, find the nearest deno.json or deno.jsonc. This is DENO ROOT.
+--- From the file being edited, find the nearest deno.lock. This is DENO LOCK ROOT
+--- If DENO LOCK ROOT is found, and PROJECT ROOT is missing or shorter, then this is a deno file, and we abort.
+--- If DENO ROOT is found, and it's longer than or equal to PROJECT ROOT, then this is a Deno file, and we abort.
+--- Otherwise, attach at PROJECT ROOT, or the cwd if not found.
 
 ---@type vim.lsp.Config
 return {
@@ -40,14 +70,19 @@ return {
     root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers, { '.git' } }
       or vim.list_extend(root_markers, { '.git' })
 
-    -- exclude deno
-    if vim.fs.root(bufnr, { 'deno.json', 'deno.jsonc', 'deno.lock' }) then
+    local deno_root = vim.fs.root(bufnr, { 'deno.json', 'deno.jsonc' })
+    local deno_lock_root = vim.fs.root(bufnr, { 'deno.lock' })
+    local project_root = vim.fs.root(bufnr, root_markers)
+    if deno_lock_root and (not project_root or #deno_lock_root > #project_root) then
+      -- deno lock is closer than package manager lock, abort
       return
     end
-
+    if deno_root and (not project_root or #deno_root >= #project_root) then
+      -- deno config is closer than or equal to package manager lock, abort
+      return
+    end
+    -- project is standard TS, not deno
     -- We fallback to the current working directory if no project root is found
-    local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
-
-    on_dir(project_root)
+    on_dir(project_root or vim.fn.getcwd())
   end,
 }
