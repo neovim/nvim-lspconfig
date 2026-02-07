@@ -26,8 +26,7 @@ return {
   init_options = {
     formatter = 'auto',
   },
-  reuse_client = function(client, config)
+  before_init = function(_, config)
     config.cmd_cwd = config.root_dir
-    return client.config.cmd_cwd == config.cmd_cwd
   end,
 }
