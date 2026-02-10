@@ -6,7 +6,7 @@
 ---@type vim.lsp.Config
 return {
   cmd = { 'clice', '--mode=pipe' },
-  filetypes = { 'cpp', 'cc', 'cxx', 'hpp', 'hxx', 'h', 'ixx', 'cppm' },
+  filetypes = { 'cpp', },
   root_markers = {
     '.git/',
     'clice.toml',
