@@ -22,6 +22,6 @@ return {
     '--use_signature_help',
   },
   filetypes = { 'fortran' },
-  root_markers = { '.fortls', '.git' },
+  root_markers = { '.fortls', '.fortlsrc', '.fortls.json', '.git' },
   settings = {},
 }
