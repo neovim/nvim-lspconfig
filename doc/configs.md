@@ -8545,28 +8545,37 @@ It can be installed via `npm`:
 npm i -g oxlint
 ```
 
+Type-aware linting will automatically be enabled if `tsgolint` exists in your
+path and your `.oxlintrc.json` contains the string "typescript".
+
+The default `on_attach` function provides an `:LspOxlintFixAll` command which
+can be used to fix all fixable diagnostics. See the `eslint` config entry for
+an example of how to use this to automatically fix all errors on write.
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('oxlint')
 ```
 
 Default config:
+- `before_init`: [../lsp/oxlint.lua:32](../lsp/oxlint.lua#L32)
 - `cmd` :
   ```lua
   { "oxlint", "--lsp" }
   ```
 - `filetypes` :
   ```lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte", "astro" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "astro" }
   ```
-- `init_options` :
+- `on_attach`: [../lsp/oxlint.lua:32](../lsp/oxlint.lua#L32)
+- `root_markers` :
   ```lua
-  {
-    settings = {}
-  }
+  { ".oxlintrc.json" }
   ```
-- `on_attach`: [../lsp/oxlint.lua:17](../lsp/oxlint.lua#L17)
-- `root_dir`: [../lsp/oxlint.lua:17](../lsp/oxlint.lua#L17)
+- `settings` :
+  ```lua
+  {}
+  ```
 - `workspace_required` : `true`
 
 ---
