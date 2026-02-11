@@ -45,8 +45,8 @@ return {
 
     -- Oxfmt resolves configuration by walking upward and using the nearest config file
     -- to the file being processed. We therefore compute the root directory by locating
-    -- the closest `.oxfmtrc.json` (or `package.json` fallback) above the buffer.
-    local root_markers = util.insert_package_json({ '.oxfmtrc.json' }, 'oxfmt', fname)[1]
+    -- the closest `.oxfmtrc.json` / `.oxfmtrc.jsonc` (or `package.json` fallback) above the buffer.
+    local root_markers = util.insert_package_json({ '.oxfmtrc.json', '.oxfmtrc.jsonc' }, 'oxfmt', fname)
     on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
   end,
 }
