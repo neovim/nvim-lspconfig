@@ -2474,11 +2474,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gdb133879b2"
+      version = "0.12.0-dev+g886efcb853"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gdb133879b2"
+      version = "0.12.0-dev+g886efcb853"
     }
   }
   ```
@@ -4397,7 +4397,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { ".fortls", ".git" }
+  { ".fortls", ".fortlsrc", ".fortls.json", ".git" }
   ```
 - `settings` :
   ```lua
@@ -4876,20 +4876,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gdb133879b2"
+      version = "0.12.0-dev+g886efcb853"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gdb133879b2"
+      version = "0.12.0-dev+g886efcb853"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gdb133879b2"
+      version = "0.12.0-dev+g886efcb853"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gdb133879b2"
+      version = "0.12.0-dev+g886efcb853"
     }
   }
   ```
@@ -11141,7 +11141,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+gdb133879b2",
+    integrationVersion = "0.12.0-dev+g886efcb853",
     token = vim.NIL,
     trustedFolders = {}
   }
