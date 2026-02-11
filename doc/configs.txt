@@ -5725,7 +5725,7 @@ Default config:
 - filetypes: >lua
   { "cmake" }
 - root_markers: >lua
-  { ".git", "build", "cmake" }
+  { ".neocmake.toml", ".git", "build", "cmake" }
 <
 
 ------------------------------------------------------------------------------

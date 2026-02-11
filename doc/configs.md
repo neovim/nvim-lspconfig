@@ -7827,7 +7827,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { ".git", "build", "cmake" }
+  { ".neocmake.toml", ".git", "build", "cmake" }
   ```
 
 ---
