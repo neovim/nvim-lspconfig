@@ -3094,6 +3094,38 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+fortitude
+
+https://fortitude.readthedocs.io/en/stable/
+
+Fortitude is a Fortran linter built in Rust and inspired by (and build upon) Ruff
+>sh
+  # Install With uv:
+  uv tool install fortitude-lint@latest
+
+  # Install with pip:
+  pip install fortitude-lint
+
+**LSP is available in Fortitude `v0.8.0`.**
+
+Refer to the [documentation](https://fortitude.readthedocs.io/en/stable/editors/) for more details.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('fortitude')
+
+
+Default config:
+- cmd: >lua
+  { "fortitude", "server" }
+- filetypes: >lua
+  { "fortran" }
+- root_markers: >lua
+  { "fpm.toml", "fortitude.toml", ".fortitude.toml", ".git" }
+- settings: >lua
+  {}
+<
+
+------------------------------------------------------------------------------
 fortls
 
 https://fortls.fortran-lang.org/index.html

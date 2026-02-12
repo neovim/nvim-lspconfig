@@ -110,6 +110,7 @@ Nvim by running `:help lspconfig-all`.
 - [flow](#flow)
 - [flux_lsp](#flux_lsp)
 - [foam_ls](#foam_ls)
+- [fortitude](#fortitude)
 - [fortls](#fortls)
 - [fsautocomplete](#fsautocomplete)
 - [fsharp_language_server](#fsharp_language_server)
@@ -4395,6 +4396,49 @@ Default config:
   { "foam", "OpenFOAM" }
   ```
 - `root_dir`: [../lsp/foam_ls.lua:11](../lsp/foam_ls.lua#L11)
+
+---
+
+## fortitude
+
+https://fortitude.readthedocs.io/en/stable/
+
+Fortitude is a Fortran linter built in Rust and inspired by (and build upon) Ruff
+
+```sh
+# Install With uv:
+uv tool install fortitude-lint@latest
+
+# Install with pip:
+pip install fortitude-lint
+```
+
+**LSP is available in Fortitude `v0.8.0`.**
+
+Refer to the [documentation](https://fortitude.readthedocs.io/en/stable/editors/) for more details.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('fortitude')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "fortitude", "server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "fortran" }
+  ```
+- `root_markers` :
+  ```lua
+  { "fpm.toml", "fortitude.toml", ".fortitude.toml", ".git" }
+  ```
+- `settings` :
+  ```lua
+  {}
+  ```
 
 ---
 
