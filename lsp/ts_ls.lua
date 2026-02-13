@@ -43,7 +43,7 @@
 --- It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
 ---
 --- Some care must be taken here to correctly infer whether a file is part of a Deno program, or a TS program that
---- expects to run in Node or Web Browsers. This supports having a Deno module using the denols LSP as a part of a
+--- expects to run in Node or Web Browsers. This supports having a Deno module using the [denols](#denols) LSP as a part of a
 --- mostly-not-Deno monorepo. We do this by finding the nearest package manager lock file, and the nearest deno.json
 --- or deno.jsonc.
 ---
