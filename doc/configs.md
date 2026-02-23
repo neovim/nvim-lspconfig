@@ -2205,6 +2205,7 @@ Default config:
   ```lua
   { "c", "cpp", "objc", "objcpp", "cuda" }
   ```
+- `get_language_id`: [../lsp/clangd.lua:65](../lsp/clangd.lua#L65)
 - `on_attach`: [../lsp/clangd.lua:65](../lsp/clangd.lua#L65)
 - `on_init`: [../lsp/clangd.lua:65](../lsp/clangd.lua#L65)
 - `root_markers` :
@@ -2475,11 +2476,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd79a9dcd42"
+      version = "0.12.0-dev+g97509aa2be"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd79a9dcd42"
+      version = "0.12.0-dev+g97509aa2be"
     }
   }
   ```
@@ -4951,20 +4952,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd79a9dcd42"
+      version = "0.12.0-dev+g97509aa2be"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gd79a9dcd42"
+      version = "0.12.0-dev+g97509aa2be"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gd79a9dcd42"
+      version = "0.12.0-dev+g97509aa2be"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gd79a9dcd42"
+      version = "0.12.0-dev+g97509aa2be"
     }
   }
   ```
@@ -11225,7 +11226,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+gd79a9dcd42",
+    integrationVersion = "0.12.0-dev+g97509aa2be",
     token = vim.NIL,
     trustedFolders = {}
   }
