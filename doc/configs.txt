@@ -6364,8 +6364,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "oxfmt", "--lsp" }
+- cmd (use "gF" to view): ../lsp/oxfmt.lua:17
 - filetypes: >lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "toml", "json", "jsonc", "json5", "yaml", "html", "vue", "handlebars", "hbs", "css", "scss", "less", "graphql", "markdown", "mdx" }
 - root_dir (use "gF" to view): ../lsp/oxfmt.lua:17
@@ -6397,8 +6396,7 @@ Snippet to enable the language server: >lua
 
 Default config:
 - before_init (use "gF" to view): ../lsp/oxlint.lua:32
-- cmd: >lua
-  { "oxlint", "--lsp" }
+- cmd (use "gF" to view): ../lsp/oxlint.lua:32
 - filetypes: >lua
   { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "astro" }
 - on_attach (use "gF" to view): ../lsp/oxlint.lua:32

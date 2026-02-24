@@ -8649,10 +8649,7 @@ vim.lsp.enable('oxfmt')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "oxfmt", "--lsp" }
-  ```
+- `cmd`: [../lsp/oxfmt.lua:17](../lsp/oxfmt.lua#L17)
 - `filetypes` :
   ```lua
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "toml", "json", "jsonc", "json5", "yaml", "html", "vue", "handlebars", "hbs", "css", "scss", "less", "graphql", "markdown", "mdx" }
@@ -8689,10 +8686,7 @@ vim.lsp.enable('oxlint')
 
 Default config:
 - `before_init`: [../lsp/oxlint.lua:32](../lsp/oxlint.lua#L32)
-- `cmd` :
-  ```lua
-  { "oxlint", "--lsp" }
-  ```
+- `cmd`: [../lsp/oxlint.lua:32](../lsp/oxlint.lua#L32)
 - `filetypes` :
   ```lua
   { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "astro" }
