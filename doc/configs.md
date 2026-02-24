@@ -165,6 +165,7 @@ Nvim by running `:help lspconfig-all`.
 - [jsonnet_ls](#jsonnet_ls)
 - [julials](#julials)
 - [just](#just)
+- [kakehashi](#kakehashi)
 - [kcl](#kcl)
 - [koka](#koka)
 - [kotlin_language_server](#kotlin_language_server)
@@ -2476,11 +2477,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g97509aa2be"
+      version = "0.12.0-dev+gd9d8c660fd"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g97509aa2be"
+      version = "0.12.0-dev+gd9d8c660fd"
     }
   }
   ```
@@ -4952,20 +4953,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g97509aa2be"
+      version = "0.12.0-dev+gd9d8c660fd"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g97509aa2be"
+      version = "0.12.0-dev+gd9d8c660fd"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g97509aa2be"
+      version = "0.12.0-dev+gd9d8c660fd"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g97509aa2be"
+      version = "0.12.0-dev+gd9d8c660fd"
     }
   }
   ```
@@ -6527,6 +6528,59 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## kakehashi
+
+https://github.com/atusy/kakehashi
+
+Tree-sitter-based language server that provides semantic tokens, selection ranges,
+and LSP bridging for embedded languages (e.g., code blocks in Markdown).
+
+kakehashi works with any language that has a Tree-sitter grammar.
+Parsers and queries are automatically installed on first use
+when `autoInstall` is enabled (the default). This requires the
+`tree-sitter` CLI, a C compiler, and Git.
+
+**You must specify `filetypes` in your call to `vim.lsp.config`** to
+restrict which files activate the server:
+
+```lua
+vim.lsp.config('kakehashi', {
+  filetypes = { 'markdown', 'lua', 'rust', 'python' },
+  init_options = {
+    autoInstall = true,
+    -- Optional: bridge LSP requests in injection regions
+    languageServers = {
+      ['lua_ls'] = {
+        cmd = { 'lua-language-server' },
+        languages = { 'lua' },
+      },
+    },
+    languages = {
+      markdown = {
+        bridge = { lua_ls = { enabled = true } },
+      },
+    },
+  },
+})
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('kakehashi')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "kakehashi" }
+  ```
+- `root_markers` :
+  ```lua
+  { "kakehashi.toml", ".git" }
   ```
 
 ---
@@ -11226,7 +11280,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g97509aa2be",
+    integrationVersion = "0.12.0-dev+gd9d8c660fd",
     token = vim.NIL,
     trustedFolders = {}
   }
