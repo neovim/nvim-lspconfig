@@ -2477,11 +2477,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd9d8c660fd"
+      version = "0.12.0-dev+g6d73bf4886"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd9d8c660fd"
+      version = "0.12.0-dev+g6d73bf4886"
     }
   }
   ```
@@ -4953,20 +4953,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gd9d8c660fd"
+      version = "0.12.0-dev+g6d73bf4886"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gd9d8c660fd"
+      version = "0.12.0-dev+g6d73bf4886"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gd9d8c660fd"
+      version = "0.12.0-dev+g6d73bf4886"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gd9d8c660fd"
+      version = "0.12.0-dev+g6d73bf4886"
     }
   }
   ```
@@ -8652,7 +8652,7 @@ Default config:
 - `cmd`: [../lsp/oxfmt.lua:17](../lsp/oxfmt.lua#L17)
 - `filetypes` :
   ```lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "toml", "json", "jsonc", "json5", "yaml", "html", "vue", "handlebars", "hbs", "css", "scss", "less", "graphql", "markdown", "mdx" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact", "toml", "json", "jsonc", "json5", "yaml", "html", "vue", "handlebars", "css", "scss", "less", "graphql", "markdown" }
   ```
 - `root_dir`: [../lsp/oxfmt.lua:17](../lsp/oxfmt.lua#L17)
 - `workspace_required` : `true`
@@ -11274,7 +11274,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+gd9d8c660fd",
+    integrationVersion = "0.12.0-dev+g6d73bf4886",
     token = vim.NIL,
     trustedFolders = {}
   }
