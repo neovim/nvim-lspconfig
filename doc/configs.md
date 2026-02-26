@@ -619,7 +619,7 @@ Default config:
 - `cmd`: [../lsp/angularls.lua:93](../lsp/angularls.lua#L93)
 - `filetypes` :
   ```lua
-  { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" }
+  { "typescript", "html", "typescriptreact", "htmlangular" }
   ```
 - `root_markers` :
   ```lua
@@ -2477,11 +2477,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6d73bf4886"
+      version = "0.12.0-dev+gbe8969f4cc"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6d73bf4886"
+      version = "0.12.0-dev+gbe8969f4cc"
     }
   }
   ```
@@ -3138,7 +3138,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact" }
   ```
 - `handlers` :
   ```lua
@@ -4105,7 +4105,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte", "astro", "htmlangular" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "astro", "htmlangular" }
   ```
 - `handlers` :
   ```lua
@@ -4336,7 +4336,7 @@ Default config:
 - `cmd`: [../lsp/flow.lua:16](../lsp/flow.lua#L16)
 - `filetypes` :
   ```lua
-  { "javascript", "javascriptreact", "javascript.jsx" }
+  { "javascript", "javascriptreact" }
   ```
 - `root_markers` :
   ```lua
@@ -4953,20 +4953,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6d73bf4886"
+      version = "0.12.0-dev+gbe8969f4cc"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g6d73bf4886"
+      version = "0.12.0-dev+gbe8969f4cc"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g6d73bf4886"
+      version = "0.12.0-dev+gbe8969f4cc"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g6d73bf4886"
+      version = "0.12.0-dev+gbe8969f4cc"
     }
   }
   ```
@@ -10300,7 +10300,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "javascript", "javascriptreact", "json", "typescript", "typescript.tsx", "typescriptreact" }
+  { "javascript", "javascriptreact", "json", "typescript", "typescriptreact" }
   ```
 - `root_markers` :
   ```lua
@@ -11274,7 +11274,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g6d73bf4886",
+    integrationVersion = "0.12.0-dev+gbe8969f4cc",
     token = vim.NIL,
     trustedFolders = {}
   }
@@ -13183,7 +13183,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact" }
   ```
 - `handlers` :
   ```lua
@@ -14418,7 +14418,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact" }
   ```
 - `init_options` :
   ```lua

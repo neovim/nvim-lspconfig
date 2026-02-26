@@ -187,7 +187,7 @@ Snippet to enable the language server: >lua
 Default config:
 - cmd (use "gF" to view): ../lsp/angularls.lua:93
 - filetypes: >lua
-  { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" }
+  { "typescript", "html", "typescriptreact", "htmlangular" }
 - root_markers: >lua
   { "angular.json", "nx.json" }
 <
@@ -1626,11 +1626,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6d73bf4886"
+      version = "0.12.0-dev+gbe8969f4cc"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6d73bf4886"
+      version = "0.12.0-dev+gbe8969f4cc"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -2131,7 +2131,7 @@ Default config:
     NO_COLOR = true
   }
 - filetypes: >lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact" }
 - handlers: >lua
   {
     ["textDocument/definition"] = <function 1>,
@@ -2864,7 +2864,7 @@ Default config:
 - cmd: >lua
   { "vscode-eslint-language-server", "--stdio" }
 - filetypes: >lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte", "astro", "htmlangular" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "astro", "htmlangular" }
 - handlers: >lua
   {
     ["eslint/confirmESLintExecution"] = <function 1>,
@@ -3049,7 +3049,7 @@ Snippet to enable the language server: >lua
 Default config:
 - cmd (use "gF" to view): ../lsp/flow.lua:16
 - filetypes: >lua
-  { "javascript", "javascriptreact", "javascript.jsx" }
+  { "javascript", "javascriptreact" }
 - root_markers: >lua
   { ".flowconfig" }
 <
@@ -3528,20 +3528,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g6d73bf4886"
+      version = "0.12.0-dev+gbe8969f4cc"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g6d73bf4886"
+      version = "0.12.0-dev+gbe8969f4cc"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g6d73bf4886"
+      version = "0.12.0-dev+gbe8969f4cc"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g6d73bf4886"
+      version = "0.12.0-dev+gbe8969f4cc"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -7625,7 +7625,7 @@ Default config:
 - cmd: >lua
   { "rome", "lsp-proxy" }
 - filetypes: >lua
-  { "javascript", "javascriptreact", "json", "typescript", "typescript.tsx", "typescriptreact" }
+  { "javascript", "javascriptreact", "json", "typescript", "typescriptreact" }
 - root_markers: >lua
   { "package.json", "node_modules", ".git" }
 <
@@ -8385,7 +8385,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g6d73bf4886",
+    integrationVersion = "0.12.0-dev+gbe8969f4cc",
     token = vim.NIL,
     trustedFolders = {}
   }
@@ -9855,7 +9855,7 @@ Default config:
     ["editor.action.showReferences"] = <function 1>
   }
 - filetypes: >lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact" }
 - handlers: >lua
   {
     ["_typescript.rename"] = <function 1>
@@ -10810,7 +10810,7 @@ Default config:
 - cmd: >lua
   { "vtsls", "--stdio" }
 - filetypes: >lua
-  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact" }
 - init_options: >lua
   {
     hostInfo = "neovim"
