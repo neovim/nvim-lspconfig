@@ -24,6 +24,6 @@ return {
 
     return vim.lsp.rpc.start(cmd, dispatchers)
   end,
-  filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx' },
+  filetypes = { 'javascript', 'javascriptreact' },
   root_markers = { '.flowconfig' },
 }

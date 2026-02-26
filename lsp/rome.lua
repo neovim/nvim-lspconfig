@@ -18,7 +18,6 @@ return {
     'javascriptreact',
     'json',
     'typescript',
-    'typescript.tsx',
     'typescriptreact',
   },
   root_markers = { 'package.json', 'node_modules', '.git' },
