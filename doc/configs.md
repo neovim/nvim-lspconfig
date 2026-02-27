@@ -238,6 +238,7 @@ Nvim by running `:help lspconfig-all`.
 - [please](#please)
 - [pli](#pli)
 - [pony_language_server](#pony_language_server)
+- [pony_lsp](#pony_lsp)
 - [poryscript_pls](#poryscript_pls)
 - [postgres_lsp](#postgres_lsp)
 - [powershell_es](#powershell_es)
@@ -9151,9 +9152,7 @@ Default config:
 
 ## pony_language_server
 
-https://github.com/ponylang/pony-language-server
-
-Language server for the Pony programming language
+Renamed to [pony_lsp](#pony_lsp)
 
 Snippet to enable the language server:
 ```lua
@@ -9169,9 +9168,59 @@ Default config:
   ```lua
   { "pony" }
   ```
+- `name` :
+  ```lua
+  "pony_lsp"
+  ```
+- `on_init`: [../lsp/pony_language_server.lua:6](../lsp/pony_language_server.lua#L6)
 - `root_markers` :
   ```lua
   { "corral.json", ".git" }
+  ```
+- `settings` :
+  ```lua
+  {
+    ["pony-lsp"] = {
+      defines = {},
+      ponypath = {}
+    }
+  }
+  ```
+
+---
+
+## pony_lsp
+
+https://github.com/ponylang/ponyc/tree/main/tools/pony-lsp
+
+Language server for the Pony programming language
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('pony_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "pony-lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "pony" }
+  ```
+- `root_markers` :
+  ```lua
+  { "corral.json", ".git" }
+  ```
+- `settings` :
+  ```lua
+  {
+    ["pony-lsp"] = {
+      defines = {},
+      ponypath = {}
+    }
+  }
   ```
 
 ---

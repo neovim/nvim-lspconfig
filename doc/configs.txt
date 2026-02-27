@@ -6750,9 +6750,7 @@ Default config:
 ------------------------------------------------------------------------------
 pony_language_server
 
-https://github.com/ponylang/pony-language-server
-
-Language server for the Pony programming language
+Renamed to [pony_lsp](#pony_lsp)
 
 Snippet to enable the language server: >lua
   vim.lsp.enable('pony_language_server')
@@ -6763,8 +6761,45 @@ Default config:
   { "pony-lsp" }
 - filetypes: >lua
   { "pony" }
+- name: >lua
+  "pony_lsp"
+- on_init (use "gF" to view): ../lsp/pony_language_server.lua:6
 - root_markers: >lua
   { "corral.json", ".git" }
+- settings: >lua
+  {
+    ["pony-lsp"] = {
+      defines = {},
+      ponypath = {}
+    }
+  }
+<
+
+------------------------------------------------------------------------------
+pony_lsp
+
+https://github.com/ponylang/ponyc/tree/main/tools/pony-lsp
+
+Language server for the Pony programming language
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('pony_lsp')
+
+
+Default config:
+- cmd: >lua
+  { "pony-lsp" }
+- filetypes: >lua
+  { "pony" }
+- root_markers: >lua
+  { "corral.json", ".git" }
+- settings: >lua
+  {
+    ["pony-lsp"] = {
+      defines = {},
+      ponypath = {}
+    }
+  }
 <
 
 ------------------------------------------------------------------------------
