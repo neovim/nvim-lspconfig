@@ -4092,13 +4092,31 @@ You can use a different version of ESLint in each package, but it is recommended
 
 /!\ When using flat config files, you need to use them across all your packages in your monorepo, as it's a global setting for the server.
 
+### Flat config in ESLint versions prior to 10.0
+
+If you're using a ESLint version that supports both flat config and eslintrc (>= 8.21, < 10.0) and want to change
+the [default behavior](https://eslint.org/blog/2023/10/flat-config-rollout-plans/), you'll need to set
+`experimental.useFlatConfig` accordingly:
+```lua
+vim.lsp.config("eslint", {
+  settings = {
+    experimental = {
+      -- If you want to use flat config on >= 8.21, < 9.0
+      useFlatConfig = true,
+      -- Or if you want to use eslintrc on 9.*
+      -- useFlatConfig = false,
+    }
+  }
+})
+```
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('eslint')
 ```
 
 Default config:
-- `before_init`: [../lsp/eslint.lua:61](../lsp/eslint.lua#L61)
+- `before_init`: [../lsp/eslint.lua:79](../lsp/eslint.lua#L79)
 - `cmd` :
   ```lua
   { "vscode-eslint-language-server", "--stdio" }
@@ -4116,8 +4134,8 @@ Default config:
     ["eslint/probeFailed"] = <function 4>
   }
   ```
-- `on_attach`: [../lsp/eslint.lua:61](../lsp/eslint.lua#L61)
-- `root_dir`: [../lsp/eslint.lua:61](../lsp/eslint.lua#L61)
+- `on_attach`: [../lsp/eslint.lua:79](../lsp/eslint.lua#L79)
+- `root_dir`: [../lsp/eslint.lua:79](../lsp/eslint.lua#L79)
 - `settings` :
   ```lua
   {
@@ -4134,9 +4152,7 @@ Default config:
       enable = false,
       mode = "all"
     },
-    experimental = {
-      useFlatConfig = false
-    },
+    experimental = {},
     format = true,
     nodePath = "",
     onIgnoredFiles = "off",
