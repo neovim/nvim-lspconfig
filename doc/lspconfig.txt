@@ -1,6 +1,5 @@
-*lspconfig.txt*         For Nvim version 0.10+
-
-nvim-lspconfig provides user-contributed configs for the Nvim |lsp| client.
+*lspconfig.txt*            User-contributed configs for the Nvim |lsp| client
+                                                       For Nvim version 0.10+
 
                                       Type |gO| to see the table of contents.
 
