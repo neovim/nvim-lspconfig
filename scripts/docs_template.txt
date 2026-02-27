@@ -1,4 +1,4 @@
-*lspconfig-all*
+*lspconfig-all*                     All configurations provided by |lspconfig|
 
 LSP configurations provided by nvim-lspconfig are listed below.
 
