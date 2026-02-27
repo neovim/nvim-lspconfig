@@ -16,7 +16,6 @@ return {
       'javascriptreact',
       'svelte',
       'typescript',
-      'typescript.tsx',
       'typescriptreact',
       'vue',
     },
