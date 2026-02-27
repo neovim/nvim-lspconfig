@@ -8694,7 +8694,7 @@ Default config:
 - `on_attach`: [../lsp/oxlint.lua:32](../lsp/oxlint.lua#L32)
 - `root_markers` :
   ```lua
-  { ".oxlintrc.json" }
+  { ".oxlintrc.json", "oxlint.config.ts" }
   ```
 - `settings` :
   ```lua
