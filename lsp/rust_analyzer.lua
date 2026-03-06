@@ -144,7 +144,7 @@ return {
         vim.list_extend(cmd, { '--', unpack(r.args.executableArgs) })
       end
 
-      local proc = vim.system(cmd, { cwd = r.args.cwd })
+      local proc = vim.system(cmd, { cwd = r.args.cwd, env = r.args.environment })
 
       local result = proc:wait()
 
