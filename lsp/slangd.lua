@@ -27,5 +27,5 @@
 return {
   cmd = { 'slangd' },
   filetypes = { 'hlsl', 'shaderslang' },
-  root_markers = { '.git' },
+  root_markers = { 'slangdconfig.json', '.clang-format', '.git' },
 }
