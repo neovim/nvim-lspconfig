@@ -10775,7 +10775,7 @@ vim.lsp.enable('rust_analyzer')
 ```
 
 Default config:
-- `before_init`: [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
+- `before_init`: [../lsp/rust_analyzer.lua:85](../lsp/rust_analyzer.lua#L85)
 - `capabilities` :
   ```lua
   {
@@ -10795,8 +10795,8 @@ Default config:
   ```lua
   { "rust" }
   ```
-- `on_attach`: [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
-- `root_dir`: [../lsp/rust_analyzer.lua:56](../lsp/rust_analyzer.lua#L56)
+- `on_attach`: [../lsp/rust_analyzer.lua:85](../lsp/rust_analyzer.lua#L85)
+- `root_dir`: [../lsp/rust_analyzer.lua:85](../lsp/rust_analyzer.lua#L85)
 - `settings` :
   ```lua
   {
