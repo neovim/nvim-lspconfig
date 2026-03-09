@@ -2478,11 +2478,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2015f19f1b"
+      version = "0.12.0-dev+g61f166ec40"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2015f19f1b"
+      version = "0.12.0-dev+g61f166ec40"
     }
   }
   ```
@@ -4970,20 +4970,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g2015f19f1b"
+      version = "0.12.0-dev+g61f166ec40"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g2015f19f1b"
+      version = "0.12.0-dev+g61f166ec40"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g2015f19f1b"
+      version = "0.12.0-dev+g61f166ec40"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g2015f19f1b"
+      version = "0.12.0-dev+g61f166ec40"
     }
   }
   ```
@@ -10418,7 +10418,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "Microsoft.CodeAnalysis.LanguageServer", "--logLevel", "Information", "--extensionLogDirectory", "/tmp/roslyn_ls/logs", "--stdio" }
+  { "roslyn-language-server", "--logLevel", "Information", "--extensionLogDirectory", "/tmp/roslyn_ls/logs", "--stdio" }
   ```
 - `commands` :
   ```lua
@@ -11339,7 +11339,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g2015f19f1b",
+    integrationVersion = "0.12.0-dev+g61f166ec40",
     token = vim.NIL,
     trustedFolders = {}
   }
