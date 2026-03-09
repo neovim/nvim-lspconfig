@@ -8235,7 +8235,7 @@ Default config:
 - filetypes: >lua
   { "hlsl", "shaderslang" }
 - root_markers: >lua
-  { ".git" }
+  { "slangdconfig.json", ".clang-format", ".git" }
 <
 
 ------------------------------------------------------------------------------

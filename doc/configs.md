@@ -11089,7 +11089,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { ".git" }
+  { "slangdconfig.json", ".clang-format", ".git" }
   ```
 
 ---
