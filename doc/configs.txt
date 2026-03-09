@@ -4709,6 +4709,11 @@ Note: In order to have LanguageServer.jl pick up installed packages or dependenc
 Julia project, you must make sure that the project is instantiated >sh
   julia --project=/path/to/my/project -e 'using Pkg; Pkg.instantiate()'
 
+To activate a Julia environment, use the `:LspJuliaActivateEnv` command. A prompt will ask you to select a Julia
+environment from the list of environments found in the current working directory and the `environments/` folder of
+`$JULIA_DEPOT_PATH` entries. You can also provide a path to a Julia environment directly.
+Example: `:LspJuliaActivateEnv /path/to/my/project`.
+
 Note: The julia programming language searches for global environments within the `environments/`
 folder of `$JULIA_DEPOT_PATH` entries. By default this simply `~/.julia/environments`
 
@@ -4721,7 +4726,7 @@ Default config:
   { "julia", "--startup-file=no", "--history-file=no", "-e", '    # Load LanguageServer.jl: attempt to load from ~/.julia/environments/nvim-lspconfig\n    # with the regular load path as a fallback\n    ls_install_path = joinpath(\n        get(DEPOT_PATH, 1, joinpath(homedir(), ".julia")),\n        "environments", "nvim-lspconfig"\n    )\n    pushfirst!(LOAD_PATH, ls_install_path)\n    using LanguageServer, SymbolServer, StaticLint\n    popfirst!(LOAD_PATH)\n    depot_path = get(ENV, "JULIA_DEPOT_PATH", "")\n    project_path = let\n        dirname(something(\n            ## 1. Finds an explicitly set project (JULIA_PROJECT)\n            Base.load_path_expand((\n                p = get(ENV, "JULIA_PROJECT", nothing);\n                p === nothing ? nothing : isempty(p) ? nothing : p\n            )),\n            ## 2. Look for a Project.toml file in the current working directory,\n            ##    or parent directories, with $HOME as an upper boundary\n            Base.current_project(),\n            ## 3. First entry in the load path\n            get(Base.load_path(), 1, nothing),\n            ## 4. Fallback to default global environment,\n            ##    this is more or less unreachable\n            Base.load_path_expand("@v#.#"),\n        ))\n    end\n    @info "Running language server" VERSION pwd() project_path depot_path\n    server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path)\n    server.runlinter = true\n    run(server)\n  ' }
 - filetypes: >lua
   { "julia" }
-- on_attach (use "gF" to view): ../lsp/julials.lua:121
+- on_attach (use "gF" to view): ../lsp/julials.lua:127
 - root_markers: >lua
   { "Project.toml", "JuliaProject.toml" }
 <

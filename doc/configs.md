@@ -6497,6 +6497,11 @@ Julia project, you must make sure that the project is instantiated:
 julia --project=/path/to/my/project -e 'using Pkg; Pkg.instantiate()'
 ```
 
+To activate a Julia environment, use the `:LspJuliaActivateEnv` command. A prompt will ask you to select a Julia
+environment from the list of environments found in the current working directory and the `environments/` folder of
+`$JULIA_DEPOT_PATH` entries. You can also provide a path to a Julia environment directly.
+Example: `:LspJuliaActivateEnv /path/to/my/project`.
+
 Note: The julia programming language searches for global environments within the `environments/`
 folder of `$JULIA_DEPOT_PATH` entries. By default this simply `~/.julia/environments`
 
@@ -6514,7 +6519,7 @@ Default config:
   ```lua
   { "julia" }
   ```
-- `on_attach`: [../lsp/julials.lua:121](../lsp/julials.lua#L121)
+- `on_attach`: [../lsp/julials.lua:127](../lsp/julials.lua#L127)
 - `root_markers` :
   ```lua
   { "Project.toml", "JuliaProject.toml" }
