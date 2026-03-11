@@ -21,6 +21,7 @@ return {
       pattern = { '*.md' },
       group = vim.api.nvim_create_augroup('lspconfig.mpls.focus', { clear = true }),
       callback = function(ctx)
+        ---@diagnostic disable-next-line:param-type-mismatch
         client:notify('mpls/editorDidChangeFocus', { uri = ctx.match })
       end,
       desc = 'mpls: notify buffer focus changed',
