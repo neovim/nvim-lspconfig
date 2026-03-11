@@ -198,6 +198,7 @@ Nvim by running `:help lspconfig-all`.
 - [mojo](#mojo)
 - [motoko_lsp](#motoko_lsp)
 - [move_analyzer](#move_analyzer)
+- [mpls](#mpls)
 - [msbuild_project_tools_server](#msbuild_project_tools_server)
 - [muon](#muon)
 - [mutt_ls](#mutt_ls)
@@ -2478,11 +2479,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g61f166ec40"
+      version = "0.12.0-dev+gb897e81b30"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g61f166ec40"
+      version = "0.12.0-dev+gb897e81b30"
     }
   }
   ```
@@ -4970,20 +4971,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g61f166ec40"
+      version = "0.12.0-dev+gb897e81b30"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g61f166ec40"
+      version = "0.12.0-dev+gb897e81b30"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g61f166ec40"
+      version = "0.12.0-dev+gb897e81b30"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g61f166ec40"
+      version = "0.12.0-dev+gb897e81b30"
     }
   }
   ```
@@ -7785,6 +7786,34 @@ Default config:
 - `root_markers` :
   ```lua
   { "Move.toml" }
+  ```
+
+---
+
+## mpls
+
+https://github.com/mhersson/mpls
+
+Markdown Preview Language Server
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('mpls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "mpls", "--theme", "dark", "--enable-emoji", "--enable-footnotes", "--no-auto" }
+  ```
+- `filetypes` :
+  ```lua
+  { "markdown" }
+  ```
+- `on_attach`: [../lsp/mpls.lua:8](../lsp/mpls.lua#L8)
+- `root_markers` :
+  ```lua
+  { ".marksman.toml", ".git" }
   ```
 
 ---
@@ -11344,7 +11373,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g61f166ec40",
+    integrationVersion = "0.12.0-dev+gb897e81b30",
     token = vim.NIL,
     trustedFolders = {}
   }
