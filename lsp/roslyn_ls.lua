@@ -121,6 +121,12 @@ return {
     fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
     '--stdio',
   },
+
+  cmd_env = {
+    -- Fixes LSP navigation in decompiled files for systems with symlinked TMPDIR (macOS)
+    TMPDIR = vim.fn.resolve(vim.env.TMPDIR),
+  },
+
   filetypes = { 'cs' },
   handlers = roslyn_handlers(),
 
