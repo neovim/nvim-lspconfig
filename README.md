@@ -170,6 +170,36 @@ Most of the time, the reason for failure is present in the logs.
 * `:lsp disable [<config_name>]` (`:LspStop` for Nvim 0.11 or older) Stops the given server. Defaults to stopping all servers active on the current buffer. To force stop use `:LspStop!`
 * `:lsp restart [<client_name>]` (`:LspRestart` for Nvim 0.11 or older) Restarts the given client, and attempts to reattach to all previously attached buffers. Defaults to restarting all active servers.
 
+## LSP Settings Type Annotations
+
+`nvim-lspconfig` generates Lua type definitions for each supported LSP server.
+By manually adding annotations (e.g., `---@type lspconfig.settings.server_name`),
+you enable auto-completion and diagnostics for your server settings.
+
+**Example:**
+
+```lua
+---@type vim.lsp.Config
+local config = {
+  ---@type lspconfig.settings.lua_ls
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      workspace = {
+        preloadFileSize = 10000,
+        library = {
+          vim.env.VIMRUNTIME,
+        }
+      },
+    },
+  },
+}
+
+vim.lsp.config('lua_ls', config)
+```
+
 ## Contributions
 
 If a language server is missing from [configs.md](doc/configs.md), contributing
