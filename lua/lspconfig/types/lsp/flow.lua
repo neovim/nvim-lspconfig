@@ -1,0 +1,67 @@
+---@meta
+
+---@class _.lspconfig.settings.flow.Flow.Trace
+---Traces the communication between VSCode and the flow lsp service.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.flow.Flow
+---Type coverage diagnostic severity
+---
+---```lua
+---default = "info"
+---```
+---@field coverageSeverity? "error" | "warn" | "info"
+---Is flow enabled
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Set value to enable flow lazy mode
+---@field lazyMode? string
+---Log level for output panel logs
+---
+---```lua
+---default = "info"
+---```
+---@field logLevel? "error" | "warn" | "info" | "trace"
+---Absolute path to flow binary. Special var ${workspaceFolder} or ${flowconfigDir} can be used in path (NOTE: in windows you can use '/' and can omit '.cmd' in path)
+---
+---```lua
+---default = "flow"
+---```
+---@field pathToFlow? string
+---If true will show uncovered code by default
+---@field showUncovered? boolean
+---Stop Flow on Exit
+---
+---```lua
+---default = true
+---```
+---@field stopFlowOnExit? boolean
+---@field trace? _.lspconfig.settings.flow.Flow.Trace
+---If true will use flow bundled with this plugin if nothing works
+---
+---```lua
+---default = true
+---```
+---@field useBundledFlow? boolean
+---Complete functions with their parameter signature.
+---
+---```lua
+---default = true
+---```
+---@field useCodeSnippetOnFunctionSuggest? boolean
+---Support using flow through your node_modules folder, WARNING: Checking this box is a security risk. When you open a project we will immediately run code contained within it.
+---
+---```lua
+---default = true
+---```
+---@field useNPMPackagedFlow? boolean
+
+---@class lspconfig.settings.flow
+---@field flow? _.lspconfig.settings.flow.Flow

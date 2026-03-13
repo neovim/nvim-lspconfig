@@ -1,0 +1,150 @@
+---@meta
+
+---@class _.lspconfig.settings.html.Html.Completion
+---Controls the default value for attributes when completion is accepted.
+---
+---```lua
+---default = "doublequotes"
+---```
+---@field attributeDefaultValue? "doublequotes" | "singlequotes" | "empty"
+
+---@class _.lspconfig.settings.html.Html.Format
+---List of tags, comma separated, where the content shouldn't be reformatted. `null` defaults to the `pre` tag.
+---
+---```lua
+---default = "pre,code,textarea"
+---```
+---@field contentUnformatted? string
+---Enable/disable default HTML formatter.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---List of tags, comma separated, that should have an extra newline before them. `null` defaults to `"head, body, /html"`.
+---
+---```lua
+---default = "head, body, /html"
+---```
+---@field extraLiners? string
+---Format and indent `{{#foo}}` and `{{/foo}}`.
+---@field indentHandlebars? boolean
+---Indent `<head>` and `<body>` sections.
+---@field indentInnerHtml? boolean
+---Maximum number of line breaks to be preserved in one chunk. Use `null` for unlimited.
+---@field maxPreserveNewLines? number
+---Controls whether existing line breaks before elements should be preserved. Only works before elements, not inside tags or for text.
+---
+---```lua
+---default = true
+---```
+---@field preserveNewLines? boolean
+---Honor django, erb, handlebars and php templating language tags.
+---@field templating? boolean
+---List of tags, comma separated, that shouldn't be reformatted. `null` defaults to all tags listed at https://www.w3.org/TR/html5/dom.html#phrasing-content.
+---
+---```lua
+---default = "wbr"
+---```
+---@field unformatted? string
+---Keep text content together between this string.
+---
+---```lua
+---default = ""
+---```
+---@field unformattedContentDelimiter? string
+---Wrap attributes.
+---
+---```lua
+---default = "auto"
+---```
+---@field wrapAttributes? "auto" | "force" | "force-aligned" | "force-expand-multiline" | "aligned-multiple" | "preserve" | "preserve-aligned"
+---Indent wrapped attributes to after N characters. Use `null` to use the default indent size. Ignored if `#html.format.wrapAttributes#` is set to `aligned`.
+---@field wrapAttributesIndentSize? number
+---Maximum amount of characters per line (0 = disable).
+---
+---```lua
+---default = 120
+---```
+---@field wrapLineLength? integer
+
+---@class _.lspconfig.settings.html.Html.Hover
+---Show tag and attribute documentation in hover.
+---
+---```lua
+---default = true
+---```
+---@field documentation? boolean
+---Show references to MDN in hover.
+---
+---```lua
+---default = true
+---```
+---@field references? boolean
+
+---@class _.lspconfig.settings.html.Html.Suggest
+---Controls whether the built-in HTML language support suggests closing tags. When disabled, end tag completions like `</div>` will not be shown.
+---@field hideEndTagSuggestions? boolean
+---Controls whether the built-in HTML language support suggests HTML5 tags, properties and values.
+---
+---```lua
+---default = true
+---```
+---@field html5? boolean
+
+---@class _.lspconfig.settings.html.Html.Trace
+---Traces the communication between VS Code and the HTML language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.html.Html.Validate
+---Controls whether the built-in HTML language support validates embedded scripts.
+---
+---```lua
+---default = true
+---```
+---@field scripts? boolean
+---Controls whether the built-in HTML language support validates embedded styles.
+---
+---```lua
+---default = true
+---```
+---@field styles? boolean
+
+---@class _.lspconfig.settings.html.Html
+---Enable/disable autoclosing of HTML tags.
+---
+---```lua
+---default = true
+---```
+---@field autoClosingTags? boolean
+---Enable/disable auto creation of quotes for HTML attribute assignment. The type of quotes can be configured by `#html.completion.attributeDefaultValue#`.
+---
+---```lua
+---default = true
+---```
+---@field autoCreateQuotes? boolean
+---@field completion? _.lspconfig.settings.html.Html.Completion
+---A list of relative file paths pointing to JSON files following the [custom data format](https://github.com/microsoft/vscode-html-languageservice/blob/master/docs/customData.md).
+---
+---VS Code loads custom data on startup to enhance its HTML support for the custom HTML tags, attributes and attribute values you specify in the JSON files.
+---
+---The file paths are relative to workspace and only workspace folder settings are considered.
+---
+---```lua
+---default = {}
+---```
+---@field customData? string[]
+---@field format? _.lspconfig.settings.html.Html.Format
+---@field hover? _.lspconfig.settings.html.Html.Hover
+---Enable/disable mirroring cursor on matching HTML tag.
+---@field mirrorCursorOnMatchingTag? boolean
+---@field suggest? _.lspconfig.settings.html.Html.Suggest
+---@field trace? _.lspconfig.settings.html.Html.Trace
+---@field validate? _.lspconfig.settings.html.Html.Validate
+
+---@class lspconfig.settings.html
+---@field html? _.lspconfig.settings.html.Html

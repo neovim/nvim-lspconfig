@@ -1,0 +1,428 @@
+---@meta
+
+---@class _.lspconfig.settings.svelte.Svelte.LanguageServer
+---- You normally don't set this - Enable more verbose logging for the language server useful for debugging language server execution.
+---@field debug? boolean
+---- You normally don't set this - Path to the language server executable. If you installed the "svelte-language-server" npm package, it's within there at "bin/server.js". Path can be either relative to your workspace root or absolute. Set this only if you want to use a custom version of the language server. This will then also use the workspace version of TypeScript. This setting can only be changed in user settings for security reasons.
+---@field ["ls-path"]? string
+---- You normally don't set this - At which port to spawn the language server. Can be used for attaching to the process for debugging / profiling. If you experience crashes due to "port already in use", try setting the port. -1 = default port is used.
+---
+---```lua
+---default = -1
+---```
+---@field port? number
+---- You normally don't need this - Path to the node executable to use to spawn the language server. This is useful when you depend on native modules such as node-sass as without this they will run in the context of vscode, meaning node version mismatch is likely. Minimum required node version is 12.17. This setting can only be changed in user settings for security reasons.
+---@field runtime? string
+---You normally don't set this. Additional arguments to pass to the node executable when spawning the language server. This is useful when you use something like Yarn PnP and need its loader arguments `["--loader", ".pnp.loader.mjs"]`.
+---@field ["runtime-args"]? any[]
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Css.ColorPresentations
+---Enable color picker for CSS
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Css.Completions
+---Enable emmet auto completions for CSS
+---
+---```lua
+---default = true
+---```
+---@field emmet? boolean
+---Enable auto completions for CSS
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Css.Diagnostics
+---Enable diagnostic messages for CSS
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Css.DocumentColors
+---Enable document colors for CSS
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Css.DocumentSymbols
+---Enable document symbols for CSS
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Css.Hover
+---Enable hover info for CSS
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Css.SelectionRange
+---Enable selection range for CSS
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Css
+---@field colorPresentations? _.lspconfig.settings.svelte.Svelte.Plugin.Css.ColorPresentations
+---@field completions? _.lspconfig.settings.svelte.Svelte.Plugin.Css.Completions
+---@field diagnostics? _.lspconfig.settings.svelte.Svelte.Plugin.Css.Diagnostics
+---@field documentColors? _.lspconfig.settings.svelte.Svelte.Plugin.Css.DocumentColors
+---@field documentSymbols? _.lspconfig.settings.svelte.Svelte.Plugin.Css.DocumentSymbols
+---Enable the CSS plugin
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Which css files should be checked for global variables (`--global-var: value;`). These variables are added to the css completions. String of comma-separated file paths or globs relative to workspace root.
+---
+---```lua
+---default = ""
+---```
+---@field globals? string
+---@field hover? _.lspconfig.settings.svelte.Svelte.Plugin.Css.Hover
+---@field selectionRange? _.lspconfig.settings.svelte.Svelte.Plugin.Css.SelectionRange
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Html.Completions
+---Enable emmet auto completions for HTML
+---
+---```lua
+---default = true
+---```
+---@field emmet? boolean
+---Enable auto completions for HTML
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Html.DocumentSymbols
+---Enable document symbols for HTML
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Html.Hover
+---Enable hover info for HTML
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Html.LinkedEditing
+---Enable Linked Editing for HTML
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Html.TagComplete
+---Enable HTML tag auto closing
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Html
+---@field completions? _.lspconfig.settings.svelte.Svelte.Plugin.Html.Completions
+---@field documentSymbols? _.lspconfig.settings.svelte.Svelte.Plugin.Html.DocumentSymbols
+---Enable the HTML plugin
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---@field hover? _.lspconfig.settings.svelte.Svelte.Plugin.Html.Hover
+---@field linkedEditing? _.lspconfig.settings.svelte.Svelte.Plugin.Html.LinkedEditing
+---@field tagComplete? _.lspconfig.settings.svelte.Svelte.Plugin.Html.TagComplete
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.CodeActions
+---Enable Code Actions for Svelte
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.Completions
+---Enable auto completions for Svelte
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.Diagnostics
+---Enable diagnostic messages for Svelte
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.DocumentHighlight
+---Enable document highlight support. Requires a restart.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.Format.Config
+---Maximum line width after which code is tried to be broken up. This is a Prettier core option. If you have the Prettier extension installed, this option is ignored and the corresponding option of that extension is used instead. This option is also ignored if there's any kind of configuration file, for example a `.prettierrc` file.
+---
+---```lua
+---default = 80
+---```
+---@field printWidth? number
+---Use single quotes instead of double quotes, where possible. This is a Prettier core option. If you have the Prettier extension installed, this option is ignored and the corresponding option of that extension is used instead. This option is also ignored if there's any kind of configuration file, for example a `.prettierrc` file.
+---@field singleQuote? boolean
+---Option to enable/disable component attribute shorthand if attribute name and expression are the same. This option is ignored if there's any kind of configuration file, for example a `.prettierrc` file.
+---
+---```lua
+---default = true
+---```
+---@field svelteAllowShorthand? boolean
+---Put the `>` of a multiline element on a new line. This option is ignored if there's any kind of configuration file, for example a `.prettierrc` file.
+---
+---```lua
+---default = true
+---```
+---@field svelteBracketNewLine? boolean
+---Whether or not to indent code inside `<script>` and `<style>` tags. This option is ignored if there's any kind of configuration file, for example a `.prettierrc` file.
+---
+---```lua
+---default = true
+---```
+---@field svelteIndentScriptAndStyle? boolean
+---Format: join the keys `options`, `scripts`, `markup`, `styles` with a - in the order you want. This option is ignored if there's any kind of configuration file, for example a `.prettierrc` file.
+---
+---```lua
+---default = "options-scripts-markup-styles"
+---```
+---@field svelteSortOrder? string
+---More strict HTML syntax. This option is ignored if there's any kind of configuration file, for example a `.prettierrc` file.
+---@field svelteStrictMode? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.Format
+---@field config? _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.Format.Config
+---Enable formatting for Svelte (includes css & js). You can set some formatting options through this extension. They will be ignored if there's any kind of configuration file, for example a `.prettierrc` file.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.Hover
+---Enable hover information for Svelte
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.Rename
+---Enable rename/move Svelte files functionality
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.RunesLegacyModeCodeLens
+---Show a code lens at the top of Svelte files indicating if they are in runes mode or legacy mode. Only visible in Svelte 5 projects.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.SelectionRange
+---Enable selection range for Svelte
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Svelte
+---@field codeActions? _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.CodeActions
+---Svelte compiler warning codes to ignore or to treat as errors. Example: { 'css-unused-selector': 'ignore', 'unused-export-let': 'error'}
+---
+---```lua
+---default = {}
+---```
+---@field compilerWarnings? table
+---@field completions? _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.Completions
+---The default language to use when generating new script tags
+---
+---```lua
+---default = "none"
+---```
+---@field defaultScriptLanguage? "none" | "ts"
+---@field diagnostics? _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.Diagnostics
+---@field documentHighlight? _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.DocumentHighlight
+---Enable the Svelte plugin
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---@field format? _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.Format
+---@field hover? _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.Hover
+---@field rename? _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.Rename
+---@field runesLegacyModeCodeLens? _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.RunesLegacyModeCodeLens
+---@field selectionRange? _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.SelectionRange
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.CodeActions
+---Enable code actions for TypeScript
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.Completions
+---Enable completions for TypeScript
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.Diagnostics
+---Enable diagnostic messages for TypeScript
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.DocumentSymbols
+---Enable document symbols for TypeScript
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.Hover
+---Enable hover info for TypeScript
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.SelectionRange
+---Enable selection range for TypeScript
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.SemanticTokens
+---Enable semantic tokens (semantic highlight) for TypeScript.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.SignatureHelp
+---Enable signature help (parameter hints) for TypeScript
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.WorkspaceSymbols
+---Enable workspace symbols for TypeScript.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin.Typescript
+---@field codeActions? _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.CodeActions
+---@field completions? _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.Completions
+---@field diagnostics? _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.Diagnostics
+---@field documentSymbols? _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.DocumentSymbols
+---Enable the TypeScript plugin
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---@field hover? _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.Hover
+---@field selectionRange? _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.SelectionRange
+---@field semanticTokens? _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.SemanticTokens
+---@field signatureHelp? _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.SignatureHelp
+---@field workspaceSymbols? _.lspconfig.settings.svelte.Svelte.Plugin.Typescript.WorkspaceSymbols
+
+---@class _.lspconfig.settings.svelte.Svelte.Plugin
+---@field css? _.lspconfig.settings.svelte.Svelte.Plugin.Css
+---@field html? _.lspconfig.settings.svelte.Svelte.Plugin.Html
+---@field svelte? _.lspconfig.settings.svelte.Svelte.Plugin.Svelte
+---@field typescript? _.lspconfig.settings.svelte.Svelte.Plugin.Typescript
+
+---@class _.lspconfig.settings.svelte.Svelte.Trace
+---Traces the communication between VS Code and the Svelte Language Server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.svelte.Svelte.Ui.SvelteKitFilesContextMenu
+---Show a context menu to generate SvelteKit files. "always" to always show it. "never" to always disable it. "auto" to show it when in a SvelteKit project. 
+---
+---```lua
+---default = "auto"
+---```
+---@field enable? "auto" | "never" | "always"
+
+---@class _.lspconfig.settings.svelte.Svelte.Ui
+---@field svelteKitFilesContextMenu? _.lspconfig.settings.svelte.Svelte.Ui.SvelteKitFilesContextMenu
+
+---@class _.lspconfig.settings.svelte.Svelte
+---Ask on startup to enable the TypeScript plugin.
+---
+---```lua
+---default = true
+---```
+---@field ["ask-to-enable-ts-plugin"]? boolean
+---Enables a TypeScript plugin which provides intellisense for Svelte files inside TS/JS files.
+---@field ["enable-ts-plugin"]? boolean
+---@field ["language-server"]? _.lspconfig.settings.svelte.Svelte.LanguageServer
+---@field plugin? _.lspconfig.settings.svelte.Svelte.Plugin
+---@field trace? _.lspconfig.settings.svelte.Svelte.Trace
+---@field ui? _.lspconfig.settings.svelte.Svelte.Ui
+
+---@class lspconfig.settings.svelte
+---@field svelte? _.lspconfig.settings.svelte.Svelte

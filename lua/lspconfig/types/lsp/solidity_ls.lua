@@ -1,0 +1,129 @@
+---@meta
+
+---@class _.lspconfig.settings.solidity_ls.Solidity
+---Compile using a local solc (js) binary file, please include the path of the file if wanted: 'C://v0.4.3+commit.2353da71.js'
+---
+---```lua
+---default = ""
+---```
+---@field compileUsingLocalVersion? string
+---Configuration to download a 'remote' solc (js) version binary file from 'https://binaries.soliditylang.org/', for example: 'latest' will always use the latest version, or a specific version like: 'v0.4.3+commit.2353da71', use the command 'Solidity: Get solidity releases' to list all versions available, or just right click in a solidity file and select either `Solidity: Change global compiler version (Remote)` or `Solidity: Change workspace compiler version (Remote)` to use the wizard to set the correct version or setting for either the current workspace or globally
+---
+---```lua
+---default = "latest"
+---```
+---@field compileUsingRemoteVersion? string
+---Optimize for how many times you intend to run the code. Lower values will optimize more for initial deployment cost, higher values will optimize more for high-frequency usage.
+---
+---```lua
+---default = 200
+---```
+---@field compilerOptimization? number
+---Sets the default compiler and compiler configuration to use. Remote will use the configured compiler using the setting 'compileUsingRemoteVersion' downloaded from https://binaries.soliditylang.org/', `localFile` will use the solc file in the location configured in the setting: `compileUsingLocalVersion`, `localNodeModule` will attempt to find the solc file in the node_modules folder / package configured on 'nodemodulespackage' and 'embedded' which will use the solc version packaged with the extension. The default is 'remote' which is configured as 'latest'
+---
+---```lua
+---default = "remote"
+---```
+---@field defaultCompiler? "remote" | "localFile" | "localNodeModule" | "embedded"
+---Enables as you type compilation of the document and error highlighting
+---
+---```lua
+---default = true
+---```
+---@field enabledAsYouTypeCompilationErrorCheck? boolean
+---Evm version, ie london, istanbul, petersburg, constantinople, byzantium, tangerineWhistle, spuriousDragon, homestead, frontier, or leave it blank for the default evm version
+---
+---```lua
+---default = ""
+---```
+---@field evmVersion? string
+---Api key for downloading ethereum smart contracts from etherscan.io
+---
+---```lua
+---default = "YourApiKey"
+---```
+---@field explorer_etherscan_apikey? string
+---Enables / disables the solidity formatter prettier (default) or forge (note it needs to be installed)
+---
+---```lua
+---default = "prettier"
+---```
+---@field formatter? "none" | "prettier" | "forge"
+---Enables linting using either solium (ethlint) or solhint. Possible options 'solhint' and 'solium', the default is solhint
+---
+---```lua
+---default = "solhint"
+---```
+---@field linter? "" | "solhint" | "solium"
+---Enables mono repo support in the current workspace, a project folder will be signaled if a file is found on the current folder or above including: remappings.txt, truffle-config.js, brownie-config.yaml, foundry.toml, hardhat.config.js, hardhat.config.ts, dappfile
+---
+---```lua
+---default = true
+---```
+---@field monoRepoSupport? boolean
+---The node modules package to find the solcjs compiler
+---
+---```lua
+---default = "solc"
+---```
+---@field nodemodulespackage? string
+---Default directory where the Package Dependency store its contracts, i.e: 'src', 'contracts', or just a blank string '', this is used to avoid typing imports with subfolder paths
+---
+---```lua
+---default = { "src", "contracts", "" }
+---```
+---@field packageDefaultDependenciesContractsDirectory? string|string[]
+---Default directory for Packages Dependencies, i.e: 'node_modules', 'lib'. This is used to avoid typing imports with that path prefix, multiple dependency paths can be set as an array: ['node_modules', 'lib'] 
+---
+---```lua
+---default = { "node_modules", "lib" }
+---```
+---@field packageDefaultDependenciesDirectory? string|string[]
+---Remappings to resolve contracts to local files / directories, i.e: ["@openzeppelin/=lib/openzeppelin-contracts","ds-test/=lib/ds-test/src/"]
+---
+---```lua
+---default = {}
+---```
+---@field remappings? any[]
+---Unix Remappings to resolve contracts to local Unix files / directories (Note this overrides the generic remapping settings if the OS is Unix based), i.e: ["@openzeppelin/=/opt/lib/openzeppelin-contracts","ds-test/=/opt/lib/ds-test/src/"]
+---
+---```lua
+---default = {}
+---```
+---@field remappingsUnix? any[]
+---Windows Remappings to resolve contracts to local Windows files / directories (Note this overrides the generic remapping settings if the OS is Windows) , i.e: ["@openzeppelin/=C:/lib/openzeppelin-contracts","ds-test/=C:/lib/ds-test/src/"]
+---
+---```lua
+---default = {}
+---```
+---@field remappingsWindows? any[]
+---The package directory to find the solhint linter
+---
+---```lua
+---default = ""
+---```
+---@field solhintPackageDirectory? string
+---Solhint linting validation rules
+---@field solhintRules? table
+---Solium linting validation rules
+---
+---```lua
+---default = {
+---  ["imports-on-top"] = 0,
+---  indentation = { "off", 4 },
+---  quotes = { "off", "double" },
+---  ["variable-declarations"] = 0
+---}
+---```
+---@field soliumRules? table
+---Delay to trigger the validation of the changes of the current document (compilation, solium)
+---
+---```lua
+---default = 1500
+---```
+---@field validationDelay? number
+---Compile using the intermediate representation (IR) instead of the AST
+---@field viaIR? boolean
+
+---@class lspconfig.settings.solidity_ls
+---@field solidity? _.lspconfig.settings.solidity_ls.Solidity

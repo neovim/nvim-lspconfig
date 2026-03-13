@@ -1,0 +1,40 @@
+name: gen-annotations
+
+on:
+  push:
+    paths:
+      - lsp/**
+      - scripts/gen_json_schemas.lua
+      - scripts/gen_annotations.lua
+      - .github/workflows/gen-annotations.yml
+  workflow_dispatch:
+
+jobs:
+  gen-annotations:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: nightly
+      - name: Generate JSON schemas
+        run: |
+          nvim  -l scripts/gen_json_schemas.lua
+      - name: Generate annotations
+        run: |
+          nvim  -l scripts/gen_annotations.lua
+      - name: Commit generated files
+        env:
+          COMMIT_MSG: |
+            chore: update generated annotations
+            skip-checks: true
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git add -A lua/lspconfig/types
+          git diff --quiet && git diff --staged --quiet || (git commit -m "${COMMIT_MSG}"; git push)

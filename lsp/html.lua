@@ -27,6 +27,7 @@ return {
   cmd = { 'vscode-html-language-server', '--stdio' },
   filetypes = { 'html' },
   root_markers = { 'package.json', '.git' },
+  ---@type lspconfig.settings.html
   settings = {},
   init_options = {
     provideFormatter = true,

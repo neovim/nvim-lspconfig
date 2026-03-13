@@ -1,0 +1,252 @@
+---@meta
+
+---@class _.lspconfig.settings.tinymist.Tinymist.Completion
+---%extension.tinymist.config.tinymist.completion.postfix.desc%
+---
+---```lua
+---default = true
+---```
+---@field postfix? boolean
+---%extension.tinymist.config.tinymist.completion.postfixUfcs.desc%
+---
+---```lua
+---default = true
+---```
+---@field postfixUfcs? boolean
+---%extension.tinymist.config.tinymist.completion.postfixUfcsLeft.desc%
+---
+---```lua
+---default = true
+---```
+---@field postfixUfcsLeft? boolean
+---%extension.tinymist.config.tinymist.completion.postfixUfcsRight.desc%
+---
+---```lua
+---default = true
+---```
+---@field postfixUfcsRight? boolean
+---Whether to make symbol completion stepless. For example, `$ar|$` will be completed to `$arrow.r$`. Hint: Restarting the editor is required to change this setting.
+---
+---```lua
+---default = "step"
+---```
+---@field symbol? "step" | "stepless"
+---%extension.tinymist.config.tinymist.completion.triggerOnSnippetPlaceholders.desc%
+---@field triggerOnSnippetPlaceholders? boolean
+
+---@class _.lspconfig.settings.tinymist.Tinymist.Lint
+---%extension.tinymist.config.tinymist.lint.enabled.desc%
+---@field enabled? boolean
+---%extension.tinymist.config.tinymist.lint.when.desc%
+---
+---```lua
+---default = "onSave"
+---```
+---@field when? "onSave" | "onType"
+
+---@class _.lspconfig.settings.tinymist.Tinymist.Preview
+---%extension.tinymist.config.tinymist.preview.cursorIndicator.desc%
+---@field cursorIndicator? boolean
+---%extension.tinymist.config.tinymist.preview.fontPaths.desc%
+---
+---```lua
+---default = {}
+---```
+---@field fontPaths? string[]
+---%extension.tinymist.config.tinymist.preview.invertColors.desc%
+---
+---```lua
+---default = "never"
+---```
+---@field invertColors? "never" | "auto" | "always"|table
+---%extension.tinymist.config.tinymist.preview.partialRendering.desc%
+---
+---```lua
+---default = true
+---```
+---@field partialRendering? boolean
+---%extension.tinymist.config.tinymist.preview.pinPreviewFile.desc%
+---@field pinPreviewFile? boolean
+---%extension.tinymist.config.tinymist.preview.refresh.desc%
+---
+---```lua
+---default = "onType"
+---```
+---@field refresh? "onSave" | "onType"
+---%extension.tinymist.config.tinymist.preview.scrollSync.desc%
+---
+---```lua
+---default = "onSelectionChangeByMouse"
+---```
+---@field scrollSync? "never" | "onSelectionChangeByMouse" | "onSelectionChange"
+---%extension.tinymist.config.tinymist.preview.sysInputs.desc%
+---
+---```lua
+---default = {}
+---```
+---@field sysInputs? table
+---%extension.tinymist.config.tinymist.preview.systemFonts.desc%
+---
+---```lua
+---default = true
+---```
+---@field systemFonts? boolean
+
+---@class _.lspconfig.settings.tinymist.Tinymist.Trace
+---%extension.tinymist.config.tinymist.trace.server.desc%
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.tinymist.Tinymist
+---%extension.tinymist.config.tinymist.compileStatus.desc%
+---
+---```lua
+---default = "enable"
+---```
+---@field compileStatus? "enable" | "disable"
+---@field completion? _.lspconfig.settings.tinymist.Tinymist.Completion
+---%extension.tinymist.config.tinymist.configureDefaultWordSeparator.string.desc%
+---
+---```lua
+---default = "disable"
+---```
+---@field configureDefaultWordSeparator? "enable" | "disable"
+---%extension.tinymist.config.tinymist.convertExtension.desc%
+---
+---```lua
+---default = {}
+---```
+---@field convertExtension? any[]
+---%extension.tinymist.config.tinymist.copyAndPaste.desc%
+---
+---```lua
+---default = "enable"
+---```
+---@field copyAndPaste? "enable" | "disable"
+---%extension.tinymist.config.tinymist.dragAndDrop.desc%
+---
+---```lua
+---default = "enable"
+---```
+---@field dragAndDrop? "enable" | "disable"
+---%extension.tinymist.config.tinymist.exportPdf.desc%
+---
+---```lua
+---default = "never"
+---```
+---@field exportPdf? "never" | "onSave" | "onType" | "onDocumentHasTitle"
+---%extension.tinymist.config.tinymist.exportTarget.desc%
+---
+---```lua
+---default = "paged"
+---```
+---@field exportTarget? "paged" | "html"
+---%extension.tinymist.config.tinymist.fontPaths.desc%
+---@field fontPaths? any[]
+---%extension.tinymist.config.tinymist.formatterIndentSize.desc%
+---
+---```lua
+---default = 2
+---```
+---@field formatterIndentSize? number
+---%extension.tinymist.config.tinymist.formatterMode.desc%
+---
+---```lua
+---default = "typstyle"
+---```
+---@field formatterMode? "disable" | "typstyle" | "typstfmt"
+---%extension.tinymist.config.tinymist.formatterPrintWidth.desc%
+---
+---```lua
+---default = 120
+---```
+---@field formatterPrintWidth? number
+---%extension.tinymist.config.tinymist.formatterProseWrap.desc%
+---@field formatterProseWrap? boolean
+---@field lint? _.lspconfig.settings.tinymist.Tinymist.Lint
+---%extension.tinymist.config.tinymist.onEnterEvent.desc%
+---
+---```lua
+---default = true
+---```
+---@field onEnterEvent? boolean
+---%extension.tinymist.config.tinymist.onPaste.desc%
+---
+---```lua
+---default = "$root/assets"
+---```
+---@field onPaste? string
+---%extension.tinymist.config.tinymist.outputPath.desc%
+---
+---```lua
+---default = ""
+---```
+---@field outputPath? string
+---@field preview? _.lspconfig.settings.tinymist.Tinymist.Preview
+---%extension.tinymist.config.tinymist.previewFeature.desc%
+---
+---```lua
+---default = "enable"
+---```
+---@field previewFeature? "enable" | "disable"
+---%extension.tinymist.config.tinymist.projectResolution.desc%
+---
+---```lua
+---default = "singleFile"
+---```
+---@field projectResolution? "singleFile" | "lockDatabase"
+---%extension.tinymist.config.tinymist.renderDocs.desc%
+---
+---```lua
+---default = "enable"
+---```
+---@field renderDocs? "enable" | "disable"
+---%extension.tinymist.config.tinymist.rootPath.desc%
+---@field rootPath? string
+---%extension.tinymist.config.tinymist.semanticTokens.desc%
+---
+---```lua
+---default = "enable"
+---```
+---@field semanticTokens? "enable" | "disable"
+---%extension.tinymist.config.tinymist.serverPath.desc%
+---@field serverPath? string
+---%extension.tinymist.config.tinymist.showExportFileIn.desc%
+---@field showExportFileIn? "editorTab" | "systemDefault"
+---%extension.tinymist.config.tinymist.statusBarFormat.desc%
+---
+---```lua
+---default = "{compileStatusIcon} {wordCount} [{fileName}]"
+---```
+---@field statusBarFormat? string
+---%extension.tinymist.config.tinymist.syntaxOnly.desc%
+---
+---```lua
+---default = "auto"
+---```
+---@field syntaxOnly? "auto" | "onPowerSaving" | "enable" | "disable"
+---%extension.tinymist.config.tinymist.systemFonts.desc%
+---
+---```lua
+---default = true
+---```
+---@field systemFonts? boolean
+---@field trace? _.lspconfig.settings.tinymist.Tinymist.Trace
+---%extension.tinymist.config.tinymist.typingContinueCommentsOnNewline.desc%
+---
+---```lua
+---default = true
+---```
+---@field typingContinueCommentsOnNewline? boolean
+---%extension.tinymist.config.tinymist.typstExtraArgs.desc%
+---
+---```lua
+---default = {}
+---```
+---@field typstExtraArgs? string[]
+
+---@class lspconfig.settings.tinymist
+---@field tinymist? _.lspconfig.settings.tinymist.Tinymist

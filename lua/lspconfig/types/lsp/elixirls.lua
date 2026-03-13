@@ -1,0 +1,109 @@
+---@meta
+
+---@class _.lspconfig.settings.elixirls.ElixirLS.Trace
+---Traces the communication between VS Code and the Elixir language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.elixirls.ElixirLS
+---Additional file types capable of triggering a build on change
+---
+---```lua
+---default = {}
+---```
+---@field additionalWatchedExtensions? string[]
+---Trigger ElixirLS build when code is saved
+---
+---```lua
+---default = true
+---```
+---@field autoBuild? boolean
+---Enable auto-insert required alias. This is true (enabled) by default.
+---
+---```lua
+---default = true
+---```
+---@field autoInsertRequiredAlias? boolean
+---Run ElixirLS's rapid Dialyzer when code is saved
+---
+---```lua
+---default = true
+---```
+---@field dialyzerEnabled? boolean
+---Formatter to use for Dialyzer warnings
+---
+---```lua
+---default = "dialyxir_long"
+---```
+---@field dialyzerFormat? "dialyzer" | "dialyxir_short" | "dialyxir_long"
+---Dialyzer options to enable or disable warnings - See Dialyzer's documentation for options. Note that the "race_conditions" option is unsupported
+---
+---```lua
+---default = {}
+---```
+---@field dialyzerWarnOpts? string[]
+---Path to a custom .formatter.exs file used when formatting documents
+---@field dotFormatter? string
+---Show code lenses to run tests in terminal.
+---@field enableTestLenses? boolean
+---Environment variables to use for compilation
+---@field envVariables? table
+---Automatically fetch project dependencies when compiling.
+---@field fetchDeps? boolean
+---Use OTP incremental dialyzer (available on OTP 26+)
+---
+---```lua
+---default = true
+---```
+---@field incrementalDialyzer? boolean
+---Absolute path to alternative ElixirLS release that will override the packaged release
+---@field languageServerOverridePath? string
+---Enable or disable the MCP server
+---@field mcpEnabled? boolean
+---Set a specific port for the MCP server. If not set, uses `3789 + hash(workspace_path)` for predictable port assignment per workspace
+---
+---```lua
+---default = 0
+---```
+---@field mcpPort? integer
+---Mix environment to use for compilation
+---
+---```lua
+---default = "test"
+---```
+---@field mixEnv? string
+---Mix target to use for compilation
+---@field mixTarget? string
+---Subdirectory containing Mix project if not in the project root
+---
+---```lua
+---default = ""
+---```
+---@field projectDir? string
+---Show signature help after confirming autocomplete.
+---
+---```lua
+---default = true
+---```
+---@field signatureAfterComplete? boolean
+---Subdirectory where the Elixir stdlib resides to allow for source code lookup. E.g. /home/youruser/.asdf/installs/elixir/1.18.2
+---
+---```lua
+---default = ""
+---```
+---@field stdlibSrcDir? string
+---Suggest @spec annotations inline using Dialyzer's inferred success typings (Requires Dialyzer).
+---
+---```lua
+---default = true
+---```
+---@field suggestSpecs? boolean
+---@field trace? _.lspconfig.settings.elixirls.ElixirLS.Trace
+---Don't try to look for mix.exs in parent directories
+---@field useCurrentRootFolderAsProjectDir? boolean
+
+---@class lspconfig.settings.elixirls
+---@field elixirLS? _.lspconfig.settings.elixirls.ElixirLS

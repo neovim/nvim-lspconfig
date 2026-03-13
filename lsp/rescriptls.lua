@@ -39,6 +39,7 @@ return {
   cmd = { 'rescript-language-server', '--stdio' },
   filetypes = { 'rescript' },
   root_markers = { 'bsconfig.json', 'rescript.json', '.git' },
+  ---@type lspconfig.settings.rescriptls
   settings = {},
   init_options = {
     extensionConfiguration = {

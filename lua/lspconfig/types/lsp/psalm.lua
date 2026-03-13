@@ -1,0 +1,83 @@
+---@meta
+
+---@class _.lspconfig.settings.psalm.Psalm.Trace
+---Traces the communication between VSCode and the Psalm language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.psalm.Psalm
+---A list of file extensions to request Psalm to analyze. By default, this only includes 'php' (Modifying requires VSCode reload)
+---
+---```lua
+---default = { {
+---    language = "php",
+---    scheme = "file"
+---  }, {
+---    language = "php",
+---    scheme = "untitled"
+---  } }
+---```
+---@field analyzedFileExtensions? any[]
+---A list of files to checkup for psalm configuration (relative to the workspace directory)
+---
+---```lua
+---default = { "psalm.xml", "psalm.xml.dist" }
+---```
+---@field configPaths? string[]
+---If this is set to true, this VSCode extension will use TCP instead of the default STDIO to communicate with the Psalm language server. (Modifying requires VSCode reload)
+---@field connectToServerWithTcp? boolean
+---Enable to disable autocomplete on methods and properties (Modifying requires VSCode reload)
+---@field disableAutoComplete? boolean
+---Enable this to print messages to the debug console when developing or debugging this VS Code extension. (Modifying requires VSCode reload)
+---@field enableDebugLog? boolean
+---Enable this to use PHP-provided ini defaults for memory and error display. (Modifying requires restart)
+---@field enableUseIniDefaults? boolean
+---Enable --verbose mode on the Psalm Language Server (Modifying requires VSCode reload)
+---@field enableVerbose? boolean
+---This will hide the Psalm status from the status bar when it is started and running.  This is useful to clear up a cluttered status bar.
+---
+---```lua
+---default = true
+---```
+---@field hideStatusMessageWhenRunning? boolean
+---Traces the communication between VSCode and the Psalm language server.
+---
+---```lua
+---default = "INFO"
+---```
+---@field logLevel? "NONE" | "ERROR" | "WARN" | "INFO" | "DEBUG" | "TRACE"
+---The number of times the Language Server is allowed to crash and restart before it will no longer try to restart (Modifying requires VSCode reload)
+---
+---```lua
+---default = 5
+---```
+---@field maxRestartCount? number
+---Optional (Advanced), default is '-dxdebug.remote_autostart=0 -dxdebug.remote_enable=0 -dxdebug_profiler_enable=0'.  Additional PHP executable CLI arguments to use. (Modifying requires VSCode reload)
+---
+---```lua
+---default = { "-dxdebug.remote_autostart=0", "-dxdebug.remote_enable=0", "-dxdebug_profiler_enable=0" }
+---```
+---@field phpExecutableArgs? string[]
+---Optional, defaults to searching for "php". The path to a PHP 7.0+ executable to use to execute the Psalm server. The PHP 7.0+ installation should preferably include and enable the PHP module `pcntl`. (Modifying requires VSCode reload)
+---@field phpExecutablePath? string
+---Optional (Advanced). If provided, this overrides the Psalm script to use, e.g. vendor/bin/psalm. (Modifying requires VSCode reload)
+---@field psalmClientScriptPath? string
+---Optional (Advanced). Additional arguments to the Psalm language server. (Modifying requires VSCode reload)
+---
+---```lua
+---default = {}
+---```
+---@field psalmScriptArgs? string[]
+---Optional (Advanced). If provided, this overrides the Psalm script to use, e.g. vendor/bin/psalm-language-server. (Modifying requires VSCode reload)
+---@field psalmScriptPath? string
+---Optional (Advanced). If provided, this overrides the Psalm version detection (Modifying requires VSCode reload)
+---@field psalmVersion? string
+---@field trace? _.lspconfig.settings.psalm.Psalm.Trace
+---Enable this to enable unused variable and parameter detection
+---@field unusedVariableDetection? boolean
+
+---@class lspconfig.settings.psalm
+---@field psalm? _.lspconfig.settings.psalm.Psalm

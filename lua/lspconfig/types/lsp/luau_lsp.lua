@@ -1,0 +1,438 @@
+---@meta
+
+---@class _.lspconfig.settings.luau_lsp.Luau.Trace
+---Traces the communication between VS Code and the Luau language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.luau_lsp.Luau
+---@field trace? _.lspconfig.settings.luau_lsp.Luau.Trace
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Bytecode
+---The `debugLevel` to use when compiling bytecode
+---
+---```lua
+---default = 1
+---```
+---@field debugLevel? number
+---The `typeInfoLevel` to use when compiling bytecode
+---
+---```lua
+---default = 1
+---```
+---@field typeInfoLevel? number
+---The `vectorCtor` to use when compiling bytecode
+---
+---```lua
+---default = "new"
+---```
+---@field vectorCtor? string
+---The `vectorLib` to use when compiling bytecode
+---
+---```lua
+---default = "Vector3"
+---```
+---@field vectorLib? string
+---The `vectorType` to use when compiling bytecode
+---
+---```lua
+---default = "Vector3"
+---```
+---@field vectorType? string
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Completion.Imports.StringRequires
+---Whether to use string requires when auto-importing requires. Only checked if `#luau-lsp.platform.type#` is `roblox`
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Completion.Imports
+---Suggest automatic imports in completion items
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Do not show any of the listed services when auto-importing
+---
+---```lua
+---default = {}
+---```
+---@field excludedServices? string[]
+---Files that match these globs will not be shown during auto-import
+---
+---```lua
+---default = { "**/_Index/**" }
+---```
+---@field ignoreGlobs? string[]
+---When non-empty, only show the services listed when auto-importing
+---
+---```lua
+---default = {}
+---```
+---@field includedServices? string[]
+---The style of requires when autocompleted
+---
+---```lua
+---default = "auto"
+---```
+---@field requireStyle? "auto" | "alwaysRelative" | "alwaysAbsolute"
+---Whether services and requires should be separated by an empty line
+---@field separateGroupsWithLine? boolean
+---@field stringRequires? _.lspconfig.settings.luau_lsp.LuauLsp.Completion.Imports.StringRequires
+---Whether module requires are suggested in autocomplete
+---
+---```lua
+---default = true
+---```
+---@field suggestRequires? boolean
+---Whether GetService completions are suggested in autocomplete
+---
+---```lua
+---default = true
+---```
+---@field suggestServices? boolean
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Completion
+---Add parentheses after completing a function call
+---
+---```lua
+---default = true
+---```
+---@field addParentheses? boolean
+---If `#luau-lsp.completion.addParentheses#` is enabled, then include a tabstop after the parentheses for the cursor to move to
+---
+---```lua
+---default = true
+---```
+---@field addTabstopAfterParentheses? boolean
+---Automatically insert an `end` when opening a block
+---@field autocompleteEnd? boolean
+---Enables the experimental fragment autocomplete system for performance improvements
+---@field enableFragmentAutocomplete? boolean
+---Enable autocomplete
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Fill parameter names in an autocompleted function call, which can be tabbed through. Requires `#luau-lsp.completion.addParentheses#` to be enabled
+---
+---```lua
+---default = true
+---```
+---@field fillCallArguments? boolean
+---@field imports? _.lspconfig.settings.luau_lsp.LuauLsp.Completion.Imports
+---Whether to show the auto-generated anonymous function completion item when autocompleting callback arguments
+---
+---```lua
+---default = true
+---```
+---@field showAnonymousAutofilledFunction? boolean
+---Whether to show deprecated items in autocomplete suggestions
+---
+---```lua
+---default = true
+---```
+---@field showDeprecatedItems? boolean
+---Whether to show keywords (`if` / `then` / `and` / etc.) during autocomplete
+---
+---```lua
+---default = true
+---```
+---@field showKeywords? boolean
+---Whether to show non-function properties when performing a method call with a colon (e.g., `foo:bar`)
+---@field showPropertiesOnMethodCall? boolean
+---Suggest automatic imports in completion items
+---@field suggestImports? boolean
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Diagnostics
+---Recompute diagnostics for dependents when a file changes. If `#luau-lsp.diagnostics.workspace#` is enabled, this is ignored
+---
+---```lua
+---default = true
+---```
+---@field includeDependents? boolean
+---Whether to update document diagnostics whenever the text file changes
+---
+---```lua
+---default = true
+---```
+---@field pullOnChange? boolean
+---Whether to update document diagnostics whenever the text file is saved
+---
+---```lua
+---default = true
+---```
+---@field pullOnSave? boolean
+---Use strict DataModel types in diagnostics. When on, this is equivalent to the more expressive autocompletion types. When this is off, `game`/`script`/`workspace` (and their members) are all typed as `any`, and helps to prevent false positives. [Read More](https://github.com/JohnnyMorganz/luau-lsp/issues/83#issuecomment-1192865024)
+---@field strictDatamodelTypes? boolean
+---Compute diagnostics for the whole workspace
+---@field workspace? boolean
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Fflags
+---Enable all (boolean) Luau FFlags by default. These flags can later be overriden by `#luau-lsp.fflags.override#` and `#luau-lsp.fflags.sync#`
+---@field enableByDefault? boolean
+---Enables the flags required for Luau's new type solver. These flags can be overriden by `#luau-lsp.fflags.override#`
+---@field enableNewSolver? boolean
+---Override FFlags passed to Luau
+---
+---```lua
+---default = {}
+---```
+---@field override? table
+---Sync currently enabled FFlags with Roblox's published FFlags.
+---This currently only syncs FFlags which begin with 'Luau'
+---
+---```lua
+---default = true
+---```
+---@field sync? boolean
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Format
+---Whether to automatically convert single/double quotes to backticks when typing `{` inside strings
+---@field convertQuotes? boolean
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Hover
+---Enable hover
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Show string length when hovering over a string literal
+---
+---```lua
+---default = true
+---```
+---@field includeStringLength? boolean
+---Show function definitions on multiple lines
+---@field multilineFunctionDefinitions? boolean
+---Show table kinds
+---@field showTableKinds? boolean
+---Use strict DataModel types in hover display. When on, this is equivalent to autocompletion types. When off, this is equivalent to diagnostic types
+---
+---```lua
+---default = true
+---```
+---@field strictDatamodelTypes? boolean
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Index
+---Whether all files in a workspace should be indexed into memory. If disabled, only limited support is available for features such as 'Find All References' and 'Rename'
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---The maximum amount of files that can be indexed. If more files are indexed, more memory is needed
+---
+---```lua
+---default = 10000
+---```
+---@field maxFiles? number
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.InlayHints
+---Show inlay hints for function return types
+---@field functionReturnTypes? boolean
+---Whether type hints should be hidden if they resolve to an error type
+---@field hideHintsForErrorTypes? boolean
+---Whether type hints should be hidden if the resolved variable name matches the parameter name
+---
+---```lua
+---default = true
+---```
+---@field hideHintsForMatchingParameterNames? boolean
+---Whether type annotation inlay hints can be made insertable by clicking
+---
+---```lua
+---default = true
+---```
+---@field makeInsertable? boolean
+---Show inlay hints for function parameter names
+---
+---```lua
+---default = "none"
+---```
+---@field parameterNames? "none" | "literals" | "all"
+---Show inlay hints for parameter types
+---@field parameterTypes? boolean
+---The maximum length a type hint should be before being truncated
+---
+---```lua
+---default = 50
+---```
+---@field typeHintMaxLength? number
+---Show inlay hints for variable types
+---@field variableTypes? boolean
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Platform
+---Platform-specific support features
+---
+---```lua
+---default = "roblox"
+---```
+---@field type? "standard" | "roblox"
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Plugin
+---Use Roblox Studio Plugin to provide DataModel information
+---@field enabled? boolean
+---The maximum request body size accepted from the plugin, in a string representation parse-able by the [bytes](https://www.npmjs.com/package/bytes) library
+---
+---```lua
+---default = "3mb"
+---```
+---@field maximumRequestBodySize? string
+---Port number to connect to the Studio Plugin
+---
+---```lua
+---default = 3667
+---```
+---@field port? number
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Require
+---A mapping of custom require string prefixes to directory paths. The aliases should include trailing slashes
+---
+---```lua
+---default = {}
+---```
+---@field directoryAliases? table
+---A mapping of custom require string aliases to file paths
+---
+---```lua
+---default = {}
+---```
+---@field fileAliases? table
+---Use the old require-by-string semantics for init.luau resolution
+---@field useOriginalRequireByStringSemantics? boolean
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Server.CrashReporting
+---Upload crash reports to Sentry
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Server
+---Path to a `.luaurc` file which acts as the default baseline Luau configuration
+---@field baseLuaurc? string
+---Type of communication channel to use for communicating with the server. Only useful for debug purposes
+---
+---```lua
+---default = "stdio"
+---```
+---@field communicationChannel? "stdio" | "pipe"
+---@field crashReporting? _.lspconfig.settings.luau_lsp.LuauLsp.Server.CrashReporting
+---Make the server spin indefinitely when starting up to allow time to attach a debugger. Only useful for debug purposes
+---@field delayStartup? boolean
+---Path to the Luau LSP server binary. If not provided, uses the binary included in the extension.
+---
+---```lua
+---default = ""
+---```
+---@field path? string
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.SignatureHelp
+---Enable signature help
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Sourcemap
+---Automatically run the `rojo sourcemap` command to regenerate sourcemaps on changes
+---
+---```lua
+---default = true
+---```
+---@field autogenerate? boolean
+---Whether Rojo sourcemap parsing is enabled
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---A command to run to generate the sourcemap. If not specified, defaults to `rojo`
+---@field generatorCommand? string
+---Include non-script instances in the generated sourcemap
+---
+---```lua
+---default = true
+---```
+---@field includeNonScripts? boolean
+---Path to the Rojo executable. If not provided, attempts to run `rojo` in the workspace directory, so it must be available on the PATH
+---@field rojoPath? string
+---The name of the Rojo project file to generate a sourcemap for.
+---Only applies if `#luau-lsp.sourcemap.autogenerate#` is enabled
+---
+---```lua
+---default = "default.project.json"
+---```
+---@field rojoProjectFile? string
+---The name of the sourcemap file
+---
+---```lua
+---default = "sourcemap.json"
+---```
+---@field sourcemapFile? string
+---Whether the VSCode filesystem watchers are used to regenerate the sourcemap. If disabled, delegates to the generator process. If using `rojo`, this command stops using `--watch`
+---@field useVSCodeWatcher? boolean
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Types
+---A mapping of package names to paths of definition files to load in to the type checker. Note that definition file syntax is currently unstable and may change at any time
+---
+---```lua
+---default = {}
+---```
+---@field definitionFiles? table
+---A list of globals to remove from the global scope. Accepts full libraries or particular functions (e.g., `table` or `table.clone`)
+---
+---```lua
+---default = {}
+---```
+---@field disabledGlobals? string[]
+---A list of paths to documentation files which provide documentation support to the definition files provided
+---
+---```lua
+---default = {}
+---```
+---@field documentationFiles? string[]
+---Load in and automatically update Roblox type definitions for the type checker
+---
+---```lua
+---default = true
+---```
+---@field roblox? boolean
+---Security Level to use in the Roblox API definitions
+---
+---```lua
+---default = "PluginSecurity"
+---```
+---@field robloxSecurityLevel? "None" | "LocalUserSecurity" | "PluginSecurity" | "RobloxScriptSecurity"
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp
+---Automatically insert an `end` when opening a block
+---@field autocompleteEnd? boolean
+---@field bytecode? _.lspconfig.settings.luau_lsp.LuauLsp.Bytecode
+---@field completion? _.lspconfig.settings.luau_lsp.LuauLsp.Completion
+---@field diagnostics? _.lspconfig.settings.luau_lsp.LuauLsp.Diagnostics
+---@field fflags? _.lspconfig.settings.luau_lsp.LuauLsp.Fflags
+---@field format? _.lspconfig.settings.luau_lsp.LuauLsp.Format
+---@field hover? _.lspconfig.settings.luau_lsp.LuauLsp.Hover
+---Diagnostics will not be reported for any file matching these globs unless the file is currently open
+---
+---```lua
+---default = { "**/_Index/**" }
+---```
+---@field ignoreGlobs? string[]
+---@field index? _.lspconfig.settings.luau_lsp.LuauLsp.Index
+---@field inlayHints? _.lspconfig.settings.luau_lsp.LuauLsp.InlayHints
+---@field platform? _.lspconfig.settings.luau_lsp.LuauLsp.Platform
+---@field plugin? _.lspconfig.settings.luau_lsp.LuauLsp.Plugin
+---@field require? _.lspconfig.settings.luau_lsp.LuauLsp.Require
+---@field server? _.lspconfig.settings.luau_lsp.LuauLsp.Server
+---@field signatureHelp? _.lspconfig.settings.luau_lsp.LuauLsp.SignatureHelp
+---@field sourcemap? _.lspconfig.settings.luau_lsp.LuauLsp.Sourcemap
+---@field types? _.lspconfig.settings.luau_lsp.LuauLsp.Types
+
+---@class lspconfig.settings.luau_lsp
+---@field luau? _.lspconfig.settings.luau_lsp.Luau
+---@field ["luau-lsp"]? _.lspconfig.settings.luau_lsp.LuauLsp

@@ -1,0 +1,657 @@
+---@meta
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.AlternateNumberFormat
+---Enables alternateNumberFormat plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Cabal
+---Enables cabal code actions
+---
+---```lua
+---default = true
+---```
+---@field codeActionsOn? boolean
+---Enables cabal completions
+---
+---```lua
+---default = true
+---```
+---@field completionOn? boolean
+---Enables cabal diagnostics
+---
+---```lua
+---default = true
+---```
+---@field diagnosticsOn? boolean
+---Enables cabal hover
+---
+---```lua
+---default = true
+---```
+---@field hoverOn? boolean
+---Enables cabal symbols
+---
+---```lua
+---default = true
+---```
+---@field symbolsOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.CabalFmt.Config
+---Set path to 'cabal-fmt' executable
+---
+---```lua
+---default = "cabal-fmt"
+---```
+---@field path? string
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.CabalFmt
+---@field config? _.lspconfig.settings.hie.Haskell.Plugin.CabalFmt.Config
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.CabalGild.Config
+---Set path to 'cabal-gild' executable
+---
+---```lua
+---default = "cabal-gild"
+---```
+---@field path? string
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.CabalGild
+---@field config? _.lspconfig.settings.hie.Haskell.Plugin.CabalGild.Config
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.CabalHaskellIntegration
+---Enables cabalHaskellIntegration plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.CallHierarchy
+---Enables callHierarchy plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.ChangeTypeSignature
+---Enables changeTypeSignature plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Class
+---Enables class code actions
+---
+---```lua
+---default = true
+---```
+---@field codeActionsOn? boolean
+---Enables class code lenses
+---
+---```lua
+---default = true
+---```
+---@field codeLensOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Eval.Config
+---Enable the diff output (WAS/NOW) of eval lenses
+---
+---```lua
+---default = true
+---```
+---@field diff? boolean
+---Enable marking exceptions with `*** Exception:` similarly to doctest and GHCi.
+---@field exception? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Eval
+---Enables eval code actions
+---
+---```lua
+---default = true
+---```
+---@field codeActionsOn? boolean
+---Enables eval code lenses
+---
+---```lua
+---default = true
+---```
+---@field codeLensOn? boolean
+---@field config? _.lspconfig.settings.hie.Haskell.Plugin.Eval.Config
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.ExplicitFields
+---Enables explicit-fields code actions
+---
+---```lua
+---default = true
+---```
+---@field codeActionsOn? boolean
+---Enables explicit-fields inlay hints
+---
+---```lua
+---default = true
+---```
+---@field inlayHintsOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.ExplicitFixity
+---Enables explicit-fixity plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Fourmolu.Config
+---Call out to an external "fourmolu" executable, rather than using the bundled library.
+---@field external? boolean
+---Set path to executable (for "external" mode).
+---
+---```lua
+---default = "fourmolu"
+---```
+---@field path? string
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Fourmolu
+---@field config? _.lspconfig.settings.hie.Haskell.Plugin.Fourmolu.Config
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Gadt
+---Enables gadt plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.GhcideCodeActionsBindings
+---Enables ghcide-code-actions-bindings plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.GhcideCodeActionsFillHoles
+---Enables ghcide-code-actions-fill-holes plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.GhcideCodeActionsImportsExports
+---Enables ghcide-code-actions-imports-exports plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.GhcideCodeActionsTypeSignatures
+---Enables ghcide-code-actions-type-signatures plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.GhcideCompletions.Config
+---Extends the import list automatically when completing a out-of-scope identifier
+---
+---```lua
+---default = true
+---```
+---@field autoExtendOn? boolean
+---Inserts snippets when using code completions
+---
+---```lua
+---default = true
+---```
+---@field snippetsOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.GhcideCompletions
+---@field config? _.lspconfig.settings.hie.Haskell.Plugin.GhcideCompletions.Config
+---Enables ghcide-completions plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.GhcideHoverAndSymbols
+---Enables ghcide-hover-and-symbols hover
+---
+---```lua
+---default = true
+---```
+---@field hoverOn? boolean
+---Enables ghcide-hover-and-symbols symbols
+---
+---```lua
+---default = true
+---```
+---@field symbolsOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.GhcideTypeLenses.Config
+---Control how type lenses are shown
+---
+---```lua
+---default = "always"
+---```
+---@field mode? "always" | "exported" | "diagnostics"
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.GhcideTypeLenses
+---@field config? _.lspconfig.settings.hie.Haskell.Plugin.GhcideTypeLenses.Config
+---Enables ghcide-type-lenses plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Hlint.Config
+---Flags used by hlint
+---
+---```lua
+---default = {}
+---```
+---@field flags? any[]
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Hlint
+---Enables hlint code actions
+---
+---```lua
+---default = true
+---```
+---@field codeActionsOn? boolean
+---@field config? _.lspconfig.settings.hie.Haskell.Plugin.Hlint.Config
+---Enables hlint diagnostics
+---
+---```lua
+---default = true
+---```
+---@field diagnosticsOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.ImportLens
+---Enables importLens code actions
+---
+---```lua
+---default = true
+---```
+---@field codeActionsOn? boolean
+---Enables importLens code lenses
+---
+---```lua
+---default = true
+---```
+---@field codeLensOn? boolean
+---Enables importLens inlay hints
+---
+---```lua
+---default = true
+---```
+---@field inlayHintsOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.ModuleName
+---Enables moduleName plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Ormolu.Config
+---Call out to an external "ormolu" executable, rather than using the bundled library
+---@field external? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Ormolu
+---@field config? _.lspconfig.settings.hie.Haskell.Plugin.Ormolu.Config
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.OverloadedRecordDot
+---Enables overloaded-record-dot plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.PragmasCompletion
+---Enables pragmas-completion plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.PragmasDisable
+---Enables pragmas-disable plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.PragmasSuggest
+---Enables pragmas-suggest plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.QualifyImportedNames
+---Enables qualifyImportedNames plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Rename.Config
+---Enable experimental cross-module renaming
+---@field crossModule? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Rename
+---@field config? _.lspconfig.settings.hie.Haskell.Plugin.Rename.Config
+---Enables rename plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Retrie
+---Enables retrie plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.SemanticTokens.Config
+---LSP semantic token type to use for typeclass methods
+---
+---```lua
+---default = "method"
+---```
+---@field classMethodToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---LSP semantic token type to use for typeclasses
+---
+---```lua
+---default = "class"
+---```
+---@field classToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---LSP semantic token type to use for data constructors
+---
+---```lua
+---default = "enumMember"
+---```
+---@field dataConstructorToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---LSP semantic token type to use for functions
+---
+---```lua
+---default = "function"
+---```
+---@field functionToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---LSP semantic token type to use for modules
+---
+---```lua
+---default = "namespace"
+---```
+---@field moduleToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---LSP semantic token type to use for operators
+---
+---```lua
+---default = "operator"
+---```
+---@field operatorToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---LSP semantic token type to use for pattern synonyms
+---
+---```lua
+---default = "macro"
+---```
+---@field patternSynonymToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---LSP semantic token type to use for record fields
+---
+---```lua
+---default = "property"
+---```
+---@field recordFieldToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---LSP semantic token type to use for type constructors
+---
+---```lua
+---default = "enum"
+---```
+---@field typeConstructorToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---LSP semantic token type to use for type families
+---
+---```lua
+---default = "interface"
+---```
+---@field typeFamilyToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---LSP semantic token type to use for type synonyms
+---
+---```lua
+---default = "type"
+---```
+---@field typeSynonymToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---LSP semantic token type to use for type variables
+---
+---```lua
+---default = "typeParameter"
+---```
+---@field typeVariableToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---LSP semantic token type to use for variables
+---
+---```lua
+---default = "variable"
+---```
+---@field variableToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.SemanticTokens
+---@field config? _.lspconfig.settings.hie.Haskell.Plugin.SemanticTokens.Config
+---Enables semanticTokens plugin
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.SignatureHelp
+---Enables signatureHelp plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Splice
+---Enables splice plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Stan
+---Enables stan plugin
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin
+---@field alternateNumberFormat? _.lspconfig.settings.hie.Haskell.Plugin.AlternateNumberFormat
+---@field cabal? _.lspconfig.settings.hie.Haskell.Plugin.Cabal
+---@field ["cabal-fmt"]? _.lspconfig.settings.hie.Haskell.Plugin.CabalFmt
+---@field ["cabal-gild"]? _.lspconfig.settings.hie.Haskell.Plugin.CabalGild
+---@field cabalHaskellIntegration? _.lspconfig.settings.hie.Haskell.Plugin.CabalHaskellIntegration
+---@field callHierarchy? _.lspconfig.settings.hie.Haskell.Plugin.CallHierarchy
+---@field changeTypeSignature? _.lspconfig.settings.hie.Haskell.Plugin.ChangeTypeSignature
+---@field class? _.lspconfig.settings.hie.Haskell.Plugin.Class
+---@field eval? _.lspconfig.settings.hie.Haskell.Plugin.Eval
+---@field ["explicit-fields"]? _.lspconfig.settings.hie.Haskell.Plugin.ExplicitFields
+---@field ["explicit-fixity"]? _.lspconfig.settings.hie.Haskell.Plugin.ExplicitFixity
+---@field fourmolu? _.lspconfig.settings.hie.Haskell.Plugin.Fourmolu
+---@field gadt? _.lspconfig.settings.hie.Haskell.Plugin.Gadt
+---@field ["ghcide-code-actions-bindings"]? _.lspconfig.settings.hie.Haskell.Plugin.GhcideCodeActionsBindings
+---@field ["ghcide-code-actions-fill-holes"]? _.lspconfig.settings.hie.Haskell.Plugin.GhcideCodeActionsFillHoles
+---@field ["ghcide-code-actions-imports-exports"]? _.lspconfig.settings.hie.Haskell.Plugin.GhcideCodeActionsImportsExports
+---@field ["ghcide-code-actions-type-signatures"]? _.lspconfig.settings.hie.Haskell.Plugin.GhcideCodeActionsTypeSignatures
+---@field ["ghcide-completions"]? _.lspconfig.settings.hie.Haskell.Plugin.GhcideCompletions
+---@field ["ghcide-hover-and-symbols"]? _.lspconfig.settings.hie.Haskell.Plugin.GhcideHoverAndSymbols
+---@field ["ghcide-type-lenses"]? _.lspconfig.settings.hie.Haskell.Plugin.GhcideTypeLenses
+---@field hlint? _.lspconfig.settings.hie.Haskell.Plugin.Hlint
+---@field importLens? _.lspconfig.settings.hie.Haskell.Plugin.ImportLens
+---@field moduleName? _.lspconfig.settings.hie.Haskell.Plugin.ModuleName
+---@field ormolu? _.lspconfig.settings.hie.Haskell.Plugin.Ormolu
+---@field ["overloaded-record-dot"]? _.lspconfig.settings.hie.Haskell.Plugin.OverloadedRecordDot
+---@field ["pragmas-completion"]? _.lspconfig.settings.hie.Haskell.Plugin.PragmasCompletion
+---@field ["pragmas-disable"]? _.lspconfig.settings.hie.Haskell.Plugin.PragmasDisable
+---@field ["pragmas-suggest"]? _.lspconfig.settings.hie.Haskell.Plugin.PragmasSuggest
+---@field qualifyImportedNames? _.lspconfig.settings.hie.Haskell.Plugin.QualifyImportedNames
+---@field rename? _.lspconfig.settings.hie.Haskell.Plugin.Rename
+---@field retrie? _.lspconfig.settings.hie.Haskell.Plugin.Retrie
+---@field semanticTokens? _.lspconfig.settings.hie.Haskell.Plugin.SemanticTokens
+---@field signatureHelp? _.lspconfig.settings.hie.Haskell.Plugin.SignatureHelp
+---@field splice? _.lspconfig.settings.hie.Haskell.Plugin.Splice
+---@field stan? _.lspconfig.settings.hie.Haskell.Plugin.Stan
+
+---@class _.lspconfig.settings.hie.Haskell.Trace
+---Sets the log level in the client side.
+---
+---```lua
+---default = "info"
+---```
+---@field client? "off" | "error" | "info" | "debug"
+---Traces the communication between VS Code and the language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.hie.Haskell
+---The formatter to use when formatting a document or range of a cabal formatter. Ensure the plugin is enabled.
+---
+---```lua
+---default = "cabal-gild"
+---```
+---@field cabalFormattingProvider? "cabal-gild" | "cabal-fmt" | "none"
+---Whether to typecheck the entire project on load. It could drive to bad performance in large projects.
+---
+---```lua
+---default = true
+---```
+---@field checkProject? boolean
+---The formatter to use when formatting a document or range. Ensure the plugin is enabled.
+---
+---```lua
+---default = "ormolu"
+---```
+---@field formattingProvider? "brittany" | "floskell" | "fourmolu" | "ormolu" | "stylish-haskell" | "none"
+---Manually set a ghcup executable path.
+---
+---```lua
+---default = ""
+---```
+---@field ghcupExecutablePath? string
+---If set, redirects the logs to a file.
+---
+---```lua
+---default = ""
+---```
+---@field logFile? string
+---How to manage/find HLS installations.
+---
+---```lua
+---default = "PATH"
+---```
+---@field manageHLS? "GHCup" | "PATH"
+---Maximum number of completions sent to the editor.
+---
+---```lua
+---default = 40
+---```
+---@field maxCompletions? integer
+---An optional URL to override where ghcup checks for tool download info (usually at: https://raw.githubusercontent.com/haskell/ghcup-metadata/master/ghcup-0.0.7.yaml)
+---
+---```lua
+---default = ""
+---```
+---@field metadataURL? string
+---When opening 'Documentation' for external libraries, open in hackage by default. Set to false to instead open in vscode.
+---
+---```lua
+---default = true
+---```
+---@field openDocumentationInHackage? boolean
+---When opening 'Source' for external libraries, open in hackage by default. Set to false to instead open in vscode.
+---
+---```lua
+---default = true
+---```
+---@field openSourceInHackage? boolean
+---@field plugin? _.lspconfig.settings.hie.Haskell.Plugin
+---Prompt before performing any downloads.
+---
+---```lua
+---default = "true"
+---```
+---@field promptBeforeDownloads? boolean
+---An optional path where downloaded metadata will be stored. Check the default value [here](https://github.com/haskell/vscode-haskell#downloaded-binaries)
+---
+---```lua
+---default = ""
+---```
+---@field releasesDownloadStoragePath? string
+---An optional URL to override where ghcup checks for HLS-GHC compatibility list (usually at: https://raw.githubusercontent.com/haskell/ghcup-metadata/master/hls-metadata-0.0.1.json)
+---
+---```lua
+---default = ""
+---```
+---@field releasesURL? string
+---Define environment variables for the language server.
+---
+---```lua
+---default = {}
+---```
+---@field serverEnvironment? table
+---Manually set a language server executable. Can be something on the $PATH or the full path to the executable itself. Works with `~,` `${HOME}` and `${workspaceFolder}`.
+---
+---```lua
+---default = ""
+---```
+---@field serverExecutablePath? string
+---Pass additional arguments to the language server.
+---
+---```lua
+---default = ""
+---```
+---@field serverExtraArgs? string
+---Preferred approach for loading package components. Setting this to 'multiple components' (EXPERIMENTAL) allows the build tool (such as `cabal` or `stack`) to [load multiple components at once](https://github.com/haskell/cabal/pull/8726), which is a significant improvement.
+---
+---```lua
+---default = "singleComponent"
+---```
+---@field sessionLoading? "singleComponent" | "multipleComponents"
+---Enable Language Server support for `.cabal` files. Requires Haskell Language Server version >= 1.9.0.0.
+---
+---```lua
+---default = "automatic"
+---```
+---@field supportCabalFiles? "enable" | "disable" | "automatic"
+---When manageHLS is set to GHCup, this can overwrite the automatic toolchain configuration with a more specific one. When a tool is omitted, the extension will manage the version (for 'ghc' we try to figure out the version the project requires). The format is '{"tool": "version", ...}'. 'version' accepts all identifiers that 'ghcup' accepts.
+---
+---```lua
+---default = {}
+---```
+---@field toolchain? table
+---@field trace? _.lspconfig.settings.hie.Haskell.Trace
+---Whether to upgrade GHCup automatically when 'manageHLS' is set to 'GHCup'.
+---
+---```lua
+---default = true
+---```
+---@field upgradeGHCup? boolean
+
+---@class lspconfig.settings.hie
+---@field haskell? _.lspconfig.settings.hie.Haskell

@@ -31,6 +31,7 @@ return {
     AutomaticWorkspaceInit = true,
   },
   -- this recommended settings values taken from  https://github.com/ionide/FsAutoComplete?tab=readme-ov-file#settings
+  ---@type lspconfig.settings.fsautocomplete
   settings = {
     FSharp = {
       keywordsAutocomplete = true,

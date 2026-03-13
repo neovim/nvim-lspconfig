@@ -48,6 +48,9 @@ example to activate the "clangd" config: >lua
     -- Enable filetype-based activation of the config.
     vim.lsp.enable('clangd')
 <
+
+lspconfig provides type annotations for LSP settings, see |lspconfig-settings-types|.
+
                                                           *lspconfig-resolved*
 You can call the "index" form of vim.lsp.config to get the resolved config
 without activating it: >lua
@@ -138,6 +141,34 @@ NEW CONFIGS                                           *lspconfig-new*
 
 To create a new config, see |lsp-config| (requires Nvim 0.11+).
 To contribute a config to nvim-lspconfig, see ../CONTRIBUTING.md.
+
+==============================================================================
+SETTINGS TYPES                                        lspconfig-settings-types
+
+`nvim-lspconfig` generates Lua type definitions for each supported LSP server.
+By manually adding annotations (e.g., `---@type lspconfig.settings.server_name`),
+you enable auto-completion and diagnostics for your server settings.
+
+Example: >lua
+  ---@type vim.lsp.Config
+  local config = {
+    ---@type lspconfig.settings.lua_ls
+    settings = {
+      Lua = {
+        runtime = {
+          version = 'LuaJIT',
+        },
+        workspace = {
+          library = {
+            vim.env.VIMRUNTIME,
+          }
+        },
+      },
+    },
+  }
+
+  vim.lsp.config('lua_ls', config)
+<
 
 ==============================================================================
 COMPLETION SUPPORT                                        *lspconfig-completion*

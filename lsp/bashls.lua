@@ -12,6 +12,7 @@
 ---@type vim.lsp.Config
 return {
   cmd = { 'bash-language-server', 'start' },
+  ---@type lspconfig.settings.bashls
   settings = {
     bashIde = {
       -- Glob pattern for finding and parsing shell script files in the workspace.

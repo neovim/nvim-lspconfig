@@ -1,0 +1,362 @@
+---@meta
+
+---@class _.lspconfig.settings.julials.Julia.Execution
+---Print executed code in REPL and append it to the REPL history.
+---@field codeInREPL? boolean
+---Show separate inline results for all code blocks in a cell
+---@field inlineResultsForCellEvaluation? boolean
+---Global override for the code execution module. Leave empty to automatically choose a context module.
+---
+---```lua
+---default = ""
+---```
+---@field module? string
+---Specifies how to show inline execution results
+---
+---```lua
+---default = "both"
+---```
+---@field resultType? "REPL" | "inline" | "inline, errors in REPL" | "both"
+---Save file before execution
+---@field saveOnEval? boolean
+
+---@class _.lspconfig.settings.julials.Julia.InlayHints.Runtime
+---Enable display of runtime inlay hints. These hints are provided by packages that overload a `show` method for the `application/vnd.julia-vscode.inlayHints` MIME type.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.julials.Julia.InlayHints.Static.ParameterNames
+---Enable name hints for function parameters:
+---```julia
+---foo(#= bar: =# 42)
+---```
+---
+---```lua
+---default = "literals"
+---```
+---@field enabled? "none" | "literals" | "all"
+
+---@class _.lspconfig.settings.julials.Julia.InlayHints.Static.VariableTypes
+---Enable type hints for variable definitions:
+---```julia
+---foo #=::Int64=# = 42
+---```
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.julials.Julia.InlayHints.Static
+---Enable display of static inlay hints.
+---@field enabled? boolean
+---@field parameterNames? _.lspconfig.settings.julials.Julia.InlayHints.Static.ParameterNames
+---@field variableTypes? _.lspconfig.settings.julials.Julia.InlayHints.Static.VariableTypes
+
+---@class _.lspconfig.settings.julials.Julia.InlayHints
+---@field runtime? _.lspconfig.settings.julials.Julia.InlayHints.Runtime
+---@field static? _.lspconfig.settings.julials.Julia.InlayHints.Static
+
+---@class _.lspconfig.settings.julials.Julia.Juliaup.Install
+---Show Juliaup install recommendation.
+---
+---```lua
+---default = true
+---```
+---@field hint? boolean
+
+---@class _.lspconfig.settings.julials.Julia.Juliaup
+---If enabled and a custom Juliaup server is set via `julia.juliaup.server`, Juliaup related configuration will be stored in a server-scoped directory. If the `JULIAUP_DEPOT_PATH` environment variable is set, this setting has no effect.
+---
+---```lua
+---default = true
+---```
+---@field customDepot? boolean
+---@field install? _.lspconfig.settings.julials.Julia.Juliaup.Install
+---Juliaup mirror. Defaults to the official sources.
+---@field server? string
+
+---@class _.lspconfig.settings.julials.Julia.Lint
+---This compares call signatures against all known methods for the called function. Calls with too many or too few arguments, or unknown keyword parameters are highlighted.
+---
+---```lua
+---default = true
+---```
+---@field call? boolean
+---Check for constant conditionals in if statements that result in branches never being reached.
+---
+---```lua
+---default = true
+---```
+---@field constif? boolean
+---Check variables used in type declarations are datatypes.
+---
+---```lua
+---default = true
+---```
+---@field datadecl? boolean
+---Specifies sub-directories in [a package directory](https://docs.julialang.org/en/v1/manual/code-loading/#Package-directories-1) where only basic linting is. This drastically lowers the chance for false positives.
+---
+---```lua
+---default = { "docs", "test" }
+---```
+---@field disabledDirs? any[]
+---Check iterator syntax of loops. Will identify, for example, attempts to iterate over single values.
+---
+---```lua
+---default = true
+---```
+---@field iter? boolean
+---Check for deterministic lazy boolean operators.
+---
+---```lua
+---default = true
+---```
+---@field lazy? boolean
+---Highlight unknown symbols. The `symbols` option will not mark unknown fields.
+---
+---```lua
+---default = "none"
+---```
+---@field missingrefs? "none" | "symbols" | "all"
+---Check submodule names do not shadow their parent's name.
+---
+---```lua
+---default = true
+---```
+---@field modname? boolean
+---Check for use of `==` rather than `===` when comparing against `nothing`.
+---
+---```lua
+---default = true
+---```
+---@field nothingcomp? boolean
+---Check for type piracy - the overloading of external functions with methods specified for external datatypes. 'External' here refers to imported code.
+---
+---```lua
+---default = true
+---```
+---@field pirates? boolean
+---Run the linter on active files.
+---
+---```lua
+---default = true
+---```
+---@field run? boolean
+---Check parameters declared in `where` statements or datatype declarations are used.
+---
+---```lua
+---default = true
+---```
+---@field typeparam? boolean
+---Check that all declared arguments are used within the function body.
+---
+---```lua
+---default = true
+---```
+---@field useoffuncargs? boolean
+
+---@class _.lspconfig.settings.julials.Julia.PersistentSession
+---Always copy the command for connecting to an external REPL to the clipboard.
+---@field alwaysCopy? boolean
+---Behaviour when stopping a persistent session.
+---
+---```lua
+---default = "ask"
+---```
+---@field closeStrategy? "ask" | "close" | "disconnect"
+---Experimental: Starts the interactive Julia session in a persistent `tmux` session. Note that `tmux` must be available in the shell defined with `#julia.persistentSession.shell#`.
+---@field enabled? boolean
+---Shell used to start the persistent session.
+---
+---```lua
+---default = "/bin/sh"
+---```
+---@field shell? string
+---Argument to execute code in the configured shell, e.g. `-c` for sh-likes or `/c` for `cmd`. Can contain multiple arguments separated by spaces.
+---
+---```lua
+---default = "-c"
+---```
+---@field shellExecutionArgument? string
+---Name of the `tmux` session. Explicitly supports substitution for the `${userHome}`, `${workspaceFolder}`, `${workspaceFolderBasename}`, `${workspaceFolder:<FOLDER_NAME>}`, `${pathSeparator}`, `${env:<ENVIRONMENT_VARIABLE>}`, `${config:<CONFIG_VARIABLE>} tokens.
+---
+---```lua
+---default = "julia_vscode"
+---```
+---@field tmuxSessionName? string
+
+---@class _.lspconfig.settings.julials.Julia.Plots
+---Default MIME type for plots. Determines whether plots are rendered as PNG or SVG by default.
+---
+---```lua
+---default = "image/png"
+---```
+---@field defaultMimeType? "image/png" | "image/svg+xml"
+---Default directory for saving plots. Can either be relative to the current workspace or absolute.
+---@field path? string
+
+---@class _.lspconfig.settings.julials.Julia.Repl
+---Experimental: Keeps the terminal window around even if the underlying Julia process is terminated to help debugging of fatal errors. Try disabling this if you see rendering issues in the integrated Julia REPL.
+---@field keepAlive? boolean
+
+---@class _.lspconfig.settings.julials.Julia.Trace
+---Traces the communication between VS Code and the language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.julials.Julia.Workspace
+---Show top-level modules in the workspace.
+---
+---```lua
+---default = true
+---```
+---@field showModules? boolean
+
+---@class _.lspconfig.settings.julials.Julia
+---Number of threads to use for Julia processes. A value of `auto` works on Julia versions that allow for `--threads=auto`.
+---@field NumThreads? integer|string
+---Additional Julia arguments.
+---
+---```lua
+---default = {}
+---```
+---@field additionalArgs? any[]
+---Cell delimiter regular expressions for Julia files.
+---
+---```lua
+---default = { "^[ \\t]?#[ \\t]#+", "^##(?!#)", "^#([ \\t]?)%%", "^##([ \\t]?)-", "^##([ \\t]?)\\+" }
+---```
+---@field cellDelimiters? any[]
+---Sets the mode for completions.
+---
+---```lua
+---default = "qualify"
+---```
+---@field completionmode? "exportedonly" | "import" | "qualify"
+---Functions or modules that are set to compiled mode when setting the defaults.
+---
+---```lua
+---default = { "ALL_MODULES_EXCEPT_MAIN" }
+---```
+---@field debuggerDefaultCompiled? any[]
+---Delete Julia .cov files when running tests with coverage, leaving only a .lcov file behind.
+---
+---```lua
+---default = true
+---```
+---@field deleteJuliaCovFiles? boolean
+---Command to open files from the REPL (via setting the `JULIA_EDITOR` environment variable).
+---
+---```lua
+---default = "code"
+---```
+---@field editor? string
+---Enable crash reports to be sent to the julia VS Code extension developers.
+---@field enableCrashReporter? boolean
+---Enable usage data and errors to be sent to the julia VS Code extension developers.
+---@field enableTelemetry? boolean
+---Path to a julia environment. VS Code needs to be reloaded for changes to take effect. Explicitly supports substitution for the `${userHome}`, `${workspaceFolder}`, `${workspaceFolderBasename}`, `${workspaceFolder:<FOLDER_NAME>}`, `${pathSeparator}`, `${env:<ENVIRONMENT_VARIABLE>}`, `${config:<CONFIG_VARIABLE>}` tokens.
+---@field environmentPath? string
+---Environment variables that are added to the Julia executable's environment for every Julia process started by this extension. Variables defined here will be merged with (and usually override) the default process environment, but various environment variables will get overridden for some processes for stability reasons.
+---
+---```lua
+---default = {}
+---```
+---@field environmentVariables? table
+---Points to the Julia executable. This can either be an absolute path, an executable on your PATH, or a juliaup channel (valid formats `julia +$channel`, `+$channel`).
+---
+---```lua
+---default = ""
+---```
+---@field executablePath? string
+---@field execution? _.lspconfig.settings.julials.Julia.Execution
+---Whether to automatically show the plot navigator when plotting.
+---@field focusPlotNavigator? boolean
+---@field inlayHints? _.lspconfig.settings.julials.Julia.InlayHints
+---@field juliaup? _.lspconfig.settings.julials.Julia.Juliaup
+---Points to the julia executable used to launch the language server process. This overwrites julia.executablePath for the language server launch if present.
+---
+---```lua
+---default = ""
+---```
+---@field languageServerExecutablePath? string
+---Juliaup channel to use for the language server (e.g., 'release', 'lts', 'beta'). Can be overridden by JULIA_VSCODE_LANGUAGESERVER_CHANNEL environment variable.
+---
+---```lua
+---default = "release"
+---```
+---@field languageServerJuliaupChannel? string
+---@field lint? _.lspconfig.settings.julials.Julia.Lint
+---Number of processes to use for testing.
+---
+---```lua
+---default = 1
+---```
+---@field numTestProcesses? integer
+---Julia package server. Sets the `JULIA_PKG_SERVER` environment variable *before* starting a Julia process. Leave this empty to use the systemwide default. Requires a restart of the Julia process.
+---
+---```lua
+---default = ""
+---```
+---@field packageServer? string
+---@field persistentSession? _.lspconfig.settings.julials.Julia.PersistentSession
+---@field plots? _.lspconfig.settings.julials.Julia.Plots
+---@field repl? _.lspconfig.settings.julials.Julia.Repl
+---Request runtime completions from the integrated REPL.
+---@field runtimeCompletions? boolean
+---Enable display of runtime diagnostics. These diagnostics are provided by packages that overload a `show` method for the `application/vnd.julia-vscode.diagnostics` MIME type.
+---
+---```lua
+---default = true
+---```
+---@field showRuntimeDiagnostics? boolean
+---Download symbol server cache files from GitHub.
+---@field symbolCacheDownload? boolean
+---Symbol server cache download URL.
+---
+---```lua
+---default = "https://www.julia-vscode.org/symbolcache"
+---```
+---@field symbolserverUpstream? string
+---@field trace? _.lspconfig.settings.julials.Julia.Trace
+---Enable highlighting of the current cell delimited by `#julia.cellDelimiters#`.
+---
+---```lua
+---default = true
+---```
+---@field useCellHighlighting? boolean
+---Enable CodeLens for showing run actions above cells delimited by `#julia.cellDelimiters#`.
+---
+---```lua
+---default = true
+---```
+---@field useCodeLens? boolean
+---Display plots within VS Code. Might require a restart of the Julia process.
+---
+---```lua
+---default = true
+---```
+---@field usePlotPane? boolean
+---Display [progress bars](https://github.com/JunoLab/ProgressLogging.jl) within VS Code.
+---
+---```lua
+---default = true
+---```
+---@field useProgressFrontend? boolean
+---Load Revise.jl on startup of the REPL.
+---
+---```lua
+---default = true
+---```
+---@field useRevise? boolean
+---@field workspace? _.lspconfig.settings.julials.Julia.Workspace
+
+---@class lspconfig.settings.julials
+---@field julia? _.lspconfig.settings.julials.Julia

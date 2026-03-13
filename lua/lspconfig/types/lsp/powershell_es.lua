@@ -1,0 +1,351 @@
+---@meta
+
+---@class _.lspconfig.settings.powershell_es.Powershell.Buttons
+---Show buttons in the editor's title bar for moving the terminals pane (with the PowerShell Extension Terminal) around.
+---@field showPanelMovementButtons? boolean
+---Show the `Run` and `Run Selection` buttons in the editor's title bar.
+---
+---```lua
+---default = true
+---```
+---@field showRunButtons? boolean
+
+---@class _.lspconfig.settings.powershell_es.Powershell.CodeFolding
+---Enables syntax based code folding. When disabled, the default indentation based code folding is used.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Shows the last line of a folded section similar to the default VS Code folding style. When disabled, the entire folded region is hidden.
+---
+---```lua
+---default = true
+---```
+---@field showLastLine? boolean
+
+---@class _.lspconfig.settings.powershell_es.Powershell.CodeFormatting
+---Adds a space before and after the pipeline operator (`|`) if it is missing.
+---
+---```lua
+---default = true
+---```
+---@field addWhitespaceAroundPipe? boolean
+---Align assignment statements in a hashtable or a DSC Configuration.
+---
+---```lua
+---default = true
+---```
+---@field alignPropertyValuePairs? boolean
+---Replaces aliases with their aliased name.
+---@field autoCorrectAliases? boolean
+---Removes redundant semicolon(s) at the end of a line where a line terminator is sufficient.
+---@field avoidSemicolonsAsLineTerminators? boolean
+---Does not reformat one-line code blocks, such as: `if (...) {...} else {...}`.
+---
+---```lua
+---default = true
+---```
+---@field ignoreOneLineBlock? boolean
+---Adds a newline (line break) after a closing brace.
+---
+---```lua
+---default = true
+---```
+---@field newLineAfterCloseBrace? boolean
+---Adds a newline (line break) after an open brace.
+---
+---```lua
+---default = true
+---```
+---@field newLineAfterOpenBrace? boolean
+---Places open brace on the same line as its associated statement.
+---
+---```lua
+---default = true
+---```
+---@field openBraceOnSameLine? boolean
+---Whether to increase indentation after a pipeline for multi-line statements. See [PSScriptAnalyzer](https://github.com/PowerShell/PSScriptAnalyzer/blob/a94d9f5666bba9f569cdf9c1bc99556934f2b8f4/docs/Rules/UseConsistentIndentation.md#pipelineindentation-string-default-value-is-increaseindentationforfirstpipeline) for examples. It is suggested to use `IncreaseIndentationForFirstPipeline` instead of the default `NoIndentation`. **This default may change in the future,** please see the [Request For Comment](https://github.com/PowerShell/vscode-powershell/issues/4296).
+---
+---```lua
+---default = "NoIndentation"
+---```
+---@field pipelineIndentationStyle? "IncreaseIndentationForFirstPipeline" | "IncreaseIndentationAfterEveryPipeline" | "NoIndentation" | "None"
+---Sets the code formatting options to follow the given indent style in a way that is compatible with PowerShell syntax. Any setting other than `Custom` will configure (and override) the settings:
+---
+---* `#powershell.codeFormatting.openBraceOnSameLine#`
+---
+---* `#powershell.codeFormatting.newLineAfterOpenBrace#`
+---
+---* `#powershell.codeFormatting.newLineAfterCloseBrace#`
+---
+---For more information about the brace styles, please see [PoshCode's discussion](https://github.com/PoshCode/PowerShellPracticeAndStyle/issues/81).
+---
+---```lua
+---default = "Custom"
+---```
+---@field preset? "Custom" | "Allman" | "OTBS" | "Stroustrup"
+---Trims extraneous whitespace (more than one character) before and after the pipeline operator (`|`).
+---@field trimWhitespaceAroundPipe? boolean
+---Use single quotes if a string is not interpolated and its value does not contain a single quote.
+---@field useConstantStrings? boolean
+---Use correct casing for cmdlets.
+---@field useCorrectCasing? boolean
+---Adds a space after a separator (`,` and `;`).
+---
+---```lua
+---default = true
+---```
+---@field whitespaceAfterSeparator? boolean
+---Adds spaces before and after an operator (`=`, `+`, `-`, etc.).
+---
+---```lua
+---default = true
+---```
+---@field whitespaceAroundOperator? boolean
+---**Deprecated:** Please use the `#powershell.codeFormatting.addWhitespaceAroundPipe#` setting instead. If you've used this setting before, we have moved it for you automatically.
+---
+---```lua
+---default = true
+---```
+---@field whitespaceAroundPipe? boolean
+---Adds a space between a keyword and its associated script-block expression.
+---
+---```lua
+---default = true
+---```
+---@field whitespaceBeforeOpenBrace? boolean
+---Adds a space between a keyword (`if`, `elseif`, `while`, `switch`, etc.) and its associated conditional expression.
+---
+---```lua
+---default = true
+---```
+---@field whitespaceBeforeOpenParen? boolean
+---Removes redundant whitespace between parameters.
+---@field whitespaceBetweenParameters? boolean
+---Adds a space after an opening brace (`{`) and before a closing brace (`}`).
+---
+---```lua
+---default = true
+---```
+---@field whitespaceInsideBrace? boolean
+
+---@class _.lspconfig.settings.powershell_es.Powershell.Debugging
+---Creates a temporary PowerShell Extension Terminal for each debugging session. This is useful for debugging PowerShell classes and binary modules.
+---@field createTemporaryIntegratedConsole? boolean
+---Sets the operator used to launch scripts.
+---
+---```lua
+---default = "DotSource"
+---```
+---@field executeMode? "DotSource" | "Call"
+
+---@class _.lspconfig.settings.powershell_es.Powershell.Developer
+---Specifies an alternative path to the folder containing modules that are bundled with the PowerShell extension, that is: PowerShell Editor Services, PSScriptAnalyzer and PSReadLine. **This setting is only meant for extension developers and requires the extension to be run in development mode!**
+---
+---```lua
+---default = "../../PowerShellEditorServices/module"
+---```
+---@field bundledModulesPath? string
+---Sets the log verbosity for both the extension and its LSP server, PowerShell Editor Services. **Please set to `Trace` when recording logs for a bug report!**
+---
+---```lua
+---default = "Warning"
+---```
+---@field editorServicesLogLevel? "Trace" | "Debug" | "Information" | "Warning" | "Error" | "None"
+---Launches the LSP server with the `/waitForDebugger` flag to force it to wait for a .NET debugger to attach before proceeding, and emit its PID until then. **This setting is only meant for extension developers and requires the extension to be run in development mode!**
+---@field editorServicesWaitForDebugger? boolean
+---An array of strings that enable experimental features in the PowerShell extension. **No flags are currently available!**
+---
+---```lua
+---default = {}
+---```
+---@field featureFlags? string[]
+---On Windows we launch the PowerShell executable with `-ExecutionPolicy Bypass` so that the LSP server (PowerShell Editor Services module) will launch without issue. Some anti-virus programs disallow this command-line argument and this flag can be used to remove it. **Using this setting may require trusting the script manually in order for it to launch!**
+---
+---```lua
+---default = true
+---```
+---@field setExecutionPolicy? boolean
+---Traces the DAP communication between VS Code and the PowerShell Editor Services [DAP Server](https://microsoft.github.io/debug-adapter-protocol/). The output will be logged and also visible in the Output pane, where the verbosity is configurable. **For extension developers and issue troubleshooting only!**
+---@field traceDap? boolean
+---Specifies how many seconds the extension will wait for the LSP server, PowerShell Editor Services, to connect. The default is four minutes; try increasing this value if your computer is particularly slow (often caused by overactive anti-malware programs).
+---
+---```lua
+---default = 240
+---```
+---@field waitForSessionFileTimeoutSeconds? number
+
+---@class _.lspconfig.settings.powershell_es.Powershell.IntegratedConsole
+---Switches focus to the console when a script selection is run or a script file is debugged.
+---
+---```lua
+---default = true
+---```
+---@field focusConsoleOnExecute? boolean
+---Use the VS Code API to clear the terminal since that's the only reliable way to clear the scrollback buffer. Turn this on if you're used to `Clear-Host` clearing scroll history. **This setting is not recommended and likely to be deprecated!**
+---@field forceClearScrollbackBuffer? boolean
+---Shows the Extension Terminal when the PowerShell extension is initialized. When disabled, the pane is not opened on startup, but the Extension Terminal is still created in order to power the extension's features.
+---
+---```lua
+---default = true
+---```
+---@field showOnStartup? boolean
+---Starts the Extension Terminal in the background. **If this is enabled, to access the terminal you must run the [Show Extension Terminal command](command:PowerShell.ShowSessionConsole), and once shown it cannot be put back into the background.** This option completely hides the Extension Terminal from the terminals view. You are probably looking for the `#powershell.integratedConsole.showOnStartup#` option instead.
+---@field startInBackground? boolean
+---Sets the startup location for Extension Terminal.
+---
+---```lua
+---default = "Panel"
+---```
+---@field startLocation? "Editor" | "Panel"
+---Do not show the startup banner in the PowerShell Extension Terminal.
+---@field suppressStartupBanner? boolean
+---This will disable the use of PSReadLine in the PowerShell Extension Terminal and use a legacy implementation. **This setting is not recommended and likely to be deprecated!**
+---@field useLegacyReadLine? boolean
+
+---@class _.lspconfig.settings.powershell_es.Powershell.Pester
+---This setting controls the appearance of the `Run Tests` and `Debug Tests` CodeLenses that appears above Pester tests.
+---
+---```lua
+---default = true
+---```
+---@field codeLens? boolean
+---Defines the verbosity of output to be used when debugging a test or a block. For Pester 5 and newer the default value `Diagnostic` will print additional information about discovery, skipped and filtered tests, mocking and more.
+---
+---```lua
+---default = "Diagnostic"
+---```
+---@field debugOutputVerbosity? "None" | "Minimal" | "Normal" | "Detailed" | "Diagnostic"
+---Defines the verbosity of output to be used. For Pester 5 and newer the default value `FromPreference` will use the `Output` settings from the `$PesterPreference` defined in the caller's context, and will default to `Normal` if there is none. For Pester 4 the `FromPreference` and `Normal` options map to `All`, and `Minimal` option maps to `Fails`.
+---
+---```lua
+---default = "FromPreference"
+---```
+---@field outputVerbosity? "FromPreference" | "None" | "Minimal" | "Normal" | "Detailed" | "Diagnostic"
+---Use a CodeLens that is compatible with Pester 4. Disabling this will show `Run Tests` on all `It`, `Describe` and `Context` blocks, and will correctly work only with Pester 5 and newer.
+---
+---```lua
+---default = true
+---```
+---@field useLegacyCodeLens? boolean
+
+---@class _.lspconfig.settings.powershell_es.Powershell.ScriptAnalysis
+---Enables real-time script analysis using [PSScriptAnalyzer](https://github.com/PowerShell/PSScriptAnalyzer) that populates the [Problems view](command:workbench.panel.markers.view.focus).
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Specifies the path to a [PSScriptAnalyzer](https://github.com/PowerShell/PSScriptAnalyzer) settings file. **This setting may not work as expected currently!**
+---
+---```lua
+---default = "PSScriptAnalyzerSettings.psd1"
+---```
+---@field settingsPath? string
+
+---@class _.lspconfig.settings.powershell_es.Powershell.SideBar
+---Specifies an array of modules to exclude from Command Explorer listing.
+---
+---```lua
+---default = {}
+---```
+---@field CommandExplorerExcludeFilter? string[]
+---Specifies the visibility of the Command Explorer in the side bar.
+---@field CommandExplorerVisibility? boolean
+
+---@class _.lspconfig.settings.powershell_es.Powershell.StartAsLoginShell
+---Starts the PowerShell extension's underlying PowerShell process as a login shell, if applicable.
+---@field linux? boolean
+---Starts the PowerShell extension's underlying PowerShell process as a login shell, if applicable.
+---
+---```lua
+---default = true
+---```
+---@field osx? boolean
+
+---@class _.lspconfig.settings.powershell_es.Powershell.Trace
+---Traces the communication between VS Code and the PowerShell Editor Services [LSP Server](https://microsoft.github.io/language-server-protocol/). The output will be logged and also visible in the Output pane, where the verbosity is configurable. **For extension developers and issue troubleshooting only!**
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.powershell_es.Powershell
+---Specifies to search for references only within open documents instead of all workspace files. An alternative to `#powershell.enableReferencesCodeLens#` that allows large workspaces to support some references without the performance impact.
+---@field analyzeOpenDocumentsOnly? boolean
+---@field buttons? _.lspconfig.settings.powershell_es.Powershell.Buttons
+---@field codeFolding? _.lspconfig.settings.powershell_es.Powershell.CodeFolding
+---@field codeFormatting? _.lspconfig.settings.powershell_es.Powershell.CodeFormatting
+---A path where the Extension Terminal will be launched. Both the PowerShell process's and the shell's location will be set to this directory. Does not support variables, but does support the use of '~' and paths relative to a single workspace. **For multi-root workspaces, use the name of the folder you wish to have as the cwd.**
+---
+---```lua
+---default = ""
+---```
+---@field cwd? string
+---@field debugging? _.lspconfig.settings.powershell_es.Powershell.Debugging
+---@field developer? _.lspconfig.settings.powershell_es.Powershell.Developer
+---Specifies whether the extension loads [PowerShell profiles](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles). Note that the extension's "Current Host" profile is `Microsoft.VSCode_profile.ps1`, which will be loaded instead of the default "Current Host" profile of `Microsoft.PowerShell_profile.ps1`. Use the "All Hosts" profile `profile.ps1` for common configuration.
+---
+---```lua
+---default = true
+---```
+---@field enableProfileLoading? boolean
+---Specifies if Code Lenses are displayed above function definitions, used to show the number of times the function is referenced in the workspace and navigate to those references. Large workspaces may want to disable this setting if performance is compromised. See also `#powershell.analyzeOpenDocumentsOnly#`.
+---
+---```lua
+---default = true
+---```
+---@field enableReferencesCodeLens? boolean
+---Specifies the [comment based help](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comment_based_help) completion style triggered by typing ` ##`.
+---
+---```lua
+---default = "BlockComment"
+---```
+---@field helpCompletion? "Disabled" | "BlockComment" | "LineComment"
+---@field integratedConsole? _.lspconfig.settings.powershell_es.Powershell.IntegratedConsole
+---@field pester? _.lspconfig.settings.powershell_es.Powershell.Pester
+---Specifies a list of Item / Value pairs where the **Item** is a user-chosen name and the **Value** is an absolute path to a PowerShell executable. The name appears in the [Session Menu Command](command:PowerShell.ShowSessionMenu) and is used to reference this executable in the `#powershell.powerShellDefaultVersion#` setting.
+---
+---```lua
+---default = {}
+---```
+---@field powerShellAdditionalExePaths? table
+---Specifies the default PowerShell version started by the extension. The name must match what is displayed in the [Session Menu command](command:PowerShell.ShowSessionMenu), for example, `Windows PowerShell (x86)`. You can specify additional PowerShell executables with the `#powershell.powerShellAdditionalExePaths#` setting.
+---
+---```lua
+---default = ""
+---```
+---@field powerShellDefaultVersion? string
+---**Deprecated:** Specifies the path to the PowerShell executable.
+---
+---```lua
+---default = ""
+---```
+---@field powerShellExePath? string
+---**Deprecated:** Specifies whether you should be prompted to update your version of `PackageManagement` if it's under 1.4.6.
+---@field promptToUpdatePackageManagement? boolean
+---Specifies whether you may be prompted to update your version of PowerShell.
+---
+---```lua
+---default = true
+---```
+---@field promptToUpdatePowerShell? boolean
+---@field scriptAnalysis? _.lspconfig.settings.powershell_es.Powershell.ScriptAnalysis
+---@field sideBar? _.lspconfig.settings.powershell_es.Powershell.SideBar
+---@field startAsLoginShell? _.lspconfig.settings.powershell_es.Powershell.StartAsLoginShell
+---Starts the PowerShell extension automatically when a PowerShell file is opened. If `false`, to start the extension use the [Restart Session command](command:PowerShell.RestartSession). **IntelliSense, code navigation, the Extension Terminal, code formatting, and other features are not enabled until the extension starts.**
+---
+---```lua
+---default = true
+---```
+---@field startAutomatically? boolean
+---Suppresses the warning message when any of `#powershell.powerShellAdditionalExePaths#` is not found.
+---@field suppressAdditionalExeNotFoundWarning? boolean
+---@field trace? _.lspconfig.settings.powershell_es.Powershell.Trace
+---**Deprecated:** Uses the 32-bit language service on 64-bit Windows. This setting has no effect on 32-bit Windows or on the PowerShell extension debugger, which has its own architecture configuration.
+---@field useX86Host? boolean
+
+---@class lspconfig.settings.powershell_es
+---@field powershell? _.lspconfig.settings.powershell_es.Powershell

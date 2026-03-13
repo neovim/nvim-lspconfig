@@ -1,0 +1,638 @@
+---@meta
+
+---@class _.lspconfig.settings.ltex.Ltex.AdditionalRules
+---Enable LanguageTool rules that are marked as picky and that are disabled by default, e.g., rules about passive voice, sentence length, etc., at the cost of more false positives.
+---@field enablePickyRules? boolean
+---Optional path to a directory with rules of a language model with *n*-gram occurrence counts. Set this setting to the parent directory that contains subdirectories for languages (e.g., `en`).
+---
+---```lua
+---default = ""
+---```
+---@field languageModel? string
+---Optional mother tongue of the user (e.g., `"de-DE"`). [More info...](https://valentjn.github.io/ltex/settings.html#ltexadditionalrulesmothertongue)
+---
+---```lua
+---default = ""
+---```
+---@field motherTongue? "" | "ar" | "ast-ES" | "be-BY" | "br-FR" | "ca-ES" | "ca-ES-valencia" | "da-DK" | "de" | "de-AT" | "de-CH" | "de-DE" | "de-DE-x-simple-language" | "el-GR" | "en" | "en-AU" | "en-CA" | "en-GB" | "en-NZ" | "en-US" | "en-ZA" | "eo" | "es" | "es-AR" | "fa" | "fr" | "ga-IE" | "gl-ES" | "it" | "ja-JP" | "km-KH" | "nl" | "nl-BE" | "pl-PL" | "pt" | "pt-AO" | "pt-BR" | "pt-MZ" | "pt-PT" | "ro-RO" | "ru-RU" | "sk-SK" | "sl-SI" | "sv" | "ta-IN" | "tl-PH" | "uk-UA" | "zh-CN"
+---Optional path to a directory with rules of a pretrained neural network model.
+---
+---```lua
+---default = ""
+---```
+---@field neuralNetworkModel? string
+---Optional path to a directory with rules of a word2vec language model.
+---
+---```lua
+---default = ""
+---```
+---@field word2VecModel? string
+
+---@class _.lspconfig.settings.ltex.Ltex.Bibtex
+---List of BibTeX fields whose values are to be checked in BibTeX files. [More info...](https://valentjn.github.io/ltex/settings.html#ltexbibtexfields)
+---
+---```lua
+---default = {}
+---```
+---@field fields? table
+
+---Controls which `settings.json` or external setting file ([see documentation](https://valentjn.github.io/ltex/vscode-ltex/setting-scopes-files.html#external-setting-files)) to update when using one of the quick fixes.
+---
+---```lua
+---default = {
+---  dictionary = "workspaceFolderExternalFile",
+---  disabledRules = "workspaceFolderExternalFile",
+---  hiddenFalsePositives = "workspaceFolderExternalFile"
+---}
+---```
+---@class _.lspconfig.settings.ltex.Ltex.ConfigurationTarget
+---@field dictionary? "user" | "workspace" | "workspaceFolder" | "userExternalFile" | "workspaceExternalFile" | "workspaceFolderExternalFile"
+---@field disabledRules? "user" | "workspace" | "workspaceFolder" | "userExternalFile" | "workspaceExternalFile" | "workspaceFolderExternalFile"
+---@field hiddenFalsePositives? "user" | "workspace" | "workspaceFolder" | "userExternalFile" | "workspaceExternalFile" | "workspaceFolderExternalFile"
+
+---Lists of additional words that should not be counted as spelling errors. [More info...](https://valentjn.github.io/ltex/settings.html#ltexdictionary)
+---
+---```lua
+---default = {}
+---```
+---@class _.lspconfig.settings.ltex.Ltex.Dictionary
+---List of additional `ar` (Arabic) words that should not be counted as spelling errors.
+---@field ar? string[]
+---List of additional `ast-ES` (Asturian) words that should not be counted as spelling errors.
+---@field ["ast-ES"]? string[]
+---List of additional `be-BY` (Belarusian) words that should not be counted as spelling errors.
+---@field ["be-BY"]? string[]
+---List of additional `br-FR` (Breton) words that should not be counted as spelling errors.
+---@field ["br-FR"]? string[]
+---List of additional `ca-ES` (Catalan) words that should not be counted as spelling errors.
+---@field ["ca-ES"]? string[]
+---List of additional `ca-ES-valencia` (Catalan (Valencian)) words that should not be counted as spelling errors.
+---@field ["ca-ES-valencia"]? string[]
+---List of additional `da-DK` (Danish) words that should not be counted as spelling errors.
+---@field ["da-DK"]? string[]
+---List of additional `de` (German) words that should not be counted as spelling errors.
+---@field de? string[]
+---List of additional `de-AT` (German (Austria)) words that should not be counted as spelling errors.
+---@field ["de-AT"]? string[]
+---List of additional `de-CH` (German (Swiss)) words that should not be counted as spelling errors.
+---@field ["de-CH"]? string[]
+---List of additional `de-DE` (German (Germany)) words that should not be counted as spelling errors.
+---@field ["de-DE"]? string[]
+---List of additional `de-DE-x-simple-language` (Simple German) words that should not be counted as spelling errors.
+---@field ["de-DE-x-simple-language"]? string[]
+---List of additional `el-GR` (Greek) words that should not be counted as spelling errors.
+---@field ["el-GR"]? string[]
+---List of additional `en` (English) words that should not be counted as spelling errors.
+---@field en? string[]
+---List of additional `en-AU` (English (Australian)) words that should not be counted as spelling errors.
+---@field ["en-AU"]? string[]
+---List of additional `en-CA` (English (Canadian)) words that should not be counted as spelling errors.
+---@field ["en-CA"]? string[]
+---List of additional `en-GB` (English (GB)) words that should not be counted as spelling errors.
+---@field ["en-GB"]? string[]
+---List of additional `en-NZ` (English (New Zealand)) words that should not be counted as spelling errors.
+---@field ["en-NZ"]? string[]
+---List of additional `en-US` (English (US)) words that should not be counted as spelling errors.
+---@field ["en-US"]? string[]
+---List of additional `en-ZA` (English (South African)) words that should not be counted as spelling errors.
+---@field ["en-ZA"]? string[]
+---List of additional `eo` (Esperanto) words that should not be counted as spelling errors.
+---@field eo? string[]
+---List of additional `es` (Spanish) words that should not be counted as spelling errors.
+---@field es? string[]
+---List of additional `es-AR` (Spanish (voseo)) words that should not be counted as spelling errors.
+---@field ["es-AR"]? string[]
+---List of additional `fa` (Persian) words that should not be counted as spelling errors.
+---@field fa? string[]
+---List of additional `fr` (French) words that should not be counted as spelling errors.
+---@field fr? string[]
+---List of additional `ga-IE` (Irish) words that should not be counted as spelling errors.
+---@field ["ga-IE"]? string[]
+---List of additional `gl-ES` (Galician) words that should not be counted as spelling errors.
+---@field ["gl-ES"]? string[]
+---List of additional `it` (Italian) words that should not be counted as spelling errors.
+---@field it? string[]
+---List of additional `ja-JP` (Japanese) words that should not be counted as spelling errors.
+---@field ["ja-JP"]? string[]
+---List of additional `km-KH` (Khmer) words that should not be counted as spelling errors.
+---@field ["km-KH"]? string[]
+---List of additional `nl` (Dutch) words that should not be counted as spelling errors.
+---@field nl? string[]
+---List of additional `nl-BE` (Dutch (Belgium)) words that should not be counted as spelling errors.
+---@field ["nl-BE"]? string[]
+---List of additional `pl-PL` (Polish) words that should not be counted as spelling errors.
+---@field ["pl-PL"]? string[]
+---List of additional `pt` (Portuguese) words that should not be counted as spelling errors.
+---@field pt? string[]
+---List of additional `pt-AO` (Portuguese (Angola preAO)) words that should not be counted as spelling errors.
+---@field ["pt-AO"]? string[]
+---List of additional `pt-BR` (Portuguese (Brazil)) words that should not be counted as spelling errors.
+---@field ["pt-BR"]? string[]
+---List of additional `pt-MZ` (Portuguese (Moçambique preAO)) words that should not be counted as spelling errors.
+---@field ["pt-MZ"]? string[]
+---List of additional `pt-PT` (Portuguese (Portugal)) words that should not be counted as spelling errors.
+---@field ["pt-PT"]? string[]
+---List of additional `ro-RO` (Romanian) words that should not be counted as spelling errors.
+---@field ["ro-RO"]? string[]
+---List of additional `ru-RU` (Russian) words that should not be counted as spelling errors.
+---@field ["ru-RU"]? string[]
+---List of additional `sk-SK` (Slovak) words that should not be counted as spelling errors.
+---@field ["sk-SK"]? string[]
+---List of additional `sl-SI` (Slovenian) words that should not be counted as spelling errors.
+---@field ["sl-SI"]? string[]
+---List of additional `sv` (Swedish) words that should not be counted as spelling errors.
+---@field sv? string[]
+---List of additional `ta-IN` (Tamil) words that should not be counted as spelling errors.
+---@field ["ta-IN"]? string[]
+---List of additional `tl-PH` (Tagalog) words that should not be counted as spelling errors.
+---@field ["tl-PH"]? string[]
+---List of additional `uk-UA` (Ukrainian) words that should not be counted as spelling errors.
+---@field ["uk-UA"]? string[]
+---List of additional `zh-CN` (Chinese) words that should not be counted as spelling errors.
+---@field ["zh-CN"]? string[]
+
+---Lists of rules that should be disabled (if enabled by default by LanguageTool). [More info...](https://valentjn.github.io/ltex/settings.html#ltexdisabledrules)
+---
+---```lua
+---default = {}
+---```
+---@class _.lspconfig.settings.ltex.Ltex.DisabledRules
+---List of additional `ar` (Arabic) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ar? string[]
+---List of additional `ast-ES` (Asturian) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["ast-ES"]? string[]
+---List of additional `be-BY` (Belarusian) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["be-BY"]? string[]
+---List of additional `br-FR` (Breton) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["br-FR"]? string[]
+---List of additional `ca-ES` (Catalan) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["ca-ES"]? string[]
+---List of additional `ca-ES-valencia` (Catalan (Valencian)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["ca-ES-valencia"]? string[]
+---List of additional `da-DK` (Danish) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["da-DK"]? string[]
+---List of additional `de` (German) rules that should be disabled (if enabled by default by LanguageTool).
+---@field de? string[]
+---List of additional `de-AT` (German (Austria)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["de-AT"]? string[]
+---List of additional `de-CH` (German (Swiss)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["de-CH"]? string[]
+---List of additional `de-DE` (German (Germany)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["de-DE"]? string[]
+---List of additional `de-DE-x-simple-language` (Simple German) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["de-DE-x-simple-language"]? string[]
+---List of additional `el-GR` (Greek) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["el-GR"]? string[]
+---List of additional `en` (English) rules that should be disabled (if enabled by default by LanguageTool).
+---@field en? string[]
+---List of additional `en-AU` (English (Australian)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["en-AU"]? string[]
+---List of additional `en-CA` (English (Canadian)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["en-CA"]? string[]
+---List of additional `en-GB` (English (GB)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["en-GB"]? string[]
+---List of additional `en-NZ` (English (New Zealand)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["en-NZ"]? string[]
+---List of additional `en-US` (English (US)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["en-US"]? string[]
+---List of additional `en-ZA` (English (South African)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["en-ZA"]? string[]
+---List of additional `eo` (Esperanto) rules that should be disabled (if enabled by default by LanguageTool).
+---@field eo? string[]
+---List of additional `es` (Spanish) rules that should be disabled (if enabled by default by LanguageTool).
+---@field es? string[]
+---List of additional `es-AR` (Spanish (voseo)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["es-AR"]? string[]
+---List of additional `fa` (Persian) rules that should be disabled (if enabled by default by LanguageTool).
+---@field fa? string[]
+---List of additional `fr` (French) rules that should be disabled (if enabled by default by LanguageTool).
+---@field fr? string[]
+---List of additional `ga-IE` (Irish) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["ga-IE"]? string[]
+---List of additional `gl-ES` (Galician) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["gl-ES"]? string[]
+---List of additional `it` (Italian) rules that should be disabled (if enabled by default by LanguageTool).
+---@field it? string[]
+---List of additional `ja-JP` (Japanese) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["ja-JP"]? string[]
+---List of additional `km-KH` (Khmer) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["km-KH"]? string[]
+---List of additional `nl` (Dutch) rules that should be disabled (if enabled by default by LanguageTool).
+---@field nl? string[]
+---List of additional `nl-BE` (Dutch (Belgium)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["nl-BE"]? string[]
+---List of additional `pl-PL` (Polish) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["pl-PL"]? string[]
+---List of additional `pt` (Portuguese) rules that should be disabled (if enabled by default by LanguageTool).
+---@field pt? string[]
+---List of additional `pt-AO` (Portuguese (Angola preAO)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["pt-AO"]? string[]
+---List of additional `pt-BR` (Portuguese (Brazil)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["pt-BR"]? string[]
+---List of additional `pt-MZ` (Portuguese (Moçambique preAO)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["pt-MZ"]? string[]
+---List of additional `pt-PT` (Portuguese (Portugal)) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["pt-PT"]? string[]
+---List of additional `ro-RO` (Romanian) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["ro-RO"]? string[]
+---List of additional `ru-RU` (Russian) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["ru-RU"]? string[]
+---List of additional `sk-SK` (Slovak) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["sk-SK"]? string[]
+---List of additional `sl-SI` (Slovenian) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["sl-SI"]? string[]
+---List of additional `sv` (Swedish) rules that should be disabled (if enabled by default by LanguageTool).
+---@field sv? string[]
+---List of additional `ta-IN` (Tamil) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["ta-IN"]? string[]
+---List of additional `tl-PH` (Tagalog) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["tl-PH"]? string[]
+---List of additional `uk-UA` (Ukrainian) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["uk-UA"]? string[]
+---List of additional `zh-CN` (Chinese) rules that should be disabled (if enabled by default by LanguageTool).
+---@field ["zh-CN"]? string[]
+
+---Lists of rules that should be enabled (if disabled by default by LanguageTool). [More info...](https://valentjn.github.io/ltex/settings.html#ltexenabledrules)
+---
+---```lua
+---default = {}
+---```
+---@class _.lspconfig.settings.ltex.Ltex.EnabledRules
+---List of additional `ar` (Arabic) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ar? string[]
+---List of additional `ast-ES` (Asturian) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["ast-ES"]? string[]
+---List of additional `be-BY` (Belarusian) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["be-BY"]? string[]
+---List of additional `br-FR` (Breton) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["br-FR"]? string[]
+---List of additional `ca-ES` (Catalan) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["ca-ES"]? string[]
+---List of additional `ca-ES-valencia` (Catalan (Valencian)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["ca-ES-valencia"]? string[]
+---List of additional `da-DK` (Danish) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["da-DK"]? string[]
+---List of additional `de` (German) rules that should be enabled (if disabled by default by LanguageTool).
+---@field de? string[]
+---List of additional `de-AT` (German (Austria)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["de-AT"]? string[]
+---List of additional `de-CH` (German (Swiss)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["de-CH"]? string[]
+---List of additional `de-DE` (German (Germany)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["de-DE"]? string[]
+---List of additional `de-DE-x-simple-language` (Simple German) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["de-DE-x-simple-language"]? string[]
+---List of additional `el-GR` (Greek) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["el-GR"]? string[]
+---List of additional `en` (English) rules that should be enabled (if disabled by default by LanguageTool).
+---@field en? string[]
+---List of additional `en-AU` (English (Australian)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["en-AU"]? string[]
+---List of additional `en-CA` (English (Canadian)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["en-CA"]? string[]
+---List of additional `en-GB` (English (GB)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["en-GB"]? string[]
+---List of additional `en-NZ` (English (New Zealand)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["en-NZ"]? string[]
+---List of additional `en-US` (English (US)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["en-US"]? string[]
+---List of additional `en-ZA` (English (South African)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["en-ZA"]? string[]
+---List of additional `eo` (Esperanto) rules that should be enabled (if disabled by default by LanguageTool).
+---@field eo? string[]
+---List of additional `es` (Spanish) rules that should be enabled (if disabled by default by LanguageTool).
+---@field es? string[]
+---List of additional `es-AR` (Spanish (voseo)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["es-AR"]? string[]
+---List of additional `fa` (Persian) rules that should be enabled (if disabled by default by LanguageTool).
+---@field fa? string[]
+---List of additional `fr` (French) rules that should be enabled (if disabled by default by LanguageTool).
+---@field fr? string[]
+---List of additional `ga-IE` (Irish) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["ga-IE"]? string[]
+---List of additional `gl-ES` (Galician) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["gl-ES"]? string[]
+---List of additional `it` (Italian) rules that should be enabled (if disabled by default by LanguageTool).
+---@field it? string[]
+---List of additional `ja-JP` (Japanese) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["ja-JP"]? string[]
+---List of additional `km-KH` (Khmer) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["km-KH"]? string[]
+---List of additional `nl` (Dutch) rules that should be enabled (if disabled by default by LanguageTool).
+---@field nl? string[]
+---List of additional `nl-BE` (Dutch (Belgium)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["nl-BE"]? string[]
+---List of additional `pl-PL` (Polish) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["pl-PL"]? string[]
+---List of additional `pt` (Portuguese) rules that should be enabled (if disabled by default by LanguageTool).
+---@field pt? string[]
+---List of additional `pt-AO` (Portuguese (Angola preAO)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["pt-AO"]? string[]
+---List of additional `pt-BR` (Portuguese (Brazil)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["pt-BR"]? string[]
+---List of additional `pt-MZ` (Portuguese (Moçambique preAO)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["pt-MZ"]? string[]
+---List of additional `pt-PT` (Portuguese (Portugal)) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["pt-PT"]? string[]
+---List of additional `ro-RO` (Romanian) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["ro-RO"]? string[]
+---List of additional `ru-RU` (Russian) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["ru-RU"]? string[]
+---List of additional `sk-SK` (Slovak) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["sk-SK"]? string[]
+---List of additional `sl-SI` (Slovenian) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["sl-SI"]? string[]
+---List of additional `sv` (Swedish) rules that should be enabled (if disabled by default by LanguageTool).
+---@field sv? string[]
+---List of additional `ta-IN` (Tamil) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["ta-IN"]? string[]
+---List of additional `tl-PH` (Tagalog) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["tl-PH"]? string[]
+---List of additional `uk-UA` (Ukrainian) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["uk-UA"]? string[]
+---List of additional `zh-CN` (Chinese) rules that should be enabled (if disabled by default by LanguageTool).
+---@field ["zh-CN"]? string[]
+
+---Lists of false-positive diagnostics to hide (by hiding all diagnostics of a specific rule within a specific sentence). [More info...](https://valentjn.github.io/ltex/settings.html#ltexhiddenfalsepositives)
+---
+---```lua
+---default = {}
+---```
+---@class _.lspconfig.settings.ltex.Ltex.HiddenFalsePositives
+---List of `ar` (Arabic) false-positive diagnostics to hide.
+---@field ar? string[]
+---List of `ast-ES` (Asturian) false-positive diagnostics to hide.
+---@field ["ast-ES"]? string[]
+---List of `be-BY` (Belarusian) false-positive diagnostics to hide.
+---@field ["be-BY"]? string[]
+---List of `br-FR` (Breton) false-positive diagnostics to hide.
+---@field ["br-FR"]? string[]
+---List of `ca-ES` (Catalan) false-positive diagnostics to hide.
+---@field ["ca-ES"]? string[]
+---List of `ca-ES-valencia` (Catalan (Valencian)) false-positive diagnostics to hide.
+---@field ["ca-ES-valencia"]? string[]
+---List of `da-DK` (Danish) false-positive diagnostics to hide.
+---@field ["da-DK"]? string[]
+---List of `de` (German) false-positive diagnostics to hide.
+---@field de? string[]
+---List of `de-AT` (German (Austria)) false-positive diagnostics to hide.
+---@field ["de-AT"]? string[]
+---List of `de-CH` (German (Swiss)) false-positive diagnostics to hide.
+---@field ["de-CH"]? string[]
+---List of `de-DE` (German (Germany)) false-positive diagnostics to hide.
+---@field ["de-DE"]? string[]
+---List of `de-DE-x-simple-language` (Simple German) false-positive diagnostics to hide.
+---@field ["de-DE-x-simple-language"]? string[]
+---List of `el-GR` (Greek) false-positive diagnostics to hide.
+---@field ["el-GR"]? string[]
+---List of `en` (English) false-positive diagnostics to hide.
+---@field en? string[]
+---List of `en-AU` (English (Australian)) false-positive diagnostics to hide.
+---@field ["en-AU"]? string[]
+---List of `en-CA` (English (Canadian)) false-positive diagnostics to hide.
+---@field ["en-CA"]? string[]
+---List of `en-GB` (English (GB)) false-positive diagnostics to hide.
+---@field ["en-GB"]? string[]
+---List of `en-NZ` (English (New Zealand)) false-positive diagnostics to hide.
+---@field ["en-NZ"]? string[]
+---List of `en-US` (English (US)) false-positive diagnostics to hide.
+---@field ["en-US"]? string[]
+---List of `en-ZA` (English (South African)) false-positive diagnostics to hide.
+---@field ["en-ZA"]? string[]
+---List of `eo` (Esperanto) false-positive diagnostics to hide.
+---@field eo? string[]
+---List of `es` (Spanish) false-positive diagnostics to hide.
+---@field es? string[]
+---List of `es-AR` (Spanish (voseo)) false-positive diagnostics to hide.
+---@field ["es-AR"]? string[]
+---List of `fa` (Persian) false-positive diagnostics to hide.
+---@field fa? string[]
+---List of `fr` (French) false-positive diagnostics to hide.
+---@field fr? string[]
+---List of `ga-IE` (Irish) false-positive diagnostics to hide.
+---@field ["ga-IE"]? string[]
+---List of `gl-ES` (Galician) false-positive diagnostics to hide.
+---@field ["gl-ES"]? string[]
+---List of `it` (Italian) false-positive diagnostics to hide.
+---@field it? string[]
+---List of `ja-JP` (Japanese) false-positive diagnostics to hide.
+---@field ["ja-JP"]? string[]
+---List of `km-KH` (Khmer) false-positive diagnostics to hide.
+---@field ["km-KH"]? string[]
+---List of `nl` (Dutch) false-positive diagnostics to hide.
+---@field nl? string[]
+---List of `nl-BE` (Dutch (Belgium)) false-positive diagnostics to hide.
+---@field ["nl-BE"]? string[]
+---List of `pl-PL` (Polish) false-positive diagnostics to hide.
+---@field ["pl-PL"]? string[]
+---List of `pt` (Portuguese) false-positive diagnostics to hide.
+---@field pt? string[]
+---List of `pt-AO` (Portuguese (Angola preAO)) false-positive diagnostics to hide.
+---@field ["pt-AO"]? string[]
+---List of `pt-BR` (Portuguese (Brazil)) false-positive diagnostics to hide.
+---@field ["pt-BR"]? string[]
+---List of `pt-MZ` (Portuguese (Moçambique preAO)) false-positive diagnostics to hide.
+---@field ["pt-MZ"]? string[]
+---List of `pt-PT` (Portuguese (Portugal)) false-positive diagnostics to hide.
+---@field ["pt-PT"]? string[]
+---List of `ro-RO` (Romanian) false-positive diagnostics to hide.
+---@field ["ro-RO"]? string[]
+---List of `ru-RU` (Russian) false-positive diagnostics to hide.
+---@field ["ru-RU"]? string[]
+---List of `sk-SK` (Slovak) false-positive diagnostics to hide.
+---@field ["sk-SK"]? string[]
+---List of `sl-SI` (Slovenian) false-positive diagnostics to hide.
+---@field ["sl-SI"]? string[]
+---List of `sv` (Swedish) false-positive diagnostics to hide.
+---@field sv? string[]
+---List of `ta-IN` (Tamil) false-positive diagnostics to hide.
+---@field ["ta-IN"]? string[]
+---List of `tl-PH` (Tagalog) false-positive diagnostics to hide.
+---@field ["tl-PH"]? string[]
+---List of `uk-UA` (Ukrainian) false-positive diagnostics to hide.
+---@field ["uk-UA"]? string[]
+---List of `zh-CN` (Chinese) false-positive diagnostics to hide.
+---@field ["zh-CN"]? string[]
+
+---@class _.lspconfig.settings.ltex.Ltex.Java
+---Initial size of the Java heap memory in megabytes (corresponds to Java's `-Xms` option, must be a positive integer). [More info...](https://valentjn.github.io/ltex/settings.html#ltexjavainitialheapsize)
+---
+---```lua
+---default = 64
+---```
+---@field initialHeapSize? integer
+---Maximum size of the Java heap memory in megabytes (corresponds to Java's `-Xmx` option, must be a positive integer). [More info...](https://valentjn.github.io/ltex/settings.html#ltexjavamaximumheapsize)
+---
+---```lua
+---default = 512
+---```
+---@field maximumHeapSize? integer
+---If set to an empty string, LTeX uses a Java distribution that is bundled with ltex-ls. You can point this setting to an existing Java installation on your computer to use that installation instead. [More info...](https://valentjn.github.io/ltex/settings.html#ltexjavapath)
+---
+---```lua
+---default = ""
+---```
+---@field path? string
+
+---@class _.lspconfig.settings.ltex.Ltex.LanguageToolOrg
+---API key for Premium API access. Only relevant if `ltex.languageToolHttpServerUri` is set.
+---
+---```lua
+---default = ""
+---```
+---@field apiKey? string
+---Username/email as used to log in at languagetool.org for Premium API access. Only relevant if `ltex.languageToolHttpServerUri` is set.
+---
+---```lua
+---default = ""
+---```
+---@field username? string
+
+---@class _.lspconfig.settings.ltex.Ltex.Latex
+---List of LaTeX commands to be handled by the LaTeX parser, listed together with empty arguments (e.g., `"\ref{}"`, `"\documentclass[]{}"`). [More info...](https://valentjn.github.io/ltex/settings.html#ltexlatexcommands)
+---
+---```lua
+---default = {}
+---```
+---@field commands? table
+---List of names of LaTeX environments to be handled by the LaTeX parser. [More info...](https://valentjn.github.io/ltex/settings.html#ltexlatexenvironments)
+---
+---```lua
+---default = {}
+---```
+---@field environments? table
+
+---@class _.lspconfig.settings.ltex.Ltex.LtexLs
+---```lua
+---default = ""
+---```
+---@field languageToolHttpServerUri? string
+---```lua
+---default = ""
+---```
+---@field languageToolOrgApiKey? string
+---```lua
+---default = ""
+---```
+---@field languageToolOrgUsername? string
+---Logging level (verbosity) of the ltex-ls server log, which is accessible via `View` › `Output` › `LTeX Language Server`. [More info...](https://valentjn.github.io/ltex/settings.html#ltexltex-lsloglevel)
+---
+---```lua
+---default = "fine"
+---```
+---@field logLevel? "severe" | "warning" | "info" | "config" | "fine" | "finer" | "finest"
+---If set to an empty string, LTeX automatically downloads [ltex-ls from GitHub](https://github.com/valentjn/ltex-ls/releases), stores it in the folder of the extension, and uses it for the checking process. You can point this setting to an ltex-ls release you downloaded by yourself. [More info...](https://valentjn.github.io/ltex/settings.html#ltexltex-lspath)
+---
+---```lua
+---default = ""
+---```
+---@field path? string
+
+---@class _.lspconfig.settings.ltex.Ltex.Markdown
+---List of Markdown node types to be handled by the Markdown parser. [More info...](https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes)
+---
+---```lua
+---default = {}
+---```
+---@field nodes? table
+
+---@class _.lspconfig.settings.ltex.Ltex.Trace
+---Debug setting to log the communication between language client and server. [More info...](https://valentjn.github.io/ltex/settings.html#ltextraceserver)
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.ltex.Ltex
+---@field additionalRules? _.lspconfig.settings.ltex.Ltex.AdditionalRules
+---@field bibtex? _.lspconfig.settings.ltex.Ltex.Bibtex
+---Controls when documents should be checked. [More info...](https://valentjn.github.io/ltex/settings.html#ltexcheckfrequency)
+---
+---```lua
+---default = "edit"
+---```
+---@field checkFrequency? "edit" | "save" | "manual"
+---If set to `true`, diagnostics of a file are cleared when the file is closed.
+---
+---```lua
+---default = true
+---```
+---@field clearDiagnosticsWhenClosingFile? boolean
+---Whether completion is enabled (also known as auto-completion, suggestions, or IntelliSense). [More info...](https://valentjn.github.io/ltex/settings.html#ltexcompletionenabled)
+---@field completionEnabled? boolean
+---Controls which `settings.json` or external setting file ([see documentation](https://valentjn.github.io/ltex/vscode-ltex/setting-scopes-files.html#external-setting-files)) to update when using one of the quick fixes.
+---
+---```lua
+---default = {
+---  dictionary = "workspaceFolderExternalFile",
+---  disabledRules = "workspaceFolderExternalFile",
+---  hiddenFalsePositives = "workspaceFolderExternalFile"
+---}
+---```
+---@field configurationTarget? _.lspconfig.settings.ltex.Ltex.ConfigurationTarget
+---Severity of the diagnostics corresponding to the grammar and spelling errors. [More info...](https://valentjn.github.io/ltex/settings.html#ltexdiagnosticseverity)
+---
+---```lua
+---default = "information"
+---```
+---@field diagnosticSeverity? any
+---Lists of additional words that should not be counted as spelling errors. [More info...](https://valentjn.github.io/ltex/settings.html#ltexdictionary)
+---
+---```lua
+---default = {}
+---```
+---@field dictionary? _.lspconfig.settings.ltex.Ltex.Dictionary
+---Lists of rules that should be disabled (if enabled by default by LanguageTool). [More info...](https://valentjn.github.io/ltex/settings.html#ltexdisabledrules)
+---
+---```lua
+---default = {}
+---```
+---@field disabledRules? _.lspconfig.settings.ltex.Ltex.DisabledRules
+---Controls whether the extension is enabled. Allows disabling LanguageTool on specific workspaces or for specific code language modes (i.e., file types). [More info...](https://valentjn.github.io/ltex/settings.html#ltexenabled)
+---
+---```lua
+---default = { "bibtex", "context", "context.tex", "html", "latex", "markdown", "org", "restructuredtext", "rsweave" }
+---```
+---@field enabled? any
+---Lists of rules that should be enabled (if disabled by default by LanguageTool). [More info...](https://valentjn.github.io/ltex/settings.html#ltexenabledrules)
+---
+---```lua
+---default = {}
+---```
+---@field enabledRules? _.lspconfig.settings.ltex.Ltex.EnabledRules
+---Lists of false-positive diagnostics to hide (by hiding all diagnostics of a specific rule within a specific sentence). [More info...](https://valentjn.github.io/ltex/settings.html#ltexhiddenfalsepositives)
+---
+---```lua
+---default = {}
+---```
+---@field hiddenFalsePositives? _.lspconfig.settings.ltex.Ltex.HiddenFalsePositives
+---@field java? _.lspconfig.settings.ltex.Ltex.Java
+---The language (e.g., `"en-US"`) LanguageTool should check against. If possible, use a specific variant like `"en-US"` or `"de-DE"` instead of the generic language code like `"en"` or `"de"` to obtain spelling corrections (in addition to grammar corrections). [More info...](https://valentjn.github.io/ltex/settings.html#ltexlanguage)
+---
+---```lua
+---default = "en-US"
+---```
+---@field language? "auto" | "ar" | "ast-ES" | "be-BY" | "br-FR" | "ca-ES" | "ca-ES-valencia" | "da-DK" | "de" | "de-AT" | "de-CH" | "de-DE" | "de-DE-x-simple-language" | "el-GR" | "en" | "en-AU" | "en-CA" | "en-GB" | "en-NZ" | "en-US" | "en-ZA" | "eo" | "es" | "es-AR" | "fa" | "fr" | "ga-IE" | "gl-ES" | "it" | "ja-JP" | "km-KH" | "nl" | "nl-BE" | "pl-PL" | "pt" | "pt-AO" | "pt-BR" | "pt-MZ" | "pt-PT" | "ro-RO" | "ru-RU" | "sk-SK" | "sl-SI" | "sv" | "ta-IN" | "tl-PH" | "uk-UA" | "zh-CN"
+---If set to a non-empty string, LTeX will not use the bundled, built-in version of LanguageTool. Instead, LTeX will connect to an external [LanguageTool HTTP server](http://wiki.languagetool.org/http-server). Set this setting to the root URI of the server, and do not append `v2/check` or similar. [More info...](https://valentjn.github.io/ltex/settings.html#ltexlanguagetoolhttpserveruri)
+---
+---```lua
+---default = ""
+---```
+---@field languageToolHttpServerUri? string
+---@field languageToolOrg? _.lspconfig.settings.ltex.Ltex.LanguageToolOrg
+---@field latex? _.lspconfig.settings.ltex.Ltex.Latex
+---@field ["ltex-ls"]? _.lspconfig.settings.ltex.Ltex.LtexLs
+---@field markdown? _.lspconfig.settings.ltex.Ltex.Markdown
+---Size of the LanguageTool `ResultCache` in sentences (must be a positive integer). [More info...](https://valentjn.github.io/ltex/settings.html#ltexsentencecachesize)
+---
+---```lua
+---default = 2000
+---```
+---@field sentenceCacheSize? integer
+---If set to `true`, an item about the status of LTeX is shown permanently in the status bar.
+---@field statusBarItem? boolean
+---@field trace? _.lspconfig.settings.ltex.Ltex.Trace
+
+---@class lspconfig.settings.ltex
+---@field ltex? _.lspconfig.settings.ltex.Ltex

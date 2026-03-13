@@ -39,7 +39,7 @@ jobs:
       - name: Run luals
         run: |
           export VIMRUNTIME="$(nvim --headless --cmd 'echo $VIMRUNTIME' +q 2>&1)"
-          ./build/luals/bin/lua-language-server --configpath=$(pwd)/.luarc.json --check=lsp/ --checklevel=Hint
+          ./build/luals/bin/lua-language-server --configpath=$(pwd)/.luarc.json --check=lsp/ --check=lua/lspconfig/types/lsp/ --checklevel=Hint
 
 
   stylua:
@@ -57,7 +57,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - run: pip install codespell
-      - run: codespell --quiet-level=2 --check-hidden --skip=./doc/configs.md,./doc/configs.txt --ignore-words=.codespellignorewords
+      - run: codespell --quiet-level=2 --check-hidden --skip=./doc/configs.md,./doc/configs.txt,./lua/lspconfig/types/lsp --ignore-words=.codespellignorewords
 
   commit:
     runs-on: ubuntu-latest

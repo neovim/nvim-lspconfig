@@ -16,6 +16,7 @@ return {
     outline = true,
     flutterOutline = true,
   },
+  ---@type lspconfig.settings.dartls
   settings = {
     dart = {
       completeFunctionCalls = true,
