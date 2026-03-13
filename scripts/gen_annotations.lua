@@ -237,6 +237,30 @@ local function lua_type_for(prop)
   return table.concat(vim.iter(types):flatten():totable(), '|')
 end
 
+---Return whether a field is required by its parent schema.
+---@param parent table
+---@param field string
+---@param child table
+---@return boolean
+local function is_required_field(parent, field, child)
+  if child.required == true then
+    return true
+  end
+
+  local required = parent.required
+  if type(required) ~= 'table' then
+    return false
+  end
+
+  for _, required_field in ipairs(required) do
+    if required_field == field then
+      return true
+    end
+  end
+
+  return false
+end
+
 ---Append annotations for an object node and its children.
 ---@param lines string[] Output buffer.
 ---@param name string Node name.
@@ -251,13 +275,14 @@ local function append_object(lines, name, prop, root_class)
     table.sort(props)
     for _, field in ipairs(props) do
       local child = prop.properties[field]
+      local optional_marker = is_required_field(prop, field, child) and '' or '?'
       append_description(object_lines, child)
 
       if child.type == 'object' and child.properties then
-        table.insert(object_lines, '---@field ' .. field .. ' ' .. class_name_for(field, root_class))
+        table.insert(object_lines, '---@field ' .. field .. optional_marker .. ' ' .. class_name_for(field, root_class))
         append_object(lines, field, child, root_class)
       else
-        table.insert(object_lines, '---@field ' .. field .. ' ' .. lua_type_for(child))
+        table.insert(object_lines, '---@field ' .. field .. optional_marker .. ' ' .. lua_type_for(child))
       end
     end
   end
