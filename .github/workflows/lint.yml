@@ -39,7 +39,7 @@ jobs:
       - name: Run luals
         run: |
           export VIMRUNTIME="$(nvim --headless --cmd 'echo $VIMRUNTIME' +q 2>&1)"
-          ./build/luals/bin/lua-language-server --configpath=$(pwd)/.luarc.json --check=lsp/ --checklevel=Hint
+          ./build/luals/bin/lua-language-server --configpath=$(pwd)/.luarc.json --check=lsp/ --check=lua/lspconfig/types/lsp/ --checklevel=Hint
 
 
   stylua:

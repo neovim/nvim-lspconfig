@@ -43,6 +43,7 @@ return {
       workspaceFolders = false, -- https://github.com/OmniSharp/omnisharp-roslyn/issues/909
     },
   },
+  ---@type lspconfig.settings.omnisharp
   settings = {
     FormattingOptions = {
       -- Enables support for reading code style, naming convention and analyzer

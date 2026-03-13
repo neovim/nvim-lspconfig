@@ -34,6 +34,7 @@ return {
     'Pipfile',
     '.git',
   },
+  ---@type lspconfig.settings.basedpyright
   settings = {
     basedpyright = {
       analysis = {

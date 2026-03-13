@@ -142,6 +142,7 @@ return {
     on_dir(project_root)
   end,
   -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
+  ---@type lspconfig.settings.eslint
   settings = {
     validate = 'on',
     ---@diagnostic disable-next-line: assign-type-mismatch

@@ -124,6 +124,7 @@ return {
       on_dir(project_root or deno_lock_root or deno_root)
     end
   end,
+  ---@type lspconfig.settings.denols
   settings = {
     deno = {
       enable = true,

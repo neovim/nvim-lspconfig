@@ -15,6 +15,7 @@ return {
   cmd = { 'svlangserver' },
   filetypes = { 'verilog', 'systemverilog' },
   root_markers = { '.svlangserver', '.git' },
+  ---@type lspconfig.settings.svlangserver
   settings = {
     systemverilog = {
       includeIndexing = { '*.{v,vh,sv,svh}', '**/*.{v,vh,sv,svh}' },

@@ -51,5 +51,6 @@ return {
     'wxss',
   },
   root_markers = root_file,
+  ---@type lspconfig.settings.stylelint_lsp
   settings = {},
 }

@@ -10,6 +10,7 @@
 ---@type vim.lsp.Config
 return {
   cmd = { 'pls' },
+  ---@type lspconfig.settings.perlpls
   settings = {
     perl = {
       perlcritic = { enabled = false },
