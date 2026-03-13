@@ -224,9 +224,9 @@ local function lua_type_for(prop)
     if t == 'array' then
       if prop.items and prop.items.type then
         if type(prop.items.type) == 'table' then
-          prop.items.type = 'any'
+          return 'any[]'
         end
-        return prop.items.type .. '[]'
+        return (prop.items.type == 'object' and 'table' or prop.items.type) .. '[]'
       end
       return 'any[]'
     end
