@@ -1,0 +1,481 @@
+---@meta
+
+---@class _.lspconfig.settings.intelephense.Intelephense.CodeLens.Implementations
+---Enable a code lens that shows an abstract and interface implementations count and command to peek locations.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.intelephense.Intelephense.CodeLens.Overrides
+---Enable a code lens that shows method override count and command to peek locations.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.intelephense.Intelephense.CodeLens.Parent
+---Enable a code lens that indicates if a method has a parent implementation and command to peek location.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.intelephense.Intelephense.CodeLens.References
+---Enable a code lens that shows a reference count and command to peek locations.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.intelephense.Intelephense.CodeLens.Usages
+---Enable a code lens that shows a trait usages count and command to peek locations.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.intelephense.Intelephense.CodeLens
+---@field implementations? _.lspconfig.settings.intelephense.Intelephense.CodeLens.Implementations
+---@field overrides? _.lspconfig.settings.intelephense.Intelephense.CodeLens.Overrides
+---@field parent? _.lspconfig.settings.intelephense.Intelephense.CodeLens.Parent
+---@field references? _.lspconfig.settings.intelephense.Intelephense.CodeLens.References
+---@field usages? _.lspconfig.settings.intelephense.Intelephense.CodeLens.Usages
+
+---@class _.lspconfig.settings.intelephense.Intelephense.Compatibility
+---Resolves `ArrayAccess` and `Traversable` implementations that are unioned with a typed array to generic syntax.
+---
+---For example: `ArrayAccessAndTraversable|Element[]` => `ArrayAccessAndTraversable&ArrayAccess<int, Element>&Traversable<int, Element>`.
+---
+---```lua
+---default = true
+---```
+---@field correctForArrayAccessArrayAndTraversableArrayUnionTypes? boolean
+---Prefer `@psalm-` and `@phpstan-` prefixed `@return`, `@var`, `@param` tags when determining symbol types.
+---@field preferPsalmPhpstanPrefixedAnnotations? boolean
+
+---@class _.lspconfig.settings.intelephense.Intelephense.Completion
+---Global namespace constants and functions will be fully qualified (prefixed with a backslash).
+---@field fullyQualifyGlobalConstantsAndFunctions? boolean
+---Use declarations will be automatically inserted for namespaced classes, traits, interfaces, functions, and constants.
+---
+---```lua
+---default = true
+---```
+---@field insertUseDeclaration? boolean
+---The maximum number of completion items returned per request.
+---
+---```lua
+---default = 100
+---```
+---@field maxItems? number
+---The preferred font case to use when suggesting parameter names. Defaults to camel case.
+---
+---```lua
+---default = "camel"
+---```
+---@field parameterCase? "camel" | "snake"
+---The preferred font case to use when suggesting property names. Defaults to snake case.
+---
+---```lua
+---default = "snake"
+---```
+---@field propertyCase? "camel" | "snake"
+---Controls whether suggestions will include a `sortText` property that may influence sort order.
+---
+---```lua
+---default = "multi-factor"
+---```
+---@field sortText? "none" | "multi-factor"
+---PHP permits the calling of static methods using the object operator eg `$obj->myStaticMethod();`. If you would prefer not to have static methods suggested in this context then set this value to `false`. Defaults to `true`.
+---
+---```lua
+---default = true
+---```
+---@field suggestObjectOperatorStaticMethods? boolean
+---Inserted text will be relative to any existing partial use declarations that may match the symbol. The value is the maximum number of namespace segments that may appear in the inserted text. Defaults to 0 (disabled).
+---
+---```lua
+---default = 0
+---```
+---@field suggestRelativeToPartialUseDeclaration? number
+---Method and function completions will include parentheses and trigger parameter hints.
+---
+---```lua
+---default = true
+---```
+---@field triggerParameterHints? boolean
+
+---@class _.lspconfig.settings.intelephense.Intelephense.Diagnostics
+---Enables argument count diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field argumentCount? boolean
+---Enables deprecated diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field deprecated? boolean
+---Enables duplicate symbol diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field duplicateSymbols? boolean
+---Enables diagnostics in embedded languages.
+---
+---```lua
+---default = true
+---```
+---@field embeddedLanguages? boolean
+---Enables diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---A map of globs to diagnostic codes to be excluded for the matching files. Use `*` as a value in the array to exclude all diagnostics. By default the vendor directory is excluded. You can override this by setting `**/vendor/**` to an empty array.
+---
+---```lua
+---default = {
+---  ["**/vendor/**"] = { "*" }
+---}
+---```
+---@field exclude? table
+---Enables reporting of problems associated with method and class implementations. For example, unimplemented methods or method signature incompatibilities.
+---
+---```lua
+---default = true
+---```
+---@field implementationErrors? boolean
+---Enables reporting of various language constraint errors.
+---
+---```lua
+---default = true
+---```
+---@field languageConstraints? boolean
+---Enables reporting of errors associated with type member access.
+---
+---```lua
+---default = true
+---```
+---@field memberAccess? boolean
+---This setting turns off type checking for the `mixed` type. This is useful for projects that may have incomplete or innacurate typings. Set to `false` to make type checking more thorough by not allowing `mixed` to satisy any type constraint. This setting has no effect when `relaxedTypeCheck` is `true`.
+---
+---```lua
+---default = true
+---```
+---@field noMixedTypeCheck? boolean
+---This setting makes type checking less thorough by allowing contravariant (wider) types to also satisfy a type constraint. This is useful for projects that may have incomplete or innacurate typings. Set to `false` for more thorough type checks. When this setting is `true`, the `noMixedTypeCheck` setting is ignored.
+---
+---```lua
+---default = true
+---```
+---@field relaxedTypeCheck? boolean
+---Controls when diagnostics are run.
+---
+---```lua
+---default = "onType"
+---```
+---@field run? "onType" | "onSave"
+---Sets the severity level for each diagnostic code.
+---@field severity? table
+---When enabled, type checks will be performed as if a `declare(strict_types=1)` directive is present in all files.
+---@field strictTypes? boolean
+---Suppresses undefined property and method errors when `__get` or `__call` magic methods are declared.
+---
+---```lua
+---default = true
+---```
+---@field suppressUndefinedMembersWhenMagicMethodDeclared? boolean
+---Enables diagnostics on type compatibility of arguments, property assignments, and return statements where types have been declared.
+---
+---```lua
+---default = true
+---```
+---@field typeErrors? boolean
+---Enables undefined class constant diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field undefinedClassConstants? boolean
+---Enables undefined constant diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field undefinedConstants? boolean
+---Enables undefined function diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field undefinedFunctions? boolean
+---Enables undefined method diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field undefinedMethods? boolean
+---Enables undefined property diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field undefinedProperties? boolean
+---DEPRECATED. Use the setting for each symbol category.
+---
+---```lua
+---default = true
+---```
+---@field undefinedSymbols? boolean
+---Enables undefined class, interface and trait diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field undefinedTypes? boolean
+---Enables undefined variable diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field undefinedVariables? boolean
+---Enables unexpected token diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field unexpectedTokens? boolean
+---Enables reporting of unreachable code.
+---
+---```lua
+---default = true
+---```
+---@field unreachableCode? boolean
+---Enables unused variable, private member, and import diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field unusedSymbols? boolean
+
+---@class _.lspconfig.settings.intelephense.Intelephense.Environment
+---The directory of the entry point to the application (directory of index.php). Can be absolute or relative to the workspace folder. Used for resolving script inclusion and path suggestions.
+---@field documentRoot? string
+---The include paths (as individual path items) as defined in the include_path ini setting or paths to external libraries. Can be absolute or relative to the workspace folder. Used for resolving script inclusion and/or adding external symbols to folder.
+---@field includePaths? string[]
+---A semver compatible string that represents the target PHP version. Used for providing version appropriate suggestions and diagnostics. PHP 5.3.0 and greater supported.
+---
+---```lua
+---default = "8.5.0"
+---```
+---@field phpVersion? string
+---When enabled '<?' will be parsed as a PHP open tag. Defaults to true.
+---
+---```lua
+---default = true
+---```
+---@field shortOpenTag? boolean
+
+---@class _.lspconfig.settings.intelephense.Intelephense.Files
+---Configure glob patterns to make files available for language server features. Inherits from files.associations.
+---
+---```lua
+---default = { "*.php", "*.phtml" }
+---```
+---@field associations? any[]
+---Configure glob patterns to exclude certain files and folders from all language server features. Inherits from files.exclude.
+---
+---```lua
+---default = { "**/.git/**", "**/.svn/**", "**/.hg/**", "**/CVS/**", "**/.DS_Store/**", "**/node_modules/**", "**/bower_components/**", "**/vendor/**/{Tests,tests}/**", "**/.history/**", "**/vendor/**/vendor/**" }
+---```
+---@field exclude? string[]
+---Maximum file size in bytes.
+---
+---```lua
+---default = 1000000
+---```
+---@field maxSize? number
+
+---@class _.lspconfig.settings.intelephense.Intelephense.Format
+---Controls formatting style of braces
+---
+---```lua
+---default = "per"
+---```
+---@field braces? "per" | "allman" | "k&r"
+---Enables formatting.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.intelephense.Intelephense.InlayHint
+---Will show inlay hints for call argument parameter names if named arguments are not already in use.
+---
+---```lua
+---default = true
+---```
+---@field parameterNames? boolean
+---Will show inlay hints for anonymous function declaration parameter types if not already declared.
+---
+---```lua
+---default = true
+---```
+---@field parameterTypes? boolean
+---Will show an inlay hint for call declaration return type if not already declared.
+---
+---```lua
+---default = true
+---```
+---@field returnTypes? boolean
+
+---An object that describes the format of generated class/interface/trait phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE.
+---
+---```lua
+---default = {
+---  summary = "$1",
+---  tags = { "@package ${1:$SYMBOL_NAMESPACE}" }
+---}
+---```
+---@class _.lspconfig.settings.intelephense.Intelephense.Phpdoc.ClassTemplate
+---A snippet string representing a phpdoc description.
+---@field description? string
+---A snippet string representing a phpdoc summary.
+---@field summary? string
+---An array of snippet strings representing phpdoc tags.
+---@field tags? string[]
+
+---An object that describes the format of generated function/method phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE.
+---
+---```lua
+---default = {
+---  summary = "$1",
+---  tags = { "@param ${1:$SYMBOL_TYPE} $SYMBOL_NAME $2", "@return ${1:$SYMBOL_TYPE} $2", "@throws ${1:$SYMBOL_TYPE} $2" }
+---}
+---```
+---@class _.lspconfig.settings.intelephense.Intelephense.Phpdoc.FunctionTemplate
+---A snippet string representing a phpdoc description.
+---@field description? string
+---A snippet string representing a phpdoc summary.
+---@field summary? string
+---An array of snippet strings representing phpdoc tags.
+---@field tags? string[]
+
+---An object that describes the format of generated property phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE.
+---
+---```lua
+---default = {
+---  summary = "$1",
+---  tags = { "@var ${1:$SYMBOL_TYPE}" }
+---}
+---```
+---@class _.lspconfig.settings.intelephense.Intelephense.Phpdoc.PropertyTemplate
+---A snippet string representing a phpdoc description.
+---@field description? string
+---A snippet string representing a phpdoc summary.
+---@field summary? string
+---An array of snippet strings representing phpdoc tags.
+---@field tags? string[]
+
+---@class _.lspconfig.settings.intelephense.Intelephense.Phpdoc
+---An object that describes the format of generated class/interface/trait phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE.
+---
+---```lua
+---default = {
+---  summary = "$1",
+---  tags = { "@package ${1:$SYMBOL_NAMESPACE}" }
+---}
+---```
+---@field classTemplate? _.lspconfig.settings.intelephense.Intelephense.Phpdoc.ClassTemplate
+---An object that describes the format of generated function/method phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE.
+---
+---```lua
+---default = {
+---  summary = "$1",
+---  tags = { "@param ${1:$SYMBOL_TYPE} $SYMBOL_NAME $2", "@return ${1:$SYMBOL_TYPE} $2", "@throws ${1:$SYMBOL_TYPE} $2" }
+---}
+---```
+---@field functionTemplate? _.lspconfig.settings.intelephense.Intelephense.Phpdoc.FunctionTemplate
+---An object that describes the format of generated property phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE.
+---
+---```lua
+---default = {
+---  summary = "$1",
+---  tags = { "@var ${1:$SYMBOL_TYPE}" }
+---}
+---```
+---@field propertyTemplate? _.lspconfig.settings.intelephense.Intelephense.Phpdoc.PropertyTemplate
+---Adds `@return void` to auto generated phpdoc for definitions that do not return a value.
+---
+---```lua
+---default = true
+---```
+---@field returnVoid? boolean
+---```lua
+---default = "snippet"
+---```
+---@field textFormat? "snippet" | "text"
+---Fully qualified names will be used for types when true. When false short type names will be used and imported where appropriate. Overrides intelephense.completion.insertUseDeclaration.
+---@field useFullyQualifiedNames? boolean
+
+---@class _.lspconfig.settings.intelephense.Intelephense.References
+---Glob patterns matching files and folders that should be excluded from references search.
+---
+---```lua
+---default = { "**/vendor/**" }
+---```
+---@field exclude? string[]
+
+---@class _.lspconfig.settings.intelephense.Intelephense.Rename
+---Glob patterns matching files and folders that should be excluded when renaming symbols. Rename operation will fail if the symbol definition is found in the excluded files/folders.
+---
+---```lua
+---default = { "**/vendor/**" }
+---```
+---@field exclude? string[]
+---Controls the scope of a namespace rename operation.
+---
+---```lua
+---default = "single"
+---```
+---@field namespaceMode? "single" | "all"
+
+---@class _.lspconfig.settings.intelephense.Intelephense.Telemetry
+---Anonymous usage and crash data will be sent to Azure Application Insights. Inherits from telemetry.enableTelemetry.
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.intelephense.Intelephense.Trace
+---Traces the communication between VSCode and the intelephense language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.intelephense.Intelephense
+---@field codeLens? _.lspconfig.settings.intelephense.Intelephense.CodeLens
+---@field compatibility? _.lspconfig.settings.intelephense.Intelephense.Compatibility
+---@field completion? _.lspconfig.settings.intelephense.Intelephense.Completion
+---@field diagnostics? _.lspconfig.settings.intelephense.Intelephense.Diagnostics
+---@field environment? _.lspconfig.settings.intelephense.Intelephense.Environment
+---@field files? _.lspconfig.settings.intelephense.Intelephense.Files
+---@field format? _.lspconfig.settings.intelephense.Intelephense.Format
+---@field inlayHint? _.lspconfig.settings.intelephense.Intelephense.InlayHint
+---DEPRECATED. Don't use this. Go to command palette and search for enter licence key.
+---@field licenceKey? string
+---Maximum memory (in MB) that the server should use. On some systems this may only have effect when runtime has been set. Minimum 256.
+---@field maxMemory? number
+---@field phpdoc? _.lspconfig.settings.intelephense.Intelephense.Phpdoc
+---@field references? _.lspconfig.settings.intelephense.Intelephense.References
+---@field rename? _.lspconfig.settings.intelephense.Intelephense.Rename
+---Path to a Node.js executable. Use this if you wish to use a different version of Node.js. Defaults to Node.js shipped with VSCode.
+---@field runtime? string
+---Will auto-close short open echo tags (`<?=`). VSCode only.
+---
+---```lua
+---default = true
+---```
+---@field shortOpenEchoAutoClose? boolean
+---Configure stub files for built in symbols and common extensions. The default setting includes PHP core and all bundled extensions.
+---
+---```lua
+---default = { "apache", "bcmath", "bz2", "calendar", "com_dotnet", "Core", "ctype", "curl", "date", "dba", "dom", "enchant", "exif", "FFI", "fileinfo", "filter", "fpm", "ftp", "gd", "gettext", "gmp", "hash", "iconv", "imap", "intl", "json", "ldap", "libxml", "mbstring", "meta", "mysqli", "oci8", "odbc", "openssl", "pcntl", "pcre", "PDO", "pgsql", "Phar", "posix", "pspell", "random", "readline", "Reflection", "session", "shmop", "SimpleXML", "snmp", "soap", "sockets", "sodium", "SPL", "sqlite3", "standard", "superglobals", "sysvmsg", "sysvsem", "sysvshm", "tidy", "tokenizer", "uri", "xml", "xmlreader", "xmlrpc", "xmlwriter", "xsl", "Zend OPcache", "zip", "zlib" }
+---```
+---@field stubs? string[]
+---@field telemetry? _.lspconfig.settings.intelephense.Intelephense.Telemetry
+---@field trace? _.lspconfig.settings.intelephense.Intelephense.Trace
+
+---@class lspconfig.settings.intelephense
+---@field intelephense? _.lspconfig.settings.intelephense.Intelephense

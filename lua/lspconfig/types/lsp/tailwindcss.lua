@@ -1,0 +1,161 @@
+---@meta
+
+---@class _.lspconfig.settings.tailwindcss.TailwindCSS.Experimental
+---@field classRegex? any[]
+---Manually specify the Tailwind config file or files that should be read to provide IntelliSense features. Can either be a single string value, or an object where each key is a config file path and each value is a glob or array of globs representing the set of files that the config file applies to.
+---@field configFile? string|table
+
+---@class _.lspconfig.settings.tailwindcss.TailwindCSS.Files
+---Configure glob patterns to exclude from all IntelliSense features. Inherits all glob patterns from the `#files.exclude#` setting.
+---
+---```lua
+---default = { "**/.git/**", "**/node_modules/**", "**/.hg/**", "**/.svn/**" }
+---```
+---@field exclude? string[]
+
+---@class _.lspconfig.settings.tailwindcss.TailwindCSS.Lint
+---Class names on the same HTML element which apply the same CSS property or properties
+---
+---```lua
+---default = "warning"
+---```
+---@field cssConflict? "ignore" | "warning" | "error"
+---Unsupported use of the [`@apply` directive](https://tailwindcss.com/docs/functions-and-directives/#apply)
+---
+---```lua
+---default = "error"
+---```
+---@field invalidApply? "ignore" | "warning" | "error"
+---Unknown or invalid path used with the [`theme` helper](https://tailwindcss.com/docs/functions-and-directives/#theme)
+---
+---```lua
+---default = "error"
+---```
+---@field invalidConfigPath? "ignore" | "warning" | "error"
+---Unknown screen name used with the [`@screen` directive](https://tailwindcss.com/docs/functions-and-directives/#screen)
+---
+---```lua
+---default = "error"
+---```
+---@field invalidScreen? "ignore" | "warning" | "error"
+---Unknown value used with the [`@tailwind` directive](https://tailwindcss.com/docs/functions-and-directives/#tailwind)
+---
+---```lua
+---default = "error"
+---```
+---@field invalidTailwindDirective? "ignore" | "warning" | "error"
+---Unknown variant name used with the [`@variants` directive](https://tailwindcss.com/docs/functions-and-directives/#variants)
+---
+---```lua
+---default = "error"
+---```
+---@field invalidVariant? "ignore" | "warning" | "error"
+---Class variants not in the recommended order (applies in [JIT mode](https://tailwindcss.com/docs/just-in-time-mode) only)
+---
+---```lua
+---default = "warning"
+---```
+---@field recommendedVariantOrder? "ignore" | "warning" | "error"
+---Indicate when utilities may be written in a more optimal form
+---
+---```lua
+---default = "warning"
+---```
+---@field suggestCanonicalClasses? "ignore" | "warning" | "error"
+---Usage of class names that have been blocklisted via `@source not inline(…)`
+---
+---```lua
+---default = "warning"
+---```
+---@field usedBlocklistedClass? "ignore" | "warning" | "error"
+
+---@class _.lspconfig.settings.tailwindcss.TailwindCSS
+---The HTML attributes for which to provide class completions, hover previews, linting etc.
+---
+---```lua
+---default = { "class", "className", "ngClass", "class:list" }
+---```
+---@field classAttributes? string[]
+---The function or tagged template literal names for which to provide class completions, hover previews, linting etc.
+---
+---```lua
+---default = {}
+---```
+---@field classFunctions? string[]
+---Enable code actions.
+---
+---```lua
+---default = true
+---```
+---@field codeActions? boolean
+---Enable code lens.
+---
+---```lua
+---default = true
+---```
+---@field codeLens? boolean
+---Controls whether the editor should render inline color decorators for Tailwind CSS classes and helper functions.
+---
+---```lua
+---default = true
+---```
+---@field colorDecorators? boolean
+---Enable class name completions when using Emmet-style syntax, for example `div.bg-red-500.uppercase`
+---@field emmetCompletions? boolean
+---@field experimental? _.lspconfig.settings.tailwindcss.TailwindCSS.Experimental
+---@field files? _.lspconfig.settings.tailwindcss.TailwindCSS.Files
+---Enable hovers.
+---
+---```lua
+---default = true
+---```
+---@field hovers? boolean
+---Enable features in languages that are not supported by default. Add a mapping here between the new language and an already supported language.
+--- E.g.: `{"plaintext": "html"}`
+---
+---```lua
+---default = {}
+---```
+---@field includeLanguages? table
+---Enable the Node.js inspector agent for the language server and listen on the specified port.
+---@field inspectPort? number
+---@field lint? _.lspconfig.settings.tailwindcss.TailwindCSS.Lint
+---Root font size in pixels. Used to convert `rem` CSS values to their `px` equivalents. See `#tailwindCSS.showPixelEquivalents#`.
+---
+---```lua
+---default = 16
+---```
+---@field rootFontSize? number
+---Show `px` equivalents for `rem` CSS values.
+---
+---```lua
+---default = true
+---```
+---@field showPixelEquivalents? boolean
+---Enable autocomplete suggestions.
+---
+---```lua
+---default = true
+---```
+---@field suggestions? boolean
+---Enable linting. Rules can be configured individually using the `tailwindcss.lint.*` settings
+---
+---```lua
+---default = true
+---```
+---@field validate? boolean
+
+---@class _.lspconfig.settings.tailwindcss.TailwindcssIntellisense.Trace
+---Traces the communication between VS Code and the Tailwind CSS Language Server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.tailwindcss.TailwindcssIntellisense
+---@field trace? _.lspconfig.settings.tailwindcss.TailwindcssIntellisense.Trace
+
+---@class lspconfig.settings.tailwindcss
+---@field tailwindCSS? _.lspconfig.settings.tailwindcss.TailwindCSS
+---@field ["tailwindcss-intellisense"]? _.lspconfig.settings.tailwindcss.TailwindcssIntellisense

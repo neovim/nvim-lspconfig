@@ -1,0 +1,106 @@
+---@meta
+
+---@class _.lspconfig.settings.svlangserver.Systemverilog.Trace
+---Traces the communication between VS Code and the SystemVerilog language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.svlangserver.Systemverilog
+---Use ANTLR parser to verify text documents when edited.
+---@field antlrVerification? boolean
+---Compile all files when opened.
+---@field compileOnOpen? boolean
+---Compile SystemVerilog/Verilog files when saved.
+---@field compileOnSave? boolean
+---Select the compiler type from the drop down list.
+---
+---```lua
+---default = "Verilator"
+---```
+---@field compilerType? "Verilator" | "VCS" | "Verible"
+---Disable automatic indexing when opening a folder or workspace.
+---@field disableIndexing? boolean
+---The level of detail the parser should use when looking for symbols:
+---  - 'full': detect blocks, ports, parameters, classes, methods, typedefs, defines, labels, instantiations, assertions, and references
+---  - 'full_no_references': detect blocks, ports, parameters, classes, methods, typedefs, defines, labels, instantiations, and assertions
+---  - 'declarations': detect blocks, ports, parameters, classes, methods, typedefs, and defines
+---  - 'fast': detect only common blocks (module, class, interface, package, program) without hierarchy
+---
+---```lua
+---default = "full"
+---```
+---@field documentSymbolsPrecision? "full" | "full_no_references" | "declaration" | "fast"
+---Enable incremental indexation as you open files.
+---
+---```lua
+---default = true
+---```
+---@field enableIncrementalIndexing? boolean
+---Files excluded from compiling (glob pattern).
+---
+---```lua
+---default = ""
+---```
+---@field excludeCompiling? string
+---Files excluded from indexing (glob pattern).
+---
+---```lua
+---default = ""
+---```
+---@field excludeIndexing? string
+---Force indexing to use fast regular expression parsing.
+---@field forceFastIndexing? boolean
+---Launch command for running the formatter.
+---
+---```lua
+---default = "verible-verilog-format"
+---```
+---@field formatCommand? string
+---Files included for indexing (glob pattern). Examples: 
+---  - Include files within the workspace's rtl folder ('*' at front of pattern denotes that path is relative to workspace root): **/rtl/**/*.{sv,v,svh,vh}
+---  - Add all files with a '.svp' extension: **/*.svp
+---  - Add files only when in a specific workspace: /abs/path/to/workspace/rtl/**/*.{sv,v,svh,vh}
+---
+---```lua
+---default = { "**/*.{sv,v,svh,vh}" }
+---```
+---@field includeIndexing? any[]
+---Launch command for running VCS as the compiler.
+---
+---```lua
+---default = "vcs"
+---```
+---@field launchConfigurationVCS? string
+---Launch command for running Verible as the compiler.
+---
+---```lua
+---default = "verible-verilog-lint"
+---```
+---@field launchConfigurationVerible? string
+---Launch command for running Verilator as the compiler.
+---
+---```lua
+---default = "verilator --sv --lint-only --language 1800-2012 --Wall"
+---```
+---@field launchConfigurationVerilator? string
+---When indexing a file, if the line count is larger than this number, fast indexing will be used to improve symbol lookup performance.
+---
+---```lua
+---default = 2000
+---```
+---@field maxLineCountIndexing? integer
+---The number of files the extension should attempt to process in parallel. Processing consist of opening found files and perform matching to find symbols.
+---
+---```lua
+---default = 10
+---```
+---@field parallelProcessing? integer
+---@field trace? _.lspconfig.settings.svlangserver.Systemverilog.Trace
+---Run ANTLR verification on all files when opened.
+---@field verifyOnOpen? boolean
+
+---@class lspconfig.settings.svlangserver
+---@field systemverilog? _.lspconfig.settings.svlangserver.Systemverilog

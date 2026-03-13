@@ -1,0 +1,105 @@
+---@meta
+
+---@class _.lspconfig.settings.yamlls.Redhat.Telemetry
+---Enable usage data and errors to be sent to Red Hat servers. Read our [privacy statement](https://developers.redhat.com/article/tool-data-collection).
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.yamlls.Redhat
+---@field telemetry? _.lspconfig.settings.yamlls.Redhat.Telemetry
+
+---@class _.lspconfig.settings.yamlls.Yaml.Format
+---Print spaces between brackets in objects
+---
+---```lua
+---default = true
+---```
+---@field bracketSpacing? boolean
+---Enable/disable default YAML formatter
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Specify the line length that the printer will wrap on
+---
+---```lua
+---default = 80
+---```
+---@field printWidth? integer
+---Always: wrap prose if it exeeds the print width, Never: never wrap the prose, Preserve: wrap prose as-is
+---
+---```lua
+---default = "preserve"
+---```
+---@field proseWrap? "preserve" | "never" | "always"
+---Use single quotes instead of double quotes
+---@field singleQuote? boolean
+
+---@class _.lspconfig.settings.yamlls.Yaml.SchemaStore
+---Automatically pull available YAML schemas from JSON Schema Store
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---URL of schema store catalog to use
+---
+---```lua
+---default = "https://www.schemastore.org/api/json/catalog.json"
+---```
+---@field url? string
+
+---@class _.lspconfig.settings.yamlls.Yaml.Trace
+---Traces the communication between VSCode and the YAML language service.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.yamlls.Yaml
+---Enable/disable completion feature
+---
+---```lua
+---default = true
+---```
+---@field completion? boolean
+---Custom tags for the parser to use
+---
+---```lua
+---default = {}
+---```
+---@field customTags? any[]
+---Globally set additionalProperties to false for all objects. So if its true, no extra properties are allowed inside yaml.
+---@field disableAdditionalProperties? boolean
+---@field format? _.lspconfig.settings.yamlls.Yaml.Format
+---Enable/disable hover feature
+---
+---```lua
+---default = true
+---```
+---@field hover? boolean
+---The maximum number of outline symbols and folding regions computed (limited for performance reasons).
+---
+---```lua
+---default = 5000
+---```
+---@field maxItemsComputed? integer
+---@field schemaStore? _.lspconfig.settings.yamlls.Yaml.SchemaStore
+---Associate schemas to YAML files in the current workspace
+---
+---```lua
+---default = {}
+---```
+---@field schemas? table
+---@field trace? _.lspconfig.settings.yamlls.Yaml.Trace
+---Enable/disable validation feature
+---
+---```lua
+---default = true
+---```
+---@field validate? boolean
+
+---@class lspconfig.settings.yamlls
+---@field redhat? _.lspconfig.settings.yamlls.Redhat
+---@field yaml? _.lspconfig.settings.yamlls.Yaml

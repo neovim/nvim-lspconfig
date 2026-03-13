@@ -1,0 +1,852 @@
+---@meta
+
+---@class _.lspconfig.settings.omnisharp.Csharp.Debug.ExpressionEvaluationOptions
+---%generateOptionsSchema.expressionEvaluationOptions.allowFastEvaluate.description%
+---
+---```lua
+---default = true
+---```
+---@field allowFastEvaluate? boolean
+---%generateOptionsSchema.expressionEvaluationOptions.allowImplicitFuncEval.description%
+---
+---```lua
+---default = true
+---```
+---@field allowImplicitFuncEval? boolean
+---%generateOptionsSchema.expressionEvaluationOptions.allowToString.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field allowToString? boolean
+---%generateOptionsSchema.expressionEvaluationOptions.showRawValues.description%
+---@field showRawValues? boolean
+
+---@class _.lspconfig.settings.omnisharp.Csharp.Debug.Logging.DiagnosticsLog
+---%generateOptionsSchema.logging.diagnosticsLog.debugEngineAPITracing.markdownDescription%
+---
+---```lua
+---default = "none"
+---```
+---@field debugEngineAPITracing? "none" | "error" | "all"
+---%generateOptionsSchema.logging.diagnosticsLog.debugRuntimeEventTracing.markdownDescription%
+---@field debugRuntimeEventTracing? boolean
+---%generateOptionsSchema.logging.diagnosticsLog.dispatcherMessages.markdownDescription%
+---
+---```lua
+---default = "none"
+---```
+---@field dispatcherMessages? "none" | "error" | "important" | "normal"
+---%generateOptionsSchema.logging.diagnosticsLog.expressionEvaluationTracing.markdownDescription%
+---@field expressionEvaluationTracing? boolean
+---%generateOptionsSchema.logging.diagnosticsLog.protocolMessages.markdownDescription%
+---@field protocolMessages? boolean
+---%generateOptionsSchema.logging.diagnosticsLog.startDebuggingTracing.markdownDescription%
+---@field startDebuggingTracing? boolean
+
+---@class _.lspconfig.settings.omnisharp.Csharp.Debug.Logging
+---%generateOptionsSchema.logging.browserStdOut.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field browserStdOut? boolean
+---%generateOptionsSchema.logging.consoleUsageMessage.description%
+---
+---```lua
+---default = true
+---```
+---@field consoleUsageMessage? boolean
+---@field diagnosticsLog? _.lspconfig.settings.omnisharp.Csharp.Debug.Logging.DiagnosticsLog
+---%generateOptionsSchema.logging.elapsedTiming.markdownDescription%
+---@field elapsedTiming? boolean
+---@field engineLogging? boolean
+---%generateOptionsSchema.logging.exceptions.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field exceptions? boolean
+---%generateOptionsSchema.logging.moduleLoad.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field moduleLoad? boolean
+---%generateOptionsSchema.logging.processExit.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field processExit? boolean
+---%generateOptionsSchema.logging.programOutput.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field programOutput? boolean
+---%generateOptionsSchema.logging.threadExit.markdownDescription%
+---@field threadExit? boolean
+
+---@class _.lspconfig.settings.omnisharp.Csharp.Debug.SymbolOptions.ModuleFilter
+---%generateOptionsSchema.symbolOptions.moduleFilter.excludedModules.description%
+---
+---```lua
+---default = {}
+---```
+---@field excludedModules? string[]
+---%generateOptionsSchema.symbolOptions.moduleFilter.includeSymbolsNextToModules.description%
+---
+---```lua
+---default = true
+---```
+---@field includeSymbolsNextToModules? boolean
+---%generateOptionsSchema.symbolOptions.moduleFilter.includeSymbolsOnDemand.description%
+---
+---```lua
+---default = true
+---```
+---@field includeSymbolsOnDemand? boolean
+---%generateOptionsSchema.symbolOptions.moduleFilter.includedModules.description%
+---
+---```lua
+---default = {}
+---```
+---@field includedModules? string[]
+---%generateOptionsSchema.symbolOptions.moduleFilter.mode.description%
+---
+---```lua
+---default = "loadAllButExcluded"
+---```
+---@field mode? "loadAllButExcluded" | "loadOnlyIncluded"
+
+---@class _.lspconfig.settings.omnisharp.Csharp.Debug.SymbolOptions
+---%generateOptionsSchema.symbolOptions.cachePath.description%
+---
+---```lua
+---default = ""
+---```
+---@field cachePath? string
+---@field moduleFilter? _.lspconfig.settings.omnisharp.Csharp.Debug.SymbolOptions.ModuleFilter
+---%generateOptionsSchema.symbolOptions.searchMicrosoftSymbolServer.description%
+---@field searchMicrosoftSymbolServer? boolean
+---%generateOptionsSchema.symbolOptions.searchNuGetOrgSymbolServer.description%
+---@field searchNuGetOrgSymbolServer? boolean
+---%generateOptionsSchema.symbolOptions.searchPaths.description%
+---
+---```lua
+---default = {}
+---```
+---@field searchPaths? string[]
+
+---@class _.lspconfig.settings.omnisharp.Csharp.Debug
+---%generateOptionsSchema.console.settingsDescription%
+---
+---```lua
+---default = "internalConsole"
+---```
+---@field console? "internalConsole" | "integratedTerminal" | "externalTerminal"
+---%generateOptionsSchema.enableStepFiltering.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field enableStepFiltering? boolean
+---@field expressionEvaluationOptions? _.lspconfig.settings.omnisharp.Csharp.Debug.ExpressionEvaluationOptions
+---%generateOptionsSchema.justMyCode.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field justMyCode? boolean
+---@field logging? _.lspconfig.settings.omnisharp.Csharp.Debug.Logging
+---%generateOptionsSchema.requireExactSource.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field requireExactSource? boolean
+---%generateOptionsSchema.sourceFileMap.markdownDescription%
+---
+---```lua
+---default = {}
+---```
+---@field sourceFileMap? table
+---%generateOptionsSchema.stopAtEntry.markdownDescription%
+---@field stopAtEntry? boolean
+---%generateOptionsSchema.suppressJITOptimizations.markdownDescription%
+---@field suppressJITOptimizations? boolean
+---@field symbolOptions? _.lspconfig.settings.omnisharp.Csharp.Debug.SymbolOptions
+
+---@class _.lspconfig.settings.omnisharp.Csharp.Format
+---%configuration.omnisharp.csharp.format.enable%
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.omnisharp.Csharp.InlayHints
+---%configuration.csharp.inlayHints.enableInlayHintsForImplicitObjectCreation%
+---@field enableInlayHintsForImplicitObjectCreation? boolean
+---%configuration.csharp.inlayHints.enableInlayHintsForImplicitVariableTypes%
+---@field enableInlayHintsForImplicitVariableTypes? boolean
+---%configuration.csharp.inlayHints.enableInlayHintsForLambdaParameterTypes%
+---@field enableInlayHintsForLambdaParameterTypes? boolean
+---%configuration.csharp.inlayHints.enableInlayHintsForTypes%
+---@field enableInlayHintsForTypes? boolean
+
+---@class _.lspconfig.settings.omnisharp.Csharp.ReferencesCodeLens
+---%configuration.omnisharp.csharp.referencesCodeLens.filteredSymbols%
+---
+---```lua
+---default = {}
+---```
+---@field filteredSymbols? string[]
+
+---@class _.lspconfig.settings.omnisharp.Csharp.SemanticHighlighting
+---%configuration.omnisharp.csharp.semanticHighlighting.enabled%
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.omnisharp.Csharp
+---@field debug? _.lspconfig.settings.omnisharp.Csharp.Debug
+---@field format? _.lspconfig.settings.omnisharp.Csharp.Format
+---@field inlayHints? _.lspconfig.settings.omnisharp.Csharp.InlayHints
+---%configuration.omnisharp.csharp.maxProjectFileCountForDiagnosticAnalysis%
+---
+---```lua
+---default = 1000
+---```
+---@field maxProjectFileCountForDiagnosticAnalysis? number
+---@field referencesCodeLens? _.lspconfig.settings.omnisharp.Csharp.ReferencesCodeLens
+---@field semanticHighlighting? _.lspconfig.settings.omnisharp.Csharp.SemanticHighlighting
+---%configuration.omnisharp.csharp.showOmnisharpLogOnError%
+---
+---```lua
+---default = true
+---```
+---@field showOmnisharpLogOnError? boolean
+---%configuration.omnisharp.csharp.suppressBuildAssetsNotification%
+---@field suppressBuildAssetsNotification? boolean
+---%configuration.omnisharp.csharp.suppressDotnetInstallWarning%
+---@field suppressDotnetInstallWarning? boolean
+---%configuration.omnisharp.csharp.suppressDotnetRestoreNotification%
+---@field suppressDotnetRestoreNotification? boolean
+---%configuration.omnisharp.csharp.suppressHiddenDiagnostics%
+---
+---```lua
+---default = true
+---```
+---@field suppressHiddenDiagnostics? boolean
+---%configuration.omnisharp.csharp.suppressProjectJsonWarning%
+---@field suppressProjectJsonWarning? boolean
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.AutoInsert
+---%configuration.dotnet.autoInsert.enableAutoInsert%
+---
+---```lua
+---default = true
+---```
+---@field enableAutoInsert? boolean
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.BackgroundAnalysis
+---%configuration.dotnet.backgroundAnalysis.analyzerDiagnosticsScope%
+---
+---```lua
+---default = "openFiles"
+---```
+---@field analyzerDiagnosticsScope? "openFiles" | "fullSolution" | "none"
+---%configuration.dotnet.backgroundAnalysis.compilerDiagnosticsScope%
+---
+---```lua
+---default = "openFiles"
+---```
+---@field compilerDiagnosticsScope? "openFiles" | "fullSolution" | "none"
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.CodeLens
+---%configuration.dotnet.codeLens.enableReferencesCodeLens%
+---
+---```lua
+---default = true
+---```
+---@field enableReferencesCodeLens? boolean
+---%configuration.dotnet.codeLens.enableTestsCodeLens%
+---
+---```lua
+---default = true
+---```
+---@field enableTestsCodeLens? boolean
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.Completion
+---%configuration.dotnet.completion.provideRegexCompletions%
+---
+---```lua
+---default = "true"
+---```
+---@field provideRegexCompletions? boolean
+---%configuration.dotnet.completion.showCompletionItemsFromUnimportedNamespaces%
+---
+---```lua
+---default = true
+---```
+---@field showCompletionItemsFromUnimportedNamespaces? boolean
+---%configuration.dotnet.completion.showNameCompletionSuggestions%
+---
+---```lua
+---default = "true"
+---```
+---@field showNameCompletionSuggestions? boolean
+---%configuration.dotnet.completion.triggerCompletionInArgumentLists%
+---
+---```lua
+---default = "true"
+---```
+---@field triggerCompletionInArgumentLists? boolean
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.Diagnostics
+---%configuration.dotnet.diagnostics.reportInformationAsHint%
+---
+---```lua
+---default = true
+---```
+---@field reportInformationAsHint? boolean
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.Formatting
+---%configuration.dotnet.formatting.organizeImportsOnFormat%
+---@field organizeImportsOnFormat? boolean
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.Highlighting
+---%configuration.dotnet.highlighting.highlightRelatedJsonComponents%
+---
+---```lua
+---default = "true"
+---```
+---@field highlightRelatedJsonComponents? boolean
+---%configuration.dotnet.highlighting.highlightRelatedRegexComponents%
+---
+---```lua
+---default = "true"
+---```
+---@field highlightRelatedRegexComponents? boolean
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.InlayHints
+---%configuration.csharp.inlayHints.enableInlayHintsForIndexerParameters%
+---@field enableInlayHintsForIndexerParameters? boolean
+---%configuration.dotnet.inlayHints.enableInlayHintsForLiteralParameters%
+---@field enableInlayHintsForLiteralParameters? boolean
+---%configuration.dotnet.inlayHints.enableInlayHintsForObjectCreationParameters%
+---@field enableInlayHintsForObjectCreationParameters? boolean
+---%configuration.dotnet.inlayHints.enableInlayHintsForOtherParameters%
+---@field enableInlayHintsForOtherParameters? boolean
+---%configuration.dotnet.inlayHints.enableInlayHintsForParameters%
+---@field enableInlayHintsForParameters? boolean
+---%configuration.dotnet.inlayHints.suppressInlayHintsForParametersThatDifferOnlyBySuffix%
+---@field suppressInlayHintsForParametersThatDifferOnlyBySuffix? boolean
+---%configuration.dotnet.inlayHints.suppressInlayHintsForParametersThatMatchArgumentName%
+---@field suppressInlayHintsForParametersThatMatchArgumentName? boolean
+---%configuration.dotnet.inlayHints.suppressInlayHintsForParametersThatMatchMethodIntent%
+---@field suppressInlayHintsForParametersThatMatchMethodIntent? boolean
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.Navigation
+---%configuration.dotnet.navigation.navigateToDecompiledSources%
+---
+---```lua
+---default = "true"
+---```
+---@field navigateToDecompiledSources? boolean
+---%configuration.dotnet.navigation.navigateToSourceLinkAndEmbeddedSources%
+---
+---```lua
+---default = "true"
+---```
+---@field navigateToSourceLinkAndEmbeddedSources? boolean
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.Projects
+---%configuration.dotnet.projects.binaryLogPath%
+---@field binaryLogPath? string
+---%configuration.dotnet.projects.enableAutomaticRestore%
+---
+---```lua
+---default = true
+---```
+---@field enableAutomaticRestore? boolean
+---%configuration.dotnet.projects.enableFileBasedPrograms%
+---
+---```lua
+---default = true
+---```
+---@field enableFileBasedPrograms? boolean
+---%configuration.dotnet.projects.enableFileBasedProgramsWhenAmbiguous%
+---
+---```lua
+---default = true
+---```
+---@field enableFileBasedProgramsWhenAmbiguous? boolean
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.QuickInfo
+---%configuration.dotnet.quickInfo.showRemarksInQuickInfo%
+---
+---```lua
+---default = "true"
+---```
+---@field showRemarksInQuickInfo? boolean
+
+---%configuration.dotnet.server.componentPaths%
+---
+---```lua
+---default = {}
+---```
+---@class _.lspconfig.settings.omnisharp.Dotnet.Server.ComponentPaths
+---%configuration.dotnet.server.componentPaths.razorExtension%
+---@field razorExtension? string
+---%configuration.dotnet.server.componentPaths.roslynCopilot%
+---@field roslynCopilot? string
+---%configuration.dotnet.server.componentPaths.roslynDevKit%
+---@field roslynDevKit? string
+---%configuration.dotnet.server.componentPaths.xamlTools%
+---@field xamlTools? string
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.Server
+---%configuration.dotnet.server.componentPaths%
+---
+---```lua
+---default = {}
+---```
+---@field componentPaths? _.lspconfig.settings.omnisharp.Dotnet.Server.ComponentPaths
+---%configuration.dotnet.server.crashDumpPath%
+---@field crashDumpPath? string
+---%configuration.dotnet.server.environmentVariables%
+---
+---```lua
+---default = {}
+---```
+---@field environmentVariables? table
+---%configuration.dotnet.server.extensionPaths%
+---@field extensionPaths? string[]
+---%configuration.dotnet.server.path%
+---@field path? string
+---%configuration.dotnet.server.sourceGeneratorExecution%
+---
+---```lua
+---default = "Balanced"
+---```
+---@field sourceGeneratorExecution? "Balanced" | "Automatic"
+---%configuration.dotnet.server.startTimeout%
+---
+---```lua
+---default = 120000
+---```
+---@field startTimeout? number
+---%configuration.dotnet.server.suppressLspErrorToasts%
+---@field suppressLspErrorToasts? boolean
+---%configuration.dotnet.server.suppressMiscellaneousFilesToasts%
+---@field suppressMiscellaneousFilesToasts? boolean
+---%configuration.omnisharp.dotnet.server.useOmnisharp%
+---@field useOmnisharp? boolean
+---%configuration.dotnet.server.useServerGC%
+---
+---```lua
+---default = true
+---```
+---@field useServerGC? boolean
+---%configuration.dotnet.server.waitForDebugger%
+---@field waitForDebugger? boolean
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.SymbolSearch
+---%configuration.dotnet.symbolSearch.searchReferenceAssemblies%
+---
+---```lua
+---default = true
+---```
+---@field searchReferenceAssemblies? boolean
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.TypeMembers
+---%configuration.dotnet.typeMembers.memberInsertionLocation%
+---
+---```lua
+---default = "withOtherMembersOfTheSameKind"
+---```
+---@field memberInsertionLocation? "withOtherMembersOfTheSameKind" | "atTheEnd"
+---%configuration.dotnet.typeMembers.propertyGenerationBehavior%
+---
+---```lua
+---default = "preferThrowingProperties"
+---```
+---@field propertyGenerationBehavior? "preferThrowingProperties" | "preferAutoProperties"
+
+---%generateOptionsSchema.expressionEvaluationOptions.description%
+---
+---```lua
+---default = {}
+---```
+---@class _.lspconfig.settings.omnisharp.Dotnet.UnitTestDebuggingOptions.ExpressionEvaluationOptions
+---%generateOptionsSchema.expressionEvaluationOptions.allowFastEvaluate.description%
+---
+---```lua
+---default = true
+---```
+---@field allowFastEvaluate? boolean
+---%generateOptionsSchema.expressionEvaluationOptions.allowImplicitFuncEval.description%
+---
+---```lua
+---default = true
+---```
+---@field allowImplicitFuncEval? boolean
+---%generateOptionsSchema.expressionEvaluationOptions.allowToString.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field allowToString? boolean
+---%generateOptionsSchema.expressionEvaluationOptions.showRawValues.description%
+---@field showRawValues? boolean
+
+---%generateOptionsSchema.logging.description%
+---
+---```lua
+---default = {}
+---```
+---@class _.lspconfig.settings.omnisharp.Dotnet.UnitTestDebuggingOptions.Logging
+---%generateOptionsSchema.logging.exceptions.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field exceptions? boolean
+---%generateOptionsSchema.logging.moduleLoad.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field moduleLoad? boolean
+---%generateOptionsSchema.logging.processExit.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field processExit? boolean
+---%generateOptionsSchema.logging.programOutput.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field programOutput? boolean
+---%generateOptionsSchema.logging.threadExit.markdownDescription%
+---@field threadExit? boolean
+
+---%generateOptionsSchema.symbolOptions.moduleFilter.description%
+---
+---```lua
+---default = {
+---  excludedModules = {},
+---  mode = "loadAllButExcluded"
+---}
+---```
+---@class _.lspconfig.settings.omnisharp.Dotnet.UnitTestDebuggingOptions.SymbolOptions.ModuleFilter
+---%generateOptionsSchema.symbolOptions.moduleFilter.excludedModules.description%
+---
+---```lua
+---default = {}
+---```
+---@field excludedModules? string[]
+---%generateOptionsSchema.symbolOptions.moduleFilter.includeSymbolsNextToModules.description%
+---
+---```lua
+---default = true
+---```
+---@field includeSymbolsNextToModules? boolean
+---%generateOptionsSchema.symbolOptions.moduleFilter.includeSymbolsOnDemand.description%
+---
+---```lua
+---default = true
+---```
+---@field includeSymbolsOnDemand? boolean
+---%generateOptionsSchema.symbolOptions.moduleFilter.includedModules.description%
+---
+---```lua
+---default = {}
+---```
+---@field includedModules? string[]
+---%generateOptionsSchema.symbolOptions.moduleFilter.mode.description%
+---
+---```lua
+---default = "loadAllButExcluded"
+---```
+---@field mode "loadAllButExcluded" | "loadOnlyIncluded"
+
+---%generateOptionsSchema.symbolOptions.description%
+---
+---```lua
+---default = {
+---  searchMicrosoftSymbolServer = false,
+---  searchNuGetOrgSymbolServer = false,
+---  searchPaths = {}
+---}
+---```
+---@class _.lspconfig.settings.omnisharp.Dotnet.UnitTestDebuggingOptions.SymbolOptions
+---%generateOptionsSchema.symbolOptions.cachePath.description%
+---
+---```lua
+---default = ""
+---```
+---@field cachePath? string
+---%generateOptionsSchema.symbolOptions.moduleFilter.description%
+---
+---```lua
+---default = {
+---  excludedModules = {},
+---  mode = "loadAllButExcluded"
+---}
+---```
+---@field moduleFilter? _.lspconfig.settings.omnisharp.Dotnet.UnitTestDebuggingOptions.SymbolOptions.ModuleFilter
+---%generateOptionsSchema.symbolOptions.searchMicrosoftSymbolServer.description%
+---@field searchMicrosoftSymbolServer? boolean
+---%generateOptionsSchema.symbolOptions.searchNuGetOrgSymbolServer.description%
+---@field searchNuGetOrgSymbolServer? boolean
+---%generateOptionsSchema.symbolOptions.searchPaths.description%
+---
+---```lua
+---default = {}
+---```
+---@field searchPaths? string[]
+
+---%configuration.dotnet.unitTestDebuggingOptions%
+---
+---```lua
+---default = {}
+---```
+---@class _.lspconfig.settings.omnisharp.Dotnet.UnitTestDebuggingOptions
+---%generateOptionsSchema.debugServer.description%
+---
+---```lua
+---default = 4711
+---```
+---@field debugServer? number
+---%generateOptionsSchema.enableStepFiltering.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field enableStepFiltering? boolean
+---%generateOptionsSchema.expressionEvaluationOptions.description%
+---
+---```lua
+---default = {}
+---```
+---@field expressionEvaluationOptions? _.lspconfig.settings.omnisharp.Dotnet.UnitTestDebuggingOptions.ExpressionEvaluationOptions
+---%generateOptionsSchema.justMyCode.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field justMyCode? boolean
+---%generateOptionsSchema.logging.description%
+---
+---```lua
+---default = {}
+---```
+---@field logging? _.lspconfig.settings.omnisharp.Dotnet.UnitTestDebuggingOptions.Logging
+---%generateOptionsSchema.requireExactSource.markdownDescription%
+---
+---```lua
+---default = true
+---```
+---@field requireExactSource? boolean
+---%generateOptionsSchema.sourceFileMap.markdownDescription%
+---@field sourceFileMap? table
+---%generateOptionsSchema.sourceLinkOptions.markdownDescription%
+---
+---```lua
+---default = {
+---  ["*"] = {
+---    enabled = true
+---  }
+---}
+---```
+---@field sourceLinkOptions? table
+---%generateOptionsSchema.suppressJITOptimizations.markdownDescription%
+---@field suppressJITOptimizations? boolean
+---%generateOptionsSchema.symbolOptions.description%
+---
+---```lua
+---default = {
+---  searchMicrosoftSymbolServer = false,
+---  searchNuGetOrgSymbolServer = false,
+---  searchPaths = {}
+---}
+---```
+---@field symbolOptions? _.lspconfig.settings.omnisharp.Dotnet.UnitTestDebuggingOptions.SymbolOptions
+---%generateOptionsSchema.targetArchitecture.markdownDescription%
+---@field targetArchitecture? "x86_64" | "arm64"
+---%generateOptionsSchema.type.markdownDescription%
+---
+---```lua
+---default = "coreclr"
+---```
+---@field type? "coreclr" | "clr"
+
+---@class _.lspconfig.settings.omnisharp.Dotnet.UnitTests
+---%configuration.dotnet.unitTests.runSettingsPath%
+---@field runSettingsPath? string
+
+---@class _.lspconfig.settings.omnisharp.Dotnet
+---@field autoInsert? _.lspconfig.settings.omnisharp.Dotnet.AutoInsert
+---@field backgroundAnalysis? _.lspconfig.settings.omnisharp.Dotnet.BackgroundAnalysis
+---@field codeLens? _.lspconfig.settings.omnisharp.Dotnet.CodeLens
+---@field completion? _.lspconfig.settings.omnisharp.Dotnet.Completion
+---%configuration.dotnet.defaultSolution.description%
+---@field defaultSolution? string
+---@field diagnostics? _.lspconfig.settings.omnisharp.Dotnet.Diagnostics
+---%configuration.dotnet.enableXamlTools%
+---
+---```lua
+---default = true
+---```
+---@field enableXamlTools? boolean
+---@field formatting? _.lspconfig.settings.omnisharp.Dotnet.Formatting
+---@field highlighting? _.lspconfig.settings.omnisharp.Dotnet.Highlighting
+---@field inlayHints? _.lspconfig.settings.omnisharp.Dotnet.InlayHints
+---@field navigation? _.lspconfig.settings.omnisharp.Dotnet.Navigation
+---%configuration.dotnet.preferCSharpExtension%
+---@field preferCSharpExtension? boolean
+---@field projects? _.lspconfig.settings.omnisharp.Dotnet.Projects
+---@field quickInfo? _.lspconfig.settings.omnisharp.Dotnet.QuickInfo
+---@field server? _.lspconfig.settings.omnisharp.Dotnet.Server
+---@field symbolSearch? _.lspconfig.settings.omnisharp.Dotnet.SymbolSearch
+---@field typeMembers? _.lspconfig.settings.omnisharp.Dotnet.TypeMembers
+---%configuration.dotnet.unitTestDebuggingOptions%
+---
+---```lua
+---default = {}
+---```
+---@field unitTestDebuggingOptions? _.lspconfig.settings.omnisharp.Dotnet.UnitTestDebuggingOptions
+---@field unitTests? _.lspconfig.settings.omnisharp.Dotnet.UnitTests
+
+---@class _.lspconfig.settings.omnisharp.Omnisharp
+---%configuration.omnisharp.autoStart%
+---
+---```lua
+---default = true
+---```
+---@field autoStart? boolean
+---%configuration.omnisharp.disableMSBuildDiagnosticWarning%
+---@field disableMSBuildDiagnosticWarning? boolean
+---%configuration.omnisharp.dotNetCliPaths%
+---@field dotNetCliPaths? string[]
+---%configuration.omnisharp.dotnetPath%
+---@field dotnetPath? string
+---%configuration.omnisharp.enableAsyncCompletion%
+---@field enableAsyncCompletion? boolean
+---%configuration.omnisharp.enableDecompilationSupport%
+---@field enableDecompilationSupport? boolean
+---%configuration.omnisharp.enableEditorConfigSupport%
+---
+---```lua
+---default = true
+---```
+---@field enableEditorConfigSupport? boolean
+---%configuration.omnisharp.enableLspDriver%
+---@field enableLspDriver? boolean
+---%configuration.omnisharp.enableMsBuildLoadProjectsOnDemand%
+---@field enableMsBuildLoadProjectsOnDemand? boolean
+---%configuration.omnisharp.loggingLevel%
+---
+---```lua
+---default = "information"
+---```
+---@field loggingLevel? "trace" | "debug" | "information" | "warning" | "error" | "critical"
+---%configuration.omnisharp.maxFindSymbolsItems%
+---
+---```lua
+---default = 1000
+---```
+---@field maxFindSymbolsItems? number
+---%configuration.omnisharp.maxProjectResults%
+---
+---```lua
+---default = 250
+---```
+---@field maxProjectResults? number
+---%configuration.omnisharp.minFindSymbolsFilterLength%
+---
+---```lua
+---default = 0
+---```
+---@field minFindSymbolsFilterLength? number
+---%configuration.omnisharp.monoPath%
+---@field monoPath? string
+---%configuration.omnisharp.projectFilesExcludePattern%
+---
+---```lua
+---default = "**/node_modules/**,**/.git/**,**/bower_components/**"
+---```
+---@field projectFilesExcludePattern? string
+---%configuration.omnisharp.projectLoadTimeout%
+---
+---```lua
+---default = 60
+---```
+---@field projectLoadTimeout? number
+---%configuration.omnisharp.sdkIncludePrereleases%
+---
+---```lua
+---default = true
+---```
+---@field sdkIncludePrereleases? boolean
+---%configuration.omnisharp.sdkPath%
+---@field sdkPath? string
+---%configuration.omnisharp.sdkVersion%
+---@field sdkVersion? string
+---%configuration.omnisharp.useEditorFormattingSettings%
+---
+---```lua
+---default = true
+---```
+---@field useEditorFormattingSettings? boolean
+---%configuration.omnisharp.useModernNet.description%
+---
+---```lua
+---default = true
+---```
+---@field useModernNet? boolean
+
+---@class _.lspconfig.settings.omnisharp.Razor.Completion
+---%configuration.razor.razor.completion.commitElementsWithSpace%
+---@field commitElementsWithSpace? boolean
+
+---@class _.lspconfig.settings.omnisharp.Razor.Format
+---%configuration.razor.razor.format.attributeIndentStyle%
+---
+---```lua
+---default = "alignWithFirst"
+---```
+---@field attributeIndentStyle? "alignWithFirst" | "indentByOne" | "indentByTwo"
+---%configuration.razor.razor.format.codeBlockBraceOnNextLine%
+---@field codeBlockBraceOnNextLine? boolean
+---%configuration.omnisharp.razor.format.enable%
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.omnisharp.Razor.Plugin
+---%configuration.omnisharp.razor.plugin.path%
+---@field path? string
+
+---@class _.lspconfig.settings.omnisharp.Razor
+---@field completion? _.lspconfig.settings.omnisharp.Razor.Completion
+---%configuration.omnisharp.razor.devmode%
+---@field devmode? boolean
+---@field format? _.lspconfig.settings.omnisharp.Razor.Format
+---@field plugin? _.lspconfig.settings.omnisharp.Razor.Plugin
+
+---@class lspconfig.settings.omnisharp
+---@field csharp? _.lspconfig.settings.omnisharp.Csharp
+---@field dotnet? _.lspconfig.settings.omnisharp.Dotnet
+---@field omnisharp? _.lspconfig.settings.omnisharp.Omnisharp
+---@field razor? _.lspconfig.settings.omnisharp.Razor

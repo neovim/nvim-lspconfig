@@ -1,0 +1,81 @@
+---@meta
+
+---@class _.lspconfig.settings.bashls.BashIde.Shfmt
+---Allow boolean operators (like && and ||) to start a line.
+---@field binaryNextLine? boolean
+---Indent patterns in case statements.
+---@field caseIndent? boolean
+---Place function opening braces on a separate line.
+---@field funcNextLine? boolean
+---Ignore shfmt config options in .editorconfig (always use language server config)
+---@field ignoreEditorconfig? boolean
+---**([Deprecated](https://github.com/mvdan/sh/issues/658))** Keep column alignment padding.
+---@field keepPadding? boolean
+---Language dialect to use when parsing (bash/posix/mksh/bats).
+---
+---```lua
+---default = "auto"
+---```
+---@field languageDialect? "auto" | "bash" | "posix" | "mksh" | "bats"
+---Controls the executable used for Shfmt formatting. An empty string will disable formatting.
+---
+---```lua
+---default = "shfmt"
+---```
+---@field path? string
+---Simplify code before formatting.
+---@field simplifyCode? boolean
+---Follow redirection operators with a space.
+---@field spaceRedirects? boolean
+
+---@class _.lspconfig.settings.bashls.BashIde
+---Maximum number of files to analyze in the background. Set to 0 to disable background analysis.
+---
+---```lua
+---default = 500
+---```
+---@field backgroundAnalysisMaxFiles? number
+---Enable diagnostics for source errors. Ignored if includeAllWorkspaceSymbols is true.
+---@field enableSourceErrorDiagnostics? boolean
+---Configure explainshell server endpoint in order to get hover documentation on flags and options.
+---
+---```lua
+---default = ""
+---```
+---@field explainshellEndpoint? string
+---Glob pattern for finding and parsing shell script files in the workspace. Used by the background analysis features across files.
+---
+---```lua
+---default = "**/*@(.sh|.inc|.bash|.command)"
+---```
+---@field globPattern? string
+---Controls how symbols (e.g. variables and functions) are included and used for completion, documentation, and renaming. If false (default and recommended), then we only include symbols from sourced files (i.e. using non dynamic statements like 'source file.sh' or '. file.sh' or following ShellCheck directives). If true, then all symbols from the workspace are included.
+---@field includeAllWorkspaceSymbols? boolean
+---Controls the log level of the language server.
+---
+---```lua
+---default = "info"
+---```
+---@field logLevel? "debug" | "info" | "warning" | "error"
+---Additional ShellCheck arguments. Note that we already add the following arguments: --shell, --format, and --external-sources (if shellcheckExternalSources is true).
+---
+---```lua
+---default = ""
+---```
+---@field shellcheckArguments? string
+---Controls whether ShellCheck is invoked with --external-sources. When enabled (default), ShellCheck follows source directives to lint referenced files. On projects with many cross-sourcing scripts this can cause unbounded memory growth. Set to false to disable.
+---
+---```lua
+---default = true
+---```
+---@field shellcheckExternalSources? boolean
+---Controls the executable used for ShellCheck linting information. An empty string will disable linting.
+---
+---```lua
+---default = "shellcheck"
+---```
+---@field shellcheckPath? string
+---@field shfmt? _.lspconfig.settings.bashls.BashIde.Shfmt
+
+---@class lspconfig.settings.bashls
+---@field bashIde? _.lspconfig.settings.bashls.BashIde

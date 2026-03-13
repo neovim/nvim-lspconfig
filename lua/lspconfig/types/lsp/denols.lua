@@ -1,0 +1,257 @@
+---@meta
+
+---@class _.lspconfig.settings.denols.Deno.CodeLens
+---Enables or disables the display of code lens information for implementations of items in the code.
+---@field implementations? boolean
+---Enables or disables the display of code lens information for references of items in the code.
+---@field references? boolean
+---Enables or disables the display of code lens information for all functions in the code.
+---@field referencesAllFunctions? boolean
+---Enables or disables the display of code lenses that allow running of individual tests in the code.
+---@field test? boolean
+---Additional arguments to use with the run test code lens.  Defaults to `[ "--allow-all", "--no-check" ]`.
+---
+---```lua
+---default = { "--allow-all", "--no-check" }
+---```
+---@field testArgs? string[]
+
+---@class _.lspconfig.settings.denols.Deno.InlayHints.EnumMemberValues
+---Enable/disable inlay hints for enum values.
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.denols.Deno.InlayHints.FunctionLikeReturnTypes
+---Enable/disable inlay hints for implicit function return types.
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.denols.Deno.InlayHints.ParameterNames
+---Enable/disable inlay hints for parameter names.
+---
+---```lua
+---default = "none"
+---```
+---@field enabled? "none" | "literals" | "all"
+---Do not display an inlay hint when the argument name matches the parameter.
+---
+---```lua
+---default = true
+---```
+---@field suppressWhenArgumentMatchesName? boolean
+
+---@class _.lspconfig.settings.denols.Deno.InlayHints.ParameterTypes
+---Enable/disable inlay hints for implicit parameter types.
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.denols.Deno.InlayHints.PropertyDeclarationTypes
+---Enable/disable inlay hints for implicit property declarations.
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.denols.Deno.InlayHints.VariableTypes
+---Enable/disable inlay hints for implicit variable types.
+---@field enabled? boolean
+---Suppress type hints where the variable name matches the implicit type.
+---
+---```lua
+---default = true
+---```
+---@field suppressWhenTypeMatchesName? boolean
+
+---@class _.lspconfig.settings.denols.Deno.InlayHints
+---@field enumMemberValues? _.lspconfig.settings.denols.Deno.InlayHints.EnumMemberValues
+---@field functionLikeReturnTypes? _.lspconfig.settings.denols.Deno.InlayHints.FunctionLikeReturnTypes
+---@field parameterNames? _.lspconfig.settings.denols.Deno.InlayHints.ParameterNames
+---@field parameterTypes? _.lspconfig.settings.denols.Deno.InlayHints.ParameterTypes
+---@field propertyDeclarationTypes? _.lspconfig.settings.denols.Deno.InlayHints.PropertyDeclarationTypes
+---@field variableTypes? _.lspconfig.settings.denols.Deno.InlayHints.VariableTypes
+
+---@class _.lspconfig.settings.denols.Deno.OrganizeImports
+---Controls if the Deno language server contributes organize imports code actions. Disable to rely on VS Code's built-in TypeScript/JavaScript organize imports instead.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.denols.Deno.Suggest.Imports
+---If enabled, when new hosts/origins are encountered that support import suggestions, you will be prompted to enable or disable it.  Defaults to `true`.
+---
+---```lua
+---default = true
+---```
+---@field autoDiscover? boolean
+---Controls which hosts are enabled for import suggestions.
+---
+---```lua
+---default = {
+---  ["https://deno.land"] = true
+---}
+---```
+---@field hosts? table
+
+---@class _.lspconfig.settings.denols.Deno.Suggest
+---```lua
+---default = true
+---```
+---@field autoImports? boolean
+---@field completeFunctionCalls? boolean
+---@field imports? _.lspconfig.settings.denols.Deno.Suggest.Imports
+---```lua
+---default = true
+---```
+---@field names? boolean
+---```lua
+---default = true
+---```
+---@field paths? boolean
+
+---@class _.lspconfig.settings.denols.Deno.Symbols.Document
+---Controls if the Deno language server provides document symbols. Disable to rely on VS Code's built-in providers instead.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.denols.Deno.Symbols.Workspace
+---Controls if the Deno language server provides workspace symbols. Disable to rely on VS Code's built-in providers instead.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.denols.Deno.Symbols
+---@field document? _.lspconfig.settings.denols.Deno.Symbols.Document
+---@field workspace? _.lspconfig.settings.denols.Deno.Symbols.Workspace
+
+---@class _.lspconfig.settings.denols.Deno.Testing
+---Arguments to use when running tests via the Test Explorer.  Defaults to `[ "--allow-all" ]`.
+---
+---```lua
+---default = { "--allow-all", "--no-check" }
+---```
+---@field args? string[]
+
+---@class _.lspconfig.settings.denols.Deno.Trace
+---Traces the communication between VS Code and the Deno Language Server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "messages" | "off" | "verbose"
+
+---@class _.lspconfig.settings.denols.Deno
+---A path to the cache directory for Deno. By default, the operating system's cache path plus `deno` is used, or the `DENO_DIR` environment variable, but if set, this path will be used instead.
+---@field cache? string
+---Controls if the extension should cache the active document's dependencies on save.
+---
+---```lua
+---default = true
+---```
+---@field cacheOnSave? boolean
+---A list of root certificate stores used to validate TLS certificates when fetching and caching remote resources. This overrides the `DENO_TLS_CA_STORE` environment variable if set.
+---@field certificateStores? string[]
+---@field codeLens? _.lspconfig.settings.denols.Deno.CodeLens
+---The file path to a configuration file. This is the equivalent to using `--config` on the command line. The path can be either be relative to the workspace, or an absolute path.
+---
+---It is recommend you name it `deno.json` or `deno.jsonc`.
+---
+---**Not recommended to be set globally.**
+---@field config? string
+---Controls the default action when clicking on a task in the _Deno Tasks sidebar_.
+---
+---```lua
+---default = "open"
+---```
+---@field defaultTaskCommand? "open" | "run"
+---Disables the Deno Language Server for specific paths. This will leave the built in TypeScript/JavaScript language server enabled for those paths. Takes priority over `deno.enablePaths`.
+---
+---**Not recommended to be enabled in user settings.**
+---
+---```lua
+---default = {}
+---```
+---@field disablePaths? string[]
+---Maximum number of file system entries to traverse when finding scripts to preload into TypeScript on startup. Set this to 0 to disable document preloading.
+---
+---```lua
+---default = 1000
+---```
+---@field documentPreloadLimit? number
+---Controls if the Deno Language Server is enabled. When enabled, the extension will disable the built-in VSCode JavaScript and TypeScript language services, and will use the Deno Language Server instead.
+---
+---If omitted, your preference will be inferred as true if there is a `deno.json[c]` at your workspace root and false if not.
+---
+---If you want to enable only part of your workspace folder, consider using `deno.enablePaths` setting instead.
+---
+---**Not recommended to be enabled globally.**
+---@field enable? boolean
+---Enables the Deno Language Server for specific paths, instead of for the whole workspace folder. This will disable the built in TypeScript/JavaScript language server for those paths.
+---
+---When a value is set, the value of `"deno.enable"` is ignored.
+---
+---The workspace folder is used as the base for the supplied paths. If for example you have all your Deno code in `worker` path in your workspace, you can add an item with the value of `./worker`, and the Deno will only provide diagnostics for the files within `worker` or any of its sub paths.
+---
+---**Not recommended to be enabled in user settings.**
+---@field enablePaths? string[]
+---Additional environment variables to pass to Deno processes. Overrides the user's env and `deno.envFile`. These will be overridden by more specific settings such as `deno.future` for `DENO_FUTURE`, and invariables like `NO_COLOR=1`.
+---
+---```lua
+---default = {}
+---```
+---@field env? table
+---Env file containing additional environment variables to pass to Deno processes. Overrides the user's env. These will be overridden by `deno.env`, more specific settings such as `deno.future` for `DENO_FUTURE`, and invariables like `NO_COLOR=1`.
+---@field envFile? string
+---Disables the server-capability for pull diagnostics to force push-based diagnostics.
+---@field forcePushBasedDiagnostics? boolean
+---Enable breaking features likely to be shipped in Deno 2.0.
+---@field future? boolean
+---The file path to an import map. This is the equivalent to using `--import-map` on the command line.
+---
+---[Import maps](https://deno.land/manual@v1.6.0/linking_to_external_code/import_maps) provide a way to "relocate" modules based on their specifiers. The path can either be relative to the workspace, or an absolute path.
+---
+---**Not recommended to be set globally.**
+---@field importMap? string
+---@field inlayHints? _.lspconfig.settings.denols.Deno.InlayHints
+---Determines if the internal debugging information for the Deno language server will be logged to the _Deno Language Server_ console.
+---@field internalDebug? boolean
+---Enables the inspector server for the JS runtime used by the Deno Language Server to host its TS server. Optionally provide an address for the inspector listener e.g. "127.0.0.1:9222" (default).
+---@field internalInspect? boolean|string
+---Controls if linting information will be provided by the Deno Language Server.
+---
+---**Not recommended to be enabled globally.**
+---
+---```lua
+---default = true
+---```
+---@field lint? boolean
+---Write logs to a file in a project-local directory.
+---@field logFile? boolean
+---Maximum amount of memory the TypeScript isolate can use. Defaults to 3072 (3GB).
+---
+---```lua
+---default = 3072
+---```
+---@field maxTsServerMemory? number
+---@field organizeImports? _.lspconfig.settings.denols.Deno.OrganizeImports
+---A path to the `deno` CLI executable. By default, the extension looks for `deno` in the `PATH`, but if set, will use the path specified instead.
+---@field path? string
+---@field suggest? _.lspconfig.settings.denols.Deno.Suggest
+---@field symbols? _.lspconfig.settings.denols.Deno.Symbols
+---@field testing? _.lspconfig.settings.denols.Deno.Testing
+---A path to a PEM certificate to use as the certificate authority when validating TLS certificates when fetching and caching remote resources. This is like using `--cert` on the Deno CLI and overrides the `DENO_CERT` environment variable if set.
+---@field tlsCertificate? string
+---@field trace? _.lspconfig.settings.denols.Deno.Trace
+---**DANGER** disables verification of TLS certificates for the hosts provided. There is likely a better way to deal with any errors than use this option. This is like using `--unsafely-ignore-certificate-errors` in the Deno CLI.
+---@field unsafelyIgnoreCertificateErrors? string[]
+---Controls which `--unstable-*` features tests will be run with when running them via the explorer.
+---
+---**Not recommended to be enabled globally.**
+---
+---```lua
+---default = {}
+---```
+---@field unstable? string[]
+
+---@class lspconfig.settings.denols
+---@field deno? _.lspconfig.settings.denols.Deno

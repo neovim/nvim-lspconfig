@@ -1,0 +1,318 @@
+---@meta
+
+---@class _.lspconfig.settings.sourcekit.SourcekitLsp.InlayHints
+---Display Inlay Hints. Inlay Hints are variable annotations indicating their inferred type. They are only available if you are using Swift 5.6 or later.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.sourcekit.SourcekitLsp.Trace
+---Traces the communication between VS Code and the SourceKit-LSP language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.sourcekit.SourcekitLsp
+---Disable the running of SourceKit-LSP.
+---@field disable? boolean
+---@field inlayHints? _.lspconfig.settings.sourcekit.SourcekitLsp.InlayHints
+---Arguments to pass to SourceKit-LSP. Keys and values should be provided as individual entries in the list. e.g. `--experimental-feature=show-macro-expansions`
+---
+---```lua
+---default = {}
+---```
+---@field serverArguments? string[]
+---The path of the `sourcekit-lsp` executable. The default is to look in the path where `swift` is found.
+---@field serverPath? string
+---Add LSP functionality for C/C++ files. By default this is set to disable when the C/C++ extension is active.
+---
+---```lua
+---default = "cpptools-inactive"
+---```
+---@field ["support-c-cpp"]? "enable" | "disable" | "cpptools-inactive"
+---@field trace? _.lspconfig.settings.sourcekit.SourcekitLsp.Trace
+
+---@class _.lspconfig.settings.sourcekit.Swift.Debugger
+---Select which debug adapter to use to debug Swift executables.
+---
+---```lua
+---default = "auto"
+---```
+---@field debugAdapter? "auto" | "lldb-dap" | "CodeLLDB"
+---Path to lldb debug adapter.
+---
+---```lua
+---default = ""
+---```
+---@field path? string
+---Choose how CodeLLDB settings are updated when debugging Swift executables.
+---
+---```lua
+---default = "prompt"
+---```
+---@field setupCodeLLDB? "prompt" | "alwaysUpdateGlobal" | "alwaysUpdateWorkspace" | "never"
+---Use the LLDB debug adapter packaged with the Swift toolchain as your debug adapter. Note: this is only available starting with Swift 6. The CodeLLDB extension will be used if your Swift toolchain does not contain lldb-dap.
+---@field useDebugAdapterFromToolchain? boolean
+
+---@class _.lspconfig.settings.sourcekit.Swift.SourcekitLsp.Trace
+---Controls logging the communication between VS Code and the SourceKit-LSP language server. Logs can be viewed in Output > SourceKit Language Server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.sourcekit.Swift.SourcekitLsp
+---Turns background indexing `on` or `off`. `auto` will enable background indexing if the Swift version is >= 6.1. This option has no effect in Swift versions prior to 6.0.
+---
+---```lua
+---default = "auto"
+---```
+---@field backgroundIndexing? "on" | "off" | "auto"
+---Disable SourceKit-LSP. This will turn off features like code completion, error diagnostics and jump-to-definition. Features like swift-testing test discovery will not work correctly.
+---@field disable? boolean
+---Arguments to pass to SourceKit-LSP. Keys and values should be provided as individual entries in the list. e.g. `--experimental-feature=show-macro-expansions`
+---
+---```lua
+---default = {}
+---```
+---@field serverArguments? string[]
+---The path of the `sourcekit-lsp` executable. The default is to look in the path where `swift` is found.
+---@field serverPath? string
+---List of languages supported by SourceKit-LSP. This is used to determine whether SourceKit-LSP should provide language features for a particular file type. If you want a different extension to provide support for a language, remove it from the list.
+---
+---```lua
+---default = { "swift", "objective-c", "objective-cpp", "c", "cpp" }
+---```
+---@field ["supported-languages"]? string[]
+---@field trace? _.lspconfig.settings.sourcekit.Swift.SourcekitLsp.Trace
+
+---@class _.lspconfig.settings.sourcekit.Swift
+---The path of the SDK to compile against (`--sdk` parameter). This is of use when supporting non-standard SDK layouts on Windows and using custom SDKs. The default SDK is determined by the environment on macOS and Windows.
+---
+---For SwiftPM projects, prefer using `swift.swiftSDK` with a triple (such as `arm64-apple-ios`) or Swift SDK name instead.
+---
+---```lua
+---default = ""
+---```
+---@field SDK? string
+---Action after a Build task generates errors.
+---
+---```lua
+---default = "Focus Terminal"
+---```
+---@field actionAfterBuildError? "Focus Problems" | "Focus Terminal" | "Do Nothing"
+---Additional arguments to pass to the `swift test` or `swift build` commands used when building and running tests from within VS Code.
+---
+---```lua
+---default = {}
+---```
+---@field additionalTestArguments? string[]
+---The path to a directory that will be used to store attachments produced during a test run.
+---
+---A relative path resolves relative to the root directory of the workspace running the test(s)
+---
+---```lua
+---default = ".build/attachments"
+---```
+---@field attachmentsPath? string
+---When loading a `Package.swift`, auto-generate `launch.json` configurations for running any executables.
+---
+---```lua
+---default = true
+---```
+---@field autoGenerateLaunchConfigurations? boolean
+---Run `swift build` in the background whenever a file is saved. Setting to `true` enables, or you can use `object` notation for more fine grained control. It is possible the background compilation will already be running when you attempt a compile yourself, so this is disabled by default.
+---@field backgroundCompilation? boolean|table
+---Additional arguments to pass to `swift build` and `swift test`. Keys and values should be provided as individual entries in the list. If you have created a copy of the build task in `tasks.json` then these build arguments will not be propagated to that task.
+---
+---```lua
+---default = {}
+---```
+---@field buildArguments? string[]
+---The path to a directory that will be used for build artifacts. This path will be added to all swift package manager commands that are executed by vscode-swift extension via `--scratch-path` option. When no value provided - nothing gets passed to swift package manager and it will use its default value of `.build` folder in the workspace.
+---
+---You can use absolute path for directory or the relative path, which will use the workspace path as a base. Note that VS Code does not respect tildes (`~`) in paths which represents user home folder under *nix systems.
+---
+---```lua
+---default = ""
+---```
+---@field buildPath? string
+---When opening a .sourckit-lsp/config.json configuration file, whether or not to check if the $schema matches the version of Swift you are using.
+---
+---```lua
+---default = true
+---```
+---@field checkLspConfigurationSchema? boolean
+---When enabled, the extension will create "swift" build tasks for library products in the package manifest. Note that automatic library products will not be included.
+---@field createTasksForLibraryProducts? boolean
+---@field debugger? _.lspconfig.settings.sourcekit.Swift.Debugger
+---Output additional diagnostics to the Swift output channel.
+---@field diagnostics? boolean
+---Controls how diagnostics from the various providers are merged into the collection of `swift` errors and warnings shown in the Problems pane.
+---
+---```lua
+---default = "keepSourceKit"
+---```
+---@field diagnosticsCollection? "onlySwiftc" | "onlySourceKit" | "keepSwiftc" | "keepSourceKit" | "keepAll"
+---The formatting style used when printing diagnostics in the Problems panel. Corresponds to the `-diagnostic-style` option to pass to `swiftc` when running `swift` tasks.
+---
+---```lua
+---default = "default"
+---```
+---@field diagnosticsStyle? "default" | "llvm" | "swift"
+---Disable automatic running of `swift package resolve` whenever the `Package.swift` or `Package.resolved` files are updated. This will also disable searching for command plugins and the initial test discovery process.
+---@field disableAutoResolve? boolean
+---Disable sandboxing when running SwiftPM commands. In most cases you should keep the sandbox enabled and leave this setting set to `false`
+---@field disableSandbox? boolean
+---Disable sandboxing when running SwiftPM commands. In most cases you should keep the sandbox enabled and leave this setting set to `false`
+---@field disableSandox? boolean
+---Disables automated Build Tasks, Package Dependency view, Launch configuration generation and TestExplorer.
+---@field disableSwiftPackageManagerIntegration? boolean
+---Disable the automatic Swiftly installation prompt when no Swift toolchain is found.
+---@field disableSwiftlyInstallPrompt? boolean
+---Controls whether or not the extension will contribute environment variables defined in `Swift: Environment Variables` to the integrated terminal. If this is set to `true` and a custom `Swift: Path` is also set then the swift path is appended to the terminal's `PATH`.
+---
+---```lua
+---default = true
+---```
+---@field enableTerminalEnvironment? boolean
+---A list of paths to exclude from code coverage reports. Paths can be absolute or relative to the workspace root.
+---
+---```lua
+---default = {}
+---```
+---@field excludeFromCodeCoverage? string[]
+---Configure glob patterns for excluding Swift package folders from getting activated. This will take precedence over the glob patterns provided to `files.exclude`.
+---@field excludePathsFromActivation? table
+---A list of glob patterns to exclude from the Package Dependencies view. Always use forward-slashes in glob expressions regardless of platform. This is combined with VS Code's default `files.exclude` setting.
+---
+---```lua
+---default = { "**/.git", "**/.github" }
+---```
+---@field excludePathsFromPackageDependencies? string[]
+---A list of folders to ignore when searching sub-folders for Swift Packages. The `swift.searchSubfoldersForPackages` must be `true` for this setting to have an effect. Always use forward-slashes in glob expressions regardless of platform. This is combined with VS Code's `files.exclude` setting.
+---
+---```lua
+---default = { ".", ".build", "Packages", "out", "bazel-out", "bazel-bin" }
+---```
+---@field ignoreSearchingForPackagesInSubfolders? string[]
+---Ignore `.swift-version` files and disable automatic toolchain switching based on them. When enabled, the extension will always use the global default toolchain instead of switching based on per-project `.swift-version` files.
+---@field ignoreSwiftVersionFile? boolean
+---Set the branch to use when setting the `$schema` property of the SourceKit-LSP configuration. For example: "release/6.1" or "main". When this setting is unset, the extension will determine the branch based on the version of the toolchain that is in use.
+---@field lspConfigurationBranch? string
+---Controls whether to open a swift project automatically after creating it.
+---
+---```lua
+---default = "prompt"
+---```
+---@field openAfterCreateNewProject? "always" | "alwaysNewWindow" | "whenNoFolderOpen" | "prompt"
+---The log level of the Swift output channel. This has no effect on the verbosity of messages written to the extension's log file.
+---
+---```lua
+---default = "info"
+---```
+---@field outputChannelLogLevel? "debug" | "info" | "warn" | "error"
+---Additional arguments to pass to swift commands that do package resolution, such as `swift package resolve`, `swift package update`, `swift build` and `swift test`. Keys and values should be provided as individual entries in the list.
+---
+---```lua
+---default = {}
+---```
+---@field packageArguments? string[]
+---Override the default path of the folder containing the Swift executables. The default is to look in the `PATH` environment variable.
+---
+---```lua
+---default = ""
+---```
+---@field path? string
+---Configure a list of arguments to pass to command invocations. This can either be an array of arguments, which will apply to all command invocations, or an object with command names as the key where the value is an array of arguments.
+---
+---```lua
+---default = {}
+---```
+---@field pluginArguments? any
+---Configures a list of permissions to be used when running a command plugins.
+---
+---Permissions objects are defined in the form:
+---
+---`{ "PluginName:command": { "allowWritingToPackageDirectory": true } }`.
+---
+---A key of `PluginName:command` will set permissions for a specific command. A key of `PluginName` will set permissions for all commands in the plugin.
+---
+---```lua
+---default = {}
+---```
+---@field pluginPermissions? table
+---Controls whether or not to record the duration of tests in the Test Explorer. This is used to show the duration of tests in the Test Explorer view. If you're experiencing performance issues when running a large number of tests that complete quickly, disabling this setting can make the UI more responsive.
+---
+---```lua
+---default = true
+---```
+---@field recordTestDuration? boolean
+---The path of the folder containing the Swift runtime libraries. This is of use when supporting non-standard SDK layouts on Windows. On Windows the runtime path is added to the `Path` environment variable. This is of less use on macOS and Linux but will be added to `DYLD_LIBRARY_PATH` and `LD_LIBRARY_PATH` environment variables respectively on each platform. 
+---
+---```lua
+---default = ""
+---```
+---@field runtimePath? string
+---Runtime [sanitizer instrumentation](https://www.swift.org/documentation/server/guides/llvm-sanitizers.html).
+---
+---```lua
+---default = "off"
+---```
+---@field sanitizer? "off" | "thread" | "address"
+---The default Swift version to use when running Swift scripts.
+---@field scriptSwiftLanguageVersion? "6" | "5" | "4.2" | "4" | "Ask Every Run"
+---Search sub-folders of workspace folder for Swift Packages at start up.
+---@field searchSubfoldersForPackages? boolean
+---Controls where to show the Swift build progress when running a `swift` build task.
+---
+---```lua
+---default = "swiftStatus"
+---```
+---@field showBuildStatus? "never" | "swiftStatus" | "progress" | "notification"
+---Controls whether or not the create new swift project button appears in the welcome page.
+---
+---```lua
+---default = true
+---```
+---@field showCreateSwiftProjectInWelcomePage? boolean
+---Controls whether or not to show inline code lenses for running and debugging tests inline, above test and suite declarations. If set to an array, specify one or more of the following: 'run', 'debug', 'coverage'.
+---
+---```lua
+---default = true
+---```
+---@field showTestCodeLenses? boolean|string[]
+---@field ["sourcekit-lsp"]? _.lspconfig.settings.sourcekit.Swift.SourcekitLsp
+---Additional environment variables to pass to swift operations (`swift build`, `swift resolve`, etc...).
+---
+---```lua
+---default = {}
+---```
+---@field swiftEnvironmentVariables? table
+---The [Swift SDK](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0387-cross-compilation-destinations.md) to compile against (`--swift-sdk` parameter).
+---
+---```lua
+---default = ""
+---```
+---@field swiftSDK? string
+---Environment variables to set when running tests. To set environment variables when debugging an application you should edit the `env` field in the relevant `launch.json` configuration.
+---
+---```lua
+---default = {}
+---```
+---@field testEnvironmentVariables? table
+---Controls whether or not the extension will warn about being unable to create symlinks. (Windows only)
+---
+---```lua
+---default = true
+---```
+---@field warnAboutSymlinkCreation? boolean
+
+---@class lspconfig.settings.sourcekit
+---@field ["sourcekit-lsp"]? _.lspconfig.settings.sourcekit.SourcekitLsp
+---@field swift? _.lspconfig.settings.sourcekit.Swift

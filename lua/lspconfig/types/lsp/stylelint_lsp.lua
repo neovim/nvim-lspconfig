@@ -1,0 +1,47 @@
+---@meta
+
+---@class _.lspconfig.settings.stylelint_lsp.Stylelintplus.Trace
+---Capture trace messages from the server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.stylelint_lsp.Stylelintplus
+---Auto-fix on format request.
+---@field autoFixOnFormat? boolean
+---Auto-fix and format on save.
+---@field autoFixOnSave? boolean
+---Stylelint config. If config and configFile are unset, stylelint will automatically look for a config file.
+---@field config? table
+---Stylelint config file. If config and configFile are unset, stylelint will automatically look for a config file.
+---@field configFile? string
+---Stylelint config overrides. These will be applied on top of the config, configFile, or auto-discovered config file loaded by stylelint.
+---@field configOverrides? table
+---Run stylelint on javascript/typescript files.
+---@field cssInJs? boolean
+---If false, stylelint will not validate the file.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Filetypes that coc-stylelintplus will lint.
+---
+---```lua
+---default = { "css", "less", "postcss", "sass", "scss", "sugarss", "vue", "wxss" }
+---```
+---@field filetypes? string[]
+---@field trace? _.lspconfig.settings.stylelint_lsp.Stylelintplus.Trace
+---Validate after saving. Automatically enabled if autoFixOnSave is enabled.
+---@field validateOnSave? boolean
+---Validate after making changes.
+---
+---```lua
+---default = true
+---```
+---@field validateOnType? boolean
+
+---@class lspconfig.settings.stylelint_lsp
+---@field stylelintplus? _.lspconfig.settings.stylelint_lsp.Stylelintplus

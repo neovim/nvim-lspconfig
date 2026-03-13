@@ -1,0 +1,282 @@
+---@meta
+
+---Show disable lint rule in the quick fix menu.
+---
+---```lua
+---default = {
+---  commentStyle = "line",
+---  enable = true,
+---  location = "separateLine"
+---}
+---```
+---@class _.lspconfig.settings.eslint.Eslint.CodeAction.DisableRuleComment
+---```lua
+---default = "line"
+---```
+---@field commentStyle? "line" | "block"
+---Show the disable code actions.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Configure the disable rule code action to insert the comment on the same line or a new line.
+---
+---```lua
+---default = "separateLine"
+---```
+---@field location? "separateLine" | "sameLine"
+
+---Show open lint rule documentation web page in the quick fix menu.
+---
+---```lua
+---default = {
+---  enable = true
+---}
+---```
+---@class _.lspconfig.settings.eslint.Eslint.CodeAction.ShowDocumentation
+---Show the documentation code actions.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.eslint.Eslint.CodeAction
+---Show disable lint rule in the quick fix menu.
+---
+---```lua
+---default = {
+---  commentStyle = "line",
+---  enable = true,
+---  location = "separateLine"
+---}
+---```
+---@field disableRuleComment? _.lspconfig.settings.eslint.Eslint.CodeAction.DisableRuleComment
+---Show open lint rule documentation web page in the quick fix menu.
+---
+---```lua
+---default = {
+---  enable = true
+---}
+---```
+---@field showDocumentation? _.lspconfig.settings.eslint.Eslint.CodeAction.ShowDocumentation
+
+---@class _.lspconfig.settings.eslint.Eslint.CodeActionsOnSave
+---Specifies the code action mode. Possible values are 'all' and 'problems'.
+---
+---```lua
+---default = "all"
+---```
+---@field mode? "all" | "problems"
+---The ESLint options object to use on save (see https://eslint.org/docs/developer-guide/nodejs-api#eslint-class). `eslint.codeActionsOnSave.rules`, if specified, will take priority over any rule options here.
+---
+---```lua
+---default = {}
+---```
+---@field options? table
+---The rules that should be executed when computing the code actions on save or formatting a file. Defaults to the rules configured via the ESLint configuration
+---@field rules? string[]|any
+
+---@class _.lspconfig.settings.eslint.Eslint.Experimental
+---Enables support of experimental Flat Config (aka eslint.config.js). Requires ESLint version >= 8.21 < 8.57.0).
+---@field useFlatConfig? boolean
+
+---@class _.lspconfig.settings.eslint.Eslint.Format
+---Enables ESLint as a formatter.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.eslint.Eslint.LintTask
+---The command to run the task for linting the whole workspace. Defaults to the found eslint binary for the workspace, or 'eslint' if no binary could be found.
+---
+---```lua
+---default = "eslint"
+---```
+---@field command? string
+---Controls whether a task for linting the whole workspace will be available.
+---@field enable? boolean
+---Command line options applied when running the task for linting the whole workspace (see https://eslint.org/docs/user-guide/command-line-interface).
+---
+---```lua
+---default = "."
+---```
+---@field options? string
+
+---@class _.lspconfig.settings.eslint.Eslint.Migration
+---Whether ESlint should migrate auto fix on save settings.
+---
+---```lua
+---default = "on"
+---```
+---@field ["2_x"]? "off" | "on"
+
+---@class _.lspconfig.settings.eslint.Eslint.Notebooks.Rules
+---A special rules customization section for text cells in notebook documents.
+---@field customizations? table[]
+
+---@class _.lspconfig.settings.eslint.Eslint.Notebooks
+---@field rules? _.lspconfig.settings.eslint.Eslint.Notebooks.Rules
+
+---@class _.lspconfig.settings.eslint.Eslint.Problems
+---Shortens the text spans of underlined problems to their first related line.
+---@field shortenToSingleLine? boolean
+
+---@class _.lspconfig.settings.eslint.Eslint.Rules
+---Override the severity of one or more rules reported by this extension, regardless of the project's ESLint config. Use globs to apply default severities for multiple rules.
+---@field customizations? table[]
+
+---The time budget in milliseconds to spend on computing fixes before showing a warning or error.
+---
+---```lua
+---default = {
+---  error = 6000,
+---  warn = 3000
+---}
+---```
+---@class _.lspconfig.settings.eslint.Eslint.TimeBudget.OnFixes
+---The time budget in milliseconds to spend on computing fixes before showing an error.
+---
+---```lua
+---default = 6000
+---```
+---@field error? number
+---The time budget in milliseconds to spend on computing fixes before showing a warning.
+---
+---```lua
+---default = 3000
+---```
+---@field warn? number
+
+---The time budget in milliseconds to spend on validation before showing a warning or error.
+---
+---```lua
+---default = {
+---  error = 8000,
+---  warn = 4000
+---}
+---```
+---@class _.lspconfig.settings.eslint.Eslint.TimeBudget.OnValidation
+---The time budget in milliseconds to spend on validation before showing an error.
+---
+---```lua
+---default = 8000
+---```
+---@field error? number
+---The time budget in milliseconds to spend on validation before showing a warning.
+---
+---```lua
+---default = 4000
+---```
+---@field warn? number
+
+---@class _.lspconfig.settings.eslint.Eslint.TimeBudget
+---The time budget in milliseconds to spend on computing fixes before showing a warning or error.
+---
+---```lua
+---default = {
+---  error = 6000,
+---  warn = 3000
+---}
+---```
+---@field onFixes? _.lspconfig.settings.eslint.Eslint.TimeBudget.OnFixes
+---The time budget in milliseconds to spend on validation before showing a warning or error.
+---
+---```lua
+---default = {
+---  error = 8000,
+---  warn = 4000
+---}
+---```
+---@field onValidation? _.lspconfig.settings.eslint.Eslint.TimeBudget.OnValidation
+
+---@class _.lspconfig.settings.eslint.Eslint.Trace
+---Traces the communication between VSCode and the eslint linter service.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"|table
+
+---@class _.lspconfig.settings.eslint.Eslint
+---Turns auto fix on save on or off.
+---@field autoFixOnSave? boolean
+---@field codeAction? _.lspconfig.settings.eslint.Eslint.CodeAction
+---@field codeActionsOnSave? _.lspconfig.settings.eslint.Eslint.CodeActionsOnSave
+---Enables ESLint debug mode (same as `--debug` on the command line)
+---@field debug? boolean
+---Controls whether eslint is enabled or not.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Additional exec argv argument passed to the runtime. This can for example be used to control the maximum heap space using --max_old_space_size
+---@field execArgv? string[]|any
+---@field experimental? _.lspconfig.settings.eslint.Eslint.Experimental
+---@field format? _.lspconfig.settings.eslint.Eslint.Format
+---If true, untitled files won't be validated by ESLint.
+---@field ignoreUntitled? boolean
+---@field lintTask? _.lspconfig.settings.eslint.Eslint.LintTask
+---@field migration? _.lspconfig.settings.eslint.Eslint.Migration
+---The value of `NODE_ENV` to use when running eslint tasks.
+---@field nodeEnv? string
+---A path added to `NODE_PATH` when resolving the eslint module.
+---@field nodePath? string
+---@field notebooks? _.lspconfig.settings.eslint.Eslint.Notebooks
+---Whether ESLint should issue a warning on ignored files.
+---
+---```lua
+---default = "off"
+---```
+---@field onIgnoredFiles? "warn" | "off"
+---The eslint options object to provide args normally passed to eslint when executed from a command line (see https://eslint.org/docs/developer-guide/nodejs-api#eslint-class).
+---
+---```lua
+---default = {}
+---```
+---@field options? table
+---The package manager you use to install node modules.
+---
+---```lua
+---default = "npm"
+---```
+---@field packageManager? "npm" | "yarn" | "pnpm"
+---An array of language ids for which the extension should probe if support is installed.
+---
+---```lua
+---default = { "astro", "civet", "javascript", "javascriptreact", "typescript", "typescriptreact", "html", "mdx", "vue", "markdown", "json", "jsonc", "css", "glimmer-js", "glimmer-ts", "svelte" }
+---```
+---@field probe? string[]
+---@field problems? _.lspconfig.settings.eslint.Eslint.Problems
+---Controls whether a task for linting the whole workspace will be available.
+---@field provideLintTask? boolean
+---Turns on quiet mode, which ignores warnings and info diagnostics.
+---@field quiet? boolean
+---@field rules? _.lspconfig.settings.eslint.Eslint.Rules
+---Run the linter on save (onSave) or on type (onType)
+---
+---```lua
+---default = "onType"
+---```
+---@field run? "onSave" | "onType"
+---The location of the node binary to run ESLint under.
+---@field runtime? string
+---@field timeBudget? _.lspconfig.settings.eslint.Eslint.TimeBudget
+---@field trace? _.lspconfig.settings.eslint.Eslint.Trace
+---Since version 7 ESLint offers a new API call ESLint. Use it even if the old CLIEngine is available. From version 8 on forward on ESLint class is available.
+---@field useESLintClass? boolean
+---Controls whether flat config should be used or not. This setting requires ESLint version 8.57 or later and is interpreted according to the [ESLint Flat Config rollout plan](https://eslint.org/blog/2023/10/flat-config-rollout-plans/). This means:
+---
+--- - *8.57.0 <= ESLint version < 9.x*: setting is honored and defaults to false
+---- *9.0.0 <= ESLint version < 10.x*: settings is honored and defaults to true
+---- *10.0.0 <= ESLint version*: setting is ignored. Flat configs are the default and can't be turned off.
+---@field useFlatConfig? boolean
+---Whether ESLint should use real paths when resolving files. This is useful when working with symlinks or when the casing of file paths is inconsistent.
+---@field useRealpaths? boolean
+---An array of language ids which should be validated by ESLint. If not installed ESLint will show an error.
+---@field validate? any[]
+---Specifies how the working directories ESLint is using are computed. ESLint resolves configuration files (e.g. `eslintrc`, `.eslintignore`) relative to a working directory so it is important to configure this correctly.
+---@field workingDirectories? any[]
+
+---@class lspconfig.settings.eslint
+---@field eslint? _.lspconfig.settings.eslint.Eslint

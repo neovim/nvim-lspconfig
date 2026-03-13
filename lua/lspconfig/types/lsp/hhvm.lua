@@ -1,0 +1,72 @@
+---@meta
+
+---@class _.lspconfig.settings.hhvm.Hack.Remote.Docker
+---Name of the local Docker container to run the language tools in
+---@field containerName? string
+
+---@class _.lspconfig.settings.hhvm.Hack.Remote.Ssh
+---Additional command line options to pass when establishing the SSH connection
+---@field flags? any[]
+---Address for the remote development server to connect to (in the format `[user@]hostname`)
+---@field host? string
+
+---@class _.lspconfig.settings.hhvm.Hack.Remote
+---@field docker? _.lspconfig.settings.hhvm.Hack.Remote.Docker
+---Run the Hack language tools on an external host
+---@field enabled? boolean
+---@field ssh? _.lspconfig.settings.hhvm.Hack.Remote.Ssh
+---The remote connection method
+---@field type? "ssh" | "docker"
+---Absolute location of workspace root in the remote file system
+---@field workspacePath? string
+
+---@class _.lspconfig.settings.hhvm.Hack.Trace
+---Traces the communication between VS Code and the Hack & HHAST language servers
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.hhvm.Hack
+---Absolute path to the hh_client executable. This can be left empty if hh_client is already in your environment $PATH.
+---
+---```lua
+---default = "hh_client"
+---```
+---@field clientPath? string
+---Enable calculation of Hack type coverage percentage for every file and display in status bar.
+---@field enableCoverageCheck? boolean
+---Optional list of arguments passed to hhast-lint executable
+---
+---```lua
+---default = {}
+---```
+---@field hhastArgs? string[]
+---Whether to lint the entire project or just the open files
+---@field hhastLintMode? "whole-project" | "open-files"
+---Use an alternate `hhast-lint` path. Can be abolute or relative to workspace root.
+---
+---```lua
+---default = "vendor/bin/hhast-lint"
+---```
+---@field hhastPath? string
+---@field remote? _.lspconfig.settings.hhvm.Hack.Remote
+---@field trace? _.lspconfig.settings.hhvm.Hack.Trace
+---Enable linting (needs [HHAST](https://github.com/hhvm/hhast) library set up and configured in project)
+---
+---```lua
+---default = true
+---```
+---@field useHhast? boolean
+---Start hh_client in Language Server mode. Only works for HHVM version 3.23 and above.
+---
+---```lua
+---default = true
+---```
+---@field useLanguageServer? boolean
+---Absolute path to the workspace root directory. This will be the VS Code workspace root by default, but can be changed if the project is in a subdirectory or mounted in a Docker container.
+---@field workspaceRootPath? string
+
+---@class lspconfig.settings.hhvm
+---@field hack? _.lspconfig.settings.hhvm.Hack

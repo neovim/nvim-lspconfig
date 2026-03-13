@@ -1,0 +1,414 @@
+---@meta
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.Autopep8
+---Enable or disable the plugin (disabling required to use `yapf`).
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.Flake8
+---Path to the config file that will be the authoritative config source.
+---@field config? string
+---Enable or disable the plugin.
+---@field enabled? boolean
+---List of files or directories to exclude.
+---
+---```lua
+---default = {}
+---```
+---@field exclude? string[]
+---Path to the flake8 executable.
+---
+---```lua
+---default = "flake8"
+---```
+---@field executable? string
+---List of errors and warnings to append to ignore list.
+---
+---```lua
+---default = {}
+---```
+---@field extendIgnore? string[]
+---List of errors and warnings to append to select list.
+---
+---```lua
+---default = {}
+---```
+---@field extendSelect? string[]
+---Only check for filenames matching the patterns in this list.
+---@field filename? string
+---Hang closing bracket instead of matching indentation of opening bracket's line.
+---@field hangClosing? boolean
+---List of errors and warnings to ignore (or skip).
+---
+---```lua
+---default = {}
+---```
+---@field ignore? string[]
+---Set indentation spaces.
+---@field indentSize? integer
+---Maximum allowed complexity threshold.
+---@field maxComplexity? integer
+---Maximum allowed line length for the entirety of this run.
+---@field maxLineLength? integer
+---A pairing of filenames and violation codes that defines which violations to ignore in a particular file, for example: `["file_path.py:W305,W304"]`).
+---
+---```lua
+---default = {}
+---```
+---@field perFileIgnores? string[]
+---List of errors and warnings to enable.
+---@field select? string[]
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.Jedi
+---List of module names for jedi.settings.auto_import_modules.
+---
+---```lua
+---default = { "numpy" }
+---```
+---@field auto_import_modules? string[]
+---Define environment variables for jedi.Script and Jedi.names.
+---@field env_vars? table
+---Define environment for jedi.Script and Jedi.names.
+---@field environment? string
+---Define extra paths for jedi.Script.
+---
+---```lua
+---default = {}
+---```
+---@field extra_paths? string[]
+---Whether to place extra_paths at the beginning (true) or end (false) of `sys.path`
+---@field prioritize_extra_paths? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.JediCompletion
+---Modules for which labels and snippets should be cached.
+---
+---```lua
+---default = { "pandas", "numpy", "tensorflow", "matplotlib" }
+---```
+---@field cache_for? string[]
+---Resolve documentation and detail eagerly.
+---@field eager? boolean
+---Enable or disable the plugin.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Enable fuzzy when requesting autocomplete.
+---@field fuzzy? boolean
+---Adds class objects as a separate completion item.
+---@field include_class_objects? boolean
+---Adds function objects as a separate completion item.
+---@field include_function_objects? boolean
+---Auto-completes methods and classes with tabstops for each parameter.
+---
+---```lua
+---default = true
+---```
+---@field include_params? boolean
+---How many labels and snippets (at most) should be resolved?
+---
+---```lua
+---default = 25
+---```
+---@field resolve_at_most? integer
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.JediDefinition
+---Enable or disable the plugin.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Follow builtin and extension definitions to stubs.
+---
+---```lua
+---default = true
+---```
+---@field follow_builtin_definitions? boolean
+---If follow_imports is True will decide if it follow builtin imports.
+---
+---```lua
+---default = true
+---```
+---@field follow_builtin_imports? boolean
+---The goto call will follow imports.
+---
+---```lua
+---default = true
+---```
+---@field follow_imports? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.JediHover
+---Enable or disable the plugin.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.JediReferences
+---Enable or disable the plugin.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.JediSignatureHelp
+---Enable or disable the plugin.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.JediSymbols
+---If True lists the names of all scopes instead of only the module namespace.
+---
+---```lua
+---default = true
+---```
+---@field all_scopes? boolean
+---Enable or disable the plugin.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---If True includes symbols imported from other libraries.
+---
+---```lua
+---default = true
+---```
+---@field include_import_symbols? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.JediTypeDefinition
+---Enable or disable the plugin.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.Mccabe
+---Enable or disable the plugin.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---The minimum threshold that triggers warnings about cyclomatic complexity.
+---
+---```lua
+---default = 15
+---```
+---@field threshold? integer
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.Preload
+---Enable or disable the plugin.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---List of modules to import on startup
+---
+---```lua
+---default = {}
+---```
+---@field modules? string[]
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.Pycodestyle
+---Enable or disable the plugin.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Exclude files or directories which match these patterns.
+---
+---```lua
+---default = {}
+---```
+---@field exclude? string[]
+---When parsing directories, only check filenames matching these patterns.
+---
+---```lua
+---default = {}
+---```
+---@field filename? string[]
+---Hang closing bracket instead of matching indentation of opening bracket's line.
+---@field hangClosing? boolean
+---Ignore errors and warnings
+---
+---```lua
+---default = {}
+---```
+---@field ignore? string[]
+---Set indentation spaces.
+---@field indentSize? integer
+---Set maximum allowed line length.
+---@field maxLineLength? integer
+---Select errors and warnings
+---@field select? string[]
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.Pydocstyle
+---Ignore errors and warnings in addition to the specified convention.
+---
+---```lua
+---default = {}
+---```
+---@field addIgnore? string[]
+---Select errors and warnings in addition to the specified convention.
+---
+---```lua
+---default = {}
+---```
+---@field addSelect? string[]
+---Choose the basic list of checked errors by specifying an existing convention.
+---@field convention? "pep257" | "numpy" | "google"
+---Enable or disable the plugin.
+---@field enabled? boolean
+---Ignore errors and warnings
+---
+---```lua
+---default = {}
+---```
+---@field ignore? string[]
+---Check only files that exactly match the given regular expression; default is to match files that don't start with 'test_' but end with '.py'.
+---
+---```lua
+---default = "(?!test_).*\\.py"
+---```
+---@field match? string
+---Search only dirs that exactly match the given regular expression; default is to match dirs which do not begin with a dot.
+---
+---```lua
+---default = "[^\\.].*"
+---```
+---@field matchDir? string
+---Select errors and warnings
+---@field select? string[]
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.Pyflakes
+---Enable or disable the plugin.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.Pylint
+---Arguments to pass to pylint.
+---
+---```lua
+---default = {}
+---```
+---@field args? string[]
+---Enable or disable the plugin.
+---@field enabled? boolean
+---Executable to run pylint with. Enabling this will run pylint on unsaved files via stdin. Can slow down workflow. Only works with python3.
+---@field executable? string
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.RopeAutoimport.CodeActions
+---Enable or disable autoimport code actions (e.g. for quick fixes).
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.RopeAutoimport.Completions
+---Enable or disable autoimport completions.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.RopeAutoimport
+---@field code_actions? _.lspconfig.settings.pylsp.Pylsp.Plugins.RopeAutoimport.CodeActions
+---@field completions? _.lspconfig.settings.pylsp.Pylsp.Plugins.RopeAutoimport.Completions
+---Enable or disable autoimport. If false, neither completions nor code actions are enabled. If true, the respective features can be enabled or disabled individually.
+---@field enabled? boolean
+---Make the autoimport database memory only. Drastically increases startup time.
+---@field memory? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.RopeCompletion
+---Resolve documentation and detail eagerly.
+---@field eager? boolean
+---Enable or disable the plugin.
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins.Yapf
+---Enable or disable the plugin.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Plugins
+---@field autopep8? _.lspconfig.settings.pylsp.Pylsp.Plugins.Autopep8
+---@field flake8? _.lspconfig.settings.pylsp.Pylsp.Plugins.Flake8
+---@field jedi? _.lspconfig.settings.pylsp.Pylsp.Plugins.Jedi
+---@field jedi_completion? _.lspconfig.settings.pylsp.Pylsp.Plugins.JediCompletion
+---@field jedi_definition? _.lspconfig.settings.pylsp.Pylsp.Plugins.JediDefinition
+---@field jedi_hover? _.lspconfig.settings.pylsp.Pylsp.Plugins.JediHover
+---@field jedi_references? _.lspconfig.settings.pylsp.Pylsp.Plugins.JediReferences
+---@field jedi_signature_help? _.lspconfig.settings.pylsp.Pylsp.Plugins.JediSignatureHelp
+---@field jedi_symbols? _.lspconfig.settings.pylsp.Pylsp.Plugins.JediSymbols
+---@field jedi_type_definition? _.lspconfig.settings.pylsp.Pylsp.Plugins.JediTypeDefinition
+---@field mccabe? _.lspconfig.settings.pylsp.Pylsp.Plugins.Mccabe
+---@field preload? _.lspconfig.settings.pylsp.Pylsp.Plugins.Preload
+---@field pycodestyle? _.lspconfig.settings.pylsp.Pylsp.Plugins.Pycodestyle
+---@field pydocstyle? _.lspconfig.settings.pylsp.Pylsp.Plugins.Pydocstyle
+---@field pyflakes? _.lspconfig.settings.pylsp.Pylsp.Plugins.Pyflakes
+---@field pylint? _.lspconfig.settings.pylsp.Pylsp.Plugins.Pylint
+---@field rope_autoimport? _.lspconfig.settings.pylsp.Pylsp.Plugins.RopeAutoimport
+---@field rope_completion? _.lspconfig.settings.pylsp.Pylsp.Plugins.RopeCompletion
+---@field yapf? _.lspconfig.settings.pylsp.Pylsp.Plugins.Yapf
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Rope
+---Builtin and c-extension modules that are allowed to be imported and inspected by rope.
+---@field extensionModules? string
+---The name of the folder in which rope stores project configurations and data.  Pass `null` for not using such a folder at all.
+---@field ropeFolder? string[]
+
+---@class _.lspconfig.settings.pylsp.Pylsp.Signature
+---Formatter to use for reformatting signatures in docstrings.
+---
+---```lua
+---default = "black"
+---```
+---@field formatter? "black" | "ruff"
+---Include signature docstring.
+---
+---```lua
+---default = true
+---```
+---@field include_docstring? boolean
+---Maximum line length in signatures.
+---
+---```lua
+---default = 88
+---```
+---@field line_length? number
+
+---@class _.lspconfig.settings.pylsp.Pylsp
+---List of configuration sources to use.
+---
+---```lua
+---default = { "pycodestyle" }
+---```
+---@field configurationSources? string[]
+---@field plugins? _.lspconfig.settings.pylsp.Pylsp.Plugins
+---@field rope? _.lspconfig.settings.pylsp.Pylsp.Rope
+---@field signature? _.lspconfig.settings.pylsp.Pylsp.Signature
+
+---@class lspconfig.settings.pylsp
+---@field pylsp? _.lspconfig.settings.pylsp.Pylsp

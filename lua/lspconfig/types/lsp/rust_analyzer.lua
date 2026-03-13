@@ -1,0 +1,1793 @@
+---@meta
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Assist.TermSearch
+---Enable borrow checking for term search code assists. If set to false, also there will be
+---more suggestions, but some of them may not borrow-check.
+---
+---```lua
+---default = true
+---```
+---@field borrowcheck? boolean
+---Term search fuel in "units of work" for assists (Defaults to 1800).
+---
+---```lua
+---default = 1800
+---```
+---@field fuel? integer
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Assist
+---Insert #[must_use] when generating `as_` methods for enum variants.
+---@field emitMustUse? boolean
+---Placeholder expression to use for missing expressions in assists.
+---
+---```lua
+---default = "todo"
+---```
+---@field expressionFillDefault? "todo" | "default"
+---Prefer to use `Self` over the type name when inserting a type (e.g. in "fill match arms" assist).
+---@field preferSelf? boolean
+---@field termSearch? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Assist.TermSearch
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.CachePriming
+---Warm up caches on project load.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---How many worker threads to handle priming caches. The default `0` means to pick
+---automatically.
+---
+---```lua
+---default = "physical"
+---```
+---@field numThreads? number|"physical" | "logical"
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Cargo.BuildScripts
+---Run build scripts (`build.rs`) for more precise code analysis.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Specifies the invocation strategy to use when running the build scripts command.
+---If `per_workspace` is set, the command will be executed for each Rust workspace with the
+---workspace as the working directory.
+---If `once` is set, the command will be executed once with the opened project as the
+---working directory.
+---This config only has an effect when `#rust-analyzer.cargo.buildScripts.overrideCommand#`
+---is set.
+---
+---```lua
+---default = "per_workspace"
+---```
+---@field invocationStrategy? "per_workspace" | "once"
+---Override the command rust-analyzer uses to run build scripts and
+---build procedural macros. The command is required to output json
+---and should therefore include `--message-format=json` or a similar
+---option.
+---
+---If there are multiple linked projects/workspaces, this command is invoked for
+---each of them, with the working directory being the workspace root
+---(i.e., the folder containing the `Cargo.toml`). This can be overwritten
+---by changing `#rust-analyzer.cargo.buildScripts.invocationStrategy#`.
+---
+---By default, a cargo invocation will be constructed for the configured
+---targets and features, with the following base command line:
+---
+---```bash
+---cargo check --quiet --workspace --message-format=json --all-targets --keep-going
+---```
+---
+---Note: The option must be specified as an array of command line arguments, with
+---the first argument being the name of the command to run.
+---@field overrideCommand? string[]
+---Rerun proc-macros building/build-scripts running when proc-macro
+---or build-script sources change and are saved.
+---
+---```lua
+---default = true
+---```
+---@field rebuildOnSave? boolean
+---Use `RUSTC_WRAPPER=rust-analyzer` when running build scripts to
+---avoid checking unnecessary things.
+---
+---```lua
+---default = true
+---```
+---@field useRustcWrapper? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Cargo
+---Pass `--all-targets` to cargo invocation.
+---
+---```lua
+---default = true
+---```
+---@field allTargets? boolean
+---Automatically refresh project info via `cargo metadata` on
+---`Cargo.toml` or `.cargo/config.toml` changes.
+---
+---```lua
+---default = true
+---```
+---@field autoreload? boolean
+---@field buildScripts? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Cargo.BuildScripts
+---List of cfg options to enable with the given values.
+---
+---To enable a name without a value, use `"key"`.
+---To enable a name with a value, use `"key=value"`.
+---To disable, prefix the entry with a `!`.
+---
+---```lua
+---default = { "debug_assertions", "miri" }
+---```
+---@field cfgs? string[]
+---Extra arguments that are passed to every cargo invocation.
+---
+---```lua
+---default = {}
+---```
+---@field extraArgs? string[]
+---Extra environment variables that will be set when running cargo, rustc
+---or other commands within the workspace. Useful for setting RUSTFLAGS.
+---
+---```lua
+---default = {}
+---```
+---@field extraEnv? table
+---List of features to activate.
+---
+---Set this to `"all"` to pass `--all-features` to cargo.
+---
+---```lua
+---default = {}
+---```
+---@field features? "all"|string[]
+---Whether to pass `--no-default-features` to cargo.
+---@field noDefaultFeatures? boolean
+---Whether to skip fetching dependencies. If set to "true", the analysis is performed
+---entirely offline, and Cargo metadata for dependencies is not fetched.
+---@field noDeps? boolean
+---Relative path to the sysroot, or "discover" to try to automatically find it via
+---"rustc --print sysroot".
+---
+---Unsetting this disables sysroot loading.
+---
+---This option does not take effect until rust-analyzer is restarted.
+---
+---```lua
+---default = "discover"
+---```
+---@field sysroot? string
+---Relative path to the sysroot library sources. If left unset, this will default to
+---`{cargo.sysroot}/lib/rustlib/src/rust/library`.
+---
+---This option does not take effect until rust-analyzer is restarted.
+---@field sysrootSrc? string
+---Compilation target override (target tuple).
+---@field target? string
+---Optional path to a rust-analyzer specific target directory.
+---This prevents rust-analyzer's `cargo check` and initial build-script and proc-macro
+---building from locking the `Cargo.lock` at the expense of duplicating build artifacts.
+---
+---Set to `true` to use a subdirectory of the existing target directory or
+---set to a path relative to the workspace to use that path.
+---@field targetDir? any|boolean|string
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Cfg
+---Set `cfg(test)` for local crates. Defaults to true.
+---
+---```lua
+---default = true
+---```
+---@field setTest? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Check
+---Check all targets and tests (`--all-targets`). Defaults to
+---`#rust-analyzer.cargo.allTargets#`.
+---@field allTargets? boolean
+---Cargo command to use for `cargo check`.
+---
+---```lua
+---default = "check"
+---```
+---@field command? string
+---Extra arguments for `cargo check`.
+---
+---```lua
+---default = {}
+---```
+---@field extraArgs? string[]
+---Extra environment variables that will be set when running `cargo check`.
+---Extends `#rust-analyzer.cargo.extraEnv#`.
+---
+---```lua
+---default = {}
+---```
+---@field extraEnv? table
+---List of features to activate. Defaults to
+---`#rust-analyzer.cargo.features#`.
+---
+---Set to `"all"` to pass `--all-features` to Cargo.
+---@field features? "all"|string[]|any
+---List of `cargo check` (or other command specified in `check.command`) diagnostics to ignore.
+---
+---For example for `cargo check`: `dead_code`, `unused_imports`, `unused_variables`,...
+---
+---```lua
+---default = {}
+---```
+---@field ignore? string[]
+---Specifies the invocation strategy to use when running the check command.
+---If `per_workspace` is set, the command will be executed for each workspace.
+---If `once` is set, the command will be executed once.
+---This config only has an effect when `#rust-analyzer.check.overrideCommand#`
+---is set.
+---
+---```lua
+---default = "per_workspace"
+---```
+---@field invocationStrategy? "per_workspace" | "once"
+---Whether to pass `--no-default-features` to Cargo. Defaults to
+---`#rust-analyzer.cargo.noDefaultFeatures#`.
+---@field noDefaultFeatures? boolean
+---Override the command rust-analyzer uses instead of `cargo check` for
+---diagnostics on save. The command is required to output json and
+---should therefore include `--message-format=json` or a similar option
+---(if your client supports the `colorDiagnosticOutput` experimental
+---capability, you can use `--message-format=json-diagnostic-rendered-ansi`).
+---
+---If you're changing this because you're using some tool wrapping
+---Cargo, you might also want to change
+---`#rust-analyzer.cargo.buildScripts.overrideCommand#`.
+---
+---If there are multiple linked projects/workspaces, this command is invoked for
+---each of them, with the working directory being the workspace root
+---(i.e., the folder containing the `Cargo.toml`). This can be overwritten
+---by changing `#rust-analyzer.check.invocationStrategy#`.
+---
+---It supports two interpolation syntaxes, both mainly intended to be used with
+---[non-Cargo build systems](./non_cargo_based_projects.md):
+---
+---- If `{saved_file}` is part of the command, rust-analyzer will pass
+---    the absolute path of the saved file to the provided command.
+---    (A previous version, `$saved_file`, also works.)
+---- If `{label}` is part of the command, rust-analyzer will pass the
+---    Cargo package ID, which can be used with `cargo check -p`, or a build label from
+---    `rust-project.json`. If `{label}` is included, rust-analyzer behaves much like
+---    [`"rust-analyzer.check.workspace": false`](#check.workspace).
+---
+---
+---
+---An example command would be:
+---
+---```bash
+---cargo check --workspace --message-format=json --all-targets
+---```
+---
+---Note: The option must be specified as an array of command line arguments, with
+---the first argument being the name of the command to run.
+---@field overrideCommand? string[]
+---Check for specific targets. Defaults to `#rust-analyzer.cargo.target#` if empty.
+---
+---Can be a single target, e.g. `"x86_64-unknown-linux-gnu"` or a list of targets, e.g.
+---`["aarch64-apple-darwin", "x86_64-apple-darwin"]`.
+---
+---Aliased as `"checkOnSave.targets"`.
+---@field targets? any|string|string[]
+---Whether `--workspace` should be passed to `cargo check`.
+---If false, `-p <package>` will be passed instead if applicable. In case it is not, no
+---check will be performed.
+---
+---```lua
+---default = true
+---```
+---@field workspace? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.AutoAwait
+---Show method calls and field accesses completions with `await` prefixed to them when
+---completing on a future.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.AutoIter
+---Show method call completions with `iter()` or `into_iter()` prefixed to them when
+---completing on a type that has them.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.Autoimport
+---Show completions that automatically add imports when completed.
+---
+---Note that your client must specify the `additionalTextEdits` LSP client capability to
+---truly have this feature enabled.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---A list of full paths to items to exclude from auto-importing completions.
+---
+---Traits in this list won't have their methods suggested in completions unless the trait
+---is in scope.
+---
+---You can either specify a string path which defaults to type "always" or use the more
+---verbose form `{ "path": "path::to::item", type: "always" }`.
+---
+---For traits the type "methods" can be used to only exclude the methods but not the trait
+---itself.
+---
+---This setting also inherits `#rust-analyzer.completion.excludeTraits#`.
+---
+---```lua
+---default = { {
+---    path = "core::borrow::Borrow",
+---    type = "methods"
+---  }, {
+---    path = "core::borrow::BorrowMut",
+---    type = "methods"
+---  } }
+---```
+---@field exclude? any[]
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.Autoself
+---Show method calls and field access completions with `self` prefixed to them when
+---inside a method.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.Callable
+---Add parenthesis and argument snippets when completing function.
+---
+---```lua
+---default = "fill_arguments"
+---```
+---@field snippets? "fill_arguments" | "add_parentheses" | "none"
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.FullFunctionSignatures
+---Show full function / method signatures in completion docs.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.Postfix
+---Show postfix snippets like `dbg`, `if`, `not`, etc.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.PrivateEditable
+---Show completions of private items and fields that are defined in the current workspace
+---even if they are not visible at the current position.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.Snippets
+---Custom completion snippets.
+---
+---```lua
+---default = {
+---  ["Arc::new"] = {
+---    body = "Arc::new(${receiver})",
+---    description = "Put the expression into an `Arc`",
+---    postfix = "arc",
+---    requires = "std::sync::Arc",
+---    scope = "expr"
+---  },
+---  ["Box::pin"] = {
+---    body = "Box::pin(${receiver})",
+---    description = "Put the expression into a pinned `Box`",
+---    postfix = "pinbox",
+---    requires = "std::boxed::Box",
+---    scope = "expr"
+---  },
+---  Err = {
+---    body = "Err(${receiver})",
+---    description = "Wrap the expression in a `Result::Err`",
+---    postfix = "err",
+---    scope = "expr"
+---  },
+---  Ok = {
+---    body = "Ok(${receiver})",
+---    description = "Wrap the expression in a `Result::Ok`",
+---    postfix = "ok",
+---    scope = "expr"
+---  },
+---  ["Rc::new"] = {
+---    body = "Rc::new(${receiver})",
+---    description = "Put the expression into an `Rc`",
+---    postfix = "rc",
+---    requires = "std::rc::Rc",
+---    scope = "expr"
+---  },
+---  Some = {
+---    body = "Some(${receiver})",
+---    description = "Wrap the expression in an `Option::Some`",
+---    postfix = "some",
+---    scope = "expr"
+---  }
+---}
+---```
+---@field custom? table
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.TermSearch
+---Enable term search based snippets like `Some(foo.bar().baz())`.
+---@field enable? boolean
+---Term search fuel in "units of work" for autocompletion (Defaults to 1000).
+---
+---```lua
+---default = 1000
+---```
+---@field fuel? integer
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion
+---Automatically add a semicolon when completing unit-returning functions.
+---
+---In `match` arms it completes a comma instead.
+---
+---```lua
+---default = true
+---```
+---@field addSemicolonToUnit? boolean
+---@field autoAwait? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.AutoAwait
+---@field autoIter? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.AutoIter
+---@field autoimport? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.Autoimport
+---@field autoself? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.Autoself
+---@field callable? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.Callable
+---A list of full paths to traits whose methods to exclude from completion.
+---
+---Methods from these traits won't be completed, even if the trait is in scope. However,
+---they will still be suggested on expressions whose type is `dyn Trait`, `impl Trait` or
+---`T where T: Trait`.
+---
+---Note that the trait themselves can still be completed.
+---
+---```lua
+---default = {}
+---```
+---@field excludeTraits? string[]
+---@field fullFunctionSignatures? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.FullFunctionSignatures
+---Omit deprecated items from completions. By default they are marked as deprecated but not
+---hidden.
+---@field hideDeprecated? boolean
+---Maximum number of completions to return. If `None`, the limit is infinite.
+---@field limit? integer
+---@field postfix? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.Postfix
+---@field privateEditable? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.PrivateEditable
+---@field snippets? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.Snippets
+---@field termSearch? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.TermSearch
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Debug
+---Whether to rebuild the project modules before debugging the same test again
+---@field buildBeforeRestart? boolean
+---Preferred debug engine.
+---
+---```lua
+---default = "auto"
+---```
+---@field engine? "auto" | "llvm-vs-code-extensions.lldb-dap" | "vadimcn.vscode-lldb" | "ms-vscode.cpptools" | "webfreak.debug"
+---Optional settings passed to the debug engine. Example: `{ "lldb": { "terminal":"external"} }`
+---
+---```lua
+---default = {}
+---```
+---@field engineSettings? table
+---Optional source file mappings passed to the debug engine.
+---
+---```lua
+---default = {
+---  ["/rustc/<id>"] = "${env:USERPROFILE}/.rustup/toolchains/<toolchain-id>/lib/rustlib/src/rust"
+---}
+---```
+---@field sourceFileMap? table|string
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Diagnostics.Experimental
+---Show experimental rust-analyzer diagnostics that might have more false positives than
+---usual.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Diagnostics.StyleLints
+---Run additional style lints.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Diagnostics
+---List of rust-analyzer diagnostics to disable.
+---
+---```lua
+---default = {}
+---```
+---@field disabled? string[]
+---Show native rust-analyzer diagnostics.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---@field experimental? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Diagnostics.Experimental
+---Whether to show the main part of the rendered rustc output of a diagnostic message.
+---@field previewRustcOutput? boolean
+---Map of prefixes to be substituted when parsing diagnostic file paths. This should be the
+---reverse mapping of what is passed to `rustc` as `--remap-path-prefix`.
+---
+---```lua
+---default = {}
+---```
+---@field remapPrefix? table
+---@field styleLints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Diagnostics.StyleLints
+---Whether to show diagnostics using the original rustc error code. If this is false, all rustc diagnostics will have the code 'rustc(Click for full compiler diagnostics)'
+---@field useRustcErrorCode? boolean
+---List of warnings that should be displayed with hint severity.
+---
+---The warnings will be indicated by faded text or three dots in code and will not show up
+---in the `Problems Panel`.
+---
+---```lua
+---default = {}
+---```
+---@field warningsAsHint? string[]
+---List of warnings that should be displayed with info severity.
+---
+---The warnings will be indicated by a blue squiggly underline in code and a blue icon in
+---the `Problems Panel`.
+---
+---```lua
+---default = {}
+---```
+---@field warningsAsInfo? string[]
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Document.Symbol.Search
+---Exclude all locals from document symbol search.
+---
+---```lua
+---default = true
+---```
+---@field excludeLocals? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Document.Symbol
+---@field search? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Document.Symbol.Search
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Document
+---@field symbol? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Document.Symbol
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Files
+---List of files to ignore
+---
+---These paths (file/directories) will be ignored by rust-analyzer. They are relative to
+---the workspace root, and globs are not supported. You may also need to add the folders to
+---Code's `files.watcherExclude`.
+---
+---```lua
+---default = {}
+---```
+---@field exclude? string[]
+---Controls file watching implementation.
+---
+---```lua
+---default = "client"
+---```
+---@field watcher? "client" | "server"
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.GotoImplementations
+---If this is `true`, when "Goto Implementations" and in "Implementations" lens, are triggered on a `struct` or `enum` or `union`, we filter out trait implementations that originate from `derive`s above the type.
+---@field filterAdjacentDerives? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated.BranchExitPoints
+---Highlight related return values while the cursor is on any `match`, `if`, or match arm
+---arrow (`=>`).
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated.BreakPoints
+---Highlight related references while the cursor is on `break`, `loop`, `while`, or `for`
+---keywords.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated.ClosureCaptures
+---Highlight all captures of a closure while the cursor is on the `|` or move keyword of a closure.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated.ExitPoints
+---Highlight all exit points while the cursor is on any `return`, `?`, `fn`, or return type
+---arrow (`->`).
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated.References
+---Highlight related references while the cursor is on any identifier.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated.YieldPoints
+---Highlight all break points for a loop or block context while the cursor is on any
+---`async` or `await` keywords.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated
+---@field branchExitPoints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated.BranchExitPoints
+---@field breakPoints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated.BreakPoints
+---@field closureCaptures? _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated.ClosureCaptures
+---@field exitPoints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated.ExitPoints
+---@field references? _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated.References
+---@field yieldPoints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated.YieldPoints
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions.Debug
+---Show `Debug` action. Only applies when `#rust-analyzer.hover.actions.enable#` is set.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions.GotoTypeDef
+---Show `Go to Type Definition` action. Only applies when
+---`#rust-analyzer.hover.actions.enable#` is set.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions.Implementations
+---Show `Implementations` action. Only applies when `#rust-analyzer.hover.actions.enable#`
+---is set.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions.References
+---Show `References` action. Only applies when `#rust-analyzer.hover.actions.enable#` is
+---set.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions.Run
+---Show `Run` action. Only applies when `#rust-analyzer.hover.actions.enable#` is set.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions.UpdateTest
+---Show `Update Test` action. Only applies when `#rust-analyzer.hover.actions.enable#` and
+---`#rust-analyzer.hover.actions.run.enable#` are set.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions
+---@field debug? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions.Debug
+---Show HoverActions in Rust files.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---@field gotoTypeDef? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions.GotoTypeDef
+---@field implementations? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions.Implementations
+---@field references? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions.References
+---@field run? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions.Run
+---@field updateTest? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions.UpdateTest
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Documentation.Keywords
+---Show keyword hover popups. Only applies when
+---`#rust-analyzer.hover.documentation.enable#` is set.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Documentation
+---Show documentation on hover.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---@field keywords? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Documentation.Keywords
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.DropGlue
+---Show drop glue information on hover.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Links
+---Use markdown syntax for links on hover.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.MemoryLayout
+---How to render the align information in a memory layout hover.
+---
+---```lua
+---default = "hexadecimal"
+---```
+---@field alignment? any|"both" | "decimal" | "hexadecimal"
+---Show memory layout data on hover.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---How to render the niche information in a memory layout hover.
+---@field niches? boolean
+---How to render the offset information in a memory layout hover.
+---
+---```lua
+---default = "hexadecimal"
+---```
+---@field offset? any|"both" | "decimal" | "hexadecimal"
+---How to render the padding information in a memory layout hover.
+---@field padding? any|"both" | "decimal" | "hexadecimal"
+---How to render the size information in a memory layout hover.
+---
+---```lua
+---default = "both"
+---```
+---@field size? any|"both" | "decimal" | "hexadecimal"
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Show
+---How many variants of an enum to display when hovering on. Show none if empty.
+---
+---```lua
+---default = 5
+---```
+---@field enumVariants? integer
+---How many fields of a struct, variant or union to display when hovering on. Show none if
+---empty.
+---
+---```lua
+---default = 5
+---```
+---@field fields? integer
+---How many associated items of a trait to display when hovering a trait.
+---@field traitAssocItems? integer
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover
+---@field actions? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Actions
+---@field documentation? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Documentation
+---@field dropGlue? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.DropGlue
+---@field links? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Links
+---Show what types are used as generic arguments in calls etc. on hover, and limit the max
+---length to show such types, beyond which they will be shown with ellipsis.
+---
+---This can take three values: `null` means "unlimited", the string `"hide"` means to not
+---show generic substitutions at all, and a number means to limit them to X characters.
+---
+---The default is 20 characters.
+---
+---```lua
+---default = 20
+---```
+---@field maxSubstitutionLength? any|"hide"|integer
+---@field memoryLayout? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.MemoryLayout
+---@field show? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Show
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Imports.Granularity
+---Enforce the import granularity setting for all files. If set to false rust-analyzer will
+---try to keep import styles consistent per file.
+---@field enforce? boolean
+---How imports should be grouped into use statements.
+---
+---```lua
+---default = "crate"
+---```
+---@field group? "crate" | "module" | "item" | "one" | "preserve"
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Imports.Group
+---Group inserted imports by the [following
+---order](https://rust-analyzer.github.io/book/features.html#auto-import). Groups are
+---separated by newlines.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Imports.Merge
+---Allow import insertion to merge new imports into single path glob imports like `use
+---std::fmt::*;`.
+---
+---```lua
+---default = true
+---```
+---@field glob? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Imports
+---@field granularity? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Imports.Granularity
+---@field group? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Imports.Group
+---@field merge? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Imports.Merge
+---Prefer to unconditionally use imports of the core and alloc crate, over the std crate.
+---@field preferNoStd? boolean
+---Prefer import paths containing a `prelude` module.
+---@field preferPrelude? boolean
+---The path structure for newly inserted paths to use.
+---
+---```lua
+---default = "crate"
+---```
+---@field prefix? "plain" | "self" | "crate"
+---Prefix external (including std, core) crate imports with `::`.
+---
+---E.g. `use ::std::io::Read;`.
+---@field prefixExternPrelude? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.BindingModeHints
+---Show inlay type hints for binding modes.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ChainingHints
+---Show inlay type hints for method chains.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ClosingBraceHints
+---Show inlay hints after a closing `}` to indicate what item it belongs to.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Minimum number of lines required before the `}` until the hint is shown (set to 0 or 1
+---to always show them).
+---
+---```lua
+---default = 25
+---```
+---@field minLines? integer
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ClosureCaptureHints
+---Show inlay hints for closure captures.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ClosureReturnTypeHints
+---Show inlay type hints for return types of closures.
+---
+---```lua
+---default = "never"
+---```
+---@field enable? "always" | "never" | "with_block"
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.DiscriminantHints
+---Show enum variant discriminant hints.
+---
+---```lua
+---default = "never"
+---```
+---@field enable? "always" | "never" | "fieldless"
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ExpressionAdjustmentHints
+---Disable reborrows in expression adjustments inlay hints.
+---
+---Reborrows are a pair of a builtin deref then borrow, i.e. `&*`. They are inserted by the compiler but are mostly useless to the programmer.
+---
+---Note: if the deref is not builtin (an overloaded deref), or the borrow is `&raw const`/`&raw mut`, they are not removed.
+---
+---```lua
+---default = true
+---```
+---@field disableReborrows? boolean
+---Show inlay hints for type adjustments.
+---
+---```lua
+---default = "never"
+---```
+---@field enable? "always" | "never" | "reborrow"
+---Hide inlay hints for type adjustments outside of `unsafe` blocks.
+---@field hideOutsideUnsafe? boolean
+---Show inlay hints as postfix ops (`.*` instead of `*`, etc).
+---
+---```lua
+---default = "prefix"
+---```
+---@field mode? "prefix" | "postfix" | "prefer_prefix" | "prefer_postfix"
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.GenericParameterHints.Const
+---Show const generic parameter name inlay hints.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.GenericParameterHints.Lifetime
+---Show generic lifetime parameter name inlay hints.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.GenericParameterHints.Type
+---Show generic type parameter name inlay hints.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.GenericParameterHints
+---@field const? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.GenericParameterHints.Const
+---@field lifetime? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.GenericParameterHints.Lifetime
+---@field type? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.GenericParameterHints.Type
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ImplicitDrops
+---Show implicit drop hints.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ImplicitSizedBoundHints
+---Show inlay hints for the implied type parameter `Sized` bound.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ImpliedDynTraitHints
+---Show inlay hints for the implied `dyn` keyword in trait object types.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.LifetimeElisionHints
+---Show inlay type hints for elided lifetimes in function signatures.
+---
+---```lua
+---default = "never"
+---```
+---@field enable? "always" | "never" | "skip_trivial"
+---Prefer using parameter names as the name for elided lifetime hints if possible.
+---@field useParameterNames? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ParameterHints.MissingArguments
+---Show parameter name inlay hints for missing arguments at the call site.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ParameterHints
+---Show function parameter name inlay hints at the call site.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---@field missingArguments? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ParameterHints.MissingArguments
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.RangeExclusiveHints
+---Show exclusive range inlay hints.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ReborrowHints
+---Show inlay hints for compiler inserted reborrows.
+---
+---This setting is deprecated in favor of
+---#rust-analyzer.inlayHints.expressionAdjustmentHints.enable#.
+---
+---```lua
+---default = "never"
+---```
+---@field enable? "always" | "never" | "mutable"
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.TypeHints
+---Show inlay type hints for variables.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Hide inlay type hints for `let` statements that initialize to a closure.
+---
+---Only applies to closures with blocks, same as
+---`#rust-analyzer.inlayHints.closureReturnTypeHints.enable#`.
+---@field hideClosureInitialization? boolean
+---Hide inlay parameter type hints for closures.
+---@field hideClosureParameter? boolean
+---Hide inlay type hints for inferred types.
+---@field hideInferredTypes? boolean
+---Hide inlay type hints for constructors.
+---@field hideNamedConstructor? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints
+---@field bindingModeHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.BindingModeHints
+---@field chainingHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ChainingHints
+---@field closingBraceHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ClosingBraceHints
+---@field closureCaptureHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ClosureCaptureHints
+---@field closureReturnTypeHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ClosureReturnTypeHints
+---Closure notation in type and chaining inlay hints.
+---
+---```lua
+---default = "impl_fn"
+---```
+---@field closureStyle? "impl_fn" | "rust_analyzer" | "with_id" | "hide"
+---@field discriminantHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.DiscriminantHints
+---@field expressionAdjustmentHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ExpressionAdjustmentHints
+---@field genericParameterHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.GenericParameterHints
+---@field implicitDrops? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ImplicitDrops
+---@field implicitSizedBoundHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ImplicitSizedBoundHints
+---@field impliedDynTraitHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ImpliedDynTraitHints
+---@field lifetimeElisionHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.LifetimeElisionHints
+---Maximum length for inlay hints. Set to null to have an unlimited length.
+---
+---**Note:** This is mostly a hint, and we don't guarantee to strictly follow the limit.
+---
+---```lua
+---default = 25
+---```
+---@field maxLength? integer
+---@field parameterHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ParameterHints
+---@field rangeExclusiveHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.RangeExclusiveHints
+---@field reborrowHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ReborrowHints
+---Whether to render leading colons for type hints, and trailing colons for parameter hints.
+---
+---```lua
+---default = true
+---```
+---@field renderColons? boolean
+---@field typeHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.TypeHints
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Interpret
+---Enable the experimental support for interpreting tests.
+---@field tests? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.JoinLines
+---Join lines merges consecutive declaration and initialization of an assignment.
+---
+---```lua
+---default = true
+---```
+---@field joinAssignments? boolean
+---Join lines inserts else between consecutive ifs.
+---
+---```lua
+---default = true
+---```
+---@field joinElseIf? boolean
+---Join lines removes trailing commas.
+---
+---```lua
+---default = true
+---```
+---@field removeTrailingComma? boolean
+---Join lines unwraps trivial blocks.
+---
+---```lua
+---default = true
+---```
+---@field unwrapTrivialBlock? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.Debug
+---Show `Debug` lens. Only applies when `#rust-analyzer.lens.enable#` is set.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.Implementations
+---Show `Implementations` lens. Only applies when `#rust-analyzer.lens.enable#` is set.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.References.Adt
+---Show `References` lens for Struct, Enum, and Union. Only applies when
+---`#rust-analyzer.lens.enable#` is set.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.References.EnumVariant
+---Show `References` lens for Enum Variants. Only applies when
+---`#rust-analyzer.lens.enable#` is set.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.References.Method
+---Show `Method References` lens. Only applies when `#rust-analyzer.lens.enable#` is set.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.References.Trait
+---Show `References` lens for Trait. Only applies when `#rust-analyzer.lens.enable#` is
+---set.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.References
+---@field adt? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.References.Adt
+---@field enumVariant? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.References.EnumVariant
+---@field method? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.References.Method
+---@field trait? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.References.Trait
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.Run
+---Show `Run` lens. Only applies when `#rust-analyzer.lens.enable#` is set.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.UpdateTest
+---Show `Update Test` lens. Only applies when `#rust-analyzer.lens.enable#` and
+---`#rust-analyzer.lens.run.enable#` are set.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens
+---@field debug? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.Debug
+---Show CodeLens in Rust files.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---@field implementations? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.Implementations
+---Where to render annotations.
+---
+---```lua
+---default = "above_name"
+---```
+---@field location? "above_name" | "above_whole_item"
+---@field references? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.References
+---@field run? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.Run
+---@field updateTest? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens.UpdateTest
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lru.Query
+---The LRU capacity of the specified queries.
+---
+---```lua
+---default = {}
+---```
+---@field capacities? table
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lru
+---Number of syntax trees rust-analyzer keeps in memory. Defaults to 128.
+---@field capacity? integer
+---@field query? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lru.Query
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Notifications
+---Show `can't find Cargo.toml` error message.
+---
+---```lua
+---default = true
+---```
+---@field cargoTomlNotFound? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.ProcMacro.Attributes
+---Expand attribute macros. Requires `#rust-analyzer.procMacro.enable#` to be set.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.ProcMacro
+---@field attributes? _.lspconfig.settings.rust_analyzer.RustAnalyzer.ProcMacro.Attributes
+---Enable support for procedural macros, implies `#rust-analyzer.cargo.buildScripts.enable#`.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---These proc-macros will be ignored when trying to expand them.
+---
+---This config takes a map of crate names with the exported proc-macro names to ignore as values.
+---
+---```lua
+---default = {}
+---```
+---@field ignored? table
+---Number of proc-macro server processes to spawn.
+---
+---Controls how many independent `proc-macro-srv` processes rust-analyzer
+---runs in parallel to handle macro expansion.
+---
+---```lua
+---default = 1
+---```
+---@field processes? number|"physical"
+---Internal config, path to proc-macro server executable.
+---@field server? string
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Profiling
+---The path where to save memory profiling output.
+---
+---**Note:** Memory profiling is not enabled by default in rust-analyzer builds, you need to build
+---from source for it.
+---@field memoryProfile? string
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.References
+---Exclude imports from find-all-references.
+---@field excludeImports? boolean
+---Exclude tests from find-all-references and call-hierarchy.
+---@field excludeTests? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Rename
+---Whether to warn when a rename will cause conflicts (change the meaning of the code).
+---
+---```lua
+---default = true
+---```
+---@field showConflicts? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Runnables.Bench
+---Subcommand used for bench runnables instead of `bench`.
+---
+---```lua
+---default = "bench"
+---```
+---@field command? string
+---Override the command used for bench runnables.
+---The first element of the array should be the program to execute (for example, `cargo`).
+---
+---Use the placeholders `${package}`, `${target_arg}`, `${target}`, `${test_name}` to dynamically
+---replace the package name, target option (such as `--bin` or `--example`), the target name and
+---the test name (name of test function or test mod path).
+---@field overrideCommand? string[]
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Runnables.Doctest
+---Override the command used for bench runnables.
+---The first element of the array should be the program to execute (for example, `cargo`).
+---
+---Use the placeholders `${package}`, `${target_arg}`, `${target}`, `${test_name}` to dynamically
+---replace the package name, target option (such as `--bin` or `--example`), the target name and
+---the test name (name of test function or test mod path).
+---@field overrideCommand? string[]
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Runnables.Test
+---Subcommand used for test runnables instead of `test`.
+---
+---```lua
+---default = "test"
+---```
+---@field command? string
+---Override the command used for test runnables.
+---The first element of the array should be the program to execute (for example, `cargo`).
+---
+---Use the placeholders `${package}`, `${target_arg}`, `${target}`, `${test_name}` to dynamically
+---replace the package name, target option (such as `--bin` or `--example`), the target name and
+---the test name (name of test function or test mod path).
+---@field overrideCommand? string[]
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Runnables
+---Ask before updating the test when running it.
+---
+---```lua
+---default = true
+---```
+---@field askBeforeUpdateTest? boolean
+---@field bench? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Runnables.Bench
+---Command to be executed instead of 'cargo' for runnables.
+---@field command? string
+---@field doctest? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Runnables.Doctest
+---Additional arguments to be passed to cargo for runnables such as
+---tests or binaries. For example, it may be `--release`.
+---
+---```lua
+---default = {}
+---```
+---@field extraArgs? string[]
+---Environment variables passed to the runnable launched using `Test` or `Debug` lens or `rust-analyzer.run` command.
+---@field extraEnv? any|table[]|table
+---Additional arguments to be passed through Cargo to launched tests, benchmarks, or
+---doc-tests.
+---
+---Unless the launched target uses a
+---[custom test harness](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-harness-field),
+---they will end up being interpreted as options to
+---[`rustc`’s built-in test harness (“libtest”)](https://doc.rust-lang.org/rustc/tests/index.html#cli-arguments).
+---
+---```lua
+---default = { "--nocapture" }
+---```
+---@field extraTestBinaryArgs? string[]
+---Problem matchers to use for `rust-analyzer.run` command, eg `["$rustc", "$rust-panic"]`.
+---
+---```lua
+---default = { "$rustc" }
+---```
+---@field problemMatcher? string[]
+---@field test? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Runnables.Test
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Rustc
+---Path to the Cargo.toml of the rust compiler workspace, for usage in rustc_private
+---projects, or "discover" to try to automatically find it if the `rustc-dev` component
+---is installed.
+---
+---Any project which uses rust-analyzer with the rustcPrivate
+---crates must set `[package.metadata.rust-analyzer] rustc_private=true` to use it.
+---
+---This option does not take effect until rust-analyzer is restarted.
+---@field source? string
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Rustfmt.RangeFormatting
+---Enables the use of rustfmt's unstable range formatting command for the
+---`textDocument/rangeFormatting` request. The rustfmt option is unstable and only
+---available on a nightly build.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Rustfmt
+---Additional arguments to `rustfmt`.
+---
+---```lua
+---default = {}
+---```
+---@field extraArgs? string[]
+---Advanced option, fully override the command rust-analyzer uses for
+---formatting. This should be the equivalent of `rustfmt` here, and
+---not that of `cargo fmt`. The file contents will be passed on the
+---standard input and the formatted result will be read from the
+---standard output.
+---
+---Note: The option must be specified as an array of command line arguments, with
+---the first argument being the name of the command to run.
+---@field overrideCommand? string[]
+---@field rangeFormatting? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Rustfmt.RangeFormatting
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Comments
+---Use semantic tokens for comments.
+---
+---In some editors (e.g. vscode) semantic tokens override other highlighting grammars.
+---By disabling semantic tokens for comments, other grammars can be used to highlight
+---their contents.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Doc.Comment.Inject
+---Inject additional highlighting into doc comments.
+---
+---When enabled, rust-analyzer will highlight rust source in doc comments as well as intra
+---doc links.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Doc.Comment
+---@field inject? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Doc.Comment.Inject
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Doc
+---@field comment? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Doc.Comment
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Operator.Specialization
+---Use specialized semantic tokens for operators.
+---
+---When enabled, rust-analyzer will emit special token types for operator tokens instead
+---of the generic `operator` token type.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Operator
+---Use semantic tokens for operators.
+---
+---When disabled, rust-analyzer will emit semantic tokens only for operator tokens when
+---they are tagged with modifiers.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---@field specialization? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Operator.Specialization
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Punctuation.Separate.Macro
+---When enabled, rust-analyzer will emit a punctuation semantic token for the `!` of macro
+---calls.
+---@field bang? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Punctuation.Separate
+---@field macro? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Punctuation.Separate.Macro
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Punctuation.Specialization
+---Use specialized semantic tokens for punctuation.
+---
+---When enabled, rust-analyzer will emit special token types for punctuation tokens instead
+---of the generic `punctuation` token type.
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Punctuation
+---Use semantic tokens for punctuation.
+---
+---When disabled, rust-analyzer will emit semantic tokens only for punctuation tokens when
+---they are tagged with modifiers or have a special role.
+---@field enable? boolean
+---@field separate? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Punctuation.Separate
+---@field specialization? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Punctuation.Specialization
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Strings
+---Use semantic tokens for strings.
+---
+---In some editors (e.g. vscode) semantic tokens override other highlighting grammars.
+---By disabling semantic tokens for strings, other grammars can be used to highlight
+---their contents.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting
+---@field comments? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Comments
+---@field doc? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Doc
+---Emit non-standard tokens and modifiers
+---
+---When enabled, rust-analyzer will emit tokens and modifiers that are not part of the
+---standard set of semantic tokens.
+---
+---```lua
+---default = true
+---```
+---@field nonStandardTokens? boolean
+---@field operator? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Operator
+---@field punctuation? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Punctuation
+---@field strings? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting.Strings
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Server
+---Extra environment variables that will be passed to the rust-analyzer executable. Useful for passing e.g. `RA_LOG` for debugging.
+---@field extraEnv? table
+---Path to rust-analyzer executable (points to bundled binary by default).
+---@field path? string
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SignatureInfo.Documentation
+---Show documentation.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.SignatureInfo
+---Show full signature of the callable. Only shows parameters if disabled.
+---
+---```lua
+---default = "full"
+---```
+---@field detail? "full" | "parameters"
+---@field documentation? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SignatureInfo.Documentation
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.StatusBar
+---Action to run when clicking the extension status bar item.
+---
+---```lua
+---default = "openLogs"
+---```
+---@field clickAction? "stopServer" | "openLogs"
+---When to show the extension status bar.
+---
+---`"always"` Always show the status bar.
+---
+---`"never"` Never show the status bar.
+---
+---`{ documentSelector: <DocumentSelector>[] }` Show the status bar if the open file matches any of the given document selectors.
+---
+---See [VS Code -- DocumentSelector](https://code.visualstudio.com/api/references/document-selector) for more information.
+---
+---```lua
+---default = {
+---  documentSelector = { {
+---      language = "rust"
+---    }, {
+---      pattern = "**/Cargo.toml"
+---    }, {
+---      pattern = "**/Cargo.lock"
+---    }, {
+---      pattern = "extension-output-rust-lang.rust-analyzer*",
+---      scheme = "output"
+---    } }
+---}
+---```
+---@field showStatusBar? "always" | "never"|table
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Trace
+---Enable logging of VS Code extensions itself.
+---@field extension? boolean
+---Trace requests to the rust-analyzer (this is usually overly verbose and not recommended for regular users).
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Typing
+---Whether to prefix newlines after comments with the corresponding comment prefix.
+---
+---```lua
+---default = true
+---```
+---@field continueCommentsOnNewline? boolean
+---Specify the characters allowed to invoke special on typing triggers.
+---
+---- typing `=` after `let` tries to smartly add `;` if `=` is followed by an existing
+---    expression
+---- typing `=` between two expressions adds `;` when in statement position
+---- typing `=` to turn an assignment into an equality comparison removes `;` when in
+---    expression position
+---- typing `.` in a chain method call auto-indents
+---- typing `{` or `(` in front of an expression inserts a closing `}` or `)` after the
+---    expression
+---- typing `{` in a use item adds a closing `}` in the right place
+---- typing `>` to complete a return type `->` will insert a whitespace after it
+---- typing `<` in a path or type position inserts a closing `>` after the path or type.
+---
+---```lua
+---default = "=."
+---```
+---@field triggerChars? string
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Vfs
+---Additional paths to include in the VFS. Generally for code that is
+---generated or otherwise managed by a build system outside of Cargo,
+---though Cargo might be the eventual consumer.
+---
+---```lua
+---default = {}
+---```
+---@field extraIncludes? string[]
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Workspace.Symbol.Search
+---Exclude all imports from workspace symbol search.
+---
+---In addition to regular imports (which are always excluded),
+---this option removes public imports (better known as re-exports)
+---and removes imports that rename the imported symbol.
+---@field excludeImports? boolean
+---Workspace symbol search kind.
+---
+---```lua
+---default = "only_types"
+---```
+---@field kind? "only_types" | "all_symbols"
+---Limits the number of items returned from a workspace symbol search (Defaults to 128).
+---Some clients like vs-code issue new searches on result filtering and don't require all results to be returned in the initial search.
+---Other clients requires all results upfront and might require a higher limit.
+---
+---```lua
+---default = 128
+---```
+---@field limit? integer
+---Workspace symbol search scope.
+---
+---```lua
+---default = "workspace"
+---```
+---@field scope? "workspace" | "workspace_and_dependencies"
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Workspace.Symbol
+---@field search? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Workspace.Symbol.Search
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Workspace
+---Configure a command that rust-analyzer can invoke to
+---obtain configuration.
+---
+---This is an alternative to manually generating
+---`rust-project.json`: it enables rust-analyzer to generate
+---rust-project.json on the fly, and regenerate it when
+---switching or modifying projects.
+---
+---This is an object with three fields:
+---
+---* `command`: the shell command to invoke
+---
+---* `filesToWatch`: which build system-specific files should
+---be watched to trigger regenerating the configuration
+---
+---* `progressLabel`: the name of the command, used in
+---progress indicators in the IDE
+---
+---Here's an example of a valid configuration:
+---
+---```json
+---"rust-analyzer.workspace.discoverConfig": {
+---        "command": [
+---                "rust-project",
+---                "develop-json",
+---                "{arg}"
+---        ],
+---        "progressLabel": "buck2/rust-project",
+---        "filesToWatch": [
+---                "BUCK"
+---        ]
+---}
+---```
+---
+---## Argument Substitutions
+---
+---If `command` includes the argument `{arg}`, that argument will be substituted
+---with the JSON-serialized form of the following enum:
+---
+---```norun
+---#[derive(PartialEq, Clone, Debug, Serialize)]
+---#[serde(rename_all = "camelCase")]
+---pub enum DiscoverArgument {
+---     Path(AbsPathBuf),
+---     Buildfile(AbsPathBuf),
+---}
+---```
+---
+---rust-analyzer will use the path invocation to find and
+---generate a `rust-project.json` and therefore a
+---workspace. Example:
+---
+---
+---```norun
+---rust-project develop-json '{ "path": "myproject/src/main.rs" }'
+---```
+---
+---rust-analyzer will use build file invocations to update an
+---existing workspace. Example:
+---
+---Or with a build file and the configuration above:
+---
+---```norun
+---rust-project develop-json '{ "buildfile": "myproject/BUCK" }'
+---```
+---
+---As a reference for implementors, buck2's `rust-project`
+---will likely be useful:
+---<https://github.com/facebook/buck2/tree/main/integrations/rust-project>.
+---
+---## Discover Command Output
+---
+---**Warning**: This format is provisional and subject to change.
+---
+---The discover command should output JSON objects, one per
+---line (JSONL format). These objects should correspond to
+---this Rust data type:
+---
+---```norun
+---#[derive(Debug, Clone, Deserialize, Serialize)]
+---#[serde(tag = "kind")]
+---#[serde(rename_all = "snake_case")]
+---enum DiscoverProjectData {
+---        Finished { buildfile: Utf8PathBuf, project: ProjectJsonData },
+---        Error { error: String, source: Option<String> },
+---        Progress { message: String },
+---}
+---```
+---
+---For example, a progress event:
+---
+---```json
+---{"kind":"progress","message":"generating rust-project.json"}
+---```
+---
+---A finished event can look like this (expanded and
+---commented for readability):
+---
+---```json
+---{
+---        // the internally-tagged representation of the enum.
+---        "kind": "finished",
+---        // the file used by a non-Cargo build system to define
+---        // a package or target.
+---        "buildfile": "rust-analyzer/BUCK",
+---        // the contents of a rust-project.json, elided for brevity
+---        "project": {
+---                "sysroot": "foo",
+---                "crates": []
+---        }
+---}
+---```
+---
+---Only the finished event is required, but the other
+---variants are encouraged to give users more feedback about
+---progress or errors.
+---@field discoverConfig? any|table
+---@field symbol? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Workspace.Symbol
+
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer
+---@field assist? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Assist
+---@field cachePriming? _.lspconfig.settings.rust_analyzer.RustAnalyzer.CachePriming
+---@field cargo? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Cargo
+---@field cfg? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Cfg
+---@field check? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Check
+---Run the check command for diagnostics on save.
+---
+---```lua
+---default = true
+---```
+---@field checkOnSave? boolean
+---@field completion? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion
+---@field debug? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Debug
+---@field diagnostics? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Diagnostics
+---@field document? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Document
+---@field files? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Files
+---@field gotoImplementations? _.lspconfig.settings.rust_analyzer.RustAnalyzer.GotoImplementations
+---@field highlightRelated? _.lspconfig.settings.rust_analyzer.RustAnalyzer.HighlightRelated
+---@field hover? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover
+---@field imports? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Imports
+---Do not start rust-analyzer server when the extension is activated.
+---@field initializeStopped? boolean
+---@field inlayHints? _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints
+---@field interpret? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Interpret
+---@field joinLines? _.lspconfig.settings.rust_analyzer.RustAnalyzer.JoinLines
+---@field lens? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lens
+---Disable project auto-discovery in favor of explicitly specified set of projects.
+---
+---Elements must be paths pointing to `Cargo.toml`, `rust-project.json`, `.rs` files (which
+---will be treated as standalone files) or JSON objects in `rust-project.json` format.
+---
+---```lua
+---default = {}
+---```
+---@field linkedProjects? any[]
+---@field lru? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lru
+---@field notifications? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Notifications
+---The number of worker threads in the main loop. The default `null` means to pick
+---automatically.
+---@field numThreads? any|number|"physical" | "logical"
+---@field procMacro? _.lspconfig.settings.rust_analyzer.RustAnalyzer.ProcMacro
+---@field profiling? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Profiling
+---@field references? _.lspconfig.settings.rust_analyzer.RustAnalyzer.References
+---@field rename? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Rename
+---Restart the server automatically when settings that require a restart are changed.
+---@field restartServerOnConfigChange? boolean
+---@field runnables? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Runnables
+---@field rustc? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Rustc
+---@field rustfmt? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Rustfmt
+---@field semanticHighlighting? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SemanticHighlighting
+---@field server? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Server
+---Show Rust Dependencies in the Explorer view.
+---
+---```lua
+---default = true
+---```
+---@field showDependenciesExplorer? boolean
+---Show error notifications when requests fail.
+---
+---```lua
+---default = true
+---```
+---@field showRequestFailedErrorNotification? boolean
+---Show Syntax Tree in the Explorer view.
+---@field showSyntaxTree? boolean
+---Show a notification for unlinked files, prompting the user to add the corresponding Cargo.toml to the linked projects setting.
+---
+---```lua
+---default = true
+---```
+---@field showUnlinkedFileNotification? boolean
+---@field signatureInfo? _.lspconfig.settings.rust_analyzer.RustAnalyzer.SignatureInfo
+---@field statusBar? _.lspconfig.settings.rust_analyzer.RustAnalyzer.StatusBar
+---Show the Test Explorer view.
+---@field testExplorer? boolean
+---@field trace? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Trace
+---@field typing? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Typing
+---@field vfs? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Vfs
+---@field workspace? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Workspace
+
+---@class lspconfig.settings.rust_analyzer
+---@field ["rust-analyzer"]? _.lspconfig.settings.rust_analyzer.RustAnalyzer

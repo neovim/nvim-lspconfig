@@ -1,0 +1,63 @@
+---@meta
+
+---@class _.lspconfig.settings.sorbet.Sorbet
+---List of workspace file patterns that contribute to Sorbet's configuration.  Changes to any of those files should trigger a restart of any actively running Sorbet language server.
+---
+---```lua
+---default = { "**/sorbet/config", "**/Gemfile.lock" }
+---```
+---@field configFilePatterns? string[]
+---Enable Sorbet Ruby IDE features
+---@field enabled? boolean
+---Shows warning for untyped values.
+---
+---```lua
+---default = "nowhere"
+---```
+---@field highlightUntyped? "nowhere" | "everywhere-but-tests" | "everywhere"
+---Which severity to use to highlight untyped usages with (controls the squiggle colors)
+---
+---```lua
+---default = 3
+---```
+---@field highlightUntypedDiagnosticSeverity? 1 | 2 | 3 | 4
+---Standard Ruby LSP configurations.  If you commit your VSCode settings to source control, you probably want to commit *this* setting, not `sorbet.userLspConfigs`.
+---
+---```lua
+---default = { {
+---    command = { "bundle", "exec", "srb", "typecheck", "--lsp" },
+---    description = "Stable Sorbet Ruby IDE features",
+---    id = "stable",
+---    name = "Sorbet"
+---  }, {
+---    command = { "bundle", "exec", "srb", "typecheck", "--lsp", "--enable-all-beta-lsp-features" },
+---    description = "Beta Sorbet Ruby IDE features",
+---    id = "beta",
+---    name = "Sorbet (Beta)"
+---  }, {
+---    command = { "bundle", "exec", "srb", "typecheck", "--lsp", "--enable-all-experimental-lsp-features" },
+---    description = "Experimental Sorbet Ruby IDE features (warning: crashy, for developers only)",
+---    id = "experimental",
+---    name = "Sorbet (Experimental)"
+---  } }
+---```
+---@field lspConfigs? table[]
+---Show the extension output window on errors.
+---@field revealOutputOnError? boolean
+---The default configuration to use from `sorbet.userLspConfigs` or `sorbet.lspConfigs`.  If unset, defaults to the first item in `sorbet.userLspConfigs` or `sorbet.lspConfigs`.
+---@field selectedLspConfigId? string
+---Displays an auto-complete nudge in `typed: false` files.
+---
+---```lua
+---default = true
+---```
+---@field typedFalseCompletionNudges? boolean
+---Custom user LSP configurations that supplement `sorbet.lspConfigs` (and override configurations with the same id).  If you commit your VSCode settings to source control, you probably want to commit `sorbet.lspConfigs`, not this value.
+---
+---```lua
+---default = {}
+---```
+---@field userLspConfigs? table[]
+
+---@class lspconfig.settings.sorbet
+---@field sorbet? _.lspconfig.settings.sorbet.Sorbet

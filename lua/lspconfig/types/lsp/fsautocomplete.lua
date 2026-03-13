@@ -1,0 +1,472 @@
+---@meta
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.TestExplorer
+---Decides if the test explorer will automatically try discover tests when the workspace loads. You can still manually refresh the explorer to discover tests at any time
+---
+---```lua
+---default = true
+---```
+---@field AutoDiscoverTestsOnLoad? boolean
+---Use the dotnet cli to discover and run tests instead of the language server. Will lose features like streamed test results and Microsoft Testing Platform support.
+---@field UseLegacyDotnetCliIntegration? boolean
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.CodeLenses.References
+---If enabled, code lenses for reference counts for methods and functions will be shown.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.CodeLenses.Signature
+---If enabled, code lenses for type signatures on methods and functions will be shown.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.CodeLenses
+---@field references? _.lspconfig.settings.fsautocomplete.FSharp.CodeLenses.References
+---@field signature? _.lspconfig.settings.fsautocomplete.FSharp.CodeLenses.Signature
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.Fcs.TransparentCompiler
+---EXPERIMENTAL: Enables the FSharp Compiler Service's [transparent compiler](https://github.com/dotnet/fsharp/pull/15179) feature. Requires restart.
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.Fcs
+---@field transparentCompiler? _.lspconfig.settings.fsautocomplete.FSharp.Fcs.TransparentCompiler
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.Fsac.Gc
+---Configures the garbage collector to [conserve memory](https://learn.microsoft.com/en-us/dotnet/core/runtime-config/garbage-collector#conserve-memory) at the expense of more frequent garbage collections and possibly longer pause times. Acceptable values are 0-9. Any non-zero value will allow the [Large Object Heap](https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/large-object-heap) to be compacted automatically if it has too much fragmentation. Requires restart.
+---@field conserveMemory? integer
+---Limits the number of [heaps](https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals#the-managed-heap) created by the garbage collector. Applies to server garbage collection only. See [Middle Ground between Server and Workstation GC](https://devblogs.microsoft.com/dotnet/middle-ground-between-server-and-workstation-gc/) for more details. This can allow FSAC to still benefit from Server garbage collection while still limiting the number of heaps. [Only available on .NET 7 or higher](https://github.com/ionide/ionide-vscode-fsharp/issues/1899#issuecomment-1649009462). Requires restart. If FSAC is run on .NET 8 runtimes, this will be set to 2 by default to prevent inflated memory use. On .NET 9 with DATAS enabled, this will not be set. 
+---@field heapCount? integer
+---Configures whether the application uses workstation garbage collection or server garbage collection. See [Workstation vs Server Garbage Collection](https://devblogs.microsoft.com/premier-developer/understanding-different-gc-modes-with-concurrency-visualizer/#workstation-gc-vs-server-gc) for more details. Workstation will use less memory but Server will have more throughput. Requires restart.
+---
+---```lua
+---default = true
+---```
+---@field server? boolean
+---Configures whether the application uses the DATAS(dynamic adaptation to application sizes) server garbage collection mode. See [DATAS](https://learn.microsoft.com/dotnet/core/runtime-config/garbage-collector#dynamic-adaptation-to-application-sizes-datas) for more details. Requires restart. When FSAC is run on .NET 8 runtimes, this will be set to false by default. On .NET 9 runtimes, this will be set to true by default.
+---@field useDatas? boolean
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.Fsac
+---Appends the `--attachdebugger` argument to fsac, this will allow you to attach a debugger.
+---@field attachDebugger? boolean
+---The MemoryCacheOptions.SizeLimit for caching typechecks.
+---
+---```lua
+---default = 200
+---```
+---@field cachedTypeCheckCount? integer
+---Configures FsAutoComplete with settings intended to reduce memory consumption. Requires restart.
+---@field conserveMemory? boolean
+---additional CLI arguments to be provided to the dotnet runner for FSAC
+---
+---```lua
+---default = {}
+---```
+---@field dotnetArgs? string[]
+---additional CLI arguments to be provided to FSAC itself. Useful for flags that aren't exposed in the settings or CLI arguments that only exist in custom built versions of FSAC. Requires restart.
+---
+---```lua
+---default = {}
+---```
+---@field fsacArgs? string[]
+---@field gc? _.lspconfig.settings.fsautocomplete.FSharp.Fsac.Gc
+---The path to the 'fsautocomplete.dll', a directory containing TFM-specific versions of fsautocomplete.dll, or a directory containing fsautocomplete.dll. Useful for debugging a self-built FSAC. If a DLL is specified, uses it directly. If a directory is specified and it contains TFM-specific folders (net6.0, net7.0, etc) then that directory will be probed for the best TFM to use for the current runtime. This is useful when working with a local copy of FSAC, you can point directly to the bin/Debug or bin/Release folder and it'll Just Work. Finally, if a directory is specified and there are no TFM paths, then fsautocomplete.dll from that directory is used. Requires restart.
+---
+---```lua
+---default = ""
+---```
+---@field netCoreDllPath? string
+---EXPERIMENTAL: Speed up analyzing of projects in parallel. Requires restart.
+---@field parallelReferenceResolution? boolean
+---An array of log categories for FSAC to filter out. These can be found by viewing your log output and noting the text in between the brackets in the log line. For example, in the log line `[16:07:14.626 INF] [Compiler] done compiling foo.fsx`, the category is 'Compiler'. 
+---
+---```lua
+---default = {}
+---```
+---@field silencedLogs? string[]
+---Enables the use of a new source text implementation. This may have better memory characteristics. Requires restart.
+---
+---```lua
+---default = "RoslynSourceText"
+---```
+---@field sourceTextImplementation? "NamedText" | "RoslynSourceText"
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.InlayHints
+---Hides the explanatory tooltip that appears on InlayHints to describe the different configuration toggles.
+---@field disableLongTooltip? boolean
+---Controls if the inlay hints feature is enabled
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Controls if parameter-name inlay hints will be displayed for functions and methods
+---
+---```lua
+---default = true
+---```
+---@field parameterNames? boolean
+---Controls if type-annotation inlay hints will be displayed for bindings.
+---
+---```lua
+---default = true
+---```
+---@field typeAnnotations? boolean
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.InlineValues
+---Enables rendering all kinds of hints inline with your code. Currently supports pipelineHints, which are like LineLenses that appear along each step of a chain of piped expressions
+---@field enabled? boolean
+---The prefix used when rendering inline values.
+---
+---```lua
+---default = "  // "
+---```
+---@field prefix? string
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.LineLens
+---Usage mode for LineLens. If `never`, LineLens will never be shown.  If `replaceCodeLens`, LineLens will be placed in a decoration on top of the current line.
+---
+---```lua
+---default = "replaceCodeLens"
+---```
+---@field enabled? "never" | "replaceCodeLens" | "always"
+---The prefix displayed before the signature in a LineLens
+---
+---```lua
+---default = "  // "
+---```
+---@field prefix? string
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.Notifications
+---Enables more verbose notifications using System.Diagnostics.Activity to view traces from FSharp.Compiler.Service.
+---@field trace? boolean
+---The set of System.Diagnostics.Activity names to watch.
+---
+---```lua
+---default = { "BoundModel.TypeCheck", "BackgroundCompiler." }
+---```
+---@field traceNamespaces? string[]
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.OpenTelemetry
+---Enables OpenTelemetry exporter. See [OpenTelemetry Protocol Exporter](https://opentelemetry.io/docs/reference/specification/protocol/exporter/) for environment variables to configure for the exporter. Requires Restart.
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.PipelineHints
+---Enables PipeLine hints, which are like LineLenses that appear along each step of a chain of piped expressions
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---The prefix displayed before the signature
+---
+---```lua
+---default = "  // "
+---```
+---@field prefix? string
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp.Trace
+---Trace server messages at the LSP protocol level for diagnostics.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.fsautocomplete.FSharp
+---An array of additional command line parameters to pass to FSI when it is launched. See [the Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/fsharp-interactive-options) for an exhaustive list.  If both this and `#FSharp.fsiExtraParameters#` are used, both sets of arguments will be passed to the launched FSI.
+---@field FSIExtraInteractiveParameters? any[]
+---An array of additional command line parameters to pass to the compiler to use when checking FSI scripts. See [the Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/fsharp-interactive-options) for an exhaustive list. If both this and `#FSharp.fsiExtraParameters#` are used, only `#FSharp.fsiExtraParameters#` will be used.
+---@field FSIExtraSharedParameters? any[]
+---@field TestExplorer? _.lspconfig.settings.fsautocomplete.FSharp.TestExplorer
+---Enables a codefix that generates missing members for an abstract class when in an type inheriting from that abstract class.
+---
+---```lua
+---default = true
+---```
+---@field abstractClassStubGeneration? boolean
+---The expression to fill in the right-hand side of inherited members when generating missing members for an abstract base class
+---
+---```lua
+---default = 'failwith "Not Implemented"'
+---```
+---@field abstractClassStubGenerationMethodBody? string
+---The name of the 'self' identifier in an inherited member. For example, `this` in the expression `this.Member(x: int) = ()`
+---
+---```lua
+---default = "this"
+---```
+---@field abstractClassStubGenerationObjectIdentifier? string
+---Enables a panel for FSI that shows the value of all existing bindings in the FSI session
+---@field addFsiWatcher? boolean
+---Enables a codefix that adds a private access modifier
+---@field addPrivateAccessModifier? boolean
+---Directories in the array are used as a source of custom analyzers. Requires restart.
+---
+---```lua
+---default = { "packages/Analyzers", "analyzers" }
+---```
+---@field analyzersPath? any[]
+---Controls whether the solution explorer should automatically reveal and select files when opening them. If `sameAsFileExplorer` is set, then the value of the `explorer.autoReveal` setting will be used instead.
+---
+---```lua
+---default = "sameAsFileExplorer"
+---```
+---@field autoRevealInExplorer? "sameAsFileExplorer" | "enabled" | "disabled"
+---@field codeLenses? _.lspconfig.settings.fsautocomplete.FSharp.CodeLenses
+---Disables popup notifications for failed project loading
+---@field disableFailedProjectNotifications? boolean
+---Sets the root path for finding locating the dotnet CLI binary. Defaults to the `dotnet` binary found on your system PATH.
+---@field dotnetRoot? string
+---Enables Enable LSP Server based on FSharp.Data.Adaptive. This can improve stability. Requires restart.
+---
+---```lua
+---default = true
+---```
+---@field enableAdaptiveLspServer? boolean
+---EXPERIMENTAL. Enables F# analyzers for custom code diagnostics. Requires restart.
+---@field enableAnalyzers? boolean
+---EXPERIMENTAL. Enables support for loading workspaces with MsBuild's ProjectGraph. This can improve load times. Requires restart.
+---@field enableMSBuildProjectGraph? boolean
+---Enables additional code lenses showing number of references of a function or value. Requires background services to be enabled.
+---
+---```lua
+---default = true
+---```
+---@field enableReferenceCodeLens? boolean
+---Enables TouchBar integration of build/run/debug buttons
+---
+---```lua
+---default = true
+---```
+---@field enableTouchBar? boolean
+---Enables the solution explorer view of the current workspace, which shows the workspace as MSBuild sees it
+---
+---```lua
+---default = true
+---```
+---@field enableTreeView? boolean
+---The names of custom analyzers that should not be executed.
+---
+---```lua
+---default = {}
+---```
+---@field excludeAnalyzers? any[]
+---Directories in the array are excluded from project file search. Requires restart.
+---
+---```lua
+---default = { ".git", "paket-files", ".fable", "packages", "node_modules" }
+---```
+---@field excludeProjectDirectories? any[]
+---Includes external (from unopened modules and namespaces) symbols in autocomplete
+---@field externalAutocomplete? boolean
+---@field fcs? _.lspconfig.settings.fsautocomplete.FSharp.Fcs
+---@field fsac? _.lspconfig.settings.fsautocomplete.FSharp.Fsac
+---An array of additional command line parameters to pass to FSI when it is started. See [the Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/fsharp-interactive-options) for an exhaustive list.
+---@field fsiExtraParameters? any[]
+---The path to the F# Interactive tool used by Ionide-FSharp (When using .NET SDK scripts)
+---
+---```lua
+---default = ""
+---```
+---@field fsiSdkFilePath? string
+---When selecting an external symbols in autocomplete, insert the full name to the editor rather than open its module/namespace. Also allow filtering suggestions by typing its full name. 
+---
+--- Requires `FSharp.externalAutocomplete` enabled.
+---@field fullNameExternalAutocomplete? boolean
+---Enables generation of `msbuild.binlog` files for project loading. It works only for fresh, non-cached project loading. Run `F#: Clear Project Cache` and `Developer: Reload Window` to force fresh loading of all projects. These files can be loaded and inspected using the [MSBuild Structured Logger](https://github.com/KirillOsenkov/MSBuildStructuredLog)
+---@field generateBinlog? boolean
+---The names of custom analyzers that should exclusively be executed, others should be ignored.
+---
+---```lua
+---default = {}
+---```
+---@field includeAnalyzers? any[]
+---The number of spaces used for indentation when generating code, e.g. for interface stubs
+---
+---```lua
+---default = 4
+---```
+---@field indentationSize? number
+---Controls whether the info panel replaces tooltips
+---@field infoPanelReplaceHover? boolean
+---Controls whether the info panel should be displayed at startup
+---@field infoPanelShowOnStartup? boolean
+---Controls whether the info panel should be locked at startup
+---@field infoPanelStartLocked? boolean
+---Controls when the info panel is updated
+---
+---```lua
+---default = "onCursorMove"
+---```
+---@field infoPanelUpdate? "onCursorMove" | "onHover" | "both" | "none"
+---@field inlayHints? _.lspconfig.settings.fsautocomplete.FSharp.InlayHints
+---@field inlineValues? _.lspconfig.settings.fsautocomplete.FSharp.InlineValues
+---Enables a codefix that generates missing interface members when inside of an interface implementation expression
+---
+---```lua
+---default = true
+---```
+---@field interfaceStubGeneration? boolean
+---The expression to fill in the right-hand side of interface members when generating missing members for an interface implementation expression
+---
+---```lua
+---default = 'failwith "Not Implemented"'
+---```
+---@field interfaceStubGenerationMethodBody? string
+---The name of the 'self' identifier in an interface member. For example, `this` in the expression `this.Member(x: int) = ()`
+---
+---```lua
+---default = "this"
+---```
+---@field interfaceStubGenerationObjectIdentifier? string
+---Includes keywords in autocomplete
+---
+---```lua
+---default = true
+---```
+---@field keywordsAutocomplete? boolean
+---@field lineLens? _.lspconfig.settings.fsautocomplete.FSharp.LineLens
+---Enables integration with [FSharpLint](https://fsprojects.github.io/FSharpLint/) for additional (user-defined) warnings
+---
+---```lua
+---default = true
+---```
+---@field linter? boolean
+---Automatically shows the MSBuild output panel when MSBuild functionality is invoked
+---@field msbuildAutoshow? boolean
+---@field notifications? _.lspconfig.settings.fsautocomplete.FSharp.Notifications
+---@field openTelemetry? _.lspconfig.settings.fsautocomplete.FSharp.OpenTelemetry
+---@field pipelineHints? _.lspconfig.settings.fsautocomplete.FSharp.PipelineHints
+---Enables a codefix that will generate missing record fields when inside a record construction expression
+---
+---```lua
+---default = true
+---```
+---@field recordStubGeneration? boolean
+---The expression to fill in the right-hand side of record fields when generating missing fields for a record construction expression
+---
+---```lua
+---default = 'failwith "Not Implemented"'
+---```
+---@field recordStubGenerationBody? string
+---Enables a codefix that will suggest namespaces or module to open when a name is not recognized
+---
+---```lua
+---default = true
+---```
+---@field resolveNamespaces? boolean
+---If enabled, the current file will be saved before sending the last selection to FSI for evaluation
+---@field saveOnSendLastSelection? boolean
+---Automatically shows solution explorer on plugin startup
+---@field showExplorerOnStartup? boolean
+---Set the activity (left bar) where the project explorer view will be displayed. If `explorer`, then the project explorer will be a collapsible tab in the main explorer view, a sibling to the file system explorer. If `fsharp`, a new activity with the F# logo will be added and the project explorer will be rendered in this activity.Requires restart.
+---
+---```lua
+---default = "fsharp"
+---```
+---@field showProjectExplorerIn? "explorer" | "fsharp"
+---Enables detection of cases when names of functions and values can be simplified
+---
+---```lua
+---default = true
+---```
+---@field simplifyNameAnalyzer? boolean
+---A set of regex patterns to exclude from the simplify name analyzer
+---
+---```lua
+---default = { ".*\\.g\\.fs", ".*\\.cg\\.fs" }
+---```
+---@field simplifyNameAnalyzerExclusions? string[]
+---Enables smart indent feature
+---@field smartIndent? boolean
+---Allow Ionide to prompt whenever internal data files aren't included in your project's .gitignore
+---
+---```lua
+---default = true
+---```
+---@field suggestGitignore? boolean
+---Allow Ionide to prompt to use SdkScripts
+---
+---```lua
+---default = true
+---```
+---@field suggestSdkScripts? boolean
+---@field trace? _.lspconfig.settings.fsautocomplete.FSharp.Trace
+---Enables a codefix that generates missing union cases when in a match expression
+---
+---```lua
+---default = true
+---```
+---@field unionCaseStubGeneration? boolean
+---The expression to fill in the right-hand side of match cases when generating missing cases for a match on a discriminated union
+---
+---```lua
+---default = 'failwith "Not Implemented"'
+---```
+---@field unionCaseStubGenerationBody? string
+---Enables detection of unnecessary parentheses
+---
+---```lua
+---default = true
+---```
+---@field unnecessaryParenthesesAnalyzer? boolean
+---A set of regex patterns to exclude from the unnecessary parentheses analyzer
+---
+---```lua
+---default = { ".*\\.g\\.fs", ".*\\.cg\\.fs" }
+---```
+---@field unnecessaryParenthesesAnalyzerExclusions? string[]
+---Enables detection of unused declarations
+---
+---```lua
+---default = true
+---```
+---@field unusedDeclarationsAnalyzer? boolean
+---A set of regex patterns to exclude from the unused declarations analyzer
+---
+---```lua
+---default = { ".*\\.g\\.fs", ".*\\.cg\\.fs" }
+---```
+---@field unusedDeclarationsAnalyzerExclusions? string[]
+---Enables detection of unused opens
+---
+---```lua
+---default = true
+---```
+---@field unusedOpensAnalyzer? boolean
+---A set of regex patterns to exclude from the unused opens analyzer
+---
+---```lua
+---default = { ".*\\.g\\.fs", ".*\\.cg\\.fs" }
+---```
+---@field unusedOpensAnalyzerExclusions? string[]
+---Logs additional information to F# output channel. This is equivalent to passing the `--verbose` flag to FSAC. Requires restart.
+---@field verboseLogging? boolean
+---The deep level of directory hierarchy when searching for sln/projects
+---
+---```lua
+---default = 4
+---```
+---@field workspaceModePeekDeepLevel? integer
+---Path to the directory or solution file that should be loaded as a workspace. If set, no workspace probing or discovery is done by Ionide at all.
+---@field workspacePath? string
+
+---@class _.lspconfig.settings.fsautocomplete.Fsharp.Fsac.Gc
+---Specifies whether to [affinitize](https://learn.microsoft.com/en-us/dotnet/core/runtime-config/garbage-collector#affinitize) garbage collection threads with processors. To affinitize a GC thread means that it can only run on its specific CPU.. Applies to server garbage collection only. See [GCNoAffinitize](https://learn.microsoft.com/en-us/dotnet/framework/configure-apps/file-schema/runtime/gcnoaffinitize-element#remarks) for more details. [Only available on .NET 7 or higher](https://github.com/ionide/ionide-vscode-fsharp/issues/1899#issuecomment-1649009462). Requires restart. If FSAC is run on .NET 8 runtimes, this will be set by default. On .NET 9 with DATAS enabled, this will not be set.
+---@field noAffinitize? boolean
+
+---@class _.lspconfig.settings.fsautocomplete.Fsharp.Fsac
+---@field gc? _.lspconfig.settings.fsautocomplete.Fsharp.Fsac.Gc
+
+---@class _.lspconfig.settings.fsautocomplete.Fsharp
+---@field fsac? _.lspconfig.settings.fsautocomplete.Fsharp.Fsac
+
+---@class lspconfig.settings.fsautocomplete
+---@field FSharp? _.lspconfig.settings.fsautocomplete.FSharp
+---@field Fsharp? _.lspconfig.settings.fsautocomplete.Fsharp

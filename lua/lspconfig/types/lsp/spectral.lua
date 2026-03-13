@@ -1,0 +1,37 @@
+---@meta
+
+---@class _.lspconfig.settings.spectral.Spectral.Trace
+---Traces the communication between VS Code and the language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.spectral.Spectral
+---Controls whether or not Spectral is enabled.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Location of the ruleset file to use when validating. If omitted, the default is a .spectral.yml/.spectral.json in the same folder as the document being validated. Paths are relative to the workspace. This can also be a remote HTTP url.
+---@field rulesetFile? string
+---Run the linter on save (onSave) or as you type (onType).
+---
+---```lua
+---default = "onType"
+---```
+---@field run? "onSave" | "onType"
+---@field trace? _.lspconfig.settings.spectral.Spectral.Trace
+---An array of file globs (e.g., `**/*.yaml`) in minimatch glob format which should be validated by Spectral. If language identifiers are also specified, the file must match both in order to be validated. You can also use negative file globs (e.g., `!**/package.json`) here to exclude files.
+---@field validateFiles? string[]
+---An array of language IDs which should be validated by Spectral. If file globs are also specified, the file must match both in order to be validated.
+---
+---```lua
+---default = { "json", "yaml" }
+---```
+---@field validateLanguages? string[]
+
+---@class lspconfig.settings.spectral
+---@field spectral? _.lspconfig.settings.spectral.Spectral
