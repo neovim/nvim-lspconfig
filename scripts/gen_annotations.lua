@@ -178,16 +178,20 @@ local function normalize_properties(node)
 end
 
 ---Build the Lua class name for a schema node.
----@param name string Node name.
+---@param path string[] Path segments from the schema root.
 ---@param root_class string Root class name.
 ---@return string
-local function class_name_for(name, root_class)
-  if name == root_class then
-    return name
+local function class_name_for(path, root_class)
+  if #path == 0 then
+    return root_class
   end
   local class_name = { '_', root_class }
-  for word in string.gmatch(name, '([^_]+)') do
-    table.insert(class_name, word:sub(1, 1):upper() .. word:sub(2))
+  for _, segment in ipairs(path) do
+    local words = {}
+    for word in string.gmatch(segment, '([^_]+)') do
+      table.insert(words, word:sub(1, 1):upper() .. word:sub(2))
+    end
+    table.insert(class_name, table.concat(words))
   end
   return table.concat(class_name, '.')
 end
@@ -263,13 +267,13 @@ end
 
 ---Append annotations for an object node and its children.
 ---@param lines string[] Output buffer.
----@param name string Node name.
+---@param path string[] Path segments from the schema root.
 ---@param prop table Object property schema.
 ---@param root_class string Root class name.
-local function append_object(lines, name, prop, root_class)
+local function append_object(lines, path, prop, root_class)
   local object_lines = {}
   append_description(object_lines, prop)
-  table.insert(object_lines, '---@class ' .. class_name_for(name, root_class))
+  table.insert(object_lines, '---@class ' .. class_name_for(path, root_class))
   if prop.properties then
     local props = vim.tbl_keys(prop.properties)
     table.sort(props)
@@ -279,8 +283,13 @@ local function append_object(lines, name, prop, root_class)
       append_description(object_lines, child)
 
       if child.type == 'object' and child.properties then
-        table.insert(object_lines, '---@field ' .. field .. optional_marker .. ' ' .. class_name_for(field, root_class))
-        append_object(lines, field, child, root_class)
+        local child_path = vim.deepcopy(path)
+        table.insert(child_path, field)
+        table.insert(
+          object_lines,
+          '---@field ' .. field .. optional_marker .. ' ' .. class_name_for(child_path, root_class)
+        )
+        append_object(lines, child_path, child, root_class)
       else
         table.insert(object_lines, '---@field ' .. field .. optional_marker .. ' ' .. lua_type_for(child))
       end
@@ -305,7 +314,7 @@ local function generate_file_annotations(file)
     schema:set(key, prop)
   end
 
-  append_object(lines, class_name, normalize_properties(schema:get()), class_name)
+  append_object(lines, {}, normalize_properties(schema:get()), class_name)
   return vim.tbl_filter(function(v)
     return v ~= nil
   end, lines)
