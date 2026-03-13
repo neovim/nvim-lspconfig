@@ -177,6 +177,20 @@ local function normalize_properties(node)
     }
 end
 
+---Normalize one schema path segment into a valid LuaLS class name segment.
+---@param segment string
+---@return string
+local function segment_name_for_annotation(segment)
+  local words = {}
+  for word in string.gmatch(segment, '[%w]+') do
+    if word:match('^%d') then
+      word = '_' .. word
+    end
+    table.insert(words, word:sub(1, 1):upper() .. word:sub(2))
+  end
+  return #words > 0 and table.concat(words) or '_'
+end
+
 ---Build the Lua class name for a schema node.
 ---@param path string[] Path segments from the schema root.
 ---@param root_class string Root class name.
@@ -187,13 +201,46 @@ local function class_name_for(path, root_class)
   end
   local class_name = { '_', root_class }
   for _, segment in ipairs(path) do
-    local words = {}
-    for word in string.gmatch(segment, '([^_]+)') do
-      table.insert(words, word:sub(1, 1):upper() .. word:sub(2))
-    end
-    table.insert(class_name, table.concat(words))
+    table.insert(class_name, segment_name_for_annotation(segment))
   end
   return table.concat(class_name, '.')
+end
+
+---@type table<string, true>
+local lua_keywords = {
+  ['and'] = true,
+  ['break'] = true,
+  ['do'] = true,
+  ['else'] = true,
+  ['elseif'] = true,
+  ['end'] = true,
+  ['false'] = true,
+  ['for'] = true,
+  ['function'] = true,
+  ['goto'] = true,
+  ['if'] = true,
+  ['in'] = true,
+  ['local'] = true,
+  ['nil'] = true,
+  ['not'] = true,
+  ['or'] = true,
+  ['package'] = true,
+  ['repeat'] = true,
+  ['return'] = true,
+  ['then'] = true,
+  ['true'] = true,
+  ['until'] = true,
+  ['while'] = true,
+}
+
+---Format a schema field name for use in a LuaLS `---@field` annotation.
+---@param field string
+---@return string
+local function field_name_for_annotation(field)
+  if field:match('^[A-Za-z_][A-Za-z0-9_]*$') and not lua_keywords[field] then
+    return field
+  end
+  return '[' .. vim.inspect(field) .. ']'
 end
 
 ---Convert a schema property into a Lua type.
@@ -280,6 +327,7 @@ local function append_object(lines, path, prop, root_class)
     for _, field in ipairs(props) do
       local child = prop.properties[field]
       local optional_marker = is_required_field(prop, field, child) and '' or '?'
+      local field_name = field_name_for_annotation(field)
       append_description(object_lines, child)
 
       if child.type == 'object' and child.properties then
@@ -287,11 +335,11 @@ local function append_object(lines, path, prop, root_class)
         table.insert(child_path, field)
         table.insert(
           object_lines,
-          '---@field ' .. field .. optional_marker .. ' ' .. class_name_for(child_path, root_class)
+          '---@field ' .. field_name .. optional_marker .. ' ' .. class_name_for(child_path, root_class)
         )
         append_object(lines, child_path, child, root_class)
       else
-        table.insert(object_lines, '---@field ' .. field .. optional_marker .. ' ' .. lua_type_for(child))
+        table.insert(object_lines, '---@field ' .. field_name .. optional_marker .. ' ' .. lua_type_for(child))
       end
     end
   end
