@@ -13,6 +13,21 @@
 return {
   cmd = { 'svelteserver', '--stdio' },
   filetypes = { 'svelte' },
+  settings = {
+    typescript = {
+      inlayHints = {
+        parameterNames = {
+          enabled = 'literals',
+          suppressWhenArgumentMatchesName = true,
+        },
+        parameterTypes = { enabled = true },
+        variableTypes = { enabled = true },
+        propertyDeclarationTypes = { enabled = true },
+        functionLikeReturnTypes = { enabled = true },
+        enumMemberValues = { enabled = true },
+      },
+    },
+  },
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     -- Svelte LSP only supports file:// schema. https://github.com/sveltejs/language-tools/issues/2777
