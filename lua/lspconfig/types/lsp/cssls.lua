@@ -47,7 +47,7 @@
 ---default = true
 ---```
 ---@field preserveNewLines? boolean
----Ensure a space character around selector separators '>', '+', '~' (e.g. `a > b`).
+---Ensure a space character around selector separators `>`, `+`, `~` (e.g. `a > b`).
 ---@field spaceAroundSelectorSeparator? boolean
 
 ---@class _.lspconfig.settings.cssls.Css.Hover
@@ -264,7 +264,7 @@
 ---default = true
 ---```
 ---@field preserveNewLines? boolean
----Ensure a space character around selector separators '>', '+', '~' (e.g. `a > b`).
+---Ensure a space character around selector separators `>`, `+`, `~` (e.g. `a > b`).
 ---@field spaceAroundSelectorSeparator? boolean
 
 ---@class _.lspconfig.settings.cssls.Less.Hover
@@ -462,7 +462,7 @@
 ---default = true
 ---```
 ---@field preserveNewLines? boolean
----Ensure a space character around selector separators '>', '+', '~' (e.g. `a > b`).
+---Ensure a space character around selector separators `>`, `+`, `~` (e.g. `a > b`).
 ---@field spaceAroundSelectorSeparator? boolean
 
 ---@class _.lspconfig.settings.cssls.Scss.Hover
