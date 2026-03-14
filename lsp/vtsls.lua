@@ -80,6 +80,9 @@ return {
     'typescriptreact',
   },
   root_dir = function(bufnr, on_dir)
+    if vim.api.nvim_buf_get_name(bufnr):match('^%a+://') then
+      return
+    end
     -- The project root is where the LSP can be started from
     -- As stated in the documentation above, this LSP supports monorepos and simple projects.
     -- We select then from the project root, which is identified by the presence of a package
