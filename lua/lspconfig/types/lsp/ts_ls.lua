@@ -828,7 +828,7 @@
 ---@field interval? number
 
 ---@class _.lspconfig.settings.ts_ls.JsTs.Tsserver.Node
----Run TS Server on a custom Node installation. This can be a path to a Node executable, or 'node' if you want VS Code to detect a Node installation.
+---Run TS Server on a custom Node installation. This can be a path to a Node executable, or `node` if you want VS Code to detect a Node installation.
 ---@field path? string
 
 ---@class _.lspconfig.settings.ts_ls.JsTs.Tsserver.Npm
@@ -1411,7 +1411,7 @@
 ---default = 3072
 ---```
 ---@field maxTsServerMemory? number
----Run TS Server on a custom Node installation. This can be a path to a Node executable, or 'node' if you want VS Code to detect a Node installation.
+---Run TS Server on a custom Node installation. This can be a path to a Node executable, or `node` if you want VS Code to detect a Node installation.
 ---@field nodePath? string
 ---Additional paths to discover TypeScript Language Service plugins.
 ---

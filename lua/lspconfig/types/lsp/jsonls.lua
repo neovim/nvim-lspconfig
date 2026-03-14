@@ -25,7 +25,7 @@
 ---default = true
 ---```
 ---@field enable? boolean
----List of trusted domains for downloading JSON schemas over http(s). Use '*' to trust all domains. '*' can also be used as a wildcard in domain names.
+---List of trusted domains for downloading JSON schemas over http(s). Use `*` to trust all domains. `*` can also be used as a wildcard in domain names.
 ---
 ---```lua
 ---default = {
