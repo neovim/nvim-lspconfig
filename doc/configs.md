@@ -2479,11 +2479,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gb027de3a87"
+      version = "0.12.0-dev+gf58d24040a"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gb027de3a87"
+      version = "0.12.0-dev+gf58d24040a"
     }
   }
   ```
@@ -4971,20 +4971,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gb027de3a87"
+      version = "0.12.0-dev+gf58d24040a"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gb027de3a87"
+      version = "0.12.0-dev+gf58d24040a"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gb027de3a87"
+      version = "0.12.0-dev+gf58d24040a"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gb027de3a87"
+      version = "0.12.0-dev+gf58d24040a"
     }
   }
   ```
@@ -11373,7 +11373,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+gb027de3a87",
+    integrationVersion = "0.12.0-dev+gf58d24040a",
     token = vim.NIL,
     trustedFolders = {}
   }
@@ -12270,6 +12270,34 @@ Default config:
   ```
 - `on_attach`: [../lsp/svelte.lua:13](../lsp/svelte.lua#L13)
 - `root_dir`: [../lsp/svelte.lua:13](../lsp/svelte.lua#L13)
+- `settings` :
+  ```lua
+  {
+    typescript = {
+      inlayHints = {
+        enumMemberValues = {
+          enabled = true
+        },
+        functionLikeReturnTypes = {
+          enabled = true
+        },
+        parameterNames = {
+          enabled = "literals",
+          suppressWhenArgumentMatchesName = true
+        },
+        parameterTypes = {
+          enabled = true
+        },
+        propertyDeclarationTypes = {
+          enabled = true
+        },
+        variableTypes = {
+          enabled = true
+        }
+      }
+    }
+  }
+  ```
 
 ---
 
