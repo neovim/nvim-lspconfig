@@ -308,6 +308,7 @@ Nvim by running `:help lspconfig-all`.
 - [sqlls](#sqlls)
 - [sqls](#sqls)
 - [sqruff](#sqruff)
+- [stan_ls](#stan_ls)
 - [standardrb](#standardrb)
 - [starlark_rust](#starlark_rust)
 - [starpls](#starpls)
@@ -2479,11 +2480,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gf58d24040a"
+      version = "0.12.0-dev+g9084483715"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gf58d24040a"
+      version = "0.12.0-dev+g9084483715"
     }
   }
   ```
@@ -4971,20 +4972,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gf58d24040a"
+      version = "0.12.0-dev+g9084483715"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gf58d24040a"
+      version = "0.12.0-dev+g9084483715"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gf58d24040a"
+      version = "0.12.0-dev+g9084483715"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gf58d24040a"
+      version = "0.12.0-dev+g9084483715"
     }
   }
   ```
@@ -11373,7 +11374,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+gf58d24040a",
+    integrationVersion = "0.12.0-dev+g9084483715",
     token = vim.NIL,
     trustedFolders = {}
   }
@@ -11921,6 +11922,39 @@ Default config:
 - `root_markers` :
   ```lua
   { ".sqruff", ".git" }
+  ```
+
+---
+
+## stan_ls
+
+https://github.com/tomatitito/stan-language-server
+
+ Language server for the Stan probabilistic programming language.
+
+@type vim.lsp.Config
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('stan_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "stan-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "stan" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".git" }
+  ```
+- `settings` :
+  ```lua
+  {}
   ```
 
 ---
