@@ -1626,11 +1626,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g9084483715"
+      version = "0.12.0-dev+g16f7440cc7"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g9084483715"
+      version = "0.12.0-dev+g16f7440cc7"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3542,20 +3542,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g9084483715"
+      version = "0.12.0-dev+g16f7440cc7"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g9084483715"
+      version = "0.12.0-dev+g16f7440cc7"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g9084483715"
+      version = "0.12.0-dev+g16f7440cc7"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g9084483715"
+      version = "0.12.0-dev+g16f7440cc7"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -7747,6 +7747,8 @@ Default config:
   }
 - cmd: >lua
   { "roslyn-language-server", "--logLevel", "Information", "--extensionLogDirectory", "/tmp/roslyn_ls/logs", "--stdio" }
+- cmd_env: >lua
+  {}
 - commands: >lua
   {
     ["roslyn.client.completionComplexEdit"] = <function 1>
@@ -8460,7 +8462,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g9084483715",
+    integrationVersion = "0.12.0-dev+g16f7440cc7",
     token = vim.NIL,
     trustedFolders = {}
   }

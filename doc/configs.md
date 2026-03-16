@@ -2480,11 +2480,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g9084483715"
+      version = "0.12.0-dev+g16f7440cc7"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g9084483715"
+      version = "0.12.0-dev+g16f7440cc7"
     }
   }
   ```
@@ -4972,20 +4972,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g9084483715"
+      version = "0.12.0-dev+g16f7440cc7"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g9084483715"
+      version = "0.12.0-dev+g16f7440cc7"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g9084483715"
+      version = "0.12.0-dev+g16f7440cc7"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g9084483715"
+      version = "0.12.0-dev+g16f7440cc7"
     }
   }
   ```
@@ -10455,6 +10455,10 @@ Default config:
   ```lua
   { "roslyn-language-server", "--logLevel", "Information", "--extensionLogDirectory", "/tmp/roslyn_ls/logs", "--stdio" }
   ```
+- `cmd_env` :
+  ```lua
+  {}
+  ```
 - `commands` :
   ```lua
   {
@@ -11374,7 +11378,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g9084483715",
+    integrationVersion = "0.12.0-dev+g16f7440cc7",
     token = vim.NIL,
     trustedFolders = {}
   }
