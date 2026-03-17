@@ -109,7 +109,11 @@
 ---@field addTabstopAfterParentheses? boolean
 ---Automatically insert an `end` when opening a block
 ---@field autocompleteEnd? boolean
----Enables the experimental fragment autocomplete system for performance improvements
+---Enables the fragment autocomplete system for performance improvements
+---
+---```lua
+---default = true
+---```
 ---@field enableFragmentAutocomplete? boolean
 ---Enable autocomplete
 ---
