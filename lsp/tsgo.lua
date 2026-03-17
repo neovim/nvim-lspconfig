@@ -46,6 +46,21 @@
 
 ---@type vim.lsp.Config
 return {
+  settings = {
+    typescript = {
+      inlayHints = {
+        parameterNames = {
+          enabled = 'literals',
+          suppressWhenArgumentMatchesName = true,
+        },
+        parameterTypes = { enabled = true },
+        variableTypes = { enabled = true },
+        propertyDeclarationTypes = { enabled = true },
+        functionLikeReturnTypes = { enabled = true },
+        enumMemberValues = { enabled = true },
+      },
+    },
+  },
   cmd = function(dispatchers, config)
     local cmd = 'tsgo'
     local local_cmd = (config or {}).root_dir and config.root_dir .. '/node_modules/.bin/tsgo'
