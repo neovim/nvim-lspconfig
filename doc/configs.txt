@@ -1626,11 +1626,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g16f7440cc7"
+      version = "0.12.0-dev+g9ab6c607cc"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g16f7440cc7"
+      version = "0.12.0-dev+g9ab6c607cc"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3542,20 +3542,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g16f7440cc7"
+      version = "0.12.0-dev+g9ab6c607cc"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g16f7440cc7"
+      version = "0.12.0-dev+g9ab6c607cc"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g16f7440cc7"
+      version = "0.12.0-dev+g9ab6c607cc"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g16f7440cc7"
+      version = "0.12.0-dev+g9ab6c607cc"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -7735,6 +7735,7 @@ Snippet to enable the language server: >lua
 
 Commands:
 - roslyn.client.completionComplexEdit
+- roslyn.client.nestedCodeAction
 
 Default config:
 - capabilities: >lua
@@ -7751,7 +7752,8 @@ Default config:
   {}
 - commands: >lua
   {
-    ["roslyn.client.completionComplexEdit"] = <function 1>
+    ["roslyn.client.completionComplexEdit"] = <function 1>,
+    ["roslyn.client.nestedCodeAction"] = <function 2>
   }
 - filetypes: >lua
   { "cs" }
@@ -8462,7 +8464,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g16f7440cc7",
+    integrationVersion = "0.12.0-dev+g9ab6c607cc",
     token = vim.NIL,
     trustedFolders = {}
   }

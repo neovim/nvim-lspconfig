@@ -2480,11 +2480,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g16f7440cc7"
+      version = "0.12.0-dev+g9ab6c607cc"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g16f7440cc7"
+      version = "0.12.0-dev+g9ab6c607cc"
     }
   }
   ```
@@ -4972,20 +4972,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g16f7440cc7"
+      version = "0.12.0-dev+g9ab6c607cc"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g16f7440cc7"
+      version = "0.12.0-dev+g9ab6c607cc"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g16f7440cc7"
+      version = "0.12.0-dev+g9ab6c607cc"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g16f7440cc7"
+      version = "0.12.0-dev+g9ab6c607cc"
     }
   }
   ```
@@ -10439,6 +10439,7 @@ vim.lsp.enable('roslyn_ls')
 
 Commands:
 - roslyn.client.completionComplexEdit
+- roslyn.client.nestedCodeAction
 
 Default config:
 - `capabilities` :
@@ -10462,7 +10463,8 @@ Default config:
 - `commands` :
   ```lua
   {
-    ["roslyn.client.completionComplexEdit"] = <function 1>
+    ["roslyn.client.completionComplexEdit"] = <function 1>,
+    ["roslyn.client.nestedCodeAction"] = <function 2>
   }
   ```
 - `filetypes` :
@@ -11378,7 +11380,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g16f7440cc7",
+    integrationVersion = "0.12.0-dev+g9ab6c607cc",
     token = vim.NIL,
     trustedFolders = {}
   }
