@@ -8027,7 +8027,7 @@ If you have installed nextflow language server, you can set the `cmd` custom pat
 
 ```lua
 vim.lsp.config('nextflow_ls', {
-    cmd = { 'java', '-jar', 'nextflow-language-server-all.jar' },
+    cmd = { 'nextflow-language-server' },
     filetypes = { 'nextflow' },
     settings = {
       nextflow = {
@@ -8047,7 +8047,7 @@ vim.lsp.enable('nextflow_ls')
 Default config:
 - `cmd` :
   ```lua
-  { "java", "-jar", "nextflow-language-server-all.jar" }
+  { "nextflow-language-server" }
   ```
 - `filetypes` :
   ```lua
