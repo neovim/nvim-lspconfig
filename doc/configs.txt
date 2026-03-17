@@ -10091,6 +10091,32 @@ Default config:
 - filetypes: >lua
   { "javascript", "javascriptreact", "typescript", "typescriptreact" }
 - root_dir (use "gF" to view): ../lsp/tsgo.lua:48
+- settings: >lua
+  {
+    typescript = {
+      inlayHints = {
+        enumMemberValues = {
+          enabled = true
+        },
+        functionLikeReturnTypes = {
+          enabled = true
+        },
+        parameterNames = {
+          enabled = "literals",
+          suppressWhenArgumentMatchesName = true
+        },
+        parameterTypes = {
+          enabled = true
+        },
+        propertyDeclarationTypes = {
+          enabled = true
+        },
+        variableTypes = {
+          enabled = true
+        }
+      }
+    }
+  }
 <
 
 ------------------------------------------------------------------------------
