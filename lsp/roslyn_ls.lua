@@ -154,6 +154,75 @@ return {
         vim.notify('roslyn_ls: completionComplexEdit args not understood: ' .. vim.inspect(args), vim.log.levels.WARN)
       end
     end,
+
+    ['roslyn.client.nestedCodeAction'] = function(command, ctx)
+      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+      local arg = command.arguments and command.arguments[1]
+
+      if type(arg) ~= 'table' then
+        vim.notify('roslyn_ls: invalid nestedCodeAction arguments', vim.log.levels.ERROR)
+        return
+      end
+
+      local function apply_action(action)
+        if not action then
+          return
+        end
+
+        if action.edit then
+          vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
+        end
+
+        if action.command then
+          client:exec_cmd(action.command)
+        end
+      end
+
+      local function handle(action)
+        if not action then
+          return
+        end
+
+        if action.data and not action.edit and not action.command then
+          client:request('codeAction/resolve', action, function(err, resolved)
+            if err then
+              vim.notify(err.message or tostring(err), vim.log.levels.ERROR)
+              return
+            end
+
+            if resolved then
+              handle(resolved)
+            end
+          end, ctx.bufnr)
+
+          return
+        end
+
+        local nested = vim.islist(action) and action or action.NestedCodeActions
+        if type(nested) ~= 'table' or vim.tbl_isempty(nested) then
+          apply_action(action)
+          return
+        end
+
+        if #nested == 1 then
+          handle(nested[1])
+          return
+        end
+
+        vim.ui.select(nested, {
+          prompt = action.title or 'Select code action',
+          format_item = function(item)
+            return item.title or (item.command and item.command.title) or 'Unnamed action'
+          end,
+        }, function(choice)
+          if choice then
+            handle(choice)
+          end
+        end)
+      end
+
+      handle(arg)
+    end,
   },
 
   root_dir = function(bufnr, cb)
