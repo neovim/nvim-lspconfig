@@ -59,12 +59,6 @@
 ---default = true
 ---```
 ---@field useHhast? boolean
----Start hh_client in Language Server mode. Only works for HHVM version 3.23 and above.
----
----```lua
----default = true
----```
----@field useLanguageServer? boolean
 ---Absolute path to the workspace root directory. This will be the VS Code workspace root by default, but can be changed if the project is in a subdirectory or mounted in a Docker container.
 ---@field workspaceRootPath? string
 
