@@ -2480,11 +2480,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g9ab6c607cc"
+      version = "0.12.0-dev+g08c64bb036"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g9ab6c607cc"
+      version = "0.12.0-dev+g08c64bb036"
     }
   }
   ```
@@ -4972,20 +4972,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g9ab6c607cc"
+      version = "0.12.0-dev+g08c64bb036"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g9ab6c607cc"
+      version = "0.12.0-dev+g08c64bb036"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g9ab6c607cc"
+      version = "0.12.0-dev+g08c64bb036"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g9ab6c607cc"
+      version = "0.12.0-dev+g08c64bb036"
     }
   }
   ```
@@ -7539,7 +7539,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { "build.sbt", "build.sc", "build.gradle", "pom.xml" }
+  { "build.sbt", "build.sc", { "build.gradle", "build.gradle.kts" }, "pom.xml" }
   ```
 
 ---
@@ -10483,10 +10483,6 @@ Default config:
   ```lua
   "roslyn_ls"
   ```
-- `offset_encoding` :
-  ```lua
-  "utf-8"
-  ```
 - `on_attach`: [../lsp/roslyn_ls.lua:112](../lsp/roslyn_ls.lua#L112)
 - `on_init` :
   ```lua
@@ -11380,7 +11376,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g9ab6c607cc",
+    integrationVersion = "0.12.0-dev+g08c64bb036",
     token = vim.NIL,
     trustedFolders = {}
   }
