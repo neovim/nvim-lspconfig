@@ -31,9 +31,7 @@ return {
     'html',
     'less',
     'scss',
-    'sugarss',
     'vue',
-    'wxss',
   },
   root_markers = root_file,
   -- Refer to https://github.com/stylelint/vscode-stylelint?tab=readme-ov-file#extension-settings for documentation.
