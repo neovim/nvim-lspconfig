@@ -111,7 +111,6 @@ end
 ---@type vim.lsp.Config
 return {
   name = 'roslyn_ls',
-  offset_encoding = 'utf-8',
   cmd = {
     vim.fn.executable('Microsoft.CodeAnalysis.LanguageServer') == 1 and 'Microsoft.CodeAnalysis.LanguageServer'
       or 'roslyn-language-server',
