@@ -9048,7 +9048,7 @@ Default config:
 - cmd: >lua
   { "stylelint-language-server", "--stdio" }
 - filetypes: >lua
-  { "astro", "css", "html", "less", "scss", "sugarss", "vue", "wxss" }
+  { "astro", "css", "html", "less", "scss", "vue" }
 - root_markers: >lua
   { ".stylelintrc", ".stylelintrc.mjs", ".stylelintrc.cjs", ".stylelintrc.js", ".stylelintrc.json", ".stylelintrc.yaml", ".stylelintrc.yml", "stylelint.config.mjs", "stylelint.config.cjs", "stylelint.config.js" }
 - settings: >lua

@@ -12163,7 +12163,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "astro", "css", "html", "less", "scss", "sugarss", "vue", "wxss" }
+  { "astro", "css", "html", "less", "scss", "vue" }
   ```
 - `root_markers` :
   ```lua
