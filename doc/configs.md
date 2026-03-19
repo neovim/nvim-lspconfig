@@ -315,6 +315,7 @@ Nvim by running `:help lspconfig-all`.
 - [statix](#statix)
 - [steep](#steep)
 - [stimulus_ls](#stimulus_ls)
+- [stylelint_language_server](#stylelint_language_server)
 - [stylelint_lsp](#stylelint_lsp)
 - [stylua](#stylua)
 - [stylua3p_ls](#stylua3p_ls)
@@ -2480,11 +2481,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g9ab6c607cc"
+      version = "0.12.0-dev+g08c64bb036"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g9ab6c607cc"
+      version = "0.12.0-dev+g08c64bb036"
     }
   }
   ```
@@ -4972,20 +4973,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g9ab6c607cc"
+      version = "0.12.0-dev+g08c64bb036"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g9ab6c607cc"
+      version = "0.12.0-dev+g08c64bb036"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g9ab6c607cc"
+      version = "0.12.0-dev+g08c64bb036"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g9ab6c607cc"
+      version = "0.12.0-dev+g08c64bb036"
     }
   }
   ```
@@ -11380,7 +11381,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g9ab6c607cc",
+    integrationVersion = "0.12.0-dev+g08c64bb036",
     token = vim.NIL,
     trustedFolders = {}
   }
@@ -12139,6 +12140,38 @@ Default config:
 - `root_markers` :
   ```lua
   { "Gemfile", ".git" }
+  ```
+
+---
+
+## stylelint_language_server
+
+https://github.com/stylelint/vscode-stylelint/tree/main/packages/language-server
+
+`stylelint-language-server` can be installed via npm `npm install -g @stylelint/language-server`.
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('stylelint_language_server')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "stylelint-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "astro", "css", "html", "less", "scss", "sugarss", "vue", "wxss" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".stylelintrc", ".stylelintrc.mjs", ".stylelintrc.cjs", ".stylelintrc.js", ".stylelintrc.json", ".stylelintrc.yaml", ".stylelintrc.yml", "stylelint.config.mjs", "stylelint.config.cjs", "stylelint.config.js" }
+  ```
+- `settings` :
+  ```lua
+  {}
   ```
 
 ---
