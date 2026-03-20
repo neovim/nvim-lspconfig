@@ -63,12 +63,14 @@ function M.root_markers_with_field(root_files, new_names, field, fname)
 
   for _, f in ipairs(found or {}) do
     -- Match the given `field`.
-    for line in io.lines(f) do
+    local file = assert(io.open(f, 'r'))
+    for line in file:lines() do
       if line:find(field) then
         root_files[#root_files + 1] = vim.fs.basename(f)
         break
       end
     end
+    file:close()
   end
 
   return root_files
