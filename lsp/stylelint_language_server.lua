@@ -6,6 +6,7 @@
 --- ```
 
 local util = require 'lspconfig.util'
+local lsp = vim.lsp
 
 local root_file = {
   '.stylelintrc',
@@ -34,7 +35,25 @@ return {
     'vue',
   },
   root_markers = root_file,
+  on_attach = function(client, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspStylelintFixAll', function()
+      client:request_sync('workspace/executeCommand', {
+        command = 'stylelint.applyAutoFix',
+        arguments = {
+          {
+            uri = vim.uri_from_bufnr(bufnr),
+            version = lsp.util.buf_versions[bufnr],
+          },
+        },
+      }, nil, bufnr)
+    end, {})
+  end,
   -- Refer to https://github.com/stylelint/vscode-stylelint?tab=readme-ov-file#extension-settings for documentation.
   ---@type lspconfig.settings.stylelint_language_server
-  settings = {},
+  settings = {
+    stylelint = {
+      validate = { 'css', 'postcss' },
+      snippet = { 'css', 'postcss' },
+    },
+  },
 }
