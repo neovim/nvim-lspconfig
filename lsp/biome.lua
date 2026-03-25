@@ -50,6 +50,8 @@ return {
       'bun.lockb',
       'bun.lock',
       'deno.lock',
+      'biome.json',
+      'biome.jsonc',
     }
     -- Give the root markers equal priority by wrapping them in a table
     root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers, { '.git' } }
