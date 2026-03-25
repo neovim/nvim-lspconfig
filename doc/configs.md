@@ -373,6 +373,7 @@ Nvim by running `:help lspconfig-all`.
 - [veryl_ls](#veryl_ls)
 - [vespa_ls](#vespa_ls)
 - [vhdl_ls](#vhdl_ls)
+- [vimdoc_ls](#vimdoc_ls)
 - [vimls](#vimls)
 - [visualforce_ls](#visualforce_ls)
 - [vls](#vls)
@@ -14313,6 +14314,39 @@ Default config:
   ```lua
   { "vhdl_ls.toml", ".vhdl_ls.toml" }
   ```
+
+---
+
+## vimdoc_ls
+
+https://github.com/barrettruth/vimdoc-language-server
+
+Language server for vim help files (vimdoc).
+
+`vimdoc-language-server` can be installed via `cargo`:
+```sh
+cargo install vimdoc-language-server
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('vimdoc_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "vimdoc-language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "help" }
+  ```
+- `root_markers` :
+  ```lua
+  { "doc", ".git" }
+  ```
+- `workspace_required` : `false`
 
 ---
 

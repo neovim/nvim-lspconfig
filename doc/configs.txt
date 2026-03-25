@@ -10732,6 +10732,30 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+vimdoc_ls
+
+https://github.com/barrettruth/vimdoc-language-server
+
+Language server for vim help files (vimdoc).
+
+`vimdoc-language-server` can be installed via `cargo` >sh
+  cargo install vimdoc-language-server
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('vimdoc_ls')
+
+
+Default config:
+- cmd: >lua
+  { "vimdoc-language-server" }
+- filetypes: >lua
+  { "help" }
+- root_markers: >lua
+  { "doc", ".git" }
+- `workspace_required` : `false`
+<
+
+------------------------------------------------------------------------------
 vimls
 
 https://github.com/iamcco/vim-language-server
