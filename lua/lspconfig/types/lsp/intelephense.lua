@@ -90,6 +90,18 @@
 ---default = true
 ---```
 ---@field triggerParameterHints? boolean
+---Method completions will include either a `parent` call or a `throw new Exception('Not implemented')` in the method body.
+---
+---```lua
+---default = true
+---```
+---@field withMethodBody? boolean
+---Method completions will include an `#[Override]` attribute where appropriate if targeting PHP 8.3+.
+---
+---```lua
+---default = true
+---```
+---@field withOverrideAttribute? boolean
 
 ---@class _.lspconfig.settings.intelephense.Intelephense.Diagnostics
 ---Enables argument count diagnostics.
@@ -176,6 +188,12 @@
 ---default = true
 ---```
 ---@field suppressUndefinedMembersWhenMagicMethodDeclared? boolean
+---Enables reporting of irregularities in code that may be indicative of a bug. For example, assignments in a conditional expression or duplicate array keys.
+---
+---```lua
+---default = true
+---```
+---@field suspectCode? boolean
 ---Enables diagnostics on type compatibility of arguments, property assignments, and return statements where types have been declared.
 ---
 ---```lua
@@ -433,7 +451,7 @@
 ---@field namespaceMode? "single" | "all"
 
 ---@class _.lspconfig.settings.intelephense.Intelephense.Telemetry
----Anonymous usage and crash data will be sent to Azure Application Insights. Inherits from telemetry.enableTelemetry.
+---When set to `true`, anonymous usage and crash data will be sent to Azure Application Insights. Defaults to `false`.
 ---@field enabled? boolean
 
 ---@class _.lspconfig.settings.intelephense.Intelephense.Trace
@@ -475,6 +493,12 @@
 ---```
 ---@field stubs? string[]
 ---@field telemetry? _.lspconfig.settings.intelephense.Intelephense.Telemetry
+---The maximum call depth to follow when analyzing throw expressions. Defaults to `0`, which limits analysis to the current function. Higher values can have a negative impact on performance.
+---
+---```lua
+---default = 0
+---```
+---@field throwDepth? number
 ---@field trace? _.lspconfig.settings.intelephense.Intelephense.Trace
 
 ---@class lspconfig.settings.intelephense

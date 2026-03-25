@@ -1251,18 +1251,18 @@
 ---Override the command used for bench runnables.
 ---The first element of the array should be the program to execute (for example, `cargo`).
 ---
----Use the placeholders `${package}`, `${target_arg}`, `${target}`, `${test_name}` to dynamically
+---Use the placeholders `${package}`, `${target_arg}`, `${target}`, `${executable_args}` to dynamically
 ---replace the package name, target option (such as `--bin` or `--example`), the target name and
----the test name (name of test function or test mod path).
+---the arguments passed to test binary args (includes `rust-analyzer.runnables.extraTestBinaryArgs`).
 ---@field overrideCommand? string[]
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Runnables.Doctest
 ---Override the command used for bench runnables.
 ---The first element of the array should be the program to execute (for example, `cargo`).
 ---
----Use the placeholders `${package}`, `${target_arg}`, `${target}`, `${test_name}` to dynamically
+---Use the placeholders `${package}`, `${target_arg}`, `${target}`, `${executable_args}` to dynamically
 ---replace the package name, target option (such as `--bin` or `--example`), the target name and
----the test name (name of test function or test mod path).
+---the arguments passed to test binary args (includes `rust-analyzer.runnables.extraTestBinaryArgs`).
 ---@field overrideCommand? string[]
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Runnables.Test
@@ -1275,9 +1275,9 @@
 ---Override the command used for test runnables.
 ---The first element of the array should be the program to execute (for example, `cargo`).
 ---
----Use the placeholders `${package}`, `${target_arg}`, `${target}`, `${test_name}` to dynamically
+---Use the placeholders `${package}`, `${target_arg}`, `${target}`, `${executable_args}` to dynamically
 ---replace the package name, target option (such as `--bin` or `--example`), the target name and
----the test name (name of test function or test mod path).
+---the arguments passed to test binary args (includes `rust-analyzer.runnables.extraTestBinaryArgs`).
 ---@field overrideCommand? string[]
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Runnables

@@ -19,6 +19,8 @@
 ---@field docPath? string[]
 ---External dependencies of the form groupId:artifactId:version or groupId:artifactId:packaging:version:scope
 ---@field externalDependencies? string[]
+---Extra compiler args, for example ["--enable-preview","-source 21"].
+---@field extraCompilerArgs? string[]
 ---Absolute path to your Java home directory
 ---@field home? string
 ---Command to run all tests in a class, for example ["mvn", "test", "-Dtest=${class}"
