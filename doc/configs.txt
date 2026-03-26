@@ -1626,11 +1626,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g40a42affa5"
+      version = "0.12.0-dev+gc9e961994b"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g40a42affa5"
+      version = "0.12.0-dev+gc9e961994b"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3542,20 +3542,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+g40a42affa5"
+      version = "0.12.0-dev+gc9e961994b"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+g40a42affa5"
+      version = "0.12.0-dev+gc9e961994b"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+g40a42affa5"
+      version = "0.12.0-dev+gc9e961994b"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+g40a42affa5"
+      version = "0.12.0-dev+gc9e961994b"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -8462,7 +8462,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g40a42affa5",
+    integrationVersion = "0.12.0-dev+gc9e961994b",
     token = vim.NIL,
     trustedFolders = {}
   }
@@ -9033,21 +9033,10 @@ Default config:
 ------------------------------------------------------------------------------
 stylelint_lsp
 
-https://github.com/bmatcuk/stylelint-lsp
+https://github.com/stylelint/vscode-stylelint/tree/main/packages/language-server
 
-`stylelint-lsp` can be installed via `npm`:
->sh
-  npm i -g stylelint-lsp
-
-Can be configured by passing a `settings.stylelintplus` object to vim.lsp.config('stylelint_lsp'):
->lua
-  vim.lsp.config('stylelint_lsp', {
-    settings = {
-      stylelintplus = {
-        -- see available options in stylelint-lsp documentation
-      }
-    }
-  })
+`stylelint-language-server` can be installed via npm `npm install -g @stylelint/language-server`.
+```
 
 Snippet to enable the language server: >lua
   vim.lsp.enable('stylelint_lsp')
@@ -9055,13 +9044,18 @@ Snippet to enable the language server: >lua
 
 Default config:
 - cmd: >lua
-  { "stylelint-lsp", "--stdio" }
+  { "stylelint-language-server", "--stdio" }
 - filetypes: >lua
-  { "astro", "css", "html", "less", "scss", "sugarss", "vue", "wxss" }
-- root_markers: >lua
-  { ".stylelintrc", ".stylelintrc.mjs", ".stylelintrc.cjs", ".stylelintrc.js", ".stylelintrc.json", ".stylelintrc.yaml", ".stylelintrc.yml", "stylelint.config.mjs", "stylelint.config.cjs", "stylelint.config.js" }
+  { "astro", "css", "html", "less", "scss", "vue" }
+- on_attach (use "gF" to view): ../lsp/stylelint_lsp.lua:25
+- root_dir (use "gF" to view): ../lsp/stylelint_lsp.lua:25
 - settings: >lua
-  {}
+  {
+    stylelint = {
+      snippet = { "css", "postcss" },
+      validate = { "css", "postcss" }
+    }
+  }
 <
 
 ------------------------------------------------------------------------------
