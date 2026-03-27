@@ -30,7 +30,7 @@ jobs:
       - name: Commit generated files
         env:
           COMMIT_MSG: |
-            chore: update generated annotations
+            docs: update generated annotations
             skip-checks: true
         run: |
           git config user.name "github-actions[bot]"
