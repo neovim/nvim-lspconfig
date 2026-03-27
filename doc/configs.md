@@ -2481,11 +2481,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc9e961994b"
+      version = "0.12.0-dev+g925e9e8722"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc9e961994b"
+      version = "0.12.0-dev+g925e9e8722"
     }
   }
   ```
@@ -4973,20 +4973,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc9e961994b"
+      version = "0.12.0-dev+g925e9e8722"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gc9e961994b"
+      version = "0.12.0-dev+g925e9e8722"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gc9e961994b"
+      version = "0.12.0-dev+g925e9e8722"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gc9e961994b"
+      version = "0.12.0-dev+g925e9e8722"
     }
   }
   ```
@@ -10440,6 +10440,7 @@ vim.lsp.enable('roslyn_ls')
 
 Commands:
 - roslyn.client.completionComplexEdit
+- roslyn.client.fixAllCodeAction
 - roslyn.client.nestedCodeAction
 
 Default config:
@@ -10465,7 +10466,8 @@ Default config:
   ```lua
   {
     ["roslyn.client.completionComplexEdit"] = <function 1>,
-    ["roslyn.client.nestedCodeAction"] = <function 2>
+    ["roslyn.client.fixAllCodeAction"] = <function 2>,
+    ["roslyn.client.nestedCodeAction"] = <function 3>
   }
   ```
 - `filetypes` :
@@ -10484,12 +10486,12 @@ Default config:
   ```lua
   "roslyn_ls"
   ```
-- `on_attach`: [../lsp/roslyn_ls.lua:112](../lsp/roslyn_ls.lua#L112)
+- `on_attach`: [../lsp/roslyn_ls.lua:165](../lsp/roslyn_ls.lua#L165)
 - `on_init` :
   ```lua
   { <function 1> }
   ```
-- `root_dir`: [../lsp/roslyn_ls.lua:112](../lsp/roslyn_ls.lua#L112)
+- `root_dir`: [../lsp/roslyn_ls.lua:165](../lsp/roslyn_ls.lua#L165)
 - `settings` :
   ```lua
   {
@@ -11377,7 +11379,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+gc9e961994b",
+    integrationVersion = "0.12.0-dev+g925e9e8722",
     token = vim.NIL,
     trustedFolders = {}
   }

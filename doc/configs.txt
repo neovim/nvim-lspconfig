@@ -1626,11 +1626,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc9e961994b"
+      version = "0.12.0-dev+g925e9e8722"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc9e961994b"
+      version = "0.12.0-dev+g925e9e8722"
     }
   }
 - on_attach (use "gF" to view): ../lsp/copilot.lua:106
@@ -3542,20 +3542,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0-dev+gc9e961994b"
+      version = "0.12.0-dev+g925e9e8722"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0-dev+gc9e961994b"
+      version = "0.12.0-dev+g925e9e8722"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0-dev+gc9e961994b"
+      version = "0.12.0-dev+g925e9e8722"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0-dev+gc9e961994b"
+      version = "0.12.0-dev+g925e9e8722"
     }
   }
 - on_attach (use "gF" to view): ../lsp/gitlab_duo.lua:317
@@ -7735,6 +7735,7 @@ Snippet to enable the language server: >lua
 
 Commands:
 - roslyn.client.completionComplexEdit
+- roslyn.client.fixAllCodeAction
 - roslyn.client.nestedCodeAction
 
 Default config:
@@ -7753,7 +7754,8 @@ Default config:
 - commands: >lua
   {
     ["roslyn.client.completionComplexEdit"] = <function 1>,
-    ["roslyn.client.nestedCodeAction"] = <function 2>
+    ["roslyn.client.fixAllCodeAction"] = <function 2>,
+    ["roslyn.client.nestedCodeAction"] = <function 3>
   }
 - filetypes: >lua
   { "cs" }
@@ -7765,10 +7767,10 @@ Default config:
   }
 - name: >lua
   "roslyn_ls"
-- on_attach (use "gF" to view): ../lsp/roslyn_ls.lua:112
+- on_attach (use "gF" to view): ../lsp/roslyn_ls.lua:165
 - on_init: >lua
   { <function 1> }
-- root_dir (use "gF" to view): ../lsp/roslyn_ls.lua:112
+- root_dir (use "gF" to view): ../lsp/roslyn_ls.lua:165
 - settings: >lua
   {
     ["csharp|background_analysis"] = {
@@ -8462,7 +8464,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+gc9e961994b",
+    integrationVersion = "0.12.0-dev+g925e9e8722",
     token = vim.NIL,
     trustedFolders = {}
   }
