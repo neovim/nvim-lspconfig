@@ -2425,46 +2425,7 @@ Default config:
 
 ## copilot
 
-https://www.npmjs.com/package/@github/copilot-language-server
-
-The Copilot Language Server enables any editor or IDE
-to integrate with GitHub Copilot via
-[the language server protocol](https://microsoft.github.io/language-server-protocol/).
-
-**[GitHub Copilot](https://github.com/features/copilot)**
-is an AI pair programmer tool that helps you write code faster and smarter.
-
-**Sign up for [GitHub Copilot Free](https://github.com/settings/copilot)!**
-
-Please see [terms of use for GitHub Copilot](https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features#github-copilot)
-
-You need to enable `:help lsp-inline-completion` to receive suggestions. For example, you can enable it in the LspAttach event:
-
-```lua
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    local bufnr = args.buf
-    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-
-    if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr) then
-      vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
-
-      vim.keymap.set(
-        'i',
-        '<C-F>',
-        vim.lsp.inline_completion.get,
-        { desc = 'LSP: accept inline completion', buffer = bufnr }
-      )
-      vim.keymap.set(
-        'i',
-        '<C-G>',
-        vim.lsp.inline_completion.select,
-        { desc = 'LSP: switch inline completion', buffer = bufnr }
-      )
-    end
-  end
-})
-```
+scripts/docgen.lua:249: attempt to index field 'version' (a function value)
 
 Snippet to enable the language server:
 ```lua
@@ -2472,36 +2433,7 @@ vim.lsp.enable('copilot')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "copilot-language-server", "--stdio" }
-  ```
-- `init_options` :
-  ```lua
-  {
-    editorInfo = {
-      name = "Neovim",
-      version = "0.12.0-dev+g925e9e8722"
-    },
-    editorPluginInfo = {
-      name = "Neovim",
-      version = "0.12.0-dev+g925e9e8722"
-    }
-  }
-  ```
-- `on_attach`: [../lsp/copilot.lua:106](../lsp/copilot.lua#L106)
-- `root_markers` :
-  ```lua
-  { ".git" }
-  ```
-- `settings` :
-  ```lua
-  {
-    telemetry = {
-      telemetryLevel = "all"
-    }
-  }
-  ```
+
 
 ---
 
@@ -4905,54 +4837,7 @@ Default config:
 
 ## gitlab_duo
 
-GitLab Duo Language Server Configuration for Neovim
-
-https://gitlab.com/gitlab-org/editor-extensions/gitlab-lsp
-
-The GitLab LSP enables any editor or IDE to integrate with GitLab Duo
-for AI-powered code suggestions via the Language Server Protocol.
-
-Prerequisites:
-- Node.js and npm installed
-- GitLab account with Duo Pro license
-- Internet connection for OAuth device flow
-
-Setup:
-1. Run :LspGitLabDuoSignIn to start OAuth authentication
-2. Follow the browser prompts to authorize
-3. Enable inline completion in LspAttach event (see example below)
-
-Inline Completion Example:
-```lua
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    local bufnr = args.buf
-    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-
-    if vim.lsp.inline_completion and
-       client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr) then
-      vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
-
-      -- Tab to accept suggestion
-      vim.keymap.set('i', '<Tab>', function()
-        if vim.lsp.inline_completion.is_visible() then
-          return vim.lsp.inline_completion.accept()
-        else
-          return '<Tab>'
-        end
-      end, { expr = true, buffer = bufnr, desc = 'GitLab Duo: Accept suggestion' })
-
-      -- Alt/Option+[ for previous suggestion
-      vim.keymap.set('i', '<M-[>', vim.lsp.inline_completion.select_prev,
-        { buffer = bufnr, desc = 'GitLab Duo: Previous suggestion' })
-
-      -- Alt/Option+] for next suggestion
-      vim.keymap.set('i', '<M-]>', vim.lsp.inline_completion.select_next,
-        { buffer = bufnr, desc = 'GitLab Duo: Next suggestion' })
-    end
-  end
-})
-```
+scripts/docgen.lua:249: attempt to index field 'version' (a function value)
 
 Snippet to enable the language server:
 ```lua
@@ -4960,58 +4845,7 @@ vim.lsp.enable('gitlab_duo')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "npx", "--registry=https://gitlab.com/api/v4/packages/npm/", "@gitlab-org/gitlab-lsp", "--stdio" }
-  ```
-- `filetypes` :
-  ```lua
-  { "ruby", "go", "javascript", "typescript", "typescriptreact", "javascriptreact", "rust", "lua", "python", "java", "cpp", "c", "php", "cs", "kotlin", "swift", "scala", "vue", "svelte", "html", "css", "scss", "json", "yaml" }
-  ```
-- `init_options` :
-  ```lua
-  {
-    editorInfo = {
-      name = "Neovim",
-      version = "0.12.0-dev+g925e9e8722"
-    },
-    editorPluginInfo = {
-      name = "Neovim LSP",
-      version = "0.12.0-dev+g925e9e8722"
-    },
-    extension = {
-      name = "Neovim LSP Client",
-      version = "0.12.0-dev+g925e9e8722"
-    },
-    ide = {
-      name = "Neovim",
-      vendor = "Neovim",
-      version = "0.12.0-dev+g925e9e8722"
-    }
-  }
-  ```
-- `on_attach`: [../lsp/gitlab_duo.lua:317](../lsp/gitlab_duo.lua#L317)
-- `on_init`: [../lsp/gitlab_duo.lua:317](../lsp/gitlab_duo.lua#L317)
-- `root_markers` :
-  ```lua
-  { ".git" }
-  ```
-- `settings` :
-  ```lua
-  {
-    baseUrl = "https://gitlab.com",
-    codeCompletion = {
-      enableSecretRedaction = true
-    },
-    featureFlags = {
-      streamCodeGenerations = false
-    },
-    logLevel = "info",
-    telemetry = {
-      enabled = false
-    }
-  }
-  ```
+
 
 ---
 
@@ -11308,55 +11142,7 @@ Default config:
 
 ## snyk_ls
 
-https://github.com/snyk/snyk-ls
-
-**[Snyk](https://snyk.io)** is a developer security platform that helps you find and fix
-vulnerabilities in your code, open source dependencies, containers, and infrastructure as code.
-
-The Snyk Language Server provides real-time security scanning for:
-- **Snyk Open Source**: Find and fix vulnerabilities in open source dependencies
-- **Snyk Code**: Find and fix security vulnerabilities in your code
-- **Snyk Infrastructure as Code**: Find and fix security issues in Kubernetes, Terraform, and other IaC files
-
-## Authentication
-
-**Note**: Currently, only token-based authentication is supported in Neovim.
-
-1. Get your API token from https://app.snyk.io/account
-2. Set the `SNYK_TOKEN` environment variable:
-   ```sh
-   export SNYK_TOKEN="your-token-here"
-   ```
-
-## Trusted Folders
-
-Snyk requires you to trust directories before scanning them. To avoid being prompted every time:
-
-```lua
-vim.lsp.config('snyk_ls', {
-  init_options = {
-    trustedFolders = {
-      '/Users/yourname/projects',  -- Trust your projects directory
-      '/path/to/another/trusted/dir',
-    },
-  },
-})
-```
-
-**Important**: Trust the top-level directory where you store your repositories, not individual repos.
-For example, if you work on `/Users/yourname/projects/my-app`, trust `/Users/yourname/projects`.
-Only trust directories containing code you trust to scan.
-
-## Configuration
-
-Full configuration options available at https://github.com/snyk/snyk-ls#configuration-1
-
-### Advanced Configuration
-
-For **non-default multi-tenant or single-tenant setups**, you may need to specify:
-
-- `endpoint`: Custom Snyk API endpoint (e.g., `https://api.eu.snyk.io` for EU, or your single-tenant URL)
-```
+scripts/docgen.lua:249: attempt to index field 'version' (a function value)
 
 Snippet to enable the language server:
 ```lua
@@ -11364,34 +11150,7 @@ vim.lsp.enable('snyk_ls')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "snyk", "language-server", "-l", "info" }
-  ```
-- `filetypes` :
-  ```lua
-  { "apex", "apexcode", "c", "cpp", "cs", "dart", "dockerfile", "elixir", "eelixir", "go", "gomod", "groovy", "helm", "java", "javascript", "json", "kotlin", "objc", "objcpp", "php", "python", "requirements", "ruby", "rust", "scala", "swift", "terraform", "terraform-vars", "typescript", "yaml" }
-  ```
-- `init_options` :
-  ```lua
-  {
-    activateSnykCode = "false",
-    activateSnykIac = "true",
-    activateSnykOpenSource = "true",
-    integrationName = "Neovim",
-    integrationVersion = "0.12.0-dev+g925e9e8722",
-    token = vim.NIL,
-    trustedFolders = {}
-  }
-  ```
-- `root_markers` :
-  ```lua
-  { ".git", ".snyk" }
-  ```
-- `settings` :
-  ```lua
-  {}
-  ```
+
 
 ---
 
