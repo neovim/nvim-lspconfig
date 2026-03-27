@@ -108,6 +108,59 @@ local function is_decompiled(bufname)
   return vim.fn.finddir(bufname:sub(1, endpos), uv.os_tmpdir()) ~= ''
 end
 
+---@param client vim.lsp.Client
+---@param action table
+local function apply_action(client, action)
+  if action.edit then
+    vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
+  end
+  if action.command then
+    client:exec_cmd(action.command)
+  end
+end
+
+---@param client vim.lsp.Client
+---@param command table
+---@param bufnr integer
+local function handle_fix_all_action(client, command, bufnr)
+  local arg = command.arguments and command.arguments[1]
+  if type(arg) ~= 'table' then
+    vim.notify('roslyn_ls: invalid fixAllCodeAction arguments', vim.log.levels.ERROR)
+    return
+  end
+
+  local flavors = arg.FixAllFlavors
+  if type(flavors) ~= 'table' or vim.tbl_isempty(flavors) then
+    vim.notify('roslyn_ls: fixAllCodeAction has no FixAllFlavors', vim.log.levels.WARN)
+    return
+  end
+
+  vim.ui.select(flavors, {
+    prompt = 'Fix All Scope:',
+  }, function(chosen_scope)
+    if not chosen_scope then
+      return
+    end
+
+    client:request('codeAction/resolveFixAll', {
+      title = command.title,
+      data = arg,
+      scope = chosen_scope,
+    }, function(err, resolved)
+      if err then
+        vim.notify(
+          'roslyn_ls: fixAllCodeAction resolve error: ' .. (err.message or tostring(err)),
+          vim.log.levels.ERROR
+        )
+        return
+      end
+      if resolved then
+        apply_action(client, resolved)
+      end
+    end, bufnr)
+  end)
+end
+
 ---@type vim.lsp.Config
 return {
   name = 'roslyn_ls',
@@ -163,20 +216,6 @@ return {
         return
       end
 
-      local function apply_action(action)
-        if not action then
-          return
-        end
-
-        if action.edit then
-          vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
-        end
-
-        if action.command then
-          client:exec_cmd(action.command)
-        end
-      end
-
       local function handle(action)
         if not action then
           return
@@ -188,18 +227,16 @@ return {
               vim.notify(err.message or tostring(err), vim.log.levels.ERROR)
               return
             end
-
             if resolved then
               handle(resolved)
             end
           end, ctx.bufnr)
-
           return
         end
 
         local nested = vim.islist(action) and action or action.NestedCodeActions
         if type(nested) ~= 'table' or vim.tbl_isempty(nested) then
-          apply_action(action)
+          apply_action(client, action)
           return
         end
 
@@ -221,6 +258,11 @@ return {
       end
 
       handle(arg)
+    end,
+
+    ['roslyn.client.fixAllCodeAction'] = function(command, ctx)
+      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+      handle_fix_all_action(client, command, ctx.bufnr)
     end,
   },
 
