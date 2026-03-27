@@ -222,6 +222,50 @@ return {
 
       handle(arg)
     end,
+
+    ['roslyn.client.fixAllCodeAction'] = function(command, ctx)
+      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+      local arg = command.arguments and command.arguments[1]
+
+      if type(arg) ~= 'table' then
+        vim.notify('roslyn_ls: invalid fixAllCodeAction arguments', vim.log.levels.ERROR)
+        return
+      end
+
+      local flavors = arg.FixAllFlavors
+      if type(flavors) ~= 'table' or vim.tbl_isempty(flavors) then
+        vim.notify('roslyn_ls: fixAllCodeAction has no FixAllFlavors', vim.log.levels.WARN)
+        return
+      end
+
+      vim.ui.select(flavors, {
+        prompt = 'Fix All Scope:',
+      }, function(chosen_scope)
+        if not chosen_scope then
+          return
+        end
+
+        client:request('codeAction/resolveFixAll', {
+          title = command.title,
+          data = arg,
+          scope = chosen_scope,
+        }, function(err, resolved)
+          if err then
+            vim.notify(
+              'roslyn_ls: fixAllCodeAction resolve error: ' .. (err.message or tostring(err)),
+              vim.log.levels.ERROR
+            )
+            return
+          end
+          if resolved and resolved.edit then
+            vim.lsp.util.apply_workspace_edit(resolved.edit, client.offset_encoding)
+          end
+          if resolved and resolved.command then
+            client:exec_cmd(resolved.command)
+          end
+        end, ctx.bufnr)
+      end)
+    end,
   },
 
   root_dir = function(bufnr, cb)
