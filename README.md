@@ -194,7 +194,7 @@ If you found a bug with LSP functionality, [report it to Neovim core](https://gi
 Before reporting a bug, check your logs and the output of `:checkhealth vim.lsp`. Add this to your init.lua to enable verbose logging:
 
 ```lua
-vim.lsp.set_log_level("debug")
+vim.lsp.log.set_level('debug')
 ```
 
 Attempt to run the language server, then run `:LspLog` to open the log.
