@@ -146,9 +146,10 @@ return {
     if not config.settings.editor.tabSize then
       config.settings.editor.tabSize = vim.lsp.util.get_effective_tabstop()
     end
-    config.settings.tailwindCSS.experimental = {
-      configFile = find_tailwind_global_css(),
-    }
+    config.settings.tailwindCSS = config.settings.tailwindCSS or {}
+    config.settings.tailwindCSS.experimental = config.settings.tailwindCSS.experimental or {}
+    config.settings.tailwindCSS.experimental.configFile = config.settings.tailwindCSS.experimental.configFile
+      or find_tailwind_global_css()
   end,
   workspace_required = true,
   root_dir = function(bufnr, on_dir)
