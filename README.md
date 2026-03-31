@@ -32,15 +32,15 @@ These configs are **best-effort and supported by the community (you).** See [con
 
 * Requires Nvim 0.11.3+.
     * Support for Nvim 0.10 [will be removed](https://github.com/neovim/nvim-lspconfig/issues/3693). Upgrade Nvim and nvim-lspconfig before reporting an issue.
-* Install nvim-lspconfig using Vim's "packages" feature:
-  ```
-  git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
-  ```
-* Or with Nvim 0.12 (nightly), you can use the builtin `vim.pack` plugin manager:
+* With Nvim 0.12+, you can use the builtin `vim.pack` plugin manager:
   ```lua
   vim.pack.add{
     { src = 'https://github.com/neovim/nvim-lspconfig' },
   }
+  ```
+* Or install nvim-lspconfig using Vim's "packages" feature:
+  ```
+  git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
   ```
 * Or use a 3rd-party plugin manager.
 
@@ -194,7 +194,7 @@ If you found a bug with LSP functionality, [report it to Neovim core](https://gi
 Before reporting a bug, check your logs and the output of `:checkhealth vim.lsp`. Add this to your init.lua to enable verbose logging:
 
 ```lua
-vim.lsp.set_log_level("debug")
+vim.lsp.log.set_level('debug')
 ```
 
 Attempt to run the language server, then run `:LspLog` to open the log.
