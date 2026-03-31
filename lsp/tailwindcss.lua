@@ -29,14 +29,10 @@ local function find_tailwind_global_css()
   })
 
   for _, path in ipairs(files) do
-    local f = io.open(path, 'r')
-    if f then
-      local content = f:read('*a')
-      f:close()
+    local content = vim.fn.readblob(path)
 
-      if content:find(target, 1, true) then
-        return path -- return first match
-      end
+    if content:find(target, 1, true) then
+      return path -- return first match
     end
   end
 
