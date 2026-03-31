@@ -2481,11 +2481,11 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0"
+      version = "0.13.0"
     },
     editorPluginInfo = {
       name = "Neovim",
-      version = "0.12.0"
+      version = "0.13.0"
     }
   }
   ```
@@ -4973,20 +4973,20 @@ Default config:
   {
     editorInfo = {
       name = "Neovim",
-      version = "0.12.0"
+      version = "0.13.0"
     },
     editorPluginInfo = {
       name = "Neovim LSP",
-      version = "0.12.0"
+      version = "0.13.0"
     },
     extension = {
       name = "Neovim LSP Client",
-      version = "0.12.0"
+      version = "0.13.0"
     },
     ide = {
       name = "Neovim",
       vendor = "Neovim",
-      version = "0.12.0"
+      version = "0.13.0"
     }
   }
   ```
@@ -11379,7 +11379,7 @@ Default config:
     activateSnykIac = "true",
     activateSnykOpenSource = "true",
     integrationName = "Neovim",
-    integrationVersion = "0.12.0",
+    integrationVersion = "0.13.0",
     token = vim.NIL,
     trustedFolders = {}
   }
