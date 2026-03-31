@@ -6,6 +6,39 @@
 --- npm install -g @tailwindcss/language-server
 local util = require 'lspconfig.util'
 
+local function find_tailwind_global_css()
+  local target = "@import 'tailwindcss';"
+
+  -- Find project root using `.git`
+  local buf = vim.api.nvim_get_current_buf()
+  local root = vim.fs.root(buf, function(name)
+    return name == '.git'
+  end)
+
+  if not root then
+    return nil -- no project root found
+  end
+
+  -- Find stylesheet files in the project root (recursively)
+  local files = vim.fs.find(function(name)
+    return name:match('%.css$') or name:match('%.scss$') or name:match('%.pcss$')
+  end, {
+    path = root,
+    type = 'file',
+    limit = math.huge, -- search full tree
+  })
+
+  for _, path in ipairs(files) do
+    local content = vim.fn.readblob(path)
+
+    if content:find(target, 1, true) then
+      return path -- return first match
+    end
+  end
+
+  return nil
+end
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'tailwindcss-language-server', '--stdio' },
@@ -113,6 +146,10 @@ return {
     if not config.settings.editor.tabSize then
       config.settings.editor.tabSize = vim.lsp.util.get_effective_tabstop()
     end
+    config.settings.tailwindCSS = config.settings.tailwindCSS or {}
+    config.settings.tailwindCSS.experimental = config.settings.tailwindCSS.experimental or {}
+    config.settings.tailwindCSS.experimental.configFile = config.settings.tailwindCSS.experimental.configFile
+      or find_tailwind_global_css()
   end,
   workspace_required = true,
   root_dir = function(bufnr, on_dir)
