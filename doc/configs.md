@@ -12570,7 +12570,7 @@ vim.lsp.enable('tailwindcss')
 ```
 
 Default config:
-- `before_init`: [../lsp/tailwindcss.lua:10](../lsp/tailwindcss.lua#L10)
+- `before_init`: [../lsp/tailwindcss.lua:43](../lsp/tailwindcss.lua#L43)
 - `capabilities` :
   ```lua
   {
@@ -12589,7 +12589,7 @@ Default config:
   ```lua
   { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
   ```
-- `root_dir`: [../lsp/tailwindcss.lua:10](../lsp/tailwindcss.lua#L10)
+- `root_dir`: [../lsp/tailwindcss.lua:43](../lsp/tailwindcss.lua#L43)
 - `settings` :
   ```lua
   {
