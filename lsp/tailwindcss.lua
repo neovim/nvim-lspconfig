@@ -7,8 +7,7 @@
 local util = require 'lspconfig.util'
 
 local function find_tailwind_global_css()
-  local target = "@import 'tailwindcss';"
-
+  local target = [[%@import ['"]tailwindcss['"]%;]]
   -- Find project root using `.git`
   local buf = vim.api.nvim_get_current_buf()
   local root = vim.fs.root(buf, function(name)
