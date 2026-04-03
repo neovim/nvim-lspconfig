@@ -18,19 +18,35 @@ local function find_tailwind_global_css()
     return nil -- no project root found
   end
 
-  -- Find stylesheet files in the project root (recursively)
-  local files = vim.fs.find(function(name)
-    return name:match('%.css$') or name:match('%.scss$') or name:match('%.pcss$')
-  end, {
-    path = root,
-    type = 'file',
-    limit = math.huge, -- search full tree
-  })
+  local files ---@type string[]
+
+  -- Use `git ls-files` to respect .gitignore and avoid scanning node_modules etc.
+  if vim.fn.executable('git') == 1 then
+    local ls = vim
+      .system({ 'git', 'ls-files', '--cached', '--others', '--exclude-standard', '*.css', '*.scss', '*.pcss' }, { cwd = root })
+      :wait()
+    if ls.code == 0 and ls.stdout and ls.stdout ~= '' then
+      files = {}
+      for line in ls.stdout:gmatch('[^\n]+') do
+        files[#files + 1] = root .. '/' .. line
+      end
+    end
+  end
+
+  -- Fallback: scan filesystem (may be slow in large projects)
+  if not files then
+    files = vim.fs.find(function(name)
+      return name:match('%.css$') or name:match('%.scss$') or name:match('%.pcss$')
+    end, {
+      path = root,
+      type = 'file',
+      limit = math.huge,
+    })
+  end
 
   for _, path in ipairs(files) do
-    local content = vim.fn.readblob(path)
-
-    if content:find(target, 1, true) then
+    local ok, content = pcall(vim.fn.readblob, path)
+    if ok and content:find(target, 1, true) then
       return path -- return first match
     end
   end
