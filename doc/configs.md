@@ -10314,7 +10314,7 @@ Default config:
   ```lua
   { "robot", "resource" }
   ```
-- `get_language_id`: [../lsp/robotcode.lua:8](../lsp/robotcode.lua#L8)
+- `get_language_id`: [../lsp/robotcode.lua:10](../lsp/robotcode.lua#L10)
 - `root_markers` :
   ```lua
   { "robot.toml", "pyproject.toml", "Pipfile", ".git" }

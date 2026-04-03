@@ -7635,7 +7635,7 @@ Default config:
   { "robotcode", "language-server" }
 - filetypes: >lua
   { "robot", "resource" }
-- get_language_id (use "gF" to view): ../lsp/robotcode.lua:8
+- get_language_id (use "gF" to view): ../lsp/robotcode.lua:10
 - root_markers: >lua
   { "robot.toml", "pyproject.toml", "Pipfile", ".git" }
 <
