@@ -9364,7 +9364,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/tailwindcss.lua:43
+- before_init (use "gF" to view): ../lsp/tailwindcss.lua:42
 - capabilities: >lua
   {
     workspace = {
@@ -9377,7 +9377,7 @@ Default config:
   { "tailwindcss-language-server", "--stdio" }
 - filetypes: >lua
   { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
-- root_dir (use "gF" to view): ../lsp/tailwindcss.lua:43
+- root_dir (use "gF" to view): ../lsp/tailwindcss.lua:42
 - settings: >lua
   {
     tailwindCSS = {
