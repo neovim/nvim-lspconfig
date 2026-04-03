@@ -74,6 +74,12 @@
 ---default = "none"
 ---```
 ---@field reportDuplicateImport? "none" | "hint" | "information" | "warning" | "error" | true | false
+---Diagnostics for an attempt to instantiate an abstract class that has no abstract members.
+---
+---```lua
+---default = "none"
+---```
+---@field reportEmptyAbstractUsage? "none" | "hint" | "information" | "warning" | "error" | true | false
 ---Diagnostics for type annotations that use the `Any` type
 ---
 ---```lua
