@@ -6,48 +6,78 @@
 --- npm install -g @tailwindcss/language-server
 local util = require 'lspconfig.util'
 
+--- Find the first CSS/SCSS/PCSS file containing a Tailwind v4 import directive.
+---@return string? path absolute path to the file, or nil if not found
 local function find_tailwind_global_css()
-  local target = [[%@import ['"]tailwindcss['"]%;]]
-  -- Find project root using `.git`
+  local targets = {
+    "@import 'tailwindcss'",
+    '@import "tailwindcss"',
+  }
+
   local buf = vim.api.nvim_get_current_buf()
   local root = vim.fs.root(buf, function(name)
     return name == '.git'
   end)
 
   if not root then
-    return nil -- no project root found
+    return nil
   end
 
-  local files ---@type string[]
-
-  -- Use `git ls-files` to respect .gitignore and avoid scanning node_modules etc.
+  -- Fast path: use git grep to search only tracked + untracked (but not ignored) files
   if vim.fn.executable('git') == 1 then
-    local ls = vim
-      .system({ 'git', 'ls-files', '--cached', '--others', '--exclude-standard', '*.css', '*.scss', '*.pcss' }, { cwd = root })
-      :wait()
-    if ls.code == 0 and ls.stdout and ls.stdout ~= '' then
-      files = {}
-      for line in ls.stdout:gmatch('[^\n]+') do
-        files[#files + 1] = root .. '/' .. line
+    local cmd = {
+      'git',
+      'grep',
+      '--untracked',
+      '-l',
+    }
+    for _, target in ipairs(targets) do
+      vim.list_extend(cmd, { '-e', target })
+    end
+    vim.list_extend(cmd, { '--', '*.css', '*.scss', '*.pcss' })
+
+    local result = vim.system(cmd, { cwd = root, text = true }):wait()
+
+    -- git grep found a match
+    if result.code == 0 and result.stdout and result.stdout ~= '' then
+      local first_match = vim.split(result.stdout, '\n')[1]
+      if first_match and first_match ~= '' then
+        return root .. '/' .. first_match
       end
+    end
+
+    -- git grep ran but found nothing — not a tailwind project, no need for fallback
+    if result.code <= 1 then
+      return nil
     end
   end
 
-  -- Fallback: scan filesystem (may be slow in large projects)
-  if not files then
-    files = vim.fs.find(function(name)
-      return name:match('%.css$') or name:match('%.scss$') or name:match('%.pcss$')
-    end, {
-      path = root,
-      type = 'file',
-      limit = math.huge,
-    })
-  end
+  -- Fallback: scan filesystem, skipping heavy directories (only when git is unavailable)
+  local skip_dirs = {
+    node_modules = true,
+    ['.git'] = true,
+    dist = true,
+  }
 
-  for _, path in ipairs(files) do
-    local ok, content = pcall(vim.fn.readblob, path)
-    if ok and content:find(target, 1, true) then
-      return path -- return first match
+  for name, typ in
+    vim.fs.dir(root, {
+      depth = math.huge --[[@as integer]],
+      skip = function(dir_name)
+        -- return false to stop searching the directory
+        return not skip_dirs[vim.fs.basename(dir_name)]
+      end,
+    })
+  do
+    if typ == 'file' and (name:match('%.css$') or name:match('%.scss$') or name:match('%.pcss$')) then
+      local path = root .. '/' .. name
+      local ok, content = pcall(vim.fn.readblob, path)
+      if ok then
+        for _, target in ipairs(targets) do
+          if content:find(target, 1, true) then
+            return path
+          end
+        end
+      end
     end
   end
 
