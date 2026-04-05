@@ -30,19 +30,17 @@
 ---
 ---       -- Tab to accept suggestion
 ---       vim.keymap.set('i', '<Tab>', function()
----         if vim.lsp.inline_completion.is_visible() then
----           return vim.lsp.inline_completion.accept()
----         else
+---         if not vim.lsp.inline_completion.get() then
 ---           return '<Tab>'
 ---         end
 ---       end, { expr = true, buffer = bufnr, desc = 'GitLab Duo: Accept suggestion' })
 ---
 ---       -- Alt/Option+[ for previous suggestion
----       vim.keymap.set('i', '<M-[>', vim.lsp.inline_completion.select_prev,
+---       vim.keymap.set('i', '<M-[>', function() vim.lsp.inline_completion.select({ count = -1 }) end,
 ---         { buffer = bufnr, desc = 'GitLab Duo: Previous suggestion' })
 ---
 ---       -- Alt/Option+] for next suggestion
----       vim.keymap.set('i', '<M-]>', vim.lsp.inline_completion.select_next,
+---       vim.keymap.set('i', '<M-]>', function() vim.lsp.inline_completion.select({ count = 1 }) end,
 ---         { buffer = bufnr, desc = 'GitLab Duo: Next suggestion' })
 ---     end
 ---   end
