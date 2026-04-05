@@ -12564,13 +12564,16 @@ Tailwind CSS Language Server can be installed via npm:
 
 npm install -g @tailwindcss/language-server
 
+To manually set the config file or CSS entry-point, see:
+https://github.com/tailwindlabs/tailwindcss-intellisense#tailwindcssexperimentalconfigfile
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('tailwindcss')
 ```
 
 Default config:
-- `before_init`: [../lsp/tailwindcss.lua:42](../lsp/tailwindcss.lua#L42)
+- `before_init`: [../lsp/tailwindcss.lua:14](../lsp/tailwindcss.lua#L14)
 - `capabilities` :
   ```lua
   {
@@ -12589,7 +12592,7 @@ Default config:
   ```lua
   { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
   ```
-- `root_dir`: [../lsp/tailwindcss.lua:42](../lsp/tailwindcss.lua#L42)
+- `root_dir`: [../lsp/tailwindcss.lua:14](../lsp/tailwindcss.lua#L14)
 - `settings` :
   ```lua
   {
