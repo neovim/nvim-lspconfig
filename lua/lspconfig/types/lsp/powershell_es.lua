@@ -31,6 +31,12 @@
 ---default = true
 ---```
 ---@field addWhitespaceAroundPipe? boolean
+---Align member value assignments in an Enum Type Definition.
+---
+---```lua
+---default = true
+---```
+---@field alignEnumMemberValues? boolean
 ---Align assignment statements in a hashtable or a DSC Configuration.
 ---
 ---```lua
