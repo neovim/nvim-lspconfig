@@ -63,6 +63,7 @@ Nvim by running `:help lspconfig-all`.
 - [csharp_ls](#csharp_ls)
 - [cspell_ls](#cspell_ls)
 - [css_variables](#css_variables)
+- [csskit](#csskit)
 - [cssls](#cssls)
 - [cssmodules_ls](#cssmodules_ls)
 - [cucumber_language_server](#cucumber_language_server)
@@ -2645,6 +2646,39 @@ Default config:
       lookupFiles = { "**/*.less", "**/*.scss", "**/*.sass", "**/*.css" }
     }
   }
+  ```
+
+---
+
+## csskit
+
+https://github.com/csskit/csskit
+
+Beautiful, fast, and powerful CSS tooling with zero configuration
+
+`csskit` can be installed via `npm`:
+
+```sh
+npm i -g csskit
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('csskit')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "csskit", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "css" }
+  ```
+- `root_markers` :
+  ```lua
+  { "package.json", ".git" }
   ```
 
 ---
