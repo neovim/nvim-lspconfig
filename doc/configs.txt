@@ -6463,7 +6463,7 @@ Default config:
   { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "astro" }
 - on_attach (use "gF" to view): ../lsp/oxlint.lua:32
 - root_markers: >lua
-  { ".oxlintrc.json", "oxlint.config.ts" }
+  { ".oxlintrc.json", ".oxlintrc.jsonc", "oxlint.config.ts" }
 - settings: >lua
   {}
 - `workspace_required` : `true`
