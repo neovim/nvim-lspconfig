@@ -562,6 +562,14 @@
 ---```
 ---@field enabled? boolean
 
+---@class _.lspconfig.settings.jdtls.Java.Jdt.Ls.ScalaSupport
+---[Experimental] Specify whether to enable `scala` plugin in Gradle projects. Defaults to `true`.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
 ---@class _.lspconfig.settings.jdtls.Java.Jdt.Ls
 ---@field androidSupport? _.lspconfig.settings.jdtls.Java.Jdt.Ls.AndroidSupport
 ---@field appcds? _.lspconfig.settings.jdtls.Java.Jdt.Ls.Appcds
@@ -572,6 +580,7 @@
 ---@field kotlinSupport? _.lspconfig.settings.jdtls.Java.Jdt.Ls.KotlinSupport
 ---@field lombokSupport? _.lspconfig.settings.jdtls.Java.Jdt.Ls.LombokSupport
 ---@field protobufSupport? _.lspconfig.settings.jdtls.Java.Jdt.Ls.ProtobufSupport
+---@field scalaSupport? _.lspconfig.settings.jdtls.Java.Jdt.Ls.ScalaSupport
 ---Specifies extra VM arguments used to launch the Java Language Server. Eg. use `-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m -Xlog:disable` to optimize memory usage with the parallel garbage collector
 ---
 ---```lua

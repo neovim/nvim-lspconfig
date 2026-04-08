@@ -315,6 +315,14 @@
 ---```
 ---@field reportInformationAsHint? boolean
 
+---@class _.lspconfig.settings.omnisharp.Dotnet.FileBasedApps
+---%configuration.dotnet.fileBasedApps.enableAutomaticDiscovery%
+---
+---```lua
+---default = true
+---```
+---@field enableAutomaticDiscovery? boolean
+
 ---@class _.lspconfig.settings.omnisharp.Dotnet.Formatting
 ---%configuration.dotnet.formatting.organizeImportsOnFormat%
 ---@field organizeImportsOnFormat? boolean
@@ -707,6 +715,7 @@
 ---default = true
 ---```
 ---@field enableXamlTools? boolean
+---@field fileBasedApps? _.lspconfig.settings.omnisharp.Dotnet.FileBasedApps
 ---@field formatting? _.lspconfig.settings.omnisharp.Dotnet.Formatting
 ---@field highlighting? _.lspconfig.settings.omnisharp.Dotnet.Highlighting
 ---@field inlayHints? _.lspconfig.settings.omnisharp.Dotnet.InlayHints

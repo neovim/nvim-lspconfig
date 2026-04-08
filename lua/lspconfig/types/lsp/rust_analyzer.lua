@@ -143,6 +143,13 @@
 ---default = {}
 ---```
 ---@field features? "all"|string[]
+---Extra arguments passed only to `cargo metadata`, not to other cargo invocations.
+---Useful for flags like `--config` that `cargo metadata` supports.
+---
+---```lua
+---default = {}
+---```
+---@field metadataExtraArgs? string[]
 ---Whether to pass `--no-default-features` to cargo.
 ---@field noDefaultFeatures? boolean
 ---Whether to skip fetching dependencies. If set to "true", the analysis is performed

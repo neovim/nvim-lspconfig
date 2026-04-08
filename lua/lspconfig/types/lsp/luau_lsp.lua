@@ -294,6 +294,27 @@
 ---```
 ---@field port? number
 
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Plugins.FileSystem
+---Allow plugins to read files within the workspace. Only files within the workspace can be accessed for security.
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.Plugins
+---Enable source code transformation plugins. Plugins are Luau scripts that can transform source code before type checking.
+---@field enabled? boolean
+---@field fileSystem? _.lspconfig.settings.luau_lsp.LuauLsp.Plugins.FileSystem
+---Paths to Luau plugin scripts. Plugins are executed in order and can transform source code before type checking.
+---
+---```lua
+---default = {}
+---```
+---@field paths? string[]
+---Timeout in milliseconds for plugin execution. If a plugin takes longer than this, it will be terminated.
+---
+---```lua
+---default = 5000
+---```
+---@field timeoutMs? number
+
 ---@class _.lspconfig.settings.luau_lsp.LuauLsp.Require
 ---A mapping of custom require string prefixes to directory paths. The aliases should include trailing slashes
 ---
@@ -431,6 +452,7 @@
 ---@field inlayHints? _.lspconfig.settings.luau_lsp.LuauLsp.InlayHints
 ---@field platform? _.lspconfig.settings.luau_lsp.LuauLsp.Platform
 ---@field plugin? _.lspconfig.settings.luau_lsp.LuauLsp.Plugin
+---@field plugins? _.lspconfig.settings.luau_lsp.LuauLsp.Plugins
 ---@field require? _.lspconfig.settings.luau_lsp.LuauLsp.Require
 ---@field server? _.lspconfig.settings.luau_lsp.LuauLsp.Server
 ---@field signatureHelp? _.lspconfig.settings.luau_lsp.LuauLsp.SignatureHelp
