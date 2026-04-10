@@ -1909,6 +1909,26 @@ buf lsp included in the cli itself
 
 buf lsp is a Protobuf language server compatible with Buf modules and workspaces
 
+buf lsp also supports Buf configuration files. The `buf-config` filetype is not
+detected automatically; register it manually (see below) or override the filetypes:
+
+```lua
+vim.filetype.add({
+  filename = {
+    ['buf.yaml'] = 'buf-config',
+    ['buf.gen.yaml'] = 'buf-config',
+    ['buf.policy.yaml'] = 'buf-config',
+    ['buf.lock'] = 'buf-config',
+  },
+})
+```
+
+Optionally, tell treesitter to treat buf config files as YAML for syntax highlighting:
+
+```lua
+vim.treesitter.language.register('yaml', 'buf-config')
+```
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('buf_ls')
@@ -1921,9 +1941,9 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "proto" }
+  { "proto", "buf-config" }
   ```
-- `reuse_client`: [../lsp/buf_ls.lua:9](../lsp/buf_ls.lua#L9)
+- `reuse_client`: [../lsp/buf_ls.lua:29](../lsp/buf_ls.lua#L29)
 - `root_markers` :
   ```lua
   { "buf.yaml", ".git" }
