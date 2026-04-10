@@ -207,6 +207,8 @@
 ---@field startLocation? "Editor" | "Panel"
 ---Do not show the startup banner in the PowerShell Extension Terminal.
 ---@field suppressStartupBanner? boolean
+---Do not show a notification when the PowerShell Extension Terminal has stopped.
+---@field suppressTerminalStoppedNotification? boolean
 ---This will disable the use of PSReadLine in the PowerShell Extension Terminal and use a legacy implementation. **This setting is not recommended and likely to be deprecated!**
 ---@field useLegacyReadLine? boolean
 
@@ -349,8 +351,6 @@
 ---@field startAutomatically? boolean
 ---Suppresses the warning message when any of `#powershell.powerShellAdditionalExePaths#` is not found.
 ---@field suppressAdditionalExeNotFoundWarning? boolean
----Do not show a notification when the PowerShell Extension Terminal has stopped.
----@field suppressTerminalStoppedNotification? boolean
 ---@field trace? _.lspconfig.settings.powershell_es.Powershell.Trace
 ---**Deprecated:** Uses the 32-bit language service on 64-bit Windows. This setting has no effect on 32-bit Windows or on the PowerShell extension debugger, which has its own architecture configuration.
 ---@field useX86Host? boolean

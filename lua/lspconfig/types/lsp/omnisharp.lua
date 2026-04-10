@@ -212,6 +212,17 @@
 ---```
 ---@field enabled? boolean
 
+---@class _.lspconfig.settings.omnisharp.Csharp.Wasm.Debug
+---%generateOptionsSchema.useVSDbg.description%
+---
+---```lua
+---default = true
+---```
+---@field useVSDbg? boolean
+
+---@class _.lspconfig.settings.omnisharp.Csharp.Wasm
+---@field debug? _.lspconfig.settings.omnisharp.Csharp.Wasm.Debug
+
 ---@class _.lspconfig.settings.omnisharp.Csharp
 ---@field debug? _.lspconfig.settings.omnisharp.Csharp.Debug
 ---@field format? _.lspconfig.settings.omnisharp.Csharp.Format
@@ -244,6 +255,7 @@
 ---@field suppressHiddenDiagnostics? boolean
 ---%configuration.omnisharp.csharp.suppressProjectJsonWarning%
 ---@field suppressProjectJsonWarning? boolean
+---@field wasm? _.lspconfig.settings.omnisharp.Csharp.Wasm
 
 ---@class _.lspconfig.settings.omnisharp.Dotnet.AutoInsert
 ---%configuration.dotnet.autoInsert.enableAutoInsert%
