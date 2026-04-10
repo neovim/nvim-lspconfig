@@ -32,9 +32,11 @@ end
 return {
   cmd = function(dispatchers, config)
     local cmd = 'oxlint'
-    local local_cmd = (config or {}).root_dir and config.root_dir .. '/node_modules/.bin/oxlint'
-    if local_cmd and vim.fn.executable(local_cmd) == 1 then
-      cmd = local_cmd
+    if (config or {}).root_dir then
+      local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', cmd)
+      if vim.fn.executable(local_cmd) == 1 then
+        cmd = local_cmd
+      end
     end
     return vim.lsp.rpc.start({ cmd, '--lsp' }, dispatchers)
   end,

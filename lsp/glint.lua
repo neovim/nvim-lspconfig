@@ -25,10 +25,15 @@
 ---@type vim.lsp.Config
 return {
   cmd = function(dispatchers, config)
+    local cmd = 'glint-language-server'
     ---@diagnostic disable-next-line: undefined-field
-    local cmd = (config.init_options.glint.useGlobal or not config.root_dir) and { 'glint-language-server' }
-      or { config.root_dir .. '/node_modules/.bin/glint-language-server' }
-    return vim.lsp.rpc.start(cmd, dispatchers)
+    if not config.init_options.glint.useGlobal and (config or {}).root_dir then
+      local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', cmd)
+      if vim.fn.executable(local_cmd) == 1 then
+        cmd = local_cmd
+      end
+    end
+    return vim.lsp.rpc.start({ cmd }, dispatchers)
   end,
   init_options = {
     glint = {
