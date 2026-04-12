@@ -479,8 +479,7 @@ Snippet to enable the language server: >lua
 
 Default config:
 - before_init (use "gF" to view): ../lsp/astro.lua:49
-- cmd: >lua
-  { "astro-ls", "--stdio" }
+- cmd (use "gF" to view): ../lsp/astro.lua:49
 - filetypes: >lua
   { "astro" }
 - init_options: >lua
@@ -1819,8 +1818,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "vscode-css-language-server", "--stdio" }
+- cmd (use "gF" to view): ../lsp/cssls.lua:24
 - filetypes: >lua
   { "css", "scss", "less" }
 - init_options: >lua
@@ -2917,8 +2915,7 @@ Snippet to enable the language server: >lua
 
 Default config:
 - before_init (use "gF" to view): ../lsp/eslint.lua:79
-- cmd: >lua
-  { "vscode-eslint-language-server", "--stdio" }
+- cmd (use "gF" to view): ../lsp/eslint.lua:79
 - filetypes: >lua
   { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "astro", "htmlangular" }
 - handlers: >lua
@@ -4309,8 +4306,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "vscode-html-language-server", "--stdio" }
+- cmd (use "gF" to view): ../lsp/html.lua:26
 - filetypes: >lua
   { "html" }
 - init_options: >lua
@@ -4695,8 +4691,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "vscode-json-language-server", "--stdio" }
+- cmd (use "gF" to view): ../lsp/jsonls.lua:25
 - filetypes: >lua
   { "json", "jsonc" }
 - init_options: >lua
@@ -7735,8 +7730,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "rome", "lsp-proxy" }
+- cmd (use "gF" to view): ../lsp/rome.lua:14
 - filetypes: >lua
   { "javascript", "javascriptreact", "json", "typescript", "typescriptreact" }
 - root_markers: >lua
@@ -9415,8 +9409,7 @@ Default config:
       }
     }
   }
-- cmd: >lua
-  { "tailwindcss-language-server", "--stdio" }
+- cmd (use "gF" to view): ../lsp/tailwindcss.lua:14
 - filetypes: >lua
   { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
 - root_dir (use "gF" to view): ../lsp/tailwindcss.lua:14
@@ -10013,8 +10006,7 @@ Commands:
 - editor.action.showReferences
 
 Default config:
-- cmd: >lua
-  { "typescript-language-server", "--stdio" }
+- cmd (use "gF" to view): ../lsp/ts_ls.lua:77
 - commands: >lua
   {
     ["editor.action.showReferences"] = <function 1>
@@ -11236,8 +11228,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "yaml-language-server", "--stdio" }
+- cmd (use "gF" to view): ../lsp/yamlls.lua:63
 - filetypes: >lua
   { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" }
 - on_init (use "gF" to view): ../lsp/yamlls.lua:63

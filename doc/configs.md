@@ -986,10 +986,7 @@ vim.lsp.enable('astro')
 
 Default config:
 - `before_init`: [../lsp/astro.lua:49](../lsp/astro.lua#L49)
-- `cmd` :
-  ```lua
-  { "astro-ls", "--stdio" }
-  ```
+- `cmd`: [../lsp/astro.lua:49](../lsp/astro.lua#L49)
 - `filetypes` :
   ```lua
   { "astro" }
@@ -2731,10 +2728,7 @@ vim.lsp.enable('cssls')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "vscode-css-language-server", "--stdio" }
-  ```
+- `cmd`: [../lsp/cssls.lua:24](../lsp/cssls.lua#L24)
 - `filetypes` :
   ```lua
   { "css", "scss", "less" }
@@ -4175,10 +4169,7 @@ vim.lsp.enable('eslint')
 
 Default config:
 - `before_init`: [../lsp/eslint.lua:79](../lsp/eslint.lua#L79)
-- `cmd` :
-  ```lua
-  { "vscode-eslint-language-server", "--stdio" }
-  ```
+- `cmd`: [../lsp/eslint.lua:79](../lsp/eslint.lua#L79)
 - `filetypes` :
   ```lua
   { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "astro", "htmlangular" }
@@ -5968,10 +5959,7 @@ vim.lsp.enable('html')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "vscode-html-language-server", "--stdio" }
-  ```
+- `cmd`: [../lsp/html.lua:26](../lsp/html.lua#L26)
 - `filetypes` :
   ```lua
   { "html" }
@@ -6477,10 +6465,7 @@ vim.lsp.enable('jsonls')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "vscode-json-language-server", "--stdio" }
-  ```
+- `cmd`: [../lsp/jsonls.lua:25](../lsp/jsonls.lua#L25)
 - `filetypes` :
   ```lua
   { "json", "jsonc" }
@@ -10447,10 +10432,7 @@ vim.lsp.enable('rome')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "rome", "lsp-proxy" }
-  ```
+- `cmd`: [../lsp/rome.lua:14](../lsp/rome.lua#L14)
 - `filetypes` :
   ```lua
   { "javascript", "javascriptreact", "json", "typescript", "typescriptreact" }
@@ -12637,10 +12619,7 @@ Default config:
     }
   }
   ```
-- `cmd` :
-  ```lua
-  { "tailwindcss-language-server", "--stdio" }
-  ```
+- `cmd`: [../lsp/tailwindcss.lua:14](../lsp/tailwindcss.lua#L14)
 - `filetypes` :
   ```lua
   { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
@@ -13381,10 +13360,7 @@ Commands:
 - editor.action.showReferences
 
 Default config:
-- `cmd` :
-  ```lua
-  { "typescript-language-server", "--stdio" }
-  ```
+- `cmd`: [../lsp/ts_ls.lua:77](../lsp/ts_ls.lua#L77)
 - `commands` :
   ```lua
   {
@@ -14950,10 +14926,7 @@ vim.lsp.enable('yamlls')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "yaml-language-server", "--stdio" }
-  ```
+- `cmd`: [../lsp/yamlls.lua:63](../lsp/yamlls.lua#L63)
 - `filetypes` :
   ```lua
   { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" }
