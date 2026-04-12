@@ -4730,7 +4730,7 @@ Default config:
 - `cmd`: [../lsp/gdscript.lua:11](../lsp/gdscript.lua#L11)
 - `filetypes` :
   ```lua
-  { "gd", "gdscript", "gdscript3" }
+  { "gdscript" }
   ```
 - `root_markers` :
   ```lua
