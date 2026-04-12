@@ -401,6 +401,22 @@
 ---Whether the VSCode filesystem watchers are used to regenerate the sourcemap. If disabled, delegates to the generator process. If using `rojo`, this command stops using `--watch`
 ---@field useVSCodeWatcher? boolean
 
+---@class _.lspconfig.settings.luau_lsp.LuauLsp.StudioPlugin
+---Use Roblox Studio Plugin to provide DataModel information
+---@field enabled? boolean
+---The maximum request body size accepted from the plugin, in a string representation parse-able by the [bytes](https://www.npmjs.com/package/bytes) library
+---
+---```lua
+---default = "3mb"
+---```
+---@field maximumRequestBodySize? string
+---Port number to connect to the Studio Plugin
+---
+---```lua
+---default = 3667
+---```
+---@field port? number
+
 ---@class _.lspconfig.settings.luau_lsp.LuauLsp.Types
 ---A mapping of package names to paths of definition files to load in to the type checker. Note that definition file syntax is currently unstable and may change at any time
 ---
@@ -457,6 +473,7 @@
 ---@field server? _.lspconfig.settings.luau_lsp.LuauLsp.Server
 ---@field signatureHelp? _.lspconfig.settings.luau_lsp.LuauLsp.SignatureHelp
 ---@field sourcemap? _.lspconfig.settings.luau_lsp.LuauLsp.Sourcemap
+---@field studioPlugin? _.lspconfig.settings.luau_lsp.LuauLsp.StudioPlugin
 ---@field types? _.lspconfig.settings.luau_lsp.LuauLsp.Types
 
 ---@class lspconfig.settings.luau_lsp
