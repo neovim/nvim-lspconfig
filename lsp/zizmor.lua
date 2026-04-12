@@ -24,7 +24,7 @@ return {
       or vim.endswith(parent, '/.forgejo/workflows')
       or vim.endswith(parent, '/.gitea/workflows')
       or (vim.endswith(bufname, "/.github/dependabot.yml") or vim.endswith(bufname, "/.github/dependabot.yaml"))
-      or vim.endswith(bufname, 'actions.yml') -- Composite actions can live in any repository subdirectory
+      or vim.endswith(bufname, 'action.yml') -- Composite actions can live in any repository subdirectory
     then
       on_dir(parent)
     end
