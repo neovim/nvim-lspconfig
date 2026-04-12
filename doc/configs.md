@@ -391,6 +391,7 @@ Nvim by running `:help lspconfig-all`.
 - [yls](#yls)
 - [ziggy](#ziggy)
 - [ziggy_schema](#ziggy_schema)
+- [zizmor](#zizmor)
 - [zk](#zk)
 - [zls](#zls)
 - [zuban](#zuban)
@@ -15063,6 +15064,50 @@ Default config:
   ```lua
   { ".git" }
   ```
+
+---
+
+## zizmor
+
+https://github.com/zizmorcore/zizmor
+
+Zizmor language server.
+
+`zizmor` can be installed by following the instructions [here](https://docs.zizmor.sh/installation/).
+
+The default `cmd` assumes that the `zizmor` binary can be found in `$PATH`.
+
+See `zizmor`'s [documentation](https://docs.zizmor.sh/) for additional documentation.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('zizmor')
+```
+
+Default config:
+- `capabilities` :
+  ```lua
+  {
+    workspace = {
+      didChangeWorkspaceFolders = {
+        dynamicRegistration = true
+      }
+    }
+  }
+  ```
+- `cmd` :
+  ```lua
+  { "zizmor", "--lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "yaml" }
+  ```
+- `init_options` :
+  ```lua
+  {}
+  ```
+- `root_dir`: [../lsp/zizmor.lua:14](../lsp/zizmor.lua#L14)
 
 ---
 
