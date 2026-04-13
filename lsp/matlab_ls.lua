@@ -20,6 +20,9 @@ return {
   cmd = { 'matlab-language-server', '--stdio' },
   filetypes = { 'matlab' },
   root_dir = function(bufnr, on_dir)
+    if vim.api.nvim_buf_get_name(bufnr):match('^%a+://') then
+      return
+    end
     local root_dir = vim.fs.root(bufnr, '.git')
     on_dir(root_dir or vim.fn.getcwd())
   end,
