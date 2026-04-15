@@ -5530,7 +5530,7 @@ vim.lsp.enable('groovyls')
 Default config:
 - `cmd` :
   ```lua
-  { "java", "-jar", "groovy-language-server-all.jar" }
+  { "groovy-language-server" }
   ```
 - `filetypes` :
   ```lua

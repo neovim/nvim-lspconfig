@@ -3977,7 +3977,7 @@ Snippet to enable the language server: >lua
 
 Default config:
 - cmd: >lua
-  { "java", "-jar", "groovy-language-server-all.jar" }
+  { "groovy-language-server" }
 - filetypes: >lua
   { "groovy" }
 - root_markers: >lua
