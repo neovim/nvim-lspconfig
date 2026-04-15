@@ -134,6 +134,12 @@
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
 ---@field useCompletionSnippets? true | false
+---Workspace symbol search method.
+---
+---```lua
+---default = "fuzzy"
+---```
+---@field workspaceSearch? "fuzzy" | "startWord"
 
 ---@class _.lspconfig.settings.ada_ls.E3Testsuite
 ---Command line arguments to pass to testsuite.py when running tests
