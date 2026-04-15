@@ -47,6 +47,11 @@ return {
   before_init = function(_, config)
     -- Add support for golangci-lint V1 (in V2 `--out-format=json` was replaced by
     -- `--output.json.path=stdout`).
+
+    if vim.fn.executable('golangci-lint') ~= 1 then
+      return
+    end
+
     local v1, v2 = false, false
     -- PERF: `golangci-lint version` is very slow (about 0.1 sec) so let's find
     -- version using `go version -m $(which golangci-lint) | grep '^\smod'`.
