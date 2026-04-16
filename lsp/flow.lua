@@ -16,7 +16,7 @@
 return {
   cmd = function(dispatchers)
     local cmd = nil
-    if vim.fn.executable('flow') then
+    if vim.fn.executable('flow') == 1 then
       cmd = { 'flow', 'lsp' }
     else
       cmd = { 'npx', '--no-install', 'flow', 'lsp' }
