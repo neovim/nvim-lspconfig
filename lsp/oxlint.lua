@@ -55,7 +55,7 @@ return {
 
     local root_markers = util.insert_package_json(
       { '.oxlintrc.json', '.oxlintrc.jsonc', 'oxlint.config.ts' },
-      { 'oxfmt', 'vite%-plus' },
+      { 'oxlint', 'vite%-plus' },
       fname
     )
     on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
