@@ -60,7 +60,6 @@ return {
     )
     on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
   end,
-
   workspace_required = true,
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'LspOxlintFixAll', function()
