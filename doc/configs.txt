@@ -6711,6 +6711,26 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+phpantom_lsp
+
+https://github.com/AJenbo/phpantom_lsp
+
+Installation: https://github.com/AJenbo/phpantom_lsp/blob/main/docs/SETUP.md
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('phpantom_lsp')
+
+
+Default config:
+- cmd: >lua
+  { "phpantom_lsp" }
+- filetypes: >lua
+  { "php" }
+- root_markers: >lua
+  { ".phpantom.toml", ".git", "composer.json" }
+<
+
+------------------------------------------------------------------------------
 phptools
 
 https://www.devsense.com/

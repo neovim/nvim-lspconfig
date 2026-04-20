@@ -235,6 +235,7 @@ Nvim by running `:help lspconfig-all`.
 - [pest_ls](#pest_ls)
 - [phan](#phan)
 - [phpactor](#phpactor)
+- [phpantom_lsp](#phpantom_lsp)
 - [phptools](#phptools)
 - [pico8_ls](#pico8_ls)
 - [please](#please)
@@ -9093,6 +9094,33 @@ Default config:
   { ".git", "composer.json", ".phpactor.json", ".phpactor.yml" }
   ```
 - `workspace_required` : `true`
+
+---
+
+## phpantom_lsp
+
+https://github.com/AJenbo/phpantom_lsp
+
+Installation: https://github.com/AJenbo/phpantom_lsp/blob/main/docs/SETUP.md
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('phpantom_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "phpantom_lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "php" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".phpantom.toml", ".git", "composer.json" }
+  ```
 
 ---
 
