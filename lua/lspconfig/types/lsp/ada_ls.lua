@@ -123,6 +123,10 @@
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists.
 ---@field scenarioVariables? table
+---Controls whether or not the Ada Language Server should emit diagnostics related to the semantic analysis of Ada files.
+---
+---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
+---@field semanticDiagnostics? true | false
 ---Whether to show error notifications in VS Code for failing LSP requests.
 ---@field showNotificationsOnErrors? boolean
 ---Controls whether or not the Ada Language Server should emit source information diagnostics (e.g: for opened files that do not belong to the loaded project tree).
