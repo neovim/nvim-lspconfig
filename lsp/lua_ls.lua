@@ -42,6 +42,8 @@
 ---         checkThirdParty = false,
 ---         library = {
 ---           vim.env.VIMRUNTIME,
+---           -- For LSP Settings Type Annotations: https://github.com/neovim/nvim-lspconfig#lsp-settings-type-annotations
+---           vim.api.nvim_get_runtime_file("lua/lspconfig", false)[1],
 ---           -- Depending on the usage, you might want to add additional paths
 ---           -- here.
 ---           -- '${3rd}/luv/library',
