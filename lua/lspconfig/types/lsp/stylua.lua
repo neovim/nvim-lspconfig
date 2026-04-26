@@ -1,0 +1,34 @@
+---@meta
+
+---@class _.lspconfig.settings.stylua.Stylua
+---Path to a `stylua.toml` configuration file. NOTE: this will override workspace configuration lookup
+---
+---```lua
+---default = ""
+---```
+---@field configPath? string
+---Disable checking the version of stylua for newer versions. Useful if you do not want network requests.
+---@field disableVersionCheck? boolean
+---The release version to install. This is overridden by `#stylua.targetReleaseVersion#`.
+---
+---```lua
+---default = "latest"
+---```
+---@field releaseVersion? "latest" | "v0.17" | "v0.16" | "v0.15" | "v0.14" | "v0.13" | "v0.12" | "v0.11" | "v0.10" | "v0.9" | "v0.8" | "v0.7" | "v0.6" | "v0.5"
+---Search for the StyLua binary in the `PATH` environment variable, and use this if available. If disabled, falls back to a bundled binary
+---@field searchBinaryInPATH? boolean
+---Search parent directories for a stylua configuration file if one is not directly available.
+---@field searchParentDirectories? boolean
+---Specifies the path of StyLua. If not specified, will automatically download one from the GitHub releases.
+---@field styluaPath? string
+---Target a specific release version tag such as `v0.9.1` or `v0.9`. This overrides the version set by `#stylua.releaseVersion#`.
+---
+---```lua
+---default = ""
+---```
+---@field targetReleaseVersion? string
+---Pass the `--verify` flag to StyLua to enforce output verification
+---@field verify? boolean
+
+---@class lspconfig.settings.stylua
+---@field stylua? _.lspconfig.settings.stylua.Stylua

@@ -1,0 +1,270 @@
+---@meta
+
+---@class _.lspconfig.settings.angularls.Angular.DocumentSymbols
+---Enable Angular-specific document symbols in the Outline view and breadcrumbs. Shows control flow blocks (`@if`, `@for`, `@defer`), elements, variables, and structural directives.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Show all implicit `@for` loop variables (`$index`, `$count`, `$first`, `$last`, `$even`, `$odd`) in document symbols. When disabled (default), only explicitly aliased variables like `let i = $index` are shown.
+---@field showImplicitForVariables? boolean
+
+---@class _.lspconfig.settings.angularls.Angular.InlayHints.BindingHints
+---Show type hints for pipe output types.
+---
+---Example:
+---
+---```html
+---{{ value | async /* : User | null */ }}
+---```
+---@field pipeOutputTypes? boolean
+---Show type hints for property/input bindings.
+---
+---Example:
+---
+---```html
+---<cmp [disabled /* : boolean */]="flag" />
+---```
+---@field propertyBindingTypes? boolean
+---Visual indicator for required inputs. `'asterisk'` shows `*`, `'exclamation'` shows `!` after the type.
+---
+---Example:
+---
+---```html
+---<cmp [requiredInput /* : string* */]="value" />
+---```
+---
+---```lua
+---default = "none"
+---```
+---@field requiredInputIndicator? "none" | "asterisk" | "exclamation"
+---Show signal type hints for two-way bindings.
+---
+---Example:
+---
+---```html
+---<cmp [(value /* : WritableSignal<string> */)]="model" />
+---```
+---@field twoWayBindingSignalTypes? boolean
+
+---@class _.lspconfig.settings.angularls.Angular.InlayHints.ControlFlowHints
+---Show type hints for `@defer` `when` trigger expressions. The expression is evaluated by truthiness, so its type is not always `boolean`.
+---
+---Example:
+---
+---```html
+---@defer (when user /* : User | null */) { ... }
+---```
+---@field deferTriggerTypes? boolean
+---Show type hints for `@switch` expression types.
+---
+---Example:
+---
+---```html
+---@switch (status /* : Status */) { ... }
+---```
+---@field switchExpressionTypes? boolean
+
+---@class _.lspconfig.settings.angularls.Angular.InlayHints.EventHints
+---Show type hints for host listener handler arguments.
+---
+---Examples:
+---
+---```ts
+---@HostListener('keydown', ['$event', '$event.target'])
+---onHostKey(event /* : KeyboardEvent */, target /* : EventTarget | null */) {}
+---```
+---
+---```ts
+---host: {
+---  '(keydown)': 'onHostKey($event /* : KeyboardEvent */, $event.target /* : EventTarget | null */)',
+---}
+---```
+---@field hostListenerArgumentTypes? boolean
+---Show type hints for event binding `$event` parameter.
+---
+---Example:
+---
+---```html
+---<button (click)="onClick($event /* : MouseEvent */)"></button>
+---```
+---@field parameterTypes? boolean
+
+---@class _.lspconfig.settings.angularls.Angular.InlayHints.FunctionTypes
+---Show type hints for arrow function parameters in templates.
+---
+---Example:
+---
+---```html
+---{{ value | apply : (x /* : number */) => x * 2 }}
+---```
+---@field arrowFunctionParameterTypes? boolean
+---Show return type hints for arrow functions in templates.
+---
+---Example:
+---
+---```html
+---{{ value | apply : (x) /* : number */ => x * 2 }}
+---```
+---@field arrowFunctionReturnTypes? boolean
+
+---@class _.lspconfig.settings.angularls.Angular.InlayHints.Interaction
+---Enable interactive inlay hints that navigate to definitions when clicked.
+---
+---Example:
+---
+---```html
+---{{ formatAmount(/* precision: */ 2) }}
+---```
+---
+---With this enabled, hint parts can be navigated.
+---@field interactiveInlayHints? boolean
+
+---@class _.lspconfig.settings.angularls.Angular.InlayHints.ParameterHints
+---Show parameter name hints for function/method calls. `'literals'` shows hints only for literal arguments.
+---
+---Example:
+---
+---```html
+---{{ formatAmount(/* value: */ amount, /* precision: */ 2) }}
+---```
+---
+---```lua
+---default = "all"
+---```
+---@field nameHints? "none" | "literals" | "all"
+---Suppress parameter name hints when argument name matches parameter name.
+---
+---Example:
+---
+---```html
+---{{ onClick(user) }}
+---```
+---
+---When enabled, suppresses hints where argument text already conveys the same name.
+---
+---```lua
+---default = true
+---```
+---@field suppressWhenArgumentMatchesName? boolean
+
+---@class _.lspconfig.settings.angularls.Angular.InlayHints.VariableTypes
+---Show type hints for `@for` loop variables.
+---
+---Example:
+---
+---```html
+---@for (user /* : User */ of users) { ... }
+---```
+---@field forLoopVariableTypes? boolean
+---Show type hints for `@if` alias variables. Set to `'complex'` to only show hints for complex expressions.
+---
+---Examples:
+---
+---```html
+---@if (user; as u) { {{ u.name }} } // simple expression
+---@if (user.profile; as profile /* : Profile */) { {{ profile.name }} } // complex expression
+---```
+---@field ifAliasTypes? true | false | "complex"
+---Show type hints for `@let` declarations.
+---
+---Example:
+---
+---```html
+---@let count /* : number */ = items.length
+---```
+---@field letDeclarationTypes? boolean
+---Show type hints for template reference variables.
+---
+---Example:
+---
+---```html
+---<input #input /* : HTMLInputElement */ />
+---```
+---@field referenceVariableTypes? boolean
+---Suppress variable type hints when variable name matches type name (case-insensitive).
+---
+---Example:
+---
+---```html
+---@let user = getUser()
+---```
+---
+---When enabled, suppresses `/* : User */` for names like `user: User`.
+---@field suppressWhenTypeMatchesName? boolean
+
+---@class _.lspconfig.settings.angularls.Angular.InlayHints
+---@field bindingHints? _.lspconfig.settings.angularls.Angular.InlayHints.BindingHints
+---@field controlFlowHints? _.lspconfig.settings.angularls.Angular.InlayHints.ControlFlowHints
+---@field eventHints? _.lspconfig.settings.angularls.Angular.InlayHints.EventHints
+---@field functionTypes? _.lspconfig.settings.angularls.Angular.InlayHints.FunctionTypes
+---@field interaction? _.lspconfig.settings.angularls.Angular.InlayHints.Interaction
+---@field parameterHints? _.lspconfig.settings.angularls.Angular.InlayHints.ParameterHints
+---@field variableTypes? _.lspconfig.settings.angularls.Angular.InlayHints.VariableTypes
+
+---@class _.lspconfig.settings.angularls.Angular.Server
+---When enabled, the Angular Language Service will delegate file watching to VS Code instead of creating its own internal file watchers. This can significantly improve performance (greater than 10x faster initialization) and reduce resource usage in large repositories.
+---
+---```lua
+---default = true
+---```
+---@field useClientSideFileWatcher? boolean
+
+---@class _.lspconfig.settings.angularls.Angular.Suggest
+---Enable/disable auto import suggestions for the exported Angular components from the current project.
+---
+---```lua
+---default = true
+---```
+---@field autoImports? boolean
+---Enable showing completions on potentially undefined values that insert an optional chain call. Requires TS 3.7+ and strict null checks to be enabled.
+---
+---```lua
+---default = true
+---```
+---@field includeAutomaticOptionalChainCompletions? boolean
+---Enable snippet completions from Angular language server. Requires using TypeScript 4.3+ in the workspace.
+---
+---```lua
+---default = true
+---```
+---@field includeCompletionsWithSnippetText? boolean
+
+---@class _.lspconfig.settings.angularls.Angular.Trace
+---Traces the communication between VS Code and the Angular language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.angularls.Angular
+---@field documentSymbols? _.lspconfig.settings.angularls.Angular.DocumentSymbols
+---Prompt to enable the [strictTemplates](https://angular.dev/reference/configs/angular-compiler-options#stricttemplates) flag in [angularCompilerOptions](https://angular.dev/reference/configs/angular-compiler-options).
+---
+---```lua
+---default = true
+---```
+---@field ["enable-strict-mode-prompt"]? boolean
+---Enabling this option will force the language service to use [strictTemplates](https://angular.dev/reference/configs/angular-compiler-options#stricttemplates) and ignore the user settings in the `tsconfig.json`.
+---@field forceStrictTemplates? boolean
+---@field inlayHints? _.lspconfig.settings.angularls.Angular.InlayHints
+---Enables logging of the Angular server to a file. This log can be used to diagnose Angular Server issues. The log may contain file paths, source code, and other potentially sensitive information from your project.
+---
+---```lua
+---default = "off"
+---```
+---@field log? "off" | "terse" | "normal" | "verbose"
+---@field server? _.lspconfig.settings.angularls.Angular.Server
+---@field suggest? _.lspconfig.settings.angularls.Angular.Suggest
+---A comma-separated list of error codes in templates whose diagnostics should be ignored.
+---
+---```lua
+---default = ""
+---```
+---@field suppressAngularDiagnosticCodes? string
+---@field trace? _.lspconfig.settings.angularls.Angular.Trace
+
+---@class lspconfig.settings.angularls
+---@field angular? _.lspconfig.settings.angularls.Angular

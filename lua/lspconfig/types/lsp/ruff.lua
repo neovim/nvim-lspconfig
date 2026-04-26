@@ -1,0 +1,430 @@
+---@meta
+
+---@class lspconfig.settings.ruff
+---A list of allowed "confusable" Unicode characters to ignore when
+---enforcing `RUF001`, `RUF002`, and `RUF003`.
+---@field ["allowed-confusables"]? string[]
+---Options to configure import map generation.
+---@field analyze? any|any
+---A list of builtins to treat as defined references, in addition to the
+---system builtins.
+---@field builtins? string[]
+---A path to the cache directory.
+---
+---By default, Ruff stores cache results in a `.ruff_cache` directory in
+---the current project root.
+---
+---However, Ruff will also respect the `RUFF_CACHE_DIR` environment
+---variable, which takes precedence over that default.
+---
+---This setting will override even the `RUFF_CACHE_DIR` environment
+---variable, if set.
+---@field ["cache-dir"]? string
+---A regular expression used to identify "dummy" variables, or those which
+---should be ignored when enforcing (e.g.) unused-variable rules. The
+---default expression matches `_`, `__`, and `_var`, but not `_var_`.
+---@field ["dummy-variable-rgx"]? string
+---A list of file patterns to exclude from formatting and linting.
+---
+---Exclusions are based on globs, and can be either:
+---
+---- Single-path patterns, like `.mypy_cache` (to exclude any directory
+---  named `.mypy_cache` in the tree), `foo.py` (to exclude any file named
+---  `foo.py`), or `foo_*.py` (to exclude any file matching `foo_*.py` ).
+---- Relative patterns, like `directory/foo.py` (to exclude that specific
+---  file) or `directory/*.py` (to exclude any Python files in
+---  `directory`). Note that these paths are relative to the project root
+---  (e.g., the directory containing your `pyproject.toml`).
+---
+---For more information on the glob syntax, refer to the [`globset` documentation](https://docs.rs/globset/latest/globset/#syntax).
+---
+---Note that you'll typically want to use
+---[`extend-exclude`](#extend-exclude) to modify the excluded paths.
+---@field exclude? string[]
+---Whether to require exact codes to select preview rules. When enabled,
+---preview rules will not be selected by prefixes — the full code of each
+---preview rule will be required to enable the rule.
+---@field ["explicit-preview-rules"]? boolean
+---A path to a local `pyproject.toml` or `ruff.toml` file to merge into this
+---configuration. User home directory and environment variables will be
+---expanded.
+---
+---To resolve the current configuration file, Ruff will first load
+---this base configuration file, then merge in properties defined
+---in the current configuration file. Most settings follow simple override
+---behavior where the child value replaces the parent value. However,
+---rule selection (`lint.select` and `lint.ignore`) has special merging
+---behavior: if the child configuration specifies `lint.select`, it
+---establishes a new baseline rule set and the parent's `lint.ignore`
+---rules are discarded; if the child configuration omits `lint.select`,
+---the parent's rule selection is inherited and both parent and child
+---`lint.ignore` rules are accumulated together.
+---@field extend? string
+---A list of file patterns to omit from formatting and linting, in addition to those
+---specified by [`exclude`](#exclude).
+---
+---Exclusions are based on globs, and can be either:
+---
+---- Single-path patterns, like `.mypy_cache` (to exclude any directory
+---  named `.mypy_cache` in the tree), `foo.py` (to exclude any file named
+---  `foo.py`), or `foo_*.py` (to exclude any file matching `foo_*.py` ).
+---- Relative patterns, like `directory/foo.py` (to exclude that specific
+---  file) or `directory/*.py` (to exclude any Python files in
+---  `directory`). Note that these paths are relative to the project root
+---  (e.g., the directory containing your `pyproject.toml`).
+---
+---For more information on the glob syntax, refer to the [`globset` documentation](https://docs.rs/globset/latest/globset/#syntax).
+---@field ["extend-exclude"]? string[]
+---A list of rule codes or prefixes to consider fixable, in addition to those
+---specified by [`fixable`](#lint_fixable).
+---@field ["extend-fixable"]? any[]
+---A list of rule codes or prefixes to ignore, in addition to those
+---specified by `ignore`.
+---
+---This option is deprecated because it is now interchangeable with
+---[`ignore`](#lint_ignore). In earlier versions of Ruff, `ignore` would
+---_replace_ the set of ignored rules when using configuration inheritance
+---(via the top-level [`extend`](https://docs.astral.sh/ruff/settings/#extend)
+---setting), while `extend-ignore` would _add_ to the inherited set. Ruff
+---now merges both `ignore` and `extend-ignore` into a single set, so the
+---distinction no longer applies. Use [`ignore`](#lint_ignore) instead.
+---@field ["extend-ignore"]? any[]
+---A list of file patterns to include when linting, in addition to those
+---specified by [`include`](#include).
+---
+---Inclusion are based on globs, and should be single-path patterns, like
+---`*.pyw`, to include any file with the `.pyw` extension.
+---
+---For more information on the glob syntax, refer to the [`globset` documentation](https://docs.rs/globset/latest/globset/#syntax).
+---@field ["extend-include"]? string[]
+---A list of mappings from file pattern to rule codes or prefixes to
+---exclude, in addition to any rules excluded by [`per-file-ignores`](#lint_per-file-ignores).
+---@field ["extend-per-file-ignores"]? table
+---A list of rule codes or prefixes for which unsafe fixes should be considered
+---safe.
+---@field ["extend-safe-fixes"]? any[]
+---A list of rule codes or prefixes to enable, in addition to those
+---specified by [`select`](#lint_select).
+---
+---Unlike [`select`](#lint_select), which _replaces_ the default rule set
+---when specified, `extend-select` _adds_ to whatever rules are already
+---active. This makes `extend-select` the preferred option when you want
+---to enable additional rules on top of the defaults without having to
+---enumerate them.
+---
+---For example, to enable the defaults plus flake8-bugbear:
+---
+---```toml
+---[tool.ruff.lint]
+---# Adds flake8-bugbear on top of the default rules (E4, E7, E9, F).
+---extend-select = ["B"]
+---```
+---
+---Using `select = ["B"]` instead would _replace_ the defaults, enabling
+---only flake8-bugbear.
+---@field ["extend-select"]? any[]
+---A list of rule codes or prefixes to consider non-auto-fixable, in addition to those
+---specified by [`unfixable`](#lint_unfixable).
+---@field ["extend-unfixable"]? any[]
+---A list of rule codes or prefixes for which safe fixes should be considered
+---unsafe.
+---@field ["extend-unsafe-fixes"]? any[]
+---A mapping of custom file extensions to known file types (overridden
+---by the `--extension` command-line flag).
+---
+---Supported file types include `python`, `pyi`, `ipynb`, and `markdown`.
+---
+---Any file extensions listed here will be automatically added to the
+---default `include` list as a `*.{ext}` glob, so that they are linted
+---and formatted without needing any additional configuration settings.
+---@field extension? table
+---A list of rule codes or prefixes that are unsupported by Ruff, but should be
+---preserved when (e.g.) validating `# noqa` directives. Useful for
+---retaining `# noqa` directives that cover plugins not yet implemented
+---by Ruff.
+---@field external? string[]
+---Enable fix behavior by-default when running `ruff` (overridden
+---by the `--fix` and `--no-fix` command-line flags).
+---Only includes automatic fixes unless `--unsafe-fixes` is provided.
+---@field fix? boolean
+---Like [`fix`](#fix), but disables reporting on leftover violation. Implies [`fix`](#fix).
+---@field ["fix-only"]? boolean
+---A list of rule codes or prefixes to consider fixable. By default,
+---all rules are considered fixable.
+---@field fixable? any[]
+---Options for the `flake8-annotations` plugin.
+---@field ["flake8-annotations"]? any|any
+---Options for the `flake8-bandit` plugin.
+---@field ["flake8-bandit"]? any|any
+---Options for the `flake8-boolean-trap` plugin.
+---@field ["flake8-boolean-trap"]? any|any
+---Options for the `flake8-bugbear` plugin.
+---@field ["flake8-bugbear"]? any|any
+---Options for the `flake8-builtins` plugin.
+---@field ["flake8-builtins"]? any|any
+---Options for the `flake8-comprehensions` plugin.
+---@field ["flake8-comprehensions"]? any|any
+---Options for the `flake8-copyright` plugin.
+---@field ["flake8-copyright"]? any|any
+---Options for the `flake8-errmsg` plugin.
+---@field ["flake8-errmsg"]? any|any
+---Options for the `flake8-gettext` plugin.
+---@field ["flake8-gettext"]? any|any
+---Options for the `flake8-implicit-str-concat` plugin.
+---@field ["flake8-implicit-str-concat"]? any|any
+---Options for the `flake8-import-conventions` plugin.
+---@field ["flake8-import-conventions"]? any|any
+---Options for the `flake8-pytest-style` plugin.
+---@field ["flake8-pytest-style"]? any|any
+---Options for the `flake8-quotes` plugin.
+---@field ["flake8-quotes"]? any|any
+---Options for the `flake8_self` plugin.
+---@field ["flake8-self"]? any|any
+---Options for the `flake8-tidy-imports` plugin.
+---@field ["flake8-tidy-imports"]? any|any
+---Options for the `flake8-type-checking` plugin.
+---@field ["flake8-type-checking"]? any|any
+---Options for the `flake8-unused-arguments` plugin.
+---@field ["flake8-unused-arguments"]? any|any
+---Whether to enforce [`exclude`](#exclude) and [`extend-exclude`](#extend-exclude) patterns,
+---even for paths that are passed to Ruff explicitly. Typically, Ruff will lint
+---any paths passed in directly, even if they would typically be
+---excluded. Setting `force-exclude = true` will cause Ruff to
+---respect these exclusions unequivocally.
+---
+---This is useful for [`pre-commit`](https://pre-commit.com/), which explicitly passes all
+---changed files to the [`ruff-pre-commit`](https://github.com/astral-sh/ruff-pre-commit)
+---plugin, regardless of whether they're marked as excluded by Ruff's own
+---settings.
+---@field ["force-exclude"]? boolean
+---Options to configure code formatting.
+---@field format? any|any
+---A list of rule codes or prefixes to ignore. Prefixes can specify exact
+---rules (like `F841`), entire categories (like `F`), or anything in
+---between.
+---
+---When breaking ties between enabled and disabled rules (via `select` and
+---`ignore`, respectively), more specific prefixes override less
+---specific prefixes. `ignore` takes precedence over `select` if the same
+---prefix appears in both.
+---@field ignore? any[]
+---Avoid automatically removing unused imports in `__init__.py` files. Such
+---imports will still be flagged, but with a dedicated message suggesting
+---that the import is either added to the module's `__all__` symbol, or
+---re-exported with a redundant alias (e.g., `import os as os`).
+---
+---This option is enabled by default, but you can opt-in to removal of imports
+---via an unsafe fix.
+---@field ["ignore-init-module-imports"]? boolean
+---A list of file patterns to include when linting.
+---
+---Inclusion are based on globs, and should be single-path patterns, like
+---`*.pyw`, to include any file with the `.pyw` extension. `pyproject.toml` is
+---included here not for configuration but because we lint whether e.g. the
+---`[project]` matches the schema.
+---
+---Notebook files (`.ipynb` extension) are included by default on Ruff 0.6.0+.
+---
+---For more information on the glob syntax, refer to the [`globset` documentation](https://docs.rs/globset/latest/globset/#syntax).
+---@field include? string[]
+---The number of spaces per indentation level (tab).
+---
+---Used by the formatter and when enforcing long-line violations (like `E501`) to determine the visual
+---width of a tab.
+---
+---This option changes the number of spaces the formatter inserts when
+---using soft-tabs (`indent-style = space`).
+---
+---PEP 8 recommends using 4 spaces per [indentation level](https://peps.python.org/pep-0008/#indentation).
+---@field ["indent-width"]? any|any
+---Options for the `isort` plugin.
+---@field isort? any|any
+---The line length to use when enforcing long-lines violations (like `E501`)
+---and at which `isort` and the formatter prefers to wrap lines.
+---
+---The length is determined by the number of characters per line, except for lines containing East Asian characters or emojis.
+---For these lines, the [unicode width](https://unicode.org/reports/tr11/) of each character is added up to determine the length.
+---
+---The value must be greater than `0` and less than or equal to `320`.
+---
+---Note: While the formatter will attempt to format lines such that they remain
+---within the `line-length`, it isn't a hard upper bound, and formatted lines may
+---exceed the `line-length`.
+---
+---See [`pycodestyle.max-line-length`](#lint_pycodestyle_max-line-length) to configure different lengths for `E501` and the formatter.
+---@field ["line-length"]? any|any
+---@field lint? any|any
+---A list of objects that should be treated equivalently to a
+---`logging.Logger` object.
+---
+---This is useful for ensuring proper diagnostics (e.g., to identify
+---`logging` deprecations and other best-practices) for projects that
+---re-export a `logging.Logger` object from a common module.
+---
+---For example, if you have a module `logging_setup.py` with the following
+---contents:
+---```python
+---import logging
+---
+---logger = logging.getLogger(__name__)
+---```
+---
+---Adding `"logging_setup.logger"` to `logger-objects` will ensure that
+---`logging_setup.logger` is treated as a `logging.Logger` object when
+---imported from other modules (e.g., `from logging_setup import logger`).
+---@field ["logger-objects"]? string[]
+---Options for the `mccabe` plugin.
+---@field mccabe? any|any
+---Mark the specified directories as namespace packages. For the purpose of
+---module resolution, Ruff will treat those directories and all their subdirectories
+---as if they contained an `__init__.py` file.
+---@field ["namespace-packages"]? string[]
+---The style in which violation messages should be formatted: `"full"` (default)
+---(shows source), `"concise"`, `"grouped"` (group messages by file), `"json"`
+---(machine-readable), `"junit"` (machine-readable XML), `"github"` (GitHub
+---Actions annotations), `"gitlab"` (GitLab CI code quality report),
+---`"pylint"` (Pylint text format) or `"azure"` (Azure Pipeline logging commands).
+---@field ["output-format"]? any|any
+---Options for the `pep8-naming` plugin.
+---@field ["pep8-naming"]? any|any
+---A list of mappings from file pattern to rule codes or prefixes to
+---exclude, when considering any matching files. An initial '!' negates
+---the file pattern.
+---@field ["per-file-ignores"]? table
+---A list of mappings from glob-style file pattern to Python version to use when checking the
+---corresponding file(s).
+---
+---This may be useful for overriding the global Python version settings in `target-version` or
+---`requires-python` for a subset of files. For example, if you have a project with a minimum
+---supported Python version of 3.9 but a subdirectory of developer scripts that want to use a
+---newer feature like the `match` statement from Python 3.10, you can use
+---`per-file-target-version` to specify `"developer_scripts/*.py" = "py310"`.
+---
+---This setting is used by the linter to enforce any enabled version-specific lint rules, as
+---well as by the formatter for any version-specific formatting options, such as parenthesizing
+---context managers on Python 3.10+.
+---@field ["per-file-target-version"]? table
+---Whether to enable preview mode. When preview mode is enabled, Ruff will
+---use unstable rules, fixes, and formatting.
+---@field preview? boolean
+---Options for the `pycodestyle` plugin.
+---@field pycodestyle? any|any
+---Options for the `pydocstyle` plugin.
+---@field pydocstyle? any|any
+---Options for the `pyflakes` plugin.
+---@field pyflakes? any|any
+---Options for the `pylint` plugin.
+---@field pylint? any|any
+---Options for the `pyupgrade` plugin.
+---@field pyupgrade? any|any
+---Enforce a requirement on the version of Ruff, to enforce at runtime.
+---If the version of Ruff does not meet the requirement, Ruff will exit
+---with an error.
+---
+---Useful for unifying results across many environments, e.g., with a
+---`pyproject.toml` file.
+---
+---Accepts a [PEP 440](https://peps.python.org/pep-0440/) specifier, like `==0.3.1` or `>=0.3.1`.
+---@field ["required-version"]? any|any
+---Whether to automatically exclude files that are ignored by `.ignore`,
+---`.gitignore`, `.git/info/exclude`, and global `gitignore` files.
+---Enabled by default.
+---@field ["respect-gitignore"]? boolean
+---A list of rule codes or prefixes to enable. Prefixes can specify exact
+---rules (like `F841`), entire categories (like `F`), or anything in
+---between.
+---
+---When breaking ties between enabled and disabled rules (via `select` and
+---`ignore`, respectively), more specific prefixes override less
+---specific prefixes. `ignore` takes precedence over `select` if the
+---same prefix appears in both.
+---@field select? any[]
+---Whether to show an enumeration of all fixed lint violations
+---(overridden by the `--show-fixes` command-line flag).
+---@field ["show-fixes"]? boolean
+---The directories to consider when resolving first- vs. third-party
+---imports.
+---
+---When omitted, the `src` directory will typically default to including both:
+---
+---1. The directory containing the nearest `pyproject.toml`, `ruff.toml`, or `.ruff.toml` file (the "project root").
+---2. The `"src"` subdirectory of the project root.
+---
+---These defaults ensure that Ruff supports both flat layouts and `src` layouts out-of-the-box.
+---(If a configuration file is explicitly provided (e.g., via the `--config` command-line
+---flag), the current working directory will be considered the project root.)
+---
+---As an example, consider an alternative project structure, like:
+---
+---```text
+---my_project
+---├── pyproject.toml
+---└── lib
+---    └── my_package
+---        ├── __init__.py
+---        ├── foo.py
+---        └── bar.py
+---```
+---
+---In this case, the `./lib` directory should be included in the `src` option
+---(e.g., `src = ["lib"]`), such that when resolving imports, `my_package.foo`
+---is considered first-party.
+---
+---This field supports globs. For example, if you have a series of Python
+---packages in a `python_modules` directory, `src = ["python_modules/*"]`
+---would expand to incorporate all packages in that directory. User home
+---directory and environment variables will also be expanded.
+---@field src? string[]
+---The minimum Python version to target, e.g., when considering automatic
+---code upgrades, like rewriting type annotations. Ruff will not propose
+---changes using features that are not available in the given version.
+---
+---For example, to represent supporting Python >=3.11 or ==3.11
+---specify `target-version = "py311"`.
+---
+---If you're already using a `pyproject.toml` file, we recommend
+---`project.requires-python` instead, as it's based on Python packaging
+---standards, and will be respected by other tools. For example, Ruff
+---treats the following as identical to `target-version = "py38"`:
+---
+---```toml
+---[project]
+---requires-python = ">=3.8"
+---```
+---
+---If both are specified, `target-version` takes precedence over
+---`requires-python`. See [_Inferring the Python version_](https://docs.astral.sh/ruff/configuration/#inferring-the-python-version)
+---for a complete description of how the `target-version` is determined
+---when left unspecified.
+---
+---Note that a stub file can [sometimes make use of a typing feature](https://typing.python.org/en/latest/spec/distributing.html#syntax)
+---before it is available at runtime, as long as the stub does not make
+---use of new *syntax*. For example, a type checker will understand
+---`int | str` in a stub as being a `Union` type annotation, even if the
+---type checker is run using Python 3.9, despite the fact that the `|`
+---operator can only be used to create union types at runtime on Python
+---3.10+. As such, Ruff will often recommend newer features in a stub
+---file than it would for an equivalent runtime file with the same target
+---version.
+---@field ["target-version"]? any|any
+---A list of task tags to recognize (e.g., "TODO", "FIXME", "XXX").
+---
+---Comments starting with these tags will be ignored by commented-out code
+---detection (`ERA`), and skipped by line-length rules (`E501`) if
+---[`ignore-overlong-task-comments`](#lint_pycodestyle_ignore-overlong-task-comments) is set to `true`.
+---@field ["task-tags"]? string[]
+---A list of modules whose exports should be treated equivalently to
+---members of the `typing` module.
+---
+---This is useful for ensuring proper type annotation inference for
+---projects that re-export `typing` and `typing_extensions` members
+---from a compatibility module. If omitted, any members imported from
+---modules apart from `typing` and `typing_extensions` will be treated
+---as ordinary Python objects.
+---@field ["typing-modules"]? string[]
+---A list of rule codes or prefixes to consider non-fixable.
+---@field unfixable? any[]
+---Enable application of unsafe fixes.
+---If excluded, a hint will be displayed when unsafe fixes are available.
+---If set to false, the hint will be hidden.
+---@field ["unsafe-fixes"]? boolean
