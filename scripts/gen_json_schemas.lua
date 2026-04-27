@@ -61,7 +61,7 @@ local index = {
   vtsls = 'https://raw.githubusercontent.com/yioneko/vtsls/main/packages/service/configuration.schema.json',
   vue_ls = 'https://raw.githubusercontent.com/vuejs/vetur/master/package.json',
   yamlls = 'https://raw.githubusercontent.com/redhat-developer/vscode-yaml/master/package.json',
-  zls = 'https://raw.githubusercontent.com/zigtools/zls-vscode/master/package.json',
+  zls = 'https://raw.githubusercontent.com/zigtools/zls/master/schema.json',
 }
 
 ---@param url string
@@ -96,6 +96,7 @@ end
 ---@field package_url string url of the package.json of the LSP server
 ---@field settings_file string file of the settings json schema of the LSP server
 ---@field translate? boolean
+---@field prefix? string Prepend this string to each schema property.
 
 --- @type table<string, LspSchema>
 local overrides = {
@@ -116,6 +117,9 @@ local overrides = {
   },
   cssls = {
     translate = true,
+  },
+  zls = {
+    prefix = 'zls.',
   },
 }
 
@@ -203,6 +207,17 @@ local function generate_server_schema(schema)
     end
   elseif config_schema.properties then
     properties = config_schema.properties
+  end
+
+  -- `properties["enable_snippets"]` => `properties["zls.enable_snippets"]`
+  if schema.prefix then
+    if type(properties) == 'table' then
+      local new = vim.empty_dict()
+      for key, value in pairs(properties) do
+        new[schema.prefix .. key] = value
+      end
+      properties = new
+    end
   end
 
   local schema_json = {
