@@ -12,7 +12,7 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'lua-language-server' },
+  cmd = { 'spade-language-server' },
   filetypes = { 'spade' },
   root_markers = { 'swim.toml' },
 }
