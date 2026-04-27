@@ -306,6 +306,7 @@ Nvim by running `:help lspconfig-all`.
 - [somesass_ls](#somesass_ls)
 - [sorbet](#sorbet)
 - [sourcekit](#sourcekit)
+- [spade_ls](#spade_ls)
 - [spectral](#spectral)
 - [spyglassmc_language_server](#spyglassmc_language_server)
 - [sqlls](#sqlls)
@@ -11861,6 +11862,39 @@ Default config:
   ```
 - `get_language_id`: [../lsp/sourcekit.lua:10](../lsp/sourcekit.lua#L10)
 - `root_dir`: [../lsp/sourcekit.lua:10](../lsp/sourcekit.lua#L10)
+
+---
+
+## spade_ls
+
+https://gitlab.com/spade-lang/spade/-/tree/main/spade-language-server
+
+Spade language server.
+
+`spade-language-server` can be installed by following the instructions
+[here](https://docs.spade-lang.org/typst/editor_setup.html)
+
+The default `cmd` assumes that `spade-language-server` binary can be
+found in `$PATH`.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('spade_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "lua-language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "spade" }
+  ```
+- `root_markers` :
+  ```lua
+  { "swim.toml" }
+  ```
 
 ---
 
