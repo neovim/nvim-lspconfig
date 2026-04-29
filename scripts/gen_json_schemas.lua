@@ -106,7 +106,11 @@ end
 ---@field translate? boolean
 ---@field prefix? string Prepend this string to each schema property.
 
---- @type table<string, LspSchema>
+---@class LspSchemaOverrides : LspSchema
+---@field package_url? string
+---@field settings_file? boolean
+
+--- @type table<string, LspSchemaOverrides>
 local overrides = {
   lua_ls = {
     translate = true,
