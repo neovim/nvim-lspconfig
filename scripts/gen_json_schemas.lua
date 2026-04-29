@@ -126,6 +126,9 @@ local overrides = {
   cssls = {
     translate = true,
   },
+  nixd = {
+    prefix = 'nixd.',
+  },
   zls = {
     prefix = 'zls.',
   },
