@@ -22,7 +22,7 @@
 ---
 --- ```lua
 --- vim.lsp.config('esbonio', {
----   cmd = { '/path/to/virtualenv/bin/python', '-m', 'esbonio' }
+---   cmd = { '/path/to/virtualenv/bin/python', '-m', 'esbonio.server' }
 --- })
 --- ```
 ---
@@ -45,7 +45,7 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'python3', '-m', 'esbonio' },
+  cmd = { 'python3', '-m', 'esbonio.server' },
   filetypes = { 'rst' },
   root_markers = { '.git' },
 }
