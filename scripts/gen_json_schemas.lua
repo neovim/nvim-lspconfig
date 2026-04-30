@@ -16,6 +16,7 @@ local index = {
   eslint = 'https://raw.githubusercontent.com/microsoft/vscode-eslint/main/package.json',
   flow = 'https://raw.githubusercontent.com/flowtype/flow-for-vscode/master/package.json',
   fsautocomplete = 'https://raw.githubusercontent.com/ionide/ionide-vscode-fsharp/main/release/package.json',
+  gopls = 'https://raw.githubusercontent.com/golang/vscode-go/refs/heads/master/extension/package.json',
   grammarly = 'https://raw.githubusercontent.com/znck/grammarly/main/extension/package.json',
   hhvm = 'https://raw.githubusercontent.com/slackhq/vscode-hack/master/package.json',
   hie = 'https://raw.githubusercontent.com/alanz/vscode-hie-server/master/package.json',
