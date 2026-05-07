@@ -175,7 +175,7 @@
 ---default = {}
 ---```
 ---@field interpreter? string[]
----Set the [line length](https://docs.astral.sh/ruff/settings/#line-length) used by the formatter and linter. Must be greater than 0 and less than or equal to 320.
+---Set the [line length](https://docs.astral.sh/ruff/settings/#line-length) used by the formatter and linter. Must be greater than 0. Ruff 0.15.12 or older uses a maximum of 320.
 ---
 ---**This setting is used only by the native server.**
 ---@field lineLength? integer

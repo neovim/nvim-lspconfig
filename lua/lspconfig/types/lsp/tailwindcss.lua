@@ -20,6 +20,12 @@
 ---default = "warning"
 ---```
 ---@field cssConflict? "ignore" | "warning" | "error"
+---Deprecated Tailwind CSS at-rules
+---
+---```lua
+---default = "warning"
+---```
+---@field deprecatedAtRule? "ignore" | "warning" | "error"
 ---Unsupported use of the [`@apply` directive](https://tailwindcss.com/docs/functions-and-directives/#apply)
 ---
 ---```lua
