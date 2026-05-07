@@ -228,6 +228,7 @@ Nvim by running `:help lspconfig-all`.
 - [oxfmt](#oxfmt)
 - [oxlint](#oxlint)
 - [pact_ls](#pact_ls)
+- [panache](#panache)
 - [pasls](#pasls)
 - [pbls](#pbls)
 - [perlls](#perlls)
@@ -8863,6 +8864,39 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## panache
+
+https://github.com/jolars/panache
+
+A language server, formatter, and linter for Markdown, Quarto, and R Markdown,
+built in Rust with a lossless CST parser and support for external formatters
+and linters on code blocks.
+
+Install via `cargo install panache`, from the [releases page](https://github.com/jolars/panache/releases),
+or via your system package manager (`nixpkgs`, AUR, `pipx install panache-cli`,
+`npm install -g @panache-cli/panache`).
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('panache')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "panache", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "markdown", "quarto", "rmd" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".panache.toml", "panache.toml", "_quarto.yml", "_bookdown.yml", ".git" }
   ```
 
 ---
