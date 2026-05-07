@@ -158,6 +158,7 @@ if vim.fn.has('nvim-0.11.2') == 1 then
       for name in vim.iter(client_names) do
         vim.schedule_wrap(vim.lsp.enable)(name)
       end
+      timer:close()
     end)
   end, {
     desc = 'Restart the given client',
