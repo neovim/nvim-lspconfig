@@ -187,7 +187,7 @@
 ---Controls the log level of the language server.
 ---
 ---**This setting is used only by the native server.**
----@field logLevel? "error" | "warning" | "info" | "debug" | "trace"
+---@field logLevel? "error" | "warn" | "info" | "debug" | "trace"
 ---Whether to use the native language server, [`ruff-lsp`](https://github.com/astral-sh/ruff-lsp) or automatically decide between the two based on the Ruff version and extension settings.
 ---
 ---```lua
