@@ -11,7 +11,7 @@
 --- npm i -g oxfmt
 --- ```
 ---
---- It can also be used as a part of Vite+ through `fmt` field in `vite.config.ts`: https://github.com/oxc-project/oxc/pull/20197
+--- or used as a part of Vite+ through `fmt` field in `vite.config.ts`: https://github.com/oxc-project/oxc/pull/20197
 
 local util = require 'lspconfig.util'
 

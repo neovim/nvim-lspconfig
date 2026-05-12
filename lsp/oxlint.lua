@@ -11,7 +11,7 @@
 --- npm i -g oxlint
 --- ```
 ---
---- or used as a part of Vite+ through `lint` field: https://github.com/oxc-project/oxc/pull/20214
+--- or used as a part of Vite+ through `lint` field in vite.config.ts: https://github.com/oxc-project/oxc/pull/20214
 ---
 --- Type-aware linting will automatically be enabled if `tsgolint` exists in your
 --- path and your `.oxlintrc.json` contains the string "typescript".
