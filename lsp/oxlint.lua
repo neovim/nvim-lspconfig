@@ -55,6 +55,8 @@ return {
 
     local root_markers = util.insert_package_json(
       { '.oxlintrc.json', '.oxlintrc.jsonc', 'oxlint.config.ts' },
+      -- Oxlint LSP supports vite plus since https://github.com/oxc-project/oxc/pull/20214
+      -- Vite+ creates a shim for oxlint bin, so we just need to discover that vite-plus is used in the project
       { 'oxlint', 'vite%-plus' },
       fname
     )
