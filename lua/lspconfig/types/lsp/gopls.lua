@@ -390,7 +390,7 @@
 ---implicitly ignored.
 ---
 ---To suppress the hint, write an actual comment containing
----"ignore error" following the call statement, or explictly
+---"ignore error" following the call statement, or explicitly
 ---assign the result to a blank variable. A handful of common
 ---functions such as `fmt.Println` are excluded from the
 ---check.
@@ -3403,7 +3403,6 @@
 ---        "fmt"
 ---        fumpt "fmt"
 ---        format "fmt"
----        _ "fmt"
 ---    )
 ---
 ---However, this is very rarely done on purpose. Usually, it is a
@@ -3416,6 +3415,11 @@
 ---https://github.com/golang/go/commit/3409ce39bfd7584523b7a8c150a310cea92d879d)
 ---– if you want to allow this pattern in your code base, you're
 ---advised to disable this check.
+---
+---It is acceptable to import the same package twice if one of the imports
+---uses the blank identifier. This is allowed in order to increase
+---resilience against erroneous changes when using the same package for its
+---side effects as well as its exported API.
 ---
 ---Available since
 ---    2020.1
@@ -3561,6 +3565,28 @@
 ---default = true
 ---```
 ---@field atomicalign? boolean
+---replace basic types in sync/atomic calls with atomic types
+---
+---The atomictypes analyzer suggests replacing the primitive sync/atomic functions with
+---the strongly typed atomic wrapper types introduced in Go1.19 (e.g.
+---atomic.Int32). For example,
+---
+---	var x int32
+---	atomic.AddInt32(&x, 1)
+---
+---would become
+---
+---	var x atomic.Int32
+---	x.Add(1)
+---
+---The atomic types are safer because they don't allow non-atomic access, which is
+---a common source of bugs. These types also resolve memory alignment issues that
+---plagued the old atomic functions on 32-bit architectures.
+---
+---```lua
+---default = true
+---```
+---@field atomictypes? boolean
 ---replace for-range over b.N with b.Loop
 ---
 ---The bloop analyzer suggests replacing benchmark loops of the form
@@ -3574,6 +3600,8 @@
 ---Caveats: The b.Loop() method is designed to prevent the compiler from
 ---optimizing away the benchmark loop, which can occasionally result in
 ---slower execution due to increased allocations in some specific cases.
+---Since its fix may change the performance of nanosecond-scale benchmarks,
+---bloop is disabled by default in the `go fix` analyzer suite; see golang/go#74967.
 ---
 ---```lua
 ---default = true
@@ -3712,39 +3740,103 @@
 ---default = true
 ---```
 ---@field embed? boolean
+---simplify references to embedded fields in composite literals
+---
+---The embedlit analyzer suggests removing redundant embedded field type specifiers
+---from composite literals. Go1.27 introduced the ability to directly initialize
+---fields promoted from embedded struct types without a nested literal. For
+---example, given the following structs:
+---
+---	type T struct {
+---		U
+---	}
+---
+---	type U struct {
+---		x int
+---	}
+---
+---A composite literal such as
+---
+---	t := T{U: U{x: 1}}
+---
+---would become
+---
+---	t := T{x: 1}
+---
+---```lua
+---default = true
+---```
+---@field embedlit? boolean
 ---report passing non-pointer or non-error values to errors.As
 ---
 ---The errorsas analyzer reports calls to errors.As where the type
 ---of the second argument is not a pointer to a type implementing error.
+---For example:
+---
+---	var unwrappedErr net.DNSError
+---	errors.As(err, unwrappedErr) // should use &unwrappedErr, DNSError.Error has a pointer reciever
+---
 ---
 ---```lua
 ---default = true
 ---```
 ---@field errorsas? boolean
----replace errors.As with errors.AsType[T]
+---Reports misuse of errors.AsType[T] in if/else chains.
+---For example:
 ---
----This analyzer suggests fixes to simplify uses of [errors.As] of
----this form:
----
----	var myerr *MyErr
----	if errors.As(err, &myerr) {
----		handle(myerr)
+---	err := f()
+---	if err, ok := errors.AsType[*FooErr](err); ok {
+---	    useFoo(err)
+---	} else if err, ok := errors.AsType[*BarErr](err); ok {
+---	    useBar(err)
 ---	}
 ---
----by using the less error-prone generic [errors.AsType] function,
----introduced in Go 1.26:
+---In this case, the second call to errors.AsType does not operate on the
+---original error. Instead, its operand is the zero value of type *FooErr
+---produced by the first if statement; this is invariably a mistake.
 ---
----	if myerr, ok := errors.AsType[*MyErr](err); ok {
----		handle(myerr)
----	}
----
----The fix is only offered if the var declaration has the form shown and
----there are no uses of myerr outside the if statement.
 ---
 ---```lua
 ---default = true
 ---```
 ---@field errorsastype? boolean
+---find structs that would use less memory if their fields were sorted
+---
+---This analyzer finds structs that can be rearranged to use less memory, and provides
+---a suggested edit with the most compact order.
+---
+---Note that there are two different diagnostics reported. One checks struct size,
+---and the other reports "pointer bytes" used. Pointer bytes is how many bytes of the
+---object that the garbage collector has to potentially scan for pointers, for example:
+---
+---	struct { uint32; string }
+---
+---have 16 pointer bytes because the garbage collector has to scan up through the string's
+---inner pointer.
+---
+---	struct { string; *uint32 }
+---
+---has 24 pointer bytes because it has to scan further through the *uint32.
+---
+---	struct { string; uint32 }
+---
+---has 8 because it can stop immediately after the string pointer.
+---
+---Be aware that the most compact order is not always the most efficient.
+---In rare cases it may cause two variables each updated by its own goroutine
+---to occupy the same CPU cache line, inducing a form of memory contention
+---known as "false sharing" that slows down both goroutines.
+---
+---Unlike most analyzers, which report likely mistakes, the diagnostics
+---produced by fieldanalyzer very rarely indicate a significant problem,
+---so the analyzer is not included in typical suites such as vet or
+---gopls. Use this standalone command to run it on your code:
+---
+---   $ go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest
+---   $ fieldalignment [packages]
+---
+---
+---@field fieldalignment? boolean
 ---suggest fixes for errors due to an incorrect number of return values
 ---
 ---This checker provides suggested fixes for type errors of the
@@ -3772,6 +3864,9 @@
 ---`fmt.Appendf(nil, ...)`. This avoids the intermediate allocation of a string
 ---by Sprintf, making the code more efficient. The suggestion also applies to
 ---fmt.Sprint and fmt.Sprintln.
+---
+---Since its fix is not a Pareto improvement, fmtappendf is disabled by default in
+---the `go fix` analyzer suite; see golang/go#77581.
 ---
 ---```lua
 ---default = true
@@ -4437,10 +4532,14 @@
 ---	reflect.TypeOf(uint32(0))        -> reflect.TypeFor[uint32]()
 ---	reflect.TypeOf((*ast.File)(nil)) -> reflect.TypeFor[*ast.File]()
 ---
----It also offers a fix to simplify the construction below, which uses
+---It also offers a fix to simplify the constructions below, which use
 ---reflect.TypeOf to return the runtime type for an interface type,
 ---
 ---	reflect.TypeOf((*io.Reader)(nil)).Elem()
+---
+---or:
+---
+---	reflect.TypeOf([]io.Reader(nil)).Elem()
 ---
 ---to:
 ---
@@ -4457,6 +4556,46 @@
 ---default = true
 ---```
 ---@field reflecttypefor? boolean
+---scannererr: report failure to check bufio.Scanner.Err
+---
+---This analyzer reports uses of bufio.Scanner in which the result of
+---NewScanner is assigned to a local variable that is then used in a loop
+---that calls Scanner.Scan, but lacks a final check of Scanner.Err,
+---which is how I/O errors are reported.
+---
+---For example:
+---
+---	sc := bufio.NewScanner(os.Stdin) // error: "bufio.Scanner sc is used in Scan loop without final check of sc.Err()"
+---	for sc.Scan() {
+---		line := sc.Text()
+---		use(line)
+---	}
+---	/* ...no use of sc.Err()... */
+---
+---To avoid false positives, the analyzer is silent if the scanner is
+---passed into or out of the function or assigned somewhere other than a
+---local variable.
+---
+---It is not this analyzer's goal to ensure proper handling of errors in
+---all cases, but merely the simple mistakes where the user may have been
+---oblivious to the existence of the Scanner.Err method.
+---
+---The analyzer ignores calls to bufio.NewScanner whose argument is an
+---infallible memory-backed io.Reader such as strings.Reader or bytes.Buffer.
+---(In such cases, Scan may yet fail if a token or line is too long for the
+---scanner's internal buffer, but this is rare.)
+---
+---If you know that errors are impossible for a given scanner, you can
+---suppress the diagnostic thus:
+---
+---	_ = sc.Err() // ignore error; neither reading nor scanning can fail
+---
+---
+---
+---```lua
+---default = true
+---```
+---@field scannererr? boolean
 ---check for possible unintended shadowing of variables
 ---
 ---This analyzer check for shadowed variables.
@@ -4741,14 +4880,37 @@
 ---
 ---This avoids quadratic memory allocation and improves performance.
 ---
----The analyzer requires that all references to s except the final one
+---No diagnostics are issued in tests, where data sizes are often
+---small and asymptotic performance is not a security concern.
+---
+---The analyzer requires that all references to s before the final uses
 ---are += operations. To avoid warning about trivial cases, at least one
 ---must appear within a loop. The variable s must be a local
 ---variable, not a global or parameter.
 ---
----The sole use of the finished string must be the last reference to the
----variable s. (It may appear within an intervening loop or function literal,
----since even s.String() is called repeatedly, it does not allocate memory.)
+---All uses of the finished string must come after the last += operation.
+---Each such use will be replaced by a call to strings.Builder's String method.
+---(These may appear within an intervening loop or function literal, since even
+---if s.String() is called repeatedly, it does not allocate memory.)
+---
+---Often the addend is a call to fmt.Sprintf, as in this example:
+---
+---	var s string
+---	for x := range seq {
+---		s += fmt.Sprintf("%v", x)
+---	}
+---
+---which, once the suggested fix is applied, becomes:
+---
+---	var s strings.Builder
+---	for x := range seq {
+---		s.WriteString(fmt.Sprintf("%v", x))
+---	}
+---
+---The WriteString call can be further simplified to the more efficient
+---fmt.Fprintf(&s, "%v", x), avoiding the allocation of an intermediary.
+---However, stringsbuilder does not perform this simplification;
+---it requires staticcheck analyzer QF1012. (See https://go.dev/issue/76918.)
 ---
 ---```lua
 ---default = true
@@ -4789,6 +4951,16 @@
 ---It also handles variants using [strings.IndexByte] instead of Index, or the bytes package instead of strings.
 ---
 ---Fixes are offered only in cases in which there are no potential modifications of the idx, s, or substr expressions between their definition and use.
+---
+---It also replaces [strings.SplitN](s, sep, 2)[0] and [strings.Split](s, sep)[0] with the "before" result of strings.Cut, when sep is a non-empty string constant:
+---
+---	x := strings.SplitN(s, sep, 2)[0]
+---
+---is replaced by:
+---
+---	x, _, _ := strings.Cut(s, sep)
+---
+---The fix is only offered when sep is a non-empty string literal. When sep is a variable or the empty string, the semantics differ (strings.Split(s, "")[0] returns the first character of s, but strings.Cut(s, "").before is ""), so no fix is suggested.
 ---
 ---```lua
 ---default = true
@@ -5098,9 +5270,38 @@
 ---default = true
 ---```
 ---@field unusedwrite? boolean
+---check for misuses of sync.WaitGroup
+---
+---This analyzer detects mistaken calls to the (*sync.WaitGroup).Add
+---method from inside a new goroutine, causing Add to race with Wait:
+---
+---	// WRONG
+---	var wg sync.WaitGroup
+---	go func() {
+---	        wg.Add(1) // "WaitGroup.Add called from inside new goroutine"
+---	        defer wg.Done()
+---	        ...
+---	}()
+---	wg.Wait() // (may return prematurely before new goroutine starts)
+---
+---The correct code calls Add before starting the goroutine:
+---
+---	// RIGHT
+---	var wg sync.WaitGroup
+---	wg.Add(1)
+---	go func() {
+---		defer wg.Done()
+---		...
+---	}()
+---	wg.Wait()
+---
+---```lua
+---default = true
+---```
+---@field waitgroup? boolean
 ---replace wg.Add(1)/go/wg.Done() with wg.Go
 ---
----The waitgroup analyzer simplifies goroutine management with `sync.WaitGroup`.
+---The waitgroupgo analyzer simplifies goroutine management with `sync.WaitGroup`.
 ---It replaces the common pattern
 ---
 ---	wg.Add(1)
@@ -5118,7 +5319,42 @@
 ---```lua
 ---default = true
 ---```
----@field waitgroup? boolean
+---@field waitgroupgo? boolean
+---detect inefficient string concatenation in uses of WriteString
+---
+---The writestring analyzer offers to replace a call to WriteString(x + y) by
+---two calls WriteString(x); WriteString(y). This is more efficient because it
+---avoids the additional memory allocation produced by string concatenation;
+---instead we just write each string into the buffer directly.
+---
+---It explicitly looks for calls to certain well-known writers such as
+---bytes.Buffer, strings.Builder and bufio.Writer. The analyzer will not suggest
+---a fix for calls to, say, (*os.File).WriteString, because for certain kinds of
+---file such as a UDP socket, it could split a single message into two.
+---Similarly it does not offer fixes when the type of the writer is unknown (as
+---in calls to io.WriteString).
+---
+---For example:
+---
+---	func f(a string, b string) string {
+---		 var s strings.Builder
+---		 s.WriteString(a+b)
+---		 return s.String()
+---	}
+---
+---would become:
+---
+---	func f(a string, b string) string {
+---		var s strings.Builder
+---		s.WriteString(a)
+---		s.WriteString(b)
+---		return s.String()
+---	}
+---
+---```lua
+---default = true
+---```
+---@field writestring? boolean
 ---report calls to yield where the result is ignored
 ---
 ---After a yield function returns false, the caller should not call
@@ -5319,6 +5555,18 @@
 ---default = ""
 ---```
 ---@field ["formatting.local"]? string
+---(Experimental) maxFileCacheBytes sets a soft limit on the file cache size in bytes.
+---If zero, the default budget is used.
+---
+---The cache may temporarily use more than this amount.
+---Also, this parameter limits file contents; disk block usage
+---as measured by du(1) may be significantly higher.
+---
+---
+---```lua
+---default = 0
+---```
+---@field maxFileCacheBytes? number
 ---codelenses overrides the enabled/disabled state of each of gopls'
 ---sources of [Code Lenses](codelenses.md).
 ---
@@ -5569,8 +5817,9 @@
 ---By default, all types are enabled.
 ---
 ---@field ["ui.semanticTokenTypes"]? table
----(Experimental) semanticTokens controls whether the LSP server will send
----semantic tokens to the client.
+---(Experimental) semanticTokens determines whether gopls will return a
+---SemanticTokensProvider at initialization, or respond
+---to request for semantic tokens.
 ---
 ---@field ["ui.semanticTokens"]? boolean
 ---(For Debugging) verboseOutput enables additional debug logging.

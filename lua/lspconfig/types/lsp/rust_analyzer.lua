@@ -436,6 +436,14 @@
 ---@field fuel? integer
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion
+---Automatically add `::` when completing the module.
+---
+---Will not be completed in `use`.
+---
+---```lua
+---default = true
+---```
+---@field addColonsToModule? boolean
 ---Automatically add a semicolon when completing unit-returning functions.
 ---
 ---In `match` arms it completes a comma instead.
