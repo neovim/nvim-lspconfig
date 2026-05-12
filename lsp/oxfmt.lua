@@ -10,6 +10,8 @@
 --- ```sh
 --- npm i -g oxfmt
 --- ```
+---
+--- It can also be used as a part of Vite+ through `fmt` field in `vite.config.ts`: https://github.com/oxc-project/oxc/pull/20197
 
 local util = require 'lspconfig.util'
 
@@ -53,8 +55,6 @@ return {
     -- the closest `.oxfmtrc.json` / `.oxfmtrc.jsonc` / `oxfmt.config.ts` (or `package.json` fallback) above the buffer.
     local root_markers = util.insert_package_json(
       { '.oxfmtrc.json', '.oxfmtrc.jsonc', 'oxfmt.config.ts' },
-      -- Oxfmt supports vite plus since https://github.com/oxc-project/oxc/pull/20197
-      -- Vite+ creates a shim for oxfmt bin, so we just need to discover that vite-plus is used in the project
       { 'oxfmt', 'vite%-plus' },
       fname
     )
