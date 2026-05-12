@@ -4091,13 +4091,18 @@ Default config:
 
 https://github.com/EmmyLuaLs/emmylua-analyzer-rust
 
-Emmylua Analyzer Rust. Language Server for Lua.
+EmmyluaLs, a language server for Lua.
 
-`emmylua_ls` can be installed using `cargo` by following the instructions[here]
-(https://github.com/EmmyLuaLs/emmylua-analyzer-rust?tab=readme-ov-file#install).
+`emmylua_ls` can be installed using `cargo` by following the [instructions](https://github.com/EmmyLuaLs/emmylua-analyzer-rust#install).
 
 The default `cmd` assumes that the `emmylua_ls` binary can be found in `$PATH`.
-It might require you to provide cargo binaries installation path in it.
+You may want to symlink to the cargo artifact:
+```
+ln -s $(pwd)/target/release/emmylua_ls ~/bin/emmylua_ls
+```
+
+See the emmylua_ls [configuration guide](https://github.com/EmmyLuaLs/emmylua-analyzer-rust/blob/main/docs/config/emmyrc_json_EN.md)
+for settings documentation.
 
 Snippet to enable the language server:
 ```lua
@@ -4115,7 +4120,18 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { ".luarc.json", ".emmyrc.json", ".luacheckrc", ".git" }
+  { { ".emmyrc.json", ".emmyrc.lua", ".luarc.json", ".luarc.jsonc" }, { ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml" }, { ".git" } }
+  ```
+- `settings` :
+  ```lua
+  {
+    codeLens = {
+      enable = true
+    },
+    hint = {
+      enable = true
+    }
+  }
   ```
 - `workspace_required` : `false`
 
@@ -7265,10 +7281,6 @@ vim.lsp.config('lua_ls', {
           vim.env.VIMRUNTIME,
           -- For LSP Settings Type Annotations: https://github.com/neovim/nvim-lspconfig#lsp-settings-type-annotations
           vim.api.nvim_get_runtime_file("lua/lspconfig", false)[1],
-          -- Depending on the usage, you might want to add additional paths
-          -- here.
-          -- '${3rd}/luv/library',
-          -- '${3rd}/busted/library',
         },
         -- Or pull in all of 'runtimepath'.
         -- NOTE: this is a lot slower and will cause issues when working on
