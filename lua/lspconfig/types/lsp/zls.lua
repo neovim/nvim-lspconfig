@@ -1,61 +1,55 @@
 ---@meta
 
----@class _.lspconfig.settings.zls.Zls.Trace
----Traces the communication between VS Code and the language server.
----
----```lua
----default = "off"
----```
----@field server? "off" | "messages" | "verbose"
-
 ---@class _.lspconfig.settings.zls.Zls
----Path to the `build_runner.zig` file provided by zls. null is equivalent to `${executable_directory}/build_runner.zig`
+---Specify which arguments should be passed to Zig when running build-on-save.
+---
+---If the `build.zig` has declared a 'check' step, it will be preferred over the default 'install' step.
+---
+---```lua
+---default = {}
+---```
+---@field build_on_save_args? string[]
+---Specify a custom build runner to resolve build system information.
 ---@field build_runner_path? string
----Path to 'builtin;' useful for debugging, automatically set if let null
+---Override the path to 'builtin' module. Automatically resolved if unset.
 ---@field builtin_path? string
----Whether to automatically check for new updates
+---Whether to show the function signature in completion results. May improve readability in some editors when disabled
 ---
 ---```lua
 ---default = true
 ---```
----@field check_for_update? boolean
----Enable debug logging in release builds of zls.
----@field debugLog? boolean
----Whether to enable ast-check diagnostics
+---@field completion_label_details? boolean
+---Whether to enable function argument placeholder completions
 ---
 ---```lua
 ---default = true
 ---```
----@field enable_ast_check_diagnostics? boolean
----Whether to automatically fix errors on save. Currently supports adding and removing discards.
----@field enable_autofix? boolean
----Whether to enable import/embedFile argument completions
----@field enable_import_embedfile_argument_completions? boolean
----Enables inlay hint support when the client also supports it
----@field enable_inlay_hints? boolean
----Enables semantic token support when the client also supports it
+---@field enable_argument_placeholders? boolean
+---Whether to enable build-on-save diagnostics. Will be automatically enabled if the `build.zig` has declared a 'check' step.
 ---
----```lua
----default = true
----```
----@field enable_semantic_tokens? boolean
+---For more infromation, checkout the [Build-On-Save](https://zigtools.org/zls/guides/build-on-save/) Guide.
+---@field enable_build_on_save? boolean
 ---Enables snippet completions when the client also supports them
+---
+---```lua
+---default = true
+---```
 ---@field enable_snippets? boolean
----Path to a directroy that will be used as zig's cache. null is equivalent to `${KnownFloders.Cache}/zls`
+---Work around editors that do not support 'source.fixall' code actions on save. This option may delivered a substandard user experience. Please refer to the installation guide to see which editors natively support code actions on save.
+---@field force_autofix? boolean
+---Path to a directory that will be used as zig's cache. Will default to `${KnownFolders.Cache}/zls`.
 ---@field global_cache_path? string
 ---Whether to highlight global var declarations
 ---@field highlight_global_var_declarations? boolean
----Whether the @ sign should be part of the completion of builtins
----@field include_at_in_builtins? boolean
 ---Don't show inlay hints for single argument calls
 ---
 ---```lua
 ---default = true
 ---```
 ---@field inlay_hints_exclude_single_argument? boolean
----Hides inlay hints when parameter name matches the identifier (e.g. foo: foo)
+---Hides inlay hints when parameter name matches the identifier (e.g. `foo: foo`)
 ---@field inlay_hints_hide_redundant_param_names? boolean
----Hides inlay hints when parameter name matches the last token of a parameter node (e.g. foo: bar.foo, foo: &foo)
+---Hides inlay hints when parameter name matches the last token of a parameter node (e.g. `foo: bar.foo`, `foo: &foo`)
 ---@field inlay_hints_hide_redundant_param_names_last_token? boolean
 ---Enable inlay hints for builtin functions
 ---
@@ -63,30 +57,43 @@
 ---default = true
 ---```
 ---@field inlay_hints_show_builtin? boolean
----The detail field of completions is truncated to be no longer than this (in bytes)
----
----```lua
----default = 1048576
----```
----@field max_detail_length? integer
----Enables `*` and `?` operators in completion lists
+---Enable inlay hints for parameter names
 ---
 ---```lua
 ---default = true
 ---```
----@field operator_completions? boolean
----Path to `zls` executable. Example: `C:/zls/zig-cache/bin/zls.exe`.
----@field path? string
----When true, skips searching for references in std. Improves lookup speed for functions in user's code. Renaming and go-to-definition will continue to work as is
+---@field inlay_hints_show_parameter_name? boolean
+---Enable inlay hints for fields in struct and union literals
+---
+---```lua
+---default = true
+---```
+---@field inlay_hints_show_struct_literal_field_type? boolean
+---Enable inlay hints for variable types
+---
+---```lua
+---default = true
+---```
+---@field inlay_hints_show_variable_type_hints? boolean
+---Favor using `zig ast-check` instead of the builtin one
+---
+---```lua
+---default = true
+---```
+---@field prefer_ast_check_as_child_process? boolean
+---Set level of semantic tokens. `partial` only includes information that requires semantic analysis.
+---
+---```lua
+---default = "full"
+---```
+---@field semantic_tokens? "none" | "partial" | "full"
+---No longer used. May be brought back to configure how symbol references in the standard library should behave
 ---@field skip_std_references? boolean
----@field trace? _.lspconfig.settings.zls.Zls.Trace
----Whether to use the comptime interpreter
----@field use_comptime_interpreter? boolean
 ---Enables warnings for style guideline mismatches
 ---@field warn_style? boolean
----Zig executable path, e.g. `/path/to/zig/zig`, used to run the custom build runner. If `null`, zig is looked up in `PATH`. Will be used to infer the zig standard library path if none is provided
+---Specify the path to the Zig executable (not the directory). If unset, zig is looked up in `PATH`. e.g. `/path/to/zig-templeos-armless-1.0.0/zig`.
 ---@field zig_exe_path? string
----Zig library path, e.g. `/path/to/zig/lib/zig`, used to analyze std library imports
+---Override the Zig library path. Will be automatically resolved using the 'zig_exe_path'.
 ---@field zig_lib_path? string
 
 ---@class lspconfig.settings.zls

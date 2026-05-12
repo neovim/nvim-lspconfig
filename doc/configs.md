@@ -66,6 +66,7 @@ Nvim by running `:help lspconfig-all`.
 - [csskit](#csskit)
 - [cssls](#cssls)
 - [cssmodules_ls](#cssmodules_ls)
+- [ctags_lsp](#ctags_lsp)
 - [cucumber_language_server](#cucumber_language_server)
 - [cue](#cue)
 - [custom_elements_ls](#custom_elements_ls)
@@ -77,6 +78,7 @@ Nvim by running `:help lspconfig-all`.
 - [dcmls](#dcmls)
 - [debputy](#debputy)
 - [denols](#denols)
+- [dexter](#dexter)
 - [dhall_lsp_server](#dhall_lsp_server)
 - [diagnosticls](#diagnosticls)
 - [digestif](#digestif)
@@ -227,6 +229,7 @@ Nvim by running `:help lspconfig-all`.
 - [oxfmt](#oxfmt)
 - [oxlint](#oxlint)
 - [pact_ls](#pact_ls)
+- [panache](#panache)
 - [pasls](#pasls)
 - [pbls](#pbls)
 - [perlls](#perlls)
@@ -235,6 +238,7 @@ Nvim by running `:help lspconfig-all`.
 - [pest_ls](#pest_ls)
 - [phan](#phan)
 - [phpactor](#phpactor)
+- [phpantom_lsp](#phpantom_lsp)
 - [phptools](#phptools)
 - [pico8_ls](#pico8_ls)
 - [please](#please)
@@ -304,6 +308,7 @@ Nvim by running `:help lspconfig-all`.
 - [somesass_ls](#somesass_ls)
 - [sorbet](#sorbet)
 - [sourcekit](#sourcekit)
+- [spade_ls](#spade_ls)
 - [spectral](#spectral)
 - [spyglassmc_language_server](#spyglassmc_language_server)
 - [sqlls](#sqlls)
@@ -2793,6 +2798,46 @@ Default config:
 
 ---
 
+## ctags_lsp
+
+https://github.com/netmute/ctags-lsp
+
+A simple LSP server wrapping universal-ctags. Provides completion,
+go-to-definition, and document/workspace symbols. Useful as a generic
+symbol provider for languages without a dedicated language server, or
+as a fallback alongside other LSPs.
+
+Requires `universal-ctags` to be installed and available in `$PATH`.
+Pre-built binaries are at https://github.com/netmute/ctags-lsp/releases
+(Homebrew: `brew install netmute/tap/ctags-lsp`).
+
+The server is generic and does not declare default `filetypes`. Configure
+the languages you want it to attach to:
+
+```lua
+vim.lsp.config('ctags_lsp', {
+  filetypes = { 'lua', 'ruby', 'go' },
+})
+vim.lsp.enable('ctags_lsp')
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('ctags_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "ctags-lsp" }
+  ```
+- `root_markers` :
+  ```lua
+  { "tags", ".tags", ".git" }
+  ```
+
+---
+
 ## cucumber_language_server
 
 https://cucumber.io
@@ -3217,6 +3262,78 @@ Default config:
       }
     }
   }
+  ```
+
+---
+
+## dexter
+
+https://github.com/remoteoss/dexter
+
+`dexter` is a fast, full-featured Elixir LSP optimized for large codebases.
+
+`dexter` can be installed via Homebrew, mise, or asdf:
+
+Via Homebrew:
+```sh
+brew install remoteoss/tap/dexter
+```
+
+Via mise:
+```sh
+mise plugin add dexter https://github.com/remoteoss/dexter.git
+mise install dexter
+```
+
+Via asdf:
+```sh
+asdf plugin add dexter https://github.com/remoteoss/dexter.git
+asdf install dexter latest
+```
+
+`dexter` works without compilation by parsing source files directly, providing:
+- Fast indexing (cold index in ~11s on 57k-file codebases)
+- Go-to-definition with alias and delegate resolution
+- Find references across the codebase
+- Hover documentation and autocompletion
+- Rename functionality with automatic file renaming
+- Format on save via persistent Elixir process
+
+Configuration example:
+```lua
+vim.lsp.config('dexter', {
+  init_options = {
+    followDelegates = true,  -- jump through defdelegate to the target function
+    -- stdlibPath = "",      -- override Elixir stdlib path (auto-detected)
+    -- debug = false,        -- verbose logging to stderr (view with :LspLog)
+  },
+})
+vim.lsp.enable('dexter')
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('dexter')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "dexter", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "elixir", "eelixir", "heex" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    followDelegates = true
+  }
+  ```
+- `root_markers` :
+  ```lua
+  { ".dexter/dexter.db", ".dexter.db", ".git", "mix.exs" }
   ```
 
 ---
@@ -3974,13 +4091,18 @@ Default config:
 
 https://github.com/EmmyLuaLs/emmylua-analyzer-rust
 
-Emmylua Analyzer Rust. Language Server for Lua.
+EmmyluaLs, a language server for Lua.
 
-`emmylua_ls` can be installed using `cargo` by following the instructions[here]
-(https://github.com/EmmyLuaLs/emmylua-analyzer-rust?tab=readme-ov-file#install).
+`emmylua_ls` can be installed using `cargo` by following the [instructions](https://github.com/EmmyLuaLs/emmylua-analyzer-rust#install).
 
 The default `cmd` assumes that the `emmylua_ls` binary can be found in `$PATH`.
-It might require you to provide cargo binaries installation path in it.
+You may want to symlink to the cargo artifact:
+```
+ln -s $(pwd)/target/release/emmylua_ls ~/bin/emmylua_ls
+```
+
+See the emmylua_ls [configuration guide](https://github.com/EmmyLuaLs/emmylua-analyzer-rust/blob/main/docs/config/emmyrc_json_EN.md)
+for settings documentation.
 
 Snippet to enable the language server:
 ```lua
@@ -3998,7 +4120,18 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { ".luarc.json", ".emmyrc.json", ".luacheckrc", ".git" }
+  { { ".emmyrc.json", ".emmyrc.lua", ".luarc.json", ".luarc.jsonc" }, { ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml" }, { ".git" } }
+  ```
+- `settings` :
+  ```lua
+  {
+    codeLens = {
+      enable = true
+    },
+    hint = {
+      enable = true
+    }
+  }
   ```
 - `workspace_required` : `false`
 
@@ -4062,7 +4195,7 @@ Or you can modify the default `cmd` to include the full path to the Python inter
 
 ```lua
 vim.lsp.config('esbonio', {
-  cmd = { '/path/to/virtualenv/bin/python', '-m', 'esbonio' }
+  cmd = { '/path/to/virtualenv/bin/python', '-m', 'esbonio.server' }
 })
 ```
 
@@ -4091,7 +4224,7 @@ vim.lsp.enable('esbonio')
 Default config:
 - `cmd` :
   ```lua
-  { "python3", "-m", "esbonio" }
+  { "python3", "-m", "esbonio.server" }
   ```
 - `filetypes` :
   ```lua
@@ -4225,7 +4358,7 @@ Default config:
 
 ## expert
 
-https://github.com/elixir-lang/expert
+https://github.com/expert-lsp/expert
 
 Expert is the official language server implementation for the Elixir programming language.
 
@@ -6758,7 +6891,7 @@ vim.lsp.enable('kotlin_lsp')
 Default config:
 - `cmd` :
   ```lua
-  { "kotlin-lsp", "--stdio" }
+  { "intellij-server", "--stdio" }
   ```
 - `filetypes` :
   ```lua
@@ -7146,10 +7279,8 @@ vim.lsp.config('lua_ls', {
         checkThirdParty = false,
         library = {
           vim.env.VIMRUNTIME,
-          -- Depending on the usage, you might want to add additional paths
-          -- here.
-          -- '${3rd}/luv/library',
-          -- '${3rd}/busted/library',
+          -- For LSP Settings Type Annotations: https://github.com/neovim/nvim-lspconfig#lsp-settings-type-annotations
+          vim.api.nvim_get_runtime_file("lua/lspconfig", false)[1],
         },
         -- Or pull in all of 'runtimepath'.
         -- NOTE: this is a lot slower and will cause issues when working on
@@ -8822,6 +8953,39 @@ Default config:
 
 ---
 
+## panache
+
+https://github.com/jolars/panache
+
+A language server, formatter, and linter for Markdown, Quarto, and R Markdown,
+built in Rust with a lossless CST parser and support for external formatters
+and linters on code blocks.
+
+Install via `cargo install panache`, from the [releases page](https://github.com/jolars/panache/releases),
+or via your system package manager (`nixpkgs`, AUR, `pipx install panache-cli`,
+`npm install -g @panache-cli/panache`).
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('panache')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "panache", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "markdown", "quarto", "rmd" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".panache.toml", "panache.toml", "_quarto.yml", "_bookdown.yml", ".git" }
+  ```
+
+---
+
 ## pasls
 
 https://github.com/genericptr/pascal-language-server
@@ -9093,6 +9257,33 @@ Default config:
   { ".git", "composer.json", ".phpactor.json", ".phpactor.yml" }
   ```
 - `workspace_required` : `true`
+
+---
+
+## phpantom_lsp
+
+https://github.com/AJenbo/phpantom_lsp
+
+Installation: https://github.com/AJenbo/phpantom_lsp/blob/main/docs/SETUP.md
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('phpantom_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "phpantom_lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "php" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".phpantom.toml", ".git", "composer.json" }
+  ```
 
 ---
 
@@ -11790,6 +11981,39 @@ Default config:
   ```
 - `get_language_id`: [../lsp/sourcekit.lua:10](../lsp/sourcekit.lua#L10)
 - `root_dir`: [../lsp/sourcekit.lua:10](../lsp/sourcekit.lua#L10)
+
+---
+
+## spade_ls
+
+https://gitlab.com/spade-lang/spade/-/tree/main/spade-language-server
+
+Spade language server.
+
+`spade-language-server` can be installed by following the instructions
+[here](https://docs.spade-lang.org/typst/editor_setup.html)
+
+The default `cmd` assumes that `spade-language-server` binary can be
+found in `$PATH`.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('spade_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "spade-language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "spade" }
+  ```
+- `root_markers` :
+  ```lua
+  { "swim.toml" }
+  ```
 
 ---
 

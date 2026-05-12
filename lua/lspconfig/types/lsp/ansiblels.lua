@@ -1,0 +1,230 @@
+---@meta
+
+---@class _.lspconfig.settings.ansiblels.Ansible.Ansible
+---Path to the ansible executable. All subcommands are expected to have adjacent locations.
+---
+---```lua
+---default = "ansible"
+---```
+---@field path? string
+---Enabling this will cause ansible commands run through VS Code to reuse the same Ansible Terminal.
+---@field reuseTerminal? boolean
+---Always use fully qualified collection names (FQCN) when inserting a module name. Disabling it will only use FQCNs when necessary.
+---
+---```lua
+---default = true
+---```
+---@field useFullyQualifiedCollectionNames? boolean
+
+---@class _.lspconfig.settings.ansiblels.Ansible.AnsibleNavigator
+---%configuration.navigate.executablePath%
+---
+---```lua
+---default = "ansible-navigator"
+---```
+---@field path? string
+
+---@class _.lspconfig.settings.ansiblels.Ansible.Completion
+---Toggle alias provider when completing module options.
+---
+---```lua
+---default = true
+---```
+---@field provideModuleOptionAliases? boolean
+---Toggle redirected module provider when completing modules.
+---
+---```lua
+---default = true
+---```
+---@field provideRedirectModules? boolean
+
+---@class _.lspconfig.settings.ansiblels.Ansible.ExecutionEnvironment.Pull
+---Specify any additional parameters that should be added to the pull command when pulling an execution environment from a container registry. e.g. `–-tls-verify=false`.
+---
+---```lua
+---default = ""
+---```
+---@field arguments? string
+---Specify the image pull policy.
+---**always**: Always pull the image when extension is activated or reloaded
+---**missing**: Pull if not locally available
+---**never**: Never pull the image
+---**tag**: If the image tag is `latest`, always pull the image, otherwise pull if not locally available.
+---
+---```lua
+---default = "missing"
+---```
+---@field policy? "always" | "missing" | "never" | "tag"
+
+---@class _.lspconfig.settings.ansiblels.Ansible.ExecutionEnvironment
+---Specify the container engine (auto=podman then docker).
+---
+---```lua
+---default = "auto"
+---```
+---@field containerEngine? "auto" | "podman" | "docker"
+---Extra parameters passed to the container engine command example: `--net=host`.
+---
+---```lua
+---default = ""
+---```
+---@field containerOptions? string
+---Enable or disable the use of an execution environment.
+---@field enabled? boolean
+---Specify the name of the execution environment image.
+---
+---```lua
+---default = "ghcr.io/ansible/community-ansible-dev-tools:latest"
+---```
+---@field image? string
+---@field pull? _.lspconfig.settings.ansiblels.Ansible.ExecutionEnvironment.Pull
+---Add a dictionary entry to the array with the volume mount source path (key: 'src'), destination (key: 'dest'), and options (key: 'options')
+---
+---```lua
+---default = {}
+---```
+---@field volumeMounts? any[]
+
+---@class _.lspconfig.settings.ansiblels.Ansible.Lightspeed.Suggestions
+---Enable inline suggestions. Note: Currently only supported with WCA provider.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Delay (in msecs) prior to sending an inline suggestion request.
+---
+---```lua
+---default = 0
+---```
+---@field waitWindow? number
+
+---@class _.lspconfig.settings.ansiblels.Ansible.Lightspeed
+---API endpoint URL for the selected provider.
+---
+---```lua
+---default = ""
+---```
+---@field apiEndpoint? string
+---API key for authentication.
+---
+---```lua
+---default = ""
+---```
+---@field apiKey? string
+---Enable Ansible Lightspeed.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Model name/ID to use.
+---
+---```lua
+---default = ""
+---```
+---@field modelName? string
+---LLM provider to use.
+---
+---```lua
+---default = "wca"
+---```
+---@field provider? "wca" | "google"
+---@field suggestions? _.lspconfig.settings.ansiblels.Ansible.Lightspeed.Suggestions
+---Request timeout in milliseconds for API calls.
+---
+---```lua
+---default = 30000
+---```
+---@field timeout? number
+
+---@class _.lspconfig.settings.ansiblels.Ansible.McpServer
+---Enable the Ansible Development Tools MCP (Model Context Protocol) server for AI assistant integration.
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.ansiblels.Ansible.Playbook
+---%configuration.playbook.arguments%
+---
+---```lua
+---default = ""
+---```
+---@field arguments? string
+
+---@class _.lspconfig.settings.ansiblels.Ansible.Python
+---Path to the virtual environment activation script. Use only if you have a custom activation script. It will be sourced using bash before executing Ansible commands. When set, the Interpreter Path setting is ignored.
+---
+---```lua
+---default = ""
+---```
+---@field activationScript? string
+---Path to the Python interpreter executable. Particularly important if you are using a Python virtual environment. Leave blank to use Python from PATH.
+---
+---```lua
+---default = ""
+---```
+---@field interpreterPath? string
+
+---@class _.lspconfig.settings.ansiblels.Ansible.Validation.Lint
+---Command line arguments to be passed to ansible-lint.
+---
+---```lua
+---default = ""
+---```
+---@field arguments? string
+---Specifies whether `ansible-lint --fix` should run automatically when you save a file. [Learn more](https://ansible.readthedocs.io/projects/lint/autofix/)
+---@field autoFixOnSave? boolean
+---Enables `ansible-lint`. If disabled only `ansible-playbook --syntax-check` will run. Requires `#ansible.validation.enabled#` to be enabled.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Path to the ansible-lint executable.
+---
+---```lua
+---default = "ansible-lint"
+---```
+---@field path? string
+
+---@class _.lspconfig.settings.ansiblels.Ansible.Validation
+---If disabled no validation will be performed.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---@field lint? _.lspconfig.settings.ansiblels.Ansible.Validation.Lint
+
+---@class _.lspconfig.settings.ansiblels.Ansible
+---@field ansible? _.lspconfig.settings.ansiblels.Ansible.Ansible
+---@field ansibleNavigator? _.lspconfig.settings.ansiblels.Ansible.AnsibleNavigator
+---@field completion? _.lspconfig.settings.ansiblels.Ansible.Completion
+---@field executionEnvironment? _.lspconfig.settings.ansiblels.Ansible.ExecutionEnvironment
+---@field lightspeed? _.lspconfig.settings.ansiblels.Ansible.Lightspeed
+---@field mcpServer? _.lspconfig.settings.ansiblels.Ansible.McpServer
+---@field playbook? _.lspconfig.settings.ansiblels.Ansible.Playbook
+---@field python? _.lspconfig.settings.ansiblels.Ansible.Python
+---@field validation? _.lspconfig.settings.ansiblels.Ansible.Validation
+
+---@class _.lspconfig.settings.ansiblels.AnsibleServer.Trace
+---Traces the communication between editor and the ansible language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.ansiblels.AnsibleServer
+---@field trace? _.lspconfig.settings.ansiblels.AnsibleServer.Trace
+
+---@class _.lspconfig.settings.ansiblels.Redhat.Telemetry
+---Enable usage data and errors to be sent to Red Hat servers. Read our [privacy statement](https://developers.redhat.com/article/tool-data-collection).
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.ansiblels.Redhat
+---@field telemetry? _.lspconfig.settings.ansiblels.Redhat.Telemetry
+
+---@class lspconfig.settings.ansiblels
+---@field ansible? _.lspconfig.settings.ansiblels.Ansible
+---@field ansibleServer? _.lspconfig.settings.ansiblels.AnsibleServer
+---@field redhat? _.lspconfig.settings.ansiblels.Redhat

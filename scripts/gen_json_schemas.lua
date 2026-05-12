@@ -1,7 +1,8 @@
 -- modified from https://gist.githubusercontent.com/williamboman/a01c3ce1884d4b57cc93422e7eae7702/raw/lsp-packages.json
 local index = {
-  -- nickel_ls = "https://raw.githubusercontent.com/tweag/nickel/master/lsp/client-extension/package.json",
   ada_ls = 'https://raw.githubusercontent.com/AdaCore/ada_language_server/master/integration/vscode/ada/package.json',
+  angularls = 'https://raw.githubusercontent.com/angular/angular/main/vscode-ng-language-service/package.json',
+  ansiblels = 'https://raw.githubusercontent.com/ansible/vscode-ansible/main/package.json',
   astro = 'https://raw.githubusercontent.com/withastro/language-tools/main/packages/vscode/package.json',
   awk_ls = 'https://raw.githubusercontent.com/Beaglefoot/awk-language-server/master/client/package.json',
   basedpyright = 'https://raw.githubusercontent.com/DetachHead/basedpyright/main/packages/vscode-pyright/package.json',
@@ -15,6 +16,7 @@ local index = {
   eslint = 'https://raw.githubusercontent.com/microsoft/vscode-eslint/main/package.json',
   flow = 'https://raw.githubusercontent.com/flowtype/flow-for-vscode/master/package.json',
   fsautocomplete = 'https://raw.githubusercontent.com/ionide/ionide-vscode-fsharp/main/release/package.json',
+  gopls = 'https://raw.githubusercontent.com/golang/vscode-go/refs/heads/master/extension/package.json',
   grammarly = 'https://raw.githubusercontent.com/znck/grammarly/main/extension/package.json',
   hhvm = 'https://raw.githubusercontent.com/slackhq/vscode-hack/master/package.json',
   hie = 'https://raw.githubusercontent.com/alanz/vscode-hie-server/master/package.json',
@@ -28,6 +30,9 @@ local index = {
   ltex = 'https://raw.githubusercontent.com/valentjn/vscode-ltex/develop/package.json',
   lua_ls = 'https://raw.githubusercontent.com/LuaLS/vscode-lua/master/package.json',
   luau_lsp = 'https://raw.githubusercontent.com/JohnnyMorganz/luau-lsp/main/editors/code/package.json',
+  nickel_ls = 'https://raw.githubusercontent.com/nickel-lang/nickel/master/lsp/vscode-extension/package.json',
+  nil_ls = 'https://raw.githubusercontent.com/oxalica/nil/main/editors/coc-nil/package.json',
+  nixd = 'https://raw.githubusercontent.com/nix-community/nixd/main/nixd/docs/nixd-schema.json',
   omnisharp = 'https://raw.githubusercontent.com/OmniSharp/omnisharp-vscode/master/package.json',
   perlls = 'https://raw.githubusercontent.com/richterger/Perl-LanguageServer/master/clients/vscode/perl/package.json',
   perlnavigator = 'https://raw.githubusercontent.com/bscan/PerlNavigator/main/package.json',
@@ -42,6 +47,8 @@ local index = {
   rescriptls = 'https://raw.githubusercontent.com/rescript-lang/rescript-vscode/master/package.json',
   rls = 'https://raw.githubusercontent.com/rust-lang/vscode-rust/master/package.json',
   rome = 'https://raw.githubusercontent.com/rome/tools/main/editors/vscode/package.json',
+  ruby_lsp = 'https://raw.githubusercontent.com/Shopify/ruby-lsp/main/vscode/package.json',
+  ruff = 'https://raw.githubusercontent.com/astral-sh/ruff/main/ruff.schema.json',
   ruff_lsp = 'https://raw.githubusercontent.com/astral-sh/ruff-vscode/main/package.json',
   rust_analyzer = 'https://raw.githubusercontent.com/rust-analyzer/rust-analyzer/master/editors/code/package.json',
   solargraph = 'https://raw.githubusercontent.com/castwide/vscode-solargraph/master/package.json',
@@ -49,7 +56,9 @@ local index = {
   sorbet = 'https://raw.githubusercontent.com/sorbet/sorbet/master/vscode_extension/package.json',
   sourcekit = 'https://raw.githubusercontent.com/swift-server/vscode-swift/main/package.json',
   spectral = 'https://raw.githubusercontent.com/stoplightio/vscode-spectral/master/package.json',
+  sqlls = 'https://raw.githubusercontent.com/joe-re/sql-language-server/release/package.json',
   stylelint_lsp = 'https://raw.githubusercontent.com/stylelint/vscode-stylelint/main/package.json',
+  stylua = 'https://raw.githubusercontent.com/JohnnyMorganz/StyLua/main/stylua-vscode/package.json',
   svelte = 'https://raw.githubusercontent.com/sveltejs/language-tools/master/packages/svelte-vscode/package.json',
   svlangserver = 'https://raw.githubusercontent.com/eirikpre/VSCode-SystemVerilog/master/package.json',
   tailwindcss = 'https://raw.githubusercontent.com/tailwindlabs/tailwindcss-intellisense/master/packages/vscode-tailwindcss/package.json',
@@ -61,7 +70,7 @@ local index = {
   vtsls = 'https://raw.githubusercontent.com/yioneko/vtsls/main/packages/service/configuration.schema.json',
   vue_ls = 'https://raw.githubusercontent.com/vuejs/vetur/master/package.json',
   yamlls = 'https://raw.githubusercontent.com/redhat-developer/vscode-yaml/master/package.json',
-  zls = 'https://raw.githubusercontent.com/zigtools/zls-vscode/master/package.json',
+  zls = 'https://raw.githubusercontent.com/zigtools/zls/master/schema.json',
 }
 
 ---@param url string
@@ -96,8 +105,13 @@ end
 ---@field package_url string url of the package.json of the LSP server
 ---@field settings_file string file of the settings json schema of the LSP server
 ---@field translate? boolean
+---@field prefix? string Prepend this string to each schema property.
 
---- @type table<string, LspSchema>
+---@class LspSchemaOverrides : LspSchema
+---@field package_url? string
+---@field settings_file? boolean
+
+--- @type table<string, LspSchemaOverrides>
 local overrides = {
   lua_ls = {
     translate = true,
@@ -116,6 +130,12 @@ local overrides = {
   },
   cssls = {
     translate = true,
+  },
+  nixd = {
+    prefix = 'nixd.',
+  },
+  zls = {
+    prefix = 'zls.',
   },
 }
 
@@ -203,6 +223,17 @@ local function generate_server_schema(schema)
     end
   elseif config_schema.properties then
     properties = config_schema.properties
+  end
+
+  -- `properties["enable_snippets"]` => `properties["zls.enable_snippets"]`
+  if schema.prefix then
+    if type(properties) == 'table' then
+      local new = vim.empty_dict()
+      for key, value in pairs(properties) do
+        new[schema.prefix .. key] = value
+      end
+      properties = new
+    end
   end
 
   local schema_json = {

@@ -23,7 +23,7 @@ jobs:
           neovim: true
           version: ${{ matrix.nvim_version }}
 
-      - uses: leafo/gh-actions-lua@v12
+      - uses: leafo/gh-actions-lua@v13
         with:
           luaVersion: "luajit-openresty"
       - uses: leafo/gh-actions-luarocks@v6

@@ -1,6 +1,6 @@
 ---@brief
 ---
---- https://github.com/elixir-lang/expert
+--- https://github.com/expert-lsp/expert
 ---
 --- Expert is the official language server implementation for the Elixir programming language.
 ---
