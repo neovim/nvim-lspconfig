@@ -143,7 +143,7 @@ To create a new config, see |lsp-config| (requires Nvim 0.11+).
 To contribute a config to nvim-lspconfig, see ../CONTRIBUTING.md.
 
 ==============================================================================
-SETTINGS TYPES                                        lspconfig-settings-types
+SETTINGS TYPES                                        *lspconfig-settings-types*
 
 `nvim-lspconfig` generates Lua type definitions for each supported LSP server.
 By manually adding annotations (e.g., `---@type lspconfig.settings.server_name`),
