@@ -141,6 +141,7 @@ Nvim by running `:help lspconfig-all`.
 - [graphql](#graphql)
 - [groovyls](#groovyls)
 - [guile_ls](#guile_ls)
+- [hare_lsp](#hare_lsp)
 - [harper_ls](#harper_ls)
 - [hdl_checker](#hdl_checker)
 - [helm_ls](#helm_ls)
@@ -5707,6 +5708,34 @@ Default config:
   ```lua
   { "guix.scm", ".git" }
   ```
+
+---
+
+## hare_lsp
+
+https://sr.ht/~whynothugo/hare-lsp/
+
+Language server for hare.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('hare_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "hare-lsp", "-S" }
+  ```
+- `filetypes` :
+  ```lua
+  { "hare" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".git" }
+  ```
+- `workspace_required` : `false`
 
 ---
 

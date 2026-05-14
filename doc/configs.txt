@@ -4110,6 +4110,27 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+hare_lsp
+
+https://sr.ht/~whynothugo/hare-lsp/
+
+Language server for hare.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('hare_lsp')
+
+
+Default config:
+- cmd: >lua
+  { "hare-lsp", "-S" }
+- filetypes: >lua
+  { "hare" }
+- root_markers: >lua
+  { ".git" }
+- `workspace_required` : `false`
+<
+
+------------------------------------------------------------------------------
 harper_ls
 
 https://github.com/automattic/harper
