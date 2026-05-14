@@ -14,7 +14,7 @@
 ---
 --- See the emmylua_ls [configuration guide](https://github.com/EmmyLuaLs/emmylua-analyzer-rust/blob/main/docs/config/emmyrc_json_EN.md)
 --- for settings documentation.
-
+---
 --- If you want completions and analysis for Neovim plugins on your runtime path, try this config:
 ---
 --- ```lua
