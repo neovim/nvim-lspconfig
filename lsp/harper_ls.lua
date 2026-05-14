@@ -37,6 +37,7 @@ return {
     'ruby',
     'rust',
     'swift',
+    'tex',
     'toml',
     'typescript',
     'typescriptreact',
