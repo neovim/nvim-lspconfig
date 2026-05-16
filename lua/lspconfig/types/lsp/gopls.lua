@@ -5537,6 +5537,21 @@
 ---default = {}
 ---```
 ---@field ["build.workspaceFiles"]? any[]
+---(Experimental) fileWatcher specifies the server-side file watching strategy used by gopls.
+---
+---By default, this is set to "off", meaning gopls relies exclusively on the
+---language client (e.g., the editor) to send file change notifications.
+---
+---Available options:
+---  - "off"      : Client-driven watching (default)
+---  - "fsnotify" : OS-level event notifications
+---  - "poll"     : Periodic directory scanning
+---
+---
+---```lua
+---default = "off"
+---```
+---@field fileWatcher? "fsnotify" | "off" | "poll"
 ---gofumpt indicates if we should run gofumpt formatting.
 ---
 ---@field ["formatting.gofumpt"]? boolean
