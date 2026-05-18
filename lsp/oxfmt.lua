@@ -10,6 +10,8 @@
 --- ```sh
 --- npm i -g oxfmt
 --- ```
+---
+--- or used as a part of Vite+ through `fmt` field in `vite.config.ts`: https://github.com/oxc-project/oxc/pull/20197
 
 local util = require 'lspconfig.util'
 
@@ -51,8 +53,12 @@ return {
     -- Oxfmt resolves configuration by walking upward and using the nearest config file
     -- to the file being processed. We therefore compute the root directory by locating
     -- the closest `.oxfmtrc.json` / `.oxfmtrc.jsonc` / `oxfmt.config.ts` (or `package.json` fallback) above the buffer.
-    local root_markers =
-      util.insert_package_json({ '.oxfmtrc.json', '.oxfmtrc.jsonc', 'oxfmt.config.ts' }, 'oxfmt', fname)
+    local root_markers = util.insert_package_json(
+      { '.oxfmtrc.json', '.oxfmtrc.jsonc', 'oxfmt.config.ts' },
+      { 'oxfmt', 'vite%-plus' },
+      fname
+    )
+    root_markers = util.root_markers_with_field(root_markers, { 'vite.config.ts' }, 'vite%-plus', fname)
     on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
   end,
 }

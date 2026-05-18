@@ -11,12 +11,15 @@
 --- npm i -g oxlint
 --- ```
 ---
+--- or used as a part of Vite+ through `lint` field in vite.config.ts: https://github.com/oxc-project/oxc/pull/20214
+---
 --- Type-aware linting will automatically be enabled if `tsgolint` exists in your
 --- path and your `.oxlintrc.json` contains the string "typescript".
 ---
 --- The default `on_attach` function provides an `:LspOxlintFixAll` command which
 --- can be used to fix all fixable diagnostics. See the `eslint` config entry for
 --- an example of how to use this to automatically fix all errors on write.
+local util = require 'lspconfig.util'
 
 local function oxlint_conf_mentions_typescript(root_dir)
   local fn = vim.fs.joinpath(root_dir, '.oxlintrc.json')
@@ -49,7 +52,17 @@ return {
     'svelte',
     'astro',
   },
-  root_markers = { '.oxlintrc.json', '.oxlintrc.jsonc', 'oxlint.config.ts' },
+  root_dir = function(bufnr, on_dir)
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+
+    local root_markers = util.insert_package_json(
+      { '.oxlintrc.json', '.oxlintrc.jsonc', 'oxlint.config.ts' },
+      { 'oxlint', 'vite%-plus' },
+      fname
+    )
+    root_markers = util.root_markers_with_field(root_markers, { 'vite.config.ts' }, 'vite%-plus', fname)
+    on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
+  end,
   workspace_required = true,
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'LspOxlintFixAll', function()
