@@ -293,6 +293,7 @@ Nvim by running `:help lspconfig-all`.
 - [selene3p_ls](#selene3p_ls)
 - [serve_d](#serve_d)
 - [shopify_theme_ls](#shopify_theme_ls)
+- [shuck](#shuck)
 - [sixtyfps](#sixtyfps)
 - [slangd](#slangd)
 - [slint_lsp](#slint_lsp)
@@ -11339,6 +11340,38 @@ Default config:
 - `settings` :
   ```lua
   {}
+  ```
+
+---
+
+## shuck
+
+https://github.com/ewhauser/shuck
+
+`shuck` can be installed via `cargo`:
+```sh
+cargo install shuck-cli
+```
+
+A lightning fast shell linter with LSP support for bash, zsh, posix, and mksh dialects.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('shuck')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "shuck", "server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "bash", "sh", "zsh" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".shuck.toml", ".git" }
   ```
 
 ---
