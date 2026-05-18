@@ -244,7 +244,7 @@
 ---An array of language ids for which the extension should probe if support is installed.
 ---
 ---```lua
----default = { "astro", "civet", "javascript", "javascriptreact", "typescript", "typescriptreact", "html", "mdx", "vue", "markdown", "json", "jsonc", "css", "glimmer-js", "glimmer-ts", "svelte" }
+---default = { "astro", "civet", "javascript", "javascriptreact", "typescript", "typescriptreact", "html", "mdx", "vue", "markdown", "json", "jsonc", "css", "glimmer-js", "glimmer-ts", "svelte", "graphql" }
 ---```
 ---@field probe? string[]
 ---@field problems? _.lspconfig.settings.eslint.Eslint.Problems
