@@ -6585,15 +6585,17 @@ It can be installed via `npm`:
 >sh
   npm i -g oxfmt
 
+or used as a part of Vite+ through `fmt` field in `vite.config.ts`: https://github.com/oxc-project/oxc/pull/20197
+
 Snippet to enable the language server: >lua
   vim.lsp.enable('oxfmt')
 
 
 Default config:
-- cmd (use "gF" to view): ../lsp/oxfmt.lua:17
+- cmd (use "gF" to view): ../lsp/oxfmt.lua:19
 - filetypes: >lua
   { "javascript", "javascriptreact", "typescript", "typescriptreact", "toml", "json", "jsonc", "json5", "yaml", "html", "vue", "handlebars", "css", "scss", "less", "graphql", "markdown" }
-- root_dir (use "gF" to view): ../lsp/oxfmt.lua:17
+- root_dir (use "gF" to view): ../lsp/oxfmt.lua:19
 - `workspace_required` : `true`
 <
 
@@ -6609,6 +6611,8 @@ It can be installed via `npm`:
 >sh
   npm i -g oxlint
 
+or used as a part of Vite+ through `lint` field in vite.config.ts: https://github.com/oxc-project/oxc/pull/20214
+
 Type-aware linting will automatically be enabled if `tsgolint` exists in your
 path and your `.oxlintrc.json` contains the string "typescript".
 
@@ -6621,13 +6625,12 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/oxlint.lua:32
-- cmd (use "gF" to view): ../lsp/oxlint.lua:32
+- before_init (use "gF" to view): ../lsp/oxlint.lua:35
+- cmd (use "gF" to view): ../lsp/oxlint.lua:35
 - filetypes: >lua
   { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "astro" }
-- on_attach (use "gF" to view): ../lsp/oxlint.lua:32
-- root_markers: >lua
-  { ".oxlintrc.json", ".oxlintrc.jsonc", "oxlint.config.ts" }
+- on_attach (use "gF" to view): ../lsp/oxlint.lua:35
+- root_dir (use "gF" to view): ../lsp/oxlint.lua:35
 - settings: >lua
   {}
 - `workspace_required` : `true`
