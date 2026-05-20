@@ -8,6 +8,14 @@
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `false`.
 ---@field indentOnly? true | false
 
+---@class _.lspconfig.settings.ada_ls.Ada.ProjectView
+---Show all projects as a flat list instead of a hierarchy in the Project View.
+---@field flatMode? boolean
+---Show the object directory as a child of each project in the Project View.
+---@field showObjectDirectories? boolean
+---Show the Ada runtime project and its source files in the Project View.
+---@field showRuntimeFiles? boolean
+
 ---@class _.lspconfig.settings.ada_ls.Ada.Trace
 ---Traces the communication between VS Code and the Ada language server in the 'Ada Language Server' Output view.
 ---
@@ -99,6 +107,7 @@
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists.
 ---@field projectFile? string
+---@field projectView? _.lspconfig.settings.ada_ls.Ada.ProjectView
 ---Enable fallback indenter in case the file is not syntactically correct.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.

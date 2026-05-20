@@ -75,6 +75,12 @@
 ---@field backgroundIndexing? "on" | "off" | "auto"
 ---Disable SourceKit-LSP. This will turn off features like code completion, error diagnostics and jump-to-definition. Features like swift-testing test discovery will not work correctly.
 ---@field disable? boolean
+---Controls whether the symbol declaration is included in the results of `Find All References`.
+---
+---```lua
+---default = "default"
+---```
+---@field includeDeclarationInFindAllReferences? "default" | "always" | "never"
 ---Arguments to pass to SourceKit-LSP. Keys and values should be provided as individual entries in the list. e.g. `--experimental-feature=show-macro-expansions`
 ---
 ---```lua

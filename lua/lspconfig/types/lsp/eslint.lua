@@ -1,5 +1,17 @@
 ---@meta
 
+---@class _.lspconfig.settings.eslint.Eslint.BulkSuppression
+---Show bulk-suppressed violations (from eslint-suppressions.json) as diagnostics. Requires ESLint >= 10.1.
+---@field enable? boolean
+---Path to the suppressions file relative to the workspace. Defaults to eslint-suppressions.json.
+---@field location? string
+---Diagnostic severity for bulk-suppressed violations.
+---
+---```lua
+---default = "info"
+---```
+---@field severity? "error" | "warn" | "info" | "hint"
+
 ---Show disable lint rule in the quick fix menu.
 ---
 ---```lua
@@ -200,6 +212,7 @@
 ---@class _.lspconfig.settings.eslint.Eslint
 ---Turns auto fix on save on or off.
 ---@field autoFixOnSave? boolean
+---@field bulkSuppression? _.lspconfig.settings.eslint.Eslint.BulkSuppression
 ---@field codeAction? _.lspconfig.settings.eslint.Eslint.CodeAction
 ---@field codeActionsOnSave? _.lspconfig.settings.eslint.Eslint.CodeActionsOnSave
 ---Enables ESLint debug mode (same as `--debug` on the command line)
