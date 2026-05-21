@@ -93,8 +93,8 @@ function M.root_markers_with_fields(root_files, new_names, fields, fname)
   local found = vim.fs.find(new_names, { path = path, upward = true, type = 'file' })
 
   for _, f in ipairs(found or {}) do
-    -- Match the given `field`.
     local file = assert(io.open(f, 'r'))
+    -- Match all the given `fields`.
     local to_find = vim.deepcopy(fields)
     for line in file:lines() do
       to_find = vim
