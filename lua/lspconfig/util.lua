@@ -100,7 +100,7 @@ function M.root_markers_with_fields(root_files, new_names, fields, fname)
       to_find = vim
         .iter(to_find)
         :filter(function(s)
-          return line:find(s)
+          return !line:find(s)
         end)
         :totable()
       if #to_find == 0 then
