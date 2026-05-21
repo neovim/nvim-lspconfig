@@ -58,7 +58,8 @@ return {
       { 'oxfmt', 'vite%-plus' },
       fname
     )
-    root_markers = util.root_markers_with_field(root_markers, { 'vite.config.ts' }, 'vite%-plus', fname)
+    -- find vite plus config with fmt field
+    root_markers = util.root_markers_with_fields(root_markers, { 'vite.config.ts' }, { 'vite%-plus', 'fmt:' }, fname)
     on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
   end,
 }

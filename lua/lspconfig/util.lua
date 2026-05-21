@@ -79,6 +79,41 @@ function M.root_markers_with_field(root_files, new_names, field, fname)
   return root_files
 end
 
+--- Appends `new_names` to `root_files` if all `fields` are found in any such file in any ancestor of `fname`.
+---
+--- NOTE: this does a "breadth-first" search, so is broken for multi-project workspaces:
+--- https://github.com/neovim/nvim-lspconfig/issues/3818#issuecomment-2848836794
+---
+--- @param root_files string[] List of root-marker files to append to.
+--- @param new_names string[] Potential root-marker filenames (e.g. `{ 'package.json', 'package.json5' }`) to inspect for the given `field`.
+--- @param fields string[] Fields to search for in the given `new_names` files.
+--- @param fname string Full path of the current buffer name to start searching upwards from.
+function M.root_markers_with_fields(root_files, new_names, fields, fname)
+  local path = vim.fn.fnamemodify(fname, ':h')
+  local found = vim.fs.find(new_names, { path = path, upward = true, type = 'file' })
+
+  for _, f in ipairs(found or {}) do
+    -- Match the given `field`.
+    local file = assert(io.open(f, 'r'))
+    local to_find = vim.deepcopy(fields)
+    for line in file:lines() do
+      to_find = vim
+        .iter(to_find)
+        :filter(function(s)
+          return line:find(s)
+        end)
+        :totable()
+      if #to_find == 0 then
+        root_files[#root_files + 1] = vim.fs.basename(f)
+        break
+      end
+    end
+    file:close()
+  end
+
+  return root_files
+end
+
 function M.insert_package_json(root_files, field, fname)
   return M.root_markers_with_field(root_files, { 'package.json', 'package.json5' }, field, fname)
 end
