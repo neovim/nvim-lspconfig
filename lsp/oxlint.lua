@@ -61,7 +61,13 @@ return {
       fname
     )
     -- find vite plus config with lint field
-    root_markers = util.root_markers_with_fields(root_markers, { 'vite.config.ts' }, { 'vite%-plus', 'lint:' }, fname)
+    root_markers = util.root_markers_with_field(
+      root_markers,
+      { 'vite.config.ts' },
+      { 'vite%-plus', 'lint:' },
+      fname,
+      'all'
+    )
     on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
   end,
   workspace_required = true,
