@@ -68,7 +68,7 @@ local function roslyn_handlers()
     end,
     ['razor/provideDynamicFileInfo'] = function(_, _, _)
       vim.notify(
-        'Razor is not supported.\nPlease use https://github.com/tris203/rzls.nvim',
+        'Razor is not supported.\nPlease use https://github.com/seblyng/roslyn.nvim',
         vim.log.levels.WARN,
         { title = 'roslyn_ls' }
       )
