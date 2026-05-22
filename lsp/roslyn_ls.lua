@@ -66,23 +66,6 @@ local function roslyn_handlers()
       refresh_diagnostics(client)
       return vim.NIL
     end,
-    ['workspace/_roslyn_projectNeedsRestore'] = function(_, result, ctx)
-      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
-
-      ---@diagnostic disable-next-line: param-type-mismatch
-      client:request('workspace/_roslyn_restore', result, function(err, response)
-        if err then
-          vim.notify(err.message, vim.log.levels.ERROR, { title = 'roslyn_ls' })
-        end
-        if response then
-          for _, v in ipairs(response) do
-            vim.notify(v.message, vim.log.levels.INFO, { title = 'roslyn_ls' })
-          end
-        end
-      end)
-
-      return vim.NIL
-    end,
     ['razor/provideDynamicFileInfo'] = function(_, _, _)
       vim.notify(
         'Razor is not supported.\nPlease use https://github.com/tris203/rzls.nvim',
