@@ -10716,10 +10716,6 @@ Download and extract it (nuget's are zip files).
   cmd = {
     'dotnet',
     '<my_folder>/Microsoft.CodeAnalysis.LanguageServer.dll',
-    '--logLevel', -- this property is required by the server
-    'Information',
-    '--extensionLogDirectory', -- this property is required by the server
-    fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
     '--stdio',
   },
   ```
@@ -10749,7 +10745,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "roslyn-language-server", "--logLevel", "Information", "--extensionLogDirectory", "/tmp/roslyn_ls/logs", "--stdio" }
+  { "roslyn-language-server", "--stdio" }
   ```
 - `cmd_env` :
   ```lua
@@ -10771,20 +10767,19 @@ Default config:
   ```lua
   {
     ["razor/provideDynamicFileInfo"] = <function 1>,
-    ["workspace/_roslyn_projectNeedsRestore"] = <function 2>,
-    ["workspace/projectInitializationComplete"] = <function 3>
+    ["workspace/projectInitializationComplete"] = <function 2>
   }
   ```
 - `name` :
   ```lua
   "roslyn_ls"
   ```
-- `on_attach`: [../lsp/roslyn_ls.lua:165](../lsp/roslyn_ls.lua#L165)
+- `on_attach`: [../lsp/roslyn_ls.lua:144](../lsp/roslyn_ls.lua#L144)
 - `on_init` :
   ```lua
   { <function 1> }
   ```
-- `root_dir`: [../lsp/roslyn_ls.lua:165](../lsp/roslyn_ls.lua#L165)
+- `root_dir`: [../lsp/roslyn_ls.lua:144](../lsp/roslyn_ls.lua#L144)
 - `settings` :
   ```lua
   {
