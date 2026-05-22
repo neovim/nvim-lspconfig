@@ -11,10 +11,6 @@
 --   cmd = {
 --     'dotnet',
 --     '<my_folder>/Microsoft.CodeAnalysis.LanguageServer.dll',
---     '--logLevel', -- this property is required by the server
---     'Information',
---     '--extensionLogDirectory', -- this property is required by the server
---     fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
 --     '--stdio',
 --   },
 --   ```
@@ -167,10 +163,6 @@ return {
   cmd = {
     vim.fn.executable('Microsoft.CodeAnalysis.LanguageServer') == 1 and 'Microsoft.CodeAnalysis.LanguageServer'
       or 'roslyn-language-server',
-    '--logLevel',
-    'Information',
-    '--extensionLogDirectory',
-    fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
     '--stdio',
   },
 
