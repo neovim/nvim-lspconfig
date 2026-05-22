@@ -10707,7 +10707,12 @@ Default config:
 
 https://github.com/dotnet/roslyn
 
-To install the server, compile from source or download as nuget package.
+The server can be installed as a dotnet tool (see https://github.com/dotnet/roslyn/blob/main/src/LanguageServer/Microsoft.CodeAnalysis.LanguageServer/README.md).
+This command will install the server in ~/.dotnet/tools:
+```bash
+dotnet tool install --global roslyn-language-server --prerelease
+```
+Alternatively, compile from source or download as nuget package.
 Go to `https://dev.azure.com/azure-public/vside/_artifacts/feed/vs-impl/NuGet/Microsoft.CodeAnalysis.LanguageServer.<platform>/overview`
 replace `<platform>` with one of the following `linux-x64`, `osx-x64`, `win-x64`, `neutral` (for more info on the download location see https://github.com/dotnet/roslyn/issues/71474#issuecomment-2177303207).
 Download and extract it (nuget's are zip files).
@@ -10774,12 +10779,12 @@ Default config:
   ```lua
   "roslyn_ls"
   ```
-- `on_attach`: [../lsp/roslyn_ls.lua:144](../lsp/roslyn_ls.lua#L144)
+- `on_attach`: [../lsp/roslyn_ls.lua:149](../lsp/roslyn_ls.lua#L149)
 - `on_init` :
   ```lua
   { <function 1> }
   ```
-- `root_dir`: [../lsp/roslyn_ls.lua:144](../lsp/roslyn_ls.lua#L144)
+- `root_dir`: [../lsp/roslyn_ls.lua:149](../lsp/roslyn_ls.lua#L149)
 - `settings` :
   ```lua
   {
