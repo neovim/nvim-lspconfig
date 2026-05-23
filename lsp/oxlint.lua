@@ -93,7 +93,12 @@ return {
   },
   before_init = function(init_params, config)
     local settings = config.settings or {}
-    if settings.typeAware == nil and vim.fn.executable('tsgolint') == 1 then
+    local has_tsgolint = vim.fn.executable('tsgolint') == 1
+    if not has_tsgolint and (config or {}).root_dir then
+      local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', 'tsgolint')
+      has_tsgolint = vim.fn.executable(local_cmd) == 1
+    end
+    if settings.typeAware == nil and has_tsgolint then
       local ok, res = pcall(oxlint_conf_mentions_typescript, config.root_dir)
       if ok and res then
         settings = vim.tbl_extend('force', settings, { typeAware = true })
