@@ -8487,6 +8487,31 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+slang_server
+
+https://github.com/hudson-trading/slang-server
+
+A SystemVerilog language server based on the Slang library.
+
+Release binaries can be downloaded from [here](https://github.com/hudson-trading/slang-server/releases)
+and placed in a directory on PATH.
+
+See [the docs](https://hudson-trading.github.io/slang-server/start/config/) for options.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('slang_server')
+
+
+Default config:
+- cmd: >lua
+  { "slang-server" }
+- filetypes: >lua
+  { "systemverilog", "verilog" }
+- root_markers: >lua
+  { ".git", ".slang" }
+<
+
+------------------------------------------------------------------------------
 slangd
 
 https://github.com/shader-slang/slang
