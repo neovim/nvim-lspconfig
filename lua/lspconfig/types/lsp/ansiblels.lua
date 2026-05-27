@@ -106,7 +106,7 @@
 ---default = ""
 ---```
 ---@field apiEndpoint? string
----API key for authentication.
+---**REMOVED** — API keys are now stored securely. Use the LLM Provider Settings panel.
 ---
 ---```lua
 ---default = ""
