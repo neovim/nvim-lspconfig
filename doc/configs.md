@@ -164,6 +164,7 @@ Nvim by running `:help lspconfig-all`.
 - [jdtls](#jdtls)
 - [jedi_language_server](#jedi_language_server)
 - [jinja_lsp](#jinja_lsp)
+- [jls](#jls)
 - [jqls](#jqls)
 - [jsonls](#jsonls)
 - [jsonnet_ls](#jsonnet_ls)
@@ -6594,6 +6595,45 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## jls
+
+https://github.com/idelice/jls
+
+A Java language server built on the Java compiler API, optimized for Neovim.
+Supports diagnostics, completion, go-to-definition, hover, find references,
+document highlights, inlay hints, code actions, rename, and Lombok.
+
+Install via mason.nvim (recommended):
+  :MasonInstall jls
+
+Or using the nvim-jls plugin which provides a managed installer:
+  https://github.com/idelice/nvim-jls
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('jls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "jls" }
+  ```
+- `filetypes` :
+  ```lua
+  { "java" }
+  ```
+- `root_markers` :
+  ```lua
+  { "pom.xml", "build.gradle", "build.gradle.kts", "settings.gradle", "settings.gradle.kts", "WORKSPACE", "WORKSPACE.bazel", ".java-version" }
+  ```
+- `settings` :
+  ```lua
+  {}
   ```
 
 ---
