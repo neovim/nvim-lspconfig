@@ -103,8 +103,6 @@
 ---default = ""
 ---```
 ---@field solhintPackageDirectory? string
----Solhint linting validation rules
----@field solhintRules? table
 ---Solium linting validation rules
 ---
 ---```lua

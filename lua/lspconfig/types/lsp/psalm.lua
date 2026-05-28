@@ -31,6 +31,8 @@
 ---@field connectToServerWithTcp? boolean
 ---Enable to disable autocomplete on methods and properties (Modifying requires VSCode reload)
 ---@field disableAutoComplete? boolean
+---Enable to disable the providing hover definition on methods and properties (Modifying requires VSCode reload)
+---@field disableProvideHover? boolean
 ---Enable this to print messages to the debug console when developing or debugging this VS Code extension. (Modifying requires VSCode reload)
 ---@field enableDebugLog? boolean
 ---Enable this to use PHP-provided ini defaults for memory and error display. (Modifying requires restart)
