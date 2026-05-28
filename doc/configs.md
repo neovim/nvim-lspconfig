@@ -10486,7 +10486,7 @@ Default config:
       codeLens = true,
       incrementalTypechecking = {
         acrossFiles = true,
-        enabled = true
+        enable = true
       },
       inlayHints = {
         enable = true
