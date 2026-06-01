@@ -13,6 +13,56 @@
 --- go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 --- ```
 
+--- @class go_dir_args
+---
+--- @field envvar_id string
+---
+--- @field subdir string?
+
+---@param dir_args go_dir_args
+---@return string?
+local function get_go_dir(dir_args)
+  local cmd = { 'go', 'env', dir_args.envvar_id }
+  local ok, sys_obj = pcall(vim.system, cmd, { text = true })
+
+  -- handles case when go is not installed on user machine
+  if not ok then
+    vim.schedule(function()
+      vim.notify(
+        ('[golangci_lint_ls] cmd %s failed with error %s'):format(vim.inspect(cmd), vim.inspect(sys_obj)),
+        vim.log.levels.ERROR
+      )
+    end)
+
+    return nil
+  end
+
+  local output = sys_obj:wait()
+  local res = vim.trim(output.stdout or '')
+
+  -- handles case when go env cmd failed or res is an empty string
+  if output.code ~= 0 or res == '' then
+    vim.schedule(function()
+      vim.notify(
+        ('[golangci_lint_ls] get ' .. dir_args.envvar_id .. ' dir cmd failed with code %d: %s\n%s'):format(
+          output.code,
+          vim.inspect(cmd),
+          output.stderr
+        ),
+        vim.log.levels.WARN
+      )
+    end)
+
+    return nil
+  end
+
+  if dir_args.subdir and dir_args.subdir ~= '' then
+    res = vim.fs.joinpath(res, dir_args.subdir)
+  end
+
+  return res
+end
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'golangci-lint-langserver' },
@@ -35,6 +85,21 @@ return {
       '--output.json.path=stdout',
     },
   },
+  reuse_client = function(client, config)
+    if client.name ~= config.name or client:is_stopped() then
+      return false
+    end
+
+    if client.root_dir ~= config.root_dir then
+      local mod_cache = get_go_dir({ envvar_id = 'GOMODCACHE' })
+      local std_lib = get_go_dir({ envvar_id = 'GOROOT', subdir = 'src' })
+
+      -- reuse client if config root dir is equal to go mod cache dir, or go standard library dir
+      return config.root_dir == mod_cache or config.root_dir == std_lib
+    end
+
+    return true
+  end,
   root_markers = {
     '.golangci.yml',
     '.golangci.yaml',
