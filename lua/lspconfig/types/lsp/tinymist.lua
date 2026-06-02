@@ -192,6 +192,12 @@
 ---default = "enable"
 ---```
 ---@field previewFeature? "enable" | "disable"
+---%extension.tinymist.config.tinymist.previewer.desc%
+---
+---```lua
+---default = "myriad-dreamin.tinymist"
+---```
+---@field previewer? string
 ---%extension.tinymist.config.tinymist.projectResolution.desc%
 ---
 ---```lua

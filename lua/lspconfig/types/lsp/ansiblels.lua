@@ -129,7 +129,7 @@
 ---```lua
 ---default = "wca"
 ---```
----@field provider? "wca" | "google"
+---@field provider? "wca" | "google" | "rhcustom"
 ---@field suggestions? _.lspconfig.settings.ansiblels.Ansible.Lightspeed.Suggestions
 ---Request timeout in milliseconds for API calls.
 ---
