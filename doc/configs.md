@@ -5545,6 +5545,22 @@ https://github.com/golang/tools/tree/master/gopls
 
 Google's lsp server for golang.
 
+[Settings documentation](https://go.dev/gopls/settings)
+
+NOTE: since v0.22.0 gopls no longer advertises semantic tokens to clients
+by default. To maintain previous behavior, semantic tokens are enabled on client side.
+To disable this feature, set `semanticTokens` option to `false`.
+
+```lua
+  vim.lsp.config('gopls', {
+    settings = {
+      gopls = {
+        semanticTokens = false
+      }
+    }
+  })
+```
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('gopls')
@@ -5559,7 +5575,15 @@ Default config:
   ```lua
   { "go", "gomod", "gowork", "gotmpl" }
   ```
-- `root_dir`: [../lsp/gopls.lua:89](../lsp/gopls.lua#L89)
+- `root_dir`: [../lsp/gopls.lua:105](../lsp/gopls.lua#L105)
+- `settings` :
+  ```lua
+  {
+    gopls = {
+      semanticTokens = true
+    }
+  }
+  ```
 
 ---
 
