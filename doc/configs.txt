@@ -1678,6 +1678,29 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+cqlls
+
+https://github.com/Akzestia/cqlls
+
+Install via cargo >sh
+  cargo install cqlls
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('cqlls')
+
+
+Default config:
+- cmd: >lua
+  { "cqlls" }
+- filetypes: >lua
+  { "cql", "cqlang" }
+- root_markers: >lua
+  { ".cqlls", ".git" }
+- settings: >lua
+  {}
+<
+
+------------------------------------------------------------------------------
 crystalline
 
 https://github.com/elbywan/crystalline

@@ -59,6 +59,7 @@ Nvim by running `:help lspconfig-all`.
 - [contextive](#contextive)
 - [copilot](#copilot)
 - [coq_lsp](#coq_lsp)
+- [cqlls](#cqlls)
 - [crystalline](#crystalline)
 - [csharp_ls](#csharp_ls)
 - [cspell_ls](#cspell_ls)
@@ -2554,6 +2555,40 @@ Default config:
 - `root_markers` :
   ```lua
   { "_CoqProject", ".git" }
+  ```
+
+---
+
+## cqlls
+
+https://github.com/Akzestia/cqlls
+
+Install via cargo:
+```sh
+cargo install cqlls
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('cqlls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "cqlls" }
+  ```
+- `filetypes` :
+  ```lua
+  { "cql", "cqlang" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".cqlls", ".git" }
+  ```
+- `settings` :
+  ```lua
+  {}
   ```
 
 ---
