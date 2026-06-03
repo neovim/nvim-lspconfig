@@ -4200,11 +4200,13 @@ Default config:
 - `settings` :
   ```lua
   {
-    codeLens = {
-      enable = true
-    },
-    hint = {
-      enable = true
+    emmylua = {
+      codeLens = {
+        enable = true
+      },
+      hint = {
+        enable = true
+      }
     }
   }
   ```
