@@ -73,7 +73,9 @@ return {
     or vim.list_extend(vim.list_extend(root_markers1, root_markers2), { '.git' }),
   workspace_required = false,
   settings = {
-    codeLens = { enable = true },
-    hint = { enable = true },
+    emmylua = {
+      codeLens = { enable = true },
+      hint = { enable = true },
+    },
   },
 }
