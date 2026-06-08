@@ -315,7 +315,7 @@ end
 return {
   cmd = {
     'npx',
-    '--registry=https://gitlab.com/api/v4/packages/npm/',
+    '--@gitlab-org:registry=https://gitlab.com/api/v4/packages/npm/',
     '@gitlab-org/gitlab-lsp',
     '--stdio',
   },
