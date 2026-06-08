@@ -627,10 +627,10 @@
 ---default = ""
 ---```
 ---@field serverExtraArgs? string
----Preferred approach for loading package components. Setting this to 'multiple components' (EXPERIMENTAL) allows the build tool (such as `cabal` or `stack`) to [load multiple components at once](https://github.com/haskell/cabal/pull/8726), which is a significant improvement.
+---Preferred approach for loading package components. Setting this to 'multiple components' allows the build tool (such as `cabal` or `stack`) to [load multiple components at once](https://github.com/haskell/cabal/pull/8726), which is a significant improvement.
 ---
 ---```lua
----default = "singleComponent"
+---default = "multipleComponents"
 ---```
 ---@field sessionLoading? "singleComponent" | "multipleComponents"
 ---Enable Language Server support for `.cabal` files. Requires Haskell Language Server version >= 1.9.0.0.

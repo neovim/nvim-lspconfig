@@ -51,6 +51,12 @@
 ---default = ""
 ---```
 ---@field excludeIndexing? string
+---Show custom file icons for Verilog/SystemVerilog file types in the Explorer and editor tabs. Disable to fall back to your file icon theme's default icons. Changing this rewrites the extension manifest and requires a window reload.
+---
+---```lua
+---default = true
+---```
+---@field fileIcons? boolean
 ---Force indexing to use fast regular expression parsing.
 ---@field forceFastIndexing? boolean
 ---Launch command for running the formatter.
