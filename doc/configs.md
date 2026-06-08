@@ -5216,7 +5216,7 @@ vim.lsp.enable('gitlab_duo')
 Default config:
 - `cmd` :
   ```lua
-  { "npx", "--registry=https://gitlab.com/api/v4/packages/npm/", "@gitlab-org/gitlab-lsp", "--stdio" }
+  { "npx", "--@gitlab-org:registry=https://gitlab.com/api/v4/packages/npm/", "@gitlab-org/gitlab-lsp", "--stdio" }
   ```
 - `filetypes` :
   ```lua
