@@ -225,11 +225,7 @@
 ---default = "FromPreference"
 ---```
 ---@field outputVerbosity? "FromPreference" | "None" | "Minimal" | "Normal" | "Detailed" | "Diagnostic"
----Use a CodeLens that is compatible with Pester 4. Disabling this will show `Run Tests` on all `It`, `Describe` and `Context` blocks, and will correctly work only with Pester 5 and newer.
----
----```lua
----default = true
----```
+---Use the legacy CodeLens compatible with Pester 4 (only shows `Run Tests` on `Describe` blocks). When disabled (the default), `Run Tests` is shown on all `It`, `Describe` and `Context` blocks for Pester 5 and newer.
 ---@field useLegacyCodeLens? boolean
 
 ---@class _.lspconfig.settings.powershell_es.Powershell.Rename

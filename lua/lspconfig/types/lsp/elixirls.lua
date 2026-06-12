@@ -39,7 +39,7 @@
 ---default = "dialyxir_long"
 ---```
 ---@field dialyzerFormat? "dialyzer" | "dialyxir_short" | "dialyxir_long"
----Dialyzer options to enable or disable warnings - See Dialyzer's documentation for options. Note that the "race_conditions" option is unsupported
+---Dialyzer options to enable or disable warnings - See Dialyzer's documentation for options
 ---
 ---```lua
 ---default = {}
@@ -53,12 +53,6 @@
 ---@field envVariables? table
 ---Automatically fetch project dependencies when compiling.
 ---@field fetchDeps? boolean
----Use OTP incremental dialyzer (available on OTP 26+)
----
----```lua
----default = true
----```
----@field incrementalDialyzer? boolean
 ---Absolute path to alternative ElixirLS release that will override the packaged release
 ---@field languageServerOverridePath? string
 ---Enable or disable the MCP server

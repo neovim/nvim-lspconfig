@@ -34,6 +34,14 @@
 ---%extension.tinymist.config.tinymist.completion.triggerOnSnippetPlaceholders.desc%
 ---@field triggerOnSnippetPlaceholders? boolean
 
+---@class _.lspconfig.settings.tinymist.Tinymist.InlayHints
+---%extension.tinymist.config.tinymist.inlayHints.packageVersionStatus.desc%
+---
+---```lua
+---default = true
+---```
+---@field packageVersionStatus? boolean
+
 ---@class _.lspconfig.settings.tinymist.Tinymist.Lint
 ---%extension.tinymist.config.tinymist.lint.enabled.desc%
 ---@field enabled? boolean
@@ -166,6 +174,7 @@
 ---@field formatterPrintWidth? number
 ---%extension.tinymist.config.tinymist.formatterProseWrap.desc%
 ---@field formatterProseWrap? boolean
+---@field inlayHints? _.lspconfig.settings.tinymist.Tinymist.InlayHints
 ---@field lint? _.lspconfig.settings.tinymist.Tinymist.Lint
 ---%extension.tinymist.config.tinymist.onEnterEvent.desc%
 ---

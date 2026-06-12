@@ -333,6 +333,9 @@
 ---For modules the type "sub_items" can be used to only exclude the all items in it but not the module
 ---itself. This does not include items defined in nested modules.
 ---
+---For enums the type "variants" can be used to only exclude the all variants in it but not the enum
+---itself.
+---
 ---This setting also inherits `#rust-analyzer.completion.excludeTraits#`.
 ---
 ---```lua
