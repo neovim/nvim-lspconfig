@@ -108,6 +108,7 @@ Nvim by running `:help lspconfig-all`.
 - [eslint](#eslint)
 - [expert](#expert)
 - [facility_language_server](#facility_language_server)
+- [fallow](#fallow)
 - [fennel_language_server](#fennel_language_server)
 - [fennel_ls](#fennel_ls)
 - [fish_lsp](#fish_lsp)
@@ -4485,6 +4486,34 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## fallow
+
+https://github.com/fallow-rs/fallow
+
+Codebase intelligence for TypeScript and JavaScript.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('fallow')
+```
+
+Default config:
+- `cmd`: [../lsp/fallow.lua:8](../lsp/fallow.lua#L8)
+- `filetypes` :
+  ```lua
+  { "javascript", "typescript", "javascriptreact", "typescriptreact" }
+  ```
+- `init_options` :
+  ```lua
+  {}
+  ```
+- `root_markers` :
+  ```lua
+  { ".fallowrc.json", ".git" }
   ```
 
 ---

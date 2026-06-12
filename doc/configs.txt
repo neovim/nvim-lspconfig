@@ -3165,6 +3165,27 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+fallow
+
+https://github.com/fallow-rs/fallow
+
+Codebase intelligence for TypeScript and JavaScript.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('fallow')
+
+
+Default config:
+- cmd (use "gF" to view): ../lsp/fallow.lua:8
+- filetypes: >lua
+  { "javascript", "typescript", "javascriptreact", "typescriptreact" }
+- init_options: >lua
+  {}
+- root_markers: >lua
+  { ".fallowrc.json", ".git" }
+<
+
+------------------------------------------------------------------------------
 fennel_language_server
 
 https://github.com/rydesun/fennel-language-server
