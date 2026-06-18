@@ -5805,6 +5805,38 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+microcad_lsp
+
+https://codeberg.org/microcad/microcad/src/branch/main/crates/lsp
+
+An LSP for the µcad model description language
+
+Install wit >sh
+  cargo install microcad-lsp
+Neovim does not detect µcad filetype automatically, so you will need to add the following to your
+>lua
+  vim.filetype.add {
+    extension = {
+      µcad = 'microcad',
+    },
+  }
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('microcad_lsp')
+
+
+Default config:
+- cmd: >lua
+  { "microcad-lsp", "--stdio" }
+- filetypes: >lua
+  { "microcad" }
+- name: >lua
+  "microcad_lsp"
+- root_markers: >lua
+  { ".git" }
+<
+
+------------------------------------------------------------------------------
 millet
 
 https://github.com/azdavis/millet

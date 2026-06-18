@@ -197,6 +197,7 @@ Nvim by running `:help lspconfig-all`.
 - [mdx_analyzer](#mdx_analyzer)
 - [mesonlsp](#mesonlsp)
 - [metals](#metals)
+- [microcad_lsp](#microcad_lsp)
 - [millet](#millet)
 - [mint](#mint)
 - [mlir_lsp_server](#mlir_lsp_server)
@@ -7907,6 +7908,51 @@ Default config:
 - `root_markers` :
   ```lua
   { "build.sbt", "build.sc", { "build.gradle", "build.gradle.kts" }, "pom.xml" }
+  ```
+
+---
+
+## microcad_lsp
+
+https://codeberg.org/microcad/microcad/src/branch/main/crates/lsp
+
+An LSP for the µcad model description language
+
+Install with
+```sh
+cargo install microcad-lsp
+```
+Neovim does not detect µcad filetype automatically, so you will need to add the following to your
+
+```lua
+vim.filetype.add {
+  extension = {
+    µcad = 'microcad',
+  },
+}
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('microcad_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "microcad-lsp", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "microcad" }
+  ```
+- `name` :
+  ```lua
+  "microcad_lsp"
+  ```
+- `root_markers` :
+  ```lua
+  { ".git" }
   ```
 
 ---
