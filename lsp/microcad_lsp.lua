@@ -19,7 +19,7 @@
 
 ---@type vim.lsp.Config
 return {
-  name = "microcad_lsp",
+  name = 'microcad_lsp',
   cmd = { 'microcad-lsp', '--stdio' },
   filetypes = { 'microcad' },
   root_markers = { '.git' },
