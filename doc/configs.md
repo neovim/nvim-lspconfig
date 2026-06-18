@@ -13413,6 +13413,14 @@ vim.lsp.enable('terraformls')
 ```
 
 Default config:
+- `capabilities` :
+  ```lua
+  {
+    experimental = {
+      showReferencesCommandId = "client.showReferences"
+    }
+  }
+  ```
 - `cmd` :
   ```lua
   { "terraform-ls", "serve" }
@@ -13421,6 +13429,7 @@ Default config:
   ```lua
   { "terraform", "terraform-vars" }
   ```
+- `on_attach`: [../lsp/terraformls.lua:36](../lsp/terraformls.lua#L36)
 - `root_markers` :
   ```lua
   { ".terraform", ".git" }

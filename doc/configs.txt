@@ -10028,10 +10028,17 @@ Snippet to enable the language server: >lua
 
 
 Default config:
+- capabilities: >lua
+  {
+    experimental = {
+      showReferencesCommandId = "client.showReferences"
+    }
+  }
 - cmd: >lua
   { "terraform-ls", "serve" }
 - filetypes: >lua
   { "terraform", "terraform-vars" }
+- on_attach (use "gF" to view): ../lsp/terraformls.lua:36
 - root_markers: >lua
   { ".terraform", ".git" }
 <
