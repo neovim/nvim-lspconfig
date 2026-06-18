@@ -151,7 +151,7 @@
 ---```lua
 ---default = "paged"
 ---```
----@field exportTarget? "paged" | "html"
+---@field exportTarget? "paged" | "html" | "bundle"
 ---%extension.tinymist.config.tinymist.fontPaths.desc%
 ---@field fontPaths? any[]
 ---%extension.tinymist.config.tinymist.formatterIndentSize.desc%

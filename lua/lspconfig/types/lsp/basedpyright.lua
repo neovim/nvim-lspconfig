@@ -254,7 +254,7 @@
 ---default = "none"
 ---```
 ---@field reportMissingTypeArgument? "none" | "hint" | "information" | "warning" | "error" | true | false
----Diagnostics for imports that have no corresponding type stub file (either a typeshed file or a custom type stub). The type checker requires type stubs to do its best job at analysis.
+---Diagnostics for imports that have no corresponding type stub file (either a typeshed file or a custom type stub). For inline-typed third-party packages, this can also indicate that the package is missing a py.typed marker file.
 ---
 ---```lua
 ---default = "none"

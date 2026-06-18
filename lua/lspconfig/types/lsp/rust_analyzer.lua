@@ -1254,6 +1254,14 @@
 ---from source for it.
 ---@field memoryProfile? string
 
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.ProjectCreation
+---Control what happens after `rust-analyzer: Create New Project...` finishes creating a Cargo project.
+---
+---```lua
+---default = "ask"
+---```
+---@field openAfterCreate? "ask" | "open" | "openNewWindow" | "addToWorkspace"
+
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.References
 ---Exclude imports from find-all-references.
 ---@field excludeImports? boolean
@@ -1800,6 +1808,7 @@
 ---@field numThreads? any|number|"physical" | "logical"
 ---@field procMacro? _.lspconfig.settings.rust_analyzer.RustAnalyzer.ProcMacro
 ---@field profiling? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Profiling
+---@field projectCreation? _.lspconfig.settings.rust_analyzer.RustAnalyzer.ProjectCreation
 ---@field references? _.lspconfig.settings.rust_analyzer.RustAnalyzer.References
 ---@field rename? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Rename
 ---Restart the server automatically when settings that require a restart are changed.
