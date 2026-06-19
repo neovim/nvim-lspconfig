@@ -8,7 +8,13 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'hh_client', 'lsp' },
+  cmd = function(dispatchers, config)
+    return vim.lsp.rpc.start({ 'hh_client', 'lsp', '--from', 'neovim' }, dispatchers, {
+      -- cwd should be the same as project root, not neovim's process cwd
+      cwd = config.root_dir,
+    })
+  end,
+
   filetypes = { 'php', 'hack' },
   root_markers = { '.hhconfig' },
 }
