@@ -6037,10 +6037,7 @@ vim.lsp.enable('hhvm')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "hh_client", "lsp" }
-  ```
+- `cmd`: [../lsp/hhvm.lua:10](../lsp/hhvm.lua#L10)
 - `filetypes` :
   ```lua
   { "php", "hack" }

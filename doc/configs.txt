@@ -4362,8 +4362,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd: >lua
-  { "hh_client", "lsp" }
+- cmd (use "gF" to view): ../lsp/hhvm.lua:10
 - filetypes: >lua
   { "php", "hack" }
 - root_markers: >lua
