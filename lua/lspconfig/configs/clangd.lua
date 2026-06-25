@@ -57,7 +57,7 @@ end
 return {
   default_config = {
     cmd = { 'clangd' },
-    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
+    filetypes = { 'c', 'c.doxygen', 'cpp', 'cpp.doxygen', 'objc', 'objcpp', 'cuda' },
     root_dir = function(fname)
       return util.root_pattern(
         '.clangd',
