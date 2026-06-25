@@ -1428,7 +1428,7 @@ Default config:
 - cmd: >lua
   { "clangd" }
 - filetypes: >lua
-  { "c", "cpp", "objc", "objcpp", "cuda" }
+  { "c", "c.doxygen", "cpp", "cpp.doxygen", "objc", "objcpp", "cuda" }
 - get_language_id (use "gF" to view): ../lsp/clangd.lua:65
 - on_attach (use "gF" to view): ../lsp/clangd.lua:65
 - on_init (use "gF" to view): ../lsp/clangd.lua:65

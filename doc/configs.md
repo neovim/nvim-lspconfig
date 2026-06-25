@@ -2239,7 +2239,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "c", "cpp", "objc", "objcpp", "cuda" }
+  { "c", "c.doxygen", "cpp", "cpp.doxygen", "objc", "objcpp", "cuda" }
   ```
 - `get_language_id`: [../lsp/clangd.lua:65](../lsp/clangd.lua#L65)
 - `on_attach`: [../lsp/clangd.lua:65](../lsp/clangd.lua#L65)
