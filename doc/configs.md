@@ -12843,7 +12843,7 @@ Note: assuming that [ts_ls](#ts_ls) is setup, full JavaScript/TypeScript support
 
 `svelte-language-server` can be installed via `npm`:
 ```sh
-npm install -g svelte-language-server
+npm install [-g] svelte-language-server
 ```
 
 Snippet to enable the language server:
@@ -12852,10 +12852,7 @@ vim.lsp.enable('svelte')
 ```
 
 Default config:
-- `cmd` :
-  ```lua
-  { "svelteserver", "--stdio" }
-  ```
+- `cmd`: [../lsp/svelte.lua:13](../lsp/svelte.lua#L13)
 - `filetypes` :
   ```lua
   { "svelte" }
