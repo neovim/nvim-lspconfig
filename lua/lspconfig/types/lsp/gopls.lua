@@ -344,13 +344,15 @@
 ---@class _.lspconfig.settings.gopls.Go.InlayHints
 ---`"assignVariableTypes"` controls inlay hints for variable types in assign statements:
 ---```go
----	i/* int*/, j/* int*/ := 0, len(r)-1
+---	i« int», j« int» := 0, len(r)-1
 ---```
 ---
 ---@field assignVariableTypes? boolean
 ---`"compositeLiteralFields"` inlay hints for composite literal field names:
 ---```go
----	{/*in: */"Hello, world", /*want: */"dlrow ,olleH"}
+---	Point2D{«X: »1, «Y: »2}
+---
+---	Outer{«Embedded.»Field: 0}
 ---```
 ---
 ---@field compositeLiteralFields? boolean
@@ -359,7 +361,7 @@
 ---	for _, c := range []struct {
 ---		in, want string
 ---	}{
----		/*struct{ in string; want string }*/{"Hello, world", "dlrow ,olleH"},
+---		«struct{ in string; want string }»{"Hello, world", "dlrow ,olleH"},
 ---	}
 ---```
 ---
@@ -367,23 +369,23 @@
 ---`"constantValues"` controls inlay hints for constant values:
 ---```go
 ---	const (
----		KindNone   Kind = iota/* = 0*/
----		KindPrint/*  = 1*/
----		KindPrintf/* = 2*/
----		KindErrorf/* = 3*/
+---		KindNone   Kind = iota« = 0»
+---		KindPrint«  = 1»
+---		KindPrintf« = 2»
+---		KindErrorf« = 3»
 ---	)
 ---```
 ---
 ---@field constantValues? boolean
 ---`"functionTypeParameters"` inlay hints for implicit type parameters on generic functions:
 ---```go
----	myFoo/*[int, string]*/(1, "hello")
+---	myFoo«[int, string]»(1, "hello")
 ---```
 ---
 ---@field functionTypeParameters? boolean
 ---`"ignoredError"` inlay hints for implicitly discarded errors:
 ---```go
----	f.Close() // ignore error
+---	f.Close()« // ignore error»
 ---```
 ---This check inserts an `// ignore error` hint following any
 ---statement that is a function call whose error result is
@@ -398,13 +400,13 @@
 ---@field ignoredError? boolean
 ---`"parameterNames"` controls inlay hints for parameter names:
 ---```go
----	parseInt(/* str: */ "123", /* radix: */ 8)
+---	parseInt(« str: » "123", « radix: » 8)
 ---```
 ---
 ---@field parameterNames? boolean
 ---`"rangeVariableTypes"` controls inlay hints for variable types in range statements:
 ---```go
----	for k/* int*/, v/* string*/ := range []string{} {
+---	for k« int», v« string» := range []string{} {
 ---		fmt.Println(k, v)
 ---	}
 ---```
@@ -1227,13 +1229,11 @@
 ---Before:
 ---
 ---    for _ = range s {}
----    x, _ = someMap[key]
 ---    _ = <-ch
 ---
 ---After:
 ---
 ---    for range s{}
----    x = someMap[key]
 ---    <-ch
 ---
 ---Available since
@@ -1819,6 +1819,10 @@
 ---@field SA1001? boolean
 ---Invalid format in time.Parse
 ---
+---time.Parse requires a layout string that uses Go's reference time:
+---'Mon Jan 2 15:04:05 MST 2006'. The layout must represent this date and time
+---exactly. See https://pkg.go.dev/time#pkg-constants for layout examples.
+---
 ---Available since
 ---    2017.1
 ---
@@ -1942,6 +1946,10 @@
 ---@field SA1011? boolean
 ---A nil context.Context is being passed to a function, consider using context.TODO instead
 ---
+---The context package prohibits the use of a nil context.
+---If no parent context is available, a new context should be used,
+---e.g. context.TODO or context.Background.
+---
 ---Available since
 ---    2017.1
 ---
@@ -1961,6 +1969,11 @@
 ---```
 ---@field SA1013? boolean
 ---Non-pointer value passed to Unmarshal or Decode
+---
+---Functions such as encoding/json.Unmarshal and
+---(*encoding/json.Decoder).Decode require a pointer to the value that should
+---be populated. Passing a non-pointer value results in the function returning an
+---error at runtime, as it cannot modify the target value.
 ---
 ---Available since
 ---    2017.1
@@ -2016,6 +2029,12 @@
 ---
 ---@field SA1018? boolean
 ---Using an invalid host:port pair with a net.Listen-related function
+---
+---Functions such as net.Listen, net.ListenTCP, and similar,
+---expect a valid network address in the form of host:port. The host, the port,
+---or both, can be omitted, e.g. localhost:8080, :8080 or : are valid
+---host:port pairs.
+---See https://pkg.go.dev/net#Listen for the full documentation.
 ---
 ---Available since
 ---    2017.1
@@ -2181,6 +2200,19 @@
 ---@field SA2002? boolean
 ---Deferred Lock right after locking, likely meant to defer Unlock instead
 ---
+---Deferring a call to Lock immediately after locking is almost always
+---a typo. For example:
+---
+---    mu.Lock()
+---    defer mu.Lock()
+---
+---While this does not strictly guarantee a deadlock depending on how the
+---surrounding code is structured, it is highly likely to be a mistake.
+---The intended code was likely this:
+---
+---    mu.Lock()
+---    defer mu.Unlock()
+---
 ---Available since
 ---    2017.1
 ---
@@ -2301,6 +2333,10 @@
 ---
 ---@field SA4009? boolean
 ---The result of append will never be observed anywhere
+---
+---Calls to append produce a new slice value. When the result of
+---append is assigned to a variable that is never subsequently read, the
+---append operation may have an unintended effect.
 ---
 ---Available since
 ---    2017.1
@@ -2786,75 +2822,6 @@
 ---    2020.1
 ---
 ---@field SA5010? boolean
----Possible nil pointer dereference
----
----A pointer is being dereferenced unconditionally, while
----also being checked against nil in another place. This suggests that
----the pointer may be nil and dereferencing it may panic. This is
----commonly a result of improperly ordered code or missing return
----statements. Consider the following examples:
----
----    func fn(x *int) {
----        fmt.Println(*x)
----
----        // This nil check is equally important for the previous dereference
----        if x != nil {
----            foo(*x)
----        }
----    }
----
----    func TestFoo(t *testing.T) {
----        x := compute()
----        if x == nil {
----            t.Errorf("nil pointer received")
----        }
----
----        // t.Errorf does not abort the test, so if x is nil, the next line will panic.
----        foo(*x)
----    }
----
----Staticcheck tries to deduce which functions abort control flow.
----For example, it is aware that a function will not continue
----execution after a call to panic or log.Fatal. However, sometimes
----this detection fails, in particular in the presence of
----conditionals. Consider the following example:
----
----    func Log(msg string, level int) {
----        fmt.Println(msg)
----        if level == levelFatal {
----            os.Exit(1)
----        }
----    }
----
----    func Fatal(msg string) {
----        Log(msg, levelFatal)
----    }
----
----    func fn(x *int) {
----        if x == nil {
----            Fatal("unexpected nil pointer")
----        }
----        fmt.Println(*x)
----    }
----
----Staticcheck will flag the dereference of x, even though it is perfectly
----safe. Staticcheck is not able to deduce that a call to
----Fatal will exit the program. For the time being, the easiest
----workaround is to modify the definition of Fatal like so:
----
----    func Fatal(msg string) {
----        Log(msg, levelFatal)
----        panic("unreachable")
----    }
----
----We also hard-code functions from common logging packages such as
----logrus. Please file an issue if we're missing support for a
----popular package.
----
----Available since
----    2020.1
----
----@field SA5011? boolean
 ---Passing odd-sized slice to function expecting even size
 ---
 ---Some functions that take slices as parameters expect the slices to have an even number of elements. 
@@ -3218,6 +3185,34 @@
 ---default = true
 ---```
 ---@field SA9009? boolean
+---Returned function should be called in defer
+---
+---If you have a function such as:
+---
+---    func f() func() {
+---        // Do something.
+---        return func() {
+---            // Do something.
+---        }
+---    }
+---
+---Then calling that in defer:
+---
+---    defer f()
+---
+---Is almost always a mistake, since you typically want to call the returned
+---function:
+---
+---    defer f()()
+---
+---Available since
+---    2026.2
+---
+---
+---```lua
+---default = true
+---```
+---@field SA9010? boolean
 ---Incorrect or missing package comment
 ---
 ---Packages must have a package comment that is formatted according to
@@ -3774,14 +3769,39 @@
 ---For example:
 ---
 ---	var unwrappedErr net.DNSError
----	errors.As(err, unwrappedErr) // should use &unwrappedErr, DNSError.Error has a pointer reciever
+---	errors.As(err, unwrappedErr) // should use &unwrappedErr, DNSError.Error has a pointer receiver
 ---
 ---
 ---```lua
 ---default = true
 ---```
 ---@field errorsas? boolean
----Reports misuse of errors.AsType[T] in if/else chains.
+---replace errors.As with errors.AsType[T]
+---
+---This analyzer suggests fixes to simplify uses of [errors.As] of
+---this form:
+---
+---	var myerr *MyErr
+---	if errors.As(err, &myerr) {
+---		handle(myerr)
+---	}
+---
+---by using the less error-prone generic [errors.AsType] function,
+---introduced in Go 1.26:
+---
+---	if myerr, ok := errors.AsType[*MyErr](err); ok {
+---		handle(myerr)
+---	}
+---
+---The fix is only offered if the var declaration has the form shown and
+---there are no uses of myerr outside the if statement.
+---
+---```lua
+---default = true
+---```
+---@field errorsastype? boolean
+---report shadowing of errors.AsType[T] in if/else chains
+---
 ---For example:
 ---
 ---	err := f()
@@ -3795,11 +3815,10 @@
 ---original error. Instead, its operand is the zero value of type *FooErr
 ---produced by the first if statement; this is invariably a mistake.
 ---
----
 ---```lua
 ---default = true
 ---```
----@field errorsastype? boolean
+---@field errorsastypeshadow? boolean
 ---find structs that would use less memory if their fields were sorted
 ---
 ---This analyzer finds structs that can be rearranged to use less memory, and provides
@@ -3972,7 +3991,12 @@
 ---@field infertypeargs? boolean
 ---apply fixes based on 'go:fix inline' comment directives
 ---
----The inline analyzer inlines functions and constants that are marked for inlining.
+---The inline analyzer inlines functions, constants, and type aliases
+---that are marked for inlining.
+---
+---Use this command to apply (just) inline fixes en masse:
+---
+---	$ go fix -inline ./...
 ---
 ---## Functions
 ---
@@ -4052,14 +4076,30 @@
 ---	//go:fix inline
 ---	const (
 ---		Ptr = Pointer
----	    Val = Value
+---		Val = Value
 ---	)
 ---
----The proposal https://go.dev/issue/32816 introduces the "//go:fix inline" directives.
+---## Type aliases
 ---
----You can use this command to apply inline fixes en masse:
+---Similar to named constants, a type alias can also be marked for inlining:
 ---
----	$ go run golang.org/x/tools/go/analysis/passes/inline/cmd/inline@latest -fix ./...
+---	//go:fix inline
+---	type A = newpkg.A
+---
+---The analyzer will replace all references to the annotated type
+---(A) by the type on the right-hand side of the declaration (newpkg.A).
+---
+---## Tests
+---
+---A use of a function, named constant, or type alias X from its
+---dedicated test (TestX), is not inlined, since the purpose of the test
+---is to exercise X itself, even if it is deprecated and other uses of it
+---should be inlined.
+---This applies to benchmarks and examples too, and follows the usual
+---conventions of test function naming.
+---
+---Similarly, if the symbol X is declared in a file named foo.go, any use
+---of it within a file named foo_test.go will also not be inlined.
 ---
 ---```lua
 ---default = true
@@ -4701,6 +4741,30 @@
 ---default = true
 ---```
 ---@field simplifyslice? boolean
+---replace backward loops over slices with slices.Backward
+---
+---The slicesbackward analyzer suggests replacing manually-written backward
+---loops of the form
+---
+---	for i := len(s) - 1; i >= 0; i-- {
+---	    use(s[i])
+---	}
+---
+---with the more readable Go 1.23 style using slices.Backward:
+---
+---	for _, v := range slices.Backward(s) {
+---	    use(v)
+---	}
+---
+---If the loop index is needed beyond just indexing into the slice, both
+---the index and value variables are kept:
+---
+---	for i, v := range slices.Backward(s) { ... }
+---
+---```lua
+---default = true
+---```
+---@field slicesbackward? boolean
 ---replace loops with slices.Contains or slices.ContainsFunc
 ---
 ---The slicescontains analyzer simplifies loops that check for the existence of
@@ -4772,6 +4836,48 @@
 ---default = true
 ---```
 ---@field sortslice? boolean
+---sqlrowserr: report failure to check sql.Rows.Err
+---
+---This analyzer reports uses of sql.Rows in which the result of a query
+---such as db.Query() is assigned to a local variable that is then used
+---in a loop that calls Rows.Next, but lacks a final check of Rows.Err.
+---This causes row iteration errors to be discarded.
+---
+---For example:
+---
+---	rows, err := db.Query("select ...") // error: "sql.Rows rows is used in Next loop without final check of rows.Err()"
+---	if err != nil {
+---		return err
+---	}
+---	defer rows.Close() // ignore error
+---	for rows.Next() {
+---		var x int
+---		if err := rows.Scan(&x); err != nil {
+---			return err
+---		}
+---		use(x)
+---	}
+---	/* ...no use of rows.Err()... */
+---
+---Correct usage of sql.Rows demands both a call to Rows.Close to release
+---resources and a call to Rows.Err to report iteration errors. It is
+---not critical to report resource cleanup errors, but it is crucial to
+---report iteration errors as they would otherwise be indistinguishable
+---from a smaller result.
+---
+---To avoid false positives, the analyzer is silent if the Rows is passed
+---into or out of the function or assigned somewhere other than a local
+---variable.
+---
+---It is not this analyzer's goal to ensure proper handling of errors in
+---all cases, but merely the simple mistakes where the user may have been
+---oblivious to the existence of the Rows.Err method.
+---
+---
+---```lua
+---default = true
+---```
+---@field sqlrowserr? boolean
 ---use iterators instead of Len/At-style APIs
 ---
 ---This analyzer suggests a fix to replace each loop of the form:
@@ -5756,6 +5862,10 @@
 ---default = true
 ---```
 ---@field ["ui.documentation.linksInHover"]? false | true | "gopls"
+---(Experimental) moveType enables producing Move Type codeactions. The implementation
+---is unfinished so we use this setting to gate its use.
+---
+---@field ["ui.moveType"]? boolean
 ---importShortcut specifies whether import statements should link to
 ---documentation or go to definitions.
 ---
@@ -5834,7 +5944,18 @@
 ---@field ["ui.semanticTokenTypes"]? table
 ---(Experimental) semanticTokens determines whether gopls will return a
 ---SemanticTokensProvider at initialization, or respond
----to request for semantic tokens.
+---to requests for semantic tokens.
+---
+---This setting being `false` won't necessary disable the client's calls
+---for semantic tokens. If you want that, it would need to be configured in
+---the client. For example, in VSCode, this would disable all Go semantic
+---token calls to the LSP server:
+---
+---```json5
+---"[go]": {
+---    "editor.semanticHighlighting.enabled": false,
+---}
+---```
 ---
 ---@field ["ui.semanticTokens"]? boolean
 ---(For Debugging) verboseOutput enables additional debug logging.
