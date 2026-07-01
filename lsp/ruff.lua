@@ -10,7 +10,7 @@
 ---
 --- **Available in Ruff `v0.4.5` in beta and stabilized in Ruff `v0.5.3`.**
 ---
---- This is the new built-in language server written in Rust. It supports the same feature set as `ruff-lsp`, but with superior performance and no installation required. Note that the `ruff-lsp` server will continue to be maintained until further notice.
+--- This is the new built-in language server written in Rust. It supports the same feature set as `ruff-lsp`, but with superior performance and no separate installation required.
 ---
 --- Server settings can be provided via:
 ---
