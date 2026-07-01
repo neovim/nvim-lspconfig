@@ -122,6 +122,10 @@
 ---default = { "debug_assertions", "miri" }
 ---```
 ---@field cfgs? string[]
+---Path to a `.cargo/config.toml` style file to pass to cargo via `--config`
+---for every cargo invocation (metadata, build scripts, config discovery).
+---Useful to give rust-analyzer a consistent view of the project configuration.
+---@field configPath? string
 ---Extra arguments that are passed to every cargo invocation.
 ---
 ---```lua
