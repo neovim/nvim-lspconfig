@@ -2,7 +2,7 @@
 ---
 --- https://github.com/astral-sh/ruff-lsp
 ---
---- WARN: `ruff-lsp` is now deprecated, LSP functionality is now built into `ruff` itslef, consider setting up `ruff` instead.
+--- WARN: `ruff-lsp` is now deprecated, LSP functionality is now built into `ruff` itself, consider setting up `ruff` instead.
 ---
 --- A Language Server Protocol implementation for Ruff, an extremely fast Python linter and code transformation tool, written in Rust. It can be installed via pip.
 ---
