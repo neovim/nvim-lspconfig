@@ -44,7 +44,9 @@ local function default_sysroot_src()
   if not sysroot then
     local rustc = os.getenv 'RUSTC' or 'rustc'
     local ok, system_obj = pcall(vim.system, { rustc, '--print', 'sysroot' }, { text = true })
-    if not ok then return nil end
+    if not ok then
+      return nil
+    end
     local result = system_obj:wait()
 
     local stdout = result.stdout
