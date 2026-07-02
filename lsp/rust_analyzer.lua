@@ -43,7 +43,9 @@ local function default_sysroot_src()
   local sysroot = vim.tbl_get(vim.lsp.config['rust_analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysroot')
   if not sysroot then
     local rustc = os.getenv 'RUSTC' or 'rustc'
-    local result = vim.system({ rustc, '--print', 'sysroot' }, { text = true }):wait()
+    local ok, system_obj = pcall(vim.system, { rustc, '--print', 'sysroot' }, { text = true })
+    if not ok then return nil end
+    local result = system_obj:wait()
 
     local stdout = result.stdout
     if result.code == 0 and stdout then
