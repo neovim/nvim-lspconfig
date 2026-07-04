@@ -616,7 +616,7 @@ Default config:
 
 ## angularls
 
-https://github.com/angular/vscode-ng-language-service
+https://github.com/angular/angular/tree/main/vscode-ng-language-service
 `angular-language-server` can be installed via npm `npm install -g @angular/language-server`.
 
 ```lua
