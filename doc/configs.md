@@ -174,6 +174,7 @@ Nvim by running `:help lspconfig-all`.
 - [just](#just)
 - [kakehashi](#kakehashi)
 - [kcl](#kcl)
+- [kdl_lsp](#kdl_lsp)
 - [koka](#koka)
 - [kotlin_language_server](#kotlin_language_server)
 - [kotlin_lsp](#kotlin_lsp)
@@ -6995,6 +6996,33 @@ Default config:
 - `filetypes` :
   ```lua
   { "kcl" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".git" }
+  ```
+
+---
+
+## kdl_lsp
+
+https://github.com/kdl-org/kdl-rs/tree/main/tools/kdl-lsp
+
+Language server for the KDL document language.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('kdl_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "kdl-lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "kdl" }
   ```
 - `root_markers` :
   ```lua
