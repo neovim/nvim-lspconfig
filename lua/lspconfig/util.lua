@@ -55,20 +55,43 @@ end
 ---
 --- @param root_files string[] List of root-marker files to append to.
 --- @param new_names string[] Potential root-marker filenames (e.g. `{ 'package.json', 'package.json5' }`) to inspect for the given `field`.
---- @param field string Field to search for in the given `new_names` files.
+--- @param field string | string[] Field(s) to search for in the given `new_names` files.
 --- @param fname string Full path of the current buffer name to start searching upwards from.
-function M.root_markers_with_field(root_files, new_names, field, fname)
+--- @param match_mode? 'all' | 'any' Match mode - all or any field passed as `field`
+function M.root_markers_with_field(root_files, new_names, field, fname, match_mode)
   local path = vim.fn.fnamemodify(fname, ':h')
-  local found = vim.fs.find(new_names, { path = path, upward = true })
-
+  local found = vim.fs.find(new_names, { path = path, upward = true, type = 'file' })
+  local fields = type(field) == 'string' and { field } or field
+  local to_find = vim.deepcopy(fields)
+  local matcher = (match_mode or 'any') == 'any'
+      and function(line)
+        return vim.iter(fields):any(function(s)
+          return line:find(s)
+        end)
+      end
+    or function(line)
+      to_find = vim
+        .iter(to_find)
+        :filter(function(s)
+          return not line:find(s)
+        end)
+        :totable()
+      if #to_find == 0 then
+        to_find = vim.deepcopy(files)
+        return true
+      end
+      return false
+    end
   for _, f in ipairs(found or {}) do
     -- Match the given `field`.
-    for line in io.lines(f) do
-      if line:find(field) then
+    local file = assert(io.open(f, 'r'))
+    for line in file:lines() do
+      if matcher(line) then
         root_files[#root_files + 1] = vim.fs.basename(f)
         break
       end
     end
+    file:close()
   end
 
   return root_files

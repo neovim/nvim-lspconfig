@@ -17,6 +17,7 @@ return {
     '--port 13603',
     '--nostdio 0',
   },
+  ---@type lspconfig.settings.perlls
   settings = {
     perl = {
       perlCmd = 'perl',

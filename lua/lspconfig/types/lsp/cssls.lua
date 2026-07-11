@@ -1,0 +1,619 @@
+---@meta
+
+---@class _.lspconfig.settings.cssls.Css.Completion
+---Insert semicolon at end of line when completing CSS properties.
+---
+---```lua
+---default = true
+---```
+---@field completePropertyWithSemicolon? boolean
+---By default, VS Code triggers property value completion after selecting a CSS property. Use this setting to disable this behavior.
+---
+---```lua
+---default = true
+---```
+---@field triggerPropertyValueCompletion? boolean
+
+---@class _.lspconfig.settings.cssls.Css.Format
+---Put braces on the same line as rules (`collapse`) or put braces on own line (`expand`).
+---
+---```lua
+---default = "collapse"
+---```
+---@field braceStyle? "collapse" | "expand"
+---Enable/disable default CSS formatter.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Maximum number of line breaks to be preserved in one chunk, when `#css.format.preserveNewLines#` is enabled.
+---@field maxPreserveNewLines? number
+---Separate rulesets by a blank line.
+---
+---```lua
+---default = true
+---```
+---@field newlineBetweenRules? boolean
+---Separate selectors with a new line.
+---
+---```lua
+---default = true
+---```
+---@field newlineBetweenSelectors? boolean
+---Whether existing line breaks before rules and declarations should be preserved.
+---
+---```lua
+---default = true
+---```
+---@field preserveNewLines? boolean
+---Ensure a space character around selector separators `>`, `+`, `~` (e.g. `a > b`).
+---@field spaceAroundSelectorSeparator? boolean
+
+---@class _.lspconfig.settings.cssls.Css.Hover
+---Show property and value documentation in CSS hovers.
+---
+---```lua
+---default = true
+---```
+---@field documentation? boolean
+---Show references to MDN in CSS hovers.
+---
+---```lua
+---default = true
+---```
+---@field references? boolean
+
+---@class _.lspconfig.settings.cssls.Css.Lint
+---Invalid number of parameters.
+---
+---```lua
+---default = "error"
+---```
+---@field argumentsInColorFunction? "ignore" | "warning" | "error"
+---Do not use `width` or `height` when using `padding` or `border`.
+---
+---```lua
+---default = "ignore"
+---```
+---@field boxModel? "ignore" | "warning" | "error"
+---When using a vendor-specific prefix make sure to also include all other vendor-specific properties.
+---
+---```lua
+---default = "ignore"
+---```
+---@field compatibleVendorPrefixes? "ignore" | "warning" | "error"
+---Do not use duplicate style definitions.
+---
+---```lua
+---default = "ignore"
+---```
+---@field duplicateProperties? "ignore" | "warning" | "error"
+---Do not use empty rulesets.
+---
+---```lua
+---default = "warning"
+---```
+---@field emptyRules? "ignore" | "warning" | "error"
+---Avoid using `float`. Floats lead to fragile CSS that is easy to break if one aspect of the layout changes.
+---
+---```lua
+---default = "ignore"
+---```
+---@field float? "ignore" | "warning" | "error"
+---`@font-face` rule must define `src` and `font-family` properties.
+---
+---```lua
+---default = "warning"
+---```
+---@field fontFaceProperties? "ignore" | "warning" | "error"
+---Hex colors must consist of 3, 4, 6 or 8 hex numbers.
+---
+---```lua
+---default = "error"
+---```
+---@field hexColorLength? "ignore" | "warning" | "error"
+---Selectors should not contain IDs because these rules are too tightly coupled with the HTML.
+---
+---```lua
+---default = "ignore"
+---```
+---@field idSelector? "ignore" | "warning" | "error"
+---IE hacks are only necessary when supporting IE7 and older.
+---
+---```lua
+---default = "ignore"
+---```
+---@field ieHack? "ignore" | "warning" | "error"
+---Import statements do not load in parallel.
+---
+---```lua
+---default = "ignore"
+---```
+---@field importStatement? "ignore" | "warning" | "error"
+---Avoid using `!important`. It is an indication that the specificity of the entire CSS has gotten out of control and needs to be refactored.
+---
+---```lua
+---default = "ignore"
+---```
+---@field important? "ignore" | "warning" | "error"
+---Property is ignored due to the display. E.g. with `display: inline`, the `width`, `height`, `margin-top`, `margin-bottom`, and `float` properties have no effect.
+---
+---```lua
+---default = "warning"
+---```
+---@field propertyIgnoredDueToDisplay? "ignore" | "warning" | "error"
+---The universal selector (`*`) is known to be slow.
+---
+---```lua
+---default = "ignore"
+---```
+---@field universalSelector? "ignore" | "warning" | "error"
+---Unknown at-rule.
+---
+---```lua
+---default = "warning"
+---```
+---@field unknownAtRules? "ignore" | "warning" | "error"
+---Unknown property.
+---
+---```lua
+---default = "warning"
+---```
+---@field unknownProperties? "ignore" | "warning" | "error"
+---Unknown vendor specific property.
+---
+---```lua
+---default = "ignore"
+---```
+---@field unknownVendorSpecificProperties? "ignore" | "warning" | "error"
+---A list of properties that are not validated against the `unknownProperties` rule.
+---
+---```lua
+---default = {}
+---```
+---@field validProperties? string[]
+---When using a vendor-specific prefix, also include the standard property.
+---
+---```lua
+---default = "warning"
+---```
+---@field vendorPrefix? "ignore" | "warning" | "error"
+---No unit for zero needed.
+---
+---```lua
+---default = "ignore"
+---```
+---@field zeroUnits? "ignore" | "warning" | "error"
+
+---@class _.lspconfig.settings.cssls.Css.Trace
+---Traces the communication between VS Code and the CSS language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.cssls.Css
+---@field completion? _.lspconfig.settings.cssls.Css.Completion
+---A list of relative file paths pointing to JSON files following the [custom data format](https://github.com/microsoft/vscode-css-languageservice/blob/master/docs/customData.md).
+---
+---VS Code loads custom data on startup to enhance its CSS support for CSS custom properties (variables), at-rules, pseudo-classes, and pseudo-elements you specify in the JSON files.
+---
+---The file paths are relative to workspace and only workspace folder settings are considered.
+---
+---```lua
+---default = {}
+---```
+---@field customData? string[]
+---@field format? _.lspconfig.settings.cssls.Css.Format
+---@field hover? _.lspconfig.settings.cssls.Css.Hover
+---@field lint? _.lspconfig.settings.cssls.Css.Lint
+---@field trace? _.lspconfig.settings.cssls.Css.Trace
+---Enables or disables all validations.
+---
+---```lua
+---default = true
+---```
+---@field validate? boolean
+
+---@class _.lspconfig.settings.cssls.Less.Completion
+---Insert semicolon at end of line when completing CSS properties.
+---
+---```lua
+---default = true
+---```
+---@field completePropertyWithSemicolon? boolean
+---By default, VS Code triggers property value completion after selecting a CSS property. Use this setting to disable this behavior.
+---
+---```lua
+---default = true
+---```
+---@field triggerPropertyValueCompletion? boolean
+
+---@class _.lspconfig.settings.cssls.Less.Format
+---Put braces on the same line as rules (`collapse`) or put braces on own line (`expand`).
+---
+---```lua
+---default = "collapse"
+---```
+---@field braceStyle? "collapse" | "expand"
+---Enable/disable default LESS formatter.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Maximum number of line breaks to be preserved in one chunk, when `#less.format.preserveNewLines#` is enabled.
+---@field maxPreserveNewLines? number
+---Separate rulesets by a blank line.
+---
+---```lua
+---default = true
+---```
+---@field newlineBetweenRules? boolean
+---Separate selectors with a new line.
+---
+---```lua
+---default = true
+---```
+---@field newlineBetweenSelectors? boolean
+---Whether existing line breaks before rules and declarations should be preserved.
+---
+---```lua
+---default = true
+---```
+---@field preserveNewLines? boolean
+---Ensure a space character around selector separators `>`, `+`, `~` (e.g. `a > b`).
+---@field spaceAroundSelectorSeparator? boolean
+
+---@class _.lspconfig.settings.cssls.Less.Hover
+---Show property and value documentation in LESS hovers.
+---
+---```lua
+---default = true
+---```
+---@field documentation? boolean
+---Show references to MDN in LESS hovers.
+---
+---```lua
+---default = true
+---```
+---@field references? boolean
+
+---@class _.lspconfig.settings.cssls.Less.Lint
+---Invalid number of parameters.
+---
+---```lua
+---default = "error"
+---```
+---@field argumentsInColorFunction? "ignore" | "warning" | "error"
+---Do not use `width` or `height` when using `padding` or `border`.
+---
+---```lua
+---default = "ignore"
+---```
+---@field boxModel? "ignore" | "warning" | "error"
+---When using a vendor-specific prefix make sure to also include all other vendor-specific properties.
+---
+---```lua
+---default = "ignore"
+---```
+---@field compatibleVendorPrefixes? "ignore" | "warning" | "error"
+---Do not use duplicate style definitions.
+---
+---```lua
+---default = "ignore"
+---```
+---@field duplicateProperties? "ignore" | "warning" | "error"
+---Do not use empty rulesets.
+---
+---```lua
+---default = "warning"
+---```
+---@field emptyRules? "ignore" | "warning" | "error"
+---Avoid using `float`. Floats lead to fragile CSS that is easy to break if one aspect of the layout changes.
+---
+---```lua
+---default = "ignore"
+---```
+---@field float? "ignore" | "warning" | "error"
+---`@font-face` rule must define `src` and `font-family` properties.
+---
+---```lua
+---default = "warning"
+---```
+---@field fontFaceProperties? "ignore" | "warning" | "error"
+---Hex colors must consist of 3, 4, 6 or 8 hex numbers.
+---
+---```lua
+---default = "error"
+---```
+---@field hexColorLength? "ignore" | "warning" | "error"
+---Selectors should not contain IDs because these rules are too tightly coupled with the HTML.
+---
+---```lua
+---default = "ignore"
+---```
+---@field idSelector? "ignore" | "warning" | "error"
+---IE hacks are only necessary when supporting IE7 and older.
+---
+---```lua
+---default = "ignore"
+---```
+---@field ieHack? "ignore" | "warning" | "error"
+---Import statements do not load in parallel.
+---
+---```lua
+---default = "ignore"
+---```
+---@field importStatement? "ignore" | "warning" | "error"
+---Avoid using `!important`. It is an indication that the specificity of the entire CSS has gotten out of control and needs to be refactored.
+---
+---```lua
+---default = "ignore"
+---```
+---@field important? "ignore" | "warning" | "error"
+---Property is ignored due to the display. E.g. with `display: inline`, the `width`, `height`, `margin-top`, `margin-bottom`, and `float` properties have no effect.
+---
+---```lua
+---default = "warning"
+---```
+---@field propertyIgnoredDueToDisplay? "ignore" | "warning" | "error"
+---The universal selector (`*`) is known to be slow.
+---
+---```lua
+---default = "ignore"
+---```
+---@field universalSelector? "ignore" | "warning" | "error"
+---Unknown at-rule.
+---
+---```lua
+---default = "warning"
+---```
+---@field unknownAtRules? "ignore" | "warning" | "error"
+---Unknown property.
+---
+---```lua
+---default = "warning"
+---```
+---@field unknownProperties? "ignore" | "warning" | "error"
+---Unknown vendor specific property.
+---
+---```lua
+---default = "ignore"
+---```
+---@field unknownVendorSpecificProperties? "ignore" | "warning" | "error"
+---A list of properties that are not validated against the `unknownProperties` rule.
+---
+---```lua
+---default = {}
+---```
+---@field validProperties? string[]
+---When using a vendor-specific prefix, also include the standard property.
+---
+---```lua
+---default = "warning"
+---```
+---@field vendorPrefix? "ignore" | "warning" | "error"
+---No unit for zero needed.
+---
+---```lua
+---default = "ignore"
+---```
+---@field zeroUnits? "ignore" | "warning" | "error"
+
+---@class _.lspconfig.settings.cssls.Less
+---@field completion? _.lspconfig.settings.cssls.Less.Completion
+---@field format? _.lspconfig.settings.cssls.Less.Format
+---@field hover? _.lspconfig.settings.cssls.Less.Hover
+---@field lint? _.lspconfig.settings.cssls.Less.Lint
+---Enables or disables all validations.
+---
+---```lua
+---default = true
+---```
+---@field validate? boolean
+
+---@class _.lspconfig.settings.cssls.Scss.Completion
+---Insert semicolon at end of line when completing CSS properties.
+---
+---```lua
+---default = true
+---```
+---@field completePropertyWithSemicolon? boolean
+---By default, VS Code triggers property value completion after selecting a CSS property. Use this setting to disable this behavior.
+---
+---```lua
+---default = true
+---```
+---@field triggerPropertyValueCompletion? boolean
+
+---@class _.lspconfig.settings.cssls.Scss.Format
+---Put braces on the same line as rules (`collapse`) or put braces on own line (`expand`).
+---
+---```lua
+---default = "collapse"
+---```
+---@field braceStyle? "collapse" | "expand"
+---Enable/disable default SCSS formatter.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Maximum number of line breaks to be preserved in one chunk, when `#scss.format.preserveNewLines#` is enabled.
+---@field maxPreserveNewLines? number
+---Separate rulesets by a blank line.
+---
+---```lua
+---default = true
+---```
+---@field newlineBetweenRules? boolean
+---Separate selectors with a new line.
+---
+---```lua
+---default = true
+---```
+---@field newlineBetweenSelectors? boolean
+---Whether existing line breaks before rules and declarations should be preserved.
+---
+---```lua
+---default = true
+---```
+---@field preserveNewLines? boolean
+---Ensure a space character around selector separators `>`, `+`, `~` (e.g. `a > b`).
+---@field spaceAroundSelectorSeparator? boolean
+
+---@class _.lspconfig.settings.cssls.Scss.Hover
+---Show property and value documentation in SCSS hovers.
+---
+---```lua
+---default = true
+---```
+---@field documentation? boolean
+---Show references to MDN in SCSS hovers.
+---
+---```lua
+---default = true
+---```
+---@field references? boolean
+
+---@class _.lspconfig.settings.cssls.Scss.Lint
+---Invalid number of parameters.
+---
+---```lua
+---default = "error"
+---```
+---@field argumentsInColorFunction? "ignore" | "warning" | "error"
+---Do not use `width` or `height` when using `padding` or `border`.
+---
+---```lua
+---default = "ignore"
+---```
+---@field boxModel? "ignore" | "warning" | "error"
+---When using a vendor-specific prefix make sure to also include all other vendor-specific properties.
+---
+---```lua
+---default = "ignore"
+---```
+---@field compatibleVendorPrefixes? "ignore" | "warning" | "error"
+---Do not use duplicate style definitions.
+---
+---```lua
+---default = "ignore"
+---```
+---@field duplicateProperties? "ignore" | "warning" | "error"
+---Do not use empty rulesets.
+---
+---```lua
+---default = "warning"
+---```
+---@field emptyRules? "ignore" | "warning" | "error"
+---Avoid using `float`. Floats lead to fragile CSS that is easy to break if one aspect of the layout changes.
+---
+---```lua
+---default = "ignore"
+---```
+---@field float? "ignore" | "warning" | "error"
+---`@font-face` rule must define `src` and `font-family` properties.
+---
+---```lua
+---default = "warning"
+---```
+---@field fontFaceProperties? "ignore" | "warning" | "error"
+---Hex colors must consist of 3, 4, 6 or 8 hex numbers.
+---
+---```lua
+---default = "error"
+---```
+---@field hexColorLength? "ignore" | "warning" | "error"
+---Selectors should not contain IDs because these rules are too tightly coupled with the HTML.
+---
+---```lua
+---default = "ignore"
+---```
+---@field idSelector? "ignore" | "warning" | "error"
+---IE hacks are only necessary when supporting IE7 and older.
+---
+---```lua
+---default = "ignore"
+---```
+---@field ieHack? "ignore" | "warning" | "error"
+---Import statements do not load in parallel.
+---
+---```lua
+---default = "ignore"
+---```
+---@field importStatement? "ignore" | "warning" | "error"
+---Avoid using `!important`. It is an indication that the specificity of the entire CSS has gotten out of control and needs to be refactored.
+---
+---```lua
+---default = "ignore"
+---```
+---@field important? "ignore" | "warning" | "error"
+---Property is ignored due to the display. E.g. with `display: inline`, the `width`, `height`, `margin-top`, `margin-bottom`, and `float` properties have no effect.
+---
+---```lua
+---default = "warning"
+---```
+---@field propertyIgnoredDueToDisplay? "ignore" | "warning" | "error"
+---The universal selector (`*`) is known to be slow.
+---
+---```lua
+---default = "ignore"
+---```
+---@field universalSelector? "ignore" | "warning" | "error"
+---Unknown at-rule.
+---
+---```lua
+---default = "warning"
+---```
+---@field unknownAtRules? "ignore" | "warning" | "error"
+---Unknown property.
+---
+---```lua
+---default = "warning"
+---```
+---@field unknownProperties? "ignore" | "warning" | "error"
+---Unknown vendor specific property.
+---
+---```lua
+---default = "ignore"
+---```
+---@field unknownVendorSpecificProperties? "ignore" | "warning" | "error"
+---A list of properties that are not validated against the `unknownProperties` rule.
+---
+---```lua
+---default = {}
+---```
+---@field validProperties? string[]
+---When using a vendor-specific prefix, also include the standard property.
+---
+---```lua
+---default = "warning"
+---```
+---@field vendorPrefix? "ignore" | "warning" | "error"
+---No unit for zero needed.
+---
+---```lua
+---default = "ignore"
+---```
+---@field zeroUnits? "ignore" | "warning" | "error"
+
+---@class _.lspconfig.settings.cssls.Scss
+---@field completion? _.lspconfig.settings.cssls.Scss.Completion
+---@field format? _.lspconfig.settings.cssls.Scss.Format
+---@field hover? _.lspconfig.settings.cssls.Scss.Hover
+---@field lint? _.lspconfig.settings.cssls.Scss.Lint
+---Enables or disables all validations.
+---
+---```lua
+---default = true
+---```
+---@field validate? boolean
+
+---@class lspconfig.settings.cssls
+---@field css? _.lspconfig.settings.cssls.Css
+---@field less? _.lspconfig.settings.cssls.Less
+---@field scss? _.lspconfig.settings.cssls.Scss

@@ -1,0 +1,147 @@
+---@meta
+
+---@class _.lspconfig.settings.perlnavigator.Perlnavigator.Trace
+---Traces the communication between VS Code and the language server.
+---
+---```lua
+---default = "messages"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.perlnavigator.Perlnavigator
+---Enable warnings using -Mwarnings command switch
+---
+---```lua
+---default = true
+---```
+---@field enableWarnings? boolean
+---Boolean to indicate if $project/lib should be added to the path by default
+---
+---```lua
+---default = true
+---```
+---@field includeLib? boolean
+---Array of paths added to @INC. You can use $workspaceFolder as a placeholder.
+---
+---```lua
+---default = {}
+---```
+---@field includePaths? any[]
+---Log to stdout from the navigator. Viewable in the Perl Navigator LSP log
+---
+---```lua
+---default = true
+---```
+---@field logging? boolean
+---Enable running perl -c on your code
+---
+---```lua
+---default = true
+---```
+---@field perlCompileEnabled? boolean
+---Pass environment variables to the perl executable. Skipped if undefined.
+---
+---```lua
+---default = {}
+---```
+---@field perlEnv? table
+---Add environment variables to current environment, or totally replace (perlEnv related).
+---
+---```lua
+---default = true
+---```
+---@field perlEnvAdd? boolean
+---Pass miscellaneous command line arguments to pass to the perl executable
+---
+---```lua
+---default = {}
+---```
+---@field perlParams? any[]
+---Full path to the perl executable (no aliases, .bat files or ~/)
+---
+---```lua
+---default = "perl"
+---```
+---@field perlPath? string
+---Enable perl critic.
+---
+---```lua
+---default = true
+---```
+---@field perlcriticEnabled? boolean
+---Regex pattern with policies to exclude for perl critic (normally in profile)
+---@field perlcriticExclude? string
+---Regex pattern with policies to include for perl critic (normally in profile)
+---@field perlcriticInclude? string
+---Format for Perl::Critic messages. Use %e to include policy explanations
+---
+---```lua
+---default = "%m"
+---```
+---@field perlcriticMessageFormat? string
+---Path to perl critic profile. Otherwise perlcritic itself will default to ~/.perlcriticrc. (no aliases, .bat files or ~/)
+---
+---```lua
+---default = ""
+---```
+---@field perlcriticProfile? string
+---Override severity level for perl critic (normally in profile)
+---@field perlcriticSeverity? number
+---Override theme for perl critic (normally in profile)
+---@field perlcriticTheme? string
+---Enable perlimports as a linter.
+---@field perlimportsLintEnabled? boolean
+---Path to perlimports.toml (no aliases, .bat files or ~/)
+---
+---```lua
+---default = ""
+---```
+---@field perlimportsProfile? string
+---Enable perlimports as a tidier.
+---@field perlimportsTidyEnabled? boolean
+---Enable perl tidy.
+---
+---```lua
+---default = true
+---```
+---@field perltidyEnabled? boolean
+---Path to perl tidy profile (no aliases, .bat files or ~/)
+---
+---```lua
+---default = ""
+---```
+---@field perltidyProfile? string
+---Editor Diagnostic severity level for Critic severity 1
+---
+---```lua
+---default = "hint"
+---```
+---@field severity1? "error" | "warning" | "info" | "hint" | "none"
+---Editor Diagnostic severity level for Critic severity 2
+---
+---```lua
+---default = "hint"
+---```
+---@field severity2? "error" | "warning" | "info" | "hint" | "none"
+---Editor Diagnostic severity level for Critic severity 3
+---
+---```lua
+---default = "hint"
+---```
+---@field severity3? "error" | "warning" | "info" | "hint" | "none"
+---Editor Diagnostic severity level for Critic severity 4
+---
+---```lua
+---default = "info"
+---```
+---@field severity4? "error" | "warning" | "info" | "hint" | "none"
+---Editor Diagnostic severity level for Critic severity 5
+---
+---```lua
+---default = "warning"
+---```
+---@field severity5? "error" | "warning" | "info" | "hint" | "none"
+---@field trace? _.lspconfig.settings.perlnavigator.Perlnavigator.Trace
+
+---@class lspconfig.settings.perlnavigator
+---@field perlnavigator? _.lspconfig.settings.perlnavigator.Perlnavigator

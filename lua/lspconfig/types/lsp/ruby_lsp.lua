@@ -1,0 +1,307 @@
+---@meta
+
+---List of enabled LSP features
+---
+---```lua
+---default = {
+---  codeActions = true,
+---  codeLens = true,
+---  completion = true,
+---  definition = true,
+---  diagnostics = true,
+---  documentHighlights = true,
+---  documentLink = true,
+---  documentSymbols = true,
+---  foldingRanges = true,
+---  formatting = true,
+---  hover = true,
+---  inlayHint = true,
+---  onTypeFormatting = true,
+---  selectionRanges = true,
+---  semanticHighlighting = true,
+---  signatureHelp = true,
+---  typeHierarchy = true,
+---  workspaceSymbol = true
+---}
+---```
+---@class _.lspconfig.settings.ruby_lsp.RubyLsp.EnabledFeatures
+---Enable code actions, like RuboCop quick fixes
+---
+---```lua
+---default = true
+---```
+---@field codeActions? boolean
+---Enable code lens, which generates clickable text to enrich editor experience
+---
+---```lua
+---default = true
+---```
+---@field codeLens? boolean
+---Enable completion, which provides suggestions for code completion
+---
+---```lua
+---default = true
+---```
+---@field completion? boolean
+---Enable go to definition, which navigates to the definition of the symbol under the cursor
+---
+---```lua
+---default = true
+---```
+---@field definition? boolean
+---Enable diagnostics, like RuboCop violations
+---
+---```lua
+---default = true
+---```
+---@field diagnostics? boolean
+---Enable document highlight, which highlights the occurrences of the entity at cursor position
+---
+---```lua
+---default = true
+---```
+---@field documentHighlights? boolean
+---Enable document link, which generates clickable link to 'PATH' based on '# source://PATH' comments
+---
+---```lua
+---default = true
+---```
+---@field documentLink? boolean
+---Enable document symbols, which populates the file outline and breadcrumbs
+---
+---```lua
+---default = true
+---```
+---@field documentSymbols? boolean
+---Enable folding ranges, which populates the places where code can be folded
+---
+---```lua
+---default = true
+---```
+---@field foldingRanges? boolean
+---Enable formatting
+---
+---```lua
+---default = true
+---```
+---@field formatting? boolean
+---Enable hover, which displays a widget with extra information when hovering over certain code
+---
+---```lua
+---default = true
+---```
+---@field hover? boolean
+---Enable inlay hints
+---
+---```lua
+---default = true
+---```
+---@field inlayHint? boolean
+---Enable on type formatting
+---
+---```lua
+---default = true
+---```
+---@field onTypeFormatting? boolean
+---Enable selection ranges, which selects code based on the position of the cursor(s)
+---
+---```lua
+---default = true
+---```
+---@field selectionRanges? boolean
+---Enable semantic highlighting, which highlights code based on Ruby's understanding of it
+---
+---```lua
+---default = true
+---```
+---@field semanticHighlighting? boolean
+---Enable signature help, which shows the parameters and documentation for the method being invoked
+---
+---```lua
+---default = true
+---```
+---@field signatureHelp? boolean
+---Enable type hierarchy lookup, which shows the supertypes and subtypes of the selected symbol
+---
+---```lua
+---default = true
+---```
+---@field typeHierarchy? boolean
+---Enable workspace symbol, which allows fuzzy searching for symbols in the entire project with CTRL/CMD + T
+---
+---```lua
+---default = true
+---```
+---@field workspaceSymbol? boolean
+
+---Allows opting in or out of feature flags
+---
+---```lua
+---default = {}
+---```
+---@class _.lspconfig.settings.ruby_lsp.RubyLsp.FeatureFlags
+---Opt-into all available feature flags
+---@field all? boolean
+---Opt-in/out of beta server versions
+---@field betaServer? boolean
+---UNDER DEVEOPMENT. Opt-in/out of the full test discovery experience
+---@field fullTestDiscovery? boolean
+---Opt-in/out of the new launcher mode
+---@field launcher? boolean
+---Opt-in/out of the Tapioca add-on
+---@field tapiocaAddon? boolean
+
+---Customize code lens features
+---@class _.lspconfig.settings.ruby_lsp.RubyLsp.FeaturesConfiguration.CodeLens
+---@field enableAll? boolean
+---Enable the run, run in terminal, debug code and other test related code lenses
+---
+---```lua
+---default = true
+---```
+---@field enableTestCodeLens? boolean
+
+---Customize inlay hint features
+---@class _.lspconfig.settings.ruby_lsp.RubyLsp.FeaturesConfiguration.InlayHint
+---@field enableAll? boolean
+---Enable inlay hints for omitted hash values
+---@field implicitHashValue? boolean
+---Enable inlay hints for bare rescues
+---@field implicitRescue? boolean
+
+---Turn on/off specific features from request
+---@class _.lspconfig.settings.ruby_lsp.RubyLsp.FeaturesConfiguration
+---Customize code lens features
+---@field codeLens? _.lspconfig.settings.ruby_lsp.RubyLsp.FeaturesConfiguration.CodeLens
+---Customize inlay hint features
+---@field inlayHint? _.lspconfig.settings.ruby_lsp.RubyLsp.FeaturesConfiguration.InlayHint
+
+---Indexing configurations. Modifying these will impact which declarations are available for definition, completion and other features
+---@class _.lspconfig.settings.ruby_lsp.RubyLsp.Indexing
+---List of gems to exclude from indexing. For example, gems that are not intended to have their declarations referenced from the application.
+---@field excludedGems? string[]
+---List of magic comments that should not be considered as documentation for declarations.
+---@field excludedMagicComments? string[]
+---List of glob patterns to exclude from indexing. For excluding gems, use excludedGems instead.
+---@field excludedPatterns? string[]
+---List of gems to include when indexing. You should only use this setting to include development gems in indexing (which are auto excluded).
+---@field includedGems? string[]
+---List of glob patterns to include when indexing. For example, Ruby files that do not have the .rb extension.
+---@field includedPatterns? string[]
+
+---```lua
+---default = {
+---  identifier = "auto"
+---}
+---```
+---@class _.lspconfig.settings.ruby_lsp.RubyLsp.RubyVersionManager
+---The path to the asdf executable script, if not installed on one of the standard locations
+---@field asdfExecutablePath? string
+---An array of extra directories to search for Ruby installations when using chruby. Equivalent to the RUBIES environment variable
+---@field chrubyRubies? any[]
+---The Ruby version manager to use
+---
+---```lua
+---default = "auto"
+---```
+---@field identifier? "asdf" | "auto" | "chruby" | "none" | "rbenv" | "rvm" | "rv" | "shadowenv" | "mise" | "custom"
+---The path to the Mise executable, if not installed in ~/.local/bin/mise
+---@field miseExecutablePath? string
+---The path to the rbenv executable, if not installed on one of the standard locations
+---@field rbenvExecutablePath? string
+---The path to the rv executable, if not installed on one of the standard locations
+---@field rvExecutablePath? string
+
+---@class _.lspconfig.settings.ruby_lsp.RubyLsp
+---Settings that will be forwarded to configure the behavior of Ruby LSP addons. Keys are addon names, values are objects of settings
+---@field addonSettings? table
+---Relative or absolute path to the Gemfile to use for bundling the Ruby LSP server. Do not use this if you're working on a monorepo or your project's Gemfile is in a subdirectory (look into multiroot workspaces instead). Only necessary when using a separate Gemfile for the Ruby LSP
+---
+---```lua
+---default = ""
+---```
+---@field bundleGemfile? string
+---Ignores if the project uses a typechecker. Only intended to be used while working on the Ruby LSP itself
+---@field bypassTypechecker? boolean
+---A shell command to activate the right Ruby version or add a custom Ruby bin folder to the PATH. Only used if rubyVersionManager is set to 'custom'
+---@field customRubyCommand? string
+---List of enabled LSP features
+---
+---```lua
+---default = {
+---  codeActions = true,
+---  codeLens = true,
+---  completion = true,
+---  definition = true,
+---  diagnostics = true,
+---  documentHighlights = true,
+---  documentLink = true,
+---  documentSymbols = true,
+---  foldingRanges = true,
+---  formatting = true,
+---  hover = true,
+---  inlayHint = true,
+---  onTypeFormatting = true,
+---  selectionRanges = true,
+---  semanticHighlighting = true,
+---  signatureHelp = true,
+---  typeHierarchy = true,
+---  workspaceSymbol = true
+---}
+---```
+---@field enabledFeatures? _.lspconfig.settings.ruby_lsp.RubyLsp.EnabledFeatures
+---Enable ERB support. This can only work with server versions v0.17.5 or above
+---
+---```lua
+---default = true
+---```
+---@field erbSupport? boolean
+---Allows opting in or out of feature flags
+---
+---```lua
+---default = {}
+---```
+---@field featureFlags? _.lspconfig.settings.ruby_lsp.RubyLsp.FeatureFlags
+---Turn on/off specific features from request
+---@field featuresConfiguration? _.lspconfig.settings.ruby_lsp.RubyLsp.FeaturesConfiguration
+---Which tool the Ruby LSP should use for formatting files
+---
+---```lua
+---default = "auto"
+---```
+---@field formatter? "auto" | "rubocop" | "rubocop_internal" | "syntax_tree" | "standard" | "rubyfmt" | "none"
+---Indexing configurations. Modifying these will impact which declarations are available for definition, completion and other features
+---@field indexing? _.lspconfig.settings.ruby_lsp.RubyLsp.Indexing
+---List of linter tools that the Ruby LSP should use for diagnostics
+---@field linters? any[]
+---When to pull diagnostics from the server (on change, save or both). Selecting 'save' may significantly improve performance on large files
+---
+---```lua
+---default = "both"
+---```
+---@field pullDiagnosticsOn? "change" | "save" | "both"
+---Path to the Ruby installation. This is used as a fallback if version manager activation fails
+---@field rubyExecutablePath? string
+---```lua
+---default = {
+---  identifier = "auto"
+---}
+---```
+---@field rubyVersionManager? _.lspconfig.settings.ruby_lsp.RubyLsp.RubyVersionManager
+---Controls the level of opacity for inline RBS comment signatures
+---
+---```lua
+---default = "1"
+---```
+---@field sigOpacityLevel? string
+---The amount of time in seconds to wait for a test to finish before timing out. Only used when running tests from the test explorer
+---
+---```lua
+---default = 30
+---```
+---@field testTimeout? integer
+---This is a temporary setting for testing purposes, do not use it! Replace the composed bundle logic by bundler-compose.
+---@field useBundlerCompose? boolean
+
+---@class lspconfig.settings.ruby_lsp
+---@field rubyLsp? _.lspconfig.settings.ruby_lsp.RubyLsp

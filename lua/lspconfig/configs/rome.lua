@@ -13,7 +13,6 @@ return {
       'javascriptreact',
       'json',
       'typescript',
-      'typescript.tsx',
       'typescriptreact',
     },
     root_dir = function(fname)

@@ -17,13 +17,13 @@ jobs:
         os: [ubuntu-latest, macos-latest]
         nvim_version: [nightly, 'v0.10.4']
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
           version: ${{ matrix.nvim_version }}
 
-      - uses: leafo/gh-actions-lua@v12
+      - uses: leafo/gh-actions-lua@v13
         with:
           luaVersion: "luajit-openresty"
       - uses: leafo/gh-actions-luarocks@v6

@@ -1,0 +1,159 @@
+---@meta
+
+---@class _.lspconfig.settings.purescriptls.Purescript.Trace
+---Traces the communication between VSCode and the PureScript language service.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.purescriptls.Purescript
+---Whether to add the local npm bin directory to the PATH for purs IDE server and build command.
+---@field addNpmPath? boolean
+---Whether to add psc-package sources to the globs passed to the IDE server for source locations (specifically the output of `psc-package sources`, if this is a psc-package project). Update due to adding packages/changing package set requires psc-ide server restart.
+---@field addPscPackageSources? boolean
+---Whether to add spago sources to the globs passed to the IDE server for source locations (specifically the output of `spago sources`, if this is a spago project). Update due to adding packages/changing package set requires psc-ide server restart.
+---
+---```lua
+---default = true
+---```
+---@field addSpagoSources? boolean
+---Whether to automatically start/connect to purs IDE server when editing a PureScript file (includes connecting to an existing running instance). If this is disabled, various features like autocomplete, tooltips, and other type info will not work until start command is run manually.
+---
+---```lua
+---default = true
+---```
+---@field autoStartPscIde? boolean
+---Whether to automatically add imported identifiers when accepting autocomplete result.
+---
+---```lua
+---default = true
+---```
+---@field autocompleteAddImport? boolean
+---Whether to always autocomplete from all built modules, or just those imported in the file. Suggestions from all modules always available by explicitly triggering autocomplete.
+---
+---```lua
+---default = true
+---```
+---@field autocompleteAllModules? boolean
+---Whether to group completions in autocomplete results. Requires compiler 0.11.6
+---
+---```lua
+---default = true
+---```
+---@field autocompleteGrouped? boolean
+---Maximum number of results to fetch for an autocompletion request. May improve performance on large projects.
+---@field autocompleteLimit? integer
+---Build command to use with arguments. Not passed to shell. eg `spago build --purs-args --json-errors`
+---
+---```lua
+---default = "spago build --purs-args --json-errors"
+---```
+---@field buildCommand? string
+---**EXPERIMENTAL** Enable purs IDE server fast rebuild of opened files. This includes both newly opened tabs and those present at startup.
+---@field buildOpenedFiles? boolean
+---The warning codes to censor, both for fast rebuild and a full build. Unrelated to any psa setup. e.g.: ["ShadowedName","MissingTypeDeclaration"]
+---
+---```lua
+---default = {}
+---```
+---@field censorWarnings? string[]
+---List of codegen targets to pass to the compiler for rebuild. e.g. js, corefn. If not specified (rather than empty array) this will not be passed and the compiler will default to js. Requires 0.12.1+
+---@field codegenTargets? string[]
+---Enable declaration codelens to add types to declarations
+---
+---```lua
+---default = true
+---```
+---@field declarationTypeCodeLens? boolean
+---**EXPERIMENTAL** Enable diagnostics on file open, as per diagnostics on type
+---@field diagnosticsOnOpen? boolean
+---**EXPERIMENTAL** Enable rebuilding modules for diagnostics automatically on typing. This may provide quicker feedback on errors, but could interfere with other functionality.
+---@field diagnosticsOnType? boolean
+---**EXPERIMENTAL**
+---
+---```lua
+---default = 100
+---```
+---@field diagnosticsOnTypeDebounce? integer
+---Enable declaration codelenses for export management
+---
+---```lua
+---default = true
+---```
+---@field exportsCodeLens? boolean
+---Enable purs IDE server fast rebuild (rebuilding single files on saving them)
+---
+---```lua
+---default = true
+---```
+---@field fastRebuild? boolean
+---Extension for foreign files
+---
+---```lua
+---default = "js"
+---```
+---@field foreignExt? string
+---Tool to use to for formatting. Must be installed and on PATH (or npm installed with addNpmPath set)
+---
+---```lua
+---default = "purs-tidy"
+---```
+---@field formatter? "none" | "purty" | "purs-tidy" | "pose"
+---Whether to perform a full build on save with the configured build command (rather than IDE server fast rebuild). This is not generally recommended because it is slow, but it does mean that dependent modules are rebuilt as necessary.
+---@field fullBuildOnSave? boolean
+---Whether to show progress for full build on save (if enabled)
+---
+---```lua
+---default = true
+---```
+---@field fullBuildOnSaveProgress? boolean
+---Module to prefer to insert when adding imports which have been re-exported. In order of preference, most preferred first.
+---
+---```lua
+---default = { "Prelude" }
+---```
+---@field importsPreferredModules? string[]
+---Override purs ide output directory (output/ if not specified). This should match up to your build command
+---
+---```lua
+---default = "output/"
+---```
+---@field outputDirectory? string
+---Path to installed packages. Will be used to control globs passed to IDE server for source locations.  Change requires IDE server restart.
+---
+---```lua
+---default = ""
+---```
+---@field packagePath? string
+---Module to consider as your default prelude, if an auto-complete suggestion comes from this module it will be imported unqualified.
+---
+---```lua
+---default = "Prelude"
+---```
+---@field preludeModule? string
+---Port to use for purs IDE server (whether an existing server or to start a new one). By default a random port is chosen (or an existing port in .psc-ide-port if present), if this is specified no attempt will be made to select an alternative port on failure.
+---@field pscIdePort? integer
+---Log level for purs IDE server
+---
+---```lua
+---default = ""
+---```
+---@field pscIdelogLevel? string
+---Location of purs executable (resolved wrt PATH)
+---
+---```lua
+---default = "purs"
+---```
+---@field pursExe? string
+---Path to application source root. Will be used to control globs passed to IDE server for source locations. Change requires IDE server restart.
+---
+---```lua
+---default = "src"
+---```
+---@field sourcePath? string
+---@field trace? _.lspconfig.settings.purescriptls.Purescript.Trace
+
+---@class lspconfig.settings.purescriptls
+---@field purescript? _.lspconfig.settings.purescriptls.Purescript

@@ -1,0 +1,33 @@
+---@meta
+
+---@class _.lspconfig.settings.java_language_server.Java.Trace
+---Traces the communication between VSCode and the language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.java_language_server.Java
+---List of modules to allow access to, for example ["jdk.compiler/com.sun.tools.javac.api"]
+---@field addExports? string[]
+---Relative paths from workspace root to .jar files, .zip files, or folders that should be included in the Java class path
+---@field classPath? string[]
+---Command to debug one test method, for example ["mvn", "test", "-Dmaven.surefire.debug", "-Dtest=${class}#${method}". The test should start paused, listening for the debugger on port 5005.
+---@field debugTestMethod? string[]
+---Relative paths from workspace root to .jar files or .zip files containing source code, or to folders that should be included in the Java doc path
+---@field docPath? string[]
+---External dependencies of the form groupId:artifactId:version or groupId:artifactId:packaging:version:scope
+---@field externalDependencies? string[]
+---Extra compiler args, for example ["--enable-preview","-source 21"].
+---@field extraCompilerArgs? string[]
+---Absolute path to your Java home directory
+---@field home? string
+---Command to run all tests in a class, for example ["mvn", "test", "-Dtest=${class}"
+---@field testClass? string[]
+---Command to run one test method, for example ["mvn", "test", "-Dtest=${class}#${method}"
+---@field testMethod? string[]
+---@field trace? _.lspconfig.settings.java_language_server.Java.Trace
+
+---@class lspconfig.settings.java_language_server
+---@field java? _.lspconfig.settings.java_language_server.Java

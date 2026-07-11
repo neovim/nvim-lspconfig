@@ -1,0 +1,178 @@
+---@meta
+
+---@class _.lspconfig.settings.puppet.Puppet.EditorService.FoldingRange
+---Enable/disable syntax aware code folding provider
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Show or hide the last line in code folding regions
+---@field showLastLine? boolean
+
+---@class _.lspconfig.settings.puppet.Puppet.EditorService.FormatOnType
+---Enable/disable the Puppet document on-type formatter, for example hashrocket alignment
+---@field enable? boolean
+---Sets the maximum file size (in Bytes) that document on-type formatting will occur. Setting this to zero (0) will disable the file size check. Note that large file sizes can cause performance issues.
+---
+---```lua
+---default = 4096
+---```
+---@field maxFileSize? integer
+
+---@class _.lspconfig.settings.puppet.Puppet.EditorService.Hover
+---Enable or disable showing Puppet Module version information in the metadata.json file
+---
+---```lua
+---default = true
+---```
+---@field showMetadataInfo? boolean
+
+---@class _.lspconfig.settings.puppet.Puppet.EditorService.Puppet
+---The Puppet configuration directory. See https://puppet.com/docs/puppet/latest/dirs_confdir.html for more information
+---
+---```lua
+---default = ""
+---```
+---@field confdir? string
+---The Puppet environment to use. See https://puppet.com/docs/puppet/latest/config_print.html#environments for more information
+---
+---```lua
+---default = ""
+---```
+---@field environment? string
+---Additional module paths to use when starting the Editor Services. On Windows this is delimited with a semicolon, and on all other platforms, with a colon. For example C:\Path1;C:\Path2
+---
+---```lua
+---default = ""
+---```
+---@field modulePath? string
+---The Puppet cache directory. See https://puppet.com/docs/puppet/latest/dirs_vardir.html for more information
+---
+---```lua
+---default = ""
+---```
+---@field vardir? string
+---The version of Puppet to use. For example '5.4.0'. This is generally only applicable when using the PDK installation type. If Puppet Editor Services is unable to use this version, it will default to the latest available version of Puppet.
+---
+---```lua
+---default = ""
+---```
+---@field version? string
+
+---@class _.lspconfig.settings.puppet.Puppet.EditorService.Tcp
+---The IP address or hostname of the remote Puppet Editor Service to connect to, for example 'computer.domain' or '192.168.0.1'. Only applicable when the editorService.protocol is set to tcp
+---@field address? string
+---The TCP Port of the remote Puppet Editor Service to connect to. Only applicable when the editorService.protocol is set to tcp
+---@field port? integer
+
+---@class _.lspconfig.settings.puppet.Puppet.EditorService
+---The absolute filepath where the Puppet Editor Service will output the debugging log. By default no logfile is generated
+---
+---```lua
+---default = ""
+---```
+---@field debugFilePath? string
+---Enable/disable advanced Puppet Language Features
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---An array of strings of experimental features to enable in the Puppet Editor Service
+---
+---```lua
+---default = {}
+---```
+---@field featureFlags? any[]
+---@field foldingRange? _.lspconfig.settings.puppet.Puppet.EditorService.FoldingRange
+---@field formatOnType? _.lspconfig.settings.puppet.Puppet.EditorService.FormatOnType
+---@field hover? _.lspconfig.settings.puppet.Puppet.EditorService.Hover
+---Set the logging verbosity level for the Puppet Editor Service, with Debug producing the most output and Error producing the least
+---
+---```lua
+---default = "normal"
+---```
+---@field loglevel? "debug" | "error" | "normal" | "warning" | "verbose"
+---The protocol used to communicate with the Puppet Editor Service. By default the local STDIO protocol is used.
+---
+---```lua
+---default = "stdio"
+---```
+---@field protocol? "stdio" | "tcp"
+---@field puppet? _.lspconfig.settings.puppet.Puppet.EditorService.Puppet
+---@field tcp? _.lspconfig.settings.puppet.Puppet.EditorService.Tcp
+---The timeout to connect to the Puppet Editor Service
+---
+---```lua
+---default = 10
+---```
+---@field timeout? integer
+
+---@class _.lspconfig.settings.puppet.Puppet.Format
+---Enable/disable the Puppet document formatter
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.puppet.Puppet.Notification
+---The type of notification used when a node graph is being generated. Default value of messagebox
+---
+---```lua
+---default = "messagebox"
+---```
+---@field nodeGraph? "messagebox" | "statusbar" | "none"
+---The type of notification used when a running Puppet Resouce. Default value of messagebox
+---
+---```lua
+---default = "messagebox"
+---```
+---@field puppetResource? "messagebox" | "statusbar" | "none"
+
+---@class _.lspconfig.settings.puppet.Puppet.Pdk
+---Enable/disable checking if installed PDK version is latest
+---
+---```lua
+---default = true
+---```
+---@field checkVersion? boolean
+
+---@class _.lspconfig.settings.puppet.Puppet.TitleBar.PdkNewModule
+---Enable/disable the PDK New Module icon in the Editor Title Bar
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.puppet.Puppet.TitleBar
+---@field pdkNewModule? _.lspconfig.settings.puppet.Puppet.TitleBar.PdkNewModule
+
+---@class _.lspconfig.settings.puppet.Puppet.Validate
+---Enable/disable using dependency resolution for Puppetfiles
+---
+---```lua
+---default = true
+---```
+---@field resolvePuppetfiles? boolean
+
+---@class _.lspconfig.settings.puppet.Puppet
+---@field editorService? _.lspconfig.settings.puppet.Puppet.EditorService
+---@field format? _.lspconfig.settings.puppet.Puppet.Format
+---The fully qualified path to the Puppet install directory. This can be a PDK or Puppet Agent installation. For example: 'C:\Program Files\Puppet Labs\Puppet' or '/opt/puppetlabs/puppet'. If this is not set the extension will attempt to detect the installation directory. Do **not** use when `#puppet.installType#` is set to `auto`
+---@field installDirectory? string
+---The type of Puppet installation. Either the Puppet Development Kit (pdk) or the Puppet Agent (agent). Choose `auto` to have the extension detect which to use automatically based on default install locations
+---
+---```lua
+---default = "auto"
+---```
+---@field installType? "auto" | "pdk" | "agent"
+---@field notification? _.lspconfig.settings.puppet.Puppet.Notification
+---@field pdk? _.lspconfig.settings.puppet.Puppet.Pdk
+---@field titleBar? _.lspconfig.settings.puppet.Puppet.TitleBar
+---@field validate? _.lspconfig.settings.puppet.Puppet.Validate
+
+---@class lspconfig.settings.puppet
+---@field puppet? _.lspconfig.settings.puppet.Puppet

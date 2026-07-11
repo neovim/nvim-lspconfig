@@ -4,10 +4,11 @@
 ---
 --- "Smithy Language Server", a Language server for the Smithy IDL.
 ---
---- smithy-language-server has no docs that say how to actually install it(?), so look at:
---- https://github.com/smithy-lang/smithy-vscode/blob/600cfcf0db65edce85f02e6d50f5fa2b0862bc8d/src/extension.ts#L78
+--- Based off the official maven artifacts setup
+--- https://github.com/smithy-lang/smithy-language-server?tab=readme-ov-file#maven-artifacts
 ---
 --- Maven package: https://central.sonatype.com/artifact/software.amazon.smithy/smithy-language-server
+--- Adjusting jvm opts: https://get-coursier.io/docs/cli-launch#java-options
 ---
 --- Installation:
 --- 1. Install coursier, or any tool that can install maven packages.
@@ -16,20 +17,16 @@
 ---    ```
 --- 2. The LS is auto-installed and launched by:
 ---    ```
----    coursier launch software.amazon.smithy:smithy-language-server:0.7.0
+---    cs launch --contrib smithy-language-server:0.8.0
 ---    ```
 
 ---@type vim.lsp.Config
 return {
-  -- pass 0 as the first argument to use STDIN/STDOUT for communication
   cmd = {
-    'coursier',
+    'cs',
     'launch',
-    'software.amazon.smithy:smithy-language-server:0.7.0',
-    '-M',
-    'software.amazon.smithy.lsp.Main',
-    '--',
-    '0',
+    '--contrib',
+    'smithy-language-server:0.8.0',
   },
   filetypes = { 'smithy' },
   root_markers = { 'smithy-build.json', 'build.gradle', 'build.gradle.kts', '.git' },

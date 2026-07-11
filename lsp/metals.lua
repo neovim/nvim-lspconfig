@@ -16,7 +16,7 @@
 return {
   cmd = { 'metals' },
   filetypes = { 'scala' },
-  root_markers = { 'build.sbt', 'build.sc', 'build.gradle', 'pom.xml' },
+  root_markers = { 'build.sbt', 'build.sc', { 'build.gradle', 'build.gradle.kts' }, 'pom.xml' },
   init_options = {
     statusBarProvider = 'show-message',
     isHttpEnabled = true,

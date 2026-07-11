@@ -1,0 +1,198 @@
+---@meta
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.Codegen
+---Whether to enable code generation to a temporary build output directory for Java interoperability (via the non-standard kotlin/buildOutputLocation LSP method). Experimental.
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.Compiler.Jvm
+---Specifies the JVM target, e.g. "1.6" or "1.8"
+---
+---```lua
+---default = "default"
+---```
+---@field target? string
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.Compiler
+---@field jvm? _.lspconfig.settings.kotlin_language_server.Kotlin.Compiler.Jvm
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.Completion.Snippets
+---Specifies whether code completion should provide snippets (true) or plain-text items (false).
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.Completion
+---@field snippets? _.lspconfig.settings.kotlin_language_server.Kotlin.Completion.Snippets
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.DebugAdapter
+---[Recommended] Specifies whether the debug adapter should be used. When enabled a debugger for Kotlin will be available.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Optionally a custom path to the debug adapter executable.
+---
+---```lua
+---default = ""
+---```
+---@field path? string
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.Diagnostics
+---[DEBUG] Specifies the debounce time limit. Lower to increase responsiveness at the cost of possible stability issues.
+---
+---```lua
+---default = 250
+---```
+---@field debounceTime? integer
+---Whether diagnostics (e.g. errors or warnings from the Kotlin compiler) should be emitted.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---The minimum severity of diagnostics to emit.
+---
+---```lua
+---default = "hint"
+---```
+---@field level? "error" | "warning" | "information" | "hint"
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.ExternalSources
+---Specifies whether decompiled/external classes should be auto-converted to Kotlin.
+---@field autoConvertToKotlin? boolean
+---[Recommended] Specifies whether URIs inside JARs should be represented using the 'kls'-scheme.
+---
+---```lua
+---default = true
+---```
+---@field useKlsScheme? boolean
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.Indexing
+---Whether global symbols in the project should be indexed automatically in the background. This enables e.g. code completion for unimported classes and functions.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.InlayHints
+---Whether to provide inlay hints on chained function calls or not.
+---@field chainedHints? boolean
+---Whether to provide inlay hints for parameters on call sites or not.
+---@field parameterHints? boolean
+---Whether to provide inlay hints for types on declaration sites or not.
+---@field typeHints? boolean
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.Java
+---A custom JAVA_HOME for the language server and debug adapter to use.
+---
+---```lua
+---default = ""
+---```
+---@field home? string
+---Custom options using JAVA_OPTS for the language server and debug adapter.
+---
+---```lua
+---default = ""
+---```
+---@field opts? string
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.LanguageServer.DebugAttach
+---[DEBUG] If enabled (together with debugAttach.enabled), the language server will not immediately launch but instead listen on the specified attach port and wait for a debugger. This is ONLY useful if you need to debug the language server ITSELF.
+---@field autoSuspend? boolean
+---[DEBUG] Whether the language server should listen for debuggers, i.e. be debuggable while running in VSCode. This is ONLY useful if you need to debug the language server ITSELF.
+---@field enabled? boolean
+---[DEBUG] If transport is stdio this enables you to attach to the running language server with a debugger. This is ONLY useful if you need to debug the language server ITSELF.
+---
+---```lua
+---default = 5005
+---```
+---@field port? integer
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.LanguageServer
+---@field debugAttach? _.lspconfig.settings.kotlin_language_server.Kotlin.LanguageServer.DebugAttach
+---[Recommended] Specifies whether the language server should be used. When enabled the extension will provide code completions and linting, otherwise just syntax highlighting. Might require a reload to apply.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Optionally a custom path to the language server executable.
+---
+---```lua
+---default = ""
+---```
+---@field path? string
+---The port to which the client will attempt to connect to. A random port is used if zero. Only used if the transport layer is TCP.
+---
+---```lua
+---default = 0
+---```
+---@field port? integer
+---The transport layer beneath the language server protocol. Note that the extension will launch the server even if a TCP socket is used.
+---
+---```lua
+---default = "stdio"
+---```
+---@field transport? "stdio" | "tcp"
+---Specifies glob patterns of files, which would be watched by LSP client. The LSP client doesn't support watching files outside a workspace folder.
+---
+---```lua
+---default = { "**/*.kt", "**/*.kts", "**/*.java", "**/pom.xml", "**/build.gradle", "**/settings.gradle" }
+---```
+---@field watchFiles? any[]
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.Linting
+---[DEBUG] Specifies the debounce time limit. Lower to increase responsiveness at the cost of possible stability issues.
+---
+---```lua
+---default = 250
+---```
+---@field debounceTime? integer
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.Scripts
+---Whether language features are provided for .gradle.kts scripts. Experimental and may not work properly.
+---@field buildScriptsEnabled? boolean
+---Whether language features are provided for .kts scripts. Experimental and may not work properly.
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin.Trace
+---Traces the communication between VSCode and the Kotlin language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.kotlin_language_server.Kotlin
+---@field codegen? _.lspconfig.settings.kotlin_language_server.Kotlin.Codegen
+---@field compiler? _.lspconfig.settings.kotlin_language_server.Kotlin.Compiler
+---@field completion? _.lspconfig.settings.kotlin_language_server.Kotlin.Completion
+---[DEPRECATED] Specifies the debounce time limit. Lower to increase responsiveness at the cost of possible stability issues.
+---
+---```lua
+---default = 250
+---```
+---@field debounceTime? integer
+---@field debugAdapter? _.lspconfig.settings.kotlin_language_server.Kotlin.DebugAdapter
+---@field diagnostics? _.lspconfig.settings.kotlin_language_server.Kotlin.Diagnostics
+---@field externalSources? _.lspconfig.settings.kotlin_language_server.Kotlin.ExternalSources
+---@field indexing? _.lspconfig.settings.kotlin_language_server.Kotlin.Indexing
+---@field inlayHints? _.lspconfig.settings.kotlin_language_server.Kotlin.InlayHints
+---@field java? _.lspconfig.settings.kotlin_language_server.Kotlin.Java
+---@field languageServer? _.lspconfig.settings.kotlin_language_server.Kotlin.LanguageServer
+---@field linting? _.lspconfig.settings.kotlin_language_server.Kotlin.Linting
+---@field scripts? _.lspconfig.settings.kotlin_language_server.Kotlin.Scripts
+---[DEPRECATED] Specifies whether code completion should provide snippets (true) or plain-text items (false).
+---
+---```lua
+---default = true
+---```
+---@field snippetsEnabled? boolean
+---@field trace? _.lspconfig.settings.kotlin_language_server.Kotlin.Trace
+
+---@class lspconfig.settings.kotlin_language_server
+---@field kotlin? _.lspconfig.settings.kotlin_language_server.Kotlin

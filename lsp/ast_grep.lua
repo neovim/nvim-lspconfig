@@ -14,13 +14,13 @@ return {
   workspace_required = true,
   reuse_client = function(client, config)
     config.cmd_cwd = config.root_dir
-    return client.config.cmd_cwd == config.cmd_cwd
+    return client.name == config.name and client.config.cmd_cwd == config.cmd_cwd
   end,
   filetypes = { -- https://ast-grep.github.io/reference/languages.html
     'bash',
     'c',
     'cpp',
-    'csharp',
+    'cs',
     'css',
     'elixir',
     'go',
@@ -29,7 +29,6 @@ return {
     'java',
     'javascript',
     'javascriptreact',
-    'javascript.jsx',
     'json',
     'kotlin',
     'lua',
@@ -43,7 +42,6 @@ return {
     'swift',
     'typescript',
     'typescriptreact',
-    'typescript.tsx',
     'yaml',
   },
   root_markers = { 'sgconfig.yaml', 'sgconfig.yml' },

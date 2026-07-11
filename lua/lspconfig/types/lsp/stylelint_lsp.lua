@@ -1,0 +1,130 @@
+---@meta
+
+---Options for the disable lint rule action in the quick fix menu.
+---
+---```lua
+---default = {
+---  location = "separateLine"
+---}
+---```
+---@class _.lspconfig.settings.stylelint_lsp.Stylelint.CodeAction.DisableRuleComment
+---Configure whether disable comments are added on the same line or a new line.
+---
+---```lua
+---default = "separateLine"
+---```
+---@field location? "separateLine" | "sameLine"
+
+---@class _.lspconfig.settings.stylelint_lsp.Stylelint.CodeAction
+---Options for the disable lint rule action in the quick fix menu.
+---
+---```lua
+---default = {
+---  location = "separateLine"
+---}
+---```
+---@field disableRuleComment? _.lspconfig.settings.stylelint_lsp.Stylelint.CodeAction.DisableRuleComment
+
+---@class _.lspconfig.settings.stylelint_lsp.Stylelint.LintFiles
+---The glob pattern used by the "Lint All Files" and "Lint Workspace Folder" commands to discover files. Adjust this if you lint SCSS, Less, or other file types; for example, `**/*.{css,scss}`.
+---
+---```lua
+---default = "**/*.css"
+---```
+---@field glob? string
+
+---@class _.lspconfig.settings.stylelint_lsp.Stylelint.Rules
+---Override severity levels for specific rules.
+---
+---```lua
+---default = {}
+---```
+---@field customizations? table[]
+
+---@class _.lspconfig.settings.stylelint_lsp.Stylelint
+---@field codeAction? _.lspconfig.settings.stylelint_lsp.Stylelint.CodeAction
+---A Stylelint configuration object.
+---@field config? table
+---A path to the directory that relative paths defining "extends" and "plugins" are relative to.
+---
+---```lua
+---default = ""
+---```
+---@field configBasedir? string
+---Path to a JSON, YAML, or JS file that contains your configuration object. Use this option if you don't want Stylelint to search for a configuration file.
+---
+---```lua
+---default = ""
+---```
+---@field configFile? string
+---An absolute path to a custom PostCSS-compatible syntax module.
+---
+---```lua
+---default = ""
+---```
+---@field customSyntax? string
+---Control whether Stylelint is enabled or not.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Additional exec argv arguments passed to the Node.js runtime.
+---@field execArgv? string[]|any
+---Ignore `stylelint-disable` (e.g. `/* stylelint-disable block-no-empty */`) comments.
+---@field ignoreDisables? boolean
+---Path to a file containing patterns describing files to ignore. Use to override automatic `.stylelintignore` detection.
+---
+---```lua
+---default = ""
+---```
+---@field ignorePath? string
+---@field lintFiles? _.lspconfig.settings.stylelint_lsp.Stylelint.LintFiles
+---Controls the log level used by the Stylelint extension and language server. Restart the extension host or the window after changing the setting, since it's picked up at initialization.
+---
+---```lua
+---default = "info"
+---```
+---@field logLevel? "error" | "warn" | "info" | "debug"
+---The package manager you use to install node modules.
+---
+---```lua
+---default = "npm"
+---```
+---@field packageManager? "npm" | "yarn" | "pnpm"
+---Report `stylelint-disable` comments without a description.
+---@field reportDescriptionlessDisables? boolean
+---Also report errors for `stylelint-disable` comments that used for rules that don't exist within the configuration object.
+---@field reportInvalidScopeDisables? boolean
+---Also report errors for `stylelint-disable` comments that are not blocking a lint warning.
+---@field reportNeedlessDisables? boolean
+---@field rules? _.lspconfig.settings.stylelint_lsp.Stylelint.Rules
+---Control when the extension lints your files. onType lints files as you edit them, while onSave only lints when you save the file.
+---
+---```lua
+---default = "onType"
+---```
+---@field run? "onSave" | "onType"
+---The location of the node binary to run Stylelint under.
+---@field runtime? string
+---An array of language ids which snippets are provided by Stylelint.
+---
+---```lua
+---default = { "css", "postcss" }
+---```
+---@field snippet? string[]
+---Supply a custom path to the Stylelint module.
+---
+---```lua
+---default = ""
+---```
+---@field stylelintPath? string
+---An array of language ids which should be validated by Stylelint.
+---
+---```lua
+---default = { "css", "postcss" }
+---```
+---@field validate? string[]
+
+---@class lspconfig.settings.stylelint_lsp
+---@field stylelint? _.lspconfig.settings.stylelint_lsp.Stylelint

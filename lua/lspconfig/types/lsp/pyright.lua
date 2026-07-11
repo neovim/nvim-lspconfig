@@ -1,0 +1,593 @@
+---@meta
+
+---@class _.lspconfig.settings.pyright.Pyright
+---Disables type completion, definitions, and references.
+---@field disableLanguageServices? boolean
+---Disables the “Organize Imports” command.
+---@field disableOrganizeImports? boolean
+---Disables the use of pull diagnostics from VS Code.
+---@field disablePullDiagnostics? boolean
+---Disable hint diagnostics with special hints for grayed-out or strike-through text.
+---@field disableTaggedHints? boolean
+
+---Allows a user to override the severity levels for individual diagnostics. Use the rule name as a key and one of "error", "warning", "information", "none", `true` (alias for "error") or `false` (alias for "none") as value. The default value shown for each diagnostic is the default when "python.analysis.typeCheckingMode" is set to "standard". See [here](https://github.com/microsoft/pyright/blob/main/docs/configuration.md#diagnostic-rule-defaults) for defaults for each type checking mode ("off", "basic", "standard", and "strict").
+---@class _.lspconfig.settings.pyright.Python.Analysis.DiagnosticSeverityOverrides
+---Diagnostics for an attempt to instantiate an abstract or protocol class or use an abstract method.
+---
+---```lua
+---default = "error"
+---```
+---@field reportAbstractUsage? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for a type incompatibility for an argument to a call.
+---
+---```lua
+---default = "error"
+---```
+---@field reportArgumentType? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for 'assert' statement that will provably always assert. This can be indicative of a programming error.
+---
+---```lua
+---default = "warning"
+---```
+---@field reportAssertAlwaysTrue? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for a type incompatibility detected by a typing.assert_type call.
+---
+---```lua
+---default = "error"
+---```
+---@field reportAssertTypeFailure? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for type incompatibilities for assignments.
+---
+---```lua
+---default = "error"
+---```
+---@field reportAssignmentType? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for issues involving attribute accesses.
+---
+---```lua
+---default = "error"
+---```
+---@field reportAttributeAccessIssue? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for function calls within a default value initialization expression. Such calls can mask expensive operations that are performed at module initialization time.
+---
+---```lua
+---default = "none"
+---```
+---@field reportCallInDefaultInitializer? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for issues involving call expressions and arguments.
+---
+---```lua
+---default = "error"
+---```
+---@field reportCallIssue? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for attempts to redefine variables whose names are all-caps with underscores and numerals.
+---
+---```lua
+---default = "none"
+---```
+---@field reportConstantRedefinition? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for use of deprecated classes or functions.
+---
+---```lua
+---default = "none"
+---```
+---@field reportDeprecated? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for an imported symbol or module that is imported more than once.
+---
+---```lua
+---default = "none"
+---```
+---@field reportDuplicateImport? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for member accesses on functions.
+---
+---```lua
+---default = "error"
+---```
+---@field reportFunctionMemberAccess? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for general type inconsistencies, unsupported operations, argument/parameter mismatches, etc. Covers all of the basic type-checking rules not covered by other rules. Does not include syntax errors.
+---
+---```lua
+---default = "error"
+---```
+---@field reportGeneralTypeIssues? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for overridden methods that do not include an `@override` decorator.
+---
+---```lua
+---default = "none"
+---```
+---@field reportImplicitOverride? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for two or more string literals that follow each other, indicating an implicit concatenation. This is considered a bad practice and often masks bugs such as missing commas.
+---
+---```lua
+---default = "none"
+---```
+---@field reportImplicitStringConcatenation? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for cyclical import chains. These are not errors in Python, but they do slow down type analysis and often hint at architectural layering issues. Generally, they should be avoided.
+---
+---```lua
+---default = "none"
+---```
+---@field reportImportCycles? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for methods that override a method of the same name in a base class in an incompatible manner (wrong number of parameters, incompatible parameter types, or incompatible return type).
+---
+---```lua
+---default = "error"
+---```
+---@field reportIncompatibleMethodOverride? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for overrides in subclasses that redefine a variable in an incompatible way.
+---
+---```lua
+---default = "error"
+---```
+---@field reportIncompatibleVariableOverride? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for the use of a module-level “__getattr__” function, indicating that the stub is incomplete.
+---
+---```lua
+---default = "none"
+---```
+---@field reportIncompleteStub? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for __init__ and __new__ methods whose signatures are inconsistent.
+---
+---```lua
+---default = "none"
+---```
+---@field reportInconsistentConstructor? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for inconsistencies between function overload signatures and implementation.
+---
+---```lua
+---default = "error"
+---```
+---@field reportInconsistentOverload? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics related to index operations and expressions.
+---
+---```lua
+---default = "error"
+---```
+---@field reportIndexIssue? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for invalid escape sequences used within string literals. The Python specification indicates that such sequences will generate a syntax error in future versions.
+---
+---```lua
+---default = "warning"
+---```
+---@field reportInvalidStringEscapeSequence? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for type stub statements that do not conform to PEP 484.
+---
+---```lua
+---default = "none"
+---```
+---@field reportInvalidStubStatement? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for invalid type argument usage.
+---
+---```lua
+---default = "error"
+---```
+---@field reportInvalidTypeArguments? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for type expression that uses an invalid form.
+---
+---```lua
+---default = "error"
+---```
+---@field reportInvalidTypeForm? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for improper use of type variables in a function signature.
+---
+---```lua
+---default = "warning"
+---```
+---@field reportInvalidTypeVarUse? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for 'match' statements that do not exhaustively match all possible values.
+---
+---```lua
+---default = "none"
+---```
+---@field reportMatchNotExhaustive? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for imports that have no corresponding imported python file or type stub file.
+---
+---```lua
+---default = "error"
+---```
+---@field reportMissingImports? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for imports that have no corresponding source file. This happens when a type stub is found, but the module source file was not found, indicating that the code may fail at runtime when using this execution environment. Type checking will be done using the type stub.
+---
+---```lua
+---default = "warning"
+---```
+---@field reportMissingModuleSource? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for parameters that are missing a type annotation.
+---
+---```lua
+---default = "none"
+---```
+---@field reportMissingParameterType? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for missing call to parent class for inherited `__init__` methods.
+---
+---```lua
+---default = "none"
+---```
+---@field reportMissingSuperCall? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for generic class reference with missing type arguments.
+---
+---```lua
+---default = "none"
+---```
+---@field reportMissingTypeArgument? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for imports that have no corresponding type stub file (either a typeshed file or a custom type stub). The type checker requires type stubs to do its best job at analysis.
+---
+---```lua
+---default = "none"
+---```
+---@field reportMissingTypeStubs? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for an overloaded function or method with a missing implementation.
+---
+---```lua
+---default = "error"
+---```
+---@field reportNoOverloadImplementation? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for related to unary or binary operators.
+---
+---```lua
+---default = "error"
+---```
+---@field reportOperatorIssue? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for an attempt to call a variable with an Optional type.
+---
+---```lua
+---default = "error"
+---```
+---@field reportOptionalCall? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for an attempt to use an Optional type as a context manager (as a parameter to a with statement).
+---
+---```lua
+---default = "error"
+---```
+---@field reportOptionalContextManager? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for an attempt to use an Optional type as an iterable value (e.g. within a for statement).
+---
+---```lua
+---default = "error"
+---```
+---@field reportOptionalIterable? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for an attempt to access a member of a variable with an Optional type.
+---
+---```lua
+---default = "error"
+---```
+---@field reportOptionalMemberAccess? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for an attempt to use an Optional type as an operand to a binary or unary operator (like '+', '<<', '~').
+---
+---```lua
+---default = "error"
+---```
+---@field reportOptionalOperand? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for an attempt to subscript (index) a variable with an Optional type.
+---
+---```lua
+---default = "error"
+---```
+---@field reportOptionalSubscript? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for function overloads that overlap in signature and obscure each other or have incompatible return types.
+---
+---```lua
+---default = "error"
+---```
+---@field reportOverlappingOverload? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for the use of variables that may be unbound on some code paths.
+---
+---```lua
+---default = "error"
+---```
+---@field reportPossiblyUnboundVariable? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for incorrect usage of symbol imported from a "py.typed" module that is not re-exported from that module.
+---
+---```lua
+---default = "error"
+---```
+---@field reportPrivateImportUsage? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for incorrect usage of private or protected variables or functions. Protected class members begin with a single underscore _ and can be accessed only by subclasses. Private class members begin with a double underscore but do not end in a double underscore and can be accessed only within the declaring class. Variables and functions declared outside of a class are considered private if their names start with either a single or double underscore, and they cannot be accessed outside of the declaring module.
+---
+---```lua
+---default = "none"
+---```
+---@field reportPrivateUsage? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for property whose setter and getter have mismatched types.
+---
+---```lua
+---default = "none"
+---```
+---@field reportPropertyTypeMismatch? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for an attempt to declare the type of a symbol multiple times.
+---
+---```lua
+---default = "error"
+---```
+---@field reportRedeclaration? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics related to function return type compatibility.
+---
+---```lua
+---default = "error"
+---```
+---@field reportReturnType? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for a missing or misnamed “self” parameter in instance methods and “cls” parameter in class methods. Instance methods in metaclasses (classes that derive from “type”) are allowed to use “cls” for instance methods.
+---
+---```lua
+---default = "warning"
+---```
+---@field reportSelfClsParameterName? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for usage of deprecated type comments.
+---
+---```lua
+---default = "none"
+---```
+---@field reportTypeCommentUsage? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for an attempt to access a non-required key within a TypedDict without a check for its presence.
+---
+---```lua
+---default = "error"
+---```
+---@field reportTypedDictNotRequiredAccess? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for the use of unbound variables.
+---
+---```lua
+---default = "error"
+---```
+---@field reportUnboundVariable? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for undefined variables.
+---
+---```lua
+---default = "error"
+---```
+---@field reportUndefinedVariable? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for the use of an unhashable object in a container that requires hashability.
+---
+---```lua
+---default = "error"
+---```
+---@field reportUnhashable? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for instance variables that are not declared or initialized within class body or `__init__` method.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUninitializedInstanceVariable? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for call arguments for functions or methods that have an unknown type.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnknownArgumentType? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for input or return parameters for lambdas that have an unknown type.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnknownLambdaType? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for class or instance variables that have an unknown type.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnknownMemberType? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for input or return parameters for functions or methods that have an unknown type.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnknownParameterType? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for variables that have an unknown type..
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnknownVariableType? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for 'cast' calls that are statically determined to be unnecessary. Such calls are sometimes indicative of a programming error.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnnecessaryCast? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for '==' and '!=' comparisons that are statically determined to be unnecessary. Such calls are sometimes indicative of a programming error.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnnecessaryComparison? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for 'in' operation that is statically determined to be unnecessary. Such operations are sometimes indicative of a programming error.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnnecessaryContains? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for 'isinstance' or 'issubclass' calls where the result is statically determined to be always (or never) true. Such calls are often indicative of a programming error.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnnecessaryIsInstance? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for '# type: ignore' comments that have no effect.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnnecessaryTypeIgnoreComment? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for code that is determined by type analysis to be unreachable.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnreachable? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for unsupported operations performed on __all__.
+---
+---```lua
+---default = "warning"
+---```
+---@field reportUnsupportedDunderAll? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for base classes whose type cannot be determined statically. These obscure the class type, defeating many type analysis features.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUntypedBaseClass? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for class decorators that have no type annotations. These obscure the class type, defeating many type analysis features.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUntypedClassDecorator? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for function decorators that have no type annotations. These obscure the function type, defeating many type analysis features.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUntypedFunctionDecorator? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics when “namedtuple” is used rather than “NamedTuple”. The former contains no type information, whereas the latter does.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUntypedNamedTuple? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for call expressions whose results are not consumed and are not None.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnusedCallResult? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for a class with a private name (starting with an underscore) that is not accessed.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnusedClass? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for call expressions that return a Coroutine and whose results are not consumed.
+---
+---```lua
+---default = "error"
+---```
+---@field reportUnusedCoroutine? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for unreachable except clause.
+---
+---```lua
+---default = "error"
+---```
+---@field reportUnusedExcept? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for simple expressions whose value is not used in any way.
+---
+---```lua
+---default = "warning"
+---```
+---@field reportUnusedExpression? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for a function or method with a private name (starting with an underscore) that is not accessed.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnusedFunction? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for an imported symbol that is not referenced within that file.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnusedImport? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for a variable that is not accessed.
+---
+---```lua
+---default = "none"
+---```
+---@field reportUnusedVariable? "none" | "information" | "warning" | "error" | true | false
+---Diagnostics for an wildcard import from an external library.
+---
+---```lua
+---default = "warning"
+---```
+---@field reportWildcardImportFromLibrary? "none" | "information" | "warning" | "error" | true | false
+
+---@class _.lspconfig.settings.pyright.Python.Analysis
+---Offer auto-import completions.
+---
+---```lua
+---default = true
+---```
+---@field autoImportCompletions? boolean
+---Automatically add common search paths like 'src'?
+---
+---```lua
+---default = true
+---```
+---@field autoSearchPaths? boolean
+---```lua
+---default = "openFilesOnly"
+---```
+---@field diagnosticMode? "openFilesOnly" | "workspace"
+---Allows a user to override the severity levels for individual diagnostics. Use the rule name as a key and one of "error", "warning", "information", "none", `true` (alias for "error") or `false` (alias for "none") as value. The default value shown for each diagnostic is the default when "python.analysis.typeCheckingMode" is set to "standard". See [here](https://github.com/microsoft/pyright/blob/main/docs/configuration.md#diagnostic-rule-defaults) for defaults for each type checking mode ("off", "basic", "standard", and "strict").
+---@field diagnosticSeverityOverrides? _.lspconfig.settings.pyright.Python.Analysis.DiagnosticSeverityOverrides
+---Paths of directories or files that should not be included. These override the include directories, allowing specific subdirectories to be excluded. Note that files in the exclude paths may still be included in the analysis if they are referenced (imported) by source files that are not excluded. Paths may contain wildcard characters ** (a directory or multiple levels of directories), * (a sequence of zero or more characters), or ? (a single character). If no exclude paths are specified, pyright automatically excludes the following: `**/node_modules`, `**/__pycache__`, `.git` and any virtual environment directories.
+---
+---```lua
+---default = {}
+---```
+---@field exclude? string[]
+---Additional import search resolution paths
+---
+---```lua
+---default = {}
+---```
+---@field extraPaths? string[]
+---Paths of directories or files whose diagnostic output (errors and warnings) should be suppressed even if they are an included file or within the transitive closure of an included file. Paths may contain wildcard characters ** (a directory or multiple levels of directories), * (a sequence of zero or more characters), or ? (a single character). If no value is provided, the value of python.linting.ignorePatterns (if set) will be used.
+---
+---```lua
+---default = {}
+---```
+---@field ignore? string[]
+---Paths of directories or files that should be included. If no paths are specified, pyright defaults to the workspace root directory. Paths may contain wildcard characters ** (a directory or multiple levels of directories), * (a sequence of zero or more characters), or ? (a single character).
+---
+---```lua
+---default = {}
+---```
+---@field include? string[]
+---Specifies the level of logging for the Output panel
+---
+---```lua
+---default = "Information"
+---```
+---@field logLevel? "Error" | "Warning" | "Information" | "Trace"
+---Path to directory containing custom type stub files.
+---
+---```lua
+---default = "typings"
+---```
+---@field stubPath? string
+---Defines the default rule set for type checking.
+---
+---```lua
+---default = "standard"
+---```
+---@field typeCheckingMode? "off" | "basic" | "standard" | "strict"
+---Paths to look for typeshed modules.
+---
+---```lua
+---default = {}
+---```
+---@field typeshedPaths? string[]
+---Use library implementations to extract type information when type stub is not present.
+---
+---```lua
+---default = true
+---```
+---@field useLibraryCodeForTypes? boolean
+
+---@class _.lspconfig.settings.pyright.Python
+---@field analysis? _.lspconfig.settings.pyright.Python.Analysis
+---Path to Python, you can use a custom version of Python.
+---
+---```lua
+---default = "python"
+---```
+---@field pythonPath? string
+---Path to folder with a list of Virtual Environments.
+---
+---```lua
+---default = ""
+---```
+---@field venvPath? string
+
+---@class lspconfig.settings.pyright
+---@field pyright? _.lspconfig.settings.pyright.Pyright
+---@field python? _.lspconfig.settings.pyright.Python

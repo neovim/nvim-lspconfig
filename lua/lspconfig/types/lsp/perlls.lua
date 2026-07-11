@@ -1,0 +1,78 @@
+---@meta
+
+---@class _.lspconfig.settings.perlls.Perl
+---directory for caching of parsed symbols, if the directory does not exists, it will be created, defaults to ${workspace}/.vscode/perl-lang. This should be one unqiue directory per project and an absolute path.
+---@field cacheDir? string
+---arguments for containerCmd. Varies depending on containerCmd.
+---@field containerArgs? any[]
+---If set Perl::LanguageServer can run inside a container. Options are: 'docker', 'docker-compose', 'podman', 'kubectl'
+---@field containerCmd? string
+---To start a new container, set to 'run', to execute inside an existing container set to 'exec'. Note: kubectl only supports 'exec'
+---
+---```lua
+---default = "exec"
+---```
+---@field containerMode? string
+---Image to start or container to exec inside or pod to use
+---@field containerName? string
+---port to use for connection between vscode and debug adapter inside Perl::LanguageServer. On a multi user system every user must use a different port.
+---
+---```lua
+---default = 13603
+---```
+---@field debugAdapterPort? integer
+---if debugAdapterPort is in use try ports from debugAdapterPort to debugAdapterPort + debugAdapterPortRange. Default 100.
+---
+---```lua
+---default = 100
+---```
+---@field debugAdapterPortRange? integer
+---if true, the LanguageServer will not cache the result of parsing source files on disk, so it can be used within readonly directories
+---@field disableCache? boolean
+---per default enviroment from vscode will be passed to debuggee, syntax check and perltidy. If set to true, no enviroment variables will be passed.
+---@field disablePassEnv? boolean
+---enable/disable this extension
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---object with environment settings for command that starts the LanguageServer, e.g. can be used to set KUBECONFIG.
+---@field env? table
+---array for filtering perl file, defaults to *.pm|*.pl
+---@field fileFilter? any[]
+---directories to ignore, defaults to .vscode, .git, .svn
+---@field ignoreDirs? any[]
+---If set, log output is written to the given logfile, instead of displaying it in the vscode output pane. Log output is always appended so you are responsible for rotating the file.
+---@field logFile? string
+---Log level 0-2
+---
+---```lua
+---default = 0
+---```
+---@field logLevel? integer
+---mapping of local to remote paths
+---@field pathMap? any[]
+---defaults to perl
+---@field perlCmd? string
+---array with paths to add to perl library path. This setting is used by the syntax checker and for the debuggee and also for the LanguageServer itself. perl.perlInc should be absolute paths.
+---@field perlInc? any[]
+---if true, show also local variables in symbol view
+---@field showLocalVars? boolean
+---ip address of remote system
+---@field sshAddr? string
+---optional arguments for ssh
+---@field sshArgs? any[]
+---defaults to ssh on unix and plink on windows
+---@field sshCmd? string
+---optional, port for ssh to remote system
+---@field sshPort? string
+---user for ssh login
+---@field sshUser? string
+---path of the workspace root on remote system
+---@field sshWorkspaceRoot? string
+---Use -T for syntax check.
+---@field useTaintForSyntaxCheck? boolean
+
+---@class lspconfig.settings.perlls
+---@field perl? _.lspconfig.settings.perlls.Perl

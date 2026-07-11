@@ -1,0 +1,148 @@
+---@meta
+
+---@class _.lspconfig.settings.volar.Vue.AutoInsert
+---%configuration.autoInsert.bracketSpacing%
+---
+---```lua
+---default = true
+---```
+---@field bracketSpacing? boolean
+---%configuration.autoInsert.dotValue%
+---@field dotValue? boolean
+
+---@class _.lspconfig.settings.volar.Vue.CodeActions
+---%configuration.codeActions.askNewComponentName%
+---
+---```lua
+---default = true
+---```
+---@field askNewComponentName? boolean
+
+---@class _.lspconfig.settings.volar.Vue.Editor
+---%configuration.editor.focusMode%
+---@field focusMode? boolean
+---%configuration.editor.reactivityVisualization%
+---
+---```lua
+---default = true
+---```
+---@field reactivityVisualization? boolean
+---%configuration.editor.templateInterpolationDecorators%
+---
+---```lua
+---default = true
+---```
+---@field templateInterpolationDecorators? boolean
+
+---@class _.lspconfig.settings.volar.Vue.Format.Script
+---%configuration.format.script.enabled%
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---%configuration.format.script.initialIndent%
+---@field initialIndent? boolean
+
+---@class _.lspconfig.settings.volar.Vue.Format.Style
+---%configuration.format.style.enabled%
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---%configuration.format.style.initialIndent%
+---@field initialIndent? boolean
+
+---@class _.lspconfig.settings.volar.Vue.Format.Template
+---%configuration.format.template.enabled%
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---%configuration.format.template.initialIndent%
+---
+---```lua
+---default = true
+---```
+---@field initialIndent? boolean
+
+---@class _.lspconfig.settings.volar.Vue.Format
+---@field script? _.lspconfig.settings.volar.Vue.Format.Script
+---@field style? _.lspconfig.settings.volar.Vue.Format.Style
+---@field template? _.lspconfig.settings.volar.Vue.Format.Template
+---%configuration.format.wrapAttributes%
+---
+---```lua
+---default = "auto"
+---```
+---@field wrapAttributes? "auto" | "force" | "force-aligned" | "force-expand-multiline" | "aligned-multiple" | "preserve" | "preserve-aligned"
+
+---@class _.lspconfig.settings.volar.Vue.Hover
+---%configuration.hover.rich%
+---@field rich? boolean
+
+---@class _.lspconfig.settings.volar.Vue.InlayHints
+---%configuration.inlayHints.destructuredProps%
+---@field destructuredProps? boolean
+---%configuration.inlayHints.inlineHandlerLeading%
+---@field inlineHandlerLeading? boolean
+---%configuration.inlayHints.missingProps%
+---@field missingProps? boolean
+---%configuration.inlayHints.optionsWrapper%
+---@field optionsWrapper? boolean
+---%configuration.inlayHints.vBindShorthand%
+---@field vBindShorthand? boolean
+
+---@class _.lspconfig.settings.volar.Vue.Server
+---%configuration.server.includeLanguages%
+---
+---```lua
+---default = { "vue" }
+---```
+---@field includeLanguages? string[]
+---%configuration.server.path%
+---@field path? string
+
+---@class _.lspconfig.settings.volar.Vue.Suggest
+---%configuration.suggest.componentNameCasing%
+---
+---```lua
+---default = "preferPascalCase"
+---```
+---@field componentNameCasing? "preferKebabCase" | "preferPascalCase" | "alwaysKebabCase" | "alwaysPascalCase"
+---%configuration.suggest.defineAssignment%
+---
+---```lua
+---default = true
+---```
+---@field defineAssignment? boolean
+---%configuration.suggest.propNameCasing%
+---
+---```lua
+---default = "preferKebabCase"
+---```
+---@field propNameCasing? "preferKebabCase" | "preferCamelCase" | "alwaysKebabCase" | "alwaysCamelCase"
+
+---@class _.lspconfig.settings.volar.Vue.Trace
+---%configuration.trace.server%
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.volar.Vue
+---@field autoInsert? _.lspconfig.settings.volar.Vue.AutoInsert
+---@field codeActions? _.lspconfig.settings.volar.Vue.CodeActions
+---@field editor? _.lspconfig.settings.volar.Vue.Editor
+---@field format? _.lspconfig.settings.volar.Vue.Format
+---@field hover? _.lspconfig.settings.volar.Vue.Hover
+---@field inlayHints? _.lspconfig.settings.volar.Vue.InlayHints
+---@field server? _.lspconfig.settings.volar.Vue.Server
+---@field suggest? _.lspconfig.settings.volar.Vue.Suggest
+---@field trace? _.lspconfig.settings.volar.Vue.Trace
+
+---@class lspconfig.settings.volar
+---@field vue? _.lspconfig.settings.volar.Vue

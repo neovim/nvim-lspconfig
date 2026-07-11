@@ -13,6 +13,7 @@
 ---@type vim.lsp.Config
 return {
   cmd = { 'solargraph', 'stdio' },
+  ---@type lspconfig.settings.solargraph
   settings = {
     solargraph = {
       diagnostics = true,

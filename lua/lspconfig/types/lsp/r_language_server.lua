@@ -1,0 +1,58 @@
+---@meta
+
+---@class _.lspconfig.settings.r_language_server.R.Lsp
+---The command line arguments to use when launching R Language Server
+---
+---```lua
+---default = {}
+---```
+---@field args? any[]
+---Debug R Language Server
+---@field debug? boolean
+---Enable Diagnostics
+---
+---```lua
+---default = true
+---```
+---@field diagnostics? boolean
+---Override default LANG environment variable
+---
+---```lua
+---default = ""
+---```
+---@field lang? string
+---Path to R binary for launching Language Server
+---
+---```lua
+---default = ""
+---```
+---@field path? string
+---Use STDIO connection instead of TCP. (Unix/macOS users only)
+---@field use_stdio? boolean
+
+---@class _.lspconfig.settings.r_language_server.R.Rpath
+---Path to an R executable for Linux. Must be "vanilla" R, not radian etc.!
+---
+---```lua
+---default = ""
+---```
+---@field linux? string
+---Path to an R executable for macOS. Must be "vanilla" R, not radian etc.!
+---
+---```lua
+---default = ""
+---```
+---@field mac? string
+---Path to an R executable for Windows. Must be "vanilla" R, not radian etc.!
+---
+---```lua
+---default = ""
+---```
+---@field windows? string
+
+---@class _.lspconfig.settings.r_language_server.R
+---@field lsp? _.lspconfig.settings.r_language_server.R.Lsp
+---@field rpath? _.lspconfig.settings.r_language_server.R.Rpath
+
+---@class lspconfig.settings.r_language_server
+---@field r? _.lspconfig.settings.r_language_server.R

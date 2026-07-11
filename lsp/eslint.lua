@@ -38,6 +38,24 @@
 --- You can use a different version of ESLint in each package, but it is recommended to use the same version of ESLint in all packages. The location of the ESLint binary will be determined automatically.
 ---
 --- /!\ When using flat config files, you need to use them across all your packages in your monorepo, as it's a global setting for the server.
+---
+--- ### Flat config in ESLint versions prior to 10.0
+---
+--- If you're using a ESLint version that supports both flat config and eslintrc (>= 8.21, < 10.0) and want to change
+--- the [default behavior](https://eslint.org/blog/2023/10/flat-config-rollout-plans/), you'll need to set
+--- `experimental.useFlatConfig` accordingly:
+--- ```lua
+--- vim.lsp.config("eslint", {
+---   settings = {
+---     experimental = {
+---       -- If you want to use flat config on >= 8.21, < 9.0
+---       useFlatConfig = true,
+---       -- Or if you want to use eslintrc on 9.*
+---       -- useFlatConfig = false,
+---     }
+---   }
+--- })
+--- ```
 
 local util = require 'lspconfig.util'
 local lsp = vim.lsp
@@ -59,14 +77,21 @@ local eslint_config_files = {
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'vscode-eslint-language-server', '--stdio' },
+  cmd = function(dispatchers, config)
+    local cmd = 'vscode-eslint-language-server'
+    if (config or {}).root_dir then
+      local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', cmd)
+      if vim.fn.executable(local_cmd) == 1 then
+        cmd = local_cmd
+      end
+    end
+    return vim.lsp.rpc.start({ cmd, '--stdio' }, dispatchers)
+  end,
   filetypes = {
     'javascript',
     'javascriptreact',
-    'javascript.jsx',
     'typescript',
     'typescriptreact',
-    'typescript.tsx',
     'vue',
     'svelte',
     'astro',
@@ -74,7 +99,7 @@ return {
   },
   workspace_required = true,
   on_attach = function(client, bufnr)
-    vim.api.nvim_buf_create_user_command(0, 'LspEslintFixAll', function()
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspEslintFixAll', function()
       client:request_sync('workspace/executeCommand', {
         command = 'eslint.applyAllFixes',
         arguments = {
@@ -97,7 +122,7 @@ return {
       or vim.list_extend(root_markers, { '.git' })
 
     -- exclude deno
-    if vim.fs.root(bufnr, { 'deno.json', 'deno.lock' }) then
+    if vim.fs.root(bufnr, { 'deno.json', 'deno.jsonc', 'deno.lock' }) then
       return
     end
 
@@ -126,14 +151,13 @@ return {
     on_dir(project_root)
   end,
   -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
+  ---@type lspconfig.settings.eslint
   settings = {
     validate = 'on',
     ---@diagnostic disable-next-line: assign-type-mismatch
     packageManager = nil,
     useESLintClass = false,
-    experimental = {
-      useFlatConfig = false,
-    },
+    experimental = {},
     codeActionOnSave = {
       enable = false,
       mode = 'all',
@@ -173,30 +197,6 @@ return {
         uri = root_dir,
         name = vim.fn.fnamemodify(root_dir, ':t'),
       }
-
-      -- Support flat config files
-      -- They contain 'config' in the file name
-      local flat_config_files = vim.tbl_filter(function(file)
-        return file:match('config')
-      end, eslint_config_files)
-
-      for _, file in ipairs(flat_config_files) do
-        local found_files = vim.fn.globpath(root_dir, file, true, true)
-
-        -- Filter out files inside node_modules
-        local filtered_files = {}
-        for _, found_file in ipairs(found_files) do
-          if string.find(found_file, '[/\\]node_modules[/\\]') == nil then
-            table.insert(filtered_files, found_file)
-          end
-        end
-
-        if #filtered_files > 0 then
-          config.settings.experimental = config.settings.experimental or {}
-          config.settings.experimental.useFlatConfig = true
-          break
-        end
-      end
 
       -- Support Yarn2 (PnP) projects
       local pnp_cjs = root_dir .. '/.pnp.cjs'

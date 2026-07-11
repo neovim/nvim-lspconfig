@@ -1,0 +1,71 @@
+--- @brief
+---
+--- https://github.com/oxc-project/oxc
+--- https://oxc.rs/docs/guide/usage/formatter.html
+---
+--- `oxfmt` is a Prettier-compatible code formatter that supports multiple languages
+--- including JavaScript, TypeScript, JSON, YAML, HTML, CSS, Markdown, and more.
+--- It can be installed via `npm`:
+---
+--- ```sh
+--- npm i -g oxfmt
+--- ```
+---
+--- or used as a part of Vite+ through `fmt` field in `vite.config.ts`: https://github.com/oxc-project/oxc/pull/20197
+
+local util = require 'lspconfig.util'
+
+---@type vim.lsp.Config
+return {
+  cmd = function(dispatchers, config)
+    local cmd = 'oxfmt'
+    if (config or {}).root_dir then
+      local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', cmd)
+      if vim.fn.executable(local_cmd) == 1 then
+        cmd = local_cmd
+      end
+    end
+    return vim.lsp.rpc.start({ cmd, '--lsp' }, dispatchers)
+  end,
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'typescript',
+    'typescriptreact',
+    'toml',
+    'json',
+    'jsonc',
+    'json5',
+    'yaml',
+    'html',
+    'vue',
+    'handlebars',
+    'css',
+    'scss',
+    'less',
+    'graphql',
+    'markdown',
+  },
+  workspace_required = true,
+  root_dir = function(bufnr, on_dir)
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+
+    -- Oxfmt resolves configuration by walking upward and using the nearest config file
+    -- to the file being processed. We therefore compute the root directory by locating
+    -- the closest `.oxfmtrc.json` / `.oxfmtrc.jsonc` / `oxfmt.config.ts` (or `package.json` fallback) above the buffer.
+    local root_markers = util.insert_package_json(
+      { '.oxfmtrc.json', '.oxfmtrc.jsonc', 'oxfmt.config.ts' },
+      { 'oxfmt', 'vite%-plus' },
+      fname
+    )
+    -- find vite plus config with fmt field
+    root_markers = util.root_markers_with_field(
+      root_markers,
+      { 'vite.config.ts' },
+      { 'vite%-plus', 'fmt:' },
+      fname,
+      'all'
+    )
+    on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
+  end,
+}

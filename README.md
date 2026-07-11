@@ -32,15 +32,15 @@ These configs are **best-effort and supported by the community (you).** See [con
 
 * Requires Nvim 0.11.3+.
     * Support for Nvim 0.10 [will be removed](https://github.com/neovim/nvim-lspconfig/issues/3693). Upgrade Nvim and nvim-lspconfig before reporting an issue.
-* Install nvim-lspconfig using Vim's "packages" feature:
-  ```
-  git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
-  ```
-* Or with Nvim 0.12 (nightly), you can use the builtin `vim.pack` plugin manager:
+* With Nvim 0.12+, you can use the builtin `vim.pack` plugin manager:
   ```lua
   vim.pack.add{
     { src = 'https://github.com/neovim/nvim-lspconfig' },
   }
+  ```
+* Or install nvim-lspconfig using Vim's "packages" feature:
+  ```
+  git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/nvim/start/nvim-lspconfig
   ```
 * Or use a 3rd-party plugin manager.
 
@@ -71,6 +71,13 @@ vim.lsp.config('jdtls', {
 })
 ```
 
+## Commands
+
+* `:LspInfo` (alias to `:checkhealth vim.lsp`) shows the status of active and configured language servers.
+* `:lsp enable [<config_name>]` (`:LspStart` for Nvim 0.11 or older) Start the requested server name. Will only successfully start if the command detects a root directory matching the current config.
+* `:lsp disable [<config_name>]` (`:LspStop` for Nvim 0.11 or older) Stops the given server. Defaults to stopping all servers active on the current buffer. To force stop use `:LspStop!`
+* `:lsp restart [<client_name>]` (`:LspRestart` for Nvim 0.11 or older) Restarts the given client, and attempts to reattach to all previously attached buffers. Defaults to restarting all active servers.
+
 ## Configuration
 
 Nvim sets default options and mappings when LSP is active in a buffer:
@@ -83,8 +90,7 @@ To customize, see:
 
 Extra settings can be specified for each LSP server. With Nvim 0.11+ you can
 [extend a config](https://neovim.io/doc/user/lsp.html#lsp-config) by calling
-`vim.lsp.config('…', {…})`. (You can also copy any config directly from
-[`lsp/`](./lsp/) and put it in a local `lsp/` directory in your 'runtimepath').
+`vim.lsp.config('…', {…})`.
 
 ```lua
 vim.lsp.config('rust_analyzer', {
@@ -95,22 +101,29 @@ vim.lsp.config('rust_analyzer', {
 })
 ```
 
-## Create a new config
+### Config priority
 
-To create a new config you can either (1) use `vim.lsp.config` or (2) create
-a file `lsp/<config-name>.lua` somewhere on your 'runtimepath'.
+Configs are sourced in this order:
 
-### Example: define a new config as code
+1. `lsp/` in 'runtimepath'
+2. `after/lsp/` in 'runtimepath'
+3. `vim.lsp.config()`
+
+If you install nvim-lspconfig or similar plugins, the order that configs are applied depends on the load order. To ensure that your own config "wins" and overrides the others, use `after/lsp/` and/or `vim.lsp.config()` to override/extend the defaults.
+
+## Creating a config
+
+### As code
 
 1. Run `:lua vim.lsp.config('foo', {cmd={'true'}})`
 2. Run `:lua vim.lsp.enable('foo')`
 3. Run `:checkhealth vim.lsp`, the new config is listed under "Enabled Configurations". 😎
 
-### Example: define a new config as a file
+### As a file
 
-1. Create a file `lsp/foo.lua` somewhere on your 'runtimepath'.
+1. Create a file `after/lsp/foo.lua` somewhere on your 'runtimepath'.
    ```
-   :exe 'edit' stdpath('config') .. '/lsp/foo.lua'
+   :exe 'edit' stdpath('config') .. '/after/lsp/foo.lua'
    ```
 2. Add this code to the file (or copy any of the examples from the [lsp/ directory](./lsp/) in this repo):
    ```
@@ -127,6 +140,36 @@ a file `lsp/<config-name>.lua` somewhere on your 'runtimepath'.
    :lua vim.lsp.enable('foo')
    ```
 5. Run `:checkhealth vim.lsp`, the new config is listed under "Enabled Configurations". 🌈
+
+## LSP Settings Type Annotations
+
+`nvim-lspconfig` generates Lua type definitions for each supported LSP server.
+By manually adding annotations (e.g., `---@type lspconfig.settings.server_name`),
+you enable auto-completion and diagnostics for your server settings.
+
+**Example:**
+
+```lua
+---@type vim.lsp.Config
+local config = {
+  ---@type lspconfig.settings.lua_ls
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      workspace = {
+        preloadFileSize = 10000,
+        library = {
+          vim.env.VIMRUNTIME,
+        }
+      },
+    },
+  },
+}
+
+vim.lsp.config('lua_ls', config)
+```
 
 ## Troubleshooting
 
@@ -151,18 +194,11 @@ If you found a bug with LSP functionality, [report it to Neovim core](https://gi
 Before reporting a bug, check your logs and the output of `:checkhealth vim.lsp`. Add this to your init.lua to enable verbose logging:
 
 ```lua
-vim.lsp.set_log_level("debug")
+vim.lsp.log.set_level('debug')
 ```
 
 Attempt to run the language server, then run `:LspLog` to open the log.
 Most of the time, the reason for failure is present in the logs.
-
-## Commands
-
-* `:LspInfo` (alias to `:checkhealth vim.lsp`) shows the status of active and configured language servers.
-* `:LspStart <config_name>` Start the requested server name. Will only successfully start if the command detects a root directory matching the current config.
-* `:LspStop [<client_id_or_name>]` Stops the given server. Defaults to stopping all servers active on the current buffer. To force stop use `:LspStop!`
-* `:LspRestart [<client_id_or_name>]` Restarts the given client, and attempts to reattach to all previously attached buffers. Defaults to restarting all active servers.
 
 ## Contributions
 

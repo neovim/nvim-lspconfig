@@ -11,7 +11,7 @@
 ---@type vim.lsp.Config
 return {
   filetypes = { 'kotlin' },
-  cmd = { 'kotlin-lsp', '--stdio' },
+  cmd = { 'intellij-server', '--stdio' },
   root_markers = {
     'settings.gradle', -- Gradle (multi-project)
     'settings.gradle.kts', -- Gradle (multi-project)

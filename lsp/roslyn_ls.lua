@@ -2,20 +2,23 @@
 ---
 --- https://github.com/dotnet/roslyn
 --
--- To install the server, compile from source or download as nuget package.
+-- The server can be installed as a dotnet tool (see https://github.com/dotnet/roslyn/blob/main/src/LanguageServer/Microsoft.CodeAnalysis.LanguageServer/README.md).
+-- This command will install the server in ~/.dotnet/tools:
+-- ```bash
+-- dotnet tool install --global roslyn-language-server --prerelease
+-- ```
+-- Alternatively, compile from source or download as nuget package.
 -- Go to `https://dev.azure.com/azure-public/vside/_artifacts/feed/vs-impl/NuGet/Microsoft.CodeAnalysis.LanguageServer.<platform>/overview`
 -- replace `<platform>` with one of the following `linux-x64`, `osx-x64`, `win-x64`, `neutral` (for more info on the download location see https://github.com/dotnet/roslyn/issues/71474#issuecomment-2177303207).
 -- Download and extract it (nuget's are zip files).
 -- - if you chose `neutral` nuget version, then you have to change the `cmd` like so:
+--   ```lua
 --   cmd = {
 --     'dotnet',
 --     '<my_folder>/Microsoft.CodeAnalysis.LanguageServer.dll',
---     '--logLevel', -- this property is required by the server
---     'Information',
---     '--extensionLogDirectory', -- this property is required by the server
---     fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
 --     '--stdio',
 --   },
+--   ```
 --   where `<my_folder>` has to be the folder you extracted the nuget package to.
 -- - for all other platforms put the extracted folder to neovim's PATH (`vim.env.PATH`)
 
@@ -68,26 +71,9 @@ local function roslyn_handlers()
       refresh_diagnostics(client)
       return vim.NIL
     end,
-    ['workspace/_roslyn_projectNeedsRestore'] = function(_, result, ctx)
-      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
-
-      ---@diagnostic disable-next-line: param-type-mismatch
-      client:request('workspace/_roslyn_restore', result, function(err, response)
-        if err then
-          vim.notify(err.message, vim.log.levels.ERROR, { title = 'roslyn_ls' })
-        end
-        if response then
-          for _, v in ipairs(response) do
-            vim.notify(v.message, vim.log.levels.INFO, { title = 'roslyn_ls' })
-          end
-        end
-      end)
-
-      return vim.NIL
-    end,
     ['razor/provideDynamicFileInfo'] = function(_, _, _)
       vim.notify(
-        'Razor is not supported.\nPlease use https://github.com/tris203/rzls.nvim',
+        'Razor is not supported.\nPlease use https://github.com/seblyng/roslyn.nvim',
         vim.log.levels.WARN,
         { title = 'roslyn_ls' }
       )
@@ -96,18 +82,83 @@ local function roslyn_handlers()
   }
 end
 
+---@param bufname string
+---@return boolean
+local function is_decompiled(bufname)
+  local _, endpos = bufname:find('[/\\]MetadataAsSource[/\\]')
+  if endpos == nil then
+    return false
+  end
+  return vim.fn.finddir(bufname:sub(1, endpos), uv.os_tmpdir()) ~= ''
+end
+
+---@param client vim.lsp.Client
+---@param action table
+local function apply_action(client, action)
+  if action.edit then
+    vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
+  end
+  if action.command then
+    client:exec_cmd(action.command)
+  end
+end
+
+---@param client vim.lsp.Client
+---@param command table
+---@param bufnr integer
+local function handle_fix_all_action(client, command, bufnr)
+  local arg = command.arguments and command.arguments[1]
+  if type(arg) ~= 'table' then
+    vim.notify('roslyn_ls: invalid fixAllCodeAction arguments', vim.log.levels.ERROR)
+    return
+  end
+
+  local flavors = arg.FixAllFlavors
+  if type(flavors) ~= 'table' or vim.tbl_isempty(flavors) then
+    vim.notify('roslyn_ls: fixAllCodeAction has no FixAllFlavors', vim.log.levels.WARN)
+    return
+  end
+
+  vim.ui.select(flavors, {
+    prompt = 'Fix All Scope:',
+  }, function(chosen_scope)
+    if not chosen_scope then
+      return
+    end
+
+    client:request('codeAction/resolveFixAll', {
+      title = command.title,
+      data = arg,
+      scope = chosen_scope,
+    }, function(err, resolved)
+      if err then
+        vim.notify(
+          'roslyn_ls: fixAllCodeAction resolve error: ' .. (err.message or tostring(err)),
+          vim.log.levels.ERROR
+        )
+        return
+      end
+      if resolved then
+        apply_action(client, resolved)
+      end
+    end, bufnr)
+  end)
+end
+
 ---@type vim.lsp.Config
 return {
   name = 'roslyn_ls',
-  offset_encoding = 'utf-8',
   cmd = {
-    'Microsoft.CodeAnalysis.LanguageServer',
-    '--logLevel',
-    'Information',
-    '--extensionLogDirectory',
-    fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
+    vim.fn.executable('Microsoft.CodeAnalysis.LanguageServer') == 1 and 'Microsoft.CodeAnalysis.LanguageServer'
+      or 'roslyn-language-server',
     '--stdio',
   },
+
+  cmd_env = {
+    -- Fixes LSP navigation in decompiled files for systems with symlinked TMPDIR (macOS)
+    TMPDIR = vim.env.TMPDIR and vim.env.TMPDIR ~= '' and vim.fn.resolve(vim.env.TMPDIR) or nil,
+  },
+
   filetypes = { 'cs' },
   handlers = roslyn_handlers(),
 
@@ -135,13 +186,71 @@ return {
         vim.notify('roslyn_ls: completionComplexEdit args not understood: ' .. vim.inspect(args), vim.log.levels.WARN)
       end
     end,
+
+    ['roslyn.client.nestedCodeAction'] = function(command, ctx)
+      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+      local arg = command.arguments and command.arguments[1]
+
+      if type(arg) ~= 'table' then
+        vim.notify('roslyn_ls: invalid nestedCodeAction arguments', vim.log.levels.ERROR)
+        return
+      end
+
+      local function handle(action)
+        if not action then
+          return
+        end
+
+        if action.data and not action.edit and not action.command then
+          client:request('codeAction/resolve', action, function(err, resolved)
+            if err then
+              vim.notify(err.message or tostring(err), vim.log.levels.ERROR)
+              return
+            end
+            if resolved then
+              handle(resolved)
+            end
+          end, ctx.bufnr)
+          return
+        end
+
+        local nested = vim.islist(action) and action or action.NestedCodeActions
+        if type(nested) ~= 'table' or vim.tbl_isempty(nested) then
+          apply_action(client, action)
+          return
+        end
+
+        if #nested == 1 then
+          handle(nested[1])
+          return
+        end
+
+        vim.ui.select(nested, {
+          prompt = action.title or 'Select code action',
+          format_item = function(item)
+            return item.title or (item.command and item.command.title) or 'Unnamed action'
+          end,
+        }, function(choice)
+          if choice then
+            handle(choice)
+          end
+        end)
+      end
+
+      handle(arg)
+    end,
+
+    ['roslyn.client.fixAllCodeAction'] = function(command, ctx)
+      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+      handle_fix_all_action(client, command, ctx.bufnr)
+    end,
   },
 
   root_dir = function(bufnr, cb)
     local bufname = vim.api.nvim_buf_get_name(bufnr)
     -- don't try to find sln or csproj for files from libraries
     -- outside of the project
-    if not bufname:match('^' .. fs.joinpath('/tmp/MetadataAsSource/')) then
+    if not is_decompiled(bufname) then
       -- try find solutions root first
       local root_dir = fs.root(bufnr, function(fname, _)
         return fname:match('%.sln[x]?$') ~= nil
@@ -156,6 +265,16 @@ return {
 
       if root_dir then
         cb(root_dir)
+      end
+    else
+      -- Decompiled code (example: "/tmp/MetadataAsSource/f2bfba/DecompilationMetadataAsSourceFileProvider/d5782a/Console.cs")
+      local prev_buf = vim.fn.bufnr('#')
+      local client = vim.lsp.get_clients({
+        name = 'roslyn_ls',
+        bufnr = prev_buf ~= 1 and prev_buf or nil,
+      })[1]
+      if client then
+        cb(client.config.root_dir)
       end
     end
   end,

@@ -37,6 +37,7 @@ return {
     'ruby',
     'rust',
     'swift',
+    'tex',
     'toml',
     'typescript',
     'typescriptreact',
@@ -48,5 +49,5 @@ return {
     'clojure',
     'sh',
   },
-  root_markers = { '.git' },
+  root_markers = { '.harper-dictionary.txt', '.git' },
 }

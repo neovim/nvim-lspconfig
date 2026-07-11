@@ -1,0 +1,75 @@
+---@meta
+
+---@class _.lspconfig.settings.jsonls.Json.ColorDecorators
+---Enables or disables color decorators
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.jsonls.Json.Format
+---Enable/disable default JSON formatter
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Keep all existing new lines when formatting.
+---@field keepLines? boolean
+
+---@class _.lspconfig.settings.jsonls.Json.SchemaDownload
+---When enabled, JSON schemas can be fetched from http and https locations.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---List of trusted domains for downloading JSON schemas over http(s). Use `*` to trust all domains. `*` can also be used as a wildcard in domain names.
+---
+---```lua
+---default = {
+---  ["https://developer.microsoft.com/json-schemas/"] = true,
+---  ["https://json-schema.org/"] = true,
+---  ["https://json.schemastore.org/"] = true,
+---  ["https://raw.githubusercontent.com/devcontainers/spec/"] = true,
+---  ["https://raw.githubusercontent.com/microsoft/vscode/"] = true,
+---  ["https://schemastore.azurewebsites.net/"] = true,
+---  ["https://www.schemastore.org/"] = true
+---}
+---```
+---@field trustedDomains? table
+
+---@class _.lspconfig.settings.jsonls.Json.Trace
+---Traces the communication between VS Code and the JSON language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.jsonls.Json.Validate
+---Enable/disable JSON validation.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---@class _.lspconfig.settings.jsonls.Json
+---@field colorDecorators? _.lspconfig.settings.jsonls.Json.ColorDecorators
+---@field format? _.lspconfig.settings.jsonls.Json.Format
+---The maximum number of outline symbols and folding regions computed (limited for performance reasons).
+---
+---```lua
+---default = 5000
+---```
+---@field maxItemsComputed? number
+---@field schemaDownload? _.lspconfig.settings.jsonls.Json.SchemaDownload
+---Associate schemas to JSON files in the current project.
+---@field schemas? table[]
+---@field trace? _.lspconfig.settings.jsonls.Json.Trace
+---@field validate? _.lspconfig.settings.jsonls.Json.Validate
+
+---@class lspconfig.settings.jsonls
+---@field json? _.lspconfig.settings.jsonls.Json

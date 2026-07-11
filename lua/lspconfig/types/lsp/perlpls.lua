@@ -1,0 +1,111 @@
+---@meta
+
+---@class _.lspconfig.settings.perlpls.Perl.Perlcritic
+---Enable perlcritic
+---@field enabled? boolean
+---Path to .perlcriticrc
+---@field perlcriticrc? string
+
+---@class _.lspconfig.settings.perlpls.Perl.Syntax
+---Enable syntax checking
+---@field enabled? boolean
+---Path to the perl binary to use for syntax checking
+---@field perl? string
+
+---@class _.lspconfig.settings.perlpls.Perl
+---Current working directory to use
+---@field cwd? string
+---Paths to add to @INC.
+---@field inc? any[]
+---@field perlcritic? _.lspconfig.settings.perlpls.Perl.Perlcritic
+---Path to .perltidyrc
+---@field perltidyrc? string
+---Path to the pls executable script
+---@field pls? string
+---Arguments to pass to the pls command
+---@field plsargs? any[]
+---@field syntax? _.lspconfig.settings.perlpls.Perl.Syntax
+
+---@class _.lspconfig.settings.perlpls.Pls.Perlcritic
+---Enable perlcritic
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Path to .perlcriticrc
+---
+---```lua
+---default = "~/.perlcriticrc"
+---```
+---@field perlcriticrc? string
+
+---@class _.lspconfig.settings.perlpls.Pls.Perltidy
+---Path to .perltidyrc
+---
+---```lua
+---default = "~/.perltidyrc"
+---```
+---@field perltidyrc? string
+
+---@class _.lspconfig.settings.perlpls.Pls.Podchecker
+---Enable podchecker (requires Pod::Checker to be installed)
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---@class _.lspconfig.settings.perlpls.Pls.Syntax
+---Additional arguments to pass when syntax checking. This is useful if there is a BEGIN block in your code that changes behavior depending on the contents of @ARGV.
+---
+---```lua
+---default = {}
+---```
+---@field args? any[]
+---Enable syntax checking
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Path to the perl binary to use for syntax checking
+---
+---```lua
+---default = ""
+---```
+---@field perl? string
+
+---@class _.lspconfig.settings.perlpls.Pls
+---Arguments to pass to the pls command
+---
+---```lua
+---default = {}
+---```
+---@field args? any[]
+---Path to the pls executable script
+---
+---```lua
+---default = "pls"
+---```
+---@field cmd? string
+---Current working directory to use
+---
+---```lua
+---default = "."
+---```
+---@field cwd? string
+---Paths to add to @INC.
+---
+---```lua
+---default = {}
+---```
+---@field inc? any[]
+---@field perlcritic? _.lspconfig.settings.perlpls.Pls.Perlcritic
+---@field perltidy? _.lspconfig.settings.perlpls.Pls.Perltidy
+---@field podchecker? _.lspconfig.settings.perlpls.Pls.Podchecker
+---@field syntax? _.lspconfig.settings.perlpls.Pls.Syntax
+
+---@class lspconfig.settings.perlpls
+---@field perl? _.lspconfig.settings.perlpls.Perl
+---@field pls? _.lspconfig.settings.perlpls.Pls

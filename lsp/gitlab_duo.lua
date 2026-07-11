@@ -30,19 +30,17 @@
 ---
 ---       -- Tab to accept suggestion
 ---       vim.keymap.set('i', '<Tab>', function()
----         if vim.lsp.inline_completion.is_visible() then
----           return vim.lsp.inline_completion.accept()
----         else
+---         if not vim.lsp.inline_completion.get() then
 ---           return '<Tab>'
 ---         end
 ---       end, { expr = true, buffer = bufnr, desc = 'GitLab Duo: Accept suggestion' })
 ---
 ---       -- Alt/Option+[ for previous suggestion
----       vim.keymap.set('i', '<M-[>', vim.lsp.inline_completion.select_prev,
+---       vim.keymap.set('i', '<M-[>', function() vim.lsp.inline_completion.select({ count = -1 }) end,
 ---         { buffer = bufnr, desc = 'GitLab Duo: Previous suggestion' })
 ---
 ---       -- Alt/Option+] for next suggestion
----       vim.keymap.set('i', '<M-]>', vim.lsp.inline_completion.select_next,
+---       vim.keymap.set('i', '<M-]>', function() vim.lsp.inline_completion.select({ count = 1 }) end,
 ---         { buffer = bufnr, desc = 'GitLab Duo: Next suggestion' })
 ---     end
 ---   end
@@ -317,7 +315,7 @@ end
 return {
   cmd = {
     'npx',
-    '--registry=https://gitlab.com/api/v4/packages/npm/',
+    '--@gitlab-org:registry=https://gitlab.com/api/v4/packages/npm/',
     '@gitlab-org/gitlab-lsp',
     '--stdio',
   },
@@ -393,7 +391,7 @@ return {
             local new_token_data = refresh_access_token(token_data.refresh_token)
             if new_token_data then
               client:notify('workspace/didChangeConfiguration', {
-                settings = { token = new_token_data.access_token },
+                settings = { token = new_token_data.access_token, baseUrl = config.gitlab_url },
               })
             else
               vim.notify('Run :LspGitLabDuoSignIn to re-authenticate', vim.log.levels.WARN)
@@ -416,6 +414,16 @@ return {
 
     -- Check authentication status
     local token, status = get_valid_token()
+
+    if token then
+      client:notify('workspace/didChangeConfiguration', {
+        settings = {
+          token = token,
+          baseUrl = config.gitlab_url,
+        },
+      })
+    end
+
     if not token then
       vim.notify('GitLab Duo: Not authenticated. Run :LspGitLabDuoSignIn to sign in.', vim.log.levels.WARN)
     elseif status == 'refreshed' then

@@ -10,6 +10,6 @@ local cmd = vim.lsp.rpc.connect('127.0.0.1', tonumber(port))
 ---@type vim.lsp.Config
 return {
   cmd = cmd,
-  filetypes = { 'gd', 'gdscript', 'gdscript3' },
+  filetypes = { 'gdscript' },
   root_markers = { 'project.godot', '.git' },
 }

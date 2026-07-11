@@ -1,0 +1,367 @@
+---@meta
+
+---Where Vetur source Scaffold Snippets from and how to indicate them. Set a source to "" to disable it.
+---
+---- workspace: `<WORKSPACE>/.vscode/vetur/snippets`.
+---- user: `<USER-DATA-DIR>/User/snippets/vetur`.
+---- vetur: Bundled in Vetur.
+---
+---The default is:
+---```
+---"vetur.completion.scaffoldSnippetSources": {
+---  "workspace": "💼",
+---  "user": "🗒️",
+---  "vetur": "✌"
+---}
+---```
+---
+---Alternatively, you can do:
+---
+---```
+---"vetur.completion.scaffoldSnippetSources": {
+---  "workspace": "(W)",
+---  "user": "(U)",
+---  "vetur": "(V)"
+---}
+---```
+---
+---Read more: https://vuejs.github.io/vetur/snippet.html.
+---
+---```lua
+---default = {
+---  user = "🗒️",
+---  vetur = "✌",
+---  workspace = "💼"
+---}
+---```
+---@class _.lspconfig.settings.vue_ls.Vetur.Completion.ScaffoldSnippetSources
+---Show Scaffold Snippets from `<USER-DATA-DIR>/User/snippets/vetur`.
+---
+---```lua
+---default = "🗒️"
+---```
+---@field user? string
+---Show Scaffold Snippets bundled in Vetur.
+---
+---```lua
+---default = "✌"
+---```
+---@field vetur? string
+---Show Scaffold Snippets from `<WORKSPACE>/.vscode/vetur/snippets`.
+---
+---```lua
+---default = "💼"
+---```
+---@field workspace? string
+
+---@class _.lspconfig.settings.vue_ls.Vetur.Completion
+---Include completion for module export and auto import them
+---
+---```lua
+---default = true
+---```
+---@field autoImport? boolean
+---Where Vetur source Scaffold Snippets from and how to indicate them. Set a source to "" to disable it.
+---
+---- workspace: `<WORKSPACE>/.vscode/vetur/snippets`.
+---- user: `<USER-DATA-DIR>/User/snippets/vetur`.
+---- vetur: Bundled in Vetur.
+---
+---The default is:
+---```
+---"vetur.completion.scaffoldSnippetSources": {
+---  "workspace": "💼",
+---  "user": "🗒️",
+---  "vetur": "✌"
+---}
+---```
+---
+---Alternatively, you can do:
+---
+---```
+---"vetur.completion.scaffoldSnippetSources": {
+---  "workspace": "(W)",
+---  "user": "(U)",
+---  "vetur": "(V)"
+---}
+---```
+---
+---Read more: https://vuejs.github.io/vetur/snippet.html.
+---
+---```lua
+---default = {
+---  user = "🗒️",
+---  vetur = "✌",
+---  workspace = "💼"
+---}
+---```
+---@field scaffoldSnippetSources? _.lspconfig.settings.vue_ls.Vetur.Completion.ScaffoldSnippetSources
+---Casing conversion for tag completion
+---
+---```lua
+---default = "kebab"
+---```
+---@field tagCasing? "initial" | "kebab"
+
+---@class _.lspconfig.settings.vue_ls.Vetur.Dev
+---Log level for VLS
+---
+---```lua
+---default = "INFO"
+---```
+---@field logLevel? "INFO" | "DEBUG"
+---Path to vls for Vetur developers. There are two ways of using it. 
+---
+---1. Clone vuejs/vetur from GitHub, build it and point it to the ABSOLUTE path of `/server`.
+---2. `yarn global add vls` and point Vetur to the installed location (`yarn global dir` + node_modules/vls)
+---@field vlsPath? string
+---The port that VLS listens to. Can be used for attaching to the VLS Node process for debugging / profiling.
+---
+---```lua
+---default = -1
+---```
+---@field vlsPort? number
+
+---@class _.lspconfig.settings.vue_ls.Vetur.Experimental
+---Enable template interpolation service that offers hover / definition / references in Vue interpolations.
+---@field templateInterpolationService? boolean
+
+---@class _.lspconfig.settings.vue_ls.Vetur.Format.DefaultFormatter
+---Default formatter for <style> region
+---
+---```lua
+---default = "prettier"
+---```
+---@field css? "none" | "prettier"
+---Default formatter for <template> region
+---
+---```lua
+---default = "prettier"
+---```
+---@field html? "none" | "prettyhtml" | "js-beautify-html" | "prettier"
+---Default formatter for <script> region
+---
+---```lua
+---default = "prettier"
+---```
+---@field js? "none" | "prettier" | "prettier-eslint" | "vscode-typescript"
+---Default formatter for <style lang='less'> region
+---
+---```lua
+---default = "prettier"
+---```
+---@field less? "none" | "prettier"
+---Default formatter for <style lang='postcss'> region
+---
+---```lua
+---default = "prettier"
+---```
+---@field postcss? "none" | "prettier"
+---Default formatter for <template lang='pug'> region
+---
+---```lua
+---default = "prettier"
+---```
+---@field pug? "none" | "prettier"
+---Default formatter for <style lang='sass'> region
+---
+---```lua
+---default = "sass-formatter"
+---```
+---@field sass? "none" | "sass-formatter"
+---Default formatter for <style lang='scss'> region
+---
+---```lua
+---default = "prettier"
+---```
+---@field scss? "none" | "prettier"
+---Default formatter for <style lang='stylus'> region
+---
+---```lua
+---default = "stylus-supremacy"
+---```
+---@field stylus? "none" | "stylus-supremacy"
+---Default formatter for <script> region
+---
+---```lua
+---default = "prettier"
+---```
+---@field ts? "none" | "prettier" | "prettier-tslint" | "vscode-typescript"
+
+---Global prettier config used by prettier formatter. Used by `prettier` and `prettier-eslint`.
+---
+---Vetur will prefer a prettier config file at home directory if one exists.
+---@class _.lspconfig.settings.vue_ls.Vetur.Format.DefaultFormatterOptions.Prettier
+
+---Options for prettyhtml
+---@class _.lspconfig.settings.vue_ls.Vetur.Format.DefaultFormatterOptions.Prettyhtml
+---Maximum amount of characters allowed per line
+---
+---```lua
+---default = 100
+---```
+---@field printWidth? number
+---Whether to use single quotes by default
+---@field singleQuote? boolean
+---Whether to sort attributes
+---@field sortAttributes? boolean
+---Whether to wrap attributes
+---@field wrapAttributes? boolean
+
+---Options for all default formatters
+---
+---```lua
+---default = {
+---  ["js-beautify-html"] = {
+---    wrap_attributes = "force-expand-multiline"
+---  },
+---  prettyhtml = {
+---    printWidth = 100,
+---    singleQuote = false,
+---    sortAttributes = false,
+---    wrapAttributes = false
+---  }
+---}
+---```
+---@class _.lspconfig.settings.vue_ls.Vetur.Format.DefaultFormatterOptions
+---Options for js-beautify
+---@field ["js-beautify-html"]? table
+---Global prettier config used by prettier formatter. Used by `prettier` and `prettier-eslint`.
+---
+---Vetur will prefer a prettier config file at home directory if one exists.
+---@field prettier? _.lspconfig.settings.vue_ls.Vetur.Format.DefaultFormatterOptions.Prettier
+---Options for prettyhtml
+---@field prettyhtml? _.lspconfig.settings.vue_ls.Vetur.Format.DefaultFormatterOptions.Prettyhtml
+
+---@class _.lspconfig.settings.vue_ls.Vetur.Format.Options
+---Number of spaces per indentation level. Inherited by all formatters.
+---
+---```lua
+---default = 2
+---```
+---@field tabSize? number
+---Use tabs for indentation. Inherited by all formatters.
+---@field useTabs? boolean
+
+---@class _.lspconfig.settings.vue_ls.Vetur.Format
+---@field defaultFormatter? _.lspconfig.settings.vue_ls.Vetur.Format.DefaultFormatter
+---Options for all default formatters
+---
+---```lua
+---default = {
+---  ["js-beautify-html"] = {
+---    wrap_attributes = "force-expand-multiline"
+---  },
+---  prettyhtml = {
+---    printWidth = 100,
+---    singleQuote = false,
+---    sortAttributes = false,
+---    wrapAttributes = false
+---  }
+---}
+---```
+---@field defaultFormatterOptions? _.lspconfig.settings.vue_ls.Vetur.Format.DefaultFormatterOptions
+---Enable/disable the Vetur document formatter.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---@field options? _.lspconfig.settings.vue_ls.Vetur.Format.Options
+---Whether to have initial indent for <script> region
+---@field scriptInitialIndent? boolean
+---Whether to have initial indent for <style> region
+---@field styleInitialIndent? boolean
+
+---@class _.lspconfig.settings.vue_ls.Vetur.Grammar
+---Mapping from custom block tag name to language name. Used for generating grammar to support syntax highlighting for custom blocks.
+---
+---```lua
+---default = {
+---  docs = "md",
+---  i18n = "json"
+---}
+---```
+---@field customBlocks? table
+
+---@class _.lspconfig.settings.vue_ls.Vetur.LanguageFeatures
+---Whether to enable codeActions
+---
+---```lua
+---default = true
+---```
+---@field codeActions? boolean
+---Whether to enable semantic highlighting. Currently only works for typescript
+---
+---```lua
+---default = true
+---```
+---@field semanticTokens? boolean
+---Whether to automatic updating import path when rename or move a file
+---
+---```lua
+---default = true
+---```
+---@field updateImportOnFileMove? boolean
+
+---@class _.lspconfig.settings.vue_ls.Vetur.Trace
+---Traces the communication between VS Code and Vue Language Server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.vue_ls.Vetur.Underline
+---Enable underline `.value` when using composition API.
+---
+---```lua
+---default = true
+---```
+---@field refValue? boolean
+
+---@class _.lspconfig.settings.vue_ls.Vetur.Validation
+---Validate interpolations in <template> region using TypeScript language service
+---
+---```lua
+---default = true
+---```
+---@field interpolation? boolean
+---Validate js/ts in <script>
+---
+---```lua
+---default = true
+---```
+---@field script? boolean
+---Validate css/scss/less/postcss in <style>
+---
+---```lua
+---default = true
+---```
+---@field style? boolean
+---Validate vue-html in <template> using eslint-plugin-vue
+---
+---```lua
+---default = true
+---```
+---@field template? boolean
+---Validate props usage in <template> region. Show error/warning for not passing declared props to child components and show error for passing wrongly typed interpolation expressions
+---@field templateProps? boolean
+
+---@class _.lspconfig.settings.vue_ls.Vetur
+---@field completion? _.lspconfig.settings.vue_ls.Vetur.Completion
+---@field dev? _.lspconfig.settings.vue_ls.Vetur.Dev
+---@field experimental? _.lspconfig.settings.vue_ls.Vetur.Experimental
+---@field format? _.lspconfig.settings.vue_ls.Vetur.Format
+---@field grammar? _.lspconfig.settings.vue_ls.Vetur.Grammar
+---Vetur will warn about not setup correctly for the project. You can disable it.
+---@field ignoreProjectWarning? boolean
+---@field languageFeatures? _.lspconfig.settings.vue_ls.Vetur.LanguageFeatures
+---@field trace? _.lspconfig.settings.vue_ls.Vetur.Trace
+---@field underline? _.lspconfig.settings.vue_ls.Vetur.Underline
+---Use dependencies from workspace. Support for TypeScript, Prettier, @starptech/prettyhtml, prettier-eslint, prettier-tslint, stylus-supremacy, @prettier/plugin-pug.
+---@field useWorkspaceDependencies? boolean
+---@field validation? _.lspconfig.settings.vue_ls.Vetur.Validation
+
+---@class lspconfig.settings.vue_ls
+---@field vetur? _.lspconfig.settings.vue_ls.Vetur

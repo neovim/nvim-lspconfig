@@ -1,17 +1,13 @@
 ---@brief
 ---
---- https://github.com/psacawa/systemd-language-server
----
---- `systemd-language-server` can be installed via `pip`:
---- ```sh
---- pip install systemd-language-server
---- ```
----
---- Language Server for Systemd unit files
+--- Renamed to [systemd_lsp](#systemd_lsp)
 
 ---@type vim.lsp.Config
-return {
-  cmd = { 'systemd-language-server' },
-  filetypes = { 'systemd' },
-  root_markers = { '.git' },
-}
+return vim.tbl_extend('force', vim.lsp.config.systemd_lsp, {
+  on_init = function(...)
+    vim.deprecate('systemd_ls', 'systemd_lsp', '3.0.0', 'nvim-lspconfig', false)
+    if vim.lsp.config.systemd_lsp.on_init then
+      vim.lsp.config.systemd_lsp.on_init(...)
+    end
+  end,
+})

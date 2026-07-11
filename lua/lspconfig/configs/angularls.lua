@@ -56,7 +56,7 @@ return {
       '--angularCoreVersion',
       default_angular_core_version,
     },
-    filetypes = { 'typescript', 'html', 'typescriptreact', 'typescript.tsx', 'htmlangular' },
+    filetypes = { 'typescript', 'html', 'typescriptreact', 'htmlangular' },
     -- Check for angular.json since that is the root of the project.
     -- Don't check for tsconfig.json or package.json since there are multiple of these
     -- in an angular monorepo setup.

@@ -14,6 +14,7 @@ return {
   cmd = { 'spectral-language-server', '--stdio' },
   filetypes = { 'yaml', 'json', 'yml' },
   root_markers = { '.spectral.yaml', '.spectral.yml', '.spectral.json', '.spectral.js' },
+  ---@type lspconfig.settings.spectral
   settings = {
     enable = true,
     run = 'onType',

@@ -35,6 +35,33 @@ local function reload_workspace(bufnr)
   end
 end
 
+local function user_sysroot_src()
+  return vim.tbl_get(vim.lsp.config['rust_analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysrootSrc')
+end
+
+local function default_sysroot_src()
+  local sysroot = vim.tbl_get(vim.lsp.config['rust_analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysroot')
+  if not sysroot then
+    local rustc = os.getenv 'RUSTC' or 'rustc'
+    local result = vim.system({ rustc, '--print', 'sysroot' }, { text = true }):wait()
+
+    local stdout = result.stdout
+    if result.code == 0 and stdout then
+      if string.sub(stdout, #stdout) == '\n' then
+        if #stdout > 1 then
+          sysroot = string.sub(stdout, 1, #stdout - 1)
+        else
+          sysroot = ''
+        end
+      else
+        sysroot = stdout
+      end
+    end
+  end
+
+  return sysroot and vim.fs.joinpath(sysroot, 'lib/rustlib/src/rust/library') or nil
+end
+
 local function is_library(fname)
   local user_home = vim.fs.normalize(vim.env.HOME)
   local cargo_home = os.getenv 'CARGO_HOME' or user_home .. '/.cargo'
@@ -44,8 +71,10 @@ local function is_library(fname)
   local rustup_home = os.getenv 'RUSTUP_HOME' or user_home .. '/.rustup'
   local toolchains = rustup_home .. '/toolchains'
 
-  for _, item in ipairs { toolchains, registry, git_registry } do
-    if vim.fs.relpath(item, fname) then
+  local sysroot_src = user_sysroot_src() or default_sysroot_src()
+
+  for _, item in ipairs { toolchains, registry, git_registry, sysroot_src } do
+    if item and vim.fs.relpath(item, fname) then
       local clients = vim.lsp.get_clients { name = 'rust_analyzer' }
       return #clients > 0 and clients[#clients].config.root_dir or nil
     end
@@ -114,6 +143,24 @@ return {
       },
     },
   },
+  ---@type lspconfig.settings.rust_analyzer
+  settings = {
+    ['rust-analyzer'] = {
+      lens = {
+        debug = { enable = true },
+        enable = true,
+        implementations = { enable = true },
+        references = {
+          adt = { enable = true },
+          enumVariant = { enable = true },
+          method = { enable = true },
+          trait = { enable = true },
+        },
+        run = { enable = true },
+        updateTest = { enable = true },
+      },
+    },
+  },
   before_init = function(init_params, config)
     -- See https://github.com/rust-lang/rust-analyzer/blob/eb5da56d839ae0a9e9f50774fa3eb78eb0964550/docs/dev/lsp-extensions.md?plain=1#L26
     if config.settings and config.settings['rust-analyzer'] then
@@ -127,7 +174,7 @@ return {
         vim.list_extend(cmd, { '--', unpack(r.args.executableArgs) })
       end
 
-      local proc = vim.system(cmd, { cwd = r.args.cwd })
+      local proc = vim.system(cmd, { cwd = r.args.cwd, env = r.args.environment })
 
       local result = proc:wait()
 

@@ -77,6 +77,7 @@ return {
   filetypes = filetypes,
   root_markers = { '.git' },
   get_language_id = get_language_id,
+  ---@type lspconfig.settings.ltex
   settings = {
     ltex = {
       enabled = enabled_ids,

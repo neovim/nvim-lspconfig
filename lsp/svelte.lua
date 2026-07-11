@@ -6,13 +6,37 @@
 ---
 --- `svelte-language-server` can be installed via `npm`:
 --- ```sh
---- npm install -g svelte-language-server
+--- npm install [-g] svelte-language-server
 --- ```
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'svelteserver', '--stdio' },
+  cmd = function(dispatchers, config)
+    local cmd = 'svelteserver'
+    if (config or {}).root_dir then
+      local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', cmd)
+      if vim.fn.executable(local_cmd) == 1 then
+        cmd = local_cmd
+      end
+    end
+    return vim.lsp.rpc.start({ cmd, '--stdio' }, dispatchers)
+  end,
   filetypes = { 'svelte' },
+  settings = {
+    typescript = {
+      inlayHints = {
+        parameterNames = {
+          enabled = 'literals',
+          suppressWhenArgumentMatchesName = true,
+        },
+        parameterTypes = { enabled = true },
+        variableTypes = { enabled = true },
+        propertyDeclarationTypes = { enabled = true },
+        functionLikeReturnTypes = { enabled = true },
+        enumMemberValues = { enabled = true },
+      },
+    },
+  },
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     -- Svelte LSP only supports file:// schema. https://github.com/sveltejs/language-tools/issues/2777

@@ -11,7 +11,7 @@
 ---
 --- ```lua
 --- vim.lsp.config('nextflow_ls', {
----     cmd = { 'java', '-jar', 'nextflow-language-server-all.jar' },
+---     cmd = { 'nextflow-language-server' },
 ---     filetypes = { 'nextflow' },
 ---     settings = {
 ---       nextflow = {
@@ -25,7 +25,7 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'java', '-jar', 'nextflow-language-server-all.jar' },
+  cmd = { 'nextflow-language-server' },
   filetypes = { 'nextflow' },
   root_markers = { 'nextflow.config', '.git' },
   settings = {

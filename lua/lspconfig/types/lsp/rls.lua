@@ -1,0 +1,153 @@
+---@meta
+
+---@class _.lspconfig.settings.rls.Rust
+---Enable all Cargo features.
+---@field all_features? boolean
+---Checks the project as if you were running cargo check --all-targets (I.e., check all targets and integration tests too).
+---
+---```lua
+---default = true
+---```
+---@field all_targets? boolean
+---Specify to run analysis as if running `cargo check --bin <name>`. Use `null` to auto-detect. (unstable)
+---@field build_bin? string
+---EXPERIMENTAL (requires `unstable_features`)
+---If set, executes a given program responsible for rebuilding save-analysis to be loaded by the RLS. The program given should output a list of resulting .json files on stdout. 
+---Implies `rust.build_on_save`: true.
+---@field build_command? string
+---Specify to run analysis as if running `cargo check --lib`. Use `null` to auto-detect. (unstable)
+---@field build_lib? boolean
+---Only index the project when a file is saved and not on change.
+---@field build_on_save? boolean
+---Build cfg(test) code. (unstable)
+---@field cfg_test? boolean
+---Clear the RUST_LOG environment variable before running rustc or cargo.
+---
+---```lua
+---default = true
+---```
+---@field clear_env_rust_log? boolean
+---Controls eagerness of clippy diagnostics when available. Valid values are (case-insensitive):
+--- - "off": Disable clippy lints.
+--- - "on": Display the same diagnostics as command-line clippy invoked with no arguments (`clippy::all` unless overridden).
+--- - "opt-in": Only display the lints explicitly enabled in the code. Start by adding `#![warn(clippy::all)]` to the root of each crate you want linted.
+---You need to install clippy via rustup if you haven't already.
+---
+---```lua
+---default = "opt-in"
+---```
+---@field clippy_preference? "on" | "opt-in" | "off"
+---Overrides the default list of packages for which analysis is skipped.
+---Available since RLS 1.38
+---
+---```lua
+---default = { "cocoa", "gleam", "glium", "idna", "libc", "openssl", "rustc_serialize", "serde", "serde_json", "typenum", "unicode_normalization", "unicode_segmentation", "winapi" }
+---```
+---@field crate_blacklist? any[]
+---A list of Cargo features to enable.
+---
+---```lua
+---default = {}
+---```
+---@field features? any[]
+---Instructs cargo to enable full documentation extraction during save-analysis while building the crate.
+---@field full_docs? boolean
+---Whether to surpress the deprecation notification on start up.
+---@field ignore_deprecation_warning? boolean
+---Number of Cargo jobs to be run in parallel.
+---@field jobs? number
+---Do not enable default Cargo features.
+---@field no_default_features? boolean
+---Enables code completion using racer.
+---
+---```lua
+---default = true
+---```
+---@field racer_completion? boolean
+---Settings passed down to rust-analyzer server
+---
+---```lua
+---default = {}
+---```
+---@field ["rust-analyzer"]? table
+---Flags added to RUSTFLAGS.
+---@field rustflags? string
+---When specified, RLS will use the Rustfmt pointed at the path instead of the bundled one
+---@field rustfmt_path? string
+---Show additional context in hover tooltips when available. This is often the type local variable declaration.
+---
+---```lua
+---default = true
+---```
+---@field show_hover_context? boolean
+---Show warnings.
+---
+---```lua
+---default = true
+---```
+---@field show_warnings? boolean
+-----sysroot
+---@field sysroot? string
+-----target
+---@field target? string
+---When specified, it places the generated analysis files at the specified target directory. By default it is placed target/rls directory.
+---@field target_dir? string
+---Enable unstable features.
+---@field unstable_features? boolean
+---Time in milliseconds between receiving a change notification and starting build.
+---@field wait_to_build? number
+
+---@class _.lspconfig.settings.rls.RustClient.Trace
+---Traces the communication between VS Code and the Rust language server.
+---
+---```lua
+---default = "off"
+---```
+---@field server? "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.rls.RustClient
+---Start RLS automatically when opening a file or project.
+---
+---```lua
+---default = true
+---```
+---@field autoStartRls? boolean
+---Rust channel to invoke rustup with. Ignored if rustup is disabled. By default, uses the same channel as your currently open project.
+---
+---```lua
+---default = "default"
+---```
+---@field channel? string|"default" | "stable" | "beta" | "nightly"
+---Disable usage of rustup and use rustc/rls/rust-analyzer from PATH.
+---@field disableRustup? boolean
+---Allow multiple projects in the same folder, along with removing the constraint that the cargo.toml must be located at the root. (Experimental: might not work for certain setups)
+---@field enableMultiProjectSetup? boolean
+---The underlying LSP server used to provide IDE support for Rust projects.
+---
+---```lua
+---default = "rls"
+---```
+---@field engine? "rls" | "rust-analyzer"
+---When set to true, RLS stderr is logged to a file at workspace root level. Requires reloading extension after change.
+---@field logToFile? boolean
+---Specifies message severity on which the output channel will be revealed. Requires reloading extension after change.
+---
+---```lua
+---default = "never"
+---```
+---@field revealOutputChannelOn? "info" | "warn" | "error" | "never"
+---Override RLS path. Only required for RLS developers. If you set this and use rustup, you should also set `rust-client.channel` to ensure your RLS sees the right libraries. If you don't use rustup, make sure to set `rust-client.disableRustup`.
+---@field rlsPath? string
+---Path to rustup executable. Ignored if rustup is disabled.
+---
+---```lua
+---default = "rustup"
+---```
+---@field rustupPath? string
+---@field trace? _.lspconfig.settings.rls.RustClient.Trace
+---Update the Rust toolchain and its required components whenever the extension starts up.
+---@field updateOnStartup? boolean
+
+---@class lspconfig.settings.rls
+---@field rust? _.lspconfig.settings.rls.Rust
+---@field ["rust-client"]? _.lspconfig.settings.rls.RustClient

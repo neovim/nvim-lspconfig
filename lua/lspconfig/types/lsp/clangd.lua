@@ -1,0 +1,91 @@
+---@meta
+
+---@class _.lspconfig.settings.clangd.Clangd.InactiveRegions
+---Opacity of inactive regions (used only if clangd.inactiveRegions.useBackgroundHighlight=false)
+---
+---```lua
+---default = 0.55
+---```
+---@field opacity? number
+---Use a background highlight rather than opacity to identify inactive preprocessor regions.
+---@field useBackgroundHighlight? boolean
+
+---@class _.lspconfig.settings.clangd.Clangd
+---Arguments for clangd server.
+---
+---```lua
+---default = {}
+---```
+---@field arguments? string[]
+---Check for language server updates on startup.
+---@field checkUpdates? boolean
+---Warn about conflicting extensions and suggest disabling them.
+---
+---```lua
+---default = true
+---```
+---@field detectExtensionConflicts? boolean
+---Enable clangd language server features
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Enable code completion provided by the language server
+---
+---```lua
+---default = true
+---```
+---@field enableCodeCompletion? boolean
+---Enable hovers provided by the language server
+---
+---```lua
+---default = true
+---```
+---@field enableHover? boolean
+---Extra clang flags used to parse files when no compilation database is found.
+---
+---```lua
+---default = {}
+---```
+---@field fallbackFlags? string[]
+---@field inactiveRegions? _.lspconfig.settings.clangd.Clangd.InactiveRegions
+---What to do when clangd configuration files are changed. Ignored for clangd 12+, which can reload such files itself; however, this can be overridden with clangd.onConfigChangedForceEnable.
+---
+---```lua
+---default = "prompt"
+---```
+---@field onConfigChanged? "prompt" | "restart" | "ignore"
+---Force enable of "On Config Changed" option regardless of clangd version.
+---@field onConfigChangedForceEnable? boolean
+---The path to clangd executable, e.g.: /usr/bin/clangd.
+---
+---```lua
+---default = "clangd"
+---```
+---@field path? string
+---Auto restart clangd (up to 4 times) if it crashes.
+---
+---```lua
+---default = true
+---```
+---@field restartAfterCrash? boolean
+---Enable semantic highlighting in clangd.
+---
+---```lua
+---default = true
+---```
+---@field semanticHighlighting? boolean
+---Always rank completion items on the server as you type. This produces more accurate results at the cost of higher latency than client-side filtering.
+---
+---```lua
+---default = true
+---```
+---@field serverCompletionRanking? boolean
+---Names a file that clangd should log a performance trace to, in chrome trace-viewer JSON format.
+---@field trace? string
+---Allows the path to be a script e.g.: clangd.sh.
+---@field useScriptAsExecutable? boolean
+
+---@class lspconfig.settings.clangd
+---@field clangd? _.lspconfig.settings.clangd.Clangd
