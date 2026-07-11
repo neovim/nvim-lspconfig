@@ -6,10 +6,9 @@
 ---
 ---Source in the [QtDeclarative repository](https://code.qt.io/cgit/qt/qtlanguageserver.git)
 
-
 ---@type vim.lsp.Config
 return {
-  cmd = { 'qmlls6' },
-  filetypes = { 'qml', 'qmljs' },
-  root_markers = { '.git' },
+  cmd = { "qmlls6" },
+  filetypes = { "qml", "qmljs" },
+  root_markers = { ".git" },
 }
