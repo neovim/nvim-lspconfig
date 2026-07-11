@@ -11603,6 +11603,41 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+wolfram_lsp
+
+https://github.com/WolframResearch/LSPServer
+
+LSPServer is an official lsp server for Mathematica.
+
+Installation:
+The LSPServer paclet and its dependencies are included in Mathematica or
+Wolfram Engine installation in recent versions (13.0 and later).
+
+If your Mathematica or Wolfram Engine installation is old and LSPServer is
+not included, you can install it manually in a Mathematica environment >mma
+  PacletInstall["CodeParser"]
+  PacletInstall["CodeInspector"]
+  PacletInstall["CodeFormatter"]
+  PacletInstall["LSPServer"]
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('wolfram_lsp')
+
+
+Default config:
+- cmd: >lua
+  { "WolframKernel", "-noinit", "-noprompt", "-nopaclet", "-noicon", "-nostartuppaclets", "-run", 'Needs["LSPServer`"];LSPServer`StartServer[]' }
+- filetypes: >lua
+  { "mma" }
+- init_options: >lua
+  {
+    semanticTokens = true
+  }
+- root_markers: >lua
+  { ".git" }
+<
+
+------------------------------------------------------------------------------
 yamlls
 
 https://github.com/redhat-developer/yaml-language-server

@@ -399,6 +399,7 @@ Nvim by running `:help lspconfig-all`.
 - [wasm_language_tools](#wasm_language_tools)
 - [wc_language_server](#wc_language_server)
 - [wgsl_analyzer](#wgsl_analyzer)
+- [wolfram_lsp](#wolfram_lsp)
 - [yamlls](#yamlls)
 - [yang_lsp](#yang_lsp)
 - [yls](#yls)
@@ -15427,6 +15428,52 @@ Default config:
 - `settings` :
   ```lua
   {}
+  ```
+
+---
+
+## wolfram_lsp
+
+https://github.com/WolframResearch/LSPServer
+
+LSPServer is an official lsp server for Mathematica.
+
+Installation:
+The LSPServer paclet and its dependencies are included in Mathematica or
+Wolfram Engine installation in recent versions (13.0 and later).
+
+If your Mathematica or Wolfram Engine installation is old and LSPServer is
+not included, you can install it manually in a Mathematica environment:
+```mma
+PacletInstall["CodeParser"]
+PacletInstall["CodeInspector"]
+PacletInstall["CodeFormatter"]
+PacletInstall["LSPServer"]
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('wolfram_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "WolframKernel", "-noinit", "-noprompt", "-nopaclet", "-noicon", "-nostartuppaclets", "-run", 'Needs["LSPServer`"];LSPServer`StartServer[]' }
+  ```
+- `filetypes` :
+  ```lua
+  { "mma" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    semanticTokens = true
+  }
+  ```
+- `root_markers` :
+  ```lua
+  { ".git" }
   ```
 
 ---
