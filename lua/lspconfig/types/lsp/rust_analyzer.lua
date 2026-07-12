@@ -1245,7 +1245,7 @@
 ---runs in parallel to handle macro expansion.
 ---
 ---```lua
----default = 1
+---default = 2
 ---```
 ---@field processes? number|"physical"
 ---Internal config, path to proc-macro server executable.
