@@ -351,6 +351,7 @@ Nvim by running `:help lspconfig-all`.
 - [termux_language_server](#termux_language_server)
 - [terraform_lsp](#terraform_lsp)
 - [terraformls](#terraformls)
+- [terragrunt_ls](#terragrunt_ls)
 - [texlab](#texlab)
 - [textlsp](#textlsp)
 - [tflint](#tflint)
@@ -13549,6 +13550,33 @@ Default config:
 - `root_markers` :
   ```lua
   { ".terraform", ".git" }
+  ```
+
+---
+
+## terragrunt_ls
+
+https://github.com/gruntwork-io/terragrunt-ls
+
+`terragrunt-ls`, a language server for Terragrunt configuration files.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('terragrunt_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "terragrunt-ls" }
+  ```
+- `filetypes` :
+  ```lua
+  { "hcl" }
+  ```
+- `root_markers` :
+  ```lua
+  { "terragrunt.hcl", ".git" }
   ```
 
 ---
