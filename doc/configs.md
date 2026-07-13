@@ -11027,12 +11027,12 @@ Default config:
   ```lua
   "roslyn_ls"
   ```
-- `on_attach`: [../lsp/roslyn_ls.lua:149](../lsp/roslyn_ls.lua#L149)
+- `on_attach`: [../lsp/roslyn_ls.lua:156](../lsp/roslyn_ls.lua#L156)
 - `on_init` :
   ```lua
   { <function 1> }
   ```
-- `root_dir`: [../lsp/roslyn_ls.lua:149](../lsp/roslyn_ls.lua#L149)
+- `root_dir`: [../lsp/roslyn_ls.lua:156](../lsp/roslyn_ls.lua#L156)
 - `settings` :
   ```lua
   {
