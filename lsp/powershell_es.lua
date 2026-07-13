@@ -51,6 +51,6 @@ return {
 
     return vim.lsp.rpc.start(cmd, dispatchers)
   end,
-  filetypes = { 'ps1' },
+  filetypes = { 'ps1', 'psd1', 'psm1', 'psrc', 'pssc' },
   root_markers = { 'PSScriptAnalyzerSettings.psd1', '.git' },
 }
