@@ -219,9 +219,10 @@
 ---A list of file patterns to include when linting.
 ---
 ---Inclusion are based on globs, and should be single-path patterns, like
----`*.pyw`, to include any file with the `.pyw` extension. `pyproject.toml` is
----included here not for configuration but because we lint whether e.g. the
----`[project]` matches the schema.
+---`*.pyw`, to include any file with the `.pyw` extension.
+---`pyproject.toml`, `ruff.toml`, and `.ruff.toml` are included here not for
+---configuration but because we lint whether e.g. the `[project]` matches
+---the schema in `pyproject.toml` or that rule names are used as selectors.
 ---
 ---Notebook files (`.ipynb` extension) are included by default on Ruff 0.6.0+.
 ---

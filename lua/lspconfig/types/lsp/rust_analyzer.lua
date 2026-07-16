@@ -904,7 +904,7 @@
 ---@field minLines? integer
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ClosureCaptureHints
----Show inlay hints for closure captures.
+---Show inlay hints for closure and coroutine captures.
 ---@field enable? boolean
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ClosureReturnTypeHints

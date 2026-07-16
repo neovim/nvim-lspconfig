@@ -247,7 +247,7 @@
 ---Symbol server cache download URL.
 ---
 ---```lua
----default = "https://www.julia-vscode.org/symbolcache"
+---default = "https://julia-symbolcache.org"
 ---```
 ---@field symbolserverUpstream? string
 ---@field trace? _.lspconfig.settings.julials.Julia.Trace
