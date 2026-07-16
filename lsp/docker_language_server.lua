@@ -2,7 +2,7 @@
 ---
 --- https://github.com/docker/docker-language-server
 ---
---- `docker-langserver-server` can be installed via `go`:
+--- `docker-language-server` can be installed via `go`:
 --- ```sh
 --- go install github.com/docker/docker-language-server/cmd/docker-language-server@latest
 --- ```
