@@ -284,23 +284,23 @@
 ---default = {}
 ---```
 ---@field flutterAttachAdditionalArgs? string[]
----The programming language to use for Android apps when creating new projects using the 'Flutter: New Project' command.
+---The programming language to use for Android apps when creating new projects using the 'Flutter: Create New Project' command.
 ---
 ---```lua
 ---default = "kotlin"
 ---```
 ---@field flutterCreateAndroidLanguage? "java" | "kotlin"
----The programming language to use for iOS apps when creating new projects using the 'Flutter: New Project' command. This is only supported up until Flutter 3.22 after which it will be ignored.
+---The programming language to use for iOS apps when creating new projects using the 'Flutter: Create New Project' command. This is only supported up until Flutter 3.22 after which it will be ignored.
 ---
 ---```lua
 ---default = "swift"
 ---```
 ---@field flutterCreateIOSLanguage? "objc" | "swift"
----The organization responsible for your new Flutter project, in reverse domain name notation (e.g. `com.google`). This string is used in Java package names and as prefix in the iOS bundle identifier when creating new projects using the 'Flutter: New Project' command.
+---The organization responsible for your new Flutter project, in reverse domain name notation (e.g. `com.google`). This string is used in Java package names and as prefix in the iOS bundle identifier when creating new projects using the 'Flutter: Create New Project' command.
 ---@field flutterCreateOrganization? string
----The platforms to enable for new projects created using the 'Flutter: New Project' command. If unset, all platforms will be enabled.
+---The platforms to enable for new projects created using the 'Flutter: Create New Project' command. If unset, all platforms will be enabled.
 ---@field flutterCreatePlatforms? string[]
----Whether to prompt for platforms when running 'Flutter: New Project'.
+---Whether to prompt for platforms when running 'Flutter: Create New Project'.
 ---
 ---```lua
 ---default = true
@@ -493,7 +493,7 @@
 ---default = true
 ---```
 ---@field notifyAnalyzerErrors? boolean
----Whether to use the --offline switch for commands like 'pub get' and 'Flutter: New Project'.
+---Whether to use the --offline switch for commands like 'pub get' and 'Flutter: Create New Project'.
 ---@field offline? boolean
 ---**Deprecated**: Whether to ignore workspace folders and perform analysis based on the open files. This setting can make performance significantly worse when moving around a project and is not recommended.
 ---@field onlyAnalyzeProjectsWithOpenFiles? boolean
