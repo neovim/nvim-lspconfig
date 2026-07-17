@@ -798,6 +798,9 @@ https://detachhead.github.io/basedpyright
 
 `basedpyright`, a static type checker and language server for python
 
+Tagged hints are disabled by default. See Pyright for more details.
+Set `basedpyright.disableTaggedHints = false` to re-enable.
+
 Snippet to enable the language server: >lua
   vim.lsp.enable('basedpyright')
 
@@ -807,7 +810,7 @@ Default config:
   { "basedpyright-langserver", "--stdio" }
 - filetypes: >lua
   { "python" }
-- on_attach (use "gF" to view): ../lsp/basedpyright.lua:25
+- on_attach (use "gF" to view): ../lsp/basedpyright.lua:28
 - root_markers: >lua
   { "pyrightconfig.json", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
 - settings: >lua
@@ -816,7 +819,8 @@ Default config:
       analysis = {
         autoSearchPaths = true,
         diagnosticMode = "openFilesOnly"
-      }
+      },
+      disableTaggedHints = true
     }
   }
 <
@@ -7619,6 +7623,15 @@ https://github.com/microsoft/pyright
 
 `pyright`, a static type checker and language server for python
 
+Pyright marks unreachable, unreferenced and deprecated code with hint
+diagnostics. Nvim correctly reports them as regular diagnostics, but they
+are usually too noisy (https://github.com/neovim/neovim/issues/30444), so
+they are disabled by default. To re-enable:
+>lua
+  vim.lsp.config('pyright', {
+    settings = { pyright = { disableTaggedHints = false } },
+  })
+
 Snippet to enable the language server: >lua
   vim.lsp.enable('pyright')
 
@@ -7628,11 +7641,14 @@ Default config:
   { "pyright-langserver", "--stdio" }
 - filetypes: >lua
   { "python" }
-- on_attach (use "gF" to view): ../lsp/pyright.lua:25
+- on_attach (use "gF" to view): ../lsp/pyright.lua:36
 - root_markers: >lua
   { "pyrightconfig.json", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
 - settings: >lua
   {
+    pyright = {
+      disableTaggedHints = true
+    },
     python = {
       analysis = {
         autoSearchPaths = true,
