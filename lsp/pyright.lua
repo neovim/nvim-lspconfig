@@ -3,6 +3,17 @@
 --- https://github.com/microsoft/pyright
 ---
 --- `pyright`, a static type checker and language server for python
+---
+--- Pyright marks unreachable, unreferenced and deprecated code with hint
+--- diagnostics. Nvim correctly reports them as regular diagnostics, but they
+--- are usually too noisy (https://github.com/neovim/neovim/issues/30444), so
+--- they are disabled by default. To re-enable:
+---
+--- ```lua
+--- vim.lsp.config('pyright', {
+---   settings = { pyright = { disableTaggedHints = false } },
+--- })
+--- ```
 
 local function set_python_path(command)
   local path = command.args
@@ -36,6 +47,9 @@ return {
   },
   ---@type lspconfig.settings.pyright
   settings = {
+    pyright = {
+      disableTaggedHints = true,
+    },
     python = {
       analysis = {
         autoSearchPaths = true,
