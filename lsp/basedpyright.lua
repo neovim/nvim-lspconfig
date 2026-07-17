@@ -3,6 +3,9 @@
 --- https://detachhead.github.io/basedpyright
 ---
 --- `basedpyright`, a static type checker and language server for python
+---
+--- Tagged hints are disabled by default. See Pyright for more details.
+--- Set `basedpyright.disableTaggedHints = false` to re-enable.
 
 local function set_python_path(command)
   local path = command.args
@@ -45,6 +48,7 @@ return {
         -- Because it will override per-project configurations like `pyproject.toml`.
         -- If left unset, its default value is `true`, and it can be correctly overridden by project config files.
       },
+      disableTaggedHints = true,
     },
   },
   on_attach = function(client, bufnr)
