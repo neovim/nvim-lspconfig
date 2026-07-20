@@ -13,8 +13,7 @@ return {
   cmd = { 'ast-grep', 'lsp' },
   workspace_required = true,
   reuse_client = function(client, config)
-    return client.name == config.name
-      and client.config.root_dir == config.root_dir
+    return client.name == config.name and client.config.root_dir == config.root_dir
   end,
   filetypes = { -- https://ast-grep.github.io/reference/languages.html
     'bash',
