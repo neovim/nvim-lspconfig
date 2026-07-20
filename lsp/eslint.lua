@@ -194,7 +194,7 @@ return {
     if root_dir then
       config.settings = config.settings or {}
       config.settings.workspaceFolder = {
-        uri = root_dir,
+        uri = vim.uri_from_fname(root_dir),
         name = vim.fn.fnamemodify(root_dir, ':t'),
       }
 
