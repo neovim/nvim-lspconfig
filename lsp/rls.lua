@@ -2,7 +2,8 @@
 ---
 --- https://github.com/rust-lang/rls
 ---
---- rls, a language server for Rust
+--- rls, a language server for Rust. It has been replaced with [rust-analyzer](https://rust-analyzer.github.io/)
+
 ---
 --- See https://github.com/rust-lang/rls#setup to setup rls itself.
 --- See https://github.com/rust-lang/rls#configuration for rls-specific settings.
