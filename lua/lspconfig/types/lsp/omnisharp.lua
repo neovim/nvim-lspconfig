@@ -427,6 +427,8 @@
 ---@field roslynCopilot? string
 ---%configuration.dotnet.server.componentPaths.roslynDevKit%
 ---@field roslynDevKit? string
+---%configuration.dotnet.server.componentPaths.testDiscovery%
+---@field testDiscovery? string
 ---%configuration.dotnet.server.componentPaths.xamlTools%
 ---@field xamlTools? string
 
