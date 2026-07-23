@@ -6,6 +6,7 @@ Nvim by running `:help lspconfig-all`.
 
 - [ada_ls](#ada_ls)
 - [agda_ls](#agda_ls)
+- [agentscript](#agentscript)
 - [aiken](#aiken)
 - [air](#air)
 - [alloy_ls](#alloy_ls)
@@ -470,6 +471,41 @@ Default config:
   { "agda" }
   ```
 - `root_dir`: [../lsp/agda_ls.lua:10](../lsp/agda_ls.lua#L10)
+
+---
+
+## agentscript
+
+https://github.com/salesforce/agentscript
+
+Language server for Agent Script, Salesforce's open agent specification
+language for `*.agent` files. Install with
+`npm install -g @sf-agentscript/lsp-server`.
+
+Neovim does not detect the `agentscript` filetype by default:
+
+```lua
+vim.filetype.add({ extension = { agent = 'agentscript' } })
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('agentscript')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "agentscript-lsp", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "agentscript" }
+  ```
+- `root_markers` :
+  ```lua
+  { "package.json", ".git" }
+  ```
 
 ---
 

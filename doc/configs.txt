@@ -58,6 +58,32 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+agentscript
+
+https://github.com/salesforce/agentscript
+
+Language server for Agent Script, Salesforce's open agent specification
+language for `*.agent` files. Install with
+`npm install -g @sf-agentscript/lsp-server`.
+
+Neovim does not detect the `agentscript` filetype by default:
+>lua
+  vim.filetype.add({ extension = { agent = 'agentscript' } })
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('agentscript')
+
+
+Default config:
+- cmd: >lua
+  { "agentscript-lsp", "--stdio" }
+- filetypes: >lua
+  { "agentscript" }
+- root_markers: >lua
+  { "package.json", ".git" }
+<
+
+------------------------------------------------------------------------------
 aiken
 
 https://github.com/aiken-lang/aiken
