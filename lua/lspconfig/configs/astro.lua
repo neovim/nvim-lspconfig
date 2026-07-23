@@ -23,7 +23,7 @@ return {
   },
   docs = {
     description = [[
-https://github.com/withastro/language-tools/tree/main/packages/language-server
+https://github.com/withastro/astro/tree/main/packages/language-tools/language-server
 
 `astro-ls` can be installed via `npm`:
 ```sh
