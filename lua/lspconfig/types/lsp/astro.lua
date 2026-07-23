@@ -1,7 +1,7 @@
 ---@meta
 
 ---@class _.lspconfig.settings.astro.Astro.AutoImportCache
----Enable the auto import cache. Yields a faster intellisense when automatically importing a file, but can cause issues with new files not being detected. Change is applied on restart. See [#1035](https://github.com/withastro/language-tools/issues/1035).
+---Enable the auto import cache. Yields a faster intellisense when automatically importing a file, but can cause issues with new files not being detected. Change is applied on restart. See [#14642](https://github.com/withastro/astro/issues/14642).
 ---
 ---```lua
 ---default = true
@@ -28,7 +28,7 @@
 
 ---@class _.lspconfig.settings.astro.Astro
 ---@field ["auto-import-cache"]? _.lspconfig.settings.astro.Astro.AutoImportCache
----Enable experimental support for content collection intellisense inside Markdown, MDX and Markdoc. Note that this require also enabling the feature in your Astro config (experimental.contentCollectionIntellisense) (Astro 4.14+)
+---Enable experimental support for content collection intellisense inside Markdown, MDX and Markdoc. Note that this requires also enabling the feature in your Astro config (experimental.contentIntellisense) (Astro 4.14+)
 ---@field ["content-intellisense"]? boolean
 ---@field ["language-server"]? _.lspconfig.settings.astro.Astro.LanguageServer
 ---@field trace? _.lspconfig.settings.astro.Astro.Trace
