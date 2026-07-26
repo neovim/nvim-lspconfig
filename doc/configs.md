@@ -1031,14 +1031,47 @@ You will need to manually pass the typescript SDK path. Here is an example of a 
 ```
 The path can also be passed via a variable, like `vim.g.tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib"` and then used in the Lua Neovim config.
 
+WARNING: TypeScript 7.x dropped `tsserverlibrary.js` from its npm package, so
+`typescript.tsdk` cannot resolve from a local or global TS 7.x install. Pin to
+TS `<= 6.x` (e.g. `npm install -g typescript@~6`) for the LSP to start.
+
+For a globally-installed TS (resolved at runtime, unlike the Nix example where the
+path is known at build time), look up the workspace-local TS first via
+`util.get_typescript_server_path`, then fall back to `npm root -g`:
+
+```lua
+vim.lsp.config('astro', {
+  before_init = function(_, config)
+    local util = require('lspconfig.util')
+    local tsdk = util.get_typescript_server_path(config.root_dir)
+    if tsdk == '' then
+      local npm_root = vim.fn.systemlist('npm root -g')
+      if vim.v.shell_error == 0 and npm_root[1] then
+        tsdk = npm_root[1] .. '/typescript/lib'
+      end
+    end
+    config.init_options = config.init_options or {}
+    config.init_options.typescript = config.init_options.typescript or {}
+    config.init_options.typescript.tsdk = tsdk
+  end,
+})
+vim.lsp.enable('astro')
+```
+
+For other package managers, replace `npm root -g` with:
+
+- pnpm: `pnpm root -g`
+- yarn classic: `yarn global dir` .. `/node_modules`
+- yarn berry (>=2): globals unsupported — use a workspace-local TS instead
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('astro')
 ```
 
 Default config:
-- `before_init`: [../lsp/astro.lua:49](../lsp/astro.lua#L49)
-- `cmd`: [../lsp/astro.lua:49](../lsp/astro.lua#L49)
+- `before_init`: [../lsp/astro.lua:82](../lsp/astro.lua#L82)
+- `cmd`: [../lsp/astro.lua:82](../lsp/astro.lua#L82)
 - `filetypes` :
   ```lua
   { "astro" }
