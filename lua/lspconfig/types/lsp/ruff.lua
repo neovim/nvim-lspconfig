@@ -116,7 +116,7 @@
 ---
 ---```toml
 ---[tool.ruff.lint]
----# Adds flake8-bugbear on top of the default rules (E4, E7, E9, F).
+---# Adds flake8-bugbear on top of the default rules.
 ---extend-select = ["B"]
 ---```
 ---

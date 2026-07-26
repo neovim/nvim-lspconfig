@@ -1,0 +1,113 @@
+---@meta
+
+---The host and port to use for external transports. (Ignored for stdio and socket transports.)
+---
+---```lua
+---default = {
+---  host = "localhost",
+---  port = 7658
+---}
+---```
+---@class _.lspconfig.settings.solargraph.Solargraph.ExternalServer
+---```lua
+---default = "localhost"
+---```
+---@field host? string
+---```lua
+---default = 7658
+---```
+---@field port? integer
+
+---@class _.lspconfig.settings.solargraph.Solargraph
+---Enable automatic formatting while typing (WARNING: experimental)
+---@field autoformat? true | false
+---Path to the bundle executable, defaults to 'bundle'. Needs to be an absolute path for the 'bundle' exec/shim
+---
+---```lua
+---default = "bundle"
+---```
+---@field bundlerPath? string
+---Automatically check if a new version of the Solargraph gem is available.
+---
+---```lua
+---default = true
+---```
+---@field checkGemVersion? true | false
+---Path to the solargraph command.  Set this to an absolute path to select from multiple installed Ruby versions.
+---
+---```lua
+---default = "solargraph"
+---```
+---@field commandPath? string
+---Enable completion
+---
+---```lua
+---default = true
+---```
+---@field completion? true | false
+---Enable definitions (go to, etc.)
+---
+---```lua
+---default = true
+---```
+---@field definitions? true | false
+---Enable diagnostics
+---@field diagnostics? true | false
+---The host and port to use for external transports. (Ignored for stdio and socket transports.)
+---
+---```lua
+---default = {
+---  host = "localhost",
+---  port = 7658
+---}
+---```
+---@field externalServer? _.lspconfig.settings.solargraph.Solargraph.ExternalServer
+---Enable folding ranges
+---
+---```lua
+---default = true
+---```
+---@field folding? boolean
+---Enable document formatting
+---@field formatting? true | false
+---Enable hover
+---
+---```lua
+---default = true
+---```
+---@field hover? true | false
+---Level of debug info to log. `warn` is least and `debug` is most.
+---
+---```lua
+---default = "warn"
+---```
+---@field logLevel? "warn" | "info" | "debug"
+---Enable finding references
+---
+---```lua
+---default = true
+---```
+---@field references? true | false
+---Enable symbol renaming
+---
+---```lua
+---default = true
+---```
+---@field rename? true | false
+---Enable symbols
+---
+---```lua
+---default = true
+---```
+---@field symbols? true | false
+---The type of transport to use.
+---
+---```lua
+---default = "socket"
+---```
+---@field transport? "socket" | "stdio" | "external"
+---Use `bundle exec` to run solargraph. (If this is true, the solargraph.commandPath setting is ignored.)
+---@field useBundler? boolean
+
+---@class lspconfig.settings.solargraph
+---@field solargraph? _.lspconfig.settings.solargraph.Solargraph
