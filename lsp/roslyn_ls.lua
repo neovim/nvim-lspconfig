@@ -52,7 +52,7 @@ end
 ---@param client vim.lsp.Client
 local function refresh_diagnostics(client)
   local capabilities = vim
-    .iter(client.dynamic_capabilities.capabilities.diagnosticProvider)
+    .iter(client.dynamic_capabilities.capabilities.diagnosticProvider or {})
     :map(function(cap)
       return cap.registerOptions.identifier
     end)
