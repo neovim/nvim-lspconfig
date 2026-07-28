@@ -1720,9 +1720,9 @@
 ---
 ---**Warning**: This format is provisional and subject to change.
 ---
----The discover command should output JSON objects, one per
----line (JSONL format). These objects should correspond to
----this Rust data type:
+---The discover command should output JSON objects to stdout,
+---one per line (JSONL format). These objects should correspond
+---to this Rust data type:
 ---
 ---```norun
 ---#[derive(Debug, Clone, Deserialize, Serialize)]
@@ -1762,6 +1762,9 @@
 ---Only the finished event is required, but the other
 ---variants are encouraged to give users more feedback about
 ---progress or errors.
+---
+---Stderr is not parsed as JSONL. It is treated as command log
+---output and forwarded to rust-analyzer's own logs.
 ---@field discoverConfig? any|table
 ---@field symbol? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Workspace.Symbol
 

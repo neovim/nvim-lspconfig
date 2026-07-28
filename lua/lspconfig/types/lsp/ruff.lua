@@ -286,6 +286,21 @@
 ---Actions annotations), `"gitlab"` (GitLab CI code quality report),
 ---`"pylint"` (Pylint text format) or `"azure"` (Azure Pipeline logging commands).
 ---@field ["output-format"]? any|any
+---Whether to prefer rule codes over human-readable rule names in diagnostic output, even
+---when preview mode is enabled.
+---
+---Diagnostics without rule codes, such as syntax errors and formatting diagnostics, will
+---continue to use the human-readable name, but those corresponding to lint rules will use the
+---rule's code. For example, the concise diagnostic for an unused import will use the code
+---`F401` instead of the name `unused-import`:
+---
+---```console
+---$ ruff check --preview --config 'output-prefer-rule-codes = true' --output-format=concise example.py
+---example.py:1:8: F401 [*] `math` imported but unused
+---$ ruff check --preview --config 'output-prefer-rule-codes = false' --output-format=concise example.py
+---example.py:1:8: unused-import: [*] `math` imported but unused
+---```
+---@field ["output-prefer-rule-codes"]? boolean
 ---Options for the `pep8-naming` plugin.
 ---@field ["pep8-naming"]? any|any
 ---A list of mappings from file pattern to rule codes or prefixes to
