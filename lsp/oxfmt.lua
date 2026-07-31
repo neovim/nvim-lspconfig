@@ -45,6 +45,7 @@ return {
     'less',
     'graphql',
     'markdown',
+    'svelte',
   },
   workspace_required = true,
   root_dir = function(bufnr, on_dir)
