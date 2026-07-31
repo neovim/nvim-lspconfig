@@ -837,6 +837,10 @@
 ---```
 ---@field useModernNet? boolean
 
+---@class _.lspconfig.settings.omnisharp.Razor.Advanced
+---%configuration.razor.razor.advanced.showAllCSharpCodeActions%
+---@field showAllCSharpCodeActions? boolean
+
 ---@class _.lspconfig.settings.omnisharp.Razor.Completion
 ---%configuration.razor.razor.completion.commitElementsWithSpace%
 ---@field commitElementsWithSpace? boolean
@@ -862,6 +866,7 @@
 ---@field path? string
 
 ---@class _.lspconfig.settings.omnisharp.Razor
+---@field advanced? _.lspconfig.settings.omnisharp.Razor.Advanced
 ---@field completion? _.lspconfig.settings.omnisharp.Razor.Completion
 ---%configuration.omnisharp.razor.devmode%
 ---@field devmode? boolean
