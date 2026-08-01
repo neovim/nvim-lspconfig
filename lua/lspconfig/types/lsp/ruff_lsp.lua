@@ -169,7 +169,7 @@
 ---default = "fromEnvironment"
 ---```
 ---@field importStrategy? "fromEnvironment" | "useBundled"
----Path to a Python interpreter to use to find the `ruff` executable.
+---Path to a Python interpreter to use to find the `ruff` executable. Requires either the Python Environments or Python extension to be installed.
 ---
 ---```lua
 ---default = {}
