@@ -73,15 +73,42 @@
 --- If DENO ROOT is found, and it's longer than or equal to PROJECT ROOT, then this is a Deno file, and we abort.
 --- Otherwise, attach at PROJECT ROOT, or the cwd if not found.
 
+--- Searches for a package within `node_modules` directories starting from the given root.
+--- Walks up the directory tree via `vim.fs.find` to locate `node_modules` folders,
+--- then checks each one for the named package.
+---
+---@param root string The starting directory path for the search.
+---@param name string The package name (or relative path) to look for inside `node_modules`.
+---@return string|nil path The absolute path to the package if found and readable, otherwise nil.
+local function find_node_package(root, name)
+  for _, dir in ipairs(vim.fs.find('node_modules', { path = root })) do
+    local path = vim.fs.joinpath(dir, name)
+    if vim.fn.filereadable(path) then
+      return path
+    end
+  end
+  return nil
+end
+
 ---@type vim.lsp.Config
 return {
-  init_options = { hostInfo = 'neovim' },
+  init_options = {
+    hostInfo = 'neovim',
+    tsserver = {
+      -- Explicitly specify path for projects that node_modules are placed
+      -- not in root directory, such as pnpm workspace
+      path = vim.fs.joinpath(find_node_package(vim.api.nvim_buf_get_name(0), 'typescript'), 'lib'),
+    },
+  },
   cmd = function(dispatchers, config)
     local cmd = 'typescript-language-server'
     if (config or {}).root_dir then
-      local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', cmd)
-      if vim.fn.executable(local_cmd) == 1 then
-        cmd = local_cmd
+      local bin = find_node_package(config.root_dir, '.bin')
+      if bin ~= nil then
+        local local_cmd = vim.fs.joinpath(bin, cmd)
+        if vim.fn.executable(local_cmd) == 1 then
+          cmd = local_cmd
+        end
       end
     end
     return vim.lsp.rpc.start({ cmd, '--stdio' }, dispatchers)
