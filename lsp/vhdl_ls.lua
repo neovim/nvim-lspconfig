@@ -35,4 +35,5 @@ return {
     'vhdl_ls.toml',
     '.vhdl_ls.toml',
   },
+  workspace_required = true,
 }
