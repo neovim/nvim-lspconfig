@@ -1,13 +1,6 @@
 ---@meta
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Assist.TermSearch
----Enable borrow checking for term search code assists. If set to false, also there will be
----more suggestions, but some of them may not borrow-check.
----
----```lua
----default = true
----```
----@field borrowcheck? boolean
 ---Term search fuel in "units of work" for assists (Defaults to 1800).
 ---
 ---```lua

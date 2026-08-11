@@ -16,6 +16,10 @@
 ---Show the Ada runtime project and its source files in the Project View.
 ---@field showRuntimeFiles? boolean
 
+---@class _.lspconfig.settings.ada_ls.Ada.RangeFormatting
+---This setting controls whether formatting should only indents the selected lines without any formatting (`indentOnly`), format only the selected lines (`narrow`) or format the selected lines as well as any surrounding code required to produce a correct result (`full`).
+---@field formatChoice? "indentOnly" | "narrow" | "full"
+
 ---@class _.lspconfig.settings.ada_ls.Ada.Trace
 ---Traces the communication between VS Code and the Ada language server in the 'Ada Language Server' Output view.
 ---
@@ -108,6 +112,7 @@
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists.
 ---@field projectFile? string
 ---@field projectView? _.lspconfig.settings.ada_ls.Ada.ProjectView
+---@field rangeFormatting? _.lspconfig.settings.ada_ls.Ada.RangeFormatting
 ---Enable fallback indenter in case the file is not syntactically correct.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.

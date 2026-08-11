@@ -1,5 +1,31 @@
 ---@meta
 
+---@class _.lspconfig.settings.julials.Julia.CellCodeLens
+---Show the `Above` CodeLens action for cells delimited by `#julia.cellDelimiters#`.
+---
+---```lua
+---default = true
+---```
+---@field above? boolean
+---Show the `Below` CodeLens action for cells delimited by `#julia.cellDelimiters#`.
+---
+---```lua
+---default = true
+---```
+---@field below? boolean
+---Show the `Debug` CodeLens action for cells delimited by `#julia.cellDelimiters#`.
+---
+---```lua
+---default = true
+---```
+---@field debug? boolean
+---Show the `Run` CodeLens action for cells delimited by `#julia.cellDelimiters#`.
+---
+---```lua
+---default = true
+---```
+---@field run? boolean
+
 ---@class _.lspconfig.settings.julials.Julia.Execution
 ---Print executed code in REPL and append it to the REPL history.
 ---@field codeInREPL? boolean
@@ -148,6 +174,7 @@
 ---default = {}
 ---```
 ---@field additionalArgs? any[]
+---@field cellCodeLens? _.lspconfig.settings.julials.Julia.CellCodeLens
 ---Cell delimiter regular expressions for Julia files.
 ---
 ---```lua
