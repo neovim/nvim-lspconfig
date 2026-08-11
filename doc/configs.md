@@ -248,6 +248,7 @@ Nvim by running `:help lspconfig-all`.
 - [phpantom_lsp](#phpantom_lsp)
 - [phptools](#phptools)
 - [pico8_ls](#pico8_ls)
+- [pkl](#pkl)
 - [please](#please)
 - [pli](#pli)
 - [pony_language_server](#pony_language_server)
@@ -9699,6 +9700,40 @@ Default config:
 - `settings` :
   ```lua
   {}
+  ```
+
+---
+
+## pkl
+
+https://github.com/apple/pkl-lsp
+
+Language server for [Pkl](https://pkl-lang.org/), a configuration language by Apple.
+
+`pkl-lsp` can be installed via Homebrew:
+```sh
+brew install pkl
+```
+
+Or downloaded from the [GitHub releases page](https://github.com/apple/pkl/releases).
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('pkl')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "pkl-lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "pkl", "pcf" }
+  ```
+- `root_markers` :
+  ```lua
+  { "PklProject", ".git" }
   ```
 
 ---
