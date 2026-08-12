@@ -14873,7 +14873,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { ".git" }
+  { "verible.filelist", ".git" }
   ```
 
 ---

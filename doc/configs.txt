@@ -11165,7 +11165,7 @@ Default config:
 - filetypes: >lua
   { "systemverilog", "verilog" }
 - root_markers: >lua
-  { ".git" }
+  { "verible.filelist", ".git" }
 <
 
 ------------------------------------------------------------------------------
