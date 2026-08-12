@@ -23,6 +23,12 @@ describe('lspconfig', function()
     return path
   end
 
+  local function versioned_executable(path, version)
+    vim.fn.writefile({ '#!/bin/sh', "echo 'Version " .. version .. "'" }, path)
+    vim.fn.setfperm(path, 'rwxr-xr-x')
+    return path
+  end
+
   local function tempdir()
     local path = vim.fn.tempname()
     mkdir(path)
@@ -298,6 +304,58 @@ describe('lspconfig', function()
       })
 
       same({ hoisted }, argv)
+    end)
+
+    it('uses a supported TypeScript LSP executable from the workspace', function()
+      local workspace = tempdir()
+      local package = mkdir(vim.fs.joinpath(workspace, 'packages/app'))
+      touch(vim.fs.joinpath(workspace, 'pnpm-lock.yaml'))
+      local bin = mkdir(vim.fs.joinpath(workspace, 'node_modules/.bin'))
+      versioned_executable(vim.fs.joinpath(bin, 'tsc'), '6.0.0')
+      local tsgo = versioned_executable(vim.fs.joinpath(bin, 'tsgo'), '7.0.0')
+      local source = touch(vim.fs.joinpath(package, 'index.ts'))
+      local bufnr = vim.fn.bufadd(source)
+      local config = dofile('lsp/tsc.lua')
+      local root_dir
+
+      config.root_dir(bufnr, function(root)
+        root_dir = root
+      end)
+      local argv = capture_cmd(config, { root_dir = root_dir })
+      vim.api.nvim_buf_delete(bufnr, { force = true })
+
+      same({ tsgo, '--lsp', '--stdio' }, argv)
+    end)
+
+    it('supports every config changed by PR 4386', function()
+      local cases = {
+        { 'astro', 'astro-ls', { '--stdio' } },
+        { 'biome', 'biome', { 'lsp-proxy' } },
+        { 'cssls', 'vscode-css-language-server', { '--stdio' } },
+        { 'eslint', 'vscode-eslint-language-server', { '--stdio' } },
+        { 'glint', 'glint-language-server', {}, { glint = { useGlobal = false } } },
+        { 'html', 'vscode-html-language-server', { '--stdio' } },
+        { 'jsonls', 'vscode-json-language-server', { '--stdio' } },
+        { 'oxfmt', 'oxfmt', { '--lsp' } },
+        { 'oxlint', 'oxlint', { '--lsp' } },
+        { 'rome', 'rome', { 'lsp-proxy' } },
+        { 'tailwindcss', 'tailwindcss-language-server', { '--stdio' } },
+        { 'ts_ls', 'typescript-language-server', { '--stdio' } },
+        { 'yamlls', 'yaml-language-server', { '--stdio' } },
+      }
+
+      for _, case in ipairs(cases) do
+        local workspace = tempdir()
+        local package = mkdir(vim.fs.joinpath(workspace, 'packages/app'))
+        touch(vim.fs.joinpath(workspace, 'pnpm-lock.yaml'))
+        local bin = mkdir(vim.fs.joinpath(workspace, 'node_modules/.bin'))
+        local hoisted = executable(vim.fs.joinpath(bin, case[2]))
+        local config = dofile('lsp/' .. case[1] .. '.lua')
+        local argv = capture_cmd(config, { root_dir = package, init_options = case[4] })
+        local expected = vim.list_extend({ hoisted }, case[3])
+
+        same(expected, argv, case[1])
+      end
     end)
   end)
 end)
