@@ -364,6 +364,7 @@ Nvim by running `:help lspconfig-all`.
 - [tombi](#tombi)
 - [ts_ls](#ts_ls)
 - [ts_query_ls](#ts_query_ls)
+- [tsc](#tsc)
 - [tsgo](#tsgo)
 - [tsp_server](#tsp_server)
 - [ttags](#ttags)
@@ -13993,6 +13994,9 @@ https://github.com/typescript-language-server/typescript-language-server
 
 `ts_ls`, aka `typescript-language-server`, is a Language Server Protocol implementation for TypeScript wrapping `tsserver`. Note that `ts_ls` is not `tsserver`.
 
+While `typescript-language-server` will likely eventually be replaced by [tsc](#tsc), the official language server
+for TypeScript, `typescript-language-server` may still be useful for features such as es5 support.
+
 `typescript-language-server` depends on `typescript`. Both packages can be installed via `npm`:
 ```sh
 npm install -g typescript typescript-language-server
@@ -14026,41 +14030,7 @@ Use the `:LspTypescriptGoToSourceDefinition` command to navigate to the source d
 
 ### Monorepo support
 
-`ts_ls` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
-This works without the need of spawning multiple instances of `ts_ls`, saving memory.
-
-It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
-
-Some care must be taken here to correctly infer whether a file is part of a Deno program, or a TS program that
-expects to run in Node or Web Browsers. This supports having a Deno module using the denols LSP as a part of a
-mostly-not-Deno monorepo. We do this by finding the nearest package manager lock file, and the nearest deno.json
-or deno.jsonc.
-
-Example:
-
-```
-project-root
-+-- node_modules/...
-+-- package-lock.json
-+-- package.json
-+-- packages
-    +-- deno-module
-    |   +-- deno.json
-    |   +-- package.json <-- It's normal for Deno projects to have package.json files!
-    |   +-- src
-    |       +-- index.ts <-- this is a Deno file
-    +-- node-module
-        +-- package.json
-        +-- src
-            +-- index.ts <-- a non-Deno file (ie, should use ts_ls or tsgols)
-```
-
-From the file being edited, we walk up to find the nearest package manager lockfile. This is PROJECT ROOT.
-From the file being edited, find the nearest deno.json or deno.jsonc. This is DENO ROOT.
-From the file being edited, find the nearest deno.lock. This is DENO LOCK ROOT
-If DENO LOCK ROOT is found, and PROJECT ROOT is missing or shorter, then this is a deno file, and we abort.
-If DENO ROOT is found, and it's longer than or equal to PROJECT ROOT, then this is a Deno file, and we abort.
-Otherwise, attach at PROJECT ROOT, or the cwd if not found.
+See the monorepo support documentation for [tsc](#tsc)
 
 Snippet to enable the language server:
 ```lua
@@ -14071,7 +14041,7 @@ Commands:
 - editor.action.showReferences
 
 Default config:
-- `cmd`: [../lsp/ts_ls.lua:77](../lsp/ts_ls.lua#L77)
+- `cmd`: [../lsp/ts_ls.lua:46](../lsp/ts_ls.lua#L46)
 - `commands` :
   ```lua
   {
@@ -14094,8 +14064,8 @@ Default config:
     hostInfo = "neovim"
   }
   ```
-- `on_attach`: [../lsp/ts_ls.lua:77](../lsp/ts_ls.lua#L77)
-- `root_dir`: [../lsp/ts_ls.lua:77](../lsp/ts_ls.lua#L77)
+- `on_attach`: [../lsp/ts_ls.lua:46](../lsp/ts_ls.lua#L46)
+- `root_dir`: [../lsp/ts_ls.lua:46](../lsp/ts_ls.lua#L46)
 
 ---
 
@@ -14152,18 +14122,20 @@ Default config:
 
 ---
 
-## tsgo
+## tsc
 
-https://github.com/microsoft/typescript-go
+https://github.com/microsoft/typescript
 
-`typescript-go` is experimental port of the TypeScript compiler (tsc) and language server (tsserver) to the Go programming language.
+TypeScript is a language for application-scale JavaScript.
+TypeScript adds optional types to JavaScript that support tools for large-scale JavaScript applications for any browser, for any host, on any OS.
+TypeScript compiles to readable, standards-based JavaScript.
 
-`tsgo` can be installed via npm `npm install @typescript/native-preview`.
+`tsc` can be installed via npm `npm install typescript`.
 
 ### Monorepo support
 
-`tsgo` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
-This works without the need of spawning multiple instances of `tsgo`, saving memory.
+`tsc` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
+This works without the need of spawning multiple instances of `tsc`, saving memory.
 
 It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
 
@@ -14188,7 +14160,7 @@ project-root
     +-- node-module
         +-- package.json
         +-- src
-            +-- index.ts <-- a non-Deno file (ie, should use ts_ls or tsgols)
+            +-- index.ts <-- a non-Deno file (ie, should use ts_ls or tsc)
 ```
 
 From the file being edited, we walk up to find the nearest package manager lockfile. This is PROJECT ROOT.
@@ -14200,16 +14172,68 @@ Otherwise, attach at PROJECT ROOT, or the cwd if not found.
 
 Snippet to enable the language server:
 ```lua
-vim.lsp.enable('tsgo')
+vim.lsp.enable('tsc')
 ```
 
 Default config:
-- `cmd`: [../lsp/tsgo.lua:48](../lsp/tsgo.lua#L48)
+- `cmd`: [../lsp/tsc.lua:50](../lsp/tsc.lua#L50)
 - `filetypes` :
   ```lua
   { "javascript", "javascriptreact", "typescript", "typescriptreact" }
   ```
-- `root_dir`: [../lsp/tsgo.lua:48](../lsp/tsgo.lua#L48)
+- `root_dir`: [../lsp/tsc.lua:50](../lsp/tsc.lua#L50)
+- `settings` :
+  ```lua
+  {
+    typescript = {
+      inlayHints = {
+        enumMemberValues = {
+          enabled = true
+        },
+        functionLikeReturnTypes = {
+          enabled = true
+        },
+        parameterNames = {
+          enabled = "literals",
+          suppressWhenArgumentMatchesName = true
+        },
+        parameterTypes = {
+          enabled = true
+        },
+        propertyDeclarationTypes = {
+          enabled = true
+        },
+        variableTypes = {
+          enabled = true
+        }
+      }
+    }
+  }
+  ```
+
+---
+
+## tsgo
+
+Deprecated in favor of [tsc](#tsc)
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('tsgo')
+```
+
+Default config:
+- `cmd`: [../lsp/tsgo.lua:6](../lsp/tsgo.lua#L6)
+- `filetypes` :
+  ```lua
+  { "javascript", "javascriptreact", "typescript", "typescriptreact" }
+  ```
+- `name` :
+  ```lua
+  "tsc"
+  ```
+- `on_init`: [../lsp/tsgo.lua:6](../lsp/tsgo.lua#L6)
+- `root_dir`: [../lsp/tsgo.lua:6](../lsp/tsgo.lua#L6)
 - `settings` :
   ```lua
   {
