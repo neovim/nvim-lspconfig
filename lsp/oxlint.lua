@@ -21,6 +21,27 @@
 --- an example of how to use this to automatically fix all errors on write.
 local util = require 'lspconfig.util'
 
+local function get_cmd(cmd, root_dir)
+  if not root_dir then
+    return cmd
+  end
+
+  local lockfiles = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
+  local workspace_root = vim.fs.root(root_dir, lockfiles) or vim.fs.root(root_dir, '.git') or root_dir
+  local dir = root_dir
+  while dir do
+    local local_cmd = vim.fs.joinpath(dir, 'node_modules/.bin', cmd)
+    if vim.fn.executable(local_cmd) == 1 then
+      return local_cmd
+    end
+    if dir == workspace_root then
+      break
+    end
+    dir = vim.fs.dirname(dir)
+  end
+  return cmd
+end
+
 local function oxlint_conf_mentions_typescript(root_dir)
   local fn = vim.fs.joinpath(root_dir, '.oxlintrc.json')
   for line in io.lines(fn) do
@@ -34,13 +55,7 @@ end
 ---@type vim.lsp.Config
 return {
   cmd = function(dispatchers, config)
-    local cmd = 'oxlint'
-    if (config or {}).root_dir then
-      local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', cmd)
-      if vim.fn.executable(local_cmd) == 1 then
-        cmd = local_cmd
-      end
-    end
+    local cmd = get_cmd('oxlint', (config or {}).root_dir)
     return vim.lsp.rpc.start({ cmd, '--lsp' }, dispatchers)
   end,
   filetypes = {
@@ -93,11 +108,8 @@ return {
   },
   before_init = function(init_params, config)
     local settings = config.settings or {}
-    local has_tsgolint = vim.fn.executable('tsgolint') == 1
-    if not has_tsgolint and (config or {}).root_dir then
-      local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', 'tsgolint')
-      has_tsgolint = vim.fn.executable(local_cmd) == 1
-    end
+    local tsgolint_cmd = get_cmd('tsgolint', (config or {}).root_dir)
+    local has_tsgolint = vim.fn.executable(tsgolint_cmd) == 1
     if settings.typeAware == nil and has_tsgolint then
       local ok, res = pcall(oxlint_conf_mentions_typescript, config.root_dir)
       if ok and res then
