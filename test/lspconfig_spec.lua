@@ -284,5 +284,20 @@ describe('lspconfig', function()
 
       same({ 'glint-language-server' }, argv)
     end)
+
+    it('finds a hoisted Glint executable when useGlobal is false', function()
+      local workspace = tempdir()
+      local package = mkdir(vim.fs.joinpath(workspace, 'packages/app'))
+      touch(vim.fs.joinpath(workspace, 'bun.lockb'))
+      local hoisted = executable(mkdir(vim.fs.joinpath(workspace, 'node_modules/.bin')) .. '/glint-language-server')
+      local config = dofile('lsp/glint.lua')
+
+      local argv = capture_cmd(config, {
+        root_dir = package,
+        init_options = { glint = { useGlobal = false } },
+      })
+
+      same({ hoisted }, argv)
+    end)
   end)
 end)
