@@ -215,7 +215,11 @@
 ---@field enableDynamicIndexing? boolean
 ---Enable usage data and errors to be sent to the julia VS Code extension developers.
 ---@field enableTelemetry? boolean
----Whether to auto-resolve environments in the workspace. If false, only environments with a Manifest.toml are considered.
+---Whether to auto-resolve environments in the workspace, for example a `docs/Project.toml` that has no Manifest.toml. Resolution runs Pkg in a background child process and may access the network. If false, only environments with a Manifest.toml are considered. Changing this requires a restart of the language server.
+---
+---```lua
+---default = true
+---```
 ---@field enableWorkspaceEnvironmentResolution? boolean
 ---Path to a julia environment. VS Code needs to be reloaded for changes to take effect. Explicitly supports substitution for the `${userHome}`, `${workspaceFolder}`, `${workspaceFolderBasename}`, `${workspaceFolder:<FOLDER_NAME>}`, `${pathSeparator}`, `${env:<ENVIRONMENT_VARIABLE>}`, `${config:<CONFIG_VARIABLE>}` tokens.
 ---@field environmentPath? string
@@ -282,7 +286,7 @@
 ---Symbol server cache download URL.
 ---
 ---```lua
----default = "https://julia-symbolcache.org"
+---default = "https://symbolcache.julialang.net"
 ---```
 ---@field symbolserverUpstream? string
 ---@field trace? _.lspconfig.settings.julials.Julia.Trace

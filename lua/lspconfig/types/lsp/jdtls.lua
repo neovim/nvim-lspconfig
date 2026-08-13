@@ -710,7 +710,7 @@
 ---```lua
 ---default = "all"
 ---```
----@field scope? "all" | "main"
+---@field scope? "all" | "main" | "projectOnly"
 
 ---@class _.lspconfig.settings.jdtls.Java.SelectionRange
 ---Enable/disable Smart Selection support for Java. Disabling this option will not affect the VS Code built-in word-based and bracket-based smart selection.
