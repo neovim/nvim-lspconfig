@@ -44,8 +44,9 @@ local function get_rustc(opt)
     return command
   elseif opt.notify_on_error then
     vim.notify_once(
-      "[rust_analyzer] `rustc` (Rust compiler) not found. Please make sure it is installed and your PATH or RUSTC environment variables are set up correctly.",
-      vim.log.levels.WARN)
+      '[rust_analyzer] `rustc` (Rust compiler) not found. Please make sure it is installed and your PATH or RUSTC environment variables are set up correctly.',
+      vim.log.levels.WARN
+    )
   end
 end
 
@@ -57,8 +58,10 @@ local function get_cargo(opt)
   if ok then
     return command
   elseif opt.notify_on_error then
-    vim.notify_once("[rust_analyzer] `cargo` (Rust package manager) not found. Please make sure it is installed.",
-      vim.log.levels.WARN)
+    vim.notify_once(
+      '[rust_analyzer] `cargo` (Rust package manager) not found. Please make sure it is installed.',
+      vim.log.levels.WARN
+    )
   end
 end
 
