@@ -49,7 +49,7 @@
 ---@type vim.lsp.Config
 return {
   settings = {
-    typescript = {
+    ['js/ts'] = {
       inlayHints = {
         parameterNames = {
           enabled = 'literals',
@@ -60,6 +60,15 @@ return {
         propertyDeclarationTypes = { enabled = true },
         functionLikeReturnTypes = { enabled = true },
         enumMemberValues = { enabled = true },
+      },
+      referencesCodeLens = {
+        enabled = true,
+        showOnAllFunctions = true,
+      },
+      implementationsCodeLens = {
+        enabled = true,
+        showOnInterfaceMethods = true,
+        showOnAllClassMethods = true,
       },
     },
   },
