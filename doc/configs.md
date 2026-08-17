@@ -14132,6 +14132,10 @@ TypeScript compiles to readable, standards-based JavaScript.
 
 `tsc` can be installed via npm `npm install typescript`.
 
+The language server (`--lsp`) is only available in the native compiler, TypeScript 7.0
+and newer. An older binary in `node_modules/.bin` is skipped in favour of one on `$PATH`
+that does support it; if no candidate qualifies, the server does not attach.
+
 ### Monorepo support
 
 `tsc` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
@@ -14176,12 +14180,12 @@ vim.lsp.enable('tsc')
 ```
 
 Default config:
-- `cmd`: [../lsp/tsc.lua:50](../lsp/tsc.lua#L50)
+- `cmd`: [../lsp/tsc.lua:70](../lsp/tsc.lua#L70)
 - `filetypes` :
   ```lua
   { "javascript", "javascriptreact", "typescript", "typescriptreact" }
   ```
-- `root_dir`: [../lsp/tsc.lua:50](../lsp/tsc.lua#L50)
+- `root_dir`: [../lsp/tsc.lua:70](../lsp/tsc.lua#L70)
 - `settings` :
   ```lua
   {
