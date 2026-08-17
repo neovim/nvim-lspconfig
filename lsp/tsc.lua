@@ -52,6 +52,7 @@
 
 local bin_cache = {} ---@type table<string, string>
 
+--- Checks if the given tsc/tsgo cmd supports the "--lsp" arg.
 ---@param bin string
 ---@return boolean
 local function supports_lsp(bin)
@@ -60,9 +61,9 @@ local function supports_lsp(bin)
   end
 
   local out = vim.system({ bin, '--version' }, { text = true }):wait()
-  local major = tonumber((out.stdout or ''):match('(%d+)%.'))
+  local version = vim.version.parse(out.stdout or '')
 
-  return out.code == 0 and major ~= nil and major >= 7
+  return out.code == 0 and version ~= nil and version.major >= 7
 end
 
 ---@type vim.lsp.Config
