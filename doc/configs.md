@@ -14185,7 +14185,12 @@ Default config:
 - `settings` :
   ```lua
   {
-    typescript = {
+    ["js/ts"] = {
+      implementationsCodeLens = {
+        enabled = true,
+        showOnAllClassMethods = true,
+        showOnInterfaceMethods = true
+      },
       inlayHints = {
         enumMemberValues = {
           enabled = true
@@ -14206,6 +14211,10 @@ Default config:
         variableTypes = {
           enabled = true
         }
+      },
+      referencesCodeLens = {
+        enabled = true,
+        showOnAllFunctions = true
       }
     }
   }
@@ -14237,7 +14246,12 @@ Default config:
 - `settings` :
   ```lua
   {
-    typescript = {
+    ["js/ts"] = {
+      implementationsCodeLens = {
+        enabled = true,
+        showOnAllClassMethods = true,
+        showOnInterfaceMethods = true
+      },
       inlayHints = {
         enumMemberValues = {
           enabled = true
@@ -14258,6 +14272,10 @@ Default config:
         variableTypes = {
           enabled = true
         }
+      },
+      referencesCodeLens = {
+        enabled = true,
+        showOnAllFunctions = true
       }
     }
   }

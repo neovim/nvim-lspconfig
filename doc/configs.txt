@@ -10639,7 +10639,12 @@ Default config:
 - root_dir (use "gF" to view): ../lsp/tsc.lua:50
 - settings: >lua
   {
-    typescript = {
+    ["js/ts"] = {
+      implementationsCodeLens = {
+        enabled = true,
+        showOnAllClassMethods = true,
+        showOnInterfaceMethods = true
+      },
       inlayHints = {
         enumMemberValues = {
           enabled = true
@@ -10660,6 +10665,10 @@ Default config:
         variableTypes = {
           enabled = true
         }
+      },
+      referencesCodeLens = {
+        enabled = true,
+        showOnAllFunctions = true
       }
     }
   }
@@ -10684,7 +10693,12 @@ Default config:
 - root_dir (use "gF" to view): ../lsp/tsgo.lua:6
 - settings: >lua
   {
-    typescript = {
+    ["js/ts"] = {
+      implementationsCodeLens = {
+        enabled = true,
+        showOnAllClassMethods = true,
+        showOnInterfaceMethods = true
+      },
       inlayHints = {
         enumMemberValues = {
           enabled = true
@@ -10705,6 +10719,10 @@ Default config:
         variableTypes = {
           enabled = true
         }
+      },
+      referencesCodeLens = {
+        enabled = true,
+        showOnAllFunctions = true
       }
     }
   }
