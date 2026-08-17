@@ -8,6 +8,10 @@
 ---
 --- `tsc` can be installed via npm `npm install typescript`.
 ---
+--- The language server (`--lsp`) is only available in the native compiler, TypeScript 7.0
+--- and newer. An older binary in `node_modules/.bin` is skipped in favour of one on `$PATH`
+--- that does support it; if no candidate qualifies, the server does not attach.
+---
 --- ### Monorepo support
 ---
 --- `tsc` supports monorepos by default. It will automatically find the `tsconfig.json` or `jsconfig.json` corresponding to the package you are working on.
@@ -46,6 +50,22 @@
 --- If DENO ROOT is found, and it's longer than or equal to PROJECT ROOT, then this is a Deno file, and we abort.
 --- Otherwise, attach at PROJECT ROOT, or the cwd if not found.
 
+local bin_cache = {} ---@type table<string, string>
+
+--- Checks if the given tsc/tsgo cmd supports the "--lsp" arg.
+---@param bin string
+---@return boolean
+local function supports_lsp(bin)
+  if vim.fn.executable(bin) ~= 1 then
+    return false
+  end
+
+  local out = vim.system({ bin, '--version' }, { text = true }):wait()
+  local version = vim.version.parse(out.stdout or '')
+
+  return out.code == 0 and version ~= nil and version.major >= 7
+end
+
 ---@type vim.lsp.Config
 return {
   settings = {
@@ -73,21 +93,7 @@ return {
     },
   },
   cmd = function(dispatchers, config)
-    local cmd = 'tsc'
-    local bins = { 'tsc', 'tsgo' }
-    for _, bin in ipairs(bins) do
-      if (config or {}).root_dir then
-        local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', bin)
-        if vim.fn.executable(local_cmd) == 1 then
-          cmd = local_cmd
-          break
-        end
-      end
-      if vim.fn.executable(bin) == 1 then
-        cmd = bin
-        break
-      end
-    end
+    local cmd = bin_cache[(config or {}).root_dir] or 'tsc'
     return vim.lsp.rpc.start({ cmd, '--lsp', '--stdio' }, dispatchers)
   end,
   filetypes = {
@@ -119,6 +125,26 @@ return {
     end
     -- project is standard TS, not deno
     -- We fallback to the current working directory if no project root is found
-    on_dir(project_root or vim.fn.getcwd())
+    local root = project_root or vim.fn.getcwd()
+
+    if bin_cache[root] then
+      return on_dir(root)
+    end
+
+    local bins = {}
+
+    for _, bin in ipairs({ 'tsc', 'tsgo' }) do
+      bins[#bins + 1] = vim.fs.joinpath(root, 'node_modules/.bin', bin)
+      bins[#bins + 1] = bin
+    end
+
+    for _, bin in ipairs(bins) do
+      if supports_lsp(bin) then
+        bin_cache[root] = bin
+        return on_dir(root)
+      end
+    end
+
+    vim.notify('tsc: no binary supporting `--lsp` found (requires TypeScript 7.0+)', vim.log.levels.WARN)
   end,
 }
