@@ -830,6 +830,8 @@
 ---```
 ---@field methodBodySuper? any[]
 ---@field newFile? _.lspconfig.settings.jdtls.Java.Templates.NewFile
+---Specifies whether newly created top-level types (class/interface/record) should be package-private instead of public.
+---@field preferPackagePrivateVisibility? boolean
 ---Specifies the type comment for new Java type. Supports configuring multi-line comments with an array of strings, and using ${variable} to reference the [predefined variables](command:_java.templateVariables).
 ---
 ---```lua

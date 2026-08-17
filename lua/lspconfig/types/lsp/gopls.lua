@@ -220,6 +220,7 @@
 ---  generateTestForFile = false,
 ---  generateTestForFunction = true,
 ---  generateTestForPackage = false,
+---  implCursor = true,
 ---  playground = true,
 ---  removeTags = false,
 ---  testAtCursor = true,
@@ -272,6 +273,12 @@
 ---default = true
 ---```
 ---@field generateTestForPackage? boolean
+---If true, adds command to generate interface stubs to the editor context menu
+---
+---```lua
+---default = true
+---```
+---@field implCursor? boolean
 ---If true, adds command to upload the current file or selection to the Go Playground
 ---
 ---```lua
@@ -647,6 +654,7 @@
 ---  generateTestForFile = false,
 ---  generateTestForFunction = true,
 ---  generateTestForPackage = false,
+---  implCursor = true,
 ---  playground = true,
 ---  removeTags = false,
 ---  testAtCursor = true,
