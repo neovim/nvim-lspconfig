@@ -15087,7 +15087,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { "vhdl_ls.toml", ".vhdl_ls.toml" }
+  { "vhdl_ls.toml" }
   ```
 - `workspace_required` : `true`
 
