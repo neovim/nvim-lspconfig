@@ -73,22 +73,37 @@ return {
     },
   },
   cmd = function(dispatchers, config)
-    local cmd = 'tsc'
-    local bins = { 'tsc', 'tsgo' }
-    for _, bin in ipairs(bins) do
-      if (config or {}).root_dir then
-        local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', bin)
-        if vim.fn.executable(local_cmd) == 1 then
-          cmd = local_cmd
-          break
+    local bins = { 'tsgo', 'tsc' }
+
+    local local_cmds = (config and config.root_dir)
+        and vim
+          .iter(bins)
+          :map(function(bin)
+            return vim.fs.joinpath(config.root_dir, 'node_modules/.bin', bin)
+          end)
+          :totable()
+      or {}
+
+    local cmd = vim
+      .iter({ local_cmds, bins })
+      :flatten()
+      :filter(function(cmd)
+        return vim.fn.executable(cmd) == 1
+      end)
+      :filter(function(cmd)
+        if cmd:match('tsc$') then
+          local result = vim.system({ cmd, '--version' }, { text = true }):wait()
+          if result.code ~= 0 then
+            return false
+          end
+          local ver = vim.version.parse(result.stdout)
+          return ver and ver.major >= 7 or false
         end
-      end
-      if vim.fn.executable(bin) == 1 then
-        cmd = bin
-        break
-      end
-    end
-    return vim.lsp.rpc.start({ cmd, '--lsp', '--stdio' }, dispatchers)
+        return true
+      end)
+      :next()
+
+    return cmd and vim.lsp.rpc.start({ cmd, '--lsp', '--stdio' }, dispatchers)
   end,
   filetypes = {
     'javascript',
