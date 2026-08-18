@@ -8751,7 +8751,7 @@ Default config:
 - filetypes: >lua
   { "systemverilog", "verilog" }
 - root_markers: >lua
-  { ".git", ".slang" }
+  { { ".git", ".slang" } }
 <
 
 ------------------------------------------------------------------------------

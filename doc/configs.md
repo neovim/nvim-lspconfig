@@ -11764,7 +11764,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { ".git", ".slang" }
+  { { ".git", ".slang" } }
   ```
 
 ---
