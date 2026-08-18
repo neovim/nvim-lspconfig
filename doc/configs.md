@@ -339,6 +339,7 @@ Nvim by running `:help lspconfig-all`.
 - [svlangserver](#svlangserver)
 - [svls](#svls)
 - [swift_mesonls](#swift_mesonls)
+- [symfony_lsp](#symfony_lsp)
 - [syntax_tree](#syntax_tree)
 - [systemd_ls](#systemd_ls)
 - [systemd_lsp](#systemd_lsp)
@@ -13137,6 +13138,88 @@ Default config:
   ```lua
   { "meson.build", "meson_options.txt", "meson.options", ".git" }
   ```
+
+---
+
+## symfony_lsp
+
+https://github.com/symfony/language-tools
+
+Symfony-aware completion, navigation, references, diagnostics, code actions,
+rename support and code lenses alongside a general PHP language server.
+
+Install the `symfony-lsp` executable from a release, then make it
+available on `PATH`.
+
+The server asks before executing application code for runtime indexing. Set
+`init_options.workspaceTrust` explicitly only for trusted workspaces.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('symfony_lsp')
+```
+
+Commands:
+- editor.action.showReferences
+
+Default config:
+- `capabilities` :
+  ```lua
+  {
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true
+      }
+    }
+  }
+  ```
+- `cmd` :
+  ```lua
+  { "symfony-lsp" }
+  ```
+- `commands` :
+  ```lua
+  {
+    ["editor.action.showReferences"] = <function 1>
+  }
+  ```
+- `filetypes` :
+  ```lua
+  { "php", "twig", "yaml", "json", "xml", "javascript", "typescript", "env" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    consolePath = "bin/console",
+    containerProjectRoot = "",
+    debug = true,
+    environment = "dev",
+    phpCommand = { "php" },
+    projectRoots = {},
+    runtimeIndexing = true,
+    trace = "off"
+  }
+  ```
+- `root_markers` :
+  ```lua
+  { "composer.json", ".git" }
+  ```
+- `settings` :
+  ```lua
+  {
+    symfonyLsp = {
+      consolePath = "bin/console",
+      containerProjectRoot = "",
+      debug = true,
+      environment = "dev",
+      phpCommand = { "php" },
+      projectRoots = {},
+      runtimeIndexing = true,
+      translationDiagnostics = false
+    }
+  }
+  ```
+- `workspace_required` : `true`
 
 ---
 
