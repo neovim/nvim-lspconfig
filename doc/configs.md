@@ -244,6 +244,7 @@ Nvim by running `:help lspconfig-all`.
 - [perlpls](#perlpls)
 - [pest_ls](#pest_ls)
 - [phan](#phan)
+- [php_lsp](#php_lsp)
 - [phpactor](#phpactor)
 - [phpantom_lsp](#phpantom_lsp)
 - [phptools](#phptools)
@@ -9576,6 +9577,37 @@ Default config:
   { "php" }
   ```
 - `root_dir`: [../lsp/phan.lua:21](../lsp/phan.lua#L21)
+
+---
+
+## php_lsp
+
+https://github.com/jorgsowa/php-lsp
+
+A high-performance PHP language server written in Rust.
+
+Installation: `cargo install php-lsp`, or download a pre-built binary from
+https://github.com/jorgsowa/php-lsp/releases
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('php_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "php-lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "php" }
+  ```
+- `root_markers` :
+  ```lua
+  { "composer.json", ".git" }
+  ```
+- `workspace_required` : `true`
 
 ---
 
