@@ -9226,7 +9226,6 @@ Default config:
   { "javascript", "javascriptreact", "typescript", "typescriptreact", "toml", "json", "jsonc", "json5", "yaml", "html", "vue", "handlebars", "css", "scss", "less", "graphql", "markdown", "svelte" }
   ```
 - `root_dir`: [../lsp/oxfmt.lua:19](../lsp/oxfmt.lua#L19)
-- `workspace_required` : `true`
 
 ---
 
@@ -9270,7 +9269,6 @@ Default config:
   ```lua
   {}
   ```
-- `workspace_required` : `true`
 
 ---
 
