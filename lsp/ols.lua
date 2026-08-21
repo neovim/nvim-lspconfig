@@ -15,6 +15,9 @@ local function default_odin_root()
   end
 
   -- https://github.com/odin-lang/Odin/wiki/Compiler-Flags
+  if vim.fn.executable('odin') == 0 then
+    return
+  end
   local result = vim.system({ 'odin', 'root' }, { text = true }):wait()
   if result.code == 0 and result.stdout ~= nil then
     local stdout = vim.trim(result.stdout)
