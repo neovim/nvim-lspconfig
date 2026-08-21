@@ -1,5 +1,13 @@
 ---@meta
 
+---@class _.lspconfig.settings.ada_ls.Ada.ExternalAnnotations
+---Highlight GNATcoverage external annotations in the editor.
+---
+---```lua
+---default = true
+---```
+---@field showInEditor? boolean
+
 ---@class _.lspconfig.settings.ada_ls.Ada.OnTypeFormatting
 ---If the VS Code `editor.formatOnType` setting is enabled, the Ada Language Server will format Ada code while it is being typed in the editor, in particular when a new line is typed.
 ---
@@ -57,6 +65,7 @@
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
 ---@field enableIndexing? true | false
+---@field externalAnnotations? _.lspconfig.settings.ada_ls.Ada.ExternalAnnotations
 ---Controls whether comments should be folded like code blocks.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.

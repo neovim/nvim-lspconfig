@@ -548,7 +548,7 @@
 ---@field go? string
 
 ---@class _.lspconfig.settings.gopls.Go.Trace
----Trace the communication between VS Code and the Go language server.
+---Trace the communication between VS Code and the Go language server. Also requires setting the 'gopls' output channel log level to 'Trace' ('Developer: Set Log Level...').
 ---
 ---```lua
 ---default = "off"

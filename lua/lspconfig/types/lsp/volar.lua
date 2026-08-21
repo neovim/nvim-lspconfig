@@ -133,6 +133,14 @@
 ---```
 ---@field server? "off" | "messages" | "verbose"
 
+---@class _.lspconfig.settings.volar.Vue.Welcome
+---%configuration.welcome.show%
+---
+---```lua
+---default = true
+---```
+---@field show? boolean
+
 ---@class _.lspconfig.settings.volar.Vue
 ---@field autoInsert? _.lspconfig.settings.volar.Vue.AutoInsert
 ---@field codeActions? _.lspconfig.settings.volar.Vue.CodeActions
@@ -143,6 +151,7 @@
 ---@field server? _.lspconfig.settings.volar.Vue.Server
 ---@field suggest? _.lspconfig.settings.volar.Vue.Suggest
 ---@field trace? _.lspconfig.settings.volar.Vue.Trace
+---@field welcome? _.lspconfig.settings.volar.Vue.Welcome
 
 ---@class lspconfig.settings.volar
 ---@field vue? _.lspconfig.settings.volar.Vue
