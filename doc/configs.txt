@@ -6619,7 +6619,7 @@ Default config:
   { "ols" }
 - filetypes: >lua
   { "odin" }
-- root_dir (use "gF" to view): ../lsp/ols.lua:43
+- root_dir (use "gF" to view): ../lsp/ols.lua:46
 <
 
 ------------------------------------------------------------------------------

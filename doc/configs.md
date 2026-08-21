@@ -8991,7 +8991,7 @@ Default config:
   ```lua
   { "odin" }
   ```
-- `root_dir`: [../lsp/ols.lua:43](../lsp/ols.lua#L43)
+- `root_dir`: [../lsp/ols.lua:46](../lsp/ols.lua#L46)
 
 ---
 
