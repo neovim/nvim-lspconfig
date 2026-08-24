@@ -35,6 +35,18 @@ local function reload_workspace(bufnr)
   end
 end
 
+---@param command string
+---@return boolean
+local function executable_exists(command)
+  local exists = vim.fn.executable(command) == 1
+
+  if not exists then
+    vim.notify_once(('[rust_analyzer] %s not found.'):format(command), vim.log.levels.WARN)
+  end
+
+  return exists
+end
+
 local function user_sysroot_src()
   return vim.tbl_get(vim.lsp.config['rust_analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysrootSrc')
 end
@@ -42,20 +54,12 @@ end
 local function default_sysroot_src()
   local sysroot = vim.tbl_get(vim.lsp.config['rust_analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysroot')
   if not sysroot then
-    local rustc = os.getenv 'RUSTC' or 'rustc'
-    local result = vim.system({ rustc, '--print', 'sysroot' }, { text = true }):wait()
+    local result = vim
+      .system({ 'cargo', '-Z', 'unstable-options', 'rustc', '--print', 'sysroot' }, { text = true })
+      :wait()
 
-    local stdout = result.stdout
-    if result.code == 0 and stdout then
-      if string.sub(stdout, #stdout) == '\n' then
-        if #stdout > 1 then
-          sysroot = string.sub(stdout, 1, #stdout - 1)
-        else
-          sysroot = ''
-        end
-      else
-        sysroot = stdout
-      end
+    if result.code == 0 and result.stdout then
+      sysroot = vim.trim(result.stdout)
     end
   end
 
@@ -86,6 +90,10 @@ return {
   cmd = { 'rust-analyzer' },
   filetypes = { 'rust' },
   root_dir = function(bufnr, on_dir)
+    if not executable_exists('cargo') then
+      return
+    end
+
     local fname = vim.api.nvim_buf_get_name(bufnr)
     local reused_dir = is_library(fname)
     if reused_dir then
