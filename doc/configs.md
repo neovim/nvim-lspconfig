@@ -296,6 +296,7 @@ Nvim by running `:help lspconfig-all`.
 - [rumdl](#rumdl)
 - [rune_languageserver](#rune_languageserver)
 - [rust_analyzer](#rust_analyzer)
+- [rust_glancer](#rust_glancer)
 - [salt_ls](#salt_ls)
 - [scheme_langserver](#scheme_langserver)
 - [scry](#scry)
@@ -11556,6 +11557,63 @@ Default config:
     }
   }
   ```
+
+---
+
+## rust_glancer
+
+https://github.com/rust-glancer/rust-glancer
+
+`rust-glancer`, an incomplete-by-design Rust language server optimized for
+low memory usage and near-instant editor restarts.
+
+VS Code is currently the only officially supported editor; the project only
+publishes `.vsix` packages, so the `rust-glancer` binary must be built from
+source for use with Nvim:
+```sh
+git clone https://github.com/rust-glancer/rust-glancer
+cd rust-glancer
+cargo build --release -p rust-glancer
+# add target/release/ to $PATH, or point `cmd` at the built binary
+```
+`rust-src` is required regardless of editor:
+```sh
+rustup component add rust-src
+```
+
+Diagnostics (`cargo check`) are disabled by default; enable them via
+`diagnostics.onStartup` / `diagnostics.onSave` below.
+
+The server reads its configuration only from the LSP `initializationOptions`
+sent on startup (there is no `workspace/configuration` support), so options
+must be set via `init_options`, not `settings`:
+```lua
+vim.lsp.config('rust_glancer', {
+  init_options = {
+    diagnostics = {
+      onSave = true,
+    },
+  },
+})
+```
+See [configuration docs](https://rust-glancer.github.io/docs/usage/CONFIGURE.html) for the full
+set of options (`cfg`, `indexing`, `cargo`, `cache`, `diagnostics`).
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('rust_glancer')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "rust-glancer", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "rust" }
+  ```
+- `root_dir`: [../lsp/rust_glancer.lua:41](../lsp/rust_glancer.lua#L41)
 
 ---
 
