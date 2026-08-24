@@ -46,14 +46,14 @@ local function executable_exists(command, opt)
 
   if env_command then
     ok = vim.fn.executable(env_command) == 1
-    error_msg = ('%s not found. Please make sure the environment variable %s points to the %s executable or unset it.'):format(
+    error_msg = ('%s not found. Ensure the environment variable %s points to the %s executable or unset it.'):format(
       command,
       opt.env_override,
       command
     )
   else
     ok = vim.fn.executable(command) == 1
-    error_msg = ('%s not found. Please make sure it is installed.'):format(command)
+    error_msg = ('%s not found.'):format(command)
   end
 
   if not ok then
