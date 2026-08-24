@@ -209,6 +209,7 @@ Nvim by running `:help lspconfig-all`.
 - [motoko_lsp](#motoko_lsp)
 - [move_analyzer](#move_analyzer)
 - [mpls](#mpls)
+- [ms_terraform_lsp](#ms_terraform_lsp)
 - [msbuild_project_tools_server](#msbuild_project_tools_server)
 - [muon](#muon)
 - [mutt_ls](#mutt_ls)
@@ -8332,6 +8333,41 @@ Default config:
 - `root_markers` :
   ```lua
   { ".marksman.toml", ".git" }
+  ```
+
+---
+
+## ms_terraform_lsp
+
+https://github.com/Azure/ms-terraform-lsp
+
+Microsoft Terraform Providers Language Server. Provides completion, hover
+documentation and schema validation for the `azapi`, `azurerm` and `msgraph`
+providers, and for Azure Verified Modules.
+
+Only covers Microsoft providers, so it is intended to run alongside
+[terraformls](#terraformls).
+
+Download a released binary from
+https://github.com/Azure/ms-terraform-lsp/releases.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('ms_terraform_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "ms-terraform-lsp", "serve" }
+  ```
+- `filetypes` :
+  ```lua
+  { "terraform" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".terraform", ".git" }
   ```
 
 ---
