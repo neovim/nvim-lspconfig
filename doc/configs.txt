@@ -8547,7 +8547,7 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- before_init (use "gF" to view): ../lsp/rust_analyzer.lua:85
+- before_init (use "gF" to view): ../lsp/rust_analyzer.lua:89
 - capabilities: >lua
   {
     experimental = {
@@ -8561,8 +8561,8 @@ Default config:
   { "rust-analyzer" }
 - filetypes: >lua
   { "rust" }
-- on_attach (use "gF" to view): ../lsp/rust_analyzer.lua:85
-- root_dir (use "gF" to view): ../lsp/rust_analyzer.lua:85
+- on_attach (use "gF" to view): ../lsp/rust_analyzer.lua:89
+- root_dir (use "gF" to view): ../lsp/rust_analyzer.lua:89
 - settings: >lua
   {
     ["rust-analyzer"] = {
