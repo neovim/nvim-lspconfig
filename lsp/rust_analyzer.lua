@@ -36,31 +36,15 @@ local function reload_workspace(bufnr)
 end
 
 ---@param command string
----@param opt { env_override: string? }?
 ---@return boolean
-local function executable_exists(command, opt)
-  opt = opt or {}
-  local env_command = opt.env_override and os.getenv(opt.env_override)
-  local ok = false
-  local error_msg = ''
+local function executable_exists(command)
+  local exists = vim.fn.executable(command) == 1
 
-  if env_command then
-    ok = vim.fn.executable(env_command) == 1
-    error_msg = ('%s not found. Ensure the environment variable %s points to the %s executable or unset it.'):format(
-      command,
-      opt.env_override,
-      command
-    )
-  else
-    ok = vim.fn.executable(command) == 1
-    error_msg = ('%s not found.'):format(command)
+  if not exists then
+    vim.notify_once(('[rust_analyzer] %s not found.'):format(command), vim.log.levels.WARN)
   end
 
-  if not ok then
-    vim.notify_once(('[rust_analyzer] %s'):format(error_msg), vim.log.levels.WARN)
-  end
-
-  return ok
+  return exists
 end
 
 local function user_sysroot_src()
@@ -70,20 +54,12 @@ end
 local function default_sysroot_src()
   local sysroot = vim.tbl_get(vim.lsp.config['rust_analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysroot')
   if not sysroot then
-    local rustc = os.getenv 'RUSTC' or 'rustc'
-    local result = vim.system({ rustc, '--print', 'sysroot' }, { text = true }):wait()
+    local result = vim
+      .system({ 'cargo', '-Z', 'unstable-options', 'rustc', '--print', 'sysroot' }, { text = true })
+      :wait()
 
-    local stdout = result.stdout
-    if result.code == 0 and stdout then
-      if string.sub(stdout, #stdout) == '\n' then
-        if #stdout > 1 then
-          sysroot = string.sub(stdout, 1, #stdout - 1)
-        else
-          sysroot = ''
-        end
-      else
-        sysroot = stdout
-      end
+    if result.code == 0 and result.stdout then
+      sysroot = vim.trim(result.stdout)
     end
   end
 
@@ -114,7 +90,7 @@ return {
   cmd = { 'rust-analyzer' },
   filetypes = { 'rust' },
   root_dir = function(bufnr, on_dir)
-    if not executable_exists('rustc', { env_override = 'RUSTC' }) or not executable_exists('cargo') then
+    if not executable_exists('cargo') then
       return
     end
 
