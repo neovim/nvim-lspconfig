@@ -37,6 +37,7 @@ return {
     'ruby',
     'rust',
     'scala',
+    'sh',
     'solidity',
     'swift',
     'typescript',
