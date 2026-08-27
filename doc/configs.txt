@@ -450,7 +450,7 @@ Default config:
 - cmd: >lua
   { "ast-grep", "lsp" }
 - filetypes: >lua
-  { "bash", "c", "cpp", "cs", "css", "elixir", "go", "haskell", "html", "java", "javascript", "javascriptreact", "json", "kotlin", "lua", "nix", "php", "python", "ruby", "rust", "scala", "solidity", "swift", "typescript", "typescriptreact", "yaml" }
+  { "bash", "c", "cpp", "cs", "css", "elixir", "go", "haskell", "html", "java", "javascript", "javascriptreact", "json", "kotlin", "lua", "nix", "php", "python", "ruby", "rust", "scala", "sh", "solidity", "swift", "typescript", "typescriptreact", "yaml" }
 - reuse_client (use "gF" to view): ../lsp/ast_grep.lua:12
 - root_markers: >lua
   { "sgconfig.yaml", "sgconfig.yml" }

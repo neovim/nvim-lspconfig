@@ -981,7 +981,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "bash", "c", "cpp", "cs", "css", "elixir", "go", "haskell", "html", "java", "javascript", "javascriptreact", "json", "kotlin", "lua", "nix", "php", "python", "ruby", "rust", "scala", "solidity", "swift", "typescript", "typescriptreact", "yaml" }
+  { "bash", "c", "cpp", "cs", "css", "elixir", "go", "haskell", "html", "java", "javascript", "javascriptreact", "json", "kotlin", "lua", "nix", "php", "python", "ruby", "rust", "scala", "sh", "solidity", "swift", "typescript", "typescriptreact", "yaml" }
   ```
 - `reuse_client`: [../lsp/ast_grep.lua:12](../lsp/ast_grep.lua#L12)
 - `root_markers` :
