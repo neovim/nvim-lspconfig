@@ -10021,6 +10021,16 @@ vim.lsp.config('powershell_es', {
 
 Note that the execution policy needs to be set to `Unrestricted` for the languageserver run under PowerShell
 
+By default, profile loading is disabled (`enableProfileLoading = false`) since the
+language server runs as a background process, not an interactive session, and a
+profile that writes to stdout can corrupt the LSP handshake. Override if needed:
+
+```lua
+vim.lsp.config('powershell_es', {
+  init_options = { enableProfileLoading = true },
+})
+```
+
 If necessary, specific `cmd` can be defined instead of `bundle_path`.
 See [PowerShellEditorServices](https://github.com/PowerShell/PowerShellEditorServices#standard-input-and-output)
 to learn more.
@@ -10037,10 +10047,16 @@ vim.lsp.enable('powershell_es')
 ```
 
 Default config:
-- `cmd`: [../lsp/powershell_es.lua:40](../lsp/powershell_es.lua#L40)
+- `cmd`: [../lsp/powershell_es.lua:91](../lsp/powershell_es.lua#L91)
 - `filetypes` :
   ```lua
   { "ps1" }
+  ```
+- `init_options` :
+  ```lua
+  {
+    enableProfileLoading = false
+  }
   ```
 - `root_markers` :
   ```lua

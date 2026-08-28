@@ -7412,6 +7412,14 @@ By default the language server is started in `pwsh` (PowerShell Core). This can 
 
 Note that the execution policy needs to be set to `Unrestricted` for the languageserver run under PowerShell
 
+By default, profile loading is disabled (`enableProfileLoading = false`) since the
+language server runs as a background process, not an interactive session, and a
+profile that writes to stdout can corrupt the LSP handshake. Override if needed:
+>lua
+  vim.lsp.config('powershell_es', {
+    init_options = { enableProfileLoading = true },
+  })
+
 If necessary, specific `cmd` can be defined instead of `bundle_path`.
 See [PowerShellEditorServices](https://github.com/PowerShell/PowerShellEditorServices#standard-input-and-output)
 to learn more.
@@ -7425,9 +7433,13 @@ Snippet to enable the language server: >lua
 
 
 Default config:
-- cmd (use "gF" to view): ../lsp/powershell_es.lua:40
+- cmd (use "gF" to view): ../lsp/powershell_es.lua:91
 - filetypes: >lua
   { "ps1" }
+- init_options: >lua
+  {
+    enableProfileLoading = false
+  }
 - root_markers: >lua
   { "PSScriptAnalyzerSettings.psd1", ".git" }
 <
