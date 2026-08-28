@@ -200,13 +200,16 @@
 ---Options to configure code formatting.
 ---@field format? any|any
 ---A list of rule codes or prefixes to ignore. Prefixes can specify exact
----rules (like `F841`), entire categories (like `F`), or anything in
+---rules (like `F841`), entire groups (like `F`), or anything in
 ---between.
 ---
 ---When breaking ties between enabled and disabled rules (via `select` and
 ---`ignore`, respectively), more specific prefixes override less
 ---specific prefixes. `ignore` takes precedence over `select` if the same
 ---prefix appears in both.
+---
+---In preview, categories like `correctness` and `suspicious` can be used
+---in addition to rule codes and linter group prefixes.
 ---@field ignore? any[]
 ---Avoid automatically removing unused imports in `__init__.py` files. Such
 ---imports will still be flagged, but with a dedicated message suggesting
@@ -347,13 +350,16 @@
 ---Enabled by default.
 ---@field ["respect-gitignore"]? boolean
 ---A list of rule codes or prefixes to enable. Prefixes can specify exact
----rules (like `F841`), entire categories (like `F`), or anything in
+---rules (like `F841`), entire groups (like `F`), or anything in
 ---between.
 ---
 ---When breaking ties between enabled and disabled rules (via `select` and
 ---`ignore`, respectively), more specific prefixes override less
 ---specific prefixes. `ignore` takes precedence over `select` if the
 ---same prefix appears in both.
+---
+---In preview, categories like `correctness` and `suspicious` can be used
+---in addition to rule codes and linter group prefixes.
 ---@field select? any[]
 ---Whether to show an enumeration of all fixed lint violations
 ---(overridden by the `--show-fixes` command-line flag).
