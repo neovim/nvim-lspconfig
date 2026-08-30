@@ -309,6 +309,8 @@
 ---A list of mappings from file pattern to rule codes or prefixes to
 ---exclude, when considering any matching files. An initial '!' negates
 ---the file pattern.
+---
+---For more information on the glob syntax, refer to the [`globset` documentation](https://docs.rs/globset/latest/globset/#syntax).
 ---@field ["per-file-ignores"]? table
 ---A list of mappings from glob-style file pattern to Python version to use when checking the
 ---corresponding file(s).
