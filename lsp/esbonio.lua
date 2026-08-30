@@ -3,49 +3,41 @@
 --- https://github.com/swyddfa/esbonio
 ---
 --- Esbonio is a language server for [Sphinx](https://www.sphinx-doc.org/en/master/) documentation projects.
---- The language server can be installed via pip
+--- The language server can be installed as a standalone tool with uv or pipx.
 ---
 --- ```
---- pip install esbonio
+--- uv tool install esbonio
 --- ```
 ---
---- Since Sphinx is highly extensible you will get best results if you install the language server in the same
---- Python environment as the one used to build your documentation. To ensure that the correct Python environment
---- is picked up, you can either launch `nvim` with the correct environment activated.
+--- Configure the Python environment and Sphinx build command for each project in `pyproject.toml`.
 ---
---- ```
---- source env/bin/activate
---- nvim
+--- ```toml
+--- [tool.esbonio.sphinx]
+--- pythonCommand = ["uv", "run", "python"]
+--- buildArguments = ["-M", "dirhtml", ".", "${defaultBuildDir}"]
 --- ```
 ---
---- Or you can modify the default `cmd` to include the full path to the Python interpreter.
+--- The same options can be supplied through LSP settings if a project does not use `pyproject.toml`.
 ---
 --- ```lua
 --- vim.lsp.config('esbonio', {
----   cmd = { '/path/to/virtualenv/bin/python', '-m', 'esbonio.server' }
---- })
---- ```
----
---- Esbonio supports a number of config values passed as `init_options` on startup, for example.
----
---- ```lua
---- vim.lsp.config('esbonio', {
----   init_options = {
----     server = {
----       logLevel = "debug"
+---   settings = {
+---     esbonio = {
+---       sphinx = {
+---         pythonCommand = { 'uv', 'run', 'python' },
+---         buildCommand = { 'sphinx-build', '-M', 'dirhtml', '.', '${defaultBuildDir}' },
+---       },
 ---     },
----     sphinx = {
----       confDir = "/path/to/docs",
----       srcDir = "${confDir}/../docs-src"
----     }
+---   },
 --- })
 --- ```
 ---
---- A full list and explanation of the available options can be found [here](https://docs.esbon.io/en/esbonio-language-server-v0.16.4/lsp/getting-started.html?editor=neovim-lspconfig#configuration)
+--- See the [Esbonio documentation](https://docs.esbon.io/en/release/integrating/howto/nvim.html)
+--- for the full configuration reference and additional Neovim integration examples.
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'python3', '-m', 'esbonio.server' },
+  cmd = { 'esbonio', 'server' },
   filetypes = { 'rst' },
-  root_markers = { '.git' },
+  root_markers = { 'conf.py', '.git' },
 }
