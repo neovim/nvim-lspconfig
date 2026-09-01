@@ -12,7 +12,7 @@ if vim.fn.has('nvim-0.11') == 0 then
 end
 
 local api, lsp = vim.api, vim.lsp
-local util = require('lspconfig.util')
+local util
 
 local completion_sort = function(items)
   table.sort(items)
@@ -201,6 +201,8 @@ if vim.fn.has('nvim-0.11.2') == 1 then
 
   return
 end
+
+util = require('lspconfig.util')
 
 api.nvim_create_user_command('LspStart', function(info)
   local server_name = string.len(info.args) > 0 and info.args or nil
