@@ -77,7 +77,7 @@ function M.root_markers_with_field(root_files, new_names, field, fname, match_mo
         end)
         :totable()
       if #to_find == 0 then
-        to_find = vim.deepcopy(files)
+        to_find = vim.deepcopy(fields)
         return true
       end
       return false
