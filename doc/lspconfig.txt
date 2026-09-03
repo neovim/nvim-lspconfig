@@ -62,7 +62,7 @@ Note these differences of |vim.lsp.config()| compared to the legacy
 nvim-lspconfig interface:
 
 - `single_file_support` is assumed by default. Can be disabled by specifying
-  `workspace_required=false` (see |vim.lsp.ClientConfig|).
+  `workspace_required=true` (see |vim.lsp.ClientConfig|).
 - `on_new_config` is currently missing, see https://github.com/neovim/neovim/issues/32287
   - However, defining `root_dir` as a function is very flexible and may fit
     your use-case instead. https://github.com/neovim/neovim/issues/32037#issuecomment-2825599872
