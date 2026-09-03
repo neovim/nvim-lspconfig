@@ -33,6 +33,9 @@
 --- }
 --- ```
 ---
+--- If you also have a `deno.json` or a `deno.jsonc` in your project, the `ts_ls` may not start (depending where the
+--- deno.json is)
+---
 --- Use the `:LspTypescriptSourceAction` command to see "whole file" ("source") code-actions such as:
 --- - organize imports
 --- - remove unused code
