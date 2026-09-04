@@ -8,6 +8,10 @@
 ---```
 ---@field enabled? boolean
 
+---@class _.lspconfig.settings.jdtls.Java.Classpath
+---Set of classpath variable strings of the form: "name=path" that are used to resolve classpath entries.
+---@field variables? string[]
+
 ---@class _.lspconfig.settings.jdtls.Java.Cleanup
 ---The list of clean ups to be run on the current document when it's saved or when the cleanup command is issued. Clean ups can automatically fix code style or programming mistakes. Click [HERE](command:_java.learnMoreAboutCleanUps) to learn more about what each clean up does.
 ---
@@ -581,6 +585,12 @@
 ---@field javac? _.lspconfig.settings.jdtls.Java.Jdt.Ls.Javac
 ---@field kotlinSupport? _.lspconfig.settings.jdtls.Java.Jdt.Ls.KotlinSupport
 ---@field lombokSupport? _.lspconfig.settings.jdtls.Java.Jdt.Ls.LombokSupport
+---Specifies the size of the in-memory Maven project cache to use. Increasing the project cache size will help load multi-module projects and monorepos faster, but will result in a significant increase in memory usage.
+---
+---```lua
+---default = 50
+---```
+---@field mavenProjectCacheSize? integer
 ---@field protobufSupport? _.lspconfig.settings.jdtls.Java.Jdt.Ls.ProtobufSupport
 ---@field scalaSupport? _.lspconfig.settings.jdtls.Java.Jdt.Ls.ScalaSupport
 ---Specifies extra VM arguments used to launch the Java Language Server. Eg. use `-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m -Xlog:disable` to optimize memory usage with the parallel garbage collector
@@ -861,6 +871,7 @@
 
 ---@class _.lspconfig.settings.jdtls.Java
 ---@field autobuild? _.lspconfig.settings.jdtls.Java.Autobuild
+---@field classpath? _.lspconfig.settings.jdtls.Java.Classpath
 ---@field cleanup? _.lspconfig.settings.jdtls.Java.Cleanup
 ---@field codeAction? _.lspconfig.settings.jdtls.Java.CodeAction
 ---@field codeGeneration? _.lspconfig.settings.jdtls.Java.CodeGeneration

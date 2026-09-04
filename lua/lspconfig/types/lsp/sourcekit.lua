@@ -64,6 +64,14 @@
 ---default = "auto"
 ---```
 ---@field backgroundIndexing? "on" | "off" | "auto"
+---When opening a .sourcekit-lsp/config.json configuration file, whether or not to check if the $schema matches the version of Swift you are using.
+---
+---```lua
+---default = true
+---```
+---@field checkConfigurationSchema? boolean
+---Set the branch to use when setting the `$schema` property of the SourceKit-LSP configuration. For example: "release/6.1" or "main". When this setting is unset, the extension will determine the branch based on the version of the toolchain that is in use.
+---@field configurationBranch? string
 ---Disable SourceKit-LSP. This will turn off features like code completion, error diagnostics and jump-to-definition. Features like swift-testing test discovery will not work correctly.
 ---@field disable? boolean
 ---Controls whether the symbol declaration is included in the results of `Find All References`.
@@ -139,7 +147,7 @@
 ---default = ""
 ---```
 ---@field buildPath? string
----When opening a .sourckit-lsp/config.json configuration file, whether or not to check if the $schema matches the version of Swift you are using.
+---When opening a .sourcekit-lsp/config.json configuration file, whether or not to check if the $schema matches the version of Swift you are using.
 ---
 ---```lua
 ---default = true

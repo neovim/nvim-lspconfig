@@ -140,8 +140,6 @@
 ---@field customData? string[]
 ---@field format? _.lspconfig.settings.html.Html.Format
 ---@field hover? _.lspconfig.settings.html.Html.Hover
----Enable/disable mirroring cursor on matching HTML tag.
----@field mirrorCursorOnMatchingTag? boolean
 ---@field suggest? _.lspconfig.settings.html.Html.Suggest
 ---@field trace? _.lspconfig.settings.html.Html.Trace
 ---@field validate? _.lspconfig.settings.html.Html.Validate
