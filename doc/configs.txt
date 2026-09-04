@@ -1518,6 +1518,34 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+clice
+
+https://github.com/clice-io/clice
+Clice is a next-generation language server for modern C++, focused on performance and code intelligence
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('clice')
+
+
+Default config:
+- capabilities: >lua
+  {
+    offsetEncoding = { "utf-8" },
+    textDocument = {
+      completion = {
+        editsNearCursor = true
+      }
+    }
+  }
+- cmd: >lua
+  { "clice", "serve" }
+- filetypes: >lua
+  { "c", "cpp" }
+- root_markers: >lua
+  { "clice.toml", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" }
+<
+
+------------------------------------------------------------------------------
 clojure_lsp
 
 https://github.com/clojure-lsp/clojure-lsp

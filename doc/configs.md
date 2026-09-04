@@ -52,6 +52,7 @@ Nvim by running `:help lspconfig-all`.
 - [circom-lsp](#circom-lsp)
 - [clangd](#clangd)
 - [clarinet](#clarinet)
+- [clice](#clice)
 - [clojure_lsp](#clojure_lsp)
 - [cmake](#cmake)
 - [cobol_ls](#cobol_ls)
@@ -2356,6 +2357,43 @@ Default config:
 - `root_markers` :
   ```lua
   { "Clarinet.toml" }
+  ```
+
+---
+
+## clice
+
+https://github.com/clice-io/clice
+Clice is a next-generation language server for modern C++, focused on performance and code intelligence
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('clice')
+```
+
+Default config:
+- `capabilities` :
+  ```lua
+  {
+    offsetEncoding = { "utf-8" },
+    textDocument = {
+      completion = {
+        editsNearCursor = true
+      }
+    }
+  }
+  ```
+- `cmd` :
+  ```lua
+  { "clice", "serve" }
+  ```
+- `filetypes` :
+  ```lua
+  { "c", "cpp" }
+  ```
+- `root_markers` :
+  ```lua
+  { "clice.toml", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" }
   ```
 
 ---
