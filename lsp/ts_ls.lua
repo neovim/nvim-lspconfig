@@ -9,7 +9,8 @@
 ---
 --- `typescript-language-server` depends on `typescript`. Both packages can be installed via `npm`:
 --- ```sh
---- npm install -g typescript typescript-language-server
+--- npm install -g typescript@<version> typescript-language-server
+--- # if you are using `ts_ls` you will need to install a `typescript` version < 7 for now
 --- ```
 ---
 --- To configure typescript language server, add a
@@ -31,6 +32,9 @@
 ---   ]
 --- }
 --- ```
+---
+--- If you also have a `deno.json` or a `deno.jsonc` in your project, the `ts_ls` may not start (depending where the
+--- deno.json is)
 ---
 --- Use the `:LspTypescriptSourceAction` command to see "whole file" ("source") code-actions such as:
 --- - organize imports
