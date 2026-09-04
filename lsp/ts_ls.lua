@@ -75,10 +75,12 @@ return {
     local deno_lock_root = vim.fs.root(bufnr, { 'deno.lock' })
     local project_root = vim.fs.root(bufnr, root_markers)
     if deno_lock_root and (not project_root or #deno_lock_root > #project_root) then
+      vim.notify('A deno.lock has been found - leaving ts_ls', vim.log.levels.WARNING)
       -- deno lock is closer than package manager lock, abort
       return
     end
     if deno_root and (not project_root or #deno_root >= #project_root) then
+      vim.notify('A deno.json has been found - leaving ts_ls', vim.log.levels.WARNING)
       -- deno config is closer than or equal to package manager lock, abort
       return
     end
