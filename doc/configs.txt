@@ -8193,7 +8193,7 @@ Default config:
 - cmd: >lua
   { "robotcode", "language-server" }
 - filetypes: >lua
-  { "robot", "resource" }
+  { "robot" }
 - get_language_id (use "gF" to view): ../lsp/robotcode.lua:10
 - root_markers: >lua
   { "robot.toml", "pyproject.toml", "Pipfile", ".git" }

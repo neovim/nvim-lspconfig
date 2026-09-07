@@ -11042,7 +11042,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "robot", "resource" }
+  { "robot" }
   ```
 - `get_language_id`: [../lsp/robotcode.lua:10](../lsp/robotcode.lua#L10)
 - `root_markers` :
