@@ -9,7 +9,7 @@ local venv = os.getenv('VIRTUAL_ENV')
 ---@type vim.lsp.Config
 return {
   cmd = { 'robotcode', 'language-server' },
-  filetypes = { 'robot', 'resource' },
+  filetypes = { 'robot' },
   root_markers = { 'robot.toml', 'pyproject.toml', 'Pipfile', '.git' },
   cmd_env = venv and { PYTHONPATH = string.gsub(vim.fn.glob(venv .. '/lib/python*/site-packages'), '\n', ':') } or nil,
   get_language_id = function(_, _)
