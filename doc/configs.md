@@ -380,7 +380,6 @@ Nvim by running `:help lspconfig-all`.
 - [ty](#ty)
 - [typeprof](#typeprof)
 - [typos_lsp](#typos_lsp)
-- [typst_lsp](#typst_lsp)
 - [uiua](#uiua)
 - [ungrammar_languageserver](#ungrammar_languageserver)
 - [unison](#unison)
@@ -14810,33 +14809,6 @@ Default config:
 - `settings` :
   ```lua
   {}
-  ```
-
----
-
-## typst_lsp
-
-https://github.com/nvarner/typst-lsp
-
-Language server for Typst.
-
-Snippet to enable the language server:
-```lua
-vim.lsp.enable('typst_lsp')
-```
-
-Default config:
-- `cmd` :
-  ```lua
-  { "typst-lsp" }
-  ```
-- `filetypes` :
-  ```lua
-  { "typst" }
-  ```
-- `root_markers` :
-  ```lua
-  { ".git" }
   ```
 
 ---
