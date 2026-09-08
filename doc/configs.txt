@@ -7187,7 +7187,7 @@ Default config:
 - cmd: >lua
   { "phpantom_lsp" }
 - filetypes: >lua
-  { "php" }
+  { "php", "blade" }
 - root_markers: >lua
   { ".phpantom.toml", ".git", "composer.json" }
 <

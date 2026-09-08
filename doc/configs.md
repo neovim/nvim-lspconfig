@@ -9722,7 +9722,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "php" }
+  { "php", "blade" }
   ```
 - `root_markers` :
   ```lua
