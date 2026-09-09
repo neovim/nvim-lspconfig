@@ -182,6 +182,7 @@ Nvim by running `:help lspconfig-all`.
 - [kotlin_lsp](#kotlin_lsp)
 - [kulala_ls](#kulala_ls)
 - [laravel_ls](#laravel_ls)
+- [laravel_lsp](#laravel_lsp)
 - [lean3ls](#lean3ls)
 - [lelwel_ls](#lelwel_ls)
 - [lemminx](#lemminx)
@@ -7291,6 +7292,38 @@ Default config:
   ```lua
   { "artisan" }
   ```
+
+---
+
+## laravel_lsp
+
+https://github.com/laravel/lsp
+
+Laravel LSP provides framework-aware editor features for Laravel applications.
+
+Install Laravel LSP globally with Composer:
+
+```sh
+composer global require laravel/lsp
+```
+
+Ensure Composer's global bin directory is on `$PATH`.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('laravel_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "laravel-lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "php", "blade" }
+  ```
+- `root_dir`: [../lsp/laravel_lsp.lua:16](../lsp/laravel_lsp.lua#L16)
 
 ---
 

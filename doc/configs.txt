@@ -5319,6 +5319,31 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+laravel_lsp
+
+https://github.com/laravel/lsp
+
+Laravel LSP provides framework-aware editor features for Laravel applications.
+
+Install Laravel LSP globally with Composer:
+>sh
+  composer global require laravel/lsp
+
+Ensure Composer's global bin directory is on `$PATH`.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('laravel_lsp')
+
+
+Default config:
+- cmd: >lua
+  { "laravel-lsp" }
+- filetypes: >lua
+  { "php", "blade" }
+- root_dir (use "gF" to view): ../lsp/laravel_lsp.lua:16
+<
+
+------------------------------------------------------------------------------
 lean3ls
 
 https://github.com/leanprover/lean-client-js/tree/master/lean-language-server
