@@ -1,0 +1,201 @@
+---@meta
+
+---Static initialization options that are set once at server startup and require a server restart to take effect. See [Initialization options](https://aviatesk.github.io/JETLS.jl/release/launching/#init-options).
+---
+---```lua
+---default = {}
+---```
+---@class _.lspconfig.settings.jetls.JetlsClient.InitializationOptions
+---Override full analysis behavior for specific file patterns. Primarily used as a temporary workaround to disable analysis for files affected by memory leak issues. Each override specifies a glob pattern, optionally a module name, and can opt back into full analysis. Note: This is an experimental feature that may be removed or changed in future versions.
+---
+---```lua
+---default = {}
+---```
+---@field analysis_overrides? table[]
+---The client-side configuration section under which the client stores JETLS settings (e.g. `jetls-client.settings` for the VSCode extension). When set, JETLS registers `workspace/didChangeConfiguration` with this section, so clients that honor the registration's section filter only send the notification when the relevant settings actually change. This is normally set programmatically by client extensions rather than by users. See [`configuration_section`](https://aviatesk.github.io/JETLS.jl/release/launching/#init-options/configuration_section).
+---
+---```lua
+---default = "null"
+---```
+---@field configuration_section? string
+---Reuse results from Julia's native inference cache for calls to methods defined outside the modules being analyzed, instead of analyzing them recursively. This can substantially speed up analysis of packages with large dependency surfaces, but analysis results may change slightly, which can change the diagnostics that are reported. See [`reuse_native_inference`](https://aviatesk.github.io/JETLS.jl/release/launching/#init-options/reuse_native_inference). Note: This is an experimental feature that may be removed or changed in future versions.
+---@field reuse_native_inference? boolean
+
+---Code lens configuration. See [Code lens configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/code_lens).
+---@class _.lspconfig.settings.jetls.JetlsClient.Settings.CodeLens
+---Show reference counts above top-level symbols (functions, structs, constants, etc.). Click to open references panel.
+---@field references? boolean
+---Show `Run`/`Debug` code lenses above `@testset` blocks. Some editors (e.g., Zed) show these as code actions, causing duplication; zed-julia defaults to false.
+---
+---```lua
+---default = true
+---```
+---@field testrunner? boolean
+
+---LaTeX and emoji completion configuration. See [documentation](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/completion/latex_emoji/strip_prefix).
+---@class _.lspconfig.settings.jetls.JetlsClient.Settings.Completion.LatexEmoji
+---Controls whether to strip `\` or `:` prefix from LaTeX/emoji completion labels. Some editors (e.g., Zed) have sorting issues with backslash in `sortText`. Auto-detected by default; set explicitly if completions appear in wrong order.
+---@field strip_prefix? boolean
+
+---Completion configuration. See [Completion configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/completion).
+---@class _.lspconfig.settings.jetls.JetlsClient.Settings.Completion
+---LaTeX and emoji completion configuration. See [documentation](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/completion/latex_emoji/strip_prefix).
+---@field latex_emoji? _.lspconfig.settings.jetls.JetlsClient.Settings.Completion.LatexEmoji
+
+---Diagnostic configuration. See [Diagnostic configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/diagnostic).
+---@class _.lspconfig.settings.jetls.JetlsClient.Settings.Diagnostic
+---Report diagnostics for all workspace files (true) or only open files (false). Disable to reduce noise from many warnings.
+---
+---```lua
+---default = true
+---```
+---@field all_files? boolean
+---Suppress unused variable diagnostics for `_`-prefixed names, following the common convention for intentionally unused variables.
+---
+---```lua
+---default = true
+---```
+---@field allow_unused_underscore? boolean
+---Enable or disable all JETLS diagnostics. When set to false, no diagnostic messages will be shown.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Fine-grained control over diagnostics through pattern matching. See [Pattern-based diagnostic configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/diagnostic/patterns).
+---
+---```lua
+---default = {}
+---```
+---@field patterns? table[]
+
+---Configuration for full JET analysis. See [Full analysis configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/full_analysis).
+---@class _.lspconfig.settings.jetls.JetlsClient.Settings.FullAnalysis
+---Controls how JETLS instantiates package environments when dependencies are missing, or when the manifest is missing or out of date (e.g., in freshly cloned repositories). `"always"` runs `Pkg.resolve()` and `Pkg.instantiate()` automatically. `"prompt"` asks for confirmation first. Alternatively, you can instantiate manually while the prompt is open and then choose `"Skip"`; JETLS rechecks the environment before analysis. `"never"` only warns. Legacy `true` and `false` settings remain supported at runtime for backward compatibility but are excluded from this schema.
+---
+---```lua
+---default = "prompt"
+---```
+---@field auto_instantiate? "always" | "prompt" | "never"
+---Additional JET top-level concretization patterns. Each entry requires a Julia expression `pattern` and can use an optional `path` glob to restrict it to specific source files.
+---
+---```lua
+---default = {}
+---```
+---@field concretization_patterns? table[]
+---Debounce time in seconds before triggering full analysis after a file save. Higher values reduce analysis frequency but may delay diagnostic updates.
+---
+---```lua
+---default = 1
+---```
+---@field debounce? number
+
+---Block-end inlay hints configuration. See [Block-end hints](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/inlay_hint/block_end).
+---@class _.lspconfig.settings.jetls.JetlsClient.Settings.InlayHint.BlockEnd
+---Enable or disable inlay hints displayed at block `end` keywords (e.g., `end # module Foo`). Supports: `module`, `function`, `macro`, `struct`, `if`, `let`, `for`, `while`, `@testset`.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Minimum number of lines a block must span before its `end`-tag inlay hint is displayed.
+---
+---```lua
+---default = 25
+---```
+---@field min_lines? integer
+
+---Type inlay hints configuration. See [Type hints](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/inlay_hint/types).
+---@class _.lspconfig.settings.jetls.JetlsClient.Settings.InlayHint.Types
+---Show inferred-type inlay hints — e.g., `x::T` for a binding, `f(arg::S)::T` for a call (annotating both the argument and result). Disable to keep only the structural `end`-tag hints.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
+---Inlay hint configuration. See [Inlay hint configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/inlay_hint).
+---@class _.lspconfig.settings.jetls.JetlsClient.Settings.InlayHint
+---Block-end inlay hints configuration. See [Block-end hints](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/inlay_hint/block_end).
+---@field block_end? _.lspconfig.settings.jetls.JetlsClient.Settings.InlayHint.BlockEnd
+---Type inlay hints configuration. See [Type hints](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/inlay_hint/types).
+---@field types? _.lspconfig.settings.jetls.JetlsClient.Settings.InlayHint.Types
+
+---TestRunner integration configuration. See [TestRunner integration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/testrunner).
+---@class _.lspconfig.settings.jetls.JetlsClient.Settings.Testrunner
+---Path to the TestRunner.jl executable. Defaults to `testrunner` (or `testrunner.bat` on Windows).
+---
+---```lua
+---default = "testrunner"
+---```
+---@field executable? string
+
+---JETLS server configuration settings. See [Configuration documentation](https://aviatesk.github.io/JETLS.jl/release/configuration/) for detailed information.
+---
+---```lua
+---default = {}
+---```
+---@class _.lspconfig.settings.jetls.JetlsClient.Settings
+---Code lens configuration. See [Code lens configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/code_lens).
+---@field code_lens? _.lspconfig.settings.jetls.JetlsClient.Settings.CodeLens
+---Completion configuration. See [Completion configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/completion).
+---@field completion? _.lspconfig.settings.jetls.JetlsClient.Settings.Completion
+---Diagnostic configuration. See [Diagnostic configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/diagnostic).
+---@field diagnostic? _.lspconfig.settings.jetls.JetlsClient.Settings.Diagnostic
+---Formatter configuration. Can be a preset name (`Runic` or `JuliaFormatter`) or a custom formatter object. See [Formatter configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/formatter).
+---
+---```lua
+---default = "Runic"
+---```
+---@field formatter? any
+---Configuration for full JET analysis. See [Full analysis configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/full_analysis).
+---@field full_analysis? _.lspconfig.settings.jetls.JetlsClient.Settings.FullAnalysis
+---Inlay hint configuration. See [Inlay hint configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/inlay_hint).
+---@field inlay_hint? _.lspconfig.settings.jetls.JetlsClient.Settings.InlayHint
+---TestRunner integration configuration. See [TestRunner integration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/testrunner).
+---@field testrunner? _.lspconfig.settings.jetls.JetlsClient.Settings.Testrunner
+
+---@class _.lspconfig.settings.jetls.JetlsClient
+---Communication channel for the language server:
+---- `'auto'` (default) selects the best option based on environment
+---- `'pipe'` for local development with stdout isolation
+---- `'socket'` for network communication
+---- `'stdio'` for maximum compatibility (but risk of stdout pollution).
+---
+---See [Communication channels](https://aviatesk.github.io/JETLS.jl/release/launching/#Communication-channels) documentation for more details.
+---
+---```lua
+---default = "auto"
+---```
+---@field communicationChannel? "auto" | "pipe" | "stdio" | "socket"
+---JETLS executable configuration. Most users should omit `path` and use the managed installation.
+---
+---Use object form `{threads, env}` for managed JETLS. Set `env.JULIAUP_CHANNEL` to select a [juliaup](https://github.com/JuliaLang/juliaup) channel, or `env.JULIA_APPS_JULIA_CMD` to select a Julia executable directly. Add `path` to use a custom executable and bypass managed installation.
+---
+---Use array form `["julia", "--startup-file=no", "--history-file=no", "--project=/path/to/JETLS", "-m", "JETLS", "serve"]` to run a full custom command.
+---
+---```lua
+---default = {}
+---```
+---@field executable? any
+---Static initialization options that are set once at server startup and require a server restart to take effect. See [Initialization options](https://aviatesk.github.io/JETLS.jl/release/launching/#init-options).
+---
+---```lua
+---default = {}
+---```
+---@field initializationOptions? _.lspconfig.settings.jetls.JetlsClient.InitializationOptions
+---JETLS server configuration settings. See [Configuration documentation](https://aviatesk.github.io/JETLS.jl/release/configuration/) for detailed information.
+---
+---```lua
+---default = {}
+---```
+---@field settings? _.lspconfig.settings.jetls.JetlsClient.Settings
+---Port number for socket communication (`0` = auto-assign). Only used when `'socket'` communication channel is used.
+---
+---```lua
+---default = 0
+---```
+---@field socketPort? number
+
+---@class lspconfig.settings.jetls
+---@field ["jetls-client"]? _.lspconfig.settings.jetls.JetlsClient
