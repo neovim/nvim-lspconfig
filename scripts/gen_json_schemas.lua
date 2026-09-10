@@ -24,6 +24,7 @@ local index = {
   intelephense = 'https://raw.githubusercontent.com/bmewburn/vscode-intelephense/master/package.json',
   java_language_server = 'https://raw.githubusercontent.com/georgewfraser/java-language-server/master/package.json',
   jdtls = 'https://raw.githubusercontent.com/redhat-developer/vscode-java/master/package.json',
+  jetls = 'https://raw.githubusercontent.com/aviatesk/jetls-vscode/refs/heads/master/package.json',
   jsonls = 'https://raw.githubusercontent.com/microsoft/vscode/master/extensions/json-language-features/package.json',
   julials = 'https://raw.githubusercontent.com/julia-vscode/julia-vscode/master/package.json',
   kotlin_language_server = 'https://raw.githubusercontent.com/fwcd/vscode-kotlin/master/package.json',
