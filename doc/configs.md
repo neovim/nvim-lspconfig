@@ -167,6 +167,7 @@ Nvim by running `:help lspconfig-all`.
 - [java_language_server](#java_language_server)
 - [jdtls](#jdtls)
 - [jedi_language_server](#jedi_language_server)
+- [jetls](#jetls)
 - [jinja_lsp](#jinja_lsp)
 - [jls](#jls)
 - [jqls](#jqls)
@@ -6755,6 +6756,37 @@ Default config:
 - `root_markers` :
   ```lua
   { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
+  ```
+
+---
+
+## jetls
+
+https://github.com/aviatesk/JETLS.jl
+
+For JETLS installation: Use the Julia Apps helper:
+```sh
+julia -e 'using Pkg; Pkg.Apps.add(; url="https://github.com/aviatesk/JETLS.jl", rev="release")'
+```
+To update it, run the same command again
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('jetls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "jetls", "serve" }
+  ```
+- `filetypes` :
+  ```lua
+  { "julia" }
+  ```
+- `root_markers` :
+  ```lua
+  { "Project.toml" }
   ```
 
 ---
