@@ -9,8 +9,8 @@
 --- `tsc` can be installed via npm `npm install typescript`.
 ---
 --- The language server (`--lsp`) is only available in the native compiler, TypeScript 7.0
---- and newer. An older binary in `node_modules/.bin` is skipped in favour of one on `$PATH`
---- that does support it; if no candidate qualifies, the server does not attach.
+--- and newer. Older binaries in `node_modules/.bin` are skipped in favour of a supported
+--- package-local, hoisted, or `$PATH` candidate; if none qualifies, the server does not attach.
 ---
 --- ### Monorepo support
 ---
@@ -64,6 +64,28 @@ local function supports_lsp(bin)
   local version = vim.version.parse(out.stdout or '')
 
   return out.code == 0 and version ~= nil and version.major >= 7
+end
+
+---@param root_dir string
+---@return string[]
+local function get_bins(root_dir)
+  local bins = {}
+  local lockfiles = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
+  local workspace_root = vim.fs.root(root_dir, lockfiles) or vim.fs.root(root_dir, '.git') or root_dir
+  local dir = root_dir
+
+  while dir do
+    for _, bin in ipairs({ 'tsc', 'tsgo' }) do
+      bins[#bins + 1] = vim.fs.joinpath(dir, 'node_modules/.bin', bin)
+    end
+    if dir == workspace_root then
+      break
+    end
+    dir = vim.fs.dirname(dir)
+  end
+
+  vim.list_extend(bins, { 'tsc', 'tsgo' })
+  return bins
 end
 
 ---@type vim.lsp.Config
@@ -131,14 +153,7 @@ return {
       return on_dir(root)
     end
 
-    local bins = {}
-
-    for _, bin in ipairs({ 'tsc', 'tsgo' }) do
-      bins[#bins + 1] = vim.fs.joinpath(root, 'node_modules/.bin', bin)
-      bins[#bins + 1] = bin
-    end
-
-    for _, bin in ipairs(bins) do
+    for _, bin in ipairs(get_bins(root)) do
       if supports_lsp(bin) then
         bin_cache[root] = bin
         return on_dir(root)
