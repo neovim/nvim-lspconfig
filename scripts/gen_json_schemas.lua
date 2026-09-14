@@ -261,13 +261,17 @@ local function generate_server_schema(schema)
     for _, config_section in pairs(config_schema) do
       if config_section.properties then
         for k, v in pairs(config_section.properties) do
-          properties[k] = resolve_local_refs(v, config_section)
+          if k ~= '$schema' then
+            properties[k] = resolve_local_refs(v, config_section)
+          end
         end
       end
     end
   elseif config_schema.properties then
     for k, v in pairs(config_schema.properties) do
-      properties[k] = resolve_local_refs(v, config_schema)
+      if k ~= '$schema' then
+        properties[k] = resolve_local_refs(v, config_schema)
+      end
     end
   end
 
