@@ -156,6 +156,49 @@ local function resolve_schema_configs()
   return vim.tbl_deep_extend('force', schemas, overrides)
 end
 
+---Resolve local JSON pointers in a schema node.
+---@param node any
+---@param root table
+---@param resolving? table<string, true>
+---@return any
+local function resolve_local_refs(node, root, resolving)
+  if type(node) ~= 'table' then
+    return node
+  end
+
+  local ref = node['$ref']
+  if type(ref) == 'string' and vim.startswith(ref, '#/') then
+    resolving = resolving or {}
+    if resolving[ref] then
+      error('Cyclic schema reference: ' .. ref)
+    end
+
+    local target = root
+    for part in ref:gmatch('/([^/]+)') do
+      part = part:gsub('~1', '/'):gsub('~0', '~')
+      target = type(target) == 'table' and target[part] or nil
+    end
+    if target == nil then
+      error('Could not resolve schema reference: ' .. ref)
+    end
+
+    resolving[ref] = true
+    local resolved = resolve_local_refs(vim.deepcopy(target), root, resolving)
+    resolving[ref] = nil
+    for key, value in pairs(node) do
+      if key ~= '$ref' then
+        resolved[key] = resolve_local_refs(value, root, resolving)
+      end
+    end
+    return resolved
+  end
+
+  for key, value in pairs(node) do
+    node[key] = resolve_local_refs(value, root, resolving)
+  end
+  return node
+end
+
 ---Replaces localized documentation placeholders in a schema tree in place.
 ---
 ---This is used for schemas whose documentation strings are stored in a
@@ -218,12 +261,14 @@ local function generate_server_schema(schema)
     for _, config_section in pairs(config_schema) do
       if config_section.properties then
         for k, v in pairs(config_section.properties) do
-          properties[k] = v
+          properties[k] = resolve_local_refs(v, config_section)
         end
       end
     end
   elseif config_schema.properties then
-    properties = config_schema.properties
+    for k, v in pairs(config_schema.properties) do
+      properties[k] = resolve_local_refs(v, config_schema)
+    end
   end
 
   -- `properties["enable_snippets"]` => `properties["zls.enable_snippets"]`
