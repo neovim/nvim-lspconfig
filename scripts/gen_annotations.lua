@@ -255,25 +255,31 @@ local function lua_type_for(prop)
       ' | '
     )
   end
+  if prop.const ~= nil then
+    return vim.inspect(prop.const)
+  end
   local types = type(prop.type) == 'table' and prop.type or { prop.type }
-  if vim.tbl_isempty(types) and type(prop.anyOf) == 'table' then
-    return table.concat(
-      vim.tbl_map(function(p)
-        return lua_type_for(p)
-      end, prop.anyOf),
-      '|'
-    )
+  local alternatives = prop.anyOf or prop.oneOf
+  if vim.tbl_isempty(types) and type(alternatives) == 'table' then
+    local alternative_types = {}
+    for _, alternative in ipairs(alternatives) do
+      if alternative.type ~= 'null' then
+        table.insert(alternative_types, lua_type_for(alternative))
+      end
+    end
+    return #alternative_types > 0 and table.concat(alternative_types, '|') or 'any'
   end
   types = vim.tbl_map(function(t)
     if t == 'null' then
       return
     end
     if t == 'array' then
-      if prop.items and prop.items.type then
-        if type(prop.items.type) == 'table' then
-          return 'any[]'
+      if prop.items then
+        local item_type = lua_type_for(prop.items)
+        if item_type:find('|', 1, true) then
+          item_type = '(' .. item_type .. ')'
         end
-        return (prop.items.type == 'object' and 'table' or prop.items.type) .. '[]'
+        return item_type .. '[]'
       end
       return 'any[]'
     end
