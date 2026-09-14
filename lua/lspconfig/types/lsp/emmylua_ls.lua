@@ -1,0 +1,681 @@
+---@meta
+
+---```lua
+---default = {}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.CodeAction
+---Add space after `---` comments when inserting `@diagnostic disable-next-line`.
+---
+---When omitted, this follows the formatter's resolved
+---`emmy_doc.space_between_tag_columns` setting.
+---@field insertSpace? boolean
+
+---```lua
+---default = {
+---  enable = true
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.CodeLens
+---Enable code lens.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---Configuration for EmmyLua code completion.
+---
+---```lua
+---default = {
+---  autoRequire = true,
+---  autoRequireFunction = "require",
+---  autoRequireNamingConvention = "keep",
+---  autoRequireSeparator = ".",
+---  baseFunctionIncludesName = true,
+---  callSnippet = false,
+---  enable = true,
+---  postfix = "@"
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.Completion
+---Automatically insert call to `require` when autocompletion
+---inserts objects from other modules.
+---
+---```lua
+---default = true
+---```
+---@field autoRequire? boolean
+---The function used for auto-requiring modules.
+---
+---```lua
+---default = "require"
+---```
+---@field autoRequireFunction? string
+---The naming convention for auto-required filenames.
+---
+---```lua
+---default = "keep"
+---```
+---@field autoRequireNamingConvention? "keep"|"snake-case"|"pascal-case"|"camel-case"|"keep-class"
+---A separator used in auto-require paths.
+---
+---```lua
+---default = "."
+---```
+---@field autoRequireSeparator? string
+---Whether to include the name in the base function completion. Effect: `function () end` -> `function name() end`.
+---
+---```lua
+---default = true
+---```
+---@field baseFunctionIncludesName? boolean
+---Whether to use call snippets in completions.
+---@field callSnippet? boolean
+---Enable autocompletion.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Symbol that's used to trigger postfix autocompletion.
+---
+---```lua
+---default = "@"
+---```
+---@field postfix? string
+
+---Represents the diagnostic configuration for Emmyrc.
+---
+---```lua
+---default = {
+---  diagnosticInterval = 500,
+---  disable = {},
+---  enable = true,
+---  enables = {},
+---  globals = {},
+---  globalsRegex = {},
+---  severity = vim.empty_dict()
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.Diagnostics
+---Delay between opening/changing a file and scanning it for errors, in milliseconds.
+---@field diagnosticInterval? integer
+---A list of diagnostic codes that are disabled.
+---
+---```lua
+---default = {}
+---```
+---@field disable? ("none"|"syntax-error"|"doc-syntax-error"|"type-not-found"|"missing-return"|"param-type-mismatch"|"missing-parameter"|"redundant-parameter"|"unreachable-code"|"unused"|"undefined-global"|"deprecated"|"access-invisible"|"discard-returns"|"undefined-field"|"local-const-reassign"|"iter-variable-reassign"|"duplicate-type"|"redefined-local"|"redefined-label"|"code-style-check"|"need-check-nil"|"await-in-sync"|"annotation-usage-error"|"return-type-mismatch"|"missing-return-value"|"redundant-return-value"|"undefined-doc-param"|"duplicate-doc-field"|"unknown-doc-tag"|"missing-fields"|"inject-field"|"circle-doc-class"|"incomplete-signature-doc"|"missing-global-doc"|"assign-type-mismatch"|"duplicate-require"|"non-literal-expressions-in-assert"|"unbalanced-assignments"|"unnecessary-assert"|"unnecessary-if"|"duplicate-set-field"|"duplicate-index"|"generic-constraint-mismatch"|"cast-type-mismatch"|"unresolved-require"|"require-module-not-visible"|"enum-value-mismatch"|"preferred-local-alias"|"read-only"|"global-in-non-module"|"attribute-param-type-mismatch"|"attribute-missing-parameter"|"attribute-redundant-parameter"|"invert-if"|"call-non-callable"|"inconsistent-type-access-modifier"|"missing-type-argument")[]
+---A flag indicating whether diagnostics are enabled.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---A list of diagnostic codes that are enabled.
+---
+---```lua
+---default = {}
+---```
+---@field enables? ("none"|"syntax-error"|"doc-syntax-error"|"type-not-found"|"missing-return"|"param-type-mismatch"|"missing-parameter"|"redundant-parameter"|"unreachable-code"|"unused"|"undefined-global"|"deprecated"|"access-invisible"|"discard-returns"|"undefined-field"|"local-const-reassign"|"iter-variable-reassign"|"duplicate-type"|"redefined-local"|"redefined-label"|"code-style-check"|"need-check-nil"|"await-in-sync"|"annotation-usage-error"|"return-type-mismatch"|"missing-return-value"|"redundant-return-value"|"undefined-doc-param"|"duplicate-doc-field"|"unknown-doc-tag"|"missing-fields"|"inject-field"|"circle-doc-class"|"incomplete-signature-doc"|"missing-global-doc"|"assign-type-mismatch"|"duplicate-require"|"non-literal-expressions-in-assert"|"unbalanced-assignments"|"unnecessary-assert"|"unnecessary-if"|"duplicate-set-field"|"duplicate-index"|"generic-constraint-mismatch"|"cast-type-mismatch"|"unresolved-require"|"require-module-not-visible"|"enum-value-mismatch"|"preferred-local-alias"|"read-only"|"global-in-non-module"|"attribute-param-type-mismatch"|"attribute-missing-parameter"|"attribute-redundant-parameter"|"invert-if"|"call-non-callable"|"inconsistent-type-access-modifier"|"missing-type-argument")[]
+---A list of global variables.
+---
+---```lua
+---default = {}
+---```
+---@field globals? string[]
+---A list of regular expressions for global variables.
+---
+---```lua
+---default = {}
+---```
+---@field globalsRegex? string[]
+---A map of diagnostic codes to their severity settings.
+---
+---```lua
+---default = {}
+---```
+---@field severity? table
+
+---```lua
+---default = {
+---  knownTags = {},
+---  privateName = {},
+---  syntax = "md"
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.Doc
+---List of known documentation tags.
+---
+---```lua
+---default = {}
+---```
+---@field knownTags? string[]
+---Treat specific field names as private, e.g. `m_*` means `XXX.m_id` and `XXX.m_type` are private, witch can only be accessed in the class where the definition is located.
+---
+---```lua
+---default = {}
+---```
+---@field privateName? string[]
+---When `syntax` is `Myst` or `Rst`, specifies default role used
+---with RST processor.
+---@field rstDefaultRole? string
+---When `syntax` is `Myst` or `Rst`, specifies primary domain used
+---with RST processor.
+---@field rstPrimaryDomain? string
+---Syntax for highlighting documentation.
+---
+---```lua
+---default = "md"
+---```
+---@field syntax? "none" | "md" | "myst" | "rst"
+
+---```lua
+---default = {
+---  enable = true
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.DocumentColor
+---Enable parsing strings for color tags and showing a color picker next to them.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---```lua
+---default = {
+---  useDiff = false
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.Format
+---Whether to enable external tool formatting.
+---@field externalTool? table
+---Whether to enable external tool range formatting.
+---@field externalToolRangeFormat? table
+---Whether to use the diff algorithm for formatting.
+---@field useDiff? boolean
+
+---```lua
+---default = {
+---  enable = true,
+---  enumParamHint = false,
+---  indexHint = true,
+---  localHint = true,
+---  metaCallHint = true,
+---  overrideHint = true,
+---  paramHint = true
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.Hint
+---Enable inlay hints.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Show name of enumerator when passing a literal value to a function
+---that expects an enum.
+---
+---Example:
+---
+---```lua
+------ @enum Level
+---local Foo = {
+---   Info = 1,
+---   Error = 2,
+---}
+---
+------ @param l Level
+---function print_level(l) end
+---
+---print_level(1 --[[ Hint: Level.Info ]])
+---```
+---@field enumParamHint? boolean
+---Show named array indexes.
+---
+---Example:
+---
+---```lua
+---local array = {
+---   [1] = 1, -- [name]
+---}
+---
+---print(array[1] --[[ Hint: name ]])
+---```
+---
+---```lua
+---default = true
+---```
+---@field indexHint? boolean
+---Show types of local variables.
+---
+---```lua
+---default = true
+---```
+---@field localHint? boolean
+---Show hint when calling an object results in a call to
+---its meta table's `__call` function.
+---
+---```lua
+---default = true
+---```
+---@field metaCallHint? boolean
+---Show methods that override functions from base class.
+---
+---```lua
+---default = true
+---```
+---@field overrideHint? boolean
+---Show parameter names in function calls and parameter types in function definitions.
+---
+---```lua
+---default = true
+---```
+---@field paramHint? boolean
+
+---```lua
+---default = {
+---  enable = true
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.Hover
+---The detail number of hover information.
+---Default is `None`, which means using the default detail level.
+---You can set it to a number between `1` and `255` to customize
+---@field customDetail? integer
+---Enable showing documentation on hover.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---```lua
+---default = {
+---  enable = true
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.InlineValues
+---Show inline values during debug.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
+---```lua
+---default = {
+---  enable = true,
+---  fuzzySearch = true,
+---  shortStringSearch = false
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.References
+---Enable searching for symbol usages.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Use fuzzy search when searching for symbol usages
+---and normal search didn't find anything.
+---
+---```lua
+---default = true
+---```
+---@field fuzzySearch? boolean
+---Also search for usages in strings.
+---@field shortStringSearch? boolean
+
+---```lua
+---default = {
+---  paths = {}
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.Resource
+---```lua
+---default = {}
+---```
+---@field paths? string[]
+
+---```lua
+---default = {
+---  extensions = {},
+---  frameworkVersions = {},
+---  nonstandardSymbol = {},
+---  requireLikeFunction = {},
+---  requirePattern = {},
+---  special = vim.empty_dict(),
+---  version = "LuaLatest"
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.Runtime
+---file Extensions. eg: .lua, .lua.txt
+---
+---```lua
+---default = {}
+---```
+---@field extensions? string[]
+---Framework versions.
+---
+---```lua
+---default = {}
+---```
+---@field frameworkVersions? string[]
+---Non-standard symbols.
+---
+---```lua
+---default = {}
+---```
+---@field nonstandardSymbol? ("//" | "/**/" | "`" | "+=" | "-=" | "*=" | "/=" | "%=" | "^=" | "//=" | "|=" | "&=" | "<<=" | ">>=" | "||" | "&&" | "!" | "!=" | "continue")[]
+---Functions that like require.
+---
+---```lua
+---default = {}
+---```
+---@field requireLikeFunction? string[]
+---Require pattern. eg. "?.lua", "?/init.lua"
+---
+---```lua
+---default = {}
+---```
+---@field requirePattern? string[]
+---Special symbols.
+---
+---```lua
+---default = {}
+---```
+---@field special? table
+---Lua version.
+---
+---```lua
+---default = "LuaLatest"
+---```
+---@field version? "LuaJIT2" | "LuaJIT3"|"Lua5.1"|"LuaJIT"|"Lua5.2"|"Lua5.3"|"Lua5.4"|"Lua5.5"|"LuaLatest"
+
+---```lua
+---default = {
+---  enable = true,
+---  renderDocumentationMarkup = true
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.SemanticTokens
+---Enable semantic tokens.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+---Render Markdown/RST in documentation. Set `doc.syntax` for this option to have effect.
+---@field renderDocumentationMarkup? boolean
+
+---```lua
+---default = {
+---  detailSignatureHelper = true
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.Signature
+---Whether to enable signature help.
+---
+---```lua
+---default = true
+---```
+---@field detailSignatureHelper? boolean
+
+---```lua
+---default = {
+---  arrayIndex = true,
+---  docBaseConstMatchBaseType = true,
+---  metaOverrideFileDefine = true,
+---  requirePath = false,
+---  typeCall = false
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.Strict
+---Whether to enable strict mode array indexing.
+---
+---```lua
+---default = true
+---```
+---@field arrayIndex? boolean
+---Base constant types defined in doc can match base types, allowing int to match `---@alias id 1|2|3`, same for string.
+---@field docBaseConstMatchBaseType? boolean
+---meta define overrides file define
+---
+---```lua
+---default = true
+---```
+---@field metaOverrideFileDefine? boolean
+---Whether to enable strict mode require path.
+---@field requirePath? boolean
+---@field typeCall? boolean
+
+---```lua
+---default = {
+---  enableReindex = false,
+---  encoding = "utf-8",
+---  ignoreDir = {},
+---  ignoreGlobs = {},
+---  library = {},
+---  moduleMap = {},
+---  packages = {},
+---  preloadFileSize = 0,
+---  reindexDuration = 5000,
+---  workspaceRoots = {}
+---}
+---```
+---@class _.lspconfig.settings.emmylua_ls.Emmylua.Workspace
+---Enable full project reindex after changing a file.
+---@field enableReindex? boolean
+---Encoding. eg: "utf-8"
+---
+---```lua
+---default = "utf-8"
+---```
+---@field encoding? string
+---Ignore directories.
+---
+---```lua
+---default = {}
+---```
+---@field ignoreDir? string[]
+---Ignore globs. eg: ["**/*.lua"]
+---
+---```lua
+---default = {}
+---```
+---@field ignoreGlobs? string[]
+---Library paths. Can be a string path or an object with path and ignore rules.
+---eg: ["/usr/local/share/lua/5.1"] or [{"path": "/usr/local/share/lua/5.1", "ignoreDir": ["test"], "ignoreGlobs": ["**/*.spec.lua"]}]
+---
+---```lua
+---default = {}
+---```
+---@field library? (string|table)[]
+---Module map. key is regex, value is new module regex
+---eg: {
+---    "^(.*)$": "module_$1"
+---    "^lib(.*)$": "script$1"
+---}
+---
+---```lua
+---default = {}
+---```
+---@field moduleMap? table[]
+---Package directories. Can be a string path or an object with path and ignore rules.
+---Treat the parent directory as a `library`, but only add files from the specified directory.
+---eg: ["/usr/local/share/lua/5.1/module"] or [{"path": "/usr/local/share/lua/5.1/module", "ignoreDir": ["test"], "ignoreGlobs": ["**/*.spec.lua"]}]
+---
+---```lua
+---default = {}
+---```
+---@field packages? (string|table)[]
+---```lua
+---default = 0
+---```
+---@field preloadFileSize? integer
+---Delay between changing a file and full project reindex, in milliseconds.
+---
+---```lua
+---default = 5000
+---```
+---@field reindexDuration? integer
+---Workspace roots. eg: ["src", "test"]
+---
+---```lua
+---default = {}
+---```
+---@field workspaceRoots? string[]
+
+---@class _.lspconfig.settings.emmylua_ls.Emmylua
+---```lua
+---default = {}
+---```
+---@field codeAction? _.lspconfig.settings.emmylua_ls.Emmylua.CodeAction
+---```lua
+---default = {
+---  enable = true
+---}
+---```
+---@field codeLens? _.lspconfig.settings.emmylua_ls.Emmylua.CodeLens
+---Configuration for EmmyLua code completion.
+---
+---```lua
+---default = {
+---  autoRequire = true,
+---  autoRequireFunction = "require",
+---  autoRequireNamingConvention = "keep",
+---  autoRequireSeparator = ".",
+---  baseFunctionIncludesName = true,
+---  callSnippet = false,
+---  enable = true,
+---  postfix = "@"
+---}
+---```
+---@field completion? _.lspconfig.settings.emmylua_ls.Emmylua.Completion
+---Represents the diagnostic configuration for Emmyrc.
+---
+---```lua
+---default = {
+---  diagnosticInterval = 500,
+---  disable = {},
+---  enable = true,
+---  enables = {},
+---  globals = {},
+---  globalsRegex = {},
+---  severity = vim.empty_dict()
+---}
+---```
+---@field diagnostics? _.lspconfig.settings.emmylua_ls.Emmylua.Diagnostics
+---```lua
+---default = {
+---  knownTags = {},
+---  privateName = {},
+---  syntax = "md"
+---}
+---```
+---@field doc? _.lspconfig.settings.emmylua_ls.Emmylua.Doc
+---```lua
+---default = {
+---  enable = true
+---}
+---```
+---@field documentColor? _.lspconfig.settings.emmylua_ls.Emmylua.DocumentColor
+---```lua
+---default = {
+---  useDiff = false
+---}
+---```
+---@field format? _.lspconfig.settings.emmylua_ls.Emmylua.Format
+---```lua
+---default = {
+---  enable = true,
+---  enumParamHint = false,
+---  indexHint = true,
+---  localHint = true,
+---  metaCallHint = true,
+---  overrideHint = true,
+---  paramHint = true
+---}
+---```
+---@field hint? _.lspconfig.settings.emmylua_ls.Emmylua.Hint
+---```lua
+---default = {
+---  enable = true
+---}
+---```
+---@field hover? _.lspconfig.settings.emmylua_ls.Emmylua.Hover
+---```lua
+---default = {
+---  enable = true
+---}
+---```
+---@field inlineValues? _.lspconfig.settings.emmylua_ls.Emmylua.InlineValues
+---```lua
+---default = {
+---  enable = true,
+---  fuzzySearch = true,
+---  shortStringSearch = false
+---}
+---```
+---@field references? _.lspconfig.settings.emmylua_ls.Emmylua.References
+---```lua
+---default = {
+---  paths = {}
+---}
+---```
+---@field resource? _.lspconfig.settings.emmylua_ls.Emmylua.Resource
+---```lua
+---default = {
+---  extensions = {},
+---  frameworkVersions = {},
+---  nonstandardSymbol = {},
+---  requireLikeFunction = {},
+---  requirePattern = {},
+---  special = vim.empty_dict(),
+---  version = "LuaLatest"
+---}
+---```
+---@field runtime? _.lspconfig.settings.emmylua_ls.Emmylua.Runtime
+---```lua
+---default = {
+---  enable = true,
+---  renderDocumentationMarkup = true
+---}
+---```
+---@field semanticTokens? _.lspconfig.settings.emmylua_ls.Emmylua.SemanticTokens
+---```lua
+---default = {
+---  detailSignatureHelper = true
+---}
+---```
+---@field signature? _.lspconfig.settings.emmylua_ls.Emmylua.Signature
+---```lua
+---default = {
+---  arrayIndex = true,
+---  docBaseConstMatchBaseType = true,
+---  metaOverrideFileDefine = true,
+---  requirePath = false,
+---  typeCall = false
+---}
+---```
+---@field strict? _.lspconfig.settings.emmylua_ls.Emmylua.Strict
+---```lua
+---default = {
+---  enableReindex = false,
+---  encoding = "utf-8",
+---  ignoreDir = {},
+---  ignoreGlobs = {},
+---  library = {},
+---  moduleMap = {},
+---  packages = {},
+---  preloadFileSize = 0,
+---  reindexDuration = 5000,
+---  workspaceRoots = {}
+---}
+---```
+---@field workspace? _.lspconfig.settings.emmylua_ls.Emmylua.Workspace
+
+---@class lspconfig.settings.emmylua_ls
+---@field emmylua? _.lspconfig.settings.emmylua_ls.Emmylua
