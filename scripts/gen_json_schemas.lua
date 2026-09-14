@@ -13,6 +13,7 @@ local index = {
   denols = 'https://raw.githubusercontent.com/denoland/vscode_deno/main/package.json',
   elixirls = 'https://raw.githubusercontent.com/elixir-lsp/vscode-elixir-ls/master/package.json',
   elmls = 'https://raw.githubusercontent.com/elm-tooling/elm-language-client-vscode/master/package.json',
+  emmylua_ls = 'https://raw.githubusercontent.com/EmmyLuaLs/emmylua-analyzer-rust/main/crates/emmylua_code_analysis/resources/schema.json',
   eslint = 'https://raw.githubusercontent.com/microsoft/vscode-eslint/main/package.json',
   flow = 'https://raw.githubusercontent.com/flowtype/flow-for-vscode/master/package.json',
   fsautocomplete = 'https://raw.githubusercontent.com/ionide/ionide-vscode-fsharp/main/release/package.json',
@@ -131,6 +132,9 @@ local overrides = {
   },
   cssls = {
     translate = true,
+  },
+  emmylua_ls = {
+    prefix = 'emmylua.',
   },
   nixd = {
     prefix = 'nixd.',
