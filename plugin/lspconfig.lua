@@ -241,7 +241,7 @@ api.nvim_create_user_command('LspRestart', function(info)
       for client_name, tuple in pairs(detach_clients) do
         if require('lspconfig.configs')[client_name] then
           local client, attached_buffers = unpack(tuple)
-          if client.is_stopped() then
+          if client:is_stopped() then
             for _, buf in pairs(attached_buffers) do
               require('lspconfig.configs')[client_name].launch(buf)
             end
