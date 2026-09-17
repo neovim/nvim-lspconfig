@@ -6119,7 +6119,7 @@ Default config:
 - filetypes: >lua
   { "mojo" }
 - root_markers: >lua
-  { ".git" }
+  { { "pixi.toml", "pixi.lock" }, { ".git" } }
 <
 
 ------------------------------------------------------------------------------

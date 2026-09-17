@@ -8332,7 +8332,7 @@ Default config:
   ```
 - `root_markers` :
   ```lua
-  { ".git" }
+  { { "pixi.toml", "pixi.lock" }, { ".git" } }
   ```
 
 ---
