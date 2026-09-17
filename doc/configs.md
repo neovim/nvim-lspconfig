@@ -3705,7 +3705,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "dockerfile", "yaml.docker-compose" }
+  { "dockerfile", "yaml.docker-compose", "hcl.docker-bake" }
   ```
 - `get_language_id`: [../lsp/docker_language_server.lua:11](../lsp/docker_language_server.lua#L11)
 - `root_markers` :

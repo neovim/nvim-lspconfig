@@ -2544,7 +2544,7 @@ Default config:
 - cmd: >lua
   { "docker-language-server", "start", "--stdio" }
 - filetypes: >lua
-  { "dockerfile", "yaml.docker-compose" }
+  { "dockerfile", "yaml.docker-compose", "hcl.docker-bake" }
 - get_language_id (use "gF" to view): ../lsp/docker_language_server.lua:11
 - root_markers: >lua
   { "Dockerfile", "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml", "docker-bake.json", "docker-bake.hcl", "docker-bake.override.json", "docker-bake.override.hcl" }
