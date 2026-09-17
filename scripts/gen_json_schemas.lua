@@ -13,6 +13,7 @@ local index = {
   denols = 'https://raw.githubusercontent.com/denoland/vscode_deno/main/package.json',
   elixirls = 'https://raw.githubusercontent.com/elixir-lsp/vscode-elixir-ls/master/package.json',
   elmls = 'https://raw.githubusercontent.com/elm-tooling/elm-language-client-vscode/master/package.json',
+  emmylua_ls = 'https://raw.githubusercontent.com/EmmyLuaLs/emmylua-analyzer-rust/main/crates/emmylua_code_analysis/resources/schema.json',
   eslint = 'https://raw.githubusercontent.com/microsoft/vscode-eslint/main/package.json',
   flow = 'https://raw.githubusercontent.com/flowtype/flow-for-vscode/master/package.json',
   fsautocomplete = 'https://raw.githubusercontent.com/ionide/ionide-vscode-fsharp/main/release/package.json',
@@ -132,6 +133,9 @@ local overrides = {
   cssls = {
     translate = true,
   },
+  emmylua_ls = {
+    prefix = 'emmylua.',
+  },
   nixd = {
     prefix = 'nixd.',
   },
@@ -154,6 +158,49 @@ local function resolve_schema_configs()
   end
 
   return vim.tbl_deep_extend('force', schemas, overrides)
+end
+
+---Resolve local JSON pointers in a schema node.
+---@param node any
+---@param root table
+---@param resolving? table<string, true>
+---@return any
+local function resolve_local_refs(node, root, resolving)
+  if type(node) ~= 'table' then
+    return node
+  end
+
+  local ref = node['$ref']
+  if type(ref) == 'string' and vim.startswith(ref, '#/') then
+    resolving = resolving or {}
+    if resolving[ref] then
+      error('Cyclic schema reference: ' .. ref)
+    end
+
+    local target = root
+    for part in ref:gmatch('/([^/]+)') do
+      part = part:gsub('~1', '/'):gsub('~0', '~')
+      target = type(target) == 'table' and target[part] or nil
+    end
+    if target == nil then
+      error('Could not resolve schema reference: ' .. ref)
+    end
+
+    resolving[ref] = true
+    local resolved = resolve_local_refs(vim.deepcopy(target), root, resolving)
+    resolving[ref] = nil
+    for key, value in pairs(node) do
+      if key ~= '$ref' then
+        resolved[key] = resolve_local_refs(value, root, resolving)
+      end
+    end
+    return resolved
+  end
+
+  for key, value in pairs(node) do
+    node[key] = resolve_local_refs(value, root, resolving)
+  end
+  return node
 end
 
 ---Replaces localized documentation placeholders in a schema tree in place.
@@ -218,12 +265,18 @@ local function generate_server_schema(schema)
     for _, config_section in pairs(config_schema) do
       if config_section.properties then
         for k, v in pairs(config_section.properties) do
-          properties[k] = v
+          if k ~= '$schema' then
+            properties[k] = resolve_local_refs(v, config_section)
+          end
         end
       end
     end
   elseif config_schema.properties then
-    properties = config_schema.properties
+    for k, v in pairs(config_schema.properties) do
+      if k ~= '$schema' then
+        properties[k] = resolve_local_refs(v, config_schema)
+      end
+    end
   end
 
   -- `properties["enable_snippets"]` => `properties["zls.enable_snippets"]`
