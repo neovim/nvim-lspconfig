@@ -7,11 +7,11 @@
 --- To install, download and extract PowerShellEditorServices.zip
 --- from the [releases](https://github.com/PowerShell/PowerShellEditorServices/releases).
 --- To configure the language server, set the property `bundle_path` to the root
---- of the extracted PowerShellEditorServices.zip.
+--- of the extracted PowerShellEditorServices.zip, e.g. `c:/w/modules`
 ---
 --- ```lua
 --- vim.lsp.config('powershell_es', {
----   bundle_path = 'c:/w/PowerShellEditorServices',
+---   bundle_path = 'c:/w/modules',
 --- })
 --- ```
 ---
@@ -19,7 +19,7 @@
 ---
 --- ```lua
 --- vim.lsp.config('powershell_es', {
----   bundle_path = 'c:/w/PowerShellEditorServices',
+---   bundle_path = 'c:/w/modules',
 ---   shell = 'powershell.exe',
 --- })
 --- ```
@@ -54,9 +54,13 @@ local function make_cmd()
     return nil, string.format("Executable '%s' not found in system PATH.", shell)
   end
 
+  local command = ''
   local bundle_path = vim.lsp.config.powershell_es.bundle_path --[[@as string]]
-  if not bundle_path or bundle_path == '' then
-    local module = 'PowerShellEditorServices'
+  local module = 'PowerShellEditorServices'
+  local script = 'Start-EditorServices.ps1'
+  if bundle_path then
+    command = ([[& '%s/%s/%s']]):format(bundle_path, module, script)
+  else
     -- Let pwsh/powershell find the module path dynamically
     local find_module_cmd = string.format('(Get-Module -ListAvailable -Name %s).ModuleBase', module)
 
@@ -67,9 +71,9 @@ local function make_cmd()
       return nil, string.format('Failed to look up %s module via shell.', module)
     end
 
-    bundle_path = vim.trim(stdout or ''):gsub('\\', '/')
+    local module_path = vim.trim(stdout or ''):gsub('\\', '/')
 
-    if bundle_path == '' then
+    if module_path == '' then
       return nil,
         string.format(
           "PowerShell module '%s' was not found by '%s'. Please check your $env:PSModulePath.",
@@ -77,12 +81,12 @@ local function make_cmd()
           shell
         )
     end
+    command = ([[& '%s/%s']]):format(module_path, script)
   end
-
   local command_fmt =
-    [[& '%s/PowerShellEditorServices/Start-EditorServices.ps1' -BundledModulesPath '%s' -LogPath '%s/powershell_es.log' -SessionDetailsPath '%s/powershell_es.session.json' -FeatureFlags @() -AdditionalModules @() -HostName nvim -HostProfileId 0 -HostVersion 1.0.0 -Stdio -LogLevel Information]]
+    [[ -LogPath '%s/powershell_es.log' -SessionDetailsPath '%s/powershell_es.session.json' -FeatureFlags @() -AdditionalModules @() -HostName nvim -HostProfileId 0 -HostVersion 1.0.0 -Stdio -LogLevel Information]]
   local temp_path = vim.fn.stdpath('cache')
-  local command = command_fmt:format(bundle_path, bundle_path, temp_path, temp_path)
+  command = command .. command_fmt:format(temp_path, temp_path)
 
   return { shell, '-NoLogo', '-NoProfile', '-Command', command }, nil
 end
