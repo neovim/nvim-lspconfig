@@ -10097,11 +10097,11 @@ Language server for PowerShell.
 To install, download and extract PowerShellEditorServices.zip
 from the [releases](https://github.com/PowerShell/PowerShellEditorServices/releases).
 To configure the language server, set the property `bundle_path` to the root
-of the extracted PowerShellEditorServices.zip.
+of the extracted PowerShellEditorServices.zip, e.g. `c:/w/modules`
 
 ```lua
 vim.lsp.config('powershell_es', {
-  bundle_path = 'c:/w/PowerShellEditorServices',
+  bundle_path = 'c:/w/modules',
 })
 ```
 
@@ -10109,7 +10109,7 @@ By default the language server is started in `pwsh` (PowerShell Core). This can 
 
 ```lua
 vim.lsp.config('powershell_es', {
-  bundle_path = 'c:/w/PowerShellEditorServices',
+  bundle_path = 'c:/w/modules',
   shell = 'powershell.exe',
 })
 ```
@@ -10142,7 +10142,7 @@ vim.lsp.enable('powershell_es')
 ```
 
 Default config:
-- `cmd`: [../lsp/powershell_es.lua:91](../lsp/powershell_es.lua#L91)
+- `cmd`: [../lsp/powershell_es.lua:95](../lsp/powershell_es.lua#L95)
 - `filetypes` :
   ```lua
   { "ps1" }
