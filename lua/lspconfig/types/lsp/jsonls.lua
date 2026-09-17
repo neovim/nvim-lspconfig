@@ -35,6 +35,7 @@
 ---  ["https://raw.githubusercontent.com/devcontainers/spec/"] = true,
 ---  ["https://raw.githubusercontent.com/microsoft/vscode/"] = true,
 ---  ["https://schemastore.azurewebsites.net/"] = true,
+---  ["https://spec.openapis.org/"] = true,
 ---  ["https://www.schemastore.org/"] = true
 ---}
 ---```

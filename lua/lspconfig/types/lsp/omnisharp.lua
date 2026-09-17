@@ -486,6 +486,10 @@
 ---```
 ---@field searchReferenceAssemblies? boolean
 
+---@class _.lspconfig.settings.omnisharp.Dotnet.Testing
+---%configuration.dotnet.testing.useSemanticTestDiscovery%
+---@field useSemanticTestDiscovery? boolean
+
 ---@class _.lspconfig.settings.omnisharp.Dotnet.TypeMembers
 ---%configuration.dotnet.typeMembers.memberInsertionLocation%
 ---
@@ -740,6 +744,7 @@
 ---@field quickInfo? _.lspconfig.settings.omnisharp.Dotnet.QuickInfo
 ---@field server? _.lspconfig.settings.omnisharp.Dotnet.Server
 ---@field symbolSearch? _.lspconfig.settings.omnisharp.Dotnet.SymbolSearch
+---@field testing? _.lspconfig.settings.omnisharp.Dotnet.Testing
 ---@field typeMembers? _.lspconfig.settings.omnisharp.Dotnet.TypeMembers
 ---%configuration.dotnet.unitTestDebuggingOptions%
 ---

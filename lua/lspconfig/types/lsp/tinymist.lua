@@ -173,7 +173,11 @@
 ---```
 ---@field formatterPrintWidth? number
 ---%extension.tinymist.config.tinymist.formatterProseWrap.desc%
----@field formatterProseWrap? boolean
+---
+---```lua
+---default = "none"
+---```
+---@field formatterProseWrap? "none" | "fill" | "sentence"|boolean
 ---@field inlayHints? _.lspconfig.settings.tinymist.Tinymist.InlayHints
 ---@field lint? _.lspconfig.settings.tinymist.Tinymist.Lint
 ---%extension.tinymist.config.tinymist.onEnterEvent.desc%
