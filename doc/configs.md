@@ -347,6 +347,7 @@ Nvim by running `:help lspconfig-all`.
 - [swift_mesonls](#swift_mesonls)
 - [symfony_lsp](#symfony_lsp)
 - [syntax_tree](#syntax_tree)
+- [sysml_lsp](#sysml_lsp)
 - [systemd_ls](#systemd_ls)
 - [systemd_lsp](#systemd_lsp)
 - [tabby_ml](#tabby_ml)
@@ -13491,6 +13492,40 @@ Default config:
   ```lua
   { ".streerc", "Gemfile", ".git" }
   ```
+
+---
+
+## sysml_lsp
+
+https://github.com/Open-MBEE/OpenSysML
+
+SysML v2 and KerML language server from OpenSysML.
+
+Install from the release archives, or with Go:
+
+```sh
+go install github.com/Open-MBEE/OpenSysML/cmd/sysml-lsp@latest
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('sysml_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "sysml-lsp", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "sysml", "kerml" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".git" }
+  ```
+- `workspace_required` : `false`
 
 ---
 
