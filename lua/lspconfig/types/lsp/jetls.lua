@@ -184,6 +184,16 @@
 ---default = {}
 ---```
 ---@field initializationOptions? _.lspconfig.settings.jetls.JetlsClient.InitializationOptions
+---Optional parent directory for managed JETLS storage. Leave empty to use the extension's VS Code global storage directory on all platforms, including portable installations. If installation fails with a Windows path-length error, choose a short, writable absolute path such as `C:/jetls`.
+---
+---Use a literal path on the extension host; environment variables and `~` are not expanded. Paths must not contain Julia's path-list separator (`;` on Windows, `:` elsewhere). The extension adds a short storage-specific subdirectory to keep separate VS Code installations isolated.
+---
+---A new location requires a fresh installation; existing depots are not moved or deleted. Ignored when using a custom executable.
+---
+---```lua
+---default = ""
+---```
+---@field managedStoragePath? string
 ---JETLS server configuration settings. See [Configuration documentation](https://aviatesk.github.io/JETLS.jl/release/configuration/) for detailed information.
 ---
 ---```lua
