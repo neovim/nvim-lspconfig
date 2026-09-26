@@ -30,6 +30,7 @@ return {
     'html',
     'java',
     'javascript',
+    'jjdescription',
     'lua',
     'markdown',
     'nix',
