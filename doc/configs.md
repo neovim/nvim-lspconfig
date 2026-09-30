@@ -22,6 +22,7 @@ Nvim by running `:help lspconfig-all`.
 - [astro](#astro)
 - [atlas](#atlas)
 - [atopile](#atopile)
+- [autocorrect](#autocorrect)
 - [autohotkey_lsp](#autohotkey_lsp)
 - [autotools_ls](#autotools_ls)
 - [awk_ls](#awk_ls)
@@ -1248,6 +1249,37 @@ Default config:
 - `root_markers` :
   ```lua
   { "ato.yaml", ".ato", ".git" }
+  ```
+
+---
+
+## autocorrect
+
+https://github.com/huacnlee/autocorrect
+
+AutoCorrect checks and fixes spacing, punctuation, and spelling between CJK (Chinese, Japanese, Korean) and English
+text. It checks the strings and comments of source files, and the full text of Markdown and plain text files.
+
+`autocorrect` can be installed with Homebrew:
+```sh
+brew install autocorrect
+```
+
+Or downloaded from the [GitHub releases page](https://github.com/huacnlee/autocorrect/releases).
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('autocorrect')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "autocorrect", "server" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".autocorrectrc", ".autocorrectignore", ".git" }
   ```
 
 ---
