@@ -131,12 +131,18 @@
 
 ---TestRunner integration configuration. See [TestRunner integration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/testrunner).
 ---@class _.lspconfig.settings.jetls.JetlsClient.Settings.Testrunner
----Path to the TestRunner.jl executable. Defaults to `testrunner` (or `testrunner.bat` on Windows).
+---Environment variables for the TestRunner.jl process. `JULIA_APPS_JULIA_CMD` selects the Julia executable to run tests with, and `JULIAUP_CHANNEL` selects a [juliaup](https://github.com/JuliaLang/juliaup) channel of the `julia` command; tests run with the Julia running JETLS otherwise. `JULIA_DEPOT_PATH`, `JULIA_LOAD_PATH`, and `JULIA_PROJECT` cannot be set. See [`testrunner.env`](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/testrunner/env).
 ---
 ---```lua
----default = "testrunner"
+---default = {}
 ---```
----@field executable? string
+---@field env? table
+---Additional command-line options for the Julia process that runs tests (e.g. `["--threads=4"]`). See [`testrunner.julia_args`](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/testrunner/julia_args).
+---
+---```lua
+---default = {}
+---```
+---@field julia_args? string[]
 
 ---JETLS server configuration settings. See [Configuration documentation](https://aviatesk.github.io/JETLS.jl/release/configuration/) for detailed information.
 ---
