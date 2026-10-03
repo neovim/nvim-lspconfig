@@ -66,6 +66,7 @@ local index = {
   tailwindcss = 'https://raw.githubusercontent.com/tailwindlabs/tailwindcss-intellisense/master/packages/vscode-tailwindcss/package.json',
   terraformls = 'https://raw.githubusercontent.com/hashicorp/vscode-terraform/master/package.json',
   tinymist = 'https://raw.githubusercontent.com/Myriad-Dreamin/tinymist/refs/heads/main/editors/vscode/package.json',
+  tombi = 'https://raw.githubusercontent.com/tombi-toml/tombi/refs/heads/main/www.schemastore.org/tombi.json',
   ts_ls = 'https://raw.githubusercontent.com/microsoft/vscode/main/extensions/typescript-language-features/package.json',
   typst_lsp = 'https://raw.githubusercontent.com/nvarner/typst-lsp/refs/heads/master/editors/vscode/package.json',
   volar = 'https://raw.githubusercontent.com/vuejs/language-tools/master/extensions/vscode/package.json',
