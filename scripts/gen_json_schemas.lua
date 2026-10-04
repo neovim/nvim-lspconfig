@@ -160,8 +160,10 @@ local function resolve_schema_configs()
   return vim.tbl_deep_extend('force', schemas, overrides)
 end
 
----Resolve local JSON pointers in a schema node.
+---Resolve local JSON pointer references in a schema node.
 ---For root `{"$defs":{"port":{"type":"integer"}}}`, `{"$ref":"#/$defs/port"}` => `{"type":"integer"}`.
+---`#` => `root`; `#/items/0` => `root.items[1]`.
+---`#/foo//bar` => `root.foo[''].bar`; `#/%24defs/port` => `root['$defs'].port`.
 ---@param node any
 ---@param root table
 ---@param resolving? table<string, true>
@@ -172,7 +174,11 @@ local function resolve_local_refs(node, root, resolving)
   end
 
   local ref = node['$ref']
-  if type(ref) ~= 'string' or not vim.startswith(ref, '#/') then
+  local pointer
+  if type(ref) == 'string' and vim.startswith(ref, '#') then
+    pointer = vim.uri_decode(ref:sub(2))
+  end
+  if pointer == nil or (pointer ~= '' and not vim.startswith(pointer, '/')) then
     for key, value in pairs(node) do
       node[key] = resolve_local_refs(value, root, resolving)
     end
@@ -186,12 +192,23 @@ local function resolve_local_refs(node, root, resolving)
 
   local target = root
   -- `#/$defs/foo~1bar~0baz` resolves to `root['$defs']['foo/bar~baz']` (`~1` escapes `/`, `~0` escapes `~`).
-  for part in ref:gmatch('/([^/]+)') do
-    part = part:gsub('~1', '/'):gsub('~0', '~')
-    if type(target) ~= 'table' or target[part] == nil then
+  for part in pointer:gmatch('/([^/]*)') do
+    local token = part:gsub('~1', '/'):gsub('~0', '~')
+    ---@type string|integer
+    local key = token
+    if type(target) ~= 'table' then
       error('Could not resolve schema reference: ' .. ref)
     end
-    target = target[part]
+    if vim.islist(target) then
+      if token ~= '0' and not token:match('^[1-9]%d*$') then
+        error('Could not resolve schema reference: ' .. ref)
+      end
+      key = assert(tonumber(token)) + 1
+    end
+    if target[key] == nil then
+      error('Could not resolve schema reference: ' .. ref)
+    end
+    target = target[key]
   end
 
   resolving[ref] = true
