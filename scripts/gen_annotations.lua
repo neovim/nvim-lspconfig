@@ -276,7 +276,7 @@ local function lua_type_for(prop)
       return
     end
     if t == 'array' then
-      if prop.items then
+      if type(prop.items) == 'table' then
         local item_type = lua_type_for(prop.items)
         if item_type:find('|', 1, true) then
           item_type = '(' .. item_type .. ')'
