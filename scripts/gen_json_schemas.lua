@@ -216,6 +216,11 @@ local function resolve_local_refs(node, root, resolving)
   resolving[ref] = nil
   for key, value in pairs(node) do
     if key ~= '$ref' then
+      if type(resolved) ~= 'table' or resolved[key] ~= nil then
+        -- TODO: Preserve conflicting constraints with `allOf` once annotation generation supports it.
+        -- See https://json-schema.org/draft/2020-12/json-schema-core#section-8.2.3.1.
+        error(('Cannot merge schema reference sibling %q: %s'):format(key, ref))
+      end
       resolved[key] = resolve_local_refs(value, root, resolving)
     end
   end
