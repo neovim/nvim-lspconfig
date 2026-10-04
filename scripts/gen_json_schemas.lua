@@ -161,6 +161,7 @@ local function resolve_schema_configs()
 end
 
 ---Resolve local JSON pointers in a schema node.
+---For root `{"$defs":{"port":{"type":"integer"}}}`, `{"$ref":"#/$defs/port"}` => `{"type":"integer"}`.
 ---@param node any
 ---@param root table
 ---@param resolving? table<string, true>
@@ -171,36 +172,37 @@ local function resolve_local_refs(node, root, resolving)
   end
 
   local ref = node['$ref']
-  if type(ref) == 'string' and vim.startswith(ref, '#/') then
-    resolving = resolving or {}
-    if resolving[ref] then
-      error('Cyclic schema reference: ' .. ref)
+  if type(ref) ~= 'string' or not vim.startswith(ref, '#/') then
+    for key, value in pairs(node) do
+      node[key] = resolve_local_refs(value, root, resolving)
     end
+    return node
+  end
 
-    local target = root
-    for part in ref:gmatch('/([^/]+)') do
-      part = part:gsub('~1', '/'):gsub('~0', '~')
-      target = type(target) == 'table' and target[part] or nil
-    end
-    if target == nil then
+  resolving = resolving or {}
+  if resolving[ref] then
+    error('Cyclic schema reference: ' .. ref)
+  end
+
+  local target = root
+  -- `#/$defs/foo~1bar~0baz` resolves to `root['$defs']['foo/bar~baz']` (`~1` escapes `/`, `~0` escapes `~`).
+  for part in ref:gmatch('/([^/]+)') do
+    part = part:gsub('~1', '/'):gsub('~0', '~')
+    if type(target) ~= 'table' or target[part] == nil then
       error('Could not resolve schema reference: ' .. ref)
     end
-
-    resolving[ref] = true
-    local resolved = resolve_local_refs(vim.deepcopy(target), root, resolving)
-    resolving[ref] = nil
-    for key, value in pairs(node) do
-      if key ~= '$ref' then
-        resolved[key] = resolve_local_refs(value, root, resolving)
-      end
-    end
-    return resolved
+    target = target[part]
   end
 
+  resolving[ref] = true
+  local resolved = resolve_local_refs(vim.deepcopy(target), root, resolving)
+  resolving[ref] = nil
   for key, value in pairs(node) do
-    node[key] = resolve_local_refs(value, root, resolving)
+    if key ~= '$ref' then
+      resolved[key] = resolve_local_refs(value, root, resolving)
+    end
   end
-  return node
+  return resolved
 end
 
 ---Replaces localized documentation placeholders in a schema tree in place.

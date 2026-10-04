@@ -259,6 +259,8 @@ local function lua_type_for(prop)
     return vim.inspect(prop.const)
   end
   local types = type(prop.type) == 'table' and prop.type or { prop.type }
+  -- Convert `anyOf`/`oneOf` to a union, excluding null:
+  -- `{ anyOf = { { type = 'string' }, { type = 'number' }, { type = 'null' } } }` => `string|number`.
   local alternatives = prop.anyOf or prop.oneOf
   if vim.tbl_isempty(types) and type(alternatives) == 'table' then
     local alternative_types = {}
