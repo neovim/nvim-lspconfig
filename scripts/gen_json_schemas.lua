@@ -13,6 +13,7 @@ local index = {
   denols = 'https://raw.githubusercontent.com/denoland/vscode_deno/main/package.json',
   elixirls = 'https://raw.githubusercontent.com/elixir-lsp/vscode-elixir-ls/master/package.json',
   elmls = 'https://raw.githubusercontent.com/elm-tooling/elm-language-client-vscode/master/package.json',
+  emmylua_ls = 'https://raw.githubusercontent.com/EmmyLuaLs/emmylua-analyzer-rust/main/crates/emmylua_code_analysis/resources/schema.json',
   eslint = 'https://raw.githubusercontent.com/microsoft/vscode-eslint/main/package.json',
   flow = 'https://raw.githubusercontent.com/flowtype/flow-for-vscode/master/package.json',
   fsautocomplete = 'https://raw.githubusercontent.com/ionide/ionide-vscode-fsharp/main/release/package.json',
@@ -132,6 +133,9 @@ local overrides = {
   cssls = {
     translate = true,
   },
+  emmylua_ls = {
+    prefix = 'emmylua.',
+  },
   nixd = {
     prefix = 'nixd.',
   },
@@ -154,6 +158,73 @@ local function resolve_schema_configs()
   end
 
   return vim.tbl_deep_extend('force', schemas, overrides)
+end
+
+---Resolve local JSON pointer references in a schema node.
+---For root `{"$defs":{"port":{"type":"integer"}}}`, `{"$ref":"#/$defs/port"}` => `{"type":"integer"}`.
+---`#` => `root`; `#/items/0` => `root.items[1]`.
+---`#/foo//bar` => `root.foo[''].bar`; `#/%24defs/port` => `root['$defs'].port`.
+---@param node any
+---@param root table
+---@param resolving? table<string, true>
+---@return any
+local function resolve_local_refs(node, root, resolving)
+  if type(node) ~= 'table' then
+    return node
+  end
+
+  local ref = node['$ref']
+  local pointer
+  if type(ref) == 'string' and vim.startswith(ref, '#') then
+    pointer = vim.uri_decode(ref:sub(2))
+  end
+  if pointer == nil or (pointer ~= '' and not vim.startswith(pointer, '/')) then
+    for key, value in pairs(node) do
+      node[key] = resolve_local_refs(value, root, resolving)
+    end
+    return node
+  end
+
+  resolving = resolving or {}
+  if resolving[ref] then
+    error('Cyclic schema reference: ' .. ref)
+  end
+
+  local target = root
+  -- `#/$defs/foo~1bar~0baz` resolves to `root['$defs']['foo/bar~baz']` (`~1` escapes `/`, `~0` escapes `~`).
+  for part in pointer:gmatch('/([^/]*)') do
+    local token = part:gsub('~1', '/'):gsub('~0', '~')
+    ---@type string|integer
+    local key = token
+    if type(target) ~= 'table' then
+      error('Could not resolve schema reference: ' .. ref)
+    end
+    if vim.islist(target) then
+      if token ~= '0' and not token:match('^[1-9]%d*$') then
+        error('Could not resolve schema reference: ' .. ref)
+      end
+      key = assert(tonumber(token)) + 1
+    end
+    if target[key] == nil then
+      error('Could not resolve schema reference: ' .. ref)
+    end
+    target = target[key]
+  end
+
+  resolving[ref] = true
+  local resolved = resolve_local_refs(vim.deepcopy(target), root, resolving)
+  resolving[ref] = nil
+  for key, value in pairs(node) do
+    if key ~= '$ref' then
+      if type(resolved) ~= 'table' or resolved[key] ~= nil then
+        -- TODO: Preserve conflicting constraints with `allOf` once annotation generation supports it.
+        -- See https://json-schema.org/draft/2020-12/json-schema-core#section-8.2.3.1.
+        error(('Cannot merge schema reference sibling %q: %s'):format(key, ref))
+      end
+      resolved[key] = resolve_local_refs(value, root, resolving)
+    end
+  end
+  return resolved
 end
 
 ---Replaces localized documentation placeholders in a schema tree in place.
@@ -218,12 +289,18 @@ local function generate_server_schema(schema)
     for _, config_section in pairs(config_schema) do
       if config_section.properties then
         for k, v in pairs(config_section.properties) do
-          properties[k] = v
+          if k ~= '$schema' then
+            properties[k] = resolve_local_refs(v, config_section)
+          end
         end
       end
     end
   elseif config_schema.properties then
-    properties = config_schema.properties
+    for k, v in pairs(config_schema.properties) do
+      if k ~= '$schema' then
+        properties[k] = resolve_local_refs(v, config_schema)
+      end
+    end
   end
 
   -- `properties["enable_snippets"]` => `properties["zls.enable_snippets"]`
