@@ -6,243 +6,243 @@
 ---```lua
 ---default = "off"
 ---```
----@field conjugationAtStartOfSentence? "on" | "off"
+---@field conjugationAtStartOfSentence? "on"|"off"
 ---Suggests ways to sound more natural and fluent.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field fluency? "on" | "off"
+---@field fluency? "on"|"off"
 ---Flags use of personal pronouns such as "I" and "you" in academic writing.
 ---
 ---```lua
 ---default = "off"
 ---```
----@field informalPronounsAcademic? "on" | "off"
+---@field informalPronounsAcademic? "on"|"off"
 ---Suggests adding missing spacing after a numeral when writing times.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field missingSpaces? "on" | "off"
+---@field missingSpaces? "on"|"off"
 ---Flags a series of nouns that modify a final noun.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field nounStrings? "on" | "off"
+---@field nounStrings? "on"|"off"
 ---Suggests spelling out numbers at the beginning of sentences.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field numbersBeginningSentences? "on" | "off"
+---@field numbersBeginningSentences? "on"|"off"
 ---Suggests spelling out numbers zero through ten.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field numbersZeroThroughTen? "on" | "off"
+---@field numbersZeroThroughTen? "on"|"off"
 ---Suggests adding the Oxford comma after the second-to-last item in a list of things.
 ---
 ---```lua
 ---default = "off"
 ---```
----@field oxfordComma? "on" | "off"
+---@field oxfordComma? "on"|"off"
 ---Flags use of passive voice.
 ---
 ---```lua
 ---default = "off"
 ---```
----@field passiveVoice? "on" | "off"
+---@field passiveVoice? "on"|"off"
 ---Suggests using person-first language to refer respectfully to an individual with a disability.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field personFirstLanguage? "on" | "off"
+---@field personFirstLanguage? "on"|"off"
 ---Suggests alternatives to potentially biased language related to older adults.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field possiblyBiasedLanguageAgeRelated? "on" | "off"
+---@field possiblyBiasedLanguageAgeRelated? "on"|"off"
 ---Suggests alternatives to potentially ableist language.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field possiblyBiasedLanguageDisabilityRelated? "on" | "off"
+---@field possiblyBiasedLanguageDisabilityRelated? "on"|"off"
 ---Suggests alternatives to potentially biased language related to parenting and family systems.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field possiblyBiasedLanguageFamilyRelated? "on" | "off"
+---@field possiblyBiasedLanguageFamilyRelated? "on"|"off"
 ---Suggests alternatives to potentially gender-biased and non-inclusive phrasing.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field possiblyBiasedLanguageGenderRelated? "on" | "off"
+---@field possiblyBiasedLanguageGenderRelated? "on"|"off"
 ---Suggests alternatives to language related to human slavery.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field possiblyBiasedLanguageHumanRights? "on" | "off"
+---@field possiblyBiasedLanguageHumanRights? "on"|"off"
 ---Suggests alternatives to terms with origins in the institution of slavery.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field possiblyBiasedLanguageHumanRightsRelated? "on" | "off"
+---@field possiblyBiasedLanguageHumanRightsRelated? "on"|"off"
 ---Flags LGBTQIA+-related terms that may be seen as biased, outdated, or disrespectful in some contexts.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field possiblyBiasedLanguageLGBTQIARelated? "on" | "off"
+---@field possiblyBiasedLanguageLGBTQIARelated? "on"|"off"
 ---Suggests alternatives to potentially biased language related to race and ethnicity.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field possiblyBiasedLanguageRaceEthnicityRelated? "on" | "off"
+---@field possiblyBiasedLanguageRaceEthnicityRelated? "on"|"off"
 ---Suggests alternatives to language that may be considered politically incorrect.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field possiblyPoliticallyIncorrectLanguage? "on" | "off"
+---@field possiblyPoliticallyIncorrectLanguage? "on"|"off"
 ---Flags use of prepositions such as "with" and "in" at the end of sentences.
 ---
 ---```lua
 ---default = "off"
 ---```
----@field prepositionAtTheEndOfSentence? "on" | "off"
+---@field prepositionAtTheEndOfSentence? "on"|"off"
 ---Suggests placing punctuation before closing quotation marks.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field punctuationWithQuotation? "on" | "off"
+---@field punctuationWithQuotation? "on"|"off"
 ---Flags long, complicated sentences that could potentially confuse your reader.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field readabilityFillerWords? "on" | "off"
+---@field readabilityFillerWords? "on"|"off"
 ---Suggests splitting long, complicated sentences that could potentially confuse your reader.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field readabilityTransforms? "on" | "off"
+---@field readabilityTransforms? "on"|"off"
 ---Flags series of sentences that follow the same pattern.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field sentenceVariety? "on" | "off"
+---@field sentenceVariety? "on"|"off"
 ---Suggests removing extra spaces surrounding a slash.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field spacesSurroundingSlash? "on" | "off"
+---@field spacesSurroundingSlash? "on"|"off"
 ---Suggests rewriting split infinitives so that an adverb doesn't come between "to" and the verb.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field splitInfinitive? "on" | "off"
+---@field splitInfinitive? "on"|"off"
 ---Suggests completing all incomplete sentences, including stylistic sentence fragments that may be intentional.
 ---
 ---```lua
 ---default = "off"
 ---```
----@field stylisticFragments? "on" | "off"
+---@field stylisticFragments? "on"|"off"
 ---Flags unnecessary use of ellipses (...).
 ---
 ---```lua
 ---default = "off"
 ---```
----@field unnecessaryEllipses? "on" | "off"
+---@field unnecessaryEllipses? "on"|"off"
 ---Suggests alternatives to words that occur frequently in the same paragraph.
 ---
 ---```lua
 ---default = "on"
 ---```
----@field variety? "on" | "off"
+---@field variety? "on"|"off"
 ---Suggests alternatives to bland and overused words such as "good" and "nice".
 ---
 ---```lua
 ---default = "on"
 ---```
----@field vocabulary? "on" | "off"
+---@field vocabulary? "on"|"off"
 
 ---@class _.lspconfig.settings.grammarly.Grammarly.Config.Suggestions
 ---Flags use of conjunctions such as 'but' and 'and' at the beginning of sentences.
----@field ConjunctionAtStartOfSentence? true | false
+---@field ConjunctionAtStartOfSentence? true|false
 ---Suggests ways to sound more natural and fluent.
----@field Fluency? true | false
+---@field Fluency? true|false
 ---Flags use of personal pronouns such as 'I' and 'you' in academic writing.
----@field InformalPronounsAcademic? true | false
+---@field InformalPronounsAcademic? true|false
 ---Suggests adding missing spacing after a numeral when writing times.
----@field MissingSpaces? true | false
+---@field MissingSpaces? true|false
 ---Flags a series of nouns that modify a final noun.
----@field NounStrings? true | false
+---@field NounStrings? true|false
 ---Suggests spelling out numbers at the beginning of sentences.
----@field NumbersBeginningSentences? true | false
+---@field NumbersBeginningSentences? true|false
 ---Suggests spelling out numbers zero through ten.
----@field NumbersZeroThroughTen? true | false
+---@field NumbersZeroThroughTen? true|false
 ---Suggests adding the Oxford comma after the second-to-last item in a list of things.
----@field OxfordComma? true | false
+---@field OxfordComma? true|false
 ---Flags use of passive voice.
----@field PassiveVoice? true | false
+---@field PassiveVoice? true|false
 ---Suggests using person-first language to refer respectfully to an individual with a disability.
----@field PersonFirstLanguage? true | false
+---@field PersonFirstLanguage? true|false
 ---Suggests alternatives to potentially biased language related to older adults.
----@field PossiblyBiasedLanguageAgeRelated? true | false
+---@field PossiblyBiasedLanguageAgeRelated? true|false
 ---Suggests alternatives to potentially ableist language.
----@field PossiblyBiasedLanguageDisabilityRelated? true | false
+---@field PossiblyBiasedLanguageDisabilityRelated? true|false
 ---Suggests alternatives to potentially biased language related to parenting and family systems.
----@field PossiblyBiasedLanguageFamilyRelated? true | false
+---@field PossiblyBiasedLanguageFamilyRelated? true|false
 ---Suggests alternatives to potentially gender-biased and non-inclusive phrasing.
----@field PossiblyBiasedLanguageGenderRelated? true | false
+---@field PossiblyBiasedLanguageGenderRelated? true|false
 ---Suggests alternatives to language related to human slavery.
----@field PossiblyBiasedLanguageHumanRights? true | false
+---@field PossiblyBiasedLanguageHumanRights? true|false
 ---Suggests alternatives to terms with origins in the institution of slavery.
----@field PossiblyBiasedLanguageHumanRightsRelated? true | false
+---@field PossiblyBiasedLanguageHumanRightsRelated? true|false
 ---Flags LGBTQIA+-related terms that may be seen as biased, outdated, or disrespectful in some contexts.
----@field PossiblyBiasedLanguageLgbtqiaRelated? true | false
+---@field PossiblyBiasedLanguageLgbtqiaRelated? true|false
 ---Suggests alternatives to potentially biased language related to race and ethnicity.
----@field PossiblyBiasedLanguageRaceEthnicityRelated? true | false
+---@field PossiblyBiasedLanguageRaceEthnicityRelated? true|false
 ---Suggests alternatives to language that may be considered politically incorrect.
----@field PossiblyPoliticallyIncorrectLanguage? true | false
+---@field PossiblyPoliticallyIncorrectLanguage? true|false
 ---Flags use of prepositions such as 'with' and 'in' at the end of sentences.
----@field PrepositionAtTheEndOfSentence? true | false
+---@field PrepositionAtTheEndOfSentence? true|false
 ---Suggests placing punctuation before closing quotation marks.
----@field PunctuationWithQuotation? true | false
+---@field PunctuationWithQuotation? true|false
 ---Flags long, complicated sentences that could potentially confuse your reader.
----@field ReadabilityFillerwords? true | false
+---@field ReadabilityFillerwords? true|false
 ---Suggests splitting long, complicated sentences that could potentially confuse your reader.
----@field ReadabilityTransforms? true | false
+---@field ReadabilityTransforms? true|false
 ---Flags series of sentences that follow the same pattern.
----@field SentenceVariety? true | false
+---@field SentenceVariety? true|false
 ---Suggests removing extra spaces surrounding a slash.
----@field SpacesSurroundingSlash? true | false
+---@field SpacesSurroundingSlash? true|false
 ---Suggests rewriting split infinitives so that an adverb doesn't come between 'to' and the verb.
----@field SplitInfinitive? true | false
+---@field SplitInfinitive? true|false
 ---Suggests completing all incomplete sentences, including stylistic sentence fragments that may be intentional.
----@field StylisticFragments? true | false
+---@field StylisticFragments? true|false
 ---Flags unnecessary use of ellipses (...).
----@field UnnecessaryEllipses? true | false
+---@field UnnecessaryEllipses? true|false
 ---Suggests alternatives to words that occur frequently in the same paragraph.
----@field Variety? true | false
+---@field Variety? true|false
 ---Suggests alternatives to bland and overused words such as 'good' and 'nice'.
----@field Vocabulary? true | false
+---@field Vocabulary? true|false
 
 ---@class _.lspconfig.settings.grammarly.Grammarly.Config
 ---Specific variety of English being written. See [this article](https://support.grammarly.com/hc/en-us/articles/115000089992-Select-between-British-English-American-English-Canadian-English-and-Australian-English) for differences.
@@ -250,13 +250,13 @@
 ---```lua
 ---default = "auto-text"
 ---```
----@field documentDialect? "american" | "australian" | "british" | "canadian" | "auto-text"
+---@field documentDialect? "american"|"australian"|"british"|"canadian"|"auto-text"
 ---The style or type of writing to be checked. See [What is domain/document type](https://support.grammarly.com/hc/en-us/articles/115000091472-What-is-domain-document-type-)?
 ---
 ---```lua
 ---default = "general"
 ---```
----@field documentDomain? "academic" | "business" | "general" | "mail" | "casual" | "creative"
+---@field documentDomain? "academic"|"business"|"general"|"mail"|"casual"|"creative"
 ---@field suggestionCategories? _.lspconfig.settings.grammarly.Grammarly.Config.SuggestionCategories
 ---@field suggestions? _.lspconfig.settings.grammarly.Grammarly.Config.Suggestions
 

@@ -73,7 +73,7 @@
 ---```lua
 ---default = "info"
 ---```
----@field logLevel? "error" | "warn" | "info" | "log"
+---@field logLevel? "error"|"warn"|"info"|"log"
 ---Path to the directory where platform-specific ReScript binaries are. You can use it if you haven't or don't want to use the installed ReScript from node_modules in your project.
 ---@field platformPath? string
 ---Optional path to the directory containing the @rescript/runtime package. Set this if your tooling is unable to automatically locate the package in your project.

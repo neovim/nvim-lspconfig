@@ -101,7 +101,7 @@
 ---```lua
 ---default = "kebab"
 ---```
----@field tagCasing? "initial" | "kebab"
+---@field tagCasing? "initial"|"kebab"
 
 ---@class _.lspconfig.settings.vue_ls.Vetur.Dev
 ---Log level for VLS
@@ -109,7 +109,7 @@
 ---```lua
 ---default = "INFO"
 ---```
----@field logLevel? "INFO" | "DEBUG"
+---@field logLevel? "INFO"|"DEBUG"
 ---Path to vls for Vetur developers. There are two ways of using it. 
 ---
 ---1. Clone vuejs/vetur from GitHub, build it and point it to the ABSOLUTE path of `/server`.
@@ -132,61 +132,61 @@
 ---```lua
 ---default = "prettier"
 ---```
----@field css? "none" | "prettier"
+---@field css? "none"|"prettier"
 ---Default formatter for <template> region
 ---
 ---```lua
 ---default = "prettier"
 ---```
----@field html? "none" | "prettyhtml" | "js-beautify-html" | "prettier"
+---@field html? "none"|"prettyhtml"|"js-beautify-html"|"prettier"
 ---Default formatter for <script> region
 ---
 ---```lua
 ---default = "prettier"
 ---```
----@field js? "none" | "prettier" | "prettier-eslint" | "vscode-typescript"
+---@field js? "none"|"prettier"|"prettier-eslint"|"vscode-typescript"
 ---Default formatter for <style lang='less'> region
 ---
 ---```lua
 ---default = "prettier"
 ---```
----@field less? "none" | "prettier"
+---@field less? "none"|"prettier"
 ---Default formatter for <style lang='postcss'> region
 ---
 ---```lua
 ---default = "prettier"
 ---```
----@field postcss? "none" | "prettier"
+---@field postcss? "none"|"prettier"
 ---Default formatter for <template lang='pug'> region
 ---
 ---```lua
 ---default = "prettier"
 ---```
----@field pug? "none" | "prettier"
+---@field pug? "none"|"prettier"
 ---Default formatter for <style lang='sass'> region
 ---
 ---```lua
 ---default = "sass-formatter"
 ---```
----@field sass? "none" | "sass-formatter"
+---@field sass? "none"|"sass-formatter"
 ---Default formatter for <style lang='scss'> region
 ---
 ---```lua
 ---default = "prettier"
 ---```
----@field scss? "none" | "prettier"
+---@field scss? "none"|"prettier"
 ---Default formatter for <style lang='stylus'> region
 ---
 ---```lua
 ---default = "stylus-supremacy"
 ---```
----@field stylus? "none" | "stylus-supremacy"
+---@field stylus? "none"|"stylus-supremacy"
 ---Default formatter for <script> region
 ---
 ---```lua
 ---default = "prettier"
 ---```
----@field ts? "none" | "prettier" | "prettier-tslint" | "vscode-typescript"
+---@field ts? "none"|"prettier"|"prettier-tslint"|"vscode-typescript"
 
 ---Global prettier config used by prettier formatter. Used by `prettier` and `prettier-eslint`.
 ---
@@ -310,7 +310,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.vue_ls.Vetur.Underline
 ---Enable underline `.value` when using composition API.

@@ -94,7 +94,7 @@
 ---```lua
 ---default = "RoslynSourceText"
 ---```
----@field sourceTextImplementation? "NamedText" | "RoslynSourceText"
+---@field sourceTextImplementation? "NamedText"|"RoslynSourceText"
 
 ---@class _.lspconfig.settings.fsautocomplete.FSharp.InlayHints
 ---Hides the explanatory tooltip that appears on InlayHints to describe the different configuration toggles.
@@ -134,7 +134,7 @@
 ---```lua
 ---default = "replaceCodeLens"
 ---```
----@field enabled? "never" | "replaceCodeLens" | "always"
+---@field enabled? "never"|"replaceCodeLens"|"always"
 ---The prefix displayed before the signature in a LineLens
 ---
 ---```lua
@@ -176,7 +176,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.fsautocomplete.FSharp
 ---An array of additional command line parameters to pass to FSI when it is launched. See [the Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/fsharp-interactive-options) for an exhaustive list.  If both this and `#FSharp.fsiExtraParameters#` are used, both sets of arguments will be passed to the launched FSI.
@@ -217,7 +217,7 @@
 ---```lua
 ---default = "sameAsFileExplorer"
 ---```
----@field autoRevealInExplorer? "sameAsFileExplorer" | "enabled" | "disabled"
+---@field autoRevealInExplorer? "sameAsFileExplorer"|"enabled"|"disabled"
 ---@field codeLenses? _.lspconfig.settings.fsautocomplete.FSharp.CodeLenses
 ---Disables popup notifications for failed project loading
 ---@field disableFailedProjectNotifications? boolean
@@ -304,7 +304,7 @@
 ---```lua
 ---default = "onCursorMove"
 ---```
----@field infoPanelUpdate? "onCursorMove" | "onHover" | "both" | "none"
+---@field infoPanelUpdate? "onCursorMove"|"onHover"|"both"|"none"
 ---@field inlayHints? _.lspconfig.settings.fsautocomplete.FSharp.InlayHints
 ---@field inlineValues? _.lspconfig.settings.fsautocomplete.FSharp.InlineValues
 ---Enables a codefix that generates missing interface members when inside of an interface implementation expression
@@ -370,7 +370,7 @@
 ---```lua
 ---default = "fsharp"
 ---```
----@field showProjectExplorerIn? "explorer" | "fsharp"
+---@field showProjectExplorerIn? "explorer"|"fsharp"
 ---Enables detection of cases when names of functions and values can be simplified
 ---
 ---```lua

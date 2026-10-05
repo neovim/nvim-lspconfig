@@ -37,7 +37,7 @@
 ---```lua
 ---default = ""
 ---```
----@field transform? "snakecase" | "camelcase" | "lispcase" | "pascalcase" | "keep"
+---@field transform? "snakecase"|"camelcase"|"lispcase"|"pascalcase"|"keep"
 
 ---Alternate tools or alternate paths for the same tools used by the Go extension. Provide either absolute path or the name of the binary in GOPATH/bin, GOROOT/bin or PATH. Useful when you want to use wrapper script for the Go tools.
 ---
@@ -87,14 +87,14 @@
 ---Color to use for the border of covered code.
 ---@field coveredBorderColor? string
 ---Gutter style to indicate covered code.
----@field coveredGutterStyle? "blockblue" | "blockred" | "blockgreen" | "blockyellow" | "slashred" | "slashgreen" | "slashblue" | "slashyellow" | "verticalred" | "verticalgreen" | "verticalblue" | "verticalyellow"
+---@field coveredGutterStyle? "blockblue"|"blockred"|"blockgreen"|"blockyellow"|"slashred"|"slashgreen"|"slashblue"|"slashyellow"|"verticalred"|"verticalgreen"|"verticalblue"|"verticalyellow"
 ---Color in the rgba format to use to highlight covered code.
 ---@field coveredHighlightColor? string
----@field type? "highlight" | "gutter"
+---@field type? "highlight"|"gutter"
 ---Color to use for the border of uncovered code.
 ---@field uncoveredBorderColor? string
 ---Gutter style to indicate covered code.
----@field uncoveredGutterStyle? "blockblue" | "blockred" | "blockgreen" | "blockyellow" | "slashred" | "slashgreen" | "slashblue" | "slashyellow" | "verticalred" | "verticalgreen" | "verticalblue" | "verticalyellow"
+---@field uncoveredGutterStyle? "blockblue"|"blockred"|"blockgreen"|"blockyellow"|"slashred"|"slashgreen"|"slashblue"|"slashyellow"|"verticalred"|"verticalgreen"|"verticalblue"|"verticalyellow"
 ---Color in the rgba format to use to highlight uncovered code.
 ---@field uncoveredHighlightColor? string
 
@@ -152,13 +152,13 @@
 ---```lua
 ---default = 2
 ---```
----@field apiVersion? 1 | 2
+---@field apiVersion? 1|2
 ---Select which debug adapter to use by default. This is also used for choosing which debug adapter to use when no launch.json is present and with codelenses.
 ---
 ---```lua
 ---default = "dlv-dap"
 ---```
----@field debugAdapter? "legacy" | "dlv-dap"
+---@field debugAdapter? "legacy"|"dlv-dap"
 ---Extra flags for `dlv`. See `dlv help` for the full list of supported. Flags such as `--log-output`, `--log`, `--log-dest`, `--api-version`, `--output`, `--backend` already have corresponding properties in the debug configuration, and flags such as `--listen` and `--headless` are used internally. If they are specified in `dlvFlags`, they may be ignored or cause an error.
 ---
 ---```lua
@@ -184,7 +184,7 @@
 ---```lua
 ---default = "debugger"
 ---```
----@field logOutput? "debugger" | "gdbwire" | "lldbout" | "debuglineerr" | "rpc" | "dap"
+---@field logOutput? "debugger"|"gdbwire"|"lldbout"|"debuglineerr"|"rpc"|"dap"
 ---Boolean value to indicate whether global package variables should be shown in the variables pane or not.
 ---@field showGlobalVariables? boolean
 ---Show log output from the delve debugger. Maps to dlv's `--log` flag.
@@ -205,7 +205,7 @@
 ---```lua
 ---default = "Prompt"
 ---```
----@field vulncheck? "Imports" | "Off" | "Prompt"
+---@field vulncheck? "Imports"|"Off"|"Prompt"
 
 ---Experimental Feature: Enable/Disable entries from the context menu in the editor.
 ---
@@ -529,7 +529,7 @@
 ---```lua
 ---default = "flat"
 ---```
----@field packageDisplayMode? "flat" | "nested"
+---@field packageDisplayMode? "flat"|"nested"
 ---Set the source location of dynamically discovered subtests to the location of the containing function. As a result, dynamically discovered subtests will be added to the gutter test widget of the containing function.
 ---@field showDynamicSubtestsInEditor? boolean
 ---Open the test output terminal when a test run is started.
@@ -547,7 +547,7 @@
 ---```lua
 ---default = "proxy"
 ---```
----@field checkForUpdates? "proxy" | "local" | "off"
+---@field checkForUpdates? "proxy"|"local"|"off"
 ---The path to the `go` binary used to install the Go tools. If it's empty, the same `go` binary chosen for the project will be used for tool installation.
 ---
 ---```lua
@@ -561,7 +561,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.gopls.Go
 ---Tags and options configured here will be used by the Add Tags command to add tags to struct fields. If promptForTags is true, or if neither tags nor options are configured, the user will be prompted for tags and the transformation rule.
@@ -593,7 +593,7 @@
 ---```lua
 ---default = "package"
 ---```
----@field buildOnSave? "package" | "workspace" | "off"
+---@field buildOnSave? "package"|"workspace"|"off"
 ---The Go build tags to use for all commands, that support a `-tags '...'` argument. When running tests, go.testTags will be used instead if it was set. This is propagated to the language server if `gopls.build.buildFlags` is not specified.
 ---
 ---```lua
@@ -605,7 +605,7 @@
 ---```lua
 ---default = "default"
 ---```
----@field coverMode? "default" | "set" | "count" | "atomic"
+---@field coverMode? "default"|"set"|"count"|"atomic"
 ---If true, runs 'go test -coverprofile' on save and shows test coverage.
 ---@field coverOnSave? boolean
 ---If true, shows test coverage when Go: Test Function at cursor command is run.
@@ -639,7 +639,7 @@
 ---```lua
 ---default = "showBothCoveredAndUncoveredCode"
 ---```
----@field coverageOptions? "showCoveredCodeOnly" | "showUncoveredCodeOnly" | "showBothCoveredAndUncoveredCode"
+---@field coverageOptions? "showCoveredCodeOnly"|"showUncoveredCodeOnly"|"showBothCoveredAndUncoveredCode"
 ---Delve settings that applies to all debugging sessions. Debug configuration in the launch.json file will override these values.
 ---
 ---```lua
@@ -700,7 +700,7 @@
 ---```lua
 ---default = "default"
 ---```
----@field formatTool? "default" | "gofmt" | "goimports" | "goformat" | "gofumpt" | "custom"
+---@field formatTool? "default"|"gofmt"|"goimports"|"goformat"|"gofumpt"|"custom"
 ---Additional command line flags to pass to `gotests` for generating tests.
 ---
 ---```lua
@@ -733,9 +733,9 @@
 ---```lua
 ---default = "package"
 ---```
----@field lintOnSave? "file" | "package" | "workspace" | "off"
+---@field lintOnSave? "file"|"package"|"workspace"|"off"
 ---Specifies an additional client-side linting tool that should be run by the Go extension. By default (unset), no additional linter is run. This feature is additional to diagnostics reported by the language server, gopls. Since Gopls incorporates the entire staticcheck analyzer suite, it is typically unnecessary to run the staticcheck tool as well. To configure gopls's linting, see the 'gopls.ui.diagnostic' settings.
----@field lintTool? "staticcheck" | "golint" | "golangci-lint" | "golangci-lint-v2" | "revive"
+---@field lintTool? "staticcheck"|"golint"|"golangci-lint"|"golangci-lint-v2"|"revive"
 ---@field logging? _.lspconfig.settings.gopls.Go.Logging
 ---The flags configured here will be passed through to command `goplay`
 ---
@@ -814,7 +814,7 @@
 ---```lua
 ---default = "package"
 ---```
----@field vetOnSave? "package" | "workspace" | "off"
+---@field vetOnSave? "package"|"workspace"|"off"
 
 ---codelenses overrides the enabled/disabled state of each of gopls'
 ---sources of [Code Lenses](codelenses.md).
@@ -5766,7 +5766,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field fileWatcher? "fsnotify" | "off" | "poll"
+---@field fileWatcher? "fsnotify"|"off"|"poll"
 ---gofumpt indicates if we should run gofumpt formatting.
 ---
 ---@field ["formatting.gofumpt"]? boolean
@@ -5873,7 +5873,7 @@
 ---```lua
 ---default = "Fuzzy"
 ---```
----@field ["ui.completion.matcher"]? "CaseInsensitive" | "CaseSensitive" | "Fuzzy"
+---@field ["ui.completion.matcher"]? "CaseInsensitive"|"CaseSensitive"|"Fuzzy"
 ---placeholders enables placeholders for function parameters or struct
 ---fields in completion responses.
 ---
@@ -5941,7 +5941,7 @@
 ---```lua
 ---default = "Edit"
 ---```
----@field ["ui.diagnostic.diagnosticsTrigger"]? "Edit" | "Save"
+---@field ["ui.diagnostic.diagnosticsTrigger"]? "Edit"|"Save"
 ---(Experimental) staticcheck configures the default set of analyses staticcheck.io.
 ---These analyses are documented on
 ---[Staticcheck's website](https://staticcheck.io/docs/checks/).
@@ -5966,7 +5966,7 @@
 ---```lua
 ---default = "FullDocumentation"
 ---```
----@field ["ui.documentation.hoverKind"]? "FullDocumentation" | "NoDocumentation" | "SingleLine" | "Structured" | "SynopsisDocumentation"
+---@field ["ui.documentation.hoverKind"]? "FullDocumentation"|"NoDocumentation"|"SingleLine"|"Structured"|"SynopsisDocumentation"
 ---linkTarget is the base URL for links to Go package
 ---documentation returned by LSP operations such as Hover and
 ---DocumentLinks and in the CodeDescription field of each
@@ -5993,7 +5993,7 @@
 ---```lua
 ---default = true
 ---```
----@field ["ui.documentation.linksInHover"]? false | true | "gopls"
+---@field ["ui.documentation.linksInHover"]? false|true|"gopls"
 ---(Experimental) moveDeclaration enables producing Move Declaration codeactions. The implementation
 ---is unfinished so we use this setting to gate its use.
 ---
@@ -6009,14 +6009,14 @@
 ---```lua
 ---default = "Both"
 ---```
----@field ["ui.navigation.importShortcut"]? "Both" | "Definition" | "Link"
+---@field ["ui.navigation.importShortcut"]? "Both"|"Definition"|"Link"
 ---(Advanced) symbolMatcher sets the algorithm that is used when finding workspace symbols.
 ---
 ---
 ---```lua
 ---default = "FastFuzzy"
 ---```
----@field ["ui.navigation.symbolMatcher"]? "CaseInsensitive" | "CaseSensitive" | "FastFuzzy" | "Fuzzy"
+---@field ["ui.navigation.symbolMatcher"]? "CaseInsensitive"|"CaseSensitive"|"FastFuzzy"|"Fuzzy"
 ---symbolScope controls which packages are searched for workspace/symbol
 ---requests. When the scope is "workspace", gopls searches only workspace
 ---packages. When the scope is "all", gopls searches all loaded packages,
@@ -6026,7 +6026,7 @@
 ---```lua
 ---default = "all"
 ---```
----@field ["ui.navigation.symbolScope"]? "all" | "workspace"
+---@field ["ui.navigation.symbolScope"]? "all"|"workspace"
 ---(Advanced) symbolStyle controls how symbols are qualified in symbol responses.
 ---
 ---Example Usage:
@@ -6043,7 +6043,7 @@
 ---```lua
 ---default = "Dynamic"
 ---```
----@field ["ui.navigation.symbolStyle"]? "Dynamic" | "Full" | "Package"
+---@field ["ui.navigation.symbolStyle"]? "Dynamic"|"Full"|"Package"
 ---newGoFileHeader enables automatic insertion of the copyright comment
 ---and package declaration in a newly created Go file.
 ---

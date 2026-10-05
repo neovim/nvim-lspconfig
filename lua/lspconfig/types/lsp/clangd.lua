@@ -55,7 +55,7 @@
 ---```lua
 ---default = "prompt"
 ---```
----@field onConfigChanged? "prompt" | "restart" | "ignore"
+---@field onConfigChanged? "prompt"|"restart"|"ignore"
 ---Force enable of "On Config Changed" option regardless of clangd version.
 ---@field onConfigChangedForceEnable? boolean
 ---The path to clangd executable, e.g.: /usr/bin/clangd.

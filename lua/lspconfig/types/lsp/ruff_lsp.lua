@@ -54,7 +54,7 @@
 ---```lua
 ---default = "internal"
 ---```
----@field backend? "internal" | "uv"
+---@field backend? "internal"|"uv"
 ---Enable [preview mode](https://docs.astral.sh/ruff/settings/#format_preview) for the formatter; enables unstable formatting.
 ---@field preview? boolean
 
@@ -80,7 +80,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.ruff_lsp.Ruff
 ---@field codeAction? _.lspconfig.settings.ruff_lsp.Ruff.CodeAction
@@ -91,7 +91,7 @@
 ---```lua
 ---default = "editorFirst"
 ---```
----@field configurationPreference? "editorFirst" | "filesystemFirst" | "editorOnly"
+---@field configurationPreference? "editorFirst"|"filesystemFirst"|"editorOnly"
 ---Whether to enable the Ruff extension.
 ---
 ---```lua
@@ -112,7 +112,7 @@
 ---```lua
 ---default = "fromEnvironment"
 ---```
----@field importStrategy? "fromEnvironment" | "useBundled"
+---@field importStrategy? "fromEnvironment"|"useBundled"
 ---Path to a Python interpreter to use to find the `ruff` executable. Requires either the Python Environments or Python extension to be installed.
 ---
 ---```lua
@@ -125,13 +125,13 @@
 ---Path to the log file for the language server.
 ---@field logFile? string
 ---Controls the log level of the language server.
----@field logLevel? "error" | "warn" | "info" | "debug" | "trace"
+---@field logLevel? "error"|"warn"|"info"|"debug"|"trace"
 ---Whether to use the native language server, [`ruff-lsp`](https://github.com/astral-sh/ruff-lsp) or automatically decide between the two based on the Ruff version and extension settings.
 ---
 ---```lua
 ---default = "auto"
 ---```
----@field nativeServer? "on" | "off" | "auto" | true | false
+---@field nativeServer? "on"|"off"|"auto"|true|false
 ---Whether to register Ruff as capable of handling `source.organizeImports` actions.
 ---
 ---```lua

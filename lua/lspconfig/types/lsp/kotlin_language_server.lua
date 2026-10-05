@@ -58,7 +58,7 @@
 ---```lua
 ---default = "hint"
 ---```
----@field level? "error" | "warning" | "information" | "hint"
+---@field level? "error"|"warning"|"information"|"hint"
 
 ---@class _.lspconfig.settings.kotlin_language_server.Kotlin.ExternalSources
 ---Specifies whether decompiled/external classes should be auto-converted to Kotlin.
@@ -137,7 +137,7 @@
 ---```lua
 ---default = "stdio"
 ---```
----@field transport? "stdio" | "tcp"
+---@field transport? "stdio"|"tcp"
 ---Specifies glob patterns of files, which would be watched by LSP client. The LSP client doesn't support watching files outside a workspace folder.
 ---
 ---```lua
@@ -165,7 +165,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.kotlin_language_server.Kotlin
 ---@field codegen? _.lspconfig.settings.kotlin_language_server.Kotlin.Codegen

@@ -14,13 +14,13 @@
 ---```lua
 ---default = "nowhere"
 ---```
----@field highlightUntyped? "nowhere" | "everywhere-but-tests" | "everywhere"
+---@field highlightUntyped? "nowhere"|"everywhere-but-tests"|"everywhere"
 ---Which severity to use to highlight untyped usages with (controls the squiggle colors)
 ---
 ---```lua
 ---default = 3
 ---```
----@field highlightUntypedDiagnosticSeverity? 1 | 2 | 3 | 4
+---@field highlightUntypedDiagnosticSeverity? 1|2|3|4
 ---Standard Ruby LSP configurations.  If you commit your VSCode settings to source control, you probably want to commit *this* setting, not `sorbet.userLspConfigs`.
 ---
 ---```lua

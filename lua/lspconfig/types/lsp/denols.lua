@@ -77,7 +77,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "messages" | "off" | "verbose"
+---@field server? "messages"|"off"|"verbose"
 
 ---@class _.lspconfig.settings.denols.Deno
 ---A path to the cache directory for Deno. By default, the operating system's cache path plus `deno` is used, or the `DENO_DIR` environment variable, but if set, this path will be used instead.
@@ -102,7 +102,7 @@
 ---```lua
 ---default = "open"
 ---```
----@field defaultTaskCommand? "open" | "run"
+---@field defaultTaskCommand? "open"|"run"
 ---Disables the Deno Language Server for specific paths. This will leave the built in TypeScript/JavaScript language server enabled for those paths. Takes priority over `deno.enablePaths`.
 ---
 ---**Not recommended to be enabled in user settings.**

@@ -6,7 +6,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.typst_lsp.TypstLsp
 ---The extension can format Typst files using typstfmt (experimental).
@@ -14,13 +14,13 @@
 ---```lua
 ---default = "off"
 ---```
----@field experimentalFormatterMode? "off" | "on"
+---@field experimentalFormatterMode? "off"|"on"
 ---The extension can export PDFs of your Typst files. This setting controls whether this feature is enabled and how often it runs.
 ---
 ---```lua
 ---default = "onSave"
 ---```
----@field exportPdf? "never" | "onSave" | "onPinnedMainSave" | "onType" | "onPinnedMainType"
+---@field exportPdf? "never"|"onSave"|"onPinnedMainSave"|"onType"|"onPinnedMainType"
 ---Configure the root for absolute paths in typst
 ---@field rootPath? string
 ---Enable or disable semantic tokens (LSP syntax highlighting)
@@ -28,7 +28,7 @@
 ---```lua
 ---default = "enable"
 ---```
----@field semanticTokens? "enable" | "disable"
+---@field semanticTokens? "enable"|"disable"
 ---The extension can use a local typst-lsp executable instead of the one bundled with the extension. This setting controls the path to the executable.
 ---@field serverPath? string
 ---@field trace? _.lspconfig.settings.typst_lsp.TypstLsp.Trace

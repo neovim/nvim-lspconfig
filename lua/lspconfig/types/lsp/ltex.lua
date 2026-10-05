@@ -14,7 +14,7 @@
 ---```lua
 ---default = ""
 ---```
----@field motherTongue? "" | "ar" | "ast-ES" | "be-BY" | "br-FR" | "ca-ES" | "ca-ES-valencia" | "da-DK" | "de" | "de-AT" | "de-CH" | "de-DE" | "de-DE-x-simple-language" | "el-GR" | "en" | "en-AU" | "en-CA" | "en-GB" | "en-NZ" | "en-US" | "en-ZA" | "eo" | "es" | "es-AR" | "fa" | "fr" | "ga-IE" | "gl-ES" | "it" | "ja-JP" | "km-KH" | "nl" | "nl-BE" | "pl-PL" | "pt" | "pt-AO" | "pt-BR" | "pt-MZ" | "pt-PT" | "ro-RO" | "ru-RU" | "sk-SK" | "sl-SI" | "sv" | "ta-IN" | "tl-PH" | "uk-UA" | "zh-CN"
+---@field motherTongue? ""|"ar"|"ast-ES"|"be-BY"|"br-FR"|"ca-ES"|"ca-ES-valencia"|"da-DK"|"de"|"de-AT"|"de-CH"|"de-DE"|"de-DE-x-simple-language"|"el-GR"|"en"|"en-AU"|"en-CA"|"en-GB"|"en-NZ"|"en-US"|"en-ZA"|"eo"|"es"|"es-AR"|"fa"|"fr"|"ga-IE"|"gl-ES"|"it"|"ja-JP"|"km-KH"|"nl"|"nl-BE"|"pl-PL"|"pt"|"pt-AO"|"pt-BR"|"pt-MZ"|"pt-PT"|"ro-RO"|"ru-RU"|"sk-SK"|"sl-SI"|"sv"|"ta-IN"|"tl-PH"|"uk-UA"|"zh-CN"
 ---Optional path to a directory with rules of a pretrained neural network model.
 ---
 ---```lua
@@ -46,9 +46,9 @@
 ---}
 ---```
 ---@class _.lspconfig.settings.ltex.Ltex.ConfigurationTarget
----@field dictionary? "user" | "workspace" | "workspaceFolder" | "userExternalFile" | "workspaceExternalFile" | "workspaceFolderExternalFile"
----@field disabledRules? "user" | "workspace" | "workspaceFolder" | "userExternalFile" | "workspaceExternalFile" | "workspaceFolderExternalFile"
----@field hiddenFalsePositives? "user" | "workspace" | "workspaceFolder" | "userExternalFile" | "workspaceExternalFile" | "workspaceFolderExternalFile"
+---@field dictionary? "user"|"workspace"|"workspaceFolder"|"userExternalFile"|"workspaceExternalFile"|"workspaceFolderExternalFile"
+---@field disabledRules? "user"|"workspace"|"workspaceFolder"|"userExternalFile"|"workspaceExternalFile"|"workspaceFolderExternalFile"
+---@field hiddenFalsePositives? "user"|"workspace"|"workspaceFolder"|"userExternalFile"|"workspaceExternalFile"|"workspaceFolderExternalFile"
 
 ---Lists of additional words that should not be counted as spelling errors. [More info...](https://valentjn.github.io/ltex/settings.html#ltexdictionary)
 ---
@@ -520,7 +520,7 @@
 ---```lua
 ---default = "fine"
 ---```
----@field logLevel? "severe" | "warning" | "info" | "config" | "fine" | "finer" | "finest"
+---@field logLevel? "severe"|"warning"|"info"|"config"|"fine"|"finer"|"finest"
 ---If set to an empty string, LTeX automatically downloads [ltex-ls from GitHub](https://github.com/valentjn/ltex-ls/releases), stores it in the folder of the extension, and uses it for the checking process. You can point this setting to an ltex-ls release you downloaded by yourself. [More info...](https://valentjn.github.io/ltex/settings.html#ltexltex-lspath)
 ---
 ---```lua
@@ -542,7 +542,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.ltex.Ltex
 ---@field additionalRules? _.lspconfig.settings.ltex.Ltex.AdditionalRules
@@ -552,7 +552,7 @@
 ---```lua
 ---default = "edit"
 ---```
----@field checkFrequency? "edit" | "save" | "manual"
+---@field checkFrequency? "edit"|"save"|"manual"
 ---If set to `true`, diagnostics of a file are cleared when the file is closed.
 ---
 ---```lua
@@ -576,7 +576,7 @@
 ---```lua
 ---default = "information"
 ---```
----@field diagnosticSeverity? "error" | "warning" | "information" | "hint"|table
+---@field diagnosticSeverity? "error"|"warning"|"information"|"hint"|table
 ---Lists of additional words that should not be counted as spelling errors. [More info...](https://valentjn.github.io/ltex/settings.html#ltexdictionary)
 ---
 ---```lua
@@ -613,7 +613,7 @@
 ---```lua
 ---default = "en-US"
 ---```
----@field language? "auto" | "ar" | "ast-ES" | "be-BY" | "br-FR" | "ca-ES" | "ca-ES-valencia" | "da-DK" | "de" | "de-AT" | "de-CH" | "de-DE" | "de-DE-x-simple-language" | "el-GR" | "en" | "en-AU" | "en-CA" | "en-GB" | "en-NZ" | "en-US" | "en-ZA" | "eo" | "es" | "es-AR" | "fa" | "fr" | "ga-IE" | "gl-ES" | "it" | "ja-JP" | "km-KH" | "nl" | "nl-BE" | "pl-PL" | "pt" | "pt-AO" | "pt-BR" | "pt-MZ" | "pt-PT" | "ro-RO" | "ru-RU" | "sk-SK" | "sl-SI" | "sv" | "ta-IN" | "tl-PH" | "uk-UA" | "zh-CN"
+---@field language? "auto"|"ar"|"ast-ES"|"be-BY"|"br-FR"|"ca-ES"|"ca-ES-valencia"|"da-DK"|"de"|"de-AT"|"de-CH"|"de-DE"|"de-DE-x-simple-language"|"el-GR"|"en"|"en-AU"|"en-CA"|"en-GB"|"en-NZ"|"en-US"|"en-ZA"|"eo"|"es"|"es-AR"|"fa"|"fr"|"ga-IE"|"gl-ES"|"it"|"ja-JP"|"km-KH"|"nl"|"nl-BE"|"pl-PL"|"pt"|"pt-AO"|"pt-BR"|"pt-MZ"|"pt-PT"|"ro-RO"|"ru-RU"|"sk-SK"|"sl-SI"|"sv"|"ta-IN"|"tl-PH"|"uk-UA"|"zh-CN"
 ---If set to a non-empty string, LTeX will not use the bundled, built-in version of LanguageTool. Instead, LTeX will connect to an external [LanguageTool HTTP server](http://wiki.languagetool.org/http-server). Set this setting to the root URI of the server, and do not append `v2/check` or similar. [More info...](https://valentjn.github.io/ltex/settings.html#ltexlanguagetoolhttpserveruri)
 ---
 ---```lua

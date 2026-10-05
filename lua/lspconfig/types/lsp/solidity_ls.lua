@@ -24,7 +24,7 @@
 ---```lua
 ---default = "remote"
 ---```
----@field defaultCompiler? "remote" | "localFile" | "localNodeModule" | "embedded"
+---@field defaultCompiler? "remote"|"localFile"|"localNodeModule"|"embedded"
 ---Enables as you type compilation of the document and error highlighting
 ---
 ---```lua
@@ -48,13 +48,13 @@
 ---```lua
 ---default = "prettier"
 ---```
----@field formatter? "none" | "prettier" | "forge"
+---@field formatter? "none"|"prettier"|"forge"
 ---Enables linting using either solium (ethlint) or solhint. Possible options 'solhint' and 'solium', the default is solhint
 ---
 ---```lua
 ---default = "solhint"
 ---```
----@field linter? "" | "solhint" | "solium"
+---@field linter? ""|"solhint"|"solium"
 ---Enables mono repo support in the current workspace, a project folder will be signaled if a file is found on the current folder or above including: remappings.txt, truffle-config.js, brownie-config.yaml, foundry.toml, hardhat.config.js, hardhat.config.ts, dappfile
 ---
 ---```lua
@@ -72,13 +72,13 @@
 ---```lua
 ---default = { "src", "contracts", "" }
 ---```
----@field packageDefaultDependenciesContractsDirectory? string|string[]
+---@field packageDefaultDependenciesContractsDirectory? string
 ---Default directory for Packages Dependencies, i.e: 'node_modules', 'lib'. This is used to avoid typing imports with that path prefix, multiple dependency paths can be set as an array: ['node_modules', 'lib'] 
 ---
 ---```lua
 ---default = { "node_modules", "lib" }
 ---```
----@field packageDefaultDependenciesDirectory? string|string[]
+---@field packageDefaultDependenciesDirectory? string
 ---Remappings to resolve contracts to local files / directories, i.e: ["@openzeppelin/=lib/openzeppelin-contracts","ds-test/=lib/ds-test/src/"]
 ---
 ---```lua

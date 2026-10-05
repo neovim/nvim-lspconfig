@@ -6,7 +6,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.java_language_server.Java
 ---List of modules to allow access to, for example ["jdk.compiler/com.sun.tools.javac.api"]

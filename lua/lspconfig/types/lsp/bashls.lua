@@ -22,7 +22,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field languageDialect? "auto" | "bash" | "posix" | "mksh" | "bats"
+---@field languageDialect? "auto"|"bash"|"posix"|"mksh"|"bats"
 ---Controls the executable used for Shfmt formatting. An empty string will disable formatting.
 ---
 ---```lua
@@ -68,7 +68,7 @@
 ---```lua
 ---default = "info"
 ---```
----@field logLevel? "debug" | "info" | "warning" | "error"
+---@field logLevel? "debug"|"info"|"warning"|"error"
 ---Additional ShellCheck arguments. Note that we already add the following arguments: --shell, --format, and --external-sources (if shellcheckExternalSources is true).
 ---
 ---```lua

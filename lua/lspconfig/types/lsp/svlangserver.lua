@@ -6,7 +6,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.svlangserver.Systemverilog
 ---Use ANTLR parser to verify text documents when edited.
@@ -20,7 +20,7 @@
 ---```lua
 ---default = "Verilator"
 ---```
----@field compilerType? "Verilator" | "VCS" | "Verible"
+---@field compilerType? "Verilator"|"VCS"|"Verible"
 ---Disable automatic indexing when opening a folder or workspace.
 ---@field disableIndexing? boolean
 ---The level of detail the parser should use when looking for symbols:
@@ -32,7 +32,7 @@
 ---```lua
 ---default = "full"
 ---```
----@field documentSymbolsPrecision? "full" | "full_no_references" | "declaration" | "fast"
+---@field documentSymbolsPrecision? "full"|"full_no_references"|"declaration"|"fast"
 ---Enable incremental indexation as you open files.
 ---
 ---```lua

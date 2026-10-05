@@ -19,61 +19,61 @@
 ---```lua
 ---default = "warning"
 ---```
----@field cssConflict? "ignore" | "warning" | "error"
+---@field cssConflict? "ignore"|"warning"|"error"
 ---Deprecated Tailwind CSS at-rules
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field deprecatedAtRule? "ignore" | "warning" | "error"
+---@field deprecatedAtRule? "ignore"|"warning"|"error"
 ---Unsupported use of the [`@apply` directive](https://tailwindcss.com/docs/functions-and-directives/#apply)
 ---
 ---```lua
 ---default = "error"
 ---```
----@field invalidApply? "ignore" | "warning" | "error"
+---@field invalidApply? "ignore"|"warning"|"error"
 ---Unknown or invalid path used with the [`theme` helper](https://tailwindcss.com/docs/functions-and-directives/#theme)
 ---
 ---```lua
 ---default = "error"
 ---```
----@field invalidConfigPath? "ignore" | "warning" | "error"
+---@field invalidConfigPath? "ignore"|"warning"|"error"
 ---Unknown screen name used with the [`@screen` directive](https://tailwindcss.com/docs/functions-and-directives/#screen)
 ---
 ---```lua
 ---default = "error"
 ---```
----@field invalidScreen? "ignore" | "warning" | "error"
+---@field invalidScreen? "ignore"|"warning"|"error"
 ---Unknown value used with the [`@tailwind` directive](https://tailwindcss.com/docs/functions-and-directives/#tailwind)
 ---
 ---```lua
 ---default = "error"
 ---```
----@field invalidTailwindDirective? "ignore" | "warning" | "error"
+---@field invalidTailwindDirective? "ignore"|"warning"|"error"
 ---Unknown variant name used with the [`@variants` directive](https://tailwindcss.com/docs/functions-and-directives/#variants)
 ---
 ---```lua
 ---default = "error"
 ---```
----@field invalidVariant? "ignore" | "warning" | "error"
+---@field invalidVariant? "ignore"|"warning"|"error"
 ---Class variants not in the recommended order (applies in [JIT mode](https://tailwindcss.com/docs/just-in-time-mode) only)
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field recommendedVariantOrder? "ignore" | "warning" | "error"
+---@field recommendedVariantOrder? "ignore"|"warning"|"error"
 ---Indicate when utilities may be written in a more optimal form
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field suggestCanonicalClasses? "ignore" | "warning" | "error"
+---@field suggestCanonicalClasses? "ignore"|"warning"|"error"
 ---Usage of class names that have been blocklisted via `@source not inline(…)`
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field usedBlocklistedClass? "ignore" | "warning" | "error"
+---@field usedBlocklistedClass? "ignore"|"warning"|"error"
 
 ---@class _.lspconfig.settings.tailwindcss.TailwindCSS
 ---The HTML attributes for which to provide class completions, hover previews, linting etc.
@@ -157,7 +157,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.tailwindcss.TailwindcssIntellisense
 ---@field trace? _.lspconfig.settings.tailwindcss.TailwindcssIntellisense.Trace

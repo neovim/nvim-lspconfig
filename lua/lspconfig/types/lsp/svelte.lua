@@ -281,7 +281,7 @@
 ---```lua
 ---default = "none"
 ---```
----@field defaultScriptLanguage? "none" | "ts"
+---@field defaultScriptLanguage? "none"|"ts"
 ---@field diagnostics? _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.Diagnostics
 ---@field documentHighlight? _.lspconfig.settings.svelte.Svelte.Plugin.Svelte.DocumentHighlight
 ---Enable the Svelte plugin
@@ -397,7 +397,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.svelte.Svelte.Ui.SvelteKitFilesContextMenu
 ---Show a context menu to generate SvelteKit files. "always" to always show it. "never" to always disable it. "auto" to show it when in a SvelteKit project. 
@@ -405,7 +405,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field enable? "auto" | "never" | "always"
+---@field enable? "auto"|"never"|"always"
 
 ---@class _.lspconfig.settings.svelte.Svelte.Ui
 ---@field svelteKitFilesContextMenu? _.lspconfig.settings.svelte.Svelte.Ui.SvelteKitFilesContextMenu

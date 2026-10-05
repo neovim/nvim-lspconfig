@@ -38,7 +38,7 @@
 ---```lua
 ---default = "none"
 ---```
----@field requiredInputIndicator? "none" | "asterisk" | "exclamation"
+---@field requiredInputIndicator? "none"|"asterisk"|"exclamation"
 ---Show signal type hints for two-way bindings.
 ---
 ---Example:
@@ -133,7 +133,7 @@
 ---```lua
 ---default = "all"
 ---```
----@field nameHints? "none" | "literals" | "all"
+---@field nameHints? "none"|"literals"|"all"
 ---Suppress parameter name hints when argument name matches parameter name.
 ---
 ---Example:
@@ -166,7 +166,7 @@
 ---@if (user; as u) { {{ u.name }} } // simple expression
 ---@if (user.profile; as profile /* : Profile */) { {{ profile.name }} } // complex expression
 ---```
----@field ifAliasTypes? true | false | "complex"
+---@field ifAliasTypes? true|false|"complex"
 ---Show type hints for `@let` declarations.
 ---
 ---Example:
@@ -237,7 +237,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.angularls.Angular
 ---@field documentSymbols? _.lspconfig.settings.angularls.Angular.DocumentSymbols
@@ -255,7 +255,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field log? "off" | "terse" | "normal" | "verbose"
+---@field log? "off"|"terse"|"normal"|"verbose"
 ---@field server? _.lspconfig.settings.angularls.Angular.Server
 ---@field suggest? _.lspconfig.settings.angularls.Angular.Suggest
 ---A comma-separated list of error codes in templates whose diagnostics should be ignored.

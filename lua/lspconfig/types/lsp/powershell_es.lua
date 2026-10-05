@@ -76,7 +76,7 @@
 ---```lua
 ---default = "NoIndentation"
 ---```
----@field pipelineIndentationStyle? "IncreaseIndentationForFirstPipeline" | "IncreaseIndentationAfterEveryPipeline" | "NoIndentation" | "None"
+---@field pipelineIndentationStyle? "IncreaseIndentationForFirstPipeline"|"IncreaseIndentationAfterEveryPipeline"|"NoIndentation"|"None"
 ---Sets the code formatting options to follow the given indent style in a way that is compatible with PowerShell syntax. Any setting other than `Custom` will configure (and override) the settings:
 ---
 ---* `#powershell.codeFormatting.openBraceOnSameLine#`
@@ -90,7 +90,7 @@
 ---```lua
 ---default = "Custom"
 ---```
----@field preset? "Custom" | "Allman" | "OTBS" | "Stroustrup"
+---@field preset? "Custom"|"Allman"|"OTBS"|"Stroustrup"
 ---Trims extraneous whitespace (more than one character) before and after the pipeline operator (`|`).
 ---@field trimWhitespaceAroundPipe? boolean
 ---Use single quotes if a string is not interpolated and its value does not contain a single quote.
@@ -138,7 +138,7 @@
 ---```lua
 ---default = "DotSource"
 ---```
----@field executeMode? "DotSource" | "Call"
+---@field executeMode? "DotSource"|"Call"
 
 ---@class _.lspconfig.settings.powershell_es.Powershell.Developer
 ---Specifies an alternative path to the folder containing modules that are bundled with the PowerShell extension, that is: PowerShell Editor Services, PSScriptAnalyzer and PSReadLine. **This setting is only meant for extension developers and requires the extension to be run in development mode!**
@@ -152,7 +152,7 @@
 ---```lua
 ---default = "Warning"
 ---```
----@field editorServicesLogLevel? "Trace" | "Debug" | "Information" | "Warning" | "Error" | "None"
+---@field editorServicesLogLevel? "Trace"|"Debug"|"Information"|"Warning"|"Error"|"None"
 ---Launches the LSP server with the `/waitForDebugger` flag to force it to wait for a .NET debugger to attach before proceeding, and emit its PID until then. **This setting is only meant for extension developers and requires the extension to be run in development mode!**
 ---@field editorServicesWaitForDebugger? boolean
 ---An array of strings that enable experimental features in the PowerShell extension. **No flags are currently available!**
@@ -198,7 +198,7 @@
 ---```lua
 ---default = "Panel"
 ---```
----@field startLocation? "Editor" | "Panel"
+---@field startLocation? "Editor"|"Panel"
 ---Do not show the startup banner in the PowerShell Extension Terminal.
 ---@field suppressStartupBanner? boolean
 ---Do not show a notification when the PowerShell Extension Terminal has stopped.
@@ -218,13 +218,13 @@
 ---```lua
 ---default = "Diagnostic"
 ---```
----@field debugOutputVerbosity? "None" | "Minimal" | "Normal" | "Detailed" | "Diagnostic"
+---@field debugOutputVerbosity? "None"|"Minimal"|"Normal"|"Detailed"|"Diagnostic"
 ---Defines the verbosity of output to be used. For Pester 5 and newer the default value `FromPreference` will use the `Output` settings from the `$PesterPreference` defined in the caller's context, and will default to `Normal` if there is none. For Pester 4 the `FromPreference` and `Normal` options map to `All`, and `Minimal` option maps to `Fails`.
 ---
 ---```lua
 ---default = "FromPreference"
 ---```
----@field outputVerbosity? "FromPreference" | "None" | "Minimal" | "Normal" | "Detailed" | "Diagnostic"
+---@field outputVerbosity? "FromPreference"|"None"|"Minimal"|"Normal"|"Detailed"|"Diagnostic"
 ---Use the legacy CodeLens compatible with Pester 4 (only shows `Run Tests` on `Describe` blocks). When disabled (the default), `Run Tests` is shown on all `It`, `Describe` and `Context` blocks for Pester 5 and newer.
 ---@field useLegacyCodeLens? boolean
 
@@ -282,7 +282,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.powershell_es.Powershell
 ---Specifies to search for references only within open documents instead of all workspace files. An alternative to `#powershell.enableReferencesCodeLens#` that allows large workspaces to support some references without the performance impact.
@@ -315,7 +315,7 @@
 ---```lua
 ---default = "BlockComment"
 ---```
----@field helpCompletion? "Disabled" | "BlockComment" | "LineComment"
+---@field helpCompletion? "Disabled"|"BlockComment"|"LineComment"
 ---@field integratedConsole? _.lspconfig.settings.powershell_es.Powershell.IntegratedConsole
 ---@field pester? _.lspconfig.settings.powershell_es.Powershell.Pester
 ---Specifies a list of Item / Value pairs where the **Item** is a user-chosen name and the **Value** is an absolute path to a PowerShell executable. The name appears in the [Session Menu Command](command:PowerShell.ShowSessionMenu) and is used to reference this executable in the `#powershell.powerShellDefaultVersion#` setting.

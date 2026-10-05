@@ -6,7 +6,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.luau_lsp.Luau
 ---@field trace? _.lspconfig.settings.luau_lsp.Luau.Trace
@@ -97,7 +97,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field requireStyle? "auto" | "alwaysRelative" | "alwaysAbsolute" | "nearestAbsolute"
+---@field requireStyle? "auto"|"alwaysRelative"|"alwaysAbsolute"|"nearestAbsolute"
 ---Whether services and requires should be separated by an empty line
 ---@field separateGroupsWithLine? boolean
 ---@field stringRequires? _.lspconfig.settings.luau_lsp.LuauLsp.Completion.Imports.StringRequires
@@ -281,7 +281,7 @@
 ---```lua
 ---default = "none"
 ---```
----@field parameterNames? "none" | "literals" | "all"
+---@field parameterNames? "none"|"literals"|"all"
 ---Show inlay hints for parameter types
 ---@field parameterTypes? boolean
 ---The maximum length a type hint should be before being truncated
@@ -299,7 +299,7 @@
 ---```lua
 ---default = "roblox"
 ---```
----@field type? "standard" | "roblox"
+---@field type? "standard"|"roblox"
 
 ---@class _.lspconfig.settings.luau_lsp.LuauLsp.Plugin
 ---Use Roblox Studio Plugin to provide DataModel information
@@ -366,7 +366,7 @@
 ---```lua
 ---default = "stdio"
 ---```
----@field communicationChannel? "stdio" | "pipe"
+---@field communicationChannel? "stdio"|"pipe"
 ---@field crashReporting? _.lspconfig.settings.luau_lsp.LuauLsp.Server.CrashReporting
 ---Make the server spin indefinitely when starting up to allow time to attach a debugger. Only useful for debug purposes
 ---@field delayStartup? boolean
@@ -470,7 +470,7 @@
 ---```lua
 ---default = "PluginSecurity"
 ---```
----@field robloxSecurityLevel? "None" | "LocalUserSecurity" | "PluginSecurity" | "RobloxScriptSecurity"
+---@field robloxSecurityLevel? "None"|"LocalUserSecurity"|"PluginSecurity"|"RobloxScriptSecurity"
 
 ---@class _.lspconfig.settings.luau_lsp.LuauLsp
 ---Whether to analyze standard `.lua` files. If disabled, only `.luau` files will be analyzed. Note: You may also need to configure `"files.associations": {"*.lua": "lua"}` in your settings to restore standard Lua syntax highlighting and behavior for `.lua` files.

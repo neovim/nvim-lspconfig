@@ -204,7 +204,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field identifier? "asdf" | "auto" | "chruby" | "none" | "rbenv" | "rvm" | "rv" | "shadowenv" | "mise" | "custom"
+---@field identifier? "asdf"|"auto"|"chruby"|"none"|"rbenv"|"rvm"|"rv"|"shadowenv"|"mise"|"custom"
 ---The path to the Mise executable, if not installed in ~/.local/bin/mise
 ---@field miseExecutablePath? string
 ---The path to the rbenv executable, if not installed on one of the standard locations
@@ -269,7 +269,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field formatter? "auto" | "rubocop" | "rubocop_internal" | "syntax_tree" | "standard" | "rubyfmt" | "none"
+---@field formatter? "auto"|"rubocop"|"rubocop_internal"|"syntax_tree"|"standard"|"rubyfmt"|"none"
 ---Indexing configurations. Modifying these will impact which declarations are available for definition, completion and other features
 ---@field indexing? _.lspconfig.settings.ruby_lsp.RubyLsp.Indexing
 ---List of linter tools that the Ruby LSP should use for diagnostics
@@ -279,7 +279,7 @@
 ---```lua
 ---default = "both"
 ---```
----@field pullDiagnosticsOn? "change" | "save" | "both"
+---@field pullDiagnosticsOn? "change"|"save"|"both"
 ---Path to the Ruby installation. This is used as a fallback if version manager activation fails
 ---@field rubyExecutablePath? string
 ---```lua

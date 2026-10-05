@@ -270,7 +270,7 @@
 ---```
 ---@field addSelect? string[]
 ---Choose the basic list of checked errors by specifying an existing convention.
----@field convention? "pep257" | "numpy" | "google"
+---@field convention? "pep257"|"numpy"|"google"
 ---Enable or disable the plugin.
 ---@field enabled? boolean
 ---Ignore errors and warnings
@@ -385,7 +385,7 @@
 ---```lua
 ---default = "black"
 ---```
----@field formatter? "black" | "ruff"
+---@field formatter? "black"|"ruff"
 ---Include signature docstring.
 ---
 ---```lua
@@ -405,7 +405,7 @@
 ---```lua
 ---default = { "pycodestyle" }
 ---```
----@field configurationSources? ("pycodestyle" | "flake8")[]
+---@field configurationSources? ("pycodestyle"|"flake8")[]
 ---@field plugins? _.lspconfig.settings.pylsp.Pylsp.Plugins
 ---@field rope? _.lspconfig.settings.pylsp.Pylsp.Rope
 ---@field signature? _.lspconfig.settings.pylsp.Pylsp.Signature

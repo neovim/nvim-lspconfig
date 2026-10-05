@@ -84,7 +84,7 @@
 ---```lua
 ---default = "full"
 ---```
----@field semantic_tokens? "none" | "partial" | "full"
+---@field semantic_tokens? "none"|"partial"|"full"
 ---No longer used. May be brought back to configure how symbol references in the standard library should behave
 ---@field skip_std_references? boolean
 ---Enables warnings for style guideline mismatches

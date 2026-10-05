@@ -59,19 +59,19 @@
 ---```lua
 ---default = "camel"
 ---```
----@field parameterCase? "camel" | "snake"
+---@field parameterCase? "camel"|"snake"
 ---The preferred font case to use when suggesting property names. Defaults to snake case.
 ---
 ---```lua
 ---default = "snake"
 ---```
----@field propertyCase? "camel" | "snake"
+---@field propertyCase? "camel"|"snake"
 ---Controls whether suggestions will include a `sortText` property that may influence sort order.
 ---
 ---```lua
 ---default = "multi-factor"
 ---```
----@field sortText? "none" | "multi-factor"
+---@field sortText? "none"|"multi-factor"
 ---PHP permits the calling of static methods using the object operator eg `$obj->myStaticMethod();`. If you would prefer not to have static methods suggested in this context then set this value to `false`. Defaults to `true`.
 ---
 ---```lua
@@ -109,7 +109,7 @@
 ---```lua
 ---default = "on"
 ---```
----@field argumentCount? "on" | "declared" | "off"
+---@field argumentCount? "on"|"declared"|"off"
 ---Enables deprecated diagnostics.
 ---
 ---```lua
@@ -177,7 +177,7 @@
 ---```lua
 ---default = "onType"
 ---```
----@field run? "onType" | "onSave"
+---@field run? "onType"|"onSave"
 ---Sets the severity level for each diagnostic code.
 ---@field severity? table
 ---When enabled, type checks will be performed as if a `declare(strict_types=1)` directive is present in all files.
@@ -247,7 +247,7 @@
 ---```lua
 ---default = "on"
 ---```
----@field undefinedVariables? "on" | "local" | "off"
+---@field undefinedVariables? "on"|"local"|"off"
 ---Enables unexpected token diagnostics.
 ---
 ---```lua
@@ -311,7 +311,7 @@
 ---```lua
 ---default = "per"
 ---```
----@field braces? "per" | "allman" | "k&r"
+---@field braces? "per"|"allman"|"k&r"
 ---Enables formatting.
 ---
 ---```lua
@@ -424,7 +424,7 @@
 ---```lua
 ---default = "snippet"
 ---```
----@field textFormat? "snippet" | "text"
+---@field textFormat? "snippet"|"text"
 ---Fully qualified names will be used for types when true. When false short type names will be used and imported where appropriate. Overrides intelephense.completion.insertUseDeclaration.
 ---@field useFullyQualifiedNames? boolean
 
@@ -448,7 +448,7 @@
 ---```lua
 ---default = "single"
 ---```
----@field namespaceMode? "single" | "all"
+---@field namespaceMode? "single"|"all"
 
 ---@class _.lspconfig.settings.intelephense.Intelephense.Telemetry
 ---When set to `true`, anonymous usage and crash data will be sent to Azure Application Insights. Defaults to `false`.
@@ -460,7 +460,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.intelephense.Intelephense
 ---@field codeLens? _.lspconfig.settings.intelephense.Intelephense.CodeLens
@@ -491,7 +491,7 @@
 ---```lua
 ---default = { "apache", "bcmath", "bz2", "calendar", "com_dotnet", "Core", "ctype", "curl", "date", "dba", "dom", "enchant", "exif", "FFI", "fileinfo", "filter", "fpm", "ftp", "gd", "gettext", "gmp", "hash", "iconv", "imap", "intl", "json", "ldap", "libxml", "mbstring", "meta", "mysqli", "oci8", "odbc", "openssl", "pcntl", "pcre", "PDO", "pgsql", "Phar", "posix", "pspell", "random", "readline", "Reflection", "session", "shmop", "SimpleXML", "snmp", "soap", "sockets", "sodium", "SPL", "sqlite3", "standard", "superglobals", "sysvmsg", "sysvsem", "sysvshm", "tidy", "tokenizer", "uri", "xml", "xmlreader", "xmlrpc", "xmlwriter", "xsl", "Zend OPcache", "zip", "zlib" }
 ---```
----@field stubs? ("aerospike" | "amqp" | "apache" | "apcu" | "ast" | "bcmath" | "blackfire" | "brotli" | "bz2" | "calendar" | "cassandra" | "com_dotnet" | "Core" | "couchbase" | "couchbase_v2" | "crypto" | "ctype" | "cubrid" | "curl" | "date" | "dba" | "decimal" | "dio" | "dom" | "ds" | "eio" | "elastic_apm" | "enchant" | "Ev" | "event" | "exif" | "expect" | "fann" | "FFI" | "ffmpeg" | "fileinfo" | "filter" | "fpm" | "frankenphp" | "ftp" | "gd" | "gearman" | "geoip" | "geos" | "gettext" | "gmagick" | "gmp" | "gnupg" | "grpc" | "hash" | "http" | "ibm_db2" | "iconv" | "igbinary" | "imagick" | "imap" | "inotify" | "interbase" | "intl" | "json" | "jsonpath" | "judy" | "ldap" | "leveldb" | "libevent" | "libsodium" | "libvirt-php" | "libxml" | "litespeed" | "lua" | "LuaSandbox" | "lzf" | "mailparse" | "mapscript" | "maxminddb" | "mbstring" | "mcrypt" | "memcache" | "memcached" | "meminfo" | "meta" | "ming" | "mongo" | "mongodb" | "mosquitto-php" | "mqseries" | "msgpack" | "mssql" | "mysql" | "mysqli" | "mysql_xdevapi" | "ncurses" | "newrelic" | "oauth" | "oci8" | "odbc" | "openssl" | "opentelemetry" | "pam" | "parallel" | "Parle" | "pcntl" | "pcov" | "pcre" | "pdflib" | "PDO" | "pgsql" | "Phar" | "phpdbg" | "posix" | "pq" | "pspell" | "pthreads" | "radius" | "random" | "rar" | "rdkafka" | "readline" | "recode" | "redis" | "Reflection" | "regex" | "relay" | "rpminfo" | "rrd" | "SaxonC" | "session" | "shmop" | "simdjson" | "simple_kafka_client" | "SimpleXML" | "snappy" | "snmp" | "soap" | "sockets" | "sodium" | "solr" | "SPL" | "SplType" | "SQLite" | "sqlite3" | "sqlsrv" | "ssh2" | "standard" | "stats" | "stomp" | "suhosin" | "superglobals" | "svm" | "svn" | "swoole" | "sybase" | "sync" | "sysvmsg" | "sysvsem" | "sysvshm" | "tidy" | "tokenizer" | "uopz" | "uploadprogress" | "uri" | "uuid" | "uv" | "v8js" | "wddx" | "win32service" | "winbinder" | "wincache" | "wordpress" | "xcache" | "xdebug" | "xdiff" | "xhprof" | "xlswriter" | "xml" | "xmlreader" | "xmlrpc" | "xmlwriter" | "xsl" | "xxtea" | "yaf" | "yaml" | "yar" | "zend" | "ZendCache" | "ZendDebugger" | "Zend OPcache" | "ZendUtils" | "zip" | "zlib" | "zmq" | "zookeeper" | "zstd")[]
+---@field stubs? ("aerospike"|"amqp"|"apache"|"apcu"|"ast"|"bcmath"|"blackfire"|"brotli"|"bz2"|"calendar"|"cassandra"|"com_dotnet"|"Core"|"couchbase"|"couchbase_v2"|"crypto"|"ctype"|"cubrid"|"curl"|"date"|"dba"|"decimal"|"dio"|"dom"|"ds"|"eio"|"elastic_apm"|"enchant"|"Ev"|"event"|"exif"|"expect"|"fann"|"FFI"|"ffmpeg"|"fileinfo"|"filter"|"fpm"|"frankenphp"|"ftp"|"gd"|"gearman"|"geoip"|"geos"|"gettext"|"gmagick"|"gmp"|"gnupg"|"grpc"|"hash"|"http"|"ibm_db2"|"iconv"|"igbinary"|"imagick"|"imap"|"inotify"|"interbase"|"intl"|"json"|"jsonpath"|"judy"|"ldap"|"leveldb"|"libevent"|"libsodium"|"libvirt-php"|"libxml"|"litespeed"|"lua"|"LuaSandbox"|"lzf"|"mailparse"|"mapscript"|"maxminddb"|"mbstring"|"mcrypt"|"memcache"|"memcached"|"meminfo"|"meta"|"ming"|"mongo"|"mongodb"|"mosquitto-php"|"mqseries"|"msgpack"|"mssql"|"mysql"|"mysqli"|"mysql_xdevapi"|"ncurses"|"newrelic"|"oauth"|"oci8"|"odbc"|"openssl"|"opentelemetry"|"pam"|"parallel"|"Parle"|"pcntl"|"pcov"|"pcre"|"pdflib"|"PDO"|"pgsql"|"Phar"|"phpdbg"|"posix"|"pq"|"pspell"|"pthreads"|"radius"|"random"|"rar"|"rdkafka"|"readline"|"recode"|"redis"|"Reflection"|"regex"|"relay"|"rpminfo"|"rrd"|"SaxonC"|"session"|"shmop"|"simdjson"|"simple_kafka_client"|"SimpleXML"|"snappy"|"snmp"|"soap"|"sockets"|"sodium"|"solr"|"SPL"|"SplType"|"SQLite"|"sqlite3"|"sqlsrv"|"ssh2"|"standard"|"stats"|"stomp"|"suhosin"|"superglobals"|"svm"|"svn"|"swoole"|"sybase"|"sync"|"sysvmsg"|"sysvsem"|"sysvshm"|"tidy"|"tokenizer"|"uopz"|"uploadprogress"|"uri"|"uuid"|"uv"|"v8js"|"wddx"|"win32service"|"winbinder"|"wincache"|"wordpress"|"xcache"|"xdebug"|"xdiff"|"xhprof"|"xlswriter"|"xml"|"xmlreader"|"xmlrpc"|"xmlwriter"|"xsl"|"xxtea"|"yaf"|"yaml"|"yar"|"zend"|"ZendCache"|"ZendDebugger"|"Zend OPcache"|"ZendUtils"|"zip"|"zlib"|"zmq"|"zookeeper"|"zstd")[]
 ---@field telemetry? _.lspconfig.settings.intelephense.Intelephense.Telemetry
 ---The maximum call depth to follow when analyzing throw expressions. Defaults to `0`, which limits analysis to the current function. Higher values can have a negative impact on performance.
 ---

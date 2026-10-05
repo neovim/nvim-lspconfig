@@ -6,7 +6,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.spectral.Spectral
 ---Controls whether or not Spectral is enabled.
@@ -22,7 +22,7 @@
 ---```lua
 ---default = "onType"
 ---```
----@field run? "onSave" | "onType"
+---@field run? "onSave"|"onType"
 ---@field trace? _.lspconfig.settings.spectral.Spectral.Trace
 ---An array of file globs (e.g., `**/*.yaml`) in minimatch glob format which should be validated by Spectral. If language identifiers are also specified, the file must match both in order to be validated. You can also use negative file globs (e.g., `!**/package.json`) here to exclude files.
 ---@field validateFiles? string[]

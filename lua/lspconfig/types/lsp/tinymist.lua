@@ -30,7 +30,7 @@
 ---```lua
 ---default = "step"
 ---```
----@field symbol? "step" | "stepless"
+---@field symbol? "step"|"stepless"
 ---%extension.tinymist.config.tinymist.completion.triggerOnSnippetPlaceholders.desc%
 ---@field triggerOnSnippetPlaceholders? boolean
 
@@ -50,7 +50,7 @@
 ---```lua
 ---default = "onSave"
 ---```
----@field when? "onSave" | "onType"
+---@field when? "onSave"|"onType"
 
 ---@class _.lspconfig.settings.tinymist.Tinymist.Preview
 ---%extension.tinymist.config.tinymist.preview.cursorIndicator.desc%
@@ -66,7 +66,7 @@
 ---```lua
 ---default = "never"
 ---```
----@field invertColors? "never" | "auto" | "always"|table
+---@field invertColors? "never"|"auto"|"always"|table
 ---%extension.tinymist.config.tinymist.preview.partialRendering.desc%
 ---
 ---```lua
@@ -80,13 +80,13 @@
 ---```lua
 ---default = "onType"
 ---```
----@field refresh? "onSave" | "onType"
+---@field refresh? "onSave"|"onType"
 ---%extension.tinymist.config.tinymist.preview.scrollSync.desc%
 ---
 ---```lua
 ---default = "onSelectionChangeByMouse"
 ---```
----@field scrollSync? "never" | "onSelectionChangeByMouse" | "onSelectionChange"
+---@field scrollSync? "never"|"onSelectionChangeByMouse"|"onSelectionChange"
 ---%extension.tinymist.config.tinymist.preview.sysInputs.desc%
 ---
 ---```lua
@@ -106,7 +106,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.tinymist.Tinymist
 ---%extension.tinymist.config.tinymist.compileStatus.desc%
@@ -114,14 +114,14 @@
 ---```lua
 ---default = "enable"
 ---```
----@field compileStatus? "enable" | "disable"
+---@field compileStatus? "enable"|"disable"
 ---@field completion? _.lspconfig.settings.tinymist.Tinymist.Completion
 ---%extension.tinymist.config.tinymist.configureDefaultWordSeparator.string.desc%
 ---
 ---```lua
 ---default = "disable"
 ---```
----@field configureDefaultWordSeparator? "enable" | "disable"
+---@field configureDefaultWordSeparator? "enable"|"disable"
 ---%extension.tinymist.config.tinymist.convertExtension.desc%
 ---
 ---```lua
@@ -133,25 +133,25 @@
 ---```lua
 ---default = "enable"
 ---```
----@field copyAndPaste? "enable" | "disable"
+---@field copyAndPaste? "enable"|"disable"
 ---%extension.tinymist.config.tinymist.dragAndDrop.desc%
 ---
 ---```lua
 ---default = "enable"
 ---```
----@field dragAndDrop? "enable" | "disable"
+---@field dragAndDrop? "enable"|"disable"
 ---%extension.tinymist.config.tinymist.exportPdf.desc%
 ---
 ---```lua
 ---default = "never"
 ---```
----@field exportPdf? "never" | "onSave" | "onType" | "onDocumentHasTitle"
+---@field exportPdf? "never"|"onSave"|"onType"|"onDocumentHasTitle"
 ---%extension.tinymist.config.tinymist.exportTarget.desc%
 ---
 ---```lua
 ---default = "paged"
 ---```
----@field exportTarget? "paged" | "html" | "bundle"
+---@field exportTarget? "paged"|"html"|"bundle"
 ---%extension.tinymist.config.tinymist.fontPaths.desc%
 ---@field fontPaths? any[]
 ---%extension.tinymist.config.tinymist.formatterIndentSize.desc%
@@ -165,7 +165,7 @@
 ---```lua
 ---default = "typstyle"
 ---```
----@field formatterMode? "disable" | "typstyle" | "typstfmt"
+---@field formatterMode? "disable"|"typstyle"|"typstfmt"
 ---%extension.tinymist.config.tinymist.formatterPrintWidth.desc%
 ---
 ---```lua
@@ -177,7 +177,7 @@
 ---```lua
 ---default = "none"
 ---```
----@field formatterProseWrap? "none" | "fill" | "sentence"|boolean
+---@field formatterProseWrap? "none"|"fill"|"sentence"|boolean
 ---@field inlayHints? _.lspconfig.settings.tinymist.Tinymist.InlayHints
 ---@field lint? _.lspconfig.settings.tinymist.Tinymist.Lint
 ---%extension.tinymist.config.tinymist.onEnterEvent.desc%
@@ -204,7 +204,7 @@
 ---```lua
 ---default = "enable"
 ---```
----@field previewFeature? "enable" | "disable"
+---@field previewFeature? "enable"|"disable"
 ---%extension.tinymist.config.tinymist.previewer.desc%
 ---
 ---```lua
@@ -216,13 +216,13 @@
 ---```lua
 ---default = "singleFile"
 ---```
----@field projectResolution? "singleFile" | "lockDatabase"
+---@field projectResolution? "singleFile"|"lockDatabase"
 ---%extension.tinymist.config.tinymist.renderDocs.desc%
 ---
 ---```lua
 ---default = "enable"
 ---```
----@field renderDocs? "enable" | "disable"
+---@field renderDocs? "enable"|"disable"
 ---%extension.tinymist.config.tinymist.rootPath.desc%
 ---@field rootPath? string
 ---%extension.tinymist.config.tinymist.semanticTokens.desc%
@@ -230,11 +230,11 @@
 ---```lua
 ---default = "enable"
 ---```
----@field semanticTokens? "enable" | "disable"
+---@field semanticTokens? "enable"|"disable"
 ---%extension.tinymist.config.tinymist.serverPath.desc%
 ---@field serverPath? string
 ---%extension.tinymist.config.tinymist.showExportFileIn.desc%
----@field showExportFileIn? "editorTab" | "systemDefault"
+---@field showExportFileIn? "editorTab"|"systemDefault"
 ---%extension.tinymist.config.tinymist.statusBarFormat.desc%
 ---
 ---```lua
@@ -246,7 +246,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field syntaxOnly? "auto" | "onPowerSaving" | "enable" | "disable"
+---@field syntaxOnly? "auto"|"onPowerSaving"|"enable"|"disable"
 ---%extension.tinymist.config.tinymist.systemFonts.desc%
 ---
 ---```lua
