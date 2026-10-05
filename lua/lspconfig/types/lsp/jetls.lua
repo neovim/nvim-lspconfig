@@ -85,12 +85,12 @@
 ---default = {}
 ---```
 ---@field concretization_patterns? table[]
----Time limit in seconds for concrete execution of each top-level statement during script and package full analysis (default: 10 seconds), not for the overall analysis. Accepts a positive finite number or the exact string `"inf"` to disable the timeout (risks hangs). Checks cover recursively interpreted callees, but pattern-selected blocks (including package source analysis) run calls natively, with checks only at interpreted top-level statement boundaries. Native calls, including `ccall`, builtins, and `Core.eval`, cannot be interrupted. Time in `include`s and module-loading statements handled by JET is excluded from the caller's limit. See [`concretization_timeout`](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/full_analysis/concretization_timeout).
+---Time limit in seconds for concrete execution of each top-level statement during script and package full analysis (default: 10 seconds), not for the overall analysis. Accepts a positive finite number or the exact string `"inf"` to disable the timeout (risks hangs). Checks cover recursively interpreted callees, including code passed to `Core.eval` (e.g. by `@eval`), but pattern-selected blocks (including package source analysis) run calls natively, with checks only at interpreted top-level statement boundaries. Native calls, including `ccall`, builtins, and the `__init__` functions of modules evaluated by `Core.eval`, cannot be interrupted. Time in `include`s and module-loading statements handled by JET is excluded from the caller's limit. See [`concretization_timeout`](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/full_analysis/concretization_timeout).
 ---
 ---```lua
 ---default = 10
 ---```
----@field concretization_timeout? any
+---@field concretization_timeout? number|"inf"
 ---Debounce time in seconds before triggering full analysis after a file save. Higher values reduce analysis frequency but may delay diagnostic updates.
 ---
 ---```lua
@@ -161,7 +161,7 @@
 ---```lua
 ---default = "Runic"
 ---```
----@field formatter? any
+---@field formatter? "Runic" | "JuliaFormatter"|table
 ---Configuration for full JET analysis. See [Full analysis configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/full_analysis).
 ---@field full_analysis? _.lspconfig.settings.jetls.JetlsClient.Settings.FullAnalysis
 ---Inlay hint configuration. See [Inlay hint configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/inlay_hint).
@@ -191,7 +191,7 @@
 ---```lua
 ---default = {}
 ---```
----@field executable? any
+---@field executable? table|string[]
 ---Static initialization options that are set once at server startup and require a server restart to take effect. See [Initialization options](https://aviatesk.github.io/JETLS.jl/release/launching/#init-options).
 ---
 ---```lua

@@ -64,12 +64,14 @@
 ---@field analyzerAdditionalArgs? string[]
 ---The port number to be used for the Dart analyzer diagnostic server. This setting is can be useful for troubleshooting issues with the Dart Analysis Server.
 ---@field analyzerDiagnosticsPort? number
----The path to a log file for very detailed logging in the Dart Analysis Server that may be useful when trying to diagnose Analysis Server issues. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should then use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
+---The path to a log file for very detailed logging in the Dart Analysis Server (captured on the server side) that may be useful when trying to diagnose Analysis Server issues. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should then use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field analyzerInstrumentationLogFile? string
----The path to a log file for communication between Dart Code and the Analysis Server. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should then use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
+---The path to a log file for communication between Dart Code and the Analysis Server (captured on the client side). Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should then use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field analyzerLogFile? string
 ---The path to a custom Dart Analysis Server. This setting is intended for use by Dart Analysis Server developers. Use `~` to insert the user's home directory (the path should then use `/` separators even on Windows).
 ---@field analyzerPath? string
+---The path to the Dart Analysis Server session log (captured on the server side) that may be useful when trying to diagnose Analysis Server issues. This log is a replacement for the instrumentation log but might not contain all of the same information in earlier SDKs. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should then use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
+---@field analyzerSessionLogFile? string
 ---An SSH host to run the Analysis Server.
 ---This can be useful when modifying code on a remote machine using SSHFS.
 ---@field analyzerSshHost? string
@@ -514,7 +516,7 @@
 ---```lua
 ---default = { "testRunStart" }
 ---```
----@field openTestView? any[]
+---@field openTestView? ("testRunStart" | "testFailure")[]
 ---EXPERIMENTAL: Whether to enable commit characters for the LSP server. In a future release, the dart.enableCompletionCommitCharacters setting will also apply to LSP.
 ---@field previewCommitCharacters? boolean
 ---EXPERIMENTAL: Whether to enable the [Flutter UI Guides preview](https://dartcode.org/releases/v3-1/#preview-flutter-ui-guides).

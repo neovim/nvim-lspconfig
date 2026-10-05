@@ -93,7 +93,7 @@
 ---```lua
 ---default = { "swift", "objective-c", "objective-cpp", "c", "cpp" }
 ---```
----@field ["supported-languages"]? string[]
+---@field ["supported-languages"]? ("swift" | "objective-c" | "objective-cpp" | "c" | "cpp")[]
 ---@field trace? _.lspconfig.settings.sourcekit.Swift.SourcekitLsp.Trace
 
 ---@class _.lspconfig.settings.sourcekit.Swift
@@ -156,8 +156,6 @@
 ---When enabled, the extension will create "swift" build tasks for library products in the package manifest. Note that automatic library products will not be included.
 ---@field createTasksForLibraryProducts? boolean
 ---@field debugger? _.lspconfig.settings.sourcekit.Swift.Debugger
----Output additional diagnostics to the Swift output channel.
----@field diagnostics? boolean
 ---Controls how diagnostics from the various providers are merged into the collection of `swift` errors and warnings shown in the Problems pane.
 ---
 ---```lua
@@ -208,6 +206,12 @@
 ---@field ignoreSearchingForPackagesInSubfolders? string[]
 ---Ignore `.swift-version` files and disable automatic toolchain switching based on them. When enabled, the extension will always use the global default toolchain instead of switching based on per-project `.swift-version` files.
 ---@field ignoreSwiftVersionFile? boolean
+---The log level of the extension's log file. This has no effect on the verbosity of messages written to the Swift output channel.
+---
+---```lua
+---default = "debug"
+---```
+---@field logFileLogLevel? "trace" | "debug" | "info" | "warn" | "error"
 ---Set the branch to use when setting the `$schema` property of the SourceKit-LSP configuration. For example: "release/6.1" or "main". When this setting is unset, the extension will determine the branch based on the version of the toolchain that is in use.
 ---@field lspConfigurationBranch? string
 ---The maximum number of directories to watch for changes to a `.swift-version` file, starting at a `Package.swift` and walking upwards towards the root of the file system. A value of `1` watches the directory containing the `Package.swift` only.
@@ -227,7 +231,7 @@
 ---```lua
 ---default = "info"
 ---```
----@field outputChannelLogLevel? "debug" | "info" | "warn" | "error"
+---@field outputChannelLogLevel? "trace" | "debug" | "info" | "warn" | "error"
 ---Additional arguments to pass to swift commands that do package resolution, such as `swift package resolve`, `swift package update`, `swift build` and `swift test`. Keys and values should be provided as individual entries in the list.
 ---
 ---```lua
@@ -245,7 +249,7 @@
 ---```lua
 ---default = {}
 ---```
----@field pluginArguments? any
+---@field pluginArguments? string[]|table
 ---Configures a list of permissions to be used when running a command plugins.
 ---
 ---Permissions objects are defined in the form:
@@ -297,7 +301,7 @@
 ---```lua
 ---default = true
 ---```
----@field showTestCodeLenses? boolean|string[]
+---@field showTestCodeLenses? boolean|("run" | "debug" | "coverage")[]
 ---@field ["sourcekit-lsp"]? _.lspconfig.settings.sourcekit.Swift.SourcekitLsp
 ---Additional environment variables to pass to swift operations (`swift build`, `swift resolve`, etc...).
 ---

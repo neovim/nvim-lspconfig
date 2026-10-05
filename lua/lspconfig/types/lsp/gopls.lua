@@ -1,29 +1,29 @@
 ---@meta
 
----Tags and options configured here will be used by the Add Tags command to add tags to struct fields. If promptForTags is true, then user will be prompted for tags and options. By default, json tags are added.
+---Tags and options configured here will be used by the Add Tags command to add tags to struct fields. If promptForTags is true, or if neither tags nor options are configured, the user will be prompted for tags and the transformation rule.
 ---
 ---```lua
 ---default = {
----  options = "json=omitempty",
+---  options = "",
 ---  promptForTags = false,
----  tags = "json",
+---  tags = "",
 ---  template = "",
----  transform = "snakecase"
+---  transform = ""
 ---}
 ---```
 ---@class _.lspconfig.settings.gopls.Go.AddTags
 ---Comma separated tag=options pairs to be used by Go: Add Tags command
 ---
 ---```lua
----default = "json=omitempty"
+---default = ""
 ---```
 ---@field options? string
----If true, Go: Add Tags command will prompt the user to provide tags, options, transform values instead of using the configured values
+---If true, Go: Add Tags command will always prompt the user to provide tags, options, and transform values instead of using the configured values
 ---@field promptForTags? boolean
 ---Comma separated tags to be used by Go: Add Tags command
 ---
 ---```lua
----default = "json"
+---default = ""
 ---```
 ---@field tags? string
 ---Custom format used by Go: Add Tags command for the tag value to be applied
@@ -32,10 +32,10 @@
 ---default = ""
 ---```
 ---@field template? string
----Transformation rule used by Go: Add Tags command to add tags
+---Transformation rule used by Go: Add Tags command to add tags. Defaults to snakecase if empty.
 ---
 ---```lua
----default = "snakecase"
+---default = ""
 ---```
 ---@field transform? "snakecase" | "camelcase" | "lispcase" | "pascalcase" | "keep"
 
@@ -399,10 +399,18 @@
 ---implicitly ignored.
 ---
 ---To suppress the hint, write an actual comment containing
----"ignore error" following the call statement, or explicitly
----assign the result to a blank variable. A handful of common
----functions such as `fmt.Println` are excluded from the
----check.
+---one of the following strings:
+---```
+---ignore error
+---discard error
+---can't fail
+---cannot fail
+---```
+---following the call statement, or explicitly assign the
+---result to a blank variable.
+---
+---A handful of common functions such as `fmt.Println` are
+---excluded from the check.
 ---
 ---@field ignoredError? boolean
 ---`"parameterNames"` controls inlay hints for parameter names:
@@ -452,7 +460,7 @@
 ---```
 ---@field share? boolean
 
----Tags and options configured here will be used by the Remove Tags command to remove tags to struct fields. If promptForTags is true, then user will be prompted for tags and options. By default, all tags and options will be removed.
+---Tags and options configured here will be used by the Remove Tags command to remove tags from struct fields. If promptForTags is true, or if neither tags nor options are configured, the user will be prompted for tags.
 ---
 ---```lua
 ---default = {
@@ -465,15 +473,15 @@
 ---Comma separated tag=options pairs to be used by Go: Remove Tags command
 ---
 ---```lua
----default = "json=omitempty"
+---default = ""
 ---```
 ---@field options? string
----If true, Go: Remove Tags command will prompt the user to provide tags and options instead of using the configured values
+---If true, Go: Remove Tags command will always prompt the user to provide tags and options instead of using the configured values
 ---@field promptForTags? boolean
 ---Comma separated tags to be used by Go: Remove Tags command
 ---
 ---```lua
----default = "json"
+---default = ""
 ---```
 ---@field tags? string
 
@@ -556,15 +564,15 @@
 ---@field server? "off" | "messages" | "verbose"
 
 ---@class _.lspconfig.settings.gopls.Go
----Tags and options configured here will be used by the Add Tags command to add tags to struct fields. If promptForTags is true, then user will be prompted for tags and options. By default, json tags are added.
+---Tags and options configured here will be used by the Add Tags command to add tags to struct fields. If promptForTags is true, or if neither tags nor options are configured, the user will be prompted for tags and the transformation rule.
 ---
 ---```lua
 ---default = {
----  options = "json=omitempty",
+---  options = "",
 ---  promptForTags = false,
----  tags = "json",
+---  tags = "",
 ---  template = "",
----  transform = "snakecase"
+---  transform = ""
 ---}
 ---```
 ---@field addTags? _.lspconfig.settings.gopls.Go.AddTags
@@ -739,7 +747,7 @@
 ---}
 ---```
 ---@field playground? _.lspconfig.settings.gopls.Go.Playground
----Tags and options configured here will be used by the Remove Tags command to remove tags to struct fields. If promptForTags is true, then user will be prompted for tags and options. By default, all tags and options will be removed.
+---Tags and options configured here will be used by the Remove Tags command to remove tags from struct fields. If promptForTags is true, or if neither tags nor options are configured, the user will be prompted for tags.
 ---
 ---```lua
 ---default = {
@@ -3509,6 +3517,12 @@
 ---For byte slices, it will prefer bytes.Clone if the "bytes" package is
 ---already imported.
 ---
+---Since the replacement (slices.Concat, or slices.Clone) allocates a new
+---slice, any slices.Clone or bytes.Clone wrapping one of the operands is
+---redundant and is removed, e.g. append(append([]T{}, slices.Clone(s)...),
+---t...) becomes slices.Concat(s, t). The clone of os.Environ in
+---append([]string(nil), os.Environ()...) is likewise elided.
+---
 ---This fix is only applied when the base of the append tower is a
 ---"clipped" slice, meaning its length and capacity are equal (e.g.
 ---x[:0:0] or []T{}). This is to avoid changing program behavior by
@@ -3981,6 +3995,21 @@
 ---default = true
 ---```
 ---@field ifaceassert? boolean
+---remove obsolete comments specifying canonical import path
+---
+---The importcomment analyzer removes comments specifying the canonical
+---import path, such as
+---
+---	package foo // import "example.com/foo"
+---
+---The go command enforced these comments in GOPATH mode via "go get", but
+---ignores them in module mode, so they are obsolete once the package
+---belongs to a module. The fix removes the comment.
+---
+---```lua
+---default = true
+---```
+---@field importcomment? boolean
 ---check for unnecessary type arguments in call expressions
 ---
 ---Explicit type arguments may be omitted from call expressions if they can be
@@ -4457,6 +4486,24 @@
 ---default = true
 ---```
 ---@field printf? boolean
+---detect inconsistent conversions of concrete types to error
+---
+---The ptrtoerror analyzer detects when a concrete type E is converted
+---to the error interface inconsistently, both as a value of type E
+---and as a pointer of type *E. Such inconsistency defeats attempts by
+---client code to test for specific error types using type assertions
+---or library functions such as [errors.As] and [errors.Is].
+---
+---The analyzer also detects when both E and *E implement error but
+---neither of those types is converted to error within the defining
+---package, leaving the intended error form (E or *E) ambiguous. This
+---diagnostic offers two alternative fixes to add declarations that
+---make the intent explicit.
+---
+---```lua
+---default = true
+---```
+---@field ptrtoerror? boolean
 ---replace 3-clause for loops with for-range over integers
 ---
 ---The rangeint analyzer suggests replacing traditional for loops such
@@ -4571,6 +4618,23 @@
 ---default = true
 ---```
 ---@field recursiveiter? boolean
+---replace v.Interface().(T) with reflect.TypeAssert[T](v)
+---
+---This analyzer suggests fixes to replace two-valued type assertions on
+---the result of (reflect.Value).Interface with reflect.TypeAssert,
+---introduced in go1.25, which avoids the intermediate allocation of an
+---interface value, for example:
+---
+---	x, ok := v.Interface().(string)  ->  x, ok := reflect.TypeAssert[string](v)
+---
+---No fix is offered for single-valued assertions, since they panic when
+---the assertion fails whereas reflect.TypeAssert does not. Nor is a fix
+---offered for a type switch.
+---
+---```lua
+---default = true
+---```
+---@field reflecttypeassert? boolean
 ---replace reflect.TypeOf(x) with TypeFor[T]()
 ---
 ---This analyzer suggests fixes to replace uses of reflect.TypeOf(x) with
@@ -4773,6 +4837,24 @@
 ---default = true
 ---```
 ---@field slicesbackward? boolean
+---replace three-index slice expressions with slices.Clip
+---
+---The slicesclip analyzer suggests replacing a full slice expression of
+---the form
+---
+---	x[:len(x):len(x)]
+---
+---which clips the capacity of a slice to its length, with the simpler
+---and more readable
+---
+---	slices.Clip(x)
+---
+---added in Go 1.21.
+---
+---```lua
+---default = true
+---```
+---@field slicesclip? boolean
 ---replace loops with slices.Contains or slices.ContainsFunc
 ---
 ---The slicescontains analyzer simplifies loops that check for the existence of
@@ -4898,7 +4980,7 @@
 ---iterator offered by the same data type:
 ---
 ---	for elem := range x.All() {
----		use(x.At(i)
+---		use(elem)
 ---	}
 ---
 ---where x is one of various well-known types in the standard library.
@@ -5033,6 +5115,7 @@
 ---replace strings.Index etc. with strings.Cut
 ---
 ---This analyzer replaces certain patterns of use of [strings.Index] and string slicing by [strings.Cut], added in go1.18.
+---It also replaces analogous uses of [strings.LastIndex] by [strings.CutLast], added in go1.27.
 ---
 ---For example:
 ---
@@ -5044,6 +5127,20 @@
 ---is replaced by:
 ---
 ---	before, _, ok := strings.Cut(s, substr)
+---	if ok {
+---	    return before
+---	}
+---
+---And:
+---
+---	idx := strings.LastIndex(s, substr)
+---	if idx >= 0 {
+---	    return s[:idx]
+---	}
+---
+---is replaced by:
+---
+---	before, _, ok := strings.CutLast(s, substr)
 ---	if ok {
 ---	    return before
 ---	}
@@ -5062,9 +5159,13 @@
 ---	    return
 ---	}
 ---
----It also handles variants using [strings.IndexByte] instead of Index, or the bytes package instead of strings.
+---(LastIndex used only as a presence check is also rewritten to Contains.)
+---
+---It also handles variants using [strings.IndexByte] or [strings.LastIndexByte]
+---instead of Index/LastIndex, or the bytes package instead of strings.
 ---
 ---Fixes are offered only in cases in which there are no potential modifications of the idx, s, or substr expressions between their definition and use.
+---CutLast fixes are offered only when the file's Go version is at least 1.27.
 ---
 ---It also replaces [strings.SplitN](s, sep, 2)[0] and [strings.Split](s, sep)[0] with the "before" result of strings.Cut, when sep is a non-empty string constant:
 ---
@@ -5696,6 +5797,29 @@
 ---default = 0
 ---```
 ---@field maxFileCacheBytes? number
+---(Experimental) memoryLimit sets a soft memory limit (in bytes) for the gopls process, via
+---runtime/debug.SetMemoryLimit. If non-positive (the default), no limit is set.
+---
+---On large workspaces, a single edit that invalidates many
+---packages (for example a syntax error in a widely-imported
+---package) can make the heap briefly grow well above the
+---steady-state working set before the garbage collector
+---catches up, spiking memory and, on memory-constrained
+---machines, causing swapping. A soft limit makes the GC work
+---harder to stay near the limit, trading some CPU for a lower
+---memory peak.
+---
+---The limit is soft and may be exceeded. Set it comfortably above the
+---steady-state working set, as too low a value causes excessive GC.
+---
+---Unlike the GOMEMLIMIT environment variable, this setting is
+---strictly numeric; SI suffixes are not permitted.
+---
+---
+---```lua
+---default = 0
+---```
+---@field memoryLimit? number
 ---codelenses overrides the enabled/disabled state of each of gopls'
 ---sources of [Code Lenses](codelenses.md).
 ---
@@ -5870,6 +5994,10 @@
 ---default = true
 ---```
 ---@field ["ui.documentation.linksInHover"]? false | true | "gopls"
+---(Experimental) moveDeclaration enables producing Move Declaration codeactions. The implementation
+---is unfinished so we use this setting to gate its use.
+---
+---@field ["ui.moveDeclaration"]? boolean
 ---(Experimental) moveType enables producing Move Type codeactions. The implementation
 ---is unfinished so we use this setting to gate its use.
 ---

@@ -44,7 +44,7 @@
 ---```lua
 ---default = {}
 ---```
----@field dialyzerWarnOpts? string[]
+---@field dialyzerWarnOpts? ("no_return" | "no_unused" | "no_unknown" | "no_improper_lists" | "no_fun_app" | "no_match" | "no_opaque" | "no_fail_call" | "no_contracts" | "no_behaviours" | "no_undefined_callbacks" | "unmatched_returns" | "error_handling" | "no_missing_calls" | "specdiffs" | "overspecs" | "underspecs" | "no_underspecs" | "extra_return" | "no_extra_return" | "missing_return" | "no_missing_return" | "unknown" | "overlapping_contract" | "opaque_union" | "no_opaque_union")[]
 ---Path to a custom .formatter.exs file used when formatting documents
 ---@field dotFormatter? string
 ---Show code lenses to run tests in terminal.

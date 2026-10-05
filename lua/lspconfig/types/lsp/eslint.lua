@@ -88,7 +88,7 @@
 ---```
 ---@field options? table
 ---The rules that should be executed when computing the code actions on save or formatting a file. Defaults to the rules configured via the ESLint configuration
----@field rules? string[]|any
+---@field rules? string[]
 
 ---@class _.lspconfig.settings.eslint.Eslint.Experimental
 ---Enables support of experimental Flat Config (aka eslint.config.js). Requires ESLint version >= 8.21 < 8.57.0).
@@ -224,7 +224,7 @@
 ---```
 ---@field enable? boolean
 ---Additional exec argv argument passed to the runtime. This can for example be used to control the maximum heap space using --max_old_space_size
----@field execArgv? string[]|any
+---@field execArgv? string[]
 ---@field experimental? _.lspconfig.settings.eslint.Eslint.Experimental
 ---@field format? _.lspconfig.settings.eslint.Eslint.Format
 ---If true, untitled files won't be validated by ESLint.
@@ -287,9 +287,9 @@
 ---Whether ESLint should use real paths when resolving files. This is useful when working with symlinks or when the casing of file paths is inconsistent.
 ---@field useRealpaths? boolean
 ---An array of language ids which should be validated by ESLint. If not installed ESLint will show an error.
----@field validate? any[]
+---@field validate? (string|table)[]
 ---Specifies how the working directories ESLint is using are computed. ESLint resolves configuration files (e.g. `eslintrc`, `.eslintignore`) relative to a working directory so it is important to configure this correctly.
----@field workingDirectories? any[]
+---@field workingDirectories? (string|table|table|table|table)[]
 
 ---@class lspconfig.settings.eslint
 ---@field eslint? _.lspconfig.settings.eslint.Eslint

@@ -127,7 +127,7 @@
 ---```lua
 ---default = {}
 ---```
----@field convertExtension? any[]
+---@field convertExtension? ("markdown"|table)[]
 ---%extension.tinymist.config.tinymist.copyAndPaste.desc%
 ---
 ---```lua

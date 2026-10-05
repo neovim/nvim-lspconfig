@@ -405,7 +405,7 @@
 ---```lua
 ---default = { "pycodestyle" }
 ---```
----@field configurationSources? string[]
+---@field configurationSources? ("pycodestyle" | "flake8")[]
 ---@field plugins? _.lspconfig.settings.pylsp.Pylsp.Plugins
 ---@field rope? _.lspconfig.settings.pylsp.Pylsp.Rope
 ---@field signature? _.lspconfig.settings.pylsp.Pylsp.Signature

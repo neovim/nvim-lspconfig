@@ -799,7 +799,7 @@
 ---```lua
 ---default = "vscode"
 ---```
----@field watchOptions? any
+---@field watchOptions? "vscode"|table
 ---@field web? _.lspconfig.settings.vtsls.Typescript.Tsserver.Web
 
 ---@class _.lspconfig.settings.vtsls.Typescript.UpdateImportsOnFileMove

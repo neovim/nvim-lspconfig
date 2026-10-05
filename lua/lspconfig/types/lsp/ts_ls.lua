@@ -918,7 +918,7 @@
 ---```lua
 ---default = "vscode"
 ---```
----@field watchOptions? any
+---@field watchOptions? "vscode"|table
 ---@field web? _.lspconfig.settings.ts_ls.JsTs.Tsserver.Web
 
 ---@class _.lspconfig.settings.ts_ls.JsTs.UpdateImportsOnFileMove
@@ -1430,7 +1430,7 @@
 ---```lua
 ---default = "vscode"
 ---```
----@field watchOptions? any
+---@field watchOptions? "vscode"|table
 ---@field web? _.lspconfig.settings.ts_ls.Typescript.Tsserver.Web
 
 ---@class _.lspconfig.settings.ts_ls.Typescript.UpdateImportsOnFileMove

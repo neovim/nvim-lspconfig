@@ -576,7 +576,7 @@
 ---```lua
 ---default = "information"
 ---```
----@field diagnosticSeverity? any
+---@field diagnosticSeverity? "error" | "warning" | "information" | "hint"|table
 ---Lists of additional words that should not be counted as spelling errors. [More info...](https://valentjn.github.io/ltex/settings.html#ltexdictionary)
 ---
 ---```lua
@@ -594,7 +594,7 @@
 ---```lua
 ---default = { "bibtex", "context", "context.tex", "html", "latex", "markdown", "org", "restructuredtext", "rsweave" }
 ---```
----@field enabled? any
+---@field enabled? boolean|string[]
 ---Lists of rules that should be enabled (if disabled by default by LanguageTool). [More info...](https://valentjn.github.io/ltex/settings.html#ltexenabledrules)
 ---
 ---```lua

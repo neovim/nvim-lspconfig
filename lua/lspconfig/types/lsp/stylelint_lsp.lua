@@ -70,7 +70,7 @@
 ---```
 ---@field enable? boolean
 ---Additional exec argv arguments passed to the Node.js runtime.
----@field execArgv? string[]|any
+---@field execArgv? string[]
 ---Ignore `stylelint-disable` (e.g. `/* stylelint-disable block-no-empty */`) comments.
 ---@field ignoreDisables? boolean
 ---Path to a file containing patterns describing files to ignore. Use to override automatic `.stylelintignore` detection.

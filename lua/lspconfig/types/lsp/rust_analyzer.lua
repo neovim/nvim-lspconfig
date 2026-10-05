@@ -176,7 +176,7 @@
 ---
 ---Set to `true` to use a subdirectory of the existing target directory or
 ---set to a path relative to the workspace to use that path.
----@field targetDir? any|boolean|string
+---@field targetDir? boolean|string
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Cfg
 ---Set `cfg(test)` for local crates. Defaults to true.
@@ -213,7 +213,7 @@
 ---`#rust-analyzer.cargo.features#`.
 ---
 ---Set to `"all"` to pass `--all-features` to Cargo.
----@field features? "all"|string[]|any
+---@field features? "all"|string[]
 ---List of `cargo check` (or other command specified in `check.command`) diagnostics to ignore.
 ---
 ---For example for `cargo check`: `dead_code`, `unused_imports`, `unused_variables`,...
@@ -278,7 +278,7 @@
 ---`["aarch64-apple-darwin", "x86_64-apple-darwin"]`.
 ---
 ---Aliased as `"checkOnSave.targets"`.
----@field targets? any|string|string[]
+---@field targets? string|string[]
 ---Whether `--workspace` should be passed to `cargo check`.
 ---If false, `-p <package>` will be passed instead if applicable. In case it is not, no
 ---check will be performed.
@@ -344,7 +344,7 @@
 ---    type = "methods"
 ---  } }
 ---```
----@field exclude? any[]
+---@field exclude? (string|table)[]
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.Autoself
 ---Show method calls and field access completions with `self` prefixed to them when
@@ -505,7 +505,7 @@
 ---  ["/rustc/<id>"] = "${env:USERPROFILE}/.rustup/toolchains/<toolchain-id>/lib/rustlib/src/rust"
 ---}
 ---```
----@field sourceFileMap? table|string
+---@field sourceFileMap? "auto"
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Diagnostics.Experimental
 ---Show experimental rust-analyzer diagnostics that might have more false positives than
@@ -759,7 +759,7 @@
 ---```lua
 ---default = "hexadecimal"
 ---```
----@field alignment? any|"both" | "decimal" | "hexadecimal"
+---@field alignment? "both" | "decimal" | "hexadecimal"
 ---Show memory layout data on hover.
 ---
 ---```lua
@@ -773,15 +773,15 @@
 ---```lua
 ---default = "hexadecimal"
 ---```
----@field offset? any|"both" | "decimal" | "hexadecimal"
+---@field offset? "both" | "decimal" | "hexadecimal"
 ---How to render the padding information in a memory layout hover.
----@field padding? any|"both" | "decimal" | "hexadecimal"
+---@field padding? "both" | "decimal" | "hexadecimal"
 ---How to render the size information in a memory layout hover.
 ---
 ---```lua
 ---default = "both"
 ---```
----@field size? any|"both" | "decimal" | "hexadecimal"
+---@field size? "both" | "decimal" | "hexadecimal"
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Show
 ---How many variants of an enum to display when hovering on. Show none if empty.
@@ -816,7 +816,7 @@
 ---```lua
 ---default = 20
 ---```
----@field maxSubstitutionLength? any|"hide"|integer
+---@field maxSubstitutionLength? "hide"|integer
 ---@field memoryLayout? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.MemoryLayout
 ---@field show? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Hover.Show
 
@@ -1349,7 +1349,7 @@
 ---```
 ---@field extraArgs? string[]
 ---Environment variables passed to the runnable launched using `Test` or `Debug` lens or `rust-analyzer.run` command.
----@field extraEnv? any|table[]|table
+---@field extraEnv? table[]|table
 ---Additional arguments to be passed through Cargo to launched tests, benchmarks, or
 ---doc-tests.
 ---
@@ -1758,7 +1758,7 @@
 ---
 ---Stderr is not parsed as JSONL. It is treated as command log
 ---output and forwarded to rust-analyzer's own logs.
----@field discoverConfig? any|table
+---@field discoverConfig? table
 ---@field symbol? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Workspace.Symbol
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer
@@ -1800,12 +1800,12 @@
 ---```lua
 ---default = {}
 ---```
----@field linkedProjects? any[]
+---@field linkedProjects? (string|table)[]
 ---@field lru? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Lru
 ---@field notifications? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Notifications
 ---The number of worker threads in the main loop. The default `null` means to pick
 ---automatically.
----@field numThreads? any|number|"physical" | "logical"
+---@field numThreads? number|"physical" | "logical"
 ---@field procMacro? _.lspconfig.settings.rust_analyzer.RustAnalyzer.ProcMacro
 ---@field profiling? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Profiling
 ---@field projectCreation? _.lspconfig.settings.rust_analyzer.RustAnalyzer.ProjectCreation

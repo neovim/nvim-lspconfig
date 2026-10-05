@@ -18,11 +18,11 @@
 ---```lua
 ---default = { "renameFileToType" }
 ---```
----@field actions? string[]
+---@field actions? ("qualifyMembers" | "qualifyStaticMembers" | "addOverride" | "addDeprecated" | "stringConcatToTextBlock" | "invertEquals" | "addFinalModifier" | "instanceofPatternMatch" | "lambdaExpressionFromAnonymousClass" | "lambdaExpression" | "switchExpression" | "tryWithResource" | "renameFileToType" | "organizeImports" | "renameUnusedLocalVariables" | "useSwitchForInstanceofPattern" | "redundantComparisonStatement" | "redundantFallingThroughBlockEnd" | "redundantIfCondition" | "redundantModifiers" | "redundantSuperCall")[]
 ---```lua
 ---default = {}
 ---```
----@field actionsOnSave? string[]
+---@field actionsOnSave? ("qualifyMembers" | "qualifyStaticMembers" | "addOverride" | "addDeprecated" | "stringConcatToTextBlock" | "invertEquals" | "addFinalModifier" | "instanceofPatternMatch" | "lambdaExpressionFromAnonymousClass" | "lambdaExpression" | "switchExpression" | "tryWithResource")[]
 
 ---@class _.lspconfig.settings.jdtls.Java.CodeAction.SortMembers
 ---Reordering of fields, enum constants, and initializers can result in semantic and runtime changes due to different initialization and persistence order. This setting prevents this from occurring.
