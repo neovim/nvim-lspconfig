@@ -72,6 +72,7 @@ return {
   root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers1, root_markers2, { '.git' } }
     or vim.list_extend(vim.list_extend(root_markers1, root_markers2), { '.git' }),
   workspace_required = false,
+  ---@type lspconfig.settings.emmylua_ls
   settings = {
     emmylua = {
       codeLens = { enable = true },
