@@ -6,7 +6,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.flow.Flow
 ---Type coverage diagnostic severity
@@ -14,7 +14,7 @@
 ---```lua
 ---default = "info"
 ---```
----@field coverageSeverity? "error" | "warn" | "info"
+---@field coverageSeverity? "error"|"warn"|"info"
 ---Is flow enabled
 ---
 ---```lua
@@ -28,7 +28,7 @@
 ---```lua
 ---default = "info"
 ---```
----@field logLevel? "error" | "warn" | "info" | "trace"
+---@field logLevel? "error"|"warn"|"info"|"trace"
 ---Absolute path to flow binary. Special var ${workspaceFolder} or ${flowconfigDir} can be used in path (NOTE: in windows you can use '/' and can omit '.cmd' in path)
 ---
 ---```lua

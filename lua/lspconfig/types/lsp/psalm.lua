@@ -6,7 +6,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.psalm.Psalm
 ---A list of file extensions to request Psalm to analyze. By default, this only includes 'php' (Modifying requires VSCode reload)
@@ -50,7 +50,7 @@
 ---```lua
 ---default = "INFO"
 ---```
----@field logLevel? "NONE" | "ERROR" | "WARN" | "INFO" | "DEBUG" | "TRACE"
+---@field logLevel? "NONE"|"ERROR"|"WARN"|"INFO"|"DEBUG"|"TRACE"
 ---The number of times the Language Server is allowed to crash and restart before it will no longer try to restart (Modifying requires VSCode reload)
 ---
 ---```lua

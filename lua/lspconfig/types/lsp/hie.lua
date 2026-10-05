@@ -243,7 +243,7 @@
 ---```lua
 ---default = "always"
 ---```
----@field mode? "always" | "exported" | "diagnostics"
+---@field mode? "always"|"exported"|"diagnostics"
 
 ---@class _.lspconfig.settings.hie.Haskell.Plugin.GhcideTypeLenses
 ---@field config? _.lspconfig.settings.hie.Haskell.Plugin.GhcideTypeLenses.Config
@@ -379,79 +379,79 @@
 ---```lua
 ---default = "method"
 ---```
----@field classMethodToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---@field classMethodToken? "namespace"|"type"|"class"|"enum"|"interface"|"struct"|"typeParameter"|"parameter"|"variable"|"property"|"enumMember"|"event"|"function"|"method"|"macro"|"keyword"|"modifier"|"comment"|"string"|"number"|"regexp"|"operator"|"decorator"
 ---LSP semantic token type to use for typeclasses
 ---
 ---```lua
 ---default = "class"
 ---```
----@field classToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---@field classToken? "namespace"|"type"|"class"|"enum"|"interface"|"struct"|"typeParameter"|"parameter"|"variable"|"property"|"enumMember"|"event"|"function"|"method"|"macro"|"keyword"|"modifier"|"comment"|"string"|"number"|"regexp"|"operator"|"decorator"
 ---LSP semantic token type to use for data constructors
 ---
 ---```lua
 ---default = "enumMember"
 ---```
----@field dataConstructorToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---@field dataConstructorToken? "namespace"|"type"|"class"|"enum"|"interface"|"struct"|"typeParameter"|"parameter"|"variable"|"property"|"enumMember"|"event"|"function"|"method"|"macro"|"keyword"|"modifier"|"comment"|"string"|"number"|"regexp"|"operator"|"decorator"
 ---LSP semantic token type to use for functions
 ---
 ---```lua
 ---default = "function"
 ---```
----@field functionToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---@field functionToken? "namespace"|"type"|"class"|"enum"|"interface"|"struct"|"typeParameter"|"parameter"|"variable"|"property"|"enumMember"|"event"|"function"|"method"|"macro"|"keyword"|"modifier"|"comment"|"string"|"number"|"regexp"|"operator"|"decorator"
 ---LSP semantic token type to use for modules
 ---
 ---```lua
 ---default = "namespace"
 ---```
----@field moduleToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---@field moduleToken? "namespace"|"type"|"class"|"enum"|"interface"|"struct"|"typeParameter"|"parameter"|"variable"|"property"|"enumMember"|"event"|"function"|"method"|"macro"|"keyword"|"modifier"|"comment"|"string"|"number"|"regexp"|"operator"|"decorator"
 ---LSP semantic token type to use for operators
 ---
 ---```lua
 ---default = "operator"
 ---```
----@field operatorToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---@field operatorToken? "namespace"|"type"|"class"|"enum"|"interface"|"struct"|"typeParameter"|"parameter"|"variable"|"property"|"enumMember"|"event"|"function"|"method"|"macro"|"keyword"|"modifier"|"comment"|"string"|"number"|"regexp"|"operator"|"decorator"
 ---LSP semantic token type to use for pattern synonyms
 ---
 ---```lua
 ---default = "macro"
 ---```
----@field patternSynonymToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---@field patternSynonymToken? "namespace"|"type"|"class"|"enum"|"interface"|"struct"|"typeParameter"|"parameter"|"variable"|"property"|"enumMember"|"event"|"function"|"method"|"macro"|"keyword"|"modifier"|"comment"|"string"|"number"|"regexp"|"operator"|"decorator"
 ---LSP semantic token type to use for record fields
 ---
 ---```lua
 ---default = "property"
 ---```
----@field recordFieldToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---@field recordFieldToken? "namespace"|"type"|"class"|"enum"|"interface"|"struct"|"typeParameter"|"parameter"|"variable"|"property"|"enumMember"|"event"|"function"|"method"|"macro"|"keyword"|"modifier"|"comment"|"string"|"number"|"regexp"|"operator"|"decorator"
 ---LSP semantic token type to use for type constructors
 ---
 ---```lua
 ---default = "enum"
 ---```
----@field typeConstructorToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---@field typeConstructorToken? "namespace"|"type"|"class"|"enum"|"interface"|"struct"|"typeParameter"|"parameter"|"variable"|"property"|"enumMember"|"event"|"function"|"method"|"macro"|"keyword"|"modifier"|"comment"|"string"|"number"|"regexp"|"operator"|"decorator"
 ---LSP semantic token type to use for type families
 ---
 ---```lua
 ---default = "interface"
 ---```
----@field typeFamilyToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---@field typeFamilyToken? "namespace"|"type"|"class"|"enum"|"interface"|"struct"|"typeParameter"|"parameter"|"variable"|"property"|"enumMember"|"event"|"function"|"method"|"macro"|"keyword"|"modifier"|"comment"|"string"|"number"|"regexp"|"operator"|"decorator"
 ---LSP semantic token type to use for type synonyms
 ---
 ---```lua
 ---default = "type"
 ---```
----@field typeSynonymToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---@field typeSynonymToken? "namespace"|"type"|"class"|"enum"|"interface"|"struct"|"typeParameter"|"parameter"|"variable"|"property"|"enumMember"|"event"|"function"|"method"|"macro"|"keyword"|"modifier"|"comment"|"string"|"number"|"regexp"|"operator"|"decorator"
 ---LSP semantic token type to use for type variables
 ---
 ---```lua
 ---default = "typeParameter"
 ---```
----@field typeVariableToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---@field typeVariableToken? "namespace"|"type"|"class"|"enum"|"interface"|"struct"|"typeParameter"|"parameter"|"variable"|"property"|"enumMember"|"event"|"function"|"method"|"macro"|"keyword"|"modifier"|"comment"|"string"|"number"|"regexp"|"operator"|"decorator"
 ---LSP semantic token type to use for variables
 ---
 ---```lua
 ---default = "variable"
 ---```
----@field variableToken? "namespace" | "type" | "class" | "enum" | "interface" | "struct" | "typeParameter" | "parameter" | "variable" | "property" | "enumMember" | "event" | "function" | "method" | "macro" | "keyword" | "modifier" | "comment" | "string" | "number" | "regexp" | "operator" | "decorator"
+---@field variableToken? "namespace"|"type"|"class"|"enum"|"interface"|"struct"|"typeParameter"|"parameter"|"variable"|"property"|"enumMember"|"event"|"function"|"method"|"macro"|"keyword"|"modifier"|"comment"|"string"|"number"|"regexp"|"operator"|"decorator"
 
 ---@class _.lspconfig.settings.hie.Haskell.Plugin.SemanticTokens
 ---@field config? _.lspconfig.settings.hie.Haskell.Plugin.SemanticTokens.Config
@@ -521,13 +521,13 @@
 ---```lua
 ---default = "info"
 ---```
----@field client? "off" | "error" | "info" | "debug"
+---@field client? "off"|"error"|"info"|"debug"
 ---Traces the communication between VS Code and the language server.
 ---
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.hie.Haskell
 ---The formatter to use when formatting a document or range of a cabal formatter. Ensure the plugin is enabled.
@@ -535,7 +535,7 @@
 ---```lua
 ---default = "cabal-gild"
 ---```
----@field cabalFormattingProvider? "cabal-gild" | "cabal-fmt" | "none"
+---@field cabalFormattingProvider? "cabal-gild"|"cabal-fmt"|"none"
 ---Whether to typecheck the entire project on load. It could drive to bad performance in large projects.
 ---
 ---```lua
@@ -547,7 +547,7 @@
 ---```lua
 ---default = "ormolu"
 ---```
----@field formattingProvider? "brittany" | "floskell" | "fourmolu" | "ormolu" | "stylish-haskell" | "none"
+---@field formattingProvider? "brittany"|"floskell"|"fourmolu"|"ormolu"|"stylish-haskell"|"none"
 ---Manually set a ghcup executable path.
 ---
 ---```lua
@@ -565,7 +565,7 @@
 ---```lua
 ---default = "PATH"
 ---```
----@field manageHLS? "GHCup" | "PATH"
+---@field manageHLS? "GHCup"|"PATH"
 ---Maximum number of completions sent to the editor.
 ---
 ---```lua
@@ -632,13 +632,13 @@
 ---```lua
 ---default = "multipleComponents"
 ---```
----@field sessionLoading? "singleComponent" | "multipleComponents"
+---@field sessionLoading? "singleComponent"|"multipleComponents"
 ---Enable Language Server support for `.cabal` files. Requires Haskell Language Server version >= 1.9.0.0.
 ---
 ---```lua
 ---default = "automatic"
 ---```
----@field supportCabalFiles? "enable" | "disable" | "automatic"
+---@field supportCabalFiles? "enable"|"disable"|"automatic"
 ---When manageHLS is set to GHCup, this can overwrite the automatic toolchain configuration with a more specific one. When a tool is omitted, the extension will manage the version (for 'ghc' we try to figure out the version the project requires). The format is '{"tool": "version", ...}'. 'version' accepts all identifiers that 'ghcup' accepts.
 ---
 ---```lua

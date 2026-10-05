@@ -33,13 +33,13 @@
 ---}
 ---```
 ---@class _.lspconfig.settings.dartls.Dart.DevToolsLocation
----@field ["cpu-profiler"]? "beside" | "active" | "external" | "sidebar"
----@field default? "beside" | "active" | "external" | "sidebar"
----@field inspector? "beside" | "active" | "external" | "sidebar"
----@field logging? "beside" | "active" | "external" | "sidebar"
----@field memory? "beside" | "active" | "external" | "sidebar"
----@field network? "beside" | "active" | "external" | "sidebar"
----@field performance? "beside" | "active" | "external" | "sidebar"
+---@field ["cpu-profiler"]? "beside"|"active"|"external"|"sidebar"
+---@field default? "beside"|"active"|"external"|"sidebar"
+---@field inspector? "beside"|"active"|"external"|"sidebar"
+---@field logging? "beside"|"active"|"external"|"sidebar"
+---@field memory? "beside"|"active"|"external"|"sidebar"
+---@field network? "beside"|"active"|"external"|"sidebar"
+---@field performance? "beside"|"active"|"external"|"sidebar"
 
 ---@class _.lspconfig.settings.dartls.Dart
 ---Whether to add your selected Dart/Flutter SDK path to the `PATH` environment variable for the embedded terminal. This is useful when switching SDKs via `#dart.sdkPaths#` / `#dart.flutterSdkPaths#` to ensure commands run from the terminal are the same version as being used by the editor/debugger (requires restart).
@@ -96,7 +96,7 @@
 ---```lua
 ---default = "tripleSlash"
 ---```
----@field automaticCommentSlashes? "none" | "tripleSlash" | "all"
+---@field automaticCommentSlashes? "none"|"tripleSlash"|"all"
 ---Additional args to pass to the `build_runner` when building/watching/serving.
 ---
 ---```lua
@@ -120,13 +120,13 @@
 ---```lua
 ---default = "debugConsole"
 ---```
----@field cliConsole? "debugConsole" | "terminal" | "externalTerminal"
+---@field cliConsole? "debugConsole"|"terminal"|"externalTerminal"
 ---Whether to automatically close embedded DevTools tabs when a debug session ends.
 ---
 ---```lua
 ---default = "never"
 ---```
----@field closeDevTools? "never" | "ifOpened" | "always"
+---@field closeDevTools? "never"|"ifOpened"|"always"
 ---Whether to show annotations against constructor, method invocations and lists that span multiple lines.
 ---
 ---```lua
@@ -144,7 +144,7 @@
 ---```lua
 ---default = "normal"
 ---```
----@field closingLabelsTextStyle? "normal" | "italic"
+---@field closingLabelsTextStyle? "normal"|"italic"
 ---Whether to insert parentheses and placeholders for positional and required arguments during code completions when using LSP. This feature is automatically disabled if commit characters are enabled.
 ---
 ---```lua
@@ -172,7 +172,7 @@
 ---```lua
 ---default = "ws"
 ---```
----@field debugExtensionBackendProtocol? "sse" | "ws"
+---@field debugExtensionBackendProtocol? "sse"|"ws"
 ---Whether to mark external pub package libraries (including `package:flutter`) as debuggable, enabling stepping into them while debugging.
 ---@field debugExternalPackageLibraries? boolean
 ---Whether to mark Dart SDK libraries (`dart:*`) as debuggable, enabling stepping into them while debugging.
@@ -182,13 +182,13 @@
 ---```lua
 ---default = "unhandled"
 ---```
----@field defaultExceptionPauseMode? "none" | "unhandled" | "all"
+---@field defaultExceptionPauseMode? "none"|"unhandled"|"all"
 ---Whether to launch external DevTools windows using Chrome or the system default browser. This setting is ignored for remote workspaces (including Docker, SSH, WSL).
 ---
 ---```lua
 ---default = "chrome"
 ---```
----@field devToolsBrowser? "chrome" | "default"
+---@field devToolsBrowser? "chrome"|"default"
 ---Where to open [Dart DevTools](https://dart.dev/tools/dart-devtools) pages.
 ---
 ---```lua
@@ -213,9 +213,9 @@
 ---```lua
 ---default = "dark"
 ---```
----@field devToolsTheme? "dark" | "light"
+---@field devToolsTheme? "dark"|"light"
 ---What level of documentation to show in Hovers and Code Completion details. When `null`, defaults to 'full' when running locally and 'none' in remote workspaces. This setting is only supported for Dart SDKs after v2.18.
----@field documentation? "full" | "summary" | "none"
+---@field documentation? "full"|"summary"|"none"
 ---How long (in ms) to delay sending editor location change events over the Dart Tooling Daemon. Increasing this results in less events which may improve performance, at the expensive of tools that use these events not updating as quickly after your location/editor changes (requires restart).
 ---
 ---```lua
@@ -297,13 +297,13 @@
 ---```lua
 ---default = "kotlin"
 ---```
----@field flutterCreateAndroidLanguage? "java" | "kotlin"
+---@field flutterCreateAndroidLanguage? "java"|"kotlin"
 ---The programming language to use for iOS apps when creating new projects using the 'Flutter: Create New Project' command. This is only supported up until Flutter 3.22 after which it will be ignored.
 ---
 ---```lua
 ---default = "swift"
 ---```
----@field flutterCreateIOSLanguage? "objc" | "swift"
+---@field flutterCreateIOSLanguage? "objc"|"swift"
 ---The organization responsible for your new Flutter project, in reverse domain name notation (e.g. `com.google`). This string is used in Java package names and as prefix in the iOS bundle identifier when creating new projects using the 'Flutter: Create New Project' command.
 ---@field flutterCreateOrganization? string
 ---The platforms to enable for new projects created using the 'Flutter: Create New Project' command. If unset, all platforms will be enabled.
@@ -327,7 +327,7 @@
 ---```lua
 ---default = "never"
 ---```
----@field flutterGenerateLocalizationsOnSave? "never" | "manual" | "manualIfDirty" | "all" | "allIfDirty"
+---@field flutterGenerateLocalizationsOnSave? "never"|"manual"|"manualIfDirty"|"all"|"allIfDirty"
 ---Whether to show Flutter icons and colors in the editor gutter.
 ---
 ---```lua
@@ -339,7 +339,7 @@
 ---```lua
 ---default = "manual"
 ---```
----@field flutterHotReloadOnSave? "never" | "manual" | "manualIfDirty" | "all" | "allIfDirty"
+---@field flutterHotReloadOnSave? "never"|"manual"|"manualIfDirty"|"all"|"allIfDirty"
 ---Whether to remember which device was last (explicitly) selected for each project. When the remembered device is selected, it will prevent newly-connected mobile devices from being automatically selected (regardless of the `#dart.flutterSelectDeviceWhenConnected#` setting).
 ---
 ---```lua
@@ -373,13 +373,13 @@
 ---```lua
 ---default = "local"
 ---```
----@field flutterShowEmulators? "local" | "always" | "never"
+---@field flutterShowEmulators? "local"|"always"|"never"
 ---When to show the Flutter headless web-server device. This requires using the Dart Debug extension for Chrome and is usually only used for remote environments where Chrome is not available such as browser/cloud-based IDEs (requires restart).
 ---
 ---```lua
 ---default = "remote"
 ---```
----@field flutterShowWebServerDevice? "remote" | "always"
+---@field flutterShowWebServerDevice? "remote"|"always"
 ---Additional args to pass to the `flutter test` command. Using the `args`/`toolArgs` fields in `launch.json` is usually better than this setting as this setting will apply to _all_ projects.
 ---
 ---```lua
@@ -391,19 +391,19 @@
 ---```lua
 ---default = "flutter-default"
 ---```
----@field flutterWebRenderer? "flutter-default" | "canvaskit" | "html" | "auto"
+---@field flutterWebRenderer? "flutter-default"|"canvaskit"|"html"|"auto"
 ---Controls whether the Widget Preview is enabled, and if so whether it is started eagerly or lazily. Starting lazily will avoid consuming any resources until you first use the Widget Preview, but will cause the first load to be slower. Requires restart.
 ---
 ---```lua
 ---default = "startLazily"
 ---```
----@field flutterWidgetPreview? "startEagerly" | "startLazily" | "disabled"
+---@field flutterWidgetPreview? "startEagerly"|"startLazily"|"disabled"
 ---Where to display the Flutter Widget Preview. Requires restart.
 ---
 ---```lua
 ---default = "sidebar"
 ---```
----@field flutterWidgetPreviewLocation? "beside" | "sidebar"
+---@field flutterWidgetPreviewLocation? "beside"|"sidebar"
 ---The path to a log file for the `flutter widget-preview` service. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should then use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field flutterWidgetPreviewLogFile? string
 ---Get the Dart SDK path from a command. Useful when using tools such as direnv, asdf, mise... The command should exit with a 0 status code and it should print to the standard output just the path to the SDK. If the command fails (non zero exit or bad path), the extension will keep looking for other SDK paths. Some configuration examples can be found in: https://github.com/Dart-Code/Dart-Code/pull/5377
@@ -415,7 +415,7 @@
 ---```lua
 ---default = "never"
 ---```
----@field hotReloadOnSave? "never" | "manual" | "manualIfDirty" | "all" | "allIfDirty"
+---@field hotReloadOnSave? "never"|"manual"|"manualIfDirty"|"all"|"allIfDirty"
 ---An array of glob patterns that should trigger Hot Reload when saved. The pattern is matched against the absolute path of the file. Use `**/assets/**` to trigger reloading for everything in the assets directory. Must always start with "**/" and use forward slashes (even on Windows) as backslashes are used for escaping.
 ---
 ---```lua
@@ -427,7 +427,7 @@
 ---```lua
 ---default = "notification"
 ---```
----@field hotReloadProgress? "notification" | "statusBar"
+---@field hotReloadProgress? "notification"|"statusBar"
 ---Whether to include symbols from the SDK and package dependencies in the "Go to Symbol in Workspace" (`cmd/ctrl`+`T`) list. This can only be disabled when using Dart 3.0 / Flutter 3.10 or later.
 ---
 ---```lua
@@ -510,13 +510,13 @@
 ---```lua
 ---default = "never"
 ---```
----@field openDevTools? "never" | "flutter" | "always"
+---@field openDevTools? "never"|"flutter"|"always"
 ---When to automatically switch focus to the test list (array to support multiple values).
 ---
 ---```lua
 ---default = { "testRunStart" }
 ---```
----@field openTestView? ("testRunStart" | "testFailure")[]
+---@field openTestView? ("testRunStart"|"testFailure")[]
 ---EXPERIMENTAL: Whether to enable commit characters for the LSP server. In a future release, the dart.enableCompletionCommitCharacters setting will also apply to LSP.
 ---@field previewCommitCharacters? boolean
 ---EXPERIMENTAL: Whether to enable the [Flutter UI Guides preview](https://dartcode.org/releases/v3-1/#preview-flutter-ui-guides).
@@ -554,7 +554,7 @@
 ---```lua
 ---default = "never"
 ---```
----@field renameFilesWithClasses? "never" | "prompt" | "always"
+---@field renameFilesWithClasses? "never"|"prompt"|"always"
 ---Whether to run Pub operations across multiple folders concurrently.
 ---
 ---```lua
@@ -566,13 +566,13 @@
 ---```lua
 ---default = "none"
 ---```
----@field runPubGetOnNestedProjects? "none" | "both" | "above" | "below"
+---@field runPubGetOnNestedProjects? "none"|"both"|"above"|"below"
 ---Whether to run `pub get` whenever `pubspec.yaml` is saved.
 ---
 ---```lua
 ---default = "always"
 ---```
----@field runPubGetOnPubspecChanges? "always" | "prompt" | "never"
+---@field runPubGetOnPubspecChanges? "always"|"prompt"|"never"
 ---The location of the Dart SDK to use for analyzing and executing code. If blank (or not a valid SDK), Dart Code will attempt to find it from the `PATH` environment variable. When editing a Flutter project, the version of Dart included in the Flutter SDK is used in preference. Use `~` to insert the user's home directory (the path should then use `/` separators even on Windows).
 ---@field sdkPath? string
 ---An array of paths that either directly point to a Dart SDK or the parent directory of multiple Dart SDKs that can be used for fast SDK switching. These paths are not used directly when searching for an SDK. When this setting is populated, the SDK version number in the status bar can be used to quickly switch between SDKs. Use `~` to insert the user's home directory (the path should then use `/` separators even on Windows).
@@ -586,7 +586,7 @@
 ---```lua
 ---default = "workspace"
 ---```
----@field sdkSwitchingTarget? "workspace" | "global"
+---@field sdkSwitchingTarget? "workspace"|"global"
 ---Whether to eagerly run DevTools for Flutter workspaces and share the spawned server with `flutter run`.
 ---
 ---```lua
@@ -660,7 +660,7 @@
 ---```lua
 ---default = "debug"
 ---```
----@field suppressTestTimeouts? "never" | "debug" | "always"
+---@field suppressTestTimeouts? "never"|"debug"|"always"
 ---Additional args to pass to the `dart test` command. Using the `args`/`toolArgs` fields in `launch.json` is usually better than this setting as this setting will apply to _all_ projects.
 ---
 ---```lua
@@ -672,7 +672,7 @@
 ---```lua
 ---default = "name"
 ---```
----@field testInvocationMode? "name" | "line" | "auto"
+---@field testInvocationMode? "name"|"line"|"auto"
 ---Additional args to pass to the `dart tooling-daemon` command that runs as a background service (requires restart).
 ---
 ---```lua

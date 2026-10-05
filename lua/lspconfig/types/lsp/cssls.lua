@@ -20,7 +20,7 @@
 ---```lua
 ---default = "collapse"
 ---```
----@field braceStyle? "collapse" | "expand"
+---@field braceStyle? "collapse"|"expand"
 ---Enable/disable default CSS formatter.
 ---
 ---```lua
@@ -70,103 +70,103 @@
 ---```lua
 ---default = "error"
 ---```
----@field argumentsInColorFunction? "ignore" | "warning" | "error"
+---@field argumentsInColorFunction? "ignore"|"warning"|"error"
 ---Do not use `width` or `height` when using `padding` or `border`.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field boxModel? "ignore" | "warning" | "error"
+---@field boxModel? "ignore"|"warning"|"error"
 ---When using a vendor-specific prefix make sure to also include all other vendor-specific properties.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field compatibleVendorPrefixes? "ignore" | "warning" | "error"
+---@field compatibleVendorPrefixes? "ignore"|"warning"|"error"
 ---Do not use duplicate style definitions.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field duplicateProperties? "ignore" | "warning" | "error"
+---@field duplicateProperties? "ignore"|"warning"|"error"
 ---Do not use empty rulesets.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field emptyRules? "ignore" | "warning" | "error"
+---@field emptyRules? "ignore"|"warning"|"error"
 ---Avoid using `float`. Floats lead to fragile CSS that is easy to break if one aspect of the layout changes.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field float? "ignore" | "warning" | "error"
+---@field float? "ignore"|"warning"|"error"
 ---`@font-face` rule must define `src` and `font-family` properties.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field fontFaceProperties? "ignore" | "warning" | "error"
+---@field fontFaceProperties? "ignore"|"warning"|"error"
 ---Hex colors must consist of 3, 4, 6 or 8 hex numbers.
 ---
 ---```lua
 ---default = "error"
 ---```
----@field hexColorLength? "ignore" | "warning" | "error"
+---@field hexColorLength? "ignore"|"warning"|"error"
 ---Selectors should not contain IDs because these rules are too tightly coupled with the HTML.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field idSelector? "ignore" | "warning" | "error"
+---@field idSelector? "ignore"|"warning"|"error"
 ---IE hacks are only necessary when supporting IE7 and older.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field ieHack? "ignore" | "warning" | "error"
+---@field ieHack? "ignore"|"warning"|"error"
 ---Import statements do not load in parallel.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field importStatement? "ignore" | "warning" | "error"
+---@field importStatement? "ignore"|"warning"|"error"
 ---Avoid using `!important`. It is an indication that the specificity of the entire CSS has gotten out of control and needs to be refactored.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field important? "ignore" | "warning" | "error"
+---@field important? "ignore"|"warning"|"error"
 ---Property is ignored due to the display. E.g. with `display: inline`, the `width`, `height`, `margin-top`, `margin-bottom`, and `float` properties have no effect.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field propertyIgnoredDueToDisplay? "ignore" | "warning" | "error"
+---@field propertyIgnoredDueToDisplay? "ignore"|"warning"|"error"
 ---The universal selector (`*`) is known to be slow.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field universalSelector? "ignore" | "warning" | "error"
+---@field universalSelector? "ignore"|"warning"|"error"
 ---Unknown at-rule.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field unknownAtRules? "ignore" | "warning" | "error"
+---@field unknownAtRules? "ignore"|"warning"|"error"
 ---Unknown property.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field unknownProperties? "ignore" | "warning" | "error"
+---@field unknownProperties? "ignore"|"warning"|"error"
 ---Unknown vendor specific property.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field unknownVendorSpecificProperties? "ignore" | "warning" | "error"
+---@field unknownVendorSpecificProperties? "ignore"|"warning"|"error"
 ---A list of properties that are not validated against the `unknownProperties` rule.
 ---
 ---```lua
@@ -178,13 +178,13 @@
 ---```lua
 ---default = "warning"
 ---```
----@field vendorPrefix? "ignore" | "warning" | "error"
+---@field vendorPrefix? "ignore"|"warning"|"error"
 ---No unit for zero needed.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field zeroUnits? "ignore" | "warning" | "error"
+---@field zeroUnits? "ignore"|"warning"|"error"
 
 ---@class _.lspconfig.settings.cssls.Css.Trace
 ---Traces the communication between VS Code and the CSS language server.
@@ -192,7 +192,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.cssls.Css
 ---@field completion? _.lspconfig.settings.cssls.Css.Completion
@@ -237,7 +237,7 @@
 ---```lua
 ---default = "collapse"
 ---```
----@field braceStyle? "collapse" | "expand"
+---@field braceStyle? "collapse"|"expand"
 ---Enable/disable default LESS formatter.
 ---
 ---```lua
@@ -287,103 +287,103 @@
 ---```lua
 ---default = "error"
 ---```
----@field argumentsInColorFunction? "ignore" | "warning" | "error"
+---@field argumentsInColorFunction? "ignore"|"warning"|"error"
 ---Do not use `width` or `height` when using `padding` or `border`.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field boxModel? "ignore" | "warning" | "error"
+---@field boxModel? "ignore"|"warning"|"error"
 ---When using a vendor-specific prefix make sure to also include all other vendor-specific properties.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field compatibleVendorPrefixes? "ignore" | "warning" | "error"
+---@field compatibleVendorPrefixes? "ignore"|"warning"|"error"
 ---Do not use duplicate style definitions.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field duplicateProperties? "ignore" | "warning" | "error"
+---@field duplicateProperties? "ignore"|"warning"|"error"
 ---Do not use empty rulesets.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field emptyRules? "ignore" | "warning" | "error"
+---@field emptyRules? "ignore"|"warning"|"error"
 ---Avoid using `float`. Floats lead to fragile CSS that is easy to break if one aspect of the layout changes.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field float? "ignore" | "warning" | "error"
+---@field float? "ignore"|"warning"|"error"
 ---`@font-face` rule must define `src` and `font-family` properties.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field fontFaceProperties? "ignore" | "warning" | "error"
+---@field fontFaceProperties? "ignore"|"warning"|"error"
 ---Hex colors must consist of 3, 4, 6 or 8 hex numbers.
 ---
 ---```lua
 ---default = "error"
 ---```
----@field hexColorLength? "ignore" | "warning" | "error"
+---@field hexColorLength? "ignore"|"warning"|"error"
 ---Selectors should not contain IDs because these rules are too tightly coupled with the HTML.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field idSelector? "ignore" | "warning" | "error"
+---@field idSelector? "ignore"|"warning"|"error"
 ---IE hacks are only necessary when supporting IE7 and older.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field ieHack? "ignore" | "warning" | "error"
+---@field ieHack? "ignore"|"warning"|"error"
 ---Import statements do not load in parallel.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field importStatement? "ignore" | "warning" | "error"
+---@field importStatement? "ignore"|"warning"|"error"
 ---Avoid using `!important`. It is an indication that the specificity of the entire CSS has gotten out of control and needs to be refactored.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field important? "ignore" | "warning" | "error"
+---@field important? "ignore"|"warning"|"error"
 ---Property is ignored due to the display. E.g. with `display: inline`, the `width`, `height`, `margin-top`, `margin-bottom`, and `float` properties have no effect.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field propertyIgnoredDueToDisplay? "ignore" | "warning" | "error"
+---@field propertyIgnoredDueToDisplay? "ignore"|"warning"|"error"
 ---The universal selector (`*`) is known to be slow.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field universalSelector? "ignore" | "warning" | "error"
+---@field universalSelector? "ignore"|"warning"|"error"
 ---Unknown at-rule.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field unknownAtRules? "ignore" | "warning" | "error"
+---@field unknownAtRules? "ignore"|"warning"|"error"
 ---Unknown property.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field unknownProperties? "ignore" | "warning" | "error"
+---@field unknownProperties? "ignore"|"warning"|"error"
 ---Unknown vendor specific property.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field unknownVendorSpecificProperties? "ignore" | "warning" | "error"
+---@field unknownVendorSpecificProperties? "ignore"|"warning"|"error"
 ---A list of properties that are not validated against the `unknownProperties` rule.
 ---
 ---```lua
@@ -395,13 +395,13 @@
 ---```lua
 ---default = "warning"
 ---```
----@field vendorPrefix? "ignore" | "warning" | "error"
+---@field vendorPrefix? "ignore"|"warning"|"error"
 ---No unit for zero needed.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field zeroUnits? "ignore" | "warning" | "error"
+---@field zeroUnits? "ignore"|"warning"|"error"
 
 ---@class _.lspconfig.settings.cssls.Less
 ---@field completion? _.lspconfig.settings.cssls.Less.Completion
@@ -435,7 +435,7 @@
 ---```lua
 ---default = "collapse"
 ---```
----@field braceStyle? "collapse" | "expand"
+---@field braceStyle? "collapse"|"expand"
 ---Enable/disable default SCSS formatter.
 ---
 ---```lua
@@ -485,103 +485,103 @@
 ---```lua
 ---default = "error"
 ---```
----@field argumentsInColorFunction? "ignore" | "warning" | "error"
+---@field argumentsInColorFunction? "ignore"|"warning"|"error"
 ---Do not use `width` or `height` when using `padding` or `border`.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field boxModel? "ignore" | "warning" | "error"
+---@field boxModel? "ignore"|"warning"|"error"
 ---When using a vendor-specific prefix make sure to also include all other vendor-specific properties.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field compatibleVendorPrefixes? "ignore" | "warning" | "error"
+---@field compatibleVendorPrefixes? "ignore"|"warning"|"error"
 ---Do not use duplicate style definitions.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field duplicateProperties? "ignore" | "warning" | "error"
+---@field duplicateProperties? "ignore"|"warning"|"error"
 ---Do not use empty rulesets.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field emptyRules? "ignore" | "warning" | "error"
+---@field emptyRules? "ignore"|"warning"|"error"
 ---Avoid using `float`. Floats lead to fragile CSS that is easy to break if one aspect of the layout changes.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field float? "ignore" | "warning" | "error"
+---@field float? "ignore"|"warning"|"error"
 ---`@font-face` rule must define `src` and `font-family` properties.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field fontFaceProperties? "ignore" | "warning" | "error"
+---@field fontFaceProperties? "ignore"|"warning"|"error"
 ---Hex colors must consist of 3, 4, 6 or 8 hex numbers.
 ---
 ---```lua
 ---default = "error"
 ---```
----@field hexColorLength? "ignore" | "warning" | "error"
+---@field hexColorLength? "ignore"|"warning"|"error"
 ---Selectors should not contain IDs because these rules are too tightly coupled with the HTML.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field idSelector? "ignore" | "warning" | "error"
+---@field idSelector? "ignore"|"warning"|"error"
 ---IE hacks are only necessary when supporting IE7 and older.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field ieHack? "ignore" | "warning" | "error"
+---@field ieHack? "ignore"|"warning"|"error"
 ---Import statements do not load in parallel.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field importStatement? "ignore" | "warning" | "error"
+---@field importStatement? "ignore"|"warning"|"error"
 ---Avoid using `!important`. It is an indication that the specificity of the entire CSS has gotten out of control and needs to be refactored.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field important? "ignore" | "warning" | "error"
+---@field important? "ignore"|"warning"|"error"
 ---Property is ignored due to the display. E.g. with `display: inline`, the `width`, `height`, `margin-top`, `margin-bottom`, and `float` properties have no effect.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field propertyIgnoredDueToDisplay? "ignore" | "warning" | "error"
+---@field propertyIgnoredDueToDisplay? "ignore"|"warning"|"error"
 ---The universal selector (`*`) is known to be slow.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field universalSelector? "ignore" | "warning" | "error"
+---@field universalSelector? "ignore"|"warning"|"error"
 ---Unknown at-rule.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field unknownAtRules? "ignore" | "warning" | "error"
+---@field unknownAtRules? "ignore"|"warning"|"error"
 ---Unknown property.
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field unknownProperties? "ignore" | "warning" | "error"
+---@field unknownProperties? "ignore"|"warning"|"error"
 ---Unknown vendor specific property.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field unknownVendorSpecificProperties? "ignore" | "warning" | "error"
+---@field unknownVendorSpecificProperties? "ignore"|"warning"|"error"
 ---A list of properties that are not validated against the `unknownProperties` rule.
 ---
 ---```lua
@@ -593,13 +593,13 @@
 ---```lua
 ---default = "warning"
 ---```
----@field vendorPrefix? "ignore" | "warning" | "error"
+---@field vendorPrefix? "ignore"|"warning"|"error"
 ---No unit for zero needed.
 ---
 ---```lua
 ---default = "ignore"
 ---```
----@field zeroUnits? "ignore" | "warning" | "error"
+---@field zeroUnits? "ignore"|"warning"|"error"
 
 ---@class _.lspconfig.settings.cssls.Scss
 ---@field completion? _.lspconfig.settings.cssls.Scss.Completion

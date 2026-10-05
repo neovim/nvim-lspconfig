@@ -14,7 +14,7 @@
 ---This setting controls whether formatting should only perform the indentation of the new line (true) or also format the previous line (false).
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `false`.
----@field indentOnly? true | false
+---@field indentOnly? true|false
 
 ---@class _.lspconfig.settings.ada_ls.Ada.ProjectView
 ---Show all projects as a flat list instead of a hierarchy in the Project view.
@@ -26,7 +26,7 @@
 
 ---@class _.lspconfig.settings.ada_ls.Ada.RangeFormatting
 ---This setting controls whether formatting should only indents the selected lines without any formatting (`indentOnly`), format only the selected lines (`narrow`) or format the selected lines as well as any surrounding code required to produce a correct result (`full`).
----@field formatChoice? "indentOnly" | "narrow" | "full"
+---@field formatChoice? "indentOnly"|"narrow"|"full"
 
 ---@class _.lspconfig.settings.ada_ls.Ada.Trace
 ---Traces the communication between VS Code and the Ada language server in the 'Ada Language Server' Output view.
@@ -34,17 +34,17 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.ada_ls.Ada
 ---Controls whether or not the Ada Language Server should emit diagnostics related to the edition of Ada files into the VS Code Problems view.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
----@field adaFileDiagnostics? true | false
+---@field adaFileDiagnostics? true|false
 ---Controls whether or not the Ada Language Server should emit diagnostics related to alire into the VS Code Problems view.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
----@field alireDiagnostics? true | false
+---@field alireDiagnostics? true|false
 ---The character set that the Ada Language Server should use when reading files from disk.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists.
@@ -52,11 +52,11 @@
 ---Controls the policy for displaying overriding and overridden subprograms on navigation requests such as 'Go To Definition' or 'Go To Implementations'.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `"usage_and_abstract_only"`.
----@field displayMethodAncestryOnNavigation? "never" | "usage_and_abstract_only" | "definition_only" | "always"
+---@field displayMethodAncestryOnNavigation? "never"|"usage_and_abstract_only"|"definition_only"|"always"
 ---Controls the primary documentation style of entities.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `"gnat"`.
----@field documentationStyle? "gnat" | "leading"
+---@field documentationStyle? "gnat"|"leading"
 ---Enable experimental features still in development.
 ---@field enableExperimentalFeatures? boolean
 ---Controls whether the Ada Language Server should index the source files immediately after loading a project.
@@ -64,16 +64,16 @@
 ---If set to false, indexing will be deferred to the time when an action requiring the index is first performed, e.g. hovering over a referenced entity to get its documentation.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
----@field enableIndexing? true | false
+---@field enableIndexing? true|false
 ---@field externalAnnotations? _.lspconfig.settings.ada_ls.Ada.ExternalAnnotations
 ---Controls whether comments should be folded like code blocks.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
----@field foldComments? true | false
+---@field foldComments? true|false
 ---Controls the Ada Language Server normalizes the file paths received from the client.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
----@field followSymlinks? true | false
+---@field followSymlinks? true|false
 ---GPR configuration file (*.cgpr) for this workspace.
 ---
 ---It is recommended to set this to a relative path starting at the root of the workspace.
@@ -83,11 +83,11 @@
 ---Controls whether or not the Ada Language Server should emit diagnostics related to the edition of GPR files into the VS Code Problems view.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
----@field gprFileDiagnostics? true | false
+---@field gprFileDiagnostics? true|false
 ---Enable insertion of missing with-clauses when accepting completion for invisible symbols.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
----@field insertWithClauses? true | false
+---@field insertWithClauses? true|false
 ---Controls the maximum number of trace files preserved in the ALS log directory (which defaults to `~/.als`). When this threshold is reached, old trace files get deleted automatically. The default number of preserved trace files is `10`.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `10`.
@@ -113,7 +113,7 @@
 ---Controls whether or not the Ada Language Server should emit diagnostics related to project loading into the VS Code Problems view.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
----@field projectDiagnostics? true | false
+---@field projectDiagnostics? true|false
 ---GPR project file (*.gpr) for this workspace.
 ---
 ---It is recommended to set this to a relative path starting at the root of the workspace.
@@ -125,7 +125,7 @@
 ---Enable fallback indenter in case the file is not syntactically correct.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
----@field rangeFormattingFallback? true | false
+---@field rangeFormattingFallback? true|false
 ---The path to a directory used for out-of-tree builds. This feature is related to the [--relocate-build-tree GPRbuild command line switch](https://docs.adacore.com/gprbuild-docs/html/gprbuild_ug/building_with_gprbuild.html#switches).
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists.
@@ -133,7 +133,7 @@
 ---Enable editing Ada comments to update references to an entity when it is being renamed.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `false`.
----@field renameInComments? true | false
+---@field renameInComments? true|false
 ---This setting must be used in conjunction with the `relocateBuildTree` setting.
 ---
 ---It specifies the root directory for artifact relocation. It corresponds to the [--root-dir GPRbuild command line switch](https://docs.adacore.com/gprbuild-docs/html/gprbuild_ug/building_with_gprbuild.html#switches).
@@ -149,24 +149,24 @@
 ---Controls whether or not the Ada Language Server should emit diagnostics related to the semantic analysis of Ada files.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
----@field semanticDiagnostics? true | false
+---@field semanticDiagnostics? true|false
 ---Whether to show error notifications in VS Code for failing LSP requests.
 ---@field showNotificationsOnErrors? boolean
 ---Controls whether or not the Ada Language Server should emit source information diagnostics (e.g: for opened files that do not belong to the loaded project tree).
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
----@field sourceInfoDiagnostics? true | false
+---@field sourceInfoDiagnostics? true|false
 ---@field trace? _.lspconfig.settings.ada_ls.Ada.Trace
 ---Enable snippets in completion results (e.g. subprogram calls).
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
----@field useCompletionSnippets? true | false
+---@field useCompletionSnippets? true|false
 ---Workspace symbol search method.
 ---
 ---```lua
 ---default = "fuzzy"
 ---```
----@field workspaceSearch? "fuzzy" | "startWord"
+---@field workspaceSearch? "fuzzy"|"startWord"
 
 ---@class _.lspconfig.settings.ada_ls.E3Testsuite
 ---Command line arguments to pass to testsuite.py when running tests
@@ -190,7 +190,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.ada_ls.Gpr
 ---@field trace? _.lspconfig.settings.ada_ls.Gpr.Trace

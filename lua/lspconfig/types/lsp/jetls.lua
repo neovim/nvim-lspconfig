@@ -78,7 +78,7 @@
 ---```lua
 ---default = "prompt"
 ---```
----@field auto_instantiate? "always" | "prompt" | "never"
+---@field auto_instantiate? "always"|"prompt"|"never"
 ---Additional JET top-level concretization patterns. Each entry requires a Julia expression `pattern` and can use an optional `path` glob to restrict it to specific source files.
 ---
 ---```lua
@@ -161,7 +161,7 @@
 ---```lua
 ---default = "Runic"
 ---```
----@field formatter? "Runic" | "JuliaFormatter"|table
+---@field formatter? "Runic"|"JuliaFormatter"|table
 ---Configuration for full JET analysis. See [Full analysis configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/full_analysis).
 ---@field full_analysis? _.lspconfig.settings.jetls.JetlsClient.Settings.FullAnalysis
 ---Inlay hint configuration. See [Inlay hint configuration](https://aviatesk.github.io/JETLS.jl/release/configuration/#config/inlay_hint).
@@ -181,7 +181,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field communicationChannel? "auto" | "pipe" | "stdio" | "socket"
+---@field communicationChannel? "auto"|"pipe"|"stdio"|"socket"
 ---JETLS executable configuration. Most users should omit `path` and use the managed installation.
 ---
 ---Use object form `{threads, env}` for managed JETLS. Set `env.JULIAUP_CHANNEL` to select a [juliaup](https://github.com/JuliaLang/juliaup) channel, or `env.JULIA_APPS_JULIA_CMD` to select a Julia executable directly. Add `path` to use a custom executable and bypass managed installation.

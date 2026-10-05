@@ -47,7 +47,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.jsonls.Json.Validate
 ---Enable/disable JSON validation.

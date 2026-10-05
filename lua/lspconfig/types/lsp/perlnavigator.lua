@@ -6,7 +6,7 @@
 ---```lua
 ---default = "messages"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.perlnavigator.Perlnavigator
 ---Enable warnings using -Mwarnings command switch
@@ -116,31 +116,31 @@
 ---```lua
 ---default = "hint"
 ---```
----@field severity1? "error" | "warning" | "info" | "hint" | "none"
+---@field severity1? "error"|"warning"|"info"|"hint"|"none"
 ---Editor Diagnostic severity level for Critic severity 2
 ---
 ---```lua
 ---default = "hint"
 ---```
----@field severity2? "error" | "warning" | "info" | "hint" | "none"
+---@field severity2? "error"|"warning"|"info"|"hint"|"none"
 ---Editor Diagnostic severity level for Critic severity 3
 ---
 ---```lua
 ---default = "hint"
 ---```
----@field severity3? "error" | "warning" | "info" | "hint" | "none"
+---@field severity3? "error"|"warning"|"info"|"hint"|"none"
 ---Editor Diagnostic severity level for Critic severity 4
 ---
 ---```lua
 ---default = "info"
 ---```
----@field severity4? "error" | "warning" | "info" | "hint" | "none"
+---@field severity4? "error"|"warning"|"info"|"hint"|"none"
 ---Editor Diagnostic severity level for Critic severity 5
 ---
 ---```lua
 ---default = "warning"
 ---```
----@field severity5? "error" | "warning" | "info" | "hint" | "none"
+---@field severity5? "error"|"warning"|"info"|"hint"|"none"
 ---@field trace? _.lspconfig.settings.perlnavigator.Perlnavigator.Trace
 
 ---@class lspconfig.settings.perlnavigator

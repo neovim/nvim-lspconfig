@@ -6,7 +6,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.purescriptls.Purescript
 ---Whether to add the local npm bin directory to the PATH for purs IDE server and build command.
@@ -100,7 +100,7 @@
 ---```lua
 ---default = "purs-tidy"
 ---```
----@field formatter? "none" | "purty" | "purs-tidy" | "pose"
+---@field formatter? "none"|"purty"|"purs-tidy"|"pose"
 ---Whether to perform a full build on save with the configured build command (rather than IDE server fast rebuild). This is not generally recommended because it is slow, but it does mean that dependent modules are rebuilt as necessary.
 ---@field fullBuildOnSave? boolean
 ---Whether to show progress for full build on save (if enabled)

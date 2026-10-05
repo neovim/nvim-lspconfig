@@ -93,13 +93,13 @@
 ---```lua
 ---default = "normal"
 ---```
----@field loglevel? "debug" | "error" | "normal" | "warning" | "verbose"
+---@field loglevel? "debug"|"error"|"normal"|"warning"|"verbose"
 ---The protocol used to communicate with the Puppet Editor Service. By default the local STDIO protocol is used.
 ---
 ---```lua
 ---default = "stdio"
 ---```
----@field protocol? "stdio" | "tcp"
+---@field protocol? "stdio"|"tcp"
 ---@field puppet? _.lspconfig.settings.puppet.Puppet.EditorService.Puppet
 ---@field tcp? _.lspconfig.settings.puppet.Puppet.EditorService.Tcp
 ---The timeout to connect to the Puppet Editor Service
@@ -123,13 +123,13 @@
 ---```lua
 ---default = "messagebox"
 ---```
----@field nodeGraph? "messagebox" | "statusbar" | "none"
+---@field nodeGraph? "messagebox"|"statusbar"|"none"
 ---The type of notification used when a running Puppet Resouce. Default value of messagebox
 ---
 ---```lua
 ---default = "messagebox"
 ---```
----@field puppetResource? "messagebox" | "statusbar" | "none"
+---@field puppetResource? "messagebox"|"statusbar"|"none"
 
 ---@class _.lspconfig.settings.puppet.Puppet.Pdk
 ---Enable/disable checking if installed PDK version is latest
@@ -168,7 +168,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field installType? "auto" | "pdk" | "agent"
+---@field installType? "auto"|"pdk"|"agent"
 ---@field notification? _.lspconfig.settings.puppet.Puppet.Notification
 ---@field pdk? _.lspconfig.settings.puppet.Puppet.Pdk
 ---@field titleBar? _.lspconfig.settings.puppet.Puppet.TitleBar

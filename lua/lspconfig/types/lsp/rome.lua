@@ -18,7 +18,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.rome.RomeLsp
 ---@field trace? _.lspconfig.settings.rome.RomeLsp.Trace

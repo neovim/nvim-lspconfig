@@ -160,73 +160,6 @@ local function resolve_schema_configs()
   return vim.tbl_deep_extend('force', schemas, overrides)
 end
 
----Resolve local JSON pointer references in a schema node.
----For root `{"$defs":{"port":{"type":"integer"}}}`, `{"$ref":"#/$defs/port"}` => `{"type":"integer"}`.
----`#` => `root`; `#/items/0` => `root.items[1]`.
----`#/foo//bar` => `root.foo[''].bar`; `#/%24defs/port` => `root['$defs'].port`.
----@param node any
----@param root table
----@param resolving? table<string, true>
----@return any
-local function resolve_local_refs(node, root, resolving)
-  if type(node) ~= 'table' then
-    return node
-  end
-
-  local ref = node['$ref']
-  local pointer
-  if type(ref) == 'string' and vim.startswith(ref, '#') then
-    pointer = vim.uri_decode(ref:sub(2))
-  end
-  if pointer == nil or (pointer ~= '' and not vim.startswith(pointer, '/')) then
-    for key, value in pairs(node) do
-      node[key] = resolve_local_refs(value, root, resolving)
-    end
-    return node
-  end
-
-  resolving = resolving or {}
-  if resolving[ref] then
-    error('Cyclic schema reference: ' .. ref)
-  end
-
-  local target = root
-  -- `#/$defs/foo~1bar~0baz` resolves to `root['$defs']['foo/bar~baz']` (`~1` escapes `/`, `~0` escapes `~`).
-  for part in pointer:gmatch('/([^/]*)') do
-    local token = part:gsub('~1', '/'):gsub('~0', '~')
-    ---@type string|integer
-    local key = token
-    if type(target) ~= 'table' then
-      error('Could not resolve schema reference: ' .. ref)
-    end
-    if vim.islist(target) then
-      if token ~= '0' and not token:match('^[1-9]%d*$') then
-        error('Could not resolve schema reference: ' .. ref)
-      end
-      key = assert(tonumber(token)) + 1
-    end
-    if target[key] == nil then
-      error('Could not resolve schema reference: ' .. ref)
-    end
-    target = target[key]
-  end
-
-  resolving[ref] = true
-  local resolved = resolve_local_refs(vim.deepcopy(target), root, resolving)
-  resolving[ref] = nil
-  for key, value in pairs(node) do
-    if key ~= '$ref' then
-      if type(resolved) ~= 'table' or resolved[key] ~= nil then
-        -- TODO: Preserve conflicting constraints with `allOf` once annotation generation supports it.
-        -- See https://json-schema.org/draft/2020-12/json-schema-core#section-8.2.3.1.
-        error(('Cannot merge schema reference sibling %q: %s'):format(key, ref))
-      end
-      resolved[key] = resolve_local_refs(value, root, resolving)
-    end
-  end
-  return resolved
-end
-
 ---Replaces localized documentation placeholders in a schema tree in place.
 ---
 ---This is used for schemas whose documentation strings are stored in a
@@ -282,40 +215,24 @@ local function generate_server_schema(schema)
   local package_json = vim.json.decode(request(schema.package_url)) or {}
   local config_schema = package_json.contributes and package_json.contributes.configuration
     or package_json.properties and package_json
-
-  local properties = vim.empty_dict()
-
-  if vim.islist(config_schema) then
-    for _, config_section in pairs(config_schema) do
-      if config_section.properties then
-        for k, v in pairs(config_section.properties) do
-          if k ~= '$schema' then
-            properties[k] = resolve_local_refs(v, config_section)
-          end
-        end
-      end
-    end
-  elseif config_schema.properties then
-    for k, v in pairs(config_schema.properties) do
-      if k ~= '$schema' then
-        properties[k] = resolve_local_refs(v, config_schema)
-      end
-    end
+  if not config_schema then
+    error('Missing `contributes.configuration` or `properties`')
   end
 
-  -- `properties["enable_snippets"]` => `properties["zls.enable_snippets"]`
-  if schema.prefix then
-    if type(properties) == 'table' then
-      local new = vim.empty_dict()
-      for key, value in pairs(properties) do
-        new[schema.prefix .. key] = value
+  local properties = vim.empty_dict()
+  for _, config_section in ipairs(vim.islist(config_schema) and config_schema or { config_schema }) do
+    for k, v in pairs(config_section.properties or {}) do
+      if k ~= '$schema' then
+        properties[('%s%s'):format(schema.prefix or '', k)] = v
       end
-      properties = new
     end
   end
 
   local schema_json = {
     ['$schema'] = 'http://json-schema.org/draft-07/schema#',
+    -- Targets of local `$ref`s (see gen_annotations.lua).
+    ['$defs'] = package_json['$defs'],
+    definitions = package_json.definitions,
     description = package_json.description,
     properties = properties,
   }
@@ -335,6 +252,8 @@ local function generate_all_schemas()
   local schemas = resolve_schema_configs()
   local names = vim.tbl_keys(schemas)
   table.sort(names)
+  -- Try all servers before failing, to report every broken URL in one run.
+  local failures = {} ---@type string[]
   for _, name in ipairs(names) do
     local schema_config = schemas[name]
     print(('Generating schema for %s'):format(name))
@@ -348,8 +267,13 @@ local function generate_all_schemas()
           schema_config.settings_file,
           'b'
         )
+      else
+        table.insert(failures, ('%s (%s): %s'):format(name, schema_config.package_url, schema_json))
       end
     end
+  end
+  if #failures > 0 then
+    error(('Failed to generate schemas:\n%s'):format(table.concat(failures, '\n')))
   end
 end
 

@@ -36,7 +36,7 @@
 ---```lua
 ---default = "opt-in"
 ---```
----@field clippy_preference? "on" | "opt-in" | "off"
+---@field clippy_preference? "on"|"opt-in"|"off"
 ---Overrides the default list of packages for which analysis is skipped.
 ---Available since RLS 1.38
 ---
@@ -103,7 +103,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.rls.RustClient
 ---Start RLS automatically when opening a file or project.
@@ -117,7 +117,7 @@
 ---```lua
 ---default = "default"
 ---```
----@field channel? string|"default" | "stable" | "beta" | "nightly"
+---@field channel? string|"default"|"stable"|"beta"|"nightly"
 ---Disable usage of rustup and use rustc/rls/rust-analyzer from PATH.
 ---@field disableRustup? boolean
 ---Allow multiple projects in the same folder, along with removing the constraint that the cargo.toml must be located at the root. (Experimental: might not work for certain setups)
@@ -127,7 +127,7 @@
 ---```lua
 ---default = "rls"
 ---```
----@field engine? "rls" | "rust-analyzer"
+---@field engine? "rls"|"rust-analyzer"
 ---When set to true, RLS stderr is logged to a file at workspace root level. Requires reloading extension after change.
 ---@field logToFile? boolean
 ---Specifies message severity on which the output channel will be revealed. Requires reloading extension after change.
@@ -135,7 +135,7 @@
 ---```lua
 ---default = "never"
 ---```
----@field revealOutputChannelOn? "info" | "warn" | "error" | "never"
+---@field revealOutputChannelOn? "info"|"warn"|"error"|"never"
 ---Override RLS path. Only required for RLS developers. If you set this and use rustup, you should also set `rust-client.channel` to ensure your RLS sees the right libraries. If you don't use rustup, make sure to set `rust-client.disableRustup`.
 ---@field rlsPath? string
 ---Path to rustup executable. Ignored if rustup is disabled.

@@ -134,7 +134,8 @@ end
 local function format_comment(desc, prefix)
   if desc then
     prefix = (prefix or '') .. '---'
-    return prefix .. desc:gsub('\n', '\n' .. prefix)
+    -- Lua also ends a comment at `\r`.
+    return prefix .. desc:gsub('\r\n?', '\n'):gsub('\n', '\n' .. prefix)
   end
 end
 
@@ -191,19 +192,14 @@ local function segment_name_for_annotation(segment)
   return #words > 0 and table.concat(words) or '_'
 end
 
----Build the Lua class name for a schema node.
----@param path string[] Path segments from the schema root.
----@param root_class string Root class name.
+---Build the Lua class name for a nested schema object.
+---`lspconfig.settings.x` + `foo` => `_.lspconfig.settings.x.Foo`, then + `bar` => `_.lspconfig.settings.x.Foo.Bar`.
+---@param class_name string Parent class name.
+---@param field string
 ---@return string
-local function class_name_for(path, root_class)
-  if #path == 0 then
-    return root_class
-  end
-  local class_name = { '_', root_class }
-  for _, segment in ipairs(path) do
-    table.insert(class_name, segment_name_for_annotation(segment))
-  end
-  return table.concat(class_name, '.')
+local function child_class_name(class_name, field)
+  local parent = vim.startswith(class_name, '_.') and class_name or ('_.%s'):format(class_name)
+  return ('%s.%s'):format(parent, segment_name_for_annotation(field))
 end
 
 ---@type table<string, true>
@@ -243,57 +239,76 @@ local function field_name_for_annotation(field)
   return '[' .. vim.inspect(field) .. ']'
 end
 
----Convert a schema property into a Lua type.
----@param prop table Schema property.
+---LuaLS type of each JSON Schema `type`, except `array` (see lua_type_for). Others (`null`, invalid) are dropped.
+---@type table<string, string>
+local json_types = {
+  boolean = 'boolean',
+  integer = 'integer',
+  number = 'number',
+  object = 'table',
+  string = 'string',
+}
+
+---Format a JSON value as a LuaLS literal type.
+---@param value any
 ---@return string
-local function lua_type_for(prop)
+local function literal_type_for(value)
+  return type(value) == 'table' and 'table' or vim.inspect(value)
+end
+
+---Convert a schema property into a Lua type.
+---@param prop any Schema property.
+---@param refs table<string, string> Class name of each `$ref` target (see generate_file_annotations).
+---@return string
+local function lua_type_for(prop, refs)
+  if type(prop) ~= 'table' then
+    return 'any'
+  end
+  if prop['$ref'] then
+    return refs[prop['$ref']] or 'any'
+  end
+  if prop.const ~= nil and type(prop.type) ~= 'table' then
+    return literal_type_for(prop.const)
+  end
+  local types = {}
   if prop.enum then
-    return table.concat(
-      vim.tbl_map(function(e)
-        return vim.inspect(e)
-      end, prop.enum),
-      ' | '
-    )
-  end
-  if prop.const ~= nil then
-    return vim.inspect(prop.const)
-  end
-  local types = type(prop.type) == 'table' and prop.type or { prop.type }
-  -- Convert `anyOf`/`oneOf` to a union, excluding null:
-  -- `{ anyOf = { { type = 'string' }, { type = 'number' }, { type = 'null' } } }` => `string|number`.
-  local alternatives = prop.anyOf or prop.oneOf
-  if vim.tbl_isempty(types) and type(alternatives) == 'table' then
-    local alternative_types = {}
-    for _, alternative in ipairs(alternatives) do
-      if alternative.type ~= 'null' then
-        table.insert(alternative_types, lua_type_for(alternative))
+    types = vim.tbl_map(literal_type_for, prop.enum)
+  elseif prop.type then
+    for _, t in ipairs(type(prop.type) == 'table' and prop.type or { prop.type }) do
+      if t == 'array' then
+        local item_type = lua_type_for(prop.items, refs)
+        table.insert(types, (item_type:find('|', 1, true) and '(%s)[]' or '%s[]'):format(item_type))
+      elseif json_types[t] then
+        table.insert(types, json_types[t])
       end
     end
-    return #alternative_types > 0 and table.concat(alternative_types, '|') or 'any'
-  end
-  types = vim.tbl_map(function(t)
-    if t == 'null' then
-      return
-    end
-    if t == 'array' then
-      if type(prop.items) == 'table' then
-        local item_type = lua_type_for(prop.items)
-        if item_type:find('|', 1, true) then
-          item_type = '(' .. item_type .. ')'
-        end
-        return item_type .. '[]'
+  else
+    -- Convert `anyOf`/`oneOf` to a union, excluding null:
+    -- `{ anyOf = { { type = 'string' }, { type = 'number' }, { type = 'null' } } }` => `string|number`.
+    for _, alternative in ipairs(prop.anyOf or prop.oneOf or {}) do
+      if type(alternative) ~= 'table' or alternative.type ~= 'null' then
+        table.insert(types, lua_type_for(alternative, refs))
       end
-      return 'any[]'
     end
-    if t == 'object' then
-      return 'table'
-    end
-    return t
-  end, types)
-  if vim.tbl_isempty(types) then
-    types = { 'any' }
   end
-  return table.concat(vim.iter(types):flatten():totable(), '|')
+  return #types > 0 and table.concat(vim.list.unique(types), '|') or 'any'
+end
+
+---Get the object schema (with `properties`) declared by `prop`, if any.
+---`{ anyOf = { { type = 'object', properties = … }, { type = 'null' } } }` => the first alternative.
+---@param prop any Schema property.
+---@return table?
+local function object_schema(prop)
+  if type(prop) ~= 'table' then
+    return nil
+  end
+  if prop.type == 'object' and prop.properties then
+    return prop
+  end
+  local alternatives = vim.tbl_filter(function(alternative)
+    return type(alternative) ~= 'table' or alternative.type ~= 'null'
+  end, prop.anyOf or prop.oneOf or {})
+  return #alternatives == 1 and object_schema(alternatives[1]) or nil
 end
 
 ---Return whether a field is required by its parent schema.
@@ -322,37 +337,56 @@ end
 
 ---Append annotations for an object node and its children.
 ---@param lines string[] Output buffer.
----@param path string[] Path segments from the schema root.
+---@param class_name string
 ---@param prop table Object property schema.
----@param root_class string Root class name.
-local function append_object(lines, path, prop, root_class)
+---@param refs table<string, string> (see lua_type_for)
+local function append_object(lines, class_name, prop, refs)
   local object_lines = {}
   append_description(object_lines, prop)
-  table.insert(object_lines, '---@class ' .. class_name_for(path, root_class))
-  if prop.properties then
-    local props = vim.tbl_keys(prop.properties)
-    table.sort(props)
-    for _, field in ipairs(props) do
-      local child = prop.properties[field]
-      local optional_marker = is_required_field(prop, field, child) and '' or '?'
-      local field_name = field_name_for_annotation(field)
-      append_description(object_lines, child)
+  table.insert(object_lines, ('---@class %s'):format(class_name))
+  local fields = vim.tbl_keys(prop.properties or {})
+  table.sort(fields)
+  for _, field in ipairs(fields) do
+    local child = type(prop.properties[field]) == 'table' and prop.properties[field] or {}
+    local optional_marker = is_required_field(prop, field, child) and '' or '?'
+    append_description(object_lines, child)
 
-      if child.type == 'object' and child.properties then
-        local child_path = vim.deepcopy(path)
-        table.insert(child_path, field)
-        table.insert(
-          object_lines,
-          '---@field ' .. field_name .. optional_marker .. ' ' .. class_name_for(child_path, root_class)
-        )
-        append_object(lines, child_path, child, root_class)
-      else
-        table.insert(object_lines, '---@field ' .. field_name .. optional_marker .. ' ' .. lua_type_for(child))
-      end
+    local object = object_schema(child)
+    local field_type = object and child_class_name(class_name, field) or lua_type_for(child, refs)
+    table.insert(
+      object_lines,
+      ('---@field %s%s %s'):format(field_name_for_annotation(field), optional_marker, field_type)
+    )
+    if object then
+      append_object(lines, field_type, object, refs)
     end
   end
   table.insert(lines, '')
   vim.list_extend(lines, object_lines)
+end
+
+---Append annotations for a schema definition.
+---@param lines string[] Output buffer.
+---@param class_name string
+---@param def table Definition schema.
+---@param refs table<string, string> (see lua_type_for)
+local function append_definition(lines, class_name, def, refs)
+  local object = object_schema(def)
+  if object then
+    append_object(lines, class_name, object, refs)
+    return
+  end
+  table.insert(lines, '')
+  append_description(lines, def)
+  if not def.enum then
+    table.insert(lines, ('---@alias %s %s'):format(class_name, lua_type_for(def, refs)))
+    return
+  end
+  -- One member per line keeps diffs small for huge enums (e.g. ruff `RuleSelector`).
+  table.insert(lines, ('---@alias %s'):format(class_name))
+  for _, value in ipairs(def.enum) do
+    table.insert(lines, ('---| %s'):format(literal_type_for(value)))
+  end
 end
 
 ---Generate annotation lines for one schema file.
@@ -364,13 +398,28 @@ local function generate_file_annotations(file)
   local class_name = 'lspconfig.settings.' .. name
   local lines = { '---@meta' }
 
+  -- `{ ['$ref'] = '#/$defs/Foo' }` => `_.lspconfig.settings.<name>.defs.Foo`, annotated once.
+  local refs = {} ---@type table<string, string>
+  local defs = {} ---@type table<string, table>
+  for _, key in ipairs({ '$defs', 'definitions' }) do
+    for def_name, def in pairs(json[key] or {}) do
+      local def_class = ('_.%s.defs.%s'):format(class_name, segment_name_for_annotation(def_name))
+      refs[('#/%s/%s'):format(key, def_name)] = def_class
+      defs[def_class] = type(def) == 'table' and def or {}
+    end
+  end
+  for def_class, def in vim.spairs(defs) do
+    append_definition(lines, def_class, def, refs)
+  end
+
   local schema = Settings.new()
   for key, prop in pairs(json.properties) do
+    prop = type(prop) == 'table' and prop or {}
     prop.leaf = true
     schema:set(key, prop)
   end
 
-  append_object(lines, {}, normalize_properties(schema:get()), class_name)
+  append_object(lines, class_name, normalize_properties(schema:get()), refs)
   return vim.tbl_filter(function(v)
     return v ~= nil
   end, lines)

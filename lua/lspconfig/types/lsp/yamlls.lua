@@ -31,7 +31,7 @@
 ---```lua
 ---default = "preserve"
 ---```
----@field proseWrap? "preserve" | "never" | "always"
+---@field proseWrap? "preserve"|"never"|"always"
 ---Use single quotes instead of double quotes
 ---@field singleQuote? boolean
 
@@ -55,7 +55,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.yamlls.Yaml
 ---Enable/disable completion feature

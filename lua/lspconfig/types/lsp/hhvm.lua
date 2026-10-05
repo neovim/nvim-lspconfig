@@ -16,7 +16,7 @@
 ---@field enabled? boolean
 ---@field ssh? _.lspconfig.settings.hhvm.Hack.Remote.Ssh
 ---The remote connection method
----@field type? "ssh" | "docker"
+---@field type? "ssh"|"docker"
 ---Absolute location of workspace root in the remote file system
 ---@field workspacePath? string
 
@@ -26,7 +26,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.hhvm.Hack
 ---Absolute path to the hh_client executable. This can be left empty if hh_client is already in your environment $PATH.
@@ -44,7 +44,7 @@
 ---```
 ---@field hhastArgs? string[]
 ---Whether to lint the entire project or just the open files
----@field hhastLintMode? "whole-project" | "open-files"
+---@field hhastLintMode? "whole-project"|"open-files"
 ---Use an alternate `hhast-lint` path. Can be abolute or relative to workspace root.
 ---
 ---```lua

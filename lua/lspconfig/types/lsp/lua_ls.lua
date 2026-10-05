@@ -36,7 +36,7 @@
 ---```lua
 ---default = "Disable"
 ---```
----@field callSnippet? "Disable" | "Both" | "Replace"
+---@field callSnippet? "Disable"|"Both"|"Replace"
 ---Previewing the relevant code snippet of the suggestion may help you understand the usage of the suggestion. The number set indicates the number of intercepted lines in the code fragment. If it is set to `0`, this feature can be disabled.
 ---
 ---```lua
@@ -54,7 +54,7 @@
 ---```lua
 ---default = "Replace"
 ---```
----@field keywordSnippet? "Disable" | "Both" | "Replace"
+---@field keywordSnippet? "Disable"|"Both"|"Replace"
 ---Maximum number of fields to analyze for completions. When an object has more fields than this limit, completions will require more specific input to appear.
 ---
 ---```lua
@@ -84,7 +84,7 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field showWord? "Enable" | "Fallback" | "Disable"
+---@field showWord? "Enable"|"Fallback"|"Disable"
 ---Whether the displayed context word contains the content of other files in the workspace.
 ---
 ---```lua
@@ -111,14 +111,14 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field ambiguity? "Any" | "Opened" | "None" | "Fallback"
+---@field ambiguity? "Any"|"Opened"|"None"|"Fallback"
 ---* await-in-sync
 ---* not-yieldable
 ---
 ---```lua
 ---default = "Fallback"
 ---```
----@field await? "Any" | "Opened" | "None" | "Fallback"
+---@field await? "Any"|"Opened"|"None"|"Fallback"
 ---* codestyle-check
 ---* name-style-check
 ---* spell-check
@@ -126,20 +126,20 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field codestyle? "Any" | "Opened" | "None" | "Fallback"
+---@field codestyle? "Any"|"Opened"|"None"|"Fallback"
 ---* global-element
 ---
 ---```lua
 ---default = "Fallback"
 ---```
----@field conventions? "Any" | "Opened" | "None" | "Fallback"
+---@field conventions? "Any"|"Opened"|"None"|"Fallback"
 ---* duplicate-index
 ---* duplicate-set-field
 ---
 ---```lua
 ---default = "Fallback"
 ---```
----@field duplicate? "Any" | "Opened" | "None" | "Fallback"
+---@field duplicate? "Any"|"Opened"|"None"|"Fallback"
 ---* global-in-nil-env
 ---* lowercase-global
 ---* undefined-env-child
@@ -148,7 +148,7 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field global? "Any" | "Opened" | "None" | "Fallback"
+---@field global? "Any"|"Opened"|"None"|"Fallback"
 ---* circle-doc-class
 ---* doc-field-no-class
 ---* duplicate-doc-alias
@@ -167,13 +167,13 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field luadoc? "Any" | "Opened" | "None" | "Fallback"
+---@field luadoc? "Any"|"Opened"|"None"|"Fallback"
 ---* redefined-local
 ---
 ---```lua
 ---default = "Fallback"
 ---```
----@field redefined? "Any" | "Opened" | "None" | "Fallback"
+---@field redefined? "Any"|"Opened"|"None"|"Fallback"
 ---* close-non-object
 ---* deprecated
 ---* discard-returns
@@ -182,13 +182,13 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field strict? "Any" | "Opened" | "None" | "Fallback"
+---@field strict? "Any"|"Opened"|"None"|"Fallback"
 ---* no-unknown
 ---
 ---```lua
 ---default = "Fallback"
 ---```
----@field strong? "Any" | "Opened" | "None" | "Fallback"
+---@field strong? "Any"|"Opened"|"None"|"Fallback"
 ---* assign-type-mismatch
 ---* cast-local-type
 ---* cast-type-mismatch
@@ -201,7 +201,7 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field ["type-check"]? "Any" | "Opened" | "None" | "Fallback"
+---@field ["type-check"]? "Any"|"Opened"|"None"|"Fallback"
 ---* missing-fields
 ---* missing-parameter
 ---* missing-return
@@ -214,7 +214,7 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field unbalanced? "Any" | "Opened" | "None" | "Fallback"
+---@field unbalanced? "Any"|"Opened"|"None"|"Fallback"
 ---* code-after-break
 ---* empty-block
 ---* redundant-return
@@ -228,7 +228,7 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field unused? "Any" | "Opened" | "None" | "Fallback"
+---@field unused? "Any"|"Opened"|"None"|"Fallback"
 
 ---Modify the diagnostic severity in a group.
 ---`Fallback` means that diagnostics in this group are controlled by `diagnostics.severity` separately.
@@ -244,14 +244,14 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field ambiguity? "Error" | "Warning" | "Information" | "Hint" | "Fallback"
+---@field ambiguity? "Error"|"Warning"|"Information"|"Hint"|"Fallback"
 ---* await-in-sync
 ---* not-yieldable
 ---
 ---```lua
 ---default = "Fallback"
 ---```
----@field await? "Error" | "Warning" | "Information" | "Hint" | "Fallback"
+---@field await? "Error"|"Warning"|"Information"|"Hint"|"Fallback"
 ---* codestyle-check
 ---* name-style-check
 ---* spell-check
@@ -259,20 +259,20 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field codestyle? "Error" | "Warning" | "Information" | "Hint" | "Fallback"
+---@field codestyle? "Error"|"Warning"|"Information"|"Hint"|"Fallback"
 ---* global-element
 ---
 ---```lua
 ---default = "Fallback"
 ---```
----@field conventions? "Error" | "Warning" | "Information" | "Hint" | "Fallback"
+---@field conventions? "Error"|"Warning"|"Information"|"Hint"|"Fallback"
 ---* duplicate-index
 ---* duplicate-set-field
 ---
 ---```lua
 ---default = "Fallback"
 ---```
----@field duplicate? "Error" | "Warning" | "Information" | "Hint" | "Fallback"
+---@field duplicate? "Error"|"Warning"|"Information"|"Hint"|"Fallback"
 ---* global-in-nil-env
 ---* lowercase-global
 ---* undefined-env-child
@@ -281,7 +281,7 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field global? "Error" | "Warning" | "Information" | "Hint" | "Fallback"
+---@field global? "Error"|"Warning"|"Information"|"Hint"|"Fallback"
 ---* circle-doc-class
 ---* doc-field-no-class
 ---* duplicate-doc-alias
@@ -300,13 +300,13 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field luadoc? "Error" | "Warning" | "Information" | "Hint" | "Fallback"
+---@field luadoc? "Error"|"Warning"|"Information"|"Hint"|"Fallback"
 ---* redefined-local
 ---
 ---```lua
 ---default = "Fallback"
 ---```
----@field redefined? "Error" | "Warning" | "Information" | "Hint" | "Fallback"
+---@field redefined? "Error"|"Warning"|"Information"|"Hint"|"Fallback"
 ---* close-non-object
 ---* deprecated
 ---* discard-returns
@@ -315,13 +315,13 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field strict? "Error" | "Warning" | "Information" | "Hint" | "Fallback"
+---@field strict? "Error"|"Warning"|"Information"|"Hint"|"Fallback"
 ---* no-unknown
 ---
 ---```lua
 ---default = "Fallback"
 ---```
----@field strong? "Error" | "Warning" | "Information" | "Hint" | "Fallback"
+---@field strong? "Error"|"Warning"|"Information"|"Hint"|"Fallback"
 ---* assign-type-mismatch
 ---* cast-local-type
 ---* cast-type-mismatch
@@ -334,7 +334,7 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field ["type-check"]? "Error" | "Warning" | "Information" | "Hint" | "Fallback"
+---@field ["type-check"]? "Error"|"Warning"|"Information"|"Hint"|"Fallback"
 ---* missing-fields
 ---* missing-parameter
 ---* missing-return
@@ -347,7 +347,7 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field unbalanced? "Error" | "Warning" | "Information" | "Hint" | "Fallback"
+---@field unbalanced? "Error"|"Warning"|"Information"|"Hint"|"Fallback"
 ---* code-after-break
 ---* empty-block
 ---* redundant-return
@@ -361,7 +361,7 @@
 ---```lua
 ---default = "Fallback"
 ---```
----@field unused? "Error" | "Warning" | "Information" | "Hint" | "Fallback"
+---@field unused? "Error"|"Warning"|"Information"|"Hint"|"Fallback"
 
 ---* Opened:  only diagnose opened files
 ---* Any:     diagnose all files
@@ -375,373 +375,373 @@
 ---```lua
 ---default = "Any"
 ---```
----@field ["ambiguity-1"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["ambiguity-1"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for assignments in which the value's type does not match the type of the assigned variable.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["assign-type-mismatch"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["assign-type-mismatch"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for calls of asynchronous functions within a synchronous function.
 ---
 ---```lua
 ---default = "None"
 ---```
----@field ["await-in-sync"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["await-in-sync"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for casts of local variables where the target type does not match the defined type.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["cast-local-type"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["cast-local-type"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for casts where the target type does not match the initial type.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["cast-type-mismatch"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["cast-type-mismatch"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Circular `@class` inheritance
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["circle-doc-class"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["circle-doc-class"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for attempts to close a variable with a non-object.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["close-non-object"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["close-non-object"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for code placed after a break statement in a loop.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["code-after-break"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["code-after-break"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for incorrectly styled lines.
 ---
 ---```lua
 ---default = "None"
 ---```
----@field ["codestyle-check"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["codestyle-check"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for `for` loops which will never reach their max/limit because the loop is incrementing instead of decrementing.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["count-down-loop"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["count-down-loop"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics to highlight deprecated API.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field deprecated? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field deprecated? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for files which are required by two different paths.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["different-requires"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["different-requires"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for calls of functions annotated with `---@nodiscard` where the return values are ignored.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["discard-returns"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["discard-returns"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics to highlight a field annotation without a defining class annotation.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["doc-field-no-class"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["doc-field-no-class"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for a duplicated alias annotation name.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["duplicate-doc-alias"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["duplicate-doc-alias"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for a duplicated field annotation name.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["duplicate-doc-field"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["duplicate-doc-field"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for a duplicated param annotation name.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["duplicate-doc-param"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["duplicate-doc-param"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable duplicate table index diagnostics.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["duplicate-index"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["duplicate-index"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for setting the same field in a class more than once.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["duplicate-set-field"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["duplicate-set-field"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable empty code block diagnostics.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["empty-block"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["empty-block"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics to warn about global elements.
 ---
 ---```lua
 ---default = "None"
 ---```
----@field ["global-element"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["global-element"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable cannot use global variables （ `_ENV` is set to `nil`） diagnostics.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["global-in-nil-env"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["global-in-nil-env"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Incomplete @param or @return annotations for functions.
 ---
 ---```lua
 ---default = "None"
 ---```
----@field ["incomplete-signature-doc"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["incomplete-signature-doc"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Injecting a field into an object
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["inject-field"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["inject-field"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for accesses to fields which are invisible.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field invisible? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field invisible? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable lowercase global variable definition diagnostics.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["lowercase-global"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["lowercase-global"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Missing fields
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["missing-fields"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["missing-fields"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Missing annotations for globals! Global functions must have a comment and annotations for all parameters and return values.
 ---
 ---```lua
 ---default = "None"
 ---```
----@field ["missing-global-doc"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["missing-global-doc"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Missing annotations for exported locals! Exported local functions must have a comment and annotations for all parameters and return values.
 ---
 ---```lua
 ---default = "None"
 ---```
----@field ["missing-local-export-doc"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["missing-local-export-doc"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for function calls where the number of arguments is less than the number of annotated function parameters.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["missing-parameter"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["missing-parameter"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for functions with return annotations which have no return statement.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["missing-return"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["missing-return"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for return statements without values although the containing function declares returns.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["missing-return-value"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["missing-return-value"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for name style.
 ---
 ---```lua
 ---default = "None"
 ---```
----@field ["name-style-check"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["name-style-check"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for variable usages if `nil` or an optional (potentially `nil`) value was assigned to the variable before.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["need-check-nil"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["need-check-nil"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable newfield call diagnostics. It is raised when the parenthesis of a function call appear on the following line when defining a field in a table.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["newfield-call"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["newfield-call"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable newline call diagnostics. It's raised when a line starting with `(` is encountered, which is syntactically parsed as a function call on the previous line.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["newline-call"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["newline-call"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for cases in which the type cannot be inferred.
 ---
 ---```lua
 ---default = "None"
 ---```
----@field ["no-unknown"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["no-unknown"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for calls to `coroutine.yield()` when it is not permitted.
 ---
 ---```lua
 ---default = "None"
 ---```
----@field ["not-yieldable"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["not-yieldable"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for function calls where the type of a provided parameter does not match the type of the annotated function definition.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["param-type-mismatch"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["param-type-mismatch"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable redefined local variable diagnostics.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["redefined-local"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["redefined-local"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable redundant function parameter diagnostics.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["redundant-parameter"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["redundant-parameter"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for return statements which are not needed because the function would exit on its own.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["redundant-return"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["redundant-return"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for return statements which return an extra value which is not specified by a return annotation.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["redundant-return-value"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["redundant-return-value"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable the redundant values assigned diagnostics. It's raised during assignment operation, when the number of values is higher than the number of objects being assigned.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["redundant-value"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["redundant-value"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for return values whose type does not match the type declared in the corresponding return annotation.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["return-type-mismatch"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["return-type-mismatch"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for typos in strings.
 ---
 ---```lua
 ---default = "None"
 ---```
----@field ["spell-check"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["spell-check"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable trailing space diagnostics.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["trailing-space"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["trailing-space"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics on multiple assignments if not all variables obtain a value (e.g., `local x,y = 1`).
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["unbalanced-assignments"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["unbalanced-assignments"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for class annotations in which an undefined class is referenced.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["undefined-doc-class"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["undefined-doc-class"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for type annotations referencing an undefined type or alias.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["undefined-doc-name"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["undefined-doc-name"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for cases in which a parameter annotation is given without declaring the parameter in the function definition.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["undefined-doc-param"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["undefined-doc-param"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable undefined environment variable diagnostics. It's raised when `_ENV` table is set to a new literal table, but the used global variable is no longer present in the global environment.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["undefined-env-child"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["undefined-env-child"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for cases in which an undefined field of a variable is read.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["undefined-field"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["undefined-field"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable undefined global variable diagnostics.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["undefined-global"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["undefined-global"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for casts of undefined variables.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["unknown-cast-variable"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["unknown-cast-variable"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics in cases in which an unknown diagnostics code is entered.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["unknown-diag-code"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["unknown-diag-code"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for unknown operators.
 ---
 ---```lua
 ---default = "Any"
 ---```
----@field ["unknown-operator"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["unknown-operator"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable diagnostics for unreachable code.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["unreachable-code"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["unreachable-code"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable unused function diagnostics.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["unused-function"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["unused-function"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable unused label diagnostics.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["unused-label"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["unused-label"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable unused local variable diagnostics.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["unused-local"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["unused-local"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 ---Enable unused vararg diagnostics.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field ["unused-vararg"]? "Any" | "Opened" | "None" | "Any!" | "Opened!" | "None!"
+---@field ["unused-vararg"]? "Any"|"Opened"|"None"|"Any!"|"Opened!"|"None!"
 
 ---Modify the diagnostic severity.
 ---
@@ -753,373 +753,373 @@
 ---```lua
 ---default = "Warning"
 ---```
----@field ["ambiguity-1"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["ambiguity-1"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for assignments in which the value's type does not match the type of the assigned variable.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["assign-type-mismatch"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["assign-type-mismatch"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for calls of asynchronous functions within a synchronous function.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["await-in-sync"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["await-in-sync"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for casts of local variables where the target type does not match the defined type.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["cast-local-type"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["cast-local-type"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for casts where the target type does not match the initial type.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["cast-type-mismatch"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["cast-type-mismatch"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Circular `@class` inheritance
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["circle-doc-class"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["circle-doc-class"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for attempts to close a variable with a non-object.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["close-non-object"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["close-non-object"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for code placed after a break statement in a loop.
 ---
 ---```lua
 ---default = "Hint"
 ---```
----@field ["code-after-break"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["code-after-break"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for incorrectly styled lines.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["codestyle-check"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["codestyle-check"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for `for` loops which will never reach their max/limit because the loop is incrementing instead of decrementing.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["count-down-loop"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["count-down-loop"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics to highlight deprecated API.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field deprecated? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field deprecated? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for files which are required by two different paths.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["different-requires"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["different-requires"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for calls of functions annotated with `---@nodiscard` where the return values are ignored.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["discard-returns"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["discard-returns"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics to highlight a field annotation without a defining class annotation.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["doc-field-no-class"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["doc-field-no-class"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for a duplicated alias annotation name.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["duplicate-doc-alias"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["duplicate-doc-alias"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for a duplicated field annotation name.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["duplicate-doc-field"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["duplicate-doc-field"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for a duplicated param annotation name.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["duplicate-doc-param"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["duplicate-doc-param"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable duplicate table index diagnostics.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["duplicate-index"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["duplicate-index"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for setting the same field in a class more than once.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["duplicate-set-field"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["duplicate-set-field"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable empty code block diagnostics.
 ---
 ---```lua
 ---default = "Hint"
 ---```
----@field ["empty-block"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["empty-block"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics to warn about global elements.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["global-element"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["global-element"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable cannot use global variables （ `_ENV` is set to `nil`） diagnostics.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["global-in-nil-env"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["global-in-nil-env"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Incomplete @param or @return annotations for functions.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["incomplete-signature-doc"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["incomplete-signature-doc"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Injecting a field into an object
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["inject-field"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["inject-field"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for accesses to fields which are invisible.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field invisible? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field invisible? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable lowercase global variable definition diagnostics.
 ---
 ---```lua
 ---default = "Information"
 ---```
----@field ["lowercase-global"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["lowercase-global"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Missing fields
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["missing-fields"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["missing-fields"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Missing annotations for globals! Global functions must have a comment and annotations for all parameters and return values.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["missing-global-doc"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["missing-global-doc"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Missing annotations for exported locals! Exported local functions must have a comment and annotations for all parameters and return values.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["missing-local-export-doc"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["missing-local-export-doc"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for function calls where the number of arguments is less than the number of annotated function parameters.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["missing-parameter"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["missing-parameter"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for functions with return annotations which have no return statement.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["missing-return"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["missing-return"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for return statements without values although the containing function declares returns.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["missing-return-value"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["missing-return-value"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for name style.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["name-style-check"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["name-style-check"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for variable usages if `nil` or an optional (potentially `nil`) value was assigned to the variable before.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["need-check-nil"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["need-check-nil"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable newfield call diagnostics. It is raised when the parenthesis of a function call appear on the following line when defining a field in a table.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["newfield-call"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["newfield-call"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable newline call diagnostics. It's raised when a line starting with `(` is encountered, which is syntactically parsed as a function call on the previous line.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["newline-call"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["newline-call"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for cases in which the type cannot be inferred.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["no-unknown"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["no-unknown"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for calls to `coroutine.yield()` when it is not permitted.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["not-yieldable"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["not-yieldable"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for function calls where the type of a provided parameter does not match the type of the annotated function definition.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["param-type-mismatch"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["param-type-mismatch"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable redefined local variable diagnostics.
 ---
 ---```lua
 ---default = "Hint"
 ---```
----@field ["redefined-local"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["redefined-local"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable redundant function parameter diagnostics.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["redundant-parameter"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["redundant-parameter"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for return statements which are not needed because the function would exit on its own.
 ---
 ---```lua
 ---default = "Hint"
 ---```
----@field ["redundant-return"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["redundant-return"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for return statements which return an extra value which is not specified by a return annotation.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["redundant-return-value"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["redundant-return-value"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable the redundant values assigned diagnostics. It's raised during assignment operation, when the number of values is higher than the number of objects being assigned.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["redundant-value"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["redundant-value"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for return values whose type does not match the type declared in the corresponding return annotation.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["return-type-mismatch"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["return-type-mismatch"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for typos in strings.
 ---
 ---```lua
 ---default = "Information"
 ---```
----@field ["spell-check"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["spell-check"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable trailing space diagnostics.
 ---
 ---```lua
 ---default = "Hint"
 ---```
----@field ["trailing-space"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["trailing-space"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics on multiple assignments if not all variables obtain a value (e.g., `local x,y = 1`).
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["unbalanced-assignments"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["unbalanced-assignments"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for class annotations in which an undefined class is referenced.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["undefined-doc-class"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["undefined-doc-class"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for type annotations referencing an undefined type or alias.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["undefined-doc-name"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["undefined-doc-name"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for cases in which a parameter annotation is given without declaring the parameter in the function definition.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["undefined-doc-param"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["undefined-doc-param"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable undefined environment variable diagnostics. It's raised when `_ENV` table is set to a new literal table, but the used global variable is no longer present in the global environment.
 ---
 ---```lua
 ---default = "Information"
 ---```
----@field ["undefined-env-child"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["undefined-env-child"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for cases in which an undefined field of a variable is read.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["undefined-field"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["undefined-field"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable undefined global variable diagnostics.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["undefined-global"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["undefined-global"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for casts of undefined variables.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["unknown-cast-variable"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["unknown-cast-variable"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics in cases in which an unknown diagnostics code is entered.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["unknown-diag-code"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["unknown-diag-code"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for unknown operators.
 ---
 ---```lua
 ---default = "Warning"
 ---```
----@field ["unknown-operator"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["unknown-operator"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable diagnostics for unreachable code.
 ---
 ---```lua
 ---default = "Hint"
 ---```
----@field ["unreachable-code"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["unreachable-code"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable unused function diagnostics.
 ---
 ---```lua
 ---default = "Hint"
 ---```
----@field ["unused-function"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["unused-function"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable unused label diagnostics.
 ---
 ---```lua
 ---default = "Hint"
 ---```
----@field ["unused-label"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["unused-label"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable unused local variable diagnostics.
 ---
 ---```lua
 ---default = "Hint"
 ---```
----@field ["unused-local"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["unused-local"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 ---Enable unused vararg diagnostics.
 ---
 ---```lua
 ---default = "Hint"
 ---```
----@field ["unused-vararg"]? "Error" | "Warning" | "Information" | "Hint" | "Error!" | "Warning!" | "Information!" | "Hint!"
+---@field ["unused-vararg"]? "Error"|"Warning"|"Information"|"Hint"|"Error!"|"Warning!"|"Information!"|"Hint!"
 
 ---@class _.lspconfig.settings.lua_ls.Lua.Diagnostics
 ---Disabled diagnostic (Use code in hover brackets).
@@ -1127,7 +1127,7 @@
 ---```lua
 ---default = {}
 ---```
----@field disable? ("action-after-return" | "ambiguity-1" | "ambiguous-syntax" | "args-after-dots" | "assign-const-global" | "assign-type-mismatch" | "await-in-sync" | "block-after-else" | "break-outside" | "cast-local-type" | "cast-type-mismatch" | "circle-doc-class" | "close-non-object" | "code-after-break" | "codestyle-check" | "count-down-loop" | "declare-const" | "deprecated" | "different-requires" | "discard-returns" | "doc-field-no-class" | "duplicate-doc-alias" | "duplicate-doc-field" | "duplicate-doc-param" | "duplicate-index" | "duplicate-set-field" | "empty-block" | "env-is-global" | "err-assign-as-eq" | "err-c-long-comment" | "err-comment-prefix" | "err-do-as-then" | "err-eq-as-assign" | "err-esc" | "err-nonstandard-symbol" | "err-then-as-do" | "exp-in-action" | "global-close-attribute" | "global-element" | "global-in-nil-env" | "incomplete-signature-doc" | "index-in-func-name" | "inject-field" | "invisible" | "jump-local-scope" | "keyword" | "local-limit" | "lowercase-global" | "lua-doc-miss-sign" | "luadoc-error-diag-mode" | "luadoc-miss-alias-extends" | "luadoc-miss-alias-name" | "luadoc-miss-arg-name" | "luadoc-miss-cate-name" | "luadoc-miss-class-extends-name" | "luadoc-miss-class-name" | "luadoc-miss-diag-mode" | "luadoc-miss-diag-name" | "luadoc-miss-field-extends" | "luadoc-miss-field-name" | "luadoc-miss-fun-after-overload" | "luadoc-miss-generic-name" | "luadoc-miss-local-name" | "luadoc-miss-module-name" | "luadoc-miss-operator-name" | "luadoc-miss-param-extends" | "luadoc-miss-param-name" | "luadoc-miss-see-name" | "luadoc-miss-sign-name" | "luadoc-miss-symbol" | "luadoc-miss-type-name" | "luadoc-miss-vararg-type" | "luadoc-miss-version" | "malformed-number" | "miss-end" | "miss-esc-x" | "miss-exp" | "miss-exponent" | "miss-field" | "miss-loop-max" | "miss-loop-min" | "miss-method" | "miss-name" | "miss-sep-in-table" | "miss-space-between" | "miss-symbol" | "missing-fields" | "missing-global-doc" | "missing-local-export-doc" | "missing-parameter" | "missing-return" | "missing-return-value" | "multi-close" | "name-style-check" | "need-check-nil" | "need-paren" | "nesting-long-mark" | "newfield-call" | "newline-call" | "no-unknown" | "no-visible-label" | "not-yieldable" | "param-type-mismatch" | "redefined-label" | "redefined-local" | "redundant-parameter" | "redundant-return" | "redundant-return-value" | "redundant-value" | "return-type-mismatch" | "set-const" | "spell-check" | "trailing-space" | "unbalanced-assignments" | "undefined-doc-class" | "undefined-doc-name" | "undefined-doc-param" | "undefined-env-child" | "undefined-field" | "undefined-global" | "unexpect-dots" | "unexpect-efunc-name" | "unexpect-gfunc-name" | "unexpect-lfunc-name" | "unexpect-symbol" | "unicode-name" | "unknown-attribute" | "unknown-cast-variable" | "unknown-diag-code" | "unknown-operator" | "unknown-symbol" | "unreachable-code" | "unsupport-named-vararg" | "unsupport-symbol" | "unused-function" | "unused-label" | "unused-local" | "unused-vararg" | "variable-not-declared")[]
+---@field disable? ("action-after-return"|"ambiguity-1"|"ambiguous-syntax"|"args-after-dots"|"assign-const-global"|"assign-type-mismatch"|"await-in-sync"|"block-after-else"|"break-outside"|"cast-local-type"|"cast-type-mismatch"|"circle-doc-class"|"close-non-object"|"code-after-break"|"codestyle-check"|"count-down-loop"|"declare-const"|"deprecated"|"different-requires"|"discard-returns"|"doc-field-no-class"|"duplicate-doc-alias"|"duplicate-doc-field"|"duplicate-doc-param"|"duplicate-index"|"duplicate-set-field"|"empty-block"|"env-is-global"|"err-assign-as-eq"|"err-c-long-comment"|"err-comment-prefix"|"err-do-as-then"|"err-eq-as-assign"|"err-esc"|"err-nonstandard-symbol"|"err-then-as-do"|"exp-in-action"|"global-close-attribute"|"global-element"|"global-in-nil-env"|"incomplete-signature-doc"|"index-in-func-name"|"inject-field"|"invisible"|"jump-local-scope"|"keyword"|"local-limit"|"lowercase-global"|"lua-doc-miss-sign"|"luadoc-error-diag-mode"|"luadoc-miss-alias-extends"|"luadoc-miss-alias-name"|"luadoc-miss-arg-name"|"luadoc-miss-cate-name"|"luadoc-miss-class-extends-name"|"luadoc-miss-class-name"|"luadoc-miss-diag-mode"|"luadoc-miss-diag-name"|"luadoc-miss-field-extends"|"luadoc-miss-field-name"|"luadoc-miss-fun-after-overload"|"luadoc-miss-generic-name"|"luadoc-miss-local-name"|"luadoc-miss-module-name"|"luadoc-miss-operator-name"|"luadoc-miss-param-extends"|"luadoc-miss-param-name"|"luadoc-miss-see-name"|"luadoc-miss-sign-name"|"luadoc-miss-symbol"|"luadoc-miss-type-name"|"luadoc-miss-vararg-type"|"luadoc-miss-version"|"malformed-number"|"miss-end"|"miss-esc-x"|"miss-exp"|"miss-exponent"|"miss-field"|"miss-loop-max"|"miss-loop-min"|"miss-method"|"miss-name"|"miss-sep-in-table"|"miss-space-between"|"miss-symbol"|"missing-fields"|"missing-global-doc"|"missing-local-export-doc"|"missing-parameter"|"missing-return"|"missing-return-value"|"multi-close"|"name-style-check"|"need-check-nil"|"need-paren"|"nesting-long-mark"|"newfield-call"|"newline-call"|"no-unknown"|"no-visible-label"|"not-yieldable"|"param-type-mismatch"|"redefined-label"|"redefined-local"|"redundant-parameter"|"redundant-return"|"redundant-return-value"|"redundant-value"|"return-type-mismatch"|"set-const"|"spell-check"|"trailing-space"|"unbalanced-assignments"|"undefined-doc-class"|"undefined-doc-name"|"undefined-doc-param"|"undefined-env-child"|"undefined-field"|"undefined-global"|"unexpect-dots"|"unexpect-efunc-name"|"unexpect-gfunc-name"|"unexpect-lfunc-name"|"unexpect-symbol"|"unicode-name"|"unknown-attribute"|"unknown-cast-variable"|"unknown-diag-code"|"unknown-operator"|"unknown-symbol"|"unreachable-code"|"unsupport-named-vararg"|"unsupport-symbol"|"unused-function"|"unused-label"|"unused-local"|"unused-vararg"|"variable-not-declared")[]
 ---Enable diagnostics.
 ---
 ---```lua
@@ -1172,13 +1172,13 @@
 ---```lua
 ---default = "Opened"
 ---```
----@field ignoredFiles? "Enable" | "Opened" | "Disable"
+---@field ignoredFiles? "Enable"|"Opened"|"Disable"
 ---How to diagnose files loaded via `Lua.workspace.library`.
 ---
 ---```lua
 ---default = "Opened"
 ---```
----@field libraryFiles? "Enable" | "Opened" | "Disable"
+---@field libraryFiles? "Enable"|"Opened"|"Disable"
 ---* Opened:  only diagnose opened files
 ---* Any:     diagnose all files
 ---* None:    disable this diagnostic
@@ -1208,7 +1208,7 @@
 ---```lua
 ---default = "OnSave"
 ---```
----@field workspaceEvent? "OnChange" | "OnSave" | "None"
+---@field workspaceEvent? "OnChange"|"OnSave"|"None"
 ---Workspace diagnostics run rate (%). Decreasing this value reduces CPU usage, but also reduces the speed of workspace diagnostics. The diagnosis of the file you are currently editing is always done at full speed and is not affected by this setting.
 ---
 ---```lua
@@ -1240,7 +1240,7 @@
 ---```lua
 ---default = "glob"
 ---```
----@field regengine? "glob" | "lua"
+---@field regengine? "glob"|"lua"
 
 ---@class _.lspconfig.settings.lua_ls.Lua.Format
 ---The default format configuration. Has a lower priority than `.editorconfig` file in the workspace.
@@ -1264,7 +1264,7 @@
 ---```lua
 ---default = "Auto"
 ---```
----@field arrayIndex? "Enable" | "Auto" | "Disable"
+---@field arrayIndex? "Enable"|"Auto"|"Disable"
 ---If the called function is marked `---@async`, prompt `await` at the call.
 ---
 ---```lua
@@ -1280,7 +1280,7 @@
 ---```lua
 ---default = "All"
 ---```
----@field paramName? "All" | "Literal" | "Disable"
+---@field paramName? "All"|"Literal"|"Disable"
 ---Show type hints at the parameter of the function.
 ---
 ---```lua
@@ -1292,7 +1292,7 @@
 ---```lua
 ---default = "SameLine"
 ---```
----@field semicolon? "All" | "SameLine" | "Disable"
+---@field semicolon? "All"|"SameLine"|"Disable"
 ---Show hints of type at assignment operation.
 ---@field setType? boolean
 
@@ -1391,121 +1391,121 @@
 ---```lua
 ---default = "default"
 ---```
----@field basic? "default" | "enable" | "disable"
+---@field basic? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field bit? "default" | "enable" | "disable"
+---@field bit? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field bit32? "default" | "enable" | "disable"
+---@field bit32? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field builtin? "default" | "enable" | "disable"
+---@field builtin? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field coroutine? "default" | "enable" | "disable"
+---@field coroutine? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field debug? "default" | "enable" | "disable"
+---@field debug? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field ffi? "default" | "enable" | "disable"
+---@field ffi? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field io? "default" | "enable" | "disable"
+---@field io? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field jit? "default" | "enable" | "disable"
+---@field jit? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field ["jit.profile"]? "default" | "enable" | "disable"
+---@field ["jit.profile"]? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field ["jit.util"]? "default" | "enable" | "disable"
+---@field ["jit.util"]? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field math? "default" | "enable" | "disable"
+---@field math? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field os? "default" | "enable" | "disable"
+---@field os? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field ["package"]? "default" | "enable" | "disable"
+---@field ["package"]? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field string? "default" | "enable" | "disable"
+---@field string? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field ["string.buffer"]? "default" | "enable" | "disable"
+---@field ["string.buffer"]? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field table? "default" | "enable" | "disable"
+---@field table? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field ["table.clear"]? "default" | "enable" | "disable"
+---@field ["table.clear"]? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field ["table.new"]? "default" | "enable" | "disable"
+---@field ["table.new"]? "default"|"enable"|"disable"
 ---TODO: Needs documentation
 ---
 ---```lua
 ---default = "default"
 ---```
----@field utf8? "default" | "enable" | "disable"
+---@field utf8? "default"|"enable"|"disable"
 
 ---@class _.lspconfig.settings.lua_ls.Lua.Runtime
 ---Adjust the enabled state of the built-in library. You can disable (or redefine) the non-existent library according to the actual runtime environment.
@@ -1524,7 +1524,7 @@
 ---```lua
 ---default = "utf8"
 ---```
----@field fileEncoding? "utf8" | "ansi" | "utf16le" | "utf16be"
+---@field fileEncoding? "utf8"|"ansi"|"utf16le"|"utf16be"
 ---Format of the directory name of the meta files.
 ---
 ---```lua
@@ -1536,7 +1536,7 @@
 ---```lua
 ---default = {}
 ---```
----@field nonstandardSymbol? ("//" | "/**/" | "`" | "+=" | "-=" | "*=" | "/=" | "%=" | "^=" | "//=" | "|=" | "&=" | "<<=" | ">>=" | "||" | "&&" | "!" | "!=" | "continue" | "|lambda|" | "?." | "?.(" | "?.[" | "??" | "ternary" | "~>>" | "~>>=" | "..=" | "~=" | "const" | "->" | "number_underscore" | "?(" | "?[" | "?:")[]
+---@field nonstandardSymbol? ("//"|"/**/"|"`"|"+="|"-="|"*="|"/="|"%="|"^="|"//="|"|="|"&="|"<<="|">>="|"||"|"&&"|"!"|"!="|"continue"|"|lambda|"|"?."|"?.("|"?.["|"??"|"ternary"|"~>>"|"~>>="|"..="|"~="|"const"|"->"|"number_underscore"|"?("|"?["|"?:")[]
 ---When using `require`, how to find the file based on the input name.
 ---Setting this config to `?/init.lua` means that when you enter `require 'myfile'`, `${workspace}/myfile/init.lua` will be searched from the loaded files.
 ---if `runtime.pathStrict` is `false`, `${workspace}/**/myfile/init.lua` will also be searched.
@@ -1573,7 +1573,7 @@
 ---```lua
 ---default = "Lua 5.4"
 ---```
----@field version? "Lua 5.1" | "Lua 5.2" | "Lua 5.3" | "Lua 5.4" | "Lua 5.5" | "LuaJIT"
+---@field version? "Lua 5.1"|"Lua 5.2"|"Lua 5.3"|"Lua 5.4"|"Lua 5.5"|"LuaJIT"
 
 ---@class _.lspconfig.settings.lua_ls.Lua.Semantic
 ---Semantic coloring of type annotations.

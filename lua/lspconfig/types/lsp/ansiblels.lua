@@ -54,7 +54,7 @@
 ---```lua
 ---default = "missing"
 ---```
----@field policy? "always" | "missing" | "never" | "tag"
+---@field policy? "always"|"missing"|"never"|"tag"
 
 ---@class _.lspconfig.settings.ansiblels.Ansible.ExecutionEnvironment
 ---Specify the container engine (auto=podman then docker).
@@ -62,7 +62,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field containerEngine? "auto" | "podman" | "docker"
+---@field containerEngine? "auto"|"podman"|"docker"
 ---Extra parameters passed to the container engine command example: `--net=host`.
 ---
 ---```lua
@@ -129,7 +129,7 @@
 ---```lua
 ---default = "wca"
 ---```
----@field provider? "wca" | "google" | "rhcustom"
+---@field provider? "wca"|"google"|"rhcustom"
 ---@field suggestions? _.lspconfig.settings.ansiblels.Ansible.Lightspeed.Suggestions
 ---Request timeout in milliseconds for API calls.
 ---
@@ -212,7 +212,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.ansiblels.AnsibleServer
 ---@field trace? _.lspconfig.settings.ansiblels.AnsibleServer.Trace

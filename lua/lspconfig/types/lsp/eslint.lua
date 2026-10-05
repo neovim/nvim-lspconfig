@@ -10,7 +10,7 @@
 ---```lua
 ---default = "info"
 ---```
----@field severity? "error" | "warn" | "info" | "hint"
+---@field severity? "error"|"warn"|"info"|"hint"
 
 ---Show disable lint rule in the quick fix menu.
 ---
@@ -25,7 +25,7 @@
 ---```lua
 ---default = "line"
 ---```
----@field commentStyle? "line" | "block"
+---@field commentStyle? "line"|"block"
 ---Show the disable code actions.
 ---
 ---```lua
@@ -37,7 +37,7 @@
 ---```lua
 ---default = "separateLine"
 ---```
----@field location? "separateLine" | "sameLine"
+---@field location? "separateLine"|"sameLine"
 
 ---Show open lint rule documentation web page in the quick fix menu.
 ---
@@ -80,7 +80,7 @@
 ---```lua
 ---default = "all"
 ---```
----@field mode? "all" | "problems"
+---@field mode? "all"|"problems"
 ---The ESLint options object to use on save (see https://eslint.org/docs/developer-guide/nodejs-api#eslint-class). `eslint.codeActionsOnSave.rules`, if specified, will take priority over any rule options here.
 ---
 ---```lua
@@ -120,7 +120,7 @@
 ---```lua
 ---default = "on"
 ---```
----@field ["2_x"]? "off" | "on"
+---@field ["2_x"]? "off"|"on"
 
 ---@class _.lspconfig.settings.eslint.Eslint.Notebooks.Rules
 ---A special rules customization section for text cells in notebook documents.
@@ -207,7 +207,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"|table
+---@field server? "off"|"messages"|"verbose"|table
 
 ---@class _.lspconfig.settings.eslint.Eslint
 ---Turns auto fix on save on or off.
@@ -241,7 +241,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field onIgnoredFiles? "warn" | "off"
+---@field onIgnoredFiles? "warn"|"off"
 ---The eslint options object to provide args normally passed to eslint when executed from a command line (see https://eslint.org/docs/developer-guide/nodejs-api#eslint-class).
 ---
 ---```lua
@@ -253,7 +253,7 @@
 ---```lua
 ---default = "npm"
 ---```
----@field packageManager? "npm" | "yarn" | "pnpm"
+---@field packageManager? "npm"|"yarn"|"pnpm"
 ---An array of language ids for which the extension should probe if support is installed.
 ---
 ---```lua
@@ -271,7 +271,7 @@
 ---```lua
 ---default = "onType"
 ---```
----@field run? "onSave" | "onType"
+---@field run? "onSave"|"onType"
 ---The location of the node binary to run ESLint under.
 ---@field runtime? string
 ---@field timeBudget? _.lspconfig.settings.eslint.Eslint.TimeBudget
@@ -289,7 +289,7 @@
 ---An array of language ids which should be validated by ESLint. If not installed ESLint will show an error.
 ---@field validate? (string|table)[]
 ---Specifies how the working directories ESLint is using are computed. ESLint resolves configuration files (e.g. `eslintrc`, `.eslintignore`) relative to a working directory so it is important to configure this correctly.
----@field workingDirectories? (string|table|table|table|table)[]
+---@field workingDirectories? (string|table)[]
 
 ---@class lspconfig.settings.eslint
 ---@field eslint? _.lspconfig.settings.eslint.Eslint

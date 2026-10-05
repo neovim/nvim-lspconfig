@@ -14,7 +14,7 @@
 ---```lua
 ---default = "latest"
 ---```
----@field releaseVersion? "latest" | "v0.17" | "v0.16" | "v0.15" | "v0.14" | "v0.13" | "v0.12" | "v0.11" | "v0.10" | "v0.9" | "v0.8" | "v0.7" | "v0.6" | "v0.5"
+---@field releaseVersion? "latest"|"v0.17"|"v0.16"|"v0.15"|"v0.14"|"v0.13"|"v0.12"|"v0.11"|"v0.10"|"v0.9"|"v0.8"|"v0.7"|"v0.6"|"v0.5"
 ---Search for the StyLua binary in the `PATH` environment variable, and use this if available. If disabled, falls back to a bundled binary
 ---@field searchBinaryInPATH? boolean
 ---Search parent directories for a stylua configuration file if one is not directly available.

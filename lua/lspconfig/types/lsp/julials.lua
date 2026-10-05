@@ -42,7 +42,7 @@
 ---```lua
 ---default = "both"
 ---```
----@field resultType? "REPL" | "inline" | "inline, errors in REPL" | "both"
+---@field resultType? "REPL"|"inline"|"inline, errors in REPL"|"both"
 ---Save file before execution
 ---@field saveOnEval? boolean
 
@@ -63,7 +63,7 @@
 ---```lua
 ---default = "literals"
 ---```
----@field enabled? "none" | "literals" | "all"
+---@field enabled? "none"|"literals"|"all"
 
 ---@class _.lspconfig.settings.julials.Julia.InlayHints.Static.VariableTypes
 ---Enable type hints for variable definitions:
@@ -113,7 +113,7 @@
 ---```lua
 ---default = "ask"
 ---```
----@field closeStrategy? "ask" | "close" | "disconnect"
+---@field closeStrategy? "ask"|"close"|"disconnect"
 ---Experimental: Starts the interactive Julia session in a persistent `tmux` session. Note that `tmux` must be available in the shell defined with `#julia.persistentSession.shell#`.
 ---@field enabled? boolean
 ---Shell used to start the persistent session.
@@ -141,7 +141,7 @@
 ---```lua
 ---default = "image/png"
 ---```
----@field defaultMimeType? "image/png" | "image/svg+xml"
+---@field defaultMimeType? "image/png"|"image/svg+xml"
 ---Default directory for saving plots. Can either be relative to the current workspace or absolute.
 ---@field path? string
 
@@ -155,7 +155,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.julials.Julia.Workspace
 ---Show top-level modules in the workspace.
@@ -186,7 +186,7 @@
 ---```lua
 ---default = "qualify"
 ---```
----@field completionmode? "exportedonly" | "import" | "qualify"
+---@field completionmode? "exportedonly"|"import"|"qualify"
 ---Functions or modules that are set to compiled mode when setting the defaults.
 ---
 ---```lua

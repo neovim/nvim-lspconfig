@@ -76,7 +76,7 @@
 ---```lua
 ---default = "ignore"
 ---```
----@field semicolons? "ignore" | "insert" | "remove"
+---@field semicolons? "ignore"|"insert"|"remove"
 
 ---@class _.lspconfig.settings.ts_ls.Javascript.InlayHints.FunctionLikeReturnTypes
 ---Enable/disable inlay hints for implicit return types on function signatures:
@@ -104,7 +104,7 @@
 ---```lua
 ---default = "none"
 ---```
----@field enabled? "none" | "literals" | "all"
+---@field enabled? "none"|"literals"|"all"
 ---Suppress parameter name hints on arguments whose text is identical to the parameter name.
 ---
 ---```lua
@@ -169,13 +169,13 @@
 ---```lua
 ---default = "default"
 ---```
----@field caseFirst? "default" | "upper" | "lower"
+---@field caseFirst? "default"|"upper"|"lower"
 ---Specifies how imports should be sorted with regards to case-sensitivity. If `auto` or unspecified, we will detect the case-sensitivity per file
 ---
 ---```lua
 ---default = "auto"
 ---```
----@field caseSensitivity? "auto" | "caseInsensitive" | "caseSensitive"
+---@field caseSensitivity? "auto"|"caseInsensitive"|"caseSensitive"
 ---Requires `organizeImports.unicodeCollation: 'unicode'`. Overrides the locale used for collation. Specify `auto` to use the UI locale.
 ---@field locale? string
 ---Requires `organizeImports.unicodeCollation: 'unicode'`. Sort numeric strings by integer value.
@@ -185,13 +185,13 @@
 ---```lua
 ---default = "auto"
 ---```
----@field typeOrder? "auto" | "last" | "inline" | "first"
+---@field typeOrder? "auto"|"last"|"inline"|"first"
 ---Specify whether to sort imports using Unicode or Ordinal collation.
 ---
 ---```lua
 ---default = "ordinal"
 ---```
----@field unicodeCollation? "ordinal" | "unicode"
+---@field unicodeCollation? "ordinal"|"unicode"
 
 ---@class _.lspconfig.settings.ts_ls.Javascript.Preferences
 ---Specify glob patterns of files to exclude from auto imports. Relative paths are resolved relative to the workspace root. Patterns are evaluated using tsconfig.json [`exclude`](https://www.typescriptlang.org/tsconfig#exclude) semantics.
@@ -208,19 +208,19 @@
 ---```lua
 ---default = "shortest"
 ---```
----@field importModuleSpecifier? "shortest" | "relative" | "non-relative" | "project-relative"
+---@field importModuleSpecifier? "shortest"|"relative"|"non-relative"|"project-relative"
 ---Preferred path ending for auto imports.
 ---
 ---```lua
 ---default = "auto"
 ---```
----@field importModuleSpecifierEnding? "auto" | "minimal" | "index" | "js"
+---@field importModuleSpecifierEnding? "auto"|"minimal"|"index"|"js"
 ---Preferred style for JSX attribute completions.
 ---
 ---```lua
 ---default = "auto"
 ---```
----@field jsxAttributeCompletionStyle? "auto" | "braces" | "none"
+---@field jsxAttributeCompletionStyle? "auto"|"braces"|"none"
 ---Advanced preferences that control how imports are ordered.
 ---@field organizeImports? _.lspconfig.settings.ts_ls.Javascript.Preferences.OrganizeImports
 ---Preferred quote style to use for Quick Fixes.
@@ -228,7 +228,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field quoteStyle? "auto" | "single" | "double"
+---@field quoteStyle? "auto"|"single"|"double"
 ---When on a JSX tag, try to rename the matching tag instead of renaming the symbol. Requires using TypeScript 5.1+ in the workspace.
 ---
 ---```lua
@@ -326,7 +326,7 @@
 ---```lua
 ---default = "prompt"
 ---```
----@field enabled? "prompt" | "always" | "never"
+---@field enabled? "prompt"|"always"|"never"
 
 ---@class _.lspconfig.settings.ts_ls.Javascript.UpdateImportsOnPaste
 ---Automatically update imports when pasting code. Requires TypeScript 5.6+.
@@ -453,7 +453,7 @@
 ---```lua
 ---default = "ignore"
 ---```
----@field semicolons? "ignore" | "insert" | "remove"
+---@field semicolons? "ignore"|"insert"|"remove"
 
 ---@class _.lspconfig.settings.ts_ls.JsTs.Hover
 ---The maximum number of characters in a hover. If the hover is longer than this, it will be truncated. Requires TypeScript 5.9+.
@@ -481,7 +481,7 @@
 ---```lua
 ---default = "ESNext"
 ---```
----@field module? "CommonJS" | "AMD" | "System" | "UMD" | "ES6" | "ES2015" | "ES2020" | "ESNext" | "None" | "ES2022" | "Node12" | "NodeNext"
+---@field module? "CommonJS"|"AMD"|"System"|"UMD"|"ES6"|"ES2015"|"ES2020"|"ESNext"|"None"|"ES2022"|"Node12"|"NodeNext"
 ---Enable/disable [strict mode](https://www.typescriptlang.org/tsconfig#strict) in JavaScript and TypeScript files that are not part of a project. Existing `jsconfig.json` or `tsconfig.json` files override this setting.
 ---
 ---```lua
@@ -505,7 +505,7 @@
 ---```lua
 ---default = "ES2024"
 ---```
----@field target? "ES3" | "ES5" | "ES6" | "ES2015" | "ES2016" | "ES2017" | "ES2018" | "ES2019" | "ES2020" | "ES2021" | "ES2022" | "ES2023" | "ES2024" | "ESNext"
+---@field target? "ES3"|"ES5"|"ES6"|"ES2015"|"ES2016"|"ES2017"|"ES2018"|"ES2019"|"ES2020"|"ES2021"|"ES2022"|"ES2023"|"ES2024"|"ESNext"
 
 ---@class _.lspconfig.settings.ts_ls.JsTs.InlayHints.EnumMemberValues
 ---Enable/disable inlay hints for member values in enum declarations:
@@ -547,7 +547,7 @@
 ---```lua
 ---default = "none"
 ---```
----@field enabled? "none" | "literals" | "all"
+---@field enabled? "none"|"literals"|"all"
 ---Suppress parameter name hints on arguments whose text is identical to the parameter name.
 ---
 ---```lua
@@ -613,13 +613,13 @@
 ---```lua
 ---default = "default"
 ---```
----@field caseFirst? "default" | "upper" | "lower"
+---@field caseFirst? "default"|"upper"|"lower"
 ---Specifies how imports should be sorted with regards to case-sensitivity. If `auto` or unspecified, we will detect the case-sensitivity per file
 ---
 ---```lua
 ---default = "auto"
 ---```
----@field caseSensitivity? "auto" | "caseInsensitive" | "caseSensitive"
+---@field caseSensitivity? "auto"|"caseInsensitive"|"caseSensitive"
 ---Requires `organizeImports.unicodeCollation: 'unicode'`. Overrides the locale used for collation. Specify `auto` to use the UI locale.
 ---@field locale? string
 ---Requires `organizeImports.unicodeCollation: 'unicode'`. Sort numeric strings by integer value.
@@ -629,13 +629,13 @@
 ---```lua
 ---default = "auto"
 ---```
----@field typeOrder? "auto" | "last" | "inline" | "first"
+---@field typeOrder? "auto"|"last"|"inline"|"first"
 ---Specify whether to sort imports using Unicode or Ordinal collation.
 ---
 ---```lua
 ---default = "ordinal"
 ---```
----@field unicodeCollation? "ordinal" | "unicode"
+---@field unicodeCollation? "ordinal"|"unicode"
 
 ---@class _.lspconfig.settings.ts_ls.JsTs.Preferences
 ---Specify glob patterns of files to exclude from auto imports. Relative paths are resolved relative to the workspace root. Patterns are evaluated using tsconfig.json [`exclude`](https://www.typescriptlang.org/tsconfig#exclude) semantics.
@@ -652,25 +652,25 @@
 ---```lua
 ---default = "shortest"
 ---```
----@field importModuleSpecifier? "shortest" | "relative" | "non-relative" | "project-relative"
+---@field importModuleSpecifier? "shortest"|"relative"|"non-relative"|"project-relative"
 ---Preferred path ending for auto imports.
 ---
 ---```lua
 ---default = "auto"
 ---```
----@field importModuleSpecifierEnding? "auto" | "minimal" | "index" | "js"
+---@field importModuleSpecifierEnding? "auto"|"minimal"|"index"|"js"
 ---Enable/disable searching `package.json` dependencies for available auto imports.
 ---
 ---```lua
 ---default = "auto"
 ---```
----@field includePackageJsonAutoImports? "auto" | "on" | "off"
+---@field includePackageJsonAutoImports? "auto"|"on"|"off"
 ---Preferred style for JSX attribute completions.
 ---
 ---```lua
 ---default = "auto"
 ---```
----@field jsxAttributeCompletionStyle? "auto" | "braces" | "none"
+---@field jsxAttributeCompletionStyle? "auto"|"braces"|"none"
 ---Advanced preferences that control how imports are ordered.
 ---@field organizeImports? _.lspconfig.settings.ts_ls.JsTs.Preferences.OrganizeImports
 ---Include the `type` keyword in auto-imports whenever possible. Requires using TypeScript 5.3+ in the workspace.
@@ -680,7 +680,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field quoteStyle? "auto" | "single" | "double"
+---@field quoteStyle? "auto"|"single"|"double"
 ---When on a JSX tag, try to rename the matching tag instead of renaming the symbol. Requires using TypeScript 5.1+ in the workspace.
 ---
 ---```lua
@@ -787,7 +787,7 @@
 ---```lua
 ---default = "on"
 ---```
----@field autoDetect? "on" | "off" | "build" | "watch"
+---@field autoDetect? "on"|"off"|"build"|"watch"
 
 ---@class _.lspconfig.settings.ts_ls.JsTs.Tsdk
 ---Specifies the folder path to the tsserver and `lib*.d.ts` files under a TypeScript install to use for IntelliSense, for example: `./node_modules/typescript/lib`.
@@ -891,7 +891,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field log? "off" | "terse" | "normal" | "verbose" | "requestTime"
+---@field log? "off"|"terse"|"normal"|"verbose"|"requestTime"
 ---The maximum amount of memory (in MB) to allocate to the TypeScript server process. To use a memory limit greater than 4 GB, use `#js/ts.tsserver.node.path#` to run TS Server with a custom Node installation.
 ---
 ---```lua
@@ -912,7 +912,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field useSyntaxServer? "always" | "never" | "auto"
+---@field useSyntaxServer? "always"|"never"|"auto"
 ---Configure which watching strategies should be used to keep track of files and directories.
 ---
 ---```lua
@@ -927,7 +927,7 @@
 ---```lua
 ---default = "prompt"
 ---```
----@field enabled? "prompt" | "always" | "never"
+---@field enabled? "prompt"|"always"|"never"
 
 ---@class _.lspconfig.settings.ts_ls.JsTs.UpdateImportsOnPaste
 ---Automatically update imports when pasting code. Requires TypeScript 5.6+.
@@ -957,7 +957,7 @@
 ---```lua
 ---default = "allOpenProjects"
 ---```
----@field scope? "allOpenProjects" | "currentProject"
+---@field scope? "allOpenProjects"|"currentProject"
 
 ---@class _.lspconfig.settings.ts_ls.JsTs
 ---@field autoClosingTags? _.lspconfig.settings.ts_ls.JsTs.AutoClosingTags
@@ -972,7 +972,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field locale? "auto" | "de" | "es" | "en" | "fr" | "it" | "ja" | "ko" | "ru" | "zh-CN" | "zh-TW"
+---@field locale? "auto"|"de"|"es"|"en"|"fr"|"it"|"ja"|"ko"|"ru"|"zh-CN"|"zh-TW"
 ---Makes `Go to Definition` avoid type declaration files when possible by triggering `Go to Source Definition` instead. This allows `Go to Source Definition` to be triggered with the mouse gesture.
 ---@field preferGoToSourceDefinition? boolean
 ---@field preferences? _.lspconfig.settings.ts_ls.JsTs.Preferences
@@ -1083,7 +1083,7 @@
 ---```lua
 ---default = "ignore"
 ---```
----@field semicolons? "ignore" | "insert" | "remove"
+---@field semicolons? "ignore"|"insert"|"remove"
 
 ---@class _.lspconfig.settings.ts_ls.Typescript.ImplementationsCodeLens
 ---Enable/disable implementations CodeLens in TypeScript files. This CodeLens shows the implementers of TypeScript interfaces.
@@ -1133,7 +1133,7 @@
 ---```lua
 ---default = "none"
 ---```
----@field enabled? "none" | "literals" | "all"
+---@field enabled? "none"|"literals"|"all"
 ---Suppress parameter name hints on arguments whose text is identical to the parameter name.
 ---
 ---```lua
@@ -1199,13 +1199,13 @@
 ---```lua
 ---default = "default"
 ---```
----@field caseFirst? "default" | "upper" | "lower"
+---@field caseFirst? "default"|"upper"|"lower"
 ---Specifies how imports should be sorted with regards to case-sensitivity. If `auto` or unspecified, we will detect the case-sensitivity per file
 ---
 ---```lua
 ---default = "auto"
 ---```
----@field caseSensitivity? "auto" | "caseInsensitive" | "caseSensitive"
+---@field caseSensitivity? "auto"|"caseInsensitive"|"caseSensitive"
 ---Requires `organizeImports.unicodeCollation: 'unicode'`. Overrides the locale used for collation. Specify `auto` to use the UI locale.
 ---@field locale? string
 ---Requires `organizeImports.unicodeCollation: 'unicode'`. Sort numeric strings by integer value.
@@ -1215,13 +1215,13 @@
 ---```lua
 ---default = "auto"
 ---```
----@field typeOrder? "auto" | "last" | "inline" | "first"
+---@field typeOrder? "auto"|"last"|"inline"|"first"
 ---Specify whether to sort imports using Unicode or Ordinal collation.
 ---
 ---```lua
 ---default = "ordinal"
 ---```
----@field unicodeCollation? "ordinal" | "unicode"
+---@field unicodeCollation? "ordinal"|"unicode"
 
 ---@class _.lspconfig.settings.ts_ls.Typescript.Preferences
 ---Specify glob patterns of files to exclude from auto imports. Relative paths are resolved relative to the workspace root. Patterns are evaluated using tsconfig.json [`exclude`](https://www.typescriptlang.org/tsconfig#exclude) semantics.
@@ -1238,25 +1238,25 @@
 ---```lua
 ---default = "shortest"
 ---```
----@field importModuleSpecifier? "shortest" | "relative" | "non-relative" | "project-relative"
+---@field importModuleSpecifier? "shortest"|"relative"|"non-relative"|"project-relative"
 ---Preferred path ending for auto imports.
 ---
 ---```lua
 ---default = "auto"
 ---```
----@field importModuleSpecifierEnding? "auto" | "minimal" | "index" | "js"
+---@field importModuleSpecifierEnding? "auto"|"minimal"|"index"|"js"
 ---Enable/disable searching `package.json` dependencies for available auto imports.
 ---
 ---```lua
 ---default = "auto"
 ---```
----@field includePackageJsonAutoImports? "auto" | "on" | "off"
+---@field includePackageJsonAutoImports? "auto"|"on"|"off"
 ---Preferred style for JSX attribute completions.
 ---
 ---```lua
 ---default = "auto"
 ---```
----@field jsxAttributeCompletionStyle? "auto" | "braces" | "none"
+---@field jsxAttributeCompletionStyle? "auto"|"braces"|"none"
 ---Advanced preferences that control how imports are ordered.
 ---@field organizeImports? _.lspconfig.settings.ts_ls.Typescript.Preferences.OrganizeImports
 ---Include the `type` keyword in auto-imports whenever possible. Requires using TypeScript 5.3+ in the workspace.
@@ -1266,7 +1266,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field quoteStyle? "auto" | "single" | "double"
+---@field quoteStyle? "auto"|"single"|"double"
 ---When on a JSX tag, try to rename the matching tag instead of renaming the symbol. Requires using TypeScript 5.1+ in the workspace.
 ---
 ---```lua
@@ -1367,7 +1367,7 @@
 ---```lua
 ---default = "on"
 ---```
----@field autoDetect? "on" | "off" | "build" | "watch"
+---@field autoDetect? "on"|"off"|"build"|"watch"
 
 ---@class _.lspconfig.settings.ts_ls.Typescript.Tsserver.Experimental
 ---Enables project wide error reporting.
@@ -1404,7 +1404,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field log? "off" | "terse" | "normal" | "verbose" | "requestTime"
+---@field log? "off"|"terse"|"normal"|"verbose"|"requestTime"
 ---The maximum amount of memory (in MB) to allocate to the TypeScript server process. To use a memory limit greater than 4 GB, use `#js/ts.tsserver.node.path#` to run TS Server with a custom Node installation.
 ---
 ---```lua
@@ -1424,7 +1424,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field useSyntaxServer? "always" | "never" | "auto"
+---@field useSyntaxServer? "always"|"never"|"auto"
 ---Configure which watching strategies should be used to keep track of files and directories.
 ---
 ---```lua
@@ -1439,7 +1439,7 @@
 ---```lua
 ---default = "prompt"
 ---```
----@field enabled? "prompt" | "always" | "never"
+---@field enabled? "prompt"|"always"|"never"
 
 ---@class _.lspconfig.settings.ts_ls.Typescript.UpdateImportsOnPaste
 ---Automatically update imports when pasting code. Requires TypeScript 5.6+.
@@ -1469,7 +1469,7 @@
 ---```lua
 ---default = "allOpenProjects"
 ---```
----@field scope? "allOpenProjects" | "currentProject"
+---@field scope? "allOpenProjects"|"currentProject"
 
 ---@class _.lspconfig.settings.ts_ls.Typescript
 ---Enable/disable automatic closing of JSX tags.
@@ -1492,7 +1492,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field locale? "auto" | "de" | "es" | "en" | "fr" | "it" | "ja" | "ko" | "ru" | "zh-CN" | "zh-TW"
+---@field locale? "auto"|"de"|"es"|"en"|"fr"|"it"|"ja"|"ko"|"ru"|"zh-CN"|"zh-TW"
 ---Specifies the path to the npm executable used for [Automatic Type Acquisition](https://code.visualstudio.com/docs/nodejs/working-with-javascript#_typings-and-automatic-type-acquisition).
 ---@field npm? string
 ---Makes `Go to Definition` avoid type declaration files when possible by triggering `Go to Source Definition` instead. This allows `Go to Source Definition` to be triggered with the mouse gesture.

@@ -77,7 +77,7 @@
 ---```lua
 ---default = "auto"
 ---```
----@field wrapAttributes? "auto" | "force" | "force-aligned" | "force-expand-multiline" | "aligned-multiple" | "preserve" | "preserve-aligned"
+---@field wrapAttributes? "auto"|"force"|"force-aligned"|"force-expand-multiline"|"aligned-multiple"|"preserve"|"preserve-aligned"
 
 ---@class _.lspconfig.settings.volar.Vue.Hover
 ---%configuration.hover.rich%
@@ -111,7 +111,7 @@
 ---```lua
 ---default = "preferPascalCase"
 ---```
----@field componentNameCasing? "preferKebabCase" | "preferPascalCase" | "alwaysKebabCase" | "alwaysPascalCase"
+---@field componentNameCasing? "preferKebabCase"|"preferPascalCase"|"alwaysKebabCase"|"alwaysPascalCase"
 ---%configuration.suggest.defineAssignment%
 ---
 ---```lua
@@ -123,7 +123,7 @@
 ---```lua
 ---default = "preferKebabCase"
 ---```
----@field propNameCasing? "preferKebabCase" | "preferCamelCase" | "alwaysKebabCase" | "alwaysCamelCase"
+---@field propNameCasing? "preferKebabCase"|"preferCamelCase"|"alwaysKebabCase"|"alwaysCamelCase"
 
 ---@class _.lspconfig.settings.volar.Vue.Trace
 ---%configuration.trace.server%
@@ -131,7 +131,7 @@
 ---```lua
 ---default = "off"
 ---```
----@field server? "off" | "messages" | "verbose"
+---@field server? "off"|"messages"|"verbose"
 
 ---@class _.lspconfig.settings.volar.Vue.Welcome
 ---%configuration.welcome.show%
