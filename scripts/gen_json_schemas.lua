@@ -140,6 +140,9 @@ local overrides = {
   nixd = {
     prefix = 'nixd.',
   },
+  tombi = {
+    prefix = 'tombi.',
+  },
   zls = {
     prefix = 'zls.',
   },
