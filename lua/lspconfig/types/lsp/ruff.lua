@@ -45,6 +45,8 @@
 ---When disabled, they are excluded.
 ---@field ["type-checking-imports"]? boolean
 
+---@alias _.lspconfig.settings.ruff.defs.AnnotationSemanticsSelection table|string[]
+
 ---@class _.lspconfig.settings.ruff.defs.ApiBan
 ---The message to display when the API is used.
 ---@field msg string
@@ -439,14 +441,40 @@
 ---Exempt classes that list any of the enumerated classes as a base class
 ---from needing to be moved into type-checking blocks.
 ---
----Common examples include Pydantic's `pydantic.BaseModel` and SQLAlchemy's
----`sqlalchemy.orm.DeclarativeBase`, but can also support user-defined
----classes that inherit from those base classes. For example, if you define
----a common `DeclarativeBase` subclass that's used throughout your project
----(e.g., `class Base(DeclarativeBase) ...` in `base.py`), you can add it to
----this list (`runtime-evaluated-base-classes = ["base.Base"]`) to exempt
+---This can either be configured as a list, if all entries share the same
+---runtime semantics of being runtime required. Or a table where each entry
+---is assigned to its desired runtime semantics.
+---
+---A common example for `"runtime"` required semantics is Pydantic's `pydantic.BaseModel`
+---but can also support user-defined classes that inherit from those base classes.
+---For example, if you define a common `BaseModel` subclass that's used throughout
+---your project (e.g., `class Base(BaseModel) ...` in `base.py`), you can add it to
+---this list/table (`runtime-evaluated-base-classes = ["base.Base"]`) to exempt
 ---models from being moved into type-checking blocks.
----@field ["runtime-evaluated-base-classes"]? string[]
+---
+---```toml
+---[tool.ruff.lint.flake8-type-checking]
+---runtime-evaluated-base-classes = ["pydantic.BaseModel"]
+---```
+---
+---Or
+---
+---```toml
+---[tool.ruff.lint.flake8-type-checking.runtime-evaluated-base-classes]
+---"pydantic.BaseModel" = "required"
+---```
+---
+---For some use-cases like SQLAlchemy's `sqlalchemy.orm.DeclarativeBase` it makes more
+---sense to mark the class as runtime `"ambiguous"`, since references to other models do
+---not need to resolve at runtime. With these semantics ruff will assume the annotations
+---already contain all of the correct forward references, and will not attempt to move
+---related imports and/or quote annotations.
+---
+---```toml
+---[tool.ruff.lint.flake8-type-checking.runtime-evaluated-base-classes]
+---"sqlalchemy.orm.DeclarativeBase" = "ambiguous"
+---```
+---@field ["runtime-evaluated-base-classes"]? _.lspconfig.settings.ruff.defs.AnnotationSemanticsSelection
 ---Exempt classes and functions decorated with any of the enumerated
 ---decorators from being moved into type-checking blocks.
 ---
@@ -467,7 +495,10 @@
 ---```
 ---
 ---Here `app.get` will correctly be identified as `fastapi.FastAPI.get`.
----@field ["runtime-evaluated-decorators"]? string[]
+---
+---Just like with `runtime-evaluated-base-classes` it's possible to mark
+---decorators as runtime `"ambiguous"`.
+---@field ["runtime-evaluated-decorators"]? _.lspconfig.settings.ruff.defs.AnnotationSemanticsSelection
 ---Enforce `TC001`, `TC002`, and `TC003` rules even when valid runtime imports
 ---are present for the same module.
 ---
@@ -4021,6 +4052,15 @@
 ---| "zip-dict-keys-and-values"
 ---| "zip-instead-of-pairwise"
 ---| "zip-without-explicit-strict"
+
+---Represents the desired runtime semantics for a set of type definitions
+---
+---Note that the order of variants is important here. `Required` has the
+---highest precedence when calling `RuntimeSemantics::combine` on two
+---separate targeting sources. (E.g. classes can be targeted both via
+---their decorators, but also via their base classes, so this determines
+---what happens when two sources disagree)
+---@alias _.lspconfig.settings.ruff.defs.RuntimeSemantics "required"|"ambiguous"
 
 ---@alias _.lspconfig.settings.ruff.defs.Strictness "parents"|"all"
 

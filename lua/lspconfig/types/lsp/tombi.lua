@@ -648,6 +648,11 @@
 ---Schema catalog path or URL
 ---@alias _.lspconfig.settings.tombi.defs.SchemaCatalogPath string
 
+---Severity supported by the global schema deprecation rule.
+---@alias _.lspconfig.settings.tombi.defs.SchemaDeprecatedSeverity
+---| "warn"
+---| "error"
+
 ---@class _.lspconfig.settings.tombi.defs.SchemaFormatOptions
 ---@field rules? _.lspconfig.settings.tombi.defs.SchemaFormatRules
 
@@ -686,9 +691,16 @@
 
 ---@alias _.lspconfig.settings.tombi.defs.SchemaOverrideTableKeysOrderRule _.lspconfig.settings.tombi.defs.TableKeysOrder|_.lspconfig.settings.tombi.defs.SchemaTableKeysOrderRule
 
+---@class _.lspconfig.settings.tombi.defs.SchemaOverviewLintOptions
+---@field rules? _.lspconfig.settings.tombi.defs.SchemaOverviewLintRules
+
+---@class _.lspconfig.settings.tombi.defs.SchemaOverviewLintRules
+---@field deprecated? _.lspconfig.settings.tombi.defs.SchemaDeprecatedSeverity
+
 ---@class _.lspconfig.settings.tombi.defs.SchemaOverviewOptions
 ---@field catalog? _.lspconfig.settings.tombi.defs.SchemaCatalog
 ---@field enabled? _.lspconfig.settings.tombi.defs.BoolDefaultTrue
+---@field lint? _.lspconfig.settings.tombi.defs.SchemaOverviewLintOptions
 ---If `additionalProperties` is not specified in the JSON Schema,
 ---the strict mode treats it as `additionalProperties: false`,
 ---which is different from the JSON Schema specification.
@@ -786,7 +798,7 @@
 
 ---@alias _.lspconfig.settings.tombi.defs.TrailingCommentSpaceWidth integer
 
----@class lspconfig.settings.tombi
+---@class _.lspconfig.settings.tombi.Tombi
 ---@field extensions? _.lspconfig.settings.tombi.defs.Extensions
 ---@field files? _.lspconfig.settings.tombi.defs.FilesOptions
 ---@field format? _.lspconfig.settings.tombi.defs.FormatOptions
@@ -801,3 +813,6 @@
 ---default = "v1.0.0"
 ---```
 ---@field ["toml-version"]? _.lspconfig.settings.tombi.defs.TomlVersion
+
+---@class lspconfig.settings.tombi
+---@field tombi? _.lspconfig.settings.tombi.Tombi
