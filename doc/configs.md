@@ -2447,34 +2447,31 @@ Default config:
 https://github.com/clice-io/clice
 Clice is a next-generation language server for modern C++, focused on performance and code intelligence
 
+Commands:
+- `:LspCliceShowContext`, `:LspCliceSwitchContext`, `:LspCliceResetContext`: show, choose or
+  reset the compilation context of the buffer: the source file a header compiles in, or the
+  compile command of a source file listed with several.
+- `:LspCliceSwitchConfiguration`: select the build configuration (the `configuration` tags of
+  the `clice.toml` rules) clice runs from its next start.
+
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('clice')
 ```
 
 Default config:
-- `capabilities` :
-  ```lua
-  {
-    offsetEncoding = { "utf-8" },
-    textDocument = {
-      completion = {
-        editsNearCursor = true
-      }
-    }
-  }
-  ```
 - `cmd` :
   ```lua
   { "clice", "serve" }
   ```
 - `filetypes` :
   ```lua
-  { "c", "cpp" }
+  { "c", "cpp", "cuda" }
   ```
+- `on_attach`: [../lsp/clice.lua:163](../lsp/clice.lua#L163)
 - `root_markers` :
   ```lua
-  { "clice.toml", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" }
+  { "clice.toml", "compile_commands.json", ".git" }
   ```
 
 ---
