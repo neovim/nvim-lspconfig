@@ -78,6 +78,14 @@
 ---```
 ---@field globalOn? boolean
 
+---@class _.lspconfig.settings.hie.Haskell.Plugin.CaseSplit
+---Enables caseSplit plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
 ---@class _.lspconfig.settings.hie.Haskell.Plugin.ChangeTypeSignature
 ---Enables changeTypeSignature plugin
 ---
@@ -141,6 +149,14 @@
 
 ---@class _.lspconfig.settings.hie.Haskell.Plugin.ExplicitFixity
 ---Enables explicit-fixity plugin
+---
+---```lua
+---default = true
+---```
+---@field globalOn? boolean
+
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Export
+---Enables export plugin
 ---
 ---```lua
 ---default = true
@@ -297,13 +313,19 @@
 ---```
 ---@field inlayHintsOn? boolean
 
----@class _.lspconfig.settings.hie.Haskell.Plugin.ModuleName
----Enables moduleName plugin
+---@class _.lspconfig.settings.hie.Haskell.Plugin.Notes
+---Enables notes completions
 ---
 ---```lua
 ---default = true
 ---```
----@field globalOn? boolean
+---@field completionOn? boolean
+---Enables notes hover
+---
+---```lua
+---default = true
+---```
+---@field hoverOn? boolean
 
 ---@class _.lspconfig.settings.hie.Haskell.Plugin.Ormolu.Config
 ---Call out to an external "ormolu" executable, rather than using the bundled library
@@ -354,24 +376,26 @@
 
 ---@class _.lspconfig.settings.hie.Haskell.Plugin.Rename.Config
 ---Enable experimental cross-module renaming
+---
+---```lua
+---default = true
+---```
 ---@field crossModule? boolean
 
 ---@class _.lspconfig.settings.hie.Haskell.Plugin.Rename
+---Enables rename code lenses
+---
+---```lua
+---default = true
+---```
+---@field codeLensOn? boolean
 ---@field config? _.lspconfig.settings.hie.Haskell.Plugin.Rename.Config
----Enables rename plugin
+---Enables rename rename
 ---
 ---```lua
 ---default = true
 ---```
----@field globalOn? boolean
-
----@class _.lspconfig.settings.hie.Haskell.Plugin.Retrie
----Enables retrie plugin
----
----```lua
----default = true
----```
----@field globalOn? boolean
+---@field renameOn? boolean
 
 ---@class _.lspconfig.settings.hie.Haskell.Plugin.SemanticTokens.Config
 ---LSP semantic token type to use for typeclass methods
@@ -456,6 +480,10 @@
 ---@class _.lspconfig.settings.hie.Haskell.Plugin.SemanticTokens
 ---@field config? _.lspconfig.settings.hie.Haskell.Plugin.SemanticTokens.Config
 ---Enables semanticTokens plugin
+---
+---```lua
+---default = true
+---```
 ---@field globalOn? boolean
 
 ---@class _.lspconfig.settings.hie.Haskell.Plugin.SignatureHelp
@@ -485,11 +513,13 @@
 ---@field ["cabal-gild"]? _.lspconfig.settings.hie.Haskell.Plugin.CabalGild
 ---@field cabalHaskellIntegration? _.lspconfig.settings.hie.Haskell.Plugin.CabalHaskellIntegration
 ---@field callHierarchy? _.lspconfig.settings.hie.Haskell.Plugin.CallHierarchy
+---@field caseSplit? _.lspconfig.settings.hie.Haskell.Plugin.CaseSplit
 ---@field changeTypeSignature? _.lspconfig.settings.hie.Haskell.Plugin.ChangeTypeSignature
 ---@field class? _.lspconfig.settings.hie.Haskell.Plugin.Class
 ---@field eval? _.lspconfig.settings.hie.Haskell.Plugin.Eval
 ---@field ["explicit-fields"]? _.lspconfig.settings.hie.Haskell.Plugin.ExplicitFields
 ---@field ["explicit-fixity"]? _.lspconfig.settings.hie.Haskell.Plugin.ExplicitFixity
+---@field export? _.lspconfig.settings.hie.Haskell.Plugin.Export
 ---@field fourmolu? _.lspconfig.settings.hie.Haskell.Plugin.Fourmolu
 ---@field gadt? _.lspconfig.settings.hie.Haskell.Plugin.Gadt
 ---@field ["ghcide-code-actions-bindings"]? _.lspconfig.settings.hie.Haskell.Plugin.GhcideCodeActionsBindings
@@ -501,7 +531,7 @@
 ---@field ["ghcide-type-lenses"]? _.lspconfig.settings.hie.Haskell.Plugin.GhcideTypeLenses
 ---@field hlint? _.lspconfig.settings.hie.Haskell.Plugin.Hlint
 ---@field importLens? _.lspconfig.settings.hie.Haskell.Plugin.ImportLens
----@field moduleName? _.lspconfig.settings.hie.Haskell.Plugin.ModuleName
+---@field notes? _.lspconfig.settings.hie.Haskell.Plugin.Notes
 ---@field ormolu? _.lspconfig.settings.hie.Haskell.Plugin.Ormolu
 ---@field ["overloaded-record-dot"]? _.lspconfig.settings.hie.Haskell.Plugin.OverloadedRecordDot
 ---@field ["pragmas-completion"]? _.lspconfig.settings.hie.Haskell.Plugin.PragmasCompletion
@@ -509,7 +539,6 @@
 ---@field ["pragmas-suggest"]? _.lspconfig.settings.hie.Haskell.Plugin.PragmasSuggest
 ---@field qualifyImportedNames? _.lspconfig.settings.hie.Haskell.Plugin.QualifyImportedNames
 ---@field rename? _.lspconfig.settings.hie.Haskell.Plugin.Rename
----@field retrie? _.lspconfig.settings.hie.Haskell.Plugin.Retrie
 ---@field semanticTokens? _.lspconfig.settings.hie.Haskell.Plugin.SemanticTokens
 ---@field signatureHelp? _.lspconfig.settings.hie.Haskell.Plugin.SignatureHelp
 ---@field splice? _.lspconfig.settings.hie.Haskell.Plugin.Splice
@@ -542,6 +571,12 @@
 ---default = true
 ---```
 ---@field checkProject? boolean
+---Preferred approach for loading package components. Setting this to 'multi: needed-only' allows the build tool (such as `cabal` or `stack`) to load multiple components at once, which is a significant improvement.
+---
+---```lua
+---default = "multi: needed-only"
+---```
+---@field componentsLoading? "single"|"multi: needed-only"|"multi: whole-project"
 ---The formatter to use when formatting a document or range. Ensure the plugin is enabled.
 ---
 ---```lua
@@ -554,6 +589,18 @@
 ---default = ""
 ---```
 ---@field ghcupExecutablePath? string
+---Where should `Documentation` links in hover messages point to
+---
+---```lua
+---default = "LinkToHackage"
+---```
+---@field linkDocTo? "LinkToHackage"|"LinkToLocal"
+---Where should `Source` links in hover messages point to
+---
+---```lua
+---default = "LinkToHackage"
+---```
+---@field linkSourceTo? "LinkToHackage"|"LinkToLocal"
 ---If set, redirects the logs to a file.
 ---
 ---```lua
@@ -572,7 +619,7 @@
 ---default = 40
 ---```
 ---@field maxCompletions? integer
----An optional URL to override where ghcup checks for tool download info (usually at: https://raw.githubusercontent.com/haskell/ghcup-metadata/master/ghcup-0.0.7.yaml)
+---An optional URL to override where ghcup checks for tool download info (usually at: https://raw.githubusercontent.com/haskell/ghcup-metadata/master/ghcup-0.1.0.yaml). Allows multiple channels passed as a JSON array, for example '[ "GHCupURL", "prereleases", "cross" ]'.
 ---
 ---```lua
 ---default = ""
@@ -627,7 +674,7 @@
 ---default = ""
 ---```
 ---@field serverExtraArgs? string
----Preferred approach for loading package components. Setting this to 'multiple components' allows the build tool (such as `cabal` or `stack`) to [load multiple components at once](https://github.com/haskell/cabal/pull/8726), which is a significant improvement.
+---Preferred approach for loading package components. Setting this to 'multipleComponents' allows the build tool (such as `cabal` or `stack`) to [load multiple components at once](https://github.com/haskell/cabal/pull/8726), which is a significant improvement.
 ---
 ---```lua
 ---default = "multipleComponents"
