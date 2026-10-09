@@ -47,7 +47,8 @@
 --- From the file being edited, find the nearest deno.json or deno.jsonc. This is DENO ROOT.
 --- From the file being edited, find the nearest deno.lock. This is DENO LOCK ROOT
 --- If DENO LOCK ROOT is found, and PROJECT ROOT is missing or shorter, then this is a deno file, and we abort.
---- If DENO ROOT is found, and it's longer than or equal to PROJECT ROOT, then this is a Deno file, and we abort.
+--- If DENO ROOT is found, and it's strictly closer than PROJECT ROOT, then this is a Deno file, and we abort.
+--- If they are equal, the project is ambiguous (deno.json is also used as a generic config file), so we attach.
 --- Otherwise, attach at PROJECT ROOT, or the cwd if not found.
 
 local bin_cache = {} ---@type table<string, string>
@@ -119,8 +120,8 @@ return {
       -- deno lock is closer than package manager lock, abort
       return
     end
-    if deno_root and (not project_root or #deno_root >= #project_root) then
-      -- deno config is closer than or equal to package manager lock, abort
+    if deno_root and (not project_root or #deno_root > #project_root) then
+      -- deno config is closer than package manager lock, abort
       return
     end
     -- project is standard TS, not deno
