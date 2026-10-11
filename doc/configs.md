@@ -228,6 +228,7 @@ Nvim by running `:help lspconfig-all`.
 - [nim_langserver](#nim_langserver)
 - [nimls](#nimls)
 - [nixd](#nixd)
+- [nlpplus_ls](#nlpplus_ls)
 - [nomad_lsp](#nomad_lsp)
 - [ntt](#ntt)
 - [nushell](#nushell)
@@ -9014,6 +9015,44 @@ Default config:
 - `root_markers` :
   ```lua
   { "flake.nix", ".git" }
+  ```
+
+---
+
+## nlpplus_ls
+
+https://github.com/VisualText/vscode-nlp/tree/master/language-server
+
+`nlpplus-language-server`, the language server for NLP++, the programming language for natural
+language processing (https://visualtext.org/nlp/). It can be installed via `npm`:
+```sh
+npm i -g nlpplus-language-server
+```
+
+Open the analyzer folder (the one that contains `spec/`) so cross-pass navigation finds every pass.
+
+Until Neovim detects NLP++ pass files on its own, register the filetype:
+```lua
+vim.filetype.add({ extension = { nlp = 'nlp' } })
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('nlpplus_ls')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "nlpplus-language-server", "--stdio" }
+  ```
+- `filetypes` :
+  ```lua
+  { "nlp" }
+  ```
+- `root_markers` :
+  ```lua
+  { "spec", ".git" }
   ```
 
 ---
