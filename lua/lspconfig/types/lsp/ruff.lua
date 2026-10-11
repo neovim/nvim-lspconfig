@@ -1024,7 +1024,8 @@
 ---@field ["allowed-confusables"]? string[]
 ---A regular expression used to identify "dummy" variables, or those which
 ---should be ignored when enforcing (e.g.) unused-variable rules. The
----default expression matches `_`, `__`, and `_var`, but not `_var_`.
+---default expression matches `_`, `__`, `_var`, and `_次`, but not `_var_`
+---or `_次_`.
 ---@field ["dummy-variable-rgx"]? string
 ---A list of file patterns to exclude from linting in addition to the files excluded globally (see [`exclude`](#exclude), and [`extend-exclude`](#extend-exclude)).
 ---
@@ -4086,7 +4087,8 @@
 ---@field ["cache-dir"]? string
 ---A regular expression used to identify "dummy" variables, or those which
 ---should be ignored when enforcing (e.g.) unused-variable rules. The
----default expression matches `_`, `__`, and `_var`, but not `_var_`.
+---default expression matches `_`, `__`, `_var`, and `_次`, but not `_var_`
+---or `_次_`.
 ---@field ["dummy-variable-rgx"]? string
 ---A list of file patterns to exclude from formatting and linting.
 ---
@@ -4467,8 +4469,8 @@
 ---code upgrades, like rewriting type annotations. Ruff will not propose
 ---changes using features that are not available in the given version.
 ---
----For example, to represent supporting Python >=3.11 or ==3.11
----specify `target-version = "py311"`.
+---For example, to represent supporting Python >=3.12 or ==3.12
+---specify `target-version = "py312"`.
 ---
 ---If you're already using a `pyproject.toml` file, we recommend
 ---`project.requires-python` instead, as it's based on Python packaging

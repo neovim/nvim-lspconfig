@@ -691,6 +691,11 @@
 
 ---@alias _.lspconfig.settings.tombi.defs.SchemaOverrideTableKeysOrderRule _.lspconfig.settings.tombi.defs.TableKeysOrder|_.lspconfig.settings.tombi.defs.SchemaTableKeysOrderRule
 
+---@class _.lspconfig.settings.tombi.defs.SchemaOverviewFormatOptions
+---Used when neither a matching `[[schemas]]` entry nor a comment directive
+---specifies the same rule.
+---@field rules? _.lspconfig.settings.tombi.defs.SchemaFormatRules
+
 ---@class _.lspconfig.settings.tombi.defs.SchemaOverviewLintOptions
 ---@field rules? _.lspconfig.settings.tombi.defs.SchemaOverviewLintRules
 
@@ -700,6 +705,7 @@
 ---@class _.lspconfig.settings.tombi.defs.SchemaOverviewOptions
 ---@field catalog? _.lspconfig.settings.tombi.defs.SchemaCatalog
 ---@field enabled? _.lspconfig.settings.tombi.defs.BoolDefaultTrue
+---@field format? _.lspconfig.settings.tombi.defs.SchemaOverviewFormatOptions
 ---@field lint? _.lspconfig.settings.tombi.defs.SchemaOverviewLintOptions
 ---If `additionalProperties` is not specified in the JSON Schema,
 ---the strict mode treats it as `additionalProperties: false`,
