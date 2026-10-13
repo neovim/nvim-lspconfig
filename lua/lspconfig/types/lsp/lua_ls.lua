@@ -67,6 +67,12 @@
 ---default = "@"
 ---```
 ---@field postfix? string
+---The function to insert when an auto-require is triggered.
+---
+---```lua
+---default = "require"
+---```
+---@field requireFunction? string
 ---The separator used when `require`.
 ---
 ---```lua
