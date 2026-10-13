@@ -9490,6 +9490,8 @@ npm i -g oxlint
 ```
 
 or used as a part of Vite+ through `lint` field in vite.config.ts: https://github.com/oxc-project/oxc/pull/20214
+The config looks for project-local `oxlint` or `vp` first, then checks PATH.
+When using `vp`, the server starts with `vp lint --lsp`.
 
 Type-aware linting will automatically be enabled if `tsgolint` exists in your
 path and your `.oxlintrc.json` contains the string "typescript".
@@ -9504,14 +9506,14 @@ vim.lsp.enable('oxlint')
 ```
 
 Default config:
-- `before_init`: [../lsp/oxlint.lua:35](../lsp/oxlint.lua#L35)
-- `cmd`: [../lsp/oxlint.lua:35](../lsp/oxlint.lua#L35)
+- `before_init`: [../lsp/oxlint.lua:37](../lsp/oxlint.lua#L37)
+- `cmd`: [../lsp/oxlint.lua:37](../lsp/oxlint.lua#L37)
 - `filetypes` :
   ```lua
   { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "astro" }
   ```
-- `on_attach`: [../lsp/oxlint.lua:35](../lsp/oxlint.lua#L35)
-- `root_dir`: [../lsp/oxlint.lua:35](../lsp/oxlint.lua#L35)
+- `on_attach`: [../lsp/oxlint.lua:37](../lsp/oxlint.lua#L37)
+- `root_dir`: [../lsp/oxlint.lua:37](../lsp/oxlint.lua#L37)
 - `settings` :
   ```lua
   {}
