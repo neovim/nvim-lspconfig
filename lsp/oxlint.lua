@@ -12,6 +12,8 @@
 --- ```
 ---
 --- or used as a part of Vite+ through `lint` field in vite.config.ts: https://github.com/oxc-project/oxc/pull/20214
+--- The config looks for project-local `oxlint` or `vp` first, then checks PATH.
+--- When using `vp`, the server starts with `vp lint --lsp`.
 ---
 --- Type-aware linting will automatically be enabled if `tsgolint` exists in your
 --- path and your `.oxlintrc.json` contains the string "typescript".
@@ -34,14 +36,20 @@ end
 ---@type vim.lsp.Config
 return {
   cmd = function(dispatchers, config)
-    local cmd = 'oxlint'
+    local cmd = { 'oxlint', '--lsp' }
     if (config or {}).root_dir then
-      local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', cmd)
-      if vim.fn.executable(local_cmd) == 1 then
-        cmd = local_cmd
+      for _, name in ipairs { 'oxlint', 'vp' } do
+        local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', name)
+        if vim.fn.executable(local_cmd) == 1 then
+          cmd = name == 'vp' and { local_cmd, 'lint', '--lsp' } or { local_cmd, '--lsp' }
+          return vim.lsp.rpc.start(cmd, dispatchers)
+        end
       end
     end
-    return vim.lsp.rpc.start({ cmd, '--lsp' }, dispatchers)
+    if vim.fn.executable('oxlint') == 0 and vim.fn.executable('vp') == 1 then
+      cmd = { 'vp', 'lint', '--lsp' }
+    end
+    return vim.lsp.rpc.start(cmd, dispatchers)
   end,
   filetypes = {
     'javascript',
