@@ -6,7 +6,7 @@
 ---default = {}
 ---```
 ---@class _.lspconfig.settings.jetls.JetlsClient.InitializationOptions
----Override full analysis behavior for specific file patterns. Primarily used as a temporary workaround to disable analysis for files affected by memory leak issues. Each override specifies a glob pattern, optionally a module name, and can opt back into full analysis. Note: This is an experimental feature that may be removed or changed in future versions.
+---Exclude files matching specific patterns from full analysis. Primarily used as a temporary workaround for files affected by memory leak issues. Each override specifies a glob pattern and what full analysis does when it reaches an `include` of a matched file. See [`analysis_overrides`](https://aviatesk.github.io/JETLS.jl/release/launching/#init-options/analysis_overrides). Note: This is an experimental feature that may be removed or changed in future versions.
 ---
 ---```lua
 ---default = {}

@@ -874,6 +874,12 @@
 ---default = true
 ---```
 ---@field enable? boolean
+---%configuration.razor.razor.format.ignoreIndentationInScriptOrStyleBlocksWithComplexRazor%
+---
+---```lua
+---default = true
+---```
+---@field ignoreIndentationInScriptOrStyleBlocksWithComplexRazor? boolean
 
 ---@class _.lspconfig.settings.omnisharp.Razor.Plugin
 ---%configuration.omnisharp.razor.plugin.path%
