@@ -7129,6 +7129,28 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+perl_lsp
+
+https://github.com/tree-sitter-perl/perl-lsp
+
+A Perl language server built on tree-sitter-perl, with cross-file type inference. It can be
+installed via `cargo` >sh
+  cargo install perl-lsp
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('perl_lsp')
+
+
+Default config:
+- cmd: >lua
+  { "perl-lsp" }
+- filetypes: >lua
+  { "perl" }
+- root_markers: >lua
+  { "cpanfile", "Makefile.PL", "Build.PL", ".git" }
+<
+
+------------------------------------------------------------------------------
 perlls
 
 https://github.com/richterger/Perl-LanguageServer/tree/master/clients/vscode/perl

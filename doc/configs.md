@@ -246,6 +246,7 @@ Nvim by running `:help lspconfig-all`.
 - [panache](#panache)
 - [pasls](#pasls)
 - [pbls](#pbls)
+- [perl_lsp](#perl_lsp)
 - [perlls](#perlls)
 - [perlnavigator](#perlnavigator)
 - [perlpls](#perlpls)
@@ -9646,6 +9647,37 @@ Default config:
 - `root_markers` :
   ```lua
   { ".pbls.toml", ".git" }
+  ```
+
+---
+
+## perl_lsp
+
+https://github.com/tree-sitter-perl/perl-lsp
+
+A Perl language server built on tree-sitter-perl, with cross-file type inference. It can be
+installed via `cargo`:
+```sh
+cargo install perl-lsp
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('perl_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "perl-lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "perl" }
+  ```
+- `root_markers` :
+  ```lua
+  { "cpanfile", "Makefile.PL", "Build.PL", ".git" }
   ```
 
 ---
