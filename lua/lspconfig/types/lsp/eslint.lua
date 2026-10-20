@@ -227,6 +227,8 @@
 ---@field execArgv? string[]
 ---@field experimental? _.lspconfig.settings.eslint.Eslint.Experimental
 ---@field format? _.lspconfig.settings.eslint.Eslint.Format
+---If true, local file documents outside all open workspace folders won't be validated by ESLint. Untitled, remote, and other virtual documents are unchanged. This has no effect when no workspace folder is open.
+---@field ignoreOutsideWorkspace? boolean
 ---If true, untitled files won't be validated by ESLint.
 ---@field ignoreUntitled? boolean
 ---@field lintTask? _.lspconfig.settings.eslint.Eslint.LintTask
