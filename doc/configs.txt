@@ -1804,7 +1804,7 @@ Default config:
 - settings: >lua
   {
     telemetry = {
-      telemetryLevel = "all"
+      telemetryLevel = "off"
     }
   }
 <

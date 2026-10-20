@@ -2729,7 +2729,7 @@ Default config:
   ```lua
   {
     telemetry = {
-      telemetryLevel = "all"
+      telemetryLevel = "off"
     }
   }
   ```
