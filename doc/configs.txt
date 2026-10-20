@@ -10827,7 +10827,7 @@ Default config:
 - cmd: >lua
   { "tofu-ls", "serve" }
 - filetypes: >lua
-  { "opentofu", "opentofu-vars", "terraform" }
+  { "opentofu", "opentofu-vars", "terraform", "terraform-vars" }
 - root_markers: >lua
   { ".terraform", ".git" }
 <

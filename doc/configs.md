@@ -14453,7 +14453,7 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "opentofu", "opentofu-vars", "terraform" }
+  { "opentofu", "opentofu-vars", "terraform", "terraform-vars" }
   ```
 - `root_markers` :
   ```lua
