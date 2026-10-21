@@ -14,6 +14,32 @@
 --- npm install -g gh-actions-language-server
 --- ```
 
+--- Session token used to perform authenticated API requests
+---@return string? token
+local function token()
+  local result = vim.system({ 'gh', 'auth', 'token', '-h', 'github.com' }):wait()
+  return result.code == 0 and vim.trim(assert(result.stdout)) or nil
+end
+
+--- Repository metadata needed for full features
+---@param root_dir string
+---@return table? metadata about the repository
+local function repos(root_dir)
+  local result = vim.system({ 'gh', 'repo', 'view', '--json', 'owner,name,isInOrganization' }):wait()
+  if result.code == 0 then
+    local data = vim.json.decode(assert(result.stdout))
+    return {
+      {
+        owner = data.owner.login --[[@as string]],
+        name = data.name --[[@as string]],
+        organizationOwned = data.isInOrganization --[[@as boolean]],
+        workspaceUri = vim.uri_from_fname(root_dir),
+      },
+    }
+  end
+  return nil
+end
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'gh-actions-language-server', '--stdio' },
@@ -47,6 +73,14 @@ return {
     end,
   },
   init_options = {}, -- needs to be present https://github.com/neovim/nvim-lspconfig/pull/3713#issuecomment-2857394868
+  before_init = function(params, config)
+    if config.root_dir and vim.fn.executable('gh') == 1 then
+      params.initializationOptions = {
+        sessionToken = token(),
+        repos = repos(config.root_dir),
+      }
+    end
+  end,
   capabilities = {
     workspace = {
       didChangeWorkspaceFolders = {
