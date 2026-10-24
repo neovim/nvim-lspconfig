@@ -19,6 +19,7 @@ local stylelint_config_files = {
   'stylelint.config.mjs',
   'stylelint.config.cjs',
   'stylelint.config.js',
+  'stylelint.config.ts',
 }
 
 ---@type vim.lsp.Config
