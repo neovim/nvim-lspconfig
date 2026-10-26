@@ -23,5 +23,4 @@ return {
   cmd = { 'mise', 'lsp' },
   filetypes = { 'toml' },
   root_markers = { 'mise.toml', '.mise.toml', 'mise.local.toml' },
-  workspace_required = true,
 }
