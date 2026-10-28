@@ -3369,6 +3369,10 @@ open-source `dbt-oss` build do not include it, and a dbt Core virtualenv can sha
 on `$PATH`. For installation see
 [Install dbt](https://docs.getdbt.com/docs/local/install-dbt?version=2).
 
+Neovim does not detect a `dbt` filetype. A plugin such as
+[dbt-ft.nvim](https://github.com/dobsontom/dbt-ft.nvim) sets it on a dbt project's `.sql` files,
+for Jinja-aware highlighting.
+
 The root is the outermost directory containing a `dbt_project.yml`, because every package in
 `dbt_packages/` has its own.
 
@@ -3389,11 +3393,11 @@ Default config:
   ```
 - `filetypes` :
   ```lua
-  { "sql" }
+  { "sql", "dbt" }
   ```
-- `on_attach`: [../lsp/dbt.lua:19](../lsp/dbt.lua#L19)
-- `on_init`: [../lsp/dbt.lua:19](../lsp/dbt.lua#L19)
-- `root_dir`: [../lsp/dbt.lua:19](../lsp/dbt.lua#L19)
+- `on_attach`: [../lsp/dbt.lua:23](../lsp/dbt.lua#L23)
+- `on_init`: [../lsp/dbt.lua:23](../lsp/dbt.lua#L23)
+- `root_dir`: [../lsp/dbt.lua:23](../lsp/dbt.lua#L23)
 
 ---
 
