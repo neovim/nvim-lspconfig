@@ -7,6 +7,10 @@
 --- on `$PATH`. For installation see
 --- [Install dbt](https://docs.getdbt.com/docs/local/install-dbt?version=2).
 ---
+--- Neovim does not detect a `dbt` filetype. A plugin such as
+--- [dbt-ft.nvim](https://github.com/dobsontom/dbt-ft.nvim) sets it on a dbt project's `.sql` files,
+--- for Jinja-aware highlighting.
+---
 --- The root is the outermost directory containing a `dbt_project.yml`, because every package in
 --- `dbt_packages/` has its own.
 ---
@@ -18,7 +22,7 @@
 ---@type vim.lsp.Config
 return {
   cmd = { 'dbt', 'lsp' },
-  filetypes = { 'sql' },
+  filetypes = { 'sql', 'dbt' },
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     local found = vim.fs.find('dbt_project.yml', { path = fname, upward = true, limit = math.huge })
