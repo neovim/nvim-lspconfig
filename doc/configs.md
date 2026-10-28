@@ -28,6 +28,7 @@ Nvim by running `:help lspconfig-all`.
 - [awk_ls](#awk_ls)
 - [azure_pipelines_ls](#azure_pipelines_ls)
 - [bacon_ls](#bacon_ls)
+- [badness](#badness)
 - [ballerina](#ballerina)
 - [basedpyright](#basedpyright)
 - [bashls](#bashls)
@@ -1528,6 +1529,39 @@ Default config:
 - `root_markers` :
   ```lua
   { ".bacon-locations", "Cargo.toml" }
+  ```
+
+---
+
+## badness
+
+https://github.com/jolars/badness
+
+Badness is a language server, formatter, and linter for LaTeX and BibTeX.
+
+Install it with `cargo install badness` or see the
+[installation guide](https://badness.dev/guide/installation.html) for other options.
+
+See the [editor configuration reference](https://badness.dev/reference/editor-configuration.html)
+for available settings. Project settings can be configured in `badness.toml`.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('badness')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "badness", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "tex", "plaintex", "bib" }
+  ```
+- `root_markers` :
+  ```lua
+  { "badness.toml", ".git" }
   ```
 
 ---
