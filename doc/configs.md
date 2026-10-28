@@ -80,6 +80,7 @@ Nvim by running `:help lspconfig-all`.
 - [dafny](#dafny)
 - [dagger](#dagger)
 - [dartls](#dartls)
+- [dbt](#dbt)
 - [dcmls](#dcmls)
 - [debputy](#debputy)
 - [denols](#denols)
@@ -3356,6 +3357,43 @@ Default config:
     }
   }
   ```
+
+---
+
+## dbt
+
+https://docs.getdbt.com/docs/about-dbt-lsp
+
+The dbt language server, built into the dbt v2 binary as `dbt lsp`. dbt Core 1.x and the
+open-source `dbt-oss` build do not include it, and a dbt Core virtualenv can shadow the v2 `dbt`
+on `$PATH`. For installation see
+[Install dbt](https://docs.getdbt.com/docs/local/install-dbt?version=2).
+
+The root is the outermost directory containing a `dbt_project.yml`, because every package in
+`dbt_packages/` has its own.
+
+Formatting is turned off, because the server formats the file on disk rather than the buffer and
+so corrupts unsaved changes ([dbt-labs/dbt#16814](https://github.com/dbt-labs/dbt/issues/16814)).
+
+`:LspDbtCompile` shows the compiled SQL of the current model in the preview window.
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('dbt')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "dbt", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "sql" }
+  ```
+- `on_attach`: [../lsp/dbt.lua:19](../lsp/dbt.lua#L19)
+- `on_init`: [../lsp/dbt.lua:19](../lsp/dbt.lua#L19)
+- `root_dir`: [../lsp/dbt.lua:19](../lsp/dbt.lua#L19)
 
 ---
 
