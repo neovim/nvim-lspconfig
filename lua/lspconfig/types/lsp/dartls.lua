@@ -460,6 +460,12 @@
 ---default = 80
 ---```
 ---@field lineLength? integer
+---Whether to enable caching of some LSP responses in the client to reduce duplicate requests to the analysis server.
+---
+---```lua
+---default = true
+---```
+---@field lspCachingMiddleware? boolean
 ---Whether to enable [Snippet support in LSP TextEdits](https://github.com/rust-analyzer/rust-analyzer/blob/979e788957ced1957ee9ac1da70fb97abf9fe2b1/docs/dev/lsp-extensions.md#snippet-textedit).
 ---
 ---```lua

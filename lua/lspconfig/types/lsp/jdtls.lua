@@ -150,12 +150,6 @@
 ---default = true
 ---```
 ---@field enabled? boolean
----[Experimental] Select code completion engine
----
----```lua
----default = "ecj"
----```
----@field engine? "ecj"|"dom"
 ---Defines a list of static members or types with static members. Content assist will propose those static members even if the import is missing.
 ---
 ---```lua
@@ -404,6 +398,8 @@
 ---```
 ---@field enabled? boolean
 ---@field offline? _.lspconfig.settings.jdtls.Java.Import.Maven.Offline
+---Specifies the template used to name imported Maven projects, e.g. `[groupId]-[artifactId]-[version]`. This is helpful when importing projects with the same groupId and artifactId but a different version. Supported variables are `[groupId]`, `[artifactId]`, `[version]` and `[name]`. Already imported projects keep their name until the workspace is cleaned.
+---@field projectNameTemplate? string
 
 ---@class _.lspconfig.settings.jdtls.Java.Import
 ---Configure glob patterns for excluding folders. Use `!` to negate patterns to allow subfolders imports. You have to include a parent directory. The order is important.
@@ -542,14 +538,6 @@
 ---"java.jdt.ls.java.home":"C:\\Program Files\\Java\\jdk-25.0.2"
 ---@field home? string
 
----@class _.lspconfig.settings.jdtls.Java.Jdt.Ls.Javac
----[Experimental] Specify whether to enable Javac-based compilation in the language server. Requires running this extension with Java 25
----
----```lua
----default = "off"
----```
----@field enabled? "on"|"off"
-
 ---@class _.lspconfig.settings.jdtls.Java.Jdt.Ls.KotlinSupport
 ---[Experimental] Specify whether to enable `org.jetbrains.kotlin.jvm` plugin in Gradle projects. Defaults to `true`.
 ---
@@ -590,7 +578,6 @@
 ---@field aspectjSupport? _.lspconfig.settings.jdtls.Java.Jdt.Ls.AspectjSupport
 ---@field groovySupport? _.lspconfig.settings.jdtls.Java.Jdt.Ls.GroovySupport
 ---@field java? _.lspconfig.settings.jdtls.Java.Jdt.Ls.Java
----@field javac? _.lspconfig.settings.jdtls.Java.Jdt.Ls.Javac
 ---@field kotlinSupport? _.lspconfig.settings.jdtls.Java.Jdt.Ls.KotlinSupport
 ---@field lombokSupport? _.lspconfig.settings.jdtls.Java.Jdt.Ls.LombokSupport
 ---Specifies the size of the in-memory Maven project cache to use. Increasing the project cache size will help load multi-module projects and monorepos faster, but will result in a significant increase in memory usage.

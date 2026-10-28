@@ -38,6 +38,14 @@
 ---```
 ---@field provideRedirectModules? boolean
 
+---@class _.lspconfig.settings.ansiblels.Ansible.Config
+---Path to the `ansible.cfg` file used by the language server for Ansible commands and diagnostics. Supports relative paths and `${workspaceFolder}`.
+---
+---```lua
+---default = ""
+---```
+---@field path? string
+
 ---@class _.lspconfig.settings.ansiblels.Ansible.ExecutionEnvironment.Pull
 ---Specify any additional parameters that should be added to the pull command when pulling an execution environment from a container registry. e.g. `–-tls-verify=false`.
 ---
@@ -199,6 +207,7 @@
 ---@field ansible? _.lspconfig.settings.ansiblels.Ansible.Ansible
 ---@field ansibleNavigator? _.lspconfig.settings.ansiblels.Ansible.AnsibleNavigator
 ---@field completion? _.lspconfig.settings.ansiblels.Ansible.Completion
+---@field config? _.lspconfig.settings.ansiblels.Ansible.Config
 ---@field executionEnvironment? _.lspconfig.settings.ansiblels.Ansible.ExecutionEnvironment
 ---@field lightspeed? _.lspconfig.settings.ansiblels.Ansible.Lightspeed
 ---@field mcpServer? _.lspconfig.settings.ansiblels.Ansible.McpServer
