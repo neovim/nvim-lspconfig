@@ -208,6 +208,7 @@ Nvim by running `:help lspconfig-all`.
 - [microcad_lsp](#microcad_lsp)
 - [millet](#millet)
 - [mint](#mint)
+- [mise](#mise)
 - [mlir_lsp_server](#mlir_lsp_server)
 - [mlir_pdll_lsp_server](#mlir_pdll_lsp_server)
 - [mm0_ls](#mm0_ls)
@@ -8336,6 +8337,47 @@ Default config:
 - `root_markers` :
   ```lua
   { "mint.json", ".git" }
+  ```
+
+---
+
+## mise
+
+https://mise.jdx.dev/ide-integration.html#language-server
+
+Language server for [mise](https://mise.jdx.dev) config files, built into the `mise` binary (v2026.10.18 or later).
+It provides diagnostics, completion, hover, formatting, and task navigation for `mise.toml`, `.mise.toml`,
+`mise.local.toml`, `mise.<env>.toml`, `mise/config.toml`, and the files of a `conf.d` directory. It ignores every
+other TOML file.
+
+`mise` can be installed by following the instructions [here](https://mise.jdx.dev/installing-mise.html).
+
+If another TOML server (such as `taplo` or `tombi`) is attached to the same buffers, hover, completion, and
+formatting appear twice. To keep only what mise adds, turn those capabilities off:
+
+```lua
+vim.lsp.config('mise', {
+  init_options = { formatting = false, hover = false, completion = false },
+})
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('mise')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "mise", "lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "toml" }
+  ```
+- `root_markers` :
+  ```lua
+  { { "mise.toml", ".mise.toml", "mise.local.toml", ".mise.local.toml", "mise/config.toml", ".mise/config.toml", ".config/mise/config.toml" } }
   ```
 
 ---
