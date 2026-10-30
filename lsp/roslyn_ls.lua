@@ -17,6 +17,7 @@
 --     'dotnet',
 --     '<my_folder>/Microsoft.CodeAnalysis.LanguageServer.dll',
 --     '--stdio',
+--     '--autoLoadProjects',
 --   },
 --   ```
 --   where `<my_folder>` has to be the folder you extracted the nuget package to.
@@ -26,28 +27,6 @@ local uv = vim.uv
 local fs = vim.fs
 
 local group = vim.api.nvim_create_augroup('lspconfig.roslyn_ls', { clear = true })
-
----@param client vim.lsp.Client
----@param target string
-local function on_init_sln(client, target)
-  vim.notify('Initializing: ' .. target, vim.log.levels.TRACE, { title = 'roslyn_ls' })
-  ---@diagnostic disable-next-line: param-type-mismatch
-  client:notify('solution/open', {
-    solution = vim.uri_from_fname(target),
-  })
-end
-
----@param client vim.lsp.Client
----@param project_files string[]
-local function on_init_project(client, project_files)
-  vim.notify('Initializing: projects', vim.log.levels.TRACE, { title = 'roslyn_ls' })
-  ---@diagnostic disable-next-line: param-type-mismatch
-  client:notify('project/open', {
-    projects = vim.tbl_map(function(file)
-      return vim.uri_from_fname(file)
-    end, project_files),
-  })
-end
 
 ---@param client vim.lsp.Client
 local function refresh_diagnostics(client)
@@ -152,13 +131,35 @@ local function handle_fix_all_action(client, command, bufnr)
   end)
 end
 
+---checks if available server supports autoLoadProjects flag
+---@param bin string
+---@return boolean
+local function supports_autoload(bin)
+  if vim.fn.executable(bin) ~= 1 then
+    return false
+  end
+
+  local out = vim.system({ bin, '--version' }, { text = true }):wait()
+  local version = vim.version.parse(out.stdout or '')
+
+  return out.code == 0 and version ~= '' and vim.version.ge(version, '5.8.0')
+end
+
 ---@type vim.lsp.Config
 return {
   name = 'roslyn_ls',
+  before_init = function(_, config)
+    local bin = config.cmd[1]
+    if not supports_autoload(bin) then
+      vim.notify("roslyn_ls: minimum required version is 5.8.0; projects won't be loaded", vim.log.levels.ERROR)
+    end
+  end,
   cmd = {
     vim.fn.executable('Microsoft.CodeAnalysis.LanguageServer') == 1 and 'Microsoft.CodeAnalysis.LanguageServer'
       or 'roslyn-language-server',
     '--stdio',
+    -- the server finds and opens the solution (or projects) in the workspace folder
+    '--autoLoadProjects',
   },
 
   cmd_env = {
@@ -285,27 +286,6 @@ return {
       end
     end
   end,
-  on_init = {
-    function(client)
-      local root_dir = client.config.root_dir
-
-      -- try load first solution we find
-      for entry, type in fs.dir(root_dir) do
-        if type == 'file' and (vim.endswith(entry, '.sln') or vim.endswith(entry, '.slnx')) then
-          on_init_sln(client, fs.joinpath(root_dir, entry))
-          return
-        end
-      end
-
-      -- if no solution is found load project
-      for entry, type in fs.dir(root_dir) do
-        if type == 'file' and vim.endswith(entry, '.csproj') then
-          on_init_project(client, { fs.joinpath(root_dir, entry) })
-        end
-      end
-    end,
-  },
-
   on_attach = function(client, bufnr)
     -- avoid duplicate autocmds for same buffer
     if vim.api.nvim_get_autocmds({ buffer = bufnr, group = group })[1] then
