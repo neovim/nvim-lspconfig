@@ -11488,6 +11488,7 @@ Download and extract it (nuget's are zip files).
     'dotnet',
     '<my_folder>/Microsoft.CodeAnalysis.LanguageServer.dll',
     '--stdio',
+    '--autoLoadProjects',
   },
   ```
   where `<my_folder>` has to be the folder you extracted the nuget package to.
@@ -11504,6 +11505,7 @@ Commands:
 - roslyn.client.nestedCodeAction
 
 Default config:
+- `before_init`: [../lsp/roslyn_ls.lua:149](../lsp/roslyn_ls.lua#L149)
 - `capabilities` :
   ```lua
   {
@@ -11516,7 +11518,7 @@ Default config:
   ```
 - `cmd` :
   ```lua
-  { "roslyn-language-server", "--stdio" }
+  { "roslyn-language-server", "--stdio", "--autoLoadProjects" }
   ```
 - `cmd_env` :
   ```lua
@@ -11545,12 +11547,8 @@ Default config:
   ```lua
   "roslyn_ls"
   ```
-- `on_attach`: [../lsp/roslyn_ls.lua:156](../lsp/roslyn_ls.lua#L156)
-- `on_init` :
-  ```lua
-  { <function 1> }
-  ```
-- `root_dir`: [../lsp/roslyn_ls.lua:156](../lsp/roslyn_ls.lua#L156)
+- `on_attach`: [../lsp/roslyn_ls.lua:149](../lsp/roslyn_ls.lua#L149)
+- `root_dir`: [../lsp/roslyn_ls.lua:149](../lsp/roslyn_ls.lua#L149)
 - `settings` :
   ```lua
   {
