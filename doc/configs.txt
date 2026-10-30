@@ -9982,8 +9982,8 @@ Default config:
   { "stylelint-language-server", "--stdio" }
 - filetypes: >lua
   { "astro", "css", "html", "less", "scss", "vue" }
-- on_attach (use "gF" to view): ../lsp/stylelint_lsp.lua:25
-- root_dir (use "gF" to view): ../lsp/stylelint_lsp.lua:25
+- on_attach (use "gF" to view): ../lsp/stylelint_lsp.lua:26
+- root_dir (use "gF" to view): ../lsp/stylelint_lsp.lua:26
 - settings: >lua
   {
     stylelint = {

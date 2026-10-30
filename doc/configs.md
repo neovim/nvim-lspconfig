@@ -13378,8 +13378,8 @@ Default config:
   ```lua
   { "astro", "css", "html", "less", "scss", "vue" }
   ```
-- `on_attach`: [../lsp/stylelint_lsp.lua:25](../lsp/stylelint_lsp.lua#L25)
-- `root_dir`: [../lsp/stylelint_lsp.lua:25](../lsp/stylelint_lsp.lua#L25)
+- `on_attach`: [../lsp/stylelint_lsp.lua:26](../lsp/stylelint_lsp.lua#L26)
+- `root_dir`: [../lsp/stylelint_lsp.lua:26](../lsp/stylelint_lsp.lua#L26)
 - `settings` :
   ```lua
   {
