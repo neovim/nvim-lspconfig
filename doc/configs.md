@@ -181,6 +181,7 @@ Nvim by running `:help lspconfig-all`.
 - [just](#just)
 - [kakehashi](#kakehashi)
 - [kcl](#kcl)
+- [kconfig_lsp](#kconfig_lsp)
 - [kdl_lsp](#kdl_lsp)
 - [kmp_lsp](#kmp_lsp)
 - [koka](#koka)
@@ -7300,6 +7301,44 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## kconfig_lsp
+
+https://github.com/cccheng/kconfig-lsp
+
+Language server for Kconfig, the configuration language of Linux, Zephyr, U-Boot, coreboot and
+other projects. It can be installed via `cargo`:
+```sh
+cargo install kconfig-lsp
+```
+
+To accept the Kconfig extensions of Zephyr, such as `configdefault` and `def_int`:
+```lua
+vim.lsp.config('kconfig_lsp', {
+  init_options = { zephyr_extensions = true },
+})
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('kconfig_lsp')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "kconfig-lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "kconfig" }
+  ```
+- `root_markers` :
+  ```lua
+  { ".git", "Kconfig" }
   ```
 
 ---
