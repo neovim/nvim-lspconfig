@@ -5349,6 +5349,33 @@ Default config:
 <
 
 ------------------------------------------------------------------------------
+kmp_lsp
+
+https://github.com/Hessesian/kmp-lsp
+
+Language server for Kotlin Multiplatform projects: Kotlin, Java, and Swift. It is built on tree-sitter and needs no
+JVM or Gradle import.
+
+`kmp-lsp` can be installed with Cargo >sh
+  cargo install kmp-lsp
+
+Or downloaded from the [GitHub releases page](https://github.com/Hessesian/kmp-lsp/releases). The release archive also
+has the `kmp-jar-indexer` sidecar, which gives types and docs for library JARs.
+
+Snippet to enable the language server: >lua
+  vim.lsp.enable('kmp_lsp')
+
+
+Default config:
+- cmd: >lua
+  { "kmp-lsp" }
+- filetypes: >lua
+  { "kotlin", "java", "swift" }
+- root_markers: >lua
+  { ".git", "settings.gradle", "settings.gradle.kts", "pom.xml", "build.gradle", "build.gradle.kts", "Package.swift" }
+<
+
+------------------------------------------------------------------------------
 koka
 
 https://koka-lang.github.io/koka/doc/index.html
