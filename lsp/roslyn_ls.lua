@@ -132,25 +132,31 @@ local function handle_fix_all_action(client, command, bufnr)
 end
 
 ---checks if available server supports autoLoadProjects flag
----@param bin string
+---@param cmd string[]
 ---@return boolean
-local function supports_autoload(bin)
-  if vim.fn.executable(bin) ~= 1 then
+local function supports_autoload(cmd)
+  if vim.fn.executable(cmd[1]) ~= 1 then
     return false
   end
 
-  local out = vim.system({ bin, '--version' }, { text = true }):wait()
+  -- `roslyn-language-server` requires a transport flag even for `--version`.
+  local probe = vim.tbl_filter(function(arg)
+    return arg ~= '--autoLoadProjects'
+  end, cmd)
+  table.insert(probe, '--version')
+
+  local out = vim.system(probe, { text = true }):wait()
   local version = vim.version.parse(out.stdout or '')
 
-  return out.code == 0 and version ~= '' and vim.version.ge(version, '5.8.0')
+  return out.code == 0 and version ~= nil and vim.version.ge(version, '5.8.0')
 end
 
 ---@type vim.lsp.Config
 return {
   name = 'roslyn_ls',
   before_init = function(_, config)
-    local bin = config.cmd[1]
-    if not supports_autoload(bin) then
+    local cmd = config.cmd
+    if type(cmd) == 'table' and not supports_autoload(cmd) then
       vim.notify("roslyn_ls: minimum required version is 5.8.0; projects won't be loaded", vim.log.levels.ERROR)
     end
   end,
