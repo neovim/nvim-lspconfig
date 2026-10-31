@@ -852,10 +852,6 @@
 ---```
 ---@field server? "off"|"messages"|"verbose"
 
----@class _.lspconfig.settings.jdtls.Java.TypeHierarchy
----Enable/disable lazy loading the content in type hierarchy. Lazy loading could save a lot of loading time but every type should be expanded manually to load its content.
----@field lazyLoad? boolean
-
 ---@class _.lspconfig.settings.jdtls.Java.UpdateImportsOnPaste
 ---Enable/disable auto organize imports when pasting code
 ---
@@ -920,7 +916,6 @@
 ---@field symbols? _.lspconfig.settings.jdtls.Java.Symbols
 ---@field templates? _.lspconfig.settings.jdtls.Java.Templates
 ---@field trace? _.lspconfig.settings.jdtls.Java.Trace
----@field typeHierarchy? _.lspconfig.settings.jdtls.Java.TypeHierarchy
 ---@field updateImportsOnPaste? _.lspconfig.settings.jdtls.Java.UpdateImportsOnPaste
 
 ---@class _.lspconfig.settings.jdtls.Redhat.Telemetry
