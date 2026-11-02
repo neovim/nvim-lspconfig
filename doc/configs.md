@@ -11581,7 +11581,7 @@ Commands:
 - roslyn.client.nestedCodeAction
 
 Default config:
-- `before_init`: [../lsp/roslyn_ls.lua:149](../lsp/roslyn_ls.lua#L149)
+- `before_init`: [../lsp/roslyn_ls.lua:155](../lsp/roslyn_ls.lua#L155)
 - `capabilities` :
   ```lua
   {
@@ -11623,8 +11623,8 @@ Default config:
   ```lua
   "roslyn_ls"
   ```
-- `on_attach`: [../lsp/roslyn_ls.lua:149](../lsp/roslyn_ls.lua#L149)
-- `root_dir`: [../lsp/roslyn_ls.lua:149](../lsp/roslyn_ls.lua#L149)
+- `on_attach`: [../lsp/roslyn_ls.lua:155](../lsp/roslyn_ls.lua#L155)
+- `root_dir`: [../lsp/roslyn_ls.lua:155](../lsp/roslyn_ls.lua#L155)
 - `settings` :
   ```lua
   {

@@ -8604,7 +8604,7 @@ Commands:
 - roslyn.client.nestedCodeAction
 
 Default config:
-- before_init (use "gF" to view): ../lsp/roslyn_ls.lua:149
+- before_init (use "gF" to view): ../lsp/roslyn_ls.lua:155
 - capabilities: >lua
   {
     textDocument = {
@@ -8632,8 +8632,8 @@ Default config:
   }
 - name: >lua
   "roslyn_ls"
-- on_attach (use "gF" to view): ../lsp/roslyn_ls.lua:149
-- root_dir (use "gF" to view): ../lsp/roslyn_ls.lua:149
+- on_attach (use "gF" to view): ../lsp/roslyn_ls.lua:155
+- root_dir (use "gF" to view): ../lsp/roslyn_ls.lua:155
 - settings: >lua
   {
     ["csharp|background_analysis"] = {
