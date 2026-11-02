@@ -139,7 +139,7 @@ local function supports_autoload(cmd)
     return false
   end
 
-  -- `roslyn-language-server` requires a transport flag even for `--version`.
+  -- `roslyn-language-server` requires a transport flag (--stdio) even for `--version`.
   local probe = vim.tbl_filter(function(arg)
     return arg ~= '--autoLoadProjects'
   end, cmd)
