@@ -7,6 +7,7 @@ local index = {
   awk_ls = 'https://raw.githubusercontent.com/Beaglefoot/awk-language-server/master/client/package.json',
   basedpyright = 'https://raw.githubusercontent.com/DetachHead/basedpyright/main/packages/vscode-pyright/package.json',
   bashls = 'https://raw.githubusercontent.com/bash-lsp/bash-language-server/master/vscode-client/package.json',
+  c3_lsp = 'https://raw.githubusercontent.com/pherrymason/c3-lsp/main/client/vscode/package.json',
   clangd = 'https://raw.githubusercontent.com/clangd/vscode-clangd/master/package.json',
   cssls = 'https://raw.githubusercontent.com/microsoft/vscode/main/extensions/css-language-features/package.json',
   dartls = 'https://raw.githubusercontent.com/Dart-Code/Dart-Code/master/package.json',
