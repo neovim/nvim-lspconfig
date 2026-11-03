@@ -35,6 +35,7 @@ local index = {
   nickel_ls = 'https://raw.githubusercontent.com/nickel-lang/nickel/master/lsp/vscode-extension/package.json',
   nil_ls = 'https://raw.githubusercontent.com/oxalica/nil/main/editors/coc-nil/package.json',
   nixd = 'https://raw.githubusercontent.com/nix-community/nixd/main/nixd/docs/nixd-schema.json',
+  ols = 'https://raw.githubusercontent.com/DanielGavin/ols/master/misc/ols.schema.json',
   omnisharp = 'https://raw.githubusercontent.com/OmniSharp/omnisharp-vscode/master/package.json',
   perlls = 'https://raw.githubusercontent.com/richterger/Perl-LanguageServer/master/clients/vscode/perl/package.json',
   perlnavigator = 'https://raw.githubusercontent.com/bscan/PerlNavigator/main/package.json',

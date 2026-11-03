@@ -1,0 +1,157 @@
+---@meta
+
+---@class lspconfig.settings.ols
+---Pass custom arguments to `odin check`.
+---@field checker_args? string
+---How long typing must pause, in milliseconds, before `enable_checker_on_change` calls the checker. Defaults to 400.
+---
+---```lua
+---default = 400
+---```
+---@field checker_on_change_delay? integer
+---Paths to packages that should not be checked by `odin check` when using `enable_checker_workspace_diagnostics`.
+---@field checker_skip_packages? string[]
+---@field collections? table[]
+---Filter procedures that include the provided attributes from completions. For example `@(test)`.
+---@field completion_exclude_attributes? string[]
+---Add automatically imported packages to bottom of file
+---@field enable_add_import_to_bottom? boolean
+---Automatically import packages that aren't in your import on completion
+---
+---```lua
+---default = true
+---```
+---@field enable_auto_import? boolean
+---Skip hidden directories when discovering packages for auto-import
+---
+---```lua
+---default = true
+---```
+---@field enable_auto_import_skip_hidden_paths? boolean
+---Turns on calling the checker on the package being edited once typing pauses for `checker_on_change_delay`, with the unsaved text of the open documents. Needs an `odin` with `-overlay`.
+---@field enable_checker_on_change? boolean
+---Turns on only calling the checker on the package being saved.
+---@field enable_checker_only_saved? boolean
+---Turns on running all workspace diagnostics using odin check. This is currently experimental and may cause problems. A better option is using the `checker_path` feature to explicity tell `ols` the projects that it should check. (experimental).
+---@field enable_checker_workspace_diagnostics? boolean
+---Enables a code action to invert if statements.
+---@field enable_code_action_invert_if? boolean
+---Provide signature help for comp lits such as when instantiating structs. Will not display correctly on some editors such as vscode.
+---@field enable_comp_lit_signature_help? boolean
+---Put signature help for comp lits in the documentation. This will allow it to be rendered nicely using markdown in editors that render the label without colour on one line.
+---@field enable_comp_lit_signature_help_use_docs? boolean
+---Enables compiler semantics for reporting type information. This is currently experimental and under active development. Needs an `odin` with `-export-semantics`.
+---@field enable_compiler_semantics? boolean
+---Attempt to match types and pointers when passing arguments to procedures.
+---
+---```lua
+---default = true
+---```
+---@field enable_completion_matching? boolean
+---Enables completion results.
+---
+---```lua
+---default = true
+---```
+---@field enable_completions? boolean
+---Enable diagnostics reported from the lsp.
+---
+---```lua
+---default = true
+---```
+---@field enable_diagnostics? boolean
+---Turns on highlighting of symbol references in file.
+---
+---```lua
+---default = true
+---```
+---@field enable_document_highlights? boolean
+---Follow links when opening documentation.
+---
+---```lua
+---default = true
+---```
+---@field enable_document_links? boolean
+---Turns on outline of all your global declarations in your document.
+---@field enable_document_symbols? boolean
+---Fades the branches of `when` statements that the checker did not take. Requires `enable_compiler_semantics` and an `odin` with `-export-semantics`. Defaults to true.
+---
+---```lua
+---default = true
+---```
+---@field enable_fade_untaken_when_branches? boolean
+---Turn on fake methods completion.
+---@field enable_fake_methods? boolean
+---Turns on formatting with odinfmt.
+---
+---```lua
+---default = true
+---```
+---@field enable_format? boolean
+---Enables hover feature
+---@field enable_hover? boolean
+---Show memory layout (size, alignment, field offsets) of types on hover.
+---@field enable_hover_layout? boolean
+---Turn on inlay hints for default parameters.
+---@field enable_inlay_hints_default_params? boolean
+---Turn on inlay hints for implicit return values.
+---@field enable_inlay_hints_implicit_return? boolean
+---Adds inlay hints for unhandled optional result value. (#optional_ok and #optional_allocator_error)
+---@field enable_inlay_hints_optional_result? boolean
+---Turn on inlay hints for (non-default) parameters.
+---@field enable_inlay_hints_params? boolean
+---Enable go-to-definition to resolve overloaded procedures from procedure groups based on call arguments.
+---@field enable_overload_resolution? boolean
+---Enable real-time diagnostics from `core:odin/parser`
+---
+---```lua
+---default = true
+---```
+---@field enable_parser_errors? boolean
+---@field enable_procedure_context? boolean
+---Use snippets when completing procedures—adds parenthesis after the name.
+---
+---```lua
+---default = true
+---```
+---@field enable_procedure_snippet? boolean
+---Turns on finding references for a symbol.
+---
+---```lua
+---default = true
+---```
+---@field enable_references? boolean
+---Turns on syntax highlighting.
+---@field enable_semantic_tokens? boolean
+---Turns on builtin snippets
+---@field enable_snippets? boolean
+---Report unused imported packages after each document change. This can slow editing in large files.
+---@field enable_unused_imports_on_change? boolean
+---Turn on reporting of unused imported packages.
+---
+---```lua
+---default = true
+---```
+---@field enable_unused_imports_reporting? boolean
+---@field file_log? boolean
+---Specify the location to your Odin executable, rather than relying on the environment path.
+---@field odin_command? string
+---Allows you to specify a custom `ODIN_ROOT` that `ols` will use to look for `odin` core libraries when implementing custom runtimes.
+---@field odin_root_override? string
+---What profile to currently use.
+---@field profile? string
+---List of different profiles that describe the environment ols is running under.
+---@field profiles? table[]
+---Controls visibility of struct fields starting with `_`:
+---
+---- "" (default): no hiding; all fields are visible
+---- "file": hide fields when accessed from outside the declaring file
+---- "package": hide fields when accessed from outside the declaring package
+---
+---```lua
+---default = ""
+---```
+---@field struct_fields_underscore_visibility? ""|"file"|"package"
+---@field thread_pool_count? integer
+---Logs warnings instead of just errors.
+---@field verbose? boolean
