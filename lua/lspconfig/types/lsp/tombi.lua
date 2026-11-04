@@ -59,6 +59,7 @@
 ---@alias _.lspconfig.settings.tombi.defs.CargoDocumentLinkFeatures _.lspconfig.settings.tombi.defs.EnabledOnly|_.lspconfig.settings.tombi.defs.CargoDocumentLinkFeatureTree
 
 ---@class _.lspconfig.settings.tombi.defs.CargoExtensionFeatureTree
+---@field lint? _.lspconfig.settings.tombi.defs.CargoLintFeatures
 ---@field lsp? _.lspconfig.settings.tombi.defs.CargoLspFeatures
 
 ---@alias _.lspconfig.settings.tombi.defs.CargoExtensionFeatures _.lspconfig.settings.tombi.defs.EnabledOnly|_.lspconfig.settings.tombi.defs.CargoExtensionFeatureTree
@@ -102,6 +103,92 @@
 ---@field ["workspace-value"]? _.lspconfig.settings.tombi.defs.ToggleFeatureDefaultTrue
 
 ---@alias _.lspconfig.settings.tombi.defs.CargoInlayHintFeatures _.lspconfig.settings.tombi.defs.EnabledOnly|_.lspconfig.settings.tombi.defs.CargoInlayHintFeatureTree
+
+---@class _.lspconfig.settings.tombi.defs.CargoLintFeatureTree
+---@field rules? _.lspconfig.settings.tombi.defs.CargoLintRules
+
+---@alias _.lspconfig.settings.tombi.defs.CargoLintFeatures _.lspconfig.settings.tombi.defs.EnabledOnly|_.lspconfig.settings.tombi.defs.CargoLintFeatureTree
+
+---Severity levels for diagnostics produced by the Cargo extension.
+---@class _.lspconfig.settings.tombi.defs.CargoLintRules
+---Report an explicitly configured build script path that does not exist.
+---
+---```toml
+---[package]
+---build = "build-missing.rs" # this file does not exist
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["missing-build-script"]? any
+---Report an explicitly configured package or workspace license file path that does not exist.
+---
+---```toml
+---[package]
+---license-file = "LICENSE-missing.txt" # this file does not exist
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["missing-license-file"]? any
+---Report a path dependency whose directory does not contain `Cargo.toml`.
+---
+---```toml
+---[dependencies]
+---local-utils = { path = "../local-utils" } # this directory has no Cargo.toml
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["missing-path-dependency"]? any
+---Report an explicitly configured package or workspace README path that does not exist.
+---
+---```toml
+---[package]
+---readme = "README-missing.md" # this file does not exist
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["missing-readme"]? any
+---Report an explicitly configured target source path that does not exist.
+---
+---```toml
+---[[bin]]
+---name = "app"
+---path = "src/bin-missing.rs" # this file does not exist
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["missing-target-path"]? any
+---Report a Cargo `workspace = true` reference without a matching workspace definition.
+---
+---```toml
+---[dependencies]
+---serde = { workspace = true } # no matching [workspace.dependencies].serde entry
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["missing-workspace"]? any
+---Report a `workspace.members` or `workspace.default-members` entry whose directory does not contain Cargo.toml, including every directory matched by a glob pattern.
+---
+---```toml
+---[workspace]
+---members = ["crates/missing"] # this directory has no Cargo.toml
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["missing-workspace-member"]? any
 
 ---@class _.lspconfig.settings.tombi.defs.CargoLspFeatureTree
 ---@field ["code-action"]? _.lspconfig.settings.tombi.defs.CargoCodeActionFeatures
@@ -553,6 +640,7 @@
 ---@alias _.lspconfig.settings.tombi.defs.PyprojectDocumentLinkFeatures _.lspconfig.settings.tombi.defs.EnabledOnly|_.lspconfig.settings.tombi.defs.PyprojectDocumentLinkFeatureTree
 
 ---@class _.lspconfig.settings.tombi.defs.PyprojectExtensionFeatureTree
+---@field lint? _.lspconfig.settings.tombi.defs.PyprojectLintFeatures
 ---@field lsp? _.lspconfig.settings.tombi.defs.PyprojectLspFeatures
 
 ---@alias _.lspconfig.settings.tombi.defs.PyprojectExtensionFeatures _.lspconfig.settings.tombi.defs.EnabledOnly|_.lspconfig.settings.tombi.defs.PyprojectExtensionFeatureTree
@@ -588,6 +676,161 @@
 ---@field ["dependency-version"]? _.lspconfig.settings.tombi.defs.ToggleFeatureDefaultTrue
 
 ---@alias _.lspconfig.settings.tombi.defs.PyprojectInlayHintFeatures _.lspconfig.settings.tombi.defs.EnabledOnly|_.lspconfig.settings.tombi.defs.PyprojectInlayHintFeatureTree
+
+---@class _.lspconfig.settings.tombi.defs.PyprojectLintFeatureTree
+---@field rules? _.lspconfig.settings.tombi.defs.PyprojectLintRules
+
+---@alias _.lspconfig.settings.tombi.defs.PyprojectLintFeatures _.lspconfig.settings.tombi.defs.EnabledOnly|_.lspconfig.settings.tombi.defs.PyprojectLintFeatureTree
+
+---Severity levels for diagnostics produced by the pyproject extension.
+---@class _.lspconfig.settings.tombi.defs.PyprojectLintRules
+---Diagnose names declared as both exclusive and shared imports.
+---
+---```toml
+---[project]
+---import-names = ["acme"] # conflicts with the same name declared below
+---import-namespaces = ["acme"] # conflicts with the same name declared above
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["ambiguous-import-name"]? any
+---Diagnose cyclic dependency group includes.
+---
+---```toml
+---[dependency-groups]
+---dev = [{ include-group = "test" }] # includes test
+---test = [{ include-group = "dev" }] # includes dev, creating a cycle
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["cyclic-include-group"]? any
+---Diagnose dependency group names that collide after PEP 503 normalization.
+---
+---```toml
+---[dependency-groups]
+---qa_tools = [] # normalizes to "qa-tools", same as the name below
+---"QA.Tools" = [] # normalizes to "qa-tools", same as the name above
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["duplicate-dependency-group"]? any
+---Diagnose project extra names that collide after PEP 503 normalization.
+---
+---```toml
+---[project.optional-dependencies]
+---qa_tools = [] # normalizes to "qa-tools", same as the name below
+---"QA.Tools" = [] # normalizes to "qa-tools", same as the name above
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["duplicate-extra-name"]? any
+---Diagnose duplicate Python import names.
+---
+---```toml
+---[project]
+---import-names = ["acme", "acme"] # the same import name is declared twice
+---```
+---
+---```lua
+---default = "warn"
+---```
+---@field ["duplicate-import-name"]? any
+---Diagnose invalid PEP 508 dependency specifiers.
+---
+---```toml
+---[project]
+---dependencies = ["not a valid requirement !!!"] # not a valid PEP 508 requirement
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["invalid-dependency-specifier"]? any
+---Diagnose invalid author and maintainer email display names.
+---
+---```toml
+---[project]
+---authors = [{ name = "Doe, Jane" }] # commas are not allowed in the display name
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["invalid-email-display-name"]? any
+---Diagnose invalid Python entry point targets.
+---
+---```toml
+---[project.scripts]
+---cli = "my_package.class" # `class` is a Python keyword and cannot be an attribute
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["invalid-entry-point-target"]? any
+---Diagnose invalid Python import names.
+---
+---```toml
+---[project]
+---import-names = ["if"] # `if` is a Python keyword, not a valid import name
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["invalid-import-name"]? any
+---Diagnose import names whose parent is not declared.
+---
+---```toml
+---[project]
+---import-namespaces = ["acme.plugins"] # parent `acme` is not declared in either list
+---```
+---
+---```lua
+---default = "warn"
+---```
+---@field ["missing-import-name-parent"]? any
+---Diagnose a non-glob `tool.uv.workspace.members` path whose directory does not contain pyproject.toml.
+---
+---```toml
+---[tool.uv.workspace]
+---members = ["packages/missing"] # this directory has no pyproject.toml
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["missing-workspace-member"]? any
+---Diagnose dependency groups that include an undefined group.
+---
+---```toml
+---[dependency-groups]
+---dev = [{ include-group = "missing" }] # no [dependency-groups].missing exists
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["undefined-include-group"]? any
+---Diagnose classifiers not listed in the Trove classifier specification.
+---
+---```toml
+---[project]
+---classifiers = ["NotAClassifier :: DefinitelyInvalid"] # not in the Trove classifier list
+---```
+---
+---```lua
+---default = "warn"
+---```
+---@field ["unknown-classifier"]? any
 
 ---@class _.lspconfig.settings.tombi.defs.PyprojectLspFeatureTree
 ---Configure pyproject code action features.
@@ -774,6 +1017,7 @@
 ---@alias _.lspconfig.settings.tombi.defs.TombiDocumentLinkFeatures _.lspconfig.settings.tombi.defs.EnabledOnly|_.lspconfig.settings.tombi.defs.TombiDocumentLinkFeatureTree
 
 ---@class _.lspconfig.settings.tombi.defs.TombiExtensionFeatureTree
+---@field lint? _.lspconfig.settings.tombi.defs.TombiLintFeatures
 ---@field lsp? _.lspconfig.settings.tombi.defs.TombiLspFeatures
 
 ---@alias _.lspconfig.settings.tombi.defs.TombiExtensionFeatures _.lspconfig.settings.tombi.defs.EnabledOnly|_.lspconfig.settings.tombi.defs.TombiExtensionFeatureTree
@@ -787,6 +1031,36 @@
 ---@alias _.lspconfig.settings.tombi.defs.TombiHoverFeatureTree table
 
 ---@alias _.lspconfig.settings.tombi.defs.TombiHoverFeatures _.lspconfig.settings.tombi.defs.EnabledOnly|_.lspconfig.settings.tombi.defs.TombiHoverFeatureTree
+
+---@class _.lspconfig.settings.tombi.defs.TombiLintFeatureTree
+---@field rules? _.lspconfig.settings.tombi.defs.TombiLintRules
+
+---@alias _.lspconfig.settings.tombi.defs.TombiLintFeatures _.lspconfig.settings.tombi.defs.EnabledOnly|_.lspconfig.settings.tombi.defs.TombiLintFeatureTree
+
+---Severity levels for diagnostics produced by the Tombi extension.
+---@class _.lspconfig.settings.tombi.defs.TombiLintRules
+---Report a local schema catalog path that does not point to a file.
+---
+---```toml
+---[schema.catalog]
+---paths = ["./schemas/catalog.json"] # no file exists at this path
+---```
+---
+---```lua
+---default = "warn"
+---```
+---@field ["missing-catalog-path"]? any
+---Report a local schema path that does not point to a file.
+---
+---```toml
+---[[schemas]]
+---path = "./schemas/app.json" # no file exists at this path
+---```
+---
+---```lua
+---default = "warn"
+---```
+---@field ["missing-schema-path"]? any
 
 ---@class _.lspconfig.settings.tombi.defs.TombiLspFeatureTree
 ---Configure Tombi completion features.

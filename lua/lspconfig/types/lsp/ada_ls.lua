@@ -1,5 +1,13 @@
 ---@meta
 
+---@class _.lspconfig.settings.ada_ls.Ada.Alire
+---Path to `alr` (`alr.exe` on Windows). Use an absolute path; `~` expands to your home directory. Leave empty to search `PATH`. Reload VS Code after changing this setting manually.
+---
+---```lua
+---default = ""
+---```
+---@field executablePath? string
+
 ---@class _.lspconfig.settings.ada_ls.Ada.ExternalAnnotations
 ---Highlight GNATcoverage external annotations in the editor.
 ---
@@ -41,6 +49,7 @@
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.
 ---@field adaFileDiagnostics? true|false
+---@field alire? _.lspconfig.settings.ada_ls.Ada.Alire
 ---Controls whether or not the Ada Language Server should emit diagnostics related to alire into the VS Code Problems view.
 ---
 ---If not set in VS Code, this setting takes its value from the [`.als.json`](https://github.com/AdaCore/ada_language_server/blob/master/doc/settings.md) file at the root of the workspace, if that file exists. Otherwise it defaults to `true`.

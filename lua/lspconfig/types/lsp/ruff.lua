@@ -3874,6 +3874,7 @@
 ---| "tab-before-keyword"
 ---| "tab-before-operator"
 ---| "tab-indentation"
+---| "tarfile-ignore-zeros-true"
 ---| "tarfile-unsafe-members"
 ---| "timeout-error-alias"
 ---| "too-few-spaces-before-inline-comment"
