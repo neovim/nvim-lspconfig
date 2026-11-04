@@ -34,10 +34,12 @@ return {
     'javascriptreact',
     'json',
     'jsonc',
+    'markdown',
     'svelte',
     'typescript',
     'typescriptreact',
     'vue',
+    'yaml',
   },
   workspace_required = true,
   root_dir = function(bufnr, on_dir)

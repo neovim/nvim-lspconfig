@@ -18,10 +18,12 @@ return {
       'javascriptreact',
       'json',
       'jsonc',
+      'markdown',
       'svelte',
       'typescript',
       'typescriptreact',
       'vue',
+      'yaml',
     },
     root_dir = function(fname)
       local root_files = { 'biome.json', 'biome.jsonc' }
