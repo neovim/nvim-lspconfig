@@ -297,6 +297,14 @@
 ---```
 ---@field enable? boolean
 
+---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.AutoDyn
+---Complete traits with `dyn` prefixed to them when completing in a type position.
+---
+---```lua
+---default = true
+---```
+---@field enable? boolean
+
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.AutoIter
 ---Show method call completions with `iter()` or `into_iter()` prefixed to them when
 ---completing on a type that has them.
@@ -464,6 +472,7 @@
 ---```
 ---@field addSemicolonToUnit? boolean
 ---@field autoAwait? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.AutoAwait
+---@field autoDyn? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.AutoDyn
 ---@field autoIter? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.AutoIter
 ---@field autoimport? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.Autoimport
 ---@field autoself? _.lspconfig.settings.rust_analyzer.RustAnalyzer.Completion.Autoself
@@ -974,7 +983,11 @@
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ImplicitDrops
 ---Show implicit drop hints.
----@field enable? boolean
+---
+---```lua
+---default = "never"
+---```
+---@field enable? "always"|"never"|"with_drop_glue"
 
 ---@class _.lspconfig.settings.rust_analyzer.RustAnalyzer.InlayHints.ImplicitSizedBoundHints
 ---Show inlay hints for the implied type parameter `Sized` bound.
