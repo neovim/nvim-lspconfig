@@ -1864,7 +1864,7 @@ Default config:
 - `cmd`: [../lsp/biome.lua:17](../lsp/biome.lua#L17)
 - `filetypes` :
   ```lua
-  { "astro", "css", "graphql", "html", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescriptreact", "vue" }
+  { "astro", "css", "graphql", "html", "javascript", "javascriptreact", "json", "jsonc", "markdown", "svelte", "typescript", "typescriptreact", "vue", "yaml" }
   ```
 - `root_dir`: [../lsp/biome.lua:17](../lsp/biome.lua#L17)
 - `workspace_required` : `true`
