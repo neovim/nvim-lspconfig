@@ -26,7 +26,15 @@ return {
       or (vim.endswith(bufname, '/.github/dependabot.yml') or vim.endswith(bufname, '/.github/dependabot.yaml'))
       or (vim.endswith(bufname, 'action.yml') or vim.endswith(bufname, 'action.yaml')) -- Composite actions can live in any repository subdirectory
     then
-      on_dir(parent)
+      local root = vim.fs.root(bufnr, {
+        '.github/zizmor.yml',
+        '.github/zizmor.yaml',
+        'zizmor.yml',
+        'zizmor.yaml',
+        '.github/',
+        '.git',
+      })
+      on_dir(root or parent)
     end
   end,
   init_options = {}, -- needs to be present https://github.com/neovim/nvim-lspconfig/pull/3713#issuecomment-2857394868
