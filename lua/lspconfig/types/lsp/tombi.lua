@@ -218,6 +218,9 @@
 ---Whether this feature is enabled.
 ---@field enabled any
 
+---A config path or URL whose file name is `tombi.toml` or `.tombi.toml`.
+---@alias _.lspconfig.settings.tombi.defs.ExtendsReference string
+
 ---🚧 Currently, third-party extensions are not supported,
 ---and only built-in extensions are provided. 🚧
 ---@class _.lspconfig.settings.tombi.defs.Extensions
@@ -1039,7 +1042,8 @@
 
 ---Severity levels for diagnostics produced by the Tombi extension.
 ---@class _.lspconfig.settings.tombi.defs.TombiLintRules
----Report a local schema catalog path that does not point to a file.
+---Report a schema catalog that does not exist: a local path that does not point to a file,
+---a `tombi://` URL that names no built-in file, or an `http(s)://` URL for which the server answers 404 or 410 (at most a warning, as it depends on the network).
 ---
 ---```toml
 ---[schema.catalog]
@@ -1047,10 +1051,22 @@
 ---```
 ---
 ---```lua
----default = "warn"
+---default = "error"
 ---```
 ---@field ["missing-catalog-path"]? any
----Report a local schema path that does not point to a file.
+---Report an `extends` entry that does not exist: a local path that does not point to a file,
+---or an `http(s)://` URL for which the server answers 404 or 410 (at most a warning, as it depends on the network).
+---
+---```toml
+---extends = ["./base/tombi.toml"] # no file exists at this path
+---```
+---
+---```lua
+---default = "error"
+---```
+---@field ["missing-extends-path"]? any
+---Report a schema that does not exist: a local path that does not point to a file,
+---a `tombi://` URL that names no built-in file, or an `http(s)://` URL for which the server answers 404 or 410 (at most a warning, as it depends on the network).
 ---
 ---```toml
 ---[[schemas]]
@@ -1058,7 +1074,7 @@
 ---```
 ---
 ---```lua
----default = "warn"
+---default = "error"
 ---```
 ---@field ["missing-schema-path"]? any
 
@@ -1079,6 +1095,10 @@
 ---@alias _.lspconfig.settings.tombi.defs.TrailingCommentSpaceWidth integer
 
 ---@class _.lspconfig.settings.tombi.Tombi
+---Config files to inherit.
+---
+---The files are interpreted in order, starting with the first entry. Later entries take precedence over earlier ones, and this config takes precedence over all of them.
+---@field extends? _.lspconfig.settings.tombi.defs.ExtendsReference[]
 ---@field extensions? _.lspconfig.settings.tombi.defs.Extensions
 ---@field files? _.lspconfig.settings.tombi.defs.FilesOptions
 ---@field format? _.lspconfig.settings.tombi.defs.FormatOptions
