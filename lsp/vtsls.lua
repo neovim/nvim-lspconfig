@@ -96,8 +96,8 @@ return {
       -- deno lock is closer than package manager lock, abort
       return
     end
-    if deno_root and (not project_root or #deno_root >= #project_root) then
-      -- deno config is closer than or equal to package manager lock, abort
+    if deno_root and (not project_root or #deno_root > #project_root) then
+      -- deno config is closer than package manager lock, abort
       return
     end
     -- project is standard TS, not deno
