@@ -7135,7 +7135,7 @@ Snippet to enable the language server: >lua
 Default config:
 - cmd (use "gF" to view): ../lsp/oxfmt.lua:19
 - filetypes: >lua
-  { "javascript", "javascriptreact", "typescript", "typescriptreact", "toml", "json", "jsonc", "json5", "yaml", "html", "vue", "handlebars", "css", "scss", "less", "graphql", "markdown", "svelte" }
+  { "javascript", "javascriptreact", "typescript", "typescriptreact", "toml", "json", "jsonc", "json5", "yaml", "html", "vue", "handlebars", "css", "scss", "less", "graphql", "markdown", "svelte", "astro" }
 - root_dir (use "gF" to view): ../lsp/oxfmt.lua:19
 <
 
