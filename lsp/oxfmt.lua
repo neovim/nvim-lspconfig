@@ -59,7 +59,7 @@ return {
       { 'oxfmt', 'vite%-plus' },
       fname
     )
-    -- find vite plus config with fmt field
+    -- Find vite plus config with fmt field
     root_markers = util.root_markers_with_field(
       root_markers,
       { 'vite.config.ts' },
@@ -67,6 +67,12 @@ return {
       fname,
       'all'
     )
-    on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
+    -- Check if the buffer is using Oxfmt
+    local root_marker = vim.fs.find(root_markers, { path = fname, upward = true })[1]
+    if not root_marker then
+      return
+    end
+
+    on_dir(vim.fs.dirname(root_marker))
   end,
 }
