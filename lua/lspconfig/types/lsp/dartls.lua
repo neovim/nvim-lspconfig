@@ -334,7 +334,7 @@
 ---default = true
 ---```
 ---@field flutterGutterIcons? boolean
----Whether to automatically send a Hot Reload request to Flutter apps during a debug session when saving files. Dart apps are controlled by the hotReloadOnSave setting.
+---Whether to automatically send a Hot Reload request to Flutter apps during a debug session when saving files. Dart apps are controlled by the `#dart.hotReloadOnSave#` setting.
 ---
 ---```lua
 ---default = "manual"
@@ -410,7 +410,7 @@
 ---@field getDartSdkCommand? table
 ---Get the Flutter SDK path from a command. Useful when using tools such as direnv, asdf, mise... The command should exit with a 0 status code and it should print to the standard output just the path to the SDK. If the command fails (non zero exit or bad path), the extension will keep looking for other SDK paths. Some configuration examples can be found in: https://github.com/Dart-Code/Dart-Code/pull/5377
 ---@field getFlutterSdkCommand? table
----Whether to automatically send a Hot Reload request to Dart apps during a debug session when saving files. Flutter apps are controlled by the flutterHotReloadOnSave setting.
+---Whether to automatically send a Hot Reload request to Dart apps during a debug session when saving files. Flutter apps are controlled by the `#dart.flutterHotReloadOnSave#` setting.
 ---
 ---```lua
 ---default = "never"
@@ -507,7 +507,7 @@
 ---default = true
 ---```
 ---@field notifyAnalyzerErrors? boolean
----Whether to use the --offline switch for commands like 'pub get' and 'Flutter: Create New Project'.
+---Whether to use the --offline switch for commands like 'Pub: Get Packages' and 'Flutter: Create New Project'.
 ---@field offline? boolean
 ---**Deprecated**: Whether to ignore workspace folders and perform analysis based on the open files. This setting can make performance significantly worse when moving around a project and is not recommended.
 ---@field onlyAnalyzeProjectsWithOpenFiles? boolean
