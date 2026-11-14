@@ -66,6 +66,8 @@ local function default_sysroot_src()
   return sysroot and vim.fs.joinpath(sysroot, 'lib/rustlib/src/rust/library') or nil
 end
 
+local workspace_cache = {} ---@type table<string, string>
+
 local function is_library(fname)
   local user_home = vim.fs.normalize(vim.env.HOME)
   local cargo_home = os.getenv 'CARGO_HOME' or user_home .. '/.cargo'
@@ -112,6 +114,11 @@ return {
       return
     end
 
+    if workspace_cache[cargo_crate_dir] then
+      on_dir(workspace_cache[cargo_crate_dir])
+      return
+    end
+
     local cmd = {
       'cargo',
       'metadata',
@@ -131,6 +138,7 @@ return {
           end
         end
 
+        workspace_cache[cargo_crate_dir] = cargo_workspace_root or cargo_crate_dir
         on_dir(cargo_workspace_root or cargo_crate_dir)
       else
         vim.schedule(function()
