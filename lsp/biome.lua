@@ -56,7 +56,7 @@ return {
       'deno.lock',
     }
     -- Set a lower priority to avoid spawning multiple servers on monorepos
-    local biome_config_files = { 'biome.json', 'biome.jsonc' }
+    local biome_config_files = { 'biome.json', 'biome.jsonc', '.biome.json', '.biome.jsonc' }
     -- Give the root markers equal priority by wrapping them in a table
     root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers, biome_config_files, { '.git' } }
       or vim.list_extend(root_markers, vim.list_extend(biome_config_files, { '.git' }))
