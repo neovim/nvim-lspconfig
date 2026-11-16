@@ -51,16 +51,19 @@ local function user_sysroot_src()
   return vim.tbl_get(vim.lsp.config['rust_analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysrootSrc')
 end
 
+local sysroot_cache = {} ---@type table<string, string|false>
+
 local function default_sysroot_src()
   local sysroot = vim.tbl_get(vim.lsp.config['rust_analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysroot')
   if not sysroot then
-    local result = vim
-      .system({ 'cargo', '-Z', 'unstable-options', 'rustc', '--print', 'sysroot' }, { text = true })
-      :wait()
-
-    if result.code == 0 and result.stdout then
-      sysroot = vim.trim(result.stdout)
+    local cwd = vim.fn.getcwd()
+    if sysroot_cache[cwd] == nil then
+      local ok, result = pcall(function()
+        return vim.system({ 'rustc', '--print', 'sysroot' }, { text = true }):wait()
+      end)
+      sysroot_cache[cwd] = ok and result.code == 0 and result.stdout and vim.trim(result.stdout) or false
     end
+    sysroot = sysroot_cache[cwd] or nil
   end
 
   return sysroot and vim.fs.joinpath(sysroot, 'lib/rustlib/src/rust/library') or nil
