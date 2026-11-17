@@ -89,6 +89,7 @@ Nvim by running `:help lspconfig-all`.
 - [dhall_lsp_server](#dhall_lsp_server)
 - [diagnosticls](#diagnosticls)
 - [digestif](#digestif)
+- [djlint](#djlint)
 - [djls](#djls)
 - [djlsp](#djlsp)
 - [docker_compose_language_service](#docker_compose_language_service)
@@ -3745,6 +3746,41 @@ Default config:
 - `root_markers` :
   ```lua
   { ".git" }
+  ```
+
+---
+
+## djlint
+
+https://github.com/djlint/djLint
+
+Linter and formatter for HTML templates. Needs djLint 1.49 or newer.
+
+```sh
+pip install djlint
+```
+
+Neovim gives some template extensions (`.j2`, `.njk`, `.gotmpl`, `.mako` and others) no
+filetype, see the [docs](https://djlint.com/docs/integrations/#neovim) to register them, and the
+[settings](https://djlint.com/docs/integrations/#settings).
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('djlint')
+```
+
+Default config:
+- `cmd` :
+  ```lua
+  { "djlint", "--lsp" }
+  ```
+- `filetypes` :
+  ```lua
+  { "html", "htmldjango", "htmlangular", "jinja", "jinja.html", "nunjucks", "twig", "handlebars", "mustache", "liquid", "gotmpl", "tera", "mako" }
+  ```
+- `root_markers` :
+  ```lua
+  { "pyproject.toml", "djlint.toml", ".djlint.toml", ".djlintrc", ".git" }
   ```
 
 ---
