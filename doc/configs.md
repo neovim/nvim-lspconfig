@@ -152,6 +152,7 @@ Nvim by running `:help lspconfig-all`.
 - [guile_ls](#guile_ls)
 - [hare_lsp](#hare_lsp)
 - [harper_ls](#harper_ls)
+- [haxe_language_server](#haxe_language_server)
 - [hdl_checker](#hdl_checker)
 - [helm_ls](#helm_ls)
 - [herb_ls](#herb_ls)
@@ -6213,6 +6214,73 @@ Default config:
   ```lua
   { ".harper-dictionary.txt", ".git" }
   ```
+
+---
+
+## haxe_language_server
+
+https://github.com/vshaxe/haxe-language-server
+
+The Haxe language server can be built from the project's root directory:
+
+```sh
+npm ci
+npx lix run vshaxe-build -t language-server
+```
+
+This creates `bin/server.js`. The server requires Haxe 3.4.0 or newer.
+Configure the path to the server before enabling it:
+
+```lua
+vim.lsp.config('haxe_language_server', {
+  cmd = { 'node', '/path/to/bin/server.js' },
+})
+vim.lsp.enable('haxe_language_server')
+```
+
+By default, the first `.hxml` file found in the project root supplies the
+compiler arguments. To choose a different file or pass arguments directly:
+
+```lua
+vim.lsp.config('haxe_language_server', {
+  init_options = {
+    displayArguments = { 'build.hxml' },
+  },
+})
+```
+
+Snippet to enable the language server:
+```lua
+vim.lsp.enable('haxe_language_server')
+```
+
+Default config:
+- `before_init`: [../lsp/haxe_language_server.lua:34](../lsp/haxe_language_server.lua#L34)
+- `cmd` :
+  ```lua
+  { "haxe-language-server" }
+  ```
+- `filetypes` :
+  ```lua
+  { "haxe" }
+  ```
+- `init_options` :
+  ```lua
+  {}
+  ```
+- `root_markers` :
+  ```lua
+  { ".git" }
+  ```
+- `settings` :
+  ```lua
+  {
+    haxe = {
+      executable = "haxe"
+    }
+  }
+  ```
+- `workspace_required` : `true`
 
 ---
 
