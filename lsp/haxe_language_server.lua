@@ -19,9 +19,6 @@
 --- vim.lsp.enable('haxe_language_server')
 --- ```
 ---
---- The project root is detected from `.git`. For projects without Git, set
---- `root_dir` explicitly in `vim.lsp.config('haxe_language_server', {...})`.
----
 --- By default, the first `.hxml` file found in the project root supplies the
 --- compiler arguments. To choose a different file or pass arguments directly:
 ---
