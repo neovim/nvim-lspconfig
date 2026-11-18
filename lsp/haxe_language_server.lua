@@ -51,7 +51,6 @@ return {
       return name:match('%.hxml$') ~= nil
     end, { path = config.root_dir, type = 'file' })[1]
     if hxml then
-      vim.notify('Using HXML: ' .. hxml)
       config.init_options.displayArguments = { hxml }
     end
   end,
