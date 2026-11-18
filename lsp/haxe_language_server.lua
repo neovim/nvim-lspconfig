@@ -19,6 +19,9 @@
 --- vim.lsp.enable('haxe_language_server')
 --- ```
 ---
+--- The project root is detected from `.git`. For projects without Git, set
+--- `root_dir` explicitly in `vim.lsp.config('haxe_language_server', {...})`.
+---
 --- By default, the first `.hxml` file found in the project root supplies the
 --- compiler arguments. To choose a different file or pass arguments directly:
 ---
@@ -30,17 +33,12 @@
 --- })
 --- ```
 
-local util = require 'lspconfig.util'
-
 ---@type vim.lsp.Config
 return {
   cmd = { 'haxe-language-server' },
   filetypes = { 'haxe' },
   workspace_required = true,
-  root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(util.root_pattern('*.hxml', '.git')(fname))
-  end,
+  root_markers = { '.git' },
   settings = {
     haxe = {
       executable = 'haxe',
