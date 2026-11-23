@@ -2492,9 +2492,12 @@ Clice is a next-generation language server for modern C++, focused on performanc
 Commands:
 - `:LspCliceShowContext`, `:LspCliceSwitchContext`, `:LspCliceResetContext`: show, choose or
   reset the compilation context of the buffer: the source file a header compiles in, or the
-  compile command of a source file listed with several.
+  compile command of a source file listed with several. Showing it also tells where the
+  buffer's command comes from.
 - `:LspCliceSwitchConfiguration`: select the build configuration (the `configuration` tags of
-  the `clice.toml` rules) clice runs from its next start.
+  the `clice.toml` rules) and restart clice under it; before Neovim 0.12, from its next start.
+- `:LspCliceSwitchSourceHeader`: open the file the buffer pairs with — a header's source, a
+  source's header, a module's interface or implementation — or pick one when several qualify.
 
 Snippet to enable the language server:
 ```lua
@@ -2502,15 +2505,36 @@ vim.lsp.enable('clice')
 ```
 
 Default config:
+- `capabilities` :
+  ```lua
+  {
+    experimental = {
+      restartServer = true
+    }
+  }
+  ```
 - `cmd` :
   ```lua
   { "clice", "serve" }
   ```
+- `cmd_env` :
+  ```lua
+  {
+    CLICE_LOG_LEVEL = "warn"
+  }
+  ```
 - `filetypes` :
   ```lua
-  { "c", "cpp", "cuda" }
+  { "c", "cpp", "cuda", "objc", "objcpp", "opencl", "hip" }
   ```
-- `on_attach`: [../lsp/clice.lua:163](../lsp/clice.lua#L163)
+- `handlers` :
+  ```lua
+  {
+    ["clice/restartServer"] = <function 1>
+  }
+  ```
+- `on_attach`: [../lsp/clice.lua:212](../lsp/clice.lua#L212)
+- `reuse_client`: [../lsp/clice.lua:212](../lsp/clice.lua#L212)
 - `root_markers` :
   ```lua
   { "clice.toml", "compile_commands.json", ".git" }
