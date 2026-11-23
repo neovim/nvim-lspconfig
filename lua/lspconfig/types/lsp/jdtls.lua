@@ -598,6 +598,14 @@
 ---@class _.lspconfig.settings.jdtls.Java.Jdt
 ---@field ls? _.lspconfig.settings.jdtls.Java.Jdt.Ls
 
+---@class _.lspconfig.settings.jdtls.Java.Jshell
+---Enable/disable classpath-aware content assist (completion, diagnostics, hover) for .jsh (JShell script) files. Disabling this does not affect syntax highlighting.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+
 ---@class _.lspconfig.settings.jdtls.Java.Maven
 ---Enable/disable download of Maven source artifacts as part of importing Maven projects.
 ---@field downloadSources? boolean
@@ -892,6 +900,7 @@
 ---@field imports? _.lspconfig.settings.jdtls.Java.Imports
 ---@field inlayHints? _.lspconfig.settings.jdtls.Java.InlayHints
 ---@field jdt? _.lspconfig.settings.jdtls.Java.Jdt
+---@field jshell? _.lspconfig.settings.jdtls.Java.Jshell
 ---@field maven? _.lspconfig.settings.jdtls.Java.Maven
 ---Max simultaneous project builds
 ---

@@ -27,9 +27,15 @@
 ---@class _.lspconfig.settings.ada_ls.Ada.ProjectView
 ---Show all projects as a flat list instead of a hierarchy in the Project view.
 ---@field flatMode? boolean
+---Choose the layout of the Project view.
+---
+---```lua
+---default = "files"
+---```
+---@field mode? "files"|"units"
 ---Show the object directory as a child of each project in the Project view.
 ---@field showObjectDirectories? boolean
----Show the Ada runtime project and its source files in the Project view.
+---Show Ada runtime sources in the Project view.
 ---@field showRuntimeFiles? boolean
 
 ---@class _.lspconfig.settings.ada_ls.Ada.RangeFormatting

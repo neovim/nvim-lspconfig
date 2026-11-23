@@ -165,7 +165,7 @@
 ---default = ""
 ---```
 ---@field activationScript? string
----Path to the Python interpreter executable. Particularly important if you are using a Python virtual environment. Leave blank to use Python from PATH.
+---Optional override for the Python interpreter used by Ansible commands and the language server. **Leave blank** and use the status bar or **Ansible: Select Python Environment** so interpreter choice is owned by the Python extension (not written into workspace settings). Supports `~`, `${workspaceFolder}`, and relative paths — prefer **User** scope for per-machine overrides. Does not apply when **Activation Script** is set.
 ---
 ---```lua
 ---default = ""
