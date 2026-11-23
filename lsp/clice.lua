@@ -6,9 +6,12 @@
 --- Commands:
 --- - `:LspCliceShowContext`, `:LspCliceSwitchContext`, `:LspCliceResetContext`: show, choose or
 ---   reset the compilation context of the buffer: the source file a header compiles in, or the
----   compile command of a source file listed with several.
+---   compile command of a source file listed with several. Showing it also tells where the
+---   buffer's command comes from.
 --- - `:LspCliceSwitchConfiguration`: select the build configuration (the `configuration` tags of
----   the `clice.toml` rules) clice runs from its next start.
+---   the `clice.toml` rules) and restart clice under it; before Neovim 0.12, from its next start.
+--- - `:LspCliceSwitchSourceHeader`: open the file the buffer pairs with — a header's source, a
+---   source's header, a module's interface or implementation — or pick one when several qualify.
 
 ---@param client vim.lsp.Client
 ---@param bufnr integer
@@ -57,12 +60,22 @@ end
 ---@param bufnr integer
 local function show_context(client, bufnr)
   request(client, bufnr, 'clice/currentContext', { uri = vim.uri_from_bufnr(bufnr) }, function(current)
+    -- Where the command comes from: database, host, default, borrowed or fallback.
+    local command = current.command
+    local source = ''
+    if command ~= nil and command ~= vim.NIL then
+      local from = command.from ~= nil
+          and command.from ~= vim.NIL
+          and (' from %s'):format(vim.fn.fnamemodify(vim.uri_to_fname(command.from), ':~:.'))
+        or ''
+      source = ('; its command: %s%s'):format(command.source, from)
+    end
     local context = current.context
     if context == nil or context == vim.NIL then
-      return vim.notify('clice: no compilation context for this file')
+      return vim.notify(('clice: no compilation context for this file%s'):format(source))
     end
     local chosen = current.automatic and 'picked automatically' or 'chosen'
-    vim.notify(('clice: %s, %s (%s)'):format(context.label, context.description, chosen))
+    vim.notify(('clice: %s, %s (%s)%s'):format(context.label, context.description, chosen, source))
   end)
 end
 
@@ -130,17 +143,25 @@ local function switch_configuration(client, bufnr)
     if #list.configurations == 0 then
       return vim.notify('clice: the rules declare no build configurations')
     end
+    local build = list.build ~= vim.NIL and list.build or nil
     vim.ui.select(list.configurations, {
       prompt = 'Build configuration',
       format_item = function(name)
         local notes = {}
         if name == list.active then
           table.insert(notes, 'active')
+          if build then
+            local directory = vim.fs.dirname(vim.uri_to_fname(build.databases[1]))
+            table.insert(notes, 'links to ' .. vim.fn.fnamemodify(directory, ':~:.'))
+          end
         elseif name == list.selected then
           table.insert(notes, 'selected for the next start')
         end
         if name == list.defaultConfiguration then
           table.insert(notes, 'default')
+        end
+        if build and name == build.configuration then
+          table.insert(notes, ('the links of %s resolve here'):format(list.active))
         end
         return #notes == 0 and name or ('%s (%s)'):format(name, table.concat(notes, ', '))
       end,
@@ -150,20 +171,84 @@ local function switch_configuration(client, bufnr)
       end
       request(client, bufnr, 'clice/switchConfiguration', { name = name, uri = uri }, function(result)
         if not result.success then
-          vim.notify('clice: failed to switch the build configuration', vim.log.levels.WARN)
-        elseif name ~= list.active then
-          vim.notify(('clice: %s applies once clice restarts'):format(name))
+          vim.notify(('clice: cannot switch the build configuration: %s'):format(result.reason), vim.log.levels.WARN)
         end
       end)
     end)
   end)
 end
 
+---@param client vim.lsp.Client
+---@param bufnr integer
+local function switch_source_header(client, bufnr)
+  request(client, bufnr, 'clice/counterparts', { uri = vim.uri_from_bufnr(bufnr) }, function(result)
+    local function open(uri)
+      vim.cmd.edit(vim.fn.fnameescape(vim.uri_to_fname(uri)))
+    end
+    if result.preferred and result.preferred ~= vim.NIL then
+      return open(result.preferred)
+    elseif #result.candidates == 0 then
+      return vim.notify('clice: no counterpart of this file found')
+    end
+    vim.ui.select(result.candidates, {
+      prompt = 'File to open',
+      format_item = function(candidate)
+        local name = vim.fn.fnamemodify(vim.uri_to_fname(candidate.uri), ':~:.')
+        return ('%s  (%s)'):format(name, table.concat(candidate.reasons, ', '))
+      end,
+    }, function(choice)
+      if choice then
+        open(choice.uri)
+      end
+    end)
+  end)
+end
+
+-- `:lsp restart` (Neovim 0.12) restarts the server when it asks to: what it
+-- was started on changed, a configuration file or the build.
+local restarts = vim.fn.exists(':lsp') == 2
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'clice', 'serve' },
-  filetypes = { 'c', 'cpp', 'cuda' },
+  cmd_env = { CLICE_LOG_LEVEL = 'warn' },
+  filetypes = { 'c', 'cpp', 'cuda', 'objc', 'objcpp', 'opencl', 'hip' },
   root_markers = { 'clice.toml', 'compile_commands.json', '.git' },
+  -- A file below no root marker, such as an installed package's module that go
+  -- to definition opens, joins a running clice, a project's rather than one
+  -- started for a file alone: the project's database may list the file, and a
+  -- clice started for a file alone reads none.
+  -- LIMITATION: with several projects open, it joins the first one started.
+  reuse_client = function(client, config)
+    if client.name ~= config.name or client:is_stopped() then
+      return false
+    end
+    local function serves_project(other)
+      return #(other.workspace_folders or {}) > 0
+    end
+    if not config.root_dir then
+      -- `_uninitialized` (internal, what Neovim's own lsp.lua passes) also
+      -- lists a project's clice still starting, as in a restored session.
+      local running = vim.lsp.get_clients({ name = config.name, _uninitialized = true })
+      return serves_project(client) or not vim.iter(running):any(serves_project)
+    end
+    local root = vim.uri_from_fname(config.root_dir)
+    for _, folder in ipairs(client.workspace_folders or {}) do
+      if folder.uri == root then
+        return true
+      end
+    end
+    return false
+  end,
+  capabilities = restarts and { experimental = { restartServer = true } } or nil,
+  handlers = restarts and {
+    ['clice/restartServer'] = function()
+      vim.schedule(function()
+        vim.cmd('lsp restart clice')
+      end)
+      return vim.NIL
+    end,
+  } or nil,
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'LspCliceShowContext', function()
       show_context(client, bufnr)
@@ -177,5 +262,8 @@ return {
     vim.api.nvim_buf_create_user_command(bufnr, 'LspCliceSwitchConfiguration', function()
       switch_configuration(client, bufnr)
     end, { desc = 'Switch the build configuration' })
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspCliceSwitchSourceHeader', function()
+      switch_source_header(client, bufnr)
+    end, { desc = 'Switch between source and header' })
   end,
 }
