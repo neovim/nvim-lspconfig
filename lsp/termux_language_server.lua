@@ -30,4 +30,16 @@ return {
       on_dir(vim.fs.root(match, '.git') or match)
     end
   end,
+  handlers = {
+    ['textDocument/publishDiagnostics'] = function(err, result, ctx, config)
+      if result and result.diagnostics then
+        for _, diagnostic in ipairs(result.diagnostics) do
+          if type(diagnostic.source) ~= 'string' or diagnostic.source == '' then
+            diagnostic.source = 'termux-language-server'
+          end
+        end
+      end
+      return vim.lsp.handlers['textDocument/publishDiagnostics'](err, result, ctx, config)
+    end,
+  },
 }

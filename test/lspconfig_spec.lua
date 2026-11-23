@@ -160,4 +160,136 @@ describe('lspconfig', function()
       }, user_config)
     end)
   end)
+
+  describe('termux_language_server', function()
+    local function with_publish_diagnostics_stub(stub, fn)
+      local orig = vim.lsp.handlers['textDocument/publishDiagnostics']
+      vim.lsp.handlers['textDocument/publishDiagnostics'] = stub
+      local ok, err = pcall(fn)
+      vim.lsp.handlers['textDocument/publishDiagnostics'] = orig
+      if not ok then
+        error(err, 0)
+      end
+    end
+
+    it('sets default diagnostic source when missing, vim.NIL, or empty', function()
+      local config = dofile(root .. '/lsp/termux_language_server.lua')
+      local handler = config.handlers['textDocument/publishDiagnostics']
+      local forwarded_result
+
+      with_publish_diagnostics_stub(function(_, result)
+        forwarded_result = result
+      end, function()
+        handler(nil, {
+          uri = 'file:///tmp/PKGBUILD',
+          diagnostics = {
+            { message = 'missing source' },
+            { message = 'null source', source = vim.NIL },
+            { message = 'empty source', source = '' },
+          },
+        }, { method = 'textDocument/publishDiagnostics', client_id = 1 })
+      end)
+
+      eq('termux-language-server', forwarded_result.diagnostics[1].source)
+      eq('termux-language-server', forwarded_result.diagnostics[2].source)
+      eq('termux-language-server', forwarded_result.diagnostics[3].source)
+    end)
+
+    it('preserves existing non-empty diagnostic source', function()
+      local config = dofile(root .. '/lsp/termux_language_server.lua')
+      local handler = config.handlers['textDocument/publishDiagnostics']
+      local forwarded_result
+
+      with_publish_diagnostics_stub(function(_, result)
+        forwarded_result = result
+      end, function()
+        handler(nil, {
+          uri = 'file:///tmp/PKGBUILD',
+          diagnostics = {
+            { message = 'from namcap', source = 'namcap' },
+            { message = 'without source' },
+          },
+        }, { method = 'textDocument/publishDiagnostics', client_id = 1 })
+      end)
+
+      eq('namcap', forwarded_result.diagnostics[1].source)
+      eq('termux-language-server', forwarded_result.diagnostics[2].source)
+    end)
+
+    it('forwards all arguments and return value for nil and empty results', function()
+      local config = dofile(root .. '/lsp/termux_language_server.lua')
+      local handler = config.handlers['textDocument/publishDiagnostics']
+      local calls = {}
+
+      with_publish_diagnostics_stub(function(err, result, ctx, cfg)
+        table.insert(calls, { err = err, result = result, ctx = ctx, cfg = cfg })
+        return 'forwarded'
+      end, function()
+        local sample_err = { code = -32603, message = 'internal error' }
+        local sample_ctx = { method = 'textDocument/publishDiagnostics', client_id = 42 }
+        local sample_cfg = { underline = false }
+
+        local ret1 = handler(sample_err, nil, sample_ctx, sample_cfg)
+        local ret2 = handler(nil, {}, sample_ctx, sample_cfg)
+
+        eq('forwarded', ret1)
+        eq('forwarded', ret2)
+        eq(2, #calls)
+        same(sample_err, calls[1].err)
+        eq(nil, calls[1].result)
+        same(sample_ctx, calls[1].ctx)
+        same(sample_cfg, calls[1].cfg)
+        eq(nil, calls[2].err)
+        same({}, calls[2].result)
+        same(sample_ctx, calls[2].ctx)
+        same(sample_cfg, calls[2].cfg)
+      end)
+    end)
+
+    it('populates vim.diagnostic source and user_data via real Neovim handler', function()
+      local config = dofile(root .. '/lsp/termux_language_server.lua')
+      local handler = config.handlers['textDocument/publishDiagnostics']
+      local bufnr = vim.api.nvim_create_buf(false, true)
+
+      local ok, err = pcall(function()
+        vim.api.nvim_buf_set_name(bufnr, vim.fn.tempname() .. '_PKGBUILD')
+        vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { 'pkgname=foo', 'pkgver=1.0' })
+        local uri = vim.uri_from_bufnr(bufnr)
+        local ctx = { method = 'textDocument/publishDiagnostics', client_id = 999 }
+
+        handler(nil, {
+          uri = uri,
+          diagnostics = {
+            {
+              range = {
+                start = { line = 0, character = 0 },
+                ['end'] = { line = 0, character = 7 },
+              },
+              message = 'missing pkgrel',
+              severity = 2,
+            },
+          },
+        }, ctx)
+
+        local diags = vim.diagnostic.get(bufnr)
+        eq(1, #diags)
+        eq('termux-language-server', diags[1].source)
+        eq('termux-language-server', diags[1].user_data.lsp.source)
+
+        handler(nil, {
+          uri = uri,
+          diagnostics = {},
+        }, ctx)
+
+        eq(0, #vim.diagnostic.get(bufnr))
+      end)
+
+      if vim.api.nvim_buf_is_valid(bufnr) then
+        vim.api.nvim_buf_delete(bufnr, { force = true })
+      end
+      if not ok then
+        error(err, 0)
+      end
+    end)
+  end)
 end)
