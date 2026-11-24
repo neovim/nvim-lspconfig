@@ -19,6 +19,8 @@
 ---
 --- `:LspDbtCompile` shows the compiled SQL of the current model in the preview window.
 --- `:LspDbtShow` runs the current model and previews up to 20 rows.
+--- To preview a CTE in a saved model, put the cursor on the line where the CTE starts
+--- and call `vim.lsp.codelens.run()`. On Neovim 0.11, call `vim.lsp.codelens.refresh()` first.
 
 local function preview_cell(value)
   if value == nil or value == vim.NIL then
@@ -30,7 +32,7 @@ local function preview_cell(value)
   return (tostring(value):gsub('\\', '\\\\'):gsub('|', '\\|'):gsub('[\r\n]+', ' '))
 end
 
-local function preview_rows(columns, rows)
+local function preview_rows(columns, rows, title)
   local lines = { 'No rows returned.' }
   if #rows > 0 then
     lines = {
@@ -45,7 +47,40 @@ local function preview_rows(columns, rows)
       lines[#lines + 1] = '| ' .. table.concat(cells, ' | ') .. ' |'
     end
   end
-  vim.lsp.util.open_floating_preview(lines, 'markdown', { title = 'dbt model preview' })
+  vim.lsp.util.open_floating_preview(lines, 'markdown', { title = title })
+end
+
+local function request_preview(client, bufnr, uri, inline)
+  local kind = inline and 'CTE' or 'model'
+  client:exec_cmd({
+    title = 'Preview ' .. kind .. ' rows',
+    command = 'dbt.show',
+    arguments = { { uri = uri, inline = inline, limit = 20 } },
+  }, { bufnr = bufnr }, function(err, result)
+    local message = err and err.message or type(result) == 'table' and result.error
+    if message and message ~= vim.NIL then
+      vim.notify(('dbt: %s'):format(message), vim.log.levels.ERROR)
+    elseif type(result) ~= 'table' or type(result.columns) ~= 'table' or type(result.data) ~= 'table' then
+      vim.notify('dbt: ' .. kind .. ' preview returned no result', vim.log.levels.WARN)
+    elseif vim.api.nvim_get_current_buf() == bufnr then
+      preview_rows(result.columns, result.data, 'dbt ' .. kind .. ' preview')
+    end
+  end)
+end
+
+local function read_cte(path, start_byte, stop_byte)
+  if type(path) ~= 'string' or type(start_byte) ~= 'number' or type(stop_byte) ~= 'number' then
+    return
+  end
+  if start_byte < 0 or stop_byte < start_byte then
+    return
+  end
+  -- dbt sends zero-based, inclusive UTF-8 byte offsets.
+  local size = stop_byte - start_byte + 1
+  local ok, text = pcall(vim.fn.readblob, path, start_byte, size)
+  if ok and #text == size then
+    return text
+  end
 end
 
 ---@type vim.lsp.Config
@@ -63,6 +98,32 @@ return {
     -- Off until https://github.com/dbt-labs/dbt/issues/16814 is fixed: dbt lsp edits the file on disk, not the buffer.
     client.server_capabilities.documentFormattingProvider = false
   end,
+  commands = {
+    ['dbt.previewCte'] = function(command, ctx)
+      local client = vim.lsp.get_client_by_id(ctx.client_id)
+      if not client or not vim.api.nvim_buf_is_loaded(ctx.bufnr) then
+        return
+      end
+      if vim.bo[ctx.bufnr].modified then
+        vim.notify('dbt: save the model before previewing a CTE', vim.log.levels.WARN)
+        return
+      end
+
+      local args = type(command.arguments) == 'table' and command.arguments or {}
+      local source_path, cte = args[1], args[2]
+      if type(source_path) ~= 'string' or type(cte) ~= 'table' or type(cte.name) ~= 'string' then
+        vim.notify('dbt: invalid CTE preview arguments', vim.log.levels.WARN)
+        return
+      end
+      local sql = read_cte(cte.compiled_path, cte.compiled_start, cte.compiled_stop)
+        or read_cte(source_path, cte.start, cte.stop)
+      if not sql then
+        vim.notify('dbt: could not read SQL for this CTE', vim.log.levels.WARN)
+        return
+      end
+      request_preview(client, ctx.bufnr, vim.uri_from_fname(source_path), sql .. '\nSELECT * FROM ' .. cte.name)
+    end,
+  },
   on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'LspDbtCompile', function()
       client:exec_cmd({
@@ -80,20 +141,7 @@ return {
     end, { desc = 'Show compiled SQL' })
 
     vim.api.nvim_buf_create_user_command(bufnr, 'LspDbtShow', function()
-      client:exec_cmd({
-        title = 'Preview model rows',
-        command = 'dbt.show',
-        arguments = { { uri = vim.uri_from_bufnr(bufnr), limit = 20 } },
-      }, { bufnr = bufnr }, function(err, result)
-        local message = err and err.message or type(result) == 'table' and result.error
-        if message and message ~= vim.NIL then
-          vim.notify(('dbt: %s'):format(message), vim.log.levels.ERROR)
-        elseif type(result) ~= 'table' or type(result.columns) ~= 'table' or type(result.data) ~= 'table' then
-          vim.notify('dbt: model preview returned no result', vim.log.levels.WARN)
-        elseif vim.api.nvim_get_current_buf() == bufnr then
-          preview_rows(result.columns, result.data)
-        end
-      end)
+      request_preview(client, bufnr, vim.uri_from_bufnr(bufnr))
     end, { desc = 'Preview model rows' })
   end,
 }
