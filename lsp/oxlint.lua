@@ -63,11 +63,14 @@ return {
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
 
-    local root_markers = util.insert_package_json(
-      { '.oxlintrc.json', '.oxlintrc.jsonc', 'oxlint.config.ts' },
-      { 'oxlint', 'vite%-plus' },
-      fname
-    )
+    local config =
+      vim.fs.find({ '.oxlintrc.json', '.oxlintrc.jsonc', 'oxlint.config.ts' }, { path = fname, upward = true })[1]
+    if config then
+      on_dir(vim.fs.dirname(config))
+      return
+    end
+
+    local root_markers = util.insert_package_json({}, { 'oxlint', 'vite%-plus' }, fname)
     -- find vite plus config with lint field
     root_markers = util.root_markers_with_field(
       root_markers,
