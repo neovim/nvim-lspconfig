@@ -25,13 +25,19 @@
 ---@field path? string
 
 ---@class _.lspconfig.settings.ansiblels.Ansible.Completion
----Toggle alias provider when completing module options.
+---Enables completion suggestions for Ansible files. If disabled, no completion items are offered by this extension.
+---
+---```lua
+---default = true
+---```
+---@field enabled? boolean
+---Toggle alias provider when completing module options. Requires `#ansible.completion.enabled#` to be enabled.
 ---
 ---```lua
 ---default = true
 ---```
 ---@field provideModuleOptionAliases? boolean
----Toggle redirected module provider when completing modules.
+---Toggle redirected module provider when completing modules. Requires `#ansible.completion.enabled#` to be enabled.
 ---
 ---```lua
 ---default = true
