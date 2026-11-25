@@ -45,7 +45,7 @@ return {
         if msg and msg ~= vim.NIL then
           vim.notify(('dbt: %s'):format(msg), vim.log.levels.ERROR)
         elseif result and result.file_uri then
-          vim.cmd.pedit(vim.uri_to_fname(result.file_uri))
+          vim.cmd.pedit(vim.fn.fnameescape(vim.uri_to_fname(result.file_uri)))
         end
       end)
     end, { desc = 'Show compiled SQL' })
