@@ -17,6 +17,9 @@
 --- Formatting is turned off, because the server formats the file on disk rather than the buffer and
 --- so corrupts unsaved changes ([dbt-labs/dbt#16814](https://github.com/dbt-labs/dbt/issues/16814)).
 ---
+--- The server writes its compiled SQL to `target/.lsp/`, so it doesn't overwrite the output of
+--- `dbt run` and `dbt compile` in `target/`.
+---
 --- `:LspDbtCompile` shows the compiled SQL of the current model in the preview window.
 --- `:LspDbtShow` runs the current model and shows up to 20 of its rows there too.
 
@@ -77,6 +80,7 @@ end
 ---@type vim.lsp.Config
 return {
   cmd = { 'dbt', 'lsp' },
+  cmd_env = { DBT_LSP_USE_TARGET_LSP = '1' },
   filetypes = { 'sql', 'dbt' },
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
