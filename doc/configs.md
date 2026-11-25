@@ -3443,24 +3443,34 @@ Formatting is turned off, because the server formats the file on disk rather tha
 so corrupts unsaved changes ([dbt-labs/dbt#16814](https://github.com/dbt-labs/dbt/issues/16814)).
 
 `:LspDbtCompile` shows the compiled SQL of the current model in the preview window.
+`:LspDbtShow` runs the current model and shows up to 20 of its rows there too.
 
 Snippet to enable the language server:
 ```lua
 vim.lsp.enable('dbt')
 ```
 
+Commands:
+- dbt.previewCte
+
 Default config:
 - `cmd` :
   ```lua
   { "dbt", "lsp" }
   ```
+- `commands` :
+  ```lua
+  {
+    ["dbt.previewCte"] = <function 1>
+  }
+  ```
 - `filetypes` :
   ```lua
   { "sql", "dbt" }
   ```
-- `on_attach`: [../lsp/dbt.lua:23](../lsp/dbt.lua#L23)
-- `on_init`: [../lsp/dbt.lua:23](../lsp/dbt.lua#L23)
-- `root_dir`: [../lsp/dbt.lua:23](../lsp/dbt.lua#L23)
+- `on_attach`: [../lsp/dbt.lua:78](../lsp/dbt.lua#L78)
+- `on_init`: [../lsp/dbt.lua:78](../lsp/dbt.lua#L78)
+- `root_dir`: [../lsp/dbt.lua:78](../lsp/dbt.lua#L78)
 
 ---
 
