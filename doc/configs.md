@@ -3442,6 +3442,9 @@ The root is the outermost directory containing a `dbt_project.yml`, because ever
 Formatting is turned off, because the server formats the file on disk rather than the buffer and
 so corrupts unsaved changes ([dbt-labs/dbt#16814](https://github.com/dbt-labs/dbt/issues/16814)).
 
+The server writes its compiled SQL to `target/.lsp/`, so it doesn't overwrite the output of
+`dbt run` and `dbt compile` in `target/`.
+
 `:LspDbtCompile` shows the compiled SQL of the current model in the preview window.
 `:LspDbtShow` runs the current model and shows up to 20 of its rows there too.
 
@@ -3458,6 +3461,12 @@ Default config:
   ```lua
   { "dbt", "lsp" }
   ```
+- `cmd_env` :
+  ```lua
+  {
+    DBT_LSP_USE_TARGET_LSP = "1"
+  }
+  ```
 - `commands` :
   ```lua
   {
@@ -3468,9 +3477,9 @@ Default config:
   ```lua
   { "sql", "dbt" }
   ```
-- `on_attach`: [../lsp/dbt.lua:78](../lsp/dbt.lua#L78)
-- `on_init`: [../lsp/dbt.lua:78](../lsp/dbt.lua#L78)
-- `root_dir`: [../lsp/dbt.lua:78](../lsp/dbt.lua#L78)
+- `on_attach`: [../lsp/dbt.lua:81](../lsp/dbt.lua#L81)
+- `on_init`: [../lsp/dbt.lua:81](../lsp/dbt.lua#L81)
+- `root_dir`: [../lsp/dbt.lua:81](../lsp/dbt.lua#L81)
 
 ---
 
