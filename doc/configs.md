@@ -14347,6 +14347,12 @@ Default config:
   ```lua
   { "termux-language-server" }
   ```
+- `handlers` :
+  ```lua
+  {
+    ["textDocument/publishDiagnostics"] = <function 1>
+  }
+  ```
 - `root_dir`: [../lsp/termux_language_server.lua:10](../lsp/termux_language_server.lua#L10)
 
 ---

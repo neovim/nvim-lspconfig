@@ -10725,6 +10725,10 @@ Snippet to enable the language server: >lua
 Default config:
 - cmd: >lua
   { "termux-language-server" }
+- handlers: >lua
+  {
+    ["textDocument/publishDiagnostics"] = <function 1>
+  }
 - root_dir (use "gF" to view): ../lsp/termux_language_server.lua:10
 <
 
