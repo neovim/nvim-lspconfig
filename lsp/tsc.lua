@@ -52,20 +52,6 @@
 
 local bin_cache = {} ---@type table<string, string>
 
---- Checks if the given tsc/tsgo cmd supports the "--lsp" arg.
----@param bin string
----@return boolean
-local function supports_lsp(bin)
-  if vim.fn.executable(bin) ~= 1 then
-    return false
-  end
-
-  local out = vim.system({ bin, '--version' }, { text = true }):wait()
-  local version = vim.version.parse(out.stdout or '')
-
-  return out.code == 0 and version ~= nil and version.major >= 7
-end
-
 ---@type vim.lsp.Config
 return {
   settings = {
@@ -138,13 +124,41 @@ return {
       bins[#bins + 1] = bin
     end
 
-    for _, bin in ipairs(bins) do
-      if supports_lsp(bin) then
-        bin_cache[root] = bin
-        return on_dir(root)
+    --- The native binary takes single-digit ms to start, but the JS shim usually adds 30-40ms of
+    --- overhead, so check the bins asynchronously to not block.
+    ---@param on_found fun(bin: string?)
+    ---@param i integer?
+    local function find_lsp_bin(on_found, i)
+      i = i or 1
+      local bin = bins[i]
+      if not bin then
+        vim.notify('tsc: no binary supporting `--lsp` found (requires TypeScript 7.0+)', vim.log.levels.WARN)
+        return
       end
+      if vim.fn.executable(bin) ~= 1 then
+        find_lsp_bin(on_found, i + 1)
+        return
+      end
+
+      vim.system({ bin, '--version' }, { text = true }, function(out)
+        vim.schedule(function()
+          local version = vim.version.parse(out.stdout or '')
+          if out.code == 0 and version ~= nil and version.major >= 7 then
+            return on_found(bin)
+          end
+          find_lsp_bin(on_found, i + 1)
+        end)
+      end)
     end
 
-    vim.notify('tsc: no binary supporting `--lsp` found (requires TypeScript 7.0+)', vim.log.levels.WARN)
+    find_lsp_bin(function(bin)
+      if not bin then
+        return
+      end
+      bin_cache[root] = bin
+      if vim.api.nvim_buf_is_valid(bufnr) then
+        on_dir(root)
+      end
+    end)
   end,
 }
